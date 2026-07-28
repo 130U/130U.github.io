@@ -1,95 +1,58 @@
 import type { Metadata } from "next";
-import Link from "next/link";
 import { SiteShell } from "./components/SiteShell";
 
 export const metadata: Metadata = {
-  title: "Home",
+  title: {
+    absolute:
+      "Strategy at a World Model Unicorn | Duke B.S. & M.Eng. | Sequoia Scholar, Cohort 8",
+  },
   description:
-    "Theodore Ouyang — AI Entrepreneur, Sequoia Scholar, and Duke University alumnus.",
+    "Theodore Ouyang works at the intersection of artificial intelligence, strategy, and finance, with a current focus on strategy at a world model unicorn.",
 };
 
 export default function Home() {
   return (
     <SiteShell active="home">
       <header className="page-intro home-intro">
-        <p className="eyebrow">AI · DECISION SYSTEMS · FINANCE</p>
-        <h1>Building decision-grade systems for the frontier AI era.</h1>
-        <p className="lede">
-          Theodore Ouyang is an AI entrepreneur and Sequoia Scholar working at
-          the intersection of frontier AI, finance, and disciplined decision
-          making.
-        </p>
+        <p className="eyebrow">WORLD MODELS · STRATEGY · FINANCE</p>
+        <h1>
+          Strategy at a World Model Unicorn <span aria-hidden="true">|</span>{" "}
+          Duke B.S. &amp; M.Eng. <span aria-hidden="true">|</span>{" "}
+          Sequoia Scholar, Cohort 8
+        </h1>
       </header>
 
-      <section className="current-grid" aria-labelledby="current-heading">
+      <section className="prose-section summary-section" aria-labelledby="about-heading">
         <div className="section-heading">
-          <p className="section-kicker">NOW</p>
-          <h2 id="current-heading">Current focus</h2>
+          <p className="section-kicker">PERSONAL SUMMARY</p>
+          <h2 id="about-heading">Summary</h2>
         </div>
-        <article className="identity-card">
-          <span className="identity-index">01</span>
-          <div>
-            <h3>AI Entrepreneur</h3>
-            <p>
-              Building within a fast-growing AI unicorn, with a focus on how
-              frontier models become reliable products and operating systems.
-            </p>
-          </div>
+        <div className="summary-copy">
+          <p>
+            Theodore Ouyang holds a Bachelor of Science and a Master of
+            Engineering from Duke University. He works at the intersection of
+            artificial intelligence, strategy, and finance, and currently
+            focuses on strategy at a unicorn developing world models.
+          </p>
+          <p>
+            His work centers on translating frontier AI capabilities into
+            products, operating models, and long-term business advantage,
+            particularly in financial and other high-stakes decision
+            environments. He is also a Sequoia Scholar in Cohort 8.
+          </p>
+        </div>
+
+        <article className="practice-note">
+          <p className="section-kicker">CURRENT PRACTICE</p>
+          <h3>Constructive internal dissent</h3>
+          <p>
+            In his current role, Theodore acts as a strategic naysayer:
+            stress-testing product assumptions, surfacing failure modes, and
+            making the strongest reasonable case against a direction before
+            the market has to do it.
+          </p>
         </article>
-        <article className="identity-card">
-          <span className="identity-index">02</span>
-          <div>
-            <h3>Sequoia Scholar</h3>
-            <p>
-              Cohort 8 — part of a community of founders and builders shaping
-              the next generation of technology companies.
-            </p>
-          </div>
-        </article>
       </section>
-
-      <section className="prose-section" aria-labelledby="about-heading">
-        <div className="section-heading">
-          <p className="section-kicker">ABOUT</p>
-          <h2 id="about-heading">Personal summary</h2>
-        </div>
-        <p>
-          Trained in mathematics and risk engineering at Duke University,
-          Theodore works across artificial intelligence, finance, and decision
-          systems. His work emphasizes disciplined judgment under constraint:
-          turning complex models, incomplete evidence, and changing market
-          conditions into decisions that can withstand scrutiny.
-        </p>
-        <p>
-          He is particularly interested in standards, validation protocols,
-          and operating frameworks that make AI deployable in regulated and
-          high-stakes environments — rigorous enough for real capital and real
-          users, yet adaptive enough to capture technological advantage.
-        </p>
-      </section>
-
-      <section className="threads-section" aria-labelledby="threads-heading">
-        <div className="section-heading">
-          <p className="section-kicker">THREADS</p>
-          <h2 id="threads-heading">What I keep returning to</h2>
-        </div>
-        <div className="thread-list">
-          <div><span>01</span><p>Frontier model evaluation and capability boundaries</p></div>
-          <div><span>02</span><p>AI-native products and operating workflows</p></div>
-          <div><span>03</span><p>Decision systems for finance and regulated capital</p></div>
-          <div><span>04</span><p>Mathematical rigor, risk, and evidence under uncertainty</p></div>
-        </div>
-      </section>
-
-      <aside className="history-note">
-        <p>
-          Looking for earlier roles and projects? They are collected separately
-          as historical experience through June 30, 2026.
-        </p>
-        <Link className="text-link" href="/past-experience/">
-          View past experience <span aria-hidden="true">→</span>
-        </Link>
-      </aside>
     </SiteShell>
   );
 }

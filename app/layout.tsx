@@ -1,24 +1,28 @@
 import type { Metadata } from "next";
 import "./globals.css";
 
+const title =
+  "Strategy at a World Model Unicorn | Duke B.S. & M.Eng. | Sequoia Scholar, Cohort 8";
+const description =
+  "Theodore Ouyang works at the intersection of artificial intelligence, strategy, and finance, translating frontier AI capabilities into products, operating models, and long-term business advantage.";
+
 export const metadata: Metadata = {
   metadataBase: new URL("https://130u.github.io"),
   title: {
-    default: "Theodore Ouyang",
+    default: title,
     template: "%s | Theodore Ouyang",
   },
-  description:
-    "Theodore Ouyang is an AI entrepreneur, Sequoia Scholar, and Duke University alumnus based in Beijing.",
+  description,
   openGraph: {
-    title: "Theodore Ouyang",
-    description: "AI Entrepreneur · Sequoia Scholar · Duke University ’25",
+    title,
+    description,
     type: "website",
-    images: [{ url: "/og.png", width: 1734, height: 907 }],
+    images: [{ url: "/og.png", width: 1774, height: 887 }],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Theodore Ouyang",
-    description: "AI Entrepreneur · Sequoia Scholar · Duke University ’25",
+    title,
+    description,
     images: ["/og.png"],
   },
 };

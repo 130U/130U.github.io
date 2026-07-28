@@ -41,16 +41,24 @@ export function SiteShell({
 
       <div className="site-frame">
         <aside className="profile-sidebar" aria-label="Profile">
-          <div className="monogram" aria-hidden="true">
-            <span>TO</span>
+          <div className="avatar-frame">
+            {/* Static GitHub Pages deployment serves this pre-sized portrait directly. */}
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              src="/theodore-avatar-warm.png"
+              alt="Illustrated portrait of Theodore Ouyang"
+              width="192"
+              height="192"
+            />
           </div>
           <h2>Theodore Ouyang</h2>
           <p className="sidebar-bio">
-            Sequoia Scholar, Cohort 8 | AI Entrepreneur | Duke University ’25
+            Strategy at a World Model Unicorn · Duke B.S. &amp; M.Eng. ·
+            Sequoia Scholar, Cohort 8
           </p>
           <ul className="profile-links">
             <li><span aria-hidden="true">⌖</span><span>Beijing, China</span></li>
-            <li><span aria-hidden="true">▦</span><span>Duke University</span></li>
+            <li><span aria-hidden="true">◇</span><span>Duke University</span></li>
             <li>
               <span aria-hidden="true">@</span>
               <a href="mailto:10@alumni.duke.edu">10@alumni.duke.edu</a>
