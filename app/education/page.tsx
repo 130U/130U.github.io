@@ -9,13 +9,8 @@ export const metadata: Metadata = {
 export default function EducationPage() {
   return (
     <SiteShell active="education">
-      <header className="page-intro">
-        <p className="eyebrow">EDUCATION</p>
-        <h1>Mathematics, risk, and applied decision making.</h1>
-        <p className="lede">
-          An interdisciplinary foundation spanning mathematics, engineering,
-          finance, data science, law, and ethics.
-        </p>
+      <header className="page-intro plain-page-intro">
+        <h1>Education</h1>
       </header>
 
       <section className="education-list" aria-label="Degrees">
@@ -47,9 +42,8 @@ export default function EducationPage() {
       </section>
 
       <section className="coursework" aria-labelledby="coursework-heading">
-        <div className="section-heading">
-          <p className="section-kicker">SELECTED COURSEWORK</p>
-          <h2 id="coursework-heading">A deliberately broad toolkit</h2>
+        <div className="section-heading single-section-heading">
+          <h2 id="coursework-heading">Selected Coursework</h2>
         </div>
         <div className="course-grid">
           <article>

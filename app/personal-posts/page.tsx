@@ -9,13 +9,8 @@ export const metadata: Metadata = {
 export default function PersonalPostsPage() {
   return (
     <SiteShell active="posts">
-      <header className="page-intro">
-        <p className="eyebrow">PERSONAL POSTS</p>
-        <h1>Ideas, projects, and work in progress.</h1>
-        <p className="lede">
-          This will be the home for personal writing, selected work, and the
-          projects that are worth sharing in public.
-        </p>
+      <header className="page-intro plain-page-intro">
+        <h1>Personal Posts</h1>
       </header>
 
       <section className="posts-empty" aria-labelledby="posts-heading">

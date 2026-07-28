@@ -5,59 +5,31 @@ import { pastExperience } from "../lib/pastExperience";
 export const metadata: Metadata = {
   title: "Past Experience",
   description:
-    "Leou before July 1, 2026: a full personal record organized across five domains.",
+    "Theodore before July 1st, 2026: a full personal record organized across five domains.",
 };
-
-function slugify(value: string) {
-  return value
-    .toLowerCase()
-    .replace(/&/g, "and")
-    .replace(/[^a-z0-9]+/g, "-")
-    .replace(/(^-|-$)/g, "");
-}
 
 const metadataOrder = ["Location", "Position", "Dates"];
 
 export default function PastExperiencePage() {
   return (
     <SiteShell active="experience">
-      <header className="page-intro experience-intro">
-        <p className="eyebrow">PAST EXPERIENCE</p>
-        <h1>Leou before July 1, 2026.</h1>
-        <p className="lede">
-          A personal record of the work that mattered, preserved in full and
-          organized by domain.
-        </p>
+      <header className="page-intro plain-page-intro experience-intro">
+        <h1>Theodore before July 1st, 2026.</h1>
+        <p className="lede">Select a domain to view the complete record.</p>
       </header>
 
-      <nav className="domain-index" aria-label="Experience domains">
-        <p className="section-kicker">FIVE DOMAINS</p>
-        <ol>
-          {pastExperience.map((domain, index) => (
-            <li key={domain.name}>
-              <a href={`#${slugify(domain.name)}`}>
-                <span>{String(index + 1).padStart(2, "0")}</span>
-                {domain.name}
-              </a>
-            </li>
-          ))}
-        </ol>
-      </nav>
-
-      <div className="domain-list">
+      <section className="domain-accordion" aria-label="Experience domains">
         {pastExperience.map((domain, domainIndex) => (
-          <section
-            className="domain-section"
-            id={slugify(domain.name)}
-            key={domain.name}
-            aria-labelledby={`${slugify(domain.name)}-heading`}
-          >
-            <header className="domain-heading">
-              <span>{String(domainIndex + 1).padStart(2, "0")}</span>
-              <h2 id={`${slugify(domain.name)}-heading`}>{domain.name}</h2>
-            </header>
+          <details className="domain-disclosure" key={domain.name}>
+            <summary>
+              <span className="domain-number">
+                {String(domainIndex + 1).padStart(2, "0")}
+              </span>
+              <span className="domain-name">{domain.name}</span>
+              <span className="domain-toggle" aria-hidden="true">+</span>
+            </summary>
 
-            <div className="domain-entries">
+            <div className="domain-panel">
               {domain.entries.map((entry, entryIndex) => (
                 <article
                   className="archive-entry"
@@ -67,7 +39,7 @@ export default function PastExperiencePage() {
                     {String(entryIndex + 1).padStart(2, "0")}
                   </div>
                   <div className="archive-entry-content">
-                    <h3>{entry.organization}</h3>
+                    <h2>{entry.organization}</h2>
                     <dl className="entry-metadata">
                       {metadataOrder.map((label) =>
                         entry.metadata[label] ? (
@@ -93,9 +65,9 @@ export default function PastExperiencePage() {
                 </article>
               ))}
             </div>
-          </section>
+          </details>
         ))}
-      </div>
+      </section>
     </SiteShell>
   );
 }
