@@ -1,5 +1,5 @@
 import assert from "node:assert/strict";
-import { readFile } from "node:fs/promises";
+import { readFile, stat } from "node:fs/promises";
 import test from "node:test";
 
 const domainPages = [
@@ -60,6 +60,26 @@ test("renders the finished homepage and profile details", async () => {
   assert.match(html, /10@alumni\.duke\.edu/);
   assert.doesNotMatch(html, /Beijing, China|Beijing · New York/);
   assert.doesNotMatch(html, /codex-preview|react-loading-skeleton/i);
+});
+
+test("publishes the lo monogram as browser and device icons", async () => {
+  const html = await (await render()).text();
+  assert.match(html, /href="https:\/\/www\.theodoreoy\.com\/favicon\.ico"/);
+  assert.match(html, /href="https:\/\/www\.theodoreoy\.com\/favicon-32\.png"/);
+  assert.match(html, /href="https:\/\/www\.theodoreoy\.com\/favicon-16\.png"/);
+  assert.match(html, /href="https:\/\/www\.theodoreoy\.com\/apple-touch-icon\.png"/);
+
+  for (const name of [
+    "lo-monogram.png",
+    "icon-512.png",
+    "apple-touch-icon.png",
+    "favicon-32.png",
+    "favicon-16.png",
+    "favicon.ico",
+  ]) {
+    const asset = await stat(new URL(`../public/${name}`, import.meta.url));
+    assert.ok(asset.size > 0, `${name} must not be empty`);
+  }
 });
 
 test("renders every public route", async () => {
