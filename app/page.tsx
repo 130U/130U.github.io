@@ -14,7 +14,9 @@ export default function Home() {
   return (
     <SiteShell active="home">
       <header className="page-intro plain-page-intro">
-        <h1>Personal Summary</h1>
+        <h1 className="introspective-title" lang="la">
+          Quis ego sum?
+        </h1>
       </header>
 
       <section className="summary-copy summary-copy-alone" aria-label="Personal summary">

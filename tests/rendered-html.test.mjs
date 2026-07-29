@@ -51,7 +51,7 @@ test("renders the finished homepage and profile details", async () => {
     html,
     /<title>Strategy at a World Model Unicorn \| Duke B\.S\. &amp; M\.Eng\. \| Sequoia Scholar, Cohort 8<\/title>/i,
   );
-  assert.match(html, /<h1>Personal Summary<\/h1>/);
+  assert.match(html, /<h1 class="introspective-title" lang="la">Quis ego sum\?<\/h1>/);
   assert.match(html, /<span>Strategy at a World Model Unicorn<\/span>/);
   assert.match(html, /<span>Duke B\.S\. &amp; M\.Eng\.<\/span>/);
   assert.match(html, /<span>Sequoia Scholar, Cohort 8<\/span>/);
