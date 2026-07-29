@@ -25,13 +25,6 @@ export default function PersonalPostsPage() {
           </p>
         </div>
       </section>
-
-      <aside className="contact-note">
-        <p>For now, the best way to follow Theodore’s work is through GitHub.</p>
-        <a className="text-link" href="https://github.com/130U">
-          Visit GitHub <span aria-hidden="true">→</span>
-        </a>
-      </aside>
     </SiteShell>
   );
 }

@@ -436,34 +436,20 @@ a:focus-visible {
   margin-bottom: 36px;
 }
 
-.domain-accordion {
+.domain-directory {
   border-top: 1px solid var(--rule-strong);
 }
 
-.domain-disclosure {
-  border-bottom: 1px solid var(--rule-strong);
-}
-
-.domain-disclosure summary {
+.domain-directory-link {
   display: grid;
   grid-template-columns: 48px minmax(0, 1fr) 28px;
   align-items: center;
   min-height: 78px;
   padding: 18px 4px;
+  border-bottom: 1px solid var(--rule-strong);
   color: var(--ink-strong);
-  cursor: pointer;
-  list-style: none;
   gap: 16px;
-  transition: color 160ms ease, background-color 160ms ease;
-}
-
-.domain-disclosure summary::-webkit-details-marker {
-  display: none;
-}
-
-.domain-disclosure summary:hover,
-.domain-disclosure[open] summary {
-  color: var(--accent-dark);
+  transition: color 160ms ease, padding-left 160ms ease;
 }
 
 .domain-number {
@@ -479,20 +465,47 @@ a:focus-visible {
   letter-spacing: -0.02em;
 }
 
-.domain-toggle {
+.domain-arrow {
   color: var(--accent);
-  font-size: 1.45rem;
-  font-weight: 350;
+  font-size: 1.05rem;
+  font-weight: 500;
   text-align: center;
   transition: transform 160ms ease;
 }
 
-.domain-disclosure[open] .domain-toggle {
-  transform: rotate(45deg);
+.domain-directory-link:hover {
+  padding-left: 10px;
+  color: var(--accent-dark);
 }
 
-.domain-panel {
-  padding: 0 0 20px 64px;
+.domain-directory-link:hover .domain-arrow {
+  transform: translateX(4px);
+}
+
+.back-link {
+  display: inline-flex;
+  align-items: center;
+  margin-bottom: 34px;
+  color: var(--muted);
+  font-size: 0.84rem;
+  font-weight: 560;
+  gap: 8px;
+}
+
+.back-link:hover {
+  color: var(--accent-dark);
+}
+
+.domain-page-number {
+  margin: 0 0 10px;
+  color: var(--accent);
+  font-size: 0.78rem;
+  font-weight: 650;
+}
+
+.domain-panel-standalone {
+  padding: 0;
+  border-top: 1px solid var(--rule-strong);
 }
 
 .domain-index {
@@ -698,30 +711,6 @@ a:focus-visible {
   color: var(--muted);
 }
 
-.contact-note {
-  margin-top: 48px;
-  padding: 28px 30px;
-  border-left: 3px solid var(--accent);
-  background: var(--paper-raised);
-}
-
-.contact-note p {
-  margin: 0 0 8px;
-  color: var(--muted);
-}
-
-.text-link {
-  color: var(--accent-dark);
-  font-family: var(--mono);
-  font-size: 0.78rem;
-  font-weight: 700;
-  letter-spacing: 0.03em;
-}
-
-.text-link:hover {
-  color: var(--accent);
-}
-
 .site-footer {
   display: flex;
   justify-content: space-between;
@@ -870,14 +859,10 @@ a:focus-visible {
     gap: 10px;
   }
 
-  .domain-disclosure summary {
+  .domain-directory-link {
     grid-template-columns: 36px minmax(0, 1fr) 24px;
     min-height: 70px;
     gap: 10px;
-  }
-
-  .domain-panel {
-    padding-left: 0;
   }
 
   .archive-entry-number {
@@ -908,8 +893,7 @@ a:focus-visible {
     grid-template-columns: 1fr;
   }
 
-  .practice-note,
-  .contact-note {
+  .practice-note {
     padding: 24px 22px;
   }
 

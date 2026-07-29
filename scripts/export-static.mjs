@@ -8,6 +8,26 @@ const routes = [
   { requestPath: "/", outputPath: "index.html" },
   { requestPath: "/education", outputPath: "education/index.html" },
   { requestPath: "/past-experience", outputPath: "past-experience/index.html" },
+  {
+    requestPath: "/past-experience/artificial-intelligence",
+    outputPath: "past-experience/artificial-intelligence/index.html",
+  },
+  {
+    requestPath: "/past-experience/data-science",
+    outputPath: "past-experience/data-science/index.html",
+  },
+  {
+    requestPath: "/past-experience/environmental-social-and-governance",
+    outputPath: "past-experience/environmental-social-and-governance/index.html",
+  },
+  {
+    requestPath: "/past-experience/finance",
+    outputPath: "past-experience/finance/index.html",
+  },
+  {
+    requestPath: "/past-experience/stem-academic-competitions-and-training",
+    outputPath: "past-experience/stem-academic-competitions-and-training/index.html",
+  },
   { requestPath: "/personal-posts", outputPath: "personal-posts/index.html" },
 ];
 const workerUrl = new URL("../dist/server/index.js", import.meta.url);
