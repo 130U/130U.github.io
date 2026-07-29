@@ -16,11 +16,16 @@ export default function EducationPage() {
       <section className="education-list" aria-label="Degrees">
         <article className="education-entry">
           <div className="entry-date">2025</div>
-          <div>
-            <p className="entry-place">Duke University · Durham, USA</p>
-            <h2>Master of Engineering in Risk Engineering</h2>
+          <div className="education-entry-content">
+            <header className="education-institution">
+              <h2>Duke University</h2>
+              <p className="entry-location">Durham, USA</p>
+            </header>
+            <h3 className="education-degree">
+              Master of Engineering in Risk Engineering
+            </h3>
             <p className="entry-subtitle">Financial Risk Concentration</p>
-            <p>
+            <p className="education-note">
               Pratt School of Engineering Merit Scholarship — one of the
               school’s highest-tier merit awards, covering 50% of tuition.
             </p>
@@ -29,11 +34,16 @@ export default function EducationPage() {
 
         <article className="education-entry">
           <div className="entry-date">2023</div>
-          <div>
-            <p className="entry-place">Duke University · Durham, USA</p>
-            <h2>Bachelor of Science in Mathematics</h2>
+          <div className="education-entry-content">
+            <header className="education-institution">
+              <h2>Duke University</h2>
+              <p className="entry-location">Durham, USA</p>
+            </header>
+            <h3 className="education-degree">
+              Bachelor of Science in Mathematics
+            </h3>
             <p className="entry-subtitle">Dual-Degree Undergraduate Program</p>
-            <p>
+            <p className="education-note">
               Undergraduate Merit Scholarship — a merit-based award covering
               25% of tuition.
             </p>

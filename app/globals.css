@@ -398,39 +398,62 @@ a:focus-visible {
   letter-spacing: 0.06em;
 }
 
-.entry-place {
-  margin: 0 0 8px;
-  color: var(--accent-dark);
-  font-family: var(--mono);
-  font-size: 0.75rem;
-  font-weight: 700;
-  letter-spacing: 0.035em;
+.education-entry-content {
+  min-width: 0;
 }
 
-.education-entry h2 {
-  margin: 0 0 6px;
+.education-institution {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  margin: 0 0 14px;
+  gap: 6px 14px;
+}
+
+.education-institution h2 {
+  margin: 0;
   color: var(--ink-strong);
   font-family: var(--body-serif);
   font-size: 1.55rem;
-  font-weight: 520;
-  line-height: 1.25;
+  font-weight: 620;
+  line-height: 1.15;
+  letter-spacing: -0.025em;
 }
 
-.education-entry p {
-  margin: 8px 0 0;
+.entry-location {
+  margin: 0;
   color: var(--muted);
+  font-family: var(--sans);
+  font-size: 0.76rem;
+  font-weight: 650;
+  letter-spacing: 0.035em;
 }
 
-.education-entry p:not(.entry-place):not(.entry-subtitle) {
-  font-family: var(--serif);
-  font-size: 1.05rem;
-  line-height: 1.62;
+.education-degree {
+  margin: 0 0 14px;
+  color: var(--ink-strong);
+  font-family: var(--body-serif);
+  font-size: 1.38rem;
+  font-weight: 500;
+  line-height: 1.28;
+  letter-spacing: -0.018em;
 }
 
 .entry-subtitle {
-  color: var(--ink) !important;
+  margin: 0 0 13px;
+  color: var(--ink);
   font-family: var(--body-serif);
+  font-size: 1.02rem;
   font-weight: 600;
+  line-height: 1.35;
+}
+
+.education-note {
+  margin: 0;
+  color: var(--muted);
+  font-family: var(--serif);
+  font-size: 1.05rem;
+  line-height: 1.62;
 }
 
 .coursework {
@@ -746,6 +769,14 @@ a:focus-visible {
   font-family: var(--mono);
   font-size: 0.8rem;
   font-weight: 700;
+}
+
+.post-listing > div {
+  min-width: 0;
+}
+
+.post-listing .section-kicker {
+  margin-bottom: 16px;
 }
 
 .post-listing h2 a {
@@ -1194,6 +1225,12 @@ a:focus-visible {
 
   .profile-links {
     grid-template-columns: 1fr;
+  }
+
+  .education-institution {
+    display: grid;
+    margin-bottom: 13px;
+    gap: 4px;
   }
 
   .practice-note {

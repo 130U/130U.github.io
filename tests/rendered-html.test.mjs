@@ -114,7 +114,26 @@ test("uses an editorial serif-led system with restrained sans utilities", async 
 
   const education = await (await render("/education")).text();
   assert.match(education, /<h1>Education<\/h1>/);
+  assert.match(education, /<h2>Duke University<\/h2>/);
+  assert.match(
+    education,
+    /<h3 class="education-degree">Master of Engineering in Risk Engineering<\/h3>/,
+  );
+  assert.match(education, /class="entry-location">Durham, USA<\/p>/);
   assert.doesNotMatch(education, /Mathematics, risk, and applied decision making|A deliberately broad toolkit/);
+
+  assert.match(
+    css,
+    /\.education-institution h2\s*{[^}]*font-size:\s*1\.55rem[^}]*font-weight:\s*620/s,
+  );
+  assert.match(
+    css,
+    /\.education-degree\s*{[^}]*margin:\s*0 0 14px[^}]*font-size:\s*1\.38rem/s,
+  );
+  assert.match(
+    css,
+    /\.post-listing \.section-kicker\s*{[^}]*margin-bottom:\s*16px/s,
+  );
 });
 
 test("past experience landing page links to five separate domain pages", async () => {
