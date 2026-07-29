@@ -29,6 +29,11 @@ const routes = [
     outputPath: "past-experience/stem-academic-competitions-and-training/index.html",
   },
   { requestPath: "/personal-posts", outputPath: "personal-posts/index.html" },
+  {
+    requestPath: "/personal-posts/from-vision-and-instructions-to-robot-actions",
+    outputPath:
+      "personal-posts/from-vision-and-instructions-to-robot-actions/index.html",
+  },
 ];
 const workerUrl = new URL("../dist/server/index.js", import.meta.url);
 workerUrl.searchParams.set("export", `${Date.now()}`);

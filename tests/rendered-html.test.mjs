@@ -86,7 +86,11 @@ test("renders every public route", async () => {
   const expectations = [
     ["/education", /Master of Engineering in Risk Engineering/],
     ["/past-experience", /Theodore before July 1st, 2026/],
-    ["/personal-posts", /The first post is being prepared/],
+    ["/personal-posts", /From Vision and Instructions to Robot Actions/],
+    [
+      "/personal-posts/from-vision-and-instructions-to-robot-actions",
+      /What the comparison is really showing/,
+    ],
     ...domainPages.map(({ path, name }) => [path, new RegExp(escapeText(name))]),
   ];
 
@@ -178,7 +182,35 @@ test("each domain page contains only its own exact archive content", async () =>
   assert.equal(exactBulletMatches, 92);
 });
 
-test("personal posts omits the GitHub promotion card", async () => {
+test("personal posts publishes the first research note and removes the placeholder", async () => {
   const html = await (await render("/personal-posts")).text();
+  assert.match(
+    html,
+    /href="\/personal-posts\/from-vision-and-instructions-to-robot-actions\/"/,
+  );
+  assert.match(html, /RESEARCH NOTE/);
+  assert.match(html, /July 29, 2026/);
+  assert.doesNotMatch(html, /COMING SOON|The first post is being prepared/);
   assert.doesNotMatch(html, /For now, the best way to follow|Visit GitHub|contact-note/);
+});
+
+test("first research note preserves the reviewed taxonomy and source diagram", async () => {
+  const path = "/personal-posts/from-vision-and-instructions-to-robot-actions";
+  const html = await (await render(path)).text();
+
+  assert.match(
+    html,
+    /<h1>From Vision and Instructions to Robot Actions: Two Emerging Paths<\/h1>/,
+  );
+  assert.match(html, /single-pass world encoder/);
+  assert.match(html, /one forward pass through the video model/);
+  assert.match(html, /future-video tokens from influencing action tokens/);
+  assert.match(html, /World-Action Model.*emerging label/s);
+  assert.match(html, /Primary sources/);
+  assert.match(html, /src="\/wam-vla-two-paths-en\.png"/);
+
+  const diagram = await stat(
+    new URL("../public/wam-vla-two-paths-en.png", import.meta.url),
+  );
+  assert.ok(diagram.size > 300_000, "The full-resolution source diagram must be retained");
 });

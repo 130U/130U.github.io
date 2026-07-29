@@ -306,7 +306,7 @@ a:focus-visible {
 
 .section-heading h2,
 .coursework h2,
-.posts-empty h2 {
+.post-listing h2 {
   margin: 0;
   color: var(--ink-strong);
   font-family: var(--body-serif);
@@ -732,7 +732,7 @@ a:focus-visible {
   content: "";
 }
 
-.posts-empty {
+.post-listing {
   display: grid;
   grid-template-columns: 105px minmax(0, 1fr);
   padding: 35px 0 45px;
@@ -748,12 +748,244 @@ a:focus-visible {
   font-weight: 700;
 }
 
-.posts-empty p:last-child {
+.post-listing h2 a {
+  text-decoration-color: transparent;
+  text-decoration-line: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 5px;
+  transition: color 160ms ease, text-decoration-color 160ms ease;
+}
+
+.post-listing h2 a:hover {
+  color: var(--accent-dark);
+  text-decoration-color: rgba(195, 95, 61, 0.55);
+}
+
+.post-listing-summary {
   margin: 14px 0 0;
   color: var(--muted);
   font-family: var(--serif);
   font-size: 1.05rem;
   line-height: 1.6;
+}
+
+.post-listing-meta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  margin: 22px 0 0;
+  color: var(--faint);
+  font-family: var(--sans);
+  font-size: 0.74rem;
+  letter-spacing: 0.02em;
+  gap: 8px;
+}
+
+.post-listing-meta a {
+  margin-left: auto;
+  color: var(--accent-dark);
+  font-weight: 650;
+}
+
+.post-listing-meta a:hover {
+  color: var(--accent);
+}
+
+.post-article .back-link {
+  margin-bottom: 28px;
+}
+
+.post-header {
+  margin-bottom: 46px;
+  padding-bottom: 36px;
+  border-bottom: 1px solid var(--rule-strong);
+}
+
+.post-header h1 {
+  max-width: 800px;
+  margin: 16px 0 0;
+  color: var(--ink-strong);
+  font-family: var(--body-serif);
+  font-size: clamp(2.35rem, 4.4vw, 3.55rem);
+  font-weight: 560;
+  line-height: 1.02;
+  letter-spacing: -0.045em;
+  text-wrap: balance;
+}
+
+.post-dek {
+  max-width: 720px;
+  margin: 24px 0 0;
+  color: var(--muted);
+  font-size: 1.18rem;
+  line-height: 1.58;
+}
+
+.post-meta {
+  display: flex;
+  align-items: center;
+  margin-top: 24px;
+  color: var(--faint);
+  font-family: var(--sans);
+  font-size: 0.76rem;
+  letter-spacing: 0.025em;
+  gap: 9px;
+}
+
+.post-prose {
+  max-width: 720px;
+  font-size: 1.08rem;
+  line-height: 1.78;
+}
+
+.post-prose section {
+  scroll-margin-top: 104px;
+}
+
+.post-prose p {
+  margin: 0 0 22px;
+}
+
+.post-prose .post-lead {
+  color: var(--ink-strong);
+  font-size: 1.2rem;
+  line-height: 1.7;
+}
+
+.post-prose h2 {
+  margin: 66px 0 21px;
+  color: var(--ink-strong);
+  font-family: var(--body-serif);
+  font-size: clamp(1.65rem, 3vw, 2.15rem);
+  font-weight: 580;
+  line-height: 1.16;
+  letter-spacing: -0.027em;
+  text-wrap: balance;
+}
+
+.post-prose a {
+  color: var(--ink-strong);
+  text-decoration-color: rgba(195, 95, 61, 0.58);
+  text-decoration-line: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 3px;
+}
+
+.post-prose a:hover {
+  color: var(--accent-dark);
+  text-decoration-color: var(--accent);
+}
+
+.post-note {
+  margin: 34px 0 4px;
+  padding: 22px 0;
+  border-top: 1px solid var(--rule-strong);
+  border-bottom: 1px solid var(--rule-strong);
+  color: var(--muted);
+  font-size: 1rem;
+  line-height: 1.65;
+}
+
+.post-note strong {
+  color: var(--ink-strong);
+  font-weight: 650;
+}
+
+.post-figure {
+  margin: 48px 0 62px;
+}
+
+.post-figure a {
+  display: block;
+  overflow: hidden;
+  border: 1px solid var(--rule-strong);
+  border-radius: 3px;
+  background: var(--paper-raised);
+  box-shadow: 0 16px 50px rgba(70, 49, 36, 0.08);
+  transition: border-color 160ms ease, transform 160ms ease;
+}
+
+.post-figure a:hover {
+  border-color: rgba(195, 95, 61, 0.6);
+  transform: translateY(-2px);
+}
+
+.post-figure img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.post-figure figcaption {
+  margin-top: 12px;
+  color: var(--faint);
+  font-family: var(--sans);
+  font-size: 0.73rem;
+  line-height: 1.5;
+}
+
+.post-flow {
+  margin: 30px 0 !important;
+  padding: 20px 22px;
+  border-left: 3px solid var(--accent);
+  background: rgba(255, 253, 248, 0.72);
+  color: var(--ink-strong);
+  font-size: 1.04rem;
+  font-weight: 600;
+  line-height: 1.55;
+}
+
+.post-questions {
+  display: grid;
+  margin: 28px 0 30px;
+  padding: 0;
+  counter-reset: post-question;
+  list-style: none;
+  gap: 0;
+}
+
+.post-questions li {
+  display: grid;
+  grid-template-columns: 34px minmax(0, 1fr);
+  padding: 14px 0;
+  border-top: 1px solid var(--rule);
+  color: var(--ink-strong);
+  counter-increment: post-question;
+  gap: 12px;
+}
+
+.post-questions li:last-child {
+  border-bottom: 1px solid var(--rule);
+}
+
+.post-questions li::before {
+  color: var(--accent);
+  font-family: var(--sans);
+  font-size: 0.72rem;
+  font-weight: 700;
+  content: "0" counter(post-question);
+}
+
+.post-references {
+  margin-top: 76px;
+  padding-top: 1px;
+  border-top: 2px solid var(--ink-strong);
+}
+
+.post-references > p {
+  color: var(--muted);
+}
+
+.post-references ol {
+  display: grid;
+  margin: 24px 0 0;
+  padding-left: 24px;
+  gap: 11px;
+}
+
+.post-references li {
+  padding-left: 5px;
+  line-height: 1.55;
 }
 
 .site-footer {
@@ -876,9 +1108,35 @@ a:focus-visible {
   }
 
   .education-entry,
-  .posts-empty {
+  .post-listing {
     grid-template-columns: 1fr;
     gap: 12px;
+  }
+
+  .post-listing-meta a {
+    width: 100%;
+    margin: 4px 0 0;
+  }
+
+  .post-header {
+    margin-bottom: 38px;
+    padding-bottom: 30px;
+  }
+
+  .post-header h1 {
+    font-size: clamp(2.2rem, 10vw, 3.05rem);
+  }
+
+  .post-dek {
+    font-size: 1.08rem;
+  }
+
+  .post-prose {
+    font-size: 1.03rem;
+  }
+
+  .post-prose .post-lead {
+    font-size: 1.12rem;
   }
 
   .course-grid {
