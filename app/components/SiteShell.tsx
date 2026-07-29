@@ -53,11 +53,12 @@ export function SiteShell({
           </div>
           <h2>Theodore Ouyang</h2>
           <p className="sidebar-bio">
-            Strategy at a World Model Unicorn | Duke B.S. &amp; M.Eng. |
-            Sequoia Scholar, Cohort 8
+            <span>Strategy at a World Model Unicorn</span>
+            <span>Duke B.S. &amp; M.Eng.</span>
+            <span>Sequoia Scholar, Cohort 8</span>
           </p>
           <ul className="profile-links">
-            <li><span aria-hidden="true">⌖</span><span>Beijing | Boston, MA</span></li>
+            <li><span aria-hidden="true">⌖</span><span>Beijing | Boston</span></li>
             <li><span aria-hidden="true">◇</span><span>Duke University</span></li>
             <li>
               <span aria-hidden="true">@</span>
@@ -75,7 +76,7 @@ export function SiteShell({
 
       <footer className="site-footer">
         <p>© 2026 Theodore Ouyang</p>
-        <p>Beijing | Boston, MA</p>
+        <p>Beijing | Boston</p>
       </footer>
     </div>
   );

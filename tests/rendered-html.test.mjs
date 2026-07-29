@@ -52,8 +52,11 @@ test("renders the finished homepage and profile details", async () => {
     /<title>Strategy at a World Model Unicorn \| Duke B\.S\. &amp; M\.Eng\. \| Sequoia Scholar, Cohort 8<\/title>/i,
   );
   assert.match(html, /<h1>Personal Summary<\/h1>/);
-  assert.match(html, /Strategy at a World Model Unicorn \| Duke B\.S\. &amp; M\.Eng\. \|\s*Sequoia Scholar, Cohort 8/);
-  assert.match(html, /Beijing \| Boston, MA/);
+  assert.match(html, /<span>Strategy at a World Model Unicorn<\/span>/);
+  assert.match(html, /<span>Duke B\.S\. &amp; M\.Eng\.<\/span>/);
+  assert.match(html, /<span>Sequoia Scholar, Cohort 8<\/span>/);
+  assert.match(html, /Beijing \| Boston/);
+  assert.doesNotMatch(html, /Boston, MA/);
   assert.match(html, /10@alumni\.duke\.edu/);
   assert.doesNotMatch(html, /Beijing, China|Beijing · New York/);
   assert.doesNotMatch(html, /codex-preview|react-loading-skeleton/i);
@@ -74,12 +77,13 @@ test("renders every public route", async () => {
   }
 });
 
-test("uses one typography system and concise page headings", async () => {
+test("uses an editorial serif and restrained sans system with stable layout", async () => {
   const css = await readFile(new URL("../app/globals.css", import.meta.url), "utf8");
-  assert.match(css, /--serif:\s*var\(--font\)/);
-  assert.match(css, /--sans:\s*var\(--font\)/);
-  assert.match(css, /--mono:\s*var\(--font\)/);
-  assert.doesNotMatch(css, /Georgia|Palatino|SFMono|Consolas/);
+  assert.match(css, /--display:\s*"Instrument Sans Variable"/);
+  assert.match(css, /--body-serif:\s*"Newsreader Variable"/);
+  assert.match(css, /--serif:\s*var\(--body-serif\)/);
+  assert.match(css, /scrollbar-gutter:\s*stable/);
+  assert.match(css, /\.page-intro h1\s*{[^}]*font-family:\s*var\(--display\)[^}]*font-weight:\s*540/s);
 
   const education = await (await render("/education")).text();
   assert.match(education, /<h1>Education<\/h1>/);
