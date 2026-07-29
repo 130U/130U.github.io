@@ -16,6 +16,14 @@
   src: url("/fonts/newsreader-variable-latin.woff2") format("woff2-variations");
 }
 
+@font-face {
+  font-family: "Newsreader Variable";
+  font-style: italic;
+  font-display: swap;
+  font-weight: 200 800;
+  src: url("/fonts/newsreader-variable-latin-italic.woff2") format("woff2-variations");
+}
+
 :root {
   --paper: #f7f4ed;
   --paper-raised: #fffdf8;
@@ -53,9 +61,10 @@ body {
   background:
     radial-gradient(circle at 9% 0%, rgba(195, 95, 61, 0.075), transparent 28rem),
     var(--paper);
-  font-family: var(--sans);
+  font-family: var(--body-serif);
   font-size: 16px;
   line-height: 1.72;
+  font-optical-sizing: auto;
   -webkit-font-smoothing: antialiased;
 }
 
@@ -100,10 +109,10 @@ a:focus-visible {
 
 .wordmark {
   color: var(--ink-strong);
-  font-family: var(--display);
-  font-size: 1.02rem;
-  font-weight: 620;
-  letter-spacing: -0.025em;
+  font-family: var(--body-serif);
+  font-size: 1.08rem;
+  font-weight: 600;
+  letter-spacing: -0.02em;
 }
 
 .primary-nav {
@@ -186,9 +195,9 @@ a:focus-visible {
 .profile-sidebar h2 {
   margin: 0 0 8px;
   color: var(--ink-strong);
-  font-family: var(--display);
-  font-size: 1.38rem;
-  font-weight: 520;
+  font-family: var(--body-serif);
+  font-size: 1.48rem;
+  font-weight: 560;
   line-height: 1.15;
   letter-spacing: -0.02em;
 }
@@ -197,7 +206,8 @@ a:focus-visible {
   display: grid;
   margin: 0;
   color: var(--muted);
-  font-size: 0.89rem;
+  font-family: var(--body-serif);
+  font-size: 0.94rem;
   line-height: 1.48;
   gap: 2px;
 }
@@ -216,7 +226,8 @@ a:focus-visible {
   grid-template-columns: 22px minmax(0, 1fr);
   align-items: baseline;
   color: var(--muted);
-  font-size: 0.83rem;
+  font-family: var(--body-serif);
+  font-size: 0.9rem;
   gap: 9px;
 }
 
@@ -269,9 +280,9 @@ a:focus-visible {
   max-width: 790px;
   margin: 0;
   color: var(--ink-strong);
-  font-family: var(--display);
+  font-family: var(--body-serif);
   font-size: clamp(2.15rem, 4vw, 3.25rem);
-  font-weight: 540;
+  font-weight: 560;
   line-height: 1.08;
   letter-spacing: -0.045em;
   text-wrap: balance;
@@ -313,7 +324,7 @@ a:focus-visible {
 .posts-empty h2 {
   margin: 0;
   color: var(--ink-strong);
-  font-family: var(--display);
+  font-family: var(--body-serif);
   font-size: clamp(1.7rem, 3vw, 2.3rem);
   font-weight: 560;
   line-height: 1.15;
@@ -363,7 +374,7 @@ a:focus-visible {
 .practice-note h3 {
   margin: 0;
   color: var(--ink-strong);
-  font-family: var(--display);
+  font-family: var(--body-serif);
   font-size: 1.48rem;
   line-height: 1.25;
 }
@@ -414,7 +425,7 @@ a:focus-visible {
 .education-entry h2 {
   margin: 0 0 6px;
   color: var(--ink-strong);
-  font-family: var(--display);
+  font-family: var(--body-serif);
   font-size: 1.55rem;
   font-weight: 520;
   line-height: 1.25;
@@ -433,6 +444,7 @@ a:focus-visible {
 
 .entry-subtitle {
   color: var(--ink) !important;
+  font-family: var(--body-serif);
   font-weight: 600;
 }
 
@@ -460,7 +472,7 @@ a:focus-visible {
 .course-grid h3 {
   margin: 0 0 10px;
   color: var(--ink-strong);
-  font-family: var(--display);
+  font-family: var(--body-serif);
   font-size: 1.18rem;
 }
 
@@ -494,11 +506,13 @@ a:focus-visible {
 
 .domain-number {
   color: var(--accent);
+  font-family: var(--mono);
   font-size: 0.76rem;
   font-weight: 650;
 }
 
 .domain-name {
+  font-family: var(--body-serif);
   font-size: clamp(1.18rem, 2.5vw, 1.55rem);
   font-weight: 540;
   line-height: 1.25;
@@ -527,6 +541,7 @@ a:focus-visible {
   align-items: center;
   margin-bottom: 34px;
   color: var(--muted);
+  font-family: var(--sans);
   font-size: 0.84rem;
   font-weight: 560;
   gap: 8px;
@@ -539,6 +554,7 @@ a:focus-visible {
 .domain-page-number {
   margin: 0 0 10px;
   color: var(--accent);
+  font-family: var(--mono);
   font-size: 0.78rem;
   font-weight: 650;
 }
@@ -618,7 +634,7 @@ a:focus-visible {
 .domain-heading h2 {
   margin: 0;
   color: var(--ink-strong);
-  font-family: var(--display);
+  font-family: var(--body-serif);
   font-size: clamp(2rem, 4vw, 3.15rem);
   font-weight: 540;
   line-height: 1.06;
@@ -648,7 +664,7 @@ a:focus-visible {
 .archive-entry-content h3 {
   margin: 0 0 18px;
   color: var(--ink-strong);
-  font-family: var(--display);
+  font-family: var(--body-serif);
   font-size: 1.64rem;
   font-weight: 550;
   line-height: 1.18;
@@ -692,7 +708,7 @@ a:focus-visible {
   border-top: 1px solid var(--rule);
   border-bottom: 1px solid var(--rule);
   color: var(--ink-strong);
-  font-family: var(--display);
+  font-family: var(--body-serif);
   font-size: 1.06rem;
   font-weight: 600;
   line-height: 1.45;

@@ -97,13 +97,17 @@ test("renders every public route", async () => {
   }
 });
 
-test("uses an editorial serif and restrained sans system with stable layout", async () => {
+test("uses an editorial serif-led system with restrained sans utilities", async () => {
   const css = await readFile(new URL("../app/globals.css", import.meta.url), "utf8");
   assert.match(css, /--display:\s*"Instrument Sans Variable"/);
   assert.match(css, /--body-serif:\s*"Newsreader Variable"/);
   assert.match(css, /--serif:\s*var\(--body-serif\)/);
+  assert.match(css, /font-style:\s*italic;[\s\S]*newsreader-variable-latin-italic\.woff2/);
   assert.match(css, /scrollbar-gutter:\s*stable/);
-  assert.match(css, /\.page-intro h1\s*{[^}]*font-family:\s*var\(--display\)[^}]*font-weight:\s*540/s);
+  assert.match(css, /body\s*{[^}]*font-family:\s*var\(--body-serif\)/s);
+  assert.match(css, /\.profile-sidebar h2\s*{[^}]*font-family:\s*var\(--body-serif\)/s);
+  assert.match(css, /\.page-intro h1\s*{[^}]*font-family:\s*var\(--body-serif\)[^}]*font-weight:\s*560/s);
+  assert.match(css, /\.primary-nav a\s*{[^}]*font-family:\s*var\(--mono\)/s);
 
   const education = await (await render("/education")).text();
   assert.match(education, /<h1>Education<\/h1>/);
