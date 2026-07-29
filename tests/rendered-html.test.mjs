@@ -51,7 +51,7 @@ test("renders the finished homepage and profile details", async () => {
     html,
     /<title>Strategy at a World Model Unicorn \| Duke B\.S\. &amp; M\.Eng\. \| Sequoia Scholar, Cohort 8<\/title>/i,
   );
-  assert.match(html, /<h1 class="introspective-title" lang="la">Quis ego sum\?<\/h1>/);
+  assert.match(html, /<h1 lang="la">Quis ego sum\?<\/h1>/);
   assert.match(html, /<span>Strategy at a World Model Unicorn<\/span>/);
   assert.match(html, /<span>Duke B\.S\. &amp; M\.Eng\.<\/span>/);
   assert.match(html, /<span>Sequoia Scholar, Cohort 8<\/span>/);
@@ -102,7 +102,6 @@ test("uses an editorial serif-led system with restrained sans utilities", async 
   assert.match(css, /--display:\s*"Instrument Sans Variable"/);
   assert.match(css, /--body-serif:\s*"Newsreader Variable"/);
   assert.match(css, /--serif:\s*var\(--body-serif\)/);
-  assert.match(css, /font-style:\s*italic;[\s\S]*newsreader-variable-latin-italic\.woff2/);
   assert.match(css, /scrollbar-gutter:\s*stable/);
   assert.match(css, /body\s*{[^}]*font-family:\s*var\(--body-serif\)/s);
   assert.match(css, /\.profile-sidebar h2\s*{[^}]*font-family:\s*var\(--body-serif\)/s);

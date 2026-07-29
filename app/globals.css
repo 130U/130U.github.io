@@ -16,14 +16,6 @@
   src: url("/fonts/newsreader-variable-latin.woff2") format("woff2-variations");
 }
 
-@font-face {
-  font-family: "Newsreader Variable";
-  font-style: italic;
-  font-display: swap;
-  font-weight: 200 800;
-  src: url("/fonts/newsreader-variable-latin-italic.woff2") format("woff2-variations");
-}
-
 :root {
   --paper: #f7f4ed;
   --paper-raised: #fffdf8;
@@ -286,13 +278,6 @@ a:focus-visible {
   line-height: 1.08;
   letter-spacing: -0.045em;
   text-wrap: balance;
-}
-
-.page-intro h1.introspective-title {
-  font-family: var(--body-serif);
-  font-style: italic;
-  font-weight: 500;
-  letter-spacing: -0.035em;
 }
 
 .home-intro h1 span {
