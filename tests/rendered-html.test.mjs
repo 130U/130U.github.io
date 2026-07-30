@@ -136,6 +136,25 @@ test("uses an editorial serif-led system with restrained sans utilities", async 
   );
 });
 
+test("uses restrained Apple-style materials and accessible motion", async () => {
+  const css = await readFile(new URL("../app/globals.css", import.meta.url), "utf8");
+
+  assert.match(css, /--ease-out:\s*cubic-bezier\(0\.23,\s*1,\s*0\.32,\s*1\)/);
+  assert.match(css, /--radius-large:\s*28px/);
+  assert.match(css, /\.topbar-inner\s*{[^}]*backdrop-filter:\s*blur\(24px\) saturate\(145%\)/s);
+  assert.match(css, /\.profile-sidebar\s*{[^}]*border-radius:\s*var\(--radius-large\)/s);
+  assert.match(css, /@media \(hover:\s*hover\) and \(pointer:\s*fine\)/);
+  assert.match(css, /@media \(prefers-reduced-motion:\s*reduce\)/);
+  assert.match(css, /@media \(prefers-reduced-transparency:\s*reduce\)/);
+  assert.match(css, /@media \(prefers-contrast:\s*more\)/);
+  assert.doesNotMatch(css, /transition:\s*all\b/);
+  assert.doesNotMatch(
+    css,
+    /transition:[^;]*(?:padding|margin|width|height|top|right|bottom|left)[^;]*;/,
+  );
+  assert.doesNotMatch(css, /@keyframes\b/);
+});
+
 test("past experience landing page links to five separate domain pages", async () => {
   const html = await (await render("/past-experience")).text();
 
