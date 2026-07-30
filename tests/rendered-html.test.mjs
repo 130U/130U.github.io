@@ -252,3 +252,29 @@ test("first research note preserves the reviewed taxonomy and source diagram", a
   );
   assert.ok(diagram.size > 300_000, "The full-resolution source diagram must be retained");
 });
+
+test("keeps the static site free of unused backend scaffolding", async () => {
+  const packageJson = JSON.parse(
+    await readFile(new URL("../package.json", import.meta.url), "utf8"),
+  );
+  const workflow = await readFile(
+    new URL("../.github/workflows/pages.yml", import.meta.url),
+    "utf8",
+  );
+
+  assert.equal(packageJson.scripts.build, "vinext build");
+  assert.equal(packageJson.scripts.check, "npm run lint && npm test");
+  assert.equal(packageJson.dependencies["drizzle-orm"], undefined);
+  assert.equal(packageJson.devDependencies["drizzle-kit"], undefined);
+  assert.match(workflow, /name: Validate and build\s+run: npm run check/);
+
+  for (const path of [
+    "../.openai/hosting.json",
+    "../app/chatgpt-auth.ts",
+    "../db/index.ts",
+    "../drizzle.config.ts",
+    "../examples/d1/app/api/notes/route.ts",
+  ]) {
+    await assert.rejects(stat(new URL(path, import.meta.url)), { code: "ENOENT" });
+  }
+});
