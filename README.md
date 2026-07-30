@@ -1,29 +1,14 @@
-# Theodore Ouyang — Personal Website
+# Theodore Ouyang
 
-The source for Theodore Ouyang’s personal website, designed around a compact academic-profile structure with four sections:
+*Quis ego sum?* — Who am I?
 
-- Home
-- Education
-- Past Experience
-- Personal Posts
+I do not think the answer is a fixed biography. It is better understood through
+the questions one pursues, the work one chooses to preserve, and the ways one’s
+thinking changes over time.
 
-The public site is deployed through GitHub Pages at [130u.github.io](https://130u.github.io/).
+I created this website to keep that record with continuity: present work, past
+experience, and personal writing, each in its proper context. It is a living
+archive rather than a conventional portfolio—selective, honest, and deliberately
+unfinished.
 
-## Local development
-
-```bash
-npm ci --ignore-scripts
-npm run dev
-```
-
-## Validation
-
-```bash
-npm run build
-npm test
-npm run lint
-```
-
-## Deployment
-
-Pushing to `main` runs the GitHub Pages workflow. The workflow builds the Vinext application, exports the four public routes as static HTML, and deploys the generated artifact.
+[Visit the website →](https://www.theodoreoy.com/)
