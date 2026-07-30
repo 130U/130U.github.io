@@ -5,9 +5,9 @@ type ActivePage = "home" | "now" | "education" | "experience" | "posts";
 
 const navigation: Array<{ key: ActivePage; label: string; href: string }> = [
   { key: "home", label: "Home", href: "/" },
-  { key: "now", label: "Now", href: "/now/" },
   { key: "education", label: "Education", href: "/education/" },
   { key: "experience", label: "Past Experience", href: "/past-experience/" },
+  { key: "now", label: "Current Chapter", href: "/now/" },
   { key: "posts", label: "Personal Posts", href: "/personal-posts/" },
 ];
 

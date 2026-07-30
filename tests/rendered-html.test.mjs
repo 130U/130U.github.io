@@ -265,12 +265,39 @@ test("each domain page contains only its own exact archive content", async () =>
 test("publishes the July 2026 transition as a separate present-facing page", async () => {
   const html = await (await render("/now")).text();
 
+  assert.match(html, /<title>Current Chapter \| Theodore Ouyang<\/title>/);
   assert.match(html, /<time dateTime="2026-07">July 2026<\/time>/);
   assert.match(html, /<h1 id="now-heading">A New Chapter<\/h1>/);
+  assert.match(
+    html,
+    /From efficiency to additionality\u2014and from predicting the world to acting within it\./,
+  );
   assert.match(html, /Nashua, New Hampshire/);
   assert.match(html, /Wudaokou, Beijing/);
-  assert.match(html, /World Models and World-Action Models/);
+  assert.match(html, /The Question/);
+  assert.match(html, /The Thesis/);
+  assert.match(html, /The Decision/);
+  assert.match(html, /World Models \u2192 World-Action Models/);
+  assert.match(
+    html,
+    /Strategy is ultimately a choice under uncertainty\. This is mine\./,
+  );
+  assert.doesNotMatch(html, /<dt>From<\/dt>|<dt>To<\/dt>|class="journey-route"/);
   assert.doesNotMatch(html, /milestone|deliverable|roadmap|Present/);
+});
+
+test("places Current Chapter after Past Experience in the primary navigation", async () => {
+  const html = await (await render("/now")).text();
+  const navigation = html.match(
+    /<nav class="primary-nav"[^>]*>([\s\S]*?)<\/nav>/,
+  )?.[1];
+
+  assert.ok(navigation, "Primary navigation must render");
+  assert.match(
+    navigation,
+    /Home[\s\S]*Education[\s\S]*Past Experience[\s\S]*Current Chapter[\s\S]*Personal Posts/,
+  );
+  assert.doesNotMatch(navigation, />Now</);
 });
 
 test("personal posts publishes the first research note and removes the placeholder", async () => {
