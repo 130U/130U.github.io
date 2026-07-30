@@ -6,6 +6,7 @@ const root = dirname(dirname(fileURLToPath(import.meta.url)));
 const output = join(root, "github-pages");
 const routes = [
   { requestPath: "/", outputPath: "index.html" },
+  { requestPath: "/now", outputPath: "now/index.html" },
   { requestPath: "/education", outputPath: "education/index.html" },
   { requestPath: "/past-experience", outputPath: "past-experience/index.html" },
   {

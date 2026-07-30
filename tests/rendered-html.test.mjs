@@ -56,6 +56,7 @@ test("renders the finished homepage and profile details", async () => {
   assert.match(html, /<span>Duke B\.S\. &amp; M\.Eng\.<\/span>/);
   assert.match(html, /<span>Sequoia Scholar, Cohort 8<\/span>/);
   assert.match(html, /Beijing \| Boston/);
+  assert.match(html, /href="\/now\/"/);
   assert.doesNotMatch(html, /Boston, MA/);
   assert.match(html, /10@alumni\.duke\.edu/);
   assert.doesNotMatch(html, /Beijing, China|Beijing · New York/);
@@ -84,6 +85,7 @@ test("publishes the lo monogram as browser and device icons", async () => {
 
 test("renders every public route", async () => {
   const expectations = [
+    ["/now", /A New Chapter/],
     ["/education", /Master of Engineering in Risk Engineering/],
     ["/past-experience", /Theodore before July 1st, 2026/],
     ["/personal-posts", /From Vision and Instructions to Robot Actions/],
@@ -122,6 +124,28 @@ test("uses an editorial serif-led system with restrained sans utilities", async 
   assert.match(education, /class="entry-location">Durham, USA<\/p>/);
   assert.doesNotMatch(education, /Mathematics, risk, and applied decision making|A deliberately broad toolkit/);
 
+  const coursework = education.split('<section class="coursework"')[1];
+  assert.ok(coursework, "Selected Coursework must render");
+  assert.equal((coursework.match(/class="course-list"/g) ?? []).length, 4);
+  assert.equal((coursework.match(/<li>/g) ?? []).length, 31);
+  assert.match(
+    coursework,
+    /Advanced Linear Algebra.*Complex Analysis.*Financial Mathematics.*Mathematical Approaches to Financial Derivatives.*Mathematical Modeling.*Measure Theory.*Numerical Analysis.*Ordinary Differential Equations.*Partial Differential Equations.*Real Analysis.*Stochastic Differential Equations.*Stochastic Processes.*Topology/s,
+  );
+  assert.match(
+    coursework,
+    /Advanced Topics in Engineering Computing.*Algorithms.*Deep Learning.*Machine Learning.*Statistical Methodology.*Technology-Driven Quantitative Finance/s,
+  );
+  assert.match(
+    coursework,
+    /Corporate Finance.*Econometrics.*Financial Accounting.*Independent Study in Economics.*Macroeconomics.*Mathematical Analysis of Macroeconomics.*Microeconomics.*Venture Capital/s,
+  );
+  assert.match(
+    coursework,
+    /Ethics and Leadership.*Global China and Global Challenges.*Ocean and Coastal Law.*Space Law/s,
+  );
+  assert.doesNotMatch(coursework, /<p>[^<]*(?:analysis|learning|finance)[^<]*<\/p>/i);
+
   assert.match(
     css,
     /\.education-institution h2\s*{[^}]*font-size:\s*1\.55rem[^}]*font-weight:\s*620/s,
@@ -153,6 +177,11 @@ test("uses restrained Apple-style materials and accessible motion", async () => 
     /transition:[^;]*(?:padding|margin|width|height|top|right|bottom|left)[^;]*;/,
   );
   assert.doesNotMatch(css, /@keyframes\b/);
+  assert.doesNotMatch(css, /\.post-listing\s*{[^}]*transition:/s);
+  assert.match(
+    css,
+    /\.post-listing h2 a\s*{[^}]*transition:[^;]*text-decoration-color/s,
+  );
 });
 
 test("past experience landing page links to five separate domain pages", async () => {
@@ -174,6 +203,19 @@ test("each domain page contains only its own exact archive content", async () =>
   );
   const domainSection = source.split("## Domain Experience")[1];
   assert.ok(domainSection, "Domain Experience must exist in the source archive");
+
+  const dateLines = domainSection.match(/^\*\*Dates:\*\*.*$/gm) ?? [];
+  assert.equal(dateLines.length, 16);
+  assert.ok(
+    dateLines.every(
+      (line) =>
+        !/\b(?:Jan|Feb|Mar|Apr|Jun|Jul|Aug|Sep|Sept|Oct|Nov|Dec)\s+\d{4}\b/.test(
+          line,
+        ),
+    ),
+    "Past Experience month names must be written in full",
+  );
+  assert.ok(dateLines.every((line) => line.includes(" – ")));
 
   const sourceDomains = domainSection
     .split(/^### /gm)
@@ -201,7 +243,7 @@ test("each domain page contains only its own exact archive content", async () =>
 
     assert.match(html, new RegExp(`<h1>${escapeText(domain.name)}<\\/h1>`));
     assert.match(html, /href="\/past-experience\/"/);
-    assert.match(html, /Nov 2025 - Jul 2026|Past Experience/);
+    assert.match(html, /November 2025 – July 2026|Past Experience/);
     assert.doesNotMatch(html, /\bPresent\b/);
 
     for (const otherPage of domainPages.filter((item) => item.path !== page.path)) {
@@ -218,6 +260,17 @@ test("each domain page contains only its own exact archive content", async () =>
   }
 
   assert.equal(exactBulletMatches, 92);
+});
+
+test("publishes the July 2026 transition as a separate present-facing page", async () => {
+  const html = await (await render("/now")).text();
+
+  assert.match(html, /<time dateTime="2026-07">July 2026<\/time>/);
+  assert.match(html, /<h1 id="now-heading">A New Chapter<\/h1>/);
+  assert.match(html, /Nashua, New Hampshire/);
+  assert.match(html, /Wudaokou, Beijing/);
+  assert.match(html, /World Models and World-Action Models/);
+  assert.doesNotMatch(html, /milestone|deliverable|roadmap|Present/);
 });
 
 test("personal posts publishes the first research note and removes the placeholder", async () => {

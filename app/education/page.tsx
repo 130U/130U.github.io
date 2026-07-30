@@ -1,6 +1,60 @@
 import type { Metadata } from "next";
 import { SiteShell } from "../components/SiteShell";
 
+const courseworkGroups = [
+  {
+    title: "Mathematics",
+    courses: [
+      "Advanced Linear Algebra",
+      "Complex Analysis",
+      "Financial Mathematics",
+      "Mathematical Approaches to Financial Derivatives",
+      "Mathematical Modeling",
+      "Measure Theory",
+      "Numerical Analysis",
+      "Ordinary Differential Equations",
+      "Partial Differential Equations",
+      "Real Analysis",
+      "Stochastic Differential Equations",
+      "Stochastic Processes",
+      "Topology",
+    ],
+  },
+  {
+    title: "Data & Computing",
+    courses: [
+      "Advanced Topics in Engineering Computing",
+      "Algorithms",
+      "Deep Learning",
+      "Machine Learning",
+      "Statistical Methodology",
+      "Technology-Driven Quantitative Finance",
+    ],
+  },
+  {
+    title: "Finance & Economics",
+    courses: [
+      "Corporate Finance",
+      "Econometrics",
+      "Financial Accounting",
+      "Independent Study in Economics",
+      "Macroeconomics",
+      "Mathematical Analysis of Macroeconomics",
+      "Microeconomics",
+      "Venture Capital",
+    ],
+  },
+  {
+    title: "Law, Ethics & Global Affairs",
+    courses: [
+      "Ethics and Leadership",
+      "Global China and Global Challenges",
+      "Ocean and Coastal Law",
+      "Space Law",
+    ],
+  },
+] as const;
+
 export const metadata: Metadata = {
   title: "Education",
   description: "Theodore Ouyang’s education at Duke University.",
@@ -56,37 +110,16 @@ export default function EducationPage() {
           <h2 id="coursework-heading">Selected Coursework</h2>
         </div>
         <div className="course-grid">
-          <article>
-            <h3>Mathematics</h3>
-            <p>
-              Real and complex analysis, measure theory, topology, stochastic
-              processes, stochastic differential equations, numerical analysis,
-              ODEs and PDEs, mathematical modeling, and financial mathematics.
-            </p>
-          </article>
-          <article>
-            <h3>Data & Computing</h3>
-            <p>
-              Statistical methodology, machine learning, deep learning,
-              algorithms, engineering computing, and technology-driven
-              quantitative finance.
-            </p>
-          </article>
-          <article>
-            <h3>Finance & Economics</h3>
-            <p>
-              Corporate finance, financial accounting, venture capital,
-              microeconomics, macroeconomics, econometrics, and mathematical
-              analysis of macroeconomics.
-            </p>
-          </article>
-          <article>
-            <h3>Law, Ethics & Global Affairs</h3>
-            <p>
-              Space law, ocean and coastal law, global China and global
-              challenges, and ethics and leadership.
-            </p>
-          </article>
+          {courseworkGroups.map((group) => (
+            <article key={group.title}>
+              <h3>{group.title}</h3>
+              <ul className="course-list">
+                {group.courses.map((course) => (
+                  <li key={course}>{course}</li>
+                ))}
+              </ul>
+            </article>
+          ))}
         </div>
       </section>
     </SiteShell>
