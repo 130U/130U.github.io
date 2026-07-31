@@ -33,6 +33,14 @@ Static files grouped by their role rather than mixed at the public root.
 - `posts/` contains diagrams and other post-specific media.
 - `profile/` contains the sidebar portrait.
 
+### `config/`
+
+Tool configuration that does not need to sit at the repository root.
+
+- `eslint.config.mjs` defines code-quality rules used by `npm run lint`.
+- `postcss.config.mjs` provides the stylesheet transformation pipeline loaded
+  explicitly by Vite.
+
 ### `docs/`
 
 Repository architecture and editorial workflow documentation.
@@ -50,15 +58,22 @@ and design-system invariants.
 
 ### `worker/`
 
-The minimal Vinext runtime entry required for the production build.
+The minimal Cloudflare-compatible Vinext runtime entry required for the
+production build.
 
 ## Why configuration remains at the root
 
-Files such as `package.json`, `tsconfig.json`, `vite.config.ts`,
-`next.config.ts`, and `eslint.config.mjs` are root-level by convention and are
-discovered there by their respective tools. Moving them into decorative
-folders would make the repository look unusual while adding path overrides and
-failure modes.
+Only files that must be discovered at the repository root remain there:
+
+- `package.json` and `package-lock.json` define the npm project and its exact
+  dependency graph.
+- `tsconfig.json` is discovered by TypeScript and the Next-compatible toolchain.
+- `vite.config.ts` is the Vinext build entry used locally and in GitHub Actions.
+- `.gitignore` controls repository-wide generated-file exclusions.
+- `README.md` is GitHub's repository introduction.
+
+Empty or unused root configuration is removed. Configuration that supports an
+explicit command, rather than automatic root discovery, belongs in `config/`.
 
 ## Maintenance rules
 

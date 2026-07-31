@@ -13,7 +13,7 @@
     "start": "vinext start",
     "test": "npm run build && node --test tests/rendered-html.test.mjs",
     "check": "npm run lint && npm test",
-    "lint": "eslint . --ignore-pattern dist --ignore-pattern .next --ignore-pattern github-pages --ignore-pattern .npm-cache"
+    "lint": "eslint --config config/eslint.config.mjs . --ignore-pattern dist --ignore-pattern .next --ignore-pattern github-pages --ignore-pattern .npm-cache"
   },
   "dependencies": {
     "next": "16.2.6",
