@@ -1,4 +1,4 @@
-# Repository structure
+# Repository Structure
 
 This site keeps content, presentation, assets, validation, and deployment
 responsibilities separate while retaining the conventions expected by Next.js
@@ -8,7 +8,8 @@ and Vinext.
 
 ### `app/`
 
-Application routes and shared interface code.
+Public routes and shared interface code. The `page.tsx` name is required by the
+Next-compatible router; the surrounding directory determines the public URL.
 
 - `components/` contains site-wide components.
 - `lib/` contains data parsing and route-independent application logic.
@@ -16,6 +17,7 @@ Application routes and shared interface code.
   `personal-posts/` mirror the public URLs.
 - `globals.css` owns the design tokens, typography, responsive layout, and
   interaction states.
+- `README.md` provides a quick route map for maintainers.
 
 ### `content/`
 
@@ -23,6 +25,8 @@ Source material that should remain readable without the interface.
 
 - `past-experience/` preserves the complete archive used to render the five
   historical domain pages.
+- `README.md` explains which content is archival and which content currently
+  lives with its page component.
 
 ### `public/assets/`
 
@@ -41,9 +45,10 @@ Tool configuration that does not need to sit at the repository root.
 - `postcss.config.mjs` provides the stylesheet transformation pipeline loaded
   explicitly by Vite.
 
-### `docs/`
+### `website-maintenance/`
 
-Repository architecture and editorial workflow documentation.
+The human- and AI-readable maintenance entry point: page map, repository map,
+Personal Posts workflow, and release checklist.
 
 ### `scripts/`
 
@@ -61,7 +66,12 @@ and design-system invariants.
 The minimal Cloudflare-compatible Vinext runtime entry required for the
 production build.
 
-## Why configuration remains at the root
+### `.github/`
+
+GitHub Pages automation. `workflows/pages.yml` validates, exports, and deploys
+the site whenever `main` changes.
+
+## Why six files remain at the root
 
 Only files that must be discovered at the repository root remain there:
 
@@ -72,15 +82,23 @@ Only files that must be discovered at the repository root remain there:
 - `.gitignore` controls repository-wide generated-file exclusions.
 - `README.md` is GitHub's repository introduction.
 
-Empty or unused root configuration is removed. Configuration that supports an
-explicit command, rather than automatic root discovery, belongs in `config/`.
+These are not unfiled documents. Their root placement is part of the contract
+used by GitHub, npm, TypeScript, Vite, and Vinext. Moving them would require
+custom flags, weaken tool discovery, or break reproducible installation.
+
+Empty or unused root configuration has been removed. Configuration that
+supports an explicit command, rather than automatic root discovery, belongs in
+`config/`.
 
 ## Maintenance rules
 
-1. Keep page copy in its route unless it is a shared source record.
-2. Place new media under the matching `public/assets/` category.
-3. Add every public route to the static exporter and rendered-route tests.
-4. Run `npm run check`, `npm run export:static`, and `npm run preview:static`
-   before publishing.
-5. Do not commit generated directories such as `dist/`, `.vinext/`,
+1. Start with `website-maintenance/01-page-file-map.md` before editing.
+2. Keep page copy in its route unless it becomes a shared or structured source.
+3. Do not rename `page.tsx`; it is a router convention, not a vague filename.
+4. Preserve `/now/` as the URL for Current Chapter unless redirects and inbound
+   links are intentionally migrated.
+5. Place new media under the matching `public/assets/` category.
+6. Add every public route to the static exporter and rendered-route tests.
+7. Run `npm run check` and `npm run export:static` before publishing.
+8. Do not commit generated directories such as `dist/`, `.vinext/`,
    `github-pages/`, or `node_modules/`.

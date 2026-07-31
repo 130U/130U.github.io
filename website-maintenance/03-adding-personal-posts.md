@@ -1,12 +1,44 @@
-# Scaling Personal Posts
+# Adding and Scaling Personal Posts
+
+## Current implementation
+
+The Personal Posts index is:
+
+```text
+app/personal-posts/page.tsx
+```
+
+The first article is:
+
+```text
+app/personal-posts/from-vision-and-instructions-to-robot-actions/page.tsx
+```
+
+Its diagram is:
+
+```text
+public/assets/posts/wam-vla-two-paths-en.png
+```
+
+The route folder is the public slug. Its required `page.tsx` file contains the
+article metadata and rendered article. When adding a post under the current
+system:
+
+1. Create `app/personal-posts/<post-slug>/page.tsx`.
+2. Add the post to `app/personal-posts/page.tsx`.
+3. Put post media in `public/assets/posts/`.
+4. Add the public route to `scripts/export-static.mjs`.
+5. Add content-preservation assertions to `tests/rendered-html.test.mjs`.
+6. Run the release checklist in `04-release-checklist.md`.
+
+## When to introduce a content collection
 
 The current implementation is appropriate for a small number of carefully
 designed essays, but one route file per article will become inefficient at a
 cadence of three or more posts each week.
 
-## Recommended next step
-
-Keep posts in this repository and move to a content-first structure:
+At that point, keep posts in this repository and move to a content-first
+structure:
 
 ```text
 content/
@@ -20,7 +52,7 @@ Each post should carry structured metadata such as title, summary, publication
 date, reading time, topic, and hero asset. A single dynamic route can then
 render every article and generate the index by date and topic.
 
-## Why not create a second repository yet
+## Why a second repository is not yet recommended
 
 A separate content repository would introduce synchronization, authentication,
 build-trigger, and preview complexity without solving a problem the current

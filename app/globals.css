@@ -1,4 +1,5 @@
-@import "tailwindcss";
+@import "tailwindcss" source(none);
+@source inline("absolute fixed static start contents hidden transition");
 
 @font-face {
   font-family: "Instrument Sans Variable";

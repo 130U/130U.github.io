@@ -119,6 +119,11 @@ test("renders every public route", async () => {
 
 test("uses an editorial serif-led system with restrained sans utilities", async () => {
   const css = await readFile(new URL("../app/globals.css", import.meta.url), "utf8");
+  assert.match(css, /@import "tailwindcss" source\(none\)/);
+  assert.match(
+    css,
+    /@source inline\("absolute fixed static start contents hidden transition"\)/,
+  );
   assert.match(css, /--display:\s*"Instrument Sans Variable"/);
   assert.match(css, /--body-serif:\s*"Newsreader Variable"/);
   assert.match(css, /--serif:\s*var\(--body-serif\)/);
