@@ -26,7 +26,7 @@ Confirm:
 - every frozen or append-only word token, heading, link target, accessible label/reference, deep-link ID, date, and image alternative remains;
 - the five domains, 16 entries, 92 bullets, 31 courses, 10 article sections, and five primary sources remain;
 - internal links and responsive image sources resolve;
-- source archive and original artwork hashes remain unchanged;
+- the source archive's canonical text hash and original artwork byte hashes remain unchanged;
 - no legacy Vinext/Vite-RSC/Wrangler runtime marker is reintroduced.
 
 Review `out/` with the in-app browser at desktop, 720 px, 390 px, and 320 px.

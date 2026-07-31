@@ -17,7 +17,7 @@ The suite also verifies authored headings, links, all `aria-label` and
 image alternatives, time metadata, and IDs; exact self-referencing canonical
 and Open Graph URLs; internal link and asset resolution; the 404, robots, and
 sitemap artifacts; removal of Vinext and Cloudflare runtime references; exact
-archive and original-asset hashes; and the approved structural counts for Past
+newline-normalized archive and byte-exact original-asset hashes; and the approved structural counts for Past
 Experience, Education, and the first research note. Every current exported page
 is discovered automatically and must match the sitemap exactly.
 

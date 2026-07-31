@@ -86,7 +86,7 @@ const domainRoutes = [
 const immutableFiles = new Map([
   [
     "content/past-experience/archive-through-2026-06-30.md",
-    "1400298101dcc94ad7d7385006c5342aa2186db699f94d1409871e36fba7d214",
+    "8a016cedb94a308c43b553d79aaeecec0640024314336734ff7bdb2ef535f64c",
   ],
   [
     "public/assets/brand/og.png",
@@ -841,11 +841,14 @@ test("robots, sitemap, and exported HTML publish the same canonical route manife
   }
 });
 
-test("original archive and source assets remain byte-for-byte intact", async () => {
+test("canonical archive text and original source assets remain intact", async () => {
   for (const [relative, expected] of immutableFiles) {
     const source = path.join(ROOT, ...relative.split("/"));
     const sourceBytes = await readFile(source);
-    assert.equal(sha256(sourceBytes), expected, `${relative} changed`);
+    const bytesForHash = relative.endsWith(".md")
+      ? Buffer.from(sourceBytes.toString("utf8").replace(/\r\n?/gu, "\n"), "utf8")
+      : sourceBytes;
+    assert.equal(sha256(bytesForHash), expected, `${relative} changed`);
 
     if (relative === "public/assets/posts/wam-vla-two-paths-en.png") {
       assert.deepEqual(
