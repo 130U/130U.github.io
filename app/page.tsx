@@ -1,14 +1,14 @@
 import type { Metadata } from "next";
 import { SiteShell } from "./components/SiteShell";
+import { createPageMetadata, HOME_TITLE } from "./lib/content/site";
 
-export const metadata: Metadata = {
-  title: {
-    absolute:
-      "Strategy at a World Model Unicorn | Duke B.S. & M.Eng. | Sequoia Scholar, Cohort 8",
-  },
+export const metadata: Metadata = createPageMetadata({
+  title: HOME_TITLE,
   description:
     "Theodore Ouyang works at the intersection of artificial intelligence, strategy, and finance, with a current focus on strategy at a world model unicorn.",
-};
+  path: "/",
+  absoluteTitle: true,
+});
 
 export default function Home() {
   return (

@@ -1,0 +1,72 @@
+{
+  "schemaVersion": 1,
+  "baselineCommit": "69d6e7134132da51f4961dbe5509fc6adb657284",
+  "routes": {
+    "/": [
+      { "tag": "a", "role": null, "value": "Theodore Ouyang home" },
+      { "tag": "nav", "role": null, "value": "Primary navigation" },
+      { "tag": "aside", "role": null, "value": "Profile" },
+      { "tag": "section", "role": null, "value": "Personal summary" }
+    ],
+    "/education/": [
+      { "tag": "a", "role": null, "value": "Theodore Ouyang home" },
+      { "tag": "nav", "role": null, "value": "Primary navigation" },
+      { "tag": "aside", "role": null, "value": "Profile" },
+      { "tag": "section", "role": null, "value": "Degrees" }
+    ],
+    "/now/": [
+      { "tag": "a", "role": null, "value": "Theodore Ouyang home" },
+      { "tag": "nav", "role": null, "value": "Primary navigation" },
+      { "tag": "aside", "role": null, "value": "Profile" }
+    ],
+    "/past-experience/": [
+      { "tag": "a", "role": null, "value": "Theodore Ouyang home" },
+      { "tag": "nav", "role": null, "value": "Primary navigation" },
+      { "tag": "aside", "role": null, "value": "Profile" },
+      { "tag": "nav", "role": null, "value": "Experience domains" }
+    ],
+    "/past-experience/artificial-intelligence/": [
+      { "tag": "a", "role": null, "value": "Theodore Ouyang home" },
+      { "tag": "nav", "role": null, "value": "Primary navigation" },
+      { "tag": "aside", "role": null, "value": "Profile" },
+      { "tag": "section", "role": null, "value": "Artificial Intelligence" }
+    ],
+    "/past-experience/data-science/": [
+      { "tag": "a", "role": null, "value": "Theodore Ouyang home" },
+      { "tag": "nav", "role": null, "value": "Primary navigation" },
+      { "tag": "aside", "role": null, "value": "Profile" },
+      { "tag": "section", "role": null, "value": "Data Science" }
+    ],
+    "/past-experience/environmental-social-and-governance/": [
+      { "tag": "a", "role": null, "value": "Theodore Ouyang home" },
+      { "tag": "nav", "role": null, "value": "Primary navigation" },
+      { "tag": "aside", "role": null, "value": "Profile" },
+      { "tag": "section", "role": null, "value": "Environmental, Social, and Governance" }
+    ],
+    "/past-experience/finance/": [
+      { "tag": "a", "role": null, "value": "Theodore Ouyang home" },
+      { "tag": "nav", "role": null, "value": "Primary navigation" },
+      { "tag": "aside", "role": null, "value": "Profile" },
+      { "tag": "section", "role": null, "value": "Finance" }
+    ],
+    "/past-experience/stem-academic-competitions-and-training/": [
+      { "tag": "a", "role": null, "value": "Theodore Ouyang home" },
+      { "tag": "nav", "role": null, "value": "Primary navigation" },
+      { "tag": "aside", "role": null, "value": "Profile" },
+      { "tag": "section", "role": null, "value": "STEM Academic Competitions and Training" }
+    ],
+    "/personal-posts/": [
+      { "tag": "a", "role": null, "value": "Theodore Ouyang home" },
+      { "tag": "nav", "role": null, "value": "Primary navigation" },
+      { "tag": "aside", "role": null, "value": "Profile" }
+    ],
+    "/personal-posts/from-vision-and-instructions-to-robot-actions/": [
+      { "tag": "a", "role": null, "value": "Theodore Ouyang home" },
+      { "tag": "nav", "role": null, "value": "Primary navigation" },
+      { "tag": "aside", "role": null, "value": "Profile" },
+      { "tag": "div", "role": null, "value": "Publication details" },
+      { "tag": "aside", "role": null, "value": "Taxonomy note" },
+      { "tag": "a", "role": null, "value": "Open the comparison diagram at full resolution" }
+    ]
+  }
+}

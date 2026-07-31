@@ -1,8 +1,11 @@
 # Build and Preview Utilities
 
-- `export-static.mjs` renders all 11 public routes into the ignored
-  `github-pages/` deployment artifact.
-- `preview-static.mjs` serves that exact artifact for final review.
+- `next build` renders every registered static route into Next.js's ignored
+  `out/` deployment artifact.
+- `preview-static.mjs` serves that exact artifact for final review, including
+  the exported `404.html` response.
+- `optimize-images.mjs` creates reproducible web derivatives while preserving
+  the original image files.
 
-Whenever a public route is added, update `export-static.mjs` and the rendered
-route tests together.
+Whenever a public route is added, update the content registry and add its
+append-only published-copy snapshot before release.

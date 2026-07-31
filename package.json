@@ -6,36 +6,36 @@
     "node": ">=22.13.0"
   },
   "scripts": {
-    "dev": "vinext dev",
-    "build": "vinext build",
-    "export:static": "node scripts/export-static.mjs",
+    "dev": "next dev",
+    "build": "next build",
+    "check:published-copy": "node scripts/check-published-copy-fixtures.mjs",
     "preview:static": "node scripts/preview-static.mjs",
-    "start": "vinext start",
-    "test": "npm run build && node --test tests/rendered-html.test.mjs",
-    "check": "npm run lint && npm test",
-    "lint": "eslint --config config/eslint.config.mjs . --ignore-pattern dist --ignore-pattern .next --ignore-pattern github-pages --ignore-pattern .npm-cache"
+    "typecheck": "tsc --noEmit",
+    "test": "npm run build && npm run test:artifact",
+    "test:artifact": "node --test",
+    "check": "npm run lint && npm run typecheck && npm test",
+    "lint": "eslint --config config/eslint.config.mjs . --ignore-pattern dist --ignore-pattern .next --ignore-pattern out --ignore-pattern github-pages --ignore-pattern .npm-cache",
+    "optimize:images": "node scripts/optimize-images.mjs"
   },
   "dependencies": {
-    "next": "16.2.6",
-    "react": "19.2.6",
-    "react-dom": "19.2.6"
+    "next": "16.2.12",
+    "react": "19.2.8",
+    "react-dom": "19.2.8"
   },
   "devDependencies": {
-    "@cloudflare/vite-plugin": "1.37.1",
     "@tailwindcss/postcss": "4.2.1",
     "@types/node": "22.19.19",
     "@types/react": "19.2.14",
     "@types/react-dom": "19.2.3",
-    "@vitejs/plugin-react": "6.0.2",
-    "@vitejs/plugin-rsc": "0.5.26",
     "eslint": "9.39.4",
-    "eslint-config-next": "16.2.6",
-    "react-server-dom-webpack": "19.2.6",
+    "eslint-config-next": "16.2.12",
+    "sharp": "0.35.3",
     "tailwindcss": "4.2.1",
-    "typescript": "5.9.3",
-    "vinext": "0.0.50",
-    "vite": "8.0.13",
-    "wrangler": "4.92.0"
+    "typescript": "5.9.3"
+  },
+  "overrides": {
+    "postcss": "8.5.25",
+    "sharp": "0.35.3"
   },
   "type": "module"
 }

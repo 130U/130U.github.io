@@ -25,7 +25,7 @@
   --ink: #322d28;
   --ink-strong: #201c18;
   --muted: #70665d;
-  --faint: #9b8f83;
+  --faint: #766b60;
   --rule: #dcd3c6;
   --rule-strong: #cbbfae;
   --accent: #c35f3d;
@@ -89,6 +89,28 @@ a:focus-visible {
   background: var(--accent-soft);
 }
 
+.skip-link {
+  position: fixed;
+  z-index: 100;
+  top: 12px;
+  left: 12px;
+  padding: 10px 14px;
+  border: 1px solid var(--rule-strong);
+  border-radius: var(--radius-small);
+  color: var(--ink-strong);
+  background: var(--paper-raised);
+  box-shadow: var(--shadow-small);
+  font-family: var(--sans);
+  font-size: 0.86rem;
+  font-weight: 650;
+  transform: translateY(calc(-100% - 24px));
+  transition: transform 120ms var(--ease-out);
+}
+
+.skip-link:focus-visible {
+  transform: translateY(0);
+}
+
 .site-shell {
   min-height: 100vh;
 }
@@ -119,11 +141,18 @@ a:focus-visible {
 }
 
 .wordmark {
+  display: inline-flex;
+  align-items: center;
   color: var(--ink-strong);
   font-family: var(--body-serif);
   font-size: 1.08rem;
   font-weight: 600;
   letter-spacing: -0.02em;
+  transition: color 160ms var(--ease-out), transform 120ms var(--ease-out);
+}
+
+.wordmark:active {
+  transform: scale(0.98);
 }
 
 .primary-nav {
@@ -204,6 +233,12 @@ a:focus-visible {
   pointer-events: none;
 }
 
+.avatar-frame picture {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
 .avatar-frame img {
   display: block;
   width: 100%;
@@ -212,7 +247,7 @@ a:focus-visible {
   object-position: center 22%;
 }
 
-.profile-sidebar h2 {
+.profile-name {
   margin: 0 0 8px;
   color: var(--ink-strong);
   font-family: var(--body-serif);
@@ -617,7 +652,7 @@ a:focus-visible {
 
 .chapter-number {
   margin: 7px 0 0;
-  color: var(--accent);
+  color: var(--accent-dark);
   font-family: var(--sans);
   font-size: 0.72rem;
   font-weight: 700;
@@ -690,7 +725,7 @@ a:focus-visible {
 }
 
 .domain-number {
-  color: var(--accent);
+  color: var(--accent-dark);
   font-family: var(--mono);
   font-size: 0.76rem;
   font-weight: 650;
@@ -734,7 +769,7 @@ a:focus-visible {
 
 .domain-page-number {
   margin: 0 0 10px;
-  color: var(--accent);
+  color: var(--accent-dark);
   font-family: var(--mono);
   font-size: 0.78rem;
   font-weight: 650;
@@ -778,7 +813,7 @@ a:focus-visible {
 }
 
 .domain-index a span {
-  color: var(--accent);
+  color: var(--accent-dark);
   font-family: var(--mono);
   font-size: 0.7rem;
 }
@@ -803,7 +838,7 @@ a:focus-visible {
 }
 
 .domain-heading > span {
-  color: var(--accent);
+  color: var(--accent-dark);
   font-family: var(--mono);
   font-size: 0.78rem;
   font-weight: 700;
@@ -900,6 +935,14 @@ a:focus-visible {
   padding-top: 4px;
 }
 
+.entry-summary {
+  margin: -6px 0 24px;
+  color: #4a433d;
+  font-family: var(--serif);
+  font-size: 1.03rem;
+  line-height: 1.62;
+}
+
 .archive-bullets {
   display: grid;
   margin: 0;
@@ -940,7 +983,7 @@ a:focus-visible {
 }
 
 .posts-number {
-  color: var(--accent);
+  color: var(--accent-dark);
   font-family: var(--mono);
   font-size: 0.8rem;
   font-weight: 700;
@@ -955,6 +998,7 @@ a:focus-visible {
 }
 
 .post-listing h2 a {
+  display: inline-block;
   text-decoration-color: transparent;
   text-decoration-line: underline;
   text-decoration-thickness: 1px;
@@ -1106,6 +1150,10 @@ a:focus-visible {
   transition: border-color 180ms var(--ease-out), box-shadow 180ms var(--ease-out), transform 180ms var(--ease-out);
 }
 
+.post-figure picture {
+  display: block;
+}
+
 .post-figure img {
   display: block;
   width: 100%;
@@ -1166,7 +1214,7 @@ a:focus-visible {
 }
 
 .post-questions li::before {
-  color: var(--accent);
+  color: var(--accent-dark);
   font-family: var(--sans);
   font-size: 0.72rem;
   font-weight: 700;
@@ -1234,6 +1282,10 @@ a:focus-visible {
 }
 
 @media (max-width: 720px) {
+  html {
+    scroll-padding-top: 170px;
+  }
+
   .topbar {
     padding-top: 8px;
   }
@@ -1246,19 +1298,18 @@ a:focus-visible {
   }
 
   .wordmark {
-    display: block;
+    display: inline-flex;
+    min-height: 44px;
     margin: 2px 8px 5px;
   }
 
   .primary-nav {
-    min-height: 42px;
-    overflow-x: auto;
+    align-content: flex-start;
+    flex-wrap: wrap;
+    min-height: auto;
+    overflow: visible;
+    padding-block: 2px;
     gap: 2px;
-    scrollbar-width: none;
-  }
-
-  .primary-nav::-webkit-scrollbar {
-    display: none;
   }
 
   .primary-nav a {
@@ -1309,7 +1360,7 @@ a:focus-visible {
     margin: 0;
   }
 
-  .profile-sidebar h2 {
+  .profile-name {
     align-self: end;
     font-size: 1.28rem;
   }
@@ -1326,6 +1377,20 @@ a:focus-visible {
 
   .profile-links li {
     min-height: 44px;
+  }
+
+  .profile-links a,
+  .back-link,
+  .domain-index a,
+  .post-listing h2 a,
+  .post-listing-meta a {
+    min-height: 44px;
+  }
+
+  .profile-links a,
+  .post-listing-meta a {
+    display: inline-flex;
+    align-items: center;
   }
 
   .page-intro {
@@ -1388,6 +1453,11 @@ a:focus-visible {
 
   .domain-index {
     margin-bottom: 70px;
+  }
+
+  .domain-section,
+  .post-prose section {
+    scroll-margin-top: 170px;
   }
 
   .domain-heading {
@@ -1550,6 +1620,11 @@ a:focus-visible {
     scroll-behavior: auto;
   }
 
+  .skip-link,
+  .wordmark {
+    transition: none;
+  }
+
   .primary-nav a,
   .profile-links li,
   .profile-links a,
@@ -1564,6 +1639,7 @@ a:focus-visible {
     transition-duration: 120ms;
   }
 
+  .wordmark:active,
   .primary-nav a:active,
   .profile-links a:active,
   .back-link:active,
@@ -1578,11 +1654,31 @@ a:focus-visible {
 }
 
 @media (prefers-reduced-transparency: reduce) {
+  :root {
+    --surface: var(--paper-raised);
+    --surface-strong: var(--paper-raised);
+    --surface-muted: var(--paper-soft);
+  }
+
+  .topbar {
+    background: var(--paper);
+  }
+
   .topbar-inner,
   .profile-sidebar {
     background: var(--paper-raised);
     -webkit-backdrop-filter: none;
     backdrop-filter: none;
+  }
+
+  .primary-nav a.active,
+  .primary-nav a:hover,
+  .domain-directory-link:hover {
+    background: var(--accent-soft);
+  }
+
+  .profile-links li:hover {
+    background: var(--paper-soft);
   }
 }
 
@@ -1601,6 +1697,8 @@ a:focus-visible {
   .archive-entry,
   .post-listing,
   .post-note,
+  .practice-note,
+  .post-flow,
   .post-questions {
     background: var(--paper-raised);
   }

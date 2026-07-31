@@ -1,13 +1,15 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { SiteShell } from "../components/SiteShell";
-import { domainRoutes } from "./domainRoutes";
+import { pastExperience } from "../lib/content/experience";
+import { createPageMetadata } from "../lib/content/site";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = createPageMetadata({
   title: "Past Experience",
   description:
     "Theodore before July 1st, 2026: a full personal record organized across five domains.",
-};
+  path: "/past-experience/",
+});
 
 export default function PastExperiencePage() {
   return (
@@ -18,10 +20,10 @@ export default function PastExperiencePage() {
       </header>
 
       <nav className="domain-directory" aria-label="Experience domains">
-        {domainRoutes.map((domain) => (
+        {pastExperience.map((domain) => (
           <Link
             className="domain-directory-link"
-            href={`/past-experience/${domain.slug}/`}
+            href={domain.path}
             key={domain.slug}
           >
             <span className="domain-number">{domain.number}</span>

@@ -1,29 +1,21 @@
 import Link from "next/link";
 import { SiteShell } from "../../components/SiteShell";
-import { pastExperience } from "../../lib/pastExperience";
+import type { ExperienceDomain } from "../../lib/content/experience";
 
-const metadataOrder = ["Location", "Position", "Dates"];
+const metadataOrder = ["Location", "Position", "Dates"] as const;
 
 export function ExperienceDomainPage({
-  domainName,
-  domainNumber,
+  domain,
 }: {
-  domainName: string;
-  domainNumber: string;
+  domain: ExperienceDomain;
 }) {
-  const domain = pastExperience.find((item) => item.name === domainName);
-
-  if (!domain) {
-    throw new Error(`Experience domain not found: ${domainName}`);
-  }
-
   return (
     <SiteShell active="experience">
       <header className="page-intro plain-page-intro domain-page-intro">
         <Link className="back-link" href="/past-experience/">
           <span aria-hidden="true">←</span> Past Experience
         </Link>
-        <p className="domain-page-number">{domainNumber}</p>
+        <p className="domain-page-number">{domain.number}</p>
         <h1>{domain.name}</h1>
       </header>
 
@@ -54,6 +46,11 @@ export function ExperienceDomainPage({
                   {entry.metadata.Project}
                 </p>
               ) : null}
+              {entry.summaries.map((summary, summaryIndex) => (
+                <p className="entry-summary" key={`${summary.slice(0, 48)}-${summaryIndex}`}>
+                  {summary}
+                </p>
+              ))}
               <ul className="archive-bullets">
                 {entry.bullets.map((bullet, bulletIndex) => (
                   <li key={`${bullet.slice(0, 48)}-${bulletIndex}`}>{bullet}</li>

@@ -38,6 +38,9 @@ yarn-error.log*
 
 # typescript
 next-env.d.ts
+*.tsbuildinfo
+
+# legacy and local build artifacts
 /dist/
 /.wrangler/
 /outputs/

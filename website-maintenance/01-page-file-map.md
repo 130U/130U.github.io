@@ -9,43 +9,39 @@ Use this map to locate public pages without searching the repository.
 | Home — “Quis ego sum?” | `/` | `app/page.tsx` |
 | Education | `/education/` | `app/education/page.tsx` |
 | Past Experience directory | `/past-experience/` | `app/past-experience/page.tsx` |
-| Artificial Intelligence archive | `/past-experience/artificial-intelligence/` | `app/past-experience/artificial-intelligence/page.tsx` |
-| Data Science archive | `/past-experience/data-science/` | `app/past-experience/data-science/page.tsx` |
-| Environmental, Social, and Governance archive | `/past-experience/environmental-social-and-governance/` | `app/past-experience/environmental-social-and-governance/page.tsx` |
-| Finance archive | `/past-experience/finance/` | `app/past-experience/finance/page.tsx` |
-| STEM Academic Competitions and Training archive | `/past-experience/stem-academic-competitions-and-training/` | `app/past-experience/stem-academic-competitions-and-training/page.tsx` |
+| All five Past Experience domains | `/past-experience/<slug>/` | `app/lib/content/experience.ts`, `content/past-experience/archive-through-2026-06-30.md`, and `app/past-experience/[slug]/page.tsx` |
 | Current Chapter — “A New Chapter” | `/now/` | `app/now/page.tsx` |
-| Personal Posts index | `/personal-posts/` | `app/personal-posts/page.tsx` |
-| “From Vision and Instructions to Robot Actions” | `/personal-posts/from-vision-and-instructions-to-robot-actions/` | `app/personal-posts/from-vision-and-instructions-to-robot-actions/page.tsx` |
+| Personal Posts index | `/personal-posts/` | `app/lib/content/posts.ts` and `app/personal-posts/page.tsx` |
+| “From Vision and Instructions to Robot Actions” | `/personal-posts/from-vision-and-instructions-to-robot-actions/` | `app/lib/content/posts.ts` and `app/personal-posts/_articles/RobotActionPathsPost.tsx` |
 
-## Shared presentation
+## Shared presentation and discovery
 
 | Responsibility | Source |
 |---|---|
 | Page shell, sidebar, navigation, footer | `app/components/SiteShell.tsx` |
-| Site-wide typography, layout, responsive rules, motion | `app/globals.css` |
-| Global metadata and browser icons | `app/layout.tsx` |
-| Past Experience route labels | `app/past-experience/domainRoutes.ts` |
-| Past Experience rendering component | `app/past-experience/components/ExperienceDomainPage.tsx` |
+| Typography, layout, responsive rules, motion | `app/globals.css` |
+| Global metadata and Person JSON-LD | `app/layout.tsx` |
+| Navigation, site constants, metadata helper | `app/lib/content/site.ts` |
+| Canonical public route list | `app/lib/content/routes.ts` |
+| Experience renderer | `app/past-experience/components/ExperienceDomainPage.tsx` |
+| Article route/component dispatch | `app/personal-posts/[slug]/page.tsx` |
+| Robots, sitemap, and 404 | `app/robots.ts`, `app/sitemap.ts`, `app/not-found.tsx` |
 
 ## Source records and assets
 
 | Material | Source |
 |---|---|
 | Exact Past Experience archive | `content/past-experience/archive-through-2026-06-30.md` |
-| Past Experience parser | `app/lib/pastExperience.ts` |
-| Profile portrait | `public/assets/profile/theodore-avatar-warm.png` |
-| Brand and browser icons | `public/assets/brand/` |
+| Strict archive parser and domain registry | `app/lib/content/experience.ts` |
+| Post metadata registry | `app/lib/content/posts.ts` |
+| Profile source and derivatives | `public/assets/profile/` |
+| Brand, browser icons, and OG source/derivative | `public/assets/brand/` |
 | Self-hosted fonts | `public/assets/fonts/` |
-| Personal Posts diagrams | `public/assets/posts/` |
+| Post source diagrams and derivatives | `public/assets/posts/` |
 
-## Why Current Chapter uses `now`
+## Route conventions
 
-`Current Chapter` is the public navigation label and page title. Its route
-remains `/now/`, so the router directory must remain `app/now/`. Renaming that
-directory would change the public URL unless a redirect migration were added.
-
-## Why every route file is called `page.tsx`
-
-`page.tsx` is required by the Next-compatible app router. The directory gives
-the page its identity; the filename is intentionally repeated.
+`Current Chapter` remains at `/now/` to preserve inbound links. Dynamic
+`[slug]` route files are framework conventions: the validated registries
+determine which slugs are statically generated, and `dynamicParams = false`
+prevents undocumented pages from appearing at runtime.

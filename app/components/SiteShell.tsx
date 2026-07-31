@@ -1,25 +1,19 @@
 import Link from "next/link";
 import type { ReactNode } from "react";
-
-type ActivePage = "home" | "now" | "education" | "experience" | "posts";
-
-const navigation: Array<{ key: ActivePage; label: string; href: string }> = [
-  { key: "home", label: "Home", href: "/" },
-  { key: "education", label: "Education", href: "/education/" },
-  { key: "experience", label: "Past Experience", href: "/past-experience/" },
-  { key: "now", label: "Current Chapter", href: "/now/" },
-  { key: "posts", label: "Personal Posts", href: "/personal-posts/" },
-];
+import { navigation, type ActivePage } from "../lib/content/site";
 
 export function SiteShell({
   active,
   children,
 }: {
-  active: ActivePage;
+  active?: ActivePage;
   children: ReactNode;
 }) {
   return (
     <div className="site-shell">
+      <a className="skip-link" href="#main-content">
+        Skip to main content
+      </a>
       <header className="topbar">
         <div className="topbar-inner">
           <Link className="wordmark" href="/" aria-label="Theodore Ouyang home">
@@ -44,15 +38,27 @@ export function SiteShell({
         <aside className="profile-sidebar" aria-label="Profile">
           <div className="avatar-frame">
             {/* Static GitHub Pages deployment serves this pre-sized portrait directly. */}
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img
-              src="/assets/profile/theodore-avatar-warm.png"
-              alt="Illustrated portrait of Theodore Ouyang"
-              width="192"
-              height="192"
-            />
+            <picture>
+              <source
+                type="image/avif"
+                srcSet="/assets/profile/theodore-avatar-warm-384.avif 384w, /assets/profile/theodore-avatar-warm-768.avif 768w"
+                sizes="(max-width: 470px) 86px, (max-width: 720px) 104px, (max-width: 930px) 148px, 164px"
+              />
+              <source
+                type="image/webp"
+                srcSet="/assets/profile/theodore-avatar-warm-384.webp 384w, /assets/profile/theodore-avatar-warm-768.webp 768w"
+                sizes="(max-width: 470px) 86px, (max-width: 720px) 104px, (max-width: 930px) 148px, 164px"
+              />
+              <img
+                src="/assets/profile/theodore-avatar-warm.png"
+                alt="Illustrated portrait of Theodore Ouyang"
+                width="1024"
+                height="1536"
+                sizes="(max-width: 470px) 86px, (max-width: 720px) 104px, (max-width: 930px) 148px, 164px"
+              />
+            </picture>
           </div>
-          <h2>Theodore Ouyang</h2>
+          <p className="profile-name">Theodore Ouyang</p>
           <p className="sidebar-bio">
             <span>Strategy at a World Model Unicorn</span>
             <span>Duke B.S. &amp; M.Eng.</span>
@@ -72,7 +78,9 @@ export function SiteShell({
           </ul>
         </aside>
 
-        <main className="content-column">{children}</main>
+        <main className="content-column" id="main-content">
+          {children}
+        </main>
       </div>
 
       <footer className="site-footer">

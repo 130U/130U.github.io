@@ -1,104 +1,73 @@
 # Repository Structure
 
-This site keeps content, presentation, assets, validation, and deployment
-responsibilities separate while retaining the conventions expected by Next.js
-and Vinext.
+The repository separates public routes, structured content, presentation,
+source assets, validation, documentation, and deployment while keeping the
+official Next.js conventions discoverable.
 
 ## Directory responsibilities
 
 ### `app/`
 
-Public routes and shared interface code. The `page.tsx` name is required by the
-Next-compatible router; the surrounding directory determines the public URL.
+Next.js App Router routes and shared interface code.
 
-- `components/` contains site-wide components.
-- `lib/` contains data parsing and route-independent application logic.
-- Route folders such as `education/`, `now/`, `past-experience/`, and
-  `personal-posts/` mirror the public URLs.
-- `globals.css` owns the design tokens, typography, responsive layout, and
-  interaction states.
-- `README.md` provides a quick route map for maintainers.
+- `components/` contains the site shell.
+- `lib/content/` contains typed registries, parsing, canonical routes, and site metadata helpers.
+- Static page folders contain bespoke page copy.
+- Dynamic `[slug]` routes render registered collections.
+- `globals.css` owns design tokens, typography, responsive layout, and interaction states.
 
 ### `content/`
 
-Source material that should remain readable without the interface.
-
-- `past-experience/` preserves the complete archive used to render the five
-  historical domain pages.
-- `README.md` explains which content is archival and which content currently
-  lives with its page component.
+Durable source records that remain readable without React. The Past Experience
+archive is preserved byte-for-byte and parsed only during the static build.
 
 ### `public/assets/`
 
-Static files grouped by their role rather than mixed at the public root.
-
-- `brand/` contains browser icons, the monogram, and social preview art.
-- `fonts/` contains the two self-hosted variable fonts.
-- `posts/` contains diagrams and other post-specific media.
-- `profile/` contains the sidebar portrait.
+Original and optimized static assets grouped by role. Original text-bearing
+artwork is immutable; `scripts/optimize-images.mjs` produces deterministic,
+reviewable derivatives without replacing the source.
 
 ### `config/`
 
-Tool configuration that does not need to sit at the repository root.
-
-- `eslint.config.mjs` defines code-quality rules used by `npm run lint`.
-- `postcss.config.mjs` provides the stylesheet transformation pipeline loaded
-  explicitly by Vite.
-
-### `website-maintenance/`
-
-The human- and AI-readable maintenance entry point: page map, repository map,
-Personal Posts workflow, and release checklist.
+ESLint configuration. PostCSS remains at the root because Next.js discovers it
+there automatically.
 
 ### `scripts/`
 
-Build-adjacent utilities. `export-static.mjs` renders every public route and
-packages the deployable GitHub Pages artifact. `preview-static.mjs` serves that
-exact artifact for final visual review.
+`preview-static.mjs` serves the exact `out/` artifact locally.
+`optimize-images.mjs` regenerates responsive image derivatives.
 
 ### `tests/`
 
-Rendered HTML, content preservation, asset existence, accessibility, motion,
-and design-system invariants.
+Final-artifact integrity tests. The committed fixture is independent of the
+current registries, so application drift cannot rewrite its own expected
+result. Tests also check links, assets, source hashes, route counts, SEO files,
+and removal of legacy runtime markers.
 
-### `worker/`
+### `website-maintenance/`
 
-The minimal Cloudflare-compatible Vinext runtime entry required for the
-production build.
+Human- and AI-readable operating documentation.
 
 ### `.github/`
 
-GitHub Pages automation. `workflows/pages.yml` validates, exports, and deploys
-the site whenever `main` changes.
+Pull-request validation and main-only GitHub Pages deployment.
 
-## Why six files remain at the root
+## Root discovery files
 
-Only files that must be discovered at the repository root remain there:
-
-- `package.json` and `package-lock.json` define the npm project and its exact
-  dependency graph.
-- `tsconfig.json` is discovered by TypeScript and the Next-compatible toolchain.
-- `vite.config.ts` is the Vinext build entry used locally and in GitHub Actions.
-- `.gitignore` controls repository-wide generated-file exclusions.
-- `README.md` is GitHub's repository introduction.
-
-These are not unfiled documents. Their root placement is part of the contract
-used by GitHub, npm, TypeScript, Vite, and Vinext. Moving them would require
-custom flags, weaken tool discovery, or break reproducible installation.
-
-Empty or unused root configuration has been removed. Configuration that
-supports an explicit command, rather than automatic root discovery, belongs in
-`config/`.
+- `package.json` and `package-lock.json` define the reproducible npm project.
+- `next.config.ts` enables the official static export and trailing slashes.
+- `postcss.config.mjs` is discovered by Next.js.
+- `tsconfig.json` configures TypeScript.
+- `.gitignore` excludes generated artifacts and local state.
+- `README.md` is the public repository introduction.
 
 ## Maintenance rules
 
-1. Start with `website-maintenance/01-page-file-map.md` before editing.
-2. Keep page copy in its route unless it becomes a shared or structured source.
-3. Do not rename `page.tsx`; it is a router convention, not a vague filename.
-4. Preserve `/now/` as the URL for Current Chapter unless redirects and inbound
-   links are intentionally migrated.
-5. Place new media under the matching `public/assets/` category.
-6. Add every public route to the static exporter and rendered-route tests.
-7. Run `npm run check` and `npm run export:static` before publishing.
-8. Do not commit generated directories such as `dist/`, `.vinext/`,
-   `github-pages/`, or `node_modules/`.
+1. Preserve public URLs and the committed content baseline.
+2. Add repeatable content through its registry; do not clone route wrappers.
+3. Keep one canonical slug/path definition per collection.
+4. Preserve original assets and generate derivatives through the script.
+5. Do not add a database, API layer, CMS, client store, or server runtime without a concrete requirement.
+6. Run `npm.cmd run check` before publishing.
+7. Review the final `out/` artifact locally at desktop and narrow mobile widths.
+8. Never commit `node_modules/`, `.next/`, `out/`, `.npm-cache/`, or `*.tsbuildinfo`.

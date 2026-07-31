@@ -1,11 +1,13 @@
 import type { Metadata } from "next";
 import { SiteShell } from "../components/SiteShell";
+import { createPageMetadata } from "../lib/content/site";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = createPageMetadata({
   title: "Current Chapter",
   description:
     "A personal note on Theodore Ouyang's July 2026 relocation and exploration of World Models and World-Action Models.",
-};
+  path: "/now/",
+});
 
 export default function NowPage() {
   return (
@@ -15,7 +17,7 @@ export default function NowPage() {
           <time dateTime="2026-07">July 2026</time>
         </p>
         <h1 className="chapter-title" id="now-heading">
-          <span>A New Chapter:</span>
+          <span>A New Chapter:</span>{" "}
           <span className="chapter-title-route">
             From Nashua, New Hampshire to Wudaokou, Beijing
           </span>

@@ -6,31 +6,37 @@ assistants.
 
 ## Non-negotiable guardrail
 
-The current public copy, visual design, typography, layout, and interaction
-behavior are approved. Repository-only maintenance must not alter them unless
-Theodore explicitly requests a visible change.
+The current public copy is protected by a committed rendered-site baseline. New
+content may be added, but existing wording, headings, links, accessible labels,
+deep-link IDs, dates, and image alternatives must not be deleted or silently
+rewritten unless Theodore explicitly approves that copy change.
+
+The visual system is intentionally restrained. Preserve its typography,
+material hierarchy, responsive behavior, reduced-motion support, and immediate
+pointer feedback unless a visible redesign is explicitly requested.
 
 ## Where to begin
 
-1. Open [`01-page-file-map.md`](01-page-file-map.md) to find the exact source
-   file for every public page.
-2. Open [`02-repository-structure.md`](02-repository-structure.md) to understand
-   each top-level directory and why six files remain at the root.
-3. Open [`03-adding-personal-posts.md`](03-adding-personal-posts.md) before
-   publishing or scaling Personal Posts.
-4. Follow [`04-release-checklist.md`](04-release-checklist.md) before changing
-   `main`.
+1. Use `01-page-file-map.md` to locate the relevant source and registry.
+2. Read `02-repository-structure.md` before moving or adding infrastructure.
+3. Follow `03-adding-personal-posts.md` for article work.
+4. Follow `04-release-checklist.md` before publishing.
+5. Read `05-architecture-decisions.md` before introducing a CMS, API, database,
+   client state, or a second repository.
+6. Read `06-public-assets.md` before adding or replacing source media.
 
 ## Technology and publishing
 
-- The site uses React, a Next-compatible `app/` router, Vinext, and Vite.
+- Official Next.js App Router with `output: "export"`.
+- React, TypeScript, Tailwind's PostCSS pipeline, and self-hosted fonts.
+- Typed registries generate repeatable routes, index entries, canonicals, and sitemap URLs.
 - `main` is the published branch.
-- `.github/workflows/pages.yml` validates and deploys the static export to
-  GitHub Pages.
-- Generated output is intentionally excluded from Git.
+- Pull requests validate only; pushes to `main` and manual reruns from `main`
+  validate, upload, and deploy to GitHub Pages. Other refs cannot deploy.
+- Generated `.next/` and `out/` directories are excluded from Git.
 
 ## Safe maintenance principle
 
-Prefer a documented, conventional structure over clever renaming. Names such as
-`app`, `public`, `package.json`, `tsconfig.json`, and `vite.config.ts` are
-recognized entry points for the tools used by this project.
+Prefer standard framework conventions, a single source of truth, strict build
+validation, and static output. Add operational complexity only when a concrete
+product requirement justifies it.

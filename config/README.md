@@ -1,7 +1,7 @@
 # Tool Configuration
 
 - `eslint.config.mjs` — repository code-quality rules.
-- `postcss.config.mjs` — stylesheet processing loaded explicitly by Vite.
 
-These files can live here because the corresponding commands point to them
-explicitly. Automatically discovered project entry files remain at the root.
+The ESLint command points here explicitly. Automatically discovered project
+entry files, including `postcss.config.mjs`, remain at the repository root so
+Next.js can load them through its standard conventions.

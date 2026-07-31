@@ -1,25 +1,28 @@
 # Application Routes
 
-This directory contains every public page and the shared site interface.
-
-The router requires the filename `page.tsx`; the directory determines the URL.
-For a complete page-to-file index, see:
-
-```text
-website-maintenance/01-page-file-map.md
-```
+This directory uses the official Next.js App Router. Static pages keep their
+bespoke copy beside their markup; repeatable collections are driven by typed,
+validated registries.
 
 Key routes:
 
 - `page.tsx` — Home.
 - `education/page.tsx` — Education.
-- `past-experience/` — Past Experience directory and five domain pages.
+- `past-experience/page.tsx` — Past Experience directory.
+- `past-experience/[slug]/page.tsx` — all five experience domain pages.
 - `now/page.tsx` — Current Chapter at `/now/`.
-- `personal-posts/` — Personal Posts index and article pages.
+- `personal-posts/page.tsx` — Personal Posts index.
+- `personal-posts/[slug]/page.tsx` — all article routes.
 
-Shared files:
+Shared responsibilities:
 
-- `components/SiteShell.tsx` — navigation, profile sidebar, and footer.
+- `components/SiteShell.tsx` — navigation, profile sidebar, footer, and skip link.
 - `globals.css` — approved visual system and responsive behavior.
-- `layout.tsx` — global metadata, fonts, and browser icons.
-- `lib/` — source parsing and route-independent logic.
+- `layout.tsx` — global metadata, icons, and Person structured data.
+- `lib/content/site.ts` — site constants, navigation, and metadata helper.
+- `lib/content/experience.ts` — strict archive parser and experience registry.
+- `lib/content/posts.ts` — article metadata registry.
+- `lib/content/routes.ts` — canonical public routes used by the sitemap.
+- `robots.ts`, `sitemap.ts`, and `not-found.tsx` — static discovery and failure pages.
+
+See `website-maintenance/01-page-file-map.md` for the complete source map.

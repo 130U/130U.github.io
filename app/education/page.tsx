@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { SiteShell } from "../components/SiteShell";
+import { createPageMetadata } from "../lib/content/site";
 
 const courseworkGroups = [
   {
@@ -55,10 +56,11 @@ const courseworkGroups = [
   },
 ] as const;
 
-export const metadata: Metadata = {
+export const metadata: Metadata = createPageMetadata({
   title: "Education",
   description: "Theodore Ouyang’s education at Duke University.",
-};
+  path: "/education/",
+});
 
 export default function EducationPage() {
   return (

@@ -1,18 +1,20 @@
 import type { Metadata } from "next";
+import {
+  DEFAULT_DESCRIPTION,
+  HOME_TITLE,
+  SITE_NAME,
+  SITE_URL,
+  absoluteUrl,
+} from "./lib/content/site";
 import "./globals.css";
 
-const title =
-  "Strategy at a World Model Unicorn | Duke B.S. & M.Eng. | Sequoia Scholar, Cohort 8";
-const description =
-  "Theodore Ouyang works at the intersection of artificial intelligence, strategy, and finance, translating frontier AI capabilities into products, operating models, and long-term business advantage.";
-
 export const metadata: Metadata = {
-  metadataBase: new URL("https://www.theodoreoy.com"),
+  metadataBase: new URL(SITE_URL),
   title: {
-    default: title,
+    default: HOME_TITLE,
     template: "%s | Theodore Ouyang",
   },
-  description,
+  description: DEFAULT_DESCRIPTION,
   icons: {
     icon: [
       { url: "/assets/brand/favicon.ico", sizes: "any" },
@@ -36,16 +38,30 @@ export const metadata: Metadata = {
     ],
   },
   openGraph: {
-    title,
-    description,
+    title: HOME_TITLE,
+    description: DEFAULT_DESCRIPTION,
     type: "website",
-    images: [{ url: "/assets/brand/og.png", width: 1774, height: 887 }],
+    url: "/",
+    siteName: SITE_NAME,
+    images: [{ url: "/assets/brand/og-1774.jpg", width: 1774, height: 887 }],
   },
   twitter: {
     card: "summary_large_image",
-    title,
-    description,
-    images: ["/assets/brand/og.png"],
+    title: HOME_TITLE,
+    description: DEFAULT_DESCRIPTION,
+    images: ["/assets/brand/og-1774.jpg"],
+  },
+};
+
+const personJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "Person",
+  name: SITE_NAME,
+  url: absoluteUrl("/"),
+  sameAs: ["https://github.com/130U"],
+  alumniOf: {
+    "@type": "CollegeOrUniversity",
+    name: "Duke University",
   },
 };
 
@@ -56,7 +72,15 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body>{children}</body>
+      <body>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify(personJsonLd).replaceAll("<", "\\u003c"),
+          }}
+        />
+        {children}
+      </body>
     </html>
   );
 }

@@ -1,38 +1,10 @@
-import type { Metadata } from "next";
 import Link from "next/link";
 import { SiteShell } from "../../components/SiteShell";
+import { getPersonalPost } from "../../lib/content/posts";
 
-const title = "From Vision and Instructions to Robot Actions: Two Emerging Paths";
-const description =
-  "A practical taxonomy for VLM-to-VLA and video/world-model-to-action systems, organized by training targets, internal representations, and inference-time computation.";
-
-export const metadata: Metadata = {
-  title,
-  description,
-  alternates: {
-    canonical: "/personal-posts/from-vision-and-instructions-to-robot-actions/",
-  },
-  openGraph: {
-    title,
-    description,
-    type: "article",
-    publishedTime: "2026-07-29",
-    images: [
-      {
-        url: "/assets/posts/wam-vla-two-paths-en.png",
-        width: 2048,
-        height: 1152,
-        alt: "Diagram comparing a VLM-to-VLA route with video and world-model routes to robot action",
-      },
-    ],
-  },
-  twitter: {
-    card: "summary_large_image",
-    title,
-    description,
-    images: ["/assets/posts/wam-vla-two-paths-en.png"],
-  },
-};
+const post = getPersonalPost("from-vision-and-instructions-to-robot-actions");
+if (!post) throw new Error("The robot action paths post is missing from the registry.");
+const { title, description } = post;
 
 export default function RobotActionPathsPost() {
   return (
@@ -93,16 +65,25 @@ export default function RobotActionPathsPost() {
             href="/assets/posts/wam-vla-two-paths-en.png"
             target="_blank"
             rel="noreferrer"
-            aria-label="Open the comparison diagram at full resolution"
+            aria-label="Open the comparison diagram at full resolution in a new tab"
           >
             {/* The source diagram is intentionally served directly at full resolution. */}
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img
-              src="/assets/posts/wam-vla-two-paths-en.png"
-              alt="Two-path comparison: a VLM-to-VLA route turns semantic task understanding into actions, while video and world-model routes use future visual dynamics through explicit generation, predictive features, or training-only supervision"
-              width="2048"
-              height="1152"
-            />
+            <picture>
+              <source
+                type="image/webp"
+                srcSet="/assets/posts/wam-vla-two-paths-en-720.webp 720w, /assets/posts/wam-vla-two-paths-en-1440.webp 1440w"
+                sizes="(max-width: 720px) calc(100vw - 48px), 850px"
+              />
+              <img
+                src="/assets/posts/wam-vla-two-paths-en.png"
+                alt="Two-path comparison: a VLM-to-VLA route turns semantic task understanding into actions, while video and world-model routes use future visual dynamics through explicit generation, predictive features, or training-only supervision"
+                width="2880"
+                height="1620"
+                sizes="(max-width: 720px) calc(100vw - 48px), 850px"
+                loading="lazy"
+                decoding="async"
+              />
+            </picture>
           </a>
           <figcaption>
             The diagram is organized around inputs, intermediate objectives,
