@@ -11,14 +11,15 @@ export default function NowPage() {
   return (
     <SiteShell active="now">
       <header className="page-intro current-chapter-intro">
-        <div className="chapter-context" aria-label="Chapter context">
+        <p className="chapter-context">
           <time dateTime="2026-07">July 2026</time>
-          <p>
-            Nashua, New Hampshire <span aria-hidden="true">→</span> Wudaokou,
-            Beijing
-          </p>
-        </div>
-        <h1 id="now-heading">A New Chapter</h1>
+        </p>
+        <h1 className="chapter-title" id="now-heading">
+          <span>A New Chapter:</span>
+          <span className="chapter-title-route">
+            From Nashua, New Hampshire to Wudaokou, Beijing
+          </span>
+        </h1>
         <p className="chapter-subtitle">
           From efficiency to additionality—and from predicting the world to
           acting within it.

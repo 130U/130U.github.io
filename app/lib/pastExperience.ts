@@ -1,4 +1,4 @@
-import archiveMarkdown from "../../content/past-2026-06-30.md?raw";
+import archiveMarkdown from "../../content/past-experience/archive-through-2026-06-30.md?raw";
 
 export type ExperienceEntry = {
   organization: string;

@@ -15,25 +15,37 @@ export const metadata: Metadata = {
   description,
   icons: {
     icon: [
-      { url: "/favicon.ico", sizes: "any" },
-      { url: "/favicon-32.png", sizes: "32x32", type: "image/png" },
-      { url: "/favicon-16.png", sizes: "16x16", type: "image/png" },
+      { url: "/assets/brand/favicon.ico", sizes: "any" },
+      {
+        url: "/assets/brand/favicon-32.png",
+        sizes: "32x32",
+        type: "image/png",
+      },
+      {
+        url: "/assets/brand/favicon-16.png",
+        sizes: "16x16",
+        type: "image/png",
+      },
     ],
     apple: [
-      { url: "/apple-touch-icon.png", sizes: "180x180", type: "image/png" },
+      {
+        url: "/assets/brand/apple-touch-icon.png",
+        sizes: "180x180",
+        type: "image/png",
+      },
     ],
   },
   openGraph: {
     title,
     description,
     type: "website",
-    images: [{ url: "/og.png", width: 1774, height: 887 }],
+    images: [{ url: "/assets/brand/og.png", width: 1774, height: 887 }],
   },
   twitter: {
     card: "summary_large_image",
     title,
     description,
-    images: ["/og.png"],
+    images: ["/assets/brand/og.png"],
   },
 };
 

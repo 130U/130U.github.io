@@ -9,14 +9,13 @@
     "dev": "vinext dev",
     "build": "vinext build",
     "export:static": "node scripts/export-static.mjs",
+    "preview:static": "node scripts/preview-static.mjs",
     "start": "vinext start",
     "test": "npm run build && node --test tests/rendered-html.test.mjs",
     "check": "npm run lint && npm test",
     "lint": "eslint . --ignore-pattern dist --ignore-pattern .next --ignore-pattern github-pages --ignore-pattern .npm-cache"
   },
   "dependencies": {
-    "@fontsource-variable/instrument-sans": "^5.3.0",
-    "@fontsource-variable/newsreader": "^5.3.0",
     "next": "16.2.6",
     "react": "19.2.6",
     "react-dom": "19.2.6"

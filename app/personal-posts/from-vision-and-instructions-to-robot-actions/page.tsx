@@ -19,7 +19,7 @@ export const metadata: Metadata = {
     publishedTime: "2026-07-29",
     images: [
       {
-        url: "/wam-vla-two-paths-en.png",
+        url: "/assets/posts/wam-vla-two-paths-en.png",
         width: 2048,
         height: 1152,
         alt: "Diagram comparing a VLM-to-VLA route with video and world-model routes to robot action",
@@ -30,7 +30,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title,
     description,
-    images: ["/wam-vla-two-paths-en.png"],
+    images: ["/assets/posts/wam-vla-two-paths-en.png"],
   },
 };
 
@@ -90,7 +90,7 @@ export default function RobotActionPathsPost() {
 
         <figure className="post-figure">
           <a
-            href="/wam-vla-two-paths-en.png"
+            href="/assets/posts/wam-vla-two-paths-en.png"
             target="_blank"
             rel="noreferrer"
             aria-label="Open the comparison diagram at full resolution"
@@ -98,7 +98,7 @@ export default function RobotActionPathsPost() {
             {/* The source diagram is intentionally served directly at full resolution. */}
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
-              src="/wam-vla-two-paths-en.png"
+              src="/assets/posts/wam-vla-two-paths-en.png"
               alt="Two-path comparison: a VLM-to-VLA route turns semantic task understanding into actions, while video and world-model routes use future visual dynamics through explicit generation, predictive features, or training-only supervision"
               width="2048"
               height="1152"

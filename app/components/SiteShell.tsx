@@ -46,7 +46,7 @@ export function SiteShell({
             {/* Static GitHub Pages deployment serves this pre-sized portrait directly. */}
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
-              src="/theodore-avatar-warm.png"
+              src="/assets/profile/theodore-avatar-warm.png"
               alt="Illustrated portrait of Theodore Ouyang"
               width="192"
               height="192"

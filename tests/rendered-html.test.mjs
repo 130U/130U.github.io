@@ -65,20 +65,34 @@ test("renders the finished homepage and profile details", async () => {
 
 test("publishes the lo monogram as browser and device icons", async () => {
   const html = await (await render()).text();
-  assert.match(html, /href="https:\/\/www\.theodoreoy\.com\/favicon\.ico"/);
-  assert.match(html, /href="https:\/\/www\.theodoreoy\.com\/favicon-32\.png"/);
-  assert.match(html, /href="https:\/\/www\.theodoreoy\.com\/favicon-16\.png"/);
-  assert.match(html, /href="https:\/\/www\.theodoreoy\.com\/apple-touch-icon\.png"/);
+  assert.match(
+    html,
+    /href="https:\/\/www\.theodoreoy\.com\/assets\/brand\/favicon\.ico"/,
+  );
+  assert.match(
+    html,
+    /href="https:\/\/www\.theodoreoy\.com\/assets\/brand\/favicon-32\.png"/,
+  );
+  assert.match(
+    html,
+    /href="https:\/\/www\.theodoreoy\.com\/assets\/brand\/favicon-16\.png"/,
+  );
+  assert.match(
+    html,
+    /href="https:\/\/www\.theodoreoy\.com\/assets\/brand\/apple-touch-icon\.png"/,
+  );
 
   for (const name of [
-    "lo-monogram.png",
-    "icon-512.png",
-    "apple-touch-icon.png",
-    "favicon-32.png",
-    "favicon-16.png",
-    "favicon.ico",
+    "brand/lo-monogram.png",
+    "brand/icon-512.png",
+    "brand/apple-touch-icon.png",
+    "brand/favicon-32.png",
+    "brand/favicon-16.png",
+    "brand/favicon.ico",
   ]) {
-    const asset = await stat(new URL(`../public/${name}`, import.meta.url));
+    const asset = await stat(
+      new URL(`../public/assets/${name}`, import.meta.url),
+    );
     assert.ok(asset.size > 0, `${name} must not be empty`);
   }
 });
@@ -198,7 +212,10 @@ test("past experience landing page links to five separate domain pages", async (
 
 test("each domain page contains only its own exact archive content", async () => {
   const source = await readFile(
-    new URL("../content/past-2026-06-30.md", import.meta.url),
+    new URL(
+      "../content/past-experience/archive-through-2026-06-30.md",
+      import.meta.url,
+    ),
     "utf8",
   );
   const domainSection = source.split("## Domain Experience")[1];
@@ -267,13 +284,19 @@ test("publishes the July 2026 transition as a separate present-facing page", asy
 
   assert.match(html, /<title>Current Chapter \| Theodore Ouyang<\/title>/);
   assert.match(html, /<time dateTime="2026-07">July 2026<\/time>/);
-  assert.match(html, /<h1 id="now-heading">A New Chapter<\/h1>/);
+  assert.match(html, /<h1 class="chapter-title" id="now-heading">/);
+  assert.match(html, /<span>A New Chapter:<\/span>/);
+  assert.match(
+    html,
+    /From Nashua, New Hampshire to Wudaokou, Beijing/,
+  );
   assert.match(
     html,
     /From efficiency to additionality\u2014and from predicting the world to acting within it\./,
   );
   assert.match(html, /Nashua, New Hampshire/);
   assert.match(html, /Wudaokou, Beijing/);
+  assert.doesNotMatch(html, /Nashua, New Hampshire[^<]*\u2192/);
   assert.match(html, /The Question/);
   assert.match(html, /The Thesis/);
   assert.match(html, /The Decision/);
@@ -325,10 +348,16 @@ test("first research note preserves the reviewed taxonomy and source diagram", a
   assert.match(html, /future-video tokens from influencing action tokens/);
   assert.match(html, /World-Action Model.*emerging label/s);
   assert.match(html, /Primary sources/);
-  assert.match(html, /src="\/wam-vla-two-paths-en\.png"/);
+  assert.match(
+    html,
+    /src="\/assets\/posts\/wam-vla-two-paths-en\.png"/,
+  );
 
   const diagram = await stat(
-    new URL("../public/wam-vla-two-paths-en.png", import.meta.url),
+    new URL(
+      "../public/assets/posts/wam-vla-two-paths-en.png",
+      import.meta.url,
+    ),
   );
   assert.ok(diagram.size > 300_000, "The full-resolution source diagram must be retained");
 });
