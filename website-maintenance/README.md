@@ -31,8 +31,9 @@ pointer feedback unless a visible redesign is explicitly requested.
 - React, TypeScript, Tailwind's PostCSS pipeline, and self-hosted fonts.
 - Typed registries generate repeatable routes, index entries, canonicals, and sitemap URLs.
 - `main` is the published branch.
-- Pull requests validate only; pushes to `main` and manual reruns from `main`
-  validate, upload, and deploy to GitHub Pages. Other refs cannot deploy.
+- Pull requests validate only; pushes to `main` validate, upload, and deploy to
+  GitHub Pages. A failed `main` run can be rerun with its original preservation
+  guard context; feature refs cannot deploy.
 - Generated `.next/` and `out/` directories are excluded from Git.
 
 ## Safe maintenance principle

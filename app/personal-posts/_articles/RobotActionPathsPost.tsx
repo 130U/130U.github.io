@@ -4,7 +4,15 @@ import { getPersonalPost } from "../../lib/content/posts";
 
 const post = getPersonalPost("from-vision-and-instructions-to-robot-actions");
 if (!post) throw new Error("The robot action paths post is missing from the registry.");
-const { title, description } = post;
+const {
+  number,
+  kicker,
+  title,
+  description,
+  publishedDate,
+  publishedDateDisplay,
+  readingTime,
+} = post;
 
 export default function RobotActionPathsPost() {
   return (
@@ -16,13 +24,15 @@ export default function RobotActionPathsPost() {
         </Link>
 
         <header className="post-header">
-          <p className="section-kicker">RESEARCH NOTE · 001</p>
+          <p className="section-kicker">
+            {kicker} · {number}
+          </p>
           <h1>{title}</h1>
           <p className="post-dek">{description}</p>
           <div className="post-meta" aria-label="Publication details">
-            <time dateTime="2026-07-29">July 29, 2026</time>
+            <time dateTime={publishedDate}>{publishedDateDisplay}</time>
             <span aria-hidden="true">·</span>
-            <span>12 min read</span>
+            <span>{readingTime}</span>
           </div>
         </header>
 

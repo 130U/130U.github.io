@@ -80,7 +80,7 @@ a {
 
 a:focus-visible {
   border-radius: 4px;
-  outline: 3px solid rgba(195, 95, 61, 0.28);
+  outline: 3px solid var(--accent);
   outline-offset: 4px;
 }
 
@@ -1571,6 +1571,24 @@ a:focus-visible {
   }
 }
 
+@media (pointer: coarse) {
+  .wordmark,
+  .primary-nav a,
+  .profile-links li,
+  .profile-links a,
+  .back-link,
+  .domain-index a,
+  .post-listing h2 a,
+  .post-listing-meta a {
+    min-height: 44px;
+  }
+
+  .profile-links a {
+    display: inline-flex;
+    align-items: center;
+  }
+}
+
 @media (hover: hover) and (pointer: fine) {
   .primary-nav a:hover {
     color: var(--accent-dark);
@@ -1684,6 +1702,7 @@ a:focus-visible {
 
 @media (prefers-contrast: more) {
   :root {
+    --rule-strong: #766b60;
     --hairline: var(--rule-strong);
     --muted: #554c44;
     --faint: #71665c;
@@ -1701,5 +1720,6 @@ a:focus-visible {
   .post-flow,
   .post-questions {
     background: var(--paper-raised);
+    border-color: var(--rule-strong);
   }
 }

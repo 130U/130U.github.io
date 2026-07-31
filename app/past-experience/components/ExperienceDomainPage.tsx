@@ -23,7 +23,7 @@ export function ExperienceDomainPage({
         {domain.entries.map((entry, entryIndex) => (
           <article
             className="archive-entry"
-            key={`${entry.organization}-${entry.metadata.Project ?? entryIndex}`}
+            key={`${entry.organization}-${entry.metadata.Project}`}
           >
             <div className="archive-entry-number" aria-hidden="true">
               {String(entryIndex + 1).padStart(2, "0")}
@@ -31,21 +31,17 @@ export function ExperienceDomainPage({
             <div className="archive-entry-content">
               <h2>{entry.organization}</h2>
               <dl className="entry-metadata">
-                {metadataOrder.map((label) =>
-                  entry.metadata[label] ? (
-                    <div key={label}>
-                      <dt>{label}</dt>
-                      <dd>{entry.metadata[label]}</dd>
-                    </div>
-                  ) : null,
-                )}
+                {metadataOrder.map((label) => (
+                  <div key={label}>
+                    <dt>{label}</dt>
+                    <dd>{entry.metadata[label]}</dd>
+                  </div>
+                ))}
               </dl>
-              {entry.metadata.Project ? (
-                <p className="entry-project">
-                  <span>Project</span>
-                  {entry.metadata.Project}
-                </p>
-              ) : null}
+              <p className="entry-project">
+                <span>Project</span>
+                {entry.metadata.Project}
+              </p>
               {entry.summaries.map((summary, summaryIndex) => (
                 <p className="entry-summary" key={`${summary.slice(0, 48)}-${summaryIndex}`}>
                   {summary}
