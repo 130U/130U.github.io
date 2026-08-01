@@ -1,0 +1,18 @@
+{
+  "schemaVersion": 1,
+  "baselineCommit": "69d6e7134132da51f4961dbe5509fc6adb657284",
+  "routes": {
+    "/education/": [
+      { "tag": "section", "role": null, "value": "coursework-heading" }
+    ],
+    "/now/": [
+      { "tag": "article", "role": null, "value": "now-heading" },
+      { "tag": "section", "role": null, "value": "chapter-question" },
+      { "tag": "section", "role": null, "value": "chapter-thesis" },
+      { "tag": "section", "role": null, "value": "chapter-decision" }
+    ],
+    "/personal-posts/": [
+      { "tag": "article", "role": null, "value": "posts-heading" }
+    ]
+  }
+}
