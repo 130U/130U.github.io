@@ -6,17 +6,23 @@ export function SiteShell({
   active,
   children,
   background,
+  frameClassName,
+  showProfile = true,
+  skipHref = "#main-content",
   variant = "default",
 }: {
   active?: ActivePage;
   children: ReactNode;
   background?: ReactNode;
+  frameClassName?: string;
+  showProfile?: boolean;
+  skipHref?: `#${string}`;
   variant?: "default" | "particle";
 }) {
   return (
     <div className={`site-shell site-shell--${variant}`}>
       {background}
-      <a className="skip-link" href="#main-content">
+      <a className="skip-link" href={skipHref}>
         Skip to main content
       </a>
       <header className="topbar">
@@ -39,8 +45,11 @@ export function SiteShell({
         </div>
       </header>
 
-      <div className="site-frame">
-        <aside className="profile-sidebar" aria-label="Profile">
+      <div
+        className={frameClassName ? `site-frame ${frameClassName}` : "site-frame"}
+      >
+        {showProfile ? (
+          <aside className="profile-sidebar" aria-label="Profile">
           <div className="avatar-frame">
             {/* Static GitHub Pages deployment serves this pre-sized portrait directly. */}
             <picture>
@@ -81,7 +90,8 @@ export function SiteShell({
               <a href="https://github.com/130U" rel="me">GitHub</a>
             </li>
           </ul>
-        </aside>
+          </aside>
+        ) : null}
 
         <main className="content-column" id="main-content">
           {children}
