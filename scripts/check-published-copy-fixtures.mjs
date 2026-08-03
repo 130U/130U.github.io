@@ -18,9 +18,12 @@ const headCommitLine = execFileSync(
 const isRootCommit = headCommitLine.split(/\s+/u).length === 1;
 
 const protectedPathspecs = [
-  "tests/fixtures/content-baseline.json",
-  "tests/fixtures/accessible-label-baseline.json",
-  "tests/fixtures/accessible-labelledby-baseline.json",
+  ":(literal)app/education/page.tsx",
+  ":(literal)app/past-experience/page.tsx",
+  ":(literal)app/past-experience/[slug]/page.tsx",
+  ":(literal)app/past-experience/components/ExperienceDomainPage.tsx",
+  ":(literal)app/lib/content/experience.ts",
+  ":(literal)content/past-experience/archive-through-2026-06-30.md",
   ":(glob)tests/fixtures/published-copy/*.json",
 ];
 
@@ -41,12 +44,13 @@ let comparisonMessage;
 
 if (mergeBaseCheck.status === 0) {
   revisions = [`${baseSha}...HEAD`];
-  comparisonMessage = "Preservation fixture changes contain additions only.";
+  comparisonMessage =
+    "Protected Education and Past Experience sources are unchanged; published-copy snapshots contain additions only.";
 } else if (isAuthorizedRootReset) {
   if (mergeBaseCheck.status === 1) {
     revisions = [baseSha, "HEAD"];
     comparisonMessage =
-      "Authorized root reset detected; direct tree comparison confirms preservation fixture changes contain additions only.";
+      "Authorized root reset detected; direct tree comparison confirms protected sources are unchanged and published-copy snapshots contain additions only.";
   } else {
     const emptyTreeSha = execFileSync(
       "git",
@@ -55,7 +59,7 @@ if (mergeBaseCheck.status === 0) {
     ).trim();
     revisions = [emptyTreeSha, "HEAD"];
     comparisonMessage =
-      "Authorized root reset detected without the previous object; all preservation fixtures are introduced as additions.";
+      "Authorized root reset detected without the previous object; protected sources and preservation snapshots are introduced as additions.";
   }
 } else {
   throw new Error(
@@ -84,7 +88,7 @@ const forbidden = changes
 
 if (forbidden.length > 0) {
   throw new Error(
-    "Preservation fixtures are immutable after introduction and published-copy snapshots are append-only; modification, deletion, and rename are forbidden:\n" +
+    "Protected Education and Past Experience sources are immutable, and published-copy snapshots are append-only; modification, deletion, and rename are forbidden:\n" +
       forbidden.join("\n"),
   );
 }

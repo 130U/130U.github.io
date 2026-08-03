@@ -3,16 +3,15 @@ import type { Metadata } from "next";
 export const SITE_URL = "https://www.theodoreoy.com";
 export const SITE_NAME = "Theodore Ouyang";
 export const HOME_TITLE =
-  "Strategy at a World Model Unicorn | Duke B.S. & M.Eng. | Sequoia Scholar, Cohort 8";
+  "Theodore Ouyang | Duke B.S. & M.Eng. | Sequoia Scholar, Cohort 8";
 export const DEFAULT_DESCRIPTION =
-  "Theodore Ouyang works at the intersection of artificial intelligence, strategy, and finance, translating frontier AI capabilities into products, operating models, and long-term business advantage.";
+  "Theodore Ouyang is a Duke University graduate and Sequoia Scholar in Cohort 8, exploring how artificial intelligence can become useful in everyday life.";
 
 export type ActivePage =
   | "home"
   | "now"
   | "education"
-  | "experience"
-  | "posts";
+  | "experience";
 
 export const navigation: ReadonlyArray<{
   key: ActivePage;
@@ -23,7 +22,6 @@ export const navigation: ReadonlyArray<{
   { key: "education", label: "Education", href: "/education/" },
   { key: "experience", label: "Past Experience", href: "/past-experience/" },
   { key: "now", label: "Current Chapter", href: "/now/" },
-  { key: "posts", label: "Personal Posts", href: "/personal-posts/" },
 ];
 
 export const coreRoutes = navigation.map(({ href }) => href);

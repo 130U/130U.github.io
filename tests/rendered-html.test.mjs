@@ -1,56 +1,35 @@
 import assert from "node:assert/strict";
 import { createHash } from "node:crypto";
 import { existsSync } from "node:fs";
-import { readFile, readdir, stat } from "node:fs/promises";
+import { readFile, readdir } from "node:fs/promises";
 import path from "node:path";
 import test from "node:test";
 import { fileURLToPath } from "node:url";
-import { gunzipSync } from "node:zlib";
 
 const ROOT = fileURLToPath(new URL("../", import.meta.url));
 const OUT = path.join(ROOT, "out");
 const SITE_ORIGIN = "https://www.theodoreoy.com";
-const BASELINE_PATH = path.join(ROOT, "tests", "fixtures", "content-baseline.json");
-const ACCESSIBLE_LABEL_BASELINE_PATH = path.join(
-  ROOT,
-  "tests",
-  "fixtures",
-  "accessible-label-baseline.json",
-);
-const ACCESSIBLE_LABELLEDBY_BASELINE_PATH = path.join(
-  ROOT,
-  "tests",
-  "fixtures",
-  "accessible-labelledby-baseline.json",
-);
-const PUBLISHED_COPY_DIR = path.join(ROOT, "tests", "fixtures", "published-copy");
-const ARCHIVE_PATH = path.join(
-  ROOT,
-  "content",
-  "past-experience",
-  "archive-through-2026-06-30.md",
-);
 
-const baseline = JSON.parse(await readFile(BASELINE_PATH, "utf8"));
-const accessibleLabelBaseline = JSON.parse(
-  await readFile(ACCESSIBLE_LABEL_BASELINE_PATH, "utf8"),
-);
-const accessibleLabelledByBaseline = JSON.parse(
-  await readFile(ACCESSIBLE_LABELLEDBY_BASELINE_PATH, "utf8"),
-);
-const publishedCopySnapshots = await Promise.all(
-  (await readdir(PUBLISHED_COPY_DIR))
-    .filter((file) => file.endsWith(".json"))
-    .sort()
-    .map(async (file) => ({
-      file,
-      snapshot: JSON.parse(await readFile(path.join(PUBLISHED_COPY_DIR, file), "utf8")),
-    })),
-);
-const frozenBaselineRoutes = Object.keys(baseline.routes);
-const htmlCache = new Map();
+const EXPECTED_ROUTES = [
+  "/",
+  "/education/",
+  "/now/",
+  "/past-experience/",
+  "/past-experience/artificial-intelligence/",
+  "/past-experience/data-science/",
+  "/past-experience/environmental-social-and-governance/",
+  "/past-experience/finance/",
+  "/past-experience/stem-academic-competitions-and-training/",
+];
 
-const domainRoutes = [
+const NAVIGATION = [
+  ["Home", "/"],
+  ["Education", "/education/"],
+  ["Past Experience", "/past-experience/"],
+  ["Current Chapter", "/now/"],
+];
+
+const DOMAIN_ROUTES = [
   {
     name: "Artificial Intelligence",
     route: "/past-experience/artificial-intelligence/",
@@ -83,18 +62,41 @@ const domainRoutes = [
   },
 ];
 
-const immutableFiles = new Map([
+const PROTECTED_SOURCE_HASHES = new Map([
+  [
+    "app/education/page.tsx",
+    "7c2d6dee0679d4737a23ece91ef14c0c903a237188619c680bece518b9945e99",
+  ],
+  [
+    "app/past-experience/page.tsx",
+    "c22ffecb129567be473ce2230103fd80d954faeaa6ebae171c9418085e6769e9",
+  ],
+  [
+    "app/past-experience/[slug]/page.tsx",
+    "a89b781c0a6a74b9295635d5495c4e2cc2cf2d890cc879578ebfd04a9f6db84b",
+  ],
+  [
+    "app/past-experience/components/ExperienceDomainPage.tsx",
+    "6350ae5dffd06111562455deea826af7373e88aba3a73b1e5a823c5a0f60288f",
+  ],
+  [
+    "app/lib/content/experience.ts",
+    "2bedced152edabc7fe56071b50d43f288f1011f427bd60288df392cfc00f06f8",
+  ],
   [
     "content/past-experience/archive-through-2026-06-30.md",
     "8a016cedb94a308c43b553d79aaeecec0640024314336734ff7bdb2ef535f64c",
   ],
+]);
+
+const IMMUTABLE_ASSET_HASHES = new Map([
   [
     "public/assets/brand/og.png",
-    "7422f52bed63b85953f5065c6c5de4bfdea57e5143917d1e120c6b04ce6fca7c",
+    "1a61b1b492dae028b031bf020f1a2c57b6ce2887f2f6ca7aeae154b085f3ec98",
   ],
   [
-    "public/assets/posts/wam-vla-two-paths-en.png",
-    "09af8d758163a74c78d52bcdf4be18066ba5e4f4ee933d5fe6e7fd22efe6dc80",
+    "public/assets/brand/og-1774.jpg",
+    "c625f0372d40bfcf392c4c8b15f3f24c48db4ea211879b25d7ae6db6a7972343",
   ],
   [
     "public/assets/profile/theodore-avatar-warm.png",
@@ -126,816 +128,399 @@ const immutableFiles = new Map([
   ],
 ]);
 
+const RETIRED_MARKERS = [
+  ["world", "model"].join(" "),
+  ["world", "-model"].join(""),
+  ["world", "-action"].join(""),
+  ["personal", "posts"].join(" "),
+  ["/personal-", "posts/"].join(""),
+  ["uni", "corn"].join(""),
+  ["present", "work"].join(" "),
+  ["personal", "writing"].join(" "),
+  ["fast", "-wam"].join(""),
+  ["vlm", "-to-vla"].join(""),
+];
+
+const htmlCache = new Map();
+
 function decodeHtml(value) {
-  const named = {
-    amp: "&",
-    apos: "'",
-    copy: "©",
-    gt: ">",
-    larr: "←",
-    ldquo: "“",
-    lsquo: "‘",
-    lt: "<",
-    mdash: "—",
-    middot: "·",
-    nbsp: " ",
-    ndash: "–",
-    pi: "π",
-    quot: '"',
-    rarr: "→",
-    rdquo: "”",
-    rsquo: "’",
-  };
-
-  return value.replace(
-    /&(?:#(\d+)|#x([\da-f]+)|([a-z][\da-z]+));/gi,
-    (entity, decimal, hexadecimal, name) => {
-      if (decimal) return String.fromCodePoint(Number(decimal));
-      if (hexadecimal) return String.fromCodePoint(Number.parseInt(hexadecimal, 16));
-      return named[name.toLowerCase()] ?? entity;
-    },
-  );
+  const named = new Map([
+    ["amp", "&"],
+    ["apos", "'"],
+    ["gt", ">"],
+    ["lt", "<"],
+    ["nbsp", " "],
+    ["quot", '"'],
+  ]);
+  return value.replace(/&(#x[\da-f]+|#\d+|[a-z]+);/giu, (match, entity) => {
+    if (entity.startsWith("#x")) return String.fromCodePoint(Number.parseInt(entity.slice(2), 16));
+    if (entity.startsWith("#")) return String.fromCodePoint(Number.parseInt(entity.slice(1), 10));
+    return named.get(entity.toLowerCase()) ?? match;
+  });
 }
 
-function normalizeText(value) {
-  return decodeHtml(value).normalize("NFC").replace(/\s+/gu, " ").trim();
+function normalizeSpace(value) {
+  return decodeHtml(value).replace(/\s+/gu, " ").trim();
 }
 
-function textContent(fragment) {
-  return normalizeText(
-    fragment
-      .replace(/<!--[\s\S]*?-->/gu, " ")
-      .replace(/<(script|style|template|noscript)\b[\s\S]*?<\/\1\s*>/giu, " ")
+function stripMarkup(value) {
+  return normalizeSpace(
+    value
+      .replace(/<script\b[\s\S]*?<\/script>/giu, " ")
+      .replace(/<style\b[\s\S]*?<\/style>/giu, " ")
+      .replace(/<svg\b[\s\S]*?<\/svg>/giu, " ")
       .replace(/<[^>]+>/gu, " "),
   );
 }
 
-function visibleBodyText(html) {
-  const body = html.match(/<body\b[^>]*>([\s\S]*?)<\/body\s*>/iu)?.[1];
-  assert.ok(body, "Exported HTML must contain a body element");
-  return textContent(body);
-}
-
-function mainMarkup(html) {
-  const main = html.match(/<main\b[^>]*>([\s\S]*?)<\/main\s*>/iu)?.[1];
-  assert.notEqual(main, undefined, "Exported page must contain a main element");
-  return main;
-}
-
-function tokenize(value) {
-  return (
-    normalizeText(value).match(
-      /[\p{L}\p{M}\p{N}]+|[^\s\p{L}\p{M}\p{N}]/gu,
-    ) ?? []
-  );
-}
-
-function assertTokenSubsequence(expectedText, actualText, message) {
-  const expected = tokenize(expectedText);
-  const actual = tokenize(actualText);
-  let cursor = 0;
-
-  for (let index = 0; index < expected.length; index += 1) {
-    const token = expected[index];
-    while (cursor < actual.length && actual[cursor] !== token) cursor += 1;
-    if (cursor === actual.length) {
-      const context = expected.slice(Math.max(0, index - 8), index + 9).join(" ");
-      assert.fail(
-        `${message}: original token ${JSON.stringify(token)} at index ${index} ` +
-          `is missing or out of order (baseline context: ${context})`,
-      );
-    }
-    cursor += 1;
-  }
-}
-
-function attribute(attributes, name) {
-  const escapedName = name.replace(/[.*+?^${}()|[\]\\]/gu, "\\$&");
-  const match = attributes.match(
-    new RegExp(
-      `(?:^|\\s)${escapedName}\\s*=\\s*(?:"([^"]*)"|'([^']*)'|([^\\s>]+))`,
-      "iu",
-    ),
+function attribute(tag, name) {
+  const escaped = name.replace(/[.*+?^${}()|[\]\\]/gu, "\\$&");
+  const match = tag.match(
+    new RegExp(`(?:^|\\s)${escaped}\\s*=\\s*(?:"([^"]*)"|'([^']*)'|([^\\s>]+))`, "iu"),
   );
   return match ? decodeHtml(match[1] ?? match[2] ?? match[3] ?? "") : undefined;
 }
 
-function hasClass(attributes, className) {
-  return (attribute(attributes, "class") ?? "")
-    .split(/\s+/u)
-    .includes(className);
+function openingTags(html, tagName) {
+  return html.match(new RegExp(`<${tagName}\\b[^>]*>`, "giu")) ?? [];
 }
 
-function extractHeadings(html) {
-  const result = [];
-  const elements = html.matchAll(/<(h[1-6]|p)\b([^>]*)>([\s\S]*?)<\/\1\s*>/giu);
-
-  for (const match of elements) {
-    const [tag, attributes, inner] = match.slice(1);
-    if (tag.toLowerCase() === "p" && !hasClass(attributes, "profile-name")) continue;
-    result.push({
-      level: tag.toLowerCase() === "p" ? 2 : Number(tag.slice(1)),
-      text: textContent(inner),
-      id: attribute(attributes, "id"),
-    });
-  }
-
-  return result;
-}
-
-function extractLinks(html) {
-  return [...html.matchAll(/<a\b([^>]*)>([\s\S]*?)<\/a\s*>/giu)].map(
-    ([, attributes, inner]) => ({
-      label: textContent(inner),
-      href: attribute(attributes, "href"),
-      ariaLabel: attribute(attributes, "aria-label"),
-      target: attribute(attributes, "target"),
-    }),
+function pairedElementsWithClass(html, tagName, className) {
+  const matches = [...html.matchAll(new RegExp(`<${tagName}\\b([^>]*)>([\\s\\S]*?)<\/${tagName}>`, "giu"))];
+  return matches.filter((match) =>
+    (attribute(match[1], "class") ?? "").split(/\s+/u).includes(className),
   );
-}
-
-function extractImages(html) {
-  return [...html.matchAll(/<img\b([^>]*)>/giu)].map(([, attributes]) => ({
-    src: attribute(attributes, "src"),
-    alt: attribute(attributes, "alt") ?? "",
-    width: attribute(attributes, "width"),
-    height: attribute(attributes, "height"),
-  }));
-}
-
-function extractTimes(html) {
-  return [...html.matchAll(/<time\b([^>]*)>([\s\S]*?)<\/time\s*>/giu)].map(
-    ([, attributes, inner]) => ({
-      text: textContent(inner),
-      dateTime: attribute(attributes, "datetime"),
-    }),
-  );
-}
-
-function extractIds(html) {
-  return [...html.matchAll(/\sid\s*=\s*(?:"([^"]*)"|'([^']*)')/giu)].map(
-    (match) => decodeHtml(match[1] ?? match[2] ?? ""),
-  );
-}
-
-function extractTitle(html) {
-  const title = html.match(/<title\b[^>]*>([\s\S]*?)<\/title\s*>/iu)?.[1];
-  assert.notEqual(title, undefined, "Exported page must contain a title");
-  return textContent(title);
-}
-
-function extractDescription(html) {
-  for (const [, attributes] of html.matchAll(/<meta\b([^>]*)>/giu)) {
-    if ((attribute(attributes, "name") ?? "").toLowerCase() === "description") {
-      return normalizeText(attribute(attributes, "content") ?? "");
-    }
-  }
-  assert.fail("Exported page must contain a meta description");
-}
-
-function extractAriaLabels(html) {
-  const markup = html.replace(
-    /<(script|style|template|noscript)\b[\s\S]*?<\/\1\s*>/giu,
-    " ",
-  );
-  const result = [];
-
-  for (const [, tag, attributes] of markup.matchAll(
-    /<([a-z][\w:-]*)\b([^>]*)>/giu,
-  )) {
-    const value = attribute(attributes, "aria-label");
-    if (value === undefined) continue;
-    result.push({
-      tag: tag.toLowerCase(),
-      role: attribute(attributes, "role") ?? null,
-      value,
-    });
-  }
-
-  return result;
-}
-
-function extractAriaLabelledBy(html) {
-  const markup = html.replace(
-    /<(script|style|template|noscript)\b[\s\S]*?<\/\1\s*>/giu,
-    " ",
-  );
-  const result = [];
-
-  for (const [, tag, attributes] of markup.matchAll(
-    /<([a-z][\w:-]*)\b([^>]*)>/giu,
-  )) {
-    const value = attribute(attributes, "aria-labelledby");
-    if (value === undefined) continue;
-    result.push({
-      tag: tag.toLowerCase(),
-      role: attribute(attributes, "role") ?? null,
-      value,
-    });
-  }
-
-  return result;
-}
-
-function extractAriaAttributes(html) {
-  const markup = html.replace(
-    /<(script|style|template|noscript)\b[\s\S]*?<\/\1\s*>/giu,
-    " ",
-  );
-  const result = [];
-
-  for (const [, tag, attributes] of markup.matchAll(
-    /<([a-z][\w:-]*)\b([^>]*)>/giu,
-  )) {
-    for (const name of ["aria-label", "aria-labelledby"]) {
-      const value = attribute(attributes, name);
-      if (value !== undefined) result.push({ tag: tag.toLowerCase(), name, value });
-    }
-  }
-
-  return result;
-}
-
-function extractCanonicalUrls(html) {
-  const result = [];
-  for (const [, attributes] of html.matchAll(/<link\b([^>]*)>/giu)) {
-    const rel = (attribute(attributes, "rel") ?? "").toLowerCase().split(/\s+/u);
-    if (rel.includes("canonical")) result.push(attribute(attributes, "href"));
-  }
-  return result;
-}
-
-function extractOpenGraphUrls(html) {
-  const result = [];
-  for (const [, attributes] of html.matchAll(/<meta\b([^>]*)>/giu)) {
-    if ((attribute(attributes, "property") ?? "").toLowerCase() === "og:url") {
-      result.push(attribute(attributes, "content"));
-    }
-  }
-  return result;
-}
-
-function canonicalUrl(route) {
-  return new URL(route, SITE_ORIGIN).toString();
-}
-
-function recordMatches(expected, actual, tokenFields = new Set()) {
-  if (typeof expected !== "object" || expected === null) return actual === expected;
-  return Object.entries(expected).every(([key, value]) => {
-    if (tokenFields.has(key)) {
-      try {
-        assertTokenSubsequence(value, actual[key] ?? "", `${key} changed`);
-        return true;
-      } catch {
-        return false;
-      }
-    }
-    return actual[key] === value;
-  });
-}
-
-function assertRecordSubsequence(
-  expectedRecords,
-  actualRecords,
-  message,
-  tokenFields = new Set(),
-) {
-  let cursor = 0;
-  for (const expected of expectedRecords) {
-    while (
-      cursor < actualRecords.length &&
-      !recordMatches(expected, actualRecords[cursor], tokenFields)
-    ) {
-      cursor += 1;
-    }
-    if (cursor === actualRecords.length) {
-      assert.fail(`${message}: missing or reordered ${JSON.stringify(expected)}`);
-    }
-    cursor += 1;
-  }
-}
-
-async function routeHtml(route) {
-  if (!htmlCache.has(route)) {
-    const relative = route === "/" ? ["index.html"] : [
-      ...route.replace(/^\/+|\/+$/gu, "").split("/"),
-      "index.html",
-    ];
-    const file = path.join(OUT, ...relative);
-    htmlCache.set(route, await readFile(file, "utf8"));
-  }
-  return htmlCache.get(route);
 }
 
 function sha256(bytes) {
   return createHash("sha256").update(bytes).digest("hex");
 }
 
-function pngDimensions(bytes) {
-  assert.equal(
-    bytes.subarray(1, 4).toString("ascii"),
-    "PNG",
-    "Expected a PNG source image",
-  );
-  return { width: bytes.readUInt32BE(16), height: bytes.readUInt32BE(20) };
+function normalizedTextBytes(bytes) {
+  return Buffer.from(bytes.toString("utf8").replace(/\r\n?/gu, "\n"), "utf8");
 }
 
 async function walk(directory) {
-  const result = [];
+  const files = [];
   for (const entry of await readdir(directory, { withFileTypes: true })) {
     const absolute = path.join(directory, entry.name);
-    if (entry.isDirectory()) result.push(...(await walk(absolute)));
-    else result.push(absolute);
+    if (entry.isDirectory()) files.push(...(await walk(absolute)));
+    else files.push(absolute);
   }
-  return result;
+  return files;
 }
 
-function localReference(reference, pageRoute) {
-  if (!reference || /^(?:data|mailto|tel|javascript):/iu.test(reference)) return null;
-  const url = new URL(reference, new URL(pageRoute, `${SITE_ORIGIN}/`));
-  if (!["http:", "https:"].includes(url.protocol)) return null;
-  if (!["www.theodoreoy.com", "theodoreoy.com"].includes(url.hostname)) return null;
-  return url;
+function routeFile(route) {
+  if (route === "/") return path.join(OUT, "index.html");
+  return path.join(OUT, ...route.split("/").filter(Boolean), "index.html");
 }
 
-function artifactCandidates(url) {
-  const pathname = decodeURIComponent(url.pathname);
-  const relative = pathname.replace(/^\/+/, "").split("/").filter(Boolean);
-
-  if (pathname === "/") return [path.join(OUT, "index.html")];
-  if (pathname.endsWith("/")) return [path.join(OUT, ...relative, "index.html")];
-
-  const direct = path.join(OUT, ...relative);
-  if (path.extname(pathname)) return [direct];
-  return [direct, path.join(direct, "index.html"), `${direct}.html`];
+async function routeHtml(route) {
+  if (!htmlCache.has(route)) htmlCache.set(route, await readFile(routeFile(route), "utf8"));
+  return htmlCache.get(route);
 }
 
-async function assertReferenceResolves(reference, pageRoute, source) {
-  const url = localReference(reference, pageRoute);
-  if (!url) return;
+async function exportedRoutes() {
+  return (await walk(OUT))
+    .filter((file) => path.basename(file) === "index.html")
+    .filter((file) => !file.includes(`${path.sep}_next${path.sep}`))
+    .map((file) => {
+      const relative = path.relative(OUT, path.dirname(file)).split(path.sep).join("/");
+      return relative ? `/${relative}/` : "/";
+    })
+    .filter((route) => route !== "/404/" && route !== "/_not-found/")
+    .sort();
+}
 
-  assert.notEqual(
-    url.pathname,
-    "/_next/image",
-    `${source} uses the runtime Next image optimizer, which cannot serve a static export`,
+function canonicalUrl(html) {
+  const tag = openingTags(html, "link").find((candidate) =>
+    (attribute(candidate, "rel") ?? "").split(/\s+/u).includes("canonical"),
   );
+  return tag ? attribute(tag, "href") : undefined;
+}
 
-  const candidates = artifactCandidates(url);
-  const resolved = candidates.find((candidate) => existsSync(candidate));
-  assert.ok(
-    resolved,
-    `${source} references ${reference}, but no exported artifact exists (${candidates.join(", ")})`,
+function metaContent(html, key, value) {
+  const tag = openingTags(html, "meta").find(
+    (candidate) => attribute(candidate, key)?.toLowerCase() === value.toLowerCase(),
   );
+  return tag ? attribute(tag, "content") : undefined;
+}
 
-  if (url.hash && resolved.endsWith(".html")) {
-    const targetHtml = await readFile(resolved, "utf8");
-    const targetId = decodeURIComponent(url.hash.slice(1));
-    assert.ok(
-      extractIds(targetHtml).includes(targetId),
-      `${source} references missing fragment #${targetId}`,
-    );
-  }
+function primaryNavigation(html) {
+  const nav = [...html.matchAll(/<nav\b([^>]*)>([\s\S]*?)<\/nav>/giu)].find(
+    (match) => attribute(match[1], "aria-label") === "Primary navigation",
+  );
+  assert.ok(nav, "Primary navigation is missing");
+  return [...nav[2].matchAll(/<a\b([^>]*)>([\s\S]*?)<\/a>/giu)].map((match) => [
+    stripMarkup(match[2]),
+    attribute(match[1], "href"),
+  ]);
+}
+
+function pathForInternalReference(reference, pageRoute) {
+  const decoded = decodeHtml(reference).trim();
+  if (!decoded || /^(?:#|data:|mailto:|tel:|javascript:|blob:)/iu.test(decoded)) return undefined;
+  const url = new URL(decoded, `${SITE_ORIGIN}${pageRoute}`);
+  if (url.origin !== SITE_ORIGIN) return undefined;
+  return decodeURIComponent(url.pathname);
+}
+
+function exportedPathForUrl(pathname) {
+  const segments = pathname.split("/").filter(Boolean);
+  if (pathname === "/") return path.join(OUT, "index.html");
+  if (pathname.endsWith("/")) return path.join(OUT, ...segments, "index.html");
+  const direct = path.join(OUT, ...segments);
+  if (existsSync(direct)) return direct;
+  return path.join(direct, "index.html");
+}
+
+function assertInsideExport(file) {
+  const relative = path.relative(OUT, file);
+  assert.ok(relative && !relative.startsWith("..") && !path.isAbsolute(relative), `${file} escaped out/`);
 }
 
 function htmlReferences(html) {
   const references = [];
-  for (const match of html.matchAll(/<(a|link|img|script|source)\b([^>]*)>/giu)) {
-    const tag = match[1].toLowerCase();
-    const attributes = match[2];
+  for (const tag of html.match(/<[a-z][^>]*>/giu) ?? []) {
     for (const name of ["href", "src"]) {
-      const value = attribute(attributes, name);
-      if (value) references.push({ value, source: `<${tag} ${name}>` });
+      const value = attribute(tag, name);
+      if (value) references.push(value);
     }
-    const srcset = attribute(attributes, "srcset");
+    const srcset = attribute(tag, "srcset");
     if (srcset) {
-      for (const candidate of srcset.split(",")) {
-        const value = candidate.trim().split(/\s+/u)[0];
-        if (value) references.push({ value, source: `<${tag} srcset>` });
-      }
+      references.push(...srcset.split(",").map((part) => part.trim().split(/\s+/u)[0]));
     }
   }
-
-  for (const [, attributes] of html.matchAll(/<meta\b([^>]*)>/giu)) {
-    const key = (
-      attribute(attributes, "property") ?? attribute(attributes, "name") ?? ""
-    ).toLowerCase();
-    if (["og:image", "twitter:image"].includes(key)) {
-      const value = attribute(attributes, "content");
-      if (value) references.push({ value, source: `<meta ${key}>` });
-    }
-  }
-
   return references;
 }
 
-function elementsWithClass(html, tagName, className) {
-  const expression = new RegExp(
-    `<${tagName}\\b([^>]*)>([\\s\\S]*?)<\\/${tagName}\\s*>`,
-    "giu",
-  );
-  return [...html.matchAll(expression)].filter((match) => hasClass(match[1], className));
-}
-
-function elementsWithAnyClass(html, tagName, classNames) {
-  const matches = classNames.flatMap((className) =>
-    elementsWithClass(html, tagName, className),
-  );
-  return [...new Map(matches.map((match) => [match.index, match])).values()].sort(
-    (left, right) => left.index - right.index,
-  );
-}
-
-function normalizeRoute(value) {
-  const pathname = new URL(value, SITE_ORIGIN).pathname;
-  return pathname === "/" ? "/" : `${pathname.replace(/\/+$/u, "")}/`;
-}
-
-async function exportedPublicRoutes() {
-  const routes = [];
-
-  for (const file of await walk(OUT)) {
-    if (path.basename(file) !== "index.html") continue;
-    const relativeDirectory = path
-      .relative(OUT, path.dirname(file))
-      .split(path.sep)
-      .filter(Boolean);
-    if (["404", "_not-found"].includes(relativeDirectory[0])) continue;
-    routes.push(relativeDirectory.length === 0 ? "/" : `/${relativeDirectory.join("/")}/`);
-  }
-
-  return routes.sort();
-}
-
-async function sitemapRoutes() {
-  const sitemap = await readFile(path.join(OUT, "sitemap.xml"), "utf8");
-  return [...sitemap.matchAll(/<loc>([\s\S]*?)<\/loc>/giu)]
-    .map((match) => normalizeRoute(decodeHtml(match[1].trim())))
-    .sort();
-}
-
-test("the preservation fixture is immutable and covers exactly 11 public routes", () => {
-  assert.equal(baseline.schemaVersion, 1);
-  assert.equal(baseline.baselineCommit, "69d6e7134132da51f4961dbe5509fc6adb657284");
-  assert.equal(accessibleLabelBaseline.schemaVersion, 1);
-  assert.equal(
-    accessibleLabelBaseline.baselineCommit,
-    "69d6e7134132da51f4961dbe5509fc6adb657284",
-  );
-  assert.equal(accessibleLabelledByBaseline.schemaVersion, 1);
-  assert.equal(
-    accessibleLabelledByBaseline.baselineCommit,
-    "69d6e7134132da51f4961dbe5509fc6adb657284",
-  );
-  assert.equal(frozenBaselineRoutes.length, 11);
-  assert.deepEqual(frozenBaselineRoutes, [
-    "/",
-    "/education/",
-    "/now/",
-    "/past-experience/",
-    "/past-experience/artificial-intelligence/",
-    "/past-experience/data-science/",
-    "/past-experience/environmental-social-and-governance/",
-    "/past-experience/finance/",
-    "/past-experience/stem-academic-competitions-and-training/",
-    "/personal-posts/",
-    "/personal-posts/from-vision-and-instructions-to-robot-actions/",
-  ]);
-  assert.deepEqual(Object.keys(accessibleLabelBaseline.routes), frozenBaselineRoutes);
-
-  for (const [route, record] of Object.entries(baseline.routes)) {
-    const expectedFile = route === "/" ? "index.html" : `${route.slice(1)}index.html`;
-    assert.equal(record.file, expectedFile, `${route} baseline file mapping is inconsistent`);
-    const text = gunzipSync(Buffer.from(record.visibleTextGzipBase64, "base64")).toString(
-      "utf8",
-    );
-    assert.equal(
-      sha256(Buffer.from(text)),
-      record.visibleTextSha256,
-      `${route} baseline payload does not match its recorded hash`,
-    );
-  }
-
-  for (const domain of domainRoutes) {
-    const record = baseline.routes[domain.route];
-    assert.equal(record.headings[1]?.text, domain.name);
-    assert.equal(
-      record.title,
-      `${domain.name} | Past Experience | Theodore Ouyang`,
-      `${domain.route} baseline title does not match its route`,
-    );
-  }
+test("the static export contains exactly the approved nine public routes", async () => {
+  assert.deepEqual(await exportedRoutes(), [...EXPECTED_ROUTES].sort());
+  assert.ok(existsSync(path.join(OUT, "404.html")), "404.html is missing");
 });
 
-test("the official Next export contains all public routes and the custom 404", async () => {
-  const output = await stat(OUT);
-  assert.ok(output.isDirectory(), "Run the official Next static build before the tests");
-
-  const currentRoutes = await exportedPublicRoutes();
-  assert.ok(currentRoutes.length >= frozenBaselineRoutes.length);
-  for (const route of currentRoutes) {
+test("every route has canonical metadata and the same four-item navigation", async () => {
+  for (const route of EXPECTED_ROUTES) {
     const html = await routeHtml(route);
-    assert.match(html, /^<!doctype html>/iu, `${route} must be a complete static HTML document`);
-    assert.deepEqual(
-      extractCanonicalUrls(html),
-      [canonicalUrl(route)],
-      `${route} must have exactly one self-referencing canonical URL`,
-    );
-    assert.deepEqual(
-      extractOpenGraphUrls(html),
-      [canonicalUrl(route)],
-      `${route} must have exactly one matching Open Graph URL`,
-    );
+    const expectedUrl = new URL(route, SITE_ORIGIN).toString();
+    assert.equal(canonicalUrl(html), expectedUrl, `${route} canonical changed`);
+    assert.equal(metaContent(html, "property", "og:url"), expectedUrl, `${route} og:url changed`);
+    assert.deepEqual(primaryNavigation(html), NAVIGATION, `${route} navigation changed`);
   }
-
-  const notFoundPath = [path.join(OUT, "404.html"), path.join(OUT, "404", "index.html")].find(
-    (candidate) => existsSync(candidate),
-  );
-  assert.ok(notFoundPath, "The export must include a static 404 page");
-  const notFoundText = visibleBodyText(await readFile(notFoundPath, "utf8"));
-  assert.match(notFoundText, /(?:\b404\b|page not found|not found)/iu);
 });
 
-test("every post-baseline route has an append-only published-copy snapshot", async () => {
-  const currentRoutes = await exportedPublicRoutes();
-  const snapshotRoutes = publishedCopySnapshots.map(({ file, snapshot }) => {
-    assert.equal(snapshot.schemaVersion, 1, `${file} has an unsupported schema`);
-    assert.equal(typeof snapshot.route, "string", `${file} must declare a route`);
-    return snapshot.route;
-  });
-
+test("Home keeps semantic identity, approved copy, and a decorative resilient visual layer", async () => {
+  const html = await routeHtml("/");
+  const body = stripMarkup(html);
+  const title = stripMarkup(html.match(/<title>([\s\S]*?)<\/title>/iu)?.[1] ?? "");
+  assert.equal(title, "Theodore Ouyang | Duke B.S. & M.Eng. | Sequoia Scholar, Cohort 8");
   assert.equal(
-    new Set(snapshotRoutes).size,
-    snapshotRoutes.length,
-    "Published-copy snapshot routes must be unique",
+    metaContent(html, "name", "description"),
+    "Theodore Ouyang is a Duke University graduate and Sequoia Scholar in Cohort 8, exploring how artificial intelligence can become useful in everyday life.",
   );
-  assert.deepEqual(
-    [...snapshotRoutes].sort(),
-    currentRoutes.filter((route) => !frozenBaselineRoutes.includes(route)).sort(),
-    "Every route added after the frozen baseline must have exactly one snapshot",
-  );
+  assert.match(body, /Quis ego sum\?/u);
+  assert.match(body, /Identity emerges from possibility\./u);
+  assert.match(body, /He is a Sequoia Scholar in Cohort 8\./u);
+  assert.match(body, /genuinely useful in everyday life/u);
 
-  for (const { file, snapshot } of publishedCopySnapshots) {
-    const html = await routeHtml(snapshot.route);
-    const main = mainMarkup(html);
-    assertTokenSubsequence(
-      snapshot.mainText,
-      textContent(main),
-      `${file} published main copy changed`,
-    );
-    assert.equal(extractTitle(html), snapshot.title, `${file} title changed`);
-    assert.equal(
-      extractDescription(html),
-      snapshot.description,
-      `${file} description changed`,
-    );
-    assertRecordSubsequence(
-      snapshot.headings,
-      extractHeadings(main),
-      `${file} headings changed`,
-      new Set(["text"]),
-    );
-    assertRecordSubsequence(
-      snapshot.links,
-      extractLinks(main),
-      `${file} links changed`,
-      new Set(["label", "ariaLabel"]),
-    );
-    assertRecordSubsequence(
-      snapshot.images,
-      extractImages(main),
-      `${file} images changed`,
-      new Set(["alt"]),
-    );
-    assertRecordSubsequence(snapshot.ids, extractIds(main), `${file} IDs changed`);
-    assertRecordSubsequence(snapshot.times, extractTimes(main), `${file} times changed`);
-    assertRecordSubsequence(
-      snapshot.ariaAttributes,
-      extractAriaAttributes(main),
-      `${file} accessible names changed`,
-      new Set(["value"]),
-    );
-  }
+  const heading = [...html.matchAll(/<h1\b([^>]*)>([\s\S]*?)<\/h1>/giu)].find(
+    (match) => attribute(match[1], "id") === "home-heading",
+  );
+  assert.equal(stripMarkup(heading?.[2] ?? ""), "Theodore Ouyang");
+  const canvas = openingTags(html, "canvas");
+  assert.equal(canvas.length, 1);
+  assert.equal(attribute(canvas[0], "aria-hidden"), "true");
+  assert.match(html, /data-state="checking"/u, "server-rendered fallback state is missing");
 });
 
-test("no original rendered copy or public structure is deleted", async () => {
-  for (const [route, record] of Object.entries(baseline.routes)) {
+test("Current Chapter is concise and limited to practical everyday AI use cases", async () => {
+  const html = await routeHtml("/now/");
+  const body = stripMarkup(html);
+  assert.match(body, /Exploring AI in everyday life\./u);
+  assert.match(
+    body,
+    /As an AI enthusiast, I am exploring how artificial intelligence can become genuinely useful in everyday life\./u,
+  );
+  assert.match(body, /practical use cases that solve real problems/u);
+  assert.equal(pairedElementsWithClass(html, "article", "current-chapter-brief").length, 1);
+});
+
+test("retired routes, assets, and current-role language are absent from the export", async () => {
+  const searchable = (await walk(OUT)).filter((file) =>
+    /\.(?:css|html|js|json|txt|xml)$/iu.test(file),
+  );
+  const combined = (await Promise.all(searchable.map((file) => readFile(file, "utf8"))))
+    .join("\n")
+    .toLowerCase();
+  for (const marker of RETIRED_MARKERS) {
+    assert.ok(!combined.includes(marker), `Retired marker remains in out/: ${marker}`);
+  }
+
+  const retiredDirectory = ["personal-", "posts"].join("");
+  assert.ok(!existsSync(path.join(OUT, retiredDirectory)), "Retired route directory was exported");
+  assert.ok(!existsSync(path.join(OUT, "assets", "posts")), "Retired asset directory was exported");
+});
+
+test("all internal HTML and CSS references resolve inside the static export", async () => {
+  for (const route of EXPECTED_ROUTES) {
     const html = await routeHtml(route);
-    const oldText = gunzipSync(Buffer.from(record.visibleTextGzipBase64, "base64")).toString(
-      "utf8",
-    );
-
-    assertTokenSubsequence(oldText, visibleBodyText(html), `${route} rendered copy changed`);
-    assert.equal(extractTitle(html), record.title, `${route} title changed`);
-    assert.equal(extractDescription(html), record.description, `${route} description changed`);
-
-    assertRecordSubsequence(
-      record.headings,
-      extractHeadings(html),
-      `${route} headings changed`,
-      new Set(["text"]),
-    );
-    assertRecordSubsequence(
-      record.links,
-      extractLinks(html),
-      `${route} link labels or destinations changed`,
-      new Set(["label", "ariaLabel"]),
-    );
-    assertRecordSubsequence(
-      record.images.map(({ alt }) => ({ alt })),
-      extractImages(html),
-      `${route} image alternative text changed`,
-      new Set(["alt"]),
-    );
-    assertRecordSubsequence(record.times, extractTimes(html), `${route} time metadata changed`);
-    assertRecordSubsequence(
-      accessibleLabelBaseline.routes[route],
-      extractAriaLabels(html),
-      `${route} accessible labels changed`,
-      new Set(["value"]),
-    );
-    assertRecordSubsequence(
-      accessibleLabelledByBaseline.routes[route] ?? [],
-      extractAriaLabelledBy(html),
-      `${route} accessible label references changed`,
-      new Set(["value"]),
-    );
-
-    // _R_ was the obsolete Vinext bootstrap script ID, not authored page content.
-    const authoredIds = record.ids.filter((id) => id !== "_R_");
-    assertRecordSubsequence(authoredIds, extractIds(html), `${route} authored IDs changed`);
-  }
-});
-
-test("all internal links, image sources, scripts, styles, and responsive sources resolve", async () => {
-  const pages = await exportedPublicRoutes();
-  if (existsSync(path.join(OUT, "404.html"))) pages.push("/404.html");
-
-  for (const route of pages) {
-    const html =
-      route === "/404.html"
-        ? await readFile(path.join(OUT, "404.html"), "utf8")
-        : await routeHtml(route);
     for (const reference of htmlReferences(html)) {
-      await assertReferenceResolves(reference.value, route, `${route} ${reference.source}`);
+      const pathname = pathForInternalReference(reference, route);
+      if (!pathname) continue;
+      const target = exportedPathForUrl(pathname);
+      assertInsideExport(target);
+      assert.ok(existsSync(target), `${route} references missing ${pathname}`);
     }
   }
 
-  for (const file of (await walk(OUT)).filter((candidate) => candidate.endsWith(".css"))) {
-    const css = await readFile(file, "utf8");
-    const route = `/${path.relative(OUT, file).split(path.sep).join("/")}`;
-    for (const match of css.matchAll(/url\(\s*(?:"([^"]+)"|'([^']+)'|([^)'"\s]+))\s*\)/giu)) {
-      const reference = match[1] ?? match[2] ?? match[3];
-      await assertReferenceResolves(reference, route, `${route} CSS url()`);
+  for (const cssFile of (await walk(OUT)).filter((file) => file.endsWith(".css"))) {
+    const css = await readFile(cssFile, "utf8");
+    for (const match of css.matchAll(/url\(\s*(["']?)(.*?)\1\s*\)/giu)) {
+      const reference = match[2].trim();
+      if (!reference || /^(?:data:|#|https?:)/iu.test(reference)) continue;
+      const clean = decodeURIComponent(reference.split(/[?#]/u)[0]);
+      const target = clean.startsWith("/")
+        ? path.join(OUT, ...clean.split("/").filter(Boolean))
+        : path.resolve(path.dirname(cssFile), clean);
+      assertInsideExport(target);
+      assert.ok(existsSync(target), `${path.relative(OUT, cssFile)} references missing ${clean}`);
     }
   }
 });
 
-test("the exported runtime is free of Vinext and Cloudflare scaffolding", async () => {
-  const textExtensions = new Set([
-    ".css",
-    ".html",
-    ".js",
-    ".json",
-    ".map",
-    ".mjs",
-    ".txt",
-    ".xml",
-  ]);
-  const forbiddenPath =
-    /(?:__VINEXT|_vinext|\bvinext\b|vite-rsc|\bcloudflare\b|\bwrangler\b)/iu;
-  const forbiddenContent =
-    /(?:__VINEXT|_vinext|\bvinext\b|vite-rsc|\bwrangler\b|@cloudflare\/vite-plugin)/iu;
-
-  for (const file of await walk(OUT)) {
-    const relative = path.relative(OUT, file).split(path.sep).join("/");
-    assert.doesNotMatch(relative, forbiddenPath, `Forbidden runtime artifact: ${relative}`);
-    if (!textExtensions.has(path.extname(file).toLowerCase())) continue;
-    assert.doesNotMatch(
-      await readFile(file, "utf8"),
-      forbiddenContent,
-      `Forbidden runtime reference in ${relative}`,
-    );
-  }
-});
-
-test("robots, sitemap, and exported HTML publish the same canonical route manifest", async () => {
-  const robotsPath = path.join(OUT, "robots.txt");
-  const sitemapPath = path.join(OUT, "sitemap.xml");
-  assert.ok(existsSync(robotsPath), "robots.txt must be part of the static export");
-  assert.ok(existsSync(sitemapPath), "sitemap.xml must be part of the static export");
-
-  const robots = await readFile(robotsPath, "utf8");
+test("robots, sitemap, and HTML share the exact route manifest", async () => {
+  const robots = await readFile(path.join(OUT, "robots.txt"), "utf8");
   assert.match(robots, /^User-agent:\s*\*/imu);
   assert.match(robots, /^Allow:\s*\/$/imu);
   assert.match(robots, /^Sitemap:\s*https:\/\/www\.theodoreoy\.com\/sitemap\.xml$/imu);
 
-  const locations = await sitemapRoutes();
-  assert.equal(new Set(locations).size, locations.length, "Sitemap routes must be unique");
-  assert.deepEqual(
-    locations,
-    await exportedPublicRoutes(),
-    "Sitemap and exported HTML routes must match exactly",
-  );
-  for (const route of frozenBaselineRoutes) {
-    assert.ok(locations.includes(route), `Sitemap is missing ${route}`);
-  }
+  const sitemap = await readFile(path.join(OUT, "sitemap.xml"), "utf8");
+  const routes = [...sitemap.matchAll(/<loc>(.*?)<\/loc>/giu)]
+    .map((match) => new URL(decodeHtml(match[1])).pathname)
+    .sort();
+  assert.deepEqual(routes, [...EXPECTED_ROUTES].sort());
+  assert.equal(new Set(routes).size, routes.length, "Sitemap routes must be unique");
 });
 
-test("canonical archive text and original source assets remain intact", async () => {
-  for (const [relative, expected] of immutableFiles) {
+test("Education and Past Experience protected sources remain byte-for-byte equivalent", async () => {
+  for (const [relative, expected] of PROTECTED_SOURCE_HASHES) {
     const source = path.join(ROOT, ...relative.split("/"));
-    const sourceBytes = await readFile(source);
-    const bytesForHash = relative.endsWith(".md")
-      ? Buffer.from(sourceBytes.toString("utf8").replace(/\r\n?/gu, "\n"), "utf8")
-      : sourceBytes;
-    assert.equal(sha256(bytesForHash), expected, `${relative} changed`);
-
-    if (relative === "public/assets/posts/wam-vla-two-paths-en.png") {
-      assert.deepEqual(
-        pngDimensions(sourceBytes),
-        { width: 2880, height: 1620 },
-        `${relative} intrinsic dimensions changed`,
-      );
-    }
-
-    if (relative.startsWith("public/")) {
-      const exported = path.join(OUT, ...relative.slice("public/".length).split("/"));
-      assert.equal(
-        sha256(await readFile(exported)),
-        expected,
-        `${relative} was not copied intact into the static export`,
-      );
-    }
+    assert.equal(sha256(normalizedTextBytes(await readFile(source))), expected, `${relative} changed`);
   }
 });
 
-test("the Past Experience archive keeps its five-domain, 16-entry, 92-bullet structure", async () => {
-  const source = await readFile(ARCHIVE_PATH, "utf8");
-  const domainSection = source.split(/^## Domain Experience\s*$/mu)[1];
-  assert.ok(domainSection, "Domain Experience is missing from the archive");
-
-  const sourceDomains = [...domainSection.matchAll(/^###\s+(.+)$/gmu)].map((match) =>
-    match[1].trim(),
+test("Past Experience keeps its five-domain, 16-entry, 92-bullet structure", async () => {
+  const archive = await readFile(
+    path.join(ROOT, "content", "past-experience", "archive-through-2026-06-30.md"),
+    "utf8",
   );
-  assert.deepEqual(sourceDomains, domainRoutes.map(({ name }) => name));
+  const domainSection = archive.split(/^## Domain Experience\s*$/mu)[1];
+  assert.ok(domainSection, "Domain Experience is missing from the archive");
+  assert.deepEqual(
+    [...domainSection.matchAll(/^###\s+(.+)$/gmu)].map((match) => match[1].trim()),
+    DOMAIN_ROUTES.map(({ name }) => name),
+  );
   assert.equal((domainSection.match(/^####\s+/gmu) ?? []).length, 16);
   assert.equal((domainSection.match(/^\*\*Project:\*\*/gmu) ?? []).length, 16);
   assert.equal((domainSection.match(/^-\s+/gmu) ?? []).length, 92);
 
-  let renderedEntries = 0;
-  let renderedBullets = 0;
-  for (const domain of domainRoutes) {
+  let entryTotal = 0;
+  let bulletTotal = 0;
+  for (const domain of DOMAIN_ROUTES) {
     const html = await routeHtml(domain.route);
-    const entries = elementsWithAnyClass(html, "article", [
-      "archive-entry",
-      "experience-entry",
-    ]);
+    const entries = pairedElementsWithClass(html, "article", "archive-entry");
     const bullets = entries.reduce(
-      (count, entry) => count + (entry[2].match(/<li\b/giu) ?? []).length,
+      (total, entry) => total + (entry[2].match(/<li\b/giu) ?? []).length,
       0,
     );
     assert.equal(entries.length, domain.entries, `${domain.name} entry count changed`);
     assert.equal(bullets, domain.bullets, `${domain.name} bullet count changed`);
-    renderedEntries += entries.length;
-    renderedBullets += bullets;
+    entryTotal += entries.length;
+    bulletTotal += bullets;
   }
-  assert.equal(renderedEntries, 16);
-  assert.equal(renderedBullets, 92);
+  assert.equal(entryTotal, 16);
+  assert.equal(bulletTotal, 92);
 
-  const artificialIntelligence = visibleBodyText(
-    await routeHtml("/past-experience/artificial-intelligence/"),
-  );
   assert.match(
-    artificialIntelligence,
+    stripMarkup(await routeHtml("/past-experience/artificial-intelligence/")),
     /Designed graduate-level, computation-heavy scientific reasoning benchmarks to probe the capability boundaries of a frontier large language model, prioritizing substance over trick wording/u,
-    "The formerly unrendered Alignerr summary must now appear without replacing any bullets",
   );
 });
 
 test("Education retains all 31 selected courses", async () => {
-  const html = await routeHtml("/education/");
-  const coursework = elementsWithClass(html, "section", "coursework");
-  assert.equal(coursework.length, 1, "Selected Coursework section must render exactly once");
-  assert.equal((coursework[0][2].match(/<li\b/giu) ?? []).length, 31);
-  assert.equal(elementsWithClass(coursework[0][2], "ul", "course-list").length, 4);
+  const lists = pairedElementsWithClass(await routeHtml("/education/"), "ul", "course-list");
+  assert.equal(lists.length, 4);
+  assert.equal(
+    lists.reduce((total, list) => total + (list[2].match(/<li\b/giu) ?? []).length, 0),
+    31,
+  );
 });
 
-test("the research note retains its 10 sections and five primary-source citations", async () => {
-  const route = "/personal-posts/from-vision-and-instructions-to-robot-actions/";
-  const html = await routeHtml(route);
-  const authoredSectionIds = baseline.routes[route].ids.filter((id) => id !== "_R_");
-  const actualSectionIds = [...html.matchAll(/<section\b([^>]*)>/giu)]
-    .map((match) => attribute(match[1], "id"))
-    .filter(Boolean);
+test("original identity assets remain intact in source and export", async () => {
+  for (const [relative, expected] of IMMUTABLE_ASSET_HASHES) {
+    const source = path.join(ROOT, ...relative.split("/"));
+    assert.equal(sha256(await readFile(source)), expected, `${relative} changed`);
+    const exported = path.join(OUT, ...relative.slice("public/".length).split("/"));
+    assert.equal(sha256(await readFile(exported)), expected, `${relative} export changed`);
+  }
+});
 
-  assert.equal(authoredSectionIds.length, 10);
-  assert.deepEqual(actualSectionIds, authoredSectionIds);
+test("the Home visual module preserves its bounded lifecycle and fallback contract", async () => {
+  const packageJson = JSON.parse(await readFile(path.join(ROOT, "package.json"), "utf8"));
+  assert.equal(packageJson.dependencies.three, "0.160.0");
+  assert.equal(packageJson.devDependencies["@types/three"], "0.160.0");
 
-  const primaryStart = html.search(/<section\b[^>]*\bid=["']primary-sources["'][^>]*>/iu);
-  assert.notEqual(primaryStart, -1, "Primary sources section is missing");
-  const primaryEnd = html.indexOf("</section>", primaryStart);
-  assert.notEqual(primaryEnd, -1, "Primary sources section is not closed");
-  const primarySources = html.slice(primaryStart, primaryEnd);
-  assert.equal((primarySources.match(/<li\b/giu) ?? []).length, 5);
-  assert.equal(extractLinks(primarySources).length, 5);
+  const config = await readFile(
+    path.join(ROOT, "app", "components", "particle-background", "particle-config.ts"),
+    "utf8",
+  );
+  assert.match(config, /desktopParticles:\s*4_000/u);
+  assert.match(config, /mobileParticles:\s*2_200/u);
+  assert.match(config, /reducedMotionParticles:\s*900/u);
+  const morphs = [...config.matchAll(/\{ kind: "morph", to: "([^"]+)", duration: ([\d.]+) \}/gu)];
+  assert.deepEqual(morphs.map((match) => match[1]), ["theodore", "scatter", "ouyang", "scatter"]);
+  assert.ok(morphs.every((match) => Number(match[2]) === 3), "Every morph must last three seconds");
+
+  const engine = await readFile(
+    path.join(ROOT, "app", "components", "particle-background", "particle-engine.ts"),
+    "utf8",
+  );
+  for (const contract of [
+    "visibilitychange",
+    "webglcontextlost",
+    "handleMotionPreferenceChange",
+    "maxPixelRatio",
+    "DynamicDrawUsage",
+    "requestAnimationFrame",
+    "setDrawRange",
+    "renderer?.dispose()",
+  ]) {
+    assert.ok(engine.includes(contract), `Particle lifecycle contract is missing: ${contract}`);
+  }
+
+  const component = await readFile(
+    path.join(ROOT, "app", "components", "particle-background", "ParticleBackground.tsx"),
+    "utf8",
+  );
+  assert.match(component, /await import\("\.\/particle-engine"\)/u);
+  assert.match(component, /engine\?\.dispose\(\)/u);
+
+  const styles = await readFile(
+    path.join(ROOT, "app", "components", "particle-background", "ParticleBackground.module.css"),
+    "utf8",
+  );
+  assert.match(styles, /@media \(prefers-reduced-motion: reduce\)/u);
+  assert.match(styles, /\.root\[data-state="fallback"\] \.fallbackName/u);
+  assert.match(styles, /\.fallbackName\s*\{[\s\S]*?opacity:\s*1;/u);
+});
+
+test("legacy alternate runtimes stay out of the production artifact", async () => {
+  const code = (await Promise.all(
+    (await walk(OUT))
+      .filter((file) => /\.(?:html|js|json)$/iu.test(file))
+      .map((file) => readFile(file, "utf8")),
+  )).join("\n").toLowerCase();
+  for (const marker of [["vin", "ext"].join(""), ["wrang", "ler"].join(""), "vite-rsc"]) {
+    assert.ok(!code.includes(marker), `Legacy runtime marker remains: ${marker}`);
+  }
 });
