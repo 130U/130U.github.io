@@ -24,17 +24,25 @@ is rendered rather than silently discarded.
 
 The particle field is a Home-only client enhancement. Three.js is dynamically
 loaded outside the shared shell, while semantic identity and copy remain static
-HTML. A single GPU point cloud, capped pixel ratio, adaptive counts, document
-visibility pausing, and explicit disposal bound its cost. Reduced motion,
-coarse-pointer behavior, and WebGL failure all resolve to a static fallback.
+HTML. The first rendered canvas frame uses the stable `THEODORE` target. A
+single GPU point cloud, capped pixel ratio, adaptive counts, document and
+viewport visibility pausing, and explicit disposal bound its cost. Reduced
+motion resolves to a static particle target; coarse-pointer behavior and WebGL
+failure retain a usable fallback.
+
+The CSS fallback and canvas sampler share a platform UI font stack, so the
+fallback cannot change shape while a web font loads. Canvas resize and pointer
+math use the element's own bounds. Initialization returns an explicit success
+state; a lost WebGL context latches the system into fallback and detaches active
+runtime listeners rather than allowing a later ready state to overwrite it.
 
 ## Independent preservation boundary
 
-CI protects the Education and Past Experience source files directly, while the
-artifact suite verifies their normalized SHA-256 hashes and approved structural
-counts. Future published-copy snapshots are append-only. This lets an explicitly
-approved site change retire unrelated content without weakening the protected
-biographical record.
+CI protects the Education, Past Experience, and Current Chapter source files
+directly, while the artifact suite verifies their normalized SHA-256 hashes and
+approved structural counts. Future published-copy snapshots are append-only.
+This lets an explicitly approved site change retire unrelated content without
+weakening the protected biographical record.
 
 ## Image policy
 

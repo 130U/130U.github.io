@@ -6,7 +6,7 @@ Use this map to locate public pages without searching the repository.
 
 | Public page | URL | Primary source |
 |---|---|---|
-| Home — “Quis ego sum?” | `/` | `app/page.tsx` and `app/components/particle-background/` |
+| Home — particle stage and profile | `/` | `app/page.tsx`, `app/home.module.css`, and `app/components/particle-background/` |
 | Education | `/education/` | `app/education/page.tsx` |
 | Past Experience directory | `/past-experience/` | `app/past-experience/page.tsx` |
 | All five Past Experience domains | `/past-experience/<slug>/` | `app/lib/content/experience.ts`, `content/past-experience/archive-through-2026-06-30.md`, and `app/past-experience/[slug]/page.tsx` |

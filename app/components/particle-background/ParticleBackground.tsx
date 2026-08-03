@@ -21,14 +21,16 @@ export function ParticleBackground() {
         const { ParticleEngine } = await import("./particle-engine");
         if (cancelled) return;
         engine = new ParticleEngine(canvas, {
-          onUnavailable: () => setState("fallback"),
+          onUnavailable: () => {
+            if (!cancelled) setState("fallback");
+          },
         });
-        await engine.initialize();
+        const ready = await engine.initialize();
         if (cancelled) {
           engine.dispose();
           return;
         }
-        setState("ready");
+        setState(ready ? "ready" : "fallback");
       } catch {
         engine?.dispose();
         if (!cancelled) setState("fallback");
@@ -46,7 +48,7 @@ export function ParticleBackground() {
     <div className={styles.root} data-state={state}>
       <canvas className={styles.canvas} ref={canvasRef} aria-hidden="true" />
       <span className={styles.fallbackName} aria-hidden="true">
-        Theodore Ouyang
+        Theodore
       </span>
     </div>
   );

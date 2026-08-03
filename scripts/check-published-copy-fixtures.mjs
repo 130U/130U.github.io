@@ -19,6 +19,7 @@ const isRootCommit = headCommitLine.split(/\s+/u).length === 1;
 
 const protectedPathspecs = [
   ":(literal)app/education/page.tsx",
+  ":(literal)app/now/page.tsx",
   ":(literal)app/past-experience/page.tsx",
   ":(literal)app/past-experience/[slug]/page.tsx",
   ":(literal)app/past-experience/components/ExperienceDomainPage.tsx",
@@ -45,12 +46,12 @@ let comparisonMessage;
 if (mergeBaseCheck.status === 0) {
   revisions = [`${baseSha}...HEAD`];
   comparisonMessage =
-    "Protected Education and Past Experience sources are unchanged; published-copy snapshots contain additions only.";
+    "Protected Education, Past Experience, and Current Chapter sources are unchanged; published-copy snapshots contain additions only.";
 } else if (isAuthorizedRootReset) {
   if (mergeBaseCheck.status === 1) {
     revisions = [baseSha, "HEAD"];
     comparisonMessage =
-      "Authorized root reset detected; direct tree comparison confirms protected sources are unchanged and published-copy snapshots contain additions only.";
+      "Authorized root reset detected; direct tree comparison confirms protected Education, Past Experience, and Current Chapter sources are unchanged and published-copy snapshots contain additions only.";
   } else {
     const emptyTreeSha = execFileSync(
       "git",
@@ -59,7 +60,7 @@ if (mergeBaseCheck.status === 0) {
     ).trim();
     revisions = [emptyTreeSha, "HEAD"];
     comparisonMessage =
-      "Authorized root reset detected without the previous object; protected sources and preservation snapshots are introduced as additions.";
+      "Authorized root reset detected without the previous object; protected Education, Past Experience, and Current Chapter sources and preservation snapshots are introduced as additions.";
   }
 } else {
   throw new Error(
@@ -88,7 +89,7 @@ const forbidden = changes
 
 if (forbidden.length > 0) {
   throw new Error(
-    "Protected Education and Past Experience sources are immutable, and published-copy snapshots are append-only; modification, deletion, and rename are forbidden:\n" +
+    "Protected Education, Past Experience, and Current Chapter sources are immutable, and published-copy snapshots are append-only; modification, deletion, and rename are forbidden:\n" +
       forbidden.join("\n"),
   );
 }

@@ -63,7 +63,7 @@ Pull-request validation and main-only GitHub Pages deployment.
 
 ## Maintenance rules
 
-1. Do not modify Education or Past Experience source text.
+1. Do not modify Education, Past Experience, or Current Chapter source text.
 2. Add repeatable experience content through its registry; do not clone route wrappers.
 3. Keep one canonical slug/path definition per collection.
 4. Preserve original identity assets and generate derivatives through the script.
