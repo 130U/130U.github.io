@@ -29,14 +29,6 @@ const jobs = [
         image.resize({ width, withoutEnlargement: true }).webp({ quality: 84, effort: 6 }),
     },
   ]),
-  ...[720, 1440].map((width) => ({
-    source: join(publicRoot, "posts", "wam-vla-two-paths-en.png"),
-    destination: join(publicRoot, "posts", `wam-vla-two-paths-en-${width}.webp`),
-    transform: (image) =>
-      image
-        .resize({ width, withoutEnlargement: true })
-        .webp({ quality: 92, effort: 6, smartSubsample: true }),
-  })),
   {
     source: join(publicRoot, "brand", "og.png"),
     destination: join(publicRoot, "brand", "og-1774.jpg"),

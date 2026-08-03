@@ -5,12 +5,17 @@ import { navigation, type ActivePage } from "../lib/content/site";
 export function SiteShell({
   active,
   children,
+  background,
+  variant = "default",
 }: {
   active?: ActivePage;
   children: ReactNode;
+  background?: ReactNode;
+  variant?: "default" | "particle";
 }) {
   return (
-    <div className="site-shell">
+    <div className={`site-shell site-shell--${variant}`}>
+      {background}
       <a className="skip-link" href="#main-content">
         Skip to main content
       </a>
@@ -60,7 +65,7 @@ export function SiteShell({
           </div>
           <p className="profile-name">Theodore Ouyang</p>
           <p className="sidebar-bio">
-            <span>Strategy at a World Model Unicorn</span>
+            <span>Exploring practical AI use cases</span>
             <span>Duke B.S. &amp; M.Eng.</span>
             <span>Sequoia Scholar, Cohort 8</span>
           </p>

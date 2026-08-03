@@ -1,35 +1,45 @@
 import type { Metadata } from "next";
 import { SiteShell } from "./components/SiteShell";
-import { createPageMetadata, HOME_TITLE } from "./lib/content/site";
+import { ParticleBackground } from "./components/particle-background/ParticleBackground";
+import {
+  createPageMetadata,
+  DEFAULT_DESCRIPTION,
+  HOME_TITLE,
+} from "./lib/content/site";
 
 export const metadata: Metadata = createPageMetadata({
   title: HOME_TITLE,
-  description:
-    "Theodore Ouyang works at the intersection of artificial intelligence, strategy, and finance, with a current focus on strategy at a world model unicorn.",
+  description: DEFAULT_DESCRIPTION,
   path: "/",
   absoluteTitle: true,
 });
 
 export default function Home() {
   return (
-    <SiteShell active="home">
-      <header className="page-intro plain-page-intro">
-        <h1 lang="la">Quis ego sum?</h1>
-      </header>
+    <SiteShell
+      active="home"
+      variant="particle"
+      background={<ParticleBackground />}
+    >
+      <section className="home-hero" aria-labelledby="home-heading">
+        <div className="home-hero-intro">
+          <p className="home-question" lang="la">Quis ego sum?</p>
+          <h1 className="visually-hidden" id="home-heading">
+            Theodore Ouyang
+          </h1>
+          <p className="home-thesis">Identity emerges from possibility.</p>
+        </div>
 
-      <section className="summary-copy summary-copy-alone" aria-label="Personal summary">
-        <p>
-          Theodore Ouyang holds a Bachelor of Science and a Master of
-          Engineering from Duke University. He works at the intersection of
-          artificial intelligence, strategy, and finance, and currently
-          focuses on strategy at a unicorn developing world models.
-        </p>
-        <p>
-          His work centers on translating frontier AI capabilities into
-          products, operating models, and long-term business advantage,
-          particularly in financial and other high-stakes decision
-          environments. He is also a Sequoia Scholar in Cohort 8.
-        </p>
+        <div className="home-summary-panel" aria-label="Personal summary">
+          <p>
+            Theodore Ouyang holds a Bachelor of Science and a Master of
+            Engineering from Duke University. His interests span artificial
+            intelligence, strategy, and finance, with a particular curiosity
+            about how emerging technologies become genuinely useful in everyday
+            life.
+          </p>
+          <p>He is a Sequoia Scholar in Cohort 8.</p>
+        </div>
       </section>
     </SiteShell>
   );

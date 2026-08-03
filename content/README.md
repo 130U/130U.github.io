@@ -8,6 +8,5 @@ of the interface.
 - The parser rejects unknown or duplicate metadata, missing required fields,
   empty entries, and registry/archive drift during the build.
 
-Current Chapter keeps its copy beside its bespoke page markup. Personal Post
-metadata is centralized in `app/lib/content/posts.ts`, while long-form article
-bodies remain in `app/personal-posts/_articles/`.
+Current Chapter keeps its short, bespoke copy beside its page markup in
+`app/now/page.tsx`.

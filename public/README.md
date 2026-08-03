@@ -5,8 +5,7 @@ transformation.
 
 - `assets/brand/` — browser icons, monogram, and social preview.
 - `assets/fonts/` — approved self-hosted fonts.
-- `assets/posts/` — Personal Posts diagrams and media.
-- `assets/profile/` — profile portrait.
+- `assets/profile/` — profile portrait and responsive derivatives.
 
 Keep asset names stable unless every referencing page and metadata field is
 updated together.

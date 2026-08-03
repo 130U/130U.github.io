@@ -10,10 +10,10 @@ official Next.js conventions discoverable.
 
 Next.js App Router routes and shared interface code.
 
-- `components/` contains the site shell.
-- `lib/content/` contains typed registries, parsing, canonical routes, and site metadata helpers.
+- `components/` contains the site shell and the isolated Home particle system.
+- `lib/content/` contains typed parsing, canonical routes, and site metadata helpers.
 - Static page folders contain bespoke page copy.
-- Dynamic `[slug]` routes render registered collections.
+- The Past Experience `[slug]` route renders its registered collection.
 - `globals.css` owns design tokens, typography, responsive layout, and interaction states.
 
 ### `content/`
@@ -23,9 +23,9 @@ archive is preserved byte-for-byte and parsed only during the static build.
 
 ### `public/assets/`
 
-Original and optimized static assets grouped by role. Original text-bearing
-artwork is immutable; `scripts/optimize-images.mjs` produces deterministic,
-reviewable derivatives without replacing the source.
+Original and optimized identity assets grouped by role.
+`scripts/optimize-images.mjs` produces deterministic, reviewable derivatives
+without replacing the source.
 
 ### `config/`
 
@@ -36,13 +36,13 @@ there automatically.
 
 `preview-static.mjs` serves the exact `out/` artifact locally.
 `optimize-images.mjs` regenerates responsive image derivatives.
+`check-published-copy-fixtures.mjs` enforces protected-source and snapshot rules.
 
 ### `tests/`
 
-Final-artifact integrity tests. The committed fixture is independent of the
-current registries, so application drift cannot rewrite its own expected
-result. Tests also check links, assets, source hashes, route counts, SEO files,
-and removal of legacy runtime markers.
+Final-artifact integrity tests verify the exact nine-route manifest, internal
+links, SEO files, protected source hashes, approved structural counts, particle
+fallback semantics, and removal of retired content.
 
 ### `website-maintenance/`
 
@@ -63,11 +63,12 @@ Pull-request validation and main-only GitHub Pages deployment.
 
 ## Maintenance rules
 
-1. Preserve public URLs and the committed content baseline.
-2. Add repeatable content through its registry; do not clone route wrappers.
+1. Do not modify Education or Past Experience source text.
+2. Add repeatable experience content through its registry; do not clone route wrappers.
 3. Keep one canonical slug/path definition per collection.
-4. Preserve original assets and generate derivatives through the script.
-5. Do not add a database, API layer, CMS, client store, or server runtime without a concrete requirement.
-6. Run `npm.cmd run check` before publishing.
-7. Review the final `out/` artifact locally at desktop and narrow mobile widths.
-8. Never commit `node_modules/`, `.next/`, `out/`, `.npm-cache/`, or `*.tsbuildinfo`.
+4. Preserve original identity assets and generate derivatives through the script.
+5. Keep decorative client code isolated so every page remains statically readable.
+6. Do not add a database, API layer, CMS, client store, or server runtime without a concrete requirement.
+7. Run `npm.cmd run check` before publishing.
+8. Review the final `out/` artifact locally at desktop and narrow mobile widths.
+9. Never commit `node_modules/`, `.next/`, `out/`, `.npm-cache/`, or `*.tsbuildinfo`.

@@ -1,21 +1,20 @@
 # Append-only published copy
 
-Add one JSON file when a route is first published after the frozen 11-route
-baseline. Existing JSON files must never be modified, deleted, or renamed; CI
-enforces additions-only changes against the pull request base commit.
+Add one JSON file when a new route is first published. Existing JSON files must
+never be modified, deleted, or renamed; CI enforces additions-only changes
+against the pull request base commit.
 
 Each snapshot records the route, normalized visible `<main>` text, title,
 description, headings, links, images, IDs, times, and `aria-label` /
-`aria-labelledby` attributes. The artifact test requires every route outside
-the original baseline to have exactly one snapshot and treats the recorded
-content and structure as an ordered subsequence of future exports.
+`aria-labelledby` attributes. The artifact test can require recorded content
+and structure to remain an ordered subsequence of future exports.
 
 Use this shape:
 
 ```json
 {
   "schemaVersion": 1,
-  "route": "/personal-posts/example/",
+  "route": "/future-route/",
   "mainText": "Complete normalized visible main text",
   "title": "Page title",
   "description": "Meta description",
@@ -29,5 +28,5 @@ Use this shape:
 ```
 
 Build first, derive the snapshot from the reviewed `out/<route>/index.html`,
-and inspect the new plaintext fixture in the same pull request. The original
-`content-baseline.json` and `accessible-label-baseline.json` remain unchanged.
+and inspect the new plaintext fixture in the same pull request. Education and
+Past Experience source files remain independently protected by CI and hashes.
