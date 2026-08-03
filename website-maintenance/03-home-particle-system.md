@@ -4,6 +4,20 @@ The Home page uses a progressive visual enhancement. Its HTML identity and
 biographical copy render without JavaScript; Three.js adds an `aria-hidden`
 background only after the client is ready.
 
+## Page composition
+
+- The first viewport is a dedicated particle stage. It contains no biography
+  card or profile sidebar; only the shared navigation and a quiet scroll cue
+  sit above the visual.
+- `app/home.module.css` owns every Home-specific layout rule. The shared
+  Education, Past Experience, and Current Chapter layout remains unchanged.
+- The visible identity, biography, and contact coordinates live in the solid
+  editorial section below the particle stage. This section is the Home page's
+  semantic content and the skip-link target.
+- `SiteShell` keeps the profile sidebar on by default. Home explicitly opts out
+  with `showProfile={false}` and supplies its own frame class, so new routes do
+  not inherit the immersive layout accidentally.
+
 ## Module boundaries
 
 - `ParticleBackground.tsx` owns feature detection and lazy engine loading.
@@ -13,6 +27,8 @@ background only after the client is ready.
 - `particle-config.ts` is the single source for point counts, timing, camera,
   and the `SCATTER → THEODORE → SCATTER → OUYANG` loop.
 - `ParticleBackground.module.css` owns the static fallback and canvas layers.
+  Its absolute layer is bounded to the opening viewport instead of following
+  the reader behind the biography and footer.
 
 ## Accessibility and failure behavior
 

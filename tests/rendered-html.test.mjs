@@ -68,6 +68,10 @@ const PROTECTED_SOURCE_HASHES = new Map([
     "7c2d6dee0679d4737a23ece91ef14c0c903a237188619c680bece518b9945e99",
   ],
   [
+    "app/now/page.tsx",
+    "d7d92116e56afc9f708fdac57030e91eb15d94769d414a2f9d29fbdcba842f8f",
+  ],
+  [
     "app/past-experience/page.tsx",
     "c22ffecb129567be473ce2230103fd80d954faeaa6ebae171c9418085e6769e9",
   ],
@@ -309,7 +313,7 @@ test("every route has canonical metadata and the same four-item navigation", asy
   }
 });
 
-test("Home keeps semantic identity, approved copy, and a decorative resilient visual layer", async () => {
+test("Home gives the particle stage visual priority and moves identity details below it", async () => {
   const html = await routeHtml("/");
   const body = stripMarkup(html);
   const title = stripMarkup(html.match(/<title>([\s\S]*?)<\/title>/iu)?.[1] ?? "");
@@ -318,19 +322,36 @@ test("Home keeps semantic identity, approved copy, and a decorative resilient vi
     metaContent(html, "name", "description"),
     "Theodore Ouyang is a Duke University graduate and Sequoia Scholar in Cohort 8, exploring how artificial intelligence can become useful in everyday life.",
   );
-  assert.match(body, /Quis ego sum\?/u);
-  assert.match(body, /Identity emerges from possibility\./u);
+  assert.doesNotMatch(body, /Quis ego sum\?/u);
+  assert.doesNotMatch(body, /Identity emerges from possibility\./u);
+  assert.match(body, /Exploring practical AI use cases/u);
+  assert.match(body, /Duke B\.S\. & M\.Eng\./u);
   assert.match(body, /He is a Sequoia Scholar in Cohort 8\./u);
   assert.match(body, /genuinely useful in everyday life/u);
+  assert.match(body, /Beijing \| Boston/u);
+  assert.match(body, /10@alumni\.duke\.edu/u);
 
   const heading = [...html.matchAll(/<h1\b([^>]*)>([\s\S]*?)<\/h1>/giu)].find(
     (match) => attribute(match[1], "id") === "home-heading",
   );
   assert.equal(stripMarkup(heading?.[2] ?? ""), "Theodore Ouyang");
+  assert.equal(pairedElementsWithClass(html, "aside", "profile-sidebar").length, 0);
+  assert.match(html, /id="home-profile"/u);
   const canvas = openingTags(html, "canvas");
   assert.equal(canvas.length, 1);
   assert.equal(attribute(canvas[0], "aria-hidden"), "true");
   assert.match(html, /data-state="checking"/u, "server-rendered fallback state is missing");
+});
+
+test("protected routes retain the shared profile sidebar", async () => {
+  for (const route of ["/education/", "/past-experience/", "/now/"]) {
+    const html = await routeHtml(route);
+    assert.equal(
+      pairedElementsWithClass(html, "aside", "profile-sidebar").length,
+      1,
+      `${route} profile sidebar changed`,
+    );
+  }
 });
 
 test("Current Chapter is concise and limited to practical everyday AI use cases", async () => {
@@ -402,7 +423,7 @@ test("robots, sitemap, and HTML share the exact route manifest", async () => {
   assert.equal(new Set(routes).size, routes.length, "Sitemap routes must be unique");
 });
 
-test("Education and Past Experience protected sources remain byte-for-byte equivalent", async () => {
+test("Education, Past Experience, and Current Chapter protected sources remain byte-for-byte equivalent", async () => {
   for (const [relative, expected] of PROTECTED_SOURCE_HASHES) {
     const source = path.join(ROOT, ...relative.split("/"));
     assert.equal(sha256(normalizedTextBytes(await readFile(source))), expected, `${relative} changed`);
