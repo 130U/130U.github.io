@@ -26,15 +26,17 @@ Confirm:
 - the HTML route manifest and sitemap match exactly;
 - the four-item primary navigation appears consistently and has no retired route;
 - the five Past Experience domains, 16 entries, 92 bullets, and 31 courses remain;
-- protected Education and Past Experience source hashes remain unchanged;
+- protected Education, Past Experience, and Current Chapter source hashes remain unchanged;
 - internal links and responsive image sources resolve;
-- the Home canvas is decorative, the fallback is readable, and reduced motion is calm;
+- the Home first paint and first canvas frame are stable, the fallback is
+  readable, reduced motion is calm, and offscreen animation pauses;
 - no retired route, asset directory, copy, or legacy runtime marker appears in `out/`.
 
 Review `out/` with the in-app browser at 1440 × 900, 720 px, 390 × 844,
 and 320 px. Check keyboard skip navigation, focus, mobile nav wrapping, text
-legibility over particles, pointer response on fine pointers, reduced motion,
-WebGL fallback, reduced transparency, and high contrast.
+legibility over particles, pointer response on fine pointers, first-frame
+stability, offscreen pausing, reduced motion, WebGL fallback, reduced
+transparency, and high contrast.
 
 ## Pull request and publishing
 

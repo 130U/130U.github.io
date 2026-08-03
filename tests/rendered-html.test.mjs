@@ -477,6 +477,43 @@ test("Education retains all 31 selected courses", async () => {
   );
 });
 
+test("README mirrors the current four-page site and its operating model", async () => {
+  const readme = await readFile(path.join(ROOT, "README.md"), "utf8");
+  assert.match(readme, /^# Theodore Ouyang$/mu);
+  for (const page of ["Home", "Education", "Past Experience", "Current Chapter"]) {
+    assert.match(readme, new RegExp(`\\b${page}\\b`, "u"), `README is missing ${page}`);
+  }
+  assert.match(readme, /particle[- ]first/iu);
+  assert.match(readme, /(?:same-shape|matching)\s+(?:particle\s+)?fallback/iu);
+  assert.match(readme, /Next(?:\.js)?\s+static export/iu);
+  assert.match(readme, /GitHub Pages/u);
+  assert.match(readme, /npm run check/u);
+  assert.match(readme, /npm run preview:static/u);
+  assert.match(
+    readme,
+    /\[Visit (?:the )?website[^\]]*\]\(https:\/\/www\.theodoreoy\.com\/\)/iu,
+  );
+  assert.doesNotMatch(readme, /Quis ego sum\?/iu);
+
+  const normalized = readme.toLowerCase();
+  for (const marker of RETIRED_MARKERS) {
+    assert.ok(!normalized.includes(marker), `Retired marker remains in README: ${marker}`);
+  }
+});
+
+test("the published-copy guard covers every protected source, including Current Chapter", async () => {
+  const guard = await readFile(
+    path.join(ROOT, "scripts", "check-published-copy-fixtures.mjs"),
+    "utf8",
+  );
+  for (const relative of PROTECTED_SOURCE_HASHES.keys()) {
+    assert.ok(
+      guard.includes(`:(literal)${relative}`),
+      `Published-copy guard is missing protected source: ${relative}`,
+    );
+  }
+});
+
 test("original identity assets remain intact in source and export", async () => {
   for (const [relative, expected] of IMMUTABLE_ASSET_HASHES) {
     const source = path.join(ROOT, ...relative.split("/"));
@@ -486,7 +523,7 @@ test("original identity assets remain intact in source and export", async () => 
   }
 });
 
-test("the Home visual module preserves its bounded lifecycle and fallback contract", async () => {
+test("the Home visual module starts in a legible, bounded, static-first particle state", async () => {
   const packageJson = JSON.parse(await readFile(path.join(ROOT, "package.json"), "utf8"));
   assert.equal(packageJson.dependencies.three, "0.160.0");
   assert.equal(packageJson.devDependencies["@types/three"], "0.160.0");
@@ -495,12 +532,31 @@ test("the Home visual module preserves its bounded lifecycle and fallback contra
     path.join(ROOT, "app", "components", "particle-background", "particle-config.ts"),
     "utf8",
   );
-  assert.match(config, /desktopParticles:\s*4_000/u);
-  assert.match(config, /mobileParticles:\s*2_200/u);
-  assert.match(config, /reducedMotionParticles:\s*900/u);
+  assert.match(config, /initialShape:\s*"theodore"/u);
+  assert.match(config, /desktopParticles:\s*5_000/u);
+  assert.match(config, /mobileParticles:\s*2_800/u);
+  assert.match(config, /reducedMotionParticles:\s*1_600/u);
+  for (const parameter of [
+    /size:\s*2\.25/u,
+    /scatterOpacity:\s*0\.38/u,
+    /wordOpacity:\s*0\.96/u,
+    /minimumGray:\s*0\.18/u,
+    /maximumGray:\s*0\.38/u,
+    /redLift:\s*0\.018/u,
+    /blueDrop:\s*0\.012/u,
+  ]) {
+    assert.match(config, parameter);
+  }
+  assert.match(
+    config,
+    /PARTICLE_TIMELINE:[\s\S]*?\{ kind: "hold", shape: "theodore", duration: [\d.]+ \}/u,
+  );
   const morphs = [...config.matchAll(/\{ kind: "morph", to: "([^"]+)", duration: ([\d.]+) \}/gu)];
-  assert.deepEqual(morphs.map((match) => match[1]), ["theodore", "scatter", "ouyang", "scatter"]);
-  assert.ok(morphs.every((match) => Number(match[2]) === 3), "Every morph must last three seconds");
+  assert.deepEqual(morphs.map((match) => match[1]), ["scatter", "ouyang", "scatter", "theodore"]);
+  assert.ok(
+    morphs.every((match) => Number(match[2]) === 2.8),
+    "Every morph must last 2.8 seconds",
+  );
 
   const engine = await readFile(
     path.join(ROOT, "app", "components", "particle-background", "particle-engine.ts"),
@@ -514,10 +570,48 @@ test("the Home visual module preserves its bounded lifecycle and fallback contra
     "DynamicDrawUsage",
     "requestAnimationFrame",
     "setDrawRange",
+    "IntersectionObserver",
+    "ResizeObserver",
+    "handleViewportIntersection",
+    "handleElementResize",
+    "viewportVisible",
+    "renderCurrentFrame",
+    "syncAnimationState",
+    "resetToInitialShape",
+    "PARTICLE_CONFIG.initialShape",
+    "this.canvas.getBoundingClientRect()",
+    "detachRuntimeListeners",
+    "resizeObserver?.disconnect()",
+    "viewportObserver?.disconnect()",
     "renderer?.dispose()",
   ]) {
     assert.ok(engine.includes(contract), `Particle lifecycle contract is missing: ${contract}`);
   }
+  const initializeBody = engine.match(
+    /async initialize\(\)\s*\{([\s\S]*?)\n\s*\}\n\n\s*private buildColors/u,
+  )?.[1];
+  assert.ok(initializeBody, "Particle initialize() body is missing");
+  assert.ok(
+    initializeBody.indexOf("this.renderCurrentFrame()") <
+      initializeBody.indexOf("this.syncAnimationState()"),
+    "The stable particle frame must render synchronously before animation can start",
+  );
+  assert.match(
+    engine,
+    /private syncAnimationState\(\)[\s\S]*?this\.reducedMotion[\s\S]*?!this\.viewportVisible[\s\S]*?this\.stop\(\)/u,
+  );
+  assert.match(
+    engine,
+    /handleMotionPreferenceChange[\s\S]*?resetToInitialShape\(\)[\s\S]*?this\.reducedMotion[\s\S]*?this\.stop\(\)[\s\S]*?this\.renderCurrentFrame\(\)/u,
+  );
+  assert.match(
+    engine,
+    /handleContextLost[\s\S]*?this\.unavailable = true[\s\S]*?detachRuntimeListeners\(\)[\s\S]*?this\.onUnavailable\(\)/u,
+  );
+  assert.match(
+    engine,
+    /const bounds = this\.canvas\.getBoundingClientRect\(\)[\s\S]*?event\.clientX - bounds\.left[\s\S]*?event\.clientY - bounds\.top/u,
+  );
 
   const component = await readFile(
     path.join(ROOT, "app", "components", "particle-background", "ParticleBackground.tsx"),
@@ -525,6 +619,18 @@ test("the Home visual module preserves its bounded lifecycle and fallback contra
   );
   assert.match(component, /await import\("\.\/particle-engine"\)/u);
   assert.match(component, /engine\?\.dispose\(\)/u);
+  assert.match(component, /onUnavailable:\s*\(\)\s*=>\s*\{\s*if \(!cancelled\)/u);
+  assert.match(component, /const ready = await engine\.initialize\(\)/u);
+  assert.match(component, /setState\(ready \? "ready" : "fallback"\)/u);
+  assert.match(component, /<span[^>]*className=\{styles\.fallbackName\}[^>]*>[\s\S]*?Theodore[\s\S]*?<\/span>/u);
+  assert.doesNotMatch(component, /Theodore Ouyang/u);
+
+  const sampler = await readFile(
+    path.join(ROOT, "app", "components", "particle-background", "shape-samplers.ts"),
+    "utf8",
+  );
+  assert.match(sampler, /system-ui/u);
+  assert.doesNotMatch(sampler, /document\.fonts/u);
 
   const styles = await readFile(
     path.join(ROOT, "app", "components", "particle-background", "ParticleBackground.module.css"),
@@ -532,7 +638,12 @@ test("the Home visual module preserves its bounded lifecycle and fallback contra
   );
   assert.match(styles, /@media \(prefers-reduced-motion: reduce\)/u);
   assert.match(styles, /\.root\[data-state="fallback"\] \.fallbackName/u);
-  assert.match(styles, /\.fallbackName\s*\{[\s\S]*?opacity:\s*1;/u);
+  assert.match(styles, /background-image:[\s\S]*?radial-gradient/u);
+  assert.match(styles, /(?:-webkit-)?background-clip:\s*text/u);
+  assert.match(
+    styles,
+    /@media \(prefers-reduced-motion: reduce\)[\s\S]*?\.root\[data-state="ready"\] \.canvas\s*\{[\s\S]*?opacity:\s*1;[\s\S]*?\.root\[data-state="ready"\] \.fallbackName\s*\{[\s\S]*?opacity:\s*0;/u,
+  );
 });
 
 test("legacy alternate runtimes stay out of the production artifact", async () => {

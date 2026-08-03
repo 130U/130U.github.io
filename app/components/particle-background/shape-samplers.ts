@@ -4,15 +4,8 @@ const SAMPLE_CANVAS_WIDTH = 1_800;
 const SAMPLE_CANVAS_HEIGHT = 520;
 const SAMPLE_FONT_SIZE = 240;
 const SAMPLE_STEP = 3;
-const FONT_FAMILY = '"Instrument Sans Variable", "Helvetica Neue", Arial, sans-serif';
-
-async function waitForParticleFont() {
-  if (!document.fonts) return;
-  await Promise.all([
-    document.fonts.ready,
-    document.fonts.load(`700 ${SAMPLE_FONT_SIZE}px ${FONT_FAMILY}`),
-  ]);
-}
+const FONT_FAMILY =
+  'system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif';
 
 function sampleWord(
   context: CanvasRenderingContext2D,
@@ -70,9 +63,7 @@ function sampleWord(
   };
 }
 
-export async function sampleParticleWords(): Promise<SampledWords> {
-  await waitForParticleFont();
-
+export function sampleParticleWords(): SampledWords {
   const canvas = document.createElement("canvas");
   canvas.width = SAMPLE_CANVAS_WIDTH;
   canvas.height = SAMPLE_CANVAS_HEIGHT;

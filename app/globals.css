@@ -376,70 +376,6 @@ a:focus-visible {
   text-wrap: balance;
 }
 
-.home-hero {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  min-height: clamp(540px, calc(100svh - 190px), 760px);
-  padding: 14px 0 8px;
-  gap: 64px;
-}
-
-.home-hero-intro {
-  max-width: 420px;
-  padding: 20px 0 0;
-}
-
-.home-question {
-  margin: 0 0 10px;
-  color: var(--accent-dark);
-  font-family: var(--sans);
-  font-size: 0.74rem;
-  font-weight: 700;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-}
-
-.home-thesis {
-  margin: 0;
-  color: var(--ink-strong);
-  font-family: var(--body-serif);
-  font-size: clamp(1.32rem, 2.4vw, 1.82rem);
-  font-weight: 520;
-  line-height: 1.26;
-  letter-spacing: -0.026em;
-  text-wrap: balance;
-}
-
-.home-summary-panel {
-  align-self: flex-end;
-  max-width: 620px;
-  padding: 25px 28px;
-  border: 1px solid var(--hairline);
-  border-radius: var(--radius-medium);
-  background: rgba(255, 253, 248, 0.84);
-  box-shadow: var(--shadow-small);
-  -webkit-backdrop-filter: blur(24px) saturate(115%);
-  backdrop-filter: blur(24px) saturate(115%);
-}
-
-.home-summary-panel p {
-  margin: 0 0 14px;
-  color: var(--ink);
-  font-family: var(--body-serif);
-  font-size: 1.04rem;
-  line-height: 1.66;
-}
-
-.home-summary-panel p:last-child {
-  margin-bottom: 0;
-  color: var(--accent-dark);
-  font-family: var(--sans);
-  font-size: 0.78rem;
-  font-weight: 700;
-  letter-spacing: 0.025em;
-}
-
 .lede {
   max-width: 680px;
   margin: 24px 0 0;
@@ -1056,17 +992,6 @@ a:focus-visible {
     padding: 32px 0 76px;
   }
 
-  .home-hero {
-    min-height: 620px;
-    gap: 54px;
-  }
-
-  .home-summary-panel {
-    align-self: stretch;
-    max-width: none;
-    padding: 22px 24px;
-  }
-
   .current-chapter-intro {
     padding-bottom: 38px;
   }
@@ -1192,23 +1117,6 @@ a:focus-visible {
 }
 
 @media (max-width: 470px) {
-  .home-hero {
-    min-height: 560px;
-    gap: 46px;
-  }
-
-  .home-hero-intro {
-    padding-top: 8px;
-  }
-
-  .home-summary-panel {
-    padding: 20px;
-  }
-
-  .home-summary-panel p {
-    font-size: 1rem;
-  }
-
   .profile-sidebar {
     grid-template-columns: 86px minmax(0, 1fr);
     padding: 17px;
@@ -1349,8 +1257,7 @@ a:focus-visible {
   }
 
   .topbar-inner,
-  .profile-sidebar,
-  .home-summary-panel {
+  .profile-sidebar {
     background: var(--paper-raised);
     -webkit-backdrop-filter: none;
     backdrop-filter: none;
@@ -1382,7 +1289,6 @@ a:focus-visible {
   .domain-directory,
   .archive-entry,
   .practice-note,
-  .home-summary-panel,
   .current-chapter-brief {
     background: var(--paper-raised);
     border-color: var(--rule-strong);

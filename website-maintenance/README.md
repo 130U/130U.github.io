@@ -6,10 +6,10 @@ assistants.
 
 ## Non-negotiable guardrail
 
-Education and Past Experience source files are protected from modification.
-Published-copy snapshots are append-only. Any other removal or rewrite requires
-Theodore's explicit approval and must update routes, tests, and documentation in
-the same change.
+Education, Past Experience, and Current Chapter source files are protected from
+modification. Published-copy snapshots are append-only. Any other removal or
+rewrite requires Theodore's explicit approval and must update routes, tests,
+and documentation in the same change.
 
 The visual system is intentionally restrained. Preserve its typography,
 material hierarchy, responsive behavior, reduced-motion support, and immediate

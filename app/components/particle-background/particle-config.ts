@@ -1,9 +1,10 @@
 import type { TimelinePhase } from "./particle-types";
 
 export const PARTICLE_CONFIG = {
-  desktopParticles: 4_000,
-  mobileParticles: 2_200,
-  reducedMotionParticles: 900,
+  initialShape: "theodore",
+  desktopParticles: 5_000,
+  mobileParticles: 2_800,
+  reducedMotionParticles: 1_600,
   mobileBreakpoint: 720,
   maxPixelRatio: 2,
   camera: {
@@ -15,11 +16,13 @@ export const PARTICLE_CONFIG = {
     parallaxY: 3,
   },
   points: {
-    size: 1.9,
-    scatterOpacity: 0.34,
-    wordOpacity: 0.86,
-    minimumGray: 0.3,
-    maximumGray: 0.52,
+    size: 2.25,
+    scatterOpacity: 0.38,
+    wordOpacity: 0.96,
+    minimumGray: 0.18,
+    maximumGray: 0.38,
+    redLift: 0.018,
+    blueDrop: 0.012,
   },
   morph: {
     maximumDelay: 0.38,
@@ -37,13 +40,12 @@ export const PARTICLE_CONFIG = {
 } as const;
 
 export const PARTICLE_TIMELINE: readonly TimelinePhase[] = [
-  { kind: "hold", shape: "scatter", duration: 1.8 },
-  { kind: "morph", to: "theodore", duration: 3 },
-  { kind: "hold", shape: "theodore", duration: 4 },
-  { kind: "morph", to: "scatter", duration: 3 },
-  { kind: "hold", shape: "scatter", duration: 1.6 },
-  { kind: "morph", to: "ouyang", duration: 3 },
-  { kind: "hold", shape: "ouyang", duration: 4 },
-  { kind: "morph", to: "scatter", duration: 3 },
-  { kind: "hold", shape: "scatter", duration: 1.6 },
+  { kind: "hold", shape: "theodore", duration: 5.5 },
+  { kind: "morph", to: "scatter", duration: 2.8 },
+  { kind: "hold", shape: "scatter", duration: 1.2 },
+  { kind: "morph", to: "ouyang", duration: 2.8 },
+  { kind: "hold", shape: "ouyang", duration: 4.5 },
+  { kind: "morph", to: "scatter", duration: 2.8 },
+  { kind: "hold", shape: "scatter", duration: 1.2 },
+  { kind: "morph", to: "theodore", duration: 2.8 },
 ];

@@ -5,6 +5,41 @@
   padding: 0;
 }
 
+:global(.site-shell--particle .topbar-inner) {
+  border-color: rgba(190, 177, 159, 0.62);
+  background: rgba(255, 253, 248, 0.82);
+  box-shadow:
+    0 1px 2px rgba(52, 39, 29, 0.045),
+    0 12px 34px rgba(52, 39, 29, 0.065);
+  -webkit-backdrop-filter: blur(28px) saturate(155%);
+  backdrop-filter: blur(28px) saturate(155%);
+}
+
+:global(.site-shell--particle .wordmark) {
+  color: var(--ink-strong);
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-size: 0.96rem;
+  font-weight: 650;
+  font-optical-sizing: auto;
+  letter-spacing: -0.018em;
+  line-height: 1;
+}
+
+:global(.site-shell--particle .primary-nav a) {
+  color: #514a43;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-size: 0.82rem;
+  font-weight: 570;
+  font-optical-sizing: auto;
+  letter-spacing: -0.008em;
+  line-height: 1;
+}
+
+:global(.site-shell--particle .primary-nav a.active) {
+  color: var(--accent-dark);
+  font-weight: 650;
+}
+
 .particleStage {
   position: relative;
   display: flex;
@@ -270,6 +305,17 @@
 }
 
 @media (max-width: 720px) {
+  :global(.site-shell--particle .wordmark) {
+    font-size: 0.94rem;
+    font-weight: 650;
+  }
+
+  :global(.site-shell--particle .primary-nav a) {
+    font-size: 0.73rem;
+    font-weight: 600;
+    letter-spacing: -0.004em;
+  }
+
   .particleStage {
     min-height: calc(100vh - 122px);
     min-height: max(22rem, calc(100svh - 122px));
@@ -384,7 +430,23 @@
   }
 }
 
+@media (prefers-reduced-transparency: reduce) {
+  :global(.site-shell--particle .topbar-inner) {
+    background: var(--paper-raised);
+    -webkit-backdrop-filter: none;
+    backdrop-filter: none;
+  }
+}
+
 @media (prefers-contrast: more) {
+  :global(.site-shell--particle .topbar-inner) {
+    border-color: var(--rule-strong);
+  }
+
+  :global(.site-shell--particle .primary-nav a) {
+    color: var(--ink);
+  }
+
   .profileSection {
     border-color: var(--rule-strong);
     background: var(--paper-raised);

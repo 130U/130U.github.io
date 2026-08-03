@@ -48,6 +48,8 @@ export class ParticleEngine {
   private points?: THREE.Points;
   private positionAttribute?: THREE.BufferAttribute;
   private samples?: SampledWords;
+  private resizeObserver?: ResizeObserver;
+  private viewportObserver?: IntersectionObserver;
 
   private readonly position: Float32Array;
   private readonly base: Float32Array;
@@ -81,6 +83,9 @@ export class ParticleEngine {
   private cameraTargetX = 0;
   private cameraTargetY = 0;
   private unavailable = false;
+  private viewportVisible = true;
+  private viewportWidth = 0;
+  private viewportHeight = 0;
 
   constructor(canvas: HTMLCanvasElement, { onUnavailable }: EngineOptions) {
     this.canvas = canvas;
@@ -130,17 +135,12 @@ export class ParticleEngine {
       PARTICLE_CONFIG.camera.far,
     );
     this.camera.position.z = PARTICLE_CONFIG.camera.z;
-    this.samples = await sampleParticleWords();
-    if (this.disposed) return;
+    this.samples = sampleParticleWords();
+    if (this.disposed) return false;
 
     this.resize(false);
     this.buildScatter();
-    this.buildWordTarget(this.samples.theodore, this.theodore);
-    this.buildWordTarget(this.samples.ouyang, this.ouyang);
-    this.base.set(this.scatter);
-    this.position.set(this.scatter);
-    this.source.set(this.scatter);
-    this.target.set(this.scatter);
+    this.resetToInitialShape();
     this.buildColors();
 
     this.geometry = new THREE.BufferGeometry();
@@ -161,7 +161,7 @@ export class ParticleEngine {
       alphaTest: 0.08,
       color: 0xffffff,
       depthWrite: false,
-      opacity: PARTICLE_CONFIG.points.scatterOpacity,
+      opacity: PARTICLE_CONFIG.points.wordOpacity,
       size: PARTICLE_CONFIG.points.size,
       sizeAttenuation: false,
       transparent: true,
@@ -173,19 +173,29 @@ export class ParticleEngine {
     this.scene.add(this.points);
 
     this.canvas.addEventListener("webglcontextlost", this.handleContextLost);
+    this.renderCurrentFrame();
+    if (this.unavailable) return false;
+
     window.addEventListener("resize", this.handleResize, { passive: true });
     document.addEventListener("visibilitychange", this.handleVisibilityChange);
     this.motionQuery.addEventListener("change", this.handleMotionPreferenceChange);
+    if ("ResizeObserver" in window) {
+      this.resizeObserver = new ResizeObserver(this.handleElementResize);
+      this.resizeObserver.observe(this.canvas);
+    }
+    if ("IntersectionObserver" in window) {
+      this.viewportObserver = new IntersectionObserver(this.handleViewportIntersection, {
+        rootMargin: "120px 0px",
+      });
+      this.viewportObserver.observe(this.canvas);
+    }
     if (this.finePointer) {
       window.addEventListener("pointermove", this.handlePointerMove, { passive: true });
       window.addEventListener("pointerout", this.handlePointerOut, { passive: true });
     }
 
-    if (this.reducedMotion) {
-      this.renderer.render(this.scene, this.camera);
-      return;
-    }
-    this.start();
+    this.syncAnimationState();
+    return true;
   }
 
   private buildColors() {
@@ -193,9 +203,9 @@ export class ParticleEngine {
     for (let index = 0; index < this.particleCount; index += 1) {
       const gray = PARTICLE_CONFIG.points.minimumGray + this.random() * range;
       const offset = index * 3;
-      this.colors[offset] = gray;
+      this.colors[offset] = Math.min(1, gray + PARTICLE_CONFIG.points.redLift);
       this.colors[offset + 1] = gray;
-      this.colors[offset + 2] = Math.min(1, gray + 0.015);
+      this.colors[offset + 2] = Math.max(0, gray - PARTICLE_CONFIG.points.blueDrop);
     }
   }
 
@@ -386,7 +396,16 @@ export class ParticleEngine {
   }
 
   private start() {
-    if (this.running || this.disposed || this.unavailable || this.reducedMotion) return;
+    if (
+      this.running ||
+      this.disposed ||
+      this.unavailable ||
+      this.reducedMotion ||
+      document.hidden ||
+      !this.viewportVisible
+    ) {
+      return;
+    }
     this.running = true;
     this.previousTime = performance.now();
     this.animationFrame = requestAnimationFrame(this.animate);
@@ -395,6 +414,16 @@ export class ParticleEngine {
   private stop() {
     this.running = false;
     cancelAnimationFrame(this.animationFrame);
+  }
+
+  private renderCurrentFrame() {
+    if (!this.renderer || !this.scene || !this.camera) return;
+    this.renderer.render(this.scene, this.camera);
+  }
+
+  private syncAnimationState() {
+    if (this.reducedMotion || document.hidden || !this.viewportVisible) this.stop();
+    else this.start();
   }
 
   private animate = (time: number) => {
@@ -411,9 +440,13 @@ export class ParticleEngine {
   };
 
   private resize(scaleExisting = true) {
-    if (!this.renderer || !this.camera) return;
-    const width = Math.max(1, window.innerWidth);
-    const height = Math.max(1, window.innerHeight);
+    if (this.disposed || this.unavailable || !this.renderer || !this.camera) return;
+    const bounds = this.canvas.getBoundingClientRect();
+    const width = Math.max(1, bounds.width);
+    const height = Math.max(1, bounds.height);
+    const geometryChanged =
+      Math.abs(width - this.viewportWidth) > 0.5 ||
+      Math.abs(height - this.viewportHeight) > 0.5;
     const previousWidth = this.visibleWidth;
     const previousHeight = this.visibleHeight;
 
@@ -428,36 +461,37 @@ export class ParticleEngine {
       2 * Math.tan(THREE.MathUtils.degToRad(PARTICLE_CONFIG.camera.fov / 2)) * PARTICLE_CONFIG.camera.z;
     const visibleWidth = visibleHeight * this.camera.aspect;
 
-    if (scaleExisting && previousWidth > 1 && previousHeight > 1) {
+    if (scaleExisting && geometryChanged && previousWidth > 1 && previousHeight > 1) {
       const scaleX = visibleWidth / previousWidth;
       const scaleY = visibleHeight / previousHeight;
-      for (const buffer of [this.position, this.base, this.source, this.target, this.scatter]) {
-        for (let index = 0; index < this.particleCount; index += 1) {
-          const offset = index * 3;
-          buffer[offset] *= scaleX;
-          buffer[offset + 1] *= scaleY;
-        }
+      for (let index = 0; index < this.particleCount; index += 1) {
+        const offset = index * 3;
+        this.scatter[offset] *= scaleX;
+        this.scatter[offset + 1] *= scaleY;
       }
     }
 
+    this.viewportWidth = width;
+    this.viewportHeight = height;
     this.visibleWidth = visibleWidth;
     this.visibleHeight = visibleHeight;
     if (this.samples) {
       this.buildWordTarget(this.samples.theodore, this.theodore);
       this.buildWordTarget(this.samples.ouyang, this.ouyang);
     }
+    if (scaleExisting && geometryChanged) this.resetToInitialShape();
     if (this.positionAttribute) this.positionAttribute.needsUpdate = true;
-    if (this.reducedMotion && this.scene) {
-      this.renderer.render(this.scene, this.camera);
-    }
+    if (this.reducedMotion && this.scene) this.renderCurrentFrame();
   }
 
   private handlePointerMove = (event: PointerEvent) => {
     if (!this.camera || this.reducedMotion) return;
+    const bounds = this.canvas.getBoundingClientRect();
+    if (bounds.width <= 0 || bounds.height <= 0) return;
     this.pointerPresent = true;
     this.pointerNdc.set(
-      (event.clientX / window.innerWidth) * 2 - 1,
-      -(event.clientY / window.innerHeight) * 2 + 1,
+      ((event.clientX - bounds.left) / bounds.width) * 2 - 1,
+      -((event.clientY - bounds.top) / bounds.height) * 2 + 1,
     );
     this.updatePointerProjection();
     this.cameraTargetX = this.pointerNdc.x * PARTICLE_CONFIG.camera.parallaxX;
@@ -473,22 +507,34 @@ export class ParticleEngine {
   };
 
   private handleResize = () => {
+    if (this.disposed || this.unavailable) return;
     cancelAnimationFrame(this.resizeFrame);
     this.resizeFrame = requestAnimationFrame(() => this.resize());
   };
 
-  private handleVisibilityChange = () => {
-    if (document.hidden) this.stop();
-    else this.start();
+  private handleElementResize: ResizeObserverCallback = () => {
+    this.handleResize();
   };
 
-  private resetToScatter() {
+  private handleVisibilityChange = () => {
+    this.syncAnimationState();
+  };
+
+  private handleViewportIntersection: IntersectionObserverCallback = (entries) => {
+    const entry = entries[0];
+    if (!entry) return;
+    this.viewportVisible = entry.isIntersecting;
+    this.syncAnimationState();
+  };
+
+  private resetToInitialShape() {
     this.phaseIndex = 0;
     this.phaseElapsed = 0;
-    this.base.set(this.scatter);
-    this.position.set(this.scatter);
-    this.source.set(this.scatter);
-    this.target.set(this.scatter);
+    const initialShape = this.shape(PARTICLE_CONFIG.initialShape);
+    this.base.set(initialShape);
+    this.position.set(initialShape);
+    this.source.set(initialShape);
+    this.target.set(initialShape);
     this.repX.fill(0);
     this.repY.fill(0);
     this.repVX.fill(0);
@@ -501,7 +547,7 @@ export class ParticleEngine {
         : this.particleCount,
     );
     this.points?.scale.setScalar(1);
-    if (this.material) this.material.opacity = PARTICLE_CONFIG.points.scatterOpacity;
+    if (this.material) this.material.opacity = PARTICLE_CONFIG.points.wordOpacity;
     if (this.camera) {
       this.camera.position.x = 0;
       this.camera.position.y = 0;
@@ -515,36 +561,42 @@ export class ParticleEngine {
     this.pointerActive = false;
     this.cameraTargetX = 0;
     this.cameraTargetY = 0;
-    this.resetToScatter();
+    this.resetToInitialShape();
     if (this.reducedMotion) {
       this.stop();
-      if (this.renderer && this.scene && this.camera) {
-        this.renderer.render(this.scene, this.camera);
-      }
-    } else if (!document.hidden) {
-      this.start();
-    }
+      this.renderCurrentFrame();
+    } else this.syncAnimationState();
   };
 
-  private handleContextLost = (event: Event) => {
-    event.preventDefault();
+  private handleContextLost = () => {
+    if (this.unavailable || this.disposed) return;
     this.unavailable = true;
     this.stop();
     this.canvas.hidden = true;
+    this.detachRuntimeListeners();
     this.onUnavailable();
   };
+
+  private detachRuntimeListeners() {
+    cancelAnimationFrame(this.resizeFrame);
+    this.resizeFrame = 0;
+    this.canvas.removeEventListener("webglcontextlost", this.handleContextLost);
+    window.removeEventListener("resize", this.handleResize);
+    document.removeEventListener("visibilitychange", this.handleVisibilityChange);
+    this.motionQuery.removeEventListener("change", this.handleMotionPreferenceChange);
+    this.resizeObserver?.disconnect();
+    this.resizeObserver = undefined;
+    this.viewportObserver?.disconnect();
+    this.viewportObserver = undefined;
+    window.removeEventListener("pointermove", this.handlePointerMove);
+    window.removeEventListener("pointerout", this.handlePointerOut);
+  }
 
   dispose() {
     if (this.disposed) return;
     this.disposed = true;
     this.stop();
-    cancelAnimationFrame(this.resizeFrame);
-    this.canvas.removeEventListener("webglcontextlost", this.handleContextLost);
-    window.removeEventListener("resize", this.handleResize);
-    document.removeEventListener("visibilitychange", this.handleVisibilityChange);
-    this.motionQuery.removeEventListener("change", this.handleMotionPreferenceChange);
-    window.removeEventListener("pointermove", this.handlePointerMove);
-    window.removeEventListener("pointerout", this.handlePointerOut);
+    this.detachRuntimeListeners();
     this.geometry?.dispose();
     this.material?.dispose();
     this.pointTexture?.dispose();
