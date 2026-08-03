@@ -40,9 +40,8 @@ runtime listeners rather than allowing a later ready state to overwrite it.
 
 CI protects the Education, Past Experience, and Current Chapter source files
 directly, while the artifact suite verifies their normalized SHA-256 hashes and
-approved structural counts. Future published-copy snapshots are append-only.
-This lets an explicitly approved site change retire unrelated content without
-weakening the protected biographical record.
+approved structural counts. This lets an explicitly approved site change
+retire unrelated content without weakening the protected biographical record.
 
 ## Image policy
 

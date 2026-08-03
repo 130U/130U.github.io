@@ -36,7 +36,7 @@ there automatically.
 
 `preview-static.mjs` serves the exact `out/` artifact locally.
 `optimize-images.mjs` regenerates responsive image derivatives.
-`check-published-copy-fixtures.mjs` enforces protected-source and snapshot rules.
+`check-protected-sources.mjs` enforces protected-source immutability.
 
 ### `tests/`
 

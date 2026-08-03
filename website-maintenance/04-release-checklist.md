@@ -44,8 +44,7 @@ transparency, and high contrast.
 - Never commit generated or local-state directories.
 - Push a `codex/` branch and open a pull request against `main`.
 - Require the pull-request build to pass before merge.
-- Confirm the preservation gate reports protected sources unchanged and
-  published-copy snapshot additions only.
+- Confirm the preservation gate reports protected sources unchanged.
 - GitHub Pages deploys only after the validated change reaches `main`.
 - After deployment, verify the Home page, one dynamic experience route,
   `/robots.txt`, and `/sitemap.xml`.

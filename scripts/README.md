@@ -7,5 +7,5 @@
 - `optimize-images.mjs` creates reproducible web derivatives while preserving
   the original image files.
 
-Whenever a public route is added, update the content registry and add its
-append-only published-copy snapshot before release.
+Whenever a public route is added, update the route registry, sitemap
+expectations, and final-artifact tests in the same change.

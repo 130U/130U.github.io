@@ -8,7 +8,7 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "check:published-copy": "node scripts/check-published-copy-fixtures.mjs",
+    "check:protected-sources": "node scripts/check-protected-sources.mjs",
     "preview:static": "node scripts/preview-static.mjs",
     "typecheck": "tsc --noEmit",
     "test": "npm run build && npm run test:artifact",

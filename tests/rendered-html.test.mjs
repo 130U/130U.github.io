@@ -477,23 +477,19 @@ test("Education retains all 31 selected courses", async () => {
   );
 });
 
-test("README mirrors the current four-page site and its operating model", async () => {
+test("README stays a concise public introduction", async () => {
   const readme = await readFile(path.join(ROOT, "README.md"), "utf8");
   assert.match(readme, /^# Theodore Ouyang$/mu);
-  for (const page of ["Home", "Education", "Past Experience", "Current Chapter"]) {
-    assert.match(readme, new RegExp(`\\b${page}\\b`, "u"), `README is missing ${page}`);
-  }
-  assert.match(readme, /particle[- ]first/iu);
-  assert.match(readme, /(?:same-shape|matching)\s+(?:particle\s+)?fallback/iu);
-  assert.match(readme, /Next(?:\.js)?\s+static export/iu);
-  assert.match(readme, /GitHub Pages/u);
-  assert.match(readme, /npm run check/u);
-  assert.match(readme, /npm run preview:static/u);
   assert.match(
     readme,
-    /\[Visit (?:the )?website[^\]]*\]\(https:\/\/www\.theodoreoy\.com\/\)/iu,
+    /\[!\[Theodore Ouyang[^\]]*\]\(public\/assets\/brand\/og-1774\.jpg\)\]\(https:\/\/www\.theodoreoy\.com\/\)/u,
   );
-  assert.doesNotMatch(readme, /Quis ego sum\?/iu);
+  assert.match(readme, /\[theodoreoy\.com\]\(https:\/\/www\.theodoreoy\.com\/\) is a living archive/u);
+  assert.match(readme, /It is selective and honest\./u);
+  assert.doesNotMatch(
+    readme,
+    /^##\s|<!--|<details|The archive|A note on the design|Repository note|deliberately\s+unfinished|npm run|Next(?:\.js)?\s+static export|GitHub Pages/imu,
+  );
 
   const normalized = readme.toLowerCase();
   for (const marker of RETIRED_MARKERS) {
@@ -501,15 +497,15 @@ test("README mirrors the current four-page site and its operating model", async 
   }
 });
 
-test("the published-copy guard covers every protected source, including Current Chapter", async () => {
+test("the protected-source guard covers every protected source, including Current Chapter", async () => {
   const guard = await readFile(
-    path.join(ROOT, "scripts", "check-published-copy-fixtures.mjs"),
+    path.join(ROOT, "scripts", "check-protected-sources.mjs"),
     "utf8",
   );
   for (const relative of PROTECTED_SOURCE_HASHES.keys()) {
     assert.ok(
       guard.includes(`:(literal)${relative}`),
-      `Published-copy guard is missing protected source: ${relative}`,
+      `Protected-source guard is missing protected source: ${relative}`,
     );
   }
 });
