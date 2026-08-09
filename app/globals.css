@@ -19,24 +19,24 @@
 
 :root {
   color-scheme: light;
-  --paper: #f7f4ed;
-  --paper-raised: #fffdf8;
-  --paper-soft: #efe9df;
-  --ink: #322d28;
-  --ink-strong: #201c18;
-  --muted: #70665d;
-  --faint: #766b60;
-  --rule: #dcd3c6;
-  --rule-strong: #cbbfae;
-  --accent: #c35f3d;
-  --accent-dark: #8f3f28;
-  --accent-soft: #f1ddd1;
-  --surface: rgba(255, 253, 248, 0.72);
-  --surface-strong: rgba(255, 253, 248, 0.9);
-  --surface-muted: rgba(239, 233, 223, 0.58);
-  --hairline: rgba(203, 191, 174, 0.68);
-  --shadow-small: 0 1px 2px rgba(52, 39, 29, 0.04), 0 10px 30px rgba(52, 39, 29, 0.055);
-  --shadow-medium: 0 2px 6px rgba(52, 39, 29, 0.045), 0 18px 55px rgba(52, 39, 29, 0.08);
+  --paper: #f4f7fb;
+  --paper-raised: #ffffff;
+  --paper-soft: #e8eef7;
+  --ink: #17324d;
+  --ink-strong: #071a33;
+  --muted: #4b627a;
+  --faint: #5e7388;
+  --rule: #d4dfec;
+  --rule-strong: #b8cadf;
+  --accent: #00539b;
+  --accent-dark: #012169;
+  --accent-soft: #e2e6ed;
+  --surface: rgba(255, 255, 255, 0.72);
+  --surface-strong: rgba(255, 255, 255, 0.9);
+  --surface-muted: rgba(232, 238, 247, 0.58);
+  --hairline: rgba(184, 202, 223, 0.68);
+  --shadow-small: 0 1px 2px rgba(1, 33, 105, 0.04), 0 10px 30px rgba(1, 33, 105, 0.055);
+  --shadow-medium: 0 2px 6px rgba(1, 33, 105, 0.045), 0 18px 55px rgba(1, 33, 105, 0.08);
   --radius-small: 12px;
   --radius-medium: 20px;
   --radius-large: 28px;
@@ -63,7 +63,7 @@ body {
   margin: 0;
   color: var(--ink);
   background:
-    radial-gradient(circle at 10% -4%, rgba(195, 95, 61, 0.085), transparent 31rem),
+    radial-gradient(circle at 10% -4%, rgba(0, 83, 155, 0.085), transparent 31rem),
     radial-gradient(circle at 88% 26%, rgba(255, 255, 255, 0.72), transparent 34rem),
     var(--paper);
   font-family: var(--body-serif);
@@ -148,7 +148,7 @@ a:focus-visible {
   z-index: 20;
   top: 0;
   padding-top: 12px;
-  background: linear-gradient(to bottom, rgba(247, 244, 237, 0.94), rgba(247, 244, 237, 0));
+  background: linear-gradient(to bottom, rgba(244, 247, 251, 0.94), rgba(244, 247, 251, 0));
 }
 
 .topbar-inner {
@@ -159,9 +159,9 @@ a:focus-visible {
   min-height: 56px;
   margin: 0 auto;
   padding: 0 8px 0 20px;
-  border: 1px solid rgba(203, 191, 174, 0.58);
+  border: 1px solid rgba(184, 202, 223, 0.58);
   border-radius: var(--radius-medium);
-  background: rgba(255, 253, 248, 0.72);
+  background: rgba(255, 255, 255, 0.72);
   box-shadow: var(--shadow-small);
   -webkit-backdrop-filter: blur(24px) saturate(145%);
   backdrop-filter: blur(24px) saturate(145%);
@@ -207,7 +207,7 @@ a:focus-visible {
 
 .primary-nav a.active {
   color: var(--accent-dark);
-  background: rgba(241, 221, 209, 0.72);
+  background: rgba(226, 230, 237, 0.76);
 }
 
 .primary-nav a.active::after {
@@ -249,13 +249,13 @@ a:focus-visible {
   border: 1px solid var(--rule-strong);
   border-radius: 50%;
   background: var(--paper-raised);
-  box-shadow: 0 12px 38px rgba(70, 49, 36, 0.12);
+  box-shadow: 0 12px 38px rgba(1, 33, 105, 0.12);
 }
 
 .avatar-frame::after {
   position: absolute;
   inset: 6px;
-  border: 1px solid rgba(255, 253, 248, 0.72);
+  border: 1px solid rgba(255, 255, 255, 0.72);
   border-radius: inherit;
   content: "";
   pointer-events: none;
@@ -328,7 +328,7 @@ a:focus-visible {
 .profile-links a {
   display: inline-block;
   overflow-wrap: anywhere;
-  text-decoration-color: rgba(195, 95, 61, 0.35);
+  text-decoration-color: rgba(0, 83, 155, 0.35);
   text-decoration-line: underline;
   text-underline-offset: 3px;
   transition: color 160ms var(--ease-out), transform 120ms var(--ease-out);
@@ -876,7 +876,7 @@ a:focus-visible {
 
 .entry-summary {
   margin: -6px 0 24px;
-  color: #4a433d;
+  color: #2c4661;
   font-family: var(--serif);
   font-size: 1.03rem;
   line-height: 1.62;
@@ -893,7 +893,7 @@ a:focus-visible {
 .archive-bullets li {
   position: relative;
   padding-left: 21px;
-  color: #4a433d;
+  color: #2c4661;
   font-family: var(--serif);
   font-size: 1.03rem;
   line-height: 1.62;
@@ -1185,11 +1185,11 @@ a:focus-visible {
 @media (hover: hover) and (pointer: fine) {
   .primary-nav a:hover {
     color: var(--accent-dark);
-    background: rgba(241, 221, 209, 0.48);
+    background: rgba(226, 230, 237, 0.58);
   }
 
   .profile-links li:hover {
-    background: rgba(239, 233, 223, 0.68);
+    background: rgba(232, 238, 247, 0.68);
   }
 
   .profile-links a:hover,
@@ -1200,7 +1200,7 @@ a:focus-visible {
 
   .domain-directory-link:hover {
     color: var(--accent-dark);
-    background: rgba(241, 221, 209, 0.38);
+    background: rgba(226, 230, 237, 0.48);
   }
 
   .domain-directory-link:hover .domain-arrow {
@@ -1276,10 +1276,10 @@ a:focus-visible {
 
 @media (prefers-contrast: more) {
   :root {
-    --rule-strong: #766b60;
+    --rule-strong: #5e7388;
     --hairline: var(--rule-strong);
-    --muted: #554c44;
-    --faint: #71665c;
+    --muted: #314b65;
+    --faint: #465f77;
   }
 
   .topbar-inner,
