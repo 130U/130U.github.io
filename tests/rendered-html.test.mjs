@@ -380,6 +380,10 @@ test("retired routes, assets, and current-role language are absent from the expo
   const retiredDirectory = ["personal-", "posts"].join("");
   assert.ok(!existsSync(path.join(OUT, retiredDirectory)), "Retired route directory was exported");
   assert.ok(!existsSync(path.join(OUT, "assets", "posts")), "Retired asset directory was exported");
+  assert.ok(
+    !existsSync(path.join(OUT, "README.md")),
+    "Internal public-assets note must not be exported",
+  );
 });
 
 test("all internal HTML and CSS references resolve inside the static export", async () => {
@@ -541,8 +545,8 @@ test("the Home visual module starts in a legible, bounded, static-first particle
     /wordOpacity:\s*0\.96/u,
     /minimumGray:\s*0\.18/u,
     /maximumGray:\s*0\.38/u,
-    /redLift:\s*0\.018/u,
-    /blueDrop:\s*0\.012/u,
+    /redOffset:\s*-0\.14/u,
+    /blueOffset:\s*0\.19/u,
   ]) {
     assert.match(config, parameter);
   }
@@ -587,7 +591,7 @@ test("the Home visual module starts in a legible, bounded, static-first particle
     assert.ok(engine.includes(contract), `Particle lifecycle contract is missing: ${contract}`);
   }
   const initializeBody = engine.match(
-    /async initialize\(\)\s*\{([\s\S]*?)\n\s*\}\n\n\s*private buildColors/u,
+    /async initialize\(\)\s*\{([\s\S]*?)\r?\n\s*\}\r?\n\r?\n\s*private buildColors/u,
   )?.[1];
   assert.ok(initializeBody, "Particle initialize() body is missing");
   assert.ok(

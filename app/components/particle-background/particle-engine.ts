@@ -203,9 +203,15 @@ export class ParticleEngine {
     for (let index = 0; index < this.particleCount; index += 1) {
       const gray = PARTICLE_CONFIG.points.minimumGray + this.random() * range;
       const offset = index * 3;
-      this.colors[offset] = Math.min(1, gray + PARTICLE_CONFIG.points.redLift);
+      this.colors[offset] = Math.min(
+        1,
+        Math.max(0, gray + PARTICLE_CONFIG.points.redOffset),
+      );
       this.colors[offset + 1] = gray;
-      this.colors[offset + 2] = Math.max(0, gray - PARTICLE_CONFIG.points.blueDrop);
+      this.colors[offset + 2] = Math.min(
+        1,
+        Math.max(0, gray + PARTICLE_CONFIG.points.blueOffset),
+      );
     }
   }
 

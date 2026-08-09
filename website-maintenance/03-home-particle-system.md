@@ -28,7 +28,7 @@ canvas that replaces it after the client is ready.
   font stack as the CSS fallback, so first paint does not wait for or swap a web
   font.
 - `particle-config.ts` is the single source for the initial target, point counts,
-  timing, camera, and the `THEODORE → SCATTER → OUYANG → SCATTER` loop.
+  timing, camera, color offsets, and the `THEODORE → SCATTER → OUYANG → SCATTER` loop.
 - `ParticleBackground.module.css` owns the static fallback and canvas layers.
   Its absolute layer is bounded to the opening viewport instead of following
   the reader behind the biography and footer.
@@ -45,6 +45,19 @@ canvas that replaces it after the client is ready.
 - Missing WebGL, context loss, or initialization failure leaves the HTML/CSS
   fallback visible and the rest of the page usable.
 - Reduced transparency and increased contrast keep foreground copy legible.
+
+## Color ownership
+
+The shared editorial palette lives in `app/globals.css`. Duke Navy `#012169`
+and Duke Royal `#00539B` are the exact brand anchors; pale surfaces and
+blue-black reading colors preserve hierarchy without turning every element into
+the same saturated blue.
+
+The Home particle field has two color paths that must change together:
+`ParticleBackground.module.css` owns the first-paint fallback, while
+`particle-config.ts` supplies bounded RGB offsets to the WebGL field. A palette
+change must preserve the point counts, material opacity, timeline, target
+geometry, and pointer physics unless those behaviors are separately approved.
 
 ## Performance guardrails
 

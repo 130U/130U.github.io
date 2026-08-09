@@ -24,7 +24,7 @@
   left: 50%;
   width: min(70vw, 980px);
   margin: 0;
-  color: rgba(55, 49, 44, 0.62);
+  color: rgba(1, 33, 105, 0.68);
   font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
   font-size: clamp(3.2rem, 12.25vw, 16rem);
   font-weight: 700;
@@ -41,8 +41,8 @@
   .fallbackName {
     color: transparent;
     background-image:
-      radial-gradient(circle, rgba(62, 55, 49, 0.62) 0 0.86px, transparent 1.04px),
-      radial-gradient(circle, rgba(143, 63, 40, 0.3) 0 0.54px, transparent 0.74px);
+      radial-gradient(circle, rgba(1, 33, 105, 0.7) 0 0.86px, transparent 1.04px),
+      radial-gradient(circle, rgba(0, 83, 155, 0.42) 0 0.54px, transparent 0.74px);
     background-position: 0 0, 2px 2px;
     background-size: 4px 4px, 7px 7px;
     -webkit-background-clip: text;
@@ -88,7 +88,7 @@
       color: transparent;
       background-image: radial-gradient(
         circle,
-        rgba(32, 28, 24, 0.96) 0 1.05px,
+        rgba(1, 33, 105, 0.96) 0 1.05px,
         transparent 1.24px
       );
       background-size: 4px 4px;

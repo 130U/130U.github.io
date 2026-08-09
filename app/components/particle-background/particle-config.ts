@@ -21,8 +21,8 @@ export const PARTICLE_CONFIG = {
     wordOpacity: 0.96,
     minimumGray: 0.18,
     maximumGray: 0.38,
-    redLift: 0.018,
-    blueDrop: 0.012,
+    redOffset: -0.14,
+    blueOffset: 0.19,
   },
   morph: {
     maximumDelay: 0.38,

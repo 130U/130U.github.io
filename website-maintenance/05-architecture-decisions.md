@@ -58,8 +58,10 @@ decision before implementation.
 
 ## Dependency security overrides
 
-`package.json` temporarily overrides Next.js's nested PostCSS and Sharp copies
-to patched releases. Both APIs are exercised by the complete build after every
-install. Re-check these overrides when Next.js updates its dependency pins;
-remove an override once the framework resolves to an equal or newer safe version.
-Production dependencies must pass `npm.cmd audit --omit=dev` before release.
+`package.json` temporarily overrides nested PostCSS, Sharp, Nano ID, and js-yaml
+copies to patched releases. The complete build exercises the runtime packages
+after every install. Re-check these overrides when their parent dependencies
+update their pins; remove an override once the dependency tree resolves to an
+equal or newer safe version. Before release, the complete dependency tree must
+pass `npm.cmd audit`, and production dependencies must also pass
+`npm.cmd audit --omit=dev`.
