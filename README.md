@@ -1,7 +1,11 @@
-[![Theodore Ouyang — Exploring practical AI use cases](public/assets/brand/og-1774.jpg)](https://www.theodoreoy.com/)
+<p align="center">
+  <a href="https://www.theodoreoy.com/">
+    <img src=".github/assets/readme-cover.jpg" alt="Visit Theodore Ouyang’s personal website" width="1600">
+  </a>
+</p>
 
-# Theodore Ouyang
-
-[theodoreoy.com](https://www.theodoreoy.com/) is a living archive of the
-questions Theodore pursues, the work he chooses to preserve, and the ways his
-thinking changes over time. It is selective and honest.
+<p align="center">
+  A personal record of education, past experience, and the questions shaping my current chapter.
+  <br><br>
+  <a href="https://www.theodoreoy.com/"><strong>Visit the website →</strong></a>
+</p>
