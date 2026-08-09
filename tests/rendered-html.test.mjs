@@ -479,16 +479,19 @@ test("Education retains all 31 selected courses", async () => {
 
 test("README stays a concise public introduction", async () => {
   const readme = await readFile(path.join(ROOT, "README.md"), "utf8");
-  assert.match(readme, /^# Theodore Ouyang$/mu);
   assert.match(
     readme,
-    /\[!\[Theodore Ouyang[^\]]*\]\(public\/assets\/brand\/og-1774\.jpg\)\]\(https:\/\/www\.theodoreoy\.com\/\)/u,
+    /<a href="https:\/\/www\.theodoreoy\.com\/">[\s\S]*?<img src="\.github\/assets\/readme-cover\.jpg" alt="Visit Theodore Ouyang’s personal website"[^>]*>[\s\S]*?<\/a>/u,
   );
-  assert.match(readme, /\[theodoreoy\.com\]\(https:\/\/www\.theodoreoy\.com\/\) is a living archive/u);
-  assert.match(readme, /It is selective and honest\./u);
+  assert.ok(
+    existsSync(path.join(ROOT, ".github", "assets", "readme-cover.jpg")),
+    "README cover is missing",
+  );
+  assert.match(readme, /href="https:\/\/www\.theodoreoy\.com\/"/u);
+  assert.doesNotMatch(readme, /public\/assets\/brand\/og-1774\.jpg/u);
   assert.doesNotMatch(
     readme,
-    /^##\s|<!--|<details|The archive|A note on the design|Repository note|deliberately\s+unfinished|npm run|Next(?:\.js)?\s+static export|GitHub Pages/imu,
+    /<!--|<details|The archive|A note on the design|Repository note|deliberately\s+unfinished|npm run|Next(?:\.js)?\s+static export|GitHub Pages/imu,
   );
 
   const normalized = readme.toLowerCase();
