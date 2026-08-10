@@ -325,11 +325,21 @@ test("Home gives the particle stage visual priority and moves identity details b
   assert.doesNotMatch(body, /Quis ego sum\?/u);
   assert.doesNotMatch(body, /Identity emerges from possibility\./u);
   assert.match(body, /Exploring practical AI use cases/u);
-  assert.match(body, /Duke B\.S\. & M\.Eng\./u);
   assert.match(body, /He is a Sequoia Scholar in Cohort 8\./u);
   assert.match(body, /genuinely useful in everyday life/u);
   assert.match(body, /Beijing \| Boston/u);
   assert.match(body, /10@alumni\.duke\.edu/u);
+
+  const credentials = [...html.matchAll(/<ul\b([^>]*)>([\s\S]*?)<\/ul>/giu)].filter(
+    (match) => attribute(match[1], "aria-label") === "Profile summary",
+  );
+  assert.equal(credentials.length, 1);
+  assert.deepEqual(
+    [...credentials[0][2].matchAll(/<li\b[^>]*>([\s\S]*?)<\/li>/giu)].map((match) =>
+      stripMarkup(match[1]),
+    ),
+    ["Exploring practical AI use cases", "Sequoia Scholar, Cohort 8"],
+  );
 
   const heading = [...html.matchAll(/<h1\b([^>]*)>([\s\S]*?)<\/h1>/giu)].find(
     (match) => attribute(match[1], "id") === "home-heading",
