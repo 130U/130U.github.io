@@ -66,7 +66,6 @@ export default function Home() {
               <h1 id="home-heading">Theodore Ouyang</h1>
               <ul className={styles.credentials} aria-label="Profile summary">
                 <li>Exploring practical AI use cases</li>
-                <li>Duke B.S. &amp; M.Eng.</li>
                 <li>Sequoia Scholar, Cohort 8</li>
               </ul>
             </div>
