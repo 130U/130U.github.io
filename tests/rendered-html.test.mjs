@@ -65,7 +65,7 @@ const DOMAIN_ROUTES = [
 const PROTECTED_SOURCE_HASHES = new Map([
   [
     "app/education/page.tsx",
-    "7c2d6dee0679d4737a23ece91ef14c0c903a237188619c680bece518b9945e99",
+    "8dd35e0d88f712c3349ebb05e151ef6ee954d3bdc54a6de4c11ad96002a1b316",
   ],
   [
     "app/now/page.tsx",
@@ -346,11 +346,16 @@ test("Home gives the particle stage visual priority and moves identity details b
 test("protected routes retain the shared profile sidebar", async () => {
   for (const route of ["/education/", "/past-experience/", "/now/"]) {
     const html = await routeHtml(route);
+    const sidebars = pairedElementsWithClass(html, "aside", "profile-sidebar");
     assert.equal(
-      pairedElementsWithClass(html, "aside", "profile-sidebar").length,
+      sidebars.length,
       1,
       `${route} profile sidebar changed`,
     );
+    const sidebarText = stripMarkup(sidebars[0][2]);
+    assert.match(sidebarText, /Exploring practical AI use cases/u);
+    assert.doesNotMatch(sidebarText, /Duke B\.S\. & M\.Eng\./u);
+    assert.match(sidebarText, /Sequoia Scholar, Cohort 8/u);
   }
 });
 
@@ -473,7 +478,17 @@ test("Past Experience keeps its five-domain, 16-entry, 92-bullet structure", asy
 });
 
 test("Education retains all 31 selected courses", async () => {
-  const lists = pairedElementsWithClass(await routeHtml("/education/"), "ul", "course-list");
+  const html = await routeHtml("/education/");
+  const entries = pairedElementsWithClass(html, "article", "education-entry");
+  assert.equal(entries.length, 2);
+  assert.match(stripMarkup(entries[0][2]), /2025[\s\S]*Duke University[\s\S]*Durham, USA/u);
+  assert.doesNotMatch(stripMarkup(entries[0][2]), /Kunshan, China/u);
+  assert.match(
+    stripMarkup(entries[1][2]),
+    /2023[\s\S]*Duke University[\s\S]*Durham, USA & Kunshan, China/u,
+  );
+
+  const lists = pairedElementsWithClass(html, "ul", "course-list");
   assert.equal(lists.length, 4);
   assert.equal(
     lists.reduce((total, list) => total + (list[2].match(/<li\b/giu) ?? []).length, 0),

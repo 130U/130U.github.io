@@ -93,7 +93,7 @@ export default function EducationPage() {
           <div className="education-entry-content">
             <header className="education-institution">
               <h2>Duke University</h2>
-              <p className="entry-location">Durham, USA</p>
+              <p className="entry-location">Durham, USA &amp; Kunshan, China</p>
             </header>
             <h3 className="education-degree">
               Bachelor of Science in Mathematics

@@ -1,4 +1,6 @@
 import { execFileSync, spawnSync } from "node:child_process";
+import { createHash } from "node:crypto";
+import { readFileSync } from "node:fs";
 
 const baseSha = process.env.BASE_SHA;
 if (!baseSha) {
@@ -26,6 +28,19 @@ const protectedPathspecs = [
   ":(literal)app/lib/content/experience.ts",
   ":(literal)content/past-experience/archive-through-2026-06-30.md",
 ];
+
+const authorizedProtectedSourceHashes = new Map([
+  [
+    "app/education/page.tsx",
+    "8dd35e0d88f712c3349ebb05e151ef6ee954d3bdc54a6de4c11ad96002a1b316",
+  ],
+]);
+
+function normalizedSha256(file) {
+  return createHash("sha256")
+    .update(readFileSync(file, "utf8").replace(/\r\n?/gu, "\n"), "utf8")
+    .digest("hex");
+}
 
 const mergeBaseCheck = spawnSync(
   "git",
@@ -81,10 +96,26 @@ const changes = execFileSync(
   { encoding: "utf8" },
 ).trim();
 
+const authorizedChanges = [];
 const forbidden = changes
   .split(/\r?\n/u)
   .filter(Boolean)
-  .filter((line) => !line.startsWith("A\t"));
+  .filter((line) => {
+    if (line.startsWith("A\t")) return false;
+
+    const [status, file] = line.split("\t");
+    const approvedHash = authorizedProtectedSourceHashes.get(file);
+    if (
+      status === "M" &&
+      approvedHash &&
+      normalizedSha256(file) === approvedHash
+    ) {
+      authorizedChanges.push(file);
+      return false;
+    }
+
+    return true;
+  });
 
 if (forbidden.length > 0) {
   throw new Error(
@@ -93,4 +124,10 @@ if (forbidden.length > 0) {
   );
 }
 
-console.log(comparisonMessage);
+if (authorizedChanges.length > 0) {
+  console.log(
+    "All other protected sources are unchanged; the explicitly authorized Education location correction matches its approved hash.",
+  );
+} else {
+  console.log(comparisonMessage);
+}

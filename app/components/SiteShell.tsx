@@ -75,7 +75,6 @@ export function SiteShell({
           <p className="profile-name">Theodore Ouyang</p>
           <p className="sidebar-bio">
             <span>Exploring practical AI use cases</span>
-            <span>Duke B.S. &amp; M.Eng.</span>
             <span>Sequoia Scholar, Cohort 8</span>
           </p>
           <ul className="profile-links">
