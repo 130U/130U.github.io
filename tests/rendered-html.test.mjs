@@ -317,7 +317,7 @@ test("Home gives the particle stage visual priority and moves identity details b
   const html = await routeHtml("/");
   const body = stripMarkup(html);
   const title = stripMarkup(html.match(/<title>([\s\S]*?)<\/title>/iu)?.[1] ?? "");
-  assert.equal(title, "Theodore Ouyang | Duke B.S. & M.Eng. | Sequoia Scholar, Cohort 8");
+  assert.equal(title, "Theodore Ouyang | Duke Alum");
   assert.equal(
     metaContent(html, "name", "description"),
     "Theodore Ouyang is a Duke University graduate and Sequoia Scholar in Cohort 8, exploring how artificial intelligence can become useful in everyday life.",

@@ -2,8 +2,7 @@ import type { Metadata } from "next";
 
 export const SITE_URL = "https://www.theodoreoy.com";
 export const SITE_NAME = "Theodore Ouyang";
-export const HOME_TITLE =
-  "Theodore Ouyang | Duke B.S. & M.Eng. | Sequoia Scholar, Cohort 8";
+export const HOME_TITLE = "Theodore Ouyang | Duke Alum";
 export const DEFAULT_DESCRIPTION =
   "Theodore Ouyang is a Duke University graduate and Sequoia Scholar in Cohort 8, exploring how artificial intelligence can become useful in everyday life.";
 
