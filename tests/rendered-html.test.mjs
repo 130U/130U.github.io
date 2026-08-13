@@ -568,10 +568,16 @@ test("the Home visual module starts in a legible, bounded, static-first particle
     /size:\s*2\.25/u,
     /scatterOpacity:\s*0\.38/u,
     /wordOpacity:\s*0\.96/u,
-    /minimumGray:\s*0\.18/u,
-    /maximumGray:\s*0\.38/u,
-    /redOffset:\s*-0\.14/u,
-    /blueOffset:\s*0\.19/u,
+    /far:\s*"#1f466d"/u,
+    /middle:\s*"#5f8fb5"/u,
+    /near:\s*"#85b9d8"/u,
+    /wordDepth:\s*8/u,
+    /yawSoftLimit:\s*3\.5/u,
+    /yawHardLimit:\s*4\.2/u,
+    /pitchSoftLimit:\s*2/u,
+    /pitchHardLimit:\s*2\.4/u,
+    /draggingRepulsionGain:\s*0\.64/u,
+    /scatterPoseGain:\s*0\.24/u,
   ]) {
     assert.match(config, parameter);
   }
@@ -616,7 +622,7 @@ test("the Home visual module starts in a legible, bounded, static-first particle
     assert.ok(engine.includes(contract), `Particle lifecycle contract is missing: ${contract}`);
   }
   const initializeBody = engine.match(
-    /async initialize\(\)\s*\{([\s\S]*?)\r?\n\s*\}\r?\n\r?\n\s*private buildColors/u,
+    /async initialize\(\)\s*\{([\s\S]*?)\r?\n\s*\}\r?\n\r?\n\s*private buildWordDepth/u,
   )?.[1];
   assert.ok(initializeBody, "Particle initialize() body is missing");
   assert.ok(
@@ -640,6 +646,31 @@ test("the Home visual module starts in a legible, bounded, static-first particle
     engine,
     /const bounds = this\.canvas\.getBoundingClientRect\(\)[\s\S]*?event\.clientX - bounds\.left[\s\S]*?event\.clientY - bounds\.top/u,
   );
+  for (const spatialContract of [
+    "this.spatialGroup = new THREE.Group()",
+    "projectionCompensation",
+    "this.wordDepth[index]",
+    "this.localRay.copy(this.raycaster.ray).applyMatrix4",
+    "window.addEventListener(\"pointerdown\", this.handlePointerDown)",
+    "mapDragAngle",
+    "phaseInteractionGain",
+    "advanceCriticalSpring",
+    "PARTICLE_CONFIG.spatial.draggingRepulsionGain",
+    "PARTICLE_CONFIG.spatial.scatterPoseGain",
+  ]) {
+    assert.ok(engine.includes(spatialContract), `Spatial particle contract is missing: ${spatialContract}`);
+  }
+
+  const spatialMotion = await readFile(
+    path.join(ROOT, "app", "components", "particle-background", "spatial-motion.ts"),
+    "utf8",
+  );
+  assert.match(spatialMotion, /export function mapDragAngle/u);
+  assert.match(spatialMotion, /Math\.exp\(-excess \/ range\)/u);
+  assert.match(spatialMotion, /export function advanceCriticalSpring/u);
+  assert.match(spatialMotion, /4\.6 \/ response/u);
+  assert.match(spatialMotion, /must never overshoot/u);
+  assert.match(spatialMotion, /export function phaseInteractionGain/u);
 
   const component = await readFile(
     path.join(ROOT, "app", "components", "particle-background", "ParticleBackground.tsx"),
@@ -672,6 +703,11 @@ test("the Home visual module starts in a legible, bounded, static-first particle
     styles,
     /@media \(prefers-reduced-motion: reduce\)[\s\S]*?\.root\[data-state="ready"\] \.canvas\s*\{[\s\S]*?opacity:\s*1;[\s\S]*?\.root\[data-state="ready"\] \.fallbackName\s*\{[\s\S]*?opacity:\s*0;/u,
   );
+
+  const homeStyles = await readFile(path.join(ROOT, "app", "home.module.css"), "utf8");
+  assert.match(homeStyles, /@media \(hover: hover\) and \(pointer: fine\)/u);
+  assert.match(homeStyles, /\.particleStage\s*\{[\s\S]*?cursor:\s*grab/u);
+  assert.match(homeStyles, /\.particleStage:active\s*\{[\s\S]*?cursor:\s*grabbing/u);
 });
 
 test("legacy alternate runtimes stay out of the production artifact", async () => {

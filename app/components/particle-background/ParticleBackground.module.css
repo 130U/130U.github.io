@@ -16,6 +16,7 @@
   height: 100%;
   opacity: 0;
   transition: opacity 120ms ease-out;
+  user-select: none;
 }
 
 .fallbackName {

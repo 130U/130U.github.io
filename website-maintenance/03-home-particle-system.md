@@ -22,13 +22,17 @@ canvas that replaces it after the client is ready.
 ## Module boundaries
 
 - `ParticleBackground.tsx` owns feature detection and lazy engine loading.
-- `particle-engine.ts` owns Three.js allocation, animation, pointer response,
-  document and viewport visibility pausing, resizing, and disposal.
+- `particle-engine.ts` owns Three.js allocation, animation, local-plane pointer
+  response, document and viewport visibility pausing, resizing, and disposal.
+- `spatial-motion.ts` owns the allocation-free shallow-view motion math: drag
+  mapping, rubber-banded angle limits, exact critically damped return, and the
+  continuous word-to-scatter interaction gain.
 - `shape-samplers.ts` converts text into point targets with the same platform UI
   font stack as the CSS fallback, so first paint does not wait for or swap a web
   font.
 - `particle-config.ts` is the single source for the initial target, point counts,
-  timing, camera, color offsets, and the `THEODORE → SCATTER → OUYANG → SCATTER` loop.
+  timing, camera, spatial depth, palette, drag limits, and the
+  `THEODORE → SCATTER → OUYANG → SCATTER` loop.
 - `ParticleBackground.module.css` owns the static fallback and canvas layers.
   Its absolute layer is bounded to the opening viewport instead of following
   the reader behind the biography and footer.
@@ -42,9 +46,38 @@ canvas that replaces it after the client is ready.
 - `prefers-reduced-motion` renders the same calm static `THEODORE` field with no
   loop.
 - Coarse pointers do not install repulsion interactions.
+- Fine pointers may drag the opening canvas through a tightly bounded shallow
+  pose. The stable navigation and scroll cue remain in the screen plane.
 - Missing WebGL, context loss, or initialization failure leaves the HTML/CSS
   fallback visible and the rest of the page usable.
 - Reduced transparency and increased contrast keep foreground copy legible.
+
+## Shallow spatial model
+
+The word targets are a deterministic shallow volume rather than a random 3D
+cloud. Most particles remain near the neutral plane and progressively fewer
+reach the front and rear depth limits. Perspective compensation adjusts each
+particle's local X/Y target so every depth layer resolves to the original crisp
+glyph when the view is neutral; depth becomes visible only during pointer
+parallax or a deliberate drag.
+
+The interaction channels remain independent:
+
+1. the timeline produces the canonical morph base in local 3D coordinates;
+2. spring-damped hover repulsion offsets particles in that local word plane;
+3. a single group pose reveals the volume without rewriting either source;
+4. the depth palette supplies the final near/middle/far color hierarchy.
+
+Drag begins only after a small movement threshold, tracks the current
+presentation pose, and meets a progressive rubber-band before the hard angle
+limit. Release inherits a bounded fraction of live angular velocity, then uses
+an exact critically damped return that cannot overshoot neutral. Re-grabbing
+during return starts from the visible pose.
+
+Word coherence controls interaction strength continuously. Stable words receive
+the complete shallow pose, while scatter holds retain only a quiet fraction of
+it. Hover repulsion likewise softens during drag and scatter so the local
+"opening" and global spatial reveal do not compete.
 
 ## Color ownership
 
@@ -55,9 +88,10 @@ the same saturated blue.
 
 The Home particle field has two color paths that must change together:
 `ParticleBackground.module.css` owns the first-paint fallback, while
-`particle-config.ts` supplies bounded RGB offsets to the WebGL field. A palette
-change must preserve the point counts, material opacity, timeline, target
-geometry, and pointer physics unless those behaviors are separately approved.
+`particle-config.ts` supplies the low-saturation far/middle/near WebGL palette.
+A palette change must preserve the point counts, material opacity, timeline,
+target geometry, and pointer physics unless those behaviors are separately
+approved.
 
 ## Performance guardrails
 
@@ -68,9 +102,11 @@ observer, all GPU resources, and all listeners on unmount. Do not add a second
 animation loop or allocate per-particle objects inside a frame.
 
 Canvas sizing and pointer projection use the canvas bounding box rather than
-the browser window. A size change rebuilds the canonical word target and resets
-the loop to its stable first phase, preventing stretched glyphs after rotation
-or responsive viewport changes.
+the browser window. Pointer rays are transformed back into the spatial group's
+local plane before repulsion is evaluated, so the opening stays under the
+cursor while the word tilts. A size change rebuilds the canonical word target
+and resets the loop to its stable first phase, preventing stretched glyphs
+after rotation or responsive viewport changes.
 
 When changing the system, run the production build and inspect the static
 preview at 1440, 720, 390, and 320 CSS pixels. Confirm the first visible frame,

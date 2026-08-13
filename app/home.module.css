@@ -407,6 +407,15 @@
 }
 
 @media (hover: hover) and (pointer: fine) {
+  .particleStage {
+    cursor: grab;
+    user-select: none;
+  }
+
+  .particleStage:active {
+    cursor: grabbing;
+  }
+
   .scrollCue:hover,
   .contactStrip a:hover {
     color: var(--accent-dark);

@@ -8,6 +8,13 @@ import {
   type RandomSource,
 } from "./particle-math";
 import { sampleParticleWords } from "./shape-samplers";
+import {
+  advanceCriticalSpring,
+  createSpatialPose,
+  mapDragAngle,
+  phaseInteractionGain,
+  resetSpatialPose,
+} from "./spatial-motion";
 import type { ParticleShape, SampledWord, SampledWords } from "./particle-types";
 
 type EngineOptions = {
@@ -42,6 +49,7 @@ export class ParticleEngine {
   private renderer?: THREE.WebGLRenderer;
   private scene?: THREE.Scene;
   private camera?: THREE.PerspectiveCamera;
+  private spatialGroup?: THREE.Group;
   private geometry?: THREE.BufferGeometry;
   private material?: THREE.PointsMaterial;
   private pointTexture?: THREE.CanvasTexture;
@@ -60,6 +68,7 @@ export class ParticleEngine {
   private readonly ouyang: Float32Array;
   private readonly delay: Float32Array;
   private readonly colors: Float32Array;
+  private readonly wordDepth: Float32Array;
   private readonly repX: Float32Array;
   private readonly repY: Float32Array;
   private readonly repVX: Float32Array;
@@ -76,12 +85,23 @@ export class ParticleEngine {
   private visibleHeight = 1;
   private pointerActive = false;
   private pointerPresent = false;
-  private pointerWorld = new THREE.Vector3();
-  private pointerNdc = new THREE.Vector2();
-  private raycaster = new THREE.Raycaster();
-  private pointerPlane = new THREE.Plane(new THREE.Vector3(0, 0, 1), 0);
+  private readonly pointerLocal = new THREE.Vector3();
+  private readonly pointerNdc = new THREE.Vector2();
+  private readonly raycaster = new THREE.Raycaster();
+  private readonly localRay = new THREE.Ray();
+  private readonly localPointerPlane = new THREE.Plane(new THREE.Vector3(0, 0, 1), 0);
+  private readonly inverseSpatialMatrix = new THREE.Matrix4();
   private cameraTargetX = 0;
   private cameraTargetY = 0;
+  private wordAmount = 1;
+  private readonly spatialPose = createSpatialPose();
+  private dragPointerId: number | undefined;
+  private dragStarted = false;
+  private dragOriginX = 0;
+  private dragOriginY = 0;
+  private dragOriginYaw = 0;
+  private dragOriginPitch = 0;
+  private dragPreviousTime = 0;
   private unavailable = false;
   private viewportVisible = true;
   private viewportWidth = 0;
@@ -109,10 +129,12 @@ export class ParticleEngine {
     this.ouyang = new Float32Array(vectorSize);
     this.delay = new Float32Array(this.particleCount);
     this.colors = new Float32Array(vectorSize);
+    this.wordDepth = new Float32Array(this.particleCount);
     this.repX = new Float32Array(this.particleCount);
     this.repY = new Float32Array(this.particleCount);
     this.repVX = new Float32Array(this.particleCount);
     this.repVY = new Float32Array(this.particleCount);
+    this.buildWordDepth();
   }
 
   async initialize() {
@@ -170,7 +192,9 @@ export class ParticleEngine {
     this.material.toneMapped = false;
     this.points = new THREE.Points(this.geometry, this.material);
     this.points.frustumCulled = false;
-    this.scene.add(this.points);
+    this.spatialGroup = new THREE.Group();
+    this.spatialGroup.add(this.points);
+    this.scene.add(this.spatialGroup);
 
     this.canvas.addEventListener("webglcontextlost", this.handleContextLost);
     this.renderCurrentFrame();
@@ -192,26 +216,43 @@ export class ParticleEngine {
     if (this.finePointer) {
       window.addEventListener("pointermove", this.handlePointerMove, { passive: true });
       window.addEventListener("pointerout", this.handlePointerOut, { passive: true });
+      window.addEventListener("pointerdown", this.handlePointerDown);
+      window.addEventListener("pointerup", this.handlePointerUp);
+      window.addEventListener("pointercancel", this.handlePointerUp);
     }
 
     this.syncAnimationState();
     return true;
   }
 
-  private buildColors() {
-    const range = PARTICLE_CONFIG.points.maximumGray - PARTICLE_CONFIG.points.minimumGray;
+  private buildWordDepth() {
+    const halfDepth = PARTICLE_CONFIG.spatial.wordDepth / 2;
     for (let index = 0; index < this.particleCount; index += 1) {
-      const gray = PARTICLE_CONFIG.points.minimumGray + this.random() * range;
+      const direction = this.random() < 0.5 ? -1 : 1;
+      const magnitude =
+        Math.pow(this.random(), PARTICLE_CONFIG.spatial.depthCurve) * halfDepth;
+      this.wordDepth[index] = direction * magnitude;
+    }
+  }
+
+  private buildColors() {
+    const { palette } = PARTICLE_CONFIG.points;
+    const halfDepth = PARTICLE_CONFIG.spatial.wordDepth / 2;
+    const far = new THREE.Color(palette.far);
+    const middle = new THREE.Color(palette.middle);
+    const near = new THREE.Color(palette.near);
+    const color = new THREE.Color();
+
+    for (let index = 0; index < this.particleCount; index += 1) {
+      const depth = clamp((this.wordDepth[index] / halfDepth + 1) / 2, 0, 1);
+      if (depth < 0.5) color.copy(far).lerp(middle, depth * 2);
+      else color.copy(middle).lerp(near, (depth - 0.5) * 2);
+
+      const variation = (this.random() - 0.5) * palette.tonalVariation;
       const offset = index * 3;
-      this.colors[offset] = Math.min(
-        1,
-        Math.max(0, gray + PARTICLE_CONFIG.points.redOffset),
-      );
-      this.colors[offset + 1] = gray;
-      this.colors[offset + 2] = Math.min(
-        1,
-        Math.max(0, gray + PARTICLE_CONFIG.points.blueOffset),
-      );
+      this.colors[offset] = clamp(color.r + variation, 0, 1);
+      this.colors[offset + 1] = clamp(color.g + variation, 0, 1);
+      this.colors[offset + 2] = clamp(color.b + variation, 0, 1);
     }
   }
 
@@ -250,10 +291,16 @@ export class ParticleEngine {
     for (let index = 0; index < this.particleCount; index += 1) {
       const targetIndex = indices[index] * 3;
       const offset = index * 3;
-      output[offset] = sample.points[targetIndex] * scale + (this.random() - 0.5) * jitter;
+      const depth = this.wordDepth[index];
+      const projectionCompensation =
+        (PARTICLE_CONFIG.camera.z - depth) / PARTICLE_CONFIG.camera.z;
+      output[offset] =
+        (sample.points[targetIndex] * scale + (this.random() - 0.5) * jitter) *
+        projectionCompensation;
       output[offset + 1] =
-        sample.points[targetIndex + 1] * scale + (this.random() - 0.5) * jitter;
-      output[offset + 2] = (this.random() - 0.5) * 0.7;
+        (sample.points[targetIndex + 1] * scale + (this.random() - 0.5) * jitter) *
+        projectionCompensation;
+      output[offset + 2] = depth;
     }
   }
 
@@ -304,7 +351,7 @@ export class ParticleEngine {
 
     if (!this.points || !this.material) return;
     const isQuietWord = phase.kind === "hold" && phase.shape !== "scatter";
-    const wordAmount =
+    this.wordAmount =
       phase.kind === "hold"
         ? phase.shape === "scatter"
           ? 0
@@ -316,7 +363,7 @@ export class ParticleEngine {
     this.material.opacity =
       PARTICLE_CONFIG.points.scatterOpacity +
       (PARTICLE_CONFIG.points.wordOpacity - PARTICLE_CONFIG.points.scatterOpacity) *
-        easeInOutQuint(wordAmount) +
+        easeInOutQuint(this.wordAmount) +
       (isQuietWord ? Math.sin(elapsedTime * 0.55) * 0.012 : 0);
   }
 
@@ -325,6 +372,12 @@ export class ParticleEngine {
     const radiusSquared = radius * radius;
     const phase = PARTICLE_TIMELINE[this.phaseIndex];
     const scatterHolding = phase.kind === "hold" && phase.shape === "scatter";
+    const repulsionGain =
+      phaseInteractionGain(
+        this.wordAmount,
+        PARTICLE_CONFIG.spatial.scatterRepulsionGain,
+      ) *
+      (this.dragStarted ? PARTICLE_CONFIG.spatial.draggingRepulsionGain : 1);
     const driftFadeDuration = Math.min(0.8, phase.duration / 2);
     const driftStrength = scatterHolding
       ? clamp(
@@ -342,13 +395,13 @@ export class ParticleEngine {
       let forceX = 0;
       let forceY = 0;
       if (this.pointerActive) {
-        const dx = this.base[offset] + this.repX[index] - this.pointerWorld.x;
-        const dy = this.base[offset + 1] + this.repY[index] - this.pointerWorld.y;
+        const dx = this.base[offset] + this.repX[index] - this.pointerLocal.x;
+        const dy = this.base[offset + 1] + this.repY[index] - this.pointerLocal.y;
         const distanceSquared = dx * dx + dy * dy;
         if (distanceSquared > 0.0001 && distanceSquared < radiusSquared) {
           const distance = Math.sqrt(distanceSquared);
           const falloff = 1 - distance / radius;
-          const magnitude = falloff * falloff * force;
+          const magnitude = falloff * falloff * force * repulsionGain;
           forceX = (dx / distance) * magnitude;
           forceY = (dy / distance) * magnitude;
         }
@@ -390,14 +443,41 @@ export class ParticleEngine {
     this.camera.lookAt(this.camera.position.x, this.camera.position.y, 0);
   }
 
+  private updateSpatialPose(delta: number) {
+    if (!this.spatialGroup) return;
+
+    if (!this.dragStarted) {
+      advanceCriticalSpring(
+        this.spatialPose.yaw,
+        delta,
+        PARTICLE_CONFIG.spatial.releaseResponse,
+      );
+      advanceCriticalSpring(
+        this.spatialPose.pitch,
+        delta,
+        PARTICLE_CONFIG.spatial.releaseResponse,
+      );
+    }
+
+    const gain = phaseInteractionGain(
+      this.wordAmount,
+      PARTICLE_CONFIG.spatial.scatterPoseGain,
+    );
+    this.spatialGroup.rotation.y = this.spatialPose.yaw.value * gain;
+    this.spatialGroup.rotation.x = this.spatialPose.pitch.value * gain;
+    this.spatialGroup.updateMatrixWorld(true);
+  }
+
   private updatePointerProjection() {
-    if (!this.camera || !this.pointerPresent) {
+    if (!this.camera || !this.spatialGroup || !this.pointerPresent) {
       this.pointerActive = false;
       return;
     }
     this.raycaster.setFromCamera(this.pointerNdc, this.camera);
+    this.inverseSpatialMatrix.copy(this.spatialGroup.matrixWorld).invert();
+    this.localRay.copy(this.raycaster.ray).applyMatrix4(this.inverseSpatialMatrix);
     this.pointerActive = Boolean(
-      this.raycaster.ray.intersectPlane(this.pointerPlane, this.pointerWorld),
+      this.localRay.intersectPlane(this.localPointerPlane, this.pointerLocal),
     );
   }
 
@@ -439,6 +519,7 @@ export class ParticleEngine {
     this.previousTime = time;
     this.updateTimeline(delta, elapsedTime);
     this.updateCamera(delta);
+    this.updateSpatialPose(delta);
     this.updatePointerProjection();
     this.updatePointer(delta, elapsedTime);
     this.renderer.render(this.scene, this.camera);
@@ -496,16 +577,114 @@ export class ParticleEngine {
     if (bounds.width <= 0 || bounds.height <= 0) return;
     this.pointerPresent = true;
     this.pointerNdc.set(
-      ((event.clientX - bounds.left) / bounds.width) * 2 - 1,
-      -((event.clientY - bounds.top) / bounds.height) * 2 + 1,
+      clamp(((event.clientX - bounds.left) / bounds.width) * 2 - 1, -1, 1),
+      clamp(-((event.clientY - bounds.top) / bounds.height) * 2 + 1, -1, 1),
     );
+    this.updateSpatialDrag(event);
     this.updatePointerProjection();
     this.cameraTargetX = this.pointerNdc.x * PARTICLE_CONFIG.camera.parallaxX;
     this.cameraTargetY = this.pointerNdc.y * PARTICLE_CONFIG.camera.parallaxY;
   };
 
+  private handlePointerDown = (event: PointerEvent) => {
+    const bounds = this.canvas.getBoundingClientRect();
+    const target = event.target instanceof Element ? event.target : undefined;
+    if (
+      event.button !== 0 ||
+      !event.isPrimary ||
+      this.reducedMotion ||
+      this.dragPointerId !== undefined ||
+      event.clientX < bounds.left ||
+      event.clientX > bounds.right ||
+      event.clientY < bounds.top ||
+      event.clientY > bounds.bottom ||
+      target?.closest("a, button, input, textarea, select, [role='button']")
+    ) {
+      return;
+    }
+
+    event.preventDefault();
+    this.dragPointerId = event.pointerId;
+    this.dragStarted = false;
+    this.dragOriginX = event.clientX;
+    this.dragOriginY = event.clientY;
+    this.dragOriginYaw = this.spatialPose.yaw.value;
+    this.dragOriginPitch = this.spatialPose.pitch.value;
+    this.dragPreviousTime = event.timeStamp;
+  };
+
+  private updateSpatialDrag(event: PointerEvent) {
+    if (event.pointerId !== this.dragPointerId) return;
+
+    const deltaX = event.clientX - this.dragOriginX;
+    const deltaY = event.clientY - this.dragOriginY;
+    const eventDelta = clamp((event.timeStamp - this.dragPreviousTime) / 1_000, 1 / 240, 0.05);
+    this.dragPreviousTime = event.timeStamp;
+
+    if (
+      !this.dragStarted &&
+      Math.hypot(deltaX, deltaY) < PARTICLE_CONFIG.spatial.dragThreshold
+    ) {
+      return;
+    }
+
+    this.dragStarted = true;
+    const degreesToRadians = THREE.MathUtils.degToRad;
+    const nextYaw = mapDragAngle(
+      this.dragOriginYaw,
+      deltaX,
+      PARTICLE_CONFIG.spatial.dragTravelX,
+      degreesToRadians(PARTICLE_CONFIG.spatial.yawSoftLimit),
+      degreesToRadians(PARTICLE_CONFIG.spatial.yawHardLimit),
+    );
+    const nextPitch = mapDragAngle(
+      this.dragOriginPitch,
+      -deltaY,
+      PARTICLE_CONFIG.spatial.dragTravelY,
+      degreesToRadians(PARTICLE_CONFIG.spatial.pitchSoftLimit),
+      degreesToRadians(PARTICLE_CONFIG.spatial.pitchHardLimit),
+    );
+    const velocityBlend = 0.65;
+    this.spatialPose.yaw.velocity =
+      this.spatialPose.yaw.velocity * (1 - velocityBlend) +
+      ((nextYaw - this.spatialPose.yaw.value) / eventDelta) * velocityBlend;
+    this.spatialPose.pitch.velocity =
+      this.spatialPose.pitch.velocity * (1 - velocityBlend) +
+      ((nextPitch - this.spatialPose.pitch.value) / eventDelta) * velocityBlend;
+    this.spatialPose.yaw.value = nextYaw;
+    this.spatialPose.pitch.value = nextPitch;
+  }
+
+  private handlePointerUp = (event: PointerEvent) => {
+    this.finishSpatialDrag(event.pointerId);
+  };
+
+  private finishSpatialDrag(pointerId: number) {
+    if (pointerId !== this.dragPointerId) return;
+
+    const wasDragging = this.dragStarted;
+    this.dragPointerId = undefined;
+    this.dragStarted = false;
+
+    if (!wasDragging) return;
+    const maximumVelocity = THREE.MathUtils.degToRad(
+      PARTICLE_CONFIG.spatial.maximumReleaseVelocity,
+    );
+    this.spatialPose.yaw.velocity = clamp(
+      this.spatialPose.yaw.velocity * PARTICLE_CONFIG.spatial.releaseVelocityRetention,
+      -maximumVelocity,
+      maximumVelocity,
+    );
+    this.spatialPose.pitch.velocity = clamp(
+      this.spatialPose.pitch.velocity * PARTICLE_CONFIG.spatial.releaseVelocityRetention,
+      -maximumVelocity,
+      maximumVelocity,
+    );
+  }
+
   private handlePointerOut = (event: PointerEvent) => {
     if (event.relatedTarget) return;
+    if (this.dragPointerId !== undefined) this.finishSpatialDrag(this.dragPointerId);
     this.pointerPresent = false;
     this.pointerActive = false;
     this.cameraTargetX = 0;
@@ -533,9 +712,19 @@ export class ParticleEngine {
     this.syncAnimationState();
   };
 
+  private resetSpatialInteraction() {
+    this.dragPointerId = undefined;
+    this.dragStarted = false;
+    resetSpatialPose(this.spatialPose);
+    this.spatialGroup?.rotation.set(0, 0, 0);
+    this.spatialGroup?.updateMatrixWorld(true);
+  }
+
   private resetToInitialShape() {
     this.phaseIndex = 0;
     this.phaseElapsed = 0;
+    this.wordAmount = 1;
+    this.resetSpatialInteraction();
     const initialShape = this.shape(PARTICLE_CONFIG.initialShape);
     this.base.set(initialShape);
     this.position.set(initialShape);
@@ -584,6 +773,7 @@ export class ParticleEngine {
   };
 
   private detachRuntimeListeners() {
+    this.resetSpatialInteraction();
     cancelAnimationFrame(this.resizeFrame);
     this.resizeFrame = 0;
     this.canvas.removeEventListener("webglcontextlost", this.handleContextLost);
@@ -596,6 +786,9 @@ export class ParticleEngine {
     this.viewportObserver = undefined;
     window.removeEventListener("pointermove", this.handlePointerMove);
     window.removeEventListener("pointerout", this.handlePointerOut);
+    window.removeEventListener("pointerdown", this.handlePointerDown);
+    window.removeEventListener("pointerup", this.handlePointerUp);
+    window.removeEventListener("pointercancel", this.handlePointerUp);
   }
 
   dispose() {
@@ -606,6 +799,7 @@ export class ParticleEngine {
     this.geometry?.dispose();
     this.material?.dispose();
     this.pointTexture?.dispose();
+    if (this.spatialGroup) this.scene?.remove(this.spatialGroup);
     this.renderer?.dispose();
   }
 }
