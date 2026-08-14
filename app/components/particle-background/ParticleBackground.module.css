@@ -34,9 +34,9 @@
 .ambientFallback {
   z-index: 0;
   background-image:
-    radial-gradient(circle, rgba(31, 70, 109, 0.18) 0 0.7px, transparent 1px),
-    radial-gradient(circle, rgba(95, 143, 181, 0.14) 0 0.55px, transparent 0.9px),
-    radial-gradient(circle, rgba(199, 166, 106, 0.12) 0 0.8px, transparent 1.15px);
+    radial-gradient(circle, rgba(22, 65, 105, 0.24) 0 0.7px, transparent 1px),
+    radial-gradient(circle, rgba(62, 129, 174, 0.19) 0 0.55px, transparent 0.9px),
+    radial-gradient(circle, rgba(173, 116, 47, 0.16) 0 0.8px, transparent 1.15px);
   background-position: 0 0, 21px 17px, 57px 31px;
   background-size: 73px 67px, 109px 97px, 181px 157px;
   transition: opacity 220ms ease-out;
@@ -65,7 +65,7 @@
   left: 50%;
   width: min(70vw, 980px);
   margin: 0;
-  color: rgba(1, 33, 105, 0.68);
+  color: rgba(1, 33, 105, 0.78);
   font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
   font-size: clamp(3.2rem, 12.25vw, 16rem);
   font-weight: 700;
@@ -82,8 +82,8 @@
   .fallbackName {
     color: transparent;
     background-image:
-      radial-gradient(circle, rgba(1, 33, 105, 0.7) 0 0.86px, transparent 1.04px),
-      radial-gradient(circle, rgba(0, 83, 155, 0.42) 0 0.54px, transparent 0.74px);
+      radial-gradient(circle, rgba(1, 33, 105, 0.82) 0 0.86px, transparent 1.04px),
+      radial-gradient(circle, rgba(0, 83, 155, 0.58) 0 0.54px, transparent 0.74px);
     background-position: 0 0, 2px 2px;
     background-size: 4px 4px, 7px 7px;
     -webkit-background-clip: text;

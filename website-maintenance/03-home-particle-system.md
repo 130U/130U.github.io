@@ -111,10 +111,22 @@ the same saturated blue.
 
 The particle field has two color paths that must change together:
 `ParticleBackground.module.css` owns the first-paint fallback, while
-`particle-config.ts` supplies the low-saturation blue, ice, champagne, and
-lavender WebGL palette. A custom shader reads stable per-star size and alpha
-attributes, producing a circular core and restrained halo without neon or
-additive bloom.
+`particle-config.ts` supplies the controlled-chroma navy, blue, ice, bronze,
+and lavender WebGL palette. Mid-tone stars carry enough contrast to survive a
+large bright viewport; a small accent cohort supplies color, while only a rare
+bright cohort receives the larger core. Depth-biased point sizing and bounded
+per-star variation keep the letterforms from reading like a uniform pixel
+matrix. A custom shader reads stable per-star size and alpha attributes,
+producing a circular core and restrained halo without neon or additive bloom.
+
+Word clarity is stateful rather than a global contrast filter. As a word
+settles, the shader continuously compresses color toward a deep navy ink,
+narrows the point-size range, and slightly reinforces opacity; ambient anchors
+quiet at the same rate. Those constraints reverse from the live value as the
+word scatters, restoring the wider star palette and depth range without a
+visual cut. Shader blend factors and engine-side anchor opacity are clamped to
+valid ranges, so future palette or clarity tuning cannot create invalid alpha,
+size, or color interpolation.
 
 ## Performance guardrails
 

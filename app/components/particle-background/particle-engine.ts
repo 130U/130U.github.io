@@ -34,6 +34,12 @@ type HeroReturnKind = "resume" | "canonical";
 
 const STAR_VERTEX_SHADER = /* glsl */ `
   uniform float uPixelRatio;
+  uniform float uReferenceSize;
+  uniform float uWordAlphaBoost;
+  uniform float uWordAmount;
+  uniform float uWordColorBlend;
+  uniform float uWordSizeBlend;
+  uniform vec3 uWordInk;
   attribute float aAlpha;
   attribute float aSize;
   varying float vAlpha;
@@ -42,10 +48,17 @@ const STAR_VERTEX_SHADER = /* glsl */ `
   void main() {
     vec4 viewPosition = modelViewMatrix * vec4(position, 1.0);
     float depthScale = clamp(130.0 / max(48.0, -viewPosition.z), 0.72, 1.35);
+    float wordSizeMix = clamp(uWordAmount * uWordSizeBlend, 0.0, 1.0);
+    float wordColorMix = clamp(uWordAmount * uWordColorBlend, 0.0, 1.0);
+    float semanticSize = mix(aSize, max(1.25, uReferenceSize), wordSizeMix);
     gl_Position = projectionMatrix * viewPosition;
-    gl_PointSize = max(1.25, aSize * uPixelRatio * depthScale);
-    vAlpha = aAlpha;
-    vColor = color;
+    gl_PointSize = max(1.25, semanticSize * uPixelRatio * depthScale);
+    vAlpha = clamp(
+      aAlpha * (1.0 + uWordAmount * max(0.0, uWordAlphaBoost)),
+      0.0,
+      1.0
+    );
+    vColor = mix(color, uWordInk, wordColorMix);
   }
 `;
 
@@ -57,9 +70,9 @@ const STAR_FRAGMENT_SHADER = /* glsl */ `
     float distanceFromCenter = length(gl_PointCoord - vec2(0.5)) * 2.0;
     if (distanceFromCenter > 1.0) discard;
 
-    float core = 1.0 - smoothstep(0.12, 0.72, distanceFromCenter);
-    float halo = (1.0 - smoothstep(0.3, 0.98, distanceFromCenter)) * 0.42;
-    float light = max(core, halo);
+    float core = 1.0 - smoothstep(0.1, 0.7, distanceFromCenter);
+    float halo = (1.0 - smoothstep(0.28, 0.98, distanceFromCenter)) * 0.5;
+    float light = min(1.0, core + halo);
     gl_FragColor = vec4(vColor, vAlpha * light);
   }
 `;
@@ -282,6 +295,12 @@ export class ParticleEngine {
         uPixelRatio: {
           value: Math.min(window.devicePixelRatio || 1, PARTICLE_CONFIG.maxPixelRatio),
         },
+        uReferenceSize: { value: PARTICLE_CONFIG.points.size },
+        uWordAlphaBoost: { value: PARTICLE_CONFIG.points.wordClarity.alphaBoost },
+        uWordAmount: { value: this.desiredMode === "hero" ? 1 : 0 },
+        uWordColorBlend: { value: PARTICLE_CONFIG.points.wordClarity.colorBlend },
+        uWordInk: { value: new THREE.Color(PARTICLE_CONFIG.points.wordClarity.ink) },
+        uWordSizeBlend: { value: PARTICLE_CONFIG.points.wordClarity.sizeBlend },
       },
       vertexColors: true,
       vertexShader: STAR_VERTEX_SHADER,
@@ -370,13 +389,16 @@ export class ParticleEngine {
     const points = PARTICLE_CONFIG.points;
     const ambient = PARTICLE_CONFIG.ambient;
     for (let index = 0; index < this.particleCount; index += 1) {
-      const depth = Math.pow(this.random(), 1.65);
+      const depth = Math.pow(this.random(), points.depthExponent);
       const bright = this.random() < points.brightStarRatio;
       const anchor = this.random() < points.ambientAnchorRatio;
-      const sizeVariation = 0.88 + this.random() * 0.24;
+      const sizeVariation =
+        points.sizeVariationMinimum +
+        this.random() * (points.sizeVariationMaximum - points.sizeVariationMinimum);
       const regularSize =
         points.sizeMinimum +
-        (points.sizeMaximum - points.sizeMinimum) * Math.pow(depth, 1.8);
+        (points.sizeMaximum - points.sizeMinimum) *
+          Math.pow(depth, points.sizeDepthExponent);
       const ambientOpacity =
         points.ambientOpacityMinimum +
         (points.ambientOpacityMaximum - points.ambientOpacityMinimum) *
@@ -391,10 +413,18 @@ export class ParticleEngine {
       this.ambientAlphas[index] = clamp(
         ambientOpacity + (anchor ? points.ambientAnchorBoost : 0) + (bright ? 0.34 : 0),
         0,
-        0.72,
+        0.78,
       );
-      this.scatterAlphas[index] = clamp(0.28 + depth * 0.3 + (bright ? 0.18 : 0), 0, 0.76);
-      this.wordAlphas[index] = clamp(0.78 + depth * 0.2 + (bright ? 0.04 : 0), 0, 1);
+      this.scatterAlphas[index] = clamp(
+        points.scatterOpacity + depth * 0.28 + (bright ? 0.16 : 0),
+        0,
+        0.88,
+      );
+      this.wordAlphas[index] = clamp(
+        points.wordOpacity - (1 - depth) * 0.08 + (bright ? 0.04 : 0),
+        0,
+        1,
+      );
       this.twinklePhase[index] = this.random() * Math.PI * 2;
       this.twinkleSpeed[index] = 0.24 + this.random() * 0.42;
       this.twinkleAmount[index] =
@@ -443,12 +473,12 @@ export class ParticleEngine {
         this.ambientAlphas[index] = clamp(
           this.ambientAlphas[index] + accentBoost,
           0,
-          0.78,
+          0.8,
         );
         this.scatterAlphas[index] = clamp(
           this.scatterAlphas[index] + accentBoost * 0.72,
           0,
-          0.82,
+          0.9,
         );
         this.wordAlphas[index] = clamp(
           this.wordAlphas[index] + accentBoost * 0.45,
@@ -688,6 +718,16 @@ export class ParticleEngine {
     const ambientAmount = this.ambientBlend.value;
     const effectiveWordAmount =
       this.wordAmount * (1 - this.semanticSuppression.value);
+    const wordClarity = easeInOutQuint(effectiveWordAmount);
+    if (this.material) this.material.uniforms.uWordAmount.value = wordClarity;
+    const anchorOpacity = clamp(
+      PARTICLE_CONFIG.points.wordClarity.anchorOpacityAtScatter +
+        (PARTICLE_CONFIG.points.wordClarity.anchorOpacityAtWord -
+          PARTICLE_CONFIG.points.wordClarity.anchorOpacityAtScatter) *
+          wordClarity,
+      0,
+      1,
+    );
     const repulsionGain =
       phaseInteractionGain(
         effectiveWordAmount,
@@ -767,10 +807,10 @@ export class ParticleEngine {
       this.position[offset + 2] = this.base[offset + 2];
 
       const heroAlpha = this.ambientAnchor[index]
-        ? this.ambientAlphas[index] * 0.86
+        ? this.ambientAlphas[index] * anchorOpacity
         : this.scatterAlphas[index] +
           (this.wordAlphas[index] - this.scatterAlphas[index]) *
-            easeInOutQuint(effectiveWordAmount);
+            wordClarity;
       const modeAlpha =
         heroAlpha + (this.ambientAlphas[index] - heroAlpha) * ambientAmount;
       const twinkle =
