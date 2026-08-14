@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
 import { SiteShell } from "./components/SiteShell";
-import { ParticleBackground } from "./components/particle-background/ParticleBackground";
 import {
   createPageMetadata,
   DEFAULT_DESCRIPTION,
@@ -19,7 +18,6 @@ export default function Home() {
   return (
     <SiteShell
       active="home"
-      background={<ParticleBackground />}
       frameClassName={styles.homeFrame}
       showProfile={false}
       skipHref="#home-profile"

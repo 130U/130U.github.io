@@ -1,16 +1,20 @@
 .root {
-  position: absolute;
+  position: fixed;
   z-index: 0;
-  top: 0;
-  right: 0;
-  left: 0;
+  inset: 0;
   height: 100vh;
   height: 100svh;
   overflow: hidden;
   pointer-events: none;
 }
 
+.root[data-mode="hero"] {
+  position: absolute;
+}
+
 .canvas {
+  position: relative;
+  z-index: 1;
   display: block;
   width: 100%;
   height: 100%;
@@ -19,8 +23,44 @@
   user-select: none;
 }
 
+.ambientFallback,
+.readingVeil {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.ambientFallback {
+  z-index: 0;
+  background-image:
+    radial-gradient(circle, rgba(31, 70, 109, 0.18) 0 0.7px, transparent 1px),
+    radial-gradient(circle, rgba(95, 143, 181, 0.14) 0 0.55px, transparent 0.9px),
+    radial-gradient(circle, rgba(199, 166, 106, 0.12) 0 0.8px, transparent 1.15px);
+  background-position: 0 0, 21px 17px, 57px 31px;
+  background-size: 73px 67px, 109px 97px, 181px 157px;
+  transition: opacity 220ms ease-out;
+}
+
+.readingVeil {
+  z-index: 2;
+  background:
+    radial-gradient(ellipse at 58% 42%, rgba(244, 247, 251, 0.44), transparent 58%),
+    linear-gradient(90deg, rgba(244, 247, 251, 0.16), rgba(244, 247, 251, 0.34) 42%, rgba(244, 247, 251, 0.16));
+  transition: opacity 420ms cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+.root[data-mode="ambient"] .readingVeil {
+  opacity: 1;
+}
+
+.root[data-mode="ambient"][data-state="fallback"] .ambientFallback {
+  opacity: 1;
+}
+
 .fallbackName {
   position: absolute;
+  z-index: 3;
   top: 50%;
   left: 50%;
   width: min(70vw, 980px);
@@ -55,7 +95,8 @@
   opacity: 1;
 }
 
-.root[data-state="ready"] .fallbackName {
+.root[data-state="ready"] .fallbackName,
+.root[data-mode="ambient"] .fallbackName {
   opacity: 0;
 }
 
@@ -63,7 +104,7 @@
   opacity: 0;
 }
 
-.root[data-state="fallback"] .fallbackName {
+.root[data-mode="hero"][data-state="fallback"] .fallbackName {
   opacity: 1;
 }
 
@@ -77,11 +118,26 @@
     opacity: 0;
     transition: none;
   }
+
+  .ambientFallback,
+  .readingVeil {
+    transition: none;
+  }
+}
+
+@media (prefers-reduced-transparency: reduce) {
+  .readingVeil {
+    background: rgba(244, 247, 251, 0.72);
+  }
 }
 
 @media (prefers-contrast: more) {
   .fallbackName {
     color: var(--ink-strong);
+  }
+
+  .readingVeil {
+    background: rgba(244, 247, 251, 0.68);
   }
 
   @supports ((-webkit-background-clip: text) or (background-clip: text)) {
@@ -98,9 +154,7 @@
 }
 
 @media (forced-colors: active) {
-  .fallbackName {
-    color: CanvasText;
-    background: none;
-    -webkit-text-fill-color: currentColor;
+  .root {
+    display: none;
   }
 }

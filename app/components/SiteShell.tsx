@@ -5,7 +5,6 @@ import { navigation, type ActivePage } from "../lib/content/site";
 export function SiteShell({
   active,
   children,
-  background,
   frameClassName,
   showProfile = true,
   skipHref = "#main-content",
@@ -13,7 +12,6 @@ export function SiteShell({
 }: {
   active?: ActivePage;
   children: ReactNode;
-  background?: ReactNode;
   frameClassName?: string;
   showProfile?: boolean;
   skipHref?: `#${string}`;
@@ -21,7 +19,6 @@ export function SiteShell({
 }) {
   return (
     <div className={`site-shell site-shell--${variant}`}>
-      {background}
       <a className="skip-link" href={skipHref}>
         Skip to main content
       </a>

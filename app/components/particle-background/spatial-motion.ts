@@ -50,25 +50,39 @@ export function mapDragAngle(
 }
 
 export function advanceCriticalSpring(axis: SpatialAxis, delta: number, response: number) {
+  advanceCriticalSpringTo(axis, 0, delta, response);
+}
+
+export function advanceCriticalSpringTo(
+  axis: SpatialAxis,
+  target: number,
+  delta: number,
+  response: number,
+) {
   if (delta <= 0 || response <= 0) return;
 
   // Exact critically damped integration. `response` is the approximate time
   // required to settle to one percent, not a fixed animation duration.
   const angularFrequency = 4.6 / response;
-  const coupling = axis.velocity + angularFrequency * axis.value;
+  const displacement = axis.value - target;
+  const coupling = axis.velocity + angularFrequency * displacement;
   const decay = Math.exp(-angularFrequency * delta);
-  const nextValue = (axis.value + coupling * delta) * decay;
+  const nextDisplacement = (displacement + coupling * delta) * decay;
+  const nextValue = target + nextDisplacement;
   const nextVelocity = (axis.velocity - angularFrequency * coupling * delta) * decay;
 
-  // Returning to neutral must never overshoot. This also makes an interrupted
-  // return safe to grab again from the current presentation value.
-  if (axis.value !== 0 && Math.sign(nextValue) !== Math.sign(axis.value)) {
-    axis.value = 0;
+  // A critically damped value must never cross its target. This also makes an
+  // interrupted return safe to retarget from the current presentation value.
+  if (
+    displacement !== 0 &&
+    Math.sign(nextDisplacement) !== Math.sign(displacement)
+  ) {
+    axis.value = target;
     axis.velocity = 0;
     return;
   }
 
-  axis.value = Math.abs(nextValue) < 0.000_01 ? 0 : nextValue;
+  axis.value = Math.abs(nextValue - target) < 0.000_01 ? target : nextValue;
   axis.velocity = Math.abs(nextVelocity) < 0.000_01 ? 0 : nextVelocity;
 }
 

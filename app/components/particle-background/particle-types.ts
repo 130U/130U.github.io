@@ -1,5 +1,7 @@
 export type ParticleShape = "scatter" | "theodore" | "ouyang";
 
+export type ParticleMode = "hero" | "ambient";
+
 export type TimelinePhase =
   | {
       kind: "hold";

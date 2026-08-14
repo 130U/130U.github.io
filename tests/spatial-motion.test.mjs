@@ -47,6 +47,26 @@ test("spatial return is critically damped, interruptible, and cannot cross neutr
   assert.ok(Math.abs(axis.velocity) < 0.000_01);
 });
 
+test("a critical spring can be retargeted without crossing its latest target", async () => {
+  const { advanceCriticalSpringTo } = await loadSpatialMotion();
+  const axis = { value: 0, velocity: 0 };
+
+  for (let frame = 0; frame < 18; frame += 1) {
+    advanceCriticalSpringTo(axis, 1, 1 / 60, 0.55);
+  }
+  assert.ok(axis.value > 0 && axis.value < 1);
+
+  let previousDistance = Math.abs(axis.value - 0.25);
+  for (let frame = 0; frame < 120; frame += 1) {
+    advanceCriticalSpringTo(axis, 0.25, 1 / 60, 0.55);
+    const distance = Math.abs(axis.value - 0.25);
+    assert.ok(axis.value >= 0.25 - 1e-12);
+    if (frame > 12) assert.ok(distance <= previousDistance + 1e-9);
+    previousDistance = distance;
+  }
+  assert.ok(Math.abs(axis.value - 0.25) < 0.000_01);
+});
+
 test("word coherence continuously scales spatial pose and hover repulsion", async () => {
   const { phaseInteractionGain } = await loadSpatialMotion();
   const scatterGain = 0.24;

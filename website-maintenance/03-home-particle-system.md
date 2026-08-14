@@ -1,9 +1,9 @@
-# Home Particle System
+# Shared Particle System
 
-The Home page uses a progressive visual enhancement. Its HTML identity and
-biographical copy render without JavaScript. A CSS point-pattern fallback gives
-the first browser paint the same visual language as the `aria-hidden` Three.js
-canvas that replaces it after the client is ready.
+The site uses one persistent progressive visual enhancement. Its HTML identity,
+navigation, and biographical copy render without JavaScript. A CSS fallback
+gives the first browser paint the same visual language as the `aria-hidden`
+Three.js canvas that replaces it after the client is ready.
 
 ## Page composition
 
@@ -21,9 +21,15 @@ canvas that replaces it after the client is ready.
 
 ## Module boundaries
 
-- `ParticleBackground.tsx` owns feature detection and lazy engine loading.
+- `layout.tsx` mounts exactly one persistent `ParticleBackground` above every
+  route so client navigation never destroys the star field.
+- `ParticleBackground.tsx` maps the current pathname to `hero` or `ambient`,
+  owns feature detection, and lazy-loads the engine.
+- `particle-mode.ts` keeps route-to-mode selection deterministic: only `/` is
+  narrative; every other route is ambient.
 - `particle-engine.ts` owns Three.js allocation, animation, local-plane pointer
-  response, document and viewport visibility pausing, resizing, and disposal.
+  response, interruptible mode retargeting, document and viewport visibility
+  pausing, resizing, and disposal.
 - `spatial-motion.ts` owns the allocation-free shallow-view motion math: drag
   mapping, rubber-banded angle limits, exact critically damped return, and the
   continuous word-to-scatter interaction gain.
@@ -33,9 +39,9 @@ canvas that replaces it after the client is ready.
 - `particle-config.ts` is the single source for the initial target, point counts,
   timing, camera, spatial depth, palette, drag limits, and the
   `THEODORE → SCATTER → OUYANG → SCATTER` loop.
-- `ParticleBackground.module.css` owns the static fallback and canvas layers.
-  Its absolute layer is bounded to the opening viewport instead of following
-  the reader behind the biography and footer.
+- `ParticleBackground.module.css` owns the static fallback, canvas, and reading
+  veil. The layer is bounded to the opening viewport in hero mode and fixed
+  behind editorial surfaces in ambient mode.
 
 ## Accessibility and failure behavior
 
@@ -43,8 +49,8 @@ canvas that replaces it after the client is ready.
 - The engine builds and renders the `THEODORE` target before the canvas becomes
   visible, so the first canvas frame is already stable rather than starting as
   a loose scatter.
-- `prefers-reduced-motion` renders the same calm static `THEODORE` field with no
-  loop.
+- `prefers-reduced-motion` renders a calm static `THEODORE` on Home and a static
+  scatter field on every inner route.
 - Coarse pointers do not install repulsion interactions.
 - Fine pointers may drag the opening canvas through a tightly bounded shallow
   pose. The stable navigation and scroll cue remain in the screen plane.
@@ -79,6 +85,23 @@ the complete shallow pose, while scatter holds retain only a quiet fraction of
 it. Hover repulsion likewise softens during drag and scatter so the local
 "opening" and global spatial reveal do not compete.
 
+## Cross-route continuity
+
+The engine owns one deterministic star identity table. Size, color, depth,
+ambient opacity, twinkle phase, and drift phase stay attached to the same star
+across all routes. A reserved ambient cohort never joins the word targets, so a
+quiet sky remains visible while `THEODORE` and `OUYANG` are legible.
+
+Route changes never queue animations. The latest route selects the latest
+target, and a critically damped mode spring continues from live positions and
+velocities. Leaving Home preserves the current timeline buffers until ambient
+settles; a quick return therefore reverses to the exact interrupted state. Once
+ambient settles, a later Home visit gathers canonically into `THEODORE`.
+
+Inner-to-inner navigation does not retarget the field. It keeps the same scatter
+positions, breathing phases, and camera state while only the foreground page
+changes. Direct inner-route loads initialize in ambient and never flash a word.
+
 ## Color ownership
 
 The shared editorial palette lives in `app/globals.css`. Duke Navy `#012169`
@@ -86,16 +109,16 @@ and Duke Royal `#00539B` are the exact brand anchors; pale surfaces and
 blue-black reading colors preserve hierarchy without turning every element into
 the same saturated blue.
 
-The Home particle field has two color paths that must change together:
+The particle field has two color paths that must change together:
 `ParticleBackground.module.css` owns the first-paint fallback, while
-`particle-config.ts` supplies the low-saturation far/middle/near WebGL palette.
-A palette change must preserve the point counts, material opacity, timeline,
-target geometry, and pointer physics unless those behaviors are separately
-approved.
+`particle-config.ts` supplies the low-saturation blue, ice, champagne, and
+lavender WebGL palette. A custom shader reads stable per-star size and alpha
+attributes, producing a circular core and restrained halo without neon or
+additive bloom.
 
 ## Performance guardrails
 
-Use one `Points` object, one buffer geometry, and typed arrays. Cap device pixel
+Use one renderer, one `Points` object, one buffer geometry, and typed arrays. Cap device pixel
 ratio, lower point counts on narrower screens, pause while the document is
 hidden or the opening stage is outside the viewport, and dispose the viewport
 observer, all GPU resources, and all listeners on unmount. Do not add a second

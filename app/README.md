@@ -15,8 +15,8 @@ Key routes:
 Shared responsibilities:
 
 - `components/SiteShell.tsx` — navigation, profile sidebar, footer, and skip link.
-- `components/particle-background/` — Home-only Three.js visual enhancement,
-  static fallback, reduced-motion behavior, and lifecycle cleanup.
+- `components/particle-background/` — persistent Three.js narrative/ambient
+  visual layer, static fallback, reduced-motion behavior, and lifecycle cleanup.
 - `globals.css` — visual system and responsive behavior.
 - `layout.tsx` — global metadata, icons, and Person structured data.
 - `lib/content/site.ts` — site constants, navigation, and metadata helper.

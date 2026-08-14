@@ -551,7 +551,7 @@ test("original identity assets remain intact in source and export", async () => 
   }
 });
 
-test("the Home visual module starts in a legible, bounded, static-first particle state", async () => {
+test("the shared visual module starts in a legible, bounded, static-first particle state", async () => {
   const packageJson = JSON.parse(await readFile(path.join(ROOT, "package.json"), "utf8"));
   assert.equal(packageJson.dependencies.three, "0.160.0");
   assert.equal(packageJson.devDependencies["@types/three"], "0.160.0");
@@ -566,11 +566,19 @@ test("the Home visual module starts in a legible, bounded, static-first particle
   assert.match(config, /reducedMotionParticles:\s*1_600/u);
   for (const parameter of [
     /size:\s*2\.25/u,
+    /sizeMinimum:\s*1\.15/u,
+    /sizeMaximum:\s*2\.9/u,
+    /brightSize:\s*4/u,
     /scatterOpacity:\s*0\.38/u,
     /wordOpacity:\s*0\.96/u,
-    /far:\s*"#1f466d"/u,
-    /middle:\s*"#5f8fb5"/u,
-    /near:\s*"#85b9d8"/u,
+    /ambientAnchorRatio:\s*0\.17/u,
+    /brightStarRatio:\s*0\.012/u,
+    /far:\s*"#183a5a"/u,
+    /middle:\s*"#4f80a8"/u,
+    /near:\s*"#86b9d5"/u,
+    /ice:\s*"#70aecd"/u,
+    /warm:\s*"#b78949"/u,
+    /lavender:\s*"#7e78ad"/u,
     /wordDepth:\s*8/u,
     /yawSoftLimit:\s*3\.5/u,
     /yawHardLimit:\s*4\.2/u,
@@ -578,6 +586,9 @@ test("the Home visual module starts in a legible, bounded, static-first particle
     /pitchHardLimit:\s*2\.4/u,
     /draggingRepulsionGain:\s*0\.64/u,
     /scatterPoseGain:\s*0\.24/u,
+    /ambientPoseGain:\s*0\.08/u,
+    /transitionResponse:\s*1\.35/u,
+    /semanticResponse:\s*0\.34/u,
   ]) {
     assert.match(config, parameter);
   }
@@ -613,6 +624,14 @@ test("the Home visual module starts in a legible, bounded, static-first particle
     "syncAnimationState",
     "resetToInitialShape",
     "PARTICLE_CONFIG.initialShape",
+    "setMode(mode: ParticleMode)",
+    "HeroReturnKind",
+    "heroReturnBase",
+    "semanticSuppression",
+    "ambientBlend",
+    "new THREE.ShaderMaterial",
+    'setAttribute("aSize"',
+    'setAttribute("aAlpha"',
     "this.canvas.getBoundingClientRect()",
     "detachRuntimeListeners",
     "resizeObserver?.disconnect()",
@@ -636,7 +655,7 @@ test("the Home visual module starts in a legible, bounded, static-first particle
   );
   assert.match(
     engine,
-    /handleMotionPreferenceChange[\s\S]*?resetToInitialShape\(\)[\s\S]*?this\.reducedMotion[\s\S]*?this\.stop\(\)[\s\S]*?this\.renderCurrentFrame\(\)/u,
+    /handleMotionPreferenceChange[\s\S]*?resetForMode\(this\.desiredMode\)[\s\S]*?this\.reducedMotion[\s\S]*?this\.stop\(\)[\s\S]*?this\.renderCurrentFrame\(\)/u,
   );
   assert.match(
     engine,
@@ -669,7 +688,7 @@ test("the Home visual module starts in a legible, bounded, static-first particle
   assert.match(spatialMotion, /Math\.exp\(-excess \/ range\)/u);
   assert.match(spatialMotion, /export function advanceCriticalSpring/u);
   assert.match(spatialMotion, /4\.6 \/ response/u);
-  assert.match(spatialMotion, /must never overshoot/u);
+  assert.match(spatialMotion, /must never cross its target/u);
   assert.match(spatialMotion, /export function phaseInteractionGain/u);
 
   const component = await readFile(
@@ -677,6 +696,10 @@ test("the Home visual module starts in a legible, bounded, static-first particle
     "utf8",
   );
   assert.match(component, /await import\("\.\/particle-engine"\)/u);
+  assert.match(component, /usePathname\(\)/u);
+  assert.match(component, /particleModeForPathname\(pathname\)/u);
+  assert.match(component, /engineRef\.current\?\.setMode\(mode\)/u);
+  assert.match(component, /initialMode:\s*modeRef\.current/u);
   assert.match(component, /engine\?\.dispose\(\)/u);
   assert.match(component, /onUnavailable:\s*\(\)\s*=>\s*\{\s*if \(!cancelled\)/u);
   assert.match(component, /const ready = await engine\.initialize\(\)/u);
@@ -696,7 +719,8 @@ test("the Home visual module starts in a legible, bounded, static-first particle
     "utf8",
   );
   assert.match(styles, /@media \(prefers-reduced-motion: reduce\)/u);
-  assert.match(styles, /\.root\[data-state="fallback"\] \.fallbackName/u);
+  assert.match(styles, /\.root\[data-mode="hero"\]\[data-state="fallback"\] \.fallbackName/u);
+  assert.match(styles, /\.root\[data-mode="ambient"\] \.readingVeil/u);
   assert.match(styles, /background-image:[\s\S]*?radial-gradient/u);
   assert.match(styles, /(?:-webkit-)?background-clip:\s*text/u);
   assert.match(
@@ -708,6 +732,11 @@ test("the Home visual module starts in a legible, bounded, static-first particle
   assert.match(homeStyles, /@media \(hover: hover\) and \(pointer: fine\)/u);
   assert.match(homeStyles, /\.particleStage\s*\{[\s\S]*?cursor:\s*grab/u);
   assert.match(homeStyles, /\.particleStage:active\s*\{[\s\S]*?cursor:\s*grabbing/u);
+
+  const layout = await readFile(path.join(ROOT, "app", "layout.tsx"), "utf8");
+  const home = await readFile(path.join(ROOT, "app", "page.tsx"), "utf8");
+  assert.match(layout, /<ParticleBackground\s*\/>/u);
+  assert.doesNotMatch(home, /ParticleBackground/u);
 });
 
 test("legacy alternate runtimes stay out of the production artifact", async () => {

@@ -20,15 +20,23 @@ structure as a build error, including unknown or duplicate metadata, missing
 required fields, empty entries, and route/archive drift. Standalone entry copy
 is rendered rather than silently discarded.
 
-## Progressive Home visual island
+## Persistent progressive visual layer
 
-The particle field is a Home-only client enhancement. Three.js is dynamically
+The particle field is a root-layout client enhancement. Three.js is dynamically
 loaded outside the shared shell, while semantic identity and copy remain static
-HTML. The first rendered canvas frame uses the stable `THEODORE` target. A
-single GPU point cloud, capped pixel ratio, adaptive counts, document and
-viewport visibility pausing, and explicit disposal bound its cost. Reduced
-motion resolves to a static particle target; coarse-pointer behavior and WebGL
-failure retain a usable fallback.
+HTML. The persistent canvas uses narrative word targets only on Home and a
+shared ambient scatter on every inner route. A single GPU point cloud, capped
+pixel ratio, adaptive counts, document and viewport visibility pausing, and
+explicit disposal bound its cost. Reduced motion resolves to a route-appropriate
+static target; coarse-pointer behavior and WebGL failure retain a usable
+fallback.
+
+Route intent and particle presentation are deliberately separate. Navigation
+never waits for a morph. The latest route retargets a critically damped mode
+transition from current positions and velocities, inner-to-inner navigation
+keeps one continuous ambient state, and direct deep links never initialize a
+word target. This provides spatial continuity without a client state library or
+request-time backend.
 
 The CSS fallback and canvas sampler share a platform UI font stack, so the
 fallback cannot change shape while a web font loads. Canvas resize and pointer

@@ -37,6 +37,7 @@
   --hairline: rgba(184, 202, 223, 0.68);
   --shadow-small: 0 1px 2px rgba(1, 33, 105, 0.04), 0 10px 30px rgba(1, 33, 105, 0.055);
   --shadow-medium: 0 2px 6px rgba(1, 33, 105, 0.045), 0 18px 55px rgba(1, 33, 105, 0.08);
+  --shadow-paper: 0 1px 3px rgba(1, 33, 105, 0.04), 0 14px 42px rgba(1, 33, 105, 0.065);
   --radius-small: 12px;
   --radius-medium: 20px;
   --radius-large: 28px;
@@ -125,6 +126,8 @@ a:focus-visible {
 }
 
 .site-shell {
+  position: relative;
+  z-index: 1;
   min-height: 100vh;
 }
 
@@ -234,8 +237,20 @@ a:focus-visible {
   padding: 28px;
   border: 1px solid var(--hairline);
   border-radius: var(--radius-large);
-  background: var(--surface);
-  box-shadow: var(--shadow-medium);
+  background: rgba(255, 255, 255, 0.8);
+  box-shadow: var(--shadow-paper);
+  -webkit-backdrop-filter: blur(22px) saturate(120%);
+  backdrop-filter: blur(22px) saturate(120%);
+}
+
+.education-list,
+.course-grid,
+.domain-directory,
+.archive-entry,
+.practice-note,
+.current-chapter-brief {
+  background: rgba(255, 255, 255, 0.8);
+  box-shadow: var(--shadow-paper);
   -webkit-backdrop-filter: blur(22px) saturate(120%);
   backdrop-filter: blur(22px) saturate(120%);
 }
