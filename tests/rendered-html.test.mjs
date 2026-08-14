@@ -65,7 +65,7 @@ const DOMAIN_ROUTES = [
 const PROTECTED_SOURCE_HASHES = new Map([
   [
     "app/education/page.tsx",
-    "8dd35e0d88f712c3349ebb05e151ef6ee954d3bdc54a6de4c11ad96002a1b316",
+    "23846a79f9bd6e4f5978932db2a50c4402b2e0136fd61efd63af864b2b8bddac",
   ],
   [
     "app/now/page.tsx",
@@ -487,12 +487,25 @@ test("Past Experience keeps its five-domain, 16-entry, 92-bullet structure", asy
   );
 });
 
-test("Education retains all 31 selected courses", async () => {
+test("Education retains all 31 selected courses and the approved advisor record", async () => {
   const html = await routeHtml("/education/");
   const entries = pairedElementsWithClass(html, "article", "education-entry");
   assert.equal(entries.length, 2);
-  assert.match(stripMarkup(entries[0][2]), /2025[\s\S]*Duke University[\s\S]*Durham, USA/u);
-  assert.doesNotMatch(stripMarkup(entries[0][2]), /Kunshan, China/u);
+  const graduateEntry = stripMarkup(entries[0][2]);
+  assert.match(graduateEntry, /2025[\s\S]*Duke University[\s\S]*Durham, USA/u);
+  assert.doesNotMatch(graduateEntry, /Kunshan, China/u);
+  assert.match(
+    graduateEntry,
+    /Financial Risk Concentration[\s\S]*Academic Advisor: Mark Borsuk, Ph\.D\.[\s\S]*Pratt School of Engineering Merit Scholarship/u,
+  );
+  assert.doesNotMatch(
+    graduateEntry,
+    /James L\. and Elizabeth M\. Vincent Professor of Civil and Environmental Engineering/u,
+  );
+  assert.match(
+    entries[0][2],
+    /<a\b[^>]*href="https:\/\/cee\.duke\.edu\/people\/mark-borsuk\/"[^>]*>[\s\S]*?Mark Borsuk, Ph\.D\.[\s\S]*?<\/a>/u,
+  );
   assert.match(
     stripMarkup(entries[1][2]),
     /2023[\s\S]*Duke University[\s\S]*Durham, USA & Kunshan, China/u,
@@ -562,37 +575,39 @@ test("the shared visual module starts in a legible, bounded, static-first partic
   );
   assert.match(config, /initialShape:\s*"theodore"/u);
   assert.match(config, /desktopParticles:\s*5_000/u);
+  assert.match(config, /wideDesktopParticles:\s*9_000/u);
   assert.match(config, /mobileParticles:\s*2_800/u);
   assert.match(config, /reducedMotionParticles:\s*1_600/u);
+  assert.match(config, /wideDesktopBreakpoint:\s*1_600/u);
   for (const parameter of [
-    /size:\s*2\.25/u,
-    /sizeMinimum:\s*1\.35/u,
-    /sizeMaximum:\s*3\.4/u,
-    /brightSize:\s*5/u,
+    /size:\s*2\.8/u,
+    /sizeMinimum:\s*1\.5/u,
+    /sizeMaximum:\s*4\.25/u,
+    /brightSize:\s*6\.8/u,
     /depthExponent:\s*1\.35/u,
     /sizeDepthExponent:\s*1\.45/u,
-    /sizeVariationMinimum:\s*0\.72/u,
-    /sizeVariationMaximum:\s*1\.3/u,
-    /scatterOpacity:\s*0\.44/u,
+    /sizeVariationMinimum:\s*0\.78/u,
+    /sizeVariationMaximum:\s*1\.35/u,
+    /scatterOpacity:\s*0\.68/u,
     /wordOpacity:\s*0\.98/u,
     /ambientAnchorRatio:\s*0\.17/u,
-    /brightStarRatio:\s*0\.016/u,
-    /ambientOpacityMinimum:\s*0\.035/u,
-    /ambientOpacityMaximum:\s*0\.31/u,
-    /ambientAnchorBoost:\s*0\.14/u,
-    /ink:\s*"#082f55"/u,
-    /colorBlend:\s*0\.36/u,
-    /sizeBlend:\s*0\.32/u,
-    /alphaBoost:\s*0\.06/u,
-    /anchorOpacityAtWord:\s*0\.36/u,
-    /anchorOpacityAtScatter:\s*0\.72/u,
+    /brightStarRatio:\s*0\.022/u,
+    /ambientOpacityMinimum:\s*0\.08/u,
+    /ambientOpacityMaximum:\s*0\.38/u,
+    /ambientAnchorBoost:\s*0\.18/u,
+    /ink:\s*"#f4faff"/u,
+    /colorBlend:\s*0\.64/u,
+    /sizeBlend:\s*0\.46/u,
+    /alphaBoost:\s*0\.1/u,
+    /anchorOpacityAtWord:\s*0\.86/u,
+    /anchorOpacityAtScatter:\s*0\.96/u,
     /targetJitterRatio:\s*0\.018/u,
-    /far:\s*"#082e52"/u,
-    /middle:\s*"#1f6291"/u,
-    /near:\s*"#4d92b3"/u,
-    /ice:\s*"#2e83ad"/u,
-    /warm:\s*"#a96825"/u,
-    /lavender:\s*"#625ba0"/u,
+    /far:\s*"#78b9e2"/u,
+    /middle:\s*"#b4dcf3"/u,
+    /near:\s*"#f5fbff"/u,
+    /ice:\s*"#78e3ff"/u,
+    /warm:\s*"#ffd28a"/u,
+    /lavender:\s*"#c9c4ff"/u,
     /wordDepth:\s*8/u,
     /yawSoftLimit:\s*3\.5/u,
     /yawHardLimit:\s*4\.2/u,
@@ -603,6 +618,15 @@ test("the shared visual module starts in a legible, bounded, static-first partic
     /ambientPoseGain:\s*0\.08/u,
     /transitionResponse:\s*1\.35/u,
     /semanticResponse:\s*0\.34/u,
+    /driftX:\s*1\.9/u,
+    /driftY:\s*1\.35/u,
+    /driftSpeedMinimum:\s*0\.18/u,
+    /driftSpeedMaximum:\s*0\.42/u,
+    /twinkleSpeedMinimum:\s*0\.65/u,
+    /twinkleSpeedMaximum:\s*1\.35/u,
+    /heroAnchorMotionGain:\s*0\.92/u,
+    /heroAnchorTwinkleGain:\s*0\.9/u,
+    /heroWordTwinkleGain:\s*0\.18/u,
   ]) {
     assert.match(config, parameter);
   }
@@ -648,6 +672,8 @@ test("the shared visual module starts in a legible, bounded, static-first partic
     'setAttribute("aAlpha"',
     "points.scatterOpacity",
     "points.wordOpacity",
+    "wideDesktopParticles",
+    "wideDesktopBreakpoint",
     "core + halo",
     "uWordAmount",
     "uWordInk",
@@ -658,6 +684,9 @@ test("the shared visual module starts in a legible, bounded, static-first partic
     "max(0.0, uWordAlphaBoost)",
     "anchorOpacityAtWord",
     "anchorOpacityAtScatter",
+    "heroAnchorMotionGain",
+    "heroAnchorTwinkleGain",
+    "heroWordTwinkleGain",
     "this.canvas.getBoundingClientRect()",
     "detachRuntimeListeners",
     "resizeObserver?.disconnect()",
@@ -748,6 +777,9 @@ test("the shared visual module starts in a legible, bounded, static-first partic
   assert.match(styles, /\.root\[data-mode="hero"\]\[data-state="fallback"\] \.fallbackName/u);
   assert.match(styles, /\.root\[data-mode="ambient"\] \.readingVeil/u);
   assert.match(styles, /background-image:[\s\S]*?radial-gradient/u);
+  assert.match(styles, /#012169/u);
+  assert.match(styles, /#00539b/iu);
+  assert.match(styles, /data-mode="hero"\]\[data-state="fallback"\] \.ambientFallback/u);
   assert.match(styles, /(?:-webkit-)?background-clip:\s*text/u);
   assert.match(
     styles,
@@ -758,6 +790,38 @@ test("the shared visual module starts in a legible, bounded, static-first partic
   assert.match(homeStyles, /@media \(hover: hover\) and \(pointer: fine\)/u);
   assert.match(homeStyles, /\.particleStage\s*\{[\s\S]*?cursor:\s*grab/u);
   assert.match(homeStyles, /\.particleStage:active\s*\{[\s\S]*?cursor:\s*grabbing/u);
+  assert.match(
+    homeStyles,
+    /\.profileSection\s*\{[\s\S]*?--profile-blend-height:\s*clamp\(460px, 34vw, 560px\)[\s\S]*?--profile-blend-overlap:\s*clamp\(220px, 19vw, 300px\)[\s\S]*?--profile-breathing-room:\s*clamp\(56px, 5vw, 84px\)[\s\S]*?--profile-content-inset:\s*calc\(/u,
+  );
+  assert.match(
+    homeStyles,
+    /var\(--profile-blend-height\) - var\(--profile-blend-overlap\) \+\s*var\(--profile-breathing-room\)/u,
+  );
+  assert.match(
+    homeStyles,
+    /\.profileSection::before\s*\{[\s\S]*?top:\s*calc\(0px - var\(--profile-blend-overlap\)\)[\s\S]*?height:\s*var\(--profile-blend-height\)/u,
+  );
+  for (const gradientStop of [
+    /rgba\(0, 18, 45, 0\) 0%/u,
+    /#092f56 42%/u,
+    /#d1d9df 78%/u,
+    /rgba\(255, 255, 255, 0\) 100%/u,
+  ]) {
+    assert.match(homeStyles, gradientStop);
+  }
+  assert.match(
+    homeStyles,
+    /\.profileInner\s*\{[\s\S]*?padding:\s*var\(--profile-content-inset\) 0 128px/u,
+  );
+  assert.match(
+    homeStyles,
+    /@media \(max-width: 720px\)[\s\S]*?--profile-breathing-room:\s*48px[\s\S]*?\.profileInner\s*\{[\s\S]*?padding:\s*var\(--profile-content-inset\) 0 92px/u,
+  );
+  assert.match(
+    homeStyles,
+    /@media \(prefers-contrast: more\)[\s\S]*?\.profileSection::before\s*\{[\s\S]*?display:\s*none/u,
+  );
 
   const layout = await readFile(path.join(ROOT, "app", "layout.tsx"), "utf8");
   const home = await readFile(path.join(ROOT, "app", "page.tsx"), "utf8");

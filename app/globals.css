@@ -151,7 +151,11 @@ a:focus-visible {
   z-index: 20;
   top: 0;
   padding-top: 12px;
-  background: linear-gradient(to bottom, rgba(244, 247, 251, 0.94), rgba(244, 247, 251, 0));
+  background: linear-gradient(
+    to bottom,
+    rgba(0, 18, 45, 0.78),
+    rgba(0, 18, 45, 0)
+  );
 }
 
 .topbar-inner {
@@ -550,6 +554,30 @@ a:focus-visible {
   line-height: 1.62;
 }
 
+.education-notes {
+  display: grid;
+  margin: 0;
+  padding: 0;
+  gap: 10px;
+}
+
+.education-advisor a {
+  color: var(--accent-dark);
+  font-weight: 600;
+  white-space: nowrap;
+  text-decoration-color: rgba(0, 83, 155, 0.42);
+  text-decoration-thickness: 1px;
+  text-underline-offset: 3px;
+  transition:
+    color 160ms var(--ease-out),
+    text-decoration-color 160ms var(--ease-out);
+}
+
+.education-advisor a:hover {
+  color: var(--accent);
+  text-decoration-color: currentColor;
+}
+
 .coursework {
   margin-top: 75px;
 }
@@ -940,6 +968,37 @@ a:focus-visible {
 
 .site-footer p {
   margin: 0;
+}
+
+.site-shell--default .page-intro,
+.site-shell--default .domain-index,
+.site-shell--default .domain-heading,
+.site-shell--default .site-footer {
+  border-color: rgba(194, 224, 244, 0.3);
+}
+
+.site-shell--default .page-intro h1,
+.site-shell--default .section-heading h2,
+.site-shell--default .coursework > h2,
+.site-shell--default .domain-heading h2,
+.site-shell--default .domain-index a {
+  color: #f4faff;
+  text-shadow: 0 2px 22px rgba(0, 12, 32, 0.26);
+}
+
+.site-shell--default .lede,
+.site-shell--default .back-link,
+.site-shell--default .site-footer {
+  color: rgba(224, 240, 251, 0.8);
+}
+
+.site-shell--default .eyebrow,
+.site-shell--default .section-kicker,
+.site-shell--default .chapter-context,
+.site-shell--default .domain-page-number,
+.site-shell--default .domain-heading > span,
+.site-shell--default .domain-index a span {
+  color: #8ed8ff;
 }
 
 @media (max-width: 930px) {

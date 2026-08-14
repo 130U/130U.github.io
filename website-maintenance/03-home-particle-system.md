@@ -15,6 +15,15 @@ Three.js canvas that replaces it after the client is ready.
 - The visible identity, biography, and contact coordinates live in the solid
   editorial section below the particle stage. This section is the Home page's
   semantic content and the skip-link target.
+- The particle stage and editorial section meet through a non-semantic
+  cross-boundary dissolve. It begins inside the closing portion of the star
+  field, progressively suppresses the stars, crosses the section boundary on an
+  opaque intermediate blue, and resolves to paper white inside the existing
+  blank profile space. The editorial content begins only after that dissolve
+  has completed and a responsive breathing interval has passed. Shared CSS
+  variables bind the content inset to the 360-560px transition geometry, so
+  future gradient tuning cannot silently crowd the portrait or heading. The
+  transition never exposes the underlying page color as a divider.
 - `SiteShell` keeps the profile sidebar on by default. Home explicitly opts out
   with `showProfile={false}` and supplies its own frame class, so new routes do
   not inherit the immersive layout accidentally.
@@ -110,19 +119,23 @@ blue-black reading colors preserve hierarchy without turning every element into
 the same saturated blue.
 
 The particle field has two color paths that must change together:
-`ParticleBackground.module.css` owns the first-paint fallback, while
-`particle-config.ts` supplies the controlled-chroma navy, blue, ice, bronze,
-and lavender WebGL palette. Mid-tone stars carry enough contrast to survive a
-large bright viewport; a small accent cohort supplies color, while only a rare
-bright cohort receives the larger core. Depth-biased point sizing and bounded
-per-star variation keep the letterforms from reading like a uniform pixel
-matrix. A custom shader reads stable per-star size and alpha attributes,
-producing a circular core and restrained halo without neon or additive bloom.
+`ParticleBackground.module.css` owns the first-paint fallback and the mottled
+studio-sky field, while `particle-config.ts` supplies the ice, white, warm, and
+lavender WebGL palette. The background is built from the official Duke Navy
+`#012169` and Duke Royal `#00539B` anchors rather than a photographic asset, so
+it remains resolution-independent and introduces no additional network request.
+Bright stars carry enough contrast against the dark field to survive a large viewport;
+a small accent cohort supplies color, while only a rare bright cohort receives
+the larger core. Depth-biased point sizing and bounded per-star variation keep
+the letterforms from reading like a uniform pixel matrix. A custom shader reads
+stable per-star size and alpha attributes, producing a circular core and
+restrained halo without additive bloom.
 
 Word clarity is stateful rather than a global contrast filter. As a word
-settles, the shader continuously compresses color toward a deep navy ink,
-narrows the point-size range, and slightly reinforces opacity; ambient anchors
-quiet at the same rate. Those constraints reverse from the live value as the
+settles, the shader continuously compresses color toward ice white, narrows the
+point-size range, and reinforces opacity. The reserved ambient anchors remain
+visible, moving, and twinkling behind the word, so the semantic foreground
+never replaces the sky. Those constraints reverse from the live value as the
 word scatters, restoring the wider star palette and depth range without a
 visual cut. Shader blend factors and engine-side anchor opacity are clamped to
 valid ranges, so future palette or clarity tuning cannot create invalid alpha,
@@ -130,11 +143,12 @@ size, or color interpolation.
 
 ## Performance guardrails
 
-Use one renderer, one `Points` object, one buffer geometry, and typed arrays. Cap device pixel
-ratio, lower point counts on narrower screens, pause while the document is
-hidden or the opening stage is outside the viewport, and dispose the viewport
-observer, all GPU resources, and all listeners on unmount. Do not add a second
-animation loop or allocate per-particle objects inside a frame.
+Use one renderer, one `Points` object, one buffer geometry, and typed arrays. Cap
+device pixel ratio, lower point counts on narrower screens, raise the allocation
+once at the wide-desktop breakpoint to protect apparent glyph density, pause while
+the document is hidden or the opening stage is outside the viewport, and dispose
+the viewport observer, all GPU resources, and all listeners on unmount. Do not add
+a second animation loop or allocate per-particle objects inside a frame.
 
 Canvas sizing and pointer projection use the canvas bounding box rather than
 the browser window. Pointer rays are transformed back into the spatial group's
