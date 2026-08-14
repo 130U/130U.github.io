@@ -56,7 +56,7 @@
   min-width: 56px;
   min-height: 64px;
   place-items: center;
-  color: var(--faint);
+  color: rgba(224, 240, 251, 0.82);
   font-family: var(--sans);
   font-size: 0.68rem;
   font-weight: 600;
@@ -73,21 +73,59 @@
 .scrollLine {
   width: 1px;
   height: 28px;
-  background: linear-gradient(to bottom, var(--accent), rgba(0, 83, 155, 0.12));
+  background: linear-gradient(
+    to bottom,
+    rgba(120, 227, 255, 0.92),
+    rgba(120, 227, 255, 0.16)
+  );
 }
 
 .profileSection {
+  --profile-blend-height: clamp(460px, 34vw, 560px);
+  --profile-blend-overlap: clamp(220px, 19vw, 300px);
+  --profile-breathing-room: clamp(56px, 5vw, 84px);
+  --profile-content-inset: calc(
+    var(--profile-blend-height) - var(--profile-blend-overlap) +
+      var(--profile-breathing-room)
+  );
   position: relative;
   z-index: 2;
-  border-top: 1px solid var(--rule-strong);
   background: linear-gradient(180deg, var(--paper-raised) 0%, var(--paper) 46%);
-  box-shadow: 0 -24px 60px rgba(1, 33, 105, 0.035);
+}
+
+.profileSection::before {
+  position: absolute;
+  z-index: 0;
+  top: calc(0px - var(--profile-blend-overlap));
+  right: 0;
+  left: 0;
+  height: var(--profile-blend-height);
+  background:
+    radial-gradient(ellipse at 18% 52%, rgba(139, 165, 185, 0.1), transparent 58%),
+    radial-gradient(ellipse at 82% 62%, rgba(216, 227, 235, 0.14), transparent 62%),
+    linear-gradient(
+      180deg,
+      rgba(0, 18, 45, 0) 0%,
+      rgba(0, 18, 45, 0.08) 14%,
+      rgba(0, 23, 55, 0.46) 28%,
+      #092f56 42%,
+      #294c6b 52%,
+      #667e93 62%,
+      #a8b6c2 70%,
+      #d1d9df 78%,
+      rgba(235, 239, 242, 0.78) 88%,
+      rgba(255, 255, 255, 0) 100%
+    );
+  content: "";
+  pointer-events: none;
 }
 
 .profileInner {
+  position: relative;
+  z-index: 1;
   width: min(1180px, calc(100% - 48px));
   margin: 0 auto;
-  padding: 112px 0 128px;
+  padding: var(--profile-content-inset) 0 128px;
 }
 
 .identity {
@@ -274,10 +312,6 @@
 }
 
 @media (max-width: 930px) {
-  .profileInner {
-    padding-top: 94px;
-  }
-
   .identity,
   .biography,
   .contactSection {
@@ -305,6 +339,12 @@
 }
 
 @media (max-width: 720px) {
+  .profileSection {
+    --profile-blend-height: 360px;
+    --profile-blend-overlap: 200px;
+    --profile-breathing-room: 48px;
+  }
+
   :global(.site-shell--particle .wordmark) {
     font-size: 0.94rem;
     font-weight: 650;
@@ -328,7 +368,7 @@
 
   .profileInner {
     width: min(100% - 32px, 640px);
-    padding: 76px 0 92px;
+    padding: var(--profile-content-inset) 0 92px;
   }
 
   .identity {
@@ -416,12 +456,12 @@
     cursor: grabbing;
   }
 
-  .scrollCue:hover,
   .contactStrip a:hover {
     color: var(--accent-dark);
   }
 
   .scrollCue:hover {
+    color: #ffffff;
     transform: translateY(2px);
   }
 }
@@ -457,8 +497,12 @@
   }
 
   .profileSection {
-    border-color: var(--rule-strong);
+    border-top: 1px solid var(--rule-strong);
     background: var(--paper-raised);
+  }
+
+  .profileSection::before {
+    display: none;
   }
 
   .contactStrip,

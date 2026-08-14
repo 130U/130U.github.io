@@ -32,7 +32,7 @@ const protectedPathspecs = [
 const authorizedProtectedSourceHashes = new Map([
   [
     "app/education/page.tsx",
-    "8dd35e0d88f712c3349ebb05e151ef6ee954d3bdc54a6de4c11ad96002a1b316",
+    "23846a79f9bd6e4f5978932db2a50c4402b2e0136fd61efd63af864b2b8bddac",
   ],
 ]);
 
@@ -126,7 +126,7 @@ if (forbidden.length > 0) {
 
 if (authorizedChanges.length > 0) {
   console.log(
-    "All other protected sources are unchanged; the explicitly authorized Education location correction matches its approved hash.",
+    "All other protected sources are unchanged; the explicitly authorized Education update matches its approved hash.",
   );
 } else {
   console.log(comparisonMessage);

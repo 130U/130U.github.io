@@ -77,6 +77,16 @@ const STAR_FRAGMENT_SHADER = /* glsl */ `
   }
 `;
 
+function particleCountForWidth(width: number) {
+  if (width <= PARTICLE_CONFIG.mobileBreakpoint) {
+    return PARTICLE_CONFIG.mobileParticles;
+  }
+  if (width >= PARTICLE_CONFIG.wideDesktopBreakpoint) {
+    return PARTICLE_CONFIG.wideDesktopParticles;
+  }
+  return PARTICLE_CONFIG.desktopParticles;
+}
+
 export class ParticleEngine {
   private readonly canvas: HTMLCanvasElement;
   private readonly onUnavailable: () => void;
@@ -187,10 +197,7 @@ export class ParticleEngine {
     this.motionQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
     this.reducedMotion = this.motionQuery.matches;
     this.finePointer = window.matchMedia("(hover: hover) and (pointer: fine)").matches;
-    this.particleCount =
-      window.innerWidth <= PARTICLE_CONFIG.mobileBreakpoint
-        ? PARTICLE_CONFIG.mobileParticles
-        : PARTICLE_CONFIG.desktopParticles;
+    this.particleCount = particleCountForWidth(window.innerWidth);
 
     const vectorSize = this.particleCount * 3;
     this.position = new Float32Array(vectorSize);
@@ -426,7 +433,10 @@ export class ParticleEngine {
         1,
       );
       this.twinklePhase[index] = this.random() * Math.PI * 2;
-      this.twinkleSpeed[index] = 0.24 + this.random() * 0.42;
+      this.twinkleSpeed[index] =
+        ambient.twinkleSpeedMinimum +
+        this.random() *
+          (ambient.twinkleSpeedMaximum - ambient.twinkleSpeedMinimum);
       this.twinkleAmount[index] =
         ambient.twinkleMinimum +
         (ambient.twinkleMaximum - ambient.twinkleMinimum) * this.random();
@@ -788,22 +798,27 @@ export class ParticleEngine {
         Math.cos(elapsedTime * 0.18 + this.driftPhaseY[index]) *
         0.32 *
         heroDriftStrength;
-      const ambientDriftX =
+      const isAmbientAnchor = this.ambientAnchor[index] === 1;
+      const heroAnchorMotion = isAmbientAnchor
+        ? (1 - ambientAmount) * PARTICLE_CONFIG.ambient.heroAnchorMotionGain
+        : 0;
+      const starfieldMotion = ambientAmount + heroAnchorMotion;
+      const starfieldDriftX =
         Math.sin(elapsedTime * this.driftSpeed[index] + this.driftPhaseX[index]) *
         PARTICLE_CONFIG.ambient.driftX *
         depthGain *
-        ambientAmount;
-      const ambientDriftY =
+        starfieldMotion;
+      const starfieldDriftY =
         Math.cos(
           elapsedTime * this.driftSpeed[index] * 0.83 + this.driftPhaseY[index],
         ) *
         PARTICLE_CONFIG.ambient.driftY *
         depthGain *
-        ambientAmount;
+        starfieldMotion;
       this.position[offset] =
-        this.base[offset] + this.repX[index] + heroDriftX + ambientDriftX;
+        this.base[offset] + this.repX[index] + heroDriftX + starfieldDriftX;
       this.position[offset + 1] =
-        this.base[offset + 1] + this.repY[index] + heroDriftY + ambientDriftY;
+        this.base[offset + 1] + this.repY[index] + heroDriftY + starfieldDriftY;
       this.position[offset + 2] = this.base[offset + 2];
 
       const heroAlpha = this.ambientAnchor[index]
@@ -813,11 +828,17 @@ export class ParticleEngine {
             wordClarity;
       const modeAlpha =
         heroAlpha + (this.ambientAlphas[index] - heroAlpha) * ambientAmount;
+      const heroTwinkle =
+        (1 - ambientAmount) *
+        (isAmbientAnchor
+          ? PARTICLE_CONFIG.ambient.heroAnchorTwinkleGain
+          : wordClarity * PARTICLE_CONFIG.ambient.heroWordTwinkleGain);
+      const twinkleGain = Math.min(1, ambientAmount + heroTwinkle);
       const twinkle =
         1 +
         Math.sin(elapsedTime * this.twinkleSpeed[index] + this.twinklePhase[index]) *
           this.twinkleAmount[index] *
-          ambientAmount;
+          twinkleGain;
       this.alphas[index] = clamp(modeAlpha * twinkle, 0, 1);
     }
     if (this.positionAttribute) this.positionAttribute.needsUpdate = true;

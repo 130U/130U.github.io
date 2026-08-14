@@ -81,10 +81,26 @@ export default function EducationPage() {
               Master of Engineering in Risk Engineering
             </h3>
             <p className="entry-subtitle">Financial Risk Concentration</p>
-            <p className="education-note">
-              Pratt School of Engineering Merit Scholarship — one of the
-              school’s highest-tier merit awards, covering 50% of tuition.
-            </p>
+            <div
+              className="education-notes"
+              role="group"
+              aria-label="Academic distinctions"
+            >
+              <p className="education-note education-advisor">
+                Academic Advisor:{" "}
+                <a
+                  href="https://cee.duke.edu/people/mark-borsuk/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  Mark Borsuk, Ph.D.
+                </a>
+              </p>
+              <p className="education-note">
+                Pratt School of Engineering Merit Scholarship — one of the
+                school’s highest-tier merit awards, covering 50% of tuition.
+              </p>
+            </div>
           </div>
         </article>
 
