@@ -794,6 +794,10 @@ test("the shared visual module starts in a legible, bounded, static-first partic
     homeStyles,
     /\.profileSection\s*\{[\s\S]*?--profile-blend-height:\s*clamp\(460px, 34vw, 560px\)[\s\S]*?--profile-blend-overlap:\s*clamp\(220px, 19vw, 300px\)[\s\S]*?--profile-breathing-room:\s*clamp\(56px, 5vw, 84px\)[\s\S]*?--profile-content-inset:\s*calc\(/u,
   );
+  for (const surfaceTone of [/#d9e7f2/u, /#e5eff7/u, /#edf5fa/u]) {
+    assert.match(homeStyles, surfaceTone);
+  }
+  assert.match(homeStyles, /rgba\(0, 83, 155, 0\.055\)/u);
   assert.match(
     homeStyles,
     /var\(--profile-blend-height\) - var\(--profile-blend-overlap\) \+\s*var\(--profile-breathing-room\)/u,
@@ -805,8 +809,8 @@ test("the shared visual module starts in a legible, bounded, static-first partic
   for (const gradientStop of [
     /rgba\(0, 18, 45, 0\) 0%/u,
     /#092f56 42%/u,
-    /#d1d9df 78%/u,
-    /rgba\(255, 255, 255, 0\) 100%/u,
+    /#bdcfde 78%/u,
+    /rgba\(217, 231, 242, 0\) 100%/u,
   ]) {
     assert.match(homeStyles, gradientStop);
   }
