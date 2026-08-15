@@ -18,12 +18,13 @@ Three.js canvas that replaces it after the client is ready.
 - The particle stage and editorial section meet through a non-semantic
   cross-boundary dissolve. It begins inside the closing portion of the star
   field, progressively suppresses the stars, crosses the section boundary on an
-  opaque intermediate blue, and resolves to paper white inside the existing
-  blank profile space. The editorial content begins only after that dissolve
-  has completed and a responsive breathing interval has passed. Shared CSS
-  variables bind the content inset to the 360-560px transition geometry, so
-  future gradient tuning cannot silently crowd the portrait or heading. The
-  transition never exposes the underlying page color as a divider.
+  opaque intermediate blue, and resolves to a cool, lightly tinted Duke Blue
+  paper surface inside the existing blank profile space. The editorial content
+  begins only after that dissolve has completed and a responsive breathing
+  interval has passed. Shared CSS variables bind the content inset to the
+  360-560px transition geometry, so future gradient tuning cannot silently
+  crowd the portrait or heading. The transition never exposes the underlying
+  page color as a divider.
 - `SiteShell` keeps the profile sidebar on by default. Home explicitly opts out
   with `showProfile={false}` and supplies its own frame class, so new routes do
   not inherit the immersive layout accidentally.

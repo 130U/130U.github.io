@@ -84,13 +84,24 @@
   --profile-blend-height: clamp(460px, 34vw, 560px);
   --profile-blend-overlap: clamp(220px, 19vw, 300px);
   --profile-breathing-room: clamp(56px, 5vw, 84px);
+  --profile-surface-top: #d9e7f2;
+  --profile-surface-mid: #e5eff7;
+  --profile-surface-bottom: #edf5fa;
   --profile-content-inset: calc(
     var(--profile-blend-height) - var(--profile-blend-overlap) +
       var(--profile-breathing-room)
   );
   position: relative;
   z-index: 2;
-  background: linear-gradient(180deg, var(--paper-raised) 0%, var(--paper) 46%);
+  background:
+    radial-gradient(circle at 18% 8%, rgba(255, 255, 255, 0.38), transparent 34rem),
+    radial-gradient(circle at 86% 58%, rgba(0, 83, 155, 0.055), transparent 42rem),
+    linear-gradient(
+      180deg,
+      var(--profile-surface-top) 0%,
+      var(--profile-surface-mid) 38%,
+      var(--profile-surface-bottom) 100%
+    );
 }
 
 .profileSection::before {
@@ -111,10 +122,10 @@
       #092f56 42%,
       #294c6b 52%,
       #667e93 62%,
-      #a8b6c2 70%,
-      #d1d9df 78%,
-      rgba(235, 239, 242, 0.78) 88%,
-      rgba(255, 255, 255, 0) 100%
+      #94adc2 70%,
+      #bdcfde 78%,
+      rgba(217, 231, 242, 0.92) 88%,
+      rgba(217, 231, 242, 0) 100%
     );
   content: "";
   pointer-events: none;
