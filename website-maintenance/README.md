@@ -23,6 +23,8 @@ pointer feedback unless a visible redesign is explicitly requested.
 5. Read `05-architecture-decisions.md` before introducing a CMS, API, database,
    client state, or a second repository.
 6. Read `06-public-assets.md` before adding or replacing source media.
+7. Read `07-brand-system.md` before changing color, typography, motion, or the
+   visual relationship between Home and the protected inner pages.
 
 ## Technology and publishing
 

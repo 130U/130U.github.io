@@ -31,6 +31,11 @@ Confirm:
 - the Home first paint and first canvas frame are stable, the fallback is
   readable, reduced motion is calm, and offscreen animation pauses;
 - no retired route, asset directory, copy, or legacy runtime marker appears in `out/`.
+- the exported root carries the static Content Security Policy, strict
+  referrer policy, Duke Navy theme color, and canonical personal identity
+  metadata;
+- fonts remain self-hosted, licensed, and limited to the two approved brand
+  families; particle word sampling remains independent of web-font timing.
 
 Review `out/` with the in-app browser at 1440 × 900, 720 px, 390 × 844,
 and 320 px. Check keyboard skip navigation, focus, mobile nav wrapping, text
