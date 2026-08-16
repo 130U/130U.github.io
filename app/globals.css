@@ -2,22 +2,6 @@
 @source inline("absolute fixed static start contents hidden transition");
 
 @font-face {
-  font-family: "Newsreader Variable";
-  font-style: normal;
-  font-display: swap;
-  font-weight: 200 800;
-  src: url("/assets/fonts/newsreader-variable-latin.woff2") format("woff2-variations");
-}
-
-@font-face {
-  font-family: "Newsreader Variable";
-  font-style: italic;
-  font-display: swap;
-  font-weight: 200 800;
-  src: url("/assets/fonts/newsreader-variable-italic-latin.woff2") format("woff2-variations");
-}
-
-@font-face {
   font-family: "Shantell Sans Variable";
   font-style: normal;
   font-display: swap;
@@ -50,13 +34,19 @@
   --radius-medium: 20px;
   --radius-large: 28px;
   --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
-  --font-editorial: "Newsreader Variable", Georgia, serif;
-  --font-interface: "Shantell Sans Variable", "Segoe UI", sans-serif;
-  --font-signature: var(--font-editorial);
-  --body-serif: var(--font-editorial);
-  --serif: var(--font-editorial);
-  --sans: var(--font-interface);
-  --mono: var(--font-interface);
+  --font-family: "Shantell Sans Variable", "Segoe UI", sans-serif;
+  --font-editorial: var(--font-family);
+  --font-interface: var(--font-family);
+  --font-signature: var(--font-family);
+  --body-serif: var(--font-family);
+  --serif: var(--font-family);
+  --sans: var(--font-family);
+  --mono: var(--font-family);
+  --font-variation-body: "BNCE" 0, "INFM" 0, "SPAC" 0;
+  --font-variation-display: "BNCE" 2, "INFM" 10, "SPAC" 0;
+  --font-variation-heading: "BNCE" 0, "INFM" 4, "SPAC" 0;
+  --font-variation-brand: "BNCE" 0, "INFM" 14, "SPAC" 0;
+  --font-variation-interface: "BNCE" 0, "INFM" 4, "SPAC" 0;
 }
 
 * {
@@ -79,6 +69,8 @@ body {
     var(--paper);
   font-family: var(--body-serif);
   font-size: 16px;
+  font-variation-settings: var(--font-variation-body);
+  font-synthesis: none;
   line-height: 1.72;
   font-optical-sizing: auto;
   -webkit-font-smoothing: antialiased;
@@ -126,6 +118,7 @@ a:focus-visible {
   box-shadow: var(--shadow-small);
   font-family: var(--sans);
   font-size: 0.86rem;
+  font-variation-settings: var(--font-variation-interface);
   font-weight: 650;
   transform: translateY(calc(-100% - 24px));
   transition: transform 120ms var(--ease-out);
@@ -191,10 +184,11 @@ a:focus-visible {
   color: var(--ink-strong);
   font-family: var(--font-signature);
   font-size: 1.24rem;
-  font-style: italic;
-  font-weight: 560;
+  font-style: normal;
+  font-variation-settings: var(--font-variation-brand);
+  font-weight: 650;
   font-synthesis: none;
-  letter-spacing: -0.035em;
+  letter-spacing: -0.018em;
   line-height: 1;
   transition: color 160ms var(--ease-out), transform 120ms var(--ease-out);
 }
@@ -221,6 +215,7 @@ a:focus-visible {
   color: var(--muted);
   font-family: var(--font-interface);
   font-size: 0.86rem;
+  font-variation-settings: var(--font-variation-interface);
   font-weight: 550;
   letter-spacing: -0.006em;
   line-height: 1;
@@ -315,7 +310,8 @@ a:focus-visible {
   color: var(--ink-strong);
   font-family: var(--font-signature);
   font-size: 1.48rem;
-  font-weight: 560;
+  font-variation-settings: var(--font-variation-brand);
+  font-weight: 620;
   line-height: 1.15;
   letter-spacing: -0.02em;
 }
@@ -357,6 +353,7 @@ a:focus-visible {
   color: var(--accent);
   font-family: var(--font-interface);
   font-size: 0.76rem;
+  font-variation-settings: var(--font-variation-interface);
   text-align: center;
 }
 
@@ -394,6 +391,7 @@ a:focus-visible {
   color: var(--accent-dark);
   font-family: var(--mono);
   font-size: 0.75rem;
+  font-variation-settings: var(--font-variation-interface);
   font-weight: 650;
   letter-spacing: 0.06em;
   line-height: 1.4;
@@ -405,9 +403,10 @@ a:focus-visible {
   color: var(--ink-strong);
   font-family: var(--body-serif);
   font-size: clamp(2.3rem, 4.3vw, 3.45rem);
-  font-weight: 560;
-  line-height: 1.04;
-  letter-spacing: -0.045em;
+  font-variation-settings: var(--font-variation-display);
+  font-weight: 540;
+  line-height: 1.02;
+  letter-spacing: -0.036em;
   text-wrap: balance;
 }
 
@@ -434,6 +433,7 @@ a:focus-visible {
   color: var(--ink-strong);
   font-family: var(--body-serif);
   font-size: clamp(1.7rem, 3vw, 2.3rem);
+  font-variation-settings: var(--font-variation-display);
   font-weight: 560;
   line-height: 1.15;
   letter-spacing: -0.032em;
@@ -470,6 +470,7 @@ a:focus-visible {
   color: var(--ink-strong);
   font-family: var(--body-serif);
   font-size: 1.48rem;
+  font-variation-settings: var(--font-variation-heading);
   line-height: 1.25;
 }
 
@@ -508,6 +509,7 @@ a:focus-visible {
   color: var(--accent-dark);
   font-family: var(--mono);
   font-size: 0.77rem;
+  font-variation-settings: var(--font-variation-interface);
   font-weight: 700;
   letter-spacing: 0.06em;
 }
@@ -529,6 +531,7 @@ a:focus-visible {
   color: var(--ink-strong);
   font-family: var(--body-serif);
   font-size: 1.55rem;
+  font-variation-settings: var(--font-variation-heading);
   font-weight: 620;
   line-height: 1.15;
   letter-spacing: -0.025em;
@@ -539,6 +542,7 @@ a:focus-visible {
   color: var(--muted);
   font-family: var(--sans);
   font-size: 0.76rem;
+  font-variation-settings: var(--font-variation-interface);
   font-weight: 650;
   letter-spacing: 0.035em;
 }
@@ -548,6 +552,7 @@ a:focus-visible {
   color: var(--ink-strong);
   font-family: var(--body-serif);
   font-size: 1.38rem;
+  font-variation-settings: var(--font-variation-heading);
   font-weight: 500;
   line-height: 1.28;
   letter-spacing: -0.018em;
@@ -558,6 +563,7 @@ a:focus-visible {
   color: var(--ink);
   font-family: var(--body-serif);
   font-size: 1.02rem;
+  font-variation-settings: var(--font-variation-heading);
   font-weight: 600;
   line-height: 1.35;
 }
@@ -625,6 +631,7 @@ a:focus-visible {
   color: var(--ink-strong);
   font-family: var(--body-serif);
   font-size: 1.18rem;
+  font-variation-settings: var(--font-variation-heading);
   font-weight: 580;
   line-height: 1.3;
   letter-spacing: -0.018em;
@@ -670,6 +677,7 @@ a:focus-visible {
   color: var(--accent-dark);
   font-family: var(--sans);
   font-size: 0.72rem;
+  font-variation-settings: var(--font-variation-interface);
   font-weight: 650;
   letter-spacing: 0.045em;
   line-height: 1.45;
@@ -726,12 +734,14 @@ a:focus-visible {
   color: var(--accent-dark);
   font-family: var(--mono);
   font-size: 0.76rem;
+  font-variation-settings: var(--font-variation-interface);
   font-weight: 650;
 }
 
 .domain-name {
   font-family: var(--body-serif);
   font-size: clamp(1.18rem, 2.5vw, 1.55rem);
+  font-variation-settings: var(--font-variation-heading);
   font-weight: 540;
   line-height: 1.25;
   letter-spacing: -0.02em;
@@ -756,6 +766,7 @@ a:focus-visible {
   color: var(--muted);
   font-family: var(--sans);
   font-size: 0.84rem;
+  font-variation-settings: var(--font-variation-interface);
   font-weight: 560;
   gap: 8px;
   transition: color 160ms var(--ease-out), transform 120ms var(--ease-out);
@@ -770,6 +781,7 @@ a:focus-visible {
   color: var(--accent-dark);
   font-family: var(--mono);
   font-size: 0.78rem;
+  font-variation-settings: var(--font-variation-interface);
   font-weight: 650;
 }
 
@@ -814,6 +826,7 @@ a:focus-visible {
   color: var(--accent-dark);
   font-family: var(--mono);
   font-size: 0.7rem;
+  font-variation-settings: var(--font-variation-interface);
 }
 
 .domain-list {
@@ -839,6 +852,7 @@ a:focus-visible {
   color: var(--accent-dark);
   font-family: var(--mono);
   font-size: 0.78rem;
+  font-variation-settings: var(--font-variation-interface);
   font-weight: 700;
 }
 
@@ -847,6 +861,7 @@ a:focus-visible {
   color: var(--ink-strong);
   font-family: var(--body-serif);
   font-size: clamp(2rem, 4vw, 3.15rem);
+  font-variation-settings: var(--font-variation-display);
   font-weight: 540;
   line-height: 1.06;
   letter-spacing: -0.042em;
@@ -872,6 +887,7 @@ a:focus-visible {
   color: var(--faint);
   font-family: var(--mono);
   font-size: 0.7rem;
+  font-variation-settings: var(--font-variation-interface);
 }
 
 .archive-entry-content h2,
@@ -880,6 +896,7 @@ a:focus-visible {
   color: var(--ink-strong);
   font-family: var(--body-serif);
   font-size: 1.64rem;
+  font-variation-settings: var(--font-variation-heading);
   font-weight: 550;
   line-height: 1.18;
   letter-spacing: -0.025em;
@@ -902,6 +919,7 @@ a:focus-visible {
   color: var(--accent-dark);
   font-family: var(--mono);
   font-size: 0.69rem;
+  font-variation-settings: var(--font-variation-interface);
   font-weight: 700;
   letter-spacing: 0.06em;
   text-transform: uppercase;
@@ -979,6 +997,7 @@ a:focus-visible {
   color: var(--faint);
   font-family: var(--mono);
   font-size: 0.69rem;
+  font-variation-settings: var(--font-variation-interface);
   letter-spacing: 0.04em;
 }
 

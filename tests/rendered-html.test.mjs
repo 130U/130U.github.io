@@ -894,42 +894,42 @@ test("the shared visual module reveals one stable particle composition before mo
   assert.doesNotMatch(home, /ParticleBackground/u);
 });
 
-test("the typography system uses two local families with explicit roles", async () => {
+test("the typography system uses one local variable family with explicit roles", async () => {
   const globals = await readFile(path.join(ROOT, "app", "globals.css"), "utf8");
   const homeStyles = await readFile(path.join(ROOT, "app", "home.module.css"), "utf8");
   const layout = await readFile(path.join(ROOT, "app", "layout.tsx"), "utf8");
 
-  assert.match(globals, /font-family:\s*"Newsreader Variable"[\s\S]*?font-style:\s*normal/u);
-  assert.match(globals, /font-family:\s*"Newsreader Variable"[\s\S]*?font-style:\s*italic/u);
   assert.match(globals, /font-family:\s*"Shantell Sans Variable"[\s\S]*?font-style:\s*normal/u);
-  assert.match(globals, /--font-editorial:\s*"Newsreader Variable"/u);
-  assert.match(globals, /--font-interface:\s*"Shantell Sans Variable"/u);
-  assert.match(globals, /--font-signature:\s*var\(--font-editorial\)/u);
-  assert.match(globals, /\.wordmark\s*\{[\s\S]*?font-family:\s*var\(--font-signature\)[\s\S]*?font-style:\s*italic/u);
+  assert.match(globals, /--font-family:\s*"Shantell Sans Variable"/u);
+  assert.match(globals, /--font-editorial:\s*var\(--font-family\)/u);
+  assert.match(globals, /--font-interface:\s*var\(--font-family\)/u);
+  assert.match(globals, /--font-signature:\s*var\(--font-family\)/u);
+  assert.match(globals, /--font-variation-display:\s*"BNCE" 2, "INFM" 10, "SPAC" 0/u);
+  assert.match(globals, /--font-variation-brand:\s*"BNCE" 0, "INFM" 14, "SPAC" 0/u);
+  assert.match(globals, /\.wordmark\s*\{[\s\S]*?font-family:\s*var\(--font-signature\)[\s\S]*?font-style:\s*normal[\s\S]*?font-variation-settings:\s*var\(--font-variation-brand\)/u);
   assert.match(globals, /\.primary-nav a\s*\{[\s\S]*?font-family:\s*var\(--font-interface\)/u);
-  assert.match(
+  assert.doesNotMatch(
     homeStyles,
-    /:global\(\.site-shell--particle \.wordmark\)\s*\{[\s\S]*?font-family:\s*var\(--font-signature\)/u,
+    /:global\(\.site-shell--particle \.wordmark\)\s*\{[^}]*font-(?:family|size|style|variation-settings|weight)/u,
   );
-  assert.match(
+  assert.doesNotMatch(
     homeStyles,
-    /:global\(\.site-shell--particle \.primary-nav a\)\s*\{[\s\S]*?font-family:\s*var\(--font-interface\)/u,
+    /:global\(\.site-shell--particle \.primary-nav a\)\s*\{[^}]*font-(?:family|size|style|variation-settings|weight)/u,
   );
   assert.doesNotMatch(globals, /Instrument Sans/u);
+  assert.doesNotMatch(globals, /Newsreader Variable/u);
   assert.doesNotMatch(homeStyles, /font-family:\s*system-ui/u);
 
-  for (const font of [
-    "newsreader-variable-latin.woff2",
-    "newsreader-variable-italic-latin.woff2",
-    "shantell-sans-variable-latin.woff2",
-  ]) {
+  for (const font of ["shantell-sans-variable-latin.woff2"]) {
     assert.match(layout, new RegExp(`/assets/fonts/${font.replace(".", "\\.")}`, "u"));
     assert.ok(existsSync(path.join(ROOT, "public", "assets", "fonts", font)));
     assert.ok(existsSync(path.join(OUT, "assets", "fonts", font)));
   }
 
-  assert.ok(existsSync(path.join(ROOT, "public", "assets", "fonts", "licenses", "newsreader-OFL.txt")));
   assert.ok(existsSync(path.join(ROOT, "public", "assets", "fonts", "licenses", "shantell-sans-OFL.txt")));
+  assert.ok(!existsSync(path.join(ROOT, "public", "assets", "fonts", "newsreader-variable-latin.woff2")));
+  assert.ok(!existsSync(path.join(ROOT, "public", "assets", "fonts", "newsreader-variable-italic-latin.woff2")));
+  assert.ok(!existsSync(path.join(ROOT, "public", "assets", "fonts", "licenses", "newsreader-OFL.txt")));
   assert.ok(!existsSync(path.join(ROOT, "public", "assets", "fonts", "instrument-sans-variable-latin.woff2")));
 });
 
