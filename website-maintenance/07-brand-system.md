@@ -15,22 +15,27 @@ strengthen that relationship rather than add unrelated decoration.
 
 ## Type roles
 
-The two-family limit is permanent unless a full redesign is explicitly
-approved.
+The one-family limit is permanent unless a full redesign is explicitly
+approved. Shantell Sans is expressive enough to carry the full system without
+introducing another visual voice.
 
-- **Newsreader Roman** carries headings, biography, academic content, and long
-  reading. It establishes rigor and editorial calm.
-- **Newsreader Italic** is the signature voice. Reserve it for the Theodore
-  Ouyang wordmark; repeating it would weaken the signature.
-- **Shantell Sans** carries navigation, dates, locations, kickers, indices, and
-  other short interface signals. It contributes human presence without turning
-  formal content into handwriting.
+- **Body** uses neutral Bounce, Informality, and Spacing axes. Weight, size,
+  and leading provide hierarchy while academic and long-form copy stays calm.
+- **Display** adds a small amount of Informality and a nearly imperceptible
+  positive Bounce. Use it only for page and domain titles.
+- **Heading** uses less Informality than Display and no Bounce, keeping card
+  titles personable but orderly.
+- **Interface** uses very low Informality and no Bounce. It carries navigation,
+  dates, locations, kickers, indices, and short control labels.
+- **Brand** is upright, moderately informal, and visually anchored by weight.
+  Reserve it for the Theodore Ouyang wordmark and profile name. Do not replace
+  it with synthetic italics.
 - Particle words use the platform geometric stack. Their job is clarity and
   spatial form, not editorial expression.
 
-The root tokens `--font-editorial`, `--font-signature`, and
-`--font-interface` are the canonical role boundary. Extend a role through its
-token instead of copying a font-family declaration into a new component.
+The root family and variation tokens are the canonical role boundary. Extend a
+role through its token instead of copying a font family or axis tuple into a
+new component.
 
 ## Motion signature
 
