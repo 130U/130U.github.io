@@ -2,19 +2,27 @@
 @source inline("absolute fixed static start contents hidden transition");
 
 @font-face {
-  font-family: "Instrument Sans Variable";
-  font-style: normal;
-  font-display: swap;
-  font-weight: 400 700;
-  src: url("/assets/fonts/instrument-sans-variable-latin.woff2") format("woff2-variations");
-}
-
-@font-face {
   font-family: "Newsreader Variable";
   font-style: normal;
   font-display: swap;
   font-weight: 200 800;
   src: url("/assets/fonts/newsreader-variable-latin.woff2") format("woff2-variations");
+}
+
+@font-face {
+  font-family: "Newsreader Variable";
+  font-style: italic;
+  font-display: swap;
+  font-weight: 200 800;
+  src: url("/assets/fonts/newsreader-variable-italic-latin.woff2") format("woff2-variations");
+}
+
+@font-face {
+  font-family: "Shantell Sans Variable";
+  font-style: normal;
+  font-display: swap;
+  font-weight: 300 800;
+  src: url("/assets/fonts/shantell-sans-variable-latin.woff2") format("woff2-variations");
 }
 
 :root {
@@ -42,11 +50,13 @@
   --radius-medium: 20px;
   --radius-large: 28px;
   --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
-  --display: "Instrument Sans Variable", "Helvetica Neue", Arial, sans-serif;
-  --body-serif: "Newsreader Variable", Georgia, serif;
-  --serif: var(--body-serif);
-  --sans: var(--display);
-  --mono: var(--display);
+  --font-editorial: "Newsreader Variable", Georgia, serif;
+  --font-interface: "Shantell Sans Variable", "Segoe UI", sans-serif;
+  --font-signature: var(--font-editorial);
+  --body-serif: var(--font-editorial);
+  --serif: var(--font-editorial);
+  --sans: var(--font-interface);
+  --mono: var(--font-interface);
 }
 
 * {
@@ -179,10 +189,13 @@ a:focus-visible {
   display: inline-flex;
   align-items: center;
   color: var(--ink-strong);
-  font-family: var(--body-serif);
-  font-size: 1.08rem;
-  font-weight: 600;
-  letter-spacing: -0.02em;
+  font-family: var(--font-signature);
+  font-size: 1.24rem;
+  font-style: italic;
+  font-weight: 560;
+  font-synthesis: none;
+  letter-spacing: -0.035em;
+  line-height: 1;
   transition: color 160ms var(--ease-out), transform 120ms var(--ease-out);
 }
 
@@ -206,15 +219,18 @@ a:focus-visible {
   padding: 0 13px;
   border-radius: var(--radius-small);
   color: var(--muted);
-  font-family: var(--mono);
-  font-size: 0.8rem;
-  letter-spacing: 0;
+  font-family: var(--font-interface);
+  font-size: 0.86rem;
+  font-weight: 550;
+  letter-spacing: -0.006em;
+  line-height: 1;
   transition: color 160ms var(--ease-out), background-color 160ms var(--ease-out), transform 120ms var(--ease-out);
 }
 
 .primary-nav a.active {
   color: var(--accent-dark);
   background: rgba(226, 230, 237, 0.76);
+  font-weight: 650;
 }
 
 .primary-nav a.active::after {
@@ -297,7 +313,7 @@ a:focus-visible {
 .profile-name {
   margin: 0 0 8px;
   color: var(--ink-strong);
-  font-family: var(--body-serif);
+  font-family: var(--font-signature);
   font-size: 1.48rem;
   font-weight: 560;
   line-height: 1.15;
@@ -339,7 +355,7 @@ a:focus-visible {
 
 .profile-links li > span:first-child {
   color: var(--accent);
-  font-family: var(--mono);
+  font-family: var(--font-interface);
   font-size: 0.76rem;
   text-align: center;
 }

@@ -73,3 +73,14 @@ update their pins; remove an override once the dependency tree resolves to an
 equal or newer safe version. Before release, the complete dependency tree must
 pass `npm.cmd audit`, and production dependencies must also pass
 `npm.cmd audit --omit=dev`.
+
+## Static browser boundary
+
+GitHub Pages cannot attach repository-owned response headers, so the root
+layout emits a conservative meta Content Security Policy. It permits only
+same-origin application code, styles, images, and fonts, with the minimum
+inline script and style allowances required by the exported Next.js runtime.
+It blocks plugins, cross-origin requests, external font services, and unsafe
+base or form targets. Personal identity metadata and Duke Navy browser chrome
+also originate in the root layout so every route inherits one canonical brand
+identity.

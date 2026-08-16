@@ -3,7 +3,8 @@
 Files under `assets/` are copied into the official Next.js static export.
 
 - `assets/brand/` — browser icons, monogram, source social preview, and optimized preview.
-- `assets/fonts/` — approved self-hosted fonts.
+- `assets/fonts/` — approved self-hosted Newsreader and Shantell Sans files,
+  with versioned provenance and OFL licenses recorded beside them.
 - `assets/profile/` — source portrait and responsive AVIF/WebP derivatives.
 
 The repository README uses `.github/assets/readme-cover.jpg`, a 1600 × 800

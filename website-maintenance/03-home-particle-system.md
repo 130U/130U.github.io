@@ -2,8 +2,9 @@
 
 The site uses one persistent progressive visual enhancement. Its HTML identity,
 navigation, and biographical copy render without JavaScript. A CSS fallback
-gives the first browser paint the same visual language as the `aria-hidden`
-Three.js canvas that replaces it after the client is ready.
+gives the first browser paint a quiet studio-sky field while the `aria-hidden`
+Three.js canvas prepares its complete first composition. The normal loading
+path never exposes a provisional word underneath the finished particle word.
 
 ## Page composition
 
@@ -49,23 +50,24 @@ Three.js canvas that replaces it after the client is ready.
 - `particle-config.ts` is the single source for the initial target, point counts,
   timing, camera, spatial depth, palette, drag limits, and the
   `THEODORE → SCATTER → OUYANG → SCATTER` loop.
-- `ParticleBackground.module.css` owns the static fallback, canvas, and reading
-  veil. The layer is bounded to the opening viewport in hero mode and fixed
-  behind editorial surfaces in ambient mode.
+- `ParticleBackground.module.css` owns the quiet loading sky, failure-only word
+  fallback, canvas reveal, and reading veil. The layer is bounded to the opening
+  viewport in hero mode and fixed behind editorial surfaces in ambient mode.
 
 ## Accessibility and failure behavior
 
 - The decorative canvas is excluded from the accessibility tree.
 - The engine builds and renders the `THEODORE` target before the canvas becomes
-  visible, so the first canvas frame is already stable rather than starting as
-  a loose scatter.
+  visible. The component reveals that stable frame first and activates the
+  timeline only after the opacity transition completes; a bounded timer is a
+  safety net for browsers that omit the transition event.
 - `prefers-reduced-motion` renders a calm static `THEODORE` on Home and a static
   scatter field on every inner route.
 - Coarse pointers do not install repulsion interactions.
 - Fine pointers may drag the opening canvas through a tightly bounded shallow
   pose. The stable navigation and scroll cue remain in the screen plane.
-- Missing WebGL, context loss, or initialization failure leaves the HTML/CSS
-  fallback visible and the rest of the page usable.
+- Only missing WebGL, context loss, or initialization failure exposes the
+  HTML/CSS word fallback; the rest of the page remains usable.
 - Reduced transparency and increased contrast keep foreground copy legible.
 
 ## Shallow spatial model
@@ -107,6 +109,9 @@ target, and a critically damped mode spring continues from live positions and
 velocities. Leaving Home preserves the current timeline buffers until ambient
 settles; a quick return therefore reverses to the exact interrupted state. Once
 ambient settles, a later Home visit gathers canonically into `THEODORE`.
+If navigation occurs during the initial canvas reveal, the still-hidden stable
+frame retargets immediately before the timeline is activated, so an inner route
+cannot inherit a brief Home word flash.
 
 Inner-to-inner navigation does not retarget the field. It keeps the same scatter
 positions, breathing phases, and camera state while only the foreground page

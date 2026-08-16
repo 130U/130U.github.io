@@ -313,6 +313,51 @@ test("every route has canonical metadata and the same four-item navigation", asy
   }
 });
 
+test("every route carries the same secure personal-brand boundary", async () => {
+  const requiredDirectives = [
+    "default-src 'self'",
+    "script-src 'self' 'unsafe-inline'",
+    "style-src 'self' 'unsafe-inline'",
+    "img-src 'self' data:",
+    "font-src 'self'",
+    "connect-src 'self'",
+    "worker-src 'self' blob:",
+    "object-src 'none'",
+    "base-uri 'self'",
+    "form-action 'self'",
+    "upgrade-insecure-requests",
+  ];
+
+  for (const route of EXPECTED_ROUTES) {
+    const html = await routeHtml(route);
+    const contentSecurityPolicy = metaContent(html, "http-equiv", "Content-Security-Policy");
+
+    assert.equal(metaContent(html, "name", "application-name"), "Theodore Ouyang");
+    assert.equal(metaContent(html, "name", "author"), "Theodore Ouyang");
+    assert.equal(metaContent(html, "name", "creator"), "Theodore Ouyang");
+    assert.equal(metaContent(html, "name", "publisher"), "Theodore Ouyang");
+    assert.equal(metaContent(html, "name", "referrer"), "strict-origin-when-cross-origin");
+    assert.equal(metaContent(html, "name", "theme-color"), "#012169");
+    assert.ok(contentSecurityPolicy, `${route} content security policy is missing`);
+    for (const directive of requiredDirectives) {
+      assert.ok(
+        contentSecurityPolicy.includes(directive),
+        `${route} content security policy lost ${directive}`,
+      );
+    }
+
+    for (const tag of [
+      ...openingTags(html, "script"),
+      ...openingTags(html, "img"),
+      ...openingTags(html, "source"),
+    ]) {
+      for (const name of ["src", "srcset"]) {
+        assert.doesNotMatch(attribute(tag, name) ?? "", /^https?:/iu, `${route} has a remote ${name}`);
+      }
+    }
+  }
+});
+
 test("Home gives the particle stage visual priority and moves identity details below it", async () => {
   const html = await routeHtml("/");
   const body = stripMarkup(html);
@@ -564,7 +609,7 @@ test("original identity assets remain intact in source and export", async () => 
   }
 });
 
-test("the shared visual module starts in a legible, bounded, static-first particle state", async () => {
+test("the shared visual module reveals one stable particle composition before motion", async () => {
   const packageJson = JSON.parse(await readFile(path.join(ROOT, "package.json"), "utf8"));
   assert.equal(packageJson.dependencies.three, "0.160.0");
   assert.equal(packageJson.devDependencies["@types/three"], "0.160.0");
@@ -659,6 +704,8 @@ test("the shared visual module starts in a legible, bounded, static-first partic
     "handleElementResize",
     "viewportVisible",
     "renderCurrentFrame",
+    "activate()",
+    "activated",
     "syncAnimationState",
     "resetToInitialShape",
     "PARTICLE_CONFIG.initialShape",
@@ -696,17 +743,26 @@ test("the shared visual module starts in a legible, bounded, static-first partic
     assert.ok(engine.includes(contract), `Particle lifecycle contract is missing: ${contract}`);
   }
   const initializeBody = engine.match(
-    /async initialize\(\)\s*\{([\s\S]*?)\r?\n\s*\}\r?\n\r?\n\s*private buildWordDepth/u,
+    /async initialize\(\)\s*\{([\s\S]*?)\r?\n\s*\}\r?\n\r?\n\s*activate\(\)/u,
   )?.[1];
   assert.ok(initializeBody, "Particle initialize() body is missing");
-  assert.ok(
-    initializeBody.indexOf("this.renderCurrentFrame()") <
-      initializeBody.indexOf("this.syncAnimationState()"),
-    "The stable particle frame must render synchronously before animation can start",
+  assert.match(initializeBody, /this\.renderCurrentFrame\(\)/u);
+  assert.doesNotMatch(
+    initializeBody,
+    /this\.syncAnimationState\(\)/u,
+    "Initialization must not advance the timeline behind the reveal",
   );
   assert.match(
     engine,
-    /private syncAnimationState\(\)[\s\S]*?this\.reducedMotion[\s\S]*?!this\.viewportVisible[\s\S]*?this\.stop\(\)/u,
+    /activate\(\)\s*\{[\s\S]*?this\.activated \|\|[\s\S]*?this\.activated = true[\s\S]*?this\.syncAnimationState\(\)/u,
+  );
+  assert.match(
+    engine,
+    /private syncAnimationState\(\)[\s\S]*?!this\.activated[\s\S]*?this\.reducedMotion[\s\S]*?!this\.viewportVisible[\s\S]*?this\.stop\(\)/u,
+  );
+  assert.match(
+    engine,
+    /setMode\(mode: ParticleMode\)[\s\S]*?if \(!this\.activated\)[\s\S]*?resetForMode\(mode\)[\s\S]*?renderCurrentFrame\(\)[\s\S]*?return/u,
   );
   assert.match(
     engine,
@@ -758,7 +814,10 @@ test("the shared visual module starts in a legible, bounded, static-first partic
   assert.match(component, /engine\?\.dispose\(\)/u);
   assert.match(component, /onUnavailable:\s*\(\)\s*=>\s*\{\s*if \(!cancelled\)/u);
   assert.match(component, /const ready = await engine\.initialize\(\)/u);
-  assert.match(component, /setState\(ready \? "ready" : "fallback"\)/u);
+  assert.match(component, /addEventListener\("transitionend", revealListener\)/u);
+  assert.match(component, /particleEngine\.activate\(\)/u);
+  assert.match(component, /if \(ready\) reveal\(canvas, engine\)/u);
+  assert.doesNotMatch(component, /setState\(ready \? "ready" : "fallback"\)/u);
   assert.match(component, /<span[^>]*className=\{styles\.fallbackName\}[^>]*>[\s\S]*?Theodore[\s\S]*?<\/span>/u);
   assert.doesNotMatch(component, /Theodore Ouyang/u);
 
@@ -779,6 +838,8 @@ test("the shared visual module starts in a legible, bounded, static-first partic
   assert.match(styles, /background-image:[\s\S]*?radial-gradient/u);
   assert.match(styles, /#012169/u);
   assert.match(styles, /#00539b/iu);
+  assert.match(styles, /\.root\[data-state="checking"\] \.ambientFallback\s*\{[\s\S]*?opacity:\s*0\.58/u);
+  assert.match(styles, /\.fallbackName\s*\{[\s\S]*?opacity:\s*0;/u);
   assert.match(styles, /data-mode="hero"\]\[data-state="fallback"\] \.ambientFallback/u);
   assert.match(styles, /(?:-webkit-)?background-clip:\s*text/u);
   assert.match(
@@ -831,6 +892,45 @@ test("the shared visual module starts in a legible, bounded, static-first partic
   const home = await readFile(path.join(ROOT, "app", "page.tsx"), "utf8");
   assert.match(layout, /<ParticleBackground\s*\/>/u);
   assert.doesNotMatch(home, /ParticleBackground/u);
+});
+
+test("the typography system uses two local families with explicit roles", async () => {
+  const globals = await readFile(path.join(ROOT, "app", "globals.css"), "utf8");
+  const homeStyles = await readFile(path.join(ROOT, "app", "home.module.css"), "utf8");
+  const layout = await readFile(path.join(ROOT, "app", "layout.tsx"), "utf8");
+
+  assert.match(globals, /font-family:\s*"Newsreader Variable"[\s\S]*?font-style:\s*normal/u);
+  assert.match(globals, /font-family:\s*"Newsreader Variable"[\s\S]*?font-style:\s*italic/u);
+  assert.match(globals, /font-family:\s*"Shantell Sans Variable"[\s\S]*?font-style:\s*normal/u);
+  assert.match(globals, /--font-editorial:\s*"Newsreader Variable"/u);
+  assert.match(globals, /--font-interface:\s*"Shantell Sans Variable"/u);
+  assert.match(globals, /--font-signature:\s*var\(--font-editorial\)/u);
+  assert.match(globals, /\.wordmark\s*\{[\s\S]*?font-family:\s*var\(--font-signature\)[\s\S]*?font-style:\s*italic/u);
+  assert.match(globals, /\.primary-nav a\s*\{[\s\S]*?font-family:\s*var\(--font-interface\)/u);
+  assert.match(
+    homeStyles,
+    /:global\(\.site-shell--particle \.wordmark\)\s*\{[\s\S]*?font-family:\s*var\(--font-signature\)/u,
+  );
+  assert.match(
+    homeStyles,
+    /:global\(\.site-shell--particle \.primary-nav a\)\s*\{[\s\S]*?font-family:\s*var\(--font-interface\)/u,
+  );
+  assert.doesNotMatch(globals, /Instrument Sans/u);
+  assert.doesNotMatch(homeStyles, /font-family:\s*system-ui/u);
+
+  for (const font of [
+    "newsreader-variable-latin.woff2",
+    "newsreader-variable-italic-latin.woff2",
+    "shantell-sans-variable-latin.woff2",
+  ]) {
+    assert.match(layout, new RegExp(`/assets/fonts/${font.replace(".", "\\.")}`, "u"));
+    assert.ok(existsSync(path.join(ROOT, "public", "assets", "fonts", font)));
+    assert.ok(existsSync(path.join(OUT, "assets", "fonts", font)));
+  }
+
+  assert.ok(existsSync(path.join(ROOT, "public", "assets", "fonts", "licenses", "newsreader-OFL.txt")));
+  assert.ok(existsSync(path.join(ROOT, "public", "assets", "fonts", "licenses", "shantell-sans-OFL.txt")));
+  assert.ok(!existsSync(path.join(ROOT, "public", "assets", "fonts", "instrument-sans-variable-latin.woff2")));
 });
 
 test("legacy alternate runtimes stay out of the production artifact", async () => {

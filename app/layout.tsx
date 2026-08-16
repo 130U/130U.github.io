@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import {
   DEFAULT_DESCRIPTION,
   HOME_TITLE,
@@ -9,8 +9,32 @@ import {
 import { ParticleBackground } from "./components/particle-background/ParticleBackground";
 import "./globals.css";
 
+const CONTENT_SECURITY_POLICY = [
+  "default-src 'self'",
+  "script-src 'self' 'unsafe-inline'",
+  "style-src 'self' 'unsafe-inline'",
+  "img-src 'self' data:",
+  "font-src 'self'",
+  "connect-src 'self'",
+  "worker-src 'self' blob:",
+  "object-src 'none'",
+  "base-uri 'self'",
+  "form-action 'self'",
+  "upgrade-insecure-requests",
+].join("; ");
+
+export const viewport: Viewport = {
+  themeColor: "#012169",
+};
+
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
+  applicationName: SITE_NAME,
+  authors: [{ name: SITE_NAME, url: SITE_URL }],
+  creator: SITE_NAME,
+  publisher: SITE_NAME,
+  category: "portfolio",
+  referrer: "strict-origin-when-cross-origin",
   title: {
     default: HOME_TITLE,
     template: "%s | Theodore Ouyang",
@@ -73,6 +97,30 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
+      <head>
+        <meta httpEquiv="Content-Security-Policy" content={CONTENT_SECURITY_POLICY} />
+        <link
+          rel="preload"
+          href="/assets/fonts/newsreader-variable-latin.woff2"
+          as="font"
+          type="font/woff2"
+          crossOrigin="anonymous"
+        />
+        <link
+          rel="preload"
+          href="/assets/fonts/newsreader-variable-italic-latin.woff2"
+          as="font"
+          type="font/woff2"
+          crossOrigin="anonymous"
+        />
+        <link
+          rel="preload"
+          href="/assets/fonts/shantell-sans-variable-latin.woff2"
+          as="font"
+          type="font/woff2"
+          crossOrigin="anonymous"
+        />
+      </head>
       <body>
         <ParticleBackground />
         <script

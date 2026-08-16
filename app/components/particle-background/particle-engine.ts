@@ -161,6 +161,7 @@ export class ParticleEngine {
   private animationFrame = 0;
   private resizeFrame = 0;
   private previousTime = 0;
+  private activated = false;
   private running = false;
   private disposed = false;
   private visibleWidth = 1;
@@ -345,8 +346,14 @@ export class ParticleEngine {
       window.addEventListener("pointercancel", this.handlePointerUp);
     }
 
-    this.syncAnimationState();
     return true;
+  }
+
+  activate() {
+    if (this.activated || this.disposed || this.unavailable) return;
+
+    this.activated = true;
+    this.syncAnimationState();
   }
 
   setMode(mode: ParticleMode) {
@@ -360,6 +367,12 @@ export class ParticleEngine {
     this.desiredMode = mode;
     this.transitionElapsed = 0;
     this.resetSpatialInteraction();
+
+    if (!this.activated) {
+      this.resetForMode(mode);
+      this.renderCurrentFrame();
+      return;
+    }
 
     if (this.reducedMotion) {
       this.resetForMode(mode);
@@ -937,7 +950,14 @@ export class ParticleEngine {
   }
 
   private syncAnimationState() {
-    if (this.reducedMotion || document.hidden || !this.viewportVisible) this.stop();
+    if (
+      !this.activated ||
+      this.reducedMotion ||
+      document.hidden ||
+      !this.viewportVisible
+    ) {
+      this.stop();
+    }
     else this.start();
   }
 
