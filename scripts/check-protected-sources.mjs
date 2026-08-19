@@ -32,7 +32,19 @@ const protectedPathspecs = [
 const authorizedProtectedSourceHashes = new Map([
   [
     "app/education/page.tsx",
-    "23846a79f9bd6e4f5978932db2a50c4402b2e0136fd61efd63af864b2b8bddac",
+    "ce3c34631d07d9e8f546670761392d9d9372cec9103970f8aa849267c795f28d",
+  ],
+  [
+    "app/past-experience/components/ExperienceDomainPage.tsx",
+    "098da21aa9d56f0ad56c4dd96997419988a0c51557507fe7748bbccb5913f3e0",
+  ],
+  [
+    "app/lib/content/experience.ts",
+    "01875681354d96713bf3025ce48e7f56febf3616ef3c8d921e48fb9f09846d72",
+  ],
+  [
+    "content/past-experience/archive-through-2026-06-30.md",
+    "02da27390a53658676f3c78892fe823725f8085fa26cb74dff52f9d74bbe9018",
   ],
 ]);
 
@@ -126,7 +138,7 @@ if (forbidden.length > 0) {
 
 if (authorizedChanges.length > 0) {
   console.log(
-    "All other protected sources are unchanged; the explicitly authorized Education update matches its approved hash.",
+    "All other protected sources are unchanged; the explicitly authorized Education and Past Experience updates match their approved hashes.",
   );
 } else {
   console.log(comparisonMessage);

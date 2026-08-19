@@ -1,12 +1,19 @@
 import { readFileSync } from "node:fs";
 import { join } from "node:path";
 
-const metadataKeys = ["Location", "Position", "Dates", "Project"] as const;
+const requiredMetadataKeys = ["Location", "Position", "Dates", "Project"] as const;
+const optionalMetadataKeys = ["Website"] as const;
+const metadataKeys = [...requiredMetadataKeys, ...optionalMetadataKeys] as const;
 type ExperienceMetadataKey = (typeof metadataKeys)[number];
+type RequiredExperienceMetadataKey = (typeof requiredMetadataKeys)[number];
+type OptionalExperienceMetadataKey = (typeof optionalMetadataKeys)[number];
+
+type ExperienceMetadata = Record<RequiredExperienceMetadataKey, string> &
+  Partial<Record<OptionalExperienceMetadataKey, string>>;
 
 export type ExperienceEntry = {
   organization: string;
-  metadata: Record<ExperienceMetadataKey, string>;
+  metadata: ExperienceMetadata;
   summaries: string[];
   bullets: string[];
 };
@@ -57,7 +64,7 @@ export function parsePastExperience(markdown: string): ParsedDomain[] {
     if (!entry) return;
     if (!domain) throw new Error(`Experience entry has no domain: ${entry.organization}`);
 
-    for (const key of metadataKeys) {
+    for (const key of requiredMetadataKeys) {
       if (!entry.metadata[key]) {
         throw new Error(`${entry.organization} is missing required metadata: ${key}`);
       }
@@ -68,7 +75,7 @@ export function parsePastExperience(markdown: string): ParsedDomain[] {
 
     domain.entries.push({
       ...entry,
-      metadata: entry.metadata as Record<ExperienceMetadataKey, string>,
+      metadata: entry.metadata as ExperienceMetadata,
     });
     entry = undefined;
   };

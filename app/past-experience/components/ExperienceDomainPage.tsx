@@ -2,7 +2,11 @@ import Link from "next/link";
 import { SiteShell } from "../../components/SiteShell";
 import type { ExperienceDomain } from "../../lib/content/experience";
 
-const metadataOrder = ["Location", "Position", "Dates"] as const;
+const metadataOrder = ["Location", "Website", "Position", "Dates"] as const;
+
+function formatWebsiteLabel(website: string) {
+  return website.replace(/^https?:\/\/(?:www\.)?/u, "").replace(/\/$/u, "");
+}
 
 export function ExperienceDomainPage({
   domain,
@@ -31,12 +35,34 @@ export function ExperienceDomainPage({
             <div className="archive-entry-content">
               <h2>{entry.organization}</h2>
               <dl className="entry-metadata">
-                {metadataOrder.map((label) => (
-                  <div key={label}>
-                    <dt>{label}</dt>
-                    <dd>{entry.metadata[label]}</dd>
-                  </div>
-                ))}
+                {metadataOrder.map((label) => {
+                  const value = entry.metadata[label];
+                  if (!value) return null;
+
+                  return (
+                    <div key={label}>
+                      <dt>{label}</dt>
+                      <dd>
+                        {label === "Website" ? (
+                          <a
+                            className="entry-website-link"
+                            href={value}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            aria-label={`Visit ${entry.organization} website (opens in a new tab)`}
+                          >
+                            <span>{formatWebsiteLabel(value)}</span>
+                            <span className="entry-website-arrow" aria-hidden="true">
+                              ↗
+                            </span>
+                          </a>
+                        ) : (
+                          value
+                        )}
+                      </dd>
+                    </div>
+                  );
+                })}
               </dl>
               <p className="entry-project">
                 <span>Project</span>

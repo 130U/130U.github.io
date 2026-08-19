@@ -932,6 +932,44 @@ a:focus-visible {
   line-height: 1.5;
 }
 
+.entry-website-link {
+  display: inline-flex;
+  width: fit-content;
+  align-items: baseline;
+  gap: 0.32rem;
+  border-bottom: 1px solid rgba(0, 83, 155, 0.42);
+  color: var(--accent-dark);
+  font-family: var(--sans);
+  font-variation-settings: var(--font-variation-interface);
+  font-weight: 650;
+  line-height: 1.35;
+  overflow-wrap: anywhere;
+  text-decoration: none;
+  transition:
+    color 160ms var(--ease-out),
+    border-color 160ms var(--ease-out);
+}
+
+.entry-website-arrow {
+  display: inline-block;
+  color: var(--accent);
+  font-size: 0.82em;
+  font-weight: 700;
+  line-height: 1;
+  transform: translate3d(0, 0, 0);
+  transition: transform 160ms var(--ease-out);
+}
+
+.entry-website-link:active {
+  border-color: currentColor;
+  color: var(--accent);
+}
+
+.entry-website-link:active .entry-website-arrow {
+  transform: translate3d(1px, -1px, 0);
+  transition-duration: 80ms;
+}
+
 .entry-project {
   display: grid;
   grid-template-columns: 78px minmax(0, 1fr);
@@ -1146,7 +1184,8 @@ a:focus-visible {
 
   .profile-links a,
   .back-link,
-  .domain-index a {
+  .domain-index a,
+  .entry-website-link {
     min-height: 44px;
   }
 
@@ -1281,7 +1320,8 @@ a:focus-visible {
   .profile-links li,
   .profile-links a,
   .back-link,
-  .domain-index a {
+  .domain-index a,
+  .entry-website-link {
     min-height: 44px;
   }
 
@@ -1305,6 +1345,15 @@ a:focus-visible {
   .back-link:hover {
     color: var(--accent-dark);
     text-decoration-color: var(--accent);
+  }
+
+  .entry-website-link:hover {
+    border-color: currentColor;
+    color: var(--accent);
+  }
+
+  .entry-website-link:hover .entry-website-arrow {
+    transform: translate3d(2px, -2px, 0);
   }
 
   .domain-directory-link:hover {
@@ -1339,8 +1388,13 @@ a:focus-visible {
   .back-link,
   .domain-directory-link,
   .domain-arrow,
-  .domain-index a {
+  .domain-index a,
+  .entry-website-link {
     transition-duration: 120ms;
+  }
+
+  .entry-website-arrow {
+    transition: none;
   }
 
   .wordmark:active,
@@ -1349,7 +1403,9 @@ a:focus-visible {
   .back-link:active,
   .domain-directory-link:active,
   .domain-directory-link:hover .domain-arrow,
-  .domain-index a:hover {
+  .domain-index a:hover,
+  .entry-website-link:hover .entry-website-arrow,
+  .entry-website-link:active .entry-website-arrow {
     transform: none;
   }
 }
@@ -1401,5 +1457,9 @@ a:focus-visible {
   .current-chapter-brief {
     background: var(--paper-raised);
     border-color: var(--rule-strong);
+  }
+
+  .entry-website-link {
+    border-bottom-color: currentColor;
   }
 }

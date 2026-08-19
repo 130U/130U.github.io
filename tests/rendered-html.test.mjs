@@ -65,7 +65,7 @@ const DOMAIN_ROUTES = [
 const PROTECTED_SOURCE_HASHES = new Map([
   [
     "app/education/page.tsx",
-    "23846a79f9bd6e4f5978932db2a50c4402b2e0136fd61efd63af864b2b8bddac",
+    "ce3c34631d07d9e8f546670761392d9d9372cec9103970f8aa849267c795f28d",
   ],
   [
     "app/now/page.tsx",
@@ -81,15 +81,15 @@ const PROTECTED_SOURCE_HASHES = new Map([
   ],
   [
     "app/past-experience/components/ExperienceDomainPage.tsx",
-    "6350ae5dffd06111562455deea826af7373e88aba3a73b1e5a823c5a0f60288f",
+    "098da21aa9d56f0ad56c4dd96997419988a0c51557507fe7748bbccb5913f3e0",
   ],
   [
     "app/lib/content/experience.ts",
-    "2bedced152edabc7fe56071b50d43f288f1011f427bd60288df392cfc00f06f8",
+    "01875681354d96713bf3025ce48e7f56febf3616ef3c8d921e48fb9f09846d72",
   ],
   [
     "content/past-experience/archive-through-2026-06-30.md",
-    "8a016cedb94a308c43b553d79aaeecec0640024314336734ff7bdb2ef535f64c",
+    "02da27390a53658676f3c78892fe823725f8085fa26cb74dff52f9d74bbe9018",
   ],
 ]);
 
@@ -532,13 +532,117 @@ test("Past Experience keeps its five-domain, 16-entry, 92-bullet structure", asy
   );
 });
 
-test("Education retains all 31 selected courses and the approved advisor record", async () => {
+test("Past Experience renders the approved metadata and reverse-chronological entry order", async () => {
+  const expectedOrganizations = new Map([
+    [
+      "/past-experience/artificial-intelligence/",
+      [
+        "A global AI data and model evaluation company",
+        "Duke University: AI at Duke",
+        "Duke University: AI at Duke",
+        "Duke University",
+      ],
+    ],
+    [
+      "/past-experience/data-science/",
+      ["Jiritsu Network", "Euromonitor International", "China Construction Bank Asia"],
+    ],
+    [
+      "/past-experience/environmental-social-and-governance/",
+      [
+        "Duke Law School",
+        "Nicholas School of the Environment",
+        "Nicholas School of the Environment",
+        "Hubble Network",
+      ],
+    ],
+    [
+      "/past-experience/finance/",
+      ["Jones Lang LaSalle (JLL)", "SAIF Partners (SoftBank Asia Infrastructure Funds)", "CITIC Securities"],
+    ],
+    [
+      "/past-experience/stem-academic-competitions-and-training/",
+      ["Independent STEM Olympiad Training Practice", "The High School Attached to Hunan Normal University"],
+    ],
+  ]);
+
+  for (const [route, expected] of expectedOrganizations) {
+    const html = await routeHtml(route);
+    const organizations = pairedElementsWithClass(html, "article", "archive-entry").map(
+      (entry) => stripMarkup(entry[2].match(/<h2\b[^>]*>([\s\S]*?)<\/h2>/iu)?.[1] ?? ""),
+    );
+    assert.deepEqual(organizations, expected, `${route} is not ordered by descending end date`);
+  }
+
+  const aiHtml = await routeHtml("/past-experience/artificial-intelligence/");
+  const aiText = stripMarkup(aiHtml);
+  assert.doesNotMatch(aiText, /Alignerr|Micro1|November 2025 – Present/u);
+  assert.match(
+    aiText,
+    /A global AI data and model evaluation company[\s\S]*November 2025 – July 2026[\s\S]*Duke University: AI at Duke[\s\S]*Durham, USA[\s\S]*Researcher[\s\S]*September 2023 – October 2025/u,
+  );
+  assert.equal((aiHtml.match(/href="https:\/\/ai\.duke\.edu\/"/gu) ?? []).length, 2);
+  assert.match(aiHtml, /href="https:\/\/dukeimpact\.com\/"/u);
+  assert.equal((aiHtml.match(/class="entry-website-link"/gu) ?? []).length, 3);
+  assert.equal((aiHtml.match(/<span>ai\.duke\.edu<\/span>/gu) ?? []).length, 2);
+  assert.match(aiHtml, /<span>dukeimpact\.com<\/span>/u);
+  assert.equal(
+    (
+      aiHtml.match(
+        /aria-label="Visit Duke University: AI at Duke website \(opens in a new tab\)"/gu,
+      ) ?? []
+    ).length,
+    2,
+  );
+  assert.equal(
+    (aiHtml.match(/class="entry-website-arrow" aria-hidden="true">↗<\/span>/gu) ?? [])
+      .length,
+    3,
+  );
+
+  const esgHtml = await routeHtml(
+    "/past-experience/environmental-social-and-governance/",
+  );
+  assert.match(
+    stripMarkup(esgHtml),
+    /Hubble Network[\s\S]*Student Consultant & Business Analytics Analyst/u,
+  );
+  assert.match(esgHtml, /href="https:\/\/hubble\.com\/"/u);
+  assert.match(esgHtml, /<span>hubble\.com<\/span>/u);
+  assert.match(
+    esgHtml,
+    /aria-label="Visit Hubble Network website \(opens in a new tab\)"/u,
+  );
+});
+
+test("Past Experience website links use restrained interface styling and accessible motion", async () => {
+  const globals = await readFile(path.join(ROOT, "app", "globals.css"), "utf8");
+
+  assert.match(
+    globals,
+    /\.entry-website-link\s*\{[\s\S]*?display:\s*inline-flex[\s\S]*?font-variation-settings:\s*var\(--font-variation-interface\)[\s\S]*?text-decoration:\s*none/u,
+  );
+  assert.match(
+    globals,
+    /@media \(pointer: coarse\)[\s\S]*?\.entry-website-link\s*\{[\s\S]*?min-height:\s*44px/u,
+  );
+  assert.match(
+    globals,
+    /@media \(prefers-reduced-motion: reduce\)[\s\S]*?\.entry-website-arrow\s*\{[\s\S]*?transition:\s*none[\s\S]*?\.entry-website-link:hover \.entry-website-arrow,[\s\S]*?\.entry-website-link:active \.entry-website-arrow\s*\{[\s\S]*?transform:\s*none/u,
+  );
+  assert.match(
+    globals,
+    /@media \(prefers-contrast: more\)[\s\S]*?\.entry-website-link\s*\{[\s\S]*?border-bottom-color:\s*currentColor/u,
+  );
+});
+
+test("Education retains all 31 selected courses and the approved advisor record without degree locations", async () => {
   const html = await routeHtml("/education/");
   const entries = pairedElementsWithClass(html, "article", "education-entry");
   assert.equal(entries.length, 2);
   const graduateEntry = stripMarkup(entries[0][2]);
-  assert.match(graduateEntry, /2025[\s\S]*Duke University[\s\S]*Durham, USA/u);
-  assert.doesNotMatch(graduateEntry, /Kunshan, China/u);
+  assert.match(graduateEntry, /2025[\s\S]*Duke University/u);
+  assert.doesNotMatch(graduateEntry, /Durham, USA|Kunshan, China/u);
   assert.match(
     graduateEntry,
     /Financial Risk Concentration[\s\S]*Academic Advisor: Mark Borsuk, Ph\.D\.[\s\S]*Pratt School of Engineering Merit Scholarship/u,
@@ -551,10 +655,8 @@ test("Education retains all 31 selected courses and the approved advisor record"
     entries[0][2],
     /<a\b[^>]*href="https:\/\/cee\.duke\.edu\/people\/mark-borsuk\/"[^>]*>[\s\S]*?Mark Borsuk, Ph\.D\.[\s\S]*?<\/a>/u,
   );
-  assert.match(
-    stripMarkup(entries[1][2]),
-    /2023[\s\S]*Duke University[\s\S]*Durham, USA & Kunshan, China/u,
-  );
+  assert.match(stripMarkup(entries[1][2]), /2023[\s\S]*Duke University/u);
+  assert.doesNotMatch(stripMarkup(entries[1][2]), /Durham, USA|Kunshan, China/u);
 
   const lists = pairedElementsWithClass(html, "ul", "course-list");
   assert.equal(lists.length, 4);
