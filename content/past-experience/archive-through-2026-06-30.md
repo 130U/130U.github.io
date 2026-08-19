@@ -39,42 +39,7 @@ His work centers on building decision-grade standards, validation protocols, and
 
 ### Artificial Intelligence
 
-#### Alignerr
-
-**Location:** Silicon Valley, USA (Hybrid)  
-**Position:** Domain Expert  
-**Dates:** November 2025 – July 2026
-**Project:** Frontier LLM Capability Boundary Probing via Graduate-Level Physics & Risk-Engineering Benchmarks  
-Designed graduate-level, computation-heavy scientific reasoning benchmarks to probe the capability boundaries of a frontier large language model, prioritizing substance over trick wording
-
-- Built physics problems centered on long-form derivations, invariant-based reasoning, and tight constraint management to prevent shortcut solutions
-- Recombined rigorous physics foundations into mechanics-heavy prompts that demand both physical intuition and careful mathematical derivations
-- Converted risk-engineering research themes into quantitative prompts that require explicit assumptions, nontrivial modeling choices, and end-to-end reasoning
-- Raised difficulty by layering advanced techniques and edge conditions, pushing problems beyond standard textbook patterns
-- Representative example: designed a right-triangle kinematics puzzle with path-invariant vertical time, reducing optimization to horizontal scheduling; proved the fastest path, showed the slowest path has no maximizer but a supremum, and derived harmonic-number asymptotics for a staircase construction approaching the bound
-- Reused the same layered-difficulty design playbook across multiple topics and scenarios, balancing high-compute reasoning with creativity
-
----
-
-#### Alignerr
-
-**Location:** Silicon Valley, USA (Hybrid)  
-**Position:** Domain Expert  
-**Dates:** November 2025 – July 2026
-**Project:** End-to-End RLHF Preference Data Engineering with Scenario Design, Rubrics & A/B Ranking Signals
-
-- Owned end-to-end human preference data engineering for RLHF alignment, designing scenarios, datasets, and rubrics to rank multiple model variants via A/B preference tests
-- Crafted evaluation scenarios that probe where strong reasoning diverges from human engineering criteria, turning alignment goals into testable, domain-grounded tasks
-- Built realistic input datasets with natural messiness and confounders, avoiding contrived control-variable setups so model behavior reflects real decision contexts
-- Defined quantifiable rubrics and structured response requirements to convert subjective judgments into consistent, rankable preference signals
-- Authored reusable task templates plus data-generation rules so each scenario can be re-instantiated and rerun at high volume without synthetic-looking artifacts
-- Representative example: designed an ESG rating evaluation that surfaces old-company advantage bias by pairing comparable new vs. established firms and rewarding substantive performance over disclosure tenure; applied the same bias-probing approach across multiple domains and scenarios
-- Produced pairwise rankings with graded preference strength and clear comparative rationales that pinpointed failure modes and decision-critical trade-offs
-- Supported evaluator consistency through lightweight calibration on edge cases and evidence re-check steps when inputs or sources were inconsistent
-
----
-
-#### Micro1
+#### A global AI data and model evaluation company
 
 **Location:** Silicon Valley, USA (Hybrid)  
 **Position:** Domain Expert  
@@ -91,9 +56,47 @@ Designed graduate-level, computation-heavy scientific reasoning benchmarks to pr
 
 ---
 
+#### Duke University: AI at Duke
+
+**Location:** Durham, USA
+**Website:** https://ai.duke.edu/
+**Position:** Researcher
+**Dates:** September 2023 – October 2025
+**Project:** Frontier LLM Capability Boundary Probing via Graduate-Level Physics & Risk-Engineering Benchmarks  
+Designed graduate-level, computation-heavy scientific reasoning benchmarks to probe the capability boundaries of a frontier large language model, prioritizing substance over trick wording
+
+- Built physics problems centered on long-form derivations, invariant-based reasoning, and tight constraint management to prevent shortcut solutions
+- Recombined rigorous physics foundations into mechanics-heavy prompts that demand both physical intuition and careful mathematical derivations
+- Converted risk-engineering research themes into quantitative prompts that require explicit assumptions, nontrivial modeling choices, and end-to-end reasoning
+- Raised difficulty by layering advanced techniques and edge conditions, pushing problems beyond standard textbook patterns
+- Representative example: designed a right-triangle kinematics puzzle with path-invariant vertical time, reducing optimization to horizontal scheduling; proved the fastest path, showed the slowest path has no maximizer but a supremum, and derived harmonic-number asymptotics for a staircase construction approaching the bound
+- Reused the same layered-difficulty design playbook across multiple topics and scenarios, balancing high-compute reasoning with creativity
+
+---
+
+#### Duke University: AI at Duke
+
+**Location:** Durham, USA
+**Website:** https://ai.duke.edu/
+**Position:** Researcher
+**Dates:** September 2023 – October 2025
+**Project:** End-to-End RLHF Preference Data Engineering with Scenario Design, Rubrics & A/B Ranking Signals
+
+- Owned end-to-end human preference data engineering for RLHF alignment, designing scenarios, datasets, and rubrics to rank multiple model variants via A/B preference tests
+- Crafted evaluation scenarios that probe where strong reasoning diverges from human engineering criteria, turning alignment goals into testable, domain-grounded tasks
+- Built realistic input datasets with natural messiness and confounders, avoiding contrived control-variable setups so model behavior reflects real decision contexts
+- Defined quantifiable rubrics and structured response requirements to convert subjective judgments into consistent, rankable preference signals
+- Authored reusable task templates plus data-generation rules so each scenario can be re-instantiated and rerun at high volume without synthetic-looking artifacts
+- Representative example: designed an ESG rating evaluation that surfaces old-company advantage bias by pairing comparable new vs. established firms and rewarding substantive performance over disclosure tenure; applied the same bias-probing approach across multiple domains and scenarios
+- Produced pairwise rankings with graded preference strength and clear comparative rationales that pinpointed failure modes and decision-critical trade-offs
+- Supported evaluator consistency through lightweight calibration on edge cases and evidence re-check steps when inputs or sources were inconsistent
+
+---
+
 #### Duke University
 
 **Location:** Durham, USA  
+**Website:** https://dukeimpact.com/
 **Position:** Research Assistant  
 **Dates:** August 2024 – May 2025
 **Project:** Sustainability Event Intelligence Labeling for Equity Research Backtests & AI Workflows
@@ -190,7 +193,8 @@ Designed graduate-level, computation-heavy scientific reasoning benchmarks to pr
 #### Hubble Network
 
 **Location:** Seattle, USA  
-**Position:** ESG & Business Analytics Analyst  
+**Website:** https://hubble.com/
+**Position:** Student Consultant & Business Analytics Analyst
 **Dates:** August 2023 – January 2024
 **Project:** Board-Ready ESG Strategy & Market Positioning with Landscape Research, Segmentation Forecasting & Concept-Test Validation
 
@@ -199,28 +203,6 @@ Designed graduate-level, computation-heavy scientific reasoning benchmarks to pr
 - Crafted positioning for existing IoT products by linking features to measurable ESG outcomes, and concept-test simulations reached 85 percent customer satisfaction
 
 ### Finance
-
-#### SAIF Partners (SoftBank Asia Infrastructure Funds)
-
-**Location:** Shanghai, China  
-**Position:** Investment Analyst Intern  
-**Dates:** June 2022 – October 2022
-**Project:** Thematic Investment Analytics in Dental with Policy Intelligence & Governance/Compliance Risk Gates
-
-- Consolidated 2,000 funding cases and 200 regulatory items into a standardized dataset covering more than 600 Greater China dental deals and 120 to 150 actionable regulatory events
-- The dataset became the backbone for systematic screening, thematic analysis, and follow-on financial modeling across the broader Greater China dental theme
-- Used the database to test whether orthodontics was large enough, structurally attractive, and manageable from a policy-risk perspective, supporting a dedicated subsector focus
-- Owned 4 public-data workstreams: funding flows, policy and regulation, industry structure, and competitive landscape across aligner brands, private chains, and dental digital and SaaS providers
-- Partnered with the VP and team to translate findings into a deduplicated longlist of more than 100 orthodontics-related targets across brands, services, equipment, and software
-- Ran a data pass mapping each target’s subsector tag, funding history, valuation range, and investor base, then assigned pass, watch, or exclude labels with concise risk notes
-- Reduced the universe to more than 10 candidates by screening against SAIF exclusion lists and conduct codes for regulatory, reputational, shareholder, and single-supplier red flags
-- Applied a governance-focused ESG gate anchored to MSCI ESG Key Issues, translating Corporate Governance and Corporate Behavior topics into 10 subcategories and 33 actionable checks
-- Drafted pass, conditional, and deny memos that guided diligence depth and valuation discussions, highlighting ownership and control complexity, related-party exposure, disclosure gaps, audit-quality concerns, and business-ethics risks
-- Presented governance and risk insights to partners via scenario-style memos, prompting 2 management meetings and additional auditor-tenure checks before advancing finalists to on-site due diligence
-- Representative example: flagged accounting and related-party issues in 2 finalists; recommendations became management Q&A and auditor-tenure checks, reshaping site-visit diligence and serving as a representative example of similar work across categories and contexts
-- Unified inputs from about 20 sources, including CVSource, industry news, and corporate registries; deduplicated rounds, standardized entities and subsector tags, and corrected errors in dates, rounds, and currencies
-
----
 
 #### Jones Lang LaSalle (JLL)
 
@@ -247,6 +229,28 @@ Designed graduate-level, computation-heavy scientific reasoning benchmarks to pr
 
 ---
 
+#### SAIF Partners (SoftBank Asia Infrastructure Funds)
+
+**Location:** Shanghai, China
+**Position:** Investment Analyst Intern
+**Dates:** June 2022 – October 2022
+**Project:** Thematic Investment Analytics in Dental with Policy Intelligence & Governance/Compliance Risk Gates
+
+- Consolidated 2,000 funding cases and 200 regulatory items into a standardized dataset covering more than 600 Greater China dental deals and 120 to 150 actionable regulatory events
+- The dataset became the backbone for systematic screening, thematic analysis, and follow-on financial modeling across the broader Greater China dental theme
+- Used the database to test whether orthodontics was large enough, structurally attractive, and manageable from a policy-risk perspective, supporting a dedicated subsector focus
+- Owned 4 public-data workstreams: funding flows, policy and regulation, industry structure, and competitive landscape across aligner brands, private chains, and dental digital and SaaS providers
+- Partnered with the VP and team to translate findings into a deduplicated longlist of more than 100 orthodontics-related targets across brands, services, equipment, and software
+- Ran a data pass mapping each target’s subsector tag, funding history, valuation range, and investor base, then assigned pass, watch, or exclude labels with concise risk notes
+- Reduced the universe to more than 10 candidates by screening against SAIF exclusion lists and conduct codes for regulatory, reputational, shareholder, and single-supplier red flags
+- Applied a governance-focused ESG gate anchored to MSCI ESG Key Issues, translating Corporate Governance and Corporate Behavior topics into 10 subcategories and 33 actionable checks
+- Drafted pass, conditional, and deny memos that guided diligence depth and valuation discussions, highlighting ownership and control complexity, related-party exposure, disclosure gaps, audit-quality concerns, and business-ethics risks
+- Presented governance and risk insights to partners via scenario-style memos, prompting 2 management meetings and additional auditor-tenure checks before advancing finalists to on-site due diligence
+- Representative example: flagged accounting and related-party issues in 2 finalists; recommendations became management Q&A and auditor-tenure checks, reshaping site-visit diligence and serving as a representative example of similar work across categories and contexts
+- Unified inputs from about 20 sources, including CVSource, industry news, and corporate registries; deduplicated rounds, standardized entities and subsector tags, and corrected errors in dates, rounds, and currencies
+
+---
+
 #### CITIC Securities
 
 **Location:** Beijing, China  
@@ -257,23 +261,6 @@ Designed graduate-level, computation-heavy scientific reasoning benchmarks to pr
 - Supported equity and industry research at CITIC Securities by compiling sector datasets, stress-testing valuation assumptions, and summarizing trading color for internal investment-strategy discussions
 
 ### STEM Academic Competitions and Training
-
-#### The High School Attached to Hunan Normal University
-
-**Location:** Changsha, China  
-**Position:** Physics & Mathematics Olympiad Trainee, School Physics Competition Team  
-**Dates:** August 2016 – January 2019
-**Project:** IPhO-Level Physics Competition Training with Undergraduate Mechanics, Electrodynamics & Mathematical Methods
-
-- Joined the school physics competition team and completed intensive IPhO-level training across the full physics-competition curriculum, including mechanics, thermodynamics, electromagnetism, optics, and modern physics
-- Built a rigorous physics problem-solving foundation through long-form derivations, invariant-based reasoning, constraint management, and nonstandard problem decompositions under time pressure
-- Completed the core undergraduate physics sequence during high school competition preparation, covering theoretical mechanics / classical mechanics, electrodynamics, thermodynamics and statistical physics, and quantum mechanics
-- Developed advanced mathematical foundations in parallel, including mathematical analysis, linear algebra, calculus, ordinary differential equations, numerical analysis, and other quantitative methods required for high-level physics modeling
-- Treated physics as a mathematically intensive modeling discipline, using physical systems as structured carriers for advanced mathematical reasoning rather than relying on formula substitution or pattern recognition
-- Earned First Prize in the 2018 Chinese Physics Olympiad, validating performance under national-level selection standards
-- Earned First Prize in the 2018 Chinese Mathematical Olympiad, demonstrating cross-disciplinary strength across mathematical abstraction, proof-based reasoning, and physics-grounded quantitative modeling
-
----
 
 #### Independent STEM Olympiad Training Practice
 
@@ -289,3 +276,20 @@ Designed graduate-level, computation-heavy scientific reasoning benchmarks to pr
 - Representative example: designed a graduate-level monotone-staircase gravity problem in a right-triangle domain, requiring energy-based modeling, constrained path analysis, extremal-time comparison, proof of non-attainment, supremum construction, and harmonic-number asymptotics for a staircase family approaching the limiting bound
 - Built problems with full reference solutions and scoring rubrics, emphasizing not only final numerical answers but also graduate-level reasoning standards, including energy methods, admissibility constraints, variational intuition, limiting constructions, inequality bounds, asymptotic expansions, and rigorous proof of non-attainment
 - Converted personal olympiad training experience into a reusable teaching framework, combining physical intuition, graduate-level theoretical physics, and advanced mathematical technique into structured training materials for high-performing STEM students
+
+---
+
+#### The High School Attached to Hunan Normal University
+
+**Location:** Changsha, China
+**Position:** Physics & Mathematics Olympiad Trainee, School Physics Competition Team
+**Dates:** August 2016 – January 2019
+**Project:** IPhO-Level Physics Competition Training with Undergraduate Mechanics, Electrodynamics & Mathematical Methods
+
+- Joined the school physics competition team and completed intensive IPhO-level training across the full physics-competition curriculum, including mechanics, thermodynamics, electromagnetism, optics, and modern physics
+- Built a rigorous physics problem-solving foundation through long-form derivations, invariant-based reasoning, constraint management, and nonstandard problem decompositions under time pressure
+- Completed the core undergraduate physics sequence during high school competition preparation, covering theoretical mechanics / classical mechanics, electrodynamics, thermodynamics and statistical physics, and quantum mechanics
+- Developed advanced mathematical foundations in parallel, including mathematical analysis, linear algebra, calculus, ordinary differential equations, numerical analysis, and other quantitative methods required for high-level physics modeling
+- Treated physics as a mathematically intensive modeling discipline, using physical systems as structured carriers for advanced mathematical reasoning rather than relying on formula substitution or pattern recognition
+- Earned First Prize in the 2018 Chinese Physics Olympiad, validating performance under national-level selection standards
+- Earned First Prize in the 2018 Chinese Mathematical Olympiad, demonstrating cross-disciplinary strength across mathematical abstraction, proof-based reasoning, and physics-grounded quantitative modeling
