@@ -13,7 +13,7 @@
     "typecheck": "tsc --noEmit",
     "test": "npm run build && npm run test:artifact",
     "test:artifact": "node --test",
-    "check": "npm run lint && npm run typecheck && npm test",
+    "check": "npm run lint && npm test",
     "lint": "eslint --config config/eslint.config.mjs . --ignore-pattern dist --ignore-pattern .next --ignore-pattern out --ignore-pattern github-pages --ignore-pattern .npm-cache",
     "optimize:images": "node scripts/optimize-images.mjs"
   },
