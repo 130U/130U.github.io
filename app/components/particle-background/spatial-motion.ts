@@ -71,8 +71,6 @@ export function advanceCriticalSpringTo(
   const nextValue = target + nextDisplacement;
   const nextVelocity = (axis.velocity - angularFrequency * coupling * delta) * decay;
 
-  // A critically damped value must never cross its target. This also makes an
-  // interrupted return safe to retarget from the current presentation value.
   if (
     displacement !== 0 &&
     Math.sign(nextDisplacement) !== Math.sign(displacement)

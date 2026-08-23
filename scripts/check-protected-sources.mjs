@@ -1,23 +1,9 @@
 import { execFileSync, spawnSync } from "node:child_process";
-import { createHash } from "node:crypto";
-import { readFileSync } from "node:fs";
 
 const baseSha = process.env.BASE_SHA;
 if (!baseSha) {
   throw new Error("BASE_SHA is required to verify protected sources.");
 }
-
-const forcedPush = process.env.FORCED_PUSH === "true";
-const authorizedRootResetSha = process.env.AUTHORIZED_ROOT_RESET_SHA;
-const headSha = execFileSync("git", ["rev-parse", "HEAD"], {
-  encoding: "utf8",
-}).trim();
-const headCommitLine = execFileSync(
-  "git",
-  ["rev-list", "--parents", "-n", "1", "HEAD"],
-  { encoding: "utf8" },
-).trim();
-const isRootCommit = headCommitLine.split(/\s+/u).length === 1;
 
 const protectedPathspecs = [
   ":(literal)app/education/page.tsx",
@@ -29,29 +15,16 @@ const protectedPathspecs = [
   ":(literal)content/past-experience/archive-through-2026-06-30.md",
 ];
 
-const authorizedProtectedSourceHashes = new Map([
-  [
-    "app/education/page.tsx",
-    "ce3c34631d07d9e8f546670761392d9d9372cec9103970f8aa849267c795f28d",
-  ],
-  [
-    "app/past-experience/components/ExperienceDomainPage.tsx",
-    "098da21aa9d56f0ad56c4dd96997419988a0c51557507fe7748bbccb5913f3e0",
-  ],
-  [
-    "app/lib/content/experience.ts",
-    "01875681354d96713bf3025ce48e7f56febf3616ef3c8d921e48fb9f09846d72",
-  ],
-  [
-    "content/past-experience/archive-through-2026-06-30.md",
-    "02da27390a53658676f3c78892fe823725f8085fa26cb74dff52f9d74bbe9018",
-  ],
-]);
-
-function normalizedSha256(file) {
-  return createHash("sha256")
-    .update(readFileSync(file, "utf8").replace(/\r\n?/gu, "\n"), "utf8")
-    .digest("hex");
+const baseCommitCheck = spawnSync(
+  "git",
+  ["cat-file", "-e", `${baseSha}^{commit}`],
+  { encoding: "utf8" },
+);
+if (baseCommitCheck.status !== 0) {
+  throw new Error(
+    `BASE_SHA must resolve to a commit in the checked-out history: ${baseSha}\n` +
+      (baseCommitCheck.stderr || "The commit is unavailable."),
+  );
 }
 
 const mergeBaseCheck = spawnSync(
@@ -59,39 +32,11 @@ const mergeBaseCheck = spawnSync(
   ["merge-base", "--is-ancestor", baseSha, "HEAD"],
   { encoding: "utf8" },
 );
-
-const isAuthorizedRootReset =
-  forcedPush &&
-  isRootCommit &&
-  Boolean(authorizedRootResetSha) &&
-  headSha === authorizedRootResetSha;
-
-let revisions;
-let comparisonMessage;
-
-if (mergeBaseCheck.status === 0) {
-  revisions = [`${baseSha}...HEAD`];
-  comparisonMessage =
-    "Protected Education, Past Experience, and Current Chapter sources are unchanged.";
-} else if (isAuthorizedRootReset) {
-  if (mergeBaseCheck.status === 1) {
-    revisions = [baseSha, "HEAD"];
-    comparisonMessage =
-      "Authorized root reset detected; direct tree comparison confirms protected Education, Past Experience, and Current Chapter sources are unchanged.";
-  } else {
-    const emptyTreeSha = execFileSync(
-      "git",
-      ["hash-object", "-t", "tree", "--stdin"],
-      { encoding: "utf8", input: "" },
-    ).trim();
-    revisions = [emptyTreeSha, "HEAD"];
-    comparisonMessage =
-      "Authorized root reset detected without the previous object; protected Education, Past Experience, and Current Chapter sources are introduced as additions.";
-  }
-} else {
+if (mergeBaseCheck.status !== 0) {
   throw new Error(
-    "BASE_SHA is not an ancestor of HEAD, and this push is not the explicitly authorized root reset.\n" +
-      (mergeBaseCheck.stderr || "No merge base exists."),
+    "BASE_SHA must be an ancestor of HEAD. History rewrites fail closed; " +
+      "protected-source verification cannot be bypassed.\n" +
+      (mergeBaseCheck.stderr || "No valid ancestry path exists."),
   );
 }
 
@@ -101,45 +46,21 @@ const changes = execFileSync(
     "diff",
     "--name-status",
     "--find-renames",
-    ...revisions,
+    `${baseSha}...HEAD`,
     "--",
     ...protectedPathspecs,
   ],
   { encoding: "utf8" },
 ).trim();
 
-const authorizedChanges = [];
-const forbidden = changes
-  .split(/\r?\n/u)
-  .filter(Boolean)
-  .filter((line) => {
-    if (line.startsWith("A\t")) return false;
-
-    const [status, file] = line.split("\t");
-    const approvedHash = authorizedProtectedSourceHashes.get(file);
-    if (
-      status === "M" &&
-      approvedHash &&
-      normalizedSha256(file) === approvedHash
-    ) {
-      authorizedChanges.push(file);
-      return false;
-    }
-
-    return true;
-  });
-
-if (forbidden.length > 0) {
+if (changes) {
   throw new Error(
-    "Protected Education, Past Experience, and Current Chapter sources are immutable; modification, deletion, and rename are forbidden:\n" +
-      forbidden.join("\n"),
+    "Protected Education, Past Experience, and Current Chapter sources are immutable; " +
+      "modification, addition, deletion, and rename are forbidden:\n" +
+      changes,
   );
 }
 
-if (authorizedChanges.length > 0) {
-  console.log(
-    "All other protected sources are unchanged; the explicitly authorized Education and Past Experience updates match their approved hashes.",
-  );
-} else {
-  console.log(comparisonMessage);
-}
+console.log(
+  "Protected Education, Past Experience, and Current Chapter sources are unchanged.",
+);

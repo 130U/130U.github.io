@@ -12,7 +12,7 @@ The suite verifies:
   their approved counts;
 - Home and Current Chapter copy, semantic fallback, and particle-system guardrails;
 - byte-exact original identity-asset hashes;
-- absence of retired routes, assets, phrases, and legacy runtime references.
+- the approved runtime-asset manifest and repository deployment policy.
 
 `npm test` always rebuilds first, preventing a stale `out/` directory from
 producing a false pass. Use `test:artifact` only when the export was built in the

@@ -37,6 +37,15 @@ The root family and variation tokens are the canonical role boundary. Extend a
 role through its token instead of copying a font family or axis tuple into a
 new component.
 
+### Font provenance
+
+| File | Package source | Version | License |
+| --- | --- | --- | --- |
+| `shantell-sans-variable-latin.woff2` | `@fontsource-variable/shantell-sans` | 5.3.0 | `public/assets/fonts/licenses/shantell-sans-OFL.txt` |
+
+The font file came from a version-pinned package path. Keep it self-hosted so
+the site renders without disclosing visits to a third-party font service.
+
 ## Motion signature
 
 The particle field is the sole expressive motion system. It may breathe,

@@ -1,8 +1,7 @@
 # Website Maintenance — Start Here
 
 This directory is the maintenance entry point for Theodore Ouyang's personal
-website. It is written for Theodore, future collaborators, and AI coding
-assistants.
+website. It is written for Theodore and future maintainers.
 
 ## Non-negotiable guardrail
 
@@ -35,6 +34,7 @@ pointer feedback unless a visible redesign is explicitly requested.
 - Pull requests validate only; pushes to `main` validate, upload, and deploy to
   GitHub Pages. A failed `main` run can be rerun with its original preservation
   guard context; feature refs cannot deploy.
+- Tags are archive references only; they never upload or deploy Pages artifacts.
 - Generated `.next/` and `out/` directories are excluded from Git.
 
 ## Safe maintenance principle

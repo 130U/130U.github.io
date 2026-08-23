@@ -7,6 +7,9 @@ personalization. Official Next.js static export is therefore the smallest
 production architecture: GitHub Pages serves immutable HTML, CSS, JavaScript,
 fonts, and images with no application server to patch or monitor.
 
+Production deployment is main-only. Tags remain immutable archive references
+and do not upload or deploy Pages artifacts.
+
 ## Registry for repeatable experience routes
 
 Past Experience uses a validated registry plus one dynamic static route.

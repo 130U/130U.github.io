@@ -5,6 +5,7 @@ import sharp from "sharp";
 
 const root = dirname(dirname(fileURLToPath(import.meta.url)));
 const publicRoot = join(root, "public", "assets");
+const sourceRoot = join(root, "source-assets");
 
 const jobs = [
   ...[384, 768].flatMap((width) => [
@@ -30,7 +31,7 @@ const jobs = [
     },
   ]),
   {
-    source: join(publicRoot, "brand", "og.png"),
+    source: join(sourceRoot, "brand", "og.png"),
     destination: join(publicRoot, "brand", "og-1774.jpg"),
     transform: (image) =>
       image.jpeg({

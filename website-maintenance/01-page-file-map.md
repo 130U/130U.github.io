@@ -32,7 +32,8 @@ Use this map to locate public pages without searching the repository.
 | Exact Past Experience archive | `content/past-experience/archive-through-2026-06-30.md` |
 | Strict archive parser and domain registry | `app/lib/content/experience.ts` |
 | Profile source and derivatives | `public/assets/profile/` |
-| Brand, browser icons, and OG source/derivative | `public/assets/brand/` |
+| Browser icons and optimized OG derivative | `public/assets/brand/` |
+| Original brand artwork | `source-assets/brand/` |
 | Self-hosted fonts | `public/assets/fonts/` |
 
 ## Route conventions

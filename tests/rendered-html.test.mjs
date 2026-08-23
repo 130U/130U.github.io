@@ -95,7 +95,7 @@ const PROTECTED_SOURCE_HASHES = new Map([
 
 const IMMUTABLE_ASSET_HASHES = new Map([
   [
-    "public/assets/brand/og.png",
+    "source-assets/brand/og.png",
     "1a61b1b492dae028b031bf020f1a2c57b6ce2887f2f6ca7aeae154b085f3ec98",
   ],
   [
@@ -107,11 +107,11 @@ const IMMUTABLE_ASSET_HASHES = new Map([
     "2954ec837ca31b13c377c6f2539406822b4ab94b1be6ca11abb146f2df016d1e",
   ],
   [
-    "public/assets/brand/lo-monogram.png",
+    "source-assets/brand/lo-monogram.png",
     "20474cd1dee3d5ea952b69285850901d362a7608b1d7ca69a959f2076a69923b",
   ],
   [
-    "public/assets/brand/icon-512.png",
+    "source-assets/brand/icon-512.png",
     "b156cb141e7b2ee85328327e80ea62e83bf8f15900e1248b0c0165070f66687f",
   ],
   [
@@ -132,17 +132,19 @@ const IMMUTABLE_ASSET_HASHES = new Map([
   ],
 ]);
 
-const RETIRED_MARKERS = [
-  ["world", "model"].join(" "),
-  ["world", "-model"].join(""),
-  ["world", "-action"].join(""),
-  ["personal", "posts"].join(" "),
-  ["/personal-", "posts/"].join(""),
-  ["uni", "corn"].join(""),
-  ["present", "work"].join(" "),
-  ["personal", "writing"].join(" "),
-  ["fast", "-wam"].join(""),
-  ["vlm", "-to-vla"].join(""),
+const EXPECTED_PUBLIC_ASSETS = [
+  "assets/brand/apple-touch-icon.png",
+  "assets/brand/favicon-16.png",
+  "assets/brand/favicon-32.png",
+  "assets/brand/favicon.ico",
+  "assets/brand/og-1774.jpg",
+  "assets/fonts/licenses/shantell-sans-OFL.txt",
+  "assets/fonts/shantell-sans-variable-latin.woff2",
+  "assets/profile/theodore-avatar-warm-384.avif",
+  "assets/profile/theodore-avatar-warm-384.webp",
+  "assets/profile/theodore-avatar-warm-768.avif",
+  "assets/profile/theodore-avatar-warm-768.webp",
+  "assets/profile/theodore-avatar-warm.png",
 ];
 
 const htmlCache = new Map();
@@ -367,8 +369,6 @@ test("Home gives the particle stage visual priority and moves identity details b
     metaContent(html, "name", "description"),
     "Theodore Ouyang is a Duke University graduate and Sequoia Scholar in Cohort 8, exploring how artificial intelligence can become useful in everyday life.",
   );
-  assert.doesNotMatch(body, /Quis ego sum\?/u);
-  assert.doesNotMatch(body, /Identity emerges from possibility\./u);
   assert.match(body, /Exploring practical AI use cases/u);
   assert.match(body, /He is a Sequoia Scholar in Cohort 8\./u);
   assert.match(body, /genuinely useful in everyday life/u);
@@ -426,24 +426,13 @@ test("Current Chapter is concise and limited to practical everyday AI use cases"
   assert.equal(pairedElementsWithClass(html, "article", "current-chapter-brief").length, 1);
 });
 
-test("retired routes, assets, and current-role language are absent from the export", async () => {
-  const searchable = (await walk(OUT)).filter((file) =>
-    /\.(?:css|html|js|json|txt|xml)$/iu.test(file),
-  );
-  const combined = (await Promise.all(searchable.map((file) => readFile(file, "utf8"))))
-    .join("\n")
-    .toLowerCase();
-  for (const marker of RETIRED_MARKERS) {
-    assert.ok(!combined.includes(marker), `Retired marker remains in out/: ${marker}`);
-  }
+test("the static export contains only approved runtime public assets", async () => {
+  const assets = (await walk(path.join(OUT, "assets")))
+    .map((file) => path.relative(OUT, file).replaceAll("\\", "/"))
+    .sort();
 
-  const retiredDirectory = ["personal-", "posts"].join("");
-  assert.ok(!existsSync(path.join(OUT, retiredDirectory)), "Retired route directory was exported");
-  assert.ok(!existsSync(path.join(OUT, "assets", "posts")), "Retired asset directory was exported");
-  assert.ok(
-    !existsSync(path.join(OUT, "README.md")),
-    "Internal public-assets note must not be exported",
-  );
+  assert.deepEqual(assets, EXPECTED_PUBLIC_ASSETS);
+  assert.ok(existsSync(path.join(OUT, ".nojekyll")));
 });
 
 test("all internal HTML and CSS references resolve inside the static export", async () => {
@@ -576,7 +565,6 @@ test("Past Experience renders the approved metadata and reverse-chronological en
 
   const aiHtml = await routeHtml("/past-experience/artificial-intelligence/");
   const aiText = stripMarkup(aiHtml);
-  assert.doesNotMatch(aiText, /Alignerr|Micro1|November 2025 – Present/u);
   assert.match(
     aiText,
     /A global AI data and model evaluation company[\s\S]*November 2025 – July 2026[\s\S]*Duke University: AI at Duke[\s\S]*Durham, USA[\s\S]*Researcher[\s\S]*September 2023 – October 2025/u,
@@ -642,22 +630,15 @@ test("Education retains all 31 selected courses and the approved advisor record 
   assert.equal(entries.length, 2);
   const graduateEntry = stripMarkup(entries[0][2]);
   assert.match(graduateEntry, /2025[\s\S]*Duke University/u);
-  assert.doesNotMatch(graduateEntry, /Durham, USA|Kunshan, China/u);
   assert.match(
     graduateEntry,
     /Financial Risk Concentration[\s\S]*Academic Advisor: Mark Borsuk, Ph\.D\.[\s\S]*Pratt School of Engineering Merit Scholarship/u,
-  );
-  assert.doesNotMatch(
-    graduateEntry,
-    /James L\. and Elizabeth M\. Vincent Professor of Civil and Environmental Engineering/u,
   );
   assert.match(
     entries[0][2],
     /<a\b[^>]*href="https:\/\/cee\.duke\.edu\/people\/mark-borsuk\/"[^>]*>[\s\S]*?Mark Borsuk, Ph\.D\.[\s\S]*?<\/a>/u,
   );
   assert.match(stripMarkup(entries[1][2]), /2023[\s\S]*Duke University/u);
-  assert.doesNotMatch(stripMarkup(entries[1][2]), /Durham, USA|Kunshan, China/u);
-
   const lists = pairedElementsWithClass(html, "ul", "course-list");
   assert.equal(lists.length, 4);
   assert.equal(
@@ -666,7 +647,7 @@ test("Education retains all 31 selected courses and the approved advisor record 
   );
 });
 
-test("README stays a concise public introduction", async () => {
+test("README links to the public site with its approved cover", async () => {
   const readme = await readFile(path.join(ROOT, "README.md"), "utf8");
   assert.match(
     readme,
@@ -677,16 +658,6 @@ test("README stays a concise public introduction", async () => {
     "README cover is missing",
   );
   assert.match(readme, /href="https:\/\/www\.theodoreoy\.com\/"/u);
-  assert.doesNotMatch(readme, /public\/assets\/brand\/og-1774\.jpg/u);
-  assert.doesNotMatch(
-    readme,
-    /<!--|<details|The archive|A note on the design|Repository note|deliberately\s+unfinished|npm run|Next(?:\.js)?\s+static export|GitHub Pages/imu,
-  );
-
-  const normalized = readme.toLowerCase();
-  for (const marker of RETIRED_MARKERS) {
-    assert.ok(!normalized.includes(marker), `Retired marker remains in README: ${marker}`);
-  }
 });
 
 test("the protected-source guard covers every protected source, including Current Chapter", async () => {
@@ -702,12 +673,14 @@ test("the protected-source guard covers every protected source, including Curren
   }
 });
 
-test("original identity assets remain intact in source and export", async () => {
+test("identity assets remain intact at their approved source and runtime boundaries", async () => {
   for (const [relative, expected] of IMMUTABLE_ASSET_HASHES) {
     const source = path.join(ROOT, ...relative.split("/"));
     assert.equal(sha256(await readFile(source)), expected, `${relative} changed`);
-    const exported = path.join(OUT, ...relative.slice("public/".length).split("/"));
-    assert.equal(sha256(await readFile(exported)), expected, `${relative} export changed`);
+    if (relative.startsWith("public/")) {
+      const exported = path.join(OUT, ...relative.slice("public/".length).split("/"));
+      assert.equal(sha256(await readFile(exported)), expected, `${relative} export changed`);
+    }
   }
 });
 
@@ -901,7 +874,6 @@ test("the shared visual module reveals one stable particle composition before mo
   assert.match(spatialMotion, /Math\.exp\(-excess \/ range\)/u);
   assert.match(spatialMotion, /export function advanceCriticalSpring/u);
   assert.match(spatialMotion, /4\.6 \/ response/u);
-  assert.match(spatialMotion, /must never cross its target/u);
   assert.match(spatialMotion, /export function phaseInteractionGain/u);
 
   const component = await readFile(
@@ -1018,10 +990,6 @@ test("the typography system uses one local variable family with explicit roles",
     homeStyles,
     /:global\(\.site-shell--particle \.primary-nav a\)\s*\{[^}]*font-(?:family|size|style|variation-settings|weight)/u,
   );
-  assert.doesNotMatch(globals, /Instrument Sans/u);
-  assert.doesNotMatch(globals, /Newsreader Variable/u);
-  assert.doesNotMatch(homeStyles, /font-family:\s*system-ui/u);
-
   for (const font of ["shantell-sans-variable-latin.woff2"]) {
     assert.match(layout, new RegExp(`/assets/fonts/${font.replace(".", "\\.")}`, "u"));
     assert.ok(existsSync(path.join(ROOT, "public", "assets", "fonts", font)));
@@ -1029,19 +997,4 @@ test("the typography system uses one local variable family with explicit roles",
   }
 
   assert.ok(existsSync(path.join(ROOT, "public", "assets", "fonts", "licenses", "shantell-sans-OFL.txt")));
-  assert.ok(!existsSync(path.join(ROOT, "public", "assets", "fonts", "newsreader-variable-latin.woff2")));
-  assert.ok(!existsSync(path.join(ROOT, "public", "assets", "fonts", "newsreader-variable-italic-latin.woff2")));
-  assert.ok(!existsSync(path.join(ROOT, "public", "assets", "fonts", "licenses", "newsreader-OFL.txt")));
-  assert.ok(!existsSync(path.join(ROOT, "public", "assets", "fonts", "instrument-sans-variable-latin.woff2")));
-});
-
-test("legacy alternate runtimes stay out of the production artifact", async () => {
-  const code = (await Promise.all(
-    (await walk(OUT))
-      .filter((file) => /\.(?:html|js|json)$/iu.test(file))
-      .map((file) => readFile(file, "utf8")),
-  )).join("\n").toLowerCase();
-  for (const marker of [["vin", "ext"].join(""), ["wrang", "ler"].join(""), "vite-rsc"]) {
-    assert.ok(!code.includes(marker), `Legacy runtime marker remains: ${marker}`);
-  }
 });

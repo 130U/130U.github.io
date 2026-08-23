@@ -23,9 +23,14 @@ archive is preserved byte-for-byte and parsed only during the static build.
 
 ### `public/assets/`
 
-Original and optimized identity assets grouped by role.
-`scripts/optimize-images.mjs` produces deterministic, reviewable derivatives
-without replacing the source.
+Runtime fonts, browser icons, the social preview derivative, and profile images
+grouped by role. Everything in this directory is intentionally public.
+
+### `source-assets/`
+
+Original brand artwork used to generate public derivatives or retained for
+future brand maintenance. These files stay in the repository without being
+copied into the deployed site.
 
 ### `config/`
 
@@ -42,11 +47,11 @@ there automatically.
 
 Final-artifact integrity tests verify the exact nine-route manifest, internal
 links, SEO files, protected source hashes, approved structural counts, particle
-fallback semantics, and removal of retired content.
+fallback semantics, deployment policy, and the explicit runtime-asset manifest.
 
 ### `website-maintenance/`
 
-Human- and AI-readable operating documentation.
+Maintainer-facing operating documentation.
 
 ### `.github/`
 
