@@ -114,19 +114,6 @@ a:focus-visible {
   background: var(--accent-soft);
 }
 
-.visually-hidden {
-  position: absolute !important;
-  width: 1px !important;
-  height: 1px !important;
-  margin: -1px !important;
-  padding: 0 !important;
-  overflow: hidden !important;
-  clip: rect(0 0 0 0) !important;
-  clip-path: inset(50%) !important;
-  border: 0 !important;
-  white-space: nowrap !important;
-}
-
 .skip-link {
   position: fixed;
   z-index: 100;
@@ -287,7 +274,6 @@ a:focus-visible {
 .course-grid,
 .domain-directory,
 .archive-entry,
-.practice-note,
 .current-chapter-brief {
   background: var(--surface-strong);
   box-shadow: inset 0 0 0 1px var(--hairline), var(--inner-highlight);
@@ -408,7 +394,6 @@ a:focus-visible {
   padding-bottom: 30px;
 }
 
-.eyebrow,
 .section-kicker {
   margin: 0;
   color: var(--accent-dark);
@@ -462,46 +447,8 @@ a:focus-visible {
   letter-spacing: -0.032em;
 }
 
-.prose-section {
-  margin-bottom: 74px;
-}
-
 .single-section-heading {
   display: block;
-}
-
-.practice-note {
-  display: grid;
-  grid-template-columns: 150px minmax(0, 1fr);
-  margin-top: 48px;
-  padding: 30px 32px;
-  border: 0;
-  border-radius: var(--radius-medium);
-  background: var(--surface-strong);
-  box-shadow: inset 0 0 0 1px var(--hairline), var(--inner-highlight);
-  gap: 10px 20px;
-}
-
-.practice-note .section-kicker {
-  grid-row: 1 / span 2;
-  padding-top: 6px;
-}
-
-.practice-note h3 {
-  margin: 0;
-  color: var(--ink-strong);
-  font-family: var(--body-serif);
-  font-size: 1.48rem;
-  font-variation-settings: var(--font-variation-heading);
-  line-height: 1.25;
-}
-
-.practice-note p:last-child {
-  margin: 0;
-  color: var(--muted);
-  font-family: var(--serif);
-  font-size: 1.04rem;
-  line-height: 1.75;
 }
 
 .education-list {
@@ -526,8 +473,7 @@ a:focus-visible {
   border-top: 0;
 }
 
-.entry-date,
-.experience-period {
+.entry-date {
   color: var(--accent-dark);
   font-family: var(--mono);
   font-size: 0.77rem;
@@ -557,16 +503,6 @@ a:focus-visible {
   font-weight: 620;
   line-height: 1.15;
   letter-spacing: -0.025em;
-}
-
-.entry-location {
-  margin: 0;
-  color: var(--muted);
-  font-family: var(--sans);
-  font-size: 0.76rem;
-  font-variation-settings: var(--font-variation-interface);
-  font-weight: 650;
-  letter-spacing: 0.035em;
 }
 
 .education-degree {
@@ -812,86 +748,6 @@ a:focus-visible {
   gap: 18px;
 }
 
-.domain-index {
-  display: grid;
-  grid-template-columns: 150px minmax(0, 1fr);
-  margin-bottom: 90px;
-  padding: 30px 0 33px;
-  border-top: 1px solid var(--rule-strong);
-  border-bottom: 1px solid var(--rule-strong);
-  gap: 24px;
-}
-
-.domain-index ol {
-  display: grid;
-  margin: 0;
-  padding: 0;
-  list-style: none;
-  gap: 4px;
-}
-
-.domain-index a {
-  display: grid;
-  grid-template-columns: 34px minmax(0, 1fr);
-  align-items: baseline;
-  padding: 7px 0;
-  color: var(--ink-strong);
-  font-family: var(--serif);
-  font-size: 1.12rem;
-  line-height: 1.3;
-  gap: 14px;
-  transition: color 160ms var(--ease-out), transform 160ms var(--ease-out);
-}
-
-.domain-index a span {
-  color: var(--accent-dark);
-  font-family: var(--mono);
-  font-size: 0.7rem;
-  font-variation-settings: var(--font-variation-interface);
-}
-
-.domain-list {
-  display: grid;
-  gap: 112px;
-}
-
-.domain-section {
-  scroll-margin-top: 105px;
-}
-
-.domain-heading {
-  display: grid;
-  grid-template-columns: 62px minmax(0, 1fr);
-  align-items: baseline;
-  margin-bottom: 12px;
-  padding-bottom: 25px;
-  border-bottom: 2px solid var(--ink-strong);
-  gap: 16px;
-}
-
-.domain-heading > span {
-  color: var(--accent-dark);
-  font-family: var(--mono);
-  font-size: 0.78rem;
-  font-variation-settings: var(--font-variation-interface);
-  font-weight: 700;
-}
-
-.domain-heading h2 {
-  margin: 0;
-  color: var(--ink-strong);
-  font-family: var(--body-serif);
-  font-size: clamp(2rem, 4vw, 3.15rem);
-  font-variation-settings: var(--font-variation-display);
-  font-weight: 540;
-  line-height: 1.06;
-  letter-spacing: -0.042em;
-}
-
-.domain-entries {
-  display: grid;
-}
-
 .archive-entry {
   display: grid;
   grid-template-columns: 62px minmax(0, 1fr);
@@ -1065,17 +921,13 @@ a:focus-visible {
 }
 
 .site-shell--default .page-intro,
-.site-shell--default .domain-index,
-.site-shell--default .domain-heading,
 .site-shell--default .site-footer {
   border-color: rgba(194, 224, 244, 0.3);
 }
 
 .site-shell--default .page-intro h1,
 .site-shell--default .section-heading h2,
-.site-shell--default .coursework > h2,
-.site-shell--default .domain-heading h2,
-.site-shell--default .domain-index a {
+.site-shell--default .coursework > h2 {
   color: #f4faff;
   text-shadow: 0 4px 24px rgba(0, 12, 32, 0.22);
 }
@@ -1086,12 +938,9 @@ a:focus-visible {
   color: rgba(224, 240, 251, 0.8);
 }
 
-.site-shell--default .eyebrow,
 .site-shell--default .section-kicker,
 .site-shell--default .chapter-context,
-.site-shell--default .domain-page-number,
-.site-shell--default .domain-heading > span,
-.site-shell--default .domain-index a span {
+.site-shell--default .domain-page-number {
   color: #8ed8ff;
 }
 
@@ -1211,7 +1060,6 @@ a:focus-visible {
 
   .profile-links a,
   .back-link,
-  .domain-index a,
   .entry-website-link {
     min-height: 44px;
   }
@@ -1230,14 +1078,8 @@ a:focus-visible {
     font-size: clamp(2rem, 9vw, 2.8rem);
   }
 
-  .section-heading,
-  .practice-note,
-  .domain-index {
+  .section-heading {
     grid-template-columns: 1fr;
-  }
-
-  .practice-note .section-kicker {
-    grid-row: auto;
   }
 
   .education-entry {
@@ -1250,18 +1092,6 @@ a:focus-visible {
     grid-template-columns: 1fr;
     padding: 25px 24px;
     gap: 18px;
-  }
-
-  .domain-index {
-    margin-bottom: 70px;
-  }
-
-  .domain-section {
-    scroll-margin-top: 170px;
-  }
-
-  .domain-heading {
-    grid-template-columns: 38px minmax(0, 1fr);
   }
 
   .archive-entry {
@@ -1316,15 +1146,6 @@ a:focus-visible {
     font-size: 0.68rem;
   }
 
-  .practice-note {
-    padding: 24px 22px;
-  }
-
-  .domain-heading {
-    grid-template-columns: 1fr;
-    gap: 5px;
-  }
-
   .entry-metadata > div,
   .entry-project {
     grid-template-columns: 1fr;
@@ -1362,7 +1183,6 @@ a:focus-visible {
   .profile-links li,
   .profile-links a,
   .back-link,
-  .domain-index a,
   .entry-website-link {
     min-height: 44px;
   }
@@ -1411,11 +1231,6 @@ a:focus-visible {
     transform: translateX(4px);
   }
 
-  .domain-index a:hover {
-    color: var(--accent-dark);
-    transform: translateX(3px);
-  }
-
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -1434,7 +1249,6 @@ a:focus-visible {
   .back-link,
   .domain-directory-link,
   .domain-arrow,
-  .domain-index a,
   .entry-website-link {
     transition-duration: 120ms;
   }
@@ -1449,7 +1263,6 @@ a:focus-visible {
   .back-link:active,
   .domain-directory-link:active,
   .domain-directory-link:hover .domain-arrow,
-  .domain-index a:hover,
   .entry-website-link:hover .entry-website-arrow,
   .entry-website-link:active .entry-website-arrow {
     transform: none;
@@ -1499,7 +1312,6 @@ a:focus-visible {
   .course-grid,
   .domain-directory,
   .archive-entry,
-  .practice-note,
   .current-chapter-brief {
     background: var(--paper-raised);
     border-color: var(--rule-strong);
