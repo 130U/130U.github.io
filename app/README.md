@@ -6,7 +6,7 @@ driven by a typed, validated registry.
 
 Key routes:
 
-- `page.tsx` — Home, including the progressively enhanced particle backdrop.
+- `page.tsx` — Home, including the progressively enhanced dithered entrance.
 - `education/page.tsx` — Education.
 - `past-experience/page.tsx` — Past Experience directory.
 - `past-experience/[slug]/page.tsx` — all five experience domain pages.
@@ -14,9 +14,10 @@ Key routes:
 
 Shared responsibilities:
 
-- `components/SiteShell.tsx` — navigation, profile sidebar, footer, and skip link.
-- `components/particle-background/` — persistent Three.js narrative/ambient
-  visual layer, static fallback, reduced-motion behavior, and lifecycle cleanup.
+- `components/SiteShell.tsx` — editorial grid, profile sidebar, footer, and skip link.
+- `components/SiteNavigation.tsx` — desktop rail and accessible mobile Menu / Close behavior.
+- `components/dithered-entrance/` — Home-only Canvas2D wordmark, static fallback,
+  reduced-motion behavior, and idle-aware lifecycle cleanup.
 - `globals.css` — visual system and responsive behavior.
 - `layout.tsx` — global metadata, icons, and Person structured data.
 - `lib/content/site.ts` — site constants, navigation, and metadata helper.

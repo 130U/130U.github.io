@@ -1,5 +1,4 @@
 import type { Metadata, Viewport } from "next";
-import { preload } from "react-dom";
 import {
   DEFAULT_DESCRIPTION,
   HOME_TITLE,
@@ -7,7 +6,6 @@ import {
   SITE_URL,
   absoluteUrl,
 } from "./lib/content/site";
-import { ParticleBackground } from "./components/particle-background/ParticleBackground";
 import "./globals.css";
 
 const SCRIPT_SOURCE =
@@ -30,7 +28,7 @@ const CONTENT_SECURITY_POLICY = [
 ].join("; ");
 
 export const viewport: Viewport = {
-  themeColor: "#012169",
+  themeColor: "#f7f6f5",
 };
 
 export const metadata: Metadata = {
@@ -101,19 +99,19 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  preload("/assets/fonts/shantell-sans-variable-latin.woff2", {
-    as: "font",
-    crossOrigin: "anonymous",
-    type: "font/woff2",
-  });
-
   return (
     <html lang="en" data-scroll-behavior="smooth">
       <head>
         <meta httpEquiv="Content-Security-Policy" content={CONTENT_SECURITY_POLICY} />
       </head>
       <body>
-        <ParticleBackground />
+        <template
+          data-design-contract="user-pinned-balanced"
+          dangerouslySetInnerHTML={{
+            __html:
+              "<!-- Cognition-style warm-white editorial shell; 3/12 desktop grid; restrained sans/serif typography; hairline rules; no cards, glass, shadows, or dark theme. Home alone begins with the user-selected Balanced two-line THEODORE / OUYANG dither, enlarged with disciplined whitespace. Menu and Close are the only new visible strings. Preserve every existing page sentence, route, metadata field, alt text, aria label, and content order. Motion is limited to the dither interaction, small link feedback, and an accessible mobile menu, with reduced-motion fallbacks. FINISH: production must pass copy lock, protected-source, responsive, accessibility, performance, and static-export verification. -->",
+          }}
+        />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{

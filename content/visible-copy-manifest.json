@@ -1,0 +1,238 @@
+{
+  "version": 1,
+  "baselineSha": "f909635d911089ab5ed1ee4f6ce6d3e158304013",
+  "allowedNewVisibleStrings": [
+    "Menu",
+    "Close"
+  ],
+  "routes": {
+    "/": {
+      "textSha256": "09ab37d103a224bb9f8133fa75e41b5fa7d215999fd3f959d42373f09a02931b",
+      "characterCount": 622,
+      "wordCount": 90,
+      "preview": "Skip to main content Theodore Ouyang Home Education Past Experience Current Chapter Scroll Profile Theodore Ouyang Exploring practical AI use cases Sequoia Scho",
+      "altTexts": [
+        "Illustrated portrait of Theodore Ouyang"
+      ],
+      "ariaLabels": [
+        "Theodore Ouyang home",
+        "Primary navigation",
+        "Profile summary"
+      ],
+      "metadata": {
+        "title": "Theodore Ouyang | Duke Alum",
+        "description": "Theodore Ouyang is a Duke University graduate and Sequoia Scholar in Cohort 8, exploring how artificial intelligence can become useful in everyday life.",
+        "canonical": "https://www.theodoreoy.com/",
+        "openGraphTitle": "Theodore Ouyang | Duke Alum",
+        "openGraphDescription": "Theodore Ouyang is a Duke University graduate and Sequoia Scholar in Cohort 8, exploring how artificial intelligence can become useful in everyday life.",
+        "openGraphUrl": "https://www.theodoreoy.com/",
+        "twitterTitle": "Theodore Ouyang | Duke Alum",
+        "twitterDescription": "Theodore Ouyang is a Duke University graduate and Sequoia Scholar in Cohort 8, exploring how artificial intelligence can become useful in everyday life."
+      }
+    },
+    "/education/": {
+      "textSha256": "c41c85e4b22831fe43e99aba4349d7865d5521d9628bed65da45b1edb144e9f2",
+      "characterCount": 1496,
+      "wordCount": 187,
+      "preview": "Skip to main content Theodore Ouyang Home Education Past Experience Current Chapter Theodore Ouyang Exploring practical AI use cases Sequoia Scholar, Cohort 8 B",
+      "altTexts": [
+        "Illustrated portrait of Theodore Ouyang"
+      ],
+      "ariaLabels": [
+        "Theodore Ouyang home",
+        "Primary navigation",
+        "Profile",
+        "Degrees",
+        "Academic distinctions"
+      ],
+      "metadata": {
+        "title": "Education | Theodore Ouyang",
+        "description": "Theodore Ouyang’s education at Duke University.",
+        "canonical": "https://www.theodoreoy.com/education/",
+        "openGraphTitle": "Education",
+        "openGraphDescription": "Theodore Ouyang’s education at Duke University.",
+        "openGraphUrl": "https://www.theodoreoy.com/education/",
+        "twitterTitle": "Education",
+        "twitterDescription": "Theodore Ouyang’s education at Duke University."
+      }
+    },
+    "/past-experience/": {
+      "textSha256": "9f7d2ad72dba30d0a32e2a932dc5658fee3867ff9ce6fe1d97428a02b3a8ac29",
+      "characterCount": 472,
+      "wordCount": 69,
+      "preview": "Skip to main content Theodore Ouyang Home Education Past Experience Current Chapter Theodore Ouyang Exploring practical AI use cases Sequoia Scholar, Cohort 8 B",
+      "altTexts": [
+        "Illustrated portrait of Theodore Ouyang"
+      ],
+      "ariaLabels": [
+        "Theodore Ouyang home",
+        "Primary navigation",
+        "Profile",
+        "Experience domains"
+      ],
+      "metadata": {
+        "title": "Past Experience | Theodore Ouyang",
+        "description": "Theodore before July 1st, 2026: a full personal record organized across five domains.",
+        "canonical": "https://www.theodoreoy.com/past-experience/",
+        "openGraphTitle": "Past Experience",
+        "openGraphDescription": "Theodore before July 1st, 2026: a full personal record organized across five domains.",
+        "openGraphUrl": "https://www.theodoreoy.com/past-experience/",
+        "twitterTitle": "Past Experience",
+        "twitterDescription": "Theodore before July 1st, 2026: a full personal record organized across five domains."
+      }
+    },
+    "/past-experience/artificial-intelligence/": {
+      "textSha256": "38d7e2f2dfb7d58ab5c31e3884bfc8037b9c99fe06b3ebe64cde6591e634b2f6",
+      "characterCount": 5783,
+      "wordCount": 743,
+      "preview": "Skip to main content Theodore Ouyang Home Education Past Experience Current Chapter Theodore Ouyang Exploring practical AI use cases Sequoia Scholar, Cohort 8 B",
+      "altTexts": [
+        "Illustrated portrait of Theodore Ouyang"
+      ],
+      "ariaLabels": [
+        "Theodore Ouyang home",
+        "Primary navigation",
+        "Profile",
+        "Artificial Intelligence",
+        "Visit Duke University: AI at Duke website (opens in a new tab)",
+        "Visit Duke University: AI at Duke website (opens in a new tab)",
+        "Visit Duke University website (opens in a new tab)"
+      ],
+      "metadata": {
+        "title": "Artificial Intelligence | Past Experience | Theodore Ouyang",
+        "description": "Theodore Ouyang is a Duke University graduate and Sequoia Scholar in Cohort 8, exploring how artificial intelligence can become useful in everyday life.",
+        "canonical": "https://www.theodoreoy.com/past-experience/artificial-intelligence/",
+        "openGraphTitle": "Artificial Intelligence | Past Experience",
+        "openGraphDescription": "Theodore Ouyang is a Duke University graduate and Sequoia Scholar in Cohort 8, exploring how artificial intelligence can become useful in everyday life.",
+        "openGraphUrl": "https://www.theodoreoy.com/past-experience/artificial-intelligence/",
+        "twitterTitle": "Artificial Intelligence | Past Experience",
+        "twitterDescription": "Theodore Ouyang is a Duke University graduate and Sequoia Scholar in Cohort 8, exploring how artificial intelligence can become useful in everyday life."
+      }
+    },
+    "/past-experience/data-science/": {
+      "textSha256": "220dad3732492f6f7a98d38536dc9be9ff1bf93ec261fda6a1d36bca31aa8edb",
+      "characterCount": 4485,
+      "wordCount": 596,
+      "preview": "Skip to main content Theodore Ouyang Home Education Past Experience Current Chapter Theodore Ouyang Exploring practical AI use cases Sequoia Scholar, Cohort 8 B",
+      "altTexts": [
+        "Illustrated portrait of Theodore Ouyang"
+      ],
+      "ariaLabels": [
+        "Theodore Ouyang home",
+        "Primary navigation",
+        "Profile",
+        "Data Science"
+      ],
+      "metadata": {
+        "title": "Data Science | Past Experience | Theodore Ouyang",
+        "description": "Theodore Ouyang is a Duke University graduate and Sequoia Scholar in Cohort 8, exploring how artificial intelligence can become useful in everyday life.",
+        "canonical": "https://www.theodoreoy.com/past-experience/data-science/",
+        "openGraphTitle": "Data Science | Past Experience",
+        "openGraphDescription": "Theodore Ouyang is a Duke University graduate and Sequoia Scholar in Cohort 8, exploring how artificial intelligence can become useful in everyday life.",
+        "openGraphUrl": "https://www.theodoreoy.com/past-experience/data-science/",
+        "twitterTitle": "Data Science | Past Experience",
+        "twitterDescription": "Theodore Ouyang is a Duke University graduate and Sequoia Scholar in Cohort 8, exploring how artificial intelligence can become useful in everyday life."
+      }
+    },
+    "/past-experience/environmental-social-and-governance/": {
+      "textSha256": "b2dca729f7f58acc9f9821ff99b9e0a1ef5dca287147eb9d5b86fba8d72baa56",
+      "characterCount": 2737,
+      "wordCount": 362,
+      "preview": "Skip to main content Theodore Ouyang Home Education Past Experience Current Chapter Theodore Ouyang Exploring practical AI use cases Sequoia Scholar, Cohort 8 B",
+      "altTexts": [
+        "Illustrated portrait of Theodore Ouyang"
+      ],
+      "ariaLabels": [
+        "Theodore Ouyang home",
+        "Primary navigation",
+        "Profile",
+        "Environmental, Social, and Governance",
+        "Visit Hubble Network website (opens in a new tab)"
+      ],
+      "metadata": {
+        "title": "Environmental, Social, and Governance | Past Experience | Theodore Ouyang",
+        "description": "Theodore Ouyang is a Duke University graduate and Sequoia Scholar in Cohort 8, exploring how artificial intelligence can become useful in everyday life.",
+        "canonical": "https://www.theodoreoy.com/past-experience/environmental-social-and-governance/",
+        "openGraphTitle": "Environmental, Social, and Governance | Past Experience",
+        "openGraphDescription": "Theodore Ouyang is a Duke University graduate and Sequoia Scholar in Cohort 8, exploring how artificial intelligence can become useful in everyday life.",
+        "openGraphUrl": "https://www.theodoreoy.com/past-experience/environmental-social-and-governance/",
+        "twitterTitle": "Environmental, Social, and Governance | Past Experience",
+        "twitterDescription": "Theodore Ouyang is a Duke University graduate and Sequoia Scholar in Cohort 8, exploring how artificial intelligence can become useful in everyday life."
+      }
+    },
+    "/past-experience/finance/": {
+      "textSha256": "94a259f656ffc9129e8ca9032c080b29c410fd7f4dfdbf8070a7644d2570cf15",
+      "characterCount": 6057,
+      "wordCount": 805,
+      "preview": "Skip to main content Theodore Ouyang Home Education Past Experience Current Chapter Theodore Ouyang Exploring practical AI use cases Sequoia Scholar, Cohort 8 B",
+      "altTexts": [
+        "Illustrated portrait of Theodore Ouyang"
+      ],
+      "ariaLabels": [
+        "Theodore Ouyang home",
+        "Primary navigation",
+        "Profile",
+        "Finance"
+      ],
+      "metadata": {
+        "title": "Finance | Past Experience | Theodore Ouyang",
+        "description": "Theodore Ouyang is a Duke University graduate and Sequoia Scholar in Cohort 8, exploring how artificial intelligence can become useful in everyday life.",
+        "canonical": "https://www.theodoreoy.com/past-experience/finance/",
+        "openGraphTitle": "Finance | Past Experience",
+        "openGraphDescription": "Theodore Ouyang is a Duke University graduate and Sequoia Scholar in Cohort 8, exploring how artificial intelligence can become useful in everyday life.",
+        "openGraphUrl": "https://www.theodoreoy.com/past-experience/finance/",
+        "twitterTitle": "Finance | Past Experience",
+        "twitterDescription": "Theodore Ouyang is a Duke University graduate and Sequoia Scholar in Cohort 8, exploring how artificial intelligence can become useful in everyday life."
+      }
+    },
+    "/past-experience/stem-academic-competitions-and-training/": {
+      "textSha256": "3142783b63d9de0d6c3e3b31d82875afff5599a9bf6984c18e5cbfaf09ef77fb",
+      "characterCount": 4330,
+      "wordCount": 500,
+      "preview": "Skip to main content Theodore Ouyang Home Education Past Experience Current Chapter Theodore Ouyang Exploring practical AI use cases Sequoia Scholar, Cohort 8 B",
+      "altTexts": [
+        "Illustrated portrait of Theodore Ouyang"
+      ],
+      "ariaLabels": [
+        "Theodore Ouyang home",
+        "Primary navigation",
+        "Profile",
+        "STEM Academic Competitions and Training"
+      ],
+      "metadata": {
+        "title": "STEM Academic Competitions and Training | Past Experience | Theodore Ouyang",
+        "description": "Theodore Ouyang is a Duke University graduate and Sequoia Scholar in Cohort 8, exploring how artificial intelligence can become useful in everyday life.",
+        "canonical": "https://www.theodoreoy.com/past-experience/stem-academic-competitions-and-training/",
+        "openGraphTitle": "STEM Academic Competitions and Training | Past Experience",
+        "openGraphDescription": "Theodore Ouyang is a Duke University graduate and Sequoia Scholar in Cohort 8, exploring how artificial intelligence can become useful in everyday life.",
+        "openGraphUrl": "https://www.theodoreoy.com/past-experience/stem-academic-competitions-and-training/",
+        "twitterTitle": "STEM Academic Competitions and Training | Past Experience",
+        "twitterDescription": "Theodore Ouyang is a Duke University graduate and Sequoia Scholar in Cohort 8, exploring how artificial intelligence can become useful in everyday life."
+      }
+    },
+    "/now/": {
+      "textSha256": "686d37978346d5d817a167e306e941daafffdb5777b2253dd21f407891a4cd87",
+      "characterCount": 553,
+      "wordCount": 84,
+      "preview": "Skip to main content Theodore Ouyang Home Education Past Experience Current Chapter Theodore Ouyang Exploring practical AI use cases Sequoia Scholar, Cohort 8 B",
+      "altTexts": [
+        "Illustrated portrait of Theodore Ouyang"
+      ],
+      "ariaLabels": [
+        "Theodore Ouyang home",
+        "Primary navigation",
+        "Profile"
+      ],
+      "metadata": {
+        "title": "Current Chapter | Theodore Ouyang",
+        "description": "An AI enthusiast's exploration of practical, real-world uses of artificial intelligence in everyday life.",
+        "canonical": "https://www.theodoreoy.com/now/",
+        "openGraphTitle": "Current Chapter",
+        "openGraphDescription": "An AI enthusiast's exploration of practical, real-world uses of artificial intelligence in everyday life.",
+        "openGraphUrl": "https://www.theodoreoy.com/now/",
+        "twitterTitle": "Current Chapter",
+        "twitterDescription": "An AI enthusiast's exploration of practical, real-world uses of artificial intelligence in everyday life."
+      }
+    }
+  }
+}

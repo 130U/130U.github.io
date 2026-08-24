@@ -7,10 +7,10 @@ rewrite its own expected route manifest.
 The suite verifies:
 
 - the exact nine-route HTML manifest, canonicals, Open Graph URLs, robots, sitemap, and 404;
-- consistent four-item primary navigation and internal asset/link resolution;
+- consistent four-item primary navigation and local runtime assets;
 - protected Education, Past Experience, and Current Chapter source hashes plus
   their approved counts;
-- Home and Current Chapter copy, semantic fallback, and particle-system guardrails;
+- Home and Current Chapter copy, semantic fallback, and dither-system guardrails;
 - byte-exact original identity-asset hashes;
 - the approved runtime-asset manifest and repository deployment policy.
 
@@ -23,3 +23,7 @@ npm.cmd test
 # Or, after npm.cmd run build:
 npm.cmd run test:artifact
 ```
+
+`npm run check:visible-copy` separately compares every public route against the
+approved text, metadata, alt-text, and ARIA-label manifest. `Menu` and `Close`
+are the only permitted new visible interface strings.
