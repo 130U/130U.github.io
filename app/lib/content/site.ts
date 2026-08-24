@@ -34,8 +34,6 @@ type PageMetadataOptions = {
   description: string;
   path: string;
   absoluteTitle?: boolean;
-  type?: "website" | "article";
-  publishedTime?: string;
   image?: {
     url: string;
     width: number;
@@ -56,8 +54,6 @@ export function createPageMetadata({
   description,
   path,
   absoluteTitle = false,
-  type = "website",
-  publishedTime,
   image = defaultImage,
 }: PageMetadataOptions): Metadata {
   const openGraph = {
@@ -66,9 +62,7 @@ export function createPageMetadata({
     url: path,
     siteName: SITE_NAME,
     images: [image],
-    ...(type === "article"
-      ? { type: "article" as const, publishedTime }
-      : { type: "website" as const }),
+    type: "website" as const,
   };
 
   return {

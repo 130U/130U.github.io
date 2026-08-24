@@ -68,31 +68,19 @@ export default function Home() {
               </p>
               <ul className={styles.contactStrip}>
                 <li>
-                  <span className={styles.contactLabel}>
-                    <span aria-hidden="true">⌖</span>
-                    Location
-                  </span>
+                  <span className={styles.contactLabel}>Location</span>
                   <span>Beijing | Boston</span>
                 </li>
                 <li>
-                  <span className={styles.contactLabel}>
-                    <span aria-hidden="true">◇</span>
-                    Education
-                  </span>
+                  <span className={styles.contactLabel}>Education</span>
                   <span>Duke University</span>
                 </li>
                 <li>
-                  <span className={styles.contactLabel}>
-                    <span aria-hidden="true">@</span>
-                    Email
-                  </span>
+                  <span className={styles.contactLabel}>Email</span>
                   <a href="mailto:10@alumni.duke.edu">10@alumni.duke.edu</a>
                 </li>
                 <li>
-                  <span className={styles.contactLabel}>
-                    <span aria-hidden="true">GH</span>
-                    Online
-                  </span>
+                  <span className={styles.contactLabel}>Online</span>
                   <a href="https://github.com/130U" rel="me">
                     GitHub
                   </a>

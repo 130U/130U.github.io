@@ -385,14 +385,7 @@ button:focus-visible {
   margin: 0 0 24px;
 }
 
-.lede {
-  max-width: 68ch;
-  margin: 27px 0 0;
-  color: var(--ink);
-  font-size: 15px;
-  line-height: 1.5;
-}
-
+.lede,
 .page-intro-support {
   max-width: 68ch;
   margin: 27px 0 0;
