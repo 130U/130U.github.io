@@ -35,11 +35,11 @@ const DOMAINS = [
   ["STEM Academic Competitions and Training", "/past-experience/stem-academic-competitions-and-training/", 2, 13],
 ];
 const PROTECTED_SOURCE_HASHES = new Map([
-  ["app/education/page.tsx", "ce3c34631d07d9e8f546670761392d9d9372cec9103970f8aa849267c795f28d"],
+  ["app/education/page.tsx", "fdd4bd0b88203d6753b5d8ba0653f62f4704367d8862dc863db1c0a5dabb8887"],
   ["app/now/page.tsx", "293642ebb1b0e7fa21c69f34dcc5f0fd2fe396ca847d69b01818c4ea7dfa3888"],
   ["app/past-experience/page.tsx", "3731858797e3a1e66135e6de87ad49e626971c8e18e86440c5d55de5dc523a11"],
   ["app/past-experience/[slug]/page.tsx", "a89b781c0a6a74b9295635d5495c4e2cc2cf2d890cc879578ebfd04a9f6db84b"],
-  ["app/past-experience/components/ExperienceDomainPage.tsx", "098da21aa9d56f0ad56c4dd96997419988a0c51557507fe7748bbccb5913f3e0"],
+  ["app/past-experience/components/ExperienceDomainPage.tsx", "064ce14220d4080b7f4bb0ed619f4676f0185166f8f756ed3d6f53f8cc94317b"],
   ["app/lib/content/experience.ts", "01875681354d96713bf3025ce48e7f56febf3616ef3c8d921e48fb9f09846d72"],
   ["content/past-experience/archive-through-2026-06-30.md", "ed0bc21996ef84788dbf76d36311bd6552d775b023b2d80cddc4192aed90957f"],
 ]);
@@ -213,8 +213,17 @@ test("Past Experience keeps five domains, 16 entries, and 92 bullets", async () 
     const html = await routeHtml(route);
     assert.match(stripMarkup(html), new RegExp(name.replace(/[.*+?^${}()|[\]\\]/gu, "\\$&"), "u"));
     const routeEntries = elementsWithClass(html, "article", "archive-entry");
+    const routeIndices = elementsWithClass(html, "div", "archive-entry-number").map(
+      (entry) => stripMarkup(entry[2]),
+    );
     const routeBullets = elementsWithClass(html, "ul", "archive-bullets").reduce((total, list) => total + (list[2].match(/<li\b/giu) ?? []).length, 0);
     assert.equal(routeEntries.length, expectedEntries);
+    assert.deepEqual(
+      routeIndices,
+      Array.from({ length: expectedEntries }, (_, index) =>
+        String.fromCharCode("a".charCodeAt(0) + index),
+      ),
+    );
     assert.equal(routeBullets, expectedBullets);
     entries += routeEntries.length;
     bullets += routeBullets;
@@ -230,6 +239,8 @@ test("Past Experience keeps five domains, 16 entries, and 92 bullets", async () 
 test("Education retains both degrees, 31 courses, and the advisor record", async () => {
   const html = await routeHtml("/education/");
   assert.equal(elementsWithClass(html, "article", "education-entry").length, 2);
+  assert.equal(elementsWithClass(html, "div", "entry-date").length, 0);
+  assert.doesNotMatch(stripMarkup(html), /\b(?:2023|2025)\b/u);
   const lists = elementsWithClass(html, "ul", "course-list");
   assert.equal(lists.length, 4);
   assert.equal(lists.reduce((total, list) => total + (list[2].match(/<li\b/giu) ?? []).length, 0), 31);
@@ -301,6 +312,10 @@ test("the production design contract is restrained and dependency-light", async 
   assert.match(globals, /width:\s*min\(100%,\s*1440px\)/u);
   assert.match(globals, /\.content-column\s*\{[\s\S]*?grid-template-columns:\s*repeat\(12,[\s\S]*?padding:\s*176px 0 144px/u);
   assert.match(globals, /\.structural-guide-tick\s*\{[\s\S]*?position:\s*sticky[\s\S]*?height:\s*20px/u);
+  assert.match(globals, /\.domain-directory\s*\{[\s\S]*?grid-column:\s*1\s*\/\s*span\s*11/u);
+  assert.match(globals, /\.domain-directory-link\s*\{[\s\S]*?grid-template-columns:\s*repeat\(11,/u);
+  assert.match(globals, /\.archive-entry\s*\{[\s\S]*?grid-template-columns:\s*repeat\(11,/u);
+  assert.doesNotMatch(globals, /\.education-entry\s*\{[^}]*grid-template-columns/u);
   for (const guide of ["frame-start", "rail-boundary", "reading-start", "reading-measure", "reading-end"]) assert.ok(structuralGrid.includes(`"${guide}"`));
   for (const contract of ["aria-controls=\"site-menu\"", "aria-expanded={menuOpen}", 'event.key === "Escape"', 'document.body.classList.add("menu-open")', 'querySelectorAll<HTMLElement>']) assert.ok(navigation.includes(contract));
   assert.match(navigation, /backgroundRegions[\s\S]*?region\.inert = true[\s\S]*?region\.inert = false/u);

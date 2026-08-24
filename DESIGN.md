@@ -132,7 +132,7 @@ Desktop navigation uses the compact black `LO + Theodore Ouyang` horizontal lock
 
 ### Editorial Rows
 
-Education, domain-directory, coursework, and experience records use aligned columns, large vertical breathing room, and structural hairlines. Experience bullet text shares the metadata value baseline; its 3px optical marker occupies a narrow 18px gutter immediately before the text rather than floating in the label column. Hover may change text color and move an arrow by 4px; it never lifts, glows, or gains a card surface.
+Education, domain-directory, coursework, and experience records use aligned columns, large vertical breathing room, and structural hairlines. Education degree rows omit visible year markers so each institution begins directly on the reading axis. Past Experience reserves the first internal track for sequence only: domains use `01`–`05`, entries restart with lowercase `a`–`d`, and every associated heading and content block begins on the second track. Experience bullet text shares the metadata value baseline; its 3px optical marker occupies a narrow 18px gutter immediately before the text rather than floating in the label column. Hover may change text color and move an arrow by 4px; it never lifts, glows, or gains a card surface.
 
 ### Page Titles
 

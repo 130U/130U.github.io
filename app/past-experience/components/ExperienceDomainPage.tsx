@@ -3,6 +3,7 @@ import { SiteShell } from "../../components/SiteShell";
 import type { ExperienceDomain } from "../../lib/content/experience";
 
 const metadataOrder = ["Location", "Website", "Position", "Dates"] as const;
+const entryIndices = "abcdefghijklmnopqrstuvwxyz";
 
 function formatWebsiteLabel(website: string) {
   return website.replace(/^https?:\/\/(?:www\.)?/u, "").replace(/\/$/u, "");
@@ -30,7 +31,7 @@ export function ExperienceDomainPage({
             key={`${entry.organization}-${entry.metadata.Project}`}
           >
             <div className="archive-entry-number" aria-hidden="true">
-              {String(entryIndex + 1).padStart(2, "0")}
+              {entryIndices[entryIndex]}
             </div>
             <div className="archive-entry-content">
               <h2>{entry.organization}</h2>

@@ -19,6 +19,13 @@ const protectedPathspecs = [
 
 const approvedProtectedChanges = new Map([
   [
+    "app/education/page.tsx",
+    {
+      status: "M",
+      hash: "fdd4bd0b88203d6753b5d8ba0653f62f4704367d8862dc863db1c0a5dabb8887",
+    },
+  ],
+  [
     "app/now/page.tsx",
     {
       status: "M",
@@ -30,6 +37,13 @@ const approvedProtectedChanges = new Map([
     {
       status: "M",
       hash: "3731858797e3a1e66135e6de87ad49e626971c8e18e86440c5d55de5dc523a11",
+    },
+  ],
+  [
+    "app/past-experience/components/ExperienceDomainPage.tsx",
+    {
+      status: "M",
+      hash: "064ce14220d4080b7f4bb0ed619f4676f0185166f8f756ed3d6f53f8cc94317b",
     },
   ],
   [

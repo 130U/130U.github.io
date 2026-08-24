@@ -71,53 +71,47 @@ export default function EducationPage() {
 
       <section className="education-list" aria-label="Degrees">
         <article className="education-entry">
-          <div className="entry-date">2025</div>
-          <div className="education-entry-content">
-            <header className="education-institution">
-              <h2>Duke University</h2>
-            </header>
-            <h3 className="education-degree">
-              Master of Engineering in Risk Engineering
-            </h3>
-            <p className="entry-subtitle">Financial Risk Concentration</p>
-            <div
-              className="education-notes"
-              role="group"
-              aria-label="Academic distinctions"
-            >
-              <p className="education-note education-advisor">
-                Academic Advisor:{" "}
-                <a
-                  href="https://cee.duke.edu/people/mark-borsuk/"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  Mark Borsuk, Ph.D.
-                </a>
-              </p>
-              <p className="education-note">
-                Pratt School of Engineering Merit Scholarship — one of the
-                school’s highest-tier merit awards, covering 50% of tuition.
-              </p>
-            </div>
+          <header className="education-institution">
+            <h2>Duke University</h2>
+          </header>
+          <h3 className="education-degree">
+            Master of Engineering in Risk Engineering
+          </h3>
+          <p className="entry-subtitle">Financial Risk Concentration</p>
+          <div
+            className="education-notes"
+            role="group"
+            aria-label="Academic distinctions"
+          >
+            <p className="education-note education-advisor">
+              Academic Advisor:{" "}
+              <a
+                href="https://cee.duke.edu/people/mark-borsuk/"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Mark Borsuk, Ph.D.
+              </a>
+            </p>
+            <p className="education-note">
+              Pratt School of Engineering Merit Scholarship — one of the
+              school’s highest-tier merit awards, covering 50% of tuition.
+            </p>
           </div>
         </article>
 
         <article className="education-entry">
-          <div className="entry-date">2023</div>
-          <div className="education-entry-content">
-            <header className="education-institution">
-              <h2>Duke University</h2>
-            </header>
-            <h3 className="education-degree">
-              Bachelor of Science in Mathematics
-            </h3>
-            <p className="entry-subtitle">Dual-Degree Undergraduate Program</p>
-            <p className="education-note">
-              Undergraduate Merit Scholarship — a merit-based award covering
-              25% of tuition.
-            </p>
-          </div>
+          <header className="education-institution">
+            <h2>Duke University</h2>
+          </header>
+          <h3 className="education-degree">
+            Bachelor of Science in Mathematics
+          </h3>
+          <p className="entry-subtitle">Dual-Degree Undergraduate Program</p>
+          <p className="education-note">
+            Undergraduate Merit Scholarship — a merit-based award covering
+            25% of tuition.
+          </p>
         </article>
       </section>
 

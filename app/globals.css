@@ -363,7 +363,6 @@ button:focus-visible {
 
 .section-kicker,
 .domain-page-number,
-.entry-date,
 .archive-entry-number,
 .domain-number,
 .entry-metadata dt,
@@ -375,7 +374,6 @@ button:focus-visible {
 }
 
 .domain-page-number,
-.entry-date,
 .archive-entry-number,
 .domain-number,
 .entry-metadata {
@@ -421,11 +419,8 @@ button:focus-visible {
 }
 
 .education-entry {
-  display: grid;
-  grid-template-columns: minmax(56px, 1fr) minmax(0, 8fr);
   padding: 36px 0 46px;
   border-bottom: 1px solid var(--rule);
-  gap: 32px;
 }
 
 .education-institution h2 {
@@ -518,21 +513,26 @@ button:focus-visible {
 }
 
 .domain-directory {
+  grid-column: 1 / span 11;
   display: grid;
 }
 
 .domain-directory-link {
   display: grid;
-  grid-template-columns: 64px minmax(0, 1fr) 32px;
+  grid-template-columns: repeat(11, minmax(0, 1fr));
   min-height: 84px;
   align-items: center;
   border-bottom: 1px solid var(--rule);
   font-family: var(--sans);
-  gap: 16px;
   transition: color 180ms var(--ease-out), border-color 180ms var(--ease-out);
 }
 
+.domain-number {
+  grid-column: 1;
+}
+
 .domain-name {
+  grid-column: 2 / span 9;
   font-size: 22px;
   font-weight: 400;
   letter-spacing: -0.015em;
@@ -540,21 +540,53 @@ button:focus-visible {
 }
 
 .domain-arrow {
+  grid-column: 11;
   justify-self: end;
   font-size: 18px;
   transition: transform 180ms var(--ease-out);
 }
 
 .domain-page-intro {
+  display: grid;
+  grid-template-columns: repeat(11, minmax(0, 1fr));
+  grid-column: 1 / span 11;
+  width: 100%;
+  max-width: none;
   margin-bottom: 72px;
+}
+
+.domain-page-intro .back-link {
+  grid-column: 2 / -1;
+  justify-self: start;
+}
+
+.domain-page-intro .domain-page-number {
+  grid-row: 2;
+  grid-column: 1;
+  margin: 0;
+  padding-top: 3px;
+}
+
+.domain-page-intro h1 {
+  grid-row: 2;
+  grid-column: 2 / -1;
+}
+
+.domain-panel-standalone {
+  grid-column: 1 / span 11;
 }
 
 .archive-entry {
   display: grid;
-  grid-template-columns: 48px minmax(0, 1fr);
+  grid-template-columns: repeat(11, minmax(0, 1fr));
   padding: 60px 0 76px;
   border-bottom: 1px solid var(--rule-strong);
-  gap: 28px;
+}
+
+.archive-entry-number {
+  grid-column: 1;
+  padding-top: 5px;
+  text-transform: lowercase;
 }
 
 .archive-entry-content h2 {
@@ -569,6 +601,7 @@ button:focus-visible {
   --entry-bullet-left: calc(var(--entry-value-offset) - var(--entry-bullet-gutter));
 
   min-width: 0;
+  grid-column: 2 / -1;
 }
 
 .entry-metadata {
@@ -769,6 +802,26 @@ button:focus-visible {
     grid-column: 2 / span 7;
   }
 
+  .domain-directory,
+  .domain-page-intro,
+  .domain-panel-standalone {
+    grid-column: 1 / span 8;
+  }
+
+  .domain-directory-link,
+  .domain-page-intro,
+  .archive-entry {
+    grid-template-columns: repeat(8, minmax(0, 1fr));
+  }
+
+  .domain-name {
+    grid-column: 2 / span 6;
+  }
+
+  .domain-arrow {
+    grid-column: 8;
+  }
+
   .course-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
@@ -912,9 +965,7 @@ button:focus-visible {
   }
 
   .education-entry {
-    grid-template-columns: 1fr;
     padding: 29px 0 36px;
-    gap: 14px;
   }
 
   .education-degree {
@@ -946,13 +997,41 @@ button:focus-visible {
   }
 
   .domain-directory-link {
-    grid-template-columns: 42px minmax(0, 1fr) 24px;
+    grid-template-columns: 32px minmax(0, 1fr) 24px;
     min-height: 78px;
     gap: 10px;
   }
 
+  .domain-number {
+    grid-column: 1;
+  }
+
   .domain-name {
+    grid-column: 2;
     font-size: 18px;
+  }
+
+  .domain-arrow {
+    grid-column: 3;
+  }
+
+  .domain-directory,
+  .domain-page-intro,
+  .domain-panel-standalone {
+    width: 100%;
+  }
+
+  .domain-page-intro {
+    grid-template-columns: 32px minmax(0, 1fr);
+    gap: 10px;
+  }
+
+  .domain-page-intro .back-link {
+    grid-column: 1 / -1;
+  }
+
+  .domain-page-intro h1 {
+    grid-column: 2;
   }
 
   .back-link {
@@ -960,9 +1039,9 @@ button:focus-visible {
   }
 
   .archive-entry {
-    grid-template-columns: 1fr;
+    grid-template-columns: 32px minmax(0, 1fr);
     padding: 42px 0 57px;
-    gap: 14px;
+    gap: 10px;
   }
 
   .entry-metadata {

@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "baselineSha": "073febf24e86f78848b71ed7f8f15549870cf733",
+  "baselineSha": "9692a533853e870f760c1b75e43f90b8703e7e25",
   "allowedNewVisibleStrings": [
     "Menu",
     "Close"
@@ -29,10 +29,10 @@
       }
     },
     "/education/": {
-      "textSha256": "277a3533eaed186bc846f33be63b260008c6a051241ec23bfa1486e6210d73b3",
-      "characterCount": 1362,
-      "wordCount": 169,
-      "preview": "Skip to main content Theodore Ouyang Home Education Past Experience Current Chapter Education 2025 Duke University Master of Engineering in Risk Engineering Fin",
+      "textSha256": "14d89c482112676a8943e436a01f2b3859f40b9eb86323016dcfc2872fc1f3ca",
+      "characterCount": 1352,
+      "wordCount": 167,
+      "preview": "Skip to main content Theodore Ouyang Home Education Past Experience Current Chapter Education Duke University Master of Engineering in Risk Engineering Financia",
       "altTexts": [],
       "ariaLabels": [
         "Theodore Ouyang home",
