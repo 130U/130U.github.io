@@ -48,13 +48,6 @@ const EXPECTED_PUBLIC_ASSETS = [
   "assets/brand/favicon-32.png",
   "assets/brand/favicon.ico",
   "assets/brand/og-1774.jpg",
-  "assets/fonts/licenses/shantell-sans-OFL.txt",
-  "assets/fonts/shantell-sans-variable-latin.woff2",
-  "assets/profile/theodore-avatar-warm-384.avif",
-  "assets/profile/theodore-avatar-warm-384.webp",
-  "assets/profile/theodore-avatar-warm-768.avif",
-  "assets/profile/theodore-avatar-warm-768.webp",
-  "assets/profile/theodore-avatar-warm.png",
 ];
 
 function decodeHtml(value) {
@@ -149,7 +142,15 @@ test("the static export contains exactly the approved nine public routes", async
 });
 
 test("every route keeps canonical metadata, CSP, and the same navigation", async () => {
-  const requiredCsp = ["default-src 'self'", "script-src 'self' 'unsafe-inline'", "object-src 'none'", "base-uri 'self'", "form-action 'self'"];
+  const requiredCsp = [
+    "default-src 'self'",
+    "script-src 'self' 'unsafe-inline'",
+    "script-src-attr 'none'",
+    "frame-src 'none'",
+    "object-src 'none'",
+    "base-uri 'self'",
+    "form-action 'self'",
+  ];
   for (const route of ROUTES) {
     const html = await routeHtml(route);
     const absolute = new URL(route, SITE_ORIGIN).toString();
@@ -263,8 +264,10 @@ test("the production design contract is restrained and dependency-light", async 
   assert.match(globals, /\.entry-metadata\s*\{[\s\S]*?grid-template-columns:\s*1fr/u);
   assert.match(globals, /\.entry-project\s*\{[\s\S]*?color:\s*var\(--muted\)/u);
   assert.match(globals, /\.archive-bullets li::marker\s*\{[\s\S]*?color:\s*var\(--ink\)/u);
-  assert.match(layout, /data-design-contract="user-pinned-balanced"/u);
-  assert.doesNotMatch(layout, /ParticleBackground|shantell-sans/u);
+  assert.doesNotMatch(layout, /data-design-contract|ParticleBackground|shantell-sans/u);
+  assert.equal(existsSync(path.join(ROOT, "postcss.config.mjs")), false);
   assert.equal(packageJson.dependencies.three, undefined);
   assert.equal(packageJson.devDependencies["@types/three"], undefined);
+  assert.equal(packageJson.devDependencies.tailwindcss, undefined);
+  assert.equal(packageJson.devDependencies["@tailwindcss/postcss"], undefined);
 });

@@ -6,8 +6,8 @@
   the exported `404.html` response.
 - `verify-visible-copy.mjs` compares the export with the approved nine-route
   visible-copy and metadata manifest.
-- `optimize-images.mjs` creates reproducible web derivatives from preserved
-  source images; non-runtime brand originals live in `source-assets/`.
+- `optimize-images.mjs` creates the reproducible social-preview derivative from
+  `source-assets/brand/og.png`.
 
 Whenever a public route is added, update the route registry, sitemap
 expectations, and final-artifact tests in the same change.

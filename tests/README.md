@@ -11,7 +11,6 @@ The suite verifies:
 - protected Education, Past Experience, and Current Chapter source hashes plus
   their approved counts;
 - Home and Current Chapter copy, semantic fallback, and dither-system guardrails;
-- byte-exact original identity-asset hashes;
 - the approved runtime-asset manifest and repository deployment policy.
 
 `npm test` always rebuilds first, preventing a stale `out/` directory from

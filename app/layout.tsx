@@ -16,11 +16,14 @@ const SCRIPT_SOURCE =
 const CONTENT_SECURITY_POLICY = [
   "default-src 'self'",
   SCRIPT_SOURCE,
+  "script-src-attr 'none'",
   "style-src 'self' 'unsafe-inline'",
   "img-src 'self' data:",
   "font-src 'self'",
   "connect-src 'self'",
-  "worker-src 'self' blob:",
+  "media-src 'self'",
+  "frame-src 'none'",
+  "manifest-src 'self'",
   "object-src 'none'",
   "base-uri 'self'",
   "form-action 'self'",
@@ -105,13 +108,6 @@ export default function RootLayout({
         <meta httpEquiv="Content-Security-Policy" content={CONTENT_SECURITY_POLICY} />
       </head>
       <body>
-        <template
-          data-design-contract="user-pinned-balanced"
-          dangerouslySetInnerHTML={{
-            __html:
-              "<!-- Cognition-style warm-white editorial shell; 3/12 desktop grid; restrained sans/serif typography; hairline rules; no cards, glass, shadows, or dark theme. Home alone begins with the user-selected Balanced two-line THEODORE / OUYANG dither, enlarged with disciplined whitespace. Menu and Close are the only new visible strings. Preserve every existing page sentence, route, metadata field, alt text, aria label, and content order. Motion is limited to the dither interaction, small link feedback, and an accessible mobile menu, with reduced-motion fallbacks. FINISH: production must pass copy lock, protected-source, responsive, accessibility, performance, and static-export verification. -->",
-          }}
-        />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{

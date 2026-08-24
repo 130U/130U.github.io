@@ -17,7 +17,7 @@ typography:
     lineHeight: 1.1
     letterSpacing: "-0.02em"
   body:
-    fontFamily: "Source Serif 4, Georgia, Times New Roman, serif"
+    fontFamily: "Georgia, Times New Roman, serif"
     fontSize: "15px"
     fontWeight: 400
     lineHeight: 1.5
@@ -81,7 +81,7 @@ Signal Blue is reserved for active navigation, focus, and meaningful link feedba
 ## Typography
 
 **Display and interface font:** Helvetica Neue with Helvetica and Arial fallbacks.  
-**Body font:** Source Serif 4 with Georgia and Times New Roman fallbacks.
+**Body font:** Georgia with Times New Roman and the platform serif fallback.
 
 Sans type supplies precision to navigation, titles, and metadata. Serif type slows the reading rhythm and prevents the minimal shell from feeling clinical. Desktop H1 uses the Headline token; mobile H1 resolves to 24px / 1.2. Body copy stays within 64–72 characters where the source layout permits.
 
@@ -121,14 +121,14 @@ Education, domain-directory, coursework, and experience records use aligned colu
 
 ### Do:
 
-- **Do** preserve every published sentence, route, metadata field, alt text, ARIA label, and content order.
+- **Do** preserve protected biographical sources, factual claims, routes, metadata, alt text, ARIA labels, and content order unless Theodore explicitly approves a revision.
 - **Do** use whitespace and real content boundaries before adding any new visual element.
 - **Do** keep the entrance interaction interruptible, idle-aware, and fully static under reduced motion.
 - **Do** verify 1440px, 1024px, 390px, and 320px layouts before release.
 
 ### Don't:
 
-- **Don't** restore the deep-blue star field, glass navigation, Shantell UI typography, or Three.js background.
+- **Don't** add a global WebGL background, handwritten interface typography, glass navigation, or ambient decorative motion.
 - **Don't** add pill navigation, bento cards, scroll reveals, parallax, or GSAP storytelling.
 - **Don't** copy Cognition's logo, client material, CSS, font files, or source code.
-- **Don't** add visible interface copy beyond the approved `Menu` and `Close` controls.
+- **Don't** add new decorative interface copy, scroll prompts, or pseudo-technical glyphs beyond the approved visible-copy baseline.

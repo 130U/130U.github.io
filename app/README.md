@@ -25,4 +25,4 @@ Shared responsibilities:
 - `lib/content/routes.ts` — canonical public routes used by the sitemap.
 - `robots.ts`, `sitemap.ts`, and `not-found.tsx` — static discovery and failure pages.
 
-See `website-maintenance/01-page-file-map.md` for the complete source map.
+See `website-maintenance/README.md` for the complete maintainer guide.

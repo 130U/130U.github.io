@@ -12,6 +12,7 @@ export function SiteNavigation({
   const [menuOpen, setMenuOpen] = useState(false);
   const toggleRef = useRef<HTMLButtonElement>(null);
   const panelRef = useRef<HTMLDivElement>(null);
+  const focusFirstLinkRef = useRef(false);
   const restoreFocusRef = useRef(false);
 
   const closeMenu = (restoreFocus: boolean) => {
@@ -34,7 +35,10 @@ export function SiteNavigation({
       ),
     ];
     const firstLink = panel.querySelector<HTMLElement>("a[href]");
-    const focusFrame = requestAnimationFrame(() => firstLink?.focus());
+    const focusFrame = focusFirstLinkRef.current
+      ? requestAnimationFrame(() => firstLink?.focus())
+      : 0;
+    focusFirstLinkRef.current = false;
 
     const onKeyDown = (event: KeyboardEvent) => {
       if (event.key === "Escape") {
@@ -78,7 +82,16 @@ export function SiteNavigation({
           aria-controls="site-menu"
           aria-expanded={menuOpen}
           className="menu-toggle"
-          onClick={() => (menuOpen ? closeMenu(true) : setMenuOpen(true))}
+          onClick={(event) => {
+            const keyboardActivation = event.detail === 0;
+
+            if (menuOpen) {
+              closeMenu(true);
+            } else {
+              focusFirstLinkRef.current = keyboardActivation;
+              setMenuOpen(true);
+            }
+          }}
           ref={toggleRef}
           type="button"
         >
@@ -100,7 +113,6 @@ export function SiteNavigation({
             </Link>
           ))}
         </nav>
-
       </div>
     </div>
   );

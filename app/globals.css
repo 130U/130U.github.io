@@ -1,5 +1,3 @@
-@import "tailwindcss" source(none);
-
 :root {
   color-scheme: light;
   --page: #f7f6f5;
@@ -10,7 +8,7 @@
   --accent: #2200ff;
   --dither: #070707;
   --sans: "Helvetica Neue", Helvetica, Arial, sans-serif;
-  --serif: "Source Serif 4", Georgia, "Times New Roman", serif;
+  --serif: Georgia, "Times New Roman", serif;
   --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
   --drawer-ease: cubic-bezier(0.32, 0.72, 0, 1);
 }

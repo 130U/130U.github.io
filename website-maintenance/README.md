@@ -1,44 +1,119 @@
-# Website Maintenance — Start Here
+# Website Maintenance
 
-This directory is the maintenance entry point for Theodore Ouyang's personal
-website. It is written for Theodore and future maintainers.
+This is the authoritative maintainer guide for Theodore Ouyang's personal site.
+It describes the current production system, not the redesign process that led
+to it.
 
-## Non-negotiable guardrail
+## Product boundary
 
-Education, Past Experience, and Current Chapter source files are protected from
-modification. Any other removal or rewrite requires Theodore's explicit
-approval and must update routes, tests, and documentation in the same change.
+The site is a static personal record with four primary routes:
 
-The visual system is intentionally restrained. Preserve its typography,
-material hierarchy, responsive behavior, reduced-motion support, and immediate
-pointer feedback unless a visible redesign is explicitly requested.
+| Page | Route | Primary source |
+| --- | --- | --- |
+| Home | `/` | `app/page.tsx`, `app/home.module.css` |
+| Education | `/education/` | `app/education/page.tsx` |
+| Past Experience | `/past-experience/` | `app/past-experience/`, `app/lib/content/experience.ts` |
+| Current Chapter | `/now/` | `app/now/page.tsx` |
 
-## Where to begin
+Five Past Experience domain routes are generated from the validated registry
+and `content/past-experience/archive-through-2026-06-30.md`. `app/sitemap.ts`
+and `app/lib/content/routes.ts` derive from the same route sources.
 
-1. Use `01-page-file-map.md` to locate the relevant source and registry.
-2. Read `02-repository-structure.md` before moving or adding infrastructure.
-3. Read `03-home-particle-system.md` before changing the Home visual system.
-4. Follow `04-release-checklist.md` before publishing.
-5. Read `05-architecture-decisions.md` before introducing a CMS, API, database,
-   client state, or a second repository.
-6. Read `06-public-assets.md` before adding or replacing source media.
-7. Read `07-brand-system.md` before changing color, typography, motion, or the
-   visual relationship between Home and the protected inner pages.
+## Architecture
 
-## Technology and publishing
+- Next.js App Router with `output: "export"` and trailing slashes.
+- React Server Components for static pages; client code is isolated to the
+  navigation menu and Home dither interaction.
+- Native CSS and CSS Modules. There is no UI framework or runtime styling
+  dependency.
+- Canvas2D for the Home-only dithered wordmark. It uses typed arrays, a capped
+  device-pixel ratio, `ResizeObserver`, Pointer Events, reduced-motion support,
+  and a requestAnimationFrame loop that stops at rest.
+- GitHub Pages serves immutable HTML, CSS, JavaScript, icons, and the social
+  preview. There is no API, database, authentication, form submission, Server
+  Action, middleware, CMS, analytics runtime, or request-time data fetch.
 
-- Official Next.js App Router with `output: "export"`.
-- React, TypeScript, Tailwind's PostCSS pipeline, Three.js on Home, and self-hosted fonts.
-- A typed registry generates repeatable experience routes and sitemap URLs.
-- `main` is the published branch.
-- Pull requests validate only; pushes to `main` validate, upload, and deploy to
-  GitHub Pages. A failed `main` run can be rerun with its original preservation
-  guard context; feature refs cannot deploy.
-- Tags are archive references only; they never upload or deploy Pages artifacts.
-- Generated `.next/` and `out/` directories are excluded from Git.
+Do not add backend or client-state infrastructure until a concrete product
+requirement cannot be met by this static architecture.
 
-## Safe maintenance principle
+## Design system
 
-Prefer standard framework conventions, a single source of truth, strict build
-validation, and static output. Add operational complexity only when a concrete
-product requirement justifies it.
+`DESIGN.md` is the visual source of truth. The north star is Quiet Technical
+Authority: one expressive identity entrance followed by a warm-white editorial
+shell with a 3/12 desktop rail, hairline rules, restrained sans/serif type, and
+rare signal blue.
+
+Keep the body calm. Do not add cards, glass, shadows, ambient particles, scroll
+reveals, parallax, GSAP storytelling, a custom cursor, or decorative interface
+copy. The Home entrance is the only authored spectacle.
+
+## Code map
+
+| Responsibility | Source |
+| --- | --- |
+| Shared shell and footer | `app/components/SiteShell.tsx` |
+| Navigation and mobile focus handling | `app/components/SiteNavigation.tsx` |
+| Home dither renderer and physics | `app/components/dithered-entrance/` |
+| Global tokens, layout, and responsive rules | `app/globals.css` |
+| Site constants and metadata helper | `app/lib/content/site.ts` |
+| Experience parser and registry | `app/lib/content/experience.ts` |
+| Content preservation | `scripts/check-protected-sources.mjs` |
+| Rendered-copy preservation | `scripts/verify-visible-copy.mjs` |
+| Final-artifact and policy checks | `tests/` |
+| Pages build and deployment | `.github/workflows/pages.yml` |
+
+## Content protection
+
+Education, Past Experience, and Current Chapter source files are protected.
+Their normalized source hashes and rendered output are verified in tests. Any
+future copy revision needs explicit approval, updated hashes, a refreshed copy
+manifest, and a release note explaining the change.
+
+Home microcopy may evolve only when the user explicitly requests a brand or
+copy revision. Preserve factual claims and do not introduce unsupported titles,
+metrics, affiliations, or employer language.
+
+## Assets
+
+Only files required by production belong under `public/assets/`:
+
+- `public/assets/brand/`: browser icons and the social preview derivative.
+- `source-assets/brand/og.png`: editable source for the social preview.
+- `source-assets/brand/icon-512.png`: editable source for browser icons.
+- `.github/assets/readme-cover.png`: current repository cover.
+
+Regenerate the optimized social preview with `npm.cmd run optimize:images`.
+Do not retain portraits, fonts, prototypes, or derivatives that the live site
+does not reference.
+
+## Release checklist
+
+Record the exact pre-change commit before editing:
+
+```powershell
+$env:BASE_SHA = (git rev-parse HEAD).Trim()
+git status --short --branch
+```
+
+Before publishing, run:
+
+```powershell
+npm.cmd run lint
+npm.cmd run typecheck
+npm.cmd run build
+npm.cmd run test:artifact
+npm.cmd run check:visible-copy
+npm.cmd audit --audit-level=moderate
+npm.cmd audit --omit=dev --audit-level=moderate
+npm.cmd run check:protected-sources
+git diff --check
+```
+
+Then inspect the exact `out/` artifact at 1440 × 900, 390 × 844, and
+320 × 800. Verify keyboard navigation, the mobile menu, reduced motion, the
+Canvas fallback, horizontal overflow, canonical metadata, robots, sitemap, and
+one Past Experience domain route.
+
+`main` is the only production branch. Pull requests validate; pushes to `main`
+validate and deploy. After publishing, verify the GitHub Actions run and the
+live custom domain independently.

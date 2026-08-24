@@ -1,6 +1,6 @@
 {
   "schemaVersion": 2,
-  "generatedAt": "2026-08-24T03:15:53.219Z",
+  "generatedAt": "2026-08-24T03:55:13.000Z",
   "title": "Design System: Theodore Ouyang Portfolio",
   "extensions": {
     "colorMeta": {
@@ -102,7 +102,7 @@
       "name": "Experience Metadata",
       "kind": "custom",
       "description": "Single-column metadata stack with quiet labels and a fixed label measure.",
-      "html": "<dl class=\"ds-entry-metadata\"><div><dt>Location</dt><dd>Beijing, China</dd></div><div><dt>Position</dt><dd>Researcher</dd></div><div><dt>Dates</dt><dd>2025 — 2026</dd></div></dl>",
+      "html": "<dl class=\"ds-entry-metadata\"><div><dt>Location</dt><dd>Beijing, China</dd></div><div><dt>Position</dt><dd>Researcher</dd></div><div><dt>Dates</dt><dd>2025-2026</dd></div></dl>",
       "css": ".ds-entry-metadata { display: grid; grid-template-columns: 1fr; max-width: 720px; margin: 38px 0 0; padding: 22px 0; border-top: 1px solid var(--rule, rgba(0,0,0,.06)); border-bottom: 1px solid var(--rule, rgba(0,0,0,.06)); gap: 13px; } .ds-entry-metadata > div { display: grid; grid-template-columns: 96px minmax(0,1fr); align-items: baseline; gap: 16px; } .ds-entry-metadata dt, .ds-entry-metadata dd { margin: 0; } .ds-entry-metadata dt { color: var(--muted, #70706c); font: 12px/1.4 Helvetica, Arial, sans-serif; } .ds-entry-metadata dd { color: var(--ink, #0b0b0b); font: 15px/1.5 Georgia, serif; overflow-wrap: anywhere; }"
     },
     {
@@ -135,16 +135,16 @@
       { "name": "The Flat Authority Rule", "body": "If an element needs a shadow to appear important, its hierarchy is wrong.", "section": "elevation" }
     ],
     "dos": [
-      "Do preserve every published sentence, route, metadata field, alt text, ARIA label, and content order.",
+      "Do preserve protected biographical sources, factual claims, routes, metadata, alt text, ARIA labels, and content order unless Theodore explicitly approves a revision.",
       "Do use whitespace and real content boundaries before adding any new visual element.",
       "Do keep the entrance interaction interruptible, idle-aware, and fully static under reduced motion.",
       "Do verify 1440px, 1024px, 390px, and 320px layouts before release."
     ],
     "donts": [
-      "Don't restore the deep-blue star field, glass navigation, Shantell UI typography, or Three.js background.",
+      "Don't add a global WebGL background, handwritten interface typography, glass navigation, or ambient decorative motion.",
       "Don't add pill navigation, bento cards, scroll reveals, parallax, or GSAP storytelling.",
       "Don't copy Cognition's logo, client material, CSS, font files, or source code.",
-      "Don't add visible interface copy beyond the approved Menu and Close controls."
+      "Don't add new decorative interface copy, scroll prompts, or pseudo-technical glyphs beyond the approved visible-copy baseline."
     ]
   }
 }

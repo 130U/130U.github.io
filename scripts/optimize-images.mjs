@@ -8,28 +8,6 @@ const publicRoot = join(root, "public", "assets");
 const sourceRoot = join(root, "source-assets");
 
 const jobs = [
-  ...[384, 768].flatMap((width) => [
-    {
-      source: join(publicRoot, "profile", "theodore-avatar-warm.png"),
-      destination: join(
-        publicRoot,
-        "profile",
-        `theodore-avatar-warm-${width}.avif`,
-      ),
-      transform: (image) =>
-        image.resize({ width, withoutEnlargement: true }).avif({ quality: 78, effort: 6 }),
-    },
-    {
-      source: join(publicRoot, "profile", "theodore-avatar-warm.png"),
-      destination: join(
-        publicRoot,
-        "profile",
-        `theodore-avatar-warm-${width}.webp`,
-      ),
-      transform: (image) =>
-        image.resize({ width, withoutEnlargement: true }).webp({ quality: 84, effort: 6 }),
-    },
-  ]),
   {
     source: join(sourceRoot, "brand", "og.png"),
     destination: join(publicRoot, "brand", "og-1774.jpg"),

@@ -7,7 +7,7 @@
   min-height: 100dvh;
   overflow: hidden;
   place-items: center;
-  background: #f7f6f5;
+  background: var(--page);
 }
 
 .stage {
@@ -34,7 +34,7 @@
 .fallback {
   display: grid;
   align-content: center;
-  color: #070707;
+  color: var(--dither);
   font-family: Arial, "Helvetica Neue", Helvetica, sans-serif;
   font-weight: 800;
   line-height: 0.84;

@@ -1,34 +1,38 @@
-# Motion audit — baseline `f909635d`
+# Motion audit
 
-## Highest-priority findings
+## Verdict
 
-| Priority | Current seam | Decision |
+The production motion system is intentionally narrow and coherent. The Home
+dither is the sole expressive moment; the mobile menu and links provide brief
+state feedback. No new animation library or additional motion surface is
+recommended.
+
+## Current contracts
+
+| Surface | Purpose | Implementation |
 | --- | --- | --- |
-| High | `app/layout.tsx` mounts a persistent Three.js field on every route; `particle-engine.ts` maintains a requestAnimationFrame timeline, ambient drift, twinkle, parallax, drag, and route retargeting. The effect is frequent and competes with reading. | Replace it with one Home-only Canvas2D entrance. Run frames only during the 800ms ready fade, active pointer response, displaced-point recovery, or a 675ms ripple. |
-| High | `particle-config.ts` cycles `THEODORE → SCATTER → OUYANG → SCATTER`; the visitor cannot read the complete identity at once. | Render `THEODORE` and `OUYANG` simultaneously in one stable two-line particle mask. No typewriter, random entrance, or recurring morph. |
-| Medium | The current top bar and inner surfaces use blur, gradients, rounded containers, and deep-blue ambient layers. Their motion and material language read as playful even where the content is editorial. | Rebuild the shell as static off-white structural grid lines. Keep motion only for the rare entrance, 200ms mobile menu state change, press feedback, and small directional-arrow feedback. |
-| Medium | Motion values are split across component CSS and Three configuration. | Consolidate web UI motion into `--ease-out`, `--ease-in-out`, `--ease-drawer`, and a small duration scale; Canvas physics remain explicit constants beside the engine. |
+| Dither ready state | Establish identity once the mask is ready | 800ms opacity reveal |
+| Pointer repulsion | Confirm that the identity mark is tactile | 100px radius, 40px maximum displacement, cubic falloff |
+| Release ripple | Acknowledge a deliberate pointer release | 225px/s, 37px width, 20px strength, 675ms lifetime |
+| Mobile menu | Explain the panel state change | 200ms opacity and 8px transform with drawer ease |
+| Links and active marker | Provide immediate state feedback | 120-180ms transform, color, and rule transitions |
 
-## Recommended opportunities already selected by the brief
+## Performance and accessibility
 
-1. **Fade in** the complete dither wordmark over 800ms after its mask is ready.
-2. **Pointer repulsion** within a 100px radius, with a maximum 40px cubic-falloff displacement and spring-like return.
-3. **Ripple** on pointer release at 225px/s, 37px width, 20px strength, lasting 675ms.
-4. **Menu reveal** using opacity plus a small transform over 180–220ms with strong ease-out; it must stay interruptible and become instant under reduced motion.
-5. **Directional feedback** on experience links with a restrained arrow translation; retain the current interaction category but reduce distance.
+- The Canvas2D loop requests another frame only while fading, rippling, or
+  converging toward a live target. It stops at rest even if the pointer remains
+  inside the canvas.
+- `ResizeObserver` owns normal canvas rebuilding; the window resize listener is
+  only a compatibility fallback, avoiding duplicate work.
+- Reduced motion renders the complete wordmark without displacement or ripple.
+- Hover motion is restricted to fine pointers, and all effects animate only
+  transform, opacity, color, or a canvas drawing surface.
+- The mobile menu remains interruptible, traps focus while open, closes on
+  Escape, and restores focus when dismissal requires it.
 
-## Rejected candidates
+## Rejected additions
 
-- Scroll reveals and staggered section entrances: they delay reading and repeat on content-first pages.
-- Parallax, magnetic controls, custom cursors, and global ambient particles: they make navigation feel performative rather than mature.
-- GSAP ScrollTrigger, pinned storytelling, AIDA restructuring, and bento cards: they conflict with the user-locked Cognition editorial shell and protected page order.
-- Toasts, Expo/Reanimated, haptics, and Swift: this is a static web portfolio with no matching product state or platform requirement.
-
-## Production verification — Balanced selection
-
-- Desktop stage: 720px with 36,555 sampled points at the measured 1920px viewport.
-- Mobile stage: 345px with 9,179 sampled points at the measured 390px viewport; the layout remains uncropped with no horizontal overflow.
-- Pointer repulsion, release ripple, recovery, and fade use the approved explicit constants in `dither-motion.ts`.
-- The loop requests another frame only while fading, interacting, rippling, or recovering; reduced motion renders the complete mask without interaction.
-- Mobile menu uses a 200ms opacity/transform transition, focus containment, Escape dismissal, focus restoration, route-close behavior, and a fixed open-state header.
-- Browser console review across Home, Education, and Past Experience found no runtime errors or warnings.
+Scroll reveals, parallax, marquees, magnetic buttons, route transitions, GSAP
+ScrollTrigger, and ambient loops would compete with reading and weaken the
+site's Quiet Technical Authority. The correct next motion improvement is no new
+motion.

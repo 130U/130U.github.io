@@ -196,7 +196,10 @@ export function DitheredEntrance() {
     };
 
     const onPointerUp = (event: PointerEvent) => {
-      if (motionQuery.matches) return;
+      if (motionQuery.matches) {
+        touchOrigin = null;
+        return;
+      }
       if (event.pointerType === "touch" && touchOrigin?.moved) {
         touchOrigin = null;
         return;
@@ -222,8 +225,11 @@ export function DitheredEntrance() {
     const resizeObserver = "ResizeObserver" in window
       ? new ResizeObserver(queueRebuild)
       : undefined;
-    resizeObserver?.observe(canvas);
-    window.addEventListener("resize", queueRebuild, { passive: true });
+    if (resizeObserver) {
+      resizeObserver.observe(canvas);
+    } else {
+      window.addEventListener("resize", queueRebuild, { passive: true });
+    }
     motionQuery.addEventListener("change", onMotionPreferenceChange);
     canvas.addEventListener("pointerdown", onPointerDown, { passive: true });
     canvas.addEventListener("pointermove", onPointerMove, { passive: true });
@@ -242,7 +248,7 @@ export function DitheredEntrance() {
       cancelAnimationFrame(frame);
       cancelAnimationFrame(resizeFrame);
       resizeObserver?.disconnect();
-      window.removeEventListener("resize", queueRebuild);
+      if (!resizeObserver) window.removeEventListener("resize", queueRebuild);
       motionQuery.removeEventListener("change", onMotionPreferenceChange);
       canvas.removeEventListener("pointerdown", onPointerDown);
       canvas.removeEventListener("pointermove", onPointerMove);
