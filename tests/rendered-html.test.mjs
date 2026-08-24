@@ -284,7 +284,11 @@ test("the production design contract is restrained and dependency-light", async 
   assert.match(entrance, /min\(76vw, 72dvh, 720px\)/u);
   assert.match(entrance, /min\(92vw, 68dvh, 380px\)/u);
   assert.match(entrance, /aspect-ratio:\s*1/u);
+  assert.match(entrance, /\.scrollCue\s*\{[\s\S]*?color:\s*var\(--muted\)[\s\S]*?font-size:\s*11px/u);
+  assert.match(globals, /@media \(pointer:\s*coarse\)[\s\S]*?\.primary-nav a,[\s\S]*?\.entry-website-link[\s\S]*?min-height:\s*44px/u);
+  assert.match(home, /@media \(pointer:\s*coarse\)[\s\S]*?\.contactStrip a[\s\S]*?min-height:\s*44px/u);
   for (const contract of ["aria-controls=\"site-menu\"", "aria-expanded={menuOpen}", 'event.key === "Escape"', 'document.body.classList.add("menu-open")', 'querySelectorAll<HTMLElement>']) assert.ok(navigation.includes(contract));
+  assert.match(navigation, /backgroundRegions[\s\S]*?region\.inert = true[\s\S]*?region\.inert = false/u);
   assert.match(navigation, /wordmark-lockup[\s\S]*?wordmark-mark[\s\S]*?wordmark-name[\s\S]*?>Theodore Ouyang<\/span>/u);
   assert.match(layout, /assets\/brand\/lo-mark\.svg/u);
   assert.doesNotMatch(navigation, /profile-sidebar|theodore-avatar/u);

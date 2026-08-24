@@ -28,6 +28,12 @@ export function SiteNavigation({
     if (!panel || !toggle) return;
 
     document.body.classList.add("menu-open");
+    const backgroundRegions = document.querySelectorAll<HTMLElement>(
+      "main, footer, .skip-link, section[data-state]",
+    );
+    backgroundRegions.forEach((region) => {
+      region.inert = true;
+    });
     const focusable = () => [
       toggle,
       ...panel.querySelectorAll<HTMLElement>(
@@ -65,6 +71,9 @@ export function SiteNavigation({
     return () => {
       cancelAnimationFrame(focusFrame);
       document.body.classList.remove("menu-open");
+      backgroundRegions.forEach((region) => {
+        region.inert = false;
+      });
       document.removeEventListener("keydown", onKeyDown);
       if (restoreFocusRef.current) toggle.focus();
       restoreFocusRef.current = false;

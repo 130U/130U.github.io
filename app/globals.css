@@ -633,6 +633,13 @@ button:focus-visible {
   }
 }
 
+@media (pointer: coarse) {
+  .primary-nav a,
+  .entry-website-link {
+    min-height: 44px;
+  }
+}
+
 @media (max-width: 1023px) and (min-width: 768px) {
   .site-frame {
     grid-template-columns: repeat(12, minmax(0, 1fr));

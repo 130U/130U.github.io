@@ -162,6 +162,12 @@
   }
 }
 
+@media (pointer: coarse) {
+  .contactStrip a {
+    min-height: 44px;
+  }
+}
+
 @media (max-width: 1279.98px) and (min-width: 768px) {
   .contactStrip {
     grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -195,10 +201,6 @@
 }
 
 @media (max-width: 767px) {
-  .homeFrame :global(.content-column) {
-    padding-top: 0;
-  }
-
   .profileSection {
     padding-top: 88px;
   }

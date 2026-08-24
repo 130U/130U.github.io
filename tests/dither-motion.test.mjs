@@ -31,6 +31,7 @@ test("the chosen Balanced interaction uses the approved restrained motion values
     rippleWidth: 37,
     rippleStrength: 20,
     rippleDuration: 675,
+    maximumRipples: 4,
     readyDuration: 800,
   });
 });

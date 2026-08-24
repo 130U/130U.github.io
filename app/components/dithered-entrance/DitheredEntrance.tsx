@@ -32,6 +32,7 @@ export function DitheredEntrance() {
     let resizeFrame = 0;
     let destroyed = false;
     let cssSize = 1;
+    let ditherColor = "";
     let fadeStartedAt = performance.now();
     let pointerActive = false;
     let pointerX = 0;
@@ -53,7 +54,7 @@ export function DitheredEntrance() {
       );
 
       context.clearRect(0, 0, cssSize, cssSize);
-      context.fillStyle = "#070707";
+      context.fillStyle = ditherColor;
       context.globalAlpha = readyProgress;
       context.beginPath();
 
@@ -147,9 +148,18 @@ export function DitheredEntrance() {
       if (!frame) frame = requestAnimationFrame(draw);
     };
 
+    const addRipple = (x: number, y: number) => {
+      ripples.push({ x, y, startedAt: performance.now() });
+      if (ripples.length > DITHER_MOTION.maximumRipples) {
+        ripples.splice(0, ripples.length - DITHER_MOTION.maximumRipples);
+      }
+      requestDraw();
+    };
+
     const rebuild = () => {
       const bounds = canvas.getBoundingClientRect();
       cssSize = Math.max(1, Math.round(Math.min(bounds.width, bounds.height)));
+      ditherColor = getComputedStyle(canvas).color;
       const pixelRatio = Math.min(2, window.devicePixelRatio || 1);
       canvas.width = Math.round(cssSize * pixelRatio);
       canvas.height = Math.round(cssSize * pixelRatio);
@@ -232,10 +242,9 @@ export function DitheredEntrance() {
         return;
       }
       const position = localPosition(event);
-      ripples.push({ ...position, startedAt: performance.now() });
+      addRipple(position.x, position.y);
       if (event.pointerType === "touch") pointerActive = false;
       touchOrigin = null;
-      requestDraw();
     };
 
     const onPointerCancel = (event: PointerEvent) => {
@@ -252,12 +261,7 @@ export function DitheredEntrance() {
 
     const onKeyboardActivate = (event: MouseEvent) => {
       if (event.detail !== 0 || motionQuery.matches) return;
-      ripples.push({
-        x: cssSize / 2,
-        y: cssSize / 2,
-        startedAt: performance.now(),
-      });
-      requestDraw();
+      addRipple(cssSize / 2, cssSize / 2);
     };
 
     const onMotionPreferenceChange = () => {

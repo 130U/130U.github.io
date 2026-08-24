@@ -7,6 +7,7 @@ export const DITHER_MOTION = {
   rippleWidth: 37,
   rippleStrength: 20,
   rippleDuration: 675,
+  maximumRipples: 4,
   readyDuration: 800,
 } as const;
 

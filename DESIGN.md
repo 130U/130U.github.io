@@ -59,7 +59,7 @@ components:
     textColor: "{colors.editorial-ink}"
     typography: "{typography.navigation}"
     rounded: "{rounded.structural}"
-    height: "27px"
+    height: "27px fine pointer / 44px coarse pointer"
   navigation-link-active:
     textColor: "{colors.signal-blue}"
     typography: "{typography.navigation}"
@@ -106,7 +106,7 @@ Sans type supplies precision to navigation, titles, and metadata. Serif type slo
 
 Desktop uses a 15-column frame with a 3-column sticky rail and 12-column content field. Tablet compresses to 12 columns with the same 3-column rail. Below 768px, the rail becomes a 64px sticky header and a single-column `Menu` / `Close` panel; page gutters use the Mobile Gutter token. Home alone places a full-viewport dithered entrance before this shell.
 
-Major sections are separated by large intervals and real hairlines. Lists, degrees, and experience records remain editorial rows rather than cards. At 540px and below, phone layouts stack metadata naturally and no identifier may force horizontal scrolling. Home Coordinates uses one column on phones, a 2×2 matrix below 1280px, and a content-weighted four-column row at 1280px and above. From 768px through 900px, the Coordinates label moves above the matrix so long identifiers remain on one line.
+Major sections are separated by large intervals and real hairlines. Lists, degrees, and experience records remain editorial rows rather than cards. At 540px and below, phone layouts stack metadata naturally and no identifier may force horizontal scrolling. Home Coordinates uses one column on phones, a 2×2 matrix below 1280px, and a content-weighted four-column row at 1280px and above. From 768px through 900px, the Coordinates label moves above the matrix so long identifiers remain on one line. Coarse-pointer devices preserve the same density while expanding primary navigation and standalone links to a 44px touch target.
 
 ## Elevation & Depth
 
@@ -122,11 +122,11 @@ Content containers, buttons, navigation, and rows have square corners. The navig
 
 ### Dithered Entrance
 
-The Home entrance simultaneously spells `THEODORE` and `OUYANG`. Its stage scales from the viewport's shorter side and is capped at 720px on desktop and 380px on mobile. The wordmark is a real focusable control: pointer hover repels points, pointer or touch press responds immediately, release creates a short ripple, and keyboard activation creates a centered ripple. The engine then stops requesting animation frames at rest. Reduced motion displays the complete static wordmark and retains opacity-based hover and press feedback.
+The Home entrance simultaneously spells `THEODORE` and `OUYANG`. Its stage scales from the viewport's shorter side and is capped at 720px on desktop and 380px on mobile. The wordmark is a real focusable control: pointer hover repels points, pointer or touch press responds immediately, release creates a short ripple, and keyboard activation creates a centered ripple. The engine keeps at most four concurrent ripples, then stops requesting animation frames at rest. Reduced motion displays the complete static wordmark and retains opacity-based hover and press feedback. The approved `Scroll` cue uses the Compact Label token and Supporting Gray so its quiet hierarchy still meets normal-text contrast.
 
 ### Navigation
 
-Desktop navigation uses the compact black `LO + Theodore Ouyang` horizontal lockup, followed by a plain vertical list with a 2px active rule and Signal Blue text. The mark remains monochrome on hover; feedback comes from opacity and a one-pixel translation. The lockup and active-state rule share a responsive 20-24px safety inset from the structural rail. The rail contains no repeated portrait or profile card. Mobile uses the same horizontal lockup with literal `Menu` and `Close` controls, a warm-paper panel, focus containment, Escape dismissal, focus restoration, and no icon-only hamburger.
+Desktop navigation uses the compact black `LO + Theodore Ouyang` horizontal lockup, followed by a plain vertical list with a 2px active rule and Signal Blue text. The mark remains monochrome on hover; feedback comes from opacity and a one-pixel translation. The lockup and active-state rule share a responsive 20-24px safety inset from the structural rail. The rail contains no repeated portrait or profile card. Mobile uses the same horizontal lockup with literal `Menu` and `Close` controls, a warm-paper panel, focus containment, inert background regions, Escape dismissal, focus restoration, and no icon-only hamburger.
 
 ### Editorial Rows
 
