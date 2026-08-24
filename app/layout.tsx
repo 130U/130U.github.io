@@ -49,6 +49,10 @@ export const metadata: Metadata = {
   description: DEFAULT_DESCRIPTION,
   icons: {
     icon: [
+      {
+        url: "/assets/brand/lo-mark.svg",
+        type: "image/svg+xml",
+      },
       { url: "/assets/brand/favicon.ico", sizes: "any" },
       {
         url: "/assets/brand/favicon-32.png",

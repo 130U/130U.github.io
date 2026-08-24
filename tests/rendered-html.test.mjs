@@ -5,6 +5,7 @@ import { readFile, readdir } from "node:fs/promises";
 import path from "node:path";
 import test from "node:test";
 import { fileURLToPath } from "node:url";
+import sharp from "sharp";
 
 const ROOT = fileURLToPath(new URL("../", import.meta.url));
 const OUT = path.join(ROOT, "out");
@@ -47,6 +48,7 @@ const EXPECTED_PUBLIC_ASSETS = [
   "assets/brand/favicon-16.png",
   "assets/brand/favicon-32.png",
   "assets/brand/favicon.ico",
+  "assets/brand/lo-mark.svg",
   "assets/brand/og-1774.jpg",
 ];
 
@@ -241,6 +243,26 @@ test("the static export contains only approved local runtime assets", async () =
   }
 });
 
+test("the LO identity stays monochrome across browser and touch icons", async () => {
+  const sourceMark = await readFile(path.join(ROOT, "source-assets", "brand", "lo-mark.svg"));
+  const publicMark = await readFile(path.join(ROOT, "public", "assets", "brand", "lo-mark.svg"));
+  assert.deepEqual(publicMark, sourceMark);
+  assert.match(sourceMark.toString("utf8"), /fill="#0b0b0b"/u);
+
+  for (const [asset, size] of [["favicon-16.png", 16], ["favicon-32.png", 32], ["apple-touch-icon.png", 180]]) {
+    const { data, info } = await sharp(path.join(ROOT, "public", "assets", "brand", asset))
+      .removeAlpha()
+      .raw()
+      .toBuffer({ resolveWithObject: true });
+    assert.equal(info.width, size);
+    assert.equal(info.height, size);
+    for (let index = 0; index < data.length; index += info.channels) {
+      assert.equal(data[index], data[index + 1], `${asset} contains a chromatic red/green pixel`);
+      assert.equal(data[index + 1], data[index + 2], `${asset} contains a chromatic green/blue pixel`);
+    }
+  }
+});
+
 test("robots and sitemap share the exact route manifest", async () => {
   const robots = await readFile(path.join(OUT, "robots.txt"), "utf8");
   assert.match(robots, /^Sitemap:\s*https:\/\/www\.theodoreoy\.com\/sitemap\.xml$/imu);
@@ -263,7 +285,8 @@ test("the production design contract is restrained and dependency-light", async 
   assert.match(entrance, /min\(92vw, 68dvh, 380px\)/u);
   assert.match(entrance, /aspect-ratio:\s*1/u);
   for (const contract of ["aria-controls=\"site-menu\"", "aria-expanded={menuOpen}", 'event.key === "Escape"', 'document.body.classList.add("menu-open")', 'querySelectorAll<HTMLElement>']) assert.ok(navigation.includes(contract));
-  assert.match(navigation, /wordmark-lockup[\s\S]*?>Theodore<\/span>[\s\S]*?>Ouyang<\/span>/u);
+  assert.match(navigation, /wordmark-lockup[\s\S]*?wordmark-mark[\s\S]*?wordmark-name[\s\S]*?>Theodore Ouyang<\/span>/u);
+  assert.match(layout, /assets\/brand\/lo-mark\.svg/u);
   assert.doesNotMatch(navigation, /profile-sidebar|theodore-avatar/u);
   assert.doesNotMatch(home, /portrait/u);
   assert.match(globals, /\.entry-metadata\s*\{[\s\S]*?grid-template-columns:\s*1fr/u);

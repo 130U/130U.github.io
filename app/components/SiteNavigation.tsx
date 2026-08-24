@@ -76,8 +76,8 @@ export function SiteNavigation({
       <div className="rail-header">
         <Link className="wordmark" href="/" aria-label="Theodore Ouyang home">
           <span className="wordmark-lockup">
-            <span>Theodore</span>
-            <span>Ouyang</span>
+            <span aria-hidden="true" className="wordmark-mark" />
+            <span className="wordmark-name">Theodore Ouyang</span>
           </span>
         </Link>
         <button

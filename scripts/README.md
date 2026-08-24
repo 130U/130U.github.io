@@ -8,6 +8,9 @@
   visible-copy and metadata manifest.
 - `optimize-images.mjs` creates the reproducible social-preview derivative from
   `source-assets/brand/og.png`.
+- `generate-brand-icons.mjs` uses the geometric `LO` master in
+  `source-assets/brand/lo-mark.svg` to generate the public SVG, PNG, ICO, and
+  Apple touch-icon family.
 
 Whenever a public route is added, update the route registry, sitemap
 expectations, and final-artifact tests in the same change.

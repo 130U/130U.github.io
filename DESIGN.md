@@ -116,7 +116,7 @@ The system is entirely flat. Hierarchy comes from type, whitespace, line weight,
 
 ## Shapes
 
-Content containers, buttons, navigation, and rows have square corners. The responsive wordmark is a compact black lockup derived from the proportions of the entrance identity; it does not create a reusable badge or rounded-card language. Particle texture belongs to the large entrance master and resolves to solid ink at navigation scale for low-DPI clarity.
+Content containers, buttons, navigation, and rows have square corners. The navigation identity is a compact monochrome `LO + Theodore Ouyang` horizontal lockup. The geometric `LO` master is shared by the rail, browser favicon, and Apple touch icon so every small-scale brand surface stays consistent. Particle texture belongs only to the large entrance and never appears inside the compact mark.
 
 ## Components
 
@@ -126,7 +126,7 @@ The Home entrance simultaneously spells `THEODORE` and `OUYANG`. Its stage scale
 
 ### Navigation
 
-Desktop navigation uses the compact black Theodore Ouyang lockup, followed by a plain vertical list with a 2px active rule and Signal Blue text. The lockup and active-state rule share a responsive 20-24px safety inset from the structural rail. The rail contains no repeated portrait or profile card. Mobile uses literal `Menu` and `Close` controls, a warm-paper panel, focus containment, Escape dismissal, focus restoration, and no icon-only hamburger.
+Desktop navigation uses the compact black `LO + Theodore Ouyang` horizontal lockup, followed by a plain vertical list with a 2px active rule and Signal Blue text. The mark remains monochrome on hover; feedback comes from opacity and a one-pixel translation. The lockup and active-state rule share a responsive 20-24px safety inset from the structural rail. The rail contains no repeated portrait or profile card. Mobile uses the same horizontal lockup with literal `Menu` and `Close` controls, a warm-paper panel, focus containment, Escape dismissal, focus restoration, and no icon-only hamburger.
 
 ### Editorial Rows
 

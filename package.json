@@ -15,6 +15,7 @@
     "test": "npm run build && npm run test:artifact && npm run check:visible-copy",
     "test:artifact": "node --test",
     "check": "npm run lint && npm test",
+    "generate:brand-icons": "node scripts/generate-brand-icons.mjs",
     "lint": "eslint --config config/eslint.config.mjs . --ignore-pattern dist --ignore-pattern .next --ignore-pattern out --ignore-pattern github-pages --ignore-pattern .npm-cache",
     "optimize:images": "node scripts/optimize-images.mjs"
   },

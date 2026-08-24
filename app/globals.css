@@ -138,30 +138,32 @@ button:focus-visible {
 }
 
 .wordmark-lockup {
-  display: grid;
-  width: 70px;
-  flex: 0 0 70px;
-  align-content: center;
+  display: inline-flex;
+  flex: 0 0 auto;
+  align-items: center;
   color: var(--ink);
   font-family: var(--sans);
-  font-weight: 800;
-  letter-spacing: -0.035em;
-  line-height: 0.78;
-  text-transform: uppercase;
+  gap: 12px;
   transition: opacity 160ms var(--ease-out), transform 160ms var(--ease-out);
 }
 
-.wordmark-lockup span {
+.wordmark-mark {
   display: block;
-  width: max-content;
+  width: 18px;
+  height: 11.25px;
+  flex: 0 0 18px;
+  background: currentColor;
+  -webkit-mask: url("/assets/brand/lo-mark.svg") center / contain no-repeat;
+  mask: url("/assets/brand/lo-mark.svg") center / contain no-repeat;
 }
 
-.wordmark-lockup span:first-child {
+.wordmark-name {
+  display: block;
   font-size: 13px;
-}
-
-.wordmark-lockup span:last-child {
-  font-size: 18px;
+  font-weight: 400;
+  letter-spacing: -0.012em;
+  line-height: 1;
+  white-space: nowrap;
 }
 
 .menu-toggle {
@@ -603,7 +605,6 @@ button:focus-visible {
 }
 
 @media (hover: hover) and (pointer: fine) {
-  .wordmark:hover,
   .menu-toggle:hover,
   .primary-nav a:hover,
   .back-link:hover,
@@ -714,7 +715,7 @@ button:focus-visible {
   }
 
   .wordmark {
-    min-width: 70px;
+    min-width: 0;
   }
 
   .menu-toggle {
@@ -932,6 +933,10 @@ button:focus-visible {
 
   .wordmark-lockup {
     color: CanvasText;
+  }
+
+  .wordmark-mark {
+    background: CanvasText;
   }
 
   .primary-nav a::before {
