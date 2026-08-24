@@ -19,8 +19,18 @@ const protectedPathspecs = [
 
 const approvedProtectedChanges = new Map([
   [
-    "M\tapp/now/page.tsx",
-    "c410e1c9109889f018983698bd3cf276e4d34aa2db1e96d56f96cefb34adb7e6",
+    "app/now/page.tsx",
+    {
+      status: "M",
+      hash: "c410e1c9109889f018983698bd3cf276e4d34aa2db1e96d56f96cefb34adb7e6",
+    },
+  ],
+  [
+    "content/past-experience/archive-through-2026-06-30.md",
+    {
+      status: "M",
+      hash: "8f810e9ac91b58ea9dd57aeebc425c6db488c99ce8507e94978c9cdccda0fcf4",
+    },
   ],
 ]);
 
@@ -72,9 +82,13 @@ const changes = [...new Set([committedChanges, workingChanges].flatMap((value) =
 
 const unapprovedChanges = changes
   .filter((change) => {
-    const expectedHash = approvedProtectedChanges.get(change);
-    if (!expectedHash) return true;
-    return normalizedSourceHash("app/now/page.tsx") !== expectedHash;
+    const [status, ...paths] = change.split("\t");
+    const relativePath = paths.at(-1);
+    if (!relativePath) return true;
+
+    const approved = approvedProtectedChanges.get(relativePath);
+    if (!approved || status !== approved.status) return true;
+    return normalizedSourceHash(relativePath) !== approved.hash;
   });
 
 if (unapprovedChanges.length > 0) {
@@ -87,5 +101,5 @@ if (unapprovedChanges.length > 0) {
 }
 
 console.log(
-  "Protected sources are unchanged or match the approved Current Chapter revision.",
+  "Protected sources are unchanged or match approved exact revisions.",
 );

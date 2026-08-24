@@ -63,7 +63,7 @@ His work centers on building decision-grade standards, validation protocols, and
 **Position:** Researcher
 **Dates:** September 2023 – October 2025
 **Project:** Frontier LLM Capability Boundary Probing via Graduate-Level Physics & Risk-Engineering Benchmarks  
-Designed graduate-level, computation-heavy scientific reasoning benchmarks to probe the capability boundaries of a frontier large language model, prioritizing substance over trick wording
+- Designed graduate-level, computation-heavy scientific reasoning benchmarks to probe the capability boundaries of a frontier large language model, prioritizing substance over trick wording
 
 - Built physics problems centered on long-form derivations, invariant-based reasoning, and tight constraint management to prevent shortcut solutions
 - Recombined rigorous physics foundations into mechanics-heavy prompts that demand both physical intuition and careful mathematical derivations

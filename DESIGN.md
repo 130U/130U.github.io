@@ -6,6 +6,7 @@ colors:
   warm-paper: "#f7f6f5"
   editorial-ink: "#0b0b0b"
   dither-ink: "#070707"
+  selection-foreground: "#fff"
   supporting-gray: "#70706c"
   structural-rule: "rgba(0, 0, 0, 0.06)"
   strong-rule: "rgba(0, 0, 0, 0.24)"
@@ -31,6 +32,20 @@ typography:
     fontSize: "12px"
     fontWeight: 400
     lineHeight: 1.4
+  scale:
+    micro-glyph: "9px"
+    compact-label: "11px"
+    metadata: "12px"
+    small-interface: "13px"
+    compact-body: "14px"
+    body: "15px"
+    mobile-body: "16px"
+    large-body: "17px"
+    directory-arrow: "18px"
+    mobile-section-heading: "20px"
+    directory-heading: "22px"
+    section-heading: "24px"
+    display-heading: "36px"
 rounded:
   structural: "0px"
 spacing:
@@ -91,7 +106,7 @@ Sans type supplies precision to navigation, titles, and metadata. Serif type slo
 
 Desktop uses a 15-column frame with a 3-column sticky rail and 12-column content field. Tablet compresses to 12 columns with the same 3-column rail. Below 768px, the rail becomes a 64px sticky header and a single-column `Menu` / `Close` panel; page gutters use the Mobile Gutter token. Home alone places a full-viewport dithered entrance before this shell.
 
-Major sections are separated by large intervals and real hairlines. Lists, degrees, and experience records remain editorial rows rather than cards. At 390px and below, metadata stacks naturally and no identifier may force horizontal scrolling.
+Major sections are separated by large intervals and real hairlines. Lists, degrees, and experience records remain editorial rows rather than cards. At 540px and below, phone layouts stack metadata naturally and no identifier may force horizontal scrolling. From 768px through 900px, the Home coordinates label moves above its 2×2 contact grid so long identifiers remain on one line; wider tablet and desktop grids retain their established density.
 
 ## Elevation & Depth
 
@@ -124,7 +139,7 @@ Education, domain-directory, coursework, and experience records use aligned colu
 - **Do** preserve protected biographical sources, factual claims, routes, metadata, alt text, ARIA labels, and content order unless Theodore explicitly approves a revision.
 - **Do** use whitespace and real content boundaries before adding any new visual element.
 - **Do** keep the entrance interaction interruptible, idle-aware, and fully static under reduced motion.
-- **Do** verify 1440px, 1024px, 390px, and 320px layouts before release.
+- **Do** verify 1440px, 1024px, 768px, 540px, 430px, 390px, and 320px layouts before release.
 
 ### Don't:
 

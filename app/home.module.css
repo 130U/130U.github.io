@@ -86,6 +86,10 @@
 }
 
 .contactStrip {
+  --contact-icon-column: 16px;
+  --contact-label-gap: 7px;
+  --contact-value-offset: calc(var(--contact-icon-column) + var(--contact-label-gap));
+
   display: grid;
   grid-template-columns: repeat(4, minmax(0, 1fr));
   margin: 0;
@@ -115,26 +119,34 @@
 }
 
 .contactLabel {
-  display: flex;
+  display: grid;
+  grid-template-columns: var(--contact-icon-column) minmax(0, 1fr);
   align-items: center;
+  min-width: 0;
   color: var(--muted);
   font-family: var(--sans);
   font-size: 11px;
   line-height: 1.3;
-  gap: 7px;
+  gap: var(--contact-label-gap);
 }
 
 .contactLabel > span {
-  min-width: 16px;
+  width: var(--contact-icon-column);
   color: var(--ink);
   font-size: 9px;
   text-align: center;
 }
 
+.contactStrip li > :last-child {
+  min-width: 0;
+  margin-left: var(--contact-value-offset);
+  overflow-wrap: anywhere;
+}
+
 .contactStrip a {
   display: inline-flex;
   width: fit-content;
-  max-width: 100%;
+  max-width: calc(100% - var(--contact-value-offset));
   overflow-wrap: anywhere;
   text-decoration: underline;
   text-decoration-color: var(--rule-strong);
@@ -172,6 +184,13 @@
 
   .contactStrip li:nth-child(4) {
     border-top: 1px solid var(--rule);
+  }
+}
+
+@media (max-width: 900px) and (min-width: 768px) {
+  .contactSection {
+    grid-template-columns: 1fr;
+    gap: 20px;
   }
 }
 
@@ -237,7 +256,7 @@
   }
 }
 
-@media (max-width: 390px) {
+@media (max-width: 540px) {
   .contactStrip {
     grid-template-columns: 1fr;
   }
@@ -247,11 +266,11 @@
   .contactStrip li:nth-child(odd) {
     min-height: 92px;
     padding: 20px 0 23px;
-    border-left: 0;
   }
 
   .contactStrip li + li {
     border-top: 1px solid var(--rule);
+    border-left: 0;
   }
 }
 

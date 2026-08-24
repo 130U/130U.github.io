@@ -27,7 +27,7 @@ const NAVIGATION = [
   ["Current Chapter", "/now/"],
 ];
 const DOMAINS = [
-  ["Artificial Intelligence", "/past-experience/artificial-intelligence/", 4, 23],
+  ["Artificial Intelligence", "/past-experience/artificial-intelligence/", 4, 24],
   ["Data Science", "/past-experience/data-science/", 3, 19],
   ["Environmental, Social, and Governance", "/past-experience/environmental-social-and-governance/", 4, 8],
   ["Finance", "/past-experience/finance/", 3, 28],
@@ -40,7 +40,7 @@ const PROTECTED_SOURCE_HASHES = new Map([
   ["app/past-experience/[slug]/page.tsx", "a89b781c0a6a74b9295635d5495c4e2cc2cf2d890cc879578ebfd04a9f6db84b"],
   ["app/past-experience/components/ExperienceDomainPage.tsx", "098da21aa9d56f0ad56c4dd96997419988a0c51557507fe7748bbccb5913f3e0"],
   ["app/lib/content/experience.ts", "01875681354d96713bf3025ce48e7f56febf3616ef3c8d921e48fb9f09846d72"],
-  ["content/past-experience/archive-through-2026-06-30.md", "02da27390a53658676f3c78892fe823725f8085fa26cb74dff52f9d74bbe9018"],
+  ["content/past-experience/archive-through-2026-06-30.md", "8f810e9ac91b58ea9dd57aeebc425c6db488c99ce8507e94978c9cdccda0fcf4"],
 ]);
 const EXPECTED_PUBLIC_ASSETS = [
   "assets/brand/apple-touch-icon.png",
@@ -191,7 +191,7 @@ test("inner routes keep the rail concise and retain approved page content", asyn
   assert.doesNotMatch(now, /\bI am\b|As an AI enthusiast/u);
 });
 
-test("Past Experience keeps five domains, 16 entries, and 92 bullets", async () => {
+test("Past Experience keeps five domains, 16 entries, and 93 bullets", async () => {
   const directory = await routeHtml("/past-experience/");
   assert.equal(elementsWithClass(directory, "a", "domain-directory-link").length, 5);
   let entries = 0;
@@ -207,7 +207,11 @@ test("Past Experience keeps five domains, 16 entries, and 92 bullets", async () 
     bullets += routeBullets;
   }
   assert.equal(entries, 16);
-  assert.equal(bullets, 92);
+  assert.equal(bullets, 93);
+  for (const [, route] of DOMAINS) {
+    const html = await routeHtml(route);
+    assert.equal(elementsWithClass(html, "p", "entry-summary").length, 0);
+  }
 });
 
 test("Education retains both degrees, 31 courses, and the advisor record", async () => {
@@ -263,7 +267,7 @@ test("the production design contract is restrained and dependency-light", async 
   assert.doesNotMatch(home, /portrait/u);
   assert.match(globals, /\.entry-metadata\s*\{[\s\S]*?grid-template-columns:\s*1fr/u);
   assert.match(globals, /\.entry-project\s*\{[\s\S]*?color:\s*var\(--muted\)/u);
-  assert.match(globals, /\.archive-bullets li::marker\s*\{[\s\S]*?color:\s*var\(--ink\)/u);
+  assert.match(globals, /\.archive-bullets li::before\s*\{[\s\S]*?content:\s*"•"/u);
   assert.doesNotMatch(layout, /data-design-contract|ParticleBackground|shantell-sans/u);
   assert.equal(existsSync(path.join(ROOT, "postcss.config.mjs")), false);
   assert.equal(packageJson.dependencies.three, undefined);

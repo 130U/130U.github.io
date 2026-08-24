@@ -442,6 +442,15 @@ button:focus-visible {
   max-width: 760px;
 }
 
+.archive-entry-content {
+  --entry-label-width: 96px;
+  --entry-column-gap: 16px;
+  --entry-value-offset: calc(var(--entry-label-width) + var(--entry-column-gap));
+  --entry-bullet-left: 0px;
+
+  min-width: 0;
+}
+
 .entry-metadata {
   display: grid;
   grid-template-columns: 1fr;
@@ -455,9 +464,9 @@ button:focus-visible {
 
 .entry-metadata > div {
   display: grid;
-  grid-template-columns: 96px minmax(0, 1fr);
+  grid-template-columns: var(--entry-label-width) minmax(0, 1fr);
   align-items: baseline;
-  gap: 16px;
+  gap: var(--entry-column-gap);
 }
 
 .entry-metadata dt,
@@ -483,14 +492,14 @@ button:focus-visible {
 
 .entry-project {
   display: grid;
-  grid-template-columns: 96px minmax(0, 1fr);
+  grid-template-columns: var(--entry-label-width) minmax(0, 1fr);
   max-width: 720px;
   margin: 28px 0 0;
   color: var(--muted);
   font-family: var(--sans);
   font-size: 13px;
   line-height: 1.5;
-  gap: 16px;
+  gap: var(--entry-column-gap);
 }
 
 .entry-project > span {
@@ -514,18 +523,24 @@ button:focus-visible {
 .archive-bullets {
   display: grid;
   margin: 30px 0 0;
-  padding-left: 18px;
-  list-style: disc;
+  padding: 0;
+  list-style: none;
   gap: 15px;
 }
 
 .archive-bullets li {
-  padding-left: 7px;
+  position: relative;
+  padding-left: var(--entry-value-offset);
 }
 
-.archive-bullets li::marker {
+.archive-bullets li::before {
+  position: absolute;
+  top: 0;
+  left: var(--entry-bullet-left);
   color: var(--ink);
+  content: "•";
   font-size: 0.72em;
+  line-height: inherit;
 }
 
 .current-chapter-intro {
@@ -798,10 +813,6 @@ button:focus-visible {
     margin-top: 28px;
   }
 
-  .entry-project {
-    grid-template-columns: 96px minmax(0, 1fr);
-  }
-
   .current-chapter-brief p {
     font-size: 16px;
   }
@@ -812,7 +823,14 @@ button:focus-visible {
   }
 }
 
-@media (max-width: 390px) {
+@media (max-width: 540px) {
+  .archive-entry-content {
+    --entry-label-width: 0px;
+    --entry-column-gap: 0px;
+    --entry-value-offset: 0px;
+    --entry-bullet-left: -14px;
+  }
+
   .entry-metadata > div,
   .entry-project {
     grid-template-columns: 1fr;
