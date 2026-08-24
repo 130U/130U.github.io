@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "baselineSha": "2ed025efc16aac7ed3a294b6d292a8825e2f5fef",
+  "baselineSha": "a225d3b1c1fffef5f171e54b2a63a782eaba16d1",
   "allowedNewVisibleStrings": [
     "Menu",
     "Close"
@@ -188,10 +188,10 @@
       }
     },
     "/now/": {
-      "textSha256": "14175a223ebaf6397e70c5f184bd02a1671d53bd411c613611e647b673a1fbc5",
+      "textSha256": "313cf905f381827a6b2e9f228cb8c1867dc0e6ce1668499639420a4a3004dfc7",
       "characterCount": 419,
-      "wordCount": 66,
-      "preview": "Skip to main content Theodore Ouyang Home Education Past Experience Current Chapter Current Chapter Exploring AI in everyday life. As an AI enthusiast, I am exp",
+      "wordCount": 60,
+      "preview": "Skip to main content Theodore Ouyang Home Education Past Experience Current Chapter Current Chapter Exploring AI in everyday life. Theodore Ouyang is exploring ",
       "altTexts": [],
       "ariaLabels": [
         "Theodore Ouyang home",
@@ -199,13 +199,13 @@
       ],
       "metadata": {
         "title": "Current Chapter | Theodore Ouyang",
-        "description": "An AI enthusiast's exploration of practical, real-world uses of artificial intelligence in everyday life.",
+        "description": "Theodore Ouyang explores practical, real-world uses of artificial intelligence in everyday life.",
         "canonical": "https://www.theodoreoy.com/now/",
         "openGraphTitle": "Current Chapter",
-        "openGraphDescription": "An AI enthusiast's exploration of practical, real-world uses of artificial intelligence in everyday life.",
+        "openGraphDescription": "Theodore Ouyang explores practical, real-world uses of artificial intelligence in everyday life.",
         "openGraphUrl": "https://www.theodoreoy.com/now/",
         "twitterTitle": "Current Chapter",
-        "twitterDescription": "An AI enthusiast's exploration of practical, real-world uses of artificial intelligence in everyday life."
+        "twitterDescription": "Theodore Ouyang explores practical, real-world uses of artificial intelligence in everyday life."
       }
     }
   }

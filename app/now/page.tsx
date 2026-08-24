@@ -5,7 +5,7 @@ import { createPageMetadata } from "../lib/content/site";
 export const metadata: Metadata = createPageMetadata({
   title: "Current Chapter",
   description:
-    "An AI enthusiast's exploration of practical, real-world uses of artificial intelligence in everyday life.",
+    "Theodore Ouyang explores practical, real-world uses of artificial intelligence in everyday life.",
   path: "/now/",
 });
 
@@ -19,10 +19,10 @@ export default function NowPage() {
 
       <article className="current-chapter-brief" aria-labelledby="now-heading">
         <p>
-          As an AI enthusiast, I am exploring how artificial intelligence can
-          become genuinely useful in everyday life. I am especially drawn to
-          practical use cases that solve real problems, expand what people can
-          do, and create lasting value beyond novelty.
+          Theodore Ouyang is exploring how artificial intelligence can become
+          genuinely useful in everyday life. He is especially interested in
+          practical applications that solve real problems, expand human
+          capability, and create lasting value beyond novelty.
         </p>
       </article>
     </SiteShell>

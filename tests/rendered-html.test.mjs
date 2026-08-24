@@ -35,7 +35,7 @@ const DOMAINS = [
 ];
 const PROTECTED_SOURCE_HASHES = new Map([
   ["app/education/page.tsx", "ce3c34631d07d9e8f546670761392d9d9372cec9103970f8aa849267c795f28d"],
-  ["app/now/page.tsx", "d7d92116e56afc9f708fdac57030e91eb15d94769d414a2f9d29fbdcba842f8f"],
+  ["app/now/page.tsx", "c410e1c9109889f018983698bd3cf276e4d34aa2db1e96d56f96cefb34adb7e6"],
   ["app/past-experience/page.tsx", "c22ffecb129567be473ce2230103fd80d954faeaa6ebae171c9418085e6769e9"],
   ["app/past-experience/[slug]/page.tsx", "a89b781c0a6a74b9295635d5495c4e2cc2cf2d890cc879578ebfd04a9f6db84b"],
   ["app/past-experience/components/ExperienceDomainPage.tsx", "098da21aa9d56f0ad56c4dd96997419988a0c51557507fe7748bbccb5913f3e0"],
@@ -184,7 +184,10 @@ test("inner routes keep the rail concise and retain approved page content", asyn
   }
   const now = stripMarkup(await routeHtml("/now/"));
   assert.match(now, /Exploring AI in everyday life\./u);
-  assert.match(now, /practical use cases that solve real problems/u);
+  assert.match(now, /Theodore Ouyang is exploring how artificial intelligence/u);
+  assert.match(now, /practical applications that solve real problems/u);
+  assert.match(now, /expand human capability/u);
+  assert.doesNotMatch(now, /\bI am\b|As an AI enthusiast/u);
 });
 
 test("Past Experience keeps five domains, 16 entries, and 92 bullets", async () => {

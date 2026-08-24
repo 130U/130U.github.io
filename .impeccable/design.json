@@ -1,6 +1,6 @@
 {
   "schemaVersion": 2,
-  "generatedAt": "2026-08-24T01:58:40.1778587Z",
+  "generatedAt": "2026-08-24T03:15:53.219Z",
   "title": "Design System: Theodore Ouyang Portfolio",
   "extensions": {
     "colorMeta": {
@@ -21,6 +21,30 @@
         "displayName": "Editorial Ink",
         "canonical": "#0b0b0b",
         "tonalRamp": ["#0b0b0b", "#242424", "#3e3e3e", "#5a5a5a", "#777777", "#999999", "#c7c7c7", "#f1f1f1"]
+      },
+      "dither-ink": {
+        "role": "neutral",
+        "displayName": "Dither Ink",
+        "canonical": "#070707",
+        "tonalRamp": ["#070707", "#202020", "#393939", "#535353", "#6d6d6d", "#929292", "#bdbdbd", "#eeeeee"]
+      },
+      "supporting-gray": {
+        "role": "neutral",
+        "displayName": "Supporting Gray",
+        "canonical": "#70706c",
+        "tonalRamp": ["#171716", "#292927", "#41413f", "#595957", "#70706c", "#92928e", "#b9b9b5", "#eeeeec"]
+      },
+      "structural-rule": {
+        "role": "neutral",
+        "displayName": "Structural Rule",
+        "canonical": "rgba(0, 0, 0, 0.06)",
+        "tonalRamp": ["rgba(0, 0, 0, 0.88)", "rgba(0, 0, 0, 0.72)", "rgba(0, 0, 0, 0.56)", "rgba(0, 0, 0, 0.40)", "rgba(0, 0, 0, 0.24)", "rgba(0, 0, 0, 0.16)", "rgba(0, 0, 0, 0.10)", "rgba(0, 0, 0, 0.06)"]
+      },
+      "strong-rule": {
+        "role": "neutral",
+        "displayName": "Strong Rule",
+        "canonical": "rgba(0, 0, 0, 0.24)",
+        "tonalRamp": ["rgba(0, 0, 0, 0.88)", "rgba(0, 0, 0, 0.72)", "rgba(0, 0, 0, 0.56)", "rgba(0, 0, 0, 0.40)", "rgba(0, 0, 0, 0.24)", "rgba(0, 0, 0, 0.16)", "rgba(0, 0, 0, 0.10)", "rgba(0, 0, 0, 0.06)"]
       }
     },
     "typographyMeta": {
@@ -32,13 +56,15 @@
     "shadows": [],
     "motion": [
       { "name": "strong-ease-out", "value": "cubic-bezier(0.23, 1, 0.32, 1)", "purpose": "Link and active-state feedback." },
-      { "name": "drawer-ease", "value": "cubic-bezier(0.32, 0.72, 0, 1)", "purpose": "The 200ms mobile menu transition." },
+      { "name": "state-transition", "value": "180ms", "purpose": "Navigation, link, and mobile menu state changes." },
+      { "name": "press-feedback", "value": "120ms", "purpose": "Restrained scale feedback on interactive controls." },
       { "name": "dither-ready", "value": "800ms", "purpose": "Home wordmark fade-in only." }
     ],
     "breakpoints": [
       { "name": "narrow-mobile", "value": "390px" },
       { "name": "mobile", "value": "767px" },
-      { "name": "tablet", "value": "1023px" }
+      { "name": "tablet-shell", "value": "1023px" },
+      { "name": "home-compact", "value": "1100px" }
     ]
   },
   "components": [
@@ -48,7 +74,7 @@
       "refersTo": "navigation-link-active",
       "description": "Plain text navigation with a narrow blue state rule.",
       "html": "<a class=\"ds-rail-link is-active\" href=\"#\">Education</a>",
-      "css": ".ds-rail-link { position: relative; display: flex; min-height: 27px; align-items: center; padding-left: 13px; color: var(--ink, #0b0b0b); font: 15px/1.3 Helvetica, Arial, sans-serif; text-decoration: none; transition: color 180ms cubic-bezier(.23,1,.32,1); } .ds-rail-link.is-active { color: var(--accent, #2200ff); } .ds-rail-link.is-active::before { position: absolute; left: 0; width: 2px; height: 12px; background: currentColor; content: ''; } .ds-rail-link:focus-visible { outline: 2px solid var(--accent, #2200ff); outline-offset: 4px; }"
+      "css": ".ds-rail-link { position: relative; display: flex; min-height: 27px; align-items: center; padding-left: 13px; color: var(--ink, #0b0b0b); font: 15px/1.3 Helvetica, Arial, sans-serif; text-decoration: none; transition: color 180ms cubic-bezier(.23,1,.32,1), transform 120ms cubic-bezier(.23,1,.32,1); } .ds-rail-link::before { position: absolute; top: 50%; left: 0; width: 2px; height: 12px; background: currentColor; content: ''; opacity: 0; transform: translateY(-50%) scaleY(.4); transform-origin: center; transition: opacity 180ms cubic-bezier(.23,1,.32,1), transform 180ms cubic-bezier(.23,1,.32,1); } .ds-rail-link.is-active { color: var(--accent, #2200ff); } .ds-rail-link.is-active::before { opacity: 1; transform: translateY(-50%) scaleY(1); } .ds-rail-link:focus-visible { outline: 2px solid var(--accent, #2200ff); outline-offset: 4px; } .ds-rail-link:active { transform: scale(.97); }"
     },
     {
       "name": "Mobile Menu Control",
@@ -56,26 +82,47 @@
       "refersTo": "mobile-menu-control",
       "description": "Literal text control with no pill, icon, or shadow.",
       "html": "<button class=\"ds-menu-control\" type=\"button\">Menu</button>",
-      "css": ".ds-menu-control { min-height: 44px; padding: 0; border: 0; border-radius: 0; color: var(--ink, #0b0b0b); background: var(--page, #f7f6f5); font: 15px/1 Helvetica, Arial, sans-serif; } .ds-menu-control:hover { color: var(--accent, #2200ff); } .ds-menu-control:focus-visible { outline: 2px solid var(--accent, #2200ff); outline-offset: 4px; } .ds-menu-control:active { transform: scale(.97); }"
+      "css": ".ds-menu-control { display: inline-flex; min-width: 44px; min-height: 44px; align-items: center; justify-content: flex-end; padding: 0; border: 0; border-radius: 0; color: var(--ink, #0b0b0b); background: transparent; font: 15px/1 Helvetica, Arial, sans-serif; cursor: pointer; transition: color 180ms cubic-bezier(.23,1,.32,1), transform 120ms cubic-bezier(.23,1,.32,1); } .ds-menu-control:hover { color: var(--accent, #2200ff); } .ds-menu-control:focus-visible { outline: 2px solid var(--accent, #2200ff); outline-offset: 4px; } .ds-menu-control:active { transform: scale(.97); }"
     },
     {
       "name": "Domain Directory Row",
       "kind": "custom",
       "description": "Number, title, and arrow aligned by a single structural rule.",
       "html": "<a class=\"ds-domain-row\" href=\"#\"><span>01</span><strong>Artificial Intelligence</strong><span>→</span></a>",
-      "css": ".ds-domain-row { display: grid; grid-template-columns: 64px 1fr 32px; min-height: 84px; align-items: center; border-bottom: 1px solid rgba(0,0,0,.06); color: #0b0b0b; font: 15px/1.3 Helvetica, Arial, sans-serif; text-decoration: none; gap: 16px; } .ds-domain-row strong { font-size: 22px; font-weight: 400; } .ds-domain-row:hover { color: #2200ff; border-color: rgba(0,0,0,.24); } .ds-domain-row:focus-visible { outline: 2px solid #2200ff; outline-offset: 4px; }"
+      "css": ".ds-domain-row { display: grid; grid-template-columns: 64px minmax(0,1fr) 32px; min-height: 84px; align-items: center; border-bottom: 1px solid var(--rule, rgba(0,0,0,.06)); color: var(--ink, #0b0b0b); font: 15px/1.3 Helvetica, Arial, sans-serif; text-decoration: none; gap: 16px; transition: color 180ms cubic-bezier(.23,1,.32,1), border-color 180ms cubic-bezier(.23,1,.32,1); } .ds-domain-row strong { font-size: 22px; font-weight: 400; letter-spacing: -.015em; line-height: 1.2; } .ds-domain-row span:last-child { justify-self: end; font-size: 18px; transition: transform 180ms cubic-bezier(.23,1,.32,1); } .ds-domain-row:hover { color: var(--accent, #2200ff); border-color: var(--rule-strong, rgba(0,0,0,.24)); } .ds-domain-row:hover span:last-child { transform: translateX(4px); } .ds-domain-row:focus-visible { outline: 2px solid var(--accent, #2200ff); outline-offset: 4px; }"
     },
     {
-      "name": "Dither Signature Mark",
+      "name": "LO Wordmark",
       "kind": "custom",
-      "description": "Small native identity mark derived from the Home entrance.",
-      "html": "<span class=\"ds-dither-mark\" aria-hidden=\"true\"></span>",
-      "css": ".ds-dither-mark { display: inline-block; width: 20px; height: 20px; color: #0b0b0b; background: radial-gradient(circle at 2px 2px, currentColor 0 1.15px, transparent 1.3px) 0 0 / 5px 5px, radial-gradient(circle at 1px 1px, currentColor 0 .65px, transparent .8px) 2px 2px / 4px 4px; clip-path: polygon(16% 0,68% 0,100% 31%,100% 84%,84% 100%,32% 100%,0 68%,0 16%); }"
+      "description": "Unboxed LO monogram paired with Theodore's name in the navigation rail.",
+      "html": "<a class=\"ds-wordmark\" href=\"#\"><span class=\"ds-wordmark-monogram\" aria-hidden=\"true\">LO</span><span>Theodore Ouyang</span></a>",
+      "css": ".ds-wordmark { display: inline-flex; min-height: 44px; align-items: center; color: var(--ink, #0b0b0b); font: 500 13px/1 Helvetica, Arial, sans-serif; letter-spacing: -.01em; text-decoration: none; gap: 10px; transition: color 180ms cubic-bezier(.23,1,.32,1), transform 120ms cubic-bezier(.23,1,.32,1); } .ds-wordmark-monogram { display: inline-block; width: 20px; flex: 0 0 20px; font-size: 14px; font-weight: 600; font-variant-ligatures: none; letter-spacing: -.12em; } .ds-wordmark:hover { color: var(--accent, #2200ff); } .ds-wordmark:focus-visible { outline: 2px solid var(--accent, #2200ff); outline-offset: 4px; } .ds-wordmark:active { transform: scale(.97); }"
+    },
+    {
+      "name": "Experience Metadata",
+      "kind": "custom",
+      "description": "Single-column metadata stack with quiet labels and a fixed label measure.",
+      "html": "<dl class=\"ds-entry-metadata\"><div><dt>Location</dt><dd>Beijing, China</dd></div><div><dt>Position</dt><dd>Researcher</dd></div><div><dt>Dates</dt><dd>2025 — 2026</dd></div></dl>",
+      "css": ".ds-entry-metadata { display: grid; grid-template-columns: 1fr; max-width: 720px; margin: 38px 0 0; padding: 22px 0; border-top: 1px solid var(--rule, rgba(0,0,0,.06)); border-bottom: 1px solid var(--rule, rgba(0,0,0,.06)); gap: 13px; } .ds-entry-metadata > div { display: grid; grid-template-columns: 96px minmax(0,1fr); align-items: baseline; gap: 16px; } .ds-entry-metadata dt, .ds-entry-metadata dd { margin: 0; } .ds-entry-metadata dt { color: var(--muted, #70706c); font: 12px/1.4 Helvetica, Arial, sans-serif; } .ds-entry-metadata dd { color: var(--ink, #0b0b0b); font: 15px/1.5 Georgia, serif; overflow-wrap: anywhere; }"
+    },
+    {
+      "name": "Experience Project and Bullets",
+      "kind": "custom",
+      "description": "Restrained project context followed by visibly marked narrative evidence.",
+      "html": "<div class=\"ds-entry-project\"><span>Project</span><p>Practical AI evaluation</p></div><ul class=\"ds-archive-bullets\"><li>Translated ambiguous requirements into clear evaluation criteria.</li><li>Validated decisions against real-world use cases.</li></ul>",
+      "css": ".ds-entry-project { display: grid; grid-template-columns: 96px minmax(0,1fr); max-width: 720px; margin: 28px 0 0; color: var(--muted, #70706c); font: 13px/1.5 Helvetica, Arial, sans-serif; gap: 16px; } .ds-entry-project span { font-size: 12px; } .ds-entry-project p { margin: 0; } .ds-archive-bullets { display: grid; max-width: 72ch; margin: 30px 0 0; padding-left: 18px; color: var(--ink, #0b0b0b); font: 15px/1.5 Georgia, serif; list-style: disc; gap: 15px; } .ds-archive-bullets li { padding-left: 7px; } .ds-archive-bullets li::marker { color: var(--ink, #0b0b0b); font-size: .72em; }"
+    },
+    {
+      "name": "Dithered Entrance",
+      "kind": "custom",
+      "description": "Static sidecar representation of the Home-only Canvas2D identity entrance.",
+      "html": "<div class=\"ds-dither-stage\" aria-label=\"Theodore Ouyang\"><div class=\"ds-dither-name\"><span>THEODORE</span><span>OUYANG</span></div></div>",
+      "css": ".ds-dither-stage { display: grid; width: min(76vw,72dvh,720px); aspect-ratio: 1; place-items: center; color: #070707; background: var(--page, #f7f6f5); container-type: inline-size; } .ds-dither-name { display: grid; width: 90%; align-content: center; font-family: Arial,Helvetica,sans-serif; font-weight: 800; line-height: .84; text-align: center; } .ds-dither-name span:first-child { font-size: 17cqw; } .ds-dither-name span:last-child { font-size: 23.5cqw; } @supports ((-webkit-background-clip:text) or (background-clip:text)) { .ds-dither-name span { color: transparent; background-image: radial-gradient(circle,#070707 0 .7px,transparent .85px); background-size: 2px 2px; -webkit-background-clip: text; background-clip: text; } } @media (max-width:767px) { .ds-dither-stage { width: min(92vw,68dvh,380px); } }"
     }
   ],
   "narrative": {
     "northStar": "Quiet Technical Authority",
-    "overview": "The site pairs a single expressive opening gesture with a disciplined editorial body. The Home-only dithered name establishes authorship; everything after it earns trust through warm paper, exact grid alignment, serif reading texture, and very limited color.",
+    "overview": "The site pairs a single expressive opening gesture with a disciplined editorial body. The Home-only dithered name establishes authorship; everything after it earns trust through warm paper, exact grid alignment, serif reading texture, and very limited color. The system should feel mature enough for an AI researcher or operator while remaining unmistakably personal.",
     "keyCharacteristics": [
       "One high-expression entrance, followed by quiet reading surfaces.",
       "Cognition-like structural discipline implemented with Theodore's own content and mark.",
