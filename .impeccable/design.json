@@ -1,6 +1,6 @@
 {
   "schemaVersion": 2,
-  "generatedAt": "2026-08-24T03:55:13.000Z",
+  "generatedAt": "2026-08-24T12:22:54.873Z",
   "title": "Design System: Theodore Ouyang Portfolio",
   "extensions": {
     "colorMeta": {
@@ -61,10 +61,12 @@
       { "name": "dither-ready", "value": "800ms", "purpose": "Home wordmark fade-in only." }
     ],
     "breakpoints": [
-      { "name": "narrow-mobile", "value": "390px" },
-      { "name": "mobile", "value": "767px" },
+      { "name": "phone-stack", "value": "540px" },
+      { "name": "mobile-shell", "value": "767px" },
+      { "name": "coordinates-label-stack", "value": "900px" },
       { "name": "tablet-shell", "value": "1023px" },
-      { "name": "home-compact", "value": "1100px" }
+      { "name": "home-compact", "value": "1100px" },
+      { "name": "coordinates-wide", "value": "1280px" }
     ]
   },
   "components": [
@@ -92,11 +94,11 @@
       "css": ".ds-domain-row { display: grid; grid-template-columns: 64px minmax(0,1fr) 32px; min-height: 84px; align-items: center; border-bottom: 1px solid var(--rule, rgba(0,0,0,.06)); color: var(--ink, #0b0b0b); font: 15px/1.3 Helvetica, Arial, sans-serif; text-decoration: none; gap: 16px; transition: color 180ms cubic-bezier(.23,1,.32,1), border-color 180ms cubic-bezier(.23,1,.32,1); } .ds-domain-row strong { font-size: 22px; font-weight: 400; letter-spacing: -.015em; line-height: 1.2; } .ds-domain-row span:last-child { justify-self: end; font-size: 18px; transition: transform 180ms cubic-bezier(.23,1,.32,1); } .ds-domain-row:hover { color: var(--accent, #2200ff); border-color: var(--rule-strong, rgba(0,0,0,.24)); } .ds-domain-row:hover span:last-child { transform: translateX(4px); } .ds-domain-row:focus-visible { outline: 2px solid var(--accent, #2200ff); outline-offset: 4px; }"
     },
     {
-      "name": "LO Wordmark",
+      "name": "Monochrome LO Wordmark",
       "kind": "custom",
-      "description": "Unboxed LO monogram paired with Theodore's name in the navigation rail.",
-      "html": "<a class=\"ds-wordmark\" href=\"#\"><span class=\"ds-wordmark-monogram\" aria-hidden=\"true\">LO</span><span>Theodore Ouyang</span></a>",
-      "css": ".ds-wordmark { display: inline-flex; min-height: 44px; align-items: center; color: var(--ink, #0b0b0b); font: 500 13px/1 Helvetica, Arial, sans-serif; letter-spacing: -.01em; text-decoration: none; gap: 10px; transition: color 180ms cubic-bezier(.23,1,.32,1), transform 120ms cubic-bezier(.23,1,.32,1); } .ds-wordmark-monogram { display: inline-block; width: 20px; flex: 0 0 20px; font-size: 14px; font-weight: 600; font-variant-ligatures: none; letter-spacing: -.12em; } .ds-wordmark:hover { color: var(--accent, #2200ff); } .ds-wordmark:focus-visible { outline: 2px solid var(--accent, #2200ff); outline-offset: 4px; } .ds-wordmark:active { transform: scale(.97); }"
+      "description": "The shared geometric LO master paired with Theodore's name in the navigation rail.",
+      "html": "<a class=\"ds-wordmark\" href=\"#\"><span class=\"ds-wordmark-lockup\"><svg class=\"ds-wordmark-mark\" viewBox=\"0 0 48 30\" aria-hidden=\"true\"><path d=\"M1 2h6v19h11v6H1V2Z\"/><path fill-rule=\"evenodd\" d=\"M34 1c-8.3 0-14 5.9-14 14s5.7 14 14 14 14-5.9 14-14S42.3 1 34 1Zm0 6c4.7 0 7.8 3.4 7.8 8s-3.1 8-7.8 8-7.8-3.4-7.8-8S29.3 7 34 7Z\"/></svg><span class=\"ds-wordmark-name\">Theodore Ouyang</span></span></a>",
+      "css": ".ds-wordmark { display: inline-flex; min-height: 44px; align-items: center; color: var(--ink, #0b0b0b); text-decoration: none; transition: transform 120ms cubic-bezier(.23,1,.32,1); } .ds-wordmark-lockup { display: inline-flex; align-items: center; gap: 12px; transition: opacity 160ms cubic-bezier(.23,1,.32,1), transform 160ms cubic-bezier(.23,1,.32,1); } .ds-wordmark-mark { display: block; width: 18px; height: 11.25px; flex: 0 0 18px; fill: currentColor; } .ds-wordmark-name { font: 400 13px/1 Helvetica, Arial, sans-serif; letter-spacing: -.012em; white-space: nowrap; } .ds-wordmark:hover .ds-wordmark-lockup { opacity: .68; transform: translateX(1px); } .ds-wordmark:focus-visible { outline: 2px solid var(--accent, #2200ff); outline-offset: 4px; } .ds-wordmark:active { transform: scale(.97); }"
     },
     {
       "name": "Experience Metadata",
@@ -111,6 +113,13 @@
       "description": "Restrained project context followed by visibly marked narrative evidence.",
       "html": "<div class=\"ds-entry-project\"><span>Project</span><p>Practical AI evaluation</p></div><ul class=\"ds-archive-bullets\"><li>Translated ambiguous requirements into clear evaluation criteria.</li><li>Validated decisions against real-world use cases.</li></ul>",
       "css": ".ds-entry-project { display: grid; grid-template-columns: 96px minmax(0,1fr); max-width: 720px; margin: 28px 0 0; color: var(--muted, #70706c); font: 13px/1.5 Helvetica, Arial, sans-serif; gap: 16px; } .ds-entry-project span { font-size: 12px; } .ds-entry-project p { margin: 0; } .ds-archive-bullets { display: grid; max-width: 72ch; margin: 30px 0 0; padding-left: 18px; color: var(--ink, #0b0b0b); font: 15px/1.5 Georgia, serif; list-style: disc; gap: 15px; } .ds-archive-bullets li { padding-left: 7px; } .ds-archive-bullets li::marker { color: var(--ink, #0b0b0b); font-size: .72em; }"
+    },
+    {
+      "name": "Coordinates Matrix",
+      "kind": "custom",
+      "description": "A content-weighted contact matrix that protects long identifiers before changing density.",
+      "html": "<ul class=\"ds-coordinates\"><li><span>Location</span><strong>Beijing | Boston</strong></li><li><span>Education</span><strong>Duke University</strong></li><li><span>Email</span><a href=\"mailto:10@alumni.duke.edu\">10@alumni.duke.edu</a></li><li><span>Online</span><a href=\"#\">GitHub</a></li></ul>",
+      "css": ".ds-coordinates { display: grid; grid-template-columns: minmax(0,1.15fr) minmax(0,1fr) minmax(148px,1.2fr) minmax(0,.72fr); margin: 0; padding: 0; border-top: 1px solid var(--rule-strong, rgba(0,0,0,.24)); border-bottom: 1px solid var(--rule-strong, rgba(0,0,0,.24)); list-style: none; } .ds-coordinates li { display: grid; align-content: start; min-width: 0; min-height: 118px; padding: 25px 19px 29px; gap: 20px; } .ds-coordinates li:first-child { padding-left: 0; } .ds-coordinates li + li { border-left: 1px solid var(--rule, rgba(0,0,0,.06)); } .ds-coordinates span { color: var(--muted, #70706c); font: 11px/1.3 Helvetica, Arial, sans-serif; } .ds-coordinates strong, .ds-coordinates a { color: var(--ink, #0b0b0b); font: 400 14px/1.4 Georgia, serif; white-space: nowrap; } .ds-coordinates a { width: fit-content; text-decoration-color: var(--rule-strong, rgba(0,0,0,.24)); text-underline-offset: 3px; } .ds-coordinates a:hover { color: var(--accent, #2200ff); text-decoration-color: currentColor; } .ds-coordinates a:focus-visible { outline: 2px solid var(--accent, #2200ff); outline-offset: 4px; } @media (max-width:1279.98px) { .ds-coordinates { grid-template-columns: repeat(2,minmax(0,1fr)); } .ds-coordinates li:nth-child(3) { padding-left: 0; border-top: 1px solid var(--rule, rgba(0,0,0,.06)); border-left: 0; } .ds-coordinates li:nth-child(4) { border-top: 1px solid var(--rule, rgba(0,0,0,.06)); } } @media (max-width:540px) { .ds-coordinates { grid-template-columns: 1fr; } .ds-coordinates li, .ds-coordinates li:first-child { min-height: 92px; padding: 20px 0 23px; } .ds-coordinates li + li { border-top: 1px solid var(--rule, rgba(0,0,0,.06)); border-left: 0; } }"
     },
     {
       "name": "Dithered Entrance",
@@ -138,7 +147,7 @@
       "Do preserve protected biographical sources, factual claims, routes, metadata, alt text, ARIA labels, and content order unless Theodore explicitly approves a revision.",
       "Do use whitespace and real content boundaries before adding any new visual element.",
       "Do keep the entrance interaction interruptible, idle-aware, and fully static under reduced motion.",
-      "Do verify 1440px, 1024px, 390px, and 320px layouts before release."
+      "Do verify 1440px, 1024px, 768px, 540px, 430px, 390px, and 320px layouts before release."
     ],
     "donts": [
       "Don't add a global WebGL background, handwritten interface typography, glass navigation, or ambient decorative motion.",

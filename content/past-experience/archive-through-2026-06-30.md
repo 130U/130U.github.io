@@ -291,5 +291,4 @@ His work centers on building decision-grade standards, validation protocols, and
 - Completed the core undergraduate physics sequence during high school competition preparation, covering theoretical mechanics / classical mechanics, electrodynamics, thermodynamics and statistical physics, and quantum mechanics
 - Developed advanced mathematical foundations in parallel, including mathematical analysis, linear algebra, calculus, ordinary differential equations, numerical analysis, and other quantitative methods required for high-level physics modeling
 - Treated physics as a mathematically intensive modeling discipline, using physical systems as structured carriers for advanced mathematical reasoning rather than relying on formula substitution or pattern recognition
-- Earned First Prize in the 2018 Chinese Physics Olympiad, validating performance under national-level selection standards
-- Earned First Prize in the 2018 Chinese Mathematical Olympiad, demonstrating cross-disciplinary strength across mathematical abstraction, proof-based reasoning, and physics-grounded quantitative modeling
+- Received multiple First Prize awards across provincial- and national-level physics and mathematics competitions.

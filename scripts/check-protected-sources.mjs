@@ -29,7 +29,7 @@ const approvedProtectedChanges = new Map([
     "content/past-experience/archive-through-2026-06-30.md",
     {
       status: "M",
-      hash: "8f810e9ac91b58ea9dd57aeebc425c6db488c99ce8507e94978c9cdccda0fcf4",
+      hash: "ed0bc21996ef84788dbf76d36311bd6552d775b023b2d80cddc4192aed90957f",
     },
   ],
 ]);

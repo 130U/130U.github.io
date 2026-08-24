@@ -32,7 +32,7 @@ const DOMAINS = [
   ["Data Science", "/past-experience/data-science/", 3, 19],
   ["Environmental, Social, and Governance", "/past-experience/environmental-social-and-governance/", 4, 8],
   ["Finance", "/past-experience/finance/", 3, 28],
-  ["STEM Academic Competitions and Training", "/past-experience/stem-academic-competitions-and-training/", 2, 14],
+  ["STEM Academic Competitions and Training", "/past-experience/stem-academic-competitions-and-training/", 2, 13],
 ];
 const PROTECTED_SOURCE_HASHES = new Map([
   ["app/education/page.tsx", "ce3c34631d07d9e8f546670761392d9d9372cec9103970f8aa849267c795f28d"],
@@ -41,7 +41,7 @@ const PROTECTED_SOURCE_HASHES = new Map([
   ["app/past-experience/[slug]/page.tsx", "a89b781c0a6a74b9295635d5495c4e2cc2cf2d890cc879578ebfd04a9f6db84b"],
   ["app/past-experience/components/ExperienceDomainPage.tsx", "098da21aa9d56f0ad56c4dd96997419988a0c51557507fe7748bbccb5913f3e0"],
   ["app/lib/content/experience.ts", "01875681354d96713bf3025ce48e7f56febf3616ef3c8d921e48fb9f09846d72"],
-  ["content/past-experience/archive-through-2026-06-30.md", "8f810e9ac91b58ea9dd57aeebc425c6db488c99ce8507e94978c9cdccda0fcf4"],
+  ["content/past-experience/archive-through-2026-06-30.md", "ed0bc21996ef84788dbf76d36311bd6552d775b023b2d80cddc4192aed90957f"],
 ]);
 const EXPECTED_PUBLIC_ASSETS = [
   "assets/brand/apple-touch-icon.png",
@@ -194,7 +194,7 @@ test("inner routes keep the rail concise and retain approved page content", asyn
   assert.doesNotMatch(now, /\bI am\b|As an AI enthusiast/u);
 });
 
-test("Past Experience keeps five domains, 16 entries, and 93 bullets", async () => {
+test("Past Experience keeps five domains, 16 entries, and 92 bullets", async () => {
   const directory = await routeHtml("/past-experience/");
   assert.equal(elementsWithClass(directory, "a", "domain-directory-link").length, 5);
   let entries = 0;
@@ -210,7 +210,7 @@ test("Past Experience keeps five domains, 16 entries, and 93 bullets", async () 
     bullets += routeBullets;
   }
   assert.equal(entries, 16);
-  assert.equal(bullets, 93);
+  assert.equal(bullets, 92);
   for (const [, route] of DOMAINS) {
     const html = await routeHtml(route);
     assert.equal(elementsWithClass(html, "p", "entry-summary").length, 0);
