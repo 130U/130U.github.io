@@ -22,6 +22,7 @@ html {
   scrollbar-gutter: stable;
   scroll-behavior: smooth;
   scroll-padding-top: 32px;
+  -webkit-text-size-adjust: 100%;
 }
 
 body {
@@ -270,6 +271,14 @@ button:focus-visible {
   line-height: 1.4;
 }
 
+.domain-page-number,
+.entry-date,
+.archive-entry-number,
+.domain-number,
+.entry-metadata {
+  font-variant-numeric: tabular-nums;
+}
+
 .section-kicker,
 .chapter-context,
 .domain-page-number {
@@ -446,7 +455,8 @@ button:focus-visible {
   --entry-label-width: 96px;
   --entry-column-gap: 16px;
   --entry-value-offset: calc(var(--entry-label-width) + var(--entry-column-gap));
-  --entry-bullet-left: 0px;
+  --entry-bullet-gutter: 18px;
+  --entry-bullet-left: calc(var(--entry-value-offset) - var(--entry-bullet-gutter));
 
   min-width: 0;
 }
@@ -480,7 +490,8 @@ button:focus-visible {
 
 .entry-website-link {
   display: inline-flex;
-  align-items: baseline;
+  min-height: 24px;
+  align-items: center;
   gap: 6px;
 }
 
@@ -535,12 +546,15 @@ button:focus-visible {
 
 .archive-bullets li::before {
   position: absolute;
-  top: 0;
+  top: 0.72em;
   left: var(--entry-bullet-left);
+  width: 3px;
+  height: 3px;
+  border-radius: 50%;
+  background: currentColor;
   color: var(--ink);
-  content: "•";
-  font-size: 0.72em;
-  line-height: inherit;
+  content: "";
+  transform: translateY(-50%);
 }
 
 .current-chapter-intro {
@@ -870,6 +884,19 @@ button:focus-visible {
   .domain-directory-link:hover .domain-arrow,
   .entry-website-link:hover .entry-website-arrow {
     transform: none;
+  }
+}
+
+@media (prefers-contrast: more) {
+  :root {
+    --muted: #454542;
+    --rule: rgba(0, 0, 0, 0.2);
+    --rule-strong: rgba(0, 0, 0, 0.48);
+  }
+
+  a:focus-visible,
+  button:focus-visible {
+    outline-width: 3px;
   }
 }
 

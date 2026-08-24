@@ -106,7 +106,7 @@ Sans type supplies precision to navigation, titles, and metadata. Serif type slo
 
 Desktop uses a 15-column frame with a 3-column sticky rail and 12-column content field. Tablet compresses to 12 columns with the same 3-column rail. Below 768px, the rail becomes a 64px sticky header and a single-column `Menu` / `Close` panel; page gutters use the Mobile Gutter token. Home alone places a full-viewport dithered entrance before this shell.
 
-Major sections are separated by large intervals and real hairlines. Lists, degrees, and experience records remain editorial rows rather than cards. At 540px and below, phone layouts stack metadata naturally and no identifier may force horizontal scrolling. From 768px through 900px, the Home coordinates label moves above its 2×2 contact grid so long identifiers remain on one line; wider tablet and desktop grids retain their established density.
+Major sections are separated by large intervals and real hairlines. Lists, degrees, and experience records remain editorial rows rather than cards. At 540px and below, phone layouts stack metadata naturally and no identifier may force horizontal scrolling. Home Coordinates uses one column on phones, a 2×2 matrix below 1280px, and a content-weighted four-column row at 1280px and above. From 768px through 900px, the Coordinates label moves above the matrix so long identifiers remain on one line.
 
 ## Elevation & Depth
 
@@ -130,7 +130,11 @@ Desktop navigation pairs the unboxed `LO` monogram with Theodore's name, followe
 
 ### Editorial Rows
 
-Education, domain-directory, coursework, and experience records use aligned columns, large vertical breathing room, and structural hairlines. Hover may change text color and move an arrow by 4px; it never lifts, glows, or gains a card surface.
+Education, domain-directory, coursework, and experience records use aligned columns, large vertical breathing room, and structural hairlines. Experience bullet text shares the metadata value baseline; its 3px optical marker occupies a narrow 18px gutter immediately before the text rather than floating in the label column. Hover may change text color and move an arrow by 4px; it never lifts, glows, or gains a card surface.
+
+### Coordinates
+
+Coordinates labels and values share one left baseline. The visible labels carry the meaning without decorative glyphs. Column widths follow content length, the email stays on one line, and the matrix changes density before any identifier is forced to wrap.
 
 ## Do's and Don'ts
 

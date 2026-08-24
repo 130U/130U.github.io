@@ -267,7 +267,7 @@ test("the production design contract is restrained and dependency-light", async 
   assert.doesNotMatch(home, /portrait/u);
   assert.match(globals, /\.entry-metadata\s*\{[\s\S]*?grid-template-columns:\s*1fr/u);
   assert.match(globals, /\.entry-project\s*\{[\s\S]*?color:\s*var\(--muted\)/u);
-  assert.match(globals, /\.archive-bullets li::before\s*\{[\s\S]*?content:\s*"•"/u);
+  assert.match(globals, /\.archive-bullets li::before\s*\{[\s\S]*?width:\s*3px[\s\S]*?content:\s*""/u);
   assert.doesNotMatch(layout, /data-design-contract|ParticleBackground|shantell-sans/u);
   assert.equal(existsSync(path.join(ROOT, "postcss.config.mjs")), false);
   assert.equal(packageJson.dependencies.three, undefined);
