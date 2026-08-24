@@ -6,10 +6,8 @@ import { navigation, type ActivePage } from "../lib/content/site";
 
 export function SiteNavigation({
   active,
-  showProfile,
 }: {
   active?: ActivePage;
-  showProfile: boolean;
 }) {
   const [menuOpen, setMenuOpen] = useState(false);
   const toggleRef = useRef<HTMLButtonElement>(null);
@@ -73,7 +71,7 @@ export function SiteNavigation({
     <div className="site-rail" data-menu-open={menuOpen ? "true" : "false"}>
       <div className="rail-header">
         <Link className="wordmark" href="/" aria-label="Theodore Ouyang home">
-          <span className="wordmark-dither" aria-hidden="true" />
+          <span className="wordmark-monogram" aria-hidden="true">LO</span>
           <span>Theodore Ouyang</span>
         </Link>
         <button
@@ -103,48 +101,6 @@ export function SiteNavigation({
           ))}
         </nav>
 
-        {showProfile ? (
-          <aside className="profile-sidebar" aria-label="Profile">
-            <div className="avatar-frame">
-              <picture>
-                <source
-                  type="image/avif"
-                  srcSet="/assets/profile/theodore-avatar-warm-384.avif 384w, /assets/profile/theodore-avatar-warm-768.avif 768w"
-                  sizes="(max-width: 767px) 84px, 116px"
-                />
-                <source
-                  type="image/webp"
-                  srcSet="/assets/profile/theodore-avatar-warm-384.webp 384w, /assets/profile/theodore-avatar-warm-768.webp 768w"
-                  sizes="(max-width: 767px) 84px, 116px"
-                />
-                <img
-                  src="/assets/profile/theodore-avatar-warm.png"
-                  alt="Illustrated portrait of Theodore Ouyang"
-                  width="1024"
-                  height="1536"
-                  sizes="(max-width: 767px) 84px, 116px"
-                />
-              </picture>
-            </div>
-            <p className="profile-name">Theodore Ouyang</p>
-            <p className="sidebar-bio">
-              <span>Exploring practical AI use cases</span>
-              <span>Sequoia Scholar, Cohort 8</span>
-            </p>
-            <ul className="profile-links">
-              <li><span aria-hidden="true">⌖</span><span>Beijing | Boston</span></li>
-              <li><span aria-hidden="true">◇</span><span>Duke University</span></li>
-              <li>
-                <span aria-hidden="true">@</span>
-                <a href="mailto:10@alumni.duke.edu">10@alumni.duke.edu</a>
-              </li>
-              <li>
-                <span className="gh-mark" aria-hidden="true">GH</span>
-                <a href="https://github.com/130U" rel="me">GitHub</a>
-              </li>
-            </ul>
-          </aside>
-        ) : null}
       </div>
     </div>
   );

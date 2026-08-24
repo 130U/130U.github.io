@@ -14,7 +14,7 @@ Key routes:
 
 Shared responsibilities:
 
-- `components/SiteShell.tsx` — editorial grid, profile sidebar, footer, and skip link.
+- `components/SiteShell.tsx` — editorial grid, concise navigation rail, footer, and skip link.
 - `components/SiteNavigation.tsx` — desktop rail and accessible mobile Menu / Close behavior.
 - `components/dithered-entrance/` — Home-only Canvas2D wordmark, static fallback,
   reduced-motion behavior, and idle-aware lifecycle cleanup.

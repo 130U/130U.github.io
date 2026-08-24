@@ -125,7 +125,7 @@
 用户已经将“Cognition 高保真复刻”设为新的视觉优先级，因此以下结构调整被视为合理范围：
 
 - 顶部横向导航改为桌面端左侧 sticky navigation。
-- 内页的 profile sidebar 不再以卡片形式重复出现。
+- 内页左侧导览不再重复头像、个人简介或联系方式。
 - profile 的唯一完整版本集中放在 Home 正文中。
 - Education、Past Experience 和 Current Chapter 进入同一套 Cognition shell。
 - 页面原有内容块可重新放入网格，但块内文字顺序不能被任意打乱。
@@ -292,11 +292,11 @@ Footer
 
 从上到下：
 
-1. Theodore 自有的微型散点标记，约 `20px × 20px`
+1. Theodore 自有的 `LO` 两字母微型字标，约 `20px` 宽
 2. 四个现有导航链接
 3. 当前页面使用 `#2200ff` 和 2px 竖线标记
 
-标记不能复制 Cognition logo。它应由入口双行 wordmark 的点阵缩略或首字母密度图生成，形成 Theodore 自己的识别系统。
+标记不能复制 Cognition logo。它使用无边框、无底板的 `LO` 排印字标，形成 Theodore 自己的识别系统。
 
 桌面端导航视觉：
 
@@ -338,7 +338,7 @@ Footer
 
 收起状态：
 
-- 顶栏左侧显示 Theodore 自有标记或 wordmark。
+- 顶栏左侧显示 `LO` 与 Theodore Ouyang wordmark。
 - 顶栏右侧显示 `Menu`。
 - `Menu` 是普通文字按钮，不使用 hamburger icon，不使用 pill 背景。
 
@@ -441,17 +441,16 @@ Footer
 
 #### Section C：Coordinates
 
-映射到 Cognition 首页第二个网格 section。使用 5 列视觉单元：
+映射到 Cognition 首页第二个网格 section。使用 4 列视觉单元：
 
-1. Theodore 现有 portrait
-2. Location
-3. Education
-4. Email
-5. Online
+1. Location
+2. Education
+3. Email
+4. Online
 
 这样可以借用 Cognition logo wall 的秩序，但不制造客户或品牌 logo。所有信息都是真实的 Theodore 内容。
 
-portrait 使用现有 AVIF/WebP responsive source，不重新生成肖像，不裁掉面部。
+Home 不显示肖像，让姓名、简介与联系方式成为唯一阅读主线。
 
 #### Footer
 
@@ -523,7 +522,7 @@ portrait 使用现有 AVIF/WebP responsive source，不重新生成肖像，不�
 - Project 保持独立层级。
 - summaries 与 bullets 保持原顺序和原文字。
 - 每条 entry 之间使用大留白和一条结构线。
-- metadata 在 desktop 可形成 2 列，在 mobile 变为上下堆叠。
+- metadata 在所有尺寸保持一列键值结构，避免横向扫描时割裂 Location、Website、Position 与 Dates。
 
 不把经历包装成卡片，不加入公司 logo，不用 timeline 圆点。
 
@@ -955,7 +954,7 @@ Education、Past Experience、五个 domain page 和 Current Chapter 只通过 `
 - 所有现有文字逐项通过 manifest。
 - Education 课程数量和顺序不变。
 - Past Experience 仍从 Markdown archive 解析。
-- Home portrait、bio、credentials 和 coordinates 全部仍可见。
+- Home bio、credentials 和 coordinates 全部仍可见，portrait 按最新确认移除。
 
 ### 14.4 动效
 

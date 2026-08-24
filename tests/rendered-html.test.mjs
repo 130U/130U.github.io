@@ -162,7 +162,7 @@ test("every route keeps canonical metadata, CSP, and the same navigation", async
   }
 });
 
-test("Home alone has the enlarged Balanced dither before the preserved profile", async () => {
+test("Home alone has the enlarged Balanced dither before the preserved profile copy", async () => {
   const home = await routeHtml("/");
   assert.equal(openingTags(home, "canvas").length, 1);
   assert.match(home, /data-state="loading"/u);
@@ -170,16 +170,17 @@ test("Home alone has the enlarged Balanced dither before the preserved profile",
   assert.match(home, /THEODORE[\s\S]*?OUYANG/u);
   assert.match(home, /id="home-profile"/u);
   assert.match(stripMarkup(home), /genuinely useful in everyday life/u);
+  assert.equal(openingTags(home, "img").length, 0);
   assert.equal(elementsWithClass(home, "aside", "profile-sidebar").length, 0);
   for (const route of ROUTES.slice(1)) assert.equal(openingTags(await routeHtml(route), "canvas").length, 0);
 });
 
-test("inner routes retain the approved profile and concise page content", async () => {
+test("inner routes keep the rail concise and retain approved page content", async () => {
   for (const route of ["/education/", "/past-experience/", "/now/"]) {
     const html = await routeHtml(route);
     const sidebar = elementsWithClass(html, "aside", "profile-sidebar");
-    assert.equal(sidebar.length, 1, `${route} lost its profile sidebar`);
-    assert.match(stripMarkup(sidebar[0][2]), /Sequoia Scholar, Cohort 8/u);
+    assert.equal(sidebar.length, 0, `${route} retained the redundant profile sidebar`);
+    assert.equal(openingTags(html, "img").length, 0, `${route} retained the portrait`);
   }
   const now = stripMarkup(await routeHtml("/now/"));
   assert.match(now, /Exploring AI in everyday life\./u);
@@ -249,10 +250,16 @@ test("the production design contract is restrained and dependency-light", async 
   for (const token of ["--page: #f7f6f5", "--ink: #0b0b0b", "--muted: #70706c", "--accent: #2200ff", "repeat(15, minmax(0, 1fr))"]) assert.ok(globals.includes(token));
   assert.doesNotMatch(globals, /box-shadow|backdrop-filter/u);
   assert.doesNotMatch(home, /box-shadow|backdrop-filter|linear-gradient/u);
-  assert.match(entrance, /min\(82vw, 520px\)/u);
-  assert.match(entrance, /min\(92%, 340px\)/u);
+  assert.match(entrance, /min\(76vw, 72dvh, 720px\)/u);
+  assert.match(entrance, /min\(92vw, 68dvh, 380px\)/u);
   assert.match(entrance, /aspect-ratio:\s*1/u);
   for (const contract of ["aria-controls=\"site-menu\"", "aria-expanded={menuOpen}", 'event.key === "Escape"', 'document.body.classList.add("menu-open")', 'querySelectorAll<HTMLElement>']) assert.ok(navigation.includes(contract));
+  assert.match(navigation, /wordmark-monogram[^>]*aria-hidden="true">LO<\/span>/u);
+  assert.doesNotMatch(navigation, /profile-sidebar|theodore-avatar/u);
+  assert.doesNotMatch(home, /portrait/u);
+  assert.match(globals, /\.entry-metadata\s*\{[\s\S]*?grid-template-columns:\s*1fr/u);
+  assert.match(globals, /\.entry-project\s*\{[\s\S]*?color:\s*var\(--muted\)/u);
+  assert.match(globals, /\.archive-bullets li::marker\s*\{[\s\S]*?color:\s*var\(--ink\)/u);
   assert.match(layout, /data-design-contract="user-pinned-balanced"/u);
   assert.doesNotMatch(layout, /ParticleBackground|shantell-sans/u);
   assert.equal(packageJson.dependencies.three, undefined);

@@ -25,7 +25,6 @@ export default function Home() {
       <SiteShell
         active="home"
         frameClassName={styles.homeFrame}
-        showProfile={false}
         showSkipLink={false}
       >
         <section
@@ -35,30 +34,8 @@ export default function Home() {
         >
           <div className={styles.profileInner}>
             <header className={styles.identity}>
-              <div className={styles.portrait}>
-                <picture>
-                  <source
-                    type="image/avif"
-                    srcSet="/assets/profile/theodore-avatar-warm-384.avif 384w, /assets/profile/theodore-avatar-warm-768.avif 768w"
-                    sizes="(max-width: 767px) 104px, 132px"
-                  />
-                  <source
-                    type="image/webp"
-                    srcSet="/assets/profile/theodore-avatar-warm-384.webp 384w, /assets/profile/theodore-avatar-warm-768.webp 768w"
-                    sizes="(max-width: 767px) 104px, 132px"
-                  />
-                  <img
-                    src="/assets/profile/theodore-avatar-warm.png"
-                    alt="Illustrated portrait of Theodore Ouyang"
-                    width="1024"
-                    height="1536"
-                    sizes="(max-width: 767px) 104px, 132px"
-                  />
-                </picture>
-              </div>
-
+              <p className={styles.sectionLabel}>Profile</p>
               <div className={styles.identityCopy}>
-                <p className={styles.sectionLabel}>Profile</p>
                 <h1 id="home-heading">Theodore Ouyang</h1>
                 <ul className={styles.credentials} aria-label="Profile summary">
                   <li>Exploring practical AI use cases</li>

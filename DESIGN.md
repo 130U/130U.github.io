@@ -101,17 +101,17 @@ The system is entirely flat. Hierarchy comes from type, whitespace, line weight,
 
 ## Shapes
 
-Content containers, buttons, navigation, and rows have square corners. The small dither mark uses a clipped irregular silhouette, and portrait cropping may use its source aspect ratio; neither creates a reusable rounded-card language.
+Content containers, buttons, navigation, and rows have square corners. The `LO` mark is an unboxed typographic monogram and does not create a reusable badge or rounded-card language.
 
 ## Components
 
 ### Dithered Entrance
 
-The Home entrance simultaneously spells `THEODORE` and `OUYANG`. Its stage is capped at 520px on desktop and 340px on mobile. Canvas2D points respond to pointer repulsion and a short release ripple, then stop requesting animation frames at rest. Reduced motion displays the complete static wordmark immediately.
+The Home entrance simultaneously spells `THEODORE` and `OUYANG`. Its stage scales from the viewport's shorter side and is capped at 720px on desktop and 380px on mobile. Canvas2D points respond to pointer repulsion and a short release ripple, then stop requesting animation frames at rest. Reduced motion displays the complete static wordmark immediately.
 
 ### Navigation
 
-Desktop navigation is a plain vertical list with a 2px active rule and Signal Blue text. Mobile uses literal `Menu` and `Close` controls, a warm-paper panel, focus containment, Escape dismissal, focus restoration, and no icon-only hamburger.
+Desktop navigation pairs the unboxed `LO` monogram with Theodore's name, followed by a plain vertical list with a 2px active rule and Signal Blue text. The rail contains no repeated portrait or profile card. Mobile uses literal `Menu` and `Close` controls, a warm-paper panel, focus containment, Escape dismissal, focus restoration, and no icon-only hamburger.
 
 ### Editorial Rows
 

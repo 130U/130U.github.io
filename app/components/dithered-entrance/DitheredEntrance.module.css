@@ -12,8 +12,10 @@
 
 .stage {
   position: relative;
-  width: min(82vw, 520px);
-  height: min(82vw, 520px);
+  width: min(76vw, 72dvh, 720px);
+  height: auto;
+  aspect-ratio: 1;
+  container-type: inline-size;
 }
 
 .canvas,
@@ -42,11 +44,11 @@
 }
 
 .fallback span:first-child {
-  font-size: clamp(3rem, 6.9vw, 5.55rem);
+  font-size: 17cqw;
 }
 
 .fallback span:last-child {
-  font-size: clamp(4rem, 9.4vw, 7.65rem);
+  font-size: 23.5cqw;
 }
 
 .entrance[data-state="fallback"] .fallback {
@@ -102,9 +104,7 @@
 
 @media (max-width: 767px) {
   .stage {
-    width: min(92%, 340px);
-    height: auto;
-    aspect-ratio: 1;
+    width: min(92vw, 68dvh, 380px);
   }
 
   .scrollCue {

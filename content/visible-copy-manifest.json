@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "baselineSha": "f909635d911089ab5ed1ee4f6ce6d3e158304013",
+  "baselineSha": "2ed025efc16aac7ed3a294b6d292a8825e2f5fef",
   "allowedNewVisibleStrings": [
     "Menu",
     "Close"
@@ -10,10 +10,8 @@
       "textSha256": "09ab37d103a224bb9f8133fa75e41b5fa7d215999fd3f959d42373f09a02931b",
       "characterCount": 622,
       "wordCount": 90,
-      "preview": "Skip to main content Theodore Ouyang Home Education Past Experience Current Chapter Scroll Profile Theodore Ouyang Exploring practical AI use cases Sequoia Scho",
-      "altTexts": [
-        "Illustrated portrait of Theodore Ouyang"
-      ],
+      "preview": "Skip to main content Scroll Theodore Ouyang Home Education Past Experience Current Chapter Profile Theodore Ouyang Exploring practical AI use cases Sequoia Scho",
+      "altTexts": [],
       "ariaLabels": [
         "Theodore Ouyang home",
         "Primary navigation",
@@ -31,17 +29,14 @@
       }
     },
     "/education/": {
-      "textSha256": "c41c85e4b22831fe43e99aba4349d7865d5521d9628bed65da45b1edb144e9f2",
-      "characterCount": 1496,
-      "wordCount": 187,
-      "preview": "Skip to main content Theodore Ouyang Home Education Past Experience Current Chapter Theodore Ouyang Exploring practical AI use cases Sequoia Scholar, Cohort 8 B",
-      "altTexts": [
-        "Illustrated portrait of Theodore Ouyang"
-      ],
+      "textSha256": "277a3533eaed186bc846f33be63b260008c6a051241ec23bfa1486e6210d73b3",
+      "characterCount": 1362,
+      "wordCount": 169,
+      "preview": "Skip to main content Theodore Ouyang Home Education Past Experience Current Chapter Education 2025 Duke University Master of Engineering in Risk Engineering Fin",
+      "altTexts": [],
       "ariaLabels": [
         "Theodore Ouyang home",
         "Primary navigation",
-        "Profile",
         "Degrees",
         "Academic distinctions"
       ],
@@ -57,17 +52,14 @@
       }
     },
     "/past-experience/": {
-      "textSha256": "9f7d2ad72dba30d0a32e2a932dc5658fee3867ff9ce6fe1d97428a02b3a8ac29",
-      "characterCount": 472,
-      "wordCount": 69,
-      "preview": "Skip to main content Theodore Ouyang Home Education Past Experience Current Chapter Theodore Ouyang Exploring practical AI use cases Sequoia Scholar, Cohort 8 B",
-      "altTexts": [
-        "Illustrated portrait of Theodore Ouyang"
-      ],
+      "textSha256": "8027ffaf0ffe581b5d5682a2674345d8a7a2e4670f7a074522bfa2b35d50cd6d",
+      "characterCount": 338,
+      "wordCount": 51,
+      "preview": "Skip to main content Theodore Ouyang Home Education Past Experience Current Chapter Theodore before July 1st, 2026. Select a domain to view the complete record.",
+      "altTexts": [],
       "ariaLabels": [
         "Theodore Ouyang home",
         "Primary navigation",
-        "Profile",
         "Experience domains"
       ],
       "metadata": {
@@ -82,17 +74,14 @@
       }
     },
     "/past-experience/artificial-intelligence/": {
-      "textSha256": "38d7e2f2dfb7d58ab5c31e3884bfc8037b9c99fe06b3ebe64cde6591e634b2f6",
-      "characterCount": 5783,
-      "wordCount": 743,
-      "preview": "Skip to main content Theodore Ouyang Home Education Past Experience Current Chapter Theodore Ouyang Exploring practical AI use cases Sequoia Scholar, Cohort 8 B",
-      "altTexts": [
-        "Illustrated portrait of Theodore Ouyang"
-      ],
+      "textSha256": "9757a5120c672fbb0f05fd86ad3964d8f911b774fcd0e8c7711019be93b24687",
+      "characterCount": 5649,
+      "wordCount": 725,
+      "preview": "Skip to main content Theodore Ouyang Home Education Past Experience Current Chapter Past Experience 01 Artificial Intelligence A global AI data and model evalua",
+      "altTexts": [],
       "ariaLabels": [
         "Theodore Ouyang home",
         "Primary navigation",
-        "Profile",
         "Artificial Intelligence",
         "Visit Duke University: AI at Duke website (opens in a new tab)",
         "Visit Duke University: AI at Duke website (opens in a new tab)",
@@ -110,17 +99,14 @@
       }
     },
     "/past-experience/data-science/": {
-      "textSha256": "220dad3732492f6f7a98d38536dc9be9ff1bf93ec261fda6a1d36bca31aa8edb",
-      "characterCount": 4485,
-      "wordCount": 596,
-      "preview": "Skip to main content Theodore Ouyang Home Education Past Experience Current Chapter Theodore Ouyang Exploring practical AI use cases Sequoia Scholar, Cohort 8 B",
-      "altTexts": [
-        "Illustrated portrait of Theodore Ouyang"
-      ],
+      "textSha256": "7479af0bf687088dd9f7da427830d753821e5a52b3c53f26e432b7dc712b12af",
+      "characterCount": 4351,
+      "wordCount": 578,
+      "preview": "Skip to main content Theodore Ouyang Home Education Past Experience Current Chapter Past Experience 02 Data Science Jiritsu Network Location Los Angeles, USA Po",
+      "altTexts": [],
       "ariaLabels": [
         "Theodore Ouyang home",
         "Primary navigation",
-        "Profile",
         "Data Science"
       ],
       "metadata": {
@@ -135,17 +121,14 @@
       }
     },
     "/past-experience/environmental-social-and-governance/": {
-      "textSha256": "b2dca729f7f58acc9f9821ff99b9e0a1ef5dca287147eb9d5b86fba8d72baa56",
-      "characterCount": 2737,
-      "wordCount": 362,
-      "preview": "Skip to main content Theodore Ouyang Home Education Past Experience Current Chapter Theodore Ouyang Exploring practical AI use cases Sequoia Scholar, Cohort 8 B",
-      "altTexts": [
-        "Illustrated portrait of Theodore Ouyang"
-      ],
+      "textSha256": "70fb6a5c533f4c0a57d32892f74befa5884b4a6db0539badfc4603c227cd63ca",
+      "characterCount": 2603,
+      "wordCount": 344,
+      "preview": "Skip to main content Theodore Ouyang Home Education Past Experience Current Chapter Past Experience 03 Environmental, Social, and Governance Duke Law School Loc",
+      "altTexts": [],
       "ariaLabels": [
         "Theodore Ouyang home",
         "Primary navigation",
-        "Profile",
         "Environmental, Social, and Governance",
         "Visit Hubble Network website (opens in a new tab)"
       ],
@@ -161,17 +144,14 @@
       }
     },
     "/past-experience/finance/": {
-      "textSha256": "94a259f656ffc9129e8ca9032c080b29c410fd7f4dfdbf8070a7644d2570cf15",
-      "characterCount": 6057,
-      "wordCount": 805,
-      "preview": "Skip to main content Theodore Ouyang Home Education Past Experience Current Chapter Theodore Ouyang Exploring practical AI use cases Sequoia Scholar, Cohort 8 B",
-      "altTexts": [
-        "Illustrated portrait of Theodore Ouyang"
-      ],
+      "textSha256": "a5ce32d6e6e283f9e055d59d5e72a0d8db633727a765c5ae94188d8f6ccfb11b",
+      "characterCount": 5923,
+      "wordCount": 787,
+      "preview": "Skip to main content Theodore Ouyang Home Education Past Experience Current Chapter Past Experience 04 Finance Jones Lang LaSalle (JLL) Location Beijing, China ",
+      "altTexts": [],
       "ariaLabels": [
         "Theodore Ouyang home",
         "Primary navigation",
-        "Profile",
         "Finance"
       ],
       "metadata": {
@@ -186,17 +166,14 @@
       }
     },
     "/past-experience/stem-academic-competitions-and-training/": {
-      "textSha256": "3142783b63d9de0d6c3e3b31d82875afff5599a9bf6984c18e5cbfaf09ef77fb",
-      "characterCount": 4330,
-      "wordCount": 500,
-      "preview": "Skip to main content Theodore Ouyang Home Education Past Experience Current Chapter Theodore Ouyang Exploring practical AI use cases Sequoia Scholar, Cohort 8 B",
-      "altTexts": [
-        "Illustrated portrait of Theodore Ouyang"
-      ],
+      "textSha256": "e921a388e9b7d55977cbedbdfc6974b533767a31fe1264027cecb7d2579071e4",
+      "characterCount": 4196,
+      "wordCount": 482,
+      "preview": "Skip to main content Theodore Ouyang Home Education Past Experience Current Chapter Past Experience 05 STEM Academic Competitions and Training Independent STEM ",
+      "altTexts": [],
       "ariaLabels": [
         "Theodore Ouyang home",
         "Primary navigation",
-        "Profile",
         "STEM Academic Competitions and Training"
       ],
       "metadata": {
@@ -211,17 +188,14 @@
       }
     },
     "/now/": {
-      "textSha256": "686d37978346d5d817a167e306e941daafffdb5777b2253dd21f407891a4cd87",
-      "characterCount": 553,
-      "wordCount": 84,
-      "preview": "Skip to main content Theodore Ouyang Home Education Past Experience Current Chapter Theodore Ouyang Exploring practical AI use cases Sequoia Scholar, Cohort 8 B",
-      "altTexts": [
-        "Illustrated portrait of Theodore Ouyang"
-      ],
+      "textSha256": "14175a223ebaf6397e70c5f184bd02a1671d53bd411c613611e647b673a1fbc5",
+      "characterCount": 419,
+      "wordCount": 66,
+      "preview": "Skip to main content Theodore Ouyang Home Education Past Experience Current Chapter Current Chapter Exploring AI in everyday life. As an AI enthusiast, I am exp",
+      "altTexts": [],
       "ariaLabels": [
         "Theodore Ouyang home",
-        "Primary navigation",
-        "Profile"
+        "Primary navigation"
       ],
       "metadata": {
         "title": "Current Chapter | Theodore Ouyang",

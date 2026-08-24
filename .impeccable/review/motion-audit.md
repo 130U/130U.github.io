@@ -26,8 +26,8 @@
 
 ## Production verification — Balanced selection
 
-- Desktop stage: 520px with 19,156 sampled points at the measured 1440px viewport.
-- Mobile stage: 340px with 8,839 sampled points at the measured 390px viewport; 320px remains uncropped with no horizontal overflow.
+- Desktop stage: 720px with 36,555 sampled points at the measured 1920px viewport.
+- Mobile stage: 345px with 9,179 sampled points at the measured 390px viewport; the layout remains uncropped with no horizontal overflow.
 - Pointer repulsion, release ripple, recovery, and fade use the approved explicit constants in `dither-motion.ts`.
 - The loop requests another frame only while fading, interacting, rippling, or recovering; reduced motion renders the complete mask without interaction.
 - Mobile menu uses a 200ms opacity/transform transition, focus containment, Escape dismissal, focus restoration, route-close behavior, and a fixed open-state header.

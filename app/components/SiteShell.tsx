@@ -6,14 +6,12 @@ export function SiteShell({
   active,
   children,
   frameClassName,
-  showProfile = true,
   showSkipLink = true,
   skipHref = "#main-content",
 }: {
   active?: ActivePage;
   children: ReactNode;
   frameClassName?: string;
-  showProfile?: boolean;
   showSkipLink?: boolean;
   skipHref?: `#${string}`;
 }) {
@@ -27,7 +25,7 @@ export function SiteShell({
       <div
         className={frameClassName ? `site-frame ${frameClassName}` : "site-frame"}
       >
-        <SiteNavigation active={active} showProfile={showProfile} />
+        <SiteNavigation active={active} />
 
         <main className="content-column" id="main-content">
           {children}
