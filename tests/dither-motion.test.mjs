@@ -72,12 +72,17 @@ test("Canvas2D lifecycle stops at idle and honors reduced motion", async () => {
     'matchMedia("(prefers-reduced-motion: reduce)")',
     "Math.min(2, window.devicePixelRatio",
     "pointermove",
+    "pointerenter",
     "pointerleave",
     "pointerup",
     "pointercancel",
     "ripples.length > 0 || stillMoving",
   ]) assert.ok(`${component}\n${mask}`.includes(contract), `Missing dither lifecycle contract: ${contract}`);
   assert.doesNotMatch(component, /pointerActive \|\| ripples\.length/u);
+  assert.match(component, /useRef<HTMLButtonElement>/u);
+  assert.match(component, /setPointerCapture/u);
+  assert.match(component, /motionQuery\.addListener/u);
+  assert.match(component, /stage\.addEventListener\("click", onKeyboardActivate\)/u);
   assert.match(mask, /"THEODORE"[\s\S]*?"OUYANG"/u);
   assert.match(mask, /size \* 0\.17/u);
   assert.match(mask, /size \* 0\.235/u);

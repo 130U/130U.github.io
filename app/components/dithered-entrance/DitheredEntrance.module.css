@@ -12,10 +12,45 @@
 
 .stage {
   position: relative;
+  display: block;
   width: min(76vw, 72dvh, 720px);
   height: auto;
+  padding: 0;
+  border: 0;
+  appearance: none;
   aspect-ratio: 1;
+  background: transparent;
+  color: inherit;
   container-type: inline-size;
+  cursor: pointer;
+  font: inherit;
+  -webkit-tap-highlight-color: transparent;
+  touch-action: pan-y;
+  transition: transform 140ms cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+.stage::after {
+  position: absolute;
+  top: 30%;
+  right: 3%;
+  bottom: 26%;
+  left: 3%;
+  border: 1px solid transparent;
+  content: "";
+  pointer-events: none;
+  transition: border-color 140ms cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+.stage:focus-visible {
+  outline: 0;
+}
+
+.stage:focus-visible::after {
+  border-color: var(--accent);
+}
+
+.stage:active {
+  transform: scale(0.995);
 }
 
 .canvas,
@@ -28,7 +63,7 @@
 
 .canvas {
   display: block;
-  touch-action: pan-y;
+  pointer-events: none;
 }
 
 .fallback {
@@ -41,6 +76,11 @@
   text-align: center;
   opacity: 0;
   pointer-events: none;
+}
+
+.canvas,
+.fallback {
+  transition: opacity 160ms cubic-bezier(0.23, 1, 0.32, 1);
 }
 
 .fallback span:first-child {
@@ -97,6 +137,14 @@
 }
 
 @media (hover: hover) and (pointer: fine) {
+  .stage:hover .canvas {
+    opacity: 0.84;
+  }
+
+  .entrance[data-state="fallback"] .stage:hover .fallback {
+    opacity: 0.84;
+  }
+
   .scrollCue:hover {
     color: #2200ff;
   }
@@ -113,8 +161,25 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
+  .stage,
+  .stage::after,
+  .canvas,
+  .fallback {
+    transition: none;
+  }
+
+  .stage:active {
+    transform: none;
+  }
+
   .canvas {
     opacity: 1;
+  }
+
+  @media (hover: hover) and (pointer: fine) {
+    .stage:hover .canvas {
+      opacity: 0.74;
+    }
   }
 
   .scrollCue {

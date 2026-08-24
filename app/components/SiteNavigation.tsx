@@ -75,8 +75,10 @@ export function SiteNavigation({
     <div className="site-rail" data-menu-open={menuOpen ? "true" : "false"}>
       <div className="rail-header">
         <Link className="wordmark" href="/" aria-label="Theodore Ouyang home">
-          <span className="wordmark-monogram" aria-hidden="true">LO</span>
-          <span>Theodore Ouyang</span>
+          <span className="wordmark-lockup">
+            <span>Theodore</span>
+            <span>Ouyang</span>
+          </span>
         </Link>
         <button
           aria-controls="site-menu"

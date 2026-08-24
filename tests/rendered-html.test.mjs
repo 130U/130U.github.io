@@ -168,6 +168,7 @@ test("Home alone has the enlarged Balanced dither before the preserved profile c
   assert.equal(openingTags(home, "canvas").length, 1);
   assert.match(home, /data-state="loading"/u);
   assert.match(home, /data-visible-copy-role="visual-identity"/u);
+  assert.match(home, /<button\b[^>]*type="button"[^>]*>[\s\S]*?<canvas/u);
   assert.match(home, /THEODORE[\s\S]*?OUYANG/u);
   assert.match(home, /id="home-profile"/u);
   assert.match(stripMarkup(home), /genuinely useful in everyday life/u);
@@ -262,7 +263,7 @@ test("the production design contract is restrained and dependency-light", async 
   assert.match(entrance, /min\(92vw, 68dvh, 380px\)/u);
   assert.match(entrance, /aspect-ratio:\s*1/u);
   for (const contract of ["aria-controls=\"site-menu\"", "aria-expanded={menuOpen}", 'event.key === "Escape"', 'document.body.classList.add("menu-open")', 'querySelectorAll<HTMLElement>']) assert.ok(navigation.includes(contract));
-  assert.match(navigation, /wordmark-monogram[^>]*aria-hidden="true">LO<\/span>/u);
+  assert.match(navigation, /wordmark-lockup[\s\S]*?>Theodore<\/span>[\s\S]*?>Ouyang<\/span>/u);
   assert.doesNotMatch(navigation, /profile-sidebar|theodore-avatar/u);
   assert.doesNotMatch(home, /portrait/u);
   assert.match(globals, /\.entry-metadata\s*\{[\s\S]*?grid-template-columns:\s*1fr/u);

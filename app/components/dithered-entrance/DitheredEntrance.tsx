@@ -12,12 +12,14 @@ import styles from "./DitheredEntrance.module.css";
 
 export function DitheredEntrance() {
   const entranceRef = useRef<HTMLElement>(null);
+  const stageRef = useRef<HTMLButtonElement>(null);
   const canvasRef = useRef<HTMLCanvasElement>(null);
 
   useEffect(() => {
     const entrance = entranceRef.current;
+    const stage = stageRef.current;
     const canvas = canvasRef.current;
-    if (!canvas || !entrance) return;
+    if (!canvas || !entrance || !stage) return;
     const context = canvas.getContext("2d");
     if (!context) {
       entrance.dataset.state = "fallback";
@@ -170,9 +172,28 @@ export function DitheredEntrance() {
     };
 
     const onPointerDown = (event: PointerEvent) => {
-      if (event.pointerType !== "touch") return;
       const position = localPosition(event);
-      touchOrigin = { ...position, moved: false };
+      if (event.pointerType === "touch") {
+        touchOrigin = { ...position, moved: false };
+      }
+      if (!motionQuery.matches) {
+        pointerX = position.x;
+        pointerY = position.y;
+        pointerActive = event.pointerType !== "touch";
+        requestDraw();
+      }
+      if (typeof stage.setPointerCapture === "function") {
+        stage.setPointerCapture(event.pointerId);
+      }
+    };
+
+    const onPointerEnter = (event: PointerEvent) => {
+      if (event.pointerType === "touch" || motionQuery.matches) return;
+      const position = localPosition(event);
+      pointerX = position.x;
+      pointerY = position.y;
+      pointerActive = true;
+      requestDraw();
     };
 
     const onPointerMove = (event: PointerEvent) => {
@@ -196,6 +217,12 @@ export function DitheredEntrance() {
     };
 
     const onPointerUp = (event: PointerEvent) => {
+      if (
+        typeof stage.hasPointerCapture === "function" &&
+        stage.hasPointerCapture(event.pointerId)
+      ) {
+        stage.releasePointerCapture(event.pointerId);
+      }
       if (motionQuery.matches) {
         touchOrigin = null;
         return;
@@ -206,13 +233,30 @@ export function DitheredEntrance() {
       }
       const position = localPosition(event);
       ripples.push({ ...position, startedAt: performance.now() });
+      if (event.pointerType === "touch") pointerActive = false;
       touchOrigin = null;
       requestDraw();
     };
 
-    const onPointerCancel = () => {
+    const onPointerCancel = (event: PointerEvent) => {
+      if (
+        typeof stage.hasPointerCapture === "function" &&
+        stage.hasPointerCapture(event.pointerId)
+      ) {
+        stage.releasePointerCapture(event.pointerId);
+      }
       touchOrigin = null;
       pointerActive = false;
+      requestDraw();
+    };
+
+    const onKeyboardActivate = (event: MouseEvent) => {
+      if (event.detail !== 0 || motionQuery.matches) return;
+      ripples.push({
+        x: cssSize / 2,
+        y: cssSize / 2,
+        startedAt: performance.now(),
+      });
       requestDraw();
     };
 
@@ -230,12 +274,18 @@ export function DitheredEntrance() {
     } else {
       window.addEventListener("resize", queueRebuild, { passive: true });
     }
-    motionQuery.addEventListener("change", onMotionPreferenceChange);
-    canvas.addEventListener("pointerdown", onPointerDown, { passive: true });
-    canvas.addEventListener("pointermove", onPointerMove, { passive: true });
-    canvas.addEventListener("pointerleave", onPointerLeave, { passive: true });
-    canvas.addEventListener("pointerup", onPointerUp, { passive: true });
-    canvas.addEventListener("pointercancel", onPointerCancel, { passive: true });
+    if (typeof motionQuery.addEventListener === "function") {
+      motionQuery.addEventListener("change", onMotionPreferenceChange);
+    } else {
+      motionQuery.addListener(onMotionPreferenceChange);
+    }
+    stage.addEventListener("pointerdown", onPointerDown, { passive: true });
+    stage.addEventListener("pointerenter", onPointerEnter, { passive: true });
+    stage.addEventListener("pointermove", onPointerMove, { passive: true });
+    stage.addEventListener("pointerleave", onPointerLeave, { passive: true });
+    stage.addEventListener("pointerup", onPointerUp, { passive: true });
+    stage.addEventListener("pointercancel", onPointerCancel, { passive: true });
+    stage.addEventListener("click", onKeyboardActivate);
 
     try {
       rebuild();
@@ -249,18 +299,24 @@ export function DitheredEntrance() {
       cancelAnimationFrame(resizeFrame);
       resizeObserver?.disconnect();
       if (!resizeObserver) window.removeEventListener("resize", queueRebuild);
-      motionQuery.removeEventListener("change", onMotionPreferenceChange);
-      canvas.removeEventListener("pointerdown", onPointerDown);
-      canvas.removeEventListener("pointermove", onPointerMove);
-      canvas.removeEventListener("pointerleave", onPointerLeave);
-      canvas.removeEventListener("pointerup", onPointerUp);
-      canvas.removeEventListener("pointercancel", onPointerCancel);
+      if (typeof motionQuery.removeEventListener === "function") {
+        motionQuery.removeEventListener("change", onMotionPreferenceChange);
+      } else {
+        motionQuery.removeListener(onMotionPreferenceChange);
+      }
+      stage.removeEventListener("pointerdown", onPointerDown);
+      stage.removeEventListener("pointerenter", onPointerEnter);
+      stage.removeEventListener("pointermove", onPointerMove);
+      stage.removeEventListener("pointerleave", onPointerLeave);
+      stage.removeEventListener("pointerup", onPointerUp);
+      stage.removeEventListener("pointercancel", onPointerCancel);
+      stage.removeEventListener("click", onKeyboardActivate);
     };
   }, []);
 
   return (
     <section className={styles.entrance} data-state="loading" ref={entranceRef}>
-      <div className={styles.stage}>
+      <button className={styles.stage} ref={stageRef} type="button">
         <div className={styles.fallback} aria-hidden="true">
           <span>THEODORE</span>
           <span>OUYANG</span>
@@ -269,7 +325,7 @@ export function DitheredEntrance() {
         <span className={styles.srOnly} data-visible-copy-role="visual-identity">
           Theodore Ouyang
         </span>
-      </div>
+      </button>
       <a className={styles.scrollCue} href="#home-profile">
         Scroll
       </a>

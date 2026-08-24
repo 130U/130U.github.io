@@ -100,6 +100,8 @@ button:focus-visible {
 }
 
 .site-rail {
+  --rail-safe-inset: clamp(20px, 2vw, 24px);
+
   position: sticky;
   z-index: 30;
   top: 0;
@@ -108,7 +110,7 @@ button:focus-visible {
   min-width: 0;
   height: 100vh;
   height: 100dvh;
-  padding: 176px 22px 36px 0;
+  padding: 176px 22px 36px var(--rail-safe-inset);
   border-right: 1px solid var(--rule);
   border-left: 1px solid var(--rule);
 }
@@ -123,11 +125,7 @@ button:focus-visible {
   align-items: center;
   color: var(--ink);
   font-family: var(--sans);
-  font-size: 13px;
-  font-weight: 500;
-  letter-spacing: -0.01em;
   line-height: 1;
-  gap: 10px;
   transition: color 180ms var(--ease-out), transform 120ms var(--ease-out);
 }
 
@@ -139,16 +137,31 @@ button:focus-visible {
   transform: scale(0.97);
 }
 
-.wordmark-monogram {
-  display: inline-block;
-  width: 20px;
-  flex: 0 0 20px;
+.wordmark-lockup {
+  display: grid;
+  width: 70px;
+  flex: 0 0 70px;
+  align-content: center;
+  color: var(--ink);
   font-family: var(--sans);
-  font-size: 14px;
-  font-weight: 600;
-  font-variant-ligatures: none;
-  letter-spacing: -0.12em;
-  line-height: 1;
+  font-weight: 800;
+  letter-spacing: -0.035em;
+  line-height: 0.78;
+  text-transform: uppercase;
+  transition: opacity 160ms var(--ease-out), transform 160ms var(--ease-out);
+}
+
+.wordmark-lockup span {
+  display: block;
+  width: max-content;
+}
+
+.wordmark-lockup span:first-child {
+  font-size: 13px;
+}
+
+.wordmark-lockup span:last-child {
+  font-size: 18px;
 }
 
 .menu-toggle {
@@ -612,6 +625,11 @@ button:focus-visible {
   .entry-website-link:hover .entry-website-arrow {
     transform: translate3d(2px, -2px, 0);
   }
+
+  .wordmark:hover .wordmark-lockup {
+    opacity: 0.68;
+    transform: translateX(1px);
+  }
 }
 
 @media (max-width: 1023px) and (min-width: 768px) {
@@ -622,6 +640,7 @@ button:focus-visible {
 
   .site-rail {
     grid-column: 1 / span 3;
+    --rail-safe-inset: 20px;
     padding-right: 18px;
   }
 
@@ -695,7 +714,7 @@ button:focus-visible {
   }
 
   .wordmark {
-    font-size: 13px;
+    min-width: 70px;
   }
 
   .menu-toggle {
@@ -864,6 +883,7 @@ button:focus-visible {
 
   .skip-link,
   .wordmark,
+  .wordmark-lockup,
   .menu-toggle,
   .primary-nav a,
   .primary-nav a::before,
@@ -908,6 +928,10 @@ button:focus-visible {
     --rule: GrayText;
     --rule-strong: CanvasText;
     --accent: LinkText;
+  }
+
+  .wordmark-lockup {
+    color: CanvasText;
   }
 
   .primary-nav a::before {
