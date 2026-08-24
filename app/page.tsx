@@ -34,7 +34,9 @@ export default function Home() {
         >
           <div className={styles.profileInner}>
             <header className={styles.identity}>
-              <p className={styles.sectionLabel}>Profile</p>
+              <p className={styles.sectionIndex} aria-hidden="true">
+                01
+              </p>
               <div className={styles.identityCopy}>
                 <h1 id="home-heading">Theodore Ouyang</h1>
                 <ul className={styles.credentials} aria-label="Profile summary">
@@ -45,7 +47,9 @@ export default function Home() {
             </header>
 
             <div className={styles.biography}>
-              <p className={styles.sectionLabel}>About</p>
+              <p className={styles.sectionIndex} aria-hidden="true">
+                02
+              </p>
               <div className={styles.biographyCopy}>
                 <p>
                   Theodore Ouyang holds a Bachelor of Science and a Master of
@@ -59,7 +63,9 @@ export default function Home() {
             </div>
 
             <div className={styles.contactSection}>
-              <p className={styles.sectionLabel}>Coordinates</p>
+              <p className={styles.sectionIndex} aria-hidden="true">
+                03
+              </p>
               <ul className={styles.contactStrip}>
                 <li>
                   <span className={styles.contactLabel}>

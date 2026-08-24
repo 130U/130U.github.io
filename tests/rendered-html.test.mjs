@@ -36,8 +36,8 @@ const DOMAINS = [
 ];
 const PROTECTED_SOURCE_HASHES = new Map([
   ["app/education/page.tsx", "ce3c34631d07d9e8f546670761392d9d9372cec9103970f8aa849267c795f28d"],
-  ["app/now/page.tsx", "c410e1c9109889f018983698bd3cf276e4d34aa2db1e96d56f96cefb34adb7e6"],
-  ["app/past-experience/page.tsx", "c22ffecb129567be473ce2230103fd80d954faeaa6ebae171c9418085e6769e9"],
+  ["app/now/page.tsx", "293642ebb1b0e7fa21c69f34dcc5f0fd2fe396ca847d69b01818c4ea7dfa3888"],
+  ["app/past-experience/page.tsx", "3731858797e3a1e66135e6de87ad49e626971c8e18e86440c5d55de5dc523a11"],
   ["app/past-experience/[slug]/page.tsx", "a89b781c0a6a74b9295635d5495c4e2cc2cf2d890cc879578ebfd04a9f6db84b"],
   ["app/past-experience/components/ExperienceDomainPage.tsx", "098da21aa9d56f0ad56c4dd96997419988a0c51557507fe7748bbccb5913f3e0"],
   ["app/lib/content/experience.ts", "01875681354d96713bf3025ce48e7f56febf3616ef3c8d921e48fb9f09846d72"],
@@ -173,6 +173,10 @@ test("Home alone has the enlarged Balanced dither before the preserved profile c
   assert.match(home, /<button\b[^>]*type="button"[^>]*>[\s\S]*?<canvas/u);
   assert.match(home, /THEODORE[\s\S]*?OUYANG/u);
   assert.match(home, /id="home-profile"/u);
+  for (const index of ["01", "02", "03"]) {
+    assert.match(home, new RegExp(`aria-hidden="true"[^>]*>${index}<`, "u"));
+  }
+  assert.doesNotMatch(home, />Profile<|>About<|>Coordinates</u);
   assert.match(stripMarkup(home), /genuinely useful in everyday life/u);
   assert.equal(openingTags(home, "img").length, 0);
   assert.equal(elementsWithClass(home, "aside", "profile-sidebar").length, 0);
@@ -186,7 +190,10 @@ test("inner routes keep the rail concise and retain approved page content", asyn
     assert.equal(sidebar.length, 0, `${route} retained the redundant profile sidebar`);
     assert.equal(openingTags(html, "img").length, 0, `${route} retained the portrait`);
   }
-  const now = stripMarkup(await routeHtml("/now/"));
+  const nowHtml = await routeHtml("/now/");
+  const now = stripMarkup(nowHtml);
+  assert.match(nowHtml, /<h1[^>]*>Current Chapter<\/h1>/u);
+  assert.match(nowHtml, /class="page-intro-support">Exploring AI in everyday life\.<\/p>/u);
   assert.match(now, /Exploring AI in everyday life\./u);
   assert.match(now, /Theodore Ouyang is exploring how artificial intelligence/u);
   assert.match(now, /practical applications that solve real problems/u);
@@ -196,6 +203,9 @@ test("inner routes keep the rail concise and retain approved page content", asyn
 
 test("Past Experience keeps five domains, 16 entries, and 92 bullets", async () => {
   const directory = await routeHtml("/past-experience/");
+  assert.match(directory, /<h1>Past Experience<\/h1>/u);
+  assert.match(directory, /class="page-intro-support">Theodore before July 1st, 2026\.<\/p>/u);
+  assert.doesNotMatch(directory, /Select a domain to view the complete record/u);
   assert.equal(elementsWithClass(directory, "a", "domain-directory-link").length, 5);
   let entries = 0;
   let bullets = 0;
@@ -276,6 +286,7 @@ test("the production design contract is restrained and dependency-light", async 
   const home = await readFile(path.join(ROOT, "app", "home.module.css"), "utf8");
   const entrance = await readFile(path.join(ROOT, "app", "components", "dithered-entrance", "DitheredEntrance.module.css"), "utf8");
   const navigation = await readFile(path.join(ROOT, "app", "components", "SiteNavigation.tsx"), "utf8");
+  const structuralGrid = await readFile(path.join(ROOT, "app", "components", "StructuralGrid.tsx"), "utf8");
   const layout = await readFile(path.join(ROOT, "app", "layout.tsx"), "utf8");
   const packageJson = JSON.parse(await readFile(path.join(ROOT, "package.json"), "utf8"));
   for (const token of ["--page: #f7f6f5", "--ink: #0b0b0b", "--muted: #70706c", "--accent: #2200ff", "repeat(15, minmax(0, 1fr))"]) assert.ok(globals.includes(token));
@@ -287,6 +298,10 @@ test("the production design contract is restrained and dependency-light", async 
   assert.match(entrance, /\.scrollCue\s*\{[\s\S]*?color:\s*var\(--muted\)[\s\S]*?font-size:\s*11px/u);
   assert.match(globals, /@media \(pointer:\s*coarse\)[\s\S]*?\.primary-nav a,[\s\S]*?\.entry-website-link[\s\S]*?min-height:\s*44px/u);
   assert.match(home, /@media \(pointer:\s*coarse\)[\s\S]*?\.contactStrip a[\s\S]*?min-height:\s*44px/u);
+  assert.match(globals, /width:\s*min\(100%,\s*1440px\)/u);
+  assert.match(globals, /\.content-column\s*\{[\s\S]*?grid-template-columns:\s*repeat\(12,[\s\S]*?padding:\s*176px 0 144px/u);
+  assert.match(globals, /\.structural-guide-tick\s*\{[\s\S]*?position:\s*sticky[\s\S]*?height:\s*20px/u);
+  for (const guide of ["frame-start", "rail-boundary", "reading-start", "reading-measure", "reading-end"]) assert.ok(structuralGrid.includes(`"${guide}"`));
   for (const contract of ["aria-controls=\"site-menu\"", "aria-expanded={menuOpen}", 'event.key === "Escape"', 'document.body.classList.add("menu-open")', 'querySelectorAll<HTMLElement>']) assert.ok(navigation.includes(contract));
   assert.match(navigation, /backgroundRegions[\s\S]*?region\.inert = true[\s\S]*?region\.inert = false/u);
   assert.match(navigation, /wordmark-lockup[\s\S]*?wordmark-mark[\s\S]*?wordmark-name[\s\S]*?>Theodore Ouyang<\/span>/u);

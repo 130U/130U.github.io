@@ -13,8 +13,8 @@ export default function NowPage() {
   return (
     <SiteShell active="now">
       <header className="page-intro current-chapter-intro">
-        <p className="chapter-context">Current Chapter</p>
-        <h1 id="now-heading">Exploring AI in everyday life.</h1>
+        <h1 id="now-heading">Current Chapter</h1>
+        <p className="page-intro-support">Exploring AI in everyday life.</p>
       </header>
 
       <article className="current-chapter-brief" aria-labelledby="now-heading">

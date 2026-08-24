@@ -104,9 +104,11 @@ Sans type supplies precision to navigation, titles, and metadata. Serif type slo
 
 ## Layout
 
-Desktop uses a 15-column frame with a 3-column sticky rail and 12-column content field. Tablet compresses to 12 columns with the same 3-column rail. Below 768px, the rail becomes a 64px sticky header and a single-column `Menu` / `Close` panel; page gutters use the Mobile Gutter token. Home alone places a full-viewport dithered entrance before this shell.
+Desktop uses a 1440px-capped 15-column frame with a 3-column sticky rail and 12-column content field. The content field repeats the same column unit internally: a quiet index track comes first and primary content occupies the following ten tracks. Tablet compresses to 12 outer columns and nine content tracks while preserving the same index-to-content relationship. Below 768px, the rail becomes a 64px sticky header and a single-column `Menu` / `Close` panel; page gutters use the Mobile Gutter token. Home alone places a full-viewport dithered entrance before this shell.
 
-Major sections are separated by large intervals and real hairlines. Lists, degrees, and experience records remain editorial rows rather than cards. At 540px and below, phone layouts stack metadata naturally and no identifier may force horizontal scrolling. Home Coordinates uses one column on phones, a 2×2 matrix below 1280px, and a content-weighted four-column row at 1280px and above. From 768px through 900px, the Coordinates label moves above the matrix so long identifiers remain on one line. Coarse-pointer devices preserve the same density while expanding primary navigation and standalone links to a 44px touch target.
+Five structural guides establish the desktop reading frame: full-height lines at the outer start, rail boundary, and reading end; shorter fading guides at the reading start and measure boundary. Each visible guide carries a 2×8px sticky viewport-edge tick. These guides are aria-hidden and never affect reading order. Mobile removes the guide layer rather than compressing it into decoration.
+
+Major sections are separated by large intervals and real hairlines. Home uses `01`, `02`, and `03` only as positional indices in the first content track; they are never headings or eyebrow labels. Lists, degrees, and experience records remain editorial rows rather than cards. At 540px and below, phone layouts stack metadata naturally and no identifier may force horizontal scrolling. Home Coordinates uses one column on phones, a 2×2 matrix below 1280px, and a content-weighted four-column row at 1280px and above. Coarse-pointer devices preserve the same density while expanding primary navigation and standalone links to a 44px touch target.
 
 ## Elevation & Depth
 
@@ -132,6 +134,10 @@ Desktop navigation uses the compact black `LO + Theodore Ouyang` horizontal lock
 
 Education, domain-directory, coursework, and experience records use aligned columns, large vertical breathing room, and structural hairlines. Experience bullet text shares the metadata value baseline; its 3px optical marker occupies a narrow 18px gutter immediately before the text rather than floating in the label column. Hover may change text color and move an arrow by 4px; it never lifts, glows, or gains a card surface.
 
+### Page Titles
+
+The principal page name always owns the H1 position and Display Heading token. Education uses `Education`; Past Experience uses `Past Experience`; Current Chapter uses `Current Chapter`. A descriptive phrase may follow as 15px serif supporting copy, but it never replaces the page name or appears as a small sans eyebrow above it. Home intentionally omits a `Home` H1 because the dithered entrance and `Theodore Ouyang` identity already establish the page.
+
 ### Coordinates
 
 Coordinates labels and values share one left baseline. The visible labels carry the meaning without decorative glyphs. Column widths follow content length, the email stays on one line, and the matrix changes density before any identifier is forced to wrap.
@@ -143,6 +149,7 @@ Coordinates labels and values share one left baseline. The visible labels carry 
 - **Do** preserve protected biographical sources, factual claims, routes, metadata, alt text, ARIA labels, and content order unless Theodore explicitly approves a revision.
 - **Do** use whitespace and real content boundaries before adding any new visual element.
 - **Do** keep the entrance interaction interruptible, idle-aware, and fully static under reduced motion.
+- **Do** keep section indices in their dedicated grid track and true headings in the reading track.
 - **Do** verify 1440px, 1024px, 768px, 540px, 430px, 390px, and 320px layouts before release.
 
 ### Don't:

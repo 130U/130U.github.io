@@ -1,6 +1,7 @@
 import type { ReactNode } from "react";
 import type { ActivePage } from "../lib/content/site";
 import { SiteNavigation } from "./SiteNavigation";
+import { StructuralGrid } from "./StructuralGrid";
 
 export function SiteShell({
   active,
@@ -25,6 +26,7 @@ export function SiteShell({
       <div
         className={frameClassName ? `site-frame ${frameClassName}` : "site-frame"}
       >
+        <StructuralGrid />
         <SiteNavigation active={active} />
 
         <main className="content-column" id="main-content">

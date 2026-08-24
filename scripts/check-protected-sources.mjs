@@ -22,7 +22,14 @@ const approvedProtectedChanges = new Map([
     "app/now/page.tsx",
     {
       status: "M",
-      hash: "c410e1c9109889f018983698bd3cf276e4d34aa2db1e96d56f96cefb34adb7e6",
+      hash: "293642ebb1b0e7fa21c69f34dcc5f0fd2fe396ca847d69b01818c4ea7dfa3888",
+    },
+  ],
+  [
+    "app/past-experience/page.tsx",
+    {
+      status: "M",
+      hash: "3731858797e3a1e66135e6de87ad49e626971c8e18e86440c5d55de5dc523a11",
     },
   ],
   [

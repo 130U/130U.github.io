@@ -1,16 +1,16 @@
 {
   "version": 1,
-  "baselineSha": "a225d3b1c1fffef5f171e54b2a63a782eaba16d1",
+  "baselineSha": "073febf24e86f78848b71ed7f8f15549870cf733",
   "allowedNewVisibleStrings": [
     "Menu",
     "Close"
   ],
   "routes": {
     "/": {
-      "textSha256": "09ab37d103a224bb9f8133fa75e41b5fa7d215999fd3f959d42373f09a02931b",
-      "characterCount": 622,
-      "wordCount": 90,
-      "preview": "Skip to main content Scroll Theodore Ouyang Home Education Past Experience Current Chapter Profile Theodore Ouyang Exploring practical AI use cases Sequoia Scho",
+      "textSha256": "5d21d497c13e896184eaa51cd4d5c3ca7488966e89b6329b45570007debd0eea",
+      "characterCount": 596,
+      "wordCount": 87,
+      "preview": "Skip to main content Scroll Theodore Ouyang Home Education Past Experience Current Chapter Theodore Ouyang Exploring practical AI use cases Sequoia Scholar, Coh",
       "altTexts": [],
       "ariaLabels": [
         "Theodore Ouyang home",
@@ -52,10 +52,10 @@
       }
     },
     "/past-experience/": {
-      "textSha256": "8027ffaf0ffe581b5d5682a2674345d8a7a2e4670f7a074522bfa2b35d50cd6d",
-      "characterCount": 338,
-      "wordCount": 51,
-      "preview": "Skip to main content Theodore Ouyang Home Education Past Experience Current Chapter Theodore before July 1st, 2026. Select a domain to view the complete record.",
+      "textSha256": "275f8a8ed4d11babe28bc348071588fd7bf0d5e270933f9e93a72c40c710f2a9",
+      "characterCount": 309,
+      "wordCount": 45,
+      "preview": "Skip to main content Theodore Ouyang Home Education Past Experience Current Chapter Past Experience Theodore before July 1st, 2026. 01 Artificial Intelligence 0",
       "altTexts": [],
       "ariaLabels": [
         "Theodore Ouyang home",

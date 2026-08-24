@@ -1,6 +1,6 @@
 {
   "schemaVersion": 2,
-  "generatedAt": "2026-08-24T12:47:39.689Z",
+  "generatedAt": "2026-08-24T15:15:44.571Z",
   "title": "Design System: Theodore Ouyang Portfolio",
   "extensions": {
     "colorMeta": {
@@ -63,13 +63,18 @@
     "breakpoints": [
       { "name": "phone-stack", "value": "540px" },
       { "name": "mobile-shell", "value": "767px" },
-      { "name": "coordinates-label-stack", "value": "900px" },
       { "name": "tablet-shell", "value": "1023px" },
-      { "name": "home-compact", "value": "1100px" },
       { "name": "coordinates-wide", "value": "1280px" }
     ]
   },
   "components": [
+    {
+      "name": "Structural Grid and Section Index",
+      "kind": "custom",
+      "description": "A non-semantic guide layer aligns the sticky rail, numeric section indices, headings, and reading measure without enclosing content in cards.",
+      "html": "<div class=\"ds-frame\"><div class=\"ds-guides\" aria-hidden=\"true\"><span class=\"ds-guide ds-guide-start\"></span><span class=\"ds-guide ds-guide-rail\"></span><span class=\"ds-guide ds-guide-reading\"></span><span class=\"ds-guide ds-guide-measure\"></span><span class=\"ds-guide ds-guide-end\"></span></div><section class=\"ds-indexed-section\"><span class=\"ds-section-index\" aria-hidden=\"true\">01</span><h2>Section content</h2></section></div>",
+      "css": ".ds-frame { position:relative; display:grid; grid-template-columns:repeat(15,minmax(0,1fr)); width:min(100%,1440px); margin:0 auto; padding:0 64px; } .ds-guides { position:absolute; inset:0 64px; display:grid; grid-template-columns:repeat(15,minmax(0,1fr)); pointer-events:none; } .ds-guide { position:relative; grid-row:1; min-height:100%; } .ds-guide::before { position:absolute; inset-block:0; left:-.5px; width:1px; background:var(--rule,rgba(0,0,0,.06)); content:''; } .ds-guide-start { grid-column:1; } .ds-guide-rail { grid-column:4; } .ds-guide-reading { grid-column:5; } .ds-guide-measure { grid-column:13; } .ds-guide-end { grid-column:15; } .ds-indexed-section { display:grid; grid-column:4/-1; grid-template-columns:repeat(12,minmax(0,1fr)); } .ds-section-index { grid-column:1; color:var(--muted,#70706c); font:10px/1.5 Helvetica,Arial,sans-serif; font-variant-numeric:tabular-nums; } .ds-indexed-section h2 { grid-column:2/span 7; margin:0; font:400 36px/1.1 Helvetica,Arial,sans-serif; letter-spacing:-.02em; } @media (max-width:767px) { .ds-guides,.ds-section-index { display:none; } .ds-frame,.ds-indexed-section { display:block; padding-inline:20px; } }"
+    },
     {
       "name": "Active Rail Link",
       "kind": "nav",
@@ -148,6 +153,7 @@
       "Do use whitespace and real content boundaries before adding any new visual element.",
       "Do keep the entrance interaction interruptible, idle-aware, and fully static under reduced motion.",
       "Do preserve 44px targets for coarse-pointer navigation and standalone links.",
+      "Do keep section indices in their dedicated grid track and true headings in the reading track.",
       "Do verify 1440px, 1024px, 768px, 540px, 430px, 390px, and 320px layouts before release."
     ],
     "donts": [

@@ -91,12 +91,93 @@ button:focus-visible {
 }
 
 .site-frame {
+  position: relative;
   display: grid;
   grid-template-columns: repeat(15, minmax(0, 1fr));
-  width: min(100%, 1600px);
+  width: min(100%, 1440px);
   min-height: calc(100vh - 76px);
   margin: 0 auto;
   padding: 0 64px;
+}
+
+.structural-grid {
+  position: absolute;
+  z-index: 0;
+  inset: 0 64px;
+  display: grid;
+  grid-template-columns: repeat(15, minmax(0, 1fr));
+  pointer-events: none;
+}
+
+.structural-guide {
+  position: relative;
+  grid-row: 1;
+  min-height: 100%;
+}
+
+.structural-guide::before {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: -0.5px;
+  width: 1px;
+  background: var(--rule);
+  content: "";
+}
+
+.structural-guide-frame-start {
+  grid-column: 1;
+}
+
+.structural-guide-rail-boundary {
+  grid-column: 4;
+}
+
+.structural-guide-reading-start {
+  grid-column: 5;
+}
+
+.structural-guide-reading-measure {
+  grid-column: 13;
+}
+
+.structural-guide-reading-end {
+  grid-column: 15;
+}
+
+.structural-guide-reading-start::before,
+.structural-guide-reading-measure::before {
+  bottom: auto;
+  background: linear-gradient(to bottom, var(--rule) 0%, var(--rule) 55%, transparent 100%);
+}
+
+.structural-guide-reading-start::before {
+  height: 220px;
+}
+
+.structural-guide-reading-measure::before {
+  height: 560px;
+}
+
+.structural-guide-tick {
+  position: sticky;
+  z-index: 1;
+  top: 0;
+  display: block;
+  width: 2px;
+  height: 20px;
+  padding-top: 8px;
+  background: var(--page);
+  transform: translateX(-1px);
+}
+
+.structural-guide-tick::after {
+  display: block;
+  width: 2px;
+  height: 8px;
+  background: var(--muted);
+  content: "";
+  opacity: 0.55;
 }
 
 .site-rail {
@@ -111,8 +192,6 @@ button:focus-visible {
   height: 100vh;
   height: 100dvh;
   padding: 176px 22px 36px var(--rail-safe-inset);
-  border-right: 1px solid var(--rule);
-  border-left: 1px solid var(--rule);
 }
 
 .rail-header {
@@ -236,10 +315,20 @@ button:focus-visible {
 }
 
 .content-column {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+  grid-auto-rows: max-content;
   grid-column: 4 / -1;
+  align-content: start;
   min-width: 0;
-  padding: 176px 64px 144px;
-  border-right: 1px solid var(--rule);
+  padding: 176px 0 144px;
+}
+
+.content-column > * {
+  grid-column: 2 / span 10;
+  min-width: 0;
 }
 
 .page-intro {
@@ -273,7 +362,6 @@ button:focus-visible {
 }
 
 .section-kicker,
-.chapter-context,
 .domain-page-number,
 .entry-date,
 .archive-entry-number,
@@ -295,12 +383,19 @@ button:focus-visible {
 }
 
 .section-kicker,
-.chapter-context,
 .domain-page-number {
   margin: 0 0 24px;
 }
 
 .lede {
+  max-width: 68ch;
+  margin: 27px 0 0;
+  color: var(--ink);
+  font-size: 15px;
+  line-height: 1.5;
+}
+
+.page-intro-support {
   max-width: 68ch;
   margin: 27px 0 0;
   color: var(--ink);
@@ -590,7 +685,7 @@ button:focus-visible {
 .site-footer {
   display: flex;
   justify-content: space-between;
-  width: min(calc(100% - 128px), 1472px);
+  width: min(calc(100% - 128px), 1312px);
   margin: 0 auto;
   padding: 25px 0 34px;
   border-top: 1px solid var(--rule-strong);
@@ -646,6 +741,19 @@ button:focus-visible {
     padding: 0 32px;
   }
 
+  .structural-grid {
+    inset: 0 32px;
+    grid-template-columns: repeat(12, minmax(0, 1fr));
+  }
+
+  .structural-guide-reading-measure {
+    grid-column: 10;
+  }
+
+  .structural-guide-reading-end {
+    grid-column: 12;
+  }
+
   .site-rail {
     grid-column: 1 / span 3;
     --rail-safe-inset: 20px;
@@ -653,9 +761,12 @@ button:focus-visible {
   }
 
   .content-column {
+    grid-template-columns: repeat(9, minmax(0, 1fr));
     grid-column: 4 / -1;
-    padding-right: 32px;
-    padding-left: 32px;
+  }
+
+  .content-column > * {
+    grid-column: 2 / span 7;
   }
 
   .course-grid {
@@ -696,6 +807,10 @@ button:focus-visible {
     width: 100%;
     min-height: 100vh;
     padding: 0 20px;
+  }
+
+  .structural-grid {
+    display: none;
   }
 
   .site-rail {
@@ -774,6 +889,7 @@ button:focus-visible {
   }
 
   .content-column {
+    display: block;
     padding: 88px 0 100px;
     border-right: 0;
   }
