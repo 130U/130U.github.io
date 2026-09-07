@@ -1,0 +1,43 @@
+{
+  "name": "theodore-ouyang-site",
+  "version": "1.0.0",
+  "private": true,
+  "engines": {
+    "node": ">=22.13.0"
+  },
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build && node scripts/assemble-static.mjs",
+    "check:protected-sources": "node scripts/check-protected-sources.mjs",
+    "check:visible-copy": "node scripts/verify-visible-copy.mjs",
+    "preview:static": "node scripts/preview-static.mjs",
+    "typecheck": "tsc --noEmit",
+    "test": "npm run build && npm run test:artifact && npm run check:visible-copy",
+    "test:artifact": "node --test",
+    "check": "npm run check:protected-sources && npm run lint && npm test",
+    "generate:brand-icons": "node scripts/generate-brand-icons.mjs",
+    "lint": "eslint .",
+    "optimize:images": "node scripts/optimize-images.mjs"
+  },
+  "dependencies": {
+    "next": "16.2.12",
+    "react": "19.2.8",
+    "react-dom": "19.2.8"
+  },
+  "devDependencies": {
+    "@types/node": "22.19.19",
+    "@types/react": "19.2.14",
+    "@types/react-dom": "19.2.3",
+    "eslint": "9.39.4",
+    "eslint-config-next": "16.2.12",
+    "sharp": "0.35.3",
+    "typescript": "5.9.3"
+  },
+  "overrides": {
+    "js-yaml": "4.3.1",
+    "nanoid": "3.3.18",
+    "postcss": "8.5.25",
+    "sharp": "0.35.3"
+  },
+  "type": "module"
+}

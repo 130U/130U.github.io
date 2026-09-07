@@ -1,0 +1,41 @@
+{
+  "schema_version": 1,
+  "diagram_type": "architecture",
+  "meta": {
+    "title": "Theodore · 网站架构",
+    "locale": "zh-CN",
+    "quality_profile": "showcase",
+    "viewBox": [1380, 700]
+  },
+  "components": [
+    { "id": "content-registry", "type": "external", "label": "内容与路由", "sublabel": "registry · Markdown", "pos": [45, 300], "size": [175, 76] },
+    { "id": "static-render", "type": "frontend", "label": "Next.js 16", "sublabel": "构建期渲染 · React 19", "brand": "next-js", "tag": "output: export", "pos": [315, 300], "size": [185, 76] },
+    { "id": "site-bundle", "type": "frontend", "label": "静态网站产物", "sublabel": "website/out/", "pos": [590, 300], "size": [175, 76] },
+    { "id": "pages-host", "type": "cloud", "label": "GitHub Pages", "sublabel": "www.theodoreoy.com", "pos": [865, 300], "size": [185, 76] },
+    { "id": "reader-browser", "type": "external", "label": "访客浏览器", "sublabel": "HTML · CSS · JavaScript", "pos": [1145, 300], "size": [185, 76] },
+    { "id": "brand-library", "type": "frontend", "label": "LO 品牌资源", "sublabel": "标志 · 图标 · 社交封面", "pos": [45, 535], "size": [175, 76] },
+    { "id": "actions-quality", "type": "cloud", "label": "GitHub Actions", "sublabel": "检查 · 构建 · 发布", "pos": [315, 95], "size": [185, 76] },
+    { "id": "architecture-viewer", "type": "external", "label": "架构文档", "sublabel": "architecture/index.html", "pos": [590, 95], "size": [175, 76] },
+    { "id": "browser-islands", "type": "frontend", "label": "浏览器交互", "sublabel": "导航 · 首页 Canvas 动效", "pos": [1145, 535], "size": [185, 76] }
+  ],
+  "boundaries": [
+    { "kind": "region", "label": "内容与品牌", "wraps": ["content-registry", "brand-library"], "pad": 24 },
+    { "kind": "region", "label": "构建与验证", "wraps": ["static-render", "site-bundle", "actions-quality", "architecture-viewer"], "pad": 24 },
+    { "kind": "region", "label": "静态交付", "wraps": ["pages-host", "reader-browser", "browser-islands"], "pad": 24 }
+  ],
+  "connections": [
+    { "id": "content-build", "from": "content-registry", "to": "static-render", "label": "读取内容", "variant": "emphasis" },
+    { "id": "build-output", "from": "static-render", "to": "site-bundle", "label": "静态导出", "variant": "emphasis" },
+    { "id": "output-deploy", "from": "site-bundle", "to": "pages-host", "label": "发布产物", "variant": "emphasis" },
+    { "id": "pages-browser", "from": "pages-host", "to": "reader-browser", "label": "HTTPS", "variant": "emphasis" },
+    { "id": "brand-build", "from": "brand-library", "to": "static-render", "label": "资源打包" },
+    { "id": "quality-build", "from": "actions-quality", "to": "static-render", "label": "npm run check", "labelDy": 76 },
+    { "id": "architecture-publish", "from": "architecture-viewer", "to": "site-bundle", "label": "复制 HTML", "labelDy": 76 },
+    { "id": "browser-enhance", "from": "reader-browser", "to": "browser-islands", "label": "客户端增强", "labelDy": 91 }
+  ],
+  "cards": [
+    { "dot": "cyan", "title": "以内容为核心", "items": ["4 个主导航页面与 5 个经历详情页", "统一路由注册表与 Markdown 内容源"] },
+    { "dot": "emerald", "title": "构建完成即可交付", "items": ["9 个静态页面、404 与独立架构页", "运行时无需 API、数据库或身份认证"] },
+    { "dot": "violet", "title": "克制的交互", "items": ["导航与 Canvas 动效在浏览器运行", "架构页独立提供检索、主题和导出"] }
+  ]
+}
