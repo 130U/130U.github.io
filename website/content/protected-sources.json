@@ -1,0 +1,13 @@
+{
+  "version": 1,
+  "normalization": "LF",
+  "sources": {
+    "app/education/page.tsx": "fdd4bd0b88203d6753b5d8ba0653f62f4704367d8862dc863db1c0a5dabb8887",
+    "app/now/page.tsx": "293642ebb1b0e7fa21c69f34dcc5f0fd2fe396ca847d69b01818c4ea7dfa3888",
+    "app/past-experience/page.tsx": "3731858797e3a1e66135e6de87ad49e626971c8e18e86440c5d55de5dc523a11",
+    "app/past-experience/[slug]/page.tsx": "a89b781c0a6a74b9295635d5495c4e2cc2cf2d890cc879578ebfd04a9f6db84b",
+    "app/past-experience/components/ExperienceDomainPage.tsx": "064ce14220d4080b7f4bb0ed619f4676f0185166f8f756ed3d6f53f8cc94317b",
+    "app/lib/content/experience.ts": "01875681354d96713bf3025ce48e7f56febf3616ef3c8d921e48fb9f09846d72",
+    "content/past-experience/archive-through-2026-06-30.md": "ed0bc21996ef84788dbf76d36311bd6552d775b023b2d80cddc4192aed90957f"
+  }
+}
