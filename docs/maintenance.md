@@ -28,6 +28,9 @@ Paths in this table are relative to `website/`.
 | Current Chapter | `/now/` | `app/now/page.tsx` |
 | Architecture | `/architecture/` | `../architecture/index.html` |
 
+`content/past-experience/experience.md` contains the current experience record.
+Use domain, organization, project, and optional subsection headings, followed by
+plain-text bullets. Each organization requires Position, Location, and Dates.
 The experience registry validates five domains and their Markdown entries during
 build. `app/lib/content/routes.ts` supplies the website sitemap. The architecture
 viewer is a separate repository reference, linked from the GitHub introduction.
@@ -71,7 +74,7 @@ cd website
 npm ci --ignore-scripts
 npm run check
 npm run typecheck
-npm audit --audit-level=moderate
+npm audit --audit-level=low
 npm run preview:static
 ```
 
@@ -85,10 +88,13 @@ validates, audits dependencies, and uploads `website/out/` to GitHub Pages. Buil
 have read-only repository access; only deployment receives Pages write and OIDC access.
 After publishing, verify the workflow for the exact commit and the live domain separately.
 
-The website's HTML content policy restricts resources to the site origin and disables
-frames, objects, and script attributes. Its inline scripts support the static Next.js
-export. GitHub Pages controls HTTP response headers; the HTML policy is not a substitute
-for host-level controls. Dependency audit results describe the advisories available at
+The build computes SHA-256 permissions for the exact inline scripts in each exported
+HTML page, including the architecture viewer. The policy appears before scripts and
+blocks arbitrary inline scripts, evaluation, frames, objects, and form submission.
+The architecture viewer additionally permits its Google Fonts resources and the
+single hashed stylesheet-load handler. Inline styles support the canvas and viewer.
+GitHub Pages controls HTTP response headers; the HTML policy is not a substitute for
+host-level controls. Dependency audit results describe the advisories available at
 run time and do not prove the absence of vulnerabilities.
 
 See [architecture](../architecture/README.md) for viewer editing and validation.

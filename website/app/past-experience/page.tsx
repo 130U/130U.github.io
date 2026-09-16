@@ -7,7 +7,7 @@ import { createPageMetadata } from "../lib/content/site";
 export const metadata: Metadata = createPageMetadata({
   title: "Past Experience",
   description:
-    "Theodore before July 1st, 2026: a full personal record organized across five domains.",
+    "Experience through September 2026: a full personal record organized across five domains.",
   path: "/past-experience/",
 });
 
@@ -16,7 +16,7 @@ export default function PastExperiencePage() {
     <SiteShell active="experience">
       <header className="page-intro plain-page-intro experience-intro">
         <h1>Past Experience</h1>
-        <p className="page-intro-support">Theodore before July 1st, 2026.</p>
+        <p className="page-intro-support">Experience through September 2026</p>
       </header>
 
       <nav className="domain-directory" aria-label="Experience domains">

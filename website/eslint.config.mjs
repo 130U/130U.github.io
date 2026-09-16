@@ -8,6 +8,8 @@ const eslintConfig = defineConfig([
   globalIgnores([
     ".next/**",
     "out/**",
+    ".npm-cache/**",
+    "coverage/**",
     "next-env.d.ts",
   ]),
 ]);
