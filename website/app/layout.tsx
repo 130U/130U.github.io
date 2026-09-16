@@ -6,6 +6,7 @@ import {
   SITE_URL,
   absoluteUrl,
 } from "./lib/content/site";
+import "../public/assets/fonts/inter.css";
 import "./globals.css";
 
 const DEVELOPMENT_SECURITY_POLICY = [
@@ -104,6 +105,13 @@ export default function RootLayout({
   return (
     <html lang="en" data-scroll-behavior="smooth">
       <head>
+        <link
+          rel="preload"
+          href="/assets/fonts/InterVariable.woff2"
+          as="font"
+          type="font/woff2"
+          crossOrigin="anonymous"
+        />
         {process.env.NODE_ENV === "development" && (
           <meta httpEquiv="Content-Security-Policy" content={DEVELOPMENT_SECURITY_POLICY} />
         )}

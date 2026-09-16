@@ -20,6 +20,6 @@ node <archify>/bin/archify.mjs validate architecture architecture/site.json --qu
 node <archify>/bin/archify.mjs deliver architecture architecture/site.json architecture/index.html --quality showcase --json
 ```
 
-`<archify>` 为本机 Archify Skill 所在目录。完整网站检查执行 `npm --prefix website run check`；构建脚本将架构 HTML 一并发布至 `/architecture/`。
+`<archify>` 为本机 Archify Skill 所在目录。生成的 HTML 应遵循网站字体契约：加载 `../assets/fonts/inter.css`，预加载 Inter 常规字体，文字继承 `--font-text`。完整网站检查执行 `npm --prefix website run check`；构建脚本将架构 HTML 一并发布至 `/architecture/`。
 
-查看器由 Archify 生成，采用 MIT 许可。在线时可加载 Google Fonts 的 JetBrains Mono 字体；离线时使用系统字体，图表与交互仍可用。
+查看器由 Archify 生成，采用 MIT 许可。发布页面使用网站自托管的 Inter；单独下载 HTML 时使用系统无衬线后备字体，图表与交互仍可用。Inter 字体以 SIL Open Font License 发布，许可随字体文件提供。

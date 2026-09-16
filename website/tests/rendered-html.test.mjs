@@ -42,6 +42,10 @@ const EXPECTED_PUBLIC_ASSETS = [
   "assets/brand/favicon.ico",
   "assets/brand/lo-mark.svg",
   "assets/brand/og-1774.jpg",
+  "assets/fonts/InterVariable-Italic.woff2",
+  "assets/fonts/InterVariable.woff2",
+  "assets/fonts/LICENSE.txt",
+  "assets/fonts/inter.css",
 ];
 
 function decodeHtml(value) {

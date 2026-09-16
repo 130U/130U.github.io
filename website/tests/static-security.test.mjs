@@ -48,10 +48,10 @@ test("static policies are deterministic and normalize browser line endings", () 
   assert.throws(() => secureStaticHtml("<body></body>"), /must have a head/u);
 });
 
-test("the architecture font loader has a single explicit attribute permission", () => {
+test("the architecture uses local fonts without inline event permissions", () => {
   const document = '<html><head><meta name="generator" content="archify 2"></head><body></body></html>';
   const secured = secureStaticHtml(document);
-  assert.ok(secured.includes(`script-src-attr 'unsafe-hashes' ${hash("this.media='all'")}`));
-  assert.ok(secured.includes("https://fonts.googleapis.com"));
-  assert.ok(secured.includes("https://fonts.gstatic.com"));
+  assert.ok(secured.includes("script-src-attr 'none'"));
+  assert.ok(secured.includes("font-src 'self'"));
+  assert.doesNotMatch(secured, /fonts\.googleapis|fonts\.gstatic|'unsafe-hashes'/u);
 });

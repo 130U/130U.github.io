@@ -13,11 +13,9 @@ export function secureStaticHtml(source) {
   const directives = [
     "default-src 'self'",
     `script-src 'self' ${[...new Set(scripts)].join(" ")}`.trim(),
-    isArchitecture
-      ? `script-src-attr 'unsafe-hashes' ${sourceHash("this.media='all'")}`
-      : "script-src-attr 'none'",
-    `style-src 'self' 'unsafe-inline'${isArchitecture ? " https://fonts.googleapis.com" : ""}`,
-    `font-src 'self'${isArchitecture ? " https://fonts.gstatic.com" : ""}`,
+    "script-src-attr 'none'",
+    "style-src 'self' 'unsafe-inline'",
+    "font-src 'self'",
     `img-src 'self' data:${isArchitecture ? " blob:" : ""}`,
     "connect-src 'self'",
     "media-src 'self' blob:",
