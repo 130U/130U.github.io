@@ -67,6 +67,14 @@ Add a server only when a defined product requirement needs one.
 Editable masters and served derivatives have separate roles. Only assets needed by
 visitors belong in `website/public/`.
 
+## Typography assets
+
+`website/public/assets/fonts/` contains the unmodified Inter 4.1 variable WOFF2
+files, their SIL Open Font License, and the shared font stylesheet. The source is
+the [official Inter 4.1 release](https://github.com/rsms/inter/releases/tag/v4.1).
+The site layout and architecture viewer load this same stylesheet and regular-face
+preload. Keep text in the inherited font; reserve separate lettering for brand artwork.
+
 ## Validation and publishing
 
 ```sh
@@ -91,8 +99,8 @@ After publishing, verify the workflow for the exact commit and the live domain s
 The build computes SHA-256 permissions for the exact inline scripts in each exported
 HTML page, including the architecture viewer. The policy appears before scripts and
 blocks arbitrary inline scripts, evaluation, frames, objects, and form submission.
-The architecture viewer additionally permits its Google Fonts resources and the
-single hashed stylesheet-load handler. Inline styles support the canvas and viewer.
+Fonts load from the site's own origin. Inline event handlers are blocked on every
+page. Inline styles support the canvas and viewer.
 GitHub Pages controls HTTP response headers; the HTML policy is not a substitute for
 host-level controls. Dependency audit results describe the advisories available at
 run time and do not prove the absence of vulnerabilities.

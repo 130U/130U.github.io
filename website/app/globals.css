@@ -7,8 +7,6 @@
   --rule-strong: rgba(0, 0, 0, 0.24);
   --accent: #2200ff;
   --dither: #070707;
-  --sans: "Helvetica Neue", Helvetica, Arial, sans-serif;
-  --serif: Georgia, "Times New Roman", serif;
   --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
   --drawer-ease: cubic-bezier(0.32, 0.72, 0, 1);
 }
@@ -29,8 +27,8 @@ body {
   margin: 0;
   color: var(--ink);
   background: var(--page);
-  font-family: var(--serif);
-  font-size: 15px;
+  font-family: var(--font-text);
+  font-size: 0.9375rem;
   line-height: 1.5;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
@@ -72,8 +70,7 @@ button:focus-visible {
   border: 1px solid var(--ink);
   color: var(--ink);
   background: var(--page);
-  font-family: var(--sans);
-  font-size: 13px;
+  font-size: 0.8125rem;
   line-height: 1;
   transform: translateY(calc(-100% - 24px));
   transition: transform 180ms var(--ease-out);
@@ -203,7 +200,6 @@ button:focus-visible {
   min-height: 44px;
   align-items: center;
   color: var(--ink);
-  font-family: var(--sans);
   line-height: 1;
   transition: color 180ms var(--ease-out), transform 120ms var(--ease-out);
 }
@@ -221,7 +217,6 @@ button:focus-visible {
   flex: 0 0 auto;
   align-items: center;
   color: var(--ink);
-  font-family: var(--sans);
   gap: 12px;
   transition: opacity 160ms var(--ease-out), transform 160ms var(--ease-out);
 }
@@ -238,7 +233,7 @@ button:focus-visible {
 
 .wordmark-name {
   display: block;
-  font-size: 13px;
+  font-size: 0.8125rem;
   font-weight: 400;
   letter-spacing: -0.012em;
   line-height: 1;
@@ -254,8 +249,7 @@ button:focus-visible {
   border: 0;
   color: var(--ink);
   background: transparent;
-  font-family: var(--sans);
-  font-size: 15px;
+  font-size: 0.9375rem;
   line-height: 1;
   cursor: pointer;
   transition: color 180ms var(--ease-out), transform 120ms var(--ease-out);
@@ -268,8 +262,7 @@ button:focus-visible {
 .primary-nav {
   display: grid;
   margin-top: 33px;
-  font-family: var(--sans);
-  font-size: 15px;
+  font-size: 0.9375rem;
   line-height: 1.3;
 }
 
@@ -342,7 +335,6 @@ button:focus-visible {
 .archive-entry-content h2 {
   margin: 0;
   color: var(--ink);
-  font-family: var(--sans);
   font-weight: 400;
   letter-spacing: -0.02em;
   text-wrap: balance;
@@ -350,14 +342,14 @@ button:focus-visible {
 
 .page-intro h1 {
   max-width: 920px;
-  font-size: 36px;
+  font-size: 2.25rem;
   line-height: 1.1;
 }
 
 .section-heading h2,
 .coursework > h2,
 .archive-entry-content h2 {
-  font-size: 24px;
+  font-size: 1.5rem;
   line-height: 1.2;
 }
 
@@ -367,8 +359,7 @@ button:focus-visible {
 .domain-number,
 .entry-metadata dt {
   color: var(--muted);
-  font-family: var(--sans);
-  font-size: 12px;
+  font-size: 0.75rem;
   line-height: 1.4;
 }
 
@@ -389,7 +380,7 @@ button:focus-visible {
   max-width: 68ch;
   margin: 27px 0 0;
   color: var(--ink);
-  font-size: 15px;
+  font-size: 0.9375rem;
   line-height: 1.5;
 }
 
@@ -398,8 +389,7 @@ button:focus-visible {
   min-height: 44px;
   align-items: center;
   margin-bottom: 58px;
-  font-family: var(--sans);
-  font-size: 13px;
+  font-size: 0.8125rem;
   gap: 8px;
 }
 
@@ -417,8 +407,7 @@ button:focus-visible {
 
 .education-institution h2 {
   margin: 0;
-  font-family: var(--sans);
-  font-size: 24px;
+  font-size: 1.5rem;
   font-weight: 400;
   letter-spacing: -0.02em;
   line-height: 1.2;
@@ -426,8 +415,7 @@ button:focus-visible {
 
 .education-degree {
   margin: 20px 0 0;
-  font-family: var(--serif);
-  font-size: 16px;
+  font-size: 1rem;
   font-weight: 400;
   line-height: 1.45;
 }
@@ -487,8 +475,7 @@ button:focus-visible {
 .course-grid h3 {
   min-height: 40px;
   margin: 0 0 25px;
-  font-family: var(--sans);
-  font-size: 13px;
+  font-size: 0.8125rem;
   font-weight: 500;
   line-height: 1.35;
 }
@@ -498,7 +485,7 @@ button:focus-visible {
   margin: 0;
   padding: 0;
   color: var(--muted);
-  font-size: 13px;
+  font-size: 0.8125rem;
   line-height: 1.45;
   list-style: none;
   gap: 9px;
@@ -515,7 +502,6 @@ button:focus-visible {
   min-height: 84px;
   align-items: center;
   border-bottom: 1px solid var(--rule);
-  font-family: var(--sans);
   transition: color 180ms var(--ease-out), border-color 180ms var(--ease-out);
 }
 
@@ -534,7 +520,7 @@ button:focus-visible {
 .domain-arrow {
   grid-column: 11;
   justify-self: end;
-  font-size: 18px;
+  font-size: 1.125rem;
   transition: transform 180ms var(--ease-out);
 }
 
@@ -642,9 +628,8 @@ button:focus-visible {
   margin: 32px 0 0;
   padding-left: var(--entry-value-offset);
   color: var(--ink);
-  font-family: var(--serif);
   font-size: var(--experience-font-size);
-  font-weight: 700;
+  font-weight: 600;
   line-height: 1.55;
   text-wrap: balance;
 }
@@ -658,7 +643,6 @@ button:focus-visible {
   margin: 28px 0 0;
   padding-left: var(--entry-value-offset);
   color: var(--ink);
-  font-family: var(--serif);
   font-size: var(--experience-font-size);
   font-style: italic;
   font-weight: 400;
@@ -679,7 +663,6 @@ button:focus-visible {
   max-width: min(72ch, 720px);
   margin: 20px 0 0;
   padding: 0;
-  font-family: var(--serif);
   font-size: var(--experience-font-size);
   font-weight: 400;
   line-height: 1.55;
@@ -716,7 +699,7 @@ button:focus-visible {
 .current-chapter-brief p {
   max-width: 72ch;
   margin: 0;
-  font-size: 17px;
+  font-size: 1.0625rem;
   line-height: 1.55;
 }
 
@@ -728,8 +711,7 @@ button:focus-visible {
   padding: 25px 0 34px;
   border-top: 1px solid var(--rule-strong);
   color: var(--muted);
-  font-family: var(--sans);
-  font-size: 12px;
+  font-size: 0.75rem;
   line-height: 1.4;
 }
 
@@ -945,13 +927,13 @@ button:focus-visible {
   .primary-nav {
     grid-template-columns: repeat(2, minmax(0, 1fr));
     margin: 0;
-    font-size: 16px;
+    font-size: 1rem;
     line-height: 1.2;
   }
 
   .site-rail[data-enhanced="true"] .primary-nav {
     grid-template-columns: 1fr;
-    font-size: 24px;
+    font-size: 1.5rem;
   }
 
   .primary-nav a {
@@ -974,7 +956,7 @@ button:focus-visible {
   }
 
   .page-intro h1 {
-    font-size: 24px;
+    font-size: 1.5rem;
     line-height: 1.2;
   }
 
@@ -982,7 +964,7 @@ button:focus-visible {
   .coursework > h2,
   .archive-entry-content h2,
   .education-institution h2 {
-    font-size: 20px;
+    font-size: 1.25rem;
     line-height: 1.25;
   }
 
@@ -1077,7 +1059,7 @@ button:focus-visible {
   }
 
   .current-chapter-brief p {
-    font-size: 16px;
+    font-size: 1rem;
   }
 
   .site-footer {
