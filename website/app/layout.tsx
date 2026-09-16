@@ -8,14 +8,9 @@ import {
 } from "./lib/content/site";
 import "./globals.css";
 
-const SCRIPT_SOURCE =
-  process.env.NODE_ENV === "development"
-    ? "script-src 'self' 'unsafe-inline' 'unsafe-eval'"
-    : "script-src 'self' 'unsafe-inline'";
-
-const CONTENT_SECURITY_POLICY = [
+const DEVELOPMENT_SECURITY_POLICY = [
   "default-src 'self'",
-  SCRIPT_SOURCE,
+  "script-src 'self' 'unsafe-inline' 'unsafe-eval'",
   "script-src-attr 'none'",
   "style-src 'self' 'unsafe-inline'",
   "img-src 'self' data:",
@@ -109,7 +104,9 @@ export default function RootLayout({
   return (
     <html lang="en" data-scroll-behavior="smooth">
       <head>
-        <meta httpEquiv="Content-Security-Policy" content={CONTENT_SECURITY_POLICY} />
+        {process.env.NODE_ENV === "development" && (
+          <meta httpEquiv="Content-Security-Policy" content={DEVELOPMENT_SECURITY_POLICY} />
+        )}
       </head>
       <body>
         <script

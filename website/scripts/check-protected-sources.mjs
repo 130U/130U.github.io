@@ -11,7 +11,7 @@ const PROTECTED_PATHS = [
   "app/past-experience/[slug]/page.tsx",
   "app/past-experience/components/ExperienceDomainPage.tsx",
   "app/lib/content/experience.ts",
-  "content/past-experience/archive-through-2026-06-30.md",
+  "content/past-experience/experience.md",
 ];
 
 export function verifyProtectedSources(root = ROOT) {

@@ -5,6 +5,7 @@ import path from "node:path";
 import test from "node:test";
 import { fileURLToPath } from "node:url";
 import sharp from "sharp";
+import { secureStaticHtml } from "../scripts/secure-static-html.mjs";
 
 const ROOT = fileURLToPath(new URL("../", import.meta.url));
 const REPOSITORY_ROOT = path.dirname(ROOT.replace(/[\\/]$/u, ""));
@@ -28,11 +29,11 @@ const NAVIGATION = [
   ["Current Chapter", "/now/"],
 ];
 const DOMAINS = [
-  ["Artificial Intelligence", "/past-experience/artificial-intelligence/", 4, 24],
-  ["Data Science", "/past-experience/data-science/", 3, 19],
-  ["Environmental, Social, and Governance", "/past-experience/environmental-social-and-governance/", 4, 8],
-  ["Finance", "/past-experience/finance/", 3, 28],
-  ["STEM Academic Competitions and Training", "/past-experience/stem-academic-competitions-and-training/", 2, 13],
+  ["Artificial Intelligence", "/past-experience/artificial-intelligence/", 3, 33],
+  ["Data Science", "/past-experience/data-science/", 3, 20],
+  ["Environmental Social and Governance", "/past-experience/environmental-social-and-governance/", 3, 5],
+  ["Finance and Consulting", "/past-experience/finance/", 4, 23],
+  ["STEM Academic Competitions and Training", "/past-experience/stem-academic-competitions-and-training/", 2, 6],
 ];
 const EXPECTED_PUBLIC_ASSETS = [
   "assets/brand/apple-touch-icon.png",
@@ -126,23 +127,23 @@ test("the static export contains nine website routes and the architecture viewer
   assert.ok(existsSync(path.join(OUT, "404.html")));
 });
 
-test("the architecture viewer is published directly from its repository source", async () => {
-  const source = await readFile(path.join(REPOSITORY_ROOT, "architecture", "index.html"));
-  const published = await readFile(path.join(OUT, "architecture", "index.html"));
-  assert.deepEqual(published, source);
-  assert.match(published.toString("utf8"), /<!doctype html>/iu);
-  assert.match(published.toString("utf8"), /<svg\b/iu);
+test("the architecture viewer preserves its source with a static security policy", async () => {
+  const source = await readFile(path.join(REPOSITORY_ROOT, "architecture", "index.html"), "utf8");
+  const published = await readFile(path.join(OUT, "architecture", "index.html"), "utf8");
+  assert.equal(published, secureStaticHtml(source));
+  assert.match(published, /<!doctype html>/iu);
+  assert.match(published, /<svg\b/iu);
 });
 
 test("every route keeps canonical metadata, CSP, and the same navigation", async () => {
   const requiredCsp = [
     "default-src 'self'",
-    "script-src 'self' 'unsafe-inline'",
+    "script-src 'self' 'sha256-",
     "script-src-attr 'none'",
     "frame-src 'none'",
     "object-src 'none'",
     "base-uri 'self'",
-    "form-action 'self'",
+    "form-action 'none'",
   ];
   for (const route of ROUTES) {
     const html = await routeHtml(route);
@@ -187,10 +188,10 @@ test("inner routes present text-focused pages and the Current Chapter introducti
   assert.match(now, /expand human capability/u);
 });
 
-test("Past Experience presents five domains, 16 entries, and 92 bullets", async () => {
+test("Past Experience presents five domains, 15 entries, and 87 bullets", async () => {
   const directory = await routeHtml("/past-experience/");
   assert.match(directory, /<h1>Past Experience<\/h1>/u);
-  assert.match(directory, /class="page-intro-support">Theodore before July 1st, 2026\.<\/p>/u);
+  assert.match(directory, /class="page-intro-support">Experience through September 2026<\/p>/u);
   assert.equal(elementsWithClass(directory, "a", "domain-directory-link").length, 5);
   let entries = 0;
   let bullets = 0;
@@ -213,8 +214,30 @@ test("Past Experience presents five domains, 16 entries, and 92 bullets", async 
     entries += routeEntries.length;
     bullets += routeBullets;
   }
-  assert.equal(entries, 16);
-  assert.equal(bullets, 92);
+  assert.equal(entries, 15);
+  assert.equal(bullets, 87);
+});
+
+test("experience pages retain the resume project hierarchy and consulting placement", async () => {
+  const ai = await routeHtml("/past-experience/artificial-intelligence/");
+  const micro1 = elementsWithClass(ai, "article", "archive-entry")[0][2];
+  assert.match(micro1, /<h2>micro1<\/h2>/u);
+  assert.deepEqual(elementsWithClass(micro1, "h3", "entry-project").map((match) => stripMarkup(match[2])), [
+    "Project 1: LLM Advertising Evaluation and Statistical Decision Modeling",
+    "Project 2: Domain Evaluation and Human Preference Data Engineering",
+  ]);
+  assert.deepEqual(elementsWithClass(micro1, "h4", "entry-section-heading").map((match) => stripMarkup(match[2])), [
+    "Evaluation operations and Bayesian quality control",
+    "Experimentation and recommendation strategy",
+  ]);
+  assert.deepEqual(elementsWithClass(micro1, "ul", "archive-bullets").map((match) => (match[2].match(/<li\b/gu) ?? []).length), [9, 7, 11]);
+  assert.match(stripMarkup(micro1), /November 2025 – September 2026/u);
+  const finance = await routeHtml("/past-experience/finance/");
+  assert.deepEqual(elementsWithClass(finance, "article", "archive-entry").map((match) => stripMarkup(match[2].match(/<h2>(.*?)<\/h2>/u)[1])), [
+    "Jones Lang LaSalle Capital Markets Team", "Hubble Network", "SAIF Partners", "CITIC Securities",
+  ]);
+  const esg = await routeHtml("/past-experience/environmental-social-and-governance/");
+  assert.doesNotMatch(esg, /Hubble Network/u);
 });
 
 test("Education presents both degrees, 31 courses, and the advisor record", async () => {
@@ -301,7 +324,7 @@ test("the production design contract is restrained and dependency-light", async 
   assert.match(navigation, /wordmark-lockup[\s\S]*?wordmark-mark[\s\S]*?wordmark-name[\s\S]*?>Theodore Ouyang<\/span>/u);
   assert.match(layout, /assets\/brand\/lo-mark\.svg/u);
   assert.match(globals, /\.entry-metadata\s*\{[\s\S]*?grid-template-columns:\s*1fr/u);
-  assert.match(globals, /\.entry-project\s*\{[\s\S]*?color:\s*var\(--muted\)/u);
+  assert.match(globals, /\.entry-project\s*\{[\s\S]*?color:\s*var\(--ink\)/u);
   assert.match(globals, /\.archive-bullets li::before\s*\{[\s\S]*?width:\s*3px[\s\S]*?content:\s*""/u);
   assert.deepEqual(Object.keys(packageJson.dependencies).sort(), ["next", "react", "react-dom"]);
 });

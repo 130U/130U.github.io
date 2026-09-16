@@ -1,6 +1,18 @@
-import { copyFile, lstat, mkdir, readdir, rename, rmdir } from "node:fs/promises";
+import { copyFile, lstat, mkdir, readFile, readdir, rename, rmdir, writeFile } from "node:fs/promises";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
+import { secureStaticHtml } from "./secure-static-html.mjs";
+
+async function secureHtmlFiles(directory) {
+  for (const entry of await readdir(directory, { withFileTypes: true })) {
+    const filename = path.join(directory, entry.name);
+    if (entry.isSymbolicLink()) throw new Error("Static export entries must not be symbolic links.");
+    if (entry.isDirectory()) await secureHtmlFiles(filename);
+    else if (entry.isFile() && entry.name.endsWith(".html")) {
+      await writeFile(filename, secureStaticHtml(await readFile(filename, "utf8")));
+    }
+  }
+}
 
 export async function normalizeSegmentPayloads(directory) {
   const root = path.resolve(directory);
@@ -57,6 +69,7 @@ async function assembleStaticExport() {
   for (const filename of ["index.html", "LICENSE"]) {
     await copyFile(new URL(`../../architecture/${filename}`, import.meta.url), new URL(filename, destination));
   }
+  await secureHtmlFiles(fileURLToPath(new URL("../out/", import.meta.url)));
   console.log(`Assembled /architecture/ and ${normalized} segment payload filenames.`);
 }
 

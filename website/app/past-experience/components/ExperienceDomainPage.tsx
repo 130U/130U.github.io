@@ -2,7 +2,7 @@ import Link from "next/link";
 import { SiteShell } from "../../components/SiteShell";
 import type { ExperienceDomain } from "../../lib/content/experience";
 
-const metadataOrder = ["Location", "Website", "Position", "Dates"] as const;
+const metadataOrder = ["Position", "Location", "Dates", "Website"] as const;
 const entryIndices = "abcdefghijklmnopqrstuvwxyz";
 
 function formatWebsiteLabel(website: string) {
@@ -28,7 +28,7 @@ export function ExperienceDomainPage({
         {domain.entries.map((entry, entryIndex) => (
           <article
             className="archive-entry"
-            key={`${entry.organization}-${entry.metadata.Project}`}
+            key={`${entry.organization}-${entryIndex}`}
           >
             <div className="archive-entry-number" aria-hidden="true">
               {entryIndices[entryIndex]}
@@ -65,20 +65,23 @@ export function ExperienceDomainPage({
                   );
                 })}
               </dl>
-              <p className="entry-project">
-                <span>Project</span>
-                {entry.metadata.Project}
-              </p>
-              {entry.summaries.map((summary, summaryIndex) => (
-                <p className="entry-summary" key={`${summary.slice(0, 48)}-${summaryIndex}`}>
-                  {summary}
-                </p>
+              {entry.projects.map((project, projectIndex) => (
+                <div className="entry-project-group" key={`${project.title}-${projectIndex}`}>
+                  <h3 className="entry-project">{project.title}</h3>
+                  {project.sections.map((section, sectionIndex) => (
+                    <div className="entry-project-section" key={sectionIndex}>
+                      {section.heading && (
+                        <h4 className="entry-section-heading">{section.heading}</h4>
+                      )}
+                      <ul className="archive-bullets">
+                        {section.bullets.map((bullet, bulletIndex) => (
+                          <li key={bulletIndex}>{bullet}</li>
+                        ))}
+                      </ul>
+                    </div>
+                  ))}
+                </div>
               ))}
-              <ul className="archive-bullets">
-                {entry.bullets.map((bullet, bulletIndex) => (
-                  <li key={`${bullet.slice(0, 48)}-${bulletIndex}`}>{bullet}</li>
-                ))}
-              </ul>
             </div>
           </article>
         ))}

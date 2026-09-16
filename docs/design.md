@@ -25,9 +25,27 @@ master is `website/source-assets/brand/lo-mark.svg`.
 Interface text uses Helvetica Neue, Helvetica, and Arial. Narrative text uses Georgia
 with Times New Roman and system serif fallbacks. The website uses system fonts.
 Desktop page headings use 36px / 1.1 regular sans with -0.02em tracking; phone headings
-use 24px / 1.2. Body copy uses 15px / 1.5 serif on desktop and 16px on phones.
+use 24px / 1.2. Compact copy and metadata use 15px / 1.5 serif. Sustained reading
+on Home, Current Chapter, and Past Experience uses 17px / 1.55, reducing to 16px
+on phones.
 Blue marks active navigation, focus, and link feedback. Flat surfaces and square corners
 keep hierarchy in typography, spacing, and rules.
+
+### Past Experience typography
+
+Domain links and institution headings use regular sans at 24px on desktop and 20px
+on phones. Within an experience, project headings, subsection headings, and bullets
+share Georgia at 17px / 1.55 (16px on phones). Project headings use bold; subsection
+headings use regular italic. The shared `--experience-font-size` keeps their reading
+scale consistent. Headings wrap with balanced lines. Numbered project titles use a
+colon between the project number and name.
+
+Narrative bullets use regular Georgia, a 1.55 line height, and 18px between items.
+Their measure is capped at 720px including the existing metadata alignment indent.
+Metadata stays compact, upright, and regular; labels retain the shared muted sans.
+Bold identifies a project and italic introduces a theme within it. Dates, roles,
+and bullets stay upright. Preserve the approved resume prose and its emphasis
+through this structural hierarchy.
 
 ## Reading frame
 
@@ -39,7 +57,8 @@ Without JavaScript, the links remain visible in normal document flow.
 
 Horizontal gutters are 64px on desktop, 32px on tablet, and 20px on phones.
 Structural guides are decorative and hidden from assistive technology; phone layouts
-omit them. At 540px and below, metadata stacks and long values can wrap.
+omit them. Below 1024px, experience metadata stacks and narrative text uses the full
+reading track. Long values can wrap without narrowing the experience prose.
 Coordinates use a content-weighted desktop row, a tablet matrix, and a phone column.
 Coarse pointers receive 44px primary navigation and standalone link targets.
 

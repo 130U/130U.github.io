@@ -1,7 +1,7 @@
 import { readFileSync } from "node:fs";
 import { join } from "node:path";
 
-const requiredMetadataKeys = ["Location", "Position", "Dates", "Project"] as const;
+const requiredMetadataKeys = ["Location", "Position", "Dates"] as const;
 const optionalMetadataKeys = ["Website"] as const;
 const metadataKeys = [...requiredMetadataKeys, ...optionalMetadataKeys] as const;
 type ExperienceMetadataKey = (typeof metadataKeys)[number];
@@ -11,11 +11,20 @@ type OptionalExperienceMetadataKey = (typeof optionalMetadataKeys)[number];
 type ExperienceMetadata = Record<RequiredExperienceMetadataKey, string> &
   Partial<Record<OptionalExperienceMetadataKey, string>>;
 
+export type ExperienceSection = {
+  heading?: string;
+  bullets: string[];
+};
+
+export type ExperienceProject = {
+  title: string;
+  sections: ExperienceSection[];
+};
+
 export type ExperienceEntry = {
   organization: string;
   metadata: ExperienceMetadata;
-  summaries: string[];
-  bullets: string[];
+  projects: ExperienceProject[];
 };
 
 export type ExperienceDomain = {
@@ -31,10 +40,10 @@ export const experienceDomainDefinitions = [
   { number: "02", name: "Data Science", slug: "data-science" },
   {
     number: "03",
-    name: "Environmental, Social, and Governance",
+    name: "Environmental Social and Governance",
     slug: "environmental-social-and-governance",
   },
-  { number: "04", name: "Finance", slug: "finance" },
+  { number: "04", name: "Finance and Consulting", slug: "finance" },
   {
     number: "05",
     name: "STEM Academic Competitions and Training",
@@ -53,12 +62,14 @@ export function parsePastExperience(markdown: string): ParsedDomain[] {
   const start = lines.findIndex((line) => line.trim() === "## Domain Experience");
 
   if (start === -1) {
-    throw new Error("The Domain Experience section is missing from the archive.");
+    throw new Error("The Domain Experience section is missing from the experience source.");
   }
 
   const domains: ParsedDomain[] = [];
   let domain: ParsedDomain | undefined;
   let entry: DraftEntry | undefined;
+  let project: ExperienceProject | undefined;
+  let section: ExperienceSection | undefined;
 
   const finishEntry = () => {
     if (!entry) return;
@@ -69,8 +80,13 @@ export function parsePastExperience(markdown: string): ParsedDomain[] {
         throw new Error(`${entry.organization} is missing required metadata: ${key}`);
       }
     }
-    if (entry.bullets.length === 0) {
-      throw new Error(`${entry.organization} must include at least one experience bullet.`);
+    if (entry.projects.length === 0) {
+      throw new Error(`${entry.organization} must include at least one project.`);
+    }
+    for (const project of entry.projects) {
+      if (project.sections.length === 0 || project.sections.some(({ bullets }) => bullets.length === 0)) {
+        throw new Error(`${entry.organization}: every section of ${project.title} must include experience bullets.`);
+      }
     }
 
     domain.entries.push({
@@ -78,6 +94,8 @@ export function parsePastExperience(markdown: string): ParsedDomain[] {
       metadata: entry.metadata as ExperienceMetadata,
     });
     entry = undefined;
+    project = undefined;
+    section = undefined;
   };
 
   const finishDomain = () => {
@@ -109,12 +127,30 @@ export function parsePastExperience(markdown: string): ParsedDomain[] {
       finishEntry();
       const organization = line.slice(5).trim();
       if (!organization) throw new Error("Experience organization cannot be empty.");
-      entry = { organization, metadata: {}, summaries: [], bullets: [] };
+      entry = { organization, metadata: {}, projects: [] };
       continue;
     }
 
     if (!entry) {
       throw new Error(`Unexpected content in Domain Experience: ${line}`);
+    }
+
+    if (line.startsWith("##### ")) {
+      const title = line.slice(6).trim();
+      if (!title) throw new Error("Experience project title cannot be empty.");
+      project = { title, sections: [] };
+      entry.projects.push(project);
+      section = undefined;
+      continue;
+    }
+
+    if (line.startsWith("###### ")) {
+      if (!project) throw new Error(`Experience section appears before a project: ${line}`);
+      const heading = line.slice(7).trim();
+      if (!heading) throw new Error("Experience section heading cannot be empty.");
+      section = { heading, bullets: [] };
+      project.sections.push(section);
+      continue;
     }
 
     const metadata = line.match(/^\*\*(.+?):\*\*\s*(.*)$/);
@@ -133,13 +169,18 @@ export function parsePastExperience(markdown: string): ParsedDomain[] {
     }
 
     if (line.startsWith("- ")) {
+      if (!project) throw new Error(`Experience bullet appears before a project: ${line}`);
       const bullet = line.slice(2).trim();
       if (!bullet) throw new Error(`Empty experience bullet for ${entry.organization}`);
-      entry.bullets.push(bullet);
+      if (!section) {
+        section = { bullets: [] };
+        project.sections.push(section);
+      }
+      section.bullets.push(bullet);
       continue;
     }
 
-    entry.summaries.push(line);
+    throw new Error(`Unexpected experience content: ${line}`);
   }
 
   finishDomain();
@@ -157,13 +198,13 @@ export function parsePastExperience(markdown: string): ParsedDomain[] {
   return domains;
 }
 
-const archivePath = join(
+const contentPath = join(
   process.cwd(),
   "content",
   "past-experience",
-  "archive-through-2026-06-30.md",
+  "experience.md",
 );
-const parsedDomains = parsePastExperience(readFileSync(archivePath, "utf8"));
+const parsedDomains = parsePastExperience(readFileSync(contentPath, "utf8"));
 
 export const pastExperience: readonly ExperienceDomain[] = parsedDomains.map(
   (domain, index) => {
