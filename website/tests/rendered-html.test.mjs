@@ -185,8 +185,8 @@ test("inner routes present text-focused pages and the Current Chapter introducti
   const nowHtml = await routeHtml("/now/");
   const now = stripMarkup(nowHtml);
   assert.match(nowHtml, /<h1[^>]*>Current Chapter<\/h1>/u);
-  assert.match(nowHtml, /class="page-intro-support">Exploring AI in everyday life\.<\/p>/u);
-  assert.match(now, /Exploring AI in everyday life\./u);
+  assert.match(nowHtml, /class="page-intro-support">Exploring AI in everyday life<\/p>/u);
+  assert.match(now, /Exploring AI in everyday life Theodore Ouyang/u);
   assert.match(now, /Theodore Ouyang is exploring how artificial intelligence/u);
   assert.match(now, /practical applications that solve real problems/u);
   assert.match(now, /expand human capability/u);
