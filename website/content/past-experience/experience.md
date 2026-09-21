@@ -50,6 +50,8 @@
 
 ##### Project 2: Domain Evaluation and Human Preference Data Engineering
 
+- An exploratory engineering project applying advanced synthetic-data approaches to financial-domain LLM post-training. Combining perturbation-based data augmentation with expert-defined, constraint-aware scenario generation, the project translated real-world evidence, variable dependencies, and business-validity requirements into scalable human preference-data workflows. Its methodological context spans input-noise training (Bishop, 1995), financial scenario generation (Høyland et al., 2003), and synthetic alignment-data pipelines (NVIDIA, 2024).
+
 - Led a domain task module within a 100-person expert project team, owning requirements, golden examples, scoring rubrics, data-expansion rules, pilot validation, and the handoff to scaled preference-data production across financial, consumer, and marketing scenarios.
 
 - Converted domain research and business evidence into scenario matrices, task specifications, input datasets, and acceptance criteria; identified decision-critical variables and recurring reasoning failures before expert production began.
@@ -110,7 +112,7 @@
 
 ##### Issuer Screening Infrastructure and Human Preference Ranking
 
-- Reported directly to the CEO and translated partnership-sourcing requirements into an issuer-level screening and prioritization system; narrowed 18,000+ CoinGecko token records to approximately 800 candidate issuers and 30 priority counterparties and delivered selection analysis supporting verification preparation for 6 tokenization pilots.
+- Reported directly to co-founder Asher Gottesman and received guidance on applied cryptography from Gene Itkis (MIT Lincoln Laboratory) and on financial applications of zero-knowledge proofs from Michael Lustig (former BlackRock Managing Director and NYU Stern Adjunct Professor of Finance). Assessed potential B2B partnerships with token projects and protocol teams, evaluating their business models and potential applications of Jiritsu’s cryptographic verification and privacy-preserving computation. Translated these assessments into a screening and prioritization system, narrowing 18,000+ CoinGecko token records to approximately 800 candidate projects and 30 priority counterparties for leadership review and business-development follow-up; also supported verification preparation for 6 tokenization pilots.
 
 - Diagnosed misalignment between token-market quality and partnership value through issuer-level error analysis; revised screening criteria and feature requirements around identifiable counterparties, commercial fit, disclosure quality, and tokenization needs.
 
