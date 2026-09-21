@@ -2,7 +2,7 @@
   "version": 1,
   "normalization": "LF",
   "sources": {
-    "app/education/page.tsx": "3c58bc3bc45f6589d9932a150c68e0ed1beac18a34e20d3a5693873dfc60922c",
+    "app/education/page.tsx": "258cd370678fb0323bf47b902fa9344aa9fa30acc733ab2a006428692e6d934a",
     "app/now/page.tsx": "fd7d113253d81fdf446c20bdb01c6dc2be6f8dc72d9bd6b83c726638ab4ea73a",
     "app/past-experience/page.tsx": "f3c6126decb358a6a43107f19d75acbdbae4886d83f0139b1ee87b0a73ebe289",
     "app/past-experience/[slug]/page.tsx": "a89b781c0a6a74b9295635d5495c4e2cc2cf2d890cc879578ebfd04a9f6db84b",
