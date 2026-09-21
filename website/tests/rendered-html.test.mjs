@@ -29,7 +29,7 @@ const NAVIGATION = [
   ["Current Chapter", "/now/"],
 ];
 const DOMAINS = [
-  ["Artificial Intelligence", "/past-experience/artificial-intelligence/", 3, 33],
+  ["Artificial Intelligence", "/past-experience/artificial-intelligence/", 3, 34],
   ["Data Science", "/past-experience/data-science/", 3, 20],
   ["Environmental Social and Governance", "/past-experience/environmental-social-and-governance/", 3, 5],
   ["Finance and Consulting", "/past-experience/finance/", 4, 23],
@@ -192,7 +192,7 @@ test("inner routes present text-focused pages and the Current Chapter introducti
   assert.match(now, /expand human capability/u);
 });
 
-test("Past Experience presents five domains, 15 entries, and 87 bullets", async () => {
+test("Past Experience presents five domains, 15 entries, and 88 bullets", async () => {
   const directory = await routeHtml("/past-experience/");
   assert.match(directory, /<h1>Past Experience<\/h1>/u);
   assert.match(directory, /class="page-intro-support">Experience through September 2026<\/p>/u);
@@ -219,7 +219,7 @@ test("Past Experience presents five domains, 15 entries, and 87 bullets", async 
     bullets += routeBullets;
   }
   assert.equal(entries, 15);
-  assert.equal(bullets, 87);
+  assert.equal(bullets, 88);
 });
 
 test("experience pages retain the resume project hierarchy and consulting placement", async () => {
@@ -234,7 +234,7 @@ test("experience pages retain the resume project hierarchy and consulting placem
     "Evaluation operations and Bayesian quality control",
     "Experimentation and recommendation strategy",
   ]);
-  assert.deepEqual(elementsWithClass(micro1, "ul", "archive-bullets").map((match) => (match[2].match(/<li\b/gu) ?? []).length), [9, 7, 11]);
+  assert.deepEqual(elementsWithClass(micro1, "ul", "archive-bullets").map((match) => (match[2].match(/<li\b/gu) ?? []).length), [9, 7, 12]);
   assert.match(stripMarkup(micro1), /November 2025 – September 2026/u);
   const finance = await routeHtml("/past-experience/finance/");
   assert.deepEqual(elementsWithClass(finance, "article", "archive-entry").map((match) => stripMarkup(match[2].match(/<h2>(.*?)<\/h2>/u)[1])), [
@@ -244,12 +244,12 @@ test("experience pages retain the resume project hierarchy and consulting placem
   assert.doesNotMatch(esg, /Hubble Network/u);
 });
 
-test("Education presents both degrees, 31 courses, and the advisor record", async () => {
+test("Education presents both degrees, 49 courses, and the advisor record", async () => {
   const html = await routeHtml("/education/");
   assert.equal(elementsWithClass(html, "article", "education-entry").length, 2);
   const lists = elementsWithClass(html, "ul", "course-list");
   assert.equal(lists.length, 4);
-  assert.equal(lists.reduce((total, list) => total + (list[2].match(/<li\b/giu) ?? []).length, 0), 31);
+  assert.equal(lists.reduce((total, list) => total + (list[2].match(/<li\b/giu) ?? []).length, 0), 49);
   assert.match(html, /Mark Borsuk, Ph\.D\./u);
 });
 

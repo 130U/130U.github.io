@@ -2,12 +2,12 @@
   "version": 1,
   "normalization": "LF",
   "sources": {
-    "app/education/page.tsx": "fdd4bd0b88203d6753b5d8ba0653f62f4704367d8862dc863db1c0a5dabb8887",
+    "app/education/page.tsx": "3c58bc3bc45f6589d9932a150c68e0ed1beac18a34e20d3a5693873dfc60922c",
     "app/now/page.tsx": "fd7d113253d81fdf446c20bdb01c6dc2be6f8dc72d9bd6b83c726638ab4ea73a",
     "app/past-experience/page.tsx": "f3c6126decb358a6a43107f19d75acbdbae4886d83f0139b1ee87b0a73ebe289",
     "app/past-experience/[slug]/page.tsx": "a89b781c0a6a74b9295635d5495c4e2cc2cf2d890cc879578ebfd04a9f6db84b",
     "app/past-experience/components/ExperienceDomainPage.tsx": "6b78dfce8ab97d890c4a773ac4521fc9103cd8e89ed11b7ab41f6c4b2b893893",
     "app/lib/content/experience.ts": "73bf670e46d5f282fdcaf4f558d960d8155e6b0cad9a6089f18e678814eb39fa",
-    "content/past-experience/experience.md": "4bc393f2aba8ce413652a0506333a77488efa771a9e8a7aa3094bc02b09260db"
+    "content/past-experience/experience.md": "cbba8b37b0876ff8a8d174e32d57f45dc1ec063be389d5ce783995076b157cfd"
   }
 }
