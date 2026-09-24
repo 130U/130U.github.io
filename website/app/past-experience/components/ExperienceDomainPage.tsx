@@ -65,23 +65,30 @@ export function ExperienceDomainPage({
                   );
                 })}
               </dl>
-              {entry.projects.map((project, projectIndex) => (
-                <div className="entry-project-group" key={`${project.title}-${projectIndex}`}>
-                  <h3 className="entry-project">{project.title}</h3>
-                  {project.sections.map((section, sectionIndex) => (
-                    <div className="entry-project-section" key={sectionIndex}>
-                      {section.heading && (
-                        <h4 className="entry-section-heading">{section.heading}</h4>
-                      )}
-                      <ul className="archive-bullets">
-                        {section.bullets.map((bullet, bulletIndex) => (
-                          <li key={bulletIndex}>{bullet}</li>
-                        ))}
-                      </ul>
-                    </div>
-                  ))}
-                </div>
-              ))}
+              {entry.projects.map((project, projectIndex) => {
+                const contextStart = project.title.indexOf(" — ");
+                const title = contextStart < 0 ? project.title : project.title.slice(0, contextStart);
+                const context = contextStart < 0 ? null : project.title.slice(contextStart + 1);
+
+                return (
+                  <div className="entry-project-group" key={`${project.title}-${projectIndex}`}>
+                    <h3 className="entry-project">{title}</h3>
+                    {context && <p className="entry-project-context">{context}</p>}
+                    {project.sections.map((section, sectionIndex) => (
+                      <div className="entry-project-section" key={sectionIndex}>
+                        {section.heading && (
+                          <h4 className="entry-section-heading">{section.heading}</h4>
+                        )}
+                        <ul className="archive-bullets">
+                          {section.bullets.map((bullet, bulletIndex) => (
+                            <li key={bulletIndex}>{bullet}</li>
+                          ))}
+                        </ul>
+                      </div>
+                    ))}
+                  </div>
+                );
+              })}
             </div>
           </article>
         ))}

@@ -7,6 +7,10 @@
   --rule-strong: rgba(0, 0, 0, 0.24);
   --accent: #2200ff;
   --dither: #070707;
+  --type-title: clamp(1.5rem, 1.1rem + 1.4vw, 2.25rem);
+  --type-heading: clamp(1.25rem, 1.05rem + 0.5vw, 1.5rem);
+  --type-reading: clamp(1rem, 0.9rem + 0.2vw, 1.0625rem);
+  --reading-leading: 1.6;
   --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
   --drawer-ease: cubic-bezier(0.32, 0.72, 0, 1);
 }
@@ -342,15 +346,15 @@ button:focus-visible {
 
 .page-intro h1 {
   max-width: 920px;
-  font-size: 2.25rem;
-  line-height: 1.1;
+  font-size: var(--type-title);
+  line-height: 1.2;
 }
 
 .section-heading h2,
 .coursework > h2,
 .archive-entry-content h2 {
-  font-size: 1.5rem;
-  line-height: 1.2;
+  font-size: var(--type-heading);
+  line-height: 1.25;
 }
 
 .section-kicker,
@@ -407,10 +411,10 @@ button:focus-visible {
 
 .education-institution h2 {
   margin: 0;
-  font-size: 1.5rem;
+  font-size: var(--type-heading);
   font-weight: 400;
   letter-spacing: -0.02em;
-  line-height: 1.2;
+  line-height: 1.25;
 }
 
 .education-degree {
@@ -461,11 +465,15 @@ button:focus-visible {
 
 .course-grid article {
   min-width: 0;
-  padding: 30px 24px 38px;
+  padding: 30px 16px 38px;
 }
 
 .course-grid article:first-child {
   padding-left: 0;
+}
+
+.course-grid article:last-child {
+  padding-right: 0;
 }
 
 .course-grid article + article {
@@ -475,7 +483,7 @@ button:focus-visible {
 .course-grid h3 {
   min-height: 40px;
   margin: 0 0 25px;
-  font-size: 0.8125rem;
+  font-size: 0.875rem;
   font-weight: 500;
   line-height: 1.35;
 }
@@ -485,8 +493,8 @@ button:focus-visible {
   margin: 0;
   padding: 0;
   color: var(--muted);
-  font-size: 0.8125rem;
-  line-height: 1.45;
+  font-size: 0.875rem;
+  line-height: 1.55;
   list-style: none;
   gap: 9px;
 }
@@ -511,10 +519,10 @@ button:focus-visible {
 
 .domain-name {
   grid-column: 2 / span 9;
-  font-size: 1.5rem;
+  font-size: var(--type-heading);
   font-weight: 400;
   letter-spacing: -0.015em;
-  line-height: 1.2;
+  line-height: 1.25;
 }
 
 .domain-arrow {
@@ -572,7 +580,7 @@ button:focus-visible {
 }
 
 .archive-entry-content {
-  --experience-font-size: 1.0625rem;
+  --experience-font-size: var(--type-reading);
   --entry-label-width: 96px;
   --entry-column-gap: 16px;
   --entry-value-offset: calc(var(--entry-label-width) + var(--entry-column-gap));
@@ -630,8 +638,17 @@ button:focus-visible {
   color: var(--ink);
   font-size: var(--experience-font-size);
   font-weight: 600;
-  line-height: 1.55;
+  line-height: var(--reading-leading);
   text-wrap: balance;
+}
+
+.entry-project-context {
+  max-width: 720px;
+  margin: 12px 0 0;
+  padding-left: var(--entry-value-offset);
+  color: var(--muted);
+  font-size: var(--experience-font-size);
+  line-height: var(--reading-leading);
 }
 
 .entry-project-group + .entry-project-group {
@@ -646,7 +663,7 @@ button:focus-visible {
   font-size: var(--experience-font-size);
   font-style: italic;
   font-weight: 400;
-  line-height: 1.55;
+  line-height: var(--reading-leading);
   text-wrap: balance;
 }
 
@@ -665,7 +682,7 @@ button:focus-visible {
   padding: 0;
   font-size: var(--experience-font-size);
   font-weight: 400;
-  line-height: 1.55;
+  line-height: var(--reading-leading);
   list-style: none;
   gap: 18px;
 }
@@ -699,8 +716,8 @@ button:focus-visible {
 .current-chapter-brief p {
   max-width: 72ch;
   margin: 0;
-  font-size: 1.0625rem;
-  line-height: 1.55;
+  font-size: var(--type-reading);
+  line-height: var(--reading-leading);
 }
 
 .site-footer {
@@ -755,7 +772,33 @@ button:focus-visible {
   }
 }
 
-@media (max-width: 1023px) and (min-width: 768px) {
+@media (768px <= width < 1280px) {
+  .course-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .course-grid article:nth-child(odd) {
+    padding-left: 0;
+    border-left: 0;
+  }
+
+  .course-grid article:nth-child(even) {
+    padding-right: 0;
+  }
+
+  .course-grid article:nth-child(n + 3) {
+    border-top: 1px solid var(--rule);
+  }
+}
+
+@media (width < 1280px) {
+  .archive-entry-content {
+    --entry-value-offset: 0px;
+    --entry-bullet-left: -14px;
+  }
+}
+
+@media (768px <= width < 1024px) {
   .site-frame {
     grid-template-columns: repeat(12, minmax(0, 1fr));
     padding: 0 32px;
@@ -809,25 +852,12 @@ button:focus-visible {
     grid-column: 8;
   }
 
-  .course-grid {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
-
-  .course-grid article:nth-child(3) {
-    border-top: 1px solid var(--rule);
-    border-left: 0;
-  }
-
-  .course-grid article:nth-child(4) {
-    border-top: 1px solid var(--rule);
-  }
-
   .site-footer {
     width: calc(100% - 64px);
   }
 }
 
-@media (max-width: 767px) {
+@media (width < 768px) {
   html {
     scrollbar-gutter: auto;
     scroll-padding-top: 72px;
@@ -955,19 +985,6 @@ button:focus-visible {
     margin-bottom: 66px;
   }
 
-  .page-intro h1 {
-    font-size: 1.5rem;
-    line-height: 1.2;
-  }
-
-  .section-heading h2,
-  .coursework > h2,
-  .archive-entry-content h2,
-  .education-institution h2 {
-    font-size: 1.25rem;
-    line-height: 1.25;
-  }
-
   .education-entry {
     padding: 29px 0 36px;
   }
@@ -1001,7 +1018,7 @@ button:focus-visible {
   }
 
   .domain-directory-link {
-    grid-template-columns: 32px minmax(0, 1fr) 24px;
+    grid-template-columns: 24px minmax(0, 1fr) 24px;
     min-height: 78px;
     gap: 10px;
   }
@@ -1012,8 +1029,6 @@ button:focus-visible {
 
   .domain-name {
     grid-column: 2;
-    font-size: 1.25rem;
-    line-height: 1.25;
   }
 
   .domain-arrow {
@@ -1027,7 +1042,7 @@ button:focus-visible {
   }
 
   .domain-page-intro {
-    grid-template-columns: 32px minmax(0, 1fr);
+    grid-template-columns: 24px minmax(0, 1fr);
     gap: 10px;
   }
 
@@ -1044,7 +1059,7 @@ button:focus-visible {
   }
 
   .archive-entry {
-    grid-template-columns: 32px minmax(0, 1fr);
+    grid-template-columns: 24px minmax(0, 1fr);
     padding: 42px 0 57px;
     gap: 10px;
   }
@@ -1054,26 +1069,16 @@ button:focus-visible {
     margin-top: 28px;
   }
 
-  .archive-entry-content {
-    --experience-font-size: 1rem;
-  }
-
-  .current-chapter-brief p {
-    font-size: 1rem;
-  }
-
   .site-footer {
     width: calc(100% - 40px);
     padding-bottom: 28px;
   }
 }
 
-@media (max-width: 1023px) {
+@media (width < 1024px) {
   .archive-entry-content {
     --entry-label-width: 0px;
     --entry-column-gap: 0px;
-    --entry-value-offset: 0px;
-    --entry-bullet-left: -14px;
   }
 
   .entry-metadata > div {

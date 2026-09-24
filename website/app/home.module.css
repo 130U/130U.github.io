@@ -42,10 +42,10 @@
 .identity h1 {
   max-width: 840px;
   margin: 0;
-  font-size: 2.25rem;
+  font-size: var(--type-title);
   font-weight: 400;
   letter-spacing: -0.02em;
-  line-height: 1.1;
+  line-height: 1.2;
   text-wrap: balance;
 }
 
@@ -79,8 +79,8 @@
 
 .biographyCopy p {
   margin: 0;
-  font-size: 1.0625rem;
-  line-height: 1.55;
+  font-size: var(--type-reading);
+  line-height: var(--reading-leading);
 }
 
 .biographyCopy p + p {
@@ -170,7 +170,7 @@
   }
 }
 
-@media (max-width: 1279.98px) and (min-width: 768px) {
+@media (768px <= width < 1280px) {
   .contactStrip {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
@@ -186,7 +186,7 @@
   }
 }
 
-@media (max-width: 1023px) and (min-width: 768px) {
+@media (768px <= width < 1024px) {
   .profileInner,
   .identity,
   .biography,
@@ -201,7 +201,7 @@
   }
 }
 
-@media (max-width: 767px) {
+@media (width < 768px) {
   .profileSection {
     padding-top: 88px;
   }
@@ -221,21 +221,12 @@
     display: none;
   }
 
-  .identity h1 {
-    font-size: 1.5rem;
-    line-height: 1.2;
-  }
-
   .credentials {
     margin-top: 20px;
   }
 
   .biography {
     padding: 55px 0 68px;
-  }
-
-  .biographyCopy p {
-    font-size: 1rem;
   }
 
   .contactStrip {

@@ -31,6 +31,8 @@ Paths in this table are relative to `website/`.
 `content/past-experience/experience.md` contains the current experience record.
 Use domain, organization, project, and optional subsection headings, followed by
 plain-text bullets. Each organization requires Position, Location, and Dates.
+Separate a project's title and optional supporting context with a spaced em dash.
+The detail renderer gives them distinct visual levels without changing the wording.
 The experience registry validates five domains and their Markdown entries during
 build. `app/lib/content/routes.ts` supplies the website sitemap. The architecture
 viewer is a separate repository reference, linked from the GitHub introduction.
@@ -38,8 +40,9 @@ viewer is a separate repository reference, linked from the GitHub introduction.
 Seven biographical source files are checked against `content/protected-sources.json`.
 `content/visible-copy-manifest.json` independently records text, metadata, alt text,
 and ARIA labels for all nine website pages. Copy changes require the owner's explicit
-request and an intentional update to these contracts. Directory moves preserve the
-source content. Tests also verify page counts and navigation independently of the registry.
+request and an intentional update to these contracts. Presentation-only changes to
+a protected component update its source hash while preserving the visible-copy
+manifest. Tests also verify page counts and navigation independently of the registry.
 
 ## Application
 

@@ -803,10 +803,8 @@
       animation: archify-signal-scan 4.8s ease-in-out 1 both;
     }
 
-    /* Motion Governor gives the reader a real static state and gives the
-       strongest semantic action the only motion budget. Atmosphere resets to
-       its authored base instead of freezing mid-cycle. Static artifacts never
-       start a decorative pulse or scan. */
+    /* Motion Governor prioritizes the active semantic action. Static mode
+       restores the authored base and disables decorative pulses and scans. */
     html:not([data-motion-capable="true"]) svg[data-animation="trace"] [data-animate] {
       animation: none !important;
     }
@@ -1990,10 +1988,8 @@
       text-align: center;
     }
 
-    /* Diagram Guide keeps the artifact's growing reader vocabulary
-       discoverable without widening the permanent control bar. It derives
-       honest counts at runtime and delegates every action to an existing
-       production interaction instead of creating a second command system. */
+    /* Diagram Guide exposes available interactions and runtime counts through
+       the viewer's shared action handlers. */
     .diagram-guide {
       position: absolute;
       top: 1rem;
@@ -3681,9 +3677,8 @@
       .relationship-lens-actions #btn-focus-relations { display: block; color: var(--database-stroke); }
       .focus-chip:not([data-relations-expanded="true"]) .relationship-lens-head { border-bottom-color: transparent; }
       .focus-chip:not([data-relations-expanded="true"]) .relationship-lens-list { display: none; }
-      /* While a mobile reader previews one relationship, turn the full Lens
-         into a compact peek card. This keeps the exact source and target on
-         canvas instead of covering them with a long, scrollable list. */
+      /* A compact mobile relationship preview keeps its source and target
+         visible on the canvas. */
       .focus-chip[data-relationship-previewing="true"] .relationship-lens-list {
         max-height: none;
         padding: 0.35rem;
@@ -3927,7 +3922,7 @@
     }
 
     /* ==========================================================
-       SVG SEMANTIC CLASSES — use these instead of inline fill/stroke
+       SVG SEMANTIC CLASSES — shared fill and stroke roles
        ========================================================== */
     .c-grid       { stroke: var(--grid); fill: none; }
     .c-mask       { fill: var(--mask); stroke: none; }
@@ -4694,8 +4689,7 @@
       animation-duration: 3.5s;
     }
     /* Embedded proofs are static until a named Story Trail chapter is played.
-       This keeps proof grids calm and ensures ?play=1 stops all viewer motion
-       after one 3.2 second chapter instead of leaving ambient trace loops on. */
+       With ?play=1, viewer motion ends after one 3.2 second chapter. */
     html[data-embed="true"] svg[data-animation="trace"] [data-animate],
     html[data-share-playback="true"] svg[data-animation="trace"] [data-animate] {
       animation: none !important;

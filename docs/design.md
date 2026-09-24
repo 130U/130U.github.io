@@ -29,10 +29,12 @@ optical sizing, and the font faces. The regular face is preloaded; italic loads 
 System sans fallbacks cover unavailable glyphs, including Chinese in the technical viewer.
 The LO mark and dithered identity retain their independent artwork.
 
-Desktop page headings use 2.25rem / 1.1 regular with -0.02em tracking; phone headings
-use 1.5rem / 1.2. Compact copy and metadata use 0.9375rem / 1.5. Sustained reading
-on Home, Current Chapter, and Past Experience uses 17px / 1.55, reducing to 16px
-on phones, expressed in rem to respect the reader's text-size preference.
+Page headings scale continuously from 1.5rem to 2.25rem with a 1.2 line height and
+-0.02em tracking. Institution headings and directory names scale from 1.25rem to
+1.5rem. Compact copy and metadata use 0.9375rem / 1.5. Sustained reading on Home,
+Current Chapter, and Past Experience scales from 1rem to 1.0625rem with a 1.6 line
+height. Shared `--type-title`, `--type-heading`, `--type-reading`, and
+`--reading-leading` tokens keep pages consistent and respect text-size preferences.
 Blue marks active navigation, focus, and link feedback. Flat surfaces and square corners
 keep hierarchy in typography, spacing, and rules.
 
@@ -40,13 +42,15 @@ keep hierarchy in typography, spacing, and rules.
 
 Domain links and institution headings use regular Inter at 24px on desktop and 20px
 on phones. Within an experience, project headings, subsection headings, and bullets
-share Inter at 17px / 1.55 (16px on phones). Project headings use semibold 600; subsection
+share the fluid reading scale. Project headings use semibold 600; subsection
 headings use regular italic. The shared `--experience-font-size` keeps their reading
 scale consistent. Headings wrap with balanced lines. Numbered project titles use a
-colon between the project number and name.
+colon between the project number and name. A project title can include supporting
+context after a spaced em dash; the renderer places that context in a separate,
+regular-weight paragraph while preserving its text and punctuation.
 
-Narrative bullets use regular Inter, a 1.55 line height, and 18px between items.
-Their measure is capped at 720px including the existing metadata alignment indent.
+Narrative bullets use regular Inter, a 1.6 line height, and 18px between items.
+Their measure is capped at 720px including the metadata alignment indent.
 Metadata stays compact, upright, and regular; labels use the shared muted color.
 Bold identifies a project and italic introduces a theme within it. Dates, roles,
 and bullets stay upright. Preserve the approved resume prose and its emphasis
@@ -58,12 +62,16 @@ The desktop frame is capped at 1440px and divided into 15 columns, with a three-
 sticky navigation rail. The content field reserves one internal track for indices and
 aligns headings and prose to the reading track. Tablet uses 12 outer columns.
 Below 768px, the navigation becomes a 64px sticky header with a Menu / Close panel.
+Media-query ranges cover fractional viewport widths continuously.
 Without JavaScript, the links remain visible in normal document flow.
 
 Horizontal gutters are 64px on desktop, 32px on tablet, and 20px on phones.
 Structural guides are decorative and hidden from assistive technology; phone layouts
-omit them. Below 1024px, experience metadata stacks and narrative text uses the full
-reading track. Long values can wrap without narrowing the experience prose.
+omit them. Below 1280px, experience narrative text uses the full reading track;
+below 1024px, metadata also stacks. Long values wrap without narrowing the prose.
+Phone indices use a compact 24px track and a 10px gap.
+Coursework uses 14px / 1.55 text, four columns at 1280px and above, two from 768px,
+and one on phones. Column padding preserves useful space for long course names.
 Coordinates use a content-weighted desktop row, a tablet matrix, and a phone column.
 Coarse pointers receive 44px primary navigation and standalone link targets.
 
@@ -96,6 +104,7 @@ and semantic HTML for new content. Match the existing type, reading measure, and
 spacing before adding a new component pattern. Keep expressive motion concentrated
 in the opening identity so the rest of the site supports reading.
 
-Review widths of 1440, 1024, 768, 540, 430, 390, and 320 pixels, keyboard use, and
+Review widths from 320 through 2560 pixels, including both sides of the 768, 1024,
+and 1280px breakpoints, iPad portrait and landscape sizes, keyboard use, and
 reduced-motion settings. The [architecture viewer](../architecture/) is a separate
 technical reference with its own light and dark viewing controls.

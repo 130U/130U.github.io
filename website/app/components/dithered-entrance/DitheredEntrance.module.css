@@ -150,7 +150,7 @@
   }
 }
 
-@media (max-width: 767px) {
+@media (width < 768px) {
   .stage {
     width: min(92vw, 68dvh, 380px);
   }
