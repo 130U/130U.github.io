@@ -29,7 +29,7 @@ const NAVIGATION = [
   ["Current Chapter", "/now/"],
 ];
 const DOMAINS = [
-  ["Artificial Intelligence", "/past-experience/artificial-intelligence/", 3, 34],
+  ["Artificial Intelligence", "/past-experience/artificial-intelligence/", 3, 37],
   ["Data Science", "/past-experience/data-science/", 3, 20],
   ["Environmental Social and Governance", "/past-experience/environmental-social-and-governance/", 3, 5],
   ["Finance and Consulting", "/past-experience/finance/", 4, 23],
@@ -192,7 +192,7 @@ test("inner routes present text-focused pages and the Current Chapter introducti
   assert.match(now, /expand human capability/u);
 });
 
-test("Past Experience presents five domains, 15 entries, and 88 bullets", async () => {
+test("Past Experience presents five domains, 15 entries, and 91 bullets", async () => {
   const directory = await routeHtml("/past-experience/");
   assert.match(directory, /<h1>Past Experience<\/h1>/u);
   assert.match(directory, /class="page-intro-support">Experience through September 2026<\/p>/u);
@@ -219,7 +219,7 @@ test("Past Experience presents five domains, 15 entries, and 88 bullets", async 
     bullets += routeBullets;
   }
   assert.equal(entries, 15);
-  assert.equal(bullets, 88);
+  assert.equal(bullets, 91);
 });
 
 test("experience pages retain the resume project hierarchy and consulting placement", async () => {

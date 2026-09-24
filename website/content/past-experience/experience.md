@@ -90,17 +90,23 @@
 
 - Developed a right-triangle kinematics problem with path-invariant vertical travel time; reduced the optimization to horizontal scheduling, established the fastest path, proved that the travel-time supremum was unattained, and derived harmonic-number asymptotics for a staircase construction approaching the bound.
 
-#### Duke University
+#### Duke University × Leading Global Alternative Asset Manager
 
-**Position:** Research Assistant
-**Location:** Durham, USA
+**Position:** Researcher, Applied AI and Investment Research
+**Location:** Durham, NC, USA; Washington, DC, USA
 **Dates:** August 2024 – May 2025
 
-##### Sustainability Event Data Engineering for Equity Research
+##### AI-Driven Investment Research and Sustainability Risk Analytics — University–industry research collaboration with a leading global alternative asset manager ($300B+ AUM as of June 2026; confidential partner)
 
-- Built a labeled, event-level dataset from 10-K filings, proxy statements, sustainability reports, and news, coding firm-level developments by sustainability dimension, direction, and estimated materiality.
+- Applied tree-based machine learning to impact, operational, financial, questionnaire, and third-party data to uncover nonlinear relationships, sector-specific sustainability risks, and investment-relevant patterns.
 
-- Engineered Python workflows to merge event labels with stock returns and company fundamentals; delivered standardized research inputs connecting qualitative disclosures with quantitative market-response analysis and systematic screening.
+- Used SHAP feature attribution to explain company-level predictions and compare predictive factors across industries, translating model outputs into interpretable findings for investment risk assessment.
+
+- Designed and implemented a scoring and validation framework that translated qualitative sustainability criteria into structured assessment rules, supporting consistent, evidence-grounded company evaluations.
+
+- Developed AI-driven evidence-verification workflows to identify potentially fabricated or manipulated ESG information across corporate and third-party sources, flagging unsupported claims and cross-source contradictions that could distort investment assessments.
+
+- Evaluated the stability of company scores and sector-level findings through sensitivity analysis and bootstrap-based uncertainty estimation, quantifying variability across resampled datasets and alternative analytical assumptions.
 
 ### Data Science
 
@@ -112,7 +118,7 @@
 
 ##### Issuer Screening Infrastructure and Human Preference Ranking
 
-- Reported directly to co-founder Asher Gottesman and received guidance on applied cryptography from Gene Itkis (MIT Lincoln Laboratory) and on financial applications of zero-knowledge proofs from Michael Lustig (former BlackRock Managing Director and NYU Stern Adjunct Professor of Finance). Assessed potential B2B partnerships with token projects and protocol teams, evaluating their business models and potential applications of Jiritsu’s cryptographic verification and privacy-preserving computation. Translated these assessments into a screening and prioritization system, narrowing 18,000+ CoinGecko token records to approximately 800 candidate projects and 30 priority counterparties for leadership review and business-development follow-up; also supported verification preparation for 6 tokenization pilots.
+- Reported directly to co-founder Asher Gottesman and received guidance on applied cryptography from Gene Itkis (MIT Lincoln Laboratory) and on financial applications of zero-knowledge proofs from Michael Lustig (former BlackRock Managing Director and NYU Stern Adjunct Professor of Finance). Assessed potential B2B partnerships with token projects and protocol teams, evaluating their business models and potential applications of Jiritsu's cryptographic verification and privacy-preserving computation. Translated these assessments into a screening and prioritization system, narrowing 18,000+ CoinGecko token records to approximately 800 candidate projects and 30 priority counterparties for leadership review and business-development follow-up; also supported verification preparation for 6 tokenization pilots.
 
 - Diagnosed misalignment between token-market quality and partnership value through issuer-level error analysis; revised screening criteria and feature requirements around identifiable counterparties, commercial fit, disclosure quality, and tokenization needs.
 
