@@ -68,12 +68,12 @@ export function ExperienceDomainPage({
               {entry.projects.map((project, projectIndex) => {
                 const contextStart = project.title.indexOf(" — ");
                 const title = contextStart < 0 ? project.title : project.title.slice(0, contextStart);
-                const context = contextStart < 0 ? null : project.title.slice(contextStart + 1);
+                const context = contextStart < 0 ? null : project.title.slice(contextStart + 3);
 
                 return (
                   <div className="entry-project-group" key={`${project.title}-${projectIndex}`}>
                     <h3 className="entry-project">{title}</h3>
-                    {context && <p className="entry-project-context">{context}</p>}
+                    {context && <p className="entry-project-context"><em>{context}</em></p>}
                     {project.sections.map((section, sectionIndex) => (
                       <div className="entry-project-section" key={sectionIndex}>
                         {section.heading && (

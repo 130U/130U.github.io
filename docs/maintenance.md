@@ -32,7 +32,7 @@ Paths in this table are relative to `website/`.
 Use domain, organization, project, and optional subsection headings, followed by
 plain-text bullets. Each organization requires Position, Location, and Dates.
 Separate a project's title and optional supporting context with a spaced em dash.
-The detail renderer gives them distinct visual levels without changing the wording.
+The detail renderer omits the separator and displays supporting context in italics.
 The experience registry validates five domains and their Markdown entries during
 build. `app/lib/content/routes.ts` supplies the website sitemap. The architecture
 viewer is a separate repository reference, linked from the GitHub introduction.

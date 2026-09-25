@@ -46,8 +46,8 @@ share the fluid reading scale. Project headings use semibold 600; subsection
 headings use regular italic. The shared `--experience-font-size` keeps their reading
 scale consistent. Headings wrap with balanced lines. Numbered project titles use a
 colon between the project number and name. A project title can include supporting
-context after a spaced em dash; the renderer places that context in a separate,
-regular-weight paragraph while preserving its text and punctuation.
+context after a spaced em dash; the renderer omits this separator and places the
+context in a separate, regular-weight italic paragraph.
 
 Narrative bullets use regular Inter, a 1.6 line height, and 18px between items.
 Their measure is capped at 720px including the metadata alignment indent.

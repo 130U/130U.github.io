@@ -4,7 +4,7 @@
 
 ### Artificial Intelligence
 
-#### micro1
+#### Micro1
 
 **Position:** Domain Expert
 **Location:** Silicon Valley, USA, Hybrid
@@ -74,7 +74,7 @@
 
 - Completed the operational handoff of validated tasks, documenting Slack workflows, delivery cadence, reviewer expectations, rework criteria, and escalation procedures; transferred routine execution to operations staff and automation while retaining task-design and data-strategy responsibilities.
 
-#### Duke University AI at Duke
+#### Duke University's AI at Duke Program
 
 **Position:** Researcher
 **Location:** Durham, USA

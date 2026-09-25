@@ -225,7 +225,7 @@ test("Past Experience presents five domains, 15 entries, and 91 bullets", async 
 test("experience pages retain the resume project hierarchy and consulting placement", async () => {
   const ai = await routeHtml("/past-experience/artificial-intelligence/");
   const micro1 = elementsWithClass(ai, "article", "archive-entry")[0][2];
-  assert.match(micro1, /<h2>micro1<\/h2>/u);
+  assert.match(micro1, /<h2>Micro1<\/h2>/u);
   assert.deepEqual(elementsWithClass(micro1, "h3", "entry-project").map((match) => stripMarkup(match[2])), [
     "Project 1: LLM Advertising Evaluation and Statistical Decision Modeling",
     "Project 2: Domain Evaluation and Human Preference Data Engineering",
