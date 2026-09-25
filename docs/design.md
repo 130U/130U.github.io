@@ -95,6 +95,17 @@ or navigation, and releases the page when the viewport reaches desktop width.
 
 ## Content and extension
 
+Page, domain, institution, project, and course titles use title case. Supporting
+sentences, subsection headings, accessibility descriptions, and action labels use
+sentence case. Preserve official spellings and acronyms such as GitHub, AI, ESG,
+LLM, SHAP, and IPhO; sentence case does not lowercase proper names.
+
+Use straight apostrophes and quotation marks with English commas, periods,
+colons, semicolons, and parentheses in public copy and metadata, including the
+architecture viewer. Dates use a spaced en dash. Preserve meaningful mathematical
+symbols, collaboration marks, and navigation arrows. An em dash can separate
+clauses; the project-context separator is omitted by the detail renderer.
+
 The four primary pages are Home, Education, Past Experience, and Current Chapter.
 Five domain pages carry the experience record. Keep factual claims, metadata, copy,
 and content order aligned with the integrity manifests.

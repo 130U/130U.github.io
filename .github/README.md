@@ -1,6 +1,6 @@
 <p align="center">
   <a href="https://www.theodoreoy.com/">
-    <img src="assets/readme-cover.jpg" alt="Visit Theodore Ouyang’s personal website" width="1248">
+    <img src="assets/readme-cover.jpg" alt="Visit Theodore Ouyang's personal website" width="1248">
   </a>
 </p>
 

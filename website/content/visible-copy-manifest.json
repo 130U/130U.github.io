@@ -28,7 +28,7 @@
       }
     },
     "/education/": {
-      "textSha256": "a5ea8d19af1981edbce6ebc84fb7fcb4f781a9207bc92365bbae1c3f2d9d6a38",
+      "textSha256": "0c1f740cb57fc520ca827be10971119365416ad410fb7aca178639590bfb785b",
       "characterCount": 2057,
       "wordCount": 253,
       "preview": "Skip to main content Theodore Ouyang Home Education Past Experience Current Chapter Education Duke University Master of Engineering in Risk Engineering Financia",
@@ -41,18 +41,18 @@
       ],
       "metadata": {
         "title": "Education | Theodore Ouyang",
-        "description": "Theodore Ouyang’s education at Duke University.",
+        "description": "Theodore Ouyang's education at Duke University.",
         "canonical": "https://www.theodoreoy.com/education/",
         "openGraphTitle": "Education",
-        "openGraphDescription": "Theodore Ouyang’s education at Duke University.",
+        "openGraphDescription": "Theodore Ouyang's education at Duke University.",
         "openGraphUrl": "https://www.theodoreoy.com/education/",
         "twitterTitle": "Education",
-        "twitterDescription": "Theodore Ouyang’s education at Duke University."
+        "twitterDescription": "Theodore Ouyang's education at Duke University."
       }
     },
     "/past-experience/": {
-      "textSha256": "49213ab1f8ca2b51f8e0f4c1cb03d871c63d54835d6aa2cb70cbf0c83d07ba9c",
-      "characterCount": 324,
+      "textSha256": "746ddd77ca3fb799f579007454ae8efa5a2413a4084c7e8e492b5fc45e55f5f2",
+      "characterCount": 326,
       "wordCount": 46,
       "preview": "Skip to main content Theodore Ouyang Home Education Past Experience Current Chapter Past Experience Experience through September 2026 01 Artificial Intelligence",
       "altTexts": [],
@@ -117,24 +117,24 @@
       }
     },
     "/past-experience/environmental-social-and-governance/": {
-      "textSha256": "67ef3b5a0f2c809ce726977b132c429cc1ff56f9ac616d1e3e9a8c3009f4565c",
-      "characterCount": 1809,
+      "textSha256": "21e5e3be5ad75b4eb51eaad8f98c629fade74ec1f304bf9f3498401bcc21671a",
+      "characterCount": 1811,
       "wordCount": 228,
-      "preview": "Skip to main content Theodore Ouyang Home Education Past Experience Current Chapter Past Experience 03 Environmental Social and Governance Duke Law School Posit",
+      "preview": "Skip to main content Theodore Ouyang Home Education Past Experience Current Chapter Past Experience 03 Environmental, Social, and Governance Duke Law School Pos",
       "altTexts": [],
       "ariaLabels": [
         "Theodore Ouyang home",
         "Primary navigation",
-        "Environmental Social and Governance"
+        "Environmental, Social, and Governance"
       ],
       "metadata": {
-        "title": "Environmental Social and Governance | Past Experience | Theodore Ouyang",
+        "title": "Environmental, Social, and Governance | Past Experience | Theodore Ouyang",
         "description": "Theodore Ouyang is a Duke University graduate and Sequoia Scholar in Cohort 8, exploring how artificial intelligence can become useful in everyday life.",
         "canonical": "https://www.theodoreoy.com/past-experience/environmental-social-and-governance/",
-        "openGraphTitle": "Environmental Social and Governance | Past Experience",
+        "openGraphTitle": "Environmental, Social, and Governance | Past Experience",
         "openGraphDescription": "Theodore Ouyang is a Duke University graduate and Sequoia Scholar in Cohort 8, exploring how artificial intelligence can become useful in everyday life.",
         "openGraphUrl": "https://www.theodoreoy.com/past-experience/environmental-social-and-governance/",
-        "twitterTitle": "Environmental Social and Governance | Past Experience",
+        "twitterTitle": "Environmental, Social, and Governance | Past Experience",
         "twitterDescription": "Theodore Ouyang is a Duke University graduate and Sequoia Scholar in Cohort 8, exploring how artificial intelligence can become useful in everyday life."
       }
     },

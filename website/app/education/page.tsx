@@ -76,7 +76,7 @@ const courseworkGroups = [
 
 export const metadata: Metadata = createPageMetadata({
   title: "Education",
-  description: "Theodore Ouyang’s education at Duke University.",
+  description: "Theodore Ouyang's education at Duke University.",
   path: "/education/",
 });
 
@@ -113,7 +113,7 @@ export default function EducationPage() {
             </p>
             <p className="education-note">
               Pratt School of Engineering Merit Scholarship — one of the
-              school’s highest-tier merit awards, covering 50% of tuition.
+              school&apos;s highest-tier merit awards, covering 50% of tuition.
             </p>
           </div>
         </article>

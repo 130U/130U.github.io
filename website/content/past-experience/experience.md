@@ -174,7 +174,7 @@
 
 - Delivered a methodology note documenting scoring logic, source data, and edge cases; translated model behavior into reviewable specifications for product managers and risk officers assessing platform adoption.
 
-### Environmental Social and Governance
+### Environmental, Social, and Governance
 
 #### Duke Law School
 

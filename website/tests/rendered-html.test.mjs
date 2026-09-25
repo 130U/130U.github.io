@@ -31,7 +31,7 @@ const NAVIGATION = [
 const DOMAINS = [
   ["Artificial Intelligence", "/past-experience/artificial-intelligence/", 3, 37],
   ["Data Science", "/past-experience/data-science/", 3, 20],
-  ["Environmental Social and Governance", "/past-experience/environmental-social-and-governance/", 3, 5],
+  ["Environmental, Social, and Governance", "/past-experience/environmental-social-and-governance/", 3, 5],
   ["Finance and Consulting", "/past-experience/finance/", 4, 23],
   ["STEM Academic Competitions and Training", "/past-experience/stem-academic-competitions-and-training/", 2, 6],
 ];

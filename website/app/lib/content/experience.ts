@@ -40,7 +40,7 @@ export const experienceDomainDefinitions = [
   { number: "02", name: "Data Science", slug: "data-science" },
   {
     number: "03",
-    name: "Environmental Social and Governance",
+    name: "Environmental, Social, and Governance",
     slug: "environmental-social-and-governance",
   },
   { number: "04", name: "Finance and Consulting", slug: "finance" },

@@ -1,6 +1,6 @@
 # Website
 
-Theodore Ouyang’s personal site, built with Next.js App Router, React, and native CSS.
+Theodore Ouyang's personal site, built with Next.js App Router, React, and native CSS.
 
 ```sh
 cd website
