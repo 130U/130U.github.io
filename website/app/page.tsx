@@ -4,6 +4,7 @@ import { SiteShell } from "./components/SiteShell";
 import {
   createPageMetadata,
   DEFAULT_DESCRIPTION,
+  FELLOWSHIP,
   HOME_TITLE,
 } from "./lib/content/site";
 import styles from "./home.module.css";
@@ -41,7 +42,7 @@ export default function Home() {
                 <h1 id="home-heading">Theodore Ouyang</h1>
                 <ul className={styles.credentials} aria-label="Profile summary">
                   <li>Exploring practical AI use cases</li>
-                  <li>Sequoia Scholar, Cohort 8</li>
+                  <li>{FELLOWSHIP.title}, Cohort {FELLOWSHIP.cohort}</li>
                 </ul>
               </div>
             </header>
@@ -58,7 +59,7 @@ export default function Home() {
                   about how emerging technologies become genuinely useful in
                   everyday life.
                 </p>
-                <p>He is a Sequoia Scholar in Cohort 8.</p>
+                <p>He is a {FELLOWSHIP.title} in Cohort {FELLOWSHIP.cohort}.</p>
               </div>
             </div>
 

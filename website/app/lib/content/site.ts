@@ -3,8 +3,9 @@ import type { Metadata } from "next";
 export const SITE_URL = "https://www.theodoreoy.com";
 export const SITE_NAME = "Theodore Ouyang";
 export const HOME_TITLE = "Theodore Ouyang | Duke Alum";
+export const FELLOWSHIP = { title: "Sequoia Fellow", cohort: 8 } as const;
 export const DEFAULT_DESCRIPTION =
-  "Theodore Ouyang is a Duke University graduate and Sequoia Scholar in Cohort 8, exploring how artificial intelligence can become useful in everyday life.";
+  `Theodore Ouyang is a Duke University graduate and ${FELLOWSHIP.title} in Cohort ${FELLOWSHIP.cohort}, exploring how artificial intelligence can become useful in everyday life.`;
 
 export type ActivePage =
   | "home"

@@ -30,9 +30,11 @@ Paths in this table are relative to `website/`.
 
 `content/past-experience/experience.md` contains the current experience record.
 Use domain, organization, project, and optional subsection headings, followed by
-plain-text bullets. Each organization requires Position, Location, and Dates.
-Separate a project's title and optional supporting context with a spaced em dash.
-The detail renderer omits the separator and displays supporting context in italics.
+experience bullets. Each organization requires Position, Location, and Dates.
+Domain introductions precede the first organization. Project introductions follow
+the project heading and precede its bullets. Inline `**emphasis**` and
+`[citation](https://example.com)` links are supported in prose; raw HTML is rendered
+as text. The AI research page displays project introductions in true italics.
 The experience registry validates five domains and their Markdown entries during
 build. `app/lib/content/routes.ts` supplies the website sitemap. The architecture
 viewer is a separate repository reference, linked from the GitHub introduction.

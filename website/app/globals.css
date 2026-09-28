@@ -3,6 +3,8 @@
   --page: #f7f6f5;
   --ink: #0b0b0b;
   --muted: #70706c;
+  --supporting-ink: #5c5c58;
+  --link-rule: #a6a6a1;
   --rule: rgba(0, 0, 0, 0.06);
   --rule-strong: rgba(0, 0, 0, 0.24);
   --accent: #2200ff;
@@ -10,7 +12,12 @@
   --type-title: clamp(1.5rem, 1.1rem + 1.4vw, 2.25rem);
   --type-heading: clamp(1.25rem, 1.05rem + 0.5vw, 1.5rem);
   --type-reading: clamp(1rem, 0.9rem + 0.2vw, 1.0625rem);
+  --type-label: 0.75rem;
+  --type-note: 0.875rem;
+  --type-compact: 0.9375rem;
+  --type-project: clamp(1.0625rem, 1rem + 0.2vw, 1.125rem);
   --reading-leading: 1.6;
+  --link-underline-offset: 0.18em;
   --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
   --drawer-ease: cubic-bezier(0.32, 0.72, 0, 1);
 }
@@ -32,7 +39,7 @@ body {
   color: var(--ink);
   background: var(--page);
   font-family: var(--font-text);
-  font-size: 0.9375rem;
+  font-size: var(--type-compact);
   line-height: 1.5;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
@@ -253,7 +260,7 @@ button:focus-visible {
   border: 0;
   color: var(--ink);
   background: transparent;
-  font-size: 0.9375rem;
+  font-size: var(--type-compact);
   line-height: 1;
   cursor: pointer;
   transition: color 180ms var(--ease-out), transform 120ms var(--ease-out);
@@ -266,7 +273,7 @@ button:focus-visible {
 .primary-nav {
   display: grid;
   margin-top: 33px;
-  font-size: 0.9375rem;
+  font-size: var(--type-compact);
   line-height: 1.3;
 }
 
@@ -363,7 +370,7 @@ button:focus-visible {
 .domain-number,
 .entry-metadata dt {
   color: var(--muted);
-  font-size: 0.75rem;
+  font-size: var(--type-label);
   line-height: 1.4;
 }
 
@@ -384,7 +391,7 @@ button:focus-visible {
   max-width: 68ch;
   margin: 27px 0 0;
   color: var(--ink);
-  font-size: 0.9375rem;
+  font-size: var(--type-compact);
   line-height: 1.5;
 }
 
@@ -442,10 +449,13 @@ button:focus-visible {
   margin-top: 12px;
 }
 
-.education-note a {
+.education-note a,
+.archive-bullets a {
   text-decoration: underline;
-  text-decoration-color: var(--rule-strong);
-  text-underline-offset: 3px;
+  text-decoration-color: var(--link-rule);
+  text-decoration-thickness: 1px;
+  text-underline-offset: var(--link-underline-offset);
+  text-decoration-skip-ink: auto;
 }
 
 .coursework {
@@ -483,7 +493,7 @@ button:focus-visible {
 .course-grid h3 {
   min-height: 40px;
   margin: 0 0 25px;
-  font-size: 0.875rem;
+  font-size: var(--type-note);
   font-weight: 500;
   line-height: 1.35;
 }
@@ -493,7 +503,7 @@ button:focus-visible {
   margin: 0;
   padding: 0;
   color: var(--muted);
-  font-size: 0.875rem;
+  font-size: var(--type-note);
   line-height: 1.55;
   list-style: none;
   gap: 9px;
@@ -705,7 +715,6 @@ button:focus-visible {
   transform: translateY(-50%);
 }
 
-/* AI research has a project abstract and contribution/evidence pairs. */
 .ai-research-page .domain-introduction {
   max-width: 720px;
   margin-top: 1.5rem;
@@ -720,19 +729,19 @@ button:focus-visible {
 .ai-research-page .domain-introduction p + p {
   margin-top: 1rem;
   color: var(--muted);
-  font-size: 0.875rem;
+  font-size: var(--type-note);
   line-height: 1.6;
 }
 
 .ai-research-page .entry-project {
-  font-size: clamp(1.0625rem, 1rem + 0.2vw, 1.125rem);
+  font-size: var(--type-project);
   line-height: 1.45;
   letter-spacing: -0.01em;
 }
 
 .ai-research-page .entry-project-context {
   margin-top: 0.75rem;
-  color: #5c5c58;
+  color: var(--supporting-ink);
   font-size: 1rem;
   font-style: italic;
   font-weight: 400;
@@ -752,16 +761,8 @@ button:focus-visible {
   margin-top: 0.75em;
 }
 
-.ai-research-page .archive-bullets a {
-  text-decoration: underline;
-  text-decoration-color: #a6a6a1;
-  text-decoration-thickness: 1px;
-  text-underline-offset: 0.18em;
-  text-decoration-skip-ink: auto;
-}
-
-.ai-research-page .archive-bullets a:hover,
-.ai-research-page .archive-bullets a:focus-visible {
+.education-note a:focus-visible,
+.archive-bullets a:focus-visible {
   color: var(--accent);
   text-decoration-color: currentColor;
 }
@@ -789,7 +790,7 @@ button:focus-visible {
   padding: 25px 0 34px;
   border-top: 1px solid var(--rule-strong);
   color: var(--muted);
-  font-size: 0.75rem;
+  font-size: var(--type-label);
   line-height: 1.4;
 }
 
@@ -802,6 +803,7 @@ button:focus-visible {
   .primary-nav a:hover,
   .back-link:hover,
   .entry-website-link:hover,
+  .archive-bullets a:hover,
   .education-note a:hover {
     color: var(--accent);
     text-decoration-color: var(--accent);

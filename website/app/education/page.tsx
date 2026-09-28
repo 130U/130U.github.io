@@ -31,7 +31,7 @@ const courseworkGroups = [
     ],
   },
   {
-    title: "AI & Data Science",
+    title: "AI and Data Science",
     courses: [
       "Advanced Stochastic Modeling and Machine Learning",
       "Artificial Intelligence",
@@ -44,7 +44,7 @@ const courseworkGroups = [
     ],
   },
   {
-    title: "Finance & Economics",
+    title: "Finance and Economics",
     courses: [
       "Asset Pricing & Risk Management",
       "Corporate Finance",
@@ -64,7 +64,7 @@ const courseworkGroups = [
     ],
   },
   {
-    title: "Law, Ethics & Global Affairs",
+    title: "Law, Ethics, and Global Affairs",
     courses: [
       "Ethics and Leadership",
       "Global China and Global Challenges",
@@ -102,7 +102,7 @@ export default function EducationPage() {
             aria-label="Academic distinctions"
           >
             <p className="education-note education-advisor">
-              Academic Advisor:{" "}
+              Academic advisor:{" "}
               <a
                 href="https://cee.duke.edu/people/mark-borsuk/"
                 target="_blank"

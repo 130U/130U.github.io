@@ -18,6 +18,8 @@ master is `website/source-assets/brand/lo-mark.svg`.
 | Ink | `#0b0b0b` |
 | Dither ink | `#070707` |
 | Supporting text | `#70706c` |
+| Project abstracts | `#5c5c58` |
+| Text-link underline | `#a6a6a1` |
 | Active state and focus | `#2200ff` |
 | Structural rule | `rgba(0, 0, 0, 0.06)` |
 | Strong rule | `rgba(0, 0, 0, 0.24)` |
@@ -45,9 +47,14 @@ on phones. Within an experience, project headings, subsection headings, and bull
 share the fluid reading scale. Project headings use semibold 600; subsection
 headings use regular italic. The shared `--experience-font-size` keeps their reading
 scale consistent. Headings wrap with balanced lines. Numbered project titles use a
-colon between the project number and name. A project title can include supporting
-context after a spaced em dash; the renderer omits this separator and places the
-context in a separate, regular-weight italic paragraph.
+colon between the project number and name. Project descriptions are separate paragraphs.
+
+The AI research page uses 17–18px semibold project titles, 16px true-italic abstracts
+with 1.65 leading, and regular narrative text. Contribution leads use weight 600;
+additional spacing separates each contribution and its supporting evidence from
+the next pair. The opening reference note uses the 14px note scale. These roles
+share Inter and the site color tokens; the page-specific hierarchy is scoped to
+`.ai-research-page`.
 
 Narrative bullets use regular Inter, a 1.6 line height, and 18px between items.
 Their measure is capped at 720px including the metadata alignment indent.
@@ -55,6 +62,11 @@ Metadata stays compact, upright, and regular; labels use the shared muted color.
 Bold identifies a project and italic introduces a theme within it. Dates, roles,
 and bullets stay upright. Preserve the approved resume prose and its emphasis
 through this structural hierarchy.
+
+Small indices and metadata labels use `--type-label` (12px). Notes and course lists
+use `--type-note` (14px); compact interface text uses `--type-compact` (15px).
+Text links share a 1px underline, `--link-rule`, and `--link-underline-offset`.
+Focus remains a visible blue outline, and hover feedback respects pointer capability.
 
 ## Reading frame
 
@@ -99,12 +111,16 @@ Page, domain, institution, project, and course titles use title case. Supporting
 sentences, subsection headings, accessibility descriptions, and action labels use
 sentence case. Preserve official spellings and acronyms such as GitHub, AI, ESG,
 LLM, SHAP, and IPhO; sentence case does not lowercase proper names.
+Use "and" in editorial category labels. Preserve official course and organization
+names, including their ampersands. The fellowship name is `Sequoia Fellow`, and
+its cohort is owned by the identity configuration in `app/lib/content/site.ts`.
 
 Use straight apostrophes and quotation marks with English commas, periods,
 colons, semicolons, and parentheses in public copy and metadata, including the
 architecture viewer. Dates use a spaced en dash. Preserve meaningful mathematical
 symbols, collaboration marks, and navigation arrows. An em dash can separate
-clauses; the project-context separator is omitted by the detail renderer.
+clauses. Unicode English dashes, ©, ×, and navigation arrows are intentional;
+Chinese full-width punctuation is not used in public interface copy.
 
 The four primary pages are Home, Education, Past Experience, and Current Chapter.
 Five domain pages carry the experience record. Keep factual claims, metadata, copy,
