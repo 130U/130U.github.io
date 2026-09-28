@@ -31,40 +31,47 @@ optical sizing, and the font faces. The regular face is preloaded; italic loads 
 System sans fallbacks cover unavailable glyphs, including Chinese in the technical viewer.
 The LO mark and dithered identity retain their independent artwork.
 
-Page headings scale continuously from 1.5rem to 2.25rem with a 1.2 line height and
--0.02em tracking. Institution headings and directory names scale from 1.25rem to
-1.5rem. Compact copy and metadata use 0.9375rem / 1.5. Sustained reading on Home,
-Current Chapter, and Past Experience scales from 1rem to 1.0625rem with a 1.6 line
-height. Shared `--type-title`, `--type-heading`, `--type-reading`, and
-`--reading-leading` tokens keep pages consistent and respect text-size preferences.
+Typography follows semantic roles. At any viewport, text with the same role uses
+the same size across every section and page. Weight, color, spacing, and italics
+provide emphasis within a role. Page-specific font-size overrides are not used.
+
+| Role | Shared token | Size at the default text setting | Leading |
+| --- | --- | --- | --- |
+| Page title | `--type-title` | 24–36px | 1.2 |
+| Section or institution heading, directory item | `--type-heading` | 20–24px | 1.25 |
+| Body, records, introductions, course names | `--type-reading` | 16–17px | 1.6 |
+| Project, degree, course-category heading | `--type-reading` | 16–17px, weight 600 | 1.45 |
+| Navigation, menu, wordmark name, return link | `--type-interface` | 14px | Contextual |
+| Field label, index, footer, scroll cue | `--type-label` | 12px | 1–1.5 |
+
+Title, section, and reading sizes use rem-based fluid scales. Labels and interface
+text use rem units. Headings have -0.02em tracking; reading text stays near zero.
+The optical font sizing and the shared `--reading-leading` support sustained reading.
 Blue marks active navigation, focus, and link feedback. Flat surfaces and square corners
 keep hierarchy in typography, spacing, and rules.
 
 ### Past Experience typography
 
-Domain links and institution headings use regular Inter at 24px on desktop and 20px
-on phones. Within an experience, project headings, subsection headings, and bullets
-share the fluid reading scale. Project headings use semibold 600; subsection
-headings use regular italic. The shared `--experience-font-size` keeps their reading
-scale consistent. Headings wrap with balanced lines. Numbered project titles use a
-colon between the project number and name. Project descriptions are separate paragraphs.
+Domain links and institution headings use the shared section scale. Project titles,
+subsection headings, introductions, reference notes, metadata values, and bullets
+use the same reading size. Project titles use weight 600, subsection headings use
+regular italic, and headings wrap with balanced lines. Numbered project titles use
+a colon between the project number and name. Descriptions are separate paragraphs.
 
-The AI research page uses 17–18px semibold project titles, 16px true-italic abstracts
-with 1.65 leading, and regular narrative text. Contribution leads use weight 600;
-additional spacing separates each contribution and its supporting evidence from
-the next pair. The opening reference note uses the 14px note scale. These roles
-share Inter and the site color tokens; the page-specific hierarchy is scoped to
-`.ai-research-page`.
+The AI research page uses true italics and the supporting ink color for project
+abstracts. Contribution leads use weight 600; additional spacing groups each
+contribution with its supporting evidence. These page-specific emphasis and spacing
+rules are scoped to `.ai-research-page`, with the shared reading size and leading.
 
 Narrative bullets use regular Inter, a 1.6 line height, and 18px between items.
 Their measure is capped at 720px including the metadata alignment indent.
-Metadata stays compact, upright, and regular; labels use the shared muted color.
+Metadata values stay upright and regular; labels use the shared muted color.
 Bold identifies a project and italic introduces a theme within it. Dates, roles,
 and bullets stay upright. Preserve the approved resume prose and its emphasis
 through this structural hierarchy.
 
-Small indices and metadata labels use `--type-label` (12px). Notes and course lists
-use `--type-note` (14px); compact interface text uses `--type-compact` (15px).
+Small indices and metadata labels use `--type-label`. Navigation, the wordmark name,
+the mobile menu, and return links share `--type-interface` at every breakpoint.
 Text links share a 1px underline, `--link-rule`, and `--link-underline-offset`.
 Focus remains a visible blue outline, and hover feedback respects pointer capability.
 
@@ -73,7 +80,7 @@ Focus remains a visible blue outline, and hover feedback respects pointer capabi
 The desktop frame is capped at 1440px and divided into 15 columns, with a three-column
 sticky navigation rail. The content field reserves one internal track for indices and
 aligns headings and prose to the reading track. Tablet uses 12 outer columns.
-Below 768px, the navigation becomes a 64px sticky header with a Menu / Close panel.
+Below 768px, the navigation becomes a 4rem sticky header with a Menu / Close panel.
 Media-query ranges cover fractional viewport widths continuously.
 Without JavaScript, the links remain visible in normal document flow.
 
@@ -81,10 +88,15 @@ Horizontal gutters are 64px on desktop, 32px on tablet, and 20px on phones.
 Structural guides are decorative and hidden from assistive technology; phone layouts
 omit them. Below 1280px, experience narrative text uses the full reading track;
 below 1024px, metadata also stacks. Long values wrap without narrowing the prose.
-Phone indices use a compact 24px track and a 10px gap.
-Coursework uses 14px / 1.55 text, four columns at 1280px and above, two from 768px,
-and one on phones. Column padding preserves useful space for long course names.
-Coordinates use a content-weighted desktop row, a tablet matrix, and a phone column.
+Phone indices use a 1.5rem track and a 0.625rem gap. These tracks and the mobile
+header scale with the user's text size. The wordmark can wrap, and long reading
+content has emergency wrapping when an unbroken word would exceed its container.
+Coursework uses the shared reading size and leading, two columns from 768px, and
+one on phones. Course-category headings match degree and project headings. Column
+padding preserves useful space for long course names. Profile details and contact
+values also use the reading scale; field labels use the label scale. Coordinates use
+a content-weighted desktop row, a tablet matrix, and a phone column. Long contact
+values can wrap when text is enlarged.
 Coarse pointers receive 44px primary navigation and standalone link targets.
 
 Page titles own the H1 position. Home's name supplies its identity heading.

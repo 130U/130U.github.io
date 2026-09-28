@@ -55,8 +55,8 @@
   margin: 28px 0 0;
   padding: 0;
   color: var(--ink);
-  font-size: var(--type-compact);
-  line-height: 1.5;
+  font-size: var(--type-reading);
+  line-height: var(--reading-leading);
   list-style: none;
   gap: 2px;
 }
@@ -97,7 +97,7 @@
   grid-template-columns:
     minmax(0, 1.15fr)
     minmax(0, 1fr)
-    minmax(148px, 1.2fr)
+    minmax(13.5rem, 1.2fr)
     minmax(0, 0.72fr);
   margin: 0;
   padding: 0;
@@ -112,8 +112,8 @@
   min-width: 0;
   min-height: 118px;
   padding: 25px 19px 29px;
-  font-size: var(--type-note);
-  line-height: 1.4;
+  font-size: var(--type-reading);
+  line-height: var(--reading-leading);
   gap: 20px;
 }
 
@@ -136,7 +136,7 @@
 .contactStrip li > :last-child {
   min-width: 0;
   margin-left: 0;
-  overflow-wrap: normal;
+  overflow-wrap: anywhere;
 }
 
 .contactStrip a {
@@ -144,14 +144,14 @@
   width: fit-content;
   min-height: 24px;
   align-items: center;
-  max-width: none;
-  overflow-wrap: normal;
+  max-width: 100%;
+  overflow-wrap: anywhere;
   text-decoration: underline;
   text-decoration-color: var(--link-rule);
   text-decoration-thickness: 1px;
   text-underline-offset: var(--link-underline-offset);
   text-decoration-skip-ink: auto;
-  white-space: nowrap;
+  white-space: normal;
   transition: color 180ms var(--ease-out), text-decoration-color 180ms var(--ease-out), transform 120ms var(--ease-out);
 }
 
