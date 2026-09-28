@@ -18,6 +18,7 @@ export type ExperienceSection = {
 
 export type ExperienceProject = {
   title: string;
+  introduction: string[];
   sections: ExperienceSection[];
 };
 
@@ -32,11 +33,12 @@ export type ExperienceDomain = {
   name: string;
   slug: string;
   path: string;
+  introduction: string[];
   entries: ExperienceEntry[];
 };
 
 export const experienceDomainDefinitions = [
-  { number: "01", name: "Artificial Intelligence", slug: "artificial-intelligence" },
+  { number: "01", name: "AI Research and Engineering", slug: "artificial-intelligence" },
   { number: "02", name: "Data Science", slug: "data-science" },
   {
     number: "03",
@@ -118,7 +120,7 @@ export function parsePastExperience(markdown: string): ParsedDomain[] {
       finishDomain();
       const name = line.slice(4).trim();
       if (!name) throw new Error("Experience domain name cannot be empty.");
-      domain = { name, entries: [] };
+      domain = { name, introduction: [], entries: [] };
       continue;
     }
 
@@ -132,13 +134,17 @@ export function parsePastExperience(markdown: string): ParsedDomain[] {
     }
 
     if (!entry) {
+      if (domain && domain.entries.length === 0 && !line.startsWith("#")) {
+        domain.introduction.push(line);
+        continue;
+      }
       throw new Error(`Unexpected content in Domain Experience: ${line}`);
     }
 
     if (line.startsWith("##### ")) {
       const title = line.slice(6).trim();
       if (!title) throw new Error("Experience project title cannot be empty.");
-      project = { title, sections: [] };
+      project = { title, introduction: [], sections: [] };
       entry.projects.push(project);
       section = undefined;
       continue;
@@ -180,6 +186,11 @@ export function parsePastExperience(markdown: string): ParsedDomain[] {
       continue;
     }
 
+    if (project && project.sections.length === 0 && !line.startsWith("#")) {
+      project.introduction.push(line);
+      continue;
+    }
+
     throw new Error(`Unexpected experience content: ${line}`);
   }
 
@@ -212,6 +223,7 @@ export const pastExperience: readonly ExperienceDomain[] = parsedDomains.map(
     return {
       ...definition,
       path: `/past-experience/${definition.slug}/`,
+      introduction: domain.introduction,
       entries: domain.entries,
     };
   },

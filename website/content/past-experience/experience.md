@@ -2,111 +2,56 @@
 
 ## Domain Experience
 
-### Artificial Intelligence
+### AI Research and Engineering
 
-#### Micro1
-
-**Position:** Domain Expert
-**Location:** Silicon Valley, USA, Hybrid
-**Dates:** November 2025 – September 2026
-
-##### Project 1: LLM Advertising Evaluation and Statistical Decision Modeling
-
-###### Evaluation operations and Bayesian quality control
-
-- Co-developed evaluation standards and quality-control workflows for a domain of approximately 300 annotators across travel, food delivery, consumer goods, and e-commerce advertising projects; contributed to an increase in complete demand matching from approximately 10% to 90% in project spot checks.
-
-- Operationalized user intent, location, applicable dates, and landing-page consistency as distinct acceptance criteria; traced failures to intent extraction, recommendation matching, link routing, and post-click behavior, converting ambiguous client complaints into actionable defect categories.
-
-- Implemented differentiated review routing: assigned three additional reviewers to initially flagged advertisements and one or two additional reviewers to initial passes based on annotator performance; incorporated expert adjudication to resolve difficult disagreements and standardize final labels.
-
-- Built an analytical workflow with SQL, Python, pandas, SciPy, and statsmodels, integrating task records, reviewer judgments, completion times, and behavioral events while maintaining separate measures of advertising correctness, annotator reliability, and user response.
-
-- Applied Bayesian Beta–Binomial reliability estimation to correct and incorrect judgments against reference labels; calculated posterior estimates and credible intervals and incorporated reliability evidence, sample requirements, and risk criteria into review allocation.
-
-- Conducted independent random expert checks and disagreement analysis to evaluate annotation quality; used adjudicated outcomes to update annotator records, calibrate review intensity, and inform personnel selection and targeted feedback.
-
-- Analyzed accepted output, task duration, and disputed judgments alongside platform timestamps and Hubstaff records; identified inconsistencies between reported activity and validated delivery and incorporated the findings into workload and quality reviews.
-
-- Established a closed-loop defect record linking requested outcomes, observed behavior, mismatch categories, reviewer rationale, and recheck results; investigated geographic and session variation, redirects, and landing-page changes to support issue attribution and correction.
-
-- Tracked complete and partial matching separately: complete matching improved by approximately 80 percentage points, while later spot checks recorded at least one applicable requirement matched in 100% of sampled results. Preserved requirement-level detail in reporting and reevaluation.
-
-###### Experimentation and recommendation strategy
-
-- Translated differences in decision stage, urgency, and comparison needs into testable recommendation strategies; combined behavioral analysis, marketing research, expert interviews, and structured internal reviews to select curated and broad-assortment alternatives for experimentation.
-
-- Evaluated approximately 20 curated hotel options versus 100+ eligible options through a post-click landing-page A/B test; identified a stronger increase in browsing time than in clicks for the broader assortment and translated the findings into a recommendation for the tested travel-exploration setting.
-
-- Fitted logistic regression models for detail-page clicks and payment within defined observation windows; included assortment-by-decision-stage interactions and estimated context-specific strategy differences with uncertainty intervals.
-
-- Modeled log-transformed dwell time and compared raw means, medians, and behavioral distributions to characterize browsing intensity; analyzed engagement and completed transactions as separate outcomes and excluded incomplete observation windows from finalized payment assessments.
-
-- Produced client-specific strategy comparisons before synthesizing cross-project patterns; differentiated immediate decision support from extended exploration and documented the contexts in which broader or more curated assortments performed differently.
-
-- Codified evaluation findings and experiment results into reusable decision playbooks covering matching prerequisites, strategy variables, outcome definitions, observation windows, and applicability limits; incorporated recurring defects and new findings into evaluation guidance and reviewer calibration.
-
-- Coordinated assignments, expert escalation, and review handoffs through Slack Workflow, linking operational delivery with quality monitoring and the research team's analytical priorities.
-
-##### Project 2: Domain Evaluation and Human Preference Data Engineering
-
-- An exploratory engineering project applying advanced synthetic-data approaches to financial-domain LLM post-training. Combining perturbation-based data augmentation with expert-defined, constraint-aware scenario generation, the project translated real-world evidence, variable dependencies, and business-validity requirements into scalable human preference-data workflows. Its methodological context spans input-noise training (Bishop, 1995), financial scenario generation (Høyland et al., 2003), and synthetic alignment-data pipelines (NVIDIA, 2024).
-
-- Led a domain task module within a 100-person expert project team, owning requirements, golden examples, scoring rubrics, data-expansion rules, pilot validation, and the handoff to scaled preference-data production across financial, consumer, and marketing scenarios.
-
-- Converted domain research and business evidence into scenario matrices, task specifications, input datasets, and acceptance criteria; identified decision-critical variables and recurring reasoning failures before expert production began.
-
-- Authored golden examples and reference answers that linked task objectives, supporting evidence, and scoring logic; operationalized expert judgment into reusable standards for case authoring and response evaluation.
-
-- Designed an ESG bias-probing task that contrasted a newer company with stronger substantive evidence against an older company with weaker evidence; evaluated whether model conclusions followed disclosed performance and governance facts or relied on corporate age as a shortcut.
-
-- Developed task-specific rubrics informed by MSCI scoring principles, covering factual grounding, decisive variables, rule adherence, and conclusion–rationale consistency; documented error taxonomies, borderline cases, and reviewer decision rules.
-
-- Defined five-level pairwise preference labels for competing model responses; linked preference direction and strength to comparative rationales, error types, prompts, input data, and response pairs, producing auditable human feedback for downstream post-training workflows.
-
-- Established controlled input-expansion rules for variable ranges, dependencies, noise, and boundary conditions; revalidated reference judgments after input changes and completed new preference examples through model-response generation and expert comparison.
-
-- Led Batch Zero validation of the full authoring and review workflow; evaluated independently produced cases, datasets, and labels, diagnosed ambiguous instructions and expert-calibration gaps, and incorporated guidance revisions, coaching, and case repairs into Batch One production standards.
-
-- Matched producers and reviewers to task complexity using professional backgrounds, platform assessments, interviews, and client requirements; calibrated reviewers through case discussion and feedback and maintained separate controls for model-response comparison and peer review of expert submissions.
-
-- Integrated an 85% output-quality threshold, the absence of material errors, and quota completion into eligibility for an approximately 20% bonus; aligned production assignments, review effort, and incentives with task complexity and delivery requirements.
-
-- Completed the operational handoff of validated tasks, documenting Slack workflows, delivery cadence, reviewer expectations, rework criteria, and escalation procedures; transferred routine execution to operations staff and automation while retaining task-design and data-strategy responsibilities.
-
-#### Duke University's AI at Duke Program
-
+Developed and tested engineering adaptations of statistical learning, model evaluation, and interpretable analysis to address data validity, expert judgment, and the reliability of research conclusions. Used expert pilots, business experiments, analytical proofs, and recalculation after evidence corrections to turn research methods into project standards that could be used and revised over time. Partner identities, proprietary model details, and project-level performance metrics are subject to confidentiality obligations.
+References identify methodological foundations or provide retrospective research context.
+#### Duke University × Top-Tier Foundation Model Company
+**Location:** Durham, NC; Palo Alto, CA
 **Position:** Researcher
-**Location:** Durham, USA
-**Dates:** September 2023 – October 2025
-
-##### Scientific Reasoning Evaluation and Task Design
-
-- Designed graduate-level physics and risk-engineering evaluation tasks that probed frontier language-model reasoning through demanding derivations, interdependent assumptions, and boundary conditions; produced analytical solutions that exposed errors in modeling and argument consistency.
-
-- Constructed computation-intensive physics problems around invariants, admissibility constraints, and unfamiliar combinations of established principles, reducing reliance on formula recall and standard textbook solution patterns.
-
-- Translated risk-engineering research into quantitative evaluation cases with explicit assumptions and end-to-end reasoning requirements; incorporated advanced methods and edge cases to test the validity of apparently plausible solutions.
-
-- Developed a right-triangle kinematics problem with path-invariant vertical travel time; reduced the optimization to horizontal scheduling, established the fastest path, proved that the travel-time supremum was unattained, and derived harmonic-number asymptotics for a staircase construction approaching the bound.
-
+**Dates:** September 2023 – September 2026
+##### Project 1: Bayesian Quality Control and Adaptive Review
+Developed methods for assessing output quality, contributor reliability, and business outcomes within limited review resources for a frontier foundation-model company. Co-developed standards across travel, food delivery, consumer goods, and e-commerce advertising projects involving approximately 300 annotators. Method contributions covered review allocation, defect diagnosis, and strategy evaluation.
+- **Turned reliability estimates into an adaptive review policy.** Combined beta-binomial posteriors, credible intervals, and verified sample counts to inform additional review and contributor selection, addressing the uncertainty hidden by short runs of correct judgments. Used initial review status to allocate follow-up checks and retained random expert audits outside targeted cases. The design specified how uncertainty should change review effort, alongside the quality-estimation problem in [CROWDLAB (Goh et al., 2022)](https://arxiv.org/abs/2210.06812) and label-budget allocation in [ActiveLab (Goh and Mueller, 2023)](https://arxiv.org/abs/2301.11856).
+- Used actual audits, disagreement analysis, and expert adjudication to check judgments against verified references, then update contributor records, feedback, and subsequent review intensity. Built SQL and Python analyses linking tasks, reviews, time spent, and behavioral events; reconciled platform and Hubstaff records with accepted deliverables so that quality and resource decisions could respond to verified output.
+- **Developed requirement-level diagnosis that also informed revisions to evaluation criteria.** Separated intent, location, date, and destination-page consistency, linking requirements to observed behavior, failure categories, reviewer rationales, and recheck results. Investigated location, session, redirect, and page changes to distinguish content, routing, and review issues. Examined both contributor judgments and unclear criteria when disputes recurred, then revised the standards. [Guerdan et al. (2025)](https://arxiv.org/abs/2503.05965) examine how underspecified criteria can admit reasonable disagreement.
+- Used defect rechecks and random expert audits to assess corrections, translating broad complaints into specific issues engineering teams could investigate and using the findings to revise instructions and reviewer calibration. Project spot checks recorded improved complete requirement matching under the overall quality workflow, without attributing the observation to any single model or review component.
+- **Designed strategy evaluation around the user's decision stage.** Compared recommendation strategies under exploratory browsing and immediate purchase conditions, defining dwell time, detail-page clicks, and payment as separate outcomes with their own observation windows. Conducted A/B tests and fitted logistic models for clicks and payment with strategy-by-decision-stage interactions, so findings could specify the decision context and business outcome to which they applied.
+- Converted the experiments and regression analyses into context-specific strategy comparisons and reusable experiment guidelines covering matching prerequisites, strategy variables, outcome definitions, and applicability limits. Reported browsing, clicks, and completed transactions separately, then incorporated findings into subsequent evaluation guidance to avoid treating higher engagement as evidence of higher conversion.
+##### Project 2: Financial Preference Data Engineering and Model Evaluation
+Led method design for a financial task module supporting a frontier foundation-model company's post-training and evaluation programs. Investigated how to expand expert-authored cases, capture preferences grounded in financial judgment, and test new specifications before production. Owned scenario requirements, reference answers, expansion rules, preference protocols, and pilot design, producing standards other experts could apply independently.
+- **Designed data expansion around business constraints and reference-answer revalidation.** Established scenario matrices, variable dependencies, and rule applicability from real materials, then expanded inputs under defined ranges, perturbations, and boundary conditions. Required revised reference judgments before generating new model responses and expert preferences. The design made input changes trigger specific downstream checks, addressing the evidence-and-calculation links in [FinQA (Chen et al., 2021)](https://arxiv.org/abs/2109.00122) and financial rule checks in [FinRule-Bench (Malarkkan et al., 2026)](https://arxiv.org/abs/2603.11339).
+- Checked expanded business relationships, reference solutions, and complete preference records, using independent trial submissions to examine whether cases could be produced from the specifications. Used the findings to repair cases and revise expansion guidance, establishing a sequence from real evidence through constrained variation to renewed expert review, with validity checks as coverage expanded.
+- **Designed a preference protocol that tied judgment strength to substantive financial errors.** Recorded direction, strength, comparative rationale, and error type in five-level pairwise judgments. Defined evidence support, decisive variables, rule applicability, and the basis for conclusions to distinguish material errors from minor shortcomings. The contribution was to turn financial judgment into explicit review conditions, related to preference strength in [HelpSteer2-Preference (Wang et al., 2024)](https://arxiv.org/abs/2410.01257) and fine-grained feedback in [Wu et al. (2023)](https://arxiv.org/abs/2306.01693).
+- Used independently submitted comparisons and disputed cases to examine how the protocol was interpreted, add boundary examples, revise guidance, and calibrate rating standards. Linked labels to prompts, inputs, response pairs, and rationales so later reviews could distinguish substantive errors, insufficient evidence, and local differences in presentation, with the findings informing subsequent guidance revisions.
+- **Created Batch Zero to test new specifications with established contributors.** Before production, selected contributors with reliable delivery records to independently complete task authoring, inputs, reference solutions, and preference review, focusing attention on ambiguity and differences in interpretation. [MultiHiertt (Zhao et al., 2022)](https://aclanthology.org/2022.acl-long.454/) also uses expert piloting and revision; this project's design incorporated internal delivery history into a repeatable test of the complete data workflow.
+- Used gaps in instructions, review disagreements, and case defects found during the pilot to revise examples and criteria before Batch One. Completed the handoff of rules, rework conditions, and escalation procedures while retaining responsibility for task design and data strategy. Batch Zero was subsequently reused for new tasks within the company, extending the method beyond a single delivery.
+---
+#### Duke University × Top-Tier AI Research Lab
+**Location:** Durham, NC; Palo Alto, CA
+**Position:** Researcher
+**Dates:** September 2023 – September 2026
+##### Project: Scientific Reasoning Evaluation and Task Design
+Led the design of graduate-level physics, mathematical reasoning, and risk-engineering tasks for a frontier AI research lab. Developed original problems, complete solutions, and failure analyses around three questions: how to construct diagnostically useful hard tasks, how to check an argument, and how to verify claims about optimal solutions and limiting bounds.
+- **Designed difficulty around combinations of principles and dependent assumptions.** Used non-routine combinations of established principles, invariants, feasibility conditions, and interacting assumptions to require quantitative formulation before formula application. Converted variables and premises from risk-engineering research into original problems requiring complete derivations, with explicit formulation requirements for expert review. Related quantitative reasoning research includes [Minerva (Lewkowycz et al., 2022)](https://arxiv.org/abs/2206.14858).
+- Completed analytical solutions and explicit conditions for the constructed tasks, checking both whether each question was defensible and whether model arguments were valid. Produced original graduate-level problems and reference materials whose analytical results exposed errors in formulation and argument consistency, giving each task a concrete diagnostic purpose.
+- **Extended answer checking to the conditions that make an argument valid.** Specified variable relationships, consequential steps, and their assumptions in reference solutions, requiring conclusions to follow from a supported derivation. Allowed alternative valid approaches and organized failures by formulation, omitted conditions, calculation, and proof gaps. Made process evaluation concrete for original scientific tasks, in relation to [Lightman et al. (2023)](https://arxiv.org/abs/2305.20050) and [ProcessBench (Zheng et al., 2024)](https://arxiv.org/abs/2412.06559).
+- Used complete derivations to identify where model arguments lost support, delivering failure analyses with error locations, missing conditions, and supporting explanations for further review and task revision. Distinguished the applicability of a formula from the accuracy of its calculation, a distinction also used in [PhysReason (Zhang et al., 2025)](https://arxiv.org/abs/2502.12054). Assessed argument validity without requiring the same sequence of steps as the reference solution.
+- **Established separate proof requirements for feasibility, optimality, and attainability.** Required candidate solutions to satisfy the stated constraints, a separate argument to establish that no better result existed, and a further check of whether the bound could be attained. Assigned constructions, boundary arguments, and asymptotic analysis to these different claims so a feasible solution, an attained optimum, and an approachable limit were evaluated distinctly.
+- In an original optimization problem, proved that the minimum completion time was attainable and the supremum of completion time was not, then provided a construction approaching the supremum and analyzed its asymptotic behavior. Incorporated these conclusions about existence and limiting behavior into reference solutions and acceptance criteria, using them to check whether the question demanded an impossible attained optimum.
+---
 #### Duke University × Leading Global Alternative Asset Manager
-
-**Position:** Researcher, Applied AI and Investment Research
-**Location:** Durham, NC, USA; Washington, DC, USA
-**Dates:** August 2024 – May 2025
-
-##### AI-Driven Investment Research and Sustainability Risk Analytics — University–industry research collaboration with a leading global alternative asset manager ($300B+ AUM as of June 2026; confidential partner)
-
-- Applied tree-based machine learning to impact, operational, financial, questionnaire, and third-party data to uncover nonlinear relationships, sector-specific sustainability risks, and investment-relevant patterns.
-
-- Used SHAP feature attribution to explain company-level predictions and compare predictive factors across industries, translating model outputs into interpretable findings for investment risk assessment.
-
-- Designed and implemented a scoring and validation framework that translated qualitative sustainability criteria into structured assessment rules, supporting consistent, evidence-grounded company evaluations.
-
-- Developed AI-driven evidence-verification workflows to identify potentially fabricated or manipulated ESG information across corporate and third-party sources, flagging unsupported claims and cross-source contradictions that could distort investment assessments.
-
-- Evaluated the stability of company scores and sector-level findings through sensitivity analysis and bootstrap-based uncertainty estimation, quantifying variability across resampled datasets and alternative analytical assumptions.
+**Location:** Durham, NC;  Washington, DC
+**Position:** Researcher
+**Dates:** September 2023 – September 2026
+##### Project: AI-Driven Investment Research and Explainable Risk Analysis
+University–industry research collaboration with a leading global alternative asset manager ($300B+ AUM as of June 2026; confidential partner). Used operating, financial, sustainability, questionnaire, and third-party materials to develop company assessments that could be checked against their evidence, with analysis conducted in approved local or private-cloud environments.
+- **Developed a method for tracing company scores and model explanations to qualitative evidence.** Converted assessment criteria into structured scoring and validation rules linking company information, judgment conditions, and supporting material. Connected tree-model predictions and SHAP contributions to original inputs and sector context, making the evidence behind scores and explanations available for review. This addressed differences in rating definitions, a problem examined by [Berg, Kölbel, and Rigobon (2022)](https://academic.oup.com/rof/article/26/6/1315/6590670).
+- Applied the method to company prediction and sector comparisons, using trees to examine thresholds and interactions and [SHAP (Lundberg and Lee, 2017)](https://arxiv.org/abs/1705.07874) to explain predictive contributions relative to a baseline. Considered fit, interpretability, and the cost of checking influential inputs when selecting methods, with tabular-learning context from [Grinsztajn et al. (2022)](https://arxiv.org/abs/2207.08815). The project contribution was to make explanations point to company materials and due-diligence questions that warranted checking.
+- **Designed and implemented a process for revisiting investment conclusions after evidence corrections.** Linked unsupported claims, conflicting sources, and questionable information found through AI-assisted cross-source checks to affected scoring inputs. Required corrections to be followed by recalculation and review of the analytical conclusions. Relevant research distinguishes citation support from factual truth in [Menick et al. (2022)](https://arxiv.org/abs/2203.11147) and documents errors in combining disclosure evidence in [CHATREPORT (Ni et al., 2023)](https://aclanthology.org/2023.emnlp-demo.3/).
+- Resolved contradictory information, corrected inputs, and recalculated company scores and model predictions, then separately checked whether rankings and feature attributions changed. Extended evidence review through to the resulting risk assessment, addressing conclusions that could otherwise remain tied to superseded inputs. Used the recalculated outputs to examine the implications of each correction.
+- **Made sample and assumption sensitivity part of the test for a research conclusion.** Combined sensitivity analysis and bootstrap resampling for company scores and sector findings, examining variation under changed assumptions and resampled data. Considered these checks alongside predictive explanations and unresolved evidence questions. [Marx et al. (2023)](https://proceedings.mlr.press/v206/marx23a/marx23a.pdf) examine the related reliability problem of different explanations from similarly predictive models.
+- Completed resampling and assumption-sensitivity analyses to assess uncertainty in company scores and sector findings, informing which results required additional evidence. Extended a single fitted result into a research output with stability checks, and used evidence quality to qualify the conditions under which conclusions could be used.
 
 ### Data Science
 

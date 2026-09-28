@@ -9,19 +9,39 @@ function formatWebsiteLabel(website: string) {
   return website.replace(/^https?:\/\/(?:www\.)?/u, "").replace(/\/$/u, "");
 }
 
+function renderExperienceText(text: string) {
+  return text.split(/(\*\*[^*]+\*\*|\[[^\]]+\]\(https?:\/\/[^\s)]+\))/gu).map((part, index) => {
+    if (part.startsWith("**") && part.endsWith("**")) {
+      return <strong key={index}>{part.slice(2, -2)}</strong>;
+    }
+    const link = part.match(/^\[([^\]]+)\]\((https?:\/\/[^\s)]+)\)$/u);
+    return link ? <a key={index} href={link[2]}>{link[1]}</a> : part;
+  });
+}
+
 export function ExperienceDomainPage({
   domain,
 }: {
   domain: ExperienceDomain;
 }) {
   return (
-    <SiteShell active="experience">
+    <SiteShell
+      active="experience"
+      frameClassName={domain.slug === "artificial-intelligence" ? "ai-research-page" : undefined}
+    >
       <header className="page-intro plain-page-intro domain-page-intro">
         <Link className="back-link" href="/past-experience/">
           <span aria-hidden="true">←</span> Past Experience
         </Link>
         <p className="domain-page-number">{domain.number}</p>
         <h1>{domain.name}</h1>
+        {domain.introduction.length > 0 && (
+          <div className="archive-entry-content domain-introduction">
+            {domain.introduction.map((paragraph, index) => (
+              <p key={index}>{renderExperienceText(paragraph)}</p>
+            ))}
+          </div>
+        )}
       </header>
 
       <section className="domain-panel domain-panel-standalone" aria-label={domain.name}>
@@ -74,6 +94,9 @@ export function ExperienceDomainPage({
                   <div className="entry-project-group" key={`${project.title}-${projectIndex}`}>
                     <h3 className="entry-project">{title}</h3>
                     {context && <p className="entry-project-context"><em>{context}</em></p>}
+                    {project.introduction.map((paragraph, index) => (
+                      <p className="entry-project-context" key={index}>{renderExperienceText(paragraph)}</p>
+                    ))}
                     {project.sections.map((section, sectionIndex) => (
                       <div className="entry-project-section" key={sectionIndex}>
                         {section.heading && (
@@ -81,7 +104,7 @@ export function ExperienceDomainPage({
                         )}
                         <ul className="archive-bullets">
                           {section.bullets.map((bullet, bulletIndex) => (
-                            <li key={bulletIndex}>{bullet}</li>
+                            <li key={bulletIndex}>{renderExperienceText(bullet)}</li>
                           ))}
                         </ul>
                       </div>

@@ -29,7 +29,7 @@ const NAVIGATION = [
   ["Current Chapter", "/now/"],
 ];
 const DOMAINS = [
-  ["Artificial Intelligence", "/past-experience/artificial-intelligence/", 3, 37],
+  ["AI Research and Engineering", "/past-experience/artificial-intelligence/", 3, 24],
   ["Data Science", "/past-experience/data-science/", 3, 20],
   ["Environmental, Social, and Governance", "/past-experience/environmental-social-and-governance/", 3, 5],
   ["Finance and Consulting", "/past-experience/finance/", 4, 23],
@@ -192,7 +192,7 @@ test("inner routes present text-focused pages and the Current Chapter introducti
   assert.match(now, /expand human capability/u);
 });
 
-test("Past Experience presents five domains, 15 entries, and 91 bullets", async () => {
+test("Past Experience presents five domains, 15 entries, and 78 bullets", async () => {
   const directory = await routeHtml("/past-experience/");
   assert.match(directory, /<h1>Past Experience<\/h1>/u);
   assert.match(directory, /class="page-intro-support">Experience through September 2026<\/p>/u);
@@ -219,23 +219,24 @@ test("Past Experience presents five domains, 15 entries, and 91 bullets", async 
     bullets += routeBullets;
   }
   assert.equal(entries, 15);
-  assert.equal(bullets, 91);
+  assert.equal(bullets, 78);
 });
 
 test("experience pages retain the resume project hierarchy and consulting placement", async () => {
   const ai = await routeHtml("/past-experience/artificial-intelligence/");
-  const micro1 = elementsWithClass(ai, "article", "archive-entry")[0][2];
-  assert.match(micro1, /<h2>Micro1<\/h2>/u);
-  assert.deepEqual(elementsWithClass(micro1, "h3", "entry-project").map((match) => stripMarkup(match[2])), [
-    "Project 1: LLM Advertising Evaluation and Statistical Decision Modeling",
-    "Project 2: Domain Evaluation and Human Preference Data Engineering",
+  const foundationModel = elementsWithClass(ai, "article", "archive-entry")[0][2];
+  assert.match(foundationModel, /<h2>Duke University × Top-Tier Foundation Model Company<\/h2>/u);
+  assert.deepEqual(elementsWithClass(foundationModel, "h3", "entry-project").map((match) => stripMarkup(match[2])), [
+    "Project 1: Bayesian Quality Control and Adaptive Review",
+    "Project 2: Financial Preference Data Engineering and Model Evaluation",
   ]);
-  assert.deepEqual(elementsWithClass(micro1, "h4", "entry-section-heading").map((match) => stripMarkup(match[2])), [
-    "Evaluation operations and Bayesian quality control",
-    "Experimentation and recommendation strategy",
-  ]);
-  assert.deepEqual(elementsWithClass(micro1, "ul", "archive-bullets").map((match) => (match[2].match(/<li\b/gu) ?? []).length), [9, 7, 12]);
-  assert.match(stripMarkup(micro1), /November 2025 – September 2026/u);
+  assert.equal(elementsWithClass(foundationModel, "h4", "entry-section-heading").length, 0);
+  assert.deepEqual(elementsWithClass(foundationModel, "ul", "archive-bullets").map((match) => (match[2].match(/<li\b/gu) ?? []).length), [6, 6]);
+  assert.match(stripMarkup(foundationModel), /September 2023 – September 2026/u);
+  assert.match(ai, /<strong>Turned reliability estimates into an adaptive review policy\.<\/strong>/u);
+  assert.match(ai, /<a href="https:\/\/arxiv\.org\/abs\/2210\.06812">CROWDLAB \(Goh et al\., 2022\)<\/a>/u);
+  assert.match(stripMarkup(ai), /Partner identities, proprietary model details, and project-level performance metrics are subject to confidentiality obligations\./u);
+  assert.match(stripMarkup(ai), /University–industry research collaboration with a leading global alternative asset manager \(\$300B\+ AUM as of June 2026; confidential partner\)/u);
   const finance = await routeHtml("/past-experience/finance/");
   assert.deepEqual(elementsWithClass(finance, "article", "archive-entry").map((match) => stripMarkup(match[2].match(/<h2>(.*?)<\/h2>/u)[1])), [
     "Jones Lang LaSalle Capital Markets Team", "Hubble Network", "SAIF Partners", "CITIC Securities",
