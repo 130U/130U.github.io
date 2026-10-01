@@ -1,0 +1,251 @@
+.paper {
+  min-width: 0;
+  max-width: 72ch;
+  color: var(--ink);
+  font-size: var(--type-reading);
+  line-height: var(--reading-leading);
+  letter-spacing: 0;
+  overflow-wrap: anywhere;
+}
+
+.paper strong {
+  font-weight: 600;
+}
+
+.header {
+  margin-bottom: 3rem;
+}
+
+.header :global(.back-link) {
+  margin-bottom: 3rem;
+}
+
+.kicker {
+  margin: 0 0 1.5rem;
+  color: var(--muted);
+  font-size: var(--type-label);
+}
+
+.subtitle {
+  margin: 1.25rem 0 0;
+  font-size: var(--type-heading);
+  line-height: 1.4;
+  text-wrap: balance;
+}
+
+.byline {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  margin-top: 2rem;
+  gap: 0.5rem 2rem;
+}
+
+.byline p {
+  margin: 0;
+}
+
+.byline p + p {
+  color: var(--supporting-ink);
+}
+
+.abstract,
+.contents {
+  margin-bottom: 3rem;
+  padding: 1.75rem 0;
+  border-top: 1px solid var(--rule-strong);
+  border-bottom: 1px solid var(--rule);
+}
+
+.abstract h2,
+.body h2,
+.footnotes h2 {
+  margin: 0 0 1.25rem;
+  font-size: var(--type-heading);
+  font-weight: 400;
+  line-height: 1.25;
+  letter-spacing: -0.02em;
+  text-wrap: balance;
+}
+
+.abstract p,
+.body p,
+.footnotes p {
+  margin: 0;
+}
+
+.abstract p + p,
+.body p + p {
+  margin-top: 1.25rem;
+}
+
+.contents summary {
+  width: fit-content;
+  min-height: 44px;
+  cursor: pointer;
+  font-size: var(--type-interface);
+  font-weight: 600;
+  transition: color 180ms var(--ease-out);
+}
+
+.contents ol {
+  display: grid;
+  margin: 0.5rem 0 0;
+  padding: 0;
+  list-style: none;
+  gap: 0.75rem;
+}
+
+.contents li {
+  font-size: var(--type-interface);
+  line-height: 1.5;
+}
+
+.subsectionLink {
+  padding-left: 1.25rem;
+}
+
+.body h2 {
+  margin-top: 3.5rem;
+  scroll-margin-top: 6rem;
+}
+
+.body h3 {
+  margin: 2.5rem 0 1.25rem;
+  font-size: var(--type-reading);
+  font-weight: 600;
+  line-height: 1.45;
+  text-wrap: balance;
+  scroll-margin-top: 6rem;
+}
+
+.smallCaps {
+  font-size: 0.82em;
+  letter-spacing: 0.025em;
+}
+
+.reference {
+  margin-left: 0.12em;
+  font-size: 0.75em;
+  line-height: 0;
+  vertical-align: super;
+}
+
+.reference a {
+  padding: 0.2em;
+  color: var(--accent);
+  text-decoration: none;
+}
+
+.paper a[id] {
+  scroll-margin-top: 6rem;
+}
+
+.paper a:not(.reference a) {
+  text-decoration-line: underline;
+  text-decoration-color: var(--link-rule);
+  text-decoration-thickness: 1px;
+  text-underline-offset: var(--link-underline-offset);
+}
+
+.footnotes {
+  margin-top: 4rem;
+  padding-top: 2rem;
+  border-top: 1px solid var(--rule-strong);
+  scroll-margin-top: 6rem;
+}
+
+.footnotes ol {
+  margin: 1.75rem 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.footnotes li,
+.authorNote {
+  display: grid;
+  grid-template-columns: 2.5rem minmax(0, 1fr);
+  padding: 1.25rem 0;
+  border-bottom: 1px solid var(--rule);
+  gap: 0.75rem;
+  scroll-margin-top: 6rem;
+}
+
+.noteNumber {
+  padding-top: 0.25rem;
+  color: var(--muted);
+  font-size: var(--type-label);
+  font-variant-numeric: tabular-nums;
+}
+
+.backlinks,
+.authorNote a {
+  display: flex;
+  flex-wrap: wrap;
+  margin-top: 0.75rem;
+  font-size: var(--type-interface);
+  gap: 0.5rem 1rem;
+}
+
+.paperFooter {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  margin-top: 3rem;
+  font-size: var(--type-interface);
+  gap: 1rem;
+}
+
+.paperFooter :global(.back-link) {
+  margin-bottom: 0;
+}
+
+.paper a:focus-visible,
+.contents summary:focus-visible {
+  color: var(--accent);
+  outline: 2px solid var(--accent);
+  outline-offset: 4px;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .paper a:hover,
+  .contents summary:hover {
+    color: var(--accent);
+    text-decoration-color: currentColor;
+  }
+}
+
+@media (pointer: coarse) {
+  .reference a {
+    position: relative;
+    display: inline-block;
+    min-width: 1.5rem;
+    padding: 0;
+    text-align: center;
+  }
+
+  .reference a::after {
+    position: absolute;
+    top: 50%;
+    right: 0;
+    left: 0;
+    height: 1.5rem;
+    content: "";
+    transform: translateY(-50%);
+  }
+
+  .contents a,
+  .backlinks a,
+  .authorNote a {
+    display: inline-flex;
+    align-items: center;
+    min-height: 44px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .contents summary {
+    transition: none;
+  }
+}

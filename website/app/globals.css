@@ -732,7 +732,7 @@ button:focus-visible {
   color: var(--muted);
 }
 
-.ai-research-page .entry-project-context {
+.entry-project-context {
   margin-top: 0.75rem;
   color: var(--supporting-ink);
   font-style: italic;
@@ -740,16 +740,25 @@ button:focus-visible {
   letter-spacing: 0;
 }
 
-.ai-research-page .archive-bullets {
+.archive-bullets {
   margin-top: 1.75rem;
 }
 
-.ai-research-page .archive-bullets strong {
+.archive-bullets strong {
   font-weight: 600;
 }
 
-.ai-research-page .archive-bullets li:has(> strong:first-child):not(:first-child) {
+.archive-bullets li:has(> strong:first-child):not(:first-child) {
   margin-top: 0.75em;
+}
+
+.entry-paper-link {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  margin: 1.25rem 0 0 var(--entry-value-offset);
+  font-size: var(--type-interface);
+  gap: 0.5rem;
 }
 
 .education-note a:focus-visible,

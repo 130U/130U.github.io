@@ -12,6 +12,13 @@ const PROTECTED_PATHS = [
   "app/past-experience/components/ExperienceDomainPage.tsx",
   "app/lib/content/experience.ts",
   "content/past-experience/experience.md",
+  "app/lib/content/legal-papers.ts",
+  "app/past-experience/[slug]/[paper]/page.tsx",
+  "app/past-experience/components/LegalPaperPage.tsx",
+  "content/legal-papers/autonomous-authority-in-space.json",
+  "content/legal-papers/small-states-and-strategic-space-dependence.json",
+  "content/legal-papers/solar-geoengineering-comparison-and-continuity.json",
+  "content/legal-papers/mangrove-restoration-and-compensatory-mitigation.json",
 ];
 
 export function verifyProtectedSources(root = ROOT) {
@@ -24,7 +31,7 @@ export function verifyProtectedSources(root = ROOT) {
     manifest.normalization !== "LF" ||
     JSON.stringify(paths) !== JSON.stringify([...PROTECTED_PATHS].sort())
   ) {
-    throw new Error("The protected-source manifest must cover all seven protected sources with LF normalization.");
+    throw new Error("The protected-source manifest must cover all fourteen protected sources with LF normalization.");
   }
 
   const failures = [];
@@ -50,5 +57,5 @@ export function verifyProtectedSources(root = ROOT) {
 
 if (process.argv[1] && path.resolve(process.argv[1]) === fileURLToPath(import.meta.url)) {
   verifyProtectedSources();
-  console.log("All seven protected sources match their content hashes.");
+  console.log("All fourteen protected sources match their content hashes.");
 }

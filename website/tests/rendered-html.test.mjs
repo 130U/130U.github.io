@@ -11,6 +11,14 @@ const ROOT = fileURLToPath(new URL("../", import.meta.url));
 const REPOSITORY_ROOT = path.dirname(ROOT.replace(/[\\/]$/u, ""));
 const OUT = path.join(ROOT, "out");
 const SITE_ORIGIN = "https://www.theodoreoy.com";
+const LAW_ROUTE = "/past-experience/legal-research-and-policy-analysis/";
+const ARTICLES = [
+  ["autonomous-authority-in-space", "Autonomous Authority in Space: Risk Tradeoffs and the Law of Delegation", "", 30],
+  ["small-states-and-strategic-space-dependence", "Small States and the Governance of Strategic Space Dependence", "", 32],
+  ["solar-geoengineering-comparison-and-continuity", "Who May Choose the Lesser Risk", "Solar Geoengineering and the Legal Duties of Comparison and Continuity", 30],
+  ["mangrove-restoration-and-compensatory-mitigation", "Mangrove Restoration and the Limits of Compensatory Mitigation", "Lessons from Florida for the Greater Bay Area", 41],
+];
+const ARTICLE_ROUTES = ARTICLES.map(([slug]) => `${LAW_ROUTE}${slug}/`);
 const ROUTES = [
   "/",
   "/education/",
@@ -18,9 +26,10 @@ const ROUTES = [
   "/past-experience/",
   "/past-experience/artificial-intelligence/",
   "/past-experience/data-science/",
-  "/past-experience/environmental-social-and-governance/",
+  LAW_ROUTE,
   "/past-experience/finance/",
   "/past-experience/stem-academic-competitions-and-training/",
+  ...ARTICLE_ROUTES,
 ];
 const NAVIGATION = [
   ["Home", "/"],
@@ -28,12 +37,14 @@ const NAVIGATION = [
   ["Past Experience", "/past-experience/"],
   ["Current Chapter", "/now/"],
 ];
+// Entry and bullet totals were counted from the saved October 1 Notion snapshot,
+// independently of the application parser and generated route registry.
 const DOMAINS = [
   ["AI Research and Engineering", "/past-experience/artificial-intelligence/", 3, 24],
-  ["Data Science", "/past-experience/data-science/", 3, 20],
-  ["Environmental, Social, and Governance", "/past-experience/environmental-social-and-governance/", 3, 5],
-  ["Finance and Consulting", "/past-experience/finance/", 4, 23],
-  ["STEM Academic Competitions and Training", "/past-experience/stem-academic-competitions-and-training/", 2, 6],
+  ["Data Science", "/past-experience/data-science/", 3, 40],
+  ["Legal Research and Policy Analysis", LAW_ROUTE, 1, 8],
+  ["Finance and Consulting", "/past-experience/finance/", 5, 24],
+  ["STEM Academic Competitions and Training", "/past-experience/stem-academic-competitions-and-training/", 2, 7],
 ];
 const EXPECTED_PUBLIC_ASSETS = [
   "assets/brand/apple-touch-icon.png",
@@ -65,6 +76,10 @@ function stripMarkup(value) {
   return normalizeSpace(value.replace(/<script\b[\s\S]*?<\/script>/giu, " ").replace(/<style\b[\s\S]*?<\/style>/giu, " ").replace(/<[^>]+>/gu, " "));
 }
 
+function inlineText(value) {
+  return normalizeSpace(value.replace(/<[^>]+>/gu, ""));
+}
+
 function attribute(tag, name) {
   const escaped = name.replace(/[.*+?^${}()|[\]\\]/gu, "\\$&");
   const match = tag.match(new RegExp(`(?:^|\\s)${escaped}\\s*=\\s*(?:"([^"]*)"|'([^']*)'|([^\\s>]+))`, "iu"));
@@ -73,6 +88,15 @@ function attribute(tag, name) {
 
 function openingTags(html, tagName) {
   return html.match(new RegExp(`<${tagName}\\b[^>]*>`, "giu")) ?? [];
+}
+
+function elementHtmlById(html, id) {
+  const escapedId = id.replace(/[.*+?^${}()|[\]\\]/gu, "\\$&");
+  const opening = new RegExp(`<([a-z][\\w:-]*)\\b[^>]*\\bid="${escapedId}"[^>]*>`, "iu").exec(html);
+  assert.ok(opening, `Missing element #${id}`);
+  const end = html.indexOf(`</${opening[1]}>`, opening.index + opening[0].length);
+  assert.ok(end >= 0, `Incomplete element #${id}`);
+  return html.slice(opening.index, end);
 }
 
 function elementsWithClass(html, tagName, className) {
@@ -126,7 +150,7 @@ async function exportedRoutes() {
     .sort();
 }
 
-test("the static export contains nine website routes and the architecture viewer", async () => {
+test("the static export contains thirteen website routes and the architecture viewer", async () => {
   assert.deepEqual(await exportedRoutes(), [...ROUTES, "/architecture/"].sort());
   assert.ok(existsSync(path.join(OUT, "404.html")));
 });
@@ -192,7 +216,7 @@ test("inner routes present text-focused pages and the Current Chapter introducti
   assert.match(now, /expand human capability/u);
 });
 
-test("Past Experience presents five domains, 15 entries, and 78 bullets", async () => {
+test("Past Experience presents five domains, 14 entries, and 103 bullets from the October Notion snapshot", async () => {
   const directory = await routeHtml("/past-experience/");
   assert.match(directory, /<h1>Past Experience<\/h1>/u);
   assert.match(directory, /class="page-intro-support">Experience through September 2026<\/p>/u);
@@ -218,8 +242,8 @@ test("Past Experience presents five domains, 15 entries, and 78 bullets", async 
     entries += routeEntries.length;
     bullets += routeBullets;
   }
-  assert.equal(entries, 15);
-  assert.equal(bullets, 78);
+  assert.equal(entries, 14);
+  assert.equal(bullets, 103);
 });
 
 test("experience pages retain the resume project hierarchy and consulting placement", async () => {
@@ -239,10 +263,125 @@ test("experience pages retain the resume project hierarchy and consulting placem
   assert.match(stripMarkup(ai), /University–industry research collaboration with a leading global alternative asset manager \(\$300B\+ AUM as of June 2026; confidential partner\)/u);
   const finance = await routeHtml("/past-experience/finance/");
   assert.deepEqual(elementsWithClass(finance, "article", "archive-entry").map((match) => stripMarkup(match[2].match(/<h2>(.*?)<\/h2>/u)[1])), [
-    "Jones Lang LaSalle Capital Markets Team", "Hubble Network", "SAIF Partners", "CITIC Securities",
+    "Jones Lang LaSalle Capital Markets Team", "Hubble Network", "SAIF Partners", "CITIC Securities", "EY-Parthenon",
   ]);
-  const esg = await routeHtml("/past-experience/environmental-social-and-governance/");
-  assert.doesNotMatch(esg, /Hubble Network/u);
+  const ey = elementsWithClass(finance, "article", "archive-entry")[4][2];
+  assert.match(stripMarkup(ey), /Summer Intern Dates May 2021 – August 2021/u);
+  assert.match(stripMarkup(ey), /Digital Transformation and Business-Line Restructuring/u);
+  assert.match(stripMarkup(ey), /Helped the team review and restructure business lines and improve visibility into the business/u);
+  const legal = await routeHtml(LAW_ROUTE);
+  assert.doesNotMatch(legal, /Hubble Network/u);
+  assert.deepEqual(elementsWithClass(legal, "h3", "entry-project").map((match) => stripMarkup(match[2])), [
+    "Project 1: Autonomous Authority in Space: Risk Tradeoffs and the Law of Delegation",
+    "Project 2: Small States and the Governance of Strategic Space Dependence",
+    "Project 3: Who May Choose the Lesser Risk: Solar Geoengineering and the Legal Duties of Comparison and Continuity",
+    "Project 4: Mangrove Restoration and the Limits of Compensatory Mitigation: Lessons from Florida for the Greater Bay Area",
+  ]);
+  for (const route of ARTICLE_ROUTES) {
+    assert.equal(openingTags(legal, "a").filter((tag) => attribute(tag, "href") === route).length, 1, `Missing unique reading link to ${route}`);
+  }
+  for (const [slug] of ARTICLES) assert.ok(legal.includes(`id="${slug}"`), `Missing experience return anchor #${slug}`);
+});
+
+test("all five domains retain their updated introductions and substantive source claims", async () => {
+  const sourceClaims = [
+    ["/past-experience/artificial-intelligence/", "Developed and tested engineering adaptations of statistical learning, model evaluation, and interpretable analysis to address data validity, expert judgment, and the reliability of research conclusions."],
+    ["/past-experience/data-science/", "Applied statistical learning, data engineering, and market analysis to counterparty screening, market entry, and green-credit assessment."],
+    [LAW_ROUTE, "Authored four research papers examining how legal institutions allocate authority and responsibility under technological and environmental uncertainty."],
+    ["/past-experience/finance/", "Applied market research, valuation analysis, and risk screening to real estate acquisition advice, technology commercialization, dental-sector research, and equity research."],
+    ["/past-experience/stem-academic-competitions-and-training/", "Combined advanced physics and mathematics Olympiad training with peer mentoring and independent instruction."],
+  ];
+  for (const [route, sourceClaim] of sourceClaims) assert.ok(stripMarkup(await routeHtml(route)).includes(sourceClaim), `${route} lost its source introduction`);
+  const dataScience = stripMarkup(await routeHtml("/past-experience/data-science/"));
+  assert.ok(dataScience.includes("Owned data-driven business development for new issuers as the sole dedicated contributor, reporting directly to co-founder Asher Gottesman."));
+  assert.ok(dataScience.includes("Diagnosed gaps between token-market performance and partnership value through issuer-level error analysis."));
+  const stem = stripMarkup(await routeHtml("/past-experience/stem-academic-competitions-and-training/"));
+  assert.ok(stem.includes("Coached multiple students participating in USAPhO and the U.S. Physics Team selection process"));
+});
+
+test("law papers preserve article identity, chapter navigation, and bidirectional footnotes", async () => {
+  for (const [slug, title, subtitle, expectedFootnotes] of ARTICLES) {
+    const route = `${LAW_ROUTE}${slug}/`;
+    const html = await routeHtml(route);
+    const text = stripMarkup(html);
+    const titleMatch = html.match(/<h1\b[^>]*>([\s\S]*?)<\/h1>/iu);
+    assert.ok(titleMatch, `${route} is missing its article title`);
+    assert.equal(stripMarkup(titleMatch[1]), title);
+    if (subtitle) assert.ok(text.includes(subtitle), `${route} lost its original subtitle`);
+    assert.ok(text.includes("Letao Ouyang"), `${route} lost its original author name`);
+    assert.ok(text.includes("December 2024"), `${route} lost its original date`);
+    assert.ok(text.includes("Abstract"), `${route} is missing its abstract`);
+    assert.equal(openingTags(html, "article").length, 1, `${route} must have one article reading region`);
+    assert.ok(openingTags(html, "a").some((tag) => attribute(tag, "href") === `${LAW_ROUTE}#${slug}`), `${route} is missing its return link`);
+
+    const allIds = [...html.matchAll(/\bid="([^"]+)"/giu)].map((match) => decodeHtml(match[1]));
+    const ids = new Set(allIds);
+    assert.equal(ids.size, allIds.length, `${route} has duplicate anchors`);
+    const links = openingTags(html, "a");
+    const chapterIds = [...html.matchAll(/<h[2-6]\b[^>]*\bid="(section-[^"]+)"[^>]*>/giu)].map((match) => decodeHtml(match[1]));
+    assert.ok(chapterIds.length > 0, `${route} is missing chapter anchors`);
+    for (const id of chapterIds) assert.ok(links.some((tag) => attribute(tag, "href") === `#${id}`), `${route} is missing its contents link to ${id}`);
+
+    const references = links.filter((tag) => attribute(tag, "role") === "doc-noteref");
+    assert.ok(references.length >= expectedFootnotes, `${route} lost footnote references`);
+    const referencedNumbers = [...html.matchAll(/<a\b([^>]*)>([\s\S]*?)<\/a>/giu)]
+      .filter((match) => attribute(match[1], "role") === "doc-noteref")
+      .map((match) => stripMarkup(match[2]))
+      .filter((number) => /^\d+$/u.test(number))
+      .map(Number);
+    assert.deepEqual([...new Set(referencedNumbers)].sort((a, b) => a - b), Array.from({ length: expectedFootnotes }, (_, index) => index + 1), `${route} lost or combined numbered references`);
+    const noteTargets = new Set();
+    for (const reference of references) {
+      const referenceId = attribute(reference, "id");
+      const href = attribute(reference, "href");
+      assert.ok(referenceId && href?.startsWith("#"), `${route} has an unaddressable footnote reference`);
+      const targetId = href.slice(1);
+      assert.ok(ids.has(targetId), `${route} has a dangling footnote target: ${href}`);
+      noteTargets.add(targetId);
+      const note = elementHtmlById(html, targetId);
+      assert.ok(openingTags(note, "a").some((tag) => attribute(tag, "href") === `#${referenceId}`), `${route} is missing the backlink for ${referenceId}`);
+    }
+    assert.ok(noteTargets.size >= expectedFootnotes, `${route} is missing distinct footnotes`);
+    for (const link of links) {
+      const href = attribute(link, "href") ?? "";
+      if (href.startsWith("#")) assert.ok(ids.has(href.slice(1)), `${route} has a broken local anchor ${href}`);
+      if (!/^https?:/iu.test(href)) assert.doesNotMatch(href, /\.pdf(?:[?#]|$)/iu, `${route} must not link to an original PDF`);
+    }
+    assert.equal(openingTags(html, "iframe").length + openingTags(html, "embed").length + openingTags(html, "object").length, 0);
+  }
+});
+
+test("law article paragraphs, headings, and citations exactly match the approved structured sources", async () => {
+  for (const [slug] of ARTICLES) {
+    const source = JSON.parse(await readFile(path.join(ROOT, "content", "legal-papers", `${slug}.json`), "utf8"));
+    const html = await routeHtml(`${LAW_ROUTE}${slug}/`);
+    const abstract = [...html.matchAll(/<section\b([^>]*)>([\s\S]*?)<\/section>/giu)]
+      .find((match) => attribute(match[1], "aria-labelledby") === "abstract-heading");
+    assert.ok(abstract, `${slug} lost its abstract region`);
+    const abstractParagraphs = [...abstract[2].matchAll(/<p\b[^>]*>([\s\S]*?)<\/p>/giu)].map((match) => inlineText(match[1]));
+    assert.deepEqual(abstractParagraphs, source.abstract.map(({ text }) => normalizeSpace(text)), `${slug} changed abstract text`);
+
+    const blocks = [...html.matchAll(/<(p|h2|h3)\b([^>]*)>([\s\S]*?)<\/\1>/giu)]
+      .filter((match) => attribute(match[2], "data-paper-block") !== undefined)
+      .map((match) => ({ index: Number(attribute(match[2], "data-paper-block")), tag: match[1], text: inlineText(match[3]) }));
+    assert.deepEqual(blocks, source.blocks.map(({ type, level, text }, index) => ({ index, tag: type === "heading" ? (level > 1 ? "h3" : "h2") : "p", text: normalizeSpace(text) })), `${slug} changed or omitted body text or heading structure`);
+
+    for (const note of source.footnotes) {
+      const noteHtml = elementHtmlById(html, `fn-${note.number}`);
+      const paragraphs = [...noteHtml.matchAll(/<p\b[^>]*>([\s\S]*?)<\/p>/giu)].map((match) => inlineText(match[1]));
+      assert.deepEqual(paragraphs, [normalizeSpace(note.text)], `${slug} changed footnote ${note.number}`);
+    }
+    const acknowledgmentHtml = elementHtmlById(html, "fn-author");
+    const acknowledgment = acknowledgmentHtml.match(/<p\b[^>]*>([\s\S]*?)<\/p>/iu);
+    assert.ok(acknowledgment, `${slug} lost its acknowledgment`);
+    assert.equal(inlineText(acknowledgment[1]), normalizeSpace(source.acknowledgment.text), `${slug} changed its acknowledgment`);
+  }
+});
+
+test("original PDFs remain absent from public assets and the exported website", async () => {
+  for (const directory of [path.join(ROOT, "public"), OUT]) {
+    assert.deepEqual((await walk(directory)).filter((file) => /\.pdf$/iu.test(file)), [], `${directory} exposes an original PDF`);
+  }
 });
 
 test("Education presents both degrees, 49 courses, and the advisor record", async () => {

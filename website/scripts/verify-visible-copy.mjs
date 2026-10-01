@@ -13,9 +13,13 @@ const ROUTES = [
   "/past-experience/",
   "/past-experience/artificial-intelligence/",
   "/past-experience/data-science/",
-  "/past-experience/environmental-social-and-governance/",
+  "/past-experience/legal-research-and-policy-analysis/",
   "/past-experience/finance/",
   "/past-experience/stem-academic-competitions-and-training/",
+  "/past-experience/legal-research-and-policy-analysis/autonomous-authority-in-space/",
+  "/past-experience/legal-research-and-policy-analysis/small-states-and-strategic-space-dependence/",
+  "/past-experience/legal-research-and-policy-analysis/solar-geoengineering-comparison-and-continuity/",
+  "/past-experience/legal-research-and-policy-analysis/mangrove-restoration-and-compensatory-mitigation/",
   "/now/",
 ];
 

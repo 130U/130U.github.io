@@ -1,22 +1,35 @@
 import Link from "next/link";
+import type { ReactNode } from "react";
 import { SiteShell } from "../../components/SiteShell";
 import type { ExperienceDomain } from "../../lib/content/experience";
 
-const metadataOrder = ["Position", "Location", "Dates", "Website"] as const;
+const metadataOrder = [
+  "Position", "Location", "Dates", "Website",
+  "Research areas", "Author credit", "Manuscript dates",
+] as const;
 const entryIndices = "abcdefghijklmnopqrstuvwxyz";
 
 function formatWebsiteLabel(website: string) {
   return website.replace(/^https?:\/\/(?:www\.)?/u, "").replace(/\/$/u, "");
 }
 
-function renderExperienceText(text: string) {
-  return text.split(/(\*\*[^*]+\*\*|\[[^\]]+\]\(https?:\/\/[^\s)]+\))/gu).map((part, index) => {
-    if (part.startsWith("**") && part.endsWith("**")) {
-      return <strong key={index}>{part.slice(2, -2)}</strong>;
+export function renderExperienceText(text: string): ReactNode[] {
+  const parts: ReactNode[] = [];
+  const inlineMarkup = /\*\*([^*]+)\*\*|\*([^*]+)\*|\[([^\]]+)\]\((https?:\/\/[^\s)]+)\)/gu;
+  let offset = 0;
+  for (const match of text.matchAll(inlineMarkup)) {
+    if (match.index > offset) parts.push(text.slice(offset, match.index));
+    if (match[1]) {
+      parts.push(<strong key={match.index}>{renderExperienceText(match[1])}</strong>);
+    } else if (match[2]) {
+      parts.push(<em key={match.index}>{renderExperienceText(match[2])}</em>);
+    } else {
+      parts.push(<a key={match.index} href={match[4]}>{renderExperienceText(match[3])}</a>);
     }
-    const link = part.match(/^\[([^\]]+)\]\((https?:\/\/[^\s)]+)\)$/u);
-    return link ? <a key={index} href={link[2]}>{link[1]}</a> : part;
-  });
+    offset = match.index + match[0].length;
+  }
+  if (offset < text.length) parts.push(text.slice(offset));
+  return parts;
 }
 
 export function ExperienceDomainPage({
@@ -86,7 +99,7 @@ export function ExperienceDomainPage({
                 })}
               </dl>
               {entry.projects.map((project, projectIndex) => (
-                <div className="entry-project-group" key={`${project.title}-${projectIndex}`}>
+                <div className="entry-project-group" id={project.paperSlug} key={`${project.title}-${projectIndex}`}>
                   <h3 className="entry-project">{project.title}</h3>
                   {project.introduction.map((paragraph, index) => (
                     <p className="entry-project-context" key={index}>{renderExperienceText(paragraph)}</p>
@@ -103,6 +116,15 @@ export function ExperienceDomainPage({
                       </ul>
                     </div>
                   ))}
+                  {project.paperSlug && (
+                    <Link
+                      className="entry-paper-link"
+                      href={`${domain.path}${project.paperSlug}/`}
+                      aria-label={`Read ${project.title.replace(/^Project(?: \d+)?:\s*/u, "")}`}
+                    >
+                      Read paper <span aria-hidden="true">↗</span>
+                    </Link>
+                  )}
                 </div>
               ))}
             </div>

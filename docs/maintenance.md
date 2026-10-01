@@ -25,23 +25,25 @@ Paths in this table are relative to `website/`.
 | Education | `/education/` | `app/education/page.tsx` |
 | Past Experience | `/past-experience/` | `app/past-experience/page.tsx` |
 | Experience details | `/past-experience/[slug]/` | `app/lib/content/experience.ts`, `content/past-experience/` |
+| Legal articles | `/past-experience/legal-research-and-policy-analysis/[article]/` | Article routes, content registry, and structured paper sources |
 | Current Chapter | `/now/` | `app/now/page.tsx` |
 | Architecture | `/architecture/` | `../architecture/index.html` |
 
 `content/past-experience/experience.md` contains the current experience record.
 Use domain, organization, project, and optional subsection headings, followed by
-experience bullets. Each organization requires Position, Location, and Dates.
+experience bullets. Each organization records Position and Dates; Location and
+Website appear when supplied by the source.
 Domain introductions precede the first organization. Project introductions follow
 the project heading and precede its bullets. Inline `**emphasis**` and
 `[citation](https://example.com)` links are supported in prose; raw HTML is rendered
-as text. The AI research page displays project introductions in true italics.
+as text. All five domain pages display project introductions in true italics.
 The experience registry validates five domains and their Markdown entries during
 build. `app/lib/content/routes.ts` supplies the website sitemap. The architecture
 viewer is a separate repository reference, linked from the GitHub introduction.
 
-Seven biographical source files are checked against `content/protected-sources.json`.
+Biographical and legal source files are checked against `content/protected-sources.json`.
 `content/visible-copy-manifest.json` independently records text, metadata, alt text,
-and ARIA labels for all nine website pages. Copy changes require the owner's explicit
+and ARIA labels for all thirteen website pages. Copy changes require the owner's explicit
 request and an intentional update to these contracts. Presentation-only changes to
 a protected component update its source hash while preserving the visible-copy
 manifest. Tests also verify page counts and navigation independently of the registry.
@@ -60,6 +62,20 @@ there is no request-time backend, database, authentication, form submission, or 
 Add a website page by updating its source, the route registry, sitemap expectations,
 and output tests together. Keep browser interaction in focused client components.
 Add a server only when a defined product requirement needs one.
+
+The legal domain replaces the former ESG category and links four selected papers:
+`autonomous-authority-in-space`, `small-states-and-strategic-space-dependence`,
+`solar-geoengineering-comparison-and-continuity`, and
+`mangrove-restoration-and-compensatory-mitigation`. Preserve each paper's source
+title, author, date, abstract, numbered chapter hierarchy, paragraphs, citations,
+and acknowledgment in its structured source. Render chapters with contents anchors
+and footnote references with return links. PDF extraction records remain outside
+public assets; no original PDF should appear in `public/` or `out/`.
+
+Article validation checks all thirteen website routes, four reading links, chapter
+anchors, complete numbered references, bidirectional footnote links, and the absence
+of public PDF files. Validate the published text against the approved source before
+refreshing visible-copy hashes. Read back the four live article pages after publishing.
 
 ## Brand assets
 

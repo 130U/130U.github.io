@@ -1,15 +1,28 @@
 import { readFileSync } from "node:fs";
 import { join } from "node:path";
 
-const requiredMetadataKeys = ["Location", "Position", "Dates"] as const;
-const optionalMetadataKeys = ["Website"] as const;
-const metadataKeys = [...requiredMetadataKeys, ...optionalMetadataKeys] as const;
+const employmentMetadataKeys = ["Position", "Dates"] as const;
+const researchMetadataKeys = ["Research areas", "Author credit", "Manuscript dates"] as const;
+const metadataKeys = [
+  ...employmentMetadataKeys,
+  "Location",
+  "Website",
+  ...researchMetadataKeys,
+] as const;
 type ExperienceMetadataKey = (typeof metadataKeys)[number];
-type RequiredExperienceMetadataKey = (typeof requiredMetadataKeys)[number];
-type OptionalExperienceMetadataKey = (typeof optionalMetadataKeys)[number];
 
-type ExperienceMetadata = Record<RequiredExperienceMetadataKey, string> &
-  Partial<Record<OptionalExperienceMetadataKey, string>>;
+type ExperienceMetadata = Partial<Record<ExperienceMetadataKey, string>>;
+
+const legalPaperSlugs = {
+  "Autonomous Authority in Space: Risk Tradeoffs and the Law of Delegation":
+    "autonomous-authority-in-space",
+  "Small States and the Governance of Strategic Space Dependence":
+    "small-states-and-strategic-space-dependence",
+  "Who May Choose the Lesser Risk: Solar Geoengineering and the Legal Duties of Comparison and Continuity":
+    "solar-geoengineering-comparison-and-continuity",
+  "Mangrove Restoration and the Limits of Compensatory Mitigation: Lessons from Florida for the Greater Bay Area":
+    "mangrove-restoration-and-compensatory-mitigation",
+} as const;
 
 export type ExperienceSection = {
   heading?: string;
@@ -18,6 +31,7 @@ export type ExperienceSection = {
 
 export type ExperienceProject = {
   title: string;
+  paperSlug?: string;
   introduction: string[];
   sections: ExperienceSection[];
 };
@@ -42,8 +56,8 @@ export const experienceDomainDefinitions = [
   { number: "02", name: "Data Science", slug: "data-science" },
   {
     number: "03",
-    name: "Environmental, Social, and Governance",
-    slug: "environmental-social-and-governance",
+    name: "Legal Research and Policy Analysis",
+    slug: "legal-research-and-policy-analysis",
   },
   { number: "04", name: "Finance and Consulting", slug: "finance" },
   {
@@ -77,6 +91,9 @@ export function parsePastExperience(markdown: string): ParsedDomain[] {
     if (!entry) return;
     if (!domain) throw new Error(`Experience entry has no domain: ${entry.organization}`);
 
+    const requiredMetadataKeys = domain.name === "Legal Research and Policy Analysis"
+      ? researchMetadataKeys
+      : employmentMetadataKeys;
     for (const key of requiredMetadataKeys) {
       if (!entry.metadata[key]) {
         throw new Error(`${entry.organization} is missing required metadata: ${key}`);
@@ -145,6 +162,12 @@ export function parsePastExperience(markdown: string): ParsedDomain[] {
       const title = line.slice(6).trim();
       if (!title) throw new Error("Experience project title cannot be empty.");
       project = { title, introduction: [], sections: [] };
+      if (domain?.name === "Legal Research and Policy Analysis") {
+        const paperTitle = title.replace(/^Project(?: \d+)?:\s*/u, "");
+        const paperSlug = legalPaperSlugs[paperTitle as keyof typeof legalPaperSlugs];
+        if (!paperSlug) throw new Error(`Legal research project has no article route: ${paperTitle}`);
+        project.paperSlug = paperSlug;
+      }
       entry.projects.push(project);
       section = undefined;
       continue;

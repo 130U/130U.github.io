@@ -6,8 +6,15 @@
     "app/now/page.tsx": "fd7d113253d81fdf446c20bdb01c6dc2be6f8dc72d9bd6b83c726638ab4ea73a",
     "app/past-experience/page.tsx": "f3c6126decb358a6a43107f19d75acbdbae4886d83f0139b1ee87b0a73ebe289",
     "app/past-experience/[slug]/page.tsx": "a89b781c0a6a74b9295635d5495c4e2cc2cf2d890cc879578ebfd04a9f6db84b",
-    "app/past-experience/components/ExperienceDomainPage.tsx": "6ca9656d36de50d012f98916e7c666411ec9b6aed887f152fca926671a197304",
-    "app/lib/content/experience.ts": "0155eeacf19f1d6652b15089d664f49cd3ff0a4805f2b74d0ae542bf2cfa9e2d",
-    "content/past-experience/experience.md": "fb80b84c846ad8a5c9c50502d3ee441b4c8e50bbbfbb52858ab050c622cdf721"
+    "app/past-experience/components/ExperienceDomainPage.tsx": "4d5e1e047b91982a5b36a84ff438ee0629190647647da8838025d8f618aaf0b8",
+    "app/lib/content/experience.ts": "3e7a5b246b492e483e04628b9965294d074d059202a9047a48af4dd17da707b2",
+    "content/past-experience/experience.md": "cb78704926f9fcab3d0712c222165bfac9379a93f7f45a37c0cd1a3f9717d807",
+    "app/lib/content/legal-papers.ts": "8bd1bca63e7211f7c286df97192faf943144ff28be6d12cc5666f704933e9f4c",
+    "app/past-experience/[slug]/[paper]/page.tsx": "614d91c7746cdb1aecb99b941458d64bc9be23710d0293c10052d3889c4cb178",
+    "app/past-experience/components/LegalPaperPage.tsx": "f75dc1da6f5815fb5768de461292303545ce62d35e8bbd9f7ca7e0a3d3d30955",
+    "content/legal-papers/autonomous-authority-in-space.json": "087d4708bdaf4b487e47438681b3f79941ba08ac2ddfe08a5dd4830fd8a4f2d9",
+    "content/legal-papers/small-states-and-strategic-space-dependence.json": "1ea90829b39b0b56923641c84ed6af46d57cc6de5c13047ced495cc1f0726acb",
+    "content/legal-papers/solar-geoengineering-comparison-and-continuity.json": "f6734b9a29d6ffdcc1c0e612f0ba1917ce9dea2fc9ec5132c81b12fe1e7b54f0",
+    "content/legal-papers/mangrove-restoration-and-compensatory-mitigation.json": "be8ad403b6504ad18cac1b6bdf55925214b389ea6f3c0f325f0fac1bea1e9cd9"
   }
 }

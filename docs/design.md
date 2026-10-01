@@ -58,10 +58,10 @@ use the same reading size. Project titles use weight 600, subsection headings us
 regular italic, and headings wrap with balanced lines. Numbered project titles use
 a colon between the project number and name. Descriptions are separate paragraphs.
 
-The AI research page uses true italics and the supporting ink color for project
-abstracts. Contribution leads use weight 600; additional spacing groups each
-contribution with its supporting evidence. These page-specific emphasis and spacing
-rules are scoped to `.ai-research-page`, with the shared reading size and leading.
+All five domain pages use true italics and the supporting ink color for project
+introductions. Contribution leads use weight 600; additional spacing groups each
+contribution with its supporting evidence. These semantic roles share the same
+reading size, leading, emphasis, and spacing across domains.
 
 Narrative bullets use regular Inter, a 1.6 line height, and 18px between items.
 Their measure is capped at 720px including the metadata alignment indent.
@@ -133,10 +133,30 @@ architecture viewer. Dates use a spaced en dash. Preserve meaningful mathematica
 symbols, collaboration marks, and navigation arrows. An em dash can separate
 clauses. Unicode English dashes, ©, ×, and navigation arrows are intentional;
 Chinese full-width punctuation is not used in public interface copy.
+Legal section symbols, paragraph symbols, mathematical notation, and author names
+with diacritics remain part of the source text.
 
 The four primary pages are Home, Education, Past Experience, and Current Chapter.
-Five domain pages carry the experience record. Keep factual claims, metadata, copy,
-and content order aligned with the integrity manifests.
+Five domain pages carry the experience record. Domain `03` is Legal Research and
+Policy Analysis; its four selected papers each open a dedicated article page.
+The website has thirteen public routes, with the architecture viewer as a separate
+technical reference. Keep factual claims, metadata, copy, and content order aligned
+with the integrity manifests.
+
+### Legal articles
+
+Each paper uses the shared shell and Inter type system with a restrained reading
+measure. Preserve the source title, subtitle, author name, date, abstract, original
+chapter numbering, paragraph order, legal citations, and acknowledgments. The
+article title owns H1; chapters and subsections use semantic H2 and H3 headings.
+Use source italics and small capitals for legal citation emphasis.
+
+A contents navigation links directly to chapter anchors. Numbered superscript
+references link to complete endnotes, and each endnote links back to the cited
+passage. Reading pages retain a visible return link to the legal experience page.
+The contents and long citations adapt to phone widths, enlarged text, keyboard
+navigation, and reduced motion. Keep the original PDFs outside public assets and
+the static export; article pages publish the text and its citation structure.
 
 Use shared tokens in `website/app/globals.css`, focused CSS Modules for local surfaces,
 and semantic HTML for new content. Match the existing type, reading measure, and
