@@ -9,12 +9,18 @@
   --rule-strong: rgba(0, 0, 0, 0.24);
   --accent: #2200ff;
   --dither: #070707;
-  --type-title: clamp(1.5rem, 1.1rem + 1.4vw, 2.25rem);
-  --type-heading: clamp(1.25rem, 1.05rem + 0.5vw, 1.5rem);
-  --type-reading: clamp(1rem, 0.9rem + 0.2vw, 1.0625rem);
+  --type-title: 2.25rem;
+  --type-heading: 1.5rem;
+  --type-subheading: 1.125rem;
+  --type-reading: 1.0625rem;
   --type-label: 0.75rem;
   --type-interface: 0.875rem;
+  --title-leading: 1.2;
+  --heading-leading: 1.25;
+  --subheading-leading: 1.45;
   --reading-leading: 1.6;
+  --interface-leading: 1.4;
+  --label-leading: 1.4;
   --link-underline-offset: 0.18em;
   --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
   --drawer-ease: cubic-bezier(0.32, 0.72, 0, 1);
@@ -39,6 +45,7 @@ body {
   font-family: var(--font-text);
   font-size: var(--type-reading);
   line-height: var(--reading-leading);
+  letter-spacing: 0;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
 }
@@ -247,8 +254,8 @@ button:focus-visible {
   min-width: 0;
   font-size: var(--type-interface);
   font-weight: 400;
-  letter-spacing: -0.012em;
-  line-height: 1.2;
+  letter-spacing: 0;
+  line-height: var(--interface-leading);
   overflow-wrap: anywhere;
 }
 
@@ -275,7 +282,7 @@ button:focus-visible {
   display: grid;
   margin-top: 33px;
   font-size: var(--type-interface);
-  line-height: 1.3;
+  line-height: var(--interface-leading);
 }
 
 .primary-nav a {
@@ -356,14 +363,14 @@ button:focus-visible {
 .page-intro h1 {
   max-width: 920px;
   font-size: var(--type-title);
-  line-height: 1.2;
+  line-height: var(--title-leading);
 }
 
 .section-heading h2,
 .coursework > h2,
 .archive-entry-content h2 {
   font-size: var(--type-heading);
-  line-height: 1.25;
+  line-height: var(--heading-leading);
 }
 
 .section-kicker,
@@ -373,7 +380,8 @@ button:focus-visible {
 .entry-metadata dt {
   color: var(--muted);
   font-size: var(--type-label);
-  line-height: 1.4;
+  line-height: var(--label-leading);
+  letter-spacing: 0.015em;
 }
 
 .domain-page-number,
@@ -403,6 +411,7 @@ button:focus-visible {
   align-items: center;
   margin-bottom: 58px;
   font-size: var(--type-interface);
+  line-height: var(--interface-leading);
   gap: 8px;
 }
 
@@ -423,20 +432,23 @@ button:focus-visible {
   font-size: var(--type-heading);
   font-weight: 400;
   letter-spacing: -0.02em;
-  line-height: 1.25;
+  line-height: var(--heading-leading);
 }
 
 .education-degree {
   margin: 20px 0 0;
-  font-size: var(--type-reading);
+  font-size: var(--type-subheading);
   font-weight: 600;
-  line-height: 1.45;
+  line-height: var(--subheading-leading);
+  text-wrap: balance;
 }
 
 .entry-subtitle,
 .education-note {
   max-width: 68ch;
   margin: 6px 0 0;
+  font-size: var(--type-reading);
+  line-height: var(--reading-leading);
 }
 
 .entry-subtitle {
@@ -495,9 +507,10 @@ button:focus-visible {
 .course-grid h3 {
   min-height: 2.9em;
   margin: 0 0 25px;
-  font-size: var(--type-reading);
+  font-size: var(--type-subheading);
   font-weight: 600;
-  line-height: 1.45;
+  line-height: var(--subheading-leading);
+  text-wrap: balance;
 }
 
 .course-list {
@@ -533,8 +546,8 @@ button:focus-visible {
   grid-column: 2 / span 9;
   font-size: var(--type-heading);
   font-weight: 400;
-  letter-spacing: -0.015em;
-  line-height: 1.25;
+  letter-spacing: -0.02em;
+  line-height: var(--heading-leading);
 }
 
 .domain-arrow {
@@ -626,6 +639,8 @@ button:focus-visible {
 }
 
 .entry-metadata dd {
+  font-size: var(--type-reading);
+  line-height: var(--reading-leading);
   overflow-wrap: anywhere;
 }
 
@@ -647,19 +662,22 @@ button:focus-visible {
   margin: 32px 0 0;
   padding-left: var(--entry-value-offset);
   color: var(--ink);
-  font-size: var(--type-reading);
+  font-size: var(--type-subheading);
   font-weight: 600;
-  line-height: 1.45;
+  line-height: var(--subheading-leading);
   text-wrap: balance;
 }
 
 .entry-project-context {
   max-width: 720px;
-  margin: 12px 0 0;
+  margin: 0.75rem 0 0;
   padding-left: var(--entry-value-offset);
-  color: var(--muted);
+  color: var(--supporting-ink);
   font-size: var(--type-reading);
+  font-style: italic;
+  font-weight: 400;
   line-height: var(--reading-leading);
+  letter-spacing: 0;
 }
 
 .entry-project-group + .entry-project-group {
@@ -674,7 +692,7 @@ button:focus-visible {
   font-size: var(--type-reading);
   font-style: italic;
   font-weight: 400;
-  line-height: 1.45;
+  line-height: var(--subheading-leading);
   text-wrap: balance;
 }
 
@@ -689,7 +707,7 @@ button:focus-visible {
 .archive-bullets {
   display: grid;
   max-width: min(72ch, 720px);
-  margin: 20px 0 0;
+  margin: 1.75rem 0 0;
   padding: 0;
   font-size: var(--type-reading);
   font-weight: 400;
@@ -732,18 +750,6 @@ button:focus-visible {
   color: var(--muted);
 }
 
-.entry-project-context {
-  margin-top: 0.75rem;
-  color: var(--supporting-ink);
-  font-style: italic;
-  font-weight: 400;
-  letter-spacing: 0;
-}
-
-.archive-bullets {
-  margin-top: 1.75rem;
-}
-
 .archive-bullets strong {
   font-weight: 600;
 }
@@ -758,6 +764,7 @@ button:focus-visible {
   min-height: 44px;
   margin: 1.25rem 0 0 var(--entry-value-offset);
   font-size: var(--type-interface);
+  line-height: var(--interface-leading);
   gap: 0.5rem;
 }
 
@@ -791,7 +798,8 @@ button:focus-visible {
   border-top: 1px solid var(--rule-strong);
   color: var(--muted);
   font-size: var(--type-label);
-  line-height: 1.4;
+  line-height: var(--label-leading);
+  letter-spacing: 0.015em;
 }
 
 .site-footer p {
@@ -917,6 +925,11 @@ button:focus-visible {
 }
 
 @media (width < 768px) {
+  :root {
+    --type-title: 1.75rem;
+    --type-heading: 1.375rem;
+  }
+
   html {
     scrollbar-gutter: auto;
     scroll-padding-top: 4.5rem;
@@ -1017,7 +1030,7 @@ button:focus-visible {
   .primary-nav {
     grid-template-columns: repeat(2, minmax(0, 1fr));
     margin: 0;
-    line-height: 1.2;
+    line-height: var(--interface-leading);
   }
 
   .site-rail[data-enhanced="true"] .primary-nav {

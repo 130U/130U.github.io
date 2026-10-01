@@ -55,3 +55,38 @@ test("the architecture uses local fonts without inline event permissions", () =>
   assert.ok(secured.includes("font-src 'self'"));
   assert.doesNotMatch(secured, /fonts\.googleapis|fonts\.gstatic|'unsafe-hashes'/u);
 });
+
+test("the exported architecture uses the shared local type system", async () => {
+  const html = await readFile(path.join(OUT, "architecture", "index.html"), "utf8");
+  const globals = await readFile(new URL("../app/globals.css", import.meta.url), "utf8");
+  assert.doesNotMatch(html, /fonts\.googleapis|fonts\.gstatic|JetBrains|Georgia|Times New Roman/u);
+  assert.match(html, /<link[^>]+rel="stylesheet"[^>]+href="\.\.\/assets\/fonts\/inter\.css"/u);
+  assert.match(html, /<link[^>]+rel="preload"[^>]+href="\.\.\/assets\/fonts\/InterVariable\.woff2"/u);
+  const fontCss = await readFile(path.join(OUT, "assets", "fonts", "inter.css"), "utf8");
+  assert.match(fontCss, /--font-text:\s*"Inter",\s*sans-serif/u);
+  for (const filename of ["InterVariable.woff2", "InterVariable-Italic.woff2"]) {
+    const font = await readFile(path.join(OUT, "assets", "fonts", filename));
+    assert.equal(font.subarray(0, 4).toString(), "wOF2", `${filename}: invalid WOFF2 asset`);
+    assert.ok(html.includes(filename), `${filename}: missing local export font`);
+  }
+  for (const role of ["title", "heading", "subheading", "reading", "interface", "label"]) {
+    for (const token of [`--type-${role}`, `--${role}-leading`]) {
+      const pattern = new RegExp(`${token}:\\s*([^;]+);`, "u");
+      assert.equal(html.match(pattern)?.[1], globals.match(pattern)?.[1], token);
+    }
+  }
+  const mobileRoot = globals.match(/@media \(width < 768px\) \{\s*:root \{([^}]+)\}/u)?.[1];
+  const viewerMobileRoot = html.match(/@media \(width < 768px\) \{\s*:root \{([^}]+)\}/u)?.[1];
+  assert.ok(mobileRoot && viewerMobileRoot, "Missing shared mobile typography.");
+  for (const [, token, value] of mobileRoot.matchAll(/(--type-[a-z]+):\s*([^;]+);/gu)) {
+    assert.equal(viewerMobileRoot.match(new RegExp(`${token}:\\s*([^;]+);`, "u"))?.[1], value, token);
+  }
+  assert.doesNotMatch(html, /\.card h3|<h3>/u);
+  assert.equal((html.match(/<h2>/gu) ?? []).length, 3);
+  const styles = [...html.matchAll(/<style\b[^>]*>([\s\S]*?)<\/style>/gu)].map(([, css]) => css).join("\n");
+  for (const [, selector, body] of styles.matchAll(/([^{}]+)\{([^{}]*)\}/gu)) {
+    const size = body.match(/font-size:\s*([^;]+);/u)?.[1];
+    if (!size || /\b(?:svg|text)\b|\.t-|\.c-/u.test(selector)) continue;
+    assert.match(size, /^var\(--type-(?:title|heading|subheading|reading|interface|label)\)$/u, selector.trim());
+  }
+});

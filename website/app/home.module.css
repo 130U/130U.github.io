@@ -35,7 +35,8 @@
   color: var(--muted);
   font-size: var(--type-label);
   font-variant-numeric: tabular-nums;
-  line-height: 1.5;
+  line-height: var(--label-leading);
+  letter-spacing: 0.015em;
   user-select: none;
 }
 
@@ -45,7 +46,7 @@
   font-size: var(--type-title);
   font-weight: 400;
   letter-spacing: -0.02em;
-  line-height: 1.2;
+  line-height: var(--title-leading);
   text-wrap: balance;
 }
 
@@ -130,7 +131,8 @@
   min-width: 0;
   color: var(--muted);
   font-size: var(--type-label);
-  line-height: 1.3;
+  line-height: var(--label-leading);
+  letter-spacing: 0.015em;
 }
 
 .contactStrip li > :last-child {

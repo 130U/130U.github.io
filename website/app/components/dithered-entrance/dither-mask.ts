@@ -18,7 +18,7 @@ function setFittedFont(
   requestedSize: number,
   maximumWidth: number,
 ) {
-  const stack = 'Arial, "Helvetica Neue", Helvetica, sans-serif';
+  const stack = getComputedStyle(document.documentElement).getPropertyValue("--font-text").trim() || '"Inter", sans-serif';
   context.font = `800 ${requestedSize}px ${stack}`;
   const measured = context.measureText(text).width;
   const size = measured > maximumWidth

@@ -37,8 +37,7 @@ const NAVIGATION = [
   ["Past Experience", "/past-experience/"],
   ["Current Chapter", "/now/"],
 ];
-// Entry and bullet totals were counted from the saved October 1 Notion snapshot,
-// independently of the application parser and generated route registry.
+// Expected entry and bullet counts are independent of the parser and route registry.
 const DOMAINS = [
   ["AI Research and Engineering", "/past-experience/artificial-intelligence/", 3, 24],
   ["Data Science", "/past-experience/data-science/", 3, 40],
@@ -216,7 +215,7 @@ test("inner routes present text-focused pages and the Current Chapter introducti
   assert.match(now, /expand human capability/u);
 });
 
-test("Past Experience presents five domains, 14 entries, and 103 bullets from the October Notion snapshot", async () => {
+test("Past Experience presents five domains, 14 entries, and 103 bullets", async () => {
   const directory = await routeHtml("/past-experience/");
   assert.match(directory, /<h1>Past Experience<\/h1>/u);
   assert.match(directory, /class="page-intro-support">Experience through September 2026<\/p>/u);

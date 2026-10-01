@@ -15,7 +15,7 @@
 }
 
 :root {
-  --font-text: "Inter", Arial, "PingFang SC", "Microsoft YaHei", sans-serif;
+  --font-text: "Inter", sans-serif;
   font-optical-sizing: auto;
   font-synthesis: none;
 }

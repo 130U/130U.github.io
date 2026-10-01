@@ -25,6 +25,7 @@
   margin: 0 0 1rem;
   color: var(--muted);
   font-size: var(--type-label);
+  line-height: var(--label-leading);
 }
 
 .subtitle {
@@ -49,7 +50,6 @@
 
 .byline p + p {
   color: var(--supporting-ink);
-  font-size: var(--type-interface);
   font-weight: 400;
 }
 
@@ -80,8 +80,8 @@
 .footnotes h2 {
   margin: 0 0 1.25rem;
   font-size: var(--type-heading);
-  font-weight: 500;
-  line-height: 1.25;
+  font-weight: 400;
+  line-height: var(--heading-leading);
   letter-spacing: -0.02em;
   text-wrap: balance;
   scroll-margin-top: 6rem;
@@ -106,6 +106,7 @@
   min-height: 44px;
   cursor: pointer;
   font-size: var(--type-interface);
+  line-height: var(--interface-leading);
   font-weight: 600;
   transition: color 180ms var(--ease-out);
   list-style: none;
@@ -139,7 +140,7 @@
 
 .contents li {
   font-size: var(--type-interface);
-  line-height: 1.5;
+  line-height: var(--interface-leading);
 }
 
 .contents a {
@@ -168,24 +169,18 @@
   margin-top: 0;
 }
 
-.body h2 .smallCaps,
-.body h3 .smallCaps {
-  font-size: inherit;
-  letter-spacing: inherit;
-}
-
 .body h3 {
   margin: 2.5rem 0 1.25rem;
-  font-size: var(--type-reading);
-  font-weight: 500;
-  line-height: 1.45;
+  font-size: var(--type-subheading);
+  font-weight: 600;
+  line-height: var(--subheading-leading);
   text-wrap: balance;
   scroll-margin-top: 6rem;
 }
 
 .smallCaps {
-  font-size: 0.82em;
-  letter-spacing: 0.025em;
+  font-size: inherit;
+  letter-spacing: inherit;
 }
 
 .reference {
@@ -238,6 +233,7 @@
   padding-top: 0.25rem;
   color: var(--muted);
   font-size: var(--type-label);
+  line-height: var(--label-leading);
   font-variant-numeric: tabular-nums;
 }
 
@@ -247,6 +243,7 @@
   flex-wrap: wrap;
   margin-top: 0.375rem;
   font-size: var(--type-interface);
+  line-height: var(--interface-leading);
   gap: 0.5rem 1rem;
 }
 
@@ -257,6 +254,7 @@
   justify-content: space-between;
   margin-top: 3rem;
   font-size: var(--type-interface);
+  line-height: var(--interface-leading);
   gap: 1rem;
 }
 

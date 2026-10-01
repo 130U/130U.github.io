@@ -28,7 +28,7 @@ Inter 4.1 is the shared typeface for headings, prose, navigation, directories, c
 metadata, and the architecture viewer. Two self-hosted WOFF2 files provide variable
 weights and true italics. `website/public/assets/fonts/inter.css` owns `--font-text`,
 optical sizing, and the font faces. The regular face is preloaded; italic loads when used.
-System sans fallbacks cover unavailable glyphs, including Chinese in the technical viewer.
+System sans fallbacks cover unavailable glyphs.
 The LO mark and dithered identity retain their independent artwork.
 
 Typography follows semantic roles. At any viewport, text with the same role uses
@@ -37,25 +37,27 @@ provide emphasis within a role. Page-specific font-size overrides are not used.
 
 | Role | Shared token | Size at the default text setting | Leading |
 | --- | --- | --- | --- |
-| Page title | `--type-title` | 24–36px | 1.2 |
-| Section or institution heading, directory item | `--type-heading` | 20–24px | 1.25 |
-| Body, records, introductions, course names | `--type-reading` | 16–17px | 1.6 |
-| Project, degree, course-category heading | `--type-reading` | 16–17px, weight 600 | 1.45 |
-| Navigation, menu, wordmark name, return link | `--type-interface` | 14px | Contextual |
-| Field label, index, footer, scroll cue | `--type-label` | 12px | 1–1.5 |
+| Page title | `--type-title` | 36px; 28px below 768px, weight 400 | 1.2 |
+| Section or institution heading, directory item | `--type-heading` | 24px; 22px below 768px, weight 400 | 1.25 |
+| Project, degree, course-category heading | `--type-subheading` | 18px, weight 600 | 1.45 |
+| Body, records, introductions, course names | `--type-reading` | 17px | 1.6 |
+| Navigation, menu, wordmark name, return link | `--type-interface` | 14px | 1.4 |
+| Field label, index, footer, scroll cue | `--type-label` | 12px | 1.4 |
 
-Title, section, and reading sizes use rem-based fluid scales. Labels and interface
-text use rem units. Headings have -0.02em tracking; reading text stays near zero.
+All six roles use rem units and scale with the user's text setting. Only the title
+and section roles become smaller below 768px, consistently across the site and
+architecture viewer. Headings have -0.02em tracking; reading text stays near zero.
 The optical font sizing and the shared `--reading-leading` support sustained reading.
-Blue marks active navigation, focus, and link feedback. Flat surfaces and square corners
-keep hierarchy in typography, spacing, and rules.
+Blue marks active navigation, focus, and link feedback. Editorial surfaces use flat
+rules and typography; the note-preview dialog uses a rounded surface to distinguish
+its temporary reading state.
 
 ### Past Experience typography
 
-Domain links and institution headings use the shared section scale. Project titles,
-subsection headings, introductions, reference notes, metadata values, and bullets
-use the same reading size. Project titles use weight 600, subsection headings use
-regular italic, and headings wrap with balanced lines. Numbered project titles use
+Domain links and institution headings use the shared section scale. Project titles
+use the subheading scale at weight 600. Optional theme headings, introductions,
+reference notes, metadata values, and bullets use the reading scale; theme headings
+use regular italic. Headings wrap with balanced lines. Numbered project titles use
 a colon between the project number and name. Descriptions are separate paragraphs.
 
 All five domain pages use true italics and the supporting ink color for project
@@ -106,8 +108,8 @@ roughly 64–72 characters where the layout permits.
 
 ## Interaction
 
-The Home wordmark is the primary expressive gesture. Its Canvas2D stage follows the
-shorter viewport side, capped at 720px on desktop and 380px on phones. Hover repels
+The Home wordmark is the primary expressive gesture. Its Canvas2D stage uses a
+bounded viewport measure. Hover repels
 points; press, release, and keyboard activation produce bounded feedback. Up to four
 ripples can coexist. The animation loop stops at rest and pauses off-screen.
 Reduced motion displays the complete static wordmark. The visible HTML fallback
@@ -129,7 +131,7 @@ its cohort is owned by the identity configuration in `app/lib/content/site.ts`.
 
 Use straight apostrophes and quotation marks with English commas, periods,
 colons, semicolons, and parentheses in public copy and metadata, including the
-architecture viewer. Dates use a spaced en dash. Preserve meaningful mathematical
+architecture viewer. Preserve source date punctuation and meaningful mathematical
 symbols, collaboration marks, and navigation arrows. An em dash can separate
 clauses. Unicode English dashes, ©, ×, and navigation arrows are intentional;
 Chinese full-width punctuation is not used in public interface copy.
@@ -149,12 +151,25 @@ Each paper uses the shared shell and Inter type system with a restrained reading
 measure. Preserve the source title, subtitle, author name, date, abstract, original
 chapter numbering, paragraph order, legal citations, and acknowledgments. The
 article title owns H1; chapters and subsections use semantic H2 and H3 headings.
-Use source italics and small capitals for legal citation emphasis.
+Chapter headings use the section role at weight 400; subsections use the 18px
+subheading role at weight 600. Preserve source capitalization, italics, and emphasis.
+Legal citations within a paragraph use its body size and spacing, including text
+marked as small capitals in the source. Note previews use the same reading role;
+their headings use the section role at weight 400.
 
-A contents navigation links directly to chapter anchors. Numbered superscript
-references link to complete endnotes, and each endnote links back to the cited
-passage. Reading pages retain a visible return link to the legal experience page.
-The contents and long citations adapt to phone widths, enlarged text, keyboard
+A contents navigation links to the abstract, chapters, and footnotes. It occupies a
+sticky side column when the reading field has enough space, and collapses into a
+single-column disclosure as the viewport or text size narrows. Section tracking
+identifies the current reading location without changing the document order.
+
+Numbered superscript references open the original note in a native dialog. Desktop
+previews are centered; phones use a bottom sheet with a scrollable note body and
+44px controls. Escape, background activation, and Close return focus to the cited
+passage. View in footnotes closes the preview and focuses the complete endnote.
+Full notes and bidirectional links remain available without JavaScript.
+
+Reading pages retain a visible return link to the legal experience page. Contents,
+long citations, and note previews adapt to phone widths, enlarged text, keyboard
 navigation, and reduced motion. Keep the original PDFs outside public assets and
 the static export; article pages publish the text and its citation structure.
 

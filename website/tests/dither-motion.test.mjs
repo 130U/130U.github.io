@@ -20,6 +20,51 @@ async function loadMotion() {
   return import(`data:text/javascript;base64,${Buffer.from(outputText).toString("base64")}`);
 }
 
+async function loadMask() {
+  const source = await readFile(
+    path.join(ROOT, "app", "components", "dithered-entrance", "dither-mask.ts"),
+    "utf8",
+  );
+  const { outputText } = ts.transpileModule(source, {
+    compilerOptions: {
+      module: ts.ModuleKind.ESNext,
+      target: ts.ScriptTarget.ES2022,
+    },
+  });
+  return import(`data:text/javascript;base64,${Buffer.from(outputText).toString("base64")}`);
+}
+
+test("the Canvas wordmark uses the shared Inter family and retains its balanced composition", async () => {
+  const { createBalancedDitherField } = await loadMask();
+  const originalDocument = globalThis.document;
+  const originalGetComputedStyle = globalThis.getComputedStyle;
+  const renderedWords = [];
+  const context = {
+    font: "",
+    clearRect() {},
+    measureText(text) { return { width: Number.parseFloat(this.font.split(" ")[1]) * text.length * 0.625 }; },
+    fillText(text, x, y) { renderedWords.push({ text, x, y, font: this.font }); },
+    getImageData() { return { data: new Uint8ClampedArray(100 * 100 * 4) }; },
+  };
+  globalThis.document = {
+    documentElement: {},
+    createElement() { return { getContext() { return context; } }; },
+  };
+  globalThis.getComputedStyle = () => ({ getPropertyValue() { return '"Inter", sans-serif'; } });
+  try {
+    createBalancedDitherField(100);
+    assert.deepEqual(renderedWords, [
+      { text: "THEODORE", x: 50, y: 40.5, font: '800 17px "Inter", sans-serif' },
+      { text: "OUYANG", x: 50, y: 61, font: '800 23.5px "Inter", sans-serif' },
+    ]);
+  } finally {
+    if (originalDocument === undefined) delete globalThis.document;
+    else globalThis.document = originalDocument;
+    if (originalGetComputedStyle === undefined) delete globalThis.getComputedStyle;
+    else globalThis.getComputedStyle = originalGetComputedStyle;
+  }
+});
+
 test("the dither interaction uses restrained motion values", async () => {
   const { DITHER_MOTION } = await loadMotion();
   assert.deepEqual(DITHER_MOTION, {

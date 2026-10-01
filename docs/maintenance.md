@@ -25,16 +25,17 @@ Paths in this table are relative to `website/`.
 | Education | `/education/` | `app/education/page.tsx` |
 | Past Experience | `/past-experience/` | `app/past-experience/page.tsx` |
 | Experience details | `/past-experience/[slug]/` | `app/lib/content/experience.ts`, `content/past-experience/` |
-| Legal articles | `/past-experience/legal-research-and-policy-analysis/[article]/` | Article routes, content registry, and structured paper sources |
+| Legal articles | `/past-experience/legal-research-and-policy-analysis/[paper]/` | `app/past-experience/[slug]/[paper]/page.tsx`, `app/lib/content/legal-papers.ts`, `content/legal-papers/` |
 | Current Chapter | `/now/` | `app/now/page.tsx` |
 | Architecture | `/architecture/` | `../architecture/index.html` |
 
 `content/past-experience/experience.md` contains the current experience record.
 Use domain, organization, project, and optional subsection headings, followed by
-experience bullets. Each organization records Position and Dates; Location and
-Website appear when supplied by the source.
+experience bullets. Employment and training entries require Position and Dates;
+Location and Website appear when supplied by the source. The Selected Research
+Papers entry requires Research areas, Author credit, and Manuscript dates.
 Domain introductions precede the first organization. Project introductions follow
-the project heading and precede its bullets. Inline `**emphasis**` and
+the project heading and precede its bullets. Inline `**bold**`, `*italic*`, and
 `[citation](https://example.com)` links are supported in prose; raw HTML is rendered
 as text. All five domain pages display project introductions in true italics.
 The experience registry validates five domains and their Markdown entries during
@@ -63,19 +64,69 @@ Add a website page by updating its source, the route registry, sitemap expectati
 and output tests together. Keep browser interaction in focused client components.
 Add a server only when a defined product requirement needs one.
 
-The legal domain replaces the former ESG category and links four selected papers:
+### Resume sources
+
+The five sections are maintained in the owner's Notion Master Resume. Synchronize
+the approved source wording, emphasis, links, metadata, and order into the experience
+Markdown. Convert source headings and line breaks to the site's structure. English
+copy uses straight quotation marks and apostrophes; retain legal symbols, accents in
+proper names, and meaningful mathematical notation. Keep extraction files,
+screenshots, and source-comparison evidence outside the repository.
+
+| Section | Notion source |
+| --- | --- |
+| AI Research and Engineering | [Source](https://app.notion.com/p/98c4dbb19cbb46fa9fa6fed2da1d6ac1?pvs=204) |
+| Data Science | [Source](https://app.notion.com/p/dcf2ef0d06b24895a4b72db158922523?pvs=204) |
+| Legal Research and Policy Analysis | [Source](https://app.notion.com/p/7df21bc60ff2400c80859b5a6afe4922?pvs=204) |
+| Finance and Consulting | [Source](https://app.notion.com/p/d62ffb825a8d469c9759b5c76f5eb87f?pvs=204) |
+| STEM Academic Competitions and Training | [Source](https://app.notion.com/p/246e29cd61d6410381ecb068bbd1eaea?pvs=204) |
+
+### Legal papers
+
+Domain `03`, Legal Research and Policy Analysis, links four selected papers:
 `autonomous-authority-in-space`, `small-states-and-strategic-space-dependence`,
 `solar-geoengineering-comparison-and-continuity`, and
 `mangrove-restoration-and-compensatory-mitigation`. Preserve each paper's source
-title, author, date, abstract, numbered chapter hierarchy, paragraphs, citations,
-and acknowledgment in its structured source. Render chapters with contents anchors
-and footnote references with return links. PDF extraction records remain outside
-public assets; no original PDF should appear in `public/` or `out/`.
+title, subtitle, author, date, abstract, numbered chapter hierarchy, paragraphs,
+citations, and acknowledgment in its structured source. The manuscripts credit
+Letao Ouyang and carry a December 2024 date.
+
+| Manuscript | Source PDF |
+| --- | --- |
+| Who May Choose the Lesser Risk: Solar Geoengineering and the Legal Duties of Comparison and Continuity | `ESSAY1.pdf` |
+| Small States and the Governance of Strategic Space Dependence | `ESSAY2.pdf` |
+| Autonomous Authority in Space: Risk Tradeoffs and the Law of Delegation | `ESSAY3.pdf` |
+| Mangrove Restoration and the Limits of Compensatory Mitigation: Lessons from Florida for the Greater Bay Area | `ESSAY4.pdf` |
+
+`PaperParagraph.text` equals the concatenated run text; runs preserve source italics,
+bold, capitalization, superscripts, and numbered references. Citation text uses the
+same body size and spacing, including source small-capital runs. Numbered notes remain
+sequential and every chapter has a unique anchor. Keep original PDFs and extraction
+records outside public assets and the static export.
+
+`LegalPaperPage` renders the article and complete endnotes. `LegalPaperContents`
+provides responsive chapter navigation and section tracking. `LegalPaperReader`
+adds native-dialog note previews, with source-link focus restoration and a route to
+the complete endnote. Original anchors, contents links, and return links remain
+available without JavaScript. Reading controls use the shared font and type tokens.
+
+To add an approved paper, update its structured source, the legal-paper slug registry,
+the matching project route in `experience.ts`, and the independent content/output
+contracts together. Use the supplied manuscript as the wording and citation authority.
 
 Article validation checks all thirteen website routes, four reading links, chapter
 anchors, complete numbered references, bidirectional footnote links, and the absence
 of public PDF files. Validate the published text against the approved source before
 refreshing visible-copy hashes. Read back the four live article pages after publishing.
+
+### Static export
+
+The `build` command runs Next.js and then `scripts/assemble-static.mjs`. Assembly
+places the standalone architecture viewer and license under `/architecture/`,
+normalizes Next.js segment payload names, and applies the production HTML security
+policy. Payload normalization validates containment and destination collisions
+before moving files; export entries may not be symbolic links. Preserve these
+output-contract tests when updating Next.js.
 
 ## Brand assets
 
@@ -107,6 +158,11 @@ npm audit --audit-level=low
 npm run preview:static
 ```
 
+Use Node.js 24 to match the deployment workflow. The local static preview binds to
+`127.0.0.1` by default and serves the assembled export; use it for production-policy
+verification. `npm run dev` uses the development security policy required by Next.js
+development tooling.
+
 Review the export at desktop and phone widths, including 320px. Check keyboard
 navigation, menu dismissal and resizing, reduced motion, the JavaScript-free fallback,
 local links, and the architecture viewer. Run `git diff --check` and inspect staged
@@ -122,8 +178,9 @@ HTML page, including the architecture viewer. The policy appears before scripts 
 blocks arbitrary inline scripts, evaluation, frames, objects, and form submission.
 Fonts load from the site's own origin. Inline event handlers are blocked on every
 page. Inline styles support the canvas and viewer.
-GitHub Pages controls HTTP response headers; the HTML policy is not a substitute for
-host-level controls. Dependency audit results describe the advisories available at
-run time and do not prove the absence of vulnerabilities.
+GitHub Pages controls HTTP response headers. The HTML policy cannot set response
+headers or the `frame-ancestors` directive. Keep dependency versions and the lockfile
+aligned, and preserve the major-scoped dependency overrides. The dependency audit
+checks the advisory data available at run time.
 
 See [architecture](../architecture/README.md) for viewer editing and validation.

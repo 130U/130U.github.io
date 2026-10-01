@@ -1,25 +1,48 @@
-# 网站架构
+# Website architecture
 
-[打开交互架构图](https://www.theodoreoy.com/architecture/)
+[Open the interactive system map](https://www.theodoreoy.com/architecture/).
 
-从内容源到浏览器，查看 Theodore 网站的构建、发布与交互边界。架构图支持中英文标识检索、深浅主题、关系追踪和图片导出；下载 `index.html` 后也可离线查看。
+The viewer maps the website's content, build, deployment, and browser interactions.
+It supports label search, light and dark themes, relationship
+tracing, and image export. A downloaded `index.html` also works offline.
 
-| 文件 | 用途 |
+| File | Responsibility |
 | --- | --- |
-| `site.json` | 依据当前代码编写的 Archify 架构定义 |
-| `index.html` | 独立运行的交互架构图 |
-| `README.md` | 访问方式与维护入口 |
-| `LICENSE` | Archify 查看器的 MIT 许可 |
+| `site.json` | Editable Archify definition of the current system |
+| `index.html` | Standalone interactive viewer |
+| `README.md` | Viewer usage and maintenance |
+| `LICENSE` | MIT license for the Archify viewer |
 
-内容与路由由 `website/app/lib/content/` 和 `website/content/` 管理。Next.js 在构建期生成静态页面；GitHub Actions 验证并发布 `website/out/`，GitHub Pages 通过自定义域名交付。导航与首页 Canvas 动效在浏览器运行，网站无需运行时 API、数据库或身份认证。
+The website contains four main pages, five experience domains, and four legal
+papers. `website/app/lib/content/` defines identity, routes, and content loaders;
+`website/content/` contains the resume, structured manuscripts, and integrity
+contracts. Next.js generates thirteen static website pages. The build includes
+this viewer at `/architecture/`, and GitHub Actions publishes `website/out/` to
+GitHub Pages on the custom domain.
 
-更新架构时，以代码和 `.github/workflows/pages.yml` 为依据编辑 `site.json`，使用安装的 Archify 校验并生成 HTML：
+The navigation menu, Home Canvas2D wordmark, and legal-paper contents and note
+previews run in the browser. The website uses no request-time API, database,
+authentication, or analytics. The [maintenance guide](../docs/maintenance.md)
+documents content ownership, output contracts, security, and publishing.
+
+Update `site.json` from the current source and `.github/workflows/pages.yml`, then
+validate and generate it with the installed Archify skill:
 
 ```sh
 node <archify>/bin/archify.mjs validate architecture architecture/site.json --quality showcase --json
 node <archify>/bin/archify.mjs deliver architecture architecture/site.json architecture/index.html --quality showcase --json
+node website/scripts/integrate-architecture.mjs
 ```
 
-`<archify>` 为本机 Archify Skill 所在目录。生成的 HTML 应遵循网站字体契约：加载 `../assets/fonts/inter.css`，预加载 Inter 常规字体，文字继承 `--font-text`。完整网站检查执行 `npm --prefix website run check`；构建脚本将架构 HTML 一并发布至 `/architecture/`。
+Run these commands from the repository root. `<archify>` is the local Archify skill
+directory. The integration script applies the website's six HTML type roles and
+major-section heading semantics while preserving SVG geometry. The viewer loads
+`../assets/fonts/inter.css`, preloads regular Inter, and inherits `--font-text`.
+Visual exports embed the local regular and italic Inter files in SVG; PNG and WebM
+render from the same prepared fonts. The integration is safe to run repeatedly.
+Run `npm --prefix website run check` to verify the complete export, including the
+viewer and its production content security policy.
 
-查看器由 Archify 生成，采用 MIT 许可。发布页面使用网站自托管的 Inter；单独下载 HTML 时使用系统无衬线后备字体，图表与交互仍可用。Inter 字体以 SIL Open Font License 发布，许可随字体文件提供。
+The viewer uses the MIT license. Published pages use the website's self-hosted Inter
+fonts under the SIL Open Font License, included with the font assets. A standalone
+offline HTML file uses system sans fallbacks when those font assets are unavailable.

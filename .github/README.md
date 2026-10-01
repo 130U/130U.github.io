@@ -5,7 +5,7 @@
 </p>
 
 <p align="center">
-  A personal record of education, past experience, and the questions shaping my current chapter.
+  A personal record of education, past experience, legal research, and the questions shaping my current chapter.
   <br><br>
   <a href="https://www.theodoreoy.com/"><strong>Visit the website →</strong></a>
 </p>

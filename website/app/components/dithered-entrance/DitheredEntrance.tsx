@@ -31,6 +31,7 @@ export function DitheredEntrance() {
     let frame = 0;
     let resizeFrame = 0;
     let destroyed = false;
+    let fontsReady = !("fonts" in document);
     let cssSize = 1;
     let ditherColor = "";
     let fadeStartedAt = performance.now();
@@ -157,6 +158,7 @@ export function DitheredEntrance() {
     };
 
     const rebuild = () => {
+      if (destroyed || !fontsReady) return;
       const bounds = canvas.getBoundingClientRect();
       cssSize = Math.max(1, Math.round(Math.min(bounds.width, bounds.height)));
       ditherColor = getComputedStyle(canvas).color;
@@ -292,7 +294,17 @@ export function DitheredEntrance() {
     stage.addEventListener("click", onKeyboardActivate);
 
     try {
-      rebuild();
+      if (fontsReady) {
+        rebuild();
+      } else {
+        document.fonts.load('800 1em "Inter"', "THEODORE OUYANG").then(() => {
+          if (destroyed) return;
+          fontsReady = true;
+          queueRebuild();
+        }).catch(() => {
+          if (!destroyed) entrance.dataset.state = "fallback";
+        });
+      }
     } catch {
       entrance.dataset.state = "fallback";
     }
