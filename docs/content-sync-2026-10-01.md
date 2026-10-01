@@ -20,6 +20,14 @@ The four original manuscripts appear as HTML with their original title, subtitle
 
 The presentation uses the existing shared Inter family, type-role sizes, paper color, reading frame, and link styling. Project descriptions now use the same italic role throughout all five domains. The article structure draws on the visible author/abstract/section/footnote organization of [Yale Law Journal's HTML articles](https://yalelawjournal.org/article/tripartite-water-cosovereignty). Original citation wording and emphasis are preserved; this update does not claim an independent Bluebook citation audit. [Cornell LII describes the Bluebook's role in U.S. legal citation](https://www.law.cornell.edu/wex/bluebook).
 
+### Subsequent article reading refinements
+
+At the owner's request, the article presentation also draws on [the supplied Oxford Academic article](https://academic.oup.com/oocc/article/5/1/kgaf012/8089845) and Oxford's documented [split-view reading features](https://academic.oup.com/pages/using-the-content/site-features). The reference is a climate-journal article, not a universal legal-paper template. Its publisher-specific metadata and reference system were not copied into the manuscripts.
+
+The four pages now share a desktop side contents list with section tracking, a collapsible mobile contents list, a more distinct Part/subsection hierarchy, compact hanging-number footnotes, and an accessible on-demand preview of the original note text. Full endnotes and bidirectional anchors remain usable without JavaScript. Header spacing, author/date roles, and abstract-to-body spacing were refined using the existing type tokens. Inter remains the sole loaded font family; no article source JSON or manuscript wording was edited in this refinement. Added reading controls use English interface labels (Close, View in footnotes, and Footnote).
+
+Validation included the full build/lint/content checks and 34 artifact tests; all four articles at 320, 768, and 1440px with no horizontal overflow, missing anchors, duplicate IDs, or additional font families; the original longest footnote text on each mobile page; author-note and keyboard dismissal/focus checks; and a 200% root-text-size fixture that reflows the sidebar into a single reading column. A 320x480px viewport confirmed that long notes scroll while the 44px close control remains available. Oxford's article content and official feature documentation were readable, while its full reference page was blocked by its browser verification screen; no pixel-for-pixel comparison is claimed.
+
 PDF page numbers and physical line/page breaks are layout artifacts and were converted for continuous reading. Printed hyphens, legal symbols, accented proper names, all prose, and all citation text remain. Original PDFs are absent from public assets and the static export.
 
 | Manuscript | PDF | Pages | Body paragraphs | Parts/subsections | Footnotes |

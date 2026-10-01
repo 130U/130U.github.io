@@ -351,6 +351,41 @@ test("law papers preserve article identity, chapter navigation, and bidirectiona
   }
 });
 
+test("law articles expose one complete native contents menu and source-only publication details", async () => {
+  for (const [slug] of ARTICLES) {
+    const source = JSON.parse(await readFile(path.join(ROOT, "content", "legal-papers", `${slug}.json`), "utf8"));
+    const html = await routeHtml(`${LAW_ROUTE}${slug}/`);
+    const menus = [...html.matchAll(/<nav\b([^>]*)>([\s\S]*?)<\/nav>/giu)]
+      .filter((match) => attribute(match[1], "aria-label") === "Article contents");
+    assert.equal(menus.length, 1, `${slug} must expose one article contents menu`);
+    const links = [...menus[0][2].matchAll(/<a\b([^>]*)>([\s\S]*?)<\/a>/giu)]
+      .map((match) => ({ href: attribute(match[1], "href"), text: inlineText(match[2]) }));
+    const expectedLinks = [
+      { href: "#abstract-heading", text: "Abstract" },
+      ...source.blocks.filter(({ type }) => type === "heading").map(({ id, text }) => ({ href: `#${id}`, text: normalizeSpace(text) })),
+      { href: "#footnotes", text: "Footnotes" },
+    ];
+    assert.deepEqual(links, expectedLinks, `${slug} must link the abstract, every source heading, and footnotes in reading order`);
+    const targets = [...openingTags(html, "h2"), ...openingTags(html, "h3"), ...openingTags(html, "section")];
+    for (const { href } of expectedLinks) {
+      assert.ok(targets.some((tag) => attribute(tag, "id") === href.slice(1)), `${slug} has a contents target that needs JavaScript: ${href}`);
+    }
+
+    const frontmatter = html.match(/<article\b[^>]*>[\s\S]*?<header\b[^>]*>([\s\S]*?)<\/header>/iu);
+    assert.ok(frontmatter, `${slug} lost its article frontmatter`);
+    const metadata = [...frontmatter[1].matchAll(/<p\b[^>]*>([\s\S]*?)<\/p>/giu)].map((match) => inlineText(match[1]));
+    assert.deepEqual(metadata, [
+      "Research paper",
+      ...(source.subtitle ? [normalizeSpace(source.subtitle)] : []),
+      `${source.author}${source.acknowledgment ? "*" : ""}`,
+      ...(source.date ? [normalizeSpace(source.date)] : []),
+    ], `${slug} must preserve source publication details without adding journal claims`);
+    for (const key of ["citation_journal_title", "citation_doi", "citation_volume", "citation_issue", "citation_issn", "citation_conference_title"]) {
+      assert.equal(metaContent(html, "name", key), undefined, `${slug} invents unsupported ${key}`);
+    }
+  }
+});
+
 test("law article paragraphs, headings, and citations exactly match the approved structured sources", async () => {
   for (const [slug] of ARTICLES) {
     const source = JSON.parse(await readFile(path.join(ROOT, "content", "legal-papers", `${slug}.json`), "utf8"));
