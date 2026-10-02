@@ -19,10 +19,11 @@
     "app/lib/content/ai-projects.ts": "5423c403cc64f9841d0ccb30f34d11890932f6495c3f7a9ca68af19723f88b0f",
     "app/lib/content/routes.ts": "5e9168ec1429cacb0c6b3deb024fc50024f2387b6e3833b420415274654abf24",
     "app/past-experience/components/AiResearchProjectPage.tsx": "05e4a226164c3d2a8e85658f96779889e110ad0523628c310cf97e430ef5ed6a",
-    "app/past-experience/components/AiResearchMath.tsx": "cbc84b47dcef8bf040392ca107e4d09510d3f51ff9436df59cb73969e1eb6ec6",
+    "app/past-experience/components/AiResearchMath.tsx": "eb73a84c7838e345e4e670be082522b4ce250234d9576226e6ad8053f7c1b373",
     "content/artificial-intelligence/statistical-inference-and-resource-allocation-in-expert-data-production.json": "16061bba4e18d81cd738ed040d6d54ed309bceb38978633979d54b03fcfe5fd5",
     "content/artificial-intelligence/task-validity-in-financial-synthetic-data.json": "132044a28758f885411b78078600a3a50df5e288a9bbbb948b217ede1df4f4de",
     "content/artificial-intelligence/verification-and-supervision-in-scientific-reasoning-tasks.json": "2c342fb87edcc4618d738233329b2c2926c6baccb1891023437c4587d1d9d560",
-    "content/artificial-intelligence/evidence-uncertainty-and-decision-guarantees-in-investment-research.json": "98a9c49dd5bc50f5c24ea94ccf7a38d5f6f93abcc770f9b70049a2c73f520bbc"
+    "content/artificial-intelligence/evidence-uncertainty-and-decision-guarantees-in-investment-research.json": "98a9c49dd5bc50f5c24ea94ccf7a38d5f6f93abcc770f9b70049a2c73f520bbc",
+    "app/lib/content/ai-math.ts": "6b221504b2a104deb02c226675878f33b0d0e5b24595afb9d072d799adc84524"
   }
 }

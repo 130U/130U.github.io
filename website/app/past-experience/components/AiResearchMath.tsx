@@ -1,38 +1,42 @@
-import temml from "temml";
-
-export function renderAiResearchMath(tex: string, displayMode = false) {
-  const markup = temml.renderToString(tex, {
-    displayMode,
-    annotate: true,
-    trust: false,
-    throwOnError: true,
-    strict: true,
-    xml: true,
-  });
-  // Only adjust the root of Temml's trusted MathML output. The source TeX stays
-  // intact in its annotation, including its equation numbers and whitespace.
-  return markup.replace(/^<math\b([^>]*)>/u, (opening, attributes: string) => {
-    const fontStyle = "font-family:var(--font-text);font-size:1em;";
-    const root = /\bstyle="/u.test(attributes)
-      ? opening.replace(/\bstyle="([^"]*)"/u, (_: string, style: string) => `style="${style}${fontStyle}"`)
-      : opening.replace(/>$/u, ` style="${fontStyle}">`);
-    return root.replace(/^<math/u, `<math data-ai-math="${displayMode ? "display" : "inline"}"`);
-  });
-}
+import { AI_MATH_GUTTER_EM, renderAiResearchMath } from "../../lib/content/ai-math";
 
 export function AiResearchMath({ tex, display = false }: { tex: string; display?: boolean }) {
+  const formula = renderAiResearchMath(tex, display);
+  const scrollableInline = !display && formula.widthEm - 2 * AI_MATH_GUTTER_EM > 6;
   return (
     <span
-      style={display ? undefined : {
-        display: "inline-flex",
-        maxWidth: "100%",
-        overflowX: "auto",
-        overflowY: "hidden",
+      data-ai-formula={display ? "display" : "inline"}
+      tabIndex={scrollableInline ? 0 : undefined}
+      aria-label={scrollableInline ? "Scrollable mathematical expression" : undefined}
+      style={{
+        position: "relative",
+        display: display ? "block" : "inline-block",
+        width: display ? "max-content" : undefined,
+        maxWidth: display ? undefined : "100%",
+        overflowX: display ? undefined : "auto",
+        overflowY: display ? undefined : "hidden",
         paddingBlock: "0.125em",
         marginBlock: "-0.125em",
-        verticalAlign: "baseline",
+        marginInline: display ? "auto" : `${-AI_MATH_GUTTER_EM}em`,
+        lineHeight: 0,
+        verticalAlign: display ? undefined : `${-formula.depthEm}em`,
       }}
-      dangerouslySetInnerHTML={{ __html: renderAiResearchMath(tex, display) }}
-    />
+    >
+      <span dangerouslySetInnerHTML={{ __html: formula.svg }} />
+      <span
+        style={{
+          position: "absolute",
+          width: "1px",
+          height: "1px",
+          padding: 0,
+          margin: "-1px",
+          overflow: "hidden",
+          clip: "rect(0,0,0,0)",
+          whiteSpace: "nowrap",
+          border: 0,
+        }}
+        dangerouslySetInnerHTML={{ __html: formula.mathml }}
+      />
+    </span>
   );
 }

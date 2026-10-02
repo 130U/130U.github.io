@@ -517,6 +517,7 @@ test("the production design contract is restrained and dependency-light", async 
   assert.match(globals, /\.entry-metadata\s*\{[\s\S]*?grid-template-columns:\s*1fr/u);
   assert.match(globals, /\.entry-project\s*\{[\s\S]*?color:\s*var\(--ink\)/u);
   assert.match(globals, /\.archive-bullets li::before\s*\{[\s\S]*?width:\s*3px[\s\S]*?content:\s*""/u);
-  assert.deepEqual(Object.keys(packageJson.dependencies).sort(), ["next", "react", "react-dom", "temml"]);
-  assert.equal(packageJson.dependencies.temml, "0.13.5");
+  assert.deepEqual(Object.keys(packageJson.dependencies).sort(), ["@mathjax/mathjax-tex-font", "@mathjax/src", "next", "react", "react-dom"]);
+  assert.equal(packageJson.dependencies["@mathjax/src"], "4.1.3");
+  assert.equal(packageJson.dependencies["@mathjax/mathjax-tex-font"], "4.1.3");
 });

@@ -26,6 +26,7 @@ const ROUTES = [
   "/past-experience/legal-research-and-policy-analysis/mangrove-restoration-and-compensatory-mitigation/",
   "/now/",
 ];
+const AI_PROJECT_ROUTES = new Set(ROUTES.filter((route) => /^\/past-experience\/artificial-intelligence\/[^/]+\/$/u.test(route)));
 
 function decodeHtml(value) {
   return value
@@ -100,8 +101,43 @@ function attributeValues(html, attribute) {
   return values;
 }
 
-function visibleText(html) {
-  const body = html.match(/<body\b[^>]*>([\s\S]*?)<\/body>/iu)?.[1] ?? "";
+function withoutSvg(html) {
+  const ranges = [];
+  let depth = 0;
+  let start = 0;
+  for (const tag of html.matchAll(/<\/?svg\b[^>]*>/giu)) {
+    if (tag[0].startsWith("</")) {
+      depth -= 1;
+      if (depth < 0) throw new Error("SVG elements must have balanced closing tags.");
+      if (depth === 0) ranges.push([start, tag.index + tag[0].length]);
+    } else if (!tag[0].endsWith("/>")) {
+      if (depth === 0) start = tag.index;
+      depth += 1;
+    } else if (depth === 0) {
+      ranges.push([tag.index, tag.index + tag[0].length]);
+    }
+  }
+  if (depth !== 0) throw new Error("SVG elements must be complete.");
+  for (const [from, to] of ranges.reverse()) html = html.slice(0, from) + " " + html.slice(to);
+  return html;
+}
+
+function formulaSnapshot(html) {
+  const formulas = [...html.matchAll(/<math\b([^>]*)>([\s\S]*?)<\/math>/giu)].map((match) => {
+    const mode = match[1].match(/\bdata-ai-math="(inline|display)"/u)?.[1];
+    const annotation = match[2].match(/<annotation\b[^>]*encoding="application\/x-tex"[^>]*>([\s\S]*?)<\/annotation>/iu)?.[1];
+    if (!mode || annotation === undefined) throw new Error("AI formulas must preserve an exact TeX annotation and display mode.");
+    return { mode, tex: decodeHtml(annotation) };
+  });
+  return { mathSourceSha256: sha256(JSON.stringify(formulas)), formulaCount: formulas.length };
+}
+
+function visibleText(html, preserveFormulaPositions = false) {
+  let body = html.match(/<body\b[^>]*>([\s\S]*?)<\/body>/iu)?.[1] ?? "";
+  if (preserveFormulaPositions) {
+    let formulaIndex = 0;
+    body = withoutSvg(body).replace(/<math\b[\s\S]*?<\/math>/giu, () => ` MATH_${formulaIndex++} `);
+  }
   const withoutNonVisibleContainers = body
     .replace(/<script\b[^>]*>[\s\S]*?<\/script>/giu, " ")
     .replace(/<style\b[^>]*>[\s\S]*?<\/style>/giu, " ")
@@ -128,7 +164,8 @@ function metadataSnapshot(html) {
 
 async function routeSnapshot(route) {
   const html = await readFile(routeHtmlPath(route), "utf8");
-  const text = visibleText(html);
+  const isAiProject = AI_PROJECT_ROUTES.has(route);
+  const text = visibleText(html, isAiProject);
   const body = html.match(/<body\b[^>]*>([\s\S]*?)<\/body>/iu)?.[1] ?? "";
   return {
     textSha256: sha256(text),
@@ -138,6 +175,7 @@ async function routeSnapshot(route) {
     altTexts: attributeValues(body, "alt"),
     ariaLabels: attributeValues(body, "aria-label"),
     metadata: metadataSnapshot(html),
+    ...(isAiProject ? formulaSnapshot(body) : {}),
   };
 }
 
@@ -175,7 +213,9 @@ async function verify() {
       continue;
     }
     const actual = await routeSnapshot(route);
-    for (const field of ["textSha256", "characterCount", "wordCount", "altTexts", "ariaLabels", "metadata"]) {
+    const fields = ["textSha256", "characterCount", "wordCount", "altTexts", "ariaLabels", "metadata"];
+    if (AI_PROJECT_ROUTES.has(route)) fields.push("mathSourceSha256", "formulaCount");
+    for (const field of fields) {
       if (stableJson(actual[field]) !== stableJson(expected[field])) {
         failures.push(
           `${route}: ${field} changed\nexpected ${stableJson(expected[field])}\nactual   ${stableJson(actual[field])}`,

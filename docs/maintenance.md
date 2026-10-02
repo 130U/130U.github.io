@@ -47,8 +47,9 @@ Biographical, AI research, and legal source files are checked against `content/p
 `content/visible-copy-manifest.json` independently records text, metadata, alt text,
 and ARIA labels for all seventeen website pages. Copy changes require the owner's explicit
 request and an intentional update to these contracts. Presentation-only changes to
-a protected component update its source hash while preserving the visible-copy
-manifest. Tests also verify page counts and navigation independently of the registry.
+a protected component update its source hash while preserving the approved prose,
+metadata, and formula source contracts. Tests also verify page counts and navigation
+independently of the registry.
 
 ## Application
 
@@ -99,16 +100,22 @@ details, or a download. Each reading page returns to its project anchor in the o
 | Evidence uncertainty and decision guarantees in investment research | [Source](https://app.notion.com/p/3ed867f96db581cfaae7d40b93aaa080?pvs=204) |
 
 `AiResearchProjectPage` uses the existing article reading styles. `AiResearchMath`
-renders TeX to MathML on the server with the pinned Temml dependency, strict parsing,
-and untrusted commands disabled. Every formula retains its original TeX annotation.
-Math inherits the shared text font and size; no equation fonts or browser runtime
-are added. Tables and display equations expose focusable scrolling regions.
+uses `app/lib/content/ai-math.ts` to render TeX on the server with the pinned MathJax
+4.1.3 engine and its TeX font package. Visible equations contain complete SVG glyph
+paths, inherit the reading size and ink color, and load no browser math engine or
+font resources. Assistive MathML preserves semantic formulas and the exact original
+TeX annotation. Invalid formulas fail the build. Tables and wide equations expose
+focusable scrolling regions.
 
 Tests compare every rendered source block, all 277 original formula annotations,
 five tables, 27 citation links, and 26 second-level headings with the approved
 documents. Update the project registry, independent route expectations, protected
 source hashes, and visible-copy contracts together when synchronizing approved text.
-For a change limited to AI, preserve the other twelve route snapshots in every field.
+The four project snapshots protect prose and formula positions independently from
+the ordered TeX-and-display-mode hash and formula count. SVG geometry and assistive
+MathML have independent regression checks for accents, fractions, aligned equations,
+Greek glyphs, superscripts, and equation numbers. Formula presentation changes preserve
+the other thirteen route snapshots in every field, including the AI overview.
 
 ### Legal papers
 

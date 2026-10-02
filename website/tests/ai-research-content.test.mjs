@@ -71,10 +71,35 @@ function readableMarkdown(markdown) {
 
 function readableHtml(html) {
   let mathIndex = 0;
-  return normalized(html
+  return normalized(withoutSvg(html)
     .replace(/<math\b[\s\S]*?<\/math>/giu, () => ` MATH_${mathIndex++} `)
     .replace(/<(?:br|\/?(?:table|thead|tbody|tr|td|th))\b[^>]*>/giu, " ")
     .replace(/<[^>]+>/gu, ""));
+}
+
+function svgRanges(html) {
+  const ranges = [];
+  let depth = 0;
+  let start = 0;
+  for (const tag of html.matchAll(/<\/?svg\b[^>]*>/giu)) {
+    if (tag[0].startsWith("</")) {
+      depth -= 1;
+      assert.ok(depth >= 0, "SVG elements must have balanced closing tags");
+      if (depth === 0) ranges.push([start, tag.index + tag[0].length]);
+    } else if (!tag[0].endsWith("/>")) {
+      if (depth === 0) start = tag.index;
+      depth += 1;
+    } else if (depth === 0) {
+      ranges.push([tag.index, tag.index + tag[0].length]);
+    }
+  }
+  assert.equal(depth, 0, "SVG elements must be complete");
+  return ranges;
+}
+
+function withoutSvg(html) {
+  for (const [from, to] of svgRanges(html).reverse()) html = html.slice(0, from) + " " + html.slice(to);
+  return html;
 }
 
 function expectedBlocks(markdown) {
@@ -176,13 +201,37 @@ for (const expected of PROJECTS) {
 
     const sourceFormulas = formulas(source.markdown);
     const math = [...content.matchAll(/<math\b([^>]*)>([\s\S]*?)<\/math>/giu)];
+    const svg = [...content.matchAll(/<svg\b([^>]*)>/giu)].filter((match) => attr(match[1], "data-ai-svg"));
+    const visualFormulas = svgRanges(content).map(([from, to]) => content.slice(from, to));
+    const containers = [...content.matchAll(/<span\b([^>]*)>/giu)].filter((match) => attr(match[1], "data-ai-formula"));
     assert.equal(math.length, expected.display + expected.inline);
+    assert.equal(svg.length, math.length, "Every source formula must have one deterministic visual SVG");
+    assert.equal(visualFormulas.length, math.length, "Nested vector geometry must remain inside its own formula root");
+    assert.equal(containers.length, math.length, "Every formula must have one visual and assistive container");
+    assert.deepEqual(svg.map((match) => attr(match[1], "data-ai-svg")), sourceFormulas.map(({ kind }) => kind));
+    assert.deepEqual(containers.map((match) => attr(match[1], "data-ai-formula")), sourceFormulas.map(({ kind }) => kind));
+    for (const match of svg) assert.equal(attr(match[1], "aria-hidden"), "true", "SVG glyphs must not duplicate accessible math");
+    for (let index = 0; index < visualFormulas.length; index += 1) {
+      const visual = visualFormulas[index];
+      assert.match(visual, /<path\b[^>]*\bd="[^"]+"/u, "Every exported formula needs complete embedded glyph paths");
+      const fallbackText = [...visual.matchAll(/<text\b[^>]*>([\s\S]*?)<\/text>/giu)]
+        .map((match) => normalized(match[1].replace(/<[^>]+>/gu, ""))).filter(Boolean);
+      assert.deepEqual(fallbackText, [], "Exported math must not fall back to browser text glyphs");
+      for (const semantic of ["mfrac", "msqrt", "mover", "munder", "msup", "msubsup", "mtable", "mlabeledtr"]) {
+        const visualCount = (visual.match(new RegExp(`data-mml-node="${semantic}"`, "gu")) ?? []).length;
+        const semanticCount = (math[index][2].match(new RegExp(`<${semantic}\\b`, "giu")) ?? []).length;
+        assert.equal(visualCount, semanticCount, `Exported formula ${index} must preserve its ${semantic} geometry`);
+      }
+    }
     assert.equal(math.filter((match) => attr(match[1], "data-ai-math") === "display").length, expected.display);
     assert.equal(math.filter((match) => attr(match[1], "data-ai-math") === "inline").length, expected.inline);
     assert.deepEqual(math.map((match) => ({
       kind: attr(match[1], "data-ai-math"),
       tex: decodeHtml(match[2].match(/<annotation\b[^>]*encoding="application\/x-tex"[^>]*>([\s\S]*?)<\/annotation>/iu)?.[1] ?? ""),
     })), sourceFormulas, "Every formula must preserve its original TeX annotation and display mode");
-    assert.doesNotMatch(content, /temml-error|<merror\b|\$`|`\$/iu);
+    assert.doesNotMatch(content, /temml-error|data-mjx-error|<merror\b|<foreignObject\b|\b(?:NaN|Infinity)\b|\$`|`\$/iu);
+    assert.doesNotMatch(content, /<(?:use|image)\b[^>]*(?:href|xlink:href)="(?!#)/iu, "Formula glyphs must not depend on remote resources");
+    const allIds = [...html.matchAll(/\bid="([^"]+)"/giu)].map((match) => decodeHtml(match[1]));
+    assert.equal(new Set(allIds).size, allIds.length, "Formula output must not create duplicate page IDs");
   });
 }

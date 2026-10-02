@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "private": true,
   "engines": {
-    "node": ">=22.13.0"
+    "node": "^22.18.0 || >=23.6.0"
   },
   "scripts": {
     "dev": "next dev",
@@ -20,10 +20,11 @@
     "optimize:images": "node scripts/optimize-images.mjs"
   },
   "dependencies": {
+    "@mathjax/mathjax-tex-font": "4.1.3",
+    "@mathjax/src": "4.1.3",
     "next": "16.3.6",
     "react": "19.2.8",
-    "react-dom": "19.2.8",
-    "temml": "0.13.5"
+    "react-dom": "19.2.8"
   },
   "devDependencies": {
     "@types/node": "22.19.19",

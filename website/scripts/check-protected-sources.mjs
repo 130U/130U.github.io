@@ -20,6 +20,7 @@ const PROTECTED_PATHS = [
   "content/legal-papers/solar-geoengineering-comparison-and-continuity.json",
   "content/legal-papers/mangrove-restoration-and-compensatory-mitigation.json",
   "app/lib/content/ai-projects.ts",
+  "app/lib/content/ai-math.ts",
   "app/lib/content/routes.ts",
   "app/past-experience/components/AiResearchProjectPage.tsx",
   "app/past-experience/components/AiResearchMath.tsx",
