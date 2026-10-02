@@ -66,7 +66,11 @@ contribution with its supporting evidence. These semantic roles share the same
 reading size, leading, emphasis, and spacing across domains.
 
 Narrative bullets use regular Inter, a 1.6 line height, and 18px between items.
-Their measure is capped at 720px including the metadata alignment indent.
+Domain titles, introductions, institution headings, metadata, and project content
+share one container right edge, capped at 720px from the institution heading's left
+edge. From 1280px, project titles, introductions, theme headings, and bullet text
+align to the metadata values; their indent is included in that shared measure.
+Prose keeps natural ragged-right wrapping within this common container.
 Metadata values stay upright and regular; labels use the shared muted color.
 Bold identifies a project and italic introduces a theme within it. Dates, roles,
 and bullets stay upright. Preserve the approved resume prose and its emphasis
@@ -82,6 +86,11 @@ Focus remains a visible blue outline, and hover feedback respects pointer capabi
 The desktop frame is capped at 1440px and divided into 15 columns, with a three-column
 sticky navigation rail. The content field reserves one internal track for indices and
 aligns headings and prose to the reading track. Tablet uses 12 outer columns.
+The shared `--reading-measure` caps narrative containers at 720px. Page introductions,
+the education list and outer coursework field, experience records, Current Chapter,
+and AI project articles align their headings and prose to this common right edge.
+Nested paragraphs fill their container with natural ragged-right wrapping. Coursework
+retains two inner columns; legal articles retain their own reading and contents layout.
 Below 768px, the navigation becomes a 4rem sticky header with a Menu / Close panel.
 Media-query ranges cover fractional viewport widths continuously.
 Without JavaScript, the links remain visible in normal document flow.

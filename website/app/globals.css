@@ -15,6 +15,7 @@
   --type-reading: 1.0625rem;
   --type-label: 0.75rem;
   --type-interface: 0.875rem;
+  --reading-measure: 720px;
   --rail-min-width: calc(5 * var(--type-interface) + 13px + clamp(20px, 2vw, 24px) + 22px + 10px);
   --title-leading: 1.2;
   --heading-leading: 1.25;
@@ -348,7 +349,7 @@ button:focus-visible {
 }
 
 .page-intro {
-  max-width: 850px;
+  max-width: var(--reading-measure);
   margin: 0 0 104px;
 }
 
@@ -401,7 +402,6 @@ button:focus-visible {
 
 .lede,
 .page-intro-support {
-  max-width: 68ch;
   margin: 27px 0 0;
   color: var(--ink);
   font-size: var(--type-reading);
@@ -423,6 +423,10 @@ button:focus-visible {
 .domain-panel,
 .current-chapter-brief {
   border-top: 1px solid var(--rule-strong);
+}
+
+.education-list {
+  max-width: var(--reading-measure);
 }
 
 .education-entry {
@@ -448,7 +452,6 @@ button:focus-visible {
 
 .entry-subtitle,
 .education-note {
-  max-width: 68ch;
   margin: 6px 0 0;
   font-size: var(--type-reading);
   line-height: var(--reading-leading);
@@ -476,6 +479,7 @@ button:focus-visible {
 }
 
 .coursework {
+  max-width: var(--reading-measure);
   margin-top: 144px;
 }
 
@@ -586,6 +590,11 @@ button:focus-visible {
   grid-column: 2 / -1;
 }
 
+.domain-page-intro h1,
+.archive-entry-content {
+  max-width: var(--reading-measure);
+}
+
 .domain-panel-standalone {
   grid-column: 1 / span 11;
 }
@@ -603,10 +612,6 @@ button:focus-visible {
   text-transform: lowercase;
 }
 
-.archive-entry-content h2 {
-  max-width: 760px;
-}
-
 .archive-entry-content {
   --entry-label-width: 96px;
   --entry-column-gap: 16px;
@@ -621,7 +626,6 @@ button:focus-visible {
 .entry-metadata {
   display: grid;
   grid-template-columns: 1fr;
-  max-width: 720px;
   margin: 38px 0 0;
   padding: 22px 0;
   border-top: 1px solid var(--rule);
@@ -661,7 +665,6 @@ button:focus-visible {
 }
 
 .entry-project {
-  max-width: 720px;
   margin: 32px 0 0;
   padding-left: var(--entry-value-offset);
   color: var(--ink);
@@ -672,7 +675,6 @@ button:focus-visible {
 }
 
 .entry-project-context {
-  max-width: 720px;
   margin: 0.75rem 0 0;
   padding-left: var(--entry-value-offset);
   color: var(--supporting-ink);
@@ -688,7 +690,6 @@ button:focus-visible {
 }
 
 .entry-section-heading {
-  max-width: 720px;
   margin: 28px 0 0;
   padding-left: var(--entry-value-offset);
   color: var(--ink);
@@ -709,7 +710,6 @@ button:focus-visible {
 
 .archive-bullets {
   display: grid;
-  max-width: min(72ch, 720px);
   margin: 1.75rem 0 0;
   padding: 0;
   font-size: var(--type-reading);
@@ -738,7 +738,6 @@ button:focus-visible {
 }
 
 .domain-introduction {
-  max-width: 720px;
   margin-top: 1.5rem;
   font-size: var(--type-reading);
   line-height: var(--reading-leading);
@@ -782,14 +781,18 @@ button:focus-visible {
 }
 
 .current-chapter-brief {
+  max-width: var(--reading-measure);
   padding: 35px 0 0;
 }
 
 .current-chapter-brief p {
-  max-width: 72ch;
   margin: 0;
   font-size: var(--type-reading);
   line-height: var(--reading-leading);
+}
+
+.ai-research-page article[aria-labelledby="ai-project-title"] > div {
+  max-width: var(--reading-measure);
 }
 
 .site-footer {
