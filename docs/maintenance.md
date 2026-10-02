@@ -86,7 +86,7 @@ screenshots, and source-comparison evidence outside the repository.
 ### AI research projects
 
 Domain `01`, AI Research and Engineering, links four project reading pages through
-Read More. Each JSON source stores its original Notion title, URL, edit timestamp,
+Read more. Each JSON source stores its original Notion title, URL, edit timestamp,
 and complete Markdown body. Preserve the opening Project and Author paragraph,
 section headings, prose, emphasis, citations, table headers and cells, and formulas.
 Use the source structure without adding an abstract, references section, publication

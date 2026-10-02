@@ -15,6 +15,7 @@
   --type-reading: 1.0625rem;
   --type-label: 0.75rem;
   --type-interface: 0.875rem;
+  --rail-min-width: calc(5 * var(--type-interface) + 13px + clamp(20px, 2vw, 24px) + 22px + 10px);
   --title-leading: 1.2;
   --heading-leading: 1.25;
   --subheading-leading: 1.45;
@@ -106,7 +107,7 @@ button:focus-visible {
 .site-frame {
   position: relative;
   display: grid;
-  grid-template-columns: repeat(15, minmax(0, 1fr));
+  grid-template-columns: repeat(3, minmax(calc(var(--rail-min-width) / 3), 1fr)) repeat(12, minmax(0, 1fr));
   width: min(100%, 1440px);
   min-height: calc(100vh - 76px);
   margin: 0 auto;
@@ -118,7 +119,7 @@ button:focus-visible {
   z-index: 0;
   inset: 0 64px;
   display: grid;
-  grid-template-columns: repeat(15, minmax(0, 1fr));
+  grid-template-columns: repeat(3, minmax(calc(var(--rail-min-width) / 3), 1fr)) repeat(12, minmax(0, 1fr));
   pointer-events: none;
 }
 
@@ -233,6 +234,7 @@ button:focus-visible {
   display: inline-flex;
   min-width: 0;
   flex: 0 1 auto;
+  flex-wrap: wrap;
   align-items: center;
   color: var(--ink);
   gap: 12px;
@@ -251,12 +253,12 @@ button:focus-visible {
 
 .wordmark-name {
   display: block;
-  min-width: 0;
+  min-width: min-content;
   font-size: var(--type-interface);
   font-weight: 400;
   letter-spacing: 0;
   line-height: var(--interface-leading);
-  overflow-wrap: anywhere;
+  overflow-wrap: normal;
 }
 
 .menu-toggle {
@@ -280,6 +282,7 @@ button:focus-visible {
 
 .primary-nav {
   display: grid;
+  grid-template-columns: minmax(0, 1fr);
   margin-top: 33px;
   font-size: var(--type-interface);
   line-height: var(--interface-leading);
@@ -844,6 +847,12 @@ button:focus-visible {
 }
 
 @media (min-width: 768px) {
+  .site-rail {
+    overflow-y: auto;
+    scrollbar-width: thin;
+    scrollbar-color: var(--rule-strong) transparent;
+  }
+
   .course-grid article:nth-child(odd) {
     padding-left: 0;
     border-left: 0;
@@ -866,14 +875,18 @@ button:focus-visible {
 }
 
 @media (768px <= width < 1024px) {
+  .site-frame,
+  .structural-grid {
+    --rail-min-width: calc(5 * var(--type-interface) + 13px + 12px + 12px + 10px);
+    grid-template-columns: repeat(3, minmax(calc(var(--rail-min-width) / 3), 1fr)) repeat(9, minmax(0, 1fr));
+  }
+
   .site-frame {
-    grid-template-columns: repeat(12, minmax(0, 1fr));
     padding: 0 32px;
   }
 
   .structural-grid {
     inset: 0 32px;
-    grid-template-columns: repeat(12, minmax(0, 1fr));
   }
 
   .structural-guide-reading-measure {

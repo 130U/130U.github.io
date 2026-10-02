@@ -6,7 +6,7 @@
     "app/now/page.tsx": "fd7d113253d81fdf446c20bdb01c6dc2be6f8dc72d9bd6b83c726638ab4ea73a",
     "app/past-experience/page.tsx": "f3c6126decb358a6a43107f19d75acbdbae4886d83f0139b1ee87b0a73ebe289",
     "app/past-experience/[slug]/page.tsx": "a89b781c0a6a74b9295635d5495c4e2cc2cf2d890cc879578ebfd04a9f6db84b",
-    "app/past-experience/components/ExperienceDomainPage.tsx": "3b8b4b94b1b5ac66f0e0d71f6c3982ff8f809a68a2863445a0938162109e1dc0",
+    "app/past-experience/components/ExperienceDomainPage.tsx": "a65be937d882fb3104c7154f56f9c6174b2668a9d0c6c222c5eee17172241f87",
     "app/lib/content/experience.ts": "46d6986e28999f63a163f591a67ed5fa4eb14a22594344131f073b20de67b560",
     "content/past-experience/experience.md": "7aa72f31eb70fe2c74e055080560b0c09b420a7f4eb6f5494d0b5936efc5376c",
     "app/lib/content/legal-papers.ts": "8bd1bca63e7211f7c286df97192faf943144ff28be6d12cc5666f704933e9f4c",
@@ -24,6 +24,6 @@
     "content/artificial-intelligence/task-validity-in-financial-synthetic-data.json": "132044a28758f885411b78078600a3a50df5e288a9bbbb948b217ede1df4f4de",
     "content/artificial-intelligence/verification-and-supervision-in-scientific-reasoning-tasks.json": "2c342fb87edcc4618d738233329b2c2926c6baccb1891023437c4587d1d9d560",
     "content/artificial-intelligence/evidence-uncertainty-and-decision-guarantees-in-investment-research.json": "98a9c49dd5bc50f5c24ea94ccf7a38d5f6f93abcc770f9b70049a2c73f520bbc",
-    "app/lib/content/ai-math.ts": "6b221504b2a104deb02c226675878f33b0d0e5b24595afb9d072d799adc84524"
+    "app/lib/content/ai-math.ts": "6a91904771a82812971bc812c65076f48a25ef74a246738b55fbbf04021f9b9c"
   }
 }

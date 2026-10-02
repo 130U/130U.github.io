@@ -131,7 +131,7 @@ export function ExperienceDomainPage({
                       href={`${domain.path}${project.readMoreSlug}/`}
                       aria-label={`Read more about ${project.title.replace(/^Project(?: \d+)?:\s*/u, "")}`}
                     >
-                      Read More <span aria-hidden="true">↗</span>
+                      Read more <span aria-hidden="true">↗</span>
                     </Link>
                   )}
                 </div>

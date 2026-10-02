@@ -107,7 +107,7 @@ function intrinsicSvg(container: LiteElement, display: boolean) {
 
   let svgRoot = root;
   if (numbered) {
-    // A native SVG frame fixes the numbered equation's responsive geometry at
+    // A native SVG frame sets the numbered equation's responsive geometry at
     // its intrinsic width, then scales the entire layout with the body text.
     const widthPx = widthEx * EX;
     const heightPx = heightEx * EX;

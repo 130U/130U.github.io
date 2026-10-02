@@ -229,7 +229,7 @@ for (const expected of PROJECTS) {
       kind: attr(match[1], "data-ai-math"),
       tex: decodeHtml(match[2].match(/<annotation\b[^>]*encoding="application\/x-tex"[^>]*>([\s\S]*?)<\/annotation>/iu)?.[1] ?? ""),
     })), sourceFormulas, "Every formula must preserve its original TeX annotation and display mode");
-    assert.doesNotMatch(content, /temml-error|data-mjx-error|<merror\b|<foreignObject\b|\b(?:NaN|Infinity)\b|\$`|`\$/iu);
+    assert.doesNotMatch(content, /data-mjx-error|<merror\b|<foreignObject\b|\b(?:NaN|Infinity)\b|\$`|`\$/iu);
     assert.doesNotMatch(content, /<(?:use|image)\b[^>]*(?:href|xlink:href)="(?!#)/iu, "Formula glyphs must not depend on remote resources");
     const allIds = [...html.matchAll(/\bid="([^"]+)"/giu)].map((match) => decodeHtml(match[1]));
     assert.equal(new Set(allIds).size, allIds.length, "Formula output must not create duplicate page IDs");

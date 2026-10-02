@@ -91,8 +91,12 @@ Structural guides are decorative and hidden from assistive technology; phone lay
 omit them. Below 1280px, experience narrative text uses the full reading track;
 below 1024px, metadata also stacks. Long values wrap without narrowing the prose.
 Phone indices use a 1.5rem track and a 0.625rem gap. These tracks and the mobile
-header scale with the user's text size. The wordmark can wrap, and long reading
-content has emergency wrapping when an unbroken word would exceed its container.
+header scale with the user's text size. The wordmark wraps at word boundaries,
+and the desktop navigation rail scrolls internally when its contents exceed the
+viewport height. Its minimum track width follows the interface type size, navigation
+indent, padding, and scrollbar allowance. The reading field and structural guides
+reflow together when enlarged text needs more rail space. Long reading content has
+emergency wrapping when an unbroken word would exceed its container.
 Coursework uses the shared reading size and leading, two columns from 768px, and
 one on phones. Course-category headings match degree and project headings. Column
 padding preserves useful space for long course names. Profile details and contact
@@ -111,7 +115,7 @@ roughly 64–72 characters where the layout permits.
 The Home wordmark is the primary expressive gesture. Its Canvas2D stage uses a
 bounded viewport measure. Hover repels
 points; press, release, and keyboard activation produce bounded feedback. Up to four
-ripples can coexist. The animation loop stops at rest and pauses off-screen.
+ripples can coexist. The animation loop stops at rest.
 Reduced motion displays the complete static wordmark. The visible HTML fallback
 supplies the name before the canvas is ready and when JavaScript is unavailable.
 
@@ -121,7 +125,8 @@ or navigation, and releases the page when the viewport reaches desktop width.
 
 ## Content and extension
 
-Page, domain, institution, project, and course titles use title case. Supporting
+Page, domain, institution, project, and course titles use title case. Research
+article titles and chapters retain their authored capitalization. Supporting
 sentences, subsection headings, accessibility descriptions, and action labels use
 sentence case. Preserve official spellings and acronyms such as GitHub, AI, ESG,
 LLM, SHAP, and IPhO; sentence case does not lowercase proper names.
@@ -141,7 +146,8 @@ with diacritics remain part of the source text.
 The four primary pages are Home, Education, Past Experience, and Current Chapter.
 Five domain pages carry the experience record. Domain `03` is Legal Research and
 Policy Analysis; its four selected papers each open a dedicated article page.
-The website has thirteen public routes, with the architecture viewer as a separate
+Domain `01`, AI Research and Engineering, links four project reading pages.
+The website has seventeen public routes, with the architecture viewer as a separate
 technical reference. Keep factual claims, metadata, copy, and content order aligned
 with the integrity manifests.
 

@@ -13,10 +13,11 @@ tracing, and image export. A downloaded `index.html` also works offline.
 | `README.md` | Viewer usage and maintenance |
 | `LICENSE` | MIT license for the Archify viewer |
 
-The website contains four main pages, five experience domains, and four legal
-papers. `website/app/lib/content/` defines identity, routes, and content loaders;
-`website/content/` contains the resume, structured manuscripts, and integrity
-contracts. Next.js generates thirteen static website pages. The build includes
+The website contains four main pages, five experience domains, four legal
+papers, and four AI research project pages. `website/app/lib/content/` defines
+identity, routes, and content loaders; `website/content/` contains the resume,
+AI project sources, structured manuscripts, and integrity contracts. Next.js
+generates seventeen static website pages. The build includes
 this viewer at `/architecture/`, and GitHub Actions publishes `website/out/` to
 GitHub Pages on the custom domain.
 

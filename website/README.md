@@ -1,8 +1,8 @@
 # Website
 
 Theodore Ouyang's personal site, built with Next.js App Router, React, and native CSS.
-The static export includes four main pages, five experience domains, and four legal
-papers. Node.js 24 matches the deployment runtime.
+The static export includes four main pages, five experience domains, four legal
+papers, and four AI research project pages. Node.js 24 matches the deployment runtime.
 
 ```sh
 cd website
@@ -13,7 +13,7 @@ npm run dev
 | Directory | Responsibility |
 | --- | --- |
 | `app/` | Pages, shared shell, content registry, and client interactions |
-| `content/` | Experience records, structured legal papers, and content integrity manifests |
+| `content/` | Experience records, AI research projects, legal papers, and integrity manifests |
 | `public/` | Assets served directly by GitHub Pages |
 | `source-assets/` | Editable brand masters |
 | `scripts/` | Content checks, asset generation, build assembly, and local preview |

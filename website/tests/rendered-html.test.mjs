@@ -270,9 +270,12 @@ test("experience pages retain the resume project hierarchy and consulting placem
   assert.match(stripMarkup(ai), /leading global alternative asset manager/u);
   for (const slug of AI_PROJECT_SLUGS) {
     const route = `${AI_ROUTE}${slug}/`;
-    assert.equal(openingTags(ai, "a").filter((tag) => attribute(tag, "href") === route).length, 1, `Missing unique Read More link to ${route}`);
+    assert.equal(openingTags(ai, "a").filter((tag) => attribute(tag, "href") === route).length, 1, `Missing unique Read more link to ${route}`);
     assert.ok(ai.includes(`id="${slug}"`), `Missing AI project return anchor #${slug}`);
   }
+  assert.deepEqual(elementsWithClass(ai, "a", "entry-paper-link").map((match) => stripMarkup(match[2])), [
+    "Read more ↗", "Read more ↗", "Read more ↗", "Read more ↗",
+  ], "All four project reading actions must use consistent sentence case");
   const finance = await routeHtml("/past-experience/finance/");
   assert.deepEqual(elementsWithClass(finance, "article", "archive-entry").map((match) => stripMarkup(match[2].match(/<h2>(.*?)<\/h2>/u)[1])), [
     "Jones Lang LaSalle Capital Markets Team", "Hubble Network", "SAIF Partners", "CITIC Securities", "EY-Parthenon",
@@ -487,7 +490,7 @@ test("the production design contract is restrained and dependency-light", async 
   const structuralGrid = await readFile(path.join(ROOT, "app", "components", "StructuralGrid.tsx"), "utf8");
   const layout = await readFile(path.join(ROOT, "app", "layout.tsx"), "utf8");
   const packageJson = JSON.parse(await readFile(path.join(ROOT, "package.json"), "utf8"));
-  for (const token of ["--page: #f7f6f5", "--ink: #0b0b0b", "--muted: #70706c", "--accent: #2200ff", "repeat(15, minmax(0, 1fr))"]) assert.ok(globals.includes(token));
+  for (const token of ["--page: #f7f6f5", "--ink: #0b0b0b", "--muted: #70706c", "--accent: #2200ff", "repeat(3, minmax(calc(var(--rail-min-width) / 3), 1fr)) repeat(12, minmax(0, 1fr))"]) assert.ok(globals.includes(token));
   assert.doesNotMatch(globals, /box-shadow|backdrop-filter/u);
   assert.doesNotMatch(home, /box-shadow|backdrop-filter|linear-gradient/u);
   assert.match(entrance, /min\(76vw, 72dvh, 720px\)/u);
