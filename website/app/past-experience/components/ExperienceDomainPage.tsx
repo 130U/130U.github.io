@@ -99,7 +99,7 @@ export function ExperienceDomainPage({
                 })}
               </dl>
               {entry.projects.map((project, projectIndex) => (
-                <div className="entry-project-group" id={project.paperSlug} key={`${project.title}-${projectIndex}`}>
+                <div className="entry-project-group" id={project.paperSlug ?? project.readMoreSlug} key={`${project.title}-${projectIndex}`}>
                   <h3 className="entry-project">{project.title}</h3>
                   {project.introduction.map((paragraph, index) => (
                     <p className="entry-project-context" key={index}>{renderExperienceText(paragraph)}</p>
@@ -123,6 +123,15 @@ export function ExperienceDomainPage({
                       aria-label={`Read ${project.title.replace(/^Project(?: \d+)?:\s*/u, "")}`}
                     >
                       Read paper <span aria-hidden="true">↗</span>
+                    </Link>
+                  )}
+                  {project.readMoreSlug && (
+                    <Link
+                      className="entry-paper-link"
+                      href={`${domain.path}${project.readMoreSlug}/`}
+                      aria-label={`Read more about ${project.title.replace(/^Project(?: \d+)?:\s*/u, "")}`}
+                    >
+                      Read More <span aria-hidden="true">↗</span>
                     </Link>
                   )}
                 </div>

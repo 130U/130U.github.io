@@ -104,5 +104,5 @@ test("the protected-source manifest cannot omit a required path", async (t) => {
   const { root, manifest } = await protectedFixture(t);
   delete manifest.sources["app/education/page.tsx"];
   await writeFile(path.join(root, "content", "protected-sources.json"), JSON.stringify(manifest));
-  assert.throws(() => verifyProtectedSources(root), /must cover all fourteen protected sources/u);
+  assert.throws(() => verifyProtectedSources(root), /must cover every required source/u);
 });

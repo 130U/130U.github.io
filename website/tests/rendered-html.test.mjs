@@ -19,6 +19,13 @@ const ARTICLES = [
   ["mangrove-restoration-and-compensatory-mitigation", "Mangrove Restoration and the Limits of Compensatory Mitigation", "Lessons from Florida for the Greater Bay Area", 41],
 ];
 const ARTICLE_ROUTES = ARTICLES.map(([slug]) => `${LAW_ROUTE}${slug}/`);
+const AI_ROUTE = "/past-experience/artificial-intelligence/";
+const AI_PROJECT_SLUGS = [
+  "statistical-inference-and-resource-allocation-in-expert-data-production",
+  "task-validity-in-financial-synthetic-data",
+  "verification-and-supervision-in-scientific-reasoning-tasks",
+  "evidence-uncertainty-and-decision-guarantees-in-investment-research",
+];
 const ROUTES = [
   "/",
   "/education/",
@@ -30,6 +37,7 @@ const ROUTES = [
   "/past-experience/finance/",
   "/past-experience/stem-academic-competitions-and-training/",
   ...ARTICLE_ROUTES,
+  ...AI_PROJECT_SLUGS.map((slug) => `${AI_ROUTE}${slug}/`),
 ];
 const NAVIGATION = [
   ["Home", "/"],
@@ -39,7 +47,7 @@ const NAVIGATION = [
 ];
 // Expected entry and bullet counts are independent of the parser and route registry.
 const DOMAINS = [
-  ["AI Research and Engineering", "/past-experience/artificial-intelligence/", 3, 24],
+  ["AI Research and Engineering", "/past-experience/artificial-intelligence/", 3, 39],
   ["Data Science", "/past-experience/data-science/", 3, 40],
   ["Legal Research and Policy Analysis", LAW_ROUTE, 1, 8],
   ["Finance and Consulting", "/past-experience/finance/", 5, 24],
@@ -149,7 +157,7 @@ async function exportedRoutes() {
     .sort();
 }
 
-test("the static export contains thirteen website routes and the architecture viewer", async () => {
+test("the static export contains seventeen website routes and the architecture viewer", async () => {
   assert.deepEqual(await exportedRoutes(), [...ROUTES, "/architecture/"].sort());
   assert.ok(existsSync(path.join(OUT, "404.html")));
 });
@@ -215,7 +223,7 @@ test("inner routes present text-focused pages and the Current Chapter introducti
   assert.match(now, /expand human capability/u);
 });
 
-test("Past Experience presents five domains, 14 entries, and 103 bullets", async () => {
+test("Past Experience presents five domains, 14 entries, and 118 bullets", async () => {
   const directory = await routeHtml("/past-experience/");
   assert.match(directory, /<h1>Past Experience<\/h1>/u);
   assert.match(directory, /class="page-intro-support">Experience through September 2026<\/p>/u);
@@ -242,24 +250,29 @@ test("Past Experience presents five domains, 14 entries, and 103 bullets", async
     bullets += routeBullets;
   }
   assert.equal(entries, 14);
-  assert.equal(bullets, 103);
+  assert.equal(bullets, 118);
 });
 
 test("experience pages retain the resume project hierarchy and consulting placement", async () => {
   const ai = await routeHtml("/past-experience/artificial-intelligence/");
   const foundationModel = elementsWithClass(ai, "article", "archive-entry")[0][2];
-  assert.match(foundationModel, /<h2>Duke University × Top-Tier Foundation Model Company<\/h2>/u);
+  assert.match(foundationModel, /<h2>Duke University and Top-Tier Foundation Model Company<\/h2>/u);
   assert.deepEqual(elementsWithClass(foundationModel, "h3", "entry-project").map((match) => stripMarkup(match[2])), [
-    "Project 1: Bayesian Quality Control and Adaptive Review",
-    "Project 2: Financial Preference Data Engineering and Model Evaluation",
+    "Project 1: Scalable Expert Quality Control and Adaptive Review",
+    "Project 2: Financial Task Design and Synthetic Data Engineering",
   ]);
   assert.equal(elementsWithClass(foundationModel, "h4", "entry-section-heading").length, 0);
-  assert.deepEqual(elementsWithClass(foundationModel, "ul", "archive-bullets").map((match) => (match[2].match(/<li\b/gu) ?? []).length), [6, 6]);
-  assert.match(stripMarkup(foundationModel), /September 2023 – September 2026/u);
-  assert.match(ai, /<strong>Turned reliability estimates into an adaptive review policy\.<\/strong>/u);
-  assert.match(ai, /<a href="https:\/\/arxiv\.org\/abs\/2210\.06812">CROWDLAB \(Goh et al\., 2022\)<\/a>/u);
-  assert.match(stripMarkup(ai), /Partner identities, proprietary model details, and project-level performance metrics are subject to confidentiality obligations\./u);
-  assert.match(stripMarkup(ai), /University–industry research collaboration with a leading global alternative asset manager \(\$300B\+ AUM as of June 2026; confidential partner\)/u);
+  assert.deepEqual(elementsWithClass(foundationModel, "ul", "archive-bullets").map((match) => (match[2].match(/<li\b/gu) ?? []).length), [9, 12]);
+  assert.match(stripMarkup(foundationModel), /September 2023 to September 2026/u);
+  assert.match(ai, /<strong>Turned contributor reliability estimates into an adaptive review policy\.<\/strong>/u);
+  assert.match(ai, /<a href="https:\/\/arxiv\.org\/abs\/2210\.06812">CROWDLAB<\/a>/u);
+  assert.match(stripMarkup(ai), /Partner identities, proprietary model details, and some project-level performance measures are confidential\./u);
+  assert.match(stripMarkup(ai), /leading global alternative asset manager/u);
+  for (const slug of AI_PROJECT_SLUGS) {
+    const route = `${AI_ROUTE}${slug}/`;
+    assert.equal(openingTags(ai, "a").filter((tag) => attribute(tag, "href") === route).length, 1, `Missing unique Read More link to ${route}`);
+    assert.ok(ai.includes(`id="${slug}"`), `Missing AI project return anchor #${slug}`);
+  }
   const finance = await routeHtml("/past-experience/finance/");
   assert.deepEqual(elementsWithClass(finance, "article", "archive-entry").map((match) => stripMarkup(match[2].match(/<h2>(.*?)<\/h2>/u)[1])), [
     "Jones Lang LaSalle Capital Markets Team", "Hubble Network", "SAIF Partners", "CITIC Securities", "EY-Parthenon",
@@ -284,7 +297,7 @@ test("experience pages retain the resume project hierarchy and consulting placem
 
 test("all five domains retain their updated introductions and substantive source claims", async () => {
   const sourceClaims = [
-    ["/past-experience/artificial-intelligence/", "Developed and tested engineering adaptations of statistical learning, model evaluation, and interpretable analysis to address data validity, expert judgment, and the reliability of research conclusions."],
+    ["/past-experience/artificial-intelligence/", "Developed AI research and production methods that domain experts could apply consistently across teams."],
     ["/past-experience/data-science/", "Applied statistical learning, data engineering, and market analysis to counterparty screening, market entry, and green-credit assessment."],
     [LAW_ROUTE, "Authored four research papers examining how legal institutions allocate authority and responsibility under technological and environmental uncertainty."],
     ["/past-experience/finance/", "Applied market research, valuation analysis, and risk screening to real estate acquisition advice, technology commercialization, dental-sector research, and equity research."],
@@ -504,5 +517,6 @@ test("the production design contract is restrained and dependency-light", async 
   assert.match(globals, /\.entry-metadata\s*\{[\s\S]*?grid-template-columns:\s*1fr/u);
   assert.match(globals, /\.entry-project\s*\{[\s\S]*?color:\s*var\(--ink\)/u);
   assert.match(globals, /\.archive-bullets li::before\s*\{[\s\S]*?width:\s*3px[\s\S]*?content:\s*""/u);
-  assert.deepEqual(Object.keys(packageJson.dependencies).sort(), ["next", "react", "react-dom"]);
+  assert.deepEqual(Object.keys(packageJson.dependencies).sort(), ["next", "react", "react-dom", "temml"]);
+  assert.equal(packageJson.dependencies.temml, "0.13.5");
 });

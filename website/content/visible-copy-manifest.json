@@ -73,15 +73,19 @@
       }
     },
     "/past-experience/artificial-intelligence/": {
-      "textSha256": "d709d9652891fbd545e72b014471e05337d8e47fc786e0c0f745b816e3d0d4fc",
-      "characterCount": 14301,
-      "wordCount": 1851,
-      "preview": "Skip to main content Theodore Ouyang Home Education Past Experience Current Chapter Past Experience 01 AI Research and Engineering Developed and tested engineer",
+      "textSha256": "b0f08763c91980b22903f0b0c2e237dddf922afeaa919f323727e34e1e54d3c0",
+      "characterCount": 22629,
+      "wordCount": 2949,
+      "preview": "Skip to main content Theodore Ouyang Home Education Past Experience Current Chapter Past Experience 01 AI Research and Engineering Developed AI research and pro",
       "altTexts": [],
       "ariaLabels": [
         "Theodore Ouyang home",
         "Primary navigation",
-        "AI Research and Engineering"
+        "AI Research and Engineering",
+        "Read more about Scalable Expert Quality Control and Adaptive Review",
+        "Read more about Financial Task Design and Synthetic Data Engineering",
+        "Read more about Scientific Reasoning Evaluation and Task Design",
+        "Read more about AI-Driven Investment Research and Explainable Risk Analysis"
       ],
       "metadata": {
         "title": "AI Research and Engineering | Past Experience | Theodore Ouyang",
@@ -567,6 +571,138 @@
         "openGraphUrl": "https://www.theodoreoy.com/now/",
         "twitterTitle": "Current Chapter",
         "twitterDescription": "Theodore Ouyang explores practical, real-world uses of artificial intelligence in everyday life."
+      }
+    },
+    "/past-experience/artificial-intelligence/statistical-inference-and-resource-allocation-in-expert-data-production/": {
+      "textSha256": "8d5ac60b4ef5646764e3f5e4360ded8c7c9dd2733f411c16d790df346935dfd4",
+      "characterCount": 18711,
+      "wordCount": 3308,
+      "preview": "Skip to main content Theodore Ouyang Home Education Past Experience Current Chapter AI Research and Engineering Statistical inference and resource allocation in",
+      "altTexts": [],
+      "ariaLabels": [
+        "Theodore Ouyang home",
+        "Primary navigation",
+        "Mathematical equation",
+        "Mathematical equation",
+        "Mathematical equation",
+        "Mathematical equation",
+        "Mathematical equation",
+        "Mathematical equation",
+        "Mathematical equation",
+        "Mathematical equation",
+        "Mathematical equation",
+        "Mathematical equation",
+        "Mathematical equation",
+        "Mathematical equation",
+        "Mathematical equation",
+        "Mathematical equation",
+        "Mathematical equation",
+        "Research data table"
+      ],
+      "metadata": {
+        "title": "Statistical inference and resource allocation in expert data production | Theodore Ouyang",
+        "description": "Statistical inference and resource allocation in expert data production",
+        "canonical": "https://www.theodoreoy.com/past-experience/artificial-intelligence/statistical-inference-and-resource-allocation-in-expert-data-production/",
+        "openGraphTitle": "Statistical inference and resource allocation in expert data production",
+        "openGraphDescription": "Statistical inference and resource allocation in expert data production",
+        "openGraphUrl": "https://www.theodoreoy.com/past-experience/artificial-intelligence/statistical-inference-and-resource-allocation-in-expert-data-production/",
+        "twitterTitle": "Statistical inference and resource allocation in expert data production",
+        "twitterDescription": "Statistical inference and resource allocation in expert data production"
+      }
+    },
+    "/past-experience/artificial-intelligence/task-validity-in-financial-synthetic-data/": {
+      "textSha256": "c3d4c6521772c1f8663832b2be6faa2804d56ea3dbf851cde0d66433cb0027f7",
+      "characterCount": 17092,
+      "wordCount": 2891,
+      "preview": "Skip to main content Theodore Ouyang Home Education Past Experience Current Chapter AI Research and Engineering Task validity in financial synthetic data Projec",
+      "altTexts": [],
+      "ariaLabels": [
+        "Theodore Ouyang home",
+        "Primary navigation",
+        "Mathematical equation",
+        "Mathematical equation",
+        "Research data table",
+        "Mathematical equation",
+        "Mathematical equation",
+        "Mathematical equation",
+        "Mathematical equation",
+        "Mathematical equation",
+        "Mathematical equation",
+        "Research data table",
+        "Mathematical equation"
+      ],
+      "metadata": {
+        "title": "Task validity in financial synthetic data | Theodore Ouyang",
+        "description": "Task validity in financial synthetic data",
+        "canonical": "https://www.theodoreoy.com/past-experience/artificial-intelligence/task-validity-in-financial-synthetic-data/",
+        "openGraphTitle": "Task validity in financial synthetic data",
+        "openGraphDescription": "Task validity in financial synthetic data",
+        "openGraphUrl": "https://www.theodoreoy.com/past-experience/artificial-intelligence/task-validity-in-financial-synthetic-data/",
+        "twitterTitle": "Task validity in financial synthetic data",
+        "twitterDescription": "Task validity in financial synthetic data"
+      }
+    },
+    "/past-experience/artificial-intelligence/verification-and-supervision-in-scientific-reasoning-tasks/": {
+      "textSha256": "00e83d3fd519a0d1c5febb667229d04bcdcd5b88779a039eafbf0f75e1885aeb",
+      "characterCount": 20176,
+      "wordCount": 3331,
+      "preview": "Skip to main content Theodore Ouyang Home Education Past Experience Current Chapter AI Research and Engineering Verification and supervision in scientific reaso",
+      "altTexts": [],
+      "ariaLabels": [
+        "Theodore Ouyang home",
+        "Primary navigation",
+        "Mathematical equation",
+        "Mathematical equation",
+        "Mathematical equation",
+        "Mathematical equation",
+        "Mathematical equation",
+        "Mathematical equation",
+        "Mathematical equation",
+        "Research data table",
+        "Mathematical equation",
+        "Mathematical equation"
+      ],
+      "metadata": {
+        "title": "Verification and supervision in scientific reasoning tasks | Theodore Ouyang",
+        "description": "Verification and supervision in scientific reasoning tasks",
+        "canonical": "https://www.theodoreoy.com/past-experience/artificial-intelligence/verification-and-supervision-in-scientific-reasoning-tasks/",
+        "openGraphTitle": "Verification and supervision in scientific reasoning tasks",
+        "openGraphDescription": "Verification and supervision in scientific reasoning tasks",
+        "openGraphUrl": "https://www.theodoreoy.com/past-experience/artificial-intelligence/verification-and-supervision-in-scientific-reasoning-tasks/",
+        "twitterTitle": "Verification and supervision in scientific reasoning tasks",
+        "twitterDescription": "Verification and supervision in scientific reasoning tasks"
+      }
+    },
+    "/past-experience/artificial-intelligence/evidence-uncertainty-and-decision-guarantees-in-investment-research/": {
+      "textSha256": "5535f06f0fabe819bd78726728a9f981c50132a63f5ddb8a72e097f894eaf42f",
+      "characterCount": 14510,
+      "wordCount": 2672,
+      "preview": "Skip to main content Theodore Ouyang Home Education Past Experience Current Chapter AI Research and Engineering Evidence uncertainty and decision guarantees in ",
+      "altTexts": [],
+      "ariaLabels": [
+        "Theodore Ouyang home",
+        "Primary navigation",
+        "Mathematical equation",
+        "Mathematical equation",
+        "Mathematical equation",
+        "Mathematical equation",
+        "Mathematical equation",
+        "Mathematical equation",
+        "Mathematical equation",
+        "Mathematical equation",
+        "Mathematical equation",
+        "Mathematical equation",
+        "Research data table"
+      ],
+      "metadata": {
+        "title": "Evidence uncertainty and decision guarantees in investment research | Theodore Ouyang",
+        "description": "Evidence uncertainty and decision guarantees in investment research",
+        "canonical": "https://www.theodoreoy.com/past-experience/artificial-intelligence/evidence-uncertainty-and-decision-guarantees-in-investment-research/",
+        "openGraphTitle": "Evidence uncertainty and decision guarantees in investment research",
+        "openGraphDescription": "Evidence uncertainty and decision guarantees in investment research",
+        "openGraphUrl": "https://www.theodoreoy.com/past-experience/artificial-intelligence/evidence-uncertainty-and-decision-guarantees-in-investment-research/",
+        "twitterTitle": "Evidence uncertainty and decision guarantees in investment research",
+        "twitterDescription": "Evidence uncertainty and decision guarantees in investment research"
       }
     }
   }

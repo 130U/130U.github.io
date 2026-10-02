@@ -19,6 +19,14 @@ const PROTECTED_PATHS = [
   "content/legal-papers/small-states-and-strategic-space-dependence.json",
   "content/legal-papers/solar-geoengineering-comparison-and-continuity.json",
   "content/legal-papers/mangrove-restoration-and-compensatory-mitigation.json",
+  "app/lib/content/ai-projects.ts",
+  "app/lib/content/routes.ts",
+  "app/past-experience/components/AiResearchProjectPage.tsx",
+  "app/past-experience/components/AiResearchMath.tsx",
+  "content/artificial-intelligence/statistical-inference-and-resource-allocation-in-expert-data-production.json",
+  "content/artificial-intelligence/task-validity-in-financial-synthetic-data.json",
+  "content/artificial-intelligence/verification-and-supervision-in-scientific-reasoning-tasks.json",
+  "content/artificial-intelligence/evidence-uncertainty-and-decision-guarantees-in-investment-research.json",
 ];
 
 export function verifyProtectedSources(root = ROOT) {
@@ -31,7 +39,7 @@ export function verifyProtectedSources(root = ROOT) {
     manifest.normalization !== "LF" ||
     JSON.stringify(paths) !== JSON.stringify([...PROTECTED_PATHS].sort())
   ) {
-    throw new Error("The protected-source manifest must cover all fourteen protected sources with LF normalization.");
+    throw new Error("The protected-source manifest must cover every required source with LF normalization.");
   }
 
   const failures = [];
@@ -57,5 +65,5 @@ export function verifyProtectedSources(root = ROOT) {
 
 if (process.argv[1] && path.resolve(process.argv[1]) === fileURLToPath(import.meta.url)) {
   verifyProtectedSources();
-  console.log("All fourteen protected sources match their content hashes.");
+  console.log(`All ${PROTECTED_PATHS.length} protected sources match their content hashes.`);
 }

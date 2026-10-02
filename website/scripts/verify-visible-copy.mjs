@@ -12,6 +12,10 @@ const ROUTES = [
   "/education/",
   "/past-experience/",
   "/past-experience/artificial-intelligence/",
+  "/past-experience/artificial-intelligence/statistical-inference-and-resource-allocation-in-expert-data-production/",
+  "/past-experience/artificial-intelligence/task-validity-in-financial-synthetic-data/",
+  "/past-experience/artificial-intelligence/verification-and-supervision-in-scientific-reasoning-tasks/",
+  "/past-experience/artificial-intelligence/evidence-uncertainty-and-decision-guarantees-in-investment-research/",
   "/past-experience/data-science/",
   "/past-experience/legal-research-and-policy-analysis/",
   "/past-experience/finance/",
@@ -102,6 +106,7 @@ function visibleText(html) {
     .replace(/<script\b[^>]*>[\s\S]*?<\/script>/giu, " ")
     .replace(/<style\b[^>]*>[\s\S]*?<\/style>/giu, " ")
     .replace(/<template\b[^>]*>[\s\S]*?<\/template>/giu, " ")
+    .replace(/<annotation\b[^>]*>[\s\S]*?<\/annotation>/giu, " ")
     .replace(/<([a-z][\w:-]*)\b[^>]*data-visible-copy-role=["']visual-identity["'][^>]*>[\s\S]*?<\/\1>/giu, " ")
     .replace(/<([a-z][\w:-]*)\b[^>]*aria-hidden=["']true["'][^>]*>[\s\S]*?<\/\1>/giu, " ")
     .replace(/<!--([\s\S]*?)-->/gu, " ");
@@ -152,6 +157,12 @@ function stableJson(value) {
 
 async function verify() {
   const manifest = JSON.parse(await readFile(MANIFEST_PATH, "utf8"));
+  if (
+    manifest.version !== 1 ||
+    stableJson(Object.keys(manifest.routes ?? {}).sort()) !== stableJson([...ROUTES].sort())
+  ) {
+    throw new Error("The visible-copy manifest must cover exactly the registered website routes.");
+  }
   if (stableJson(manifest.ignoredInterfaceStrings) !== stableJson(IGNORED_INTERFACE_STRINGS)) {
     throw new Error("The ignored interface strings must be Menu and Close.");
   }

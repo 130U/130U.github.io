@@ -25,6 +25,7 @@ Paths in this table are relative to `website/`.
 | Education | `/education/` | `app/education/page.tsx` |
 | Past Experience | `/past-experience/` | `app/past-experience/page.tsx` |
 | Experience details | `/past-experience/[slug]/` | `app/lib/content/experience.ts`, `content/past-experience/` |
+| AI research projects | `/past-experience/artificial-intelligence/[paper]/` | `app/lib/content/ai-projects.ts`, `content/artificial-intelligence/` |
 | Legal articles | `/past-experience/legal-research-and-policy-analysis/[paper]/` | `app/past-experience/[slug]/[paper]/page.tsx`, `app/lib/content/legal-papers.ts`, `content/legal-papers/` |
 | Current Chapter | `/now/` | `app/now/page.tsx` |
 | Architecture | `/architecture/` | `../architecture/index.html` |
@@ -42,9 +43,9 @@ The experience registry validates five domains and their Markdown entries during
 build. `app/lib/content/routes.ts` supplies the website sitemap. The architecture
 viewer is a separate repository reference, linked from the GitHub introduction.
 
-Biographical and legal source files are checked against `content/protected-sources.json`.
+Biographical, AI research, and legal source files are checked against `content/protected-sources.json`.
 `content/visible-copy-manifest.json` independently records text, metadata, alt text,
-and ARIA labels for all thirteen website pages. Copy changes require the owner's explicit
+and ARIA labels for all seventeen website pages. Copy changes require the owner's explicit
 request and an intentional update to these contracts. Presentation-only changes to
 a protected component update its source hash while preserving the visible-copy
 manifest. Tests also verify page counts and navigation independently of the registry.
@@ -81,6 +82,34 @@ screenshots, and source-comparison evidence outside the repository.
 | Finance and Consulting | [Source](https://app.notion.com/p/d62ffb825a8d469c9759b5c76f5eb87f?pvs=204) |
 | STEM Academic Competitions and Training | [Source](https://app.notion.com/p/246e29cd61d6410381ecb068bbd1eaea?pvs=204) |
 
+### AI research projects
+
+Domain `01`, AI Research and Engineering, links four project reading pages through
+Read More. Each JSON source stores its original Notion title, URL, edit timestamp,
+and complete Markdown body. Preserve the opening Project and Author paragraph,
+section headings, prose, emphasis, citations, table headers and cells, and formulas.
+Use the source structure without adding an abstract, references section, publication
+details, or a download. Each reading page returns to its project anchor in the overview.
+
+| Project page | Notion source |
+| --- | --- |
+| Statistical inference and resource allocation in expert data production | [Source](https://app.notion.com/p/3ed867f96db58171ad07d36248e8d05c?pvs=204) |
+| Task validity in financial synthetic data | [Source](https://app.notion.com/p/3ed867f96db5810798b2f3668e2dd0a5?pvs=204) |
+| Verification and supervision in scientific reasoning tasks | [Source](https://app.notion.com/p/3ed867f96db5814c91c0fd96d9348c2f?pvs=204) |
+| Evidence uncertainty and decision guarantees in investment research | [Source](https://app.notion.com/p/3ed867f96db581cfaae7d40b93aaa080?pvs=204) |
+
+`AiResearchProjectPage` uses the existing article reading styles. `AiResearchMath`
+renders TeX to MathML on the server with the pinned Temml dependency, strict parsing,
+and untrusted commands disabled. Every formula retains its original TeX annotation.
+Math inherits the shared text font and size; no equation fonts or browser runtime
+are added. Tables and display equations expose focusable scrolling regions.
+
+Tests compare every rendered source block, all 277 original formula annotations,
+five tables, 27 citation links, and 26 second-level headings with the approved
+documents. Update the project registry, independent route expectations, protected
+source hashes, and visible-copy contracts together when synchronizing approved text.
+For a change limited to AI, preserve the other twelve route snapshots in every field.
+
 ### Legal papers
 
 Domain `03`, Legal Research and Policy Analysis, links four selected papers:
@@ -114,7 +143,7 @@ To add an approved paper, update its structured source, the legal-paper slug reg
 the matching project route in `experience.ts`, and the independent content/output
 contracts together. Use the supplied manuscript as the wording and citation authority.
 
-Article validation checks all thirteen website routes, four reading links, chapter
+Article validation checks all seventeen website routes, four legal reading links, chapter
 anchors, complete numbered references, bidirectional footnote links, and the absence
 of public PDF files. Validate the published text against the approved source before
 refreshing visible-copy hashes. Read back the four live article pages after publishing.

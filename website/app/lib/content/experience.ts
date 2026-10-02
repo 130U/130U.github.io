@@ -32,6 +32,7 @@ export type ExperienceSection = {
 export type ExperienceProject = {
   title: string;
   paperSlug?: string;
+  readMoreSlug?: string;
   introduction: string[];
   sections: ExperienceSection[];
 };
@@ -106,6 +107,9 @@ export function parsePastExperience(markdown: string): ParsedDomain[] {
       if (project.sections.length === 0 || project.sections.some(({ bullets }) => bullets.length === 0)) {
         throw new Error(`${entry.organization}: every section of ${project.title} must include experience bullets.`);
       }
+      if (domain.name === "AI Research and Engineering" && !project.readMoreSlug) {
+        throw new Error(`${entry.organization}: ${project.title} must link to its research detail page.`);
+      }
     }
 
     domain.entries.push({
@@ -179,6 +183,15 @@ export function parsePastExperience(markdown: string): ParsedDomain[] {
       if (!heading) throw new Error("Experience section heading cannot be empty.");
       section = { heading, bullets: [] };
       project.sections.push(section);
+      continue;
+    }
+
+    const readMore = line.match(/^Read more: ([a-z0-9]+(?:-[a-z0-9]+)*)$/u);
+    if (readMore) {
+      if (domain?.name !== "AI Research and Engineering" || !project || project.readMoreSlug) {
+        throw new Error(`Unexpected research detail link: ${line}`);
+      }
+      project.readMoreSlug = readMore[1];
       continue;
     }
 
