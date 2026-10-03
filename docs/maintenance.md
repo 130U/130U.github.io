@@ -66,6 +66,12 @@ Add a website page by updating its source, the route registry, sitemap expectati
 and output tests together. Keep browser interaction in focused client components.
 Add a server only when a defined product requirement needs one.
 
+`tooling/directory-glob/` supplies Next.js lint root-directory discovery through
+the pinned Tinyglobby implementation. Its adapter preserves literal, wildcard,
+recursive, and platform-specific directory paths. Integration tests exercise the
+Next.js consumer directly. The dependency override is scoped to the Next.js lint
+plugin; application dependencies and lint rules retain their normal configuration.
+
 ### Resume sources
 
 The five sections are maintained in the owner's Notion Master Resume. Synchronize

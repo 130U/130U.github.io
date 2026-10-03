@@ -1,0 +1,19 @@
+{
+  "name": "@theodoreoy/directory-glob",
+  "version": "1.0.0",
+  "description": "Directory pattern discovery for Next.js lint rules.",
+  "private": true,
+  "license": "MIT",
+  "type": "module",
+  "main": "index.mjs",
+  "exports": {
+    ".": "./index.mjs",
+    "./package.json": "./package.json"
+  },
+  "files": [
+    "index.mjs"
+  ],
+  "dependencies": {
+    "tinyglobby": "0.2.17"
+  }
+}

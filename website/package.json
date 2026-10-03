@@ -32,10 +32,14 @@
     "@types/react-dom": "19.2.3",
     "eslint": "9.39.4",
     "eslint-config-next": "16.3.6",
+    "fast-glob": "file:./tooling/directory-glob",
     "sharp": "0.35.4",
     "typescript": "5.9.3"
   },
   "overrides": {
+    "@next/eslint-plugin-next": {
+      "fast-glob": "$fast-glob"
+    },
     "brace-expansion@^1.0.0": "1.1.21",
     "brace-expansion@^5.0.0": "5.0.12",
     "js-yaml": "4.3.2",
