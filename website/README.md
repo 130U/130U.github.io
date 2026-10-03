@@ -18,6 +18,7 @@ npm run dev
 | `source-assets/` | Editable brand masters |
 | `scripts/` | Content checks, asset generation, build assembly, and local preview |
 | `tests/` | Static output, interaction, and repository policy checks |
+| `tooling/` | Private build and lint utilities |
 
 `npm run check` verifies protected sources, lints, builds, tests the export, and
 checks visible text and metadata. `npm run preview:static` serves `out/` on
