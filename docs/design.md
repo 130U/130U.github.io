@@ -42,9 +42,11 @@ provide emphasis within a role. Page-specific font-size overrides are not used.
 | Project, degree, course-category heading | `--type-subheading` | 18px, weight 600 | 1.45 |
 | Body, records, introductions, course names | `--type-reading` | 17px | 1.6 |
 | Navigation, menu, wordmark name, return link | `--type-interface` | 14px | 1.4 |
+| Project reading action | `--type-action` | 16px, weight 500 | 1.4 |
+| Mathematical expression | `--type-math` | 20px | Intrinsic mathematical geometry |
 | Field label, index, footer, scroll cue | `--type-label` | 12px | 1.4 |
 
-All six roles use rem units and scale with the user's text setting. Only the title
+All roles use rem units and scale with the user's text setting. Only the title
 and section roles become smaller below 768px, consistently across the site and
 architecture viewer. Headings have -0.02em tracking; reading text stays near zero.
 The optical font sizing and the shared `--reading-leading` support sustained reading.
@@ -75,6 +77,21 @@ Metadata values stay upright and regular; labels use the shared muted color.
 Bold identifies a project and italic introduces a theme within it. Dates, roles,
 and bullets stay upright. Preserve the approved resume prose and its emphasis
 through this structural hierarchy.
+
+Project reading actions follow the title and complete introduction, before the
+contribution list. AI analyses and legal papers share a blue control, 16px Inter at
+weight 500, a 10rem width, and a minimum 2.75rem height. Width stays within the reading
+column when text is enlarged. The right chevron indicates an internal reading page;
+the existing labels and descriptive accessible names identify its destination.
+Hover changes the blue surface; press feedback is immediate and focus uses the
+shared outline. Reduced motion removes the color transition.
+
+AI articles use the same 20px math base in prose and standalone equations. Subscripts,
+superscripts, fractions, accents, and equation labels retain their mathematical
+hierarchy. Multiline equations have explicit row spacing and generous surrounding
+space. Wide equations scroll locally at their natural size. Displayed equations omit
+sentence-ending punctuation while original TeX annotations preserve the authored
+source. Mathematical SVG glyphs are artwork rather than an additional prose font.
 
 Small indices and metadata labels use `--type-label`. Navigation, the wordmark name,
 the mobile menu, and return links share `--type-interface` at every breakpoint.

@@ -86,7 +86,8 @@ screenshots, and source-comparison evidence outside the repository.
 ### AI research projects
 
 Domain `01`, AI Research and Engineering, links four project reading pages through
-Read more. Each JSON source stores its original Notion title, URL, edit timestamp,
+Read more actions placed between the project introduction and its contributions.
+Each JSON source stores its original Notion title, URL, edit timestamp,
 and complete Markdown body. Preserve the opening Project and Author paragraph,
 section headings, prose, emphasis, citations, table headers and cells, and formulas.
 Use the source structure without adding an abstract, references section, publication
@@ -102,10 +103,12 @@ details, or a download. Each reading page returns to its project anchor in the o
 `AiResearchProjectPage` uses the existing article reading styles. `AiResearchMath`
 uses `app/lib/content/ai-math.ts` to render TeX on the server with the pinned MathJax
 4.1.3 engine and its TeX font package. Visible equations contain complete SVG glyph
-paths, inherit the reading size and ink color, and load no browser math engine or
-font resources. Assistive MathML preserves semantic formulas and the exact original
-TeX annotation. Invalid formulas fail the build. Tables and wide equations expose
-focusable scrolling regions.
+paths, use the shared `--type-math` size and ink color, and load no browser math
+engine or font resources. `AiResearchMath.module.css` owns formula spacing and
+scrolling. Display rows omit sentence punctuation and use explicit multiline spacing;
+mathematical terms and equation labels remain intact. Assistive MathML preserves
+semantic formulas and the exact original TeX annotation. Invalid formulas fail the
+build. Tables and wide equations expose focusable scrolling regions.
 
 Tests compare every rendered source block, all 277 original formula annotations,
 five tables, 27 citation links, and 26 second-level headings with the approved
@@ -115,7 +118,8 @@ The four project snapshots protect prose and formula positions independently fro
 the ordered TeX-and-display-mode hash and formula count. SVG geometry and assistive
 MathML have independent regression checks for accents, fractions, aligned equations,
 Greek glyphs, superscripts, and equation numbers. Formula presentation changes preserve
-the other thirteen route snapshots in every field, including the AI overview.
+narrative text and source annotations. Approved navigation order or scrolling changes
+update only the corresponding contract fields after independent verification.
 
 ### Legal papers
 

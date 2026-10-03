@@ -10,6 +10,8 @@ import type { LiteElement } from "@mathjax/src/js/adaptors/lite/Element.js";
 import type { LiteText } from "@mathjax/src/js/adaptors/lite/Text.js";
 import type { LiteDocument } from "@mathjax/src/js/adaptors/lite/Document.js";
 import type { TextNode } from "@mathjax/src/js/core/MmlTree/MmlNode.js";
+import type ParseOptions from "@mathjax/src/js/input/tex/ParseOptions.js";
+import type { MathItem } from "@mathjax/src/js/core/MathItem.js";
 import "@mathjax/src/js/input/tex/base/BaseConfiguration.js";
 import "@mathjax/src/js/input/tex/ams/AmsConfiguration.js";
 import "@mathjax/src/js/input/tex/newcommand/NewcommandConfiguration.js";
@@ -25,6 +27,76 @@ export type AiResearchMathMarkup = Readonly<{
 }>;
 
 export const AI_MATH_GUTTER_EM = 0.375;
+export const AI_MATH_ROW_SPACING_EM = 0.6;
+
+const equationEnvironments = new Set(["aligned", "gathered"]);
+
+function isDisplayRowEnd(suffix: string, environments: readonly string[]) {
+  let remaining = suffix.trimStart();
+  const open = [...environments];
+  while (remaining.startsWith("\\end")) {
+    const end = /^\\end\s*\{(aligned|gathered)\}/u.exec(remaining);
+    if (!end || open.pop() !== end[1]) return false;
+    remaining = remaining.slice(end[0].length).trimStart();
+  }
+  if (remaining.startsWith("\\\\")) return open.length > 0 && equationEnvironments.has(open.at(-1)!);
+  if (open.length) return false;
+  const tag = /^\\tag\*?\s*\{[^{}]*\}/u.exec(remaining);
+  if (tag) remaining = remaining.slice(tag[0].length).trimStart();
+  return remaining.length === 0;
+}
+
+/** Suppress sentence punctuation at display row termini while preserving mathematical tokens. */
+export function normalizeAiResearchDisplayTex(tex: string) {
+  const environments: string[] = [];
+  const delimiters: string[] = [];
+  let groupDepth = 0;
+  let offset = 0;
+  let normalized = "";
+  const closeDelimiter = (opening: string) => {
+    if (delimiters.at(-1) === opening) delimiters.pop();
+  };
+  for (let index = 0; index < tex.length; index += 1) {
+    const character = tex[index];
+    if (character === "\\") {
+      const environment = /^\\(begin|end)\s*\{([A-Za-z*]+)\}/u.exec(tex.slice(index));
+      if (environment) {
+        if (environment[1] === "begin") environments.push(environment[2]);
+        else if (environments.at(-1) === environment[2]) environments.pop();
+        index += environment[0].length - 1;
+        continue;
+      }
+      const command = /^\\(?:[A-Za-z]+|[\s\S])/u.exec(tex.slice(index));
+      if (groupDepth === 0 && command) {
+        if (["\\{", "\\lbrace"].includes(command[0])) delimiters.push("{");
+        if (["\\}", "\\rbrace"].includes(command[0])) closeDelimiter("{");
+        if (command[0] === "\\langle") delimiters.push("<");
+        if (command[0] === "\\rangle") closeDelimiter("<");
+        if (command[0] === "\\lparen") delimiters.push("(");
+        if (command[0] === "\\rparen") closeDelimiter("(");
+        if (command[0] === "\\lbrack") delimiters.push("[");
+        if (command[0] === "\\rbrack") closeDelimiter("[");
+      }
+      if (command) index += command[0].length - 1;
+      continue;
+    }
+    if (character === "{") groupDepth += 1;
+    else if (character === "}") groupDepth = Math.max(0, groupDepth - 1);
+    if (groupDepth > 0) continue;
+    if (character === "(" || character === "[") delimiters.push(character);
+    else if (character === ")") closeDelimiter("(");
+    else if (character === "]") closeDelimiter("[");
+    if (!/[,.]/u.test(character) || delimiters.length || environments.some((name) => !equationEnvironments.has(name))) continue;
+    if (character === "." && (
+      tex[index - 1] === "." || tex[index + 1] === "." ||
+      /\\(?:left|right|middle|[bB]ig(?:g)?[lr]?)\s*$/u.test(tex.slice(0, index))
+    )) continue;
+    if (!isDisplayRowEnd(tex.slice(index + 1), environments)) continue;
+    normalized += tex.slice(offset, index);
+    offset = index + 1;
+  }
+  return normalized + tex.slice(offset);
+}
 
 const EM = 16;
 const adaptor = liteAdaptor({ fontSize: EM });
@@ -35,6 +107,16 @@ const input = new TeX<LiteElement, LiteText, LiteDocument>({
   formatError(_jax: TeX<LiteElement, LiteText, LiteDocument>, error: TexError) {
     throw new Error(`AI research equation could not be rendered: ${error.message}`);
   },
+});
+input.postFilters.add((value: unknown) => {
+  const { math, data } = value as { math: MathItem<LiteElement, LiteText, LiteDocument>; data: ParseOptions };
+  if (!math.display) return;
+  for (const table of data.getList("mtable")) {
+    const source = String(table.attributes.get("data-latex") ?? "");
+    if (table.childNodes.length > 1 && /^(?:\{(?:aligned|gathered)\}|\\begin\{(?:aligned|gathered)\})/u.test(source)) {
+      table.attributes.set("rowspacing", `${AI_MATH_ROW_SPACING_EM}em`);
+    }
+  }
 });
 const output = new SVG<LiteElement, LiteText, LiteDocument>({
   fontData: MathJaxTexFont,
@@ -108,7 +190,7 @@ function intrinsicSvg(container: LiteElement, display: boolean) {
   let svgRoot = root;
   if (numbered) {
     // A native SVG frame sets the numbered equation's responsive geometry at
-    // its intrinsic width, then scales the entire layout with the body text.
+    // its intrinsic width, then scales the entire layout with the math size.
     const widthPx = widthEx * EX;
     const heightPx = heightEx * EX;
     adaptor.setAttribute(root, "width", decimal(widthPx));
@@ -167,7 +249,8 @@ export function renderAiResearchMath(tex: string, display = false): AiResearchMa
   const cached = cache.get(key);
   if (cached) return cached;
   input.reset();
-  const node = document.convert(tex, { display, em: EM, ex: EX, containerWidth: 80 * EM }) as LiteElement;
+  const visibleTex = display ? normalizeAiResearchDisplayTex(tex) : tex;
+  const node = document.convert(visibleTex, { display, em: EM, ex: EX, containerWidth: 80 * EM }) as LiteElement;
   const geometry = intrinsicSvg(node, display);
   const mathml = assistiveMathml(tex, display);
   const result = Object.freeze({ ...geometry, mathml });

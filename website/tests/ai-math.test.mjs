@@ -4,7 +4,7 @@ import { readFile } from "node:fs/promises";
 import path from "node:path";
 import test from "node:test";
 import { fileURLToPath } from "node:url";
-import { AI_MATH_GUTTER_EM, renderAiResearchMath } from "../app/lib/content/ai-math.ts";
+import { AI_MATH_GUTTER_EM, AI_MATH_ROW_SPACING_EM, normalizeAiResearchDisplayTex, renderAiResearchMath } from "../app/lib/content/ai-math.ts";
 
 const ROOT = fileURLToPath(new URL("../", import.meta.url));
 const PROJECTS = [
@@ -38,6 +38,13 @@ function visualText(svg) {
     .filter(Boolean);
 }
 
+function glyphPaths(svg) {
+  return [...svg.matchAll(/<path\b[^>]*>/gu)].map(([tag]) => ({
+    code: tag.match(/data-c="([^"]+)"/u)?.[1],
+    d: tag.match(/\bd="([^"]+)"/u)?.[1],
+  }));
+}
+
 function assertCompleteFormula(rendered, tex) {
   assert.match(rendered.svg, /^<svg\b/iu);
   assert.match(rendered.mathml, /^<math\b/iu);
@@ -60,6 +67,7 @@ function assertCompleteFormula(rendered, tex) {
 
 test("all 277 approved formulas have complete vector glyphs and exact accessible TeX", async () => {
   let total = 0;
+  const mathematicalPaths = [];
   for (const [slug, expected] of PROJECTS) {
     const source = JSON.parse(await readFile(path.join(ROOT, "content", "artificial-intelligence", `${slug}.json`), "utf8"));
     const formulas = [...source.markdown.matchAll(/\$\$([\s\S]*?)\$\$|\$\x60([\s\S]*?)\x60\$/gu)];
@@ -68,6 +76,7 @@ test("all 277 approved formulas have complete vector glyphs and exact accessible
       const tex = formula[1] ?? formula[2];
       const rendered = await renderAiResearchMath(tex, formula[1] !== undefined);
       assertCompleteFormula(rendered, tex);
+      mathematicalPaths.push(glyphPaths(rendered.svg).filter(({ code }) => code !== "2C" && code !== "2E"));
       assert.equal(tagCount(rendered.mathml, "mfrac"), (tex.match(/\\(?:t|d)?frac(?![A-Za-z])/gu) ?? []).length, `${slug} must preserve each fraction`);
       assert.equal(tagCount(rendered.mathml, "msqrt"), (tex.match(/\\sqrt(?![A-Za-z])/gu) ?? []).length, `${slug} must preserve each square root`);
       assert.equal(tagCount(rendered.mathml, "mover"), (tex.match(/\\(?:bar|overline|widehat|widetilde)(?![A-Za-z])/gu) ?? []).length, `${slug} must preserve each source accent`);
@@ -76,6 +85,54 @@ test("all 277 approved formulas have complete vector glyphs and exact accessible
     total += formulas.length;
   }
   assert.equal(total, 277);
+  assert.equal(createHash("sha256").update(JSON.stringify(mathematicalPaths)).digest("hex"), "606c6b481d7db57321108982ef2d042eabd85dde46f2155be32dd3a0b5a3dda8", "All mathematical glyphs must retain the approved shapes and order");
+});
+
+test("display punctuation normalization changes only true sentence and equation-row termini", () => {
+  const fixtures = [
+    ["x=0.25.\n", "x=0.25\n"],
+    ["x=.5,", "x=.5"],
+    ["x=1...", "x=1..."],
+    [String.raw`x=\ldots.`, String.raw`x=\ldots`],
+    [String.raw`x=f(a,b),\qquad y=\{0,1\}.`, String.raw`x=f(a,b),\qquad y=\{0,1\}`],
+    [String.raw`x=\text{a,b.}.`, String.raw`x=\text{a,b.}`],
+    [String.raw`x=\operatorname{f,g}(a,b).`, String.raw`x=\operatorname{f,g}(a,b)`],
+    [String.raw`x=\left.a\right.`, String.raw`x=\left.a\right.`],
+    [String.raw`x=\frac{1}{2.}.`, String.raw`x=\frac{1}{2.}`],
+    [String.raw`\begin{aligned}x&=f(a,b),\\y&=0.25.\end{aligned}\tag{4}`, String.raw`\begin{aligned}x&=f(a,b)\\y&=0.25\end{aligned}\tag{4}`],
+    [String.raw`\begin{gathered}a,b\\c,d,\end{gathered}\tag{5}`, String.raw`\begin{gathered}a,b\\c,d\end{gathered}\tag{5}`],
+    [String.raw`\begin{aligned}x&=f(a,\\b).\end{aligned}`, String.raw`\begin{aligned}x&=f(a,\\b)\end{aligned}`],
+    [String.raw`\begin{aligned}x&=\lparen a,\\b\rparen.\end{aligned}`, String.raw`\begin{aligned}x&=\lparen a,\\b\rparen\end{aligned}`],
+    [String.raw`\begin{aligned}x&=\lbrack a,\\b\rbrack.\end{aligned}`, String.raw`\begin{aligned}x&=\lbrack a,\\b\rbrack\end{aligned}`],
+    [String.raw`\begin{cases}a,&x=0\\b,&x=1\end{cases}.`, String.raw`\begin{cases}a,&x=0\\b,&x=1\end{cases}`],
+    [String.raw`\begin{matrix}a,&b\\c,&d\end{matrix}.`, String.raw`\begin{matrix}a,&b\\c,&d\end{matrix}`],
+  ];
+  for (const [source, expected] of fixtures) assert.equal(normalizeAiResearchDisplayTex(source), expected, source);
+});
+
+test("visible display math preserves internal punctuation, original annotations, and inline glyphs", () => {
+  const tex = String.raw`x=f(a,b)+0.25.`;
+  const display = renderAiResearchMath(tex, true);
+  const inline = renderAiResearchMath(tex, false);
+  assertCompleteFormula(display, tex);
+  assertCompleteFormula(inline, tex);
+  assert.equal(glyphPaths(display.svg).filter(({ code }) => code === "2C").length, 1);
+  assert.equal(glyphPaths(display.svg).filter(({ code }) => code === "2E").length, 1);
+  assert.equal(glyphPaths(inline.svg).filter(({ code }) => code === "2C").length, 1);
+  assert.equal(glyphPaths(inline.svg).filter(({ code }) => code === "2E").length, 2);
+  assert.match(display.mathml, /<mn>0\.25<\/mn>/u);
+  assert.match(display.mathml, /<mo>,<\/mo>/u);
+});
+
+test("display aligned and gathered rows get reading space while cases and matrices retain their spacing", () => {
+  assert.equal(AI_MATH_ROW_SPACING_EM, 0.6);
+  for (const environment of ["aligned", "gathered"]) {
+    const tex = `\\begin{${environment}}x=1\\\\y=2\\end{${environment}}`;
+    assert.match(renderAiResearchMath(tex, true).mathml, /<mtable\b[^>]*rowspacing="0\.6em"/u);
+    assert.match(renderAiResearchMath(tex, false).mathml, /<mtable\b[^>]*rowspacing="3pt"/u);
+  }
+  assert.match(renderAiResearchMath(String.raw`\begin{cases}x,&y=1\\z,&y=2\end{cases}`, true).mathml, /<mtable\b[^>]*rowspacing="\.2em"/u);
+  assert.match(renderAiResearchMath(String.raw`\begin{matrix}a&b\\c&d\end{matrix}`, true).mathml, /<mtable\b[^>]*rowspacing="4pt"/u);
 });
 
 test("Greek symbols, accents, primes, and fractions retain distinct mathematical geometry", async () => {
@@ -134,15 +191,15 @@ test("SVG canvases preserve natural glyph scale and baselines with room for acce
   const fixtures = [
     {
       slug: "verification-and-supervision-in-scientific-reasoning-tasks", index: 32,
-      widthEm: 24.403704, heightEm: 3.836118, depthEm: 1.668108,
-      viewBox: [0, 0, 390.459264, 61.377888], numbered: true,
-      pathCount: 72, pathGeometrySha256: "26d2a2dfff25e04a590fa0c1ca99b039fd46bb01e50725100a5515dfabd38cb5",
+      widthEm: 24.125686, heightEm: 4.435912, depthEm: 1.967784,
+      viewBox: [0, 0, 386.010976, 70.974592], numbered: true,
+      pathCount: 69, pathGeometrySha256: "5f03e5829453d96262499c5dba0a2eebcd689eb68950d66340fbcef08ef612e8",
     },
     {
       slug: "evidence-uncertainty-and-decision-guarantees-in-investment-research", index: 26,
-      widthEm: 28.781272, heightEm: 2.20116, depthEm: 1.168206,
-      viewBox: [0, -1033, 28781.3, 2201.1], numbered: false,
-      pathCount: 64, pathGeometrySha256: "68380a661369ea18ab602a99dd8eda98e4f090ae2fd014fd58030ec65c7c9f57",
+      widthEm: 28.503254, heightEm: 2.20116, depthEm: 1.168206,
+      viewBox: [0, -1033, 28503.3, 2201.1], numbered: false,
+      pathCount: 63, pathGeometrySha256: "4ba2daeeea8ad99a6d08749790eb5efd2cab9526b8fa0ad42c8a66d6bde95dcd",
     },
     {
       slug: "evidence-uncertainty-and-decision-guarantees-in-investment-research", index: 27,
@@ -176,7 +233,7 @@ test("SVG canvases preserve natural glyph scale and baselines with room for acce
       const inner = rendered.svg.slice(root.length).match(/^<svg\b[^>]*>/iu)?.[0] ?? "";
       close(Number(inner.match(/\bwidth="([^"]+)"/u)?.[1]), fixture.viewBox[2], "Numbered equation width must retain its original native pixel coordinates");
       close(Number(inner.match(/\bheight="([^"]+)"/u)?.[1]), fixture.viewBox[3], "Numbered equation height must retain its original native pixel coordinates");
-      assert.match(rendered.svg, /transform="scale\(0\.016,-0\.016\) translate\(0, -2168\)"/u);
+      assert.match(rendered.svg, /transform="scale\(0\.016,-0\.016\)/u);
     }
   }
 });

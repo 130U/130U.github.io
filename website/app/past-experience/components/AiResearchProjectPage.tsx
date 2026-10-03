@@ -5,6 +5,7 @@ import { AI_DOMAIN_PATH, type AiResearchInline, type AiResearchProject } from ".
 import { renderExperienceText } from "./ExperienceDomainPage";
 import { AiResearchMath } from "./AiResearchMath";
 import readingStyles from "./LegalPaperPage.module.css";
+import mathStyles from "./AiResearchMath.module.css";
 
 function InlineContent({ inlines }: { inlines: AiResearchInline[] }) {
   return inlines.map((inline, index) => {
@@ -34,7 +35,7 @@ export function AiResearchProjectPage({ project }: { project: AiResearchProject 
             }
             if (block.type === "equation") {
               return (
-                <div {...marker} key={index} tabIndex={0} role="region" aria-label="Mathematical equation" style={{ overflowX: "auto", overflowY: "hidden", maxWidth: "100%", paddingBlock: "0.125em", margin: "1.25rem 0" }}>
+                <div {...marker} className={mathStyles.equation} key={index} tabIndex={0} role="region" aria-label="Mathematical equation">
                   <AiResearchMath tex={block.tex} display />
                 </div>
               );

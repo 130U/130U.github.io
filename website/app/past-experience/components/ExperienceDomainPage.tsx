@@ -13,6 +13,27 @@ function formatWebsiteLabel(website: string) {
   return website.replace(/^https?:\/\/(?:www\.)?/u, "").replace(/\/$/u, "");
 }
 
+function ProjectReadingLink({ path, slug, title, kind }: {
+  path: string;
+  slug: string;
+  title: string;
+  kind: "paper" | "analysis";
+}) {
+  const projectName = title.replace(/^Project(?: \d+)?:\s*/u, "");
+  return (
+    <Link
+      className="entry-paper-link"
+      href={`${path}${slug}/`}
+      aria-label={kind === "paper" ? `Read ${projectName}` : `Read more about ${projectName}`}
+    >
+      {kind === "paper" ? "Read paper" : "Read more"}
+      <svg className="entry-paper-arrow" viewBox="0 0 24 24" fill="none" aria-hidden="true" focusable="false">
+        <path d="m9 5 7 7-7 7" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round" />
+      </svg>
+    </Link>
+  );
+}
+
 export function renderExperienceText(text: string): ReactNode[] {
   const parts: ReactNode[] = [];
   const inlineMarkup = /\*\*([^*]+)\*\*|\*([^*]+)\*|\[([^\]]+)\]\((https?:\/\/[^\s)]+)\)/gu;
@@ -104,6 +125,12 @@ export function ExperienceDomainPage({
                   {project.introduction.map((paragraph, index) => (
                     <p className="entry-project-context" key={index}>{renderExperienceText(paragraph)}</p>
                   ))}
+                  {project.paperSlug && (
+                    <ProjectReadingLink path={domain.path} slug={project.paperSlug} title={project.title} kind="paper" />
+                  )}
+                  {project.readMoreSlug && (
+                    <ProjectReadingLink path={domain.path} slug={project.readMoreSlug} title={project.title} kind="analysis" />
+                  )}
                   {project.sections.map((section, sectionIndex) => (
                     <div className="entry-project-section" key={sectionIndex}>
                       {section.heading && (
@@ -116,24 +143,6 @@ export function ExperienceDomainPage({
                       </ul>
                     </div>
                   ))}
-                  {project.paperSlug && (
-                    <Link
-                      className="entry-paper-link"
-                      href={`${domain.path}${project.paperSlug}/`}
-                      aria-label={`Read ${project.title.replace(/^Project(?: \d+)?:\s*/u, "")}`}
-                    >
-                      Read paper <span aria-hidden="true">↗</span>
-                    </Link>
-                  )}
-                  {project.readMoreSlug && (
-                    <Link
-                      className="entry-paper-link"
-                      href={`${domain.path}${project.readMoreSlug}/`}
-                      aria-label={`Read more about ${project.title.replace(/^Project(?: \d+)?:\s*/u, "")}`}
-                    >
-                      Read more <span aria-hidden="true">↗</span>
-                    </Link>
-                  )}
                 </div>
               ))}
             </div>

@@ -274,7 +274,7 @@ test("experience pages retain the resume project hierarchy and consulting placem
     assert.ok(ai.includes(`id="${slug}"`), `Missing AI project return anchor #${slug}`);
   }
   assert.deepEqual(elementsWithClass(ai, "a", "entry-paper-link").map((match) => stripMarkup(match[2])), [
-    "Read more ↗", "Read more ↗", "Read more ↗", "Read more ↗",
+    "Read more", "Read more", "Read more", "Read more",
   ], "All four project reading actions must use consistent sentence case");
   const finance = await routeHtml("/past-experience/finance/");
   assert.deepEqual(elementsWithClass(finance, "article", "archive-entry").map((match) => stripMarkup(match[2].match(/<h2>(.*?)<\/h2>/u)[1])), [

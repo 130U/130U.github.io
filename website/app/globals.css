@@ -15,6 +15,8 @@
   --type-reading: 1.0625rem;
   --type-label: 0.75rem;
   --type-interface: 0.875rem;
+  --type-action: 1rem;
+  --type-math: 1.25rem;
   --reading-measure: 720px;
   --rail-min-width: calc(5 * var(--type-interface) + 13px + clamp(20px, 2vw, 24px) + 22px + 10px);
   --title-leading: 1.2;
@@ -763,11 +765,43 @@ button:focus-visible {
 .entry-paper-link {
   display: inline-flex;
   align-items: center;
-  min-height: 44px;
+  min-height: 2.75rem;
+  width: min(10rem, calc(100% - var(--entry-value-offset)));
+  justify-content: space-between;
   margin: 1.25rem 0 0 var(--entry-value-offset);
-  font-size: var(--type-interface);
+  padding: 0.625rem 1.125rem;
+  border-radius: 999px;
+  background: var(--accent);
+  color: #fff;
+  font-size: var(--type-action);
+  font-weight: 500;
   line-height: var(--interface-leading);
+  text-decoration: none;
   gap: 0.5rem;
+  transition: background-color 160ms var(--ease-out);
+}
+
+.entry-paper-arrow {
+  flex: 0 0 1em;
+  width: 1em;
+  height: 1em;
+}
+
+.entry-paper-link:active {
+  background: color-mix(in srgb, var(--accent) 78%, var(--ink));
+  transition: none;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .entry-paper-link:hover {
+    background: color-mix(in srgb, var(--accent) 88%, var(--ink));
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .entry-paper-link {
+    transition: none;
+  }
 }
 
 .education-note a:focus-visible,
