@@ -18,7 +18,7 @@
     "content/legal-papers/mangrove-restoration-and-compensatory-mitigation.json": "be8ad403b6504ad18cac1b6bdf55925214b389ea6f3c0f325f0fac1bea1e9cd9",
     "app/lib/content/ai-projects.ts": "5423c403cc64f9841d0ccb30f34d11890932f6495c3f7a9ca68af19723f88b0f",
     "app/lib/content/routes.ts": "5e9168ec1429cacb0c6b3deb024fc50024f2387b6e3833b420415274654abf24",
-    "app/past-experience/components/AiResearchProjectPage.tsx": "b9f29b027989eb104bbebfd22df881ad8fb30d8b2ef836ff854c560fa4945789",
+    "app/past-experience/components/AiResearchProjectPage.tsx": "0de3a385bebe9f3ac7a918d34dd9443ec9f2db23f04d3a2770aff66300b4bf02",
     "app/past-experience/components/AiResearchMath.tsx": "d89803a87bb66472a46c61c2e64b3fb09f82357b6f9efb5cba55ca23af8b8825",
     "content/artificial-intelligence/statistical-inference-and-resource-allocation-in-expert-data-production.json": "16061bba4e18d81cd738ed040d6d54ed309bceb38978633979d54b03fcfe5fd5",
     "content/artificial-intelligence/task-validity-in-financial-synthetic-data.json": "132044a28758f885411b78078600a3a50df5e288a9bbbb948b217ede1df4f4de",

@@ -6,6 +6,7 @@ import { renderExperienceText } from "./ExperienceDomainPage";
 import { AiResearchMath } from "./AiResearchMath";
 import readingStyles from "./LegalPaperPage.module.css";
 import mathStyles from "./AiResearchMath.module.css";
+import styles from "./AiResearchProjectPage.module.css";
 
 function InlineContent({ inlines }: { inlines: AiResearchInline[] }) {
   return inlines.map((inline, index) => {
@@ -25,7 +26,7 @@ export function AiResearchProjectPage({ project }: { project: AiResearchProject 
           <h1 id="ai-project-title" tabIndex={-1}>{project.title}</h1>
         </header>
 
-        <div className={`${readingStyles.body} ${readingStyles.readingColumn}`}>
+        <div className={`${readingStyles.body} ${readingStyles.readingColumn} ${styles.body}`}>
           {project.blocks.map((block, index) => {
             const marker = { "data-ai-block": index, "data-ai-block-type": block.type };
             if (block.type === "paragraph") return <p {...marker} key={index}><InlineContent inlines={block.inlines} /></p>;

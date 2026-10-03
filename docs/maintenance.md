@@ -106,7 +106,8 @@ details, or a download. Each reading page returns to its project anchor in the o
 | Verification and supervision in scientific reasoning tasks | [Source](https://app.notion.com/p/3ed867f96db5814c91c0fd96d9348c2f?pvs=204) |
 | Evidence uncertainty and decision guarantees in investment research | [Source](https://app.notion.com/p/3ed867f96db581cfaae7d40b93aaa080?pvs=204) |
 
-`AiResearchProjectPage` uses the existing article reading styles. `AiResearchMath`
+`AiResearchProjectPage` uses the shared article structure with a focused CSS Module
+that gives prose and table cells the same base size as formulas. `AiResearchMath`
 uses `app/lib/content/ai-math.ts` to render TeX on the server with the pinned MathJax
 4.1.3 engine and its TeX font package. Visible equations contain complete SVG glyph
 paths, use the shared `--type-math` size and ink color, and load no browser math

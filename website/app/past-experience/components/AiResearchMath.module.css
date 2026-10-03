@@ -38,8 +38,8 @@
 
 .equation {
   max-width: 100%;
-  padding-block: 0.375rem;
-  margin-block: 1.5rem;
+  padding-block: 0.5rem;
+  margin-block: 2rem;
   overflow-x: auto;
   overflow-y: hidden;
   scrollbar-width: thin;

@@ -1,0 +1,8 @@
+.body {
+  font-size: var(--type-math);
+  line-height: var(--reading-leading);
+}
+
+.body h3 {
+  font-size: var(--type-math);
+}

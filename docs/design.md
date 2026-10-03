@@ -33,7 +33,8 @@ The LO mark and dithered identity retain their independent artwork.
 
 Typography follows semantic roles. At any viewport, text with the same role uses
 the same size across every section and page. Weight, color, spacing, and italics
-provide emphasis within a role. Page-specific font-size overrides are not used.
+provide emphasis within a role. AI analysis prose shares the mathematical reading
+size, keeping sentences and embedded expressions at one base scale.
 
 | Role | Shared token | Size at the default text setting | Leading |
 | --- | --- | --- | --- |
@@ -43,6 +44,7 @@ provide emphasis within a role. Page-specific font-size overrides are not used.
 | Body, records, introductions, course names | `--type-reading` | 17px | 1.6 |
 | Navigation, menu, wordmark name, return link | `--type-interface` | 14px | 1.4 |
 | Project reading action | `--type-action` | 16px, weight 500 | 1.4 |
+| AI analysis prose and table cells | `--type-math` | 20px | 1.6 |
 | Mathematical expression | `--type-math` | 20px | Intrinsic mathematical geometry |
 | Field label, index, footer, scroll cue | `--type-label` | 12px | 1.4 |
 
@@ -79,17 +81,22 @@ and bullets stay upright. Preserve the approved resume prose and its emphasis
 through this structural hierarchy.
 
 Project reading actions follow the title and complete introduction, before the
-contribution list. AI analyses and legal papers share a blue control, 16px Inter at
+contribution list. AI analyses and legal papers share a neutral control, 16px Inter at
 weight 500, a 10rem width, and a minimum 2.75rem height. Width stays within the reading
-column when text is enlarged. The right chevron indicates an internal reading page;
+column when text is enlarged. Horizontal padding narrows with the viewport so
+enlarged labels wrap consistently in a constrained reading field.
+The right chevron indicates an internal reading page;
 the existing labels and descriptive accessible names identify its destination.
-Hover changes the blue surface; press feedback is immediate and focus uses the
-shared outline. Reduced motion removes the color transition.
+The resting surface uses a quiet gray fill, black text, and a subtle outline.
+Hover and keyboard focus use the blue accent and white text; focus retains the
+shared outline. Press feedback is immediate. Reduced motion removes the color transition.
 
-AI articles use the same 20px math base in prose and standalone equations. Subscripts,
+AI article prose, emphasis, citations, table cells, and inline and standalone formulas
+share a 20px base. Subsection headings use this size with weight 600. Subscripts,
 superscripts, fractions, accents, and equation labels retain their mathematical
 hierarchy. Multiline equations have explicit row spacing and generous surrounding
-space. Wide equations scroll locally at their natural size. Displayed equations omit
+space. Equation blocks use symmetric 2rem margins and 0.5rem vertical padding.
+Wide equations scroll locally at their natural size. Displayed equations omit
 sentence-ending punctuation while original TeX annotations preserve the authored
 source. Mathematical SVG glyphs are artwork rather than an additional prose font.
 
