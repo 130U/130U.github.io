@@ -2,7 +2,7 @@
   "version": 1,
   "normalization": "LF",
   "sources": {
-    "app/education/page.tsx": "295f5559f0d25dd3e1b8c513a3b1a00b95abe39748cb43a1e14cce2d0e7889c1",
+    "app/education/page.tsx": "875f7ddcab8d9e5737ce8a18f0bae9289bf617ec8c0e38923bd55b585185f249",
     "app/now/page.tsx": "fd7d113253d81fdf446c20bdb01c6dc2be6f8dc72d9bd6b83c726638ab4ea73a",
     "app/past-experience/page.tsx": "f3c6126decb358a6a43107f19d75acbdbae4886d83f0139b1ee87b0a73ebe289",
     "app/past-experience/[slug]/page.tsx": "a89b781c0a6a74b9295635d5495c4e2cc2cf2d890cc879578ebfd04a9f6db84b",
@@ -17,13 +17,17 @@
     "content/legal-papers/solar-geoengineering-comparison-and-continuity.json": "f6734b9a29d6ffdcc1c0e612f0ba1917ce9dea2fc9ec5132c81b12fe1e7b54f0",
     "content/legal-papers/mangrove-restoration-and-compensatory-mitigation.json": "be8ad403b6504ad18cac1b6bdf55925214b389ea6f3c0f325f0fac1bea1e9cd9",
     "app/lib/content/ai-projects.ts": "5423c403cc64f9841d0ccb30f34d11890932f6495c3f7a9ca68af19723f88b0f",
-    "app/lib/content/routes.ts": "5e9168ec1429cacb0c6b3deb024fc50024f2387b6e3833b420415274654abf24",
+    "app/lib/content/routes.ts": "33f9cb6f15b61e7dcfec62e38175face48e25612e83a0b7d55922ba0f8f752cd",
     "app/past-experience/components/AiResearchProjectPage.tsx": "0de3a385bebe9f3ac7a918d34dd9443ec9f2db23f04d3a2770aff66300b4bf02",
     "app/past-experience/components/AiResearchMath.tsx": "d89803a87bb66472a46c61c2e64b3fb09f82357b6f9efb5cba55ca23af8b8825",
     "content/artificial-intelligence/statistical-inference-and-resource-allocation-in-expert-data-production.json": "16061bba4e18d81cd738ed040d6d54ed309bceb38978633979d54b03fcfe5fd5",
     "content/artificial-intelligence/task-validity-in-financial-synthetic-data.json": "132044a28758f885411b78078600a3a50df5e288a9bbbb948b217ede1df4f4de",
     "content/artificial-intelligence/verification-and-supervision-in-scientific-reasoning-tasks.json": "2c342fb87edcc4618d738233329b2c2926c6baccb1891023437c4587d1d9d560",
     "content/artificial-intelligence/evidence-uncertainty-and-decision-guarantees-in-investment-research.json": "98a9c49dd5bc50f5c24ea94ccf7a38d5f6f93abcc770f9b70049a2c73f520bbc",
-    "app/lib/content/ai-math.ts": "94e3f670e77f66a2c4f8c013f755325ad2b89f555f27e691485855eaf96e698c"
+    "app/lib/content/ai-math.ts": "94e3f670e77f66a2c4f8c013f755325ad2b89f555f27e691485855eaf96e698c",
+    "app/education/certified-valuation-arithmetic-asian-options/page.tsx": "8631ce61ac848ab98b9493a70005b23754372f6daddc992fcc247b0ac35e5de6",
+    "app/education/components/SelectedResearchArticle.tsx": "ef9147b7f5dbfae997ad4af727dd8376366f65aebf10691bc526706934e62b8f",
+    "app/lib/content/selected-research.ts": "ae6c3a6ebae3814b43626e4f6ff1784d157015f0061bdb70372cfba49f366b00",
+    "content/selected-research/certified-valuation-arithmetic-asian-options.json": "82cd7c6aa7a7f6f257a70856eda8ba2de8649ee8f5770d7a79c063f8aaaa01ee"
   }
 }

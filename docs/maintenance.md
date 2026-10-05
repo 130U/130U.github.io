@@ -23,6 +23,7 @@ Paths in this table are relative to `website/`.
 | --- | --- | --- |
 | Home | `/` | `app/page.tsx`, `app/home.module.css` |
 | Education | `/education/` | `app/education/page.tsx` |
+| Selected Research | `/education/certified-valuation-arithmetic-asian-options/` | `app/lib/content/selected-research.ts`, `content/selected-research/` |
 | Past Experience | `/past-experience/` | `app/past-experience/page.tsx` |
 | Experience details | `/past-experience/[slug]/` | `app/lib/content/experience.ts`, `content/past-experience/` |
 | AI research projects | `/past-experience/artificial-intelligence/[paper]/` | `app/lib/content/ai-projects.ts`, `content/artificial-intelligence/` |
@@ -45,7 +46,7 @@ viewer is a separate repository reference, linked from the GitHub introduction.
 
 Biographical, AI research, and legal source files are checked against `content/protected-sources.json`.
 `content/visible-copy-manifest.json` independently records text, metadata, alt text,
-and ARIA labels for all seventeen website pages. Copy changes require the owner's explicit
+and ARIA labels for all eighteen website pages. Copy changes require the owner's explicit
 request and an intentional update to these contracts. Presentation-only changes to
 a protected component update its source hash while preserving the approved prose,
 metadata, and formula source contracts. Tests also verify page counts and navigation
@@ -161,7 +162,7 @@ To add an approved paper, update its structured source, the legal-paper slug reg
 the matching project route in `experience.ts`, and the independent content/output
 contracts together. Use the supplied manuscript as the wording and citation authority.
 
-Article validation checks all seventeen website routes, four legal reading links, chapter
+Article validation checks all eighteen website routes, four legal reading links, chapter
 anchors, complete numbered references, bidirectional footnote links, and the absence
 of public PDF files. Validate the published text against the approved source before
 refreshing visible-copy hashes. Read back the four live article pages after publishing.

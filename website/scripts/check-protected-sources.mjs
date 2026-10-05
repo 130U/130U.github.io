@@ -6,6 +6,10 @@ import { fileURLToPath } from "node:url";
 const ROOT = fileURLToPath(new URL("../", import.meta.url));
 const PROTECTED_PATHS = [
   "app/education/page.tsx",
+  "app/education/certified-valuation-arithmetic-asian-options/page.tsx",
+  "app/education/components/SelectedResearchArticle.tsx",
+  "app/lib/content/selected-research.ts",
+  "content/selected-research/certified-valuation-arithmetic-asian-options.json",
   "app/now/page.tsx",
   "app/past-experience/page.tsx",
   "app/past-experience/[slug]/page.tsx",

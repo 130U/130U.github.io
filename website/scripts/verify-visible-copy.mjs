@@ -10,6 +10,7 @@ const IGNORED_INTERFACE_STRINGS = ["Menu", "Close"];
 const ROUTES = [
   "/",
   "/education/",
+  "/education/certified-valuation-arithmetic-asian-options/",
   "/past-experience/",
   "/past-experience/artificial-intelligence/",
   "/past-experience/artificial-intelligence/statistical-inference-and-resource-allocation-in-expert-data-production/",
@@ -27,6 +28,7 @@ const ROUTES = [
   "/now/",
 ];
 const AI_PROJECT_ROUTES = new Set(ROUTES.filter((route) => /^\/past-experience\/artificial-intelligence\/[^/]+\/$/u.test(route)));
+AI_PROJECT_ROUTES.add("/education/certified-valuation-arithmetic-asian-options/");
 
 function decodeHtml(value) {
   return value

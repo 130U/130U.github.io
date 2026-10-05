@@ -180,7 +180,9 @@ The four primary pages are Home, Education, Past Experience, and Current Chapter
 Five domain pages carry the experience record. Domain `03` is Legal Research and
 Policy Analysis; its four selected papers each open a dedicated article page.
 Domain `01`, AI Research and Engineering, links four project reading pages.
-The website has seventeen public routes, with the architecture viewer as a separate
+Education's Selected Research overview uses the same reading and mathematical type
+roles as the AI research articles, with a matching Read more action.
+The website has eighteen public routes, with the architecture viewer as a separate
 technical reference. Keep factual claims, metadata, copy, and content order aligned
 with the integrity manifests.
 
