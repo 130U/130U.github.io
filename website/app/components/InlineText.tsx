@@ -18,4 +18,3 @@ export function renderInlineText(text: string): ReactNode[] {
   if (offset < text.length) parts.push(text.slice(offset));
   return parts;
 }
-

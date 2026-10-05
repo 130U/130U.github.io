@@ -25,10 +25,10 @@
     "app/education/certified-valuation-arithmetic-asian-options/page.tsx": "73b75955c5324231cf1a4c7c2c11c7f0730910cad2b8395a07f6941a4ef5fcc1",
     "app/lib/content/selected-research.ts": "3043f34e34b7a73608aab9ce96e3fe6b1021ee4a78d4a519a1a12ed09a766e8e",
     "content/selected-research/certified-valuation-arithmetic-asian-options.json": "82cd7c6aa7a7f6f257a70856eda8ba2de8649ee8f5770d7a79c063f8aaaa01ee",
-    "app/components/InlineText.tsx": "d917e90d6a55f3284a46a93ec8281867fdda74b55ac4ace475de98a1647837e1",
+    "app/components/InlineText.tsx": "0aef041dcc7f92bb8edd23b09a0f8eaa23ef6c4e15745680b4feaa72cc70dd5e",
     "app/components/research/ResearchArticle.tsx": "93fb7f1deba54ab57fe54c3ba7ba246bf09c0eb7e6f48d73f960cb63b5af2657",
     "app/components/research/ResearchMath.tsx": "8fefb7358bbda19a16c0655f1397a36e84397b0ddbb40d1fc62f1f7cac2d558c",
-    "app/lib/content/research-markdown.ts": "5ecd82b784419e58697de5aaebd6e535087e1eac5b38a96b21285ac2edc04697",
+    "app/lib/content/research-markdown.ts": "d6bffe78b0b917b8f973e8e5c87835333f5473d93efb8671d49123f9563b5a10",
     "app/lib/content/research-math.ts": "0343a075dba996cd6a96d3ab299eb6bf095b1b7a4c662f84b253cd243c4107ff"
   }
 }

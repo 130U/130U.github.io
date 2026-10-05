@@ -138,4 +138,3 @@ export function parseResearchMarkdown(markdown: string): ResearchBlock[] {
   if (!blocks.length || uses.some((count) => count !== 1)) throw new Error("Research source blocks lost or duplicated equations.");
   return blocks;
 }
-
