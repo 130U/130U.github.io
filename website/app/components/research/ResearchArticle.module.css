@@ -1,0 +1,30 @@
+.body {
+  max-width: var(--reading-measure);
+  font-size: var(--type-math);
+  line-height: var(--reading-leading);
+}
+
+.body h3 {
+  font-size: var(--type-math);
+}
+
+.tableRegion {
+  max-width: 100%;
+  margin: 1.25rem 0;
+  overflow-x: auto;
+  overflow-y: hidden;
+}
+
+.table {
+  width: 100%;
+  min-width: 32rem;
+  border-collapse: collapse;
+  text-align: left;
+  font: inherit;
+}
+
+.cell {
+  padding: 0.75rem;
+  border-bottom: 1px solid var(--rule);
+  vertical-align: top;
+}

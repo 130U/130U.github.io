@@ -14,10 +14,11 @@ tracing, and image export. A downloaded `index.html` also works offline.
 | `LICENSE` | MIT license for the Archify viewer |
 
 The website contains four main pages, five experience domains, four legal
-papers, and four AI research project pages. `website/app/lib/content/` defines
-identity, routes, and content loaders; `website/content/` contains the resume,
-AI project sources, structured manuscripts, and integrity contracts. Next.js
-generates seventeen static website pages. The build includes
+papers, four AI research project pages, and one Selected Research article linked
+from Education. `website/app/lib/content/` defines identity, routes, content loaders,
+and research Markdown and math rendering; `website/content/` contains the resume,
+research sources, structured manuscripts, and integrity contracts. Next.js
+generates eighteen static website pages. The build includes
 this viewer at `/architecture/`, and GitHub Actions publishes `website/out/` to
 GitHub Pages on the custom domain.
 
@@ -36,8 +37,9 @@ node website/scripts/integrate-architecture.mjs
 ```
 
 Run these commands from the repository root. `<archify>` is the local Archify skill
-directory. The integration script applies the website's six HTML type roles and
-major-section heading semantics while preserving SVG geometry. The viewer loads
+directory. The integration script applies the website's six HTML type roles,
+major-section heading semantics, and sentence-case control labels while preserving
+SVG geometry. The viewer loads
 `../assets/fonts/inter.css`, preloads regular Inter, and inherits `--font-text`.
 Visual exports embed the local regular and italic Inter files in SVG; PNG and WebM
 render from the same prepared fonts. The integration is safe to run repeatedly.

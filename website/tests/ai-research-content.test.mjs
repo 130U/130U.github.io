@@ -125,7 +125,7 @@ function expectedBlocks(markdown) {
 }
 
 function renderedBlocks(html) {
-  return [...html.matchAll(/<([a-z][\w:-]*)\b[^>]*\bdata-ai-block="(\d+)"[^>]*>/giu)].map((opening) => {
+  return [...html.matchAll(/<([a-z][\w:-]*)\b[^>]*\bdata-research-block="(\d+)"[^>]*>/giu)].map((opening) => {
     const tag = opening[1];
     const tags = new RegExp(`<\\/?${tag}\\b[^>]*>`, "giu");
     tags.lastIndex = opening.index;
@@ -142,7 +142,7 @@ function renderedBlocks(html) {
     return {
       index: Number(opening[2]),
       tag,
-      type: attr(opening[0], "data-ai-block-type"),
+      type: attr(opening[0], "data-research-block-type"),
       html: html.slice(opening.index, end),
     };
   });
@@ -201,15 +201,15 @@ for (const expected of PROJECTS) {
 
     const sourceFormulas = formulas(source.markdown);
     const math = [...content.matchAll(/<math\b([^>]*)>([\s\S]*?)<\/math>/giu)];
-    const svg = [...content.matchAll(/<svg\b([^>]*)>/giu)].filter((match) => attr(match[1], "data-ai-svg"));
+    const svg = [...content.matchAll(/<svg\b([^>]*)>/giu)].filter((match) => attr(match[1], "data-research-svg"));
     const visualFormulas = svgRanges(content).map(([from, to]) => content.slice(from, to));
-    const containers = [...content.matchAll(/<span\b([^>]*)>/giu)].filter((match) => attr(match[1], "data-ai-formula"));
+    const containers = [...content.matchAll(/<span\b([^>]*)>/giu)].filter((match) => attr(match[1], "data-research-formula"));
     assert.equal(math.length, expected.display + expected.inline);
     assert.equal(svg.length, math.length, "Every source formula must have one deterministic visual SVG");
     assert.equal(visualFormulas.length, math.length, "Nested vector geometry must remain inside its own formula root");
     assert.equal(containers.length, math.length, "Every formula must have one visual and assistive container");
-    assert.deepEqual(svg.map((match) => attr(match[1], "data-ai-svg")), sourceFormulas.map(({ kind }) => kind));
-    assert.deepEqual(containers.map((match) => attr(match[1], "data-ai-formula")), sourceFormulas.map(({ kind }) => kind));
+    assert.deepEqual(svg.map((match) => attr(match[1], "data-research-svg")), sourceFormulas.map(({ kind }) => kind));
+    assert.deepEqual(containers.map((match) => attr(match[1], "data-research-formula")), sourceFormulas.map(({ kind }) => kind));
     for (const match of svg) assert.equal(attr(match[1], "aria-hidden"), "true", "SVG glyphs must not duplicate accessible math");
     for (let index = 0; index < visualFormulas.length; index += 1) {
       const visual = visualFormulas[index];
@@ -223,10 +223,10 @@ for (const expected of PROJECTS) {
         assert.equal(visualCount, semanticCount, `Exported formula ${index} must preserve its ${semantic} geometry`);
       }
     }
-    assert.equal(math.filter((match) => attr(match[1], "data-ai-math") === "display").length, expected.display);
-    assert.equal(math.filter((match) => attr(match[1], "data-ai-math") === "inline").length, expected.inline);
+    assert.equal(math.filter((match) => attr(match[1], "data-research-math") === "display").length, expected.display);
+    assert.equal(math.filter((match) => attr(match[1], "data-research-math") === "inline").length, expected.inline);
     assert.deepEqual(math.map((match) => ({
-      kind: attr(match[1], "data-ai-math"),
+      kind: attr(match[1], "data-research-math"),
       tex: decodeHtml(match[2].match(/<annotation\b[^>]*encoding="application\/x-tex"[^>]*>([\s\S]*?)<\/annotation>/iu)?.[1] ?? ""),
     })), sourceFormulas, "Every formula must preserve its original TeX annotation and display mode");
     assert.doesNotMatch(content, /data-mjx-error|<merror\b|<foreignObject\b|\b(?:NaN|Infinity)\b|\$`|`\$/iu);

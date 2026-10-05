@@ -106,6 +106,40 @@ function applyReaderLayout(viewer) {
   return viewer.replace("</head>", `${readerRules}\n</head>`);
 }
 
+function applyViewerLabels(viewer) {
+  const labels = {
+    "viewer.export.shareCard": "Share card",
+    "viewer.export.routeShareCard": "Route share card",
+    "viewer.export.reachShareCard": "Reach share card",
+    "viewer.export.copyShareCard": "Copy share card",
+    "viewer.export.vectorMotion.heading": "Vector and motion",
+    "viewer.export.unknownVariant": "Unknown share card variant: {variant}",
+    "viewer.export.routeRequired": "Trace a route before exporting a route share card",
+    "viewer.export.reachRequired": "Trace authored reach before exporting a reach share card",
+    "viewer.export.routeFailed": "Route share card export failed: {message}",
+    "viewer.export.reachFailed": "Reach share card export failed: {message}",
+    "viewer.export.copiedShare": "Copied share card",
+    "viewer.export.downloadedShare": "Downloaded share card",
+    "viewer.export.downloadedRoute": "Downloaded route share card",
+    "viewer.export.downloadedReach": "Downloaded reach share card",
+    "viewer.export.error.variantsCombined": "Share card variants cannot be combined",
+    "viewer.export.error.viewerState": "Share card export could not remove temporary viewer state",
+    "viewer.export.error.routeState": "Route card export could not preserve the resolved route safely",
+    "viewer.export.error.reachState": "Reach card export could not preserve authored reach safely",
+  };
+  for (const [key, value] of Object.entries(labels)) {
+    const pattern = new RegExp(`("${key.replaceAll(".", "\\.")}":)"[^"]*"`, "u");
+    assert.ok(pattern.test(viewer), `Missing viewer label: ${key}`);
+    viewer = viewer.replace(pattern, (_, prefix) => `${prefix}${JSON.stringify(value)}`);
+  }
+  return viewer
+    .replaceAll("<strong>Share Card</strong>", "<strong>Share card</strong>")
+    .replaceAll("<strong>Route Share Card</strong>", "<strong>Route share card</strong>")
+    .replaceAll("<strong>Reach Share Card</strong>", "<strong>Reach share card</strong>")
+    .replaceAll("<strong>Copy Share Card</strong>", "<strong>Copy share card</strong>")
+    .replaceAll("Vector &amp; motion</span>", "Vector and motion</span>");
+}
+
 let source = original.replaceAll(".card h3", ".card h2")
   .replace(/(<div class="card-header">[\s\S]*?)<h3>([^<]+)<\/h3>/gu, "$1<h2>$2</h2>");
 assert.equal((source.match(/<h2>/gu) ?? []).length, 3, "Expected three major information cards.");
@@ -114,6 +148,7 @@ source = source.replace(/(\.semantic-passport-reach-actions strong\s*\{[^}]*font
   "$1 var(--type-interface);");
 source = source.replace(/(\.semantic-passport-reach-actions strong\s*\{[^}]*line-height:)\s*[^;]+;/gu,
   "$1 var(--interface-leading);");
+source = applyViewerLabels(source);
 
 if (source.includes("data-site-typography")) {
   assert.doesNotMatch(source, /fonts\.googleapis|fonts\.gstatic|JetBrains|Georgia|Times New Roman/u);

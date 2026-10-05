@@ -60,8 +60,12 @@ there is no request-time backend, database, authentication, form submission, or 
 - `app/components/SiteShell.tsx` owns the shared reading frame.
 - `app/components/SiteNavigation.tsx` owns the mobile menu and focus handling.
 - `app/components/dithered-entrance/` owns the Home Canvas2D wordmark and static fallback.
+- `app/components/research/` owns the shared research article and mathematical presentation.
+- `app/components/InlineText.tsx` renders prose emphasis and citation links.
 - `app/globals.css` and `app/home.module.css` implement the [design system](design.md).
 - `app/lib/content/site.ts` owns site identity and metadata helpers.
+- `app/lib/content/research-markdown.ts` parses research prose, headings, tables, and formulas.
+- `app/lib/content/research-math.ts` renders mathematical SVG and assistive MathML on the server.
 
 Add a website page by updating its source, the route registry, sitemap expectations,
 and output tests together. Keep browser interaction in focused client components.
@@ -107,12 +111,12 @@ details, or a download. Each reading page returns to its project anchor in the o
 | Verification and supervision in scientific reasoning tasks | [Source](https://app.notion.com/p/3ed867f96db5814c91c0fd96d9348c2f?pvs=204) |
 | Evidence uncertainty and decision guarantees in investment research | [Source](https://app.notion.com/p/3ed867f96db581cfaae7d40b93aaa080?pvs=204) |
 
-`AiResearchProjectPage` uses the shared article structure with a focused CSS Module
-that gives prose and table cells the same base size as formulas. `AiResearchMath`
-uses `app/lib/content/ai-math.ts` to render TeX on the server with the pinned MathJax
+`ResearchArticle` renders both AI projects and Selected Research with a focused CSS
+Module that gives prose and table cells the same base size as formulas.
+`ResearchMath` uses `app/lib/content/research-math.ts` to render TeX on the server with the pinned MathJax
 4.1.3 engine and its TeX font package. Visible equations contain complete SVG glyph
 paths, use the shared `--type-math` size and ink color, and load no browser math
-engine or font resources. `AiResearchMath.module.css` owns formula spacing and
+engine or font resources. `ResearchMath.module.css` owns formula spacing and
 scrolling. Display rows omit sentence punctuation and use explicit multiline spacing;
 mathematical terms and equation labels remain intact. Assistive MathML preserves
 semantic formulas and the exact original TeX annotation. Invalid formulas fail the
@@ -128,6 +132,20 @@ MathML have independent regression checks for accents, fractions, aligned equati
 Greek glyphs, superscripts, and equation numbers. Formula presentation changes preserve
 narrative text and source annotations. Approved navigation order or scrolling changes
 update only the corresponding contract fields after independent verification.
+
+### Selected Research
+
+Education presents a research summary and a Read more link before Selected Coursework.
+`app/lib/content/selected-research.ts` owns the summary, title, and route; the article
+source is `content/selected-research/certified-valuation-arithmetic-asian-options.json`.
+Its provenance records the report URL and exact Git commit. The academic overview
+uses the shared `ResearchArticle` and `ResearchMath` components, returns to the
+Education research anchor, and links to the project repository.
+
+Preserve the distinction between the projected Euler pricing certificate and its
+continuous-model comparison, and retain the stated assumptions for weak expansion
+and posterior quantile results. Approved content changes update the source hash,
+visible-copy contract, and independent output expectations together.
 
 ### Legal papers
 

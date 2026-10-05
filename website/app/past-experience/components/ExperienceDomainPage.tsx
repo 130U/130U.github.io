@@ -1,5 +1,5 @@
 import Link from "next/link";
-import type { ReactNode } from "react";
+import { renderInlineText } from "../../components/InlineText";
 import { SiteShell } from "../../components/SiteShell";
 import type { ExperienceDomain } from "../../lib/content/experience";
 
@@ -34,25 +34,6 @@ function ProjectReadingLink({ path, slug, title, kind }: {
   );
 }
 
-export function renderExperienceText(text: string): ReactNode[] {
-  const parts: ReactNode[] = [];
-  const inlineMarkup = /\*\*([^*]+)\*\*|\*([^*]+)\*|\[([^\]]+)\]\((https?:\/\/[^\s)]+)\)/gu;
-  let offset = 0;
-  for (const match of text.matchAll(inlineMarkup)) {
-    if (match.index > offset) parts.push(text.slice(offset, match.index));
-    if (match[1]) {
-      parts.push(<strong key={match.index}>{renderExperienceText(match[1])}</strong>);
-    } else if (match[2]) {
-      parts.push(<em key={match.index}>{renderExperienceText(match[2])}</em>);
-    } else {
-      parts.push(<a key={match.index} href={match[4]}>{renderExperienceText(match[3])}</a>);
-    }
-    offset = match.index + match[0].length;
-  }
-  if (offset < text.length) parts.push(text.slice(offset));
-  return parts;
-}
-
 export function ExperienceDomainPage({
   domain,
 }: {
@@ -61,7 +42,6 @@ export function ExperienceDomainPage({
   return (
     <SiteShell
       active="experience"
-      frameClassName={domain.slug === "artificial-intelligence" ? "ai-research-page" : undefined}
     >
       <header className="page-intro plain-page-intro domain-page-intro">
         <Link className="back-link" href="/past-experience/">
@@ -72,7 +52,7 @@ export function ExperienceDomainPage({
         {domain.introduction.length > 0 && (
           <div className="archive-entry-content domain-introduction">
             {domain.introduction.map((paragraph, index) => (
-              <p key={index}>{renderExperienceText(paragraph)}</p>
+              <p key={index}>{renderInlineText(paragraph)}</p>
             ))}
           </div>
         )}
@@ -123,7 +103,7 @@ export function ExperienceDomainPage({
                 <div className="entry-project-group" id={project.paperSlug ?? project.readMoreSlug} key={`${project.title}-${projectIndex}`}>
                   <h3 className="entry-project">{project.title}</h3>
                   {project.introduction.map((paragraph, index) => (
-                    <p className="entry-project-context" key={index}>{renderExperienceText(paragraph)}</p>
+                    <p className="entry-project-context" key={index}>{renderInlineText(paragraph)}</p>
                   ))}
                   {project.paperSlug && (
                     <ProjectReadingLink path={domain.path} slug={project.paperSlug} title={project.title} kind="paper" />
@@ -138,7 +118,7 @@ export function ExperienceDomainPage({
                       )}
                       <ul className="archive-bullets">
                         {section.bullets.map((bullet, bulletIndex) => (
-                          <li key={bulletIndex}>{renderExperienceText(bullet)}</li>
+                          <li key={bulletIndex}>{renderInlineText(bullet)}</li>
                         ))}
                       </ul>
                     </div>

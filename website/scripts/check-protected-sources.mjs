@@ -5,9 +5,13 @@ import { fileURLToPath } from "node:url";
 
 const ROOT = fileURLToPath(new URL("../", import.meta.url));
 const PROTECTED_PATHS = [
+  "app/components/InlineText.tsx",
+  "app/components/research/ResearchArticle.tsx",
+  "app/components/research/ResearchMath.tsx",
+  "app/lib/content/research-markdown.ts",
+  "app/lib/content/research-math.ts",
   "app/education/page.tsx",
   "app/education/certified-valuation-arithmetic-asian-options/page.tsx",
-  "app/education/components/SelectedResearchArticle.tsx",
   "app/lib/content/selected-research.ts",
   "content/selected-research/certified-valuation-arithmetic-asian-options.json",
   "app/now/page.tsx",
@@ -24,10 +28,7 @@ const PROTECTED_PATHS = [
   "content/legal-papers/solar-geoengineering-comparison-and-continuity.json",
   "content/legal-papers/mangrove-restoration-and-compensatory-mitigation.json",
   "app/lib/content/ai-projects.ts",
-  "app/lib/content/ai-math.ts",
   "app/lib/content/routes.ts",
-  "app/past-experience/components/AiResearchProjectPage.tsx",
-  "app/past-experience/components/AiResearchMath.tsx",
   "content/artificial-intelligence/statistical-inference-and-resource-allocation-in-expert-data-production.json",
   "content/artificial-intelligence/task-validity-in-financial-synthetic-data.json",
   "content/artificial-intelligence/verification-and-supervision-in-scientific-reasoning-tasks.json",

@@ -3,8 +3,8 @@ import { notFound } from "next/navigation";
 import { getLegalPaper, legalPapers, legalPaperPath } from "../../../lib/content/legal-papers";
 import { createPageMetadata } from "../../../lib/content/site";
 import { LegalPaperPage } from "../../components/LegalPaperPage";
-import { getAiResearchProject, aiResearchProjects, aiResearchProjectPath } from "../../../lib/content/ai-projects";
-import { AiResearchProjectPage } from "../../components/AiResearchProjectPage";
+import { AI_DOMAIN_PATH, getAiResearchProject, aiResearchProjects, aiResearchProjectPath } from "../../../lib/content/ai-projects";
+import { ResearchArticle } from "../../../components/research/ResearchArticle";
 
 export const dynamicParams = false;
 
@@ -39,7 +39,7 @@ export default async function PaperPage({ params }: Params) {
   if (slug === "artificial-intelligence") {
     const project = getAiResearchProject(paperSlug);
     if (!project) notFound();
-    return <AiResearchProjectPage project={project} />;
+    return <ResearchArticle project={project} active="experience" returnPath={`${AI_DOMAIN_PATH}#${project.slug}`} returnLabel="AI Research and Engineering" titleId="ai-project-title" />;
   }
   const paper = getLegalPaper(paperSlug);
   if (slug !== "legal-research-and-policy-analysis" || !paper) notFound();

@@ -13,8 +13,8 @@ npm run dev
 
 | Directory | Responsibility |
 | --- | --- |
-| `app/` | Pages, shared shell, content registry, and client interactions |
-| `content/` | Experience records, AI research projects, legal papers, and integrity manifests |
+| `app/` | Pages, shared shell and research readers, content registry, and client interactions |
+| `content/` | Experience records, AI and selected research, legal papers, and integrity manifests |
 | `public/` | Assets served directly by GitHub Pages |
 | `source-assets/` | Editable brand masters |
 | `scripts/` | Content checks, asset generation, build assembly, and local preview |

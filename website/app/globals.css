@@ -836,10 +836,6 @@ button:focus-visible {
   line-height: var(--reading-leading);
 }
 
-.ai-research-page article[aria-labelledby="ai-project-title"] > div {
-  max-width: var(--reading-measure);
-}
-
 .site-footer {
   display: flex;
   justify-content: space-between;
