@@ -232,25 +232,25 @@
   "cards": [
     {
       "dot": "cyan",
-      "title": "Content First",
+      "title": "Content first",
       "items": [
-        "4 main pages, 5 experience pages, 4 legal papers, 4 AI projects",
+        "4 main pages, 5 domains, 4 legal and 4 AI articles, 1 Selected Research",
         "Shared route registry and protected source text"
       ]
     },
     {
       "dot": "emerald",
-      "title": "Static Delivery",
+      "title": "Static delivery",
       "items": [
-        "17 content pages, 404, and architecture viewer",
+        "18 content pages, 404, and architecture viewer",
         "No runtime API, database, or authentication"
       ]
     },
     {
       "dot": "violet",
-      "title": "Focused Interactions",
+      "title": "Focused interactions",
       "items": [
-        "Navigation, Canvas, contents, and footnote previews",
+        "Navigation, canvas, contents, and footnote previews",
         "Architecture search, themes, tracing, and export"
       ]
     }

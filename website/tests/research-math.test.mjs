@@ -4,7 +4,7 @@ import { readFile } from "node:fs/promises";
 import path from "node:path";
 import test from "node:test";
 import { fileURLToPath } from "node:url";
-import { AI_MATH_GUTTER_EM, AI_MATH_ROW_SPACING_EM, normalizeAiResearchDisplayTex, renderAiResearchMath } from "../app/lib/content/ai-math.ts";
+import { RESEARCH_MATH_GUTTER_EM, RESEARCH_MATH_ROW_SPACING_EM, normalizeResearchDisplayTex, renderResearchMath } from "../app/lib/content/research-math.ts";
 
 const ROOT = fileURLToPath(new URL("../", import.meta.url));
 const PROJECTS = [
@@ -74,7 +74,7 @@ test("all 277 approved formulas have complete vector glyphs and exact accessible
     assert.equal(formulas.length, expected, `${slug} must retain its approved formula count`);
     for (const formula of formulas) {
       const tex = formula[1] ?? formula[2];
-      const rendered = await renderAiResearchMath(tex, formula[1] !== undefined);
+      const rendered = await renderResearchMath(tex, formula[1] !== undefined);
       assertCompleteFormula(rendered, tex);
       mathematicalPaths.push(glyphPaths(rendered.svg).filter(({ code }) => code !== "2C" && code !== "2E"));
       assert.equal(tagCount(rendered.mathml, "mfrac"), (tex.match(/\\(?:t|d)?frac(?![A-Za-z])/gu) ?? []).length, `${slug} must preserve each fraction`);
@@ -107,13 +107,13 @@ test("display punctuation normalization changes only true sentence and equation-
     [String.raw`\begin{cases}a,&x=0\\b,&x=1\end{cases}.`, String.raw`\begin{cases}a,&x=0\\b,&x=1\end{cases}`],
     [String.raw`\begin{matrix}a,&b\\c,&d\end{matrix}.`, String.raw`\begin{matrix}a,&b\\c,&d\end{matrix}`],
   ];
-  for (const [source, expected] of fixtures) assert.equal(normalizeAiResearchDisplayTex(source), expected, source);
+  for (const [source, expected] of fixtures) assert.equal(normalizeResearchDisplayTex(source), expected, source);
 });
 
 test("visible display math preserves internal punctuation, original annotations, and inline glyphs", () => {
   const tex = String.raw`x=f(a,b)+0.25.`;
-  const display = renderAiResearchMath(tex, true);
-  const inline = renderAiResearchMath(tex, false);
+  const display = renderResearchMath(tex, true);
+  const inline = renderResearchMath(tex, false);
   assertCompleteFormula(display, tex);
   assertCompleteFormula(inline, tex);
   assert.equal(glyphPaths(display.svg).filter(({ code }) => code === "2C").length, 1);
@@ -125,14 +125,14 @@ test("visible display math preserves internal punctuation, original annotations,
 });
 
 test("display aligned and gathered rows get reading space while cases and matrices retain their spacing", () => {
-  assert.equal(AI_MATH_ROW_SPACING_EM, 0.6);
+  assert.equal(RESEARCH_MATH_ROW_SPACING_EM, 0.6);
   for (const environment of ["aligned", "gathered"]) {
     const tex = `\\begin{${environment}}x=1\\\\y=2\\end{${environment}}`;
-    assert.match(renderAiResearchMath(tex, true).mathml, /<mtable\b[^>]*rowspacing="0\.6em"/u);
-    assert.match(renderAiResearchMath(tex, false).mathml, /<mtable\b[^>]*rowspacing="3pt"/u);
+    assert.match(renderResearchMath(tex, true).mathml, /<mtable\b[^>]*rowspacing="0\.6em"/u);
+    assert.match(renderResearchMath(tex, false).mathml, /<mtable\b[^>]*rowspacing="3pt"/u);
   }
-  assert.match(renderAiResearchMath(String.raw`\begin{cases}x,&y=1\\z,&y=2\end{cases}`, true).mathml, /<mtable\b[^>]*rowspacing="\.2em"/u);
-  assert.match(renderAiResearchMath(String.raw`\begin{matrix}a&b\\c&d\end{matrix}`, true).mathml, /<mtable\b[^>]*rowspacing="4pt"/u);
+  assert.match(renderResearchMath(String.raw`\begin{cases}x,&y=1\\z,&y=2\end{cases}`, true).mathml, /<mtable\b[^>]*rowspacing="\.2em"/u);
+  assert.match(renderResearchMath(String.raw`\begin{matrix}a&b\\c&d\end{matrix}`, true).mathml, /<mtable\b[^>]*rowspacing="4pt"/u);
 });
 
 test("Greek symbols, accents, primes, and fractions retain distinct mathematical geometry", async () => {
@@ -147,14 +147,14 @@ test("Greek symbols, accents, primes, and fractions retain distinct mathematical
     [String.raw`x'`, "msup", /\u2032/u],
   ];
   for (const [tex, semantic, symbol] of fixtures) {
-    const rendered = await renderAiResearchMath(tex, false);
+    const rendered = await renderResearchMath(tex, false);
     assertCompleteFormula(rendered, tex);
     assert.equal(tagCount(rendered.mathml, semantic), 1, `${tex} must retain its ${semantic} structure`);
     assert.match(rendered.svg, new RegExp(`data-mml-node="${semantic}"`, "u"), `${tex} must have matching visual geometry`);
     if (symbol) assert.match(decodeXml(rendered.mathml), symbol);
   }
-  const delta = await renderAiResearchMath(String.raw`\Delta`, false);
-  const latin = await renderAiResearchMath("D", false);
+  const delta = await renderResearchMath(String.raw`\Delta`, false);
+  const latin = await renderResearchMath("D", false);
   assert.match(delta.svg, /data-c="394"/u);
   assert.doesNotMatch(delta.svg, /data-c="44"/u);
   assert.notEqual(delta.svg.match(/<path\b[^>]*\bd="([^"]+)"/u)?.[1], latin.svg.match(/<path\b[^>]*\bd="([^"]+)"/u)?.[1]);
@@ -162,7 +162,7 @@ test("Greek symbols, accents, primes, and fractions retain distinct mathematical
 
 test("aligned equations preserve rows, fractions, and all nine science equation numbers", async () => {
   const alignedTex = String.raw`\begin{aligned}x&=\frac{1}{2}\\y&=3\end{aligned}`;
-  const aligned = await renderAiResearchMath(alignedTex, true);
+  const aligned = await renderResearchMath(alignedTex, true);
   assertCompleteFormula(aligned, alignedTex);
   assert.equal(tagCount(aligned.mathml, "mtable"), 1);
   assert.equal(tagCount(aligned.mathml, "mtr"), 2);
@@ -170,7 +170,7 @@ test("aligned equations preserve rows, fractions, and all nine science equation 
   assert.match(aligned.svg, /data-mml-node="mtable"/u);
   for (let number = 1; number <= 9; number += 1) {
     const tex = String.raw`x=\frac{1}{2}\tag{${number}}`;
-    const rendered = await renderAiResearchMath(tex, true);
+    const rendered = await renderResearchMath(tex, true);
     assertCompleteFormula(rendered, tex);
     assert.equal(tagCount(rendered.mathml, "mlabeledtr"), 1, "Equation labels must be associated with their expression");
     const label = rendered.mathml.match(/<mlabeledtr\b[^>]*>\s*<mtd\b[^>]*>([\s\S]*?)<\/mtd>/iu)?.[1] ?? "";
@@ -182,12 +182,12 @@ test("aligned equations preserve rows, fractions, and all nine science equation 
 
 test("unsupported and malformed TeX fail explicitly instead of producing error artwork", async () => {
   for (const tex of [String.raw`\unknownCommand{x}`, String.raw`\frac{x}{`, String.raw`\href{javascript:alert(1)}{x}`]) {
-    await assert.rejects(async () => renderAiResearchMath(tex, false), /.+/u);
+    await assert.rejects(async () => renderResearchMath(tex, false), /.+/u);
   }
 });
 
 test("SVG canvases preserve natural glyph scale and baselines with room for accents and labels", async () => {
-  assert.equal(AI_MATH_GUTTER_EM, 0.375);
+  assert.equal(RESEARCH_MATH_GUTTER_EM, 0.375);
   const fixtures = [
     {
       slug: "verification-and-supervision-in-scientific-reasoning-tasks", index: 32,
@@ -212,7 +212,7 @@ test("SVG canvases preserve natural glyph scale and baselines with room for acce
   for (const fixture of fixtures) {
     const source = JSON.parse(await readFile(path.join(ROOT, "content", "artificial-intelligence", `${fixture.slug}.json`), "utf8"));
     const formula = [...source.markdown.matchAll(/\$\$([\s\S]*?)\$\$|\$\x60([\s\S]*?)\x60\$/gu)][fixture.index];
-    const rendered = await renderAiResearchMath(formula[1] ?? formula[2], formula[1] !== undefined);
+    const rendered = await renderResearchMath(formula[1] ?? formula[2], formula[1] !== undefined);
     assertCompleteFormula(rendered, formula[1] ?? formula[2]);
     close(rendered.widthEm, fixture.widthEm + 0.75, "Canvas must leave 0.375em on each horizontal side");
     close(rendered.heightEm, fixture.heightEm + 0.75, "Canvas must leave 0.375em above and below the expression");

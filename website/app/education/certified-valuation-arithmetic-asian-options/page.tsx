@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { SelectedResearchArticle } from "../components/SelectedResearchArticle";
+import { ResearchArticle } from "../../components/research/ResearchArticle";
 import { selectedResearch, SELECTED_RESEARCH_PATH } from "../../lib/content/selected-research";
 import { createPageMetadata } from "../../lib/content/site";
 
@@ -16,5 +16,5 @@ export const metadata: Metadata = {
 };
 
 export default function SelectedResearchPage() {
-  return <SelectedResearchArticle project={selectedResearch} />;
+  return <ResearchArticle project={selectedResearch} active="education" returnPath={`/education/#${selectedResearch.slug}`} returnLabel="Selected Research" titleId="research-article-title" />;
 }

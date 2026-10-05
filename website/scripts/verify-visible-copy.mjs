@@ -27,8 +27,10 @@ const ROUTES = [
   "/past-experience/legal-research-and-policy-analysis/mangrove-restoration-and-compensatory-mitigation/",
   "/now/",
 ];
-const AI_PROJECT_ROUTES = new Set(ROUTES.filter((route) => /^\/past-experience\/artificial-intelligence\/[^/]+\/$/u.test(route)));
-AI_PROJECT_ROUTES.add("/education/certified-valuation-arithmetic-asian-options/");
+const RESEARCH_ARTICLE_ROUTES = new Set(ROUTES.filter((route) =>
+  /^\/past-experience\/artificial-intelligence\/[^/]+\/$/u.test(route) ||
+  /^\/education\/[^/]+\/$/u.test(route),
+));
 
 function decodeHtml(value) {
   return value
@@ -126,9 +128,9 @@ function withoutSvg(html) {
 
 function formulaSnapshot(html) {
   const formulas = [...html.matchAll(/<math\b([^>]*)>([\s\S]*?)<\/math>/giu)].map((match) => {
-    const mode = match[1].match(/\bdata-ai-math="(inline|display)"/u)?.[1];
+    const mode = match[1].match(/\bdata-research-math="(inline|display)"/u)?.[1];
     const annotation = match[2].match(/<annotation\b[^>]*encoding="application\/x-tex"[^>]*>([\s\S]*?)<\/annotation>/iu)?.[1];
-    if (!mode || annotation === undefined) throw new Error("AI formulas must preserve an exact TeX annotation and display mode.");
+    if (!mode || annotation === undefined) throw new Error("Research formulas must preserve an exact TeX annotation and display mode.");
     return { mode, tex: decodeHtml(annotation) };
   });
   return { mathSourceSha256: sha256(JSON.stringify(formulas)), formulaCount: formulas.length };
@@ -166,8 +168,8 @@ function metadataSnapshot(html) {
 
 async function routeSnapshot(route) {
   const html = await readFile(routeHtmlPath(route), "utf8");
-  const isAiProject = AI_PROJECT_ROUTES.has(route);
-  const text = visibleText(html, isAiProject);
+  const isResearchArticle = RESEARCH_ARTICLE_ROUTES.has(route);
+  const text = visibleText(html, isResearchArticle);
   const body = html.match(/<body\b[^>]*>([\s\S]*?)<\/body>/iu)?.[1] ?? "";
   return {
     textSha256: sha256(text),
@@ -177,7 +179,7 @@ async function routeSnapshot(route) {
     altTexts: attributeValues(body, "alt"),
     ariaLabels: attributeValues(body, "aria-label"),
     metadata: metadataSnapshot(html),
-    ...(isAiProject ? formulaSnapshot(body) : {}),
+    ...(isResearchArticle ? formulaSnapshot(body) : {}),
   };
 }
 
@@ -216,7 +218,7 @@ async function verify() {
     }
     const actual = await routeSnapshot(route);
     const fields = ["textSha256", "characterCount", "wordCount", "altTexts", "ariaLabels", "metadata"];
-    if (AI_PROJECT_ROUTES.has(route)) fields.push("mathSourceSha256", "formulaCount");
+    if (RESEARCH_ARTICLE_ROUTES.has(route)) fields.push("mathSourceSha256", "formulaCount");
     for (const field of fields) {
       if (stableJson(actual[field]) !== stableJson(expected[field])) {
         failures.push(
