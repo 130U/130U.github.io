@@ -29,6 +29,7 @@ const AI_PROJECT_SLUGS = [
 const ROUTES = [
   "/",
   "/education/",
+  "/education/certified-valuation-arithmetic-asian-options/",
   "/now/",
   "/past-experience/",
   "/past-experience/artificial-intelligence/",
@@ -157,7 +158,7 @@ async function exportedRoutes() {
     .sort();
 }
 
-test("the static export contains seventeen website routes and the architecture viewer", async () => {
+test("the static export contains eighteen website routes and the architecture viewer", async () => {
   assert.deepEqual(await exportedRoutes(), [...ROUTES, "/architecture/"].sort());
   assert.ok(existsSync(path.join(OUT, "404.html")));
 });
@@ -221,6 +222,21 @@ test("inner routes present text-focused pages and the Current Chapter introducti
   assert.match(now, /Theodore Ouyang is exploring how artificial intelligence/u);
   assert.match(now, /practical applications that solve real problems/u);
   assert.match(now, /expand human capability/u);
+});
+
+test("Selected Research links Education to its complete academic overview", async () => {
+  const route = "/education/certified-valuation-arithmetic-asian-options/";
+  const education = await routeHtml("/education/");
+  assert.ok(education.indexOf("Selected Research") < education.indexOf("Selected Coursework"));
+  assert.match(education, /<a[^>]*class="entry-paper-link"[^>]*href="\/education\/certified-valuation-arithmetic-asian-options\/"[^>]*>Read more/u);
+  const article = await routeHtml(route);
+  assert.equal(openingTags(article, "h1").length, 1);
+  assert.equal(openingTags(article, "table").length, 2);
+  for (const value of ["0.011024692273", "0.010642371599", "6.508371733", "6.518868974", "0.008018821658", "0.012716404217"]) {
+    assert.ok(article.includes(value), `The overview must retain ${value}.`);
+  }
+  assert.match(article, /href="\/education\/#certified-valuation-arithmetic-asian-options"/u);
+  assert.match(article, /href="https:\/\/github\.com\/130U\/certified-valuation-arithmetic-asian-options">GitHub repository<\/a>/u);
 });
 
 test("Past Experience presents five domains, 14 entries, and 118 bullets", async () => {

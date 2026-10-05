@@ -28,16 +28,17 @@
       }
     },
     "/education/": {
-      "textSha256": "07fa53323a69dc2835d5745c4bac0e734476e23a3d6a2a90d77c7466517118c5",
-      "characterCount": 2064,
-      "wordCount": 253,
+      "textSha256": "64ad7c505741c52177dae2e049dfcff41d99a2d8d03040eb962fc9ee6dd8e316",
+      "characterCount": 2829,
+      "wordCount": 352,
       "preview": "Skip to main content Theodore Ouyang Home Education Past Experience Current Chapter Education Duke University Master of Engineering in Risk Engineering Financia",
       "altTexts": [],
       "ariaLabels": [
         "Theodore Ouyang home",
         "Primary navigation",
         "Degrees",
-        "Academic distinctions"
+        "Academic distinctions",
+        "Read more about Certified Valuation of Arithmetic Asian Options via Common Gaussian Smoothing"
       ],
       "metadata": {
         "title": "Education | Theodore Ouyang",
@@ -759,6 +760,43 @@
       },
       "mathSourceSha256": "d7a55a8cdc57534e23fbceebf22197be1da30e053b65a75db18148b00dc0703a",
       "formulaCount": 79
+    },
+    "/education/certified-valuation-arithmetic-asian-options/": {
+      "textSha256": "5c270883452d0c24c52d8ff7a00a4a27e8d7a8ed3a6dfe2c6907fc15932fc81c",
+      "characterCount": 11417,
+      "wordCount": 1589,
+      "preview": "Skip to main content Theodore Ouyang Home Education Past Experience Current Chapter Selected Research Certified Valuation of Arithmetic Asian Options via Common",
+      "altTexts": [],
+      "ariaLabels": [
+        "Theodore Ouyang home",
+        "Primary navigation",
+        "Mathematical equation",
+        "Mathematical equation",
+        "Mathematical equation",
+        "Mathematical equation",
+        "Mathematical equation",
+        "Mathematical equation",
+        "Mathematical equation",
+        "Mathematical equation",
+        "Research data table",
+        "Mathematical equation",
+        "Mathematical equation",
+        "Mathematical equation",
+        "Mathematical equation",
+        "Research data table"
+      ],
+      "metadata": {
+        "title": "Certified Valuation of Arithmetic Asian Options via Common Gaussian Smoothing | Theodore Ouyang",
+        "description": "Computable pricing-error bounds for arithmetic Asian options under projected Euler, with joint weak expansions and posterior quantile transfer.",
+        "canonical": "https://www.theodoreoy.com/education/certified-valuation-arithmetic-asian-options/",
+        "openGraphTitle": "Certified Valuation of Arithmetic Asian Options via Common Gaussian Smoothing",
+        "openGraphDescription": "Computable pricing-error bounds for arithmetic Asian options under projected Euler, with joint weak expansions and posterior quantile transfer.",
+        "openGraphUrl": "https://www.theodoreoy.com/education/certified-valuation-arithmetic-asian-options/",
+        "twitterTitle": "Certified Valuation of Arithmetic Asian Options via Common Gaussian Smoothing",
+        "twitterDescription": "Computable pricing-error bounds for arithmetic Asian options under projected Euler, with joint weak expansions and posterior quantile transfer."
+      },
+      "mathSourceSha256": "8a228a298c52fb6ed57965948e33002511afe6675a7fcc490eafbefe0ca00d96",
+      "formulaCount": 17
     }
   }
 }

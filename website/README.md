@@ -2,7 +2,8 @@
 
 Theodore Ouyang's personal site, built with Next.js App Router, React, and native CSS.
 The static export includes four main pages, five experience domains, four legal
-papers, and four AI research project pages. Node.js 24 matches the deployment runtime.
+papers, four AI research project pages, and a selected research overview linked from
+Education. Node.js 24 matches the deployment runtime.
 
 ```sh
 cd website
