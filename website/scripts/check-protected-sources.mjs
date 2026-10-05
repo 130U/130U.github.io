@@ -21,6 +21,7 @@ const PROTECTED_PATHS = [
   "app/lib/content/experience.ts",
   "content/past-experience/experience.md",
   "app/lib/content/legal-papers.ts",
+  "app/lib/content/metadata-excerpt.ts",
   "app/past-experience/[slug]/[paper]/page.tsx",
   "app/past-experience/components/LegalPaperPage.tsx",
   "content/legal-papers/autonomous-authority-in-space.json",

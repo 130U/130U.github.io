@@ -108,6 +108,15 @@ function applyReaderLayout(viewer) {
 
 function applyViewerLabels(viewer) {
   const labels = {
+    "viewer.owner.route": "route probe",
+    "viewer.owner.lens": "semantic lens",
+    "viewer.owner.relationship": "relationship preview",
+    "viewer.owner.intent": "intent trace",
+    "viewer.guide.present": "Enter presentation stage",
+    "viewer.guided.selectBeatLink": "Select a story beat to copy its exact link",
+    "viewer.guide.map.hint": "Open semantic radar with a live viewport and stable nodes.",
+    "viewer.radar.focus": "Focus {label} from semantic radar",
+    "viewer.radar.compacted": "Radar compacted to avoid covering the semantic passport or MAP controls.",
     "viewer.export.shareCard": "Share card",
     "viewer.export.routeShareCard": "Route share card",
     "viewer.export.reachShareCard": "Reach share card",
@@ -133,6 +142,9 @@ function applyViewerLabels(viewer) {
     viewer = viewer.replace(pattern, (_, prefix) => `${prefix}${JSON.stringify(value)}`);
   }
   return viewer
+    .replaceAll("Enter Presentation Stage", "Enter presentation stage")
+    .replaceAll("Select a Story Beat to copy its exact link", "Select a story beat to copy its exact link")
+    .replaceAll("Open Semantic Radar with", "Open semantic radar with")
     .replaceAll("<strong>Share Card</strong>", "<strong>Share card</strong>")
     .replaceAll("<strong>Route Share Card</strong>", "<strong>Route share card</strong>")
     .replaceAll("<strong>Reach Share Card</strong>", "<strong>Reach share card</strong>")
@@ -141,7 +153,8 @@ function applyViewerLabels(viewer) {
 }
 
 let source = original.replaceAll(".card h3", ".card h2")
-  .replace(/(<div class="card-header">[\s\S]*?)<h3>([^<]+)<\/h3>/gu, "$1<h2>$2</h2>");
+  .replace(/(<div class="card-header">[\s\S]*?)<h3>([^<]+)<\/h3>/gu, "$1<h2>$2</h2>")
+  .replace(/\n(?:      \/\/[^\n]*\n)+      try \{\n        if \(new URLSearchParams\(window\.location\.search\)\.get\('openExport'\) === '1'\) \{[\s\S]*?\n      \} catch \(_\) \{\}/u, "");
 assert.equal((source.match(/<h2>/gu) ?? []).length, 3, "Expected three major information cards.");
 source = source.replace(/(\.card h2\s*\{[^}]*font-weight:)\s*[^;]+;/gu, "$1 400;");
 source = source.replace(/(\.semantic-passport-reach-actions strong\s*\{[^}]*font-size:)\s*[^;]+;/gu,
