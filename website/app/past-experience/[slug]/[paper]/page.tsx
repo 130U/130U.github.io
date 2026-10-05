@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { getLegalPaper, legalPapers, legalPaperPath } from "../../../lib/content/legal-papers";
 import { createPageMetadata } from "../../../lib/content/site";
+import { createMetadataExcerpt } from "../../../lib/content/metadata-excerpt";
 import { LegalPaperPage } from "../../components/LegalPaperPage";
 import { AI_DOMAIN_PATH, getAiResearchProject, aiResearchProjects, aiResearchProjectPath } from "../../../lib/content/ai-projects";
 import { ResearchArticle } from "../../../components/research/ResearchArticle";
@@ -28,7 +29,7 @@ export async function generateMetadata({ params }: Params): Promise<Metadata> {
   if (slug !== "legal-research-and-policy-analysis" || !paper) notFound();
   const metadata = createPageMetadata({
     title: paper.subtitle ? `${paper.title}: ${paper.subtitle}` : paper.title,
-    description: paper.abstract.map(({ text }) => text).join(" ").slice(0, 260),
+    description: createMetadataExcerpt(paper.abstract.map(({ text }) => text).join(" ")),
     path: legalPaperPath(paper.slug),
   });
   return { ...metadata, authors: [{ name: paper.author }], openGraph: { ...metadata.openGraph, type: "article", authors: [paper.author] } };

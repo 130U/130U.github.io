@@ -10,7 +10,7 @@
     "app/lib/content/experience.ts": "46d6986e28999f63a163f591a67ed5fa4eb14a22594344131f073b20de67b560",
     "content/past-experience/experience.md": "7aa72f31eb70fe2c74e055080560b0c09b420a7f4eb6f5494d0b5936efc5376c",
     "app/lib/content/legal-papers.ts": "8bd1bca63e7211f7c286df97192faf943144ff28be6d12cc5666f704933e9f4c",
-    "app/past-experience/[slug]/[paper]/page.tsx": "365309a1147ab0f8b35d91225862bbd269bb146df8df3558503a0ed75ef9362f",
+    "app/past-experience/[slug]/[paper]/page.tsx": "b0131c02abad4286776ea01a8e2dbd207f56fff7f258d28661184471cb116b79",
     "app/past-experience/components/LegalPaperPage.tsx": "cb654c20da8afeb1e5ececcbf5a4cf819c13d1fd2ceca9b4f3b6d42465e05b1d",
     "content/legal-papers/autonomous-authority-in-space.json": "087d4708bdaf4b487e47438681b3f79941ba08ac2ddfe08a5dd4830fd8a4f2d9",
     "content/legal-papers/small-states-and-strategic-space-dependence.json": "1ea90829b39b0b56923641c84ed6af46d57cc6de5c13047ced495cc1f0726acb",
@@ -29,6 +29,7 @@
     "app/components/research/ResearchArticle.tsx": "93fb7f1deba54ab57fe54c3ba7ba246bf09c0eb7e6f48d73f960cb63b5af2657",
     "app/components/research/ResearchMath.tsx": "8fefb7358bbda19a16c0655f1397a36e84397b0ddbb40d1fc62f1f7cac2d558c",
     "app/lib/content/research-markdown.ts": "d6bffe78b0b917b8f973e8e5c87835333f5473d93efb8671d49123f9563b5a10",
-    "app/lib/content/research-math.ts": "0343a075dba996cd6a96d3ab299eb6bf095b1b7a4c662f84b253cd243c4107ff"
+    "app/lib/content/research-math.ts": "0343a075dba996cd6a96d3ab299eb6bf095b1b7a4c662f84b253cd243c4107ff",
+    "app/lib/content/metadata-excerpt.ts": "567139663925462cc48584a53dabb91e50e3727acd68afe7ddf61fa2818f0e71"
   }
 }
