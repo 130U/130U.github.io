@@ -116,7 +116,7 @@ export default function EducationPage() {
             </p>
             <p className="education-note">
               Pratt School of Engineering Merit Scholarship — one of the
-              school&apos;s highest-tier merit awards, covering 50% of tuition.
+              graduate program&apos;s highest-tier merit awards.
             </p>
           </div>
         </article>
@@ -130,8 +130,7 @@ export default function EducationPage() {
           </h3>
           <p className="entry-subtitle">Dual-Degree Undergraduate Program</p>
           <p className="education-note">
-            Undergraduate Merit Scholarship — a merit-based award covering
-            25% of tuition.
+            Undergraduate Merit Scholarship
           </p>
         </article>
       </section>

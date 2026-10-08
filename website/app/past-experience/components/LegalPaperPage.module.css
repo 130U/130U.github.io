@@ -96,7 +96,7 @@
 
 .abstract p + p,
 .body p + p {
-  margin-top: 1.25rem;
+  margin-top: 1.5rem;
 }
 
 .contents summary {
@@ -162,16 +162,20 @@
 }
 
 .body h2 {
-  margin-top: 3.5rem;
+  margin: 5rem 0 1.5rem;
+  padding-top: 2rem;
+  border-top: 1px solid var(--rule-strong);
   scroll-margin-top: 6rem;
 }
 
-.body h2:first-child {
+.body h2:first-of-type {
   margin-top: 0;
+  padding-top: 0;
+  border-top: 0;
 }
 
 .body h3 {
-  margin: 2.5rem 0 1.25rem;
+  margin: 3rem 0 1.5rem;
   font-size: var(--type-subheading);
   font-weight: 600;
   line-height: var(--subheading-leading);
@@ -304,6 +308,16 @@
 
   .abstract {
     padding-top: 1.5rem;
+  }
+
+  .body h2 {
+    margin-top: 4rem;
+    padding-top: 1.5rem;
+  }
+
+  .body h2:first-of-type {
+    margin-top: 0;
+    padding-top: 0;
   }
 }
 
