@@ -50,7 +50,7 @@ for (const expected of PROJECTS) {
     assert.ok(article.markdown.startsWith(main + "\n\n## Appendices and supporting material\n"), "Every main-text character must survive import, except resolved relative link targets.");
     assert.ok(article.markdown.endsWith(references + "\n"), "The complete bibliography must survive import.");
     assert.doesNotMatch(article.markdown, /^## Appendix [A-Z]\./mu);
-    const blocks = parseResearchMarkdown(article.markdown);
+    const blocks = parseResearchMarkdown(article.markdown, { joinSoftLines: true });
     assert.equal(blocks.filter((block) => block.type === "heading" && /^## \d+\./u.test(block.source)).length, expected.sections);
     assert.equal(blocks.filter((block) => block.type === "table").length, expected.tables);
     const formulas = sourceFormulas(article.markdown);
@@ -68,7 +68,7 @@ for (const expected of PROJECTS) {
     const html = await readFile(new URL(`../out/education/${expected.slug}/index.html`, import.meta.url), "utf8");
     const rendered = [...html.matchAll(/<math\b[^>]*data-research-math="(inline|display)"[^>]*>[\s\S]*?<annotation\b[^>]*encoding="application\/x-tex"[^>]*>([\s\S]*?)<\/annotation>[\s\S]*?<\/math>/gu)].map((match) => ({ tex: decodeHtml(match[2]), display: match[1] === "display" }));
     assert.deepEqual(rendered, sourceFormulas(article.markdown));
-    const blocks = parseResearchMarkdown(article.markdown);
+    const blocks = parseResearchMarkdown(article.markdown, { joinSoftLines: true });
     const markers = [...html.matchAll(/data-research-block="(\d+)"/gu)].map((match) => Number(match[1]));
     assert.deepEqual(markers, blocks.map((_, index) => index), "Every article block must appear once, in source order.");
     const contents = html.match(/<nav\b[^>]*aria-label="Table of contents"[^>]*>([\s\S]*?)<\/nav>/u);

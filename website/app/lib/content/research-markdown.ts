@@ -26,7 +26,7 @@ export type ResearchArticleContent = {
 
 const MATH_PREFIX = "@@RESEARCH-MATH-";
 
-export function parseResearchMarkdown(markdown: string): ResearchBlock[] {
+export function parseResearchMarkdown(markdown: string, options: { joinSoftLines?: boolean } = {}): ResearchBlock[] {
   if (markdown.includes(MATH_PREFIX)) throw new Error("Research source contains a reserved equation marker.");
 
   const formulas: Array<{ tex: string; display: boolean; source: string }> = [];
@@ -49,6 +49,13 @@ export function parseResearchMarkdown(markdown: string): ResearchBlock[] {
 
   function restoreSource(source: string) {
     return source.replace(/@@RESEARCH-MATH-(\d+)@@/gu, (_, index) => formulaAt(Number(index)).source);
+  }
+
+  function paragraphBoundary(line: string) {
+    const value = line.trim();
+    if (!value || /^(?:#{1,6} |<table\b|<a id=|\||(?:[-*+]|\d+[.)])\s)/u.test(value)) return true;
+    const display = value.match(/^@@RESEARCH-MATH-(\d+)@@$/u);
+    return display !== null && formulaAt(Number(display[1])).display;
   }
 
   function inlines(source: string): ResearchInline[] {
@@ -166,7 +173,14 @@ export function parseResearchMarkdown(markdown: string): ResearchBlock[] {
       continue;
     }
     if (/^#{1,6} /u.test(structuralLine)) throw new Error("Unsupported Research source heading level.");
-    blocks.push({ type: "paragraph", source: restoreSource(line), inlines: inlines(line), ...(paragraphId ? { id: paragraphId } : {}) });
+    const paragraphLines = [line];
+    if (options.joinSoftLines) {
+      while (index + 1 < lines.length && !paragraphBoundary(lines[index + 1])) {
+        index += 1;
+        paragraphLines.push(lines[index]);
+      }
+    }
+    blocks.push({ type: "paragraph", source: restoreSource(paragraphLines.join("\n")), inlines: inlines(paragraphLines.join(" ")), ...(paragraphId ? { id: paragraphId } : {}) });
     paragraphId = undefined;
   }
 

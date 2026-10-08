@@ -17,7 +17,7 @@ function readResearch(slug: string) {
   if (source.slug !== slug || !source.title || !source.markdown || !source.description || !/^[a-f0-9]{40}$/u.test(source.sourceCommit) || !/^[a-f0-9]{40}$/u.test(source.sourceBlob) || source.repositoryUrl !== `https://github.com/130U/${slug}` || !source.sourceUrl.startsWith(`${source.repositoryUrl}/blob/${source.sourceCommit}/`)) {
     throw new Error(`Incomplete selected research source: ${slug}.`);
   }
-  return { ...source, path: `/education/${slug}/`, blocks: parseResearchMarkdown(source.markdown) };
+  return { ...source, path: `/education/${slug}/`, blocks: parseResearchMarkdown(source.markdown, { joinSoftLines: true }) };
 }
 
 export const selectedResearchProjects = [
