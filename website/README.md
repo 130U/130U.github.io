@@ -7,7 +7,7 @@ Education: nineteen content routes, plus the architecture viewer for twenty navi
 routes, excluding 404. Node.js 24 matches the deployment runtime.
 
 The design follows Cognition's editorial grid, warm paper color, and fine rules while
-retaining self-hosted Inter. Home opens directly with the profile. Body text is 17px,
+retaining self-hosted Inter. Home opens with the interactive name entrance, followed by the profile. Body text is 17px,
 H3 headings are 18px, and mathematical expressions use a relative 1.15em scale.
 
 ```sh
@@ -32,7 +32,7 @@ checks visible text and metadata. `npm run preview:static` serves `out/` on
 
 `npm run typecheck` validates TypeScript and `npm audit --audit-level=low` checks
 dependency advisories. Browser interaction in the main site is limited to the
-navigation menu and legal-paper contents and note previews. The original article
+interactive name entrance, navigation menu, and legal-paper contents and note previews. The original article
 links and site navigation also work without JavaScript.
 
 Selected Research uses compact linked titles and separate GitHub links on Education.

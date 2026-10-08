@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { DitheredEntrance } from "./components/dithered-entrance/DitheredEntrance";
 import { SiteShell } from "./components/SiteShell";
 import {
   createPageMetadata,
@@ -21,6 +22,7 @@ export default function Home() {
       <a className="skip-link" href="#home-profile">
         Skip to main content
       </a>
+      <DitheredEntrance />
       <SiteShell
         active="home"
         frameClassName={styles.homeFrame}

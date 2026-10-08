@@ -63,7 +63,7 @@ there is no request-time backend, database, authentication, form submission, or 
 
 - `app/components/SiteShell.tsx` owns the shared reading frame.
 - `app/components/SiteNavigation.tsx` owns the mobile menu and focus handling.
-- `app/page.tsx` presents the Home profile directly, without an animated entrance.
+- `app/page.tsx` retains the interactive Canvas2D name entrance before the Home profile; `app/components/dithered-entrance/` owns its pointer, keyboard, fallback, and reduced-motion behavior.
 - `app/components/research/` owns the shared research article and mathematical presentation.
 - `app/components/InlineText.tsx` renders prose emphasis and citation links.
 - `app/globals.css` and `app/home.module.css` implement the [design system](design.md).

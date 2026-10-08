@@ -22,7 +22,7 @@ generates nineteen content pages. The build includes
 this viewer at `/architecture/` for twenty navigable routes, excluding 404, and GitHub Actions publishes `website/out/` to
 GitHub Pages on the custom domain.
 
-Home opens directly with the profile, without a Canvas2D entrance. The navigation
+Home retains its interactive Canvas2D name entrance before the profile. The navigation
 menu and legal-paper contents and note previews run in the browser. The website uses no request-time API, database,
 authentication, or analytics. The [maintenance guide](../docs/maintenance.md)
 documents content ownership, output contracts, security, and publishing.

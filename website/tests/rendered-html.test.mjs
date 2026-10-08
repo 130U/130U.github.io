@@ -194,10 +194,12 @@ test("every route keeps canonical metadata, CSP, and the same navigation", async
   }
 });
 
-test("Home presents the profile directly without an animated entrance", async () => {
+test("Home retains its interactive name entrance before the complete profile", async () => {
   const home = await routeHtml("/");
-  assert.equal(openingTags(home, "canvas").length, 0);
-  assert.doesNotMatch(home, /data-state="loading"/u);
+  assert.equal(openingTags(home, "canvas").length, 1);
+  assert.match(home, /data-state="loading"/u);
+  assert.ok(home.indexOf("<canvas") < home.indexOf('id="home-profile"'));
+  assert.match(home, /href="#home-profile"[^>]*>Scroll<\/a>/u);
   assert.match(home, /<h1[^>]*>Theodore Ouyang<\/h1>/u);
   assert.match(home, /id="home-profile"/u);
   for (const index of ["01", "02", "03"]) {
@@ -513,7 +515,7 @@ test("the production design contract is restrained and dependency-light", async 
   for (const token of ["--page: #f7f6f5", "--ink: #0b0b0b", "--muted: #70706c", "--accent: #2200ff", "repeat(3, minmax(calc(var(--rail-min-width) / 3), 1fr)) repeat(12, minmax(0, 1fr))"]) assert.ok(globals.includes(token));
   assert.doesNotMatch(globals, /box-shadow|backdrop-filter/u);
   assert.doesNotMatch(home, /box-shadow|backdrop-filter|linear-gradient/u);
-  assert.doesNotMatch(homePage, /DitheredEntrance/u);
+  assert.match(homePage, /<DitheredEntrance \/>/u);
   assert.match(globals, /@media \(pointer:\s*coarse\)[\s\S]*?\.primary-nav a,[\s\S]*?\.entry-website-link[\s\S]*?min-height:\s*44px/u);
   assert.match(home, /@media \(pointer:\s*coarse\)[\s\S]*?\.contactStrip a[\s\S]*?min-height:\s*44px/u);
   assert.match(globals, /width:\s*min\(100%,\s*1440px\)/u);

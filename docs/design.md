@@ -8,9 +8,11 @@ does not claim to reproduce Cognition's current font files or its complete inter
 
 ## Identity
 
-The compact LO mark appears in the navigation and browser icons. Home opens directly
-with the name, profile, and contact information; it has no particle entrance or
-full-screen animated gate. The mark's editable master is
+The compact LO mark appears in the navigation and browser icons. Home opens with
+the interactive full-screen THEODORE OUYANG particle wordmark, followed by the
+profile and contact information. This signature entrance is an intentional part
+of the owner's identity; preserve its pointer and keyboard interaction, scroll
+link, static fallback, and reduced-motion behavior. The mark's editable master is
 `website/source-assets/brand/lo-mark.svg`.
 
 ## Color and type
@@ -96,10 +98,19 @@ reading size. Subsection headings use the shared 18px size with weight 600. Inli
 and standalone formulas use a relative 1.15em scale. Subscripts,
 superscripts, fractions, accents, and equation labels retain their mathematical
 hierarchy. Multiline equations have explicit row spacing and generous surrounding
-space. Equation blocks use symmetric 2rem margins and 0.5rem vertical padding.
+space. Equation blocks use symmetric 2.25rem margins and 0.75rem vertical padding.
 Wide equations scroll locally at their natural size. Displayed equations omit
 sentence-ending punctuation while original TeX annotations preserve the authored
 source. Mathematical SVG glyphs are artwork rather than an additional prose font.
+
+Research tables preserve normal word boundaries and a minimum useful column width.
+Only tables wider than the reading column scroll horizontally; their formulas move
+with the table instead of creating nested scrolling areas. Table and equation
+regions retain native touch, trackpad, scrollbar, and keyboard navigation. Article
+paragraphs have 1.5rem separation. New main chapters begin after 5rem of space, a
+fine rule, and 2rem of inset; phone spacing is 4rem and 1.5rem. Subsections use
+3rem of separation. These boundaries distinguish argument levels without changing
+the site's fonts or type sizes.
 
 Small indices and metadata labels use `--type-label`. Navigation, the wordmark name,
 the mobile menu, and return links share `--type-interface` at every breakpoint.
@@ -146,7 +157,7 @@ roughly 64–72 characters where the layout permits.
 
 ## Interaction
 
-Home presents its profile immediately, without a Canvas2D entrance. Routine links
+Home retains its Canvas2D name entrance and direct scroll link to the profile. Routine links
 use color and underline feedback rather than moving, scaling, or animated arrows.
 Anchor navigation uses native scrolling. The mobile menu retains a short opening
 transition, with reduced-motion support.
@@ -225,7 +236,8 @@ the static export; article pages publish the text and its citation structure.
 Use shared tokens in `website/app/globals.css`, focused CSS Modules for local surfaces,
 and semantic HTML for new content. Match the existing type, reading measure, and
 spacing before adding a new component pattern. Keep interactions focused on navigation
-and reading; do not reintroduce decorative entrances or particle effects.
+and reading while preserving the signature interactive name entrance. Visual
+identity may be expressive; biographical and research claims remain measured.
 
 Review widths from 320 through 2560 pixels, including both sides of the 768, 1024,
 and 1280px breakpoints, iPad portrait and landscape sizes, keyboard use, and
