@@ -1,8 +1,8 @@
 import Link from "next/link";
 import { Fragment, type ReactNode } from "react";
 import { SiteShell } from "../../components/SiteShell";
+import { ArticleReadingLayout } from "../../components/article/ArticleReadingLayout";
 import { LEGAL_DOMAIN_PATH, type LegalPaper, type PaperRun } from "../../lib/content/legal-papers";
-import { LegalPaperContents } from "./LegalPaperContents";
 import { LegalPaperReader } from "./LegalPaperReader";
 import styles from "./LegalPaperPage.module.css";
 
@@ -79,30 +79,34 @@ export function LegalPaperPage({ paper }: { paper: LegalPaper }) {
             </div>
           </header>
 
-          <div className={styles.readingLayout}>
-            <LegalPaperContents headings={headings.map(({ id, text, level }) => ({ id: id!, text, level }))} />
-            <div className={styles.readingColumn}>
-              <section className={styles.abstract} aria-labelledby="abstract-heading">
+          <ArticleReadingLayout
+            items={[
+              { id: "abstract-heading", text: "Abstract" },
+              ...headings.map(({ id, text, level }) => ({ id: id!, text, level })),
+              { id: "footnotes", text: "Footnotes" },
+            ]}
+            overview={
+              <section aria-labelledby="abstract-heading">
                 <h2 id="abstract-heading" tabIndex={-1}>Abstract</h2>
                 {paper.abstract.map((paragraph, index) => <p key={index}><RunText runs={paragraph.runs} prefix={`abstract-${index}`} /></p>)}
               </section>
-
-              <div className={styles.body}>
-                {paper.blocks.map((block, index) => {
-                  const content = <RunText runs={block.runs} prefix={`body-${index}`} />;
-                  if (block.type !== "heading") return <p data-paper-block={index} key={index}>{content}</p>;
-                  const Heading = (block.level ?? 1) > 1 ? "h3" : "h2";
-                  return <Heading id={block.id} tabIndex={-1} data-paper-block={index} key={index}>{content}</Heading>;
-                })}
-              </div>
-
-              <section className={styles.footnotes} id="footnotes" tabIndex={-1} role="doc-endnotes" aria-labelledby="footnotes-heading">
-                <h2 id="footnotes-heading">Footnotes</h2>
-                {acknowledgment && <div className={styles.authorNote} id="fn-author" tabIndex={-1}><span className={styles.noteNumber} aria-hidden="true">*</span><div><p><RunText runs={acknowledgment.runs} prefix="author-note" /></p><a href="#fnref-author" role="doc-backlink" aria-label="Return to author credit">Return to author</a></div></div>}
-                <ol>{paper.footnotes.map((note) => <li id={`fn-${note.number}`} tabIndex={-1} key={note.number}><span className={styles.noteNumber} aria-hidden="true">{note.number}</span><div><p><RunText runs={note.runs} prefix={`note-${note.number}`} /></p><Backlinks number={note.number} /></div></li>)}</ol>
-              </section>
+            }
+          >
+            <div className={styles.body}>
+              {paper.blocks.map((block, index) => {
+                const content = <RunText runs={block.runs} prefix={`body-${index}`} />;
+                if (block.type !== "heading") return <p data-paper-block={index} key={index}>{content}</p>;
+                const Heading = (block.level ?? 1) > 1 ? "h3" : "h2";
+                return <Heading id={block.id} tabIndex={-1} data-paper-block={index} key={index}>{content}</Heading>;
+              })}
             </div>
-          </div>
+
+            <section className={styles.footnotes} id="footnotes" tabIndex={-1} role="doc-endnotes" aria-labelledby="footnotes-heading">
+              <h2 id="footnotes-heading">Footnotes</h2>
+              {acknowledgment && <div className={styles.authorNote} id="fn-author" tabIndex={-1}><span className={styles.noteNumber} aria-hidden="true">*</span><div><p><RunText runs={acknowledgment.runs} prefix="author-note" /></p><a href="#fnref-author" role="doc-backlink" aria-label="Return to author credit">Return to author</a></div></div>}
+              <ol>{paper.footnotes.map((note) => <li id={`fn-${note.number}`} tabIndex={-1} key={note.number}><span className={styles.noteNumber} aria-hidden="true">{note.number}</span><div><p><RunText runs={note.runs} prefix={`note-${note.number}`} /></p><Backlinks number={note.number} /></div></li>)}</ol>
+            </section>
+          </ArticleReadingLayout>
 
           <footer className={styles.paperFooter}><Link className="back-link" href={`${LEGAL_DOMAIN_PATH}#${paper.slug}`}><span aria-hidden="true">←</span> Legal Research and Policy Analysis</Link><a href="#paper-title">Back to top</a></footer>
         </LegalPaperReader>

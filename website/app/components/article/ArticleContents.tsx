@@ -1,11 +1,11 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import styles from "./LegalPaperPage.module.css";
+import styles from "../../past-experience/components/LegalPaperPage.module.css";
 
-type ContentsItem = { id: string; text: string; level?: number };
+export type ArticleContentsItem = { id: string; text: string; level?: number };
 
-export function LegalPaperContents({ headings }: { headings: ContentsItem[] }) {
+export function ArticleContents({ items }: { items: ArticleContentsItem[] }) {
   const sidebar = useRef<HTMLElement>(null);
   const details = useRef<HTMLDetailsElement>(null);
   const [active, setActive] = useState<string | null>(null);
@@ -13,12 +13,11 @@ export function LegalPaperContents({ headings }: { headings: ContentsItem[] }) {
   useEffect(() => {
     const desktop = window.matchMedia("(min-width: 1200px)");
     const layout = sidebar.current?.parentElement;
-    const ids = ["abstract-heading", ...headings.map(({ id }) => id), "footnotes"];
-    const targets = ids.map((id) => document.getElementById(id)).filter((target): target is HTMLElement => Boolean(target));
+    const targets = items.map(({ id }) => document.getElementById(id)).filter((target): target is HTMLElement => Boolean(target));
     let frame = 0;
     const update = () => {
       frame = 0;
-      let current = targets[0]?.id ?? "abstract-heading";
+      let current = targets[0]?.id ?? null;
       const scrollMargin = targets[0] ? Number.parseFloat(window.getComputedStyle(targets[0]).scrollMarginTop) || 0 : 0;
       const scrollPadding = Number.parseFloat(window.getComputedStyle(document.documentElement).scrollPaddingTop) || 0;
       const threshold = scrollMargin + scrollPadding + 1;
@@ -50,7 +49,7 @@ export function LegalPaperContents({ headings }: { headings: ContentsItem[] }) {
       window.removeEventListener("resize", resize);
       cancelAnimationFrame(frame);
     };
-  }, [headings]);
+  }, [items]);
 
   useEffect(() => {
     const container = sidebar.current;
@@ -63,7 +62,6 @@ export function LegalPaperContents({ headings }: { headings: ContentsItem[] }) {
     else if (linkBounds.bottom > bounds.bottom) container.scrollTop += linkBounds.bottom - bounds.bottom;
   }, [active]);
 
-  const items = [{ id: "abstract-heading", text: "Abstract" }, ...headings, { id: "footnotes", text: "Footnotes" }];
   return (
     <aside className={styles.contents} ref={sidebar}>
       <details ref={details} open>

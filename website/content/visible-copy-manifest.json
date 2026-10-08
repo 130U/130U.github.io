@@ -53,20 +53,20 @@
       }
     },
     "/education/certified-valuation-arithmetic-asian-options/": {
-      "textSha256": "75100510f07ed9fb6ca0659bb68c17fcb33ab81e969d80ab3763f8f9c0926d19",
-      "characterCount": 44607,
-      "wordCount": 6318,
+      "textSha256": "f257911fe607b2651489847e636d7b8b14a26885802e0609d873daf9cc48efc5",
+      "characterCount": 45808,
+      "wordCount": 6501,
       "preview": "Skip to main content Theodore Ouyang Home Education Past Experience Current Chapter Selected Research Certified Valuation of Arithmetic Asian Options Common Gau",
       "altTexts": [],
       "ariaLabels": [
         "Theodore Ouyang home",
         "Primary navigation",
-        "Table of contents",
         "Scrollable mathematical expression",
         "Scrollable mathematical expression",
         "Mathematical equation",
         "Mathematical equation",
         "Scrollable mathematical expression",
+        "Article contents",
         "Mathematical equation",
         "Mathematical equation",
         "Research data table",
@@ -239,15 +239,15 @@
       "formulaCount": 349
     },
     "/education/certified-rough-heston-valuation/": {
-      "textSha256": "50dce0ada20df0d77c55b5eb31a6b24fe9d2ba1a4a9d532b8cb1532a5f225842",
-      "characterCount": 56366,
-      "wordCount": 7974,
+      "textSha256": "23b2eb89b4d6b9bc53a7fa7f2c9c4f5b0d27cb1792af37fe342cf26670f37230",
+      "characterCount": 56924,
+      "wordCount": 8057,
       "preview": "Skip to main content Theodore Ouyang Home Education Past Experience Current Chapter Selected Research Certified Joint Pricing Errors in Rough Heston GitHub Full",
       "altTexts": [],
       "ariaLabels": [
         "Theodore Ouyang home",
         "Primary navigation",
-        "Table of contents",
+        "Article contents",
         "Mathematical equation",
         "Research data table",
         "Mathematical equation",
@@ -440,14 +440,15 @@
       }
     },
     "/past-experience/artificial-intelligence/statistical-inference-and-resource-allocation-in-expert-data-production/": {
-      "textSha256": "d7eb0cb53a5e3c98bde3ae792416cddc100d627baa41d1e42b690b915cda09bf",
-      "characterCount": 17383,
-      "wordCount": 2473,
+      "textSha256": "d33d93ee8588e20ccb2cef7a6f1fb691af4bd28f2f598e2563b71a6cba21e021",
+      "characterCount": 17806,
+      "wordCount": 2533,
       "preview": "Skip to main content Theodore Ouyang Home Education Past Experience Current Chapter AI Research and Engineering Statistical inference and resource allocation in",
       "altTexts": [],
       "ariaLabels": [
         "Theodore Ouyang home",
         "Primary navigation",
+        "Article contents",
         "Scrollable mathematical expression",
         "Mathematical equation",
         "Mathematical equation",
@@ -492,14 +493,15 @@
       "formulaCount": 79
     },
     "/past-experience/artificial-intelligence/task-validity-in-financial-synthetic-data/": {
-      "textSha256": "8720c0e5cbd2b2dec04dfd268db72e5c09545ea6f0185c4efc77f5fb7ead7693",
-      "characterCount": 16152,
-      "wordCount": 2293,
+      "textSha256": "8ec2ee3db51a857fdfc95deac2b6fabae3a3d53b6d985112d45d21e29d8f868f",
+      "characterCount": 16655,
+      "wordCount": 2362,
       "preview": "Skip to main content Theodore Ouyang Home Education Past Experience Current Chapter AI Research and Engineering Task validity in financial synthetic data Projec",
       "altTexts": [],
       "ariaLabels": [
         "Theodore Ouyang home",
         "Primary navigation",
+        "Article contents",
         "Scrollable mathematical expression",
         "Scrollable mathematical expression",
         "Mathematical equation",
@@ -536,14 +538,15 @@
       "formulaCount": 61
     },
     "/past-experience/artificial-intelligence/verification-and-supervision-in-scientific-reasoning-tasks/": {
-      "textSha256": "17882b758788f4443f8be8ded63e296c85b93fd3542c96f5aad0606c74918a60",
-      "characterCount": 19309,
-      "wordCount": 2757,
+      "textSha256": "7693ae43893be30afe6e1a99cc113fad91b196603c441a8a19d410dbd29ed1ca",
+      "characterCount": 19848,
+      "wordCount": 2831,
       "preview": "Skip to main content Theodore Ouyang Home Education Past Experience Current Chapter AI Research and Engineering Verification and supervision in scientific reaso",
       "altTexts": [],
       "ariaLabels": [
         "Theodore Ouyang home",
         "Primary navigation",
+        "Article contents",
         "Scrollable mathematical expression",
         "Scrollable mathematical expression",
         "Scrollable mathematical expression",
@@ -575,14 +578,15 @@
       "formulaCount": 58
     },
     "/past-experience/artificial-intelligence/evidence-uncertainty-and-decision-guarantees-in-investment-research/": {
-      "textSha256": "4ab7756f41074e40769a0a8df4eb04db26081af6eec99af7487d7043f1fe5f19",
-      "characterCount": 13459,
-      "wordCount": 1957,
+      "textSha256": "8cb227e1f599343f20ddade3aaf7a9d33f1bda437b0ea7d42d9c35e62c7092b5",
+      "characterCount": 13821,
+      "wordCount": 2003,
       "preview": "Skip to main content Theodore Ouyang Home Education Past Experience Current Chapter AI Research and Engineering Evidence uncertainty and decision guarantees in ",
       "altTexts": [],
       "ariaLabels": [
         "Theodore Ouyang home",
         "Primary navigation",
+        "Article contents",
         "Scrollable mathematical expression",
         "Mathematical equation",
         "Scrollable mathematical expression",
@@ -719,7 +723,7 @@
       }
     },
     "/past-experience/legal-research-and-policy-analysis/autonomous-authority-in-space/": {
-      "textSha256": "733f04fac166af07a4c2949fef18c247b76ca793280ec32ae9d1cf21bcb4f850",
+      "textSha256": "68d10b0cd4e6f01f63cc1cc20926c1972aa2f849d7faccf928a9956d41adf679",
       "characterCount": 64197,
       "wordCount": 9031,
       "preview": "Skip to main content Theodore Ouyang Home Education Past Experience Current Chapter Legal Research and Policy Analysis Research paper Autonomous Authority in Sp",
@@ -803,7 +807,7 @@
       }
     },
     "/past-experience/legal-research-and-policy-analysis/small-states-and-strategic-space-dependence/": {
-      "textSha256": "7d39e6c3c533bf1f3a42831674dd2fd006295e6ca2db815af2182d146d8a5613",
+      "textSha256": "3f862f8195677bde0f4a2f6cc356497d359af23fdad2cc0999dc4c5c1c948c9d",
       "characterCount": 48194,
       "wordCount": 6623,
       "preview": "Skip to main content Theodore Ouyang Home Education Past Experience Current Chapter Legal Research and Policy Analysis Research paper Small States and the Gover",
@@ -891,7 +895,7 @@
       }
     },
     "/past-experience/legal-research-and-policy-analysis/solar-geoengineering-comparison-and-continuity/": {
-      "textSha256": "cdfffcae610fc689942e6811d74e364feb5fce86f1a95149607ed3c9918015bb",
+      "textSha256": "74eecee548ddba373a20b3344236d4d6f93d0a97bbf97f7da799894071208255",
       "characterCount": 45913,
       "wordCount": 6425,
       "preview": "Skip to main content Theodore Ouyang Home Education Past Experience Current Chapter Legal Research and Policy Analysis Research paper Who May Choose the Lesser ",
@@ -975,7 +979,7 @@
       }
     },
     "/past-experience/legal-research-and-policy-analysis/mangrove-restoration-and-compensatory-mitigation/": {
-      "textSha256": "cd4519684325f0ce6c4a47ceed069714fb4d600f1192a9481d109c8927fc5553",
+      "textSha256": "e587f2db1ac5e90b323d155d7ff08abdefde8873c2921344245bae3cbe841ea1",
       "characterCount": 60185,
       "wordCount": 8436,
       "preview": "Skip to main content Theodore Ouyang Home Education Past Experience Current Chapter Legal Research and Policy Analysis Research paper Mangrove Restoration and t",
