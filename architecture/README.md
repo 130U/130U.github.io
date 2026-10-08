@@ -14,18 +14,28 @@ tracing, and image export. A downloaded `index.html` also works offline.
 | `LICENSE` | MIT license for the Archify viewer |
 
 The website contains four main pages, five experience domains, four legal
-papers, four AI research project pages, and one Selected Research article linked
+papers, four AI research project pages, and two Selected Research papers linked
 from Education. `website/app/lib/content/` defines identity, routes, content loaders,
 and research Markdown and math rendering; `website/content/` contains the resume,
 research sources, structured manuscripts, and integrity contracts. Next.js
-generates eighteen static website pages. The build includes
-this viewer at `/architecture/`, and GitHub Actions publishes `website/out/` to
+generates nineteen content pages. The build includes
+this viewer at `/architecture/` for twenty navigable routes, excluding 404, and GitHub Actions publishes `website/out/` to
 GitHub Pages on the custom domain.
 
-The navigation menu, Home Canvas2D wordmark, and legal-paper contents and note
-previews run in the browser. The website uses no request-time API, database,
+Home opens directly with the profile, without a Canvas2D entrance. The navigation
+menu and legal-paper contents and note previews run in the browser. The website uses no request-time API, database,
 authentication, or analytics. The [maintenance guide](../docs/maintenance.md)
 documents content ownership, output contracts, security, and publishing.
+
+Education lists the two papers as compact linked titles with GitHub links. The
+on-site articles include their abstracts, core chapters (Asian options 1–10; Rough
+Heston 1–8), and references; appendices are linked on GitHub. Each source JSON records
+its exact upstream commit, blob, and manuscript URL.
+
+The main website takes its grid, warm paper color, and fine rules from Cognition as
+a design reference, while retaining self-hosted Inter. Body text shares a 17px scale,
+H3 headings use 18px, and formulas use 1.15em. The architecture viewer retains its
+independent diagram controls and geometry while sharing the site's HTML type roles.
 
 Update `site.json` from the current source and `.github/workflows/pages.yml`, then
 validate and generate it with the installed Archify skill:

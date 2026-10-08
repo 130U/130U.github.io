@@ -11,6 +11,7 @@ const ROUTES = [
   "/",
   "/education/",
   "/education/certified-valuation-arithmetic-asian-options/",
+  "/education/certified-rough-heston-valuation/",
   "/past-experience/",
   "/past-experience/artificial-intelligence/",
   "/past-experience/artificial-intelligence/statistical-inference-and-resource-allocation-in-expert-data-production/",

@@ -1,11 +1,92 @@
+.header {
+  margin-bottom: 2rem;
+}
+
+.header :global(.back-link) {
+  margin-bottom: 2rem;
+}
+
+.frontMatter {
+  margin-top: 1.5rem;
+  font-size: var(--type-reading);
+  line-height: var(--reading-leading);
+}
+
+.frontMatter p {
+  margin: 0;
+}
+
+.frontMatter p + p {
+  margin-top: 0.75rem;
+}
+
 .body {
   max-width: var(--reading-measure);
-  font-size: var(--type-math);
+  font-size: var(--type-reading);
   line-height: var(--reading-leading);
 }
 
 .body h3 {
-  font-size: var(--type-math);
+  font-size: var(--type-subheading);
+}
+
+.sourceLinks {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem 1.5rem;
+  margin: 1.5rem 0 0;
+  color: var(--supporting-ink);
+  font-size: var(--type-interface);
+  line-height: var(--interface-leading);
+}
+
+.sourceLinks a {
+  display: inline-flex;
+  min-height: 44px;
+  align-items: center;
+}
+
+.contents {
+  padding: 1.5rem 0;
+  margin-block: 2rem 3rem;
+  border-top: 1px solid var(--rule-strong);
+  border-bottom: 1px solid var(--rule);
+  font-size: var(--type-interface);
+  line-height: var(--interface-leading);
+}
+
+.contents summary {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  min-height: 44px;
+  font-weight: 600;
+  cursor: pointer;
+  list-style: none;
+}
+
+.contents summary::-webkit-details-marker { display: none; }
+.contents summary::after { content: "+"; font-weight: 400; }
+.contents details[open] summary::after { content: "−"; }
+.contents summary:focus-visible { outline: 2px solid var(--accent); outline-offset: 4px; }
+.contents summary:hover { color: var(--accent); }
+
+.contents ol {
+  display: grid;
+  gap: 0.75rem;
+  padding: 0;
+  margin: 1rem 0 0;
+  list-style: none;
+}
+
+.body code {
+  font-size: 0.9em;
+  overflow-wrap: anywhere;
+}
+
+.tableRegion:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
 }
 
 .tableRegion {

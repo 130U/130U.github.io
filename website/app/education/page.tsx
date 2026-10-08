@@ -2,11 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { SiteShell } from "../components/SiteShell";
 import { createPageMetadata } from "../lib/content/site";
-import {
-  SELECTED_RESEARCH_PATH,
-  SELECTED_RESEARCH_SUMMARY,
-  SELECTED_RESEARCH_TITLE,
-} from "../lib/content/selected-research";
+import { selectedResearchProjects } from "../lib/content/selected-research";
 import styles from "./EducationResearch.module.css";
 
 const courseworkGroups = [
@@ -144,40 +140,20 @@ export default function EducationPage() {
         <div className="section-heading single-section-heading">
           <h2 id="research-heading">Selected Research</h2>
         </div>
-        <article
-          className={styles.entry}
-          id="certified-valuation-arithmetic-asian-options"
-          aria-labelledby="valuation-research-title"
-        >
-          <h3 className="entry-project" id="valuation-research-title">
-            {SELECTED_RESEARCH_TITLE}
-          </h3>
-          <p className="entry-project-context">
-            {SELECTED_RESEARCH_SUMMARY}
-          </p>
-          <Link
-            className="entry-paper-link"
-            href={SELECTED_RESEARCH_PATH}
-            aria-label={`Read more about ${SELECTED_RESEARCH_TITLE}`}
-          >
-            Read more
-            <svg
-              className="entry-paper-arrow"
-              viewBox="0 0 24 24"
-              fill="none"
-              aria-hidden="true"
-              focusable="false"
-            >
-              <path
-                d="m9 5 7 7-7 7"
-                stroke="currentColor"
-                strokeWidth="1.75"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              />
-            </svg>
-          </Link>
-        </article>
+        <div className={styles.list}>
+          {selectedResearchProjects.map((project) => (
+            <article className={styles.entry} key={project.slug} id={project.slug}>
+              <h3 className={styles.title}>
+                <Link href={project.path}>{project.title}</Link>
+              </h3>
+              <a className={styles.repository} href={project.repositoryUrl}
+                target="_blank" rel="noopener noreferrer"
+                aria-label={`${project.title} on GitHub`}>
+                GitHub <span aria-hidden="true">↗</span>
+              </a>
+            </article>
+          ))}
+        </div>
       </section>
 
       <section className="coursework" aria-labelledby="coursework-heading">

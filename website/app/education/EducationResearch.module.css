@@ -1,5 +1,53 @@
-.entry {
-  --entry-value-offset: 0px;
-
+.list {
   border-top: 1px solid var(--rule-strong);
+}
+
+.entry {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: baseline;
+  gap: 1rem 2rem;
+  padding: 1.75rem 0;
+  border-bottom: 1px solid var(--rule);
+}
+
+.title {
+  margin: 0;
+  font-size: var(--type-subheading);
+  font-weight: 600;
+  line-height: var(--subheading-leading);
+  text-wrap: balance;
+}
+
+.title a {
+  text-decoration: underline;
+  text-decoration-color: var(--link-rule);
+  text-decoration-thickness: 1px;
+  text-underline-offset: var(--link-underline-offset);
+}
+
+.repository {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  color: var(--supporting-ink);
+  font-size: var(--type-interface);
+  line-height: var(--interface-leading);
+  white-space: nowrap;
+  gap: 0.5rem;
+}
+
+.entry a:hover,
+.entry a:focus-visible {
+  color: var(--accent);
+  text-decoration-color: currentColor;
+}
+
+@media (max-width: 540px) {
+  .entry {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 0.25rem;
+    padding: 1.5rem 0;
+  }
+  .repository { justify-self: start; }
 }

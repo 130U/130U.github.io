@@ -2,11 +2,11 @@ import { pastExperience } from "./experience";
 import { coreRoutes } from "./site";
 import { legalPapers, legalPaperPath } from "./legal-papers";
 import { aiResearchProjects, aiResearchProjectPath } from "./ai-projects";
-import { SELECTED_RESEARCH_PATH } from "./selected-research";
+import { selectedResearchProjects } from "./selected-research";
 
 export const publicRoutes = [
   ...coreRoutes,
-  SELECTED_RESEARCH_PATH,
+  ...selectedResearchProjects.map(({ path }) => path),
   ...pastExperience.map(({ path }) => path),
   ...legalPapers.map(({ slug }) => legalPaperPath(slug)),
   ...aiResearchProjects.map(({ slug }) => aiResearchProjectPath(slug)),

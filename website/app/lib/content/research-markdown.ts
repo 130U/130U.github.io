@@ -1,12 +1,15 @@
 export type ResearchInline =
   | { type: "text"; text: string }
   | { type: "math"; tex: string }
+  | { type: "strong" | "emphasis"; inlines: ResearchInline[] }
+  | { type: "code"; text: string }
+  | { type: "link"; href: string; inlines: ResearchInline[] }
   | { type: "line-break" };
 
 export type ResearchCell = { source: string; inlines: ResearchInline[] };
 
 export type ResearchBlock =
-  | { type: "paragraph"; source: string; inlines: ResearchInline[] }
+  | { type: "paragraph"; source: string; inlines: ResearchInline[]; id?: string }
   | { type: "heading"; source: string; level: 2 | 3; id: string; inlines: ResearchInline[] }
   | { type: "equation"; source: string; tex: string }
   | { type: "table"; source: string; headerRow: boolean; rows: ResearchCell[][] };
@@ -18,6 +21,7 @@ export type ResearchArticleContent = {
   sourceEditedAt: string;
   markdown: string;
   blocks: ResearchBlock[];
+  repositoryUrl?: string;
 };
 
 const MATH_PREFIX = "@@RESEARCH-MATH-";
@@ -28,11 +32,11 @@ export function parseResearchMarkdown(markdown: string): ResearchBlock[] {
   const formulas: Array<{ tex: string; display: boolean; source: string }> = [];
   // Protect TeX before parsing inline markup: comparisons can contain < or >,
   // and optimality notation can contain stars that are not Markdown emphasis.
-  const protectedText = markdown.replace(/\$\$([\s\S]*?)\$\$|\$`([^`]*?)`\$/gu, (source, displayTex, inlineTex) => {
+  const protectedText = markdown.replace(/```math\r?\n([\s\S]*?)\r?\n```|\$\$([\s\S]*?)\$\$|\\\[([\s\S]*?)\\\]|\\\(([\s\S]*?)\\\)|\$`([^`]*?)`\$|(?<!\\)\$([^$\r\n]+?)(?<!\\)\$/gu, (source, fencedTex, displayTex, bracketTex, parenTex, inlineTex, dollarTex) => {
     const index = formulas.length;
-    const tex = displayTex ?? inlineTex;
+    const tex = fencedTex ?? displayTex ?? bracketTex ?? parenTex ?? inlineTex ?? dollarTex;
     if (!tex.trim()) throw new Error("Research equations cannot be empty.");
-    formulas.push({ tex, display: displayTex !== undefined, source });
+    formulas.push({ tex, display: fencedTex !== undefined || displayTex !== undefined || bracketTex !== undefined, source });
     return `${MATH_PREFIX}${index}@@`;
   });
   const uses = formulas.map(() => 0);
@@ -50,9 +54,15 @@ export function parseResearchMarkdown(markdown: string): ResearchBlock[] {
   function inlines(source: string): ResearchInline[] {
     const result: ResearchInline[] = [];
     let offset = 0;
-    for (const match of source.matchAll(/<br\s*\/?>|@@RESEARCH-MATH-(\d+)@@/giu)) {
+    for (const match of source.matchAll(/<br\s*\/?>|@@RESEARCH-MATH-(\d+)@@|\*\*([\s\S]+?)\*\*|\*([^*]+)\*|`([^`]+)`|\[([^\]]+)\]\(((?:https?:\/\/|mailto:|#)[^\s)]+)\)/giu)) {
       if (match.index > offset) result.push({ type: "text", text: source.slice(offset, match.index) });
-      if (match[1] === undefined) {
+      if (match[2] !== undefined || match[3] !== undefined) {
+        result.push({ type: match[2] !== undefined ? "strong" : "emphasis", inlines: inlines(match[2] ?? match[3]) });
+      } else if (match[4] !== undefined) {
+        result.push({ type: "code", text: match[4] });
+      } else if (match[5] !== undefined) {
+        result.push({ type: "link", href: match[6], inlines: inlines(match[5]) });
+      } else if (match[1] === undefined) {
         result.push({ type: "line-break" });
       } else {
         const index = Number(match[1]);
@@ -94,10 +104,18 @@ export function parseResearchMarkdown(markdown: string): ResearchBlock[] {
   const blocks: ResearchBlock[] = [];
   const lines = protectedText.split(/\r?\n/u);
   let headingCount = 0;
+  let paragraphId: string | undefined;
   for (let index = 0; index < lines.length; index += 1) {
     const line = lines[index];
     const structuralLine = line.trim();
     if (!structuralLine) continue;
+
+    const anchor = structuralLine.match(/^<a id="([A-Za-z][A-Za-z0-9-]*)"><\/a>$/u);
+    if (anchor) {
+      if (paragraphId) throw new Error("Research anchor lacks its reference paragraph.");
+      paragraphId = anchor[1];
+      continue;
+    }
 
     const display = structuralLine.match(/^@@RESEARCH-MATH-(\d+)@@$/u);
     if (display && formulaAt(Number(display[1])).display) {
@@ -119,6 +137,22 @@ export function parseResearchMarkdown(markdown: string): ResearchBlock[] {
       continue;
     }
 
+    if (structuralLine.startsWith("|")) {
+      const tableLines = [structuralLine];
+      while (index + 1 < lines.length && lines[index + 1].trim().startsWith("|")) {
+        index += 1;
+        tableLines.push(lines[index].trim());
+      }
+      const cells = (row: string) => row.replace(/^\||\|$/gu, "").split("|").map((cell) => cell.trim());
+      if (tableLines.length < 2 || !cells(tableLines[1]).every((cell) => /^:?-+:?$/u.test(cell))) {
+        throw new Error("Research Markdown tables require a header separator.");
+      }
+      const rows = [tableLines[0], ...tableLines.slice(2)].map((row) => cells(row).map((cell) => ({ source: restoreSource(cell), inlines: inlines(cell) })));
+      if (!rows[0].length || rows.some((row) => row.length !== rows[0].length)) throw new Error("Research tables must retain complete rectangular rows.");
+      blocks.push({ type: "table", source: restoreSource(tableLines.join("\n")), headerRow: true, rows });
+      continue;
+    }
+
     const heading = structuralLine.match(/^(#{2,3}) (.+)$/u);
     if (heading) {
       headingCount += 1;
@@ -132,9 +166,10 @@ export function parseResearchMarkdown(markdown: string): ResearchBlock[] {
       continue;
     }
     if (/^#{1,6} /u.test(structuralLine)) throw new Error("Unsupported Research source heading level.");
-    blocks.push({ type: "paragraph", source: restoreSource(line), inlines: inlines(line) });
+    blocks.push({ type: "paragraph", source: restoreSource(line), inlines: inlines(line), ...(paragraphId ? { id: paragraphId } : {}) });
+    paragraphId = undefined;
   }
 
-  if (!blocks.length || uses.some((count) => count !== 1)) throw new Error("Research source blocks lost or duplicated equations.");
+  if (paragraphId || !blocks.length || uses.some((count) => count !== 1)) throw new Error("Research source blocks lost or duplicated equations.");
   return blocks;
 }

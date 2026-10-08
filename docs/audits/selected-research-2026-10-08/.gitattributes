@@ -1,0 +1,2 @@
+# Preserve the byte identity of manuscripts fetched from their GitHub blobs.
+*-source.md text eol=lf

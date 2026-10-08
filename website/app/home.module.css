@@ -4,8 +4,6 @@
 
 .profileSection {
   grid-column: 1 / -1;
-  min-height: 100vh;
-  min-height: 100dvh;
   padding-top: 176px;
 }
 
@@ -25,7 +23,8 @@
 }
 
 .identityCopy {
-  grid-column: 2 / span 7;
+  grid-column: 2 / span 10;
+  max-width: var(--reading-measure);
   min-width: 0;
 }
 
@@ -74,8 +73,8 @@
 }
 
 .biographyCopy {
-  grid-column: 2 / span 7;
-  max-width: 72ch;
+  grid-column: 2 / span 10;
+  max-width: var(--reading-measure);
 }
 
 .biographyCopy p {
@@ -158,7 +157,7 @@
 }
 
 .contactStrip a:active {
-  transform: scale(0.97);
+  color: var(--accent);
 }
 
 @media (hover: hover) and (pointer: fine) {

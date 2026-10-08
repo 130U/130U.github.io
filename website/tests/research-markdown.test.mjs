@@ -30,3 +30,30 @@ test("research parsing rejects incomplete and nonrectangular tables", () => {
     "<table><tr><td>a</td></tr>stray</table>",
   ]) assert.throws(() => parseResearchMarkdown(source), undefined, source);
 });
+
+test("manuscript math delimiters, mathematical table pipes, and rich inline structure survive parsing", () => {
+  const markdown = [
+    "**Lemma $`x`$.** See [reference](#ref-1) and `field.json`.",
+    "",
+    "\\[\\lvert x\\rvert < y\\]",
+    "",
+    "```math", "x=1", "```", "",
+    "| Input | Bound |", "| --- | --- |", "| \\(x\\) | $|x|$ |",
+    "", '<a id="ref-1"></a>', "1. Reference.",
+  ].join("\n");
+  const blocks = parseResearchMarkdown(markdown);
+  assert.deepEqual(blocks[0].inlines[0], { type: "strong", inlines: [{ type: "text", text: "Lemma " }, { type: "math", tex: "x" }, { type: "text", text: "." }] });
+  assert.deepEqual(blocks[0].inlines[2], { type: "link", href: "#ref-1", inlines: [{ type: "text", text: "reference" }] });
+  assert.equal(blocks[1].tex, String.raw`\lvert x\rvert < y`);
+  assert.equal(blocks[2].tex, "x=1");
+  assert.equal(blocks[3].type, "table");
+  assert.equal(blocks[3].rows.length, 2);
+  assert.deepEqual(blocks[3].rows[1][1].inlines, [{ type: "math", tex: "|x|" }]);
+  assert.equal(blocks[4].id, "ref-1");
+});
+
+test("manuscript tables and reference anchors fail closed when incomplete", () => {
+  for (const source of ["| A | B |\n| one | two |", "| A | B |\n| --- | --- |\n| one |", '<a id="ref-1"></a>']) {
+    assert.throws(() => parseResearchMarkdown(source));
+  }
+});
