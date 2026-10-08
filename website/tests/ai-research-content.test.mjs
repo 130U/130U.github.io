@@ -174,7 +174,13 @@ for (const expected of PROJECTS) {
       const original = sourceBlocks[index];
       assert.equal(actual.index, index, "Source blocks must appear exactly once and in order");
       assert.equal(actual.type, original.type);
-      assert.equal(readableHtml(actual.html), readableMarkdown(original.source), `${expected.slug} changed source block ${index}`);
+      const actualText = readableHtml(actual.html);
+      const originalText = readableMarkdown(original.source);
+      assert.equal(
+        original.type === "heading" ? actualText.replace(/^[IVXLCDM]+\. /u, "") : actualText,
+        original.type === "heading" ? originalText.replace(/^\d+\.? /u, "") : originalText,
+        `${expected.slug} changed source block ${index}`,
+      );
       if (original.type === "heading") assert.equal(actual.tag, "h2");
     }
 

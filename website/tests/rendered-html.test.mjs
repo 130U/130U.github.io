@@ -238,7 +238,7 @@ test("Selected Research presents two title links and complete main texts", async
     const article = await routeHtml(`/education/${slug}/`);
     assert.equal(openingTags(article, "h1").length, 1);
     assert.equal(openingTags(article, "table").length, tables);
-    assert.match(article, /aria-label="Table of contents"/u);
+    assert.match(article, /aria-label="Article contents"/u);
     assert.match(article, /This page includes the complete main text and references/u);
     assert.match(article, new RegExp(`href="/education/#${slug}"`, "u"));
     assert.match(article, new RegExp(`href="https://github.com/130U/${slug}">GitHub repository</a>`, "u"));

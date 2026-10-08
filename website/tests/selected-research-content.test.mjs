@@ -71,14 +71,14 @@ for (const expected of PROJECTS) {
     const blocks = parseResearchMarkdown(article.markdown, { joinSoftLines: true });
     const markers = [...html.matchAll(/data-research-block="(\d+)"/gu)].map((match) => Number(match[1]));
     assert.deepEqual(markers, blocks.map((_, index) => index), "Every article block must appear once, in source order.");
-    const contents = html.match(/<nav\b[^>]*aria-label="Table of contents"[^>]*>([\s\S]*?)<\/nav>/u);
+    const contents = html.match(/<nav\b[^>]*aria-label="Article contents"[^>]*>([\s\S]*?)<\/nav>/u);
     assert.ok(contents);
-    assert.match(contents[1], /<details><summary>Contents<\/summary><ol>/u, "Only the navigation is collapsed by default.");
-    assert.doesNotMatch(contents[1], /<details\b[^>]*\bopen\b|data-research-block/u);
+    assert.doesNotMatch(contents[1], /data-research-block/u, "Only navigation, never manuscript content, belongs in the disclosure.");
     const firstHeading = blocks.findIndex((block) => block.type === "heading");
-    assert.ok(contents.index < html.indexOf(`data-research-block="${firstHeading}"`), "Contents must precede the abstract.");
-    if (firstHeading > 0) assert.ok(contents.index > html.indexOf(`data-research-block="${firstHeading - 1}"`), "Manuscript front matter must precede the contents.");
-    for (const heading of blocks.filter((block) => block.type === "heading" && block.level === 2)) {
+    const firstChapter = blocks.findIndex((block, index) => index > firstHeading && block.type === "heading");
+    assert.ok(contents.index > html.indexOf(`data-research-block="${firstChapter - 1}"`), "The complete abstract must precede the contents in reading order.");
+    assert.ok(contents.index < html.indexOf(`data-research-block="${firstChapter}"`), "Contents must precede the first body chapter in reading order.");
+    for (const heading of blocks.filter((block) => block.type === "heading")) {
       assert.ok(html.includes(`href="#${heading.id}"`));
       assert.ok(html.includes(`id="${heading.id}"`));
     }
