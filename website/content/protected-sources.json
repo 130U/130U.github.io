@@ -27,7 +27,7 @@
     "content/selected-research/certified-valuation-arithmetic-asian-options.json": "f2af1f4db3b7999953bcbc502a59c68ac9132c9ac2e728fb19ad7fcf87a67a1d",
     "app/components/InlineText.tsx": "0aef041dcc7f92bb8edd23b09a0f8eaa23ef6c4e15745680b4feaa72cc70dd5e",
     "app/components/research/ResearchArticle.tsx": "ec09affdce9122e34e7a8e2e3ab0356455a81bf01eda99c68f4fa1ac8b169d98",
-    "app/components/research/ResearchMath.tsx": "8fefb7358bbda19a16c0655f1397a36e84397b0ddbb40d1fc62f1f7cac2d558c",
+    "app/components/research/ResearchMath.tsx": "5fec90d5c5e369639750f327c203b47ab92a1c06896d9eb360c69d88c1d6a24c",
     "app/lib/content/research-markdown.ts": "902c2fc65048a58127ff169efe36fe3c27db78f2c9a559d69b1f7b6654d5f16b",
     "app/lib/content/research-math.ts": "0343a075dba996cd6a96d3ab299eb6bf095b1b7a4c662f84b253cd243c4107ff",
     "app/lib/content/metadata-excerpt.ts": "567139663925462cc48584a53dabb91e50e3727acd68afe7ddf61fa2818f0e71",

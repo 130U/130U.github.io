@@ -159,7 +159,7 @@ async function exportedRoutes() {
     .sort();
 }
 
-test("the static export contains eighteen website routes and the architecture viewer", async () => {
+test("the static export contains nineteen website routes and the architecture viewer", async () => {
   assert.deepEqual(await exportedRoutes(), [...ROUTES, "/architecture/"].sort());
   assert.ok(existsSync(path.join(OUT, "404.html")));
 });

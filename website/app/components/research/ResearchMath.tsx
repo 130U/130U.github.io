@@ -12,7 +12,7 @@ export function ResearchMath({ tex, display = false }: { tex: string; display?: 
       aria-label={scrollableInline ? "Scrollable mathematical expression" : undefined}
       style={{
         marginInline: display ? undefined : `${0.125 - RESEARCH_MATH_GUTTER_EM}em`,
-        verticalAlign: display ? undefined : `calc(${-formula.depthEm} * var(--type-math))`,
+        verticalAlign: display ? undefined : `${-formula.depthEm}em`,
       }}
     >
       <span dangerouslySetInnerHTML={{ __html: formula.svg }} />
