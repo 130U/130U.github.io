@@ -1,14 +1,17 @@
 # Design
 
-Theodore Ouyang's site pairs an expressive personal entrance with a precise editorial
-reading frame. The visual language is quiet technical authority: warm paper, black ink,
-clear typography, a monochrome LO mark, and selective blue feedback.
+Theodore Ouyang's site uses a precise editorial reading frame: warm paper, black ink,
+clear typography, a monochrome LO mark, and selective blue feedback. Its grid, paper
+color, restrained rules, and spacing take their reference from [Cognition](https://cognition.com/).
+The site retains its own self-hosted Inter typeface and content hierarchy. The design
+does not claim to reproduce Cognition's current font files or its complete interface.
 
 ## Identity
 
-The compact LO mark appears in the navigation and browser icons. The full name becomes
-a dithered wordmark on Home. Both share a monochrome identity. The mark's editable
-master is `website/source-assets/brand/lo-mark.svg`.
+The compact LO mark appears in the navigation and browser icons. Home opens directly
+with the name, profile, and contact information; it has no particle entrance or
+full-screen animated gate. The mark's editable master is
+`website/source-assets/brand/lo-mark.svg`.
 
 ## Color and type
 
@@ -16,9 +19,8 @@ master is `website/source-assets/brand/lo-mark.svg`.
 | --- | --- |
 | Paper | `#f7f6f5` |
 | Ink | `#0b0b0b` |
-| Dither ink | `#070707` |
 | Supporting text | `#70706c` |
-| Project abstracts | `#5c5c58` |
+| Supporting prose and source links | `#5c5c58` |
 | Text-link underline | `#a6a6a1` |
 | Active state and focus | `#2200ff` |
 | Structural rule | `rgba(0, 0, 0, 0.06)` |
@@ -29,12 +31,13 @@ metadata, and the architecture viewer. Two self-hosted WOFF2 files provide varia
 weights and true italics. `website/public/assets/fonts/inter.css` owns `--font-text`,
 optical sizing, and the font faces. The regular face is preloaded; italic loads when used.
 System sans fallbacks cover unavailable glyphs.
-The LO mark and dithered identity retain their independent artwork.
+The LO mark retains its independent artwork.
 
 Typography follows semantic roles. At any viewport, text with the same role uses
 the same size across every section and page. Weight, color, spacing, and italics
-provide emphasis within a role. AI analysis prose shares the mathematical reading
-size, keeping sentences and embedded expressions at one base scale.
+provide emphasis within a role. Research prose and table cells use the same reading
+size as the biography, experience record, and legal articles. Mathematical expressions
+scale relative to surrounding text without changing the prose size.
 
 | Role | Shared token | Size at the default text setting | Leading |
 | --- | --- | --- | --- |
@@ -43,10 +46,10 @@ size, keeping sentences and embedded expressions at one base scale.
 | Project, degree, course-category heading | `--type-subheading` | 18px, weight 600 | 1.45 |
 | Body, records, introductions, course names | `--type-reading` | 17px | 1.6 |
 | Navigation, menu, wordmark name, return link | `--type-interface` | 14px | 1.4 |
-| Project reading action | `--type-action` | 16px, weight 500 | 1.4 |
-| AI analysis prose and table cells | `--type-math` | 20px | 1.6 |
-| Mathematical expression | `--type-math` | 20px | Intrinsic mathematical geometry |
-| Field label, index, footer, scroll cue | `--type-label` | 12px | 1.4 |
+| Project reading action | `--type-action`, alias of `--type-interface` | 14px, weight 500 | 1.4 |
+| Research prose and table cells | `--type-reading` | 17px | 1.6 |
+| Mathematical expression | `--type-math` | 1.15em of its surrounding text | Intrinsic mathematical geometry |
+| Field label, index, footer | `--type-label` | 12px | 1.4 |
 
 All roles use rem units and scale with the user's text setting. Only the title
 and section roles become smaller below 768px, consistently across the site and
@@ -81,18 +84,16 @@ and bullets stay upright. Preserve the approved resume prose and its emphasis
 through this structural hierarchy.
 
 Project reading actions follow the title and complete introduction, before the
-contribution list. AI analyses and legal papers share a neutral control, 16px Inter at
-weight 500, a 10rem width, and a minimum 2.75rem height. Width stays within the reading
-column when text is enlarged. Horizontal padding narrows with the viewport so
-enlarged labels wrap consistently in a constrained reading field.
-The right chevron indicates an internal reading page;
-the existing labels and descriptive accessible names identify its destination.
-The resting surface uses a quiet gray fill, black text, and a subtle outline.
-Hover and keyboard focus use the blue accent and white text; focus retains the
-shared outline. Press feedback is immediate. Reduced motion removes the color transition.
+contribution list. AI analyses and legal papers share an underlined text link,
+14px Inter at weight 500, and a minimum 2.75rem target height. The link width follows
+its content and remains within the reading column when text is enlarged. The right
+chevron indicates an internal reading page; the label and descriptive accessible name
+identify its destination. Hover and keyboard focus use the blue accent, while focus
+retains the shared outline. There is no capsule background or click-scale effect.
 
-AI article prose, emphasis, citations, table cells, and inline and standalone formulas
-share a 20px base. Subsection headings use this size with weight 600. Subscripts,
+Research article prose, emphasis, citations, and table cells use the shared 17px
+reading size. Subsection headings use the shared 18px size with weight 600. Inline
+and standalone formulas use a relative 1.15em scale. Subscripts,
 superscripts, fractions, accents, and equation labels retain their mathematical
 hierarchy. Multiline equations have explicit row spacing and generous surrounding
 space. Equation blocks use symmetric 2rem margins and 0.5rem vertical padding.
@@ -145,14 +146,10 @@ roughly 64–72 characters where the layout permits.
 
 ## Interaction
 
-The Home wordmark is the primary expressive gesture. Its Canvas2D stage uses a
-bounded viewport measure. Hover repels
-points; press, release, and keyboard activation produce bounded feedback. Up to four
-ripples can coexist. The animation loop stops at rest.
-Reduced motion displays the complete static wordmark. The visible HTML fallback
-supplies the name before the canvas is ready and when JavaScript is unavailable.
-
-Navigation and links use brief color, opacity, rule, or transform feedback.
+Home presents its profile immediately, without a Canvas2D entrance. Routine links
+use color and underline feedback rather than moving, scaling, or animated arrows.
+Anchor navigation uses native scrolling. The mobile menu retains a short opening
+transition, with reduced-motion support.
 Focus outlines remain visible. The mobile menu traps keyboard focus, closes on Escape
 or navigation, and releases the page when the viewport reaches desktop width.
 
@@ -180,11 +177,22 @@ The four primary pages are Home, Education, Past Experience, and Current Chapter
 Five domain pages carry the experience record. Domain `03` is Legal Research and
 Policy Analysis; its four selected papers each open a dedicated article page.
 Domain `01`, AI Research and Engineering, links four project reading pages.
-Education's Selected Research overview uses the same reading and mathematical type
-roles as the AI research articles, with a matching Read more action.
-The website has eighteen public routes, with the architecture viewer as a separate
-technical reference. Keep factual claims, metadata, copy, and content order aligned
-with the integrity manifests.
+Education's Selected Research section presents two compact entries, each with a
+linked article title and a separate GitHub link. It does not repeat the abstracts or
+add a Read more button. Titles use the same 18px subheading role; the GitHub links use
+the 14px interface role. Thin horizontal rules separate entries. The two-column
+title/link layout becomes a single column on narrow screens.
+
+Each research page provides a contents list and the manuscript's abstract, core
+chapters, formulas, and references. The Asian-options paper includes chapters 1–10;
+the Rough Heston paper includes chapters 1–8. Appendices and supporting material are
+linked on GitHub. Each JSON source records the exact source commit, blob, and manuscript
+URL; source links should continue to identify that version. The full manuscript is
+available from the article header, and return links lead to Education's research section.
+
+The website has nineteen content routes. The architecture viewer is one additional
+technical reference route, making twenty navigable routes in total, excluding 404.
+Keep factual claims, metadata, copy, and content order aligned with the integrity manifests.
 
 ### Legal articles
 
@@ -216,8 +224,8 @@ the static export; article pages publish the text and its citation structure.
 
 Use shared tokens in `website/app/globals.css`, focused CSS Modules for local surfaces,
 and semantic HTML for new content. Match the existing type, reading measure, and
-spacing before adding a new component pattern. Keep expressive motion concentrated
-in the opening identity so the rest of the site supports reading.
+spacing before adding a new component pattern. Keep interactions focused on navigation
+and reading; do not reintroduce decorative entrances or particle effects.
 
 Review widths from 320 through 2560 pixels, including both sides of the 768, 1024,
 and 1280px breakpoints, iPad portrait and landscape sizes, keyboard use, and

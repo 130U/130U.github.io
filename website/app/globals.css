@@ -15,8 +15,8 @@
   --type-reading: 1.0625rem;
   --type-label: 0.75rem;
   --type-interface: 0.875rem;
-  --type-action: 1rem;
-  --type-math: 1.25rem;
+  --type-action: var(--type-interface);
+  --type-math: 1.15em;
   --reading-measure: 720px;
   --rail-min-width: calc(5 * var(--type-interface) + 13px + clamp(20px, 2vw, 24px) + 22px + 10px);
   --title-leading: 1.2;
@@ -37,7 +37,7 @@
 html {
   overflow-y: scroll;
   scrollbar-gutter: stable;
-  scroll-behavior: smooth;
+  scroll-behavior: auto;
   scroll-padding-top: 32px;
   -webkit-text-size-adjust: 100%;
 }
@@ -230,7 +230,7 @@ button:focus-visible {
 .primary-nav a:active,
 .back-link:active,
 .entry-website-link:active {
-  transform: scale(0.97);
+  color: var(--accent);
 }
 
 .wordmark-lockup {
@@ -352,7 +352,7 @@ button:focus-visible {
 
 .page-intro {
   max-width: var(--reading-measure);
-  margin: 0 0 104px;
+  margin: 0 0 72px;
 }
 
 .page-intro h1,
@@ -482,11 +482,11 @@ button:focus-visible {
 
 .coursework {
   max-width: var(--reading-measure);
-  margin-top: 144px;
+  margin-top: 104px;
 }
 
 .section-heading {
-  margin-bottom: 44px;
+  margin-bottom: 28px;
 }
 
 .course-grid {
@@ -542,6 +542,7 @@ button:focus-visible {
   display: grid;
   grid-template-columns: repeat(11, minmax(0, 1fr));
   min-height: 84px;
+  padding-block: 20px;
   align-items: center;
   border-bottom: 1px solid var(--rule);
   transition: color 180ms var(--ease-out), border-color 180ms var(--ease-out);
@@ -681,7 +682,7 @@ button:focus-visible {
   padding-left: var(--entry-value-offset);
   color: var(--supporting-ink);
   font-size: var(--type-reading);
-  font-style: italic;
+  font-style: normal;
   font-weight: 400;
   line-height: var(--reading-leading);
   letter-spacing: 0;
@@ -696,8 +697,8 @@ button:focus-visible {
   padding-left: var(--entry-value-offset);
   color: var(--ink);
   font-size: var(--type-reading);
-  font-style: italic;
-  font-weight: 400;
+  font-style: normal;
+  font-weight: 500;
   line-height: var(--subheading-leading);
   text-wrap: balance;
 }
@@ -766,18 +767,19 @@ button:focus-visible {
   display: inline-flex;
   align-items: center;
   min-height: 2.75rem;
-  width: min(10rem, calc(100% - var(--entry-value-offset)));
-  justify-content: space-between;
+  width: fit-content;
+  max-width: calc(100% - var(--entry-value-offset));
+  justify-content: flex-start;
   margin: 1.25rem 0 0 var(--entry-value-offset);
-  padding: 0.5625rem clamp(0.75rem, 3vw, 1.125rem);
-  border: 1px solid var(--rule-strong);
-  border-radius: 999px;
-  background: var(--rule);
+  padding: 0;
   color: var(--ink);
   font-size: var(--type-action);
   font-weight: 500;
   line-height: var(--interface-leading);
-  text-decoration: none;
+  text-decoration: underline;
+  text-decoration-color: var(--link-rule);
+  text-decoration-thickness: 1px;
+  text-underline-offset: var(--link-underline-offset);
   gap: 0.5rem;
   transition: background-color 160ms var(--ease-out), border-color 160ms var(--ease-out), color 160ms var(--ease-out);
 }
@@ -789,23 +791,19 @@ button:focus-visible {
 }
 
 .entry-paper-link:focus-visible {
-  border-color: var(--accent);
-  background: var(--accent);
-  color: #fff;
+  color: var(--accent);
+  text-decoration-color: currentColor;
 }
 
 @media (hover: hover) and (pointer: fine) {
   .entry-paper-link:hover {
-    border-color: var(--accent);
-    background: var(--accent);
-    color: #fff;
+    color: var(--accent);
+    text-decoration-color: currentColor;
   }
 }
 
 .entry-paper-link:active {
-  border-color: var(--accent);
-  background: color-mix(in srgb, var(--accent) 78%, var(--ink));
-  color: #fff;
+  color: var(--accent);
   transition: none;
 }
 
@@ -870,16 +868,15 @@ button:focus-visible {
   }
 
   .domain-directory-link:hover .domain-arrow {
-    transform: translateX(4px);
+    color: var(--accent);
   }
 
   .entry-website-link:hover .entry-website-arrow {
-    transform: translate3d(2px, -2px, 0);
+    color: var(--accent);
   }
 
   .wordmark:hover .wordmark-lockup {
-    opacity: 0.68;
-    transform: translateX(1px);
+    color: var(--accent);
   }
 }
 
@@ -1065,21 +1062,18 @@ button:focus-visible {
     background: var(--page);
     opacity: 0;
     pointer-events: none;
-    transform: translateY(-8px);
     visibility: hidden;
   }
 
   .site-rail[data-menu-interacted="true"] .rail-panel {
     transition:
       opacity 200ms var(--drawer-ease),
-      transform 200ms var(--drawer-ease),
       visibility 0s linear 200ms;
   }
 
   .site-rail[data-menu-open="true"] .rail-panel {
     opacity: 1;
     pointer-events: auto;
-    transform: translateY(0);
     visibility: visible;
     transition-delay: 0s;
   }
@@ -1122,7 +1116,7 @@ button:focus-visible {
   }
 
   .coursework {
-    margin-top: 96px;
+    margin-top: 72px;
   }
 
   .course-grid {

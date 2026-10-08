@@ -129,7 +129,7 @@
       "id": "browser-islands",
       "type": "frontend",
       "label": "Reader Interactions",
-      "sublabel": "Navigation / Canvas / Notes",
+      "sublabel": "Navigation / Contents / Notes",
       "pos": [
         1145,
         535
@@ -234,7 +234,7 @@
       "dot": "cyan",
       "title": "Content first",
       "items": [
-        "4 main pages, 5 domains, 4 legal and 4 AI articles, 1 Selected Research",
+        "4 main pages, 5 domains, 4 legal and 4 AI articles, 2 Selected Research papers",
         "Shared route registry and protected source text"
       ]
     },
@@ -242,7 +242,7 @@
       "dot": "emerald",
       "title": "Static delivery",
       "items": [
-        "18 content pages, 404, and architecture viewer",
+        "19 content pages, 404, and architecture viewer",
         "No runtime API, database, or authentication"
       ]
     },
@@ -250,7 +250,7 @@
       "dot": "violet",
       "title": "Focused interactions",
       "items": [
-        "Navigation, canvas, contents, and footnote previews",
+        "Navigation, contents, and footnote previews",
         "Architecture search, themes, tracing, and export"
       ]
     }

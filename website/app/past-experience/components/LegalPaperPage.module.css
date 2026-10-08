@@ -13,7 +13,7 @@
 }
 
 .header {
-  max-width: 72ch;
+  max-width: var(--reading-measure);
   margin-bottom: 3rem;
 }
 
@@ -30,8 +30,9 @@
 
 .subtitle {
   margin: 1.25rem 0 0;
-  font-size: var(--type-heading);
-  line-height: 1.4;
+  font-size: var(--type-reading);
+  line-height: var(--reading-leading);
+  color: var(--supporting-ink);
   text-wrap: balance;
 }
 
@@ -59,7 +60,7 @@
 
 .readingColumn {
   min-width: 0;
-  max-width: 72ch;
+  max-width: var(--reading-measure);
 }
 
 .abstract {

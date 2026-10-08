@@ -22,7 +22,7 @@
   "dependencies": {
     "@mathjax/mathjax-tex-font": "4.1.3",
     "@mathjax/src": "4.1.3",
-    "next": "16.3.6",
+    "next": "16.3.8",
     "react": "19.2.8",
     "react-dom": "19.2.8"
   },
@@ -31,9 +31,9 @@
     "@types/react": "19.2.14",
     "@types/react-dom": "19.2.3",
     "eslint": "9.39.4",
-    "eslint-config-next": "16.3.6",
+    "eslint-config-next": "16.3.8",
     "fast-glob": "file:./tooling/directory-glob",
-    "sharp": "0.35.4",
+    "sharp": "0.35.5",
     "typescript": "5.9.3"
   },
   "overrides": {
@@ -45,7 +45,8 @@
     "js-yaml": "4.3.2",
     "nanoid": "3.3.18",
     "postcss": "8.5.25",
-    "sharp": "0.35.4"
+    "sharp": "0.35.5",
+    "source-map-js": "1.2.2"
   },
   "type": "module"
 }

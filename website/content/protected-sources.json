@@ -2,7 +2,7 @@
   "version": 1,
   "normalization": "LF",
   "sources": {
-    "app/education/page.tsx": "875f7ddcab8d9e5737ce8a18f0bae9289bf617ec8c0e38923bd55b585185f249",
+    "app/education/page.tsx": "018afa80e36237ef16bc9a48ee778eddd3e94b60ab0e18a3b804e842763168f9",
     "app/now/page.tsx": "fd7d113253d81fdf446c20bdb01c6dc2be6f8dc72d9bd6b83c726638ab4ea73a",
     "app/past-experience/page.tsx": "f3c6126decb358a6a43107f19d75acbdbae4886d83f0139b1ee87b0a73ebe289",
     "app/past-experience/[slug]/page.tsx": "a89b781c0a6a74b9295635d5495c4e2cc2cf2d890cc879578ebfd04a9f6db84b",
@@ -17,19 +17,21 @@
     "content/legal-papers/solar-geoengineering-comparison-and-continuity.json": "f6734b9a29d6ffdcc1c0e612f0ba1917ce9dea2fc9ec5132c81b12fe1e7b54f0",
     "content/legal-papers/mangrove-restoration-and-compensatory-mitigation.json": "be8ad403b6504ad18cac1b6bdf55925214b389ea6f3c0f325f0fac1bea1e9cd9",
     "app/lib/content/ai-projects.ts": "acf07dd865754e90b1b75c89bb65e6f93e26cd41f3f267c2a80a7dad185c9b5f",
-    "app/lib/content/routes.ts": "33f9cb6f15b61e7dcfec62e38175face48e25612e83a0b7d55922ba0f8f752cd",
+    "app/lib/content/routes.ts": "1ca023d4901a2b8ddc849e6ea5e6919d537149bcc1185867152267bc3eadc1e1",
     "content/artificial-intelligence/statistical-inference-and-resource-allocation-in-expert-data-production.json": "16061bba4e18d81cd738ed040d6d54ed309bceb38978633979d54b03fcfe5fd5",
     "content/artificial-intelligence/task-validity-in-financial-synthetic-data.json": "132044a28758f885411b78078600a3a50df5e288a9bbbb948b217ede1df4f4de",
     "content/artificial-intelligence/verification-and-supervision-in-scientific-reasoning-tasks.json": "2c342fb87edcc4618d738233329b2c2926c6baccb1891023437c4587d1d9d560",
     "content/artificial-intelligence/evidence-uncertainty-and-decision-guarantees-in-investment-research.json": "98a9c49dd5bc50f5c24ea94ccf7a38d5f6f93abcc770f9b70049a2c73f520bbc",
-    "app/education/certified-valuation-arithmetic-asian-options/page.tsx": "73b75955c5324231cf1a4c7c2c11c7f0730910cad2b8395a07f6941a4ef5fcc1",
-    "app/lib/content/selected-research.ts": "3043f34e34b7a73608aab9ce96e3fe6b1021ee4a78d4a519a1a12ed09a766e8e",
-    "content/selected-research/certified-valuation-arithmetic-asian-options.json": "82cd7c6aa7a7f6f257a70856eda8ba2de8649ee8f5770d7a79c063f8aaaa01ee",
+    "app/education/certified-valuation-arithmetic-asian-options/page.tsx": "687184285bb136bf0a9f4ab70d85ddc306a827f05f91ecb38853afc877a0587b",
+    "app/lib/content/selected-research.ts": "87be0b41d9e77d2973ee087716ea878f9e9e3022100a8eac4de636da83a35ca6",
+    "content/selected-research/certified-valuation-arithmetic-asian-options.json": "f2af1f4db3b7999953bcbc502a59c68ac9132c9ac2e728fb19ad7fcf87a67a1d",
     "app/components/InlineText.tsx": "0aef041dcc7f92bb8edd23b09a0f8eaa23ef6c4e15745680b4feaa72cc70dd5e",
-    "app/components/research/ResearchArticle.tsx": "93fb7f1deba54ab57fe54c3ba7ba246bf09c0eb7e6f48d73f960cb63b5af2657",
-    "app/components/research/ResearchMath.tsx": "8fefb7358bbda19a16c0655f1397a36e84397b0ddbb40d1fc62f1f7cac2d558c",
-    "app/lib/content/research-markdown.ts": "d6bffe78b0b917b8f973e8e5c87835333f5473d93efb8671d49123f9563b5a10",
+    "app/components/research/ResearchArticle.tsx": "ec09affdce9122e34e7a8e2e3ab0356455a81bf01eda99c68f4fa1ac8b169d98",
+    "app/components/research/ResearchMath.tsx": "5fec90d5c5e369639750f327c203b47ab92a1c06896d9eb360c69d88c1d6a24c",
+    "app/lib/content/research-markdown.ts": "7774b6637384a193b3fcbdc3463e6b1e0e7679d569e1e79a1115c5d84b3435bf",
     "app/lib/content/research-math.ts": "0343a075dba996cd6a96d3ab299eb6bf095b1b7a4c662f84b253cd243c4107ff",
-    "app/lib/content/metadata-excerpt.ts": "567139663925462cc48584a53dabb91e50e3727acd68afe7ddf61fa2818f0e71"
+    "app/lib/content/metadata-excerpt.ts": "567139663925462cc48584a53dabb91e50e3727acd68afe7ddf61fa2818f0e71",
+    "app/education/certified-rough-heston-valuation/page.tsx": "8aa1dd4a30bc0d3eaf7507e0189cc180bfbc023ba004d13255e06c7a83912d08",
+    "content/selected-research/certified-rough-heston-valuation.json": "3e287797b917c49b40c52f7f951559cd5d091523dddfa17e758a7059caa87b6b"
   }
 }

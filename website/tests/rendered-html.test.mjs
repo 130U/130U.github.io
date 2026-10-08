@@ -30,6 +30,7 @@ const ROUTES = [
   "/",
   "/education/",
   "/education/certified-valuation-arithmetic-asian-options/",
+  "/education/certified-rough-heston-valuation/",
   "/now/",
   "/past-experience/",
   "/past-experience/artificial-intelligence/",
@@ -158,7 +159,7 @@ async function exportedRoutes() {
     .sort();
 }
 
-test("the static export contains eighteen website routes and the architecture viewer", async () => {
+test("the static export contains nineteen website routes and the architecture viewer", async () => {
   assert.deepEqual(await exportedRoutes(), [...ROUTES, "/architecture/"].sort());
   assert.ok(existsSync(path.join(OUT, "404.html")));
 });
@@ -193,13 +194,11 @@ test("every route keeps canonical metadata, CSP, and the same navigation", async
   }
 });
 
-test("Home presents the interactive dither identity before the profile", async () => {
+test("Home presents the profile directly without an animated entrance", async () => {
   const home = await routeHtml("/");
-  assert.equal(openingTags(home, "canvas").length, 1);
-  assert.match(home, /data-state="loading"/u);
-  assert.match(home, /data-visible-copy-role="visual-identity"/u);
-  assert.match(home, /<button\b[^>]*type="button"[^>]*>[\s\S]*?<canvas/u);
-  assert.match(home, /THEODORE[\s\S]*?OUYANG/u);
+  assert.equal(openingTags(home, "canvas").length, 0);
+  assert.doesNotMatch(home, /data-state="loading"/u);
+  assert.match(home, /<h1[^>]*>Theodore Ouyang<\/h1>/u);
   assert.match(home, /id="home-profile"/u);
   for (const index of ["01", "02", "03"]) {
     assert.match(home, new RegExp(`aria-hidden="true"[^>]*>${index}<`, "u"));
@@ -224,19 +223,24 @@ test("inner routes present text-focused pages and the Current Chapter introducti
   assert.match(now, /expand human capability/u);
 });
 
-test("Selected Research links Education to its complete academic overview", async () => {
-  const route = "/education/certified-valuation-arithmetic-asian-options/";
+test("Selected Research presents two title links and complete main texts", async () => {
   const education = await routeHtml("/education/");
   assert.ok(education.indexOf("Selected Research") < education.indexOf("Selected Coursework"));
-  assert.match(education, /<a[^>]*class="entry-paper-link"[^>]*href="\/education\/certified-valuation-arithmetic-asian-options\/"[^>]*>Read more/u);
-  const article = await routeHtml(route);
-  assert.equal(openingTags(article, "h1").length, 1);
-  assert.equal(openingTags(article, "table").length, 2);
-  for (const value of ["0.011024692273", "0.010642371599", "6.508371733", "6.518868974", "0.008018821658", "0.012716404217"]) {
-    assert.ok(article.includes(value), `The overview must retain ${value}.`);
+  assert.doesNotMatch(education, /Developed a mathematical framework for certifying|Read more about Certified/u);
+  for (const [slug, title, tables] of [
+    ["certified-valuation-arithmetic-asian-options", "Certified Valuation of Arithmetic Asian Options", 11],
+    ["certified-rough-heston-valuation", "Certified Joint Pricing Errors in Rough Heston", 13],
+  ]) {
+    assert.match(education, new RegExp(`<a[^>]*href="/education/${slug}/"[^>]*>${title}</a>`, "u"));
+    assert.match(education, new RegExp(`href="https://github.com/130U/${slug}"`, "u"));
+    const article = await routeHtml(`/education/${slug}/`);
+    assert.equal(openingTags(article, "h1").length, 1);
+    assert.equal(openingTags(article, "table").length, tables);
+    assert.match(article, /aria-label="Table of contents"/u);
+    assert.match(article, /This page includes the complete main text and references/u);
+    assert.match(article, new RegExp(`href="/education/#${slug}"`, "u"));
+    assert.match(article, new RegExp(`href="https://github.com/130U/${slug}">GitHub repository</a>`, "u"));
   }
-  assert.match(article, /href="\/education\/#certified-valuation-arithmetic-asian-options"/u);
-  assert.match(article, /href="https:\/\/github\.com\/130U\/certified-valuation-arithmetic-asian-options">GitHub repository<\/a>/u);
 });
 
 test("Past Experience presents five domains, 14 entries, and 118 bullets", async () => {
@@ -501,7 +505,7 @@ test("robots and sitemap share the exact route manifest", async () => {
 test("the production design contract is restrained and dependency-light", async () => {
   const globals = await readFile(path.join(ROOT, "app", "globals.css"), "utf8");
   const home = await readFile(path.join(ROOT, "app", "home.module.css"), "utf8");
-  const entrance = await readFile(path.join(ROOT, "app", "components", "dithered-entrance", "DitheredEntrance.module.css"), "utf8");
+  const homePage = await readFile(path.join(ROOT, "app", "page.tsx"), "utf8");
   const navigation = await readFile(path.join(ROOT, "app", "components", "SiteNavigation.tsx"), "utf8");
   const structuralGrid = await readFile(path.join(ROOT, "app", "components", "StructuralGrid.tsx"), "utf8");
   const layout = await readFile(path.join(ROOT, "app", "layout.tsx"), "utf8");
@@ -509,10 +513,7 @@ test("the production design contract is restrained and dependency-light", async 
   for (const token of ["--page: #f7f6f5", "--ink: #0b0b0b", "--muted: #70706c", "--accent: #2200ff", "repeat(3, minmax(calc(var(--rail-min-width) / 3), 1fr)) repeat(12, minmax(0, 1fr))"]) assert.ok(globals.includes(token));
   assert.doesNotMatch(globals, /box-shadow|backdrop-filter/u);
   assert.doesNotMatch(home, /box-shadow|backdrop-filter|linear-gradient/u);
-  assert.match(entrance, /min\(76vw, 72dvh, 720px\)/u);
-  assert.match(entrance, /min\(92vw, 68dvh, 380px\)/u);
-  assert.match(entrance, /aspect-ratio:\s*1/u);
-  assert.match(entrance, /\.scrollCue\s*\{[\s\S]*?color:\s*var\(--muted\)[\s\S]*?font-size:\s*var\(--type-label\)/u);
+  assert.doesNotMatch(homePage, /DitheredEntrance/u);
   assert.match(globals, /@media \(pointer:\s*coarse\)[\s\S]*?\.primary-nav a,[\s\S]*?\.entry-website-link[\s\S]*?min-height:\s*44px/u);
   assert.match(home, /@media \(pointer:\s*coarse\)[\s\S]*?\.contactStrip a[\s\S]*?min-height:\s*44px/u);
   assert.match(globals, /width:\s*min\(100%,\s*1440px\)/u);
@@ -529,8 +530,6 @@ test("the production design contract is restrained and dependency-light", async 
   assert.match(navigation, /matchMedia\("\(min-width: 768px\)"\)[\s\S]*?if \(desktopQuery\.matches\) closeMenu\(false\)/u);
   assert.match(navigation, /desktopQuery\.addEventListener\("change", onViewportChange\)[\s\S]*?desktopQuery\.removeEventListener\("change", onViewportChange\)/u);
   assert.match(globals, /\.site-rail\[data-enhanced="true"\] \.rail-panel\s*\{[^}]*visibility:\s*hidden/u);
-  assert.match(entrance, /\.fallback\s*\{[^}]*opacity:\s*1/u);
-  assert.match(entrance, /\.entrance\[data-state="ready"\] \.fallback\s*\{\s*opacity:\s*0/u);
   assert.match(navigation, /wordmark-lockup[\s\S]*?wordmark-mark[\s\S]*?wordmark-name[\s\S]*?>Theodore Ouyang<\/span>/u);
   assert.match(layout, /assets\/brand\/lo-mark\.svg/u);
   assert.match(globals, /\.entry-metadata\s*\{[\s\S]*?grid-template-columns:\s*1fr/u);

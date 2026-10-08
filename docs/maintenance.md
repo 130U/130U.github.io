@@ -23,7 +23,8 @@ Paths in this table are relative to `website/`.
 | --- | --- | --- |
 | Home | `/` | `app/page.tsx`, `app/home.module.css` |
 | Education | `/education/` | `app/education/page.tsx` |
-| Selected Research | `/education/certified-valuation-arithmetic-asian-options/` | `app/lib/content/selected-research.ts`, `content/selected-research/` |
+| Asian-options research | `/education/certified-valuation-arithmetic-asian-options/` | `app/lib/content/selected-research.ts`, `content/selected-research/certified-valuation-arithmetic-asian-options.json` |
+| Rough Heston research | `/education/certified-rough-heston-valuation/` | `app/lib/content/selected-research.ts`, `content/selected-research/certified-rough-heston-valuation.json` |
 | Past Experience | `/past-experience/` | `app/past-experience/page.tsx` |
 | Experience details | `/past-experience/[slug]/` | `app/lib/content/experience.ts`, `content/past-experience/` |
 | AI research projects | `/past-experience/artificial-intelligence/[paper]/` | `app/lib/content/ai-projects.ts`, `content/artificial-intelligence/` |
@@ -43,10 +44,13 @@ as text. All five domain pages display project introductions in true italics.
 The experience registry validates five domains and their Markdown entries during
 build. `app/lib/content/routes.ts` supplies the website sitemap. The architecture
 viewer is a separate repository reference, linked from the GitHub introduction.
+The registry contains nineteen content routes: four main pages, five experience
+domains, four AI research pages, four legal papers, and two Selected Research pages.
+Assembly adds `/architecture/` for twenty navigable routes, excluding the 404 page.
 
-Biographical, AI research, and legal source files are checked against `content/protected-sources.json`.
+Biographical, AI research, Selected Research, and legal source files are checked against `content/protected-sources.json`.
 `content/visible-copy-manifest.json` independently records text, metadata, alt text,
-and ARIA labels for all eighteen website pages. Copy changes require the owner's explicit
+and ARIA labels for all nineteen content pages. Copy changes require the owner's explicit
 request and an intentional update to these contracts. Presentation-only changes to
 a protected component update its source hash while preserving the approved prose,
 metadata, and formula source contracts. Tests also verify page counts and navigation
@@ -59,7 +63,7 @@ there is no request-time backend, database, authentication, form submission, or 
 
 - `app/components/SiteShell.tsx` owns the shared reading frame.
 - `app/components/SiteNavigation.tsx` owns the mobile menu and focus handling.
-- `app/components/dithered-entrance/` owns the Home Canvas2D wordmark and static fallback.
+- `app/page.tsx` presents the Home profile directly, without an animated entrance.
 - `app/components/research/` owns the shared research article and mathematical presentation.
 - `app/components/InlineText.tsx` renders prose emphasis and citation links.
 - `app/globals.css` and `app/home.module.css` implement the [design system](design.md).
@@ -112,17 +116,18 @@ details, or a download. Each reading page returns to its project anchor in the o
 | Evidence uncertainty and decision guarantees in investment research | [Source](https://app.notion.com/p/3ed867f96db581cfaae7d40b93aaa080?pvs=204) |
 
 `ResearchArticle` renders both AI projects and Selected Research with a focused CSS
-Module that gives prose and table cells the same base size as formulas.
+Module that gives prose and table cells the shared 17px reading size, and H3 headings
+the shared 18px subheading size.
 `ResearchMath` uses `app/lib/content/research-math.ts` to render TeX on the server with the pinned MathJax
 4.1.3 engine and its TeX font package. Visible equations contain complete SVG glyph
-paths, use the shared `--type-math` size and ink color, and load no browser math
+paths, use the shared `--type-math` relative scale of 1.15em and ink color, and load no browser math
 engine or font resources. `ResearchMath.module.css` owns formula spacing and
 scrolling. Display rows omit sentence punctuation and use explicit multiline spacing;
 mathematical terms and equation labels remain intact. Assistive MathML preserves
 semantic formulas and the exact original TeX annotation. Invalid formulas fail the
 build. Tables and wide equations expose focusable scrolling regions.
 
-Tests compare every rendered source block, all 277 original formula annotations,
+AI project tests compare every rendered source block, all 277 original formula annotations,
 five tables, 27 citation links, and 26 second-level headings with the approved
 documents. Update the project registry, independent route expectations, protected
 source hashes, and visible-copy contracts together when synchronizing approved text.
@@ -135,17 +140,31 @@ update only the corresponding contract fields after independent verification.
 
 ### Selected Research
 
-Education presents a research summary and a Read more link before Selected Coursework.
-`app/lib/content/selected-research.ts` owns the summary, title, and route; the article
-source is `content/selected-research/certified-valuation-arithmetic-asian-options.json`.
-Its provenance records the report URL and exact Git commit. The academic overview
-uses the shared `ResearchArticle` and `ResearchMath` components, returns to the
-Education research anchor, and links to the project repository.
+Education presents two compact title-and-GitHub entries before Selected Coursework.
+The title opens the on-site paper; the separate GitHub link opens its repository.
+The list omits abstracts and Read more buttons. `app/lib/content/selected-research.ts`
+loads both structured sources from `content/selected-research/`:
 
-Preserve the distinction between the projected Euler pricing certificate and its
-continuous-model comparison, and retain the stated assumptions for weak expansion
-and posterior quantile results. Approved content changes update the source hash,
-visible-copy contract, and independent output expectations together.
+| Source | On-site manuscript scope |
+| --- | --- |
+| `certified-valuation-arithmetic-asian-options.json` | Abstract, chapters 1–10, references, and an appendix/supporting-material link |
+| `certified-rough-heston-valuation.json` | Abstract, chapters 1–8, references, and an appendix/supporting-material link |
+
+The pages use the shared `ResearchArticle` and `ResearchMath` components, with a
+contents list, source links, and return links to Education. They publish the core
+chapters rather than a rewritten overview. Appendices remain in the GitHub manuscript.
+Each JSON source stores `repositoryUrl`, `sourceUrl`, `sourceCommit`, and `sourceBlob`.
+The manuscript link is pinned to that source commit. When refreshing a paper, compare
+against the pinned file, preserve the complete core chapters and references, and
+update the provenance only for the version actually imported.
+
+Preserve the Asian paper's distinction between the projected Euler pricing certificate
+and its continuous-model comparison, including the assumptions for weak expansion and
+posterior quantile results. Preserve the Rough Heston paper's stated configurations,
+certificate scope, error definitions, and reproducibility limits. Approved content
+changes update the source hash, visible-copy contract, independent output expectations,
+and route registry together. Verify rendered formulas, internal manuscript links, and
+appendix destinations before publishing.
 
 ### Legal papers
 
@@ -180,7 +199,7 @@ To add an approved paper, update its structured source, the legal-paper slug reg
 the matching project route in `experience.ts`, and the independent content/output
 contracts together. Use the supplied manuscript as the wording and citation authority.
 
-Article validation checks all eighteen website routes, four legal reading links, chapter
+Article validation checks all nineteen content routes, four legal reading links, chapter
 anchors, complete numbered references, bidirectional footnote links, and the absence
 of public PDF files. Validate the published text against the approved source before
 refreshing visible-copy hashes. Read back the four live article pages after publishing.
@@ -213,6 +232,12 @@ the [official Inter 4.1 release](https://github.com/rsms/inter/releases/tag/v4.1
 The site layout and architecture viewer load this same stylesheet and regular-face
 preload. Keep text in the inherited font; reserve separate lettering for brand artwork.
 
+The visual reference is Cognition's grid, warm paper color, restrained rules, and
+spacing. Inter remains the site's own self-hosted typeface. Research and other body
+text share 17px, subsection headings share 18px, and math uses a relative 1.15em scale.
+Keep these roles synchronized through `app/globals.css`; do not give a particular
+article a larger prose size or change type size to fit a long title.
+
 ## Validation and publishing
 
 ```sh
@@ -243,7 +268,7 @@ The build computes SHA-256 permissions for the exact inline scripts in each expo
 HTML page, including the architecture viewer. The policy appears before scripts and
 blocks arbitrary inline scripts, evaluation, frames, objects, and form submission.
 Fonts load from the site's own origin. Inline event handlers are blocked on every
-page. Inline styles support the canvas and viewer.
+page. Inline styles support the framework and standalone viewer.
 GitHub Pages controls HTTP response headers. The HTML policy cannot set response
 headers or the `frame-ancestors` directive. Keep dependency versions and the lockfile
 aligned, and preserve the major-scoped dependency overrides. The dependency audit

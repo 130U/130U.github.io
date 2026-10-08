@@ -5,7 +5,7 @@ import { createPageMetadata } from "../../lib/content/site";
 
 const pageMetadata = createPageMetadata({
   title: selectedResearch.title,
-  description: "Computable pricing-error bounds for arithmetic Asian options under projected Euler, with joint weak expansions and posterior quantile transfer.",
+  description: selectedResearch.description,
   path: SELECTED_RESEARCH_PATH,
 });
 
