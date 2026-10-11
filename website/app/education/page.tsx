@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { SiteShell } from "../components/SiteShell";
+import { renderInlineText } from "../components/InlineText";
 import { createPageMetadata } from "../lib/content/site";
 import { selectedResearchProjects } from "../lib/content/selected-research";
 import styles from "./EducationResearch.module.css";
@@ -145,11 +146,22 @@ export default function EducationPage() {
               <h3 className={styles.title}>
                 <Link href={project.path}>{project.title}</Link>
               </h3>
-              <a className={styles.repository} href={project.repositoryUrl}
-                target="_blank" rel="noopener noreferrer"
-                aria-label={`${project.title} on GitHub`}>
-                GitHub <span aria-hidden="true">↗</span>
-              </a>
+              <div className={styles.introduction}>
+                {project.introduction.map((paragraph) => (
+                  <p className="education-note" key={paragraph}>
+                    {renderInlineText(paragraph)}
+                  </p>
+                ))}
+              </div>
+              <p className={styles.repository}>
+                <Link href={project.path}>Paper</Link>
+                <span aria-hidden="true">·</span>
+                <a href={project.repositoryUrl} target="_blank" rel="noopener noreferrer"
+                  aria-label={`${project.title} on GitHub`}>Research repository</a>
+                <span aria-hidden="true">·</span>
+                <a href={`${project.repositoryUrl}/blob/main/EVIDENCE.md`} target="_blank" rel="noopener noreferrer"
+                  aria-label={`${project.title} results`}>Results</a>
+              </p>
             </article>
           ))}
         </div>

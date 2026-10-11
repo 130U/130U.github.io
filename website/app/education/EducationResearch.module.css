@@ -12,6 +12,7 @@
 }
 
 .title {
+  grid-column: 1 / -1;
   margin: 0;
   font-size: var(--type-subheading);
   font-weight: 600;
@@ -26,14 +27,20 @@
   text-underline-offset: var(--link-underline-offset);
 }
 
+.introduction {
+  grid-column: 1 / -1;
+}
+
 .repository {
+  grid-column: 1 / -1;
+  margin: 0;
   display: inline-flex;
   align-items: center;
   min-height: 44px;
   color: var(--supporting-ink);
   font-size: var(--type-interface);
   line-height: var(--interface-leading);
-  white-space: nowrap;
+  flex-wrap: wrap;
   gap: 0.5rem;
 }
 

@@ -22,6 +22,8 @@ const sources = [
 
 const receipts = [];
 for (const config of sources) {
+  const contentUrl = new URL(`../content/selected-research/${config.slug}.json`, import.meta.url);
+  const { introduction } = JSON.parse(await readFile(contentUrl, "utf8"));
   const bytes = await readFile(new URL(`${config.key}-source.md`, audit));
   const source = bytes.toString("utf8");
   const blob = createHash("sha1").update(`blob ${bytes.length}\0`).update(bytes).digest("hex");
@@ -41,12 +43,12 @@ for (const config of sources) {
     refs,
   ].join("\n\n").replace(/\]\((\.\.\/[^\s)]+)\)/gu, (_, relative) => `](${repositoryUrl}/blob/${config.sourceCommit}/${relative.slice(3)})`) + "\n";
   const content = {
-    slug: config.slug, title, description: config.description, sourceUrl, repositoryUrl,
+    slug: config.slug, title, description: config.description, introduction, sourceUrl, repositoryUrl,
     sourceEditedAt: config.sourceEditedAt, sourceCommit: config.sourceCommit, sourceBlob: config.sourceBlob,
     coverage: { mainSections: config.mainSections, omitted: "Appendices only; all main-text tables and references are retained." },
     markdown,
   };
-  await writeFile(new URL(`../content/selected-research/${config.slug}.json`, import.meta.url), JSON.stringify(content, null, 2) + "\n");
+  await writeFile(contentUrl, JSON.stringify(content, null, 2) + "\n");
   receipts.push({
     slug: config.slug, sourceUrl, sourceCommit: config.sourceCommit, sourceBlob: blob,
     sourceSha256: createHash("sha256").update(bytes).digest("hex"),

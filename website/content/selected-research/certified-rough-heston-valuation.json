@@ -2,6 +2,10 @@
   "slug": "certified-rough-heston-valuation",
   "title": "Certified Joint Pricing Errors in Rough Heston",
   "description": "Deterministic joint pricing-error certificates for stored rough Heston outputs, finite-history propagation, portfolios, and finite-candidate decisions.",
+  "introduction": [
+    "I establish a deterministic framework for joint pricing-error certification in rough Heston. A finite-history theorem carries continuous fractional Riccati residuals into the pricing exponent, while a joint error set preserves the Fourier perturbations shared across strikes. Together, these results provide rigorous bounds for spreads and portfolio valuations sharing the same model and maturity.",
+    "For the paper’s quarter-year **4400–4500 call spread**, the framework certifies the stored numerical output with a complete error upper bound of **0.233318843 index points**, meeting a **0.25-point accuracy budget**. The certificate includes quadrature, omitted frequencies, the infinite tail and arithmetic, connecting fractional dynamics to a checkable guarantee for the valuation."
+  ],
   "sourceUrl": "https://github.com/130U/certified-rough-heston-valuation/blob/8d7264ce2f269a2e01f0b9dd80680bf70e50dcee/manuscript/merged-heston-en.md",
   "repositoryUrl": "https://github.com/130U/certified-rough-heston-valuation",
   "sourceEditedAt": "2026-10-08T11:08:15Z",

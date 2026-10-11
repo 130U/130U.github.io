@@ -28,9 +28,9 @@
       }
     },
     "/education/": {
-      "textSha256": "e72d60934874485b65d7ddad8c497d4ae6601da74d19840aaf2a2391725759bc",
-      "characterCount": 2129,
-      "wordCount": 259,
+      "textSha256": "ee7a63a2d8eea07768ca9e92769c7abd6ed6f5de03a28ee18e25e3b9bbd320f5",
+      "characterCount": 3696,
+      "wordCount": 470,
       "preview": "Skip to main content Theodore Ouyang Home Education Past Experience Current Chapter Education Duke University Master of Engineering in Risk Engineering Financia",
       "altTexts": [],
       "ariaLabels": [
@@ -39,7 +39,9 @@
         "Degrees",
         "Academic distinctions",
         "Certified Valuation of Arithmetic Asian Options on GitHub",
-        "Certified Joint Pricing Errors in Rough Heston on GitHub"
+        "Certified Valuation of Arithmetic Asian Options results",
+        "Certified Joint Pricing Errors in Rough Heston on GitHub",
+        "Certified Joint Pricing Errors in Rough Heston results"
       ],
       "metadata": {
         "title": "Education | Theodore Ouyang",

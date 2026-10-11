@@ -2,6 +2,10 @@
   "slug": "certified-valuation-arithmetic-asian-options",
   "title": "Certified Valuation of Arithmetic Asian Options",
   "description": "Certified pricing-error bounds for arithmetic Asian options under projected Euler, with common Gaussian smoothing, weak expansions, and posterior quantile transfer.",
+  "introduction": [
+    "I develop a mathematical framework for certifying discretization error in arithmetic Asian valuation. Its core is a weighted payoff-remainder bound derived from a Gaussian factor shared across observation dates. This connects the payoff’s nonsmooth structure to computable moment bounds, which I combine with validated transforms for the original projected Euler scheme under Heston stochastic volatility.",
+    "In the paper’s one-year Heston Asian call-spread example with twelve monthly fixings, the framework establishes a complete discretization-error bound below **0.011025 price units**. The contribution connects payoff analysis, stochastic dynamics and validated computation to give a rigorous monetary guarantee for the discrete valuation."
+  ],
   "sourceUrl": "https://github.com/130U/certified-valuation-arithmetic-asian-options/blob/846bbe6acbaa4eaac07e20d5d2c566b3abc5456d/manuscript/report.md",
   "repositoryUrl": "https://github.com/130U/certified-valuation-arithmetic-asian-options",
   "sourceEditedAt": "2026-10-08T11:16:02Z",

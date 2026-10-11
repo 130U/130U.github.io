@@ -7,6 +7,7 @@ export const SELECTED_RESEARCH_TITLE = "Certified Valuation of Arithmetic Asian 
 
 type SelectedResearchSource = Omit<ResearchArticleContent, "blocks"> & {
   description: string;
+  introduction: string[];
   repositoryUrl: string;
   sourceCommit: string;
   sourceBlob: string;
