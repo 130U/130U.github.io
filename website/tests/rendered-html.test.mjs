@@ -45,6 +45,11 @@ const LEGAL_LISTING_TITLES = [
   "Duke Law School: Climate Law and Geoengineering Governance Research",
   "Duke Law School: Environmental Law and Ecological Restoration Research",
 ];
+const DISPLAY_DETAIL_TITLES = new Map([
+  [8, "Autonomous Authority in Space — Risk Tradeoffs and the Law of Delegation"],
+  [10, "Who May Choose the Lesser Risk — Solar Geoengineering and the Legal Duties of Comparison and Continuity"],
+  [11, "Mangrove Restoration and the Limits of Compensatory Mitigation — Lessons from Florida for the Greater Bay Area"],
+]);
 const ROUTES = [
   "/",
   "/education/",
@@ -177,7 +182,7 @@ function expectedExperiencePresentation(entry) {
   assert.ok(slug, `Entry ${entry.id} needs an independent expected route`);
   return {
     listingTitle: legal ? LEGAL_LISTING_TITLES[entry.id - 8] : entry.organization,
-    pageTitle: `${organization}: ${entry.detailTitle}`,
+    pageTitle: `${organization}: ${DISPLAY_DETAIL_TITLES.get(entry.id) ?? entry.detailTitle}`,
     path: ai ? `${AI_ROUTE}${slug}/` : legal ? `${LAW_ROUTE}${slug}/` : `/experience/${slug}/`,
     slug,
   };
@@ -206,8 +211,8 @@ function assertExperienceDetails(html, expected) {
     .find((match) => attribute(match[1], "data-experience-contributions") === String(expected.id));
   assert.ok(contributions, `Entry ${expected.id} is missing its contribution block`);
   assert.equal(stripMarkup(contributions[2].match(/<h[2-6]\b[^>]*>([\s\S]*?)<\/h[2-6]>/iu)?.[1] ?? ""), expected.contributionsLabel);
-  assert.deepEqual([...contributions[2].matchAll(/<li\b[^>]*>([\s\S]*?)<\/li>/giu)].map((match) => stripMarkup(match[1])), expected.keyContributions.map(normalizeSpace));
-  assert.deepEqual([...contributions[2].matchAll(/<p\b[^>]*>([\s\S]*?)<\/p>/giu)].map((match) => stripMarkup(match[1])), expected.notes.map(normalizeSpace));
+  assert.deepEqual([...contributions[2].matchAll(/<li\b[^>]*>([\s\S]*?)<\/li>/giu)].map((match) => stripMarkup(match[1])), [...expected.keyContributions, ...expected.notes].map(normalizeSpace));
+  assert.equal(openingTags(contributions[2], "p").length, 0, "Supporting notes must be exact trailing list items, not separate paragraphs");
 }
 
 async function walk(directory) {
@@ -423,6 +428,7 @@ test("all eighteen approved Experience entries use institution titles and real l
     const detailPage = await routeHtml(presentation.path);
     assert.equal(openingTags(detailPage, "h1").length, 1);
     assert.equal(stripMarkup(detailPage.match(/<h1\b[^>]*>([\s\S]*?)<\/h1>/u)?.[1] ?? ""), presentation.pageTitle);
+    assert.equal((presentation.pageTitle.match(/:/gu) ?? []).length, 1, "Only the institution separator may remain a colon");
     assertExperienceDetails(detailPage, entry);
     assert.ok(detailPage.indexOf("data-experience-metadata") < detailPage.indexOf("data-experience-contributions"));
     const returns = openingTags(detailPage, "a").filter((tag) => attribute(tag, "href") === `/experience/#${presentation.slug}`);
@@ -486,7 +492,7 @@ test("law papers preserve article identity, chapter navigation, and bidirectiona
     const titleMatch = html.match(/<h1\b[^>]*>([\s\S]*?)<\/h1>/iu);
     assert.ok(titleMatch, `${route} is missing its article title`);
     assert.equal(stripMarkup(titleMatch[1]), expectedExperiencePresentation(approved.find(({ id }) => id === index + 8)).pageTitle);
-    assert.ok(text.includes(title), `${route} lost its original article title`);
+    assert.ok(text.includes(title.split(": ").join(" — ")), `${route} lost its original article-title wording`);
     if (subtitle) assert.ok(text.includes(subtitle), `${route} lost its original subtitle`);
     assert.ok(text.includes("Letao Ouyang"), `${route} lost its original author name`);
     assert.ok(text.includes("December 2024"), `${route} lost its original date`);

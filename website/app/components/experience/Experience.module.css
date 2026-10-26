@@ -111,7 +111,6 @@
 }
 .contributions li { padding-left: 3px; }
 .contributions li::marker { font-size: 0.7em; }
-.contributions .note { margin: 20px 0 0; color: var(--supporting-ink); }
 .domainHeader { margin-bottom: 28px; }
 @media (hover: hover) and (pointer: fine) {
   .readMore:hover, .directory a:hover { color: var(--accent); text-decoration-color: var(--accent); }

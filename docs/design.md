@@ -85,9 +85,11 @@ All eighteen entries use real Read More links to dedicated pages. The eight AI a
 legal articles retain their existing URLs; the other ten entries have pages at
 `/experience/{slug}/`. Outer entries lead with the institution or organization;
 legal entries use `Duke Law School: {research area} Research`. Detail-page H1s use
-`{institution}: {project title}`. Position, Location, and Dates appear as three
+`{institution}: {project title}`, with any internal title colon rendered as an em
+dash so the institution separator is the title's only colon. Position, Location, and Dates appear as three
 stacked rows in one column at every viewport, followed by the approved Key
-Contributions and optional notes. Links work without JavaScript and have accessible
+Contributions, with contextual notes as the final bullets in the same list and
+type style. Links work without JavaScript and have accessible
 keyboard focus and touch targets. Do not repeat the outer summary in the detail view.
 
 AI pages proceed directly from Key Contributions to the original numbered article

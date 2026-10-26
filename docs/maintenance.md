@@ -47,9 +47,11 @@ screen width and eighteen summaries. All eighteen Read More actions are links to
 real pages. The eight AI and legal entries retain their existing manuscript URLs;
 the other ten entries use `/experience/[slug]/`. Outer headings lead with the
 institution or organization; legal headings use `Duke Law School: {research area}
-Research`. Detail-page titles use `{institution}: {project title}`. Position,
+Research`. Detail-page titles use `{institution}: {project title}`; internal title
+colons render as em dashes, preserving only the institution separator. Position,
 Location, and Dates form three stacked rows at every viewport, followed by the
-approved Key Contributions and optional notes. Do not repeat the outer summary.
+approved Key Contributions with contextual notes appended as the final list items.
+All items share the same typography and color. Do not repeat the outer summary.
 
 AI pages continue directly from Key Contributions into the original numbered
 article body. Only rendering omits the duplicate technical title, Project and

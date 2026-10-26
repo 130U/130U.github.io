@@ -16,8 +16,7 @@ export function KeyContributions({ entry, id = "key-contributions", nested = fal
   return (
     <section className={styles.contributions} aria-labelledby={id} data-experience-contributions={entry.id}>
       <Heading id={id} tabIndex={-1}>{entry.contributionsLabel}</Heading>
-      <ul>{entry.keyContributions.map((text, index) => <li key={index}>{text}</li>)}</ul>
-      {entry.notes.map((text, index) => <p className={styles.note} key={index}>{text}</p>)}
+      <ul>{[...entry.keyContributions, ...entry.notes].map((text, index) => <li key={index}>{text}</li>)}</ul>
     </section>
   );
 }

@@ -4,8 +4,8 @@
   "sources": {
     "app/experience/page.tsx": "993f5aa641588d4cd2d5ea7ef7d7826e1b5cafbd06b1bc2bc704f802e23df777",
     "app/components/experience/ExperienceContent.tsx": "97f1070f3a75292aa3395cbdddec1806384603e4898ab5cb8b3628e72950ffde",
-    "app/components/experience/ExperienceDetails.tsx": "a50c602c8269b6bfdccb57bf58f2f9a8290040aeb6b5d05d66d04734b318a848",
-    "app/lib/content/experience-showcase.ts": "ff1bb20cdd09c519df89b061a3df5c01e703df89baf5850fe9a93934e5fdbbeb",
+    "app/components/experience/ExperienceDetails.tsx": "5eb638be11cc1752a22e48e1cc97928d93dc0d9056c1464a3771c14cddfd4075",
+    "app/lib/content/experience-showcase.ts": "a904830a8ada9cae7ed3a3ee7502c7c45b60111378ded57d6ff35ad740f7a7f0",
     "content/experience-showcase.json": "af3104f4d4ecc04269342367f34f01fc42d0ae787eb0c20a2c7cf94c42e2e785",
     "app/components/AboutContent.tsx": "fb52aeb23eac834e4ea8582978e1721ee8f312db7d0b217921675f6eb8274790",
     "app/lib/content/about.ts": "8d79e72133dcbcae9523771a099f53f0aecb879cea384769ff6bb0144e05626f",

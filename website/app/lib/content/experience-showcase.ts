@@ -53,7 +53,7 @@ export const showcaseEntries: readonly ShowcaseEntry[] = source.entries.map((ent
     ...entry, slug, articlePath,
     detailPath: articlePath ?? `/experience/${slug}/`,
     listingTitle,
-    pageTitle: `${organization}: ${entry.detailTitle}`,
+    pageTitle: `${organization}: ${entry.detailTitle.replace(/:\s*/gu, " — ")}`,
   };
 });
 if (showcaseEntries.length !== 18) throw new Error("The approved Experience document contains 18 entries.");
