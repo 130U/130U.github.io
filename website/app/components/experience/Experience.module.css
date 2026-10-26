@@ -20,8 +20,8 @@
   min-height: 32px;
   padding-block: 4px;
   gap: 12px;
-  font-size: var(--type-reading);
-  line-height: var(--reading-leading);
+  font-size: var(--type-subheading);
+  line-height: var(--subheading-leading);
 }
 .directory span, .sectionIndex {
   color: var(--muted);
@@ -31,7 +31,8 @@
 }
 .directory span {
   flex: 0 0 2ch;
-  font-size: var(--type-interface);
+  font-size: inherit;
+  line-height: inherit;
   white-space: nowrap;
 }
 .section {

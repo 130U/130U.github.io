@@ -272,9 +272,9 @@ The visual reference is Cognition's grid, warm paper color, restrained rules, an
 spacing. Inter remains the site's own self-hosted typeface. Research and other body
 text share 14px with 1.6 leading; subsection headings use 18px. Page titles and
 section headings use 22px with 1.25 leading at every viewport. Math uses a relative
-1.15em scale. Experience directory labels, metadata, main navigation, indices,
-field labels, and footers all use 14px. The semantic token names remain distinct;
-mobile layouts retain the same 22px, 18px, and 14px hierarchy.
+1.15em scale. Experience directory labels and numbers use 18px. Metadata, main
+navigation, section indices, field labels, and footers use 14px. The semantic token
+names remain distinct; mobile layouts retain the same 22px, 18px, and 14px hierarchy.
 Keep these roles synchronized through `app/globals.css`; do not give a particular
 article a larger prose size or change type size to fit a long title.
 
