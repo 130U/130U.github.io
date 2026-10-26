@@ -223,9 +223,11 @@ Policy Analysis; its four selected papers
 use dedicated article URLs. Domain `01`, AI Research and Engineering,
 has four project reading URLs. The other ten entries open dedicated detail
 pages under `/experience/`.
-About's Selected Research section presents two entries, each with its
-original title as a black manuscript link that turns blue on hover or keyboard
-focus, followed by supporting paragraphs with selected bold emphasis. Numerical guarantees retain their
+About's Selected Research section presents three entries. The first,
+[Critical Dependence Stress for Portfolio Diversification](https://github.com/130U/mathematical-finance-project),
+links to its GitHub project; the Asian-options and Rough Heston entries follow and
+link to their on-site manuscripts. Titles use black links that turn blue on hover
+or keyboard focus, followed by supporting paragraphs with selected bold emphasis. Numerical guarantees retain their
 model, horizon, payoff, and comparison scope.
 It does not repeat the abstracts or add a separate action row. Titles use the same
 18px subheading role; supporting paragraphs use the 14px reading role. Thin

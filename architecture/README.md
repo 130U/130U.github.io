@@ -27,8 +27,10 @@ menu, shared article contents, and legal-note previews run in the browser. The w
 authentication, or analytics. The [maintenance guide](../docs/maintenance.md)
 documents content ownership, output contracts, security, and publishing.
 
-About presents two Selected Research entries with linked manuscript titles and
-research summaries. The article headers provide GitHub and Full Manuscript links. The
+About presents three Selected Research entries with linked titles and research
+summaries. [Critical Dependence Stress for Portfolio Diversification](https://github.com/130U/mathematical-finance-project)
+appears first and links to GitHub, followed by the Asian-options and Rough Heston
+on-site manuscripts. Their article headers provide GitHub and Full Manuscript links. The
 on-site articles include their abstracts, core chapters (Asian options 1–10; Rough
 Heston 1–8), and references; appendices are linked on GitHub. Each source JSON records
 its exact upstream commit, blob, and manuscript URL. Frozen manuscript evidence lives

@@ -170,8 +170,10 @@ update only the corresponding contract fields after independent verification.
 
 ### Selected Research
 
-About presents two compact research entries before Education and Selected Coursework.
-Each original title links to its on-site manuscript in black ink, turning blue on
+About presents three compact research entries before Education and Selected Coursework.
+[Critical Dependence Stress for Portfolio Diversification](https://github.com/130U/mathematical-finance-project)
+appears first and links to GitHub. The Asian-options and Rough Heston entries follow,
+linking to their on-site manuscripts. Title links use black ink, turning blue on
 hover or keyboard focus. A short paragraph states the mathematical method and the
 achieved result within the paper's specified example. Keep numerical bounds and
 improvements tied to their model, horizon, payoff, and comparison. Source links remain

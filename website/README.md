@@ -42,8 +42,10 @@ dependency advisories. Browser interaction in the main site is limited to the
 interactive name entrance, navigation menu, shared article contents, and legal-note
 previews. Article links and site navigation also work without JavaScript.
 
-About's Selected Research entries use linked manuscript titles and concise research
-summaries. GitHub and Full Manuscript links appear in the article headers.
+About's three Selected Research entries use linked titles and concise research
+summaries. [Critical Dependence Stress for Portfolio Diversification](https://github.com/130U/mathematical-finance-project)
+appears first and links to GitHub, followed by the Asian-options and Rough Heston
+on-site manuscripts. GitHub and Full Manuscript links appear in their article headers.
 The reading pages contain the abstract, core chapters, and references: chapters 1–10
 for the Asian-options paper and 1–8 for Rough Heston. Appendices and supporting
 material are linked on GitHub. The JSON files in `content/selected-research/` record

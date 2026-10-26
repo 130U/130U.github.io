@@ -7,7 +7,7 @@
     "app/components/experience/ExperienceDetails.tsx": "5eb638be11cc1752a22e48e1cc97928d93dc0d9056c1464a3771c14cddfd4075",
     "app/lib/content/experience-showcase.ts": "88e476dec472df7e28dc4f1854029f952d907a240e0488c392ec7edca1742f66",
     "content/experience-showcase.json": "03e3680be51c769b2749383b2d1ed225515396c7847700e732978234fd992483",
-    "app/components/AboutContent.tsx": "1842bb2f03c6a000c146d41ae93a6d6415016cb0711f0108bea2c3f1801c6997",
+    "app/components/AboutContent.tsx": "5fe207e08b76cbeb1298997316df120d668fd0ea9a2af2fa771a0e1941891507",
     "app/lib/content/about.ts": "8d79e72133dcbcae9523771a099f53f0aecb879cea384769ff6bb0144e05626f",
     "app/components/research/ResearchArticle.tsx": "cc1271fc1a3a5c0f9f3b1416324aba8ca4b7ab50d431b286ce7bef8ebb27a73a",
     "app/components/research/ResearchMath.tsx": "5fec90d5c5e369639750f327c203b47ab92a1c06896d9eb360c69d88c1d6a24c",
