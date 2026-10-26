@@ -8,7 +8,7 @@ does not claim to reproduce Cognition's current font files or its complete inter
 
 ## Identity
 
-The compact LO mark appears in the navigation and browser icons. Home opens with
+The compact LO mark appears in the navigation and browser icons. About opens with
 the interactive full-screen THEODORE OUYANG particle wordmark, followed by the
 profile and contact information. This signature entrance is an intentional part
 of the owner's identity; preserve its pointer and keyboard interaction, scroll
@@ -44,8 +44,9 @@ scale relative to surrounding text without changing the prose size.
 | Role | Shared token | Size at the default text setting | Leading |
 | --- | --- | --- | --- |
 | Page title | `--type-title` | 36px; 28px below 768px, weight 400 | 1.2 |
-| Section or institution heading, directory item | `--type-heading` | 24px; 22px below 768px, weight 400 | 1.25 |
-| Project, degree, course-category heading | `--type-subheading` | 18px, weight 600 | 1.45 |
+| Section heading, directory item | `--type-heading` | 24px; 22px below 768px, weight 400 | 1.25 |
+| Project, About institution, course-category heading | `--type-subheading` | 18px, weight 600 | 1.45 |
+| About degree | `--type-reading` | 17px, weight 500 | 1.6 |
 | Body, records, introductions, course names | `--type-reading` | 17px | 1.6 |
 | Navigation, menu, wordmark name, return link | `--type-interface` | 14px | 1.4 |
 | Project reading action | `--type-action`, alias of `--type-interface` | 14px, weight 500 | 1.4 |
@@ -143,21 +144,23 @@ indent, padding, and scrollbar allowance. The reading field and structural guide
 reflow together when enlarged text needs more rail space. Long reading content has
 emergency wrapping when an unbroken word would exceed its container.
 Coursework uses the shared reading size and leading, two columns from 768px, and
-one on phones. Course-category headings match degree and project headings. Column
-padding preserves useful space for long course names. Profile details and contact
-values also use the reading scale; field labels use the label scale. Coordinates use
-a content-weighted desktop row, a tablet matrix, and a phone column. Long contact
-values can wrap when text is enlarged.
+one on phones. Course-category headings match project and About institution
+headings; degree names use the reading size at weight 500. Column padding preserves
+useful space for long course names. Profile details and contact values also use the
+reading scale; field labels use the label scale. Email and GitHub occupy two columns
+above 540px and stack in one column at 540px and below. Long contact values can wrap
+when text is enlarged.
 Coarse pointers receive 44px primary navigation and standalone link targets.
 
-Page titles own the H1 position. Home's name supplies its identity heading.
+Page titles own the H1 position. About's "Thinking mathematically. Working in AI."
+supplies its main heading; the particle wordmark retains the full name artwork.
 Experience domains use `01`–`05` indices, and entries use lowercase letters.
 Bullet markers occupy an 18px gutter beside the text. Narrative lines remain within
 roughly 64–72 characters where the layout permits.
 
 ## Interaction
 
-Home retains its Canvas2D name entrance and direct scroll link to the profile. Routine links
+About retains its Canvas2D name entrance and direct scroll link to the profile. Routine links
 use color and underline feedback rather than moving, scaling, or animated arrows.
 Anchor navigation uses native scrolling. The mobile menu retains a short opening
 transition, with reduced-motion support.
@@ -184,25 +187,34 @@ Chinese full-width punctuation is not used in public interface copy.
 Legal section symbols, paragraph symbols, mathematical notation, and author names
 with diacritics remain part of the source text.
 
-The four primary pages are Home, Education, Past Experience, and Current Chapter.
+The three primary pages are About, Past Experience, and Current Chapter. About at
+`/` combines the introduction, Selected Research, Education, Selected Coursework,
+and contact details. The supplied first-person introduction leads the page; both
+Duke degrees, the advisor, scholarships, fellowship, and all 49 courses remain
+available. Coursework keeps its four subject groups. The `/education/` compatibility
+page shares the About content without repeating the particle entrance, uses `/`
+as its canonical URL, and remains outside primary navigation and the sitemap.
 Five domain pages carry the experience record. Domain `03` is Legal Research and
 Policy Analysis; its four selected papers each open a dedicated article page.
 Domain `01`, AI Research and Engineering, links four project reading pages.
-Education's Selected Research section presents two compact entries, each with a
-linked article title and a separate GitHub link. It does not repeat the abstracts or
-add a Read more button. Titles use the same 18px subheading role; the GitHub links use
-the 14px interface role. Thin horizontal rules separate entries. The two-column
-title/link layout becomes a single column on narrow screens.
+About's Selected Research section presents two compact entries, each with its
+original title, a short description, and Paper, Repository, and Results links.
+It does not repeat the abstracts or add a Read more button. Titles use the same
+18px subheading role; reading actions use the 14px interface role. Thin horizontal
+rules separate entries. Typography, spacing, and wrapping adapt within the shared
+reading frame without introducing cards or changing the palette.
 
 Each research page provides a contents list and the manuscript's abstract, core
 chapters, formulas, and references. The Asian-options paper includes chapters 1–10;
 the Rough Heston paper includes chapters 1–8. Appendices and supporting material are
 linked on GitHub. Each JSON source records the exact source commit, blob, and manuscript
 URL; source links should continue to identify that version. The full manuscript is
-available from the article header, and return links lead to Education's research section.
+available from the article header, and return links lead to the corresponding
+research entry on About. Existing `/education/<paper>/` article URLs remain stable.
 
-The website has nineteen content routes. The architecture viewer is one additional
-technical reference route, making twenty navigable routes in total, excluding 404.
+The website has eighteen canonical content routes and one Education compatibility
+route. The architecture viewer is one additional technical reference route, making
+twenty navigable routes in total, excluding 404.
 Keep factual claims, metadata, copy, and content order aligned with the integrity manifests.
 
 ### Legal articles

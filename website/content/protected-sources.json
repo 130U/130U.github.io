@@ -2,7 +2,7 @@
   "version": 1,
   "normalization": "LF",
   "sources": {
-    "app/education/page.tsx": "c7406206070a2c63c10580449a79e55b5ea813085612e83e4a31738c662fe980",
+    "app/education/page.tsx": "eac723893ce54e0f474edfe6c8d31be7bfd7e333ad1e2fcacfbec978cd8f082d",
     "app/now/page.tsx": "fd7d113253d81fdf446c20bdb01c6dc2be6f8dc72d9bd6b83c726638ab4ea73a",
     "app/past-experience/page.tsx": "f3c6126decb358a6a43107f19d75acbdbae4886d83f0139b1ee87b0a73ebe289",
     "app/past-experience/[slug]/page.tsx": "a89b781c0a6a74b9295635d5495c4e2cc2cf2d890cc879578ebfd04a9f6db84b",
@@ -22,7 +22,7 @@
     "content/artificial-intelligence/task-validity-in-financial-synthetic-data.json": "132044a28758f885411b78078600a3a50df5e288a9bbbb948b217ede1df4f4de",
     "content/artificial-intelligence/verification-and-supervision-in-scientific-reasoning-tasks.json": "2c342fb87edcc4618d738233329b2c2926c6baccb1891023437c4587d1d9d560",
     "content/artificial-intelligence/evidence-uncertainty-and-decision-guarantees-in-investment-research.json": "98a9c49dd5bc50f5c24ea94ccf7a38d5f6f93abcc770f9b70049a2c73f520bbc",
-    "app/education/certified-valuation-arithmetic-asian-options/page.tsx": "687184285bb136bf0a9f4ab70d85ddc306a827f05f91ecb38853afc877a0587b",
+    "app/education/certified-valuation-arithmetic-asian-options/page.tsx": "ac50f30d6ba9f95eaf75c44a88ae26334479217ac1a92634371b69ee86d789fa",
     "app/lib/content/selected-research.ts": "4a9abbbeafc942ce44f03f355d9afd9e7c5d71b829e2b99944b64fb6ffd4a63a",
     "content/selected-research/certified-valuation-arithmetic-asian-options.json": "1cd1c51b471e5ddf83d673788b62cf73a0f4d4967a99d96f4fdb9e8b50e5c0a0",
     "app/components/InlineText.tsx": "0aef041dcc7f92bb8edd23b09a0f8eaa23ef6c4e15745680b4feaa72cc70dd5e",
@@ -31,7 +31,9 @@
     "app/lib/content/research-markdown.ts": "7774b6637384a193b3fcbdc3463e6b1e0e7679d569e1e79a1115c5d84b3435bf",
     "app/lib/content/research-math.ts": "0343a075dba996cd6a96d3ab299eb6bf095b1b7a4c662f84b253cd243c4107ff",
     "app/lib/content/metadata-excerpt.ts": "567139663925462cc48584a53dabb91e50e3727acd68afe7ddf61fa2818f0e71",
-    "app/education/certified-rough-heston-valuation/page.tsx": "8aa1dd4a30bc0d3eaf7507e0189cc180bfbc023ba004d13255e06c7a83912d08",
-    "content/selected-research/certified-rough-heston-valuation.json": "f7fc027dce9e755c600702a7e405782a863ec8ef90eda31962c39e8990d34004"
+    "app/education/certified-rough-heston-valuation/page.tsx": "3891da8f094b8315eff066a95c4aec8a8bca527587f330e6a080e4c6086c1783",
+    "content/selected-research/certified-rough-heston-valuation.json": "f7fc027dce9e755c600702a7e405782a863ec8ef90eda31962c39e8990d34004",
+    "app/components/AboutContent.tsx": "93ca9d47404dfda5064a6737118f76153c28fc5524d5aae260edce3391a0dd7d",
+    "app/lib/content/about.ts": "8d79e72133dcbcae9523771a099f53f0aecb879cea384769ff6bb0144e05626f"
   }
 }

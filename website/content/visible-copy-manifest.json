@@ -6,59 +6,58 @@
   ],
   "routes": {
     "/": {
-      "textSha256": "41e25339b1dbff2bf31c7d419f985182d1bc58589e0e433e30cd9293f648e5ab",
-      "characterCount": 596,
-      "wordCount": 89,
-      "preview": "Skip to main content Scroll Theodore Ouyang Home Education Past Experience Current Chapter Theodore Ouyang Exploring practical AI use cases Sequoia Fellow , Coh",
+      "textSha256": "2daf66ae572e0e3c2cc3ebc357f1805b500c2592c0ff044fd9c62af2a2d4da87",
+      "characterCount": 2661,
+      "wordCount": 338,
+      "preview": "Skip to main content Scroll Theodore Ouyang About Past Experience Current Chapter Thinking mathematically. Working in AI. Mathematics is how I make sense of thi",
       "altTexts": [],
       "ariaLabels": [
         "Theodore Ouyang home",
         "Primary navigation",
-        "Profile summary"
+        "Certified Valuation of Arithmetic Asian Options links",
+        "Certified Joint Pricing Errors in Rough Heston links",
+        "Contact"
       ],
       "metadata": {
-        "title": "Theodore Ouyang | Duke Alum",
-        "description": "Theodore Ouyang is a Duke University graduate and Sequoia Fellow in Cohort 8, exploring how artificial intelligence can become useful in everyday life.",
+        "title": "About | Theodore Ouyang",
+        "description": "Thinking mathematically. Working in AI. Theodore Ouyang's research, education, and interests.",
         "canonical": "https://www.theodoreoy.com/",
-        "openGraphTitle": "Theodore Ouyang | Duke Alum",
-        "openGraphDescription": "Theodore Ouyang is a Duke University graduate and Sequoia Fellow in Cohort 8, exploring how artificial intelligence can become useful in everyday life.",
+        "openGraphTitle": "About | Theodore Ouyang",
+        "openGraphDescription": "Thinking mathematically. Working in AI. Theodore Ouyang's research, education, and interests.",
         "openGraphUrl": "https://www.theodoreoy.com/",
-        "twitterTitle": "Theodore Ouyang | Duke Alum",
-        "twitterDescription": "Theodore Ouyang is a Duke University graduate and Sequoia Fellow in Cohort 8, exploring how artificial intelligence can become useful in everyday life."
+        "twitterTitle": "About | Theodore Ouyang",
+        "twitterDescription": "Thinking mathematically. Working in AI. Theodore Ouyang's research, education, and interests."
       }
     },
     "/education/": {
-      "textSha256": "ee7a63a2d8eea07768ca9e92769c7abd6ed6f5de03a28ee18e25e3b9bbd320f5",
-      "characterCount": 3696,
-      "wordCount": 470,
-      "preview": "Skip to main content Theodore Ouyang Home Education Past Experience Current Chapter Education Duke University Master of Engineering in Risk Engineering Financia",
+      "textSha256": "8dfd433626c9734ac2ea788d573d3998699b087ba9e9171c5922cdb9cb7b35e6",
+      "characterCount": 2654,
+      "wordCount": 337,
+      "preview": "Skip to main content Theodore Ouyang About Past Experience Current Chapter Thinking mathematically. Working in AI. Mathematics is how I make sense of things. I ",
       "altTexts": [],
       "ariaLabels": [
         "Theodore Ouyang home",
         "Primary navigation",
-        "Degrees",
-        "Academic distinctions",
-        "Certified Valuation of Arithmetic Asian Options on GitHub",
-        "Certified Valuation of Arithmetic Asian Options results",
-        "Certified Joint Pricing Errors in Rough Heston on GitHub",
-        "Certified Joint Pricing Errors in Rough Heston results"
+        "Certified Valuation of Arithmetic Asian Options links",
+        "Certified Joint Pricing Errors in Rough Heston links",
+        "Contact"
       ],
       "metadata": {
-        "title": "Education | Theodore Ouyang",
-        "description": "Theodore Ouyang's education at Duke University.",
-        "canonical": "https://www.theodoreoy.com/education/",
-        "openGraphTitle": "Education",
-        "openGraphDescription": "Theodore Ouyang's education at Duke University.",
-        "openGraphUrl": "https://www.theodoreoy.com/education/",
-        "twitterTitle": "Education",
-        "twitterDescription": "Theodore Ouyang's education at Duke University."
+        "title": "About | Theodore Ouyang",
+        "description": "Thinking mathematically. Working in AI. Theodore Ouyang's research, education, and interests.",
+        "canonical": "https://www.theodoreoy.com/",
+        "openGraphTitle": "About | Theodore Ouyang",
+        "openGraphDescription": "Thinking mathematically. Working in AI. Theodore Ouyang's research, education, and interests.",
+        "openGraphUrl": "https://www.theodoreoy.com/",
+        "twitterTitle": "About | Theodore Ouyang",
+        "twitterDescription": "Thinking mathematically. Working in AI. Theodore Ouyang's research, education, and interests."
       }
     },
     "/education/certified-valuation-arithmetic-asian-options/": {
-      "textSha256": "f257911fe607b2651489847e636d7b8b14a26885802e0609d873daf9cc48efc5",
-      "characterCount": 45808,
-      "wordCount": 6501,
-      "preview": "Skip to main content Theodore Ouyang Home Education Past Experience Current Chapter Selected Research Certified Valuation of Arithmetic Asian Options Common Gau",
+      "textSha256": "d9f51135a0ace30fb7cd08d4e2a17b2dc1dfb25cd9d405de72c4a2682c95b533",
+      "characterCount": 45799,
+      "wordCount": 6500,
+      "preview": "Skip to main content Theodore Ouyang About Past Experience Current Chapter Selected Research Certified Valuation of Arithmetic Asian Options Common Gaussian Smo",
       "altTexts": [],
       "ariaLabels": [
         "Theodore Ouyang home",
@@ -241,10 +240,10 @@
       "formulaCount": 349
     },
     "/education/certified-rough-heston-valuation/": {
-      "textSha256": "23b2eb89b4d6b9bc53a7fa7f2c9c4f5b0d27cb1792af37fe342cf26670f37230",
-      "characterCount": 56924,
-      "wordCount": 8057,
-      "preview": "Skip to main content Theodore Ouyang Home Education Past Experience Current Chapter Selected Research Certified Joint Pricing Errors in Rough Heston GitHub Full",
+      "textSha256": "182db6922ed87f92e247884abd30bda75a3d941e17c0affc0cf1f47e2dbf0329",
+      "characterCount": 56915,
+      "wordCount": 8056,
+      "preview": "Skip to main content Theodore Ouyang About Past Experience Current Chapter Selected Research Certified Joint Pricing Errors in Rough Heston GitHub Full manuscri",
       "altTexts": [],
       "ariaLabels": [
         "Theodore Ouyang home",
@@ -394,10 +393,10 @@
       "formulaCount": 262
     },
     "/past-experience/": {
-      "textSha256": "38ef82ce3ac7eeb56a005f4b62709be58425168856369221ea9d5cfb0b4cc018",
-      "characterCount": 327,
-      "wordCount": 49,
-      "preview": "Skip to main content Theodore Ouyang Home Education Past Experience Current Chapter Past Experience Experience through September 2026 01 AI Research and Enginee",
+      "textSha256": "e735a136a808083b6fcbeebe21ed470a2b288a6ba154e2f0c72f357c753cb120",
+      "characterCount": 318,
+      "wordCount": 48,
+      "preview": "Skip to main content Theodore Ouyang About Past Experience Current Chapter Past Experience Experience through September 2026 01 AI Research and Engineering 02 D",
       "altTexts": [],
       "ariaLabels": [
         "Theodore Ouyang home",
@@ -416,10 +415,10 @@
       }
     },
     "/past-experience/artificial-intelligence/": {
-      "textSha256": "8dce8cbb4f2efecba21ca3df7ac280d0a7f20aa131d6cfc5ce41b9f7895bb42e",
-      "characterCount": 22629,
-      "wordCount": 2949,
-      "preview": "Skip to main content Theodore Ouyang Home Education Past Experience Current Chapter Past Experience 01 AI Research and Engineering Developed AI research and pro",
+      "textSha256": "2ebc12d67a9a0bdef29a85982ebdb8585ab2b88177c291f58a901da34d7195d7",
+      "characterCount": 22620,
+      "wordCount": 2948,
+      "preview": "Skip to main content Theodore Ouyang About Past Experience Current Chapter Past Experience 01 AI Research and Engineering Developed AI research and production m",
       "altTexts": [],
       "ariaLabels": [
         "Theodore Ouyang home",
@@ -442,10 +441,10 @@
       }
     },
     "/past-experience/artificial-intelligence/statistical-inference-and-resource-allocation-in-expert-data-production/": {
-      "textSha256": "d33d93ee8588e20ccb2cef7a6f1fb691af4bd28f2f598e2563b71a6cba21e021",
-      "characterCount": 17806,
-      "wordCount": 2533,
-      "preview": "Skip to main content Theodore Ouyang Home Education Past Experience Current Chapter AI Research and Engineering Statistical inference and resource allocation in",
+      "textSha256": "71e404e11399fe94b37f3e4e665e3a9ed4b085f71f6a25c121b03ca7fa8bdeb6",
+      "characterCount": 17797,
+      "wordCount": 2532,
+      "preview": "Skip to main content Theodore Ouyang About Past Experience Current Chapter AI Research and Engineering Statistical inference and resource allocation in expert d",
       "altTexts": [],
       "ariaLabels": [
         "Theodore Ouyang home",
@@ -495,10 +494,10 @@
       "formulaCount": 79
     },
     "/past-experience/artificial-intelligence/task-validity-in-financial-synthetic-data/": {
-      "textSha256": "8ec2ee3db51a857fdfc95deac2b6fabae3a3d53b6d985112d45d21e29d8f868f",
-      "characterCount": 16655,
-      "wordCount": 2362,
-      "preview": "Skip to main content Theodore Ouyang Home Education Past Experience Current Chapter AI Research and Engineering Task validity in financial synthetic data Projec",
+      "textSha256": "5f0cf1024a56d56bfb4e0c000f9e67aa9a013bb0f8415e8093c1674c251328c7",
+      "characterCount": 16646,
+      "wordCount": 2361,
+      "preview": "Skip to main content Theodore Ouyang About Past Experience Current Chapter AI Research and Engineering Task validity in financial synthetic data Project 2: Fina",
       "altTexts": [],
       "ariaLabels": [
         "Theodore Ouyang home",
@@ -540,10 +539,10 @@
       "formulaCount": 61
     },
     "/past-experience/artificial-intelligence/verification-and-supervision-in-scientific-reasoning-tasks/": {
-      "textSha256": "7693ae43893be30afe6e1a99cc113fad91b196603c441a8a19d410dbd29ed1ca",
-      "characterCount": 19848,
-      "wordCount": 2831,
-      "preview": "Skip to main content Theodore Ouyang Home Education Past Experience Current Chapter AI Research and Engineering Verification and supervision in scientific reaso",
+      "textSha256": "5d90dee9e98c146b156fe2f879655a03767b27574458641525e8b2ce7dbd7e01",
+      "characterCount": 19839,
+      "wordCount": 2830,
+      "preview": "Skip to main content Theodore Ouyang About Past Experience Current Chapter AI Research and Engineering Verification and supervision in scientific reasoning task",
       "altTexts": [],
       "ariaLabels": [
         "Theodore Ouyang home",
@@ -580,10 +579,10 @@
       "formulaCount": 58
     },
     "/past-experience/artificial-intelligence/evidence-uncertainty-and-decision-guarantees-in-investment-research/": {
-      "textSha256": "8cb227e1f599343f20ddade3aaf7a9d33f1bda437b0ea7d42d9c35e62c7092b5",
-      "characterCount": 13821,
-      "wordCount": 2003,
-      "preview": "Skip to main content Theodore Ouyang Home Education Past Experience Current Chapter AI Research and Engineering Evidence uncertainty and decision guarantees in ",
+      "textSha256": "8bde681fcfe46c764f0426e5950a334eca36445fa1d2523b6baa2be6ff06a0c1",
+      "characterCount": 13812,
+      "wordCount": 2002,
+      "preview": "Skip to main content Theodore Ouyang About Past Experience Current Chapter AI Research and Engineering Evidence uncertainty and decision guarantees in investmen",
       "altTexts": [],
       "ariaLabels": [
         "Theodore Ouyang home",
@@ -633,10 +632,10 @@
       "formulaCount": 79
     },
     "/past-experience/data-science/": {
-      "textSha256": "de4af4e8c6a92b58f75ac16e012d62599d3756f7dadf9e7cea4aa089ebdfb3b1",
-      "characterCount": 14207,
-      "wordCount": 1732,
-      "preview": "Skip to main content Theodore Ouyang Home Education Past Experience Current Chapter Past Experience 02 Data Science Applied statistical learning, data engineeri",
+      "textSha256": "a246be834afa2ee29b9ae6b22e4df10882afa8956cb0aedb69c882a520011e16",
+      "characterCount": 14198,
+      "wordCount": 1731,
+      "preview": "Skip to main content Theodore Ouyang About Past Experience Current Chapter Past Experience 02 Data Science Applied statistical learning, data engineering, and m",
       "altTexts": [],
       "ariaLabels": [
         "Theodore Ouyang home",
@@ -655,10 +654,10 @@
       }
     },
     "/past-experience/legal-research-and-policy-analysis/": {
-      "textSha256": "759bcf6ac2a9ce637b96e7940f41ec5656a290e18e979cf726b63b459e222a33",
-      "characterCount": 3377,
-      "wordCount": 415,
-      "preview": "Skip to main content Theodore Ouyang Home Education Past Experience Current Chapter Past Experience 03 Legal Research and Policy Analysis Authored four research",
+      "textSha256": "8ea1449d58b6d084915586aec01a86f2cbd94b0452d4378018f979a2d1b4f629",
+      "characterCount": 3368,
+      "wordCount": 414,
+      "preview": "Skip to main content Theodore Ouyang About Past Experience Current Chapter Past Experience 03 Legal Research and Policy Analysis Authored four research papers e",
       "altTexts": [],
       "ariaLabels": [
         "Theodore Ouyang home",
@@ -681,10 +680,10 @@
       }
     },
     "/past-experience/finance/": {
-      "textSha256": "859057b55bfea52643a3d8ddaf824c0170f5b7855bbff62e17d80c2695f42ddf",
-      "characterCount": 8697,
-      "wordCount": 1076,
-      "preview": "Skip to main content Theodore Ouyang Home Education Past Experience Current Chapter Past Experience 04 Finance and Consulting Applied market research, valuation",
+      "textSha256": "c908a44e50e710ff8204937f99424a373dfe582aaa7a755b94c9b6309e185f64",
+      "characterCount": 8688,
+      "wordCount": 1075,
+      "preview": "Skip to main content Theodore Ouyang About Past Experience Current Chapter Past Experience 04 Finance and Consulting Applied market research, valuation analysis",
       "altTexts": [],
       "ariaLabels": [
         "Theodore Ouyang home",
@@ -703,10 +702,10 @@
       }
     },
     "/past-experience/stem-academic-competitions-and-training/": {
-      "textSha256": "4bfdb08dd6a8f8b13413f007ae67c3c39f536edd2d0a283f4f7fa7159a80db3c",
-      "characterCount": 2901,
-      "wordCount": 375,
-      "preview": "Skip to main content Theodore Ouyang Home Education Past Experience Current Chapter Past Experience 05 STEM Academic Competitions and Training Combined advanced",
+      "textSha256": "1d8bfa6d8329284c201c5604f8d49c0ef8e687a43be4baa30b591ae976e41706",
+      "characterCount": 2892,
+      "wordCount": 374,
+      "preview": "Skip to main content Theodore Ouyang About Past Experience Current Chapter Past Experience 05 STEM Academic Competitions and Training Combined advanced physics ",
       "altTexts": [],
       "ariaLabels": [
         "Theodore Ouyang home",
@@ -725,10 +724,10 @@
       }
     },
     "/past-experience/legal-research-and-policy-analysis/autonomous-authority-in-space/": {
-      "textSha256": "68d10b0cd4e6f01f63cc1cc20926c1972aa2f849d7faccf928a9956d41adf679",
-      "characterCount": 64197,
-      "wordCount": 9031,
-      "preview": "Skip to main content Theodore Ouyang Home Education Past Experience Current Chapter Legal Research and Policy Analysis Research paper Autonomous Authority in Sp",
+      "textSha256": "1f64cce48039f84d24d3a23c83c4cba4a17564d42e8a796be5476968bff2ff27",
+      "characterCount": 64188,
+      "wordCount": 9030,
+      "preview": "Skip to main content Theodore Ouyang About Past Experience Current Chapter Legal Research and Policy Analysis Research paper Autonomous Authority in Space: Risk",
       "altTexts": [],
       "ariaLabels": [
         "Theodore Ouyang home",
@@ -809,10 +808,10 @@
       }
     },
     "/past-experience/legal-research-and-policy-analysis/small-states-and-strategic-space-dependence/": {
-      "textSha256": "3f862f8195677bde0f4a2f6cc356497d359af23fdad2cc0999dc4c5c1c948c9d",
-      "characterCount": 48194,
-      "wordCount": 6623,
-      "preview": "Skip to main content Theodore Ouyang Home Education Past Experience Current Chapter Legal Research and Policy Analysis Research paper Small States and the Gover",
+      "textSha256": "9dd671953e2527a06199ca761b5d44d7468c95d0f00d4851d3cf7ceafae5b0e7",
+      "characterCount": 48185,
+      "wordCount": 6622,
+      "preview": "Skip to main content Theodore Ouyang About Past Experience Current Chapter Legal Research and Policy Analysis Research paper Small States and the Governance of ",
       "altTexts": [],
       "ariaLabels": [
         "Theodore Ouyang home",
@@ -897,10 +896,10 @@
       }
     },
     "/past-experience/legal-research-and-policy-analysis/solar-geoengineering-comparison-and-continuity/": {
-      "textSha256": "74eecee548ddba373a20b3344236d4d6f93d0a97bbf97f7da799894071208255",
-      "characterCount": 45913,
-      "wordCount": 6425,
-      "preview": "Skip to main content Theodore Ouyang Home Education Past Experience Current Chapter Legal Research and Policy Analysis Research paper Who May Choose the Lesser ",
+      "textSha256": "fec1b8e1d5204729b9bc6e12cd02f1f1e6bfc1d4ce9300b8be9776b263897668",
+      "characterCount": 45904,
+      "wordCount": 6424,
+      "preview": "Skip to main content Theodore Ouyang About Past Experience Current Chapter Legal Research and Policy Analysis Research paper Who May Choose the Lesser Risk Sola",
       "altTexts": [],
       "ariaLabels": [
         "Theodore Ouyang home",
@@ -981,10 +980,10 @@
       }
     },
     "/past-experience/legal-research-and-policy-analysis/mangrove-restoration-and-compensatory-mitigation/": {
-      "textSha256": "e587f2db1ac5e90b323d155d7ff08abdefde8873c2921344245bae3cbe841ea1",
-      "characterCount": 60185,
-      "wordCount": 8436,
-      "preview": "Skip to main content Theodore Ouyang Home Education Past Experience Current Chapter Legal Research and Policy Analysis Research paper Mangrove Restoration and t",
+      "textSha256": "a25984be3df1ade6451136fca975a2c391c17b9bba6e6f98ef27e4f2d0d26d43",
+      "characterCount": 60176,
+      "wordCount": 8435,
+      "preview": "Skip to main content Theodore Ouyang About Past Experience Current Chapter Legal Research and Policy Analysis Research paper Mangrove Restoration and the Limits",
       "altTexts": [],
       "ariaLabels": [
         "Theodore Ouyang home",
@@ -1087,10 +1086,10 @@
       }
     },
     "/now/": {
-      "textSha256": "abeaab91a442895522915d946a2f9626d2023060e03a7b7fc1098a250704d4d0",
-      "characterCount": 418,
-      "wordCount": 60,
-      "preview": "Skip to main content Theodore Ouyang Home Education Past Experience Current Chapter Current Chapter Exploring AI in everyday life Theodore Ouyang is exploring h",
+      "textSha256": "723a1acaf7cf2ffe12c243f291c617c4508f96a0608e32ccc6c7367f7498d35c",
+      "characterCount": 409,
+      "wordCount": 59,
+      "preview": "Skip to main content Theodore Ouyang About Past Experience Current Chapter Current Chapter Exploring AI in everyday life Theodore Ouyang is exploring how artifi",
       "altTexts": [],
       "ariaLabels": [
         "Theodore Ouyang home",

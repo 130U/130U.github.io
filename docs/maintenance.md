@@ -21,8 +21,8 @@ Paths in this table are relative to `website/`.
 
 | Page | Route | Source |
 | --- | --- | --- |
-| Home | `/` | `app/page.tsx`, `app/home.module.css` |
-| Education | `/education/` | `app/education/page.tsx` |
+| About | `/` | `app/page.tsx`, `app/home.module.css`, shared About content |
+| Education compatibility alias | `/education/` | `app/education/page.tsx`, shared About content |
 | Asian-options research | `/education/certified-valuation-arithmetic-asian-options/` | `app/lib/content/selected-research.ts`, `content/selected-research/certified-valuation-arithmetic-asian-options.json` |
 | Rough Heston research | `/education/certified-rough-heston-valuation/` | `app/lib/content/selected-research.ts`, `content/selected-research/certified-rough-heston-valuation.json` |
 | Past Experience | `/past-experience/` | `app/past-experience/page.tsx` |
@@ -44,9 +44,13 @@ as text. All five domain pages display project introductions in true italics.
 The experience registry validates five domains and their Markdown entries during
 build. `app/lib/content/routes.ts` supplies the website sitemap. The architecture
 viewer is a separate repository reference, linked from the GitHub introduction.
-The registry contains nineteen content routes: four main pages, five experience
+The registry contains eighteen canonical content routes: three main pages, five experience
 domains, four AI research pages, four legal papers, and two Selected Research pages.
-Assembly adds `/architecture/` for twenty navigable routes, excluding the 404 page.
+The static export also retains `/education/` as a compatibility alias of About,
+without the particle entrance. Its canonical and Open Graph URL are `/`; it is
+excluded from the sitemap and primary navigation. Existing research article URLs
+and their entry IDs remain stable. Assembly adds `/architecture/` for twenty
+navigable routes, including the alias and excluding the 404 page.
 
 Biographical, AI research, Selected Research, and legal source files are checked against `content/protected-sources.json`.
 `content/visible-copy-manifest.json` independently records text, metadata, alt text,
@@ -63,7 +67,7 @@ there is no request-time backend, database, authentication, form submission, or 
 
 - `app/components/SiteShell.tsx` owns the shared reading frame.
 - `app/components/SiteNavigation.tsx` owns the mobile menu and focus handling.
-- `app/page.tsx` retains the interactive Canvas2D name entrance before the Home profile; `app/components/dithered-entrance/` owns its pointer, keyboard, fallback, and reduced-motion behavior.
+- `app/page.tsx` retains the interactive Canvas2D name entrance before About; `app/components/dithered-entrance/` owns its pointer, keyboard, fallback, and reduced-motion behavior. Its scroll cue still targets `#home-profile`.
 - `app/components/research/` owns the shared research article and mathematical presentation.
 - `app/components/InlineText.tsx` renders prose emphasis and citation links.
 - `app/globals.css` and `app/home.module.css` implement the [design system](design.md).
@@ -140,9 +144,10 @@ update only the corresponding contract fields after independent verification.
 
 ### Selected Research
 
-Education presents two compact title-and-GitHub entries before Selected Coursework.
-The title opens the on-site paper; the separate GitHub link opens its repository.
-The list omits abstracts and Read more buttons. `app/lib/content/selected-research.ts`
+About presents two compact research entries before Education and Selected Coursework.
+Each retains its original title and adds the approved one-line description, followed
+by Paper, Repository, and Results links. Results opens the repository's `EVIDENCE.md`
+on `main`. The list omits abstracts and Read more buttons. `app/lib/content/selected-research.ts`
 loads both structured sources from `content/selected-research/`:
 
 | Source | On-site manuscript scope |
@@ -151,7 +156,8 @@ loads both structured sources from `content/selected-research/`:
 | `certified-rough-heston-valuation.json` | Abstract, chapters 1–8, references, and an appendix/supporting-material link |
 
 The pages use the shared `ResearchArticle` and `ResearchMath` components, with a
-contents list, source links, and return links to Education. They publish the core
+contents list, source links, and return links to the corresponding About research
+entry at `/#<slug>`. Their navigation marks About as current. They publish the core
 chapters rather than a rewritten overview. Appendices remain in the GitHub manuscript.
 Each JSON source stores `repositoryUrl`, `sourceUrl`, `sourceCommit`, and `sourceBlob`.
 The manuscript link is pinned to that source commit. When refreshing a paper, compare

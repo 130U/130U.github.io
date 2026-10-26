@@ -2,28 +2,34 @@
   padding-top: 0;
 }
 
-.profileSection {
+.homeFrame .profileSection {
   grid-column: 1 / -1;
   padding-top: 176px;
 }
 
-.profileInner {
+.identity,
+.section {
   display: grid;
   grid-template-columns: repeat(12, minmax(0, 1fr));
-  width: 100%;
+  align-items: start;
 }
 
 .identity {
-  display: grid;
-  grid-column: 1 / -1;
-  grid-template-columns: repeat(12, minmax(0, 1fr));
-  align-items: start;
   padding-bottom: 72px;
-  border-bottom: 1px solid var(--rule-strong);
 }
 
-.identityCopy {
+.section {
+  border-top: 1px solid var(--rule-strong);
+  padding: 64px 0 72px;
+}
+
+.section:last-child {
+  padding-bottom: 0;
+}
+
+.sectionBody {
   grid-column: 2 / span 10;
+  width: 100%;
   max-width: var(--reading-measure);
   min-width: 0;
 }
@@ -31,6 +37,7 @@
 .sectionIndex {
   grid-column: 1;
   margin: 0;
+  padding-top: 5px;
   color: var(--muted);
   font-size: var(--type-label);
   font-variant-numeric: tabular-nums;
@@ -40,127 +47,185 @@
 }
 
 .identity h1 {
-  max-width: 840px;
   margin: 0;
   font-size: var(--type-title);
   font-weight: 400;
-  letter-spacing: -0.02em;
+  letter-spacing: -0.025em;
   line-height: var(--title-leading);
   text-wrap: balance;
 }
 
-.credentials {
-  display: grid;
-  max-width: 64ch;
-  margin: 28px 0 0;
-  padding: 0;
-  color: var(--ink);
-  font-size: var(--type-reading);
-  line-height: var(--reading-leading);
-  list-style: none;
-  gap: 2px;
-}
-
-.biography,
-.contactSection {
-  display: grid;
-  grid-column: 1 / -1;
-  grid-template-columns: repeat(12, minmax(0, 1fr));
-}
-
-.biography {
-  padding: 76px 0 92px;
+.identity h1 span {
+  display: block;
 }
 
 .biographyCopy {
-  grid-column: 2 / span 10;
-  max-width: var(--reading-measure);
+  margin-top: 32px;
+  font-size: var(--type-reading);
+  line-height: var(--reading-leading);
+  text-wrap: pretty;
 }
 
 .biographyCopy p {
   margin: 0;
-  font-size: var(--type-reading);
-  line-height: var(--reading-leading);
 }
 
 .biographyCopy p + p {
   margin-top: 24px;
 }
 
-.contactSection {
-  align-items: start;
+.sectionTitle {
+  margin: 0 0 32px;
+  font-size: var(--type-heading);
+  font-weight: 400;
+  line-height: var(--heading-leading);
+  letter-spacing: -0.02em;
+}
+
+.researchEntry + .researchEntry {
+  border-top: 1px solid var(--rule);
+  margin-top: 28px;
+  padding-top: 28px;
+}
+
+.researchTitle,
+.institution {
+  margin: 0;
+  font-size: var(--type-subheading);
+  font-weight: 600;
+  line-height: var(--subheading-leading);
+  text-wrap: balance;
+}
+
+.researchSummary {
+  margin: 8px 0 0;
+  color: var(--supporting-ink);
+  font-size: var(--type-reading);
+  line-height: var(--reading-leading);
+  text-wrap: pretty;
+}
+
+.researchLinks {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  margin: 12px 0 0;
+  padding: 0;
+  list-style: none;
+  font-size: var(--type-interface);
+  line-height: var(--interface-leading);
+}
+
+.researchLinks li {
+  display: flex;
+  align-items: center;
+}
+
+.researchLinks li + li::before {
+  content: "·";
+  margin: 0 10px;
+  color: var(--muted);
+}
+
+.researchLinks a,
+.contactStrip a {
+  display: inline-flex;
+  align-items: center;
+  min-height: 28px;
+  max-width: 100%;
+  text-decoration: underline;
+  text-decoration-color: var(--link-rule);
+  text-decoration-thickness: 1px;
+  text-underline-offset: var(--link-underline-offset);
+  text-decoration-skip-ink: auto;
+  transition: color 180ms var(--ease-out), text-decoration-color 180ms var(--ease-out);
+}
+
+.researchLinks a:focus-visible,
+.researchLinks a:active,
+.contactStrip a:focus-visible,
+.contactStrip a:active {
+  color: var(--accent);
+  text-decoration-color: var(--accent);
+}
+
+.educationList :global(.education-entry) {
+  padding: 0 0 32px;
+}
+
+.educationList :global(.education-entry) + :global(.education-entry) {
+  padding-top: 32px;
+}
+
+.educationList :global(.education-degree) {
+  margin-top: 12px;
+  font-size: var(--type-reading);
+  font-weight: 500;
+  line-height: var(--reading-leading);
+}
+
+.educationList :global(.education-note) {
+  color: var(--supporting-ink);
+}
+
+.fellowship {
+  margin: 28px 0 0;
+  font-size: var(--type-reading);
+  line-height: var(--reading-leading);
+}
+
+.courseGrid {
+  border-top: 0;
+  border-bottom: 0;
+}
+
+.courseGrid article {
+  padding-top: 0;
+}
+
+.courseGrid article:nth-child(n + 3) {
+  padding-top: 30px;
+}
+
+.courseGrid :global(.course-list) {
+  color: var(--supporting-ink);
 }
 
 .contactStrip {
   display: grid;
-  grid-column: 2 / span 10;
-  grid-template-columns:
-    minmax(0, 1.15fr)
-    minmax(0, 1fr)
-    minmax(13.5rem, 1.2fr)
-    minmax(0, 0.72fr);
+  grid-template-columns: repeat(2, minmax(0, 1fr));
   margin: 0;
   padding: 0;
-  border-top: 1px solid var(--rule-strong);
-  border-bottom: 1px solid var(--rule-strong);
   list-style: none;
 }
 
 .contactStrip li {
   display: grid;
-  align-content: start;
   min-width: 0;
-  min-height: 118px;
-  padding: 25px 19px 29px;
-  font-size: var(--type-reading);
-  line-height: var(--reading-leading);
-  gap: 20px;
-}
-
-.contactStrip li:first-child {
-  padding-left: 0;
+  align-content: start;
+  gap: 16px;
 }
 
 .contactStrip li + li {
+  padding-left: 28px;
   border-left: 1px solid var(--rule);
 }
 
 .contactLabel {
-  display: block;
-  min-width: 0;
   color: var(--muted);
   font-size: var(--type-label);
   line-height: var(--label-leading);
   letter-spacing: 0.015em;
 }
 
-.contactStrip li > :last-child {
-  min-width: 0;
-  margin-left: 0;
-  overflow-wrap: anywhere;
-}
-
 .contactStrip a {
-  display: inline-flex;
   width: fit-content;
-  min-height: 24px;
-  align-items: center;
-  max-width: 100%;
+  font-size: var(--type-reading);
   overflow-wrap: anywhere;
-  text-decoration: underline;
-  text-decoration-color: var(--link-rule);
-  text-decoration-thickness: 1px;
-  text-underline-offset: var(--link-underline-offset);
-  text-decoration-skip-ink: auto;
-  white-space: normal;
-  transition: color 180ms var(--ease-out), text-decoration-color 180ms var(--ease-out), transform 120ms var(--ease-out);
-}
-
-.contactStrip a:active {
-  color: var(--accent);
 }
 
 @media (hover: hover) and (pointer: fine) {
+  .researchLinks a:hover,
   .contactStrip a:hover {
     color: var(--accent);
     text-decoration-color: var(--accent);
@@ -168,118 +233,78 @@
 }
 
 @media (pointer: coarse) {
+  .researchLinks a,
   .contactStrip a {
     min-height: 44px;
   }
 }
 
-@media (768px <= width < 1280px) {
-  .contactStrip {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
-
-  .contactStrip li:nth-child(3) {
-    padding-left: 0;
-    border-top: 1px solid var(--rule);
-    border-left: 0;
-  }
-
-  .contactStrip li:nth-child(4) {
-    border-top: 1px solid var(--rule);
-  }
-}
-
 @media (768px <= width < 1024px) {
-  .profileInner,
   .identity,
-  .biography,
-  .contactSection {
+  .section {
     grid-template-columns: repeat(9, minmax(0, 1fr));
   }
 
-  .identityCopy,
-  .biographyCopy,
-  .contactStrip {
+  .sectionBody {
     grid-column: 2 / span 7;
   }
 }
 
 @media (width < 768px) {
-  .profileSection {
+  .homeFrame .profileSection {
     padding-top: 88px;
   }
 
-  .identity {
+  .identity,
+  .section {
     display: block;
-    padding-bottom: 52px;
   }
 
-  .profileInner,
-  .biography,
-  .contactSection {
-    display: block;
+  .identity {
+    padding-bottom: 48px;
+  }
+
+  .section {
+    padding: 44px 0 48px;
   }
 
   .sectionIndex {
     display: none;
   }
 
-  .credentials {
-    margin-top: 20px;
+  .biographyCopy {
+    margin-top: 28px;
   }
 
-  .biography {
-    padding: 55px 0 68px;
+  .sectionTitle {
+    margin-bottom: 28px;
   }
 
-  .contactStrip {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
+  .courseGrid article + article {
+    padding-top: 30px;
   }
 
-  .contactStrip li,
-  .contactStrip li:first-child {
-    min-height: 106px;
-    padding: 22px 14px 25px;
-  }
-
-  .contactStrip li:nth-child(odd) {
-    padding-left: 0;
-  }
-
-  .contactStrip li:nth-child(3) {
-    border-top: 1px solid var(--rule);
-    border-left: 0;
-  }
-
-  .contactStrip li:nth-child(4) {
-    border-top: 1px solid var(--rule);
+  .courseGrid article:first-child {
+    padding-top: 0;
   }
 }
 
 @media (max-width: 540px) {
   .contactStrip {
     grid-template-columns: 1fr;
-  }
-
-  .contactStrip li,
-  .contactStrip li:first-child,
-  .contactStrip li:nth-child(odd) {
-    min-height: 92px;
-    padding: 20px 0 23px;
+    gap: 24px;
   }
 
   .contactStrip li + li {
+    padding: 24px 0 0;
     border-top: 1px solid var(--rule);
     border-left: 0;
   }
 }
 
 @media (prefers-reduced-motion: reduce) {
+  .researchLinks a,
   .contactStrip a {
     transition: none;
-  }
-
-  .contactStrip a:active {
-    transform: none;
   }
 }

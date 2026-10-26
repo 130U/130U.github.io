@@ -42,11 +42,11 @@ const ROUTES = [
   ...AI_PROJECT_SLUGS.map((slug) => `${AI_ROUTE}${slug}/`),
 ];
 const NAVIGATION = [
-  ["Home", "/"],
-  ["Education", "/education/"],
+  ["About", "/"],
   ["Past Experience", "/past-experience/"],
   ["Current Chapter", "/now/"],
 ];
+const CANONICAL_ROUTES = ROUTES.filter((route) => route !== "/education/");
 // Expected entry and bullet counts are independent of the parser and route registry.
 const DOMAINS = [
   ["AI Research and Engineering", "/past-experience/artificial-intelligence/", 3, 39],
@@ -159,7 +159,7 @@ async function exportedRoutes() {
     .sort();
 }
 
-test("the static export contains nineteen website routes and the architecture viewer", async () => {
+test("the static export retains eighteen canonical pages, the education alias, and the architecture viewer", async () => {
   assert.deepEqual(await exportedRoutes(), [...ROUTES, "/architecture/"].sort());
   assert.ok(existsSync(path.join(OUT, "404.html")));
 });
@@ -184,7 +184,7 @@ test("every route keeps canonical metadata, CSP, and the same navigation", async
   ];
   for (const route of ROUTES) {
     const html = await routeHtml(route);
-    const absolute = new URL(route, SITE_ORIGIN).toString();
+    const absolute = new URL(route === "/education/" ? "/" : route, SITE_ORIGIN).toString();
     assert.equal(canonicalUrl(html), absolute);
     assert.equal(metaContent(html, "property", "og:url"), absolute);
     assert.equal(metaContent(html, "name", "theme-color"), "#f7f6f5");
@@ -194,20 +194,44 @@ test("every route keeps canonical metadata, CSP, and the same navigation", async
   }
 });
 
-test("Home retains its interactive name entrance before the complete profile", async () => {
+test("About retains its interactive name entrance before the combined profile", async () => {
   const home = await routeHtml("/");
   assert.equal(openingTags(home, "canvas").length, 1);
   assert.match(home, /data-state="loading"/u);
   assert.ok(home.indexOf("<canvas") < home.indexOf('id="home-profile"'));
   assert.match(home, /href="#home-profile"[^>]*>Scroll<\/a>/u);
-  assert.match(home, /<h1[^>]*>Theodore Ouyang<\/h1>/u);
+  const heading = home.match(/<h1\b[^>]*>([\s\S]*?)<\/h1>/u);
+  assert.ok(heading);
+  assert.equal(stripMarkup(heading[1]), "Thinking mathematically. Working in AI.");
+  assert.match(home, /<title>About \| Theodore Ouyang<\/title>/u);
   assert.match(home, /id="home-profile"/u);
   for (const index of ["01", "02", "03"]) {
     assert.match(home, new RegExp(`aria-hidden="true"[^>]*>${index}<`, "u"));
   }
-  assert.match(stripMarkup(home), /genuinely useful in everyday life/u);
+  assert.ok(stripMarkup(home).includes("Mathematics is how I make sense of things. I want to know which assumptions underlie a conclusion, what happens when they change, and where intuition stops being reliable."));
+  assert.ok(stripMarkup(home).includes("My work increasingly centers on AI. I build and experiment to understand these systems firsthand, and to work out what is worth doing with them."));
+  for (const id of ["selected-research", "education", "coursework", "contact"]) {
+    assert.match(home, new RegExp(`id="${id}"`, "u"));
+  }
+  assert.match(home, /href="mailto:10@alumni\.duke\.edu"/u);
+  assert.match(home, /href="https:\/\/github\.com\/130U"/u);
   assert.equal(openingTags(home, "img").length, 0);
   for (const route of ROUTES.slice(1)) assert.equal(openingTags(await routeHtml(route), "canvas").length, 0);
+});
+
+test("the education compatibility page shares About content and marks About as current", async () => {
+  const home = await routeHtml("/");
+  const alias = await routeHtml("/education/");
+  const mainText = (html) => stripMarkup(html.match(/<main\b[^>]*>([\s\S]*?)<\/main>/u)?.[1] ?? "");
+  assert.ok(mainText(home));
+  assert.equal(mainText(alias), mainText(home));
+  assert.equal(canonicalUrl(alias), `${SITE_ORIGIN}/`);
+  assert.equal(openingTags(alias, "canvas").length, 0);
+  for (const html of [home, alias]) {
+    const current = openingTags(html, "a").filter((tag) => attribute(tag, "aria-current") === "page");
+    assert.equal(current.length, 1);
+    assert.equal(attribute(current[0], "href"), "/");
+  }
 });
 
 test("inner routes present text-focused pages and the Current Chapter introduction", async () => {
@@ -225,22 +249,36 @@ test("inner routes present text-focused pages and the Current Chapter introducti
   assert.match(now, /expand human capability/u);
 });
 
-test("Selected Research presents two title links and complete main texts", async () => {
-  const education = await routeHtml("/education/");
-  assert.ok(education.indexOf("Selected Research") < education.indexOf("Selected Coursework"));
-  assert.doesNotMatch(education, /Developed a mathematical framework for certifying|Read more about Certified/u);
-  for (const [slug, title, tables] of [
-    ["certified-valuation-arithmetic-asian-options", "Certified Valuation of Arithmetic Asian Options", 11],
-    ["certified-rough-heston-valuation", "Certified Joint Pricing Errors in Rough Heston", 13],
+test("About research entries link papers, repositories, and results while preserving complete main texts", async () => {
+  const about = await routeHtml("/");
+  assert.ok(about.indexOf('id="selected-research"') < about.indexOf('id="education"'));
+  assert.ok(about.indexOf('id="education"') < about.indexOf('id="coursework"'));
+  assert.doesNotMatch(about, /Developed a mathematical framework for certifying|Read more about Certified/u);
+  for (const [slug, title, description, tables] of [
+    ["certified-valuation-arithmetic-asian-options", "Certified Valuation of Arithmetic Asian Options", "Rigorous error bounds for numerical option valuation.", 11],
+    ["certified-rough-heston-valuation", "Certified Joint Pricing Errors in Rough Heston", "Joint error bounds for related valuations that share a stochastic model.", 13],
   ]) {
-    assert.match(education, new RegExp(`<a[^>]*href="/education/${slug}/"[^>]*>${title}</a>`, "u"));
-    assert.match(education, new RegExp(`href="https://github.com/130U/${slug}"`, "u"));
+    assert.match(about, new RegExp(`id="${slug}"`, "u"));
+    const headings = [...about.matchAll(/<h3\b[^>]*>([\s\S]*?)<\/h3>/gu)].map((match) => stripMarkup(match[1]));
+    assert.ok(headings.includes(title));
+    assert.ok(stripMarkup(about).includes(description));
+    for (const [label, href] of [
+      ["Paper", `/education/${slug}/`],
+      ["Repository", `https://github.com/130U/${slug}`],
+      ["Results", `https://github.com/130U/${slug}/blob/main/EVIDENCE.md`],
+    ]) {
+      const link = [...about.matchAll(/<a\b([^>]*)>([\s\S]*?)<\/a>/gu)]
+        .find((match) => attribute(match[1], "href") === href && stripMarkup(match[2]) === label);
+      assert.ok(link, `${slug} is missing its ${label} link`);
+    }
     const article = await routeHtml(`/education/${slug}/`);
     assert.equal(openingTags(article, "h1").length, 1);
     assert.equal(openingTags(article, "table").length, tables);
     assert.match(article, /aria-label="Article contents"/u);
     assert.match(article, /This page includes the complete main text and references/u);
-    assert.match(article, new RegExp(`href="/education/#${slug}"`, "u"));
+    assert.match(article, new RegExp(`href="/#${slug}"`, "u"));
+    const current = openingTags(article, "a").find((tag) => attribute(tag, "aria-current") === "page");
+    assert.equal(attribute(current ?? "", "href"), "/");
     assert.match(article, new RegExp(`href="https://github.com/130U/${slug}">GitHub repository</a>`, "u"));
   }
 });
@@ -456,13 +494,20 @@ test("original PDFs remain absent from public assets and the exported website", 
   }
 });
 
-test("Education presents both degrees, 49 courses, and the advisor record", async () => {
-  const html = await routeHtml("/education/");
-  assert.equal(elementsWithClass(html, "article", "education-entry").length, 2);
-  const lists = elementsWithClass(html, "ul", "course-list");
-  assert.equal(lists.length, 4);
-  assert.equal(lists.reduce((total, list) => total + (list[2].match(/<li\b/giu) ?? []).length, 0), 49);
-  assert.match(html, /Mark Borsuk, Ph\.D\./u);
+test("About and its education alias preserve both degrees, 49 courses, and the advisor record", async () => {
+  for (const route of ["/", "/education/"]) {
+    const html = await routeHtml(route);
+    assert.equal(elementsWithClass(html, "article", "education-entry").length, 2);
+    const lists = elementsWithClass(html, "ul", "course-list");
+    assert.equal(lists.length, 4);
+    assert.equal(lists.reduce((total, list) => total + (list[2].match(/<li\b/giu) ?? []).length, 0), 49);
+    const text = stripMarkup(html);
+    for (const record of ["Master of Engineering in Risk Engineering", "Financial Risk Concentration", "Bachelor of Science in Mathematics", "Dual-Degree Undergraduate Program", "Pratt School of Engineering Merit Scholarship", "Undergraduate Merit Scholarship", "Academic advisor:", "Mark Borsuk, Ph.D."]) {
+      assert.ok(text.includes(record), `${route} is missing ${record}`);
+    }
+    assert.equal((text.match(/Sequoia Fellow, Cohort 8/gu) ?? []).length, 1);
+    assert.doesNotMatch(text, /highest-tier merit awards/u);
+  }
 });
 
 test("the website uses its local brand assets without remote runtime resources", async () => {
@@ -501,7 +546,7 @@ test("robots and sitemap share the exact route manifest", async () => {
   assert.match(robots, /^Sitemap:\s*https:\/\/www\.theodoreoy\.com\/sitemap\.xml$/imu);
   const sitemap = await readFile(path.join(OUT, "sitemap.xml"), "utf8");
   const routes = [...sitemap.matchAll(/<loc>(.*?)<\/loc>/giu)].map((match) => new URL(decodeHtml(match[1])).pathname).sort();
-  assert.deepEqual(routes, [...ROUTES].sort());
+  assert.deepEqual(routes, [...CANONICAL_ROUTES].sort());
 });
 
 test("the production design contract is restrained and dependency-light", async () => {

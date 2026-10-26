@@ -25,10 +25,21 @@ export function SiteNavigation({
     const rail = railRef.current;
     if (!rail) return;
     rail.dataset.enhanced = "true";
+    // The mobile fallback navigation occupies more height before enhancement.
+    // Restore About bookmarks after it collapses so the heading stays in view.
+    const anchorFrame = active === "about" && window.location.hash
+      ? requestAnimationFrame(() => {
+          document.getElementById(window.location.hash.slice(1))?.scrollIntoView({
+            block: "start",
+            behavior: "instant",
+          });
+        })
+      : 0;
     return () => {
+      cancelAnimationFrame(anchorFrame);
       delete rail.dataset.enhanced;
     };
-  }, []);
+  }, [active]);
 
   useEffect(() => {
     if (!menuOpen) return;
