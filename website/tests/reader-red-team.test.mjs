@@ -71,8 +71,8 @@ function exportedPages() {
   return pagesPromise ??= (async () => {
     const sitemap = await readFile(new URL("../out/sitemap.xml", import.meta.url), "utf8");
     const routes = [...sitemap.matchAll(/<loc>([^<]+)<\/loc>/gu)].map((match) => new URL(decodeHtml(match[1])).pathname);
-    routes.push("/architecture/");
-    assert.equal(new Set(routes).size, 20, "Audit all 19 sitemap pages plus the architecture page.");
+    routes.push("/education/", "/architecture/");
+    assert.equal(new Set(routes).size, 20, "Audit all 18 canonical pages, the education alias, and the architecture page.");
     const entries = await Promise.all(routes.map(async (route) => {
       const html = await readFile(new URL(`../out/${route.replace(/^\//u, "")}index.html`, import.meta.url), "utf8");
       const tree = readTree(html);

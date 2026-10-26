@@ -1,189 +1,22 @@
 import type { Metadata } from "next";
-import Link from "next/link";
+import { AboutContent } from "../components/AboutContent";
 import { SiteShell } from "../components/SiteShell";
-import { renderInlineText } from "../components/InlineText";
-import { createPageMetadata } from "../lib/content/site";
-import { selectedResearchProjects } from "../lib/content/selected-research";
-import styles from "./EducationResearch.module.css";
+import { createPageMetadata, ABOUT_DESCRIPTION, HOME_TITLE } from "../lib/content/site";
+import styles from "../home.module.css";
 
-const courseworkGroups = [
-  {
-    title: "Mathematics",
-    courses: [
-      "Abstract Algebra",
-      "Advanced Linear Algebra",
-      "Algorithmic Game Theory",
-      "Applied Computational Analysis",
-      "Complex Analysis",
-      "Differential Geometry",
-      "Financial Derivatives",
-      "Geometry",
-      "Introduction to Stochastic Calculus",
-      "Mathematical Cryptography",
-      "Mathematical Finance",
-      "Mathematical Modeling",
-      "Mathematical Numerical Analysis",
-      "Mathematics of Machine Learning",
-      "Measure and Integration",
-      "Number Theory",
-      "Numerical Linear Algebra, Optimization and Monte Carlo Simulation",
-      "Ordinary and Partial Differential Equations",
-      "Real Analysis",
-      "Statistical Inference",
-      "Topological Data Analysis",
-      "Topology",
-    ],
-  },
-  {
-    title: "AI and Data Science",
-    courses: [
-      "Advanced Stochastic Modeling and Machine Learning",
-      "Artificial Intelligence",
-      "Bayesian Inference and Decision",
-      "Bayesian Statistical Modeling and Data Analysis",
-      "Deep Learning Fundamentals",
-      "Machine Learning and Data Mining",
-      "Multilevel and Hierarchical Models",
-      "Statistical Optimization",
-    ],
-  },
-  {
-    title: "Finance and Economics",
-    courses: [
-      "Asset Pricing & Risk Management",
-      "Corporate Finance",
-      "Data Science and Decision Optimization in Banking & Financial Services",
-      "Econometrics",
-      "Empirical Methods in High Frequency Financial Econometrics",
-      "Environment, Social, Governance (ESG) Investing",
-      "Financial Accounting",
-      "Independent Study in Economics",
-      "Investment Strategies",
-      "Macroeconomics",
-      "Mathematical Analysis of Macroeconomics",
-      "Microeconomics",
-      "Structuring Venture Capital and Private Equity Transactions",
-      "Technology-Driven Quantitative Finance",
-      "Venture Capital",
-    ],
-  },
-  {
-    title: "Law, Ethics, and Global Affairs",
-    courses: [
-      "Ethics and Leadership",
-      "Global China and Global Challenges",
-      "Ocean and Coastal Law",
-      "Space Law",
-    ],
-  },
-] as const;
-
+// Preserve old bookmarks and research fragments on the static host.
+// About is canonical; this alias shares its content without repeating the entrance.
 export const metadata: Metadata = createPageMetadata({
-  title: "Education",
-  description: "Theodore Ouyang's education at Duke University.",
-  path: "/education/",
+  title: HOME_TITLE,
+  description: ABOUT_DESCRIPTION,
+  path: "/",
+  absoluteTitle: true,
 });
 
-export default function EducationPage() {
+export default function EducationAlias() {
   return (
-    <SiteShell active="education">
-      <header className="page-intro plain-page-intro">
-        <h1>Education</h1>
-      </header>
-
-      <section className="education-list" aria-label="Degrees">
-        <article className="education-entry">
-          <header className="education-institution">
-            <h2>Duke University</h2>
-          </header>
-          <h3 className="education-degree">
-            Master of Engineering in Risk Engineering
-          </h3>
-          <p className="entry-subtitle">Financial Risk Concentration</p>
-          <div
-            className="education-notes"
-            role="group"
-            aria-label="Academic distinctions"
-          >
-            <p className="education-note education-advisor">
-              Academic advisor:{" "}
-              <a
-                href="https://cee.duke.edu/people/mark-borsuk/"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                Mark Borsuk, Ph.D.
-              </a>
-            </p>
-            <p className="education-note">
-              Pratt School of Engineering Merit Scholarship — one of the
-              graduate program&apos;s highest-tier merit awards.
-            </p>
-          </div>
-        </article>
-
-        <article className="education-entry">
-          <header className="education-institution">
-            <h2>Duke University</h2>
-          </header>
-          <h3 className="education-degree">
-            Bachelor of Science in Mathematics
-          </h3>
-          <p className="entry-subtitle">Dual-Degree Undergraduate Program</p>
-          <p className="education-note">
-            Undergraduate Merit Scholarship
-          </p>
-        </article>
-      </section>
-
-      <section className="coursework" aria-labelledby="research-heading">
-        <div className="section-heading single-section-heading">
-          <h2 id="research-heading">Selected Research</h2>
-        </div>
-        <div className={styles.list}>
-          {selectedResearchProjects.map((project) => (
-            <article className={styles.entry} key={project.slug} id={project.slug}>
-              <h3 className={styles.title}>
-                <Link href={project.path}>{project.title}</Link>
-              </h3>
-              <div className={styles.introduction}>
-                {project.introduction.map((paragraph) => (
-                  <p className="education-note" key={paragraph}>
-                    {renderInlineText(paragraph)}
-                  </p>
-                ))}
-              </div>
-              <p className={styles.repository}>
-                <Link href={project.path}>Paper</Link>
-                <span aria-hidden="true">·</span>
-                <a href={project.repositoryUrl} target="_blank" rel="noopener noreferrer"
-                  aria-label={`${project.title} on GitHub`}>Research repository</a>
-                <span aria-hidden="true">·</span>
-                <a href={`${project.repositoryUrl}/blob/main/EVIDENCE.md`} target="_blank" rel="noopener noreferrer"
-                  aria-label={`${project.title} results`}>Results</a>
-              </p>
-            </article>
-          ))}
-        </div>
-      </section>
-
-      <section className="coursework" aria-labelledby="coursework-heading">
-        <div className="section-heading single-section-heading">
-          <h2 id="coursework-heading">Selected Coursework</h2>
-        </div>
-        <div className="course-grid">
-          {courseworkGroups.map((group) => (
-            <article key={group.title}>
-              <h3>{group.title}</h3>
-              <ul className="course-list">
-                {group.courses.map((course) => (
-                  <li key={course}>{course}</li>
-                ))}
-              </ul>
-            </article>
-          ))}
-        </div>
-      </section>
+    <SiteShell active="about" frameClassName={styles.homeFrame}>
+      <AboutContent />
     </SiteShell>
   );
 }

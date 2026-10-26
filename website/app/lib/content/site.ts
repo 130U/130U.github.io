@@ -2,15 +2,16 @@ import type { Metadata } from "next";
 
 export const SITE_URL = "https://www.theodoreoy.com";
 export const SITE_NAME = "Theodore Ouyang";
-export const HOME_TITLE = "Theodore Ouyang | Duke Alum";
+export const HOME_TITLE = "About | Theodore Ouyang";
 export const FELLOWSHIP = { title: "Sequoia Fellow", cohort: 8 } as const;
 export const DEFAULT_DESCRIPTION =
   `Theodore Ouyang is a Duke University graduate and ${FELLOWSHIP.title} in Cohort ${FELLOWSHIP.cohort}, exploring how artificial intelligence can become useful in everyday life.`;
+export const ABOUT_DESCRIPTION =
+  "Thinking mathematically. Working in AI. Theodore Ouyang's research, education, and interests.";
 
 export type ActivePage =
-  | "home"
+  | "about"
   | "now"
-  | "education"
   | "experience";
 
 export const navigation: ReadonlyArray<{
@@ -18,8 +19,7 @@ export const navigation: ReadonlyArray<{
   label: string;
   href: string;
 }> = [
-  { key: "home", label: "Home", href: "/" },
-  { key: "education", label: "Education", href: "/education/" },
+  { key: "about", label: "About", href: "/" },
   { key: "experience", label: "Past Experience", href: "/past-experience/" },
   { key: "now", label: "Current Chapter", href: "/now/" },
 ];

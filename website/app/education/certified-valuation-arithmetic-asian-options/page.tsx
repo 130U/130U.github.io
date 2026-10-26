@@ -16,5 +16,5 @@ export const metadata: Metadata = {
 };
 
 export default function SelectedResearchPage() {
-  return <ResearchArticle project={selectedResearch} active="education" returnPath={`/education/#${selectedResearch.slug}`} returnLabel="Selected Research" titleId="research-article-title" />;
+  return <ResearchArticle project={selectedResearch} active="about" returnPath={`/#${selectedResearch.slug}`} returnLabel="Selected Research" titleId="research-article-title" />;
 }

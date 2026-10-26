@@ -16,5 +16,5 @@ export const metadata: Metadata = {
 };
 
 export default function RoughHestonResearchPage() {
-  return <ResearchArticle project={roughHestonResearch} active="education" returnPath={`/education/#${roughHestonResearch.slug}`} returnLabel="Selected Research" titleId="research-article-title" />;
+  return <ResearchArticle project={roughHestonResearch} active="about" returnPath={`/#${roughHestonResearch.slug}`} returnLabel="Selected Research" titleId="research-article-title" />;
 }
