@@ -71,8 +71,10 @@ function exportedPages() {
   return pagesPromise ??= (async () => {
     const sitemap = await readFile(new URL("../out/sitemap.xml", import.meta.url), "utf8");
     const routes = [...sitemap.matchAll(/<loc>([^<]+)<\/loc>/gu)].map((match) => new URL(decodeHtml(match[1])).pathname);
-    routes.push("/education/", "/architecture/");
-    assert.equal(new Set(routes).size, 20, "Audit all 18 canonical pages, the education alias, and the architecture page.");
+    assert.equal(routes.length, 22, "About, Experience, ten full articles and ten experience detail pages remain canonical.");
+    routes.push("/education/", "/architecture/", "/past-experience/", "/now/",
+      ...["artificial-intelligence", "data-science", "legal-research-and-policy-analysis", "finance", "stem-academic-competitions-and-training"].map((slug) => `/past-experience/${slug}/`));
+    assert.equal(new Set(routes).size, 31, "Audit all canonical pages and every retained compatibility route.");
     const entries = await Promise.all(routes.map(async (route) => {
       const html = await readFile(new URL(`../out/${route.replace(/^\//u, "")}index.html`, import.meta.url), "utf8");
       const tree = readTree(html);
@@ -83,7 +85,7 @@ function exportedPages() {
   })();
 }
 
-test("20 exported pages contain no encoding corruption, exposed math markup, duplicate IDs or broken local anchors", async () => {
+test("31 exported pages contain no encoding corruption, exposed math markup, duplicate IDs or broken local anchors", async () => {
   const pages = await exportedPages();
   for (const [route, page] of pages) {
     const text = readable(page.tree);
@@ -106,7 +108,7 @@ test("20 exported pages contain no encoding corruption, exposed math markup, dup
   }
 });
 
-test("all ten full articles share overview, contents and body order with complete heading navigation", async () => {
+test("all ten full articles retain introduction, contents and body order with complete chapter navigation", async () => {
   const pages = await exportedPages();
   const articles = [...pages].filter(([route]) => /^\/education\/[^/]+\/$/u.test(route) || /^\/past-experience\/(?:artificial-intelligence|legal-research-and-policy-analysis)\/[^/]+\/$/u.test(route));
   assert.equal(articles.length, 10);
@@ -121,6 +123,30 @@ test("all ten full articles share overview, contents and body order with complet
     assert.ok(overview[0].end <= menus[0].start && menus[0].end <= body[0].start, `${route}: preserve overview, contents, body reading order.`);
     const links = elements(menus[0], (node) => node.tag === "a").map((node) => node.attrs.get("href"));
     const headings = [...elements(overview[0], (node) => /^h[23]$/u.test(node.tag)), ...elements(body[0], (node) => /^h[23]$/u.test(node.tag))];
+    const isAiExperience = route.startsWith("/past-experience/artificial-intelligence/");
+    const manuscriptTitles = headings.filter((node) => node.attrs.get("id") === "article-title");
+    assert.equal(manuscriptTitles.length, 0, `${route}: do not repeat the technical manuscript title below the contribution lead.`);
+    if (isAiExperience) {
+      const slug = route.split("/").filter(Boolean).at(-1);
+      const firstSourceIndices = new Map([
+        ["statistical-inference-and-resource-allocation-in-expert-data-production", 4],
+        ["task-validity-in-financial-synthetic-data", 3],
+        ["verification-and-supervision-in-scientific-reasoning-tasks", 3],
+        ["evidence-uncertainty-and-decision-guarantees-in-investment-research", 2],
+      ]);
+      const sourceBlocks = elements(body[0], (node) => node.attrs.has("data-research-block"));
+      assert.ok(sourceBlocks.length, `${route}: retain the numbered manuscript.`);
+      assert.equal(sourceBlocks[0].tag, "h2", `${route}: enter the first numbered chapter directly after contributions.`);
+      assert.equal(Number(sourceBlocks[0].attrs.get("data-research-block")), firstSourceIndices.get(slug), `${route}: remove only the approved original front matter.`);
+      assert.equal(sourceBlocks[0].attrs.get("data-source-number"), "1");
+      assert.equal(headings[1], sourceBlocks[0], `${route}: no repeated title or Overview heading may precede the first source chapter.`);
+      assert.equal(elements(body[0], (node) => node.tag === "p" && node.start < sourceBlocks[0].start).length, 0, `${route}: no repeated Project/Author or overview prose may precede the first source chapter.`);
+    }
+    if (route.startsWith("/past-experience/")) {
+      assert.equal(links[0], "#key-contributions", `${route}: contribution points open the article directory.`);
+      assert.equal(readable(headings[0]), "Key Contributions", `${route}: contribution points replace the generic introductory label.`);
+      assert.ok(!links.includes("#overview"), `${route}: do not duplicate the contribution lead with an Overview entry.`);
+    }
     for (const heading of headings) {
       const id = heading.attrs.get("id");
       assert.ok(id, `${route}: heading ${readable(heading)} needs an anchor.`);
@@ -132,7 +158,7 @@ test("all ten full articles share overview, contents and body order with complet
       }
       assert.equal(links.filter((href) => destinations.has(href)).length, 1, `${route}: heading ${readable(heading)} must occur once in contents.`);
     }
-    const chapters = elements(body[0], (node) => node.tag === "h2").filter((node) => !/^(?:Appendix|Appendices|References|Footnotes|Acknowledgments|Acknowledgements)\b/iu.test(readable(node)));
+    const chapters = elements(body[0], (node) => node.tag === "h2" && (node.attrs.has("data-research-block") || node.attrs.has("data-paper-block"))).filter((node) => !/^(?:Appendix|Appendices|References|Footnotes|Acknowledgments|Acknowledgements)\b/iu.test(readable(node)));
     assert.ok(chapters.length > 0, `${route}: missing body chapters.`);
     chapters.forEach((chapter, index) => assert.match(readable(chapter), new RegExp(`^${roman[index]}(?:[.)])?\\s+`, "u"), `${route}: main chapters must use consecutive Roman numerals.`));
     for (const proofEnd of page.nodes.filter((node) => node.attrs.has("data-proof-end"))) {

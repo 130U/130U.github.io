@@ -26,8 +26,8 @@ export function SiteNavigation({
     if (!rail) return;
     rail.dataset.enhanced = "true";
     // The mobile fallback navigation occupies more height before enhancement.
-    // Restore About bookmarks after it collapses so the heading stays in view.
-    const anchorFrame = active === "about" && window.location.hash
+    // Restore section bookmarks after it collapses so the heading stays in view.
+    const anchorFrame = window.location.hash
       ? requestAnimationFrame(() => {
           document.getElementById(window.location.hash.slice(1))?.scrollIntoView({
             block: "start",

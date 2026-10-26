@@ -87,6 +87,7 @@
 }
 
 .abstract h2,
+.manuscriptAbstract h2,
 .body h2,
 .footnotes h2 {
   margin: 0 0 1.25rem;
@@ -99,14 +100,37 @@
 }
 
 .abstract p,
+.manuscriptAbstract p,
 .body p,
 .footnotes p {
   margin: 0;
 }
 
 .abstract p + p,
+.manuscriptAbstract > p + p,
 .body p + p {
   margin-top: 1.5rem;
+}
+
+.manuscriptAbstract {
+  margin-top: 3rem;
+  padding-top: 2rem;
+  border-top: 1px solid var(--rule-strong);
+}
+
+.manuscriptByline {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 0.5rem 1.5rem;
+  margin-bottom: 1.5rem;
+  color: var(--supporting-ink);
+  font-size: var(--type-interface);
+  line-height: var(--interface-leading);
+}
+
+.manuscriptByline p + p {
+  margin-top: 0;
 }
 
 .contents summary {
