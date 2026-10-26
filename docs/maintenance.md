@@ -144,7 +144,7 @@ or a download. Each reading page returns to its project anchor on Experience.
 | Evidence uncertainty and decision guarantees in investment research | [Source](https://app.notion.com/p/3ed867f96db581cfaae7d40b93aaa080?pvs=204) |
 
 `ResearchArticle` renders both AI projects and Selected Research with a focused CSS
-Module that gives prose and table cells the shared 16px reading size, and H3 headings
+Module that gives prose and table cells the shared 14px reading size, and H3 headings
 the shared 18px subheading size.
 `ResearchMath` uses `app/lib/content/research-math.ts` to render TeX on the server with the pinned MathJax
 4.1.3 engine and its TeX font package. Visible equations contain complete SVG glyph
@@ -270,10 +270,11 @@ preload. Keep text in the inherited font; reserve separate lettering for brand a
 
 The visual reference is Cognition's grid, warm paper color, restrained rules, and
 spacing. Inter remains the site's own self-hosted typeface. Research and other body
-text share 16px, subsection headings share 18px, and math uses a relative 1.15em scale.
-Section headings use 24px, or 22px below 768px. Experience directory labels use the
-16px reading role and directory numbers use the 14px interface role. Main navigation
-stays at 14px; section margin indices on About and Experience stay at 12px.
+text share 14px with 1.6 leading; subsection headings use 18px. Page titles and
+section headings use 22px with 1.25 leading at every viewport. Math uses a relative
+1.15em scale. Experience directory labels, metadata, main navigation, indices,
+field labels, and footers all use 14px. The semantic token names remain distinct;
+mobile layouts retain the same 22px, 18px, and 14px hierarchy.
 Keep these roles synchronized through `app/globals.css`; do not give a particular
 article a larger prose size or change type size to fit a long title.
 

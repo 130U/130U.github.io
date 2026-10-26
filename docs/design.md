@@ -47,21 +47,21 @@ scale relative to surrounding text without changing the prose size.
 
 | Role | Shared token | Size at the default text setting | Leading |
 | --- | --- | --- | --- |
-| Page title | `--type-title` | 36px; 28px below 768px, weight 400 | 1.2 |
-| Section heading | `--type-heading` | 24px; 22px below 768px, weight 400 | 1.25 |
+| Page title | `--type-title` | 22px, weight 400 | 1.25 |
+| Section heading | `--type-heading` | 22px, weight 400 | 1.25 |
 | Project, About institution, course-category heading | `--type-subheading` | 18px, weight 600 | 1.45 |
-| About degree | `--type-reading` | 16px, weight 500 | 1.6 |
-| Body, records, introductions, course names, Experience directory item | `--type-reading` | 16px | 1.6 |
+| About degree | `--type-reading` | 14px, weight 500 | 1.6 |
+| Body, records, introductions, course names, metadata values, Experience directory item | `--type-reading` | 14px | 1.6 |
 | Navigation, menu, wordmark name, return link | `--type-interface` | 14px | 1.4 |
 | Experience directory number | `--type-interface` | 14px | 1.4 |
 | Project reading action | `--type-action`, alias of `--type-interface` | 14px, weight 500 | 1.4 |
-| Research prose and table cells | `--type-reading` | 16px | 1.6 |
+| Research prose and table cells | `--type-reading` | 14px | 1.6 |
 | Mathematical expression | `--type-math` | 1.15em of its surrounding text | Intrinsic mathematical geometry |
-| Field label, section margin index, footer | `--type-label` | 12px | 1.4 |
+| Field label, section margin index, footer | `--type-label` | 14px | 1.4 |
 
-All roles use rem units and scale with the user's text setting. Only the title
-and section roles become smaller below 768px, consistently across the site and
-architecture viewer. About headings use zero tracking; other page and section
+Text roles use rem units and scale with the user's text setting. The 22px, 18px,
+and 14px hierarchy stays the same at every viewport across the site and architecture
+viewer; mobile layouts do not reduce type sizes. About headings use zero tracking; other page and section
 headings retain -0.02em tracking. Reading text stays near zero. The shared
 `--reading-leading` supports sustained reading.
 Blue marks active navigation, focus, and link feedback. Editorial surfaces use flat
@@ -72,12 +72,12 @@ its temporary reading state.
 
 Experience shares About's Inter family, fixed optical size, role sizes, grid, and
 paper/ink palette. It is one page with five numbered sections and a compact anchor
-directory that stays in one column at every screen width. Its labels use the 16px
+directory that stays in one column at every screen width. Its labels use the 14px
 reading role and its numbers use the 14px interface role; section margin indices
-remain 12px on both About and Experience. Section spacing separates
+use 14px on both About and Experience. Section spacing separates
 domains; thin rules and 28px gaps distinguish entries within them. Category
 introductions are omitted. Summaries use upright
-black body text at 16px; project and organization titles use the 18px subheading
+black body text at 14px; project and organization titles use the 18px subheading
 role. No content is truncated to fit a card.
 
 The black and blue in the approved Word document identify outer and detail content;
@@ -105,7 +105,7 @@ includes the contribution block, retains the original chapter links, and follows
 the existing responsive reading layout. Return links target the matching entry on
 Experience. About and its mathematical manuscripts retain their existing layouts.
 
-Research article prose, emphasis, citations, and table cells use the shared 16px
+Research article prose, emphasis, citations, and table cells use the shared 14px
 reading size. Subsection headings use the shared 18px size with weight 600. Inline
 and standalone formulas use a relative 1.15em scale. Subscripts,
 superscripts, fractions, accents, and equation labels retain their mathematical
@@ -174,14 +174,14 @@ About uses compact spacing inside each research or education record and larger
 breaks between its numbered sections. The research title is an underlined manuscript
 link in black ink, with blue hover and keyboard-focus feedback, followed by a single
 supporting paragraph. Paragraphs wrap naturally
-without forced line breaks. Section headings, entry headings, and reading text keep
-the existing type sizes; scoped spacing overrides do not affect other pages.
+without forced line breaks. Section headings, entry headings, and reading text use
+the shared 22px, 18px, and 14px hierarchy; scoped spacing overrides do not affect other pages.
 
 Page titles own the H1 position. About's two-line "Thinking mathematically / Working in AI"
 supplies its main heading; the particle wordmark retains the full name artwork.
 Experience domains use `01`–`05` indices, and entries use lowercase letters.
-Bullet markers occupy an 18px gutter beside the text. Narrative lines remain within
-roughly 64–72 characters where the layout permits.
+Bullet markers occupy an 18px gutter beside the text. Narrative lines stay within
+the shared 720px reading measure and reflow with the viewport.
 
 ## Interaction
 
@@ -233,7 +233,7 @@ focus, followed by a supporting paragraph stating the method and the achieved
 result within the paper's specified example. Numerical guarantees retain their
 model, horizon, payoff, and comparison scope.
 It does not repeat the abstracts or add a separate action row. Titles use the same
-18px subheading role; supporting paragraphs use the 16px reading role. Thin
+18px subheading role; supporting paragraphs use the 14px reading role. Thin
 horizontal rules separate entries. Typography, spacing, and wrapping adapt within
 the shared reading frame without introducing cards or changing the palette.
 
