@@ -346,7 +346,7 @@ test("About research titles link to complete papers with their source links pres
   assert.doesNotMatch(about, /Developed a mathematical framework for certifying|Read more about Certified/u);
   for (const [slug, title, description, tables] of [
     ["certified-valuation-arithmetic-asian-options", "Certified Valuation of Arithmetic Asian Options", "discretization-error bound below 0.011025 price units", 11],
-    ["certified-rough-heston-valuation", "Certified Joint Pricing Errors in Rough Heston", "finite-history propagation tightens the complete error upper bound by 72.91%", 13],
+    ["certified-rough-heston-valuation", "Certified Joint Pricing Errors in Rough Heston", "finite-history propagation tightens the complete pricing-error upper bound by 72.91%", 13],
   ]) {
     assert.match(about, new RegExp(`id="${slug}"`, "u"));
     const headings = [...about.matchAll(/<h3\b[^>]*>([\s\S]*?)<\/h3>/gu)].map((match) => stripMarkup(match[1]));
