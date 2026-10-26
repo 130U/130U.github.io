@@ -1,3 +1,9 @@
+.homeFrame {
+  font-family: var(--font-text);
+  font-optical-sizing: none;
+  font-variation-settings: "opsz" 14;
+}
+
 .homeFrame :global(.content-column) {
   padding-top: 0;
 }
@@ -50,7 +56,7 @@
   margin: 0;
   font-size: var(--type-title);
   font-weight: 400;
-  letter-spacing: -0.025em;
+  letter-spacing: 0;
   line-height: var(--title-leading);
   text-wrap: balance;
 }
@@ -79,7 +85,7 @@
   font-size: var(--type-heading);
   font-weight: 400;
   line-height: var(--heading-leading);
-  letter-spacing: -0.02em;
+  letter-spacing: 0;
 }
 
 .researchEntry + .researchEntry {
@@ -89,10 +95,12 @@
 }
 
 .researchTitle,
-.institution {
+.institution,
+.courseTitle {
   margin: 0;
   font-size: var(--type-subheading);
   font-weight: 600;
+  letter-spacing: 0;
   line-height: var(--subheading-leading);
   text-wrap: balance;
 }
@@ -106,7 +114,7 @@
 }
 
 .researchTitle a {
-  color: var(--accent);
+  color: var(--ink);
 }
 
 .researchTitle a,
@@ -128,16 +136,23 @@
   text-decoration-color: var(--accent);
 }
 
+.educationList {
+  margin-top: 8px;
+}
+
 .educationList :global(.education-entry) {
-  padding: 0 0 24px;
+  padding: 0;
+  border-bottom: 0;
 }
 
 .educationList :global(.education-entry) + :global(.education-entry) {
-  padding-top: 24px;
+  margin-top: 16px;
+  padding-top: 16px;
+  border-top: 1px solid var(--rule);
 }
 
 .educationList :global(.education-degree) {
-  margin-top: 6px;
+  margin-top: 0;
   font-size: var(--type-reading);
   font-weight: 500;
   line-height: var(--reading-leading);
@@ -145,44 +160,36 @@
 
 .educationList :global(.entry-subtitle),
 .educationList :global(.education-note) {
-  margin-top: 4px;
+  margin-top: 0;
   color: var(--supporting-ink);
 }
 
 .educationList :global(.education-notes) {
-  margin-top: 10px;
+  margin-top: 0;
 }
 
 .educationList :global(.education-note) + :global(.education-note) {
-  margin-top: 4px;
-}
-
-.fellowship {
-  margin: 20px 0 0;
-  font-size: var(--type-reading);
-  line-height: var(--reading-leading);
-}
-
-.courseGrid {
-  border-top: 0;
-  border-bottom: 0;
+  margin-top: 0;
 }
 
 .courseGrid article {
-  padding-top: 0;
+  min-width: 0;
 }
 
-.courseGrid article:nth-child(n + 3) {
-  padding-top: 30px;
+.courseGrid article + article {
+  margin-top: 20px;
+  padding-top: 20px;
+  border-top: 1px solid var(--rule);
 }
 
-.courseGrid h3 {
-  margin-bottom: 12px;
+.courseTitle {
+  margin-bottom: 8px;
 }
 
 .courseGrid :global(.course-list) {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
   color: var(--supporting-ink);
-  gap: 4px;
+  gap: 2px 24px;
 }
 
 .contactStrip {
@@ -197,7 +204,7 @@
   display: grid;
   min-width: 0;
   align-content: start;
-  gap: 8px;
+  gap: 4px;
 }
 
 .contactStrip li + li {
@@ -276,12 +283,8 @@
     margin-bottom: 22px;
   }
 
-  .courseGrid article + article {
-    padding-top: 30px;
-  }
-
-  .courseGrid article:first-child {
-    padding-top: 0;
+  .courseGrid :global(.course-list) {
+    grid-template-columns: 1fr;
   }
 }
 

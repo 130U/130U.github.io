@@ -1,14 +1,13 @@
 import Link from "next/link";
 import { courseworkGroups } from "../lib/content/about";
 import { selectedResearchProjects } from "../lib/content/selected-research";
-import { FELLOWSHIP } from "../lib/content/site";
 import styles from "../home.module.css";
 
 const researchSummaries: Record<string, string> = {
   "certified-valuation-arithmetic-asian-options":
-    "I use a shared Gaussian factor to control the nonsmooth payoff of an arithmetic Asian option, then combine the resulting bounds with validated Heston transforms. The resulting certificate bounds projected Euler time-discretization error in the paper’s monthly call-spread example, with numerical integration and rounding errors explicitly accounted for.",
+    "I develop a weighted payoff-remainder method that uses a shared Gaussian factor to control the nonsmooth Asian payoff. Coupled with validated Heston transforms, it yields a complete projected Euler discretization-error bound below 0.011025 price units for the paper’s one-year call spread with twelve monthly fixings.",
   "certified-rough-heston-valuation":
-    "I propagate fractional Riccati residuals into price bounds while retaining the Fourier errors shared across strikes. The resulting joint certificate captures cancellation in portfolios that separate price bounds miss. In the paper’s quarter-year call-spread example, the joint bound meets a 0.25-point budget that the corresponding separate bounds do not certify.",
+    "I develop a joint error framework combining finite-history propagation of fractional Riccati residuals with the Fourier error structure shared across strikes. For the paper’s quarter-year call spread, this tightens the complete error bound by 7.6% over matched separate-price bounds and certifies a 0.25-point budget.",
 };
 
 export function AboutContent() {
@@ -57,9 +56,9 @@ export function AboutContent() {
         <p className={styles.sectionIndex} aria-hidden="true">03</p>
         <div className={styles.sectionBody}>
           <h2 className={styles.sectionTitle} id="education-heading">Education</h2>
+          <h3 className={styles.institution}>Duke University</h3>
           <div className={styles.educationList}>
             <article className="education-entry">
-              <h3 className={styles.institution}>Duke University</h3>
               <h4 className="education-degree">Master of Engineering in Risk Engineering</h4>
               <p className="entry-subtitle">Financial Risk Concentration</p>
               <div className="education-notes">
@@ -71,13 +70,11 @@ export function AboutContent() {
               </div>
             </article>
             <article className="education-entry">
-              <h3 className={styles.institution}>Duke University</h3>
               <h4 className="education-degree">Bachelor of Science in Mathematics</h4>
               <p className="entry-subtitle">Dual-Degree Undergraduate Program</p>
               <p className="education-note">Undergraduate Merit Scholarship</p>
             </article>
           </div>
-          <p className={styles.fellowship}>{`${FELLOWSHIP.title}, Cohort ${FELLOWSHIP.cohort}`}</p>
         </div>
       </section>
 
@@ -85,10 +82,10 @@ export function AboutContent() {
         <p className={styles.sectionIndex} aria-hidden="true">04</p>
         <div className={styles.sectionBody}>
           <h2 className={styles.sectionTitle} id="coursework-heading">Selected Coursework</h2>
-          <div className={`course-grid ${styles.courseGrid}`}>
+          <div className={styles.courseGrid}>
             {courseworkGroups.map((group) => (
               <article key={group.title}>
-                <h3>{group.title}</h3>
+                <h3 className={styles.courseTitle}>{group.title}</h3>
                 <ul className="course-list">
                   {group.courses.map((course) => <li key={course}>{course}</li>)}
                 </ul>

@@ -255,8 +255,8 @@ test("About research titles link to complete papers with their source links pres
   assert.ok(about.indexOf('id="education"') < about.indexOf('id="coursework"'));
   assert.doesNotMatch(about, /Developed a mathematical framework for certifying|Read more about Certified/u);
   for (const [slug, title, description, tables] of [
-    ["certified-valuation-arithmetic-asian-options", "Certified Valuation of Arithmetic Asian Options", "projected Euler time-discretization error", 11],
-    ["certified-rough-heston-valuation", "Certified Joint Pricing Errors in Rough Heston", "the corresponding separate bounds do not certify", 13],
+    ["certified-valuation-arithmetic-asian-options", "Certified Valuation of Arithmetic Asian Options", "discretization-error bound below 0.011025 price units", 11],
+    ["certified-rough-heston-valuation", "Certified Joint Pricing Errors in Rough Heston", "tightens the complete error bound by 7.6%", 13],
   ]) {
     assert.match(about, new RegExp(`id="${slug}"`, "u"));
     const headings = [...about.matchAll(/<h3\b[^>]*>([\s\S]*?)<\/h3>/gu)].map((match) => stripMarkup(match[1]));
@@ -501,7 +501,8 @@ test("About and its education alias preserve both degrees, 49 courses, and the a
     for (const record of ["Master of Engineering in Risk Engineering", "Financial Risk Concentration", "Bachelor of Science in Mathematics", "Dual-Degree Undergraduate Program", "Pratt School of Engineering Merit Scholarship", "Undergraduate Merit Scholarship", "Academic advisor:", "Mark Borsuk, Ph.D."]) {
       assert.ok(text.includes(record), `${route} is missing ${record}`);
     }
-    assert.equal((text.match(/Sequoia Fellow, Cohort 8/gu) ?? []).length, 1);
+    assert.equal((text.match(/Duke University/gu) ?? []).length, 1);
+    assert.doesNotMatch(text, /Sequoia Fellow/u);
     assert.doesNotMatch(text, /highest-tier merit awards/u);
   }
 });
