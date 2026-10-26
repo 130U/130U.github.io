@@ -6,9 +6,9 @@ import styles from "../home.module.css";
 
 const researchSummaries: Record<string, string> = {
   "certified-valuation-arithmetic-asian-options":
-    "Rigorous error bounds for numerical option valuation.",
+    "I use a shared Gaussian factor to control the nonsmooth payoff of an arithmetic Asian option, then combine the resulting bounds with validated Heston transforms. The resulting certificate bounds projected Euler time-discretization error in the paper’s monthly call-spread example, with numerical integration and rounding errors explicitly accounted for.",
   "certified-rough-heston-valuation":
-    "Joint error bounds for related valuations that share a stochastic model.",
+    "I propagate fractional Riccati residuals into price bounds while retaining the Fourier errors shared across strikes. The resulting joint certificate captures cancellation in portfolios that separate price bounds miss. In the paper’s quarter-year call-spread example, the joint bound meets a 0.25-point budget that the corresponding separate bounds do not certify.",
 };
 
 export function AboutContent() {
@@ -18,8 +18,8 @@ export function AboutContent() {
         <p className={styles.sectionIndex} aria-hidden="true">01</p>
         <div className={styles.sectionBody}>
           <h1 id="home-heading">
-            <span>Thinking mathematically.</span>{" "}
-            <span>Working in AI.</span>
+            <span>Thinking mathematically</span>{" "}
+            <span>Working in AI</span>
           </h1>
           <div className={styles.biographyCopy}>
             <p>
@@ -43,13 +43,10 @@ export function AboutContent() {
           <div>
             {selectedResearchProjects.map((project) => (
               <article className={styles.researchEntry} key={project.slug} id={project.slug}>
-                <h3 className={styles.researchTitle}>{project.title}</h3>
+                <h3 className={styles.researchTitle}>
+                  <Link href={project.path}>{project.title}</Link>
+                </h3>
                 <p className={styles.researchSummary}>{researchSummaries[project.slug]}</p>
-                <ul className={styles.researchLinks} aria-label={`${project.title} links`}>
-                  <li><Link href={project.path}>Paper</Link></li>
-                  <li><a href={project.repositoryUrl} target="_blank" rel="noopener noreferrer">Repository</a></li>
-                  <li><a href={`${project.repositoryUrl}/blob/main/EVIDENCE.md`} target="_blank" rel="noopener noreferrer">Results</a></li>
-                </ul>
               </article>
             ))}
           </div>

@@ -152,7 +152,13 @@ above 540px and stack in one column at 540px and below. Long contact values can 
 when text is enlarged.
 Coarse pointers receive 44px primary navigation and standalone link targets.
 
-Page titles own the H1 position. About's "Thinking mathematically. Working in AI."
+About uses compact spacing inside each research or education record and larger
+breaks between its numbered sections. The research title is a blue, underlined
+manuscript link, followed by a single supporting paragraph. Paragraphs wrap naturally
+without forced line breaks. Section headings, entry headings, and reading text keep
+the existing type sizes; scoped spacing overrides do not affect other pages.
+
+Page titles own the H1 position. About's two-line "Thinking mathematically / Working in AI"
 supplies its main heading; the particle wordmark retains the full name artwork.
 Experience domains use `01`–`05` indices, and entries use lowercase letters.
 Bullet markers occupy an 18px gutter beside the text. Narrative lines remain within
@@ -198,11 +204,12 @@ Five domain pages carry the experience record. Domain `03` is Legal Research and
 Policy Analysis; its four selected papers each open a dedicated article page.
 Domain `01`, AI Research and Engineering, links four project reading pages.
 About's Selected Research section presents two compact entries, each with its
-original title, a short description, and Paper, Repository, and Results links.
-It does not repeat the abstracts or add a Read more button. Titles use the same
-18px subheading role; reading actions use the 14px interface role. Thin horizontal
-rules separate entries. Typography, spacing, and wrapping adapt within the shared
-reading frame without introducing cards or changing the palette.
+original title as a blue link to the on-site manuscript, followed by a supporting
+paragraph describing the method and contribution within the paper's stated scope.
+It does not repeat the abstracts or add a separate action row. Titles use the same
+18px subheading role; supporting paragraphs use the 17px reading role. Thin
+horizontal rules separate entries. Typography, spacing, and wrapping adapt within
+the shared reading frame without introducing cards or changing the palette.
 
 Each research page provides a contents list and the manuscript's abstract, core
 chapters, formulas, and references. The Asian-options paper includes chapters 1–10;
