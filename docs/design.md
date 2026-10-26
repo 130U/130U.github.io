@@ -172,8 +172,8 @@ Coarse pointers receive 44px primary navigation and standalone link targets.
 
 About uses compact spacing inside each research or education record and larger
 breaks between its numbered sections. The research title is an underlined manuscript
-link in black ink, with blue hover and keyboard-focus feedback, followed by a single
-supporting paragraph. Paragraphs wrap naturally
+link in black ink, with blue hover and keyboard-focus feedback, followed by
+supporting paragraphs. Paragraphs wrap naturally
 without forced line breaks. Section headings, entry headings, and reading text use
 the shared 22px, 18px, and 14px hierarchy; scoped spacing overrides do not affect other pages.
 
@@ -227,10 +227,9 @@ Policy Analysis; its four selected papers
 retain their dedicated article URLs. Domain `01`, AI Research and Engineering,
 retains four project reading URLs. The other ten entries open dedicated detail
 pages under `/experience/`.
-About's Selected Research section presents two compact entries, each with its
+About's Selected Research section presents two entries, each with its
 original title as a black manuscript link that turns blue on hover or keyboard
-focus, followed by a supporting paragraph stating the method and the achieved
-result within the paper's specified example. Numerical guarantees retain their
+focus, followed by supporting paragraphs with selected bold emphasis. Numerical guarantees retain their
 model, horizon, payoff, and comparison scope.
 It does not repeat the abstracts or add a separate action row. Titles use the same
 18px subheading role; supporting paragraphs use the 14px reading role. Thin
