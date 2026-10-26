@@ -1,34 +1,18 @@
 import Link from "next/link";
 import { showcaseDomains, type ShowcaseDomain, type ShowcaseEntry } from "../../lib/content/experience-showcase";
-import { ExperienceMetadata, KeyContributions } from "./ExperienceDetails";
 import styles from "./Experience.module.css";
 
 function ReadingArrow() {
   return <svg viewBox="0 0 24 24" fill="none" aria-hidden="true" focusable="false"><path d="m9 5 7 7-7 7" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" /></svg>;
 }
 function ExperienceEntry({ entry }: { entry: ShowcaseEntry }) {
-  const title = entry.articlePath ? entry.detailTitle : entry.organization;
   return (
     <article className={styles.entry} id={entry.slug} data-experience-entry={entry.id}>
-      <h3 className={styles.entryTitle}>{title}</h3>
-      {entry.articlePath && entry.organization !== entry.detailTitle && <p className={styles.organization}>{entry.organization}</p>}
+      <h3 className={styles.entryTitle}>{entry.listingTitle}</h3>
       <p className={styles.summary} data-experience-summary>{entry.summary}</p>
-      {entry.articlePath ? (
-        <Link className={styles.readMore} href={entry.articlePath} aria-label={`Read more about ${entry.detailTitle}`}>
-          {entry.readMoreLabel}<ReadingArrow />
-        </Link>
-      ) : (
-        <details className={styles.details}>
-          <summary className={styles.readMore}>
-            <span className={styles.closedLabel}>{entry.readMoreLabel}</span><span className={styles.openLabel}>Show less</span><span className={styles.visuallyHidden}> about {entry.organization}</span><ReadingArrow />
-          </summary>
-          <div className={styles.detailBody}>
-            <h4>{entry.detailTitle}</h4>
-            <ExperienceMetadata entry={entry} />
-            <KeyContributions entry={entry} id={`${entry.slug}-key-contributions`} nested />
-          </div>
-        </details>
-      )}
+      <Link className={styles.readMore} href={entry.detailPath} aria-label={`Read more about ${entry.pageTitle}`}>
+        {entry.readMoreLabel}<ReadingArrow />
+      </Link>
     </article>
   );
 }

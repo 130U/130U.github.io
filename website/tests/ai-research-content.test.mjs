@@ -13,25 +13,25 @@ const PROJECTS = [
     slug: "statistical-inference-and-resource-allocation-in-expert-data-production",
     title: "Statistical inference and resource allocation in expert data production",
     markdownSha256: "d5337572ca5f67cab778e55f29e60f54cad14270ca346426046139c3d5d6fb58",
-    display: 15, inline: 64, headings: 7, citations: 5, strong: 10, tables: [[4, 4, 4, 4, 4, 4]],
+    bodyStart: 4, display: 15, inline: 64, headings: 7, citations: 5, strong: 7, tables: [[4, 4, 4, 4, 4, 4]],
   },
   {
     slug: "task-validity-in-financial-synthetic-data",
     title: "Task validity in financial synthetic data",
     markdownSha256: "5dd231da44360e298f656048ea05e0c45e8c30dabc65f509c20a36d3edef3797",
-    display: 9, inline: 52, headings: 6, citations: 9, strong: 7, tables: [[3, 3, 3, 3], [3, 3, 3, 3, 3]],
+    bodyStart: 3, display: 9, inline: 52, headings: 6, citations: 9, strong: 5, tables: [[3, 3, 3, 3], [3, 3, 3, 3, 3]],
   },
   {
     slug: "verification-and-supervision-in-scientific-reasoning-tasks",
     title: "Verification and supervision in scientific reasoning tasks",
     markdownSha256: "e2e2ea3032919367a671e280a439d07500444bf1f0fa6937734986cdcc275a27",
-    display: 9, inline: 49, headings: 7, citations: 6, strong: 3, tables: [[4, 4, 4, 4]],
+    bodyStart: 3, display: 9, inline: 49, headings: 7, citations: 6, strong: 1, tables: [[4, 4, 4, 4]],
   },
   {
     slug: "evidence-uncertainty-and-decision-guarantees-in-investment-research",
     title: "Evidence uncertainty and decision guarantees in investment research",
     markdownSha256: "7e615e1b16b049a9f86b8a403c88d33c677da895652e795421c3d76b760f07d1",
-    display: 10, inline: 69, headings: 6, citations: 7, strong: 5, tables: [[3, 3, 3, 3]],
+    bodyStart: 2, display: 10, inline: 69, headings: 6, citations: 7, strong: 3, tables: [[3, 3, 3, 3]],
   },
 ];
 
@@ -157,7 +157,7 @@ function tableCells(html, source) {
 }
 
 for (const expected of PROJECTS) {
-  test(`AI project preserves the complete source: ${expected.slug}`, async () => {
+  test(`AI project preserves its complete numbered manuscript after replacing its front matter: ${expected.slug}`, async () => {
     const source = JSON.parse(await readFile(path.join(ROOT, "content", "artificial-intelligence", `${expected.slug}.json`), "utf8"));
     const showcase = JSON.parse(await readFile(path.join(ROOT, "content", "experience-showcase.json"), "utf8"))
       .entries.find(({ id }) => id === PROJECTS.indexOf(expected) + 1);
@@ -165,27 +165,33 @@ for (const expected of PROJECTS) {
     assert.equal(source.slug, expected.slug);
     assert.equal(source.title, expected.title);
     assert.equal(createHash("sha256").update(source.markdown, "utf8").digest("hex"), expected.markdownSha256);
-    assert.equal(readableHtml(html.match(/<h1\b[^>]*>([\s\S]*?)<\/h1>/iu)?.[1] ?? ""), showcase.detailTitle);
-    assert.equal(readableHtml(html.match(/<h2\b[^>]*\bid="article-title"[^>]*>([\s\S]*?)<\/h2>/iu)?.[1] ?? ""), expected.title);
+    assert.equal(readableHtml(html.match(/<h1\b[^>]*>([\s\S]*?)<\/h1>/iu)?.[1] ?? ""), `${showcase.organization}: ${showcase.detailTitle}`);
     assert.match(html, new RegExp(`href="/experience/#${expected.slug}"`, "u"));
     assert.match(html, /href="#key-contributions"/u);
-    assert.doesNotMatch(html, /href="#overview"|id="overview"/u);
-    assert.ok(html.indexOf('id="key-contributions"') < html.indexOf('data-research-block="0"'));
+    assert.doesNotMatch(html, /href="#overview"|id="overview"|id="article-title"/u);
+    assert.ok(html.indexOf('id="key-contributions"') < html.indexOf(`data-research-block="${expected.bodyStart}"`));
 
     const sourceBlocks = expectedBlocks(source.markdown);
+    assert.equal(sourceBlocks.findIndex((block) => block.type === "heading"), expected.bodyStart, "Only the approved Project/Author and Overview front matter may be replaced.");
+    const removedFrontMatter = sourceBlocks.slice(0, expected.bodyStart);
+    assert.ok(removedFrontMatter.every((block) => block.type === "paragraph"));
+    const removedMarkdown = removedFrontMatter.map((block) => block.source).join("\n");
+    assert.deepEqual(formulas(removedMarkdown), [], "Removing the introductory presentation must never remove a formula.");
+    assert.doesNotMatch(removedMarkdown, /\[[^\]]+\]\(https?:\/\//u, "The approved front-matter removal contains no citations.");
+    const bodyBlocks = sourceBlocks.slice(expected.bodyStart);
     const actualBlocks = renderedBlocks(html);
-    assert.equal(actualBlocks.length, sourceBlocks.length);
-    for (let index = 0; index < sourceBlocks.length; index += 1) {
+    assert.equal(actualBlocks.length, bodyBlocks.length);
+    for (let index = 0; index < bodyBlocks.length; index += 1) {
       const actual = actualBlocks[index];
-      const original = sourceBlocks[index];
-      assert.equal(actual.index, index, "Source blocks must appear exactly once and in order");
+      const original = bodyBlocks[index];
+      assert.equal(actual.index, expected.bodyStart + index, "Every numbered-manuscript block must appear exactly once, in order, with its original source index");
       assert.equal(actual.type, original.type);
       const actualText = readableHtml(actual.html);
       const originalText = readableMarkdown(original.source);
       assert.equal(
         original.type === "heading" ? actualText.replace(/^[IVXLCDM]+\. /u, "") : actualText,
         original.type === "heading" ? originalText.replace(/^\d+\.? /u, "") : originalText,
-        `${expected.slug} changed source block ${index}`,
+        `${expected.slug} changed source block ${expected.bodyStart + index}`,
       );
       if (original.type === "heading") assert.equal(actual.tag, "h2");
     }
@@ -194,7 +200,7 @@ for (const expected of PROJECTS) {
     assert.equal(actualBlocks.filter((block) => block.type === "heading").length, expected.headings);
     assert.doesNotMatch(content, /<h[2-6]\b[^>]*>\s*(?:Abstract|References)\s*<\/h[2-6]>/iu);
     assert.equal((content.match(/<strong\b/giu) ?? []).length, expected.strong);
-    const originalStrong = [...source.markdown.matchAll(/\*\*([^*]+)\*\*/gu)].map((match) => readableMarkdown(match[1]));
+    const originalStrong = [...bodyBlocks.map((block) => block.source).join("\n").matchAll(/\*\*([^*]+)\*\*/gu)].map((match) => readableMarkdown(match[1]));
     const actualStrong = [...content.matchAll(/<strong\b[^>]*>([\s\S]*?)<\/strong>/giu)].map((match) => readableHtml(match[1]));
     assert.deepEqual(actualStrong, originalStrong);
 

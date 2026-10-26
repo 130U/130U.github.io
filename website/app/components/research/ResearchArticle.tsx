@@ -76,7 +76,7 @@ export function ResearchArticle({ project, active, returnPath, returnLabel, titl
       <article className={readingStyles.paper} aria-labelledby={titleId}>
         <header className={`page-intro plain-page-intro ${readingStyles.header}`}>
           <Link className="back-link" href={returnPath}><span aria-hidden="true">←</span> {returnLabel}</Link>
-          <h1 id={titleId} tabIndex={-1}>{showcase?.detailTitle ?? project.title}</h1>
+          <h1 id={titleId} tabIndex={-1}>{showcase?.pageTitle ?? project.title}</h1>
           {showcase ? <ExperienceMetadata entry={showcase} /> : frontMatterCount > 0 && <div className={styles.frontMatter}>{renderedBlocks.slice(0, frontMatterCount)}</div>}
           {project.repositoryUrl && <p className={styles.sourceLinks}><a href={project.repositoryUrl}>GitHub</a><a href={project.sourceUrl}>Full manuscript</a></p>}
         </header>
@@ -88,10 +88,7 @@ export function ResearchArticle({ project, active, returnPath, returnLabel, titl
             ...project.blocks.filter((block) => block.type === "heading").map((heading) => ({ id: heading.id, text: headingPresentations.get(heading.id)!.text, level: heading.level - 1 })),
           ]}
         >
-          <div className={`${readingStyles.body} ${styles.body}`}>
-            {showcase && <h2 id="article-title" tabIndex={-1} className={styles.manuscriptTitle}>{project.title}</h2>}
-            {showcase ? renderedBlocks : renderedBlocks.slice(bodyStart)}
-          </div>
+          <div className={`${readingStyles.body} ${styles.body}`}>{renderedBlocks.slice(bodyStart)}</div>
         </ArticleReadingLayout>
 
         <footer className={readingStyles.paperFooter}>

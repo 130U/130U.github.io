@@ -71,8 +71,9 @@ its temporary reading state.
 
 Experience shares About's Inter family, fixed optical size, role sizes, grid, and
 paper/ink palette. It is one page with five numbered sections and a compact anchor
-directory. Section spacing separates domains; thin rules and 28px gaps distinguish
-entries within them. Category introductions are omitted. Summaries use upright
+directory that stays in one column at every screen width. Section spacing separates
+domains; thin rules and 28px gaps distinguish entries within them. Category
+introductions are omitted. Summaries use upright
 black body text at 17px; project and organization titles use the 18px subheading
 role. No content is truncated to fit a card.
 
@@ -80,18 +81,21 @@ The black and blue in the approved Word document identify outer and detail conte
 blue is not a prose color on the website. All body copy uses the existing ink colors.
 Blue remains reserved for navigation, hover, and keyboard focus.
 
-Ten non-research entries use native Read More disclosures. Their title is followed
-by Position, Location, Dates, and the full approved contribution list. Metadata
-uses a full-width position row and two columns for location and dates, stacking
-on phones. Disclosures work without JavaScript and have 44px keyboard-accessible
-controls. Eight research entries link to their full article pages, where the same
-metadata and a concise Key Contributions block precede the manuscript. Do not
-repeat the outer summary in the detail view.
+All eighteen entries use real Read More links to dedicated pages. The eight AI and
+legal articles retain their existing URLs; the other ten entries have pages at
+`/experience/{slug}/`. Outer entries lead with the institution or organization;
+legal entries use `Duke Law School: {research area} Research`. Detail-page H1s use
+`{institution}: {project title}`. Position, Location, and Dates appear as three
+stacked rows in one column at every viewport, followed by the approved Key
+Contributions and optional notes. Links work without JavaScript and have accessible
+keyboard focus and touch targets. Do not repeat the outer summary in the detail view.
 
-AI pages use the approved project title as H1 and retain the original technical
-title at the start of the analysis, followed by every source block in its original
-order. Key Contributions replaces the standalone Overview label. Legal pages place
-Key Contributions before the unchanged Abstract and manuscript. The contents rail
+AI pages proceed directly from Key Contributions to the original numbered article
+body. The rendering layer omits the duplicate technical title, Project and Author
+lines, standalone Overview heading, and old introductory paragraphs before the
+first numbered chapter; the protected source JSON remains unchanged. Legal pages
+place Key Contributions before the complete unchanged Abstract and manuscript.
+The contents rail
 includes the contribution block, retains the original chapter links, and follows
 the existing responsive reading layout. Return links target the matching entry on
 Experience. About and its mathematical manuscripts retain their existing layouts.
@@ -126,7 +130,7 @@ The desktop frame is capped at 1440px and divided into 15 columns, with a three-
 sticky navigation rail. The content field reserves one internal track for indices and
 aligns headings and prose to the reading track. Tablet uses 12 outer columns.
 The shared `--reading-measure` caps narrative containers at 720px. Page introductions,
-the education list and outer coursework field, experience records, Current Chapter,
+the education list and outer coursework field, Experience records and detail pages,
 and AI project articles align their headings and prose to this common right edge.
 Nested paragraphs fill their container with natural ragged-right wrapping. Each
 coursework category contains a two-column list on desktop; legal articles retain
@@ -137,8 +141,9 @@ Without JavaScript, the links remain visible in normal document flow.
 
 Horizontal gutters are 64px on desktop, 32px on tablet, and 20px on phones.
 Structural guides are decorative and hidden from assistive technology; phone layouts
-omit them. Below 1280px, experience narrative text uses the full reading track;
-below 1024px, metadata also stacks. Long values wrap without narrowing the prose.
+omit them. Below 1280px, experience narrative text uses the full reading track.
+Experience metadata remains in one column at every width. Long values wrap without
+narrowing the prose.
 Phone indices use a 1.5rem track and a 0.625rem gap. These tracks and the mobile
 header scale with the user's text size. The wordmark wraps at word boundaries,
 and the desktop navigation rail scrolls internally when its contents exceed the
@@ -201,16 +206,20 @@ Chinese full-width punctuation is not used in public interface copy.
 Legal section symbols, paragraph symbols, mathematical notation, and author names
 with diacritics remain part of the source text.
 
-The three primary pages are About, Past Experience, and Current Chapter. About at
+The primary navigation contains About and Experience. About at
 `/` combines the introduction, Selected Research, Education, Selected Coursework,
 and contact details. The supplied first-person introduction leads the page; both
 Duke degrees, the advisor, scholarships, and all 49 courses remain
 available. Coursework keeps its four subject groups. The `/education/` compatibility
 page shares the About content without repeating the particle entrance, uses `/`
 as its canonical URL, and remains outside primary navigation and the sitemap.
-Five domain pages carry the experience record. Domain `03` is Legal Research and
-Policy Analysis; its four selected papers each open a dedicated article page.
-Domain `01`, AI Research and Engineering, links four project reading pages.
+Experience contains all five domains and eighteen entries. The five older domain
+URLs remain compatibility pages with `/experience/` as their canonical URL and a
+return link to the matching Experience section. Domain `03` is Legal Research and
+Policy Analysis; its four selected papers
+retain their dedicated article URLs. Domain `01`, AI Research and Engineering,
+retains four project reading URLs. The other ten entries open dedicated detail
+pages under `/experience/`.
 About's Selected Research section presents two compact entries, each with its
 original title as a black manuscript link that turns blue on hover or keyboard
 focus, followed by a supporting paragraph stating the method and the achieved
@@ -229,9 +238,11 @@ URL; source links should continue to identify that version. The full manuscript 
 available from the article header, and return links lead to the corresponding
 research entry on About. Existing `/education/<paper>/` article URLs remain stable.
 
-The website has eighteen canonical content routes and one Education compatibility
-route. The architecture viewer is one additional technical reference route, making
-twenty navigable routes in total, excluding 404.
+The website has twenty-two canonical content routes: About, Experience, two Selected
+Research articles, eight Experience manuscripts, and ten other Experience detail
+pages. Eight compatibility pages bring the content export to thirty routes. The
+architecture viewer adds one technical reference route, making thirty-one exported
+routes in total, excluding 404.
 Keep factual claims, metadata, copy, and content order aligned with the integrity manifests.
 
 ### Legal articles
@@ -239,14 +250,16 @@ Keep factual claims, metadata, copy, and content order aligned with the integrit
 Each paper uses the shared shell and Inter type system with a restrained reading
 measure. Preserve the source title, subtitle, author name, date, abstract, original
 chapter numbering, paragraph order, legal citations, and acknowledgments. The
-article title owns H1; chapters and subsections use semantic H2 and H3 headings.
+detail-page H1 combines the institution and approved project title; chapters and
+subsections use semantic H2 and H3 headings.
 Chapter headings use the section role at weight 400; subsections use the 18px
 subheading role at weight 600. Preserve source capitalization, italics, and emphasis.
 Legal citations within a paragraph use its body size and spacing, including text
 marked as small capitals in the source. Note previews use the same reading role;
 their headings use the section role at weight 400.
 
-A contents navigation links to the abstract, chapters, and footnotes. It occupies a
+A contents navigation links to Key Contributions, the abstract, chapters, and
+footnotes. It occupies a
 sticky side column when the reading field has enough space, and collapses into a
 single-column disclosure as the viewport or text size narrows. Section tracking
 identifies the current reading location without changing the document order.

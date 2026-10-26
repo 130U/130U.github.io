@@ -71,10 +71,10 @@ function exportedPages() {
   return pagesPromise ??= (async () => {
     const sitemap = await readFile(new URL("../out/sitemap.xml", import.meta.url), "utf8");
     const routes = [...sitemap.matchAll(/<loc>([^<]+)<\/loc>/gu)].map((match) => new URL(decodeHtml(match[1])).pathname);
-    assert.equal(routes.length, 12, "The unified Experience page and ten full articles remain canonical alongside About.");
+    assert.equal(routes.length, 22, "About, Experience, ten full articles and ten experience detail pages remain canonical.");
     routes.push("/education/", "/architecture/", "/past-experience/", "/now/",
       ...["artificial-intelligence", "data-science", "legal-research-and-policy-analysis", "finance", "stem-academic-competitions-and-training"].map((slug) => `/past-experience/${slug}/`));
-    assert.equal(new Set(routes).size, 21, "Audit all canonical pages and every retained compatibility route.");
+    assert.equal(new Set(routes).size, 31, "Audit all canonical pages and every retained compatibility route.");
     const entries = await Promise.all(routes.map(async (route) => {
       const html = await readFile(new URL(`../out/${route.replace(/^\//u, "")}index.html`, import.meta.url), "utf8");
       const tree = readTree(html);
@@ -85,7 +85,7 @@ function exportedPages() {
   })();
 }
 
-test("21 exported pages contain no encoding corruption, exposed math markup, duplicate IDs or broken local anchors", async () => {
+test("31 exported pages contain no encoding corruption, exposed math markup, duplicate IDs or broken local anchors", async () => {
   const pages = await exportedPages();
   for (const [route, page] of pages) {
     const text = readable(page.tree);
@@ -125,14 +125,22 @@ test("all ten full articles retain introduction, contents and body order with co
     const headings = [...elements(overview[0], (node) => /^h[23]$/u.test(node.tag)), ...elements(body[0], (node) => /^h[23]$/u.test(node.tag))];
     const isAiExperience = route.startsWith("/past-experience/artificial-intelligence/");
     const manuscriptTitles = headings.filter((node) => node.attrs.get("id") === "article-title");
-    assert.equal(manuscriptTitles.length, isAiExperience ? 1 : 0, `${route}: only AI Experience adds a technical manuscript title below its contribution lead.`);
+    assert.equal(manuscriptTitles.length, 0, `${route}: do not repeat the technical manuscript title below the contribution lead.`);
     if (isAiExperience) {
       const slug = route.split("/").filter(Boolean).at(-1);
-      const source = JSON.parse(await readFile(new URL(`../content/artificial-intelligence/${slug}.json`, import.meta.url), "utf8"));
-      assert.equal(readable(manuscriptTitles[0]), source.title, `${route}: retain the exact technical manuscript title.`);
+      const firstSourceIndices = new Map([
+        ["statistical-inference-and-resource-allocation-in-expert-data-production", 4],
+        ["task-validity-in-financial-synthetic-data", 3],
+        ["verification-and-supervision-in-scientific-reasoning-tasks", 3],
+        ["evidence-uncertainty-and-decision-guarantees-in-investment-research", 2],
+      ]);
       const sourceBlocks = elements(body[0], (node) => node.attrs.has("data-research-block"));
-      assert.ok(sourceBlocks.length && manuscriptTitles[0].end <= sourceBlocks[0].start, `${route}: the manuscript title must precede every original source block.`);
-      assert.ok(!links.includes("#article-title"), `${route}: the manuscript title is not an additional chapter.`);
+      assert.ok(sourceBlocks.length, `${route}: retain the numbered manuscript.`);
+      assert.equal(sourceBlocks[0].tag, "h2", `${route}: enter the first numbered chapter directly after contributions.`);
+      assert.equal(Number(sourceBlocks[0].attrs.get("data-research-block")), firstSourceIndices.get(slug), `${route}: remove only the approved original front matter.`);
+      assert.equal(sourceBlocks[0].attrs.get("data-source-number"), "1");
+      assert.equal(headings[1], sourceBlocks[0], `${route}: no repeated title or Overview heading may precede the first source chapter.`);
+      assert.equal(elements(body[0], (node) => node.tag === "p" && node.start < sourceBlocks[0].start).length, 0, `${route}: no repeated Project/Author or overview prose may precede the first source chapter.`);
     }
     if (route.startsWith("/past-experience/")) {
       assert.equal(links[0], "#key-contributions", `${route}: contribution points open the article directory.`);
@@ -142,7 +150,6 @@ test("all ten full articles retain introduction, contents and body order with co
     for (const heading of headings) {
       const id = heading.attrs.get("id");
       assert.ok(id, `${route}: heading ${readable(heading)} needs an anchor.`);
-      if (isAiExperience && id === "article-title") continue;
       const destinations = new Set([`#${id}`]);
       // A labelled section may be the intended destination (for example,
       // #footnotes is labelled by its nested #footnotes-heading).

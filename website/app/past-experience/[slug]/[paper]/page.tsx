@@ -26,12 +26,12 @@ export async function generateMetadata({ params }: Params): Promise<Metadata> {
   if (slug === "artificial-intelligence") {
     const project = getAiResearchProject(paperSlug);
     if (!project) notFound();
-    return createPageMetadata({ title: showcase.detailTitle, description: createMetadataExcerpt(showcase.summary), path: aiResearchProjectPath(project.slug) });
+    return createPageMetadata({ title: showcase.pageTitle, description: createMetadataExcerpt(showcase.summary), path: aiResearchProjectPath(project.slug) });
   }
   const paper = getLegalPaper(paperSlug);
   if (slug !== "legal-research-and-policy-analysis" || !paper) notFound();
   const metadata = createPageMetadata({
-    title: showcase.detailTitle,
+    title: showcase.pageTitle,
     description: createMetadataExcerpt(showcase.summary),
     path: legalPaperPath(paper.slug),
   });

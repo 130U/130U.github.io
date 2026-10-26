@@ -26,6 +26,7 @@ Paths in this table are relative to `website/`.
 | Asian-options research | `/education/certified-valuation-arithmetic-asian-options/` | `app/lib/content/selected-research.ts`, `content/selected-research/certified-valuation-arithmetic-asian-options.json` |
 | Rough Heston research | `/education/certified-rough-heston-valuation/` | `app/lib/content/selected-research.ts`, `content/selected-research/certified-rough-heston-valuation.json` |
 | Experience | `/experience/` | `app/components/experience/`, `content/experience-showcase.json` |
+| Experience detail pages | `/experience/[slug]/` | Approved entries from `content/experience-showcase.json` |
 | Experience compatibility aliases | `/past-experience/`, `/now/` | Shared Experience page |
 | Legacy experience categories | `/past-experience/[slug]/` | Filtered approved Experience sections |
 | AI research projects | `/past-experience/artificial-intelligence/[paper]/` | `app/lib/content/ai-projects.ts`, `content/artificial-intelligence/` |
@@ -41,25 +42,34 @@ The historical `content/past-experience/experience.md` and its parser remain int
 for provenance and category definitions.
 
 The primary navigation contains About and Experience. Experience presents all five
-numbered sections in one page, with an anchor directory and eighteen summaries.
-The ten non-research entries use native disclosures for their detailed title,
-Position / Location / Dates, contributions, and optional notes. The eight AI and
-legal entries link to their existing manuscript URLs. Both article types begin
-with approved metadata and concise Key Contributions. AI retains every original
-source block after its technical article title; legal articles retain their full
+numbered sections in one page, with a single-column anchor directory at every
+screen width and eighteen summaries. All eighteen Read More actions are links to
+real pages. The eight AI and legal entries retain their existing manuscript URLs;
+the other ten entries use `/experience/[slug]/`. Outer headings lead with the
+institution or organization; legal headings use `Duke Law School: {research area}
+Research`. Detail-page titles use `{institution}: {project title}`. Position,
+Location, and Dates form three stacked rows at every viewport, followed by the
+approved Key Contributions and optional notes. Do not repeat the outer summary.
+
+AI pages continue directly from Key Contributions into the original numbered
+article body. Only rendering omits the duplicate technical title, Project and
+Author lines, Overview heading, and the old pre-chapter introduction; the full
+source JSON remains protected and unchanged. Legal articles retain their complete
 Abstract, text, author note, and footnotes after the contribution block. Contents
 starts with Key Contributions and preserves the original chapter anchors.
 
-`app/lib/content/routes.ts` supplies twelve canonical sitemap routes: About,
-Experience, two Selected Research articles, and eight Experience manuscripts.
+`app/lib/content/routes.ts` supplies twenty-two canonical sitemap routes: About,
+Experience, two Selected Research articles, eight Experience manuscripts, and ten
+other Experience detail pages.
 The static export also retains `/education/`, `/past-experience/`, `/now/`, and the
 five old category URLs as compatibility pages. The category pages render the same
 approved entries and point canonically to the corresponding Experience section.
-There are twenty content routes and the separate `/architecture/` reference.
+There are thirty exported content routes and the separate `/architecture/`
+reference: thirty-one routes in total, excluding 404.
 
 Biographical, AI research, Selected Research, and legal source files are checked against `content/protected-sources.json`.
 `content/visible-copy-manifest.json` independently records text, metadata, alt text,
-and ARIA labels for all twenty content pages. Copy changes require the owner's explicit
+and ARIA labels for all thirty content pages. Copy changes require the owner's explicit
 request and an intentional update to these contracts. Presentation-only changes to
 a protected component update its source hash while preserving the approved prose,
 metadata, and formula source contracts. Tests also verify page counts and navigation
@@ -111,12 +121,16 @@ independently protected and are not regenerated from the showcase document.
 ### AI research projects
 
 Domain `01`, AI Research and Engineering, links four project reading pages through
-Read more actions placed between the project introduction and its contributions.
+Read More actions following the outer summaries. Their existing URLs remain stable.
 Each JSON source stores its original Notion title, URL, edit timestamp,
-and complete Markdown body. Preserve the opening Project and Author paragraph,
-section headings, prose, emphasis, citations, table headers and cells, and formulas.
-Use the source structure without adding an abstract, references section, publication
-details, or a download. Each reading page returns to its project anchor in the overview.
+and complete Markdown body. Preserve that source, including its original opening
+Project and Author paragraph. In the rendered page, show the institution and
+project title, vertical metadata, and approved Key Contributions, then begin at
+the first original numbered chapter. Omit the duplicate technical title and old
+Project / Author / Overview introduction only in this presentation. Keep the
+numbered body, emphasis, citations, table headers and cells, and formulas in their
+original order. Do not add an abstract, references section, publication details,
+or a download. Each reading page returns to its project anchor on Experience.
 
 | Project page | Notion source |
 | --- | --- |
@@ -137,7 +151,8 @@ mathematical terms and equation labels remain intact. Assistive MathML preserves
 semantic formulas and the exact original TeX annotation. Invalid formulas fail the
 build. Tables and wide equations expose focusable scrolling regions.
 
-AI project tests compare every rendered source block, all 277 original formula annotations,
+AI project tests compare the retained numbered body with its original source blocks,
+verify the presentation-only omission of the old preface, and check all 277 original formula annotations,
 five tables, 27 citation links, and 26 second-level headings with the approved
 documents. Update the project registry, independent route expectations, protected
 source hashes, and visible-copy contracts together when synchronizing approved text.
@@ -204,7 +219,8 @@ same body size and spacing, including source small-capital runs. Numbered notes 
 sequential and every chapter has a unique anchor. Keep original PDFs and extraction
 records outside public assets and the static export.
 
-`LegalPaperPage` renders the article and complete endnotes. `LegalPaperContents`
+`LegalPaperPage` renders the institution-and-project heading, vertical metadata,
+Key Contributions, complete original Abstract, article, and endnotes. `LegalPaperContents`
 provides responsive chapter navigation and section tracking. `LegalPaperReader`
 adds native-dialog note previews, with source-link focus restoration and a route to
 the complete endnote. Original anchors, contents links, and return links remain
@@ -214,7 +230,8 @@ To add an approved paper, update its structured source, the legal-paper slug reg
 the matching project route in `experience.ts`, and the independent content/output
 contracts together. Use the supplied manuscript as the wording and citation authority.
 
-Article validation checks all nineteen content routes, four legal reading links, chapter
+Article validation checks all thirty exported content routes, eighteen Experience
+reading links including four legal articles, chapter
 anchors, complete numbered references, bidirectional footnote links, and the absence
 of public PDF files. Validate the published text against the approved source before
 refreshing visible-copy hashes. Read back the four live article pages after publishing.

@@ -389,23 +389,33 @@
       "formulaCount": 262
     },
     "/experience/": {
-      "textSha256": "28facf2d888d5fb8f951b729aac4c4a8059e26cb4b109b237eaf53e8e3e7aa21",
-      "characterCount": 24352,
-      "wordCount": 3063,
+      "textSha256": "a956840f1b6af0161e8ab474cf7ca0f0c703af97b541b3c039c8d461ef213d0c",
+      "characterCount": 8750,
+      "wordCount": 1117,
       "preview": "Skip to main content Theodore Ouyang About Experience Experience 01 AI Research and Engineering 02 Data Science 03 Legal Research and Policy Analysis 04 Finance",
       "altTexts": [],
       "ariaLabels": [
         "Theodore Ouyang home",
         "Primary navigation",
         "Experience sections",
-        "Read more about Scalable Expert Quality Control and Adaptive Review",
-        "Read more about Financial Task Design and Synthetic Data Engineering",
-        "Read more about Scientific Reasoning Evaluation and Task Design",
-        "Read more about AI-Driven Investment Research and Explainable Risk Analysis",
-        "Read more about Autonomous Authority in Space: Risk Tradeoffs and the Law of Delegation",
-        "Read more about Small States and the Governance of Strategic Space Dependence",
-        "Read more about Who May Choose the Lesser Risk: Solar Geoengineering and the Legal Duties of Comparison and Continuity",
-        "Read more about Mangrove Restoration and the Limits of Compensatory Mitigation: Lessons from Florida for the Greater Bay Area"
+        "Read more about Duke University × Top-Tier Foundation Model Company: Scalable Expert Quality Control and Adaptive Review",
+        "Read more about Duke University × Top-Tier Foundation Model Company: Financial Task Design and Synthetic Data Engineering",
+        "Read more about Duke University × Top-Tier AI Research Lab: Scientific Reasoning Evaluation and Task Design",
+        "Read more about Duke University × Leading Global Alternative Asset Manager: AI-Driven Investment Research and Explainable Risk Analysis",
+        "Read more about Jiritsu Network: Asset-verification partnerships and issuer ranking",
+        "Read more about Euromonitor International: China market entry for a premium European appliance brand",
+        "Read more about China Construction Bank: PCA-based sustainability analysis and green-credit screening",
+        "Read more about Duke Law School: Autonomous Authority in Space: Risk Tradeoffs and the Law of Delegation",
+        "Read more about Duke Law School: Small States and the Governance of Strategic Space Dependence",
+        "Read more about Duke Law School: Who May Choose the Lesser Risk: Solar Geoengineering and the Legal Duties of Comparison and Continuity",
+        "Read more about Duke Law School: Mangrove Restoration and the Limits of Compensatory Mitigation: Lessons from Florida for the Greater Bay Area",
+        "Read more about Jones Lang LaSalle Capital Markets Team: Office investment underwriting and ESG due diligence",
+        "Read more about Hubble Network: Bluetooth satellite commercialization and market selection",
+        "Read more about SAIF Partners: Dental investment research and governance due diligence",
+        "Read more about CITIC Securities: Agriculture equity research and valuation",
+        "Read more about EY-Parthenon: Business-line restructuring for digital transformation",
+        "Read more about Independent STEM Olympiad Training Practice: Advanced physics Olympiad instruction",
+        "Read more about The High School Attached to Hunan Normal University: Advanced Olympiad training, awards, and peer mentoring"
       ],
       "metadata": {
         "title": "Experience | Theodore Ouyang",
@@ -418,24 +428,244 @@
         "twitterDescription": "AI research and engineering, data science, legal research, finance and consulting, and STEM competitions and training."
       }
     },
+    "/experience/jiritsu-network/": {
+      "textSha256": "94a48478329e1f0460edf1ef95e797df0bb7a14299dcd042c1035718a7af58a4",
+      "characterCount": 3277,
+      "wordCount": 409,
+      "preview": "Skip to main content Theodore Ouyang About Experience Experience Jiritsu Network: Asset-verification partnerships and issuer ranking Position Business Developme",
+      "altTexts": [],
+      "ariaLabels": [
+        "Theodore Ouyang home",
+        "Primary navigation"
+      ],
+      "metadata": {
+        "title": "Jiritsu Network: Asset-verification partnerships and issuer ranking | Theodore Ouyang",
+        "description": "Owned business development for Jiritsu's asset-verification and privacy-preserving computation services as the sole dedicated contributor for new issuers. Reported directly to a co-founder, combining data engineering, preference ranking, and counterparty discussions to develop partnership recommendations for the board.",
+        "canonical": "https://www.theodoreoy.com/experience/jiritsu-network/",
+        "openGraphTitle": "Jiritsu Network: Asset-verification partnerships and issuer ranking",
+        "openGraphDescription": "Owned business development for Jiritsu's asset-verification and privacy-preserving computation services as the sole dedicated contributor for new issuers. Reported directly to a co-founder, combining data engineering, preference ranking, and counterparty discussions to develop partnership recommendations for the board.",
+        "openGraphUrl": "https://www.theodoreoy.com/experience/jiritsu-network/",
+        "twitterTitle": "Jiritsu Network: Asset-verification partnerships and issuer ranking",
+        "twitterDescription": "Owned business development for Jiritsu's asset-verification and privacy-preserving computation services as the sole dedicated contributor for new issuers. Reported directly to a co-founder, combining data engineering, preference ranking, and counterparty discussions to develop partnership recommendations for the board."
+      }
+    },
+    "/experience/euromonitor-international/": {
+      "textSha256": "2711f7428da07faef9bfc8b25af06fd3d76227416000b3dc21c1178cc677c951",
+      "characterCount": 2298,
+      "wordCount": 286,
+      "preview": "Skip to main content Theodore Ouyang About Experience Experience Euromonitor International: China market entry for a premium European appliance brand Position C",
+      "altTexts": [],
+      "ariaLabels": [
+        "Theodore Ouyang home",
+        "Primary navigation"
+      ],
+      "metadata": {
+        "title": "Euromonitor International: China market entry for a premium European appliance brand | Theodore Ouyang",
+        "description": "Led the China workstream of a global market-entry engagement covering China, Japan, and the Middle East for a premium European appliance brand. Combined market data, consumer evidence, and policy research to recommend local products, pricing, channels, and marketing while maintaining the client's global positioning.",
+        "canonical": "https://www.theodoreoy.com/experience/euromonitor-international/",
+        "openGraphTitle": "Euromonitor International: China market entry for a premium European appliance brand",
+        "openGraphDescription": "Led the China workstream of a global market-entry engagement covering China, Japan, and the Middle East for a premium European appliance brand. Combined market data, consumer evidence, and policy research to recommend local products, pricing, channels, and marketing while maintaining the client's global positioning.",
+        "openGraphUrl": "https://www.theodoreoy.com/experience/euromonitor-international/",
+        "twitterTitle": "Euromonitor International: China market entry for a premium European appliance brand",
+        "twitterDescription": "Led the China workstream of a global market-entry engagement covering China, Japan, and the Middle East for a premium European appliance brand. Combined market data, consumer evidence, and policy research to recommend local products, pricing, channels, and marketing while maintaining the client's global positioning."
+      }
+    },
+    "/experience/china-construction-bank/": {
+      "textSha256": "450b7185262778d0da7fa87834d9bfce857d3b9ed389cd3886c17396fef23f63",
+      "characterCount": 1610,
+      "wordCount": 208,
+      "preview": "Skip to main content Theodore Ouyang About Experience Experience China Construction Bank: PCA-based sustainability analysis and green-credit screening Position ",
+      "altTexts": [],
+      "ariaLabels": [
+        "Theodore Ouyang home",
+        "Primary navigation"
+      ],
+      "metadata": {
+        "title": "China Construction Bank: PCA-based sustainability analysis and green-credit screening | Theodore Ouyang",
+        "description": "Applied statistical methods to sustainability assessment and green-credit screening within China Construction Bank's internal framework. Combined company data, historical assessments, and explicit eligibility rules to support candidate review, then documented the method for product managers and risk officers evaluating its use on a platform.",
+        "canonical": "https://www.theodoreoy.com/experience/china-construction-bank/",
+        "openGraphTitle": "China Construction Bank: PCA-based sustainability analysis and green-credit screening",
+        "openGraphDescription": "Applied statistical methods to sustainability assessment and green-credit screening within China Construction Bank's internal framework. Combined company data, historical assessments, and explicit eligibility rules to support candidate review, then documented the method for product managers and risk officers evaluating its use on a platform.",
+        "openGraphUrl": "https://www.theodoreoy.com/experience/china-construction-bank/",
+        "twitterTitle": "China Construction Bank: PCA-based sustainability analysis and green-credit screening",
+        "twitterDescription": "Applied statistical methods to sustainability assessment and green-credit screening within China Construction Bank's internal framework. Combined company data, historical assessments, and explicit eligibility rules to support candidate review, then documented the method for product managers and risk officers evaluating its use on a platform."
+      }
+    },
+    "/experience/jones-lang-lasalle/": {
+      "textSha256": "7adec9a023e66b2d67226419a92327cff2139a985daa40225d78eb2db5b33e41",
+      "characterCount": 2299,
+      "wordCount": 285,
+      "preview": "Skip to main content Theodore Ouyang About Experience Experience Jones Lang LaSalle Capital Markets Team: Office investment underwriting and ESG due diligence P",
+      "altTexts": [],
+      "ariaLabels": [
+        "Theodore Ouyang home",
+        "Primary navigation"
+      ],
+      "metadata": {
+        "title": "Jones Lang LaSalle Capital Markets Team: Office investment underwriting and ESG due diligence | Theodore Ouyang",
+        "description": "Served as the project team's ESG lead on acquisition advisory for a Southeast Asian conglomerate seeking Chinese office properties. Worked with JLL's internal ESG team to connect asset screening, property valuation, and site-level diligence with the client's investment requirements and potential refurbishment or repositioning plans.",
+        "canonical": "https://www.theodoreoy.com/experience/jones-lang-lasalle/",
+        "openGraphTitle": "Jones Lang LaSalle Capital Markets Team: Office investment underwriting and ESG due diligence",
+        "openGraphDescription": "Served as the project team's ESG lead on acquisition advisory for a Southeast Asian conglomerate seeking Chinese office properties. Worked with JLL's internal ESG team to connect asset screening, property valuation, and site-level diligence with the client's investment requirements and potential refurbishment or repositioning plans.",
+        "openGraphUrl": "https://www.theodoreoy.com/experience/jones-lang-lasalle/",
+        "twitterTitle": "Jones Lang LaSalle Capital Markets Team: Office investment underwriting and ESG due diligence",
+        "twitterDescription": "Served as the project team's ESG lead on acquisition advisory for a Southeast Asian conglomerate seeking Chinese office properties. Worked with JLL's internal ESG team to connect asset screening, property valuation, and site-level diligence with the client's investment requirements and potential refurbishment or repositioning plans."
+      }
+    },
+    "/experience/hubble-technology-investment/": {
+      "textSha256": "320655ce10672a7eebd05f1ae85744678a34cb4a86add51668ea3fe7fc8a5343",
+      "characterCount": 1761,
+      "wordCount": 221,
+      "preview": "Skip to main content Theodore Ouyang About Experience Experience Hubble Network: Bluetooth satellite commercialization and market selection Position Student Con",
+      "altTexts": [],
+      "ariaLabels": [
+        "Theodore Ouyang home",
+        "Primary navigation"
+      ],
+      "metadata": {
+        "title": "Hubble Network: Bluetooth satellite commercialization and market selection | Theodore Ouyang",
+        "description": "Led shipping, logistics, and industrial asset-tracking research for Hubble's Bluetooth satellite commercialization through a Duke Practicum. Assessed where the technology's cost, accuracy, power consumption, and periodic reporting capabilities matched customer needs, translating technical and market evidence into recommendations for early applications.",
+        "canonical": "https://www.theodoreoy.com/experience/hubble-technology-investment/",
+        "openGraphTitle": "Hubble Network: Bluetooth satellite commercialization and market selection",
+        "openGraphDescription": "Led shipping, logistics, and industrial asset-tracking research for Hubble's Bluetooth satellite commercialization through a Duke Practicum. Assessed where the technology's cost, accuracy, power consumption, and periodic reporting capabilities matched customer needs, translating technical and market evidence into recommendations for early applications.",
+        "openGraphUrl": "https://www.theodoreoy.com/experience/hubble-technology-investment/",
+        "twitterTitle": "Hubble Network: Bluetooth satellite commercialization and market selection",
+        "twitterDescription": "Led shipping, logistics, and industrial asset-tracking research for Hubble's Bluetooth satellite commercialization through a Duke Practicum. Assessed where the technology's cost, accuracy, power consumption, and periodic reporting capabilities matched customer needs, translating technical and market evidence into recommendations for early applications."
+      }
+    },
+    "/experience/saif-partners/": {
+      "textSha256": "15cae7007fc64c44b394eb3b55cd06997c97068ba8b7ae7ca57c51dfd53b8678",
+      "characterCount": 1842,
+      "wordCount": 232,
+      "preview": "Skip to main content Theodore Ouyang About Experience Experience SAIF Partners: Dental investment research and governance due diligence Position Summer Intern L",
+      "altTexts": [],
+      "ariaLabels": [
+        "Theodore Ouyang home",
+        "Primary navigation"
+      ],
+      "metadata": {
+        "title": "SAIF Partners: Dental investment research and governance due diligence | Theodore Ouyang",
+        "description": "Owned public-data research and governance screening for a Greater China dental-investment theme. Worked with the VP and investment team to prioritize subsectors and candidates, then translated governance concerns into investment recommendations, management questions, and on-site diligence priorities.",
+        "canonical": "https://www.theodoreoy.com/experience/saif-partners/",
+        "openGraphTitle": "SAIF Partners: Dental investment research and governance due diligence",
+        "openGraphDescription": "Owned public-data research and governance screening for a Greater China dental-investment theme. Worked with the VP and investment team to prioritize subsectors and candidates, then translated governance concerns into investment recommendations, management questions, and on-site diligence priorities.",
+        "openGraphUrl": "https://www.theodoreoy.com/experience/saif-partners/",
+        "twitterTitle": "SAIF Partners: Dental investment research and governance due diligence",
+        "twitterDescription": "Owned public-data research and governance screening for a Greater China dental-investment theme. Worked with the VP and investment team to prioritize subsectors and candidates, then translated governance concerns into investment recommendations, management questions, and on-site diligence priorities."
+      }
+    },
+    "/experience/citic-securities/": {
+      "textSha256": "a9b6366cd7b0bc2d5eaa4f91463c319994d0ec5ecce73123fe7df8bea2139d46",
+      "characterCount": 559,
+      "wordCount": 71,
+      "preview": "Skip to main content Theodore Ouyang About Experience Experience CITIC Securities: Agriculture equity research and valuation Position Equity Research Intern Loc",
+      "altTexts": [],
+      "ariaLabels": [
+        "Theodore Ouyang home",
+        "Primary navigation"
+      ],
+      "metadata": {
+        "title": "CITIC Securities: Agriculture equity research and valuation | Theodore Ouyang",
+        "description": "Supported the Agriculture Research Group's sector analysis and research-report work, contributing evidence for internal investment-strategy discussions.",
+        "canonical": "https://www.theodoreoy.com/experience/citic-securities/",
+        "openGraphTitle": "CITIC Securities: Agriculture equity research and valuation",
+        "openGraphDescription": "Supported the Agriculture Research Group's sector analysis and research-report work, contributing evidence for internal investment-strategy discussions.",
+        "openGraphUrl": "https://www.theodoreoy.com/experience/citic-securities/",
+        "twitterTitle": "CITIC Securities: Agriculture equity research and valuation",
+        "twitterDescription": "Supported the Agriculture Research Group's sector analysis and research-report work, contributing evidence for internal investment-strategy discussions."
+      }
+    },
+    "/experience/ey-parthenon/": {
+      "textSha256": "59b4aa4347a0f137b8ec686869b97d7c25af847c6aa83ba467b148323b29f6df",
+      "characterCount": 458,
+      "wordCount": 63,
+      "preview": "Skip to main content Theodore Ouyang About Experience Experience EY-Parthenon: Business-line restructuring for digital transformation Position Summer Intern Loc",
+      "altTexts": [],
+      "ariaLabels": [
+        "Theodore Ouyang home",
+        "Primary navigation"
+      ],
+      "metadata": {
+        "title": "EY-Parthenon: Business-line restructuring for digital transformation | Theodore Ouyang",
+        "description": "Supported a digital-transformation engagement for a leading Chinese company preparing to list, with a focus on business-line restructuring.",
+        "canonical": "https://www.theodoreoy.com/experience/ey-parthenon/",
+        "openGraphTitle": "EY-Parthenon: Business-line restructuring for digital transformation",
+        "openGraphDescription": "Supported a digital-transformation engagement for a leading Chinese company preparing to list, with a focus on business-line restructuring.",
+        "openGraphUrl": "https://www.theodoreoy.com/experience/ey-parthenon/",
+        "twitterTitle": "EY-Parthenon: Business-line restructuring for digital transformation",
+        "twitterDescription": "Supported a digital-transformation engagement for a leading Chinese company preparing to list, with a focus on business-line restructuring."
+      }
+    },
+    "/experience/independent-stem-olympiad-training/": {
+      "textSha256": "933b9b100411bffab639f016f4c18daf06bce8818ed49d2f149dfe67f1f6efcb",
+      "characterCount": 746,
+      "wordCount": 93,
+      "preview": "Skip to main content Theodore Ouyang About Experience Experience Independent STEM Olympiad Training Practice: Advanced physics Olympiad instruction Position IPh",
+      "altTexts": [],
+      "ariaLabels": [
+        "Theodore Ouyang home",
+        "Primary navigation"
+      ],
+      "metadata": {
+        "title": "Independent STEM Olympiad Training Practice: Advanced physics Olympiad instruction | Theodore Ouyang",
+        "description": "Independently coached students preparing for advanced physics Olympiads through online and in-person instruction, combining subject teaching with competition problem-solving practice.",
+        "canonical": "https://www.theodoreoy.com/experience/independent-stem-olympiad-training/",
+        "openGraphTitle": "Independent STEM Olympiad Training Practice: Advanced physics Olympiad instruction",
+        "openGraphDescription": "Independently coached students preparing for advanced physics Olympiads through online and in-person instruction, combining subject teaching with competition problem-solving practice.",
+        "openGraphUrl": "https://www.theodoreoy.com/experience/independent-stem-olympiad-training/",
+        "twitterTitle": "Independent STEM Olympiad Training Practice: Advanced physics Olympiad instruction",
+        "twitterDescription": "Independently coached students preparing for advanced physics Olympiads through online and in-person instruction, combining subject teaching with competition problem-solving practice."
+      }
+    },
+    "/experience/stem-olympiad-competitions/": {
+      "textSha256": "f944e4bc81f1b4774494504a79aff0933e7d6257dbedd6c0cbd2c51d773ad9db",
+      "characterCount": 1575,
+      "wordCount": 205,
+      "preview": "Skip to main content Theodore Ouyang About Experience Experience The High School Attached to Hunan Normal University: Advanced Olympiad training, awards, and pe",
+      "altTexts": [],
+      "ariaLabels": [
+        "Theodore Ouyang home",
+        "Primary navigation"
+      ],
+      "metadata": {
+        "title": "The High School Attached to Hunan Normal University: Advanced Olympiad training, awards, and peer mentoring | Theodore Ouyang",
+        "description": "Trained in physics and mathematics Olympiads and served as a peer mentor in the school's nationally leading physics competition program, combining advanced study with collaborative problem solving.",
+        "canonical": "https://www.theodoreoy.com/experience/stem-olympiad-competitions/",
+        "openGraphTitle": "The High School Attached to Hunan Normal University: Advanced Olympiad training, awards, and peer mentoring",
+        "openGraphDescription": "Trained in physics and mathematics Olympiads and served as a peer mentor in the school's nationally leading physics competition program, combining advanced study with collaborative problem solving.",
+        "openGraphUrl": "https://www.theodoreoy.com/experience/stem-olympiad-competitions/",
+        "twitterTitle": "The High School Attached to Hunan Normal University: Advanced Olympiad training, awards, and peer mentoring",
+        "twitterDescription": "Trained in physics and mathematics Olympiads and served as a peer mentor in the school's nationally leading physics competition program, combining advanced study with collaborative problem solving."
+      }
+    },
     "/past-experience/": {
-      "textSha256": "28facf2d888d5fb8f951b729aac4c4a8059e26cb4b109b237eaf53e8e3e7aa21",
-      "characterCount": 24352,
-      "wordCount": 3063,
+      "textSha256": "a956840f1b6af0161e8ab474cf7ca0f0c703af97b541b3c039c8d461ef213d0c",
+      "characterCount": 8750,
+      "wordCount": 1117,
       "preview": "Skip to main content Theodore Ouyang About Experience Experience 01 AI Research and Engineering 02 Data Science 03 Legal Research and Policy Analysis 04 Finance",
       "altTexts": [],
       "ariaLabels": [
         "Theodore Ouyang home",
         "Primary navigation",
         "Experience sections",
-        "Read more about Scalable Expert Quality Control and Adaptive Review",
-        "Read more about Financial Task Design and Synthetic Data Engineering",
-        "Read more about Scientific Reasoning Evaluation and Task Design",
-        "Read more about AI-Driven Investment Research and Explainable Risk Analysis",
-        "Read more about Autonomous Authority in Space: Risk Tradeoffs and the Law of Delegation",
-        "Read more about Small States and the Governance of Strategic Space Dependence",
-        "Read more about Who May Choose the Lesser Risk: Solar Geoengineering and the Legal Duties of Comparison and Continuity",
-        "Read more about Mangrove Restoration and the Limits of Compensatory Mitigation: Lessons from Florida for the Greater Bay Area"
+        "Read more about Duke University × Top-Tier Foundation Model Company: Scalable Expert Quality Control and Adaptive Review",
+        "Read more about Duke University × Top-Tier Foundation Model Company: Financial Task Design and Synthetic Data Engineering",
+        "Read more about Duke University × Top-Tier AI Research Lab: Scientific Reasoning Evaluation and Task Design",
+        "Read more about Duke University × Leading Global Alternative Asset Manager: AI-Driven Investment Research and Explainable Risk Analysis",
+        "Read more about Jiritsu Network: Asset-verification partnerships and issuer ranking",
+        "Read more about Euromonitor International: China market entry for a premium European appliance brand",
+        "Read more about China Construction Bank: PCA-based sustainability analysis and green-credit screening",
+        "Read more about Duke Law School: Autonomous Authority in Space: Risk Tradeoffs and the Law of Delegation",
+        "Read more about Duke Law School: Small States and the Governance of Strategic Space Dependence",
+        "Read more about Duke Law School: Who May Choose the Lesser Risk: Solar Geoengineering and the Legal Duties of Comparison and Continuity",
+        "Read more about Duke Law School: Mangrove Restoration and the Limits of Compensatory Mitigation: Lessons from Florida for the Greater Bay Area",
+        "Read more about Jones Lang LaSalle Capital Markets Team: Office investment underwriting and ESG due diligence",
+        "Read more about Hubble Network: Bluetooth satellite commercialization and market selection",
+        "Read more about SAIF Partners: Dental investment research and governance due diligence",
+        "Read more about CITIC Securities: Agriculture equity research and valuation",
+        "Read more about EY-Parthenon: Business-line restructuring for digital transformation",
+        "Read more about Independent STEM Olympiad Training Practice: Advanced physics Olympiad instruction",
+        "Read more about The High School Attached to Hunan Normal University: Advanced Olympiad training, awards, and peer mentoring"
       ],
       "metadata": {
         "title": "Experience | Theodore Ouyang",
@@ -449,18 +679,18 @@
       }
     },
     "/past-experience/artificial-intelligence/": {
-      "textSha256": "b493f391fd8ec733d17b7a6f27e4486844e7b2430c3fe848a63b9a63d7f5afce",
-      "characterCount": 3103,
-      "wordCount": 397,
-      "preview": "Skip to main content Theodore Ouyang About Experience Experience AI Research and Engineering Scalable Expert Quality Control and Adaptive Review Duke University",
+      "textSha256": "95e6997e0d955a59a5aa19746b516dfcd0dd0f511e4d09cce4a7adcc9354cd2b",
+      "characterCount": 2890,
+      "wordCount": 370,
+      "preview": "Skip to main content Theodore Ouyang About Experience Experience AI Research and Engineering Duke University × Top-Tier Foundation Model Company Co-developed qu",
       "altTexts": [],
       "ariaLabels": [
         "Theodore Ouyang home",
         "Primary navigation",
-        "Read more about Scalable Expert Quality Control and Adaptive Review",
-        "Read more about Financial Task Design and Synthetic Data Engineering",
-        "Read more about Scientific Reasoning Evaluation and Task Design",
-        "Read more about AI-Driven Investment Research and Explainable Risk Analysis"
+        "Read more about Duke University × Top-Tier Foundation Model Company: Scalable Expert Quality Control and Adaptive Review",
+        "Read more about Duke University × Top-Tier Foundation Model Company: Financial Task Design and Synthetic Data Engineering",
+        "Read more about Duke University × Top-Tier AI Research Lab: Scientific Reasoning Evaluation and Task Design",
+        "Read more about Duke University × Leading Global Alternative Asset Manager: AI-Driven Investment Research and Explainable Risk Analysis"
       ],
       "metadata": {
         "title": "AI Research and Engineering | Experience | Theodore Ouyang",
@@ -474,10 +704,10 @@
       }
     },
     "/past-experience/artificial-intelligence/statistical-inference-and-resource-allocation-in-expert-data-production/": {
-      "textSha256": "81f531841a5857a35cbd003527160806138d395759015d56a61e763487145de4",
-      "characterCount": 19903,
-      "wordCount": 2793,
-      "preview": "Skip to main content Theodore Ouyang About Experience Experience Scalable Expert Quality Control and Adaptive Review Position Researcher Location Durham, NC; Pa",
+      "textSha256": "4d6a7360ad0dc0cffd6c6401d44d0f2e874c1b091934cdbb4f784878399b48f0",
+      "characterCount": 18846,
+      "wordCount": 2651,
+      "preview": "Skip to main content Theodore Ouyang About Experience Experience Duke University × Top-Tier Foundation Model Company: Scalable Expert Quality Control and Adapti",
       "altTexts": [],
       "ariaLabels": [
         "Theodore Ouyang home",
@@ -514,23 +744,23 @@
         "Scrollable mathematical expression"
       ],
       "metadata": {
-        "title": "Scalable Expert Quality Control and Adaptive Review | Theodore Ouyang",
+        "title": "Duke University × Top-Tier Foundation Model Company: Scalable Expert Quality Control and Adaptive Review | Theodore Ouyang",
         "description": "Co-developed quality control for more than 300 contributors across travel, food delivery, consumer goods, and e-commerce advertising.",
         "canonical": "https://www.theodoreoy.com/past-experience/artificial-intelligence/statistical-inference-and-resource-allocation-in-expert-data-production/",
-        "openGraphTitle": "Scalable Expert Quality Control and Adaptive Review",
+        "openGraphTitle": "Duke University × Top-Tier Foundation Model Company: Scalable Expert Quality Control and Adaptive Review",
         "openGraphDescription": "Co-developed quality control for more than 300 contributors across travel, food delivery, consumer goods, and e-commerce advertising.",
         "openGraphUrl": "https://www.theodoreoy.com/past-experience/artificial-intelligence/statistical-inference-and-resource-allocation-in-expert-data-production/",
-        "twitterTitle": "Scalable Expert Quality Control and Adaptive Review",
+        "twitterTitle": "Duke University × Top-Tier Foundation Model Company: Scalable Expert Quality Control and Adaptive Review",
         "twitterDescription": "Co-developed quality control for more than 300 contributors across travel, food delivery, consumer goods, and e-commerce advertising."
       },
       "mathSourceSha256": "fa3372e29781d19b4efad0a525fcc52c0c0f71034ecbaad0375354b3e01cb93e",
       "formulaCount": 79
     },
     "/past-experience/artificial-intelligence/task-validity-in-financial-synthetic-data/": {
-      "textSha256": "74e3db8434534584eb705663db8a81788ed804c6e22fb7567c981b6a3e2f5b03",
-      "characterCount": 18809,
-      "wordCount": 2636,
-      "preview": "Skip to main content Theodore Ouyang About Experience Experience Financial Task Design and Synthetic Data Engineering Position Researcher Location Durham, NC; P",
+      "textSha256": "1f27e87c75f9bc722c59a4eb78f4334e0478e9fecec4fb5a92083c3d6b2136fa",
+      "characterCount": 17614,
+      "wordCount": 2472,
+      "preview": "Skip to main content Theodore Ouyang About Experience Experience Duke University × Top-Tier Foundation Model Company: Financial Task Design and Synthetic Data E",
       "altTexts": [],
       "ariaLabels": [
         "Theodore Ouyang home",
@@ -559,23 +789,23 @@
         "Mathematical equation"
       ],
       "metadata": {
-        "title": "Financial Task Design and Synthetic Data Engineering | Theodore Ouyang",
+        "title": "Duke University × Top-Tier Foundation Model Company: Financial Task Design and Synthetic Data Engineering | Theodore Ouyang",
         "description": "Led financial and business task design for a frontier foundation model company, defining the task environment, reference cases, synthetic expansion rules, and expert preference protocols for post-training and evaluation.",
         "canonical": "https://www.theodoreoy.com/past-experience/artificial-intelligence/task-validity-in-financial-synthetic-data/",
-        "openGraphTitle": "Financial Task Design and Synthetic Data Engineering",
+        "openGraphTitle": "Duke University × Top-Tier Foundation Model Company: Financial Task Design and Synthetic Data Engineering",
         "openGraphDescription": "Led financial and business task design for a frontier foundation model company, defining the task environment, reference cases, synthetic expansion rules, and expert preference protocols for post-training and evaluation.",
         "openGraphUrl": "https://www.theodoreoy.com/past-experience/artificial-intelligence/task-validity-in-financial-synthetic-data/",
-        "twitterTitle": "Financial Task Design and Synthetic Data Engineering",
+        "twitterTitle": "Duke University × Top-Tier Foundation Model Company: Financial Task Design and Synthetic Data Engineering",
         "twitterDescription": "Led financial and business task design for a frontier foundation model company, defining the task environment, reference cases, synthetic expansion rules, and expert preference protocols for post-training and evaluation."
       },
       "mathSourceSha256": "e9aaa0218a27a5ea645110f4a67d289bc9ea83d3b7a0495d1e7fe557350331e1",
       "formulaCount": 61
     },
     "/past-experience/artificial-intelligence/verification-and-supervision-in-scientific-reasoning-tasks/": {
-      "textSha256": "482f0de81f19b41f6edd7c08400b96bf652db8e3d2091910869c31601afc6f61",
-      "characterCount": 22172,
-      "wordCount": 3107,
-      "preview": "Skip to main content Theodore Ouyang About Experience Experience Scientific Reasoning Evaluation and Task Design Position Researcher Location Durham, NC; Palo A",
+      "textSha256": "87169a5852e3b66ee7d8212083c94477d59bc158aff895bab0784c56489c941a",
+      "characterCount": 21325,
+      "wordCount": 2993,
+      "preview": "Skip to main content Theodore Ouyang About Experience Experience Duke University × Top-Tier AI Research Lab: Scientific Reasoning Evaluation and Task Design Pos",
       "altTexts": [],
       "ariaLabels": [
         "Theodore Ouyang home",
@@ -599,23 +829,23 @@
         "Mathematical equation"
       ],
       "metadata": {
-        "title": "Scientific Reasoning Evaluation and Task Design | Theodore Ouyang",
+        "title": "Duke University × Top-Tier AI Research Lab: Scientific Reasoning Evaluation and Task Design | Theodore Ouyang",
         "description": "Developed original physics, mathematics, and risk-engineering tasks, complete solutions, and failure feedback for a frontier AI research laboratory. Built acceptance methods around explicit proof requirements and valid alternative solutions.",
         "canonical": "https://www.theodoreoy.com/past-experience/artificial-intelligence/verification-and-supervision-in-scientific-reasoning-tasks/",
-        "openGraphTitle": "Scientific Reasoning Evaluation and Task Design",
+        "openGraphTitle": "Duke University × Top-Tier AI Research Lab: Scientific Reasoning Evaluation and Task Design",
         "openGraphDescription": "Developed original physics, mathematics, and risk-engineering tasks, complete solutions, and failure feedback for a frontier AI research laboratory. Built acceptance methods around explicit proof requirements and valid alternative solutions.",
         "openGraphUrl": "https://www.theodoreoy.com/past-experience/artificial-intelligence/verification-and-supervision-in-scientific-reasoning-tasks/",
-        "twitterTitle": "Scientific Reasoning Evaluation and Task Design",
+        "twitterTitle": "Duke University × Top-Tier AI Research Lab: Scientific Reasoning Evaluation and Task Design",
         "twitterDescription": "Developed original physics, mathematics, and risk-engineering tasks, complete solutions, and failure feedback for a frontier AI research laboratory. Built acceptance methods around explicit proof requirements and valid alternative solutions."
       },
       "mathSourceSha256": "3b15e2bbbf1a18918f9549cdc76f326aaf90f8adb8554c33d4cf047bba55af73",
       "formulaCount": 58
     },
     "/past-experience/artificial-intelligence/evidence-uncertainty-and-decision-guarantees-in-investment-research/": {
-      "textSha256": "8833680572f9743b5fc7f3dbe3c4d7548ea63b1043f7fc2eb0184478826f3a40",
-      "characterCount": 16119,
-      "wordCount": 2293,
-      "preview": "Skip to main content Theodore Ouyang About Experience Experience AI-Driven Investment Research and Explainable Risk Analysis Position Researcher Location Durham",
+      "textSha256": "4ef625055b3a74dee0670bcaffbd542204c040b8e480ae27a040b495035e5d5e",
+      "characterCount": 15286,
+      "wordCount": 2179,
+      "preview": "Skip to main content Theodore Ouyang About Experience Experience Duke University × Leading Global Alternative Asset Manager: AI-Driven Investment Research and E",
       "altTexts": [],
       "ariaLabels": [
         "Theodore Ouyang home",
@@ -652,27 +882,30 @@
         "Research data table"
       ],
       "metadata": {
-        "title": "AI-Driven Investment Research and Explainable Risk Analysis | Theodore Ouyang",
+        "title": "Duke University × Leading Global Alternative Asset Manager: AI-Driven Investment Research and Explainable Risk Analysis | Theodore Ouyang",
         "description": "Developed an investment-research workflow that carried corrections to company evidence through scores, predictions, rankings, and explanations in a university-industry collaboration.",
         "canonical": "https://www.theodoreoy.com/past-experience/artificial-intelligence/evidence-uncertainty-and-decision-guarantees-in-investment-research/",
-        "openGraphTitle": "AI-Driven Investment Research and Explainable Risk Analysis",
+        "openGraphTitle": "Duke University × Leading Global Alternative Asset Manager: AI-Driven Investment Research and Explainable Risk Analysis",
         "openGraphDescription": "Developed an investment-research workflow that carried corrections to company evidence through scores, predictions, rankings, and explanations in a university-industry collaboration.",
         "openGraphUrl": "https://www.theodoreoy.com/past-experience/artificial-intelligence/evidence-uncertainty-and-decision-guarantees-in-investment-research/",
-        "twitterTitle": "AI-Driven Investment Research and Explainable Risk Analysis",
+        "twitterTitle": "Duke University × Leading Global Alternative Asset Manager: AI-Driven Investment Research and Explainable Risk Analysis",
         "twitterDescription": "Developed an investment-research workflow that carried corrections to company evidence through scores, predictions, rankings, and explanations in a university-industry collaboration."
       },
       "mathSourceSha256": "d7a55a8cdc57534e23fbceebf22197be1da30e053b65a75db18148b00dc0703a",
       "formulaCount": 79
     },
     "/past-experience/data-science/": {
-      "textSha256": "9ed6e7c0e325203b14a9a0c5eb54adaf03fcd928db10fe3c9645f6d719467fd2",
-      "characterCount": 8045,
-      "wordCount": 1009,
+      "textSha256": "30affc917e9a491f047c709a79d18c17be8468fc13815c84a4b3113938ccd7c4",
+      "characterCount": 1196,
+      "wordCount": 157,
       "preview": "Skip to main content Theodore Ouyang About Experience Experience Data Science Jiritsu Network Owned business development for Jiritsu's asset-verification and pr",
       "altTexts": [],
       "ariaLabels": [
         "Theodore Ouyang home",
-        "Primary navigation"
+        "Primary navigation",
+        "Read more about Jiritsu Network: Asset-verification partnerships and issuer ranking",
+        "Read more about Euromonitor International: China market entry for a premium European appliance brand",
+        "Read more about China Construction Bank: PCA-based sustainability analysis and green-credit screening"
       ],
       "metadata": {
         "title": "Data Science | Experience | Theodore Ouyang",
@@ -686,18 +919,18 @@
       }
     },
     "/past-experience/legal-research-and-policy-analysis/": {
-      "textSha256": "17a96da8864f83fce963d6e9258ede45cc7a2602b047cc174f07a61d5630cb3e",
-      "characterCount": 2807,
-      "wordCount": 362,
-      "preview": "Skip to main content Theodore Ouyang About Experience Experience Legal Research and Policy Analysis Autonomous Authority in Space: Risk Tradeoffs and the Law of",
+      "textSha256": "e60689e4a0d97139bef712f468d1e34fc677b55b7810a2432f7c87fbccdef3b8",
+      "characterCount": 2723,
+      "wordCount": 346,
+      "preview": "Skip to main content Theodore Ouyang About Experience Experience Legal Research and Policy Analysis Duke Law School: Space Law and Autonomous Systems Research D",
       "altTexts": [],
       "ariaLabels": [
         "Theodore Ouyang home",
         "Primary navigation",
-        "Read more about Autonomous Authority in Space: Risk Tradeoffs and the Law of Delegation",
-        "Read more about Small States and the Governance of Strategic Space Dependence",
-        "Read more about Who May Choose the Lesser Risk: Solar Geoengineering and the Legal Duties of Comparison and Continuity",
-        "Read more about Mangrove Restoration and the Limits of Compensatory Mitigation: Lessons from Florida for the Greater Bay Area"
+        "Read more about Duke Law School: Autonomous Authority in Space: Risk Tradeoffs and the Law of Delegation",
+        "Read more about Duke Law School: Small States and the Governance of Strategic Space Dependence",
+        "Read more about Duke Law School: Who May Choose the Lesser Risk: Solar Geoengineering and the Legal Duties of Comparison and Continuity",
+        "Read more about Duke Law School: Mangrove Restoration and the Limits of Compensatory Mitigation: Lessons from Florida for the Greater Bay Area"
       ],
       "metadata": {
         "title": "Legal Research and Policy Analysis | Experience | Theodore Ouyang",
@@ -711,14 +944,19 @@
       }
     },
     "/past-experience/finance/": {
-      "textSha256": "1561016f891e740edfe0ec1ed69a8dcebb75cd7cd50008cc193e5544e4139d77",
-      "characterCount": 7920,
-      "wordCount": 986,
+      "textSha256": "30e8b0973613673c41c96f55f01fa9ad97bc98bf5f2dfd7c004be347541e8d27",
+      "characterCount": 1561,
+      "wordCount": 199,
       "preview": "Skip to main content Theodore Ouyang About Experience Experience Finance and Consulting Jones Lang LaSalle Capital Markets Team Served as the project team's ESG",
       "altTexts": [],
       "ariaLabels": [
         "Theodore Ouyang home",
-        "Primary navigation"
+        "Primary navigation",
+        "Read more about Jones Lang LaSalle Capital Markets Team: Office investment underwriting and ESG due diligence",
+        "Read more about Hubble Network: Bluetooth satellite commercialization and market selection",
+        "Read more about SAIF Partners: Dental investment research and governance due diligence",
+        "Read more about CITIC Securities: Agriculture equity research and valuation",
+        "Read more about EY-Parthenon: Business-line restructuring for digital transformation"
       ],
       "metadata": {
         "title": "Finance and Consulting | Experience | Theodore Ouyang",
@@ -732,14 +970,16 @@
       }
     },
     "/past-experience/stem-academic-competitions-and-training/": {
-      "textSha256": "d0fdb3d8fbf68a53447aa3e54f6803e0f5b7ee38432903b0293bd11d7a0d1976",
-      "characterCount": 2739,
-      "wordCount": 349,
+      "textSha256": "c0e572aaf365a02560e2e89c47d4bd58be69d655318571791bdbf5462652cd39",
+      "characterCount": 642,
+      "wordCount": 85,
       "preview": "Skip to main content Theodore Ouyang About Experience Experience STEM Academic Competitions and Training Independent STEM Olympiad Training Practice Independent",
       "altTexts": [],
       "ariaLabels": [
         "Theodore Ouyang home",
-        "Primary navigation"
+        "Primary navigation",
+        "Read more about Independent STEM Olympiad Training Practice: Advanced physics Olympiad instruction",
+        "Read more about The High School Attached to Hunan Normal University: Advanced Olympiad training, awards, and peer mentoring"
       ],
       "metadata": {
         "title": "STEM Academic Competitions and Training | Experience | Theodore Ouyang",
@@ -753,10 +993,10 @@
       }
     },
     "/past-experience/legal-research-and-policy-analysis/autonomous-authority-in-space/": {
-      "textSha256": "ff625a3d82002c00b6ddc4b2b91ab8bf8a1c723f70d7bc63982758e7c843c193",
-      "characterCount": 65599,
-      "wordCount": 9197,
-      "preview": "Skip to main content Theodore Ouyang About Experience Experience Autonomous Authority in Space: Risk Tradeoffs and the Law of Delegation Position Author (Letao ",
+      "textSha256": "80e743dcbe32b3da042e1399092b08da8f1b680bc40e149f7851c112c926275a",
+      "characterCount": 65616,
+      "wordCount": 9200,
+      "preview": "Skip to main content Theodore Ouyang About Experience Experience Duke Law School: Autonomous Authority in Space: Risk Tradeoffs and the Law of Delegation Positi",
       "altTexts": [],
       "ariaLabels": [
         "Theodore Ouyang home",
@@ -826,21 +1066,21 @@
         "Return to footnote 30 in the text"
       ],
       "metadata": {
-        "title": "Autonomous Authority in Space: Risk Tradeoffs and the Law of Delegation | Theodore Ouyang",
+        "title": "Duke Law School: Autonomous Authority in Space: Risk Tradeoffs and the Law of Delegation | Theodore Ouyang",
         "description": "Developed a legal framework for authorizing autonomous space operations when delayed human intervention creates risks of its own. Formulated a two-threshold test separating the authority to act from the evidence needed to delegate execution.",
         "canonical": "https://www.theodoreoy.com/past-experience/legal-research-and-policy-analysis/autonomous-authority-in-space/",
-        "openGraphTitle": "Autonomous Authority in Space: Risk Tradeoffs and the Law of Delegation",
+        "openGraphTitle": "Duke Law School: Autonomous Authority in Space: Risk Tradeoffs and the Law of Delegation",
         "openGraphDescription": "Developed a legal framework for authorizing autonomous space operations when delayed human intervention creates risks of its own. Formulated a two-threshold test separating the authority to act from the evidence needed to delegate execution.",
         "openGraphUrl": "https://www.theodoreoy.com/past-experience/legal-research-and-policy-analysis/autonomous-authority-in-space/",
-        "twitterTitle": "Autonomous Authority in Space: Risk Tradeoffs and the Law of Delegation",
+        "twitterTitle": "Duke Law School: Autonomous Authority in Space: Risk Tradeoffs and the Law of Delegation",
         "twitterDescription": "Developed a legal framework for authorizing autonomous space operations when delayed human intervention creates risks of its own. Formulated a two-threshold test separating the authority to act from the evidence needed to delegate execution."
       }
     },
     "/past-experience/legal-research-and-policy-analysis/small-states-and-strategic-space-dependence/": {
-      "textSha256": "7f5374943682e6cbaa0d74b336aab50c23b7813963cfa60df19da5898b0ce55e",
-      "characterCount": 49667,
-      "wordCount": 6800,
-      "preview": "Skip to main content Theodore Ouyang About Experience Experience Small States and the Governance of Strategic Space Dependence Position Author (Letao Ouyang) Lo",
+      "textSha256": "fe75b01f6fe5a1d4c32b89dd4f6640f710a3ff00d030f01370265e8fb0b2cd7c",
+      "characterCount": 49684,
+      "wordCount": 6803,
+      "preview": "Skip to main content Theodore Ouyang About Experience Experience Duke Law School: Small States and the Governance of Strategic Space Dependence Position Author ",
       "altTexts": [],
       "ariaLabels": [
         "Theodore Ouyang home",
@@ -914,21 +1154,21 @@
         "Return to footnote 32 in the text"
       ],
       "metadata": {
-        "title": "Small States and the Governance of Strategic Space Dependence | Theodore Ouyang",
+        "title": "Duke Law School: Small States and the Governance of Strategic Space Dependence | Theodore Ouyang",
         "description": "Developed a comparative legal framework for assessing small states' control over foreign-dependent space infrastructure.",
         "canonical": "https://www.theodoreoy.com/past-experience/legal-research-and-policy-analysis/small-states-and-strategic-space-dependence/",
-        "openGraphTitle": "Small States and the Governance of Strategic Space Dependence",
+        "openGraphTitle": "Duke Law School: Small States and the Governance of Strategic Space Dependence",
         "openGraphDescription": "Developed a comparative legal framework for assessing small states' control over foreign-dependent space infrastructure.",
         "openGraphUrl": "https://www.theodoreoy.com/past-experience/legal-research-and-policy-analysis/small-states-and-strategic-space-dependence/",
-        "twitterTitle": "Small States and the Governance of Strategic Space Dependence",
+        "twitterTitle": "Duke Law School: Small States and the Governance of Strategic Space Dependence",
         "twitterDescription": "Developed a comparative legal framework for assessing small states' control over foreign-dependent space infrastructure."
       }
     },
     "/past-experience/legal-research-and-policy-analysis/solar-geoengineering-comparison-and-continuity/": {
-      "textSha256": "6f550ebe4d890dcc2de0ee1a06ce6db21de4567755b605ae7edbce0d1d388137",
-      "characterCount": 47430,
-      "wordCount": 6604,
-      "preview": "Skip to main content Theodore Ouyang About Experience Experience Who May Choose the Lesser Risk: Solar Geoengineering and the Legal Duties of Comparison and Con",
+      "textSha256": "03fc266420787d25a55e31fb0c7313e8ea391ed8497f1412d57b5bb7c50cd517",
+      "characterCount": 47447,
+      "wordCount": 6607,
+      "preview": "Skip to main content Theodore Ouyang About Experience Experience Duke Law School: Who May Choose the Lesser Risk: Solar Geoengineering and the Legal Duties of C",
       "altTexts": [],
       "ariaLabels": [
         "Theodore Ouyang home",
@@ -998,21 +1238,21 @@
         "Return to footnote 30 in the text"
       ],
       "metadata": {
-        "title": "Who May Choose the Lesser Risk: Solar Geoengineering and the Legal Duties of Comparison and Continuity | Theodore Ouyang",
+        "title": "Duke Law School: Who May Choose the Lesser Risk: Solar Geoengineering and the Legal Duties of Comparison and Continuity | Theodore Ouyang",
         "description": "Developed two proposed legal duties for solar geoengineering: comparative justification and continuity. Connected risk-risk analysis to authorization by requiring proponents to defend policy alternatives and answer challenges from affected constituencies.",
         "canonical": "https://www.theodoreoy.com/past-experience/legal-research-and-policy-analysis/solar-geoengineering-comparison-and-continuity/",
-        "openGraphTitle": "Who May Choose the Lesser Risk: Solar Geoengineering and the Legal Duties of Comparison and Continuity",
+        "openGraphTitle": "Duke Law School: Who May Choose the Lesser Risk: Solar Geoengineering and the Legal Duties of Comparison and Continuity",
         "openGraphDescription": "Developed two proposed legal duties for solar geoengineering: comparative justification and continuity. Connected risk-risk analysis to authorization by requiring proponents to defend policy alternatives and answer challenges from affected constituencies.",
         "openGraphUrl": "https://www.theodoreoy.com/past-experience/legal-research-and-policy-analysis/solar-geoengineering-comparison-and-continuity/",
-        "twitterTitle": "Who May Choose the Lesser Risk: Solar Geoengineering and the Legal Duties of Comparison and Continuity",
+        "twitterTitle": "Duke Law School: Who May Choose the Lesser Risk: Solar Geoengineering and the Legal Duties of Comparison and Continuity",
         "twitterDescription": "Developed two proposed legal duties for solar geoengineering: comparative justification and continuity. Connected risk-risk analysis to authorization by requiring proponents to defend policy alternatives and answer challenges from affected constituencies."
       }
     },
     "/past-experience/legal-research-and-policy-analysis/mangrove-restoration-and-compensatory-mitigation/": {
-      "textSha256": "5f87bd609864a5896619717c4ab291a81cd3902ee7279b267ab0d472bdb6dc04",
-      "characterCount": 61725,
-      "wordCount": 8622,
-      "preview": "Skip to main content Theodore Ouyang About Experience Experience Mangrove Restoration and the Limits of Compensatory Mitigation: Lessons from Florida for the Gr",
+      "textSha256": "ce4fd0c07690791f1008c392b75bffe6fbbadc0abb280b16b92006685ecd37da",
+      "characterCount": 61742,
+      "wordCount": 8625,
+      "preview": "Skip to main content Theodore Ouyang About Experience Experience Duke Law School: Mangrove Restoration and the Limits of Compensatory Mitigation: Lessons from F",
       "altTexts": [],
       "ariaLabels": [
         "Theodore Ouyang home",
@@ -1104,34 +1344,44 @@
         "Return to footnote 41 in the text"
       ],
       "metadata": {
-        "title": "Mangrove Restoration and the Limits of Compensatory Mitigation: Lessons from Florida for the Greater Bay Area | Theodore Ouyang",
+        "title": "Duke Law School: Mangrove Restoration and the Limits of Compensatory Mitigation: Lessons from Florida for the Greater Bay Area | Theodore Ouyang",
         "description": "Developed a comparative legal framework for deciding when ecological restoration can justify new habitat loss.",
         "canonical": "https://www.theodoreoy.com/past-experience/legal-research-and-policy-analysis/mangrove-restoration-and-compensatory-mitigation/",
-        "openGraphTitle": "Mangrove Restoration and the Limits of Compensatory Mitigation: Lessons from Florida for the Greater Bay Area",
+        "openGraphTitle": "Duke Law School: Mangrove Restoration and the Limits of Compensatory Mitigation: Lessons from Florida for the Greater Bay Area",
         "openGraphDescription": "Developed a comparative legal framework for deciding when ecological restoration can justify new habitat loss.",
         "openGraphUrl": "https://www.theodoreoy.com/past-experience/legal-research-and-policy-analysis/mangrove-restoration-and-compensatory-mitigation/",
-        "twitterTitle": "Mangrove Restoration and the Limits of Compensatory Mitigation: Lessons from Florida for the Greater Bay Area",
+        "twitterTitle": "Duke Law School: Mangrove Restoration and the Limits of Compensatory Mitigation: Lessons from Florida for the Greater Bay Area",
         "twitterDescription": "Developed a comparative legal framework for deciding when ecological restoration can justify new habitat loss."
       }
     },
     "/now/": {
-      "textSha256": "28facf2d888d5fb8f951b729aac4c4a8059e26cb4b109b237eaf53e8e3e7aa21",
-      "characterCount": 24352,
-      "wordCount": 3063,
+      "textSha256": "a956840f1b6af0161e8ab474cf7ca0f0c703af97b541b3c039c8d461ef213d0c",
+      "characterCount": 8750,
+      "wordCount": 1117,
       "preview": "Skip to main content Theodore Ouyang About Experience Experience 01 AI Research and Engineering 02 Data Science 03 Legal Research and Policy Analysis 04 Finance",
       "altTexts": [],
       "ariaLabels": [
         "Theodore Ouyang home",
         "Primary navigation",
         "Experience sections",
-        "Read more about Scalable Expert Quality Control and Adaptive Review",
-        "Read more about Financial Task Design and Synthetic Data Engineering",
-        "Read more about Scientific Reasoning Evaluation and Task Design",
-        "Read more about AI-Driven Investment Research and Explainable Risk Analysis",
-        "Read more about Autonomous Authority in Space: Risk Tradeoffs and the Law of Delegation",
-        "Read more about Small States and the Governance of Strategic Space Dependence",
-        "Read more about Who May Choose the Lesser Risk: Solar Geoengineering and the Legal Duties of Comparison and Continuity",
-        "Read more about Mangrove Restoration and the Limits of Compensatory Mitigation: Lessons from Florida for the Greater Bay Area"
+        "Read more about Duke University × Top-Tier Foundation Model Company: Scalable Expert Quality Control and Adaptive Review",
+        "Read more about Duke University × Top-Tier Foundation Model Company: Financial Task Design and Synthetic Data Engineering",
+        "Read more about Duke University × Top-Tier AI Research Lab: Scientific Reasoning Evaluation and Task Design",
+        "Read more about Duke University × Leading Global Alternative Asset Manager: AI-Driven Investment Research and Explainable Risk Analysis",
+        "Read more about Jiritsu Network: Asset-verification partnerships and issuer ranking",
+        "Read more about Euromonitor International: China market entry for a premium European appliance brand",
+        "Read more about China Construction Bank: PCA-based sustainability analysis and green-credit screening",
+        "Read more about Duke Law School: Autonomous Authority in Space: Risk Tradeoffs and the Law of Delegation",
+        "Read more about Duke Law School: Small States and the Governance of Strategic Space Dependence",
+        "Read more about Duke Law School: Who May Choose the Lesser Risk: Solar Geoengineering and the Legal Duties of Comparison and Continuity",
+        "Read more about Duke Law School: Mangrove Restoration and the Limits of Compensatory Mitigation: Lessons from Florida for the Greater Bay Area",
+        "Read more about Jones Lang LaSalle Capital Markets Team: Office investment underwriting and ESG due diligence",
+        "Read more about Hubble Network: Bluetooth satellite commercialization and market selection",
+        "Read more about SAIF Partners: Dental investment research and governance due diligence",
+        "Read more about CITIC Securities: Agriculture equity research and valuation",
+        "Read more about EY-Parthenon: Business-line restructuring for digital transformation",
+        "Read more about Independent STEM Olympiad Training Practice: Advanced physics Olympiad instruction",
+        "Read more about The High School Attached to Hunan Normal University: Advanced Olympiad training, awards, and peer mentoring"
       ],
       "metadata": {
         "title": "Experience | Theodore Ouyang",

@@ -26,6 +26,25 @@ const AI_PROJECT_SLUGS = [
   "verification-and-supervision-in-scientific-reasoning-tasks",
   "evidence-uncertainty-and-decision-guarantees-in-investment-research",
 ];
+const EXPERIENCE_DETAIL_SLUGS = new Map([
+  [5, "jiritsu-network"],
+  [6, "euromonitor-international"],
+  [7, "china-construction-bank"],
+  [12, "jones-lang-lasalle"],
+  [13, "hubble-technology-investment"],
+  [14, "saif-partners"],
+  [15, "citic-securities"],
+  [16, "ey-parthenon"],
+  [17, "independent-stem-olympiad-training"],
+  [18, "stem-olympiad-competitions"],
+]);
+const EXPERIENCE_DETAIL_ROUTES = [...EXPERIENCE_DETAIL_SLUGS.values()].map((slug) => `/experience/${slug}/`);
+const LEGAL_LISTING_TITLES = [
+  "Duke Law School: Space Law and Autonomous Systems Research",
+  "Duke Law School: Space Law and Strategic Infrastructure Research",
+  "Duke Law School: Climate Law and Geoengineering Governance Research",
+  "Duke Law School: Environmental Law and Ecological Restoration Research",
+];
 const ROUTES = [
   "/",
   "/education/",
@@ -33,6 +52,7 @@ const ROUTES = [
   "/education/certified-rough-heston-valuation/",
   "/now/",
   "/experience/",
+  ...EXPERIENCE_DETAIL_ROUTES,
   "/past-experience/",
   "/past-experience/artificial-intelligence/",
   "/past-experience/data-science/",
@@ -48,6 +68,7 @@ const NAVIGATION = [
 ];
 const CANONICAL_ROUTES = [
   "/", "/experience/",
+  ...EXPERIENCE_DETAIL_ROUTES,
   "/education/certified-valuation-arithmetic-asian-options/",
   "/education/certified-rough-heston-valuation/",
   ...ARTICLE_ROUTES,
@@ -147,6 +168,21 @@ async function approvedExperience() {
   return JSON.parse(await readFile(path.join(ROOT, "content", "experience-showcase.json"), "utf8")).entries;
 }
 
+function expectedExperiencePresentation(entry) {
+  const legal = entry.categoryId === "03";
+  const ai = entry.categoryId === "01";
+  const organization = legal ? "Duke Law School" : entry.organization;
+  const slug = ai ? AI_PROJECT_SLUGS[entry.id - 1]
+    : legal ? ARTICLES[entry.id - 8][0] : EXPERIENCE_DETAIL_SLUGS.get(entry.id);
+  assert.ok(slug, `Entry ${entry.id} needs an independent expected route`);
+  return {
+    listingTitle: legal ? LEGAL_LISTING_TITLES[entry.id - 8] : entry.organization,
+    pageTitle: `${organization}: ${entry.detailTitle}`,
+    path: ai ? `${AI_ROUTE}${slug}/` : legal ? `${LAW_ROUTE}${slug}/` : `/experience/${slug}/`,
+    slug,
+  };
+}
+
 function experienceEntries(html) {
   return [...html.matchAll(/<article\b([^>]*)>([\s\S]*?)<\/article>/giu)]
     .filter((match) => attribute(match[1], "data-experience-entry") !== undefined)
@@ -157,6 +193,12 @@ function assertExperienceDetails(html, expected) {
   const metadata = [...html.matchAll(/<dl\b([^>]*)>([\s\S]*?)<\/dl>/giu)]
     .filter((match) => attribute(match[1], "data-experience-metadata") !== undefined);
   assert.equal(metadata.length, 1, `Entry ${expected.id} must have one metadata group`);
+  const metadataRows = [...metadata[0][2].matchAll(/<div\b[^>]*>([\s\S]*?)<\/div>/giu)];
+  assert.equal(metadataRows.length, 3, `Entry ${expected.id} must keep Position, Location, and Dates in separate rows`);
+  for (const [index, row] of metadataRows.entries()) {
+    assert.equal(openingTags(row[1], "dt").length, 1, `Entry ${expected.id}, metadata row ${index + 1}`);
+    assert.equal(openingTags(row[1], "dd").length, 1, `Entry ${expected.id}, metadata row ${index + 1}`);
+  }
   assert.deepEqual([...metadata[0][2].matchAll(/<d[td]\b[^>]*>([\s\S]*?)<\/d[td]>/giu)].map((match) => stripMarkup(match[1])), [
     "Position", expected.metadata.position, "Location", expected.metadata.location, "Dates", expected.metadata.dates,
   ]);
@@ -354,48 +396,67 @@ test("Experience presents five numbered sections and all eighteen approved entri
   for (const introduction of oldIntroductions) assert.ok(!stripMarkup(main).includes(introduction), "General category introductions must not return");
 });
 
-test("approved summaries, metadata, contributions, and notes render exactly with eight article links and ten native disclosures", async () => {
+test("all eighteen approved Experience entries use institution titles and real links to complete detail pages", async () => {
   const html = await routeHtml("/experience/");
   const expected = await approvedExperience();
   const entries = experienceEntries(html);
-  const articlePaths = new Map([
-    ...AI_PROJECT_SLUGS.map((slug, index) => [index + 1, `${AI_ROUTE}${slug}/`]),
-    ...ARTICLES.map(([slug], index) => [index + 8, `${LAW_ROUTE}${slug}/`]),
-  ]);
-  assert.equal(openingTags(html, "details").length, 10);
-  assert.equal(openingTags(html, "summary").length, 10);
+  assert.equal(openingTags(html, "details").length, 0, "Experience must not expand entries inline");
+  assert.equal(openingTags(html, "summary").length, 0);
+  assert.doesNotMatch(html, /data-experience-metadata|data-experience-contributions/u, "Detail content belongs on the linked page");
+  const destinations = [];
   for (const entry of expected) {
+    const presentation = expectedExperiencePresentation(entry);
     const rendered = entries.find(({ id }) => id === entry.id).html;
     const summaries = [...rendered.matchAll(/<p\b([^>]*)>([\s\S]*?)<\/p>/giu)]
       .filter((match) => attribute(match[1], "data-experience-summary") !== undefined);
     assert.equal(summaries.length, 1);
     assert.equal(stripMarkup(summaries[0][2]), normalizeSpace(entry.summary));
-    assert.equal(stripMarkup(rendered.match(/<h3\b[^>]*>([\s\S]*?)<\/h3>/u)?.[1] ?? ""), articlePaths.has(entry.id) ? entry.detailTitle : entry.organization);
-    if (articlePaths.has(entry.id)) {
-      assert.equal(openingTags(rendered, "details").length, 0);
-      const links = [...rendered.matchAll(/<a\b([^>]*)>([\s\S]*?)<\/a>/giu)];
-      assert.equal(links.length, 1);
-      assert.equal(attribute(links[0][1], "href"), articlePaths.get(entry.id));
-      assert.equal(stripMarkup(links[0][2]), entry.readMoreLabel);
-      const article = await routeHtml(articlePaths.get(entry.id));
-      assertExperienceDetails(article, entry);
-      assert.equal(stripMarkup(article.match(/<h1\b[^>]*>([\s\S]*?)<\/h1>/u)?.[1] ?? ""), entry.detailTitle);
-    } else {
-      const disclosure = rendered.match(/<details\b([^>]*)>([\s\S]*?)<\/details>/iu);
-      assert.ok(disclosure, `Entry ${entry.id} must open without JavaScript`);
-      assert.doesNotMatch(disclosure[1], /\bopen(?:\s|=|$)/u, "Disclosures start closed");
-      assert.match(disclosure[2], /^\s*<summary\b/u, "Native summary must be the first disclosure child");
-      const action = disclosure[2].match(/<summary\b[^>]*>([\s\S]*?)<\/summary>/iu)?.[1] ?? "";
-      assert.ok(stripMarkup(action).includes(entry.readMoreLabel));
-      assert.doesNotMatch(disclosure[2], /<script\b|\bonclick\s*=|role="button"/iu);
-      assert.equal(stripMarkup(disclosure[2].match(/<h4\b[^>]*>([\s\S]*?)<\/h4>/u)?.[1] ?? ""), entry.detailTitle);
-      assertExperienceDetails(disclosure[2], entry);
-      assert.ok(disclosure[2].indexOf("data-experience-metadata") < disclosure[2].indexOf("data-experience-contributions"));
-    }
+    assert.equal(openingTags(rendered, "p").length, 1, `Entry ${entry.id} must have one outer summary`);
+    assert.equal(stripMarkup(rendered.match(/<h3\b[^>]*>([\s\S]*?)<\/h3>/u)?.[1] ?? ""), presentation.listingTitle);
+    const links = [...rendered.matchAll(/<a\b([^>]*)>([\s\S]*?)<\/a>/giu)];
+    assert.equal(links.length, 1, `Entry ${entry.id} needs one Read More action`);
+    assert.equal(attribute(links[0][1], "href"), presentation.path);
+    assert.equal(stripMarkup(links[0][2]), entry.readMoreLabel);
+    assert.doesNotMatch(links[0][1], /\bonclick\s*=|role="button"/iu, "Read More must remain a native link");
+    destinations.push(presentation.path);
+
+    const detailPage = await routeHtml(presentation.path);
+    assert.equal(openingTags(detailPage, "h1").length, 1);
+    assert.equal(stripMarkup(detailPage.match(/<h1\b[^>]*>([\s\S]*?)<\/h1>/u)?.[1] ?? ""), presentation.pageTitle);
+    assertExperienceDetails(detailPage, entry);
+    assert.ok(detailPage.indexOf("data-experience-metadata") < detailPage.indexOf("data-experience-contributions"));
+    const returns = openingTags(detailPage, "a").filter((tag) => attribute(tag, "href") === `/experience/#${presentation.slug}`);
+    assert.equal(returns.length, 2, `Entry ${entry.id} needs header and footer links to its listing anchor`);
+    assert.ok(openingTags(html, "article").some((tag) => attribute(tag, "id") === presentation.slug));
+    const current = openingTags(detailPage, "a").filter((tag) => attribute(tag, "aria-current") === "page");
+    assert.equal(current.length, 1);
+    assert.equal(attribute(current[0], "href"), "/experience/");
   }
+  assert.equal(new Set(destinations).size, 18);
+  assert.deepEqual(destinations.filter((route) => route.startsWith("/experience/")), EXPERIENCE_DETAIL_ROUTES);
   assert.equal(expected.find(({ id }) => id === 16).metadata.location, "Beijing, China");
   assert.deepEqual(expected.filter(({ categoryId }) => ["02", "04", "05"].includes(categoryId)).map(({ keyContributions }) => keyContributions.length), [9, 7, 6, 7, 5, 6, 1, 1, 2, 4]);
   assert.equal(expected.find(({ id }) => id === 18).notes.length, 1, "The school-program context must survive the detailed-bullet merge");
+});
+
+test("the ten nonresearch detail routes are complete static pages with vertically stacked metadata", async () => {
+  const metadataStyles = await readFile(path.join(ROOT, "app", "components", "experience", "Experience.module.css"), "utf8");
+  const metadataRules = [...metadataStyles.matchAll(/(?:^|\n)\s*\.metadata\s*\{([^}]+)\}/gu)];
+  assert.ok(metadataRules.length > 0, "Experience metadata needs an explicit layout rule");
+  for (const [, declarations] of metadataRules) {
+    assert.match(declarations, /grid-template-columns:\s*1fr\s*;/u, "Metadata must remain a single column at every defined breakpoint");
+  }
+  for (const route of EXPERIENCE_DETAIL_ROUTES) {
+    const html = await routeHtml(route);
+    assert.equal(openingTags(html, "article").length, 1);
+    assert.equal(openingTags(html, "details").length, 0);
+    assert.match(html, /<h1\b[^>]*\bid="experience-title"/u);
+    assert.match(html, /href="#experience-title"/u);
+    assert.equal(canonicalUrl(html), `${SITE_ORIGIN}${route}`);
+    const main = html.match(/<main\b[^>]*>([\s\S]*?)<\/main>/u)?.[1] ?? "";
+    assert.doesNotMatch(stripMarkup(main), /\p{Script=Han}/u);
+    assert.doesNotMatch(main, /data-experience-summary/u, "The outer summary must not be repeated on the detail page");
+  }
 });
 
 test("legacy domain routes preserve approved sections, canonicalize to Experience, and return to valid anchors", async () => {
@@ -424,7 +485,7 @@ test("law papers preserve article identity, chapter navigation, and bidirectiona
     const text = stripMarkup(html);
     const titleMatch = html.match(/<h1\b[^>]*>([\s\S]*?)<\/h1>/iu);
     assert.ok(titleMatch, `${route} is missing its article title`);
-    assert.equal(stripMarkup(titleMatch[1]), approved.find(({ id }) => id === index + 8).detailTitle);
+    assert.equal(stripMarkup(titleMatch[1]), expectedExperiencePresentation(approved.find(({ id }) => id === index + 8)).pageTitle);
     assert.ok(text.includes(title), `${route} lost its original article title`);
     if (subtitle) assert.ok(text.includes(subtitle), `${route} lost its original subtitle`);
     assert.ok(text.includes("Letao Ouyang"), `${route} lost its original author name`);

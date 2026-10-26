@@ -22,11 +22,6 @@
   font-size: var(--type-subheading);
 }
 
-.body h2.manuscriptTitle {
-  margin-top: 3rem;
-  padding-top: 2rem;
-}
-
 .sourceLinks {
   display: flex;
   flex-wrap: wrap;

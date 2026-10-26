@@ -73,7 +73,7 @@ export function LegalPaperPage({ paper, showcase }: { paper: LegalPaper; showcas
         ]}>
           <header className={`page-intro ${styles.header}`}>
             <Link className="back-link" href={`/experience/#${showcase.slug}`}><span aria-hidden="true">←</span> Experience</Link>
-            <h1 id="paper-title" tabIndex={-1}>{showcase.detailTitle}</h1>
+            <h1 id="paper-title" tabIndex={-1}>{showcase.pageTitle}</h1>
             <ExperienceMetadata entry={showcase} />
           </header>
 
