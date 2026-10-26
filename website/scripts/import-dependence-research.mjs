@@ -9,7 +9,7 @@ const outputUrl = new URL("../content/selected-research/critical-dependence-stre
 assert.ok(process.argv.slice(2).every((argument) => argument === "--check"), "Usage: node scripts/import-dependence-research.mjs [--check]");
 const checkOnly = process.argv.includes("--check");
 async function writeOrCheck(url, content) {
-  if (checkOnly) assert.deepEqual(await readFile(url), Buffer.from(content, "utf8"), `Generated content differs: ${url.pathname}`);
+  if (checkOnly) assert.equal((await readFile(url, "utf8")).replace(/\r\n/gu, "\n"), content, `Generated content differs: ${url.pathname}`);
   else await writeFile(url, content);
 }
 const manifest = JSON.parse(await readFile(new URL("source-manifest.json", sourceDirectory), "utf8"));

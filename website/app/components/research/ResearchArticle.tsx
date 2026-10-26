@@ -1,5 +1,7 @@
 import Link from "next/link";
-import { type ReactNode } from "react";
+import { join } from "node:path";
+import { cache, type ReactNode } from "react";
+import sharp from "sharp";
 import { SiteShell } from "../SiteShell";
 import { ArticleReadingLayout } from "../article/ArticleReadingLayout";
 import { ExperienceMetadata, KeyContributions } from "../experience/ExperienceDetails";
@@ -31,6 +33,19 @@ function InlineContent({ inlines }: { inlines: ArticleInline[] }) {
   });
 }
 
+const figureDimensions = cache(async (src: string) => {
+  const { width, height } = await sharp(join(process.cwd(), "public", src.slice(1))).metadata();
+  if (!width || !height) throw new Error(`Research figure has no intrinsic dimensions: ${src}`);
+  return { width, height };
+});
+
+async function FigureImage({ src, label, captionId }: { src: string; label: string; captionId: string }) {
+  const dimensions = await figureDimensions(src);
+  // Intrinsic dimensions reserve the manuscript image's aspect ratio before loading.
+  // eslint-disable-next-line @next/next/no-img-element
+  return <img src={src} {...dimensions} alt={label} aria-describedby={captionId} loading="lazy" decoding="async" />;
+}
+
 export function ResearchArticle({ project, active, returnPath, returnLabel, titleId, showcase }: {
   project: ResearchArticleContent;
   active: ActivePage;
@@ -57,13 +72,14 @@ export function ResearchArticle({ project, active, returnPath, returnLabel, titl
       return <div {...marker} id={block.id} className={mathStyles.equation} key={index} tabIndex={0} role="region" aria-label="Mathematical equation"><ResearchMath tex={block.tex} display /></div>;
     }
     if (block.type === "figure") {
+      const captionId = `research-figure-${index}-caption`;
+      const opening = block.inlines[0];
+      const label = (opening?.type === "text" && opening.text.match(/^Figure \d+/u)?.[0]) || "Research figure";
       return <figure {...marker} id={block.id} className={styles.figure} key={index}>
-        <a href={block.src} aria-label="Open research figure at full resolution">
-          {/* Static manuscript figures retain their intrinsic aspect ratio. */}
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img src={block.src} alt="" loading="lazy" decoding="async" />
+        <a href={block.src} aria-label={`Open ${label.toLowerCase()} at full resolution`}>
+          <FigureImage src={block.src} label={label} captionId={captionId} />
         </a>
-        <figcaption><InlineContent inlines={linkArticleSectionReferences(block.inlines, project.slug, headingMap)} /></figcaption>
+        <figcaption id={captionId}><InlineContent inlines={linkArticleSectionReferences(block.inlines, project.slug, headingMap)} /></figcaption>
       </figure>;
     }
     const tableRows = block.rows.map((row, rowIndex) => (

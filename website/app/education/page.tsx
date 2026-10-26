@@ -4,8 +4,8 @@ import { SiteShell } from "../components/SiteShell";
 import { createPageMetadata, ABOUT_DESCRIPTION, HOME_TITLE } from "../lib/content/site";
 import styles from "../home.module.css";
 
-// Preserve old bookmarks and research fragments on the static host.
-// About is canonical; this alias shares its content without repeating the entrance.
+// Static compatibility route for About content and its research fragment links.
+// Canonical metadata points to /; shared content omits the particle entrance.
 export const metadata: Metadata = createPageMetadata({
   title: HOME_TITLE,
   description: ABOUT_DESCRIPTION,

@@ -3,7 +3,6 @@ import { join } from "node:path";
 import { parseResearchMarkdown, type ResearchArticleContent } from "./research-markdown";
 
 export const SELECTED_RESEARCH_PATH = "/education/certified-valuation-arithmetic-asian-options/";
-export const SELECTED_RESEARCH_TITLE = "Certified Valuation of Arithmetic Asian Options";
 
 type SelectedResearchSource = Omit<ResearchArticleContent, "blocks"> & {
   description: string;

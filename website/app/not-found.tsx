@@ -19,7 +19,7 @@ export default function NotFound() {
           The page you requested may have moved or may no longer exist.
         </p>
         <Link className="back-link" href="/">
-          <span aria-hidden="true">←</span> Return home
+          <span aria-hidden="true">←</span> Return Home
         </Link>
       </header>
     </SiteShell>
