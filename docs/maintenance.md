@@ -28,23 +28,22 @@ Paths in this table are relative to `website/`.
 | Experience | `/experience/` | `app/components/experience/`, `content/experience-showcase.json` |
 | Experience detail pages | `/experience/[slug]/` | Approved entries from `content/experience-showcase.json` |
 | Experience compatibility aliases | `/past-experience/`, `/now/` | Shared Experience page |
-| Legacy experience categories | `/past-experience/[slug]/` | Filtered approved Experience sections |
+| Experience category compatibility pages | `/past-experience/[slug]/` | Filtered approved Experience sections |
 | AI research projects | `/past-experience/artificial-intelligence/[paper]/` | `app/lib/content/ai-projects.ts`, `content/artificial-intelligence/` |
 | Legal articles | `/past-experience/legal-research-and-policy-analysis/[paper]/` | `app/past-experience/[slug]/[paper]/page.tsx`, `app/lib/content/legal-papers.ts`, `content/legal-papers/` |
 | Architecture | `/architecture/` | `../architecture/index.html` |
 
 `content/experience-showcase.json` is the approved English presentation source,
-extracted verbatim from `experience-merged-bilingual.docx`. Its source-document
-SHA-256 records the reviewed version. It contains five categories and eighteen
-entries; Chinese audit text, editorial instructions, and long manuscripts are not
-included. Do not substitute the older resume Markdown for this approved copy.
-The historical `content/past-experience/experience.md` and its parser remain intact
-for provenance and category definitions.
+derived from `experience-merged-bilingual.docx` with approved display capitalization.
+Its source-document SHA-256 identifies the reviewed Word file. It contains five categories and eighteen
+entries. The file contains public English copy only; full manuscripts have separate
+protected sources. `app/lib/content/experience-domains.ts` defines the five categories,
+and `app/lib/content/experience-showcase.ts` maps entries to their reading pages.
 
 The primary navigation contains About and Experience. Experience presents all five
 numbered sections in one page, with a single-column anchor directory at every
 screen width and eighteen summaries. All eighteen Read More actions are links to
-real pages. The eight AI and legal entries retain their existing manuscript URLs;
+real pages. The eight AI and legal entries use their manuscript URLs;
 the other ten entries use `/experience/[slug]/`. Outer headings lead with the
 institution or organization; legal headings use `Duke Law School: {research area}
 Research`. Detail-page titles use `{institution}: {project title}`; internal title
@@ -53,19 +52,20 @@ Location, and Dates form three stacked rows at every viewport, followed by the
 approved Key Contributions with contextual notes appended as the final list items.
 All items share the same typography and color. Do not repeat the outer summary.
 
-AI pages continue directly from Key Contributions into the original numbered
-article body. Only rendering omits the duplicate technical title, Project and
-Author lines, Overview heading, and the old pre-chapter introduction; the full
-source JSON remains protected and unchanged. Legal articles retain their complete
-Abstract, text, author note, and footnotes after the contribution block. Contents
-starts with Key Contributions and preserves the original chapter anchors.
+AI pages continue directly from Key Contributions into the numbered article body.
+The renderer starts at the first numbered chapter; the full source JSON includes
+the title, Project and Author lines, and introductory material for provenance.
+Legal articles present their complete Abstract, text, Author Note, and Footnotes
+after the contribution block. Contents starts with Key Contributions and uses the
+source chapter anchors.
 
 `app/lib/content/routes.ts` supplies twenty-two canonical sitemap routes: About,
 Experience, two Selected Research articles, eight Experience manuscripts, and ten
 other Experience detail pages.
-The static export also retains `/education/`, `/past-experience/`, `/now/`, and the
-five old category URLs as compatibility pages. The category pages render the same
-approved entries and point canonically to the corresponding Experience section.
+The static export includes `/education/`, `/past-experience/`, `/now/`, and the
+five category URLs as compatibility pages. The category pages render the same
+approved entries, use `/experience/` as their canonical URL, and link back to the
+corresponding Experience section.
 There are thirty exported content routes and the separate `/architecture/`
 reference: thirty-one routes in total, excluding 404.
 
@@ -84,23 +84,24 @@ there is no request-time backend, database, authentication, form submission, or 
 
 - `app/components/SiteShell.tsx` owns the shared reading frame.
 - `app/components/SiteNavigation.tsx` owns the mobile menu and focus handling.
-- `app/page.tsx` retains the interactive Canvas2D name entrance before About; `app/components/dithered-entrance/` owns its pointer, keyboard, fallback, and reduced-motion behavior. Its scroll cue still targets `#home-profile`.
+- `app/page.tsx` presents the interactive Canvas2D name entrance before About; `app/components/dithered-entrance/` owns its pointer, keyboard, fallback, and reduced-motion behavior. Its scroll cue targets `#home-profile`.
+- `app/components/article/` owns the shared reading layout, responsive contents navigation, and section tracking.
 - `app/components/research/` owns the shared research article and mathematical presentation.
-- `app/components/InlineText.tsx` renders prose emphasis and citation links.
 - `app/globals.css` and `app/home.module.css` implement the [design system](design.md).
 - `app/lib/content/site.ts` owns site identity and metadata helpers.
 - `app/lib/content/research-markdown.ts` parses research prose, headings, tables, and formulas.
+- `app/lib/content/article-headings.ts` supplies Roman-numeral chapter labels, lettered subsections, and verified internal section links while preserving source anchors and reference numerals.
 - `app/lib/content/research-math.ts` renders mathematical SVG and assistive MathML on the server.
 
 `app/components/AboutContent.tsx` supplies the shared About and Education-alias
 content. It presents Duke University once above both degree records and omits the
-fellowship from About. `app/lib/content/about.ts` retains all 49 course names in four
+fellowship from About. `app/lib/content/about.ts` supplies all 49 course names in four
 categories. Categories stack vertically; each list flows down up to two independent
 CSS columns with a 16rem target width, a 24px column gap, and 2px between items.
 Course names stay together across column breaks, and lists use one column below
 768px. `app/home.module.css` scopes the compact
 record spacing and consistent role styles to About. Its reading frame uses the
-existing Inter family with `font-optical-sizing: none` and `"opsz" 14`; heading and
+shared Inter family with `font-optical-sizing: none` and `"opsz" 14`; heading and
 prose tracking is zero. Keep these role sizes synchronized with Experience and research pages.
 
 Add a website page by updating its source, the route registry, sitemap expectations,
@@ -117,22 +118,22 @@ plugin; application dependencies and lint rules retain their normal configuratio
 
 The approved bilingual Word document is the current authority for showcase copy.
 Read its English blocks only; preserve category and entry order, metadata, each
-contribution, and the two contextual notes. Update the JSON and its document hash
-only when a replacement version is approved. AI and legal manuscript sources are
+contribution, and the two contextual notes. Apply approved display-format changes
+without changing the source-document hash; update that hash only when a replacement
+Word file is approved. AI and legal manuscript sources are
 independently protected and are not regenerated from the showcase document.
 
 
 ### AI research projects
 
 Domain `01`, AI Research and Engineering, links four project reading pages through
-Read More actions following the outer summaries. Their existing URLs remain stable.
+Read More actions following the outer summaries. Their manuscript URLs are stable.
 Each JSON source stores its original Notion title, URL, edit timestamp,
 and complete Markdown body. Preserve that source, including its original opening
-Project and Author paragraph. In the rendered page, show the institution and
-project title, vertical metadata, and approved Key Contributions, then begin at
-the first original numbered chapter. Omit the duplicate technical title and old
-Project / Author / Overview introduction only in this presentation. Keep the
-numbered body, emphasis, citations, table headers and cells, and formulas in their
+Project and Author paragraph. The rendered page shows the institution and
+project title, vertical metadata, and approved Key Contributions, followed by
+the first numbered chapter. Keep the numbered body, emphasis, citations, table
+headers and cells, and formulas in their
 original order. Do not add an abstract, references section, publication details,
 or a download. Each reading page returns to its project anchor on Experience.
 
@@ -155,8 +156,8 @@ mathematical terms and equation labels remain intact. Assistive MathML preserves
 semantic formulas and the exact original TeX annotation. Invalid formulas fail the
 build. Tables and wide equations expose focusable scrolling regions.
 
-AI project tests compare the retained numbered body with its original source blocks,
-verify the presentation-only omission of the old preface, and check all 277 original formula annotations,
+AI project tests compare the numbered body with its source blocks,
+verify the chapter boundary used for rendering, and check all 277 original formula annotations,
 five tables, 27 citation links, and 26 second-level headings with the approved
 documents. Update the project registry, independent route expectations, protected
 source hashes, and visible-copy contracts together when synchronizing approved text.
@@ -183,10 +184,14 @@ loads both structured sources from `content/selected-research/`:
 | `certified-valuation-arithmetic-asian-options.json` | Abstract, chapters 1–10, references, and an appendix/supporting-material link |
 | `certified-rough-heston-valuation.json` | Abstract, chapters 1–8, references, and an appendix/supporting-material link |
 
+Frozen Markdown sources and their provenance record live in
+`content/sources/selected-research/`. The import script and content tests use these
+files to verify the structured manuscript sources against the pinned upstream versions.
+
 The pages use the shared `ResearchArticle` and `ResearchMath` components, with a
 contents list, source links, and return links to the corresponding About research
-entry at `/#<slug>`. Their navigation marks About as current. They publish the core
-chapters rather than a rewritten overview. Appendices remain in the GitHub manuscript.
+entry at `/#<slug>`. Their navigation marks About as current. They publish the complete
+core chapters. Appendices are available in the GitHub manuscript.
 Each JSON source stores `repositoryUrl`, `sourceUrl`, `sourceCommit`, and `sourceBlob`.
 The manuscript link is pinned to that source commit. When refreshing a paper, compare
 against the pinned file, preserve the complete core chapters and references, and
@@ -224,14 +229,14 @@ sequential and every chapter has a unique anchor. Keep original PDFs and extract
 records outside public assets and the static export.
 
 `LegalPaperPage` renders the institution-and-project heading, vertical metadata,
-Key Contributions, complete original Abstract, article, and endnotes. `LegalPaperContents`
-provides responsive chapter navigation and section tracking. `LegalPaperReader`
+Key Contributions, complete original Abstract, article, and endnotes. The shared
+`ArticleContents` provides responsive chapter navigation and section tracking. `LegalPaperReader`
 adds native-dialog note previews, with source-link focus restoration and a route to
 the complete endnote. Original anchors, contents links, and return links remain
 available without JavaScript. Reading controls use the shared font and type tokens.
 
 To add an approved paper, update its structured source, the legal-paper slug registry,
-the matching project route in `experience.ts`, and the independent content/output
+its entry and route mapping in `experience-showcase.ts`, and the independent content/output
 contracts together. Use the supplied manuscript as the wording and citation authority.
 
 Article validation checks all thirty exported content routes, eighteen Experience

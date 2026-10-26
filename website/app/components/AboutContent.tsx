@@ -70,7 +70,7 @@ export function AboutContent() {
               <p className="entry-subtitle">Financial Risk Concentration</p>
               <div className="education-notes">
                 <p className="education-note education-advisor">
-                  Academic advisor:{" "}
+                  Academic Advisor:{" "}
                   <a href="https://cee.duke.edu/people/mark-borsuk/" target="_blank" rel="noopener noreferrer">Mark Borsuk, Ph.D.</a>
                 </p>
                 <p className="education-note">Pratt School of Engineering Merit Scholarship</p>

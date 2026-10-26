@@ -61,7 +61,7 @@ export function LegalPaperPage({ paper, showcase }: { paper: LegalPaper; showcas
   const acknowledgment = paper.acknowledgment;
 
   function Backlinks({ number }: { number: number | string }) {
-    return <span className={styles.backlinks}>{(references.get(noteKey(number)) ?? []).map((id, index) => <a key={id} href={`#${id}`} role="doc-backlink" aria-label={`Return to footnote ${number} in the text${index ? `, reference ${index + 1}` : ""}`}>Return to text{index ? ` ${index + 1}` : ""}</a>)}</span>;
+    return <span className={styles.backlinks}>{(references.get(noteKey(number)) ?? []).map((id, index) => <a key={id} href={`#${id}`} role="doc-backlink" aria-label={`Return to footnote ${number} in the text${index ? `, reference ${index + 1}` : ""}`}>Return to Text{index ? ` ${index + 1}` : ""}</a>)}</span>;
   }
 
   return (
@@ -105,12 +105,12 @@ export function LegalPaperPage({ paper, showcase }: { paper: LegalPaper; showcas
 
             <section className={styles.footnotes} id="footnotes" tabIndex={-1} role="doc-endnotes" aria-labelledby="footnotes-heading">
               <h2 id="footnotes-heading">Footnotes</h2>
-              {acknowledgment && <div className={styles.authorNote} id="fn-author" tabIndex={-1}><span className={styles.noteNumber} aria-hidden="true">*</span><div><p><RunText runs={acknowledgment.runs} prefix="author-note" /></p><a href="#fnref-author" role="doc-backlink" aria-label="Return to author credit">Return to author</a></div></div>}
+              {acknowledgment && <div className={styles.authorNote} id="fn-author" tabIndex={-1}><span className={styles.noteNumber} aria-hidden="true">*</span><div><p><RunText runs={acknowledgment.runs} prefix="author-note" /></p><a href="#fnref-author" role="doc-backlink" aria-label="Return to author credit">Return to Author</a></div></div>}
               <ol>{paper.footnotes.map((note) => <li id={`fn-${note.number}`} tabIndex={-1} key={note.number}><span className={styles.noteNumber} aria-hidden="true">{note.number}</span><div><p><RunText runs={note.runs} prefix={`note-${note.number}`} /></p><Backlinks number={note.number} /></div></li>)}</ol>
             </section>
           </ArticleReadingLayout>
 
-          <footer className={styles.paperFooter}><Link className="back-link" href={`/experience/#${showcase.slug}`}><span aria-hidden="true">←</span> Experience</Link><a href="#paper-title">Back to top</a></footer>
+          <footer className={styles.paperFooter}><Link className="back-link" href={`/experience/#${showcase.slug}`}><span aria-hidden="true">←</span> Experience</Link><a href="#paper-title">Back to Top</a></footer>
         </LegalPaperReader>
       </article>
     </SiteShell>

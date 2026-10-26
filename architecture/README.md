@@ -13,29 +13,32 @@ tracing, and image export. A downloaded `index.html` also works offline.
 | `README.md` | Viewer usage and maintenance |
 | `LICENSE` | MIT license for the Archify viewer |
 
-The website contains four main pages, five experience domains, four legal
-papers, four AI research project pages, and two Selected Research papers linked
-from Education. `website/app/lib/content/` defines identity, routes, content loaders,
-and research Markdown and math rendering; `website/content/` contains the resume,
-research sources, structured manuscripts, and integrity contracts. Next.js
-generates nineteen content pages. The build includes
-this viewer at `/architecture/` for twenty navigable routes, excluding 404, and GitHub Actions publishes `website/out/` to
-GitHub Pages on the custom domain.
+The primary navigation contains About and Experience. Twenty-two canonical content
+routes cover these pages, two Selected Research manuscripts, and eighteen Experience
+detail pages. Eight compatibility pages bring the content export to thirty routes.
+This viewer at `/architecture/` makes thirty-one exported routes, excluding 404.
+`website/app/lib/content/` defines identity, routes, content loaders, and research
+Markdown and math rendering. `website/content/` contains approved Experience copy,
+structured manuscripts, frozen source evidence, and integrity contracts. GitHub
+Actions publishes the assembled `website/out/` export to GitHub Pages on the custom domain.
 
-Home retains its interactive Canvas2D name entrance before the profile. The navigation
-menu and legal-paper contents and note previews run in the browser. The website uses no request-time API, database,
+About opens with its interactive Canvas2D name entrance before the profile. The navigation
+menu, shared article contents, and legal-note previews run in the browser. The website uses no request-time API, database,
 authentication, or analytics. The [maintenance guide](../docs/maintenance.md)
 documents content ownership, output contracts, security, and publishing.
 
-Education lists the two papers as compact linked titles with GitHub links. The
+About presents two Selected Research entries with linked manuscript titles and
+research summaries. The article headers provide GitHub and Full Manuscript links. The
 on-site articles include their abstracts, core chapters (Asian options 1–10; Rough
 Heston 1–8), and references; appendices are linked on GitHub. Each source JSON records
-its exact upstream commit, blob, and manuscript URL.
+its exact upstream commit, blob, and manuscript URL. Frozen manuscript evidence lives
+in `website/content/sources/selected-research/`.
 
 The main website takes its grid, warm paper color, and fine rules from Cognition as
-a design reference, while retaining self-hosted Inter. Body text shares a 14px scale,
-H3 headings use 18px, and formulas use 1.15em. The architecture viewer retains its
-independent diagram controls and geometry while sharing the site's HTML type roles.
+a design reference and uses self-hosted Inter. Page titles and section headings use
+22px, entry headings use 18px, and body text uses 14px. Experience directory labels
+and numbers use 18px; formulas use 1.15em. The architecture viewer has independent
+diagram controls and geometry and shares the site's HTML type roles.
 
 Update `site.json` from the current source and `.github/workflows/pages.yml`, then
 validate and generate it with the installed Archify skill:
@@ -48,7 +51,7 @@ node website/scripts/integrate-architecture.mjs
 
 Run these commands from the repository root. `<archify>` is the local Archify skill
 directory. The integration script applies the website's six HTML type roles,
-major-section heading semantics, and sentence-case control labels while preserving
+major-section heading semantics, and normalized control labels while preserving
 SVG geometry. The viewer loads
 `../assets/fonts/inter.css`, preloads regular Inter, and inherits `--font-text`.
 Visual exports embed the local regular and italic Inter files in SVG; PNG and WebM

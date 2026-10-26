@@ -1,6 +1,6 @@
 import { readFileSync } from "node:fs";
 import { join } from "node:path";
-import { experienceDomainDefinitions } from "./experience";
+import { experienceDomainDefinitions } from "./experience-domains";
 import { aiResearchProjectSlugs, aiResearchProjectPath } from "./ai-projects";
 import { legalPaperSlugs, legalPaperPath } from "./legal-papers";
 

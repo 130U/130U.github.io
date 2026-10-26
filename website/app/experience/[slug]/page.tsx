@@ -36,7 +36,7 @@ export default async function ExperienceDetailPage({ params }: PageProps) {
         <KeyContributions entry={entry} />
         <footer className={styles.detailFooter}>
           <Link className="back-link" href={returnPath}><span aria-hidden="true">←</span> Experience</Link>
-          <a href="#experience-title">Back to top</a>
+          <a href="#experience-title">Back to Top</a>
         </footer>
       </article>
     </SiteShell>

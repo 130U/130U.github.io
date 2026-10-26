@@ -18,7 +18,7 @@ The rest of the design is deliberately quiet: warm paper, clear typography, and 
 
 ## Academic background and research
 
-[Education](https://www.theodoreoy.com/education/) covers my **B.S. in Mathematics and M.Eng. in Risk Engineering at Duke**, selected coursework, and mathematical finance research.
+[About](https://www.theodoreoy.com/) covers my **B.S. in Mathematics and M.Eng. in Risk Engineering at Duke**, selected coursework, and mathematical finance research.
 
 Two manuscripts develop methods for certified option valuation. The Asian-options work connects a weighted payoff-remainder argument to a complete Heston discretization-error bound. The Rough Heston work carries fractional Riccati residuals into joint price-error certificates, showing how shared numerical errors can change a portfolio's certification result.
 
@@ -26,7 +26,7 @@ Both papers can be read on the site, with equations, chapter navigation, referen
 
 ## Experience across five fields
 
-[Past Experience](https://www.theodoreoy.com/past-experience/) connects each role to the problem, methods, and contribution behind it.
+[Experience](https://www.theodoreoy.com/experience/) presents eighteen projects and roles across five fields, with summaries and dedicated pages for their methods and contributions.
 
 | Field | Work represented |
 | --- | --- |
@@ -36,9 +36,7 @@ Both papers can be read on the site, with equations, chapter navigation, referen
 | **Finance and Consulting** | Real estate underwriting at JLL, satellite commercialization research for Hubble, investment diligence at SAIF, equity research at CITIC, and business restructuring at EY-Parthenon. |
 | **STEM Academic Competitions and Training** | Advanced physics and mathematics training, competition awards, peer mentoring, and independent Olympiad instruction. |
 
-The AI and legal projects open into complete articles, so visitors can follow the reasoning beyond a résumé entry.
-
-[Current Chapter](https://www.theodoreoy.com/now/) introduces the questions shaping my present work.
+Every entry has a Read More page with its role, location, dates, and Key Contributions. The AI and legal pages also include the research articles, so visitors can follow the underlying reasoning.
 
 ## About the site
 

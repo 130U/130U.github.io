@@ -37,7 +37,7 @@ function decodeHtml(value) {
 
 for (const expected of PROJECTS) {
   test(`${expected.key} main text and references are complete and match the frozen GitHub source`, async () => {
-    const bytes = await readFile(new URL(`../../docs/audits/selected-research-2026-10-08/${expected.key}-source.md`, import.meta.url));
+    const bytes = await readFile(new URL(`../content/sources/selected-research/${expected.key}-source.md`, import.meta.url));
     assert.equal(createHash("sha1").update(`blob ${bytes.length}\0`).update(bytes).digest("hex"), expected.blob);
     const upstream = bytes.toString("utf8");
     const article = JSON.parse(await readFile(new URL(`../content/selected-research/${expected.slug}.json`, import.meta.url), "utf8"));
