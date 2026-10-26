@@ -75,6 +75,15 @@ there is no request-time backend, database, authentication, form submission, or 
 - `app/lib/content/research-markdown.ts` parses research prose, headings, tables, and formulas.
 - `app/lib/content/research-math.ts` renders mathematical SVG and assistive MathML on the server.
 
+`app/components/AboutContent.tsx` supplies the shared About and Education-alias
+content. It presents Duke University once above both degree records and omits the
+fellowship from About. `app/lib/content/about.ts` retains all 49 course names in four
+categories. Categories stack vertically, with a two-column course list at 768px and
+above and one column below that breakpoint. `app/home.module.css` scopes the compact
+record spacing and consistent role styles to About. Its reading frame uses the
+existing Inter family with `font-optical-sizing: none` and `"opsz" 14`; heading and
+prose tracking is zero. Keep shared type sizes and other pages' typography intact.
+
 Add a website page by updating its source, the route registry, sitemap expectations,
 and output tests together. Keep browser interaction in focused client components.
 Add a server only when a defined product requirement needs one.
@@ -145,9 +154,11 @@ update only the corresponding contract fields after independent verification.
 ### Selected Research
 
 About presents two compact research entries before Education and Selected Coursework.
-Each original title is a blue link to its on-site manuscript, followed by a short
-paragraph describing the mathematical method and the contribution within the paper's
-stated scope. Source links remain on the manuscript pages; About has no separate
+Each original title links to its on-site manuscript in black ink, turning blue on
+hover or keyboard focus. A short paragraph states the mathematical method and the
+achieved result within the paper's specified example. Keep numerical bounds and
+improvements tied to their model, horizon, payoff, and comparison. Source links remain
+on the manuscript pages; About has no separate
 Paper, Repository, or Results action row. `app/lib/content/selected-research.ts`
 loads both structured sources from `content/selected-research/`:
 

@@ -31,9 +31,13 @@ link, static fallback, and reduced-motion behavior. The mark's editable master i
 Inter 4.1 is the shared typeface for headings, prose, navigation, directories, controls,
 metadata, and the architecture viewer. Two self-hosted WOFF2 files provide variable
 weights and true italics. `website/public/assets/fonts/inter.css` owns `--font-text`,
-optical sizing, and the font faces. The regular face is preloaded; italic loads when used.
+the default optical sizing, and the font faces. The regular face is preloaded; italic loads when used.
 System sans fallbacks cover unavailable glyphs.
 The LO mark retains its independent artwork.
+About's reading frame uses this same Inter family with automatic optical sizing
+disabled and the `opsz` axis fixed at 14. Its headings and prose use normal tracking;
+small indices and field labels retain their shared label tracking. These scoped
+settings leave other pages and the particle artwork unchanged.
 
 Typography follows semantic roles. At any viewport, text with the same role uses
 the same size across every section and page. Weight, color, spacing, and italics
@@ -56,8 +60,9 @@ scale relative to surrounding text without changing the prose size.
 
 All roles use rem units and scale with the user's text setting. Only the title
 and section roles become smaller below 768px, consistently across the site and
-architecture viewer. Headings have -0.02em tracking; reading text stays near zero.
-The optical font sizing and the shared `--reading-leading` support sustained reading.
+architecture viewer. About headings use zero tracking; other page and section
+headings retain -0.02em tracking. Reading text stays near zero. The shared
+`--reading-leading` supports sustained reading.
 Blue marks active navigation, focus, and link feedback. Editorial surfaces use flat
 rules and typography; the note-preview dialog uses a rounded surface to distinguish
 its temporary reading state.
@@ -126,8 +131,9 @@ aligns headings and prose to the reading track. Tablet uses 12 outer columns.
 The shared `--reading-measure` caps narrative containers at 720px. Page introductions,
 the education list and outer coursework field, experience records, Current Chapter,
 and AI project articles align their headings and prose to this common right edge.
-Nested paragraphs fill their container with natural ragged-right wrapping. Coursework
-retains two inner columns; legal articles retain their own reading and contents layout.
+Nested paragraphs fill their container with natural ragged-right wrapping. Each
+coursework category contains a two-column list on desktop; legal articles retain
+their own reading and contents layout.
 Below 768px, the navigation becomes a 4rem sticky header with a Menu / Close panel.
 Media-query ranges cover fractional viewport widths continuously.
 Without JavaScript, the links remain visible in normal document flow.
@@ -143,18 +149,22 @@ viewport height. Its minimum track width follows the interface type size, naviga
 indent, padding, and scrollbar allowance. The reading field and structural guides
 reflow together when enlarged text needs more rail space. Long reading content has
 emergency wrapping when an unbroken word would exceed its container.
-Coursework uses the shared reading size and leading, two columns from 768px, and
-one on phones. Course-category headings match project and About institution
-headings; degree names use the reading size at weight 500. Column padding preserves
-useful space for long course names. Profile details and contact values also use the
-reading scale; field labels use the label scale. Email and GitHub occupy two columns
+Coursework uses four stacked category blocks, each with a two-column course list
+from 768px and one column on phones. Lists keep the shared reading size and leading,
+with a 2px row gap and 24px column gap. Category headings share the same size, weight,
+leading, and tracking as research titles and the About institution heading, without
+reserving a second line. Duke University appears once above the two degree records;
+degree names use the reading size at weight 500. Compact notes and a thin rule
+separate the degree records. Profile details and contact values also use the reading
+scale; field labels use the label scale. Email and GitHub occupy two columns
 above 540px and stack in one column at 540px and below. Long contact values can wrap
 when text is enlarged.
 Coarse pointers receive 44px primary navigation and standalone link targets.
 
 About uses compact spacing inside each research or education record and larger
-breaks between its numbered sections. The research title is a blue, underlined
-manuscript link, followed by a single supporting paragraph. Paragraphs wrap naturally
+breaks between its numbered sections. The research title is an underlined manuscript
+link in black ink, with blue hover and keyboard-focus feedback, followed by a single
+supporting paragraph. Paragraphs wrap naturally
 without forced line breaks. Section headings, entry headings, and reading text keep
 the existing type sizes; scoped spacing overrides do not affect other pages.
 
@@ -183,6 +193,7 @@ LLM, SHAP, and IPhO; sentence case does not lowercase proper names.
 Use "and" in editorial category labels. Preserve official course and organization
 names, including their ampersands. The fellowship name is `Sequoia Fellow`, and
 its cohort is owned by the identity configuration in `app/lib/content/site.ts`.
+It remains available to existing site metadata but is not displayed on About.
 
 Use straight apostrophes and quotation marks with English commas, periods,
 colons, semicolons, and parentheses in public copy and metadata, including the
@@ -196,7 +207,7 @@ with diacritics remain part of the source text.
 The three primary pages are About, Past Experience, and Current Chapter. About at
 `/` combines the introduction, Selected Research, Education, Selected Coursework,
 and contact details. The supplied first-person introduction leads the page; both
-Duke degrees, the advisor, scholarships, fellowship, and all 49 courses remain
+Duke degrees, the advisor, scholarships, and all 49 courses remain
 available. Coursework keeps its four subject groups. The `/education/` compatibility
 page shares the About content without repeating the particle entrance, uses `/`
 as its canonical URL, and remains outside primary navigation and the sitemap.
@@ -204,8 +215,10 @@ Five domain pages carry the experience record. Domain `03` is Legal Research and
 Policy Analysis; its four selected papers each open a dedicated article page.
 Domain `01`, AI Research and Engineering, links four project reading pages.
 About's Selected Research section presents two compact entries, each with its
-original title as a blue link to the on-site manuscript, followed by a supporting
-paragraph describing the method and contribution within the paper's stated scope.
+original title as a black manuscript link that turns blue on hover or keyboard
+focus, followed by a supporting paragraph stating the method and the achieved
+result within the paper's specified example. Numerical guarantees retain their
+model, horizon, payoff, and comparison scope.
 It does not repeat the abstracts or add a separate action row. Titles use the same
 18px subheading role; supporting paragraphs use the 17px reading role. Thin
 horizontal rules separate entries. Typography, spacing, and wrapping adapt within

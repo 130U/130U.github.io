@@ -6,9 +6,9 @@
   ],
   "routes": {
     "/": {
-      "textSha256": "8e0f547f4b007a2065cd8712ee8fa8bb6d200cc2de4b27cf99728b0717724f6c",
-      "characterCount": 3200,
-      "wordCount": 412,
+      "textSha256": "9454589a95ad3aba3739470603ae49a475e45f1a5ee04fcb07254b86f59e3c5a",
+      "characterCount": 3077,
+      "wordCount": 397,
       "preview": "Skip to main content Scroll Theodore Ouyang About Past Experience Current Chapter Thinking mathematically Working in AI Mathematics is how I make sense of thing",
       "altTexts": [],
       "ariaLabels": [
@@ -28,9 +28,9 @@
       }
     },
     "/education/": {
-      "textSha256": "c26eee21f8253a4e638402fe8d59e7a8ae9d71b76fe1395a2292d8e9585e6526",
-      "characterCount": 3193,
-      "wordCount": 411,
+      "textSha256": "4353b90fcc3eda9adea31f4d22b4d59592b62058257ea61f45f65ed01d82eea0",
+      "characterCount": 3070,
+      "wordCount": 396,
       "preview": "Skip to main content Theodore Ouyang About Past Experience Current Chapter Thinking mathematically Working in AI Mathematics is how I make sense of things. I wa",
       "altTexts": [],
       "ariaLabels": [
