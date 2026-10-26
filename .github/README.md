@@ -20,9 +20,9 @@ The rest of the design is deliberately quiet: warm paper, clear typography, and 
 
 [About](https://www.theodoreoy.com/) covers my **B.S. in Mathematics and M.Eng. in Risk Engineering at Duke**, selected coursework, and mathematical finance research.
 
-Two manuscripts develop methods for certified option valuation. The Asian-options work connects a weighted payoff-remainder argument to a complete Heston discretization-error bound. The Rough Heston work carries fractional Riccati residuals into joint price-error certificates, showing how shared numerical errors can change a portfolio's certification result.
+Selected Research presents *Critical Dependence Stress for Portfolio Diversification* and two manuscripts on certified option valuation. The Asian-options work connects a weighted payoff-remainder argument to a complete Heston discretization-error bound. The Rough Heston work carries fractional Riccati residuals into joint price-error certificates, showing how shared numerical errors can change a portfolio's certification result.
 
-Both papers can be read on the site, with equations, chapter navigation, references, and links to their research repositories.
+All three papers can be read on the site, with equations, chapter navigation, references, and links to their research repositories.
 
 ## Experience across five fields
 

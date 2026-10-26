@@ -4,7 +4,7 @@ import { ExperienceSection } from "../../components/experience/ExperienceContent
 import type { ShowcaseDomain } from "../../lib/content/experience-showcase";
 import styles from "../../components/experience/Experience.module.css";
 
-// Legacy category URLs remain useful, with the same approved copy as Experience.
+// Compatibility category pages render the approved Experience entries.
 export function ExperienceDomainPage({ domain }: { domain: ShowcaseDomain }) {
   return (
     <SiteShell active="experience" frameClassName={styles.frame}>

@@ -31,7 +31,7 @@ const entrySlugs = [
   ...legalPaperSlugs, "jones-lang-lasalle", "hubble-technology-investment", "saif-partners",
   "citic-securities", "ey-parthenon", "independent-stem-olympiad-training", "stem-olympiad-competitions",
 ];
-// Presentation labels sit separately from the approved document's verbatim copy.
+// Presentation labels are separate from the approved Experience copy.
 const legalResearchAreas: Record<number, string> = {
   8: "Space Law and Autonomous Systems Research",
   9: "Space Law and Strategic Infrastructure Research",

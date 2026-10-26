@@ -12,8 +12,11 @@ The site is a static personal record published at [theodoreoy.com](https://www.t
 | `website/` | Application, content, assets, tools, and tests |
 
 Run application commands from `website/`, or use `npm --prefix website run <command>`
-from the repository root. Generated files remain inside the ignored `website/out/`
-and `website/.next/` directories. Keep local screenshots and audit logs outside the repository.
+from the repository root. `website/.gitignore` excludes the static export, build and
+package caches, installed dependencies, generated Next.js types, and TypeScript
+build metadata. The tracked `architecture/index.html` and generated brand assets
+in `website/public/assets/brand/` are deliverables maintained by their documented
+generation scripts. Keep local screenshots and audit logs outside the repository.
 
 ## Routes and content
 
@@ -194,6 +197,10 @@ imports those two papers. The dependence-stress paper uses frozen TeX files and 
 own provenance record in `content/sources/selected-research/dependence/`, with
 deterministic conversion in `scripts/import-dependence-research.mjs`. The import
 scripts and content tests verify structured manuscripts against their pinned sources.
+The frozen source tree includes supporting TeX inputs used to resolve manuscript
+cross-references. Its four PNG figures are source evidence; the copies in
+`public/assets/research/dependence/` are served assets. Tests verify that the served
+and exported images match the frozen bytes.
 
 The pages use the shared `ResearchArticle` and `ResearchMath` components, with a
 contents list, source links, and return links to the corresponding About research
