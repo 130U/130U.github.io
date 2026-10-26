@@ -58,6 +58,30 @@ test("manuscript tables and reference anchors fail closed when incomplete", () =
   }
 });
 
+test("manuscript anchors bind to equations, headings and locally sourced figures", () => {
+  const source = [
+    '<a id="model"></a>', '## 1. Model',
+    '<a id="eq-budget"></a>', '$$s=1$$',
+    '<a id="fig-budget"></a>', '![Figure 1. Budget $s$.](/assets/research/dependence/budget-comparison.png)',
+    'See [the budget](#eq-budget).',
+  ].join('\n');
+  const blocks = parseResearchMarkdown(source, { joinSoftLines: true });
+  assert.deepEqual(blocks.map(({ type, id }) => [type, id]), [['heading', 'model'], ['equation', 'eq-budget'], ['figure', 'fig-budget'], ['paragraph', undefined]]);
+  assert.equal(blocks[2].src, '/assets/research/dependence/budget-comparison.png');
+  assert.deepEqual(blocks[2].inlines, [{ type: 'text', text: 'Figure 1. Budget ' }, { type: 'math', tex: 's' }, { type: 'text', text: '.' }]);
+  for (const unsafe of ['https://example.com/figure.png', '/assets/research/../secret.png', 'javascript:alert(1)']) {
+    assert.throws(() => parseResearchMarkdown(`![Caption](${unsafe})`));
+  }
+});
+
+test("citation brackets remain outside the linked reference number", () => {
+  assert.deepEqual(parseResearchMarkdown('See [[31](#ref-author)].')[0].inlines, [
+    { type: 'text', text: 'See [' },
+    { type: 'link', href: '#ref-author', inlines: [{ type: 'text', text: '31' }] },
+    { type: 'text', text: '].' },
+  ]);
+});
+
 test("manuscript soft wrapping joins prose while preserving mathematical and structural boundaries", () => {
   const source = [
     "The objective uses", "$`x+y`$ with **all five**", "candidates retained.",

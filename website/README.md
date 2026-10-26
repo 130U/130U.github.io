@@ -1,10 +1,10 @@
 # Website
 
 Theodore Ouyang's personal site, built with Next.js App Router, React, and native CSS.
-The primary navigation contains About and Experience. Twenty-two canonical content
-routes cover these two pages, two Selected Research manuscripts, and eighteen
+The primary navigation contains About and Experience. Twenty-three canonical content
+routes cover these two pages, three Selected Research manuscripts, and eighteen
 Experience detail pages. Eight compatibility pages bring the content export to
-thirty routes; the architecture viewer makes thirty-one exported routes, excluding
+thirty-one routes; the architecture viewer makes thirty-two exported routes, excluding
 404. Node.js 24 matches the deployment runtime.
 
 The design follows Cognition's editorial grid, warm paper color, and fine rules with
@@ -42,15 +42,18 @@ dependency advisories. Browser interaction in the main site is limited to the
 interactive name entrance, navigation menu, shared article contents, and legal-note
 previews. Article links and site navigation also work without JavaScript.
 
-About's three Selected Research entries use linked titles and concise research
-summaries. [Critical Dependence Stress for Portfolio Diversification](https://github.com/130U/mathematical-finance-project)
-appears first and links to GitHub, followed by the Asian-options and Rough Heston
-on-site manuscripts. GitHub and Full Manuscript links appear in their article headers.
-The reading pages contain the abstract, core chapters, and references: chapters 1–10
-for the Asian-options paper and 1–8 for Rough Heston. Appendices and supporting
+About's three Selected Research entries link to on-site manuscripts and include
+concise research summaries. Critical Dependence Stress for Portfolio Diversification
+appears first, followed by the Asian-options and Rough Heston papers. Article headers
+contain the return link, title, GitHub link, and Full Manuscript link. Reading content
+starts at Abstract; pre-abstract front matter remains in the protected source.
+The pages include the core chapters and references: chapters 1–5 for dependence
+stress, 1–10 for Asian options, and 1–8 for Rough Heston. Appendices and supporting
 material are linked on GitHub. The JSON files in `content/selected-research/` record
 the exact source commit, blob, and manuscript URL for each imported paper. Frozen
-Markdown sources and their provenance record live in `content/sources/selected-research/`.
+manuscript evidence lives in `content/sources/selected-research/`. The dependence-stress
+paper has its own TeX sources and provenance in the `dependence/` subdirectory and
+uses `scripts/import-dependence-research.mjs` for deterministic import.
 
 `content/experience-showcase.json` holds the approved English copy for all eighteen
 Experience entries. `app/lib/content/experience-domains.ts` defines the five categories;

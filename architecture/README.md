@@ -13,10 +13,10 @@ tracing, and image export. A downloaded `index.html` also works offline.
 | `README.md` | Viewer usage and maintenance |
 | `LICENSE` | MIT license for the Archify viewer |
 
-The primary navigation contains About and Experience. Twenty-two canonical content
-routes cover these pages, two Selected Research manuscripts, and eighteen Experience
-detail pages. Eight compatibility pages bring the content export to thirty routes.
-This viewer at `/architecture/` makes thirty-one exported routes, excluding 404.
+The primary navigation contains About and Experience. Twenty-three canonical content
+routes cover these pages, three Selected Research manuscripts, and eighteen Experience
+detail pages. Eight compatibility pages bring the content export to thirty-one routes.
+This viewer at `/architecture/` makes thirty-two exported routes, excluding 404.
 `website/app/lib/content/` defines identity, routes, content loaders, and research
 Markdown and math rendering. `website/content/` contains approved Experience copy,
 structured manuscripts, frozen source evidence, and integrity contracts. GitHub
@@ -27,14 +27,17 @@ menu, shared article contents, and legal-note previews run in the browser. The w
 authentication, or analytics. The [maintenance guide](../docs/maintenance.md)
 documents content ownership, output contracts, security, and publishing.
 
-About presents three Selected Research entries with linked titles and research
-summaries. [Critical Dependence Stress for Portfolio Diversification](https://github.com/130U/mathematical-finance-project)
-appears first and links to GitHub, followed by the Asian-options and Rough Heston
-on-site manuscripts. Their article headers provide GitHub and Full Manuscript links. The
-on-site articles include their abstracts, core chapters (Asian options 1–10; Rough
-Heston 1–8), and references; appendices are linked on GitHub. Each source JSON records
+About presents three Selected Research entries with links to on-site manuscripts
+and research summaries. Critical Dependence Stress for Portfolio Diversification
+appears first, followed by the Asian-options and Rough Heston papers. Article headers
+contain the return link, title, GitHub link, and Full Manuscript link. Reading content
+begins at Abstract; pre-abstract front matter stays in the protected source. The
+articles include core chapters (dependence stress 1–5; Asian options 1–10; Rough
+Heston 1–8) and references; appendices are linked on GitHub. Each source JSON records
 its exact upstream commit, blob, and manuscript URL. Frozen manuscript evidence lives
-in `website/content/sources/selected-research/`.
+in `website/content/sources/selected-research/`. The `dependence/` subdirectory contains
+the dependence-stress paper's frozen TeX files and independent provenance record;
+`website/scripts/import-dependence-research.mjs` imports that manuscript deterministically.
 
 The main website takes its grid, warm paper color, and fine rules from Cognition as
 a design reference and uses self-hosted Inter. Page titles and section headings use

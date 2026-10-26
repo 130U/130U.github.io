@@ -1,0 +1,6798 @@
+{
+  "repositoryUrl": "https://github.com/130U/mathematical-finance-project",
+  "sourceUrl": "https://github.com/130U/mathematical-finance-project/blob/3cc4c7e9b36e77027962999b932a1df7972cd2ed/paper/paper.pdf",
+  "sourceTitle": "Critical Dependence Stress for Diversification Gains under Fixed Marginals",
+  "sourceCommit": "3cc4c7e9b36e77027962999b932a1df7972cd2ed",
+  "sourceBlob": "6ae3b86691b81075188d4cf73f091ac078f961bd",
+  "sourceEditedAt": "2026-10-26T17:39:13Z",
+  "fetchedWith": "GitHub connector at the pinned commit; all frozen bytes verified against the connector Git-tree blob SHA-1 and size.",
+  "sourceFiles": [
+    {
+      "path": "computation/source/en/figures/budget-comparison.png",
+      "local": "figures/budget-comparison.png",
+      "gitBlob": "26049b53bce1aa46a7e76dd256a41a7b8f047b2f",
+      "sha256": "1f05258c963223f1421aff597bed8c699eff69caec1c7ec08d6d24f19a517820",
+      "bytes": 131904
+    },
+    {
+      "path": "computation/source/en/figures/corner-capacity.png",
+      "local": "figures/corner-capacity.png",
+      "gitBlob": "1b0448f98bb83f1bf298c792e8ce6dd6e0b87f3e",
+      "sha256": "208b2f88f3a40bd495f2c65a77262785059ddba8581d68422e05e044da8e6dbd",
+      "bytes": 56176
+    },
+    {
+      "path": "computation/source/en/figures/optimal-flow-shares.png",
+      "local": "figures/optimal-flow-shares.png",
+      "gitBlob": "109cbcf481ff5fd0eb991cb1bb441f90490d2cdc",
+      "sha256": "205e88a23bfcb0ecf5bd3e00df74aae72196356ddebbb6e601bb55125f192252",
+      "bytes": 61333
+    },
+    {
+      "path": "computation/source/en/figures/tail-layer-repair.png",
+      "local": "figures/tail-layer-repair.png",
+      "gitBlob": "af03ddccc5c9deecad2efa1d786989ee7d2c9425",
+      "sha256": "83d2c85deb3ee5cc670bb61d609b99323830218644d8754c73f5fb875ecca6e0",
+      "bytes": 94807
+    },
+    {
+      "path": "paper/source/declarations.tex",
+      "local": "declarations.tex",
+      "gitBlob": "89f601719f90503b89a8a062ffe8f83a36f16ccb",
+      "sha256": "9d9dea327e9a340b93ea9e470a2a52238c0e6dd92b39fbc7c59cf8033deb790f",
+      "bytes": 932
+    },
+    {
+      "path": "paper/source/figure-budget.tex",
+      "local": "figure-budget.tex",
+      "gitBlob": "7ea1729bbcba78937e1d80f8abee868d6a36a319",
+      "sha256": "acb41677469f4fb95a5d8b42a75e71ce664e9f03584ff0dc312679f0b9d3376f",
+      "bytes": 617
+    },
+    {
+      "path": "paper/source/figure-corner.tex",
+      "local": "figure-corner.tex",
+      "gitBlob": "3e1c46d033b7f651ecc68785a35b2f2e15ace35a",
+      "sha256": "1a83915252a23c65f77e38a81d08b3a84852fbe719285938acb3c78a096bc7a4",
+      "bytes": 719
+    },
+    {
+      "path": "paper/source/figure-tail-layer.tex",
+      "local": "figure-tail-layer.tex",
+      "gitBlob": "854ab425a884ccfc969ddd50d3e63019395f18d6",
+      "sha256": "b39f82f5b6f2ac3235a29137f73c87eda12bc5051b69219a7693232561a4963c",
+      "bytes": 668
+    },
+    {
+      "path": "paper/source/main-classification-flow.tex",
+      "local": "main-classification-flow.tex",
+      "gitBlob": "679500583a2df9c46c106e3a3b4ec3a7018e4e27",
+      "sha256": "8decd17471ba80a20351792a395694cd2ff1a4deb338e8afdd8cfa7ad7eedddc",
+      "bytes": 20185
+    },
+    {
+      "path": "paper/source/main-crossing-proof.tex",
+      "local": "main-crossing-proof.tex",
+      "gitBlob": "ed061612967d87cec33ffe8c667d3052d810f75c",
+      "sha256": "a844da72ff9141b6b568f031ddaecfef87a82514b321050b1c00f418c855b4a7",
+      "bytes": 4373
+    },
+    {
+      "path": "paper/source/main-crossing.tex",
+      "local": "main-crossing.tex",
+      "gitBlob": "f62b71011445d97f76ce606b6f80967ed490b08a",
+      "sha256": "dbbba989f51315065f0be4808feb4e725ddb81707e0b30f552e886b854c76203",
+      "bytes": 8624
+    },
+    {
+      "path": "paper/source/main-introduction.tex",
+      "local": "main-introduction.tex",
+      "gitBlob": "24ed3bdc5206a73c4d4b18845ecc8ac9dc8eb2a8",
+      "sha256": "296b5a3c826e1ebf5709fdc30ef79aefaf20ede99340e5bcf5dd795623532926",
+      "bytes": 11929
+    },
+    {
+      "path": "paper/source/main-model-benchmark.tex",
+      "local": "main-model-benchmark.tex",
+      "gitBlob": "11a21a33732f4dde16faab00c50f1e31acd991ac",
+      "sha256": "780e1b3a4e93e1cbd7836daa336c20e083182b78157a19e26b7b8611f72547f0",
+      "bytes": 23329
+    },
+    {
+      "path": "paper/source/main-quantitative.tex",
+      "local": "main-quantitative.tex",
+      "gitBlob": "05800ce07c7cf521d7871b3dcfde8dd307e0d9dc",
+      "sha256": "bd4776002483b60392e93e924fcc00dea7628ca15b9230768bbd9bfd33237313",
+      "bytes": 11615
+    },
+    {
+      "path": "paper/source/main-scope.tex",
+      "local": "main-scope.tex",
+      "gitBlob": "8af333921870657878dbeed566884da28215b644",
+      "sha256": "55a0e1768f66575278e34d802e1855b251be1a05fe1765fd0266eb31303553d9",
+      "bytes": 4057
+    },
+    {
+      "path": "paper/source/main-variational-proof.tex",
+      "local": "main-variational-proof.tex",
+      "gitBlob": "a439c57d8164c99b27e868d44e8dc8807cfbc833",
+      "sha256": "8a116d6eb3a3337f1bfaf39574e1848e146ff349fc288ac9a12924048ac0fe1f",
+      "bytes": 3674
+    },
+    {
+      "path": "paper/source/main-variational.tex",
+      "local": "main-variational.tex",
+      "gitBlob": "0f9ced9de7af17a0d5751358ae76c984887816a6",
+      "sha256": "a69bed91c410a4587a84aada505feb6f4fe1d68d04706ef3aced025a384171f8",
+      "bytes": 9320
+    },
+    {
+      "path": "paper/source/paper.tex",
+      "local": "paper.tex",
+      "gitBlob": "6ae3b86691b81075188d4cf73f091ac078f961bd",
+      "sha256": "5cd1e32ff2f23b5287a860a5b7c6c87cfe79fdfc28f7a50abd7b2b8bdf78ad32",
+      "bytes": 5595
+    },
+    {
+      "path": "paper/source/references.tex",
+      "local": "references.tex",
+      "gitBlob": "c9c14922694c91f8a2a861d086e8401dc81cbddc",
+      "sha256": "b07f5c0dcbf01ca641371ada644ef2f93270ce572419cbdccafff0e10ef13cde",
+      "bytes": 10734
+    },
+    {
+      "path": "paper/source/technical-cost-proof.tex",
+      "local": "technical-cost-proof.tex",
+      "gitBlob": "c40ce68d78a89c723ab8aa6eb0eed1c6b306cd0b",
+      "sha256": "89fd82b325bc6a6463a186f3787cb894aa0e8364d57dfdf1038e8b23a78af93d",
+      "bytes": 2817
+    },
+    {
+      "path": "paper/source/technical-efficiency-identity.tex",
+      "local": "technical-efficiency-identity.tex",
+      "gitBlob": "428f2d1c87c98240ddf300f6e2bead93935fed0a",
+      "sha256": "7c130b843c152d08139140df56e151b5c3a5be35948d5d7f238c719d6769e71f",
+      "bytes": 1603
+    },
+    {
+      "path": "paper/source/technical-flow-proof.tex",
+      "local": "technical-flow-proof.tex",
+      "gitBlob": "d11550c25c734569593f8047c11769261f140411",
+      "sha256": "c899d84e515e7c0d2365eea603c49d273072362530b08162e575a3e8d53507b3",
+      "bytes": 7861
+    },
+    {
+      "path": "paper/source/technical-limit.tex",
+      "local": "technical-limit.tex",
+      "gitBlob": "b7f280ebf1472ec9ce9a9864842936b60a6c3666",
+      "sha256": "b0852db99502628183d42bd0d184478259ae1c1b41f87656fd4d25ed6573808c",
+      "bytes": 12651
+    },
+    {
+      "path": "paper/source/technical-mixture-obstruction.tex",
+      "local": "technical-mixture-obstruction.tex",
+      "gitBlob": "d3b3f854872e12fd31e1c35f3dfc44c5a5f3805d",
+      "sha256": "7d0a78228da73388b522e72cb209428b31bd915a5ae3213bb3c485f30586559a",
+      "bytes": 1423
+    },
+    {
+      "path": "paper/source/technical-quantitative.tex",
+      "local": "technical-quantitative.tex",
+      "gitBlob": "ce04cb9bf6d5c6c10385b0f5159a4da9598026a0",
+      "sha256": "69169dcb889a16a73b09478dc630f5004a2ce971442e4caef499215a54a611bd",
+      "bytes": 6569
+    },
+    {
+      "path": "paper/source/technical-reference.tex",
+      "local": "technical-reference.tex",
+      "gitBlob": "44c7620f618c98ed96da2343ed6bba1c8126afcd",
+      "sha256": "8c63a00a731b208d87a08340569d4017c09895e1d6f457e74d1c6c321cd69785",
+      "bytes": 3244
+    },
+    {
+      "path": "paper/source/technical-threshold-statement.tex",
+      "local": "technical-threshold-statement.tex",
+      "gitBlob": "fef5cc5c5d8cd4c1154957062c7eda42bc5627e2",
+      "sha256": "dcaa858e99472c12a066ad6eb1892c63f5ff36aa8c85e8033b18d113fbdf1de1",
+      "bytes": 481
+    },
+    {
+      "path": "paper/source/technical-variational-proof.tex",
+      "local": "technical-variational-proof.tex",
+      "gitBlob": "ebb9c6f3db465e375ed4960691ef00a437e58f59",
+      "sha256": "0662cb2299153ae2b8f03ac2d089a994a7b39289961e07317308845238acfd9f",
+      "bytes": 19100
+    }
+  ],
+  "includedFiles": [
+    "paper.tex (abstract)",
+    "main-introduction.tex",
+    "main-model-benchmark.tex",
+    "main-variational.tex",
+    "figure-tail-layer.tex",
+    "main-variational-proof.tex",
+    "main-crossing.tex",
+    "main-classification-flow.tex",
+    "technical-efficiency-identity.tex",
+    "figure-corner.tex",
+    "main-quantitative.tex",
+    "figure-budget.tex",
+    "main-scope.tex",
+    "references.tex"
+  ],
+  "includedHeadings": [
+    "1. Introduction",
+    "2. Model formulation and the local benchmark",
+    "2.1 Fixed marginals and a common stress law",
+    "2.2 The exchangeable box model",
+    "2.3 Nominal curvature and the exact initial slope",
+    "3. Variational limit and the critical profile",
+    "3.1 Local transport and marginal compensation",
+    "3.2 The limiting risk and convergence theorem",
+    "3.3 Initial linearity and the critical budget",
+    "4. Efficiency premiums and projected flow duality",
+    "4.1 Local efficiency and the zero-premium classification",
+    "4.2 Boundary sensitivity and the flow–cut representation",
+    "5. Analytical illustrations and financial implications",
+    "5.1 Projection potentials and a uniform reference",
+    "5.2 A dependence family with fixed marginal laws",
+    "5.3 Implications for reverse stress testing and further questions"
+  ],
+  "results": [
+    {
+      "environment": "proposition",
+      "number": "2.1",
+      "title": "Existence under integrable marginal laws"
+    },
+    {
+      "environment": "proposition",
+      "number": "2.2",
+      "title": "Nominal benchmark and exact initial efficiency"
+    },
+    {
+      "environment": "theorem",
+      "number": "3.1",
+      "title": "\\(\\Gamma\\)-convergence and the critical risk profile"
+    },
+    {
+      "environment": "proposition",
+      "number": "3.2",
+      "title": "Capacity of the initial linear segment"
+    },
+    {
+      "environment": "theorem",
+      "number": "3.3",
+      "title": "Strict improvement by local replacement and a common critical coefficient"
+    },
+    {
+      "environment": "lemma",
+      "number": "4.1",
+      "title": "Local-efficiency bound and critical-level optimality"
+    },
+    {
+      "environment": "theorem",
+      "number": "4.2",
+      "title": "Zero-premium classification"
+    },
+    {
+      "environment": "theorem",
+      "number": "4.3",
+      "title": "Boundary derivative and projected flow duality"
+    },
+    {
+      "environment": "proposition",
+      "number": "5.1",
+      "title": "A projection-potential bound"
+    },
+    {
+      "environment": "corollary",
+      "number": "5.2",
+      "title": "Uniform reference with costly background displacement"
+    },
+    {
+      "environment": "proposition",
+      "number": "5.3",
+      "title": "Background share along the dependence family"
+    }
+  ],
+  "figures": [
+    {
+      "number": 1,
+      "src": "/assets/research/dependence/tail-layer-repair.png",
+      "labels": [
+        "fig:tail-layer"
+      ],
+      "captionSource": "Local transport and full marginal compensation (schematic). A layer with thickness and mass of order \\(O(\\varepsilon)\\), transported over distances of order \\(O(\\varepsilon)\\), incurs second-order cost. The remaining nonnegative plan must cancel the local plan's coordinate CDF discrepancies. Their integrated absolute values give the compensation lower bound, with leading coefficients \\(\\|j_i\\|_1\\); a zero flux requires no corresponding leading-order compensation. The shaded discrepancy illustrates this mechanism."
+    },
+    {
+      "number": 2,
+      "src": "/assets/research/dependence/corner-capacity.png",
+      "labels": [
+        "fig:corner"
+      ],
+      "captionSource": "Corner demand and return capacity, illustrated on \\(I=I_3=[0,2]\\) for \\(\\beta=7/4\\), \\(v=15/4\\), \\(\\delta=0.35\\). The blue region \\(E_\\delta\\) stays away from the diagonal and has demand at least a positive multiple of \\(\\delta^2\\). Return sources lie in the hatched triangles, which may extend beyond \\(\\Omega\\); their area and squared displacement are both \\(O(\\delta^2)\\), giving capacity \\(O(\\delta^4)\\). The bounds shown, with \\(\\lambda=\\min f\\), \\(\\Lambda=\\max f\\), and \\(\\Delta=\\xi_+-\\xi_-\\), violate \\(M_\\delta\\le N_1+N_2\\) for sufficiently small positive \\(\\delta\\)."
+    },
+    {
+      "number": 3,
+      "src": "/assets/research/dependence/budget-comparison.png",
+      "labels": [
+        "fig:budget"
+      ],
+      "captionSource": "Proved risk envelopes for the independent uniform model with \\(\\beta=1\\), \\(p=1/2\\), and \\(\\gamma=(1,1,2)\\). Explicit mixtures attain the lower envelope; the upper envelope follows from midpoint potentials and the efficiency bound. The inset shows the exact initial interval \\([0,1/96]\\) in green. The dashed line extrapolates its slope to \\(J=5/32\\), whereas the critical budget lies in \\([13/64,29/96]\\). Both plotted envelopes are piecewise linear analytical formulas."
+    },
+    {
+      "number": 4,
+      "src": "/assets/research/dependence/optimal-flow-shares.png",
+      "labels": [
+        "fig:flow-shares"
+      ],
+      "captionSource": "An optimal allocation of normal displacement on the tail\nsurface \\(D\\), at the equal-cost boundary, for\n\\(\\vartheta=0\\) (U, top) and \\(\\vartheta=1/4\\) (D, bottom).\nThe panels evaluate the explicit shares \\(a,b,1-a-b\\) in\n\\eqref{eq:legacy-K.7}; all use the same scale from zero to one.\nOn each same-side section we allocate displacement to a rebalanced\ncoordinate and match its projection using the cross-region.\nWe allocate the remainder to the background coordinate.\nBlank regions lie outside \\(D\\)."
+    }
+  ],
+  "references": [
+    "artzner1999",
+    "bartl2021",
+    "bartleckstein2026",
+    "bartlwiesel2023",
+    "bernard2014",
+    "bertsekas2009",
+    "blanchet2019",
+    "brandtner2018",
+    "chenfurmanlin2026",
+    "chen2022",
+    "dalmaso1993",
+    "devecchinendelstreicher2026",
+    "eckstein2020",
+    "eckstein2021multiasset",
+    "embrechts2013",
+    "embrechts2015",
+    "fiechtner2026",
+    "gao2017",
+    "gao2023",
+    "korman2015",
+    "lam2018",
+    "li2018partial",
+    "liu2026",
+    "martin2011",
+    "mcneil2015",
+    "namkoong2026",
+    "otakimura2021",
+    "pesenti2019",
+    "pesenti2022",
+    "pesentijaimungal2023",
+    "pflugpohl2018",
+    "rockafellar2002",
+    "ruschendorf2013",
+    "santambrogio2015",
+    "sauldubois2026",
+    "scaillet2004",
+    "sion1958",
+    "tasche2001",
+    "vallender1974",
+    "villani2003",
+    "wang2015superadditive"
+  ],
+  "crossReferences": [
+    {
+      "label": "eq:legacy-K.7",
+      "href": "https://github.com/130U/mathematical-finance-project/blob/3cc4c7e9b36e77027962999b932a1df7972cd2ed/paper/source/technical-quantitative.tex#L80",
+      "number": "B.2"
+    },
+    {
+      "label": "prop:nominal-benchmark",
+      "href": "#dep-prop-nominal-benchmark",
+      "number": "2.2"
+    },
+    {
+      "label": "thm:critical-limit",
+      "href": "#dep-thm-critical-limit",
+      "number": "3.1"
+    },
+    {
+      "label": "prop:balanced-linear-profile",
+      "href": "#dep-prop-balanced-linear-profile",
+      "number": "3.2"
+    },
+    {
+      "label": "thm:zero-premium",
+      "href": "#dep-thm-zero-premium",
+      "number": "4.2"
+    },
+    {
+      "label": "fig:corner",
+      "href": "#dep-fig-corner",
+      "number": "2"
+    },
+    {
+      "label": "prop:nominal-benchmark",
+      "href": "#dep-prop-nominal-benchmark",
+      "number": "2.2"
+    },
+    {
+      "label": "prop:nominal-benchmark",
+      "href": "#dep-prop-nominal-benchmark",
+      "number": "2.2"
+    },
+    {
+      "label": "prop:uniform-variable-cost",
+      "href": "#dep-prop-uniform-variable-cost",
+      "number": "5.2"
+    },
+    {
+      "label": "thm:projected-flow",
+      "href": "#dep-prop-boundary-sensitivity",
+      "number": "4.3"
+    },
+    {
+      "label": "eq:legacy-A.1",
+      "href": "#dep-eq-legacy-A-1",
+      "number": "2.2"
+    },
+    {
+      "label": "prop:general-wellposedness",
+      "href": "#dep-prop-general-wellposedness",
+      "number": "2.1"
+    },
+    {
+      "label": "eq:legacy-2.2",
+      "href": "#dep-eq-legacy-2-2",
+      "number": "2.3"
+    },
+    {
+      "label": "thm:strict-crossing",
+      "href": "#dep-thm-strict-crossing",
+      "number": "3.3"
+    },
+    {
+      "label": "eq:legacy-2.2",
+      "href": "#dep-eq-legacy-2-2",
+      "number": "2.3"
+    },
+    {
+      "label": "lemma:general-variation",
+      "href": "https://github.com/130U/mathematical-finance-project/blob/3cc4c7e9b36e77027962999b932a1df7972cd2ed/paper/source/technical-reference.tex#L4",
+      "number": "A.1"
+    },
+    {
+      "label": "lemma:general-variation",
+      "href": "https://github.com/130U/mathematical-finance-project/blob/3cc4c7e9b36e77027962999b932a1df7972cd2ed/paper/source/technical-reference.tex#L4",
+      "number": "A.1"
+    },
+    {
+      "label": "lemma:general-variation",
+      "href": "https://github.com/130U/mathematical-finance-project/blob/3cc4c7e9b36e77027962999b932a1df7972cd2ed/paper/source/technical-reference.tex#L4",
+      "number": "A.1"
+    },
+    {
+      "label": "eq:legacy-3.2",
+      "href": "#dep-eq-legacy-3-2",
+      "number": "2.6"
+    },
+    {
+      "label": "eq:legacy-B.2",
+      "href": "#dep-eq-legacy-B-2",
+      "number": "2.7"
+    },
+    {
+      "label": "eq:legacy-3.3",
+      "href": "#dep-eq-legacy-3-3",
+      "number": "2.8"
+    },
+    {
+      "label": "prop:general-wellposedness",
+      "href": "#dep-prop-general-wellposedness",
+      "number": "2.1"
+    },
+    {
+      "label": "eq:legacy-3.4",
+      "href": "#dep-eq-legacy-3-4",
+      "number": "2.9"
+    },
+    {
+      "label": "eq:legacy-3.3",
+      "href": "#dep-eq-legacy-3-3",
+      "number": "2.8"
+    },
+    {
+      "label": "eq:legacy-3.5",
+      "href": "#dep-eq-legacy-3-5",
+      "number": "2.10"
+    },
+    {
+      "label": "eq:legacy-3.4",
+      "href": "#dep-eq-legacy-3-4",
+      "number": "2.9"
+    },
+    {
+      "label": "prop:nominal-benchmark",
+      "href": "#dep-prop-nominal-benchmark",
+      "number": "2.2"
+    },
+    {
+      "label": "thm:critical-limit",
+      "href": "#dep-thm-critical-limit",
+      "number": "3.1"
+    },
+    {
+      "label": "thm:strict-crossing",
+      "href": "#dep-thm-strict-crossing",
+      "number": "3.3"
+    },
+    {
+      "label": "fig:tail-layer",
+      "href": "#dep-fig-tail-layer",
+      "number": "1"
+    },
+    {
+      "label": "eq:legacy-B.2",
+      "href": "#dep-eq-legacy-B-2",
+      "number": "2.7"
+    },
+    {
+      "label": "lem:threshold-convexity",
+      "href": "https://github.com/130U/mathematical-finance-project/blob/3cc4c7e9b36e77027962999b932a1df7972cd2ed/paper/source/technical-limit.tex#L103",
+      "number": "A.4"
+    },
+    {
+      "label": "thm:critical-limit",
+      "href": "#dep-thm-critical-limit",
+      "number": "3.1"
+    },
+    {
+      "label": "model:critical-box",
+      "href": "#dep-model-critical-box",
+      "number": "2.2"
+    },
+    {
+      "label": "eq:legacy-4.3",
+      "href": "#dep-eq-legacy-4-3",
+      "number": "3.3"
+    },
+    {
+      "label": "thm:critical-limit",
+      "href": "#dep-thm-critical-limit",
+      "number": "3.1"
+    },
+    {
+      "label": "thm:strict-crossing",
+      "href": "#dep-thm-strict-crossing",
+      "number": "3.3"
+    },
+    {
+      "label": "proof:threshold-localization",
+      "href": "https://github.com/130U/mathematical-finance-project/blob/3cc4c7e9b36e77027962999b932a1df7972cd2ed/paper/source/technical-limit.tex#L2",
+      "number": "A.2"
+    },
+    {
+      "label": "b-l2-all-optimal-thresholds-under-a-budget-of-order-varepsilon2",
+      "href": "https://github.com/130U/mathematical-finance-project/blob/3cc4c7e9b36e77027962999b932a1df7972cd2ed/paper/source/technical-threshold-statement.tex#L1",
+      "number": "A.2"
+    },
+    {
+      "label": "eq:legacy-B.26",
+      "href": "https://github.com/130U/mathematical-finance-project/blob/3cc4c7e9b36e77027962999b932a1df7972cd2ed/paper/source/technical-limit.tex#L136",
+      "number": "A.13"
+    },
+    {
+      "label": "eq:legacy-A.19",
+      "href": "#dep-eq-legacy-A-19",
+      "number": "3.7"
+    },
+    {
+      "label": "lem:threshold-convexity",
+      "href": "https://github.com/130U/mathematical-finance-project/blob/3cc4c7e9b36e77027962999b932a1df7972cd2ed/paper/source/technical-limit.tex#L103",
+      "number": "A.4"
+    },
+    {
+      "label": "lem:projected-imbalance",
+      "href": "https://github.com/130U/mathematical-finance-project/blob/3cc4c7e9b36e77027962999b932a1df7972cd2ed/paper/source/technical-limit.tex#L54",
+      "number": "A.3"
+    },
+    {
+      "label": "prop:nominal-benchmark",
+      "href": "#dep-prop-nominal-benchmark",
+      "number": "2.2"
+    },
+    {
+      "label": "model:critical-box",
+      "href": "#dep-model-critical-box",
+      "number": "2.2"
+    },
+    {
+      "label": "thm:critical-limit",
+      "href": "#dep-thm-critical-limit",
+      "number": "3.1"
+    },
+    {
+      "label": "eq:legacy-2.3",
+      "href": "#dep-eq-legacy-2-3",
+      "number": "2.4"
+    },
+    {
+      "label": "prop:nominal-benchmark",
+      "href": "#dep-prop-nominal-benchmark",
+      "number": "2.2"
+    },
+    {
+      "label": "thm:critical-limit",
+      "href": "#dep-thm-critical-limit",
+      "number": "3.1"
+    },
+    {
+      "label": "prop:nominal-benchmark",
+      "href": "#dep-prop-nominal-benchmark",
+      "number": "2.2"
+    },
+    {
+      "label": "eq:legacy-3.4",
+      "href": "#dep-eq-legacy-3-4",
+      "number": "2.9"
+    },
+    {
+      "label": "prop:balanced-linear-profile",
+      "href": "#dep-prop-balanced-linear-profile",
+      "number": "3.2"
+    },
+    {
+      "label": "eq:legacy-E.5",
+      "href": "#dep-eq-legacy-E-5",
+      "number": "4.2"
+    },
+    {
+      "label": "eq:legacy-E.5",
+      "href": "#dep-eq-legacy-E-5",
+      "number": "4.2"
+    },
+    {
+      "label": "lem:threshold-convexity",
+      "href": "https://github.com/130U/mathematical-finance-project/blob/3cc4c7e9b36e77027962999b932a1df7972cd2ed/paper/source/technical-limit.tex#L103",
+      "number": "A.4"
+    },
+    {
+      "label": "eq:legacy-D.2",
+      "href": "#dep-eq-legacy-D-2",
+      "number": "4.7"
+    },
+    {
+      "label": "eq:legacy-6.3",
+      "href": "#dep-eq-legacy-6-3",
+      "number": "4.1"
+    },
+    {
+      "label": "thm:strict-crossing",
+      "href": "#dep-thm-strict-crossing",
+      "number": "3.3"
+    },
+    {
+      "label": "model:critical-box",
+      "href": "#dep-model-critical-box",
+      "number": "2.2"
+    },
+    {
+      "label": "thm:zero-premium",
+      "href": "#dep-thm-zero-premium",
+      "number": "4.2"
+    },
+    {
+      "label": "lem:efficiency-bound",
+      "href": "#dep-lem-efficiency-bound",
+      "number": "4.1"
+    },
+    {
+      "label": "eq:legacy-D.2",
+      "href": "#dep-eq-legacy-D-2",
+      "number": "4.7"
+    },
+    {
+      "label": "eq:legacy-D.3",
+      "href": "#dep-eq-legacy-D-3",
+      "number": "4.8"
+    },
+    {
+      "label": "lem:efficiency-bound",
+      "href": "#dep-lem-efficiency-bound",
+      "number": "4.1"
+    },
+    {
+      "label": "eq:legacy-6.2",
+      "href": "#dep-eq-legacy-6-2",
+      "number": "4.10"
+    },
+    {
+      "label": "eq:legacy-D.2",
+      "href": "#dep-eq-legacy-D-2",
+      "number": "4.7"
+    },
+    {
+      "label": "eq:legacy-D.3",
+      "href": "#dep-eq-legacy-D-3",
+      "number": "4.8"
+    },
+    {
+      "label": "eq:legacy-D.2",
+      "href": "#dep-eq-legacy-D-2",
+      "number": "4.7"
+    },
+    {
+      "label": "lem:efficiency-bound",
+      "href": "#dep-lem-efficiency-bound",
+      "number": "4.1"
+    },
+    {
+      "label": "eq:legacy-6.3",
+      "href": "#dep-eq-legacy-6-3",
+      "number": "4.1"
+    },
+    {
+      "label": "eq:legacy-E.15",
+      "href": "#dep-eq-legacy-E-15",
+      "number": "4.15"
+    },
+    {
+      "label": "eq:legacy-E.16",
+      "href": "#dep-eq-legacy-E-16",
+      "number": "4.16"
+    },
+    {
+      "label": "fig:corner",
+      "href": "#dep-fig-corner",
+      "number": "2"
+    },
+    {
+      "label": "geometry:interior-diagonal",
+      "href": "#dep-geometry-interior-diagonal",
+      "number": "2.3"
+    },
+    {
+      "label": "eq:legacy-E.16",
+      "href": "#dep-eq-legacy-E-16",
+      "number": "4.16"
+    },
+    {
+      "label": "eq:legacy-E.15",
+      "href": "#dep-eq-legacy-E-15",
+      "number": "4.15"
+    },
+    {
+      "label": "eq:legacy-D.7",
+      "href": "#dep-eq-legacy-D-7",
+      "number": "4.13"
+    },
+    {
+      "label": "eq:legacy-6.2",
+      "href": "#dep-eq-legacy-6-2",
+      "number": "4.10"
+    },
+    {
+      "label": "lem:efficiency-bound",
+      "href": "#dep-lem-efficiency-bound",
+      "number": "4.1"
+    },
+    {
+      "label": "eq:legacy-6.9",
+      "href": "#dep-eq-legacy-6-9",
+      "number": "4.21"
+    },
+    {
+      "label": "app:flow-proof",
+      "href": "https://github.com/130U/mathematical-finance-project/blob/3cc4c7e9b36e77027962999b932a1df7972cd2ed/paper/source/technical-flow-proof.tex#L1",
+      "number": "A.8"
+    },
+    {
+      "label": "app:cost-proofs",
+      "href": "https://github.com/130U/mathematical-finance-project/blob/3cc4c7e9b36e77027962999b932a1df7972cd2ed/paper/source/technical-cost-proof.tex#L1",
+      "number": "A.7"
+    },
+    {
+      "label": "eq:legacy-6.5",
+      "href": "#dep-eq-legacy-6-5",
+      "number": "4.19"
+    },
+    {
+      "label": "eq:legacy-6.8",
+      "href": "#dep-eq-legacy-6-8",
+      "number": "4.20"
+    },
+    {
+      "label": "eq:legacy-6.9",
+      "href": "#dep-eq-legacy-6-9",
+      "number": "4.21"
+    },
+    {
+      "label": "app:potential-proof",
+      "href": "https://github.com/130U/mathematical-finance-project/blob/3cc4c7e9b36e77027962999b932a1df7972cd2ed/paper/source/technical-quantitative.tex#L3",
+      "number": "B.1"
+    },
+    {
+      "label": "thm:projected-flow",
+      "href": "#dep-prop-boundary-sensitivity",
+      "number": "4.3"
+    },
+    {
+      "label": "prop:projection-potential-bound",
+      "href": "#dep-prop-projection-potential-bound",
+      "number": "5.1"
+    },
+    {
+      "label": "eq:legacy-J.6",
+      "href": "#dep-eq-legacy-J-6",
+      "number": "5.1"
+    },
+    {
+      "label": "prop:balanced-linear-profile",
+      "href": "#dep-prop-balanced-linear-profile",
+      "number": "3.2"
+    },
+    {
+      "label": "eq:legacy-D.1",
+      "href": "#dep-eq-legacy-D-1",
+      "number": "4.11"
+    },
+    {
+      "label": "app:uniform-bound-proof",
+      "href": "https://github.com/130U/mathematical-finance-project/blob/3cc4c7e9b36e77027962999b932a1df7972cd2ed/paper/source/technical-quantitative.tex#L32",
+      "number": "B.2"
+    },
+    {
+      "label": "eq:legacy-E.5",
+      "href": "#dep-eq-legacy-E-5",
+      "number": "4.2"
+    },
+    {
+      "label": "fig:budget",
+      "href": "#dep-fig-budget",
+      "number": "3"
+    },
+    {
+      "label": "app:dependence-family-proof",
+      "href": "https://github.com/130U/mathematical-finance-project/blob/3cc4c7e9b36e77027962999b932a1df7972cd2ed/paper/source/technical-quantitative.tex#L49",
+      "number": "B.3"
+    },
+    {
+      "label": "eq:legacy-K.9",
+      "href": "#dep-eq-legacy-K-9",
+      "number": "5.3"
+    },
+    {
+      "label": "fig:flow-shares",
+      "href": "#dep-fig-flow-shares",
+      "number": "4"
+    },
+    {
+      "label": "eq:legacy-3.4",
+      "href": "#dep-eq-legacy-3-4",
+      "number": "2.9"
+    },
+    {
+      "label": "prop:balanced-linear-profile",
+      "href": "#dep-prop-balanced-linear-profile",
+      "number": "3.2"
+    },
+    {
+      "label": "thm:zero-premium",
+      "href": "#dep-thm-zero-premium",
+      "number": "4.2"
+    },
+    {
+      "label": "thm:projected-flow",
+      "href": "#dep-prop-boundary-sensitivity",
+      "number": "4.3"
+    },
+    {
+      "label": "eq:legacy-7.2",
+      "href": "#dep-eq-legacy-7-2",
+      "number": "5.4"
+    },
+    {
+      "label": "thm:strict-crossing",
+      "href": "#dep-thm-strict-crossing",
+      "number": "3.3"
+    }
+  ],
+  "mathematics": [
+    {
+      "display": false,
+      "sourceTex": "1",
+      "tex": "1",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "\\rho=s\\varepsilon^2",
+      "tex": "\\rho=s\\varepsilon^2",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "\\varepsilon",
+      "tex": "\\varepsilon",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "\\Gamma",
+      "tex": "\\Gamma",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "X_1,X_2",
+      "tex": "X_1,X_2",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "(1+\\varepsilon,1-\\varepsilon)",
+      "tex": "(1+\\varepsilon,1-\\varepsilon)",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "(1,1)",
+      "tex": "(1,1)",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "\\beta X_3",
+      "tex": "\\beta X_3",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "A_\\varepsilon=(1+\\varepsilon)X_1+(1-\\varepsilon)X_2+\\beta X_3=B+\\varepsilon H",
+      "tex": "A_\\varepsilon=(1+\\varepsilon)X_1+(1-\\varepsilon)X_2+\\beta X_3=B+\\varepsilon H",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "B",
+      "tex": "B",
+      "labels": []
+    },
+    {
+      "display": true,
+      "sourceTex": "B=X_1+X_2+\\beta X_3,\\qquad H=X_1-X_2,\\qquad \\beta>0.",
+      "tex": "B=X_1+X_2+\\beta X_3,\\qquad H=X_1-X_2,\\qquad \\beta>0.",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "p\\in(0,1)",
+      "tex": "p\\in(0,1)",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "\\Phi_\\varepsilon(P)=ES_p^P(B)-ES_p^P(A_\\varepsilon)",
+      "tex": "\\Phi_\\varepsilon(P)=ES_p^P(B)-ES_p^P(A_\\varepsilon)",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "P",
+      "tex": "P",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "\\Phi_\\varepsilon(P)<0",
+      "tex": "\\Phi_\\varepsilon(P)<0",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "\\beta X_3",
+      "tex": "\\beta X_3",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "A_\\varepsilon-B",
+      "tex": "A_\\varepsilon-B",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "\\Pi",
+      "tex": "\\Pi",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "P_0",
+      "tex": "P_0",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "W_1",
+      "tex": "W_1",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "c_\\gamma(x,y)=|y-x|_\\gamma=\\sum_i\\gamma_i|y_i-x_i|",
+      "tex": "c_\\gamma(x,y)=|y-x|_\\gamma=\\sum_i\\gamma_i|y_i-x_i|",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "\\gamma_i>0",
+      "tex": "\\gamma_i>0",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "\\rho",
+      "tex": "\\rho",
+      "labels": []
+    },
+    {
+      "display": true,
+      "sourceTex": "D_\\varepsilon(\\rho)\n=\\sup_{\\substack{P\\in\\Pi\\\\ W_\\gamma(P,P_0)\\le\\rho}}\n\\bigl\\{ES_p^P(B)-ES_p^P(A_\\varepsilon)\\bigr\\},\n\\qquad m_\\varepsilon=-D_\\varepsilon(0).",
+      "tex": "D_\\varepsilon(\\rho)\n=\\sup_{\\substack{P\\in\\Pi\\\\ W_\\gamma(P,P_0)\\le\\rho}}\n\\bigl\\{ES_p^P(B)-ES_p^P(A_\\varepsilon)\\bigr\\},\n\\qquad m_\\varepsilon=-D_\\varepsilon(0).",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "m_\\varepsilon=(J/p)\\varepsilon^2+o(\\varepsilon^2)",
+      "tex": "m_\\varepsilon=(J/p)\\varepsilon^2+o(\\varepsilon^2)",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "J>0",
+      "tex": "J>0",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "\\gamma_1\\le\\min\\{\\gamma_2,\\gamma_3/\\beta\\}",
+      "tex": "\\gamma_1\\le\\min\\{\\gamma_2,\\gamma_3/\\beta\\}",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "K_\\varepsilon",
+      "tex": "K_\\varepsilon",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "r_{0,\\varepsilon}=m_\\varepsilon/K_\\varepsilon=O(\\varepsilon^2)",
+      "tex": "r_{0,\\varepsilon}=m_\\varepsilon/K_\\varepsilon=O(\\varepsilon^2)",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "\\rho=s\\varepsilon^2",
+      "tex": "\\rho=s\\varepsilon^2",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "s",
+      "tex": "s",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "O(\\varepsilon)",
+      "tex": "O(\\varepsilon)",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "O(\\varepsilon)",
+      "tex": "O(\\varepsilon)",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "\\varepsilon",
+      "tex": "\\varepsilon",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "O(\\varepsilon^2)",
+      "tex": "O(\\varepsilon^2)",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "O(\\varepsilon^2)",
+      "tex": "O(\\varepsilon^2)",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "L^1",
+      "tex": "L^1",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "O(\\varepsilon)",
+      "tex": "O(\\varepsilon)",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "\\varepsilon^2",
+      "tex": "\\varepsilon^2",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "I^2\\times I_3",
+      "tex": "I^2\\times I_3",
+      "labels": []
+    },
+    {
+      "display": true,
+      "sourceTex": "F(s)=\\lim_{\\varepsilon\\downarrow0}\\varepsilon^{-2}D_\\varepsilon(s\\varepsilon^2),\n\\qquad F(0)=-J/p,",
+      "tex": "F(s)=\\lim_{\\varepsilon\\downarrow0}\\varepsilon^{-2}D_\\varepsilon(s\\varepsilon^2),\n\\qquad F(0)=-J/p,",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "s\\ge0",
+      "tex": "s\\ge0",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "\\Gamma",
+      "tex": "\\Gamma",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "\\rho^-_\\varepsilon",
+      "tex": "\\rho^-_\\varepsilon",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "\\rho^+_\\varepsilon",
+      "tex": "\\rho^+_\\varepsilon",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "s^*",
+      "tex": "s^*",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "F",
+      "tex": "F",
+      "labels": []
+    },
+    {
+      "display": true,
+      "sourceTex": "\\rho^-_\\varepsilon=s^*\\varepsilon^2+o(\\varepsilon^2),\\qquad\n\\rho^+_\\varepsilon=s^*\\varepsilon^2+o(\\varepsilon^2).",
+      "tex": "\\rho^-_\\varepsilon=s^*\\varepsilon^2+o(\\varepsilon^2),\\qquad\n\\rho^+_\\varepsilon=s^*\\varepsilon^2+o(\\varepsilon^2).",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "\\gamma_1,\\gamma_2",
+      "tex": "\\gamma_1,\\gamma_2",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "c_3=\\gamma_3/\\beta",
+      "tex": "c_3=\\gamma_3/\\beta",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "c_{\\min}=\\min\\{\\gamma_1,\\gamma_2,c_3\\}",
+      "tex": "c_{\\min}=\\min\\{\\gamma_1,\\gamma_2,c_3\\}",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "[0,s_{\\rm lin}]",
+      "tex": "[0,s_{\\rm lin}]",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "F(s)=-J/p+s/(p\\gamma_1)",
+      "tex": "F(s)=-J/p+s/(p\\gamma_1)",
+      "labels": []
+    },
+    {
+      "display": true,
+      "sourceTex": "s^*=Jc_{\\min}\\quad\\Longleftrightarrow\\quad\nc_3\\le\\min\\{\\gamma_1,\\gamma_2\\}.",
+      "tex": "s^*=Jc_{\\min}\\quad\\Longleftrightarrow\\quad\nc_3\\le\\min\\{\\gamma_1,\\gamma_2\\}.",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "s^*-Jc_{\\min}",
+      "tex": "s^*-Jc_{\\min}",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "Jc_{\\min}",
+      "tex": "Jc_{\\min}",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "\\delta^2",
+      "tex": "\\delta^2",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "O(\\delta^4)",
+      "tex": "O(\\delta^4)",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "c_{\\min}=\\gamma_1<c_3",
+      "tex": "c_{\\min}=\\gamma_1<c_3",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "\\rho^\\pm_\\varepsilon/r_{0,\\varepsilon}\\to s^*/(\\gamma_1J)>1",
+      "tex": "\\rho^\\pm_\\varepsilon/r_{0,\\varepsilon}\\to s^*/(\\gamma_1J)>1",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "[0,2]^3",
+      "tex": "[0,2]^3",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "\\beta=1",
+      "tex": "\\beta=1",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "p=1/2",
+      "tex": "p=1/2",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "\\gamma=(1,1,2)",
+      "tex": "\\gamma=(1,1,2)",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "g=3/8",
+      "tex": "g=3/8",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "J=5/32",
+      "tex": "J=5/32",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "m_\\varepsilon=(5/16)\\varepsilon^2+o(\\varepsilon^2)",
+      "tex": "m_\\varepsilon=(5/16)\\varepsilon^2+o(\\varepsilon^2)",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "F(s)=2s-5/16",
+      "tex": "F(s)=2s-5/16",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "0\\le s\\le1/96",
+      "tex": "0\\le s\\le1/96",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "13/64\\le s^*\\le29/96",
+      "tex": "13/64\\le s^*\\le29/96",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "30\\%",
+      "tex": "30\\%",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "5/32",
+      "tex": "5/32",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "\\gamma_1=\\gamma_2=\\gamma",
+      "tex": "\\gamma_1=\\gamma_2=\\gamma",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "c_3=\\gamma(1+\\eta)",
+      "tex": "c_3=\\gamma(1+\\eta)",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "\\eta\\ge0",
+      "tex": "\\eta\\ge0",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "Jc_{\\min}=\\gamma J",
+      "tex": "Jc_{\\min}=\\gamma J",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "s^*",
+      "tex": "s^*",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "\\gamma Ja_+",
+      "tex": "\\gamma Ja_+",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "\\eta=0",
+      "tex": "\\eta=0",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "a_+\\in(0,1)",
+      "tex": "a_+\\in(0,1)",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "\\gamma Ja_+",
+      "tex": "\\gamma Ja_+",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "\\rho=s\\varepsilon^2",
+      "tex": "\\rho=s\\varepsilon^2",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "\\rho=s\\varepsilon^2",
+      "tex": "\\rho=s\\varepsilon^2",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "T_\\#\\mu",
+      "tex": "T_\\#\\mu",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "|d|_\\gamma=\\sum_i\\gamma_i|d_i|",
+      "tex": "|d|_\\gamma=\\sum_i\\gamma_i|d_i|",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "O_\\alpha(\\varepsilon^k)",
+      "tex": "O_\\alpha(\\varepsilon^k)",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "\\varepsilon",
+      "tex": "\\varepsilon",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "\\inf\\varnothing=+\\infty",
+      "tex": "\\inf\\varnothing=+\\infty",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "n\\ge2",
+      "tex": "n\\ge2",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "\\mu_1,\\ldots,\\mu_n",
+      "tex": "\\mu_1,\\ldots,\\mu_n",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "P_0",
+      "tex": "P_0",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "\\Pi(\\mu_1,\\ldots,\\mu_n)=\\{P\\in\\mathcal P(\\mathbb R^n):P_i=\\mu_i,\\ 1\\le i\\le n\\}",
+      "tex": "\\Pi(\\mu_1,\\ldots,\\mu_n)=\\{P\\in\\mathcal P(\\mathbb R^n):P_i=\\mu_i,\\ 1\\le i\\le n\\}",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "b,h\\in\\mathbb R^n",
+      "tex": "b,h\\in\\mathbb R^n",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "A_\\varepsilon=B+\\varepsilon H",
+      "tex": "A_\\varepsilon=B+\\varepsilon H",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "B",
+      "tex": "B",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "B=b\\cdot X",
+      "tex": "B=b\\cdot X",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "H=h\\cdot X",
+      "tex": "H=h\\cdot X",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "p\\in(0,1)",
+      "tex": "p\\in(0,1)",
+      "labels": []
+    },
+    {
+      "display": true,
+      "sourceTex": "ES_p^P(L)=\\min_{t\\in\\mathbb R}\n\\left\\{t+\\frac1pE_P(L-t)_+\\right\\}.\n\\tag{2.1}\\label{eq:legacy-2.1}",
+      "tex": "ES_p^P(L)=\\min_{t\\in\\mathbb R}\n\\left\\{t+\\frac1pE_P(L-t)_+\\right\\}.\n\\tag{2.1}",
+      "labels": [
+        "eq:legacy-2.1"
+      ]
+    },
+    {
+      "display": false,
+      "sourceTex": "\\mathscr E_L(P;t)=t+p^{-1}E_P(L-t)_+",
+      "tex": "\\mathscr E_L(P;t)=t+p^{-1}E_P(L-t)_+",
+      "labels": []
+    },
+    {
+      "display": true,
+      "sourceTex": "t\\in\\arg\\min_{u}\\mathscr E_L(P;u)\n\\quad\\Longleftrightarrow\\quad P(L>t)\\le p\\le P(L\\ge t).\n\\tag{2.2}\\label{eq:legacy-A.1}",
+      "tex": "t\\in\\arg\\min_{u}\\mathscr E_L(P;u)\n\\quad\\Longleftrightarrow\\quad P(L>t)\\le p\\le P(L\\ge t).\n\\tag{2.2}",
+      "labels": [
+        "eq:legacy-A.1"
+      ]
+    },
+    {
+      "display": false,
+      "sourceTex": "P\\in\\Pi",
+      "tex": "P\\in\\Pi",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "\\Phi_\\varepsilon(P)=ES_p^P(B)-ES_p^P(A_\\varepsilon)",
+      "tex": "\\Phi_\\varepsilon(P)=ES_p^P(B)-ES_p^P(A_\\varepsilon)",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "\\gamma_i",
+      "tex": "\\gamma_i",
+      "labels": []
+    },
+    {
+      "display": true,
+      "sourceTex": "c_\\gamma(x,y)=\\sum_{i=1}^n\\gamma_i|y_i-x_i|,\n\\qquad W_\\gamma(P,P_0)=\\min_{\\pi\\in\\Gamma(P_0,P)}\\int c_\\gamma\\,d\\pi.",
+      "tex": "c_\\gamma(x,y)=\\sum_{i=1}^n\\gamma_i|y_i-x_i|,\n\\qquad W_\\gamma(P,P_0)=\\min_{\\pi\\in\\Gamma(P_0,P)}\\int c_\\gamma\\,d\\pi.",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "\\Pi=\\Pi(\\mu_1,\\ldots,\\mu_n)",
+      "tex": "\\Pi=\\Pi(\\mu_1,\\ldots,\\mu_n)",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "\\rho",
+      "tex": "\\rho",
+      "labels": []
+    },
+    {
+      "display": true,
+      "sourceTex": "\\mathcal A_\\rho=\\{P\\in\\Pi:W_\\gamma(P,P_0)\\le\\rho\\},\\quad\nD_\\varepsilon(\\rho)=\\max_{P\\in\\mathcal A_\\rho}\\Phi_\\varepsilon(P),\\quad\nm_\\varepsilon=-\\Phi_\\varepsilon(P_0).\n\\tag{2.3}\\label{eq:legacy-2.2}",
+      "tex": "\\mathcal A_\\rho=\\{P\\in\\Pi:W_\\gamma(P,P_0)\\le\\rho\\},\\quad\nD_\\varepsilon(\\rho)=\\max_{P\\in\\mathcal A_\\rho}\\Phi_\\varepsilon(P),\\quad\nm_\\varepsilon=-\\Phi_\\varepsilon(P_0).\n\\tag{2.3}",
+      "labels": [
+        "eq:legacy-2.2"
+      ]
+    },
+    {
+      "display": true,
+      "sourceTex": "\\rho^-_\\varepsilon=\\inf\\{\\rho\\ge0:D_\\varepsilon(\\rho)\\ge0\\},\n\\qquad\n\\rho^+_\\varepsilon=\\inf\\{\\rho\\ge0:D_\\varepsilon(\\rho)>0\\},\n\\tag{2.4}\\label{eq:legacy-2.3}",
+      "tex": "\\rho^-_\\varepsilon=\\inf\\{\\rho\\ge0:D_\\varepsilon(\\rho)\\ge0\\},\n\\qquad\n\\rho^+_\\varepsilon=\\inf\\{\\rho\\ge0:D_\\varepsilon(\\rho)>0\\},\n\\tag{2.4}",
+      "labels": [
+        "eq:legacy-2.3"
+      ]
+    },
+    {
+      "display": false,
+      "sourceTex": "n\\ge2",
+      "tex": "n\\ge2",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "\\mu_1,\\ldots,\\mu_n",
+      "tex": "\\mu_1,\\ldots,\\mu_n",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "P_0\\in\\Pi(\\mu_1,\\ldots,\\mu_n)",
+      "tex": "P_0\\in\\Pi(\\mu_1,\\ldots,\\mu_n)",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "\\gamma_i",
+      "tex": "\\gamma_i",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "b,h\\in\\mathbb R^n",
+      "tex": "b,h\\in\\mathbb R^n",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "p\\in(0,1)",
+      "tex": "p\\in(0,1)",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "\\Pi",
+      "tex": "\\Pi",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "\\mathcal A_\\rho",
+      "tex": "\\mathcal A_\\rho",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "W_\\gamma",
+      "tex": "W_\\gamma",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "\\varepsilon",
+      "tex": "\\varepsilon",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "D_\\varepsilon",
+      "tex": "D_\\varepsilon",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "[0,\\infty)",
+      "tex": "[0,\\infty)",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "P_k\\to P",
+      "tex": "P_k\\to P",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "\\Pi",
+      "tex": "\\Pi",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "\\int|x|_\\gamma\\,dP_k=\\sum_i\\gamma_i\\int|x_i|\\,d\\mu_i=\\int|x|_\\gamma\\,dP",
+      "tex": "\\int|x|_\\gamma\\,dP_k=\\sum_i\\gamma_i\\int|x_i|\\,d\\mu_i=\\int|x|_\\gamma\\,dP",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "W_\\gamma",
+      "tex": "W_\\gamma",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "\\Pi",
+      "tex": "\\Pi",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "\\mathcal A_\\rho",
+      "tex": "\\mathcal A_\\rho",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "L=a\\cdot X",
+      "tex": "L=a\\cdot X",
+      "labels": []
+    },
+    {
+      "display": true,
+      "sourceTex": "|ES_p^P(L)-ES_p^Q(L)|\\le p^{-1}\\|a\\|_{\\gamma,*}W_\\gamma(P,Q),\n\\qquad \\|a\\|_{\\gamma,*}=\\max_i|a_i|/\\gamma_i.",
+      "tex": "|ES_p^P(L)-ES_p^Q(L)|\\le p^{-1}\\|a\\|_{\\gamma,*}W_\\gamma(P,Q),\n\\qquad \\|a\\|_{\\gamma,*}=\\max_i|a_i|/\\gamma_i.",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "B=b\\cdot X",
+      "tex": "B=b\\cdot X",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "A_\\varepsilon=(b+\\varepsilon h)\\cdot X",
+      "tex": "A_\\varepsilon=(b+\\varepsilon h)\\cdot X",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "\\Phi_\\varepsilon",
+      "tex": "\\Phi_\\varepsilon",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "C_\\varepsilon=p^{-1}(\\|b\\|_{\\gamma,*}+\\|b+\\varepsilon h\\|_{\\gamma,*})",
+      "tex": "C_\\varepsilon=p^{-1}(\\|b\\|_{\\gamma,*}+\\|b+\\varepsilon h\\|_{\\gamma,*})",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "\\mathcal A_\\rho",
+      "tex": "\\mathcal A_\\rho",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "\\rho_2>\\rho_1",
+      "tex": "\\rho_2>\\rho_1",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "P",
+      "tex": "P",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "\\rho_2",
+      "tex": "\\rho_2",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "P_a=(1-a)P_0+aP",
+      "tex": "P_a=(1-a)P_0+aP",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "a=\\rho_1/\\rho_2",
+      "tex": "a=\\rho_1/\\rho_2",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "W_\\gamma(P_a,P_0)\\le a\\rho_2",
+      "tex": "W_\\gamma(P_a,P_0)\\le a\\rho_2",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "W_\\gamma(P_a,P)\\le(1-a)\\rho_2",
+      "tex": "W_\\gamma(P_a,P)\\le(1-a)\\rho_2",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "\\Phi_\\varepsilon(P_a)",
+      "tex": "\\Phi_\\varepsilon(P_a)",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "\\Phi_\\varepsilon(P)",
+      "tex": "\\Phi_\\varepsilon(P)",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "0\\le D_\\varepsilon(\\rho_2)-D_\\varepsilon(\\rho_1)\\le C_\\varepsilon(\\rho_2-\\rho_1)",
+      "tex": "0\\le D_\\varepsilon(\\rho_2)-D_\\varepsilon(\\rho_1)\\le C_\\varepsilon(\\rho_2-\\rho_1)",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "H=X_i-X_j",
+      "tex": "H=X_i-X_j",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "X_j",
+      "tex": "X_j",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "X_i",
+      "tex": "X_i",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "A_\\varepsilon=B",
+      "tex": "A_\\varepsilon=B",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "\\gamma_jE_{P_0}|X_i-X_j|",
+      "tex": "\\gamma_jE_{P_0}|X_i-X_j|",
+      "labels": []
+    },
+    {
+      "display": true,
+      "sourceTex": "0\\le\\rho^-_\\varepsilon\n\\le\\min\\{\\gamma_i,\\gamma_j\\}\\,E_{P_0}|X_i-X_j|<\\infty.",
+      "tex": "0\\le\\rho^-_\\varepsilon\n\\le\\min\\{\\gamma_i,\\gamma_j\\}\\,E_{P_0}|X_i-X_j|<\\infty.",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "\\varepsilon^2",
+      "tex": "\\varepsilon^2",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "\\beta X_3",
+      "tex": "\\beta X_3",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "X_3",
+      "tex": "X_3",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "(X_1,X_2,X_3)",
+      "tex": "(X_1,X_2,X_3)",
+      "labels": []
+    },
+    {
+      "display": true,
+      "sourceTex": "I=[\\ell,r],\\qquad I_3=[\\ell_3,r_3],\\qquad\nS=I^2\\times I_3,\\qquad \\Delta_I=r-\\ell>0,\\quad \\Delta_3=r_3-\\ell_3>0.",
+      "tex": "I=[\\ell,r],\\qquad I_3=[\\ell_3,r_3],\\qquad\nS=I^2\\times I_3,\\qquad \\Delta_I=r-\\ell>0,\\quad \\Delta_3=r_3-\\ell_3>0.",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "I_1=I_2=I",
+      "tex": "I_1=I_2=I",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "f>0",
+      "tex": "f>0",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "S",
+      "tex": "S",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "f(x,y,z)=f(y,x,z)",
+      "tex": "f(x,y,z)=f(y,x,z)",
+      "labels": []
+    },
+    {
+      "display": true,
+      "sourceTex": "B=X_1+X_2+\\beta X_3,\\qquad H=X_1-X_2,\\qquad\nA_\\varepsilon=B+\\varepsilon H,\\qquad\n\\beta>0,\\quad 0<\\varepsilon<1,",
+      "tex": "B=X_1+X_2+\\beta X_3,\\qquad H=X_1-X_2,\\qquad\nA_\\varepsilon=B+\\varepsilon H,\\qquad\n\\beta>0,\\quad 0<\\varepsilon<1,",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "p\\in(0,1)",
+      "tex": "p\\in(0,1)",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "\\gamma_i>0",
+      "tex": "\\gamma_i>0",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "b=(1,1,\\beta)",
+      "tex": "b=(1,1,\\beta)",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "h=(1,-1,0)",
+      "tex": "h=(1,-1,0)",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "\\varepsilon\\downarrow0",
+      "tex": "\\varepsilon\\downarrow0",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "(1+\\varepsilon,1-\\varepsilon)",
+      "tex": "(1+\\varepsilon,1-\\varepsilon)",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "(1,1)",
+      "tex": "(1,1)",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "\\beta X_3",
+      "tex": "\\beta X_3",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "\\Pi((P_0)_1,(P_0)_2,(P_0)_3)",
+      "tex": "\\Pi((P_0)_1,(P_0)_2,(P_0)_3)",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "P_0",
+      "tex": "P_0",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "E_P[A_\\varepsilon]-E_P[B]=\\varepsilon(E_P[X_1]-E_P[X_2])=0",
+      "tex": "E_P[A_\\varepsilon]-E_P[B]=\\varepsilon(E_P[X_1]-E_P[X_2])=0",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "\\Delta X_3",
+      "tex": "\\Delta X_3",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "\\beta\\Delta X_3",
+      "tex": "\\beta\\Delta X_3",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "\\gamma_3|\\Delta X_3|=(\\gamma_3/\\beta)|\\beta\\Delta X_3|",
+      "tex": "\\gamma_3|\\Delta X_3|=(\\gamma_3/\\beta)|\\beta\\Delta X_3|",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "c_1=\\gamma_1",
+      "tex": "c_1=\\gamma_1",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "c_2=\\gamma_2",
+      "tex": "c_2=\\gamma_2",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "c_3=\\gamma_3/\\beta",
+      "tex": "c_3=\\gamma_3/\\beta",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "B",
+      "tex": "B",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "c_3/\\gamma_1",
+      "tex": "c_3/\\gamma_1",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "X=T_{\\rm box}(u)=(\\ell+\\kappa u_1,\\ell+\\kappa u_2,\\ell_3+\\kappa_3u_3)",
+      "tex": "X=T_{\\rm box}(u)=(\\ell+\\kappa u_1,\\ell+\\kappa u_2,\\ell_3+\\kappa_3u_3)",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "\\kappa=\\Delta_I/2",
+      "tex": "\\kappa=\\Delta_I/2",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "\\kappa_3=\\Delta_3/2",
+      "tex": "\\kappa_3=\\Delta_3/2",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "[0,2]^3",
+      "tex": "[0,2]^3",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "\\widehat\\beta=\\beta\\kappa_3/\\kappa",
+      "tex": "\\widehat\\beta=\\beta\\kappa_3/\\kappa",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "\\widehat\\gamma=(\\kappa\\gamma_1,\\kappa\\gamma_2,\\kappa_3\\gamma_3)",
+      "tex": "\\widehat\\gamma=(\\kappa\\gamma_1,\\kappa\\gamma_2,\\kappa_3\\gamma_3)",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "\\kappa",
+      "tex": "\\kappa",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "p",
+      "tex": "p",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "v",
+      "tex": "v",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "p",
+      "tex": "p",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "B",
+      "tex": "B",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "X_i",
+      "tex": "X_i",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "E_{P_0}[X_i\\mid B>v]",
+      "tex": "E_{P_0}[X_i\\mid B>v]",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "B",
+      "tex": "B",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "H=X_1-X_2",
+      "tex": "H=X_1-X_2",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "T_H=E_{P_0}[H1_{\\{B>v\\}}]",
+      "tex": "T_H=E_{P_0}[H1_{\\{B>v\\}}]",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "p^{-1}T_H=E_{P_0}[X_1-X_2\\mid B>v]=0",
+      "tex": "p^{-1}T_H=E_{P_0}[X_1-X_2\\mid B>v]=0",
+      "labels": []
+    },
+    {
+      "display": true,
+      "sourceTex": "\\Omega=\\{(x,y)\\in(\\ell,r)^2:\\ell_3<z_v(x,y)<r_3\\},\\qquad\nz_v(x,y)=\\frac{v-x-y}{\\beta},\\qquad\n\\xi=(x,y,z_v(x,y)).",
+      "tex": "\\Omega=\\{(x,y)\\in(\\ell,r)^2:\\ell_3<z_v(x,y)<r_3\\},\\qquad\nz_v(x,y)=\\frac{v-x-y}{\\beta},\\qquad\n\\xi=(x,y,z_v(x,y)).",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "p\\in(0,1)",
+      "tex": "p\\in(0,1)",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "f>0",
+      "tex": "f>0",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "2\\ell+\\beta\\ell_3<v<2r+\\beta r_3",
+      "tex": "2\\ell+\\beta\\ell_3<v<2r+\\beta r_3",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "S",
+      "tex": "S",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "v",
+      "tex": "v",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "(x_*,x_*,z_*)",
+      "tex": "(x_*,x_*,z_*)",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "(x_*,x_*)",
+      "tex": "(x_*,x_*)",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "\\Omega",
+      "tex": "\\Omega",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "H=x-y\\ne0",
+      "tex": "H=x-y\\ne0",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "B-v",
+      "tex": "B-v",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "d\\sigma=f(\\xi)\\,dx\\,dy/\\beta",
+      "tex": "d\\sigma=f(\\xi)\\,dx\\,dy/\\beta",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "B",
+      "tex": "B",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "v",
+      "tex": "v",
+      "labels": []
+    },
+    {
+      "display": true,
+      "sourceTex": "g=\\sigma(\\Omega)>0,\\qquad J=\\frac12\\int_\\Omega H^2\\,d\\sigma>0.\n\\tag{2.5}\\label{eq:legacy-3.1}",
+      "tex": "g=\\sigma(\\Omega)>0,\\qquad J=\\frac12\\int_\\Omega H^2\\,d\\sigma>0.\n\\tag{2.5}",
+      "labels": [
+        "eq:legacy-3.1"
+      ]
+    },
+    {
+      "display": false,
+      "sourceTex": "g=f_B(v)",
+      "tex": "g=f_B(v)",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "d\\sigma/g",
+      "tex": "d\\sigma/g",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "H",
+      "tex": "H",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "2J/g=\\operatorname{Var}_{P_0}(H\\mid B=v)",
+      "tex": "2J/g=\\operatorname{Var}_{P_0}(H\\mid B=v)",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "\\{B=v\\}",
+      "tex": "\\{B=v\\}",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "g",
+      "tex": "g",
+      "labels": []
+    },
+    {
+      "display": true,
+      "sourceTex": "t_\\varepsilon-v=o(\\varepsilon),\\qquad\nm_\\varepsilon=\\frac Jp\\varepsilon^2+o(\\varepsilon^2).\n\\tag{2.6}\\label{eq:legacy-3.2}",
+      "tex": "t_\\varepsilon-v=o(\\varepsilon),\\qquad\nm_\\varepsilon=\\frac Jp\\varepsilon^2+o(\\varepsilon^2).\n\\tag{2.6}",
+      "labels": [
+        "eq:legacy-3.2"
+      ]
+    },
+    {
+      "display": false,
+      "sourceTex": "B+\\eta H",
+      "tex": "B+\\eta H",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "|\\eta|<1",
+      "tex": "|\\eta|<1",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "m_\\varepsilon>0",
+      "tex": "m_\\varepsilon>0",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "0<\\varepsilon<1",
+      "tex": "0<\\varepsilon<1",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "L_{c,\\varepsilon}=B+c\\varepsilon H",
+      "tex": "L_{c,\\varepsilon}=B+c\\varepsilon H",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "c=0,1",
+      "tex": "c=0,1",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "|\\tau|\\le T<\\infty",
+      "tex": "|\\tau|\\le T<\\infty",
+      "labels": []
+    },
+    {
+      "display": true,
+      "sourceTex": "\\mathscr E_{L_{c,\\varepsilon}}(P_0;v+\\varepsilon\\tau)\n=ES_p^{P_0}(B)+\\frac{\\varepsilon^2}{p}\n\\left(c^2J+\\frac g2\\tau^2\\right)+o(\\varepsilon^2).\n\\tag{2.7}\\label{eq:legacy-B.2}",
+      "tex": "\\mathscr E_{L_{c,\\varepsilon}}(P_0;v+\\varepsilon\\tau)\n=ES_p^{P_0}(B)+\\frac{\\varepsilon^2}{p}\n\\left(c^2J+\\frac g2\\tau^2\\right)+o(\\varepsilon^2).\n\\tag{2.7}",
+      "labels": [
+        "eq:legacy-B.2"
+      ]
+    },
+    {
+      "display": false,
+      "sourceTex": "P,Q\\in\\Pi",
+      "tex": "P,Q\\in\\Pi",
+      "labels": []
+    },
+    {
+      "display": true,
+      "sourceTex": "|\\Phi_\\varepsilon(P)-\\Phi_\\varepsilon(Q)|\\le \\kappa_\\varepsilon W_\\gamma(P,Q),\\quad\n\\kappa_\\varepsilon=\\frac1p\\max\\left\\{\\frac{1+\\varepsilon/2}{\\gamma_1},\n\\frac{1-\\varepsilon/2}{\\gamma_2},\\frac\\beta{\\gamma_3}\\right\\}.\n\\tag{2.8}\\label{eq:legacy-3.3}",
+      "tex": "|\\Phi_\\varepsilon(P)-\\Phi_\\varepsilon(Q)|\\le \\kappa_\\varepsilon W_\\gamma(P,Q),\\quad\n\\kappa_\\varepsilon=\\frac1p\\max\\left\\{\\frac{1+\\varepsilon/2}{\\gamma_1},\n\\frac{1-\\varepsilon/2}{\\gamma_2},\\frac\\beta{\\gamma_3}\\right\\}.\n\\tag{2.8}",
+      "labels": [
+        "eq:legacy-3.3"
+      ]
+    },
+    {
+      "display": false,
+      "sourceTex": "0<\\varepsilon<1",
+      "tex": "0<\\varepsilon<1",
+      "labels": []
+    },
+    {
+      "display": true,
+      "sourceTex": "\\frac{1+\\varepsilon/2}{\\gamma_1}\n\\ge\\max\\left\\{\\frac{1-\\varepsilon/2}{\\gamma_2},\\frac\\beta{\\gamma_3}\\right\\},\n\\tag{2.9}\\label{eq:legacy-3.4}",
+      "tex": "\\frac{1+\\varepsilon/2}{\\gamma_1}\n\\ge\\max\\left\\{\\frac{1-\\varepsilon/2}{\\gamma_2},\\frac\\beta{\\gamma_3}\\right\\},\n\\tag{2.9}",
+      "labels": [
+        "eq:legacy-3.4"
+      ]
+    },
+    {
+      "display": false,
+      "sourceTex": "r_\\varepsilon>0",
+      "tex": "r_\\varepsilon>0",
+      "labels": []
+    },
+    {
+      "display": true,
+      "sourceTex": "K_\\varepsilon=\\frac{1+\\varepsilon/2}{p\\gamma_1},\\qquad\nD_\\varepsilon(\\rho)=-m_\\varepsilon+K_\\varepsilon\\rho\n\\quad(0\\le\\rho\\le r_\\varepsilon).\n\\tag{2.10}\\label{eq:legacy-3.5}",
+      "tex": "K_\\varepsilon=\\frac{1+\\varepsilon/2}{p\\gamma_1},\\qquad\nD_\\varepsilon(\\rho)=-m_\\varepsilon+K_\\varepsilon\\rho\n\\quad(0\\le\\rho\\le r_\\varepsilon).\n\\tag{2.10}",
+      "labels": [
+        "eq:legacy-3.5"
+      ]
+    },
+    {
+      "display": false,
+      "sourceTex": "B+\\eta H",
+      "tex": "B+\\eta H",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "|\\eta|<1",
+      "tex": "|\\eta|<1",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "[2\\ell+\\beta\\ell_3,2r+\\beta r_3]",
+      "tex": "[2\\ell+\\beta\\ell_3,2r+\\beta r_3]",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "\\operatorname{int}S",
+      "tex": "\\operatorname{int}S",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "H",
+      "tex": "H",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "B+\\eta H",
+      "tex": "B+\\eta H",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "H",
+      "tex": "H",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "\\eta\\mapsto ES_p^{P_0}(B+\\eta H)",
+      "tex": "\\eta\\mapsto ES_p^{P_0}(B+\\eta H)",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "(-1,1)",
+      "tex": "(-1,1)",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "\\eta=0",
+      "tex": "\\eta=0",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "H",
+      "tex": "H",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "T_H=m_1=0",
+      "tex": "T_H=m_1=0",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "(0,v)",
+      "tex": "(0,v)",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "m_0=g",
+      "tex": "m_0=g",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "m_2=2J",
+      "tex": "m_2=2J",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "2J/p",
+      "tex": "2J/p",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "m_\\varepsilon>0",
+      "tex": "m_\\varepsilon>0",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "0<\\varepsilon<1",
+      "tex": "0<\\varepsilon<1",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "\\Psi",
+      "tex": "\\Psi",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "(0,v)",
+      "tex": "(0,v)",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "\\operatorname{diag}(2J/p,g/p)",
+      "tex": "\\operatorname{diag}(2J/p,g/p)",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "(c\\varepsilon,\\varepsilon\\tau)",
+      "tex": "(c\\varepsilon,\\varepsilon\\tau)",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "\\tau",
+      "tex": "\\tau",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "\\Pi",
+      "tex": "\\Pi",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "u",
+      "tex": "u",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "B",
+      "tex": "B",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "Q",
+      "tex": "Q",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "t",
+      "tex": "t",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "A_\\varepsilon",
+      "tex": "A_\\varepsilon",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "P",
+      "tex": "P",
+      "labels": []
+    },
+    {
+      "display": true,
+      "sourceTex": "\\begin{aligned}\nh_{u,t}&=(B-u)_+-(A_\\varepsilon-t)_+,\\\\\n\\Delta_B&=\\mathscr E_B(P;u)-ES_p^P(B),&\n\\Delta_A&=\\mathscr E_{A_\\varepsilon}(Q;t)-ES_p^Q(A_\\varepsilon).\n\\end{aligned}",
+      "tex": "\\begin{aligned}\nh_{u,t}&=(B-u)_+-(A_\\varepsilon-t)_+,\\\\\n\\Delta_B&=\\mathscr E_B(P;u)-ES_p^P(B),&\n\\Delta_A&=\\mathscr E_{A_\\varepsilon}(Q;t)-ES_p^Q(A_\\varepsilon).\n\\end{aligned}",
+      "labels": []
+    },
+    {
+      "display": true,
+      "sourceTex": "\\Phi_\\varepsilon(P)-\\Phi_\\varepsilon(Q)\n=p^{-1}\\int h_{u,t}\\,d(P-Q)-\\Delta_B-\\Delta_A.\n\\tag{2.11}\\label{eq:legacy-A.14}",
+      "tex": "\\Phi_\\varepsilon(P)-\\Phi_\\varepsilon(Q)\n=p^{-1}\\int h_{u,t}\\,d(P-Q)-\\Delta_B-\\Delta_A.\n\\tag{2.11}",
+      "labels": [
+        "eq:legacy-A.14"
+      ]
+    },
+    {
+      "display": false,
+      "sourceTex": "h_{u,t}",
+      "tex": "h_{u,t}",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "x_1",
+      "tex": "x_1",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "1+\\varepsilon",
+      "tex": "1+\\varepsilon",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "P",
+      "tex": "P",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "Q",
+      "tex": "Q",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "P-Q",
+      "tex": "P-Q",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "h_{u,t}",
+      "tex": "h_{u,t}",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "\\int H\\,d(P-Q)=0",
+      "tex": "\\int H\\,d(P-Q)=0",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "H=X_1-X_2",
+      "tex": "H=X_1-X_2",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "x_1",
+      "tex": "x_1",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "-(1+\\varepsilon)",
+      "tex": "-(1+\\varepsilon)",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "1",
+      "tex": "1",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "-\\varepsilon/2",
+      "tex": "-\\varepsilon/2",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "\\varepsilon H/2",
+      "tex": "\\varepsilon H/2",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "x_2",
+      "tex": "x_2",
+      "labels": []
+    },
+    {
+      "display": true,
+      "sourceTex": "\\begin{array}{c|rrrr}\n(1_{\\{B>u\\}},1_{\\{A_\\varepsilon>t\\}})&(0,0)&(1,0)&(0,1)&(1,1)\\\\\n\\partial_{x_1}h_{u,t}&0&1&-(1+\\varepsilon)&-\\varepsilon\\\\\n\\partial_{x_1}(h_{u,t}+\\varepsilon H/2)&\\varepsilon/2&1+\\varepsilon/2&-1-\\varepsilon/2&-\\varepsilon/2.\n\\end{array}",
+      "tex": "\\begin{array}{c|rrrr}\n(1_{\\{B>u\\}},1_{\\{A_\\varepsilon>t\\}})&(0,0)&(1,0)&(0,1)&(1,1)\\\\\n\\partial_{x_1}h_{u,t}&0&1&-(1+\\varepsilon)&-\\varepsilon\\\\\n\\partial_{x_1}(h_{u,t}+\\varepsilon H/2)&\\varepsilon/2&1+\\varepsilon/2&-1-\\varepsilon/2&-\\varepsilon/2.\n\\end{array}",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "x_1",
+      "tex": "x_1",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "1+\\varepsilon/2",
+      "tex": "1+\\varepsilon/2",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "x_2",
+      "tex": "x_2",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "x_3",
+      "tex": "x_3",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "1-\\varepsilon/2",
+      "tex": "1-\\varepsilon/2",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "\\beta",
+      "tex": "\\beta",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "G_{u,t}=h_{u,t}+\\varepsilon H/2",
+      "tex": "G_{u,t}=h_{u,t}+\\varepsilon H/2",
+      "labels": []
+    },
+    {
+      "display": true,
+      "sourceTex": "|G_{u,t}(Y)-G_{u,t}(X)|\n\\le(1+\\varepsilon/2)|Y_1-X_1|\n+(1-\\varepsilon/2)|Y_2-X_2|+\\beta|Y_3-X_3|.",
+      "tex": "|G_{u,t}(Y)-G_{u,t}(X)|\n\\le(1+\\varepsilon/2)|Y_1-X_1|\n+(1-\\varepsilon/2)|Y_2-X_2|+\\beta|Y_3-X_3|.",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "P,Q",
+      "tex": "P,Q",
+      "labels": []
+    },
+    {
+      "display": true,
+      "sourceTex": "0\\le D_\\varepsilon(\\rho_2)-D_\\varepsilon(\\rho_1)\n\\le \\kappa_\\varepsilon(\\rho_2-\\rho_1)\\qquad(0\\le\\rho_1<\\rho_2).\n\\tag{2.12}\\label{eq:sharp-budget-continuity}",
+      "tex": "0\\le D_\\varepsilon(\\rho_2)-D_\\varepsilon(\\rho_1)\n\\le \\kappa_\\varepsilon(\\rho_2-\\rho_1)\\qquad(0\\le\\rho_1<\\rho_2).\n\\tag{2.12}",
+      "labels": [
+        "eq:sharp-budget-continuity"
+      ]
+    },
+    {
+      "display": false,
+      "sourceTex": "\\{B=v\\}",
+      "tex": "\\{B=v\\}",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "\\{A_\\varepsilon=t_\\varepsilon\\}",
+      "tex": "\\{A_\\varepsilon=t_\\varepsilon\\}",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "\\varepsilon\\in(0,1)",
+      "tex": "\\varepsilon\\in(0,1)",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "[m_F,M_F]",
+      "tex": "[m_F,M_F]",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "A_\\varepsilon",
+      "tex": "A_\\varepsilon",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "F_v=\\{B=v\\}\\cap S",
+      "tex": "F_v=\\{B=v\\}\\cap S",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "x_{\\min}=(\\ell,\\ell,\\ell_3)",
+      "tex": "x_{\\min}=(\\ell,\\ell,\\ell_3)",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "B>v",
+      "tex": "B>v",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "F_v",
+      "tex": "F_v",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "t_\\varepsilon\\le m_F",
+      "tex": "t_\\varepsilon\\le m_F",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "\\{B>v\\}\\subset\\{A_\\varepsilon>t_\\varepsilon\\}",
+      "tex": "\\{B>v\\}\\subset\\{A_\\varepsilon>t_\\varepsilon\\}",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "A_\\varepsilon",
+      "tex": "A_\\varepsilon",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "F_v",
+      "tex": "F_v",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "B=v",
+      "tex": "B=v",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "f>0",
+      "tex": "f>0",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "t_\\varepsilon\\ge M_F",
+      "tex": "t_\\varepsilon\\ge M_F",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "t_\\varepsilon\\in(m_F,M_F)",
+      "tex": "t_\\varepsilon\\in(m_F,M_F)",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "c=(x_*,y_*,z_*)\\in\\operatorname{int}S",
+      "tex": "c=(x_*,y_*,z_*)\\in\\operatorname{int}S",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "e_1",
+      "tex": "e_1",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "x_*",
+      "tex": "x_*",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "c",
+      "tex": "c",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "(0,-\\zeta_0,a\\zeta_0)",
+      "tex": "(0,-\\zeta_0,a\\zeta_0)",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "B",
+      "tex": "B",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "(-1+\\beta a)\\zeta_0",
+      "tex": "(-1+\\beta a)\\zeta_0",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "A_\\varepsilon",
+      "tex": "A_\\varepsilon",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "(-(1-\\varepsilon)+\\beta a)\\zeta_0",
+      "tex": "(-(1-\\varepsilon)+\\beta a)\\zeta_0",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "a=(1-\\varepsilon/2)/\\beta",
+      "tex": "a=(1-\\varepsilon/2)/\\beta",
+      "labels": []
+    },
+    {
+      "display": true,
+      "sourceTex": "c_\\pm=(x_*,y_*\\mp \\zeta_0,z_*\\pm(1-\\varepsilon/2)\\zeta_0/\\beta)",
+      "tex": "c_\\pm=(x_*,y_*\\mp \\zeta_0,z_*\\pm(1-\\varepsilon/2)\\zeta_0/\\beta)",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "\\zeta_0>0",
+      "tex": "\\zeta_0>0",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "c_+",
+      "tex": "c_+",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "-\\varepsilon \\zeta_0/2",
+      "tex": "-\\varepsilon \\zeta_0/2",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "B",
+      "tex": "B",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "\\varepsilon \\zeta_0/2",
+      "tex": "\\varepsilon \\zeta_0/2",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "A_\\varepsilon",
+      "tex": "A_\\varepsilon",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "c_-",
+      "tex": "c_-",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "0<\\delta_x<\\varepsilon\\zeta_0/(1+\\varepsilon)",
+      "tex": "0<\\delta_x<\\varepsilon\\zeta_0/(1+\\varepsilon)",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "\\eta_0>0",
+      "tex": "\\eta_0>0",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "E_\\pm",
+      "tex": "E_\\pm",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "\\eta_0",
+      "tex": "\\eta_0",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "c_\\pm\\pm(\\delta_x/2)e_1",
+      "tex": "c_\\pm\\pm(\\delta_x/2)e_1",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "S",
+      "tex": "S",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "\\mp\\delta_xe_1",
+      "tex": "\\mp\\delta_xe_1",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "\\nu_\\pm=\\lambda1_{E_\\pm}\\,dx\\,dy\\,dz",
+      "tex": "\\nu_\\pm=\\lambda1_{E_\\pm}\\,dx\\,dy\\,dz",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "\\lambda=\\min_Sf",
+      "tex": "\\lambda=\\min_Sf",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "\\mu=\\lambda(2\\eta_0)^3",
+      "tex": "\\mu=\\lambda(2\\eta_0)^3",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "P_0",
+      "tex": "P_0",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "T_\\pm(x)=x\\mp\\delta_xe_1",
+      "tex": "T_\\pm(x)=x\\mp\\delta_xe_1",
+      "labels": []
+    },
+    {
+      "display": true,
+      "sourceTex": "P_\\theta=P_0-\\theta(\\nu_++\\nu_-)\n+\\theta(T_+)_\\#\\nu_++\\theta(T_-)_\\#\\nu_-,\\qquad 0\\le\\theta\\le1.\n\\tag{2.13}\\label{eq:legacy-A.16a}",
+      "tex": "P_\\theta=P_0-\\theta(\\nu_++\\nu_-)\n+\\theta(T_+)_\\#\\nu_++\\theta(T_-)_\\#\\nu_-,\\qquad 0\\le\\theta\\le1.\n\\tag{2.13}",
+      "labels": [
+        "eq:legacy-A.16a"
+      ]
+    },
+    {
+      "display": false,
+      "sourceTex": "P_\\theta",
+      "tex": "P_\\theta",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "v",
+      "tex": "v",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "t_\\varepsilon",
+      "tex": "t_\\varepsilon",
+      "labels": []
+    },
+    {
+      "display": true,
+      "sourceTex": "\\Phi_\\varepsilon(P_\\theta)-\\Phi_\\varepsilon(P_0)\n=\\frac{(2+\\varepsilon)\\theta\\mu\\delta_x}{p}\n=K_\\varepsilon(2\\gamma_1\\theta\\mu\\delta_x).\n\\tag{2.14}\\label{eq:legacy-A.16b}",
+      "tex": "\\Phi_\\varepsilon(P_\\theta)-\\Phi_\\varepsilon(P_0)\n=\\frac{(2+\\varepsilon)\\theta\\mu\\delta_x}{p}\n=K_\\varepsilon(2\\gamma_1\\theta\\mu\\delta_x).\n\\tag{2.14}",
+      "labels": [
+        "eq:legacy-A.16b"
+      ]
+    },
+    {
+      "display": false,
+      "sourceTex": "2\\gamma_1\\theta\\mu\\delta_x",
+      "tex": "2\\gamma_1\\theta\\mu\\delta_x",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "W_\\gamma(P_\\theta,P_0)",
+      "tex": "W_\\gamma(P_\\theta,P_0)",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "\\theta\\in[0,1]",
+      "tex": "\\theta\\in[0,1]",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "r_\\varepsilon=2\\gamma_1\\mu\\delta_x>0",
+      "tex": "r_\\varepsilon=2\\gamma_1\\mu\\delta_x>0",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "\\gamma_2\\ge\\gamma_1",
+      "tex": "\\gamma_2\\ge\\gamma_1",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "\\gamma_3\\ge\\beta\\gamma_1",
+      "tex": "\\gamma_3\\ge\\beta\\gamma_1",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "\\varepsilon\\in(0,1)",
+      "tex": "\\varepsilon\\in(0,1)",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "r_{0,\\varepsilon}=m_\\varepsilon/K_\\varepsilon",
+      "tex": "r_{0,\\varepsilon}=m_\\varepsilon/K_\\varepsilon",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "\\varepsilon",
+      "tex": "\\varepsilon",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "r_\\varepsilon>0",
+      "tex": "r_\\varepsilon>0",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "r_\\varepsilon/\\varepsilon^2",
+      "tex": "r_\\varepsilon/\\varepsilon^2",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "|D_\\varepsilon(\\rho)|\\le\\varepsilon\\|H\\|_\\infty",
+      "tex": "|D_\\varepsilon(\\rho)|\\le\\varepsilon\\|H\\|_\\infty",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "(\\rho,\\varepsilon)",
+      "tex": "(\\rho,\\varepsilon)",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "K_\\varepsilon\\to1/(p\\gamma_1)>0",
+      "tex": "K_\\varepsilon\\to1/(p\\gamma_1)>0",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "\\rho=s\\varepsilon^2",
+      "tex": "\\rho=s\\varepsilon^2",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "B-\\varepsilon H",
+      "tex": "B-\\varepsilon H",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "B+\\varepsilon H",
+      "tex": "B+\\varepsilon H",
+      "labels": []
+    },
+    {
+      "display": true,
+      "sourceTex": "ES_p^P(B)\\le\\tfrac12 ES_p^P(B-\\varepsilon H)+\\tfrac12 ES_p^P(B+\\varepsilon H)\n=ES_p^P(A_\\varepsilon).\n\\tag{2.15}\\label{eq:legacy-3.6}",
+      "tex": "ES_p^P(B)\\le\\tfrac12 ES_p^P(B-\\varepsilon H)+\\tfrac12 ES_p^P(B+\\varepsilon H)\n=ES_p^P(A_\\varepsilon).\n\\tag{2.15}",
+      "labels": [
+        "eq:legacy-3.6"
+      ]
+    },
+    {
+      "display": false,
+      "sourceTex": "S=[0,2]^3",
+      "tex": "S=[0,2]^3",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "\\beta=1",
+      "tex": "\\beta=1",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "p=1/2",
+      "tex": "p=1/2",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "f_\\delta=[1+\\delta(x-y)(z-1)]/8",
+      "tex": "f_\\delta=[1+\\delta(x-y)(z-1)]/8",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "0<|\\delta|<1/2",
+      "tex": "0<|\\delta|<1/2",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "T_H",
+      "tex": "T_H",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "x,y",
+      "tex": "x,y",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "B=x+y+z",
+      "tex": "B=x+y+z",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "v=3",
+      "tex": "v=3",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "z=1\\pm t",
+      "tex": "z=1\\pm t",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "2-t<x+y\\le2+t",
+      "tex": "2-t<x+y\\le2+t",
+      "labels": []
+    },
+    {
+      "display": true,
+      "sourceTex": "T_H=\\frac{\\delta}{8}\\int_0^1 t\\int_{\\{2-t<x+y\\le2+t\\}\\cap[0,2]^2}(x-y)^2\\,dx\\,dy\\,dt\\ne0.",
+      "tex": "T_H=\\frac{\\delta}{8}\\int_0^1 t\\int_{\\{2-t<x+y\\le2+t\\}\\cap[0,2]^2}(x-y)^2\\,dx\\,dy\\,dt\\ne0.",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "s=\\rho/\\varepsilon^2",
+      "tex": "s=\\rho/\\varepsilon^2",
+      "labels": []
+    },
+    {
+      "display": true,
+      "sourceTex": "\\varepsilon^{-2}D_\\varepsilon(s\\varepsilon^2)\n\\xrightarrow{\\text{locally uniformly}}\nF(s)\n\\xrightarrow{\\text{unique zero}}\ns^*.",
+      "tex": "\\varepsilon^{-2}D_\\varepsilon(s\\varepsilon^2)\n\\xrightarrow{\\text{locally uniformly}}\nF(s)\n\\xrightarrow{\\text{unique zero}}\ns^*.",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "O(\\varepsilon)",
+      "tex": "O(\\varepsilon)",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "\\{B=v\\}",
+      "tex": "\\{B=v\\}",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "O(\\varepsilon)",
+      "tex": "O(\\varepsilon)",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "\\varepsilon",
+      "tex": "\\varepsilon",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "\\varepsilon^2",
+      "tex": "\\varepsilon^2",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "u=(B(X)-v)/\\varepsilon",
+      "tex": "u=(B(X)-v)/\\varepsilon",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "d=(Y-X)/\\varepsilon",
+      "tex": "d=(Y-X)/\\varepsilon",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "u",
+      "tex": "u",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "d\\nu=d\\sigma\\,du",
+      "tex": "d\\nu=d\\sigma\\,du",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "\\alpha_{\\xi,u}(dd)",
+      "tex": "\\alpha_{\\xi,u}(dd)",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "\\xi",
+      "tex": "\\xi",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "u",
+      "tex": "u",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "\\delta_0",
+      "tex": "\\delta_0",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "d\\Pi_\\alpha(\\xi,u,d)=\\alpha_{\\xi,u}(dd)\\,d\\nu(\\xi,u)",
+      "tex": "d\\Pi_\\alpha(\\xi,u,d)=\\alpha_{\\xi,u}(dd)\\,d\\nu(\\xi,u)",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "\\nu=\\sigma\\otimes du",
+      "tex": "\\nu=\\sigma\\otimes du",
+      "labels": []
+    },
+    {
+      "display": true,
+      "sourceTex": "I(\\alpha)=\\int|d|_\\gamma\\,d\\Pi_\\alpha<\\infty,\n\\qquad |d|_\\gamma=\\sum_i\\gamma_i|d_i|.",
+      "tex": "I(\\alpha)=\\int|d|_\\gamma\\,d\\Pi_\\alpha<\\infty,\n\\qquad |d|_\\gamma=\\sum_i\\gamma_i|d_i|.",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "\\{X_i\\le q\\}",
+      "tex": "\\{X_i\\le q\\}",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "j_i\\in L^1(I_i)",
+      "tex": "j_i\\in L^1(I_i)",
+      "labels": []
+    },
+    {
+      "display": true,
+      "sourceTex": "j_i(q)dq=(\\xi_i)_\\#(d_i\\,d\\Pi_\\alpha),\\qquad\n\\mathcal C(\\alpha)=I(\\alpha)+\\sum_{i=1}^3\\gamma_i\\|j_i\\|_{L^1(I_i)}.\n\\tag{3.1}\\label{eq:legacy-4.1}",
+      "tex": "j_i(q)dq=(\\xi_i)_\\#(d_i\\,d\\Pi_\\alpha),\\qquad\n\\mathcal C(\\alpha)=I(\\alpha)+\\sum_{i=1}^3\\gamma_i\\|j_i\\|_{L^1(I_i)}.\n\\tag{3.1}",
+      "labels": [
+        "eq:legacy-4.1"
+      ]
+    },
+    {
+      "display": false,
+      "sourceTex": "j_i",
+      "tex": "j_i",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "i",
+      "tex": "i",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "W_1",
+      "tex": "W_1",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "\\mathcal C",
+      "tex": "\\mathcal C",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "I",
+      "tex": "I",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "I\\le\\mathcal C\\le2I",
+      "tex": "I\\le\\mathcal C\\le2I",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "\\mathcal C=I",
+      "tex": "\\mathcal C=I",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "\\mathcal C=2I",
+      "tex": "\\mathcal C=2I",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "d_i",
+      "tex": "d_i",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "\\Pi_\\alpha",
+      "tex": "\\Pi_\\alpha",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "\\|j_i\\|_1=\\int|d_i|\\,d\\Pi_\\alpha",
+      "tex": "\\|j_i\\|_1=\\int|d_i|\\,d\\Pi_\\alpha",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "O(\\varepsilon)",
+      "tex": "O(\\varepsilon)",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "O(\\varepsilon)",
+      "tex": "O(\\varepsilon)",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "\\|j_i\\|_1",
+      "tex": "\\|j_i\\|_1",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "v+\\varepsilon\\tau",
+      "tex": "v+\\varepsilon\\tau",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "d",
+      "tex": "d",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "L_{c,\\varepsilon}=B+c\\varepsilon H",
+      "tex": "L_{c,\\varepsilon}=B+c\\varepsilon H",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "u+cH",
+      "tex": "u+cH",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "u+b\\cdot d+cH",
+      "tex": "u+b\\cdot d+cH",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "\\mathfrak q_c(\\tau)=(u+b\\cdot d+cH-\\tau)_+-(u+cH-\\tau)_+",
+      "tex": "\\mathfrak q_c(\\tau)=(u+b\\cdot d+cH-\\tau)_+-(u+cH-\\tau)_+",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "T_c^\\alpha(\\tau)=\\int\\mathfrak q_c(\\tau)\\,d\\Pi_\\alpha",
+      "tex": "T_c^\\alpha(\\tau)=\\int\\mathfrak q_c(\\tau)\\,d\\Pi_\\alpha",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "v",
+      "tex": "v",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "g\\tau^2/2",
+      "tex": "g\\tau^2/2",
+      "labels": []
+    },
+    {
+      "display": true,
+      "sourceTex": "G_c^\\alpha(\\tau)=\\frac g2\\tau^2+T_c^\\alpha(\\tau),\\qquad\n\\mathcal V(\\alpha)=-\\frac Jp+\n\\frac{\\min_{\\tau_B}G_0^\\alpha(\\tau_B)-\\min_{\\tau_A}G_1^\\alpha(\\tau_A)}p.\n\\tag{3.2}\\label{eq:legacy-4.2}",
+      "tex": "G_c^\\alpha(\\tau)=\\frac g2\\tau^2+T_c^\\alpha(\\tau),\\qquad\n\\mathcal V(\\alpha)=-\\frac Jp+\n\\frac{\\min_{\\tau_B}G_0^\\alpha(\\tau_B)-\\min_{\\tau_A}G_1^\\alpha(\\tau_A)}p.\n\\tag{3.2}",
+      "labels": [
+        "eq:legacy-4.2"
+      ]
+    },
+    {
+      "display": false,
+      "sourceTex": "\\mathcal C",
+      "tex": "\\mathcal C",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "u",
+      "tex": "u",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "\\alpha",
+      "tex": "\\alpha",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "\\kappa_B=\\max_i b_i/\\gamma_i",
+      "tex": "\\kappa_B=\\max_i b_i/\\gamma_i",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "\\kappa_H=\\max\\{\\gamma_1^{-1},\\gamma_2^{-1}\\}",
+      "tex": "\\kappa_H=\\max\\{\\gamma_1^{-1},\\gamma_2^{-1}\\}",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "|T_c^\\alpha|\\le\\kappa_BI",
+      "tex": "|T_c^\\alpha|\\le\\kappa_BI",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "g\\tau^2/2\\le2\\kappa_BI",
+      "tex": "g\\tau^2/2\\le2\\kappa_BI",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "\\mathcal V",
+      "tex": "\\mathcal V",
+      "labels": []
+    },
+    {
+      "display": true,
+      "sourceTex": "F(s)=\\max_{\\mathcal C(\\alpha)\\le s}\\mathcal V(\\alpha),\\qquad s\\ge0.\n\\tag{3.3}\\label{eq:legacy-4.3}",
+      "tex": "F(s)=\\max_{\\mathcal C(\\alpha)\\le s}\\mathcal V(\\alpha),\\qquad s\\ge0.\n\\tag{3.3}",
+      "labels": [
+        "eq:legacy-4.3"
+      ]
+    },
+    {
+      "display": false,
+      "sourceTex": "\\mathscr X=\\mathcal M^+_{\\rm loc}(Z)",
+      "tex": "\\mathscr X=\\mathcal M^+_{\\rm loc}(Z)",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "Z=I^2\\times\\mathbb R\\times\\mathbb R^3",
+      "tex": "Z=I^2\\times\\mathbb R\\times\\mathbb R^3",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "\\pi",
+      "tex": "\\pi",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "P_0",
+      "tex": "P_0",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "\\Pi",
+      "tex": "\\Pi",
+      "labels": []
+    },
+    {
+      "display": true,
+      "sourceTex": "\\mathscr T_\\varepsilon\\pi=\\varepsilon^{-1}\n\\left(X_1,X_2,\\frac{B(X)-v}{\\varepsilon},\\frac{Y-X}{\\varepsilon}\\right)_\\#\\pi.",
+      "tex": "\\mathscr T_\\varepsilon\\pi=\\varepsilon^{-1}\n\\left(X_1,X_2,\\frac{B(X)-v}{\\varepsilon},\\frac{Y-X}{\\varepsilon}\\right)_\\#\\pi.",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "\\varepsilon^{-1}",
+      "tex": "\\varepsilon^{-1}",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "(X,Y)",
+      "tex": "(X,Y)",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "\\varepsilon",
+      "tex": "\\varepsilon",
+      "labels": []
+    },
+    {
+      "display": true,
+      "sourceTex": "\\begin{aligned}\n\\mathcal E_\\varepsilon(\\Lambda)\n&=\\begin{cases}\n\\displaystyle\\int |d|_\\gamma\\,d\\Lambda\n=\\varepsilon^{-2}\\int c_\\gamma\\,d\\pi,\n&\\begin{gathered}\\Lambda=\\mathscr T_\\varepsilon\\pi,\\\\ \\pi\\in\\Gamma(P_0,P),\\ P\\in\\Pi,\\end{gathered}\\\\\n+\\infty,&\\text{otherwise},\n\\end{cases}\\\\\n\\mathcal E(\\Lambda)\n&=\\begin{cases}\n\\mathcal C(\\alpha),&\\Lambda=\\Pi_\\alpha,\\ I(\\alpha)<\\infty,\\\\\n+\\infty,&\\text{otherwise}.\n\\end{cases}\n\\end{aligned}",
+      "tex": "\\begin{aligned}\n\\mathcal E_\\varepsilon(\\Lambda)\n&=\\begin{cases}\n\\displaystyle\\int |d|_\\gamma\\,d\\Lambda\n=\\varepsilon^{-2}\\int c_\\gamma\\,d\\pi,\n&\\begin{gathered}\\Lambda=\\mathscr T_\\varepsilon\\pi,\\\\ \\pi\\in\\Gamma(P_0,P),\\ P\\in\\Pi,\\end{gathered}\\\\\n+\\infty,&\\text{otherwise},\n\\end{cases}\\\\\n\\mathcal E(\\Lambda)\n&=\\begin{cases}\n\\mathcal C(\\alpha),&\\Lambda=\\Pi_\\alpha,\\ I(\\alpha)<\\infty,\\\\\n+\\infty,&\\text{otherwise}.\n\\end{cases}\n\\end{aligned}",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "\\Pi_\\alpha",
+      "tex": "\\Pi_\\alpha",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "Z",
+      "tex": "Z",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "(\\xi,u,d)\\mapsto(\\xi_1,\\xi_2,u,d)",
+      "tex": "(\\xi,u,d)\\mapsto(\\xi_1,\\xi_2,u,d)",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "\\xi=(x,y,z_v(x,y))",
+      "tex": "\\xi=(x,y,z_v(x,y))",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "\\Omega",
+      "tex": "\\Omega",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "(I^2\\setminus\\Omega)\\times\\mathbb R\\times\\mathbb R^3",
+      "tex": "(I^2\\setminus\\Omega)\\times\\mathbb R\\times\\mathbb R^3",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "\\mathcal E_\\varepsilon",
+      "tex": "\\mathcal E_\\varepsilon",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "P",
+      "tex": "P",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "\\varepsilon^{-2}W_\\gamma(P,P_0)",
+      "tex": "\\varepsilon^{-2}W_\\gamma(P,P_0)",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "\\Gamma",
+      "tex": "\\Gamma",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "\\Gamma",
+      "tex": "\\Gamma",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "\\mathcal E_\\varepsilon",
+      "tex": "\\mathcal E_\\varepsilon",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "\\Gamma",
+      "tex": "\\Gamma",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "\\mathcal E",
+      "tex": "\\mathcal E",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "\\varepsilon\\downarrow0",
+      "tex": "\\varepsilon\\downarrow0",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "\\mathscr X",
+      "tex": "\\mathscr X",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "\\varepsilon_n\\downarrow0",
+      "tex": "\\varepsilon_n\\downarrow0",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "\\Pi_n\\in\\mathscr X",
+      "tex": "\\Pi_n\\in\\mathscr X",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "\\mathcal E_{\\varepsilon_n}(\\Pi_n)",
+      "tex": "\\mathcal E_{\\varepsilon_n}(\\Pi_n)",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "\\Pi_n=\\mathscr T_{\\varepsilon_n}\\pi_n\\to\\Pi_\\alpha",
+      "tex": "\\Pi_n=\\mathscr T_{\\varepsilon_n}\\pi_n\\to\\Pi_\\alpha",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "P_n",
+      "tex": "P_n",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "\\pi_n",
+      "tex": "\\pi_n",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "\\Phi_{\\varepsilon_n}(P_n)/\\varepsilon_n^2\\to\\mathcal V(\\alpha)",
+      "tex": "\\Phi_{\\varepsilon_n}(P_n)/\\varepsilon_n^2\\to\\mathcal V(\\alpha)",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "\\varepsilon_n\\downarrow0",
+      "tex": "\\varepsilon_n\\downarrow0",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "W_\\gamma(P_n,P_0)=O(\\varepsilon_n^2)",
+      "tex": "W_\\gamma(P_n,P_0)=O(\\varepsilon_n^2)",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "I",
+      "tex": "I",
+      "labels": []
+    },
+    {
+      "display": true,
+      "sourceTex": "\\mathcal C(\\alpha)\\le\\liminf_n\\frac{W_\\gamma(P_n,P_0)}{\\varepsilon_n^2},\\qquad\n\\frac{\\Phi_{\\varepsilon_n}(P_n)}{\\varepsilon_n^2}\\longrightarrow\\mathcal V(\\alpha).\n\\tag{3.4}\\label{eq:legacy-4.5}",
+      "tex": "\\mathcal C(\\alpha)\\le\\liminf_n\\frac{W_\\gamma(P_n,P_0)}{\\varepsilon_n^2},\\qquad\n\\frac{\\Phi_{\\varepsilon_n}(P_n)}{\\varepsilon_n^2}\\longrightarrow\\mathcal V(\\alpha).\n\\tag{3.4}",
+      "labels": [
+        "eq:legacy-4.5"
+      ]
+    },
+    {
+      "display": false,
+      "sourceTex": "I",
+      "tex": "I",
+      "labels": []
+    },
+    {
+      "display": true,
+      "sourceTex": "\\limsup_{\\varepsilon\\downarrow0}\\frac{W_\\gamma(P_\\varepsilon,P_0)}{\\varepsilon^2}\\le\\mathcal C(\\alpha),\\qquad\n\\frac{\\Phi_\\varepsilon(P_\\varepsilon)}{\\varepsilon^2}\\longrightarrow\\mathcal V(\\alpha).\n\\tag{3.5}\\label{eq:legacy-4.6}",
+      "tex": "\\limsup_{\\varepsilon\\downarrow0}\\frac{W_\\gamma(P_\\varepsilon,P_0)}{\\varepsilon^2}\\le\\mathcal C(\\alpha),\\qquad\n\\frac{\\Phi_\\varepsilon(P_\\varepsilon)}{\\varepsilon^2}\\longrightarrow\\mathcal V(\\alpha).\n\\tag{3.5}",
+      "labels": [
+        "eq:legacy-4.6"
+      ]
+    },
+    {
+      "display": false,
+      "sourceTex": "F",
+      "tex": "F",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "F(0)=-J/p",
+      "tex": "F(0)=-J/p",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "F>0",
+      "tex": "F>0",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "S_0",
+      "tex": "S_0",
+      "labels": []
+    },
+    {
+      "display": true,
+      "sourceTex": "\\sup_{0\\le s\\le S_0}\\left|\\frac{D_\\varepsilon(s\\varepsilon^2)}{\\varepsilon^2}-F(s)\\right|\\longrightarrow0.\n\\tag{3.6}\\label{eq:legacy-4.4}",
+      "tex": "\\sup_{0\\le s\\le S_0}\\left|\\frac{D_\\varepsilon(s\\varepsilon^2)}{\\varepsilon^2}-F(s)\\right|\\longrightarrow0.\n\\tag{3.6}",
+      "labels": [
+        "eq:legacy-4.4"
+      ]
+    },
+    {
+      "display": false,
+      "sourceTex": "\\Gamma",
+      "tex": "\\Gamma",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "\\Pi",
+      "tex": "\\Pi",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "s^*",
+      "tex": "s^*",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "O_M(\\varepsilon)",
+      "tex": "O_M(\\varepsilon)",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "\\mathfrak q_0(0)",
+      "tex": "\\mathfrak q_0(0)",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "H",
+      "tex": "H",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "\\mathcal K_{\\rm fin}^c",
+      "tex": "\\mathcal K_{\\rm fin}^c",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "Q_\\varepsilon",
+      "tex": "Q_\\varepsilon",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "F_{i,\\varepsilon}-F_i=-\\varepsilon^2j_i+o(\\varepsilon^2)",
+      "tex": "F_{i,\\varepsilon}-F_i=-\\varepsilon^2j_i+o(\\varepsilon^2)",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "F_i",
+      "tex": "F_i",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "F_i^{-1}\\circ F_{i,\\varepsilon}",
+      "tex": "F_i^{-1}\\circ F_{i,\\varepsilon}",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "\\varepsilon^2\\sum_i\\gamma_i\\|j_i\\|_1+o(\\varepsilon^2)",
+      "tex": "\\varepsilon^2\\sum_i\\gamma_i\\|j_i\\|_1+o(\\varepsilon^2)",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "O_\\alpha(\\varepsilon^2)",
+      "tex": "O_\\alpha(\\varepsilon^2)",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "O_\\alpha(\\varepsilon)",
+      "tex": "O_\\alpha(\\varepsilon)",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "-\\varepsilon h",
+      "tex": "-\\varepsilon h",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "O_\\alpha(\\varepsilon^3)",
+      "tex": "O_\\alpha(\\varepsilon^3)",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "Q_\\varepsilon",
+      "tex": "Q_\\varepsilon",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "O_\\alpha(\\varepsilon)",
+      "tex": "O_\\alpha(\\varepsilon)",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "O_\\alpha(\\varepsilon^3)",
+      "tex": "O_\\alpha(\\varepsilon^3)",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "\\mathcal K_{\\rm fin}^c",
+      "tex": "\\mathcal K_{\\rm fin}^c",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "o(\\varepsilon^2)",
+      "tex": "o(\\varepsilon^2)",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "W=\\{u(u+H)<0\\}",
+      "tex": "W=\\{u(u+H)<0\\}",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "\\zeta=-(u+H)1_W",
+      "tex": "\\zeta=-(u+H)1_W",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "A_\\varepsilon",
+      "tex": "A_\\varepsilon",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "c_{\\min}=\\gamma_1",
+      "tex": "c_{\\min}=\\gamma_1",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "e_1",
+      "tex": "e_1",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "x",
+      "tex": "x",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "W",
+      "tex": "W",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "\\zeta<0",
+      "tex": "\\zeta<0",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "y<x",
+      "tex": "y<x",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "\\zeta>0",
+      "tex": "\\zeta>0",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "y>x",
+      "tex": "y>x",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "\\int\\zeta\\,du=-H|H|/2",
+      "tex": "\\int\\zeta\\,du=-H|H|/2",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "k(x,y)=f(x,y,(v-x-y)/\\beta)1_{\\{\\beta\\ell_3<v-x-y<\\beta r_3\\}}",
+      "tex": "k(x,y)=f(x,y,(v-x-y)/\\beta)1_{\\{\\beta\\ell_3<v-x-y<\\beta r_3\\}}",
+      "labels": []
+    },
+    {
+      "display": true,
+      "sourceTex": "\\ell_-(x)=\\frac1{2\\beta}\\int_I(x-y)_+^2k(x,y)\\,dy,\\qquad\n\\ell_+(x)=\\frac1{2\\beta}\\int_I(y-x)_+^2k(x,y)\\,dy.\n\\tag{3.7}\\label{eq:legacy-A.19}",
+      "tex": "\\ell_-(x)=\\frac1{2\\beta}\\int_I(x-y)_+^2k(x,y)\\,dy,\\qquad\n\\ell_+(x)=\\frac1{2\\beta}\\int_I(y-x)_+^2k(x,y)\\,dy.\n\\tag{3.7}",
+      "labels": [
+        "eq:legacy-A.19"
+      ]
+    },
+    {
+      "display": false,
+      "sourceTex": "\\int_I\\ell_-=\\int_I\\ell_+=J/2",
+      "tex": "\\int_I\\ell_-=\\int_I\\ell_+=J/2",
+      "labels": []
+    },
+    {
+      "display": true,
+      "sourceTex": "\\begin{aligned}\nq_{\\rm bal}(x)&=\\min\\{\\ell_-(x),\\ell_+(x)\\},&\nQ_{\\rm bal}&=\\int_I q_{\\rm bal}(x)\\,dx,\\\\\ns_{\\rm lin}&=2\\gamma_1Q_{\\rm bal}=\\gamma_1J(1-\\chi)>0,&\n\\chi&=\\|\\ell_--\\ell_+\\|_{L^1(I)}/J.\n\\end{aligned}",
+      "tex": "\\begin{aligned}\nq_{\\rm bal}(x)&=\\min\\{\\ell_-(x),\\ell_+(x)\\},&\nQ_{\\rm bal}&=\\int_I q_{\\rm bal}(x)\\,dx,\\\\\ns_{\\rm lin}&=2\\gamma_1Q_{\\rm bal}=\\gamma_1J(1-\\chi)>0,&\n\\chi&=\\|\\ell_--\\ell_+\\|_{L^1(I)}/J.\n\\end{aligned}",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "\\gamma_1=\\min\\{\\gamma_1,\\gamma_2,\\gamma_3/\\beta\\}",
+      "tex": "\\gamma_1=\\min\\{\\gamma_1,\\gamma_2,\\gamma_3/\\beta\\}",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "\\ell_\\pm",
+      "tex": "\\ell_\\pm",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "s_{\\rm lin}=\\gamma_1J(1-\\chi)>0",
+      "tex": "s_{\\rm lin}=\\gamma_1J(1-\\chi)>0",
+      "labels": []
+    },
+    {
+      "display": true,
+      "sourceTex": "F(s)=-J/p+s/(p\\gamma_1),\\qquad 0\\le s\\le s_{\\rm lin}.",
+      "tex": "F(s)=-J/p+s/(p\\gamma_1),\\qquad 0\\le s\\le s_{\\rm lin}.",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "W=\\{u(u+H)<0\\}",
+      "tex": "W=\\{u(u+H)<0\\}",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "\\zeta=-(u+H)1_W",
+      "tex": "\\zeta=-(u+H)1_W",
+      "labels": []
+    },
+    {
+      "display": true,
+      "sourceTex": "a(\\xi)=\n\\begin{cases}\nq_{\\rm bal}(x)/\\ell_-(x),&H>0,\\ \\ell_-(x)>0,\\\\\nq_{\\rm bal}(x)/\\ell_+(x),&H<0,\\ \\ell_+(x)>0,\\\\\n0,&\\text{otherwise},\n\\end{cases}",
+      "tex": "a(\\xi)=\n\\begin{cases}\nq_{\\rm bal}(x)/\\ell_-(x),&H>0,\\ \\ell_-(x)>0,\\\\\nq_{\\rm bal}(x)/\\ell_+(x),&H<0,\\ \\ell_+(x)>0,\\\\\n0,&\\text{otherwise},\n\\end{cases}",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "\\alpha^\\theta_{\\xi,u}=\\theta a(\\xi)\\delta_{\\zeta e_1}+(1-\\theta a(\\xi))\\delta_0",
+      "tex": "\\alpha^\\theta_{\\xi,u}=\\theta a(\\xi)\\delta_{\\zeta e_1}+(1-\\theta a(\\xi))\\delta_0",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "0\\le\\theta\\le1",
+      "tex": "0\\le\\theta\\le1",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "0\\le a\\le1",
+      "tex": "0\\le a\\le1",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "|u|,|\\zeta|\\le\\Delta_I",
+      "tex": "|u|,|\\zeta|\\le\\Delta_I",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "-\\theta q_{\\rm bal}(x)",
+      "tex": "-\\theta q_{\\rm bal}(x)",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "\\theta q_{\\rm bal}(x)",
+      "tex": "\\theta q_{\\rm bal}(x)",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "j_i=0",
+      "tex": "j_i=0",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "i",
+      "tex": "i",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "I(\\alpha^\\theta)=\\mathcal C(\\alpha^\\theta)=2\\theta\\gamma_1Q_{\\rm bal}=\\theta s_{\\rm lin}",
+      "tex": "I(\\alpha^\\theta)=\\mathcal C(\\alpha^\\theta)=2\\theta\\gamma_1Q_{\\rm bal}=\\theta s_{\\rm lin}",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "-H",
+      "tex": "-H",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "B",
+      "tex": "B",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "A_\\varepsilon",
+      "tex": "A_\\varepsilon",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "\\operatorname{sgn}u=\\operatorname{sgn}(-H)\\ne0",
+      "tex": "\\operatorname{sgn}u=\\operatorname{sgn}(-H)\\ne0",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "W",
+      "tex": "W",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "B",
+      "tex": "B",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "B",
+      "tex": "B",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "A_\\varepsilon",
+      "tex": "A_\\varepsilon",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "H",
+      "tex": "H",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "\\mathfrak m_\\pm=\\int_{\\{\\pm H>0\\}}a(\\xi)|H|\\,d\\sigma",
+      "tex": "\\mathfrak m_\\pm=\\int_{\\{\\pm H>0\\}}a(\\xi)|H|\\,d\\sigma",
+      "labels": []
+    },
+    {
+      "display": true,
+      "sourceTex": "G'_{0,-}(0)=G'_{0,+}(0)=0,\\qquad\nG'_{1,-}(0)=-\\theta \\mathfrak m_-\\le0,\\qquad\nG'_{1,+}(0)=\\theta \\mathfrak m_+\\ge0.",
+      "tex": "G'_{0,-}(0)=G'_{0,+}(0)=0,\\qquad\nG'_{1,-}(0)=-\\theta \\mathfrak m_-\\le0,\\qquad\nG'_{1,+}(0)=\\theta \\mathfrak m_+\\ge0.",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "H^2/2",
+      "tex": "H^2/2",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "B",
+      "tex": "B",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "H<0",
+      "tex": "H<0",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "-H^2/2",
+      "tex": "-H^2/2",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "A_\\varepsilon",
+      "tex": "A_\\varepsilon",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "H>0",
+      "tex": "H>0",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "T_0(0)=\\theta Q_{\\rm bal}",
+      "tex": "T_0(0)=\\theta Q_{\\rm bal}",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "T_1(0)=-\\theta Q_{\\rm bal}",
+      "tex": "T_1(0)=-\\theta Q_{\\rm bal}",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "\\mathcal V(\\alpha^\\theta)=-J/p+\\theta s_{\\rm lin}/(p\\gamma_1)",
+      "tex": "\\mathcal V(\\alpha^\\theta)=-J/p+\\theta s_{\\rm lin}/(p\\gamma_1)",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "0<\\chi<1",
+      "tex": "0<\\chi<1",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "\\theta=s/s_{\\rm lin}",
+      "tex": "\\theta=s/s_{\\rm lin}",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "e^{-u^2}e_1",
+      "tex": "e^{-u^2}e_1",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "u",
+      "tex": "u",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "-u",
+      "tex": "-u",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "B",
+      "tex": "B",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "H",
+      "tex": "H",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "U",
+      "tex": "U",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "O_M(U^{-1})",
+      "tex": "O_M(U^{-1})",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "U",
+      "tex": "U",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "F",
+      "tex": "F",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "s^*>0",
+      "tex": "s^*>0",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "\\varepsilon^2",
+      "tex": "\\varepsilon^2",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "0\\le M<\\infty",
+      "tex": "0\\le M<\\infty",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "c_M>0",
+      "tex": "c_M>0",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "I(\\alpha)\\le M",
+      "tex": "I(\\alpha)\\le M",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "0<\\delta\\le1",
+      "tex": "0<\\delta\\le1",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "\\widehat\\alpha",
+      "tex": "\\widehat\\alpha",
+      "labels": []
+    },
+    {
+      "display": true,
+      "sourceTex": "\\mathcal C(\\widehat\\alpha)\\le\\mathcal C(\\alpha)+\\delta,\\qquad\n\\mathcal V(\\widehat\\alpha)\\ge\\mathcal V(\\alpha)+c_M\\delta.\n\\tag{3.8}\\label{eq:legacy-5.1}",
+      "tex": "\\mathcal C(\\widehat\\alpha)\\le\\mathcal C(\\alpha)+\\delta,\\qquad\n\\mathcal V(\\widehat\\alpha)\\ge\\mathcal V(\\alpha)+c_M\\delta.\n\\tag{3.8}",
+      "labels": [
+        "eq:legacy-5.1"
+      ]
+    },
+    {
+      "display": false,
+      "sourceTex": "(\\widehat\\alpha_\\delta)_{0<\\delta\\le1}",
+      "tex": "(\\widehat\\alpha_\\delta)_{0<\\delta\\le1}",
+      "labels": []
+    },
+    {
+      "display": true,
+      "sourceTex": "\\int |d|_\\gamma\\,|\\widehat\\alpha_\\delta-\\alpha|(dd)\\,d\\nu\n\\xrightarrow[\\delta\\downarrow0]{}0,\n\\qquad\n\\lim_{\\delta\\downarrow0}\n\\frac{\\mathcal V(\\widehat\\alpha_\\delta)-\\mathcal V(\\alpha)}{\\delta}\n\\ge c_M>0.",
+      "tex": "\\int |d|_\\gamma\\,|\\widehat\\alpha_\\delta-\\alpha|(dd)\\,d\\nu\n\\xrightarrow[\\delta\\downarrow0]{}0,\n\\qquad\n\\lim_{\\delta\\downarrow0}\n\\frac{\\mathcal V(\\widehat\\alpha_\\delta)-\\mathcal V(\\alpha)}{\\delta}\n\\ge c_M>0.",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "S_0>0",
+      "tex": "S_0>0",
+      "labels": []
+    },
+    {
+      "display": true,
+      "sourceTex": "F(t)-F(s)\\ge c_{S_0}(t-s)>0\\qquad(0\\le s<t\\le S_0).\n\\tag{3.9}\\label{eq:legacy-5.2}",
+      "tex": "F(t)-F(s)\\ge c_{S_0}(t-s)>0\\qquad(0\\le s<t\\le S_0).\n\\tag{3.9}",
+      "labels": [
+        "eq:legacy-5.2"
+      ]
+    },
+    {
+      "display": false,
+      "sourceTex": "F",
+      "tex": "F",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "s^*>0",
+      "tex": "s^*>0",
+      "labels": []
+    },
+    {
+      "display": true,
+      "sourceTex": "s^*=\\min_{\\alpha:\\,\\mathcal V(\\alpha)\\ge0}\\mathcal C(\\alpha)\n=\\min_{\\alpha:\\,\\mathcal V(\\alpha)=0}\\mathcal C(\\alpha)\n=\\inf_{\\alpha:\\,\\mathcal V(\\alpha)>0}\\mathcal C(\\alpha).\n\\tag{3.10}\\label{eq:legacy-5.3}",
+      "tex": "s^*=\\min_{\\alpha:\\,\\mathcal V(\\alpha)\\ge0}\\mathcal C(\\alpha)\n=\\min_{\\alpha:\\,\\mathcal V(\\alpha)=0}\\mathcal C(\\alpha)\n=\\inf_{\\alpha:\\,\\mathcal V(\\alpha)>0}\\mathcal C(\\alpha).\n\\tag{3.10}",
+      "labels": [
+        "eq:legacy-5.3"
+      ]
+    },
+    {
+      "display": true,
+      "sourceTex": "\\rho^-_\\varepsilon=s^*\\varepsilon^2+o(\\varepsilon^2),\\qquad\n\\rho^+_\\varepsilon=s^*\\varepsilon^2+o(\\varepsilon^2).\n\\tag{3.11}\\label{eq:legacy-5.4}",
+      "tex": "\\rho^-_\\varepsilon=s^*\\varepsilon^2+o(\\varepsilon^2),\\qquad\n\\rho^+_\\varepsilon=s^*\\varepsilon^2+o(\\varepsilon^2).\n\\tag{3.11}",
+      "labels": [
+        "eq:legacy-5.4"
+      ]
+    },
+    {
+      "display": false,
+      "sourceTex": "\\varepsilon",
+      "tex": "\\varepsilon",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "B",
+      "tex": "B",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "c_{\\mathrm{exec},\\varepsilon}\\ge0",
+      "tex": "c_{\\mathrm{exec},\\varepsilon}\\ge0",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "c_{\\mathrm{exec},\\varepsilon}/\\varepsilon^2\\to\\theta\\in[0,J/p)",
+      "tex": "c_{\\mathrm{exec},\\varepsilon}/\\varepsilon^2\\to\\theta\\in[0,J/p)",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "D^{\\rm net}_\\varepsilon=D_\\varepsilon+c_{\\mathrm{exec},\\varepsilon}",
+      "tex": "D^{\\rm net}_\\varepsilon=D_\\varepsilon+c_{\\mathrm{exec},\\varepsilon}",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "F+\\theta",
+      "tex": "F+\\theta",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "\\rho^{\\pm,\\rm net}_\\varepsilon=s_\\theta\\varepsilon^2+o(\\varepsilon^2)",
+      "tex": "\\rho^{\\pm,\\rm net}_\\varepsilon=s_\\theta\\varepsilon^2+o(\\varepsilon^2)",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "s_\\theta",
+      "tex": "s_\\theta",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "F(s_\\theta)=-\\theta",
+      "tex": "F(s_\\theta)=-\\theta",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "\\theta",
+      "tex": "\\theta",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "J/p",
+      "tex": "J/p",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "s^*",
+      "tex": "s^*",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "s_\\theta=c_3(J-p\\theta)",
+      "tex": "s_\\theta=c_3(J-p\\theta)",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "L^1",
+      "tex": "L^1",
+      "labels": []
+    },
+    {
+      "display": true,
+      "sourceTex": "\\mathcal C(\\alpha)-I(\\alpha)\n=\\sup_{|\\phi_i|\\le\\gamma_i}\\sum_i\\int_{I_i}\\phi_i(q)j_i(q)\\,dq\n=\\sup_{|\\phi_i|\\le\\gamma_i}\\int\\sum_i\\phi_i(\\xi_i)d_i\\,d\\Pi_\\alpha.",
+      "tex": "\\mathcal C(\\alpha)-I(\\alpha)\n=\\sup_{|\\phi_i|\\le\\gamma_i}\\sum_i\\int_{I_i}\\phi_i(q)j_i(q)\\,dq\n=\\sup_{|\\phi_i|\\le\\gamma_i}\\int\\sum_i\\phi_i(\\xi_i)d_i\\,d\\Pi_\\alpha.",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "\\phi_i(q)",
+      "tex": "\\phi_i(q)",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "q",
+      "tex": "q",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "c_1=\\gamma_1",
+      "tex": "c_1=\\gamma_1",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "c_2=\\gamma_2",
+      "tex": "c_2=\\gamma_2",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "c_3=\\gamma_3/\\beta",
+      "tex": "c_3=\\gamma_3/\\beta",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "c_{\\min}=\\min\\{c_1,c_2,c_3\\}",
+      "tex": "c_{\\min}=\\min\\{c_1,c_2,c_3\\}",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "F(s)\\le-J/p+s/(pc_{\\min})",
+      "tex": "F(s)\\le-J/p+s/(pc_{\\min})",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "\\gamma_1=c_{\\min}",
+      "tex": "\\gamma_1=c_{\\min}",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "x,y",
+      "tex": "x,y",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "u",
+      "tex": "u",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "I(\\alpha)<\\infty",
+      "tex": "I(\\alpha)<\\infty",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "p\\mathcal V(\\alpha)+J\\le\\mathcal C(\\alpha)/c_{\\min}",
+      "tex": "p\\mathcal V(\\alpha)+J\\le\\mathcal C(\\alpha)/c_{\\min}",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "s^*\\ge c_{\\min}J",
+      "tex": "s^*\\ge c_{\\min}J",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "b=(1,1,\\beta)",
+      "tex": "b=(1,1,\\beta)",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "\\zeta=-(u+H)1_{\\{u(u+H)<0\\}}",
+      "tex": "\\zeta=-(u+H)1_{\\{u(u+H)<0\\}}",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "s^*=c_{\\min}J",
+      "tex": "s^*=c_{\\min}J",
+      "labels": []
+    },
+    {
+      "display": true,
+      "sourceTex": "\\begin{aligned}\nb\\cdot d=\\zeta,\\qquad |d|_\\gamma=c_{\\min}|\\zeta|\n&\\quad\\Pi_\\alpha\\text{-almost everywhere},\\\\\n(\\xi_i)_\\#(d_i\\,d\\Pi_\\alpha)=0\n&\\quad i=1,2,3.\n\\end{aligned}\n\\tag{4.1}\\label{eq:legacy-6.3}",
+      "tex": "\\begin{aligned}\nb\\cdot d=\\zeta,\\qquad |d|_\\gamma=c_{\\min}|\\zeta|\n&\\quad\\Pi_\\alpha\\text{-almost everywhere},\\\\\n(\\xi_i)_\\#(d_i\\,d\\Pi_\\alpha)=0\n&\\quad i=1,2,3.\n\\end{aligned}\n\\tag{4.1}",
+      "labels": [
+        "eq:legacy-6.3"
+      ]
+    },
+    {
+      "display": false,
+      "sourceTex": "\\mathcal C=I=c_{\\min}J",
+      "tex": "\\mathcal C=I=c_{\\min}J",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "\\mathcal V=0",
+      "tex": "\\mathcal V=0",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "\\mathcal V\\ge0",
+      "tex": "\\mathcal V\\ge0",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "\\mathcal C\\le c_{\\min}J",
+      "tex": "\\mathcal C\\le c_{\\min}J",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "w=b\\cdot d",
+      "tex": "w=b\\cdot d",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "\\Delta_+(t,w)=(t+w)_+-t_+",
+      "tex": "\\Delta_+(t,w)=(t+w)_+-t_+",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "\\tau_A\\in\\arg\\min G_1",
+      "tex": "\\tau_A\\in\\arg\\min G_1",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "B",
+      "tex": "B",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "|w|",
+      "tex": "|w|",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "c_{\\min}|w|\\le |d|_\\gamma",
+      "tex": "c_{\\min}|w|\\le |d|_\\gamma",
+      "labels": []
+    },
+    {
+      "display": true,
+      "sourceTex": "\\begin{aligned}\n\\frac{\\mathcal C}{c_{\\min}}-(p\\mathcal V+J)\n={}&\\underbrace{\\frac{\\mathcal C-I}{c_{\\min}}}_{\\mathrm{I}}\n+\\underbrace{\\left(\\frac I {c_{\\min}}-\\int |w|\\,d\\Pi_\\alpha\\right)}_{\\mathrm{II}}\n+\\underbrace{\\frac g2\\tau_A^2}_{\\mathrm{III}}\\\\\n&+\\underbrace{\\int[|w|-\\Delta_+(u,w)+\\Delta_+(u+H-\\tau_A,w)]\\,d\\Pi_\\alpha}_{\\mathrm{IV}}\\\\\n&+\\underbrace{G_0(0)-\\min_{\\tau_B}G_0(\\tau_B)}_{\\mathrm{V}}.\n\\end{aligned}\n\\tag{4.2}\\label{eq:legacy-E.5}",
+      "tex": "\\begin{aligned}\n\\frac{\\mathcal C}{c_{\\min}}-(p\\mathcal V+J)\n={}&\\underbrace{\\frac{\\mathcal C-I}{c_{\\min}}}_{\\mathrm{I}}\n+\\underbrace{\\left(\\frac I {c_{\\min}}-\\int |w|\\,d\\Pi_\\alpha\\right)}_{\\mathrm{II}}\n+\\underbrace{\\frac g2\\tau_A^2}_{\\mathrm{III}}\\\\\n&+\\underbrace{\\int[|w|-\\Delta_+(u,w)+\\Delta_+(u+H-\\tau_A,w)]\\,d\\Pi_\\alpha}_{\\mathrm{IV}}\\\\\n&+\\underbrace{G_0(0)-\\min_{\\tau_B}G_0(\\tau_B)}_{\\mathrm{V}}.\n\\end{aligned}\n\\tag{4.2}",
+      "labels": [
+        "eq:legacy-E.5"
+      ]
+    },
+    {
+      "display": false,
+      "sourceTex": "A_\\varepsilon",
+      "tex": "A_\\varepsilon",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "B",
+      "tex": "B",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "\\Delta_+(t,w)\\in[\\min\\{0,w\\},\\max\\{0,w\\}]",
+      "tex": "\\Delta_+(t,w)\\in[\\min\\{0,w\\},\\max\\{0,w\\}]",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "|w|",
+      "tex": "|w|",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "|w|",
+      "tex": "|w|",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "\\tau_A",
+      "tex": "\\tau_A",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "A_\\varepsilon",
+      "tex": "A_\\varepsilon",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "\\mathcal V\\ge0",
+      "tex": "\\mathcal V\\ge0",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "\\mathcal C\\le c_{\\min}J",
+      "tex": "\\mathcal C\\le c_{\\min}J",
+      "labels": []
+    },
+    {
+      "display": true,
+      "sourceTex": "\\mathcal V=0,\\qquad \\mathcal C=I=c_{\\min}J,\\qquad\n\\int|w|\\,d\\Pi_\\alpha=J,\\qquad j_i=0\\quad(i=1,2,3).\n\\tag{4.3}\\label{eq:legacy-E.7}",
+      "tex": "\\mathcal V=0,\\qquad \\mathcal C=I=c_{\\min}J,\\qquad\n\\int|w|\\,d\\Pi_\\alpha=J,\\qquad j_i=0\\quad(i=1,2,3).\n\\tag{4.3}",
+      "labels": [
+        "eq:legacy-E.7"
+      ]
+    },
+    {
+      "display": false,
+      "sourceTex": "\\arg\\min G_1=\\{0\\}",
+      "tex": "\\arg\\min G_1=\\{0\\}",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "0\\in\\arg\\min G_0",
+      "tex": "0\\in\\arg\\min G_0",
+      "labels": []
+    },
+    {
+      "display": true,
+      "sourceTex": "|d|_\\gamma-c_{\\min}|b\\cdot d|\n=\\sum_i(\\gamma_i-c_{\\min}b_i)|d_i|\n+c_{\\min}\\left(\\sum_i b_i|d_i|-\\left|\\sum_i b_id_i\\right|\\right)\n\\tag{4.4}\\label{eq:legacy-E.8}",
+      "tex": "|d|_\\gamma-c_{\\min}|b\\cdot d|\n=\\sum_i(\\gamma_i-c_{\\min}b_i)|d_i|\n+c_{\\min}\\left(\\sum_i b_i|d_i|-\\left|\\sum_i b_id_i\\right|\\right)\n\\tag{4.4}",
+      "labels": [
+        "eq:legacy-E.8"
+      ]
+    },
+    {
+      "display": false,
+      "sourceTex": "w",
+      "tex": "w",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "\\tau_A=0",
+      "tex": "\\tau_A=0",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "u\\ge0",
+      "tex": "u\\ge0",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "u+H\\le-w",
+      "tex": "u+H\\le-w",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "w>0",
+      "tex": "w>0",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "u\\le0",
+      "tex": "u\\le0",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "u+H\\ge-w",
+      "tex": "u+H\\ge-w",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "w<0",
+      "tex": "w<0",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "|w|\\le K:=|u+H|1_{\\{u(u+H)<0\\}}",
+      "tex": "|w|\\le K:=|u+H|1_{\\{u(u+H)<0\\}}",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "\\zeta",
+      "tex": "\\zeta",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "w\\ne0",
+      "tex": "w\\ne0",
+      "labels": []
+    },
+    {
+      "display": true,
+      "sourceTex": "\\int_{\\mathbb R}K\\,du=H^2/2,\\qquad\n\\int_{\\mathbb R}\\zeta\\,du=-H|H|/2,\n\\tag{4.5}\\label{eq:legacy-E.12}",
+      "tex": "\\int_{\\mathbb R}K\\,du=H^2/2,\\qquad\n\\int_{\\mathbb R}\\zeta\\,du=-H|H|/2,\n\\tag{4.5}",
+      "labels": [
+        "eq:legacy-E.12"
+      ]
+    },
+    {
+      "display": false,
+      "sourceTex": "\\int K\\,d\\Pi_\\alpha=J=\\int|w|\\,d\\Pi_\\alpha",
+      "tex": "\\int K\\,d\\Pi_\\alpha=J=\\int|w|\\,d\\Pi_\\alpha",
+      "labels": []
+    },
+    {
+      "display": true,
+      "sourceTex": "b\\cdot d=\\zeta\\quad\\Pi_\\alpha\\text{-almost everywhere},\n\\tag{4.6}\\label{eq:legacy-6.4}",
+      "tex": "b\\cdot d=\\zeta\\quad\\Pi_\\alpha\\text{-almost everywhere},\n\\tag{4.6}",
+      "labels": [
+        "eq:legacy-6.4"
+      ]
+    },
+    {
+      "display": false,
+      "sourceTex": "w=\\zeta",
+      "tex": "w=\\zeta",
+      "labels": []
+    },
+    {
+      "display": true,
+      "sourceTex": "T_0(0)=J/2,\\qquad T_1(0)=-J/2,\\qquad\n\\int_{H>0}H^2\\,d\\sigma=\\int_{H<0}H^2\\,d\\sigma=J.\n\\tag{4.7}\\label{eq:legacy-D.2}",
+      "tex": "T_0(0)=J/2,\\qquad T_1(0)=-J/2,\\qquad\n\\int_{H>0}H^2\\,d\\sigma=\\int_{H<0}H^2\\,d\\sigma=J.\n\\tag{4.7}",
+      "labels": [
+        "eq:legacy-D.2"
+      ]
+    },
+    {
+      "display": false,
+      "sourceTex": "B",
+      "tex": "B",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "G_0'(0)=0",
+      "tex": "G_0'(0)=0",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "m_\\pm=\\int(\\pm H)_+\\,d\\sigma>0",
+      "tex": "m_\\pm=\\int(\\pm H)_+\\,d\\sigma>0",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "A_\\varepsilon",
+      "tex": "A_\\varepsilon",
+      "labels": []
+    },
+    {
+      "display": true,
+      "sourceTex": "G_{1,-}'(0)=-m_-<0,\\qquad G_{1,+}'(0)=m_+>0.\n\\tag{4.8}\\label{eq:legacy-D.3}",
+      "tex": "G_{1,-}'(0)=-m_-<0,\\qquad G_{1,+}'(0)=m_+>0.\n\\tag{4.8}",
+      "labels": [
+        "eq:legacy-D.3"
+      ]
+    },
+    {
+      "display": false,
+      "sourceTex": "G_1",
+      "tex": "G_1",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "G_0",
+      "tex": "G_0",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "\\{H>0,u>0\\}",
+      "tex": "\\{H>0,u>0\\}",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "\\{H<0,u<0\\}",
+      "tex": "\\{H<0,u<0\\}",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "g/2",
+      "tex": "g/2",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "\\lambda_0\\ge(g/2)\\,dt",
+      "tex": "\\lambda_0\\ge(g/2)\\,dt",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "\\mathbb R",
+      "tex": "\\mathbb R",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "G_0(\\tau)-G_0(0)\\ge g\\tau^2/4",
+      "tex": "G_0(\\tau)-G_0(0)\\ge g\\tau^2/4",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "G_0",
+      "tex": "G_0",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "\\mathcal V=0",
+      "tex": "\\mathcal V=0",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "I=c_{\\min}J",
+      "tex": "I=c_{\\min}J",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "\\mathcal C=c_{\\min}J",
+      "tex": "\\mathcal C=c_{\\min}J",
+      "labels": []
+    },
+    {
+      "display": true,
+      "sourceTex": "s^*=Jc_{\\min}\\quad\\Longleftrightarrow\\quad\nc_3\\le\\min\\{\\gamma_1,\\gamma_2\\}.\n\\tag{4.9}\\label{eq:legacy-6.1}",
+      "tex": "s^*=Jc_{\\min}\\quad\\Longleftrightarrow\\quad\nc_3\\le\\min\\{\\gamma_1,\\gamma_2\\}.\n\\tag{4.9}",
+      "labels": [
+        "eq:legacy-6.1"
+      ]
+    },
+    {
+      "display": false,
+      "sourceTex": "c_3=c_{\\min}",
+      "tex": "c_3=c_{\\min}",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "F(s)=-J/p+s/(pc_3)",
+      "tex": "F(s)=-J/p+s/(pc_3)",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "0\\le s\\le c_3J",
+      "tex": "0\\le s\\le c_3J",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "\\gamma_2\\ge\\gamma_1",
+      "tex": "\\gamma_2\\ge\\gamma_1",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "c_3>\\gamma_1",
+      "tex": "c_3>\\gamma_1",
+      "labels": []
+    },
+    {
+      "display": true,
+      "sourceTex": "1<\\frac{s^*}{\\gamma_1J}\\le\\min\\{1+\\chi,c_3/\\gamma_1\\}<2,\n\\tag{4.10}\\label{eq:legacy-6.2}",
+      "tex": "1<\\frac{s^*}{\\gamma_1J}\\le\\min\\{1+\\chi,c_3/\\gamma_1\\}<2,\n\\tag{4.10}",
+      "labels": [
+        "eq:legacy-6.2"
+      ]
+    },
+    {
+      "display": false,
+      "sourceTex": "\\chi=\\|\\ell_--\\ell_+\\|_{L^1(I)}/J\\in(0,1)",
+      "tex": "\\chi=\\|\\ell_--\\ell_+\\|_{L^1(I)}/J\\in(0,1)",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "\\zeta",
+      "tex": "\\zeta",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "x",
+      "tex": "x",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "y",
+      "tex": "y",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "\\delta^2",
+      "tex": "\\delta^2",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "O(\\delta^4)",
+      "tex": "O(\\delta^4)",
+      "labels": []
+    },
+    {
+      "display": true,
+      "sourceTex": "\\alpha^{(1)}=\\delta_{\\zeta e_1},\\qquad\n\\alpha^{(2)}=\\delta_{\\zeta e_2},\\qquad\n\\alpha^{(3)}=\\delta_{(\\zeta/\\beta)e_3}\n\\tag{4.11}\\label{eq:legacy-D.1}",
+      "tex": "\\alpha^{(1)}=\\delta_{\\zeta e_1},\\qquad\n\\alpha^{(2)}=\\delta_{\\zeta e_2},\\qquad\n\\alpha^{(3)}=\\delta_{(\\zeta/\\beta)e_3}\n\\tag{4.11}",
+      "labels": [
+        "eq:legacy-D.1"
+      ]
+    },
+    {
+      "display": false,
+      "sourceTex": "j_1=\\ell_+-\\ell_-",
+      "tex": "j_1=\\ell_+-\\ell_-",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "j_2=\\ell_--\\ell_+",
+      "tex": "j_2=\\ell_--\\ell_+",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "(x,y,u)\\mapsto(y,x,-u)",
+      "tex": "(x,y,u)\\mapsto(y,x,-u)",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "\\nu,\\xi_3",
+      "tex": "\\nu,\\xi_3",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "\\zeta",
+      "tex": "\\zeta",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "\\varphi",
+      "tex": "\\varphi",
+      "labels": []
+    },
+    {
+      "display": true,
+      "sourceTex": "\\int\\varphi(\\xi_3)d_3^{(3)}d\\nu\n=-\\int\\varphi(\\xi_3)d_3^{(3)}d\\nu=0.\n\\tag{4.12}\\label{eq:legacy-D.6}",
+      "tex": "\\int\\varphi(\\xi_3)d_3^{(3)}d\\nu\n=-\\int\\varphi(\\xi_3)d_3^{(3)}d\\nu=0.\n\\tag{4.12}",
+      "labels": [
+        "eq:legacy-D.6"
+      ]
+    },
+    {
+      "display": false,
+      "sourceTex": "\\alpha^{(3)}",
+      "tex": "\\alpha^{(3)}",
+      "labels": []
+    },
+    {
+      "display": true,
+      "sourceTex": "\\mathcal C(\\alpha^{(1)})=\\gamma_1J(1+\\chi),\\quad\n\\mathcal C(\\alpha^{(2)})=\\gamma_2J(1+\\chi),\\quad\n\\mathcal C(\\alpha^{(3)})=c_3J.\n\\tag{4.13}\\label{eq:legacy-D.7}",
+      "tex": "\\mathcal C(\\alpha^{(1)})=\\gamma_1J(1+\\chi),\\quad\n\\mathcal C(\\alpha^{(2)})=\\gamma_2J(1+\\chi),\\quad\n\\mathcal C(\\alpha^{(3)})=c_3J.\n\\tag{4.13}",
+      "labels": [
+        "eq:legacy-D.7"
+      ]
+    },
+    {
+      "display": false,
+      "sourceTex": "s^*\\le J\\min\\{\\gamma_1(1+\\chi),\\gamma_2(1+\\chi),c_3\\}",
+      "tex": "s^*\\le J\\min\\{\\gamma_1(1+\\chi),\\gamma_2(1+\\chi),c_3\\}",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "\\gamma_2\\ge\\gamma_1",
+      "tex": "\\gamma_2\\ge\\gamma_1",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "c_3>\\gamma_1",
+      "tex": "c_3>\\gamma_1",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "c_3=c_{\\min}",
+      "tex": "c_3=c_{\\min}",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "\\alpha^{(3)}",
+      "tex": "\\alpha^{(3)}",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "\\theta=s/(c_3J)\\in[0,1]",
+      "tex": "\\theta=s/(c_3J)\\in[0,1]",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "G_c^{\\delta_0}(\\tau)=g\\tau^2/2",
+      "tex": "G_c^{\\delta_0}(\\tau)=g\\tau^2/2",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "\\theta c_3J=s",
+      "tex": "\\theta c_3J=s",
+      "labels": []
+    },
+    {
+      "display": true,
+      "sourceTex": "\\mathcal V=-(1-\\theta)J/p.\n\\tag{4.14}\\label{eq:legacy-D.9}",
+      "tex": "\\mathcal V=-(1-\\theta)J/p.\n\\tag{4.14}",
+      "labels": [
+        "eq:legacy-D.9"
+      ]
+    },
+    {
+      "display": false,
+      "sourceTex": "c_3>c_{\\min}",
+      "tex": "c_3>c_{\\min}",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "\\mathcal V\\ge0",
+      "tex": "\\mathcal V\\ge0",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "c_{\\min}J",
+      "tex": "c_{\\min}J",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "d_3=0",
+      "tex": "d_3=0",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "d_1+d_2=\\zeta",
+      "tex": "d_1+d_2=\\zeta",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "\\zeta",
+      "tex": "\\zeta",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "m_i(x,y)=\\int_{\\mathbb R}\\int d_i\\,\\alpha_{\\xi,u}(dd)\\,du",
+      "tex": "m_i(x,y)=\\int_{\\mathbb R}\\int d_i\\,\\alpha_{\\xi,u}(dd)\\,du",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "i=1,2",
+      "tex": "i=1,2",
+      "labels": []
+    },
+    {
+      "display": true,
+      "sourceTex": "\\begin{aligned}\n&m_1+m_2=-H|H|/2,\\qquad |m_i|\\le H^2/2,\\\\\n&m_i\\ge0\\quad\\text{for}\\ x<y,\\qquad\nm_i\\le0\\quad\\text{for}\\ x>y.\n\\end{aligned}\n\\tag{4.15}\\label{eq:legacy-E.15}",
+      "tex": "\\begin{aligned}\n&m_1+m_2=-H|H|/2,\\qquad |m_i|\\le H^2/2,\\\\\n&m_i\\ge0\\quad\\text{for}\\ x<y,\\qquad\nm_i\\le0\\quad\\text{for}\\ x>y.\n\\end{aligned}\n\\tag{4.15}",
+      "labels": [
+        "eq:legacy-E.15"
+      ]
+    },
+    {
+      "display": false,
+      "sourceTex": "A,B\\subset I",
+      "tex": "A,B\\subset I",
+      "labels": []
+    },
+    {
+      "display": true,
+      "sourceTex": "\\int_{\\Omega\\cap\\{x\\in A\\}}m_1d\\sigma=0,\\qquad\n\\int_{\\Omega\\cap\\{y\\in B\\}}m_2d\\sigma=0.\n\\tag{4.16}\\label{eq:legacy-E.16}",
+      "tex": "\\int_{\\Omega\\cap\\{x\\in A\\}}m_1d\\sigma=0,\\qquad\n\\int_{\\Omega\\cap\\{y\\in B\\}}m_2d\\sigma=0.\n\\tag{4.16}",
+      "labels": [
+        "eq:legacy-E.16"
+      ]
+    },
+    {
+      "display": false,
+      "sourceTex": "\\Omega",
+      "tex": "\\Omega",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "x",
+      "tex": "x",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "y",
+      "tex": "y",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "(y-x)^2/2",
+      "tex": "(y-x)^2/2",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "\\{x>y\\}",
+      "tex": "\\{x>y\\}",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "x",
+      "tex": "x",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "y",
+      "tex": "y",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "\\Omega=(\\ell,r)^2\\cap\\{q_-<x+y<q_+\\}",
+      "tex": "\\Omega=(\\ell,r)^2\\cap\\{q_-<x+y<q_+\\}",
+      "labels": []
+    },
+    {
+      "display": true,
+      "sourceTex": "\\begin{gathered}\nq_-=v-\\beta r_3,\\qquad q_+=v-\\beta\\ell_3,\\\\\n\\xi_-=\\max\\{\\ell,q_--r\\},\\qquad\n\\xi_+=\\min\\{r,q_+-\\ell\\},\\qquad \\Delta=\\xi_+-\\xi_->0.\n\\end{gathered}",
+      "tex": "\\begin{gathered}\nq_-=v-\\beta r_3,\\qquad q_+=v-\\beta\\ell_3,\\\\\n\\xi_-=\\max\\{\\ell,q_--r\\},\\qquad\n\\xi_+=\\min\\{r,q_+-\\ell\\},\\qquad \\Delta=\\xi_+-\\xi_->0.\n\\end{gathered}",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "\\Omega",
+      "tex": "\\Omega",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "(\\xi_-,\\xi_+)",
+      "tex": "(\\xi_-,\\xi_+)",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "\\xi_-<x_*<\\xi_+",
+      "tex": "\\xi_-<x_*<\\xi_+",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "\\Delta>0",
+      "tex": "\\Delta>0",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "q_*:=\\xi_-+\\xi_+\\in[q_-,q_+]",
+      "tex": "q_*:=\\xi_-+\\xi_+\\in[q_-,q_+]",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "(\\xi_-,\\xi_+)",
+      "tex": "(\\xi_-,\\xi_+)",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "(x,y)=(\\xi_-+t,\\xi_+-z)",
+      "tex": "(x,y)=(\\xi_-+t,\\xi_+-z)",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "0<t,z<\\delta",
+      "tex": "0<t,z<\\delta",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "-(q_*-q_-)<t-z<q_+-q_*",
+      "tex": "-(q_*-q_-)<t-z<q_+-q_*",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "\\beta\\Delta_3",
+      "tex": "\\beta\\Delta_3",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "\\beta\\Delta_3/2",
+      "tex": "\\beta\\Delta_3/2",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "\\delta<\\beta\\Delta_3/2",
+      "tex": "\\delta<\\beta\\Delta_3/2",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "z<t",
+      "tex": "z<t",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "t<z",
+      "tex": "t<z",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "\\delta<\\Delta/4",
+      "tex": "\\delta<\\Delta/4",
+      "labels": []
+    },
+    {
+      "display": true,
+      "sourceTex": "E_\\delta=\\Omega\\cap((\\xi_-,\\xi_-+\\delta)\\times(\\xi_+-\\delta,\\xi_+)),\n\\qquad |E_\\delta|\\ge\\delta^2/2,\n\\qquad y-x\\ge\\Delta/2\\quad\\hbox{on }E_\\delta.",
+      "tex": "E_\\delta=\\Omega\\cap((\\xi_-,\\xi_-+\\delta)\\times(\\xi_+-\\delta,\\xi_+)),\n\\qquad |E_\\delta|\\ge\\delta^2/2,\n\\qquad y-x\\ge\\Delta/2\\quad\\hbox{on }E_\\delta.",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "f",
+      "tex": "f",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "S",
+      "tex": "S",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "y-x\\ge\\Delta/2",
+      "tex": "y-x\\ge\\Delta/2",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "c_\\Omega>0",
+      "tex": "c_\\Omega>0",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "\\delta",
+      "tex": "\\delta",
+      "labels": []
+    },
+    {
+      "display": true,
+      "sourceTex": "M_\\delta:=\\int_{E_\\delta}(m_1+m_2)d\\sigma\n\\ge c_\\Omega\\delta^2.\n\\tag{4.17}\\label{eq:legacy-E.20}",
+      "tex": "M_\\delta:=\\int_{E_\\delta}(m_1+m_2)d\\sigma\n\\ge c_\\Omega\\delta^2.\n\\tag{4.17}",
+      "labels": [
+        "eq:legacy-E.20"
+      ]
+    },
+    {
+      "display": false,
+      "sourceTex": "A_\\delta=(\\xi_-,\\xi_-+\\delta)",
+      "tex": "A_\\delta=(\\xi_-,\\xi_-+\\delta)",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "B_\\delta=(\\xi_+-\\delta,\\xi_+)",
+      "tex": "B_\\delta=(\\xi_+-\\delta,\\xi_+)",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "M_\\delta\\le N_1+N_2",
+      "tex": "M_\\delta\\le N_1+N_2",
+      "labels": []
+    },
+    {
+      "display": true,
+      "sourceTex": "N_1=\\int_{\\Omega\\cap\\{x\\in A_\\delta,\\ x>y\\}}(-m_1)d\\sigma,\n\\qquad\nN_2=\\int_{\\Omega\\cap\\{y\\in B_\\delta,\\ x>y\\}}(-m_2)d\\sigma.",
+      "tex": "N_1=\\int_{\\Omega\\cap\\{x\\in A_\\delta,\\ x>y\\}}(-m_1)d\\sigma,\n\\qquad\nN_2=\\int_{\\Omega\\cap\\{y\\in B_\\delta,\\ x>y\\}}(-m_2)d\\sigma.",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "N_1",
+      "tex": "N_1",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "x\\in A_\\delta",
+      "tex": "x\\in A_\\delta",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "y<x",
+      "tex": "y<x",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "\\xi_-<y<x<\\xi_-+\\delta",
+      "tex": "\\xi_-<y<x<\\xi_-+\\delta",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "N_2",
+      "tex": "N_2",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "\\xi_+-\\delta<y<x<\\xi_+",
+      "tex": "\\xi_+-\\delta<y<x<\\xi_+",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "O(\\delta^2)",
+      "tex": "O(\\delta^2)",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "-m_i\\le H^2/2=(x-y)^2/2=O(\\delta^2)",
+      "tex": "-m_i\\le H^2/2=(x-y)^2/2=O(\\delta^2)",
+      "labels": []
+    },
+    {
+      "display": true,
+      "sourceTex": "N_1+N_2\\le C_\\Omega\\int_0^\\delta\\int_0^x(x-y)^2\\,dy\\,dx\n=\\frac{C_\\Omega}{12}\\delta^4.\n\\tag{4.18}\\label{eq:legacy-E.22}",
+      "tex": "N_1+N_2\\le C_\\Omega\\int_0^\\delta\\int_0^x(x-y)^2\\,dy\\,dx\n=\\frac{C_\\Omega}{12}\\delta^4.\n\\tag{4.18}",
+      "labels": [
+        "eq:legacy-E.22"
+      ]
+    },
+    {
+      "display": false,
+      "sourceTex": "C_\\Omega<\\infty",
+      "tex": "C_\\Omega<\\infty",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "\\delta",
+      "tex": "\\delta",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "\\delta",
+      "tex": "\\delta",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "c_\\Omega\\delta^2\\le M_\\delta\\le N_1+N_2",
+      "tex": "c_\\Omega\\delta^2\\le M_\\delta\\le N_1+N_2",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "s^*>Jc_{\\min}",
+      "tex": "s^*>Jc_{\\min}",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "c_3>c_{\\min}",
+      "tex": "c_3>c_{\\min}",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "I=I_3=[0,2]",
+      "tex": "I=I_3=[0,2]",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "\\beta=7/4",
+      "tex": "\\beta=7/4",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "v=15/4",
+      "tex": "v=15/4",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "\\delta=0.35",
+      "tex": "\\delta=0.35",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "E_\\delta",
+      "tex": "E_\\delta",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "\\delta^2",
+      "tex": "\\delta^2",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "\\Omega",
+      "tex": "\\Omega",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "O(\\delta^2)",
+      "tex": "O(\\delta^2)",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "O(\\delta^4)",
+      "tex": "O(\\delta^4)",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "\\lambda=\\min f",
+      "tex": "\\lambda=\\min f",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "\\Lambda=\\max f",
+      "tex": "\\Lambda=\\max f",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "\\Delta=\\xi_+-\\xi_-",
+      "tex": "\\Delta=\\xi_+-\\xi_-",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "M_\\delta\\le N_1+N_2",
+      "tex": "M_\\delta\\le N_1+N_2",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "\\delta",
+      "tex": "\\delta",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "J",
+      "tex": "J",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "b\\cdot d=\\zeta",
+      "tex": "b\\cdot d=\\zeta",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "D=\\Omega\\cap\\{x<y\\}",
+      "tex": "D=\\Omega\\cap\\{x<y\\}",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "d\\mu=w\\,d\\sigma=w_\\sigma(x,y)\\,dx\\,dy",
+      "tex": "d\\mu=w\\,d\\sigma=w_\\sigma(x,y)\\,dx\\,dy",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "w=(y-x)^2/2",
+      "tex": "w=(y-x)^2/2",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "J/2",
+      "tex": "J/2",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "p,\\beta,\\gamma",
+      "tex": "p,\\beta,\\gamma",
+      "labels": []
+    },
+    {
+      "display": true,
+      "sourceTex": "\\boldsymbol\\gamma(\\eta)=(\\gamma,\\gamma,\\beta\\gamma(1+\\eta)),\\quad\n\\pi(\\eta)=s^*(\\boldsymbol\\gamma(\\eta))/(\\gamma J)-1,\\quad \\eta\\ge0.",
+      "tex": "\\boldsymbol\\gamma(\\eta)=(\\gamma,\\gamma,\\beta\\gamma(1+\\eta)),\\quad\n\\pi(\\eta)=s^*(\\boldsymbol\\gamma(\\eta))/(\\gamma J)-1,\\quad \\eta\\ge0.",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "\\mathcal C_0",
+      "tex": "\\mathcal C_0",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "\\eta=0",
+      "tex": "\\eta=0",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "\\mathcal Z_0=\\{\\alpha:I(\\alpha)<\\infty,\\ \\mathcal V(\\alpha)=0,\\ \\mathcal C_0(\\alpha)=\\gamma J\\}",
+      "tex": "\\mathcal Z_0=\\{\\alpha:I(\\alpha)<\\infty,\\ \\mathcal V(\\alpha)=0,\\ \\mathcal C_0(\\alpha)=\\gamma J\\}",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "\\Pi_\\alpha",
+      "tex": "\\Pi_\\alpha",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "\\mathcal Z_0",
+      "tex": "\\mathcal Z_0",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "\\mathscr X",
+      "tex": "\\mathscr X",
+      "labels": []
+    },
+    {
+      "display": true,
+      "sourceTex": "\\pi(\\eta)=a_+\\eta+o(\\eta),\\qquad\na_+=\\frac\\beta J\\min_{\\alpha\\in\\mathcal Z_0}\n\\int|d_3|\\,d\\Pi_\\alpha\\in[0,1].\n\\tag{4.19}\\label{eq:legacy-6.5}",
+      "tex": "\\pi(\\eta)=a_+\\eta+o(\\eta),\\qquad\na_+=\\frac\\beta J\\min_{\\alpha\\in\\mathcal Z_0}\n\\int|d_3|\\,d\\Pi_\\alpha\\in[0,1].\n\\tag{4.19}",
+      "labels": [
+        "eq:legacy-6.5"
+      ]
+    },
+    {
+      "display": false,
+      "sourceTex": "D=\\Omega\\cap\\{x<y\\}",
+      "tex": "D=\\Omega\\cap\\{x<y\\}",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "d\\mu=\\frac12(y-x)^2\\,d\\sigma",
+      "tex": "d\\mu=\\frac12(y-x)^2\\,d\\sigma",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "a,b",
+      "tex": "a,b",
+      "labels": []
+    },
+    {
+      "display": true,
+      "sourceTex": "\\mathfrak F_\\mu=\\max\\left\\{\\int_D(a+b)d\\mu:\na,b\\ge0,\\ a+b\\le1,\\ (x)_\\#(a\\mu)=(y)_\\#(b\\mu)\\right\\}.",
+      "tex": "\\mathfrak F_\\mu=\\max\\left\\{\\int_D(a+b)d\\mu:\na,b\\ge0,\\ a+b\\le1,\\ (x)_\\#(a\\mu)=(y)_\\#(b\\mu)\\right\\}.",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "0<\\mathfrak F_\\mu<J/2",
+      "tex": "0<\\mathfrak F_\\mu<J/2",
+      "labels": []
+    },
+    {
+      "display": true,
+      "sourceTex": "a_+=1-\\frac{2\\mathfrak F_\\mu}{J}\\in(0,1),\\qquad\n\\mathfrak F_\\mu=\\inf_{\\substack{\\varphi\\text{ measurable}\\\\|\\varphi|\\le1}}\n\\int_D\\max\\{0,1-\\varphi(x),1+\\varphi(y)\\}\\,d\\mu.\\tag{4.20}\\label{eq:legacy-6.8}",
+      "tex": "a_+=1-\\frac{2\\mathfrak F_\\mu}{J}\\in(0,1),\\qquad\n\\mathfrak F_\\mu=\\inf_{\\substack{\\varphi\\text{ measurable}\\\\|\\varphi|\\le1}}\n\\int_D\\max\\{0,1-\\varphi(x),1+\\varphi(y)\\}\\,d\\mu.\\tag{4.20}",
+      "labels": [
+        "eq:legacy-6.8"
+      ]
+    },
+    {
+      "display": false,
+      "sourceTex": "a_+",
+      "tex": "a_+",
+      "labels": []
+    },
+    {
+      "display": true,
+      "sourceTex": "a_+=\\frac2J\\sup_{U\\cap V=\\varnothing}\n\\left[\\mu(D\\cap(U\\times V))-\n\\mu\\bigl(D\\cap((V\\times I)\\cup(I\\times U))\\bigr)\\right].\\tag{4.21}\\label{eq:legacy-6.9}",
+      "tex": "a_+=\\frac2J\\sup_{U\\cap V=\\varnothing}\n\\left[\\mu(D\\cap(U\\times V))-\n\\mu\\bigl(D\\cap((V\\times I)\\cup(I\\times U))\\bigr)\\right].\\tag{4.21}",
+      "labels": [
+        "eq:legacy-6.9"
+      ]
+    },
+    {
+      "display": false,
+      "sourceTex": "U,V\\subset I",
+      "tex": "U,V\\subset I",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "2\\mathfrak F_\\mu",
+      "tex": "2\\mathfrak F_\\mu",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "a_+",
+      "tex": "a_+",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "D\\cap(U\\times V)",
+      "tex": "D\\cap(U\\times V)",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "D\\cap((V\\times I)\\cup(I\\times U))",
+      "tex": "D\\cap((V\\times I)\\cup(I\\times U))",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "2/J",
+      "tex": "2/J",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "\\alpha\\in\\mathcal Z_0",
+      "tex": "\\alpha\\in\\mathcal Z_0",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "(x)_\\#(a\\mu)=(y)_\\#(b\\mu)",
+      "tex": "(x)_\\#(a\\mu)=(y)_\\#(b\\mu)",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "\\beta\\int|d_3|\\,d\\Pi_\\alpha=J-2\\int_D(a+b)\\,d\\mu",
+      "tex": "\\beta\\int|d_3|\\,d\\Pi_\\alpha=J-2\\int_D(a+b)\\,d\\mu",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "\\mathcal Z_0",
+      "tex": "\\mathcal Z_0",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "J-2\\mathfrak F_\\mu",
+      "tex": "J-2\\mathfrak F_\\mu",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "J",
+      "tex": "J",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "a_+",
+      "tex": "a_+",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "\\mathcal V",
+      "tex": "\\mathcal V",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "A_i(\\alpha)=\\int|d_i|\\,d\\Pi_\\alpha+\\|j_i\\|_1",
+      "tex": "A_i(\\alpha)=\\int|d_i|\\,d\\Pi_\\alpha+\\|j_i\\|_1",
+      "labels": []
+    },
+    {
+      "display": true,
+      "sourceTex": "s^*(\\gamma)=\\inf_{\\mathcal V(\\alpha)\\ge0}\\sum_i\\gamma_i A_i(\\alpha).\n\\tag{4.22}\\label{eq:legacy-D.11}",
+      "tex": "s^*(\\gamma)=\\inf_{\\mathcal V(\\alpha)\\ge0}\\sum_i\\gamma_i A_i(\\alpha).\n\\tag{4.22}",
+      "labels": [
+        "eq:legacy-D.11"
+      ]
+    },
+    {
+      "display": false,
+      "sourceTex": "\\gamma",
+      "tex": "\\gamma",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "r_-\\gamma\\le\\widetilde\\gamma\\le r_+\\gamma",
+      "tex": "r_-\\gamma\\le\\widetilde\\gamma\\le r_+\\gamma",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "0<r_-\\le r_+",
+      "tex": "0<r_-\\le r_+",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "r_-s^*(\\gamma)\\le s^*(\\widetilde\\gamma)\\le r_+s^*(\\gamma)",
+      "tex": "r_-s^*(\\gamma)\\le s^*(\\widetilde\\gamma)\\le r_+s^*(\\gamma)",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "\\gamma=(1,1,\\beta)",
+      "tex": "\\gamma=(1,1,\\beta)",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "\\beta=1",
+      "tex": "\\beta=1",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "\\gamma=(1,1,2)",
+      "tex": "\\gamma=(1,1,2)",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "r_+<2r_-",
+      "tex": "r_+<2r_-",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "\\widetilde\\gamma_3>\\max\\{\\widetilde\\gamma_1,\\widetilde\\gamma_2\\}",
+      "tex": "\\widetilde\\gamma_3>\\max\\{\\widetilde\\gamma_1,\\widetilde\\gamma_2\\}",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "\\phi_i",
+      "tex": "\\phi_i",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "\\gamma_i\\pm\\phi_i(\\xi_i)",
+      "tex": "\\gamma_i\\pm\\phi_i(\\xi_i)",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "b=(1,1,\\beta)",
+      "tex": "b=(1,1,\\beta)",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "|\\phi_i|\\le\\gamma_i",
+      "tex": "|\\phi_i|\\le\\gamma_i",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "k_\\pm(\\xi)=\\min_{1\\le i\\le3}(\\gamma_i\\pm\\phi_i(\\xi_i))/b_i",
+      "tex": "k_\\pm(\\xi)=\\min_{1\\le i\\le3}(\\gamma_i\\pm\\phi_i(\\xi_i))/b_i",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "\\tau\\in\\arg\\min G_1",
+      "tex": "\\tau\\in\\arg\\min G_1",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "\\lambda>0",
+      "tex": "\\lambda>0",
+      "labels": []
+    },
+    {
+      "display": true,
+      "sourceTex": "\\mathcal C(\\alpha)\\ge\n\\lambda\\left(J+p\\mathcal V+\\frac g2\\tau^2\\right)\n-\\frac{\\lambda}{2}\\int_\\Omega(H-\\tau)^2\n\\left(\\frac{\\lambda}{k(\\xi,H-\\tau)}-1\\right)_+\\,d\\sigma,\n\\tag{5.1}\\label{eq:legacy-J.6}",
+      "tex": "\\mathcal C(\\alpha)\\ge\n\\lambda\\left(J+p\\mathcal V+\\frac g2\\tau^2\\right)\n-\\frac{\\lambda}{2}\\int_\\Omega(H-\\tau)^2\n\\left(\\frac{\\lambda}{k(\\xi,H-\\tau)}-1\\right)_+\\,d\\sigma,\n\\tag{5.1}",
+      "labels": [
+        "eq:legacy-J.6"
+      ]
+    },
+    {
+      "display": false,
+      "sourceTex": "k(\\xi,h)=k_+(\\xi)",
+      "tex": "k(\\xi,h)=k_+(\\xi)",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "h<0",
+      "tex": "h<0",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "k_-(\\xi)",
+      "tex": "k_-(\\xi)",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "h>0",
+      "tex": "h>0",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "h=0",
+      "tex": "h=0",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "k_+w_++k_-(-w)_+",
+      "tex": "k_+w_++k_-(-w)_+",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "w=b\\cdot d",
+      "tex": "w=b\\cdot d",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "[0,2]",
+      "tex": "[0,2]",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "\\beta=1",
+      "tex": "\\beta=1",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "p=1/2",
+      "tex": "p=1/2",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "\\gamma=(\\gamma_0,\\gamma_0,2\\gamma_0)",
+      "tex": "\\gamma=(\\gamma_0,\\gamma_0,2\\gamma_0)",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "v=3",
+      "tex": "v=3",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "d\\sigma=dx\\,dy/8",
+      "tex": "d\\sigma=dx\\,dy/8",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "g=3/8",
+      "tex": "g=3/8",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "J=5/32",
+      "tex": "J=5/32",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "\\varphi(q)=1_{[0,1)}(q)-1_{(1,2]}(q)",
+      "tex": "\\varphi(q)=1_{[0,1)}(q)-1_{(1,2]}(q)",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "\\gamma_0/2",
+      "tex": "\\gamma_0/2",
+      "labels": []
+    },
+    {
+      "display": true,
+      "sourceTex": "\\phi_1(x)=\\frac{\\gamma_0}{2}\\operatorname{sgn}(1-x),\\qquad\n\\phi_2(y)=\\frac{\\gamma_0}{2}\\operatorname{sgn}(y-1),\\qquad \\phi_3=0.",
+      "tex": "\\phi_1(x)=\\frac{\\gamma_0}{2}\\operatorname{sgn}(1-x),\\qquad\n\\phi_2(y)=\\frac{\\gamma_0}{2}\\operatorname{sgn}(y-1),\\qquad \\phi_3=0.",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "w=b\\cdot d>0",
+      "tex": "w=b\\cdot d>0",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "x<y",
+      "tex": "x<y",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "w<0",
+      "tex": "w<0",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "x>y",
+      "tex": "x>y",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "\\gamma_0/2",
+      "tex": "\\gamma_0/2",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "k(\\xi,H)=3\\gamma_0/2",
+      "tex": "k(\\xi,H)=3\\gamma_0/2",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "\\gamma_0/2",
+      "tex": "\\gamma_0/2",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "\\lambda=3\\gamma_0/2",
+      "tex": "\\lambda=3\\gamma_0/2",
+      "labels": []
+    },
+    {
+      "display": true,
+      "sourceTex": "\\frac{13}{64}\\le\\frac{s^*}{\\gamma_0}\\le\\frac{29}{96},\n\\qquad \\frac{s^*}{\\gamma_0J}\\ge\\frac{13}{10}.\n\\tag{5.2}\\label{eq:legacy-7.1}",
+      "tex": "\\frac{13}{64}\\le\\frac{s^*}{\\gamma_0}\\le\\frac{29}{96},\n\\qquad \\frac{s^*}{\\gamma_0J}\\ge\\frac{13}{10}.\n\\tag{5.2}",
+      "labels": [
+        "eq:legacy-7.1"
+      ]
+    },
+    {
+      "display": false,
+      "sourceTex": "0\\le s\\le\\gamma_0/96",
+      "tex": "0\\le s\\le\\gamma_0/96",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "1/2\\le x\\le1",
+      "tex": "1/2\\le x\\le1",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "1-x<y<x",
+      "tex": "1-x<y<x",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "(x-y)^2/16",
+      "tex": "(x-y)^2/16",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "\\ell_-(x)=(2x-1)^3/48",
+      "tex": "\\ell_-(x)=(2x-1)^3/48",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "0\\le x\\le1/2",
+      "tex": "0\\le x\\le1/2",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "\\ell_-(x)=0",
+      "tex": "\\ell_-(x)=0",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "\\ell_+(x)=\\ell_-(2-x)",
+      "tex": "\\ell_+(x)=\\ell_-(2-x)",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "I",
+      "tex": "I",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "\\ell_-",
+      "tex": "\\ell_-",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "Q_{\\rm bal}=2\\int_{1/2}^1\\ell_-(x)\\,dx=1/192",
+      "tex": "Q_{\\rm bal}=2\\int_{1/2}^1\\ell_-(x)\\,dx=1/192",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "\\int_I(\\ell_-+\\ell_+)\\,dx=J",
+      "tex": "\\int_I(\\ell_-+\\ell_+)\\,dx=J",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "\\|\\ell_--\\ell_+\\|_1=J-2Q_{\\rm bal}=7/48",
+      "tex": "\\|\\ell_--\\ell_+\\|_1=J-2Q_{\\rm bal}=7/48",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "s_{\\rm lin}=\\gamma_0/96",
+      "tex": "s_{\\rm lin}=\\gamma_0/96",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "\\delta_{\\zeta e_1}",
+      "tex": "\\delta_{\\zeta e_1}",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "\\gamma_0(J+\\|\\ell_--\\ell_+\\|_1)=29\\gamma_0/96",
+      "tex": "\\gamma_0(J+\\|\\ell_--\\ell_+\\|_1)=29\\gamma_0/96",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "\\lambda=3\\gamma_0/2",
+      "tex": "\\lambda=3\\gamma_0/2",
+      "labels": []
+    },
+    {
+      "display": true,
+      "sourceTex": "\\frac{\\mathcal C}{\\gamma_0}\\ge\n\\begin{cases}\n\\displaystyle \\frac34\\mathcal V+\\frac{13}{64}\n+\\frac{\\tau^2(6-\\tau^2)}{64},& |\\tau|\\le1,\\\\[2pt]\n\\displaystyle \\frac12\\mathcal V+\\frac{11}{32},& |\\tau|\\ge1.\n\\end{cases}",
+      "tex": "\\frac{\\mathcal C}{\\gamma_0}\\ge\n\\begin{cases}\n\\displaystyle \\frac34\\mathcal V+\\frac{13}{64}\n+\\frac{\\tau^2(6-\\tau^2)}{64},& |\\tau|\\le1,\\\\[2pt]\n\\displaystyle \\frac12\\mathcal V+\\frac{11}{32},& |\\tau|\\ge1.\n\\end{cases}",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "|\\tau|\\le1",
+      "tex": "|\\tau|\\le1",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "|\\tau|\\ge1",
+      "tex": "|\\tau|\\ge1",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "\\mathcal V\\ge0",
+      "tex": "\\mathcal V\\ge0",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "13\\gamma_0/64",
+      "tex": "13\\gamma_0/64",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "30\\%",
+      "tex": "30\\%",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "\\gamma_0J",
+      "tex": "\\gamma_0J",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "\\gamma_0=1",
+      "tex": "\\gamma_0=1",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "F(s)",
+      "tex": "F(s)",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "[0,U]",
+      "tex": "[0,U]",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "U=29/96",
+      "tex": "U=29/96",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "s_0=1/96",
+      "tex": "s_0=1/96",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "-7/24",
+      "tex": "-7/24",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "U",
+      "tex": "U",
+      "labels": []
+    },
+    {
+      "display": true,
+      "sourceTex": "\\underline F(s)=\n\\begin{cases}\n2s-5/16,&0\\le s\\le1/96,\\\\\ns-29/96,&1/96\\le s\\le29/96.\n\\end{cases}",
+      "tex": "\\underline F(s)=\n\\begin{cases}\n2s-5/16,&0\\le s\\le1/96,\\\\\ns-29/96,&1/96\\le s\\le29/96.\n\\end{cases}",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "F",
+      "tex": "F",
+      "labels": []
+    },
+    {
+      "display": true,
+      "sourceTex": "\\begin{aligned}\nF(s)&\\le\\min\\left\\{2s-\\frac5{16},\n\\max\\left\\{\\frac43s-\\frac{13}{48},2s-\\frac{11}{16}\\right\\}\\right\\}\n\\\\\n&=\\overline F(s):=\\min\\left\\{2s-\\frac5{16},\\frac43s-\\frac{13}{48}\\right\\}\n\\qquad(0\\le s\\le U).\n\\end{aligned}",
+      "tex": "\\begin{aligned}\nF(s)&\\le\\min\\left\\{2s-\\frac5{16},\n\\max\\left\\{\\frac43s-\\frac{13}{48},2s-\\frac{11}{16}\\right\\}\\right\\}\n\\\\\n&=\\overline F(s):=\\min\\left\\{2s-\\frac5{16},\\frac43s-\\frac{13}{48}\\right\\}\n\\qquad(0\\le s\\le U).\n\\end{aligned}",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "s=5/8>U",
+      "tex": "s=5/8>U",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "\\underline F\\le F\\le\\overline F",
+      "tex": "\\underline F\\le F\\le\\overline F",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "[0,U]",
+      "tex": "[0,U]",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "[0,s_{\\rm lin}]",
+      "tex": "[0,s_{\\rm lin}]",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "J=5/32",
+      "tex": "J=5/32",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "s^*",
+      "tex": "s^*",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "13/10",
+      "tex": "13/10",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "29/15",
+      "tex": "29/15",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "J",
+      "tex": "J",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "30\\%",
+      "tex": "30\\%",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "\\beta=1",
+      "tex": "\\beta=1",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "p=1/2",
+      "tex": "p=1/2",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "\\gamma=(1,1,2)",
+      "tex": "\\gamma=(1,1,2)",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "[0,1/96]",
+      "tex": "[0,1/96]",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "J=5/32",
+      "tex": "J=5/32",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "[13/64,29/96]",
+      "tex": "[13/64,29/96]",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "a_+",
+      "tex": "a_+",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "\\gamma_0Ja_+",
+      "tex": "\\gamma_0Ja_+",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "\\beta=1",
+      "tex": "\\beta=1",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "p=1/2",
+      "tex": "p=1/2",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "x+y-2",
+      "tex": "x+y-2",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "z-1",
+      "tex": "z-1",
+      "labels": []
+    },
+    {
+      "display": true,
+      "sourceTex": "f_\\vartheta(x,y,z)=\\frac{1+\\vartheta(x+y-2)(z-1)}8,\\qquad\n|\\vartheta|<\\frac12,\\qquad\nE_\\vartheta[(X_1+X_2-2)(X_3-1)]=\\frac{2\\vartheta}{9}.",
+      "tex": "f_\\vartheta(x,y,z)=\\frac{1+\\vartheta(x+y-2)(z-1)}8,\\qquad\n|\\vartheta|<\\frac12,\\qquad\nE_\\vartheta[(X_1+X_2-2)(X_3-1)]=\\frac{2\\vartheta}{9}.",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "[0,1]",
+      "tex": "[0,1]",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "\\vartheta",
+      "tex": "\\vartheta",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "v=3",
+      "tex": "v=3",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "[1-\\vartheta(x+y-2)^2]/8",
+      "tex": "[1-\\vartheta(x+y-2)^2]/8",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "\\vartheta",
+      "tex": "\\vartheta",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "x+y=2",
+      "tex": "x+y=2",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "D",
+      "tex": "D",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "d\\mu_\\vartheta=w_{\\sigma,\\vartheta}(x,y)\\,dx\\,dy",
+      "tex": "d\\mu_\\vartheta=w_{\\sigma,\\vartheta}(x,y)\\,dx\\,dy",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "w_{\\sigma,\\vartheta}(x,y)=(y-x)^2\\{1-\\vartheta(x+y-2)^2\\}/16",
+      "tex": "w_{\\sigma,\\vartheta}(x,y)=(y-x)^2\\{1-\\vartheta(x+y-2)^2\\}/16",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "D_-=D\\cap\\{y<1\\}",
+      "tex": "D_-=D\\cap\\{y<1\\}",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "D_+=D\\cap\\{x>1\\}",
+      "tex": "D_+=D\\cap\\{x>1\\}",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "M_{\\vartheta,\\pm}=\\mu_\\vartheta(D_\\pm)",
+      "tex": "M_{\\vartheta,\\pm}=\\mu_\\vartheta(D_\\pm)",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "|\\vartheta|<1/2",
+      "tex": "|\\vartheta|<1/2",
+      "labels": []
+    },
+    {
+      "display": true,
+      "sourceTex": "J_\\vartheta=\\frac{75-14\\vartheta}{480},\\qquad\nM_{\\vartheta,-}=M_{\\vartheta,+}=\\frac{3-2\\vartheta}{1152},\n\\qquad\na_{+,\\vartheta}\n=1-\\frac{4(M_{\\vartheta,-}+M_{\\vartheta,+})}{J_\\vartheta}.\n\\tag{5.3}\\label{eq:legacy-K.9}",
+      "tex": "J_\\vartheta=\\frac{75-14\\vartheta}{480},\\qquad\nM_{\\vartheta,-}=M_{\\vartheta,+}=\\frac{3-2\\vartheta}{1152},\n\\qquad\na_{+,\\vartheta}\n=1-\\frac{4(M_{\\vartheta,-}+M_{\\vartheta,+})}{J_\\vartheta}.\n\\tag{5.3}",
+      "labels": [
+        "eq:legacy-K.9"
+      ]
+    },
+    {
+      "display": true,
+      "sourceTex": "J_\\vartheta a_{+,\\vartheta}=\\frac{195-22\\vartheta}{1440},\\qquad\n\\frac{d a_{+,\\vartheta}}{d\\vartheta}\n=\\frac{360}{(75-14\\vartheta)^2}>0,\\qquad\n\\frac{d(J_\\vartheta a_{+,\\vartheta})}{d\\vartheta}\n=-\\frac{11}{720}.",
+      "tex": "J_\\vartheta a_{+,\\vartheta}=\\frac{195-22\\vartheta}{1440},\\qquad\n\\frac{d a_{+,\\vartheta}}{d\\vartheta}\n=\\frac{360}{(75-14\\vartheta)^2}>0,\\qquad\n\\frac{d(J_\\vartheta a_{+,\\vartheta})}{d\\vartheta}\n=-\\frac{11}{720}.",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "D_-",
+      "tex": "D_-",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "D_+",
+      "tex": "D_+",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "|\\vartheta|<1/2",
+      "tex": "|\\vartheta|<1/2",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "0<\\vartheta<1/2",
+      "tex": "0<\\vartheta<1/2",
+      "labels": []
+    },
+    {
+      "display": true,
+      "sourceTex": "a_{+,\\vartheta}-a_{+,0}\n=\\frac{24\\vartheta}{5(75-14\\vartheta)}>0,\\qquad\nJ_\\vartheta a_{+,\\vartheta}-J_0a_{+,0}\n=-\\frac{11\\vartheta}{720}<0.\n\\tag{5.4}\\label{eq:legacy-7.2}",
+      "tex": "a_{+,\\vartheta}-a_{+,0}\n=\\frac{24\\vartheta}{5(75-14\\vartheta)}>0,\\qquad\nJ_\\vartheta a_{+,\\vartheta}-J_0a_{+,0}\n=-\\frac{11\\vartheta}{720}<0.\n\\tag{5.4}",
+      "labels": [
+        "eq:legacy-7.2"
+      ]
+    },
+    {
+      "display": false,
+      "sourceTex": "x+y+z=3",
+      "tex": "x+y+z=3",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "z-1=-(x+y-2)",
+      "tex": "z-1=-(x+y-2)",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "\\vartheta",
+      "tex": "\\vartheta",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "x+y=2",
+      "tex": "x+y=2",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "1-\\vartheta(x+y-2)^2",
+      "tex": "1-\\vartheta(x+y-2)^2",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "4(M_{\\vartheta,-}+M_{\\vartheta,+})",
+      "tex": "4(M_{\\vartheta,-}+M_{\\vartheta,+})",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "J_\\vartheta",
+      "tex": "J_\\vartheta",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "J_\\vartheta a_{+,\\vartheta}",
+      "tex": "J_\\vartheta a_{+,\\vartheta}",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "J_\\vartheta",
+      "tex": "J_\\vartheta",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "0<\\vartheta<1/2",
+      "tex": "0<\\vartheta<1/2",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "\\vartheta=0",
+      "tex": "\\vartheta=0",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "\\vartheta=1/4",
+      "tex": "\\vartheta=1/4",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "(J_\\vartheta,a_{+,\\vartheta},J_\\vartheta a_{+,\\vartheta})",
+      "tex": "(J_\\vartheta,a_{+,\\vartheta},J_\\vartheta a_{+,\\vartheta})",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "(5/32,13/15,13/96)",
+      "tex": "(5/32,13/15,13/96)",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "(143/960,379/429,379/2880)",
+      "tex": "(143/960,379/429,379/2880)",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "0.8667",
+      "tex": "0.8667",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "0.8834",
+      "tex": "0.8834",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "0.1354",
+      "tex": "0.1354",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "0.1316",
+      "tex": "0.1316",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "D",
+      "tex": "D",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "\\vartheta=0",
+      "tex": "\\vartheta=0",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "\\vartheta=1/4",
+      "tex": "\\vartheta=1/4",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "a,b,1-a-b",
+      "tex": "a,b,1-a-b",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "D",
+      "tex": "D",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "r_{0,\\varepsilon}=m_\\varepsilon/K_\\varepsilon",
+      "tex": "r_{0,\\varepsilon}=m_\\varepsilon/K_\\varepsilon",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "\\gamma_1=c_{\\min}<c_3",
+      "tex": "\\gamma_1=c_{\\min}<c_3",
+      "labels": []
+    },
+    {
+      "display": true,
+      "sourceTex": "\\frac{\\rho^\\pm_\\varepsilon}{r_{0,\\varepsilon}}\\longrightarrow\\frac{s^*}{\\gamma_1J}>1.",
+      "tex": "\\frac{\\rho^\\pm_\\varepsilon}{r_{0,\\varepsilon}}\\longrightarrow\\frac{s^*}{\\gamma_1J}>1.",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "\\boldsymbol\\gamma(\\eta)=(\\gamma_0,\\gamma_0,\\gamma_0(1+\\eta))",
+      "tex": "\\boldsymbol\\gamma(\\eta)=(\\gamma_0,\\gamma_0,\\gamma_0(1+\\eta))",
+      "labels": []
+    },
+    {
+      "display": true,
+      "sourceTex": "\\mathcal R_\\vartheta(\\eta):=\\lim_{\\varepsilon\\downarrow0}\n\\frac{\\rho^\\pm_{\\varepsilon,\\vartheta}(\\eta)}{m_{\\varepsilon,\\vartheta}}\n=\\frac{p\\,s^*_\\vartheta(\\eta)}{J_\\vartheta},\\qquad\n\\mathcal R_\\vartheta'(0+)=p\\gamma_0a_{+,\\vartheta}.",
+      "tex": "\\mathcal R_\\vartheta(\\eta):=\\lim_{\\varepsilon\\downarrow0}\n\\frac{\\rho^\\pm_{\\varepsilon,\\vartheta}(\\eta)}{m_{\\varepsilon,\\vartheta}}\n=\\frac{p\\,s^*_\\vartheta(\\eta)}{J_\\vartheta},\\qquad\n\\mathcal R_\\vartheta'(0+)=p\\gamma_0a_{+,\\vartheta}.",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "(s^*_\\vartheta)'(0+)=\\gamma_0J_\\vartheta a_{+,\\vartheta}",
+      "tex": "(s^*_\\vartheta)'(0+)=\\gamma_0J_\\vartheta a_{+,\\vartheta}",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "\\vartheta",
+      "tex": "\\vartheta",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "\\mathcal R_\\vartheta'(0+)",
+      "tex": "\\mathcal R_\\vartheta'(0+)",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "\\frac{d}{d\\vartheta}(\\gamma_0J_\\vartheta a_{+,\\vartheta})=\\gamma_0(J_\\vartheta'a_{+,\\vartheta}+J_\\vartheta a_{+,\\vartheta}')<0",
+      "tex": "\\frac{d}{d\\vartheta}(\\gamma_0J_\\vartheta a_{+,\\vartheta})=\\gamma_0(J_\\vartheta'a_{+,\\vartheta}+J_\\vartheta a_{+,\\vartheta}')<0",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "F",
+      "tex": "F",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "\\sup_{s\\le S_0}|\\varepsilon^{-2}D_\\varepsilon(s\\varepsilon^2)-F(s)|",
+      "tex": "\\sup_{s\\le S_0}|\\varepsilon^{-2}D_\\varepsilon(s\\varepsilon^2)-F(s)|",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "W_1",
+      "tex": "W_1",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "L^1",
+      "tex": "L^1",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "\\varepsilon^2",
+      "tex": "\\varepsilon^2",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "\\Gamma",
+      "tex": "\\Gamma",
+      "labels": []
+    }
+  ],
+  "importedMarkdownSha256": "3bbd1432c2acf4e76d5bff895dd08fced706b74691075dfcf73cb2abfcd66b8e",
+  "transformations": [
+    "Seven main TeX input files contain five numbered sections and eleven subsections; recursively included main-text proofs are retained.",
+    "TeX line wrapping, layout commands, font styling, and text accents are converted to equivalent web markup.",
+    "Every inline/display mathematical body is preserved, apart from moving TeX label commands to HTML anchors; explicit equation tags are retained.",
+    "Original theorem numbers, proof endings, result-part numbering, bibliography order, citation targets, and complete figure captions are retained.",
+    "Aliases on one original target share one web anchor; references to omitted appendices point to their exact pinned TeX source line.",
+    "The four original PNG siblings of the PDF figures are referenced at local asset paths, with their original Git blob identities recorded.",
+    "The public page title differs from the original paper title, which is recorded separately as sourceTitle."
+  ]
+}

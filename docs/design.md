@@ -223,10 +223,9 @@ Policy Analysis; its four selected papers
 use dedicated article URLs. Domain `01`, AI Research and Engineering,
 has four project reading URLs. The other ten entries open dedicated detail
 pages under `/experience/`.
-About's Selected Research section presents three entries. The first,
-[Critical Dependence Stress for Portfolio Diversification](https://github.com/130U/mathematical-finance-project),
-links to its GitHub project; the Asian-options and Rough Heston entries follow and
-link to their on-site manuscripts. Titles use black links that turn blue on hover
+About's Selected Research section presents three on-site manuscripts: Critical
+Dependence Stress for Portfolio Diversification, followed by the Asian-options and
+Rough Heston papers. Titles use black links that turn blue on hover
 or keyboard focus, followed by supporting paragraphs with selected bold emphasis. Numerical guarantees retain their
 model, horizon, payoff, and comparison scope.
 It does not repeat the abstracts or add a separate action row. Titles use the same
@@ -235,8 +234,11 @@ horizontal rules separate entries. Typography, spacing, and wrapping adapt withi
 the shared reading frame without introducing cards or changing the palette.
 
 Each research page provides a contents list and the manuscript's abstract, core
-chapters, formulas, and references. The Asian-options paper includes chapters 1–10;
-the Rough Heston paper includes chapters 1–8. Appendices and supporting material are
+chapters, formulas, and references. The dependence-stress paper includes chapters
+1–5, the Asian-options paper chapters 1–10, and the Rough Heston paper chapters 1–8.
+Article headers contain the return link, title, GitHub link, and Full Manuscript
+link. Reading content begins at Abstract; source front matter before Abstract is
+kept in the protected source. Appendices and supporting material are
 linked on GitHub. Each JSON source records the exact source commit, blob, and manuscript
 URL; source links should continue to identify that version. The full manuscript is
 available from the article header, and return links lead to the corresponding
@@ -246,10 +248,10 @@ Research chapter headings display Roman numerals, and subsections display letter
 in reading order. Source numbering and anchors remain intact. Verified internal
 section references link to the matching heading and preserve their source numerals.
 
-The website has twenty-two canonical content routes: About, Experience, two Selected
+The website has twenty-three canonical content routes: About, Experience, three Selected
 Research articles, eight Experience manuscripts, and ten other Experience detail
-pages. Eight compatibility pages bring the content export to thirty routes. The
-architecture viewer adds one technical reference route, making thirty-one exported
+pages. Eight compatibility pages bring the content export to thirty-one routes. The
+architecture viewer adds one technical reference route, making thirty-two exported
 routes in total, excluding 404.
 Keep factual claims, metadata, copy, and content order aligned with the integrity manifests.
 

@@ -54,7 +54,17 @@ export function ResearchArticle({ project, active, returnPath, returnLabel, titl
       return <Heading {...marker} data-source-number={heading.sourceNumber} id={block.id} tabIndex={-1} key={index}><InlineContent inlines={heading.displayInlines} /></Heading>;
     }
     if (block.type === "equation") {
-      return <div {...marker} className={mathStyles.equation} key={index} tabIndex={0} role="region" aria-label="Mathematical equation"><ResearchMath tex={block.tex} display /></div>;
+      return <div {...marker} id={block.id} className={mathStyles.equation} key={index} tabIndex={0} role="region" aria-label="Mathematical equation"><ResearchMath tex={block.tex} display /></div>;
+    }
+    if (block.type === "figure") {
+      return <figure {...marker} id={block.id} className={styles.figure} key={index}>
+        <a href={block.src} aria-label="Open research figure at full resolution">
+          {/* Static manuscript figures retain their intrinsic aspect ratio. */}
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img src={block.src} alt="" loading="lazy" decoding="async" />
+        </a>
+        <figcaption><InlineContent inlines={linkArticleSectionReferences(block.inlines, project.slug, headingMap)} /></figcaption>
+      </figure>;
     }
     const tableRows = block.rows.map((row, rowIndex) => (
       <tr key={rowIndex}>{row.map((cell, cellIndex) => {
@@ -64,7 +74,7 @@ export function ResearchArticle({ project, active, returnPath, returnLabel, titl
     ));
     return (
       <div key={index} tabIndex={0} role="region" aria-label="Research data table" className={styles.tableRegion}>
-        <table {...marker} className={styles.table}>
+        <table {...marker} id={block.id} className={styles.table}>
           {block.headerRow && <thead>{tableRows[0]}</thead>}
           <tbody>{block.headerRow ? tableRows.slice(1) : tableRows}</tbody>
         </table>
@@ -77,7 +87,7 @@ export function ResearchArticle({ project, active, returnPath, returnLabel, titl
         <header className={`page-intro plain-page-intro ${readingStyles.header}`}>
           <Link className="back-link" href={returnPath}><span aria-hidden="true">←</span> {returnLabel}</Link>
           <h1 id={titleId} tabIndex={-1}>{showcase?.pageTitle ?? project.title}</h1>
-          {showcase ? <ExperienceMetadata entry={showcase} /> : frontMatterCount > 0 && <div className={styles.frontMatter}>{renderedBlocks.slice(0, frontMatterCount)}</div>}
+          {showcase ? <ExperienceMetadata entry={showcase} /> : !project.repositoryUrl && frontMatterCount > 0 && <div className={styles.frontMatter}>{renderedBlocks.slice(0, frontMatterCount)}</div>}
           {project.repositoryUrl && <p className={styles.sourceLinks}><a href={project.repositoryUrl}>GitHub</a><a href={project.sourceUrl}>Full Manuscript</a></p>}
         </header>
 

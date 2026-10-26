@@ -12,6 +12,7 @@ const ROUTES = [
   "/education/",
   "/education/certified-valuation-arithmetic-asian-options/",
   "/education/certified-rough-heston-valuation/",
+  "/education/critical-dependence-stress-for-portfolio-diversification/",
   "/experience/",
   "/experience/jiritsu-network/",
   "/experience/euromonitor-international/",
@@ -117,6 +118,54 @@ function attributeValues(html, attribute) {
   return values;
 }
 
+function bodyHtml(html) {
+  const opening = /<body\b[^>]*>/iu.exec(html);
+  if (!opening) return "";
+  const start = opening.index + opening[0].length;
+  const end = html.toLowerCase().indexOf("</body>", start);
+  return end < 0 ? "" : html.slice(start, end);
+}
+
+function replaceRanges(html, ranges, replacement = " ") {
+  const pieces = [];
+  let cursor = 0;
+  for (const [start, end] of ranges) {
+    pieces.push(html.slice(cursor, start), typeof replacement === "function" ? replacement() : replacement);
+    cursor = end;
+  }
+  pieces.push(html.slice(cursor));
+  return pieces.join("");
+}
+
+// Match only opening tags. Large manuscript bodies and framework payloads must
+// not pass through a repeated regex group that grows with the enclosed content.
+function replaceElements(html, openingPattern, replacement = " ") {
+  const lower = html.toLowerCase();
+  const ranges = [];
+  let cursor = 0;
+  for (const opening of html.matchAll(openingPattern)) {
+    if (opening.index < cursor) continue;
+    const closing = `</${opening[1].toLowerCase()}>`;
+    const end = lower.indexOf(closing, opening.index + opening[0].length);
+    if (end < 0) continue;
+    cursor = end + closing.length;
+    ranges.push([opening.index, cursor]);
+  }
+  return replaceRanges(html, ranges, replacement);
+}
+
+function withoutComments(html) {
+  const ranges = [];
+  let cursor = 0;
+  for (let start = html.indexOf("<!--", cursor); start >= 0; start = html.indexOf("<!--", cursor)) {
+    const end = html.indexOf("-->", start + 4);
+    if (end < 0) break;
+    cursor = end + 3;
+    ranges.push([start, cursor]);
+  }
+  return replaceRanges(html, ranges);
+}
+
 function withoutSvg(html) {
   const ranges = [];
   let depth = 0;
@@ -134,8 +183,7 @@ function withoutSvg(html) {
     }
   }
   if (depth !== 0) throw new Error("SVG elements must be complete.");
-  for (const [from, to] of ranges.reverse()) html = html.slice(0, from) + " " + html.slice(to);
-  return html;
+  return replaceRanges(html, ranges);
 }
 
 function formulaSnapshot(html) {
@@ -149,20 +197,17 @@ function formulaSnapshot(html) {
 }
 
 function visibleText(html, preserveFormulaPositions = false) {
-  let body = html.match(/<body\b[^>]*>([\s\S]*?)<\/body>/iu)?.[1] ?? "";
+  let body = bodyHtml(html);
   if (preserveFormulaPositions) {
     let formulaIndex = 0;
-    body = withoutSvg(body).replace(/<math\b[\s\S]*?<\/math>/giu, () => ` MATH_${formulaIndex++} `);
+    body = replaceElements(withoutSvg(body), /<(math)\b[^>]*>/giu, () => ` MATH_${formulaIndex++} `);
   }
-  const withoutNonVisibleContainers = body
-    .replace(/<script\b[^>]*>[\s\S]*?<\/script>/giu, " ")
-    .replace(/<style\b[^>]*>[\s\S]*?<\/style>/giu, " ")
-    .replace(/<template\b[^>]*>[\s\S]*?<\/template>/giu, " ")
-    .replace(/<annotation\b[^>]*>[\s\S]*?<\/annotation>/giu, " ")
-    .replace(/<([a-z][\w:-]*)\b[^>]*data-visible-copy-role=["']visual-identity["'][^>]*>[\s\S]*?<\/\1>/giu, " ")
-    .replace(/<([a-z][\w:-]*)\b[^>]*aria-hidden=["']true["'][^>]*>[\s\S]*?<\/\1>/giu, " ")
-    .replace(/<!--([\s\S]*?)-->/gu, " ");
-  return stripInterfaceStrings(withoutNonVisibleContainers.replace(/<[^>]+>/gu, " "));
+  for (const tag of ["script", "style", "template", "annotation"]) {
+    body = replaceElements(body, new RegExp(`<(${tag})\\b[^>]*>`, "giu"));
+  }
+  body = replaceElements(body, /<([a-z][\w:-]*)\b[^>]*data-visible-copy-role=["']visual-identity["'][^>]*>/giu);
+  body = replaceElements(body, /<([a-z][\w:-]*)\b[^>]*aria-hidden=["']true["'][^>]*>/giu);
+  return stripInterfaceStrings(withoutComments(body).replace(/<[^>]+>/gu, " "));
 }
 
 function metadataSnapshot(html) {
@@ -178,11 +223,9 @@ function metadataSnapshot(html) {
   };
 }
 
-async function routeSnapshot(route) {
-  const html = await readFile(routeHtmlPath(route), "utf8");
-  const isResearchArticle = RESEARCH_ARTICLE_ROUTES.has(route);
+export function snapshotHtml(html, isResearchArticle = false) {
   const text = visibleText(html, isResearchArticle);
-  const body = html.match(/<body\b[^>]*>([\s\S]*?)<\/body>/iu)?.[1] ?? "";
+  const body = bodyHtml(html);
   return {
     textSha256: sha256(text),
     characterCount: [...text].length,
@@ -193,6 +236,11 @@ async function routeSnapshot(route) {
     metadata: metadataSnapshot(html),
     ...(isResearchArticle ? formulaSnapshot(body) : {}),
   };
+}
+
+async function routeSnapshot(route) {
+  const html = await readFile(routeHtmlPath(route), "utf8");
+  return snapshotHtml(html, RESEARCH_ARTICLE_ROUTES.has(route));
 }
 
 async function createManifest() {
@@ -246,8 +294,10 @@ async function verify() {
   console.log("Visible text, metadata, alt text, and aria-label copy match the content manifest.");
 }
 
-if (process.argv.includes("--emit")) {
-  console.log(stableJson(await createManifest()));
-} else {
-  await verify();
+if (process.argv[1] && path.resolve(process.argv[1]) === fileURLToPath(import.meta.url)) {
+  if (process.argv.includes("--emit")) {
+    console.log(stableJson(await createManifest()));
+  } else {
+    await verify();
+  }
 }

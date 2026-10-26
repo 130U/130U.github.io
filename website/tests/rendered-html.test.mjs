@@ -53,6 +53,7 @@ const DISPLAY_DETAIL_TITLES = new Map([
 const ROUTES = [
   "/",
   "/education/",
+  "/education/critical-dependence-stress-for-portfolio-diversification/",
   "/education/certified-valuation-arithmetic-asian-options/",
   "/education/certified-rough-heston-valuation/",
   "/now/",
@@ -74,6 +75,7 @@ const NAVIGATION = [
 const CANONICAL_ROUTES = [
   "/", "/experience/",
   ...EXPERIENCE_DETAIL_ROUTES,
+  "/education/critical-dependence-stress-for-portfolio-diversification/",
   "/education/certified-valuation-arithmetic-asian-options/",
   "/education/certified-rough-heston-valuation/",
   ...ARTICLE_ROUTES,
@@ -98,6 +100,10 @@ const EXPECTED_PUBLIC_ASSETS = [
   "assets/fonts/InterVariable.woff2",
   "assets/fonts/LICENSE.txt",
   "assets/fonts/inter.css",
+  "assets/research/dependence/budget-comparison.png",
+  "assets/research/dependence/corner-capacity.png",
+  "assets/research/dependence/optimal-flow-shares.png",
+  "assets/research/dependence/tail-layer-repair.png",
 ];
 
 function decodeHtml(value) {
@@ -343,10 +349,13 @@ test("About research titles link to complete papers with their source links pres
   const about = await routeHtml("/");
   assert.ok(about.indexOf('id="selected-research"') < about.indexOf('id="education"'));
   assert.ok(about.indexOf('id="education"') < about.indexOf('id="coursework"'));
-  assert.doesNotMatch(about, /Developed a mathematical framework for certifying|Read more about Certified/u);
-  for (const [slug, title, description, tables] of [
-    ["certified-valuation-arithmetic-asian-options", "Certified Valuation of Arithmetic Asian Options", "discretization-error bound below 0.011025 price units", 11],
-    ["certified-rough-heston-valuation", "Certified Joint Pricing Errors in Rough Heston", "finite-history propagation tightens the complete pricing-error upper bound by 72.91%", 13],
+  assert.doesNotMatch(about, /I developed|Developed a mathematical framework for certifying|Read more about Certified/u);
+  const researchEntries = [...about.matchAll(/<article\b[^>]*id="([^"]+)"[^>]*>[\s\S]*?<\/article>/gu)].map((match) => match[1]).filter((id) => id.startsWith("critical-dependence-") || id.startsWith("certified-"));
+  assert.deepEqual(researchEntries, ["critical-dependence-stress-for-portfolio-diversification", "certified-valuation-arithmetic-asian-options", "certified-rough-heston-valuation"]);
+  for (const [slug, title, description, tables, sections, repository] of [
+    ["critical-dependence-stress-for-portfolio-diversification", "Critical Dependence Stress for Portfolio Diversification", "I develop a variational framework", 0, 5, "mathematical-finance-project"],
+    ["certified-valuation-arithmetic-asian-options", "Certified Valuation of Arithmetic Asian Options", "discretization-error bound below 0.011025 price units", 11, 10, "certified-valuation-arithmetic-asian-options"],
+    ["certified-rough-heston-valuation", "Certified Joint Pricing Errors in Rough Heston", "finite-history propagation tightens the complete pricing-error upper bound by 72.91%", 13, 8, "certified-rough-heston-valuation"],
   ]) {
     assert.match(about, new RegExp(`id="${slug}"`, "u"));
     const headings = [...about.matchAll(/<h3\b[^>]*>([\s\S]*?)<\/h3>/gu)].map((match) => stripMarkup(match[1]));
@@ -359,13 +368,17 @@ test("About research titles link to complete papers with their source links pres
     assert.equal(openingTags(entry, "a").length, 1);
     const article = await routeHtml(`/education/${slug}/`);
     assert.equal(openingTags(article, "h1").length, 1);
+    const articleHeader = article.match(/<article\b[^>]*>\s*<header\b[^>]*>([\s\S]*?)<\/header>/u)?.[1] ?? "";
+    assert.equal(stripMarkup(articleHeader), `← Selected Research ${title} GitHub Full Manuscript`, "Selected Research headers contain only the return link, title, and source links.");
     assert.equal(openingTags(article, "table").length, tables);
+    assert.deepEqual(openingTags(article, "h2").map((tag) => attribute(tag, "data-source-number")).filter(Boolean), Array.from({ length: sections }, (_, index) => String(index + 1)), `${slug}: every numbered main chapter is rendered once and in order.`);
     assert.match(article, /aria-label="Article contents"/u);
-    assert.match(article, /This page includes the complete main text and references/u);
+    assert.match(article, /This page includes the complete (?:main text and references|abstract, five main sections)/u);
     assert.match(article, new RegExp(`href="/#${slug}"`, "u"));
     const current = openingTags(article, "a").find((tag) => attribute(tag, "aria-current") === "page");
     assert.equal(attribute(current ?? "", "href"), "/");
-    assert.match(article, new RegExp(`href="https://github.com/130U/${slug}">GitHub repository</a>`, "u"));
+    const githubLink = openingTags(articleHeader, "a").find((tag) => attribute(tag, "href") === `https://github.com/130U/${repository}`);
+    assert.ok(githubLink, `${slug}: the article header links to its actual source repository.`);
   }
 });
 
@@ -633,7 +646,15 @@ test("the website uses its local brand assets without remote runtime resources",
   for (const route of ROUTES) {
     const html = await routeHtml(route);
     for (const tag of [...openingTags(html, "script"), ...openingTags(html, "img"), ...openingTags(html, "source")]) {
-      for (const name of ["src", "srcset"]) assert.doesNotMatch(attribute(tag, name) ?? "", /^https?:/iu);
+      for (const name of ["src", "srcset"]) {
+        const value = attribute(tag, name)?.trim();
+        if (!value) continue;
+        const candidates = name === "srcset" ? value.split(",").map((candidate) => candidate.trim().split(/\s+/u)[0]) : [value];
+        for (const candidate of candidates) {
+          const resource = new URL(candidate, new URL(route, SITE_ORIGIN));
+          assert.equal(resource.origin, SITE_ORIGIN, `${route}: ${name} resources must be served from this site.`);
+        }
+      }
     }
   }
 });

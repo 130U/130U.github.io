@@ -7,7 +7,7 @@ import styles from "../home.module.css";
 const researchSummaries: Record<string, ReactNode[]> = {
   "critical-dependence-stress-for-portfolio-diversification": [
     <>
-      I developed a variational framework for measuring the dependence stress needed to reverse a portfolio’s Expected Shortfall advantage while preserving individual loss distributions. I prove a quadratic law for the critical stress budget and characterize exactly when marginal restoration adds a premium. In a uniform benchmark, the asymptotic reversal budget is <strong>at least 30% higher</strong> than the initial-sensitivity prediction. Continuous flow–cut duality characterizes the premium’s sensitivity to background displacement costs, turning local risk sensitivity into a mathematically derived threshold for portfolio decision reversal.
+      I develop a variational framework for measuring the dependence stress needed to reverse a portfolio’s Expected Shortfall advantage while preserving individual loss distributions. I prove a quadratic law for the critical stress budget and characterize exactly when marginal restoration adds a premium. In a uniform benchmark, the asymptotic reversal budget is <strong>at least 30% higher</strong> than the initial-sensitivity prediction. Continuous flow–cut duality characterizes the premium’s sensitivity to background displacement costs, turning local risk sensitivity into a mathematically derived threshold for portfolio decision reversal.
     </>,
   ],
   "certified-valuation-arithmetic-asian-options": [
@@ -19,15 +19,6 @@ const researchSummaries: Record<string, ReactNode[]> = {
     </>,
   ],
 };
-
-const researchEntries = [
-  {
-    slug: "critical-dependence-stress-for-portfolio-diversification",
-    title: "Critical Dependence Stress for Portfolio Diversification",
-    path: "https://github.com/130U/mathematical-finance-project",
-  },
-  ...selectedResearchProjects,
-];
 
 export function AboutContent() {
   return (
@@ -59,7 +50,7 @@ export function AboutContent() {
         <div className={styles.sectionBody}>
           <h2 className={styles.sectionTitle} id="research-heading">Selected Research</h2>
           <div>
-            {researchEntries.map((project) => (
+            {selectedResearchProjects.map((project) => (
               <article className={styles.researchEntry} key={project.slug} id={project.slug}>
                 <h3 className={styles.researchTitle}>
                   <Link href={project.path}>{project.title}</Link>
