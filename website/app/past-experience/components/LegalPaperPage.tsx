@@ -2,9 +2,12 @@ import Link from "next/link";
 import { Fragment, type ReactNode } from "react";
 import { SiteShell } from "../../components/SiteShell";
 import { ArticleReadingLayout } from "../../components/article/ArticleReadingLayout";
-import { LEGAL_DOMAIN_PATH, type LegalPaper, type PaperRun } from "../../lib/content/legal-papers";
+import { ExperienceMetadata, KeyContributions } from "../../components/experience/ExperienceDetails";
+import { type LegalPaper, type PaperRun } from "../../lib/content/legal-papers";
+import type { ShowcaseEntry } from "../../lib/content/experience-showcase";
 import { LegalPaperReader } from "./LegalPaperReader";
 import styles from "./LegalPaperPage.module.css";
+import experienceStyles from "../../components/experience/Experience.module.css";
 
 function noteKey(number: number | string) {
   return number === "*" ? "author" : String(number);
@@ -40,7 +43,7 @@ function RunText({ runs, prefix }: { runs: PaperRun[]; prefix: string }) {
   });
 }
 
-export function LegalPaperPage({ paper }: { paper: LegalPaper }) {
+export function LegalPaperPage({ paper, showcase }: { paper: LegalPaper; showcase: ShowcaseEntry }) {
   const headings = paper.blocks.filter(({ type }) => type === "heading");
   const references = new Map<string, string[]>();
   function collect(runs: PaperRun[], prefix: string) {
@@ -62,36 +65,35 @@ export function LegalPaperPage({ paper }: { paper: LegalPaper }) {
   }
 
   return (
-    <SiteShell active="experience" frameClassName="legal-paper-page">
+    <SiteShell active="experience" frameClassName={`legal-paper-page ${experienceStyles.frame}`}>
       <article className={styles.paper} aria-labelledby="paper-title">
         <LegalPaperReader notes={[
           ...(acknowledgment ? [{ key: "author", label: "Author note", content: <RunText runs={acknowledgment.runs} prefix="preview-author" /> }] : []),
           ...paper.footnotes.map((note) => ({ key: String(note.number), label: String(note.number), content: <RunText runs={note.runs} prefix={`preview-${note.number}`} /> })),
         ]}>
           <header className={`page-intro ${styles.header}`}>
-            <Link className="back-link" href={`${LEGAL_DOMAIN_PATH}#${paper.slug}`}><span aria-hidden="true">←</span> Legal Research and Policy Analysis</Link>
-            <p className={styles.kicker}>Research paper</p>
-            <h1 id="paper-title" tabIndex={-1}>{paper.title}</h1>
-            {paper.subtitle && <p className={styles.subtitle}>{paper.subtitle}</p>}
-            <div className={styles.byline}>
-              <p>{paper.author}{acknowledgment && <sup className={styles.reference}><a id="fnref-author" href="#fn-author" role="doc-noteref" aria-label="Author note">*</a></sup>}</p>
-              {paper.date && <p>{paper.date}</p>}
-            </div>
+            <Link className="back-link" href={`/experience/#${showcase.slug}`}><span aria-hidden="true">←</span> Experience</Link>
+            <h1 id="paper-title" tabIndex={-1}>{showcase.detailTitle}</h1>
+            <ExperienceMetadata entry={showcase} />
           </header>
 
           <ArticleReadingLayout
             items={[
+              { id: "key-contributions", text: showcase.contributionsLabel },
               { id: "abstract-heading", text: "Abstract" },
               ...headings.map(({ id, text, level }) => ({ id: id!, text, level })),
               { id: "footnotes", text: "Footnotes" },
             ]}
-            overview={
-              <section aria-labelledby="abstract-heading">
+            overview={<KeyContributions entry={showcase} />}
+          >
+            <section className={styles.manuscriptAbstract} aria-labelledby="abstract-heading">
+                <div className={styles.manuscriptByline}>
+                  <p>{paper.author}{acknowledgment && <sup className={styles.reference}><a id="fnref-author" href="#fn-author" role="doc-noteref" aria-label="Author note">*</a></sup>}</p>
+                  {paper.date && <p>{paper.date}</p>}
+                </div>
                 <h2 id="abstract-heading" tabIndex={-1}>Abstract</h2>
                 {paper.abstract.map((paragraph, index) => <p key={index}><RunText runs={paragraph.runs} prefix={`abstract-${index}`} /></p>)}
-              </section>
-            }
-          >
+            </section>
             <div className={styles.body}>
               {paper.blocks.map((block, index) => {
                 const content = <RunText runs={block.runs} prefix={`body-${index}`} />;
@@ -108,7 +110,7 @@ export function LegalPaperPage({ paper }: { paper: LegalPaper }) {
             </section>
           </ArticleReadingLayout>
 
-          <footer className={styles.paperFooter}><Link className="back-link" href={`${LEGAL_DOMAIN_PATH}#${paper.slug}`}><span aria-hidden="true">←</span> Legal Research and Policy Analysis</Link><a href="#paper-title">Back to top</a></footer>
+          <footer className={styles.paperFooter}><Link className="back-link" href={`/experience/#${showcase.slug}`}><span aria-hidden="true">←</span> Experience</Link><a href="#paper-title">Back to top</a></footer>
         </LegalPaperReader>
       </article>
     </SiteShell>

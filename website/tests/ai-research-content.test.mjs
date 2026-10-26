@@ -159,12 +159,18 @@ function tableCells(html, source) {
 for (const expected of PROJECTS) {
   test(`AI project preserves the complete source: ${expected.slug}`, async () => {
     const source = JSON.parse(await readFile(path.join(ROOT, "content", "artificial-intelligence", `${expected.slug}.json`), "utf8"));
+    const showcase = JSON.parse(await readFile(path.join(ROOT, "content", "experience-showcase.json"), "utf8"))
+      .entries.find(({ id }) => id === PROJECTS.indexOf(expected) + 1);
     const html = await readFile(path.join(ROOT, "out", ...AI_ROUTE.split("/").filter(Boolean), expected.slug, "index.html"), "utf8");
     assert.equal(source.slug, expected.slug);
     assert.equal(source.title, expected.title);
     assert.equal(createHash("sha256").update(source.markdown, "utf8").digest("hex"), expected.markdownSha256);
-    assert.equal(readableHtml(html.match(/<h1\b[^>]*>([\s\S]*?)<\/h1>/iu)?.[1] ?? ""), expected.title);
-    assert.match(html, new RegExp(`href="${AI_ROUTE}#${expected.slug}"`, "u"));
+    assert.equal(readableHtml(html.match(/<h1\b[^>]*>([\s\S]*?)<\/h1>/iu)?.[1] ?? ""), showcase.detailTitle);
+    assert.equal(readableHtml(html.match(/<h2\b[^>]*\bid="article-title"[^>]*>([\s\S]*?)<\/h2>/iu)?.[1] ?? ""), expected.title);
+    assert.match(html, new RegExp(`href="/experience/#${expected.slug}"`, "u"));
+    assert.match(html, /href="#key-contributions"/u);
+    assert.doesNotMatch(html, /href="#overview"|id="overview"/u);
+    assert.ok(html.indexOf('id="key-contributions"') < html.indexOf('data-research-block="0"'));
 
     const sourceBlocks = expectedBlocks(source.markdown);
     const actualBlocks = renderedBlocks(html);

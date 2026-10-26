@@ -25,36 +25,41 @@ Paths in this table are relative to `website/`.
 | Education compatibility alias | `/education/` | `app/education/page.tsx`, shared About content |
 | Asian-options research | `/education/certified-valuation-arithmetic-asian-options/` | `app/lib/content/selected-research.ts`, `content/selected-research/certified-valuation-arithmetic-asian-options.json` |
 | Rough Heston research | `/education/certified-rough-heston-valuation/` | `app/lib/content/selected-research.ts`, `content/selected-research/certified-rough-heston-valuation.json` |
-| Past Experience | `/past-experience/` | `app/past-experience/page.tsx` |
-| Experience details | `/past-experience/[slug]/` | `app/lib/content/experience.ts`, `content/past-experience/` |
+| Experience | `/experience/` | `app/components/experience/`, `content/experience-showcase.json` |
+| Experience compatibility aliases | `/past-experience/`, `/now/` | Shared Experience page |
+| Legacy experience categories | `/past-experience/[slug]/` | Filtered approved Experience sections |
 | AI research projects | `/past-experience/artificial-intelligence/[paper]/` | `app/lib/content/ai-projects.ts`, `content/artificial-intelligence/` |
 | Legal articles | `/past-experience/legal-research-and-policy-analysis/[paper]/` | `app/past-experience/[slug]/[paper]/page.tsx`, `app/lib/content/legal-papers.ts`, `content/legal-papers/` |
-| Current Chapter | `/now/` | `app/now/page.tsx` |
 | Architecture | `/architecture/` | `../architecture/index.html` |
 
-`content/past-experience/experience.md` contains the current experience record.
-Use domain, organization, project, and optional subsection headings, followed by
-experience bullets. Employment and training entries require Position and Dates;
-Location and Website appear when supplied by the source. The Selected Research
-Papers entry requires Research areas, Author credit, and Manuscript dates.
-Domain introductions precede the first organization. Project introductions follow
-the project heading and precede its bullets. Inline `**bold**`, `*italic*`, and
-`[citation](https://example.com)` links are supported in prose; raw HTML is rendered
-as text. All five domain pages display project introductions in true italics.
-The experience registry validates five domains and their Markdown entries during
-build. `app/lib/content/routes.ts` supplies the website sitemap. The architecture
-viewer is a separate repository reference, linked from the GitHub introduction.
-The registry contains eighteen canonical content routes: three main pages, five experience
-domains, four AI research pages, four legal papers, and two Selected Research pages.
-The static export also retains `/education/` as a compatibility alias of About,
-without the particle entrance. Its canonical and Open Graph URL are `/`; it is
-excluded from the sitemap and primary navigation. Existing research article URLs
-and their entry IDs remain stable. Assembly adds `/architecture/` for twenty
-navigable routes, including the alias and excluding the 404 page.
+`content/experience-showcase.json` is the approved English presentation source,
+extracted verbatim from `experience-merged-bilingual.docx`. Its source-document
+SHA-256 records the reviewed version. It contains five categories and eighteen
+entries; Chinese audit text, editorial instructions, and long manuscripts are not
+included. Do not substitute the older resume Markdown for this approved copy.
+The historical `content/past-experience/experience.md` and its parser remain intact
+for provenance and category definitions.
+
+The primary navigation contains About and Experience. Experience presents all five
+numbered sections in one page, with an anchor directory and eighteen summaries.
+The ten non-research entries use native disclosures for their detailed title,
+Position / Location / Dates, contributions, and optional notes. The eight AI and
+legal entries link to their existing manuscript URLs. Both article types begin
+with approved metadata and concise Key Contributions. AI retains every original
+source block after its technical article title; legal articles retain their full
+Abstract, text, author note, and footnotes after the contribution block. Contents
+starts with Key Contributions and preserves the original chapter anchors.
+
+`app/lib/content/routes.ts` supplies twelve canonical sitemap routes: About,
+Experience, two Selected Research articles, and eight Experience manuscripts.
+The static export also retains `/education/`, `/past-experience/`, `/now/`, and the
+five old category URLs as compatibility pages. The category pages render the same
+approved entries and point canonically to the corresponding Experience section.
+There are twenty content routes and the separate `/architecture/` reference.
 
 Biographical, AI research, Selected Research, and legal source files are checked against `content/protected-sources.json`.
 `content/visible-copy-manifest.json` independently records text, metadata, alt text,
-and ARIA labels for all nineteen content pages. Copy changes require the owner's explicit
+and ARIA labels for all twenty content pages. Copy changes require the owner's explicit
 request and an intentional update to these contracts. Presentation-only changes to
 a protected component update its source hash while preserving the approved prose,
 metadata, and formula source contracts. Tests also verify page counts and navigation
@@ -94,22 +99,14 @@ recursive, and platform-specific directory paths. Integration tests exercise the
 Next.js consumer directly. The dependency override is scoped to the Next.js lint
 plugin; application dependencies and lint rules retain their normal configuration.
 
-### Resume sources
+### Experience source updates
 
-The five sections are maintained in the owner's Notion Master Resume. Synchronize
-the approved source wording, emphasis, links, metadata, and order into the experience
-Markdown. Convert source headings and line breaks to the site's structure. English
-copy uses straight quotation marks and apostrophes; retain legal symbols, accents in
-proper names, and meaningful mathematical notation. Keep extraction files,
-screenshots, and source-comparison evidence outside the repository.
+The approved bilingual Word document is the current authority for showcase copy.
+Read its English blocks only; preserve category and entry order, metadata, each
+contribution, and the two contextual notes. Update the JSON and its document hash
+only when a replacement version is approved. AI and legal manuscript sources are
+independently protected and are not regenerated from the showcase document.
 
-| Section | Notion source |
-| --- | --- |
-| AI Research and Engineering | [Source](https://app.notion.com/p/98c4dbb19cbb46fa9fa6fed2da1d6ac1?pvs=204) |
-| Data Science | [Source](https://app.notion.com/p/dcf2ef0d06b24895a4b72db158922523?pvs=204) |
-| Legal Research and Policy Analysis | [Source](https://app.notion.com/p/7df21bc60ff2400c80859b5a6afe4922?pvs=204) |
-| Finance and Consulting | [Source](https://app.notion.com/p/d62ffb825a8d469c9759b5c76f5eb87f?pvs=204) |
-| STEM Academic Competitions and Training | [Source](https://app.notion.com/p/246e29cd61d6410381ecb068bbd1eaea?pvs=204) |
 
 ### AI research projects
 

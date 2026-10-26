@@ -11,7 +11,6 @@ export const ABOUT_DESCRIPTION =
 
 export type ActivePage =
   | "about"
-  | "now"
   | "experience";
 
 export const navigation: ReadonlyArray<{
@@ -20,8 +19,7 @@ export const navigation: ReadonlyArray<{
   href: string;
 }> = [
   { key: "about", label: "About", href: "/" },
-  { key: "experience", label: "Past Experience", href: "/past-experience/" },
-  { key: "now", label: "Current Chapter", href: "/now/" },
+  { key: "experience", label: "Experience", href: "/experience/" },
 ];
 
 export const coreRoutes = navigation.map(({ href }) => href);

@@ -71,8 +71,10 @@ function exportedPages() {
   return pagesPromise ??= (async () => {
     const sitemap = await readFile(new URL("../out/sitemap.xml", import.meta.url), "utf8");
     const routes = [...sitemap.matchAll(/<loc>([^<]+)<\/loc>/gu)].map((match) => new URL(decodeHtml(match[1])).pathname);
-    routes.push("/education/", "/architecture/");
-    assert.equal(new Set(routes).size, 20, "Audit all 18 canonical pages, the education alias, and the architecture page.");
+    assert.equal(routes.length, 12, "The unified Experience page and ten full articles remain canonical alongside About.");
+    routes.push("/education/", "/architecture/", "/past-experience/", "/now/",
+      ...["artificial-intelligence", "data-science", "legal-research-and-policy-analysis", "finance", "stem-academic-competitions-and-training"].map((slug) => `/past-experience/${slug}/`));
+    assert.equal(new Set(routes).size, 21, "Audit all canonical pages and every retained compatibility route.");
     const entries = await Promise.all(routes.map(async (route) => {
       const html = await readFile(new URL(`../out/${route.replace(/^\//u, "")}index.html`, import.meta.url), "utf8");
       const tree = readTree(html);
@@ -83,7 +85,7 @@ function exportedPages() {
   })();
 }
 
-test("20 exported pages contain no encoding corruption, exposed math markup, duplicate IDs or broken local anchors", async () => {
+test("21 exported pages contain no encoding corruption, exposed math markup, duplicate IDs or broken local anchors", async () => {
   const pages = await exportedPages();
   for (const [route, page] of pages) {
     const text = readable(page.tree);
@@ -106,7 +108,7 @@ test("20 exported pages contain no encoding corruption, exposed math markup, dup
   }
 });
 
-test("all ten full articles share overview, contents and body order with complete heading navigation", async () => {
+test("all ten full articles retain introduction, contents and body order with complete chapter navigation", async () => {
   const pages = await exportedPages();
   const articles = [...pages].filter(([route]) => /^\/education\/[^/]+\/$/u.test(route) || /^\/past-experience\/(?:artificial-intelligence|legal-research-and-policy-analysis)\/[^/]+\/$/u.test(route));
   assert.equal(articles.length, 10);
@@ -121,9 +123,26 @@ test("all ten full articles share overview, contents and body order with complet
     assert.ok(overview[0].end <= menus[0].start && menus[0].end <= body[0].start, `${route}: preserve overview, contents, body reading order.`);
     const links = elements(menus[0], (node) => node.tag === "a").map((node) => node.attrs.get("href"));
     const headings = [...elements(overview[0], (node) => /^h[23]$/u.test(node.tag)), ...elements(body[0], (node) => /^h[23]$/u.test(node.tag))];
+    const isAiExperience = route.startsWith("/past-experience/artificial-intelligence/");
+    const manuscriptTitles = headings.filter((node) => node.attrs.get("id") === "article-title");
+    assert.equal(manuscriptTitles.length, isAiExperience ? 1 : 0, `${route}: only AI Experience adds a technical manuscript title below its contribution lead.`);
+    if (isAiExperience) {
+      const slug = route.split("/").filter(Boolean).at(-1);
+      const source = JSON.parse(await readFile(new URL(`../content/artificial-intelligence/${slug}.json`, import.meta.url), "utf8"));
+      assert.equal(readable(manuscriptTitles[0]), source.title, `${route}: retain the exact technical manuscript title.`);
+      const sourceBlocks = elements(body[0], (node) => node.attrs.has("data-research-block"));
+      assert.ok(sourceBlocks.length && manuscriptTitles[0].end <= sourceBlocks[0].start, `${route}: the manuscript title must precede every original source block.`);
+      assert.ok(!links.includes("#article-title"), `${route}: the manuscript title is not an additional chapter.`);
+    }
+    if (route.startsWith("/past-experience/")) {
+      assert.equal(links[0], "#key-contributions", `${route}: contribution points open the article directory.`);
+      assert.equal(readable(headings[0]), "Key Contributions", `${route}: contribution points replace the generic introductory label.`);
+      assert.ok(!links.includes("#overview"), `${route}: do not duplicate the contribution lead with an Overview entry.`);
+    }
     for (const heading of headings) {
       const id = heading.attrs.get("id");
       assert.ok(id, `${route}: heading ${readable(heading)} needs an anchor.`);
+      if (isAiExperience && id === "article-title") continue;
       const destinations = new Set([`#${id}`]);
       // A labelled section may be the intended destination (for example,
       // #footnotes is labelled by its nested #footnotes-heading).
@@ -132,7 +151,7 @@ test("all ten full articles share overview, contents and body order with complet
       }
       assert.equal(links.filter((href) => destinations.has(href)).length, 1, `${route}: heading ${readable(heading)} must occur once in contents.`);
     }
-    const chapters = elements(body[0], (node) => node.tag === "h2").filter((node) => !/^(?:Appendix|Appendices|References|Footnotes|Acknowledgments|Acknowledgements)\b/iu.test(readable(node)));
+    const chapters = elements(body[0], (node) => node.tag === "h2" && (node.attrs.has("data-research-block") || node.attrs.has("data-paper-block"))).filter((node) => !/^(?:Appendix|Appendices|References|Footnotes|Acknowledgments|Acknowledgements)\b/iu.test(readable(node)));
     assert.ok(chapters.length > 0, `${route}: missing body chapters.`);
     chapters.forEach((chapter, index) => assert.match(readable(chapter), new RegExp(`^${roman[index]}(?:[.)])?\\s+`, "u"), `${route}: main chapters must use consecutive Roman numerals.`));
     for (const proofEnd of page.nodes.filter((node) => node.attrs.has("data-proof-end"))) {

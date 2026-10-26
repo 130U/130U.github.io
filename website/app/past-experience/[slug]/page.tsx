@@ -1,42 +1,21 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
-import {
-  getExperienceDomain,
-  pastExperience,
-} from "../../lib/content/experience";
-import { createPageMetadata, DEFAULT_DESCRIPTION } from "../../lib/content/site";
+import { getShowcaseDomain, showcaseDomains } from "../../lib/content/experience-showcase";
+import { createPageMetadata } from "../../lib/content/site";
 import { ExperienceDomainPage } from "../components/ExperienceDomainPage";
 
 export const dynamicParams = false;
-
-export function generateStaticParams() {
-  return pastExperience.map(({ slug }) => ({ slug }));
-}
-
-export async function generateMetadata({
-  params,
-}: {
-  params: Promise<{ slug: string }>;
-}): Promise<Metadata> {
+export function generateStaticParams() { return showcaseDomains.map(({ slug }) => ({ slug })); }
+type Params = { params: Promise<{ slug: string }> };
+export async function generateMetadata({ params }: Params): Promise<Metadata> {
   const { slug } = await params;
-  const domain = getExperienceDomain(slug);
+  const domain = getShowcaseDomain(slug);
   if (!domain) notFound();
-
-  return createPageMetadata({
-    title: `${domain.name} | Past Experience`,
-    description: DEFAULT_DESCRIPTION,
-    path: domain.path,
-  });
+  return createPageMetadata({ title: `${domain.name} | Experience`, description: domain.entries[0].summary, path: "/experience/" });
 }
-
-export default async function ExperiencePage({
-  params,
-}: {
-  params: Promise<{ slug: string }>;
-}) {
+export default async function ExperienceDomain({ params }: Params) {
   const { slug } = await params;
-  const domain = getExperienceDomain(slug);
+  const domain = getShowcaseDomain(slug);
   if (!domain) notFound();
-
   return <ExperienceDomainPage domain={domain} />;
 }

@@ -67,37 +67,34 @@ Blue marks active navigation, focus, and link feedback. Editorial surfaces use f
 rules and typography; the note-preview dialog uses a rounded surface to distinguish
 its temporary reading state.
 
-### Past Experience typography
+### Experience presentation
 
-Domain links and institution headings use the shared section scale. Project titles
-use the subheading scale at weight 600. Optional theme headings, introductions,
-reference notes, metadata values, and bullets use the reading scale; theme headings
-use regular italic. Headings wrap with balanced lines. Numbered project titles use
-a colon between the project number and name. Descriptions are separate paragraphs.
+Experience shares About's Inter family, fixed optical size, role sizes, grid, and
+paper/ink palette. It is one page with five numbered sections and a compact anchor
+directory. Section spacing separates domains; thin rules and 28px gaps distinguish
+entries within them. Category introductions are omitted. Summaries use upright
+black body text at 17px; project and organization titles use the 18px subheading
+role. No content is truncated to fit a card.
 
-All five domain pages use true italics and the supporting ink color for project
-introductions. Contribution leads use weight 600; additional spacing groups each
-contribution with its supporting evidence. These semantic roles share the same
-reading size, leading, emphasis, and spacing across domains.
+The black and blue in the approved Word document identify outer and detail content;
+blue is not a prose color on the website. All body copy uses the existing ink colors.
+Blue remains reserved for navigation, hover, and keyboard focus.
 
-Narrative bullets use regular Inter, a 1.6 line height, and 18px between items.
-Domain titles, introductions, institution headings, metadata, and project content
-share one container right edge, capped at 720px from the institution heading's left
-edge. From 1280px, project titles, introductions, theme headings, and bullet text
-align to the metadata values; their indent is included in that shared measure.
-Prose keeps natural ragged-right wrapping within this common container.
-Metadata values stay upright and regular; labels use the shared muted color.
-Bold identifies a project and italic introduces a theme within it. Dates, roles,
-and bullets stay upright. Preserve the approved resume prose and its emphasis
-through this structural hierarchy.
+Ten non-research entries use native Read More disclosures. Their title is followed
+by Position, Location, Dates, and the full approved contribution list. Metadata
+uses a full-width position row and two columns for location and dates, stacking
+on phones. Disclosures work without JavaScript and have 44px keyboard-accessible
+controls. Eight research entries link to their full article pages, where the same
+metadata and a concise Key Contributions block precede the manuscript. Do not
+repeat the outer summary in the detail view.
 
-Project reading actions follow the title and complete introduction, before the
-contribution list. AI analyses and legal papers share an underlined text link,
-14px Inter at weight 500, and a minimum 2.75rem target height. The link width follows
-its content and remains within the reading column when text is enlarged. The right
-chevron indicates an internal reading page; the label and descriptive accessible name
-identify its destination. Hover and keyboard focus use the blue accent, while focus
-retains the shared outline. There is no capsule background or click-scale effect.
+AI pages use the approved project title as H1 and retain the original technical
+title at the start of the analysis, followed by every source block in its original
+order. Key Contributions replaces the standalone Overview label. Legal pages place
+Key Contributions before the unchanged Abstract and manuscript. The contents rail
+includes the contribution block, retains the original chapter links, and follows
+the existing responsive reading layout. Return links target the matching entry on
+Experience. About and its mathematical manuscripts retain their existing layouts.
 
 Research article prose, emphasis, citations, and table cells use the shared 17px
 reading size. Subsection headings use the shared 18px size with weight 600. Inline
@@ -260,7 +257,7 @@ previews are centered; phones use a bottom sheet with a scrollable note body and
 passage. View in footnotes closes the preview and focuses the complete endnote.
 Full notes and bidirectional links remain available without JavaScript.
 
-Reading pages retain a visible return link to the legal experience page. Contents,
+Reading pages retain a visible return link to the corresponding Experience entry. Contents,
 long citations, and note previews adapt to phone widths, enlarged text, keyboard
 navigation, and reduced motion. Keep the original PDFs outside public assets and
 the static export; article pages publish the text and its citation structure.
