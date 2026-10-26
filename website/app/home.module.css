@@ -187,9 +187,15 @@
 }
 
 .courseGrid :global(.course-list) {
-  grid-template-columns: repeat(2, minmax(0, 1fr));
+  display: block;
+  columns: 16rem 2;
+  column-gap: 24px;
   color: var(--supporting-ink);
-  gap: 2px 24px;
+}
+
+.courseGrid :global(.course-list) li {
+  break-inside: avoid;
+  margin-bottom: 2px;
 }
 
 .contactStrip {
@@ -284,7 +290,7 @@
   }
 
   .courseGrid :global(.course-list) {
-    grid-template-columns: 1fr;
+    column-count: 1;
   }
 }
 

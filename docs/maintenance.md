@@ -95,11 +95,13 @@ there is no request-time backend, database, authentication, form submission, or 
 `app/components/AboutContent.tsx` supplies the shared About and Education-alias
 content. It presents Duke University once above both degree records and omits the
 fellowship from About. `app/lib/content/about.ts` retains all 49 course names in four
-categories. Categories stack vertically, with a two-column course list at 768px and
-above and one column below that breakpoint. `app/home.module.css` scopes the compact
+categories. Categories stack vertically; each list flows down up to two independent
+CSS columns with a 16rem target width, a 24px column gap, and 2px between items.
+Course names stay together across column breaks, and lists use one column below
+768px. `app/home.module.css` scopes the compact
 record spacing and consistent role styles to About. Its reading frame uses the
 existing Inter family with `font-optical-sizing: none` and `"opsz" 14`; heading and
-prose tracking is zero. Keep shared type sizes and other pages' typography intact.
+prose tracking is zero. Keep these role sizes synchronized with Experience and research pages.
 
 Add a website page by updating its source, the route registry, sitemap expectations,
 and output tests together. Keep browser interaction in focused client components.
@@ -142,7 +144,7 @@ or a download. Each reading page returns to its project anchor on Experience.
 | Evidence uncertainty and decision guarantees in investment research | [Source](https://app.notion.com/p/3ed867f96db581cfaae7d40b93aaa080?pvs=204) |
 
 `ResearchArticle` renders both AI projects and Selected Research with a focused CSS
-Module that gives prose and table cells the shared 17px reading size, and H3 headings
+Module that gives prose and table cells the shared 16px reading size, and H3 headings
 the shared 18px subheading size.
 `ResearchMath` uses `app/lib/content/research-math.ts` to render TeX on the server with the pinned MathJax
 4.1.3 engine and its TeX font package. Visible equations contain complete SVG glyph
@@ -268,7 +270,10 @@ preload. Keep text in the inherited font; reserve separate lettering for brand a
 
 The visual reference is Cognition's grid, warm paper color, restrained rules, and
 spacing. Inter remains the site's own self-hosted typeface. Research and other body
-text share 17px, subsection headings share 18px, and math uses a relative 1.15em scale.
+text share 16px, subsection headings share 18px, and math uses a relative 1.15em scale.
+Section headings use 24px, or 22px below 768px. Experience directory labels use the
+16px reading role and directory numbers use the 14px interface role. Main navigation
+stays at 14px; section margin indices on About and Experience stay at 12px.
 Keep these roles synchronized through `app/globals.css`; do not give a particular
 article a larger prose size or change type size to fit a long title.
 

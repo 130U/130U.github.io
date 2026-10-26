@@ -7,8 +7,12 @@ Education: nineteen content routes, plus the architecture viewer for twenty navi
 routes, excluding 404. Node.js 24 matches the deployment runtime.
 
 The design follows Cognition's editorial grid, warm paper color, and fine rules while
-retaining self-hosted Inter. Home opens with the interactive name entrance, followed by the profile. Body text is 17px,
-H3 headings are 18px, and mathematical expressions use a relative 1.15em scale.
+retaining self-hosted Inter. Home opens with the interactive name entrance, followed
+by the profile. Body text is 16px, entry headings are 18px, and section headings are
+24px or 22px below 768px. Mathematical expressions use a relative 1.15em scale.
+Experience directory labels are 16px and their numbers are 14px; main navigation
+remains 14px and section margin indices remain 12px. Coursework flows down up to two
+independent columns, with one column below 768px and no shared row gaps.
 
 ```sh
 cd website

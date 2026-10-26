@@ -20,14 +20,19 @@
   min-height: 32px;
   padding-block: 4px;
   gap: 12px;
-  font-size: var(--type-interface);
-  line-height: var(--interface-leading);
+  font-size: var(--type-reading);
+  line-height: var(--reading-leading);
 }
 .directory span, .sectionIndex {
   color: var(--muted);
   font-size: var(--type-label);
   line-height: var(--label-leading);
   font-variant-numeric: tabular-nums;
+}
+.directory span {
+  flex: 0 0 2ch;
+  font-size: var(--type-interface);
+  white-space: nowrap;
 }
 .section {
   display: grid;
