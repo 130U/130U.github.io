@@ -51,7 +51,7 @@
 }
 
 .body code {
-  font-size: 0.9em;
+  font-size: var(--type-reading);
   overflow-wrap: anywhere;
 }
 

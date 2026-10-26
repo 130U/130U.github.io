@@ -1,13 +1,19 @@
 import Link from "next/link";
+import type { ReactNode } from "react";
 import { courseworkGroups } from "../lib/content/about";
 import { selectedResearchProjects } from "../lib/content/selected-research";
 import styles from "../home.module.css";
 
-const researchSummaries: Record<string, string> = {
-  "certified-valuation-arithmetic-asian-options":
-    "I develop a weighted payoff-remainder method that uses a shared Gaussian factor to control the nonsmooth Asian payoff. Coupled with validated Heston transforms, it yields a complete projected Euler discretization-error bound below 0.011025 price units for the paper’s one-year call spread with twelve monthly fixings.",
-  "certified-rough-heston-valuation":
-    "I develop a joint error framework combining finite-history propagation of fractional Riccati residuals with the Fourier error structure shared across strikes. For the paper’s quarter-year call spread, this tightens the complete error bound by 7.6% over matched separate-price bounds and certifies a 0.25-point budget.",
+const researchSummaries: Record<string, ReactNode[]> = {
+  "certified-valuation-arithmetic-asian-options": [
+    "I develop a weighted payoff-remainder method that turns an exact conditional price representation into certified arithmetic Asian valuations. Combining shared Gaussian smoothing with validated Heston transforms, I obtain a complete projected Euler discretization-error bound below 0.011025 price units for a one-year call spread with twelve monthly fixings. I also derive a direct coupling bound that reduces the nonlinear remainder width by 99.4% in a deterministic-variance example, with proofs and executable certificates supporting both results.",
+  ],
+  "certified-rough-heston-valuation": [
+    "I develop a mathematical framework for certifying rough Heston portfolio valuations. Starting from the fractional Riccati equation, I derive a history kernel that carries continuous residuals into rigorous pricing bounds. A joint error set preserves Fourier perturbations shared across strikes, and its exact support function identifies when separate price bounds lose information. I also prove denominator and left-half-plane guarantees for the Gatheral–Radoicic rational output across all real frequencies and positive times on a specified parameter domain.",
+    <>
+      For the six-month 4400–4500 call spread at α=0.52, finite-history propagation tightens the complete error upper bound by <strong>72.91%</strong>, from <strong>1.397612096 to 0.378598956 index points</strong>, with the output and reference centre fixed. For the quarter-year spread, shared aggregation across <strong>1,025 nodes</strong> lowers the complete upper bound by <strong>7.56%</strong>, from <strong>0.252393939 to 0.233318843 points</strong>, certifying a <strong>0.25-point budget</strong>. Both results retain the complete valuation error account, including quadrature, omitted frequencies, the infinite tail and arithmetic.
+    </>,
+  ],
 };
 
 export function AboutContent() {
@@ -45,7 +51,9 @@ export function AboutContent() {
                 <h3 className={styles.researchTitle}>
                   <Link href={project.path}>{project.title}</Link>
                 </h3>
-                <p className={styles.researchSummary}>{researchSummaries[project.slug]}</p>
+                {researchSummaries[project.slug].map((paragraph, index) => (
+                  <p className={styles.researchSummary} key={index}>{paragraph}</p>
+                ))}
               </article>
             ))}
           </div>

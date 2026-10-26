@@ -9,17 +9,17 @@
   --rule-strong: rgba(0, 0, 0, 0.24);
   --accent: #2200ff;
   --dither: #070707;
-  --type-title: 2.25rem;
-  --type-heading: 1.5rem;
+  --type-title: 1.375rem;
+  --type-heading: 1.375rem;
   --type-subheading: 1.125rem;
-  --type-reading: 1.0625rem;
-  --type-label: 0.75rem;
+  --type-reading: 0.875rem;
+  --type-label: 0.875rem;
   --type-interface: 0.875rem;
   --type-action: var(--type-interface);
   --type-math: 1.15em;
   --reading-measure: 720px;
   --rail-min-width: calc(5 * var(--type-interface) + 13px + clamp(20px, 2vw, 24px) + 22px + 10px);
-  --title-leading: 1.2;
+  --title-leading: 1.25;
   --heading-leading: 1.25;
   --subheading-leading: 1.45;
   --reading-leading: 1.6;
@@ -980,7 +980,7 @@ button:focus-visible {
 
 @media (width < 768px) {
   :root {
-    --type-title: 1.75rem;
+    --type-title: 1.375rem;
     --type-heading: 1.375rem;
   }
 
