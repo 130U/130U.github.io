@@ -202,7 +202,7 @@ test("About retains its interactive name entrance before the combined profile", 
   assert.match(home, /href="#home-profile"[^>]*>Scroll<\/a>/u);
   const heading = home.match(/<h1\b[^>]*>([\s\S]*?)<\/h1>/u);
   assert.ok(heading);
-  assert.equal(stripMarkup(heading[1]), "Thinking mathematically. Working in AI.");
+  assert.equal(stripMarkup(heading[1]), "Thinking mathematically Working in AI");
   assert.match(home, /<title>About \| Theodore Ouyang<\/title>/u);
   assert.match(home, /id="home-profile"/u);
   for (const index of ["01", "02", "03"]) {
@@ -249,28 +249,24 @@ test("inner routes present text-focused pages and the Current Chapter introducti
   assert.match(now, /expand human capability/u);
 });
 
-test("About research entries link papers, repositories, and results while preserving complete main texts", async () => {
+test("About research titles link to complete papers with their source links preserved", async () => {
   const about = await routeHtml("/");
   assert.ok(about.indexOf('id="selected-research"') < about.indexOf('id="education"'));
   assert.ok(about.indexOf('id="education"') < about.indexOf('id="coursework"'));
   assert.doesNotMatch(about, /Developed a mathematical framework for certifying|Read more about Certified/u);
   for (const [slug, title, description, tables] of [
-    ["certified-valuation-arithmetic-asian-options", "Certified Valuation of Arithmetic Asian Options", "Rigorous error bounds for numerical option valuation.", 11],
-    ["certified-rough-heston-valuation", "Certified Joint Pricing Errors in Rough Heston", "Joint error bounds for related valuations that share a stochastic model.", 13],
+    ["certified-valuation-arithmetic-asian-options", "Certified Valuation of Arithmetic Asian Options", "projected Euler time-discretization error", 11],
+    ["certified-rough-heston-valuation", "Certified Joint Pricing Errors in Rough Heston", "the corresponding separate bounds do not certify", 13],
   ]) {
     assert.match(about, new RegExp(`id="${slug}"`, "u"));
     const headings = [...about.matchAll(/<h3\b[^>]*>([\s\S]*?)<\/h3>/gu)].map((match) => stripMarkup(match[1]));
     assert.ok(headings.includes(title));
     assert.ok(stripMarkup(about).includes(description));
-    for (const [label, href] of [
-      ["Paper", `/education/${slug}/`],
-      ["Repository", `https://github.com/130U/${slug}`],
-      ["Results", `https://github.com/130U/${slug}/blob/main/EVIDENCE.md`],
-    ]) {
-      const link = [...about.matchAll(/<a\b([^>]*)>([\s\S]*?)<\/a>/gu)]
-        .find((match) => attribute(match[1], "href") === href && stripMarkup(match[2]) === label);
-      assert.ok(link, `${slug} is missing its ${label} link`);
-    }
+    const entry = about.match(new RegExp(`<article\\b[^>]*id="${slug}"[^>]*>([\\s\\S]*?)</article>`, "u"))?.[1] ?? "";
+    const titleLink = entry.match(/<h3\b[^>]*>\s*<a\b([^>]*)>([\s\S]*?)<\/a>\s*<\/h3>/u);
+    assert.equal(attribute(titleLink?.[1] ?? "", "href"), `/education/${slug}/`);
+    assert.equal(stripMarkup(titleLink?.[2] ?? ""), title);
+    assert.equal(openingTags(entry, "a").length, 1);
     const article = await routeHtml(`/education/${slug}/`);
     assert.equal(openingTags(article, "h1").length, 1);
     assert.equal(openingTags(article, "table").length, tables);

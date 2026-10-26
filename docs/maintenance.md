@@ -145,9 +145,10 @@ update only the corresponding contract fields after independent verification.
 ### Selected Research
 
 About presents two compact research entries before Education and Selected Coursework.
-Each retains its original title and adds the approved one-line description, followed
-by Paper, Repository, and Results links. Results opens the repository's `EVIDENCE.md`
-on `main`. The list omits abstracts and Read more buttons. `app/lib/content/selected-research.ts`
+Each original title is a blue link to its on-site manuscript, followed by a short
+paragraph describing the mathematical method and the contribution within the paper's
+stated scope. Source links remain on the manuscript pages; About has no separate
+Paper, Repository, or Results action row. `app/lib/content/selected-research.ts`
 loads both structured sources from `content/selected-research/`:
 
 | Source | On-site manuscript scope |

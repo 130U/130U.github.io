@@ -7,7 +7,7 @@ export const FELLOWSHIP = { title: "Sequoia Fellow", cohort: 8 } as const;
 export const DEFAULT_DESCRIPTION =
   `Theodore Ouyang is a Duke University graduate and ${FELLOWSHIP.title} in Cohort ${FELLOWSHIP.cohort}, exploring how artificial intelligence can become useful in everyday life.`;
 export const ABOUT_DESCRIPTION =
-  "Thinking mathematically. Working in AI. Theodore Ouyang's research, education, and interests.";
+  "Theodore Ouyang's research, education, and interests in mathematics and AI.";
 
 export type ActivePage =
   | "about"

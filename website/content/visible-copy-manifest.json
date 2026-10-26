@@ -6,51 +6,47 @@
   ],
   "routes": {
     "/": {
-      "textSha256": "2daf66ae572e0e3c2cc3ebc357f1805b500c2592c0ff044fd9c62af2a2d4da87",
-      "characterCount": 2661,
-      "wordCount": 338,
-      "preview": "Skip to main content Scroll Theodore Ouyang About Past Experience Current Chapter Thinking mathematically. Working in AI. Mathematics is how I make sense of thi",
+      "textSha256": "8e0f547f4b007a2065cd8712ee8fa8bb6d200cc2de4b27cf99728b0717724f6c",
+      "characterCount": 3200,
+      "wordCount": 412,
+      "preview": "Skip to main content Scroll Theodore Ouyang About Past Experience Current Chapter Thinking mathematically Working in AI Mathematics is how I make sense of thing",
       "altTexts": [],
       "ariaLabels": [
         "Theodore Ouyang home",
         "Primary navigation",
-        "Certified Valuation of Arithmetic Asian Options links",
-        "Certified Joint Pricing Errors in Rough Heston links",
         "Contact"
       ],
       "metadata": {
         "title": "About | Theodore Ouyang",
-        "description": "Thinking mathematically. Working in AI. Theodore Ouyang's research, education, and interests.",
+        "description": "Theodore Ouyang's research, education, and interests in mathematics and AI.",
         "canonical": "https://www.theodoreoy.com/",
         "openGraphTitle": "About | Theodore Ouyang",
-        "openGraphDescription": "Thinking mathematically. Working in AI. Theodore Ouyang's research, education, and interests.",
+        "openGraphDescription": "Theodore Ouyang's research, education, and interests in mathematics and AI.",
         "openGraphUrl": "https://www.theodoreoy.com/",
         "twitterTitle": "About | Theodore Ouyang",
-        "twitterDescription": "Thinking mathematically. Working in AI. Theodore Ouyang's research, education, and interests."
+        "twitterDescription": "Theodore Ouyang's research, education, and interests in mathematics and AI."
       }
     },
     "/education/": {
-      "textSha256": "8dfd433626c9734ac2ea788d573d3998699b087ba9e9171c5922cdb9cb7b35e6",
-      "characterCount": 2654,
-      "wordCount": 337,
-      "preview": "Skip to main content Theodore Ouyang About Past Experience Current Chapter Thinking mathematically. Working in AI. Mathematics is how I make sense of things. I ",
+      "textSha256": "c26eee21f8253a4e638402fe8d59e7a8ae9d71b76fe1395a2292d8e9585e6526",
+      "characterCount": 3193,
+      "wordCount": 411,
+      "preview": "Skip to main content Theodore Ouyang About Past Experience Current Chapter Thinking mathematically Working in AI Mathematics is how I make sense of things. I wa",
       "altTexts": [],
       "ariaLabels": [
         "Theodore Ouyang home",
         "Primary navigation",
-        "Certified Valuation of Arithmetic Asian Options links",
-        "Certified Joint Pricing Errors in Rough Heston links",
         "Contact"
       ],
       "metadata": {
         "title": "About | Theodore Ouyang",
-        "description": "Thinking mathematically. Working in AI. Theodore Ouyang's research, education, and interests.",
+        "description": "Theodore Ouyang's research, education, and interests in mathematics and AI.",
         "canonical": "https://www.theodoreoy.com/",
         "openGraphTitle": "About | Theodore Ouyang",
-        "openGraphDescription": "Thinking mathematically. Working in AI. Theodore Ouyang's research, education, and interests.",
+        "openGraphDescription": "Theodore Ouyang's research, education, and interests in mathematics and AI.",
         "openGraphUrl": "https://www.theodoreoy.com/",
         "twitterTitle": "About | Theodore Ouyang",
-        "twitterDescription": "Thinking mathematically. Working in AI. Theodore Ouyang's research, education, and interests."
+        "twitterDescription": "Theodore Ouyang's research, education, and interests in mathematics and AI."
       }
     },
     "/education/certified-valuation-arithmetic-asian-options/": {
