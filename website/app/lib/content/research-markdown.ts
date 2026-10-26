@@ -11,8 +11,9 @@ export type ResearchCell = { source: string; inlines: ResearchInline[] };
 export type ResearchBlock =
   | { type: "paragraph"; source: string; inlines: ResearchInline[]; id?: string }
   | { type: "heading"; source: string; level: 2 | 3; id: string; inlines: ResearchInline[] }
-  | { type: "equation"; source: string; tex: string }
-  | { type: "table"; source: string; headerRow: boolean; rows: ResearchCell[][] };
+  | { type: "equation"; source: string; tex: string; id?: string }
+  | { type: "figure"; source: string; src: string; inlines: ResearchInline[]; id?: string }
+  | { type: "table"; source: string; headerRow: boolean; rows: ResearchCell[][]; id?: string };
 
 export type ResearchArticleContent = {
   slug: string;
@@ -53,7 +54,7 @@ export function parseResearchMarkdown(markdown: string, options: { joinSoftLines
 
   function paragraphBoundary(line: string) {
     const value = line.trim();
-    if (!value || /^(?:#{1,6} |<table\b|<a id=|\||(?:[-*+]|\d+[.)])\s)/u.test(value)) return true;
+    if (!value || /^(?:#{1,6} |<table\b|<a id=|!\[|\||(?:[-*+]|\d+[.)])\s)/u.test(value) || value.startsWith("![")) return true;
     const display = value.match(/^@@RESEARCH-MATH-(\d+)@@$/u);
     return display !== null && formulaAt(Number(display[1])).display;
   }
@@ -61,7 +62,7 @@ export function parseResearchMarkdown(markdown: string, options: { joinSoftLines
   function inlines(source: string): ResearchInline[] {
     const result: ResearchInline[] = [];
     let offset = 0;
-    for (const match of source.matchAll(/<br\s*\/?>|@@RESEARCH-MATH-(\d+)@@|\*\*([\s\S]+?)\*\*|\*([^*]+)\*|`([^`]+)`|\[([^\]]+)\]\(((?:https?:\/\/|mailto:|#)[^\s)]+)\)/giu)) {
+    for (const match of source.matchAll(/<br\s*\/?>|@@RESEARCH-MATH-(\d+)@@|\*\*([\s\S]+?)\*\*|\*([^*]+)\*|`([^`]+)`|\[([^\[\]]+)\]\(((?:https?:\/\/|mailto:|#)[^\s)]+)\)/giu)) {
       if (match.index > offset) result.push({ type: "text", text: source.slice(offset, match.index) });
       if (match[2] !== undefined || match[3] !== undefined) {
         result.push({ type: match[2] !== undefined ? "strong" : "emphasis", inlines: inlines(match[2] ?? match[3]) });
@@ -112,6 +113,11 @@ export function parseResearchMarkdown(markdown: string, options: { joinSoftLines
   const lines = protectedText.split(/\r?\n/u);
   let headingCount = 0;
   let paragraphId: string | undefined;
+  function takeAnchor() {
+    const anchor = paragraphId ? { id: paragraphId } : {};
+    paragraphId = undefined;
+    return anchor;
+  }
   for (let index = 0; index < lines.length; index += 1) {
     const line = lines[index];
     const structuralLine = line.trim();
@@ -129,7 +135,14 @@ export function parseResearchMarkdown(markdown: string, options: { joinSoftLines
       const formulaIndex = Number(display[1]);
       const formula = formulaAt(formulaIndex);
       uses[formulaIndex] += 1;
-      blocks.push({ type: "equation", source: formula.source, tex: formula.tex });
+      blocks.push({ type: "equation", source: formula.source, tex: formula.tex, ...takeAnchor() });
+      continue;
+    }
+
+    if (structuralLine.startsWith("![")) {
+      const figure = structuralLine.match(/^!\[(.+)\]\((\/assets\/research\/(?:[a-z0-9-]+\/)*[a-z0-9-]+\.(?:png|webp|jpg))\)$/u);
+      if (!figure) throw new Error("Research figures require a caption and a local research image.");
+      blocks.push({ type: "figure", source: restoreSource(line), src: figure[2], inlines: inlines(figure[1]), ...takeAnchor() });
       continue;
     }
 
@@ -140,7 +153,7 @@ export function parseResearchMarkdown(markdown: string, options: { joinSoftLines
         if (index >= lines.length) throw new Error("Unclosed Research table.");
         tableLines.push(lines[index]);
       }
-      blocks.push(table(tableLines.join("\n")));
+      blocks.push({ ...table(tableLines.join("\n")), ...takeAnchor() });
       continue;
     }
 
@@ -156,7 +169,7 @@ export function parseResearchMarkdown(markdown: string, options: { joinSoftLines
       }
       const rows = [tableLines[0], ...tableLines.slice(2)].map((row) => cells(row).map((cell) => ({ source: restoreSource(cell), inlines: inlines(cell) })));
       if (!rows[0].length || rows.some((row) => row.length !== rows[0].length)) throw new Error("Research tables must retain complete rectangular rows.");
-      blocks.push({ type: "table", source: restoreSource(tableLines.join("\n")), headerRow: true, rows });
+      blocks.push({ type: "table", source: restoreSource(tableLines.join("\n")), headerRow: true, rows, ...takeAnchor() });
       continue;
     }
 
@@ -169,6 +182,7 @@ export function parseResearchMarkdown(markdown: string, options: { joinSoftLines
         level: heading[1].length as 2 | 3,
         id: `section-${headingCount}`,
         inlines: inlines(heading[2]),
+        ...takeAnchor(),
       });
       continue;
     }

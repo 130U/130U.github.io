@@ -7,16 +7,16 @@
     "app/components/experience/ExperienceDetails.tsx": "5eb638be11cc1752a22e48e1cc97928d93dc0d9056c1464a3771c14cddfd4075",
     "app/lib/content/experience-showcase.ts": "88e476dec472df7e28dc4f1854029f952d907a240e0488c392ec7edca1742f66",
     "content/experience-showcase.json": "03e3680be51c769b2749383b2d1ed225515396c7847700e732978234fd992483",
-    "app/components/AboutContent.tsx": "5fe207e08b76cbeb1298997316df120d668fd0ea9a2af2fa771a0e1941891507",
+    "app/components/AboutContent.tsx": "6f5861525912ac8a692478b4d7f442f7308b6cecb566c66a36d407ea1f28f843",
     "app/lib/content/about.ts": "8d79e72133dcbcae9523771a099f53f0aecb879cea384769ff6bb0144e05626f",
-    "app/components/research/ResearchArticle.tsx": "cc1271fc1a3a5c0f9f3b1416324aba8ca4b7ab50d431b286ce7bef8ebb27a73a",
+    "app/components/research/ResearchArticle.tsx": "3224d3a98db362a57936ef2bbc94edb040f0ee13a60797373c11ff4ccca529b9",
     "app/components/research/ResearchMath.tsx": "5fec90d5c5e369639750f327c203b47ab92a1c06896d9eb360c69d88c1d6a24c",
-    "app/lib/content/research-markdown.ts": "7774b6637384a193b3fcbdc3463e6b1e0e7679d569e1e79a1115c5d84b3435bf",
+    "app/lib/content/research-markdown.ts": "d2d03cfc6b7bc38d5a409d134f517c9ccdff3a3977b3af0495b437b96850e001",
     "app/lib/content/research-math.ts": "0343a075dba996cd6a96d3ab299eb6bf095b1b7a4c662f84b253cd243c4107ff",
     "app/education/page.tsx": "eac723893ce54e0f474edfe6c8d31be7bfd7e333ad1e2fcacfbec978cd8f082d",
     "app/education/certified-valuation-arithmetic-asian-options/page.tsx": "ac50f30d6ba9f95eaf75c44a88ae26334479217ac1a92634371b69ee86d789fa",
     "app/education/certified-rough-heston-valuation/page.tsx": "3891da8f094b8315eff066a95c4aec8a8bca527587f330e6a080e4c6086c1783",
-    "app/lib/content/selected-research.ts": "4a9abbbeafc942ce44f03f355d9afd9e7c5d71b829e2b99944b64fb6ffd4a63a",
+    "app/lib/content/selected-research.ts": "11059ff97c1b051dc01c7136a0b8c56974d80a6691295ce2228230a762594dff",
     "content/selected-research/certified-valuation-arithmetic-asian-options.json": "1cd1c51b471e5ddf83d673788b62cf73a0f4d4967a99d96f4fdb9e8b50e5c0a0",
     "content/selected-research/certified-rough-heston-valuation.json": "f7fc027dce9e755c600702a7e405782a863ec8ef90eda31962c39e8990d34004",
     "app/now/page.tsx": "701f81ff14577a7860daff4fe83208ee6f5e30fd44fe499a11e97269ec888544",
@@ -38,6 +38,8 @@
     "content/artificial-intelligence/verification-and-supervision-in-scientific-reasoning-tasks.json": "2c342fb87edcc4618d738233329b2c2926c6baccb1891023437c4587d1d9d560",
     "content/artificial-intelligence/evidence-uncertainty-and-decision-guarantees-in-investment-research.json": "98a9c49dd5bc50f5c24ea94ccf7a38d5f6f93abcc770f9b70049a2c73f520bbc",
     "app/experience/[slug]/page.tsx": "997cadef95f145e2abf55cd64506e278425b5c30d4cfccb9b835453b811c755e",
-    "app/lib/content/experience-domains.ts": "7362085d4857daa83ae476f176163378dde550572d5a1932d2f142d4d1a00c7d"
+    "app/lib/content/experience-domains.ts": "7362085d4857daa83ae476f176163378dde550572d5a1932d2f142d4d1a00c7d",
+    "app/education/critical-dependence-stress-for-portfolio-diversification/page.tsx": "b0dbb4c593e681c702908a707b8dc31ac1800472f749a8897bc3c7d2550f1f90",
+    "content/selected-research/critical-dependence-stress-for-portfolio-diversification.json": "66dae1b9bdbf757d46992632bb69c409e24079d157cbd155852c7e48e2ebe26a"
   }
 }

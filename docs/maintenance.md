@@ -23,6 +23,7 @@ Paths in this table are relative to `website/`.
 | --- | --- | --- |
 | About | `/` | `app/page.tsx`, `app/home.module.css`, shared About content |
 | Education compatibility alias | `/education/` | `app/education/page.tsx`, shared About content |
+| Dependence-stress research | `/education/critical-dependence-stress-for-portfolio-diversification/` | `app/lib/content/selected-research.ts`, `content/selected-research/critical-dependence-stress-for-portfolio-diversification.json` |
 | Asian-options research | `/education/certified-valuation-arithmetic-asian-options/` | `app/lib/content/selected-research.ts`, `content/selected-research/certified-valuation-arithmetic-asian-options.json` |
 | Rough Heston research | `/education/certified-rough-heston-valuation/` | `app/lib/content/selected-research.ts`, `content/selected-research/certified-rough-heston-valuation.json` |
 | Experience | `/experience/` | `app/components/experience/`, `content/experience-showcase.json` |
@@ -59,19 +60,19 @@ Legal articles present their complete Abstract, text, Author Note, and Footnotes
 after the contribution block. Contents starts with Key Contributions and uses the
 source chapter anchors.
 
-`app/lib/content/routes.ts` supplies twenty-two canonical sitemap routes: About,
-Experience, two Selected Research articles, eight Experience manuscripts, and ten
+`app/lib/content/routes.ts` supplies twenty-three canonical sitemap routes: About,
+Experience, three Selected Research articles, eight Experience manuscripts, and ten
 other Experience detail pages.
 The static export includes `/education/`, `/past-experience/`, `/now/`, and the
 five category URLs as compatibility pages. The category pages render the same
 approved entries, use `/experience/` as their canonical URL, and link back to the
 corresponding Experience section.
-There are thirty exported content routes and the separate `/architecture/`
-reference: thirty-one routes in total, excluding 404.
+There are thirty-one exported content routes and the separate `/architecture/`
+reference: thirty-two routes in total, excluding 404.
 
 Biographical, AI research, Selected Research, and legal source files are checked against `content/protected-sources.json`.
 `content/visible-copy-manifest.json` independently records text, metadata, alt text,
-and ARIA labels for all thirty content pages. Copy changes require the owner's explicit
+and ARIA labels for all thirty-one content pages. Copy changes require the owner's explicit
 request and an intentional update to these contracts. Presentation-only changes to
 a protected component update its source hash while preserving the approved prose,
 metadata, and formula source contracts. Tests also verify page counts and navigation
@@ -171,29 +172,36 @@ update only the corresponding contract fields after independent verification.
 ### Selected Research
 
 About presents three compact research entries before Education and Selected Coursework.
-[Critical Dependence Stress for Portfolio Diversification](https://github.com/130U/mathematical-finance-project)
-appears first and links to GitHub. The Asian-options and Rough Heston entries follow,
-linking to their on-site manuscripts. Title links use black ink, turning blue on
+Critical Dependence Stress for Portfolio Diversification appears first, followed
+by the Asian-options and Rough Heston papers. All three titles link to their on-site
+manuscripts. Title links use black ink, turning blue on
 hover or keyboard focus. A short paragraph states the mathematical method and the
 achieved result within the paper's specified example. Keep numerical bounds and
 improvements tied to their model, horizon, payoff, and comparison. Source links remain
 on the manuscript pages; About has no separate
 Paper, Repository, or Results action row. `app/lib/content/selected-research.ts`
-loads both structured sources from `content/selected-research/`:
+loads three structured sources from `content/selected-research/`:
 
 | Source | On-site manuscript scope |
 | --- | --- |
+| `critical-dependence-stress-for-portfolio-diversification.json` | Abstract, chapters 1–5, references, and an appendix/supporting-material link |
 | `certified-valuation-arithmetic-asian-options.json` | Abstract, chapters 1–10, references, and an appendix/supporting-material link |
 | `certified-rough-heston-valuation.json` | Abstract, chapters 1–8, references, and an appendix/supporting-material link |
 
-Frozen Markdown sources and their provenance record live in
-`content/sources/selected-research/`. The import script and content tests use these
-files to verify the structured manuscript sources against the pinned upstream versions.
+Frozen Asian-options and Rough Heston Markdown sources and their shared provenance
+record live in `content/sources/selected-research/`; `scripts/import-selected-research.mjs`
+imports those two papers. The dependence-stress paper uses frozen TeX files and its
+own provenance record in `content/sources/selected-research/dependence/`, with
+deterministic conversion in `scripts/import-dependence-research.mjs`. The import
+scripts and content tests verify structured manuscripts against their pinned sources.
 
 The pages use the shared `ResearchArticle` and `ResearchMath` components, with a
 contents list, source links, and return links to the corresponding About research
 entry at `/#<slug>`. Their navigation marks About as current. They publish the complete
-core chapters. Appendices are available in the GitHub manuscript.
+core chapters. The article header contains only the return link, title, GitHub link,
+and Full Manuscript link. Reading content starts at Abstract; source front matter
+before Abstract remains in the protected source. Appendices are available in the
+GitHub manuscript.
 Each JSON source stores `repositoryUrl`, `sourceUrl`, `sourceCommit`, and `sourceBlob`.
 The manuscript link is pinned to that source commit. When refreshing a paper, compare
 against the pinned file, preserve the complete core chapters and references, and
@@ -241,7 +249,7 @@ To add an approved paper, update its structured source, the legal-paper slug reg
 its entry and route mapping in `experience-showcase.ts`, and the independent content/output
 contracts together. Use the supplied manuscript as the wording and citation authority.
 
-Article validation checks all thirty exported content routes, eighteen Experience
+Article validation checks all thirty-one exported content routes, eighteen Experience
 reading links including four legal articles, chapter
 anchors, complete numbered references, bidirectional footnote links, and the absence
 of public PDF files. Validate the published text against the approved source before

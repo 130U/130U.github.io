@@ -234,7 +234,7 @@
       "dot": "cyan",
       "title": "Content first",
       "items": [
-        "About and Experience, 5 domains, 18 experience entries, 3 Selected Research entries (2 on-site papers)",
+        "About and Experience, 5 domains, 18 experience entries, 3 on-site Selected Research papers",
         "Shared route registry and protected source text"
       ]
     },
@@ -242,7 +242,7 @@
       "dot": "emerald",
       "title": "Static delivery",
       "items": [
-        "22 canonical content pages, 8 compatibility pages, architecture viewer, and 404",
+        "23 canonical content pages, 8 compatibility pages, architecture viewer, and 404",
         "No runtime API, database, or authentication"
       ]
     },

@@ -37,6 +37,7 @@ test("research tables protect words and formula widths before using native horiz
 
 test("all research tables retain native table semantics inside named keyboard-accessible scroll regions", async () => {
   const routes = [
+    ["education/critical-dependence-stress-for-portfolio-diversification", 0],
     ["education/certified-valuation-arithmetic-asian-options", 11],
     ["education/certified-rough-heston-valuation", 13],
     ["past-experience/artificial-intelligence/statistical-inference-and-resource-allocation-in-expert-data-production", 1],

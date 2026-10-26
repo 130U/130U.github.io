@@ -1,0 +1,148 @@
+{
+  "repository": "130U/mathematical-finance-project",
+  "commit": "3cc4c7e9b36e77027962999b932a1df7972cd2ed",
+  "commitDate": "2026-10-26T17:39:13Z",
+  "fetchedWith": "GitHub connector commit/tree pinning and fetch_file base64 downloads checked against Git blob SHA-1",
+  "files": [
+    {
+      "path": "computation/source/en/figures/budget-comparison.png",
+      "sha": "26049b53bce1aa46a7e76dd256a41a7b8f047b2f",
+      "size": 131904
+    },
+    {
+      "path": "computation/source/en/figures/corner-capacity.png",
+      "sha": "1b0448f98bb83f1bf298c792e8ce6dd6e0b87f3e",
+      "size": 56176
+    },
+    {
+      "path": "computation/source/en/figures/optimal-flow-shares.png",
+      "sha": "109cbcf481ff5fd0eb991cb1bb441f90490d2cdc",
+      "size": 61333
+    },
+    {
+      "path": "computation/source/en/figures/tail-layer-repair.png",
+      "sha": "af03ddccc5c9deecad2efa1d786989ee7d2c9425",
+      "size": 94807
+    },
+    {
+      "path": "paper/source/declarations.tex",
+      "sha": "89f601719f90503b89a8a062ffe8f83a36f16ccb",
+      "size": 932
+    },
+    {
+      "path": "paper/source/figure-budget.tex",
+      "sha": "7ea1729bbcba78937e1d80f8abee868d6a36a319",
+      "size": 617
+    },
+    {
+      "path": "paper/source/figure-corner.tex",
+      "sha": "3e1c46d033b7f651ecc68785a35b2f2e15ace35a",
+      "size": 719
+    },
+    {
+      "path": "paper/source/figure-tail-layer.tex",
+      "sha": "854ab425a884ccfc969ddd50d3e63019395f18d6",
+      "size": 668
+    },
+    {
+      "path": "paper/source/main-classification-flow.tex",
+      "sha": "679500583a2df9c46c106e3a3b4ec3a7018e4e27",
+      "size": 20185
+    },
+    {
+      "path": "paper/source/main-crossing-proof.tex",
+      "sha": "ed061612967d87cec33ffe8c667d3052d810f75c",
+      "size": 4373
+    },
+    {
+      "path": "paper/source/main-crossing.tex",
+      "sha": "f62b71011445d97f76ce606b6f80967ed490b08a",
+      "size": 8624
+    },
+    {
+      "path": "paper/source/main-introduction.tex",
+      "sha": "24ed3bdc5206a73c4d4b18845ecc8ac9dc8eb2a8",
+      "size": 11929
+    },
+    {
+      "path": "paper/source/main-model-benchmark.tex",
+      "sha": "11a21a33732f4dde16faab00c50f1e31acd991ac",
+      "size": 23329
+    },
+    {
+      "path": "paper/source/main-quantitative.tex",
+      "sha": "05800ce07c7cf521d7871b3dcfde8dd307e0d9dc",
+      "size": 11615
+    },
+    {
+      "path": "paper/source/main-scope.tex",
+      "sha": "8af333921870657878dbeed566884da28215b644",
+      "size": 4057
+    },
+    {
+      "path": "paper/source/main-variational-proof.tex",
+      "sha": "a439c57d8164c99b27e868d44e8dc8807cfbc833",
+      "size": 3674
+    },
+    {
+      "path": "paper/source/main-variational.tex",
+      "sha": "0f9ced9de7af17a0d5751358ae76c984887816a6",
+      "size": 9320
+    },
+    {
+      "path": "paper/source/paper.tex",
+      "sha": "6ae3b86691b81075188d4cf73f091ac078f961bd",
+      "size": 5595
+    },
+    {
+      "path": "paper/source/references.tex",
+      "sha": "c9c14922694c91f8a2a861d086e8401dc81cbddc",
+      "size": 10734
+    },
+    {
+      "path": "paper/source/technical-cost-proof.tex",
+      "sha": "c40ce68d78a89c723ab8aa6eb0eed1c6b306cd0b",
+      "size": 2817
+    },
+    {
+      "path": "paper/source/technical-efficiency-identity.tex",
+      "sha": "428f2d1c87c98240ddf300f6e2bead93935fed0a",
+      "size": 1603
+    },
+    {
+      "path": "paper/source/technical-flow-proof.tex",
+      "sha": "d11550c25c734569593f8047c11769261f140411",
+      "size": 7861
+    },
+    {
+      "path": "paper/source/technical-limit.tex",
+      "sha": "b7f280ebf1472ec9ce9a9864842936b60a6c3666",
+      "size": 12651
+    },
+    {
+      "path": "paper/source/technical-mixture-obstruction.tex",
+      "sha": "d3b3f854872e12fd31e1c35f3dfc44c5a5f3805d",
+      "size": 1423
+    },
+    {
+      "path": "paper/source/technical-quantitative.tex",
+      "sha": "ce04cb9bf6d5c6c10385b0f5159a4da9598026a0",
+      "size": 6569
+    },
+    {
+      "path": "paper/source/technical-reference.tex",
+      "sha": "44c7620f618c98ed96da2343ed6bba1c8126afcd",
+      "size": 3244
+    },
+    {
+      "path": "paper/source/technical-threshold-statement.tex",
+      "sha": "fef5cc5c5d8cd4c1154957062c7eda42bc5627e2",
+      "size": 481
+    },
+    {
+      "path": "paper/source/technical-variational-proof.tex",
+      "sha": "ebb9c6f3db465e375ed4960691ef00a437e58f59",
+      "size": 19100
+    }
+  ]
+}

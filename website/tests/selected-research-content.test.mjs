@@ -69,8 +69,10 @@ for (const expected of PROJECTS) {
     const rendered = [...html.matchAll(/<math\b[^>]*data-research-math="(inline|display)"[^>]*>[\s\S]*?<annotation\b[^>]*encoding="application\/x-tex"[^>]*>([\s\S]*?)<\/annotation>[\s\S]*?<\/math>/gu)].map((match) => ({ tex: decodeHtml(match[2]), display: match[1] === "display" }));
     assert.deepEqual(rendered, sourceFormulas(article.markdown));
     const blocks = parseResearchMarkdown(article.markdown, { joinSoftLines: true });
+    const abstractIndex = blocks.findIndex((block) => block.type === "heading" && block.source.trim() === "## Abstract");
+    assert.ok(abstractIndex >= 0, "Selected Research must begin its reading content at Abstract.");
     const markers = [...html.matchAll(/data-research-block="(\d+)"/gu)].map((match) => Number(match[1]));
-    assert.deepEqual(markers, blocks.map((_, index) => index), "Every article block must appear once, in source order.");
+    assert.deepEqual(markers, blocks.slice(abstractIndex).map((_, index) => abstractIndex + index), "Every block from Abstract onward must appear once, in source order; pre-abstract front matter stays in the source.");
     const contents = html.match(/<nav\b[^>]*aria-label="Article contents"[^>]*>([\s\S]*?)<\/nav>/u);
     assert.ok(contents);
     assert.doesNotMatch(contents[1], /data-research-block/u, "Only navigation, never manuscript content, belongs in the disclosure.");
