@@ -618,7 +618,7 @@ test("About and its education alias preserve both degrees, 49 courses, and the a
     assert.equal(lists.length, 4);
     assert.equal(lists.reduce((total, list) => total + (list[2].match(/<li\b/giu) ?? []).length, 0), 49);
     const text = stripMarkup(html);
-    for (const record of ["Master of Engineering in Risk Engineering", "Financial Risk Concentration", "Bachelor of Science in Mathematics", "Dual-Degree Undergraduate Program", "Pratt School of Engineering Merit Scholarship", "Undergraduate Merit Scholarship", "Academic advisor:", "Mark Borsuk, Ph.D."]) {
+    for (const record of ["Master of Engineering in Risk Engineering", "Financial Risk Concentration", "Bachelor of Science in Mathematics", "Dual-Degree Undergraduate Program", "Pratt School of Engineering Merit Scholarship", "Undergraduate Merit Scholarship", "Academic Advisor:", "Mark Borsuk, Ph.D."]) {
       assert.ok(text.includes(record), `${route} is missing ${record}`);
     }
     assert.equal((text.match(/Duke University/gu) ?? []).length, 1);
@@ -678,14 +678,15 @@ test("the production design contract is restrained and dependency-light", async 
   assert.doesNotMatch(globals, /box-shadow|backdrop-filter/u);
   assert.doesNotMatch(home, /box-shadow|backdrop-filter|linear-gradient/u);
   assert.match(homePage, /<DitheredEntrance \/>/u);
-  assert.match(globals, /@media \(pointer:\s*coarse\)[\s\S]*?\.primary-nav a,[\s\S]*?\.entry-website-link[\s\S]*?min-height:\s*44px/u);
+  const experience = await readFile(path.join(ROOT, "app", "components", "experience", "Experience.module.css"), "utf8");
+  assert.match(globals, /@media \(pointer:\s*coarse\)[\s\S]*?\.primary-nav a\s*\{[^}]*min-height:\s*44px/u);
   assert.match(home, /@media \(pointer:\s*coarse\)[\s\S]*?\.contactStrip a[\s\S]*?min-height:\s*44px/u);
   assert.match(globals, /width:\s*min\(100%,\s*1440px\)/u);
   assert.match(globals, /\.content-column\s*\{[\s\S]*?grid-template-columns:\s*repeat\(12,[\s\S]*?padding:\s*176px 0 144px/u);
   assert.match(globals, /\.structural-guide-tick\s*\{[\s\S]*?position:\s*sticky[\s\S]*?height:\s*20px/u);
-  assert.match(globals, /\.domain-directory\s*\{[\s\S]*?grid-column:\s*1\s*\/\s*span\s*11/u);
-  assert.match(globals, /\.domain-directory-link\s*\{[\s\S]*?grid-template-columns:\s*repeat\(11,/u);
-  assert.match(globals, /\.archive-entry\s*\{[\s\S]*?grid-template-columns:\s*repeat\(11,/u);
+  assert.match(experience, /\.directory\s*\{[^}]*grid-template-columns:\s*1fr/u);
+  assert.match(experience, /\.section\s*\{[^}]*grid-template-columns:\s*repeat\(12,/u);
+  assert.match(experience, /\.sectionBody\s*\{[^}]*grid-column:\s*2\s*\/\s*span\s*10[^}]*max-width:\s*var\(--reading-measure\)/u);
   assert.doesNotMatch(globals, /\.education-entry\s*\{[^}]*grid-template-columns/u);
   for (const guide of ["frame-start", "rail-boundary", "reading-start", "reading-measure", "reading-end"]) assert.ok(structuralGrid.includes(`"${guide}"`));
   for (const contract of ["aria-controls=\"site-menu\"", "aria-expanded={menuOpen}", 'event.key === "Escape"', 'document.body.classList.add("menu-open")', 'querySelectorAll<HTMLElement>']) assert.ok(navigation.includes(contract));
@@ -696,9 +697,10 @@ test("the production design contract is restrained and dependency-light", async 
   assert.match(globals, /\.site-rail\[data-enhanced="true"\] \.rail-panel\s*\{[^}]*visibility:\s*hidden/u);
   assert.match(navigation, /wordmark-lockup[\s\S]*?wordmark-mark[\s\S]*?wordmark-name[\s\S]*?>Theodore Ouyang<\/span>/u);
   assert.match(layout, /assets\/brand\/lo-mark\.svg/u);
-  assert.match(globals, /\.entry-metadata\s*\{[\s\S]*?grid-template-columns:\s*1fr/u);
-  assert.match(globals, /\.entry-project\s*\{[\s\S]*?color:\s*var\(--ink\)/u);
-  assert.match(globals, /\.archive-bullets li::before\s*\{[\s\S]*?width:\s*3px[\s\S]*?content:\s*""/u);
+  assert.match(experience, /\.metadata\s*\{[^}]*grid-template-columns:\s*1fr/u);
+  assert.match(experience, /\.entryTitle\s*\{[^}]*font-size:\s*var\(--type-subheading\)/u);
+  assert.match(experience, /\.contributions ul\s*\{[^}]*padding-left:\s*19px/u);
+  assert.match(experience, /\.contributions li\s*\{[^}]*padding-left:\s*3px/u);
   assert.deepEqual(Object.keys(packageJson.dependencies).sort(), ["@mathjax/mathjax-tex-font", "@mathjax/src", "next", "react", "react-dom"]);
   assert.equal(packageJson.dependencies["@mathjax/src"], "4.1.3");
   assert.equal(packageJson.dependencies["@mathjax/mathjax-tex-font"], "4.1.3");

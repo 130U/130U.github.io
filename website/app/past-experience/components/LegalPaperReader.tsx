@@ -111,14 +111,14 @@ export function LegalPaperReader({
         {activeNote && (
           <>
             <header className={styles.header}>
-              <h2 id={titleId}>{activeNote.label === "Author note" ? "Author note" : `Footnote ${activeNote.label}`}</h2>
+              <h2 id={titleId}>{activeNote.label === "Author note" ? "Author Note" : `Footnote ${activeNote.label}`}</h2>
               <button ref={closeButtonRef} className={styles.closeButton} type="button" onClick={closePreview} aria-label="Close note preview">
                 Close
               </button>
             </header>
             <div className={styles.content}>{activeNote.content}</div>
             <footer className={styles.footer}>
-              <a className={styles.footnotesLink} href={`#fn-${activeNote.key}`} onClick={viewInFootnotes}>View in footnotes</a>
+              <a className={styles.footnotesLink} href={`#fn-${activeNote.key}`} onClick={viewInFootnotes}>View in Footnotes</a>
             </footer>
           </>
         )}

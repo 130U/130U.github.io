@@ -3,8 +3,7 @@
 Theodore Ouyang's site uses a precise editorial reading frame: warm paper, black ink,
 clear typography, a monochrome LO mark, and selective blue feedback. Its grid, paper
 color, restrained rules, and spacing take their reference from [Cognition](https://cognition.com/).
-The site retains its own self-hosted Inter typeface and content hierarchy. The design
-does not claim to reproduce Cognition's current font files or its complete interface.
+The site uses self-hosted Inter and its own content hierarchy.
 
 ## Identity
 
@@ -33,11 +32,10 @@ metadata, and the architecture viewer. Two self-hosted WOFF2 files provide varia
 weights and true italics. `website/public/assets/fonts/inter.css` owns `--font-text`,
 the default optical sizing, and the font faces. The regular face is preloaded; italic loads when used.
 System sans fallbacks cover unavailable glyphs.
-The LO mark retains its independent artwork.
+The LO mark uses independent artwork.
 About's reading frame uses this same Inter family with automatic optical sizing
-disabled and the `opsz` axis fixed at 14. Its headings and prose use normal tracking;
-small indices and field labels retain their shared label tracking. These scoped
-settings leave other pages and the particle artwork unchanged.
+disabled and the `opsz` axis fixed at 14. Its headings and prose use normal tracking.
+Small indices and field labels use the shared label tracking.
 
 Typography follows semantic roles. At any viewport, text with the same role uses
 the same size across every section and page. Weight, color, spacing, and italics
@@ -85,7 +83,7 @@ blue is not a prose color on the website. All body copy uses the existing ink co
 Blue remains reserved for navigation, hover, and keyboard focus.
 
 All eighteen entries use real Read More links to dedicated pages. The eight AI and
-legal articles retain their existing URLs; the other ten entries have pages at
+legal articles use their manuscript URLs; the other ten entries have pages at
 `/experience/{slug}/`. Outer entries lead with the institution or organization;
 legal entries use `Duke Law School: {research area} Research`. Detail-page H1s use
 `{institution}: {project title}`, with any internal title colon rendered as an em
@@ -95,15 +93,12 @@ Contributions, with contextual notes as the final bullets in the same list and
 type style. Links work without JavaScript and have accessible
 keyboard focus and touch targets. Do not repeat the outer summary in the detail view.
 
-AI pages proceed directly from Key Contributions to the original numbered article
-body. The rendering layer omits the duplicate technical title, Project and Author
-lines, standalone Overview heading, and old introductory paragraphs before the
-first numbered chapter; the protected source JSON remains unchanged. Legal pages
-place Key Contributions before the complete unchanged Abstract and manuscript.
-The contents rail
-includes the contribution block, retains the original chapter links, and follows
-the existing responsive reading layout. Return links target the matching entry on
-Experience. About and its mathematical manuscripts retain their existing layouts.
+AI pages proceed directly from Key Contributions to the first numbered chapter.
+The complete protected source JSON includes the title, Project and Author lines,
+and introductory material for provenance. Legal pages place Key Contributions
+before the complete Abstract and manuscript. The shared contents rail includes
+the contribution block and source chapter links. Return links target the matching
+entry on Experience.
 
 Research article prose, emphasis, citations, and table cells use the shared 14px
 reading size. Subsection headings use the shared 18px size with weight 600. Inline
@@ -185,24 +180,25 @@ the shared 720px reading measure and reflow with the viewport.
 
 ## Interaction
 
-About retains its Canvas2D name entrance and direct scroll link to the profile. Routine links
-use color and underline feedback rather than moving, scaling, or animated arrows.
-Anchor navigation uses native scrolling. The mobile menu retains a short opening
+About opens with its Canvas2D name entrance and direct scroll link to the profile. Routine links
+use color and underline feedback.
+Anchor navigation uses native scrolling. The mobile menu uses a short opening
 transition, with reduced-motion support.
 Focus outlines remain visible. The mobile menu traps keyboard focus, closes on Escape
 or navigation, and releases the page when the viewport reaches desktop width.
 
 ## Content and extension
 
-Page, domain, institution, project, and course titles use title case. Research
-article titles and chapters retain their authored capitalization. Supporting
-sentences, subsection headings, accessibility descriptions, and action labels use
+Page, domain, institution, project, and course titles use title case. Interface
+labels use title case, including Read More, Back to Top, Full Manuscript, Author
+Note, and View in Footnotes. Research article titles and chapters preserve their
+authored capitalization. Supporting sentences and accessibility descriptions use
 sentence case. Preserve official spellings and acronyms such as GitHub, AI, ESG,
 LLM, SHAP, and IPhO; sentence case does not lowercase proper names.
 Use "and" in editorial category labels. Preserve official course and organization
 names, including their ampersands. The fellowship name is `Sequoia Fellow`, and
 its cohort is owned by the identity configuration in `app/lib/content/site.ts`.
-It remains available to existing site metadata but is not displayed on About.
+Site metadata uses this identity configuration; About omits the fellowship.
 
 Use straight apostrophes and quotation marks with English commas, periods,
 colons, semicolons, and parentheses in public copy and metadata, including the
@@ -220,12 +216,12 @@ Duke degrees, the advisor, scholarships, and all 49 courses remain
 available. Coursework keeps its four subject groups. The `/education/` compatibility
 page shares the About content without repeating the particle entrance, uses `/`
 as its canonical URL, and remains outside primary navigation and the sitemap.
-Experience contains all five domains and eighteen entries. The five older domain
-URLs remain compatibility pages with `/experience/` as their canonical URL and a
+Experience contains all five domains and eighteen entries. The five category
+URLs provide compatibility pages with `/experience/` as their canonical URL and a
 return link to the matching Experience section. Domain `03` is Legal Research and
 Policy Analysis; its four selected papers
-retain their dedicated article URLs. Domain `01`, AI Research and Engineering,
-retains four project reading URLs. The other ten entries open dedicated detail
+use dedicated article URLs. Domain `01`, AI Research and Engineering,
+has four project reading URLs. The other ten entries open dedicated detail
 pages under `/experience/`.
 About's Selected Research section presents two entries, each with its
 original title as a black manuscript link that turns blue on hover or keyboard
@@ -242,7 +238,11 @@ the Rough Heston paper includes chapters 1–8. Appendices and supporting materi
 linked on GitHub. Each JSON source records the exact source commit, blob, and manuscript
 URL; source links should continue to identify that version. The full manuscript is
 available from the article header, and return links lead to the corresponding
-research entry on About. Existing `/education/<paper>/` article URLs remain stable.
+research entry on About. The `/education/<paper>/` manuscript URLs are stable.
+
+Research chapter headings display Roman numerals, and subsections display letters
+in reading order. Source numbering and anchors remain intact. Verified internal
+section references link to the matching heading and preserve their source numerals.
 
 The website has twenty-two canonical content routes: About, Experience, two Selected
 Research articles, eight Experience manuscripts, and ten other Experience detail
@@ -273,7 +273,7 @@ identifies the current reading location without changing the document order.
 Numbered superscript references open the original note in a native dialog. Desktop
 previews are centered; phones use a bottom sheet with a scrollable note body and
 44px controls. Escape, background activation, and Close return focus to the cited
-passage. View in footnotes closes the preview and focuses the complete endnote.
+passage. View in Footnotes closes the preview and focuses the complete endnote.
 Full notes and bidirectional links remain available without JavaScript.
 
 Reading pages retain a visible return link to the corresponding Experience entry. Contents,

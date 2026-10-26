@@ -78,7 +78,7 @@ export function ResearchArticle({ project, active, returnPath, returnLabel, titl
           <Link className="back-link" href={returnPath}><span aria-hidden="true">←</span> {returnLabel}</Link>
           <h1 id={titleId} tabIndex={-1}>{showcase?.pageTitle ?? project.title}</h1>
           {showcase ? <ExperienceMetadata entry={showcase} /> : frontMatterCount > 0 && <div className={styles.frontMatter}>{renderedBlocks.slice(0, frontMatterCount)}</div>}
-          {project.repositoryUrl && <p className={styles.sourceLinks}><a href={project.repositoryUrl}>GitHub</a><a href={project.sourceUrl}>Full manuscript</a></p>}
+          {project.repositoryUrl && <p className={styles.sourceLinks}><a href={project.repositoryUrl}>GitHub</a><a href={project.sourceUrl}>Full Manuscript</a></p>}
         </header>
 
         <ArticleReadingLayout
@@ -93,7 +93,7 @@ export function ResearchArticle({ project, active, returnPath, returnLabel, titl
 
         <footer className={readingStyles.paperFooter}>
           <Link className="back-link" href={returnPath}><span aria-hidden="true">←</span> {returnLabel}</Link>
-          <a href={`#${titleId}`}>Back to top</a>
+          <a href={`#${titleId}`}>Back to Top</a>
         </footer>
       </article>
     </SiteShell>

@@ -2,7 +2,7 @@ import { createHash } from "node:crypto";
 import { readFile, writeFile } from "node:fs/promises";
 import { fileURLToPath } from "node:url";
 
-const audit = new URL("../../docs/audits/selected-research-2026-10-08/", import.meta.url);
+const sourceDirectory = new URL("../content/sources/selected-research/", import.meta.url);
 const sources = [
   {
     key: "asian", slug: "certified-valuation-arithmetic-asian-options", file: "manuscript/report.md",
@@ -24,7 +24,7 @@ const receipts = [];
 for (const config of sources) {
   const contentUrl = new URL(`../content/selected-research/${config.slug}.json`, import.meta.url);
   const { introduction } = JSON.parse(await readFile(contentUrl, "utf8"));
-  const bytes = await readFile(new URL(`${config.key}-source.md`, audit));
+  const bytes = await readFile(new URL(`${config.key}-source.md`, sourceDirectory));
   const source = bytes.toString("utf8");
   const blob = createHash("sha1").update(`blob ${bytes.length}\0`).update(bytes).digest("hex");
   if (blob !== config.sourceBlob) throw new Error(`The frozen ${config.key} manuscript does not match its GitHub blob.`);
@@ -59,5 +59,5 @@ for (const config of sources) {
     transformations: ["The title is rendered once by the page header.", "Relative file links resolve to the frozen GitHub commit.", "A paragraph links omitted appendices and supporting material to GitHub.", "Main text, all main-text tables, mathematical TeX and references are otherwise retained verbatim."],
   });
 }
-await writeFile(new URL("provenance.json", audit), JSON.stringify({ fetchedAt: "2026-10-08", fetchedWith: "GitHub plugin: github_fetch branches and commits; github_fetch_file at exact commit", sources: receipts }, null, 2) + "\n");
-console.log(`Imported ${receipts.length} complete main texts; provenance: ${fileURLToPath(new URL("provenance.json", audit))}`);
+await writeFile(new URL("provenance.json", sourceDirectory), JSON.stringify({ fetchedAt: "2026-10-08", fetchedWith: "GitHub plugin: github_fetch branches and commits; github_fetch_file at exact commit", sources: receipts }, null, 2) + "\n");
+console.log(`Imported ${receipts.length} complete main texts; provenance: ${fileURLToPath(new URL("provenance.json", sourceDirectory))}`);

@@ -1,2 +1,2 @@
-// Current Chapter is now part of Experience, including for existing bookmarks.
+// Serve Experience at /now/ for retained bookmarks.
 export { default, metadata } from "../experience/page";
