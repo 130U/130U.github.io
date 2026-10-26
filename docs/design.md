@@ -51,9 +51,9 @@ scale relative to surrounding text without changing the prose size.
 | Section heading | `--type-heading` | 22px, weight 400 | 1.25 |
 | Project, About institution, course-category heading | `--type-subheading` | 18px, weight 600 | 1.45 |
 | About degree | `--type-reading` | 14px, weight 500 | 1.6 |
-| Body, records, introductions, course names, metadata values, Experience directory item | `--type-reading` | 14px | 1.6 |
+| Body, records, introductions, course names, metadata values | `--type-reading` | 14px | 1.6 |
 | Navigation, menu, wordmark name, return link | `--type-interface` | 14px | 1.4 |
-| Experience directory number | `--type-interface` | 14px | 1.4 |
+| Experience directory item and number | `--type-subheading` | 18px, weight 400 | 1.45 |
 | Project reading action | `--type-action`, alias of `--type-interface` | 14px, weight 500 | 1.4 |
 | Research prose and table cells | `--type-reading` | 14px | 1.6 |
 | Mathematical expression | `--type-math` | 1.15em of its surrounding text | Intrinsic mathematical geometry |
@@ -72,8 +72,8 @@ its temporary reading state.
 
 Experience shares About's Inter family, fixed optical size, role sizes, grid, and
 paper/ink palette. It is one page with five numbered sections and a compact anchor
-directory that stays in one column at every screen width. Its labels use the 14px
-reading role and its numbers use the 14px interface role; section margin indices
+directory that stays in one column at every screen width. Its labels and numbers
+use the 18px subheading size at weight 400; section margin indices
 use 14px on both About and Experience. Section spacing separates
 domains; thin rules and 28px gaps distinguish entries within them. Category
 introductions are omitted. Summaries use upright

@@ -33,7 +33,7 @@ Heston 1–8), and references; appendices are linked on GitHub. Each source JSON
 its exact upstream commit, blob, and manuscript URL.
 
 The main website takes its grid, warm paper color, and fine rules from Cognition as
-a design reference, while retaining self-hosted Inter. Body text shares a 17px scale,
+a design reference, while retaining self-hosted Inter. Body text shares a 14px scale,
 H3 headings use 18px, and formulas use 1.15em. The architecture viewer retains its
 independent diagram controls and geometry while sharing the site's HTML type roles.
 
