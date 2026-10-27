@@ -7,9 +7,9 @@ import { fileURLToPath } from "node:url";
 
 const ROOT = fileURLToPath(new URL("../", import.meta.url));
 const AI_ROUTE = "/past-experience/artificial-intelligence/";
-const APPROVED_DOCUMENT = path.join(ROOT, "content", "sources", "ai-portfolio", "theodore_ouyang_ai_portfolio_optimized.md");
-const APPROVED_REVISIONS = path.join(ROOT, "content", "sources", "ai-portfolio", "editorial-revisions.json");
-const REVISIONS_SHA256 = "6171190332fee0deae11d95e60f3278f885bfac7cb75093ab3608a299e9cf3c5";
+const SOURCE_FILE = "content/sources/ai-portfolio/ai-research-and-engineering.md";
+const CANONICAL_DOCUMENT = path.join(ROOT, SOURCE_FILE);
+const SOURCE_SHA256 = "bc688374f1ca56e7c5eafbd06a7f33e6d7d752f4c8d0dd98b05f30164921405d";
 // Structure and benchmark-table shapes are checked independently of the renderer.
 const PROJECTS = [
   {
@@ -68,57 +68,58 @@ function readableMarkdown(markdown) {
     .replace(/<[^>]+>/gu, " "));
 }
 
-function comparableManuscript(markdown) {
-  return readableMarkdown(markdown
-    .replace(/^## (?:[IVXLCDM]+\.|\d+\.?) /gmu, "## ")
-    .replace(/^\|\s*:?-+[:\s|\-]*\|\s*$/gmu, "")
-    .replace(/^\s*(?:\*|•) /gmu, "")
-    .replace(/^\|(.+)\|$/gmu, (_, row) => row.replaceAll("|", " ")));
+async function canonicalPortfolio() {
+  const document = (await readFile(CANONICAL_DOCUMENT, "utf8")).replace(/\r\n?/gu, "\n");
+  assert.equal(createHash("sha256").update(document).digest("hex"), SOURCE_SHA256, "The canonical manuscript must match its approved content hash after LF normalization");
+  const parts = document.split(/^# Project (\d{2}): ([a-z0-9-]+)$/gmu);
+  assert.equal(parts.length, 13, "The canonical portfolio must contain exactly four projects");
+  const projects = PROJECTS.map(({ slug }, index) => {
+    assert.equal(Number(parts[index * 3 + 1]), index + 1);
+    assert.equal(parts[index * 3 + 2], slug);
+    return parts[index * 3 + 3];
+  });
+  return {
+    projects,
+    sourceDocument: { fileName: path.basename(SOURCE_FILE), path: SOURCE_FILE, sha256: SOURCE_SHA256 },
+    updated: parts[0].match(/\*\*Updated\*\*\n(\d{4}-\d{2}-\d{2})/u)?.[1],
+    disclosure: {
+      title: "Confidentiality & Disclosure Note",
+      text: parts[0].split("## Confidentiality & Disclosure Note\n")[1].trim(),
+    },
+  };
 }
 
-async function approvedPortfolio() {
-  const raw = await readFile(APPROVED_DOCUMENT);
-  const document = raw.toString("utf8").replace(/\r\n?/gu, "\n");
-  assert.equal(createHash("sha256").update(document).digest("hex"), "211f94a29754ca89b196f5de9fec47a990b95d587c2b5c5d89acfeabb775d283", "The frozen copy must be the exact user-approved manuscript, allowing Git line-ending normalization");
-  const projects = document.split(/^# SUBPAGE \d{2}: .+$/gmu).slice(1);
-  assert.equal(projects.length, 4);
-  return { document, projects };
-}
-
-async function approvedRevisions() {
-  const text = (await readFile(APPROVED_REVISIONS, "utf8")).replace(/\r\n?/gu, "\n");
-  assert.equal(createHash("sha256").update(text).digest("hex"), REVISIONS_SHA256, "The exact independently reviewed revision manifest must remain frozen");
-  const manifest = JSON.parse(text);
-  assert.equal(manifest.sourceSha256, "211f94a29754ca89b196f5de9fec47a990b95d587c2b5c5d89acfeabb775d283");
-  assert.equal(manifest.revisions.length, 52);
-  assert.equal(new Set(manifest.revisions.map(({ id }) => id)).size, 52);
-  return manifest.revisions;
-}
-
-function restoreFrozenCopy(file, document, revisions) {
-  const restored = structuredClone(document);
-  for (const revision of revisions.filter((item) => item.file === file).toReversed()) {
-    const keys = revision.jsonPointer.slice(1).split("/");
-    let parent = restored;
-    for (const key of keys.slice(0, -1)) {
-      assert.ok(Object.hasOwn(parent, key), `Missing reviewed field for ${revision.id}`);
-      parent = parent[key];
-    }
-    const key = keys.at(-1);
-    assert.equal(typeof parent[key], "string");
-    assert.equal(parent[key].split(revision.after).length - 1, 1, `The exact approved text for ${revision.id} must appear once`);
-    parent[key] = parent[key].replace(revision.after, () => revision.before);
-  }
-  return restored;
-}
-
-function frozenContributionDetails(project) {
-  const section = project.split("## Key Contributions\n")[1].split("\n## Architectural Context:")[0];
-  const parents = section.split(/^\* /gmu).slice(1);
-  return Object.fromEntries(parents.flatMap((parent, index) => {
+function canonicalEntry(project, index) {
+  const field = (label) => {
+    const value = project.match(new RegExp(`\\*\\*${label}\\*\\*\\n([^\\n]+)`, "u"))?.[1];
+    assert.ok(value, `Missing canonical field ${label}`);
+    return value;
+  };
+  const contributions = project.split("## Key Contributions\n")[1].split("\n## Architectural Context:")[0];
+  const parents = contributions.split(/^\* /gmu).slice(1);
+  const details = Object.fromEntries(parents.flatMap((parent, i) => {
     const lines = [...parent.matchAll(/^ {2}(\*|\d+\.) (.+)$/gmu)];
-    return lines.length ? [[index, { ordered: lines[0][1] !== "*", items: lines.map((line) => line[2]) }]] : [];
+    return lines.length ? [[i, { ordered: lines[0][1] !== "*", items: lines.map((line) => line[2]) }]] : [];
   }));
+  const entry = {
+    id: index + 1,
+    categoryId: "01",
+    organization: field("Organization"),
+    summary: project.split("## Summary\n")[1].split("\n## Confidentiality & Scope Disclosure")[0].trim(),
+    readMoreLabel: field("Read More Label"),
+    detailTitle: field("Title"),
+    metadata: { position: field("Position"), location: field("Location"), dates: field("Dates") },
+    contributionsLabel: "Key Contributions",
+    keyContributions: parents.map((parent) => parent.split("\n")[0]),
+    notes: [],
+    disclosure: { title: "Confidentiality & Scope Disclosure", text: project.split("## Confidentiality & Scope Disclosure\n")[1].split("\n## Key Contributions")[0].trim() },
+    architecturalContext: {
+      title: project.match(/^## (Architectural Context:[^\n]+)$/mu)?.[1],
+      text: project.match(/^## Architectural Context:[^\n]+\n([\s\S]+?)\n## Manuscript/mu)?.[1].trim(),
+    },
+  };
+  if (Object.keys(details).length) entry.keyContributionDetails = details;
+  return { entry, articleTitle: field("Article Title"), url: field("URL") };
 }
 
 function readableHtml(html) {
@@ -237,44 +238,34 @@ function tableCells(html, source) {
 }
 
 for (const expected of PROJECTS) {
-  test(`AI project preserves the frozen manuscript, reviewed corrections, and complete mathematical rendering: ${expected.slug}`, async () => {
-    const { document, projects } = await approvedPortfolio();
-    const revisions = await approvedRevisions();
-    const approvedProject = projects[PROJECTS.indexOf(expected)];
-    let approvedBody = approvedProject.slice(approvedProject.indexOf("## I. ")).trim();
-    if (PROJECTS.indexOf(expected) === 3) {
-      // The preceding published article defines these two symbols; the revised
-      // document uses them without definitions. Preserve that original math.
-      approvedBody = approvedBody.replace("For smooth nonlinear models where", String.raw`Set $m_f=\Delta_f(0)$ and $a_f=\nabla\Delta_f(0)$.
-
-For smooth nonlinear models where`);
-    }
+  test(`AI project preserves the canonical manuscript and complete mathematical rendering: ${expected.slug}`, async () => {
+    const { projects, sourceDocument, updated, disclosure } = await canonicalPortfolio();
+    const index = PROJECTS.indexOf(expected);
+    const project = projects[index];
+    const bodyParts = project.split("\n## Manuscript\n");
+    assert.equal(bodyParts.length, 2);
+    const canonicalBody = bodyParts[1].trim();
+    const canonical = canonicalEntry(project, index);
     const source = JSON.parse(await readFile(path.join(ROOT, "content", "artificial-intelligence", `${expected.slug}.json`), "utf8"));
     const showcaseFile = JSON.parse(await readFile(path.join(ROOT, "content", "experience-showcase.json"), "utf8"));
-    const showcase = showcaseFile.entries.find(({ id }) => id === PROJECTS.indexOf(expected) + 1);
-    const originalShowcase = restoreFrozenCopy("content/experience-showcase.json", showcaseFile, revisions).entries[PROJECTS.indexOf(expected)];
-    const originalArticle = restoreFrozenCopy(`content/artificial-intelligence/${expected.slug}.json`, source, revisions);
+    const showcase = showcaseFile.entries.find(({ id }) => id === index + 1);
     const html = await readFile(path.join(ROOT, "out", ...AI_ROUTE.split("/").filter(Boolean), expected.slug, "index.html"), "utf8");
-    const briefs = [...document.slice(document.indexOf("# PART 1:"), document.indexOf("# PART 2 & PART 3:")).matchAll(/^### ([^\n]+)\n([^\n]+)\n\n\[Read More >\]/gmu)];
-    const index = PROJECTS.indexOf(expected);
-    assert.equal(showcase.organization, briefs[index][1]);
-    assert.equal(originalShowcase.summary, briefs[index][2], "Reversing only the reviewed edits must recover the complete frozen brief");
-    for (const field of ["Position", "Location", "Dates"]) {
-      assert.equal(showcase.metadata[field.toLowerCase()], approvedProject.match(new RegExp(`\\*\\*${field}\\*\\*\\n([^\\n]+)`, "u"))?.[1]);
-    }
-    const approvedContributions = approvedProject.split("## Key Contributions\n")[1].split("\n## Architectural Context:")[0].split("\n").filter((line) => line.startsWith("* ")).map((line) => line.slice(2));
-    assert.deepEqual(originalShowcase.keyContributions, approvedContributions, "Every frozen contribution must survive except the exact reviewed revisions");
-    const approvedDetails = frozenContributionDetails(approvedProject);
-    assert.deepEqual(originalShowcase.keyContributionDetails ?? {}, approvedDetails, "All original nested contributions must survive in order, except the exact reviewed revisions");
-    assert.equal(Object.values(approvedDetails).reduce((count, detail) => count + detail.items.length, 0), [0, 4, 3, 0][index]);
-    assert.equal(showcase.disclosure.title, "Confidentiality & Scope Disclosure");
-    assert.equal(showcase.disclosure.text, approvedProject.match(/\*\*Confidentiality & Scope Disclosure\*\*\n([^\n]+)/u)?.[1]);
-    assert.equal(originalShowcase.architecturalContext.title, approvedProject.match(/^## (Architectural Context:[^\n]+)$/mu)?.[1]);
-    assert.equal(originalShowcase.architecturalContext.text, approvedProject.match(/^## Architectural Context:[^\n]+\n([\s\S]+?)\n## Contents/mu)?.[1].trim());
-    assert.equal(source.slug, expected.slug);
+    assert.deepEqual(showcaseFile.aiSourceDocument, sourceDocument, "The generated directory must record the current canonical source");
+    assert.deepEqual(showcaseFile.categories.find(({ id }) => id === "01").disclosure, disclosure);
+    assert.deepEqual(showcase, canonical.entry, "Every generated entry field, including nested details, must match the canonical manuscript");
+    assert.deepEqual(source, {
+      slug: expected.slug,
+      title: canonical.articleTitle,
+      sourceUrl: `https://github.com/130U/130U.github.io/blob/main/website/${SOURCE_FILE}`,
+      sourceEditedAt: updated,
+      markdown: canonicalBody,
+      sourceDocument,
+    }, "Every generated article field and its exact manuscript must match the canonical source");
     assert.equal(source.title, expected.title);
-    assert.equal(comparableManuscript(originalArticle.markdown), comparableManuscript(approvedBody), "Reversing the reviewed edits must recover every original paragraph and table");
-    assert.deepEqual(formulas(originalArticle.markdown).map(({ kind, tex }) => ({ kind, tex: tex.trim() })), formulas(approvedBody).map(({ kind, tex }) => ({ kind, tex: tex.trim() })), "Reversing the reviewed edits must recover every original TeX expression in order");
+    assert.equal(canonical.url, `https://www.theodoreoy.com${AI_ROUTE}${expected.slug}/`);
+    assert.deepEqual(formulas(source.markdown), formulas(canonicalBody), "Every mathematical expression must retain its exact TeX and order");
+    const canonicalDetails = canonical.entry.keyContributionDetails ?? {};
+    assert.equal(Object.values(canonicalDetails).reduce((count, detail) => count + detail.items.length, 0), [0, 4, 3, 0][index]);
     assert.equal(readableHtml(html.match(/<h1\b[^>]*>([\s\S]*?)<\/h1>/iu)?.[1] ?? ""), `${showcase.organization}: ${showcase.detailTitle}`);
     assert.match(html, new RegExp(`href="/experience/#${expected.slug}"`, "u"));
     assert.match(html, /href="#key-contributions"/u);
@@ -282,14 +273,14 @@ For smooth nonlinear models where`);
     assert.ok(html.indexOf('id="key-contributions"') < html.indexOf(`data-research-block="${expected.bodyStart}"`));
 
     const detailLists = [...html.matchAll(/<([ou]l)\b[^>]*\bdata-contribution-details="(\d+)"[^>]*>([\s\S]*?)<\/\1>/giu)];
-    assert.equal(detailLists.length, Object.keys(approvedDetails).length, "Every nested source list must be rendered once");
+    assert.equal(detailLists.length, Object.keys(canonicalDetails).length, "Every nested source list must be rendered once");
     for (const list of detailLists) {
       const details = showcase.keyContributionDetails[list[2]];
-      assert.ok(details, "Rendered details must have a reviewed source parent");
+      assert.ok(details, "Rendered details must have a canonical source parent");
       assert.equal(list[1], details.ordered ? "ol" : "ul");
       const children = [...list[3].matchAll(/<li\b[^>]*\bdata-contribution-detail="(\d+)"[^>]*>([\s\S]*?)<\/li>/giu)];
       assert.deepEqual(children.map((child) => Number(child[1])), details.items.map((_, child) => child));
-      assert.deepEqual(children.map((child) => readableHtml(child[2])), details.items.map(readableMarkdown), "All seven nested details must retain their reviewed text and order");
+      assert.deepEqual(children.map((child) => readableHtml(child[2])), details.items.map(readableMarkdown), "All seven nested details must retain their canonical text and order");
       for (const [childIndex, child] of children.entries()) {
         const annotations = [...child[2].matchAll(/<annotation\b[^>]*encoding="application\/x-tex"[^>]*>([\s\S]*?)<\/annotation>/giu)].map((item) => decodeHtml(item[1]));
         assert.deepEqual(annotations, formulas(details.items[childIndex]).map(({ tex }) => tex), "Nested contribution TeX must remain exact");
@@ -334,10 +325,6 @@ For smooth nonlinear models where`);
     const originalLinks = [...source.markdown.matchAll(/\[([^\]]+)\]\((https?:\/\/[^\s)]+)\)/gu)].map((match) => [readableMarkdown(match[1]), match[2]]);
     const actualLinks = [...content.matchAll(/<a\b([^>]*)>([\s\S]*?)<\/a>/giu)].map((match) => [readableHtml(match[2]), attr(match[1], "href")]);
     assert.deepEqual(actualLinks, originalLinks, "Citation labels, targets, and order must remain exact");
-    const retainedCitations = JSON.parse(await readFile(path.join(ROOT, "content", "sources", "ai-portfolio", "citation-links.json"), "utf8"))[expected.slug];
-    for (const citation of retainedCitations) {
-      assert.ok(actualLinks.some(([, href]) => href === citation.href), `The original reference must remain clickable: ${citation.text}`);
-    }
 
     const sourceFormulas = formulas(source.markdown);
     const numericVisuals = sourceFormulas.map(expectedNumberVisual);
@@ -379,7 +366,7 @@ For smooth nonlinear models where`);
       }
     }
     assert.equal(math.filter((match) => attr(match[1], "data-research-math") === "display").length, expected.display);
-    assert.equal(sourceFormulas.filter(({ kind }) => kind === "inline").length, expected.inline, "The independently reviewed inline formula count must remain exact");
+    assert.equal(sourceFormulas.filter(({ kind }) => kind === "inline").length, expected.inline, "The canonical inline formula count must remain exact");
     assert.equal(math.filter((match) => attr(match[1], "data-research-math") === "inline").length, sourceFormulas.filter(({ kind }) => kind === "inline").length);
     assert.deepEqual(math.map((match) => ({
       kind: attr(match[1], "data-research-math"),

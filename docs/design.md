@@ -81,8 +81,7 @@ introductions are omitted. Summaries use upright
 black body text at 14px; project and organization titles use the 18px subheading
 role. No content is truncated to fit a card.
 
-The black and blue in the approved Word document identify outer and detail content;
-blue is not a prose color on the website. All body copy uses the existing ink colors.
+All body copy uses the shared ink colors.
 Blue remains reserved for navigation, hover, and keyboard focus.
 
 All eighteen entries use real Read More links to dedicated pages. The eight AI and
@@ -100,8 +99,8 @@ keyboard focus and touch targets. Do not repeat the outer summary in the detail 
 
 AI pages include the scope disclosure, Key Contributions with any nested method
 lists, Architectural Context, and the numbered manuscript chapters. Thin rules
-separate top-level contribution items across all detail pages. The frozen original
-manuscript and explicit reviewed corrections retain the content's provenance.
+separate top-level contribution items across all detail pages. A single authoritative
+AI manuscript supplies the introductory copy, nested lists, and complete mathematical body.
 Legal pages place Key Contributions
 before the complete Abstract and manuscript. The shared contents rail includes
 the contribution block and source chapter links. Return links target the matching

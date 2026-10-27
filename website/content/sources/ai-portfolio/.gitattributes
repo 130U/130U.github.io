@@ -1,2 +1,2 @@
-# Keep the approved source's byte-level evidence identical across checkouts.
+# Use consistent manuscript line endings across platforms.
 *.md text eol=lf

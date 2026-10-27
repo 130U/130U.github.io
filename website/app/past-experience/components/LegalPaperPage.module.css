@@ -81,11 +81,6 @@
   border-top: 1px solid var(--rule-strong);
 }
 
-.overview {
-  min-width: 0;
-  max-width: var(--reading-measure);
-}
-
 .contents {
   margin-bottom: 2rem;
   padding: 0.5rem 0;

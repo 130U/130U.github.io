@@ -106,6 +106,11 @@ function applyReaderLayout(viewer) {
   return viewer.replace("</head>", `${readerRules}\n</head>`);
 }
 
+function applyExportTypography(viewer) {
+  const rule = "svg { font-family: 'Inter', sans-serif; font-optical-sizing: none; font-variation-settings: 'opsz' 14; font-variant-numeric: lining-nums proportional-nums; font-synthesis: none; }";
+  return viewer.replace(/svg \{ font-family: '(?:Inter|JetBrains Mono)'[^}]+\}/gu, rule);
+}
+
 function applyViewerLabels(viewer) {
   const labels = {
     "viewer.owner.route": "route probe",
@@ -162,6 +167,7 @@ source = source.replace(/(\.semantic-passport-reach-actions strong\s*\{[^}]*font
 source = source.replace(/(\.semantic-passport-reach-actions strong\s*\{[^}]*line-height:)\s*[^;]+;/gu,
   "$1 var(--interface-leading);");
 source = applyViewerLabels(source);
+source = applyExportTypography(source);
 
 if (source.includes("data-site-typography")) {
   assert.doesNotMatch(source, /fonts\.googleapis|fonts\.gstatic|JetBrains|Georgia|Times New Roman/u);
@@ -258,8 +264,6 @@ if (source.includes("data-site-typography")) {
   viewer = replaceOnce(viewer, /        \/\/ Prepend a local\(\)-only[\s\S]*?        var style =/u,
     "        var fontFaces = exportFontCss;\n\n        var style =");
   viewer = viewer.replaceAll("fontFallback +", "fontFaces +");
-  viewer = viewer.replace(/svg \{ font-family: 'JetBrains Mono'[^}]+\}/gu,
-    "svg { font-family: 'Inter', sans-serif; font-optical-sizing: auto; font-synthesis: none; }");
   viewer = viewer.replace(/'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, Consolas, monospace/gu,
     "'Inter', sans-serif");
   for (const [name, argument] of [["rasterize", "format"], ["renderShareCard", "options"], ["recordWebm", "options"]]) {

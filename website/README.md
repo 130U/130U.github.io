@@ -29,7 +29,7 @@ npm run dev
 | Directory | Responsibility |
 | --- | --- |
 | `app/` | Pages, shared shell and research readers, content registry, and client interactions |
-| `content/` | Approved Experience copy, research manuscripts, frozen source evidence, and integrity manifests |
+| `content/` | Experience copy, research manuscripts, authoritative source material, and integrity manifests |
 | `public/` | Assets served directly by GitHub Pages |
 | `source-assets/` | Editable brand masters |
 | `scripts/` | Content checks, asset generation, build assembly, and local preview |
@@ -64,16 +64,13 @@ Experience entries. `app/lib/content/experience-domains.ts` defines the five cat
 starts with Position, Location, Dates, and Key Contributions. The four AI and four
 legal pages continue into their protected manuscripts.
 
-The four AI entries use the approved portfolio copy frozen in
-`content/sources/ai-portfolio/`. Run `node scripts/import-ai-portfolio.mjs` from
-`website/` to reproduce their briefs, disclosures, contributions, architectural
-contexts, nested contribution lists, and mathematical bodies. The import restores
-the earlier citation URLs, carries forward the two nonlinear Taylor definitions
-from the previous article, and applies the exact scoped corrections recorded in
-`editorial-revisions.json`. The original manuscript remains unchanged. Each revision
-records its original text, replacement, and reason; a missing or repeated match
-stops the import. The source file, citation map, and revision record are protected;
-tests check the complete original-to-reviewed text and mathematical rendering.
+The four AI entries share one authoritative manuscript:
+`content/sources/ai-portfolio/ai-research-and-engineering.md`. Edit that file and run
+`node scripts/import-ai-portfolio.mjs` from `website/` to generate their briefs,
+disclosures, contributions, architectural contexts, nested method lists, and
+mathematical bodies. The importer validates the document structure before writing
+the generated JSON. Tests independently compare all text, citation links, tables,
+and TeX with this source and check the exported mathematical rendering.
 
 The build includes the standalone [architecture viewer](../architecture/).
 See [maintenance](../docs/maintenance.md) for routes, publishing, and extension

@@ -35,24 +35,13 @@
       "type": "heading",
       "level": 1,
       "id": "section-1",
-      "text": "I. INTRODUCTION",
+      "text": "I. Introduction",
       "sourcePages": [
         2
       ],
       "runs": [
         {
-          "text": "I."
-        },
-        {
-          "text": " ",
-          "smallCaps": true
-        },
-        {
-          "text": "I"
-        },
-        {
-          "text": "NTRODUCTION",
-          "smallCaps": true
+          "text": "I. Introduction"
         }
       ]
     },
@@ -129,24 +118,13 @@
       "type": "heading",
       "level": 1,
       "id": "section-7",
-      "text": "II. COMPARING LEGAL DECISIONS AND ECOLOGICAL OUTCOMES",
+      "text": "II. Comparing legal decisions and ecological outcomes",
       "sourcePages": [
         3
       ],
       "runs": [
         {
-          "text": "II."
-        },
-        {
-          "text": " ",
-          "smallCaps": true
-        },
-        {
-          "text": "C"
-        },
-        {
-          "text": "OMPARING LEGAL DECISIONS AND ECOLOGICAL OUTCOMES",
-          "smallCaps": true
+          "text": "II. Comparing legal decisions and ecological outcomes"
         }
       ]
     },
@@ -273,24 +251,13 @@
       "type": "heading",
       "level": 1,
       "id": "section-16",
-      "text": "III. THE GOVERNING LEGAL FRAMEWORKS",
+      "text": "III. The governing legal frameworks",
       "sourcePages": [
         5
       ],
       "runs": [
         {
-          "text": "III."
-        },
-        {
-          "text": " ",
-          "smallCaps": true
-        },
-        {
-          "text": "T"
-        },
-        {
-          "text": "HE GOVERNING LEGAL FRAMEWORKS",
-          "smallCaps": true
+          "text": "III. The governing legal frameworks"
         }
       ]
     },
@@ -771,24 +738,13 @@
       "type": "heading",
       "level": 1,
       "id": "section-42",
-      "text": "IV. RESTORATION EVIDENCE AND ITS LIMITS",
+      "text": "IV. Restoration evidence and its limits",
       "sourcePages": [
         13
       ],
       "runs": [
         {
-          "text": "IV."
-        },
-        {
-          "text": " ",
-          "smallCaps": true
-        },
-        {
-          "text": "R"
-        },
-        {
-          "text": "ESTORATION EVIDENCE AND ITS LIMITS",
-          "smallCaps": true
+          "text": "IV. Restoration evidence and its limits"
         }
       ]
     },
@@ -1015,31 +971,13 @@
       "type": "heading",
       "level": 1,
       "id": "section-55",
-      "text": "V. SAN TIN AND RELIANCE ON FUTURE WETLAND FUNCTION",
+      "text": "V. San Tin and reliance on future wetland function",
       "sourcePages": [
         17
       ],
       "runs": [
         {
-          "text": "V."
-        },
-        {
-          "text": " ",
-          "smallCaps": true
-        },
-        {
-          "text": "S"
-        },
-        {
-          "text": "AN ",
-          "smallCaps": true
-        },
-        {
-          "text": "T"
-        },
-        {
-          "text": "IN AND RELIANCE ON FUTURE WETLAND FUNCTION",
-          "smallCaps": true
+          "text": "V. San Tin and reliance on future wetland function"
         }
       ]
     },
@@ -1205,24 +1143,13 @@
       "type": "heading",
       "level": 1,
       "id": "section-65",
-      "text": "VI. CONDITIONS FOR ACCOUNTABLE RESTORATION",
+      "text": "VI. Conditions for accountable restoration",
       "sourcePages": [
         20
       ],
       "runs": [
         {
-          "text": "VI."
-        },
-        {
-          "text": " ",
-          "smallCaps": true
-        },
-        {
-          "text": "C"
-        },
-        {
-          "text": "ONDITIONS FOR ACCOUNTABLE RESTORATION",
-          "smallCaps": true
+          "text": "VI. Conditions for accountable restoration"
         }
       ]
     },
@@ -1538,38 +1465,13 @@
       "type": "heading",
       "level": 1,
       "id": "section-88",
-      "text": "VII. COSTS, MEASUREMENT, AND ENFORCEMENT",
+      "text": "VII. Costs, measurement, and enforcement",
       "sourcePages": [
         25
       ],
       "runs": [
         {
-          "text": "VII."
-        },
-        {
-          "text": " ",
-          "smallCaps": true
-        },
-        {
-          "text": "C"
-        },
-        {
-          "text": "OSTS",
-          "smallCaps": true
-        },
-        {
-          "text": ","
-        },
-        {
-          "text": " MEASUREMENT",
-          "smallCaps": true
-        },
-        {
-          "text": ","
-        },
-        {
-          "text": " AND ENFORCEMENT",
-          "smallCaps": true
+          "text": "VII. Costs, measurement, and enforcement"
         }
       ]
     },
@@ -1647,24 +1549,13 @@
       "type": "heading",
       "level": 1,
       "id": "section-94",
-      "text": "VIII. CONCLUSION",
+      "text": "VIII. Conclusion",
       "sourcePages": [
         27
       ],
       "runs": [
         {
-          "text": "VIII."
-        },
-        {
-          "text": " ",
-          "smallCaps": true
-        },
-        {
-          "text": "C"
-        },
-        {
-          "text": "ONCLUSION",
-          "smallCaps": true
+          "text": "VIII. Conclusion"
         }
       ]
     },
