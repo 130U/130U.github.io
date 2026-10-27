@@ -127,19 +127,13 @@ test("all eleven full articles retain introduction, contents and body order with
     const manuscriptTitles = headings.filter((node) => node.attrs.get("id") === "article-title");
     assert.equal(manuscriptTitles.length, 0, `${route}: do not repeat the technical manuscript title below the contribution lead.`);
     if (isAiExperience) {
-      const slug = route.split("/").filter(Boolean).at(-1);
-      const firstSourceIndices = new Map([
-        ["statistical-inference-and-resource-allocation-in-expert-data-production", 4],
-        ["task-validity-in-financial-synthetic-data", 3],
-        ["verification-and-supervision-in-scientific-reasoning-tasks", 3],
-        ["evidence-uncertainty-and-decision-guarantees-in-investment-research", 2],
-      ]);
       const sourceBlocks = elements(body[0], (node) => node.attrs.has("data-research-block"));
       assert.ok(sourceBlocks.length, `${route}: retain the numbered manuscript.`);
-      assert.equal(sourceBlocks[0].tag, "h2", `${route}: enter the first numbered chapter directly after contributions.`);
-      assert.equal(Number(sourceBlocks[0].attrs.get("data-research-block")), firstSourceIndices.get(slug), `${route}: remove only the approved original front matter.`);
+      assert.equal(sourceBlocks[0].tag, "h2", `${route}: enter the first numbered chapter directly after the architectural context and contents.`);
+      assert.equal(Number(sourceBlocks[0].attrs.get("data-research-block")), 0, `${route}: retain the complete imported manuscript from its first chapter.`);
       assert.equal(sourceBlocks[0].attrs.get("data-source-number"), "1");
-      assert.equal(headings[1], sourceBlocks[0], `${route}: no repeated title or Overview heading may precede the first source chapter.`);
+      assert.match(readable(headings[1]), /^Architectural Context:/u, `${route}: include the approved architectural bridge before the manuscript.`);
+      assert.equal(headings[2], sourceBlocks[0], `${route}: no repeated title or Overview heading may precede the first source chapter.`);
       assert.equal(elements(body[0], (node) => node.tag === "p" && node.start < sourceBlocks[0].start).length, 0, `${route}: no repeated Project/Author or overview prose may precede the first source chapter.`);
     }
     if (route.startsWith("/past-experience/")) {

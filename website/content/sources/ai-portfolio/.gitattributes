@@ -1,0 +1,2 @@
+# Keep the approved source's byte-level evidence identical across checkouts.
+*.md text eol=lf

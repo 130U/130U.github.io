@@ -61,6 +61,14 @@ Experience entries. `app/lib/content/experience-domains.ts` defines the five cat
 starts with Position, Location, Dates, and Key Contributions. The four AI and four
 legal pages continue into their protected manuscripts.
 
+The four AI entries use the approved portfolio copy frozen in
+`content/sources/ai-portfolio/`. Run `node scripts/import-ai-portfolio.mjs` from
+`website/` to reproduce their briefs, disclosures, contributions, architectural
+contexts, and mathematical bodies. The import retains the supplied wording,
+restores the earlier citation URLs, and carries forward the two nonlinear Taylor
+definitions from the previous article. The source file and citation map are
+protected; tests compare the imported copy and rendered equations against them.
+
 The build includes the standalone [architecture viewer](../architecture/).
 See [maintenance](../docs/maintenance.md) for routes, publishing, and extension
 guidance, and [design](../docs/design.md) for the visual system.

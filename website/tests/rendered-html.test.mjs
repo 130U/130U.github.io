@@ -127,6 +127,29 @@ function inlineText(value) {
   return normalizeSpace(value.replace(/<[^>]+>/gu, ""));
 }
 
+function markdownInlineText(value) {
+  let formula = 0;
+  return normalizeSpace(value
+    .replace(/\$`([^`]*?)`\$|(?<!\\)\$([^$\r\n]+?)(?<!\\)\$/gu, () => ` MATH_${formula++} `)
+    .replace(/\[([^\]]+)\]\((?:https?:\/\/|#)[^\s)]+\)/gu, "$1")
+    .replace(/\*\*([\s\S]+?)\*\*|\*([^*]+)\*|`([^`]+)`/gu, (_, strong, emphasis, code) => strong ?? emphasis ?? code));
+}
+
+function renderedInlineText(value) {
+  let formula = 0;
+  return normalizeSpace(value
+    .replace(/<svg\b[\s\S]*?<\/svg>/giu, "")
+    .replace(/<math\b[\s\S]*?<\/math>/giu, () => ` MATH_${formula++} `)
+    .replace(/<[^>]+>/gu, ""));
+}
+
+function assertApprovedInline(html, source) {
+  assert.equal(renderedInlineText(html), markdownInlineText(source), "Approved inline prose must survive Markdown rendering exactly");
+  const expected = [...source.matchAll(/\$`([^`]*?)`\$|(?<!\\)\$([^$\r\n]+?)(?<!\\)\$/gu)].map((match) => match[1] ?? match[2]);
+  const actual = [...html.matchAll(/<annotation\b[^>]*encoding="application\/x-tex"[^>]*>([\s\S]*?)<\/annotation>/giu)].map((match) => decodeHtml(match[1]));
+  assert.deepEqual(actual, expected, "Approved inline equations must preserve their exact TeX");
+}
+
 function attribute(tag, name) {
   const escaped = name.replace(/[.*+?^${}()|[\]\\]/gu, "\\$&");
   const match = tag.match(new RegExp(`(?:^|\\s)${escaped}\\s*=\\s*(?:"([^"]*)"|'([^']*)'|([^\\s>]+))`, "iu"));
@@ -217,8 +240,30 @@ function assertExperienceDetails(html, expected) {
     .find((match) => attribute(match[1], "data-experience-contributions") === String(expected.id));
   assert.ok(contributions, `Entry ${expected.id} is missing its contribution block`);
   assert.equal(stripMarkup(contributions[2].match(/<h[2-6]\b[^>]*>([\s\S]*?)<\/h[2-6]>/iu)?.[1] ?? ""), expected.contributionsLabel);
-  assert.deepEqual([...contributions[2].matchAll(/<li\b[^>]*>([\s\S]*?)<\/li>/giu)].map((match) => stripMarkup(match[1])), [...expected.keyContributions, ...expected.notes].map(normalizeSpace));
+  const items = [...contributions[2].matchAll(/<li\b[^>]*>([\s\S]*?)<\/li>/giu)];
+  const approvedItems = [...expected.keyContributions, ...expected.notes];
+  assert.equal(items.length, approvedItems.length);
+  for (const [index, item] of items.entries()) {
+    if (expected.categoryId === "01") assertApprovedInline(item[1], approvedItems[index]);
+    else assert.equal(stripMarkup(item[1]), normalizeSpace(approvedItems[index]));
+  }
   assert.equal(openingTags(contributions[2], "p").length, 0, "Supporting notes must be exact trailing list items, not separate paragraphs");
+  if (expected.categoryId === "01") {
+    const disclosure = [...html.matchAll(/<aside\b([^>]*)>([\s\S]*?)<\/aside>/giu)]
+      .find((match) => attribute(match[1], "data-experience-disclosure") !== undefined);
+    assert.ok(disclosure, "AI detail pages need their approved confidentiality disclosure");
+    assert.equal(stripMarkup(disclosure[2].match(/<h2\b[^>]*>([\s\S]*?)<\/h2>/iu)?.[1] ?? ""), expected.disclosure.title);
+    assertApprovedInline(disclosure[2].match(/<p\b[^>]*>([\s\S]*?)<\/p>/iu)?.[1] ?? "", expected.disclosure.text);
+    const context = [...html.matchAll(/<section\b([^>]*)>([\s\S]*?)<\/section>/giu)]
+      .find((match) => attribute(match[1], "data-architectural-context") !== undefined);
+    assert.ok(context, "AI contributions need the approved architectural bridge");
+    assert.equal(stripMarkup(context[2].match(/<h2\b[^>]*>([\s\S]*?)<\/h2>/iu)?.[1] ?? ""), expected.architecturalContext.title);
+    const paragraphs = [...context[2].matchAll(/<p\b[^>]*>([\s\S]*?)<\/p>/giu)];
+    const approvedParagraphs = expected.architecturalContext.text.split(/\n+/u);
+    assert.equal(paragraphs.length, approvedParagraphs.length);
+    paragraphs.forEach((paragraph, index) => assertApprovedInline(paragraph[1], approvedParagraphs[index]));
+    assert.ok(metadata[0].index < disclosure.index && disclosure.index < contributions.index && contributions.index < context.index, "Metadata, disclosure, contributions, and architectural context must retain their reading order");
+  }
 }
 
 async function walk(directory) {
@@ -386,7 +431,7 @@ test("Experience presents five numbered sections and all eighteen approved entri
   const html = await routeHtml("/experience/");
   const expected = await approvedExperience();
   assert.deepEqual(expected.map(({ id }) => id), Array.from({ length: 18 }, (_, index) => index + 1));
-  assert.deepEqual(expected.map(({ keyContributions }) => keyContributions.length), [6, 6, 6, 6, 9, 7, 6, 5, 5, 5, 5, 7, 5, 6, 1, 1, 2, 4]);
+  assert.deepEqual(expected.map(({ keyContributions }) => keyContributions.length), [7, 5, 6, 6, 9, 7, 6, 5, 5, 5, 5, 7, 5, 6, 1, 1, 2, 4]);
   assert.deepEqual(experienceEntries(html).map(({ id }) => id), expected.map(({ id }) => id));
   assert.equal(openingTags(html, "h1").length, 1);
   assert.match(html, /<h1>Experience<\/h1>/u);
@@ -402,6 +447,11 @@ test("Experience presents five numbered sections and all eighteen approved entri
     assert.deepEqual(expected.filter(({ categoryId }) => categoryId === String(index + 1).padStart(2, "0")).map(({ id }) => id), ids);
   }
   const main = html.match(/<main\b[^>]*>([\s\S]*?)<\/main>/u)?.[1] ?? "";
+  const approvedDisclosure = JSON.parse(await readFile(path.join(ROOT, "content", "experience-showcase.json"), "utf8")).categories.find(({ id }) => id === "01").disclosure;
+  const disclosure = [...html.matchAll(/<aside\b([^>]*)>([\s\S]*?)<\/aside>/giu)].find((match) => attribute(match[1], "data-experience-disclosure") !== undefined);
+  assert.ok(disclosure, "The AI section must introduce its approved confidentiality disclosure");
+  assert.equal(stripMarkup(disclosure[2].match(/<h3\b[^>]*>([\s\S]*?)<\/h3>/iu)?.[1] ?? ""), approvedDisclosure.title);
+  assertApprovedInline(disclosure[2].match(/<p\b[^>]*>([\s\S]*?)<\/p>/iu)?.[1] ?? "", approvedDisclosure.text);
   assert.doesNotMatch(stripMarkup(main), /\p{Script=Han}/u, "The public Experience copy must be English only");
   assert.doesNotMatch(stripMarkup(main), /Experience through September 2026|Past Experience|Current Chapter|Experience Website Copy|Latest version English and Chinese|English layout specification|Full articles are omitted here/u);
   const oldIntroductions = [
@@ -428,7 +478,8 @@ test("all eighteen approved Experience entries use institution titles and real l
     const summaries = [...rendered.matchAll(/<p\b([^>]*)>([\s\S]*?)<\/p>/giu)]
       .filter((match) => attribute(match[1], "data-experience-summary") !== undefined);
     assert.equal(summaries.length, 1);
-    assert.equal(stripMarkup(summaries[0][2]), normalizeSpace(entry.summary));
+    if (entry.categoryId === "01") assertApprovedInline(summaries[0][2], entry.summary);
+    else assert.equal(stripMarkup(summaries[0][2]), normalizeSpace(entry.summary));
     assert.equal(openingTags(rendered, "p").length, 1, `Entry ${entry.id} must have one outer summary`);
     assert.equal(stripMarkup(rendered.match(/<h3\b[^>]*>([\s\S]*?)<\/h3>/u)?.[1] ?? ""), presentation.listingTitle);
     const links = [...rendered.matchAll(/<a\b([^>]*)>([\s\S]*?)<\/a>/giu)];

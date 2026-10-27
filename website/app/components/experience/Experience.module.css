@@ -64,6 +64,33 @@
   text-wrap: balance;
 }
 .summary { margin: 10px 0 0; font-size: var(--type-reading); line-height: var(--reading-leading); text-wrap: pretty; }
+.indexDisclosure { margin-bottom: 28px; }
+.indexDisclosure h3, .disclosure h2 {
+  margin: 0 0 10px;
+  font-size: var(--type-reading);
+  line-height: var(--reading-leading);
+  font-weight: 600;
+  letter-spacing: 0;
+}
+.indexDisclosure p, .disclosure p, .architecturalContext p {
+  margin: 0;
+  font-size: var(--type-reading);
+  line-height: var(--reading-leading);
+}
+.architecturalContext { margin-top: 32px; }
+.architecturalContext h2 {
+  margin: 0 0 16px;
+  font-size: var(--type-heading);
+  line-height: var(--heading-leading);
+  font-weight: 400;
+  letter-spacing: 0;
+  scroll-margin-top: 6rem;
+}
+.architecturalContext p + p { margin-top: 16px; }
+.summary code, .contributions code, .architecturalContext code {
+  font: inherit;
+  overflow-wrap: anywhere;
+}
 .readMore {
   display: flex;
   width: fit-content;

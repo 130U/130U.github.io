@@ -1,37 +1,20 @@
 import Link from "next/link";
 import { join } from "node:path";
-import { cache, type ReactNode } from "react";
+import { cache } from "react";
 import sharp from "sharp";
 import { SiteShell } from "../SiteShell";
 import { ArticleReadingLayout } from "../article/ArticleReadingLayout";
-import { ExperienceMetadata, KeyContributions } from "../experience/ExperienceDetails";
+import { ArchitecturalContext, ExperienceDisclosure, ExperienceMetadata, KeyContributions } from "../experience/ExperienceDetails";
 import type { ShowcaseEntry } from "../../lib/content/experience-showcase";
 import type { ResearchArticleContent } from "../../lib/content/research-markdown";
-import { buildArticleHeadingMap, formatArticleHeadings, linkArticleSectionReferences, type ArticleInline } from "../../lib/content/article-headings";
+import { buildArticleHeadingMap, formatArticleHeadings, linkArticleSectionReferences } from "../../lib/content/article-headings";
 import type { ActivePage } from "../../lib/content/site";
 import { ResearchMath } from "./ResearchMath";
+import { InlineContent } from "./ResearchInline";
 import readingStyles from "../../past-experience/components/LegalPaperPage.module.css";
 import mathStyles from "./ResearchMath.module.css";
 import styles from "./ResearchArticle.module.css";
 import experienceStyles from "../experience/Experience.module.css";
-
-function ProofEnd({ source }: { source?: ReactNode }) {
-  return <span className={styles.proofEnd} data-proof-end>{source && <span hidden>{source}</span>}<abbr title="End of proof">Q.E.D.</abbr></span>;
-}
-
-function InlineContent({ inlines }: { inlines: ArticleInline[] }) {
-  return inlines.map((inline, index) => {
-    if (inline.type === "math") return inline.tex.trim() === "\\square"
-      ? <ProofEnd key={index} source={<ResearchMath tex={inline.tex} />} />
-      : <ResearchMath key={index} tex={inline.tex} />;
-    if (inline.type === "line-break") return <br key={index} />;
-    if (inline.type === "strong") return <strong key={index}><InlineContent inlines={inline.inlines} /></strong>;
-    if (inline.type === "emphasis") return <em key={index}><InlineContent inlines={inline.inlines} /></em>;
-    if (inline.type === "code") return <code key={index}>{inline.text}</code>;
-    if (inline.type === "link") return <a key={index} href={inline.href} title={inline.title}><InlineContent inlines={inline.inlines} /></a>;
-    if (inline.type === "text") return inline.text.split(/(∎)/u).map((part, partIndex) => part === "∎" ? <ProofEnd key={`${index}-${partIndex}`} /> : part);
-  });
-}
 
 const figureDimensions = cache(async (src: string) => {
   const { width, height } = await sharp(join(process.cwd(), "public", src.slice(1))).metadata();
@@ -104,13 +87,15 @@ export function ResearchArticle({ project, active, returnPath, returnLabel, titl
           <Link className="back-link" href={returnPath}><span aria-hidden="true">←</span> {returnLabel}</Link>
           <h1 id={titleId} tabIndex={-1}>{showcase?.pageTitle ?? project.title}</h1>
           {showcase ? <ExperienceMetadata entry={showcase} /> : !project.repositoryUrl && frontMatterCount > 0 && <div className={styles.frontMatter}>{renderedBlocks.slice(0, frontMatterCount)}</div>}
+          {showcase && <ExperienceDisclosure entry={showcase} />}
           {project.repositoryUrl && <p className={styles.sourceLinks}><a href={project.repositoryUrl}>GitHub</a><a href={project.sourceUrl}>Full Manuscript</a></p>}
         </header>
 
         <ArticleReadingLayout
-          overview={showcase ? <KeyContributions entry={showcase} /> : <>{!hasAbstract && <h2 id="overview" tabIndex={-1}>Overview</h2>}{renderedBlocks.slice(frontMatterCount, bodyStart)}</>}
+          overview={showcase ? <><KeyContributions entry={showcase} /><ArchitecturalContext entry={showcase} /></> : <>{!hasAbstract && <h2 id="overview" tabIndex={-1}>Overview</h2>}{renderedBlocks.slice(frontMatterCount, bodyStart)}</>}
           items={[
             ...(showcase ? [{ id: "key-contributions", text: showcase.contributionsLabel, level: 1 }] : !hasAbstract ? [{ id: "overview", text: "Overview", level: 1 }] : []),
+            ...(showcase?.architecturalContext ? [{ id: "architectural-context", text: showcase.architecturalContext.title, level: 1 }] : []),
             ...project.blocks.filter((block) => block.type === "heading").map((heading) => ({ id: heading.id, text: headingPresentations.get(heading.id)!.text, level: heading.level - 1 })),
           ]}
         >
