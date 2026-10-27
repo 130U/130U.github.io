@@ -39,9 +39,9 @@ test("every exported HTML page permits only its authored inline scripts", async 
 });
 
 test("static policies are deterministic and normalize browser line endings", () => {
-  const document = '<html><head></head><body><script>const label = "你好";\r\n</script></body></html>';
+  const document = '<html><head></head><body><script>const label = "café";\r\n</script></body></html>';
   const secured = secureStaticHtml(document);
-  assert.ok(secured.includes(hash('const label = "你好";\n')));
+  assert.ok(secured.includes(hash('const label = "café";\n')));
   assert.equal(secureStaticHtml(secured), secured);
   assert.equal((secured.match(/http-equiv="Content-Security-Policy"/gu) ?? []).length, 1);
   assert.ok(secured.includes("script-src-attr 'none'"));

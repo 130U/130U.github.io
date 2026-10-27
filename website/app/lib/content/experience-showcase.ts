@@ -34,11 +34,26 @@ const source = JSON.parse(readFileSync(join(process.cwd(), "content", "experienc
   categories: { id: string; disclosure?: CopySection }[];
   entries: SourceEntry[];
 };
-const entrySlugs = [
-  ...aiResearchProjectSlugs, "jiritsu-network", "euromonitor-international", "china-construction-bank",
-  ...legalPaperSlugs, "jones-lang-lasalle", "hubble-technology-investment", "saif-partners",
-  "citic-securities", "ey-parthenon", "independent-stem-olympiad-training", "stem-olympiad-competitions",
-];
+const entrySlugs: Readonly<Record<number, string>> = {
+  1: "statistical-inference-and-resource-allocation-in-expert-data-production",
+  2: "task-validity-in-financial-synthetic-data",
+  3: "verification-and-supervision-in-scientific-reasoning-tasks",
+  4: "evidence-uncertainty-and-decision-guarantees-in-investment-research",
+  5: "jiritsu-network",
+  6: "euromonitor-international",
+  7: "china-construction-bank",
+  8: "autonomous-authority-in-space",
+  9: "small-states-and-strategic-space-dependence",
+  10: "solar-geoengineering-comparison-and-continuity",
+  11: "mangrove-restoration-and-compensatory-mitigation",
+  12: "jones-lang-lasalle",
+  13: "hubble-technology-investment",
+  14: "saif-partners",
+  15: "citic-securities",
+  16: "ey-parthenon",
+  17: "independent-stem-olympiad-training",
+  18: "stem-olympiad-competitions",
+};
 // Presentation labels are separate from the approved Experience copy.
 const legalResearchAreas: Record<number, string> = {
   8: "Space Law and Autonomous Systems Research",
@@ -52,7 +67,12 @@ export const showcaseEntries: readonly ShowcaseEntry[] = source.entries.map((ent
       !entry.metadata.position || !entry.metadata.location || !entry.metadata.dates) {
     throw new Error(`Incomplete approved Experience entry: ${entry.id}`);
   }
-  const slug = entrySlugs[index];
+  const slug = entrySlugs[entry.id];
+  if (!slug ||
+      (entry.categoryId === "01" && !aiResearchProjectSlugs.some((project) => project === slug)) ||
+      (entry.categoryId === "03" && !legalPaperSlugs.some((paper) => paper === slug))) {
+    throw new Error(`Experience entry has no matching route: ${entry.id}`);
+  }
   const articlePath = entry.categoryId === "01" ? aiResearchProjectPath(slug)
     : entry.categoryId === "03" ? legalPaperPath(slug) : undefined;
   const organization = entry.categoryId === "03" ? "Duke Law School" : entry.organization;
@@ -65,6 +85,9 @@ export const showcaseEntries: readonly ShowcaseEntry[] = source.entries.map((ent
   };
 });
 if (showcaseEntries.length !== 18) throw new Error("The approved Experience document contains 18 entries.");
+if (new Set(showcaseEntries.map(({ slug }) => slug)).size !== showcaseEntries.length) {
+  throw new Error("Experience entries must have unique routes.");
+}
 
 export const showcaseDomains: readonly ShowcaseDomain[] = experienceDomainDefinitions.map((domain) => ({
   ...domain, entries: showcaseEntries.filter((entry) => entry.categoryId === domain.number),

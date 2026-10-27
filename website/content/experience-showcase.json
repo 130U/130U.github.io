@@ -67,7 +67,7 @@
       "id": 2,
       "categoryId": "01",
       "organization": "Duke University × Top-Tier Foundation Model Company",
-      "summary": "Initiated in September 2023 for a frontier foundation model program *(partner identity anonymized under NDA)*, this project defined what constitutes high-signal financial post-training data and established an end-to-end paradigm for adversarial task design, constraint-preserving synthetic data engineering, and structured preference supervision. To expose subtle reasoning blind spots where base models and practitioners systematically stumble, I engineered diagnostic, error-inducing financial decision tasks and a five-level pairwise preference protocol that translates doctoral- and CFA-level expert judgments into evidence-grounded training signals for RLHF and direct preference optimization. I paired these task specifications with a four-regime mathematical synthesis architecture—Gaussian copulas for cross-sectional corporate fundamentals, covariance-weighted affine projections enforcing exact accounting identities ($1.21 \\times 10^{-14}$ maximum residual across 200,000 12-dimensional draws), CTGAN and TabDDPM with Lipschitz margin checks and Gaussian margin-to-noise ($\\gamma/s$) analysis for label recomputation for multimodal tables, and SDEs, neural SDEs, and Brownian bridges with strict temporal filtration isolation ($\\mathcal{F}_s$) for continuous-time price and interest-rate trajectories. To bridge research design and massive vendor scale-up, I created **Batch Zero**—an independent execution and calibration gate subsequently adopted across the company for new post-training tracks.",
+      "summary": "Initiated in September 2023 for a frontier foundation model program *(partner identity anonymized under NDA)*, this project defined what constitutes high-signal financial post-training data and established an end-to-end paradigm for adversarial task design, constraint-preserving synthetic data engineering, and structured preference supervision. To expose subtle reasoning blind spots where base models and practitioners systematically stumble, I engineered diagnostic, error-inducing financial decision tasks and a five-level pairwise preference protocol that translates doctoral- and CFA-level expert judgments into evidence-grounded training signals for RLHF and direct preference optimization. I paired these task specifications with a four-regime mathematical synthesis architecture—Gaussian copulas for cross-sectional corporate fundamentals, covariance-weighted affine projections enforcing exact accounting identities ($1.21 \\times 10^{-14}$ maximum residual across 200,000 12-dimensional draws), CTGAN and TabDDPM for multimodal tables, with Lipschitz margin checks and Gaussian margin-to-noise ($\\gamma/s$) analysis to guide label recomputation, and SDEs, neural SDEs, and Brownian bridges with strict temporal filtration isolation ($\\mathcal{F}_s$) for continuous-time price and interest-rate trajectories. To bridge research design and massive vendor scale-up, I created **Batch Zero**—an independent execution and calibration gate subsequently adopted across the company for new post-training tracks.",
       "readMoreLabel": "Read More",
       "detailTitle": "Financial Task Design and Synthetic Data Engineering",
       "metadata": {
@@ -486,8 +486,8 @@
     }
   ],
   "aiSourceDocument": {
-    "fileName": "theodore_ouyang_ai_portfolio_optimized.md",
-    "path": "content/sources/ai-portfolio/theodore_ouyang_ai_portfolio_optimized.md",
-    "sha256": "211f94a29754ca89b196f5de9fec47a990b95d587c2b5c5d89acfeabb775d283"
+    "fileName": "ai-research-and-engineering.md",
+    "path": "content/sources/ai-portfolio/ai-research-and-engineering.md",
+    "sha256": "bc688374f1ca56e7c5eafbd06a7f33e6d7d752f4c8d0dd98b05f30164921405d"
   }
 }

@@ -1,309 +1,184 @@
 # Maintenance
 
-The site is a static personal record published at [theodoreoy.com](https://www.theodoreoy.com/).
+The site is a static portfolio published at [theodoreoy.com](https://www.theodoreoy.com/).
+Next.js builds HTML, CSS, and JavaScript; GitHub Pages serves the assembled export.
+There is no request-time API, database, authentication, form submission, or analytics.
+Use Node.js 24 to match deployment. Run application commands from `website/`, or use
+`npm --prefix website run <command>` from the repository root.
 
 ## Repository
 
 | Directory | Responsibility |
 | --- | --- |
 | `.github/` | Repository presentation and the Pages workflow |
-| `architecture/` | Interactive system map and its editable specification |
-| `docs/` | Design principles and maintenance guidance |
-| `website/` | Application, content, assets, tools, and tests |
+| `architecture/` | Editable system-map definition and standalone viewer |
+| `docs/` | Design and maintenance guidance |
+| `website/app/` | Routes, shared readers, content loaders, and browser interactions |
+| `website/content/` | Maintained content, research source inputs, provenance, and integrity contracts |
+| `website/public/` | Assets included in the static export |
+| `website/source-assets/` | Editable brand masters |
+| `website/scripts/`, `tests/`, `tooling/` | Import, build, verification, and lint utilities |
 
-Run application commands from `website/`, or use `npm --prefix website run <command>`
-from the repository root. `website/.gitignore` excludes the static export, build and
-package caches, installed dependencies, generated Next.js types, and TypeScript
-build metadata. The tracked `architecture/index.html` and generated brand assets
-in `website/public/assets/brand/` are deliverables maintained by their documented
-generation scripts. Keep local screenshots and audit logs outside the repository.
+`website/.gitignore` excludes installed dependencies, build output, caches, logs,
+generated Next.js types, and TypeScript build metadata. Keep local screenshots,
+audit logs, and original source documents outside the repository unless they are
+explicitly maintained research inputs. Only visitor-facing assets belong in `public/`.
 
-## Routes and content
+## Content ownership and routes
 
-Paths in this table are relative to `website/`.
+Paths below are relative to `website/`.
 
-| Page | Route | Source |
-| --- | --- | --- |
-| About | `/` | `app/page.tsx`, `app/home.module.css`, shared About content |
-| Education compatibility alias | `/education/` | `app/education/page.tsx`, shared About content |
-| Dependence-stress research | `/education/critical-dependence-stress-for-portfolio-diversification/` | `app/lib/content/selected-research.ts`, `content/selected-research/critical-dependence-stress-for-portfolio-diversification.json` |
-| Asian-options research | `/education/certified-valuation-arithmetic-asian-options/` | `app/lib/content/selected-research.ts`, `content/selected-research/certified-valuation-arithmetic-asian-options.json` |
-| Rough Heston research | `/education/certified-rough-heston-valuation/` | `app/lib/content/selected-research.ts`, `content/selected-research/certified-rough-heston-valuation.json` |
-| Experience | `/experience/` | `app/components/experience/`, `content/experience-showcase.json` |
-| Experience detail pages | `/experience/[slug]/` | Approved entries from `content/experience-showcase.json` |
-| Experience compatibility aliases | `/past-experience/`, `/now/` | Shared Experience page |
-| Experience category compatibility pages | `/past-experience/[slug]/` | Filtered approved Experience sections |
-| AI research projects | `/past-experience/artificial-intelligence/[paper]/` | `app/lib/content/ai-projects.ts`, `content/artificial-intelligence/` |
-| Legal articles | `/past-experience/legal-research-and-policy-analysis/[paper]/` | `app/past-experience/[slug]/[paper]/page.tsx`, `app/lib/content/legal-papers.ts`, `content/legal-papers/` |
-| Architecture | `/architecture/` | `../architecture/index.html` |
+| Content | Maintained input | Loader or importer | Route |
+| --- | --- | --- | --- |
+| About and coursework | `app/components/AboutContent.tsx`, `app/lib/content/about.ts` | Shared About component | `/` |
+| Experience | `content/experience-showcase.json`; AI fields are generated from the manuscript below | `app/lib/content/experience-showcase.ts` | `/experience/`, `/experience/[slug]/` |
+| AI research | `content/sources/ai-portfolio/ai-research-and-engineering.md` | `scripts/import-ai-portfolio.mjs`, `app/lib/content/ai-projects.ts` | `/past-experience/artificial-intelligence/[paper]/` |
+| Selected Research | `content/sources/selected-research/` | Research import scripts, `app/lib/content/selected-research.ts` | `/education/[paper]/` |
+| Legal research | `content/legal-papers/` structured manuscripts | `app/lib/content/legal-papers.ts` | `/past-experience/legal-research-and-policy-analysis/[paper]/` |
+| Architecture | `../architecture/site.json` | Archify and `scripts/integrate-architecture.mjs` | `/architecture/` |
 
-`content/experience-showcase.json` is the approved English presentation source,
-derived from `experience-merged-bilingual.docx` with approved display capitalization.
-Its source-document SHA-256 identifies the reviewed Word file. It contains five categories and eighteen
-entries. The file contains public English copy only; full manuscripts have separate
-protected sources. `app/lib/content/experience-domains.ts` defines the five categories,
-and `app/lib/content/experience-showcase.ts` maps entries to their reading pages.
+`app/lib/content/site.ts` owns site identity and primary navigation;
+`app/lib/content/routes.ts` supplies canonical sitemap routes.
+`experience-domains.ts` defines the five Experience categories. All eighteen
+Experience entries have dedicated reading pages: four AI manuscripts, four legal
+manuscripts, and ten ordinary detail pages.
 
-The primary navigation contains About and Experience. Experience presents all five
-numbered sections in one page, with a single-column anchor directory at every
-screen width and eighteen summaries. All eighteen Read More actions are links to
-real pages. The eight AI and legal entries use their manuscript URLs;
-the other ten entries use `/experience/[slug]/`. Outer headings lead with the
-institution or organization; legal headings use `Duke Law School: {research area}
-Research`. Detail-page titles use `{institution}: {project title}`; internal title
-colons render as em dashes, preserving only the institution separator. Position,
-Location, and Dates form three stacked rows at every viewport, followed by the
-approved Key Contributions with contextual notes appended as the final list items.
-All items share the same typography and color. Do not repeat the outer summary.
+Compatibility routes remain functional: `/education/` renders shared About content;
+`/past-experience/` and `/now/` render Experience; the five
+`/past-experience/[slug]/` category pages filter the same approved entries. Their
+canonical URLs point to the corresponding primary page. Keep these shared renderers
+and their return links intact when changing navigation.
 
-AI pages continue directly from Key Contributions into the numbered article body.
-The renderer starts at the first numbered chapter; the full source JSON includes
-the title, Project and Author lines, and introductory material for provenance.
-Legal articles present their complete Abstract, text, Author Note, and Footnotes
-after the contribution block. Contents starts with Key Contributions and uses the
-source chapter anchors.
+### AI research
 
-`app/lib/content/routes.ts` supplies twenty-three canonical sitemap routes: About,
-Experience, three Selected Research articles, eight Experience manuscripts, and ten
-other Experience detail pages.
-The static export includes `/education/`, `/past-experience/`, `/now/`, and the
-five category URLs as compatibility pages. The category pages render the same
-approved entries, use `/experience/` as their canonical URL, and link back to the
-corresponding Experience section.
-There are thirty-one exported content routes and the separate `/architecture/`
-reference: thirty-two routes in total, excluding 404.
+Edit `content/sources/ai-portfolio/ai-research-and-engineering.md` as the single
+authority for all four AI projects. It contains the directory disclosure, project
+metadata, summaries, scope disclosures, contributions and nested lists,
+Architectural Context, and complete numbered manuscripts with citations, tables,
+and TeX. Preserve the project's metadata labels, ordered section structure, and
+chapter sequence so the importer can validate the complete input before writing.
 
-Biographical, AI research, Selected Research, and legal source files are checked against `content/protected-sources.json`.
-`content/visible-copy-manifest.json` independently records text, metadata, alt text,
-and ARIA labels for all thirty-one content pages. Copy changes require the owner's explicit
-request and an intentional update to these contracts. Presentation-only changes to
-a protected component update its source hash while preserving the approved prose,
-metadata, and formula source contracts. Tests also verify page counts and navigation
-independently of the registry.
+```sh
+node scripts/import-ai-portfolio.mjs
+```
 
-## Application
+The importer updates the four AI entries in `content/experience-showcase.json` and
+the four article JSON files in `content/artificial-intelligence/`. It records the
+source path and LF-normalized SHA-256, preserves non-AI entries, and copies each
+numbered manuscript directly. Edit the canonical manuscript rather than generated
+AI fields. Citation links and mathematical definitions belong in that manuscript.
 
-Next.js exports static HTML, CSS, and JavaScript. GitHub Pages serves these files;
-there is no request-time backend, database, authentication, form submission, or analytics.
-
-- `app/components/SiteShell.tsx` owns the shared reading frame.
-- `app/components/SiteNavigation.tsx` owns the mobile menu and focus handling.
-- `app/page.tsx` presents the interactive Canvas2D name entrance before About; `app/components/dithered-entrance/` owns its pointer, keyboard, fallback, and reduced-motion behavior. Its scroll cue targets `#home-profile`.
-- `app/components/article/` owns the shared reading layout, responsive contents navigation, and section tracking.
-- `app/components/research/` owns the shared research article and mathematical presentation.
-- `app/globals.css` and `app/home.module.css` implement the [design system](design.md).
-- `app/lib/content/site.ts` owns site identity and metadata helpers.
-- `app/lib/content/research-markdown.ts` parses research prose, headings, tables, and formulas.
-- `app/lib/content/article-headings.ts` supplies Roman-numeral chapter labels, lettered subsections, and verified internal section links while preserving source anchors and reference numerals.
-- `app/lib/content/research-math.ts` renders mathematical SVG and assistive MathML on the server.
-
-`app/components/AboutContent.tsx` supplies the shared About and Education-alias
-content. It presents Duke University once above both degree records and omits the
-fellowship from About. `app/lib/content/about.ts` supplies all 49 course names in four
-categories. Categories stack vertically; each list flows down up to two independent
-CSS columns with a 16rem target width, a 24px column gap, and 2px between items.
-Course names stay together across column breaks, and lists use one column below
-768px. `app/home.module.css` scopes the compact
-record spacing and consistent role styles to About. Its reading frame uses the
-shared Inter family with `font-optical-sizing: none` and `"opsz" 14`; heading and
-prose tracking is zero. Keep these role sizes synchronized with Experience and research pages.
-
-Add a website page by updating its source, the route registry, sitemap expectations,
-and output tests together. Keep browser interaction in focused client components.
-Add a server only when a defined product requirement needs one.
-
-`tooling/directory-glob/` supplies Next.js lint root-directory discovery through
-the pinned Tinyglobby implementation. Its adapter preserves literal, wildcard,
-recursive, and platform-specific directory paths. Integration tests exercise the
-Next.js consumer directly. The dependency override is scoped to the Next.js lint
-plugin; application dependencies and lint rules retain their normal configuration.
-
-### Experience source updates
-
-The approved bilingual Word document is the current authority for showcase copy.
-Read its English blocks only; preserve category and entry order, metadata, each
-contribution, and the two contextual notes. Apply approved display-format changes
-without changing the source-document hash; update that hash only when a replacement
-Word file is approved. AI and legal manuscript sources are
-independently protected and are not regenerated from the showcase document.
-
-
-### AI research projects
-
-Domain `01`, AI Research and Engineering, links four project reading pages through
-Read More actions following the outer summaries. Their manuscript URLs are stable.
-Each JSON source stores its original Notion title, URL, edit timestamp,
-and complete Markdown body. Preserve that source, including its original opening
-Project and Author paragraph. The rendered page shows the institution and
-project title, vertical metadata, and approved Key Contributions, followed by
-the first numbered chapter. Keep the numbered body, emphasis, citations, table
-headers and cells, and formulas in their
-original order. Do not add an abstract, references section, publication details,
-or a download. Each reading page returns to its project anchor on Experience.
-
-| Project page | Notion source |
-| --- | --- |
-| Statistical inference and resource allocation in expert data production | [Source](https://app.notion.com/p/3ed867f96db58171ad07d36248e8d05c?pvs=204) |
-| Task validity in financial synthetic data | [Source](https://app.notion.com/p/3ed867f96db5810798b2f3668e2dd0a5?pvs=204) |
-| Verification and supervision in scientific reasoning tasks | [Source](https://app.notion.com/p/3ed867f96db5814c91c0fd96d9348c2f?pvs=204) |
-| Evidence uncertainty and decision guarantees in investment research | [Source](https://app.notion.com/p/3ed867f96db581cfaae7d40b93aaa080?pvs=204) |
-
-`ResearchArticle` renders both AI projects and Selected Research with a focused CSS
-Module that gives prose and table cells the shared 14px reading size, and H3 headings
-the shared 18px subheading size.
-`ResearchMath` uses `app/lib/content/research-math.ts` to render TeX on the server with the pinned MathJax
-4.1.3 engine and its TeX font package. Visible equations contain complete SVG glyph
-paths, use the shared `--type-math` relative scale of 1.15em and ink color, and load no browser math
-engine or font resources. `ResearchMath.module.css` owns formula spacing and
-scrolling. Display rows omit sentence punctuation and use explicit multiline spacing;
-mathematical terms and equation labels remain intact. Assistive MathML preserves
-semantic formulas and the exact original TeX annotation. Invalid formulas fail the
-build. Tables and wide equations expose focusable scrolling regions.
-
-AI project tests compare the numbered body with its source blocks,
-verify the chapter boundary used for rendering, and check all 277 original formula annotations,
-five tables, 27 citation links, and 26 second-level headings with the approved
-documents. Update the project registry, independent route expectations, protected
-source hashes, and visible-copy contracts together when synchronizing approved text.
-The four project snapshots protect prose and formula positions independently from
-the ordered TeX-and-display-mode hash and formula count. SVG geometry and assistive
-MathML have independent regression checks for accents, fractions, aligned equations,
-Greek glyphs, superscripts, and equation numbers. Formula presentation changes preserve
-narrative text and source annotations. Approved navigation order or scrolling changes
-update only the corresponding contract fields after independent verification.
+The list presents the disclosure and four briefs. Detail pages show the institution
+and project title, Position, Location, Dates, scope disclosure, Key Contributions,
+Architectural Context, and numbered body. Each article returns to its project
+anchor on Experience. Tests compare the full generated fields and manuscript
+blocks with the maintained source and verify mathematical rendering independently.
 
 ### Selected Research
 
-About presents three compact research entries before Education and Selected Coursework.
-Critical Dependence Stress for Portfolio Diversification appears first, followed
-by the Asian-options and Rough Heston papers. All three titles link to their on-site
-manuscripts. Title links use black ink, turning blue on
-hover or keyboard focus. A short paragraph states the mathematical method and the
-achieved result within the paper's specified example. Keep numerical bounds and
-improvements tied to their model, horizon, payoff, and comparison. Source links remain
-on the manuscript pages; About has no separate
-Paper, Repository, or Results action row. `app/lib/content/selected-research.ts`
-loads three structured sources from `content/selected-research/`:
+The three papers use pinned research inputs and deterministic importers:
 
-| Source | On-site manuscript scope |
+| Paper | Input and importer | On-site scope |
+| --- | --- | --- |
+| Critical Dependence Stress for Portfolio Diversification | `content/sources/selected-research/dependence/`; `scripts/import-dependence-research.mjs` | Abstract, chapters 1–5, references, and supporting-material links |
+| Certified Valuation of Arithmetic Asian Options | `content/sources/selected-research/asian-source.md`; `scripts/import-selected-research.mjs` | Abstract, chapters 1–10, references, and supporting-material links |
+| Certified Rough Heston Valuation | `content/sources/selected-research/rough-source.md`; `scripts/import-selected-research.mjs` | Abstract, chapters 1–8, references, and supporting-material links |
+
+```sh
+node scripts/import-selected-research.mjs
+node scripts/import-dependence-research.mjs
+node scripts/import-dependence-research.mjs --check
+```
+
+The source records identify the upstream repository, commit, blob, and file hashes.
+Refresh these only for the version actually imported. Retain complete core chapters,
+tables, references, theorem assumptions, error definitions, and reproducibility
+limits. Distinguish the Asian paper's projected-Euler certificate from its
+continuous-model comparison, and retain the Rough Heston paper's stated
+configurations and finite-candidate scope.
+
+The dependence source tree includes supporting TeX inputs needed to resolve
+cross-references. Its four PNG figures are source evidence; copies in
+`public/assets/research/dependence/` are served assets. Tests check their byte
+identity. The readers link appendices and supplementary proofs to the pinned full
+manuscripts and return to the corresponding About research entry.
+
+### Legal research
+
+`content/legal-papers/` preserves source titles, authors, dates, Abstracts, chapter
+hierarchies, paragraph runs, citations, acknowledgments, and numbered footnotes.
+The approved source PDFs are external inputs, not served downloads:
+
+| Structured manuscript | Source PDF |
 | --- | --- |
-| `critical-dependence-stress-for-portfolio-diversification.json` | Abstract, chapters 1–5, references, and an appendix/supporting-material link |
-| `certified-valuation-arithmetic-asian-options.json` | Abstract, chapters 1–10, references, and an appendix/supporting-material link |
-| `certified-rough-heston-valuation.json` | Abstract, chapters 1–8, references, and an appendix/supporting-material link |
+| `solar-geoengineering-comparison-and-continuity.json` | `ESSAY1.pdf` |
+| `small-states-and-strategic-space-dependence.json` | `ESSAY2.pdf` |
+| `autonomous-authority-in-space.json` | `ESSAY3.pdf` |
+| `mangrove-restoration-and-compensatory-mitigation.json` | `ESSAY4.pdf` |
 
-Frozen Asian-options and Rough Heston Markdown sources and their shared provenance
-record live in `content/sources/selected-research/`; `scripts/import-selected-research.mjs`
-imports those two papers. The dependence-stress paper uses frozen TeX files and its
-own provenance record in `content/sources/selected-research/dependence/`, with
-deterministic conversion in `scripts/import-dependence-research.mjs`. The import
-scripts and content tests verify structured manuscripts against their pinned sources.
-The frozen source tree includes supporting TeX inputs used to resolve manuscript
-cross-references. Its four PNG figures are source evidence; the copies in
-`public/assets/research/dependence/` are served assets. Tests verify that the served
-and exported images match the frozen bytes.
+`PaperParagraph.text` must equal the concatenated run text. Preserve emphasis,
+capitalization, superscripts, unique chapter anchors, and sequential notes.
+`LegalPaperPage` presents metadata and contributions before the complete Abstract,
+manuscript, and endnotes. `LegalPaperReader` adds native-dialog note previews with
+focus restoration; chapter and endnote links also work without JavaScript.
 
-The pages use the shared `ResearchArticle` and `ResearchMath` components, with a
-contents list, source links, and return links to the corresponding About research
-entry at `/#<slug>`. Their navigation marks About as current. They publish the complete
-core chapters. The article header contains only the return link, title, GitHub link,
-and Full Manuscript link. Reading content starts at Abstract; source front matter
-before Abstract remains in the protected source. Appendices are available in the
-GitHub manuscript.
-Each JSON source stores `repositoryUrl`, `sourceUrl`, `sourceCommit`, and `sourceBlob`.
-The manuscript link is pinned to that source commit. When refreshing a paper, compare
-against the pinned file, preserve the complete core chapters and references, and
-update the provenance only for the version actually imported.
+## Shared rendering and extension
 
-Preserve the Asian paper's distinction between the projected Euler pricing certificate
-and its continuous-model comparison, including the assumptions for weak expansion and
-posterior quantile results. Preserve the Rough Heston paper's stated configurations,
-certificate scope, error definitions, and reproducibility limits. Approved content
-changes update the source hash, visible-copy contract, independent output expectations,
-and route registry together. Verify rendered formulas, internal manuscript links, and
-appendix destinations before publishing.
+`SiteShell` owns the reading frame, `SiteNavigation` the mobile menu, and
+`ArticleReadingLayout`/`ArticleContents` the article structure and responsive
+navigation. `ExperienceSection` and `ExperienceDetails` keep all categories and
+detail pages consistent. Browser interaction stays in focused client components;
+the About entrance is isolated in `components/dithered-entrance/`.
 
-### Legal papers
+`ResearchArticle` serves AI and Selected Research. The Markdown parser supports
+typed prose, emphasis, links, headings, tables, and formulas rather than arbitrary
+HTML. `ResearchMath` renders TeX to self-contained SVG and assistive MathML during
+the build; no browser math engine is loaded. Original TeX remains in accessible
+annotations. Invalid formulas fail the build. Wide equations and tables scroll
+locally without shrinking the reading text.
 
-Domain `03`, Legal Research and Policy Analysis, links four selected papers:
-`autonomous-authority-in-space`, `small-states-and-strategic-space-dependence`,
-`solar-geoengineering-comparison-and-continuity`, and
-`mangrove-restoration-and-compensatory-mitigation`. Preserve each paper's source
-title, subtitle, author, date, abstract, numbered chapter hierarchy, paragraphs,
-citations, and acknowledgment in its structured source. The manuscripts credit
-Letao Ouyang and carry a December 2024 date.
+Use the shared Inter and typography tokens: 22px general titles and module headings,
+18px institution/project/paper names and Experience directory items, and 14px prose,
+metadata, and auxiliary navigation. Inline formulas use 1em; displayed formulas
+use 1.15em. Pure inline numbers inherit Inter. These roles remain unchanged on
+mobile. See [design](design.md) for spacing and mathematical geometry.
 
-| Manuscript | Source PDF |
-| --- | --- |
-| Who May Choose the Lesser Risk: Solar Geoengineering and the Legal Duties of Comparison and Continuity | `ESSAY1.pdf` |
-| Small States and the Governance of Strategic Space Dependence | `ESSAY2.pdf` |
-| Autonomous Authority in Space: Risk Tradeoffs and the Law of Delegation | `ESSAY3.pdf` |
-| Mangrove Restoration and the Limits of Compensatory Mitigation: Lessons from Florida for the Greater Bay Area | `ESSAY4.pdf` |
+When adding content, update its source, loader/slug registry, route mapping, sitemap
+expectations, and output tests together. Experience routes are keyed by stable
+entry IDs; add the corresponding mapping when adding an entry. The loader checks
+for missing routes, duplicate slugs, and mismatched AI or legal manuscript routes.
 
-`PaperParagraph.text` equals the concatenated run text; runs preserve source italics,
-bold, capitalization, superscripts, and numbered references. Citation text uses the
-same body size and spacing, including source small-capital runs. Numbered notes remain
-sequential and every chapter has a unique anchor. Keep original PDFs and extraction
-records outside public assets and the static export.
+`content/protected-sources.json` checks approved source bytes with LF normalization;
+`content/visible-copy-manifest.json` independently checks rendered text, metadata,
+alt text, and ARIA labels. Review intended content changes before updating either
+contract. Presentation changes preserve approved prose and formula annotations.
+Keep independent route, link, figure, and mathematical checks when updating a loader.
 
-`LegalPaperPage` renders the institution-and-project heading, vertical metadata,
-Key Contributions, complete original Abstract, article, and endnotes. The shared
-`ArticleContents` provides responsive chapter navigation and section tracking. `LegalPaperReader`
-adds native-dialog note previews, with source-link focus restoration and a route to
-the complete endnote. Original anchors, contents links, and return links remain
-available without JavaScript. Reading controls use the shared font and type tokens.
+`tooling/directory-glob/` adapts pinned Tinyglobby for Next.js lint directory
+discovery. Its override is scoped to the lint plugin; preserve its directory-path
+behavior and consumer tests when changing dependencies.
 
-To add an approved paper, update its structured source, the legal-paper slug registry,
-its entry and route mapping in `experience-showcase.ts`, and the independent content/output
-contracts together. Use the supplied manuscript as the wording and citation authority.
+## Assets and static assembly
 
-Article validation checks all thirty-one exported content routes, eighteen Experience
-reading links including four legal articles, chapter
-anchors, complete numbered references, bidirectional footnote links, and the absence
-of public PDF files. Validate the published text against the approved source before
-refreshing visible-copy hashes. Read back the four live article pages after publishing.
+`source-assets/brand/lo-mark.svg` is the editable mark;
+`npm run generate:brand-icons` produces the public SVG and icon derivatives.
+`source-assets/brand/og.png` is the social-preview master;
+`npm run optimize:images` produces `public/assets/brand/og-1774.jpg`.
+The repository cover lives in `.github/assets/readme-cover.jpg`.
 
-### Static export
+The Inter variable fonts and SIL Open Font License live in `public/assets/fonts/`.
+The site and architecture viewer load the same stylesheet, with automatic optical
+sizing disabled, the optical axis fixed at 14, and lining numerals. Retain font
+licenses and use separate lettering only for brand artwork.
 
-The `build` command runs Next.js and then `scripts/assemble-static.mjs`. Assembly
-places the standalone architecture viewer and license under `/architecture/`,
-normalizes Next.js segment payload names, and applies the production HTML security
-policy. Payload normalization validates containment and destination collisions
-before moving files; export entries may not be symbolic links. Preserve these
-output-contract tests when updating Next.js.
+`npm run build` runs Next.js, then `scripts/assemble-static.mjs`. Assembly includes
+the architecture viewer and its license, normalizes segment payload filenames, and
+applies production CSP. Payload moves validate containment and destination
+collisions; export entries may not be symbolic links. Preserve these output checks
+when upgrading Next.js. See [architecture](../architecture/README.md) for viewer
+generation and export-font integration.
 
-## Brand assets
-
-`website/source-assets/brand/lo-mark.svg` is the editable LO master.
-`npm run generate:brand-icons` creates its public SVG, favicon, and Apple touch derivatives.
-`website/source-assets/brand/og.png` is the social-preview master;
-`npm run optimize:images` creates `public/assets/brand/og-1774.jpg`.
-`.github/assets/readme-cover.jpg` is the repository cover.
-
-Editable masters and served derivatives have separate roles. Only assets needed by
-visitors belong in `website/public/`.
-
-## Typography assets
-
-`website/public/assets/fonts/` contains the unmodified Inter 4.1 variable WOFF2
-files, their SIL Open Font License, and the shared font stylesheet. The source is
-the [official Inter 4.1 release](https://github.com/rsms/inter/releases/tag/v4.1).
-The site layout and architecture viewer load this same stylesheet and regular-face
-preload. Keep text in the inherited font; reserve separate lettering for brand artwork.
-
-The visual reference is Cognition's grid, warm paper color, restrained rules, and
-spacing. Inter remains the site's own self-hosted typeface. Research and other body
-text share 14px with 1.6 leading; subsection headings and institution/project/paper
-names use 18px, including detail-page H1s. General page titles and section headings
-use 22px with 1.25 leading at every viewport. Inline math uses 1em and displayed
-math uses 1.15em. Pure inline numeric values use Inter and retain accessible MathML.
-Shared Inter settings fix the optical axis at 14 and use lining numerals.
-Experience directory labels and numbers use 18px. Metadata, main
-navigation, section indices, field labels, and footers use 14px. The semantic token
-names remain distinct; mobile layouts retain the same 22px, 18px, and 14px hierarchy.
-Keep these roles synchronized through `app/globals.css`; do not give a particular
-article a larger prose size or change type size to fit a long title.
-
-## Validation and publishing
+## Validation, security, and publishing
 
 ```sh
 cd website
@@ -314,29 +189,27 @@ npm audit --audit-level=low
 npm run preview:static
 ```
 
-Use Node.js 24 to match the deployment workflow. The local static preview binds to
-`127.0.0.1` by default and serves the assembled export; use it for production-policy
-verification. `npm run dev` uses the development security policy required by Next.js
-development tooling.
+`check` verifies protected sources, lints, builds, tests the artifact, and compares
+visible copy. The static preview binds to `127.0.0.1:8123` by default and serves
+`out/`; use it to inspect production behavior. `npm run dev` uses the separate
+development security policy required by Next.js tooling.
 
-Review the export at desktop and phone widths, including 320px. Check keyboard
-navigation, menu dismissal and resizing, reduced motion, the JavaScript-free fallback,
-local links, and the architecture viewer. Run `git diff --check` and inspect staged
-files for credentials, temporary files, and generated build output.
+Review desktop and phone layouts, including 320px, keyboard navigation, menu
+dismissal, reduced motion, JavaScript-free content, local links, equations, tables,
+note previews, and architecture exports. Run `git diff --check` and inspect staged
+files for credentials, temporary files, and unintended generated output.
 
-The SHA-pinned GitHub Actions workflow validates pull requests. A push to `main`
-validates, audits dependencies, and uploads `website/out/` to GitHub Pages. Build jobs
-have read-only repository access; only deployment receives Pages write and OIDC access.
-After publishing, verify the workflow for the exact commit and the live domain separately.
+The workflow validates pull requests with read-only repository access. A push to
+`main` runs validation and the dependency audit, uploads `website/out/`, and deploys
+with Pages write and OIDC permissions confined to the deployment job. Every action
+is SHA-pinned. After publishing, verify the workflow for the exact commit and read
+back the live routes separately.
 
-The build computes SHA-256 permissions for the exact inline scripts in each exported
-HTML page, including the architecture viewer. The policy appears before scripts and
-blocks arbitrary inline scripts, evaluation, frames, objects, and form submission.
-Fonts load from the site's own origin. Inline event handlers are blocked on every
-page. Inline styles support the framework and standalone viewer.
-GitHub Pages controls HTTP response headers. The HTML policy cannot set response
-headers or the `frame-ancestors` directive. Keep dependency versions and the lockfile
-aligned, and preserve the major-scoped dependency overrides. The dependency audit
-checks the advisory data available at run time.
-
-See [architecture](../architecture/README.md) for viewer editing and validation.
+Each exported HTML page receives hashes for its exact inline scripts before any
+script executes. Production CSP blocks arbitrary inline scripts, eval, inline event
+handlers, embedded frames/objects, and form submission; fonts and network fetches
+use the same origin. Inline styles support framework and viewer geometry.
+GitHub Pages controls HTTP response headers: a meta policy cannot enforce
+`frame-ancestors` or supply host-level security headers. Keep the lockfile, pinned
+dependencies, and scoped overrides aligned. An advisory check is current only when
+the npm endpoint returns a successful result.

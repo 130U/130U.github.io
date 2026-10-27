@@ -34,24 +34,13 @@
       "type": "heading",
       "level": 1,
       "id": "section-1",
-      "text": "I. INTRODUCTION",
+      "text": "I. Introduction",
       "sourcePages": [
         2
       ],
       "runs": [
         {
-          "text": "I."
-        },
-        {
-          "text": " ",
-          "smallCaps": true
-        },
-        {
-          "text": "I"
-        },
-        {
-          "text": "NTRODUCTION",
-          "smallCaps": true
+          "text": "I. Introduction"
         }
       ]
     },
@@ -153,24 +142,13 @@
       "type": "heading",
       "level": 1,
       "id": "section-9",
-      "text": "II. FROM RISK CLASSIFICATION TO A COMPARATIVE DECISION PROCEDURE",
+      "text": "II. From risk classification to a comparative decision procedure",
       "sourcePages": [
         4
       ],
       "runs": [
         {
-          "text": "II."
-        },
-        {
-          "text": " ",
-          "smallCaps": true
-        },
-        {
-          "text": "F"
-        },
-        {
-          "text": "ROM RISK CLASSIFICATION TO A COMPARATIVE DECISION PROCEDURE",
-          "smallCaps": true
+          "text": "II. From risk classification to a comparative decision procedure"
         }
       ]
     },
@@ -362,24 +340,13 @@
       "type": "heading",
       "level": 1,
       "id": "section-23",
-      "text": "III. EXISTING LAW GOVERNS THE ACTORS BUT LEAVES OPERATIONAL CHOICES",
+      "text": "III. Existing law governs the actors but leaves operational choices",
       "sourcePages": [
         7
       ],
       "runs": [
         {
-          "text": "III."
-        },
-        {
-          "text": " ",
-          "smallCaps": true
-        },
-        {
-          "text": "E"
-        },
-        {
-          "text": "XISTING LAW GOVERNS THE ACTORS BUT LEAVES OPERATIONAL CHOICES",
-          "smallCaps": true
+          "text": "III. Existing law governs the actors but leaves operational choices"
         }
       ]
     },
@@ -617,24 +584,13 @@
       "type": "heading",
       "level": 1,
       "id": "section-36",
-      "text": "IV. DELAYED SPACECRAFT OPERATIONS AND THE CASE FOR ADVANCE PERMISSION",
+      "text": "IV. Delayed spacecraft operations and the case for advance permission",
       "sourcePages": [
         11
       ],
       "runs": [
         {
-          "text": "IV."
-        },
-        {
-          "text": " ",
-          "smallCaps": true
-        },
-        {
-          "text": "D"
-        },
-        {
-          "text": "ELAYED SPACECRAFT OPERATIONS AND THE CASE FOR ADVANCE PERMISSION",
-          "smallCaps": true
+          "text": "IV. Delayed spacecraft operations and the case for advance permission"
         }
       ]
     },
@@ -883,24 +839,13 @@
       "type": "heading",
       "level": 1,
       "id": "section-53",
-      "text": "V. ORBITAL SAFETY AND RISKS IMPOSED ON OTHER OPERATORS",
+      "text": "V. Orbital safety and risks imposed on other operators",
       "sourcePages": [
         15
       ],
       "runs": [
         {
-          "text": "V."
-        },
-        {
-          "text": " ",
-          "smallCaps": true
-        },
-        {
-          "text": "O"
-        },
-        {
-          "text": "RBITAL SAFETY AND RISKS IMPOSED ON OTHER OPERATORS",
-          "smallCaps": true
+          "text": "V. Orbital safety and risks imposed on other operators"
         }
       ]
     },
@@ -1217,24 +1162,13 @@
       "type": "heading",
       "level": 1,
       "id": "section-75",
-      "text": "VI. SETI AND THE DIFFERENCE BETWEEN A CANDIDATE AND A CONCLUSION",
+      "text": "VI. SETI and the difference between a candidate and a conclusion",
       "sourcePages": [
         20
       ],
       "runs": [
         {
-          "text": "VI."
-        },
-        {
-          "text": " ",
-          "smallCaps": true
-        },
-        {
-          "text": "SETI"
-        },
-        {
-          "text": " AND THE DIFFERENCE BETWEEN A CANDIDATE AND A CONCLUSION",
-          "smallCaps": true
+          "text": "VI. SETI and the difference between a candidate and a conclusion"
         }
       ]
     },
@@ -1406,24 +1340,13 @@
       "type": "heading",
       "level": 1,
       "id": "section-86",
-      "text": "VII. IMPLEMENTING AUTHORITY THAT CAN BE REVISED",
+      "text": "VII. Implementing authority that can be revised",
       "sourcePages": [
         24
       ],
       "runs": [
         {
-          "text": "VII."
-        },
-        {
-          "text": " ",
-          "smallCaps": true
-        },
-        {
-          "text": "I"
-        },
-        {
-          "text": "MPLEMENTING AUTHORITY THAT CAN BE REVISED",
-          "smallCaps": true
+          "text": "VII. Implementing authority that can be revised"
         }
       ]
     },
@@ -1646,24 +1569,13 @@
       "type": "heading",
       "level": 1,
       "id": "section-103",
-      "text": "VIII. OBJECTIONS AND THE RISKS OF REGULATION",
+      "text": "VIII. Objections and the risks of regulation",
       "sourcePages": [
         27
       ],
       "runs": [
         {
-          "text": "VIII."
-        },
-        {
-          "text": " ",
-          "smallCaps": true
-        },
-        {
-          "text": "O"
-        },
-        {
-          "text": "BJECTIONS AND THE RISKS OF REGULATION",
-          "smallCaps": true
+          "text": "VIII. Objections and the risks of regulation"
         }
       ]
     },
@@ -1875,24 +1787,13 @@
       "type": "heading",
       "level": 1,
       "id": "section-119",
-      "text": "IX. CONCLUSION",
+      "text": "IX. Conclusion",
       "sourcePages": [
         31
       ],
       "runs": [
         {
-          "text": "IX."
-        },
-        {
-          "text": " ",
-          "smallCaps": true
-        },
-        {
-          "text": "C"
-        },
-        {
-          "text": "ONCLUSION",
-          "smallCaps": true
+          "text": "IX. Conclusion"
         }
       ]
     },

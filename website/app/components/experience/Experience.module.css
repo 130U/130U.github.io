@@ -123,10 +123,9 @@
   line-height: var(--reading-leading);
 }
 .position { grid-column: 1 / -1; }
-.metadata dt { color: var(--muted); font-size: var(--type-label); line-height: var(--label-leading); margin-bottom: 3px; }
+.metadata dt { color: var(--muted); font-size: var(--type-label); line-height: var(--label-leading); margin-bottom: 0; }
 .metadata dd { margin: 0; }
-.metadata > div { display: grid; grid-template-columns: 90px minmax(0, 1fr); align-items: baseline; gap: 8px 16px; }
-.metadata dt { margin-bottom: 0; }
+.metadata > div { display: grid; grid-template-columns: 6.5em minmax(0, 1fr); align-items: baseline; gap: 8px 16px; }
 .contributions h2, .contributions h5 {
   margin: 0 0 16px;
   font-size: var(--type-heading);

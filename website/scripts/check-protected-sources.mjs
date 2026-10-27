@@ -46,9 +46,7 @@ const PROTECTED_PATHS = [
   "content/artificial-intelligence/task-validity-in-financial-synthetic-data.json",
   "content/artificial-intelligence/verification-and-supervision-in-scientific-reasoning-tasks.json",
   "content/artificial-intelligence/evidence-uncertainty-and-decision-guarantees-in-investment-research.json",
-  "content/sources/ai-portfolio/theodore_ouyang_ai_portfolio_optimized.md",
-  "content/sources/ai-portfolio/citation-links.json",
-  "content/sources/ai-portfolio/editorial-revisions.json",
+  "content/sources/ai-portfolio/ai-research-and-engineering.md",
   "scripts/import-ai-portfolio.mjs",
 ];
 

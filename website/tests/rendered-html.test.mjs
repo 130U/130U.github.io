@@ -575,7 +575,7 @@ test("the ten nonresearch detail routes keep metadata in separate label/value ro
   for (const [, declarations] of metadataRules) {
     assert.match(declarations, /grid-template-columns:\s*1fr\s*;/u, "Metadata must remain a single column at every defined breakpoint");
   }
-  assert.match(metadataStyles, /\.metadata\s*>\s*div\s*\{[^}]*display:\s*grid[^}]*grid-template-columns:\s*90px minmax\(0,\s*1fr\)[^}]*align-items:\s*baseline/u, "Desktop and tablet metadata labels and values share a baseline within each row");
+  assert.match(metadataStyles, /\.metadata\s*>\s*div\s*\{[^}]*display:\s*grid[^}]*grid-template-columns:\s*6\.5em minmax\(0,\s*1fr\)[^}]*align-items:\s*baseline/u, "Metadata labels and values share a baseline, with label width scaling with the text size");
   assert.match(metadataStyles, /@media\s*\(width\s*<\s*420px\)\s*\{\s*\.metadata\s*>\s*div\s*\{[^}]*grid-template-columns:\s*1fr/u, "Narrow screens stack each label above its value without rearranging metadata rows");
   for (const route of EXPERIENCE_DETAIL_ROUTES) {
     const html = await routeHtml(route);
@@ -879,7 +879,7 @@ test("shared typography source roles preserve Inter numerals, article names, met
   assert.match(rule(math, ".number"), /font-variant-numeric:\s*lining-nums\s+proportional-nums\s*;/u);
   assert.match(rule(math, ".number sup"), /font-size:\s*0\.75em\s*;/u);
   assert.match(rule(math, ".number sup"), /vertical-align:\s*super\s*;/u);
-  assert.match(rule(experience, ".metadata > div"), /grid-template-columns:\s*90px minmax\(0,\s*1fr\)\s*;/u);
+  assert.match(rule(experience, ".metadata > div"), /grid-template-columns:\s*6\.5em minmax\(0,\s*1fr\)\s*;/u);
   assert.match(rule(experience, ".contributions > ul > li + li"), /border-top:\s*1px solid var\(--rule\)\s*;/u);
   assert.match(rule(experience, ".contributions > ul > li + li"), /padding-top:\s*16px\s*;/u);
   assert.doesNotMatch(experience, /\.contributions\s+li(?:\s*\+\s*li)?\s*\{/u, "Contribution spacing and dividers must not cascade into nested items");
