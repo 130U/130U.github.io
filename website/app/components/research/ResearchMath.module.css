@@ -12,6 +12,20 @@
   overflow-x: auto;
   overflow-y: hidden;
   scrollbar-width: none;
+  font-size: 1em;
+}
+
+.number {
+  position: relative;
+  font: inherit;
+  font-variant-numeric: lining-nums proportional-nums;
+  white-space: nowrap;
+}
+
+.number sup {
+  font-size: 0.75em;
+  line-height: 0;
+  vertical-align: super;
 }
 
 .inline::-webkit-scrollbar {

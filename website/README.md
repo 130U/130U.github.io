@@ -9,11 +9,14 @@ thirty-one routes; the architecture viewer makes thirty-two exported routes, exc
 
 The design follows Cognition's editorial grid, warm paper color, and fine rules with
 self-hosted Inter. About opens with the interactive name entrance, followed
-by the profile. Page titles and section headings are 22px with 1.25 leading, entry
-headings are 18px, and body text is 14px with 1.6 leading. Metadata, navigation,
+by the profile. General page titles and section headings are 22px with 1.25 leading;
+institution, project, and paper names are 18px, including detail-page H1s. Body
+text is 14px with 1.6 leading. Metadata, navigation,
 labels, indices, and footers also use 14px. Experience directory labels and numbers
-use 18px. This hierarchy stays the same at every viewport; mathematical expressions
-use a relative 1.15em scale.
+use 18px. This hierarchy stays the same at every viewport. Inter uses a shared fixed
+optical size of 14 and lining numerals. Inline mathematical expressions use 1em;
+displayed expressions use 1.15em. Pure inline numeric values use Inter while
+preserving their original TeX in accessible MathML.
 Coursework flows down up to two independent columns, with one column below 768px
 and no shared row gaps.
 
@@ -64,10 +67,13 @@ legal pages continue into their protected manuscripts.
 The four AI entries use the approved portfolio copy frozen in
 `content/sources/ai-portfolio/`. Run `node scripts/import-ai-portfolio.mjs` from
 `website/` to reproduce their briefs, disclosures, contributions, architectural
-contexts, and mathematical bodies. The import retains the supplied wording,
-restores the earlier citation URLs, and carries forward the two nonlinear Taylor
-definitions from the previous article. The source file and citation map are
-protected; tests compare the imported copy and rendered equations against them.
+contexts, nested contribution lists, and mathematical bodies. The import restores
+the earlier citation URLs, carries forward the two nonlinear Taylor definitions
+from the previous article, and applies the exact scoped corrections recorded in
+`editorial-revisions.json`. The original manuscript remains unchanged. Each revision
+records its original text, replacement, and reason; a missing or repeated match
+stops the import. The source file, citation map, and revision record are protected;
+tests check the complete original-to-reviewed text and mathematical rendering.
 
 The build includes the standalone [architecture viewer](../architecture/).
 See [maintenance](../docs/maintenance.md) for routes, publishing, and extension

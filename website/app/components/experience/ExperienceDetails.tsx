@@ -37,7 +37,16 @@ export function KeyContributions({ entry, id = "key-contributions", nested = fal
   return (
     <section className={styles.contributions} aria-labelledby={id} data-experience-contributions={entry.id}>
       <Heading id={id} tabIndex={-1}>{entry.contributionsLabel}</Heading>
-      <ul>{[...entry.keyContributions, ...entry.notes].map((text, index) => <li key={index}>{entry.categoryId === "01" ? <InlineMarkdown text={text} /> : text}</li>)}</ul>
+      <ul>{[...entry.keyContributions, ...entry.notes].map((text, index) => {
+        const detail = entry.keyContributionDetails?.[String(index)];
+        const DetailList = detail?.ordered ? "ol" : "ul";
+        return <li key={index} data-contribution-item={index}>
+          {entry.categoryId === "01" ? <InlineMarkdown text={text} /> : text}
+          {detail && <DetailList className={styles.contributionDetails} data-contribution-details={index}>
+            {detail.items.map((item, childIndex) => <li key={childIndex} data-contribution-detail={childIndex}><InlineMarkdown text={item} /></li>)}
+          </DetailList>}
+        </li>;
+      })}</ul>
     </section>
   );
 }

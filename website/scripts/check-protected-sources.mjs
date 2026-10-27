@@ -19,6 +19,7 @@ const PROTECTED_PATHS = [
   "app/components/research/ResearchMath.tsx",
   "app/lib/content/research-markdown.ts",
   "app/lib/content/research-math.ts",
+  "app/lib/content/research-number.ts",
   "app/education/page.tsx",
   "app/education/certified-valuation-arithmetic-asian-options/page.tsx",
   "app/education/certified-rough-heston-valuation/page.tsx",
@@ -47,6 +48,7 @@ const PROTECTED_PATHS = [
   "content/artificial-intelligence/evidence-uncertainty-and-decision-guarantees-in-investment-research.json",
   "content/sources/ai-portfolio/theodore_ouyang_ai_portfolio_optimized.md",
   "content/sources/ai-portfolio/citation-links.json",
+  "content/sources/ai-portfolio/editorial-revisions.json",
   "scripts/import-ai-portfolio.mjs",
 ];
 

@@ -1,7 +1,5 @@
 .homeFrame {
   font-family: var(--font-text);
-  font-optical-sizing: none;
-  font-variation-settings: "opsz" 14;
 }
 
 .homeFrame :global(.content-column) {

@@ -1,7 +1,5 @@
 .frame {
   font-family: var(--font-text);
-  font-optical-sizing: none;
-  font-variation-settings: "opsz" 14;
 }
 .frame :global(.content-column) { padding-top: 112px; }
 .intro { max-width: var(--reading-measure); margin-bottom: 48px; }
@@ -110,6 +108,7 @@
 .readMore:focus-visible, .directory a:focus-visible { outline: 2px solid var(--accent); outline-offset: 4px; }
 .detailPage { max-width: var(--reading-measure); }
 .detailHeader { margin-bottom: 3rem; }
+.detailPage .detailHeader h1 { font-size: var(--type-subheading); font-weight: 600; line-height: var(--subheading-leading); letter-spacing: 0; }
 .detailHeader :global(.back-link) { margin-bottom: 2rem; }
 .detailHeader + .contributions { border-top: 1px solid var(--rule-strong); padding-top: 2rem; }
 .detailFooter { display: flex; justify-content: space-between; gap: 24px; border-top: 1px solid var(--rule); margin-top: 40px; padding-top: 24px; font-size: var(--type-interface); }
@@ -126,6 +125,8 @@
 .position { grid-column: 1 / -1; }
 .metadata dt { color: var(--muted); font-size: var(--type-label); line-height: var(--label-leading); margin-bottom: 3px; }
 .metadata dd { margin: 0; }
+.metadata > div { display: grid; grid-template-columns: 90px minmax(0, 1fr); align-items: baseline; gap: 8px 16px; }
+.metadata dt { margin-bottom: 0; }
 .contributions h2, .contributions h5 {
   margin: 0 0 16px;
   font-size: var(--type-heading);
@@ -134,7 +135,7 @@
   letter-spacing: 0;
   scroll-margin-top: 6rem;
 }
-.contributions ul {
+.contributions > ul {
   display: grid;
   gap: 12px;
   padding-left: 19px;
@@ -142,8 +143,17 @@
   font-size: var(--type-reading);
   line-height: var(--reading-leading);
 }
-.contributions li { padding-left: 3px; }
-.contributions li::marker { font-size: 0.7em; }
+.contributions > ul > li { padding-left: 3px; }
+.contributions > ul > li + li { border-top: 1px solid var(--rule); padding-top: 16px; }
+.contributions > ul > li::marker { font-size: 0.7em; }
+.contributionDetails {
+  display: grid;
+  gap: 8px;
+  margin: 12px 0 0;
+  padding-left: 20px;
+  font-size: var(--type-reading);
+  line-height: var(--reading-leading);
+}
 .domainHeader { margin-bottom: 28px; }
 @media (hover: hover) and (pointer: fine) {
   .readMore:hover, .directory a:hover { color: var(--accent); text-decoration-color: var(--accent); }
@@ -162,4 +172,8 @@
   .sectionTitle { margin-bottom: 24px; }
   .entry { scroll-margin-top: 6rem; }
   .metadata { grid-template-columns: 1fr; gap: 12px; }
+}
+
+@media (width < 420px) {
+  .metadata > div { grid-template-columns: 1fr; gap: 3px; }
 }

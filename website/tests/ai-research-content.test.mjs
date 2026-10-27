@@ -8,27 +8,29 @@ import { fileURLToPath } from "node:url";
 const ROOT = fileURLToPath(new URL("../", import.meta.url));
 const AI_ROUTE = "/past-experience/artificial-intelligence/";
 const APPROVED_DOCUMENT = path.join(ROOT, "content", "sources", "ai-portfolio", "theodore_ouyang_ai_portfolio_optimized.md");
+const APPROVED_REVISIONS = path.join(ROOT, "content", "sources", "ai-portfolio", "editorial-revisions.json");
+const REVISIONS_SHA256 = "6171190332fee0deae11d95e60f3278f885bfac7cb75093ab3608a299e9cf3c5";
 // Structure and benchmark-table shapes are checked independently of the renderer.
 const PROJECTS = [
   {
     slug: "statistical-inference-and-resource-allocation-in-expert-data-production",
     title: "Statistical inference and resource allocation in expert data production",
-    bodyStart: 0, display: 20, headings: 7, tables: [[4, 4, 4, 4, 4, 4]],
+    bodyStart: 0, display: 20, inline: 120, headings: 7, tables: [[4, 4, 4, 4, 4, 4]],
   },
   {
     slug: "task-validity-in-financial-synthetic-data",
     title: "Task validity in financial synthetic data",
-    bodyStart: 0, display: 13, headings: 6, tables: [[3, 3, 3, 3], [3, 3, 3, 3, 3]],
+    bodyStart: 0, display: 13, inline: 85, headings: 6, tables: [[3, 3, 3, 3], [3, 3, 3, 3, 3]],
   },
   {
     slug: "verification-and-supervision-in-scientific-reasoning-tasks",
     title: "Verification and supervision in scientific reasoning tasks",
-    bodyStart: 0, display: 15, headings: 7, tables: [[4, 4, 4, 4]],
+    bodyStart: 0, display: 15, inline: 108, headings: 7, tables: [[4, 4, 4, 4]],
   },
   {
     slug: "evidence-uncertainty-and-decision-guarantees-in-investment-research",
     title: "Evidence uncertainty and decision guarantees in investment research",
-    bodyStart: 0, display: 11, headings: 6, tables: [[3, 3, 3, 3]],
+    bodyStart: 0, display: 11, inline: 121, headings: 6, tables: [[3, 3, 3, 3]],
   },
 ];
 
@@ -83,12 +85,76 @@ async function approvedPortfolio() {
   return { document, projects };
 }
 
+async function approvedRevisions() {
+  const text = (await readFile(APPROVED_REVISIONS, "utf8")).replace(/\r\n?/gu, "\n");
+  assert.equal(createHash("sha256").update(text).digest("hex"), REVISIONS_SHA256, "The exact independently reviewed revision manifest must remain frozen");
+  const manifest = JSON.parse(text);
+  assert.equal(manifest.sourceSha256, "211f94a29754ca89b196f5de9fec47a990b95d587c2b5c5d89acfeabb775d283");
+  assert.equal(manifest.revisions.length, 52);
+  assert.equal(new Set(manifest.revisions.map(({ id }) => id)).size, 52);
+  return manifest.revisions;
+}
+
+function restoreFrozenCopy(file, document, revisions) {
+  const restored = structuredClone(document);
+  for (const revision of revisions.filter((item) => item.file === file).toReversed()) {
+    const keys = revision.jsonPointer.slice(1).split("/");
+    let parent = restored;
+    for (const key of keys.slice(0, -1)) {
+      assert.ok(Object.hasOwn(parent, key), `Missing reviewed field for ${revision.id}`);
+      parent = parent[key];
+    }
+    const key = keys.at(-1);
+    assert.equal(typeof parent[key], "string");
+    assert.equal(parent[key].split(revision.after).length - 1, 1, `The exact approved text for ${revision.id} must appear once`);
+    parent[key] = parent[key].replace(revision.after, () => revision.before);
+  }
+  return restored;
+}
+
+function frozenContributionDetails(project) {
+  const section = project.split("## Key Contributions\n")[1].split("\n## Architectural Context:")[0];
+  const parents = section.split(/^\* /gmu).slice(1);
+  return Object.fromEntries(parents.flatMap((parent, index) => {
+    const lines = [...parent.matchAll(/^ {2}(\*|\d+\.) (.+)$/gmu)];
+    return lines.length ? [[index, { ordered: lines[0][1] !== "*", items: lines.map((line) => line[2]) }]] : [];
+  }));
+}
+
 function readableHtml(html) {
   let mathIndex = 0;
   return normalized(withoutSvg(html)
+    .replace(/<span\b([^>]*\bdata-research-number\b[^>]*)>[\s\S]*?<\/span>/giu, (whole, attributes) => attr(attributes, "aria-hidden") === "true" ? "" : whole)
     .replace(/<math\b[\s\S]*?<\/math>/giu, () => ` MATH_${mathIndex++} `)
     .replace(/<(?:br|\/?(?:table|thead|tbody|tr|td|th))\b[^>]*>/giu, " ")
     .replace(/<[^>]+>/gu, ""));
+}
+
+function expectedNumberVisual({ kind, tex }) {
+  if (kind !== "inline") return undefined;
+  const compact = tex.replace(/\s+/gu, "");
+  const suffix = compact.endsWith("\\%") ? "%" : "";
+  const value = suffix ? compact.slice(0, -2) : compact;
+  const numeric = /^[+-]?(?:(?:\d{1,3}(?:,\d{3})+|\d+)(?:\.\d+)?|\.\d+)$/u;
+  const scientific = value.match(/^(?:(.+)\\times)?10\^\{([+-]?\d+)\}$/u);
+  const minus = (text) => text.replace(/^-/u, "−");
+  if (scientific && (scientific[1] === undefined || numeric.test(scientific[1]))) {
+    return { base: scientific[1] === undefined ? "10" : `${minus(scientific[1])} × 10`, exponent: minus(scientific[2]), suffix };
+  }
+  return numeric.test(value) ? { base: minus(value), suffix } : undefined;
+}
+
+function formulaContainers(html) {
+  return [...html.matchAll(/<span\b[^>]*\bdata-research-formula="(?:inline|display)"[^>]*>/giu)].map((opening) => {
+    const tags = /<\/?span\b[^>]*>/giu;
+    tags.lastIndex = opening.index;
+    let depth = 0;
+    for (let tag = tags.exec(html); tag; tag = tags.exec(html)) {
+      depth += tag[0].startsWith("</") ? -1 : 1;
+      if (depth === 0) return html.slice(opening.index, tags.lastIndex);
+    }
+    assert.fail("Formula spans must be balanced");
+  });
 }
 
 function svgRanges(html) {
@@ -171,8 +237,9 @@ function tableCells(html, source) {
 }
 
 for (const expected of PROJECTS) {
-  test(`AI project preserves the approved portfolio manuscript and its complete mathematical rendering: ${expected.slug}`, async () => {
+  test(`AI project preserves the frozen manuscript, reviewed corrections, and complete mathematical rendering: ${expected.slug}`, async () => {
     const { document, projects } = await approvedPortfolio();
+    const revisions = await approvedRevisions();
     const approvedProject = projects[PROJECTS.indexOf(expected)];
     let approvedBody = approvedProject.slice(approvedProject.indexOf("## I. ")).trim();
     if (PROJECTS.indexOf(expected) === 3) {
@@ -183,31 +250,51 @@ for (const expected of PROJECTS) {
 For smooth nonlinear models where`);
     }
     const source = JSON.parse(await readFile(path.join(ROOT, "content", "artificial-intelligence", `${expected.slug}.json`), "utf8"));
-    const showcase = JSON.parse(await readFile(path.join(ROOT, "content", "experience-showcase.json"), "utf8"))
-      .entries.find(({ id }) => id === PROJECTS.indexOf(expected) + 1);
+    const showcaseFile = JSON.parse(await readFile(path.join(ROOT, "content", "experience-showcase.json"), "utf8"));
+    const showcase = showcaseFile.entries.find(({ id }) => id === PROJECTS.indexOf(expected) + 1);
+    const originalShowcase = restoreFrozenCopy("content/experience-showcase.json", showcaseFile, revisions).entries[PROJECTS.indexOf(expected)];
+    const originalArticle = restoreFrozenCopy(`content/artificial-intelligence/${expected.slug}.json`, source, revisions);
     const html = await readFile(path.join(ROOT, "out", ...AI_ROUTE.split("/").filter(Boolean), expected.slug, "index.html"), "utf8");
     const briefs = [...document.slice(document.indexOf("# PART 1:"), document.indexOf("# PART 2 & PART 3:")).matchAll(/^### ([^\n]+)\n([^\n]+)\n\n\[Read More >\]/gmu)];
     const index = PROJECTS.indexOf(expected);
     assert.equal(showcase.organization, briefs[index][1]);
-    assert.equal(showcase.summary, briefs[index][2], "The list-page brief must use the approved paragraph verbatim");
+    assert.equal(originalShowcase.summary, briefs[index][2], "Reversing only the reviewed edits must recover the complete frozen brief");
     for (const field of ["Position", "Location", "Dates"]) {
       assert.equal(showcase.metadata[field.toLowerCase()], approvedProject.match(new RegExp(`\\*\\*${field}\\*\\*\\n([^\\n]+)`, "u"))?.[1]);
     }
     const approvedContributions = approvedProject.split("## Key Contributions\n")[1].split("\n## Architectural Context:")[0].split("\n").filter((line) => line.startsWith("* ")).map((line) => line.slice(2));
-    assert.deepEqual(showcase.keyContributions, approvedContributions, "Every approved contribution must remain verbatim and in order");
+    assert.deepEqual(originalShowcase.keyContributions, approvedContributions, "Every frozen contribution must survive except the exact reviewed revisions");
+    const approvedDetails = frozenContributionDetails(approvedProject);
+    assert.deepEqual(originalShowcase.keyContributionDetails ?? {}, approvedDetails, "All original nested contributions must survive in order, except the exact reviewed revisions");
+    assert.equal(Object.values(approvedDetails).reduce((count, detail) => count + detail.items.length, 0), [0, 4, 3, 0][index]);
     assert.equal(showcase.disclosure.title, "Confidentiality & Scope Disclosure");
     assert.equal(showcase.disclosure.text, approvedProject.match(/\*\*Confidentiality & Scope Disclosure\*\*\n([^\n]+)/u)?.[1]);
-    assert.equal(showcase.architecturalContext.title, approvedProject.match(/^## (Architectural Context:[^\n]+)$/mu)?.[1]);
-    assert.equal(showcase.architecturalContext.text, approvedProject.match(/^## Architectural Context:[^\n]+\n([\s\S]+?)\n## Contents/mu)?.[1].trim());
+    assert.equal(originalShowcase.architecturalContext.title, approvedProject.match(/^## (Architectural Context:[^\n]+)$/mu)?.[1]);
+    assert.equal(originalShowcase.architecturalContext.text, approvedProject.match(/^## Architectural Context:[^\n]+\n([\s\S]+?)\n## Contents/mu)?.[1].trim());
     assert.equal(source.slug, expected.slug);
     assert.equal(source.title, expected.title);
-    assert.equal(comparableManuscript(source.markdown), comparableManuscript(approvedBody), "The complete approved prose and tables must survive import without editorial rewrites");
-    assert.deepEqual(formulas(source.markdown).map(({ kind, tex }) => ({ kind, tex: tex.trim() })), formulas(approvedBody).map(({ kind, tex }) => ({ kind, tex: tex.trim() })), "Every approved mathematical expression must retain its exact TeX and order");
+    assert.equal(comparableManuscript(originalArticle.markdown), comparableManuscript(approvedBody), "Reversing the reviewed edits must recover every original paragraph and table");
+    assert.deepEqual(formulas(originalArticle.markdown).map(({ kind, tex }) => ({ kind, tex: tex.trim() })), formulas(approvedBody).map(({ kind, tex }) => ({ kind, tex: tex.trim() })), "Reversing the reviewed edits must recover every original TeX expression in order");
     assert.equal(readableHtml(html.match(/<h1\b[^>]*>([\s\S]*?)<\/h1>/iu)?.[1] ?? ""), `${showcase.organization}: ${showcase.detailTitle}`);
     assert.match(html, new RegExp(`href="/experience/#${expected.slug}"`, "u"));
     assert.match(html, /href="#key-contributions"/u);
     assert.doesNotMatch(html, /href="#overview"|id="overview"|id="article-title"/u);
     assert.ok(html.indexOf('id="key-contributions"') < html.indexOf(`data-research-block="${expected.bodyStart}"`));
+
+    const detailLists = [...html.matchAll(/<([ou]l)\b[^>]*\bdata-contribution-details="(\d+)"[^>]*>([\s\S]*?)<\/\1>/giu)];
+    assert.equal(detailLists.length, Object.keys(approvedDetails).length, "Every nested source list must be rendered once");
+    for (const list of detailLists) {
+      const details = showcase.keyContributionDetails[list[2]];
+      assert.ok(details, "Rendered details must have a reviewed source parent");
+      assert.equal(list[1], details.ordered ? "ol" : "ul");
+      const children = [...list[3].matchAll(/<li\b[^>]*\bdata-contribution-detail="(\d+)"[^>]*>([\s\S]*?)<\/li>/giu)];
+      assert.deepEqual(children.map((child) => Number(child[1])), details.items.map((_, child) => child));
+      assert.deepEqual(children.map((child) => readableHtml(child[2])), details.items.map(readableMarkdown), "All seven nested details must retain their reviewed text and order");
+      for (const [childIndex, child] of children.entries()) {
+        const annotations = [...child[2].matchAll(/<annotation\b[^>]*encoding="application\/x-tex"[^>]*>([\s\S]*?)<\/annotation>/giu)].map((item) => decodeHtml(item[1]));
+        assert.deepEqual(annotations, formulas(details.items[childIndex]).map(({ tex }) => tex), "Nested contribution TeX must remain exact");
+      }
+    }
 
     const sourceBlocks = expectedBlocks(source.markdown);
     assert.equal(sourceBlocks.findIndex((block) => block.type === "heading"), expected.bodyStart, "The imported body starts at its first complete numbered chapter.");
@@ -253,16 +340,31 @@ For smooth nonlinear models where`);
     }
 
     const sourceFormulas = formulas(source.markdown);
+    const numericVisuals = sourceFormulas.map(expectedNumberVisual);
+    const vectorIndices = sourceFormulas.flatMap((_, index) => numericVisuals[index] ? [] : [index]);
     const math = [...content.matchAll(/<math\b([^>]*)>([\s\S]*?)<\/math>/giu)];
     const svg = [...content.matchAll(/<svg\b([^>]*)>/giu)].filter((match) => attr(match[1], "data-research-svg"));
     const visualFormulas = svgRanges(content).map(([from, to]) => content.slice(from, to));
-    const containers = [...content.matchAll(/<span\b([^>]*)>/giu)].filter((match) => attr(match[1], "data-research-formula"));
+    const containers = formulaContainers(content);
     assert.equal(math.length, sourceFormulas.length);
-    assert.equal(svg.length, math.length, "Every source formula must have one deterministic visual SVG");
-    assert.equal(visualFormulas.length, math.length, "Nested vector geometry must remain inside its own formula root");
+    assert.equal(svg.length, vectorIndices.length, "Every nonnumeric or display expression must have one deterministic visual SVG");
+    assert.equal(visualFormulas.length, vectorIndices.length, "Nested vector geometry must remain inside its own formula root");
     assert.equal(containers.length, math.length, "Every formula must have one visual and assistive container");
-    assert.deepEqual(svg.map((match) => attr(match[1], "data-research-svg")), sourceFormulas.map(({ kind }) => kind));
-    assert.deepEqual(containers.map((match) => attr(match[1], "data-research-formula")), sourceFormulas.map(({ kind }) => kind));
+    assert.deepEqual(svg.map((match) => attr(match[1], "data-research-svg")), vectorIndices.map((index) => sourceFormulas[index].kind));
+    assert.deepEqual(containers.map((container) => attr(container.match(/^<span\b[^>]*>/iu)[0], "data-research-formula")), sourceFormulas.map(({ kind }) => kind));
+    for (const [index, container] of containers.entries()) {
+      const number = numericVisuals[index];
+      const numericSpans = [...container.matchAll(/<span\b([^>]*\bdata-research-number\b[^>]*)>([\s\S]*?)<\/span>/giu)];
+      assert.equal((container.match(/<math\b/giu) ?? []).length, 1, "Every formula retains exactly one assistive MathML expression");
+      assert.equal(numericSpans.length, number ? 1 : 0, "Only complete inline numeric literals may use the prose-number presentation");
+      assert.equal((container.match(/data-research-svg=/gu) ?? []).length, number ? 0 : 1, "Numeric prose must not duplicate SVG; every other expression retains SVG");
+      if (number) {
+        const [, attributes, markup] = numericSpans[0];
+        assert.equal(attr(attributes, "aria-hidden"), "true", "Visible numeric text must not duplicate accessible math");
+        const expectedMarkup = `${number.base}${number.exponent === undefined ? "" : `<sup>${number.exponent}</sup>`}${number.suffix}`;
+        assert.equal(decodeHtml(markup.replace(/<!--[\s\S]*?-->/gu, "")), expectedMarkup, "Numeric base, exponent, percent suffix, and semantic superscript must remain exact");
+      }
+    }
     for (const match of svg) assert.equal(attr(match[1], "aria-hidden"), "true", "SVG glyphs must not duplicate accessible math");
     for (let index = 0; index < visualFormulas.length; index += 1) {
       const visual = visualFormulas[index];
@@ -272,12 +374,13 @@ For smooth nonlinear models where`);
       assert.deepEqual(fallbackText, [], "Exported math must not fall back to browser text glyphs");
       for (const semantic of ["mfrac", "msqrt", "mover", "munder", "msup", "msubsup", "mtable", "mlabeledtr"]) {
         const visualCount = (visual.match(new RegExp(`data-mml-node="${semantic}"`, "gu")) ?? []).length;
-        const semanticCount = (math[index][2].match(new RegExp(`<${semantic}\\b`, "giu")) ?? []).length;
+        const semanticCount = (math[vectorIndices[index]][2].match(new RegExp(`<${semantic}\\b`, "giu")) ?? []).length;
         assert.equal(visualCount, semanticCount, `Exported formula ${index} must preserve its ${semantic} geometry`);
       }
     }
     assert.equal(math.filter((match) => attr(match[1], "data-research-math") === "display").length, expected.display);
-    assert.equal(math.filter((match) => attr(match[1], "data-research-math") === "inline").length, formulas(approvedBody).filter(({ kind }) => kind === "inline").length);
+    assert.equal(sourceFormulas.filter(({ kind }) => kind === "inline").length, expected.inline, "The independently reviewed inline formula count must remain exact");
+    assert.equal(math.filter((match) => attr(match[1], "data-research-math") === "inline").length, sourceFormulas.filter(({ kind }) => kind === "inline").length);
     assert.deepEqual(math.map((match) => ({
       kind: attr(match[1], "data-research-math"),
       tex: decodeHtml(match[2].match(/<annotation\b[^>]*encoding="application\/x-tex"[^>]*>([\s\S]*?)<\/annotation>/iu)?.[1] ?? ""),

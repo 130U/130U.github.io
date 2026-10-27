@@ -58,6 +58,18 @@ body.menu-open {
   overflow: hidden;
 }
 
+strong,
+b {
+  font-weight: 600;
+}
+
+code,
+kbd,
+samp {
+  font-family: var(--font-text);
+  font-size: inherit;
+}
+
 a {
   color: inherit;
   text-decoration: none;
