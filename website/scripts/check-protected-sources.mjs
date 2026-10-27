@@ -15,6 +15,7 @@ const PROTECTED_PATHS = [
   "app/components/AboutContent.tsx",
   "app/lib/content/about.ts",
   "app/components/research/ResearchArticle.tsx",
+  "app/components/research/ResearchInline.tsx",
   "app/components/research/ResearchMath.tsx",
   "app/lib/content/research-markdown.ts",
   "app/lib/content/research-math.ts",
@@ -44,6 +45,9 @@ const PROTECTED_PATHS = [
   "content/artificial-intelligence/task-validity-in-financial-synthetic-data.json",
   "content/artificial-intelligence/verification-and-supervision-in-scientific-reasoning-tasks.json",
   "content/artificial-intelligence/evidence-uncertainty-and-decision-guarantees-in-investment-research.json",
+  "content/sources/ai-portfolio/theodore_ouyang_ai_portfolio_optimized.md",
+  "content/sources/ai-portfolio/citation-links.json",
+  "scripts/import-ai-portfolio.mjs",
 ];
 
 export function verifyProtectedSources(root = ROOT) {

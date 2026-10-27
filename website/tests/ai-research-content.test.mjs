@@ -7,31 +7,28 @@ import { fileURLToPath } from "node:url";
 
 const ROOT = fileURLToPath(new URL("../", import.meta.url));
 const AI_ROUTE = "/past-experience/artificial-intelligence/";
-// These expectations come from the approved Notion documents, independently of the renderer.
+const APPROVED_DOCUMENT = path.join(ROOT, "content", "sources", "ai-portfolio", "theodore_ouyang_ai_portfolio_optimized.md");
+// Structure and benchmark-table shapes are checked independently of the renderer.
 const PROJECTS = [
   {
     slug: "statistical-inference-and-resource-allocation-in-expert-data-production",
     title: "Statistical inference and resource allocation in expert data production",
-    markdownSha256: "d5337572ca5f67cab778e55f29e60f54cad14270ca346426046139c3d5d6fb58",
-    bodyStart: 4, display: 15, inline: 64, headings: 7, citations: 5, strong: 7, tables: [[4, 4, 4, 4, 4, 4]],
+    bodyStart: 0, display: 20, headings: 7, tables: [[4, 4, 4, 4, 4, 4]],
   },
   {
     slug: "task-validity-in-financial-synthetic-data",
     title: "Task validity in financial synthetic data",
-    markdownSha256: "5dd231da44360e298f656048ea05e0c45e8c30dabc65f509c20a36d3edef3797",
-    bodyStart: 3, display: 9, inline: 52, headings: 6, citations: 9, strong: 5, tables: [[3, 3, 3, 3], [3, 3, 3, 3, 3]],
+    bodyStart: 0, display: 13, headings: 6, tables: [[3, 3, 3, 3], [3, 3, 3, 3, 3]],
   },
   {
     slug: "verification-and-supervision-in-scientific-reasoning-tasks",
     title: "Verification and supervision in scientific reasoning tasks",
-    markdownSha256: "e2e2ea3032919367a671e280a439d07500444bf1f0fa6937734986cdcc275a27",
-    bodyStart: 3, display: 9, inline: 49, headings: 7, citations: 6, strong: 1, tables: [[4, 4, 4, 4]],
+    bodyStart: 0, display: 15, headings: 7, tables: [[4, 4, 4, 4]],
   },
   {
     slug: "evidence-uncertainty-and-decision-guarantees-in-investment-research",
     title: "Evidence uncertainty and decision guarantees in investment research",
-    markdownSha256: "7e615e1b16b049a9f86b8a403c88d33c677da895652e795421c3d76b760f07d1",
-    bodyStart: 2, display: 10, inline: 69, headings: 6, citations: 7, strong: 3, tables: [[3, 3, 3, 3]],
+    bodyStart: 0, display: 11, headings: 6, tables: [[3, 3, 3, 3]],
   },
 ];
 
@@ -53,20 +50,37 @@ function attr(tag, name) {
 }
 
 function formulas(markdown) {
-  return [...markdown.matchAll(/\$\$([\s\S]*?)\$\$|\$`([\s\S]*?)`\$/gu)].map((match) => ({
+  return [...markdown.matchAll(/\$\$([\s\S]*?)\$\$|\$`([^`]*?)`\$|(?<!\\)\$([^$\r\n]+?)(?<!\\)\$/gu)].map((match) => ({
     kind: match[1] === undefined ? "inline" : "display",
-    tex: match[1] ?? match[2],
+    tex: match[1] ?? match[2] ?? match[3],
   }));
 }
 
 function readableMarkdown(markdown) {
   let mathIndex = 0;
   return normalized(markdown
-    .replace(/\$\$[\s\S]*?\$\$|\$`[\s\S]*?`\$/gu, () => ` MATH_${mathIndex++} `)
+    .replace(/\$\$[\s\S]*?\$\$|\$`[^`]*?`\$|(?<!\\)\$[^$\r\n]+?(?<!\\)\$/gu, () => ` MATH_${mathIndex++} `)
     .replace(/\[([^\]]+)\]\((https?:\/\/[^\s)]+)\)/gu, "$1")
     .replace(/^#{1,6}\s+/gmu, "")
-    .replaceAll("**", "")
+    .replace(/\*\*([\s\S]+?)\*\*|\*([^*]+)\*|`([^`]+)`/gu, (_, strong, emphasis, code) => strong ?? emphasis ?? code)
     .replace(/<[^>]+>/gu, " "));
+}
+
+function comparableManuscript(markdown) {
+  return readableMarkdown(markdown
+    .replace(/^## (?:[IVXLCDM]+\.|\d+\.?) /gmu, "## ")
+    .replace(/^\|\s*:?-+[:\s|\-]*\|\s*$/gmu, "")
+    .replace(/^\s*(?:\*|•) /gmu, "")
+    .replace(/^\|(.+)\|$/gmu, (_, row) => row.replaceAll("|", " ")));
+}
+
+async function approvedPortfolio() {
+  const raw = await readFile(APPROVED_DOCUMENT);
+  const document = raw.toString("utf8").replace(/\r\n?/gu, "\n");
+  assert.equal(createHash("sha256").update(document).digest("hex"), "211f94a29754ca89b196f5de9fec47a990b95d587c2b5c5d89acfeabb775d283", "The frozen copy must be the exact user-approved manuscript, allowing Git line-ending normalization");
+  const projects = document.split(/^# SUBPAGE \d{2}: .+$/gmu).slice(1);
+  assert.equal(projects.length, 4);
+  return { document, projects };
 }
 
 function readableHtml(html) {
@@ -157,14 +171,38 @@ function tableCells(html, source) {
 }
 
 for (const expected of PROJECTS) {
-  test(`AI project preserves its complete numbered manuscript after replacing its front matter: ${expected.slug}`, async () => {
+  test(`AI project preserves the approved portfolio manuscript and its complete mathematical rendering: ${expected.slug}`, async () => {
+    const { document, projects } = await approvedPortfolio();
+    const approvedProject = projects[PROJECTS.indexOf(expected)];
+    let approvedBody = approvedProject.slice(approvedProject.indexOf("## I. ")).trim();
+    if (PROJECTS.indexOf(expected) === 3) {
+      // The preceding published article defines these two symbols; the revised
+      // document uses them without definitions. Preserve that original math.
+      approvedBody = approvedBody.replace("For smooth nonlinear models where", String.raw`Set $m_f=\Delta_f(0)$ and $a_f=\nabla\Delta_f(0)$.
+
+For smooth nonlinear models where`);
+    }
     const source = JSON.parse(await readFile(path.join(ROOT, "content", "artificial-intelligence", `${expected.slug}.json`), "utf8"));
     const showcase = JSON.parse(await readFile(path.join(ROOT, "content", "experience-showcase.json"), "utf8"))
       .entries.find(({ id }) => id === PROJECTS.indexOf(expected) + 1);
     const html = await readFile(path.join(ROOT, "out", ...AI_ROUTE.split("/").filter(Boolean), expected.slug, "index.html"), "utf8");
+    const briefs = [...document.slice(document.indexOf("# PART 1:"), document.indexOf("# PART 2 & PART 3:")).matchAll(/^### ([^\n]+)\n([^\n]+)\n\n\[Read More >\]/gmu)];
+    const index = PROJECTS.indexOf(expected);
+    assert.equal(showcase.organization, briefs[index][1]);
+    assert.equal(showcase.summary, briefs[index][2], "The list-page brief must use the approved paragraph verbatim");
+    for (const field of ["Position", "Location", "Dates"]) {
+      assert.equal(showcase.metadata[field.toLowerCase()], approvedProject.match(new RegExp(`\\*\\*${field}\\*\\*\\n([^\\n]+)`, "u"))?.[1]);
+    }
+    const approvedContributions = approvedProject.split("## Key Contributions\n")[1].split("\n## Architectural Context:")[0].split("\n").filter((line) => line.startsWith("* ")).map((line) => line.slice(2));
+    assert.deepEqual(showcase.keyContributions, approvedContributions, "Every approved contribution must remain verbatim and in order");
+    assert.equal(showcase.disclosure.title, "Confidentiality & Scope Disclosure");
+    assert.equal(showcase.disclosure.text, approvedProject.match(/\*\*Confidentiality & Scope Disclosure\*\*\n([^\n]+)/u)?.[1]);
+    assert.equal(showcase.architecturalContext.title, approvedProject.match(/^## (Architectural Context:[^\n]+)$/mu)?.[1]);
+    assert.equal(showcase.architecturalContext.text, approvedProject.match(/^## Architectural Context:[^\n]+\n([\s\S]+?)\n## Contents/mu)?.[1].trim());
     assert.equal(source.slug, expected.slug);
     assert.equal(source.title, expected.title);
-    assert.equal(createHash("sha256").update(source.markdown, "utf8").digest("hex"), expected.markdownSha256);
+    assert.equal(comparableManuscript(source.markdown), comparableManuscript(approvedBody), "The complete approved prose and tables must survive import without editorial rewrites");
+    assert.deepEqual(formulas(source.markdown).map(({ kind, tex }) => ({ kind, tex: tex.trim() })), formulas(approvedBody).map(({ kind, tex }) => ({ kind, tex: tex.trim() })), "Every approved mathematical expression must retain its exact TeX and order");
     assert.equal(readableHtml(html.match(/<h1\b[^>]*>([\s\S]*?)<\/h1>/iu)?.[1] ?? ""), `${showcase.organization}: ${showcase.detailTitle}`);
     assert.match(html, new RegExp(`href="/experience/#${expected.slug}"`, "u"));
     assert.match(html, /href="#key-contributions"/u);
@@ -172,12 +210,7 @@ for (const expected of PROJECTS) {
     assert.ok(html.indexOf('id="key-contributions"') < html.indexOf(`data-research-block="${expected.bodyStart}"`));
 
     const sourceBlocks = expectedBlocks(source.markdown);
-    assert.equal(sourceBlocks.findIndex((block) => block.type === "heading"), expected.bodyStart, "Only the approved Project/Author and Overview front matter may be replaced.");
-    const removedFrontMatter = sourceBlocks.slice(0, expected.bodyStart);
-    assert.ok(removedFrontMatter.every((block) => block.type === "paragraph"));
-    const removedMarkdown = removedFrontMatter.map((block) => block.source).join("\n");
-    assert.deepEqual(formulas(removedMarkdown), [], "Removing the introductory presentation must never remove a formula.");
-    assert.doesNotMatch(removedMarkdown, /\[[^\]]+\]\(https?:\/\//u, "The approved front-matter removal contains no citations.");
+    assert.equal(sourceBlocks.findIndex((block) => block.type === "heading"), expected.bodyStart, "The imported body starts at its first complete numbered chapter.");
     const bodyBlocks = sourceBlocks.slice(expected.bodyStart);
     const actualBlocks = renderedBlocks(html);
     assert.equal(actualBlocks.length, bodyBlocks.length);
@@ -199,7 +232,6 @@ for (const expected of PROJECTS) {
     const content = actualBlocks.map((block) => block.html).join("\n");
     assert.equal(actualBlocks.filter((block) => block.type === "heading").length, expected.headings);
     assert.doesNotMatch(content, /<h[2-6]\b[^>]*>\s*(?:Abstract|References)\s*<\/h[2-6]>/iu);
-    assert.equal((content.match(/<strong\b/giu) ?? []).length, expected.strong);
     const originalStrong = [...bodyBlocks.map((block) => block.source).join("\n").matchAll(/\*\*([^*]+)\*\*/gu)].map((match) => readableMarkdown(match[1]));
     const actualStrong = [...content.matchAll(/<strong\b[^>]*>([\s\S]*?)<\/strong>/giu)].map((match) => readableHtml(match[1]));
     assert.deepEqual(actualStrong, originalStrong);
@@ -214,15 +246,18 @@ for (const expected of PROJECTS) {
 
     const originalLinks = [...source.markdown.matchAll(/\[([^\]]+)\]\((https?:\/\/[^\s)]+)\)/gu)].map((match) => [readableMarkdown(match[1]), match[2]]);
     const actualLinks = [...content.matchAll(/<a\b([^>]*)>([\s\S]*?)<\/a>/giu)].map((match) => [readableHtml(match[2]), attr(match[1], "href")]);
-    assert.equal(actualLinks.length, expected.citations);
     assert.deepEqual(actualLinks, originalLinks, "Citation labels, targets, and order must remain exact");
+    const retainedCitations = JSON.parse(await readFile(path.join(ROOT, "content", "sources", "ai-portfolio", "citation-links.json"), "utf8"))[expected.slug];
+    for (const citation of retainedCitations) {
+      assert.ok(actualLinks.some(([, href]) => href === citation.href), `The original reference must remain clickable: ${citation.text}`);
+    }
 
     const sourceFormulas = formulas(source.markdown);
     const math = [...content.matchAll(/<math\b([^>]*)>([\s\S]*?)<\/math>/giu)];
     const svg = [...content.matchAll(/<svg\b([^>]*)>/giu)].filter((match) => attr(match[1], "data-research-svg"));
     const visualFormulas = svgRanges(content).map(([from, to]) => content.slice(from, to));
     const containers = [...content.matchAll(/<span\b([^>]*)>/giu)].filter((match) => attr(match[1], "data-research-formula"));
-    assert.equal(math.length, expected.display + expected.inline);
+    assert.equal(math.length, sourceFormulas.length);
     assert.equal(svg.length, math.length, "Every source formula must have one deterministic visual SVG");
     assert.equal(visualFormulas.length, math.length, "Nested vector geometry must remain inside its own formula root");
     assert.equal(containers.length, math.length, "Every formula must have one visual and assistive container");
@@ -242,7 +277,7 @@ for (const expected of PROJECTS) {
       }
     }
     assert.equal(math.filter((match) => attr(match[1], "data-research-math") === "display").length, expected.display);
-    assert.equal(math.filter((match) => attr(match[1], "data-research-math") === "inline").length, expected.inline);
+    assert.equal(math.filter((match) => attr(match[1], "data-research-math") === "inline").length, formulas(approvedBody).filter(({ kind }) => kind === "inline").length);
     assert.deepEqual(math.map((match) => ({
       kind: attr(match[1], "data-research-math"),
       tex: decodeHtml(match[2].match(/<annotation\b[^>]*encoding="application\/x-tex"[^>]*>([\s\S]*?)<\/annotation>/iu)?.[1] ?? ""),

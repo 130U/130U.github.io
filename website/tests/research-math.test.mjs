@@ -8,10 +8,10 @@ import { RESEARCH_MATH_GUTTER_EM, RESEARCH_MATH_ROW_SPACING_EM, normalizeResearc
 
 const ROOT = fileURLToPath(new URL("../", import.meta.url));
 const PROJECTS = [
-  ["statistical-inference-and-resource-allocation-in-expert-data-production", 79],
-  ["task-validity-in-financial-synthetic-data", 61],
-  ["verification-and-supervision-in-scientific-reasoning-tasks", 58],
-  ["evidence-uncertainty-and-decision-guarantees-in-investment-research", 79],
+  ["statistical-inference-and-resource-allocation-in-expert-data-production", 140],
+  ["task-validity-in-financial-synthetic-data", 98],
+  ["verification-and-supervision-in-scientific-reasoning-tasks", 121],
+  ["evidence-uncertainty-and-decision-guarantees-in-investment-research", 124],
 ];
 
 function decodeXml(value) {
@@ -65,7 +65,7 @@ function assertCompleteFormula(rendered, tex) {
   }
 }
 
-test("all 277 approved formulas have complete vector glyphs and exact accessible TeX", async () => {
+test("all 483 approved formulas have complete vector glyphs and exact accessible TeX", async () => {
   let total = 0;
   const mathematicalPaths = [];
   for (const [slug, expected] of PROJECTS) {
@@ -79,13 +79,13 @@ test("all 277 approved formulas have complete vector glyphs and exact accessible
       mathematicalPaths.push(glyphPaths(rendered.svg).filter(({ code }) => code !== "2C" && code !== "2E"));
       assert.equal(tagCount(rendered.mathml, "mfrac"), (tex.match(/\\(?:t|d)?frac(?![A-Za-z])/gu) ?? []).length, `${slug} must preserve each fraction`);
       assert.equal(tagCount(rendered.mathml, "msqrt"), (tex.match(/\\sqrt(?![A-Za-z])/gu) ?? []).length, `${slug} must preserve each square root`);
-      assert.equal(tagCount(rendered.mathml, "mover"), (tex.match(/\\(?:bar|overline|widehat|widetilde)(?![A-Za-z])/gu) ?? []).length, `${slug} must preserve each source accent`);
+      assert.equal(tagCount(rendered.mathml, "mover"), (tex.match(/\\(?:bar|overline|hat|widehat|tilde|widetilde)(?![A-Za-z])/gu) ?? []).length, `${slug} must preserve each source accent`);
       assert.equal(tagCount(rendered.mathml, "mlabeledtr"), (tex.match(/\\tag(?![A-Za-z])/gu) ?? []).length, `${slug} must preserve each equation number`);
     }
     total += formulas.length;
   }
-  assert.equal(total, 277);
-  assert.equal(createHash("sha256").update(JSON.stringify(mathematicalPaths)).digest("hex"), "606c6b481d7db57321108982ef2d042eabd85dde46f2155be32dd3a0b5a3dda8", "All mathematical glyphs must retain the approved shapes and order");
+  assert.equal(total, 483);
+  assert.equal(createHash("sha256").update(JSON.stringify(mathematicalPaths)).digest("hex"), "91e8855aa589f5c297c15d9ec989cdf05e41ecf7f1bfa9cf583bf1c8a5b16347", "All mathematical glyphs must retain the approved shapes and order");
 });
 
 test("display punctuation normalization changes only true sentence and equation-row termini", () => {
@@ -188,21 +188,43 @@ test("unsupported and malformed TeX fail explicitly instead of producing error a
 
 test("SVG canvases preserve natural glyph scale and baselines with room for accents and labels", async () => {
   assert.equal(RESEARCH_MATH_GUTTER_EM, 0.375);
+  // Frozen from the approved sources at 463b612: science formula 32 and
+  // investment formulas 26–27. Geometry regressions must not depend on an
+  // equation's position in an evolving manuscript.
   const fixtures = [
     {
-      slug: "verification-and-supervision-in-scientific-reasoning-tasks", index: 32,
+      tex: String.raw`
+\begin{gathered}
+\left|J'(\Phi(u))-aJ(u)-b\right|\le\varepsilon,
+\qquad a>0,\\
+av+b-\varepsilon\le v'\le av+b+\varepsilon,\\
+J(u)-v\le\delta
+\quad\Longrightarrow\quad
+J'(\Phi(u))-v'\le a\delta+2\varepsilon,
+\end{gathered}
+\tag{5}
+`,
+      display: true,
       widthEm: 24.125686, heightEm: 4.435912, depthEm: 1.967784,
       viewBox: [0, 0, 386.010976, 70.974592], numbered: true,
       pathCount: 69, pathGeometrySha256: "5f03e5829453d96262499c5dba0a2eebcd689eb68950d66340fbcef08ef612e8",
     },
     {
-      slug: "evidence-uncertainty-and-decision-guarantees-in-investment-research", index: 26,
+      tex: String.raw`
+\underline\Delta_{ik}
+=\inf_{(f,X)\in\Omega(E)}[f(x_i)-f(x_k)],
+\qquad
+\overline\Delta_{ik}
+=\sup_{(f,X)\in\Omega(E)}[f(x_i)-f(x_k)].
+`,
+      display: true,
       widthEm: 28.503254, heightEm: 2.20116, depthEm: 1.168206,
       viewBox: [0, -1033, 28503.3, 2201.1], numbered: false,
       pathCount: 63, pathGeometrySha256: "4ba2daeeea8ad99a6d08749790eb5efd2cab9526b8fa0ad42c8a66d6bde95dcd",
     },
     {
-      slug: "evidence-uncertainty-and-decision-guarantees-in-investment-research", index: 27,
+      tex: String.raw`\underline\Delta_{ik}>0`,
+      display: false,
       widthEm: 3.361852, heightEm: 1.07627, depthEm: 0.36023,
       viewBox: [0, -716, 3361.9, 1076.1], numbered: false,
       pathCount: 6, pathGeometrySha256: "8af038a117b5a0595e72f3f92338d7b7337e442ee08c26206f15020ecb559975",
@@ -210,10 +232,8 @@ test("SVG canvases preserve natural glyph scale and baselines with room for acce
   ];
   const close = (actual, expected, message, tolerance = 1e-8) => assert.ok(Math.abs(actual - expected) <= tolerance, message);
   for (const fixture of fixtures) {
-    const source = JSON.parse(await readFile(path.join(ROOT, "content", "artificial-intelligence", `${fixture.slug}.json`), "utf8"));
-    const formula = [...source.markdown.matchAll(/\$\$([\s\S]*?)\$\$|\$\x60([\s\S]*?)\x60\$/gu)][fixture.index];
-    const rendered = await renderResearchMath(formula[1] ?? formula[2], formula[1] !== undefined);
-    assertCompleteFormula(rendered, formula[1] ?? formula[2]);
+    const rendered = await renderResearchMath(fixture.tex, fixture.display);
+    assertCompleteFormula(rendered, fixture.tex);
     close(rendered.widthEm, fixture.widthEm + 0.75, "Canvas must leave 0.375em on each horizontal side");
     close(rendered.heightEm, fixture.heightEm + 0.75, "Canvas must leave 0.375em above and below the expression");
     close(rendered.depthEm, fixture.depthEm + 0.375, "The vertical alignment must compensate for the lower canvas gutter");

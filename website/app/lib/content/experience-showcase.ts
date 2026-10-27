@@ -4,6 +4,8 @@ import { experienceDomainDefinitions } from "./experience-domains";
 import { aiResearchProjectSlugs, aiResearchProjectPath } from "./ai-projects";
 import { legalPaperSlugs, legalPaperPath } from "./legal-papers";
 
+type CopySection = { title: string; text: string };
+
 type SourceEntry = {
   id: number;
   categoryId: string;
@@ -15,6 +17,8 @@ type SourceEntry = {
   contributionsLabel: string;
   keyContributions: string[];
   notes: string[];
+  disclosure?: CopySection;
+  architecturalContext?: CopySection;
 };
 
 export type ShowcaseEntry = SourceEntry & {
@@ -24,8 +28,11 @@ export type ShowcaseEntry = SourceEntry & {
   listingTitle: string;
   pageTitle: string;
 };
-export type ShowcaseDomain = { number: string; name: string; slug: string; entries: ShowcaseEntry[] };
-const source = JSON.parse(readFileSync(join(process.cwd(), "content", "experience-showcase.json"), "utf8")) as { entries: SourceEntry[] };
+export type ShowcaseDomain = { number: string; name: string; slug: string; entries: ShowcaseEntry[]; disclosure?: CopySection };
+const source = JSON.parse(readFileSync(join(process.cwd(), "content", "experience-showcase.json"), "utf8")) as {
+  categories: { id: string; disclosure?: CopySection }[];
+  entries: SourceEntry[];
+};
 const entrySlugs = [
   ...aiResearchProjectSlugs, "jiritsu-network", "euromonitor-international", "china-construction-bank",
   ...legalPaperSlugs, "jones-lang-lasalle", "hubble-technology-investment", "saif-partners",
@@ -60,6 +67,7 @@ if (showcaseEntries.length !== 18) throw new Error("The approved Experience docu
 
 export const showcaseDomains: readonly ShowcaseDomain[] = experienceDomainDefinitions.map((domain) => ({
   ...domain, entries: showcaseEntries.filter((entry) => entry.categoryId === domain.number),
+  disclosure: source.categories.find((category) => category.id === domain.number)?.disclosure,
 }));
 export function getShowcaseDomain(slug: string) { return showcaseDomains.find((domain) => domain.slug === slug); }
 export function getShowcaseEntry(slug: string) { return showcaseEntries.find((entry) => entry.slug === slug); }
