@@ -10,8 +10,8 @@ const ROOT = fileURLToPath(new URL("../", import.meta.url));
 const PROJECTS = [
   ["statistical-inference-and-resource-allocation-in-expert-data-production", 140],
   ["task-validity-in-financial-synthetic-data", 98],
-  ["verification-and-supervision-in-scientific-reasoning-tasks", 121],
-  ["evidence-uncertainty-and-decision-guarantees-in-investment-research", 124],
+  ["verification-and-supervision-in-scientific-reasoning-tasks", 123],
+  ["evidence-uncertainty-and-decision-guarantees-in-investment-research", 132],
 ];
 
 function decodeXml(value) {
@@ -65,7 +65,7 @@ function assertCompleteFormula(rendered, tex) {
   }
 }
 
-test("all 483 approved formulas have complete vector glyphs and exact accessible TeX", async () => {
+test("all 493 reviewed formulas have complete vector glyphs and exact accessible TeX", async () => {
   let total = 0;
   const mathematicalPaths = [];
   for (const [slug, expected] of PROJECTS) {
@@ -84,8 +84,8 @@ test("all 483 approved formulas have complete vector glyphs and exact accessible
     }
     total += formulas.length;
   }
-  assert.equal(total, 483);
-  assert.equal(createHash("sha256").update(JSON.stringify(mathematicalPaths)).digest("hex"), "91e8855aa589f5c297c15d9ec989cdf05e41ecf7f1bfa9cf583bf1c8a5b16347", "All mathematical glyphs must retain the approved shapes and order");
+  assert.equal(total, 493);
+  assert.equal(createHash("sha256").update(JSON.stringify(mathematicalPaths)).digest("hex"), "9323d15329b8b07f3b91e8e33731b0b5bf414e7a8b65d99ea009a6f7de966732", "All mathematical glyphs must retain the reviewed shapes and order");
 });
 
 test("display punctuation normalization changes only true sentence and equation-row termini", () => {

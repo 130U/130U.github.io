@@ -6423,7 +6423,7 @@
 
           style.textContent =
             fontFaces + "\n" +
-            "svg { font-family: 'Inter', sans-serif; font-optical-sizing: auto; font-synthesis: none; }\n" +
+            "svg { font-family: 'Inter', sans-serif; font-optical-sizing: none; font-variation-settings: 'opsz' 14; font-variant-numeric: lining-nums proportional-nums; font-synthesis: none; }\n" +
             hostStyle + "\n" +
             ":root, svg { " + darkVars + " }\n" +
             "@media (prefers-color-scheme: light) { :root, svg { " + lightVars + " } }\n" +
@@ -6451,7 +6451,7 @@
           // Keep this order.
           style.textContent =
             fontFaces + "\n" +
-            "svg { font-family: 'Inter', sans-serif; font-optical-sizing: auto; font-synthesis: none; }\n" +
+            "svg { font-family: 'Inter', sans-serif; font-optical-sizing: none; font-variation-settings: 'opsz' 14; font-variant-numeric: lining-nums proportional-nums; font-synthesis: none; }\n" +
             hostStyle + "\n" +
             ":root, svg { " + vars + " }\n";
 

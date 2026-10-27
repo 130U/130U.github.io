@@ -30,11 +30,13 @@ link, static fallback, and reduced-motion behavior. The mark's editable master i
 Inter 4.1 is the shared typeface for headings, prose, navigation, directories, controls,
 metadata, and the architecture viewer. Two self-hosted WOFF2 files provide variable
 weights and true italics. `website/public/assets/fonts/inter.css` owns `--font-text`,
-the default optical sizing, and the font faces. The regular face is preloaded; italic loads when used.
+the fixed optical sizing, lining numerals, and the font faces. The regular face is preloaded; italic loads when used.
 System sans fallbacks cover unavailable glyphs.
 The LO mark uses independent artwork.
-About's reading frame uses this same Inter family with automatic optical sizing
-disabled and the `opsz` axis fixed at 14. Its headings and prose use normal tracking.
+Every reading frame uses this same Inter family with automatic optical sizing
+disabled and the `opsz` axis fixed at 14. Prose numerals use proportional widths;
+directory indices and numeric tables can use tabular widths within the same family.
+Inline code labels inherit Inter, and shared bold emphasis uses weight 600.
 Small indices and field labels use the shared label tracking.
 
 Typography follows semantic roles. At any viewport, text with the same role uses
@@ -45,16 +47,17 @@ scale relative to surrounding text without changing the prose size.
 
 | Role | Shared token | Size at the default text setting | Leading |
 | --- | --- | --- | --- |
-| Page title | `--type-title` | 22px, weight 400 | 1.25 |
+| General page title | `--type-title` | 22px, weight 400 | 1.25 |
 | Section heading | `--type-heading` | 22px, weight 400 | 1.25 |
-| Project, About institution, course-category heading | `--type-subheading` | 18px, weight 600 | 1.45 |
+| Institution, project or paper name, course-category heading | `--type-subheading` | 18px, weight 600 | 1.45 |
 | About degree | `--type-reading` | 14px, weight 500 | 1.6 |
 | Body, records, introductions, course names, metadata values | `--type-reading` | 14px | 1.6 |
 | Navigation, menu, wordmark name, return link | `--type-interface` | 14px | 1.4 |
 | Experience directory item and number | `--type-subheading` | 18px, weight 400 | 1.45 |
 | Project reading action | `--type-action`, alias of `--type-interface` | 14px, weight 500 | 1.4 |
 | Research prose and table cells | `--type-reading` | 14px | 1.6 |
-| Mathematical expression | `--type-math` | 1.15em of its surrounding text | Intrinsic mathematical geometry |
+| Inline mathematical expression | Relative to surrounding text | 1em | Intrinsic mathematical geometry |
+| Displayed mathematical expression | `--type-math` | 1.15em | Intrinsic mathematical geometry |
 | Field label, section margin index, footer | `--type-label` | 14px | 1.4 |
 
 Text roles use rem units and scale with the user's text setting. The 22px, 18px,
@@ -87,22 +90,29 @@ legal articles use their manuscript URLs; the other ten entries have pages at
 `/experience/{slug}/`. Outer entries lead with the institution or organization;
 legal entries use `Duke Law School: {research area} Research`. Detail-page H1s use
 `{institution}: {project title}`, with any internal title colon rendered as an em
-dash so the institution separator is the title's only colon. Position, Location, and Dates appear as three
-stacked rows in one column at every viewport, followed by the approved Key
+dash so the institution separator is the title's only colon. These project and paper
+names use the 18px role even when they are H1s. Position, Location, and Dates appear
+as three rows with aligned label/value pairs, stacking within a row below 420px.
+The rows are followed by the approved Key
 Contributions, with contextual notes as the final bullets in the same list and
 type style. Links work without JavaScript and have accessible
 keyboard focus and touch targets. Do not repeat the outer summary in the detail view.
 
-AI pages proceed directly from Key Contributions to the first numbered chapter.
-The complete protected source JSON includes the title, Project and Author lines,
-and introductory material for provenance. Legal pages place Key Contributions
+AI pages include the scope disclosure, Key Contributions with any nested method
+lists, Architectural Context, and the numbered manuscript chapters. Thin rules
+separate top-level contribution items across all detail pages. The frozen original
+manuscript and explicit reviewed corrections retain the content's provenance.
+Legal pages place Key Contributions
 before the complete Abstract and manuscript. The shared contents rail includes
 the contribution block and source chapter links. Return links target the matching
 entry on Experience.
 
 Research article prose, emphasis, citations, and table cells use the shared 14px
 reading size. Subsection headings use the shared 18px size with weight 600. Inline
-and standalone formulas use a relative 1.15em scale. Subscripts,
+formulas use 1em; standalone formulas use 1.15em. Pure inline numerical values,
+including scientific notation and percentages, use the surrounding Inter family
+with native superscripts while retaining their accessible MathML and original TeX.
+Genuine expressions retain the mathematical glyph renderer. Subscripts,
 superscripts, fractions, accents, and equation labels retain their mathematical
 hierarchy. Multiline equations have explicit row spacing and generous surrounding
 space. Equation blocks use symmetric 2.25rem margins and 0.75rem vertical padding.

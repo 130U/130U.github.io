@@ -9,9 +9,14 @@ const sourceFile = "content/sources/ai-portfolio/theodore_ouyang_ai_portfolio_op
 const sourceBytes = readFileSync(path.join(root, sourceFile));
 const source = sourceBytes.toString("utf8").replace(/\r\n?/gu, "\n");
 const links = JSON.parse(readFileSync(path.join(root, "content/sources/ai-portfolio/citation-links.json"), "utf8"));
+const revisions = JSON.parse(readFileSync(path.join(root, "content/sources/ai-portfolio/editorial-revisions.json"), "utf8"));
+assert.equal(revisions.schemaVersion, 1, "Unsupported AI editorial revision schema");
+assert.equal(revisions.sourceFile, sourceFile, "Revisions must target the frozen AI manuscript");
+assert.equal(createHash("sha256").update(source).digest("hex"), revisions.sourceSha256, "The frozen manuscript changed");
 const showcasePath = path.join(root, "content/experience-showcase.json");
 const showcase = JSON.parse(readFileSync(showcasePath, "utf8"));
 const beforeOtherEntries = JSON.stringify(showcase.entries.slice(4));
+const generated = new Map([["content/experience-showcase.json", showcase]]);
 const sourceDocument = {
   fileName: path.basename(sourceFile),
   path: sourceFile,
@@ -49,6 +54,51 @@ function manuscript(markdown, definitions) {
   return result.trim();
 }
 
+function contributionDetails(contributions) {
+  const details = {};
+  let parent = -1;
+  for (const line of contributions.split("\n")) {
+    if (line.startsWith("* ")) parent += 1;
+    const child = line.match(/^ {2}(\*|\d+\.) (.+)$/u);
+    if (!child) continue;
+    assert.ok(parent >= 0, "Nested contributions require a parent contribution");
+    const ordered = child[1] !== "*";
+    details[parent] ??= { ordered, items: [] };
+    assert.equal(details[parent].ordered, ordered, "A contribution detail list cannot mix list types");
+    if (ordered) assert.equal(Number.parseInt(child[1], 10), details[parent].items.length + 1, "Ordered details must retain their source sequence");
+    details[parent].items.push(child[2]);
+  }
+  return details;
+}
+
+function applyEditorialRevisions() {
+  const ids = new Set();
+  for (const revision of revisions.revisions) {
+    assert.ok(!ids.has(revision.id), `Duplicate revision ${revision.id}`);
+    ids.add(revision.id);
+    assert.ok(revision.reason && revision.sourceRefs.length, `Revision ${revision.id} requires a reason and source references`);
+    assert.ok(revision.before && revision.after && revision.before !== revision.after, `Empty revision ${revision.id}`);
+    const target = generated.get(revision.file);
+    assert.ok(target, `Revision ${revision.id} is outside the four AI articles and showcase`);
+    if (revision.file === "content/experience-showcase.json") {
+      assert.match(revision.jsonPointer, /^\/entries\/[0-3]\/(?:summary|keyContributions\/\d+|architecturalContext\/(?:title|text)|keyContributionDetails\/\d+\/items\/\d+)$/u, `Revision ${revision.id} targets unapproved entry fields`);
+    } else {
+      assert.equal(revision.jsonPointer, "/markdown", "Article revisions may change manuscript text only");
+    }
+    const keys = revision.jsonPointer.slice(1).split("/");
+    let parent = target;
+    for (const key of keys.slice(0, -1)) {
+      assert.ok(Object.hasOwn(parent, key), `Revision ${revision.id} targets a missing field`);
+      parent = parent[key];
+    }
+    const key = keys.at(-1);
+    assert.ok(Object.hasOwn(parent, key) && typeof parent[key] === "string", `Revision ${revision.id} must target text`);
+    assert.equal(parent[key].split(revision.before).length - 1, 1, `Revision ${revision.id} must match exactly once`);
+    parent[key] = parent[key].replace(revision.before, () => revision.after);
+    assert.equal(parent[key].split(revision.after).length - 1, 1, `Revision ${revision.id} must produce one exact reviewed fragment`);
+  }
+}
+
 showcase.aiSourceDocument = sourceDocument;
 showcase.categories.find(({ id }) => id === "01").disclosure = {
   title: "Confidentiality & Disclosure Note",
@@ -78,6 +128,9 @@ for (let index = 0; index < 4; index += 1) {
   const contributions = capture(page, /## Key Contributions\n([\s\S]+?)\n## Architectural Context:/u, "contributions");
   entry.keyContributions = contributions.split("\n").filter((line) => line.startsWith("* ")).map((line) => line.slice(2));
   assert.ok(entry.keyContributions.length >= 5);
+  const details = contributionDetails(contributions);
+  if (Object.keys(details).length) entry.keyContributionDetails = details;
+  else delete entry.keyContributionDetails;
   entry.architecturalContext = {
     title: capture(page, /^## (Architectural Context:[^\n]+)$/mu, "architectural title"),
     text: capture(page, /^## Architectural Context:[^\n]+\n([\s\S]+?)\n## Contents/mu, "architectural context"),
@@ -95,8 +148,10 @@ For smooth nonlinear models where`);
   article.sourceUrl = `https://github.com/130U/130U.github.io/blob/main/website/${sourceFile}`;
   article.sourceEditedAt = "2026-10-27";
   article.sourceDocument = sourceDocument;
-  writeFileSync(articlePath, `${JSON.stringify(article, null, 2)}\n`);
+  generated.set(`content/artificial-intelligence/${slug}.json`, article);
 }
+applyEditorialRevisions();
 assert.equal(JSON.stringify(showcase.entries.slice(4)), beforeOtherEntries, "Only the four AI entries may change");
-writeFileSync(showcasePath, `${JSON.stringify(showcase, null, 2)}\n`);
-console.log("Imported four AI briefs, disclosures, contributions, architectural contexts, and complete manuscripts.");
+// Validate every revision before writing any generated content.
+for (const [file, document] of generated) writeFileSync(path.join(root, file), `${JSON.stringify(document, null, 2)}\n`);
+console.log(`Imported four AI manuscripts and all nested contributions; applied ${revisions.revisions.length} reviewed editorial revisions.`);

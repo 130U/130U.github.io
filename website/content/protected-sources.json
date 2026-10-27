@@ -4,13 +4,13 @@
   "sources": {
     "app/experience/page.tsx": "993f5aa641588d4cd2d5ea7ef7d7826e1b5cafbd06b1bc2bc704f802e23df777",
     "app/components/experience/ExperienceContent.tsx": "4fa27f8b87ffc9e798846da715e10f72aa7c18947786aad113fb1b1260d4e7f0",
-    "app/components/experience/ExperienceDetails.tsx": "a43b5b6ba1a4032ad650e1f99cacbb44638a049aceb9eb692a0972159fe142ba",
-    "app/lib/content/experience-showcase.ts": "29a84dcaa61967f6b7894f89c2ab4bfe26ea9b6f45d1f3650b7c08e9d81a7e99",
-    "content/experience-showcase.json": "e7bc94b0a1f1242abd29d8cf5d1e22d20de1002fffbba24b1152f1fed4a6f99a",
+    "app/components/experience/ExperienceDetails.tsx": "fc0d3ca896ab636dcadcb5370cb176065f70cd748b2cfbdfb89271fe83b8e261",
+    "app/lib/content/experience-showcase.ts": "14462c94181c1cbe375a23d74a6de1e10c216a05341cde1968601251c65b3b45",
+    "content/experience-showcase.json": "8d19a7cadecc6ac5a5af93fcde88e30a898cf3cbde35304e2c6579aea37b117b",
     "app/components/AboutContent.tsx": "6f5861525912ac8a692478b4d7f442f7308b6cecb566c66a36d407ea1f28f843",
     "app/lib/content/about.ts": "8d79e72133dcbcae9523771a099f53f0aecb879cea384769ff6bb0144e05626f",
     "app/components/research/ResearchArticle.tsx": "4abb9ad9ee42d0c71ead3b0f43846320cc06a4c79454d91cb9e32ade0fa356f5",
-    "app/components/research/ResearchMath.tsx": "5fec90d5c5e369639750f327c203b47ab92a1c06896d9eb360c69d88c1d6a24c",
+    "app/components/research/ResearchMath.tsx": "a61ffe67375e2c50a7cac7167f39ff39ef7a115d6aa240c14f9240b9361e54cf",
     "app/lib/content/research-markdown.ts": "d2d03cfc6b7bc38d5a409d134f517c9ccdff3a3977b3af0495b437b96850e001",
     "app/lib/content/research-math.ts": "0343a075dba996cd6a96d3ab299eb6bf095b1b7a4c662f84b253cd243c4107ff",
     "app/education/page.tsx": "697f94528f437622c3ddcaf6c4098b6ebf7f59d86ca7d4c9628fadb3606fc8ea",
@@ -33,10 +33,10 @@
     "content/legal-papers/mangrove-restoration-and-compensatory-mitigation.json": "be8ad403b6504ad18cac1b6bdf55925214b389ea6f3c0f325f0fac1bea1e9cd9",
     "app/lib/content/ai-projects.ts": "acf07dd865754e90b1b75c89bb65e6f93e26cd41f3f267c2a80a7dad185c9b5f",
     "app/lib/content/routes.ts": "610d99093fe37e69b6603570a8d55f0d058fc44571ba4aed8f2f6c4c6a306cea",
-    "content/artificial-intelligence/statistical-inference-and-resource-allocation-in-expert-data-production.json": "9a92df869a490d78a13189c2facbe4dcafa809fc642baabcc6dc0021f3ff2ca6",
-    "content/artificial-intelligence/task-validity-in-financial-synthetic-data.json": "2a8f98865905415b72f51807a47d1b7637467f2622d62cc0465f695e6c3dc00d",
-    "content/artificial-intelligence/verification-and-supervision-in-scientific-reasoning-tasks.json": "4d3ad7eae7c3ab47d911876d97d9327685122f0e404d7a24ebb73651c68e2866",
-    "content/artificial-intelligence/evidence-uncertainty-and-decision-guarantees-in-investment-research.json": "20dae9fea1f271490779c6e65dc46048c7f6ca3a846cd4468522eddd3165ddf3",
+    "content/artificial-intelligence/statistical-inference-and-resource-allocation-in-expert-data-production.json": "ad84ce64dcd9cc2d1e1affa61f46c34e5461c6bfdede23ec15fbec110fcb4643",
+    "content/artificial-intelligence/task-validity-in-financial-synthetic-data.json": "0cafd69ca15623e0ef593a13becd439f7d0f5a6c252cba94ec1ab4c453652cdd",
+    "content/artificial-intelligence/verification-and-supervision-in-scientific-reasoning-tasks.json": "02727352f1487759c9b003067a0c02a11d8af028128cb80c0c6d3538717a027b",
+    "content/artificial-intelligence/evidence-uncertainty-and-decision-guarantees-in-investment-research.json": "0f264a90815ab5c65f1b52665d0392e4c1e27800695421f5f66a9094fa78d4c2",
     "app/experience/[slug]/page.tsx": "997cadef95f145e2abf55cd64506e278425b5c30d4cfccb9b835453b811c755e",
     "app/lib/content/experience-domains.ts": "7362085d4857daa83ae476f176163378dde550572d5a1932d2f142d4d1a00c7d",
     "app/education/critical-dependence-stress-for-portfolio-diversification/page.tsx": "b0dbb4c593e681c702908a707b8dc31ac1800472f749a8897bc3c7d2550f1f90",
@@ -44,6 +44,8 @@
     "app/components/research/ResearchInline.tsx": "ad5cae237a294ce103f6edd3aa71ba7beadc972f587861bd39a0d157ddfb4315",
     "content/sources/ai-portfolio/theodore_ouyang_ai_portfolio_optimized.md": "211f94a29754ca89b196f5de9fec47a990b95d587c2b5c5d89acfeabb775d283",
     "content/sources/ai-portfolio/citation-links.json": "40eeff369104f887512f2acd183136338b127744420ca88e2d3329e30ea14093",
-    "scripts/import-ai-portfolio.mjs": "4037e4fa900c2388f72c6b6595bf8842c57e47fbd8511207b5062093a2bc65cd"
+    "scripts/import-ai-portfolio.mjs": "cfc2e092fcedcdf487662fd10aaae9aba9f58d0036ebc568561f7e9f83c187d1",
+    "app/lib/content/research-number.ts": "2d29d06ffde33580bd5e655b547b28c953d64b0d2b0fa7fe31663da68dd1276b",
+    "content/sources/ai-portfolio/editorial-revisions.json": "6171190332fee0deae11d95e60f3278f885bfac7cb75093ab3608a299e9cf3c5"
   }
 }

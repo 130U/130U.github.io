@@ -292,9 +292,12 @@ preload. Keep text in the inherited font; reserve separate lettering for brand a
 
 The visual reference is Cognition's grid, warm paper color, restrained rules, and
 spacing. Inter remains the site's own self-hosted typeface. Research and other body
-text share 14px with 1.6 leading; subsection headings use 18px. Page titles and
-section headings use 22px with 1.25 leading at every viewport. Math uses a relative
-1.15em scale. Experience directory labels and numbers use 18px. Metadata, main
+text share 14px with 1.6 leading; subsection headings and institution/project/paper
+names use 18px, including detail-page H1s. General page titles and section headings
+use 22px with 1.25 leading at every viewport. Inline math uses 1em and displayed
+math uses 1.15em. Pure inline numeric values use Inter and retain accessible MathML.
+Shared Inter settings fix the optical axis at 14 and use lining numerals.
+Experience directory labels and numbers use 18px. Metadata, main
 navigation, section indices, field labels, and footers use 14px. The semantic token
 names remain distinct; mobile layouts retain the same 22px, 18px, and 14px hierarchy.
 Keep these roles synchronized through `app/globals.css`; do not give a particular

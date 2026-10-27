@@ -139,6 +139,7 @@ function renderedInlineText(value) {
   let formula = 0;
   return normalizeSpace(value
     .replace(/<svg\b[\s\S]*?<\/svg>/giu, "")
+    .replace(/<span\b([^>]*\bdata-research-number\b[^>]*)>[\s\S]*?<\/span>/giu, (whole, attributes) => attribute(attributes, "aria-hidden") === "true" ? "" : whole)
     .replace(/<math\b[\s\S]*?<\/math>/giu, () => ` MATH_${formula++} `)
     .replace(/<[^>]+>/gu, ""));
 }
@@ -148,6 +149,24 @@ function assertApprovedInline(html, source) {
   const expected = [...source.matchAll(/\$`([^`]*?)`\$|(?<!\\)\$([^$\r\n]+?)(?<!\\)\$/gu)].map((match) => match[1] ?? match[2]);
   const actual = [...html.matchAll(/<annotation\b[^>]*encoding="application\/x-tex"[^>]*>([\s\S]*?)<\/annotation>/giu)].map((match) => decodeHtml(match[1]));
   assert.deepEqual(actual, expected, "Approved inline equations must preserve their exact TeX");
+  const numericExpected = expected.map((tex) => {
+    const compact = tex.replace(/\s+/gu, "");
+    const suffix = compact.endsWith("\\%") ? "%" : "";
+    const value = suffix ? compact.slice(0, -2) : compact;
+    const numeric = /^[+-]?(?:(?:\d{1,3}(?:,\d{3})+|\d+)(?:\.\d+)?|\.\d+)$/u;
+    const scientific = value.match(/^(?:(.+)\\times)?10\^\{([+-]?\d+)\}$/u);
+    const minus = (text) => text.replace(/^-/u, "−");
+    if (scientific && (scientific[1] === undefined || numeric.test(scientific[1]))) {
+      const base = scientific[1] === undefined ? "10" : `${minus(scientific[1])} × 10`;
+      return `${base}<sup>${minus(scientific[2])}</sup>${suffix}`;
+    }
+    return numeric.test(value) ? `${minus(value)}${suffix}` : undefined;
+  });
+  const visibleNumbers = [...html.matchAll(/<span\b([^>]*\bdata-research-number\b[^>]*)>([\s\S]*?)<\/span>/giu)];
+  assert.deepEqual(visibleNumbers.map((match) => decodeHtml(match[2].replace(/<!--[\s\S]*?-->/gu, ""))), numericExpected.filter((number) => number !== undefined), "Visible numeric literals must preserve exact bases, superscripts, and percent suffixes");
+  for (const match of visibleNumbers) assert.equal(attribute(match[1], "aria-hidden"), "true");
+  const vectorCount = openingTags(html, "svg").filter((tag) => attribute(tag, "data-research-svg") !== undefined).length;
+  assert.equal(vectorCount, expected.length - visibleNumbers.length, "All other inline expressions retain their mathematical SVG rendering");
 }
 
 function attribute(tag, name) {
@@ -223,6 +242,24 @@ function experienceEntries(html) {
     .map((match) => ({ id: Number(attribute(match[1], "data-experience-entry")), html: match[2] }));
 }
 
+function topLevelListItems(html) {
+  const items = [];
+  let depth = 0;
+  let opening;
+  for (const tag of html.matchAll(/<\/?li\b[^>]*>/giu)) {
+    if (!tag[0].startsWith("</")) {
+      if (depth === 0) opening = tag;
+      depth += 1;
+    } else {
+      depth -= 1;
+      assert.ok(depth >= 0, "List items must have balanced tags");
+      if (depth === 0) items.push({ attributes: opening[0], html: html.slice(opening.index + opening[0].length, tag.index) });
+    }
+  }
+  assert.equal(depth, 0, "List items must remain complete");
+  return items;
+}
+
 function assertExperienceDetails(html, expected) {
   const metadata = [...html.matchAll(/<dl\b([^>]*)>([\s\S]*?)<\/dl>/giu)]
     .filter((match) => attribute(match[1], "data-experience-metadata") !== undefined);
@@ -240,12 +277,27 @@ function assertExperienceDetails(html, expected) {
     .find((match) => attribute(match[1], "data-experience-contributions") === String(expected.id));
   assert.ok(contributions, `Entry ${expected.id} is missing its contribution block`);
   assert.equal(stripMarkup(contributions[2].match(/<h[2-6]\b[^>]*>([\s\S]*?)<\/h[2-6]>/iu)?.[1] ?? ""), expected.contributionsLabel);
-  const items = [...contributions[2].matchAll(/<li\b[^>]*>([\s\S]*?)<\/li>/giu)];
+  const items = topLevelListItems(contributions[2]);
   const approvedItems = [...expected.keyContributions, ...expected.notes];
   assert.equal(items.length, approvedItems.length);
   for (const [index, item] of items.entries()) {
-    if (expected.categoryId === "01") assertApprovedInline(item[1], approvedItems[index]);
-    else assert.equal(stripMarkup(item[1]), normalizeSpace(approvedItems[index]));
+    assert.equal(attribute(item.attributes, "data-contribution-item"), String(index), "Top-level contribution order must remain explicit");
+    const nested = [...item.html.matchAll(/<(ul|ol)\b([^>]*\bdata-contribution-details\b[^>]*)>([\s\S]*?)<\/\1>/giu)];
+    const approvedDetails = expected.keyContributionDetails?.[String(index)];
+    assert.equal(nested.length, approvedDetails ? 1 : 0, "Each contribution retains exactly its approved nested detail group");
+    const parentCopy = nested.length ? item.html.slice(0, nested[0].index) + item.html.slice(nested[0].index + nested[0][0].length) : item.html;
+    if (expected.categoryId === "01") assertApprovedInline(parentCopy, approvedItems[index]);
+    else assert.equal(stripMarkup(parentCopy), normalizeSpace(approvedItems[index]));
+    if (approvedDetails) {
+      assert.equal(nested[0][1], approvedDetails.ordered ? "ol" : "ul", "Numbered and bulleted source lists retain their semantics");
+      assert.equal(attribute(nested[0][2], "data-contribution-details"), String(index));
+      const childItems = topLevelListItems(nested[0][3]);
+      assert.equal(childItems.length, approvedDetails.items.length);
+      childItems.forEach((child, childIndex) => {
+        assert.equal(attribute(child.attributes, "data-contribution-detail"), String(childIndex));
+        assertApprovedInline(child.html, approvedDetails.items[childIndex]);
+      });
+    }
   }
   assert.equal(openingTags(contributions[2], "p").length, 0, "Supporting notes must be exact trailing list items, not separate paragraphs");
   if (expected.categoryId === "01") {
@@ -507,15 +559,24 @@ test("all eighteen approved Experience entries use institution titles and real l
   assert.equal(expected.find(({ id }) => id === 16).metadata.location, "Beijing, China");
   assert.deepEqual(expected.filter(({ categoryId }) => ["02", "04", "05"].includes(categoryId)).map(({ keyContributions }) => keyContributions.length), [9, 7, 6, 7, 5, 6, 1, 1, 2, 4]);
   assert.equal(expected.find(({ id }) => id === 18).notes.length, 1, "The school-program context must survive the detailed-bullet merge");
+  assert.deepEqual(expected.filter(({ keyContributionDetails }) => keyContributionDetails).map((entry) => ({
+    id: entry.id,
+    groups: Object.entries(entry.keyContributionDetails).map(([index, detail]) => ({ index, ordered: detail.ordered, count: detail.items.length })),
+  })), [
+    { id: 2, groups: [{ index: "2", ordered: false, count: 4 }] },
+    { id: 3, groups: [{ index: "0", ordered: true, count: 3 }] },
+  ], "All seven original nested contributions must survive under their correct parent items");
 });
 
-test("the ten nonresearch detail routes are complete static pages with vertically stacked metadata", async () => {
+test("the ten nonresearch detail routes keep metadata in separate label/value rows", async () => {
   const metadataStyles = await readFile(path.join(ROOT, "app", "components", "experience", "Experience.module.css"), "utf8");
   const metadataRules = [...metadataStyles.matchAll(/(?:^|\n)\s*\.metadata\s*\{([^}]+)\}/gu)];
   assert.ok(metadataRules.length > 0, "Experience metadata needs an explicit layout rule");
   for (const [, declarations] of metadataRules) {
     assert.match(declarations, /grid-template-columns:\s*1fr\s*;/u, "Metadata must remain a single column at every defined breakpoint");
   }
+  assert.match(metadataStyles, /\.metadata\s*>\s*div\s*\{[^}]*display:\s*grid[^}]*grid-template-columns:\s*90px minmax\(0,\s*1fr\)[^}]*align-items:\s*baseline/u, "Desktop and tablet metadata labels and values share a baseline within each row");
+  assert.match(metadataStyles, /@media\s*\(width\s*<\s*420px\)\s*\{\s*\.metadata\s*>\s*div\s*\{[^}]*grid-template-columns:\s*1fr/u, "Narrow screens stack each label above its value without rearranging metadata rows");
   for (const route of EXPERIENCE_DETAIL_ROUTES) {
     const html = await routeHtml(route);
     assert.equal(openingTags(html, "article").length, 1);
@@ -771,9 +832,77 @@ test("the production design contract is restrained and dependency-light", async 
   assert.match(layout, /assets\/brand\/lo-mark\.svg/u);
   assert.match(experience, /\.metadata\s*\{[^}]*grid-template-columns:\s*1fr/u);
   assert.match(experience, /\.entryTitle\s*\{[^}]*font-size:\s*var\(--type-subheading\)/u);
-  assert.match(experience, /\.contributions ul\s*\{[^}]*padding-left:\s*19px/u);
-  assert.match(experience, /\.contributions li\s*\{[^}]*padding-left:\s*3px/u);
+  assert.match(experience, /\.contributions > ul\s*\{[^}]*padding-left:\s*19px/u);
+  assert.match(experience, /\.contributions > ul > li\s*\{[^}]*padding-left:\s*3px/u);
   assert.deepEqual(Object.keys(packageJson.dependencies).sort(), ["@mathjax/mathjax-tex-font", "@mathjax/src", "next", "react", "react-dom"]);
   assert.equal(packageJson.dependencies["@mathjax/src"], "4.1.3");
   assert.equal(packageJson.dependencies["@mathjax/mathjax-tex-font"], "4.1.3");
+});
+
+test("shared typography source roles preserve Inter numerals, article names, metadata, and mathematical scale", async () => {
+  const [fonts, exportedFonts, globals, articles, experience, math] = await Promise.all([
+    readFile(path.join(ROOT, "public", "assets", "fonts", "inter.css"), "utf8"),
+    readFile(path.join(OUT, "assets", "fonts", "inter.css"), "utf8"),
+    readFile(path.join(ROOT, "app", "globals.css"), "utf8"),
+    readFile(path.join(ROOT, "app", "past-experience", "components", "LegalPaperPage.module.css"), "utf8"),
+    readFile(path.join(ROOT, "app", "components", "experience", "Experience.module.css"), "utf8"),
+    readFile(path.join(ROOT, "app", "components", "research", "ResearchMath.module.css"), "utf8"),
+  ]);
+  const rule = (css, selector) => {
+    const escaped = selector.replace(/[.*+?^${}()|[\]\\]/gu, "\\$&");
+    const match = css.match(new RegExp(`(?:^|\\n)\\s*${escaped}\\s*\\{([^}]+)\\}`, "u"));
+    assert.ok(match, `Missing typography role ${selector}`);
+    return match[1];
+  };
+  const fontRoot = rule(fonts, ":root");
+  assert.equal(exportedFonts, fonts, "The export must ship the shared font stylesheet verbatim");
+  assert.match(fontRoot, /--font-text:\s*"Inter",\s*sans-serif\s*;/u);
+  assert.match(fontRoot, /font-optical-sizing:\s*none\s*;/u);
+  assert.match(fontRoot, /font-variation-settings:\s*"opsz"\s+14\s*;/u);
+  assert.match(fontRoot, /font-variant-numeric:\s*lining-nums\s+proportional-nums\s*;/u);
+  assert.match(fontRoot, /font-synthesis:\s*none\s*;/u);
+  assert.doesNotMatch(experience, /font-optical-sizing|font-variation-settings/u, "Experience must inherit the global optical settings rather than create a different font instance");
+  assert.match(rule(globals, "body"), /font-family:\s*var\(--font-text\)/u);
+  const tokens = rule(globals, ":root");
+  assert.match(tokens, /--type-subheading:\s*1\.125rem\s*;/u);
+  assert.match(tokens, /--type-reading:\s*0\.875rem\s*;/u);
+  assert.match(tokens, /--type-math:\s*1\.15em\s*;/u);
+  for (const declarations of [rule(articles, ".paper .header h1"), rule(experience, ".detailPage .detailHeader h1"), rule(experience, ".entryTitle")]) {
+    assert.match(declarations, /font-size:\s*var\(--type-subheading\)\s*;/u, "Article and experience names must share the 18px semantic role");
+    assert.match(declarations, /font-weight:\s*600\s*;/u);
+    assert.match(declarations, /line-height:\s*var\(--subheading-leading\)\s*;/u);
+  }
+  assert.match(rule(math, ".formula"), /font-size:\s*var\(--type-math\)\s*;/u);
+  assert.match(rule(math, ".inline"), /font-size:\s*1em\s*;/u, "Inline expressions must track surrounding prose rather than the display-math scale");
+  assert.doesNotMatch(rule(math, ".display"), /font-size:/u, "Display expressions retain the shared 1.15em formula role");
+  assert.match(rule(math, ".number"), /font:\s*inherit\s*;/u);
+  assert.match(rule(math, ".number"), /font-variant-numeric:\s*lining-nums\s+proportional-nums\s*;/u);
+  assert.match(rule(math, ".number sup"), /font-size:\s*0\.75em\s*;/u);
+  assert.match(rule(math, ".number sup"), /vertical-align:\s*super\s*;/u);
+  assert.match(rule(experience, ".metadata > div"), /grid-template-columns:\s*90px minmax\(0,\s*1fr\)\s*;/u);
+  assert.match(rule(experience, ".contributions > ul > li + li"), /border-top:\s*1px solid var\(--rule\)\s*;/u);
+  assert.match(rule(experience, ".contributions > ul > li + li"), /padding-top:\s*16px\s*;/u);
+  assert.doesNotMatch(experience, /\.contributions\s+li(?:\s*\+\s*li)?\s*\{/u, "Contribution spacing and dividers must not cascade into nested items");
+  const nestedDetails = rule(experience, ".contributionDetails");
+  assert.match(nestedDetails, /font-size:\s*var\(--type-reading\)\s*;/u);
+  assert.match(nestedDetails, /gap:\s*8px\s*;/u);
+  assert.match(nestedDetails, /padding-left:\s*20px\s*;/u);
+  assert.doesNotMatch(nestedDetails, /border|font-family/u, "Nested lists inherit the same typeface and avoid per-item divider styling");
+
+  const researchRoutes = CANONICAL_ROUTES.filter((route) => route.startsWith("/education/") || route.startsWith("/past-experience/"));
+  const stylesheetCache = new Map();
+  for (const route of [...researchRoutes, ...EXPERIENCE_DETAIL_ROUTES]) {
+    const html = await routeHtml(route);
+    const header = html.match(/<header\b([^>]*)>[\s\S]*?<h1\b/iu);
+    assert.ok(header, `${route} needs a title inside its semantic page header`);
+    const headerClass = researchRoutes.includes(route) ? "_header" : "_detailHeader";
+    assert.ok(attribute(header[1], "class")?.split(/\s+/u).some((name) => name.endsWith(headerClass)), `${route} must bind its title to the shared article-name role`);
+    const stylesheetHrefs = openingTags(html, "link").filter((tag) => attribute(tag, "rel") === "stylesheet").map((tag) => attribute(tag, "href"));
+    const loadedStyles = await Promise.all(stylesheetHrefs.map(async (href) => {
+      assert.ok(href?.startsWith("/"), "Typography assets must remain local");
+      if (!stylesheetCache.has(href)) stylesheetCache.set(href, await readFile(path.join(OUT, ...href.split("/").filter(Boolean)), "utf8"));
+      return stylesheetCache.get(href);
+    }));
+    assert.ok(loadedStyles.some((css) => /font-optical-sizing:\s*none/u.test(css) && /font-variation-settings:\s*"opsz"\s+14/u.test(css) && /font-variant-numeric:\s*lining-nums\s+proportional-nums/u.test(css)), `${route} must load the compiled shared Inter settings`);
+  }
 });
