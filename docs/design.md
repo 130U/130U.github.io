@@ -37,7 +37,6 @@ Every reading frame uses this same Inter family with automatic optical sizing
 disabled and the `opsz` axis fixed at 14. Prose numerals use proportional widths;
 directory indices and numeric tables can use tabular widths within the same family.
 Inline code labels inherit Inter, and shared bold emphasis uses weight 600.
-Small indices and field labels use the shared label tracking.
 
 Typography follows semantic roles. At any viewport, text with the same role uses
 the same size across every section and page. Weight, color, spacing, and italics
@@ -219,14 +218,17 @@ existing article and experience footer links remain available after long content
 
 ## Content and extension
 
-Page, domain, institution, project, and course titles use title case. Interface
-labels use title case, including View Coursework, Read More, Back to Education,
-Back to Selected Research, Back to Experience, Back to Top, Full Manuscript, Author
-Note, and View in Footnotes. Function words such as "to" and "in" stay lowercase.
+Page, domain, institution, project, and course titles use title case. Main-site
+navigation and action labels use title case, including View Coursework, Read More,
+Back to Education, Back to Selected Research, Back to Experience, Back to Top,
+Full Manuscript, Author Note, and View in Footnotes. Function words such as "to"
+and "in" stay lowercase.
 Research article titles and chapters preserve their
 authored capitalization. Supporting sentences and accessibility descriptions use
-sentence case. Preserve official spellings and acronyms such as GitHub, AI, ESG,
-LLM, SHAP, and IPhO; sentence case does not lowercase proper names.
+sentence case. The architecture viewer uses sentence case for tool commands and
+export menus, including Share card and Copy share card. Preserve official spellings
+and acronyms such as GitHub, AI, ESG, LLM, SHAP, and IPhO; sentence case does not
+lowercase proper names.
 Use "and" in editorial category labels. Preserve official course and organization
 names, including their ampersands. The fellowship name is `Sequoia Fellow`, and
 its cohort is owned by the identity configuration in `app/lib/content/site.ts`.

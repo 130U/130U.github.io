@@ -476,17 +476,6 @@ button:focus-visible {
   text-decoration-skip-ink: auto;
 }
 
-.course-list {
-  display: grid;
-  margin: 0;
-  padding: 0;
-  color: var(--muted);
-  font-size: var(--type-reading);
-  line-height: var(--reading-leading);
-  list-style: none;
-  gap: 9px;
-}
-
 .education-note a:focus-visible {
   color: var(--accent);
   text-decoration-color: currentColor;
