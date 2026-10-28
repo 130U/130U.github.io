@@ -809,7 +809,7 @@ test("About preserves both degrees and the advisor record while linking to all 4
     const coursework = elementHtmlById(education, "coursework");
     const courseworkLink = coursework.match(/<a\b([^>]*)>([\s\S]*?)<\/a>/u);
     assert.equal(attribute(courseworkLink?.[1] ?? "", "href"), "/coursework/");
-    assert.equal(stripMarkup(courseworkLink?.[2] ?? ""), "View coursework");
+    assert.equal(stripMarkup(courseworkLink?.[2] ?? ""), "View Coursework");
     assert.equal(openingTags(education, "details").length, 0, "The Education control navigates to a separate page.");
     assert.equal(elementsWithClass(html, "ul", "course-list").length, 0, "Course lists must not consume space on About.");
     for (const course of courseworkGroups.flatMap((group) => group.courses)) {

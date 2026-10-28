@@ -119,7 +119,6 @@
 .detailPage { max-width: var(--reading-measure); }
 .detailHeader { margin-bottom: 3rem; }
 .detailPage .detailHeader h1 { font-size: var(--type-subheading); font-weight: 600; line-height: var(--subheading-leading); letter-spacing: 0; }
-.detailHeader :global(.back-link) { margin-bottom: 2rem; }
 .detailHeader + .contributions { border-top: 1px solid var(--rule-strong); padding-top: 2rem; }
 .detailFooter { display: flex; justify-content: space-between; gap: 24px; border-top: 1px solid var(--rule); margin-top: 40px; padding-top: 24px; font-size: var(--type-interface); }
 .detailFooter a { display: inline-flex; align-items: center; min-height: 44px; }
@@ -136,7 +135,7 @@
 .metadata dt { color: var(--muted); font-size: var(--type-label); line-height: var(--label-leading); margin-bottom: 0; }
 .metadata dd { margin: 0; }
 .metadata > div { display: grid; grid-template-columns: 6.5em minmax(0, 1fr); align-items: baseline; gap: 8px 16px; }
-.contributions h2, .contributions h5 {
+.contributions h2 {
   margin: 0 0 16px;
   font-size: var(--type-heading);
   font-weight: 400;

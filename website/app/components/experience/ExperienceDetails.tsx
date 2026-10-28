@@ -32,11 +32,10 @@ export function ArchitecturalContext({ entry }: { entry: ShowcaseEntry }) {
   );
 }
 
-export function KeyContributions({ entry, id = "key-contributions", nested = false }: { entry: ShowcaseEntry; id?: string; nested?: boolean }) {
-  const Heading = nested ? "h5" : "h2";
+export function KeyContributions({ entry }: { entry: ShowcaseEntry }) {
   return (
-    <section className={styles.contributions} aria-labelledby={id} data-experience-contributions={entry.id}>
-      <Heading id={id} tabIndex={-1}>{entry.contributionsLabel}</Heading>
+    <section className={styles.contributions} aria-labelledby="key-contributions" data-experience-contributions={entry.id}>
+      <h2 id="key-contributions" tabIndex={-1}>{entry.contributionsLabel}</h2>
       <ul>{[...entry.keyContributions, ...entry.notes].map((text, index) => {
         const detail = entry.keyContributionDetails?.[String(index)];
         const DetailList = detail?.ordered ? "ol" : "ul";

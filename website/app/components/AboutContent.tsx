@@ -87,7 +87,7 @@ export function AboutContent() {
             </article>
           </div>
           <div className={styles.coursework} id="coursework">
-            <Link className={styles.courseworkButton} href="/coursework/">View coursework</Link>
+            <Link className={styles.courseworkButton} href="/coursework/">View Coursework</Link>
           </div>
         </div>
       </section>
