@@ -53,7 +53,7 @@ scale relative to surrounding text without changing the prose size.
 | About degree | `--type-reading` | 14px, weight 500 | 1.6 |
 | Body, records, introductions, course names, metadata values | `--type-reading` | 14px | 1.6 |
 | Navigation, menu, wordmark name, return link | `--type-interface` | 14px | 1.4 |
-| Experience directory item and number | `--type-subheading` | 18px, weight 400 | 1.45 |
+| Experience directory item and Research list title | `--type-subheading` | 18px, weight 400 | 1.45 |
 | Project reading action | `--type-action`, alias of `--type-interface` | 14px, weight 500 | 1.4 |
 | Research prose and table cells | `--type-reading` | 14px | 1.6 |
 | Inline mathematical expression | Relative to surrounding text | 1em | Intrinsic mathematical geometry |
@@ -72,10 +72,13 @@ its temporary reading state.
 ### Experience presentation
 
 Experience shares About's Inter family, fixed optical size, role sizes, grid, and
-paper/ink palette. It is one page with five numbered sections and a compact anchor
-directory that stays in one column at every screen width. Its labels and numbers
-use the 18px subheading size at weight 400; section margin indices
-use 14px on both About and Experience. Section spacing separates
+paper/ink palette. It is one page with five numbered sections and an anchor
+directory that stays in one column at every screen width. The directory uses
+full-width rows separated by thin rules, with no leading numbers. Labels use the
+18px subheading size at weight 400. A right-aligned View action appears on hover
+and keyboard focus and remains visible on touch devices; the complete row turns
+blue on hover or focus. Section margin indices use 14px on both About and
+Experience. Section spacing separates
 domains; thin rules and 28px gaps distinguish entries within them. Category
 introductions are omitted. Summaries use upright
 black body text at 14px; project and organization titles use the 18px subheading
@@ -160,24 +163,30 @@ viewport height. Its minimum track width follows the interface type size, naviga
 indent, padding, and scrollbar allowance. The reading field and structural guides
 reflow together when enlarged text needs more rail space. Long reading content has
 emergency wrapping when an unbroken word would exceed its container.
-Coursework uses four stacked category blocks. Each list flows down up to two CSS
+Coursework opens from the View coursework control below the Education records.
+It uses a native details disclosure, initially closed, with a compact dark gray
+summary button and visible keyboard focus. All 49 courses remain in the HTML and
+are available without JavaScript. The expanded content uses four stacked category
+blocks. Each list flows down up to two CSS
 columns with a 16rem target width and a 24px gap, returning to one column below
 768px. Course names stay together across column breaks, with 2px between items;
 wrapped names do not reserve empty space in the adjacent column. Lists keep the
 shared reading size and leading. Category headings share the same size, weight,
-leading, and tracking as research titles and the About institution heading, without
+leading, and tracking as the About institution heading, without
 reserving a second line. Duke University appears once above the two degree records;
 degree names use the reading size at weight 500. Compact notes and a thin rule
 separate the degree records. Profile details and contact values also use the reading
-scale; field labels use the label scale. Email and GitHub occupy two columns
+scale; field labels use the label scale. Email, GitHub, and X occupy three columns
 above 540px and stack in one column at 540px and below. Long contact values can wrap
 when text is enlarged.
 Coarse pointers receive 44px primary navigation and standalone link targets.
 
 About uses compact spacing inside each research or education record and larger
-breaks between its numbered sections. The research title is an underlined manuscript
-link in black ink, with blue hover and keyboard-focus feedback, followed by
-supporting paragraphs. Paragraphs wrap naturally
+breaks between its numbered sections. Each Research entry is one manuscript link
+containing its title and complete summary, separated from the next entry by a thin
+rule. Titles use weight 400 without underlines; titles and summaries share black
+ink at rest and turn blue together on hover or keyboard focus. The title supplies
+the link's accessible name. The list omits dates. Paragraphs wrap naturally
 without forced line breaks. Section headings, entry headings, and reading text use
 the shared 22px, 18px, and 14px hierarchy; scoped spacing overrides do not affect other pages.
 
@@ -219,10 +228,12 @@ Legal section symbols, paragraph symbols, mathematical notation, and author name
 with diacritics remain part of the source text.
 
 The primary navigation contains About and Experience. About at
-`/` combines the introduction, Selected Research, Education, Selected Coursework,
-and contact details. The supplied first-person introduction leads the page; both
+`/` combines the introduction, Selected Research, Education with expandable
+coursework, and contact details in sections 01 through 04. The supplied first-person
+introduction leads the page; both
 Duke degrees, the advisor, scholarships, and all 49 courses remain
-available. Coursework keeps its four subject groups. The `/education/` compatibility
+available. Coursework keeps its four subject groups and its `#coursework` anchor.
+The `/education/` compatibility
 page shares the About content without repeating the particle entrance, uses `/`
 as its canonical URL, and remains outside primary navigation and the sitemap.
 Experience contains all five domains and eighteen entries. The five category

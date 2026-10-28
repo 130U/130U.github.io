@@ -39,7 +39,12 @@ export function ExperienceContent() {
       <header className={styles.intro}>
         <h1>Experience</h1>
         <nav className={styles.directory} aria-label="Experience sections">
-          {showcaseDomains.map((domain) => <a href={`#${domain.slug}`} key={domain.number}><span>{domain.number}</span>{domain.name}</a>)}
+          {showcaseDomains.map((domain) => (
+            <a href={`#${domain.slug}`} key={domain.number}>
+              <span className={styles.directoryTitle}>{domain.name}</span>
+              <span className={styles.directoryAction} aria-hidden="true">View</span>
+            </a>
+          ))}
         </nav>
       </header>
       {showcaseDomains.map((domain) => <ExperienceSection domain={domain} key={domain.number} />)}

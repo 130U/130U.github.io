@@ -393,7 +393,7 @@ test("About retains its interactive name entrance before the combined profile", 
   assert.equal(stripMarkup(heading[1]), "Thinking mathematically Working in AI");
   assert.match(home, /<title>About \| Theodore Ouyang<\/title>/u);
   assert.match(home, /id="home-profile"/u);
-  for (const index of ["01", "02", "03"]) {
+  for (const index of ["01", "02", "03", "04"]) {
     assert.match(home, new RegExp(`aria-hidden="true"[^>]*>${index}<`, "u"));
   }
   assert.ok(stripMarkup(home).includes("Mathematics is how I make sense of things. I want to know which assumptions underlie a conclusion, what happens when they change, and where intuition stops being reliable."));
@@ -403,6 +403,11 @@ test("About retains its interactive name entrance before the combined profile", 
   }
   assert.match(home, /href="mailto:10@alumni\.duke\.edu"/u);
   assert.match(home, /href="https:\/\/github\.com\/130U"/u);
+  const contact = elementHtmlById(home, "contact");
+  assert.deepEqual(openingTags(contact, "a").map((tag) => attribute(tag, "href")), [
+    "mailto:10@alumni.duke.edu", "https://github.com/130U", "https://x.com/D3rfr31schutz",
+  ]);
+  assert.ok(stripMarkup(contact).includes("@D3rfr31schutz"));
   assert.equal(openingTags(home, "img").length, 0);
   for (const route of ROUTES.slice(1)) assert.equal(openingTags(await routeHtml(route), "canvas").length, 0);
 });
@@ -459,9 +464,11 @@ test("About research titles link to complete papers with their source links pres
     assert.ok(headings.includes(title));
     assert.ok(stripMarkup(about).includes(description));
     const entry = about.match(new RegExp(`<article\\b[^>]*id="${slug}"[^>]*>([\\s\\S]*?)</article>`, "u"))?.[1] ?? "";
-    const titleLink = entry.match(/<h3\b[^>]*>\s*<a\b([^>]*)>([\s\S]*?)<\/a>\s*<\/h3>/u);
-    assert.equal(attribute(titleLink?.[1] ?? "", "href"), `/education/${slug}/`);
-    assert.equal(stripMarkup(titleLink?.[2] ?? ""), title);
+    const researchLink = entry.match(/<a\b([^>]*)>([\s\S]*?)<\/a>/u);
+    assert.equal(attribute(researchLink?.[1] ?? "", "href"), `/education/${slug}/`);
+    assert.equal(attribute(researchLink?.[1] ?? "", "aria-labelledby"), `${slug}-title`);
+    assert.equal(stripMarkup(elementHtmlById(researchLink?.[2] ?? "", `${slug}-title`)), title);
+    assert.ok(stripMarkup(researchLink?.[2] ?? "").includes(description), "The manuscript link includes its summary so the complete row is actionable.");
     assert.equal(openingTags(entry, "a").length, 1);
     const article = await routeHtml(`/education/${slug}/`);
     assert.equal(openingTags(article, "h1").length, 1);
@@ -493,7 +500,9 @@ test("Experience presents five numbered sections and all eighteen approved entri
   const sectionLinks = [...directory[2].matchAll(/<a\b([^>]*)>([\s\S]*?)<\/a>/giu)];
   assert.deepEqual(sectionLinks.map((match) => attribute(match[1], "href")), DOMAINS.map(([, slug]) => `#${slug}`));
   for (const [index, [name, slug, ids]] of DOMAINS.entries()) {
-    assert.equal(inlineText(sectionLinks[index][2]), `${String(index + 1).padStart(2, "0")}${name}`);
+    const directoryLabels = [...sectionLinks[index][2].matchAll(/<span\b([^>]*)>([\s\S]*?)<\/span>/gu)];
+    assert.deepEqual(directoryLabels.map((match) => stripMarkup(match[2])), [name, "View"]);
+    assert.equal(attribute(directoryLabels[1][1], "aria-hidden"), "true", "The repeated visual action must not lengthen each section link's accessible name.");
     assert.ok(openingTags(html, "section").some((tag) => attribute(tag, "id") === slug));
     assert.equal(stripMarkup(elementHtmlById(html, `${slug}-heading`)), name);
     assert.deepEqual(expected.filter(({ categoryId }) => categoryId === String(index + 1).padStart(2, "0")).map(({ id }) => id), ids);
@@ -739,7 +748,13 @@ test("About and its education alias preserve both degrees, 49 courses, and the a
   for (const route of ["/", "/education/"]) {
     const html = await routeHtml(route);
     assert.equal(elementsWithClass(html, "article", "education-entry").length, 2);
-    const lists = elementsWithClass(html, "ul", "course-list");
+    const education = elementHtmlById(html, "education");
+    const coursework = elementHtmlById(education, "coursework");
+    const disclosure = openingTags(coursework, "details");
+    assert.equal(disclosure.length, 1, "All coursework belongs to one native disclosure within Education.");
+    assert.doesNotMatch(disclosure[0], /\sopen(?:\s|=|>)/u, "Coursework must be collapsed in the initial HTML.");
+    assert.equal(stripMarkup(coursework.match(/<summary\b[^>]*>([\s\S]*?)<\/summary>/u)?.[1] ?? ""), "View coursework");
+    const lists = elementsWithClass(coursework, "ul", "course-list");
     assert.equal(lists.length, 4);
     assert.equal(lists.reduce((total, list) => total + (list[2].match(/<li\b/giu) ?? []).length, 0), 49);
     const text = stripMarkup(html);

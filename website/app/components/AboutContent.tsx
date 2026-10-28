@@ -52,12 +52,12 @@ export function AboutContent() {
           <div>
             {selectedResearchProjects.map((project) => (
               <article className={styles.researchEntry} key={project.slug} id={project.slug}>
-                <h3 className={styles.researchTitle}>
-                  <Link href={project.path}>{project.title}</Link>
-                </h3>
-                {researchSummaries[project.slug].map((paragraph, index) => (
-                  <p className={styles.researchSummary} key={index}>{paragraph}</p>
-                ))}
+                <Link className={styles.researchLink} href={project.path} aria-labelledby={`${project.slug}-title`}>
+                  <h3 className={styles.researchTitle} id={`${project.slug}-title`}>{project.title}</h3>
+                  {researchSummaries[project.slug].map((paragraph, index) => (
+                    <p className={styles.researchSummary} key={index}>{paragraph}</p>
+                  ))}
+                </Link>
               </article>
             ))}
           </div>
@@ -87,28 +87,27 @@ export function AboutContent() {
               <p className="education-note">Undergraduate Merit Scholarship</p>
             </article>
           </div>
-        </div>
-      </section>
-
-      <section className={styles.section} id="coursework" aria-labelledby="coursework-heading">
-        <p className={styles.sectionIndex} aria-hidden="true">04</p>
-        <div className={styles.sectionBody}>
-          <h2 className={styles.sectionTitle} id="coursework-heading">Selected Coursework</h2>
-          <div className={styles.courseGrid}>
-            {courseworkGroups.map((group) => (
-              <article key={group.title}>
-                <h3 className={styles.courseTitle}>{group.title}</h3>
-                <ul className="course-list">
-                  {group.courses.map((course) => <li key={course}>{course}</li>)}
-                </ul>
-              </article>
-            ))}
-          </div>
+          <details className={styles.coursework} id="coursework">
+            <summary className={styles.courseworkButton}>View coursework</summary>
+            <div className={styles.courseworkContent}>
+              <h3 className={styles.courseworkHeading} id="coursework-heading">Selected Coursework</h3>
+              <div className={styles.courseGrid}>
+                {courseworkGroups.map((group) => (
+                  <article key={group.title}>
+                    <h4 className={styles.courseTitle}>{group.title}</h4>
+                    <ul className="course-list">
+                      {group.courses.map((course) => <li key={course}>{course}</li>)}
+                    </ul>
+                  </article>
+                ))}
+              </div>
+            </div>
+          </details>
         </div>
       </section>
 
       <section className={styles.section} id="contact" aria-label="Contact">
-        <p className={styles.sectionIndex} aria-hidden="true">05</p>
+        <p className={styles.sectionIndex} aria-hidden="true">04</p>
         <div className={styles.sectionBody}>
           <ul className={styles.contactStrip}>
             <li>
@@ -118,6 +117,10 @@ export function AboutContent() {
             <li>
               <span className={styles.contactLabel}>GitHub</span>
               <a href="https://github.com/130U" rel="me">github.com/130U</a>
+            </li>
+            <li>
+              <span className={styles.contactLabel}>X (Twitter)</span>
+              <a href="https://x.com/D3rfr31schutz" rel="me">@D3rfr31schutz</a>
             </li>
           </ul>
         </div>
