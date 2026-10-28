@@ -63,8 +63,9 @@ scale relative to surrounding text without changing the prose size.
 
 Text roles use rem units and scale with the user's text setting. The 22px, 18px,
 and 14px hierarchy stays the same at every viewport across the site and architecture
-viewer; mobile layouts do not reduce type sizes. About headings use zero tracking; other page and section
-headings retain -0.02em tracking. Reading text stays near zero. The shared
+viewer; mobile layouts do not reduce type sizes. About, Experience, and Coursework
+headings use zero tracking. General page introductions and article chapter headings
+use -0.02em tracking; article titles use zero. Reading text stays near zero. The shared
 `--reading-leading` supports sustained reading.
 Blue marks active navigation, focus, and link feedback. Editorial surfaces use flat
 rules and typography; the note-preview dialog uses a rounded surface to distinguish
@@ -157,17 +158,18 @@ Without JavaScript, the links remain visible in normal document flow.
 
 Horizontal gutters are 64px on desktop, 32px on tablet, and 20px on phones.
 Structural guides are decorative and hidden from assistive technology; phone layouts
-omit them. Below 1280px, experience narrative text uses the full reading track.
+omit them.
 Experience metadata remains in one column at every width. Long values wrap without
 narrowing the prose.
-Phone indices use a 1.5rem track and a 0.625rem gap. These tracks and the mobile
-header scale with the user's text size. The wordmark wraps at word boundaries,
+Below 768px, About hides its margin indices; Experience and Coursework place their
+indices above the section headings. The mobile header scales with the user's text
+size. The wordmark wraps at word boundaries,
 and the desktop navigation rail scrolls internally when its contents exceed the
 viewport height. Its minimum track width follows the interface type size, navigation
 indent, padding, and scrollbar allowance. The reading field and structural guides
 reflow together when enlarged text needs more rail space. Long reading content has
 emergency wrapping when an unbroken word would exceed its container.
-Coursework opens at `/coursework/` from the View coursework link below the Education
+Coursework opens at `/coursework/` from the View Coursework link below the Education
 records. The link uses a compact dark gray button with visible keyboard focus;
 the About page keeps its `#coursework` anchor around this entrance. The dedicated
 page has a numbered directory and four subject sections, indexed 01 through 04.
@@ -181,7 +183,8 @@ separate the degree records. Profile details and contact values also use the rea
 scale; field labels use the label scale. Email, GitHub, and X occupy three columns
 above 540px and stack in one column at 540px and below. Long contact values can wrap
 when text is enlarged.
-Coarse pointers receive 44px primary navigation and standalone link targets.
+Parent links have 44px targets; coarse pointers also receive 44px primary navigation
+and standalone link targets.
 
 About uses compact spacing inside each research or education record and larger
 breaks between its numbered sections. Each Research entry is one manuscript link
@@ -194,7 +197,7 @@ the shared 22px, 18px, and 14px hierarchy; scoped spacing overrides do not affec
 
 Page titles own the H1 position. About's two-line "Thinking mathematically / Working in AI"
 supplies its main heading; the particle wordmark retains the full name artwork.
-Experience domains use `01`–`05` indices, and entries use lowercase letters.
+Experience domains use `01`–`05` indices; individual entries have no leading markers.
 Bullet markers occupy an 18px gutter beside the text. Narrative lines stay within
 the shared 720px reading measure and reflow with the viewport.
 
@@ -217,8 +220,10 @@ existing article and experience footer links remain available after long content
 ## Content and extension
 
 Page, domain, institution, project, and course titles use title case. Interface
-labels use title case, including Read More, Back to Top, Full Manuscript, Author
-Note, and View in Footnotes. Research article titles and chapters preserve their
+labels use title case, including View Coursework, Read More, Back to Education,
+Back to Selected Research, Back to Experience, Back to Top, Full Manuscript, Author
+Note, and View in Footnotes. Function words such as "to" and "in" stay lowercase.
+Research article titles and chapters preserve their
 authored capitalization. Supporting sentences and accessibility descriptions use
 sentence case. Preserve official spellings and acronyms such as GitHub, AI, ESG,
 LLM, SHAP, and IPhO; sentence case does not lowercase proper names.
@@ -227,9 +232,9 @@ names, including their ampersands. The fellowship name is `Sequoia Fellow`, and
 its cohort is owned by the identity configuration in `app/lib/content/site.ts`.
 Site metadata uses this identity configuration; About omits the fellowship.
 
-Use straight apostrophes and quotation marks with English commas, periods,
-colons, semicolons, and parentheses in public copy and metadata, including the
-architecture viewer. Preserve source date punctuation and meaningful mathematical
+Use English punctuation in public copy and metadata, including the architecture
+viewer. Straight and curly apostrophes and quotation marks are both valid.
+Preserve source date punctuation and meaningful mathematical
 symbols, collaboration marks, and navigation arrows. An em dash can separate
 clauses. Unicode English dashes, ©, ×, and navigation arrows are intentional;
 Chinese full-width punctuation is not used in public interface copy.
@@ -240,7 +245,7 @@ Top-level pages retain the About and Experience primary navigation, including th
 `/education/`, `/now/`, and `/past-experience/` compatibility pages. The 27 detail
 pages replace those primary links with parent navigation while retaining the home
 wordmark: Coursework, three Selected Research manuscripts, eighteen Experience
-detail pages, and five legacy Experience domain pages. About at
+detail pages, and five Experience domain compatibility pages. About at
 `/` combines the introduction, Selected Research, Education with a coursework
 entrance, and contact details in sections 01 through 04. The supplied first-person
 introduction leads the page; both
@@ -260,8 +265,8 @@ has four project reading URLs. The other ten entries open dedicated detail
 pages under `/experience/`.
 About's Selected Research section presents three on-site manuscripts: Critical
 Dependence Stress for Portfolio Diversification, followed by the Asian-options and
-Rough Heston papers. Titles use black links that turn blue on hover
-or keyboard focus, followed by supporting paragraphs with selected bold emphasis. Numerical guarantees retain their
+Rough Heston papers. Each title and summary form one link whose text turns blue on
+hover or keyboard focus. Summaries retain selected bold emphasis. Numerical guarantees retain their
 model, horizon, payoff, and comparison scope.
 It does not repeat the abstracts or add a separate action row. Titles use the same
 18px subheading role; supporting paragraphs use the 14px reading role. Thin
@@ -284,10 +289,10 @@ Research chapter headings display Roman numerals, and subsections display letter
 in reading order. Source numbering and anchors remain intact. Verified internal
 section references link to the matching heading and preserve their source numerals.
 
-The website has twenty-three canonical content routes: About, Experience, three Selected
-Research articles, eight Experience manuscripts, and ten other Experience detail
-pages. Eight compatibility pages bring the content export to thirty-one routes. The
-architecture viewer adds one technical reference route, making thirty-two exported
+The website has twenty-four canonical content routes: About, Experience, Coursework,
+three Selected Research articles, eight Experience manuscripts, and ten other Experience
+detail pages. Eight compatibility pages bring the content export to thirty-two routes. The
+architecture viewer adds one technical reference route, making thirty-three exported
 routes in total, excluding 404.
 Keep factual claims, metadata, copy, and content order aligned with the integrity manifests.
 
@@ -329,6 +334,6 @@ and reading while preserving the signature interactive name entrance. Visual
 identity may be expressive; biographical and research claims remain measured.
 
 Review widths from 320 through 2560 pixels, including both sides of the 768, 1024,
-and 1280px breakpoints, iPad portrait and landscape sizes, keyboard use, and
+and 1200px breakpoints, iPad portrait and landscape sizes, keyboard use, and
 reduced-motion settings. The [architecture viewer](../architecture/) is a separate
 technical reference with its own light and dark viewing controls.

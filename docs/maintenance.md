@@ -30,18 +30,21 @@ Paths below are relative to `website/`.
 
 | Content | Maintained input | Loader or importer | Route |
 | --- | --- | --- | --- |
-| About and coursework | `app/components/AboutContent.tsx`, `app/lib/content/about.ts` | Shared About component | `/` |
+| About | `app/components/AboutContent.tsx`, `app/lib/content/about.ts` | Shared About component | `/` |
+| Coursework | `app/lib/content/about.ts` | `app/coursework/page.tsx` | `/coursework/` |
 | Experience | `content/experience-showcase.json`; AI fields are generated from the manuscript below | `app/lib/content/experience-showcase.ts` | `/experience/`, `/experience/[slug]/` |
 | AI research | `content/sources/ai-portfolio/ai-research-and-engineering.md` | `scripts/import-ai-portfolio.mjs`, `app/lib/content/ai-projects.ts` | `/past-experience/artificial-intelligence/[paper]/` |
 | Selected Research | `content/sources/selected-research/` | Research import scripts, `app/lib/content/selected-research.ts` | `/education/[paper]/` |
 | Legal research | `content/legal-papers/` structured manuscripts | `app/lib/content/legal-papers.ts` | `/past-experience/legal-research-and-policy-analysis/[paper]/` |
 | Architecture | `../architecture/site.json` | Archify and `scripts/integrate-architecture.mjs` | `/architecture/` |
 
-`app/lib/content/site.ts` owns site identity and primary navigation;
+`app/lib/content/site.ts` owns site identity, core routes, and navigation types;
 `app/lib/content/routes.ts` supplies canonical sitemap routes.
 `experience-domains.ts` defines the five Experience categories. All eighteen
 Experience entries have dedicated reading pages: four AI manuscripts, four legal
 manuscripts, and ten ordinary detail pages.
+About's Education section links to the dedicated Coursework page through View
+Coursework. The page preserves all 49 courses in four subject groups.
 
 Compatibility routes remain functional: `/education/` renders shared About content;
 `/past-experience/` and `/now/` render Experience; the five
@@ -82,7 +85,7 @@ The three papers use pinned research inputs and deterministic importers:
 | --- | --- | --- |
 | Critical Dependence Stress for Portfolio Diversification | `content/sources/selected-research/dependence/`; `scripts/import-dependence-research.mjs` | Abstract, chapters 1–5, references, and supporting-material links |
 | Certified Valuation of Arithmetic Asian Options | `content/sources/selected-research/asian-source.md`; `scripts/import-selected-research.mjs` | Abstract, chapters 1–10, references, and supporting-material links |
-| Certified Rough Heston Valuation | `content/sources/selected-research/rough-source.md`; `scripts/import-selected-research.mjs` | Abstract, chapters 1–8, references, and supporting-material links |
+| Certified Joint Pricing Errors in Rough Heston | `content/sources/selected-research/rough-source.md`; `scripts/import-selected-research.mjs` | Abstract, chapters 1–8, references, and supporting-material links |
 
 ```sh
 node scripts/import-selected-research.mjs
@@ -124,8 +127,10 @@ focus restoration; chapter and endnote links also work without JavaScript.
 
 ## Shared rendering and extension
 
-`SiteShell` owns the reading frame, `SiteNavigation` the mobile menu, and
-`ArticleReadingLayout`/`ArticleContents` the article structure and responsive
+`SiteShell` owns the reading frame. `SiteNavigation` renders the primary navigation
+and mobile menu on top-level pages, or one parent link on detail pages. Detail links
+return to the originating Education, Selected Research, or Experience anchor.
+`ArticleReadingLayout`/`ArticleContents` own the article structure and responsive
 navigation. `ExperienceSection` and `ExperienceDetails` keep all categories and
 detail pages consistent. Browser interaction stays in focused client components;
 the About entrance is isolated in `components/dithered-entrance/`.
@@ -138,7 +143,7 @@ annotations. Invalid formulas fail the build. Wide equations and tables scroll
 locally without shrinking the reading text.
 
 Use the shared Inter and typography tokens: 22px general titles and module headings,
-18px institution/project/paper names and Experience directory items, and 14px prose,
+18px institution/project/paper names, top-level directory items, and section indices; 14px prose,
 metadata, and auxiliary navigation. Inline formulas use 1em; displayed formulas
 use 1.15em. Pure inline numbers inherit Inter. These roles remain unchanged on
 mobile. See [design](design.md) for spacing and mathematical geometry.

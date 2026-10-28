@@ -234,7 +234,7 @@
       "dot": "cyan",
       "title": "Content First",
       "items": [
-        "About and Experience, 5 domains, 18 experience entries, 3 on-site Selected Research papers",
+        "49 courses, 5 Experience domains, 18 entries, and 3 Selected Research papers",
         "Shared route registry and protected source text"
       ]
     },
@@ -242,7 +242,7 @@
       "dot": "emerald",
       "title": "Static Delivery",
       "items": [
-        "23 canonical content pages, 8 compatibility pages, architecture viewer, and 404",
+        "24 canonical content pages, 8 compatibility pages, architecture viewer, and 404",
         "No runtime API, database, or authentication"
       ]
     },
@@ -250,7 +250,7 @@
       "dot": "violet",
       "title": "Focused Interactions",
       "items": [
-        "Navigation, contents, and footnote previews",
+        "Name entrance, navigation, contents, and footnote previews",
         "Architecture search, themes, tracing, and export"
       ]
     }

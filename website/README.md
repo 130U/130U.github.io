@@ -1,10 +1,10 @@
 # Website
 
 Theodore Ouyang's personal site, built with Next.js App Router, React, and native CSS.
-The primary navigation contains About and Experience. Twenty-three canonical content
-routes cover these two pages, three Selected Research manuscripts, and eighteen
+The primary navigation contains About and Experience. Twenty-four canonical content
+routes cover these two pages, Coursework, three Selected Research manuscripts, and eighteen
 Experience detail pages. Eight compatibility pages bring the content export to
-thirty-one routes; the architecture viewer makes thirty-two exported routes, excluding
+thirty-two routes; the architecture viewer makes thirty-three exported routes, excluding
 404. Node.js 24 matches the deployment runtime.
 
 The design follows Cognition's editorial grid, warm paper color, and fine rules with
@@ -12,13 +12,13 @@ self-hosted Inter. About opens with the interactive name entrance, followed
 by the profile. General page titles and section headings are 22px with 1.25 leading;
 institution, project, and paper names are 18px, including detail-page H1s. Body
 text is 14px with 1.6 leading. Metadata, navigation,
-labels, indices, and footers also use 14px. Experience directory labels and numbers
+field labels, and footers also use 14px. Top-level directory labels and section indices
 use 18px. This hierarchy stays the same at every viewport. Inter uses a shared fixed
 optical size of 14 and lining numerals. Inline mathematical expressions use 1em;
 displayed expressions use 1.15em. Pure inline numeric values use Inter while
 preserving their original TeX in accessible MathML.
-Coursework flows down up to two independent columns, with one column below 768px
-and no shared row gaps.
+View Coursework below Education opens a dedicated page containing all 49 courses
+in four subject groups. Each group uses one column at every width.
 
 ```sh
 cd website
@@ -42,13 +42,16 @@ checks visible text and metadata. `npm run preview:static` serves `out/` on
 
 `npm run typecheck` validates TypeScript and `npm audit --audit-level=low` checks
 dependency advisories. Browser interaction in the main site is limited to the
-interactive name entrance, navigation menu, shared article contents, and legal-note
+interactive name entrance, top-level navigation menu, shared article contents, and legal-note
 previews. Article links and site navigation also work without JavaScript.
+Detail pages retain the wordmark and a visible parent link in the navigation rail;
+on phones, that link stays in the header without a Menu toggle.
 
 About's three Selected Research entries link to on-site manuscripts and include
 concise research summaries. Critical Dependence Stress for Portfolio Diversification
 appears first, followed by the Asian-options and Rough Heston papers. Article headers
-contain the return link, title, GitHub link, and Full Manuscript link. Reading content
+contain the title, GitHub link, and Full Manuscript link. Back to Selected Research
+appears in the navigation rail. Reading content
 starts at Abstract; pre-abstract front matter remains in the protected source.
 The pages include the core chapters and references: chapters 1–5 for dependence
 stress, 1–10 for Asian options, and 1–8 for Rough Heston. Appendices and supporting

@@ -16,7 +16,10 @@ relationship tracing, and image export.
 
 `website/app/lib/content/` owns identity, routing, content loading, and research
 Markdown/math rendering. Experience presents five categories and eighteen entries;
-About includes three Selected Research papers. The AI portfolio's single maintained
+About includes three Selected Research papers and an Education link to the dedicated
+Coursework page, which presents 49 courses in four subject groups. Detail pages use
+parent navigation to return to their originating section or entry.
+The AI portfolio's single maintained
 source is `website/content/sources/ai-portfolio/ai-research-and-engineering.md`;
 its importer generates the AI showcase fields and four article JSON files.
 Selected Research uses pinned Markdown/TeX inputs with provenance; legal manuscripts
@@ -26,7 +29,7 @@ describes content ownership, import commands, and extension checks.
 Next.js exports HTML, CSS, and JavaScript to `website/out/`. Build assembly includes
 this viewer and applies production CSP before GitHub Actions deploys the artifact
 to GitHub Pages. There is no request-time API, database, authentication, or analytics.
-The main site's browser interactions are the Canvas2D entrance, navigation menu,
+The main site's browser interactions are the Canvas2D entrance, top-level navigation menu,
 article contents, and legal-note previews. Reading and ordinary links remain
 available without JavaScript.
 
