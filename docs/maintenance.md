@@ -210,6 +210,10 @@ with Pages write and OIDC permissions confined to the deployment job. Every acti
 is SHA-pinned. After publishing, verify the workflow for the exact commit and read
 back the live routes separately.
 
+Dependabot alerts, secret scanning, and push protection are enabled for the
+repository. Review open dependency and secret alerts when maintaining a release;
+the workflow's dependency audit also checks the installed lockfile on every build.
+
 Each exported HTML page receives hashes for its exact inline scripts before any
 script executes. Production CSP blocks arbitrary inline scripts, eval, inline event
 handlers, embedded frames/objects, and form submission; fonts and network fetches
