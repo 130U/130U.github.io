@@ -39,8 +39,8 @@
 .directory a:active .directoryAction { opacity: 1; }
 .sectionIndex {
   color: var(--muted);
-  font-size: var(--type-label);
-  line-height: var(--label-leading);
+  font-size: var(--type-index);
+  line-height: var(--subheading-leading);
   font-variant-numeric: tabular-nums;
 }
 .section {
@@ -51,7 +51,7 @@
   padding: 48px 0 64px;
   scroll-margin-top: 32px;
 }
-.sectionIndex { grid-column: 1; padding-top: 5px; }
+.sectionIndex { grid-column: 1; padding-top: 1px; }
 .sectionBody { grid-column: 2 / span 10; max-width: var(--reading-measure); min-width: 0; }
 .sectionTitle {
   margin: 0 0 28px;

@@ -71,10 +71,10 @@ function exportedPages() {
   return pagesPromise ??= (async () => {
     const sitemap = await readFile(new URL("../out/sitemap.xml", import.meta.url), "utf8");
     const routes = [...sitemap.matchAll(/<loc>([^<]+)<\/loc>/gu)].map((match) => new URL(decodeHtml(match[1])).pathname);
-    assert.equal(routes.length, 23, "About, Experience, eleven full articles and ten experience detail pages remain canonical.");
+    assert.equal(routes.length, 24, "About, Coursework, Experience, eleven full articles and ten experience detail pages remain canonical.");
     routes.push("/education/", "/architecture/", "/past-experience/", "/now/",
       ...["artificial-intelligence", "data-science", "legal-research-and-policy-analysis", "finance", "stem-academic-competitions-and-training"].map((slug) => `/past-experience/${slug}/`));
-    assert.equal(new Set(routes).size, 32, "Audit all canonical pages and every retained compatibility route.");
+    assert.equal(new Set(routes).size, 33, "Audit all canonical pages and every retained compatibility route.");
     const entries = await Promise.all(routes.map(async (route) => {
       const html = await readFile(new URL(`../out/${route.replace(/^\//u, "")}index.html`, import.meta.url), "utf8");
       const tree = readTree(html);
@@ -85,7 +85,7 @@ function exportedPages() {
   })();
 }
 
-test("32 exported pages contain no encoding corruption, exposed math markup, duplicate IDs or broken local anchors", async () => {
+test("33 exported pages contain no encoding corruption, exposed math markup, duplicate IDs or broken local anchors", async () => {
   const pages = await exportedPages();
   for (const [route, page] of pages) {
     const text = readable(page.tree);

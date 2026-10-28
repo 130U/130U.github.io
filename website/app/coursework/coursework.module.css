@@ -1,0 +1,141 @@
+.frame {
+  font-family: var(--font-text);
+}
+
+.frame :global(.content-column) {
+  padding-top: 112px;
+}
+
+.intro {
+  max-width: var(--reading-measure);
+  margin-bottom: 48px;
+}
+
+.backLink {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  margin-bottom: 20px;
+  font-size: var(--type-interface);
+  line-height: var(--interface-leading);
+}
+
+.intro h1,
+.sectionBody h2 {
+  margin: 0;
+  font-size: var(--type-heading);
+  font-weight: 400;
+  line-height: var(--heading-leading);
+  letter-spacing: 0;
+}
+
+.directory {
+  display: grid;
+  margin-top: 24px;
+}
+
+.directory a {
+  display: flex;
+  align-items: baseline;
+  gap: 16px;
+  min-height: 44px;
+  padding: 8px 0;
+  font-size: var(--type-subheading);
+  line-height: var(--subheading-leading);
+}
+
+.directoryIndex {
+  flex: 0 0 2.5ch;
+  color: var(--muted);
+  font-size: var(--type-index);
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+
+.directory a:focus-visible,
+.directory a:active {
+  color: var(--accent);
+}
+
+.section {
+  display: grid;
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+  grid-column: 1 / -1;
+  align-items: start;
+  padding: 48px 0 64px;
+  border-top: 1px solid var(--rule-strong);
+  scroll-margin-top: 32px;
+}
+
+.section:last-child {
+  padding-bottom: 0;
+}
+
+.sectionIndex {
+  grid-column: 1;
+  padding-top: 1px;
+  color: var(--muted);
+  font-size: var(--type-index);
+  line-height: var(--subheading-leading);
+  font-variant-numeric: tabular-nums;
+}
+
+.sectionBody {
+  grid-column: 2 / span 10;
+  max-width: var(--reading-measure);
+  min-width: 0;
+}
+
+.sectionBody h2 {
+  margin-bottom: 24px;
+}
+
+.courseList {
+  display: block;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  color: var(--ink);
+  font-size: var(--type-reading);
+  line-height: var(--reading-leading);
+}
+
+.courseList li {
+  padding: 16px 0;
+  border-top: 1px solid var(--rule);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .directory a:hover,
+  .backLink:hover {
+    color: var(--accent);
+  }
+}
+
+@media (768px <= width < 1024px) {
+  .section {
+    grid-template-columns: repeat(9, minmax(0, 1fr));
+  }
+
+  .sectionBody {
+    grid-column: 2 / span 7;
+  }
+}
+
+@media (width < 768px) {
+  .frame :global(.content-column) {
+    padding-top: 88px;
+  }
+
+  .section {
+    display: block;
+    padding: 40px 0 48px;
+    scroll-margin-top: 88px;
+  }
+
+  .sectionIndex {
+    display: block;
+    padding: 0;
+    margin-bottom: 12px;
+  }
+}

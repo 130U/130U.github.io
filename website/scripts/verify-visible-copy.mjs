@@ -10,6 +10,7 @@ const IGNORED_INTERFACE_STRINGS = ["Menu", "Close"];
 const ROUTES = [
   "/",
   "/education/",
+  "/coursework/",
   "/education/certified-valuation-arithmetic-asian-options/",
   "/education/certified-rough-heston-valuation/",
   "/education/critical-dependence-stress-for-portfolio-diversification/",

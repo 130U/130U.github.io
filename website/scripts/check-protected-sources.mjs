@@ -14,6 +14,7 @@ const PROTECTED_PATHS = [
   "content/experience-showcase.json",
   "app/components/AboutContent.tsx",
   "app/lib/content/about.ts",
+  "app/coursework/page.tsx",
   "app/components/research/ResearchArticle.tsx",
   "app/components/research/ResearchInline.tsx",
   "app/components/research/ResearchMath.tsx",

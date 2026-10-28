@@ -48,17 +48,18 @@ scale relative to surrounding text without changing the prose size.
 | Role | Shared token | Size at the default text setting | Leading |
 | --- | --- | --- | --- |
 | General page title | `--type-title` | 22px, weight 400 | 1.25 |
-| Section heading | `--type-heading` | 22px, weight 400 | 1.25 |
-| Institution, project or paper name, course-category heading | `--type-subheading` | 18px, weight 600 | 1.45 |
+| Section heading, coursework category heading | `--type-heading` | 22px, weight 400 | 1.25 |
+| Institution, project or paper name | `--type-subheading` | 18px, weight 600 | 1.45 |
 | About degree | `--type-reading` | 14px, weight 500 | 1.6 |
 | Body, records, introductions, course names, metadata values | `--type-reading` | 14px | 1.6 |
 | Navigation, menu, wordmark name, return link | `--type-interface` | 14px | 1.4 |
-| Experience directory item and Research list title | `--type-subheading` | 18px, weight 400 | 1.45 |
+| Top-level directory item and Research list title | `--type-subheading` | 18px, weight 400 | 1.45 |
+| Section margin index and directory number | `--type-index` | 18px, weight 400 | 1.45 |
 | Project reading action | `--type-action`, alias of `--type-interface` | 14px, weight 500 | 1.4 |
 | Research prose and table cells | `--type-reading` | 14px | 1.6 |
 | Inline mathematical expression | Relative to surrounding text | 1em | Intrinsic mathematical geometry |
 | Displayed mathematical expression | `--type-math` | 1.15em | Intrinsic mathematical geometry |
-| Field label, section margin index, footer | `--type-label` | 14px | 1.4 |
+| Field label, footer | `--type-label` | 14px | 1.4 |
 
 Text roles use rem units and scale with the user's text setting. The 22px, 18px,
 and 14px hierarchy stays the same at every viewport across the site and architecture
@@ -77,8 +78,8 @@ directory that stays in one column at every screen width. The directory uses
 full-width rows separated by thin rules, with no leading numbers. Labels use the
 18px subheading size at weight 400. A right-aligned View action appears on hover
 and keyboard focus and remains visible on touch devices; the complete row turns
-blue on hover or focus. Section margin indices use 14px on both About and
-Experience. Section spacing separates
+blue on hover or focus. Section margin indices use the shared 18px index role on
+About, Experience, and Coursework. Section spacing separates
 domains; thin rules and 28px gaps distinguish entries within them. Category
 introductions are omitted. Summaries use upright
 black body text at 14px; project and organization titles use the 18px subheading
@@ -131,7 +132,8 @@ fine rule, and 2rem of inset; phone spacing is 4rem and 1.5rem. Subsections use
 3rem of separation. These boundaries distinguish argument levels without changing
 the site's fonts or type sizes.
 
-Section margin indices and metadata labels use `--type-label`. Navigation, the wordmark name,
+Section margin indices use `--type-index`; metadata labels use `--type-label`.
+Top-level directories use the 18px subheading role. Navigation, the wordmark name,
 the mobile menu, and return links share `--type-interface` at every breakpoint.
 Text links share a 1px underline, `--link-rule`, and `--link-underline-offset`.
 Focus remains a visible blue outline, and hover feedback respects pointer capability.
@@ -142,10 +144,10 @@ The desktop frame is capped at 1440px and divided into 15 columns, with a three-
 sticky navigation rail. The content field reserves one internal track for indices and
 aligns headings and prose to the reading track. Tablet uses 12 outer columns.
 The shared `--reading-measure` caps narrative containers at 720px. Page introductions,
-the education list and outer coursework field, Experience records and detail pages,
+the education list and Coursework sections, Experience records and detail pages,
 and AI project articles align their headings and prose to this common right edge.
 Nested paragraphs fill their container with natural ragged-right wrapping. Each
-coursework category flows into up to two independent columns on desktop; legal articles retain
+coursework category uses one text column at every width; legal articles retain
 their own reading and contents layout.
 Below 768px, the navigation becomes a 4rem sticky header with a Menu / Close panel.
 Media-query ranges cover fractional viewport widths continuously.
@@ -163,17 +165,14 @@ viewport height. Its minimum track width follows the interface type size, naviga
 indent, padding, and scrollbar allowance. The reading field and structural guides
 reflow together when enlarged text needs more rail space. Long reading content has
 emergency wrapping when an unbroken word would exceed its container.
-Coursework opens from the View coursework control below the Education records.
-It uses a native details disclosure, initially closed, with a compact dark gray
-summary button and visible keyboard focus. All 49 courses remain in the HTML and
-are available without JavaScript. The expanded content uses four stacked category
-blocks. Each list flows down up to two CSS
-columns with a 16rem target width and a 24px gap, returning to one column below
-768px. Course names stay together across column breaks, with 2px between items;
-wrapped names do not reserve empty space in the adjacent column. Lists keep the
-shared reading size and leading. Category headings share the same size, weight,
-leading, and tracking as the About institution heading, without
-reserving a second line. Duke University appears once above the two degree records;
+Coursework opens at `/coursework/` from the View coursework link below the Education
+records. The link uses a compact dark gray button with visible keyboard focus;
+the About page keeps its `#coursework` anchor around this entrance. The dedicated
+page has a numbered directory and four subject sections, indexed 01 through 04.
+Each section has a 22px category heading and a single-column list of course names
+at the shared 14px reading size and leading. All 49 courses retain their original
+wording and order as static text, available without JavaScript. A return link
+leads to Education. Duke University appears once above the two degree records;
 degree names use the reading size at weight 500. Compact notes and a thin rule
 separate the degree records. Profile details and contact values also use the reading
 scale; field labels use the label scale. Email, GitHub, and X occupy three columns
@@ -228,11 +227,13 @@ Legal section symbols, paragraph symbols, mathematical notation, and author name
 with diacritics remain part of the source text.
 
 The primary navigation contains About and Experience. About at
-`/` combines the introduction, Selected Research, Education with expandable
-coursework, and contact details in sections 01 through 04. The supplied first-person
+`/` combines the introduction, Selected Research, Education with a coursework
+entrance, and contact details in sections 01 through 04. The supplied first-person
 introduction leads the page; both
 Duke degrees, the advisor, scholarships, and all 49 courses remain
-available. Coursework keeps its four subject groups and its `#coursework` anchor.
+available. The canonical `/coursework/` page keeps the four subject groups, marks
+About as current in the primary navigation, and appears in the sitemap. The
+homepage's `#coursework` anchor remains a valid entrance to this page.
 The `/education/` compatibility
 page shares the About content without repeating the particle entrance, uses `/`
 as its canonical URL, and remains outside primary navigation and the sitemap.
