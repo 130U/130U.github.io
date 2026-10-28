@@ -2,12 +2,14 @@
 
 import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
-import { navigation, type ActivePage } from "../lib/content/site";
+import { navigation, type ActivePage, type ParentPage } from "../lib/content/site";
 
 export function SiteNavigation({
   active,
+  parent,
 }: {
   active?: ActivePage;
+  parent?: ParentPage;
 }) {
   const [menuOpen, setMenuOpen] = useState(false);
   const railRef = useRef<HTMLDivElement>(null);
@@ -39,7 +41,7 @@ export function SiteNavigation({
       cancelAnimationFrame(anchorFrame);
       delete rail.dataset.enhanced;
     };
-  }, [active]);
+  }, [active, parent?.href]);
 
   useEffect(() => {
     if (!menuOpen) return;
@@ -108,7 +110,7 @@ export function SiteNavigation({
   }, [menuOpen]);
 
   return (
-    <div className="site-rail" data-menu-open={menuOpen ? "true" : "false"} ref={railRef}>
+    <div className="site-rail" data-parent-navigation={parent ? "true" : undefined} data-menu-open={menuOpen ? "true" : "false"} ref={railRef}>
       <div className="rail-header">
         <Link className="wordmark" href="/" aria-label="Theodore Ouyang home">
           <span className="wordmark-lockup">
@@ -116,7 +118,7 @@ export function SiteNavigation({
             <span className="wordmark-name">Theodore Ouyang</span>
           </span>
         </Link>
-        <button
+        {!parent && <button
           aria-controls="site-menu"
           aria-expanded={menuOpen}
           className="menu-toggle"
@@ -135,10 +137,19 @@ export function SiteNavigation({
           type="button"
         >
           {menuOpen ? "Close" : "Menu"}
-        </button>
+        </button>}
       </div>
 
-      <div className="rail-panel" id="site-menu" ref={panelRef}>
+      {parent ? (
+        <nav className="parent-nav" aria-label="Parent navigation">
+          <Link className="parent-link" href={parent.href}>
+            <svg aria-hidden="true" viewBox="0 0 16 16" width="16" height="16" fill="none">
+              <path d="M13 8H3m0 0 4-4M3 8l4 4" stroke="currentColor" strokeWidth="1.25" strokeLinecap="round" strokeLinejoin="round" />
+            </svg>
+            <span>Back to {parent.label}</span>
+          </Link>
+        </nav>
+      ) : <div className="rail-panel" id="site-menu" ref={panelRef}>
         <nav className="primary-nav" aria-label="Primary navigation">
           {navigation.map((item) => (
             <Link
@@ -152,7 +163,7 @@ export function SiteNavigation({
             </Link>
           ))}
         </nav>
-      </div>
+      </div>}
     </div>
   );
 }

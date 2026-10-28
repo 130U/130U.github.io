@@ -241,6 +241,7 @@ button:focus-visible {
 .wordmark:active,
 .menu-toggle:active,
 .primary-nav a:active,
+.parent-link:active,
 .back-link:active {
   color: var(--accent);
 }
@@ -333,6 +334,33 @@ button:focus-visible {
 .primary-nav a.active::before {
   opacity: 1;
   transform: translateY(-50%) scaleY(1);
+}
+
+.parent-nav {
+  margin-top: 33px;
+  font-size: var(--type-interface);
+  line-height: var(--interface-leading);
+}
+
+.parent-link {
+  display: flex;
+  width: fit-content;
+  max-width: 100%;
+  min-height: 44px;
+  align-items: flex-start;
+  gap: 10px;
+  padding-block: 10px;
+  color: var(--ink);
+  transition: color 180ms var(--ease-out);
+}
+
+.parent-link svg {
+  flex: 0 0 16px;
+  margin-top: 2px;
+}
+
+.parent-link span {
+  min-width: 0;
 }
 
 .back-link {
@@ -484,6 +512,7 @@ button:focus-visible {
 @media (hover: hover) and (pointer: fine) {
   .menu-toggle:hover,
   .primary-nav a:hover,
+  .parent-link:hover,
   .back-link:hover,
   .education-note a:hover {
     color: var(--accent);
@@ -563,6 +592,10 @@ button:focus-visible {
     scroll-padding-top: 4.5rem;
   }
 
+  html:has(.site-rail[data-parent-navigation="true"]) {
+    scroll-padding-top: 7.5rem;
+  }
+
   body.menu-open .site-rail {
     position: fixed;
     top: 0;
@@ -599,6 +632,19 @@ button:focus-visible {
 
   .site-rail[data-enhanced="true"] {
     height: 4rem;
+  }
+
+  .site-rail[data-parent-navigation="true"] {
+    height: auto;
+    padding-bottom: 8px;
+  }
+
+  .site-rail[data-parent-navigation="true"] .rail-header {
+    height: 3.5rem;
+  }
+
+  .parent-nav {
+    margin-top: 0;
   }
 
   .rail-header {
@@ -716,6 +762,7 @@ button:focus-visible {
   .wordmark-lockup,
   .menu-toggle,
   .primary-nav a,
+  .parent-link,
   .primary-nav a::before,
   .back-link,
   .rail-panel {

@@ -1,16 +1,18 @@
 import type { ReactNode } from "react";
-import type { ActivePage } from "../lib/content/site";
+import type { ActivePage, ParentPage } from "../lib/content/site";
 import { SiteNavigation } from "./SiteNavigation";
 import { StructuralGrid } from "./StructuralGrid";
 
 export function SiteShell({
   active,
+  parent,
   children,
   frameClassName,
   showSkipLink = true,
   skipHref = "#main-content",
 }: {
   active?: ActivePage;
+  parent?: ParentPage;
   children: ReactNode;
   frameClassName?: string;
   showSkipLink?: boolean;
@@ -27,7 +29,7 @@ export function SiteShell({
         className={frameClassName ? `site-frame ${frameClassName}` : "site-frame"}
       >
         <StructuralGrid />
-        <SiteNavigation active={active} />
+        <SiteNavigation active={active} parent={parent} />
 
         <main className="content-column" id="main-content">
           {children}

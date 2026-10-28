@@ -91,6 +91,24 @@ const DOMAINS = [
   ["Finance and Consulting", "finance", [12, 13, 14, 15, 16]],
   ["STEM Academic Competitions and Training", "stem-academic-competitions-and-training", [17, 18]],
 ];
+const DETAIL_PARENTS = new Map([
+  ["/coursework/", ["Back to Education", "/#education"]],
+  ...CANONICAL_ROUTES.filter((route) => route.startsWith("/education/")).map((route) => [
+    route, ["Back to Selected Research", `/#${route.split("/")[2]}`],
+  ]),
+  ...[...EXPERIENCE_DETAIL_SLUGS.values()].map((slug) => [
+    `/experience/${slug}/`, ["Back to Experience", `/experience/#${slug}`],
+  ]),
+  ...ARTICLES.map(([slug]) => [
+    `${LAW_ROUTE}${slug}/`, ["Back to Experience", `/experience/#${slug}`],
+  ]),
+  ...AI_PROJECT_SLUGS.map((slug) => [
+    `${AI_ROUTE}${slug}/`, ["Back to Experience", `/experience/#${slug}`],
+  ]),
+  ...DOMAINS.map(([, slug]) => [
+    `/past-experience/${slug}/`, ["Back to Experience", `/experience/#${slug}`],
+  ]),
+]);
 const EXPECTED_PUBLIC_ASSETS = [
   "assets/brand/apple-touch-icon.png",
   "assets/brand/favicon-16.png",
@@ -206,9 +224,9 @@ function canonicalUrl(html) {
   return tag ? attribute(tag, "href") : undefined;
 }
 
-function primaryNavigation(html) {
-  const nav = [...html.matchAll(/<nav\b([^>]*)>([\s\S]*?)<\/nav>/giu)].find((match) => attribute(match[1], "aria-label") === "Primary navigation");
-  assert.ok(nav, "Primary navigation is missing");
+function navigationLinks(html, label) {
+  const nav = [...html.matchAll(/<nav\b([^>]*)>([\s\S]*?)<\/nav>/giu)].find((match) => attribute(match[1], "aria-label") === label);
+  assert.ok(nav, `${label} is missing`);
   return [...nav[2].matchAll(/<a\b([^>]*)>([\s\S]*?)<\/a>/giu)].map((match) => [stripMarkup(match[2]), attribute(match[1], "href")]);
 }
 
@@ -362,7 +380,7 @@ test("the architecture viewer preserves its source with a static security policy
   assert.match(published, /<svg\b/iu);
 });
 
-test("every route keeps canonical metadata, CSP, and the same navigation", async () => {
+test("every route keeps canonical metadata, CSP, and navigation appropriate to its page level", async () => {
   const requiredCsp = [
     "default-src 'self'",
     "script-src 'self' 'sha256-",
@@ -378,9 +396,51 @@ test("every route keeps canonical metadata, CSP, and the same navigation", async
     assert.equal(canonicalUrl(html), absolute);
     assert.equal(metaContent(html, "property", "og:url"), absolute);
     assert.equal(metaContent(html, "name", "theme-color"), "#f7f6f5");
-    assert.deepEqual(primaryNavigation(html), NAVIGATION);
+    const parent = DETAIL_PARENTS.get(route);
+    assert.deepEqual(navigationLinks(html, parent ? "Parent navigation" : "Primary navigation"), parent ? [parent] : NAVIGATION);
     const csp = metaContent(html, "http-equiv", "Content-Security-Policy") ?? "";
     for (const directive of requiredCsp) assert.ok(csp.includes(directive), `${route} lost ${directive}`);
+  }
+});
+
+test("all 27 detail pages keep their wordmark and a direct parent link outside the mobile menu", async () => {
+  assert.equal(DETAIL_PARENTS.size, 27);
+  const targetPages = new Map();
+  for (const [route, expectedParent] of DETAIL_PARENTS) {
+    const html = await routeHtml(route);
+    const parentNavs = elementsWithClass(html, "nav", "parent-nav");
+    assert.equal(parentNavs.length, 1, `${route}: one parent navigation is required.`);
+    assert.equal(attribute(parentNavs[0][1], "aria-label"), "Parent navigation");
+    assert.deepEqual(navigationLinks(html, "Parent navigation"), [expectedParent]);
+    assert.equal(elementsWithClass(html, "nav", "primary-nav").length, 0, `${route}: details replace the primary navigation.`);
+    assert.equal(elementsWithClass(html, "button", "menu-toggle").length, 0, `${route}: returning to the parent must not require opening a menu.`);
+    assert.ok(!openingTags(html, "div").some((tag) => attribute(tag, "id") === "site-menu"));
+    const parentLinks = elementsWithClass(parentNavs[0][2], "a", "parent-link");
+    assert.equal(parentLinks.length, 1);
+    assert.doesNotMatch(parentLinks[0][1], /\bonclick\s*=|role="button"/iu, "Parent navigation must remain a native link.");
+    const arrows = openingTags(parentLinks[0][2], "svg");
+    assert.equal(arrows.length, 1);
+    assert.equal(attribute(arrows[0], "aria-hidden"), "true", "The arrow is decorative; the parent link has a text name.");
+    const wordmarks = elementsWithClass(html, "a", "wordmark");
+    assert.equal(wordmarks.length, 1);
+    assert.equal(attribute(wordmarks[0][1], "href"), "/");
+    assert.equal(attribute(wordmarks[0][1], "aria-label"), "Theodore Ouyang home");
+    assert.equal(stripMarkup(wordmarks[0][2]), "Theodore Ouyang");
+    assert.ok(html.indexOf(parentNavs[0][0]) < html.indexOf("<main"), `${route}: parent navigation belongs to the persistent rail.`);
+    const main = html.match(/<main\b[^>]*>([\s\S]*?)<\/main>/u)?.[1] ?? "";
+    assert.equal(elementsWithClass(main.slice(0, main.indexOf("<h1")), "a", "back-link").length, 0, `${route}: the page introduction must not repeat the rail's return action.`);
+    for (const header of main.matchAll(/<header\b[^>]*>([\s\S]*?)<\/header>/gu)) {
+      assert.equal(elementsWithClass(header[1], "a", "back-link").length, 0, `${route}: the reading header must not repeat the rail's return action.`);
+    }
+    const target = new URL(expectedParent[1], SITE_ORIGIN);
+    if (!targetPages.has(target.pathname)) targetPages.set(target.pathname, await routeHtml(target.pathname));
+    assert.ok(target.hash, `${route}: return to the originating section or entry.`);
+    assert.ok(targetPages.get(target.pathname).includes(`id="${decodeURIComponent(target.hash.slice(1))}"`), `${route}: the parent link's anchor must exist in the static export.`);
+  }
+  for (const route of ROUTES.filter((candidate) => !DETAIL_PARENTS.has(candidate))) {
+    const html = await routeHtml(route);
+    assert.deepEqual(navigationLinks(html, "Primary navigation"), NAVIGATION);
+    assert.equal(elementsWithClass(html, "nav", "parent-nav").length, 0, `${route}: top-level pages retain their primary navigation.`);
   }
 });
 
@@ -475,14 +535,13 @@ test("About research titles link to complete papers with their source links pres
     const article = await routeHtml(`/education/${slug}/`);
     assert.equal(openingTags(article, "h1").length, 1);
     const articleHeader = article.match(/<article\b[^>]*>\s*<header\b[^>]*>([\s\S]*?)<\/header>/u)?.[1] ?? "";
-    assert.equal(stripMarkup(articleHeader), `← Selected Research ${title} GitHub Full Manuscript`, "Selected Research headers contain only the return link, title, and source links.");
+    assert.equal(stripMarkup(articleHeader), `${title} GitHub Full Manuscript`, "Selected Research headers contain the title and source links; return navigation belongs in the rail.");
     assert.equal(openingTags(article, "table").length, tables);
     assert.deepEqual(openingTags(article, "h2").map((tag) => attribute(tag, "data-source-number")).filter(Boolean), Array.from({ length: sections }, (_, index) => String(index + 1)), `${slug}: every numbered main chapter is rendered once and in order.`);
     assert.match(article, /aria-label="Article contents"/u);
     assert.match(article, /This page includes the complete (?:main text and references|abstract, five main sections)/u);
     assert.match(article, new RegExp(`href="/#${slug}"`, "u"));
-    const current = openingTags(article, "a").find((tag) => attribute(tag, "aria-current") === "page");
-    assert.equal(attribute(current ?? "", "href"), "/");
+    assert.deepEqual(navigationLinks(article, "Parent navigation"), [["Back to Selected Research", `/#${slug}`]]);
     const githubLink = openingTags(articleHeader, "a").find((tag) => attribute(tag, "href") === `https://github.com/130U/${repository}`);
     assert.ok(githubLink, `${slug}: the article header links to its actual source repository.`);
   }
@@ -559,11 +618,9 @@ test("all eighteen approved Experience entries use institution titles and real l
     assertExperienceDetails(detailPage, entry);
     assert.ok(detailPage.indexOf("data-experience-metadata") < detailPage.indexOf("data-experience-contributions"));
     const returns = openingTags(detailPage, "a").filter((tag) => attribute(tag, "href") === `/experience/#${presentation.slug}`);
-    assert.equal(returns.length, 2, `Entry ${entry.id} needs header and footer links to its listing anchor`);
+    assert.equal(returns.length, 2, `Entry ${entry.id} needs rail and footer links to its listing anchor`);
     assert.ok(openingTags(html, "article").some((tag) => attribute(tag, "id") === presentation.slug));
-    const current = openingTags(detailPage, "a").filter((tag) => attribute(tag, "aria-current") === "page");
-    assert.equal(current.length, 1);
-    assert.equal(attribute(current[0], "href"), "/experience/");
+    assert.deepEqual(navigationLinks(detailPage, "Parent navigation"), [["Back to Experience", `/experience/#${presentation.slug}`]]);
   }
   assert.equal(new Set(destinations).size, 18);
   assert.deepEqual(destinations.filter((route) => route.startsWith("/experience/")), EXPERIENCE_DETAIL_ROUTES);
@@ -613,9 +670,7 @@ test("legacy domain routes preserve approved sections, canonicalize to Experienc
     assert.ok(openingTags(html, "a").some((tag) => attribute(tag, "href") === `/experience/#${slug}`));
     assert.ok(openingTags(main, "section").some((tag) => attribute(tag, "id") === slug));
     for (const entry of entries) assert.equal(entry.html, mainEntries.find(({ id }) => id === entry.id).html);
-    const current = openingTags(html, "a").filter((tag) => attribute(tag, "aria-current") === "page");
-    assert.equal(current.length, 1);
-    assert.equal(attribute(current[0], "href"), "/experience/");
+    assert.deepEqual(navigationLinks(html, "Parent navigation"), [["Back to Experience", `/experience/#${slug}`]]);
   }
 });
 
@@ -772,9 +827,7 @@ test("About preserves both degrees and the advisor record while linking to all 4
   const html = await routeHtml("/coursework/");
   assert.equal(stripMarkup(html.match(/<h1\b[^>]*>([\s\S]*?)<\/h1>/u)?.[1] ?? ""), "Selected Coursework");
   assert.equal(canonicalUrl(html), `${SITE_ORIGIN}/coursework/`);
-  assert.ok(openingTags(html, "a").some((tag) => attribute(tag, "href") === "/#education"), "Coursework must return to Education.");
-  const current = openingTags(html, "a").filter((tag) => attribute(tag, "aria-current") === "page");
-  assert.deepEqual(current.map((tag) => attribute(tag, "href")), ["/"]);
+  assert.deepEqual(navigationLinks(html, "Parent navigation"), [["Back to Education", "/#education"]]);
   const categories = ["mathematics", "ai-and-data-science", "finance-and-economics", "law-ethics-and-global-affairs"];
   const directory = [...html.matchAll(/<nav\b([^>]*)>([\s\S]*?)<\/nav>/giu)]
     .find((match) => attribute(match[1], "aria-label") === "Coursework sections");

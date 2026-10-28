@@ -50,14 +50,14 @@
       }
     },
     "/coursework/": {
-      "textSha256": "c28de5e55ed98ef8ca609531b9a9d17b5761118df975d9a8d6ee99d76c434331",
-      "characterCount": 1714,
-      "wordCount": 208,
-      "preview": "Skip to main content Theodore Ouyang About Experience ← Education Selected Coursework Mathematics AI and Data Science Finance and Economics Law, Ethics, and Glo",
+      "textSha256": "69bb10d6764c059706cf48815017a855902383d6acdf570b3c7dbebab4ab5a1a",
+      "characterCount": 1703,
+      "wordCount": 207,
+      "preview": "Skip to main content Theodore Ouyang Back to Education Selected Coursework Mathematics AI and Data Science Finance and Economics Law, Ethics, and Global Affairs",
       "altTexts": [],
       "ariaLabels": [
         "Theodore Ouyang home",
-        "Primary navigation",
+        "Parent navigation",
         "Coursework sections"
       ],
       "metadata": {
@@ -72,14 +72,14 @@
       }
     },
     "/education/certified-valuation-arithmetic-asian-options/": {
-      "textSha256": "c5cc768e016a835940d13b0500b236d6056920ec16d7ed6edf9ebc045a90e8d3",
-      "characterCount": 45446,
+      "textSha256": "0bb33060179445c4a371b9282f9c074b7334b674e30029f1f108cc07e91da93b",
+      "characterCount": 45437,
       "wordCount": 6465,
-      "preview": "Skip to main content Theodore Ouyang About Experience Selected Research Certified Valuation of Arithmetic Asian Options GitHub Full Manuscript Abstract We devel",
+      "preview": "Skip to main content Theodore Ouyang Back to Selected Research Certified Valuation of Arithmetic Asian Options GitHub Full Manuscript Abstract We develop finite",
       "altTexts": [],
       "ariaLabels": [
         "Theodore Ouyang home",
-        "Primary navigation",
+        "Parent navigation",
         "Scrollable mathematical expression",
         "Scrollable mathematical expression",
         "Mathematical equation",
@@ -250,14 +250,14 @@
       "formulaCount": 349
     },
     "/education/certified-rough-heston-valuation/": {
-      "textSha256": "f75c730aa10acc227bd432f4bd04a96c9711e6487d22b8b7f172df8485b370dc",
-      "characterCount": 56894,
+      "textSha256": "9f8ea6b73a2061d8f7eeb2c8718fb01d7a756d721aeb960c696f9239a205973c",
+      "characterCount": 56885,
       "wordCount": 8053,
-      "preview": "Skip to main content Theodore Ouyang About Experience Selected Research Certified Joint Pricing Errors in Rough Heston GitHub Full Manuscript Abstract We give d",
+      "preview": "Skip to main content Theodore Ouyang Back to Selected Research Certified Joint Pricing Errors in Rough Heston GitHub Full Manuscript Abstract We give determinis",
       "altTexts": [],
       "ariaLabels": [
         "Theodore Ouyang home",
-        "Primary navigation",
+        "Parent navigation",
         "Article contents",
         "Mathematical equation",
         "Research data table",
@@ -401,10 +401,10 @@
       "formulaCount": 262
     },
     "/education/critical-dependence-stress-for-portfolio-diversification/": {
-      "textSha256": "13dc7b6c44ec6a0e47abf88d830562158da138b1b9417ed8f6e2110a86616372",
-      "characterCount": 74633,
+      "textSha256": "dd861a9e883cb6608de1bb7e4fce303e59fa5c80683e2ad78b03fa31e0f64717",
+      "characterCount": 74624,
       "wordCount": 11210,
-      "preview": "Skip to main content Theodore Ouyang About Experience Selected Research Critical Dependence Stress for Portfolio Diversification GitHub Full Manuscript Abstract",
+      "preview": "Skip to main content Theodore Ouyang Back to Selected Research Critical Dependence Stress for Portfolio Diversification GitHub Full Manuscript Abstract How much",
       "altTexts": [
         "Figure 1",
         "Figure 2",
@@ -413,7 +413,7 @@
       ],
       "ariaLabels": [
         "Theodore Ouyang home",
-        "Primary navigation",
+        "Parent navigation",
         "Article contents",
         "Scrollable mathematical expression",
         "Scrollable mathematical expression",
@@ -806,14 +806,14 @@
       }
     },
     "/experience/jiritsu-network/": {
-      "textSha256": "f99cf11a8e927ffc3f75c97fb50a38bd9e782ba225ef060964add6e05fda8ed8",
-      "characterCount": 3277,
+      "textSha256": "f1d3a2397b4887e6ff2154c1d9a69034c27d30e5f636d2661f0a522b8f5e1cd7",
+      "characterCount": 3268,
       "wordCount": 409,
-      "preview": "Skip to main content Theodore Ouyang About Experience Experience Jiritsu Network: Asset-Verification Partnerships and Issuer Ranking Position Business Developme",
+      "preview": "Skip to main content Theodore Ouyang Back to Experience Jiritsu Network: Asset-Verification Partnerships and Issuer Ranking Position Business Development and Bu",
       "altTexts": [],
       "ariaLabels": [
         "Theodore Ouyang home",
-        "Primary navigation"
+        "Parent navigation"
       ],
       "metadata": {
         "title": "Jiritsu Network: Asset-Verification Partnerships and Issuer Ranking | Theodore Ouyang",
@@ -827,14 +827,14 @@
       }
     },
     "/experience/euromonitor-international/": {
-      "textSha256": "d343611846b7d244dc23dfb869dbc49ee0f055a6b249f6776a6b512c66fc4d5d",
-      "characterCount": 2298,
+      "textSha256": "6f93928cb9c6de06848d8b47635fa969c1007396ddb138bb32ccc6304e63dfb8",
+      "characterCount": 2289,
       "wordCount": 286,
-      "preview": "Skip to main content Theodore Ouyang About Experience Experience Euromonitor International: China Market Entry for a Premium European Appliance Brand Position C",
+      "preview": "Skip to main content Theodore Ouyang Back to Experience Euromonitor International: China Market Entry for a Premium European Appliance Brand Position Consulting",
       "altTexts": [],
       "ariaLabels": [
         "Theodore Ouyang home",
-        "Primary navigation"
+        "Parent navigation"
       ],
       "metadata": {
         "title": "Euromonitor International: China Market Entry for a Premium European Appliance Brand | Theodore Ouyang",
@@ -848,14 +848,14 @@
       }
     },
     "/experience/china-construction-bank/": {
-      "textSha256": "3ddc96a0f400d534be38d8fa00e6197eaaea1c766eb579fd3f8a73f016896871",
-      "characterCount": 1610,
+      "textSha256": "36164b4644c89c8dc147735bc15cc92ba92fa5856b8aa1567aae67def7b1dda1",
+      "characterCount": 1601,
       "wordCount": 208,
-      "preview": "Skip to main content Theodore Ouyang About Experience Experience China Construction Bank: PCA-Based Sustainability Analysis and Green-Credit Screening Position ",
+      "preview": "Skip to main content Theodore Ouyang Back to Experience China Construction Bank: PCA-Based Sustainability Analysis and Green-Credit Screening Position Fintech I",
       "altTexts": [],
       "ariaLabels": [
         "Theodore Ouyang home",
-        "Primary navigation"
+        "Parent navigation"
       ],
       "metadata": {
         "title": "China Construction Bank: PCA-Based Sustainability Analysis and Green-Credit Screening | Theodore Ouyang",
@@ -869,14 +869,14 @@
       }
     },
     "/experience/jones-lang-lasalle/": {
-      "textSha256": "d5370cbcf91302930b46075c4ded437f32e2537f7fafc5699b50b26657e67644",
-      "characterCount": 2299,
+      "textSha256": "511ad864468edf10c42b7a398c91468aa54a976766cc9788496a82220f7edd55",
+      "characterCount": 2290,
       "wordCount": 285,
-      "preview": "Skip to main content Theodore Ouyang About Experience Experience Jones Lang LaSalle Capital Markets Team: Office Investment Underwriting and ESG Due Diligence P",
+      "preview": "Skip to main content Theodore Ouyang Back to Experience Jones Lang LaSalle Capital Markets Team: Office Investment Underwriting and ESG Due Diligence Position S",
       "altTexts": [],
       "ariaLabels": [
         "Theodore Ouyang home",
-        "Primary navigation"
+        "Parent navigation"
       ],
       "metadata": {
         "title": "Jones Lang LaSalle Capital Markets Team: Office Investment Underwriting and ESG Due Diligence | Theodore Ouyang",
@@ -890,14 +890,14 @@
       }
     },
     "/experience/hubble-technology-investment/": {
-      "textSha256": "3b26a4a5346ea321b2b4523e03becfef1d3799711b913cffd5de841b4011ab96",
-      "characterCount": 1761,
+      "textSha256": "a03bb38b5e1df41ec022fd6cb24743ac395c3c9486fb0cdb48e2fb97c406833d",
+      "characterCount": 1752,
       "wordCount": 221,
-      "preview": "Skip to main content Theodore Ouyang About Experience Experience Hubble Network: Bluetooth Satellite Commercialization and Market Selection Position Student Con",
+      "preview": "Skip to main content Theodore Ouyang Back to Experience Hubble Network: Bluetooth Satellite Commercialization and Market Selection Position Student Consultant a",
       "altTexts": [],
       "ariaLabels": [
         "Theodore Ouyang home",
-        "Primary navigation"
+        "Parent navigation"
       ],
       "metadata": {
         "title": "Hubble Network: Bluetooth Satellite Commercialization and Market Selection | Theodore Ouyang",
@@ -911,14 +911,14 @@
       }
     },
     "/experience/saif-partners/": {
-      "textSha256": "fb15e642292389a7159d4386587ca31e1c0c913ef4c411bac0a2bbb9a941571c",
-      "characterCount": 1842,
+      "textSha256": "4e6a6f514d5222341b98485effa64f1962009617f2b330a5ae7cdc74929481f5",
+      "characterCount": 1833,
       "wordCount": 232,
-      "preview": "Skip to main content Theodore Ouyang About Experience Experience SAIF Partners: Dental Investment Research and Governance Due Diligence Position Summer Intern L",
+      "preview": "Skip to main content Theodore Ouyang Back to Experience SAIF Partners: Dental Investment Research and Governance Due Diligence Position Summer Intern Location S",
       "altTexts": [],
       "ariaLabels": [
         "Theodore Ouyang home",
-        "Primary navigation"
+        "Parent navigation"
       ],
       "metadata": {
         "title": "SAIF Partners: Dental Investment Research and Governance Due Diligence | Theodore Ouyang",
@@ -932,14 +932,14 @@
       }
     },
     "/experience/citic-securities/": {
-      "textSha256": "8db056ca97e4a8e73627a2463749c511d1dd292c6bc60ae4e02e7c8c915b1b36",
-      "characterCount": 559,
+      "textSha256": "daceb77e230056fd19897d7a764b67ea0365f1f836c1e12491bed4ec6ca3e4b3",
+      "characterCount": 550,
       "wordCount": 71,
-      "preview": "Skip to main content Theodore Ouyang About Experience Experience CITIC Securities: Agriculture Equity Research and Valuation Position Equity Research Intern Loc",
+      "preview": "Skip to main content Theodore Ouyang Back to Experience CITIC Securities: Agriculture Equity Research and Valuation Position Equity Research Intern Location Bei",
       "altTexts": [],
       "ariaLabels": [
         "Theodore Ouyang home",
-        "Primary navigation"
+        "Parent navigation"
       ],
       "metadata": {
         "title": "CITIC Securities: Agriculture Equity Research and Valuation | Theodore Ouyang",
@@ -953,14 +953,14 @@
       }
     },
     "/experience/ey-parthenon/": {
-      "textSha256": "9c240b5443591f413932d92dcabafd5e700765bb753d91d59067233b052dbd14",
-      "characterCount": 458,
+      "textSha256": "b4371503ade5adc649363342b4a1e00e43b17a9eb7ed2571605ee02d5757bcd2",
+      "characterCount": 449,
       "wordCount": 63,
-      "preview": "Skip to main content Theodore Ouyang About Experience Experience EY-Parthenon: Business-Line Restructuring for Digital Transformation Position Summer Intern Loc",
+      "preview": "Skip to main content Theodore Ouyang Back to Experience EY-Parthenon: Business-Line Restructuring for Digital Transformation Position Summer Intern Location Bei",
       "altTexts": [],
       "ariaLabels": [
         "Theodore Ouyang home",
-        "Primary navigation"
+        "Parent navigation"
       ],
       "metadata": {
         "title": "EY-Parthenon: Business-Line Restructuring for Digital Transformation | Theodore Ouyang",
@@ -974,14 +974,14 @@
       }
     },
     "/experience/independent-stem-olympiad-training/": {
-      "textSha256": "02b572c39f79627d4a54c446f6426a915c8fb24946cfdf5d437bd442965ba49d",
-      "characterCount": 746,
+      "textSha256": "48a02f597d009e946d416bce0c0d6b9357673b4ad40f0ed8b65e154574785898",
+      "characterCount": 737,
       "wordCount": 93,
-      "preview": "Skip to main content Theodore Ouyang About Experience Experience Independent STEM Olympiad Training Practice: Advanced Physics Olympiad Instruction Position IPh",
+      "preview": "Skip to main content Theodore Ouyang Back to Experience Independent STEM Olympiad Training Practice: Advanced Physics Olympiad Instruction Position IPhO-Level P",
       "altTexts": [],
       "ariaLabels": [
         "Theodore Ouyang home",
-        "Primary navigation"
+        "Parent navigation"
       ],
       "metadata": {
         "title": "Independent STEM Olympiad Training Practice: Advanced Physics Olympiad Instruction | Theodore Ouyang",
@@ -995,14 +995,14 @@
       }
     },
     "/experience/stem-olympiad-competitions/": {
-      "textSha256": "48fc5b6bbd5c3429a188f8fae12cad54cf1e4839ae4dd1857dd5dd656b3cf4d0",
-      "characterCount": 1575,
+      "textSha256": "3a2ad4bcb3a66097e9e5f8860edcb73dc3a218e49714adc771c202dc487ce840",
+      "characterCount": 1566,
       "wordCount": 205,
-      "preview": "Skip to main content Theodore Ouyang About Experience Experience The High School Attached to Hunan Normal University: Advanced Olympiad Training, Awards, and Pe",
+      "preview": "Skip to main content Theodore Ouyang Back to Experience The High School Attached to Hunan Normal University: Advanced Olympiad Training, Awards, and Peer Mentor",
       "altTexts": [],
       "ariaLabels": [
         "Theodore Ouyang home",
-        "Primary navigation"
+        "Parent navigation"
       ],
       "metadata": {
         "title": "The High School Attached to Hunan Normal University: Advanced Olympiad Training, Awards, and Peer Mentoring | Theodore Ouyang",
@@ -1056,14 +1056,14 @@
       }
     },
     "/past-experience/artificial-intelligence/": {
-      "textSha256": "76f26ad93d7038ddb3ee5a13033114d704a0c01a98c22a143eebeed868aff4b0",
-      "characterCount": 6841,
+      "textSha256": "852ba3c17d8940271c6a24b7babdea058c04edad795e1e27c05db7637eb7e05d",
+      "characterCount": 6832,
       "wordCount": 873,
-      "preview": "Skip to main content Theodore Ouyang About Experience Experience AI Research and Engineering Confidentiality & Disclosure Note The following four research and e",
+      "preview": "Skip to main content Theodore Ouyang Back to Experience AI Research and Engineering Confidentiality & Disclosure Note The following four research and engineerin",
       "altTexts": [],
       "ariaLabels": [
         "Theodore Ouyang home",
-        "Primary navigation",
+        "Parent navigation",
         "Read more about Duke University × Top-Tier Foundation Model Company: Scalable Expert Quality Control and Adaptive Review",
         "Read more about Duke University × Top-Tier Foundation Model Company: Financial Task Design and Synthetic Data Engineering",
         "Read more about Duke University × Top-Tier AI Research Lab: Scientific Reasoning Evaluation and Task Design",
@@ -1081,14 +1081,14 @@
       }
     },
     "/past-experience/artificial-intelligence/statistical-inference-and-resource-allocation-in-expert-data-production/": {
-      "textSha256": "3a76f5576749a56e62c90909b67d07dcbd214b011a1efaf0f187c4c813a29b4b",
-      "characterCount": 23252,
+      "textSha256": "2bb316f5bdc5ba50e6a71b446d464b4c94ee51bbf5b82f0dab98938bdf8527b4",
+      "characterCount": 23243,
       "wordCount": 3139,
-      "preview": "Skip to main content Theodore Ouyang About Experience Experience Duke University × Top-Tier Foundation Model Company: Scalable Expert Quality Control and Adapti",
+      "preview": "Skip to main content Theodore Ouyang Back to Experience Duke University × Top-Tier Foundation Model Company: Scalable Expert Quality Control and Adaptive Review",
       "altTexts": [],
       "ariaLabels": [
         "Theodore Ouyang home",
-        "Primary navigation",
+        "Parent navigation",
         "Scrollable mathematical expression",
         "Scrollable mathematical expression",
         "Article contents",
@@ -1143,14 +1143,14 @@
       "formulaCount": 147
     },
     "/past-experience/artificial-intelligence/task-validity-in-financial-synthetic-data/": {
-      "textSha256": "d504bc09957ccce8e4cbf8f646e230f8734fda986eeaff9e7f1ced45462769c6",
-      "characterCount": 21697,
+      "textSha256": "b20c88c3055e2c1d9bc813104537c7346538bd70b65175a9f24ed8181b646563",
+      "characterCount": 21688,
       "wordCount": 2833,
-      "preview": "Skip to main content Theodore Ouyang About Experience Experience Duke University × Top-Tier Foundation Model Company: Financial Task Design and Synthetic Data E",
+      "preview": "Skip to main content Theodore Ouyang Back to Experience Duke University × Top-Tier Foundation Model Company: Financial Task Design and Synthetic Data Engineerin",
       "altTexts": [],
       "ariaLabels": [
         "Theodore Ouyang home",
-        "Primary navigation",
+        "Parent navigation",
         "Scrollable mathematical expression",
         "Article contents",
         "Scrollable mathematical expression",
@@ -1194,14 +1194,14 @@
       "formulaCount": 107
     },
     "/past-experience/artificial-intelligence/verification-and-supervision-in-scientific-reasoning-tasks/": {
-      "textSha256": "fcdc4cd4810832581d66e7288f32488fff48af7b6a96d1cbd169723845cb9ea8",
-      "characterCount": 20003,
+      "textSha256": "e218c7a46a07bc582091365360356c4c7a45fa7a3909540dda249dad363e5f99",
+      "characterCount": 19994,
       "wordCount": 2731,
-      "preview": "Skip to main content Theodore Ouyang About Experience Experience Duke University × Top-Tier AI Research Lab: Scientific Reasoning Evaluation and Task Design Pos",
+      "preview": "Skip to main content Theodore Ouyang Back to Experience Duke University × Top-Tier AI Research Lab: Scientific Reasoning Evaluation and Task Design Position Res",
       "altTexts": [],
       "ariaLabels": [
         "Theodore Ouyang home",
-        "Primary navigation",
+        "Parent navigation",
         "Scrollable mathematical expression",
         "Scrollable mathematical expression",
         "Article contents",
@@ -1258,14 +1258,14 @@
       "formulaCount": 131
     },
     "/past-experience/artificial-intelligence/evidence-uncertainty-and-decision-guarantees-in-investment-research/": {
-      "textSha256": "078b57e8f2452846d88bd77b0c1844cd449fbc909b74bd1c8d25f154808f75e8",
-      "characterCount": 17540,
+      "textSha256": "9a9c57f0f5a18c82746ea0324d300e8aea6c96dd70db5d1525900ae8e11dd02f",
+      "characterCount": 17531,
       "wordCount": 2386,
-      "preview": "Skip to main content Theodore Ouyang About Experience Experience Duke University × Leading Global Alternative Asset Manager: AI-Driven Investment Research and E",
+      "preview": "Skip to main content Theodore Ouyang Back to Experience Duke University × Leading Global Alternative Asset Manager: AI-Driven Investment Research and Explainabl",
       "altTexts": [],
       "ariaLabels": [
         "Theodore Ouyang home",
-        "Primary navigation",
+        "Parent navigation",
         "Scrollable mathematical expression",
         "Article contents",
         "Scrollable mathematical expression",
@@ -1320,14 +1320,14 @@
       "formulaCount": 139
     },
     "/past-experience/data-science/": {
-      "textSha256": "30affc917e9a491f047c709a79d18c17be8468fc13815c84a4b3113938ccd7c4",
-      "characterCount": 1196,
+      "textSha256": "4c28243e2463e440a5821cbeb48f0044ad1a042b262bc5e841ebea2f585cf666",
+      "characterCount": 1187,
       "wordCount": 157,
-      "preview": "Skip to main content Theodore Ouyang About Experience Experience Data Science Jiritsu Network Owned business development for Jiritsu's asset-verification and pr",
+      "preview": "Skip to main content Theodore Ouyang Back to Experience Data Science Jiritsu Network Owned business development for Jiritsu's asset-verification and privacy-pre",
       "altTexts": [],
       "ariaLabels": [
         "Theodore Ouyang home",
-        "Primary navigation",
+        "Parent navigation",
         "Read more about Jiritsu Network: Asset-Verification Partnerships and Issuer Ranking",
         "Read more about Euromonitor International: China Market Entry for a Premium European Appliance Brand",
         "Read more about China Construction Bank: PCA-Based Sustainability Analysis and Green-Credit Screening"
@@ -1344,14 +1344,14 @@
       }
     },
     "/past-experience/legal-research-and-policy-analysis/": {
-      "textSha256": "e60689e4a0d97139bef712f468d1e34fc677b55b7810a2432f7c87fbccdef3b8",
-      "characterCount": 2723,
+      "textSha256": "cf695f53988279199908126c97d28a2e955e61cf45c5f8f38484ff5e3a38c79e",
+      "characterCount": 2714,
       "wordCount": 346,
-      "preview": "Skip to main content Theodore Ouyang About Experience Experience Legal Research and Policy Analysis Duke Law School: Space Law and Autonomous Systems Research D",
+      "preview": "Skip to main content Theodore Ouyang Back to Experience Legal Research and Policy Analysis Duke Law School: Space Law and Autonomous Systems Research Developed ",
       "altTexts": [],
       "ariaLabels": [
         "Theodore Ouyang home",
-        "Primary navigation",
+        "Parent navigation",
         "Read more about Duke Law School: Autonomous Authority in Space — Risk Tradeoffs and the Law of Delegation",
         "Read more about Duke Law School: Small States and the Governance of Strategic Space Dependence",
         "Read more about Duke Law School: Who May Choose the Lesser Risk — Solar Geoengineering and the Legal Duties of Comparison and Continuity",
@@ -1369,14 +1369,14 @@
       }
     },
     "/past-experience/finance/": {
-      "textSha256": "30e8b0973613673c41c96f55f01fa9ad97bc98bf5f2dfd7c004be347541e8d27",
-      "characterCount": 1561,
+      "textSha256": "2fb0fa2cc1489d8c7a9c2960e6b5e831cdd33e4acbe1fe7cfac26360e6390e8f",
+      "characterCount": 1552,
       "wordCount": 199,
-      "preview": "Skip to main content Theodore Ouyang About Experience Experience Finance and Consulting Jones Lang LaSalle Capital Markets Team Served as the project team's ESG",
+      "preview": "Skip to main content Theodore Ouyang Back to Experience Finance and Consulting Jones Lang LaSalle Capital Markets Team Served as the project team's ESG lead on ",
       "altTexts": [],
       "ariaLabels": [
         "Theodore Ouyang home",
-        "Primary navigation",
+        "Parent navigation",
         "Read more about Jones Lang LaSalle Capital Markets Team: Office Investment Underwriting and ESG Due Diligence",
         "Read more about Hubble Network: Bluetooth Satellite Commercialization and Market Selection",
         "Read more about SAIF Partners: Dental Investment Research and Governance Due Diligence",
@@ -1395,14 +1395,14 @@
       }
     },
     "/past-experience/stem-academic-competitions-and-training/": {
-      "textSha256": "c0e572aaf365a02560e2e89c47d4bd58be69d655318571791bdbf5462652cd39",
-      "characterCount": 642,
+      "textSha256": "6d84e5a156f15f08ffedf0488b840b1240b579e3c30675a9fb48405441c8c3b3",
+      "characterCount": 633,
       "wordCount": 85,
-      "preview": "Skip to main content Theodore Ouyang About Experience Experience STEM Academic Competitions and Training Independent STEM Olympiad Training Practice Independent",
+      "preview": "Skip to main content Theodore Ouyang Back to Experience STEM Academic Competitions and Training Independent STEM Olympiad Training Practice Independently coache",
       "altTexts": [],
       "ariaLabels": [
         "Theodore Ouyang home",
-        "Primary navigation",
+        "Parent navigation",
         "Read more about Independent STEM Olympiad Training Practice: Advanced Physics Olympiad Instruction",
         "Read more about The High School Attached to Hunan Normal University: Advanced Olympiad Training, Awards, and Peer Mentoring"
       ],
@@ -1418,14 +1418,14 @@
       }
     },
     "/past-experience/legal-research-and-policy-analysis/autonomous-authority-in-space/": {
-      "textSha256": "1496b1f3c5aa218da9b981c7bbe73cc3fd12e8338405400a306b51574a7c8d27",
-      "characterCount": 65609,
+      "textSha256": "1eb520ff23e97049240f444816a14182c312baabb552132607b4527d91e97180",
+      "characterCount": 65600,
       "wordCount": 9193,
-      "preview": "Skip to main content Theodore Ouyang About Experience Experience Duke Law School: Autonomous Authority in Space — Risk Tradeoffs and the Law of Delegation Posit",
+      "preview": "Skip to main content Theodore Ouyang Back to Experience Duke Law School: Autonomous Authority in Space — Risk Tradeoffs and the Law of Delegation Position Autho",
       "altTexts": [],
       "ariaLabels": [
         "Theodore Ouyang home",
-        "Primary navigation",
+        "Parent navigation",
         "Article contents",
         "Author note",
         "Footnote 1",
@@ -1502,14 +1502,14 @@
       }
     },
     "/past-experience/legal-research-and-policy-analysis/small-states-and-strategic-space-dependence/": {
-      "textSha256": "3950c945d4b5fdcfaa990d250408bdc1fe519b7b8b0113d2b7d2a9e0bde08a02",
-      "characterCount": 49677,
+      "textSha256": "7967f3015ce3d150ee5aea3aa6b1c23f0e9569804708e86047f8fcdaa0461ad9",
+      "characterCount": 49668,
       "wordCount": 6796,
-      "preview": "Skip to main content Theodore Ouyang About Experience Experience Duke Law School: Small States and the Governance of Strategic Space Dependence Position Author ",
+      "preview": "Skip to main content Theodore Ouyang Back to Experience Duke Law School: Small States and the Governance of Strategic Space Dependence Position Author (Letao Ou",
       "altTexts": [],
       "ariaLabels": [
         "Theodore Ouyang home",
-        "Primary navigation",
+        "Parent navigation",
         "Article contents",
         "Author note",
         "Footnote 1",
@@ -1590,14 +1590,14 @@
       }
     },
     "/past-experience/legal-research-and-policy-analysis/solar-geoengineering-comparison-and-continuity/": {
-      "textSha256": "7c4d0b1347f8ff2e88cd6eaf6add992a528654a4152cbaf5cf4b0c32a05ce112",
-      "characterCount": 47439,
+      "textSha256": "1fe0d57b976ee1b32b9005c2545139bb640ad5627c5b8810495f0e0b4c9505f7",
+      "characterCount": 47430,
       "wordCount": 6599,
-      "preview": "Skip to main content Theodore Ouyang About Experience Experience Duke Law School: Who May Choose the Lesser Risk — Solar Geoengineering and the Legal Duties of ",
+      "preview": "Skip to main content Theodore Ouyang Back to Experience Duke Law School: Who May Choose the Lesser Risk — Solar Geoengineering and the Legal Duties of Compariso",
       "altTexts": [],
       "ariaLabels": [
         "Theodore Ouyang home",
-        "Primary navigation",
+        "Parent navigation",
         "Article contents",
         "Author note",
         "Footnote 1",
@@ -1674,14 +1674,14 @@
       }
     },
     "/past-experience/legal-research-and-policy-analysis/mangrove-restoration-and-compensatory-mitigation/": {
-      "textSha256": "3065bf4ab6d152eef2837b599c5bc10679954f4d9837d843905828ae470c553b",
-      "characterCount": 61732,
+      "textSha256": "60a4d6e87cb56d4e2aa2392e9b76fdb63db365b427ac2a19dfbe276ed78eeba6",
+      "characterCount": 61723,
       "wordCount": 8615,
-      "preview": "Skip to main content Theodore Ouyang About Experience Experience Duke Law School: Mangrove Restoration and the Limits of Compensatory Mitigation — Lessons from ",
+      "preview": "Skip to main content Theodore Ouyang Back to Experience Duke Law School: Mangrove Restoration and the Limits of Compensatory Mitigation — Lessons from Florida f",
       "altTexts": [],
       "ariaLabels": [
         "Theodore Ouyang home",
-        "Primary navigation",
+        "Parent navigation",
         "Article contents",
         "Author note",
         "Footnote 1",

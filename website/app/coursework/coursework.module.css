@@ -11,15 +11,6 @@
   margin-bottom: 48px;
 }
 
-.backLink {
-  display: inline-flex;
-  align-items: center;
-  min-height: 44px;
-  margin-bottom: 20px;
-  font-size: var(--type-interface);
-  line-height: var(--interface-leading);
-}
-
 .intro h1,
 .sectionBody h2 {
   margin: 0;
@@ -106,8 +97,7 @@
 }
 
 @media (hover: hover) and (pointer: fine) {
-  .directory a:hover,
-  .backLink:hover {
+  .directory a:hover {
     color: var(--accent);
   }
 }

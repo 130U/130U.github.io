@@ -65,14 +65,13 @@ export function LegalPaperPage({ paper, showcase }: { paper: LegalPaper; showcas
   }
 
   return (
-    <SiteShell active="experience" frameClassName={`legal-paper-page ${experienceStyles.frame}`}>
+    <SiteShell active="experience" parent={{ href: `/experience/#${showcase.slug}`, label: "Experience" }} frameClassName={`legal-paper-page ${experienceStyles.frame}`}>
       <article className={styles.paper} aria-labelledby="paper-title">
         <LegalPaperReader notes={[
           ...(acknowledgment ? [{ key: "author", label: "Author note", content: <RunText runs={acknowledgment.runs} prefix="preview-author" /> }] : []),
           ...paper.footnotes.map((note) => ({ key: String(note.number), label: String(note.number), content: <RunText runs={note.runs} prefix={`preview-${note.number}`} /> })),
         ]}>
           <header className={`page-intro ${styles.header}`}>
-            <Link className="back-link" href={`/experience/#${showcase.slug}`}><span aria-hidden="true">←</span> Experience</Link>
             <h1 id="paper-title" tabIndex={-1}>{showcase.pageTitle}</h1>
             <ExperienceMetadata entry={showcase} />
           </header>
