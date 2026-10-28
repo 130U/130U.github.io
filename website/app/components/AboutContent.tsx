@@ -1,6 +1,5 @@
 import Link from "next/link";
 import type { ReactNode } from "react";
-import { courseworkGroups } from "../lib/content/about";
 import { selectedResearchProjects } from "../lib/content/selected-research";
 import styles from "../home.module.css";
 
@@ -87,22 +86,9 @@ export function AboutContent() {
               <p className="education-note">Undergraduate Merit Scholarship</p>
             </article>
           </div>
-          <details className={styles.coursework} id="coursework">
-            <summary className={styles.courseworkButton}>View coursework</summary>
-            <div className={styles.courseworkContent}>
-              <h3 className={styles.courseworkHeading} id="coursework-heading">Selected Coursework</h3>
-              <div className={styles.courseGrid}>
-                {courseworkGroups.map((group) => (
-                  <article key={group.title}>
-                    <h4 className={styles.courseTitle}>{group.title}</h4>
-                    <ul className="course-list">
-                      {group.courses.map((course) => <li key={course}>{course}</li>)}
-                    </ul>
-                  </article>
-                ))}
-              </div>
-            </div>
-          </details>
+          <div className={styles.coursework} id="coursework">
+            <Link className={styles.courseworkButton} href="/coursework/">View coursework</Link>
+          </div>
         </div>
       </section>
 

@@ -6,6 +6,7 @@ import test from "node:test";
 import { fileURLToPath } from "node:url";
 import sharp from "sharp";
 import { secureStaticHtml } from "../scripts/secure-static-html.mjs";
+import { courseworkGroups } from "../app/lib/content/about.ts";
 
 const ROOT = fileURLToPath(new URL("../", import.meta.url));
 const REPOSITORY_ROOT = path.dirname(ROOT.replace(/[\\/]$/u, ""));
@@ -53,6 +54,7 @@ const DISPLAY_DETAIL_TITLES = new Map([
 const ROUTES = [
   "/",
   "/education/",
+  "/coursework/",
   "/education/critical-dependence-stress-for-portfolio-diversification/",
   "/education/certified-valuation-arithmetic-asian-options/",
   "/education/certified-rough-heston-valuation/",
@@ -73,7 +75,7 @@ const NAVIGATION = [
   ["Experience", "/experience/"],
 ];
 const CANONICAL_ROUTES = [
-  "/", "/experience/",
+  "/", "/coursework/", "/experience/",
   ...EXPERIENCE_DETAIL_ROUTES,
   "/education/critical-dependence-stress-for-portfolio-diversification/",
   "/education/certified-valuation-arithmetic-asian-options/",
@@ -744,19 +746,20 @@ test("original PDFs remain absent from public assets and the exported website", 
   }
 });
 
-test("About and its education alias preserve both degrees, 49 courses, and the advisor record", async () => {
+test("About preserves both degrees and the advisor record while linking to all 49 courses on their own page", async () => {
   for (const route of ["/", "/education/"]) {
     const html = await routeHtml(route);
     assert.equal(elementsWithClass(html, "article", "education-entry").length, 2);
     const education = elementHtmlById(html, "education");
     const coursework = elementHtmlById(education, "coursework");
-    const disclosure = openingTags(coursework, "details");
-    assert.equal(disclosure.length, 1, "All coursework belongs to one native disclosure within Education.");
-    assert.doesNotMatch(disclosure[0], /\sopen(?:\s|=|>)/u, "Coursework must be collapsed in the initial HTML.");
-    assert.equal(stripMarkup(coursework.match(/<summary\b[^>]*>([\s\S]*?)<\/summary>/u)?.[1] ?? ""), "View coursework");
-    const lists = elementsWithClass(coursework, "ul", "course-list");
-    assert.equal(lists.length, 4);
-    assert.equal(lists.reduce((total, list) => total + (list[2].match(/<li\b/giu) ?? []).length, 0), 49);
+    const courseworkLink = coursework.match(/<a\b([^>]*)>([\s\S]*?)<\/a>/u);
+    assert.equal(attribute(courseworkLink?.[1] ?? "", "href"), "/coursework/");
+    assert.equal(stripMarkup(courseworkLink?.[2] ?? ""), "View coursework");
+    assert.equal(openingTags(education, "details").length, 0, "The Education control navigates to a separate page.");
+    assert.equal(elementsWithClass(html, "ul", "course-list").length, 0, "Course lists must not consume space on About.");
+    for (const course of courseworkGroups.flatMap((group) => group.courses)) {
+      assert.ok(!stripMarkup(education).includes(course), `${route}: ${course} belongs on the coursework page.`);
+    }
     const text = stripMarkup(html);
     for (const record of ["Master of Engineering in Risk Engineering", "Financial Risk Concentration", "Bachelor of Science in Mathematics", "Dual-Degree Undergraduate Program", "Pratt School of Engineering Merit Scholarship", "Undergraduate Merit Scholarship", "Academic Advisor:", "Mark Borsuk, Ph.D."]) {
       assert.ok(text.includes(record), `${route} is missing ${record}`);
@@ -764,6 +767,33 @@ test("About and its education alias preserve both degrees, 49 courses, and the a
     assert.equal((text.match(/Duke University/gu) ?? []).length, 1);
     assert.doesNotMatch(text, /Sequoia Fellow/u);
     assert.doesNotMatch(text, /highest-tier merit awards/u);
+  }
+
+  const html = await routeHtml("/coursework/");
+  assert.equal(stripMarkup(html.match(/<h1\b[^>]*>([\s\S]*?)<\/h1>/u)?.[1] ?? ""), "Selected Coursework");
+  assert.equal(canonicalUrl(html), `${SITE_ORIGIN}/coursework/`);
+  assert.ok(openingTags(html, "a").some((tag) => attribute(tag, "href") === "/#education"), "Coursework must return to Education.");
+  const current = openingTags(html, "a").filter((tag) => attribute(tag, "aria-current") === "page");
+  assert.deepEqual(current.map((tag) => attribute(tag, "href")), ["/"]);
+  const categories = ["mathematics", "ai-and-data-science", "finance-and-economics", "law-ethics-and-global-affairs"];
+  const directory = [...html.matchAll(/<nav\b([^>]*)>([\s\S]*?)<\/nav>/giu)]
+    .find((match) => attribute(match[1], "aria-label") === "Coursework sections");
+  assert.ok(directory);
+  const links = [...directory[2].matchAll(/<a\b([^>]*)>([\s\S]*?)<\/a>/giu)];
+  assert.deepEqual(links.map((match) => attribute(match[1], "href")), categories.map((id) => `#${id}`));
+  const lists = elementsWithClass(html, "ul", "course-list");
+  assert.equal(lists.length, 4);
+  assert.equal(lists.reduce((total, list) => total + (list[2].match(/<li\b/giu) ?? []).length, 0), 49);
+  for (const [index, group] of courseworkGroups.entries()) {
+    const number = String(index + 1).padStart(2, "0");
+    assert.equal(inlineText(links[index][2]), `${number}${group.title}`);
+    const section = elementHtmlById(html, categories[index]);
+    assert.match(section, new RegExp(`aria-hidden="true"[^>]*>${number}<`, "u"));
+    assert.equal(stripMarkup(section.match(/<h2\b[^>]*>([\s\S]*?)<\/h2>/u)?.[1] ?? ""), group.title);
+    const list = elementsWithClass(section, "ul", "course-list")[0];
+    assert.ok(list);
+    assert.deepEqual([...list[2].matchAll(/<li\b[^>]*>([\s\S]*?)<\/li>/gu)].map((match) => stripMarkup(match[1])), group.courses, "Every course retains its approved wording and order.");
+    assert.equal(openingTags(list[2], "a").length, 0, "Course names are static text, not empty navigation targets.");
   }
 });
 
@@ -855,13 +885,15 @@ test("the production design contract is restrained and dependency-light", async 
 });
 
 test("shared typography source roles preserve Inter numerals, article names, metadata, and mathematical scale", async () => {
-  const [fonts, exportedFonts, globals, articles, experience, math] = await Promise.all([
+  const [fonts, exportedFonts, globals, articles, experience, math, home, coursework] = await Promise.all([
     readFile(path.join(ROOT, "public", "assets", "fonts", "inter.css"), "utf8"),
     readFile(path.join(OUT, "assets", "fonts", "inter.css"), "utf8"),
     readFile(path.join(ROOT, "app", "globals.css"), "utf8"),
     readFile(path.join(ROOT, "app", "past-experience", "components", "LegalPaperPage.module.css"), "utf8"),
     readFile(path.join(ROOT, "app", "components", "experience", "Experience.module.css"), "utf8"),
     readFile(path.join(ROOT, "app", "components", "research", "ResearchMath.module.css"), "utf8"),
+    readFile(path.join(ROOT, "app", "home.module.css"), "utf8"),
+    readFile(path.join(ROOT, "app", "coursework", "coursework.module.css"), "utf8"),
   ]);
   const rule = (css, selector) => {
     const escaped = selector.replace(/[.*+?^${}()|[\]\\]/gu, "\\$&");
@@ -880,8 +912,17 @@ test("shared typography source roles preserve Inter numerals, article names, met
   assert.match(rule(globals, "body"), /font-family:\s*var\(--font-text\)/u);
   const tokens = rule(globals, ":root");
   assert.match(tokens, /--type-subheading:\s*1\.125rem\s*;/u);
+  assert.match(tokens, /--type-index:\s*1\.125rem\s*;/u);
   assert.match(tokens, /--type-reading:\s*0\.875rem\s*;/u);
   assert.match(tokens, /--type-math:\s*1\.15em\s*;/u);
+  for (const css of [home, experience, coursework]) {
+    assert.match(rule(css, ".sectionIndex"), /font-size:\s*var\(--type-index\)\s*;/u, "Section indices share the 18px semantic role.");
+  }
+  for (const css of [experience, coursework]) {
+    assert.match(rule(css, ".directory a"), /font-size:\s*var\(--type-subheading\)\s*;/u, "Top-level directories share the 18px semantic role.");
+  }
+  assert.match(rule(coursework, ".sectionBody h2"), /font-size:\s*var\(--type-heading\)\s*;/u);
+  assert.match(rule(coursework, ".courseList"), /font-size:\s*var\(--type-reading\)\s*;/u);
   for (const declarations of [rule(articles, ".paper .header h1"), rule(experience, ".detailPage .detailHeader h1"), rule(experience, ".entryTitle")]) {
     assert.match(declarations, /font-size:\s*var\(--type-subheading\)\s*;/u, "Article and experience names must share the 18px semantic role");
     assert.match(declarations, /font-weight:\s*600\s*;/u);

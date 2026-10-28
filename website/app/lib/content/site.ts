@@ -22,7 +22,7 @@ export const navigation: ReadonlyArray<{
   { key: "experience", label: "Experience", href: "/experience/" },
 ];
 
-export const coreRoutes = navigation.map(({ href }) => href);
+export const coreRoutes = [...navigation.map(({ href }) => href), "/coursework/"];
 
 export function absoluteUrl(path: string) {
   return new URL(path, SITE_URL).toString();

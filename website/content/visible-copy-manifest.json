@@ -6,9 +6,9 @@
   ],
   "routes": {
     "/": {
-      "textSha256": "2e8062b7c883b6c15242cdef18df6538868cfcdcfae054ebffcc7a96c2638837",
-      "characterCount": 4222,
-      "wordCount": 541,
+      "textSha256": "492efe44f28dd975576ec7803ce294d2896454e3c450e64980faa4a70c18df1a",
+      "characterCount": 2699,
+      "wordCount": 363,
       "preview": "Skip to main content Scroll Theodore Ouyang About Experience Thinking mathematically Working in AI Mathematics is how I make sense of things. I want to know whi",
       "altTexts": [],
       "ariaLabels": [
@@ -28,9 +28,9 @@
       }
     },
     "/education/": {
-      "textSha256": "ded7c7e59e85d62299b82da640b9175da3b98b3977bc199f5f6a59240a259b22",
-      "characterCount": 4215,
-      "wordCount": 540,
+      "textSha256": "ede9a7c89fdc3653f0b8aeb0858be39f2afe2d943fbc68dd11cad552121c31aa",
+      "characterCount": 2692,
+      "wordCount": 362,
       "preview": "Skip to main content Theodore Ouyang About Experience Thinking mathematically Working in AI Mathematics is how I make sense of things. I want to know which assu",
       "altTexts": [],
       "ariaLabels": [
@@ -47,6 +47,28 @@
         "openGraphUrl": "https://www.theodoreoy.com/",
         "twitterTitle": "About | Theodore Ouyang",
         "twitterDescription": "Theodore Ouyang's research, education, and interests in mathematics and AI."
+      }
+    },
+    "/coursework/": {
+      "textSha256": "c28de5e55ed98ef8ca609531b9a9d17b5761118df975d9a8d6ee99d76c434331",
+      "characterCount": 1714,
+      "wordCount": 208,
+      "preview": "Skip to main content Theodore Ouyang About Experience ← Education Selected Coursework Mathematics AI and Data Science Finance and Economics Law, Ethics, and Glo",
+      "altTexts": [],
+      "ariaLabels": [
+        "Theodore Ouyang home",
+        "Primary navigation",
+        "Coursework sections"
+      ],
+      "metadata": {
+        "title": "Selected Coursework | Theodore Ouyang",
+        "description": "Selected coursework in mathematics, AI and data science, finance and economics, and law, ethics, and global affairs.",
+        "canonical": "https://www.theodoreoy.com/coursework/",
+        "openGraphTitle": "Selected Coursework",
+        "openGraphDescription": "Selected coursework in mathematics, AI and data science, finance and economics, and law, ethics, and global affairs.",
+        "openGraphUrl": "https://www.theodoreoy.com/coursework/",
+        "twitterTitle": "Selected Coursework",
+        "twitterDescription": "Selected coursework in mathematics, AI and data science, finance and economics, and law, ethics, and global affairs."
       }
     },
     "/education/certified-valuation-arithmetic-asian-options/": {

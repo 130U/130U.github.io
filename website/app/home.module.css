@@ -41,11 +41,11 @@
 .sectionIndex {
   grid-column: 1;
   margin: 0;
-  padding-top: 5px;
+  padding-top: 1px;
   color: var(--muted);
-  font-size: var(--type-label);
+  font-size: var(--type-index);
   font-variant-numeric: tabular-nums;
-  line-height: var(--label-leading);
+  line-height: var(--subheading-leading);
   letter-spacing: 0.015em;
   user-select: none;
 }
@@ -107,8 +107,7 @@
 }
 
 .researchTitle,
-.institution,
-.courseTitle {
+.institution {
   margin: 0;
   font-size: var(--type-subheading);
   font-weight: 600;
@@ -198,13 +197,8 @@
   font-size: var(--type-action);
   font-weight: 500;
   line-height: var(--interface-leading);
-  list-style: none;
   cursor: pointer;
   transition: background-color 180ms var(--ease-out);
-}
-
-.courseworkButton::-webkit-details-marker {
-  display: none;
 }
 
 .courseworkButton:focus-visible {
@@ -212,48 +206,8 @@
   outline-offset: 4px;
 }
 
-.courseworkButton:active,
-.coursework[open] > .courseworkButton {
+.courseworkButton:active {
   background: var(--accent);
-}
-
-.courseworkContent {
-  margin-top: 28px;
-  padding-top: 24px;
-  border-top: 1px solid var(--rule);
-}
-
-.courseworkHeading {
-  margin: 0 0 24px;
-  font-size: var(--type-subheading);
-  font-weight: 400;
-  line-height: var(--subheading-leading);
-}
-
-.courseGrid article {
-  min-width: 0;
-}
-
-.courseGrid article + article {
-  margin-top: 20px;
-  padding-top: 20px;
-  border-top: 1px solid var(--rule);
-}
-
-.courseTitle {
-  margin-bottom: 8px;
-}
-
-.courseGrid :global(.course-list) {
-  display: block;
-  columns: 16rem 2;
-  column-gap: 24px;
-  color: var(--supporting-ink);
-}
-
-.courseGrid :global(.course-list) li {
-  break-inside: avoid;
-  margin-bottom: 2px;
 }
 
 .contactStrip {
@@ -352,9 +306,6 @@
     margin-bottom: 22px;
   }
 
-  .courseGrid :global(.course-list) {
-    column-count: 1;
-  }
 }
 
 @media (max-width: 540px) {
