@@ -26,10 +26,9 @@ export default async function ExperienceDetailPage({ params }: PageProps) {
   if (!entry || entry.articlePath) notFound();
   const returnPath = `/experience/#${entry.slug}`;
   return (
-    <SiteShell active="experience" frameClassName={styles.frame}>
+    <SiteShell active="experience" parent={{ href: returnPath, label: "Experience" }} frameClassName={styles.frame}>
       <article className={styles.detailPage} aria-labelledby="experience-title">
         <header className={`page-intro plain-page-intro ${styles.detailHeader}`}>
-          <Link className="back-link" href={returnPath}><span aria-hidden="true">←</span> Experience</Link>
           <h1 id="experience-title" tabIndex={-1}>{entry.pageTitle}</h1>
           <ExperienceMetadata entry={entry} />
         </header>

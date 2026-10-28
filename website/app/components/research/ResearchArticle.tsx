@@ -81,10 +81,9 @@ export function ResearchArticle({ project, active, returnPath, returnLabel, titl
     );
   });
   return (
-    <SiteShell active={active} frameClassName={showcase ? experienceStyles.frame : undefined}>
+    <SiteShell active={active} parent={{ href: returnPath, label: returnLabel }} frameClassName={showcase ? experienceStyles.frame : undefined}>
       <article className={readingStyles.paper} aria-labelledby={titleId}>
         <header className={`page-intro plain-page-intro ${readingStyles.header}`}>
-          <Link className="back-link" href={returnPath}><span aria-hidden="true">←</span> {returnLabel}</Link>
           <h1 id={titleId} tabIndex={-1}>{showcase?.pageTitle ?? project.title}</h1>
           {showcase ? <ExperienceMetadata entry={showcase} /> : !project.repositoryUrl && frontMatterCount > 0 && <div className={styles.frontMatter}>{renderedBlocks.slice(0, frontMatterCount)}</div>}
           {showcase && <ExperienceDisclosure entry={showcase} />}

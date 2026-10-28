@@ -149,7 +149,9 @@ and AI project articles align their headings and prose to this common right edge
 Nested paragraphs fill their container with natural ragged-right wrapping. Each
 coursework category uses one text column at every width; legal articles retain
 their own reading and contents layout.
-Below 768px, the navigation becomes a 4rem sticky header with a Menu / Close panel.
+Below 768px, top-level pages use a 4rem sticky header with a Menu / Close panel.
+Detail pages keep the wordmark and their parent link visible in the header without
+a menu toggle. On desktop, both forms use the existing sticky navigation rail.
 Media-query ranges cover fractional viewport widths continuously.
 Without JavaScript, the links remain visible in normal document flow.
 
@@ -171,8 +173,9 @@ the About page keeps its `#coursework` anchor around this entrance. The dedicate
 page has a numbered directory and four subject sections, indexed 01 through 04.
 Each section has a 22px category heading and a single-column list of course names
 at the shared 14px reading size and leading. All 49 courses retain their original
-wording and order as static text, available without JavaScript. A return link
-leads to Education. Duke University appears once above the two degree records;
+wording and order as static text, available without JavaScript. The rail's
+Back to Education link returns to the Education section. Duke University appears
+once above the two degree records;
 degree names use the reading size at weight 500. Compact notes and a thin rule
 separate the degree records. Profile details and contact values also use the reading
 scale; field labels use the label scale. Email, GitHub, and X occupy three columns
@@ -203,6 +206,13 @@ Anchor navigation uses native scrolling. The mobile menu uses a short opening
 transition, with reduced-motion support.
 Focus outlines remain visible. The mobile menu traps keyboard focus, closes on Escape
 or navigation, and releases the page when the viewport reaches desktop width.
+Detail pages use one native parent link beside the retained wordmark. Its visible
+label is Back to Education, Back to Selected Research, or Back to Experience,
+with a small decorative left arrow. The destination is the originating section
+or entry, so it works after opening a detail page directly as well as after
+following an internal link. This return action stays outside the mobile menu.
+Reading headers begin with their title rather than repeating the return action;
+existing article and experience footer links remain available after long content.
 
 ## Content and extension
 
@@ -226,13 +236,17 @@ Chinese full-width punctuation is not used in public interface copy.
 Legal section symbols, paragraph symbols, mathematical notation, and author names
 with diacritics remain part of the source text.
 
-The primary navigation contains About and Experience. About at
+Top-level pages retain the About and Experience primary navigation, including the
+`/education/`, `/now/`, and `/past-experience/` compatibility pages. The 27 detail
+pages replace those primary links with parent navigation while retaining the home
+wordmark: Coursework, three Selected Research manuscripts, eighteen Experience
+detail pages, and five legacy Experience domain pages. About at
 `/` combines the introduction, Selected Research, Education with a coursework
 entrance, and contact details in sections 01 through 04. The supplied first-person
 introduction leads the page; both
 Duke degrees, the advisor, scholarships, and all 49 courses remain
-available. The canonical `/coursework/` page keeps the four subject groups, marks
-About as current in the primary navigation, and appears in the sitemap. The
+available. The canonical `/coursework/` page keeps the four subject groups,
+returns to Education through its parent navigation, and appears in the sitemap. The
 homepage's `#coursework` anchor remains a valid entrance to this page.
 The `/education/` compatibility
 page shares the About content without repeating the particle entrance, uses `/`
@@ -257,8 +271,9 @@ the shared reading frame without introducing cards or changing the palette.
 Each research page provides a contents list and the manuscript's abstract, core
 chapters, formulas, and references. The dependence-stress paper includes chapters
 1–5, the Asian-options paper chapters 1–10, and the Rough Heston paper chapters 1–8.
-Article headers contain the return link, title, GitHub link, and Full Manuscript
-link. Reading content begins at Abstract; source front matter before Abstract is
+Article headers contain the title, GitHub link, and Full Manuscript link. The
+Back to Selected Research link lives in the left rail. Reading content begins at
+Abstract; source front matter before Abstract is
 kept in the protected source. Appendices and supporting material are
 linked on GitHub. Each JSON source records the exact source commit, blob, and manuscript
 URL; source links should continue to identify that version. The full manuscript is
@@ -301,7 +316,8 @@ previews are centered; phones use a bottom sheet with a scrollable note body and
 passage. View in Footnotes closes the preview and focuses the complete endnote.
 Full notes and bidirectional links remain available without JavaScript.
 
-Reading pages retain a visible return link to the corresponding Experience entry. Contents,
+Reading pages retain a visible parent link in the rail and their existing footer
+return link to the corresponding Experience entry. Contents,
 long citations, and note previews adapt to phone widths, enlarged text, keyboard
 navigation, and reduced motion. Keep the original PDFs outside public assets and
 the static export; article pages publish the text and its citation structure.

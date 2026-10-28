@@ -13,6 +13,8 @@ export type ActivePage =
   | "about"
   | "experience";
 
+export type ParentPage = Readonly<{ href: string; label: string }>;
+
 export const navigation: ReadonlyArray<{
   key: ActivePage;
   label: string;

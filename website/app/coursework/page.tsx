@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-import Link from "next/link";
 import { SiteShell } from "../components/SiteShell";
 import { courseworkGroups } from "../lib/content/about";
 import { createPageMetadata } from "../lib/content/site";
@@ -20,9 +19,8 @@ const sectionIds = [
 
 export default function CourseworkPage() {
   return (
-    <SiteShell active="about" frameClassName={styles.frame}>
+    <SiteShell active="about" parent={{ href: "/#education", label: "Education" }} frameClassName={styles.frame}>
       <header className={styles.intro}>
-        <Link className={`back-link ${styles.backLink}`} href="/#education">← Education</Link>
         <h1>Selected Coursework</h1>
         <nav className={styles.directory} aria-label="Coursework sections">
           {courseworkGroups.map((group, index) => (

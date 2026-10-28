@@ -163,7 +163,6 @@
   font-size: var(--type-reading);
   line-height: var(--reading-leading);
 }
-.domainHeader { margin-bottom: 28px; }
 @media (hover: hover) and (pointer: fine) {
   .readMore:hover, .directory a:hover { color: var(--accent); text-decoration-color: var(--accent); }
   .directory a:hover .directoryAction { opacity: 1; }

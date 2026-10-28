@@ -9,7 +9,7 @@
     "content/experience-showcase.json": "5003dd0195067ee81adff9cc80ec70f7b35d474f1d717e6da0ba9e1eff8f33f3",
     "app/components/AboutContent.tsx": "e10c5f9f49446d83bb04fdf6f222deb9d9a85165f097b1781a31f235c0f6e77d",
     "app/lib/content/about.ts": "8d79e72133dcbcae9523771a099f53f0aecb879cea384769ff6bb0144e05626f",
-    "app/components/research/ResearchArticle.tsx": "4abb9ad9ee42d0c71ead3b0f43846320cc06a4c79454d91cb9e32ade0fa356f5",
+    "app/components/research/ResearchArticle.tsx": "2f48af261a23f0d137f4536a8d57791f9cad475f91bb360f5427797ce6d846e9",
     "app/components/research/ResearchMath.tsx": "a61ffe67375e2c50a7cac7167f39ff39ef7a115d6aa240c14f9240b9361e54cf",
     "app/lib/content/research-markdown.ts": "d2d03cfc6b7bc38d5a409d134f517c9ccdff3a3977b3af0495b437b96850e001",
     "app/lib/content/research-math.ts": "0343a075dba996cd6a96d3ab299eb6bf095b1b7a4c662f84b253cd243c4107ff",
@@ -22,11 +22,11 @@
     "app/now/page.tsx": "701f81ff14577a7860daff4fe83208ee6f5e30fd44fe499a11e97269ec888544",
     "app/past-experience/page.tsx": "92f0f9e0b5129e7644387a6a4ea6967a483c628b521a6dfe0baf9f9bfff521fc",
     "app/past-experience/[slug]/page.tsx": "8ee0cb7500cd04c48e5148b2667eb2efa65a3f0b35d9f7ee45b2383dfbedd16e",
-    "app/past-experience/components/ExperienceDomainPage.tsx": "203a51817457db96ad65ef76ee5ed925df6b1ba494282a163191b0dcf5fe1de0",
+    "app/past-experience/components/ExperienceDomainPage.tsx": "2f2aed707e09433f2df017a1d7411222ceb77174dad533c041d886b8e757984a",
     "app/lib/content/legal-papers.ts": "8bd1bca63e7211f7c286df97192faf943144ff28be6d12cc5666f704933e9f4c",
     "app/lib/content/metadata-excerpt.ts": "567139663925462cc48584a53dabb91e50e3727acd68afe7ddf61fa2818f0e71",
     "app/past-experience/[slug]/[paper]/page.tsx": "0a54d7899422b36ca794920d635fc93e4771183105041d9504479e4333f444b0",
-    "app/past-experience/components/LegalPaperPage.tsx": "d227289591733176ebe9a6c6421f267cdc4475c23a83757169b26532ab88fb67",
+    "app/past-experience/components/LegalPaperPage.tsx": "ced13fa08ae1a7eaec0608c7393e2ecc11e77ec0237f1b49d3c8173b2820a49b",
     "content/legal-papers/autonomous-authority-in-space.json": "ee5c9a0bd42264a26a7cd221ad8341ae2c91d7e0b959fb2d1a5fe69ceb5e5ced",
     "content/legal-papers/small-states-and-strategic-space-dependence.json": "5d7ef044d762e243e061ff65de12a8c6ab23513b7ba0e9ee01b352d18ac3a0f5",
     "content/legal-papers/solar-geoengineering-comparison-and-continuity.json": "eb104d73d6eaa1893a08726df869c628ed18ed2071499bbf45dbb33421e3461f",
@@ -37,7 +37,7 @@
     "content/artificial-intelligence/task-validity-in-financial-synthetic-data.json": "ce413f7a748a6eb33714ab1709df4daed4a738ac74ff9eba1042a946c5c911dd",
     "content/artificial-intelligence/verification-and-supervision-in-scientific-reasoning-tasks.json": "6cf298145c2e4bf20a53623b40d0a5e8fe231fcda9589fc38821dae45e1af50f",
     "content/artificial-intelligence/evidence-uncertainty-and-decision-guarantees-in-investment-research.json": "6473726c418f185e8606c89c07cebd37b689668478c93f3be58281977a8ec373",
-    "app/experience/[slug]/page.tsx": "997cadef95f145e2abf55cd64506e278425b5c30d4cfccb9b835453b811c755e",
+    "app/experience/[slug]/page.tsx": "34231615e39baca65186fb063a9589815536106d51a72a9d4fd719b95d3e8a49",
     "app/lib/content/experience-domains.ts": "7362085d4857daa83ae476f176163378dde550572d5a1932d2f142d4d1a00c7d",
     "app/education/critical-dependence-stress-for-portfolio-diversification/page.tsx": "b0dbb4c593e681c702908a707b8dc31ac1800472f749a8897bc3c7d2550f1f90",
     "content/selected-research/critical-dependence-stress-for-portfolio-diversification.json": "66dae1b9bdbf757d46992632bb69c409e24079d157cbd155852c7e48e2ebe26a",
@@ -45,6 +45,6 @@
     "scripts/import-ai-portfolio.mjs": "2279e6dfe815b467d59effe6c8b333a61a6bbf605e9d5bdfa2c01d9fefc1498c",
     "app/lib/content/research-number.ts": "2d29d06ffde33580bd5e655b547b28c953d64b0d2b0fa7fe31663da68dd1276b",
     "content/sources/ai-portfolio/ai-research-and-engineering.md": "bc688374f1ca56e7c5eafbd06a7f33e6d7d752f4c8d0dd98b05f30164921405d",
-    "app/coursework/page.tsx": "df646f0ebfc2d2a8d7d1afd72f637c1eb3e4a9ca07df2a7dee13f893d1a6665b"
+    "app/coursework/page.tsx": "0a975c5e8d446b0e66852015bcb3ffc7ef761665d8b7904a42d690d6f1d2a4b6"
   }
 }
