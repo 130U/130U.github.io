@@ -3,11 +3,11 @@
   "normalization": "LF",
   "sources": {
     "app/experience/page.tsx": "993f5aa641588d4cd2d5ea7ef7d7826e1b5cafbd06b1bc2bc704f802e23df777",
-    "app/components/experience/ExperienceContent.tsx": "4fa27f8b87ffc9e798846da715e10f72aa7c18947786aad113fb1b1260d4e7f0",
+    "app/components/experience/ExperienceContent.tsx": "0673dc16794a98f134eda5ba400c9115dbec4a52a781971b27c1e8b3f87dd674",
     "app/components/experience/ExperienceDetails.tsx": "fc0d3ca896ab636dcadcb5370cb176065f70cd748b2cfbdfb89271fe83b8e261",
     "app/lib/content/experience-showcase.ts": "c769e21ec5ba92d66d439746d1090eee5c83ea129e69b30b21943d18325512dd",
     "content/experience-showcase.json": "5003dd0195067ee81adff9cc80ec70f7b35d474f1d717e6da0ba9e1eff8f33f3",
-    "app/components/AboutContent.tsx": "6f5861525912ac8a692478b4d7f442f7308b6cecb566c66a36d407ea1f28f843",
+    "app/components/AboutContent.tsx": "fcd1ad77ffb55ffe4f8f9e0146813d542374b74998b85b40c66159359282f5f2",
     "app/lib/content/about.ts": "8d79e72133dcbcae9523771a099f53f0aecb879cea384769ff6bb0144e05626f",
     "app/components/research/ResearchArticle.tsx": "4abb9ad9ee42d0c71ead3b0f43846320cc06a4c79454d91cb9e32ade0fa356f5",
     "app/components/research/ResearchMath.tsx": "a61ffe67375e2c50a7cac7167f39ff39ef7a115d6aa240c14f9240b9361e54cf",

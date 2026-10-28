@@ -6,9 +6,9 @@
   ],
   "routes": {
     "/": {
-      "textSha256": "a37aabfc9aa302dcb7ac73e3e5cd328bb2c903d4b01bfbd176895ce463207636",
-      "characterCount": 4179,
-      "wordCount": 536,
+      "textSha256": "2e8062b7c883b6c15242cdef18df6538868cfcdcfae054ebffcc7a96c2638837",
+      "characterCount": 4222,
+      "wordCount": 541,
       "preview": "Skip to main content Scroll Theodore Ouyang About Experience Thinking mathematically Working in AI Mathematics is how I make sense of things. I want to know whi",
       "altTexts": [],
       "ariaLabels": [
@@ -28,9 +28,9 @@
       }
     },
     "/education/": {
-      "textSha256": "e23ae505a7de6986009ddf28a7ace8309d8ae55de637fa7bb2b917a291042b7d",
-      "characterCount": 4172,
-      "wordCount": 535,
+      "textSha256": "ded7c7e59e85d62299b82da640b9175da3b98b3977bc199f5f6a59240a259b22",
+      "characterCount": 4215,
+      "wordCount": 540,
       "preview": "Skip to main content Theodore Ouyang About Experience Thinking mathematically Working in AI Mathematics is how I make sense of things. I want to know which assu",
       "altTexts": [],
       "ariaLabels": [
@@ -744,10 +744,10 @@
       "formulaCount": 965
     },
     "/experience/": {
-      "textSha256": "b189dc1cb7b7e5ca6370402a1fe1ed772cd0d2bd95e423c5f907d66b1c1903f5",
-      "characterCount": 12701,
-      "wordCount": 1620,
-      "preview": "Skip to main content Theodore Ouyang About Experience Experience 01 AI Research and Engineering 02 Data Science 03 Legal Research and Policy Analysis 04 Finance",
+      "textSha256": "c349e74c97508d15322ef97b96fac8a281eaf8dfcc7ac1de366d16d38d17433a",
+      "characterCount": 12686,
+      "wordCount": 1615,
+      "preview": "Skip to main content Theodore Ouyang About Experience Experience AI Research and Engineering Data Science Legal Research and Policy Analysis Finance and Consult",
       "altTexts": [],
       "ariaLabels": [
         "Theodore Ouyang home",
@@ -994,10 +994,10 @@
       }
     },
     "/past-experience/": {
-      "textSha256": "b189dc1cb7b7e5ca6370402a1fe1ed772cd0d2bd95e423c5f907d66b1c1903f5",
-      "characterCount": 12701,
-      "wordCount": 1620,
-      "preview": "Skip to main content Theodore Ouyang About Experience Experience 01 AI Research and Engineering 02 Data Science 03 Legal Research and Policy Analysis 04 Finance",
+      "textSha256": "c349e74c97508d15322ef97b96fac8a281eaf8dfcc7ac1de366d16d38d17433a",
+      "characterCount": 12686,
+      "wordCount": 1615,
+      "preview": "Skip to main content Theodore Ouyang About Experience Experience AI Research and Engineering Data Science Legal Research and Policy Analysis Finance and Consult",
       "altTexts": [],
       "ariaLabels": [
         "Theodore Ouyang home",
@@ -1758,10 +1758,10 @@
       }
     },
     "/now/": {
-      "textSha256": "b189dc1cb7b7e5ca6370402a1fe1ed772cd0d2bd95e423c5f907d66b1c1903f5",
-      "characterCount": 12701,
-      "wordCount": 1620,
-      "preview": "Skip to main content Theodore Ouyang About Experience Experience 01 AI Research and Engineering 02 Data Science 03 Legal Research and Policy Analysis 04 Finance",
+      "textSha256": "c349e74c97508d15322ef97b96fac8a281eaf8dfcc7ac1de366d16d38d17433a",
+      "characterCount": 12686,
+      "wordCount": 1615,
+      "preview": "Skip to main content Theodore Ouyang About Experience Experience AI Research and Engineering Data Science Legal Research and Policy Analysis Finance and Consult",
       "altTexts": [],
       "ariaLabels": [
         "Theodore Ouyang home",
