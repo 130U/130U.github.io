@@ -311,7 +311,7 @@
   }
 }
 
-@media (max-width: 767px) {
+@media (width < 768px) {
   .header {
     margin-bottom: 2rem;
   }

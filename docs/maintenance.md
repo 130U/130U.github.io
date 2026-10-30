@@ -17,12 +17,18 @@ Use Node.js 24 to match deployment. Run application commands from `website/`, or
 | `website/content/` | Maintained content, research source inputs, provenance, and integrity contracts |
 | `website/public/` | Assets included in the static export |
 | `website/source-assets/` | Editable brand masters |
-| `website/scripts/`, `tests/`, `tooling/` | Import, build, verification, and lint utilities |
+| `website/scripts/`, `website/tests/`, `website/tooling/` | Import, build, verification, and lint utilities |
 
 `website/.gitignore` excludes installed dependencies, build output, caches, logs,
 generated Next.js types, and TypeScript build metadata. Keep local screenshots,
 audit logs, and original source documents outside the repository unless they are
 explicitly maintained research inputs. Only visitor-facing assets belong in `public/`.
+
+Documentation has one responsibility per entry point: [the website README](../website/README.md)
+provides setup and a directory map; [design](design.md) defines the visual system;
+this guide owns content and release procedures; [the architecture README](../architecture/README.md)
+owns viewer generation. Keep these guides about the maintained system. Source-version
+history belongs in manuscript provenance, and implementation history belongs in Git.
 
 ## Content ownership and routes
 
@@ -135,7 +141,7 @@ navigation. `ExperienceSection` and `ExperienceDetails` keep all categories and
 detail pages consistent. `SectionDirectory` owns the shared numbered anchor directory
 for Experience and Coursework, including row rules, decorative indices, and View
 feedback for pointer, keyboard, and touch input. Browser interaction stays in focused client components;
-the About entrance is isolated in `components/dithered-entrance/`.
+the About entrance is isolated in `app/components/dithered-entrance/`.
 
 `ResearchArticle` serves AI and Selected Research. The Markdown parser supports
 typed prose, emphasis, links, headings, tables, and formulas rather than arbitrary
@@ -144,14 +150,11 @@ the build; no browser math engine is loaded. Original TeX remains in accessible
 annotations. Invalid formulas fail the build. Wide equations and tables scroll
 locally without shrinking the reading text.
 
-Use the shared typography tokens: 32px general titles and module headings (28px
-below 768px), 18px institution/project/paper names and top-level directory labels,
-14px prose, metadata, and auxiliary navigation, and 10px section/directory indices.
-Headings and interface text retain Inter; narrative prose and small indices use
-Source Serif 4. General headings use weight 500, names use 600, and directory labels
-use 500. Inline formulas use 1em; displayed formulas use 1.15em. Pure inline numbers
-inherit the surrounding prose family. Only the general heading size changes on
-mobile. See [design](design.md) for spacing and mathematical geometry.
+Use the semantic typography tokens in `app/globals.css` and the shared font files.
+The [design guide](design.md#color-and-type) defines each role's size, weight, family,
+and responsive behavior. Apply a role by meaning: an institution or paper name is
+a subheading even when it is the page's H1. Shared components own the corresponding
+layout and interaction rules.
 
 When adding content, update its source, loader/slug registry, route mapping, sitemap
 expectations, and output tests together. Experience routes are keyed by stable
@@ -217,9 +220,9 @@ with Pages write and OIDC permissions confined to the deployment job. Every acti
 is SHA-pinned. After publishing, verify the workflow for the exact commit and read
 back the live routes separately.
 
-Dependabot alerts, secret scanning, and push protection are enabled for the
-repository. Review open dependency and secret alerts when maintaining a release;
-the workflow's dependency audit also checks the installed lockfile on every build.
+Review the repository's Dependabot alerts, secret scanning, and push-protection
+settings when maintaining a release. The workflow's dependency audit checks the
+installed lockfile on every build.
 
 Each exported HTML page receives hashes for its exact inline scripts before any
 script executes. Production CSP blocks arbitrary inline scripts, eval, inline event
