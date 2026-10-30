@@ -3,7 +3,7 @@
   "normalization": "LF",
   "sources": {
     "app/experience/page.tsx": "993f5aa641588d4cd2d5ea7ef7d7826e1b5cafbd06b1bc2bc704f802e23df777",
-    "app/components/experience/ExperienceContent.tsx": "2b49347aed4017f1ac1b8a9fdff55d3e68d45739d3bb48308bf5ef4701508d70",
+    "app/components/experience/ExperienceContent.tsx": "cdac8faf9025e6ce8d5aaa7ffa1687cf4ede045d18fc416dd15c3135efb53790",
     "app/components/experience/ExperienceDetails.tsx": "a47f62f2a973e7681684d757b8c31017634ee00c2cd7dced8affd2a832109540",
     "app/lib/content/experience-showcase.ts": "c769e21ec5ba92d66d439746d1090eee5c83ea129e69b30b21943d18325512dd",
     "content/experience-showcase.json": "5003dd0195067ee81adff9cc80ec70f7b35d474f1d717e6da0ba9e1eff8f33f3",
@@ -45,6 +45,6 @@
     "scripts/import-ai-portfolio.mjs": "2279e6dfe815b467d59effe6c8b333a61a6bbf605e9d5bdfa2c01d9fefc1498c",
     "app/lib/content/research-number.ts": "2d29d06ffde33580bd5e655b547b28c953d64b0d2b0fa7fe31663da68dd1276b",
     "content/sources/ai-portfolio/ai-research-and-engineering.md": "bc688374f1ca56e7c5eafbd06a7f33e6d7d752f4c8d0dd98b05f30164921405d",
-    "app/coursework/page.tsx": "0a975c5e8d446b0e66852015bcb3ffc7ef761665d8b7904a42d690d6f1d2a4b6"
+    "app/coursework/page.tsx": "0d061cfb681b1975f96c92d609f35dff15ab53a86451372569e8f14cb7eaef14"
   }
 }

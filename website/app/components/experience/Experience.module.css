@@ -10,35 +10,6 @@
   font-weight: 500;
   letter-spacing: -0.02em;
 }
-.directory { display: grid; grid-template-columns: 1fr; margin-top: 24px; }
-.directory a {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  width: 100%;
-  min-height: 68px;
-  padding-block: 20px;
-  border-top: 1px solid var(--rule);
-  gap: 24px;
-  color: var(--ink);
-  font-size: var(--type-subheading);
-  font-weight: 500;
-  line-height: var(--subheading-leading);
-  transition: color 180ms var(--ease-out);
-}
-.directoryTitle { min-width: 0; }
-.directoryAction {
-  flex-shrink: 0;
-  font-size: var(--type-action);
-  font-weight: 400;
-  line-height: var(--interface-leading);
-  opacity: 0;
-  transition: opacity 180ms var(--ease-out);
-}
-.directory a:focus-visible,
-.directory a:active { color: var(--accent); }
-.directory a:focus-visible .directoryAction,
-.directory a:active .directoryAction { opacity: 1; }
 .sectionIndex {
   color: var(--muted);
   font-family: var(--font-prose);
@@ -127,7 +98,7 @@
   cursor: pointer;
 }
 .readMore svg { width: 14px; height: 14px; flex-shrink: 0; }
-.readMore:focus-visible, .directory a:focus-visible { outline: 2px solid var(--accent); outline-offset: 4px; }
+.readMore:focus-visible { outline: 2px solid var(--accent); outline-offset: 4px; }
 .detailPage { max-width: var(--reading-measure); }
 .detailHeader { margin-bottom: 3rem; }
 .detailPage .detailHeader h1 { font-size: var(--type-subheading); font-weight: 600; line-height: var(--subheading-leading); letter-spacing: 0; }
@@ -175,11 +146,7 @@
   line-height: var(--reading-leading);
 }
 @media (hover: hover) and (pointer: fine) {
-  .readMore:hover, .directory a:hover { color: var(--accent); text-decoration-color: var(--accent); }
-  .directory a:hover .directoryAction { opacity: 1; }
-}
-@media (hover: none), (pointer: coarse) {
-  .directoryAction { opacity: 1; }
+  .readMore:hover { color: var(--accent); text-decoration-color: var(--accent); }
 }
 @media (768px <= width < 1024px) {
   .section { grid-template-columns: repeat(9, minmax(0, 1fr)); }
@@ -188,7 +155,6 @@
 @media (width < 768px) {
   .frame :global(.content-column) { padding-top: 52px; }
   .intro { margin-bottom: 32px; }
-  .directory { grid-template-columns: 1fr; }
   .section { display: block; padding: 36px 0 44px; scroll-margin-top: 6rem; }
   .sectionIndex { display: block; margin-bottom: 10px; }
   .sectionTitle { margin-bottom: 24px; }
@@ -198,9 +164,4 @@
 
 @media (width < 420px) {
   .metadata > div { grid-template-columns: 1fr; gap: 3px; }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .directory a,
-  .directoryAction { transition: none; }
 }

@@ -558,16 +558,19 @@ test("Experience presents five numbered sections and all eighteen approved entri
   assert.deepEqual(expected.map(({ keyContributions }) => keyContributions.length), [7, 5, 6, 6, 9, 7, 6, 5, 5, 5, 5, 7, 5, 6, 1, 1, 2, 4]);
   assert.deepEqual(experienceEntries(html).map(({ id }) => id), expected.map(({ id }) => id));
   assert.equal(openingTags(html, "h1").length, 1);
-  assert.match(html, /<h1>Areas of Focus<\/h1>/u);
+  assert.match(html, /<h1>Experience: Areas of Focus<\/h1>/u);
   const directory = [...html.matchAll(/<nav\b([^>]*)>([\s\S]*?)<\/nav>/giu)]
     .find((match) => attribute(match[1], "aria-label") === "Experience sections");
   assert.ok(directory);
   const sectionLinks = [...directory[2].matchAll(/<a\b([^>]*)>([\s\S]*?)<\/a>/giu)];
   assert.deepEqual(sectionLinks.map((match) => attribute(match[1], "href")), DOMAINS.map(([, slug]) => `#${slug}`));
   for (const [index, [name, slug, ids]] of DOMAINS.entries()) {
+    const number = String(index + 1).padStart(2, "0");
     const directoryLabels = [...sectionLinks[index][2].matchAll(/<span\b([^>]*)>([\s\S]*?)<\/span>/gu)];
-    assert.deepEqual(directoryLabels.map((match) => stripMarkup(match[2])), [name, "View"]);
-    assert.equal(attribute(directoryLabels[1][1], "aria-hidden"), "true", "The repeated visual action must not lengthen each section link's accessible name.");
+    assert.deepEqual(directoryLabels.map((match) => stripMarkup(match[2])), [number, name, "View"]);
+    assert.equal(attribute(directoryLabels[0][1], "aria-hidden"), "true", "The decorative number must not lengthen the section link's accessible name.");
+    assert.notEqual(attribute(directoryLabels[1][1], "aria-hidden"), "true", "The domain title supplies the section link's accessible name.");
+    assert.equal(attribute(directoryLabels[2][1], "aria-hidden"), "true", "The repeated visual action must not lengthen each section link's accessible name.");
     assert.ok(openingTags(html, "section").some((tag) => attribute(tag, "id") === slug));
     assert.equal(stripMarkup(elementHtmlById(html, `${slug}-heading`)), name);
     assert.deepEqual(expected.filter(({ categoryId }) => categoryId === String(index + 1).padStart(2, "0")).map(({ id }) => id), ids);
@@ -843,7 +846,11 @@ test("About preserves both degrees and the advisor record while linking to all 4
   assert.equal(lists.reduce((total, list) => total + (list[2].match(/<li\b/giu) ?? []).length, 0), 49);
   for (const [index, group] of courseworkGroups.entries()) {
     const number = String(index + 1).padStart(2, "0");
-    assert.equal(inlineText(links[index][2]), `${number}${group.title}`);
+    const directoryLabels = [...links[index][2].matchAll(/<span\b([^>]*)>([\s\S]*?)<\/span>/gu)];
+    assert.deepEqual(directoryLabels.map((match) => stripMarkup(match[2])), [number, group.title, "View"]);
+    assert.equal(attribute(directoryLabels[0][1], "aria-hidden"), "true", "The decorative number must not lengthen the section link's accessible name.");
+    assert.notEqual(attribute(directoryLabels[1][1], "aria-hidden"), "true", "The coursework category supplies the section link's accessible name.");
+    assert.equal(attribute(directoryLabels[2][1], "aria-hidden"), "true", "The repeated visual action must not lengthen each section link's accessible name.");
     const section = elementHtmlById(html, categories[index]);
     assert.match(section, new RegExp(`aria-hidden="true"[^>]*>${number}<`, "u"));
     assert.equal(stripMarkup(section.match(/<h2\b[^>]*>([\s\S]*?)<\/h2>/u)?.[1] ?? ""), group.title);
@@ -914,12 +921,13 @@ test("the production design contract is restrained and dependency-light", async 
   assert.doesNotMatch(home, /box-shadow|backdrop-filter|linear-gradient/u);
   assert.match(homePage, /<DitheredEntrance \/>/u);
   const experience = await readFile(path.join(ROOT, "app", "components", "experience", "Experience.module.css"), "utf8");
+  const directory = await readFile(path.join(ROOT, "app", "components", "SectionDirectory.module.css"), "utf8");
   assert.match(globals, /@media \(pointer:\s*coarse\)[\s\S]*?\.primary-nav a\s*\{[^}]*min-height:\s*44px/u);
   assert.match(home, /@media \(pointer:\s*coarse\)[\s\S]*?\.contactStrip a[\s\S]*?min-height:\s*44px/u);
   assert.match(globals, /width:\s*min\(100%,\s*1440px\)/u);
   assert.match(globals, /\.content-column\s*\{[\s\S]*?grid-template-columns:\s*repeat\(12,[\s\S]*?padding:\s*176px 0 144px/u);
   assert.match(globals, /\.structural-guide-tick\s*\{[\s\S]*?position:\s*sticky[\s\S]*?height:\s*20px/u);
-  assert.match(experience, /\.directory\s*\{[^}]*grid-template-columns:\s*1fr/u);
+  assert.match(directory, /\.directory\s*\{[^}]*grid-template-columns:\s*1fr/u);
   assert.match(experience, /\.section\s*\{[^}]*grid-template-columns:\s*repeat\(12,/u);
   assert.match(experience, /\.sectionBody\s*\{[^}]*grid-column:\s*2\s*\/\s*span\s*10[^}]*max-width:\s*var\(--reading-measure\)/u);
   assert.doesNotMatch(globals, /\.education-entry\s*\{[^}]*grid-template-columns/u);
@@ -942,7 +950,7 @@ test("the production design contract is restrained and dependency-light", async 
 });
 
 test("shared typography source roles preserve article names, compact indices, metadata, and mathematical scale", async () => {
-  const [fonts, exportedFonts, globals, articles, experience, math, home, coursework] = await Promise.all([
+  const [fonts, exportedFonts, globals, articles, experience, math, home, coursework, directory] = await Promise.all([
     readFile(path.join(ROOT, "public", "assets", "fonts", "inter.css"), "utf8"),
     readFile(path.join(OUT, "assets", "fonts", "inter.css"), "utf8"),
     readFile(path.join(ROOT, "app", "globals.css"), "utf8"),
@@ -951,6 +959,7 @@ test("shared typography source roles preserve article names, compact indices, me
     readFile(path.join(ROOT, "app", "components", "research", "ResearchMath.module.css"), "utf8"),
     readFile(path.join(ROOT, "app", "home.module.css"), "utf8"),
     readFile(path.join(ROOT, "app", "coursework", "coursework.module.css"), "utf8"),
+    readFile(path.join(ROOT, "app", "components", "SectionDirectory.module.css"), "utf8"),
   ]);
   const rule = (css, selector) => {
     const escaped = selector.replace(/[.*+?^${}()|[\]\\]/gu, "\\$&");
@@ -975,9 +984,8 @@ test("shared typography source roles preserve article names, compact indices, me
   for (const css of [home, experience, coursework]) {
     assert.match(rule(css, ".sectionIndex"), /font-size:\s*var\(--type-index\)\s*;/u, "Section indices share the compact 10px semantic role.");
   }
-  for (const css of [experience, coursework]) {
-    assert.match(rule(css, ".directory a"), /font-size:\s*var\(--type-subheading\)\s*;/u, "Top-level directories share the 18px semantic role.");
-  }
+  assert.match(rule(directory, ".directory a"), /font-size:\s*var\(--type-subheading\)\s*;/u, "Both top-level directories share the 18px semantic role.");
+  assert.match(rule(directory, ".index"), /font-size:\s*var\(--type-index\)\s*;/u, "Both directories use the compact section-index role.");
   assert.match(rule(coursework, ".sectionBody h2"), /font-size:\s*var\(--type-heading\)\s*;/u);
   assert.match(rule(coursework, ".courseList"), /font-size:\s*var\(--type-reading\)\s*;/u);
   for (const declarations of [rule(articles, ".paper .header h1"), rule(experience, ".detailPage .detailHeader h1"), rule(experience, ".entryTitle")]) {

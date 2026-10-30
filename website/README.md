@@ -18,7 +18,11 @@ and directory indices use 10px/400. These smaller roles stay the same at every v
 Inter retains a shared fixed optical size of 14 and lining numerals. Inline mathematical
 expressions use 1em; displayed expressions use 1.15em. Pure inline numeric values inherit
 the surrounding prose family while preserving their original TeX in accessible MathML.
-Experience opens with an Areas of Focus directory linking to its five domains.
+Experience opens with Experience: Areas of Focus. Experience and Coursework share
+one numbered directory component with thin row rules and a right-aligned View action
+on hover or keyboard focus, always visible on touch devices. The five Experience
+domains use 01 through 05; the four Coursework groups use 01 through 04. Each row's
+accessible name is its section title; numbers and repeated actions are decorative.
 View Coursework below Education opens a dedicated page containing all 49 courses
 in four subject groups. Each group uses one column at every width.
 

@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { showcaseDomains, type ShowcaseDomain, type ShowcaseEntry } from "../../lib/content/experience-showcase";
 import { InlineMarkdown } from "../research/ResearchInline";
+import { SectionDirectory } from "../SectionDirectory";
 import styles from "./Experience.module.css";
 
 function ReadingArrow() {
@@ -37,15 +38,12 @@ export function ExperienceContent() {
   return (
     <>
       <header className={styles.intro}>
-        <h1>Areas of Focus</h1>
-        <nav className={styles.directory} aria-label="Experience sections">
-          {showcaseDomains.map((domain) => (
-            <a href={`#${domain.slug}`} key={domain.number}>
-              <span className={styles.directoryTitle}>{domain.name}</span>
-              <span className={styles.directoryAction} aria-hidden="true">View</span>
-            </a>
-          ))}
-        </nav>
+        <h1>Experience: Areas of Focus</h1>
+        <SectionDirectory label="Experience sections" items={showcaseDomains.map((domain) => ({
+          number: domain.number,
+          title: domain.name,
+          href: `#${domain.slug}`,
+        }))} />
       </header>
       {showcaseDomains.map((domain) => <ExperienceSection domain={domain} key={domain.number} />)}
     </>

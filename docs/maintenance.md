@@ -132,7 +132,9 @@ and mobile menu on top-level pages, or one parent link on detail pages. Detail l
 return to the originating Education, Selected Research, or Experience anchor.
 `ArticleReadingLayout`/`ArticleContents` own the article structure and responsive
 navigation. `ExperienceSection` and `ExperienceDetails` keep all categories and
-detail pages consistent. Browser interaction stays in focused client components;
+detail pages consistent. `SectionDirectory` owns the shared numbered anchor directory
+for Experience and Coursework, including row rules, decorative indices, and View
+feedback for pointer, keyboard, and touch input. Browser interaction stays in focused client components;
 the About entrance is isolated in `components/dithered-entrance/`.
 
 `ResearchArticle` serves AI and Selected Research. The Markdown parser supports

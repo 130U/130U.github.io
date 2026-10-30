@@ -20,39 +20,6 @@
   letter-spacing: -0.02em;
 }
 
-.directory {
-  display: grid;
-  margin-top: 24px;
-}
-
-.directory a {
-  display: flex;
-  align-items: baseline;
-  gap: 16px;
-  min-height: 44px;
-  padding: 8px 0;
-  font-size: var(--type-subheading);
-  font-weight: 500;
-  line-height: var(--subheading-leading);
-}
-
-.directoryIndex {
-  flex: 0 0 2.5ch;
-  color: var(--muted);
-  font-family: var(--font-prose);
-  font-size: var(--type-index);
-  font-weight: 400;
-  line-height: 1.5;
-  letter-spacing: 0;
-  font-variant-numeric: tabular-nums;
-  white-space: nowrap;
-}
-
-.directory a:focus-visible,
-.directory a:active {
-  color: var(--accent);
-}
-
 .section {
   display: grid;
   grid-template-columns: repeat(12, minmax(0, 1fr));
@@ -103,12 +70,6 @@
 .courseList li {
   padding: 16px 0;
   border-top: 1px solid var(--rule);
-}
-
-@media (hover: hover) and (pointer: fine) {
-  .directory a:hover {
-    color: var(--accent);
-  }
 }
 
 @media (768px <= width < 1024px) {

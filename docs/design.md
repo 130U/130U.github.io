@@ -78,11 +78,15 @@ its temporary reading state.
 
 Experience shares About's Inter headings, Source Serif 4 prose, role sizes, grid, and
 paper/ink palette. It is one page with five numbered sections and an anchor
-directory headed Areas of Focus that stays in one column at every screen width. The directory uses
-full-width rows separated by thin rules, with no leading numbers. Labels use the
+directory headed Experience: Areas of Focus that stays in one column at every screen width.
+Experience and Coursework use the same `SectionDirectory` component: full-width
+rows separated by thin rules, with small serif numbers at the left and labels in the
 18px subheading size at weight 500. A right-aligned View action appears on hover
 and keyboard focus and remains visible on touch devices; the complete row turns
-blue on hover or focus. Section margin indices use the shared 10px serif index role on
+blue on hover or focus. Directory numbers run from 01 through 05 for Experience
+and 01 through 04 for Coursework. Both the decorative numbers and repeated View
+actions are hidden from assistive technology, leaving the section title as each
+link's accessible name. Section margin indices use the shared 10px serif index role on
 About, Experience, and Coursework. Section spacing separates
 domains; thin rules and 28px gaps distinguish entries within them. Category
 introductions are omitted. Summaries use upright
@@ -175,7 +179,8 @@ emergency wrapping when an unbroken word would exceed its container.
 Coursework opens at `/coursework/` from the View Coursework link below the Education
 records. The link uses a compact dark gray button with visible keyboard focus;
 the About page keeps its `#coursework` anchor around this entrance. The dedicated
-page has a numbered directory and four subject sections, indexed 01 through 04.
+page has four subject sections, indexed 01 through 04, and uses the same numbered,
+ruled directory and View interaction as Experience.
 Each section has a shared section heading and a single-column list of course names
 at the shared 14px reading size and leading. All 49 courses retain their original
 wording and order as static text, available without JavaScript. The rail's
