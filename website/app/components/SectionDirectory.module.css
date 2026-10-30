@@ -1,0 +1,83 @@
+.directory {
+  display: grid;
+  grid-template-columns: 1fr;
+  margin-top: 24px;
+  font-family: var(--font-text);
+}
+
+.directory a {
+  display: grid;
+  grid-template-columns: 1rem minmax(0, 1fr) auto;
+  align-items: baseline;
+  gap: 16px;
+  width: 100%;
+  min-height: 68px;
+  padding-block: 20px;
+  border-top: 1px solid var(--rule);
+  color: var(--ink);
+  font-size: var(--type-subheading);
+  font-weight: 500;
+  line-height: var(--subheading-leading);
+  transition: color 180ms var(--ease-out);
+}
+
+.index {
+  color: var(--muted);
+  font-family: var(--font-prose);
+  font-size: var(--type-index);
+  font-weight: 400;
+  line-height: 1.5;
+  letter-spacing: 0;
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+
+.title {
+  min-width: 0;
+}
+
+.action {
+  font-size: var(--type-action);
+  font-weight: 400;
+  line-height: var(--interface-leading);
+  opacity: 0;
+  transition: opacity 180ms var(--ease-out);
+}
+
+.directory a:focus-visible,
+.directory a:active {
+  color: var(--accent);
+}
+
+.directory a:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 4px;
+}
+
+.directory a:focus-visible .action,
+.directory a:active .action {
+  opacity: 1;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .directory a:hover {
+    color: var(--accent);
+  }
+
+  .directory a:hover .action {
+    opacity: 1;
+  }
+}
+
+@media (hover: none), (pointer: coarse) {
+  .action {
+    opacity: 1;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .directory a,
+  .action {
+    transition: none;
+  }
+}

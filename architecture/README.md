@@ -52,9 +52,11 @@ preserving SVG geometry. It handles both freshly generated and already integrate
 viewers; running it again should leave the current viewer unchanged.
 
 The viewer loads `../assets/fonts/inter.css`, preloads regular Inter, and inherits
-the site's fixed optical axis of 14 and lining numerals. General page and module
-headings use 22px, secondary headings 18px, and body/control text 14px at every
-viewport. Diagram labels retain their own SVG coordinate sizes. On the main site,
+the site's fixed optical axis of 14 and lining numerals. The tool UI remains entirely
+in Inter while the main site's narrative prose uses Source Serif 4. General page and
+module headings share the site's 32px desktop / 28px mobile scale at weight 500;
+secondary headings remain 18px and body/control text 14px at every viewport.
+Diagram labels retain their own SVG coordinate sizes. On the main site,
 inline formulas use 1em and displayed formulas 1.15em.
 
 SVG exports embed the local regular and italic Inter files and retain the same

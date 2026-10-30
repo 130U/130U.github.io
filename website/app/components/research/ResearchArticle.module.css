@@ -1,5 +1,6 @@
 .frontMatter {
   margin-top: 1.5rem;
+  font-family: var(--font-prose);
   font-size: var(--type-reading);
   line-height: var(--reading-leading);
 }

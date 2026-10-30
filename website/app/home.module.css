@@ -43,18 +43,20 @@
   margin: 0;
   padding-top: 1px;
   color: var(--muted);
+  font-family: var(--font-prose);
   font-size: var(--type-index);
+  font-weight: 400;
   font-variant-numeric: tabular-nums;
-  line-height: var(--subheading-leading);
-  letter-spacing: 0.015em;
+  line-height: 1.5;
+  letter-spacing: 0;
   user-select: none;
 }
 
 .identity h1 {
   margin: 0;
   font-size: var(--type-title);
-  font-weight: 400;
-  letter-spacing: 0;
+  font-weight: 500;
+  letter-spacing: -0.02em;
   line-height: var(--title-leading);
   text-wrap: balance;
 }
@@ -65,6 +67,7 @@
 
 .biographyCopy {
   margin-top: 24px;
+  font-family: var(--font-prose);
   font-size: var(--type-reading);
   line-height: var(--reading-leading);
   text-wrap: pretty;
@@ -81,9 +84,9 @@
 .sectionTitle {
   margin: 0 0 24px;
   font-size: var(--type-heading);
-  font-weight: 400;
+  font-weight: 500;
   line-height: var(--heading-leading);
-  letter-spacing: 0;
+  letter-spacing: -0.02em;
 }
 
 .researchEntry {
@@ -119,13 +122,13 @@
 .researchSummary {
   margin: 8px 0 0;
   color: inherit;
+  font-family: var(--font-prose);
   font-size: var(--type-reading);
   line-height: var(--reading-leading);
   text-wrap: pretty;
 }
 
 .researchTitle {
-  font-weight: 400;
   text-wrap: pretty;
 }
 

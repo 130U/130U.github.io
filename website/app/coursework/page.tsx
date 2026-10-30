@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { SiteShell } from "../components/SiteShell";
+import { SectionDirectory } from "../components/SectionDirectory";
 import { courseworkGroups } from "../lib/content/about";
 import { createPageMetadata } from "../lib/content/site";
 import styles from "./coursework.module.css";
@@ -22,14 +23,11 @@ export default function CourseworkPage() {
     <SiteShell active="about" parent={{ href: "/#education", label: "Education" }} frameClassName={styles.frame}>
       <header className={styles.intro}>
         <h1>Selected Coursework</h1>
-        <nav className={styles.directory} aria-label="Coursework sections">
-          {courseworkGroups.map((group, index) => (
-            <a key={group.title} href={`#${sectionIds[index]}`}>
-              <span className={styles.directoryIndex} aria-hidden="true">{String(index + 1).padStart(2, "0")}</span>
-              <span>{group.title}</span>
-            </a>
-          ))}
-        </nav>
+        <SectionDirectory label="Coursework sections" items={courseworkGroups.map((group, index) => ({
+          number: String(index + 1).padStart(2, "0"),
+          title: group.title,
+          href: `#${sectionIds[index]}`,
+        }))} />
       </header>
 
       {courseworkGroups.map((group, index) => (

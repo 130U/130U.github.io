@@ -161,7 +161,8 @@ let source = original.replaceAll(".card h3", ".card h2")
   .replace(/(<div class="card-header">[\s\S]*?)<h3>([^<]+)<\/h3>/gu, "$1<h2>$2</h2>")
   .replace(/\n(?:      \/\/[^\n]*\n)+      try \{\n        if \(new URLSearchParams\(window\.location\.search\)\.get\('openExport'\) === '1'\) \{[\s\S]*?\n      \} catch \(_\) \{\}/u, "");
 assert.equal((source.match(/<h2>/gu) ?? []).length, 3, "Expected three major information cards.");
-source = source.replace(/(\.card h2\s*\{[^}]*font-weight:)\s*[^;]+;/gu, "$1 400;");
+source = source.replace(/(\.card h2\s*\{[^}]*font-weight:)\s*[^;]+;/gu, "$1 500;");
+source = source.replace(/(line-height: var\(--(?:title|heading)-leading\);\s+font-weight:)\s*\d+;/gu, "$1 500;");
 source = source.replace(/(\.semantic-passport-reach-actions strong\s*\{[^}]*font-size:)\s*[^;]+;/gu,
   "$1 var(--type-interface);");
 source = source.replace(/(\.semantic-passport-reach-actions strong\s*\{[^}]*line-height:)\s*[^;]+;/gu,
@@ -207,7 +208,7 @@ if (source.includes("data-site-typography")) {
       } else {
         updated = updated.replace(/font-size:[^;]+;/u, (size) => `${size}\n      line-height: var(--${role}-leading);`);
       }
-      if (role === "title") updated = updated.replace(/font-weight:\s*[^;}]+;/gu, "font-weight: 400;");
+      if (role === "title" || role === "heading") updated = updated.replace(/font-weight:\s*[^;}]+;/gu, "font-weight: 500;");
       return `${selector}{${updated}}`;
     });
     css = replaceOnce(css, /    body \{\n/u,
