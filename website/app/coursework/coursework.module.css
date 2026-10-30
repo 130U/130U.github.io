@@ -15,9 +15,9 @@
 .sectionBody h2 {
   margin: 0;
   font-size: var(--type-heading);
-  font-weight: 400;
+  font-weight: 500;
   line-height: var(--heading-leading);
-  letter-spacing: 0;
+  letter-spacing: -0.02em;
 }
 
 .directory {
@@ -32,13 +32,18 @@
   min-height: 44px;
   padding: 8px 0;
   font-size: var(--type-subheading);
+  font-weight: 500;
   line-height: var(--subheading-leading);
 }
 
 .directoryIndex {
   flex: 0 0 2.5ch;
   color: var(--muted);
+  font-family: var(--font-prose);
   font-size: var(--type-index);
+  font-weight: 400;
+  line-height: 1.5;
+  letter-spacing: 0;
   font-variant-numeric: tabular-nums;
   white-space: nowrap;
 }
@@ -66,8 +71,11 @@
   grid-column: 1;
   padding-top: 1px;
   color: var(--muted);
+  font-family: var(--font-prose);
   font-size: var(--type-index);
-  line-height: var(--subheading-leading);
+  font-weight: 400;
+  line-height: 1.5;
+  letter-spacing: 0;
   font-variant-numeric: tabular-nums;
 }
 
@@ -87,6 +95,7 @@
   padding: 0;
   list-style: none;
   color: var(--ink);
+  font-family: var(--font-prose);
   font-size: var(--type-reading);
   line-height: var(--reading-leading);
 }

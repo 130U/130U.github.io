@@ -142,10 +142,13 @@ the build; no browser math engine is loaded. Original TeX remains in accessible
 annotations. Invalid formulas fail the build. Wide equations and tables scroll
 locally without shrinking the reading text.
 
-Use the shared Inter and typography tokens: 22px general titles and module headings,
-18px institution/project/paper names, top-level directory items, and section indices; 14px prose,
-metadata, and auxiliary navigation. Inline formulas use 1em; displayed formulas
-use 1.15em. Pure inline numbers inherit Inter. These roles remain unchanged on
+Use the shared typography tokens: 32px general titles and module headings (28px
+below 768px), 18px institution/project/paper names and top-level directory labels,
+14px prose, metadata, and auxiliary navigation, and 10px section/directory indices.
+Headings and interface text retain Inter; narrative prose and small indices use
+Source Serif 4. General headings use weight 500, names use 600, and directory labels
+use 500. Inline formulas use 1em; displayed formulas use 1.15em. Pure inline numbers
+inherit the surrounding prose family. Only the general heading size changes on
 mobile. See [design](design.md) for spacing and mathematical geometry.
 
 When adding content, update its source, loader/slug registry, route mapping, sitemap
@@ -171,10 +174,12 @@ behavior and consumer tests when changing dependencies.
 `npm run optimize:images` produces `public/assets/brand/og-1774.jpg`.
 The repository cover lives in `.github/assets/readme-cover.jpg`.
 
-The Inter variable fonts and SIL Open Font License live in `public/assets/fonts/`.
-The site and architecture viewer load the same stylesheet, with automatic optical
-sizing disabled, the optical axis fixed at 14, and lining numerals. Retain font
-licenses and use separate lettering only for brand artwork.
+The Inter and Source Serif 4 variable fonts and their SIL Open Font Licenses live
+in `public/assets/fonts/`. The site and architecture viewer share `inter.css`;
+Inter retains automatic optical sizing disabled, the optical axis fixed at 14,
+and lining numerals. The main site also loads `source-serif.css` for prose and
+small indices. Keep the architecture tool UI and original particle wordmark in
+Inter. Retain both font licenses when updating or redistributing the assets.
 
 `npm run build` runs Next.js, then `scripts/assemble-static.mjs`. Assembly includes
 the architecture viewer and its license, normalizes segment payload filenames, and

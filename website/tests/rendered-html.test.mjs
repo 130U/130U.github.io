@@ -119,7 +119,11 @@ const EXPECTED_PUBLIC_ASSETS = [
   "assets/fonts/InterVariable-Italic.woff2",
   "assets/fonts/InterVariable.woff2",
   "assets/fonts/LICENSE.txt",
+  "assets/fonts/SourceSerif4-LICENSE.md",
+  "assets/fonts/SourceSerif4Variable-Italic.woff2",
+  "assets/fonts/SourceSerif4Variable-Roman.woff2",
   "assets/fonts/inter.css",
+  "assets/fonts/source-serif.css",
   "assets/research/dependence/budget-comparison.png",
   "assets/research/dependence/corner-capacity.png",
   "assets/research/dependence/optimal-flow-shares.png",
@@ -554,7 +558,7 @@ test("Experience presents five numbered sections and all eighteen approved entri
   assert.deepEqual(expected.map(({ keyContributions }) => keyContributions.length), [7, 5, 6, 6, 9, 7, 6, 5, 5, 5, 5, 7, 5, 6, 1, 1, 2, 4]);
   assert.deepEqual(experienceEntries(html).map(({ id }) => id), expected.map(({ id }) => id));
   assert.equal(openingTags(html, "h1").length, 1);
-  assert.match(html, /<h1>Experience<\/h1>/u);
+  assert.match(html, /<h1>Areas of Focus<\/h1>/u);
   const directory = [...html.matchAll(/<nav\b([^>]*)>([\s\S]*?)<\/nav>/giu)]
     .find((match) => attribute(match[1], "aria-label") === "Experience sections");
   assert.ok(directory);
@@ -937,7 +941,7 @@ test("the production design contract is restrained and dependency-light", async 
   assert.equal(packageJson.dependencies["@mathjax/mathjax-tex-font"], "4.1.3");
 });
 
-test("shared typography source roles preserve Inter numerals, article names, metadata, and mathematical scale", async () => {
+test("shared typography source roles preserve article names, compact indices, metadata, and mathematical scale", async () => {
   const [fonts, exportedFonts, globals, articles, experience, math, home, coursework] = await Promise.all([
     readFile(path.join(ROOT, "public", "assets", "fonts", "inter.css"), "utf8"),
     readFile(path.join(OUT, "assets", "fonts", "inter.css"), "utf8"),
@@ -965,11 +969,11 @@ test("shared typography source roles preserve Inter numerals, article names, met
   assert.match(rule(globals, "body"), /font-family:\s*var\(--font-text\)/u);
   const tokens = rule(globals, ":root");
   assert.match(tokens, /--type-subheading:\s*1\.125rem\s*;/u);
-  assert.match(tokens, /--type-index:\s*1\.125rem\s*;/u);
+  assert.match(tokens, /--type-index:\s*0\.625rem\s*;/u);
   assert.match(tokens, /--type-reading:\s*0\.875rem\s*;/u);
   assert.match(tokens, /--type-math:\s*1\.15em\s*;/u);
   for (const css of [home, experience, coursework]) {
-    assert.match(rule(css, ".sectionIndex"), /font-size:\s*var\(--type-index\)\s*;/u, "Section indices share the 18px semantic role.");
+    assert.match(rule(css, ".sectionIndex"), /font-size:\s*var\(--type-index\)\s*;/u, "Section indices share the compact 10px semantic role.");
   }
   for (const css of [experience, coursework]) {
     assert.match(rule(css, ".directory a"), /font-size:\s*var\(--type-subheading\)\s*;/u, "Top-level directories share the 18px semantic role.");

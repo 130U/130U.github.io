@@ -3,7 +3,7 @@
   "normalization": "LF",
   "sources": {
     "app/experience/page.tsx": "993f5aa641588d4cd2d5ea7ef7d7826e1b5cafbd06b1bc2bc704f802e23df777",
-    "app/components/experience/ExperienceContent.tsx": "0673dc16794a98f134eda5ba400c9115dbec4a52a781971b27c1e8b3f87dd674",
+    "app/components/experience/ExperienceContent.tsx": "2b49347aed4017f1ac1b8a9fdff55d3e68d45739d3bb48308bf5ef4701508d70",
     "app/components/experience/ExperienceDetails.tsx": "a47f62f2a973e7681684d757b8c31017634ee00c2cd7dced8affd2a832109540",
     "app/lib/content/experience-showcase.ts": "c769e21ec5ba92d66d439746d1090eee5c83ea129e69b30b21943d18325512dd",
     "content/experience-showcase.json": "5003dd0195067ee81adff9cc80ec70f7b35d474f1d717e6da0ba9e1eff8f33f3",

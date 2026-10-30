@@ -44,7 +44,7 @@
   max-width: 100%;
   margin: 0;
   font-size: var(--type-heading);
-  font-weight: 400;
+  font-weight: 500;
   line-height: var(--heading-leading);
   letter-spacing: -0.02em;
 }
@@ -76,6 +76,7 @@
 
 .content {
   min-height: 0;
+  font-family: var(--font-prose);
   padding: 0 1.5rem 1.5rem;
   overflow-y: auto;
   overflow-wrap: anywhere;

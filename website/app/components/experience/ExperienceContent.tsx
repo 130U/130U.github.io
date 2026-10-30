@@ -37,7 +37,7 @@ export function ExperienceContent() {
   return (
     <>
       <header className={styles.intro}>
-        <h1>Experience</h1>
+        <h1>Areas of Focus</h1>
         <nav className={styles.directory} aria-label="Experience sections">
           {showcaseDomains.map((domain) => (
             <a href={`#${domain.slug}`} key={domain.number}>

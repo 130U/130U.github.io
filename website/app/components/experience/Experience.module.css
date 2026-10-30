@@ -7,8 +7,8 @@
   margin: 0;
   font-size: var(--type-title);
   line-height: var(--title-leading);
-  font-weight: 400;
-  letter-spacing: 0;
+  font-weight: 500;
+  letter-spacing: -0.02em;
 }
 .directory { display: grid; grid-template-columns: 1fr; margin-top: 24px; }
 .directory a {
@@ -22,6 +22,7 @@
   gap: 24px;
   color: var(--ink);
   font-size: var(--type-subheading);
+  font-weight: 500;
   line-height: var(--subheading-leading);
   transition: color 180ms var(--ease-out);
 }
@@ -29,6 +30,7 @@
 .directoryAction {
   flex-shrink: 0;
   font-size: var(--type-action);
+  font-weight: 400;
   line-height: var(--interface-leading);
   opacity: 0;
   transition: opacity 180ms var(--ease-out);
@@ -39,8 +41,11 @@
 .directory a:active .directoryAction { opacity: 1; }
 .sectionIndex {
   color: var(--muted);
+  font-family: var(--font-prose);
   font-size: var(--type-index);
-  line-height: var(--subheading-leading);
+  font-weight: 400;
+  line-height: 1.5;
+  letter-spacing: 0;
   font-variant-numeric: tabular-nums;
 }
 .section {
@@ -56,9 +61,9 @@
 .sectionTitle {
   margin: 0 0 28px;
   font-size: var(--type-heading);
-  font-weight: 400;
+  font-weight: 500;
   line-height: var(--heading-leading);
-  letter-spacing: 0;
+  letter-spacing: -0.02em;
   text-wrap: balance;
 }
 .entry { scroll-margin-top: 40px; }
@@ -72,6 +77,13 @@
   text-wrap: balance;
 }
 .summary { margin: 10px 0 0; font-size: var(--type-reading); line-height: var(--reading-leading); text-wrap: pretty; }
+.summary,
+.indexDisclosure p,
+.disclosure p,
+.architecturalContext p,
+.contributions > ul {
+  font-family: var(--font-prose);
+}
 .indexDisclosure { margin-bottom: 28px; }
 .indexDisclosure h3, .disclosure h2 {
   margin: 0 0 10px;
@@ -90,8 +102,8 @@
   margin: 0 0 16px;
   font-size: var(--type-heading);
   line-height: var(--heading-leading);
-  font-weight: 400;
-  letter-spacing: 0;
+  font-weight: 500;
+  letter-spacing: -0.02em;
   scroll-margin-top: 6rem;
 }
 .architecturalContext p + p { margin-top: 16px; }
@@ -138,9 +150,9 @@
 .contributions h2 {
   margin: 0 0 16px;
   font-size: var(--type-heading);
-  font-weight: 400;
+  font-weight: 500;
   line-height: var(--heading-leading);
-  letter-spacing: 0;
+  letter-spacing: -0.02em;
   scroll-margin-top: 6rem;
 }
 .contributions > ul {

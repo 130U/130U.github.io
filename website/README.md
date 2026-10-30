@@ -8,15 +8,17 @@ thirty-two routes; the architecture viewer makes thirty-three exported routes, e
 404. Node.js 24 matches the deployment runtime.
 
 The design follows Cognition's editorial grid, warm paper color, and fine rules with
-self-hosted Inter. About opens with the interactive name entrance, followed
-by the profile. General page titles and section headings are 22px with 1.25 leading;
-institution, project, and paper names are 18px, including detail-page H1s. Body
-text is 14px with 1.6 leading. Metadata, navigation,
-field labels, and footers also use 14px. Top-level directory labels and section indices
-use 18px. This hierarchy stays the same at every viewport. Inter uses a shared fixed
-optical size of 14 and lining numerals. Inline mathematical expressions use 1em;
-displayed expressions use 1.15em. Pure inline numeric values use Inter while
-preserving their original TeX in accessible MathML.
+self-hosted Inter headings and Source Serif 4 prose. About opens with the original
+interactive Inter name entrance, followed by the profile. General page titles and
+section headings are 32px on desktop and 28px below 768px, with weight 500 and 1.2
+leading. Institution, project, and paper names remain 18px/600, including detail-page
+H1s. Body text remains 14px with 1.6 leading. Metadata, navigation, field labels, and
+footers also remain 14px. Top-level directory labels use 18px/500; small serif section
+and directory indices use 10px/400. These smaller roles stay the same at every viewport.
+Inter retains a shared fixed optical size of 14 and lining numerals. Inline mathematical
+expressions use 1em; displayed expressions use 1.15em. Pure inline numeric values inherit
+the surrounding prose family while preserving their original TeX in accessible MathML.
+Experience opens with an Areas of Focus directory linking to its five domains.
 View Coursework below Education opens a dedicated page containing all 49 courses
 in four subject groups. Each group uses one column at every width.
 

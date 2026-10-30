@@ -3,7 +3,7 @@
 Theodore Ouyang's site uses a precise editorial reading frame: warm paper, black ink,
 clear typography, a monochrome LO mark, and selective blue feedback. Its grid, paper
 color, restrained rules, and spacing take their reference from [Cognition](https://cognition.com/).
-The site uses self-hosted Inter and its own content hierarchy.
+The site pairs self-hosted Inter with Source Serif 4 and its own content hierarchy.
 
 ## Identity
 
@@ -27,16 +27,19 @@ link, static fallback, and reduced-motion behavior. The mark's editable master i
 | Structural rule | `rgba(0, 0, 0, 0.06)` |
 | Strong rule | `rgba(0, 0, 0, 0.24)` |
 
-Inter 4.1 is the shared typeface for headings, prose, navigation, directories, controls,
-metadata, and the architecture viewer. Two self-hosted WOFF2 files provide variable
-weights and true italics. `website/public/assets/fonts/inter.css` owns `--font-text`,
-the fixed optical sizing, lining numerals, and the font faces. The regular face is preloaded; italic loads when used.
-System sans fallbacks cover unavailable glyphs.
-The LO mark uses independent artwork.
-Every reading frame uses this same Inter family with automatic optical sizing
-disabled and the `opsz` axis fixed at 14. Prose numerals use proportional widths;
-directory indices and numeric tables can use tabular widths within the same family.
-Inline code labels inherit Inter, and shared bold emphasis uses weight 600.
+Inter 4.1 remains the typeface for headings, navigation, directory labels, controls,
+metadata, and the architecture viewer. Source Serif 4 supplies narrative prose and
+the small section and directory indices. This sans-serif/serif pairing follows
+Cognition's distinction between headings and reading text while retaining the site's
+original Inter lettering and content hierarchy.
+`website/public/assets/fonts/inter.css` owns `--font-text`, the fixed optical sizing,
+lining numerals, and the Inter faces. `source-serif.css` owns `--font-prose` and the
+Source Serif 4 faces. Both families use self-hosted variable WOFF2 files with true
+italics and bundled licenses. Inter retains automatic optical sizing disabled and
+the `opsz` axis fixed at 14. Prose numerals use proportional widths; section indices
+and numeric tables can use tabular widths. Shared bold emphasis uses weight 600.
+The LO mark uses independent artwork, and the particle wordmark retains Inter and
+its original composition and interaction.
 
 Typography follows semantic roles. At any viewport, text with the same role uses
 the same size across every section and page. Weight, color, spacing, and italics
@@ -46,39 +49,40 @@ scale relative to surrounding text without changing the prose size.
 
 | Role | Shared token | Size at the default text setting | Leading |
 | --- | --- | --- | --- |
-| General page title | `--type-title` | 22px, weight 400 | 1.25 |
-| Section heading, coursework category heading | `--type-heading` | 22px, weight 400 | 1.25 |
+| General page title | `--type-title` | 32px desktop / 28px mobile, weight 500 | 1.2 |
+| Section heading, coursework category heading | `--type-heading` | 32px desktop / 28px mobile, weight 500 | 1.2 |
 | Institution, project or paper name | `--type-subheading` | 18px, weight 600 | 1.45 |
 | About degree | `--type-reading` | 14px, weight 500 | 1.6 |
 | Body, records, introductions, course names, metadata values | `--type-reading` | 14px | 1.6 |
 | Navigation, menu, wordmark name, return link | `--type-interface` | 14px | 1.4 |
-| Top-level directory item and Research list title | `--type-subheading` | 18px, weight 400 | 1.45 |
-| Section margin index and directory number | `--type-index` | 18px, weight 400 | 1.45 |
+| Top-level directory item | `--type-subheading` | 18px, weight 500 | 1.45 |
+| Research list title | `--type-subheading` | 18px, weight 600 | 1.45 |
+| Section margin index and directory number | `--type-index` | 10px, weight 400 | 1.5 |
 | Project reading action | `--type-action`, alias of `--type-interface` | 14px, weight 500 | 1.4 |
 | Research prose and table cells | `--type-reading` | 14px | 1.6 |
 | Inline mathematical expression | Relative to surrounding text | 1em | Intrinsic mathematical geometry |
 | Displayed mathematical expression | `--type-math` | 1.15em | Intrinsic mathematical geometry |
 | Field label, footer | `--type-label` | 14px | 1.4 |
 
-Text roles use rem units and scale with the user's text setting. The 22px, 18px,
-and 14px hierarchy stays the same at every viewport across the site and architecture
-viewer; mobile layouts do not reduce type sizes. About, Experience, and Coursework
-headings use zero tracking. General page introductions and article chapter headings
-use -0.02em tracking; article titles use zero. Reading text stays near zero. The shared
-`--reading-leading` supports sustained reading.
+Text roles use rem units and scale with the user's text setting. General titles and
+section headings use 32px on desktop and 28px below 768px, including in the architecture
+viewer. The 18px subheading, 14px reading/interface, and 10px index roles remain the
+same at every viewport. General titles and section headings use -0.02em tracking;
+article names, reading text, and indices use zero tracking. The shared
+`--reading-leading` remains 1.6 for sustained reading.
 Blue marks active navigation, focus, and link feedback. Editorial surfaces use flat
 rules and typography; the note-preview dialog uses a rounded surface to distinguish
 its temporary reading state.
 
 ### Experience presentation
 
-Experience shares About's Inter family, fixed optical size, role sizes, grid, and
+Experience shares About's Inter headings, Source Serif 4 prose, role sizes, grid, and
 paper/ink palette. It is one page with five numbered sections and an anchor
-directory that stays in one column at every screen width. The directory uses
+directory headed Areas of Focus that stays in one column at every screen width. The directory uses
 full-width rows separated by thin rules, with no leading numbers. Labels use the
-18px subheading size at weight 400. A right-aligned View action appears on hover
+18px subheading size at weight 500. A right-aligned View action appears on hover
 and keyboard focus and remains visible on touch devices; the complete row turns
-blue on hover or focus. Section margin indices use the shared 18px index role on
+blue on hover or focus. Section margin indices use the shared 10px serif index role on
 About, Experience, and Coursework. Section spacing separates
 domains; thin rules and 28px gaps distinguish entries within them. Category
 introductions are omitted. Summaries use upright
@@ -113,7 +117,7 @@ entry on Experience.
 Research article prose, emphasis, citations, and table cells use the shared 14px
 reading size. Subsection headings use the shared 18px size with weight 600. Inline
 formulas use 1em; standalone formulas use 1.15em. Pure inline numerical values,
-including scientific notation and percentages, use the surrounding Inter family
+including scientific notation and percentages, use the surrounding prose family
 with native superscripts while retaining their accessible MathML and original TeX.
 Genuine expressions retain the mathematical glyph renderer. Subscripts,
 superscripts, fractions, accents, and equation labels retain their mathematical
@@ -172,7 +176,7 @@ Coursework opens at `/coursework/` from the View Coursework link below the Educa
 records. The link uses a compact dark gray button with visible keyboard focus;
 the About page keeps its `#coursework` anchor around this entrance. The dedicated
 page has a numbered directory and four subject sections, indexed 01 through 04.
-Each section has a 22px category heading and a single-column list of course names
+Each section has a shared section heading and a single-column list of course names
 at the shared 14px reading size and leading. All 49 courses retain their original
 wording and order as static text, available without JavaScript. The rail's
 Back to Education link returns to the Education section. Duke University appears
@@ -188,11 +192,11 @@ and standalone link targets.
 About uses compact spacing inside each research or education record and larger
 breaks between its numbered sections. Each Research entry is one manuscript link
 containing its title and complete summary, separated from the next entry by a thin
-rule. Titles use weight 400 without underlines; titles and summaries share black
+rule. Titles use weight 600 without underlines; titles and summaries share black
 ink at rest and turn blue together on hover or keyboard focus. The title supplies
 the link's accessible name. The list omits dates. Paragraphs wrap naturally
 without forced line breaks. Section headings, entry headings, and reading text use
-the shared 22px, 18px, and 14px hierarchy; scoped spacing overrides do not affect other pages.
+the shared heading, 18px subheading, and 14px reading hierarchy; scoped spacing overrides do not affect other pages.
 
 Page titles own the H1 position. About's two-line "Thinking mathematically / Working in AI"
 supplies its main heading; the particle wordmark retains the full name artwork.
@@ -300,16 +304,16 @@ Keep factual claims, metadata, copy, and content order aligned with the integrit
 
 ### Legal articles
 
-Each paper uses the shared shell and Inter type system with a restrained reading
+Each paper uses the shared shell, Inter headings, and Source Serif 4 prose with a restrained reading
 measure. Preserve the source title, subtitle, author name, date, abstract, original
 chapter numbering, paragraph order, legal citations, and acknowledgments. The
 detail-page H1 combines the institution and approved project title; chapters and
 subsections use semantic H2 and H3 headings.
-Chapter headings use the section role at weight 400; subsections use the 18px
+Chapter headings use the section role at weight 500; subsections use the 18px
 subheading role at weight 600. Preserve source capitalization, italics, and emphasis.
 Legal citations within a paragraph use its body size and spacing, including text
 marked as small capitals in the source. Note previews use the same reading role;
-their headings use the section role at weight 400.
+their headings use the section role at weight 500.
 
 A contents navigation links to Key Contributions, the abstract, chapters, and
 footnotes. It occupies a
