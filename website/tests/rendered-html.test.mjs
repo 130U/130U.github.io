@@ -555,7 +555,7 @@ test("Experience presents five numbered sections and all eighteen approved entri
   const html = await routeHtml("/experience/");
   const expected = await approvedExperience();
   assert.deepEqual(expected.map(({ id }) => id), Array.from({ length: 18 }, (_, index) => index + 1));
-  assert.deepEqual(expected.map(({ keyContributions }) => keyContributions.length), [7, 5, 6, 6, 9, 7, 6, 5, 5, 5, 5, 7, 5, 6, 1, 1, 2, 4]);
+  assert.deepEqual(expected.map(({ keyContributions }) => keyContributions.length), [6, 5, 6, 6, 9, 7, 6, 5, 5, 5, 5, 7, 5, 6, 1, 1, 2, 4]);
   assert.deepEqual(experienceEntries(html).map(({ id }) => id), expected.map(({ id }) => id));
   assert.equal(openingTags(html, "h1").length, 1);
   assert.match(html, /<h1>Experience: Areas of Focus<\/h1>/u);

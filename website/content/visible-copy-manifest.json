@@ -766,19 +766,19 @@
       "formulaCount": 965
     },
     "/experience/": {
-      "textSha256": "599369625e0647cd1c25327a0de3acb3c0fcde39dcf6f998122dcddd5b8cc873",
-      "characterCount": 12702,
-      "wordCount": 1618,
+      "textSha256": "cddc98a73e58b3f1efab9066bb611111e2f5b6c7e312de9e8987160e8d962717",
+      "characterCount": 12583,
+      "wordCount": 1633,
       "preview": "Skip to main content Theodore Ouyang About Experience Experience: Areas of Focus AI Research and Engineering Data Science Legal Research and Policy Analysis Fin",
       "altTexts": [],
       "ariaLabels": [
         "Theodore Ouyang home",
         "Primary navigation",
         "Experience sections",
-        "Read more about Duke University × Top-Tier Foundation Model Company: Scalable Expert Quality Control and Adaptive Review",
-        "Read more about Duke University × Top-Tier Foundation Model Company: Financial Task Design and Synthetic Data Engineering",
-        "Read more about Duke University × Top-Tier AI Research Lab: Scientific Reasoning Evaluation and Task Design",
-        "Read more about Duke University × Leading Global Alternative Asset Manager: AI-Driven Investment Research and Explainable Risk Analysis",
+        "Read more about Duke University × Leading Foundation Model Developer: Large-scale domain expert feedback governance and adaptive review",
+        "Read more about Duke University × Leading Foundation Model Developer: Financial task design and synthetic data engineering",
+        "Read more about Duke University × Frontier AI Research Laboratory: General reasoning evaluation and layered verification",
+        "Read more about Duke University × Leading Global Alternative Asset Manager: Evidence verification and robust comparison in investment research",
         "Read more about Jiritsu Network: Asset-Verification Partnerships and Issuer Ranking",
         "Read more about Euromonitor International: China Market Entry for a Premium European Appliance Brand",
         "Read more about China Construction Bank: PCA-Based Sustainability Analysis and Green-Credit Screening",
@@ -1016,19 +1016,19 @@
       }
     },
     "/past-experience/": {
-      "textSha256": "599369625e0647cd1c25327a0de3acb3c0fcde39dcf6f998122dcddd5b8cc873",
-      "characterCount": 12702,
-      "wordCount": 1618,
+      "textSha256": "cddc98a73e58b3f1efab9066bb611111e2f5b6c7e312de9e8987160e8d962717",
+      "characterCount": 12583,
+      "wordCount": 1633,
       "preview": "Skip to main content Theodore Ouyang About Experience Experience: Areas of Focus AI Research and Engineering Data Science Legal Research and Policy Analysis Fin",
       "altTexts": [],
       "ariaLabels": [
         "Theodore Ouyang home",
         "Primary navigation",
         "Experience sections",
-        "Read more about Duke University × Top-Tier Foundation Model Company: Scalable Expert Quality Control and Adaptive Review",
-        "Read more about Duke University × Top-Tier Foundation Model Company: Financial Task Design and Synthetic Data Engineering",
-        "Read more about Duke University × Top-Tier AI Research Lab: Scientific Reasoning Evaluation and Task Design",
-        "Read more about Duke University × Leading Global Alternative Asset Manager: AI-Driven Investment Research and Explainable Risk Analysis",
+        "Read more about Duke University × Leading Foundation Model Developer: Large-scale domain expert feedback governance and adaptive review",
+        "Read more about Duke University × Leading Foundation Model Developer: Financial task design and synthetic data engineering",
+        "Read more about Duke University × Frontier AI Research Laboratory: General reasoning evaluation and layered verification",
+        "Read more about Duke University × Leading Global Alternative Asset Manager: Evidence verification and robust comparison in investment research",
         "Read more about Jiritsu Network: Asset-Verification Partnerships and Issuer Ranking",
         "Read more about Euromonitor International: China Market Entry for a Premium European Appliance Brand",
         "Read more about China Construction Bank: PCA-Based Sustainability Analysis and Green-Credit Screening",
@@ -1056,35 +1056,35 @@
       }
     },
     "/past-experience/artificial-intelligence/": {
-      "textSha256": "852ba3c17d8940271c6a24b7babdea058c04edad795e1e27c05db7637eb7e05d",
-      "characterCount": 6832,
-      "wordCount": 873,
-      "preview": "Skip to main content Theodore Ouyang Back to Experience AI Research and Engineering Confidentiality & Disclosure Note The following four research and engineerin",
+      "textSha256": "ae303353ccd44ebf3773ed4810116bb60cf799bd4b5390e6182689ef4d422119",
+      "characterCount": 6713,
+      "wordCount": 888,
+      "preview": "Skip to main content Theodore Ouyang Back to Experience AI Research and Engineering Confidentiality & Disclosure Note I conducted the following four projects th",
       "altTexts": [],
       "ariaLabels": [
         "Theodore Ouyang home",
         "Parent navigation",
-        "Read more about Duke University × Top-Tier Foundation Model Company: Scalable Expert Quality Control and Adaptive Review",
-        "Read more about Duke University × Top-Tier Foundation Model Company: Financial Task Design and Synthetic Data Engineering",
-        "Read more about Duke University × Top-Tier AI Research Lab: Scientific Reasoning Evaluation and Task Design",
-        "Read more about Duke University × Leading Global Alternative Asset Manager: AI-Driven Investment Research and Explainable Risk Analysis"
+        "Read more about Duke University × Leading Foundation Model Developer: Large-scale domain expert feedback governance and adaptive review",
+        "Read more about Duke University × Leading Foundation Model Developer: Financial task design and synthetic data engineering",
+        "Read more about Duke University × Frontier AI Research Laboratory: General reasoning evaluation and layered verification",
+        "Read more about Duke University × Leading Global Alternative Asset Manager: Evidence verification and robust comparison in investment research"
       ],
       "metadata": {
         "title": "AI Research and Engineering | Experience | Theodore Ouyang",
-        "description": "Launched in September 2023 for a flagship multimodal foundation model program, this initiative established the project’s statistical governance and resource-allocation framework for reinforcement learning from human feedback (RLHF) across more than 300 domain specialists in travel, food delivery, consumer goods, and e-commerce advertising *(partner corporate identity anonymized under NDA; role, scope, and mathematical design disclosed)*. Rather than executing routine vendor quality assurance, I architected the pilot’s mathematical and operational framework for governing external expert networks, calibrating evolving acceptance standards, and allocating review capacity at scale. By uniting hierarchical Beta-Binomial reliability modeling, prediction-assisted active statistical inference (inverse-probability-weighted residual correction), and capacity-constrained mixed-integer programming, the framework strictly separates *epistemic measurement value* from *defect remediation value*. In a 10,000-submission synthetic benchmark verified across 200,000 independent sampling repetitions with ideal residual calibration, this allocation architecture reduced population quality estimation variance by **17.79%** versus uniform sampling at equal expected audit cost. A separate 200-item analytical example reduced post-review expected error loss by **8.89%** at equal review volume.",
+        "description": "Beginning in September 2023, I led the development of a large-scale domain expert collaboration system for LLM post-training, defining reusable mathematical specifications and operating standards for expert feedback production. The system coordinated more than 300 specialists across several domains and an external vendor network supporting reinforcement learning from human feedback (RLHF) *(the corporate partner is anonymized under NDA; my role, project scope, and mathematical design are approved for public disclosure)*. I brought contributor reliability calibration, evolving acceptance criteria, and review capacity allocation into a common framework. It combines hierarchical Beta-Binomial modeling, prediction-assisted active statistical inference with inverse-probability-weighted residual correction, and capacity-constrained mixed-integer programming to optimize the *statistical value of measuring population quality* and the *value of correcting defects* separately. In a synthetic benchmark of 10,000 submissions evaluated over 200,000 independent sampling repetitions, the allocation method reduced population quality estimation variance by **17.79%** relative to uniform sampling at the same expected audit cost, under ideal residual calibration. A separate analytical example with 200 tasks reduced expected post-review error loss by **8.89%** at the same review volume.",
         "canonical": "https://www.theodoreoy.com/experience/",
         "openGraphTitle": "AI Research and Engineering | Experience",
-        "openGraphDescription": "Launched in September 2023 for a flagship multimodal foundation model program, this initiative established the project’s statistical governance and resource-allocation framework for reinforcement learning from human feedback (RLHF) across more than 300 domain specialists in travel, food delivery, consumer goods, and e-commerce advertising *(partner corporate identity anonymized under NDA; role, scope, and mathematical design disclosed)*. Rather than executing routine vendor quality assurance, I architected the pilot’s mathematical and operational framework for governing external expert networks, calibrating evolving acceptance standards, and allocating review capacity at scale. By uniting hierarchical Beta-Binomial reliability modeling, prediction-assisted active statistical inference (inverse-probability-weighted residual correction), and capacity-constrained mixed-integer programming, the framework strictly separates *epistemic measurement value* from *defect remediation value*. In a 10,000-submission synthetic benchmark verified across 200,000 independent sampling repetitions with ideal residual calibration, this allocation architecture reduced population quality estimation variance by **17.79%** versus uniform sampling at equal expected audit cost. A separate 200-item analytical example reduced post-review expected error loss by **8.89%** at equal review volume.",
+        "openGraphDescription": "Beginning in September 2023, I led the development of a large-scale domain expert collaboration system for LLM post-training, defining reusable mathematical specifications and operating standards for expert feedback production. The system coordinated more than 300 specialists across several domains and an external vendor network supporting reinforcement learning from human feedback (RLHF) *(the corporate partner is anonymized under NDA; my role, project scope, and mathematical design are approved for public disclosure)*. I brought contributor reliability calibration, evolving acceptance criteria, and review capacity allocation into a common framework. It combines hierarchical Beta-Binomial modeling, prediction-assisted active statistical inference with inverse-probability-weighted residual correction, and capacity-constrained mixed-integer programming to optimize the *statistical value of measuring population quality* and the *value of correcting defects* separately. In a synthetic benchmark of 10,000 submissions evaluated over 200,000 independent sampling repetitions, the allocation method reduced population quality estimation variance by **17.79%** relative to uniform sampling at the same expected audit cost, under ideal residual calibration. A separate analytical example with 200 tasks reduced expected post-review error loss by **8.89%** at the same review volume.",
         "openGraphUrl": "https://www.theodoreoy.com/experience/",
         "twitterTitle": "AI Research and Engineering | Experience",
-        "twitterDescription": "Launched in September 2023 for a flagship multimodal foundation model program, this initiative established the project’s statistical governance and resource-allocation framework for reinforcement learning from human feedback (RLHF) across more than 300 domain specialists in travel, food delivery, consumer goods, and e-commerce advertising *(partner corporate identity anonymized under NDA; role, scope, and mathematical design disclosed)*. Rather than executing routine vendor quality assurance, I architected the pilot’s mathematical and operational framework for governing external expert networks, calibrating evolving acceptance standards, and allocating review capacity at scale. By uniting hierarchical Beta-Binomial reliability modeling, prediction-assisted active statistical inference (inverse-probability-weighted residual correction), and capacity-constrained mixed-integer programming, the framework strictly separates *epistemic measurement value* from *defect remediation value*. In a 10,000-submission synthetic benchmark verified across 200,000 independent sampling repetitions with ideal residual calibration, this allocation architecture reduced population quality estimation variance by **17.79%** versus uniform sampling at equal expected audit cost. A separate 200-item analytical example reduced post-review expected error loss by **8.89%** at equal review volume."
+        "twitterDescription": "Beginning in September 2023, I led the development of a large-scale domain expert collaboration system for LLM post-training, defining reusable mathematical specifications and operating standards for expert feedback production. The system coordinated more than 300 specialists across several domains and an external vendor network supporting reinforcement learning from human feedback (RLHF) *(the corporate partner is anonymized under NDA; my role, project scope, and mathematical design are approved for public disclosure)*. I brought contributor reliability calibration, evolving acceptance criteria, and review capacity allocation into a common framework. It combines hierarchical Beta-Binomial modeling, prediction-assisted active statistical inference with inverse-probability-weighted residual correction, and capacity-constrained mixed-integer programming to optimize the *statistical value of measuring population quality* and the *value of correcting defects* separately. In a synthetic benchmark of 10,000 submissions evaluated over 200,000 independent sampling repetitions, the allocation method reduced population quality estimation variance by **17.79%** relative to uniform sampling at the same expected audit cost, under ideal residual calibration. A separate analytical example with 200 tasks reduced expected post-review error loss by **8.89%** at the same review volume."
       }
     },
     "/past-experience/artificial-intelligence/statistical-inference-and-resource-allocation-in-expert-data-production/": {
-      "textSha256": "2bb316f5bdc5ba50e6a71b446d464b4c94ee51bbf5b82f0dab98938bdf8527b4",
-      "characterCount": 23243,
-      "wordCount": 3139,
-      "preview": "Skip to main content Theodore Ouyang Back to Experience Duke University × Top-Tier Foundation Model Company: Scalable Expert Quality Control and Adaptive Review",
+      "textSha256": "01b6075f41783cde2ebe83af43cb3a4cb6f1c76ba140a6d0d22bb42c5be826e2",
+      "characterCount": 22178,
+      "wordCount": 3070,
+      "preview": "Skip to main content Theodore Ouyang Back to Experience Duke University × Leading Foundation Model Developer: Large-scale domain expert feedback governance and ",
       "altTexts": [],
       "ariaLabels": [
         "Theodore Ouyang home",
@@ -1130,23 +1130,23 @@
         "Scrollable mathematical expression"
       ],
       "metadata": {
-        "title": "Duke University × Top-Tier Foundation Model Company: Scalable Expert Quality Control and Adaptive Review | Theodore Ouyang",
-        "description": "Launched in September 2023 for a flagship multimodal foundation model program, this initiative established the project’s statistical governance and resource-allocation framework for reinforcement learning from human feedback (RLHF) across more than 300...",
+        "title": "Duke University × Leading Foundation Model Developer: Large-scale domain expert feedback governance and adaptive review | Theodore Ouyang",
+        "description": "Beginning in September 2023, I led the development of a large-scale domain expert collaboration system for LLM post-training, defining reusable mathematical specifications and operating standards for expert feedback production.",
         "canonical": "https://www.theodoreoy.com/past-experience/artificial-intelligence/statistical-inference-and-resource-allocation-in-expert-data-production/",
-        "openGraphTitle": "Duke University × Top-Tier Foundation Model Company: Scalable Expert Quality Control and Adaptive Review",
-        "openGraphDescription": "Launched in September 2023 for a flagship multimodal foundation model program, this initiative established the project’s statistical governance and resource-allocation framework for reinforcement learning from human feedback (RLHF) across more than 300...",
+        "openGraphTitle": "Duke University × Leading Foundation Model Developer: Large-scale domain expert feedback governance and adaptive review",
+        "openGraphDescription": "Beginning in September 2023, I led the development of a large-scale domain expert collaboration system for LLM post-training, defining reusable mathematical specifications and operating standards for expert feedback production.",
         "openGraphUrl": "https://www.theodoreoy.com/past-experience/artificial-intelligence/statistical-inference-and-resource-allocation-in-expert-data-production/",
-        "twitterTitle": "Duke University × Top-Tier Foundation Model Company: Scalable Expert Quality Control and Adaptive Review",
-        "twitterDescription": "Launched in September 2023 for a flagship multimodal foundation model program, this initiative established the project’s statistical governance and resource-allocation framework for reinforcement learning from human feedback (RLHF) across more than 300..."
+        "twitterTitle": "Duke University × Leading Foundation Model Developer: Large-scale domain expert feedback governance and adaptive review",
+        "twitterDescription": "Beginning in September 2023, I led the development of a large-scale domain expert collaboration system for LLM post-training, defining reusable mathematical specifications and operating standards for expert feedback production."
       },
       "mathSourceSha256": "9e6f078942ff402e49009497df010d00d6c2d3715a6bc5332a7dc45ddd19167a",
       "formulaCount": 147
     },
     "/past-experience/artificial-intelligence/task-validity-in-financial-synthetic-data/": {
-      "textSha256": "b20c88c3055e2c1d9bc813104537c7346538bd70b65175a9f24ed8181b646563",
-      "characterCount": 21688,
-      "wordCount": 2833,
-      "preview": "Skip to main content Theodore Ouyang Back to Experience Duke University × Top-Tier Foundation Model Company: Financial Task Design and Synthetic Data Engineerin",
+      "textSha256": "c9e3d1649814af33e0755f797181ac38ff8ccc85f6ba2bf147000ac3afc32583",
+      "characterCount": 21549,
+      "wordCount": 2885,
+      "preview": "Skip to main content Theodore Ouyang Back to Experience Duke University × Leading Foundation Model Developer: Financial task design and synthetic data engineeri",
       "altTexts": [],
       "ariaLabels": [
         "Theodore Ouyang home",
@@ -1181,23 +1181,23 @@
         "Mathematical equation"
       ],
       "metadata": {
-        "title": "Duke University × Top-Tier Foundation Model Company: Financial Task Design and Synthetic Data Engineering | Theodore Ouyang",
-        "description": "Initiated in September 2023 for a frontier foundation model program (partner identity anonymized under NDA), this project defined what constitutes high-signal financial post-training data and established an end-to-end paradigm for adversarial task design,...",
+        "title": "Duke University × Leading Foundation Model Developer: Financial task design and synthetic data engineering | Theodore Ouyang",
+        "description": "This project began in September 2023 as part of a frontier foundation model program (the partner's identity is confidential under an NDA).",
         "canonical": "https://www.theodoreoy.com/past-experience/artificial-intelligence/task-validity-in-financial-synthetic-data/",
-        "openGraphTitle": "Duke University × Top-Tier Foundation Model Company: Financial Task Design and Synthetic Data Engineering",
-        "openGraphDescription": "Initiated in September 2023 for a frontier foundation model program (partner identity anonymized under NDA), this project defined what constitutes high-signal financial post-training data and established an end-to-end paradigm for adversarial task design,...",
+        "openGraphTitle": "Duke University × Leading Foundation Model Developer: Financial task design and synthetic data engineering",
+        "openGraphDescription": "This project began in September 2023 as part of a frontier foundation model program (the partner's identity is confidential under an NDA).",
         "openGraphUrl": "https://www.theodoreoy.com/past-experience/artificial-intelligence/task-validity-in-financial-synthetic-data/",
-        "twitterTitle": "Duke University × Top-Tier Foundation Model Company: Financial Task Design and Synthetic Data Engineering",
-        "twitterDescription": "Initiated in September 2023 for a frontier foundation model program (partner identity anonymized under NDA), this project defined what constitutes high-signal financial post-training data and established an end-to-end paradigm for adversarial task design,..."
+        "twitterTitle": "Duke University × Leading Foundation Model Developer: Financial task design and synthetic data engineering",
+        "twitterDescription": "This project began in September 2023 as part of a frontier foundation model program (the partner's identity is confidential under an NDA)."
       },
       "mathSourceSha256": "a5135c00bb4ad37f87634c0a46f1bedae0f3d2d8368c7a927ba3822b31ac64db",
       "formulaCount": 107
     },
     "/past-experience/artificial-intelligence/verification-and-supervision-in-scientific-reasoning-tasks/": {
-      "textSha256": "e218c7a46a07bc582091365360356c4c7a45fa7a3909540dda249dad363e5f99",
-      "characterCount": 19994,
-      "wordCount": 2731,
-      "preview": "Skip to main content Theodore Ouyang Back to Experience Duke University × Top-Tier AI Research Lab: Scientific Reasoning Evaluation and Task Design Position Res",
+      "textSha256": "8e3241c7fada7122aa096809801c8609954ac57338e88da11e14a537b592c128",
+      "characterCount": 22006,
+      "wordCount": 3101,
+      "preview": "Skip to main content Theodore Ouyang Back to Experience Duke University × Frontier AI Research Laboratory: General reasoning evaluation and layered verification",
       "altTexts": [],
       "ariaLabels": [
         "Theodore Ouyang home",
@@ -1218,14 +1218,11 @@
         "Scrollable mathematical expression",
         "Scrollable mathematical expression",
         "Scrollable mathematical expression",
-        "Scrollable mathematical expression",
-        "Scrollable mathematical expression",
         "Mathematical equation",
         "Scrollable mathematical expression",
         "Mathematical equation",
         "Mathematical equation",
         "Mathematical equation",
-        "Scrollable mathematical expression",
         "Scrollable mathematical expression",
         "Scrollable mathematical expression",
         "Mathematical equation",
@@ -1245,23 +1242,23 @@
         "Mathematical equation"
       ],
       "metadata": {
-        "title": "Duke University × Top-Tier AI Research Lab: Scientific Reasoning Evaluation and Task Design | Theodore Ouyang",
-        "description": "Launched in September 2023 through an early academic collaboration with a frontier AI research laboratory (partner identity anonymized under NDA), this work developed a three-pillar evaluation and process-supervision framework for scientific, mathematical,...",
+        "title": "Duke University × Frontier AI Research Laboratory: General reasoning evaluation and layered verification | Theodore Ouyang",
+        "description": "I developed a framework for evaluating and supervising general reasoning through a university collaboration with a frontier AI research laboratory that began in September 2023 (partner identity withheld under NDA).",
         "canonical": "https://www.theodoreoy.com/past-experience/artificial-intelligence/verification-and-supervision-in-scientific-reasoning-tasks/",
-        "openGraphTitle": "Duke University × Top-Tier AI Research Lab: Scientific Reasoning Evaluation and Task Design",
-        "openGraphDescription": "Launched in September 2023 through an early academic collaboration with a frontier AI research laboratory (partner identity anonymized under NDA), this work developed a three-pillar evaluation and process-supervision framework for scientific, mathematical,...",
+        "openGraphTitle": "Duke University × Frontier AI Research Laboratory: General reasoning evaluation and layered verification",
+        "openGraphDescription": "I developed a framework for evaluating and supervising general reasoning through a university collaboration with a frontier AI research laboratory that began in September 2023 (partner identity withheld under NDA).",
         "openGraphUrl": "https://www.theodoreoy.com/past-experience/artificial-intelligence/verification-and-supervision-in-scientific-reasoning-tasks/",
-        "twitterTitle": "Duke University × Top-Tier AI Research Lab: Scientific Reasoning Evaluation and Task Design",
-        "twitterDescription": "Launched in September 2023 through an early academic collaboration with a frontier AI research laboratory (partner identity anonymized under NDA), this work developed a three-pillar evaluation and process-supervision framework for scientific, mathematical,..."
+        "twitterTitle": "Duke University × Frontier AI Research Laboratory: General reasoning evaluation and layered verification",
+        "twitterDescription": "I developed a framework for evaluating and supervising general reasoning through a university collaboration with a frontier AI research laboratory that began in September 2023 (partner identity withheld under NDA)."
       },
-      "mathSourceSha256": "3fbf3a0fbf6e1e939c84096a30ac08b09759144c18a9cc6cf635c803ef22c7c6",
-      "formulaCount": 131
+      "mathSourceSha256": "fddec0a0b51e9c82919a0fee70492836a2426d22605efa632c35fec62ae1896a",
+      "formulaCount": 126
     },
     "/past-experience/artificial-intelligence/evidence-uncertainty-and-decision-guarantees-in-investment-research/": {
-      "textSha256": "9a9c57f0f5a18c82746ea0324d300e8aea6c96dd70db5d1525900ae8e11dd02f",
-      "characterCount": 17531,
-      "wordCount": 2386,
-      "preview": "Skip to main content Theodore Ouyang Back to Experience Duke University × Leading Global Alternative Asset Manager: AI-Driven Investment Research and Explainabl",
+      "textSha256": "200a4ae24187bc4b82f807d637b8a5a5f137476294b241342b627a565d2a97fd",
+      "characterCount": 16009,
+      "wordCount": 2281,
+      "preview": "Skip to main content Theodore Ouyang Back to Experience Duke University × Leading Global Alternative Asset Manager: Evidence verification and robust comparison ",
       "altTexts": [],
       "ariaLabels": [
         "Theodore Ouyang home",
@@ -1307,17 +1304,17 @@
         "Research data table"
       ],
       "metadata": {
-        "title": "Duke University × Leading Global Alternative Asset Manager: AI-Driven Investment Research and Explainable Risk Analysis | Theodore Ouyang",
-        "description": "Developed in a multi-year collaboration between Duke University and a leading global alternative asset manager overseeing more than $300 billion in assets under management (partner identity anonymized under NDA), this project built an AI-native...",
+        "title": "Duke University × Leading Global Alternative Asset Manager: Evidence verification and robust comparison in investment research | Theodore Ouyang",
+        "description": "I developed and implemented an evidence verification and decision assurance framework through a multiyear collaboration between Duke University and a leading global alternative asset manager with more than $300 billion in assets under management.",
         "canonical": "https://www.theodoreoy.com/past-experience/artificial-intelligence/evidence-uncertainty-and-decision-guarantees-in-investment-research/",
-        "openGraphTitle": "Duke University × Leading Global Alternative Asset Manager: AI-Driven Investment Research and Explainable Risk Analysis",
-        "openGraphDescription": "Developed in a multi-year collaboration between Duke University and a leading global alternative asset manager overseeing more than $300 billion in assets under management (partner identity anonymized under NDA), this project built an AI-native...",
+        "openGraphTitle": "Duke University × Leading Global Alternative Asset Manager: Evidence verification and robust comparison in investment research",
+        "openGraphDescription": "I developed and implemented an evidence verification and decision assurance framework through a multiyear collaboration between Duke University and a leading global alternative asset manager with more than $300 billion in assets under management.",
         "openGraphUrl": "https://www.theodoreoy.com/past-experience/artificial-intelligence/evidence-uncertainty-and-decision-guarantees-in-investment-research/",
-        "twitterTitle": "Duke University × Leading Global Alternative Asset Manager: AI-Driven Investment Research and Explainable Risk Analysis",
-        "twitterDescription": "Developed in a multi-year collaboration between Duke University and a leading global alternative asset manager overseeing more than $300 billion in assets under management (partner identity anonymized under NDA), this project built an AI-native..."
+        "twitterTitle": "Duke University × Leading Global Alternative Asset Manager: Evidence verification and robust comparison in investment research",
+        "twitterDescription": "I developed and implemented an evidence verification and decision assurance framework through a multiyear collaboration between Duke University and a leading global alternative asset manager with more than $300 billion in assets under management."
       },
-      "mathSourceSha256": "ff4de88335c665f54b941d4d5a0fa91b4d824805c6da45dfe8a7855d8f8b2b99",
-      "formulaCount": 139
+      "mathSourceSha256": "b5a9f4358cfd16cbcbd639c68f46134326efb2b51391b964e4e0e19470b1669a",
+      "formulaCount": 133
     },
     "/past-experience/data-science/": {
       "textSha256": "4c28243e2463e440a5821cbeb48f0044ad1a042b262bc5e841ebea2f585cf666",
@@ -1780,19 +1777,19 @@
       }
     },
     "/now/": {
-      "textSha256": "599369625e0647cd1c25327a0de3acb3c0fcde39dcf6f998122dcddd5b8cc873",
-      "characterCount": 12702,
-      "wordCount": 1618,
+      "textSha256": "cddc98a73e58b3f1efab9066bb611111e2f5b6c7e312de9e8987160e8d962717",
+      "characterCount": 12583,
+      "wordCount": 1633,
       "preview": "Skip to main content Theodore Ouyang About Experience Experience: Areas of Focus AI Research and Engineering Data Science Legal Research and Policy Analysis Fin",
       "altTexts": [],
       "ariaLabels": [
         "Theodore Ouyang home",
         "Primary navigation",
         "Experience sections",
-        "Read more about Duke University × Top-Tier Foundation Model Company: Scalable Expert Quality Control and Adaptive Review",
-        "Read more about Duke University × Top-Tier Foundation Model Company: Financial Task Design and Synthetic Data Engineering",
-        "Read more about Duke University × Top-Tier AI Research Lab: Scientific Reasoning Evaluation and Task Design",
-        "Read more about Duke University × Leading Global Alternative Asset Manager: AI-Driven Investment Research and Explainable Risk Analysis",
+        "Read more about Duke University × Leading Foundation Model Developer: Large-scale domain expert feedback governance and adaptive review",
+        "Read more about Duke University × Leading Foundation Model Developer: Financial task design and synthetic data engineering",
+        "Read more about Duke University × Frontier AI Research Laboratory: General reasoning evaluation and layered verification",
+        "Read more about Duke University × Leading Global Alternative Asset Manager: Evidence verification and robust comparison in investment research",
         "Read more about Jiritsu Network: Asset-Verification Partnerships and Issuer Ranking",
         "Read more about Euromonitor International: China Market Entry for a Premium European Appliance Brand",
         "Read more about China Construction Bank: PCA-Based Sustainability Analysis and Green-Credit Screening",
