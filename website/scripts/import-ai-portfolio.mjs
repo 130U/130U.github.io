@@ -74,9 +74,9 @@ for (const [index, [slug, chapterCount]] of projects.entries()) {
   assert.ok(body.startsWith("## 1 "), "The manuscript must start at its first chapter");
 
   const sectionHeadings = [...parts[0].matchAll(/^## ([^\n]+)$/gmu)];
-  assert.equal(sectionHeadings.length, 4, `Incomplete project sections for ${slug}`);
-  assert.deepEqual(sectionHeadings.slice(0, 3).map((heading) => heading[1]), ["Summary", "Confidentiality & Scope Disclosure", "Key Contributions"]);
-  assert.match(sectionHeadings[3][1], /^Architectural Context: .+/u);
+  assert.equal(sectionHeadings.length, 3, `Incomplete project sections for ${slug}`);
+  assert.deepEqual(sectionHeadings.slice(0, 2).map((heading) => heading[1]), ["Summary", "Key Contributions"]);
+  assert.match(sectionHeadings[2][1], /^Architectural Context: .+/u);
   const sections = sectionHeadings.map((heading, i) => parts[0].slice(heading.index + heading[0].length, sectionHeadings[i + 1]?.index).trim());
   assert.ok(sections.every(Boolean), `Empty project section for ${slug}`);
 
@@ -95,13 +95,13 @@ for (const [index, [slug, chapterCount]] of projects.entries()) {
   entry.detailTitle = metadata.Title;
   entry.readMoreLabel = metadata["Read More Label"];
   entry.metadata = { position: metadata.Position, location: metadata.Location, dates: metadata.Dates };
-  entry.disclosure = { title: sectionHeadings[1][1], text: sections[1] };
-  entry.contributionsLabel = sectionHeadings[2][1];
-  const parsedContributions = contributions(sections[2]);
+  delete entry.disclosure;
+  entry.contributionsLabel = sectionHeadings[1][1];
+  const parsedContributions = contributions(sections[1]);
   entry.keyContributions = parsedContributions.items;
   if (Object.keys(parsedContributions.details).length) entry.keyContributionDetails = parsedContributions.details;
   else delete entry.keyContributionDetails;
-  entry.architecturalContext = { title: sectionHeadings[3][1], text: sections[3] };
+  entry.architecturalContext = { title: sectionHeadings[2][1], text: sections[2] };
   entry.notes = [];
 
   const articleFile = `content/artificial-intelligence/${slug}.json`;
