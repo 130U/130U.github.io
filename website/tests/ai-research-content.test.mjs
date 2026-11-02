@@ -9,7 +9,7 @@ const ROOT = fileURLToPath(new URL("../", import.meta.url));
 const AI_ROUTE = "/past-experience/artificial-intelligence/";
 const SOURCE_FILE = "content/sources/ai-portfolio/ai-research-and-engineering.md";
 const CANONICAL_DOCUMENT = path.join(ROOT, SOURCE_FILE);
-const SOURCE_SHA256 = "bc688374f1ca56e7c5eafbd06a7f33e6d7d752f4c8d0dd98b05f30164921405d";
+const SOURCE_SHA256 = "34b1b3378c6baa36f01255c807eb1a445411e75406ca119157cb6d86fb9d005c";
 // Structure and benchmark-table shapes are checked independently of the renderer.
 const PROJECTS = [
   {
@@ -24,13 +24,13 @@ const PROJECTS = [
   },
   {
     slug: "verification-and-supervision-in-scientific-reasoning-tasks",
-    title: "Verification and supervision in scientific reasoning tasks",
-    bodyStart: 0, display: 15, inline: 108, headings: 7, tables: [[4, 4, 4, 4]],
+    title: "Verification and supervision in reasoning tasks",
+    bodyStart: 0, display: 15, inline: 105, headings: 7, tables: [[4, 4, 4, 4]],
   },
   {
     slug: "evidence-uncertainty-and-decision-guarantees-in-investment-research",
     title: "Evidence uncertainty and decision guarantees in investment research",
-    bodyStart: 0, display: 11, inline: 121, headings: 6, tables: [[3, 3, 3, 3]],
+    bodyStart: 0, display: 11, inline: 115, headings: 6, tables: [[3, 3, 3, 3]],
   },
 ];
 

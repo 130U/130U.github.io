@@ -4,11 +4,11 @@
 Theodore Ouyang
 
 **Updated**
-2026-10-27
+2026-11-02
 
 ## Confidentiality & Disclosure Note
 
-The following four research and engineering initiatives were conducted between September 2023 and September 2026 through university–industry collaborations at Duke University. Pursuant to strict non-disclosure agreements (NDAs) with our industry partners—comprising a flagship multimodal foundation model developer, a frontier AI research laboratory, and a leading global alternative asset manager overseeing more than $300 billion in AUM—partner corporate names and proprietary internal system identifiers are anonymized on this public site. Project titles, my role (*Researcher*), geographic locations, dates, architectural paradigms, and self-contained mathematical formulations with reproducible synthetic benchmarks are authorized for public presentation.
+I conducted the following four projects through Duke University collaborations from September 2023 to September 2026. Partner names and proprietary internal system identifiers are withheld under nondisclosure agreements. The collaborators include a leading multimodal foundation model developer, a frontier AI research laboratory, and a leading global alternative asset manager with more than $300 billion in assets under management. The project titles, my role as a researcher, locations, dates, system architectures, mathematical formulations, and reproducible synthetic benchmarks are cleared for public disclosure.
 
 # Project 01: statistical-inference-and-resource-allocation-in-expert-data-production
 
@@ -16,10 +16,10 @@ The following four research and engineering initiatives were conducted between S
 Statistical inference and resource allocation in expert data production
 
 **Organization**
-Duke University × Top-Tier Foundation Model Company
+Duke University × Leading Foundation Model Developer
 
 **Title**
-Scalable Expert Quality Control and Adaptive Review
+Large-scale domain expert feedback governance and adaptive review
 
 **URL**
 https://www.theodoreoy.com/past-experience/artificial-intelligence/statistical-inference-and-resource-allocation-in-expert-data-production/
@@ -28,43 +28,42 @@ https://www.theodoreoy.com/past-experience/artificial-intelligence/statistical-i
 Researcher
 
 **Location**
-Durham, NC; Palo Alto, CA
+Durham, North Carolina; Palo Alto, California
 
 **Dates**
-September 2023 – September 2026
+September 2023 to September 2026
 
 **Read More Label**
 Read More
 
 ## Summary
 
-Launched in September 2023 for a flagship multimodal foundation model program, this initiative established the project’s statistical governance and resource-allocation framework for reinforcement learning from human feedback (RLHF) across more than 300 domain specialists in travel, food delivery, consumer goods, and e-commerce advertising *(partner corporate identity anonymized under NDA; role, scope, and mathematical design disclosed)*. Rather than executing routine vendor quality assurance, I architected the pilot’s mathematical and operational framework for governing external expert networks, calibrating evolving acceptance standards, and allocating review capacity at scale. By uniting hierarchical Beta-Binomial reliability modeling, prediction-assisted active statistical inference (inverse-probability-weighted residual correction), and capacity-constrained mixed-integer programming, the framework strictly separates *epistemic measurement value* from *defect remediation value*. In a 10,000-submission synthetic benchmark verified across 200,000 independent sampling repetitions with ideal residual calibration, this allocation architecture reduced population quality estimation variance by **17.79%** versus uniform sampling at equal expected audit cost. A separate 200-item analytical example reduced post-review expected error loss by **8.89%** at equal review volume.
+Beginning in September 2023, I led the development of a large-scale domain expert collaboration system for LLM post-training, defining reusable mathematical specifications and operating standards for expert feedback production. The system coordinated more than 300 specialists across several domains and an external vendor network supporting reinforcement learning from human feedback (RLHF) *(the corporate partner is anonymized under NDA; my role, project scope, and mathematical design are approved for public disclosure)*. I brought contributor reliability calibration, evolving acceptance criteria, and review capacity allocation into a common framework. It combines hierarchical Beta-Binomial modeling, prediction-assisted active statistical inference with inverse-probability-weighted residual correction, and capacity-constrained mixed-integer programming to optimize the *statistical value of measuring population quality* and the *value of correcting defects* separately. In a synthetic benchmark of 10,000 submissions evaluated over 200,000 independent sampling repetitions, the allocation method reduced population quality estimation variance by **17.79%** relative to uniform sampling at the same expected audit cost, under ideal residual calibration. A separate analytical example with 200 tasks reduced expected post-review error loss by **8.89%** at the same review volume.
 
 ## Confidentiality & Scope Disclosure
 
-Conducted through a university–industry research collaboration with a flagship multimodal foundation model developer. While the corporate partner's name is withheld pursuant to non-disclosure agreements, my role, project scope, operational scale, and the underlying mathematical and engineering frameworks are authorized for public disclosure.
+This project was conducted through a university-industry research collaboration with a multimodal foundation model developer. The corporate partner is anonymized under non-disclosure agreements. My role, project scope, operational scale, and mathematical and engineering frameworks are approved for public disclosure.
 
 ## Key Contributions
 
-* **Established the Pilot Statistical Governance Framework for Expert Post-Training Data (September 2023 Launch)**: Starting in September 2023, I architected a pilot system governing more than 300 domain contributors across travel, food delivery, consumer goods, and e-commerce advertising. My work defined the project’s mathematical and operational standards for structuring, auditing, and scaling its external expert and outsourcing networks.
-* **Bayesian Adaptive Review Routing & Hierarchical Contributor Calibration**: Designed multi-tier adaptive review rules parameterized by Beta-Binomial reliability posteriors, credible intervals, verified sample counts, and task-level risk priors. In a flagship e-commerce advertising workflow, dynamically routed flagged submissions to three additional specialists and initially accepted submissions to one or two; closed the feedback loop by feeding expert adjudications directly back into contributor reliability posteriors, targeted coaching, and dynamic review intensity.
-* **Taxonomic Defect Disentanglement & Rubric Evolution**: Combined independent random reference audits with targeted high-risk escalations to convert recurring inter-annotator disagreements into unambiguous acceptance criteria. Formally separated missing context, ambiguous prompt instructions, and genuine contributor defects; systematically revised task instructions, boundary cases, and shared calibration anchors and subsequently compared Dawid-Skene reviewer-error models with cost-sensitive deferral rules (DeCCaF) to inform escalation thresholds.
-* **Empirical Cost-Latency Telemetry & Production Data Engineering**: Built end-to-end SQL and Python data pipelines unifying task metadata, review trajectories, acceptance outcomes, turnaround times, and behavioral logs, reconciling platform activity with Hubstaff operational telemetry. Crucially, this cross-system reconciliation served not as clerical time-tracking, but to empirically calibrate unit verification costs ($c_i$), task-stratum latencies ($t_{iaj}$), and hard specialist capacity constraints ($H_j^{\text{review}}$) for our mathematical allocation solvers, while translating client-reported model defects into reproducible engineering investigations and operating SOPs.
-* **Econometric Analysis of Exploratory Choice Architecture**: Analyzed user decision behavior across curated (approximately 20 hotels) versus expanded (100+ eligible options) recommendation sets using logistic regression with decision-stage interactions, dwell-time transformations, and distributional modeling. Demonstrated that expanding the choice set increased deliberation browsing time significantly more clearly than click-through conversion, establishing quantitative product guidance for exploratory assistant settings.
-* **Unified Mathematical Theory Separating Audit Measurement from Defect Remediation**: Extended our production procedures into a rigorous joint mathematical design connecting prediction-assisted active statistical inference, cost-aware audit allocation, and capacity-constrained review assignment. Proved that optimal operations must separate three distinct quantities that standard QA pipelines conflate: a task's *initial error risk* ($q_i$), the *statistical information value of an independent reference audit* ($m_i / c_i$), and the *expected defect loss that additional human handling can remove* ($\Delta_i = r_{i0} - r_{i1}$).
-* **Reproducible Large-Scale Monte Carlo & Remediation Validation**: Validated the estimator and allocation algorithms on a stratified synthetic benchmark of 10,000 submissions checked across 200,000 independent Monte Carlo sampling repetitions. Under ideal residual calibration and an identical expected audit budget, cost-aware residual allocation reduced population quality estimation variance by **17.79%** (cutting standard deviation by **9.33%**) relative to uniform sampling. In a separate 200-item analytical example, marginal-gain review ranking reduced expected post-review defect loss by **8.89%** at equal review volume.
+* **Beginning in September 2023, I led the development of a collaboration system spanning more than 300 domain experts across several specialties.** I defined the mathematical specifications and operating standards for task organization, reliability calibration, acceptance adjudication, and review allocation across the project's external expert and vendor networks. These procedures made distributed expert judgments traceable and subject to calibration as post-training feedback.
+* **I designed tiered review rules using Beta-Binomial reliability posteriors, credible intervals, verified sample counts, and task-level risk priors.** In one workflow, flagged submissions were dynamically assigned to three additional specialists, while initially accepted submissions went to one or two. Expert adjudications then updated contributor reliability posteriors, informed targeted coaching, and adjusted review intensity.
+* **I combined independent random reference audits with escalation of high-risk tasks to turn recurring annotator disagreements into explicit acceptance criteria.** I distinguished missing context, ambiguous instructions, and contributor errors, then revised task instructions, boundary cases, and shared calibration anchors. Subsequent comparisons of Dawid-Skene reviewer-error models and cost-sensitive deferral rules (DeCCaF) informed escalation thresholds.
+* **I built SQL and Python pipelines that brought together task metadata, review histories, acceptance outcomes, turnaround times, and behavioral logs, and reconciled platform activity with Hubstaff operational telemetry.** These records supplied empirical estimates of unit verification costs ($c_i$), task-stratum latencies ($t_{iaj}$), and hard specialist capacity limits ($H_j^{\text{review}}$) for the allocation solvers. I also translated client-reported model defects into reproducible engineering investigations and standard operating procedures.
+* **I formalized the production procedures by connecting prediction-assisted active statistical inference, cost-aware audit allocation, and capacity-constrained review assignment.** The analysis defines a task's *initial error risk* ($q_i$), the *statistical information value of an independent reference audit* ($m_i / c_i$), and the *expected defect loss removable through additional human handling* ($\Delta_i = r_{i0} - r_{i1}$). I derived the sampling and review decisions associated with each quantity, producing a reusable allocation method for expert feedback across domains.
+* **I tested the estimator and allocation algorithms on a stratified synthetic benchmark of 10,000 submissions using 200,000 independent Monte Carlo sampling repetitions.** Under ideal residual calibration and an equal expected audit budget, allocation based on residuals and costs reduced population quality estimation variance by **17.79%**, equivalent to a **9.33%** reduction in standard deviation, relative to uniform sampling. In a separate analytical example with 200 tasks, ranking reviews by marginal gain reduced expected post-review defect loss by **8.89%** at the same review volume.
 
-## Architectural Context: Statistical Governance for Expert Data Production
+## Architectural Context: Statistical governance for expert data production
 
-As the project scaled multi-domain post-training work from September 2023 onward, it faced a statistical problem: coordinating hundreds of distributed domain specialists and external vendor queues while keeping quality measurements interpretable under selective review. Concentrating human review on heuristic high-risk flags created severe selection bias ($\operatorname{Cov}(\pi(X), q(X)) > 0$) that made raw inspection error rates uninterpretable, while auditing tasks whose errors were already predictable wasted senior specialist capacity without improving statistical visibility. The seven sections below formalize the production design and compare it with subsequent literature. The September 2023 start date describes the collaboration; references published in 2024–2026 provide later methodological context.
+Beginning in September 2023, I led the development of the project's expert feedback governance framework for post-training across multiple domains. I coordinated hundreds of distributed specialists and external vendor queues and defined mathematical specifications for quality measurement and resource allocation under selective review. When review successfully targets tasks with higher true error probabilities, the resulting selection bias is positive ($\operatorname{Cov}(\pi(X), q(X)) > 0$), so raw inspection error rates require correction before they can support population quality inference. Audit allocation must also account for residual uncertainty and verification cost to direct expert capacity toward tasks that improve estimation precision. The following seven sections formalize the production design and compare it with subsequent literature. September 2023 is the collaboration's start date; references published in 2024 to 2026 provide later methodological context.
 
 ## Manuscript
 
-## 1 The observation mechanism creates its own failure modes
+## 1 How selective review changes quality measurement
 
-In production RLHF pipelines, the routing policy used to inspect submissions alters the statistical properties of the observed sample. Let $`X`$ denote observable task features (encoding domain vertical, prompt complexity, and contributor history) and $`Y \in \{0, 1\}`$ indicate an error in the original submission under fixed acceptance criteria. The true conditional error probability is $`q(x) = P(Y = 1 \mid X = x)`$. Let $`S = 1`$ indicate selection for an independent reference audit. Conditional on $`X`$, selection is randomized with probability $`\pi(x) > 0`$, independently of the reference label that has yet to be observed.
+In production RLHF pipelines, the policy for routing submissions to review changes the statistical properties of the observed sample. Let $`X`$ denote observable task features, including the domain, prompt complexity, and contributor history, and let $`Y \in \{0, 1\}`$ indicate whether the original submission contains an error under fixed acceptance criteria. The true conditional error probability is $`q(x) = P(Y = 1 \mid X = x)`$. Let $`S = 1`$ indicate selection for an independent reference audit. Conditional on $`X`$, selection is randomized with probability $`\pi(x) > 0`$ and is independent of the reference label, which has not yet been observed.
 
-When operational dashboards use the error fraction among verified submissions to assess the full population, they actually target:
+An operational dashboard that uses the error fraction among verified submissions to estimate population quality targets:
 
 $$
 E[Y \mid S = 1] = \frac{E[\pi(X)q(X)]}{E[\pi(X)]}
@@ -74,79 +73,79 @@ $$
 E[Y \mid S = 1] - E[Y] = \frac{\operatorname{Cov}(\pi(X), q(X))}{E[\pi(X)]}
 $$
 
-When review priorities successfully target high-risk tasks, the covariance between audit probability $`\pi(X)`$ and true defect probability $`q(X)`$ is strictly positive. A higher error detection rate in the reviewed sample cannot then be read directly as a deterioration in overall production quality; it often reflects sharper risk targeting. This identity describes the distribution of a selected item. In a finite batch, the ratio of observed errors to selected items also has a random denominator, so the two quantities should not be conflated.
+When review successfully targets higher true error risk, the covariance between audit probability $`\pi(X)`$ and true defect probability $`q(X)`$ is strictly positive. A higher error detection rate in the reviewed sample can therefore reflect more effective risk targeting; it does not by itself establish that production quality has deteriorated. These identities describe the distribution of a selected item. In a finite batch, the observed error fraction also has a random denominator, so it must be distinguished from the population expression above.
 
-Expert rankings are affected by the exact same mechanism. Let $`a_{jh}`$ be the probability that expert $`j`$ is correct on task stratum $`h`$, and let $`p_{jht}`$ describe the mix of tasks assigned to that expert in period $`t`$. Even with unchanged underlying ability, observed accuracy shifts whenever task routing changes:
+The same selection mechanism affects expert rankings. Let $`a_{jh}`$ be the probability that expert $`j`$ answers a task in stratum $`h`$ correctly, and let $`p_{jht}`$ describe that expert's assigned task mix in period $`t`$. Observed accuracy changes with the task mix even if underlying ability remains constant:
 
 $$
 A_{jt} = \sum_h p_{jht} a_{jh}, \qquad A_{j,t+1} - A_{jt} = \sum_h (p_{jh,t+1} - p_{jht}) a_{jh}
 $$
 
-Valid cross-period comparisons therefore require a fixed target task mix $`w_h`$, reporting standardized accuracy:
+Comparisons across periods therefore require a fixed target task mix $`w_h`$ and standardized accuracy:
 
 $$
 A_j^{\text{std}} = \sum_h w_h a_{jh}
 $$
 
-with overlapping assignments or shared anchor cases to support estimation within each stratum. In our production routing engine, we model each contributor's stratum-level reliability via a conjugate Beta-Binomial scheme: given prior $`\operatorname{Beta}(\alpha_{0h}, \beta_{0h})`$ and $`n_{jht}`$ audited tasks with $`k_{jht}`$ verified successes, the posterior reliability distribution $`\operatorname{Beta}(\alpha_{0h} + k_{jht}, \beta_{0h} + n_{jht} - k_{jht})`$ yields shrinkage-regularized point estimates and credible intervals that account for unequal sample sizes across comparable audits. Pooling different difficulty levels, criteria versions, and selection mechanisms into a single unstratified binomial sample leaves the preceding selection bias unresolved.
+Overlapping assignments or shared anchor cases support estimation within each stratum. In the project's production routing engine, I used a conjugate Beta-Binomial model for each contributor's reliability within a task stratum. Given a prior $`\operatorname{Beta}(\alpha_{0h}, \beta_{0h})`$ and $`n_{jht}`$ audited tasks with $`k_{jht}`$ verified successes, the posterior $`\operatorname{Beta}(\alpha_{0h} + k_{jht}, \beta_{0h} + n_{jht} - k_{jht})`$ provides shrinkage-regularized point estimates and credible intervals that account for unequal sample sizes across comparable audits. Pooling tasks of different difficulty, rubric versions, and selection mechanisms into a single unstratified binomial sample leaves the selection bias unresolved.
 
-These distinctions also guide algorithmic method selection. **[Dawid-Skene](https://doi.org/10.2307/2346806)** models represent differences in reviewer confusion matrices across latent ground truth, whereas **[DeCCaF](https://arxiv.org/html/2403.06906v1)** incorporates task conditions, error costs, and reviewer capacity into human-AI deferral and highlights how assigning difficult cases distorts naive evaluations of expert performance. The architecture developed here addresses the critical interface between selective operational deferral and unbiased population quality inference in ongoing post-training production (*[Dawid-Skene](https://doi.org/10.2307/2346806); [DeCCaF](https://arxiv.org/html/2403.06906v1)*).
+These statistical requirements also guide the choice of reviewer models and allocation methods. [Dawid-Skene](https://doi.org/10.2307/2346806) models describe differences in reviewer confusion matrices relative to latent ground truth. [DeCCaF](https://arxiv.org/html/2403.06906v1) incorporates task conditions, error costs, and reviewer capacity into human-AI deferral, including the effect of difficult assignments on naive evaluations of expert performance. The production architecture connects selective review assignment with unbiased population quality inference in ongoing post-training work ([Dawid-Skene](https://doi.org/10.2307/2346806); [DeCCaF](https://arxiv.org/html/2403.06906v1)).
 
-## 2 Correct predictions with audits to recover the population target
+## 2 Correcting predictions with audits to estimate population quality
 
-Fix a production batch of $`N`$ original submissions, its acceptance criteria, and its latent reference labels $`Y_1, \dots, Y_N`$. The inferential target is the finite-batch error rate $`\mu = N^{-1} \sum_{i=1}^N Y_i`$. Let $`f_i \in [0, 1]`$ be a fixed, inexpensive risk prediction (synthesized from contributor posterior reliability, task complexity features, and automated heuristic checks) and $`\pi_i \in [\pi_{\min}, 1]`$ be the assigned audit probability, with independent draws $`S_i \sim \operatorname{Bernoulli}(\pi_i)`$. Both predictions and sampling probabilities are locked before the current batch's reference labels are revealed.
+Fix a production batch of $`N`$ original submissions, its acceptance criteria, and its latent reference labels $`Y_1, \dots, Y_N`$. The inferential target is the finite-batch error rate $`\mu = N^{-1} \sum_{i=1}^N Y_i`$. Let $`f_i \in [0, 1]`$ be a fixed, inexpensive risk prediction combining contributor reliability posteriors, task complexity, and automated heuristic checks. Assign audit probability $`\pi_i \in [\pi_{\min}, 1]`$ and draw $`S_i \sim \operatorname{Bernoulli}(\pi_i)`$ independently across submissions. Predictions and sampling probabilities are locked before the current batch's reference labels are revealed.
 
-We deploy a prediction-assisted, inverse-probability-weighted (IPW) residual-corrected estimator:
+We used a prediction-assisted estimator with inverse-probability-weighted (IPW) residual correction:
 
 $$
 \hat{\mu} = \frac{1}{N} \sum_{i=1}^N \left[ f_i + \frac{S_i}{\pi_i} (Y_i - f_i) \right]
 $$
 
-Its design-based validity follows directly. Write the prediction residual as $`e_i = Y_i - f_i`$ and condition on the fixed batch, predictions, and sampling probabilities:
+Its design-based validity follows from the conditional expectation below. Write the prediction residual as $`e_i = Y_i - f_i`$ and condition on the fixed batch, predictions, and sampling probabilities:
 
 $$
 \hat{\mu} - \mu = \frac{1}{N} \sum_{i=1}^N \left( \frac{S_i}{\pi_i} - 1 \right) e_i, \qquad E_S[\hat{\mu} - \mu] = 0
 $$
 
-Inverse-probability weighting restores the population representation altered by selective verification, while predictions reduce the residual variation that expensive human expert audits must resolve. Crucially for production robustness, **this design-based unbiasedness does not require $`f_i = q(X_i)`$**: inaccurate predictions can reduce statistical efficiency, but they never introduce selection bias under the specified Bernoulli sampling design. While the estimator builds on established active statistical inference principles (*[Active Statistical Inference: mean estimation and sampling design](https://arxiv.org/html/2403.03208v3)*), our production architecture specifies the exact immutable objects being audited, the rubric version lineage, and the telemetry records required for downstream optimization.
+Inverse-probability weighting restores the population representation altered by selective verification. Predictions reduce the residual variation that human expert audits must resolve. Design-based unbiasedness does not require $`f_i = q(X_i)`$: inaccurate predictions may reduce efficiency, but the estimator remains unbiased under the specified Bernoulli sampling design. The estimator follows established active statistical inference principles ([Active Statistical Inference: mean estimation and sampling design](https://arxiv.org/html/2403.03208v3)). For production use, I defined procedures for freezing the audited objects, recording rubric version histories, and retaining the telemetry needed for optimization.
 
-Specifically, original and revised submissions must be retained as separate database entities. Estimating $`\hat{\mu}_{\text{raw}}`$ on frozen originals and $`\hat{\mu}_{\text{final}}`$ on post-review deliverables cleanly distinguishes *defects generated in initial production* from *defects corrected by review*. Furthermore, whenever post-training criteria evolve, a shared set of anchor cases is adjudicated under both rubric versions; submissions from different periods are then compared under a common reference version, preventing stricter acceptance standards from being mistaken for declining contributor capability.
+Original and revised submissions must be retained as separate database entities. Estimating $`\hat{\mu}_{\text{raw}}`$ on frozen originals and $`\hat{\mu}_{\text{final}}`$ on post-review deliverables distinguishes defects introduced during initial production from those corrected through review. When post-training criteria change, a shared set of anchor cases is adjudicated under both rubric versions. Submissions from different periods can then be compared under a common reference version, preventing stricter acceptance standards from being misread as declining contributor ability.
 
-## 3 Allocate audit effort according to residuals and cost
+## 3 Allocating audit effort by residual uncertainty and cost
 
-Independent Bernoulli sampling eliminates cross-item covariance terms, yielding the exact design variance:
+Independent Bernoulli sampling removes cross-item covariance terms and gives the exact design variance:
 
 $$
 \operatorname{Var}_S(\hat{\mu}) = \frac{1}{N^2} \sum_{i=1}^N \frac{1 - \pi_i}{\pi_i} e_i^2
 $$
 
-This expression identifies the true mathematical objective of audit allocation: **audit effort should address what the automated risk predictions have not resolved**. For a binary error label with conditional error probability $`q_i`$, the expected squared residual decomposes into two components:
+This expression defines the audit allocation objective: audit effort should address uncertainty left unresolved by automated risk predictions. For a binary error label with conditional error probability $`q_i`$, the expected squared residual has two components:
 
 $$
 m_i := E[(Y_i - f_i)^2 \mid X_i] = q_i(1 - q_i) + (q_i - f_i)^2
 $$
 
-The two terms are intrinsic conditional Bernoulli variance $`q_i(1 - q_i)`$ and squared prediction calibration error $`(q_i - f_i)^2`$. This identity establishes a counter-intuitive operational principle: **a high error probability $`q_i`$ does not necessarily imply high inferential value**. If a task category is almost certain to contain an error ($`q_i \approx 1`$) and the predictor correctly recognizes that fact ($`f_i \approx 1`$), then $`m_i \approx 0`$—spending an independent reference audit on that item yields less statistical information about population quality than auditing a moderately risky task whose outcome is genuinely uncertain ($`q_i \approx 0.5`$). The high-risk task still merits operational correction, which is precisely why the *value of measurement* and the *value of remediation* require separate mathematical models.
+The terms are the conditional Bernoulli variance $`q_i(1 - q_i)`$ and the squared calibration error $`(q_i - f_i)^2`$. A high error probability $`q_i`$ need not imply high inferential value. If a task category is almost certain to contain an error ($`q_i \approx 1`$) and the predictor recognizes this ($`f_i \approx 1`$), then $`m_i \approx 0`$. An independent reference audit of that item contributes less information about population quality than an audit of a moderately risky item whose outcome remains uncertain ($`q_i \approx 0.5`$). A remediation model measures the benefit of correcting high-risk tasks; a measurement model evaluates how audits improve population estimates.
 
-Let $`c_i > 0`$ be the empirical cost of an independent reference audit (calibrated by reconciling platform review logs with Hubstaff active-work telemetry) and $`B`$ be the expected audit-cost budget. First consider the optimal design when the true residual second moments $`m_i > 0`$ are known:
+Let $`c_i > 0`$ be the empirical cost of an independent reference audit, calibrated by reconciling platform review logs with Hubstaff active-work telemetry, and let $`B`$ be the expected audit-cost budget. When the true residual second moments $`m_i > 0`$ are known, the optimal design solves:
 
 $$
 \min_{\pi} \sum_{i=1}^N \frac{m_i}{\pi_i} \quad \text{s.t.} \quad \sum_{i=1}^N c_i \pi_i \le B, \quad \pi_{\min} \le \pi_i \le 1
 $$
 
-The omitted constant $`-\sum_i m_i`$ in the numerator of the variance does not depend on the allocation $`\pi`$. For probabilities strictly between their lower and upper bounds, the Lagrangian first-order condition yields the clipped square-root allocation law:
+The omitted constant $`-\sum_i m_i`$ in the variance numerator does not depend on the allocation $`\pi`$. For probabilities strictly between their bounds, the Lagrangian first-order condition gives the clipped square-root allocation:
 
 $$
 -\frac{m_i}{\pi_i^2} + \lambda c_i = 0 \implies \pi_i^* = \operatorname{clip}_{[\pi_{\min}, 1]} \left( \sqrt{\frac{m_i}{\lambda c_i}} \right)
 $$
 
-for budgets below the cost of a full audit, $`\lambda > 0`$ is chosen to satisfy the budget constraint (the multiplier need not be unique when clipping is active), and feasibility requires $`B \ge \pi_{\min} \sum_i c_i`$. If the budget covers a full audit, every item is audited ($`\pi_i^* = 1`$). The square-root law increases sampling intensity for larger expected residuals while penalizing expensive audits, and the positive probability floor $`\pi_{\min}`$ preserves observation coverage and bounded IPW weights across the entire task space.
+For a budget below the cost of a full audit, $`\lambda > 0`$ is chosen to satisfy the budget constraint. The multiplier need not be unique when clipping is active, and feasibility requires $`B \ge \pi_{\min} \sum_i c_i`$. If the budget covers a full audit, every item is audited ($`\pi_i^* = 1`$). The square-root rule assigns higher sampling intensity to larger expected residuals and lower intensity to more expensive audits. A positive probability floor $`\pi_{\min}`$ maintains coverage across the task space and bounds IPW weights.
 
-Production implementation substitutes regularized stratum estimates $`\hat{m}_i > 0`$ obtained from earlier independent audits or a pilot calibration batch. True $`m_i`$ defines the optimality analysis; estimated values $`\hat{m}_i`$ determine the operational allocation. By estimating residuals at the level of `(task stratum × criteria version × cost stratum)`, the pipeline avoids fitting unstable parameters to individual submissions. (Note that $`B`$ constrains *expected* audit cost per batch. Workflows requiring an exact integer count must use a feasible fixed-size sampling design: its first-order inclusion probabilities sum to that integer, and its variance depends on joint inclusion probabilities. These probabilities need not equal the Bernoulli optimum $`\pi_i^*`$.)
+Production allocation uses regularized stratum estimates $`\hat{m}_i > 0`$ from earlier independent audits or a pilot calibration batch. The true $`m_i`$ defines the optimality analysis; the estimates $`\hat{m}_i`$ determine operational allocation. Residuals are estimated at the level of `(task stratum × criteria version × cost stratum)` to avoid fitting unstable parameters to individual submissions. The budget $`B`$ constrains expected audit cost per batch. A workflow requiring an exact integer audit count needs a feasible fixed-size sampling design whose first-order inclusion probabilities sum to that count. Its variance depends on joint inclusion probabilities, and its inclusion probabilities need not equal the Bernoulli optimum $`\pi_i^*`$.
 
-## 4 Derive the gain and identify when it disappears
+## 4 Allocation gains and the conditions they require
 
-We now derive the exact analytical efficiency gain of cost-aware residual allocation over uniform sampling using the same predictor, and characterize when active allocation fails. Let $`C = \sum_{i=1}^N c_i`$, so that the budget-equivalent uniform sampling probability is $`p = B / C`$. When true residual second moments $`m_i`$ are available and no optimal probability reaches a clipping boundary, averaging design variance over the conditional label distribution gives:
+Using the same predictor, the efficiency gain from allocation based on residuals and costs can be derived relative to uniform sampling. The derivation also identifies when the gain vanishes or the allocation fails. Let $`C = \sum_{i=1}^N c_i`$, so the uniform sampling probability at the same expected cost is $`p = B / C`$. If the true residual second moments $`m_i`$ are available and no optimal probability reaches a clipping boundary, averaging design variance over the conditional label distribution gives:
 
 $$
 V_{\text{uniform}} = \frac{1}{N^2} \left[ \frac{C \sum_i m_i}{B} - \sum_i m_i \right]
@@ -156,55 +155,55 @@ $$
 V_{\text{optimal}} = \frac{1}{N^2} \left[ \frac{\left(\sum_i \sqrt{m_i c_i}\right)^2}{B} - \sum_i m_i \right]
 $$
 
-(If a common sampling probability is used within each fixed task stratum, substituting that stratum's finite-batch mean squared residual for $`m_i`$ makes these expressions exact finite-batch identities.) By the Cauchy-Schwarz inequality:
+If all items within a fixed task stratum share a sampling probability, substituting that stratum's finite-batch mean squared residual for $`m_i`$ makes these expressions exact finite-batch identities. The Cauchy-Schwarz inequality gives:
 
 $$
 V_{\text{uniform}} - V_{\text{optimal}} = \frac{C \sum_i m_i - \left(\sum_i \sqrt{m_i c_i}\right)^2}{N^2 B} \ge 0
 $$
 
-Equality holds **if and only if $`m_i / c_i`$ is constant across all items**. Efficiency gains therefore depend strictly on identifiable heterogeneity in residual second moment per unit audit cost; with homogeneous residuals and costs, optimal allocation reduces to uniform sampling. When clipping is active at $`\pi_{\min}`$ or $`1`$, constrained optimization is still no worse than feasible uniform policies, with the exact gain evaluated directly at the clipped primal objective.
+Equality holds if and only if $`m_i / c_i`$ is constant across items. Efficiency gains depend on identifiable variation in residual second moment per unit audit cost. With homogeneous residuals and costs, the optimal allocation is uniform. If clipping is active at $`\pi_{\min}`$ or $`1`$, constrained optimization remains no worse than a feasible uniform policy; the gain can be evaluated directly from the clipped primal objective.
 
-Crucially, the same analysis exposes the exact variance penalty of model misspecification. If the allocation uses inaccurate residual estimates $`\hat{m}_i`$ and neither allocation is clipped, the excess variance relative to the true optimum is:
+The analysis also quantifies the variance penalty from model misspecification. If allocation uses inaccurate residual estimates $`\hat{m}_i`$ and neither allocation is clipped, the excess variance relative to the true optimum is:
 
 $$
 V(\hat{\pi}) - V(\pi^*) = \frac{1}{N^2 B} \left[ \left( \sum_i \sqrt{\hat{m}_i c_i} \right) \left( \sum_i \frac{m_i \sqrt{c_i}}{\sqrt{\hat{m}_i}} \right) - \left( \sum_i \sqrt{m_i c_i} \right)^2 \right] \ge 0
 $$
 
-Severely underestimating $`\hat{m}_i`$ in any region of the task space inflates the penalty through the $`\sqrt{\hat{m}_i}`$ denominator. Enforcing a positive sampling floor $`\pi_{\min}`$ caps this worst-case blowup, while mixing active and uniform probabilities via the budget-preserving defensive convex combination:
+Severely underestimating $`\hat{m}_i`$ in any part of the task space increases the penalty through the denominator $`\sqrt{\hat{m}_i}`$. A positive sampling floor $`\pi_{\min}`$ limits the worst-case variance increase. Active and uniform sampling probabilities can also be combined without changing the budget:
 
 $$
 \pi_i(\rho) = (1 - \rho)\hat{\pi}_i + \rho p
 $$
 
-allows the shrinkage weight $`\rho \in [0, 1]`$ to be tuned across independent calibration batches (*[Robust Sampling for Active Statistical Inference](https://arxiv.org/html/2511.08991v1)*).
+The shrinkage weight $`\rho \in [0, 1]`$ can be tuned using independent calibration batches ([Robust Sampling for Active Statistical Inference](https://arxiv.org/html/2511.08991v1)).
 
-## 5 Allocate review by expected loss reduction
+## 5 Allocating review by expected loss reduction
 
-Whereas statistical auditing seeks to *measure* population quality with minimum variance, operational review seeks to *remove defects* from the current batch before training handoff. For task $`i`$ under handling action $`a`$ (e.g., accept directly, route to peer review, escalate to expert adjudication, or request contributor revision), let $`r_{ia}`$ be the expected error loss remaining *after* the action, $`d_{ia}`$ its operational cost, and $`t_{iaj}`$ the time required from specialist $`j`$ (measured via platform and Hubstaff telemetry). Binary assignment decisions $`z_{ia} \in \{0, 1\}`$ solve:
+Statistical auditing measures population quality with minimum variance. Operational review removes defects from the current batch before it is delivered for training. The two objectives are estimation precision and delivered quality. For task $`i`$ under handling action $`a`$, such as direct acceptance, peer review, expert adjudication, or contributor revision, let $`r_{ia}`$ be the expected error loss remaining after the action, $`d_{ia}`$ its operational cost, and $`t_{iaj}`$ the time required from specialist $`j`$, measured through platform and Hubstaff telemetry. Binary assignment decisions $`z_{ia} \in \{0, 1\}`$ solve:
 
 $$
 \min_{z} F(z) = \sum_{i,a} z_{ia}(r_{ia} + \eta d_{ia}) \quad \text{s.t.} \quad \sum_a z_{ia} = 1, \quad \sum_{i,a} z_{ia} t_{iaj} \le H_j \quad \forall j
 $$
 
-where $`H_j`$ is available specialist time and $`\eta \ge 0`$ converts resource cost to the scale of error loss (*[DeCCaF: capacity constraints and global assignment](https://arxiv.org/html/2403.06906v1)*).
+Here $`H_j`$ is the specialist's available time, and $`\eta \ge 0`$ converts resource cost to the scale of error loss ([DeCCaF: capacity constraints and global assignment](https://arxiv.org/html/2403.06906v1)).
 
-When review costs are equal and each reviewed task consumes one slot, **the optimal priority ranking is by marginal remediation gain $`\Delta_i = r_{i0} - r_{i1}`$, not by initial risk $`r_{i0}`$**. Missing external evidence may make a high-risk task difficult to repair through one additional review ($`\Delta_i`$ small), whereas a self-contained calculation error in a moderate-risk task can be completely eliminated ($`\Delta_k`$ large). Moving a single review slot from task $`i`$ to task $`k`$ changes total expected loss by:
+When review costs are equal and each reviewed task uses one slot, the optimal priority order is determined by marginal remediation gain $`\Delta_i = r_{i0} - r_{i1}`$. Initial risk $`r_{i0}`$ measures the risk before review. Missing external evidence may leave a high-risk task difficult to repair through one additional review, giving a small $`\Delta_i`$. A self-contained calculation error in a moderate-risk task may be fully correctable, giving a large $`\Delta_k`$. Moving one review slot from task $`i`$ to task $`k`$ changes total expected loss by:
 
 $$
 \Delta F = (r_{i0} + r_{k1}) - (r_{i1} + r_{k0}) = \Delta_i - \Delta_k
 $$
 
-Whenever $`\Delta_k > \Delta_i`$, the exchange strictly reduces delivered defect loss, regardless of the tasks' initial risk ordering.
+Whenever $`\Delta_k > \Delta_i`$, the exchange strictly reduces delivered defect loss, regardless of the initial risk ordering.
 
-We can also state the exact calibration precision required of the action-risk estimators. Suppose $`|\hat{r}_{ia} - r_{ia}| \le \delta`$ for every feasible action, costs and capacities are known, and $`\hat{z}`$ minimizes the predicted objective $`\hat{F}(z)`$. Relative to the true optimal feasible assignment $`z^*`$:
+Error in the action-risk estimates also determines a performance bound for review allocation. Suppose $`|\hat{r}_{ia} - r_{ia}| \le \delta`$ for every feasible action, costs and capacities are known, and $`\hat{z}`$ minimizes the predicted objective $`\hat{F}(z)`$. Relative to the true optimal feasible assignment $`z^*`$:
 
 $$
 F(\hat{z}) \le \hat{F}(\hat{z}) + N\delta \le \hat{F}(z^*) + N\delta \le F(z^*) + 2N\delta
 $$
 
-This bound identifies *post-action residual loss* $`r_{ia}`$ as the critical empirical calibration target, motivating randomized pilot trials across permitted review actions.
+The bound identifies post-action residual loss $`r_{ia}`$ as the empirical quantity that must be calibrated, providing a basis for randomized pilot trials across permitted review actions.
 
-Finally, both budgets—remediation and statistical measurement—combine into a single batch-level **Mixed-Integer Convex Program (MICP)**. Let $`\tau^2`$ be the target variance ceiling for the quality estimate, $`B_{\text{total}}`$ the combined cost budget, and $`V_{\hat{m}}(\pi) = N^{-2}\sum_i (1 - \pi_i)\hat{m}_i / \pi_i`$ the planning variance under the calibrated residual model:
+The remediation and measurement budgets can be combined in a batch-level mixed-integer convex program (MICP). Let $`\tau^2`$ be the target variance ceiling for the quality estimate, $`B_{\text{total}}`$ the total cost budget, and $`V_{\hat{m}}(\pi) = N^{-2}\sum_i (1 - \pi_i)\hat{m}_i / \pi_i`$ the planning variance under the calibrated residual model:
 
 $$
 \min_{z, \pi} \sum_{i,a} z_{ia}\hat{r}_{ia} \quad \text{s.t.} \quad \sum_{i,a} z_{ia} d_{ia} + \sum_i c_i \pi_i \le B_{\text{total}}, \quad V_{\hat{m}}(\pi) \le \tau^2
@@ -214,16 +213,16 @@ $$
 \sum_a z_{ia} = 1, \quad z_{ia} \in \{0, 1\}, \quad \sum_{i,a} z_{ia} t_{iaj} \le H_j^{\text{review}} \ \forall j, \quad \pi_{\min} \le \pi_i \le 1
 $$
 
-Here $`H_j^{\text{review}}`$ is hard capacity allocated to remediation actions while reference audits are scheduled independently on frozen original submissions. The precision ceiling is model-based: independent audits must check residual calibration, and expected audit cost does not impose a hard limit on realized audit hours. Infeasibility exposes a conflict between the planning precision target, feasible review assignments, and available engineering budget.
+The hard capacity $`H_j^{\text{review}}`$ is allocated to remediation actions. Reference audits are scheduled independently on frozen original submissions. The precision ceiling is model-based and requires independent audits to check residual calibration. An expected audit-cost constraint does not impose a hard limit on realized audit hours. An infeasible program indicates a conflict among the precision target, feasible review assignments, and available engineering budget.
 
 ## 6 Reproducible experiments at equal cost
 
-The following self-contained synthetic experiments test the mathematical mechanisms derived above (they validate algorithmic behavior on specified public parameters rather than reporting proprietary client telemetry). A fixed batch contains $`N = 10,000`$ submissions partitioned into three strata of $`6,000`$, $`3,000`$, and $`1,000`$ items, containing $`60`$, $`300`$, and $`350`$ errors respectively (true batch defect rate $`\mu = 7.10\%`$). Unit audit costs are $`1`$, $`1.5`$, and $`3`$ units across the three strata. Every policy operates under an expected audit budget of $`B = 2,000`$ units and a minimum sampling floor of $`\pi_{\min} = 3\%`$.
+The following synthetic experiments test these mathematical mechanisms using publicly specified parameters. Their results describe algorithm behavior under those parameters; proprietary client telemetry is outside the disclosure scope. A fixed batch contains $`N = 10,000`$ submissions in three strata of $`6,000`$, $`3,000`$, and $`1,000`$ items, with $`60`$, $`300`$, and $`350`$ errors, respectively. The true batch defect rate is $`\mu = 7.10\%`$. Unit audit costs are $`1`$, $`1.5`$, and $`3`$ across the three strata. Every policy has an expected audit budget of $`B = 2,000`$ units and a minimum sampling probability of $`\pi_{\min} = 3\%`$.
 
-Risk predictions for the three strata are $`2\%`$, $`8\%`$, and $`30\%`$ (batch average $`6.60\%`$, differing from the true defect rate by $`0.50`$ percentage points). Cost-aware allocation uses the true within-stratum mean squared residuals (ideal calibration), while the misspecified policy reverses the residual ordering across strata. Holding predictions, budget, and submissions fixed, $`200,000`$ independent Monte Carlo repetitions verify the analytical variance formulas:
+Risk predictions for the three strata are $`2\%`$, $`8\%`$, and $`30\%`$. The batch average is $`6.60\%`$, which differs from the true defect rate by $`0.50`$ percentage points. The cost-aware allocation uses the true within-stratum mean squared residuals, representing ideal calibration. The misspecified policy reverses the residual ordering across strata. With predictions, budget, and submissions held fixed, $`200,000`$ independent Monte Carlo repetitions verify the analytical variance formulas:
 
 <table header-row="true">
-<tr><td>Audit Policy</td><td>Sampling Probabilities Across the Three Strata</td><td>Std. Dev. of Corrected Estimate (pct. points)</td><td>Variance Change Relative to Uniform Sampling</td></tr>
+<tr><td>Audit policy</td><td>Sampling probabilities across the three strata</td><td>Standard deviation of corrected estimate (percentage points)</td><td>Variance change relative to uniform sampling</td></tr>
 <tr><td>**Uniform sampling with the same residual correction**</td><td>14.81% / 14.81% / 14.81%</td><td>0.568</td><td>Baseline</td></tr>
 <tr><td>**Prioritize predicted error probability ($`f_i`$)**</td><td>3.00% / 11.56% / 43.33%</td><td>0.657</td><td>+33.77% increase</td></tr>
 <tr><td>**Residual- and cost-aware allocation with ideal calibration**</td><td>7.89% / 19.37% / 21.84%</td><td>**0.515**</td><td>**-17.79% reduction**</td></tr>
@@ -231,17 +230,17 @@ Risk predictions for the three strata are $`2\%`$, $`8\%`$, and $`30\%`$ (batch 
 <tr><td>**Misspecified allocation with 70% weight on uniform sampling**</td><td>17.27% / 13.90% / 11.27%</td><td>0.615</td><td>+17.07% increase</td></tr>
 </table>
 
-Under ideal residual calibration, the standard deviation of the population quality estimate falls by **9.33%** (a **17.79% variance reduction**). Notice that for the naive high-risk-first policy, the uncorrected raw error detection rate averages **19.60%** (wildly distorting true quality), whereas our IPW residual-corrected estimator recovers **7.1015%** while exposing that naive risk-prioritization actually *inflates* estimation variance by **33.77%** due to over-sampling the expensive third stratum. Across all five policies, Monte Carlo variances match analytical formulas to within $`0.5\%`$.
+Under ideal residual calibration, the standard deviation of the population quality estimate falls by **9.33%**, a **17.79%** reduction in variance. Under the high-risk-first policy, the uncorrected error detection rate averages **19.60%**, overstating the population defect rate. IPW residual correction recovers **7.1015%**. The policy oversamples the more expensive third stratum, increasing estimation variance by **33.77%**. Across all five policies, Monte Carlo variances differ from the analytical formulas by no more than $`0.5\%`$.
 
-A separate, exact allocation experiment isolates remediation gains. Two task groups contain $`100`$ items each, with initial error risks of $`0.40`$ and $`0.15`$. Additional review reduces those risks to $`0.30`$ ($`\Delta_1 = 0.10`$) and $`0.01`$ ($`\Delta_2 = 0.14`$), respectively. Review costs are equal and capacity is $`100`$ items. Ranking by initial risk leaves $`100(0.30) + 100(0.15) = 45`$ expected errors; ranking by expected loss reduction ($`\Delta_i`$) leaves $`100(0.40) + 100(0.01) = 41`$ expected errors—cutting expected defect loss by **8.89%** at the exact same review volume.
+A separate exact allocation experiment isolates the effect of remediation. Two task groups contain $`100`$ items each, with initial error risks of $`0.40`$ and $`0.15`$. Additional review reduces these risks to $`0.30`$ ($`\Delta_1 = 0.10`$) and $`0.01`$ ($`\Delta_2 = 0.14`$), respectively. Review costs are equal, and capacity is $`100`$ items. Ranking by initial risk leaves $`100(0.30) + 100(0.15) = 45`$ expected errors. Ranking by expected loss reduction ($`\Delta_i`$) leaves $`100(0.40) + 100(0.01) = 41`$ expected errors, reducing expected defect loss by **8.89%** at the same review volume.
 
-## 7 Establish whether the design improves production
+## 7 Production validation and evaluation criteria
 
-Production deployment tests statistical quality inference and operational defect control separately, recognizing that *detecting more errors in a targeted queue is never, by itself, evidence of better delivered quality*:
-1. **Inferential Validation on Frozen Adjudicated Batches**: Compare uniform sampling, legacy high-risk routing, cost-aware residual allocation, and defensive mixtures against complete independent adjudication—evaluating bias, MSE, and interval coverage across individual task strata and rubric versions.
-2. **Capacity-Matched Remediation Trials**: Compare legacy tiered rules against marginal-gain ($`\Delta_i`$) action allocation at equal total specialist hours, measuring severe defects surviving into final post-training corpora and total fully-loaded cost per accepted submission.
+I defined separate production evaluations for statistical quality inference and operational defect control. Errors detected in a targeted queue indicate how well review locates defects. Improvements in delivered quality must be assessed through the defects that remain and the associated costs.
+1. **Inference on frozen, adjudicated batches.** Compare uniform sampling, legacy high-risk routing, cost-aware residual allocation, and defensive mixtures against complete independent adjudication. Assess bias, mean squared error (MSE), and interval coverage within task strata and rubric versions.
+2. **Remediation trials at matched capacity.** Compare legacy tiered rules with marginal-gain ($`\Delta_i`$) action allocation at equal total specialist hours. Measure severe defects remaining in the final post-training corpus and the fully loaded cost per accepted submission.
 
-The contributor reliability records, tiered review workflows, and random reference audits I established from September 2023 provided the operational foundation for this architecture. The mathematical analysis above states the sampling, calibration, and capacity assumptions under which quality estimation is unbiased and audit allocation is optimal when residual second moments are correctly specified; the synthetic benchmarks test those mechanisms under their stated conditions.
+Beginning in September 2023, I led the development of contributor reliability records, tiered review workflows, and random reference audits, establishing the project's operating standards for expert collaboration, quality measurement, and resource allocation. The analysis specifies the sampling, calibration, and capacity assumptions under which quality estimation is unbiased and audit allocation is optimal when residual second moments are correctly specified. The synthetic benchmarks test these mechanisms under their stated conditions.
 
 # Project 02: task-validity-in-financial-synthetic-data
 
@@ -249,10 +248,10 @@ The contributor reliability records, tiered review workflows, and random referen
 Task validity in financial synthetic data
 
 **Organization**
-Duke University × Top-Tier Foundation Model Company
+Duke University × Leading Foundation Model Developer
 
 **Title**
-Financial Task Design and Synthetic Data Engineering
+Financial task design and synthetic data engineering
 
 **URL**
 https://www.theodoreoy.com/past-experience/artificial-intelligence/task-validity-in-financial-synthetic-data/
@@ -261,47 +260,47 @@ https://www.theodoreoy.com/past-experience/artificial-intelligence/task-validity
 Researcher
 
 **Location**
-Durham, NC; Palo Alto, CA
+Durham, North Carolina; Palo Alto, California
 
 **Dates**
-September 2023 – September 2026
+September 2023 to September 2026
 
 **Read More Label**
 Read More
 
 ## Summary
 
-Initiated in September 2023 for a frontier foundation model program *(partner identity anonymized under NDA)*, this project defined what constitutes high-signal financial post-training data and established an end-to-end paradigm for adversarial task design, constraint-preserving synthetic data engineering, and structured preference supervision. To expose subtle reasoning blind spots where base models and practitioners systematically stumble, I engineered diagnostic, error-inducing financial decision tasks and a five-level pairwise preference protocol that translates doctoral- and CFA-level expert judgments into evidence-grounded training signals for RLHF and direct preference optimization. I paired these task specifications with a four-regime mathematical synthesis architecture—Gaussian copulas for cross-sectional corporate fundamentals, covariance-weighted affine projections enforcing exact accounting identities ($1.21 \times 10^{-14}$ maximum residual across 200,000 12-dimensional draws), CTGAN and TabDDPM for multimodal tables, with Lipschitz margin checks and Gaussian margin-to-noise ($\gamma/s$) analysis to guide label recomputation, and SDEs, neural SDEs, and Brownian bridges with strict temporal filtration isolation ($\mathcal{F}_s$) for continuous-time price and interest-rate trajectories. To bridge research design and massive vendor scale-up, I created **Batch Zero**—an independent execution and calibration gate subsequently adopted across the company for new post-training tracks.
+This project began in September 2023 as part of a frontier foundation model program *(the partner's identity is confidential under an NDA)*. I defined the requirements for high-signal financial post-training data and developed a framework covering adversarial task design, constraint-preserving synthetic data, and structured preference supervision. To identify subtle reasoning errors that recur in both foundation models and professional practice, I designed diagnostic financial decision tasks and a five-level pairwise preference protocol. The protocol translates judgments from experts with doctoral or CFA-level expertise into evidence-based training signals for reinforcement learning from human feedback (RLHF) and direct preference optimization. I paired these task specifications with mathematical synthesis methods for four settings: Gaussian copulas for cross-sectional corporate fundamentals; covariance-weighted affine projections for exact accounting identities, with a maximum residual of $1.21 \times 10^{-14}$ across 200,000 12-dimensional draws; CTGAN and TabDDPM for multimodal tables, with Lipschitz decision-margin checks and Gaussian margin-to-noise analysis ($\gamma/s$) to guide label recomputation; and stochastic differential equations (SDEs), neural SDEs, and Brownian bridges for continuous-time price and interest-rate paths, with strict separation of temporal information sets ($\mathcal{F}_s$). I created **Batch Zero** to translate the capability objectives and data requirements of post-training research teams into a data strategy with explicit criteria for independent execution and expert calibration before scaling. The protocol tests whether task specifications, reference solutions, and preference annotations can be reproduced, then uses execution disagreements to refine task design and data acceptance criteria. The company subsequently extended Batch Zero to other new post-training programs.
 
 ## Confidentiality & Scope Disclosure
 
-Conducted through a university–industry research collaboration with a flagship foundation model developer. While the corporate partner's name is withheld pursuant to non-disclosure agreements, my role, project scope, organizational protocols (*Batch Zero*), and mathematical synthesis frameworks are authorized for public disclosure.
+This project was conducted through a university-industry research collaboration with a leading foundation model developer. The corporate partner is anonymized under a nondisclosure agreement. My role, the project scope, the Batch Zero protocol, and the mathematical synthesis framework are approved for public disclosure.
 
 ## Key Contributions
 
-* **Defined the Financial Post-Training Task Environment & Adversarial Diagnostic Paradigm (Sept 2023)**: Led financial and business decision task design for a frontier foundation model program, specifying capability taxonomies, primary evidence standards, input schemas, decisive variables, and acceptance conditions. Rather than authoring routine textbook prompts, I deliberately engineered **error-inducing diagnostic cases** targeting high-risk business decision boundaries where base models and practitioners systematically stumble—ensuring every task required genuine doctoral- or CFA-level domain judgment.
-* **Architected the Five-Level Pairwise Preference Protocol for RLHF / DPO Supervision**: To convert tacit human domain expertise into actionable post-training gradients, I designed a structured **five-level pairwise preference protocol** that captures *why* an expert judges one response superior to another. By requiring experts to bind every preference judgment to verifiable evidence citations, accounting rules, and decisive variables, the protocol transformed subjective expert comparisons into high-signal preference data that teaches models which financial judgments are evidence-backed.
-* **Principled Four-Regime Financial Synthetic Data Engineering**: Selected and customized mathematical synthesis engines around the exact structural relationships each financial task had to preserve, avoiding naive one-size-fits-all tabular generation:
-  * *Cross-Sectional Corporate Fundamentals*: Applied **Gaussian and vine copulas alongside conditional sampling** across company scale, operating vintage, and financial ratios to preserve joint cross-column dependencies and prevent unrealistic column-independent random generation.
-  * *Hard Accounting Identities, Ratio Bounds & Chronological Order*: Deployed **constrained sampling, variable transformations, and covariance-weighted affine manifold projections** to enforce exact balance-sheet/cash-flow identities, ratio ranges, and date ordering—achieving a maximum constraint residual of **$1.21 \times 10^{-14}$** across 200,000 12-dimensional synthetic draws. A separate standardized-residual rejection model yields a $0.0002529\%$ acceptance rate.
-  * *Multimodal & Mixed Numerical/Categorical Records*: Utilized **CTGAN and TabDDPM** to model multimodal empirical distributions, paired with mandatory post-generation business rule validation and Lipschitz margin checks and Gaussian margin-to-noise ($\gamma/s$) analysis to guide reference recomputation and reduce stale supervision labels.
-  * *Continuous-Time Price & Interest-Rate Trajectories*: Developed dynamic paths for temporal financial tasks (as distinct from static cross-sectional company comparisons) using **stochastic differential equations (SDEs), neural SDEs, Brownian bridges, and stochastic interpolation** (extending MathWorks-style stochastic interest-rate path constructions), matching each construction to the task's permitted filtration ($\mathcal{F}_s$) to prevent future-information evaluation leakage.
-* **Created the "Batch Zero" Pre-Scaling Execution Gate (Adopted Company-Wide)**: Before scaling task families to external vendor production, I created **Batch Zero**—a pilot verification protocol in which doctoral-level specialists independently executed task construction, synthetic expansion, reference solving, and pairwise preference grading. Pilot disagreements and failure modes directly drove instruction revisions, boundary-case refinements, and **Batch One** entry criteria. The foundation model company subsequently adopted **Batch Zero** as a standard organizational gate across other new post-training tracks.
-* **Quantified Stale-Label Corruption, Temporal Leakage & Family Clustering**: Proved analytically and via simulation how synthetic perturbations near decision boundaries cause **40.13%** inherited-label error at $\gamma/s = 0.25$ without recomputation, how undisclosed Brownian bridge endpoint conditioning creates an artificial **29.29% RMSE reduction** via future leakage, and how within-family correlation ($\rho = 0.5$) reduces 2,000 nominal synthetic variants across 100 families to **$N_{\text{eff}} \approx 190.48$** effective independent observations.
+* **Beginning in September 2023, I led financial and business decision task design for a frontier foundation model program, specifying the capability taxonomy, primary evidence standards, input schemas, decisive variables, and acceptance criteria.** Diagnostic cases targeted high-stakes business decision boundaries where foundation models and practitioners repeatedly make errors. The cases translated doctoral or CFA-level domain judgment into testable task requirements.
+* **I designed a five-level pairwise preference protocol for RLHF and DPO supervision.** The protocol records why an expert prefers one response to another and turns domain knowledge into post-training supervision. Each judgment must cite verifiable evidence, relevant accounting rules, and decisive variables. These annotations preserve the evidence and reasoning behind each preference and support training models to assess whether a financial judgment has sufficient support.
+* **I developed financial synthetic data methods for four settings.** I selected and adapted mathematical generators to each task's structural invariants, data types, and permitted information:
+  * *Cross-sectional corporate fundamentals.* I used Gaussian and vine copulas with conditional sampling for company size, operating history, and financial ratios. These methods preserve joint dependencies across columns and avoid the unrealistic combinations produced by sampling each column independently.
+  * *Accounting identities, ratio bounds, and chronological order.* Constrained sampling, variable transformations, and covariance-weighted affine projections enforce balance-sheet and cash-flow identities, ratio ranges, and date ordering. Across 200,000 12-dimensional synthetic draws, the maximum constraint residual was **$1.21 \times 10^{-14}$**. A separate standardized-residual rejection model had an acceptance rate of $0.0002529\%$.
+  * *Multimodal records with numerical and categorical fields.* CTGAN and TabDDPM model multimodal empirical distributions. Mandatory business-rule checks after generation, Lipschitz decision-margin tests, and Gaussian margin-to-noise analysis ($\gamma/s$) guide reference-answer recomputation and reduce stale supervision labels.
+  * *Continuous-time price and interest-rate paths.* SDEs, neural SDEs, Brownian bridges, and stochastic interpolation generate paths for temporal financial tasks; static cross-sectional company comparisons do not require these constructions. This work extends MathWorks-style stochastic interest-rate path construction and matches each method to the task's permitted filtration ($\mathcal{F}_s$) to prevent future-information leakage in evaluation.
+* **I created Batch Zero to implement post-training data strategy.** Starting from the capability objectives and data requirements of post-training research teams, I established a protocol for independent execution and expert calibration before a task family enters large-scale data construction. Doctoral-level domain experts independently construct tasks, generate synthetic variants, solve reference cases, and assign five-level pairwise preference scores. Execution disagreements and failure modes inform revisions to task specifications, boundary cases, and **Batch One** data acceptance criteria. The foundation model company subsequently extended **Batch Zero** to other new post-training programs.
+* **I quantified stale-label errors, temporal leakage, and task-family clustering.** Analytical derivations and simulations show that synthetic perturbations near a decision boundary produce **40.13%** inherited-label error at $\gamma/s = 0.25$ when labels are not recomputed. Undisclosed Brownian bridge endpoint conditioning creates an apparent **29.29% reduction in RMSE** through future-information leakage. With within-family correlation $\rho = 0.5$, 2,000 nominal synthetic variants from 100 task families provide only **$N_{\text{eff}} \approx 190.48$** effective independent observations.
 
-## Architectural Context: Why Frontier Financial Post-Training Requires Diagnostic Traps & Manifold-Exact Synthesis
+## Architectural Context: Task specifications and data strategy for financial post-training
 
-In September 2023, frontier foundation models could already recite corporate finance definitions, yet they failed unpredictably on real-world financial workflows where small numerical shifts or accounting footnotes reverse an investment recommendation. Our architecture solved two foundational challenges in post-training data engineering:
-1. **Why We Engineer "Error-Prone" Prompts**: Easy prompts may yield less discriminative comparisons between candidate responses. By designing prompts specifically around subtle business failure modes—such as covenant breaches, off-balance-sheet adjustments, or near-boundary valuation spreads—we force reasoning errors into the open. Pairing these diagnostic prompts with our five-level pairwise preference protocol translates a specialist's domain intuition (*"Response A is superior because it isolates the working-capital constraint and cites Footnote 4"*) into structured preference supervision that directly steers post-training.
-2. **Matching the Mathematical Generator to the Financial Structure**: Generating synthetic financial data is fundamentally different from generating synthetic images or unconstrained text. If a synthetic corporate table violates Total Assets $=$ Total Liabilities $+$ Equity by even a fraction of a percent, or if a synthetic interest-rate trajectory leaks future terminal rates into a historical forecasting prompt, the resulting training data actively corrupts model reasoning. Sections I–VI below establish the complete mathematical framework we built to guarantee constraint validity, label stability, and filtration integrity across scaled synthetic production.
+In September 2023, frontier foundation models could reproduce corporate finance definitions but still made unpredictable errors in financial workflows where a small numerical change or an accounting footnote could reverse an investment recommendation. I developed a data strategy around the capability objectives and data requirements of post-training research teams, connecting task specifications, synthesis methods, and expert calibration to address two problems:
+1. **Diagnosing reasoning limits through task design.** Simple prompts may provide little basis for distinguishing candidate responses. We designed prompts around subtle business failure modes, including covenant breaches, off-balance-sheet adjustments, and valuation differences close to a decision boundary. Paired with the five-level preference protocol, these prompts turn domain judgments such as *"Response A is better because it isolates the working-capital constraint and cites Footnote 4"* into structured preference supervision for post-training.
+2. **Matching the generator to the financial structure.** Synthetic financial data must satisfy structural constraints, remain consistent with reference judgments, and respect the task's information boundaries. A corporate table that violates Total Assets $=$ Total Liabilities $+$ Equity, even by a fraction of a percentage point, introduces a structural error. An interest-rate path that exposes a future terminal rate to a historical forecasting task introduces temporal leakage. Sections 1 through 6 state the conditions, analytical results, and validation designs for each method. Batch Zero turns these requirements into acceptance criteria: experts must be able to execute the task specification independently, reproduce reference solutions, and calibrate their judgments.
 
 ## Manuscript
 
-## 1 Why better distributional fit may leave task validity unchanged
+## 1 Distributional fit and task validity
 
-Modern tabular generative models address distinct distributional challenges: **[CTGAN](https://arxiv.org/abs/1907.00503)** handles mixed discrete-continuous types, multimodality, and class imbalance via mode-specific normalization and conditional vectors, while **[TabDDPM](https://proceedings.mlr.press/v202/kotelnikov23a.html)** applies Gaussian and multinomial diffusion to numerical and categorical fields (*[CTGAN](https://arxiv.org/abs/1907.00503); [TabDDPM](https://proceedings.mlr.press/v202/kotelnikov23a.html)*). However, while both learn empirical distributions effectively, **financial task validity requires strict structural invariants that global distributional similarity metrics cannot enforce**: exact accounting identities, chronological ordering of fiscal periods, covenant applicability conditions, and logical consistency between numerical inputs and reference judgments.
+Modern tabular generators address different distributional problems. [CTGAN](https://arxiv.org/abs/1907.00503) uses mode-specific normalization and conditional vectors to handle mixed discrete and continuous data, multimodality, and class imbalance. [TabDDPM](https://proceedings.mlr.press/v202/kotelnikov23a.html) applies Gaussian diffusion to numerical fields and multinomial diffusion to categorical fields ([CTGAN](https://arxiv.org/abs/1907.00503); [TabDDPM](https://proceedings.mlr.press/v202/kotelnikov23a.html)). Both can learn empirical distributions effectively. Financial task validity also requires structural invariants that global distributional similarity metrics cannot enforce: exact accounting identities, chronological ordering of fiscal periods, covenant applicability conditions, and logical consistency between numerical inputs and reference judgments.
 
-Consider a failure mode that admits an exact mathematical proof. Valid financial inputs $`x \in \mathbb{R}^d`$ must satisfy $`m`$ linear accounting or ratio identities $`Ax = b`$, where $`A \in \mathbb{R}^{m \times d}`$ has full row rank. The valid population distribution $`P`$ is supported entirely on the affine subspace $`M = \{x \in \mathbb{R}^d : Ax = b\}`$ and has finite second moments. Let the columns of $`N \in \mathbb{R}^{d \times m}`$ form an orthonormal basis for the normal space orthogonal to $`M`$. Suppose a generative model captures $`P`$ tangential to the manifold but adds a tiny amount of independent noise in the normal directions: $`X_\sigma = X + \sigma N \varepsilon`$, where $`\varepsilon \sim \mathcal{N}(0, I_m)`$ is independent of $`X \sim P`$. Writing the generated distribution as $`Q_\sigma`$, we have for every $`\sigma > 0`$:
+A simple construction makes this limitation precise. Valid financial inputs $`x \in \mathbb{R}^d`$ must satisfy $`m`$ linear accounting or ratio identities $`Ax = b`$, where $`A \in \mathbb{R}^{m \times d}`$ has full row rank. The valid population distribution $`P`$ is supported entirely on the affine subspace $`M = \{x \in \mathbb{R}^d : Ax = b\}`$ and has finite second moments. Let the columns of $`N \in \mathbb{R}^{d \times m}`$ form an orthonormal basis for the normal space orthogonal to $`M`$. Suppose a generator captures $`P`$ along the manifold but adds a small amount of independent noise in the normal directions: $`X_\sigma = X + \sigma N \varepsilon`$, where $`\varepsilon \sim \mathcal{N}(0, I_m)`$ is independent of $`X \sim P`$. Denote the generated distribution by $`Q_\sigma`$. For every $`\sigma > 0`$,
 
 $$
 W_2(P, Q_\sigma) \le \sqrt{E\|X_\sigma - X\|^2} = \sigma \sqrt{m} \longrightarrow 0 \quad (\text{as } \sigma \to 0^+)
@@ -315,37 +314,37 @@ $$
 \|P - Q_\sigma\|_{\text{TV}} := \sup_B |P(B) - Q_\sigma(B)| = 1
 $$
 
-The first line follows from the coupling $`(X, X_\sigma)`$ constructed on the same probability space. The second follows because $`AN`$ is invertible and a continuous $`m`$-dimensional Gaussian vector equals zero with probability zero. The third follows by taking the Borel set $`B = M`$. Thus, **the 2-Wasserstein distance $`W_2(P, Q_\sigma)`$ can converge to zero while the acceptance rate under exact business constraints remains identically zero ($`Q_\sigma(M) = 0`$) and Total Variation distance remains at its maximum of $`1`$**.
+The first line follows from coupling $`(X, X_\sigma)`$ on the same probability space. The second holds because $`AN`$ is invertible and a continuous $`m`$-dimensional Gaussian vector equals zero with probability zero. Taking the Borel set $`B = M`$ gives the third line. Thus the 2-Wasserstein distance $`W_2(P, Q_\sigma)`$ can tend to zero while the acceptance rate under exact business constraints remains zero ($`Q_\sigma(M) = 0`$) and the total variation distance remains at its maximum value of $`1`$.
 
-This counterexample dictates how responsibilities must be partitioned in a production synthetic data architecture (*[SDV constraint-augmented generation](https://docs.sdv.dev/sdv/modeling/constraint-augmented-generation-cag)*):
-• **Copula models and conditional sampling** capture cross-sectional rank and tail dependencies across continuous corporate indicators (company scale, operating history, leverage, and margin ratios) so columns are never generated independently.
-• **[CTGAN](https://arxiv.org/abs/1907.00503) and [TabDDPM](https://proceedings.mlr.press/v202/kotelnikov23a.html)** model complex mixed-type and multimodal empirical distributions, followed by explicit business-rule validation.
-• **Deterministic variable transformations and manifold projections** enforce hard accounting equalities, ratio bounds, and chronological sequences exactly.
+This counterexample motivates a division of responsibilities in the synthetic data architecture ([SDV constraint-augmented generation](https://docs.sdv.dev/sdv/modeling/constraint-augmented-generation-cag)):
+• Copula models and conditional sampling capture cross-sectional rank and tail dependencies among continuous corporate indicators, including company size, operating history, leverage, and profit margins. They preserve the dependencies that independent column generation would discard.
+• [CTGAN](https://arxiv.org/abs/1907.00503) and [TabDDPM](https://proceedings.mlr.press/v202/kotelnikov23a.html) model mixed-type and multimodal empirical distributions, followed by explicit business-rule checks.
+• Deterministic variable transformations and manifold projections enforce accounting equalities, ratio bounds, and chronological order.
 
-## 2 Enforce business constraints while preserving the correct conditional distribution
+## 2 Preserving the conditional distribution under business constraints
 
-Enforcing hard constraints by generating unconstrained candidates and discarding violations (post-hoc rejection sampling) becomes computationally intractable as multiple financial constraints tighten simultaneously. Suppose a candidate draw has $`m`$ standardized constraint residuals that behave as independent standard normal variables, and each must lie within a tight tolerance $`[-\epsilon, \epsilon]`$. The acceptance probability and expected candidate draws required per valid input are:
+Rejection sampling generates unconstrained candidates and discards those that violate the constraints. Its computational cost can become prohibitive as several financial constraints tighten. Suppose a candidate draw produces $`m`$ standardized constraint residuals that behave as independent standard normal variables, each of which must lie within $`[-\epsilon, \epsilon]`$. The acceptance probability and expected number of candidate draws per valid input are
 
 $$
 \alpha_m(\epsilon) = [2\Phi(\epsilon) - 1]^m \sim \left( \sqrt{\frac{2}{\pi}} \epsilon \right)^m \quad (\epsilon \to 0^+), \qquad E[N_{\text{attempts}}] = \frac{1}{\alpha_m(\epsilon)}
 $$
 
-Each additional accounting or ratio constraint multiplies the expected candidate count. Setting each tolerance to $`\epsilon = 0.05`$ residual standard deviations yields the following exact analytical scaling:
+Each additional accounting or ratio constraint multiplies the expected candidate count. With a tolerance of $`\epsilon = 0.05`$ residual standard deviations, the exact analytical values are:
 
 <table header-row="true">
-<tr><td>Simultaneous Constraints ($`m`$)</td><td>Rejection Sampling Acceptance Rate $`\alpha_m(\epsilon)`$</td><td>Expected Candidate Draws per Valid Input</td></tr>
+<tr><td>Simultaneous constraints ($`m`$)</td><td>Rejection-sampling acceptance rate $`\alpha_m(\epsilon)`$</td><td>Expected candidate draws per valid input</td></tr>
 <tr><td>**1**</td><td>3.9878%</td><td>25.08</td></tr>
 <tr><td>**2**</td><td>0.1590%</td><td>628.84</td></tr>
 <tr><td>**4**</td><td>**0.0002529%**</td><td>**395,442.59**</td></tr>
 </table>
 
-Generating directly through the degrees of freedom permitted by the constraints eliminates these wasted draws. In the linear Gaussian regime, covariance-weighted affine projection also preserves the exact theoretical conditional distribution. For a Gaussian copula, this result applies only when the constraints are affine in its latent Gaussian coordinates; nonlinear marginal transformations do not generally preserve affine constraints in the observed financial variables. Let the initial unconstrained draw be $`Z \sim \mathcal{N}(\mu, \Sigma)`$ with $`\Sigma \succ 0`$. Rather than overwriting a single balance-sheet line item (which corrupts covariance structure), we apply a **covariance-weighted Mahalanobis projection**:
+Generating directly along the degrees of freedom permitted by the constraints avoids these rejected draws. In the linear Gaussian setting, covariance-weighted affine projection also preserves the exact theoretical conditional distribution. For a Gaussian copula, this result applies only when the constraints are affine in the latent Gaussian coordinates. Nonlinear marginal transformations generally do not preserve affine constraints in the observed financial variables. Let the initial unconstrained draw be $`Z \sim \mathcal{N}(\mu, \Sigma)`$, with $`\Sigma \succ 0`$. To satisfy the linear constraints while preserving the theoretical conditional covariance, we apply a covariance-weighted Mahalanobis projection:
 
 $$
 X = \arg\min_{x : Ax = b} \frac{1}{2}(x - Z)^\top \Sigma^{-1}(x - Z) = Z + K(b - AZ), \qquad K = \Sigma A^\top (A \Sigma A^\top)^{-1}
 $$
 
-The first-order Lagrangian stationarity condition is $`\Sigma^{-1}(X - Z) + A^\top \lambda = 0`$; substituting $`AX = b`$ and eliminating the multiplier $`\lambda`$ yields the closed-form update. Since $`AK = I_m`$, every draw satisfies $`AX = b`$ exactly, with mean and covariance:
+The first-order Lagrangian stationarity condition is $`\Sigma^{-1}(X - Z) + A^\top \lambda = 0`$. Substituting $`AX = b`$ and eliminating the multiplier $`\lambda`$ gives the closed-form update. Since $`AK = I_m`$, every draw satisfies $`AX = b`$ exactly. Its mean and covariance are
 
 $$
 E[X] = \mu + K(b - A\mu)
@@ -355,38 +354,38 @@ $$
 \operatorname{Cov}(X) = (I - KA)\Sigma(I - KA)^\top = \Sigma - \Sigma A^\top (A \Sigma A^\top)^{-1} A\Sigma
 $$
 
-Because an affine transformation preserves Gaussianity, these moments match the exact regular conditional Gaussian law of $`Z \mid AZ = b`$ (*[Majumdar and Majumdar on Gaussian distributions under linear conditioning](https://arxiv.org/abs/1710.09285)*).
+Affine transformations preserve Gaussianity, so these moments identify the exact regular conditional Gaussian distribution of $`Z \mid AZ = b`$ ([Majumdar and Majumdar on Gaussian distributions under linear conditioning](https://arxiv.org/abs/1710.09285)).
 
-In our synthetic verification benchmark, generating **200,000 synthetic 12-dimensional financial vectors under 4 simultaneous linear constraints** achieved a **maximum absolute constraint residual of $`1.21 \times 10^{-14}`$** and a **relative Frobenius covariance error of 0.662%** against the theoretical conditional covariance—using direct constrained draws without post-hoc rejection. The nearly 400,000 candidate count above belongs to the separate standardized-residual rejection model. Fields fully determined by accounting definitions are computed analytically; range bounds and chronological date orderings that admit bijective transformations (such as log-transforms or positive increments $`t_{k} = t_{k-1} + \exp(\xi_k)`$) are enforced in latent generation space.
+Our synthetic validation benchmark generated **200,000 12-dimensional financial vectors subject to 4 simultaneous linear constraints**. The maximum absolute constraint residual was **$`1.21 \times 10^{-14}`$**, and the relative Frobenius covariance error against the theoretical conditional covariance was **0.662%**. These were direct constrained draws, with no subsequent rejection. The nearly 400,000 candidate draws reported above refer to the separate standardized-residual rejection model. Fields fully determined by accounting definitions are computed analytically. Range bounds and date ordering are enforced in the latent generation space when they admit bijective transformations, such as logarithmic transforms or positive increments $`t_{k} = t_{k-1} + \exp(\xi_k)`$.
 
-## 3 Use decision margins to determine when reference judgments must be recomputed
+## 3 Using decision margins to determine when reference judgments need recomputation
 
-Synthetic expansion of a golden financial case often preserves the qualitative business narrative while perturbing decisive financial figures, covenant thresholds, or macroeconomic inputs. **Retaining the original golden-case reference answer after perturbing the numbers injects systematic label corruption into post-training**, even when every synthetic input satisfies all accounting constraints. Just as *[FinQA](https://aclanthology.org/2021.emnlp-main.300/)* pairs financial questions with executable reasoning programs, synthetic preference engineering requires the link between inputs, reference conclusions, and expert preference explanations to update dynamically (*[FinQA](https://aclanthology.org/2021.emnlp-main.300/)*).
+Synthetic variants of a financial reference case often retain its business narrative while changing decisive financial figures, covenant thresholds, or macroeconomic inputs. Keeping the original reference answer after changing those values introduces systematic label errors into post-training, even when all accounting constraints hold. [FinQA](https://aclanthology.org/2021.emnlp-main.300/) pairs financial questions with executable reasoning programs. Synthetic preference data similarly require a maintained link between inputs, reference conclusions, and the expert's explanation of a preference ([FinQA](https://aclanthology.org/2021.emnlp-main.300/)).
 
-Consider a formal decision rule for choosing between two corporate actions. Let $`d(x)`$ denote the net valuation or metric advantage of Action A over Action B, so the true reference decision is $`\operatorname{sign} d(x)`$. If $`d`$ is $`L`$-Lipschitz on a feasible neighborhood, a sufficient condition for retaining the original reference decision without recomputation is that the perturbation $`\Delta`$ remains strictly within the decision margin:
+Consider a decision rule that chooses between two corporate actions. Let $`d(x)`$ denote the net valuation or metric advantage of action A over action B, so the correct reference decision is $`\operatorname{sign} d(x)`$. If $`d`$ is $`L`$-Lipschitz on a feasible neighborhood, a sufficient condition for retaining the original reference decision is that the perturbation $`\Delta`$ stays strictly within the decision margin:
 
 $$
 |d(x + \Delta) - d(x)| \le L\|\Delta\|, \qquad |d(x)| > L\|\Delta\| \implies \operatorname{sign} d(x + \Delta) = \operatorname{sign} d(x)
 $$
 
-Because our diagnostic tasks deliberately target **contested decision boundaries** where models are most prone to error, $`|d(x)|`$ is intentionally small! We can derive the exact closed-form rate of **stale-label error** for a linear comparison rule $`d(x) = w^\top x - c`$ with initial margin $`\gamma = d(x) > 0`$. Under a feasible manifold perturbation $`\Delta \sim \mathcal{N}(0, \Omega)`$ with projected variance $`s^2 = w^\top \Omega w > 0`$, the probability that retaining the original decision reverses the true ground-truth label is:
+Our diagnostic tasks focus on contested decision boundaries where models are prone to error, so $`|d(x)|`$ is deliberately kept small. For a linear comparison rule $`d(x) = w^\top x - c`$ with initial margin $`\gamma = d(x) > 0`$, the stale-label error rate has an exact closed form. Let the perturbation within the feasible manifold satisfy $`\Delta \sim \mathcal{N}(0, \Omega)`$, with projected variance $`s^2 = w^\top \Omega w > 0`$. The probability that the correct label flips while the original decision is retained is
 
 $$
 \Pr\{d(x + \Delta) < 0\} = \Pr\{w^\top \Delta < -\gamma\} = \Phi\left(-\frac{\gamma}{s}\right)
 $$
 
-Verified across $`1,000,000`$ Monte Carlo draws:
-• When the margin-to-noise ratio $`\gamma / s = 2`$, the inherited-label error rate is **2.28%**.
-• When $`\gamma / s = 1`$, the inherited-label error rate jumps to **15.87%**.
-• Near diagnostic decision boundaries where $`\gamma / s = 0.25`$, **40.13% of retained labels are false!**
+Validation with $`1,000,000`$ Monte Carlo draws gave the following inherited-label error rates:
+• At a margin-to-noise ratio of $`\gamma / s = 2`$, the error rate was **2.28%**.
+• At $`\gamma / s = 1`$, it was **15.87%**.
+• Near a diagnostic decision boundary, at $`\gamma / s = 0.25`$, it was **40.13%**.
 
-This analytical result explains why our pipeline links case expansion directly to reference recomputation and fresh **five-level pairwise preference grading** (see the later methodological comparison in *[HelpSteer2-Preference](https://arxiv.org/abs/2410.01257)*). Whenever a synthetic perturbation crosses or approaches a decision boundary, the reference solution is recomputed, fresh candidate model trajectories are sampled, and domain experts evaluate the pair on our five-level preference scale—explicitly annotating which trajectory identified the flipped decisive variable and supported its judgment with primary evidence.
+This result motivates linking case expansion to reference-answer recomputation and renewed five-level pairwise preference grading when perturbations approach or cross a decision boundary. [HelpSteer2-Preference](https://arxiv.org/abs/2410.01257) provides a later methodological comparison. When a synthetic perturbation approaches or crosses a decision boundary, the workflow recomputes the reference solution and samples new candidate model reasoning trajectories. Domain experts then assess the pair on the five-level preference scale, identifying which trajectory recognized the decisive variable whose change reversed the decision and supported its judgment with primary evidence.
 
-## 4 Define the information available for each temporal task
+## 4 Specifying the information available to each temporal task
 
-While cross-sectional corporate comparisons do not require continuous-time stochastic processes, dynamic financial tasks—such as derivatives valuation, interest-rate term-structure interpolation, and multi-period liquidity stress testing—require path generators. In these temporal regimes, we deploy **stochastic differential equations (SDEs)** and **neural SDEs** to model path distributions beyond single-time marginals (*[Neural SDEs as Infinite-Dimensional GANs](https://proceedings.mlr.press/v139/kidger21b.html)*), alongside **Brownian bridges** and **stochastic interpolation** (aligning with classical MathWorks stochastic interest-rate path constructions) when conditioning on known intermediate observations or endpoints.
+Cross-sectional company comparisons do not require continuous-time stochastic processes. Dynamic tasks such as derivatives valuation, interest-rate term-structure interpolation, and liquidity stress tests over multiple periods require path generators. We use SDEs and neural SDEs to model path distributions beyond single-time marginals ([Neural SDEs as Infinite-Dimensional GANs](https://proceedings.mlr.press/v139/kidger21b.html)). Brownian bridges and stochastic interpolation support conditioning on known intermediate observations or endpoints, following classical MathWorks stochastic interest-rate path constructions.
 
-However, path conditioning introduces a severe **temporal evaluation leakage hazard** whose magnitude can be derived in closed form. Consider a scaled Brownian motion $`X_u = \sigma W_u`$ over $`s < t < T`$. Under squared error loss, the optimal squared-error predictor acting at time $`s`$ with access only to the historical filtration $`\mathcal{F}_s`$ has conditional mean squared error $`\sigma^2(t - s)`$. If a synthetic pipeline conditions path generation on the future terminal endpoint $`X_T`$ and inadvertently exposes that conditioned structure to a forecasting task, Gaussian conditioning gives (*[Pitman on the Brownian bridge](https://www.stat.berkeley.edu/~pitman/s205s03/b_bridge.pdf)*):
+Path conditioning can introduce temporal leakage into evaluation, with an effect that can be derived in closed form. Consider scaled Brownian motion $`X_u = \sigma W_u`$, where $`s < t < T`$. Under squared-error loss, the optimal predictor at time $`s`$, given only the historical filtration $`\mathcal{F}_s`$, has conditional mean squared error $`\sigma^2(t - s)`$. If the generator conditions paths on the future endpoint $`X_T`$ and inadvertently exposes that conditioning to a forecasting task, Gaussian conditioning gives ([Pitman on the Brownian bridge](https://www.stat.berkeley.edu/~pitman/s205s03/b_bridge.pdf)):
 
 $$
 \operatorname{Var}(X_t \mid \mathcal{F}_s) = \sigma^2(t - s)
@@ -396,56 +395,58 @@ $$
 \operatorname{Var}(X_t \mid \mathcal{F}_s, X_T) = \sigma^2(t - s) - \frac{[\sigma^2(t - s)]^2}{\sigma^2(T - s)} = \sigma^2(t - s)\frac{T - t}{T - s}
 $$
 
-When $`t = (s + T)/2`$ is the midpoint of the forecasting horizon, conditioning on $`X_T`$ halves the conditional variance, producing an **apparent 29.29% reduction in RMSE** ($`1 - 1/\sqrt{2}`$) that is 100% attributable to future information leakage rather than model capability! (By contrast, if the task explicitly supplies both endpoints $`X_s`$ and $`X_T`$ and asks the model to audit an *interpolation* or back-cast an intervening accounting period, Brownian bridge conditioning is mathematically appropriate.)
+At the midpoint $`t = (s + T)/2`$, conditioning on $`X_T`$ halves the conditional variance. The resulting **29.29% apparent reduction in RMSE** ($`1 - 1/\sqrt{2}`$) comes entirely from the additional endpoint information in this construction. It is temporal leakage if the forecasting task does not permit access to that information. If the task supplies both endpoints $`X_s`$ and $`X_T`$ and asks the model to audit an interpolation or backcast an intervening accounting period, Brownian bridge conditioning is consistent with the specified information set.
 
-Our task environment specification therefore enforces a strict separation across three information sets:
-1. **Construction Information ($`\mathcal{F}_{\text{gen}}`$)**: Complete paths, terminal endpoints, or latent parameters used by the generator to synthesize the scenario.
-2. **Permitted Predictor Filtration ($`\mathcal{F}_s`$)**: The exact historical information legally visible to the model at decision time $`s`$.
-3. **Evaluation & Oracle Information ($`\mathcal{F}_{\text{eval}}`$)**: Realized post-$`s`$ outcomes reserved strictly for scoring or explicitly disclosed oracle baselines.
+The task specification therefore separates three information sets:
+1. **Construction information ($`\mathcal{F}_{\text{gen}}`$):** the complete path, endpoint, or latent parameters used to generate a scenario.
+2. **Permitted predictor filtration ($`\mathcal{F}_s`$):** the historical information the task allows the model to observe at decision time $`s`$.
+3. **Evaluation and oracle information ($`\mathcal{F}_{\text{eval}}`$):** outcomes realized after $`s`$, reserved for scoring or for explicitly disclosed oracle baselines.
 
-## 5 Test independent execution through Batch Zero and retain the task family as a statistical unit
+## 5 Batch Zero: independent execution and calibration for post-training data strategy
 
-Even when constraint projections, decision-margin recomputations, and filtration rules are mathematically sound, a post-training specification must remain reproducible when executed by hundreds of external specialists. To solve this organizational scaling bottleneck, I created **Batch Zero**:
-• **The Batch Zero Protocol**: Prior to launching scaled vendor production (*Batch One*), a select cohort of doctoral-level domain specialists with proven delivery records independently executed the entire specification—authoring seed cases, running synthetic expansions, verifying reference solutions, and assigning five-level pairwise preference scores. Every failed case or inter-expert disagreement in Batch Zero triggered surgical revisions to prompt instructions, boundary definitions, and calibration rubrics. Following the pilot’s use in preparing external vendor workflows, **the partner foundation model company adopted Batch Zero as a standard pre-scaling gate across other new post-training tracks**.
+I created **Batch Zero** around the capability objectives and data requirements of post-training research teams. The protocol brings task design, synthetic data strategy, and preference supervision into a common set of acceptance criteria before scaling. It tests whether domain experts can independently execute a research specification, reproduce reference solutions, and calibrate their preference judgments. The resulting specifications support subsequent data construction.
+• **Independent execution:** before a task family enters large-scale data construction (*Batch One*), doctoral-level domain experts independently write seed cases, generate synthetic variants, verify reference solutions, and assign five-level pairwise preference scores. This exposes implicit assumptions, missing information, and ambiguities in the specification.
+• **Calibration and feedback to data strategy:** failures, expert disagreements, and boundary-case errors inform revisions to task instructions, reference solutions, grading rules, and Batch One data acceptance criteria. Task design, execution, revision, and recalibration form an iterative process.
+• **Organizational adoption:** the partner foundation model company subsequently extended **Batch Zero** to other new post-training programs.
 
-Simultaneously, our statistical governance prevents **synthetic sample-size overstatement**. Suppose $`G`$ independent golden-case families are each expanded into $`k`$ synthetic variants ($`Gk`$ nominal records), where any two variants within a family share correlation $`\rho`$ and common variance $`\sigma_Y^2`$. Expanding the covariance sum for the sample mean yields the exact **effective sample size** $`N_{\text{eff}}`$:
+For statistical analysis and evaluation, I treat the task family as the basic unit of effective coverage and uncertainty estimation. Suppose $`G`$ independent reference-case families each yield $`k`$ synthetic variants, giving $`Gk`$ nominal records. Any two variants within a family have correlation $`\rho`$ and common variance $`\sigma_Y^2`$. Expanding the covariance sum for the sample mean gives the exact effective sample size $`N_{\text{eff}}`$:
 
 $$
 \operatorname{Var}(\bar{Y}) = \frac{Gk\sigma_Y^2 + Gk(k - 1)\rho\sigma_Y^2}{(Gk)^2} = \frac{\sigma_Y^2}{Gk}[1 + (k - 1)\rho] \implies N_{\text{eff}} = \frac{Gk}{1 + (k - 1)\rho}
 $$
 
-With $`G = 100`$ independent families, $`k = 20`$ synthetic variants per family ($`2,000`$ nominal tasks), and within-family correlation $`\rho = 0.5`$, **the nominal 2,000 records provide the exact same statistical precision for the mean as just $`190.48`$ independent records**—and ignoring within-family correlation understates standard errors by a factor of **$`3.24\times`$**! Consequently, our production pipeline enforces strict family-level train/evaluation splits and computes all confidence intervals with family-level and expert-level hierarchical clustering.
+With $`G = 100`$ independent families, $`k = 20`$ variants per family ($`2,000`$ nominal tasks), and within-family correlation $`\rho = 0.5`$, the 2,000 records provide the same precision for estimating the mean as $`190.48`$ independent records. Ignoring this correlation understates standard errors by a factor of **$`3.24\times`$**. Our data workflow therefore separates training and evaluation sets at the task-family level and accounts for hierarchical clustering at both the family and expert levels in all confidence intervals.
 
-## 6 Establish whether the complete method justifies scaled production
+## 6 Staged validation and coverage efficiency
 
-To evaluate whether our constraint-preserving synthesis and preference architecture justifies scaled production, we hold the task mix, generator training budget, expert review budget, and final acceptance criteria fixed, introducing each methodological layer in staged blind comparisons evaluated across independent task families:
+We evaluate whether constraint-preserving synthesis and preference supervision meet the data requirements of post-training research teams through staged, blinded comparisons across independent task families. The task mix, generator training budget, expert review budget, and final acceptance criteria remain fixed as each method is introduced:
 
 <table header-row="true">
-<tr><td>Comparison Stage</td><td>Methodological Upgrade Introduced</td><td>Core Research & Production Question</td></tr>
-<tr><td>**Existing production baseline**</td><td>Unconstrained generation + manual expert review & rework</td><td>What is the true fully-loaded cost per finally accepted, valid case?</td></tr>
-<tr><td>**Add manifold-constrained generation**</td><td>Fix generator; enforce affine projections & variable transforms</td><td>Do invalid candidates and manual expert repairs drop while preserving conditional distributions?</td></tr>
-<tr><td>**Add margin-aware reference recomputation**</td><td>Recompute reference judgments when the sufficient Lipschitz margin check fails; use $`\gamma/s`$ to quantify Gaussian label-flip risk</td><td>Do stale-label errors decline, producing valid supervision on both sides of decision boundaries?</td></tr>
-<tr><td>**Apply complete Batch Zero & filtration criteria**</td><td>Jointly check $`\mathcal{F}_s`$ timing conditions and independent execution</td><td>Do post-training gains persist after excluding leakage and clustering by source family?</td></tr>
+<tr><td>Comparison stage</td><td>Method introduced</td><td>Research and data strategy question</td></tr>
+<tr><td>**Current data construction baseline**</td><td>Unconstrained generation plus expert review and rework</td><td>What is the fully loaded cost of each valid case that is ultimately accepted?</td></tr>
+<tr><td>**Add manifold-constrained generation**</td><td>Hold the generator fixed; apply affine projections and variable transformations</td><td>Do invalid candidates and manual repairs decrease while the conditional distribution is preserved?</td></tr>
+<tr><td>**Add decision-margin checks and reference-answer recomputation**</td><td>Recompute reference judgments when the sufficient Lipschitz margin condition fails; use $`\gamma/s`$ to quantify Gaussian label-flip risk</td><td>Do stale-label errors decrease, with valid supervision on both sides of the decision boundary?</td></tr>
+<tr><td>**Apply Batch Zero acceptance criteria and filtration rules**</td><td>Jointly check the temporal information boundaries in $`\mathcal{F}_s`$, independent execution, reproducibility of reference solutions, and calibration of preference standards</td><td>Do post-training gains persist after leakage is excluded and clustering by source task family is accounted for?</td></tr>
 </table>
 
-Because raw acceptance rates reward generating trivial variants of easy templates, and raw generation speed ignores manual expert repair costs, we govern production decisions via **Scenario-Weighted Family Coverage Efficiency**. Let $`j`$ index predefined cells in the financial capability matrix with strategic weights $`w_j \ge 0`$ ($`\sum_j w_j = 1`$) and required independent valid family counts $`n_j^* > 0`$:
+Raw acceptance rates favor trivial variants of easy templates, and generation speed alone omits the cost of expert repairs. We use scenario-weighted task-family coverage efficiency to allocate data construction and review resources. Let $`j`$ index predefined cells in the financial capability matrix, with strategic weights $`w_j \ge 0`$ ($`\sum_j w_j = 1`$) and required counts of independent valid task families $`n_j^* > 0`$:
 
 $$
 \operatorname{Coverage} = \sum_j w_j \min\left(1, \frac{n_j^{\text{valid}}}{n_j^*}\right), \qquad \operatorname{Efficiency} = \frac{\operatorname{Coverage}}{C_{\text{generation}} + C_{\text{review}} + C_{\text{rework}} + C_{\text{adjudication}}}
 $$
 
-Once a cell reaches its target $`n_j^*`$ independent families, repeatedly expanding easy templates yields zero marginal coverage gain (*[Alaa et al. on synthetic data evaluation](https://proceedings.mlr.press/v162/alaa22a.html)*). Together, manifold constraint enforcement, decision-margin label recomputation, temporal filtration isolation, and **Batch Zero** calibration establish a rigorous engineering standard for synthetic preference data in frontier model post-training.
+Once a cell reaches its target of $`n_j^*`$ independent task families, further variants of simple templates add no coverage ([Alaa et al. on synthetic data evaluation](https://proceedings.mlr.press/v162/alaa22a.html)). Manifold constraint enforcement, decision-margin label recomputation, separation of temporal information sets, and Batch Zero calibration together define task-validity standards, execution protocols, and evaluation methods for synthetic financial preference data used in post-training.
 
 # Project 03: verification-and-supervision-in-scientific-reasoning-tasks
 
 **Article Title**
-Verification and supervision in scientific reasoning tasks
+Verification and supervision in reasoning tasks
 
 **Organization**
-Duke University × Top-Tier AI Research Lab
+Duke University × Frontier AI Research Laboratory
 
 **Title**
-Scientific Reasoning Evaluation and Task Design
+General reasoning evaluation and layered verification
 
 **URL**
 https://www.theodoreoy.com/past-experience/artificial-intelligence/verification-and-supervision-in-scientific-reasoning-tasks/
@@ -454,82 +455,86 @@ https://www.theodoreoy.com/past-experience/artificial-intelligence/verification-
 Researcher
 
 **Location**
-Durham, NC; Palo Alto, CA
+Durham, North Carolina; Palo Alto, California
 
 **Dates**
-September 2023 – September 2026
+September 2023 to September 2026
 
 **Read More Label**
 Read More
 
 ## Summary
 
-Launched in September 2023 through an early academic collaboration with a frontier AI research laboratory *(partner identity anonymized under NDA)*, this work developed a three-pillar evaluation and process-supervision framework for scientific, mathematical, and quantitative risk reasoning. Recognizing in our earliest experiments that simply stumping frontier models on Olympiad- or graduate-level STEM final answers yields minimal actionable feedback for model iteration, I built an acceptance and diagnostic architecture that audits **(1) Chain-of-Thought (CoT) trajectory soundness** via acyclic proof-obligation dependency graphs ($\Gamma_q \vdash C_q$), **(2) strict compliance in sandboxed tool invocation** (requiring execution within auditable enterprise toolkits such as Excel rather than unauthorized Python virtual machines in regulated workflows, and rejecting numerically correct answers obtained via non-compliant tools), and **(3) structural mathematical reduction over brute-force computation**. In an exact-arithmetic stress test of 3,600 constructed submissions across 600 strongly convex quadratic problem families, semantic certificate verification accepted all **1,200 valid submissions (0.0% false rejection, preserving valid alternative Lagrangian and elimination proofs)** and rejected all **2,400 invalid submissions (0.0% false acceptance, compared to 75.0% false acceptance under answer-only checking)**.
+I developed a framework for evaluating and supervising general reasoning through a university collaboration with a frontier AI research laboratory that began in September 2023 (partner identity withheld under NDA). The evaluation brings together task specifications, the model's visible chain of thought (CoT), and evidence from execution. I examine final answers alongside reasoning traces, tool calls, intermediate outputs, elapsed time, and attempt counts to identify unsupported claims, misapplied rules, and repeated attempts that make no progress. The review process has three layers: code or rules check directly verifiable answers and hard requirements; LLM-as-a-Judge screens for semantic issues; and scholars with relevant expertise review domain judgments and disputed cases. Proof-obligation dependency graphs, checkable mathematical certificates, and error-propagation rules for task transformations make the resulting supervision signals traceable. Correctness, compliance with execution requirements, and efficiency are recorded separately. I also used exact-arithmetic stress tests to examine whether certificate rules detect errors while accepting valid alternative proofs, and analyzed how grading bias propagates into post-training objectives.
 
 ## Confidentiality & Scope Disclosure
 
-Conducted through an early university–industry research partnership with a frontier AI research laboratory beginning in September 2023. While the partner laboratory's name is withheld pursuant to non-disclosure agreements, my role, evaluation methodology, proof-obligation verification architecture, and exact-arithmetic stress tests are authorized for public disclosure.
+This work began in September 2023 through an early university collaboration with a frontier AI research laboratory. The laboratory's name is withheld under non-disclosure agreements. My role, evaluation methods, proof-obligation verification architecture, and exact-arithmetic stress tests are authorized for public disclosure.
 
 ## Key Contributions
 
-* **Developed Three-Pillar Process and Tool Evaluation from September 2023**: During a university collaboration aimed at stress-testing frontier models with Olympiad- and graduate-level STEM tasks, I identified the limitations of final-answer checks in our workflow and developed an evaluation framework covering reasoning validity, compliance with task-specific tool policies, and structural mathematical insight.
-  1. *Chain-of-Thought (CoT) Trajectory & Proof-Obligation Auditing*: Verifying whether intermediate reasoning steps follow a sound logical trajectory rather than reaching a lucky final number through compensating errors or unverified leaps.
-  2. *Enterprise-Compliant Tool-Invocation Governance*: Auditing whether the model selects and executes tools strictly within regulatory and institutional compliance boundaries. When a task’s specified data-governance policy permits only the approved Excel environment, an unauthorized Python virtual machine violates that execution policy. Under our acceptance standard, **even if a model computes the exact right numerical answer, invoking a non-compliant tool (e.g., Python instead of mandated Excel) results in immediate failure**.
-  3. *Penalizing Brute-Force Compute in Favor of Structural Mathematical Insight*: Designing tasks and scoring rubrics that discourage models from burning inference compute on brute-force algebraic or numerical exhaustion, rewarding instead the identification of domain invariants and structural reductions.
-* **Translated Physics, Mathematics & Risk Engineering into Proof-Obligation DAGs**: Formalized task deliverables as directed acyclic dependency graphs ($\Gamma_q \vdash C_q$) that separate physical model formulation, theorem applicability, compliant tool execution, uniform approximation bounds, and conclusion strength—accommodating legitimate alternative proof paths (such as Lagrangian duality versus variable elimination) that brittle reference-matching pipelines falsely reject.
-* **Derived Projected-Residual Optimality Certificates for Convex Optimization**: Formulated exact KKT projected-residual bounds ($0 \le f(x) - v^* \le \|P_{\ker A} r\|_2^2 / (2\mu)$) on the optimality gap for equality-constrained strongly convex quadratic programs, replacing heuristic numerical proximity checks with mathematical certificates of solution quality.
-* **Engineered Original Kinematics Benchmarks via Path Invariance & Harmonic Asymptotics**: Created original physics and risk-engineering tasks that test deep structural reasoning—using the path invariance of vertical travel time to reduce a 2D kinematics problem to 1D horizontal scheduling, proving an attained minimum completion time and an unattained supremum, and deriving harmonic-number ($H_n$) asymptotics for staircase trajectories approaching the upper bound.
-* **Quantified Biased Supervision Gradients & Task-Transformation Error Propagation**: Proved mathematically how false acceptance ($\alpha$) and false rejection ($\beta$) reverse model rankings on leaderboards and bias the binary cross-entropy training gradient of Process Reward Models ($E[\nabla_s \ell(s,V) - \nabla_s \ell(s,Z) \mid h] = p(h) - \tilde{p}(h)$), and derived exact tolerance propagation laws ($a\delta + 2\varepsilon$) under bijective task transformations.
-* **Achieved 0.0% False Acceptance and 0.0% False Rejection Across 3,600 Exact-Arithmetic Stress Tests**: Constructed 600 strongly convex quadratic problem families (3,600 exact rational arithmetic submissions) where 75% of invalid proofs report the exact right optimal value $v^*$. Semantic certificate checking accepted all **1,200 valid proofs (0.0% false rejection)** and rejected all **2,400 invalid submissions (0.0% false acceptance)**, outperforming answer-only checking (**75.0% false acceptance**) and strict reference-path matching (**50.0% false rejection**).
+* **I developed a joint evaluation method for answers, visible reasoning, and execution evidence.** Beginning in September 2023, I brought the model's displayed CoT, actual tool calls, and intermediate outputs into the review workflow, assessing the validity of conclusions, compliance with task requirements, and progress during problem solving as separate dimensions.
+  1. I cross-check the model's displayed CoT against actual tool calls, return values, and intermediate outputs to assess whether its reasoning claims have observable support.
+  2. I use code or rules to check directly verifiable answers, required deliverables, and approved tools and execution environments. Compliance is assessed against the requirements specified for the task.
+  3. I use elapsed time, attempt counts, and changes in intermediate results to identify repeated operations, continued use of failed assumptions, and attempts that add no evidence. These findings inform efficiency analysis even when the final answer is correct. Any resource limit used to determine acceptance must be defined in the task specification beforehand.
+* **I organized deliverables into proof-obligation dependency graphs ($\Gamma_q \vdash C_q$).** The graphs track domain assumptions, method applicability, evidentiary support, compliant execution, uniform approximation bounds, and the strength of each conclusion. They help locate the first unsupported step and its downstream effects while allowing valid alternative derivations. For tasks that admit formalization, checking local nodes and their dependencies within a sound inference system establishes the full conclusion.
+* **I developed checkable error certificates and bounds on solution quality for programmatically verifiable task families under explicit mathematical assumptions.** The projected-residual optimality bound ($0 \le f(x) - v^* \le \|P_{\ker A} r\|_2^2 / (2\mu)$) makes feasibility, stationarity, and the accuracy of a conclusion separate verification obligations. Different proofs can pass by satisfying the same obligations. Section 3 gives the assumptions, certificate construction, and problem class.
+* **I established a division of work among code or rule checks, LLM-assisted screening, and review by scholars with relevant expertise.** Code checks directly verifiable answers, tool permissions, and other requirements specified in advance. LLM-as-a-Judge helps flag missing evidence, misapplied rules, and gaps in reasoning; disputed domain judgments go to specialist scholars. I also compare elapsed time, attempt counts, changes in intermediate outputs, and the use of tool results to identify redundant work and loops without progress. These efficiency findings remain separate from correctness judgments.
+* **I derived how false acceptance ($\alpha$) and false rejection ($\beta$) can reverse model rankings and bias the binary cross-entropy gradient used to train process reward models ($E[\nabla_s \ell(s,V) - \nabla_s \ell(s,Z) \mid h] = p(h) - \tilde{p}(h)$).** I also derived the exact tolerance-propagation rule ($a\delta + 2\varepsilon$) for bijective task transformations. These results specify when grading labels and transformed tasks support valid comparisons.
+* **I tested false acceptance and false rejection on 3,600 exact-arithmetic submissions from 600 constructed strongly convex quadratic task families.** In this benchmark, 75% of invalid proofs reported the correct final value. Certificate checking accepted all 1,200 valid proofs (0.0% false rejection) and rejected all 2,400 invalid submissions (0.0% false acceptance). Final-answer matching had a 75.0% false acceptance rate, while strict reference-path matching had a 50.0% false rejection rate. The constructed families defined in Section 6 test both error detection and the retention of valid alternative proofs.
 
-## Architectural Context: From "Stumping Models on Final Answers" to Verifiable Trajectory & Tool Governance
+## Architectural Context: Visible reasoning and execution evidence
 
-The collaboration began in autumn 2023 with scientific-reasoning tasks for frontier models. Initial experiments in our workflow showed why final-answer matching was insufficient: a correct number could coexist with an invalid physical assumption, an unsupported computational shortcut, or a tool call that violated the task’s specified execution policy. Sections I–VII formalize the resulting acceptance architecture and relate it to subsequent process-evaluation research; the project start date does not imply that every later citation or mathematical formulation was part of the initial workflow.
+The collaboration began in fall 2023 with an evaluation of general reasoning in frontier models. In our workflow, a correct answer could coexist with unsupported assumptions, misapplied rules, or tool use that violated the task specification. Repeated calls that left the evidence and intermediate results unchanged also exposed opportunities to improve execution. I therefore cross-checked final answers, the model's visible reasoning, execution records, and efficiency measures, with responsibilities divided among programmatic checks, LLM-assisted semantic screening, and review by specialist scholars. Sections 1 through 7 describe the acceptance criteria, mathematical certificates for a programmatically verifiable subfamily, and the associated experiments. The collaboration's start date does not imply that every later citation or mathematical formulation was part of the initial workflow.
 
 ## Manuscript
 
-## 1 Correct final answers can conceal invalid reasoning and reverse model rankings
+## 1 Correct answers can conceal invalid reasoning and reverse model rankings
 
-Checking only the final answer is appropriate only when that final value constitutes the entire deliverable. In scientific reasoning, quantitative finance, and risk engineering, the model formulation, theorem assumptions, compliant tool invocation, intermediate derivations, and conclusion must hold together. In the OlympiadBench and Omni-MATH samples later analyzed to construct *ProcessBench*, **32.2% and 51.8% of solutions with correct final answers still contained process errors** (*[ProcessBench, Section 3.3](https://arxiv.org/html/2412.06559v2)*). Answer checking and trajectory validity measure fundamentally different things.
+Final-answer checking is sufficient only when the answer is the entire deliverable. For tasks that also require a derivation or a specified execution process, I examine domain assumptions, method applicability, supporting evidence, tool compliance, intermediate results, and the conclusion. The model's displayed CoT and visible reasoning traces are observable outputs that I cross-check against execution records; they are not direct records of its internal reasoning. In the OlympiadBench and Omni-MATH samples later analyzed for *ProcessBench*, 32.2% and 51.8% of solutions with correct final answers still contained process errors (*[ProcessBench, Section 3.3](https://arxiv.org/html/2412.06559v2)*). Answer accuracy and the validity of a reasoning trace are distinct evaluation targets.
 
-Suppose problems and model trajectories are drawn from a target capability distribution. Let $`Z = 1`$ indicate that the complete solution (including reasoning steps and compliant tool execution) is valid, and let $`V = 1`$ indicate that the evaluation protocol passes it. For model $`m`$, let $`\theta_m = \Pr_m(Z = 1)`$ be its true validity rate, $`\alpha_m = \Pr_m(V = 1 \mid Z = 0)`$ its **false acceptance rate** on invalid solutions (e.g., passing a flawed proof, a brute-force guess, or a non-compliant Python tool call that yields the right number), and $`\beta_m = \Pr_m(V = 0 \mid Z = 1)`$ its **false rejection rate** on valid solutions (e.g., rejecting a valid alternative derivation). The law of total probability gives:
+Suppose problems and model trajectories are drawn from a target capability distribution. Let $`Z = 1`$ indicate that the complete solution, including its reasoning steps and tool execution, is valid, and let $`V = 1`$ indicate that the evaluation protocol accepts it. For model $`m`$, define its true validity rate as $`\theta_m = \Pr_m(Z = 1)`$, its false acceptance rate as $`\alpha_m = \Pr_m(V = 1 \mid Z = 0)`$, and its false rejection rate as $`\beta_m = \Pr_m(V = 0 \mid Z = 1)`$. False acceptance can admit an unsupported derivation or a tool call that produces the correct answer while violating a predefined execution requirement. False rejection can exclude a valid alternative derivation. By the law of total probability:
 
 $$
 (1) \qquad s_m = E_m[V] = \alpha_m + (1 - \alpha_m - \beta_m)\theta_m, \qquad s_m - \theta_m = \alpha_m(1 - \theta_m) - \beta_m\theta_m
 $$
 
-The first bias term $`\alpha_m(1 - \theta_m)`$ credits invalid trajectories; the second term $`-\beta_m\theta_m`$ penalizes valid ones. **Adding more benchmark problems reduces sampling variance in $`\hat{s}_m`$, but never removes the structural gap $`s_m - \theta_m`$**. Because different models exhibit different failure modes (e.g., one model adheres strictly to compliant tools and rigorous deduction, while another aggressively invokes unauthorized code interpreters or heuristic shortcuts), their $`\alpha_m`$ and $`\beta_m`$ can differ enough to **strictly reverse their leaderboard ranking**:
-• In a concrete arithmetic scenario, suppose Model A and Model B have true validity rates of $`\theta_A = 72\%`$ and $`\theta_B = 64\%`$, respectively.
-• If their invalid trajectories pass a final-answer check with probabilities $`\alpha_A = 4\%`$ and $`\alpha_B = 36\%`$ (while $`\beta_A = \beta_B = 0\%`$), their observed benchmark scores become **$`s_A = 73.12\%`$** and **$`s_B = 76.96\%`$**—ranking the less capable, shortcut-prone model higher!
+The term $`\alpha_m(1 - \theta_m)`$ credits invalid trajectories, while $`-\beta_m\theta_m`$ penalizes valid ones. Adding benchmark problems reduces the sampling variance of $`\hat{s}_m`$ but does not remove the structural gap $`s_m - \theta_m`$. Models can differ in their adherence to evidence requirements, verification steps, and tool permissions. The resulting differences in $`\alpha_m`$ and $`\beta_m`$ can reverse their ranking:
+• Suppose Models A and B have true validity rates of $`\theta_A = 72\%`$ and $`\theta_B = 64\%`$.
+• If invalid trajectories pass the final-answer check with probabilities $`\alpha_A = 4\%`$ and $`\alpha_B = 36\%`$, with $`\beta_A = \beta_B = 0\%`$, their observed scores are $`s_A = 73.12\%`$ and $`s_B = 76.96\%`$. The model with the lower rate of fully valid solutions ranks higher.
 
-While process supervision extends evaluation to intermediate steps (*[Let's Verify Step by Step, Sections 2 and 3](https://arxiv.org/html/2305.20050v1)*), the architecture formalized here addresses three practical requirements in scientific post-training: omissions in reference solutions, valid alternative proof methods, and strict enforcement of tool-compliance and structural-insight obligations defined *before* model responses are generated.
+Process supervision extends evaluation to intermediate steps (*[Let's Verify Step by Step, Sections 2 and 3](https://arxiv.org/html/2305.20050v1)*). I apply this approach to general post-training evaluation by accounting for omissions in reference solutions, accepting valid alternative methods, and enforcing evidence and execution requirements defined before responses are generated. Structural simplification can explain a method or reveal redundant work. A slower solution or a larger number of attempts, however, does not by itself make the solution incorrect. A resource-related rejection requires a hard limit specified in advance.
 
-## 2 Define acceptance through proof obligations and allow valid alternative solutions
+## 2 Proof obligations organize layered review and allow alternative solutions
 
-A complete task deliverable specifies its domain assumptions and environmental compliance constraints $`\Gamma_q`$, the target conclusion $`C_q`$, and the proof obligations required to establish it. A model trajectory $`\tau`$ may choose its own intermediate lemmas, coordinate representations, or order of deduction; acceptance depends strictly on whether it fulfills the obligations while obeying tool governance. Organizing the response as a directed acyclic dependency graph (DAG) $`G`$ yields the local soundness check for every node $`v_j`$ alongside the global tool-compliance predicate $`\mathcal{T}_{\text{comp}}(\tau) \in \{0, 1\}`$:
+A task specification defines the domain assumptions and execution constraints $`\Gamma_q`$, the target conclusion $`C_q`$, and the proof obligations needed to establish it. Here, a model trajectory $`\tau`$ consists of visible reasoning and observable execution records. It may use different intermediate lemmas, representations, or orders of deduction. Review concerns the submitted material and whether it fulfills the task's obligations. A directed acyclic dependency graph (DAG) $`G`$ organizes the local soundness check for each node $`v_j`$, together with a global tool-compliance predicate $`\mathcal{T}_{\text{comp}}(\tau) \in \{0, 1\}`$:
 
 $$
 (2) \qquad \Gamma_q \cup \{v_k : k \in \operatorname{pa}(j)\} \vdash v_j, \qquad \Gamma_q \cup \{v_j : j \in \operatorname{sink}(G)\} \vdash C_q, \qquad \mathcal{T}_{\text{comp}}(\tau) = 1
 $$
 
-Here $`\vdash`$ denotes valid derivability within the sound domain inference system, and $`\mathcal{T}_{\text{comp}}(\tau) = 1`$ certifies that every external tool invocation $`t \in \tau`$ belongs to the task's permitted compliance sandbox $`\mathcal{A}_q`$ (for instance, $`\mathcal{A}_q = \{\text{Excel Audited Workbook}\}`$ and $`\text{Python VM} \notin \mathcal{A}_q`$). If the root nodes follow from verified assumptions $`\Gamma_q`$, each dependency edge is sound, and $`\mathcal{T}_{\text{comp}}(\tau) = 1`$, structural induction over a topological ordering of $`G`$ establishes the complete conclusion from local checks.
+The symbol $`\vdash`$ denotes valid derivability within a sound domain inference system. The condition $`\mathcal{T}_{\text{comp}}(\tau) = 1`$ certifies that each external tool invocation $`t \in \tau`$ belongs to the task's permitted execution environment $`\mathcal{A}_q`$. If root nodes follow from verified assumptions $`\Gamma_q`$, every dependency is sound, and $`\mathcal{T}_{\text{comp}}(\tau) = 1`$, structural induction over a topological ordering of $`G`$ establishes the full conclusion. This formal argument requires the local derivations to have been verified in a sound system.
 
-In production implementation, I organized the central obligations around five verifiable gates:
-1. **Valid Model Formulation**: Checking that physical, financial, or probabilistic state spaces are well-defined.
-2. **Compliant Tool Selection ($`\mathcal{T}_{\text{comp}}(\tau) = 1`$)**: When a task’s specified data-governance policy permits only the approved Excel environment, trajectories that invoke an unauthorized Python virtual machine are rejected immediately ($`V = 0`$), even if the final numerical calculation is exact.
-3. **Method Applicability & Uniform Error Control**: In physics tasks, pointwise convergence at a fixed parameter value does not establish that an approximation remains valid inside an optimization, an integral, or an exchange of limits. Authors and models must specify the approximation parameter, its domain of validity, and uniform error bounds before claiming an order of accuracy. In risk engineering, the corresponding obligations govern distributional and tail-dependence assumptions behind extreme-value bounds.
-4. **Structural Insight vs. Brute-Force Penalization**: Obligations require identifying the governing mathematical invariant rather than exhausting finite grids via raw compute.
-5. **First-Error Localization in Feedback**: Algebra that is locally correct under a false premise does not restore proof validity. Recording the first failed obligation node $`v_j`$ and marking its descendant subgraph $`\operatorname{desc}(v_j)`$ as unverified resolves the post-error ambiguity highlighted in *[ProcessBench, Section 3.1](https://arxiv.org/html/2412.06559v2)*.
+In production, I divided verification into three layers:
+1. Code and rule checks cover directly verifiable parts of an answer, required deliverables, and predefined restrictions on tools, execution environments, and resources. Tool compliance requires $`\mathcal{T}_{\text{comp}}(\tau) = 1`$. A call that violates an explicit hard requirement causes rejection ($`V = 0`$), even when the final answer is correct.
+2. LLM-as-a-Judge assists with semantic screening. It flags insufficient evidence, misapplied rules, conclusions that exceed their premises, and gaps in reasoning, linking each concern to the relevant trace, tool response, or intermediate output. These flags help direct further review.
+3. Scholars with relevant expertise review questions that require domain judgment, admit several reasonable interpretations, or remain disputed after the first two checks. They examine the evidence, applicability of the method, and conclusion. Questions that cannot be resolved from the available evidence remain open.
 
-## 3 Produce an error certificate as part of acceptance
+All three layers use the same observable material. I cross-check the model's displayed CoT and visible reasoning against actual tool calls, intermediate outputs, elapsed time, and attempt counts. For each attempt, I look for new evidence, revised premises, or a change in the state of the solution. This identifies repeated calls, continued use of failed assumptions, and loops that make no progress. Conclusions remain unverified when the necessary execution records are missing. I record efficiency separately from correctness and compliance. Long runtimes, repeated attempts, or exhaustive methods can warrant efficiency analysis; they affect acceptance only when they violate a predefined hard limit.
 
-An executable optimization subfamily illustrates how formal mathematical certificates replace brittle string matching. Consider the equality-constrained strongly convex quadratic problem:
+Method applicability also needs its own check. Pointwise convergence at a fixed parameter value does not establish that an approximation remains valid within an optimization, an integral, or an exchange of limits. A claim about the order of accuracy requires an approximation parameter, its domain of validity, and a uniform error bound. When such issues cannot be decided programmatically, an LLM can help locate a concern and a specialist scholar can review the assumptions and derivation. This review carries a different evidentiary status from a checkable formal certificate.
+
+For feedback, I record the first failed obligation at node $`v_j`$ and mark its descendant subgraph $`\operatorname{desc}(v_j)`$ as unverified. Locally correct calculations under a false premise do not repair the full derivation. This treatment addresses the ambiguity after an error discussed in *[ProcessBench, Section 3.1](https://arxiv.org/html/2412.06559v2)*. A suspected error awaiting specialist review remains unresolved until that review is complete.
+
+## 3 Error certificates for a programmatically verifiable subfamily
+
+To test the programmatic layer, I use an optimization subfamily whose constraints and certificates can be checked explicitly. It tests whether certificate checks reject invalid submissions while retaining valid alternative proofs. Consider the equality-constrained strongly convex quadratic problem:
 
 $$
 (3) \qquad v^* = \min_{Ax = b} f(x), \qquad f(x) = \frac{1}{2}x^\top H x + c^\top x, \qquad H \succeq \mu I, \quad \mu > 0
 $$
 
-where $`H`$ is symmetric, $`Ax = b`$ is feasible, and $`\mu > 0`$ is a verified lower bound on curvature. For any feasible candidate $`x`$ ($`Ax = b`$), choose any dual multiplier vector $`\nu`$ and define the stationarity residual $`r = Hx + c + A^\top \nu`$. Strong convexity gives the first inequality below for every feasible displacement $`d \in \ker A`$; completing the square in $`d`$ yields an exact **optimality error certificate**:
+Here $`H`$ is symmetric, $`Ax = b`$ is feasible, and $`\mu > 0`$ is a verified lower bound on curvature. For any feasible candidate $`x`$ satisfying $`Ax = b`$, choose any dual multiplier vector $`\nu`$ and define the stationarity residual $`r = Hx + c + A^\top \nu`$. Strong convexity gives the first inequality below for every feasible displacement $`d \in \ker A`$. Completing the square in $`d`$ gives an exact optimality error certificate:
 
 $$
 (4) \qquad f(x + d) \ge f(x) + r^\top d + \frac{\mu}{2}\|d\|^2
@@ -543,17 +548,17 @@ $$
 0 \le f(x) - v^* \le \frac{\|P_{\ker A} r\|_2^2}{2\mu}
 $$
 
-The operator $`P_{\ker A}`$ is the orthogonal projection onto the null space of feasible directions $`\ker A`$, removing residual components normal to the constraints that do not affect optimality along the feasible manifold (*[Boyd and Vandenberghe, Convex Optimization, Sections 5.5 and 9.1](https://web.stanford.edu/~boyd/cvxbook/bv_cvxbook.pdf)*). A zero projected residual ($`P_{\ker A} r = 0`$) certifies exact optimality; otherwise, the certificate bounds the suboptimality gap in objective units:
-• Solutions obtained via **Lagrange multipliers** or by **first eliminating the equality constraints** map seamlessly to the exact same semantic obligations and pass verification.
-• Conversely, merely reporting the correct optimal value $`v^*`$ does not satisfy the certificate obligations: feasibility and the claimed objective value must be checked independently. If a submission asserts a KKT multiplier witness, the full stationarity equation $`Hx+c+A^\top\nu=0`$ must also be verified. The projected-residual bound alone cannot validate the claimed multiplier, because $`P_{\ker A}A^\top\nu=0`$ for every $`\nu`$; a valid equality-elimination proof need not submit such a witness.
+The operator $`P_{\ker A}`$ is the orthogonal projection onto the space of feasible directions $`\ker A`$. It removes residual components normal to the constraints, which do not affect optimality along the feasible manifold (*[Boyd and Vandenberghe, Convex Optimization, Sections 5.5 and 9.1](https://web.stanford.edu/~boyd/cvxbook/bv_cvxbook.pdf)*). A zero projected residual, $`P_{\ker A} r = 0`$, certifies exact optimality. Otherwise, the certificate bounds the suboptimality gap in objective units:
+• Solutions derived through Lagrange multipliers or by eliminating the equality constraints can satisfy the same semantic obligations and pass verification.
+• Reporting the correct optimal value $`v^*`$ alone does not fulfill these obligations. Feasibility and the claimed objective value must be checked separately. If a submission claims a KKT multiplier witness, its full stationarity equation $`Hx+c+A^\top\nu=0`$ must also be verified. The projected-residual bound cannot validate that multiplier, since $`P_{\ker A}A^\top\nu=0`$ for every $`\nu`$. A valid equality-elimination proof need not supply a multiplier witness.
 
-Optimization certificates are one instance of our broader obligation design. In an original kinematics benchmark I created for the project, I used the **path invariance of vertical travel time** to reduce a 2D trajectory problem to 1D horizontal scheduling—separately proving an **attained minimum completion time**, an **unattained supremum**, and **harmonic-number ($`H_n = \sum_{k=1}^n k^{-1}`$) asymptotics** for a staircase path construction approaching the supremum. This benchmark demonstrates why feasibility, optimal bounds, structural reduction, and attainment require separate proof obligations even when a model guesses the final limiting value correctly.
+I use the lessons from this subfamily to structure general review: check the inputs and assumptions, compliance with the execution specification, support for the derivation, and whether the conclusion exceeds the evidence. Rules or certificate verifiers handle obligations that admit programmatic checks. Other semantic questions go through LLM-assisted screening and specialist review. Structural simplification may explain why a method needs less repeated work, but efficiency gains and validity certificates are evaluated separately.
 
-## 4 Task expansion must propagate mathematical error
+## 4 Task transformations must propagate error bounds
 
-While symbolic templates (*[GSM-Symbolic, Section 3.1](https://arxiv.org/html/2410.05229v1)*) parameterize variable domains and answer formulas, scientific and engineering benchmarks also require verifiable laws governing how a transformation changes feasible sets, objective values, and acceptance tolerances.
+Symbolic templates parameterize variable domains and answer formulas (*[GSM-Symbolic, Section 3.1](https://arxiv.org/html/2410.05229v1)*). Tasks with formalizable transformations also need verifiable rules for how those transformations affect feasible sets, objective values, and acceptance tolerances.
 
-Let the original problem and its transformed variant have feasible sets $`F`$ and $`F'`$ with objectives $`J`$ and $`J'`$ and finite infima $`v`$ and $`v'`$. Suppose the task designer verifies a bijection $`\Phi : F \to F'`$ satisfying the uniform bound for every feasible $`u \in F`$:
+Let an original problem and its transformed variant have feasible sets $`F`$ and $`F'`$, objectives $`J`$ and $`J'`$, and finite infima $`v`$ and $`v'`$. Suppose the task designer verifies a bijection $`\Phi : F \to F'`$ such that every feasible $`u \in F`$ satisfies the uniform bound:
 
 $$
 (5) \qquad |J'(\Phi(u)) - aJ(u) - b| \le \varepsilon, \quad a > 0
@@ -567,11 +572,11 @@ $$
 J(u) - v \le \delta \implies J'(\Phi(u)) - v' \le a\delta + 2\varepsilon
 $$
 
-Taking infima across the first line yields the second; subtracting the lower bound on $`v'`$ from the upper bound on $`J'(\Phi(u))`$ yields the third. This theorem answers an essential engineering question: after a unit conversion, parameter rescaling, or numerical transformation with bounded error $`\varepsilon`$, what acceptance tolerance must apply to a previously $`\delta`$-optimal solution? Retaining the raw tolerance $`\delta`$ can misclassify valid transformed solutions as model failures, while relaxing tolerances ad-hoc conceals genuine capability gaps. Moreover, when $`\varepsilon = 0`$, the bijection and positive scaling $`a > 0`$ preserve whether an optimum is attained; variants that alter boundary compactness or admissible control classes require fresh attainment proofs.
+Taking infima in the first line gives the second. Subtracting the lower bound on $`v'`$ from the upper bound on $`J'(\Phi(u))`$ gives the third. The result determines the acceptance tolerance for a previously $`\delta`$-optimal solution after a unit conversion, parameter rescaling, or numerical transformation with error bounded by $`\varepsilon`$. Keeping the original tolerance $`\delta`$ can misclassify a valid transformed solution as a model failure; relaxing it arbitrarily can conceal a real capability gap. When $`\varepsilon = 0`$, the bijection and positive scaling $`a > 0`$ also preserve whether an optimum is attained. Changes to boundary compactness or admissible control classes require a new attainment proof.
 
-## 5 Label quality determines what post-training research optimizes
+## 5 Grading errors change the post-training objective
 
-Granular step-level process labels improve post-training only if they measure true logical and compliance validity; systematic grading errors are directly absorbed by downstream Process Reward Models (PRMs) and RLHF policies. Let $`h`$ denote the problem and reasoning prefix through the current step, $`Z = 1`$ indicate true step validity under the problem's assumptions, and $`V \in \{0, 1\}`$ be the noisy acceptance label produced by the grader with conditional false acceptance $`\alpha(h)`$ and false rejection $`\beta(h)`$. Writing $`p(h) = \Pr(Z = 1 \mid h)`$, a process evaluator with logit $`s`$ trained via binary cross-entropy optimizes toward the corrupted conditional target:
+Step-level labels can improve post-training only if they measure logical validity and compliance. Systematic grading errors pass into the targets used by process reward models (PRMs) and RLHF policies. Let $`h`$ denote the task input and the model's visible reasoning prefix through the current step. Let $`Z = 1`$ indicate that the step is valid under the problem's assumptions, and let $`V \in \{0, 1\}`$ be the grader's noisy acceptance label, with conditional false acceptance $`\alpha(h)`$ and false rejection $`\beta(h)`$. Writing $`p(h) = \Pr(Z = 1 \mid h)`$, a process evaluator with logit $`s`$ trained by binary cross-entropy is optimized toward the corrupted conditional target:
 
 $$
 (6) \qquad \tilde{p}(h) = \alpha(h) + [1 - \alpha(h) - \beta(h)]p(h)
@@ -585,52 +590,52 @@ $$
 E[\nabla_s \ell(s, V) - \nabla_s \ell(s, Z) \mid h] = p(h) - \tilde{p}(h)
 $$
 
-This expected gradient bias formula proves mathematically why naive evaluation pipelines damage post-training:
-• **When false rejection dominates ($`\beta(h)p(h) > \alpha(h)[1-p(h)]`$)**: $`\tilde{p}(h) < p(h)`$, shifting the learned validity target downward and penalizing valid alternative proofs.
-• **When false acceptance dominates ($`\alpha(h)[1-p(h)] > \beta(h)p(h)`$)**: $`\tilde{p}(h) > p(h)`$, shifting the learned validity target upward and rewarding flawed proofs or non-compliant tool calls. The two effects cancel in the conditional mean when their weighted contributions are equal.
+The expected gradient difference describes how grading bias changes the training target:
+• If false rejection dominates, $`\beta(h)p(h) > \alpha(h)[1-p(h)]`$, then $`\tilde{p}(h) < p(h)`$. The learned validity target shifts downward, penalizing valid alternative proofs.
+• If false acceptance dominates, $`\alpha(h)[1-p(h)] > \beta(h)p(h)`$, then $`\tilde{p}(h) > p(h)`$. The target shifts upward, rewarding flawed proofs or noncompliant tool calls. The effects cancel in the conditional mean when their weighted contributions are equal.
 
-Furthermore, while class-conditional noise correction (*[Learning with Noisy Labels, Sections 2 and 3](https://papers.nips.cc/paper_files/paper/2013/file/3871bd64012152bfb53fdf04b401193f-Paper.pdf)*) can unbias the mean estimate when $`\alpha, \beta`$ are known constants ($`\alpha + \beta < 1`$), it inflates estimation variance quadratically:
+When $`\alpha, \beta`$ are known constants with $`\alpha + \beta < 1`$, class-conditional noise correction can remove bias from the mean estimate (*[Learning with Noisy Labels, Sections 2 and 3](https://papers.nips.cc/paper_files/paper/2013/file/3871bd64012152bfb53fdf04b401193f-Paper.pdf)*). It also increases variance by the following squared factor:
 
 $$
 (7) \qquad \hat{\theta}_{\text{corr}} = \frac{\bar{V} - \alpha}{1 - \alpha - \beta}, \qquad \operatorname{Var}(\hat{\theta}_{\text{corr}}) = \frac{\operatorname{Var}(\bar{V})}{(1 - \alpha - \beta)^2}
 $$
 
-For task families whose validity is exactly decidable by a sound and complete certificate verifier, $`\alpha=\beta=0`$ removes this noise-correction variance penalty. The zero observed error rates in the constructed stress test below do not establish zero population error on unrestricted scientific reasoning.
+For task families whose validity is exactly decidable by a sound and complete certificate verifier, $`\alpha=\beta=0`$ removes this variance penalty. The stress test below evaluates the certificate method within such a programmatically decidable subfamily. Error rates for LLM-assisted labels and specialist review require separate calibration samples.
 
-## 6 Reproducible stress tests for false acceptance and false rejection
+## 6 Reproducible tests of false acceptance and false rejection
 
-To validate our certificate verifier reproducibly, I constructed **600 strongly convex quadratic task families** and generated **6 algebraic submissions per family (3,600 total submissions)** using **exact rational arithmetic**:
-• **1,200 Valid Certificates (2 per family)**: One derived in Lagrangian multiplier form and one in equality-elimination form.
-• **2,400 Controlled-Defect Submissions (4 per family)**: (1) An infeasible construction ($`Ax \neq b`$) yielding the exact optimal value $`v^*`$; (2) failed stationarity along a feasible direction in $`\ker A`$ while reporting $`v^*`$; (3) a claimed multiplier that fails the stationarity equation while reporting $`v^*`$; and (4) an incorrect final objective value. Crucially, the first three defect classes (1,800 submissions, or **75% of all invalid submissions**) report the exact right final answer $`v^*`$!
+I constructed 600 strongly convex quadratic task families to test the certificate verifier within this subfamily. Using exact rational arithmetic, I generated 6 algebraic submissions per family, for 3,600 submissions in total:
+• 1,200 valid certificates, 2 per family: one derived using Lagrange multipliers and one using equality elimination.
+• 2,400 submissions with controlled defects, 4 per family: (1) an infeasible construction, $`Ax \neq b`$, that yields the exact optimal value $`v^*`$; (2) failure of stationarity along a feasible direction in $`\ker A`$ while reporting $`v^*`$; (3) a claimed multiplier that fails the stationarity equation while reporting $`v^*`$; and (4) an incorrect final objective value. The first three classes, comprising 1,800 submissions or 75% of all invalid submissions, report the correct final answer $`v^*`$.
 
-We benchmarked three deterministic acceptance protocols across all 3,600 submissions:
+We compared three deterministic acceptance protocols on all 3,600 submissions:
 
 <table header-row="true">
-<tr><td>Acceptance Protocol</td><td>False Acceptance Rate on Invalid Certificates ($`2,400`$)</td><td>False Rejection Rate on Valid Certificates ($`1,200`$)</td><td>Valid Share of Accepted Submissions</td></tr>
-<tr><td>**Final-answer matching only**</td><td>**75.0%** (admits 1,800 flawed solutions)</td><td>0.0%</td><td>40.0%</td></tr>
-<tr><td>**Strict reference path (ablation)**</td><td>0.0%</td><td>**50.0%** (rejects 600 valid elimination proofs)</td><td>100.0%</td></tr>
-<tr><td>**Semantic certificate verification (Ours)**</td><td>**0.0%**</td><td>**0.0%**</td><td>**100.0%**</td></tr>
+<tr><td>Acceptance protocol</td><td>False acceptance rate on invalid certificates ($`2,400`$)</td><td>False rejection rate on valid certificates ($`1,200`$)</td><td>Valid share of accepted submissions</td></tr>
+<tr><td>Final-answer matching only</td><td>75.0% (accepts 1,800 flawed solutions)</td><td>0.0%</td><td>40.0%</td></tr>
+<tr><td>Strict reference-path matching (ablation)</td><td>0.0%</td><td>50.0% (rejects 600 valid elimination proofs)</td><td>100.0%</td></tr>
+<tr><td>Semantic certificate verification (programmatic checks for this subfamily)</td><td>0.0%</td><td>0.0%</td><td>100.0%</td></tr>
 </table>
 
-Within this exact-arithmetic benchmark, semantic certificate verification admitted **1,800 fewer invalid proofs** than final-answer matching and retained **600 more valid alternative solutions** than strict reference-path matching, while passing all 600 feasible-perturbation checks on the projected-residual bound in Equation (4).
+Within this exact-arithmetic benchmark, semantic certificate verification accepted 1,800 fewer invalid proofs than final-answer matching and retained 600 more valid alternative solutions than strict reference-path matching. It also passed all 600 feasible-perturbation checks on the projected-residual bound in Equation (4). Here, semantic certificate verification checks the constraints, objective value, and certificate conditions explicitly. The reported error rates apply to this constructed benchmark. LLM-assisted screening and review by specialist scholars are evaluated separately.
 
-## 7 Account for dependence within task families and the full cost of expert review
+## 7 Dependence within task families and the cost of expert review
 
-Generating surface variants of a single problem template does not yield independent observations of scientific capability. Across $`F`$ independent task families with $`K`$ variants per family, common marginal variance $`\sigma^2`$, and common pairwise within-family correlation $`\rho`$, the variance of the sample mean and effective sample size $`n_{\text{eff}}`$ are:
+Surface variations of one problem template do not provide independent observations of general reasoning ability. Suppose there are $`F`$ independent task families, each with $`K`$ variants, common marginal variance $`\sigma^2`$, and common pairwise within-family correlation $`\rho`$. The variance of the sample mean and the effective sample size $`n_{\text{eff}}`$ are:
 
 $$
 (8) \qquad \operatorname{Var}(\bar{Z}) = \frac{\sigma^2}{FK}[1 + (K - 1)\rho], \qquad n_{\text{eff}} = \frac{FK}{1 + (K - 1)\rho}
 $$
 
-If $`F = 50`$ task families each have $`K = 8`$ variants ($`400`$ total responses) with $`\rho = 0.6`$, the $`400`$ responses provide the same precision as just **$`n_{\text{eff}} \approx 77`$ independent observations**—mandating family-level train/test partitioning and new combinations of physical and mathematical principles rather than superficial numerical templating.
+For $`F = 50`$ families with $`K = 8`$ variants each, there are $`400`$ responses. If $`\rho = 0.6`$, those $`400`$ responses provide the same precision as $`n_{\text{eff}} \approx 77`$ independent observations. Training and test sets therefore need to be split by task family. New tasks should vary assumptions, evidentiary relationships, or the structure of a derivation, beyond simply substituting numbers.
 
-Finally, full production cost accounting determines when automated certificate verification outperforms manual PhD review. Let $`C_0`$ be the upfront engineering cost of building the proof-obligation certificates and verifier, $`c_e`$ the legacy workflow's expert review cost per submission, $`c_v`$ the automated verifier's unit execution cost, and $`u`$ the fraction of submissions escalated to human adjudication. Once false acceptance and false rejection standards are met, the certificate architecture reduces total cost whenever submission volume $`N`$ exceeds:
+I account for the cost of certificate verification and human review separately within the programmatically verifiable subfamily. The following model compares automated certificate checking with the original workflow of reviewing every submission. The full three-layer process also incurs costs for model calls, calibration, and review of disputed cases. Let $`C_0`$ be the upfront engineering cost of the proof-obligation certificates and verifier, $`c_e`$ the original expert review cost per submission, $`c_v`$ the automated verifier's unit execution cost, and $`u`$ the fraction of submissions escalated to human adjudication. Once false acceptance and false rejection standards are met, assume unit costs are stable and the same expert unit cost applies to escalated cases. The certificate workflow then reduces total cost when submission volume $`N`$ exceeds:
 
 $$
 (9) \qquad C_0 + N(c_v + uc_e) < Nc_e \iff N > \frac{C_0}{(1 - u)c_e - c_v}, \qquad (1 - u)c_e > c_v
 $$
 
-By connecting capability specifications, CoT proof obligations, tool-compliance sandboxes, and exact optimality certificates, the framework developed from this collaboration provides a rigorous blueprint for verifiable reasoning evaluation and post-training supervision.
+The evaluation workflow combines task specifications, visible reasoning, execution evidence, and layered review, with exact certificates where the problem class permits them. I report correctness, compliance, and efficiency separately, preserving the scope and evidentiary status of each assessment.
 
 # Project 04: evidence-uncertainty-and-decision-guarantees-in-investment-research
 
@@ -641,7 +646,7 @@ Evidence uncertainty and decision guarantees in investment research
 Duke University × Leading Global Alternative Asset Manager
 
 **Title**
-AI-Driven Investment Research and Explainable Risk Analysis
+Evidence verification and robust comparison in investment research
 
 **URL**
 https://www.theodoreoy.com/past-experience/artificial-intelligence/evidence-uncertainty-and-decision-guarantees-in-investment-research/
@@ -650,157 +655,155 @@ https://www.theodoreoy.com/past-experience/artificial-intelligence/evidence-unce
 Researcher
 
 **Location**
-Durham, NC; Washington, DC
+Durham, North Carolina; Washington, DC
 
 **Dates**
-September 2023 – September 2026
+September 2023 to September 2026
 
 **Read More Label**
 Read More
 
 ## Summary
 
-Developed in a multi-year collaboration between Duke University and a leading global alternative asset manager overseeing more than $300 billion in assets under management *(partner identity anonymized under NDA)*, this project built an AI-native investment-research and epistemic-verification workflow designed to counter **AI-era corporate greenwashing and adversarial narrative manipulation**. The workflow addresses the risk that AI-polished corporate disclosures and PR narratives can influence automated ESG and investment-research scores without strengthening the underlying evidence; document-level checks alone may miss shared reporting errors and unsupported claims. Rather than building a black-box system that tells deal teams which company to fund, I architected a decision-guarantee engine (`Multi-Source Ingestion → Multi-Model Rashomon Scoring → Support-Function Ranking Stability Certification → Minimax-Regret Verification Routing → Versioned SHAP Propagation`) that measures **how trustworthy an AI-assisted assessment actually is** and identifies **which exact factual claim analysts should verify next**. In reproducible analytical benchmarks, joint support-function modeling certified a **0.6-point pairwise company advantage** completely obscured by independent confidence intervals, while a single minimax-regret query reduced worst-case decision regret from **0.61 score units to zero**.
+I developed and implemented an evidence verification and decision assurance framework through a multiyear collaboration between Duke University and a leading global alternative asset manager with more than $300 billion in assets under management. The partner is unnamed under a confidentiality agreement. The research examines how AI-polished disclosures and corporate narratives affect ESG and investment scores, accounting jointly for model selection, unverified claims, and shared reporting errors. The system ingests evidence from multiple sources, scores companies across a Rashomon model set, and computes support-function bounds on ranking stability. A minimax-regret criterion directs analysts to the facts they should verify next; versioned updates then propagate corrections through scores and SHAP attributions. In reproducible analytical benchmarks, the joint model certified a 0.6-point pairwise company advantage that separate company intervals could not establish. In an eight-scenario benchmark with one equal-cost query, the verification criterion reduced worst-case decision regret from 0.61 score units to zero.
 
 ## Confidentiality & Scope Disclosure
 
-Conducted through a university–industry collaboration with a leading global alternative asset manager overseeing more than $300 billion in assets under management as of June 2026. While the partner institution's name is withheld pursuant to non-disclosure agreements, my role, system architecture, anti-greenwashing methodology, and analytical benchmarks are authorized for public disclosure.
+This research was conducted through an academic-industry collaboration with a leading global alternative asset manager whose assets under management exceeded $300 billion as of June 2026. The institution is unnamed under a confidentiality agreement. My role, the system architecture, the methods for detecting greenwashing, and the analytical benchmarks are cleared for public disclosure.
 
 ## Key Contributions
 
-* **Designed Institutional Controls for AI-Era Greenwashing and Narrative Manipulation**: Addressed the risk that polished corporate disclosures and sustainability narratives can influence automated LLM and ESG scores without corresponding factual support. Designed evidence-tracing and verification controls for private-market and ESG research, where report-level review alone may leave shared-source errors and unresolved factual claims undetected.
-* **Built an Epistemic Decision-Support Engine Rather Than a Black-Box Deal Picker**: Designed the internal AI workflow around a strict institutional mandate—**never replace the investment committee by outputting a black-box "invest / pass" verdict; instead, quantify how trustworthy the current score is and prescribe which exact factual claim analysts must verify next to minimize misjudgment**. Implemented the complete closed-loop pipeline: `Multi-Source Evidence Ingestion → Multi-Model Rashomon Scoring → Ranking Stability Certification → Minimax-Regret Verification Routing → Automated Post-Correction Re-scoring & Attribution Propagation`.
-* **Converted Heterogeneous Disclosures into Traceable Scoring Rules & Contradiction Detectors**: Transformed operating reports, audited financial statements, sustainability disclosures, management questionnaires, and third-party datasets into structured scoring rubrics with strict evidence lineage. Directed AI-assisted verification specifically toward unsubstantiated corporate claims and cross-document contradictions—signals that warrant targeted factual review.
-* **Combined Tree Ensembles, Conditional SHAP & Rashomon Model Multiplicity**: Deployed gradient-boosted tree models and tabular deep learning to capture nonlinear thresholds and interaction effects, paired with SHAP attributions and conditional Shapley analyses across Rashomon sets of near-optimal models ($\mathcal{F}_\alpha$) to distinguish stable score contributors from model-selection artifacts.
-* **Formulated Joint Model-and-Evidence Uncertainty Bounds via Convex Support Functions**: Derived failure cases for standard bootstrap resampling and raw SHAP-based verification priorities under shared reporting bias or unverified corporate claims. Represented unresolved company evidence $\mathcal{X}(E)$ and Rashomon model sets $\mathcal{F}_\alpha$ jointly ($\Omega(E) = \mathcal{F}_\alpha \times \mathcal{X}(E)$) and derived convex support-function bounds ($h_U(a_f)$) that cancel shared-source measurement errors when the two companies have identical exposures—certifying, in a synthetic comparison, a **0.6-point pairwise company advantage** that separate company confidence intervals ($[-1.4, 2.6]$) failed to resolve.
-* **Derived Minimax-Regret Active Verification Routing ($V(q)/c_q$)**: Formulated a distribution-free verification criterion that prioritizes diligence queries by the **worst-case decision regret they remove** rather than by naive SHAP magnitude. In an eight-scenario benchmark, a single targeted verification query reduced worst-case decision regret from **0.61 score units to zero**, whereas rechecking an already-verified high-SHAP feature yielded zero regret reduction.
+* **I studied how AI-polished corporate narratives influence LLM-assisted scoring, ESG ratings, and investment analysis when the underlying claims lack factual support.** I brought corporate claims, cross-document contradictions, and shared reporting errors into a common review process to support targeted verification in private-market and ESG research.
+* **I translated institutional diligence requirements into measures of score reliability, pairwise ranking stability, and verification priority.** I implemented a workflow that ingests evidence, scores companies across a Rashomon model set, computes ranking bounds, and allocates verification effort using minimax regret. Corrections trigger rescoring and attribution updates, giving the investment committee a traceable basis for its analysis.
+* **I converted operating reports, audited financial statements, sustainability disclosures, management questionnaires, and third-party datasets into structured scoring rules with source and version records.** AI-assisted checks identify unsupported claims and contradictions across documents for targeted factual review.
+* **I deployed gradient-boosted trees and deep learning models for tabular data to capture nonlinear thresholds and interactions.** SHAP attributions across a near-optimal Rashomon set ($\mathcal{F}_\alpha$), together with conditional Shapley analysis, measure sensitivity to model choice and identify scoring factors whose contributions remain stable across models.
+* **I derived failure cases for conventional bootstrap resampling and verification priorities based on raw SHAP magnitudes when inputs contain shared reporting bias or unverified claims.** I represented unresolved evidence $\mathcal{X}(E)$ jointly with the Rashomon set $\mathcal{F}_\alpha$ through $\Omega(E) = \mathcal{F}_\alpha \times \mathcal{X}(E)$ and derived convex support-function bounds ($h_U(a_f)$). Common measurement errors cancel when the two companies have identical exposures. In a synthetic comparison, the joint model certified a 0.6-point advantage that the difference bound from separate company intervals ($[-1.4, 2.6]$) could not establish.
+* **I derived a query criterion that requires no probability distribution over scenarios within the specified joint uncertainty set.** It prioritizes the reduction in worst-case decision regret that a query can guarantee. For unequal query costs, $V(q)/c_q$ provides a one-step efficiency measure. In an eight-scenario benchmark with one equal-cost query, targeted verification reduced worst-case regret from 0.61 score units to zero; rechecking an already verified feature with a large SHAP attribution reduced regret by zero.
 
-## Architectural Context: Countering Adversarial AI Greenwashing in $300B+ Institutional Diligence
+## Architectural Context: Corporate evidence and the allocation of verification effort
 
-In private-equity and impact-investment diligence, fluent summaries do not establish the truth of corporate disclosures. The workflow treats AI-polished narratives, unsupported sustainability claims, and shared reporting errors as risks to the credibility of automated ESG and investment scores. Existing disclosure and antifraud obligations do not remove the analyst’s need to verify material evidence. Sections I–VI present the mathematical and systems architecture I developed to audit score credibility, account for shared measurement errors, and route human diligence toward claims capable of changing the comparison.
+Institutional diligence must account for uncertainty in both corporate evidence and scoring models. AI-polished narratives, unverified sustainability claims, and common reporting errors can all affect ESG and investment scores. The architecture takes a traceable evidence state as its input and incorporates model multiplicity, joint measurement error, and verification costs. Sections 1 through 6 set out the limits of attribution methods, the joint uncertainty model, ranking bounds, the query criterion, versioned updates, and analytical benchmarks.
 
 ## Manuscript
 
-## 1 Where existing methods leave the decision unresolved
+## 1 Feature attribution and the value of verification
 
-[SHAP](https://arxiv.org/abs/1705.07874)'s local accuracy property decomposes a given model prediction into additive feature contributions, while conditional Shapley methods address feature dependence and Rashomon-set methods examine explanation stability across near-optimal models (*[SHAP](https://arxiv.org/abs/1705.07874); [Aas et al.](https://arxiv.org/html/1903.10464v3); [Marx et al.](https://proceedings.mlr.press/v206/marx23a.html)*). However, **these explainability methods impose zero requirement that the underlying corporate input facts $`x`$ be true**. In institutional investment diligence—where self-reported disclosures may contain AI-polished greenwashing—a further mathematical layer is required to determine *which factual correction to the evidence could flip the current investment decision*.
+[SHAP](https://arxiv.org/abs/1705.07874) decomposes a model prediction into additive feature contributions through its local accuracy property. Conditional Shapley methods account for dependence among features, and Rashomon-set methods assess the stability of explanations across near-optimal models ([SHAP](https://arxiv.org/abs/1705.07874); [Aas et al.](https://arxiv.org/html/1903.10464v3); [Marx et al.](https://proceedings.mlr.press/v206/marx23a.html)). These methods do not establish whether the corporate inputs $`x`$ are factually correct. In investment diligence, where self-reported disclosures may contain AI-polished greenwashing, an analyst also needs to know which corrections to the evidence could change a decision.
 
-For a linear scoring model under a fixed marginal background $`Q`$, the [SHAP](https://arxiv.org/abs/1705.07874) attribution assigned to feature $`j`$ is $`\phi_j = \beta_j(x_j - E_Q X_j)`$. Suppose feature $`j`$ carries an unresolved factual or greenwashing uncertainty bounded by $`|\delta_j| \le d_j`$. Its true sensitivity to factual verification is $`|\beta_j|d_j`$, and over a box of admissible evidence errors, the exact worst-case swing in the company's score is:
+For a linear scoring model with a fixed marginal background distribution $`Q`$, the [SHAP](https://arxiv.org/abs/1705.07874) attribution for feature $`j`$ is $`\phi_j = \beta_j(x_j - E_Q X_j)`$. Suppose the feature has unresolved factual uncertainty bounded by $`|\delta_j| \le d_j`$. Its sensitivity to verification is $`|\beta_j|d_j`$. Over a box of admissible evidence errors, the exact worst-case change in the company score is
 
 $$
 \sup_{|\delta_j| \le d_j} |f(x + \delta) - f(x)| = \sum_j |\beta_j| d_j
 $$
 
-The triangle inequality gives the upper bound, which is attained by choosing the endpoint of each error interval so that all perturbations push the score in the same direction. This identity exposes a fundamental flaw in standard XAI-driven diligence:
-• A core financial metric with a massive [SHAP](https://arxiv.org/abs/1705.07874) bar $`|\phi_j|`$ may come from audited statutory filings that have already been thoroughly verified ($`d_j \approx 0`$); re-auditing it wastes diligence budget.
-• Conversely, a self-reported ESG or operational metric whose current claimed value sits near the sector average ($`x_j \approx E_Q X_j \implies \phi_j \approx 0`$) appears completely unimportant on a [SHAP](https://arxiv.org/abs/1705.07874) chart, yet may harbor substantial unresolved greenwashing error ($`d_j \gg 0`$) capable of reversing the deal ranking!
+The triangle inequality gives the upper bound. It is attained by choosing the endpoint of each error interval so that every perturbation moves the score in the same direction. Attribution magnitude and verification value therefore require separate calculations:
+• A financial metric may have a large [SHAP](https://arxiv.org/abs/1705.07874) attribution $`|\phi_j|`$ and come from audited filings that have already been verified ($`d_j \approx 0`$). Further checks of that field contribute little to reducing score uncertainty.
+• A self-reported ESG or operating metric may lie near the sector mean ($`x_j \approx E_Q X_j \implies \phi_j \approx 0`$), giving it a near-zero [SHAP](https://arxiv.org/abs/1705.07874) attribution. Substantial unresolved reporting error ($`d_j \gg 0`$) may nevertheless be sufficient to reverse a company ranking.
 
-Naive bootstrap resampling of existing records fails for a parallel reason: it cannot detect a shared reporting or AI-marketing bias. Suppose $`n`$ reported observations satisfy $`X_i = \mu + b + \varepsilon_i`$, where $`\varepsilon_i \sim \mathcal{N}(0, \sigma^2)`$ are independent random errors and $`b \neq 0`$ is an unmodeled systemic bias shared across records (such as sector-wide self-reporting inflation or coordinated AI-PR sentiment manipulation). A conventional nominal 95% normal confidence interval centered on the sample mean $`\bar{X}`$ covers the true fundamental parameter $`\mu`$ with probability:
+Resampling existing records cannot, by itself, identify a shared reporting or AI-marketing bias. Suppose $`n`$ reported observations satisfy $`X_i = \mu + b + \varepsilon_i`$, where $`\varepsilon_i \sim \mathcal{N}(0, \sigma^2)`$ are independent errors and $`b \neq 0`$ is an unmodeled bias common to all records. Examples include systematic overstatement across a sector or coordinated AI-assisted public relations. A conventional nominal 95% normal confidence interval centered on the sample mean $`\bar{X}`$ covers the true parameter $`\mu`$ with probability
 
 $$
 \Pr\left\{ \mu \in \left[ \bar{X} - z\frac{\sigma}{\sqrt{n}}, \ \bar{X} + z\frac{\sigma}{\sqrt{n}} \right] \right\} = \Phi\left( z - \frac{b\sqrt{n}}{\sigma} \right) - \Phi\left( -z - \frac{b\sqrt{n}}{\sigma} \right) \longrightarrow 0 \quad (\text{as } n \to \infty)
 $$
 
-where $`z = \Phi^{-1}(0.975) \approx 1.96`$. **Collecting more biased documents ($`n \to \infty`$) shrinks random variance while driving true confidence coverage to zero!** A bootstrap that resamples the same biased disclosures has no statistical leverage to identify $`b`$. Active evidence verification must therefore bound input uncertainty before stability analysis can provide valid decision guarantees.
+where $`z = \Phi^{-1}(0.975) \approx 1.96`$. With a fixed nonzero common bias, increasing the sample size ($`n \to \infty`$) reduces random variance while the interval's coverage of the true parameter tends to zero. Bootstrapping the same biased records supplies no information that identifies $`b`$. External evidence is needed to bound the common bias, and ranking analysis must retain the resulting uncertainty.
 
 ## 2 Joint uncertainty over models and evidence
 
-To evaluate whether an ESG or investment ranking is genuinely trustworthy, our engine represents **model-selection multiplicity** and **unresolved evidence uncertainty** jointly.
+The framework represents model multiplicity and unresolved evidence jointly to assess whether an ESG or investment ranking remains stable under admissible changes to either.
 
-Fix the prediction target, input definitions, and output scale. Consider $`M`$ candidate scoring models $`\mathcal{F}_0`$ specified before examining a validation set of $`n`$ i.i.d. observations from the target evaluation distribution, independent of model construction, with loss bounded in $`[0, 1]`$. For failure probability $`\alpha \in (0, 1)`$, Hoeffding's inequality and a union bound guarantee:
+Fix the prediction target, input definitions, and output scale. Let $`\mathcal{F}_0`$ contain $`M`$ candidate scoring models specified before examining the validation data. The validation set consists of $`n`$ i.i.d. observations from the target evaluation distribution, independent of model construction, and the loss is bounded in $`[0, 1]`$. For a failure probability $`\alpha \in (0, 1)`$, Hoeffding's inequality and a union bound give
 
 $$
 \Pr\left\{ \max_{f \in \mathcal{F}_0} |\hat{L}_n(f) - L(f)| \le t_n \right\} \ge 1 - \alpha, \qquad t_n = \sqrt{\frac{\log(2M / \alpha)}{2n}}
 $$
 
-Let $`f^*`$ minimize true population loss within $`\mathcal{F}_0`$, and retain the empirical **Rashomon set** of all near-optimal models within $`2t_n`$ of the empirical validation minimum:
+Let $`f^*`$ minimize population loss within $`\mathcal{F}_0`$. Retaining all models whose empirical validation loss is within $`2t_n`$ of the empirical minimum defines an empirical Rashomon set:
 
 $$
 \mathcal{F}_\alpha = \left\{ f \in \mathcal{F}_0 : \hat{L}_n(f) \le \min_{g \in \mathcal{F}_0} \hat{L}_n(g) + 2t_n \right\}
 $$
 
-On the simultaneous concentration event, $`\hat{L}_n(f^*) \le L(f^*) + t_n \le \min_g \hat{L}_n(g) + 2t_n`$, guaranteeing $`f^* \in \mathcal{F}_\alpha`$ while every retained model has population excess loss at most $`4t_n`$ (*[Marx et al.](https://proceedings.mlr.press/v206/marx23a.html)*).
+On the simultaneous concentration event, $`\hat{L}_n(f^*) \le L(f^*) + t_n \le \min_g \hat{L}_n(g) + 2t_n`$. Thus $`f^* \in \mathcal{F}_\alpha`$, and every retained model has population excess loss at most $`4t_n`$ ([Marx et al.](https://proceedings.mlr.press/v206/marx23a.html)).
 
-Simultaneously, the **evidence uncertainty set** $`\mathcal{X}(E)`$ encodes all unresolved questions regarding entity boundaries, reporting periods, physical units, measurement definitions, shared third-party data sources, and suspected greenwashing claims under current diligence state $`E`$. Crucially, each element $`X \in \mathcal{X}(E)`$ specifies a *joint* input configuration across all candidate companies—preserving cross-company error dependencies rather than treating each company field as an isolated error bar. Defining the joint uncertainty space $`\Omega(E) = \mathcal{F}_\alpha \times \mathcal{X}(E)`$, we compute the exact worst-case pairwise comparison bounds for Companies $`i`$ and $`k`$:
+The evidence uncertainty set $`\mathcal{X}(E)`$ represents unresolved questions under the current diligence state $`E`$: entity boundaries, reporting periods, physical units, measurement definitions, shared third-party sources, and suspected greenwashing claims. Each $`X \in \mathcal{X}(E)`$ specifies a joint input configuration for all candidate companies, preserving error dependence across companies and fields. Over the joint space $`\Omega(E) = \mathcal{F}_\alpha \times \mathcal{X}(E)`$, the exact worst-case bounds on the score difference between companies $`i`$ and $`k`$ are
 
 $$
 \underline{\Delta}_{ik} = \inf_{(f, X) \in \Omega(E)} [f(x_i) - f(x_k)], \qquad \overline{\Delta}_{ik} = \sup_{(f, X) \in \Omega(E)} [f(x_i) - f(x_k)]
 $$
 
-Whenever $`\underline{\Delta}_{ik} > 0`$, the strict ordering $`i \succ k`$ is certified across every defensible model in $`\mathcal{F}_\alpha`$ and every admissible factual resolution in $`\mathcal{X}(E)`$. If calibration establishes that $`\mathcal{X}(E)`$ contains the true ground-truth inputs with probability at least $`1 - \beta`$ at the specified certification stage, a union bound guarantees joint inclusion of $`f^*`$ and the true inputs with probability at least $`1 - \alpha - \beta`$. Thus the unconditional probability of issuing a ranking certificate that is false for $`f^*`$ evaluated at the true inputs is at most $`\alpha + \beta`$, without requiring independence between model validation and evidence calibration. This guarantee concerns the best model in the prespecified class; it does not certify model-class adequacy or realized investment outcomes. Repeated adaptive certification requires calibration valid across the stages being reported.
+If $`\underline{\Delta}_{ik} > 0`$, the ordering $`i \succ k`$ holds for every retained model in $`\mathcal{F}_\alpha`$ and every admissible resolution of the evidence in $`\mathcal{X}(E)`$. Suppose calibration establishes that $`\mathcal{X}(E)`$ contains the true inputs with probability at least $`1 - \beta`$ at the specified certification stage. A union bound then gives joint inclusion of $`f^*`$ and the true inputs with probability at least $`1 - \alpha - \beta`$. The unconditional probability of issuing a certificate that is false for $`f^*`$ at the true inputs is therefore at most $`\alpha + \beta`$. Independence between model validation and evidence calibration is unnecessary. The guarantee concerns the best model in the prespecified class; it does not establish that the class is adequate or guarantee realized investment outcomes. Adaptive certification repeated over several stages requires calibration that is jointly valid across those stages.
 
 ## 3 Computing comparison bounds with support functions
 
-Our joint evidence representation also makes worst-case comparison bounds computationally tractable via **convex support functions** (*[Ben-Tal and Nemirovski](https://www2.isye.gatech.edu/~nemirovs/MOR_RCO_1998.pdf), Robust Optimization*). Let $`u \in U`$ collect shared and company-specific unresolved factual quantities (including both shared benchmark errors and company-specific greenwashing tolerances), parameterizing company inputs as $`x_i(u) = \bar{x}_i + B_i u`$. Under affine scoring models, the pairwise score difference between Company $`i`$ and Company $`k`$ takes the form $`\Delta_f(u) = m_f + a_f^\top u`$, where $`a_f = (B_i - B_k)^\top \beta_f`$. Introducing the support function $`h_U(a) = \sup_{u \in U} a^\top u`$ yields exact closed-form comparison bounds:
+Convex support functions make the joint comparison bounds tractable ([Ben-Tal and Nemirovski](https://www2.isye.gatech.edu/~nemirovs/MOR_RCO_1998.pdf)). Let $`u \in U`$ collect unresolved factual quantities, including common benchmark errors and company-specific allowances for reporting error, and write company inputs as $`x_i(u) = \bar{x}_i + B_i u`$. For an affine scoring model, the pairwise difference is $`\Delta_f(u) = m_f + a_f^\top u`$, where $`a_f = (B_i - B_k)^\top \beta_f`$. The support function $`h_U(a) = \sup_{u \in U} a^\top u`$ gives exact comparison bounds:
 
 $$
 \inf_{u \in U} \Delta_f(u) = m_f - h_U(-a_f), \qquad \sup_{u \in U} \Delta_f(u) = m_f + h_U(a_f)
 $$
 
-For an ellipsoidal uncertainty set $`U = \{Cz : \|z\|_2 \le r\}`$, the Cauchy-Schwarz inequality yields $`h_U(a_f) = r\|C^\top a_f\|_2`$; when $`U`$ is an $`\ell_\infty`$ box centered at zero, $`h_U(a_f)`$ reduces to a weighted sum of absolute values.
+For the ellipsoidal uncertainty set $`U = \{Cz : \|z\|_2 \le r\}`$, the Cauchy-Schwarz inequality gives $`h_U(a_f) = r\|C^\top a_f\|_2`$. For an $`\ell_\infty`$ box centered at zero, $`h_U(a_f)`$ reduces to a weighted sum of absolute values.
 
-This formulation delivers a major operational advantage over naive company-by-company confidence intervals: **Exact Cancellation of Shared-Source Errors**. Let $`S`$ index shared-source coordinates on which the two companies have identical loadings, so $`(B_i-B_k)_{:,S}=0`$. Under the same linear scoring model:
+The joint representation allows shared errors to cancel exactly in a pairwise comparison. Let $`S`$ index common-source coordinates on which the two companies have identical loadings, so that $`(B_i-B_k)_{:,S}=0`$. Under the same linear scoring model,
 
 $$
 (a_f)_S=0,\qquad \Delta_f(u)=m_f+(a_f)_{S^c}^{\top}u_{S^c}
 $$
 
-The shared-source contribution cancels identically in the pairwise comparison; company-specific uncertainty remains in the support-function bound. If all uncertain directions cancel, then $`a_f=0`$ and $`h_U(\pm a_f)=0`$. Constructing separate uncertainty intervals for Company $`i`$ and Company $`k`$ and subtracting them falsely allows the shared source to vary in opposite directions simultaneously, manufacturing a spurious worst case that paralyzes investment decisions.
+The common-source contribution cancels; company-specific uncertainty remains in the support-function bound. If every uncertain direction cancels, $`a_f=0`$ and $`h_U(\pm a_f)=0`$. Subtracting intervals constructed separately for companies $`i`$ and $`k`$ permits a shared source to move in opposite directions at the same time. That combination is incompatible with the joint error structure and produces an unnecessarily wide difference bound.
 
-Set $`m_f=\Delta_f(0)`$ and $`a_f=\nabla\Delta_f(0)`$.
-
-For smooth nonlinear models where $`\Delta_f(u)`$ is twice continuously differentiable on $`\|u\|_2 \le r`$ with Hessian operator norm bounded by $`K_f`$, Taylor's remainder theorem gives the certified lower bound:
+For a smooth nonlinear model, set $`m_f=\Delta_f(0)`$ and $`a_f=\nabla\Delta_f(0)`$. If $`\Delta_f(u)`$ is twice continuously differentiable on $`\|u\|_2 \le r`$ and its Hessian has operator norm bounded by $`K_f`$, Taylor's theorem gives
 
 $$
 |\Delta_f(u) - m_f - a_f^\top u| \le \kappa_f, \qquad \kappa_f = \frac{1}{2}K_f r^2 \implies \underline{\Delta}_f \ge m_f - r\|a_f\|_2 - \kappa_f
 $$
 
-while non-smooth tree ensembles are bounded via leaf-region partitioning or mixed-integer linear programming, concentrating compute strictly on company pairs near the zero decision boundary.
+For nonsmooth tree ensembles, leaf-region partitioning or mixed-integer linear programming provides bounds. The implementation prioritizes computation for company pairs whose difference bounds are close to the zero decision boundary.
 
-## 4 Choosing verification queries by the regret they can remove
+## 4 Selecting queries by the regret they can remove
 
-When $`\underline{\Delta}_{ik} \le 0 < \overline{\Delta}_{ik}`$, the ranking between candidate investments remains unresolved—indicating that suspected greenwashing or data ambiguity could flip the decision. Rather than telling the investor which company to pick, our system recommends **which specific verification query $`q`$ (e.g., auditing a supplier contract, requesting raw utility bills, or cross-checking a regulatory filing) to execute next**.
+When $`\underline{\Delta}_{ik} \le 0 < \overline{\Delta}_{ik}`$, the ranking is unresolved: a factual correction or resolution of ambiguous evidence could change the decision. The system prioritizes the next verification query $`q`$, such as reviewing a supplier contract, requesting original utility bills, or checking a regulatory filing.
 
-Let $`A`$ be the finite set of institutional actions (such as advancing Company $`i`$ to final diligence, advancing Company $`k`$, or deferring rating) and $`U(a, \omega)`$ be the pre-specified decision utility under scenario $`\omega \in \Omega`$, with nonempty $`\Omega`$ and uniformly bounded utilities. The baseline **minimax decision regret** over deterministic actions is:
+Let $`A`$ be a finite set of institutional actions, such as advancing company $`i`$ or company $`k`$ to final diligence, or deferring a rating. Let $`U(a, \omega)`$ be the prespecified utility of an action in scenario $`\omega \in \Omega`$, where $`\Omega`$ is nonempty and utilities are uniformly bounded. The baseline minimax regret over deterministic actions is
 
 $$
 R^*(\Omega) = \min_{a \in A} \sup_{\omega \in \Omega} \left[ \max_{b \in A} U(b, \omega) - U(a, \omega) \right]
 $$
 
-Executing a verification query $`q`$ produces an observation $`o \in O_q`$ that restricts the compatible scenario set to a nonempty subset $`\Omega_{q,o} \subseteq \Omega`$. The **guaranteed worst-case reduction in decision regret** provided by query $`q`$ is:
+A query $`q`$ returns an observation $`o \in O_q`$ and restricts the compatible scenarios to a nonempty subset $`\Omega_{q,o} \subseteq \Omega`$. Its guaranteed reduction in worst-case decision regret is
 
 $$
 V(q) = R^*(\Omega) - \sup_{o \in O_q} R^*(\Omega_{q,o}) \ge 0
 $$
 
-The non-negativity of $`V(q)`$ follows immediately from set inclusion $`\Omega_{q,o} \subseteq \Omega`$: shrinking the set of plausible greenwashing/evidence scenarios cannot increase worst-case regret for any fixed action, and minimizing over actions $`a \in A`$ preserves the inequality (*[Robust Active Preference Elicitation](https://arxiv.org/html/2003.01899)*). Crucially, **$`V(q)`$ requires no subjective probability prior over whether a corporate disclosure is exaggerated**. At a fixed evidence state, maximizing $`V(q)`$ among affordable queries minimizes worst-case regret after one query. With positive unequal query costs $`c_q`$, $`V(q)/c_q`$ is a one-step efficiency heuristic; complementary or sequential queries require joint or adaptive optimization under the total diligence budget $`B`$.
+Nonnegativity follows from $`\Omega_{q,o} \subseteq \Omega`$: restricting the scenario set cannot increase worst-case regret for any fixed action, and minimizing over $`a \in A`$ preserves that inequality ([Robust Active Preference Elicitation](https://arxiv.org/html/2003.01899)). The calculation of $`V(q)`$ uses the set of compatible scenarios and requires no prior probability that a disclosure is exaggerated. At a fixed evidence state, maximizing $`V(q)`$ over affordable queries minimizes worst-case regret after one query. With positive, unequal costs $`c_q`$, the ratio $`V(q)/c_q`$ is a one-step efficiency heuristic. Complementary or sequential queries require joint or adaptive optimization under the total diligence budget $`B`$.
 
-## 5 Checking that corrections propagate through attribution
+## 5 Propagating factual corrections through scores and attributions
 
-Once diligence resolves a query and updates a company's verified evidence vector from $`x`$ to $`x'`$, our pipeline guarantees that the factual correction propagates deterministically through all downstream scores, peer rankings, and [SHAP](https://arxiv.org/abs/1705.07874) explanations. Holding the scoring function $`f`$, background reference $`Q`$, and rubric version fixed, **Shapley efficiency** enforces the exact conservation identity (*[SHAP local accuracy property](https://arxiv.org/pdf/1705.07874)*):
+When diligence resolves a query and changes the verified evidence vector from $`x`$ to $`x'`$, the system follows versioned dependencies to recompute affected scores, peer rankings, and [SHAP](https://arxiv.org/abs/1705.07874) explanations. With the scoring function $`f`$, background reference $`Q`$, and rubric version held fixed, Shapley efficiency gives the exact identity ([SHAP local accuracy](https://arxiv.org/pdf/1705.07874)):
 
 $$
 f(x) = \phi_0 + \sum_j \phi_j(f, Q, x), \qquad \sum_j [\phi_j(f, Q, x') - \phi_j(f, Q, x)] = f(x') - f(x)
 $$
 
-If approximate Shapley outputs have efficiency residuals $`|\phi_0+\sum_j\phi_j-f(x)|\le\eta`$ and $`|\phi_0+\sum_j\phi'_j-f(x')|\le\eta'`$ under the same baseline $`\phi_0`$, the triangle inequality gives $`|\sum_j \Delta \phi_j - \Delta f| \le \eta + \eta'`$ for the recomputation gate. This checks aggregate conservation, not the accuracy of each attribution or the truth of the input evidence. Every database update logs explicit version identifiers for `(Field Version, Evidence Document ID, Model Version, Background Q, Rubric Version)` so that changes driven by factual diligence corrections are never conflated with model retraining.
+Suppose approximate Shapley outputs have efficiency residuals $`|\phi_0+\sum_j\phi_j-f(x)|\le\eta`$ and $`|\phi_0+\sum_j\phi'_j-f(x')|\le\eta'`$ under the same baseline $`\phi_0`$. The triangle inequality then gives the recomputation check $`|\sum_j \Delta \phi_j - \Delta f| \le \eta + \eta'`$. It verifies aggregate conservation, not the accuracy of individual attributions or the truth of the evidence. Every database update records `(field version, evidence document ID, model version, background Q, rubric version)`. These identifiers distinguish changes caused by factual corrections from those caused by model updates or changes to the background distribution.
 
 ## 6 Reproducible quantitative comparisons
 
-Three reproducible analytical experiments verify the mathematical mechanisms derived above:
+The following analytical benchmarks test the mechanisms under explicit model and parameter settings.
 
-1. **Collapse of Conventional Confidence Intervals Under Shared Greenwashing / Reporting Bias**:
-• Set shared reporting bias $`b = 0.2`$ and independent noise $`\sigma = 1`$. Ignoring the common bias $`b`$, a nominal 95% confidence interval achieves actual coverage of only **48.40% at $`n = 100`$ records**, collapsing to **0.000637% at $`n = 1,000`$ records**. When targeted verification establishes the bias bound $`|b| \le 0.2`$, expanding the interval half-width to $`0.2 + 1.96/\sqrt{n}`$ restores **97.50% actual coverage**.
-2. **Shared-Source Error Cancellation in Pairwise Company Ranking**:
-• Two target companies have a nominal score difference of $`0.6`$ points and share an additive sector-benchmark error in $`[-1, 1]`$. Subtracting independently constructed company intervals gives **$`[-1.4, 2.6]`$**, failing to certify an ordering. Our joint support-function model cancels the incompatible error combinations identically, yielding **$`[0.6, 0.6]`$** and certifying the ranking.
-3. **Minimax-Regret Verification Routing vs. Naive [SHAP](https://arxiv.org/abs/1705.07874) Attribution Ranking**:
-• Consider one verification query of equal cost across 8 scenarios formed from 2 Rashomon-set candidate models ($`s \in \{-1, 1\}`$) and 4 unresolved evidence configurations ($`z_1 \in \{-0.4, 0.4\}`$, $`z_2 \in \{-0.2, 0.2\}`$), with pairwise score difference $`\Delta_s = 0.15s + z_1 + 0.3s z_2`$. A further shared feature has a large [SHAP](https://arxiv.org/abs/1705.07874) attribution but has already been verified ($`d_0 = 0`$). The decision action is to select Company $`i`$ or Company $`k`$, with regret measured in model-score units:
+1. **Confidence interval coverage under common reporting bias.**
+• Set the shared bias to $`b = 0.2`$ and independent noise to $`\sigma = 1`$. If the common bias $`b`$ is ignored, a nominal 95% interval has actual coverage of 48.40% at $`n = 100`$ records and 0.000637% at $`n = 1,000`$. Once targeted verification establishes $`|b| \le 0.2`$, increasing the half-width to $`0.2 + 1.96/\sqrt{n}`$ gives 97.50% actual coverage.
+2. **Cancellation of shared errors in pairwise rankings.**
+• Two companies have a nominal score difference of $`0.6`$ points and share an additive sector-benchmark error in $`[-1, 1]`$. Subtracting separately constructed company intervals gives $`[-1.4, 2.6]`$, which cannot certify the ordering. The joint support-function calculation cancels the shared error and gives $`[0.6, 0.6]`$, certifying the ranking.
+3. **Minimax-regret verification compared with [SHAP](https://arxiv.org/abs/1705.07874) magnitude.**
+• Consider a single query, with the same cost for each query option. The benchmark has 8 scenarios: 2 candidate models from the Rashomon set ($`s \in \{-1, 1\}`$) and 4 unresolved evidence configurations ($`z_1 \in \{-0.4, 0.4\}`$, $`z_2 \in \{-0.2, 0.2\}`$). The pairwise score difference is $`\Delta_s = 0.15s + z_1 + 0.3s z_2`$. A further shared feature has a large [SHAP](https://arxiv.org/abs/1705.07874) attribution but is already verified ($`d_0 = 0`$). The action is to select company $`i`$ or company $`k`$, and regret is measured in model-score units.
 
 <table header-row="true">
-<tr><td>Verification Query</td><td>Remaining Regret After Worst Possible Observation</td><td>Guaranteed Reduction in Regret $`V(q)`$</td></tr>
-<tr><td>**Recheck the already-resolved field with a large [SHAP](https://arxiv.org/abs/1705.07874) attribution**</td><td>0.61</td><td>**0**</td></tr>
-<tr><td>**Verify the smaller unresolved variable $`z_2`$**</td><td>0.61</td><td>**0**</td></tr>
-<tr><td>**Verify $`z_1`$, which determines the sign of the score difference**</td><td>**0**</td><td>**0.61**</td></tr>
+<tr><td>Verification query</td><td>Remaining regret under the worst observation</td><td>Guaranteed regret reduction $`V(q)`$</td></tr>
+<tr><td>Recheck the verified field with a large [SHAP](https://arxiv.org/abs/1705.07874) attribution</td><td>0.61</td><td>0</td></tr>
+<tr><td>Verify the smaller unresolved variable $`z_2`$</td><td>0.61</td><td>0</td></tr>
+<tr><td>Verify $`z_1`$, which determines the sign of the score difference</td><td>0</td><td>0.61</td></tr>
 </table>
 
-Enumerating all eight scenarios proves that ranking diligence work by raw [SHAP](https://arxiv.org/abs/1705.07874) magnitude wastes 100% of the query budget ($`V(q) = 0`$), whereas our minimax-regret criterion isolates $`z_1`$ and reduces worst-case decision regret from **0.61 to zero** in a single query. By uniting **Rashomon model multiplicity**, **support-function evidence bounds**, and **minimax-regret verification routing**, this architecture provides institutional investors with a rigorous, auditable defense against AI-era greenwashing.
+Enumerating the eight scenarios shows that rechecking the verified field with a large [SHAP](https://arxiv.org/abs/1705.07874) attribution produces no regret reduction ($`V(q) = 0`$). Verifying $`z_1`$ reduces worst-case regret from 0.61 to zero. In this benchmark, verification value depends on how unresolved evidence can affect the decision. The Rashomon model set, support-function bounds, and minimax-regret criterion make that relationship computable under the specified uncertainty model; versioned data updates carry the result into the research workflow.
