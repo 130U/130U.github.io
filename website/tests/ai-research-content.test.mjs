@@ -9,7 +9,7 @@ const ROOT = fileURLToPath(new URL("../", import.meta.url));
 const AI_ROUTE = "/past-experience/artificial-intelligence/";
 const SOURCE_FILE = "content/sources/ai-portfolio/ai-research-and-engineering.md";
 const CANONICAL_DOCUMENT = path.join(ROOT, SOURCE_FILE);
-const SOURCE_SHA256 = "34b1b3378c6baa36f01255c807eb1a445411e75406ca119157cb6d86fb9d005c";
+const SOURCE_SHA256 = "fde1a036ca8422d1355b968779becdcb4162bbc091a35d400c1e83a9428dc31e";
 // Structure and benchmark-table shapes are checked independently of the renderer.
 const PROJECTS = [
   {
@@ -105,14 +105,13 @@ function canonicalEntry(project, index) {
     id: index + 1,
     categoryId: "01",
     organization: field("Organization"),
-    summary: project.split("## Summary\n")[1].split("\n## Confidentiality & Scope Disclosure")[0].trim(),
+    summary: project.split("## Summary\n")[1].split("\n## Key Contributions")[0].trim(),
     readMoreLabel: field("Read More Label"),
     detailTitle: field("Title"),
     metadata: { position: field("Position"), location: field("Location"), dates: field("Dates") },
     contributionsLabel: "Key Contributions",
     keyContributions: parents.map((parent) => parent.split("\n")[0]),
     notes: [],
-    disclosure: { title: "Confidentiality & Scope Disclosure", text: project.split("## Confidentiality & Scope Disclosure\n")[1].split("\n## Key Contributions")[0].trim() },
     architecturalContext: {
       title: project.match(/^## (Architectural Context:[^\n]+)$/mu)?.[1],
       text: project.match(/^## Architectural Context:[^\n]+\n([\s\S]+?)\n## Manuscript/mu)?.[1].trim(),

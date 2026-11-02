@@ -327,9 +327,8 @@ function assertExperienceDetails(html, expected) {
   if (expected.categoryId === "01") {
     const disclosure = [...html.matchAll(/<aside\b([^>]*)>([\s\S]*?)<\/aside>/giu)]
       .find((match) => attribute(match[1], "data-experience-disclosure") !== undefined);
-    assert.ok(disclosure, "AI detail pages need their approved confidentiality disclosure");
-    assert.equal(stripMarkup(disclosure[2].match(/<h2\b[^>]*>([\s\S]*?)<\/h2>/iu)?.[1] ?? ""), expected.disclosure.title);
-    assertApprovedInline(disclosure[2].match(/<p\b[^>]*>([\s\S]*?)<\/p>/iu)?.[1] ?? "", expected.disclosure.text);
+    assert.equal(disclosure, undefined, "AI detail pages must not repeat the directory's confidentiality disclosure");
+    assert.equal(expected.disclosure, undefined);
     const context = [...html.matchAll(/<section\b([^>]*)>([\s\S]*?)<\/section>/giu)]
       .find((match) => attribute(match[1], "data-architectural-context") !== undefined);
     assert.ok(context, "AI contributions need the approved architectural bridge");
@@ -338,7 +337,7 @@ function assertExperienceDetails(html, expected) {
     const approvedParagraphs = expected.architecturalContext.text.split(/\n+/u);
     assert.equal(paragraphs.length, approvedParagraphs.length);
     paragraphs.forEach((paragraph, index) => assertApprovedInline(paragraph[1], approvedParagraphs[index]));
-    assert.ok(metadata[0].index < disclosure.index && disclosure.index < contributions.index && contributions.index < context.index, "Metadata, disclosure, contributions, and architectural context must retain their reading order");
+    assert.ok(metadata[0].index < contributions.index && contributions.index < context.index, "Metadata, contributions, and architectural context must retain their reading order");
   }
 }
 

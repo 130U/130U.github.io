@@ -766,9 +766,9 @@
       "formulaCount": 965
     },
     "/experience/": {
-      "textSha256": "cddc98a73e58b3f1efab9066bb611111e2f5b6c7e312de9e8987160e8d962717",
-      "characterCount": 12583,
-      "wordCount": 1633,
+      "textSha256": "4c562eaeea41f12a30babe410d43fc795f898cbd764dd0ca4b0e123651ba09c5",
+      "characterCount": 12315,
+      "wordCount": 1595,
       "preview": "Skip to main content Theodore Ouyang About Experience Experience: Areas of Focus AI Research and Engineering Data Science Legal Research and Policy Analysis Fin",
       "altTexts": [],
       "ariaLabels": [
@@ -1016,9 +1016,9 @@
       }
     },
     "/past-experience/": {
-      "textSha256": "cddc98a73e58b3f1efab9066bb611111e2f5b6c7e312de9e8987160e8d962717",
-      "characterCount": 12583,
-      "wordCount": 1633,
+      "textSha256": "4c562eaeea41f12a30babe410d43fc795f898cbd764dd0ca4b0e123651ba09c5",
+      "characterCount": 12315,
+      "wordCount": 1595,
       "preview": "Skip to main content Theodore Ouyang About Experience Experience: Areas of Focus AI Research and Engineering Data Science Legal Research and Policy Analysis Fin",
       "altTexts": [],
       "ariaLabels": [
@@ -1056,9 +1056,9 @@
       }
     },
     "/past-experience/artificial-intelligence/": {
-      "textSha256": "ae303353ccd44ebf3773ed4810116bb60cf799bd4b5390e6182689ef4d422119",
-      "characterCount": 6713,
-      "wordCount": 888,
+      "textSha256": "724af07e5e42356b74abbc41c4aee5d352d36e6d785963bd0af26fb3b1402fb7",
+      "characterCount": 6445,
+      "wordCount": 850,
       "preview": "Skip to main content Theodore Ouyang Back to Experience AI Research and Engineering Confidentiality & Disclosure Note I conducted the following four projects th",
       "altTexts": [],
       "ariaLabels": [
@@ -1071,19 +1071,19 @@
       ],
       "metadata": {
         "title": "AI Research and Engineering | Experience | Theodore Ouyang",
-        "description": "Beginning in September 2023, I led the development of a large-scale domain expert collaboration system for LLM post-training, defining reusable mathematical specifications and operating standards for expert feedback production. The system coordinated more than 300 specialists across several domains and an external vendor network supporting reinforcement learning from human feedback (RLHF) *(the corporate partner is anonymized under NDA; my role, project scope, and mathematical design are approved for public disclosure)*. I brought contributor reliability calibration, evolving acceptance criteria, and review capacity allocation into a common framework. It combines hierarchical Beta-Binomial modeling, prediction-assisted active statistical inference with inverse-probability-weighted residual correction, and capacity-constrained mixed-integer programming to optimize the *statistical value of measuring population quality* and the *value of correcting defects* separately. In a synthetic benchmark of 10,000 submissions evaluated over 200,000 independent sampling repetitions, the allocation method reduced population quality estimation variance by **17.79%** relative to uniform sampling at the same expected audit cost, under ideal residual calibration. A separate analytical example with 200 tasks reduced expected post-review error loss by **8.89%** at the same review volume.",
+        "description": "Beginning in September 2023, I led the development of a large-scale domain expert collaboration system for LLM post-training, defining reusable mathematical specifications and operating standards for expert feedback production. The system coordinated more than 300 specialists across several domains and an external vendor network supporting reinforcement learning from human feedback (RLHF). I brought contributor reliability calibration, evolving acceptance criteria, and review capacity allocation into a common framework. It combines hierarchical Beta-Binomial modeling, prediction-assisted active statistical inference with inverse-probability-weighted residual correction, and capacity-constrained mixed-integer programming to optimize the *statistical value of measuring population quality* and the *value of correcting defects* separately. In a synthetic benchmark of 10,000 submissions evaluated over 200,000 independent sampling repetitions, the allocation method reduced population quality estimation variance by **17.79%** relative to uniform sampling at the same expected audit cost, under ideal residual calibration. A separate analytical example with 200 tasks reduced expected post-review error loss by **8.89%** at the same review volume.",
         "canonical": "https://www.theodoreoy.com/experience/",
         "openGraphTitle": "AI Research and Engineering | Experience",
-        "openGraphDescription": "Beginning in September 2023, I led the development of a large-scale domain expert collaboration system for LLM post-training, defining reusable mathematical specifications and operating standards for expert feedback production. The system coordinated more than 300 specialists across several domains and an external vendor network supporting reinforcement learning from human feedback (RLHF) *(the corporate partner is anonymized under NDA; my role, project scope, and mathematical design are approved for public disclosure)*. I brought contributor reliability calibration, evolving acceptance criteria, and review capacity allocation into a common framework. It combines hierarchical Beta-Binomial modeling, prediction-assisted active statistical inference with inverse-probability-weighted residual correction, and capacity-constrained mixed-integer programming to optimize the *statistical value of measuring population quality* and the *value of correcting defects* separately. In a synthetic benchmark of 10,000 submissions evaluated over 200,000 independent sampling repetitions, the allocation method reduced population quality estimation variance by **17.79%** relative to uniform sampling at the same expected audit cost, under ideal residual calibration. A separate analytical example with 200 tasks reduced expected post-review error loss by **8.89%** at the same review volume.",
+        "openGraphDescription": "Beginning in September 2023, I led the development of a large-scale domain expert collaboration system for LLM post-training, defining reusable mathematical specifications and operating standards for expert feedback production. The system coordinated more than 300 specialists across several domains and an external vendor network supporting reinforcement learning from human feedback (RLHF). I brought contributor reliability calibration, evolving acceptance criteria, and review capacity allocation into a common framework. It combines hierarchical Beta-Binomial modeling, prediction-assisted active statistical inference with inverse-probability-weighted residual correction, and capacity-constrained mixed-integer programming to optimize the *statistical value of measuring population quality* and the *value of correcting defects* separately. In a synthetic benchmark of 10,000 submissions evaluated over 200,000 independent sampling repetitions, the allocation method reduced population quality estimation variance by **17.79%** relative to uniform sampling at the same expected audit cost, under ideal residual calibration. A separate analytical example with 200 tasks reduced expected post-review error loss by **8.89%** at the same review volume.",
         "openGraphUrl": "https://www.theodoreoy.com/experience/",
         "twitterTitle": "AI Research and Engineering | Experience",
-        "twitterDescription": "Beginning in September 2023, I led the development of a large-scale domain expert collaboration system for LLM post-training, defining reusable mathematical specifications and operating standards for expert feedback production. The system coordinated more than 300 specialists across several domains and an external vendor network supporting reinforcement learning from human feedback (RLHF) *(the corporate partner is anonymized under NDA; my role, project scope, and mathematical design are approved for public disclosure)*. I brought contributor reliability calibration, evolving acceptance criteria, and review capacity allocation into a common framework. It combines hierarchical Beta-Binomial modeling, prediction-assisted active statistical inference with inverse-probability-weighted residual correction, and capacity-constrained mixed-integer programming to optimize the *statistical value of measuring population quality* and the *value of correcting defects* separately. In a synthetic benchmark of 10,000 submissions evaluated over 200,000 independent sampling repetitions, the allocation method reduced population quality estimation variance by **17.79%** relative to uniform sampling at the same expected audit cost, under ideal residual calibration. A separate analytical example with 200 tasks reduced expected post-review error loss by **8.89%** at the same review volume."
+        "twitterDescription": "Beginning in September 2023, I led the development of a large-scale domain expert collaboration system for LLM post-training, defining reusable mathematical specifications and operating standards for expert feedback production. The system coordinated more than 300 specialists across several domains and an external vendor network supporting reinforcement learning from human feedback (RLHF). I brought contributor reliability calibration, evolving acceptance criteria, and review capacity allocation into a common framework. It combines hierarchical Beta-Binomial modeling, prediction-assisted active statistical inference with inverse-probability-weighted residual correction, and capacity-constrained mixed-integer programming to optimize the *statistical value of measuring population quality* and the *value of correcting defects* separately. In a synthetic benchmark of 10,000 submissions evaluated over 200,000 independent sampling repetitions, the allocation method reduced population quality estimation variance by **17.79%** relative to uniform sampling at the same expected audit cost, under ideal residual calibration. A separate analytical example with 200 tasks reduced expected post-review error loss by **8.89%** at the same review volume."
       }
     },
     "/past-experience/artificial-intelligence/statistical-inference-and-resource-allocation-in-expert-data-production/": {
-      "textSha256": "01b6075f41783cde2ebe83af43cb3a4cb6f1c76ba140a6d0d22bb42c5be826e2",
-      "characterCount": 22178,
-      "wordCount": 3070,
+      "textSha256": "6ed9e7851da97ece0344c9c163d897032368077c0362fb828483df4bfe6fc98d",
+      "characterCount": 21763,
+      "wordCount": 3019,
       "preview": "Skip to main content Theodore Ouyang Back to Experience Duke University × Leading Foundation Model Developer: Large-scale domain expert feedback governance and ",
       "altTexts": [],
       "ariaLabels": [
@@ -1143,9 +1143,9 @@
       "formulaCount": 147
     },
     "/past-experience/artificial-intelligence/task-validity-in-financial-synthetic-data/": {
-      "textSha256": "c9e3d1649814af33e0755f797181ac38ff8ccc85f6ba2bf147000ac3afc32583",
-      "characterCount": 21549,
-      "wordCount": 2885,
+      "textSha256": "6765a86cb396557916d4905ad3cbd64ac6ee57ac025747411e136bcf43c372df",
+      "characterCount": 21192,
+      "wordCount": 2838,
       "preview": "Skip to main content Theodore Ouyang Back to Experience Duke University × Leading Foundation Model Developer: Financial task design and synthetic data engineeri",
       "altTexts": [],
       "ariaLabels": [
@@ -1182,21 +1182,21 @@
       ],
       "metadata": {
         "title": "Duke University × Leading Foundation Model Developer: Financial task design and synthetic data engineering | Theodore Ouyang",
-        "description": "This project began in September 2023 as part of a frontier foundation model program (the partner's identity is confidential under an NDA).",
+        "description": "This project began in September 2023 as part of a frontier foundation model program.",
         "canonical": "https://www.theodoreoy.com/past-experience/artificial-intelligence/task-validity-in-financial-synthetic-data/",
         "openGraphTitle": "Duke University × Leading Foundation Model Developer: Financial task design and synthetic data engineering",
-        "openGraphDescription": "This project began in September 2023 as part of a frontier foundation model program (the partner's identity is confidential under an NDA).",
+        "openGraphDescription": "This project began in September 2023 as part of a frontier foundation model program.",
         "openGraphUrl": "https://www.theodoreoy.com/past-experience/artificial-intelligence/task-validity-in-financial-synthetic-data/",
         "twitterTitle": "Duke University × Leading Foundation Model Developer: Financial task design and synthetic data engineering",
-        "twitterDescription": "This project began in September 2023 as part of a frontier foundation model program (the partner's identity is confidential under an NDA)."
+        "twitterDescription": "This project began in September 2023 as part of a frontier foundation model program."
       },
       "mathSourceSha256": "a5135c00bb4ad37f87634c0a46f1bedae0f3d2d8368c7a927ba3822b31ac64db",
       "formulaCount": 107
     },
     "/past-experience/artificial-intelligence/verification-and-supervision-in-scientific-reasoning-tasks/": {
-      "textSha256": "8e3241c7fada7122aa096809801c8609954ac57338e88da11e14a537b592c128",
-      "characterCount": 22006,
-      "wordCount": 3101,
+      "textSha256": "3504e0bba5ed34b081200e4f9afca5387294d7669ca3addda16e07e7f2f5cc85",
+      "characterCount": 21643,
+      "wordCount": 3056,
       "preview": "Skip to main content Theodore Ouyang Back to Experience Duke University × Frontier AI Research Laboratory: General reasoning evaluation and layered verification",
       "altTexts": [],
       "ariaLabels": [
@@ -1243,21 +1243,21 @@
       ],
       "metadata": {
         "title": "Duke University × Frontier AI Research Laboratory: General reasoning evaluation and layered verification | Theodore Ouyang",
-        "description": "I developed a framework for evaluating and supervising general reasoning through a university collaboration with a frontier AI research laboratory that began in September 2023 (partner identity withheld under NDA).",
+        "description": "I developed a framework for evaluating and supervising general reasoning through a university collaboration with a frontier AI research laboratory that began in September 2023.",
         "canonical": "https://www.theodoreoy.com/past-experience/artificial-intelligence/verification-and-supervision-in-scientific-reasoning-tasks/",
         "openGraphTitle": "Duke University × Frontier AI Research Laboratory: General reasoning evaluation and layered verification",
-        "openGraphDescription": "I developed a framework for evaluating and supervising general reasoning through a university collaboration with a frontier AI research laboratory that began in September 2023 (partner identity withheld under NDA).",
+        "openGraphDescription": "I developed a framework for evaluating and supervising general reasoning through a university collaboration with a frontier AI research laboratory that began in September 2023.",
         "openGraphUrl": "https://www.theodoreoy.com/past-experience/artificial-intelligence/verification-and-supervision-in-scientific-reasoning-tasks/",
         "twitterTitle": "Duke University × Frontier AI Research Laboratory: General reasoning evaluation and layered verification",
-        "twitterDescription": "I developed a framework for evaluating and supervising general reasoning through a university collaboration with a frontier AI research laboratory that began in September 2023 (partner identity withheld under NDA)."
+        "twitterDescription": "I developed a framework for evaluating and supervising general reasoning through a university collaboration with a frontier AI research laboratory that began in September 2023."
       },
       "mathSourceSha256": "fddec0a0b51e9c82919a0fee70492836a2426d22605efa632c35fec62ae1896a",
       "formulaCount": 126
     },
     "/past-experience/artificial-intelligence/evidence-uncertainty-and-decision-guarantees-in-investment-research/": {
-      "textSha256": "200a4ae24187bc4b82f807d637b8a5a5f137476294b241342b627a565d2a97fd",
-      "characterCount": 16009,
-      "wordCount": 2281,
+      "textSha256": "1f3152bca11007ec6f5cef6a78f8d9c7ef56a8fd2121ab30d74bf72c286f529e",
+      "characterCount": 15585,
+      "wordCount": 2224,
       "preview": "Skip to main content Theodore Ouyang Back to Experience Duke University × Leading Global Alternative Asset Manager: Evidence verification and robust comparison ",
       "altTexts": [],
       "ariaLabels": [
@@ -1305,13 +1305,13 @@
       ],
       "metadata": {
         "title": "Duke University × Leading Global Alternative Asset Manager: Evidence verification and robust comparison in investment research | Theodore Ouyang",
-        "description": "I developed and implemented an evidence verification and decision assurance framework through a multiyear collaboration between Duke University and a leading global alternative asset manager with more than $300 billion in assets under management.",
+        "description": "I developed and implemented an evidence verification and decision assurance framework through a multiyear collaboration between Duke University and a leading global alternative asset manager with more than $300 billion in assets under management as of June...",
         "canonical": "https://www.theodoreoy.com/past-experience/artificial-intelligence/evidence-uncertainty-and-decision-guarantees-in-investment-research/",
         "openGraphTitle": "Duke University × Leading Global Alternative Asset Manager: Evidence verification and robust comparison in investment research",
-        "openGraphDescription": "I developed and implemented an evidence verification and decision assurance framework through a multiyear collaboration between Duke University and a leading global alternative asset manager with more than $300 billion in assets under management.",
+        "openGraphDescription": "I developed and implemented an evidence verification and decision assurance framework through a multiyear collaboration between Duke University and a leading global alternative asset manager with more than $300 billion in assets under management as of June...",
         "openGraphUrl": "https://www.theodoreoy.com/past-experience/artificial-intelligence/evidence-uncertainty-and-decision-guarantees-in-investment-research/",
         "twitterTitle": "Duke University × Leading Global Alternative Asset Manager: Evidence verification and robust comparison in investment research",
-        "twitterDescription": "I developed and implemented an evidence verification and decision assurance framework through a multiyear collaboration between Duke University and a leading global alternative asset manager with more than $300 billion in assets under management."
+        "twitterDescription": "I developed and implemented an evidence verification and decision assurance framework through a multiyear collaboration between Duke University and a leading global alternative asset manager with more than $300 billion in assets under management as of June..."
       },
       "mathSourceSha256": "b5a9f4358cfd16cbcbd639c68f46134326efb2b51391b964e4e0e19470b1669a",
       "formulaCount": 133
@@ -1777,9 +1777,9 @@
       }
     },
     "/now/": {
-      "textSha256": "cddc98a73e58b3f1efab9066bb611111e2f5b6c7e312de9e8987160e8d962717",
-      "characterCount": 12583,
-      "wordCount": 1633,
+      "textSha256": "4c562eaeea41f12a30babe410d43fc795f898cbd764dd0ca4b0e123651ba09c5",
+      "characterCount": 12315,
+      "wordCount": 1595,
       "preview": "Skip to main content Theodore Ouyang About Experience Experience: Areas of Focus AI Research and Engineering Data Science Legal Research and Policy Analysis Fin",
       "altTexts": [],
       "ariaLabels": [
