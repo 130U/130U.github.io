@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { AboutContent } from "./components/AboutContent";
-import { DitheredEntrance } from "./components/dithered-entrance/DitheredEntrance";
+import { ClarinetHero } from "./components/clarinet-hero/ClarinetHero";
 import { SiteShell } from "./components/SiteShell";
 import { createPageMetadata, ABOUT_DESCRIPTION, HOME_TITLE } from "./lib/content/site";
 import styles from "./home.module.css";
@@ -16,9 +16,9 @@ export default function AboutPage() {
   return (
     <>
       <a className="skip-link" href="#home-profile">Skip to main content</a>
-      <DitheredEntrance />
+      <ClarinetHero />
       <SiteShell active="about" frameClassName={styles.homeFrame} showSkipLink={false}>
-        <AboutContent />
+        <AboutContent hasHero />
       </SiteShell>
     </>
   );

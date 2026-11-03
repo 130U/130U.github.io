@@ -12,7 +12,7 @@ I am a Duke University graduate and a Sequoia Fellow whose work spans AI researc
 
 ## A personal introduction
 
-The homepage opens with my name drawn as an interactive field of dots. Move the pointer across the letters and the particles spring away, then settle back into place; a click sends a ripple through the wordmark. It gives the site a distinctive entrance before introducing my background and contact details.
+The homepage pairs my name and background with a clarinet drawn from separated particles. Moving the pointer gently displaces nearby points, which spring back into place; scrolling disperses the composition and returning restores it. Four musical notes move continuously beside the instrument, while reduced-motion settings show a complete static illustration.
 
 The rest of the design is deliberately quiet: warm paper, clear typography, and generous space for the work itself.
 

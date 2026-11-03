@@ -52,7 +52,7 @@
   user-select: none;
 }
 
-.identity h1 {
+.identity :is(h1, h2) {
   margin: 0;
   font-size: var(--type-title);
   font-weight: 500;
@@ -61,7 +61,7 @@
   text-wrap: balance;
 }
 
-.identity h1 span {
+.identity :is(h1, h2) span {
   display: block;
 }
 
@@ -91,22 +91,11 @@
 
 .researchEntry {
   border-top: 1px solid var(--rule);
-}
-
-.researchLink {
-  display: block;
   padding: 28px 0 30px;
-  color: var(--ink);
-  transition: color 180ms var(--ease-out);
 }
 
-.researchEntry:last-child .researchLink {
+.researchEntry:last-child {
   padding-bottom: 0;
-}
-
-.researchLink:focus-visible,
-.researchLink:active {
-  color: var(--accent);
 }
 
 .researchTitle,
@@ -189,28 +178,31 @@
   scroll-margin-top: 32px;
 }
 
-.courseworkButton {
+.readMore {
   display: flex;
-  align-items: center;
   width: fit-content;
-  min-height: 36px;
-  padding: 7px 10px;
-  color: #fff;
-  background: #464646;
+  align-items: center;
+  min-height: 44px;
+  margin-top: 4px;
+  gap: 6px;
   font-size: var(--type-action);
   font-weight: 500;
   line-height: var(--interface-leading);
+  text-decoration: underline;
+  text-decoration-color: var(--link-rule);
+  text-underline-offset: var(--link-underline-offset);
   cursor: pointer;
-  transition: background-color 180ms var(--ease-out);
 }
 
-.courseworkButton:focus-visible {
+.readMore svg {
+  width: 14px;
+  height: 14px;
+  flex-shrink: 0;
+}
+
+.readMore:focus-visible {
   outline: 2px solid var(--accent);
   outline-offset: 4px;
-}
-
-.courseworkButton:active {
-  background: var(--accent);
 }
 
 .contactStrip {
@@ -250,20 +242,15 @@
 }
 
 @media (hover: hover) and (pointer: fine) {
-  .researchLink:hover,
+  .readMore:hover,
   .contactStrip a:hover {
     color: var(--accent);
     text-decoration-color: var(--accent);
   }
-
-  .courseworkButton:hover {
-    background: var(--accent);
-  }
 }
 
 @media (pointer: coarse) {
-  .contactStrip a,
-  .courseworkButton {
+  .contactStrip a {
     min-height: 44px;
   }
 }
@@ -325,8 +312,6 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .researchLink,
-  .courseworkButton,
   .contactStrip a {
     transition: none;
   }

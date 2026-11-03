@@ -49,8 +49,8 @@ Paths below are relative to `website/`.
 `experience-domains.ts` defines the five Experience categories. All eighteen
 Experience entries have dedicated reading pages: four AI manuscripts, four legal
 manuscripts, and ten ordinary detail pages.
-About's Education section links to the dedicated Coursework page through View
-Coursework. The page preserves all 49 courses in four subject groups.
+About's Education section links to the dedicated Coursework page through Read More.
+The page presents all 49 courses in four subject groups.
 
 Compatibility routes remain functional: `/education/` renders shared About content;
 `/past-experience/` and `/now/` render Experience; the five
@@ -143,7 +143,7 @@ navigation. `ExperienceSection` and `ExperienceDetails` keep all categories and
 detail pages consistent. `SectionDirectory` owns the shared numbered anchor directory
 for Experience and Coursework, including row rules, decorative indices, and View
 feedback for pointer, keyboard, and touch input. Browser interaction stays in focused client components;
-the About entrance is isolated in `app/components/dithered-entrance/`.
+the About hero is isolated in `app/components/clarinet-hero/`.
 
 `ResearchArticle` serves AI and Selected Research. The Markdown parser supports
 typed prose, emphasis, links, headings, tables, and formulas rather than arbitrary
@@ -185,7 +185,7 @@ The Inter and Source Serif 4 variable fonts and their SIL Open Font Licenses liv
 in `public/assets/fonts/`. The site and architecture viewer share `inter.css`;
 Inter retains automatic optical sizing disabled, the optical axis fixed at 14,
 and lining numerals. The main site also loads `source-serif.css` for prose and
-small indices. Keep the architecture tool UI and original particle wordmark in
+small indices. The architecture tool UI, hero name, and institution names use
 Inter. Retain both font licenses when updating or redistributing the assets.
 
 `npm run build` runs Next.js, then `scripts/assemble-static.mjs`. Assembly includes
