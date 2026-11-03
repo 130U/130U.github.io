@@ -6,14 +6,18 @@
   ],
   "routes": {
     "/": {
-      "textSha256": "5967fe6ad4a18408b2201a2b6c1f8af419930ec6cc5da6bf40e519c642b2d0fd",
-      "characterCount": 2699,
-      "wordCount": 363,
-      "preview": "Skip to main content Scroll Theodore Ouyang About Experience Thinking mathematically Working in AI Mathematics is how I make sense of things. I want to know whi",
+      "textSha256": "c39aae8bf1b4a104103de2bbf57e2cd83fe09864290aa7ab1486310b22bd7699",
+      "characterCount": 2760,
+      "wordCount": 374,
+      "preview": "Skip to main content Theodore Ouyang Duke alumnus Sequoia Fellow Theodore Ouyang About Experience Thinking mathematically Working in AI Mathematics is how I mak",
       "altTexts": [],
       "ariaLabels": [
         "Theodore Ouyang home",
         "Primary navigation",
+        "Read more about Critical Dependence Stress for Portfolio Diversification",
+        "Read more about Certified Valuation of Arithmetic Asian Options",
+        "Read more about Certified Joint Pricing Errors in Rough Heston",
+        "Read more about coursework",
         "Contact"
       ],
       "metadata": {
@@ -28,14 +32,18 @@
       }
     },
     "/education/": {
-      "textSha256": "9f9bced701858799efbcc1a935c66b60b6eeb006631d3024b728e9954727be18",
-      "characterCount": 2692,
-      "wordCount": 362,
+      "textSha256": "5d863e93930479085960820a25415a47dae966cc476fd18c0c62a42fd9f9f3f1",
+      "characterCount": 2716,
+      "wordCount": 368,
       "preview": "Skip to main content Theodore Ouyang About Experience Thinking mathematically Working in AI Mathematics is how I make sense of things. I want to know which assu",
       "altTexts": [],
       "ariaLabels": [
         "Theodore Ouyang home",
         "Primary navigation",
+        "Read more about Critical Dependence Stress for Portfolio Diversification",
+        "Read more about Certified Valuation of Arithmetic Asian Options",
+        "Read more about Certified Joint Pricing Errors in Rough Heston",
+        "Read more about coursework",
         "Contact"
       ],
       "metadata": {

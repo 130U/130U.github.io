@@ -29,7 +29,7 @@ describes content ownership, import commands, and extension checks.
 Next.js exports HTML, CSS, and JavaScript to `website/out/`. Build assembly includes
 this viewer and applies production CSP before GitHub Actions deploys the artifact
 to GitHub Pages. There is no request-time API, database, authentication, or analytics.
-The main site's browser interactions are the Canvas2D entrance, top-level navigation menu,
+The main site's browser interactions are the Canvas 2D clarinet hero, top-level navigation menu,
 article contents, and legal-note previews. Reading and ordinary links remain
 available without JavaScript.
 

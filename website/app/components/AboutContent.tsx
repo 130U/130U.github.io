@@ -19,16 +19,21 @@ const researchSummaries: Record<string, ReactNode[]> = {
   ],
 };
 
-export function AboutContent() {
+function ReadingArrow() {
+  return <svg viewBox="0 0 24 24" fill="none" aria-hidden="true" focusable="false"><path d="m9 5 7 7-7 7" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" /></svg>;
+}
+
+export function AboutContent({ hasHero = false }: { hasHero?: boolean }) {
+  const Heading = hasHero ? "h2" : "h1";
   return (
     <div className={styles.profileSection}>
       <header className={styles.identity} id="home-profile">
         <p className={styles.sectionIndex} aria-hidden="true">01</p>
         <div className={styles.sectionBody}>
-          <h1 id="home-heading">
+          <Heading id="home-heading">
             <span>Thinking mathematically</span>{" "}
             <span>Working in AI</span>
-          </h1>
+          </Heading>
           <div className={styles.biographyCopy}>
             <p>
               Mathematics is how I make sense of things. I want to know which
@@ -51,11 +56,12 @@ export function AboutContent() {
           <div>
             {selectedResearchProjects.map((project) => (
               <article className={styles.researchEntry} key={project.slug} id={project.slug}>
-                <Link className={styles.researchLink} href={project.path} aria-labelledby={`${project.slug}-title`}>
-                  <h3 className={styles.researchTitle} id={`${project.slug}-title`}>{project.title}</h3>
-                  {researchSummaries[project.slug].map((paragraph, index) => (
-                    <p className={styles.researchSummary} key={index}>{paragraph}</p>
-                  ))}
+                <h3 className={styles.researchTitle} id={`${project.slug}-title`}>{project.title}</h3>
+                {researchSummaries[project.slug].map((paragraph, index) => (
+                  <p className={styles.researchSummary} key={index}>{paragraph}</p>
+                ))}
+                <Link className={styles.readMore} href={project.path} aria-label={`Read more about ${project.title}`}>
+                  Read More<ReadingArrow />
                 </Link>
               </article>
             ))}
@@ -87,7 +93,7 @@ export function AboutContent() {
             </article>
           </div>
           <div className={styles.coursework} id="coursework">
-            <Link className={styles.courseworkButton} href="/coursework/">View Coursework</Link>
+            <Link className={styles.readMore} href="/coursework/" aria-label="Read more about coursework">Read More<ReadingArrow /></Link>
           </div>
         </div>
       </section>

@@ -7,6 +7,7 @@ import { fileURLToPath } from "node:url";
 import sharp from "sharp";
 import { secureStaticHtml } from "../scripts/secure-static-html.mjs";
 import { courseworkGroups } from "../app/lib/content/about.ts";
+import { BEAMED_NOTE, NODE, NOTE } from "../app/components/clarinet-hero/shape.ts";
 
 const ROOT = fileURLToPath(new URL("../", import.meta.url));
 const REPOSITORY_ROOT = path.dirname(ROOT.replace(/[\\/]$/u, ""));
@@ -447,15 +448,79 @@ test("all 27 detail pages keep their wordmark and a direct parent link outside t
   }
 });
 
-test("About retains its interactive name entrance before the combined profile", async () => {
+test("About opens with its accessible clarinet hero before the retained profile", async () => {
   const home = await routeHtml("/");
   assert.equal(openingTags(home, "canvas").length, 1);
-  assert.match(home, /data-state="loading"/u);
+  assert.equal(attribute(openingTags(home, "canvas")[0], "aria-hidden"), "true");
   assert.ok(home.indexOf("<canvas") < home.indexOf('id="home-profile"'));
-  assert.match(home, /href="#home-profile"[^>]*>Scroll<\/a>/u);
+  const hero = home.match(/<section\b[^>]*aria-labelledby="hero-name"[^>]*>([\s\S]*?)<\/section>/u)?.[1];
+  assert.ok(hero, "The hero retains a named section.");
+  assert.equal(openingTags(hero, "a").length, 0, "The hero has no call-to-action link.");
+  assert.equal(openingTags(hero, "button").length, 0, "The hero has no playback control.");
+  assert.doesNotMatch(stripMarkup(hero), /Explore my work|Pause animation|Play animation/u);
   const heading = home.match(/<h1\b[^>]*>([\s\S]*?)<\/h1>/u);
   assert.ok(heading);
-  assert.equal(stripMarkup(heading[1]), "Thinking mathematically Working in AI");
+  assert.equal(openingTags(home, "h1").length, 1);
+  assert.equal(stripMarkup(heading[1]), "Theodore Ouyang");
+  assert.match(stripMarkup(hero), /Duke alumnus/u);
+  assert.match(stripMarkup(hero), /Sequoia Fellow/u);
+  const cornerTags = [...hero.matchAll(/<[a-z][\w:-]*\b[^>]*>/gu)]
+    .map(match => match[0]).filter(tag => (attribute(tag, "class") ?? "").split(/\s+/u)
+      .some(name => /_corner(?:TL|TR|BL|BR)$/u.test(name)));
+  assert.equal(cornerTags.length, 4, "All four decorative corner marks remain visible in the HTML.");
+  for (const tag of cornerTags) assert.equal(attribute(tag, "aria-hidden"), "true");
+  assert.ok(openingTags(home, "svg").some((tag) => attribute(tag, "viewBox") === "0 0 1286 1223"),
+    "The clarinet remains available as an inline SVG fallback at its original aspect ratio.");
+  const fallback = hero.match(/<svg\b[^>]*>[\s\S]*?<\/svg>/u)?.[0];
+  assert.ok(fallback);
+  assert.doesNotMatch(fallback, /<(?:linearGradient|radialGradient|image)\b/u,
+    "The loading and no-JavaScript fallback must not flash a solid gradient or bitmap.");
+  const patterns = [...fallback.matchAll(/<pattern\b([^>]*)>([\s\S]*?)<\/pattern>/gu)];
+  assert.ok(patterns.length >= 2, "The fallback uses transparent dot patterns for its materials.");
+  const patternIds = new Set();
+  for (const [, attributes, body] of patterns) {
+    patternIds.add(attribute(attributes, "id"));
+    const width = Number(attribute(attributes, "width"));
+    const height = Number(attribute(attributes, "height"));
+    assert.equal(attribute(attributes, "patternUnits"), "userSpaceOnUse");
+    const dots = openingTags(body, "rect");
+    assert.equal(dots.length, 1);
+    assert.ok(Number(attribute(dots[0], "width")) > 0 && Number(attribute(dots[0], "width")) < width);
+    assert.ok(Number(attribute(dots[0], "height")) > 0 && Number(attribute(dots[0], "height")) < height,
+      "Each tile leaves a transparent gap between particles.");
+  }
+  const visibleFallback = fallback.replace(/<defs\b[^>]*>[\s\S]*?<\/defs>/gu, "");
+  const visibleGeometry = ["path", "ellipse", "rect"].flatMap(name => openingTags(visibleFallback, name));
+  const accents = visibleGeometry.filter(tag => attribute(tag, "data-clarinet-accent") !== undefined);
+  assert.equal(accents.length, 5, "Only four notes and the single blue node may be solid.");
+  const notes = accents.filter(tag => attribute(tag, "data-clarinet-accent") === "note");
+  const nodes = accents.filter(tag => attribute(tag, "data-clarinet-accent") === "node");
+  assert.equal(notes.length, 4); assert.equal(nodes.length, 1);
+  assert.equal(notes.filter(tag => attribute(tag, "d") === BEAMED_NOTE).length, 1);
+  for (const tag of notes) {
+    assert.match(tag, /^<path\b/u);
+    assert.ok([NOTE, BEAMED_NOTE].includes(attribute(tag, "d")));
+    assert.ok(["currentColor", "#2200ff"].includes(attribute(tag, "fill")));
+  }
+  assert.match(nodes[0], /^<ellipse\b/u);
+  assert.equal(attribute(nodes[0], "fill"), "#2200ff");
+  assert.equal(Number(attribute(nodes[0], "rx")), NODE.rx);
+  assert.equal(Number(attribute(nodes[0], "ry")), NODE.ry);
+  for (const tag of accents) assert.ok([undefined, "none"].includes(attribute(tag, "stroke")));
+  for (const tag of visibleGeometry.filter(tag => attribute(tag, "data-clarinet-accent") === undefined)) {
+    for (const paint of ["fill", "stroke"]) {
+      const value = attribute(tag, paint);
+      if (paint === "stroke" && value === undefined) continue;
+      assert.ok(value === "none" || patternIds.has(value?.match(/^url\(#([^)]*)\)$/u)?.[1]),
+        "Instrument, keywork and arc geometry must paint only separated dots, with no solid underlay or outline.");
+    }
+  }
+  const ringDots = openingTags(visibleFallback, "path").find(tag => attribute(tag, "fill-rule") === "evenodd");
+  assert.ok(ringDots, "The fallback preserves the six ring keys and the bell rim as point fields.");
+  assert.equal((attribute(ringDots, "d").match(/Z/gu) ?? []).length, 14,
+    "Six ring keys and one bell rim each retain an inner and outer contour.");
+  const profileHeading = home.match(/<h2\b[^>]*id="home-heading"[^>]*>([\s\S]*?)<\/h2>/u);
+  assert.equal(stripMarkup(profileHeading?.[1] ?? ""), "Thinking mathematically Working in AI");
   assert.match(home, /<title>About \| Theodore Ouyang<\/title>/u);
   assert.match(home, /id="home-profile"/u);
   for (const index of ["01", "02", "03", "04"]) {
@@ -512,11 +577,11 @@ test("Experience compatibility pages share the unified text-focused page", async
   }
 });
 
-test("About research titles link to complete papers with their source links preserved", async () => {
+test("About research uses explicit Read More links with complete papers and source links preserved", async () => {
   const about = await routeHtml("/");
   assert.ok(about.indexOf('id="selected-research"') < about.indexOf('id="education"'));
   assert.ok(about.indexOf('id="education"') < about.indexOf('id="coursework"'));
-  assert.doesNotMatch(about, /I developed|Developed a mathematical framework for certifying|Read more about Certified/u);
+  assert.doesNotMatch(about, /I developed|Developed a mathematical framework for certifying/u);
   const researchEntries = [...about.matchAll(/<article\b[^>]*id="([^"]+)"[^>]*>[\s\S]*?<\/article>/gu)].map((match) => match[1]).filter((id) => id.startsWith("critical-dependence-") || id.startsWith("certified-"));
   assert.deepEqual(researchEntries, ["critical-dependence-stress-for-portfolio-diversification", "certified-valuation-arithmetic-asian-options", "certified-rough-heston-valuation"]);
   for (const [slug, title, description, tables, sections, repository] of [
@@ -531,9 +596,15 @@ test("About research titles link to complete papers with their source links pres
     const entry = about.match(new RegExp(`<article\\b[^>]*id="${slug}"[^>]*>([\\s\\S]*?)</article>`, "u"))?.[1] ?? "";
     const researchLink = entry.match(/<a\b([^>]*)>([\s\S]*?)<\/a>/u);
     assert.equal(attribute(researchLink?.[1] ?? "", "href"), `/education/${slug}/`);
-    assert.equal(attribute(researchLink?.[1] ?? "", "aria-labelledby"), `${slug}-title`);
-    assert.equal(stripMarkup(elementHtmlById(researchLink?.[2] ?? "", `${slug}-title`)), title);
-    assert.ok(stripMarkup(researchLink?.[2] ?? "").includes(description), "The manuscript link includes its summary so the complete row is actionable.");
+    assert.equal(stripMarkup(researchLink?.[2] ?? ""), "Read More");
+    assert.equal(attribute(researchLink?.[1] ?? "", "aria-label"), `Read more about ${title}`);
+    assert.equal(stripMarkup(elementHtmlById(entry, `${slug}-title`)), title);
+    assert.doesNotMatch(researchLink?.[2] ?? "", /<(?:h3|p)\b/u,
+      "The manuscript action is separate from its static title and summary.");
+    assert.doesNotMatch(researchLink?.[1] ?? "", /\bonclick\s*=|role="button"/iu,
+      "Read More remains a native navigation link.");
+    assert.equal(openingTags(researchLink?.[2] ?? "", "svg").length, 1);
+    assert.equal(attribute(openingTags(researchLink?.[2] ?? "", "svg")[0], "aria-hidden"), "true");
     assert.equal(openingTags(entry, "a").length, 1);
     const article = await routeHtml(`/education/${slug}/`);
     assert.equal(openingTags(article, "h1").length, 1);
@@ -815,7 +886,11 @@ test("About preserves both degrees and the advisor record while linking to all 4
     const coursework = elementHtmlById(education, "coursework");
     const courseworkLink = coursework.match(/<a\b([^>]*)>([\s\S]*?)<\/a>/u);
     assert.equal(attribute(courseworkLink?.[1] ?? "", "href"), "/coursework/");
-    assert.equal(stripMarkup(courseworkLink?.[2] ?? ""), "View Coursework");
+    assert.equal(stripMarkup(courseworkLink?.[2] ?? ""), "Read More");
+    assert.equal(attribute(courseworkLink?.[1] ?? "", "aria-label"), "Read more about coursework");
+    assert.doesNotMatch(courseworkLink?.[1] ?? "", /\bonclick\s*=|role="button"/iu);
+    assert.equal(openingTags(courseworkLink?.[2] ?? "", "svg").length, 1);
+    assert.equal(attribute(openingTags(courseworkLink?.[2] ?? "", "svg")[0], "aria-hidden"), "true");
     assert.equal(openingTags(education, "details").length, 0, "The Education control navigates to a separate page.");
     assert.equal(elementsWithClass(html, "ul", "course-list").length, 0, "Course lists must not consume space on About.");
     for (const course of courseworkGroups.flatMap((group) => group.courses)) {
@@ -826,7 +901,8 @@ test("About preserves both degrees and the advisor record while linking to all 4
       assert.ok(text.includes(record), `${route} is missing ${record}`);
     }
     assert.equal((text.match(/Duke University/gu) ?? []).length, 1);
-    assert.doesNotMatch(text, /Sequoia Fellow/u);
+    assert.doesNotMatch(stripMarkup(education), /Sequoia Fellow/u,
+      "The fellowship belongs in the hero, not among degree records.");
     assert.doesNotMatch(text, /highest-tier merit awards/u);
   }
 
@@ -911,6 +987,7 @@ test("the production design contract is restrained and dependency-light", async 
   const globals = await readFile(path.join(ROOT, "app", "globals.css"), "utf8");
   const home = await readFile(path.join(ROOT, "app", "home.module.css"), "utf8");
   const homePage = await readFile(path.join(ROOT, "app", "page.tsx"), "utf8");
+  const hero = await readFile(path.join(ROOT, "app", "components", "clarinet-hero", "ClarinetHero.module.css"), "utf8");
   const navigation = await readFile(path.join(ROOT, "app", "components", "SiteNavigation.tsx"), "utf8");
   const structuralGrid = await readFile(path.join(ROOT, "app", "components", "StructuralGrid.tsx"), "utf8");
   const layout = await readFile(path.join(ROOT, "app", "layout.tsx"), "utf8");
@@ -918,7 +995,15 @@ test("the production design contract is restrained and dependency-light", async 
   for (const token of ["--page: #f7f6f5", "--ink: #0b0b0b", "--muted: #70706c", "--accent: #2200ff", "repeat(3, minmax(calc(var(--rail-min-width) / 3), 1fr)) repeat(12, minmax(0, 1fr))"]) assert.ok(globals.includes(token));
   assert.doesNotMatch(globals, /box-shadow|backdrop-filter/u);
   assert.doesNotMatch(home, /box-shadow|backdrop-filter|linear-gradient/u);
-  assert.match(homePage, /<DitheredEntrance \/>/u);
+  assert.match(homePage, /<ClarinetHero \/>/u);
+  assert.match(hero, /\.copy h1\s*\{[^}]*font-family:\s*var\(--font-text\)/u);
+  assert.match(hero, /\.credentials\s*\{[^}]*font-family:\s*var\(--font-prose\)/u);
+  assert.match(hero, /\.credentials strong\s*\{[^}]*font-family:\s*var\(--font-text\)/u);
+  const markerStyle = hero.match(/\.markers i\s*\{([^}]+)\}/u)?.[1] ?? "";
+  assert.match(markerStyle, /background:\s*var\(--accent\)/u);
+  const markerWidth = Number(markerStyle.match(/(?:^|;)\s*width:\s*([\d.]+)px/u)?.[1]);
+  const markerHeight = Number(markerStyle.match(/(?:^|;)\s*height:\s*([\d.]+)px/u)?.[1]);
+  assert.ok(markerHeight > markerWidth && markerWidth > 0, "Corner markers are vertical blue bars.");
   const experience = await readFile(path.join(ROOT, "app", "components", "experience", "Experience.module.css"), "utf8");
   const directory = await readFile(path.join(ROOT, "app", "components", "SectionDirectory.module.css"), "utf8");
   assert.match(globals, /@media \(pointer:\s*coarse\)[\s\S]*?\.primary-nav a\s*\{[^}]*min-height:\s*44px/u);

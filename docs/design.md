@@ -8,10 +8,21 @@ The site pairs self-hosted Inter with Source Serif 4 and its own content hierarc
 ## Identity
 
 The compact LO mark appears in the navigation and browser icons. About opens with
-the interactive full-screen THEODORE OUYANG particle wordmark, followed by the
-profile and contact information. This signature entrance is an intentional part
-of the owner's identity; preserve its pointer and keyboard interaction, scroll
-link, static fallback, and reduced-motion behavior. The mark's editable master is
+Theodore Ouyang's name and the identities Duke alumnus and Sequoia Fellow on the
+left, with a recognizable clarinet particle field on the right. The clarinet
+follows the selected reference's slender silhouette, reflective mouthpiece face,
+six silver ring keys, joint bands and pads, two long rods, and a flared
+bell with an elliptical rim. The body, fittings, ring-key centers, and bell cavity
+are all composed of separated points; the cavity uses denser ink points.
+Its open arc uses larger, more closely spaced blue points, with occlusion where
+the instrument passes in front; it remains an open curve. A single solid blue oval
+and restrained trails retain the composition's graphic character. Four
+short blue vertical marks define the stage corners; four solid, clearly recognizable
+musical notes accompany the particle field. The hero has no call-to-action or
+playback buttons. The same-shape SVG fallback keeps the instrument's separated dot
+patterns, so loading and no-JavaScript states have no solid instrument surface underneath. Preserve
+the reduced-motion behavior.
+The mark's editable master is
 `website/source-assets/brand/lo-mark.svg`.
 
 ## Color and type
@@ -30,16 +41,35 @@ link, static fallback, and reduced-motion behavior. The mark's editable master i
 Inter 4.1 remains the typeface for headings, navigation, directory labels, controls,
 metadata, and the architecture viewer. Source Serif 4 supplies narrative prose and
 the small section and directory indices. This sans-serif/serif pairing follows
-Cognition's distinction between headings and reading text while retaining the site's
-original Inter lettering and content hierarchy.
+Cognition's distinction between headings and reading text within the site's
+content hierarchy.
 `website/public/assets/fonts/inter.css` owns `--font-text`, the fixed optical sizing,
 lining numerals, and the Inter faces. `source-serif.css` owns `--font-prose` and the
 Source Serif 4 faces. Both families use self-hosted variable WOFF2 files with true
 italics and bundled licenses. Inter retains automatic optical sizing disabled and
 the `opsz` axis fixed at 14. Prose numerals use proportional widths; section indices
 and numeric tables can use tabular widths. Shared bold emphasis uses weight 600.
-The LO mark uses independent artwork, and the particle wordmark retains Inter and
-its original composition and interaction.
+The LO mark uses independent artwork. The hero name and the institution names
+Duke and Sequoia retain Inter; the supporting roles alumnus and Fellow use Source
+Serif 4, preserving the site's heading/prose pairing.
+The decorative clarinet uses opaque ink, silver-gray, and blue point samples in
+Canvas 2D, with transparent gaps between the points. Clean mother-shape paths are
+rasterized into temporary construction masks only when the field is built or
+resized. Those masks identify the body, fittings, and outlines; they never become
+visible filled surfaces. Silver fittings use separated dark outline points and
+sparse gray interior points. The four musical notes and the single blue oval are
+the illustration's solid accents: they use filled `Path2D` shapes rather than
+point sampling. The instrument itself has no solid bitmap, continuous metal fill,
+or gradient surface. No decorative typeface is loaded, and the reference image's
+existing texture is not converted into the particle field.
+
+Settled points align to device pixels. Their transparent cached layer copies at
+native resolution without another scaling pass. `alignCanvas` derives responsive
+dimensions from the stage, aligns the displayed canvas origin to device pixels,
+and matches its CSS box to the backing store. Canvas resolution follows device
+pixel ratio, capped at 3, independently of the CSS coordinates used for physics.
+Moving points use subpixel edge coverage rather than a blur filter; they return
+to the exact pixel-aligned cached positions when they settle.
 
 Typography follows semantic roles. At any viewport, text with the same role uses
 the same size across every section and page. Weight, color, spacing, and italics
@@ -176,8 +206,9 @@ viewport height. Its minimum track width follows the interface type size, naviga
 indent, padding, and scrollbar allowance. The reading field and structural guides
 reflow together when enlarged text needs more rail space. Long reading content has
 emergency wrapping when an unbroken word would exceed its container.
-Coursework opens at `/coursework/` from the View Coursework link below the Education
-records. The link uses a compact dark gray button with visible keyboard focus;
+Coursework opens at `/coursework/` from the Read More link below the Education
+records. It uses the same underlined text and decorative right arrow as Experience,
+with visible keyboard focus and a descriptive accessible name;
 the About page keeps its `#coursework` anchor around this entrance. The dedicated
 page has four subject sections, indexed 01 through 04, and uses the same numbered,
 ruled directory and View interaction as Experience.
@@ -195,29 +226,51 @@ Parent links have 44px targets; coarse pointers also receive 44px primary naviga
 and standalone link targets.
 
 About uses compact spacing inside each research or education record and larger
-breaks between its numbered sections. Each Research entry is one manuscript link
-containing its title and complete summary, separated from the next entry by a thin
-rule. Titles use weight 600 without underlines; titles and summaries share black
-ink at rest and turn blue together on hover or keyboard focus. The title supplies
-the link's accessible name. The list omits dates. Paragraphs wrap naturally
+breaks between its numbered sections. Each Research entry contains its title,
+complete summary, and a separate Read More manuscript link, separated from the
+next entry by a thin rule. Titles use weight 600 without underlines. The action
+matches Experience's underlined text and decorative right arrow, with blue hover
+and keyboard-focus feedback. Its accessible name identifies the manuscript.
+The list omits dates. Paragraphs wrap naturally
 without forced line breaks. Section headings, entry headings, and reading text use
 the shared heading, 18px subheading, and 14px reading hierarchy; scoped spacing overrides do not affect other pages.
 
-Page titles own the H1 position. About's two-line "Thinking mathematically / Working in AI"
-supplies its main heading; the particle wordmark retains the full name artwork.
+Page titles own the H1 position. About's two-line "Theodore / Ouyang" supplies its
+main heading. The "Thinking mathematically / Working in AI" introduction
+is an H2 below the hero; it remains the H1 on the `/education/` compatibility page.
 Experience domains use `01`–`05` indices; individual entries have no leading markers.
 Bullet markers occupy an 18px gutter beside the text. Narrative lines stay within
 the shared 720px reading measure and reflow with the viewport.
 
 ## Interaction
 
-About opens with its Canvas2D name entrance and direct scroll link to the profile. Routine links
-use color and underline feedback.
+About's Canvas 2D clarinet aggregates from seeded peripheral positions. Fine-pointer
+movement gently displaces nearby points, which spring back to their
+sampled positions; the bell remains the most stable part of the instrument.
+Scrolling away disperses the points in response to actual
+scroll progress, and returning restores the composition; ordinary document
+scrolling remains native. Four musical notes move continuously while the hero is
+visible, with independent periods for restrained drift, rotation, scale, and opacity.
+The body breathes subtly through opacity while its settled point positions
+remain fixed and sharp. Phones reframe the surrounding whitespace to give the
+instrument more space. Physics advances at a fixed 60 Hz using the discrete spring
+rule, with interpolation between simulation states for rendering. Rendering pauses
+offscreen and in hidden tabs, preserving the active animation
+time so it resumes without a jump. Reduced motion displays the
+complete static field immediately and disables decorative movement and scroll
+dispersion. Resize preserves the shape's aspect ratio and does not replay the
+entrance. The body cache contains points and transparent gaps. A spatial index
+activates nearby particles for pointer interaction, and only affected regions are
+repainted while those particles return; the other points remain in the native
+cache. Construction masks are released after instrument sampling. Reusable filled
+paths draw the notes and blue node with the same continuous decorative movement.
+These choices reduce repeated work;
+actual frame time still depends on the device and browser. Routine links use color and underline feedback.
 Anchor navigation uses native scrolling. The mobile menu uses a short opening
 transition, with reduced-motion support.
 Focus outlines remain visible. The mobile menu traps keyboard focus, closes on Escape
 or navigation, and releases the page when the viewport reaches desktop width.
-Detail pages use one native parent link beside the retained wordmark. Its visible
+Detail pages use one native parent link beside the wordmark. Its visible
 label is Back to Education, Back to Selected Research, or Back to Experience,
 with a small decorative left arrow. The destination is the originating section
 or entry, so it works after opening a detail page directly as well as after
@@ -228,7 +281,7 @@ existing article and experience footer links remain available after long content
 ## Content and extension
 
 Page, domain, institution, project, and course titles use title case. Main-site
-navigation and action labels use title case, including View Coursework, Read More,
+navigation and action labels use title case, including Read More,
 Back to Education, Back to Selected Research, Back to Experience, Back to Top,
 Full Manuscript, Author Note, and View in Footnotes. Function words such as "to"
 and "in" stay lowercase.
@@ -241,7 +294,7 @@ lowercase proper names.
 Use "and" in editorial category labels. Preserve official course and organization
 names, including their ampersands. The fellowship name is `Sequoia Fellow`, and
 its cohort is owned by the identity configuration in `app/lib/content/site.ts`.
-Site metadata uses this identity configuration; About omits the fellowship.
+Site metadata uses this identity configuration; the About hero displays Sequoia Fellow.
 
 Use English punctuation in public copy and metadata, including the architecture
 viewer. Straight and curly apostrophes and quotation marks are both valid.
@@ -258,14 +311,14 @@ pages replace those primary links with parent navigation while retaining the hom
 wordmark: Coursework, three Selected Research manuscripts, eighteen Experience
 detail pages, and five Experience domain compatibility pages. About at
 `/` combines the introduction, Selected Research, Education with a coursework
-entrance, and contact details in sections 01 through 04. The supplied first-person
-introduction leads the page; both
-Duke degrees, the advisor, scholarships, and all 49 courses remain
-available. The canonical `/coursework/` page keeps the four subject groups,
+entrance, and contact details in sections 01 through 04. The first-person
+introduction opens the reading content beneath the hero; both
+Duke degrees, the advisor, scholarships, and all 49 courses are
+available. The canonical `/coursework/` page presents the four subject groups,
 returns to Education through its parent navigation, and appears in the sitemap. The
 homepage's `#coursework` anchor remains a valid entrance to this page.
 The `/education/` compatibility
-page shares the About content without repeating the particle entrance, uses `/`
+page shares the About content without repeating the clarinet hero, uses `/`
 as its canonical URL, and remains outside primary navigation and the sitemap.
 Experience contains all five domains and eighteen entries. The five category
 URLs provide compatibility pages with `/experience/` as their canonical URL and a
@@ -276,10 +329,11 @@ has four project reading URLs. The other ten entries open dedicated detail
 pages under `/experience/`.
 About's Selected Research section presents three on-site manuscripts: Critical
 Dependence Stress for Portfolio Diversification, followed by the Asian-options and
-Rough Heston papers. Each title and summary form one link whose text turns blue on
-hover or keyboard focus. Summaries retain selected bold emphasis. Numerical guarantees retain their
+Rough Heston papers. Each entry has a separate Read More manuscript link with blue
+hover and keyboard-focus feedback. Titles and complete summaries remain outside
+the link. Summaries retain selected bold emphasis. Numerical guarantees retain their
 model, horizon, payoff, and comparison scope.
-It does not repeat the abstracts or add a separate action row. Titles use the same
+It does not repeat the abstracts. Titles use the same
 18px subheading role; supporting paragraphs use the 14px reading role. Thin
 horizontal rules separate entries. Typography, spacing, and wrapping adapt within
 the shared reading frame without introducing cards or changing the palette.
@@ -341,7 +395,7 @@ the static export; article pages publish the text and its citation structure.
 Use shared tokens in `website/app/globals.css`, focused CSS Modules for local surfaces,
 and semantic HTML for new content. Match the existing type, reading measure, and
 spacing before adding a new component pattern. Keep interactions focused on navigation
-and reading while preserving the signature interactive name entrance. Visual
+and reading while preserving the approved interactive clarinet composition. Visual
 identity may be expressive; biographical and research claims remain measured.
 
 Review widths from 320 through 2560 pixels, including both sides of the 768, 1024,

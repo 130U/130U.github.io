@@ -7,8 +7,18 @@ across five fields. Dedicated readers present coursework and research
 articles with mathematical notation, chapter navigation, and legal footnotes.
 
 The visual system pairs Inter headings with Source Serif 4 prose, a warm paper
-background, and a restrained editorial grid. The original interactive name entrance
-opens About. Experience and Coursework share a numbered section directory.
+background, and a restrained editorial grid. About opens with a two-column name
+and recognizable clarinet hero. The dense Canvas 2D particle field aggregates on entry,
+responds locally to the pointer, disperses with scrolling, and returns to its
+shape, with six silver ring keys, joint bands and pads, two long rods, and
+a dark elliptical bell cavity. All these features use separated points with
+transparent gaps, including the darker ring-key centers and bell cavity.
+The name and institutions use Inter; the credential roles use Source Serif 4.
+Blue corner marks, a single solid blue oval, and four solid, continuously breathing
+musical notes accompany the field. The open blue arc has larger, more closely
+spaced points and retains its occlusion behind the instrument.
+Selected Research and Education use the same Read More link pattern as Experience.
+Experience and Coursework share a numbered section directory.
 
 ## Local development
 
@@ -51,10 +61,27 @@ loaders. AI and Selected Research articles have deterministic importers; their
 generated JSON records the corresponding source version. Read the content ownership
 table in the maintenance guide before editing generated article data.
 
-The main site's browser interactions are the name entrance, top-level navigation
+The main site's browser interactions are the clarinet particle field, top-level navigation
 menu, article contents, and legal-note previews. Page content, ordinary navigation,
-chapter links, and endnotes also work without JavaScript. The build includes the
-standalone architecture viewer.
+chapter links, and endnotes also work without JavaScript. The clarinet has a
+same-shape SVG dot-pattern fallback and a complete static field for reduced motion.
+The fallback retains transparent gaps during loading and without JavaScript.
+Clean paths supply temporary sampling masks for the point field, which are released
+after construction. The body, silver fittings, and bell use opaque point samples;
+four musical notes and one blue oval use reusable filled `Path2D` shapes.
+
+Settled points share a transparent native-resolution cache. A spatial index
+activates nearby particles for pointer input and repaints only affected regions.
+Physics advances at 60 Hz, with rendering interpolated between simulation steps.
+Moving points use subpixel coverage without blur filters; settled points return
+to exact device-pixel positions. `alignCanvas` derives dimensions from the stage
+and aligns the canvas box and origin with its backing store, including at
+fractional pixel ratios. The body retains its subtle opacity breathing.
+Notes continue their independent movement for as long as the hero is visible;
+hidden tabs and offscreen heroes pause the active animation clock without a jump
+on return. Reduced motion keeps the entire composition static.
+Its implementation lives in `app/components/clarinet-hero/`. The build includes
+the standalone architecture viewer.
 
 ## Maintained references
 

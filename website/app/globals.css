@@ -371,9 +371,9 @@ button:focus-visible {
 
 .back-link {
   text-decoration: underline;
-  text-decoration-color: var(--rule-strong);
+  text-decoration-color: var(--link-rule);
   text-decoration-thickness: 1px;
-  text-underline-offset: 3px;
+  text-underline-offset: var(--link-underline-offset);
   transition: color 180ms var(--ease-out), text-decoration-color 180ms var(--ease-out), transform 120ms var(--ease-out);
 }
 
