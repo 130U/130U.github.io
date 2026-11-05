@@ -6,7 +6,7 @@ import styles from "../../components/experience/Experience.module.css";
 // Compatibility category pages render the approved Experience entries.
 export function ExperienceDomainPage({ domain }: { domain: ShowcaseDomain }) {
   return (
-    <SiteShell active="experience" parent={{ href: `/experience/#${domain.slug}`, label: "Experience" }} frameClassName={styles.frame}>
+    <SiteShell active="experience" parent={{ href: `/experience/#${domain.slug}`, label: "Experience" }} frameClassName={styles.frame} guides="index">
       <ExperienceSection domain={domain} standalone />
     </SiteShell>
   );

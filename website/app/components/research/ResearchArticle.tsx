@@ -4,7 +4,7 @@ import { cache } from "react";
 import sharp from "sharp";
 import { SiteShell } from "../SiteShell";
 import { ArticleReadingLayout } from "../article/ArticleReadingLayout";
-import { ArchitecturalContext, ExperienceDisclosure, ExperienceMetadata, KeyContributions } from "../experience/ExperienceDetails";
+import { ArchitecturalContext, ExperienceDiagram, ExperienceDisclosure, ExperienceMetadata, KeyContributions } from "../experience/ExperienceDetails";
 import type { ShowcaseEntry } from "../../lib/content/experience-showcase";
 import type { ResearchArticleContent } from "../../lib/content/research-markdown";
 import { buildArticleHeadingMap, formatArticleHeadings, linkArticleSectionReferences } from "../../lib/content/article-headings";
@@ -88,6 +88,7 @@ export function ResearchArticle({ project, active, returnPath, returnLabel, titl
           {showcase ? <ExperienceMetadata entry={showcase} /> : !project.repositoryUrl && frontMatterCount > 0 && <div className={styles.frontMatter}>{renderedBlocks.slice(0, frontMatterCount)}</div>}
           {showcase && <ExperienceDisclosure entry={showcase} />}
           {project.repositoryUrl && <p className={styles.sourceLinks}><a href={project.repositoryUrl}>GitHub</a><a href={project.sourceUrl}>Full Manuscript</a></p>}
+          {showcase && <ExperienceDiagram entry={showcase} />}
         </header>
 
         <ArticleReadingLayout

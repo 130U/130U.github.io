@@ -6,26 +6,37 @@
   --supporting-ink: #5c5c58;
   --link-rule: #a6a6a1;
   --rule: rgba(0, 0, 0, 0.06);
+  --rule-medium: rgba(0, 0, 0, 0.12);
   --rule-strong: rgba(0, 0, 0, 0.24);
+  --panel: #fcfbfa;
   --accent: #2200ff;
   --dither: #070707;
-  --type-title: 2rem;
-  --type-heading: 1.25rem;
-  --type-subheading: 0.9375rem;
-  --type-index: 0.625rem;
-  --type-reading: 0.9375rem;
-  --type-label: 0.9375rem;
+  /* One size per role, everywhere: title 36, heading 24, subheading 18,
+     reading 16, interface 15, label 13, index 11. */
+  --type-title: 2.25rem;
+  --type-heading: 1.5rem;
+  --type-subheading: 1.125rem;
+  --type-index: 0.6875rem;
+  --type-reading: 1rem;
+  --type-label: 0.8125rem;
   --type-interface: 0.9375rem;
   --type-action: var(--type-interface);
   --type-math: 1.15em;
-  --reading-measure: 560px;
+  --reading-measure: 40rem;
   --rail-min-width: calc(5 * var(--type-interface) + 13px + clamp(20px, 2vw, 24px) + 22px + 10px);
-  --title-leading: 1.15;
-  --heading-leading: 1.3;
-  --subheading-leading: 1.5;
-  --reading-leading: 1.7;
+  --title-leading: 1.12;
+  --heading-leading: 1.25;
+  --subheading-leading: 1.4;
+  --reading-leading: 1.65;
   --interface-leading: 1.5;
-  --label-leading: 1.5;
+  --label-leading: 1.45;
+  --title-tracking: -0.022em;
+  --heading-tracking: -0.015em;
+  --subheading-tracking: -0.006em;
+  /* Hanging layout: titles on axis A (3 of 10 columns), prose on axis B (7 of 10).
+     The gap belongs to the title cell so axis B lands exactly on a grid line. */
+  --hang-columns: minmax(0, 3fr) minmax(0, 7fr);
+  --hang-gap: 40px;
   --link-underline-offset: 0.18em;
   --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
   --drawer-ease: cubic-bezier(0.32, 0.72, 0, 1);
@@ -174,7 +185,17 @@ button:focus-visible {
 }
 
 .structural-guide-reading-measure {
-  grid-column: 13;
+  grid-column: 12;
+}
+
+.structural-grid[data-guides="index"] .structural-guide-reading-measure {
+  grid-column: 8;
+}
+
+@media (width < 1200px) {
+  .structural-grid[data-guides="index"] .structural-guide-reading-measure {
+    display: none;
+  }
 }
 
 .structural-guide-reading-end {
@@ -191,8 +212,9 @@ button:focus-visible {
   height: 220px;
 }
 
+/* Stops above the first line of content, which spans this column on every page. */
 .structural-guide-reading-measure::before {
-  height: 560px;
+  height: 96px;
 }
 
 .structural-guide-tick {
@@ -396,23 +418,18 @@ button:focus-visible {
 }
 
 .page-intro {
-  max-width: var(--reading-measure);
   margin: 0 0 72px;
 }
 
 .page-intro h1 {
+  max-width: 80%;
   margin: 0;
   color: var(--ink);
-  font-weight: 500;
-  letter-spacing: -0.02em;
-  text-wrap: balance;
-}
-
-.page-intro h1 {
-  max-width: 920px;
   font-size: var(--type-title);
+  font-weight: 400;
   line-height: var(--title-leading);
-  letter-spacing: -0.02em;
+  letter-spacing: var(--title-tracking);
+  text-wrap: balance;
 }
 
 .section-kicker {
@@ -552,7 +569,7 @@ button:focus-visible {
   }
 
   .structural-guide-reading-measure {
-    grid-column: 10;
+    display: none;
   }
 
   .structural-guide-reading-end {
@@ -581,7 +598,8 @@ button:focus-visible {
 
 @media (width < 768px) {
   :root {
-    --type-title: 1.75rem;
+    --type-title: 1.875rem;
+    --type-heading: 1.375rem;
   }
 
   html {

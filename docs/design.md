@@ -36,7 +36,9 @@ The mark's editable master is
 | Text-link underline | `#a6a6a1` |
 | Active state and focus | `#2200ff` |
 | Structural rule | `rgba(0, 0, 0, 0.06)` |
+| Entry rule and diagram node border | `rgba(0, 0, 0, 0.12)` |
 | Strong rule | `rgba(0, 0, 0, 0.24)` |
+| Diagram node surface | `#fcfbfa` |
 
 Inter 4.1 remains the typeface for headings, navigation, directory labels, controls,
 metadata, and the architecture viewer. Source Serif 4 supplies narrative prose and
@@ -79,29 +81,34 @@ scale relative to surrounding text without changing the prose size.
 
 | Role | Shared token | Size and face | Leading |
 | --- | --- | --- | --- |
-| Page title | `--type-title` | 32px desktop / 28px mobile, Inter 400 | 1.15 |
-| Section or chapter heading, directory item | `--type-heading` | 20px, Inter 400 | 1.3 |
-| Item or subsection title: project, paper, institution, article subsection | `--type-subheading` | 15px, Inter 500 | 1.5 |
-| Prose: body, summaries, records, course names, table cells, captions | `--type-reading` | 15px, Source Serif 4 400 | 1.7 |
-| Interface: navigation, metadata, contents, Read More, flow labels, footer | `--type-interface`, `--type-label`, `--type-action` | 15px, Inter 400 | 1.5 |
-| Section margin index and directory number | `--type-index` | 10px, Source Serif 4 400 | 1.5 |
+| Page title | `--type-title` | 36px desktop / 30px mobile, Inter 400, -0.022em | 1.12 |
+| Section or chapter heading, directory item | `--type-heading` | 24px desktop / 22px mobile, Inter 400, -0.015em | 1.25 |
+| Item or subsection title: project, paper, institution, article subsection | `--type-subheading` | 18px, Inter 500 | 1.4 |
+| Prose: body, summaries, record values, course names, table cells, captions | `--type-reading` | 16px, Source Serif 4 400 | 1.65 |
+| Interface: navigation, contents, Read More, degree names, diagram node titles | `--type-interface`, `--type-action` | 15px, Inter 400 (500 for actions and node titles) | 1.5 |
+| Label: field labels, entry record lines, diagram stage and detail text, footer | `--type-label` | 13px, Inter 400 | 1.45 |
+| Section margin index, directory number, contribution number | `--type-index` | 11px, Source Serif 4 400 | 1.5 |
 | Inline mathematical expression | Relative to surrounding text | 1em | Intrinsic mathematical geometry |
 | Displayed mathematical expression | `--type-math` | 1.15em | Intrinsic mathematical geometry |
 
-Three sizes carry the site. A level looks the same on every page, so hierarchy comes
-from size and space. Inter marks structure and Source Serif 4 marks reading. Inline
-`code` inherits the surrounding face. Summaries and contributions carry no bold;
-italic run-ins and bold theorem labels remain inside mathematics papers. The hero
-name is the one display exception.
+Seven roles carry the site, each with one size. A level looks the same on every page,
+so hierarchy comes from size, weight and space. Inter marks structure and Source Serif 4
+marks reading. Inline `code` inherits the surrounding face. Summaries carry no bold.
+In Key Contributions, the lead sentence and results authored in bold in the AI
+manuscript render at weight 600, so each contribution opens with its claim; italic
+run-ins and bold theorem labels remain inside mathematics papers. The hero name is the
+one display exception.
 
-Whitespace separates entries, chapters, and list items. Rules are reserved for
-page-level sections and the two directories. Do not add metric rows, pills, badges,
-or other pulled-out figures: a result belongs in its sentence.
+Whitespace separates chapters and list items. Rules mark page-level sections, the
+entries within a section, the two directories, the record strip, and diagram stages.
+Do not add metric rows, pills, badges, or other pulled-out figures: a result belongs in
+its sentence.
 
-Text roles use rem units and scale with the user's text setting. Page titles use 32px on desktop and 28px below 768px, including in the architecture
-viewer. The 20px heading, 15px, and 10px index roles remain the same at every viewport. General titles and section headings use -0.02em tracking;
-article names, reading text, and indices use zero tracking. The shared
-`--reading-leading` remains 1.6 for sustained reading.
+Text roles use rem units and scale with the user's text setting. Titles and headings
+step down below 768px, including in the architecture viewer; the other roles remain
+the same at every viewport. Titles, headings and item titles use the `--title-tracking`,
+`--heading-tracking` and `--subheading-tracking` tokens; reading text and indices use
+zero tracking.
 Blue marks active navigation, focus, and link feedback. Editorial surfaces use flat
 rules and typography; the note-preview dialog uses a rounded surface to distinguish
 its temporary reading state.
@@ -113,40 +120,60 @@ paper/ink palette. It is one page with five numbered sections and an anchor
 directory headed Experience: Areas of Focus that stays in one column at every screen width.
 Experience and Coursework use the same `SectionDirectory` component: full-width
 rows separated by thin rules, with small serif numbers at the left and labels in the
-20px heading size at weight 500. A right-aligned View action appears on hover
+heading size. A right-aligned View action appears on hover
 and keyboard focus and remains visible on touch devices; the complete row turns
 blue on hover or focus. Directory numbers run from 01 through 05 for Experience
 and 01 through 04 for Coursework. Both the decorative numbers and repeated View
 actions are hidden from assistive technology, leaving the section title as each
-link's accessible name. Section margin indices use the shared 10px serif index role on
-About, Experience, and Coursework. Section spacing separates
-domains, and 56px of space distinguishes entries within them. Category
-introductions are omitted. Summaries use upright
-black body text at 15px; project titles use the subheading role. No content is truncated to fit a card.
+link's accessible name. Section margin indices use the shared serif index role on
+About, Experience, and Coursework. Category introductions are omitted.
+
+On About, Experience, Coursework and the ten detail pages, content hangs on two axes
+of the ten-column field (`--hang-columns`, 3fr / 7fr). From 1200px, item titles sit on
+axis A and their prose on axis B, three columns in, separated by entry rules; below
+1200px the title stacks above its prose. Each Experience entry shows its title in the
+subheading role and, under it, a record line in the label role: the organization for
+AI projects, the paper title for legal research, the position otherwise, then the
+dates. These lines reuse the approved metadata verbatim. Summaries use upright black
+body text. No content is truncated to fit a card. Sections end on the reading-end
+guide (11 of the 12 content columns).
 
 All body copy uses the shared ink colors. Blue marks navigation, hover, keyboard
 focus, and the decision or feedback path in architecture figures.
 
-AI entries lead with the project name. AI pages show one `ArchitectureFlow` under
-Architectural Context: stage labels on a single rule with the site's blue ticks, then
-a caption in prose. It reflows to a vertical sequence below 620px, and its copy lives
-in `app/lib/content/architecture-flows.ts`. The confidentiality note closes the AI
-section.
+AI entries lead with the project name. The confidentiality note closes the AI section.
 
-Reading columns stay inside the structural reading-measure guide at 560px. On wide layouts the
-contents rail lists chapters and opens subsections only for the chapter being read.
+Each of the eight AI and legal articles opens with a `LogicDiagram` in its header,
+under the record strip, as the article's visual abstract. Its data lives in
+`app/lib/content/architecture-diagrams.ts`, keyed by Experience entry ID: four stages
+read left to right, each holding one node or one node per lane, with an optional
+feedback loop to an earlier stage. Stage labels sit on short rules with the site's
+blue ticks; nodes are flat panels with a 1px border, and the stage holding the
+decisive mechanism is set in ink. Connectors are drawn in CSS on the same grid as the
+nodes (arrows, fan-out and fan-in buses), and the loop is the one blue path, labelled
+beneath. Node details accept inline TeX. The figure is pure HTML and CSS, so its text
+keeps the site's roles and works without JavaScript. Below 640px of figure width it
+reflows into a vertical sequence (parallel nodes side by side from 480px) and the
+loop becomes a labelled return note. A prose caption follows. Every stage must have
+one node or as many as the widest stage; the module throws at build time otherwise.
+
+Prose stays within `--reading-measure` (40rem). On wide article layouts the reading
+column takes seven grid columns and the contents rail three, so the split lands on
+the column-12 guide; the rail lists chapters and opens subsections only for the
+chapter being read.
 
 All eighteen entries use real Read More links to dedicated pages. The eight AI and
 legal articles use their manuscript URLs; the other ten entries have pages at
 `/experience/{slug}/`. AI entries lead with the project name, other outer entries with
 the organization, and legal entries with `Duke Law School: {research area} Research`.
 Detail-page H1s use the project or paper title in the page-title role. Organization,
-Position, Location, and Dates appear as four rows with aligned label/value pairs,
-stacking within a row below 420px. The browser title keeps
-`{institution}: {project title}`.
-The rows are followed by the approved Key
-Contributions, with contextual notes as the final bullets in the same list and
-type style. Links work without JavaScript and have accessible
+Position, Location, and Dates form a record strip under a strong rule: four fields on
+desktop, two per row below 1200px and one below 420px, each a label-role caption above
+a value in the reading face. The browser title keeps `{institution}: {project title}`.
+The strip is followed by the approved Key Contributions as an ordered list with
+decorative serif indices (01, 02, ...), with contextual notes as the final items in
+the same list and type style. On the ten non-article detail pages the Key
+Contributions heading hangs on axis A beside its list. Links work without JavaScript and have accessible
 keyboard focus and touch targets. Do not repeat the outer summary in the detail view.
 
 AI pages include the scope disclosure, Key Contributions with any nested method
@@ -157,8 +184,8 @@ before the complete Abstract and manuscript. The shared contents rail includes
 the contribution block and source chapter links. Return links target the matching
 entry on Experience.
 
-Research article prose, emphasis, citations, and table cells use the shared 15px
-reading size. Subsection headings use the shared 20px size with weight 500. Inline
+Research article prose, emphasis, citations, and table cells use the shared
+reading size. Subsection headings use the subheading role. Inline
 formulas use 1em; standalone formulas use 1.15em. Pure inline numerical values,
 including scientific notation and percentages, use the surrounding prose family
 with native superscripts while retaining their accessible MathML and original TeX.
@@ -180,7 +207,7 @@ fine rule, and 2rem of inset; phone spacing is 4rem and 1.5rem. Subsections use
 the site's fonts or type sizes.
 
 Section margin indices use `--type-index`; metadata labels use `--type-label`.
-Top-level directories use the 20px heading role. Navigation, the wordmark name,
+Top-level directories use the heading role. Navigation, the wordmark name,
 the mobile menu, and return links share `--type-interface` at every breakpoint.
 Text links share a 1px underline, `--link-rule`, and `--link-underline-offset`.
 Focus remains a visible blue outline, and hover feedback respects pointer capability.
@@ -190,7 +217,7 @@ Focus remains a visible blue outline, and hover feedback respects pointer capabi
 The desktop frame is capped at 1440px and divided into 15 columns, with a three-column
 sticky navigation rail. The content field reserves one internal track for indices and
 aligns headings and prose to the reading track. Tablet uses 12 outer columns.
-The shared `--reading-measure` caps narrative containers at 720px. Page introductions,
+The shared `--reading-measure` caps narrative containers at 40rem. Page introductions,
 the education list and Coursework sections, Experience records and detail pages,
 and AI project articles align their headings and prose to this common right edge.
 Nested paragraphs fill their container with natural ragged-right wrapping. Each
@@ -221,12 +248,12 @@ with visible keyboard focus and a descriptive accessible name;
 the About page keeps its `#coursework` anchor around this entrance. The dedicated
 page has four subject sections, indexed 01 through 04, and uses the same numbered,
 ruled directory and View interaction as Experience.
-Each section has a shared section heading and a single-column list of course names
-at the shared 15px reading size and leading. All 49 courses retain their original
+Each section has a shared section heading and a list of course names
+at the shared reading size and leading, in two columns on axis B from 1200px. All 49 courses retain their original
 wording and order as static text, available without JavaScript. The rail's
 Back to Education link returns to the Education section. Duke University appears
 once above the two degree records;
-degree names use the reading size at weight 500. Compact notes and a thin rule
+degree names use the interface size at weight 500, on axis B beside the institution. Compact notes and a thin rule
 separate the degree records. Profile details and contact values also use the reading
 scale; field labels use the label scale. Email, GitHub, and X occupy three columns
 above 540px and stack in one column at 540px and below. Long contact values can wrap
@@ -242,14 +269,14 @@ matches Experience's underlined text and decorative right arrow, with blue hover
 and keyboard-focus feedback. Its accessible name identifies the manuscript.
 The list omits dates. Paragraphs wrap naturally
 without forced line breaks. Section headings, entry headings, and reading text use
-the shared heading, 20px heading, and 15px reading hierarchy; scoped spacing overrides do not affect other pages.
+the shared title, heading, subheading and reading hierarchy; scoped spacing overrides do not affect other pages.
 
 Page titles own the H1 position. About's two-line "Theodore / Ouyang" supplies its
 main heading. The "Thinking mathematically / Working in AI" introduction
 is an H2 below the hero; it remains the H1 on the `/education/` compatibility page.
 Experience domains use `01`–`05` indices; individual entries have no leading markers.
 Top-level contributions are plain paragraphs without bullets or rules. Narrative lines stay within
-the shared 560px reading measure and reflow with the viewport.
+the shared reading measure and reflow with the viewport.
 
 ## Interaction
 
@@ -343,7 +370,7 @@ hover and keyboard-focus feedback. Titles and complete summaries remain outside
 the link. Summaries retain selected bold emphasis. Numerical guarantees retain their
 model, horizon, payoff, and comparison scope.
 It does not repeat the abstracts. Titles use the same
-20px heading role; supporting paragraphs use the 15px reading role. Thin
+subheading role on axis A; supporting paragraphs use the reading role on axis B. Thin
 horizontal rules separate entries. Typography, spacing, and wrapping adapt within
 the shared reading frame without introducing cards or changing the palette.
 
@@ -377,7 +404,7 @@ measure. Preserve the source title, subtitle, author name, date, abstract, origi
 chapter numbering, paragraph order, legal citations, and acknowledgments. The
 detail-page H1 is the approved project title; chapters and subsections use semantic
 H2 and H3 headings.
-Chapter headings use the 20px heading role at weight 400; subsections use the 15px
+Chapter headings use the heading role at weight 400; subsections use the
 subheading role at weight 500. Preserve source capitalization and emphasis; italics
 in subsection headings render upright so a heading stays in one face.
 Legal citations within a paragraph use its body size and spacing, including text

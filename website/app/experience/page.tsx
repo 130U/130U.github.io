@@ -10,5 +10,5 @@ export const metadata: Metadata = createPageMetadata({
   path: "/experience/",
 });
 export default function ExperiencePage() {
-  return <SiteShell active="experience" frameClassName={styles.frame}><ExperienceContent /></SiteShell>;
+  return <SiteShell active="experience" frameClassName={styles.frame} guides="index"><ExperienceContent /></SiteShell>;
 }

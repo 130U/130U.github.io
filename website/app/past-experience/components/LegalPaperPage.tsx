@@ -2,7 +2,7 @@ import Link from "next/link";
 import { Fragment, type ReactNode } from "react";
 import { SiteShell } from "../../components/SiteShell";
 import { ArticleReadingLayout } from "../../components/article/ArticleReadingLayout";
-import { ExperienceMetadata, KeyContributions } from "../../components/experience/ExperienceDetails";
+import { ExperienceDiagram, ExperienceMetadata, KeyContributions } from "../../components/experience/ExperienceDetails";
 import { type LegalPaper, type PaperRun } from "../../lib/content/legal-papers";
 import type { ShowcaseEntry } from "../../lib/content/experience-showcase";
 import { LegalPaperReader } from "./LegalPaperReader";
@@ -74,6 +74,7 @@ export function LegalPaperPage({ paper, showcase }: { paper: LegalPaper; showcas
           <header className={`page-intro ${styles.header}`}>
             <h1 id="paper-title" tabIndex={-1}>{showcase.headline}</h1>
             <ExperienceMetadata entry={showcase} />
+            <ExperienceDiagram entry={showcase} />
           </header>
 
           <ArticleReadingLayout

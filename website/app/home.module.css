@@ -7,24 +7,24 @@
 }
 
 .homeFrame .profileSection {
-  grid-column: 1 / -1;
+  grid-column: 1 / span 11;
   padding-top: 176px;
 }
 
 .identity,
 .section {
   display: grid;
-  grid-template-columns: repeat(12, minmax(0, 1fr));
+  grid-template-columns: repeat(11, minmax(0, 1fr));
   align-items: start;
 }
 
 .identity {
-  padding-bottom: 96px;
+  padding-bottom: 112px;
 }
 
 .section {
   border-top: 1px solid var(--rule-strong);
-  padding: 80px 0 96px;
+  padding: 72px 0 104px;
 }
 
 .section:last-child {
@@ -32,16 +32,15 @@
 }
 
 .sectionBody {
-  grid-column: 2 / span 8;
+  grid-column: 2 / span 10;
   width: 100%;
-  max-width: var(--reading-measure);
   min-width: 0;
 }
 
 .sectionIndex {
   grid-column: 1;
   margin: 0;
-  padding-top: 1px;
+  padding-top: 0.5rem;
   color: var(--muted);
   font-family: var(--font-prose);
   font-size: var(--type-index);
@@ -56,7 +55,7 @@
   margin: 0;
   font-size: var(--type-title);
   font-weight: 400;
-  letter-spacing: -0.02em;
+  letter-spacing: var(--title-tracking);
   line-height: var(--title-leading);
   text-wrap: balance;
 }
@@ -66,7 +65,8 @@
 }
 
 .biographyCopy {
-  margin-top: 24px;
+  max-width: var(--reading-measure);
+  margin-top: 32px;
   font-family: var(--font-prose);
   font-size: var(--type-reading);
   line-height: var(--reading-leading);
@@ -78,62 +78,50 @@
 }
 
 .biographyCopy p + p {
-  margin-top: 1.5rem;
+  margin-top: 1.25rem;
 }
 
 .sectionTitle {
-  margin: 0 0 32px;
+  margin: 0 0 40px;
   font-size: var(--type-heading);
   font-weight: 400;
   line-height: var(--heading-leading);
-  letter-spacing: -0.01em;
+  letter-spacing: var(--heading-tracking);
 }
 
-.researchEntry + .researchEntry {
-  margin-top: 56px;
+/* A hanging row: the item title on axis A, its prose on axis B. */
+.row {
+  padding: 28px 0 32px;
+  border-top: 1px solid var(--rule-medium);
 }
 
-.researchTitle,
+.row:last-child {
+  padding-bottom: 0;
+}
+
+.rowTitle,
 .institution {
   margin: 0;
+  color: var(--ink);
   font-size: var(--type-subheading);
   font-weight: 500;
-  letter-spacing: 0;
+  letter-spacing: var(--subheading-tracking);
   line-height: var(--subheading-leading);
-  text-wrap: balance;
+  text-wrap: pretty;
+}
+
+.rowBody {
+  min-width: 0;
+  max-width: var(--reading-measure);
 }
 
 .researchSummary {
-  margin: 8px 0 0;
+  margin: 0;
   color: inherit;
   font-family: var(--font-prose);
   font-size: var(--type-reading);
   line-height: var(--reading-leading);
   text-wrap: pretty;
-}
-
-.researchTitle {
-  text-wrap: pretty;
-}
-
-.contactStrip a {
-  max-width: 100%;
-  text-decoration: underline;
-  text-decoration-color: var(--link-rule);
-  text-decoration-thickness: 1px;
-  text-underline-offset: var(--link-underline-offset);
-  text-decoration-skip-ink: auto;
-  transition: color 180ms var(--ease-out), text-decoration-color 180ms var(--ease-out);
-}
-
-.contactStrip a:focus-visible,
-.contactStrip a:active {
-  color: var(--accent);
-  text-decoration-color: var(--accent);
-}
-
-.educationList {
-  margin-top: 8px;
 }
 
 .educationList :global(.education-entry) {
@@ -142,14 +130,17 @@
 }
 
 .educationList :global(.education-entry) + :global(.education-entry) {
-  margin-top: 28px;
+  margin-top: 24px;
+  padding-top: 24px;
+  border-top: 1px solid var(--rule);
 }
 
 .educationList :global(.education-degree) {
-  margin-top: 0;
-  font-size: var(--type-reading);
+  margin: 0 0 2px;
+  font-family: var(--font-text);
+  font-size: var(--type-interface);
   font-weight: 500;
-  line-height: var(--reading-leading);
+  line-height: var(--interface-leading);
 }
 
 .educationList :global(.entry-subtitle),
@@ -167,7 +158,7 @@
 }
 
 .coursework {
-  margin-top: 28px;
+  margin-top: 20px;
   scroll-margin-top: 32px;
 }
 
@@ -176,7 +167,7 @@
   width: fit-content;
   align-items: center;
   min-height: 44px;
-  margin-top: 4px;
+  margin-top: 8px;
   gap: 6px;
   font-size: var(--type-action);
   font-weight: 500;
@@ -185,12 +176,14 @@
   text-decoration-color: var(--link-rule);
   text-underline-offset: var(--link-underline-offset);
   cursor: pointer;
+  transition: color 180ms var(--ease-out), text-decoration-color 180ms var(--ease-out);
 }
 
 .readMore svg {
   width: 14px;
   height: 14px;
   flex-shrink: 0;
+  transition: transform 180ms var(--ease-out);
 }
 
 .readMore:focus-visible {
@@ -210,11 +203,11 @@
   display: grid;
   min-width: 0;
   align-content: start;
-  gap: 4px;
+  gap: 6px;
 }
 
 .contactStrip li + li {
-  padding-left: 20px;
+  padding-left: 24px;
   border-left: 1px solid var(--rule);
 }
 
@@ -222,16 +215,29 @@
   color: var(--muted);
   font-size: var(--type-label);
   line-height: var(--label-leading);
-  letter-spacing: 0.015em;
 }
 
 .contactStrip a {
   display: inline-flex;
   align-items: center;
-  min-height: 28px;
   width: fit-content;
+  max-width: 100%;
+  min-height: 28px;
+  font-family: var(--font-prose);
   font-size: var(--type-reading);
+  text-decoration: underline;
+  text-decoration-color: var(--link-rule);
+  text-decoration-thickness: 1px;
+  text-underline-offset: var(--link-underline-offset);
+  text-decoration-skip-ink: auto;
   overflow-wrap: anywhere;
+  transition: color 180ms var(--ease-out), text-decoration-color 180ms var(--ease-out);
+}
+
+.contactStrip a:focus-visible,
+.contactStrip a:active {
+  color: var(--accent);
+  text-decoration-color: var(--accent);
 }
 
 @media (hover: hover) and (pointer: fine) {
@@ -239,6 +245,10 @@
   .contactStrip a:hover {
     color: var(--accent);
     text-decoration-color: var(--accent);
+  }
+
+  .readMore:hover svg {
+    transform: translateX(2px);
   }
 }
 
@@ -248,7 +258,42 @@
   }
 }
 
+@media (min-width: 1200px) {
+  .biographyCopy {
+    max-width: none;
+    margin-left: 30%;
+  }
+
+  .row {
+    display: grid;
+    grid-template-columns: var(--hang-columns);
+    align-items: start;
+  }
+
+  .rowTitle,
+  .institution {
+    padding-right: var(--hang-gap);
+  }
+
+  .rowBody {
+    max-width: none;
+  }
+
+  .contactStrip {
+    grid-template-columns: minmax(0, 3fr) minmax(0, 3fr) minmax(0, 4fr);
+  }
+
+  .contactStrip li + li {
+    padding-left: 0;
+    border-left: 0;
+  }
+}
+
 @media (768px <= width < 1024px) {
+  .homeFrame .profileSection {
+    grid-column: 1 / -1;
+  }
+
   .identity,
   .section {
     grid-template-columns: repeat(9, minmax(0, 1fr));
@@ -256,6 +301,13 @@
 
   .sectionBody {
     grid-column: 2 / span 7;
+  }
+}
+
+@media (width < 1200px) {
+  .rowTitle,
+  .institution {
+    margin-bottom: 10px;
   }
 }
 
@@ -270,11 +322,11 @@
   }
 
   .identity {
-    padding-bottom: 64px;
+    padding-bottom: 72px;
   }
 
   .section {
-    padding: 56px 0 64px;
+    padding: 56px 0 72px;
   }
 
   .sectionIndex {
@@ -286,26 +338,31 @@
   }
 
   .sectionTitle {
-    margin-bottom: 22px;
+    margin-bottom: 28px;
   }
 
+  .row {
+    padding: 24px 0 28px;
+  }
 }
 
 @media (max-width: 540px) {
   .contactStrip {
     grid-template-columns: 1fr;
-    gap: 24px;
+    gap: 20px;
   }
 
   .contactStrip li + li {
-    padding: 24px 0 0;
+    padding: 20px 0 0;
     border-top: 1px solid var(--rule);
     border-left: 0;
   }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .contactStrip a {
+  .contactStrip a,
+  .readMore,
+  .readMore svg {
     transition: none;
   }
 }

@@ -679,7 +679,13 @@ test("all eighteen approved Experience entries use institution titles and real l
     assert.equal(summaries.length, 1);
     if (entry.categoryId === "01") assertApprovedInline(summaries[0][2], entry.summary);
     else assert.equal(stripMarkup(summaries[0][2]), normalizeSpace(entry.summary));
-    assert.equal(openingTags(rendered, "p").length, 1, `Entry ${entry.id} must have one outer summary`);
+    assert.equal(openingTags(rendered, "p").length, 2, `Entry ${entry.id} must have one outer summary and one record line`);
+    const record = [...rendered.matchAll(/<p\b([^>]*)>([\s\S]*?)<\/p>/giu)]
+      .find((match) => attribute(match[1], "data-experience-record") !== undefined);
+    assert.ok(record, `Entry ${entry.id} needs its record line under the title`);
+    const recordContext = entry.categoryId === "01" ? entry.organization : entry.categoryId === "03" ? entry.detailTitle : entry.metadata.position;
+    assert.deepEqual([...record[2].matchAll(/<span\b[^>]*>([\s\S]*?)<\/span>/giu)].map((match) => stripMarkup(match[1])),
+      [normalizeSpace(recordContext), normalizeSpace(entry.metadata.dates)], "The record line reuses the approved metadata verbatim");
     assert.equal(stripMarkup(rendered.match(/<h3\b[^>]*>([\s\S]*?)<\/h3>/u)?.[1] ?? ""), presentation.listingTitle);
     const links = [...rendered.matchAll(/<a\b([^>]*)>([\s\S]*?)<\/a>/giu)];
     assert.equal(links.length, 1, `Entry ${entry.id} needs one Read More action`);
@@ -713,15 +719,13 @@ test("all eighteen approved Experience entries use institution titles and real l
   ], "All seven original nested contributions must survive under their correct parent items");
 });
 
-test("the ten nonresearch detail routes keep metadata in separate label/value rows", async () => {
-  const metadataStyles = await readFile(path.join(ROOT, "app", "components", "experience", "Experience.module.css"), "utf8");
-  const metadataRules = [...metadataStyles.matchAll(/(?:^|\n)\s*\.metadata\s*\{([^}]+)\}/gu)];
-  assert.ok(metadataRules.length > 0, "Experience metadata needs an explicit layout rule");
-  for (const [, declarations] of metadataRules) {
-    assert.match(declarations, /grid-template-columns:\s*1fr\s*;/u, "Metadata must remain a single column at every defined breakpoint");
-  }
-  assert.match(metadataStyles, /\.metadata\s*>\s*div\s*\{[^}]*display:\s*grid[^}]*grid-template-columns:\s*6\.5em minmax\(0,\s*1fr\)[^}]*align-items:\s*baseline/u, "Metadata labels and values share a baseline, with label width scaling with the text size");
-  assert.match(metadataStyles, /@media\s*\(width\s*<\s*420px\)\s*\{\s*\.metadata\s*>\s*div\s*\{[^}]*grid-template-columns:\s*1fr/u, "Narrow screens stack each label above its value without rearranging metadata rows");
+test("the ten nonresearch detail routes keep metadata in a labelled record strip", async () => {
+  const metadataStyles = (await readFile(path.join(ROOT, "app", "components", "experience", "Experience.module.css"), "utf8")).replace(/\r\n?/gu, "\n");
+  assert.match(metadataStyles, /(?:^|\n)\.metadata\s*\{[^}]*grid-template-columns:\s*repeat\(4,\s*minmax\(0,\s*1fr\)\)[^}]*border-top:\s*1px solid var\(--rule-strong\)/u, "Desktop sets the four fields on one rule");
+  assert.match(metadataStyles, /@media \(width < 1200px\) \{[^@]*?\.metadata\s*\{\s*grid-template-columns:\s*repeat\(2,\s*minmax\(0,\s*1fr\)\)/u, "Narrower layouts use two fields per row");
+  assert.match(metadataStyles, /@media \(width < 420px\) \{\s*\.metadata\s*\{\s*grid-template-columns:\s*1fr/u, "Phones stack the fields");
+  assert.match(metadataStyles, /\.metadata dt\s*\{[^}]*font-size:\s*var\(--type-label\)/u, "Field labels use the label role");
+  assert.match(metadataStyles, /\.metadata dd\s*\{[^}]*font-family:\s*var\(--font-prose\)[^}]*font-size:\s*var\(--type-reading\)/u, "Field values use the reading face and size");
   for (const route of EXPERIENCE_DETAIL_ROUTES) {
     const html = await routeHtml(route);
     assert.equal(openingTags(html, "article").length, 1);
@@ -732,6 +736,23 @@ test("the ten nonresearch detail routes keep metadata in separate label/value ro
     const main = html.match(/<main\b[^>]*>([\s\S]*?)<\/main>/u)?.[1] ?? "";
     assert.doesNotMatch(stripMarkup(main), /\p{Script=Han}/u);
     assert.doesNotMatch(main, /data-experience-summary/u, "The outer summary must not be repeated on the detail page");
+  }
+});
+
+test("each AI and legal article opens with one logic architecture diagram", async () => {
+  const routes = [...AI_PROJECT_SLUGS.map((slug) => `${AI_ROUTE}${slug}/`), ...ARTICLES.map(([slug]) => `${LAW_ROUTE}${slug}/`)];
+  assert.equal(routes.length, 8);
+  for (const route of routes) {
+    const html = await routeHtml(route);
+    const figures = [...html.matchAll(/<figure\b([^>]*)>([\s\S]*?)<\/figure>/giu)]
+      .filter((match) => attribute(match[1], "data-logic-diagram") !== undefined);
+    assert.equal(figures.length, 1, `${route} needs exactly one logic diagram`);
+    const header = html.match(/<header\b[^>]*>([\s\S]*?)<\/header>/iu)?.[1] ?? "";
+    assert.ok(header.includes("data-logic-diagram"), `${route}: the diagram belongs in the article header as its visual abstract`);
+    assert.ok(header.indexOf("data-experience-metadata") < header.indexOf("data-logic-diagram"), `${route}: the record strip precedes the diagram`);
+    const stages = [...figures[0][2].matchAll(/\bdata-stage="(\d+)"/gu)].map((match) => Number(match[1]));
+    assert.deepEqual(stages, [1, 2, 3, 4], `${route}: four stages, read left to right`);
+    assert.ok(stripMarkup(figures[0][2].match(/<figcaption\b[^>]*>([\s\S]*?)<\/figcaption>/iu)?.[1] ?? "").length > 40, `${route}: the diagram needs its caption`);
   }
 });
 
@@ -1012,8 +1033,12 @@ test("the production design contract is restrained and dependency-light", async 
   assert.match(globals, /\.content-column\s*\{[\s\S]*?grid-template-columns:\s*repeat\(12,[\s\S]*?padding:\s*176px 0 144px/u);
   assert.match(globals, /\.structural-guide-tick\s*\{[\s\S]*?position:\s*sticky[\s\S]*?height:\s*20px/u);
   assert.match(directory, /\.directory\s*\{[^}]*grid-template-columns:\s*1fr/u);
-  assert.match(experience, /\.section\s*\{[^}]*grid-template-columns:\s*repeat\(12,/u);
-  assert.match(experience, /\.sectionBody\s*\{[^}]*grid-column:\s*2\s*\/\s*span\s*8[^}]*max-width:\s*var\(--reading-measure\)/u);
+  assert.match(experience, /\.section\s*\{[^}]*grid-template-columns:\s*repeat\(11,[^}]*grid-column:\s*1 \/ span 11/u, "Sections end on the reading-end guide");
+  assert.match(experience, /\.sectionBody\s*\{[^}]*grid-column:\s*2\s*\/\s*span\s*10/u);
+  assert.match(globals, /--hang-columns:\s*minmax\(0,\s*3fr\)\s+minmax\(0,\s*7fr\)/u, "Hanging rows put titles on 3 of 10 columns and prose on 7");
+  for (const css of [experience, home]) assert.match(css, /@media \(min-width: 1200px\)[\s\S]*?grid-template-columns:\s*var\(--hang-columns\)/u);
+  assert.match(structuralGrid, /data-guides=\{layout\}/u);
+  assert.match(globals, /\.structural-grid\[data-guides="index"\] \.structural-guide-reading-measure\s*\{\s*grid-column:\s*8/u, "Index pages mark the prose axis");
   assert.doesNotMatch(globals, /\.education-entry\s*\{[^}]*grid-template-columns/u);
   for (const guide of ["frame-start", "rail-boundary", "reading-start", "reading-measure", "reading-end"]) assert.ok(structuralGrid.includes(`"${guide}"`));
   for (const contract of ["aria-controls=\"site-menu\"", "aria-expanded={menuOpen}", 'event.key === "Escape"', 'document.body.classList.add("menu-open")', 'querySelectorAll<HTMLElement>']) assert.ok(navigation.includes(contract));
@@ -1024,9 +1049,9 @@ test("the production design contract is restrained and dependency-light", async 
   assert.match(globals, /\.site-rail\[data-enhanced="true"\] \.rail-panel\s*\{[^}]*visibility:\s*hidden/u);
   assert.match(navigation, /wordmark-lockup[\s\S]*?wordmark-mark[\s\S]*?wordmark-name[\s\S]*?>Theodore Ouyang<\/span>/u);
   assert.match(layout, /assets\/brand\/lo-mark\.svg/u);
-  assert.match(experience, /\.metadata\s*\{[^}]*grid-template-columns:\s*1fr/u);
+  assert.match(experience, /\.metadata\s*\{[^}]*grid-template-columns:\s*repeat\(4,/u);
   assert.match(experience, /\.entryTitle\s*\{[^}]*font-size:\s*var\(--type-subheading\)/u);
-  assert.match(experience, /\.contributions > ul\s*\{[^}]*padding:\s*0\s*;[^}]*list-style:\s*none\s*;/u);
+  assert.match(experience, /\.contributions > ol\s*\{[^}]*padding:\s*0\s*;[^}]*list-style:\s*none\s*;/u);
   assert.deepEqual(Object.keys(packageJson.dependencies).sort(), ["@mathjax/mathjax-tex-font", "@mathjax/src", "next", "react", "react-dom"]);
   assert.equal(packageJson.dependencies["@mathjax/src"], "4.1.3");
   assert.equal(packageJson.dependencies["@mathjax/mathjax-tex-font"], "4.1.3");
@@ -1060,14 +1085,19 @@ test("shared typography source roles preserve article names, compact indices, me
   assert.doesNotMatch(experience, /font-optical-sizing|font-variation-settings/u, "Experience must inherit the global optical settings rather than create a different font instance");
   assert.match(rule(globals, "body"), /font-family:\s*var\(--font-text\)/u);
   const tokens = rule(globals, ":root");
-  assert.match(tokens, /--type-subheading:\s*0\.9375rem\s*;/u);
-  assert.match(tokens, /--type-index:\s*0\.625rem\s*;/u);
-  assert.match(tokens, /--type-reading:\s*0\.9375rem\s*;/u);
+  // One size per role: title 36, heading 24, subheading 18, reading 16, interface 15, label 13, index 11.
+  assert.match(tokens, /--type-title:\s*2\.25rem\s*;/u);
+  assert.match(tokens, /--type-heading:\s*1\.5rem\s*;/u);
+  assert.match(tokens, /--type-subheading:\s*1\.125rem\s*;/u);
+  assert.match(tokens, /--type-index:\s*0\.6875rem\s*;/u);
+  assert.match(tokens, /--type-reading:\s*1rem\s*;/u);
+  assert.match(tokens, /--type-interface:\s*0\.9375rem\s*;/u);
+  assert.match(tokens, /--type-label:\s*0\.8125rem\s*;/u);
   assert.match(tokens, /--type-math:\s*1\.15em\s*;/u);
   for (const css of [home, experience, coursework]) {
-    assert.match(rule(css, ".sectionIndex"), /font-size:\s*var\(--type-index\)\s*;/u, "Section indices share the compact 10px semantic role.");
+    assert.match(rule(css, ".sectionIndex"), /font-size:\s*var\(--type-index\)\s*;/u, "Section indices share the compact index role.");
   }
-  assert.match(rule(directory, ".directory a"), /font-size:\s*var\(--type-heading\)\s*;/u, "Both top-level directories share the 18px semantic role.");
+  assert.match(rule(directory, ".directory a"), /font-size:\s*var\(--type-heading\)\s*;/u, "Both top-level directories share the heading role.");
   assert.match(rule(directory, ".index"), /font-size:\s*var\(--type-index\)\s*;/u, "Both directories use the compact section-index role.");
   assert.match(rule(coursework, ".sectionBody h2"), /font-size:\s*var\(--type-heading\)\s*;/u);
   assert.match(rule(coursework, ".courseList"), /font-size:\s*var\(--type-reading\)\s*;/u);
@@ -1087,8 +1117,9 @@ test("shared typography source roles preserve article names, compact indices, me
   assert.match(rule(math, ".number"), /font-variant-numeric:\s*lining-nums\s+proportional-nums\s*;/u);
   assert.match(rule(math, ".number sup"), /font-size:\s*0\.75em\s*;/u);
   assert.match(rule(math, ".number sup"), /vertical-align:\s*super\s*;/u);
-  assert.match(rule(experience, ".metadata > div"), /grid-template-columns:\s*6\.5em minmax\(0,\s*1fr\)\s*;/u);
-  assert.match(experience, /\.contributions > ul\s*\{[^}]*gap:\s*1\.5rem\s*;/u);
+  assert.match(rule(experience, ".metadata dd"), /font-size:\s*var\(--type-reading\)\s*;/u);
+  assert.match(experience, /\.contributions > ol\s*\{[^}]*gap:\s*1\.75rem\s*;/u);
+  assert.match(experience, /\.contributions > ol strong\s*\{\s*font-weight:\s*600;/u, "Lead sentences carry the emphasis authored in the manuscript");
   assert.doesNotMatch(experience, /\.contributions\s+li(?:\s*\+\s*li)?\s*\{/u, "Contribution spacing and dividers must not cascade into nested items");
   const nestedDetails = rule(experience, ".contributionDetails");
   assert.match(nestedDetails, /font-size:\s*var\(--type-reading\)\s*;/u);

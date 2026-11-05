@@ -17,7 +17,7 @@ export default function AboutPage() {
     <>
       <a className="skip-link" href="#home-profile">Skip to main content</a>
       <ClarinetHero />
-      <SiteShell active="about" frameClassName={styles.homeFrame} showSkipLink={false}>
+      <SiteShell active="about" frameClassName={styles.homeFrame} guides="index" showSkipLink={false}>
         <AboutContent hasHero />
       </SiteShell>
     </>

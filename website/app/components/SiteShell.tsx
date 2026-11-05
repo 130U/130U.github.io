@@ -1,13 +1,14 @@
 import type { ReactNode } from "react";
 import type { ActivePage, ParentPage } from "../lib/content/site";
 import { SiteNavigation } from "./SiteNavigation";
-import { StructuralGrid } from "./StructuralGrid";
+import { StructuralGrid, type GuideLayout } from "./StructuralGrid";
 
 export function SiteShell({
   active,
   parent,
   children,
   frameClassName,
+  guides = "article",
   showSkipLink = true,
   skipHref = "#main-content",
 }: {
@@ -15,6 +16,7 @@ export function SiteShell({
   parent?: ParentPage;
   children: ReactNode;
   frameClassName?: string;
+  guides?: GuideLayout;
   showSkipLink?: boolean;
   skipHref?: `#${string}`;
 }) {
@@ -28,7 +30,7 @@ export function SiteShell({
       <div
         className={frameClassName ? `site-frame ${frameClassName}` : "site-frame"}
       >
-        <StructuralGrid />
+        <StructuralGrid layout={guides} />
         <SiteNavigation active={active} parent={parent} />
 
         <main className="content-column" id="main-content">

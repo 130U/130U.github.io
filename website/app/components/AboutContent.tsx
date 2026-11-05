@@ -55,14 +55,16 @@ export function AboutContent({ hasHero = false }: { hasHero?: boolean }) {
           <h2 className={styles.sectionTitle} id="research-heading">Selected Research</h2>
           <div>
             {selectedResearchProjects.map((project) => (
-              <article className={styles.researchEntry} key={project.slug} id={project.slug}>
-                <h3 className={styles.researchTitle} id={`${project.slug}-title`}>{project.title}</h3>
-                {researchSummaries[project.slug].map((paragraph, index) => (
-                  <p className={styles.researchSummary} key={index}>{paragraph}</p>
-                ))}
-                <Link className={styles.readMore} href={project.path} aria-label={`Read more about ${project.title}`}>
-                  Read More<ReadingArrow />
-                </Link>
+              <article className={styles.row} key={project.slug} id={project.slug}>
+                <h3 className={styles.rowTitle} id={`${project.slug}-title`}>{project.title}</h3>
+                <div className={styles.rowBody}>
+                  {researchSummaries[project.slug].map((paragraph, index) => (
+                    <p className={styles.researchSummary} key={index}>{paragraph}</p>
+                  ))}
+                  <Link className={styles.readMore} href={project.path} aria-label={`Read more about ${project.title}`}>
+                    Read More<ReadingArrow />
+                  </Link>
+                </div>
               </article>
             ))}
           </div>
@@ -73,27 +75,31 @@ export function AboutContent({ hasHero = false }: { hasHero?: boolean }) {
         <p className={styles.sectionIndex} aria-hidden="true">03</p>
         <div className={styles.sectionBody}>
           <h2 className={styles.sectionTitle} id="education-heading">Education</h2>
-          <h3 className={styles.institution}>Duke University</h3>
-          <div className={styles.educationList}>
-            <article className="education-entry">
-              <h4 className="education-degree">Master of Engineering in Risk Engineering</h4>
-              <p className="entry-subtitle">Financial Risk Concentration</p>
-              <div className="education-notes">
-                <p className="education-note education-advisor">
-                  Academic Advisor:{" "}
-                  <a href="https://cee.duke.edu/people/mark-borsuk/" target="_blank" rel="noopener noreferrer">Mark Borsuk, Ph.D.</a>
-                </p>
-                <p className="education-note">Pratt School of Engineering Merit Scholarship</p>
+          <div className={styles.row}>
+            <h3 className={styles.institution}>Duke University</h3>
+            <div className={styles.rowBody}>
+              <div className={styles.educationList}>
+                <article className="education-entry">
+                  <h4 className="education-degree">Master of Engineering in Risk Engineering</h4>
+                  <p className="entry-subtitle">Financial Risk Concentration</p>
+                  <div className="education-notes">
+                    <p className="education-note education-advisor">
+                      Academic Advisor:{" "}
+                      <a href="https://cee.duke.edu/people/mark-borsuk/" target="_blank" rel="noopener noreferrer">Mark Borsuk, Ph.D.</a>
+                    </p>
+                    <p className="education-note">Pratt School of Engineering Merit Scholarship</p>
+                  </div>
+                </article>
+                <article className="education-entry">
+                  <h4 className="education-degree">Bachelor of Science in Mathematics</h4>
+                  <p className="entry-subtitle">Dual-Degree Undergraduate Program</p>
+                  <p className="education-note">Undergraduate Merit Scholarship</p>
+                </article>
               </div>
-            </article>
-            <article className="education-entry">
-              <h4 className="education-degree">Bachelor of Science in Mathematics</h4>
-              <p className="entry-subtitle">Dual-Degree Undergraduate Program</p>
-              <p className="education-note">Undergraduate Merit Scholarship</p>
-            </article>
-          </div>
-          <div className={styles.coursework} id="coursework">
-            <Link className={styles.readMore} href="/coursework/" aria-label="Read more about coursework">Read More<ReadingArrow /></Link>
+              <div className={styles.coursework} id="coursework">
+                <Link className={styles.readMore} href="/coursework/" aria-label="Read more about coursework">Read More<ReadingArrow /></Link>
+              </div>
+            </div>
           </div>
         </div>
       </section>

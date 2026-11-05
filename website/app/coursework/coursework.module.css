@@ -7,16 +7,16 @@
 }
 
 .intro {
-  max-width: var(--reading-measure);
-  margin-bottom: 64px;
+  margin-bottom: 80px;
 }
 
 .intro h1 {
+  max-width: 80%;
   margin: 0;
   font-size: var(--type-title);
   font-weight: 400;
   line-height: var(--title-leading);
-  letter-spacing: -0.02em;
+  letter-spacing: var(--title-tracking);
 }
 
 .sectionBody h2 {
@@ -24,15 +24,15 @@
   font-size: var(--type-heading);
   font-weight: 400;
   line-height: var(--heading-leading);
-  letter-spacing: -0.01em;
+  letter-spacing: var(--heading-tracking);
 }
 
 .section {
   display: grid;
-  grid-template-columns: repeat(12, minmax(0, 1fr));
-  grid-column: 1 / -1;
+  grid-template-columns: repeat(11, minmax(0, 1fr));
+  grid-column: 1 / span 11;
   align-items: start;
-  padding: 80px 0 96px;
+  padding: 72px 0 104px;
   border-top: 1px solid var(--rule-strong);
   scroll-margin-top: 32px;
 }
@@ -43,7 +43,7 @@
 
 .sectionIndex {
   grid-column: 1;
-  padding-top: 1px;
+  padding-top: 0.5rem;
   color: var(--muted);
   font-family: var(--font-prose);
   font-size: var(--type-index);
@@ -54,8 +54,7 @@
 }
 
 .sectionBody {
-  grid-column: 2 / span 8;
-  max-width: var(--reading-measure);
+  grid-column: 2 / span 10;
   min-width: 0;
 }
 
@@ -78,9 +77,38 @@
   margin-top: 8px;
 }
 
+/* Subject on axis A, its courses in two columns on axis B. */
+@media (min-width: 1200px) {
+  .sectionBody {
+    display: grid;
+    grid-template-columns: var(--hang-columns);
+    align-items: start;
+  }
+
+  .sectionBody h2 {
+    margin-bottom: 0;
+    padding-right: var(--hang-gap);
+  }
+
+  .courseList {
+    columns: 2;
+    column-gap: var(--hang-gap);
+  }
+
+  .courseList li {
+    padding-bottom: 8px;
+    break-inside: avoid;
+  }
+
+  .courseList li + li {
+    margin-top: 0;
+  }
+}
+
 @media (768px <= width < 1024px) {
   .section {
     grid-template-columns: repeat(9, minmax(0, 1fr));
+    grid-column: 1 / -1;
   }
 
   .sectionBody {
