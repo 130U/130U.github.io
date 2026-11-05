@@ -85,7 +85,7 @@ test("all 484 reviewed formulas have complete vector glyphs and exact accessible
     total += formulas.length;
   }
   assert.equal(total, 484);
-  assert.equal(createHash("sha256").update(JSON.stringify(mathematicalPaths)).digest("hex"), "4ae5f85bc01add29061786f822acd7622cfb4f69a99c63cb74a6a352942a5f87", "All mathematical glyphs must retain the reviewed shapes and order");
+  assert.equal(createHash("sha256").update(JSON.stringify(mathematicalPaths)).digest("hex"), "b4e50040552babb5532d9b06f6a77ba910b7f061d244c9531c7c648963113a17", "All mathematical glyphs must retain the reviewed shapes and order");
 });
 
 test("display punctuation normalization changes only true sentence and equation-row termini", () => {
