@@ -150,8 +150,7 @@ type style. Links work without JavaScript and have accessible
 keyboard focus and touch targets. Do not repeat the outer summary in the detail view.
 
 AI pages include the scope disclosure, Key Contributions with any nested method
-lists, Architectural Context, and the numbered manuscript chapters. Thin rules
-separate top-level contribution items across all detail pages. A single authoritative
+lists, Architectural Context, and the numbered manuscript chapters. A single authoritative
 AI manuscript supplies the introductory copy, nested lists, and complete mathematical body.
 Legal pages place Key Contributions
 before the complete Abstract and manuscript. The shared contents rail includes
@@ -249,7 +248,7 @@ Page titles own the H1 position. About's two-line "Theodore / Ouyang" supplies i
 main heading. The "Thinking mathematically / Working in AI" introduction
 is an H2 below the hero; it remains the H1 on the `/education/` compatibility page.
 Experience domains use `01`–`05` indices; individual entries have no leading markers.
-Bullet markers occupy an 18px gutter beside the text. Narrative lines stay within
+Top-level contributions are plain paragraphs without bullets or rules. Narrative lines stay within
 the shared 720px reading measure and reflow with the viewport.
 
 ## Interaction
@@ -378,8 +377,8 @@ measure. Preserve the source title, subtitle, author name, date, abstract, origi
 chapter numbering, paragraph order, legal citations, and acknowledgments. The
 detail-page H1 combines the institution and approved project title; chapters and
 subsections use semantic H2 and H3 headings.
-Chapter headings use the section role at weight 500; subsections use the 18px
-subheading role at weight 600. Preserve source capitalization, italics, and emphasis.
+Chapter headings use the 20px heading role at weight 400; subsections use the 15px
+subheading role at weight 500. Preserve source capitalization, italics, and emphasis.
 Legal citations within a paragraph use its body size and spacing, including text
 marked as small capitals in the source. Note previews use the same reading role;
 their headings use the section role at weight 500.

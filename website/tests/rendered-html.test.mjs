@@ -759,7 +759,7 @@ test("law papers preserve article identity, chapter navigation, and bidirectiona
     const text = stripMarkup(html);
     const titleMatch = html.match(/<h1\b[^>]*>([\s\S]*?)<\/h1>/iu);
     assert.ok(titleMatch, `${route} is missing its article title`);
-    assert.equal(stripMarkup(titleMatch[1]), expectedExperiencePresentation(approved.find(({ id }) => id === index + 8)).pageTitle);
+    assert.equal(stripMarkup(titleMatch[1]), approved.find(({ id }) => id === index + 8).detailTitle);
     assert.ok(text.includes(title.split(": ").join(" — ")), `${route} lost its original article-title wording`);
     if (subtitle) assert.ok(text.includes(subtitle), `${route} lost its original subtitle`);
     assert.ok(text.includes("Letao Ouyang"), `${route} lost its original author name`);
@@ -1026,8 +1026,7 @@ test("the production design contract is restrained and dependency-light", async 
   assert.match(layout, /assets\/brand\/lo-mark\.svg/u);
   assert.match(experience, /\.metadata\s*\{[^}]*grid-template-columns:\s*1fr/u);
   assert.match(experience, /\.entryTitle\s*\{[^}]*font-size:\s*var\(--type-subheading\)/u);
-  assert.match(experience, /\.contributions > ul\s*\{[^}]*padding-left:\s*19px/u);
-  assert.match(experience, /\.contributions > ul > li\s*\{[^}]*padding-left:\s*3px/u);
+  assert.match(experience, /\.contributions > ul\s*\{[^}]*padding:\s*0\s*;[^}]*list-style:\s*none\s*;/u);
   assert.deepEqual(Object.keys(packageJson.dependencies).sort(), ["@mathjax/mathjax-tex-font", "@mathjax/src", "next", "react", "react-dom"]);
   assert.equal(packageJson.dependencies["@mathjax/src"], "4.1.3");
   assert.equal(packageJson.dependencies["@mathjax/mathjax-tex-font"], "4.1.3");
@@ -1089,8 +1088,7 @@ test("shared typography source roles preserve article names, compact indices, me
   assert.match(rule(math, ".number sup"), /font-size:\s*0\.75em\s*;/u);
   assert.match(rule(math, ".number sup"), /vertical-align:\s*super\s*;/u);
   assert.match(rule(experience, ".metadata > div"), /grid-template-columns:\s*6\.5em minmax\(0,\s*1fr\)\s*;/u);
-  assert.match(rule(experience, ".contributions > ul > li + li"), /border-top:\s*1px solid var\(--rule\)\s*;/u);
-  assert.match(rule(experience, ".contributions > ul > li + li"), /padding-top:\s*16px\s*;/u);
+  assert.match(rule(experience, ".contributions > ul"), /gap:\s*1\.5rem\s*;/u);
   assert.doesNotMatch(experience, /\.contributions\s+li(?:\s*\+\s*li)?\s*\{/u, "Contribution spacing and dividers must not cascade into nested items");
   const nestedDetails = rule(experience, ".contributionDetails");
   assert.match(nestedDetails, /font-size:\s*var\(--type-reading\)\s*;/u);

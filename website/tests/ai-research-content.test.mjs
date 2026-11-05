@@ -265,7 +265,7 @@ for (const expected of PROJECTS) {
     assert.deepEqual(formulas(source.markdown), formulas(canonicalBody), "Every mathematical expression must retain its exact TeX and order");
     const canonicalDetails = canonical.entry.keyContributionDetails ?? {};
     assert.equal(Object.values(canonicalDetails).reduce((count, detail) => count + detail.items.length, 0), [0, 4, 3, 0][index]);
-    assert.equal(readableHtml(html.match(/<h1\b[^>]*>([\s\S]*?)<\/h1>/iu)?.[1] ?? ""), `${showcase.organization}: ${showcase.detailTitle}`);
+    assert.equal(readableHtml(html.match(/<h1\b[^>]*>([\s\S]*?)<\/h1>/iu)?.[1] ?? ""), showcase.detailTitle);
     assert.match(html, new RegExp(`href="/experience/#${expected.slug}"`, "u"));
     assert.match(html, /href="#key-contributions"/u);
     assert.doesNotMatch(html, /href="#overview"|id="overview"|id="article-title"/u);
