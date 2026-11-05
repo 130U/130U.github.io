@@ -19,6 +19,11 @@ async function manuscript() {
   return { article, provenance, blocks: parseResearchMarkdown(article.markdown, { joinSoftLines: true }) };
 }
 
+async function editionBlocks() {
+  const source = await readFile(path.join(ROOT, "content", "selected-research", "site-edition", `${SLUG}.md`), "utf8");
+  return parseResearchMarkdown(source.replace(/\r\n?/gu, "\n").replace(/^---\n[\s\S]*?\n---\n\n/u, ""), { joinSoftLines: true });
+}
+
 function sha256(bytes) { return createHash("sha256").update(bytes).digest("hex"); }
 function normalize(text) { return text.replace(/\s+/gu, " ").trim(); }
 function decodeHtml(text) {
@@ -88,9 +93,10 @@ test("dependence parsing and published mathematics retain the complete source le
   assert.deepEqual(parsedMath(blocks), expected);
   const html = await readFile(path.join(ROOT, "out", "education", SLUG, "index.html"), "utf8");
   const rendered = [...html.matchAll(/<math\b[^>]*data-research-math="(inline|display)"[^>]*>[\s\S]*?<annotation\b[^>]*encoding="application\/x-tex"[^>]*>([\s\S]*?)<\/annotation>[\s\S]*?<\/math>/gu)].map((match) => ({ tex: decodeHtml(match[2]), display: match[1] === "display" }));
-  assert.deepEqual(rendered, expected, "Rendered annotations preserve every TeX byte, equation tag, mode and position.");
+  const published = await editionBlocks();
+  assert.deepEqual(rendered, parsedMath(published), "Rendered annotations preserve every TeX byte, equation tag and mode of the site edition.");
   assert.equal(blocks.length, 343);
-  assert.deepEqual([...html.matchAll(/data-research-block="(\d+)"/gu)].map((match) => Number(match[1])), blocks.map((_, index) => index));
+  assert.deepEqual([...html.matchAll(/data-research-block="(\d+)"/gu)].map((match) => Number(match[1])), published.map((_, index) => index));
   assert.doesNotMatch(html, /data-mjx-error|<merror\b|@@DEPENDENCE|@@FINAL-MATH/u);
   const ids = [...html.matchAll(/\bid="([^"]+)"/gu)].map((match) => match[1]);
   assert.equal(new Set(ids).size, ids.length);

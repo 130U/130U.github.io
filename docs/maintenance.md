@@ -40,7 +40,7 @@ Paths below are relative to `website/`.
 | Coursework | `app/lib/content/about.ts` | `app/coursework/page.tsx` | `/coursework/` |
 | Experience | `content/experience-showcase.json`; AI fields are generated from the manuscript below | `app/lib/content/experience-showcase.ts` | `/experience/`, `/experience/[slug]/` |
 | AI research | `content/sources/ai-portfolio/ai-research-and-engineering.md` | `scripts/import-ai-portfolio.mjs`, `app/lib/content/ai-projects.ts` | `/past-experience/artificial-intelligence/[paper]/` |
-| Selected Research | `content/sources/selected-research/` | Research import scripts, `app/lib/content/selected-research.ts` | `/education/[paper]/` |
+| Selected Research | `content/sources/selected-research/` (frozen import), `content/selected-research/site-edition/` (published text) | Research import scripts, `app/lib/content/selected-research.ts` | `/education/[paper]/` |
 | Legal research | `content/legal-papers/` structured manuscripts | `app/lib/content/legal-papers.ts` | `/past-experience/legal-research-and-policy-analysis/[paper]/` |
 | Architecture | `../architecture/site.json` | Archify and `scripts/integrate-architecture.mjs` | `/architecture/` |
 
@@ -107,6 +107,13 @@ tables, references, theorem assumptions, error definitions, and reproducibility
 limits. Distinguish the Asian paper's projected-Euler certificate from its
 continuous-model comparison, and retain the Rough Heston paper's stated
 configurations and finite-candidate scope.
+
+Each page publishes its file in `content/selected-research/site-edition/`, which begins
+with a one-line `description` and revises expository prose only. The frozen JSON stays
+pinned to upstream. `tests/site-edition.test.mjs` requires the edition to keep the frozen
+mathematics, formal statements, tables, references, and chapter structure. Edit the
+edition for wording; rerun the importers only when the upstream manuscript changes, then
+reconcile the edition with the new import.
 
 The dependence source tree includes supporting TeX inputs needed to resolve
 cross-references. Its four PNG figures are source evidence; copies in
