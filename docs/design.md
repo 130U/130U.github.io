@@ -120,7 +120,7 @@ and 01 through 04 for Coursework. Both the decorative numbers and repeated View
 actions are hidden from assistive technology, leaving the section title as each
 link's accessible name. Section margin indices use the shared 10px serif index role on
 About, Experience, and Coursework. Section spacing separates
-domains; thin rules and 28px gaps distinguish entries within them. Category
+domains, and 56px of space distinguishes entries within them. Category
 introductions are omitted. Summaries use upright
 black body text at 15px; project titles use the subheading role. No content is truncated to fit a card.
 
@@ -138,12 +138,12 @@ contents rail lists chapters and opens subsections only for the chapter being re
 
 All eighteen entries use real Read More links to dedicated pages. The eight AI and
 legal articles use their manuscript URLs; the other ten entries have pages at
-`/experience/{slug}/`. Outer entries lead with the institution or organization;
-legal entries use `Duke Law School: {research area} Research`. Detail-page H1s use
-`{institution}: {project title}`, with any internal title colon rendered as an em
-dash so the institution separator is the title's only colon. These project and paper
-names use the 20px role even when they are H1s. Position, Location, and Dates appear
-as three rows with aligned label/value pairs, stacking within a row below 420px.
+`/experience/{slug}/`. AI entries lead with the project name, other outer entries with
+the organization, and legal entries with `Duke Law School: {research area} Research`.
+Detail-page H1s use the project or paper title in the page-title role. Organization,
+Position, Location, and Dates appear as four rows with aligned label/value pairs,
+stacking within a row below 420px. The browser title keeps
+`{institution}: {project title}`.
 The rows are followed by the approved Key
 Contributions, with contextual notes as the final bullets in the same list and
 type style. Links work without JavaScript and have accessible
@@ -249,7 +249,7 @@ main heading. The "Thinking mathematically / Working in AI" introduction
 is an H2 below the hero; it remains the H1 on the `/education/` compatibility page.
 Experience domains use `01`–`05` indices; individual entries have no leading markers.
 Top-level contributions are plain paragraphs without bullets or rules. Narrative lines stay within
-the shared 720px reading measure and reflow with the viewport.
+the shared 560px reading measure and reflow with the viewport.
 
 ## Interaction
 
@@ -375,10 +375,11 @@ Keep factual claims, metadata, copy, and content order aligned with the integrit
 Each paper uses the shared shell, Inter headings, and Source Serif 4 prose with a restrained reading
 measure. Preserve the source title, subtitle, author name, date, abstract, original
 chapter numbering, paragraph order, legal citations, and acknowledgments. The
-detail-page H1 combines the institution and approved project title; chapters and
-subsections use semantic H2 and H3 headings.
+detail-page H1 is the approved project title; chapters and subsections use semantic
+H2 and H3 headings.
 Chapter headings use the 20px heading role at weight 400; subsections use the 15px
-subheading role at weight 500. Preserve source capitalization, italics, and emphasis.
+subheading role at weight 500. Preserve source capitalization and emphasis; italics
+in subsection headings render upright so a heading stays in one face.
 Legal citations within a paragraph use its body size and spacing, including text
 marked as small capitals in the source. Note previews use the same reading role;
 their headings use the section role at weight 500.
