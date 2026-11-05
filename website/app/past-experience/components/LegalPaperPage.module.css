@@ -19,7 +19,7 @@
 
 .paper .header h1 {
   font-size: var(--type-subheading);
-  font-weight: 600;
+  font-weight: 500;
   line-height: var(--subheading-leading);
   letter-spacing: 0;
 }

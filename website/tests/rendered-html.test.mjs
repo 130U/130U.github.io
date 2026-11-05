@@ -1013,7 +1013,7 @@ test("the production design contract is restrained and dependency-light", async 
   assert.match(globals, /\.structural-guide-tick\s*\{[\s\S]*?position:\s*sticky[\s\S]*?height:\s*20px/u);
   assert.match(directory, /\.directory\s*\{[^}]*grid-template-columns:\s*1fr/u);
   assert.match(experience, /\.section\s*\{[^}]*grid-template-columns:\s*repeat\(12,/u);
-  assert.match(experience, /\.sectionBody\s*\{[^}]*grid-column:\s*2\s*\/\s*span\s*10[^}]*max-width:\s*var\(--reading-measure\)/u);
+  assert.match(experience, /\.sectionBody\s*\{[^}]*grid-column:\s*2\s*\/\s*span\s*8[^}]*max-width:\s*var\(--reading-measure\)/u);
   assert.doesNotMatch(globals, /\.education-entry\s*\{[^}]*grid-template-columns/u);
   for (const guide of ["frame-start", "rail-boundary", "reading-start", "reading-measure", "reading-end"]) assert.ok(structuralGrid.includes(`"${guide}"`));
   for (const contract of ["aria-controls=\"site-menu\"", "aria-expanded={menuOpen}", 'event.key === "Escape"', 'document.body.classList.add("menu-open")', 'querySelectorAll<HTMLElement>']) assert.ok(navigation.includes(contract));
@@ -1073,8 +1073,8 @@ test("shared typography source roles preserve article names, compact indices, me
   assert.match(rule(coursework, ".sectionBody h2"), /font-size:\s*var\(--type-heading\)\s*;/u);
   assert.match(rule(coursework, ".courseList"), /font-size:\s*var\(--type-reading\)\s*;/u);
   for (const declarations of [rule(articles, ".paper .header h1"), rule(experience, ".detailPage .detailHeader h1"), rule(experience, ".entryTitle")]) {
-    assert.match(declarations, /font-size:\s*var\(--type-subheading\)\s*;/u, "Article and experience names must share the 18px semantic role");
-    assert.match(declarations, /font-weight:\s*600\s*;/u);
+    assert.match(declarations, /font-size:\s*var\(--type-subheading\)\s*;/u, "Article and experience names must share the 20px semantic role");
+    assert.match(declarations, /font-weight:\s*500\s*;/u);
     assert.match(declarations, /line-height:\s*var\(--subheading-leading\)\s*;/u);
   }
   assert.match(rule(math, ".formula"), /font-size:\s*var\(--type-math\)\s*;/u);

@@ -103,7 +103,7 @@
 .readMore:focus-visible { outline: 2px solid var(--accent); outline-offset: 4px; }
 .detailPage { max-width: var(--reading-measure); }
 .detailHeader { margin-bottom: 3rem; }
-.detailPage .detailHeader h1 { font-size: var(--type-subheading); font-weight: 600; line-height: var(--subheading-leading); letter-spacing: 0; }
+.detailPage .detailHeader h1 { font-size: var(--type-subheading); font-weight: 500; line-height: var(--subheading-leading); letter-spacing: 0; }
 .detailHeader + .contributions { border-top: 1px solid var(--rule-strong); padding-top: 2rem; }
 .detailFooter { display: flex; justify-content: space-between; gap: 24px; border-top: 1px solid var(--rule); margin-top: 40px; padding-top: 24px; font-size: var(--type-interface); }
 .detailFooter a { display: inline-flex; align-items: center; min-height: 44px; }

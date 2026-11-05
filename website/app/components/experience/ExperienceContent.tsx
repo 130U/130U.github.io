@@ -14,7 +14,7 @@ function ExperienceEntry({ entry }: { entry: ShowcaseEntry }) {
   return (
     <article className={styles.entry} id={entry.slug} data-experience-entry={entry.id}>
       <h3 className={styles.entryTitle}>{entry.listingTitle}</h3>
-      {entry.listingOrganization && <p className={styles.entryOrganization}>{entry.listingOrganization}</p>}
+      {entry.listingOrganization && <div className={styles.entryOrganization}>{entry.listingOrganization}</div>}
       <p className={styles.summary} data-experience-summary>{entry.categoryId === "01" ? <InlineMarkdown text={entry.summary} /> : entry.summary}</p>
       {highlight && <MetricRow metrics={highlight.metrics} />}
       <Link className={styles.readMore} href={entry.detailPath} aria-label={`Read more about ${entry.pageTitle}`}>
