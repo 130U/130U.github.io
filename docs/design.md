@@ -112,7 +112,7 @@ paper/ink palette. It is one page with five numbered sections and an anchor
 directory headed Experience: Areas of Focus that stays in one column at every screen width.
 Experience and Coursework use the same `SectionDirectory` component: full-width
 rows separated by thin rules, with small serif numbers at the left and labels in the
-18px subheading size at weight 500. A right-aligned View action appears on hover
+20px subheading size at weight 500. A right-aligned View action appears on hover
 and keyboard focus and remains visible on touch devices; the complete row turns
 blue on hover or focus. Directory numbers run from 01 through 05 for Experience
 and 01 through 04 for Coursework. Both the decorative numbers and repeated View
@@ -121,7 +121,7 @@ link's accessible name. Section margin indices use the shared 10px serif index r
 About, Experience, and Coursework. Section spacing separates
 domains; thin rules and 28px gaps distinguish entries within them. Category
 introductions are omitted. Summaries use upright
-black body text at 14px; project and organization titles use the 18px subheading
+black body text at 15px; project and organization titles use the 20px subheading
 role. No content is truncated to fit a card.
 
 All body copy uses the shared ink colors. Blue marks navigation, hover, keyboard
@@ -145,7 +145,7 @@ legal articles use their manuscript URLs; the other ten entries have pages at
 legal entries use `Duke Law School: {research area} Research`. Detail-page H1s use
 `{institution}: {project title}`, with any internal title colon rendered as an em
 dash so the institution separator is the title's only colon. These project and paper
-names use the 18px role even when they are H1s. Position, Location, and Dates appear
+names use the 20px role even when they are H1s. Position, Location, and Dates appear
 as three rows with aligned label/value pairs, stacking within a row below 420px.
 The rows are followed by the approved Key
 Contributions, with contextual notes as the final bullets in the same list and
@@ -161,8 +161,8 @@ before the complete Abstract and manuscript. The shared contents rail includes
 the contribution block and source chapter links. Return links target the matching
 entry on Experience.
 
-Research article prose, emphasis, citations, and table cells use the shared 14px
-reading size. Subsection headings use the shared 18px size with weight 600. Inline
+Research article prose, emphasis, citations, and table cells use the shared 15px
+reading size. Subsection headings use the shared 20px size with weight 500. Inline
 formulas use 1em; standalone formulas use 1.15em. Pure inline numerical values,
 including scientific notation and percentages, use the surrounding prose family
 with native superscripts while retaining their accessible MathML and original TeX.
@@ -184,7 +184,7 @@ fine rule, and 2rem of inset; phone spacing is 4rem and 1.5rem. Subsections use
 the site's fonts or type sizes.
 
 Section margin indices use `--type-index`; metadata labels use `--type-label`.
-Top-level directories use the 18px subheading role. Navigation, the wordmark name,
+Top-level directories use the 20px subheading role. Navigation, the wordmark name,
 the mobile menu, and return links share `--type-interface` at every breakpoint.
 Text links share a 1px underline, `--link-rule`, and `--link-underline-offset`.
 Focus remains a visible blue outline, and hover feedback respects pointer capability.
@@ -226,7 +226,7 @@ the About page keeps its `#coursework` anchor around this entrance. The dedicate
 page has four subject sections, indexed 01 through 04, and uses the same numbered,
 ruled directory and View interaction as Experience.
 Each section has a shared section heading and a single-column list of course names
-at the shared 14px reading size and leading. All 49 courses retain their original
+at the shared 15px reading size and leading. All 49 courses retain their original
 wording and order as static text, available without JavaScript. The rail's
 Back to Education link returns to the Education section. Duke University appears
 once above the two degree records;
@@ -246,7 +246,7 @@ matches Experience's underlined text and decorative right arrow, with blue hover
 and keyboard-focus feedback. Its accessible name identifies the manuscript.
 The list omits dates. Paragraphs wrap naturally
 without forced line breaks. Section headings, entry headings, and reading text use
-the shared heading, 18px subheading, and 14px reading hierarchy; scoped spacing overrides do not affect other pages.
+the shared heading, 20px subheading, and 15px reading hierarchy; scoped spacing overrides do not affect other pages.
 
 Page titles own the H1 position. About's two-line "Theodore / Ouyang" supplies its
 main heading. The "Thinking mathematically / Working in AI" introduction
