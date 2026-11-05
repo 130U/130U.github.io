@@ -7,13 +7,13 @@
   "abstract": [
     {
       "type": "paragraph",
-      "text": "An authority may approve a mangrove restoration project because it offers a reasonable prospect of repairing degraded habitat. Relying on the same project to authorize destruction elsewhere requires a further judgment about replacement functions, delay, and failure. This Article develops that distinction through a comparison of Florida and the Guangdong-Hong Kong-Macao Greater Bay Area. China's Wetland Protection Law expressly addresses mangroves and hydrological disruption; Shenzhen connects ecological assessment to project acceptance. Federal and Florida law offer additional mechanisms, subject to jurisdictional limits and statutory exemptions. West Lake illustrates the value of restoring tidal conditions, while research in Deep Bay and the San Tin environmental assessment dispute demonstrate the limits of treating canopy expansion, construction, or predicted enhancement as proof of functional replacement. The Article proposes project conditions that connect a defensible baseline and locally justified ecological objectives to staged authorization, funded correction, and continuing responsibility. The resulting approach permits proportionate experimentation in degraded habitats while requiring stronger justification when restoration promises support irreversible loss.",
+      "text": "An authority may approve a mangrove restoration project because it offers a reasonable prospect of repairing degraded habitat. Relying on the same project to authorize destruction elsewhere requires a further judgment about replacement functions, delay, and failure. This Article develops that distinction through a comparison of Florida and the Guangdong-Hong Kong-Macao Greater Bay Area and argues that restoration objectives should be tied to identifiable decisions and allocated responsibilities. China's Wetland Protection Law expressly addresses mangroves and hydrological disruption; Shenzhen connects ecological assessment to project acceptance. Federal and Florida law offer additional mechanisms, subject to jurisdictional limits and statutory exemptions. West Lake illustrates the value of restoring tidal conditions, while research in Deep Bay and the San Tin environmental assessment dispute demonstrate the limits of treating canopy expansion, construction, or predicted enhancement as proof of functional replacement. This Article proposes project conditions that connect a defensible baseline and locally justified ecological objectives to staged authorization, funded correction, and continuing responsibility. The resulting approach permits proportionate experimentation in degraded habitats while requiring stronger justification when restoration promises support irreversible loss.",
       "sourcePages": [
         1
       ],
       "runs": [
         {
-          "text": "An authority may approve a mangrove restoration project because it offers a reasonable prospect of repairing degraded habitat. Relying on the same project to authorize destruction elsewhere requires a further judgment about replacement functions, delay, and failure. This Article develops that distinction through a comparison of Florida and the Guangdong-Hong Kong-Macao Greater Bay Area. China's Wetland Protection Law expressly addresses mangroves and hydrological disruption; Shenzhen connects ecological assessment to project acceptance. Federal and Florida law offer additional mechanisms, subject to jurisdictional limits and statutory exemptions. West Lake illustrates the value of restoring tidal conditions, while research in Deep Bay and the San Tin environmental assessment dispute demonstrate the limits of treating canopy expansion, construction, or predicted enhancement as proof of functional replacement. The Article proposes project conditions that connect a defensible baseline and locally justified ecological objectives to staged authorization, funded correction, and continuing responsibility. The resulting approach permits proportionate experimentation in degraded habitats while requiring stronger justification when restoration promises support irreversible loss."
+          "text": "An authority may approve a mangrove restoration project because it offers a reasonable prospect of repairing degraded habitat. Relying on the same project to authorize destruction elsewhere requires a further judgment about replacement functions, delay, and failure. This Article develops that distinction through a comparison of Florida and the Guangdong-Hong Kong-Macao Greater Bay Area and argues that restoration objectives should be tied to identifiable decisions and allocated responsibilities. China's Wetland Protection Law expressly addresses mangroves and hydrological disruption; Shenzhen connects ecological assessment to project acceptance. Federal and Florida law offer additional mechanisms, subject to jurisdictional limits and statutory exemptions. West Lake illustrates the value of restoring tidal conditions, while research in Deep Bay and the San Tin environmental assessment dispute demonstrate the limits of treating canopy expansion, construction, or predicted enhancement as proof of functional replacement. This Article proposes project conditions that connect a defensible baseline and locally justified ecological objectives to staged authorization, funded correction, and continuing responsibility. The resulting approach permits proportionate experimentation in degraded habitats while requiring stronger justification when restoration promises support irreversible loss."
         }
       ]
     }
@@ -104,13 +104,19 @@
     },
     {
       "type": "paragraph",
-      "text": "Part II establishes the basis for comparison. Part III examines the relevant legal obligations; Part IV evaluates the ecological claims made for West Lake and Deep Bay. Part V considers San Tin's approval conditions, and Part VI proposes measures for allocating restoration risk. Part VII addresses delay, measurement, and enforcement. The central inquiry throughout is when an ecological prediction warrants a legal consequence.",
-      "sourcePages": [
-        3
-      ],
+      "text": "This Article makes five contributions. First, it organizes the comparison around the distinction among protection, repair, and compensation for new loss. It traces the duties, approval instruments, and administrative powers through which a restoration condition can take legal effect in Florida, mainland China, Shenzhen, Hong Kong, and Macao. Second, it sets out an explicit evidentiary chain from legal duty to durable ecological function. It uses West Lake to examine hydrological rehabilitation and Deep Bay and San Tin to assess functional replacement, distinguishing canopy growth, construction, and predicted enhancement from evidence supporting compensation. Third, it proposes staged approval and acceptance, which separates engineering completion from ecological performance and links each damaging development phase to the availability of the functions used to justify it. Fourth, it designs arrangements for delayed or failed recovery through funded monitoring, correction, and continuing management. Fifth, it links ecological evidence to fund release, discharge of responsibility, and development permission. Where promised functions lack credible replacement, it proposes smaller footprints, revised sequencing, alternative sites, or refusal to credit compensation, while allowing proportionate trials in degraded habitats.",
       "runs": [
         {
-          "text": "Part II establishes the basis for comparison. Part III examines the relevant legal obligations; Part IV evaluates the ecological claims made for West Lake and Deep Bay. Part V considers San Tin's approval conditions, and Part VI proposes measures for allocating restoration risk. Part VII addresses delay, measurement, and enforcement. The central inquiry throughout is when an ecological prediction warrants a legal consequence."
+          "text": "This Article makes five contributions. First, it organizes the comparison around the distinction among protection, repair, and compensation for new loss. It traces the duties, approval instruments, and administrative powers through which a restoration condition can take legal effect in Florida, mainland China, Shenzhen, Hong Kong, and Macao. Second, it sets out an explicit evidentiary chain from legal duty to durable ecological function. It uses West Lake to examine hydrological rehabilitation and Deep Bay and San Tin to assess functional replacement, distinguishing canopy growth, construction, and predicted enhancement from evidence supporting compensation. Third, it proposes staged approval and acceptance, which separates engineering completion from ecological performance and links each damaging development phase to the availability of the functions used to justify it. Fourth, it designs arrangements for delayed or failed recovery through funded monitoring, correction, and continuing management. Fifth, it links ecological evidence to fund release, discharge of responsibility, and development permission. Where promised functions lack credible replacement, it proposes smaller footprints, revised sequencing, alternative sites, or refusal to credit compensation, while allowing proportionate trials in degraded habitats."
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "Part II establishes the basis for comparison. Part III examines the relevant legal obligations. Part IV evaluates the ecological claims made for West Lake and Deep Bay. Part V considers San Tin's approval conditions. Part VI proposes five conditions for accountable restoration. Part VII addresses delay, measurement, and enforcement, and Part VIII concludes. The central inquiry throughout is when an ecological prediction warrants a legal consequence.",
+      "runs": [
+        {
+          "text": "Part II establishes the basis for comparison. Part III examines the relevant legal obligations. Part IV evaluates the ecological claims made for West Lake and Deep Bay. Part V considers San Tin's approval conditions. Part VI proposes five conditions for accountable restoration. Part VII addresses delay, measurement, and enforcement, and Part VIII concludes. The central inquiry throughout is when an ecological prediction warrants a legal consequence."
         }
       ]
     },
@@ -145,13 +151,10 @@
     },
     {
       "type": "paragraph",
-      "text": "Counting statutes is an unreliable measure of conservation. A specialized enactment may create exemptions or preempt stricter local rules, while a general environmental statute may contain highly specific habitat duties. Nor does a common environmental objective make legal institutions interchangeable. A federal permit requirement, a provincial restoration approval, a Hong Kong environmental permit and a Macao administrative assessment may differ in their territorial reach, decision makers, legal force and available remedies.",
-      "sourcePages": [
-        3
-      ],
+      "text": "Counting statutes is an unreliable measure of conservation. A specialized enactment may create exemptions or preempt stricter local rules, while a general environmental statute may contain highly specific habitat duties. Nor does a common environmental objective make legal institutions interchangeable. A federal permit requirement, a provincial restoration approval, a Hong Kong environmental permit, and a Macao administrative assessment may differ in their territorial reach, decision makers, legal force, and available remedies.",
       "runs": [
         {
-          "text": "Counting statutes is an unreliable measure of conservation. A specialized enactment may create exemptions or preempt stricter local rules, while a general environmental statute may contain highly specific habitat duties. Nor does a common environmental objective make legal institutions interchangeable. A federal permit requirement, a provincial restoration approval, a Hong Kong environmental permit and a Macao administrative assessment may differ in their territorial reach, decision makers, legal force and available remedies."
+          "text": "Counting statutes is an unreliable measure of conservation. A specialized enactment may create exemptions or preempt stricter local rules, while a general environmental statute may contain highly specific habitat duties. Nor does a common environmental objective make legal institutions interchangeable. A federal permit requirement, a provincial restoration approval, a Hong Kong environmental permit, and a Macao administrative assessment may differ in their territorial reach, decision makers, legal force, and available remedies."
         }
       ]
     },
@@ -177,13 +180,10 @@
     },
     {
       "type": "paragraph",
-      "text": "The analysis distinguishes protection of existing habitat, repair of degradation, and compensation for newly authorized harm. The American compensatory mitigation rule preserves avoidance and minimization before compensation.3 Its procedures can inform independent repair, but their legal scope remains tied to the permits they implement. A repair trial may yield useful knowledge even if it cannot compensate for an unrelated development.",
-      "sourcePages": [
-        4
-      ],
+      "text": "This Article distinguishes protection of existing habitat, repair of degradation, and compensation for newly authorized harm. The American compensatory mitigation rule preserves avoidance and minimization before compensation.3 Its procedures can inform independent repair, but their legal scope remains tied to the permits they implement. A repair trial may yield useful knowledge even if it cannot compensate for an unrelated development.",
       "runs": [
         {
-          "text": "The analysis distinguishes protection of existing habitat, repair of degradation, and compensation for newly authorized harm. The American compensatory mitigation rule preserves avoidance and minimization before compensation."
+          "text": "This Article distinguishes protection of existing habitat, repair of degradation, and compensation for newly authorized harm. The American compensatory mitigation rule preserves avoidance and minimization before compensation."
         },
         {
           "text": "3",
@@ -212,26 +212,19 @@
     },
     {
       "type": "paragraph",
-      "text": "Credible institutional attribution requires more than observing trees after a law was enacted. The relevant chain runs from an applicable legal duty, through a changed decision and funded conduct, to altered site conditions, ecological responses and durable functions. A permit might require a tidal creek, a contractor might excavate it, monitoring might establish improved exchange, and recruitment might follow. Each observation supports a different link. Aerial photographs of canopy expansion cannot establish all of them.",
-      "sourcePages": [
-        4
-      ],
+      "text": "Credible institutional attribution requires more than observing trees after a law was enacted. This Article uses an explicit evidentiary chain that runs from an applicable legal duty, through a changed decision and funded conduct, to altered site conditions, ecological responses, and durable functions. A permit might require a tidal creek, a contractor might excavate it, monitoring might establish improved exchange, and recruitment might follow. Each observation supports a different link. Aerial photographs of canopy expansion cannot establish all of them.",
       "runs": [
         {
-          "text": "Credible institutional attribution requires more than observing trees after a law was enacted. The relevant chain runs from an applicable legal duty, through a changed decision and funded conduct, to altered site conditions, ecological responses and durable functions. A permit might require a tidal creek, a contractor might excavate it, monitoring might establish improved exchange, and recruitment might follow. Each observation supports a different link. Aerial photographs of canopy expansion cannot establish all of them."
+          "text": "Credible institutional attribution requires more than observing trees after a law was enacted. This Article uses an explicit evidentiary chain that runs from an applicable legal duty, through a changed decision and funded conduct, to altered site conditions, ecological responses, and durable functions. A permit might require a tidal creek, a contractor might excavate it, monitoring might establish improved exchange, and recruitment might follow. Each observation supports a different link. Aerial photographs of canopy expansion cannot establish all of them."
         }
       ]
     },
     {
       "type": "paragraph",
-      "text": "The counterfactual also changes with the claim. To assess ecological technique, one asks what would have happened without reconnection or with planting alone. To assess a legal mechanism, one asks whether the same work would have occurred without that obligation, funding condition or credible sanction. To assess compensation, one compares the development-and-restoration package with the relevant lawful alternative, including the habitat and management that would otherwise persist. A baseline cannot simply assume that existing habitat will continue deteriorating if avoiding that deterioration is already a legal duty.",
-      "sourcePages": [
-        4,
-        5
-      ],
+      "text": "The counterfactual also changes with the claim. To assess ecological technique, one asks what would have happened without reconnection or with planting alone. To assess a legal mechanism, one asks whether the same work would have occurred without that obligation, funding condition, or credible sanction. To assess compensation, one compares the development-and-restoration package with the relevant lawful alternative, including the habitat and management that would otherwise persist. A baseline cannot simply assume that existing habitat will continue deteriorating if avoiding that deterioration is already a legal duty.",
       "runs": [
         {
-          "text": "The counterfactual also changes with the claim. To assess ecological technique, one asks what would have happened without reconnection or with planting alone. To assess a legal mechanism, one asks whether the same work would have occurred without that obligation, funding condition or credible sanction. To assess compensation, one compares the development-and-restoration package with the relevant lawful alternative, including the habitat and management that would otherwise persist. A baseline cannot simply assume that existing habitat will continue deteriorating if avoiding that deterioration is already a legal duty."
+          "text": "The counterfactual also changes with the claim. To assess ecological technique, one asks what would have happened without reconnection or with planting alone. To assess a legal mechanism, one asks whether the same work would have occurred without that obligation, funding condition, or credible sanction. To assess compensation, one compares the development-and-restoration package with the relevant lawful alternative, including the habitat and management that would otherwise persist. A baseline cannot simply assume that existing habitat will continue deteriorating if avoiding that deterioration is already a legal duty."
         }
       ]
     },
@@ -379,13 +372,10 @@
     },
     {
       "type": "paragraph",
-      "text": "Guangdong law identifies a specific incentive worth examining. Article 34 of the provincial Wetland Protection Regulation links qualifying annual afforestation, assessed against area and prescribed standards, to rewards in new-construction-land quotas under national rules. Article 30 also requires mangrove planning to accommodate navigation, flood discharge, migratory-bird feeding and resting areas, and local production and living needs.9 The statutory objectives can pull in different directions. Their practical effect depends on how awards, site selection, and acceptance decisions reconcile them.",
-      "sourcePages": [
-        7
-      ],
+      "text": "Guangdong law contains a specific incentive worth examining. Article 34 of the provincial Wetland Protection Regulation links qualifying annual afforestation, assessed against area and prescribed standards, to rewards in new-construction-land quotas under national rules. Article 30 also requires mangrove planning to accommodate navigation, flood discharge, migratory-bird feeding and resting areas, and local production and living needs.9 The statutory objectives can pull in different directions. Their practical effect depends on how awards, site selection, and acceptance decisions reconcile them.",
       "runs": [
         {
-          "text": "Guangdong law identifies a specific incentive worth examining. Article 34 of the provincial Wetland Protection Regulation links qualifying annual afforestation, assessed against area and prescribed standards, to rewards in new-construction-land quotas under national rules. Article 30 also requires mangrove planning to accommodate navigation, flood discharge, migratory-bird feeding and resting areas, and local production and living needs."
+          "text": "Guangdong law contains a specific incentive worth examining. Article 34 of the provincial Wetland Protection Regulation links qualifying annual afforestation, assessed against area and prescribed standards, to rewards in new-construction-land quotas under national rules. Article 30 also requires mangrove planning to accommodate navigation, flood discharge, migratory-bird feeding and resting areas, and local production and living needs."
         },
         {
           "text": "9",
@@ -435,13 +425,10 @@
     },
     {
       "type": "paragraph",
-      "text": "Section 9(1) of the Environmental Impact Assessment Ordinance generally prohibits constructing or operating a Part I Schedule 2 designated project without an environmental permit or contrary to its conditions. Schedule 3 projects require assessment but do not acquire the same permit requirement merely by appearing in that schedule. San Tin's urban-development assessment and the permits for its component designated works must therefore be distinguished. The Ordinance also provides for public inspection and approval. It does not mean that every action affecting a mangrove automatically undergoes the same procedure. Planning controls, protected-area measures and project-specific obligations operate alongside that system.11",
-      "sourcePages": [
-        8
-      ],
+      "text": "Section 9(1) of the Environmental Impact Assessment Ordinance generally prohibits constructing or operating a Part I Schedule 2 designated project without an environmental permit or contrary to its conditions. Schedule 3 projects require assessment but do not acquire the same permit requirement merely by appearing in that schedule. San Tin's urban-development assessment and the permits for its component designated works must therefore be distinguished. The Ordinance also provides for public inspection and approval. That does not mean that every action affecting a mangrove automatically undergoes the same procedure. Planning controls, protected-area measures, and project-specific obligations operate alongside that system.11",
       "runs": [
         {
-          "text": "Section 9(1) of the Environmental Impact Assessment Ordinance generally prohibits constructing or operating a Part I Schedule 2 designated project without an environmental permit or contrary to its conditions. Schedule 3 projects require assessment but do not acquire the same permit requirement merely by appearing in that schedule. San Tin's urban-development assessment and the permits for its component designated works must therefore be distinguished. The Ordinance also provides for public inspection and approval. It does not mean that every action affecting a mangrove automatically undergoes the same procedure. Planning controls, protected-area measures and project-specific obligations operate alongside that system."
+          "text": "Section 9(1) of the Environmental Impact Assessment Ordinance generally prohibits constructing or operating a Part I Schedule 2 designated project without an environmental permit or contrary to its conditions. Schedule 3 projects require assessment but do not acquire the same permit requirement merely by appearing in that schedule. San Tin's urban-development assessment and the permits for its component designated works must therefore be distinguished. The Ordinance also provides for public inspection and approval. That does not mean that every action affecting a mangrove automatically undergoes the same procedure. Planning controls, protected-area measures, and project-specific obligations operate alongside that system."
         },
         {
           "text": "11",
@@ -452,14 +439,10 @@
     },
     {
       "type": "paragraph",
-      "text": "The Technical Memorandum gives ecological assessment substantive content. Its ecological framework addresses habitat value, alternatives and mitigation, including avoidance, minimization and compensation. The Deep Bay planning guidelines additionally address wetland conservation and buffer areas and the protection of wetland functions.12 A Ramsar designation, a planning designation, and an environmental permit have different legal consequences. International recognition cannot be substituted for identifying the domestic power that constrains the particular activity. Equally, ecological damage beyond a designated boundary can matter where a project affects the functions that the assessment must consider.",
-      "sourcePages": [
-        8,
-        9
-      ],
+      "text": "The Technical Memorandum gives ecological assessment substantive content. Its ecological framework addresses habitat value, alternatives and mitigation, including avoidance, minimization, and compensation. The Deep Bay planning guidelines additionally address wetland conservation and buffer areas and the protection of wetland functions.12 A Ramsar designation, a planning designation, and an environmental permit have different legal consequences. International recognition cannot be substituted for identifying the domestic power that constrains the particular activity. Equally, ecological damage beyond a designated boundary can matter where a project affects the functions that the assessment must consider.",
       "runs": [
         {
-          "text": "The Technical Memorandum gives ecological assessment substantive content. Its ecological framework addresses habitat value, alternatives and mitigation, including avoidance, minimization and compensation. The Deep Bay planning guidelines additionally address wetland conservation and buffer areas and the protection of wetland functions."
+          "text": "The Technical Memorandum gives ecological assessment substantive content. Its ecological framework addresses habitat value, alternatives and mitigation, including avoidance, minimization, and compensation. The Deep Bay planning guidelines additionally address wetland conservation and buffer areas and the protection of wetland functions."
         },
         {
           "text": "12",
@@ -631,13 +614,10 @@
     },
     {
       "type": "paragraph",
-      "text": "Where section 404 applies, the guidelines impose an alternatives requirement. The guidelines restrict discharges when a practicable, less damaging alternative exists, taking cost, technology and logistics into account, and bar significant degradation. Compensation follows avoidance and minimization; it is not an automatic entitlement to replace any wetland with another.18",
-      "sourcePages": [
-        11
-      ],
+      "text": "Where section 404 applies, the guidelines impose an alternatives requirement. The guidelines restrict discharges when a practicable, less damaging alternative exists, taking cost, technology, and logistics into account, and bar significant degradation. Compensation follows avoidance and minimization; it is not an automatic entitlement to replace any wetland with another.18",
       "runs": [
         {
-          "text": "Where section 404 applies, the guidelines impose an alternatives requirement. The guidelines restrict discharges when a practicable, less damaging alternative exists, taking cost, technology and logistics into account, and bar significant degradation. Compensation follows avoidance and minimization; it is not an automatic entitlement to replace any wetland with another."
+          "text": "Where section 404 applies, the guidelines impose an alternatives requirement. The guidelines restrict discharges when a practicable, less damaging alternative exists, taking cost, technology, and logistics into account, and bar significant degradation. Compensation follows avoidance and minimization; it is not an automatic entitlement to replace any wetland with another."
         },
         {
           "text": "18",
@@ -696,13 +676,10 @@
     },
     {
       "type": "paragraph",
-      "text": "The Act also assigns remedial responsibility: specified harmful trimming can trigger restoration or mitigation obligations, with equivalent canopy within five years, an 80-percent one-year planted-tree survival requirement and designated responsible parties. Yet even a legally measurable canopy requirement is not a complete measure of ecosystem function.21 A rule can improve administrability while still selecting only part of what matters ecologically. The legal standard must be assessed against the functions it is expected to protect.",
-      "sourcePages": [
-        12
-      ],
+      "text": "The Act also assigns remedial responsibility: specified harmful trimming can trigger restoration or mitigation obligations, with equivalent canopy within five years, an 80-percent one-year planted-tree survival requirement, and designated responsible parties. Yet even a legally measurable canopy requirement is not a complete measure of ecosystem function.21 A rule can improve administrability while still selecting only part of what matters ecologically. The legal standard must be assessed against the functions it is expected to protect.",
       "runs": [
         {
-          "text": "The Act also assigns remedial responsibility: specified harmful trimming can trigger restoration or mitigation obligations, with equivalent canopy within five years, an 80-percent one-year planted-tree survival requirement and designated responsible parties. Yet even a legally measurable canopy requirement is not a complete measure of ecosystem function."
+          "text": "The Act also assigns remedial responsibility: specified harmful trimming can trigger restoration or mitigation obligations, with equivalent canopy within five years, an 80-percent one-year planted-tree survival requirement, and designated responsible parties. Yet even a legally measurable canopy requirement is not a complete measure of ecosystem function."
         },
         {
           "text": "21",
@@ -941,10 +918,7 @@
     },
     {
       "type": "paragraph",
-      "text": "Other original research identifies mechanisms beyond tree protection. A long observational study in Futian links nutrient enrichment to the reproductive output of locally exotic mangroves. Its measured endpoint and modeling approach do not establish the effects of any particular law, but they make catchment conditions a plausible part of the causal explanation.29 A separate study of mangrove expansion and shorebird conservation provides a habitat-sensitive decision framework rather than a presumption that planting is always beneficial.30 Together these sources support site diagnosis and competing-habitat assessment. They do not justify ranking legal failure above pollution, geomorphology or species selection as the dominant regional cause.",
-      "sourcePages": [
-        16
-      ],
+      "text": "Other original research identifies mechanisms beyond tree protection. A long observational study in Futian links nutrient enrichment to the reproductive output of locally exotic mangroves. Its measured endpoint and modeling approach do not establish the effects of any particular law, but they make catchment conditions a plausible part of the causal explanation.29 A separate study of mangrove expansion and shorebird conservation provides a habitat-sensitive decision framework rather than a presumption that planting is always beneficial.30 Together these sources support site diagnosis and competing-habitat assessment. They do not justify ranking legal failure above pollution, geomorphology, or species selection as the dominant regional cause.",
       "runs": [
         {
           "text": "Other original research identifies mechanisms beyond tree protection. A long observational study in Futian links nutrient enrichment to the reproductive output of locally exotic mangroves. Its measured endpoint and modeling approach do not establish the effects of any particular law, but they make catchment conditions a plausible part of the causal explanation."
@@ -963,7 +937,7 @@
           "footnoteRef": "30"
         },
         {
-          "text": " Together these sources support site diagnosis and competing-habitat assessment. They do not justify ranking legal failure above pollution, geomorphology or species selection as the dominant regional cause."
+          "text": " Together these sources support site diagnosis and competing-habitat assessment. They do not justify ranking legal failure above pollution, geomorphology, or species selection as the dominant regional cause."
         }
       ]
     },
@@ -1003,13 +977,10 @@
     },
     {
       "type": "paragraph",
-      "text": "The Hong Kong Bird Watching Society challenged, among other matters, the justification for the projected 45 percent functional enhancement, the comparability of the precedents invoked, the management arrangements and the implementation timetable. It also questioned whether existing management work should be counted as new enhancement.32 These are directly relevant objections about transfer, additionality and the timing of replacement. They remain an organization's submissions, not adjudicated findings that the approved assessment was unlawful or that the proposed compensation would necessarily fail.",
-      "sourcePages": [
-        17
-      ],
+      "text": "The Hong Kong Bird Watching Society challenged, among other matters, the justification for the projected 45 percent functional enhancement, the comparability of the precedents invoked, the management arrangements, and the implementation timetable. It also questioned whether existing management work should be counted as new enhancement.32 These are directly relevant objections about transfer, additionality, and the timing of replacement. They remain an organization's submissions, not adjudicated findings that the approved assessment was unlawful or that the proposed compensation would necessarily fail.",
       "runs": [
         {
-          "text": "The Hong Kong Bird Watching Society challenged, among other matters, the justification for the projected 45 percent functional enhancement, the comparability of the precedents invoked, the management arrangements and the implementation timetable. It also questioned whether existing management work should be counted as new enhancement."
+          "text": "The Hong Kong Bird Watching Society challenged, among other matters, the justification for the projected 45 percent functional enhancement, the comparability of the precedents invoked, the management arrangements, and the implementation timetable. It also questioned whether existing management work should be counted as new enhancement."
         },
         {
           "text": "32",
@@ -1017,7 +988,7 @@
           "footnoteRef": "32"
         },
         {
-          "text": " These are directly relevant objections about transfer, additionality and the timing of replacement. They remain an organization's submissions, not adjudicated findings that the approved assessment was unlawful or that the proposed compensation would necessarily fail."
+          "text": " These are directly relevant objections about transfer, additionality, and the timing of replacement. They remain an organization's submissions, not adjudicated findings that the approved assessment was unlawful or that the proposed compensation would necessarily fail."
         }
       ]
     },
@@ -1064,13 +1035,10 @@
     },
     {
       "type": "paragraph",
-      "text": "The applicable 1997 Technical Memorandum makes this distinction legally pertinent without prescribing a single timetable. Annex 16 paragraph 5.4.3 expresses a preference for mitigation before works and on site. Paragraph 5.4.5(g) requires the feasibility, reliability, design, timescale, monitoring, management and maintenance of off-site mitigation to be confirmed during the assessment.35 Operational details may be developed in a later management plan, but that is different from postponing the evidence needed to establish the feasibility of the compensation on which the assessment relies. Evaluating compliance would require the complete assessment and supporting record, not condition 9 in isolation.",
-      "sourcePages": [
-        18
-      ],
+      "text": "The applicable 1997 Technical Memorandum makes this distinction legally pertinent without prescribing a single timetable. Annex 16 paragraph 5.4.3 expresses a preference for mitigation before works and on site. Paragraph 5.4.5(g) requires the feasibility, reliability, design, timescale, monitoring, management, and maintenance of off-site mitigation to be confirmed during the assessment.35 Operational details may be developed in a later management plan, but that is different from postponing the evidence needed to establish the feasibility of the compensation on which the assessment relies. Evaluating compliance would require the complete assessment and supporting record, not condition 9 in isolation.",
       "runs": [
         {
-          "text": "The applicable 1997 Technical Memorandum makes this distinction legally pertinent without prescribing a single timetable. Annex 16 paragraph 5.4.3 expresses a preference for mitigation before works and on site. Paragraph 5.4.5(g) requires the feasibility, reliability, design, timescale, monitoring, management and maintenance of off-site mitigation to be confirmed during the assessment."
+          "text": "The applicable 1997 Technical Memorandum makes this distinction legally pertinent without prescribing a single timetable. Annex 16 paragraph 5.4.3 expresses a preference for mitigation before works and on site. Paragraph 5.4.5(g) requires the feasibility, reliability, design, timescale, monitoring, management, and maintenance of off-site mitigation to be confirmed during the assessment."
         },
         {
           "text": "35",
@@ -1097,22 +1065,16 @@
     },
     {
       "type": "paragraph",
-      "text": "The dispute also exposes an important limit of functional metrics. Moving from hectares to bird use or ecological capacity can improve analysis, but the new measure can itself be manipulated. A short-lived concentration of birds in stocked ponds need not demonstrate additional regional carrying capacity; it may represent redistribution. A composite index can obscure the loss of a habitat that serves a particular species or season. These are methodological risks to test, not findings that such manipulation occurred at San Tin. A functional standard is credible only when its endpoint, baseline, sampling effort and spatial interpretation are available for scrutiny.",
-      "sourcePages": [
-        19
-      ],
+      "text": "The dispute also exposes an important limit of functional metrics. Moving from hectares to bird use or ecological capacity can improve analysis, but the new measure can itself be manipulated. A short-lived concentration of birds in stocked ponds need not demonstrate additional regional carrying capacity; it may represent redistribution. A composite index can obscure the loss of a habitat that serves a particular species or season. These are methodological risks to test, not findings that such manipulation occurred at San Tin. A functional standard is credible only when its endpoint, baseline, sampling effort, and spatial interpretation are available for scrutiny.",
       "runs": [
         {
-          "text": "The dispute also exposes an important limit of functional metrics. Moving from hectares to bird use or ecological capacity can improve analysis, but the new measure can itself be manipulated. A short-lived concentration of birds in stocked ponds need not demonstrate additional regional carrying capacity; it may represent redistribution. A composite index can obscure the loss of a habitat that serves a particular species or season. These are methodological risks to test, not findings that such manipulation occurred at San Tin. A functional standard is credible only when its endpoint, baseline, sampling effort and spatial interpretation are available for scrutiny."
+          "text": "The dispute also exposes an important limit of functional metrics. Moving from hectares to bird use or ecological capacity can improve analysis, but the new measure can itself be manipulated. A short-lived concentration of birds in stocked ponds need not demonstrate additional regional carrying capacity; it may represent redistribution. A composite index can obscure the loss of a habitat that serves a particular species or season. These are methodological risks to test, not findings that such manipulation occurred at San Tin. A functional standard is credible only when its endpoint, baseline, sampling effort, and spatial interpretation are available for scrutiny."
         }
       ]
     },
     {
       "type": "paragraph",
-      "text": "Additionality requires separate scrutiny. The American rule permits mitigation credits on public land only for functions above those supplied by public programs already planned or in place.36 Work that would occur as ordinary reserve management cannot automatically be credited as compensation for a new loss. Yet not all work within an existing reserve is necessarily nonadditional. Extra funding could support a demonstrably expanded intervention beyond the funded baseline. The authority should distinguish existing obligations, their actual financing, the proposed incremental work and the risk of displacing other conservation expenditure. Otherwise the same improvement can be counted twice without anyone making an explicitly false statement.",
-      "sourcePages": [
-        19
-      ],
+      "text": "Additionality requires separate scrutiny. The American rule permits mitigation credits on public land only for functions above those supplied by public programs already planned or in place.36 Work that would occur as ordinary reserve management cannot automatically be credited as compensation for a new loss. Yet not all work within an existing reserve is necessarily nonadditional. Extra funding could support a demonstrably expanded intervention beyond the funded baseline. The authority should distinguish existing obligations, their actual financing, the proposed incremental work, and the risk of displacing other conservation expenditure. Otherwise the same improvement can be counted twice without anyone making an explicitly false statement.",
       "runs": [
         {
           "text": "Additionality requires separate scrutiny. The American rule permits mitigation credits on public land only for functions above those supplied by public programs already planned or in place."
@@ -1123,7 +1085,7 @@
           "footnoteRef": "36"
         },
         {
-          "text": " Work that would occur as ordinary reserve management cannot automatically be credited as compensation for a new loss. Yet not all work within an existing reserve is necessarily nonadditional. Extra funding could support a demonstrably expanded intervention beyond the funded baseline. The authority should distinguish existing obligations, their actual financing, the proposed incremental work and the risk of displacing other conservation expenditure. Otherwise the same improvement can be counted twice without anyone making an explicitly false statement."
+          "text": " Work that would occur as ordinary reserve management cannot automatically be credited as compensation for a new loss. Yet not all work within an existing reserve is necessarily nonadditional. Extra funding could support a demonstrably expanded intervention beyond the funded baseline. The authority should distinguish existing obligations, their actual financing, the proposed incremental work, and the risk of displacing other conservation expenditure. Otherwise the same improvement can be counted twice without anyone making an explicitly false statement."
         }
       ]
     },
@@ -1150,6 +1112,15 @@
       "runs": [
         {
           "text": "VI. Conditions for accountable restoration"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "This Part proposes five conditions for accountable restoration. Authorities should use existing instruments and specify the decisions they govern, establish a defensible baseline, separate engineering completion from ecological acceptance, allocate correction and residual risk in advance, and give affected people a role tied to evidence and decisions.",
+      "runs": [
+        {
+          "text": "This Part proposes five conditions for accountable restoration. Authorities should use existing instruments and specify the decisions they govern, establish a defensible baseline, separate engineering completion from ecological acceptance, allocate correction and residual risk in advance, and give affected people a role tied to evidence and decisions."
         }
       ]
     },
@@ -1182,13 +1153,10 @@
     },
     {
       "type": "paragraph",
-      "text": "On the mainland, the Wetland Protection Law's restoration procedures and Shenzhen's acceptance and correction provisions provide starting points. In Hong Kong, assessment approvals, environmental permits and enforceable project commitments provide different routes. In Macao, the authority and legal force of a proposed term must be identified in the applicable authorization or public contracting arrangement. An administrative guideline cannot silently create a new offence, and an agency cannot impose a bond or perpetual obligation without legal authority. Where existing authority is inadequate, the proposed change should identify the missing power narrowly rather than demand comprehensive new legislation by default.",
-      "sourcePages": [
-        20
-      ],
+      "text": "On the mainland, the Wetland Protection Law's restoration procedures and Shenzhen's acceptance and correction provisions provide starting points. In Hong Kong, assessment approvals, environmental permits, and enforceable project commitments provide different routes. In Macao, the authority and legal force of a proposed term must be identified in the applicable authorization or public contracting arrangement. An administrative guideline cannot silently create a new offense, and an agency cannot impose a bond or perpetual obligation without legal authority. Where existing authority is inadequate, the proposed change should identify the missing power narrowly rather than demand comprehensive new legislation by default.",
       "runs": [
         {
-          "text": "On the mainland, the Wetland Protection Law's restoration procedures and Shenzhen's acceptance and correction provisions provide starting points. In Hong Kong, assessment approvals, environmental permits and enforceable project commitments provide different routes. In Macao, the authority and legal force of a proposed term must be identified in the applicable authorization or public contracting arrangement. An administrative guideline cannot silently create a new offence, and an agency cannot impose a bond or perpetual obligation without legal authority. Where existing authority is inadequate, the proposed change should identify the missing power narrowly rather than demand comprehensive new legislation by default."
+          "text": "On the mainland, the Wetland Protection Law's restoration procedures and Shenzhen's acceptance and correction provisions provide starting points. In Hong Kong, assessment approvals, environmental permits, and enforceable project commitments provide different routes. In Macao, the authority and legal force of a proposed term must be identified in the applicable authorization or public contracting arrangement. An administrative guideline cannot silently create a new offense, and an agency cannot impose a bond or perpetual obligation without legal authority. Where existing authority is inadequate, the proposed change should identify the missing power narrowly rather than demand comprehensive new legislation by default."
         }
       ]
     },
@@ -1242,13 +1210,10 @@
     },
     {
       "type": "paragraph",
-      "text": "The diagnostic record should identify tidal restriction, elevation and datum, sediment and water quality, propagule supply, species composition and the surrounding habitat mosaic. It should consider future sea-level and sediment changes and the space available for habitat migration, rather than treating the reference condition as permanently stationary. It should also identify who controls embankments, drainage structures and access routes. A contractor cannot be held responsible for restoring tidal exchange if the design depends on a gate that another authority has not agreed to operate. Conversely, a planting contract should not be accepted as adequate merely because it is easier to procure than resolving a drainage constraint.",
-      "sourcePages": [
-        21
-      ],
+      "text": "The diagnostic record should identify tidal restriction, elevation and datum, sediment and water quality, propagule supply, species composition, and the surrounding habitat mosaic. It should consider future sea-level and sediment changes and the space available for habitat migration, rather than treating the reference condition as permanently stationary. It should also identify who controls embankments, drainage structures, and access routes. A contractor cannot be held responsible for restoring tidal exchange if the design depends on a gate that another authority has not agreed to operate. Conversely, a planting contract should not be accepted as adequate merely because it is easier to procure than resolving a drainage constraint.",
       "runs": [
         {
-          "text": "The diagnostic record should identify tidal restriction, elevation and datum, sediment and water quality, propagule supply, species composition and the surrounding habitat mosaic. It should consider future sea-level and sediment changes and the space available for habitat migration, rather than treating the reference condition as permanently stationary. It should also identify who controls embankments, drainage structures and access routes. A contractor cannot be held responsible for restoring tidal exchange if the design depends on a gate that another authority has not agreed to operate. Conversely, a planting contract should not be accepted as adequate merely because it is easier to procure than resolving a drainage constraint."
+          "text": "The diagnostic record should identify tidal restriction, elevation and datum, sediment and water quality, propagule supply, species composition, and the surrounding habitat mosaic. It should consider future sea-level and sediment changes and the space available for habitat migration, rather than treating the reference condition as permanently stationary. It should also identify who controls embankments, drainage structures, and access routes. A contractor cannot be held responsible for restoring tidal exchange if the design depends on a gate that another authority has not agreed to operate. Conversely, a planting contract should not be accepted as adequate merely because it is easier to procure than resolving a drainage constraint."
         }
       ]
     },
@@ -1281,13 +1246,10 @@
     },
     {
       "type": "paragraph",
-      "text": "The schedule should distinguish controllable construction tasks from ecological trajectories. Excavation to a specified grade can be checked at completion. Recruitment, community composition and habitat use require observation over time. Both matter, but they should not trigger the same declaration of success. Proposed standards should specify a reference condition, a plausible range rather than false numerical precision, observation frequency, seasonal coverage and the authority entitled to approve changes.",
-      "sourcePages": [
-        22
-      ],
+      "text": "The schedule should distinguish controllable construction tasks from ecological trajectories. Excavation to a specified grade can be checked at completion. Recruitment, community composition, and habitat use require observation over time. Both matter, but they should not trigger the same declaration of success. Proposed standards should specify a reference condition, a plausible range rather than false numerical precision, observation frequency, seasonal coverage, and the authority entitled to approve changes.",
       "runs": [
         {
-          "text": "The schedule should distinguish controllable construction tasks from ecological trajectories. Excavation to a specified grade can be checked at completion. Recruitment, community composition and habitat use require observation over time. Both matter, but they should not trigger the same declaration of success. Proposed standards should specify a reference condition, a plausible range rather than false numerical precision, observation frequency, seasonal coverage and the authority entitled to approve changes."
+          "text": "The schedule should distinguish controllable construction tasks from ecological trajectories. Excavation to a specified grade can be checked at completion. Recruitment, community composition, and habitat use require observation over time. Both matter, but they should not trigger the same declaration of success. Proposed standards should specify a reference condition, a plausible range rather than false numerical precision, observation frequency, seasonal coverage, and the authority entitled to approve changes."
         }
       ]
     },
@@ -1305,26 +1267,19 @@
     },
     {
       "type": "paragraph",
-      "text": "Funding arrangements should reflect this distinction. A contractor should receive payment for properly completed and verified work, while an identified manager retains a funded obligation to monitor and correct ecological underperformance. Withholding all payment until full ecosystem maturity would transfer uncontrollable risk to the contractor and could exclude capable small providers. Paying everything at construction completion could leave no practical means to finance correction. A proportionate retention, funded maintenance account or public budget commitment can address the gap, depending on legal authority and project risk.",
-      "sourcePages": [
-        22,
-        23
-      ],
+      "text": "Funding arrangements should reflect this distinction. A contractor should receive payment for properly completed and verified work, while an identified manager retains a funded obligation to monitor and correct ecological underperformance. Withholding all payment until full ecosystem maturity would transfer uncontrollable risk to the contractor and could exclude capable small providers. Paying everything at construction completion could leave no practical means to finance correction. A proportionate retention, funded maintenance account, or public budget commitment can address the gap, depending on legal authority and project risk.",
       "runs": [
         {
-          "text": "Funding arrangements should reflect this distinction. A contractor should receive payment for properly completed and verified work, while an identified manager retains a funded obligation to monitor and correct ecological underperformance. Withholding all payment until full ecosystem maturity would transfer uncontrollable risk to the contractor and could exclude capable small providers. Paying everything at construction completion could leave no practical means to finance correction. A proportionate retention, funded maintenance account or public budget commitment can address the gap, depending on legal authority and project risk."
+          "text": "Funding arrangements should reflect this distinction. A contractor should receive payment for properly completed and verified work, while an identified manager retains a funded obligation to monitor and correct ecological underperformance. Withholding all payment until full ecosystem maturity would transfer uncontrollable risk to the contractor and could exclude capable small providers. Paying everything at construction completion could leave no practical means to finance correction. A proportionate retention, funded maintenance account, or public budget commitment can address the gap, depending on legal authority and project risk."
         }
       ]
     },
     {
       "type": "paragraph",
-      "text": "Where a function supports permission for new habitat loss, the consequences should be more stringent. The authority should identify which functions must be available before each damaging phase and which may reasonably recover later under an adequately supported interim arrangement. Some functions may be replaceable only slowly; others may not be replaceable in the relevant location at all. In those cases, the response may be a smaller development footprint, a different sequence, an alternative site or refusal to count the proposed compensation. A promise to plant more trees elsewhere does not answer every loss.",
-      "sourcePages": [
-        23
-      ],
+      "text": "Where a function supports permission for new habitat loss, the consequences should be more stringent. The authority should identify which functions must be available before each damaging phase and which may reasonably recover later under an adequately supported interim arrangement. Some functions may be replaceable only slowly; others may not be replaceable in the relevant location at all. In those cases, the response may be a smaller development footprint, a different sequence, an alternative site, or refusal to count the proposed compensation. A promise to plant more trees elsewhere does not answer every loss.",
       "runs": [
         {
-          "text": "Where a function supports permission for new habitat loss, the consequences should be more stringent. The authority should identify which functions must be available before each damaging phase and which may reasonably recover later under an adequately supported interim arrangement. Some functions may be replaceable only slowly; others may not be replaceable in the relevant location at all. In those cases, the response may be a smaller development footprint, a different sequence, an alternative site or refusal to count the proposed compensation. A promise to plant more trees elsewhere does not answer every loss."
+          "text": "Where a function supports permission for new habitat loss, the consequences should be more stringent. The authority should identify which functions must be available before each damaging phase and which may reasonably recover later under an adequately supported interim arrangement. Some functions may be replaceable only slowly; others may not be replaceable in the relevant location at all. In those cases, the response may be a smaller development footprint, a different sequence, an alternative site, or refusal to count the proposed compensation. A promise to plant more trees elsewhere does not answer every loss."
         }
       ]
     },
@@ -1357,26 +1312,19 @@
     },
     {
       "type": "paragraph",
-      "text": "A useful monitoring report must be capable of changing what happens next. The schedule should therefore specify who reviews a failed milestone, how quickly the cause is investigated, which corrective options are available and what funding pays for them. A blocked culvert may justify maintenance; unsuitable site selection may require redesign; evidence of habitat conflict may require abandoning an intended planting area. Replanting by default can perpetuate the original diagnostic error.",
-      "sourcePages": [
-        23
-      ],
+      "text": "A useful monitoring report must be capable of changing what happens next. The schedule should therefore specify who reviews a failed milestone, how quickly the cause is investigated, which corrective options are available, and what funding pays for them. A blocked culvert may justify maintenance; unsuitable site selection may require redesign; evidence of habitat conflict may require abandoning an intended planting area. Replanting by default can perpetuate the original diagnostic error.",
       "runs": [
         {
-          "text": "A useful monitoring report must be capable of changing what happens next. The schedule should therefore specify who reviews a failed milestone, how quickly the cause is investigated, which corrective options are available and what funding pays for them. A blocked culvert may justify maintenance; unsuitable site selection may require redesign; evidence of habitat conflict may require abandoning an intended planting area. Replanting by default can perpetuate the original diagnostic error."
+          "text": "A useful monitoring report must be capable of changing what happens next. The schedule should therefore specify who reviews a failed milestone, how quickly the cause is investigated, which corrective options are available, and what funding pays for them. A blocked culvert may justify maintenance; unsuitable site selection may require redesign; evidence of habitat conflict may require abandoning an intended planting area. Replanting by default can perpetuate the original diagnostic error."
         }
       ]
     },
     {
       "type": "paragraph",
-      "text": "Responsibility should distinguish negligent or noncompliant conduct from agreed ecological uncertainty and exceptional events. A storm should not automatically absolve a contractor whose drainage works were defective, but neither should a contractor insure all future climate change. The contract and approval should identify maintenance duties, event reporting, review procedures, the treatment of external causes and the conditions for release. The American rule's adaptive-management and long-term financing provisions illustrate how correction can be anticipated without treating the initial design as infallible.38",
-      "sourcePages": [
-        23,
-        24
-      ],
+      "text": "Responsibility should distinguish negligent or noncompliant conduct from agreed ecological uncertainty and exceptional events. A storm should not automatically absolve a contractor whose drainage works were defective, but neither should a contractor insure all future climate change. The contract and approval should identify maintenance duties, event reporting, review procedures, the treatment of external causes, and the conditions for release. The American rule's adaptive-management and long-term financing provisions illustrate how correction can be anticipated without treating the initial design as infallible.38",
       "runs": [
         {
-          "text": "Responsibility should distinguish negligent or noncompliant conduct from agreed ecological uncertainty and exceptional events. A storm should not automatically absolve a contractor whose drainage works were defective, but neither should a contractor insure all future climate change. The contract and approval should identify maintenance duties, event reporting, review procedures, the treatment of external causes and the conditions for release. The American rule's adaptive-management and long-term financing provisions illustrate how correction can be anticipated without treating the initial design as infallible."
+          "text": "Responsibility should distinguish negligent or noncompliant conduct from agreed ecological uncertainty and exceptional events. A storm should not automatically absolve a contractor whose drainage works were defective, but neither should a contractor insure all future climate change. The contract and approval should identify maintenance duties, event reporting, review procedures, the treatment of external causes, and the conditions for release. The American rule's adaptive-management and long-term financing provisions illustrate how correction can be anticipated without treating the initial design as infallible."
         },
         {
           "text": "38",
@@ -1414,13 +1362,10 @@
     },
     {
       "type": "paragraph",
-      "text": "Participation should begin before restoration determines land and water use. Pond operators, tenants, neighboring residents, conservation managers and people relying on flood-control structures may bear different costs. A landowner's agreement does not establish that every livelihood or access issue has been resolved. Mainland law's provision for compensation for damage to lawful rights and the action plan's differentiated treatment of legal and illegal ponds recognize that ecological policy cannot simply erase these interests.39",
-      "sourcePages": [
-        24
-      ],
+      "text": "Participation should begin before restoration determines land and water use. Pond operators, tenants, neighboring residents, conservation managers, and people relying on flood-control structures may bear different costs. A landowner's agreement does not establish that every livelihood or access issue has been resolved. Mainland law's provision for compensation for damage to lawful rights and the action plan's differentiated treatment of legal and illegal ponds recognize that ecological policy cannot simply erase these interests.39",
       "runs": [
         {
-          "text": "Participation should begin before restoration determines land and water use. Pond operators, tenants, neighboring residents, conservation managers and people relying on flood-control structures may bear different costs. A landowner's agreement does not establish that every livelihood or access issue has been resolved. Mainland law's provision for compensation for damage to lawful rights and the action plan's differentiated treatment of legal and illegal ponds recognize that ecological policy cannot simply erase these interests."
+          "text": "Participation should begin before restoration determines land and water use. Pond operators, tenants, neighboring residents, conservation managers, and people relying on flood-control structures may bear different costs. A landowner's agreement does not establish that every livelihood or access issue has been resolved. Mainland law's provision for compensation for damage to lawful rights and the action plan's differentiated treatment of legal and illegal ponds recognize that ecological policy cannot simply erase these interests."
         },
         {
           "text": "39",
@@ -1443,13 +1388,10 @@
     },
     {
       "type": "paragraph",
-      "text": "Cross-border cooperation should identify a task and the powers necessary to complete it. Deep Bay bird monitoring spans the boundary, and ecological research uses data from both sides.40 A channel alteration or nutrient problem with cross-border effects may require advance notification, compatible measurements, a shared baseline, and an agreement specifying which authority responds to an exceedance. Each domestic agency would retain its own powers. Information sharing becomes useful when it supports an identified response.",
-      "sourcePages": [
-        25
-      ],
+      "text": "Cross-border cooperation should identify a task and the powers necessary to complete it; information sharing becomes useful when it supports an identified response. Deep Bay bird monitoring spans the boundary, and ecological research uses data from both sides.40 A channel alteration or nutrient problem with cross-border effects may require advance notification, compatible measurements, a shared baseline, and an agreement specifying which authority responds to an exceedance. Each domestic agency would retain its own powers.",
       "runs": [
         {
-          "text": "Cross-border cooperation should identify a task and the powers necessary to complete it. Deep Bay bird monitoring spans the boundary, and ecological research uses data from both sides."
+          "text": "Cross-border cooperation should identify a task and the powers necessary to complete it; information sharing becomes useful when it supports an identified response. Deep Bay bird monitoring spans the boundary, and ecological research uses data from both sides."
         },
         {
           "text": "40",
@@ -1457,7 +1399,7 @@
           "footnoteRef": "40"
         },
         {
-          "text": " A channel alteration or nutrient problem with cross-border effects may require advance notification, compatible measurements, a shared baseline, and an agreement specifying which authority responds to an exceedance. Each domestic agency would retain its own powers. Information sharing becomes useful when it supports an identified response."
+          "text": " A channel alteration or nutrient problem with cross-border effects may require advance notification, compatible measurements, a shared baseline, and an agreement specifying which authority responds to an exceedance. Each domestic agency would retain its own powers."
         }
       ]
     },
@@ -1489,14 +1431,10 @@
     },
     {
       "type": "paragraph",
-      "text": "A further objection is redundancy. The national Wetland Protection Law, Shenzhen's assessment provisions, and San Tin's approval conditions already require substantial planning and monitoring. That objection confines the proposal. Reform should specify how existing duties affect approval, acceptance, and continuing liability instead of merely requiring another report. At San Tin, for example, the relevant issue concerns what the construction-linked timetable permits before replacement functions are demonstrated. The quality of the eventual plan must be assessed against that reliance.",
-      "sourcePages": [
-        25,
-        26
-      ],
+      "text": "A further objection is redundancy. The national Wetland Protection Law, Shenzhen's assessment provisions, and San Tin's approval conditions already require substantial planning and monitoring. That objection shapes the proposal. Reform should specify how existing duties affect approval, acceptance, and continuing liability instead of merely requiring another report. At San Tin, for example, the relevant issue concerns what the construction-linked timetable permits before replacement functions are demonstrated. The quality of the eventual plan must be assessed against that reliance.",
       "runs": [
         {
-          "text": "A further objection is redundancy. The national Wetland Protection Law, Shenzhen's assessment provisions, and San Tin's approval conditions already require substantial planning and monitoring. That objection confines the proposal. Reform should specify how existing duties affect approval, acceptance, and continuing liability instead of merely requiring another report. At San Tin, for example, the relevant issue concerns what the construction-linked timetable permits before replacement functions are demonstrated. The quality of the eventual plan must be assessed against that reliance."
+          "text": "A further objection is redundancy. The national Wetland Protection Law, Shenzhen's assessment provisions, and San Tin's approval conditions already require substantial planning and monitoring. That objection shapes the proposal. Reform should specify how existing duties affect approval, acceptance, and continuing liability instead of merely requiring another report. At San Tin, for example, the relevant issue concerns what the construction-linked timetable permits before replacement functions are demonstrated. The quality of the eventual plan must be assessed against that reliance."
         }
       ]
     },
@@ -1514,10 +1452,7 @@
     },
     {
       "type": "paragraph",
-      "text": "Even well-drafted conditions can remain unimplemented. A 2005 Government Accountability Office review of selected Corps districts found substantial weaknesses in compensatory-mitigation monitoring.41 The review preceded the 2008 rule and does not measure Florida's current compliance. It demonstrates why detailed requirements need a responsible reviewer, sustained resources, and consequences for failure. The proposed commitments cannot eliminate adverse political incentives; they can make departures and unresolved responsibilities easier to identify.",
-      "sourcePages": [
-        26
-      ],
+      "text": "Even well-drafted conditions can remain unimplemented. A 2005 Government Accountability Office review of selected Corps districts found substantial weaknesses in compensatory-mitigation monitoring.41 The review preceded the 2008 rule and does not measure Florida's current compliance. It demonstrates why detailed requirements need a responsible reviewer, sustained resources, and consequences for failure. The proposed commitments can make departures and unresolved responsibilities easier to identify, even where adverse political incentives persist.",
       "runs": [
         {
           "text": "Even well-drafted conditions can remain unimplemented. A 2005 Government Accountability Office review of selected Corps districts found substantial weaknesses in compensatory-mitigation monitoring."
@@ -1528,7 +1463,7 @@
           "footnoteRef": "41"
         },
         {
-          "text": " The review preceded the 2008 rule and does not measure Florida's current compliance. It demonstrates why detailed requirements need a responsible reviewer, sustained resources, and consequences for failure. The proposed commitments cannot eliminate adverse political incentives; they can make departures and unresolved responsibilities easier to identify."
+          "text": " The review preceded the 2008 rule and does not measure Florida's current compliance. It demonstrates why detailed requirements need a responsible reviewer, sustained resources, and consequences for failure. The proposed commitments can make departures and unresolved responsibilities easier to identify, even where adverse political incentives persist."
         }
       ]
     },
@@ -1573,13 +1508,10 @@
     },
     {
       "type": "paragraph",
-      "text": "Mainland China, Shenzhen, and Hong Kong already recognize water regimes, habitat function, monitoring, and correction. Macao requires its own account of the instruments and resources supporting those commitments. The reform question is when restoration is sufficiently credible to influence a legal decision. Independent repair may justify experimentation; compensation for new loss requires an additional account of replacement, timing, additionality, and failure.",
-      "sourcePages": [
-        27
-      ],
+      "text": "Mainland China, Shenzhen, and Hong Kong already recognize water regimes, habitat function, monitoring, and correction. Macao requires its own account of the instruments and resources supporting those commitments. The reform question is when restoration is sufficiently credible to influence a legal decision. This Article answers it with project conditions that connect a defensible baseline and locally justified ecological objectives to staged authorization, funded correction, and continuing responsibility. Independent repair may justify experimentation; compensation for new loss requires an additional account of replacement, timing, additionality, and failure.",
       "runs": [
         {
-          "text": "Mainland China, Shenzhen, and Hong Kong already recognize water regimes, habitat function, monitoring, and correction. Macao requires its own account of the instruments and resources supporting those commitments. The reform question is when restoration is sufficiently credible to influence a legal decision. Independent repair may justify experimentation; compensation for new loss requires an additional account of replacement, timing, additionality, and failure."
+          "text": "Mainland China, Shenzhen, and Hong Kong already recognize water regimes, habitat function, monitoring, and correction. Macao requires its own account of the instruments and resources supporting those commitments. The reform question is when restoration is sufficiently credible to influence a legal decision. This Article answers it with project conditions that connect a defensible baseline and locally justified ecological objectives to staged authorization, funded correction, and continuing responsibility. Independent repair may justify experimentation; compensation for new loss requires an additional account of replacement, timing, additionality, and failure."
         }
       ]
     },

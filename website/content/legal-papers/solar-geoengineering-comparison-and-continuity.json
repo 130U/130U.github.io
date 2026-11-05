@@ -7,13 +7,13 @@
   "abstract": [
     {
       "type": "paragraph",
-      "text": "Stratospheric aerosol injection poses a problem that identifying competing risks cannot resolve: who may choose among those risks for people who cannot escape the resulting climate? This Article argues that risk-risk analysis should support a comparative justification duty, rather than operate as a substitute for authorization. A deployment proponent should have to defend its policy comparator, expose distributional assumptions to challenge, and establish responsibility for both continued operation and eventual withdrawal. The argument does not depend on proving that solar geoengineering necessarily creates geographical losers. Even favorable climate simulations cannot settle the welfare metrics, acceptable inequalities, or allocation of authority through which their results acquire policy significance. The Article develops a further implication of termination risk: periodic authorization must permit political control to change without automatically requiring abrupt physical cessation. It distinguishes this proposed architecture from existing international law and from permission for limited research. The resulting position supports governed inquiry and restraint on deployment until comparative review and continuity obligations become institutionally credible, while requiring continuing scrutiny of the harms of nondeployment.",
+      "text": "Stratospheric aerosol injection poses a problem that identifying competing risks cannot resolve: who may choose among those risks for people who cannot escape the resulting climate? This Article argues that risk-risk analysis should support a comparative justification duty, rather than operate as a substitute for authorization. A deployment proponent should have to defend its policy comparator, expose distributional assumptions to challenge, and establish responsibility for both continued operation and eventual withdrawal. The argument holds whether or not solar geoengineering necessarily creates geographical losers. Even favorable climate simulations cannot settle the welfare metrics, acceptable inequalities, or allocation of authority through which their results acquire policy significance. The Article also develops a continuity duty from a further implication of termination risk: periodic authorization must permit political control to change without automatically requiring abrupt physical cessation. It distinguishes this proposed architecture from existing international law and from permission for limited research. The resulting position supports governed inquiry and restraint on deployment until comparative review and continuity obligations become institutionally credible, while requiring continuing scrutiny of the harms of nondeployment.",
       "sourcePages": [
         1
       ],
       "runs": [
         {
-          "text": "Stratospheric aerosol injection poses a problem that identifying competing risks cannot resolve: who may choose among those risks for people who cannot escape the resulting climate? This Article argues that risk-risk analysis should support a comparative justification duty, rather than operate as a substitute for authorization. A deployment proponent should have to defend its policy comparator, expose distributional assumptions to challenge, and establish responsibility for both continued operation and eventual withdrawal. The argument does not depend on proving that solar geoengineering necessarily creates geographical losers. Even favorable climate simulations cannot settle the welfare metrics, acceptable inequalities, or allocation of authority through which their results acquire policy significance. The Article develops a further implication of termination risk: periodic authorization must permit political control to change without automatically requiring abrupt physical cessation. It distinguishes this proposed architecture from existing international law and from permission for limited research. The resulting position supports governed inquiry and restraint on deployment until comparative review and continuity obligations become institutionally credible, while requiring continuing scrutiny of the harms of nondeployment."
+          "text": "Stratospheric aerosol injection poses a problem that identifying competing risks cannot resolve: who may choose among those risks for people who cannot escape the resulting climate? This Article argues that risk-risk analysis should support a comparative justification duty, rather than operate as a substitute for authorization. A deployment proponent should have to defend its policy comparator, expose distributional assumptions to challenge, and establish responsibility for both continued operation and eventual withdrawal. The argument holds whether or not solar geoengineering necessarily creates geographical losers. Even favorable climate simulations cannot settle the welfare metrics, acceptable inequalities, or allocation of authority through which their results acquire policy significance. The Article also develops a continuity duty from a further implication of termination risk: periodic authorization must permit political control to change without automatically requiring abrupt physical cessation. It distinguishes this proposed architecture from existing international law and from permission for limited research. The resulting position supports governed inquiry and restraint on deployment until comparative review and continuity obligations become institutionally credible, while requiring continuing scrutiny of the harms of nondeployment."
         }
       ]
     }
@@ -89,10 +89,7 @@
     },
     {
       "type": "paragraph",
-      "text": "This Article defends a comparative justification duty: before climate-affecting deployment, proponents should be required to defend a contestable comparison of feasible alternatives and establish institutions capable of answering to those exposed. The duty should extend beyond initial permission. When sustained cooling makes abrupt cessation dangerous, proponents must demonstrate credible arrangements for continuity, succession, and eventual withdrawal. Otherwise, an initial intervention could manufacture the very dependence later invoked to insulate its operators from political challenge.",
-      "sourcePages": [
-        3
-      ],
+      "text": "This Article defends a comparative justification duty: before climate-affecting deployment, proponents should be required to defend a contestable comparison of feasible alternatives and establish institutions capable of answering to those exposed. The duty should extend beyond initial permission through a companion continuity duty. When sustained cooling makes abrupt cessation dangerous, proponents must demonstrate credible arrangements for continuity, succession, and eventual withdrawal. Otherwise, an initial intervention could manufacture the very dependence later invoked to insulate its operators from political challenge.",
       "runs": [
         {
           "text": "This Article defends a "
@@ -102,7 +99,14 @@
           "italic": true
         },
         {
-          "text": ": before climate-affecting deployment, proponents should be required to defend a contestable comparison of feasible alternatives and establish institutions capable of answering to those exposed. The duty should extend beyond initial permission. When sustained cooling makes abrupt cessation dangerous, proponents must demonstrate credible arrangements for continuity, succession, and eventual withdrawal. Otherwise, an initial intervention could manufacture the very dependence later invoked to insulate its operators from political challenge."
+          "text": ": before climate-affecting deployment, proponents should be required to defend a contestable comparison of feasible alternatives and establish institutions capable of answering to those exposed. The duty should extend beyond initial permission through a companion "
+        },
+        {
+          "text": "continuity duty",
+          "italic": true
+        },
+        {
+          "text": ". When sustained cooling makes abrupt cessation dangerous, proponents must demonstrate credible arrangements for continuity, succession, and eventual withdrawal. Otherwise, an initial intervention could manufacture the very dependence later invoked to insulate its operators from political challenge."
         }
       ]
     },
@@ -120,13 +124,19 @@
     },
     {
       "type": "paragraph",
-      "text": "The argument connects the selection of comparators to procedural rights, and termination risk to a separation between political and physical exit. Existing international law provides relevant constraints but does not already establish the proposed regime. A brief outer-space comparison identifies the limits of transferring that argument to another domain.",
-      "sourcePages": [
-        3
-      ],
+      "text": "This Article proposes two legal duties and the institutional design that would give them effect. The comparative justification duty connects the selection of comparators to procedural rights. It separates a reference climate, a future without SAI, and feasible policy portfolios as distinct comparators. It then requires proponents to defend their alternatives, disclose distributional choices, and answer substantiated objections. Independently selected representatives of exposed constituencies must hold collective power to demand redesign or withhold approval. The continuity duty connects termination risk to a separation between political and physical exit. It distinguishes program control, operator choice, and the cooling trajectory. It specifies bounded interim succession, independent monitoring, transition finance, and gradual withdrawal, so that political authority can change without automatically triggering abrupt physical cessation. The Article also formulates a priority rule for serious threats to subsistence and survival, and it proposes scrutiny of research based on expected effects and cumulative scale.",
       "runs": [
         {
-          "text": "The argument connects the selection of comparators to procedural rights, and termination risk to a separation between political and physical exit. Existing international law provides relevant constraints but does not already establish the proposed regime. A brief outer-space comparison identifies the limits of transferring that argument to another domain."
+          "text": "This Article proposes two legal duties and the institutional design that would give them effect. The comparative justification duty connects the selection of comparators to procedural rights. It separates a reference climate, a future without SAI, and feasible policy portfolios as distinct comparators. It then requires proponents to defend their alternatives, disclose distributional choices, and answer substantiated objections. Independently selected representatives of exposed constituencies must hold collective power to demand redesign or withhold approval. The continuity duty connects termination risk to a separation between political and physical exit. It distinguishes program control, operator choice, and the cooling trajectory. It specifies bounded interim succession, independent monitoring, transition finance, and gradual withdrawal, so that political authority can change without automatically triggering abrupt physical cessation. The Article also formulates a priority rule for serious threats to subsistence and survival, and it proposes scrutiny of research based on expected effects and cumulative scale."
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "Part II sets out what risk-risk analysis can establish and the limits of its categories and causal accounting. Part III separates the three baselines, takes the favorable scientific evidence seriously, and distinguishes uncertainty from value judgments. Part IV draws the line between research and deployment and shows that existing international law provides relevant constraints but does not already establish the proposed regime. Part V develops the comparative justification duty: who must justify what, how challenge becomes consequential, and what responsibility survives uncertainty. Part VI identifies the exit paradox and develops the continuity duty in response. Part VII answers the objection that restraint privileges the damaging status quo and the opposite objection to research permission, and a brief outer-space comparison identifies the limits of transferring the argument to another domain. Part VIII concludes.",
+      "runs": [
+        {
+          "text": "Part II sets out what risk-risk analysis can establish and the limits of its categories and causal accounting. Part III separates the three baselines, takes the favorable scientific evidence seriously, and distinguishes uncertainty from value judgments. Part IV draws the line between research and deployment and shows that existing international law provides relevant constraints but does not already establish the proposed regime. Part V develops the comparative justification duty: who must justify what, how challenge becomes consequential, and what responsibility survives uncertainty. Part VI identifies the exit paradox and develops the continuity duty in response. Part VII answers the objection that restraint privileges the damaging status quo and the opposite objection to research permission, and a brief outer-space comparison identifies the limits of transferring the argument to another domain. Part VIII concludes."
         }
       ]
     },
@@ -226,13 +236,10 @@
     },
     {
       "type": "paragraph",
-      "text": "The proposed duty gives that concern institutional consequences. People represented in a model should have a route to challenge the comparator, impact measures, and treatment of their interests. This is more demanding than inviting comments after investigators have selected the policy options. It also avoids claiming that participation will necessarily reveal the uniquely correct policy. Reasonable participants may disagree after all relevant evidence is considered. Risk analysis can discipline that disagreement without eliminating the need for legitimate decision rules.",
-      "sourcePages": [
-        5
-      ],
+      "text": "The proposed duty gives that concern institutional consequences. People represented in a model should have a route to challenge the comparator, impact measures, and treatment of their interests. This is more demanding than inviting comments after investigators have selected the policy options. Reasonable participants may disagree after all relevant evidence is considered. Risk analysis can discipline that disagreement without eliminating the need for legitimate decision rules.",
       "runs": [
         {
-          "text": "The proposed duty gives that concern institutional consequences. People represented in a model should have a route to challenge the comparator, impact measures, and treatment of their interests. This is more demanding than inviting comments after investigators have selected the policy options. It also avoids claiming that participation will necessarily reveal the uniquely correct policy. Reasonable participants may disagree after all relevant evidence is considered. Risk analysis can discipline that disagreement without eliminating the need for legitimate decision rules."
+          "text": "The proposed duty gives that concern institutional consequences. People represented in a model should have a route to challenge the comparator, impact measures, and treatment of their interests. This is more demanding than inviting comments after investigators have selected the policy options. Reasonable participants may disagree after all relevant evidence is considered. Risk analysis can discipline that disagreement without eliminating the need for legitimate decision rules."
         }
       ]
     },
@@ -484,13 +491,10 @@
     },
     {
       "type": "paragraph",
-      "text": "The regulatory boundary should turn on the expected effects and cumulative scale of the activity. A proposed test deliberately intended to alter climate conditions should face deployment review even if its sponsors describe the results as experimental. Smaller activities should receive proportionate scrutiny of releases, location, duration, and links to a larger program. No scientifically established universal mass threshold separates legitimate research from deployment, and this Article supplies none. The reviewing institution should publish its classification and consider related projects together to prevent fragmentation into nominally minor experiments. That approach preserves the distinction without assuming a sharp physical boundary that applicants could exploit.",
-      "sourcePages": [
-        10
-      ],
+      "text": "The regulatory boundary should turn on the expected effects and cumulative scale of the activity. A proposed test deliberately intended to alter climate conditions should face deployment review even if its sponsors describe the results as experimental. Smaller activities should receive proportionate scrutiny of releases, location, duration, and links to a larger program. No scientifically established universal mass threshold separates legitimate research from deployment. The reviewing institution should publish its classification and consider related projects together to prevent fragmentation into nominally minor experiments. That approach preserves the distinction without assuming a sharp physical boundary that applicants could exploit.",
       "runs": [
         {
-          "text": "The regulatory boundary should turn on the expected effects and cumulative scale of the activity. A proposed test deliberately intended to alter climate conditions should face deployment review even if its sponsors describe the results as experimental. Smaller activities should receive proportionate scrutiny of releases, location, duration, and links to a larger program. No scientifically established universal mass threshold separates legitimate research from deployment, and this Article supplies none. The reviewing institution should publish its classification and consider related projects together to prevent fragmentation into nominally minor experiments. That approach preserves the distinction without assuming a sharp physical boundary that applicants could exploit."
+          "text": "The regulatory boundary should turn on the expected effects and cumulative scale of the activity. A proposed test deliberately intended to alter climate conditions should face deployment review even if its sponsors describe the results as experimental. Smaller activities should receive proportionate scrutiny of releases, location, duration, and links to a larger program. No scientifically established universal mass threshold separates legitimate research from deployment. The reviewing institution should publish its classification and consider related projects together to prevent fragmentation into nominally minor experiments. That approach preserves the distinction without assuming a sharp physical boundary that applicants could exploit."
         }
       ]
     },
@@ -747,14 +751,10 @@
     },
     {
       "type": "paragraph",
-      "text": "Participating states could begin with a negotiated review council linked to their domestic licensing and funding powers. A deployment regime would require an international agreement defining that council's authority and domestic measures giving its decisions effect. General duties of assessment and consultation would remain independently applicable; they cannot confer the new council's licensing, financing, or remedial powers by implication. An independent scientific panel would assess evidence; the council would make the policy decision and publish responses to material objections. Transparent appointments and recusal rules should prevent applicants from unilaterally controlling review of their own proposals. Community representatives would have access to the record, a funded opportunity to propose alternatives, and review of procedural exclusions. These are proposed institutional roles, not powers already held by the UNFCCC or CBD.",
-      "sourcePages": [
-        14,
-        15
-      ],
+      "text": "Participating states could begin with a negotiated review council linked to their domestic licensing and funding powers. A deployment regime would require an international agreement defining that council's authority and domestic measures giving its decisions effect. General duties of assessment and consultation would remain independently applicable; they cannot confer the new council's licensing, financing, or remedial powers by implication. An independent scientific panel would assess evidence; the council would make the policy decision and publish responses to material objections. Transparent appointments and recusal rules should prevent applicants from unilaterally controlling review of their own proposals. Community representatives would have access to the record, a funded opportunity to propose alternatives, and review of procedural exclusions. Neither the UNFCCC nor the CBD already holds these powers.",
       "runs": [
         {
-          "text": "Participating states could begin with a negotiated review council linked to their domestic licensing and funding powers. A deployment regime would require an international agreement defining that council's authority and domestic measures giving its decisions effect. General duties of assessment and consultation would remain independently applicable; they cannot confer the new council's licensing, financing, or remedial powers by implication. An independent scientific panel would assess evidence; the council would make the policy decision and publish responses to material objections. Transparent appointments and recusal rules should prevent applicants from unilaterally controlling review of their own proposals. Community representatives would have access to the record, a funded opportunity to propose alternatives, and review of procedural exclusions. These are proposed institutional roles, not powers already held by the UNFCCC or CBD."
+          "text": "Participating states could begin with a negotiated review council linked to their domestic licensing and funding powers. A deployment regime would require an international agreement defining that council's authority and domestic measures giving its decisions effect. General duties of assessment and consultation would remain independently applicable; they cannot confer the new council's licensing, financing, or remedial powers by implication. An independent scientific panel would assess evidence; the council would make the policy decision and publish responses to material objections. Transparent appointments and recusal rules should prevent applicants from unilaterally controlling review of their own proposals. Community representatives would have access to the record, a funded opportunity to propose alternatives, and review of procedural exclusions. Neither the UNFCCC nor the CBD already holds these powers."
         }
       ]
     },
@@ -772,26 +772,19 @@
     },
     {
       "type": "paragraph",
-      "text": "At minimum, representatives of exposed, non-sponsoring constituencies, selected independently of applicants, must hold collective power to withhold approval or require redesign. Otherwise participation would leave the allocation of power untouched. The agreement would have to specify their selection, mandate, and review, with particular attention to limited adaptive capacity. A voting rule could require separate concurrence from sponsor representatives and independently selected representatives of exposed constituencies. A sponsor bloc would then be unable to approve its own proposal over the latter's collective objection. The composition and voting thresholds would require negotiation, and formal balance would leave problems of coercion and unequal resources to be addressed. This condition falls short of universal consent but goes beyond consultation. It also cannot extinguish existing obligations toward nonparticipating states.",
-      "sourcePages": [
-        15
-      ],
+      "text": "At minimum, representatives of exposed, non-sponsoring constituencies, selected independently of applicants, must hold collective power to withhold approval or require redesign. Otherwise participation would leave the allocation of power untouched. The agreement must specify their selection, mandate, and review, with particular attention to limited adaptive capacity. A voting rule could require separate concurrence from sponsor representatives and from independently selected representatives of exposed constituencies. A sponsor bloc would then be unable to approve its own proposal over the latter's collective objection. The composition and voting thresholds would require negotiation, and formal balance would leave problems of coercion and unequal resources to be addressed. This condition goes beyond consultation without requiring universal consent. It also cannot extinguish existing obligations toward nonparticipating states.",
       "runs": [
         {
-          "text": "At minimum, representatives of exposed, non-sponsoring constituencies, selected independently of applicants, must hold collective power to withhold approval or require redesign. Otherwise participation would leave the allocation of power untouched. The agreement would have to specify their selection, mandate, and review, with particular attention to limited adaptive capacity. A voting rule could require separate concurrence from sponsor representatives and independently selected representatives of exposed constituencies. A sponsor bloc would then be unable to approve its own proposal over the latter's collective objection. The composition and voting thresholds would require negotiation, and formal balance would leave problems of coercion and unequal resources to be addressed. This condition falls short of universal consent but goes beyond consultation. It also cannot extinguish existing obligations toward nonparticipating states."
+          "text": "At minimum, representatives of exposed, non-sponsoring constituencies, selected independently of applicants, must hold collective power to withhold approval or require redesign. Otherwise participation would leave the allocation of power untouched. The agreement must specify their selection, mandate, and review, with particular attention to limited adaptive capacity. A voting rule could require separate concurrence from sponsor representatives and from independently selected representatives of exposed constituencies. A sponsor bloc would then be unable to approve its own proposal over the latter's collective objection. The composition and voting thresholds would require negotiation, and formal balance would leave problems of coercion and unequal resources to be addressed. This condition goes beyond consultation without requiring universal consent. It also cannot extinguish existing obligations toward nonparticipating states."
         }
       ]
     },
     {
       "type": "paragraph",
-      "text": "This limitation produces an immediate policy consequence. States can make public research funding and domestic permissions conditional on transparent records, independent review, and a prohibition on progression to deployment without further authorization. They can finance expertise selected by potential host and affected communities before projects are proposed. They also do not solve enforcement against a determined nonparticipant. Their defensible purpose is to improve knowledge and constrain participating actors while broader authority remains unresolved, rather than to present voluntary cooperation as sufficient permission for planetary action.",
-      "sourcePages": [
-        15,
-        16
-      ],
+      "text": "This limitation produces an immediate policy consequence. States can make public research funding and domestic permissions conditional on transparent records, independent review, and a prohibition on progression to deployment without further authorization. They can also finance expertise selected by potential host and affected communities before projects are proposed. These steps do not solve enforcement against a determined nonparticipant. Their defensible purpose is to improve knowledge and constrain participating actors while broader authority remains unresolved, rather than to present voluntary cooperation as sufficient permission for planetary action.",
       "runs": [
         {
-          "text": "This limitation produces an immediate policy consequence. States can make public research funding and domestic permissions conditional on transparent records, independent review, and a prohibition on progression to deployment without further authorization. They can finance expertise selected by potential host and affected communities before projects are proposed. They also do not solve enforcement against a determined nonparticipant. Their defensible purpose is to improve knowledge and constrain participating actors while broader authority remains unresolved, rather than to present voluntary cooperation as sufficient permission for planetary action."
+          "text": "This limitation produces an immediate policy consequence. States can make public research funding and domestic permissions conditional on transparent records, independent review, and a prohibition on progression to deployment without further authorization. They can also finance expertise selected by potential host and affected communities before projects are proposed. These steps do not solve enforcement against a determined nonparticipant. Their defensible purpose is to improve knowledge and constrain participating actors while broader authority remains unresolved, rather than to present voluntary cooperation as sufficient permission for planetary action."
         }
       ]
     },
@@ -836,11 +829,7 @@
     },
     {
       "type": "paragraph",
-      "text": "This distinction matters because regional changes and individual disasters may be difficult to attribute, as the National Academies explains. A system promising relief only after definitive attribution could offer little practical protection.24 Yet dispensing assistance is not proof of liability, and a pre-funded account cannot make every loss compensable. Death, ecological destruction, and cultural injury resist simple monetary substitution. Financial provision supports responsibility; it cannot purchase unrestricted permission.",
-      "sourcePages": [
-        16,
-        17
-      ],
+      "text": "This distinction matters because regional changes and individual disasters may be difficult to attribute, as the National Academies explains. A system promising relief only after definitive attribution could offer little practical protection.24 Yet dispensing assistance is not proof of liability. Financial provision supports responsibility, but it cannot purchase unrestricted permission. Nor can a pre-funded account make every loss compensable. Death, ecological destruction, and cultural injury resist simple monetary substitution.",
       "runs": [
         {
           "text": "This distinction matters because regional changes and individual disasters may be difficult to attribute, as the National Academies explains. A system promising relief only after definitive attribution could offer little practical protection."
@@ -851,19 +840,16 @@
           "footnoteRef": "24"
         },
         {
-          "text": " Yet dispensing assistance is not proof of liability, and a pre-funded account cannot make every loss compensable. Death, ecological destruction, and cultural injury resist simple monetary substitution. Financial provision supports responsibility; it cannot purchase unrestricted permission."
+          "text": " Yet dispensing assistance is not proof of liability. Financial provision supports responsibility, but it cannot purchase unrestricted permission. Nor can a pre-funded account make every loss compensable. Death, ecological destruction, and cultural injury resist simple monetary substitution."
         }
       ]
     },
     {
       "type": "paragraph",
-      "text": "The decision rule should therefore be stronger than aggregate net benefit but weaker than guaranteed universal improvement. A credible prospect of a grave, concentrated increase in harm relative to the defended feasible comparator should create a strong presumption against approval. Rebuttal would require credible evidence that the proposed intervention would avert at least comparably grave threats to other vulnerable groups, that no feasible less harmful portfolio could do so, and that shared authorization and credible relief were secured. Aggregating lesser benefits elsewhere would not suffice. Where all feasible options threaten basic interests gravely, an absolute prohibition on imposing risk would conceal rather than resolve the conflict. The decision maker must compare those threats and explain any remaining inequality. This is a proposed priority rule, not a result dictated by atmospheric science.",
-      "sourcePages": [
-        17
-      ],
+      "text": "The decision rule should therefore be stronger than aggregate net benefit but weaker than guaranteed universal improvement. A credible prospect of a grave, concentrated increase in harm relative to the defended feasible comparator should create a strong presumption against approval. Rebutting that presumption would require credible evidence that the proposed intervention would avert at least comparably grave threats to other vulnerable groups, that no feasible less harmful portfolio could do so, and that shared authorization and credible relief were secured. Aggregating lesser benefits elsewhere would not suffice. Where all feasible options threaten basic interests gravely, an absolute prohibition on imposing risk would conceal the conflict rather than resolve it. The decision maker must compare those threats and explain any remaining inequality. This Article proposes this priority rule; atmospheric science does not dictate the result.",
       "runs": [
         {
-          "text": "The decision rule should therefore be stronger than aggregate net benefit but weaker than guaranteed universal improvement. A credible prospect of a grave, concentrated increase in harm relative to the defended feasible comparator should create a strong presumption against approval. Rebuttal would require credible evidence that the proposed intervention would avert at least comparably grave threats to other vulnerable groups, that no feasible less harmful portfolio could do so, and that shared authorization and credible relief were secured. Aggregating lesser benefits elsewhere would not suffice. Where all feasible options threaten basic interests gravely, an absolute prohibition on imposing risk would conceal rather than resolve the conflict. The decision maker must compare those threats and explain any remaining inequality. This is a proposed priority rule, not a result dictated by atmospheric science."
+          "text": "The decision rule should therefore be stronger than aggregate net benefit but weaker than guaranteed universal improvement. A credible prospect of a grave, concentrated increase in harm relative to the defended feasible comparator should create a strong presumption against approval. Rebutting that presumption would require credible evidence that the proposed intervention would avert at least comparably grave threats to other vulnerable groups, that no feasible less harmful portfolio could do so, and that shared authorization and credible relief were secured. Aggregating lesser benefits elsewhere would not suffice. Where all feasible options threaten basic interests gravely, an absolute prohibition on imposing risk would conceal the conflict rather than resolve it. The decision maker must compare those threats and explain any remaining inequality. This Article proposes this priority rule; atmospheric science does not dictate the result."
         }
       ]
     },
@@ -895,13 +881,10 @@
     },
     {
       "type": "paragraph",
-      "text": "Termination risk changes the legal meaning of revisability. Parker and Irvine distinguish the conditions for a severe termination shock from its probability: substantial cooling, sudden cessation, and a sufficiently prolonged interruption. Gradual withdrawal, limited cooling, and operational redundancy change the risk. Their analysis challenges claims that catastrophe is inevitable, while depending on arrangements that are not guaranteed to materialize.25",
-      "sourcePages": [
-        18
-      ],
+      "text": "Termination risk changes the legal meaning of revisability. Parker and Irvine distinguish the conditions for a severe termination shock from its probability. The conditions are substantial cooling, sudden cessation, and a sufficiently prolonged interruption. Gradual withdrawal, limited cooling, and operational redundancy change the risk. Their analysis challenges claims that catastrophe is inevitable, while depending on arrangements that are not guaranteed to materialize.25",
       "runs": [
         {
-          "text": "Termination risk changes the legal meaning of revisability. Parker and Irvine distinguish the conditions for a severe termination shock from its probability: substantial cooling, sudden cessation, and a sufficiently prolonged interruption. Gradual withdrawal, limited cooling, and operational redundancy change the risk. Their analysis challenges claims that catastrophe is inevitable, while depending on arrangements that are not guaranteed to materialize."
+          "text": "Termination risk changes the legal meaning of revisability. Parker and Irvine distinguish the conditions for a severe termination shock from its probability. The conditions are substantial cooling, sudden cessation, and a sufficiently prolonged interruption. Gradual withdrawal, limited cooling, and operational redundancy change the risk. Their analysis challenges claims that catastrophe is inevitable, while depending on arrangements that are not guaranteed to materialize."
         },
         {
           "text": "25",
@@ -924,13 +907,10 @@
     },
     {
       "type": "paragraph",
-      "text": "The response should be to separate three decisions: who governs the program, who operates it, and what physical trajectory it follows. An authorization could expire for a particular operator while temporary operation transfers to a previously designated public successor under a reviewed continuity plan. A political decision to end SAI could initiate a tapering pathway evaluated against emissions and atmospheric conditions. Neither decision implies unconditional continuation at the previous intensity, and neither should mechanically trigger abrupt cessation.",
-      "sourcePages": [
-        18
-      ],
+      "text": "This Article proposes separating three decisions: who governs the program, who operates it, and what physical trajectory it follows. An authorization could expire for a particular operator while temporary operation transfers to a previously designated public successor under a reviewed continuity plan. A political decision to end SAI could initiate a tapering pathway evaluated against emissions and atmospheric conditions. Neither decision implies unconditional continuation at the previous intensity, and neither should mechanically trigger abrupt cessation.",
       "runs": [
         {
-          "text": "The response should be to separate three decisions: who governs the program, who operates it, and what physical trajectory it follows. An authorization could expire for a particular operator while temporary operation transfers to a previously designated public successor under a reviewed continuity plan. A political decision to end SAI could initiate a tapering pathway evaluated against emissions and atmospheric conditions. Neither decision implies unconditional continuation at the previous intensity, and neither should mechanically trigger abrupt cessation."
+          "text": "This Article proposes separating three decisions: who governs the program, who operates it, and what physical trajectory it follows. An authorization could expire for a particular operator while temporary operation transfers to a previously designated public successor under a reviewed continuity plan. A political decision to end SAI could initiate a tapering pathway evaluated against emissions and atmospheric conditions. Neither decision implies unconditional continuation at the previous intensity, and neither should mechanically trigger abrupt cessation."
         }
       ]
     },
@@ -994,25 +974,19 @@
     },
     {
       "type": "paragraph",
-      "text": "There is also a danger that continuity planning entrenches the program. A successor mechanism might become an institution dedicated to perpetuation; operators could exaggerate withdrawal risks to resist scrutiny. Review must therefore include independent evaluation of continuation, redesign, and tapering, with reasons tied to measured conditions rather than the sponsor's survival. Interim succession must not presume entitlement to the original dose. Technical redundancy can reduce operational failure. Dispersed political control and review are intended to prevent dependence from insulating operators from challenge. Neither protection substitutes for the other.",
-      "sourcePages": [
-        20
-      ],
+      "text": "There is also a danger that continuity planning entrenches the program. A successor mechanism might become an institution dedicated to perpetuation; operators could exaggerate withdrawal risks to resist scrutiny. Review must therefore include independent evaluation of continuation, redesign, and tapering, with reasons tied to measured conditions rather than the sponsor's survival. Interim succession must not presume entitlement to the original dose. The two protections do not substitute for each other: technical redundancy can reduce operational failure, while dispersed political control and review are intended to prevent dependence from insulating operators from challenge.",
       "runs": [
         {
-          "text": "There is also a danger that continuity planning entrenches the program. A successor mechanism might become an institution dedicated to perpetuation; operators could exaggerate withdrawal risks to resist scrutiny. Review must therefore include independent evaluation of continuation, redesign, and tapering, with reasons tied to measured conditions rather than the sponsor's survival. Interim succession must not presume entitlement to the original dose. Technical redundancy can reduce operational failure. Dispersed political control and review are intended to prevent dependence from insulating operators from challenge. Neither protection substitutes for the other."
+          "text": "There is also a danger that continuity planning entrenches the program. A successor mechanism might become an institution dedicated to perpetuation; operators could exaggerate withdrawal risks to resist scrutiny. Review must therefore include independent evaluation of continuation, redesign, and tapering, with reasons tied to measured conditions rather than the sponsor's survival. Interim succession must not presume entitlement to the original dose. The two protections do not substitute for each other: technical redundancy can reduce operational failure, while dispersed political control and review are intended to prevent dependence from insulating operators from challenge."
         }
       ]
     },
     {
       "type": "paragraph",
-      "text": "Consider an expressly hypothetical case. After substantial deployment, a regional coalition alleges serious agricultural losses and withdraws its support. Immediate termination may expose it and others to larger harms, while unconditional continuation denies its challenge practical significance. Under the proposed regime, the claim would trigger independent assessment, interim protection, and review of the deployment design or operator. A continuity plan would preserve room to decide without making sudden interruption the price of political dissent. Independent review would determine whether the alleged harm is established and whether cooling should continue. It prevents the original sponsor from presenting its own permanence as the only alternative to catastrophe.",
-      "sourcePages": [
-        20
-      ],
+      "text": "Consider an expressly hypothetical case. After substantial deployment, a regional coalition alleges serious agricultural losses and withdraws its support. Immediate termination may expose it and others to larger harms, while unconditional continuation denies its challenge practical significance. Under the proposed regime, the claim would trigger independent assessment, interim protection, and review of the deployment design or operator. A continuity plan would preserve room to decide without making sudden interruption the price of political dissent. Independent review would determine whether the alleged harm is established and whether cooling should continue. It would prevent the original sponsor from presenting its own permanence as the only alternative to catastrophe.",
       "runs": [
         {
-          "text": "Consider an expressly hypothetical case. After substantial deployment, a regional coalition alleges serious agricultural losses and withdraws its support. Immediate termination may expose it and others to larger harms, while unconditional continuation denies its challenge practical significance. Under the proposed regime, the claim would trigger independent assessment, interim protection, and review of the deployment design or operator. A continuity plan would preserve room to decide without making sudden interruption the price of political dissent. Independent review would determine whether the alleged harm is established and whether cooling should continue. It prevents the original sponsor from presenting its own permanence as the only alternative to catastrophe."
+          "text": "Consider an expressly hypothetical case. After substantial deployment, a regional coalition alleges serious agricultural losses and withdraws its support. Immediate termination may expose it and others to larger harms, while unconditional continuation denies its challenge practical significance. Under the proposed regime, the claim would trigger independent assessment, interim protection, and review of the deployment design or operator. A continuity plan would preserve room to decide without making sudden interruption the price of political dissent. Independent review would determine whether the alleged harm is established and whether cooling should continue. It would prevent the original sponsor from presenting its own permanence as the only alternative to catastrophe."
         }
       ]
     },
@@ -1086,14 +1060,10 @@
     },
     {
       "type": "paragraph",
-      "text": "Inquiry should be permitted where its expected informational value, alternatives, direct effects, and contribution to a larger program withstand review. It does not presume that knowledge is socially costless. Funding should support investigating reasons against deployment and strengthen independent assessment outside sponsoring institutions. Where an experiment mainly advances deployability without answering a decision-relevant question unavailable by safer means, refusal can be justified. Conversely, preventing low-impact inquiry that could expose a decisive flaw also has costs. Research oversight should preserve a real possibility of ending the program.",
-      "sourcePages": [
-        21,
-        22
-      ],
+      "text": "Inquiry should be permitted where its expected informational value, alternatives, direct effects, and contribution to a larger program withstand review. This standard does not presume that knowledge is socially costless. Funding should support investigating reasons against deployment and strengthen independent assessment outside sponsoring institutions. Where an experiment mainly advances deployability without answering a decision-relevant question unavailable by safer means, refusal can be justified. Conversely, preventing low-impact inquiry that could expose a decisive flaw also has costs. Research oversight should preserve a real possibility of ending the program.",
       "runs": [
         {
-          "text": "Inquiry should be permitted where its expected informational value, alternatives, direct effects, and contribution to a larger program withstand review. It does not presume that knowledge is socially costless. Funding should support investigating reasons against deployment and strengthen independent assessment outside sponsoring institutions. Where an experiment mainly advances deployability without answering a decision-relevant question unavailable by safer means, refusal can be justified. Conversely, preventing low-impact inquiry that could expose a decisive flaw also has costs. Research oversight should preserve a real possibility of ending the program."
+          "text": "Inquiry should be permitted where its expected informational value, alternatives, direct effects, and contribution to a larger program withstand review. This standard does not presume that knowledge is socially costless. Funding should support investigating reasons against deployment and strengthen independent assessment outside sponsoring institutions. Where an experiment mainly advances deployability without answering a decision-relevant question unavailable by safer means, refusal can be justified. Conversely, preventing low-impact inquiry that could expose a decisive flaw also has costs. Research oversight should preserve a real possibility of ending the program."
         }
       ]
     },

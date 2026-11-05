@@ -6,13 +6,13 @@
   "abstract": [
     {
       "type": "paragraph",
-      "text": "Autonomous space systems require legal rules allocating authority among states, operators, and reviewers. Waiting for a command may expose a spacecraft to avoidable loss; delegating the command may allow its operator to impose risks on others. This Article argues that supervision should distinguish lawful authority to undertake an activity from evidence justifying autonomous execution. States should authorize defined classes of action, require renewed justification when material assumptions change, and reserve individual approval for decisions where review remains effective or separate legal permission is required. The argument compares delayed spacecraft operations with orbital collision avoidance. Debris capture exposes the limits imposed by ownership and registry-state interests, while SETI shows why scientific verification cannot simply borrow spacecraft licensing powers. The space treaties supply responsibility, supervision, liability, and due-regard obligations without prescribing an algorithmic control architecture. Risk-risk analysis requires assessment of the proposed controls as well as the systems they constrain. Advance authorization is defensible only where its factual basis can be examined, its external effects justified, and its exercise reconstructed after a consequential event.",
+      "text": "Autonomous space systems require legal rules allocating authority among states, operators, and reviewers. Waiting for a command may expose a spacecraft to avoidable loss; delegating the command may allow its operator to impose risks on others. This Article argues that supervision should distinguish lawful authority to undertake an activity from evidence justifying autonomous execution. It proposes a two-threshold decision procedure and a task-specific authorization record that implement this distinction. States should authorize defined classes of action, require renewed justification when material assumptions change, and reserve individual approval for decisions where review remains effective or separate legal permission is required. The argument compares delayed spacecraft operations with orbital collision avoidance. Debris capture exposes the limits imposed by ownership and registry-state interests, while SETI shows why scientific verification cannot simply borrow spacecraft licensing powers. The space treaties supply responsibility, supervision, liability, and due-regard obligations without prescribing an algorithmic control architecture. Risk-risk analysis requires assessment of the proposed controls as well as the systems they constrain. Advance authorization is defensible only where its factual basis can be examined, its external effects justified, and its exercise reconstructed after a consequential event.",
       "sourcePages": [
         1
       ],
       "runs": [
         {
-          "text": "Autonomous space systems require legal rules allocating authority among states, operators, and reviewers. Waiting for a command may expose a spacecraft to avoidable loss; delegating the command may allow its operator to impose risks on others. This Article argues that supervision should distinguish lawful authority to undertake an activity from evidence justifying autonomous execution. States should authorize defined classes of action, require renewed justification when material assumptions change, and reserve individual approval for decisions where review remains effective or separate legal permission is required. The argument compares delayed spacecraft operations with orbital collision avoidance. Debris capture exposes the limits imposed by ownership and registry-state interests, while SETI shows why scientific verification cannot simply borrow spacecraft licensing powers. The space treaties supply responsibility, supervision, liability, and due-regard obligations without prescribing an algorithmic control architecture. Risk-risk analysis requires assessment of the proposed controls as well as the systems they constrain. Advance authorization is defensible only where its factual basis can be examined, its external effects justified, and its exercise reconstructed after a consequential event."
+          "text": "Autonomous space systems require legal rules allocating authority among states, operators, and reviewers. Waiting for a command may expose a spacecraft to avoidable loss; delegating the command may allow its operator to impose risks on others. This Article argues that supervision should distinguish lawful authority to undertake an activity from evidence justifying autonomous execution. It proposes a two-threshold decision procedure and a task-specific authorization record that implement this distinction. States should authorize defined classes of action, require renewed justification when material assumptions change, and reserve individual approval for decisions where review remains effective or separate legal permission is required. The argument compares delayed spacecraft operations with orbital collision avoidance. Debris capture exposes the limits imposed by ownership and registry-state interests, while SETI shows why scientific verification cannot simply borrow spacecraft licensing powers. The space treaties supply responsibility, supervision, liability, and due-regard obligations without prescribing an algorithmic control architecture. Risk-risk analysis requires assessment of the proposed controls as well as the systems they constrain. Advance authorization is defensible only where its factual basis can be examined, its external effects justified, and its exercise reconstructed after a consequential event."
         }
       ]
     }
@@ -46,25 +46,28 @@
     },
     {
       "type": "paragraph",
-      "text": "A spacecraft may need to act before its operators can approve a command. A satellite may avoid one collision by moving into a trajectory that changes another operator's risk. A radio telescope may detect an unusual signal without possessing evidence that the signal is extraterrestrial. The decisions differ in the interests they affect and the institutions competent to govern them. A regulator deciding whether to permit a maneuver policy faces a legal problem that scientific investigators assessing a possible technosignature do not.",
-      "sourcePages": [
-        2
-      ],
+      "text": "A spacecraft may need to act before its operators can approve a command. A satellite may avoid one collision by moving into a trajectory that changes another operator's risk. A radio telescope may detect an unusual signal with no evidence that the signal is extraterrestrial. The decisions differ in the interests they affect and the institutions competent to govern them. A regulator deciding whether to permit a maneuver policy faces a legal problem that scientific investigators assessing a possible technosignature do not. As Part III shows, existing law governs the actors in space activities but leaves operational choices open. The space treaties supply responsibility, supervision, liability, and due-regard obligations without prescribing an algorithmic control architecture.",
       "runs": [
         {
-          "text": "A spacecraft may need to act before its operators can approve a command. A satellite may avoid one collision by moving into a trajectory that changes another operator's risk. A radio telescope may detect an unusual signal without possessing evidence that the signal is extraterrestrial. The decisions differ in the interests they affect and the institutions competent to govern them. A regulator deciding whether to permit a maneuver policy faces a legal problem that scientific investigators assessing a possible technosignature do not."
+          "text": "A spacecraft may need to act before its operators can approve a command. A satellite may avoid one collision by moving into a trajectory that changes another operator's risk. A radio telescope may detect an unusual signal with no evidence that the signal is extraterrestrial. The decisions differ in the interests they affect and the institutions competent to govern them. A regulator deciding whether to permit a maneuver policy faces a legal problem that scientific investigators assessing a possible technosignature do not. As Part III shows, existing law governs the actors in space activities but leaves operational choices open. The space treaties supply responsibility, supervision, liability, and due-regard obligations without prescribing an algorithmic control architecture."
         }
       ]
     },
     {
       "type": "paragraph",
-      "text": "The central claim of this paper is that autonomy should be regulated through the allocation of decision rights at identifiable stages of an activity. The relevant distinction is between actions already justified within an authorized operating range and decisions that alter that range, the mission's purpose, or third-party exposure beyond that assessed and authorized. An operator should sometimes be permitted to execute a validated action without contemporaneous human approval. That permission should be accompanied by advance justification, conditions that terminate or narrow it, and evidence enabling another institution to examine its use. Conversely, a useful prediction does not itself authorize a maneuver, a successful approach does not authorize capture of another state's object, and an anomalous signal does not authorize a claim of confirmed extraterrestrial intelligence.",
-      "sourcePages": [
-        2
-      ],
+      "text": "This Article argues that autonomy should be regulated by allocating decision rights at identifiable stages of an activity. The relevant distinction is between actions already justified within an authorized operating range and decisions that alter that range, the mission's purpose, or third-party exposure beyond that assessed and authorized. An operator should sometimes be permitted to execute a validated action without contemporaneous human approval. That permission should be accompanied by advance justification, conditions that terminate or narrow it, and evidence enabling another institution to examine its use. Conversely, a useful prediction does not itself authorize a maneuver, a successful approach does not authorize capture of another state's object, and an anomalous signal does not authorize a claim of confirmed extraterrestrial intelligence.",
       "runs": [
         {
-          "text": "The central claim of this paper is that autonomy should be regulated through the allocation of decision rights at identifiable stages of an activity. The relevant distinction is between actions already justified within an authorized operating range and decisions that alter that range, the mission's purpose, or third-party exposure beyond that assessed and authorized. An operator should sometimes be permitted to execute a validated action without contemporaneous human approval. That permission should be accompanied by advance justification, conditions that terminate or narrow it, and evidence enabling another institution to examine its use. Conversely, a useful prediction does not itself authorize a maneuver, a successful approach does not authorize capture of another state's object, and an anomalous signal does not authorize a claim of confirmed extraterrestrial intelligence."
+          "text": "This Article argues that autonomy should be regulated by allocating decision rights at identifiable stages of an activity. The relevant distinction is between actions already justified within an authorized operating range and decisions that alter that range, the mission's purpose, or third-party exposure beyond that assessed and authorized. An operator should sometimes be permitted to execute a validated action without contemporaneous human approval. That permission should be accompanied by advance justification, conditions that terminate or narrow it, and evidence enabling another institution to examine its use. Conversely, a useful prediction does not itself authorize a maneuver, a successful approach does not authorize capture of another state's object, and an anomalous signal does not authorize a claim of confirmed extraterrestrial intelligence."
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "This Article contributes a two-threshold decision procedure. The first threshold asks whether the actor has authority to undertake the activity and impose the relevant exposure; the second asks whether the evidence justifies delegating it. Where both are met, the procedure turns to the time at which human review can still change the outcome, and it treats individual approval, advance-constrained action, and fallback behavior as separate supervisory choices. The Article then proposes a task-specific authorization record naming responsible actors, permitted actions, operating conditions, exposed interests, and reassessment triggers, backed by independent scrutiny and by event records from which consequential decisions can be reconstructed. It uses debris capture and SETI to distinguish technical capability from permission to affect another party's interests or confirm a scientific interpretation. It also integrates review delays, compliance costs, disclosure risks, and correlated failures into the proposed controls, making the burdens of supervision part of the authorization decision.",
+      "runs": [
+        {
+          "text": "This Article contributes a two-threshold decision procedure. The first threshold asks whether the actor has authority to undertake the activity and impose the relevant exposure; the second asks whether the evidence justifies delegating it. Where both are met, the procedure turns to the time at which human review can still change the outcome, and it treats individual approval, advance-constrained action, and fallback behavior as separate supervisory choices. The Article then proposes a task-specific authorization record naming responsible actors, permitted actions, operating conditions, exposed interests, and reassessment triggers, backed by independent scrutiny and by event records from which consequential decisions can be reconstructed. It uses debris capture and SETI to distinguish technical capability from permission to affect another party's interests or confirm a scientific interpretation. It also integrates review delays, compliance costs, disclosure risks, and correlated failures into the proposed controls, making the burdens of supervision part of the authorization decision."
         }
       ]
     },
@@ -82,11 +85,7 @@
     },
     {
       "type": "paragraph",
-      "text": "Risk-risk analysis supplies the comparative discipline for this inquiry. A measure that reduces one danger can create another, and withholding the measure can preserve risks that regulation was meant to prevent. The analysis must therefore reach the controls themselves. Human approval, disclosure, and certification require the same examination of consequences as the system they constrain. The framework developed by John Graham and Jonathan Wiener, and subsequently applied by Felgenhauer and colleagues, provides a basis for examining these effects.1 The question pursued here is how that comparison should govern authority over a particular class of action.",
-      "sourcePages": [
-        2,
-        3
-      ],
+      "text": "Risk-risk analysis supplies the comparative discipline for this inquiry. A measure that reduces one danger can create another, and withholding the measure can preserve risks that regulation was meant to prevent. The analysis must therefore reach the controls themselves. Human approval, disclosure, and certification require the same examination of consequences as the system they constrain. The framework developed by John Graham and Jonathan Wiener, and subsequently applied by Felgenhauer and colleagues, provides a basis for examining these effects.1 This Article asks how that comparison should govern authority over a particular class of action.",
       "runs": [
         {
           "text": "Risk-risk analysis supplies the comparative discipline for this inquiry. A measure that reduces one danger can create another, and withholding the measure can preserve risks that regulation was meant to prevent. The analysis must therefore reach the controls themselves. Human approval, disclosure, and certification require the same examination of consequences as the system they constrain. The framework developed by John Graham and Jonathan Wiener, and subsequently applied by Felgenhauer and colleagues, provides a basis for examining these effects."
@@ -97,44 +96,34 @@
           "footnoteRef": "1"
         },
         {
-          "text": " The question pursued here is how that comparison should govern authority over a particular class of action."
+          "text": " This Article asks how that comparison should govern authority over a particular class of action."
         }
       ]
     },
     {
       "type": "paragraph",
-      "text": "Delayed spacecraft operations and orbital collision avoidance provide the principal comparison. Debris capture introduces jurisdiction and ownership interests into the latter case. SETI then tests the limits of applying a framework for physical action to scientific claims. These selected settings expose different legal transitions; they supply no general estimate of the safety of space AI.",
-      "sourcePages": [
-        3
-      ],
+      "text": "Delayed spacecraft operations and orbital collision avoidance provide the principal comparison. Debris capture introduces jurisdiction and ownership interests into the latter case. SETI then tests the limits of applying a framework for physical action to scientific claims. These selected settings expose different legal transitions.",
       "runs": [
         {
-          "text": "Delayed spacecraft operations and orbital collision avoidance provide the principal comparison. Debris capture introduces jurisdiction and ownership interests into the latter case. SETI then tests the limits of applying a framework for physical action to scientific claims. These selected settings expose different legal transitions; they supply no general estimate of the safety of space AI."
+          "text": "Delayed spacecraft operations and orbital collision avoidance provide the principal comparison. Debris capture introduces jurisdiction and ownership interests into the latter case. SETI then tests the limits of applying a framework for physical action to scientific claims. These selected settings expose different legal transitions."
         }
       ]
     },
     {
       "type": "paragraph",
-      "text": "The legal analysis begins with the Outer Space Treaty and the Liability and Registration Conventions. United States communications regulation and NASA software requirements supply narrower implementation examples. Their scope matters: a domestic licensing condition and an agency engineering requirement cannot become a worldwide obligation by analogy. The argument concerns the evidence and institutional arrangements needed to justify delegation. Publicly described flight experiments, simulations, and search results do not establish an accident rate or a numerical net benefit for the proposed regime.",
-      "sourcePages": [
-        3
-      ],
+      "text": "The legal analysis begins with the Outer Space Treaty and the Liability and Registration Conventions. United States communications regulation and NASA software requirements supply narrower implementation examples. Their scope matters: a domestic licensing condition and an agency engineering requirement cannot become a worldwide obligation by analogy. The argument concerns the evidence and institutional arrangements needed to justify delegation.",
       "runs": [
         {
-          "text": "The legal analysis begins with the Outer Space Treaty and the Liability and Registration Conventions. United States communications regulation and NASA software requirements supply narrower implementation examples. Their scope matters: a domestic licensing condition and an agency engineering requirement cannot become a worldwide obligation by analogy. The argument concerns the evidence and institutional arrangements needed to justify delegation. Publicly described flight experiments, simulations, and search results do not establish an accident rate or a numerical net benefit for the proposed regime."
+          "text": "The legal analysis begins with the Outer Space Treaty and the Liability and Registration Conventions. United States communications regulation and NASA software requirements supply narrower implementation examples. Their scope matters: a domestic licensing condition and an agency engineering requirement cannot become a worldwide obligation by analogy. The argument concerns the evidence and institutional arrangements needed to justify delegation."
         }
       ]
     },
     {
       "type": "paragraph",
-      "text": "Part II explains what risk-risk analysis contributes to a legal decision. Part III identifies existing duties and the limits of their operational specification. Parts IV and V examine delayed spacecraft operations and orbital safety; Part VI tests the argument against SETI. Part VII proposes an authorization process that can be revised as its factual basis changes. Part VIII considers the objections that could require narrower permission or defeat a particular application.",
-      "sourcePages": [
-        3,
-        4
-      ],
+      "text": "Part II explains what risk-risk analysis contributes to a legal decision and develops the two-threshold decision procedure. Part III identifies existing duties and the limits of their operational specification. Parts IV and V examine delayed spacecraft operations and orbital safety, including debris capture; Part VI tests the argument against SETI. Part VII proposes the task-specific authorization record, an authorization process that can be revised as its factual basis changes. Part VIII answers the objections that could require narrower permission or defeat a particular application. Part IX concludes.",
       "runs": [
         {
-          "text": "Part II explains what risk-risk analysis contributes to a legal decision. Part III identifies existing duties and the limits of their operational specification. Parts IV and V examine delayed spacecraft operations and orbital safety; Part VI tests the argument against SETI. Part VII proposes an authorization process that can be revised as its factual basis changes. Part VIII considers the objections that could require narrower permission or defeat a particular application."
+          "text": "Part II explains what risk-risk analysis contributes to a legal decision and develops the two-threshold decision procedure. Part III identifies existing duties and the limits of their operational specification. Parts IV and V examine delayed spacecraft operations and orbital safety, including debris capture; Part VI tests the argument against SETI. Part VII proposes the task-specific authorization record, an authorization process that can be revised as its factual basis changes. Part VIII answers the objections that could require narrower permission or defeat a particular application. Part IX concludes."
         }
       ]
     },
@@ -214,13 +203,10 @@
     },
     {
       "type": "paragraph",
-      "text": "The same discipline applies to SETI errors. Missing a signal and falsely elevating interference are different events, although both can be grouped under scientific error. If the target harm is specifically a lost discovery, a false positive becomes relevant through a further pathway: it may absorb scarce telescope time, displace more promising candidates, or create a misleading public claim. The analysis should state that pathway rather than assume that opposite classification errors are automatically commensurable. Labels cannot replace a theory of harm.",
-      "sourcePages": [
-        5
-      ],
+      "text": "The same discipline applies to SETI errors. Missing a signal and falsely elevating interference are different events, although both can be grouped under scientific error. If the target harm is specifically a lost discovery, a false positive becomes relevant through a further pathway: it may absorb scarce telescope time, displace more promising candidates, or create a misleading public claim. The analysis should state that pathway rather than assume that opposite classification errors are automatically commensurable, because labels cannot replace a theory of harm.",
       "runs": [
         {
-          "text": "The same discipline applies to SETI errors. Missing a signal and falsely elevating interference are different events, although both can be grouped under scientific error. If the target harm is specifically a lost discovery, a false positive becomes relevant through a further pathway: it may absorb scarce telescope time, displace more promising candidates, or create a misleading public claim. The analysis should state that pathway rather than assume that opposite classification errors are automatically commensurable. Labels cannot replace a theory of harm."
+          "text": "The same discipline applies to SETI errors. Missing a signal and falsely elevating interference are different events, although both can be grouped under scientific error. If the target harm is specifically a lost discovery, a false positive becomes relevant through a further pathway: it may absorb scarce telescope time, displace more promising candidates, or create a misleading public claim. The analysis should state that pathway rather than assume that opposite classification errors are automatically commensurable, because labels cannot replace a theory of harm."
         }
       ]
     },
@@ -326,13 +312,10 @@
     },
     {
       "type": "paragraph",
-      "text": "The proposed decision procedure therefore has two thresholds. First, does the actor have authority to undertake the activity and impose the relevant exposure? Second, does the evidence justify delegating this class of action under these conditions? Evidence satisfying the second threshold cannot substitute for the first. Where both thresholds are met, individual review should be required when its expected protective contribution is credible and timely. Where review is infeasible, the choice becomes advance-constrained action, a justified fallback, or withholding permission for the activity altogether. The absence of time to ask is not, by itself, a reason to authorize unrestricted autonomy.",
-      "sourcePages": [
-        7
-      ],
+      "text": "The decision procedure this Article proposes therefore has two thresholds. First, does the actor have authority to undertake the activity and impose the relevant exposure? Second, does the evidence justify delegating this class of action under these conditions? Evidence satisfying the second threshold cannot substitute for the first. Where both thresholds are met, individual review should be required when its expected protective contribution is credible and timely. Where review is infeasible, the choice becomes advance-constrained action, a justified fallback, or withholding permission for the activity altogether. The absence of time to ask is not, by itself, a reason to authorize unrestricted autonomy.",
       "runs": [
         {
-          "text": "The proposed decision procedure therefore has two thresholds. First, does the actor have authority to undertake the activity and impose the relevant exposure? Second, does the evidence justify delegating this class of action under these conditions? Evidence satisfying the second threshold cannot substitute for the first. Where both thresholds are met, individual review should be required when its expected protective contribution is credible and timely. Where review is infeasible, the choice becomes advance-constrained action, a justified fallback, or withholding permission for the activity altogether. The absence of time to ask is not, by itself, a reason to authorize unrestricted autonomy."
+          "text": "The decision procedure this Article proposes therefore has two thresholds. First, does the actor have authority to undertake the activity and impose the relevant exposure? Second, does the evidence justify delegating this class of action under these conditions? Evidence satisfying the second threshold cannot substitute for the first. Where both thresholds are met, individual review should be required when its expected protective contribution is credible and timely. Where review is infeasible, the choice becomes advance-constrained action, a justified fallback, or withholding permission for the activity altogether. The absence of time to ask is not, by itself, a reason to authorize unrestricted autonomy."
         }
       ]
     },
@@ -417,11 +400,7 @@
     },
     {
       "type": "paragraph",
-      "text": "Article IX requires due regard for other states parties' corresponding interests. Where a state has reason to believe that a planned activity by it or its nationals would cause potentially harmful interference with other states parties' peaceful exploration and use, it must undertake appropriate international consultations before proceeding. Another state party may request consultation when the stated conditions are met.6 Consultation supplies no express universal veto. Due regard also supplies no numerical collision threshold. The authorization mechanism proposed below is an implementation choice intended to give these duties practical effect. It requires consideration of external exposure without claiming that the treaty already dictates its precise procedure.",
-      "sourcePages": [
-        8,
-        9
-      ],
+      "text": "Article IX requires due regard for other states parties' corresponding interests. Where a state has reason to believe that a planned activity by it or its nationals would cause potentially harmful interference with other states parties' peaceful exploration and use, it must undertake appropriate international consultations before proceeding. Another state party may request consultation when the stated conditions are met.6 Consultation supplies no express universal veto. Due regard also supplies no numerical collision threshold. The authorization mechanism proposed below is an implementation choice designed to give these duties practical effect by requiring consideration of external exposure.",
       "runs": [
         {
           "text": "Article IX requires due regard for other states parties' corresponding interests. Where a state has reason to believe that a planned activity by it or its nationals would cause potentially harmful interference with other states parties' peaceful exploration and use, it must undertake appropriate international consultations before proceeding. Another state party may request consultation when the stated conditions are met."
@@ -432,7 +411,7 @@
           "footnoteRef": "6"
         },
         {
-          "text": " Consultation supplies no express universal veto. Due regard also supplies no numerical collision threshold. The authorization mechanism proposed below is an implementation choice intended to give these duties practical effect. It requires consideration of external exposure without claiming that the treaty already dictates its precise procedure."
+          "text": " Consultation supplies no express universal veto. Due regard also supplies no numerical collision threshold. The authorization mechanism proposed below is an implementation choice designed to give these duties practical effect by requiring consideration of external exposure."
         }
       ]
     },
@@ -453,13 +432,10 @@
     },
     {
       "type": "paragraph",
-      "text": "The Liability Convention distinguishes covered damage on Earth's surface or to aircraft in flight, for which launching-state liability is absolute, from covered damage elsewhere to another launching state's space object or persons or property aboard it, for which Article III applies a fault standard. Article I defines damage in terms of death, injury or impaired health, and property loss or damage. Article VI provides specified conditions for exoneration from absolute liability. These distinctions prevent a single characterization of all space harm as either strict liability or an unregulated technological accident.7",
-      "sourcePages": [
-        9
-      ],
+      "text": "The Liability Convention distinguishes two kinds of covered damage. For damage on Earth's surface or to aircraft in flight, launching-state liability is absolute. For damage elsewhere to another launching state's space object, or to persons or property aboard it, Article III applies a fault standard. Article I defines damage in terms of death, injury or impaired health, and property loss or damage. Article VI provides specified conditions for exoneration from absolute liability. These distinctions prevent a single characterization of all space harm as either strict liability or an unregulated technological accident.7",
       "runs": [
         {
-          "text": "The Liability Convention distinguishes covered damage on Earth's surface or to aircraft in flight, for which launching-state liability is absolute, from covered damage elsewhere to another launching state's space object or persons or property aboard it, for which Article III applies a fault standard. Article I defines damage in terms of death, injury or impaired health, and property loss or damage. Article VI provides specified conditions for exoneration from absolute liability. These distinctions prevent a single characterization of all space harm as either strict liability or an unregulated technological accident."
+          "text": "The Liability Convention distinguishes two kinds of covered damage. For damage on Earth's surface or to aircraft in flight, launching-state liability is absolute. For damage elsewhere to another launching state's space object, or to persons or property aboard it, Article III applies a fault standard. Article I defines damage in terms of death, injury or impaired health, and property loss or damage. Article VI provides specified conditions for exoneration from absolute liability. These distinctions prevent a single characterization of all space harm as either strict liability or an unregulated technological accident."
         },
         {
           "text": "7",
@@ -470,14 +446,10 @@
     },
     {
       "type": "paragraph",
-      "text": "The Convention leaves significant remedial limits. Claims proceed through states and diplomatic channels. Article XI preserves domestic proceedings, subject to its restriction on concurrent pursuit of the same damage, but creates no universal private cause of action. A Claims Commission's award binds the parties only if they have so agreed; otherwise it is recommendatory. Article VII excludes launching-state nationals and specified participants or invited persons. A lost scientific opportunity or diffuse environmental interest without a clear connection to covered damage raises an additional scope question.8 These limits affect the incentives and accessibility of compensation even though the underlying treaty obligations remain binding.",
-      "sourcePages": [
-        9,
-        10
-      ],
+      "text": "The Convention's remedies have significant limits. Claims proceed through states and diplomatic channels. Article XI preserves domestic proceedings, subject to its restriction on concurrent pursuit of the same damage, but creates no universal private cause of action. A Claims Commission's award binds the parties only if they have so agreed; otherwise it is recommendatory. Article VII excludes launching-state nationals and specified participants or invited persons. A lost scientific opportunity or diffuse environmental interest without a clear connection to covered damage raises an additional scope question.8 These limits affect the incentives and accessibility of compensation even though the underlying treaty obligations remain binding.",
       "runs": [
         {
-          "text": "The Convention leaves significant remedial limits. Claims proceed through states and diplomatic channels. Article XI preserves domestic proceedings, subject to its restriction on concurrent pursuit of the same damage, but creates no universal private cause of action. A Claims Commission's award binds the parties only if they have so agreed; otherwise it is recommendatory. Article VII excludes launching-state nationals and specified participants or invited persons. A lost scientific opportunity or diffuse environmental interest without a clear connection to covered damage raises an additional scope question."
+          "text": "The Convention's remedies have significant limits. Claims proceed through states and diplomatic channels. Article XI preserves domestic proceedings, subject to its restriction on concurrent pursuit of the same damage, but creates no universal private cause of action. A Claims Commission's award binds the parties only if they have so agreed; otherwise it is recommendatory. Article VII excludes launching-state nationals and specified participants or invited persons. A lost scientific opportunity or diffuse environmental interest without a clear connection to covered damage raises an additional scope question."
         },
         {
           "text": "8",
@@ -813,13 +785,10 @@
     },
     {
       "type": "paragraph",
-      "text": "Human authority remains essential at other points. People must approve mission objectives, review material changes, understand what a protective response sacrifices, and investigate unexpected outcomes. For a crewed vehicle, the allocation of authority must also consider crew knowledge and the consequences of an erroneous override. The proposal does not presume that adding an accessible override always increases safety. It requires evidence about the intervention that particular humans can actually perform.",
-      "sourcePages": [
-        15
-      ],
+      "text": "Human authority remains essential at other points. People must approve mission objectives, review material changes, understand what a protective response sacrifices, and investigate unexpected outcomes. For a crewed vehicle, the allocation of authority must also consider crew knowledge and the consequences of an erroneous override. The proposal leaves the safety value of an accessible override to be shown: it requires evidence about the intervention that particular humans can actually perform.",
       "runs": [
         {
-          "text": "Human authority remains essential at other points. People must approve mission objectives, review material changes, understand what a protective response sacrifices, and investigate unexpected outcomes. For a crewed vehicle, the allocation of authority must also consider crew knowledge and the consequences of an erroneous override. The proposal does not presume that adding an accessible override always increases safety. It requires evidence about the intervention that particular humans can actually perform."
+          "text": "Human authority remains essential at other points. People must approve mission objectives, review material changes, understand what a protective response sacrifices, and investigate unexpected outcomes. For a crewed vehicle, the allocation of authority must also consider crew knowledge and the consequences of an erroneous override. The proposal leaves the safety value of an accessible override to be shown: it requires evidence about the intervention that particular humans can actually perform."
         }
       ]
     },
@@ -983,14 +952,10 @@
     },
     {
       "type": "paragraph",
-      "text": "The proposed authorization should accordingly require a comparative justification at the level of the maneuver policy, not only the predictor. The applicant should explain how it screens the proposed trajectory, accounts for uncertain or missing information, avoids mutually inconsistent responses where coordination is possible, and responds when communications fail. A relevant assurance exercise would test misleading alerts, stale estimates, simultaneous maneuvers, and loss of the expected coordination channel. These are proposed evaluation conditions. The present literature does not establish one universally correct threshold or prove that every operator can satisfy them.",
-      "sourcePages": [
-        17,
-        18
-      ],
+      "text": "The proposed authorization should accordingly require a comparative justification at the level of the maneuver policy, not only the predictor. The applicant should explain how it screens the proposed trajectory, accounts for uncertain or missing information, avoids mutually inconsistent responses where coordination is possible, and responds when communications fail. A relevant assurance exercise would test misleading alerts, stale estimates, simultaneous maneuvers, and loss of the expected coordination channel.",
       "runs": [
         {
-          "text": "The proposed authorization should accordingly require a comparative justification at the level of the maneuver policy, not only the predictor. The applicant should explain how it screens the proposed trajectory, accounts for uncertain or missing information, avoids mutually inconsistent responses where coordination is possible, and responds when communications fail. A relevant assurance exercise would test misleading alerts, stale estimates, simultaneous maneuvers, and loss of the expected coordination channel. These are proposed evaluation conditions. The present literature does not establish one universally correct threshold or prove that every operator can satisfy them."
+          "text": "The proposed authorization should accordingly require a comparative justification at the level of the maneuver policy, not only the predictor. The applicant should explain how it screens the proposed trajectory, accounts for uncertain or missing information, avoids mutually inconsistent responses where coordination is possible, and responds when communications fail. A relevant assurance exercise would test misleading alerts, stale estimates, simultaneous maneuvers, and loss of the expected coordination channel."
         }
       ]
     },
@@ -1056,13 +1021,10 @@
     },
     {
       "type": "paragraph",
-      "text": "There is no requirement here that sensitive telemetry be broadcast universally. A competent institution could receive detailed information while other operators receive the minimum timely information needed to coordinate. That proposal has costs: trusted intermediaries can fail, withhold information, or become attractive targets. The tradeoff should be explicit, and the fallback should not depend on an information service that the operator has no reliable right or ability to use.",
-      "sourcePages": [
-        19
-      ],
+      "text": "Sensitive telemetry need not be broadcast universally. A competent institution could receive detailed information while other operators receive the minimum timely information needed to coordinate. That proposal has costs: trusted intermediaries can fail, withhold information, or become attractive targets. The tradeoff should be explicit, and the fallback should not depend on an information service that the operator has no reliable right or ability to use.",
       "runs": [
         {
-          "text": "There is no requirement here that sensitive telemetry be broadcast universally. A competent institution could receive detailed information while other operators receive the minimum timely information needed to coordinate. That proposal has costs: trusted intermediaries can fail, withhold information, or become attractive targets. The tradeoff should be explicit, and the fallback should not depend on an information service that the operator has no reliable right or ability to use."
+          "text": "Sensitive telemetry need not be broadcast universally. A competent institution could receive detailed information while other operators receive the minimum timely information needed to coordinate. That proposal has costs: trusted intermediaries can fail, withhold information, or become attractive targets. The tradeoff should be explicit, and the fallback should not depend on an information service that the operator has no reliable right or ability to use."
         }
       ]
     },
@@ -1148,13 +1110,10 @@
     },
     {
       "type": "paragraph",
-      "text": "This case exposes the limits of autonomy regulation standing alone. It cannot decide all questions of orbital access, target prioritization, compensation, and international security. It can require that those decisions be made by identifiable actors with relevant authority before a machine is permitted to implement them. The legal improvement is to make the boundary between deciding and executing visible and contestable.",
-      "sourcePages": [
-        20
-      ],
+      "text": "This case exposes the limits of autonomy regulation standing alone. It cannot decide all questions of orbital access, target prioritization, compensation, and international security. It can require that those decisions be made by identifiable actors with relevant authority before a machine is permitted to implement them. That requirement improves the law by making the boundary between deciding and executing visible and contestable.",
       "runs": [
         {
-          "text": "This case exposes the limits of autonomy regulation standing alone. It cannot decide all questions of orbital access, target prioritization, compensation, and international security. It can require that those decisions be made by identifiable actors with relevant authority before a machine is permitted to implement them. The legal improvement is to make the boundary between deciding and executing visible and contestable."
+          "text": "This case exposes the limits of autonomy regulation standing alone. It cannot decide all questions of orbital access, target prioritization, compensation, and international security. It can require that those decisions be made by identifiable actors with relevant authority before a machine is permitted to implement them. That requirement improves the law by making the boundary between deciding and executing visible and contestable."
         }
       ]
     },
@@ -1325,14 +1284,10 @@
     },
     {
       "type": "paragraph",
-      "text": "Transmission of a deliberate response is a further act, distinct from detecting, interpreting, or reporting. Classifier performance supplies no evidence about the effects of a deliberate response. Permission to search cannot, by itself, authorize an institution to speak for humanity or choose that response. Separating those decisions preserves the benefit of automated search while refusing to infer new authority from technical success.",
-      "sourcePages": [
-        23,
-        24
-      ],
+      "text": "Transmission of a deliberate response is a further act, distinct from detecting, interpreting, or reporting. Classifier performance supplies no evidence about the effects of a deliberate response. Permission to search cannot, by itself, authorize an institution to speak for humanity or choose that response. With those decisions separated, institutions retain the benefit of automated search and refuse to infer new authority from technical success.",
       "runs": [
         {
-          "text": "Transmission of a deliberate response is a further act, distinct from detecting, interpreting, or reporting. Classifier performance supplies no evidence about the effects of a deliberate response. Permission to search cannot, by itself, authorize an institution to speak for humanity or choose that response. Separating those decisions preserves the benefit of automated search while refusing to infer new authority from technical success."
+          "text": "Transmission of a deliberate response is a further act, distinct from detecting, interpreting, or reporting. Classifier performance supplies no evidence about the effects of a deliberate response. Permission to search cannot, by itself, authorize an institution to speak for humanity or choose that response. With those decisions separated, institutions retain the benefit of automated search and refuse to infer new authority from technical success."
         }
       ]
     },
@@ -1367,25 +1322,19 @@
     },
     {
       "type": "paragraph",
-      "text": "The proposed mechanism is a concise authorization record for a defined activity, supported by a proportionate assurance case. It should state the actor, the action class, the operating conditions, the interests exposed, the feasible alternatives considered, and the conditions that require fresh review. It should also identify what the system must do when its authorization no longer fits the situation. The record is a legal and operational instrument; it need not reveal source code to every affected party or require a new certificate for every routine command.",
-      "sourcePages": [
-        24
-      ],
+      "text": "This Article proposes a concise authorization record for a defined activity, supported by a proportionate assurance case. It should state the actor, the action class, the operating conditions, the interests exposed, the feasible alternatives considered, and the conditions that require fresh review. It should also identify what the system must do when its authorization no longer fits the situation. The record is a legal and operational instrument; it need not reveal source code to every affected party or require a new certificate for every routine command.",
       "runs": [
         {
-          "text": "The proposed mechanism is a concise authorization record for a defined activity, supported by a proportionate assurance case. It should state the actor, the action class, the operating conditions, the interests exposed, the feasible alternatives considered, and the conditions that require fresh review. It should also identify what the system must do when its authorization no longer fits the situation. The record is a legal and operational instrument; it need not reveal source code to every affected party or require a new certificate for every routine command."
+          "text": "This Article proposes a concise authorization record for a defined activity, supported by a proportionate assurance case. It should state the actor, the action class, the operating conditions, the interests exposed, the feasible alternatives considered, and the conditions that require fresh review. It should also identify what the system must do when its authorization no longer fits the situation. The record is a legal and operational instrument; it need not reveal source code to every affected party or require a new certificate for every routine command."
         }
       ]
     },
     {
       "type": "paragraph",
-      "text": "For a spacecraft instrument, the record might authorize selection within specified parameters while reserving changes to scientific goals or hazardous operating conditions. For avoidance, it might authorize a set of maneuver policies with data-quality, coordination, and trajectory constraints. For capture, it should identify the target and legal permissions separately from execution limits. For SETI, the analogous institutional record would distinguish candidate generation, scientific confirmation, and communication responsibilities. These examples apply the same questions through different institutions; they do not propose a universal space-AI regulator.",
-      "sourcePages": [
-        24
-      ],
+      "text": "For a spacecraft instrument, the record might authorize selection within specified parameters while reserving changes to scientific goals or hazardous operating conditions. For avoidance, it might authorize a set of maneuver policies with data-quality, coordination, and trajectory constraints. For capture, it should identify the target and legal permissions separately from execution limits. For SETI, the analogous institutional record would distinguish candidate generation, scientific confirmation, and communication responsibilities. These examples apply the same questions through different institutions rather than a universal space-AI regulator.",
       "runs": [
         {
-          "text": "For a spacecraft instrument, the record might authorize selection within specified parameters while reserving changes to scientific goals or hazardous operating conditions. For avoidance, it might authorize a set of maneuver policies with data-quality, coordination, and trajectory constraints. For capture, it should identify the target and legal permissions separately from execution limits. For SETI, the analogous institutional record would distinguish candidate generation, scientific confirmation, and communication responsibilities. These examples apply the same questions through different institutions; they do not propose a universal space-AI regulator."
+          "text": "For a spacecraft instrument, the record might authorize selection within specified parameters while reserving changes to scientific goals or hazardous operating conditions. For avoidance, it might authorize a set of maneuver policies with data-quality, coordination, and trajectory constraints. For capture, it should identify the target and legal permissions separately from execution limits. For SETI, the analogous institutional record would distinguish candidate generation, scientific confirmation, and communication responsibilities. These examples apply the same questions through different institutions rather than a universal space-AI regulator."
         }
       ]
     },
@@ -1431,13 +1380,10 @@
     },
     {
       "type": "paragraph",
-      "text": "Independent scrutiny is not synonymous with unrestricted disclosure. Public justification can explain the action class, protected interests, and reasons for the decision while controlled access protects sensitive details. Those directly positioned to identify an omitted risk should have a route to raise it with a competent decision maker. This is a proposed procedural safeguard, not a claim that current space treaties grant every person a public-hearing right. It is especially important when one operator's claimed efficiency depends on another operator accommodating its behavior.",
-      "sourcePages": [
-        25
-      ],
+      "text": "Independent scrutiny is not synonymous with unrestricted disclosure. Public justification can explain the action class, protected interests, and reasons for the decision while controlled access protects sensitive details. Those directly positioned to identify an omitted risk should have a route to raise it with a competent decision maker. This proposed procedural safeguard is especially important when one operator's claimed efficiency depends on another operator accommodating its behavior.",
       "runs": [
         {
-          "text": "Independent scrutiny is not synonymous with unrestricted disclosure. Public justification can explain the action class, protected interests, and reasons for the decision while controlled access protects sensitive details. Those directly positioned to identify an omitted risk should have a route to raise it with a competent decision maker. This is a proposed procedural safeguard, not a claim that current space treaties grant every person a public-hearing right. It is especially important when one operator's claimed efficiency depends on another operator accommodating its behavior."
+          "text": "Independent scrutiny is not synonymous with unrestricted disclosure. Public justification can explain the action class, protected interests, and reasons for the decision while controlled access protects sensitive details. Those directly positioned to identify an omitted risk should have a route to raise it with a competent decision maker. This proposed procedural safeguard is especially important when one operator's claimed efficiency depends on another operator accommodating its behavior."
         }
       ]
     },
@@ -1609,13 +1555,10 @@
     },
     {
       "type": "paragraph",
-      "text": "The objection reaches the conditions of legitimate permission. The authorization must identify whose losses are excluded or uncertain, disclose the basis for material tradeoffs, and remain open to revision. Compliance should not create immunity or conclusive proof of due care. A reviewer must be able to challenge the activity's scale and objective, not only the model's accuracy. Where a mission's economics depend on imposing unacceptable external effects, narrower software permissions will not make it legitimate. The appropriate response may be to constrain the activity itself.",
-      "sourcePages": [
-        28
-      ],
+      "text": "The objection reaches the conditions of legitimate permission, and the proposal meets it on those terms. The authorization must identify whose losses are excluded or uncertain, disclose the basis for material tradeoffs, and remain open to revision. Compliance should not create immunity or conclusive proof of due care. A reviewer must be able to challenge the activity's scale and objective, not only the model's accuracy. Where a mission's economics depend on imposing unacceptable external effects, narrower software permissions will not make it legitimate. The appropriate response may be to constrain the activity itself.",
       "runs": [
         {
-          "text": "The objection reaches the conditions of legitimate permission. The authorization must identify whose losses are excluded or uncertain, disclose the basis for material tradeoffs, and remain open to revision. Compliance should not create immunity or conclusive proof of due care. A reviewer must be able to challenge the activity's scale and objective, not only the model's accuracy. Where a mission's economics depend on imposing unacceptable external effects, narrower software permissions will not make it legitimate. The appropriate response may be to constrain the activity itself."
+          "text": "The objection reaches the conditions of legitimate permission, and the proposal meets it on those terms. The authorization must identify whose losses are excluded or uncertain, disclose the basis for material tradeoffs, and remain open to revision. Compliance should not create immunity or conclusive proof of due care. A reviewer must be able to challenge the activity's scale and objective, not only the model's accuracy. Where a mission's economics depend on imposing unacceptable external effects, narrower software permissions will not make it legitimate. The appropriate response may be to constrain the activity itself."
         }
       ]
     },
@@ -1669,13 +1612,10 @@
     },
     {
       "type": "paragraph",
-      "text": "Proportionality requires the evidence and process to track the consequences and uncertainty of the action. High compliance costs cannot justify unlimited exposure of other operators. Shared infrastructure may lower the cost of producing that evidence. Where no proportionate control makes the activity defensible, the relevant conclusion is a limit on permission, not an exemption from the underlying concern.",
-      "sourcePages": [
-        29
-      ],
+      "text": "Proportionality requires the evidence and process to track the consequences and uncertainty of the action. Shared infrastructure may lower the cost of producing that evidence, but high compliance costs cannot justify unlimited exposure of other operators. Where no proportionate control makes the activity defensible, the relevant conclusion is a limit on permission, not an exemption from the underlying concern.",
       "runs": [
         {
-          "text": "Proportionality requires the evidence and process to track the consequences and uncertainty of the action. High compliance costs cannot justify unlimited exposure of other operators. Shared infrastructure may lower the cost of producing that evidence. Where no proportionate control makes the activity defensible, the relevant conclusion is a limit on permission, not an exemption from the underlying concern."
+          "text": "Proportionality requires the evidence and process to track the consequences and uncertainty of the action. Shared infrastructure may lower the cost of producing that evidence, but high compliance costs cannot justify unlimited exposure of other operators. Where no proportionate control makes the activity defensible, the relevant conclusion is a limit on permission, not an exemption from the underlying concern."
         }
       ]
     },
@@ -1708,26 +1648,19 @@
     },
     {
       "type": "paragraph",
-      "text": "The proposal requires an operating range justified by evidence, not a claim of universal safety. Independence of a protective component must be assessed against actual failure pathways, rather than inferred from a different software module name. Validation should include adverse interactions and plausible losses of information. Where changed conditions cannot reliably be detected, permission may need to be narrower. Evidence of severe, unbounded common failures would support withholding a class of autonomous action even if its average performance were attractive.",
-      "sourcePages": [
-        29
-      ],
+      "text": "The proposal answers this objection by requiring an operating range justified by evidence rather than treated as a guarantee. Independence of a protective component must be assessed against actual failure pathways, rather than inferred from a different software module name. Validation should include adverse interactions and plausible losses of information. Where changed conditions cannot reliably be detected, permission may need to be narrower. Evidence of severe, unbounded common failures would support withholding a class of autonomous action even if its average performance were attractive.",
       "runs": [
         {
-          "text": "The proposal requires an operating range justified by evidence, not a claim of universal safety. Independence of a protective component must be assessed against actual failure pathways, rather than inferred from a different software module name. Validation should include adverse interactions and plausible losses of information. Where changed conditions cannot reliably be detected, permission may need to be narrower. Evidence of severe, unbounded common failures would support withholding a class of autonomous action even if its average performance were attractive."
+          "text": "The proposal answers this objection by requiring an operating range justified by evidence rather than treated as a guarantee. Independence of a protective component must be assessed against actual failure pathways, rather than inferred from a different software module name. Validation should include adverse interactions and plausible losses of information. Where changed conditions cannot reliably be detected, permission may need to be narrower. Evidence of severe, unbounded common failures would support withholding a class of autonomous action even if its average performance were attractive."
         }
       ]
     },
     {
       "type": "paragraph",
-      "text": "An operating range whose limits cannot be observed may be incapable of supporting permission. It would be insufficient to show that constrained autonomy usually works while its bounds become unobservable precisely when catastrophic harm is possible. A comparison may then favor a simpler controller, a different mission design, human judgment with sufficient time, or no deployment. The framework is intended to select among those options rather than ensure a favorable outcome for AI.",
-      "sourcePages": [
-        29,
-        30
-      ],
+      "text": "An operating range whose limits cannot be observed may be incapable of supporting permission. It would be insufficient to show that constrained autonomy usually works while its bounds become unobservable precisely when catastrophic harm is possible. A comparison may then favor a simpler controller, a different mission design, human judgment with sufficient time, or no deployment. The framework selects among those options according to the evidence.",
       "runs": [
         {
-          "text": "An operating range whose limits cannot be observed may be incapable of supporting permission. It would be insufficient to show that constrained autonomy usually works while its bounds become unobservable precisely when catastrophic harm is possible. A comparison may then favor a simpler controller, a different mission design, human judgment with sufficient time, or no deployment. The framework is intended to select among those options rather than ensure a favorable outcome for AI."
+          "text": "An operating range whose limits cannot be observed may be incapable of supporting permission. It would be insufficient to show that constrained autonomy usually works while its bounds become unobservable precisely when catastrophic harm is possible. A comparison may then favor a simpler controller, a different mission design, human judgment with sufficient time, or no deployment. The framework selects among those options according to the evidence."
         }
       ]
     },
@@ -1811,13 +1744,10 @@
     },
     {
       "type": "paragraph",
-      "text": "Existing law already governs the actors and many of the interests at stake. Its incompleteness calls for operational specification, lawful implementation, and reconstructable evidence, rather than an assumption that every technological change requires a new treaty. The proposed authorization is limited, revisable, and open to challenge. It gives no immunity for conduct inside a nominal boundary and no permission for conduct beyond the actor's legal authority.",
-      "sourcePages": [
-        31
-      ],
+      "text": "Existing law already governs the actors and many of the interests at stake. Its incompleteness calls for operational specification, lawful implementation, and reconstructable evidence, rather than an assumption that every technological change requires a new treaty. The proposed authorization is task-specific, revisable, and open to challenge. It gives no immunity for conduct inside a nominal boundary and no permission for conduct beyond the actor's legal authority.",
       "runs": [
         {
-          "text": "Existing law already governs the actors and many of the interests at stake. Its incompleteness calls for operational specification, lawful implementation, and reconstructable evidence, rather than an assumption that every technological change requires a new treaty. The proposed authorization is limited, revisable, and open to challenge. It gives no immunity for conduct inside a nominal boundary and no permission for conduct beyond the actor's legal authority."
+          "text": "Existing law already governs the actors and many of the interests at stake. Its incompleteness calls for operational specification, lawful implementation, and reconstructable evidence, rather than an assumption that every technological change requires a new treaty. The proposed authorization is task-specific, revisable, and open to challenge. It gives no immunity for conduct inside a nominal boundary and no permission for conduct beyond the actor's legal authority."
         }
       ]
     },
