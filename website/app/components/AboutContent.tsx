@@ -1,6 +1,8 @@
 import Link from "next/link";
 import type { ReactNode } from "react";
+import { profileMetrics } from "../lib/content/experience-highlights";
 import { selectedResearchProjects } from "../lib/content/selected-research";
+import { MetricRow } from "./MetricRow";
 import styles from "../home.module.css";
 
 const researchSummaries: Record<string, ReactNode[]> = {
@@ -46,6 +48,7 @@ export function AboutContent({ hasHero = false }: { hasHero?: boolean }) {
               doing with them.
             </p>
           </div>
+          <MetricRow metrics={profileMetrics} size="display" />
         </div>
       </header>
 

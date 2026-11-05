@@ -62,6 +62,15 @@ export function ArticleContents({ items }: { items: ArticleContentsItem[] }) {
     else if (linkBounds.bottom > bounds.bottom) container.scrollTop += linkBounds.bottom - bounds.bottom;
   }, [active]);
 
+  // The rail lists chapters; only the chapter being read opens its subsections.
+  const chapters = new Map<string, string>();
+  let chapter = "";
+  for (const { id, level } of items) {
+    if ((level ?? 1) <= 1) chapter = id;
+    chapters.set(id, chapter);
+  }
+  const activeChapter = active ? chapters.get(active) : undefined;
+
   return (
     <aside className={styles.contents} ref={sidebar}>
       <details ref={details} open>
@@ -71,7 +80,7 @@ export function ArticleContents({ items }: { items: ArticleContentsItem[] }) {
         <nav aria-label="Article contents">
           <ol>
             {items.map(({ id, text, level }) => (
-              <li key={id} className={(level ?? 1) > 1 ? styles.subsectionLink : undefined}>
+              <li key={id} className={(level ?? 1) > 1 ? styles.subsectionLink : undefined} data-open-chapter={(level ?? 1) > 1 && chapters.get(id) === activeChapter ? "" : undefined}>
                 <a href={`#${id}`} aria-current={active === id ? "location" : undefined}>{text}</a>
               </li>
             ))}

@@ -254,7 +254,7 @@ function expectedExperiencePresentation(entry) {
     : legal ? ARTICLES[entry.id - 8][0] : EXPERIENCE_DETAIL_SLUGS.get(entry.id);
   assert.ok(slug, `Entry ${entry.id} needs an independent expected route`);
   return {
-    listingTitle: legal ? LEGAL_LISTING_TITLES[entry.id - 8] : entry.organization,
+    listingTitle: legal ? LEGAL_LISTING_TITLES[entry.id - 8] : entry.categoryId === "01" ? entry.detailTitle : entry.organization,
     pageTitle: `${organization}: ${DISPLAY_DETAIL_TITLES.get(entry.id) ?? entry.detailTitle}`,
     path: ai ? `${AI_ROUTE}${slug}/` : legal ? `${LAW_ROUTE}${slug}/` : `/experience/${slug}/`,
     slug,
@@ -462,7 +462,7 @@ test("About opens with its accessible clarinet hero before the retained profile"
   assert.ok(heading);
   assert.equal(openingTags(home, "h1").length, 1);
   assert.equal(stripMarkup(heading[1]), "Theodore Ouyang");
-  assert.match(stripMarkup(hero), /Duke alumnus/u);
+  assert.match(stripMarkup(hero), /Duke Alumnus/u);
   assert.match(stripMarkup(hero), /Sequoia Fellow/u);
   const cornerTags = [...hero.matchAll(/<[a-z][\w:-]*\b[^>]*>/gu)]
     .map(match => match[0]).filter(tag => (attribute(tag, "class") ?? "").split(/\s+/u)
@@ -1061,9 +1061,9 @@ test("shared typography source roles preserve article names, compact indices, me
   assert.doesNotMatch(experience, /font-optical-sizing|font-variation-settings/u, "Experience must inherit the global optical settings rather than create a different font instance");
   assert.match(rule(globals, "body"), /font-family:\s*var\(--font-text\)/u);
   const tokens = rule(globals, ":root");
-  assert.match(tokens, /--type-subheading:\s*1\.125rem\s*;/u);
+  assert.match(tokens, /--type-subheading:\s*1\.25rem\s*;/u);
   assert.match(tokens, /--type-index:\s*0\.625rem\s*;/u);
-  assert.match(tokens, /--type-reading:\s*0\.875rem\s*;/u);
+  assert.match(tokens, /--type-reading:\s*0\.9375rem\s*;/u);
   assert.match(tokens, /--type-math:\s*1\.15em\s*;/u);
   for (const css of [home, experience, coursework]) {
     assert.match(rule(css, ".sectionIndex"), /font-size:\s*var\(--type-index\)\s*;/u, "Section indices share the compact 10px semantic role.");

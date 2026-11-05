@@ -8,7 +8,7 @@ The site pairs self-hosted Inter with Source Serif 4 and its own content hierarc
 ## Identity
 
 The compact LO mark appears in the navigation and browser icons. About opens with
-Theodore Ouyang's name and the identities Duke alumnus and Sequoia Fellow on the
+Theodore Ouyang's name and the identities Duke Alumnus and Sequoia Fellow on the
 left, with a recognizable clarinet particle field on the right. The clarinet
 follows the selected reference's slender silhouette, reflective mouthpiece face,
 six silver ring keys, joint bands and pads, two long rods, and a flared
@@ -50,7 +50,7 @@ italics and bundled licenses. Inter retains automatic optical sizing disabled an
 the `opsz` axis fixed at 14. Prose numerals use proportional widths; section indices
 and numeric tables can use tabular widths. Shared bold emphasis uses weight 600.
 The LO mark uses independent artwork. The hero name and the institution names
-Duke and Sequoia retain Inter; the supporting roles alumnus and Fellow use Source
+Duke and Sequoia retain Inter; the supporting roles Alumnus and Fellow use Source
 Serif 4, preserving the site's heading/prose pairing.
 The decorative clarinet uses opaque ink, silver-gray, and blue point samples in
 Canvas 2D, with transparent gaps between the points. Clean mother-shape paths are
@@ -79,25 +79,26 @@ scale relative to surrounding text without changing the prose size.
 
 | Role | Shared token | Size at the default text setting | Leading |
 | --- | --- | --- | --- |
-| General page title | `--type-title` | 32px desktop / 28px mobile, weight 500 | 1.2 |
-| Section heading, coursework category heading | `--type-heading` | 32px desktop / 28px mobile, weight 500 | 1.2 |
-| Institution, project or paper name | `--type-subheading` | 18px, weight 600 | 1.45 |
-| About degree | `--type-reading` | 14px, weight 500 | 1.6 |
-| Body, records, introductions, course names, metadata values | `--type-reading` | 14px | 1.6 |
+| General page title | `--type-title` | 36px desktop / 30px mobile, weight 400 | 1.12 |
+| Section heading, coursework category heading | `--type-heading` | 36px desktop / 30px mobile, weight 400 | 1.12 |
+| Institution, project or paper name | `--type-subheading` | 20px, weight 500 | 1.35 |
+| About degree | `--type-reading` | 15px, weight 500 | 1.6 |
+| Body, records, introductions, course names, metadata values | `--type-reading` | 15px | 1.6 |
 | Navigation, menu, wordmark name, return link | `--type-interface` | 14px | 1.4 |
-| Top-level directory item | `--type-subheading` | 18px, weight 500 | 1.45 |
-| Research list title | `--type-subheading` | 18px, weight 600 | 1.45 |
+| Top-level directory item | `--type-subheading` | 20px, weight 500 | 1.35 |
+| Research list title | `--type-subheading` | 20px, weight 500 | 1.35 |
 | Section margin index and directory number | `--type-index` | 10px, weight 400 | 1.5 |
 | Project reading action | `--type-action`, alias of `--type-interface` | 14px, weight 500 | 1.4 |
-| Research prose and table cells | `--type-reading` | 14px | 1.6 |
+| Research prose and table cells | `--type-reading` | 15px | 1.6 |
+| Metric label, organization line, figure caption | `--type-caption` | 13px | 1.4 |
 | Inline mathematical expression | Relative to surrounding text | 1em | Intrinsic mathematical geometry |
 | Displayed mathematical expression | `--type-math` | 1.15em | Intrinsic mathematical geometry |
 | Field label, footer | `--type-label` | 14px | 1.4 |
 
 Text roles use rem units and scale with the user's text setting. General titles and
-section headings use 32px on desktop and 28px below 768px, including in the architecture
-viewer. The 18px subheading, 14px reading/interface, and 10px index roles remain the
-same at every viewport. General titles and section headings use -0.02em tracking;
+section headings use 36px on desktop and 30px below 768px, including in the architecture
+viewer. The 20px subheading, 15px reading, 14px interface, and 10px index roles remain
+the same at every viewport. General titles and section headings use -0.02em tracking;
 article names, reading text, and indices use zero tracking. The shared
 `--reading-leading` remains 1.6 for sustained reading.
 Blue marks active navigation, focus, and link feedback. Editorial surfaces use flat
@@ -123,8 +124,20 @@ introductions are omitted. Summaries use upright
 black body text at 14px; project and organization titles use the 18px subheading
 role. No content is truncated to fit a card.
 
-All body copy uses the shared ink colors.
-Blue remains reserved for navigation, hover, and keyboard focus.
+All body copy uses the shared ink colors. Blue marks navigation, hover, keyboard
+focus, and the decision or feedback path in architecture figures.
+
+AI entries lead with the project name, followed by the organization, a short
+summary, and `MetricRow`: flat figures under a rule, with no fill or pill. Benchmark
+metrics name their setting. The same row follows the metadata on AI detail pages,
+and a display-size row closes the About introduction. AI pages show one
+`ArchitectureFlow` under Architectural Context, drawn in HTML so its labels stay
+selectable and reflow to a vertical sequence below 620px. Copy for both lives in
+`app/lib/content/experience-highlights.ts`. The confidentiality note closes the AI
+section.
+
+Reading columns stop at the structural reading-measure guide. On wide layouts the
+contents rail lists chapters and opens subsections only for the chapter being read.
 
 All eighteen entries use real Read More links to dedicated pages. The eight AI and
 legal articles use their manuscript URLs; the other ten entries have pages at

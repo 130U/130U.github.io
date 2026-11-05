@@ -1,4 +1,7 @@
+import { experienceHighlights } from "../../lib/content/experience-highlights";
 import type { ShowcaseEntry } from "../../lib/content/experience-showcase";
+import { MetricRow } from "../MetricRow";
+import { ArchitectureFlow } from "./ArchitectureFlow";
 import { InlineMarkdown } from "../research/ResearchInline";
 import styles from "./Experience.module.css";
 
@@ -10,6 +13,11 @@ export function ExperienceMetadata({ entry }: { entry: ShowcaseEntry }) {
       <div><dt>Dates</dt><dd>{entry.metadata.dates}</dd></div>
     </dl>
   );
+}
+
+export function ExperienceResults({ entry }: { entry: ShowcaseEntry }) {
+  const metrics = experienceHighlights[entry.id]?.metrics;
+  return metrics ? <MetricRow metrics={metrics} /> : null;
 }
 
 export function ExperienceDisclosure({ entry }: { entry: ShowcaseEntry }) {
@@ -24,10 +32,12 @@ export function ExperienceDisclosure({ entry }: { entry: ShowcaseEntry }) {
 
 export function ArchitecturalContext({ entry }: { entry: ShowcaseEntry }) {
   if (!entry.architecturalContext) return null;
+  const flow = experienceHighlights[entry.id]?.flow;
   return (
     <section className={styles.architecturalContext} aria-labelledby="architectural-context" data-architectural-context>
       <h2 id="architectural-context" tabIndex={-1}>{entry.architecturalContext.title}</h2>
       {entry.architecturalContext.text.split(/\n+/u).map((text, index) => <p key={index}><InlineMarkdown text={text} /></p>)}
+      {flow && <ArchitectureFlow flow={flow} />}
     </section>
   );
 }
