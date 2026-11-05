@@ -1088,7 +1088,7 @@ test("shared typography source roles preserve article names, compact indices, me
   assert.match(rule(math, ".number sup"), /font-size:\s*0\.75em\s*;/u);
   assert.match(rule(math, ".number sup"), /vertical-align:\s*super\s*;/u);
   assert.match(rule(experience, ".metadata > div"), /grid-template-columns:\s*6\.5em minmax\(0,\s*1fr\)\s*;/u);
-  assert.match(rule(experience, ".contributions > ul"), /gap:\s*1\.5rem\s*;/u);
+  assert.match(experience, /\.contributions > ul\s*\{[^}]*gap:\s*1\.5rem\s*;/u);
   assert.doesNotMatch(experience, /\.contributions\s+li(?:\s*\+\s*li)?\s*\{/u, "Contribution spacing and dividers must not cascade into nested items");
   const nestedDetails = rule(experience, ".contributionDetails");
   assert.match(nestedDetails, /font-size:\s*var\(--type-reading\)\s*;/u);
