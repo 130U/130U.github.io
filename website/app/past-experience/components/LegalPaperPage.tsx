@@ -72,7 +72,7 @@ export function LegalPaperPage({ paper, showcase }: { paper: LegalPaper; showcas
           ...paper.footnotes.map((note) => ({ key: String(note.number), label: String(note.number), content: <RunText runs={note.runs} prefix={`preview-${note.number}`} /> })),
         ]}>
           <header className={`page-intro ${styles.header}`}>
-            <h1 id="paper-title" tabIndex={-1}>{showcase.pageTitle}</h1>
+            <h1 id="paper-title" tabIndex={-1}>{showcase.headline}</h1>
             <ExperienceMetadata entry={showcase} />
           </header>
 

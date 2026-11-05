@@ -9,7 +9,7 @@ const ROOT = fileURLToPath(new URL("../", import.meta.url));
 const AI_ROUTE = "/past-experience/artificial-intelligence/";
 const SOURCE_FILE = "content/sources/ai-portfolio/ai-research-and-engineering.md";
 const CANONICAL_DOCUMENT = path.join(ROOT, SOURCE_FILE);
-const SOURCE_SHA256 = "9ae49b3c8a554b3960c18db83aaf0ebe01a3a336b114c325d66ecbbd41f6f68b";
+const SOURCE_SHA256 = "6b1b487c986316b97aee42299b11414bc2584baed104cd92bb57973252f989e0";
 // Structure and benchmark-table shapes are checked independently of the renderer.
 const PROJECTS = [
   {
@@ -265,7 +265,7 @@ for (const expected of PROJECTS) {
     assert.deepEqual(formulas(source.markdown), formulas(canonicalBody), "Every mathematical expression must retain its exact TeX and order");
     const canonicalDetails = canonical.entry.keyContributionDetails ?? {};
     assert.equal(Object.values(canonicalDetails).reduce((count, detail) => count + detail.items.length, 0), [0, 4, 3, 0][index]);
-    assert.equal(readableHtml(html.match(/<h1\b[^>]*>([\s\S]*?)<\/h1>/iu)?.[1] ?? ""), `${showcase.organization}: ${showcase.detailTitle}`);
+    assert.equal(readableHtml(html.match(/<h1\b[^>]*>([\s\S]*?)<\/h1>/iu)?.[1] ?? ""), showcase.detailTitle);
     assert.match(html, new RegExp(`href="/experience/#${expected.slug}"`, "u"));
     assert.match(html, /href="#key-contributions"/u);
     assert.doesNotMatch(html, /href="#overview"|id="overview"|id="article-title"/u);

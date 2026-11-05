@@ -1,7 +1,5 @@
 import Link from "next/link";
 import { showcaseDomains, type ShowcaseDomain, type ShowcaseEntry } from "../../lib/content/experience-showcase";
-import { experienceHighlights } from "../../lib/content/experience-highlights";
-import { MetricRow } from "../MetricRow";
 import { InlineMarkdown } from "../research/ResearchInline";
 import { SectionDirectory } from "../SectionDirectory";
 import styles from "./Experience.module.css";
@@ -10,13 +8,10 @@ function ReadingArrow() {
   return <svg viewBox="0 0 24 24" fill="none" aria-hidden="true" focusable="false"><path d="m9 5 7 7-7 7" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" /></svg>;
 }
 function ExperienceEntry({ entry }: { entry: ShowcaseEntry }) {
-  const highlight = experienceHighlights[entry.id];
   return (
     <article className={styles.entry} id={entry.slug} data-experience-entry={entry.id}>
       <h3 className={styles.entryTitle}>{entry.listingTitle}</h3>
-      {entry.listingOrganization && <div className={styles.entryOrganization}>{entry.listingOrganization}</div>}
       <p className={styles.summary} data-experience-summary>{entry.categoryId === "01" ? <InlineMarkdown text={entry.summary} /> : entry.summary}</p>
-      {highlight && <MetricRow metrics={highlight.metrics} />}
       <Link className={styles.readMore} href={entry.detailPath} aria-label={`Read more about ${entry.pageTitle}`}>
         {entry.readMoreLabel}<ReadingArrow />
       </Link>

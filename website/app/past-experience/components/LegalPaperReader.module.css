@@ -46,7 +46,7 @@
   font-size: var(--type-heading);
   font-weight: 400;
   line-height: var(--heading-leading);
-  letter-spacing: -0.02em;
+  letter-spacing: -0.01em;
 }
 
 .closeButton {

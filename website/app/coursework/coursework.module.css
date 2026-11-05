@@ -8,16 +8,23 @@
 
 .intro {
   max-width: var(--reading-measure);
-  margin-bottom: 48px;
+  margin-bottom: 64px;
 }
 
-.intro h1,
+.intro h1 {
+  margin: 0;
+  font-size: var(--type-title);
+  font-weight: 400;
+  line-height: var(--title-leading);
+  letter-spacing: -0.02em;
+}
+
 .sectionBody h2 {
   margin: 0;
   font-size: var(--type-heading);
   font-weight: 400;
   line-height: var(--heading-leading);
-  letter-spacing: -0.02em;
+  letter-spacing: -0.01em;
 }
 
 .section {
@@ -25,7 +32,7 @@
   grid-template-columns: repeat(12, minmax(0, 1fr));
   grid-column: 1 / -1;
   align-items: start;
-  padding: 48px 0 64px;
+  padding: 80px 0 96px;
   border-top: 1px solid var(--rule-strong);
   scroll-margin-top: 32px;
 }
@@ -47,13 +54,13 @@
 }
 
 .sectionBody {
-  grid-column: 2 / span 10;
+  grid-column: 2 / span 8;
   max-width: var(--reading-measure);
   min-width: 0;
 }
 
 .sectionBody h2 {
-  margin-bottom: 24px;
+  margin-bottom: 32px;
 }
 
 .courseList {
@@ -67,9 +74,8 @@
   line-height: var(--reading-leading);
 }
 
-.courseList li {
-  padding: 16px 0;
-  border-top: 1px solid var(--rule);
+.courseList li + li {
+  margin-top: 8px;
 }
 
 @media (768px <= width < 1024px) {

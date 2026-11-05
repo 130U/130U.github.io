@@ -8,7 +8,8 @@
   overflow-wrap: anywhere;
 }
 
-.paper strong {
+.paper strong,
+.paper th {
   font-weight: 600;
 }
 
@@ -18,10 +19,10 @@
 }
 
 .paper .header h1 {
-  font-size: var(--type-subheading);
-  font-weight: 500;
-  line-height: var(--subheading-leading);
-  letter-spacing: 0;
+  font-size: var(--type-title);
+  font-weight: 400;
+  line-height: var(--title-leading);
+  letter-spacing: -0.02em;
 }
 
 .readingLayout {
@@ -74,7 +75,7 @@
   font-size: var(--type-heading);
   font-weight: 400;
   line-height: var(--heading-leading);
-  letter-spacing: -0.02em;
+  letter-spacing: -0.01em;
   text-wrap: balance;
   scroll-margin-top: 6rem;
 }
@@ -93,9 +94,7 @@
 }
 
 .manuscriptAbstract {
-  margin-top: 3rem;
-  padding-top: 2rem;
-  border-top: 1px solid var(--rule-strong);
+  margin-top: 6rem;
 }
 
 .manuscriptByline {
@@ -122,7 +121,7 @@
   cursor: pointer;
   font-size: var(--type-interface);
   line-height: var(--interface-leading);
-  font-weight: 600;
+  font-weight: 400;
   transition: color 180ms var(--ease-out);
   list-style: none;
 }
@@ -168,7 +167,6 @@
 .contents a[aria-current="location"] {
   border-left-color: var(--accent);
   color: var(--ink);
-  font-weight: 500;
 }
 
 .subsectionLink {
@@ -176,14 +174,16 @@
 }
 
 .body h2 {
-  margin: 5rem 0 1.5rem;
-  padding-top: 2rem;
-  border-top: 1px solid var(--rule-strong);
+  margin: 6rem 0 1.25rem;
   scroll-margin-top: 6rem;
 }
 
+.body h3 em {
+  font-style: normal;
+}
+
 .body h3 {
-  margin: 3rem 0 1.5rem;
+  margin: 3rem 0 0.75rem;
   font-size: var(--type-subheading);
   font-weight: 500;
   line-height: var(--subheading-leading);
@@ -221,9 +221,7 @@
 }
 
 .footnotes {
-  margin-top: 4rem;
-  padding-top: 2rem;
-  border-top: 1px solid var(--rule-strong);
+  margin-top: 6rem;
   scroll-margin-top: 6rem;
 }
 
@@ -329,8 +327,7 @@
   }
 
   .body h2 {
-    margin-top: 4rem;
-    padding-top: 1.5rem;
+    margin-top: 4.5rem;
   }
 }
 

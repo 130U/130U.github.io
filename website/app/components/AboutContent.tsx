@@ -1,14 +1,12 @@
 import Link from "next/link";
 import type { ReactNode } from "react";
-import { profileMetrics } from "../lib/content/experience-highlights";
 import { selectedResearchProjects } from "../lib/content/selected-research";
-import { MetricRow } from "./MetricRow";
 import styles from "../home.module.css";
 
 const researchSummaries: Record<string, ReactNode[]> = {
   "critical-dependence-stress-for-portfolio-diversification": [
     <>
-      I develop a variational framework that measures how much dependence stress it takes to reverse a portfolio’s Expected Shortfall advantage while every individual loss distribution stays fixed. I prove a quadratic law for the critical stress budget, introduce the marginal-restoration premium, and characterize exactly when it is positive. In a uniform benchmark, the asymptotic reversal budget is <strong>at least 30% higher</strong> than the initial-sensitivity prediction. At equal effective costs, continuous flow–cut duality characterizes how the premium responds to background displacement costs. Together these results turn local risk sensitivity into a mathematically derived threshold for portfolio decision reversal.
+      I develop a variational framework that measures how much dependence stress it takes to reverse a portfolio’s Expected Shortfall advantage while every individual loss distribution stays fixed. I prove a quadratic law for the critical stress budget, introduce the marginal-restoration premium, and characterize exactly when it is positive. In a uniform benchmark, the asymptotic reversal budget is at least 30% higher than the initial-sensitivity prediction. At equal effective costs, continuous flow–cut duality characterizes how the premium responds to background displacement costs. Together these results turn local risk sensitivity into a mathematically derived threshold for portfolio decision reversal.
     </>,
   ],
   "certified-valuation-arithmetic-asian-options": [
@@ -16,7 +14,7 @@ const researchSummaries: Record<string, ReactNode[]> = {
   ],
   "certified-rough-heston-valuation": [
     <>
-      I develop a deterministic framework for certifying rough Heston portfolio valuations. I derive a finite-history propagation kernel and the exact support function of a joint error enclosure, which captures the shared Fourier errors that separate option-by-option bounds lose. In a matched benchmark, finite-history propagation tightens the complete pricing-error upper bound by <strong>72.91%</strong> with the pricing output unchanged. Mathematical proofs and executable certificates tie these theoretical advances to financial results that can be verified.
+      I develop a deterministic framework for certifying rough Heston portfolio valuations. I derive a finite-history propagation kernel and the exact support function of a joint error enclosure, which captures the shared Fourier errors that separate option-by-option bounds lose. In a matched benchmark, finite-history propagation tightens the complete pricing-error upper bound by 72.91% with the pricing output unchanged. Mathematical proofs and executable certificates tie these theoretical advances to financial results that can be verified.
     </>,
   ],
 };
@@ -48,7 +46,6 @@ export function AboutContent({ hasHero = false }: { hasHero?: boolean }) {
               doing with them.
             </p>
           </div>
-          <MetricRow metrics={profileMetrics} size="display" />
         </div>
       </header>
 

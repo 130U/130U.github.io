@@ -38,7 +38,7 @@ Read More
 
 ## Summary
 
-I led the statistical system behind expert feedback for LLM post-training, one of the first engineering implementations of prediction-assisted statistical inference and capacity-constrained review allocation in expert data production. It coordinated more than 300 specialists across several domains and an external vendor network, and it optimizes measuring population quality and correcting defects as separate decisions.
+With a leading foundation model developer, I led the statistical system behind expert feedback for LLM post-training, one of the first engineering implementations of prediction-assisted statistical inference and capacity-constrained review allocation in expert data production. It coordinated more than 300 specialists and an external vendor network. Under ideal residual calibration, a synthetic benchmark showed 17.79% lower estimation variance than uniform sampling at equal audit cost.
 
 ## Key Contributions
 
@@ -267,7 +267,7 @@ Read More
 
 ## Summary
 
-I designed the data strategy for financial post-training in a frontier foundation model program, one of the first engineering implementations of constraint-preserving synthetic data and structured expert preference supervision for financial LLM post-training. Diagnostic decision tasks, exact accounting constraints and a five-level preference protocol feed **Batch Zero**, the calibration protocol the company later extended to other post-training programs.
+I designed the data strategy for financial post-training in a frontier foundation model program, one of the first engineering implementations of constraint-preserving synthetic data and structured expert preference supervision for financial LLM post-training. Diagnostic decision tasks, exact accounting constraints and a five-level preference protocol feed Batch Zero, the calibration protocol the company later extended to other post-training programs.
 
 ## Key Contributions
 
@@ -458,7 +458,7 @@ Read More
 
 ## Summary
 
-I developed a framework for evaluating and supervising general reasoning with a frontier AI research laboratory, among the first engineering implementations of joint verification across final answers, visible reasoning and execution evidence in frontier model evaluation. Code checks, LLM-as-a-Judge screening and specialist scholars work in three layers, and checkable mathematical certificates keep the supervision signals traceable.
+I developed a framework for evaluating and supervising general reasoning with a frontier AI research laboratory, among the first engineering implementations of joint verification across final answers, visible reasoning and execution evidence in frontier model evaluation. Code checks, LLM-as-a-Judge screening and specialist scholars work in three layers. On 3,600 benchmark submissions, certificate checking made no false acceptances, where final-answer matching falsely accepted 75.0%.
 
 ## Key Contributions
 
@@ -652,7 +652,7 @@ Read More
 
 ## Summary
 
-I developed and implemented a framework for evidence verification and decision assurance with a leading global alternative asset manager, one of the first engineering implementations in institutional investment research to treat model multiplicity, unverified evidence and the cost of verification jointly. It scores companies across a Rashomon model set, bounds ranking stability and tells analysts which fact to verify next.
+I developed and implemented a framework for evidence verification and decision assurance with a leading global alternative asset manager, one of the first engineering implementations in institutional investment research to treat model multiplicity, unverified evidence and the cost of verification jointly. It tells analysts which fact to verify next: in an eight-scenario benchmark, one targeted query cut worst-case regret from 0.61 score units to zero.
 
 ## Key Contributions
 
