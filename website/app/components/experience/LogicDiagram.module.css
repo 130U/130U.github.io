@@ -1,0 +1,363 @@
+.diagram {
+  --line: rgba(11, 11, 11, 0.42);
+  --diagram-gap: clamp(28px, 4.6cqi, 44px);
+  --arrow: 6px;
+
+  container: diagram / inline-size;
+  margin: 72px 0 0;
+  padding-top: 18px;
+  border-top: 1px solid var(--rule-strong);
+}
+
+.label {
+  margin: 0 0 32px;
+  color: var(--muted);
+  font-family: var(--font-text);
+  font-size: var(--type-label);
+  line-height: var(--label-leading);
+}
+
+.canvas {
+  display: grid;
+  align-items: stretch;
+  font-family: var(--font-text);
+}
+
+/* Stages are transparent wrappers on the grid; their children carry positions. */
+.stage {
+  display: contents;
+}
+
+.stageLabel {
+  position: relative;
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+  margin: 0 0 18px;
+  padding-top: 10px;
+  border-top: 1px solid var(--rule-medium);
+  color: var(--ink);
+  font-size: var(--type-label);
+  line-height: var(--label-leading);
+}
+
+.stageLabel::before {
+  position: absolute;
+  top: -5px;
+  left: 0;
+  width: 2px;
+  height: 9px;
+  background: var(--accent);
+  content: "";
+}
+
+.stageIndex {
+  color: var(--muted);
+  font-family: var(--font-prose);
+  font-size: var(--type-index);
+  font-variant-numeric: tabular-nums;
+}
+
+.cell {
+  display: flex;
+  min-width: 0;
+  flex-direction: column;
+  justify-content: center;
+  padding: 6px 0;
+}
+
+.node {
+  display: grid;
+  flex: 1 1 auto;
+  align-content: center;
+  gap: 4px;
+  min-width: 0;
+  padding: 12px 14px 13px;
+  border: 1px solid var(--rule-medium);
+  background: var(--panel);
+}
+
+.cell[data-single] .node {
+  flex: 0 0 auto;
+}
+
+.tag {
+  color: var(--muted);
+  font-family: var(--font-prose);
+  font-size: var(--type-index);
+  line-height: 1.4;
+  letter-spacing: 0.02em;
+}
+
+.nodeTitle {
+  color: var(--ink);
+  font-size: var(--type-interface);
+  font-weight: 500;
+  line-height: 1.35;
+  letter-spacing: -0.003em;
+  text-wrap: balance;
+}
+
+.nodeDetail {
+  color: var(--supporting-ink);
+  font-size: var(--type-label);
+  line-height: var(--label-leading);
+  text-wrap: pretty;
+}
+
+/* The decisive mechanism of each system is set in ink. */
+.emphasis {
+  border-color: var(--ink);
+  background: var(--ink);
+}
+
+.emphasis .nodeTitle {
+  color: var(--page);
+}
+
+.emphasis .tag,
+.emphasis .nodeDetail {
+  color: rgba(247, 246, 245, 0.68);
+}
+
+/* Connectors: one piece per lane in each connector column. */
+.link {
+  position: relative;
+  min-width: 0;
+  color: var(--line);
+  pointer-events: none;
+}
+
+.link::before {
+  position: absolute;
+  top: 50%;
+  border-top: 1px solid currentColor;
+  content: "";
+}
+
+.straight::before,
+.branchOut::before,
+.join::before {
+  right: calc(var(--arrow) - 1px);
+}
+
+.straight::before { left: 0; }
+.stem::before,
+.branchIn::before { left: 0; width: 50%; }
+.branchOut::before,
+.join::before { left: 50%; }
+
+.straight::after,
+.branchOut::after,
+.join::after {
+  position: absolute;
+  top: 50%;
+  right: 0;
+  width: var(--arrow);
+  height: 7px;
+  margin-top: -3px;
+  background: currentColor;
+  clip-path: polygon(0 0, 100% 50%, 0 100%);
+  content: "";
+}
+
+.bus {
+  position: absolute;
+  left: 50%;
+  border-left: 1px solid currentColor;
+}
+
+[data-position="first"] > .bus { top: 50%; bottom: 0; }
+[data-position="middle"] > .bus { top: 0; bottom: 0; }
+[data-position="last"] > .bus { top: 0; height: calc(50% + 1px); }
+
+/* Feedback loop: legs drop from both endpoint nodes into a return rule. */
+.cell[data-loop] {
+  overflow: hidden;
+  overflow: clip;
+}
+
+.cell[data-loop] .node {
+  position: relative;
+}
+
+.cell[data-loop] .node::after {
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  height: 100vh;
+  border-left: 1px solid var(--accent);
+  content: "";
+}
+
+.cell[data-loop="target"] .node::before {
+  position: absolute;
+  z-index: 1;
+  top: calc(100% + 1px);
+  left: calc(50% - 3px);
+  width: 7px;
+  height: var(--arrow);
+  background: var(--accent);
+  clip-path: polygon(50% 0, 100% 100%, 0 100%);
+  content: "";
+}
+
+.loop {
+  height: 28px;
+  border-bottom: 1px solid var(--accent);
+}
+
+.loopStart {
+  margin-left: 50%;
+  border-left: 1px solid var(--accent);
+}
+
+.loopEnd {
+  width: calc(50% + 1px);
+  border-right: 1px solid var(--accent);
+}
+
+.loopLabel {
+  margin: 0;
+  padding: 10px 12px 0;
+  color: var(--accent);
+  font-size: var(--type-label);
+  line-height: var(--label-leading);
+  text-align: center;
+  text-wrap: balance;
+}
+
+.loopReturn {
+  display: none;
+}
+
+.caption {
+  max-width: var(--reading-measure);
+  margin-top: 36px;
+  color: var(--supporting-ink);
+  font-family: var(--font-prose);
+  font-size: var(--type-reading);
+  line-height: var(--reading-leading);
+  text-wrap: pretty;
+}
+
+/* Narrow: the same markup becomes a vertical sequence. */
+@container diagram (width < 640px) {
+  .canvas {
+    display: block;
+  }
+
+  .stage {
+    position: relative;
+    display: block;
+  }
+
+  .stage:not([data-stage="1"]) {
+    padding-top: 40px;
+  }
+
+  .stage:not([data-stage="1"])::before {
+    position: absolute;
+    top: 8px;
+    left: 20px;
+    height: 24px;
+    border-left: 1px solid var(--line);
+    content: "";
+  }
+
+  .stage:not([data-stage="1"])::after {
+    position: absolute;
+    top: 26px;
+    left: 17px;
+    width: 7px;
+    height: var(--arrow);
+    background: var(--line);
+    clip-path: polygon(0 0, 100% 0, 50% 100%);
+    content: "";
+  }
+
+  .stageLabel {
+    margin-bottom: 12px;
+  }
+
+  .cell {
+    padding: 0;
+  }
+
+  .cell + .cell {
+    margin-top: 8px;
+  }
+
+  .link,
+  .loop,
+  .cell[data-loop] .node::before,
+  .cell[data-loop] .node::after {
+    display: none;
+  }
+
+  .loopLabel {
+    margin-top: 28px;
+    padding: 2px 0 2px 14px;
+    border-left: 1px solid var(--accent);
+    text-align: left;
+  }
+
+  .loopReturn {
+    display: inline;
+  }
+
+  .caption {
+    margin-top: 28px;
+  }
+}
+
+/* Mid widths: parallel nodes of a stage sit side by side. */
+@container diagram (480px <= width < 640px) {
+  .stage {
+    display: grid;
+    grid-template-columns: repeat(var(--columns), minmax(0, 1fr));
+    gap: 8px;
+  }
+
+  .stageLabel {
+    grid-column: 1 / -1 !important;
+    grid-row: auto !important;
+  }
+
+  .stage > .cell {
+    grid-column: auto !important;
+    grid-row: auto !important;
+  }
+
+  .stage > .cell + .cell {
+    margin-top: 0;
+  }
+
+  .cell .node {
+    flex: 1 1 auto;
+  }
+}
+
+@media (width < 768px) {
+  .diagram {
+    margin-top: 56px;
+  }
+}
+
+@media (forced-colors: active) {
+  .emphasis {
+    border-color: CanvasText;
+    background: Canvas;
+  }
+
+  .emphasis .nodeTitle,
+  .emphasis .tag,
+  .emphasis .nodeDetail {
+    color: CanvasText;
+  }
+
+  .link::after,
+  .cell[data-loop="target"] .node::before {
+    background: CanvasText;
+  }
+}

@@ -15,7 +15,7 @@ export const metadata: Metadata = createPageMetadata({
 
 export default function EducationAlias() {
   return (
-    <SiteShell active="about" frameClassName={styles.homeFrame}>
+    <SiteShell active="about" frameClassName={styles.homeFrame} guides="index">
       <AboutContent />
     </SiteShell>
   );

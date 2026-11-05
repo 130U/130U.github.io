@@ -20,7 +20,7 @@ const sectionIds = [
 
 export default function CourseworkPage() {
   return (
-    <SiteShell active="about" parent={{ href: "/#education", label: "Education" }} frameClassName={styles.frame}>
+    <SiteShell active="about" parent={{ href: "/#education", label: "Education" }} frameClassName={styles.frame} guides="index">
       <header className={styles.intro}>
         <h1>Selected Coursework</h1>
         <SectionDirectory label="Coursework sections" items={courseworkGroups.map((group, index) => ({

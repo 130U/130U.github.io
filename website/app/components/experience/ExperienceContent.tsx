@@ -7,14 +7,28 @@ import styles from "./Experience.module.css";
 function ReadingArrow() {
   return <svg viewBox="0 0 24 24" fill="none" aria-hidden="true" focusable="false"><path d="m9 5 7 7-7 7" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" /></svg>;
 }
+/** The record line under an entry title: who it was with (or the paper it produced), then when. */
+function entryRecord(entry: ShowcaseEntry) {
+  const context = entry.categoryId === "01" ? entry.organization
+    : entry.categoryId === "03" ? entry.detailTitle
+    : entry.metadata.position;
+  return [context, entry.metadata.dates];
+}
 function ExperienceEntry({ entry }: { entry: ShowcaseEntry }) {
   return (
     <article className={styles.entry} id={entry.slug} data-experience-entry={entry.id}>
-      <h3 className={styles.entryTitle}>{entry.listingTitle}</h3>
-      <p className={styles.summary} data-experience-summary>{entry.categoryId === "01" ? <InlineMarkdown text={entry.summary} /> : entry.summary}</p>
-      <Link className={styles.readMore} href={entry.detailPath} aria-label={`Read more about ${entry.pageTitle}`}>
-        {entry.readMoreLabel}<ReadingArrow />
-      </Link>
+      <div className={styles.entryHead}>
+        <h3 className={styles.entryTitle}>{entry.listingTitle}</h3>
+        <p className={styles.entryMeta} data-experience-record>
+          {entryRecord(entry).map((line) => <span key={line}>{line}</span>)}
+        </p>
+      </div>
+      <div className={styles.entryBody}>
+        <p className={styles.summary} data-experience-summary>{entry.categoryId === "01" ? <InlineMarkdown text={entry.summary} /> : entry.summary}</p>
+        <Link className={styles.readMore} href={entry.detailPath} aria-label={`Read more about ${entry.pageTitle}`}>
+          {entry.readMoreLabel}<ReadingArrow />
+        </Link>
+      </div>
     </article>
   );
 }

@@ -775,9 +775,9 @@
       "formulaCount": 973
     },
     "/experience/": {
-      "textSha256": "f640cebdce8a87ab8f1434a718b50a161fcb366a01fbd83dcc211460bdef58f6",
-      "characterCount": 8870,
-      "wordCount": 1156,
+      "textSha256": "78cb36b17f5a155a4e9916e427c238ac811b0b3f2d78d43d43f97c30c68dd9c8",
+      "characterCount": 10317,
+      "wordCount": 1369,
       "preview": "Skip to main content Theodore Ouyang About Experience Experience: Areas of Focus AI Research and Engineering Data Science Legal Research and Policy Analysis Fin",
       "altTexts": [],
       "ariaLabels": [
@@ -1025,9 +1025,9 @@
       }
     },
     "/past-experience/": {
-      "textSha256": "f640cebdce8a87ab8f1434a718b50a161fcb366a01fbd83dcc211460bdef58f6",
-      "characterCount": 8870,
-      "wordCount": 1156,
+      "textSha256": "78cb36b17f5a155a4e9916e427c238ac811b0b3f2d78d43d43f97c30c68dd9c8",
+      "characterCount": 10317,
+      "wordCount": 1369,
       "preview": "Skip to main content Theodore Ouyang About Experience Experience: Areas of Focus AI Research and Engineering Data Science Legal Research and Policy Analysis Fin",
       "altTexts": [],
       "ariaLabels": [
@@ -1065,10 +1065,10 @@
       }
     },
     "/past-experience/artificial-intelligence/": {
-      "textSha256": "f21fbea060c48fcc4f655195f726a7a19c493aa95bacf81ca9d0f32a651a5de3",
-      "characterCount": 2945,
-      "wordCount": 393,
-      "preview": "Skip to main content Theodore Ouyang Back to Experience AI Research and Engineering Large-scale domain expert feedback governance and adaptive review With a lea",
+      "textSha256": "eef9a3bc27efdc436856c74094a53e593440032adc1cf97396190ba7779599d4",
+      "characterCount": 3292,
+      "wordCount": 442,
+      "preview": "Skip to main content Theodore Ouyang Back to Experience AI Research and Engineering Large-scale domain expert feedback governance and adaptive review Duke Unive",
       "altTexts": [],
       "ariaLabels": [
         "Theodore Ouyang home",
@@ -1090,14 +1090,15 @@
       }
     },
     "/past-experience/artificial-intelligence/statistical-inference-and-resource-allocation-in-expert-data-production/": {
-      "textSha256": "54cd301ae344a322b0b670df12f5fd28e531453f4023091404847702f105e119",
-      "characterCount": 22583,
-      "wordCount": 3203,
+      "textSha256": "688f0c76305cb0d307896c92cfa87a15c1348478d8b9d4ea13bbb9847f405b9e",
+      "characterCount": 23116,
+      "wordCount": 3271,
       "preview": "Skip to main content Theodore Ouyang Back to Experience Large-scale domain expert feedback governance and adaptive review Organization Duke University × Leading",
       "altTexts": [],
       "ariaLabels": [
         "Theodore Ouyang home",
         "Parent navigation",
+        "Scrollable mathematical expression",
         "Scrollable mathematical expression",
         "Scrollable mathematical expression",
         "Article contents",
@@ -1148,13 +1149,13 @@
         "twitterTitle": "Duke University × Leading Foundation Model Developer: Large-scale domain expert feedback governance and adaptive review",
         "twitterDescription": "With a leading foundation model developer, I led the statistical system behind expert feedback for LLM post-training, one of the first engineering implementations of prediction-assisted statistical inference and capacity-constrained review allocation in..."
       },
-      "mathSourceSha256": "5295a0f525517511c5308ba90852d58e7f37534677875c25ebb0174a42852a87",
-      "formulaCount": 147
+      "mathSourceSha256": "f3d7ba2b0e0de31349488cd12eaa1b589fd3008d4ed1bde80cef7b7d750ba867",
+      "formulaCount": 152
     },
     "/past-experience/artificial-intelligence/task-validity-in-financial-synthetic-data/": {
-      "textSha256": "cf781998d2a1b4eb3a6bbe04e46cc6799a722d1e2ae55967c882d9561dd99c73",
-      "characterCount": 22100,
-      "wordCount": 3020,
+      "textSha256": "84f1d294d4967f73a8211dffccf6fb239b0f62ebcd91b710f307afbcda0e90c9",
+      "characterCount": 22773,
+      "wordCount": 3108,
       "preview": "Skip to main content Theodore Ouyang Back to Experience Financial task design and synthetic data engineering Organization Duke University × Leading Foundation M",
       "altTexts": [],
       "ariaLabels": [
@@ -1199,13 +1200,13 @@
         "twitterTitle": "Duke University × Leading Foundation Model Developer: Financial task design and synthetic data engineering",
         "twitterDescription": "I designed the data strategy for financial post-training in a frontier foundation model program, one of the first engineering implementations of constraint-preserving synthetic data and structured expert preference supervision for financial LLM post-training."
       },
-      "mathSourceSha256": "a5135c00bb4ad37f87634c0a46f1bedae0f3d2d8368c7a927ba3822b31ac64db",
-      "formulaCount": 107
+      "mathSourceSha256": "e3b1e4f3fece5f26fd7889d0e2fb2cc54cb9d65a6241f589f99a908078fd6bc9",
+      "formulaCount": 109
     },
     "/past-experience/artificial-intelligence/verification-and-supervision-in-scientific-reasoning-tasks/": {
-      "textSha256": "23fff0c854e906302d4d11061beecb990167731c3a20c496982f1b67034d5a59",
-      "characterCount": 22504,
-      "wordCount": 3214,
+      "textSha256": "6242c1966a90ebd923b14158214a4976d1f8bc35a12c4fa7e7c5bb510f51b5e0",
+      "characterCount": 22967,
+      "wordCount": 3274,
       "preview": "Skip to main content Theodore Ouyang Back to Experience General reasoning evaluation and layered verification Organization Duke University × Frontier AI Researc",
       "altTexts": [],
       "ariaLabels": [
@@ -1260,13 +1261,13 @@
         "twitterTitle": "Duke University × Frontier AI Research Laboratory: General reasoning evaluation and layered verification",
         "twitterDescription": "I developed a framework for evaluating and supervising general reasoning with a frontier AI research laboratory, among the first engineering implementations of joint verification across final answers, visible reasoning and execution evidence in frontier..."
       },
-      "mathSourceSha256": "ab3430d55979ab3241a20d4dc8b0b42233ceb872994e1c0149c6d055d23fe704",
-      "formulaCount": 126
+      "mathSourceSha256": "e491a1dd5d5faafa14cf68d9c47f2f42e074c7018698bd6633759998327829e1",
+      "formulaCount": 127
     },
     "/past-experience/artificial-intelligence/evidence-uncertainty-and-decision-guarantees-in-investment-research/": {
-      "textSha256": "8668a9fadc95f4194d6c622b3766fafdc8ad02d9bc38b2681522bdd945427b52",
-      "characterCount": 16813,
-      "wordCount": 2463,
+      "textSha256": "8adbb870af316766c668fcf327036453101d03f7d9ce5e2501e899365a1310c4",
+      "characterCount": 17212,
+      "wordCount": 2516,
       "preview": "Skip to main content Theodore Ouyang Back to Experience Evidence verification and robust comparison in investment research Organization Duke University × Leadin",
       "altTexts": [],
       "ariaLabels": [
@@ -1322,14 +1323,14 @@
         "twitterTitle": "Duke University × Leading Global Alternative Asset Manager: Evidence verification and robust comparison in investment research",
         "twitterDescription": "I developed and implemented a framework for evidence verification and decision assurance with a leading global alternative asset manager, one of the first engineering implementations in institutional investment research to treat model multiplicity,..."
       },
-      "mathSourceSha256": "b5a9f4358cfd16cbcbd639c68f46134326efb2b51391b964e4e0e19470b1669a",
-      "formulaCount": 133
+      "mathSourceSha256": "aac71524ae3c1dd0942d8f8e917c85cc3d245e9e670070edc9e6574d6b73b7fa",
+      "formulaCount": 136
     },
     "/past-experience/data-science/": {
-      "textSha256": "4c28243e2463e440a5821cbeb48f0044ad1a042b262bc5e841ebea2f585cf666",
-      "characterCount": 1187,
-      "wordCount": 157,
-      "preview": "Skip to main content Theodore Ouyang Back to Experience Data Science Jiritsu Network Owned business development for Jiritsu's asset-verification and privacy-pre",
+      "textSha256": "6a0cd7abc26180586f454a18267837381bc2e650b15a761e83cd29129a006064",
+      "characterCount": 1351,
+      "wordCount": 182,
+      "preview": "Skip to main content Theodore Ouyang Back to Experience Data Science Jiritsu Network Business Development and Business Analytics (Full-time) August 2024 – Octob",
       "altTexts": [],
       "ariaLabels": [
         "Theodore Ouyang home",
@@ -1350,10 +1351,10 @@
       }
     },
     "/past-experience/legal-research-and-policy-analysis/": {
-      "textSha256": "e4c6c4d6f51fe85467925f1bf156ee7eca9e5f4223daa6fbe7189e4de7561d63",
-      "characterCount": 2769,
-      "wordCount": 364,
-      "preview": "Skip to main content Theodore Ouyang Back to Experience Legal Research and Policy Analysis Duke Law School: Space Law and Autonomous Systems Research I develope",
+      "textSha256": "e37047334b031b87edad40697698671aaf74cce0c54d102afa0e087e57251ad6",
+      "characterCount": 3244,
+      "wordCount": 432,
+      "preview": "Skip to main content Theodore Ouyang Back to Experience Legal Research and Policy Analysis Duke Law School: Space Law and Autonomous Systems Research Autonomous",
       "altTexts": [],
       "ariaLabels": [
         "Theodore Ouyang home",
@@ -1375,10 +1376,10 @@
       }
     },
     "/past-experience/finance/": {
-      "textSha256": "2fb0fa2cc1489d8c7a9c2960e6b5e831cdd33e4acbe1fe7cfac26360e6390e8f",
-      "characterCount": 1552,
-      "wordCount": 199,
-      "preview": "Skip to main content Theodore Ouyang Back to Experience Finance and Consulting Jones Lang LaSalle Capital Markets Team Served as the project team's ESG lead on ",
+      "textSha256": "71e835a59414372df382e4a9b7fd98ca5b30e914b9aa42b263e58a5f444f16df",
+      "characterCount": 1809,
+      "wordCount": 241,
+      "preview": "Skip to main content Theodore Ouyang Back to Experience Finance and Consulting Jones Lang LaSalle Capital Markets Team Summer Intern June 2024 – August 2024 Ser",
       "altTexts": [],
       "ariaLabels": [
         "Theodore Ouyang home",
@@ -1401,10 +1402,10 @@
       }
     },
     "/past-experience/stem-academic-competitions-and-training/": {
-      "textSha256": "6d84e5a156f15f08ffedf0488b840b1240b579e3c30675a9fb48405441c8c3b3",
-      "characterCount": 633,
-      "wordCount": 85,
-      "preview": "Skip to main content Theodore Ouyang Back to Experience STEM Academic Competitions and Training Independent STEM Olympiad Training Practice Independently coache",
+      "textSha256": "56eefd34f7bb0b901911ae40ed5c347c7445b64e3b62937d808831a034193a00",
+      "characterCount": 837,
+      "wordCount": 114,
+      "preview": "Skip to main content Theodore Ouyang Back to Experience STEM Academic Competitions and Training Independent STEM Olympiad Training Practice IPhO-Level Physics I",
       "altTexts": [],
       "ariaLabels": [
         "Theodore Ouyang home",
@@ -1424,9 +1425,9 @@
       }
     },
     "/past-experience/legal-research-and-policy-analysis/autonomous-authority-in-space/": {
-      "textSha256": "552496e45bb45b141c6ce8997a3b2761dcba34b02af9e2a6feea6de51ae746d7",
-      "characterCount": 66694,
-      "wordCount": 9324,
+      "textSha256": "f7c1100643fcd1ebec082cee98ccaab1a86ef53fd1c7f40494aa7c8d7ed9bb21",
+      "characterCount": 67417,
+      "wordCount": 9418,
       "preview": "Skip to main content Theodore Ouyang Back to Experience Autonomous Authority in Space: Risk Tradeoffs and the Law of Delegation Organization Duke Law School Pos",
       "altTexts": [],
       "ariaLabels": [
@@ -1508,9 +1509,9 @@
       }
     },
     "/past-experience/legal-research-and-policy-analysis/small-states-and-strategic-space-dependence/": {
-      "textSha256": "829c62025481eccb60a0b671d9473a624d0f1ad8f28d21232786dedacf71bc3d",
-      "characterCount": 51464,
-      "wordCount": 7039,
+      "textSha256": "64fd1ef569431686cac353c7034580ce1b827de86ac282bb634cc5d2a897bbed",
+      "characterCount": 52442,
+      "wordCount": 7165,
       "preview": "Skip to main content Theodore Ouyang Back to Experience Small States and the Governance of Strategic Space Dependence Organization Duke Law School Position Auth",
       "altTexts": [],
       "ariaLabels": [
@@ -1596,9 +1597,9 @@
       }
     },
     "/past-experience/legal-research-and-policy-analysis/solar-geoengineering-comparison-and-continuity/": {
-      "textSha256": "e2aee50b00b5d8be6c0c0122ca7f982a876a7e9d2565e06139874970252f71d2",
-      "characterCount": 49113,
-      "wordCount": 6826,
+      "textSha256": "0971213c3ab29da1b544567b6b97ddc304939e5fbd7cb52b7f79957fb11e9431",
+      "characterCount": 49903,
+      "wordCount": 6921,
       "preview": "Skip to main content Theodore Ouyang Back to Experience Who May Choose the Lesser Risk: Solar Geoengineering and the Legal Duties of Comparison and Continuity O",
       "altTexts": [],
       "ariaLabels": [
@@ -1680,9 +1681,9 @@
       }
     },
     "/past-experience/legal-research-and-policy-analysis/mangrove-restoration-and-compensatory-mitigation/": {
-      "textSha256": "f3c1652000d7c23e4f79e4e248b8e66a86758edd7f05e0bf92fb2691c5b39475",
-      "characterCount": 63809,
-      "wordCount": 8886,
+      "textSha256": "ecc0a0b6fea2791f4eeb7aef5632f935ed7a2520203767ffcc8d8a79427d5579",
+      "characterCount": 64481,
+      "wordCount": 8972,
       "preview": "Skip to main content Theodore Ouyang Back to Experience Mangrove Restoration and the Limits of Compensatory Mitigation: Lessons from Florida for the Greater Bay",
       "altTexts": [],
       "ariaLabels": [
@@ -1786,9 +1787,9 @@
       }
     },
     "/now/": {
-      "textSha256": "f640cebdce8a87ab8f1434a718b50a161fcb366a01fbd83dcc211460bdef58f6",
-      "characterCount": 8870,
-      "wordCount": 1156,
+      "textSha256": "78cb36b17f5a155a4e9916e427c238ac811b0b3f2d78d43d43f97c30c68dd9c8",
+      "characterCount": 10317,
+      "wordCount": 1369,
       "preview": "Skip to main content Theodore Ouyang About Experience Experience: Areas of Focus AI Research and Engineering Data Science Legal Research and Policy Analysis Fin",
       "altTexts": [],
       "ariaLabels": [
