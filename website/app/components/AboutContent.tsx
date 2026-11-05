@@ -10,7 +10,7 @@ const researchSummaries: Record<string, ReactNode[]> = {
     </>,
   ],
   "certified-valuation-arithmetic-asian-options": [
-    "I develop a weighted payoff-remainder method and use it to turn an exact conditional price representation into certified valuations of arithmetic Asian options. Shared Gaussian smoothing and validated Heston transforms together give a complete bound on the projected Euler discretization error, below 0.011025 price units, for a one-year call spread with twelve monthly fixings at a specified Heston parameter point and step size. I also derive a direct coupling bound, which cuts the nonlinear remainder width by 99.4% in a deterministic-variance example. Both results come with proofs and executable certificates.",
+    "I develop a weighted payoff-remainder method and use it to turn an exact conditional price representation into certified valuations of arithmetic Asian options. Shared Gaussian smoothing and validated Heston transforms together give a complete projected Euler discretization-error bound below 0.011025 price units for a one-year call spread with twelve monthly fixings at a specified Heston parameter point and step size. I also derive a direct coupling bound, which cuts the nonlinear remainder width by 99.4% in a deterministic-variance example. Both results come with proofs and executable certificates.",
   ],
   "certified-rough-heston-valuation": [
     <>
