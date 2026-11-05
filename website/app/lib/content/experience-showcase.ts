@@ -27,6 +27,7 @@ export type ShowcaseEntry = SourceEntry & {
   articlePath?: string;
   detailPath: string;
   listingTitle: string;
+  listingOrganization?: string;
   pageTitle: string;
 };
 export type ShowcaseDomain = { number: string; name: string; slug: string; entries: ShowcaseEntry[]; disclosure?: CopySection };
@@ -76,11 +77,13 @@ export const showcaseEntries: readonly ShowcaseEntry[] = source.entries.map((ent
   const articlePath = entry.categoryId === "01" ? aiResearchProjectPath(slug)
     : entry.categoryId === "03" ? legalPaperPath(slug) : undefined;
   const organization = entry.categoryId === "03" ? "Duke Law School" : entry.organization;
-  const listingTitle = entry.categoryId === "03" ? `${organization}: ${legalResearchAreas[entry.id]}` : organization;
+  const listingTitle = entry.categoryId === "03" ? `${organization}: ${legalResearchAreas[entry.id]}`
+    : entry.categoryId === "01" ? entry.detailTitle : organization;
   return {
     ...entry, slug, articlePath,
     detailPath: articlePath ?? `/experience/${slug}/`,
     listingTitle,
+    listingOrganization: entry.categoryId === "01" ? organization : undefined,
     pageTitle: `${organization}: ${entry.detailTitle.replace(/:\s*/gu, " — ")}`,
   };
 });

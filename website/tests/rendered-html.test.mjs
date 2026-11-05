@@ -254,7 +254,7 @@ function expectedExperiencePresentation(entry) {
     : legal ? ARTICLES[entry.id - 8][0] : EXPERIENCE_DETAIL_SLUGS.get(entry.id);
   assert.ok(slug, `Entry ${entry.id} needs an independent expected route`);
   return {
-    listingTitle: legal ? LEGAL_LISTING_TITLES[entry.id - 8] : entry.organization,
+    listingTitle: legal ? LEGAL_LISTING_TITLES[entry.id - 8] : entry.categoryId === "01" ? entry.detailTitle : entry.organization,
     pageTitle: `${organization}: ${DISPLAY_DETAIL_TITLES.get(entry.id) ?? entry.detailTitle}`,
     path: ai ? `${AI_ROUTE}${slug}/` : legal ? `${LAW_ROUTE}${slug}/` : `/experience/${slug}/`,
     slug,
@@ -462,7 +462,7 @@ test("About opens with its accessible clarinet hero before the retained profile"
   assert.ok(heading);
   assert.equal(openingTags(home, "h1").length, 1);
   assert.equal(stripMarkup(heading[1]), "Theodore Ouyang");
-  assert.match(stripMarkup(hero), /Duke alumnus/u);
+  assert.match(stripMarkup(hero), /Duke Alumnus/u);
   assert.match(stripMarkup(hero), /Sequoia Fellow/u);
   const cornerTags = [...hero.matchAll(/<[a-z][\w:-]*\b[^>]*>/gu)]
     .map(match => match[0]).filter(tag => (attribute(tag, "class") ?? "").split(/\s+/u)
@@ -1013,7 +1013,7 @@ test("the production design contract is restrained and dependency-light", async 
   assert.match(globals, /\.structural-guide-tick\s*\{[\s\S]*?position:\s*sticky[\s\S]*?height:\s*20px/u);
   assert.match(directory, /\.directory\s*\{[^}]*grid-template-columns:\s*1fr/u);
   assert.match(experience, /\.section\s*\{[^}]*grid-template-columns:\s*repeat\(12,/u);
-  assert.match(experience, /\.sectionBody\s*\{[^}]*grid-column:\s*2\s*\/\s*span\s*10[^}]*max-width:\s*var\(--reading-measure\)/u);
+  assert.match(experience, /\.sectionBody\s*\{[^}]*grid-column:\s*2\s*\/\s*span\s*8[^}]*max-width:\s*var\(--reading-measure\)/u);
   assert.doesNotMatch(globals, /\.education-entry\s*\{[^}]*grid-template-columns/u);
   for (const guide of ["frame-start", "rail-boundary", "reading-start", "reading-measure", "reading-end"]) assert.ok(structuralGrid.includes(`"${guide}"`));
   for (const contract of ["aria-controls=\"site-menu\"", "aria-expanded={menuOpen}", 'event.key === "Escape"', 'document.body.classList.add("menu-open")', 'querySelectorAll<HTMLElement>']) assert.ok(navigation.includes(contract));
@@ -1061,9 +1061,9 @@ test("shared typography source roles preserve article names, compact indices, me
   assert.doesNotMatch(experience, /font-optical-sizing|font-variation-settings/u, "Experience must inherit the global optical settings rather than create a different font instance");
   assert.match(rule(globals, "body"), /font-family:\s*var\(--font-text\)/u);
   const tokens = rule(globals, ":root");
-  assert.match(tokens, /--type-subheading:\s*1\.125rem\s*;/u);
+  assert.match(tokens, /--type-subheading:\s*1\.25rem\s*;/u);
   assert.match(tokens, /--type-index:\s*0\.625rem\s*;/u);
-  assert.match(tokens, /--type-reading:\s*0\.875rem\s*;/u);
+  assert.match(tokens, /--type-reading:\s*0\.9375rem\s*;/u);
   assert.match(tokens, /--type-math:\s*1\.15em\s*;/u);
   for (const css of [home, experience, coursework]) {
     assert.match(rule(css, ".sectionIndex"), /font-size:\s*var\(--type-index\)\s*;/u, "Section indices share the compact 10px semantic role.");
@@ -1073,8 +1073,8 @@ test("shared typography source roles preserve article names, compact indices, me
   assert.match(rule(coursework, ".sectionBody h2"), /font-size:\s*var\(--type-heading\)\s*;/u);
   assert.match(rule(coursework, ".courseList"), /font-size:\s*var\(--type-reading\)\s*;/u);
   for (const declarations of [rule(articles, ".paper .header h1"), rule(experience, ".detailPage .detailHeader h1"), rule(experience, ".entryTitle")]) {
-    assert.match(declarations, /font-size:\s*var\(--type-subheading\)\s*;/u, "Article and experience names must share the 18px semantic role");
-    assert.match(declarations, /font-weight:\s*600\s*;/u);
+    assert.match(declarations, /font-size:\s*var\(--type-subheading\)\s*;/u, "Article and experience names must share the 20px semantic role");
+    assert.match(declarations, /font-weight:\s*500\s*;/u);
     assert.match(declarations, /line-height:\s*var\(--subheading-leading\)\s*;/u);
   }
   assert.match(rule(math, ".formula"), /font-size:\s*var\(--type-math\)\s*;/u);

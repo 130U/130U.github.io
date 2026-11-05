@@ -21,7 +21,7 @@ export function ClarinetHero() {
         <div className={styles.copy} data-hero-copy>
           <h1 id="hero-name"><span>Theodore</span>{" "}<span>Ouyang</span></h1>
           <ul className={styles.credentials}>
-            <li><strong>Duke</strong>{" "}<span>alumnus</span></li>
+            <li><strong>Duke</strong>{" "}<span>Alumnus</span></li>
             <li><strong>Sequoia</strong>{" "}<span>Fellow</span></li>
           </ul>
         </div>

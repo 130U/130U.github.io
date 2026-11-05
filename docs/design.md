@@ -8,7 +8,7 @@ The site pairs self-hosted Inter with Source Serif 4 and its own content hierarc
 ## Identity
 
 The compact LO mark appears in the navigation and browser icons. About opens with
-Theodore Ouyang's name and the identities Duke alumnus and Sequoia Fellow on the
+Theodore Ouyang's name and the identities Duke Alumnus and Sequoia Fellow on the
 left, with a recognizable clarinet particle field on the right. The clarinet
 follows the selected reference's slender silhouette, reflective mouthpiece face,
 six silver ring keys, joint bands and pads, two long rods, and a flared
@@ -50,7 +50,7 @@ italics and bundled licenses. Inter retains automatic optical sizing disabled an
 the `opsz` axis fixed at 14. Prose numerals use proportional widths; section indices
 and numeric tables can use tabular widths. Shared bold emphasis uses weight 600.
 The LO mark uses independent artwork. The hero name and the institution names
-Duke and Sequoia retain Inter; the supporting roles alumnus and Fellow use Source
+Duke and Sequoia retain Inter; the supporting roles Alumnus and Fellow use Source
 Serif 4, preserving the site's heading/prose pairing.
 The decorative clarinet uses opaque ink, silver-gray, and blue point samples in
 Canvas 2D, with transparent gaps between the points. Clean mother-shape paths are
@@ -79,25 +79,26 @@ scale relative to surrounding text without changing the prose size.
 
 | Role | Shared token | Size at the default text setting | Leading |
 | --- | --- | --- | --- |
-| General page title | `--type-title` | 32px desktop / 28px mobile, weight 500 | 1.2 |
-| Section heading, coursework category heading | `--type-heading` | 32px desktop / 28px mobile, weight 500 | 1.2 |
-| Institution, project or paper name | `--type-subheading` | 18px, weight 600 | 1.45 |
-| About degree | `--type-reading` | 14px, weight 500 | 1.6 |
-| Body, records, introductions, course names, metadata values | `--type-reading` | 14px | 1.6 |
+| General page title | `--type-title` | 36px desktop / 30px mobile, weight 400 | 1.12 |
+| Section heading, coursework category heading | `--type-heading` | 36px desktop / 30px mobile, weight 400 | 1.12 |
+| Institution, project or paper name | `--type-subheading` | 20px, weight 500 | 1.35 |
+| About degree | `--type-reading` | 15px, weight 500 | 1.6 |
+| Body, records, introductions, course names, metadata values | `--type-reading` | 15px | 1.6 |
 | Navigation, menu, wordmark name, return link | `--type-interface` | 14px | 1.4 |
-| Top-level directory item | `--type-subheading` | 18px, weight 500 | 1.45 |
-| Research list title | `--type-subheading` | 18px, weight 600 | 1.45 |
+| Top-level directory item | `--type-subheading` | 20px, weight 500 | 1.35 |
+| Research list title | `--type-subheading` | 20px, weight 500 | 1.35 |
 | Section margin index and directory number | `--type-index` | 10px, weight 400 | 1.5 |
 | Project reading action | `--type-action`, alias of `--type-interface` | 14px, weight 500 | 1.4 |
-| Research prose and table cells | `--type-reading` | 14px | 1.6 |
+| Research prose and table cells | `--type-reading` | 15px | 1.6 |
+| Metric label, organization line, figure caption | `--type-caption` | 13px | 1.4 |
 | Inline mathematical expression | Relative to surrounding text | 1em | Intrinsic mathematical geometry |
 | Displayed mathematical expression | `--type-math` | 1.15em | Intrinsic mathematical geometry |
 | Field label, footer | `--type-label` | 14px | 1.4 |
 
 Text roles use rem units and scale with the user's text setting. General titles and
-section headings use 32px on desktop and 28px below 768px, including in the architecture
-viewer. The 18px subheading, 14px reading/interface, and 10px index roles remain the
-same at every viewport. General titles and section headings use -0.02em tracking;
+section headings use 36px on desktop and 30px below 768px, including in the architecture
+viewer. The 20px subheading, 15px reading, 14px interface, and 10px index roles remain
+the same at every viewport. General titles and section headings use -0.02em tracking;
 article names, reading text, and indices use zero tracking. The shared
 `--reading-leading` remains 1.6 for sustained reading.
 Blue marks active navigation, focus, and link feedback. Editorial surfaces use flat
@@ -111,7 +112,7 @@ paper/ink palette. It is one page with five numbered sections and an anchor
 directory headed Experience: Areas of Focus that stays in one column at every screen width.
 Experience and Coursework use the same `SectionDirectory` component: full-width
 rows separated by thin rules, with small serif numbers at the left and labels in the
-18px subheading size at weight 500. A right-aligned View action appears on hover
+20px subheading size at weight 500. A right-aligned View action appears on hover
 and keyboard focus and remains visible on touch devices; the complete row turns
 blue on hover or focus. Directory numbers run from 01 through 05 for Experience
 and 01 through 04 for Coursework. Both the decorative numbers and repeated View
@@ -120,11 +121,23 @@ link's accessible name. Section margin indices use the shared 10px serif index r
 About, Experience, and Coursework. Section spacing separates
 domains; thin rules and 28px gaps distinguish entries within them. Category
 introductions are omitted. Summaries use upright
-black body text at 14px; project and organization titles use the 18px subheading
+black body text at 15px; project and organization titles use the 20px subheading
 role. No content is truncated to fit a card.
 
-All body copy uses the shared ink colors.
-Blue remains reserved for navigation, hover, and keyboard focus.
+All body copy uses the shared ink colors. Blue marks navigation, hover, keyboard
+focus, and the decision or feedback path in architecture figures.
+
+AI entries lead with the project name, followed by the organization, a short
+summary, and `MetricRow`: flat figures under a rule, with no fill or pill. Benchmark
+metrics name their setting. The same row follows the metadata on AI detail pages,
+and a display-size row closes the About introduction. AI pages show one
+`ArchitectureFlow` under Architectural Context, drawn in HTML so its labels stay
+selectable and reflow to a vertical sequence below 620px. Copy for both lives in
+`app/lib/content/experience-highlights.ts`. The confidentiality note closes the AI
+section.
+
+Reading columns stop at the structural reading-measure guide. On wide layouts the
+contents rail lists chapters and opens subsections only for the chapter being read.
 
 All eighteen entries use real Read More links to dedicated pages. The eight AI and
 legal articles use their manuscript URLs; the other ten entries have pages at
@@ -132,7 +145,7 @@ legal articles use their manuscript URLs; the other ten entries have pages at
 legal entries use `Duke Law School: {research area} Research`. Detail-page H1s use
 `{institution}: {project title}`, with any internal title colon rendered as an em
 dash so the institution separator is the title's only colon. These project and paper
-names use the 18px role even when they are H1s. Position, Location, and Dates appear
+names use the 20px role even when they are H1s. Position, Location, and Dates appear
 as three rows with aligned label/value pairs, stacking within a row below 420px.
 The rows are followed by the approved Key
 Contributions, with contextual notes as the final bullets in the same list and
@@ -148,8 +161,8 @@ before the complete Abstract and manuscript. The shared contents rail includes
 the contribution block and source chapter links. Return links target the matching
 entry on Experience.
 
-Research article prose, emphasis, citations, and table cells use the shared 14px
-reading size. Subsection headings use the shared 18px size with weight 600. Inline
+Research article prose, emphasis, citations, and table cells use the shared 15px
+reading size. Subsection headings use the shared 20px size with weight 500. Inline
 formulas use 1em; standalone formulas use 1.15em. Pure inline numerical values,
 including scientific notation and percentages, use the surrounding prose family
 with native superscripts while retaining their accessible MathML and original TeX.
@@ -171,7 +184,7 @@ fine rule, and 2rem of inset; phone spacing is 4rem and 1.5rem. Subsections use
 the site's fonts or type sizes.
 
 Section margin indices use `--type-index`; metadata labels use `--type-label`.
-Top-level directories use the 18px subheading role. Navigation, the wordmark name,
+Top-level directories use the 20px subheading role. Navigation, the wordmark name,
 the mobile menu, and return links share `--type-interface` at every breakpoint.
 Text links share a 1px underline, `--link-rule`, and `--link-underline-offset`.
 Focus remains a visible blue outline, and hover feedback respects pointer capability.
@@ -213,7 +226,7 @@ the About page keeps its `#coursework` anchor around this entrance. The dedicate
 page has four subject sections, indexed 01 through 04, and uses the same numbered,
 ruled directory and View interaction as Experience.
 Each section has a shared section heading and a single-column list of course names
-at the shared 14px reading size and leading. All 49 courses retain their original
+at the shared 15px reading size and leading. All 49 courses retain their original
 wording and order as static text, available without JavaScript. The rail's
 Back to Education link returns to the Education section. Duke University appears
 once above the two degree records;
@@ -233,7 +246,7 @@ matches Experience's underlined text and decorative right arrow, with blue hover
 and keyboard-focus feedback. Its accessible name identifies the manuscript.
 The list omits dates. Paragraphs wrap naturally
 without forced line breaks. Section headings, entry headings, and reading text use
-the shared heading, 18px subheading, and 14px reading hierarchy; scoped spacing overrides do not affect other pages.
+the shared heading, 20px subheading, and 15px reading hierarchy; scoped spacing overrides do not affect other pages.
 
 Page titles own the H1 position. About's two-line "Theodore / Ouyang" supplies its
 main heading. The "Thinking mathematically / Working in AI" introduction

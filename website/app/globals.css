@@ -9,20 +9,21 @@
   --rule-strong: rgba(0, 0, 0, 0.24);
   --accent: #2200ff;
   --dither: #070707;
-  --type-title: 2rem;
-  --type-heading: 2rem;
-  --type-subheading: 1.125rem;
+  --type-title: 2.25rem;
+  --type-heading: 2.25rem;
+  --type-subheading: 1.25rem;
   --type-index: 0.625rem;
-  --type-reading: 0.875rem;
+  --type-caption: 0.8125rem;
+  --type-reading: 0.9375rem;
   --type-label: 0.875rem;
   --type-interface: 0.875rem;
   --type-action: var(--type-interface);
   --type-math: 1.15em;
-  --reading-measure: 720px;
+  --reading-measure: 600px;
   --rail-min-width: calc(5 * var(--type-interface) + 13px + clamp(20px, 2vw, 24px) + 22px + 10px);
-  --title-leading: 1.2;
-  --heading-leading: 1.2;
-  --subheading-leading: 1.45;
+  --title-leading: 1.12;
+  --heading-leading: 1.12;
+  --subheading-leading: 1.35;
   --reading-leading: 1.6;
   --interface-leading: 1.4;
   --label-leading: 1.4;
@@ -412,6 +413,7 @@ button:focus-visible {
   max-width: 920px;
   font-size: var(--type-title);
   line-height: var(--title-leading);
+  letter-spacing: -0.02em;
 }
 
 .section-kicker {
@@ -580,8 +582,8 @@ button:focus-visible {
 
 @media (width < 768px) {
   :root {
-    --type-title: 1.75rem;
-    --type-heading: 1.75rem;
+    --type-title: 1.875rem;
+    --type-heading: 1.875rem;
   }
 
   html {
