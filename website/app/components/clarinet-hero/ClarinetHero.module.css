@@ -56,17 +56,15 @@
   border-top: 1px solid var(--rule-strong);
   list-style: none;
   font-family: var(--font-prose);
-  font-size: clamp(18px, 1.5vw, 22px);
-  line-height: 1.45;
+  font-size: var(--type-reading);
+  line-height: var(--reading-leading);
   color: var(--supporting-ink);
 }
 .credentials li { display: grid; gap: 3px; }
 .credentials strong {
   color: var(--ink);
   font-family: var(--font-text);
-  font-size: 16px;
   font-weight: 500;
-  letter-spacing: -.01em;
 }
 .visual { position: relative; min-width: 0; padding: 26px 0; }
 .stage {

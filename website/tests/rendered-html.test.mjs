@@ -290,13 +290,13 @@ function assertExperienceDetails(html, expected) {
     .filter((match) => attribute(match[1], "data-experience-metadata") !== undefined);
   assert.equal(metadata.length, 1, `Entry ${expected.id} must have one metadata group`);
   const metadataRows = [...metadata[0][2].matchAll(/<div\b[^>]*>([\s\S]*?)<\/div>/giu)];
-  assert.equal(metadataRows.length, 3, `Entry ${expected.id} must keep Position, Location, and Dates in separate rows`);
+  assert.equal(metadataRows.length, 4, `Entry ${expected.id} must keep Organization, Position, Location, and Dates in separate rows`);
   for (const [index, row] of metadataRows.entries()) {
     assert.equal(openingTags(row[1], "dt").length, 1, `Entry ${expected.id}, metadata row ${index + 1}`);
     assert.equal(openingTags(row[1], "dd").length, 1, `Entry ${expected.id}, metadata row ${index + 1}`);
   }
   assert.deepEqual([...metadata[0][2].matchAll(/<d[td]\b[^>]*>([\s\S]*?)<\/d[td]>/giu)].map((match) => stripMarkup(match[1])), [
-    "Position", expected.metadata.position, "Location", expected.metadata.location, "Dates", expected.metadata.dates,
+    "Organization", expected.categoryId === "03" ? "Duke Law School" : expected.organization, "Position", expected.metadata.position, "Location", expected.metadata.location, "Dates", expected.metadata.dates,
   ]);
   const contributions = [...html.matchAll(/<section\b([^>]*)>([\s\S]*?)<\/section>/giu)]
     .find((match) => attribute(match[1], "data-experience-contributions") === String(expected.id));
@@ -690,7 +690,7 @@ test("all eighteen approved Experience entries use institution titles and real l
 
     const detailPage = await routeHtml(presentation.path);
     assert.equal(openingTags(detailPage, "h1").length, 1);
-    assert.equal(stripMarkup(detailPage.match(/<h1\b[^>]*>([\s\S]*?)<\/h1>/u)?.[1] ?? ""), presentation.pageTitle);
+    assert.equal(stripMarkup(detailPage.match(/<h1\b[^>]*>([\s\S]*?)<\/h1>/u)?.[1] ?? ""), entry.detailTitle);
     assert.equal((presentation.pageTitle.match(/:/gu) ?? []).length, 1, "Only the institution separator may remain a colon");
     assertExperienceDetails(detailPage, entry);
     assert.ok(detailPage.indexOf("data-experience-metadata") < detailPage.indexOf("data-experience-contributions"));
@@ -830,7 +830,7 @@ test("law articles expose one complete native contents menu and source-only publ
     assert.ok(frontmatter, `${slug} lost its article frontmatter`);
     const expected = (await approvedExperience()).find(({ id }) => id === ARTICLES.findIndex(([articleSlug]) => articleSlug === slug) + 8);
     const metadata = [...frontmatter[1].matchAll(/<d[td]\b[^>]*>([\s\S]*?)<\/d[td]>/giu)].map((match) => inlineText(match[1]));
-    assert.deepEqual(metadata, ["Position", expected.metadata.position, "Location", expected.metadata.location, "Dates", expected.metadata.dates]);
+    assert.deepEqual(metadata, ["Organization", "Duke Law School", "Position", expected.metadata.position, "Location", expected.metadata.location, "Dates", expected.metadata.dates]);
     assert.ok(html.indexOf('id="key-contributions"') < html.indexOf('id="abstract-heading"'));
     for (const key of ["citation_journal_title", "citation_doi", "citation_volume", "citation_issue", "citation_issn", "citation_conference_title"]) {
       assert.equal(metaContent(html, "name", key), undefined, `${slug} invents unsupported ${key}`);
@@ -1061,22 +1061,26 @@ test("shared typography source roles preserve article names, compact indices, me
   assert.doesNotMatch(experience, /font-optical-sizing|font-variation-settings/u, "Experience must inherit the global optical settings rather than create a different font instance");
   assert.match(rule(globals, "body"), /font-family:\s*var\(--font-text\)/u);
   const tokens = rule(globals, ":root");
-  assert.match(tokens, /--type-subheading:\s*1\.25rem\s*;/u);
+  assert.match(tokens, /--type-subheading:\s*0\.9375rem\s*;/u);
   assert.match(tokens, /--type-index:\s*0\.625rem\s*;/u);
   assert.match(tokens, /--type-reading:\s*0\.9375rem\s*;/u);
   assert.match(tokens, /--type-math:\s*1\.15em\s*;/u);
   for (const css of [home, experience, coursework]) {
     assert.match(rule(css, ".sectionIndex"), /font-size:\s*var\(--type-index\)\s*;/u, "Section indices share the compact 10px semantic role.");
   }
-  assert.match(rule(directory, ".directory a"), /font-size:\s*var\(--type-subheading\)\s*;/u, "Both top-level directories share the 18px semantic role.");
+  assert.match(rule(directory, ".directory a"), /font-size:\s*var\(--type-heading\)\s*;/u, "Both top-level directories share the 18px semantic role.");
   assert.match(rule(directory, ".index"), /font-size:\s*var\(--type-index\)\s*;/u, "Both directories use the compact section-index role.");
   assert.match(rule(coursework, ".sectionBody h2"), /font-size:\s*var\(--type-heading\)\s*;/u);
   assert.match(rule(coursework, ".courseList"), /font-size:\s*var\(--type-reading\)\s*;/u);
-  for (const declarations of [rule(articles, ".paper .header h1"), rule(experience, ".detailPage .detailHeader h1"), rule(experience, ".entryTitle")]) {
-    assert.match(declarations, /font-size:\s*var\(--type-subheading\)\s*;/u, "Article and experience names must share the 20px semantic role");
-    assert.match(declarations, /font-weight:\s*500\s*;/u);
-    assert.match(declarations, /line-height:\s*var\(--subheading-leading\)\s*;/u);
+  for (const declarations of [rule(articles, ".paper .header h1"), rule(experience, ".detailPage .detailHeader h1")]) {
+    assert.match(declarations, /font-size:\s*var\(--type-title\)\s*;/u, "Every page title shares the title role");
+    assert.match(declarations, /font-weight:\s*400\s*;/u);
+    assert.match(declarations, /line-height:\s*var\(--title-leading\)\s*;/u);
   }
+  const entryTitle = rule(experience, ".entryTitle");
+  assert.match(entryTitle, /font-size:\s*var\(--type-subheading\)\s*;/u, "Every item title shares the subheading role");
+  assert.match(entryTitle, /font-weight:\s*500\s*;/u);
+  assert.match(entryTitle, /line-height:\s*var\(--subheading-leading\)\s*;/u);
   assert.match(rule(math, ".formula"), /font-size:\s*var\(--type-math\)\s*;/u);
   assert.match(rule(math, ".inline"), /font-size:\s*1em\s*;/u, "Inline expressions must track surrounding prose rather than the display-math scale");
   assert.doesNotMatch(rule(math, ".display"), /font-size:/u, "Display expressions retain the shared 1.15em formula role");

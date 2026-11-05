@@ -15,9 +15,10 @@
   padding-block: 20px;
   border-top: 1px solid var(--rule);
   color: var(--ink);
-  font-size: var(--type-subheading);
-  font-weight: 500;
-  line-height: var(--subheading-leading);
+  font-size: var(--type-heading);
+  font-weight: 400;
+  letter-spacing: -0.01em;
+  line-height: var(--heading-leading);
   transition: color 180ms var(--ease-out);
 }
 

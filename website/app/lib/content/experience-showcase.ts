@@ -27,7 +27,8 @@ export type ShowcaseEntry = SourceEntry & {
   articlePath?: string;
   detailPath: string;
   listingTitle: string;
-  listingOrganization?: string;
+  headline: string;
+  institution: string;
   pageTitle: string;
 };
 export type ShowcaseDomain = { number: string; name: string; slug: string; entries: ShowcaseEntry[]; disclosure?: CopySection };
@@ -83,7 +84,8 @@ export const showcaseEntries: readonly ShowcaseEntry[] = source.entries.map((ent
     ...entry, slug, articlePath,
     detailPath: articlePath ?? `/experience/${slug}/`,
     listingTitle,
-    listingOrganization: entry.categoryId === "01" ? organization : undefined,
+    headline: entry.detailTitle,
+    institution: organization,
     pageTitle: `${organization}: ${entry.detailTitle.replace(/:\s*/gu, " — ")}`,
   };
 });

@@ -1,6 +1,5 @@
-import { experienceHighlights } from "../../lib/content/experience-highlights";
+import { architectureFlows } from "../../lib/content/architecture-flows";
 import type { ShowcaseEntry } from "../../lib/content/experience-showcase";
-import { MetricRow } from "../MetricRow";
 import { ArchitectureFlow } from "./ArchitectureFlow";
 import { InlineMarkdown } from "../research/ResearchInline";
 import styles from "./Experience.module.css";
@@ -8,16 +7,12 @@ import styles from "./Experience.module.css";
 export function ExperienceMetadata({ entry }: { entry: ShowcaseEntry }) {
   return (
     <dl className={styles.metadata} data-experience-metadata>
+      <div><dt>Organization</dt><dd>{entry.institution}</dd></div>
       <div className={styles.position}><dt>Position</dt><dd>{entry.metadata.position}</dd></div>
       <div><dt>Location</dt><dd>{entry.metadata.location}</dd></div>
       <div><dt>Dates</dt><dd>{entry.metadata.dates}</dd></div>
     </dl>
   );
-}
-
-export function ExperienceResults({ entry }: { entry: ShowcaseEntry }) {
-  const metrics = experienceHighlights[entry.id]?.metrics;
-  return metrics ? <MetricRow metrics={metrics} /> : null;
 }
 
 export function ExperienceDisclosure({ entry }: { entry: ShowcaseEntry }) {
@@ -32,7 +27,7 @@ export function ExperienceDisclosure({ entry }: { entry: ShowcaseEntry }) {
 
 export function ArchitecturalContext({ entry }: { entry: ShowcaseEntry }) {
   if (!entry.architecturalContext) return null;
-  const flow = experienceHighlights[entry.id]?.flow;
+  const flow = architectureFlows[entry.id];
   return (
     <section className={styles.architecturalContext} aria-labelledby="architectural-context" data-architectural-context>
       <h2 id="architectural-context" tabIndex={-1}>{entry.architecturalContext.title}</h2>

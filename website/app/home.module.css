@@ -78,24 +78,19 @@
 }
 
 .biographyCopy p + p {
-  margin-top: 12px;
+  margin-top: 1.5rem;
 }
 
 .sectionTitle {
-  margin: 0 0 24px;
+  margin: 0 0 32px;
   font-size: var(--type-heading);
   font-weight: 400;
   line-height: var(--heading-leading);
-  letter-spacing: -0.02em;
+  letter-spacing: -0.01em;
 }
 
-.researchEntry {
-  border-top: 1px solid var(--rule);
-  padding: 28px 0 30px;
-}
-
-.researchEntry:last-child {
-  padding-bottom: 0;
+.researchEntry + .researchEntry {
+  margin-top: 56px;
 }
 
 .researchTitle,
@@ -147,9 +142,7 @@
 }
 
 .educationList :global(.education-entry) + :global(.education-entry) {
-  margin-top: 16px;
-  padding-top: 16px;
-  border-top: 1px solid var(--rule);
+  margin-top: 28px;
 }
 
 .educationList :global(.education-degree) {
