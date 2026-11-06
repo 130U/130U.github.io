@@ -64,9 +64,14 @@
   display: block;
 }
 
+/* A two-line statement: the second line steps back in tone, not in size. */
+.identity :is(h1, h2) span + span {
+  color: var(--muted);
+}
+
 .biographyCopy {
   max-width: var(--reading-measure);
-  margin-top: 32px;
+  margin-top: 40px;
   font-family: var(--font-prose);
   font-size: var(--type-reading);
   line-height: var(--reading-leading);
@@ -82,21 +87,17 @@
 }
 
 .sectionTitle {
-  margin: 0 0 40px;
+  margin: 0 0 56px;
   font-size: var(--type-heading);
   font-weight: 400;
   line-height: var(--heading-leading);
   letter-spacing: var(--heading-tracking);
 }
 
-/* A hanging row: the item title on axis A, its prose on axis B. */
-.row {
-  padding: 28px 0 32px;
-  border-top: 1px solid var(--rule-medium);
-}
-
-.row:last-child {
-  padding-bottom: 0;
+/* A hanging row: the item title on axis A, its prose on axis B. Whitespace,
+   not rules, separates rows. */
+.row + .row {
+  margin-top: 64px;
 }
 
 .rowTitle,
@@ -130,9 +131,7 @@
 }
 
 .educationList :global(.education-entry) + :global(.education-entry) {
-  margin-top: 24px;
-  padding-top: 24px;
-  border-top: 1px solid var(--rule);
+  margin-top: 28px;
 }
 
 .educationList :global(.education-degree) {
@@ -208,7 +207,6 @@
 
 .contactStrip li + li {
   padding-left: 24px;
-  border-left: 1px solid var(--rule);
 }
 
 .contactLabel {
@@ -259,11 +257,6 @@
 }
 
 @media (min-width: 1200px) {
-  .biographyCopy {
-    max-width: none;
-    margin-left: 30%;
-  }
-
   .row {
     display: grid;
     grid-template-columns: var(--hang-columns);
@@ -277,15 +270,15 @@
 
   .rowBody {
     max-width: none;
+    padding-right: var(--prose-inset);
   }
 
   .contactStrip {
-    grid-template-columns: minmax(0, 3fr) minmax(0, 3fr) minmax(0, 4fr);
+    grid-template-columns: minmax(0, 4fr) minmax(0, 3fr) minmax(0, 3fr);
   }
 
   .contactStrip li + li {
     padding-left: 0;
-    border-left: 0;
   }
 }
 
@@ -341,8 +334,8 @@
     margin-bottom: 28px;
   }
 
-  .row {
-    padding: 24px 0 28px;
+  .row + .row {
+    margin-top: 48px;
   }
 }
 
@@ -353,9 +346,7 @@
   }
 
   .contactStrip li + li {
-    padding: 20px 0 0;
-    border-top: 1px solid var(--rule);
-    border-left: 0;
+    padding: 0;
   }
 }
 

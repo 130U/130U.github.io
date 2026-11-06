@@ -33,7 +33,7 @@
 .sectionIndex { grid-column: 1; padding-top: 0.5rem; }
 .sectionBody { grid-column: 2 / span 10; min-width: 0; }
 .sectionTitle {
-  margin: 0 0 40px;
+  margin: 0 0 56px;
   font-size: var(--type-heading);
   font-weight: 400;
   line-height: var(--heading-leading);
@@ -41,13 +41,10 @@
   text-wrap: balance;
 }
 
-/* Entries hang their title and record on axis A and their summary on axis B. */
-.entry {
-  padding: 28px 0 32px;
-  border-top: 1px solid var(--rule-medium);
-  scroll-margin-top: 40px;
-}
-.entryHead { min-width: 0; }
+/* Entries hang their title on axis A and their summary on axis B; whitespace,
+   not rules, separates them. */
+.entry { scroll-margin-top: 40px; }
+.entry + .entry { margin-top: 64px; }
 .entryTitle {
   margin: 0;
   color: var(--ink);
@@ -57,16 +54,6 @@
   letter-spacing: var(--subheading-tracking);
   text-wrap: pretty;
 }
-.entryMeta {
-  display: grid;
-  gap: 2px;
-  margin: 10px 0 0;
-  color: var(--muted);
-  font-size: var(--type-label);
-  line-height: var(--label-leading);
-  text-wrap: pretty;
-}
-.entryMeta span { display: block; }
 .entryBody { min-width: 0; max-width: var(--reading-measure); }
 .summary { margin: 0; font-size: var(--type-reading); line-height: var(--reading-leading); text-wrap: pretty; }
 .summary,
@@ -77,18 +64,8 @@
   font-family: var(--font-prose);
 }
 
-.indexDisclosure {
-  padding: 28px 0 0;
-  border-top: 1px solid var(--rule-medium);
-}
-.indexDisclosure h3 {
-  margin: 0 0 8px;
-  color: var(--muted);
-  font-size: var(--type-label);
-  font-weight: 400;
-  line-height: var(--label-leading);
-  letter-spacing: 0;
-}
+/* The AI section's note is its standfirst: under the heading, on the same edge. */
+.indexDisclosure { max-width: var(--reading-measure); margin: -24px 0 72px; }
 .indexDisclosure p { color: var(--supporting-ink); }
 .disclosure h2 {
   margin: 0 0 8px;
@@ -228,17 +205,16 @@
 
 @media (min-width: 1200px) {
   .entry,
-  .indexDisclosure,
   .detailPage > .contributions {
     display: grid;
     grid-template-columns: var(--hang-columns);
     align-items: start;
   }
-  .entryHead,
-  .indexDisclosure h3,
+  .entryTitle,
   .detailPage > .contributions h2 { padding-right: var(--hang-gap); }
-  .entryBody { max-width: none; }
+  .entryBody { max-width: none; padding-right: var(--prose-inset); }
   .detailPage > .contributions h2 { margin: 0; }
+  .detailPage > .contributions > ol { padding-right: var(--prose-inset); }
 }
 
 @media (768px <= width < 1024px) {
@@ -247,10 +223,9 @@
 }
 
 @media (width < 1200px) {
-  .entryMeta { margin-bottom: 14px; }
+  .entryTitle { margin-bottom: 12px; }
   .metadata { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-  .detailPage > .contributions > ol,
-  .indexDisclosure p { max-width: var(--reading-measure); }
+  .detailPage > .contributions > ol { max-width: var(--reading-measure); }
 }
 
 @media (width < 768px) {
@@ -260,8 +235,10 @@
   .detailPage .detailHeader h1 { max-width: none; }
   .section { display: block; padding: 40px 0 56px; scroll-margin-top: 6rem; }
   .sectionIndex { display: block; margin-bottom: 10px; padding-top: 0; }
-  .sectionTitle { margin-bottom: 28px; }
-  .entry { padding: 24px 0 28px; scroll-margin-top: 6rem; }
+  .sectionTitle { margin-bottom: 32px; }
+  .indexDisclosure { margin: -8px 0 48px; }
+  .entry { scroll-margin-top: 6rem; }
+  .entry + .entry { margin-top: 48px; }
   .metadata { gap: 16px 24px; margin-top: 32px; }
   .contributions > ol > li { grid-template-columns: 1.75rem minmax(0, 1fr); }
 }

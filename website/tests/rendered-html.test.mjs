@@ -679,13 +679,7 @@ test("all eighteen approved Experience entries use institution titles and real l
     assert.equal(summaries.length, 1);
     if (entry.categoryId === "01") assertApprovedInline(summaries[0][2], entry.summary);
     else assert.equal(stripMarkup(summaries[0][2]), normalizeSpace(entry.summary));
-    assert.equal(openingTags(rendered, "p").length, 2, `Entry ${entry.id} must have one outer summary and one record line`);
-    const record = [...rendered.matchAll(/<p\b([^>]*)>([\s\S]*?)<\/p>/giu)]
-      .find((match) => attribute(match[1], "data-experience-record") !== undefined);
-    assert.ok(record, `Entry ${entry.id} needs its record line under the title`);
-    const recordContext = entry.categoryId === "01" ? entry.organization : entry.categoryId === "03" ? entry.detailTitle : entry.metadata.position;
-    assert.deepEqual([...record[2].matchAll(/<span\b[^>]*>([\s\S]*?)<\/span>/giu)].map((match) => stripMarkup(match[1])),
-      [normalizeSpace(recordContext), normalizeSpace(entry.metadata.dates)], "The record line reuses the approved metadata verbatim");
+    assert.equal(openingTags(rendered, "p").length, 1, `Entry ${entry.id} must have one outer summary`);
     assert.equal(stripMarkup(rendered.match(/<h3\b[^>]*>([\s\S]*?)<\/h3>/u)?.[1] ?? ""), presentation.listingTitle);
     const links = [...rendered.matchAll(/<a\b([^>]*)>([\s\S]*?)<\/a>/giu)];
     assert.equal(links.length, 1, `Entry ${entry.id} needs one Read More action`);
@@ -1035,10 +1029,14 @@ test("the production design contract is restrained and dependency-light", async 
   assert.match(directory, /\.directory\s*\{[^}]*grid-template-columns:\s*1fr/u);
   assert.match(experience, /\.section\s*\{[^}]*grid-template-columns:\s*repeat\(11,[^}]*grid-column:\s*1 \/ span 11/u, "Sections end on the reading-end guide");
   assert.match(experience, /\.sectionBody\s*\{[^}]*grid-column:\s*2\s*\/\s*span\s*10/u);
-  assert.match(globals, /--hang-columns:\s*minmax\(0,\s*3fr\)\s+minmax\(0,\s*7fr\)/u, "Hanging rows put titles on 3 of 10 columns and prose on 7");
+  assert.match(globals, /--hang-columns:\s*minmax\(0,\s*4fr\)\s+minmax\(0,\s*6fr\)/u, "Hanging rows put titles on 4 of 10 columns and prose on 6");
   for (const css of [experience, home]) assert.match(css, /@media \(min-width: 1200px\)[\s\S]*?grid-template-columns:\s*var\(--hang-columns\)/u);
   assert.match(structuralGrid, /data-guides=\{layout\}/u);
-  assert.match(globals, /\.structural-grid\[data-guides="index"\] \.structural-guide-reading-measure\s*\{\s*grid-column:\s*8/u, "Index pages mark the prose axis");
+  assert.match(globals, /\.structural-grid\[data-guides="index"\] \.structural-guide-reading-measure\s*\{\s*grid-column:\s*9/u, "Index pages mark the prose axis");
+  // Whitespace, not rules, separates entries and directory rows; rules stay at section level.
+  assert.doesNotMatch(experience, /(?:^|\n)\.entry(?: \+ \.entry)?\s*\{[^}]*border/u);
+  assert.doesNotMatch(home, /\.row\s*\{[^}]*border/u);
+  assert.doesNotMatch(directory, /\.directory a\s*\{[^}]*border/u);
   assert.doesNotMatch(globals, /\.education-entry\s*\{[^}]*grid-template-columns/u);
   for (const guide of ["frame-start", "rail-boundary", "reading-start", "reading-measure", "reading-end"]) assert.ok(structuralGrid.includes(`"${guide}"`));
   for (const contract of ["aria-controls=\"site-menu\"", "aria-expanded={menuOpen}", 'event.key === "Escape"', 'document.body.classList.add("menu-open")', 'querySelectorAll<HTMLElement>']) assert.ok(navigation.includes(contract));

@@ -5,8 +5,6 @@
 
   container: diagram / inline-size;
   margin: 72px 0 0;
-  padding-top: 18px;
-  border-top: 1px solid var(--rule-strong);
 }
 
 .label {
@@ -215,6 +213,11 @@
 .loopEnd {
   width: calc(50% + 1px);
   border-right: 1px solid var(--accent);
+}
+
+/* The return rule under the stages between the loop's two ends. */
+.loopSpan {
+  min-width: 0;
 }
 
 .loopLabel {
