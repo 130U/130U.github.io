@@ -69,7 +69,6 @@
   margin: 0;
   padding: 24px 28px 18px;
   border: 1px solid var(--frame);
-  background: var(--panel);
   list-style: none;
   color: var(--ink);
   font-family: var(--font-prose);

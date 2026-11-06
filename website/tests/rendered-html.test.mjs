@@ -1034,12 +1034,15 @@ test("the production design contract is restrained and dependency-light", async 
   for (const css of [experience, home]) assert.match(css, /@media \(min-width: 1200px\)[\s\S]*?grid-template-columns:\s*var\(--hang-columns\)/u);
   assert.match(structuralGrid, /data-guides=\{layout\}/u);
   assert.match(globals, /\.structural-grid\[data-guides="index"\] \.structural-guide-reading-measure\s*\{\s*grid-column:\s*9/u, "Index pages mark the prose axis");
-  // Units of content sit in faint frames; divisions inside a frame are dashed hairlines.
-  assert.match(globals, /--frame:\s*rgba\(0, 0, 0, 0\.09\)/u);
+  // Each group of content sits in one faint, unfilled frame with a continuous dashed
+  // spine; divisions inside a frame are dashed hairlines.
+  assert.match(globals, /--frame:\s*rgba\(0, 0, 0, 0\.08\)/u);
   assert.match(globals, /--dash-y:\s*repeating-linear-gradient\(to bottom/u);
-  assert.match(experience, /(?:^|\n)\.entry\s*\{[^}]*border:\s*1px solid var\(--frame\)/u);
-  assert.match(experience, /\.entryBody\s*\{[^}]*background:\s*var\(--dash-y\)/u);
-  assert.match(home, /(?:^|\n)\.row\s*\{[^}]*border:\s*1px solid var\(--frame\)/u);
+  for (const [css, group] of [[experience, "entries"], [home, "rows"]]) {
+    assert.match(css, new RegExp(`(?:^|\\n)\\.${group}\\s*\\{[^}]*border:\\s*1px solid var\\(--frame\\)`, "u"), `.${group} is the section's single frame`);
+    assert.match(css, new RegExp(`\\.${group}::before\\s*\\{[^}]*background:\\s*var\\(--dash-y\\)`, "u"), `.${group} draws one continuous spine`);
+  }
+  for (const css of [experience, home, directory]) assert.doesNotMatch(css, /background:\s*var\(--panel\)/u, "Frames stay unfilled");
   assert.match(directory, /\.directory\s*\{[^}]*border:\s*1px solid var\(--frame\)/u);
   assert.match(directory, /\.directory a \+ a\s*\{[^}]*background-image:\s*var\(--dash-x\)/u);
   assert.doesNotMatch(directory, /\.directory a\s*\{[^}]*border/u);

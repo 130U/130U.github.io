@@ -32,7 +32,9 @@ export function ExperienceSection({ domain, standalone = false }: { domain: Show
           <h3 className="visually-hidden" id={`${domain.slug}-disclosure`}>{domain.disclosure.title}</h3>
           <p><InlineMarkdown text={domain.disclosure.text} /></p>
         </aside>}
-        {domain.entries.map((entry) => <ExperienceEntry entry={entry} key={entry.id} />)}
+        <div className={styles.entries}>
+          {domain.entries.map((entry) => <ExperienceEntry entry={entry} key={entry.id} />)}
+        </div>
       </div>
     </section>
   );
