@@ -38,9 +38,9 @@ The mark's editable master is
 | Structural rule | `rgba(0, 0, 0, 0.06)` |
 | Diagram node border | `rgba(0, 0, 0, 0.12)` |
 | Strong rule | `rgba(0, 0, 0, 0.24)` |
-| Frame edge (`--frame`) | `rgba(0, 0, 0, 0.09)` |
-| Dashed hairline (`--dash`, drawn by `--dash-x` / `--dash-y`) | `rgba(0, 0, 0, 0.17)`, 4px dash, 4px gap |
-| Frame and diagram node surface (`--panel`) | `#fcfbfa` |
+| Frame edge (`--frame`) | `rgba(0, 0, 0, 0.08)` |
+| Dashed hairline (`--dash`, drawn by `--dash-x` / `--dash-y`) | `rgba(0, 0, 0, 0.15)`, 4px dash, 4px gap |
+| Diagram node surface (`--panel`) | `#fcfbfa` |
 
 Inter 4.1 remains the typeface for headings, navigation, directory labels, controls,
 metadata, and the architecture viewer. Source Serif 4 supplies narrative prose and
@@ -104,10 +104,12 @@ one display exception.
 Restraint, not absence. Each component uses at most two text styles, and small grey
 labels appear only where a field needs naming (the record strip, contact details,
 diagrams). Structure has three weights: a strong solid rule opens each page-level
-section; a faint 1px frame on the `--panel` surface holds each unit of content (an
-entry, the section index, the record strip, contact details, a course list); and
-divisions inside a frame are dashed hairlines (title | summary, field | field, row /
-row, column | column). Frames have square corners and no shadow, and sit 16px apart.
+section; one faint, unfilled 1px frame holds each group of content (a section's
+entries, the section index, the record strip, contact details, a course list), with
+`--frame-pad` (44px) of room inside; and divisions inside a frame are dashed hairlines
+(the spine between titles and prose, field | field, row / row, column | column).
+Frames have square corners, no fill and no shadow. Never stack frames with a gap
+between them: entries of one section share a frame and are separated by space.
 Do not add metric rows, pills, badges, or other pulled-out figures: a result belongs in
 its sentence.
 
@@ -137,9 +139,12 @@ link's accessible name. Section margin indices use the shared serif index role o
 About, Experience, and Coursework. Category introductions are omitted.
 
 On About, Experience, Coursework and the ten detail pages, content hangs on two axes
-of the ten-column field (`--hang-columns`, 4fr / 6fr). Each entry is a frame; from
-1200px its title sits alone on the left and a dashed hairline divides it from the
-prose on the right. Below 1200px the title stacks above its prose inside the frame.
+of the ten-column field (`--hang-columns`, 4fr / 6fr). A section's entries share one
+frame (`.entries` on Experience, `.rows` on About). From 1200px each title sits alone
+on the left, and one continuous dashed spine runs down the frame between titles and
+prose, with 72px of space between entries. Below 1200px each title stacks above its
+prose and entries are separated by a dashed line inside the frame. On About, the
+contact strip's first divider falls on the same axis as the spine.
 Summaries use upright black body text. No content is truncated to fit a frame.
 Sections end on the reading-end guide (11 of the 12 content columns).
 
@@ -382,7 +387,7 @@ the link. Summaries retain selected bold emphasis. Numerical guarantees retain t
 model, horizon, payoff, and comparison scope.
 It does not repeat the abstracts. Titles use the same
 subheading role on axis A; supporting paragraphs use the reading role on axis B.
-Each entry is a frame with a dashed divider, as on Experience. Typography, spacing,
+The entries share one frame with a dashed spine, as on Experience. Typography, spacing,
 and wrapping adapt within the shared reading frame without changing the palette.
 
 Each research page provides a contents list and the manuscript's abstract, core

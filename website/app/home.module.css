@@ -94,16 +94,16 @@
   letter-spacing: var(--heading-tracking);
 }
 
-/* A framed row: the item title hangs on the left and a dashed hairline divides
-   it from its prose. */
-.row {
-  padding: var(--frame-pad) 36px 22px;
+/* A section's rows share one unfilled frame with room inside. From 1200px a
+   continuous dashed spine runs between the titles and their prose. */
+.rows {
+  position: relative;
+  padding: var(--frame-pad) var(--frame-pad) calc(var(--frame-pad) - 10px);
   border: 1px solid var(--frame);
-  background: var(--panel);
 }
 
 .row + .row {
-  margin-top: 16px;
+  margin-top: 72px;
 }
 
 .rowTitle,
@@ -205,7 +205,6 @@
   margin: 0;
   padding: 0;
   border: 1px solid var(--frame);
-  background: var(--panel);
   list-style: none;
 }
 
@@ -280,14 +279,33 @@
     padding-right: var(--hang-gap);
   }
 
+  .rows::before {
+    position: absolute;
+    top: var(--frame-pad);
+    bottom: var(--frame-pad);
+    left: calc(var(--frame-pad) + (100% - 2 * var(--frame-pad)) * 0.4);
+    width: 1px;
+    background: var(--dash-y);
+    content: "";
+  }
+
   .rowBody {
     max-width: none;
     padding-left: var(--hang-gap);
-    background: var(--dash-y) left top / 1px 100% no-repeat;
   }
 
+  /* The first divider falls on the same axis as the spine of the frames above,
+     and each value starts where their titles and prose start. */
   .contactStrip {
-    grid-template-columns: minmax(0, 4fr) minmax(0, 3fr) minmax(0, 3fr);
+    grid-template-columns: calc(var(--frame-pad) + (100% - 2 * var(--frame-pad)) * 0.4) minmax(0, 1fr) minmax(0, 1fr);
+  }
+
+  .contactStrip li {
+    padding-inline: var(--hang-gap) 24px;
+  }
+
+  .contactStrip li:first-child {
+    padding-left: var(--frame-pad);
   }
 }
 
@@ -310,6 +328,12 @@
   .rowTitle,
   .institution {
     margin-bottom: 10px;
+  }
+
+  .row + .row {
+    margin-top: 36px;
+    padding-top: 36px;
+    background: var(--dash-x) left top / 100% 1px no-repeat;
   }
 }
 
@@ -343,12 +367,13 @@
     margin-bottom: 28px;
   }
 
-  .row {
-    padding: 24px 20px 16px;
+  .rows {
+    padding: 28px 20px 18px;
   }
 
   .row + .row {
-    margin-top: 12px;
+    margin-top: 28px;
+    padding-top: 28px;
   }
 }
 

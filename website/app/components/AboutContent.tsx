@@ -53,7 +53,7 @@ export function AboutContent({ hasHero = false }: { hasHero?: boolean }) {
         <p className={styles.sectionIndex} aria-hidden="true">02</p>
         <div className={styles.sectionBody}>
           <h2 className={styles.sectionTitle} id="research-heading">Selected Research</h2>
-          <div>
+          <div className={styles.rows}>
             {selectedResearchProjects.map((project) => (
               <article className={styles.row} key={project.slug} id={project.slug}>
                 <h3 className={styles.rowTitle} id={`${project.slug}-title`}>{project.title}</h3>
@@ -75,29 +75,31 @@ export function AboutContent({ hasHero = false }: { hasHero?: boolean }) {
         <p className={styles.sectionIndex} aria-hidden="true">03</p>
         <div className={styles.sectionBody}>
           <h2 className={styles.sectionTitle} id="education-heading">Education</h2>
-          <div className={styles.row}>
-            <h3 className={styles.institution}>Duke University</h3>
-            <div className={styles.rowBody}>
-              <div className={styles.educationList}>
-                <article className="education-entry">
-                  <h4 className="education-degree">Master of Engineering in Risk Engineering</h4>
-                  <p className="entry-subtitle">Financial Risk Concentration</p>
-                  <div className="education-notes">
-                    <p className="education-note education-advisor">
-                      Academic Advisor:{" "}
-                      <a href="https://cee.duke.edu/people/mark-borsuk/" target="_blank" rel="noopener noreferrer">Mark Borsuk, Ph.D.</a>
-                    </p>
-                    <p className="education-note">Pratt School of Engineering Merit Scholarship</p>
-                  </div>
-                </article>
-                <article className="education-entry">
-                  <h4 className="education-degree">Bachelor of Science in Mathematics</h4>
-                  <p className="entry-subtitle">Dual-Degree Undergraduate Program</p>
-                  <p className="education-note">Undergraduate Merit Scholarship</p>
-                </article>
-              </div>
-              <div className={styles.coursework} id="coursework">
-                <Link className={styles.readMore} href="/coursework/" aria-label="Read more about coursework">Read More<ReadingArrow /></Link>
+          <div className={styles.rows}>
+            <div className={styles.row}>
+              <h3 className={styles.institution}>Duke University</h3>
+              <div className={styles.rowBody}>
+                <div className={styles.educationList}>
+                  <article className="education-entry">
+                    <h4 className="education-degree">Master of Engineering in Risk Engineering</h4>
+                    <p className="entry-subtitle">Financial Risk Concentration</p>
+                    <div className="education-notes">
+                      <p className="education-note education-advisor">
+                        Academic Advisor:{" "}
+                        <a href="https://cee.duke.edu/people/mark-borsuk/" target="_blank" rel="noopener noreferrer">Mark Borsuk, Ph.D.</a>
+                      </p>
+                      <p className="education-note">Pratt School of Engineering Merit Scholarship</p>
+                    </div>
+                  </article>
+                  <article className="education-entry">
+                    <h4 className="education-degree">Bachelor of Science in Mathematics</h4>
+                    <p className="entry-subtitle">Dual-Degree Undergraduate Program</p>
+                    <p className="education-note">Undergraduate Merit Scholarship</p>
+                  </article>
+                </div>
+                <div className={styles.coursework} id="coursework">
+                  <Link className={styles.readMore} href="/coursework/" aria-label="Read more about coursework">Read More<ReadingArrow /></Link>
+                </div>
               </div>
             </div>
           </div>

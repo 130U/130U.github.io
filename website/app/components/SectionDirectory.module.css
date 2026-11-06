@@ -4,7 +4,6 @@
   grid-template-columns: 1fr;
   margin-top: 48px;
   border: 1px solid var(--frame);
-  background: var(--panel);
   font-family: var(--font-text);
 }
 
