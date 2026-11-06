@@ -24,7 +24,7 @@ export function SiteShell({
     <div className="site-shell">
       {showSkipLink ? (
         <a className="skip-link" href={skipHref}>
-          Skip to main content
+          Skip to Main Content
         </a>
       ) : null}
       <div

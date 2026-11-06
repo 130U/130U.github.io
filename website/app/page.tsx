@@ -15,7 +15,7 @@ export const metadata: Metadata = createPageMetadata({
 export default function AboutPage() {
   return (
     <>
-      <a className="skip-link" href="#home-profile">Skip to main content</a>
+      <a className="skip-link" href="#home-profile">Skip to Main Content</a>
       <ClarinetHero />
       <SiteShell active="about" frameClassName={styles.homeFrame} guides="index" showSkipLink={false}>
         <AboutContent hasHero />

@@ -1,45 +1,49 @@
-# Theodore Ouyang's Personal Website
-
-I am a Duke alumnus and Sequoia Fellow. My work makes high-stakes conclusions verifiable across derivative pricing, frontier AI evaluation, and law. This site brings together my academic background, industry experience, and written work.
-
-**[Visit the website](https://www.theodoreoy.com/)**
-
 <p align="center">
   <a href="https://www.theodoreoy.com/">
-    <img src="assets/readme-cover.jpg" alt="Theodore Ouyang's personal website" width="1248">
+    <img src="../website/public/assets/brand/og-1774.jpg" alt="Theodore Ouyang, Duke Alumnus and Sequoia Fellow">
   </a>
 </p>
 
-## A personal introduction
+# Theodore Ouyang
 
-The homepage pairs my name and background with a clarinet drawn from separated particles. Moving the pointer gently displaces nearby points, which spring back into place; scrolling disperses the composition and returning restores it. Four musical notes move continuously beside the instrument, while reduced-motion settings show a complete static illustration.
+**I make high-stakes conclusions verifiable:** certified error bounds in derivative pricing, layered verification in frontier AI evaluation, and evidence standards for delegating authority to autonomous systems.
 
-The rest of the design is deliberately quiet: warm paper, clear typography, and generous space for the work itself.
+Duke alumnus, B.S. in Mathematics and M.Eng. in Risk Engineering · Sequoia Fellow
 
-## Academic background and research
+[theodoreoy.com](https://www.theodoreoy.com/) · [Email](mailto:10@alumni.duke.edu) · [X](https://x.com/D3rfr31schutz)
 
-[About](https://www.theodoreoy.com/) covers my **B.S. in Mathematics and M.Eng. in Risk Engineering at Duke**, selected coursework, and mathematical finance research.
+## Selected Research
 
-Selected Research presents *Critical Dependence Stress for Portfolio Diversification* and two manuscripts on certified option valuation. The Asian-options work connects a weighted payoff-remainder argument to a complete Heston discretization-error bound. The Rough Heston work carries fractional Riccati residuals into joint price-error certificates, showing how shared numerical errors can change a portfolio's certification result.
+- **[Critical Dependence Stress for Portfolio Diversification](https://www.theodoreoy.com/critical-dependence-stress-for-portfolio-diversification/)**
+  How much dependence stress reverses a portfolio's Expected Shortfall advantage while every loss distribution stays fixed. The asymptotic reversal budget is at least 30% above the initial-sensitivity prediction.
+- **[Certified Valuation of Arithmetic Asian Options](https://www.theodoreoy.com/certified-valuation-arithmetic-asian-options/)**
+  A weighted payoff-remainder method that turns an exact conditional price representation into certified valuations, with a complete Heston discretization-error bound below 0.011025 price units.
+- **[Certified Joint Pricing Errors in Rough Heston](https://www.theodoreoy.com/certified-rough-heston-valuation/)**
+  Joint error enclosures for rough Heston portfolios. Finite-history propagation tightens the complete pricing-error bound by 72.91% with the pricing output unchanged.
 
-All three papers can be read on the site, with equations, chapter navigation, references, and links to their research repositories.
+## AI Research and Engineering
 
-## Experience across five fields
+- **[Large-Scale Domain Expert Feedback Governance and Adaptive Review](https://www.theodoreoy.com/experience/statistical-inference-and-resource-allocation-in-expert-data-production/)**
+  The statistical system behind expert feedback for LLM post-training, coordinating more than 300 specialists.
+- **[Financial Task Design and Synthetic Data Engineering](https://www.theodoreoy.com/experience/task-validity-in-financial-synthetic-data/)**
+  The data strategy for financial post-training, including Batch Zero, the calibration protocol since reused across other post-training programs.
+- **[General Reasoning Evaluation and Layered Verification](https://www.theodoreoy.com/experience/verification-and-supervision-in-scientific-reasoning-tasks/)**
+  Joint verification of final answers, visible reasoning and execution evidence. Certificate checking made no false acceptances where final-answer matching falsely accepted 75.0%.
+- **[Evidence Verification and Robust Comparison in Investment Research](https://www.theodoreoy.com/experience/evidence-uncertainty-and-decision-guarantees-in-investment-research/)**
+  A framework that tells analysts which fact to verify next under model multiplicity and unverified evidence.
 
-[Experience](https://www.theodoreoy.com/experience/) presents eighteen projects and roles across five fields, with summaries and dedicated pages for their methods and contributions.
+## Legal Research
 
-| Field | Work represented |
-| --- | --- |
-| **AI Research and Engineering** | Expert-data quality control, financial synthetic-data design, scientific reasoning evaluation, and AI-driven investment research. |
-| **Data Science** | Issuer ranking as a data scientist at Jiritsu, market-entry data analysis at Euromonitor, and sustainability screening at China Construction Bank. |
-| **Legal Research and Policy Analysis** | Papers on autonomous authority in space, strategic infrastructure dependence, solar geoengineering, and ecological restoration. |
-| **Finance and Consulting** | Real estate underwriting at JLL, satellite commercialization research for Hubble, investment diligence at SAIF, equity research at CITIC, and business restructuring at EY-Parthenon. |
-| **STEM Academic Competitions and Training** | Advanced physics and mathematics training, competition awards, peer mentoring, and independent Olympiad instruction. |
+Four papers written at Duke Law School: [autonomous authority in space](https://www.theodoreoy.com/experience/autonomous-authority-in-space/), [small states and strategic space dependence](https://www.theodoreoy.com/experience/small-states-and-strategic-space-dependence/), [solar geoengineering](https://www.theodoreoy.com/experience/solar-geoengineering-comparison-and-continuity/), and [mangrove restoration and compensatory mitigation](https://www.theodoreoy.com/experience/mangrove-restoration-and-compensatory-mitigation/).
 
-Every entry has a Read More page with its role, location, dates, and Key Contributions. The AI and legal pages also include the research articles, each opening with a diagram of its system or argument, so visitors can follow the underlying reasoning.
+## Industry
 
-## About the site
+Jiritsu Network · Euromonitor International · China Construction Bank · Jones Lang LaSalle · Hubble Network · SAIF Partners · CITIC Securities · EY-Parthenon
 
-I built the site with Next.js, React, TypeScript, and native CSS. A shared reading layout brings research and experience into the same visual system, with mathematical notation and legal footnotes presented as part of the text.
+[All experience →](https://www.theodoreoy.com/experience/)
 
-[Architecture](https://www.theodoreoy.com/architecture/) · [Design](../docs/design.md) · [Development guide](../website/README.md) · [Maintenance](../docs/maintenance.md)
+## This Repository
+
+The site is built with the same care as the work it presents: a Next.js static export, a Canvas 2D clarinet drawn from separated particles, mathematics rendered to SVG at build time, legal footnotes that open in place, a strict content security policy, and tests that cover every route and every line of visible copy.
+
+[Design](../docs/design.md) · [Maintenance](../docs/maintenance.md) · [Development](../website/README.md) · [Architecture](https://www.theodoreoy.com/architecture/)

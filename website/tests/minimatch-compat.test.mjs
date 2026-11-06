@@ -10,7 +10,7 @@ const require = createRequire(import.meta.url);
 const ROOT = fileURLToPath(new URL("../", import.meta.url));
 const providerRequire = createRequire(require.resolve("minimatch"));
 
-test("legacy and modern consumers use the patched engine without installation scripts", () => {
+test("CommonJS and ESM consumers share the v11 engine without installation scripts", () => {
   const provider = require("minimatch/package.json");
   assert.equal(provider.name, "@theodoreoy/minimatch-compat");
   assert.equal(provider.dependencies["minimatch-engine"], "npm:minimatch@11.0.1");
@@ -96,7 +96,7 @@ test("helpers and chained defaults preserve option precedence", () => {
   assert.equal(new NestedMatcher("*.ts").match(".FILE.TS"), true);
 });
 
-test("the legacy makeRe test interface delegates to nonrecursive matching", () => {
+test("the makeRe().test() interface delegates to nonrecursive matching", () => {
   const matcher = minimatch.makeRe("@scope/*");
   assert.equal(matcher instanceof RegExp, false);
   assert.equal(matcher.test("@scope/package"), true);

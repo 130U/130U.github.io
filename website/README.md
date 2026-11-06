@@ -9,8 +9,8 @@ articles with mathematical notation, chapter navigation, and legal footnotes.
 The visual system pairs Inter headings with Source Serif 4 prose, a warm paper
 background, and a restrained editorial grid: faint frames hold each list, dashed
 hairlines divide them, and each AI and legal article opens with a logic architecture
-diagram. About opens with a two-column name
-and recognizable clarinet hero. The dense Canvas 2D particle field aggregates on entry,
+diagram. About opens with the name beside a recognizable clarinet hero, stacked
+above it on phones and portrait tablets. The dense Canvas 2D particle field aggregates on entry,
 responds locally to the pointer, disperses with scrolling, and returns to its
 shape, with six silver ring keys, joint bands and pads, two long rods, and
 a dark elliptical bell cavity. All these features use separated points with

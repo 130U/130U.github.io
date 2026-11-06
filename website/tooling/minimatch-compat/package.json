@@ -1,7 +1,7 @@
 {
   "name": "@theodoreoy/minimatch-compat",
   "version": "1.0.0",
-  "description": "Legacy lint API compatibility backed by the patched minimatch engine.",
+  "description": "Callable minimatch API for lint plugins, backed by minimatch v11.",
   "private": true,
   "license": "MIT",
   "type": "commonjs",

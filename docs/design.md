@@ -307,8 +307,9 @@ scroll progress, and returning restores the composition; ordinary document
 scrolling remains native. Four musical notes move continuously while the hero is
 visible, with independent periods for restrained drift, rotation, scale, and opacity.
 The body breathes subtly through opacity while its settled point positions
-remain fixed and sharp. Phones reframe the surrounding whitespace to give the
-instrument more space. Physics advances at a fixed 60 Hz using the discrete spring
+remain fixed and sharp. Phones and portrait tablets stack the name above the
+instrument and reframe the surrounding whitespace to give it more space; landscape
+tablets and desktops keep the two columns. Physics advances at a fixed 60 Hz using the discrete spring
 rule, with interpolation between simulation states for rendering. Rendering pauses
 offscreen and in hidden tabs, preserving the active animation
 time so it resumes without a jump. Reduced motion displays the
@@ -336,7 +337,7 @@ existing article and experience footer links remain available after long content
 ## Content and extension
 
 Page, domain, institution, project, and course titles use title case. Main-site
-navigation and action labels use title case, including Read More,
+navigation and action labels use title case, including Skip to Main Content, Read More,
 Back to Education, Back to Selected Research, Back to Experience, Back to Top,
 Full Manuscript, Author Note, and View in Footnotes. Function words such as "to"
 and "in" stay lowercase.
@@ -359,8 +360,8 @@ work directly, without hedging verbs such as "exploring".
 
 The social card master, `website/source-assets/brand/og.png`, repeats the hero on
 the paper background: the name, Duke Alumnus and Sequoia Fellow, the dotted clarinet
-with its blue corner marks, and the domain in the lower band. The repository cover
-uses the same composition.
+with its blue corner marks, and the domain in the lower band. The repository README
+displays the same card.
 
 Use English punctuation in public copy and metadata, including the architecture
 viewer. Straight and curly apostrophes and quotation marks are both valid.
