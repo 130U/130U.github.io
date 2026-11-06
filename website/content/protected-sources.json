@@ -4,7 +4,7 @@
   "sources": {
     "app/experience/page.tsx": "1dbf2ee75f4d859128a5ce92b6a0c7c6df94579962c37bc672544c4d7698c3a6",
     "app/experience/[slug]/page.tsx": "b57c5422793ec804d64e3da7217762400bf682a8c71a9a7f850201b66c04d6c8",
-    "app/components/experience/ExperienceContent.tsx": "70c80dbc812293c4e38a902fea79fee7fb730f577c7fa2669529a881a1643960",
+    "app/components/experience/ExperienceContent.tsx": "fe93231a7f95db5f76b7d36260995a7745178734acc2ec139b9b9a16ff029c22",
     "app/components/experience/ExperienceDetails.tsx": "4d6320c1adf2310a75dea9cb6b4fca037f166b0073da5b5627e4e4ef8a3a3385",
     "app/lib/content/experience-showcase.ts": "2711d4c142e9a48c2cc2e7b0480a6827bba0c4d7898f3b9e3d42918b9b08a544",
     "app/lib/content/experience-domains.ts": "7362085d4857daa83ae476f176163378dde550572d5a1932d2f142d4d1a00c7d",

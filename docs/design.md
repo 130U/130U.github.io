@@ -86,7 +86,7 @@ scale relative to surrounding text without changing the prose size.
 | Item or subsection title: project, paper, institution, article subsection | `--type-subheading` | 18px, Inter 500 | 1.4 |
 | Prose: body, summaries, record values, course names, table cells, captions | `--type-reading` | 16px, Source Serif 4 400 | 1.65 |
 | Interface: navigation, contents, Read More, degree names, diagram node titles | `--type-interface`, `--type-action` | 15px, Inter 400 (500 for actions and node titles) | 1.5 |
-| Label: field labels, entry record lines, diagram stage and detail text, footer | `--type-label` | 13px, Inter 400 | 1.45 |
+| Label: field labels, diagram stage and detail text, footer | `--type-label` | 13px, Inter 400 | 1.45 |
 | Section margin index, directory number, contribution number | `--type-index` | 11px, Source Serif 4 400 | 1.5 |
 | Inline mathematical expression | Relative to surrounding text | 1em | Intrinsic mathematical geometry |
 | Displayed mathematical expression | `--type-math` | 1.15em | Intrinsic mathematical geometry |
@@ -99,10 +99,12 @@ manuscript render at weight 600, so each contribution opens with its claim; ital
 run-ins and bold theorem labels remain inside mathematics papers. The hero name is the
 one display exception.
 
-Whitespace separates chapters and list items. Rules mark page-level sections, the
-entries within a section, the two directories, the record strip, and diagram stages.
-Do not add metric rows, pills, badges, or other pulled-out figures: a result belongs in
-its sentence.
+Subtraction is the rule. Each component uses at most two text styles, and small grey
+labels appear only where a field needs naming (the record strip, contact details,
+diagrams). Whitespace separates entries, directory rows, chapters and list items;
+rules mark only page-level sections, the record strip, and diagram stages. Do not add
+metric rows, pills, badges, or other pulled-out figures: a result belongs in its
+sentence.
 
 Text roles use rem units and scale with the user's text setting. Titles and headings
 step down below 768px, including in the architecture viewer; the other roles remain
@@ -119,7 +121,7 @@ Experience shares About's Inter headings, Source Serif 4 prose, role sizes, grid
 paper/ink palette. It is one page with five numbered sections and an anchor
 directory headed Experience: Areas of Focus that stays in one column at every screen width.
 Experience and Coursework use the same `SectionDirectory` component: full-width
-rows separated by thin rules, with small serif numbers at the left and labels in the
+rows separated by whitespace, with small serif numbers at the left and labels in the
 heading size. A right-aligned View action appears on hover
 and keyboard focus and remains visible on touch devices; the complete row turns
 blue on hover or focus. Directory numbers run from 01 through 05 for Experience
@@ -129,19 +131,20 @@ link's accessible name. Section margin indices use the shared serif index role o
 About, Experience, and Coursework. Category introductions are omitted.
 
 On About, Experience, Coursework and the ten detail pages, content hangs on two axes
-of the ten-column field (`--hang-columns`, 3fr / 7fr). From 1200px, item titles sit on
-axis A and their prose on axis B, three columns in, separated by entry rules; below
-1200px the title stacks above its prose. Each Experience entry shows its title in the
-subheading role and, under it, a record line in the label role: the organization for
-AI projects, the paper title for legal research, the position otherwise, then the
-dates. These lines reuse the approved metadata verbatim. Summaries use upright black
-body text. No content is truncated to fit a card. Sections end on the reading-end
-guide (11 of the 12 content columns).
+of the ten-column field (`--hang-columns`, 4fr / 6fr). From 1200px, item titles sit
+alone on axis A and their prose on axis B, four columns in, with `--prose-inset` of
+space before the reading-end guide; 64px of whitespace separates entries. Below 1200px
+the title stacks above its prose. Summaries use upright black body text. No content is
+truncated to fit a card. Sections end on the reading-end guide (11 of the 12 content
+columns).
 
 All body copy uses the shared ink colors. Blue marks navigation, hover, keyboard
 focus, and the decision or feedback path in architecture figures.
 
-AI entries lead with the project name. The confidentiality note closes the AI section.
+AI entries lead with the project name. The confidentiality note introduces "the
+following four projects", so it opens the AI section as its standfirst: directly under
+the heading, on the same edge, in the reading face and supporting-ink colour. Its
+heading is visually hidden and labels the aside for assistive technology.
 
 Each of the eight AI and legal articles opens with a `LogicDiagram` in its header,
 under the record strip, as the article's visual abstract. Its data lives in
@@ -253,7 +256,7 @@ at the shared reading size and leading, in two columns on axis B from 1200px. Al
 wording and order as static text, available without JavaScript. The rail's
 Back to Education link returns to the Education section. Duke University appears
 once above the two degree records;
-degree names use the interface size at weight 500, on axis B beside the institution. Compact notes and a thin rule
+degree names use the interface size at weight 500, on axis B beside the institution. Compact notes and whitespace
 separate the degree records. Profile details and contact values also use the reading
 scale; field labels use the label scale. Email, GitHub, and X occupy three columns
 above 540px and stack in one column at 540px and below. Long contact values can wrap
@@ -274,6 +277,8 @@ the shared title, heading, subheading and reading hierarchy; scoped spacing over
 Page titles own the H1 position. About's two-line "Theodore / Ouyang" supplies its
 main heading. The "Thinking mathematically / Working in AI" introduction
 is an H2 below the hero; it remains the H1 on the `/education/` compatibility page.
+Its two lines share the title size, the second in the muted tone, and the biography
+sits below on the same left edge within the reading measure.
 Experience domains use `01`–`05` indices; individual entries have no leading markers.
 Top-level contributions are plain paragraphs without bullets or rules. Narrative lines stay within
 the shared reading measure and reflow with the viewport.
@@ -370,8 +375,8 @@ hover and keyboard-focus feedback. Titles and complete summaries remain outside
 the link. Summaries retain selected bold emphasis. Numerical guarantees retain their
 model, horizon, payoff, and comparison scope.
 It does not repeat the abstracts. Titles use the same
-subheading role on axis A; supporting paragraphs use the reading role on axis B. Thin
-horizontal rules separate entries. Typography, spacing, and wrapping adapt within
+subheading role on axis A; supporting paragraphs use the reading role on axis B.
+Whitespace separates entries. Typography, spacing, and wrapping adapt within
 the shared reading frame without introducing cards or changing the palette.
 
 Each research page provides a contents list and the manuscript's abstract, core
