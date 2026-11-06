@@ -715,7 +715,8 @@ test("all eighteen approved Experience entries use institution titles and real l
 
 test("the ten nonresearch detail routes keep metadata in a labelled record strip", async () => {
   const metadataStyles = (await readFile(path.join(ROOT, "app", "components", "experience", "Experience.module.css"), "utf8")).replace(/\r\n?/gu, "\n");
-  assert.match(metadataStyles, /(?:^|\n)\.metadata\s*\{[^}]*grid-template-columns:\s*repeat\(4,\s*minmax\(0,\s*1fr\)\)[^}]*border-top:\s*1px solid var\(--rule-strong\)/u, "Desktop sets the four fields on one rule");
+  assert.match(metadataStyles, /(?:^|\n)\.metadata\s*\{[^}]*grid-template-columns:\s*repeat\(4,\s*minmax\(0,\s*1fr\)\)[^}]*border:\s*1px solid var\(--frame\)/u, "Desktop sets the four fields in one frame");
+  assert.match(metadataStyles, /\.metadata > div \+ div\s*\{\s*background:\s*var\(--dash-y\)/u, "Dashed hairlines divide the fields");
   assert.match(metadataStyles, /@media \(width < 1200px\) \{[^@]*?\.metadata\s*\{\s*grid-template-columns:\s*repeat\(2,\s*minmax\(0,\s*1fr\)\)/u, "Narrower layouts use two fields per row");
   assert.match(metadataStyles, /@media \(width < 420px\) \{\s*\.metadata\s*\{\s*grid-template-columns:\s*1fr/u, "Phones stack the fields");
   assert.match(metadataStyles, /\.metadata dt\s*\{[^}]*font-size:\s*var\(--type-label\)/u, "Field labels use the label role");
@@ -1033,9 +1034,14 @@ test("the production design contract is restrained and dependency-light", async 
   for (const css of [experience, home]) assert.match(css, /@media \(min-width: 1200px\)[\s\S]*?grid-template-columns:\s*var\(--hang-columns\)/u);
   assert.match(structuralGrid, /data-guides=\{layout\}/u);
   assert.match(globals, /\.structural-grid\[data-guides="index"\] \.structural-guide-reading-measure\s*\{\s*grid-column:\s*9/u, "Index pages mark the prose axis");
-  // Whitespace, not rules, separates entries and directory rows; rules stay at section level.
-  assert.doesNotMatch(experience, /(?:^|\n)\.entry(?: \+ \.entry)?\s*\{[^}]*border/u);
-  assert.doesNotMatch(home, /\.row\s*\{[^}]*border/u);
+  // Units of content sit in faint frames; divisions inside a frame are dashed hairlines.
+  assert.match(globals, /--frame:\s*rgba\(0, 0, 0, 0\.09\)/u);
+  assert.match(globals, /--dash-y:\s*repeating-linear-gradient\(to bottom/u);
+  assert.match(experience, /(?:^|\n)\.entry\s*\{[^}]*border:\s*1px solid var\(--frame\)/u);
+  assert.match(experience, /\.entryBody\s*\{[^}]*background:\s*var\(--dash-y\)/u);
+  assert.match(home, /(?:^|\n)\.row\s*\{[^}]*border:\s*1px solid var\(--frame\)/u);
+  assert.match(directory, /\.directory\s*\{[^}]*border:\s*1px solid var\(--frame\)/u);
+  assert.match(directory, /\.directory a \+ a\s*\{[^}]*background-image:\s*var\(--dash-x\)/u);
   assert.doesNotMatch(directory, /\.directory a\s*\{[^}]*border/u);
   assert.doesNotMatch(globals, /\.education-entry\s*\{[^}]*grid-template-columns/u);
   for (const guide of ["frame-start", "rail-boundary", "reading-start", "reading-measure", "reading-end"]) assert.ok(structuralGrid.includes(`"${guide}"`));
@@ -1095,7 +1101,7 @@ test("shared typography source roles preserve article names, compact indices, me
   for (const css of [home, experience, coursework]) {
     assert.match(rule(css, ".sectionIndex"), /font-size:\s*var\(--type-index\)\s*;/u, "Section indices share the compact index role.");
   }
-  assert.match(rule(directory, ".directory a"), /font-size:\s*var\(--type-heading\)\s*;/u, "Both top-level directories share the heading role.");
+  assert.match(rule(directory, ".directory a"), /font-size:\s*var\(--type-subheading\)\s*;/u, "Both framed section indices share the subheading role.");
   assert.match(rule(directory, ".index"), /font-size:\s*var\(--type-index\)\s*;/u, "Both directories use the compact section-index role.");
   assert.match(rule(coursework, ".sectionBody h2"), /font-size:\s*var\(--type-heading\)\s*;/u);
   assert.match(rule(coursework, ".courseList"), /font-size:\s*var\(--type-reading\)\s*;/u);

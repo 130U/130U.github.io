@@ -62,10 +62,14 @@
   margin-bottom: 32px;
 }
 
+/* Each subject's courses sit in one faint frame; columns are divided by dashed
+   hairlines. */
 .courseList {
   display: block;
   margin: 0;
-  padding: 0;
+  padding: 24px 28px 18px;
+  border: 1px solid var(--frame);
+  background: var(--panel);
   list-style: none;
   color: var(--ink);
   font-family: var(--font-prose);
@@ -77,22 +81,11 @@
   margin-top: 8px;
 }
 
-/* Subject on axis A, its courses in two columns on axis B. */
-@media (min-width: 1200px) {
-  .sectionBody {
-    display: grid;
-    grid-template-columns: var(--hang-columns);
-    align-items: start;
-  }
-
-  .sectionBody h2 {
-    margin-bottom: 0;
-    padding-right: var(--hang-gap);
-  }
-
+@media (min-width: 768px) {
   .courseList {
     columns: 2;
-    column-gap: var(--hang-gap);
+    column-gap: 56px;
+    column-rule: 1px dashed var(--dash);
   }
 
   .courseList li {
@@ -102,6 +95,27 @@
 
   .courseList li + li {
     margin-top: 0;
+  }
+}
+
+@media (min-width: 1200px) {
+  .intro {
+    display: grid;
+    grid-template-columns: var(--hang-columns);
+    align-items: start;
+  }
+
+  .intro h1 {
+    max-width: none;
+    padding-right: var(--hang-gap);
+  }
+
+  .intro > nav {
+    margin-top: 0;
+  }
+
+  .courseList {
+    columns: 3;
   }
 }
 
@@ -131,5 +145,9 @@
     display: block;
     padding: 0;
     margin-bottom: 12px;
+  }
+
+  .courseList {
+    padding: 18px 20px 14px;
   }
 }

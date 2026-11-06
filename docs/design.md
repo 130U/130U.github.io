@@ -36,9 +36,11 @@ The mark's editable master is
 | Text-link underline | `#a6a6a1` |
 | Active state and focus | `#2200ff` |
 | Structural rule | `rgba(0, 0, 0, 0.06)` |
-| Entry rule and diagram node border | `rgba(0, 0, 0, 0.12)` |
+| Diagram node border | `rgba(0, 0, 0, 0.12)` |
 | Strong rule | `rgba(0, 0, 0, 0.24)` |
-| Diagram node surface | `#fcfbfa` |
+| Frame edge (`--frame`) | `rgba(0, 0, 0, 0.09)` |
+| Dashed hairline (`--dash`, drawn by `--dash-x` / `--dash-y`) | `rgba(0, 0, 0, 0.17)`, 4px dash, 4px gap |
+| Frame and diagram node surface (`--panel`) | `#fcfbfa` |
 
 Inter 4.1 remains the typeface for headings, navigation, directory labels, controls,
 metadata, and the architecture viewer. Source Serif 4 supplies narrative prose and
@@ -99,12 +101,15 @@ manuscript render at weight 600, so each contribution opens with its claim; ital
 run-ins and bold theorem labels remain inside mathematics papers. The hero name is the
 one display exception.
 
-Subtraction is the rule. Each component uses at most two text styles, and small grey
+Restraint, not absence. Each component uses at most two text styles, and small grey
 labels appear only where a field needs naming (the record strip, contact details,
-diagrams). Whitespace separates entries, directory rows, chapters and list items;
-rules mark only page-level sections, the record strip, and diagram stages. Do not add
-metric rows, pills, badges, or other pulled-out figures: a result belongs in its
-sentence.
+diagrams). Structure has three weights: a strong solid rule opens each page-level
+section; a faint 1px frame on the `--panel` surface holds each unit of content (an
+entry, the section index, the record strip, contact details, a course list); and
+divisions inside a frame are dashed hairlines (title | summary, field | field, row /
+row, column | column). Frames have square corners and no shadow, and sit 16px apart.
+Do not add metric rows, pills, badges, or other pulled-out figures: a result belongs in
+its sentence.
 
 Text roles use rem units and scale with the user's text setting. Titles and headings
 step down below 768px, including in the architecture viewer; the other roles remain
@@ -120,10 +125,11 @@ its temporary reading state.
 Experience shares About's Inter headings, Source Serif 4 prose, role sizes, grid, and
 paper/ink palette. It is one page with five numbered sections and an anchor
 directory headed Experience: Areas of Focus that stays in one column at every screen width.
-Experience and Coursework use the same `SectionDirectory` component: full-width
-rows separated by whitespace, with small serif numbers at the left and labels in the
-heading size. A right-aligned View action appears on hover
-and keyboard focus and remains visible on touch devices; the complete row turns
+Experience and Coursework use the same `SectionDirectory` component: a framed index
+whose rows are divided by inset dashed hairlines, with small serif numbers at the left
+and labels in the subheading size at weight 400. From 1200px the page title hangs on
+axis A and the index sits beside it on axis B. A right-aligned View label appears on
+hover and keyboard focus and remains visible on touch devices; the complete row turns
 blue on hover or focus. Directory numbers run from 01 through 05 for Experience
 and 01 through 04 for Coursework. Both the decorative numbers and repeated View
 actions are hidden from assistive technology, leaving the section title as each
@@ -131,12 +137,11 @@ link's accessible name. Section margin indices use the shared serif index role o
 About, Experience, and Coursework. Category introductions are omitted.
 
 On About, Experience, Coursework and the ten detail pages, content hangs on two axes
-of the ten-column field (`--hang-columns`, 4fr / 6fr). From 1200px, item titles sit
-alone on axis A and their prose on axis B, four columns in, with `--prose-inset` of
-space before the reading-end guide; 64px of whitespace separates entries. Below 1200px
-the title stacks above its prose. Summaries use upright black body text. No content is
-truncated to fit a card. Sections end on the reading-end guide (11 of the 12 content
-columns).
+of the ten-column field (`--hang-columns`, 4fr / 6fr). Each entry is a frame; from
+1200px its title sits alone on the left and a dashed hairline divides it from the
+prose on the right. Below 1200px the title stacks above its prose inside the frame.
+Summaries use upright black body text. No content is truncated to fit a frame.
+Sections end on the reading-end guide (11 of the 12 content columns).
 
 All body copy uses the shared ink colors. Blue marks navigation, hover, keyboard
 focus, and the decision or feedback path in architecture figures.
@@ -170,9 +175,9 @@ legal articles use their manuscript URLs; the other ten entries have pages at
 `/experience/{slug}/`. AI entries lead with the project name, other outer entries with
 the organization, and legal entries with `Duke Law School: {research area} Research`.
 Detail-page H1s use the project or paper title in the page-title role. Organization,
-Position, Location, and Dates form a record strip under a strong rule: four fields on
-desktop, two per row below 1200px and one below 420px, each a label-role caption above
-a value in the reading face. The browser title keeps `{institution}: {project title}`.
+Position, Location, and Dates form a framed record strip with dashed hairlines between
+fields: four fields on desktop, two per row below 1200px and one below 420px, each a
+label-role caption above a value in the reading face. The browser title keeps `{institution}: {project title}`.
 The strip is followed by the approved Key Contributions as an ordered list with
 decorative serif indices (01, 02, ...), with contextual notes as the final items in
 the same list and type style. On the ten non-article detail pages the Key
@@ -250,16 +255,17 @@ records. It uses the same underlined text and decorative right arrow as Experien
 with visible keyboard focus and a descriptive accessible name;
 the About page keeps its `#coursework` anchor around this entrance. The dedicated
 page has four subject sections, indexed 01 through 04, and uses the same numbered,
-ruled directory and View interaction as Experience.
-Each section has a shared section heading and a list of course names
-at the shared reading size and leading, in two columns on axis B from 1200px. All 49 courses retain their original
+framed index and View interaction as Experience.
+Each section has a shared section heading and a framed list of course names
+at the shared reading size and leading, in three columns from 1200px and two from
+768px, divided by dashed column rules. All 49 courses retain their original
 wording and order as static text, available without JavaScript. The rail's
 Back to Education link returns to the Education section. Duke University appears
 once above the two degree records;
-degree names use the interface size at weight 500, on axis B beside the institution. Compact notes and whitespace
+degree names use the interface size at weight 500, on axis B beside the institution. Compact notes and a dashed hairline
 separate the degree records. Profile details and contact values also use the reading
-scale; field labels use the label scale. Email, GitHub, and X occupy three columns
-above 540px and stack in one column at 540px and below. Long contact values can wrap
+scale; field labels use the label scale. Email, GitHub, and X share one frame with
+dashed dividers, in three columns above 540px and stacked at 540px and below. Long contact values can wrap
 when text is enlarged.
 Parent links have 44px targets; coarse pointers also receive 44px primary navigation
 and standalone link targets.
@@ -376,8 +382,8 @@ the link. Summaries retain selected bold emphasis. Numerical guarantees retain t
 model, horizon, payoff, and comparison scope.
 It does not repeat the abstracts. Titles use the same
 subheading role on axis A; supporting paragraphs use the reading role on axis B.
-Whitespace separates entries. Typography, spacing, and wrapping adapt within
-the shared reading frame without introducing cards or changing the palette.
+Each entry is a frame with a dashed divider, as on Experience. Typography, spacing,
+and wrapping adapt within the shared reading frame without changing the palette.
 
 Each research page provides a contents list and the manuscript's abstract, core
 chapters, formulas, and references. The dependence-stress paper includes chapters

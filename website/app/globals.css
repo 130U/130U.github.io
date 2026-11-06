@@ -9,6 +9,13 @@
   --rule-medium: rgba(0, 0, 0, 0.12);
   --rule-strong: rgba(0, 0, 0, 0.24);
   --panel: #fcfbfa;
+  /* Frames: a faint solid edge around a unit of content; divisions inside a
+     frame are dashed hairlines. */
+  --frame: rgba(0, 0, 0, 0.09);
+  --dash: rgba(0, 0, 0, 0.17);
+  --dash-x: repeating-linear-gradient(to right, var(--dash) 0 4px, transparent 4px 8px);
+  --dash-y: repeating-linear-gradient(to bottom, var(--dash) 0 4px, transparent 4px 8px);
+  --frame-pad: 32px;
   --accent: #2200ff;
   --dither: #070707;
   /* One size per role, everywhere: title 36, heading 24, subheading 18,
