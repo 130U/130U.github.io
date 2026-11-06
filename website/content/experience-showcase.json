@@ -37,11 +37,11 @@
       "organization": "Duke University × Leading Foundation Model Developer",
       "summary": "With a leading foundation model developer, I led the statistical system behind expert feedback for LLM post-training, one of the first engineering implementations of prediction-assisted statistical inference and capacity-constrained review allocation in expert data production. It coordinated more than 300 specialists and an external vendor network. Under ideal residual calibration, a synthetic benchmark showed 17.79% lower estimation variance than uniform sampling at equal audit cost.",
       "readMoreLabel": "Read More",
-      "detailTitle": "Large-scale domain expert feedback governance and adaptive review",
+      "detailTitle": "Large-Scale Domain Expert Feedback Governance and Adaptive Review",
       "metadata": {
         "position": "Researcher",
         "location": "Durham, North Carolina; Palo Alto, California",
-        "dates": "September 2023 to September 2026"
+        "dates": "September 2023 – September 2026"
       },
       "contributionsLabel": "Key Contributions",
       "keyContributions": [
@@ -64,11 +64,11 @@
       "organization": "Duke University × Leading Foundation Model Developer",
       "summary": "I designed the data strategy for financial post-training in a frontier foundation model program, one of the first engineering implementations of constraint-preserving synthetic data and structured expert preference supervision for financial LLM post-training. Diagnostic decision tasks, exact accounting constraints and a five-level preference protocol feed Batch Zero, the calibration protocol the company later extended to other post-training programs.",
       "readMoreLabel": "Read More",
-      "detailTitle": "Financial task design and synthetic data engineering",
+      "detailTitle": "Financial Task Design and Synthetic Data Engineering",
       "metadata": {
         "position": "Researcher",
         "location": "Durham, North Carolina; Palo Alto, California",
-        "dates": "September 2023 to September 2026"
+        "dates": "September 2023 – September 2026"
       },
       "contributionsLabel": "Key Contributions",
       "keyContributions": [
@@ -101,11 +101,11 @@
       "organization": "Duke University × Frontier AI Research Laboratory",
       "summary": "I developed a framework for evaluating and supervising general reasoning with a frontier AI research laboratory, among the first engineering implementations of joint verification across final answers, visible reasoning and execution evidence in frontier model evaluation. Code checks, LLM-as-a-Judge screening and specialist scholars work in three layers. On 3,600 benchmark submissions, certificate checking made no false acceptances, where final-answer matching falsely accepted 75.0%.",
       "readMoreLabel": "Read More",
-      "detailTitle": "General reasoning evaluation and layered verification",
+      "detailTitle": "General Reasoning Evaluation and Layered Verification",
       "metadata": {
         "position": "Researcher",
         "location": "Durham, North Carolina; Palo Alto, California",
-        "dates": "September 2023 to September 2026"
+        "dates": "September 2023 – September 2026"
       },
       "contributionsLabel": "Key Contributions",
       "keyContributions": [
@@ -138,11 +138,11 @@
       "organization": "Duke University × Leading Global Alternative Asset Manager",
       "summary": "I developed and implemented a framework for evidence verification and decision assurance with a leading global alternative asset manager, one of the first engineering implementations in institutional investment research to treat model multiplicity, unverified evidence and the cost of verification jointly. It tells analysts which fact to verify next: in an eight-scenario benchmark, one targeted query cut worst-case regret from 0.61 score units to zero.",
       "readMoreLabel": "Read More",
-      "detailTitle": "Evidence verification and robust comparison in investment research",
+      "detailTitle": "Evidence Verification and Robust Comparison in Investment Research",
       "metadata": {
         "position": "Researcher",
         "location": "Durham, North Carolina; Washington, DC",
-        "dates": "September 2023 to September 2026"
+        "dates": "September 2023 – September 2026"
       },
       "contributionsLabel": "Key Contributions",
       "keyContributions": [
@@ -168,7 +168,7 @@
       "detailTitle": "Asset-Verification Partnerships and Issuer Ranking",
       "metadata": {
         "position": "Business Development and Business Analytics (Full-time)",
-        "location": "Los Angeles, California, USA (Remote)",
+        "location": "Los Angeles, California (Remote)",
         "dates": "August 2024 – October 2025"
       },
       "contributionsLabel": "Key Contributions",
@@ -218,7 +218,7 @@
       "detailTitle": "PCA-Based Sustainability Analysis and Green-Credit Screening",
       "metadata": {
         "position": "Fintech Intern",
-        "location": "Shanghai & Suzhou, China",
+        "location": "Shanghai and Suzhou, China",
         "dates": "March 2021 – May 2021"
       },
       "contributionsLabel": "Key Contributions",
@@ -241,7 +241,7 @@
       "detailTitle": "Autonomous Authority in Space: Risk Tradeoffs and the Law of Delegation",
       "metadata": {
         "position": "Author (Letao Ouyang)",
-        "location": "Durham, NC",
+        "location": "Durham, North Carolina",
         "dates": "December 2024 (manuscript date)"
       },
       "contributionsLabel": "Key Contributions",
@@ -263,7 +263,7 @@
       "detailTitle": "Small States and the Governance of Strategic Space Dependence",
       "metadata": {
         "position": "Author (Letao Ouyang)",
-        "location": "Durham, NC",
+        "location": "Durham, North Carolina",
         "dates": "December 2024 (manuscript date)"
       },
       "contributionsLabel": "Key Contributions",
@@ -285,7 +285,7 @@
       "detailTitle": "Who May Choose the Lesser Risk: Solar Geoengineering and the Legal Duties of Comparison and Continuity",
       "metadata": {
         "position": "Author (Letao Ouyang)",
-        "location": "Durham, NC",
+        "location": "Durham, North Carolina",
         "dates": "December 2024 (manuscript date)"
       },
       "contributionsLabel": "Key Contributions",
@@ -307,7 +307,7 @@
       "detailTitle": "Mangrove Restoration and the Limits of Compensatory Mitigation: Lessons from Florida for the Greater Bay Area",
       "metadata": {
         "position": "Author (Letao Ouyang)",
-        "location": "Durham, NC",
+        "location": "Durham, North Carolina",
         "dates": "December 2024 (manuscript date)"
       },
       "contributionsLabel": "Key Contributions",
@@ -353,7 +353,7 @@
       "detailTitle": "Bluetooth Satellite Commercialization and Market Selection",
       "metadata": {
         "position": "Student Consultant and Business Analytics Analyst, Duke Practicum",
-        "location": "Seattle, USA",
+        "location": "Seattle, Washington",
         "dates": "August 2023 – January 2024"
       },
       "contributionsLabel": "Key Contributions",
@@ -434,7 +434,7 @@
       "detailTitle": "Advanced Physics Olympiad Instruction",
       "metadata": {
         "position": "IPhO-Level Physics Instructor and Original Problem Designer",
-        "location": "Durham, USA (Hybrid)",
+        "location": "Durham, North Carolina (Hybrid)",
         "dates": "August 2019 – January 2026"
       },
       "contributionsLabel": "Key Contributions",
@@ -471,6 +471,6 @@
   "aiSourceDocument": {
     "fileName": "ai-research-and-engineering.md",
     "path": "content/sources/ai-portfolio/ai-research-and-engineering.md",
-    "sha256": "6b1b487c986316b97aee42299b11414bc2584baed104cd92bb57973252f989e0"
+    "sha256": "b5d6a1b86108c5b4f5d84f64bf50ff262c84cc11736946afa8ea925564323c13"
   }
 }

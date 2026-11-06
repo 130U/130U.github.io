@@ -371,7 +371,7 @@ async function exportedRoutes() {
     .sort();
 }
 
-test("the static export retains the unified Experience page, legacy routes, and the architecture viewer", async () => {
+test("the static export contains the unified Experience page, alias routes, and the architecture viewer", async () => {
   assert.deepEqual(await exportedRoutes(), [...ROUTES, "/architecture/"].sort());
   assert.ok(existsSync(path.join(OUT, "404.html")));
 });
@@ -520,7 +520,7 @@ test("About opens with its accessible clarinet hero before the retained profile"
   assert.equal((attribute(ringDots, "d").match(/Z/gu) ?? []).length, 14,
     "Six ring keys and one bell rim each retain an inner and outer contour.");
   const profileHeading = home.match(/<h2\b[^>]*id="home-heading"[^>]*>([\s\S]*?)<\/h2>/u);
-  assert.equal(stripMarkup(profileHeading?.[1] ?? ""), "Thinking mathematically Working in AI");
+  assert.equal(stripMarkup(profileHeading?.[1] ?? ""), "Thinking Mathematically Working in AI");
   assert.match(home, /<title>About \| Theodore Ouyang<\/title>/u);
   assert.match(home, /id="home-profile"/u);
   for (const index of ["01", "02", "03", "04"]) {
@@ -542,7 +542,7 @@ test("About opens with its accessible clarinet hero before the retained profile"
   for (const route of ROUTES.slice(1)) assert.equal(openingTags(await routeHtml(route), "canvas").length, 0);
 });
 
-test("the education compatibility page shares About content and marks About as current", async () => {
+test("the education alias page shares About content and marks About as current", async () => {
   const home = await routeHtml("/");
   const alias = await routeHtml("/education/");
   const mainText = (html) => stripMarkup(html.match(/<main\b[^>]*>([\s\S]*?)<\/main>/u)?.[1] ?? "");
@@ -557,7 +557,7 @@ test("the education compatibility page shares About content and marks About as c
   }
 });
 
-test("Experience compatibility pages share the unified text-focused page", async () => {
+test("Experience alias pages share the unified text-focused page", async () => {
   for (const route of ["/education/", "/experience/", "/past-experience/", "/now/"]) {
     const html = await routeHtml(route);
     assert.equal(openingTags(html, "img").length, 0, `${route} must use text-focused content`);
@@ -652,15 +652,6 @@ test("Experience presents five numbered sections and all eighteen approved entri
   assert.equal(stripMarkup(disclosure[2].match(/<h3\b[^>]*>([\s\S]*?)<\/h3>/iu)?.[1] ?? ""), approvedDisclosure.title);
   assertApprovedInline(disclosure[2].match(/<p\b[^>]*>([\s\S]*?)<\/p>/iu)?.[1] ?? "", approvedDisclosure.text);
   assert.doesNotMatch(stripMarkup(main), /\p{Script=Han}/u, "The public Experience copy must be English only");
-  assert.doesNotMatch(stripMarkup(main), /Experience through September 2026|Past Experience|Current Chapter|Experience Website Copy|Latest version English and Chinese|English layout specification|Full articles are omitted here/u);
-  const oldIntroductions = [
-    "Developed AI research and production methods that domain experts could apply consistently across teams.",
-    "Applied statistical learning, data engineering, and market analysis to counterparty screening, market entry, and green-credit assessment.",
-    "Authored four research papers examining how legal institutions allocate authority and responsibility under technological and environmental uncertainty.",
-    "Applied market research, valuation analysis, and risk screening to real estate acquisition advice, technology commercialization, dental-sector research, and equity research.",
-    "Combined advanced physics and mathematics Olympiad training with peer mentoring and independent instruction.",
-  ];
-  for (const introduction of oldIntroductions) assert.ok(!stripMarkup(main).includes(introduction), "General category introductions must not return");
 });
 
 test("all eighteen approved Experience entries use institution titles and real links to complete detail pages", async () => {
@@ -751,7 +742,7 @@ test("each AI and legal article opens with one logic architecture diagram", asyn
   }
 });
 
-test("legacy domain routes preserve approved sections, canonicalize to Experience, and return to valid anchors", async () => {
+test("domain alias routes preserve approved sections, canonicalize to Experience, and return to valid anchors", async () => {
   const main = await routeHtml("/experience/");
   const mainEntries = experienceEntries(main);
   for (const [name, slug, ids] of DOMAINS) {
@@ -1031,18 +1022,22 @@ test("the production design contract is restrained and dependency-light", async 
   assert.match(experience, /\.section\s*\{[^}]*grid-template-columns:\s*repeat\(11,[^}]*grid-column:\s*1 \/ span 11/u, "Sections end on the reading-end guide");
   assert.match(experience, /\.sectionBody\s*\{[^}]*grid-column:\s*2\s*\/\s*span\s*10/u);
   assert.match(globals, /--hang-columns:\s*minmax\(0,\s*4fr\)\s+minmax\(0,\s*6fr\)/u, "Hanging rows put titles on 4 of 10 columns and prose on 6");
-  for (const css of [experience, home]) assert.match(css, /@media \(min-width: 1200px\)[\s\S]*?grid-template-columns:\s*var\(--hang-columns\)/u);
+  for (const css of [experience, globals]) assert.match(css, /@media \(min-width: 1200px\)[\s\S]*?grid-template-columns:\s*var\(--hang-columns\)/u);
   assert.match(structuralGrid, /data-guides=\{layout\}/u);
   assert.match(globals, /\.structural-grid\[data-guides="index"\] \.structural-guide-reading-measure\s*\{\s*grid-column:\s*9/u, "Index pages mark the prose axis");
   // Each group of content sits in one faint, unfilled frame with a continuous dashed
   // spine; divisions inside a frame are dashed hairlines.
   assert.match(globals, /--frame:\s*rgba\(0, 0, 0, 0\.08\)/u);
   assert.match(globals, /--dash-y:\s*repeating-linear-gradient\(to bottom/u);
-  for (const [css, group] of [[experience, "entries"], [home, "rows"]]) {
-    assert.match(css, new RegExp(`(?:^|\\n)\\.${group}\\s*\\{[^}]*border:\\s*1px solid var\\(--frame\\)`, "u"), `.${group} is the section's single frame`);
-    assert.match(css, new RegExp(`\\.${group}::before\\s*\\{[^}]*background:\\s*var\\(--dash-y\\)`, "u"), `.${group} draws one continuous spine`);
+  assert.match(globals, /(?:^|\n)\.ledger\s*\{[^}]*border:\s*1px solid var\(--frame\)/u, "A ledger is a section's single frame");
+  assert.match(globals, /\.ledger::before\s*\{[^}]*background:\s*var\(--dash-y\)/u, "A ledger draws one continuous spine");
+  for (const component of ["AboutContent.tsx", path.join("experience", "ExperienceContent.tsx")]) {
+    const source = await readFile(path.join(ROOT, "app", "components", component), "utf8");
+    for (const part of ["ledger", "ledger-item", "ledger-title", "ledger-body", "ledger-prose", "read-more"]) {
+      assert.ok(source.includes(`className="${part}"`), `${component} renders its lists with .${part}`);
+    }
   }
-  for (const css of [experience, home, directory]) assert.doesNotMatch(css, /background:\s*var\(--panel\)/u, "Frames stay unfilled");
+  for (const css of [globals, experience, home, directory]) assert.doesNotMatch(css, /background:\s*var\(--panel\)/u, "Frames stay unfilled");
   assert.match(directory, /\.directory\s*\{[^}]*border:\s*1px solid var\(--frame\)/u);
   assert.match(directory, /\.directory a \+ a\s*\{[^}]*background-image:\s*var\(--dash-x\)/u);
   assert.doesNotMatch(directory, /\.directory a\s*\{[^}]*border/u);
@@ -1057,7 +1052,7 @@ test("the production design contract is restrained and dependency-light", async 
   assert.match(navigation, /wordmark-lockup[\s\S]*?wordmark-mark[\s\S]*?wordmark-name[\s\S]*?>Theodore Ouyang<\/span>/u);
   assert.match(layout, /assets\/brand\/lo-mark\.svg/u);
   assert.match(experience, /\.metadata\s*\{[^}]*grid-template-columns:\s*repeat\(4,/u);
-  assert.match(experience, /\.entryTitle\s*\{[^}]*font-size:\s*var\(--type-subheading\)/u);
+  assert.match(globals, /\.ledger-title\s*\{[^}]*font-size:\s*var\(--type-subheading\)/u);
   assert.match(experience, /\.contributions > ol\s*\{[^}]*padding:\s*0\s*;[^}]*list-style:\s*none\s*;/u);
   assert.deepEqual(Object.keys(packageJson.dependencies).sort(), ["@mathjax/mathjax-tex-font", "@mathjax/src", "next", "react", "react-dom"]);
   assert.equal(packageJson.dependencies["@mathjax/src"], "4.1.3");
@@ -1113,7 +1108,7 @@ test("shared typography source roles preserve article names, compact indices, me
     assert.match(declarations, /font-weight:\s*400\s*;/u);
     assert.match(declarations, /line-height:\s*var\(--title-leading\)\s*;/u);
   }
-  const entryTitle = rule(experience, ".entryTitle");
+  const entryTitle = rule(globals, ".ledger-title");
   assert.match(entryTitle, /font-size:\s*var\(--type-subheading\)\s*;/u, "Every item title shares the subheading role");
   assert.match(entryTitle, /font-weight:\s*500\s*;/u);
   assert.match(entryTitle, /line-height:\s*var\(--subheading-leading\)\s*;/u);

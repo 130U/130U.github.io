@@ -279,11 +279,6 @@
       align-items: start;
     }
 
-    .overview,
-    .readingColumn {
-      max-width: none;
-    }
-
     .overview {
       grid-column: 1;
       grid-row: 1;

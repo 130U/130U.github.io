@@ -28,7 +28,7 @@ export default async function ExperienceDetailPage({ params }: PageProps) {
   return (
     <SiteShell active="experience" parent={{ href: returnPath, label: "Experience" }} frameClassName={styles.frame} guides="index">
       <article className={styles.detailPage} aria-labelledby="experience-title">
-        <header className={`page-intro plain-page-intro ${styles.detailHeader}`}>
+        <header className={`page-intro ${styles.detailHeader}`}>
           <h1 id="experience-title" tabIndex={-1}>{entry.headline}</h1>
           <ExperienceMetadata entry={entry} />
         </header>

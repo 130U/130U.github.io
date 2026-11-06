@@ -12,7 +12,7 @@ export const metadata: Metadata = createPageMetadata({
 export default function NotFound() {
   return (
     <SiteShell>
-      <header className="page-intro plain-page-intro">
+      <header className="page-intro">
         <p className="section-kicker">404</p>
         <h1>Page Not Found</h1>
         <p className="lede">

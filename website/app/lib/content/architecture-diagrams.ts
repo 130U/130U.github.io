@@ -14,8 +14,8 @@ export type ArchitectureDiagram = {
   caption: string;
 };
 
-const SYSTEM = "System architecture";
-const FRAMEWORK = "Analytical framework";
+const SYSTEM = "System Architecture";
+const FRAMEWORK = "Analytical Framework";
 
 export const architectureDiagrams: Readonly<Record<number, ArchitectureDiagram>> = {
   1: {

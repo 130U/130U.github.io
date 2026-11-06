@@ -94,43 +94,6 @@
   letter-spacing: var(--heading-tracking);
 }
 
-/* A section's rows share one unfilled frame with room inside. From 1200px a
-   continuous dashed spine runs between the titles and their prose. */
-.rows {
-  position: relative;
-  padding: var(--frame-pad) var(--frame-pad) calc(var(--frame-pad) - 10px);
-  border: 1px solid var(--frame);
-}
-
-.row + .row {
-  margin-top: 72px;
-}
-
-.rowTitle,
-.institution {
-  margin: 0;
-  color: var(--ink);
-  font-size: var(--type-subheading);
-  font-weight: 500;
-  letter-spacing: var(--subheading-tracking);
-  line-height: var(--subheading-leading);
-  text-wrap: pretty;
-}
-
-.rowBody {
-  min-width: 0;
-  max-width: var(--reading-measure);
-}
-
-.researchSummary {
-  margin: 0;
-  color: inherit;
-  font-family: var(--font-prose);
-  font-size: var(--type-reading);
-  line-height: var(--reading-leading);
-  text-wrap: pretty;
-}
-
 .educationList :global(.education-entry) {
   padding: 0;
   border-bottom: 0;
@@ -167,35 +130,6 @@
 .coursework {
   margin-top: 20px;
   scroll-margin-top: 32px;
-}
-
-.readMore {
-  display: flex;
-  width: fit-content;
-  align-items: center;
-  min-height: 44px;
-  margin-top: 8px;
-  gap: 6px;
-  font-size: var(--type-action);
-  font-weight: 500;
-  line-height: var(--interface-leading);
-  text-decoration: underline;
-  text-decoration-color: var(--link-rule);
-  text-underline-offset: var(--link-underline-offset);
-  cursor: pointer;
-  transition: color 180ms var(--ease-out), text-decoration-color 180ms var(--ease-out);
-}
-
-.readMore svg {
-  width: 14px;
-  height: 14px;
-  flex-shrink: 0;
-  transition: transform 180ms var(--ease-out);
-}
-
-.readMore:focus-visible {
-  outline: 2px solid var(--accent);
-  outline-offset: 4px;
 }
 
 /* Contact fields share one frame, divided by dashed hairlines. */
@@ -250,14 +184,9 @@
 }
 
 @media (hover: hover) and (pointer: fine) {
-  .readMore:hover,
   .contactStrip a:hover {
     color: var(--accent);
     text-decoration-color: var(--accent);
-  }
-
-  .readMore:hover svg {
-    transform: translateX(2px);
   }
 }
 
@@ -268,33 +197,7 @@
 }
 
 @media (min-width: 1200px) {
-  .row {
-    display: grid;
-    grid-template-columns: var(--hang-columns);
-    align-items: start;
-  }
-
-  .rowTitle,
-  .institution {
-    padding-right: var(--hang-gap);
-  }
-
-  .rows::before {
-    position: absolute;
-    top: var(--frame-pad);
-    bottom: var(--frame-pad);
-    left: calc(var(--frame-pad) + (100% - 2 * var(--frame-pad)) * 0.4);
-    width: 1px;
-    background: var(--dash-y);
-    content: "";
-  }
-
-  .rowBody {
-    max-width: none;
-    padding-left: var(--hang-gap);
-  }
-
-  /* The first divider falls on the same axis as the spine of the frames above,
+  /* The first divider falls on the same axis as the ledger spine above,
      and each value starts where their titles and prose start. */
   .contactStrip {
     grid-template-columns: calc(var(--frame-pad) + (100% - 2 * var(--frame-pad)) * 0.4) minmax(0, 1fr) minmax(0, 1fr);
@@ -321,19 +224,6 @@
 
   .sectionBody {
     grid-column: 2 / span 7;
-  }
-}
-
-@media (width < 1200px) {
-  .rowTitle,
-  .institution {
-    margin-bottom: 10px;
-  }
-
-  .row + .row {
-    margin-top: 36px;
-    padding-top: 36px;
-    background: var(--dash-x) left top / 100% 1px no-repeat;
   }
 }
 
@@ -366,15 +256,6 @@
   .sectionTitle {
     margin-bottom: 28px;
   }
-
-  .rows {
-    padding: 28px 20px 18px;
-  }
-
-  .row + .row {
-    margin-top: 28px;
-    padding-top: 28px;
-  }
 }
 
 @media (max-width: 540px) {
@@ -392,9 +273,7 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .contactStrip a,
-  .readMore,
-  .readMore svg {
+  .contactStrip a {
     transition: none;
   }
 }

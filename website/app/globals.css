@@ -17,7 +17,6 @@
   --dash-y: repeating-linear-gradient(to bottom, var(--dash) 0 4px, transparent 4px 8px);
   --frame-pad: 44px;
   --accent: #2200ff;
-  --dither: #070707;
   /* One size per role, everywhere: title 36, heading 24, subheading 18,
      reading 16, interface 15, label 13, index 11. */
   --type-title: 2.25rem;
@@ -29,7 +28,8 @@
   --type-interface: 0.9375rem;
   --type-action: var(--type-interface);
   --type-math: 1.15em;
-  --reading-measure: 40rem;
+  /* About seventy characters of Source Serif 4 at the reading size. */
+  --reading-measure: 36rem;
   --rail-min-width: calc(5 * var(--type-interface) + 13px + clamp(20px, 2vw, 24px) + 22px + 10px);
   --title-leading: 1.12;
   --heading-leading: 1.25;
@@ -44,7 +44,6 @@
      The gap belongs to the title cell so axis B lands exactly on a grid line,
      and prose keeps an inset from the reading-end guide. */
   --hang-columns: minmax(0, 4fr) minmax(0, 6fr);
-  --hang-offset: 40%;
   --hang-gap: 40px;
   --prose-inset: 32px;
   --link-underline-offset: 0.18em;
@@ -529,6 +528,75 @@ button:focus-visible {
   text-decoration-color: currentColor;
 }
 
+/* Ledger: a section's items in one unfilled frame with room inside. Each title
+   hangs on the left; from 1200px one continuous dashed spine divides the titles
+   from their prose. */
+.ledger {
+  position: relative;
+  padding: var(--frame-pad) var(--frame-pad) calc(var(--frame-pad) - 10px);
+  border: 1px solid var(--frame);
+}
+
+.ledger-item {
+  scroll-margin-top: 40px;
+}
+
+.ledger-item + .ledger-item {
+  margin-top: 72px;
+}
+
+.ledger-title {
+  margin: 0;
+  color: var(--ink);
+  font-size: var(--type-subheading);
+  font-weight: 500;
+  line-height: var(--subheading-leading);
+  letter-spacing: var(--subheading-tracking);
+  text-wrap: pretty;
+}
+
+.ledger-body {
+  min-width: 0;
+  max-width: var(--reading-measure);
+}
+
+.ledger-prose {
+  margin: 0;
+  font-family: var(--font-prose);
+  font-size: var(--type-reading);
+  line-height: var(--reading-leading);
+  text-wrap: pretty;
+}
+
+.ledger-prose code {
+  font: inherit;
+  overflow-wrap: anywhere;
+}
+
+.read-more {
+  display: flex;
+  width: fit-content;
+  align-items: center;
+  min-height: 44px;
+  margin-top: 8px;
+  gap: 6px;
+  font-size: var(--type-action);
+  font-weight: 500;
+  line-height: var(--interface-leading);
+  text-decoration: underline;
+  text-decoration-color: var(--link-rule);
+  text-underline-offset: var(--link-underline-offset);
+  cursor: pointer;
+  transition: color 180ms var(--ease-out), text-decoration-color 180ms var(--ease-out);
+}
+
+.read-more svg {
+  width: 14px;
+  height: 14px;
+  flex-shrink: 0;
+  transition: transform 180ms var(--ease-out);
+}
+
 .site-footer {
   display: flex;
   justify-content: space-between;
@@ -551,13 +619,61 @@ button:focus-visible {
   .primary-nav a:hover,
   .parent-link:hover,
   .back-link:hover,
-  .education-note a:hover {
+  .education-note a:hover,
+  .read-more:hover {
     color: var(--accent);
     text-decoration-color: var(--accent);
   }
 
   .wordmark:hover .wordmark-lockup {
     color: var(--accent);
+  }
+
+  .read-more:hover svg {
+    transform: translateX(2px);
+  }
+}
+
+@media (min-width: 1200px) {
+  .ledger::before {
+    position: absolute;
+    top: var(--frame-pad);
+    bottom: var(--frame-pad);
+    left: calc(var(--frame-pad) + (100% - 2 * var(--frame-pad)) * 0.4);
+    width: 1px;
+    background: var(--dash-y);
+    content: "";
+  }
+
+  .ledger-item {
+    display: grid;
+    grid-template-columns: var(--hang-columns);
+    align-items: start;
+  }
+
+  .ledger-title {
+    padding-right: var(--hang-gap);
+  }
+
+  .ledger-body {
+    max-width: none;
+    padding-left: var(--hang-gap);
+  }
+}
+
+@media (width < 1200px) {
+  .ledger {
+    padding: 32px 32px 22px;
+  }
+
+  .ledger-title {
+    margin-bottom: 12px;
+  }
+
+  .ledger-item + .ledger-item {
+    margin-top: 36px;
+    padding-top: 36px;
+    background: var(--dash-x) left top / 100% 1px no-repeat;
   }
 }
 
@@ -776,6 +892,19 @@ button:focus-visible {
     margin-bottom: 45px;
   }
 
+  .ledger {
+    padding: 28px 20px 18px;
+  }
+
+  .ledger-item {
+    scroll-margin-top: 6rem;
+  }
+
+  .ledger-item + .ledger-item {
+    margin-top: 28px;
+    padding-top: 28px;
+  }
+
   .site-footer {
     width: calc(100% - 40px);
     padding-bottom: 28px;
@@ -802,7 +931,9 @@ button:focus-visible {
   .parent-link,
   .primary-nav a::before,
   .back-link,
-  .rail-panel {
+  .rail-panel,
+  .read-more,
+  .read-more svg {
     transition: none;
   }
 
