@@ -7,7 +7,7 @@ const researchSummaries: Record<string, string> = {
   "critical-dependence-stress-for-portfolio-diversification":
     "I develop a variational framework that measures how much dependence stress it takes to reverse a portfolio's Expected Shortfall advantage while every individual loss distribution stays fixed. I prove a quadratic law for the critical stress budget, introduce the marginal-restoration premium, and characterize exactly when it is positive. In a uniform benchmark, the asymptotic reversal budget is at least 30% higher than the initial-sensitivity prediction. At equal effective costs, continuous flow–cut duality characterizes how the premium responds to background displacement costs. Together these results turn local risk sensitivity into a mathematically derived threshold for portfolio decision reversal.",
   "certified-valuation-arithmetic-asian-options":
-    "I develop a weighted payoff-remainder method and use it to turn an exact conditional price representation into certified valuations of arithmetic Asian options. Shared Gaussian smoothing and validated Heston transforms together give a complete projected Euler discretization-error bound below 0.011025 price units for a one-year call spread with twelve monthly fixings at a specified Heston parameter point and step size. I also derive a direct coupling bound, which cuts the nonlinear remainder width by 99.4% in a deterministic-variance example. Both results come with proofs and executable certificates.",
+    "I develop a weighted payoff-remainder method and use it to turn an exact conditional price representation into certified valuations of arithmetic Asian options. Shared Gaussian smoothing and validated Heston transforms together give a complete projected Euler discretization-error bound below 0.011025 price units for a one-year call spread with twelve monthly fixings at a specified Heston parameter point and step size. I also derive a direct coupling bound that tightens the nonlinear remainder. Both results come with proofs and executable certificates.",
   "certified-rough-heston-valuation":
     "I develop a deterministic framework for certifying rough Heston portfolio valuations. I derive a finite-history propagation kernel and the exact support function of a joint error enclosure, which captures the shared Fourier errors that separate option-by-option bounds lose. In a matched benchmark, finite-history propagation tightens the complete pricing-error upper bound by 72.91% with the pricing output unchanged. Mathematical proofs and executable certificates tie these theoretical advances to financial results that can be verified.",
 };
@@ -30,7 +30,13 @@ export function AboutContent({ hasHero = false }: { hasHero?: boolean }) {
               and where intuition stops being reliable.
             </p>
             <p>
-              My work increasingly centers on AI. I build and experiment to
+              My work makes high-stakes conclusions verifiable: certified error
+              bounds in derivative pricing, layered verification in frontier AI
+              evaluation, and evidence standards for delegating authority to
+              autonomous systems.
+            </p>
+            <p>
+              AI is now the center of that work. I build and experiment to
               understand these systems firsthand, and to work out what is worth
               doing with them.
             </p>

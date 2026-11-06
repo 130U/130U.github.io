@@ -519,13 +519,14 @@ test("About opens with its accessible clarinet hero before the retained profile"
     "Six ring keys and one bell rim each retain an inner and outer contour.");
   const profileHeading = home.match(/<h2\b[^>]*id="home-heading"[^>]*>([\s\S]*?)<\/h2>/u);
   assert.equal(stripMarkup(profileHeading?.[1] ?? ""), "Thinking Mathematically Working in AI");
-  assert.match(home, /<title>About \| Theodore Ouyang<\/title>/u);
+  assert.match(home, /<title>Theodore Ouyang<\/title>/u);
   assert.match(home, /id="home-profile"/u);
   for (const index of ["01", "02", "03", "04"]) {
     assert.match(home, new RegExp(`aria-hidden="true"[^>]*>${index}<`, "u"));
   }
   assert.ok(stripMarkup(home).includes("Mathematics is how I make sense of things. I want to know which assumptions underlie a conclusion, what happens when they change, and where intuition stops being reliable."));
-  assert.ok(stripMarkup(home).includes("My work increasingly centers on AI. I build and experiment to understand these systems firsthand, and to work out what is worth doing with them."));
+  assert.ok(stripMarkup(home).includes("My work makes high-stakes conclusions verifiable: certified error bounds in derivative pricing, layered verification in frontier AI evaluation, and evidence standards for delegating authority to autonomous systems."));
+  assert.ok(stripMarkup(home).includes("AI is now the center of that work. I build and experiment to understand these systems firsthand, and to work out what is worth doing with them."));
   for (const id of ["selected-research", "education", "coursework", "contact"]) {
     assert.match(home, new RegExp(`id="${id}"`, "u"));
   }

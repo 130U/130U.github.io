@@ -1,6 +1,6 @@
 # Theodore Ouyang's Personal Website
 
-I am a Duke University graduate and a Sequoia Fellow whose work spans AI research, mathematics, finance, and technology strategy. This site brings together my academic background, industry experience, and written work.
+I am a Duke alumnus and Sequoia Fellow. My work makes high-stakes conclusions verifiable across derivative pricing, frontier AI evaluation, and law. This site brings together my academic background, industry experience, and written work.
 
 **[Visit the website](https://www.theodoreoy.com/)**
 
@@ -31,7 +31,7 @@ All three papers can be read on the site, with equations, chapter navigation, re
 | Field | Work represented |
 | --- | --- |
 | **AI Research and Engineering** | Expert-data quality control, financial synthetic-data design, scientific reasoning evaluation, and AI-driven investment research. |
-| **Data Science** | Issuer assessment and preference ranking at Jiritsu, market-entry research at Euromonitor, and sustainability screening at China Construction Bank. |
+| **Data Science** | Issuer ranking as a data scientist at Jiritsu, market-entry data analysis at Euromonitor, and sustainability screening at China Construction Bank. |
 | **Legal Research and Policy Analysis** | Papers on autonomous authority in space, strategic infrastructure dependence, solar geoengineering, and ecological restoration. |
 | **Finance and Consulting** | Real estate underwriting at JLL, satellite commercialization research for Hubble, investment diligence at SAIF, equity research at CITIC, and business restructuring at EY-Parthenon. |
 | **STEM Academic Competitions and Training** | Advanced physics and mathematics training, competition awards, peer mentoring, and independent Olympiad instruction. |
