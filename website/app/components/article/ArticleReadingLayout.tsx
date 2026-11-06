@@ -1,6 +1,6 @@
 import type { ReactNode } from "react";
 import { ArticleContents, type ArticleContentsItem } from "./ArticleContents";
-import styles from "../../past-experience/components/LegalPaperPage.module.css";
+import styles from "../legal/LegalPaperPage.module.css";
 
 export function ArticleReadingLayout({ overview, items, children }: {
   overview: ReactNode;

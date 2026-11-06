@@ -72,9 +72,8 @@ function exportedPages() {
     const sitemap = await readFile(new URL("../out/sitemap.xml", import.meta.url), "utf8");
     const routes = [...sitemap.matchAll(/<loc>([^<]+)<\/loc>/gu)].map((match) => new URL(decodeHtml(match[1])).pathname);
     assert.equal(routes.length, 24, "About, Coursework, Experience, eleven full articles and ten experience detail pages remain canonical.");
-    routes.push("/education/", "/architecture/", "/past-experience/", "/now/",
-      ...["artificial-intelligence", "data-science", "legal-research-and-policy-analysis", "finance", "stem-academic-competitions-and-training"].map((slug) => `/past-experience/${slug}/`));
-    assert.equal(new Set(routes).size, 33, "Audit all canonical pages and every alias route.");
+    routes.push("/architecture/");
+    assert.equal(new Set(routes).size, 25, "Audit every canonical page and the architecture viewer.");
     const entries = await Promise.all(routes.map(async (route) => {
       const html = await readFile(new URL(`../out/${route.replace(/^\//u, "")}index.html`, import.meta.url), "utf8");
       const tree = readTree(html);
@@ -110,7 +109,7 @@ test("33 exported pages contain no encoding corruption, exposed math markup, dup
 
 test("all eleven full articles retain introduction, contents and body order with complete chapter navigation", async () => {
   const pages = await exportedPages();
-  const articles = [...pages].filter(([route]) => /^\/education\/[^/]+\/$/u.test(route) || /^\/past-experience\/(?:artificial-intelligence|legal-research-and-policy-analysis)\/[^/]+\/$/u.test(route));
+  const articles = [...pages].filter(([, page]) => page.nodes.some((node) => node.attrs.has("data-article-body")));
   assert.equal(articles.length, 11);
   const roman = ["I", "II", "III", "IV", "V", "VI", "VII", "VIII", "IX", "X", "XI", "XII", "XIII", "XIV", "XV", "XVI", "XVII", "XVIII", "XIX", "XX"];
   for (const [route, page] of articles) {
@@ -123,7 +122,8 @@ test("all eleven full articles retain introduction, contents and body order with
     assert.ok(overview[0].end <= menus[0].start && menus[0].end <= body[0].start, `${route}: preserve overview, contents, body reading order.`);
     const links = elements(menus[0], (node) => node.tag === "a").map((node) => node.attrs.get("href"));
     const headings = [...elements(overview[0], (node) => /^h[23]$/u.test(node.tag)), ...elements(body[0], (node) => /^h[23]$/u.test(node.tag))];
-    const isAiExperience = route.startsWith("/past-experience/artificial-intelligence/");
+    const isExperience = route.startsWith("/experience/");
+    const isAiExperience = isExperience && page.nodes.some((node) => node.attrs.has("data-architectural-context"));
     const manuscriptTitles = headings.filter((node) => node.attrs.get("id") === "article-title");
     assert.equal(manuscriptTitles.length, 0, `${route}: do not repeat the technical manuscript title below the contribution lead.`);
     if (isAiExperience) {
@@ -136,7 +136,7 @@ test("all eleven full articles retain introduction, contents and body order with
       assert.equal(headings[2], sourceBlocks[0], `${route}: no repeated title or Overview heading may precede the first source chapter.`);
       assert.equal(elements(body[0], (node) => node.tag === "p" && node.start < sourceBlocks[0].start).length, 0, `${route}: no repeated Project/Author or overview prose may precede the first source chapter.`);
     }
-    if (route.startsWith("/past-experience/")) {
+    if (isExperience) {
       assert.equal(links[0], "#key-contributions", `${route}: contribution points open the article directory.`);
       assert.equal(readable(headings[0]), "Key Contributions", `${route}: contribution points replace the generic introductory label.`);
       assert.ok(!links.includes("#overview"), `${route}: do not duplicate the contribution lead with an Overview entry.`);
@@ -167,7 +167,7 @@ test("all eleven full articles retain introduction, contents and body order with
       }
     }
   }
-  const asian = pages.get("/education/certified-valuation-arithmetic-asian-options/");
+  const asian = pages.get("/certified-valuation-arithmetic-asian-options/");
   assert.equal((readable(asian.tree).match(/Q\.E\.D\./gu) ?? []).length, 5, "The five proof endings must be readable labels, not interpreted as missing characters.");
   const annotations = asian.nodes.filter((node) => node.tag === "annotation" && node.attrs.get("encoding") === "application/x-tex");
   assert.equal(annotations.filter((node) => node.children.map((child) => child.text ?? "").join("") === "\\square").length, 5, "Preserve the original QED TeX in the exported mathematical source.");

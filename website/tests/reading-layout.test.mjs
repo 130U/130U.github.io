@@ -37,13 +37,13 @@ test("research tables protect words and formula widths before using native horiz
 
 test("all research tables retain native table semantics inside named keyboard-accessible scroll regions", async () => {
   const routes = [
-    ["education/critical-dependence-stress-for-portfolio-diversification", 0],
-    ["education/certified-valuation-arithmetic-asian-options", 11],
-    ["education/certified-rough-heston-valuation", 13],
-    ["past-experience/artificial-intelligence/statistical-inference-and-resource-allocation-in-expert-data-production", 1],
-    ["past-experience/artificial-intelligence/task-validity-in-financial-synthetic-data", 2],
-    ["past-experience/artificial-intelligence/verification-and-supervision-in-scientific-reasoning-tasks", 1],
-    ["past-experience/artificial-intelligence/evidence-uncertainty-and-decision-guarantees-in-investment-research", 1],
+    ["critical-dependence-stress-for-portfolio-diversification", 0],
+    ["certified-valuation-arithmetic-asian-options", 11],
+    ["certified-rough-heston-valuation", 13],
+    ["experience/statistical-inference-and-resource-allocation-in-expert-data-production", 1],
+    ["experience/task-validity-in-financial-synthetic-data", 2],
+    ["experience/verification-and-supervision-in-scientific-reasoning-tasks", 1],
+    ["experience/evidence-uncertainty-and-decision-guarantees-in-investment-research", 1],
   ];
   for (const [route, count] of routes) {
     const html = await readFile(new URL(`../out/${route}/index.html`, import.meta.url), "utf8");

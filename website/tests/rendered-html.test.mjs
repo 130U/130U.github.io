@@ -13,15 +13,14 @@ const ROOT = fileURLToPath(new URL("../", import.meta.url));
 const REPOSITORY_ROOT = path.dirname(ROOT.replace(/[\\/]$/u, ""));
 const OUT = path.join(ROOT, "out");
 const SITE_ORIGIN = "https://www.theodoreoy.com";
-const LAW_ROUTE = "/past-experience/legal-research-and-policy-analysis/";
+const EXPERIENCE_ROUTE = "/experience/";
 const ARTICLES = [
   ["autonomous-authority-in-space", "Autonomous Authority in Space: Risk Tradeoffs and the Law of Delegation", "", 30],
   ["small-states-and-strategic-space-dependence", "Small States and the Governance of Strategic Space Dependence", "", 32],
   ["solar-geoengineering-comparison-and-continuity", "Who May Choose the Lesser Risk", "Solar Geoengineering and the Legal Duties of Comparison and Continuity", 30],
   ["mangrove-restoration-and-compensatory-mitigation", "Mangrove Restoration and the Limits of Compensatory Mitigation", "Lessons from Florida for the Greater Bay Area", 41],
 ];
-const ARTICLE_ROUTES = ARTICLES.map(([slug]) => `${LAW_ROUTE}${slug}/`);
-const AI_ROUTE = "/past-experience/artificial-intelligence/";
+const ARTICLE_ROUTES = ARTICLES.map(([slug]) => `${EXPERIENCE_ROUTE}${slug}/`);
 const AI_PROJECT_SLUGS = [
   "statistical-inference-and-resource-allocation-in-expert-data-production",
   "task-validity-in-financial-synthetic-data",
@@ -52,38 +51,28 @@ const DISPLAY_DETAIL_TITLES = new Map([
   [10, "Who May Choose the Lesser Risk — Solar Geoengineering and the Legal Duties of Comparison and Continuity"],
   [11, "Mangrove Restoration and the Limits of Compensatory Mitigation — Lessons from Florida for the Greater Bay Area"],
 ]);
+const RESEARCH_SLUGS = [
+  "critical-dependence-stress-for-portfolio-diversification",
+  "certified-valuation-arithmetic-asian-options",
+  "certified-rough-heston-valuation",
+];
+// About's children sit at /<slug>/; every Experience entry at /experience/<slug>/.
+const RESEARCH_ROUTES = RESEARCH_SLUGS.map((slug) => `/${slug}/`);
+const AI_ROUTES = AI_PROJECT_SLUGS.map((slug) => `${EXPERIENCE_ROUTE}${slug}/`);
 const ROUTES = [
   "/",
-  "/education/",
   "/coursework/",
-  "/education/critical-dependence-stress-for-portfolio-diversification/",
-  "/education/certified-valuation-arithmetic-asian-options/",
-  "/education/certified-rough-heston-valuation/",
-  "/now/",
+  ...RESEARCH_ROUTES,
   "/experience/",
   ...EXPERIENCE_DETAIL_ROUTES,
-  "/past-experience/",
-  "/past-experience/artificial-intelligence/",
-  "/past-experience/data-science/",
-  LAW_ROUTE,
-  "/past-experience/finance/",
-  "/past-experience/stem-academic-competitions-and-training/",
   ...ARTICLE_ROUTES,
-  ...AI_PROJECT_SLUGS.map((slug) => `${AI_ROUTE}${slug}/`),
+  ...AI_ROUTES,
 ];
 const NAVIGATION = [
   ["About", "/"],
   ["Experience", "/experience/"],
 ];
-const CANONICAL_ROUTES = [
-  "/", "/coursework/", "/experience/",
-  ...EXPERIENCE_DETAIL_ROUTES,
-  "/education/critical-dependence-stress-for-portfolio-diversification/",
-  "/education/certified-valuation-arithmetic-asian-options/",
-  "/education/certified-rough-heston-valuation/",
-  ...ARTICLE_ROUTES,
-  ...AI_PROJECT_SLUGS.map((slug) => `${AI_ROUTE}${slug}/`),
-];
+const CANONICAL_ROUTES = ROUTES;
 // Expected category placement is independent of the renderer and route registry.
 const DOMAINS = [
   ["AI Research and Engineering", "artificial-intelligence", [1, 2, 3, 4]],
@@ -94,20 +83,14 @@ const DOMAINS = [
 ];
 const DETAIL_PARENTS = new Map([
   ["/coursework/", ["Back to Education", "/#education"]],
-  ...CANONICAL_ROUTES.filter((route) => route.startsWith("/education/")).map((route) => [
-    route, ["Back to Selected Research", `/#${route.split("/")[2]}`],
+  ...RESEARCH_SLUGS.map((slug) => [
+    `/${slug}/`, ["Back to Selected Research", `/#${slug}`],
   ]),
   ...[...EXPERIENCE_DETAIL_SLUGS.values()].map((slug) => [
     `/experience/${slug}/`, ["Back to Experience", `/experience/#${slug}`],
   ]),
-  ...ARTICLES.map(([slug]) => [
-    `${LAW_ROUTE}${slug}/`, ["Back to Experience", `/experience/#${slug}`],
-  ]),
-  ...AI_PROJECT_SLUGS.map((slug) => [
-    `${AI_ROUTE}${slug}/`, ["Back to Experience", `/experience/#${slug}`],
-  ]),
-  ...DOMAINS.map(([, slug]) => [
-    `/past-experience/${slug}/`, ["Back to Experience", `/experience/#${slug}`],
+  ...[...ARTICLES.map(([slug]) => slug), ...AI_PROJECT_SLUGS].map((slug) => [
+    `${EXPERIENCE_ROUTE}${slug}/`, ["Back to Experience", `/experience/#${slug}`],
   ]),
 ]);
 const EXPECTED_PUBLIC_ASSETS = [
@@ -235,13 +218,6 @@ function navigationLinks(html, label) {
   return [...nav[2].matchAll(/<a\b([^>]*)>([\s\S]*?)<\/a>/giu)].map((match) => [stripMarkup(match[2]), attribute(match[1], "href")]);
 }
 
-function expectedCanonical(route) {
-  if (route === "/education/") return "/";
-  if (["/past-experience/", "/now/"].includes(route)) return "/experience/";
-  const domain = DOMAINS.find(([, slug]) => route === `/past-experience/${slug}/`);
-  return domain ? "/experience/" : route;
-}
-
 async function approvedExperience() {
   return JSON.parse(await readFile(path.join(ROOT, "content", "experience-showcase.json"), "utf8")).entries;
 }
@@ -256,7 +232,7 @@ function expectedExperiencePresentation(entry) {
   return {
     listingTitle: legal ? LEGAL_LISTING_TITLES[entry.id - 8] : entry.categoryId === "01" ? entry.detailTitle : entry.organization,
     pageTitle: `${organization}: ${DISPLAY_DETAIL_TITLES.get(entry.id) ?? entry.detailTitle}`,
-    path: ai ? `${AI_ROUTE}${slug}/` : legal ? `${LAW_ROUTE}${slug}/` : `/experience/${slug}/`,
+    path: `${EXPERIENCE_ROUTE}${slug}/`,
     slug,
   };
 }
@@ -371,9 +347,31 @@ async function exportedRoutes() {
     .sort();
 }
 
-test("the static export contains the unified Experience page, alias routes, and the architecture viewer", async () => {
+test("the static export contains exactly the two sections' pages and the architecture viewer", async () => {
   assert.deepEqual(await exportedRoutes(), [...ROUTES, "/architecture/"].sort());
   assert.ok(existsSync(path.join(OUT, "404.html")));
+  for (const route of ROUTES.slice(1)) {
+    assert.ok(route === "/coursework/" || route.startsWith(EXPERIENCE_ROUTE) || RESEARCH_ROUTES.includes(route), `${route} belongs to About or Experience`);
+  }
+});
+
+test("addresses outside the two sections answer 404 and the 404 page forwards them", async () => {
+  for (const directory of ["education", "now", "past-experience"]) assert.ok(!existsSync(path.join(OUT, directory)), `/${directory}/ is not exported`);
+  const notFound = await readFile(path.join(OUT, "404.html"), "utf8");
+  const script = [...notFound.matchAll(/<script\b[^>]*>([\s\S]*?)<\/script>/giu)].map((match) => match[1]).find((source) => source.includes("location.replace"));
+  assert.ok(script, "The 404 page carries the forwarding script");
+  const paths = JSON.parse(script.match(/const paths = (\{[\s\S]*?\});/u)?.[1] ?? "{}");
+  const expected = {
+    "/education/": "/",
+    "/now/": "/experience/",
+    "/past-experience/": "/experience/",
+    ...Object.fromEntries(RESEARCH_SLUGS.map((slug) => [`/education/${slug}/`, `/${slug}/`])),
+    ...Object.fromEntries(DOMAINS.map(([, slug]) => [`/past-experience/${slug}/`, `/experience/#${slug}`])),
+    ...Object.fromEntries(AI_PROJECT_SLUGS.map((slug) => [`/past-experience/artificial-intelligence/${slug}/`, `/experience/${slug}/`])),
+    ...Object.fromEntries(ARTICLES.map(([slug]) => [`/past-experience/legal-research-and-policy-analysis/${slug}/`, `/experience/${slug}/`])),
+  };
+  assert.deepEqual(paths, expected);
+  for (const target of Object.values(paths)) assert.ok(ROUTES.includes(target.replace(/#.*$/u, "")), `${target} is an exported page`);
 });
 
 test("the architecture viewer preserves its source with a static security policy", async () => {
@@ -396,7 +394,7 @@ test("every route keeps canonical metadata, CSP, and navigation appropriate to i
   ];
   for (const route of ROUTES) {
     const html = await routeHtml(route);
-    const absolute = new URL(expectedCanonical(route), SITE_ORIGIN).toString();
+    const absolute = new URL(route, SITE_ORIGIN).toString();
     assert.equal(canonicalUrl(html), absolute);
     assert.equal(metaContent(html, "property", "og:url"), absolute);
     assert.equal(metaContent(html, "name", "theme-color"), "#f7f6f5");
@@ -407,8 +405,8 @@ test("every route keeps canonical metadata, CSP, and navigation appropriate to i
   }
 });
 
-test("all 27 detail pages keep their wordmark and a direct parent link outside the mobile menu", async () => {
-  assert.equal(DETAIL_PARENTS.size, 27);
+test("all 22 detail pages keep their wordmark and a direct parent link outside the mobile menu", async () => {
+  assert.equal(DETAIL_PARENTS.size, 22);
   const targetPages = new Map();
   for (const [route, expectedParent] of DETAIL_PARENTS) {
     const html = await routeHtml(route);
@@ -542,41 +540,6 @@ test("About opens with its accessible clarinet hero before the retained profile"
   for (const route of ROUTES.slice(1)) assert.equal(openingTags(await routeHtml(route), "canvas").length, 0);
 });
 
-test("the education alias page shares About content and marks About as current", async () => {
-  const home = await routeHtml("/");
-  const alias = await routeHtml("/education/");
-  const mainText = (html) => stripMarkup(html.match(/<main\b[^>]*>([\s\S]*?)<\/main>/u)?.[1] ?? "");
-  assert.ok(mainText(home));
-  assert.equal(mainText(alias), mainText(home));
-  assert.equal(canonicalUrl(alias), `${SITE_ORIGIN}/`);
-  assert.equal(openingTags(alias, "canvas").length, 0);
-  for (const html of [home, alias]) {
-    const current = openingTags(html, "a").filter((tag) => attribute(tag, "aria-current") === "page");
-    assert.equal(current.length, 1);
-    assert.equal(attribute(current[0], "href"), "/");
-  }
-});
-
-test("Experience alias pages share the unified text-focused page", async () => {
-  for (const route of ["/education/", "/experience/", "/past-experience/", "/now/"]) {
-    const html = await routeHtml(route);
-    assert.equal(openingTags(html, "img").length, 0, `${route} must use text-focused content`);
-  }
-  const experience = await routeHtml("/experience/");
-  const mainText = (html) => stripMarkup(html.match(/<main\b[^>]*>([\s\S]*?)<\/main>/u)?.[1] ?? "");
-  assert.ok(mainText(experience));
-  for (const route of ["/past-experience/", "/now/"]) {
-    const alias = await routeHtml(route);
-    assert.equal(mainText(alias), mainText(experience));
-    assert.equal(canonicalUrl(alias), `${SITE_ORIGIN}/experience/`);
-  }
-  for (const route of ["/experience/", "/past-experience/", "/now/"]) {
-    const current = openingTags(await routeHtml(route), "a").filter((tag) => attribute(tag, "aria-current") === "page");
-    assert.equal(current.length, 1);
-    assert.equal(attribute(current[0], "href"), "/experience/");
-  }
-});
-
 test("About research uses explicit Read More links with complete papers and source links preserved", async () => {
   const about = await routeHtml("/");
   assert.ok(about.indexOf('id="selected-research"') < about.indexOf('id="education"'));
@@ -595,7 +558,7 @@ test("About research uses explicit Read More links with complete papers and sour
     assert.ok(stripMarkup(about).includes(description));
     const entry = about.match(new RegExp(`<article\\b[^>]*id="${slug}"[^>]*>([\\s\\S]*?)</article>`, "u"))?.[1] ?? "";
     const researchLink = entry.match(/<a\b([^>]*)>([\s\S]*?)<\/a>/u);
-    assert.equal(attribute(researchLink?.[1] ?? "", "href"), `/education/${slug}/`);
+    assert.equal(attribute(researchLink?.[1] ?? "", "href"), `/${slug}/`);
     assert.equal(stripMarkup(researchLink?.[2] ?? ""), "Read More");
     assert.equal(attribute(researchLink?.[1] ?? "", "aria-label"), `Read more about ${title}`);
     assert.equal(stripMarkup(elementHtmlById(entry, `${slug}-title`)), title);
@@ -606,7 +569,7 @@ test("About research uses explicit Read More links with complete papers and sour
     assert.equal(openingTags(researchLink?.[2] ?? "", "svg").length, 1);
     assert.equal(attribute(openingTags(researchLink?.[2] ?? "", "svg")[0], "aria-hidden"), "true");
     assert.equal(openingTags(entry, "a").length, 1);
-    const article = await routeHtml(`/education/${slug}/`);
+    const article = await routeHtml(`/${slug}/`);
     assert.equal(openingTags(article, "h1").length, 1);
     const articleHeader = article.match(/<article\b[^>]*>\s*<header\b[^>]*>([\s\S]*?)<\/header>/u)?.[1] ?? "";
     assert.equal(stripMarkup(articleHeader), `${title} GitHub Full Manuscript`, "Selected Research headers contain the title and source links; return navigation belongs in the rail.");
@@ -691,7 +654,7 @@ test("all eighteen approved Experience entries use institution titles and real l
     assert.deepEqual(navigationLinks(detailPage, "Parent navigation"), [["Back to Experience", `/experience/#${presentation.slug}`]]);
   }
   assert.equal(new Set(destinations).size, 18);
-  assert.deepEqual(destinations.filter((route) => route.startsWith("/experience/")), EXPERIENCE_DETAIL_ROUTES);
+  assert.deepEqual([...destinations].sort(), [...AI_ROUTES, ...ARTICLE_ROUTES, ...EXPERIENCE_DETAIL_ROUTES].sort(), "Every entry opens at /experience/<slug>/");
   assert.equal(expected.find(({ id }) => id === 16).metadata.location, "Beijing, China");
   assert.deepEqual(expected.filter(({ categoryId }) => ["02", "04", "05"].includes(categoryId)).map(({ keyContributions }) => keyContributions.length), [9, 7, 6, 7, 5, 6, 1, 1, 2, 4]);
   assert.equal(expected.find(({ id }) => id === 18).notes.length, 1, "The school-program context must survive the detailed-bullet merge");
@@ -726,7 +689,7 @@ test("the ten nonresearch detail routes keep metadata in a labelled record strip
 });
 
 test("each AI and legal article opens with one logic architecture diagram", async () => {
-  const routes = [...AI_PROJECT_SLUGS.map((slug) => `${AI_ROUTE}${slug}/`), ...ARTICLES.map(([slug]) => `${LAW_ROUTE}${slug}/`)];
+  const routes = [...AI_PROJECT_SLUGS.map((slug) => `${EXPERIENCE_ROUTE}${slug}/`), ...ARTICLES.map(([slug]) => `${EXPERIENCE_ROUTE}${slug}/`)];
   assert.equal(routes.length, 8);
   for (const route of routes) {
     const html = await routeHtml(route);
@@ -742,26 +705,10 @@ test("each AI and legal article opens with one logic architecture diagram", asyn
   }
 });
 
-test("domain alias routes preserve approved sections, canonicalize to Experience, and return to valid anchors", async () => {
-  const main = await routeHtml("/experience/");
-  const mainEntries = experienceEntries(main);
-  for (const [name, slug, ids] of DOMAINS) {
-    const html = await routeHtml(`/past-experience/${slug}/`);
-    const entries = experienceEntries(html);
-    assert.deepEqual(entries.map(({ id }) => id), ids);
-    assert.equal(stripMarkup(html.match(/<h1\b[^>]*>([\s\S]*?)<\/h1>/u)?.[1] ?? ""), name);
-    assert.equal(canonicalUrl(html), `${SITE_ORIGIN}/experience/`);
-    assert.ok(openingTags(html, "a").some((tag) => attribute(tag, "href") === `/experience/#${slug}`));
-    assert.ok(openingTags(main, "section").some((tag) => attribute(tag, "id") === slug));
-    for (const entry of entries) assert.equal(entry.html, mainEntries.find(({ id }) => id === entry.id).html);
-    assert.deepEqual(navigationLinks(html, "Parent navigation"), [["Back to Experience", `/experience/#${slug}`]]);
-  }
-});
-
 test("law papers preserve article identity, chapter navigation, and bidirectional footnotes", async () => {
   const approved = await approvedExperience();
   for (const [index, [slug, title, subtitle, expectedFootnotes]] of ARTICLES.entries()) {
-    const route = `${LAW_ROUTE}${slug}/`;
+    const route = `${EXPERIENCE_ROUTE}${slug}/`;
     const html = await routeHtml(route);
     const text = stripMarkup(html);
     const titleMatch = html.match(/<h1\b[^>]*>([\s\S]*?)<\/h1>/iu);
@@ -815,7 +762,7 @@ test("law papers preserve article identity, chapter navigation, and bidirectiona
 test("law articles expose one complete native contents menu and source-only publication details", async () => {
   for (const [slug] of ARTICLES) {
     const source = JSON.parse(await readFile(path.join(ROOT, "content", "legal-papers", `${slug}.json`), "utf8"));
-    const html = await routeHtml(`${LAW_ROUTE}${slug}/`);
+    const html = await routeHtml(`${EXPERIENCE_ROUTE}${slug}/`);
     const menus = [...html.matchAll(/<nav\b([^>]*)>([\s\S]*?)<\/nav>/giu)]
       .filter((match) => attribute(match[1], "aria-label") === "Article contents");
     assert.equal(menus.length, 1, `${slug} must expose one article contents menu`);
@@ -848,7 +795,7 @@ test("law articles expose one complete native contents menu and source-only publ
 test("law article paragraphs, headings, and citations exactly match the approved structured sources", async () => {
   for (const [slug] of ARTICLES) {
     const source = JSON.parse(await readFile(path.join(ROOT, "content", "legal-papers", `${slug}.json`), "utf8"));
-    const html = await routeHtml(`${LAW_ROUTE}${slug}/`);
+    const html = await routeHtml(`${EXPERIENCE_ROUTE}${slug}/`);
     const abstract = [...html.matchAll(/<section\b([^>]*)>([\s\S]*?)<\/section>/giu)]
       .find((match) => attribute(match[1], "aria-labelledby") === "abstract-heading");
     assert.ok(abstract, `${slug} lost its abstract region`);
@@ -886,7 +833,7 @@ test("original PDFs remain absent from public assets and the exported website", 
 });
 
 test("About preserves both degrees and the advisor record while linking to all 49 courses on their own page", async () => {
-  for (const route of ["/", "/education/"]) {
+  for (const route of ["/"]) {
     const html = await routeHtml(route);
     assert.equal(elementsWithClass(html, "article", "education-entry").length, 2);
     const education = elementHtmlById(html, "education");
@@ -1064,7 +1011,7 @@ test("shared typography source roles preserve article names, compact indices, me
     readFile(path.join(ROOT, "public", "assets", "fonts", "inter.css"), "utf8"),
     readFile(path.join(OUT, "assets", "fonts", "inter.css"), "utf8"),
     readFile(path.join(ROOT, "app", "globals.css"), "utf8"),
-    readFile(path.join(ROOT, "app", "past-experience", "components", "LegalPaperPage.module.css"), "utf8"),
+    readFile(path.join(ROOT, "app", "components", "legal", "LegalPaperPage.module.css"), "utf8"),
     readFile(path.join(ROOT, "app", "components", "experience", "Experience.module.css"), "utf8"),
     readFile(path.join(ROOT, "app", "components", "research", "ResearchMath.module.css"), "utf8"),
     readFile(path.join(ROOT, "app", "home.module.css"), "utf8"),
@@ -1129,7 +1076,7 @@ test("shared typography source roles preserve article names, compact indices, me
   assert.match(nestedDetails, /padding-left:\s*20px\s*;/u);
   assert.doesNotMatch(nestedDetails, /border|font-family/u, "Nested lists inherit the same typeface and avoid per-item divider styling");
 
-  const researchRoutes = CANONICAL_ROUTES.filter((route) => route.startsWith("/education/") || route.startsWith("/past-experience/"));
+  const researchRoutes = [...RESEARCH_ROUTES, ...ARTICLE_ROUTES, ...AI_ROUTES];
   const stylesheetCache = new Map();
   for (const route of [...researchRoutes, ...EXPERIENCE_DETAIL_ROUTES]) {
     const html = await routeHtml(route);

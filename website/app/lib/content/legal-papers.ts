@@ -34,7 +34,6 @@ export type LegalPaper = {
   footnotes: Array<PaperParagraph & { number: number }>;
 };
 
-export const LEGAL_DOMAIN_PATH = "/past-experience/legal-research-and-policy-analysis/";
 export const legalPaperSlugs = [
   "autonomous-authority-in-space",
   "small-states-and-strategic-space-dependence",
@@ -56,10 +55,6 @@ export const legalPapers: readonly LegalPaper[] = legalPaperSlugs.map((slug) => 
   }
   return paper;
 });
-
-export function legalPaperPath(slug: string) {
-  return `${LEGAL_DOMAIN_PATH}${slug}/`;
-}
 
 export function getLegalPaper(slug: string) {
   return legalPapers.find((paper) => paper.slug === slug);

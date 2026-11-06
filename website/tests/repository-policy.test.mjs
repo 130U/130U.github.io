@@ -82,7 +82,7 @@ test("the checked-out protected sources match the manifest", () => {
 test("the protected-source guard accepts matching content with either line ending", async (t) => {
   const { root } = await protectedFixture(t);
   assert.doesNotThrow(() => verifyProtectedSources(root));
-  const source = path.join(root, "app", "education", "page.tsx");
+  const source = path.join(root, "app", "coursework", "page.tsx");
   const text = await readFile(source, "utf8");
   await writeFile(source, text.replace(/\r\n?/gu, "\n").replaceAll("\n", "\r\n"));
   assert.doesNotThrow(() => verifyProtectedSources(root));
@@ -90,19 +90,19 @@ test("the protected-source guard accepts matching content with either line endin
 
 test("the protected-source guard rejects modified content", async (t) => {
   const { root } = await protectedFixture(t);
-  await writeFile(path.join(root, "app", "education", "page.tsx"), "changed content\n");
-  assert.throws(() => verifyProtectedSources(root), /app\/education\/page\.tsx: content differs/u);
+  await writeFile(path.join(root, "app", "coursework", "page.tsx"), "changed content\n");
+  assert.throws(() => verifyProtectedSources(root), /app\/coursework\/page\.tsx: content differs/u);
 });
 
 test("the protected-source guard rejects a missing source", async (t) => {
   const { root } = await protectedFixture(t);
-  await rm(path.join(root, "app", "education", "page.tsx"));
-  assert.throws(() => verifyProtectedSources(root), /app\/education\/page\.tsx: protected source is missing/u);
+  await rm(path.join(root, "app", "coursework", "page.tsx"));
+  assert.throws(() => verifyProtectedSources(root), /app\/coursework\/page\.tsx: protected source is missing/u);
 });
 
 test("the protected-source manifest cannot omit a required path", async (t) => {
   const { root, manifest } = await protectedFixture(t);
-  delete manifest.sources["app/education/page.tsx"];
+  delete manifest.sources["app/coursework/page.tsx"];
   await writeFile(path.join(root, "content", "protected-sources.json"), JSON.stringify(manifest));
   assert.throws(() => verifyProtectedSources(root), /must cover every required source/u);
 });

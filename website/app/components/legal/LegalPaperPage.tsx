@@ -1,13 +1,13 @@
 import Link from "next/link";
 import { Fragment, type ReactNode } from "react";
-import { SiteShell } from "../../components/SiteShell";
-import { ArticleReadingLayout } from "../../components/article/ArticleReadingLayout";
-import { ExperienceDiagram, ExperienceMetadata, KeyContributions } from "../../components/experience/ExperienceDetails";
+import { SiteShell } from "../SiteShell";
+import { ArticleReadingLayout } from "../article/ArticleReadingLayout";
+import { ExperienceDiagram, ExperienceMetadata, KeyContributions } from "../experience/ExperienceDetails";
 import { type LegalPaper, type PaperRun } from "../../lib/content/legal-papers";
 import type { ShowcaseEntry } from "../../lib/content/experience-showcase";
 import { LegalPaperReader } from "./LegalPaperReader";
 import styles from "./LegalPaperPage.module.css";
-import experienceStyles from "../../components/experience/Experience.module.css";
+import experienceStyles from "../experience/Experience.module.css";
 
 function noteKey(number: number | string) {
   return number === "*" ? "author" : String(number);

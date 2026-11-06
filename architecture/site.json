@@ -242,7 +242,7 @@
       "dot": "emerald",
       "title": "Static Delivery",
       "items": [
-        "24 canonical content pages, 8 compatibility pages, architecture viewer, and 404",
+        "24 content pages in two sections, architecture viewer, and 404",
         "No runtime API, database, or authentication"
       ]
     },

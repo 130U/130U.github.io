@@ -91,7 +91,7 @@ test("dependence parsing and published mathematics retain the complete source le
   // Display delimiters contribute one newline on either side of the unchanged TeX.
   const expected = provenance.mathematics.map(({ tex, display }) => ({ tex: display ? `\n${tex}\n` : tex, display }));
   assert.deepEqual(parsedMath(blocks), expected);
-  const html = await readFile(path.join(ROOT, "out", "education", SLUG, "index.html"), "utf8");
+  const html = await readFile(path.join(ROOT, "out", SLUG, "index.html"), "utf8");
   const rendered = [...html.matchAll(/<math\b[^>]*data-research-math="(inline|display)"[^>]*>[\s\S]*?<annotation\b[^>]*encoding="application\/x-tex"[^>]*>([\s\S]*?)<\/annotation>[\s\S]*?<\/math>/gu)].map((match) => ({ tex: decodeHtml(match[2]), display: match[1] === "display" }));
   const published = await editionBlocks();
   assert.deepEqual(rendered, parsedMath(published), "Rendered annotations preserve every TeX byte, equation tag and mode of the site edition.");
@@ -110,7 +110,7 @@ test("dependence figures preserve source bytes, complete captions and appendix r
   const { provenance, blocks } = await manuscript();
   const figures = blocks.filter((block) => block.type === "figure");
   assert.deepEqual(figures.map(({ src }) => path.basename(src)), ["tail-layer-repair.png", "corner-capacity.png", "budget-comparison.png", "optimal-flow-shares.png"]);
-  const html = await readFile(path.join(ROOT, "out", "education", SLUG, "index.html"), "utf8");
+  const html = await readFile(path.join(ROOT, "out", SLUG, "index.html"), "utf8");
   const rendered = [...html.matchAll(/<figure\b([^>]*)>([\s\S]*?)<\/figure>/gu)];
   assert.equal(rendered.length, 4);
   const sourceText = (await Promise.all(provenance.sourceFiles.filter(({ local }) => local.endsWith(".tex")).map(({ local }) => readFile(path.join(SOURCE, local), "utf8")))).join("\n").replace(/\r\n?/gu, "\n");

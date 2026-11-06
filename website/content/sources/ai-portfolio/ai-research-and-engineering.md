@@ -22,7 +22,7 @@ Duke University × Leading Foundation Model Developer
 Large-Scale Domain Expert Feedback Governance and Adaptive Review
 
 **URL**
-https://www.theodoreoy.com/past-experience/artificial-intelligence/statistical-inference-and-resource-allocation-in-expert-data-production/
+https://www.theodoreoy.com/experience/statistical-inference-and-resource-allocation-in-expert-data-production/
 
 **Position**
 Researcher
@@ -251,7 +251,7 @@ Duke University × Leading Foundation Model Developer
 Financial Task Design and Synthetic Data Engineering
 
 **URL**
-https://www.theodoreoy.com/past-experience/artificial-intelligence/task-validity-in-financial-synthetic-data/
+https://www.theodoreoy.com/experience/task-validity-in-financial-synthetic-data/
 
 **Position**
 Researcher
@@ -442,7 +442,7 @@ Duke University × Frontier AI Research Laboratory
 General Reasoning Evaluation and Layered Verification
 
 **URL**
-https://www.theodoreoy.com/past-experience/artificial-intelligence/verification-and-supervision-in-scientific-reasoning-tasks/
+https://www.theodoreoy.com/experience/verification-and-supervision-in-scientific-reasoning-tasks/
 
 **Position**
 Researcher
@@ -636,7 +636,7 @@ Duke University × Leading Global Alternative Asset Manager
 Evidence Verification and Robust Comparison in Investment Research
 
 **URL**
-https://www.theodoreoy.com/past-experience/artificial-intelligence/evidence-uncertainty-and-decision-guarantees-in-investment-research/
+https://www.theodoreoy.com/experience/evidence-uncertainty-and-decision-guarantees-in-investment-research/
 
 **Position**
 Researcher

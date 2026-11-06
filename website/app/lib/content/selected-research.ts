@@ -2,8 +2,6 @@ import { readFileSync } from "node:fs";
 import { join } from "node:path";
 import { parseResearchMarkdown, type ResearchArticleContent } from "./research-markdown";
 
-export const SELECTED_RESEARCH_PATH = "/education/certified-valuation-arithmetic-asian-options/";
-
 type SelectedResearchSource = Omit<ResearchArticleContent, "blocks"> & {
   description: string;
   introduction: string[];
@@ -27,7 +25,7 @@ function readResearch(slug: string, repository = slug) {
     throw new Error(`Incomplete selected research source: ${slug}.`);
   }
   const edition = readSiteEdition(slug);
-  return { ...source, ...edition, path: `/education/${slug}/`, blocks: parseResearchMarkdown(edition.markdown, { joinSoftLines: true }) };
+  return { ...source, ...edition, path: `/${slug}/`, blocks: parseResearchMarkdown(edition.markdown, { joinSoftLines: true }) };
 }
 
 export const selectedResearch = readResearch("certified-valuation-arithmetic-asian-options");

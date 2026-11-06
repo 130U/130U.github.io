@@ -39,9 +39,9 @@ Paths below are relative to `website/`.
 | About | `app/components/AboutContent.tsx`, `app/lib/content/about.ts` | Shared About component | `/` |
 | Coursework | `app/lib/content/about.ts` | `app/coursework/page.tsx` | `/coursework/` |
 | Experience | `content/experience-showcase.json`; AI fields are generated from the manuscript below | `app/lib/content/experience-showcase.ts` | `/experience/`, `/experience/[slug]/` |
-| AI research | `content/sources/ai-portfolio/ai-research-and-engineering.md` | `scripts/import-ai-portfolio.mjs`, `app/lib/content/ai-projects.ts` | `/past-experience/artificial-intelligence/[paper]/` |
-| Selected Research | `content/sources/selected-research/` (frozen import), `content/selected-research/site-edition/` (published text) | Research import scripts, `app/lib/content/selected-research.ts` | `/education/[paper]/` |
-| Legal research | `content/legal-papers/` structured manuscripts | `app/lib/content/legal-papers.ts` | `/past-experience/legal-research-and-policy-analysis/[paper]/` |
+| AI research | `content/sources/ai-portfolio/ai-research-and-engineering.md` | `scripts/import-ai-portfolio.mjs`, `app/lib/content/ai-projects.ts` | `/experience/[slug]/` |
+| Selected Research | `content/sources/selected-research/` (frozen import), `content/selected-research/site-edition/` (published text) | Research import scripts, `app/lib/content/selected-research.ts` | `/[paper]/` |
+| Legal research | `content/legal-papers/` structured manuscripts | `app/lib/content/legal-papers.ts` | `/experience/[slug]/` |
 | Architecture | `../architecture/site.json` | Archify and `scripts/integrate-architecture.mjs` | `/architecture/` |
 
 `app/lib/content/site.ts` owns site identity, core routes, and navigation types;
@@ -52,11 +52,12 @@ manuscripts, and ten ordinary detail pages.
 About's Education section links to the dedicated Coursework page through Read More.
 The page presents all 49 courses in four subject groups.
 
-Alias routes: `/education/` renders shared About content;
-`/past-experience/` and `/now/` render Experience; the five
-`/past-experience/[slug]/` category pages filter the same approved entries. Their
-canonical URLs point to the corresponding primary page. Keep these shared renderers
-and their return links intact when changing navigation.
+Every URL belongs to About (`/`, `/coursework/`, `/[paper]/`) or Experience
+(`/experience/`, `/experience/[slug]/`). `app/experience/[slug]/page.tsx` renders an
+entry as an AI article, a legal article, or a detail page from its category.
+`app/lib/content/forwarded-paths.ts` lists addresses outside the two sections and the
+page each one forwards to from the 404 page; add an entry there when a public URL
+changes.
 
 ### AI research
 
