@@ -111,7 +111,8 @@ entries, the section index, the record strip, contact details, a course list), w
 Frames have square corners, no fill and no shadow. Never stack frames with a gap
 between them: entries of one section share a frame and are separated by space.
 Do not add metric rows, pills, badges, or other pulled-out figures: a result belongs in
-its sentence.
+its sentence. A summary on About or Experience carries at most one headline figure;
+the other figures stay on the entry's detail page.
 
 Text roles use rem units and scale with the user's text setting. Titles and headings
 step down below 768px, including in the architecture viewer; the other roles remain
@@ -306,8 +307,9 @@ scroll progress, and returning restores the composition; ordinary document
 scrolling remains native. Four musical notes move continuously while the hero is
 visible, with independent periods for restrained drift, rotation, scale, and opacity.
 The body breathes subtly through opacity while its settled point positions
-remain fixed and sharp. Phones reframe the surrounding whitespace to give the
-instrument more space. Physics advances at a fixed 60 Hz using the discrete spring
+remain fixed and sharp. Phones and portrait tablets stack the name above the
+instrument and reframe the surrounding whitespace to give it more space; landscape
+tablets and desktops keep the two columns. Physics advances at a fixed 60 Hz using the discrete spring
 rule, with interpolation between simulation states for rendering. Rendering pauses
 offscreen and in hidden tabs, preserving the active animation
 time so it resumes without a jump. Reduced motion displays the
@@ -335,7 +337,7 @@ existing article and experience footer links remain available after long content
 ## Content and extension
 
 Page, domain, institution, project, and course titles use title case. Main-site
-navigation and action labels use title case, including Read More,
+navigation and action labels use title case, including Skip to Main Content, Read More,
 Back to Education, Back to Selected Research, Back to Experience, Back to Top,
 Full Manuscript, Author Note, and View in Footnotes. Function words such as "to"
 and "in" stay lowercase.
@@ -346,9 +348,20 @@ export menus, including Share card and Copy share card. Preserve official spelli
 and acronyms such as GitHub, AI, ESG, LLM, SHAP, and IPhO; sentence case does not
 lowercase proper names.
 Use "and" in editorial category labels. Preserve official course and organization
-names, including their ampersands. The fellowship name is `Sequoia Fellow`, and
-its cohort is owned by the identity configuration in `app/lib/content/site.ts`.
-Site metadata uses this identity configuration; the About hero displays Sequoia Fellow.
+names, including their ampersands. The fellowship name is `Sequoia Fellow` in every
+place it appears: the About hero, site metadata from `app/lib/content/site.ts`, the
+social card, and the repository README.
+
+Public prose uses the first person singular in the active voice: past tense for
+Experience summaries and contributions, present tense for research summaries.
+Manuscripts keep their authored voice; the mathematical papers use the conventional
+authorial "we". The home page title is the name alone, and descriptions state the
+work directly, without hedging verbs such as "exploring".
+
+The social card master, `website/source-assets/brand/og.png`, repeats the hero on
+the paper background: the name, Duke Alumnus and Sequoia Fellow, the dotted clarinet
+with its blue corner marks, and the domain in the lower band. The repository README
+displays the same card.
 
 Use English punctuation in public copy and metadata, including the architecture
 viewer. Straight and curly apostrophes and quotation marks are both valid.
@@ -368,7 +381,8 @@ pages replace those primary links with parent navigation while retaining the hom
 wordmark. About at
 `/` combines the introduction, Selected Research, Education with a coursework
 entrance, and contact details in sections 01 through 04. The first-person
-introduction opens the reading content beneath the hero; both
+introduction opens the reading content beneath the hero and states the through-line
+of the work, making high-stakes conclusions verifiable; both
 Duke degrees, the advisor, scholarships, and all 49 courses are
 available. The canonical `/coursework/` page presents the four subject groups,
 returns to Education through its parent navigation, and appears in the sitemap. The

@@ -62,7 +62,7 @@ test("mobile 130 percent width always comes from the stage, including a responsi
   close(first.width, Math.round(350.125 * 1.3 * 3) / 3);
   const rawLeft = h.rect.width * -.25;
   assert.ok(Math.abs(Number.parseFloat(h.canvas.style.left) - rawLeft) <= .5 / 3);
-  // A previously rounded inline canvas width must never feed back into scale.
+  // A rounded inline canvas width must never feed back into scale.
   h.canvas.style.width = "12px";
   h.rect.width = 390.375;
   const resized = alignCanvas(h.canvas);

@@ -2,12 +2,10 @@ import type { Metadata } from "next";
 
 export const SITE_URL = "https://www.theodoreoy.com";
 export const SITE_NAME = "Theodore Ouyang";
-export const HOME_TITLE = "About | Theodore Ouyang";
-export const FELLOWSHIP = { title: "Sequoia Fellow", cohort: 8 } as const;
+export const HOME_TITLE = SITE_NAME;
+export const FELLOWSHIP = "Sequoia Fellow";
 export const DEFAULT_DESCRIPTION =
-  `Theodore Ouyang is a Duke University graduate and ${FELLOWSHIP.title} in Cohort ${FELLOWSHIP.cohort}, exploring how artificial intelligence can become useful in everyday life.`;
-export const ABOUT_DESCRIPTION =
-  "Theodore Ouyang's research, education, and interests in mathematics and AI.";
+  `Theodore Ouyang makes high-stakes conclusions verifiable across derivative pricing, frontier AI evaluation, and law. Duke alumnus and ${FELLOWSHIP}.`;
 
 export type ActivePage =
   | "about"

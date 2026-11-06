@@ -8,8 +8,8 @@
     "app/components/experience/ExperienceDetails.tsx": "24825db17064489761e27951efb762b3f3657d4f93edcace36791fd1e21dd312",
     "app/lib/content/experience-showcase.ts": "a8fcb1bcb3870604f6b7b86f7859d9cab664e07aaf06eea8fcc8502e859040f0",
     "app/lib/content/experience-domains.ts": "7362085d4857daa83ae476f176163378dde550572d5a1932d2f142d4d1a00c7d",
-    "content/experience-showcase.json": "1385bcd6d63f91f0db216bf1ee429c28938734b048528157bb2e60d4fe614b2e",
-    "app/components/AboutContent.tsx": "7421746c7cb0ccf09c6b6cc78447dbeb5c5fd7d96aa5833586e4cb4b3ba198e4",
+    "content/experience-showcase.json": "3a7bf4bbdeb9ada62bd0b2f3666b6c319bf662b6adf44e15f2a56c84483e2cc4",
+    "app/components/AboutContent.tsx": "d8976bc0e4ac034619792189bf04bc3743926e74e823d4271681d761128917ba",
     "app/lib/content/about.ts": "8d79e72133dcbcae9523771a099f53f0aecb879cea384769ff6bb0144e05626f",
     "app/coursework/page.tsx": "a1caf4bd363d652ce401c237e06336be26e15296a3ffa19890b3d1c53b6ab63c",
     "app/components/research/ResearchArticle.tsx": "4044f4bd8288aadac59386ae210fe67aab9c4c59b9267f9c21503bceba521e75",
@@ -35,11 +35,11 @@
     "content/legal-papers/mangrove-restoration-and-compensatory-mitigation.json": "40a0b507877517f556ee6f5a3e7a1ca792ed0a45ea770c5e627fa140bc703c79",
     "app/lib/content/ai-projects.ts": "83beef58c5efb8e045acdadd676075d6aa990030abe054ee7e51d546e12b25ca",
     "app/lib/content/routes.ts": "2877c5d98045c6185d46e2d9ba4d8a0c735a73423d2569badc82cad98ca2369b",
-    "content/artificial-intelligence/statistical-inference-and-resource-allocation-in-expert-data-production.json": "18f44e9264f1ed914ff9c58e6db9cf9906a0659ca4ff4bc3833142a9ebc60f54",
-    "content/artificial-intelligence/task-validity-in-financial-synthetic-data.json": "bbcd547337937596a6ccbd60950cb31d90f651eb779de3a3c9cc9a93618523af",
-    "content/artificial-intelligence/verification-and-supervision-in-scientific-reasoning-tasks.json": "1ebba3ba7eec79ecb6388e088c1207d32c03b67a4054369b624c6aa125fc022e",
-    "content/artificial-intelligence/evidence-uncertainty-and-decision-guarantees-in-investment-research.json": "2db4b0332ffa1de03d62c7f508a042816d7e4babaf09cb318af887035e0a1eda",
-    "content/sources/ai-portfolio/ai-research-and-engineering.md": "73f582baf15ed915e77e4aa8d10d058383875d039a80bba6f586bcd2e76cebd8",
+    "content/artificial-intelligence/statistical-inference-and-resource-allocation-in-expert-data-production.json": "d31876b31ebe7b5c4d11857eb835d6782d09a2d31f96693dd121ffb8ddbded51",
+    "content/artificial-intelligence/task-validity-in-financial-synthetic-data.json": "696c98b4123690f763b0d3ca6ecd3d90ab08d658349874c232ace01df00d8508",
+    "content/artificial-intelligence/verification-and-supervision-in-scientific-reasoning-tasks.json": "d2dd556856892fde1b7b2be9c83c3a834c9c75ce4bccce61b9bc5de79feff3c7",
+    "content/artificial-intelligence/evidence-uncertainty-and-decision-guarantees-in-investment-research.json": "737733eb739e74b58e9c61a061d24f1cdae81a723f729e784e0bf7d605360576",
+    "content/sources/ai-portfolio/ai-research-and-engineering.md": "2e2c46bf0573668a93b767f851e6f106c9653aa181c58caca400eb1eeaec839f",
     "scripts/import-ai-portfolio.mjs": "226fb94cc9d4ba0c8cfb8943de3ff3931ffdbd2399217e1b663c82f503b278f0"
   }
 }

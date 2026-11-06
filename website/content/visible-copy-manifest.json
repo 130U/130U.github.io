@@ -6,10 +6,10 @@
   ],
   "routes": {
     "/": {
-      "textSha256": "bcc49a28c3129f8aa835e513e2d1f5072e80013391cb805dda304c8ecd87a264",
-      "characterCount": 2914,
-      "wordCount": 406,
-      "preview": "Skip to main content Theodore Ouyang Duke Alumnus Sequoia Fellow Theodore Ouyang About Experience Thinking Mathematically Working in AI Mathematics is how I mak",
+      "textSha256": "97bdfdb6513b2bdc98951607a53c4c17e223b6c7e490a4563750eb68c8e95a83",
+      "characterCount": 3079,
+      "wordCount": 428,
+      "preview": "Skip to Main Content Theodore Ouyang Duke Alumnus Sequoia Fellow Theodore Ouyang About Experience Thinking Mathematically Working in AI Mathematics is how I mak",
       "altTexts": [],
       "ariaLabels": [
         "Theodore Ouyang home",
@@ -21,21 +21,21 @@
         "Contact"
       ],
       "metadata": {
-        "title": "About | Theodore Ouyang",
-        "description": "Theodore Ouyang's research, education, and interests in mathematics and AI.",
+        "title": "Theodore Ouyang",
+        "description": "Theodore Ouyang makes high-stakes conclusions verifiable across derivative pricing, frontier AI evaluation, and law. Duke alumnus and Sequoia Fellow.",
         "canonical": "https://www.theodoreoy.com/",
-        "openGraphTitle": "About | Theodore Ouyang",
-        "openGraphDescription": "Theodore Ouyang's research, education, and interests in mathematics and AI.",
+        "openGraphTitle": "Theodore Ouyang",
+        "openGraphDescription": "Theodore Ouyang makes high-stakes conclusions verifiable across derivative pricing, frontier AI evaluation, and law. Duke alumnus and Sequoia Fellow.",
         "openGraphUrl": "https://www.theodoreoy.com/",
-        "twitterTitle": "About | Theodore Ouyang",
-        "twitterDescription": "Theodore Ouyang's research, education, and interests in mathematics and AI."
+        "twitterTitle": "Theodore Ouyang",
+        "twitterDescription": "Theodore Ouyang makes high-stakes conclusions verifiable across derivative pricing, frontier AI evaluation, and law. Duke alumnus and Sequoia Fellow."
       }
     },
     "/coursework/": {
-      "textSha256": "69bb10d6764c059706cf48815017a855902383d6acdf570b3c7dbebab4ab5a1a",
+      "textSha256": "cea7f5191276c9a677fad8456aea2c64b2b79811b31b21ac8a63db2ee68c7f70",
       "characterCount": 1703,
       "wordCount": 207,
-      "preview": "Skip to main content Theodore Ouyang Back to Education Selected Coursework Mathematics AI and Data Science Finance and Economics Law, Ethics, and Global Affairs",
+      "preview": "Skip to Main Content Theodore Ouyang Back to Education Selected Coursework Mathematics AI and Data Science Finance and Economics Law, Ethics, and Global Affairs",
       "altTexts": [],
       "ariaLabels": [
         "Theodore Ouyang home",
@@ -54,10 +54,10 @@
       }
     },
     "/critical-dependence-stress-for-portfolio-diversification/": {
-      "textSha256": "976aeabe1551251be4629b7abc3728a71a0d3c9a69b5c24c01c7c00662646f33",
+      "textSha256": "c40b5c0ffcc172d1c28d4880fd759b0ab7fe48b6749349659a73b8b630ef5e30",
       "characterCount": 76086,
       "wordCount": 11512,
-      "preview": "Skip to main content Theodore Ouyang Back to Selected Research Critical Dependence Stress for Portfolio Diversification GitHub Full Manuscript Abstract We ask h",
+      "preview": "Skip to Main Content Theodore Ouyang Back to Selected Research Critical Dependence Stress for Portfolio Diversification GitHub Full Manuscript Abstract We ask h",
       "altTexts": [
         "Figure 1",
         "Figure 2",
@@ -420,10 +420,10 @@
       "formulaCount": 973
     },
     "/certified-valuation-arithmetic-asian-options/": {
-      "textSha256": "6d87413cf2fbca596bb65b8ea6627933a8958db9e352e1b3bb196b70ff5ae3f4",
+      "textSha256": "e39087eeb8653a763777ac1ef980a4b1ddc2f428a5a5cda470a3aa3049ff160d",
       "characterCount": 48051,
       "wordCount": 6943,
-      "preview": "Skip to main content Theodore Ouyang Back to Selected Research Certified Valuation of Arithmetic Asian Options GitHub Full Manuscript Abstract We develop finite",
+      "preview": "Skip to Main Content Theodore Ouyang Back to Selected Research Certified Valuation of Arithmetic Asian Options GitHub Full Manuscript Abstract We develop finite",
       "altTexts": [],
       "ariaLabels": [
         "Theodore Ouyang home",
@@ -598,10 +598,10 @@
       "formulaCount": 353
     },
     "/certified-rough-heston-valuation/": {
-      "textSha256": "486c72be9d83e3b35f2bb2f0c4c72e654ca135804d98a905002fa9c075611110",
+      "textSha256": "1d05ec1ab60b78d5d0aecc6e0855ad84c5b91d1bc56a598b4d1a7efdf12cd030",
       "characterCount": 59198,
       "wordCount": 8470,
-      "preview": "Skip to main content Theodore Ouyang Back to Selected Research Certified Joint Pricing Errors in Rough Heston GitHub Full Manuscript Abstract We give determinis",
+      "preview": "Skip to Main Content Theodore Ouyang Back to Selected Research Certified Joint Pricing Errors in Rough Heston GitHub Full Manuscript Abstract We give determinis",
       "altTexts": [],
       "ariaLabels": [
         "Theodore Ouyang home",
@@ -749,10 +749,10 @@
       "formulaCount": 262
     },
     "/experience/": {
-      "textSha256": "f4a5257c2d304e45a490be25a43eb3474435d89a9691f5dc9b3932b9633106a3",
-      "characterCount": 8870,
-      "wordCount": 1156,
-      "preview": "Skip to main content Theodore Ouyang About Experience Experience: Areas of Focus AI Research and Engineering Data Science Legal Research and Policy Analysis Fin",
+      "textSha256": "c5a8982f90387eafdf23a5966191fd3b208272bff1220a6594f84a5f849aa24c",
+      "characterCount": 8933,
+      "wordCount": 1175,
+      "preview": "Skip to Main Content Theodore Ouyang About Experience Experience: Areas of Focus AI Research and Engineering Data Science Legal Research and Policy Analysis Fin",
       "altTexts": [],
       "ariaLabels": [
         "Theodore Ouyang home",
@@ -789,10 +789,10 @@
       }
     },
     "/experience/statistical-inference-and-resource-allocation-in-expert-data-production/": {
-      "textSha256": "801bf08f47066decbf73394032427dcb6c403e0f56336085e01277eef9edca32",
-      "characterCount": 23115,
-      "wordCount": 3271,
-      "preview": "Skip to main content Theodore Ouyang Back to Experience Large-Scale Domain Expert Feedback Governance and Adaptive Review Organization Duke University × Leading",
+      "textSha256": "52226b5dd0bce36441f81d0f0be932d4a821fd1cd4e5e5949092488a0afeea8b",
+      "characterCount": 23213,
+      "wordCount": 3289,
+      "preview": "Skip to Main Content Theodore Ouyang Back to Experience Large-Scale Domain Expert Feedback Governance and Adaptive Review Organization Duke University × Leading",
       "altTexts": [],
       "ariaLabels": [
         "Theodore Ouyang home",
@@ -840,22 +840,22 @@
       ],
       "metadata": {
         "title": "Duke University × Leading Foundation Model Developer: Large-Scale Domain Expert Feedback Governance and Adaptive Review | Theodore Ouyang",
-        "description": "With a leading foundation model developer, I led the statistical system behind expert feedback for LLM post-training, one of the first engineering implementations of prediction-assisted statistical inference and capacity-constrained review allocation in...",
+        "description": "With a leading foundation model developer, I led the statistical system behind expert feedback for LLM post-training, the first engineering implementation of prediction-assisted statistical inference and capacity-constrained review allocation in expert data...",
         "canonical": "https://www.theodoreoy.com/experience/statistical-inference-and-resource-allocation-in-expert-data-production/",
         "openGraphTitle": "Duke University × Leading Foundation Model Developer: Large-Scale Domain Expert Feedback Governance and Adaptive Review",
-        "openGraphDescription": "With a leading foundation model developer, I led the statistical system behind expert feedback for LLM post-training, one of the first engineering implementations of prediction-assisted statistical inference and capacity-constrained review allocation in...",
+        "openGraphDescription": "With a leading foundation model developer, I led the statistical system behind expert feedback for LLM post-training, the first engineering implementation of prediction-assisted statistical inference and capacity-constrained review allocation in expert data...",
         "openGraphUrl": "https://www.theodoreoy.com/experience/statistical-inference-and-resource-allocation-in-expert-data-production/",
         "twitterTitle": "Duke University × Leading Foundation Model Developer: Large-Scale Domain Expert Feedback Governance and Adaptive Review",
-        "twitterDescription": "With a leading foundation model developer, I led the statistical system behind expert feedback for LLM post-training, one of the first engineering implementations of prediction-assisted statistical inference and capacity-constrained review allocation in..."
+        "twitterDescription": "With a leading foundation model developer, I led the statistical system behind expert feedback for LLM post-training, the first engineering implementation of prediction-assisted statistical inference and capacity-constrained review allocation in expert data..."
       },
       "mathSourceSha256": "f3d7ba2b0e0de31349488cd12eaa1b589fd3008d4ed1bde80cef7b7d750ba867",
       "formulaCount": 152
     },
     "/experience/task-validity-in-financial-synthetic-data/": {
-      "textSha256": "d3acbfccee7802d39816c96511309a6031e89c3bf785c33081917b56f2d7a9e8",
-      "characterCount": 22772,
-      "wordCount": 3108,
-      "preview": "Skip to main content Theodore Ouyang Back to Experience Financial Task Design and Synthetic Data Engineering Organization Duke University × Leading Foundation M",
+      "textSha256": "e914b80bf34eef25ddf5e9ac9f5305978f458c903f39e1982f0bd994368bce0e",
+      "characterCount": 22813,
+      "wordCount": 3115,
+      "preview": "Skip to Main Content Theodore Ouyang Back to Experience Financial Task Design and Synthetic Data Engineering Organization Duke University × Leading Foundation M",
       "altTexts": [],
       "ariaLabels": [
         "Theodore Ouyang home",
@@ -891,22 +891,22 @@
       ],
       "metadata": {
         "title": "Duke University × Leading Foundation Model Developer: Financial Task Design and Synthetic Data Engineering | Theodore Ouyang",
-        "description": "I designed the data strategy for financial post-training in a frontier foundation model program, one of the first engineering implementations of constraint-preserving synthetic data and structured expert preference supervision for financial LLM post-training.",
+        "description": "I designed the data strategy for financial post-training in a frontier foundation model program, pioneering constraint-preserving synthetic data and structured expert preference supervision for financial LLM post-training in engineering practice.",
         "canonical": "https://www.theodoreoy.com/experience/task-validity-in-financial-synthetic-data/",
         "openGraphTitle": "Duke University × Leading Foundation Model Developer: Financial Task Design and Synthetic Data Engineering",
-        "openGraphDescription": "I designed the data strategy for financial post-training in a frontier foundation model program, one of the first engineering implementations of constraint-preserving synthetic data and structured expert preference supervision for financial LLM post-training.",
+        "openGraphDescription": "I designed the data strategy for financial post-training in a frontier foundation model program, pioneering constraint-preserving synthetic data and structured expert preference supervision for financial LLM post-training in engineering practice.",
         "openGraphUrl": "https://www.theodoreoy.com/experience/task-validity-in-financial-synthetic-data/",
         "twitterTitle": "Duke University × Leading Foundation Model Developer: Financial Task Design and Synthetic Data Engineering",
-        "twitterDescription": "I designed the data strategy for financial post-training in a frontier foundation model program, one of the first engineering implementations of constraint-preserving synthetic data and structured expert preference supervision for financial LLM post-training."
+        "twitterDescription": "I designed the data strategy for financial post-training in a frontier foundation model program, pioneering constraint-preserving synthetic data and structured expert preference supervision for financial LLM post-training in engineering practice."
       },
       "mathSourceSha256": "e3b1e4f3fece5f26fd7889d0e2fb2cc54cb9d65a6241f589f99a908078fd6bc9",
       "formulaCount": 109
     },
     "/experience/verification-and-supervision-in-scientific-reasoning-tasks/": {
-      "textSha256": "df15856578e67a03963754bd84ae54fa6b6c96a8ae37157d48d25d2bf905237d",
-      "characterCount": 22966,
-      "wordCount": 3274,
-      "preview": "Skip to main content Theodore Ouyang Back to Experience General Reasoning Evaluation and Layered Verification Organization Duke University × Frontier AI Researc",
+      "textSha256": "e9282dacffeccb66c2c01bdcebe69a6339d8a90b0ae621f31a7987bc18b28731",
+      "characterCount": 23016,
+      "wordCount": 3282,
+      "preview": "Skip to Main Content Theodore Ouyang Back to Experience General Reasoning Evaluation and Layered Verification Organization Duke University × Frontier AI Researc",
       "altTexts": [],
       "ariaLabels": [
         "Theodore Ouyang home",
@@ -952,22 +952,22 @@
       ],
       "metadata": {
         "title": "Duke University × Frontier AI Research Laboratory: General Reasoning Evaluation and Layered Verification | Theodore Ouyang",
-        "description": "I developed a framework for evaluating and supervising general reasoning with a frontier AI research laboratory, among the first engineering implementations of joint verification across final answers, visible reasoning and execution evidence in frontier...",
+        "description": "I developed a framework for evaluating and supervising general reasoning with a frontier AI research laboratory, the first to put joint verification across final answers, visible reasoning and execution evidence into engineering practice for frontier model...",
         "canonical": "https://www.theodoreoy.com/experience/verification-and-supervision-in-scientific-reasoning-tasks/",
         "openGraphTitle": "Duke University × Frontier AI Research Laboratory: General Reasoning Evaluation and Layered Verification",
-        "openGraphDescription": "I developed a framework for evaluating and supervising general reasoning with a frontier AI research laboratory, among the first engineering implementations of joint verification across final answers, visible reasoning and execution evidence in frontier...",
+        "openGraphDescription": "I developed a framework for evaluating and supervising general reasoning with a frontier AI research laboratory, the first to put joint verification across final answers, visible reasoning and execution evidence into engineering practice for frontier model...",
         "openGraphUrl": "https://www.theodoreoy.com/experience/verification-and-supervision-in-scientific-reasoning-tasks/",
         "twitterTitle": "Duke University × Frontier AI Research Laboratory: General Reasoning Evaluation and Layered Verification",
-        "twitterDescription": "I developed a framework for evaluating and supervising general reasoning with a frontier AI research laboratory, among the first engineering implementations of joint verification across final answers, visible reasoning and execution evidence in frontier..."
+        "twitterDescription": "I developed a framework for evaluating and supervising general reasoning with a frontier AI research laboratory, the first to put joint verification across final answers, visible reasoning and execution evidence into engineering practice for frontier model..."
       },
       "mathSourceSha256": "e491a1dd5d5faafa14cf68d9c47f2f42e074c7018698bd6633759998327829e1",
       "formulaCount": 127
     },
     "/experience/evidence-uncertainty-and-decision-guarantees-in-investment-research/": {
-      "textSha256": "a6142d83cde59e38385cf6941414ce16a0823b9d9f37331085deeb2bd2997807",
-      "characterCount": 17211,
-      "wordCount": 2516,
-      "preview": "Skip to main content Theodore Ouyang Back to Experience Evidence Verification and Robust Comparison in Investment Research Organization Duke University × Leadin",
+      "textSha256": "5e9c3400624c53b2b73844f62d6251592030222ed28e484ba37c7ee116430cbb",
+      "characterCount": 17245,
+      "wordCount": 2522,
+      "preview": "Skip to Main Content Theodore Ouyang Back to Experience Evidence Verification and Robust Comparison in Investment Research Organization Duke University × Leadin",
       "altTexts": [],
       "ariaLabels": [
         "Theodore Ouyang home",
@@ -1014,22 +1014,22 @@
       ],
       "metadata": {
         "title": "Duke University × Leading Global Alternative Asset Manager: Evidence Verification and Robust Comparison in Investment Research | Theodore Ouyang",
-        "description": "I developed and implemented a framework for evidence verification and decision assurance with a leading global alternative asset manager, one of the first engineering implementations in institutional investment research to treat model multiplicity,...",
+        "description": "I developed and implemented a framework for evidence verification and decision assurance with a leading global alternative asset manager, the first engineering implementation in institutional investment research to treat model multiplicity, unverified...",
         "canonical": "https://www.theodoreoy.com/experience/evidence-uncertainty-and-decision-guarantees-in-investment-research/",
         "openGraphTitle": "Duke University × Leading Global Alternative Asset Manager: Evidence Verification and Robust Comparison in Investment Research",
-        "openGraphDescription": "I developed and implemented a framework for evidence verification and decision assurance with a leading global alternative asset manager, one of the first engineering implementations in institutional investment research to treat model multiplicity,...",
+        "openGraphDescription": "I developed and implemented a framework for evidence verification and decision assurance with a leading global alternative asset manager, the first engineering implementation in institutional investment research to treat model multiplicity, unverified...",
         "openGraphUrl": "https://www.theodoreoy.com/experience/evidence-uncertainty-and-decision-guarantees-in-investment-research/",
         "twitterTitle": "Duke University × Leading Global Alternative Asset Manager: Evidence Verification and Robust Comparison in Investment Research",
-        "twitterDescription": "I developed and implemented a framework for evidence verification and decision assurance with a leading global alternative asset manager, one of the first engineering implementations in institutional investment research to treat model multiplicity,..."
+        "twitterDescription": "I developed and implemented a framework for evidence verification and decision assurance with a leading global alternative asset manager, the first engineering implementation in institutional investment research to treat model multiplicity, unverified..."
       },
       "mathSourceSha256": "aac71524ae3c1dd0942d8f8e917c85cc3d245e9e670070edc9e6574d6b73b7fa",
       "formulaCount": 136
     },
     "/experience/autonomous-authority-in-space/": {
-      "textSha256": "86ae2bdf918779cd7be183e1e1d42f9632e2ad84aac69e4f375f2bf2c287ce5c",
-      "characterCount": 67429,
-      "wordCount": 9419,
-      "preview": "Skip to main content Theodore Ouyang Back to Experience Autonomous Authority in Space: Risk Tradeoffs and the Law of Delegation Organization Duke Law School Pos",
+      "textSha256": "17f4ff678134741c60cd6f7bb470e131fa90c202e520ab44047bdb17d26ec9e6",
+      "characterCount": 67451,
+      "wordCount": 9427,
+      "preview": "Skip to Main Content Theodore Ouyang Back to Experience Autonomous Authority in Space: Risk Tradeoffs and the Law of Delegation Organization Duke Law School Pos",
       "altTexts": [],
       "ariaLabels": [
         "Theodore Ouyang home",
@@ -1110,10 +1110,10 @@
       }
     },
     "/experience/small-states-and-strategic-space-dependence/": {
-      "textSha256": "f791110ef146ed413c35b602c3660a7e47be5ac77e7429e0d9a6d10823c9e9a1",
-      "characterCount": 52454,
-      "wordCount": 7166,
-      "preview": "Skip to main content Theodore Ouyang Back to Experience Small States and the Governance of Strategic Space Dependence Organization Duke Law School Position Auth",
+      "textSha256": "0a0907368495f9c6305bc139751ad63bfc14c7599f8f2886e23df6c53ce0575c",
+      "characterCount": 52472,
+      "wordCount": 7174,
+      "preview": "Skip to Main Content Theodore Ouyang Back to Experience Small States and the Governance of Strategic Space Dependence Organization Duke Law School Position Auth",
       "altTexts": [],
       "ariaLabels": [
         "Theodore Ouyang home",
@@ -1198,10 +1198,10 @@
       }
     },
     "/experience/solar-geoengineering-comparison-and-continuity/": {
-      "textSha256": "ee11abd8387f29fcb91d7ac1560204eb0e241a05b039456d576f6f72d5387a06",
-      "characterCount": 49915,
-      "wordCount": 6922,
-      "preview": "Skip to main content Theodore Ouyang Back to Experience Who May Choose the Lesser Risk: Solar Geoengineering and the Legal Duties of Comparison and Continuity O",
+      "textSha256": "9b0847516e8fcc42c82f98d586e295160e29667055fe1e5d288005f347dfa7f0",
+      "characterCount": 49942,
+      "wordCount": 6932,
+      "preview": "Skip to Main Content Theodore Ouyang Back to Experience Who May Choose the Lesser Risk: Solar Geoengineering and the Legal Duties of Comparison and Continuity O",
       "altTexts": [],
       "ariaLabels": [
         "Theodore Ouyang home",
@@ -1282,10 +1282,10 @@
       }
     },
     "/experience/mangrove-restoration-and-compensatory-mitigation/": {
-      "textSha256": "7b1d21b296907926e481c88a1213db05a5ded2be9f31eda074bfbc949be76e0c",
-      "characterCount": 64493,
-      "wordCount": 8973,
-      "preview": "Skip to main content Theodore Ouyang Back to Experience Mangrove Restoration and the Limits of Compensatory Mitigation: Lessons from Florida for the Greater Bay",
+      "textSha256": "58cec8c7a2e15f53f7fc1f40c2ee849bd1d18532093b4e69c1e9574785a7108c",
+      "characterCount": 64509,
+      "wordCount": 8980,
+      "preview": "Skip to Main Content Theodore Ouyang Back to Experience Mangrove Restoration and the Limits of Compensatory Mitigation: Lessons from Florida for the Greater Bay",
       "altTexts": [],
       "ariaLabels": [
         "Theodore Ouyang home",
@@ -1388,10 +1388,10 @@
       }
     },
     "/experience/jiritsu-network/": {
-      "textSha256": "c91c15900d0d80cec408f54aec40ed2b2bd611788c14b1fd4c5660da24f14057",
-      "characterCount": 3275,
-      "wordCount": 409,
-      "preview": "Skip to main content Theodore Ouyang Back to Experience Asset-Verification Partnerships and Issuer Ranking Organization Jiritsu Network Position Business Develo",
+      "textSha256": "4ef0731dfb5db4dd035fa90d95c5edbd560629933a4878d88ab3c69f1e3805f3",
+      "characterCount": 3303,
+      "wordCount": 428,
+      "preview": "Skip to Main Content Theodore Ouyang Back to Experience Asset-Verification Partnerships and Issuer Ranking Organization Jiritsu Network Position Data Scientist ",
       "altTexts": [],
       "ariaLabels": [
         "Theodore Ouyang home",
@@ -1399,20 +1399,20 @@
       ],
       "metadata": {
         "title": "Jiritsu Network: Asset-Verification Partnerships and Issuer Ranking | Theodore Ouyang",
-        "description": "Owned business development for Jiritsu's asset-verification and privacy-preserving computation services as the sole dedicated contributor for new issuers. Reported directly to a co-founder, combining data engineering, preference ranking, and counterparty discussions to develop partnership recommendations for the board.",
+        "description": "I built the data and ranking system behind Jiritsu's partnerships for its asset-verification and privacy-preserving computation services, as the sole dedicated contributor for new issuers. Reporting directly to a co-founder, I combined data engineering, preference ranking, and counterparty discussions to develop partnership recommendations for the board.",
         "canonical": "https://www.theodoreoy.com/experience/jiritsu-network/",
         "openGraphTitle": "Jiritsu Network: Asset-Verification Partnerships and Issuer Ranking",
-        "openGraphDescription": "Owned business development for Jiritsu's asset-verification and privacy-preserving computation services as the sole dedicated contributor for new issuers. Reported directly to a co-founder, combining data engineering, preference ranking, and counterparty discussions to develop partnership recommendations for the board.",
+        "openGraphDescription": "I built the data and ranking system behind Jiritsu's partnerships for its asset-verification and privacy-preserving computation services, as the sole dedicated contributor for new issuers. Reporting directly to a co-founder, I combined data engineering, preference ranking, and counterparty discussions to develop partnership recommendations for the board.",
         "openGraphUrl": "https://www.theodoreoy.com/experience/jiritsu-network/",
         "twitterTitle": "Jiritsu Network: Asset-Verification Partnerships and Issuer Ranking",
-        "twitterDescription": "Owned business development for Jiritsu's asset-verification and privacy-preserving computation services as the sole dedicated contributor for new issuers. Reported directly to a co-founder, combining data engineering, preference ranking, and counterparty discussions to develop partnership recommendations for the board."
+        "twitterDescription": "I built the data and ranking system behind Jiritsu's partnerships for its asset-verification and privacy-preserving computation services, as the sole dedicated contributor for new issuers. Reporting directly to a co-founder, I combined data engineering, preference ranking, and counterparty discussions to develop partnership recommendations for the board."
       }
     },
     "/experience/euromonitor-international/": {
-      "textSha256": "2d2eb048b268e6716cabffe6cf250e5290d342371ff809ef0d7221c10d638b37",
-      "characterCount": 2301,
-      "wordCount": 287,
-      "preview": "Skip to main content Theodore Ouyang Back to Experience China Market Entry for a Premium European Appliance Brand Organization Euromonitor International Positio",
+      "textSha256": "1b9d0d1781db56a7c8dee2ce374abcef0c4465c6306b7d5683a45b7d89bb17bf",
+      "characterCount": 2334,
+      "wordCount": 300,
+      "preview": "Skip to Main Content Theodore Ouyang Back to Experience China Market Entry for a Premium European Appliance Brand Organization Euromonitor International Positio",
       "altTexts": [],
       "ariaLabels": [
         "Theodore Ouyang home",
@@ -1420,20 +1420,20 @@
       ],
       "metadata": {
         "title": "Euromonitor International: China Market Entry for a Premium European Appliance Brand | Theodore Ouyang",
-        "description": "Led the China workstream of a global market-entry engagement covering China, Japan, and the Middle East for a premium European appliance brand. Combined market data, consumer evidence, and policy research to recommend local products, pricing, channels, and marketing while maintaining the client's global positioning.",
+        "description": "I led the China workstream of a global market-entry engagement covering China, Japan, and the Middle East for a premium European appliance brand. I analyzed approximately 50,000 e-commerce listings alongside consumer evidence and policy research to recommend local products, pricing, channels, and marketing while maintaining the client's global positioning.",
         "canonical": "https://www.theodoreoy.com/experience/euromonitor-international/",
         "openGraphTitle": "Euromonitor International: China Market Entry for a Premium European Appliance Brand",
-        "openGraphDescription": "Led the China workstream of a global market-entry engagement covering China, Japan, and the Middle East for a premium European appliance brand. Combined market data, consumer evidence, and policy research to recommend local products, pricing, channels, and marketing while maintaining the client's global positioning.",
+        "openGraphDescription": "I led the China workstream of a global market-entry engagement covering China, Japan, and the Middle East for a premium European appliance brand. I analyzed approximately 50,000 e-commerce listings alongside consumer evidence and policy research to recommend local products, pricing, channels, and marketing while maintaining the client's global positioning.",
         "openGraphUrl": "https://www.theodoreoy.com/experience/euromonitor-international/",
         "twitterTitle": "Euromonitor International: China Market Entry for a Premium European Appliance Brand",
-        "twitterDescription": "Led the China workstream of a global market-entry engagement covering China, Japan, and the Middle East for a premium European appliance brand. Combined market data, consumer evidence, and policy research to recommend local products, pricing, channels, and marketing while maintaining the client's global positioning."
+        "twitterDescription": "I led the China workstream of a global market-entry engagement covering China, Japan, and the Middle East for a premium European appliance brand. I analyzed approximately 50,000 e-commerce listings alongside consumer evidence and policy research to recommend local products, pricing, channels, and marketing while maintaining the client's global positioning."
       }
     },
     "/experience/china-construction-bank/": {
-      "textSha256": "4c46e79aabeaf4d2e0a09dd9d25e5af81cf154434147a9885e7a42e04f8aa415",
-      "characterCount": 1615,
-      "wordCount": 209,
-      "preview": "Skip to main content Theodore Ouyang Back to Experience PCA-Based Sustainability Analysis and Green-Credit Screening Organization China Construction Bank Positi",
+      "textSha256": "30c3864b233b0f7ddc9f6e1ae9b2c21ffcb82caf5d10b3c04ebdadc716b7af8d",
+      "characterCount": 1633,
+      "wordCount": 217,
+      "preview": "Skip to Main Content Theodore Ouyang Back to Experience PCA-Based Sustainability Analysis and Green-Credit Screening Organization China Construction Bank Positi",
       "altTexts": [],
       "ariaLabels": [
         "Theodore Ouyang home",
@@ -1441,20 +1441,20 @@
       ],
       "metadata": {
         "title": "China Construction Bank: PCA-Based Sustainability Analysis and Green-Credit Screening | Theodore Ouyang",
-        "description": "Applied statistical methods to sustainability assessment and green-credit screening within China Construction Bank's internal framework. Combined company data, historical assessments, and explicit eligibility rules to support candidate review, then documented the method for product managers and risk officers evaluating its use on a platform.",
+        "description": "I applied statistical methods to sustainability assessment and green-credit screening within China Construction Bank's internal framework. I combined company data, historical assessments, and explicit eligibility rules to support candidate review, then documented the method for product managers and risk officers evaluating its use on a platform.",
         "canonical": "https://www.theodoreoy.com/experience/china-construction-bank/",
         "openGraphTitle": "China Construction Bank: PCA-Based Sustainability Analysis and Green-Credit Screening",
-        "openGraphDescription": "Applied statistical methods to sustainability assessment and green-credit screening within China Construction Bank's internal framework. Combined company data, historical assessments, and explicit eligibility rules to support candidate review, then documented the method for product managers and risk officers evaluating its use on a platform.",
+        "openGraphDescription": "I applied statistical methods to sustainability assessment and green-credit screening within China Construction Bank's internal framework. I combined company data, historical assessments, and explicit eligibility rules to support candidate review, then documented the method for product managers and risk officers evaluating its use on a platform.",
         "openGraphUrl": "https://www.theodoreoy.com/experience/china-construction-bank/",
         "twitterTitle": "China Construction Bank: PCA-Based Sustainability Analysis and Green-Credit Screening",
-        "twitterDescription": "Applied statistical methods to sustainability assessment and green-credit screening within China Construction Bank's internal framework. Combined company data, historical assessments, and explicit eligibility rules to support candidate review, then documented the method for product managers and risk officers evaluating its use on a platform."
+        "twitterDescription": "I applied statistical methods to sustainability assessment and green-credit screening within China Construction Bank's internal framework. I combined company data, historical assessments, and explicit eligibility rules to support candidate review, then documented the method for product managers and risk officers evaluating its use on a platform."
       }
     },
     "/experience/jones-lang-lasalle/": {
-      "textSha256": "29cf30e6340f4b3e44da6547586cb9608a17f801927acba432683611e885ea8f",
-      "characterCount": 2302,
-      "wordCount": 286,
-      "preview": "Skip to main content Theodore Ouyang Back to Experience Office Investment Underwriting and ESG Due Diligence Organization Jones Lang LaSalle Capital Markets Tea",
+      "textSha256": "643c80baa7c73ad2ca418fed5f86deb90d3af7126cb6e608205b79ca6919c813",
+      "characterCount": 2325,
+      "wordCount": 296,
+      "preview": "Skip to Main Content Theodore Ouyang Back to Experience Office Investment Underwriting and ESG Due Diligence Organization Jones Lang LaSalle Capital Markets Tea",
       "altTexts": [],
       "ariaLabels": [
         "Theodore Ouyang home",
@@ -1462,20 +1462,20 @@
       ],
       "metadata": {
         "title": "Jones Lang LaSalle Capital Markets Team: Office Investment Underwriting and ESG Due Diligence | Theodore Ouyang",
-        "description": "Served as the project team's ESG lead on acquisition advisory for a Southeast Asian conglomerate seeking Chinese office properties. Worked with JLL's internal ESG team to connect asset screening, property valuation, and site-level diligence with the client's investment requirements and potential refurbishment or repositioning plans.",
+        "description": "I served as the project team's ESG lead on acquisition advisory for a Southeast Asian conglomerate seeking Chinese office properties. Working with JLL's internal ESG team, I connected asset screening, property valuation, and site-level diligence with the client's investment requirements and potential refurbishment or repositioning plans.",
         "canonical": "https://www.theodoreoy.com/experience/jones-lang-lasalle/",
         "openGraphTitle": "Jones Lang LaSalle Capital Markets Team: Office Investment Underwriting and ESG Due Diligence",
-        "openGraphDescription": "Served as the project team's ESG lead on acquisition advisory for a Southeast Asian conglomerate seeking Chinese office properties. Worked with JLL's internal ESG team to connect asset screening, property valuation, and site-level diligence with the client's investment requirements and potential refurbishment or repositioning plans.",
+        "openGraphDescription": "I served as the project team's ESG lead on acquisition advisory for a Southeast Asian conglomerate seeking Chinese office properties. Working with JLL's internal ESG team, I connected asset screening, property valuation, and site-level diligence with the client's investment requirements and potential refurbishment or repositioning plans.",
         "openGraphUrl": "https://www.theodoreoy.com/experience/jones-lang-lasalle/",
         "twitterTitle": "Jones Lang LaSalle Capital Markets Team: Office Investment Underwriting and ESG Due Diligence",
-        "twitterDescription": "Served as the project team's ESG lead on acquisition advisory for a Southeast Asian conglomerate seeking Chinese office properties. Worked with JLL's internal ESG team to connect asset screening, property valuation, and site-level diligence with the client's investment requirements and potential refurbishment or repositioning plans."
+        "twitterDescription": "I served as the project team's ESG lead on acquisition advisory for a Southeast Asian conglomerate seeking Chinese office properties. Working with JLL's internal ESG team, I connected asset screening, property valuation, and site-level diligence with the client's investment requirements and potential refurbishment or repositioning plans."
       }
     },
     "/experience/hubble-technology-investment/": {
-      "textSha256": "6061f8bc9eb4fcfa19731e3cd0284533a672fbe9d032fc3d364662256c747609",
-      "characterCount": 1771,
-      "wordCount": 222,
-      "preview": "Skip to main content Theodore Ouyang Back to Experience Bluetooth Satellite Commercialization and Market Selection Organization Hubble Network Position Student ",
+      "textSha256": "5b9609e07e6f4da0a21544d6566d5adb4ceedb9f8596c804783016fcfa27594c",
+      "characterCount": 1795,
+      "wordCount": 230,
+      "preview": "Skip to Main Content Theodore Ouyang Back to Experience Bluetooth Satellite Commercialization and Market Selection Organization Hubble Network Position Student ",
       "altTexts": [],
       "ariaLabels": [
         "Theodore Ouyang home",
@@ -1483,20 +1483,20 @@
       ],
       "metadata": {
         "title": "Hubble Network: Bluetooth Satellite Commercialization and Market Selection | Theodore Ouyang",
-        "description": "Led shipping, logistics, and industrial asset-tracking research for Hubble's Bluetooth satellite commercialization through a Duke Practicum. Assessed where the technology's cost, accuracy, power consumption, and periodic reporting capabilities matched customer needs, translating technical and market evidence into recommendations for early applications.",
+        "description": "Through a Duke Practicum, I led shipping, logistics, and industrial asset-tracking research for Hubble's Bluetooth satellite commercialization. I assessed where the technology's cost, accuracy, power consumption, and periodic reporting capabilities matched customer needs, translating technical and market evidence into recommendations for early applications.",
         "canonical": "https://www.theodoreoy.com/experience/hubble-technology-investment/",
         "openGraphTitle": "Hubble Network: Bluetooth Satellite Commercialization and Market Selection",
-        "openGraphDescription": "Led shipping, logistics, and industrial asset-tracking research for Hubble's Bluetooth satellite commercialization through a Duke Practicum. Assessed where the technology's cost, accuracy, power consumption, and periodic reporting capabilities matched customer needs, translating technical and market evidence into recommendations for early applications.",
+        "openGraphDescription": "Through a Duke Practicum, I led shipping, logistics, and industrial asset-tracking research for Hubble's Bluetooth satellite commercialization. I assessed where the technology's cost, accuracy, power consumption, and periodic reporting capabilities matched customer needs, translating technical and market evidence into recommendations for early applications.",
         "openGraphUrl": "https://www.theodoreoy.com/experience/hubble-technology-investment/",
         "twitterTitle": "Hubble Network: Bluetooth Satellite Commercialization and Market Selection",
-        "twitterDescription": "Led shipping, logistics, and industrial asset-tracking research for Hubble's Bluetooth satellite commercialization through a Duke Practicum. Assessed where the technology's cost, accuracy, power consumption, and periodic reporting capabilities matched customer needs, translating technical and market evidence into recommendations for early applications."
+        "twitterDescription": "Through a Duke Practicum, I led shipping, logistics, and industrial asset-tracking research for Hubble's Bluetooth satellite commercialization. I assessed where the technology's cost, accuracy, power consumption, and periodic reporting capabilities matched customer needs, translating technical and market evidence into recommendations for early applications."
       }
     },
     "/experience/saif-partners/": {
-      "textSha256": "065019d29c8cfda1558c140339f633734ca44533627d0af1ca953f78adcdef49",
-      "characterCount": 1845,
-      "wordCount": 233,
-      "preview": "Skip to main content Theodore Ouyang Back to Experience Dental Investment Research and Governance Due Diligence Organization SAIF Partners Position Summer Inter",
+      "textSha256": "aafae2b26b5498bba07f96de00089fc004d585861373715c4b5e94e03d879700",
+      "characterCount": 1865,
+      "wordCount": 242,
+      "preview": "Skip to Main Content Theodore Ouyang Back to Experience Dental Investment Research and Governance Due Diligence Organization SAIF Partners Position Summer Inter",
       "altTexts": [],
       "ariaLabels": [
         "Theodore Ouyang home",
@@ -1504,20 +1504,20 @@
       ],
       "metadata": {
         "title": "SAIF Partners: Dental Investment Research and Governance Due Diligence | Theodore Ouyang",
-        "description": "Owned public-data research and governance screening for a Greater China dental-investment theme. Worked with the VP and investment team to prioritize subsectors and candidates, then translated governance concerns into investment recommendations, management questions, and on-site diligence priorities.",
+        "description": "I owned public-data research and governance screening for a Greater China dental-investment theme. Working with the VP and investment team, I prioritized subsectors and candidates, then translated governance concerns into investment recommendations, management questions, and on-site diligence priorities.",
         "canonical": "https://www.theodoreoy.com/experience/saif-partners/",
         "openGraphTitle": "SAIF Partners: Dental Investment Research and Governance Due Diligence",
-        "openGraphDescription": "Owned public-data research and governance screening for a Greater China dental-investment theme. Worked with the VP and investment team to prioritize subsectors and candidates, then translated governance concerns into investment recommendations, management questions, and on-site diligence priorities.",
+        "openGraphDescription": "I owned public-data research and governance screening for a Greater China dental-investment theme. Working with the VP and investment team, I prioritized subsectors and candidates, then translated governance concerns into investment recommendations, management questions, and on-site diligence priorities.",
         "openGraphUrl": "https://www.theodoreoy.com/experience/saif-partners/",
         "twitterTitle": "SAIF Partners: Dental Investment Research and Governance Due Diligence",
-        "twitterDescription": "Owned public-data research and governance screening for a Greater China dental-investment theme. Worked with the VP and investment team to prioritize subsectors and candidates, then translated governance concerns into investment recommendations, management questions, and on-site diligence priorities."
+        "twitterDescription": "I owned public-data research and governance screening for a Greater China dental-investment theme. Working with the VP and investment team, I prioritized subsectors and candidates, then translated governance concerns into investment recommendations, management questions, and on-site diligence priorities."
       }
     },
     "/experience/citic-securities/": {
-      "textSha256": "b6e656fc769bce95d9735fe54c607f05e3c46024a0a516d7e68e06aa1cc59274",
-      "characterCount": 562,
-      "wordCount": 72,
-      "preview": "Skip to main content Theodore Ouyang Back to Experience Agriculture Equity Research and Valuation Organization CITIC Securities Position Equity Research Intern ",
+      "textSha256": "9f0a21a9046444e910064c1529ee02336a7b10735052751f3ca4456a8f3e4ea1",
+      "characterCount": 568,
+      "wordCount": 74,
+      "preview": "Skip to Main Content Theodore Ouyang Back to Experience Agriculture Equity Research and Valuation Organization CITIC Securities Position Equity Research Intern ",
       "altTexts": [],
       "ariaLabels": [
         "Theodore Ouyang home",
@@ -1525,20 +1525,20 @@
       ],
       "metadata": {
         "title": "CITIC Securities: Agriculture Equity Research and Valuation | Theodore Ouyang",
-        "description": "Supported the Agriculture Research Group's sector analysis and research-report work, contributing evidence for internal investment-strategy discussions.",
+        "description": "I supported the Agriculture Research Group's sector analysis and research-report work, contributing evidence for internal investment-strategy discussions.",
         "canonical": "https://www.theodoreoy.com/experience/citic-securities/",
         "openGraphTitle": "CITIC Securities: Agriculture Equity Research and Valuation",
-        "openGraphDescription": "Supported the Agriculture Research Group's sector analysis and research-report work, contributing evidence for internal investment-strategy discussions.",
+        "openGraphDescription": "I supported the Agriculture Research Group's sector analysis and research-report work, contributing evidence for internal investment-strategy discussions.",
         "openGraphUrl": "https://www.theodoreoy.com/experience/citic-securities/",
         "twitterTitle": "CITIC Securities: Agriculture Equity Research and Valuation",
-        "twitterDescription": "Supported the Agriculture Research Group's sector analysis and research-report work, contributing evidence for internal investment-strategy discussions."
+        "twitterDescription": "I supported the Agriculture Research Group's sector analysis and research-report work, contributing evidence for internal investment-strategy discussions."
       }
     },
     "/experience/ey-parthenon/": {
-      "textSha256": "d3f8cb64c940bc31e7c88a123bae48c34642774f0fed8cb72661e1a410ee6da5",
-      "characterCount": 461,
-      "wordCount": 64,
-      "preview": "Skip to main content Theodore Ouyang Back to Experience Business-Line Restructuring for Digital Transformation Organization EY-Parthenon Position Summer Intern ",
+      "textSha256": "ce796244b1f7e65c62de2dc3710615d5ad1549c8964a4d35bc020f8798702cf7",
+      "characterCount": 463,
+      "wordCount": 65,
+      "preview": "Skip to Main Content Theodore Ouyang Back to Experience Business-Line Restructuring for Digital Transformation Organization EY-Parthenon Position Summer Intern ",
       "altTexts": [],
       "ariaLabels": [
         "Theodore Ouyang home",
@@ -1546,20 +1546,20 @@
       ],
       "metadata": {
         "title": "EY-Parthenon: Business-Line Restructuring for Digital Transformation | Theodore Ouyang",
-        "description": "Supported a digital-transformation engagement for a leading Chinese company preparing to list, with a focus on business-line restructuring.",
+        "description": "I supported a digital-transformation engagement for a leading Chinese company preparing to list, with a focus on business-line restructuring.",
         "canonical": "https://www.theodoreoy.com/experience/ey-parthenon/",
         "openGraphTitle": "EY-Parthenon: Business-Line Restructuring for Digital Transformation",
-        "openGraphDescription": "Supported a digital-transformation engagement for a leading Chinese company preparing to list, with a focus on business-line restructuring.",
+        "openGraphDescription": "I supported a digital-transformation engagement for a leading Chinese company preparing to list, with a focus on business-line restructuring.",
         "openGraphUrl": "https://www.theodoreoy.com/experience/ey-parthenon/",
         "twitterTitle": "EY-Parthenon: Business-Line Restructuring for Digital Transformation",
-        "twitterDescription": "Supported a digital-transformation engagement for a leading Chinese company preparing to list, with a focus on business-line restructuring."
+        "twitterDescription": "I supported a digital-transformation engagement for a leading Chinese company preparing to list, with a focus on business-line restructuring."
       }
     },
     "/experience/independent-stem-olympiad-training/": {
-      "textSha256": "0f8a0dce301f8983e9b8d7f074b62938a120af1aeb47e1f55569e3391bf79394",
-      "characterCount": 760,
-      "wordCount": 95,
-      "preview": "Skip to main content Theodore Ouyang Back to Experience Advanced Physics Olympiad Instruction Organization Independent STEM Olympiad Training Practice Position ",
+      "textSha256": "4b1479f4686863c12f93b3114607daacb3125606328a1b203c9b921683d604e0",
+      "characterCount": 764,
+      "wordCount": 97,
+      "preview": "Skip to Main Content Theodore Ouyang Back to Experience Advanced Physics Olympiad Instruction Organization Independent STEM Olympiad Training Practice Position ",
       "altTexts": [],
       "ariaLabels": [
         "Theodore Ouyang home",
@@ -1567,20 +1567,20 @@
       ],
       "metadata": {
         "title": "Independent STEM Olympiad Training Practice: Advanced Physics Olympiad Instruction | Theodore Ouyang",
-        "description": "Independently coached students preparing for advanced physics Olympiads through online and in-person instruction, combining subject teaching with competition problem-solving practice.",
+        "description": "I independently coached students preparing for advanced physics Olympiads through online and in-person instruction, combining subject teaching with competition problem-solving practice.",
         "canonical": "https://www.theodoreoy.com/experience/independent-stem-olympiad-training/",
         "openGraphTitle": "Independent STEM Olympiad Training Practice: Advanced Physics Olympiad Instruction",
-        "openGraphDescription": "Independently coached students preparing for advanced physics Olympiads through online and in-person instruction, combining subject teaching with competition problem-solving practice.",
+        "openGraphDescription": "I independently coached students preparing for advanced physics Olympiads through online and in-person instruction, combining subject teaching with competition problem-solving practice.",
         "openGraphUrl": "https://www.theodoreoy.com/experience/independent-stem-olympiad-training/",
         "twitterTitle": "Independent STEM Olympiad Training Practice: Advanced Physics Olympiad Instruction",
-        "twitterDescription": "Independently coached students preparing for advanced physics Olympiads through online and in-person instruction, combining subject teaching with competition problem-solving practice."
+        "twitterDescription": "I independently coached students preparing for advanced physics Olympiads through online and in-person instruction, combining subject teaching with competition problem-solving practice."
       }
     },
     "/experience/stem-olympiad-competitions/": {
-      "textSha256": "d76b708cd20d0c4613a53122da007b72f5499ed860b0d4d900ae0b23bdccb608",
-      "characterCount": 1578,
-      "wordCount": 206,
-      "preview": "Skip to main content Theodore Ouyang Back to Experience Advanced Olympiad Training, Awards, and Peer Mentoring Organization The High School Attached to Hunan No",
+      "textSha256": "94771a46273cbbf2f3ea99398e05905c892691fba88ee7553d89e65192e1553d",
+      "characterCount": 1590,
+      "wordCount": 211,
+      "preview": "Skip to Main Content Theodore Ouyang Back to Experience Advanced Olympiad Training, Awards, and Peer Mentoring Organization The High School Attached to Hunan No",
       "altTexts": [],
       "ariaLabels": [
         "Theodore Ouyang home",
@@ -1588,13 +1588,13 @@
       ],
       "metadata": {
         "title": "The High School Attached to Hunan Normal University: Advanced Olympiad Training, Awards, and Peer Mentoring | Theodore Ouyang",
-        "description": "Trained in physics and mathematics Olympiads and served as a peer mentor in the school's nationally leading physics competition program, combining advanced study with collaborative problem solving.",
+        "description": "I trained in physics and mathematics Olympiads and served as a peer mentor in the school's nationally leading physics competition program, combining advanced study with collaborative problem solving.",
         "canonical": "https://www.theodoreoy.com/experience/stem-olympiad-competitions/",
         "openGraphTitle": "The High School Attached to Hunan Normal University: Advanced Olympiad Training, Awards, and Peer Mentoring",
-        "openGraphDescription": "Trained in physics and mathematics Olympiads and served as a peer mentor in the school's nationally leading physics competition program, combining advanced study with collaborative problem solving.",
+        "openGraphDescription": "I trained in physics and mathematics Olympiads and served as a peer mentor in the school's nationally leading physics competition program, combining advanced study with collaborative problem solving.",
         "openGraphUrl": "https://www.theodoreoy.com/experience/stem-olympiad-competitions/",
         "twitterTitle": "The High School Attached to Hunan Normal University: Advanced Olympiad Training, Awards, and Peer Mentoring",
-        "twitterDescription": "Trained in physics and mathematics Olympiads and served as a peer mentor in the school's nationally leading physics competition program, combining advanced study with collaborative problem solving."
+        "twitterDescription": "I trained in physics and mathematics Olympiads and served as a peer mentor in the school's nationally leading physics competition program, combining advanced study with collaborative problem solving."
       }
     }
   }

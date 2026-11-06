@@ -170,7 +170,7 @@ export function sampleClarinet(width: number, dpr: number): SampleDot[] {
         if (random() > retention) continue;
         const desired = cavity ? 1.7 : bell ? 1.5 + tone * .2 : 1 + tone * .7;
         const size = Math.max(1, Math.min(bodyPitch - bodyGap, Math.round(desired * dpr)));
-        // Retain a clear material boundary instead of covering silver with ink dots.
+        // Silver fittings and outlines keep a clear boundary free of ink dots.
         if (alphaAt(metalPixels, x, y) > .2 || alphaAt(outlinePixels, x, y) > .3) continue;
         add(x, y, size, 0, "body", fringe);
       }
@@ -190,7 +190,7 @@ export function sampleClarinet(width: number, dpr: number): SampleDot[] {
     }
 
     // The dotted arc has a full central crest and lighter ends.
-    // Spacing follows curve length in CSS pixels, rather than parametric steps.
+    // Spacing follows curve length in CSS pixels.
     let previous = cubicPoint(ARC, 0);
     let distance = 0;
     for (let step = 1; step <= 600; step++) {

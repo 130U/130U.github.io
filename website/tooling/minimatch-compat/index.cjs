@@ -1,11 +1,11 @@
 "use strict";
 
-// The legacy ESLint consumers load this synchronous CommonJS entry point.
+// The installed ESLint plugins load this synchronous CommonJS entry point.
 // eslint-disable-next-line @typescript-eslint/no-require-imports
 const engine = require("minimatch-engine");
 
-// Every match uses the maintained, nonrecursive v11 engine. The old lint
-// packages additionally expect a callable CommonJS export and makeRe().test().
+// Every match uses the nonrecursive v11 engine. The lint plugins also expect
+// a callable CommonJS export and makeRe().test().
 function createCompatibility(defaultOptions = {}) {
   const optionsFor = (options) => ({ ...defaultOptions, ...options });
 
@@ -18,8 +18,8 @@ function createCompatibility(defaultOptions = {}) {
     constructor: { value: Minimatch, writable: true, configurable: true },
     makeRe: {
       value() {
-        // eslint-plugin-import only calls .test(). Returning a matcher avoids
-        // rebuilding the backtracking regular expressions removed upstream.
+        // eslint-plugin-import only calls .test(), so a matcher is sufficient
+        // and no backtracking regular expression is built.
         return Object.freeze({ test: (value) => this.match(value) });
       },
       writable: true,

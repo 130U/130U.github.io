@@ -191,7 +191,7 @@ behavior and consumer tests when changing dependencies.
 `npm run generate:brand-icons` produces the public SVG and icon derivatives.
 `source-assets/brand/og.png` is the social-preview master;
 `npm run optimize:images` produces `public/assets/brand/og-1774.jpg`.
-The repository cover lives in `.github/assets/readme-cover.jpg`.
+The repository README displays the same card from `public/assets/brand/og-1774.jpg`.
 
 The Inter and Source Serif 4 variable fonts and their SIL Open Font Licenses live
 in `public/assets/fonts/`. The site and architecture viewer share `inter.css`;

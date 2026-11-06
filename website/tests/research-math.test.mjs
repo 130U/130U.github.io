@@ -188,9 +188,8 @@ test("unsupported and malformed TeX fail explicitly instead of producing error a
 
 test("SVG canvases preserve natural glyph scale and baselines with room for accents and labels", async () => {
   assert.equal(RESEARCH_MATH_GUTTER_EM, 0.375);
-  // Frozen from the approved sources at 463b612: science formula 32 and
-  // investment formulas 26–27. Geometry regressions must not depend on an
-  // equation's position in an evolving manuscript.
+  // Science formula 32 and investment formulas 26–27, copied from the manuscripts
+  // so these geometry checks do not depend on an equation's position.
   const fixtures = [
     {
       tex: String.raw`

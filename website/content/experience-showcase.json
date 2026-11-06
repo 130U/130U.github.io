@@ -1,9 +1,5 @@
 {
   "schemaVersion": 1,
-  "sourceDocument": {
-    "fileName": "experience-merged-bilingual.docx",
-    "sha256": "546b14b0efa69a260ef5df962ceb08cb1410826b9b6c832915b1c5bca7ba6f7a"
-  },
   "categories": [
     {
       "id": "01",
@@ -35,7 +31,7 @@
       "id": 1,
       "categoryId": "01",
       "organization": "Duke University × Leading Foundation Model Developer",
-      "summary": "With a leading foundation model developer, I led the statistical system behind expert feedback for LLM post-training, one of the first engineering implementations of prediction-assisted statistical inference and capacity-constrained review allocation in expert data production. It coordinated more than 300 specialists and an external vendor network. Under ideal residual calibration, a synthetic benchmark showed 17.79% lower estimation variance than uniform sampling at equal audit cost.",
+      "summary": "With a leading foundation model developer, I led the statistical system behind expert feedback for LLM post-training, the first engineering implementation of prediction-assisted statistical inference and capacity-constrained review allocation in expert data production. It coordinated more than 300 specialists and an external vendor network, and later programs have reused its design repeatedly.",
       "readMoreLabel": "Read More",
       "detailTitle": "Large-Scale Domain Expert Feedback Governance and Adaptive Review",
       "metadata": {
@@ -45,10 +41,10 @@
       },
       "contributionsLabel": "Key Contributions",
       "keyContributions": [
-        "**Starting in September 2023, I led the development of a collaboration system spanning more than 300 domain experts across several specialties.** Across the project's external expert and vendor networks, I defined the mathematical specifications and operating standards for task organization, reliability calibration, acceptance adjudication and review allocation. These procedures made distributed expert judgments traceable and subject to calibration as post-training feedback. This was among the first engineering implementations of prediction-assisted statistical inference and capacity-constrained review allocation in expert data production.",
+        "**Starting in September 2023, I led the development of a collaboration system spanning more than 300 domain experts across several specialties.** Across the project's external expert and vendor networks, I defined the mathematical specifications and operating standards for task organization, reliability calibration, acceptance adjudication and review allocation. These procedures made distributed expert judgments traceable and subject to calibration as post-training feedback. This was the first engineering implementation of prediction-assisted statistical inference and capacity-constrained review allocation in expert data production, and later programs have reused its design repeatedly.",
         "**I designed tiered review rules from Beta-Binomial reliability posteriors, credible intervals, verified sample counts and task-level risk priors.** In one workflow, a flagged submission was dynamically assigned to three additional specialists, and an initially accepted one went to one or two. The expert adjudications then fed back into the system, updating contributor reliability posteriors, informing targeted coaching and adjusting review intensity.",
         "**I combined independent random reference audits with escalation of high-risk tasks to turn recurring annotator disagreements into explicit acceptance criteria.** I separated missing context from ambiguous instructions and from contributor errors, then revised the task instructions, boundary cases and shared calibration anchors accordingly. Later comparisons of Dawid-Skene reviewer-error models and cost-sensitive deferral rules (DeCCaF) informed the escalation thresholds.",
-        "**I built SQL and Python pipelines that brought together task metadata, review histories, acceptance outcomes, turnaround times and behavioral logs, and reconciled platform activity with Hubstaff operational telemetry.** The allocation solvers took their empirical estimates of unit verification costs ($c_i$), task-stratum latencies ($t_{iaj}$) and hard specialist capacity limits ($H_j^{\\text{review}}$) from these records. I also translated client-reported model defects into reproducible engineering investigations and standard operating procedures.",
+        "**I built SQL and Python pipelines that brought together task metadata, review histories, acceptance outcomes, turnaround times and behavioral logs, and reconciled platform activity with the team's KPI monitoring system.** The allocation solvers took their empirical estimates of unit verification costs ($c_i$), task-stratum latencies ($t_{iaj}$) and hard specialist capacity limits ($H_j^{\\text{review}}$) from these records. I also translated client-reported model defects into reproducible engineering investigations and standard operating procedures.",
         "**I formalized the production procedures by connecting prediction-assisted active statistical inference, cost-aware audit allocation and capacity-constrained review assignment.** For each task I defined an *initial error risk* ($q_i$), the *statistical information value of an independent reference audit* ($m_i / c_i$), and the *expected defect loss removable through additional human handling* ($\\Delta_i = r_{i0} - r_{i1}$). I derived the sampling and review decisions that go with each quantity, which gave a reusable allocation method for expert feedback across domains.",
         "**I tested the estimator and allocation algorithms on a stratified synthetic benchmark of 10,000 submissions, using 200,000 independent Monte Carlo sampling repetitions.** Under ideal residual calibration and an equal expected audit budget, allocating by residuals and costs cut population quality estimation variance by **17.79%** relative to uniform sampling, equivalent to a **9.33%** reduction in standard deviation. In a separate analytical example with 200 tasks, ranking reviews by marginal gain cut expected post-review defect loss by **8.89%** at the same review volume."
       ],
@@ -62,7 +58,7 @@
       "id": 2,
       "categoryId": "01",
       "organization": "Duke University × Leading Foundation Model Developer",
-      "summary": "I designed the data strategy for financial post-training in a frontier foundation model program, one of the first engineering implementations of constraint-preserving synthetic data and structured expert preference supervision for financial LLM post-training. Diagnostic decision tasks, exact accounting constraints and a five-level preference protocol feed Batch Zero, the calibration protocol the company later extended to other post-training programs.",
+      "summary": "I designed the data strategy for financial post-training in a frontier foundation model program, pioneering constraint-preserving synthetic data and structured expert preference supervision for financial LLM post-training in engineering practice. Diagnostic decision tasks, exact accounting constraints and a five-level preference protocol feed Batch Zero, the calibration protocol the company has since reused repeatedly across other post-training programs.",
       "readMoreLabel": "Read More",
       "detailTitle": "Financial Task Design and Synthetic Data Engineering",
       "metadata": {
@@ -72,7 +68,7 @@
       },
       "contributionsLabel": "Key Contributions",
       "keyContributions": [
-        "**Beginning in September 2023, I led financial and business decision task design for a frontier foundation model program, specifying the capability taxonomy, primary evidence standards, input schemas, decisive variables, and acceptance criteria.** The diagnostic cases targeted high-stakes business decision boundaries where foundation models and practitioners repeatedly make errors. They translated doctoral or CFA-level domain judgment into testable task requirements. Together with the synthesis methods and Batch Zero below, this work was among the first engineering implementations of constraint-preserving synthetic data and structured expert preference supervision for financial LLM post-training.",
+        "**Beginning in September 2023, I led financial and business decision task design for a frontier foundation model program, specifying the capability taxonomy, primary evidence standards, input schemas, decisive variables, and acceptance criteria.** The diagnostic cases targeted high-stakes business decision boundaries where foundation models and practitioners repeatedly make errors. They translated doctoral or CFA-level domain judgment into testable task requirements. Together with the synthesis methods and Batch Zero below, this work was the first engineering implementation of constraint-preserving synthetic data and structured expert preference supervision for financial LLM post-training, and the company has since reused it repeatedly.",
         "**I designed a five-level pairwise preference protocol for RLHF and DPO supervision.** It records why an expert prefers one response to another, and that record is how domain knowledge becomes post-training supervision. Each judgment has to cite verifiable evidence, the relevant accounting rules, and the decisive variables. The annotations keep the evidence and reasoning behind each preference and support training models to assess whether a financial judgment has sufficient support.",
         "**I developed financial synthetic data methods for four settings.** For each task I selected a mathematical generator and adapted it to the task's structural invariants, data types, and permitted information:",
         "**I created Batch Zero to implement post-training data strategy.** Starting from the capability objectives and data requirements of post-training research teams, I established a protocol for independent execution and expert calibration that a task family goes through before it enters large-scale data construction. Doctoral-level domain experts independently construct tasks, generate synthetic variants, solve reference cases, and assign five-level pairwise preference scores. The disagreements and failure modes that appear in execution inform revisions to task specifications, boundary cases, and **Batch One** data acceptance criteria. The foundation model company subsequently extended **Batch Zero** to other new post-training programs.",
@@ -99,7 +95,7 @@
       "id": 3,
       "categoryId": "01",
       "organization": "Duke University × Frontier AI Research Laboratory",
-      "summary": "I developed a framework for evaluating and supervising general reasoning with a frontier AI research laboratory, among the first engineering implementations of joint verification across final answers, visible reasoning and execution evidence in frontier model evaluation. Code checks, LLM-as-a-Judge screening and specialist scholars work in three layers. On 3,600 benchmark submissions, certificate checking made no false acceptances, where final-answer matching falsely accepted 75.0%.",
+      "summary": "I developed a framework for evaluating and supervising general reasoning with a frontier AI research laboratory, the first to put joint verification across final answers, visible reasoning and execution evidence into engineering practice for frontier model evaluation. Its three layers of code checks, LLM-as-a-Judge screening and specialist scholars have since been reused repeatedly. In benchmark testing, certificate checking made no false acceptances, where final-answer matching falsely accepted 75.0%.",
       "readMoreLabel": "Read More",
       "detailTitle": "General Reasoning Evaluation and Layered Verification",
       "metadata": {
@@ -109,7 +105,7 @@
       },
       "contributionsLabel": "Key Contributions",
       "keyContributions": [
-        "**I developed a joint evaluation method for answers, visible reasoning, and execution evidence.** Beginning in September 2023, I brought the model's displayed CoT, its actual tool calls and its intermediate outputs into the review workflow. I assessed the validity of conclusions, compliance with task requirements and progress during problem solving as separate dimensions. This was among the first engineering implementations of joint verification across final answers, visible reasoning and execution evidence in frontier model evaluation.",
+        "**I developed a joint evaluation method for answers, visible reasoning, and execution evidence.** Beginning in September 2023, I brought the model's displayed CoT, its actual tool calls and its intermediate outputs into the review workflow. I assessed the validity of conclusions, compliance with task requirements and progress during problem solving as separate dimensions. This was the first engineering implementation of joint verification across final answers, visible reasoning and execution evidence in frontier model evaluation, and its layered design has since been reused repeatedly.",
         "**I organized deliverables into proof-obligation dependency graphs ($\\Gamma_q \\vdash C_q$).** The graphs track domain assumptions, method applicability, evidentiary support, compliant execution, uniform approximation bounds and the strength of each conclusion. They help me locate the first unsupported step and what it affects downstream, and they allow valid alternative derivations. For tasks that admit formalization, checking local nodes and their dependencies within a sound inference system establishes the full conclusion.",
         "**I developed checkable error certificates and bounds on solution quality for programmatically verifiable task families under explicit mathematical assumptions.** The projected-residual optimality bound ($0 \\le f(x) - v^* \\le \\|P_{\\ker A} r\\|_2^2 / (2\\mu)$) splits feasibility, stationarity and the accuracy of a conclusion into separate verification obligations, and different proofs can pass by satisfying the same ones. Section 3 gives the assumptions, certificate construction and problem class.",
         "**I established a division of work among code or rule checks, LLM-assisted screening, and review by scholars with relevant expertise.** Code checks directly verifiable answers, tool permissions and other requirements specified in advance. LLM-as-a-Judge helps flag missing evidence, misapplied rules and gaps in reasoning, and disputed domain judgments go to specialist scholars. I also compare elapsed time, attempt counts, changes in intermediate outputs and the use of tool results to find redundant work and loops without progress, keeping those efficiency findings apart from correctness judgments.",
@@ -136,7 +132,7 @@
       "id": 4,
       "categoryId": "01",
       "organization": "Duke University × Leading Global Alternative Asset Manager",
-      "summary": "I developed and implemented a framework for evidence verification and decision assurance with a leading global alternative asset manager, one of the first engineering implementations in institutional investment research to treat model multiplicity, unverified evidence and the cost of verification jointly. It tells analysts which fact to verify next: in an eight-scenario benchmark, one targeted query cut worst-case regret from 0.61 score units to zero.",
+      "summary": "I developed and implemented a framework for evidence verification and decision assurance with a leading global alternative asset manager, the first engineering implementation in institutional investment research to treat model multiplicity, unverified evidence and the cost of verification jointly, and one that has since been reused repeatedly. It tells analysts which fact to verify next: in benchmark testing, one targeted query cut worst-case regret from 0.61 score units to zero.",
       "readMoreLabel": "Read More",
       "detailTitle": "Evidence Verification and Robust Comparison in Investment Research",
       "metadata": {
@@ -147,7 +143,7 @@
       "contributionsLabel": "Key Contributions",
       "keyContributions": [
         "**I studied what AI-polished corporate narratives do to LLM-assisted scoring, ESG ratings and investment analysis when the claims underneath them lack factual support.** I brought corporate claims, cross-document contradictions and shared reporting errors into a common review process so that verification in private-market and ESG research could be targeted.",
-        "**I turned institutional diligence requirements into measures of score reliability, pairwise ranking stability and verification priority.** The workflow I implemented ingests evidence, scores companies across a Rashomon model set, computes ranking bounds, and allocates verification effort by minimax regret. Each correction triggers rescoring and attribution updates, so the investment committee has a traceable basis for its analysis. This was among the first engineering implementations in institutional investment research to treat model multiplicity, unverified evidence and the cost of verification jointly.",
+        "**I turned institutional diligence requirements into measures of score reliability, pairwise ranking stability and verification priority.** The workflow I implemented ingests evidence, scores companies across a Rashomon model set, computes ranking bounds, and allocates verification effort by minimax regret. Each correction triggers rescoring and attribution updates, so the investment committee has a traceable basis for its analysis. This was the first engineering implementation in institutional investment research to treat model multiplicity, unverified evidence and the cost of verification jointly, and it has since been reused repeatedly.",
         "**I converted operating reports, audited financial statements, sustainability disclosures, management questionnaires and third-party datasets into structured scoring rules that carry source and version records.** AI-assisted checks then pick out unsupported claims and contradictions across documents for targeted factual review.",
         "**I deployed gradient-boosted trees and deep learning models for tabular data to capture nonlinear thresholds and interactions.** SHAP attributions across a near-optimal Rashomon set ($\\mathcal{F}_\\alpha$), read together with conditional Shapley analysis, measure sensitivity to model choice and identify the scoring factors whose contributions stay stable across models.",
         "**I derived failure cases for conventional bootstrap resampling, and for verification priorities based on raw SHAP magnitudes, when inputs contain shared reporting bias or unverified claims.** I represented unresolved evidence $\\mathcal{X}(E)$ jointly with the Rashomon set $\\mathcal{F}_\\alpha$ through $\\Omega(E) = \\mathcal{F}_\\alpha \\times \\mathcal{X}(E)$ and derived convex support-function bounds ($h_U(a_f)$). Common measurement errors cancel when the two companies have identical exposures. In a synthetic comparison, the joint model certified a 0.6-point advantage that the difference bound from separate company intervals ($[-1.4, 2.6]$) could not show.",
@@ -163,25 +159,25 @@
       "id": 5,
       "categoryId": "02",
       "organization": "Jiritsu Network",
-      "summary": "Owned business development for Jiritsu's asset-verification and privacy-preserving computation services as the sole dedicated contributor for new issuers. Reported directly to a co-founder, combining data engineering, preference ranking, and counterparty discussions to develop partnership recommendations for the board.",
+      "summary": "I built the data and ranking system behind Jiritsu's partnerships for its asset-verification and privacy-preserving computation services, as the sole dedicated contributor for new issuers. Reporting directly to a co-founder, I combined data engineering, preference ranking, and counterparty discussions to develop partnership recommendations for the board.",
       "readMoreLabel": "Read More",
       "detailTitle": "Asset-Verification Partnerships and Issuer Ranking",
       "metadata": {
-        "position": "Business Development and Business Analytics (Full-time)",
+        "position": "Data Scientist (Full-Time)",
         "location": "Los Angeles, California (Remote)",
         "dates": "August 2024 – October 2025"
       },
       "contributionsLabel": "Key Contributions",
       "keyContributions": [
-        "Served as the sole dedicated contributor to business development for new issuers, reporting to co-founder Asher Gottesman. Turned commercialization priorities into screening criteria, experiments, data requirements, and outreach plans; independently managed analysis, counterparty discussions, and recommendations.",
-        "Organized core-team reviews with commercial input from Asher Gottesman and technical and financial guidance from Gene Itkis of MIT Lincoln Laboratory and Michael Lustig, former Senior Managing Director at BlackRock and Adjunct Professor of Finance at NYU Stern. Assessed applied cryptography, zero-knowledge applications, technical fit, liquidity, and risk.",
-        "Designed a two-stage framework for real-world assets, stablecoins, DeFi, and infrastructure: test identity, liquidity, pricing validity, data completeness, and risk, then rank commercial fit and accessibility. Used issuer-level error analysis to refine qualification rules, exclude out-of-scope projects, and record evidence-backed reasons for each decision.",
-        "Resolved issuer identities across CoinGecko, chain records, websites, white papers, and disclosures. Reconciled multichain listings and wrapped or bridged assets to remove duplicate opportunities. Built market and text features spanning liquidity, capitalization, activity, project age, chain affiliation, business models, and technical needs.",
-        "Built a Python, Prefect, DuckDB, and Parquet pipeline for ingestion, standardization, entity mapping, feature preparation, and querying. Implemented scheduled refreshes, retries, persisted outputs, reruns, and historical backfills to support model training and repeatable shortlist updates.",
-        "Trained a LightGBM pairwise ranking model on the core team's comparisons of eligible counterparties. Combined commercial, disclosure, and market features to prioritize approximately 800 potential partners. Repeated comparison, retraining, and ranking over two to four weeks, using uncertainty sampling to focus expert review on borderline candidates, near ties, and conflicting evidence.",
-        "Applied issuer similarity analysis and Leiden community detection to discover overlooked projects with related business or technical characteristics, then brought qualified candidates into commercial review and ranking.",
-        "Led Codex-assisted solution design and Python development. Used meta prompting and ChatGPT deep research to translate business objectives into analytical plans and development specifications; selected methods, debugged workflows, and verified issuer-level outputs and selection rationales.",
-        "Screened 18,000+ token records into approximately 800 potential counterparties, 30 outreach priorities, and six proposed pilot counterparties. Discussed asset-verification needs, service arrangements, and technology licensing with prospects, and delivered the candidate list and commercial assessments to the board for technical and business evaluation."
+        "I was the sole dedicated contributor to business development for new issuers, reporting to co-founder Asher Gottesman. I turned commercialization priorities into screening criteria, experiments, data requirements, and outreach plans, and independently managed analysis, counterparty discussions, and recommendations.",
+        "I organized core-team reviews with commercial input from Asher Gottesman and technical and financial guidance from Gene Itkis of MIT Lincoln Laboratory and Michael Lustig, former Senior Managing Director at BlackRock and Adjunct Professor of Finance at NYU Stern. In these reviews, I assessed applied cryptography, zero-knowledge applications, technical fit, liquidity, and risk.",
+        "I designed a two-stage framework for real-world assets, stablecoins, DeFi, and infrastructure: it tests identity, liquidity, pricing validity, data completeness, and risk, then ranks commercial fit and accessibility. I used issuer-level error analysis to refine qualification rules, exclude out-of-scope projects, and record evidence-backed reasons for each decision.",
+        "I resolved issuer identities across CoinGecko, chain records, websites, white papers, and disclosures, and reconciled multichain listings and wrapped or bridged assets to remove duplicate opportunities. I then built market and text features spanning liquidity, capitalization, activity, project age, chain affiliation, business models, and technical needs.",
+        "I built a Python, Prefect, DuckDB, and Parquet pipeline for ingestion, standardization, entity mapping, feature preparation, and querying, with scheduled refreshes, retries, persisted outputs, reruns, and historical backfills to support model training and repeatable shortlist updates.",
+        "I trained a LightGBM pairwise ranking model on the core team's comparisons of eligible counterparties, combining commercial, disclosure, and market features to prioritize approximately 800 potential partners. I repeated comparison, retraining, and ranking over two to four weeks, using uncertainty sampling to focus expert review on borderline candidates, near ties, and conflicting evidence.",
+        "I applied issuer similarity analysis and Leiden community detection to discover overlooked projects with related business or technical characteristics, then brought qualified candidates into commercial review and ranking.",
+        "I led Codex-assisted solution design and Python development, using meta prompting and ChatGPT deep research to translate business objectives into analytical plans and development specifications. I selected methods, debugged workflows, and verified issuer-level outputs and selection rationales.",
+        "I screened 18,000+ token records into approximately 800 potential counterparties, 30 outreach priorities, and six proposed pilot counterparties. I discussed asset-verification needs, service arrangements, and technology licensing with prospects, and delivered the candidate list and commercial assessments to the board for technical and business evaluation."
       ],
       "notes": []
     },
@@ -189,23 +185,23 @@
       "id": 6,
       "categoryId": "02",
       "organization": "Euromonitor International",
-      "summary": "Led the China workstream of a global market-entry engagement covering China, Japan, and the Middle East for a premium European appliance brand. Combined market data, consumer evidence, and policy research to recommend local products, pricing, channels, and marketing while maintaining the client's global positioning.",
+      "summary": "I led the China workstream of a global market-entry engagement covering China, Japan, and the Middle East for a premium European appliance brand. I analyzed approximately 50,000 e-commerce listings alongside consumer evidence and policy research to recommend local products, pricing, channels, and marketing while maintaining the client's global positioning.",
       "readMoreLabel": "Read More",
       "detailTitle": "China Market Entry for a Premium European Appliance Brand",
       "metadata": {
-        "position": "Consulting Intern",
+        "position": "Data Analyst Intern",
         "location": "Shanghai, China",
         "dates": "September 2021 – May 2022"
       },
       "contributionsLabel": "Key Contributions",
       "keyContributions": [
-        "Built a MECE analytical framework spanning product fit, pricing, channels, marketing, and policy. Defined which elements of the client's premium positioning should remain consistent globally and where the China strategy required local adaptation.",
-        "Specified data requirements across five e-commerce platforms and seven appliance categories, coordinating with data scientists on collection and local analysts on validation. Owned downstream processing and interpretation of approximately 50,000 listings in Python, standardizing attributes, efficiency labels, prices, promotions, and reviews while preserving channel-specific observations.",
-        "Mapped competitors in Tableau by category, price band, efficiency, and features. Combined product comparisons with consumer reviews to identify relatively underserved segments, including high-efficiency products at mid- to high-price points, and assessed opportunities in tier-1 and tier-2 cities.",
-        "Evaluated the European portfolio against Chinese usage needs, product dimensions, and efficiency requirements. Recommended local assortments and compared the brand's website, e-commerce, physical retail, and channel partnerships, incorporating Xiaohongshu and Douyin into marketing analysis.",
-        "Researched efficiency standards, subsidies, certification, and market access through published sources and expert interviews, including think-tank discussions. Built entry scenarios by category and city tier, translating current requirements and expected policy changes into product-introduction and timing recommendations.",
-        "Delivered the China market report and represented the workstream in global project meetings. Presented the evidence behind product, pricing, channel, and marketing recommendations; coordinated green-product definitions and policy assumptions. Documented field mappings and processing rules in a reusable template for subsequent regional analysis.",
-        "Received a full-time offer from Euromonitor's consulting team during the internship."
+        "I built a MECE analytical framework spanning product fit, pricing, channels, marketing, and policy, defining which elements of the client's premium positioning should remain consistent globally and where the China strategy required local adaptation.",
+        "I specified data requirements across five e-commerce platforms and seven appliance categories, coordinating with data scientists on collection and local analysts on validation. I owned downstream processing and interpretation of approximately 50,000 listings in Python, standardizing attributes, efficiency labels, prices, promotions, and reviews while preserving channel-specific observations.",
+        "I mapped competitors in Tableau by category, price band, efficiency, and features. Combining product comparisons with consumer reviews, I identified relatively underserved segments, including high-efficiency products at mid- to high-price points, and assessed opportunities in tier-1 and tier-2 cities.",
+        "I evaluated the European portfolio against Chinese usage needs, product dimensions, and efficiency requirements. I recommended local assortments and compared the brand's website, e-commerce, physical retail, and channel partnerships, incorporating Xiaohongshu and Douyin into marketing analysis.",
+        "I researched efficiency standards, subsidies, certification, and market access through published sources and expert interviews, including think-tank discussions. I built entry scenarios by category and city tier, translating current requirements and expected policy changes into product-introduction and timing recommendations.",
+        "I delivered the China market report and represented the workstream in global project meetings, presenting the evidence behind product, pricing, channel, and marketing recommendations and coordinating green-product definitions and policy assumptions. I documented field mappings and processing rules in a reusable template for subsequent regional analysis.",
+        "I received a full-time offer from Euromonitor's consulting team during the internship."
       ],
       "notes": []
     },
@@ -213,7 +209,7 @@
       "id": 7,
       "categoryId": "02",
       "organization": "China Construction Bank",
-      "summary": "Applied statistical methods to sustainability assessment and green-credit screening within China Construction Bank's internal framework. Combined company data, historical assessments, and explicit eligibility rules to support candidate review, then documented the method for product managers and risk officers evaluating its use on a platform.",
+      "summary": "I applied statistical methods to sustainability assessment and green-credit screening within China Construction Bank's internal framework. I combined company data, historical assessments, and explicit eligibility rules to support candidate review, then documented the method for product managers and risk officers evaluating its use on a platform.",
       "readMoreLabel": "Read More",
       "detailTitle": "PCA-Based Sustainability Analysis and Green-Credit Screening",
       "metadata": {
@@ -223,12 +219,12 @@
       },
       "contributionsLabel": "Key Contributions",
       "keyContributions": [
-        "Analyzed financial, operational, and environmental data for approximately 2,000 entities within CCB's framework of more than 30 indicators, assessing overall scores alongside minimum requirements for individual metrics.",
-        "Used PCA to identify overlapping indicator information and construct compact representations for candidate comparison. Applied supervised learning to historically labeled cases, examining feature patterns associated with positive and negative assessments and adding empirical evidence to candidate assessment.",
-        "Incorporated life cycle assessment principles into sustainability analysis, examining operating and environmental factors alongside financial performance.",
-        "Tested the initial top 30% of ranked candidates against individual-metric and overall-score minimums, retaining approximately 28% of the full pool for further research and review.",
-        "Reviewed selection and exclusion patterns across the pool, separating ranking cutoffs from threshold failures. Converted borderline cases, unmet requirements, and follow-up questions into a reusable checklist linked to the applicable screening rules.",
-        "Delivered a methodology note explaining scoring logic, data sources, model behavior, and edge cases to product managers and risk officers assessing the method for platform use."
+        "I analyzed financial, operational, and environmental data for approximately 2,000 entities within CCB's framework of more than 30 indicators, assessing overall scores alongside minimum requirements for individual metrics.",
+        "I used PCA to identify overlapping indicator information and construct compact representations for candidate comparison. I applied supervised learning to historically labeled cases, examining feature patterns associated with positive and negative assessments and adding empirical evidence to candidate assessment.",
+        "I incorporated life cycle assessment principles into sustainability analysis, examining operating and environmental factors alongside financial performance.",
+        "I tested the initial top 30% of ranked candidates against individual-metric and overall-score minimums, retaining approximately 28% of the full pool for further research and review.",
+        "I reviewed selection and exclusion patterns across the pool, separating ranking cutoffs from threshold failures, and converted borderline cases, unmet requirements, and follow-up questions into a reusable checklist linked to the applicable screening rules.",
+        "I delivered a methodology note explaining scoring logic, data sources, model behavior, and edge cases to product managers and risk officers assessing the method for platform use."
       ],
       "notes": []
     },
@@ -246,11 +242,11 @@
       },
       "contributionsLabel": "Key Contributions",
       "keyContributions": [
-        "Specified a two-threshold decision procedure linking legal authority, evidence for delegation, and the time at which human review can still change the outcome. Distinguished individual approval, advance-constrained action, and fallback behavior as separate supervisory choices.",
-        "Designed a task-specific authorization record specifying responsible actors, permitted actions, operating conditions, exposed interests, and reassessment triggers. Connected these terms to independent scrutiny and event records that allow consequential decisions to be reconstructed.",
-        "Compared delayed spacecraft operations and orbital avoidance against existing automation and ground review. Analyzed how latency, uncertain trajectories, simultaneous maneuvers, and failed coordination affect delegation and redistribute risk among operators.",
-        "Used debris capture and SETI to distinguish technical capability from permission to affect another party's interests or confirm a scientific interpretation. Proposed scientific verification through alternative explanations, independent observations, and documented evidence.",
-        "Integrated review delays, compliance costs, disclosure risks, and correlated failures into the proposed controls. Developed proportionate reassessment around material changes, reusable evidence, and legally competent institutions, making the burdens of supervision part of the authorization decision."
+        "I specified a two-threshold decision procedure linking legal authority, evidence for delegation, and the time at which human review can still change the outcome, distinguishing individual approval, advance-constrained action, and fallback behavior as separate supervisory choices.",
+        "I designed a task-specific authorization record specifying responsible actors, permitted actions, operating conditions, exposed interests, and reassessment triggers, and connected these terms to independent scrutiny and event records that allow consequential decisions to be reconstructed.",
+        "I compared delayed spacecraft operations and orbital avoidance against existing automation and ground review, analyzing how latency, uncertain trajectories, simultaneous maneuvers, and failed coordination affect delegation and redistribute risk among operators.",
+        "I used debris capture and SETI to distinguish technical capability from permission to affect another party's interests or confirm a scientific interpretation, and proposed scientific verification through alternative explanations, independent observations, and documented evidence.",
+        "I integrated review delays, compliance costs, disclosure risks, and correlated failures into the proposed controls. I developed proportionate reassessment around material changes, reusable evidence, and legally competent institutions, making the burdens of supervision part of the authorization decision."
       ],
       "notes": []
     },
@@ -268,11 +264,11 @@
       },
       "contributionsLabel": "Key Contributions",
       "keyContributions": [
-        "Built a structured comparison around specific public functions and the decisions needed to perform them, defining practical autonomy as the capacity to make and implement a specified lawful public decision. Examined external dependencies, legal and operational rights, domestic capability, and documented outcomes to assess whether retained authority could support an actual public decision.",
-        "Identified distinct mechanisms in the three cases: retained launch-permission authority in New Zealand, operational capability through divided responsibilities in Norway, and the planning and legislative information required alongside asset ownership in Luxembourg.",
-        "Proposed an accountable-acceptance standard requiring decision makers to identify who can interrupt essential services, which information and rights permit a response, and what funded capacity enables action. Material gaps would require reasoned acceptance or revision before commitment.",
-        "Translated the standard into proposed licensing and procurement terms covering operator information, significant changes, suspension, recovery, and service transition. Connected these terms to lifetime costs, technical staffing, and timely legislative scrutiny of financial commitments.",
-        "Analyzed collective agency through anti-satellite-testing commitments, UN consensus procedures, and ESA programme and voting rules. Distinguished participation rights, influence, and implementation capacity, connecting national safeguards to collective restraint on debris and cross-border service disruption."
+        "I built a structured comparison around specific public functions and the decisions needed to perform them, defining practical autonomy as the capacity to make and implement a specified lawful public decision. I examined external dependencies, legal and operational rights, domestic capability, and documented outcomes to assess whether retained authority could support an actual public decision.",
+        "I identified distinct mechanisms in the three cases: retained launch-permission authority in New Zealand, operational capability through divided responsibilities in Norway, and the planning and legislative information required alongside asset ownership in Luxembourg.",
+        "I proposed an accountable-acceptance standard requiring decision makers to identify who can interrupt essential services, which information and rights permit a response, and what funded capacity enables action. Material gaps would require reasoned acceptance or revision before commitment.",
+        "I translated the standard into proposed licensing and procurement terms covering operator information, significant changes, suspension, recovery, and service transition, and connected these terms to lifetime costs, technical staffing, and timely legislative scrutiny of financial commitments.",
+        "I analyzed collective agency through anti-satellite-testing commitments, UN consensus procedures, and ESA programme and voting rules. I distinguished participation rights, influence, and implementation capacity, connecting national safeguards to collective restraint on debris and cross-border service disruption."
       ],
       "notes": []
     },
@@ -290,11 +286,11 @@
       },
       "contributionsLabel": "Key Contributions",
       "keyContributions": [
-        "Separated historical climate conditions, a future without stratospheric aerosol injection, and feasible policy portfolios as distinct comparators. Analyzed how baseline selection, welfare measures, and distributional assumptions shape the case for intervention and the burdens assigned to exposed populations.",
-        "Proposed a comparative justification duty requiring proponents to defend alternatives, disclose distributional choices, and answer substantiated objections. Designed powers for independently selected representatives of exposed constituencies to demand redesign or withhold collective approval.",
-        "Developed a continuity duty separating program control, operator choice, and the cooling trajectory. Specified bounded interim succession, independent monitoring, transition finance, and gradual withdrawal so that political authority can change without automatically triggering abrupt physical cessation.",
-        "Mapped environmental assessment, notification, and consultation requirements onto the authorization problem. Distinguished limited research from climate-affecting deployment and proposed scrutiny based on expected effects and cumulative scale, including review of related projects together.",
-        "Formulated a priority rule for serious threats to subsistence and survival, requiring comparison of feasible alternatives, shared authorization, and credible relief. Built periodic reassessment of forgone benefits and harms of nondeployment into the same decision process."
+        "I separated historical climate conditions, a future without stratospheric aerosol injection, and feasible policy portfolios as distinct comparators, and analyzed how baseline selection, welfare measures, and distributional assumptions shape the case for intervention and the burdens assigned to exposed populations.",
+        "I proposed a comparative justification duty requiring proponents to defend alternatives, disclose distributional choices, and answer substantiated objections, and designed powers for independently selected representatives of exposed constituencies to demand redesign or withhold collective approval.",
+        "I developed a continuity duty separating program control, operator choice, and the cooling trajectory. It specifies bounded interim succession, independent monitoring, transition finance, and gradual withdrawal so that political authority can change without automatically triggering abrupt physical cessation.",
+        "I mapped environmental assessment, notification, and consultation requirements onto the authorization problem. I distinguished limited research from climate-affecting deployment and proposed scrutiny based on expected effects and cumulative scale, including review of related projects together.",
+        "I formulated a priority rule for serious threats to subsistence and survival, requiring comparison of feasible alternatives, shared authorization, and credible relief, and built periodic reassessment of forgone benefits and harms of nondeployment into the same decision process."
       ],
       "notes": []
     },
@@ -312,11 +308,11 @@
       },
       "contributionsLabel": "Key Contributions",
       "keyContributions": [
-        "Organized the legal comparison around habitat protection, repair, and compensation for new loss. Traced duties, approval instruments, and administrative powers across Florida, mainland China, Shenzhen, Hong Kong, and Macao to identify how restoration conditions can take legal effect.",
-        "Used West Lake to examine hydrological rehabilitation and Deep Bay and San Tin to assess functional replacement. Distinguished canopy growth, construction, and predicted enhancement from evidence supporting compensation, including additionality and the timing of replacement functions.",
-        "Proposed staged approval and acceptance separating engineering completion from ecological performance. Specified site baselines, functional objectives, monitoring periods, seasonal coverage, and review authority, linking damaging development phases to the availability of the functions used to justify them.",
-        "Designed arrangements for delayed or failed recovery through funded monitoring, correction, and continuing management. Distinguished contractor performance from ecological uncertainty, and examined retention, financial security, and public budget commitments as instruments for sustaining corrective work.",
-        "Linked ecological evidence to fund release, discharge of responsibility, and development permission. Proposed smaller footprints, revised sequencing, alternative sites, or refusal to credit compensation where promised functions lack credible replacement, while allowing proportionate trials in degraded habitats."
+        "I organized the legal comparison around habitat protection, repair, and compensation for new loss, tracing duties, approval instruments, and administrative powers across Florida, mainland China, Shenzhen, Hong Kong, and Macao to identify how restoration conditions can take legal effect.",
+        "I used West Lake to examine hydrological rehabilitation and Deep Bay and San Tin to assess functional replacement, distinguishing canopy growth, construction, and predicted enhancement from evidence supporting compensation, including additionality and the timing of replacement functions.",
+        "I proposed staged approval and acceptance separating engineering completion from ecological performance. I specified site baselines, functional objectives, monitoring periods, seasonal coverage, and review authority, linking damaging development phases to the availability of the functions used to justify them.",
+        "I designed arrangements for delayed or failed recovery through funded monitoring, correction, and continuing management. I distinguished contractor performance from ecological uncertainty and examined retention, financial security, and public budget commitments as instruments for sustaining corrective work.",
+        "I linked ecological evidence to fund release, discharge of responsibility, and development permission, proposing smaller footprints, revised sequencing, alternative sites, or refusal to credit compensation where promised functions lack credible replacement, while allowing proportionate trials in degraded habitats."
       ],
       "notes": []
     },
@@ -324,7 +320,7 @@
       "id": 12,
       "categoryId": "04",
       "organization": "Jones Lang LaSalle Capital Markets Team",
-      "summary": "Served as the project team's ESG lead on acquisition advisory for a Southeast Asian conglomerate seeking Chinese office properties. Worked with JLL's internal ESG team to connect asset screening, property valuation, and site-level diligence with the client's investment requirements and potential refurbishment or repositioning plans.",
+      "summary": "I served as the project team's ESG lead on acquisition advisory for a Southeast Asian conglomerate seeking Chinese office properties. Working with JLL's internal ESG team, I connected asset screening, property valuation, and site-level diligence with the client's investment requirements and potential refurbishment or repositioning plans.",
       "readMoreLabel": "Read More",
       "detailTitle": "Office Investment Underwriting and ESG Due Diligence",
       "metadata": {
@@ -334,13 +330,13 @@
       },
       "contributionsLabel": "Key Contributions",
       "keyContributions": [
-        "Screened 22 cities across four investable regions against client preferences, preliminary budgets, market liquidity, and institutional-grade office stock. Narrowed the search to 20 assets in Beijing, Shanghai, Guangzhou, Shenzhen, and Chengdu.",
-        "Developed a GRESB-informed desktop screen with approximately 40 ESG and operating indicators, coordinating with JLL's internal ESG team. Flagged environmental, operating, and capital-expenditure concerns that excluded approximately 40% of candidates before full valuation and due diligence.",
-        "Structured diligence across management, performance, and development: ownership and SPV transparency, policy coverage, compliance, safety, and 12 months of continuous operating records. Benchmarked energy, carbon, water, waste, certifications, and upgrades against comparable properties matched by city, submarket, vintage, and building systems.",
-        "Assessed upgrade, refurbishment, and extension risks through capital-expenditure and cash-flow analysis. Used equipment age, chiller efficiency, building-management systems, sub-metering, air monitoring, and maintenance records as proxies where utility data were unavailable. Converted findings into red, amber, and green signals and asset-specific diligence priorities.",
-        "Underwrote shortlisted properties using discounted cash flow, replacement cost, and comparable transactions, incorporating operating conditions and upgrade requirements into valuation assumptions, cash-flow scenarios, and exit-risk assessments.",
-        "Built ten dashboards in Excel, Python, and Tableau to compare market fundamentals, valuations, ESG indicators, and scenario exposures across cities, assets, and the investment pipeline.",
-        "Led bilingual briefings for capital-markets leadership and client managers, shaped site-visit sequencing and ESG questions, and delivered standardized asset books covering tenant concentration, weighted average lease expiry, vacancy, rents, operating costs, valuation models, and diligence findings."
+        "I screened 22 cities across four investable regions against client preferences, preliminary budgets, market liquidity, and institutional-grade office stock, narrowing the search to 20 assets in Beijing, Shanghai, Guangzhou, Shenzhen, and Chengdu.",
+        "I developed a GRESB-informed desktop screen with approximately 40 ESG and operating indicators, coordinating with JLL's internal ESG team. It flagged environmental, operating, and capital-expenditure concerns that excluded approximately 40% of candidates before full valuation and due diligence.",
+        "I structured diligence across management, performance, and development: ownership and SPV transparency, policy coverage, compliance, safety, and 12 months of continuous operating records. I benchmarked energy, carbon, water, waste, certifications, and upgrades against comparable properties matched by city, submarket, vintage, and building systems.",
+        "I assessed upgrade, refurbishment, and extension risks through capital-expenditure and cash-flow analysis, using equipment age, chiller efficiency, building-management systems, sub-metering, air monitoring, and maintenance records as proxies where utility data were unavailable. I converted findings into red, amber, and green signals and asset-specific diligence priorities.",
+        "I underwrote shortlisted properties using discounted cash flow, replacement cost, and comparable transactions, incorporating operating conditions and upgrade requirements into valuation assumptions, cash-flow scenarios, and exit-risk assessments.",
+        "I built ten dashboards in Excel, Python, and Tableau to compare market fundamentals, valuations, ESG indicators, and scenario exposures across cities, assets, and the investment pipeline.",
+        "I led bilingual briefings for capital-markets leadership and client managers, shaped site-visit sequencing and ESG questions, and delivered standardized asset books covering tenant concentration, weighted average lease expiry, vacancy, rents, operating costs, valuation models, and diligence findings."
       ],
       "notes": []
     },
@@ -348,7 +344,7 @@
       "id": 13,
       "categoryId": "04",
       "organization": "Hubble Network",
-      "summary": "Led shipping, logistics, and industrial asset-tracking research for Hubble's Bluetooth satellite commercialization through a Duke Practicum. Assessed where the technology's cost, accuracy, power consumption, and periodic reporting capabilities matched customer needs, translating technical and market evidence into recommendations for early applications.",
+      "summary": "Through a Duke Practicum, I led shipping, logistics, and industrial asset-tracking research for Hubble's Bluetooth satellite commercialization. I assessed where the technology's cost, accuracy, power consumption, and periodic reporting capabilities matched customer needs, translating technical and market evidence into recommendations for early applications.",
       "readMoreLabel": "Read More",
       "detailTitle": "Bluetooth Satellite Commercialization and Market Selection",
       "metadata": {
@@ -358,11 +354,11 @@
       },
       "contributionsLabel": "Key Contributions",
       "keyContributions": [
-        "Led the shipping, logistics, and industrial tracking workstreams after Hubble's $20 million Series A and before its first satellite launches. Helped refocus the go-to-market brief on vertical-market selection, organizing opportunity scans, elimination criteria, detailed assessment, market sizing, and prioritization.",
-        "Translated stakeholder objectives, company cost data, and technical parameters into application assessments. Compared customer needs, incumbent solutions, accuracy, power consumption, and reporting frequency to identify promising uses for periodic location tracking.",
-        "Prepared and conducted workstream interviews through Duke Pratt's alumni network, including sales professionals. Contributed to a team research program covering approximately 20 fields, typically two or three alumni per field, and more than 100 hours of expert interviews.",
-        "Triangulated Fuqua business databases, official statistics, industry reports, competitor research, and interviews. Applied SWOT and PESTLE and contributed market-sizing models, scenario forecasts, and sensitivity analyses to compare priority applications.",
-        "Integrated workstream findings into the team's evaluation of approximately 20 use cases, five recommended market directions, and 100-page strategy report. Presented conclusions to management and the board, explaining market attractiveness, competition, and the requirements for commercialization."
+        "I led the shipping, logistics, and industrial tracking workstreams after Hubble's $20 million Series A and before its first satellite launches, and helped refocus the go-to-market brief on vertical-market selection by organizing opportunity scans, elimination criteria, detailed assessment, market sizing, and prioritization.",
+        "I translated stakeholder objectives, company cost data, and technical parameters into application assessments, comparing customer needs, incumbent solutions, accuracy, power consumption, and reporting frequency to identify promising uses for periodic location tracking.",
+        "I prepared and conducted workstream interviews through Duke Pratt's alumni network, including sales professionals, contributing to a team research program covering approximately 20 fields, typically two or three alumni per field, and more than 100 hours of expert interviews.",
+        "I triangulated Fuqua business databases, official statistics, industry reports, competitor research, and interviews, applying SWOT and PESTLE and contributing market-sizing models, scenario forecasts, and sensitivity analyses to compare priority applications.",
+        "I integrated workstream findings into the team's evaluation of approximately 20 use cases, five recommended market directions, and 100-page strategy report, and presented conclusions to management and the board, explaining market attractiveness, competition, and the requirements for commercialization."
       ],
       "notes": []
     },
@@ -370,7 +366,7 @@
       "id": 14,
       "categoryId": "04",
       "organization": "SAIF Partners",
-      "summary": "Owned public-data research and governance screening for a Greater China dental-investment theme. Worked with the VP and investment team to prioritize subsectors and candidates, then translated governance concerns into investment recommendations, management questions, and on-site diligence priorities.",
+      "summary": "I owned public-data research and governance screening for a Greater China dental-investment theme. Working with the VP and investment team, I prioritized subsectors and candidates, then translated governance concerns into investment recommendations, management questions, and on-site diligence priorities.",
       "readMoreLabel": "Read More",
       "detailTitle": "Dental Investment Research and Governance Due Diligence",
       "metadata": {
@@ -380,12 +376,12 @@
       },
       "contributionsLabel": "Key Contributions",
       "keyContributions": [
-        "Reconciled approximately 2,000 funding cases and 200 regulatory items from about 20 sources, including CVSource, industry reporting, and corporate registries. Deduplicated rounds and standardized entities, subsectors, dates, financing classifications, and currencies, producing 600+ deals and 120–150 actionable regulatory events.",
-        "Owned funding-flow, regulatory, industry-structure, and competitive research. Compared orthodontic aligner brands, private dental chains, equipment suppliers, and digital and SaaS providers to inform subsector prioritization.",
-        "Worked with the VP and investment team to narrow a longlist of 100+ targets to more than ten candidates. Profiled financing histories, valuation ranges, and investor bases, and assigned pass, watch, or exclude recommendations with regulatory, reputational, shareholder, and supplier-risk flags.",
-        "Converted MSCI Corporate Governance and Corporate Behavior topics into ten subcategories and 33 diligence checks covering control complexity, related-party exposure, disclosure, audit quality, and business ethics.",
-        "Authored pass, conditional, and deny memoranda to guide diligence depth and valuation discussions. Specified evidence requirements and management questions for governance issues requiring further investigation.",
-        "Presented governance and risk findings to partners, prompting two management meetings and additional auditor-tenure checks. Identified accounting and related-party concerns in two finalists and translated them into management questions and on-site diligence priorities."
+        "I reconciled approximately 2,000 funding cases and 200 regulatory items from about 20 sources, including CVSource, industry reporting, and corporate registries. I deduplicated rounds and standardized entities, subsectors, dates, financing classifications, and currencies, producing 600+ deals and 120–150 actionable regulatory events.",
+        "I owned funding-flow, regulatory, industry-structure, and competitive research, comparing orthodontic aligner brands, private dental chains, equipment suppliers, and digital and SaaS providers to inform subsector prioritization.",
+        "I worked with the VP and investment team to narrow a longlist of 100+ targets to more than ten candidates. I profiled financing histories, valuation ranges, and investor bases, and assigned pass, watch, or exclude recommendations with regulatory, reputational, shareholder, and supplier-risk flags.",
+        "I converted MSCI Corporate Governance and Corporate Behavior topics into ten subcategories and 33 diligence checks covering control complexity, related-party exposure, disclosure, audit quality, and business ethics.",
+        "I authored pass, conditional, and deny memoranda to guide diligence depth and valuation discussions, specifying evidence requirements and management questions for governance issues requiring further investigation.",
+        "I presented governance and risk findings to partners, prompting two management meetings and additional auditor-tenure checks. I identified accounting and related-party concerns in two finalists and translated them into management questions and on-site diligence priorities."
       ],
       "notes": []
     },
@@ -393,7 +389,7 @@
       "id": 15,
       "categoryId": "04",
       "organization": "CITIC Securities",
-      "summary": "Supported the Agriculture Research Group's sector analysis and research-report work, contributing evidence for internal investment-strategy discussions.",
+      "summary": "I supported the Agriculture Research Group's sector analysis and research-report work, contributing evidence for internal investment-strategy discussions.",
       "readMoreLabel": "Read More",
       "detailTitle": "Agriculture Equity Research and Valuation",
       "metadata": {
@@ -403,7 +399,7 @@
       },
       "contributionsLabel": "Key Contributions",
       "keyContributions": [
-        "Compiled sector datasets and stress-tested valuation assumptions. Synthesized market and trading commentary for internal investment-strategy discussions, connecting industry evidence with the team's evaluation of investment cases and research-report collaboration."
+        "I compiled sector datasets and stress-tested valuation assumptions, and synthesized market and trading commentary for internal investment-strategy discussions, connecting industry evidence with the team's evaluation of investment cases and research-report collaboration."
       ],
       "notes": []
     },
@@ -411,7 +407,7 @@
       "id": 16,
       "categoryId": "04",
       "organization": "EY-Parthenon",
-      "summary": "Supported a digital-transformation engagement for a leading Chinese company preparing to list, with a focus on business-line restructuring.",
+      "summary": "I supported a digital-transformation engagement for a leading Chinese company preparing to list, with a focus on business-line restructuring.",
       "readMoreLabel": "Read More",
       "detailTitle": "Business-Line Restructuring for Digital Transformation",
       "metadata": {
@@ -421,7 +417,7 @@
       },
       "contributionsLabel": "Key Contributions",
       "keyContributions": [
-        "Contributed to the team's review and restructuring of business lines, helping improve visibility into operations and supplying inputs for cost and efficiency analysis."
+        "I contributed to the team's review and restructuring of business lines, helping improve visibility into operations and supplying inputs for cost and efficiency analysis."
       ],
       "notes": []
     },
@@ -429,7 +425,7 @@
       "id": 17,
       "categoryId": "05",
       "organization": "Independent STEM Olympiad Training Practice",
-      "summary": "Independently coached students preparing for advanced physics Olympiads through online and in-person instruction, combining subject teaching with competition problem-solving practice.",
+      "summary": "I independently coached students preparing for advanced physics Olympiads through online and in-person instruction, combining subject teaching with competition problem-solving practice.",
       "readMoreLabel": "Read More",
       "detailTitle": "Advanced Physics Olympiad Instruction",
       "metadata": {
@@ -439,8 +435,8 @@
       },
       "contributionsLabel": "Key Contributions",
       "keyContributions": [
-        "Coached multiple students participating in USAPhO and U.S. Physics Team selection, developing rigorous derivations, clearly structured written solutions, and problem-solving methods suited to competition time constraints.",
-        "Delivered online and in-person IPhO-level training camps in mechanics, electromagnetism, thermodynamics, optics, modern physics, and advanced mathematical methods."
+        "I coached multiple students participating in USAPhO and U.S. Physics Team selection, developing rigorous derivations, clearly structured written solutions, and problem-solving methods suited to competition time constraints.",
+        "I delivered online and in-person IPhO-level training camps in mechanics, electromagnetism, thermodynamics, optics, modern physics, and advanced mathematical methods."
       ],
       "notes": []
     },
@@ -448,7 +444,7 @@
       "id": 18,
       "categoryId": "05",
       "organization": "The High School Attached to Hunan Normal University",
-      "summary": "Trained in physics and mathematics Olympiads and served as a peer mentor in the school's nationally leading physics competition program, combining advanced study with collaborative problem solving.",
+      "summary": "I trained in physics and mathematics Olympiads and served as a peer mentor in the school's nationally leading physics competition program, combining advanced study with collaborative problem solving.",
       "readMoreLabel": "Read More",
       "detailTitle": "Advanced Olympiad Training, Awards, and Peer Mentoring",
       "metadata": {
@@ -458,10 +454,10 @@
       },
       "contributionsLabel": "Key Contributions",
       "keyContributions": [
-        "Mentored teammates in mechanics and electromagnetism study groups, working through advanced problems and explaining the derivations behind solution methods. Presented findings to the full competition team, sharing methods developed through individual study and collaborative discussion.",
-        "Earned provincial- and national-level competition awards across physics and mathematics Olympiads.",
-        "Completed intensive training in mechanics, electromagnetism, thermodynamics, optics, and modern physics, including undergraduate-level classical mechanics, electrodynamics, statistical physics, and quantum mechanics.",
-        "Studied mathematical analysis, linear algebra, calculus, ordinary differential equations, and numerical analysis, applying these tools to nonstandard physics problems and extended derivations."
+        "I mentored teammates in mechanics and electromagnetism study groups, working through advanced problems and explaining the derivations behind solution methods, and presented findings to the full competition team, sharing methods developed through individual study and collaborative discussion.",
+        "I earned provincial- and national-level competition awards across physics and mathematics Olympiads.",
+        "I completed intensive training in mechanics, electromagnetism, thermodynamics, optics, and modern physics, including undergraduate-level classical mechanics, electrodynamics, statistical physics, and quantum mechanics.",
+        "I studied mathematical analysis, linear algebra, calculus, ordinary differential equations, and numerical analysis, applying these tools to nonstandard physics problems and extended derivations."
       ],
       "notes": [
         "Program context: In 2020, 10 students from the program were selected for China's 50-member national physics Olympiad training squad (20%): eight listed under the school and two who studied in the program with school registration in Chongqing. This exceeded the total from any province or municipality outside Hunan. The program also included a 2019 IPhO gold medalist."
@@ -471,6 +467,6 @@
   "aiSourceDocument": {
     "fileName": "ai-research-and-engineering.md",
     "path": "content/sources/ai-portfolio/ai-research-and-engineering.md",
-    "sha256": "73f582baf15ed915e77e4aa8d10d058383875d039a80bba6f586bcd2e76cebd8"
+    "sha256": "2e2c46bf0573668a93b767f851e6f106c9653aa181c58caca400eb1eeaec839f"
   }
 }
