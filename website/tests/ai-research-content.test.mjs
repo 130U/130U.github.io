@@ -6,10 +6,10 @@ import test from "node:test";
 import { fileURLToPath } from "node:url";
 
 const ROOT = fileURLToPath(new URL("../", import.meta.url));
-const AI_ROUTE = "/past-experience/artificial-intelligence/";
+const AI_ROUTE = "/experience/";
 const SOURCE_FILE = "content/sources/ai-portfolio/ai-research-and-engineering.md";
 const CANONICAL_DOCUMENT = path.join(ROOT, SOURCE_FILE);
-const SOURCE_SHA256 = "b5d6a1b86108c5b4f5d84f64bf50ff262c84cc11736946afa8ea925564323c13";
+const SOURCE_SHA256 = "73f582baf15ed915e77e4aa8d10d058383875d039a80bba6f586bcd2e76cebd8";
 // Structure and benchmark-table shapes are checked independently of the renderer.
 const PROJECTS = [
   {

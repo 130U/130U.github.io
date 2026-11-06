@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { SiteShell } from "./components/SiteShell";
+import { forwardScript } from "./lib/content/forwarded-paths";
 import { createPageMetadata } from "./lib/content/site";
 
 export const metadata: Metadata = createPageMetadata({
@@ -12,6 +13,7 @@ export const metadata: Metadata = createPageMetadata({
 export default function NotFound() {
   return (
     <SiteShell>
+      <script dangerouslySetInnerHTML={{ __html: forwardScript }} />
       <header className="page-intro">
         <p className="section-kicker">404</p>
         <h1>Page Not Found</h1>

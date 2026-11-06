@@ -70,7 +70,7 @@ for (const expected of PROJECTS) {
 
   test(`${expected.key} published article retains every equation and all section links`, async () => {
     const markdown = await siteEdition(expected.slug);
-    const html = await readFile(new URL(`../out/education/${expected.slug}/index.html`, import.meta.url), "utf8");
+    const html = await readFile(new URL(`../out/${expected.slug}/index.html`, import.meta.url), "utf8");
     const rendered = [...html.matchAll(/<math\b[^>]*data-research-math="(inline|display)"[^>]*>[\s\S]*?<annotation\b[^>]*encoding="application\/x-tex"[^>]*>([\s\S]*?)<\/annotation>[\s\S]*?<\/math>/gu)].map((match) => ({ tex: decodeHtml(match[2]), display: match[1] === "display" }));
     assert.deepEqual(rendered, sourceFormulas(markdown));
     const blocks = parseResearchMarkdown(markdown, { joinSoftLines: true });

@@ -289,7 +289,7 @@ the shared title, heading, subheading and reading hierarchy; scoped spacing over
 
 Page titles own the H1 position. About's two-line "Theodore / Ouyang" supplies its
 main heading. The "Thinking Mathematically / Working in AI" introduction
-is an H2 below the hero; it is the H1 on the `/education/` alias page.
+is an H2 below the hero.
 Its two lines share the title size, the second in the muted tone, and the biography
 sits below on the same left edge within the reading measure.
 Experience domains use `01`–`05` indices; individual entries have no leading markers.
@@ -359,11 +359,13 @@ Chinese full-width punctuation is not used in public interface copy.
 Legal section symbols, paragraph symbols, mathematical notation, and author names
 with diacritics remain part of the source text.
 
-Top-level pages retain the About and Experience primary navigation, including the
-`/education/`, `/now/`, and `/past-experience/` alias pages. The 27 detail
+The site has two sections, and every URL sits inside one of them. About is `/`;
+its children are `/coursework/` and the three Selected Research manuscripts at
+`/<slug>/`. Experience is `/experience/`; each of its eighteen entries opens at
+`/experience/<slug>/`, whether a full AI or legal article or a detail page. The two
+top-level pages carry the About and Experience primary navigation. The 22 detail
 pages replace those primary links with parent navigation while retaining the home
-wordmark: Coursework, three Selected Research manuscripts, eighteen Experience
-detail pages, and five Experience domain alias pages. About at
+wordmark. About at
 `/` combines the introduction, Selected Research, Education with a coursework
 entrance, and contact details in sections 01 through 04. The first-person
 introduction opens the reading content beneath the hero; both
@@ -371,16 +373,10 @@ Duke degrees, the advisor, scholarships, and all 49 courses are
 available. The canonical `/coursework/` page presents the four subject groups,
 returns to Education through its parent navigation, and appears in the sitemap. The
 homepage's `#coursework` anchor remains a valid entrance to this page.
-The `/education/` alias
-page shares the About content without repeating the clarinet hero, uses `/`
-as its canonical URL, and remains outside primary navigation and the sitemap.
-Experience contains all five domains and eighteen entries. The five category
-URLs are alias pages with `/experience/` as their canonical URL and a
-return link to the matching Experience section. Domain `03` is Legal Research and
-Policy Analysis; its four selected papers
-use dedicated article URLs. Domain `01`, AI Research and Engineering,
-has four project reading URLs. The other ten entries open dedicated detail
-pages under `/experience/`.
+Experience contains all five domains and eighteen entries; each domain is a section
+of `/experience/` with its own anchor. Domain `01`, AI Research and Engineering, and
+domain `03`, Legal Research and Policy Analysis, open their eight entries as full
+articles; the other ten entries open detail pages.
 About's Selected Research section presents three on-site manuscripts: Critical
 Dependence Stress for Portfolio Diversification, followed by the Asian-options and
 Rough Heston papers. Each entry has a separate Read More manuscript link with blue
@@ -402,17 +398,18 @@ kept in the protected source. Appendices and supporting material are
 linked on GitHub. Each JSON source records the exact source commit, blob, and manuscript
 URL; source links should continue to identify that version. The full manuscript is
 available from the article header, and return links lead to the corresponding
-research entry on About. The `/education/<paper>/` manuscript URLs are stable.
+research entry on About.
 
 Research chapter headings display Roman numerals, and subsections display letters
 in reading order. Source numbering and anchors remain intact. Verified internal
 section references link to the matching heading and preserve their source numerals.
 
-The website has twenty-four canonical content routes: About, Experience, Coursework,
-three Selected Research articles, eight Experience manuscripts, and ten other Experience
-detail pages. Eight alias pages bring the content export to thirty-two routes. The
-architecture viewer adds one technical reference route, making thirty-three exported
-routes in total, excluding 404.
+The website has twenty-four content routes: About, Experience, Coursework, three
+Selected Research articles, eight Experience articles, and ten other Experience
+detail pages. The architecture viewer adds one technical reference route, making
+twenty-five exported routes, excluding 404. Addresses outside the two sections are
+not exported, so the host answers 404 for them; the 404 page forwards the addresses
+listed in `app/lib/content/forwarded-paths.ts` to the page that holds their content.
 Keep factual claims, metadata, copy, and content order aligned with the integrity manifests.
 
 ### Legal articles

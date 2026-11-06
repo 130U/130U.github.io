@@ -1,8 +1,8 @@
 import { readFileSync } from "node:fs";
 import { join } from "node:path";
 import { experienceDomainDefinitions } from "./experience-domains";
-import { aiResearchProjectSlugs, aiResearchProjectPath } from "./ai-projects";
-import { legalPaperSlugs, legalPaperPath } from "./legal-papers";
+import { aiResearchProjectSlugs } from "./ai-projects";
+import { legalPaperSlugs } from "./legal-papers";
 
 type CopySection = { title: string; text: string };
 
@@ -23,7 +23,8 @@ type SourceEntry = {
 
 export type ShowcaseEntry = SourceEntry & {
   slug: string;
-  articlePath?: string;
+  /** AI projects and legal papers open as full articles. */
+  article?: "ai" | "legal";
   detailPath: string;
   listingTitle: string;
   headline: string;
@@ -74,14 +75,13 @@ export const showcaseEntries: readonly ShowcaseEntry[] = source.entries.map((ent
       (entry.categoryId === "03" && !legalPaperSlugs.some((paper) => paper === slug))) {
     throw new Error(`Experience entry has no matching route: ${entry.id}`);
   }
-  const articlePath = entry.categoryId === "01" ? aiResearchProjectPath(slug)
-    : entry.categoryId === "03" ? legalPaperPath(slug) : undefined;
+  const article = entry.categoryId === "01" ? "ai" : entry.categoryId === "03" ? "legal" : undefined;
   const organization = entry.categoryId === "03" ? "Duke Law School" : entry.organization;
   const listingTitle = entry.categoryId === "03" ? `${organization}: ${legalResearchAreas[entry.id]}`
     : entry.categoryId === "01" ? entry.detailTitle : organization;
   return {
-    ...entry, slug, articlePath,
-    detailPath: articlePath ?? `/experience/${slug}/`,
+    ...entry, slug, article,
+    detailPath: `/experience/${slug}/`,
     listingTitle,
     headline: entry.detailTitle,
     institution: organization,
@@ -97,6 +97,4 @@ export const showcaseDomains: readonly ShowcaseDomain[] = experienceDomainDefini
   ...domain, entries: showcaseEntries.filter((entry) => entry.categoryId === domain.number),
   disclosure: source.categories.find((category) => category.id === domain.number)?.disclosure,
 }));
-export function getShowcaseDomain(slug: string) { return showcaseDomains.find((domain) => domain.slug === slug); }
 export function getShowcaseEntry(slug: string) { return showcaseEntries.find((entry) => entry.slug === slug); }
-export function getShowcaseEntryForArticle(slug: string) { return showcaseEntries.find((entry) => entry.slug === slug && entry.articlePath); }

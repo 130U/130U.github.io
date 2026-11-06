@@ -86,7 +86,7 @@ for (const [index, [slug, chapterCount]] of projects.entries()) {
   assert.deepEqual(metadataFields.map((field) => field[1]), ["Article Title", "Organization", "Title", "URL", "Position", "Location", "Dates", "Read More Label"], `Incomplete metadata for ${slug}`);
   assert.equal(metadataText.replace(metadataPattern, "").trim(), "", `Unexpected metadata content for ${slug}`);
   const metadata = Object.fromEntries(metadataFields.map((field) => [field[1], field[2]]));
-  assert.equal(metadata.URL, `https://www.theodoreoy.com/past-experience/artificial-intelligence/${slug}/`, "The source URL must match the fixed project route");
+  assert.equal(metadata.URL, `https://www.theodoreoy.com/experience/${slug}/`, "The source URL must match the project route");
   const entry = showcase.entries[index];
   assert.equal(entry.id, index + 1);
   assert.equal(entry.categoryId, "01");

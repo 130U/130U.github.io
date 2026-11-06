@@ -7,14 +7,27 @@ const ROOT = fileURLToPath(new URL("../", import.meta.url));
 const OUT = path.join(ROOT, "out");
 const MANIFEST_PATH = path.join(ROOT, "content", "visible-copy-manifest.json");
 const IGNORED_INTERFACE_STRINGS = ["Menu", "Close"];
+const RESEARCH_PAPER_ROUTES = [
+  "/critical-dependence-stress-for-portfolio-diversification/",
+  "/certified-valuation-arithmetic-asian-options/",
+  "/certified-rough-heston-valuation/",
+];
+const AI_ARTICLE_ROUTES = [
+  "/experience/statistical-inference-and-resource-allocation-in-expert-data-production/",
+  "/experience/task-validity-in-financial-synthetic-data/",
+  "/experience/verification-and-supervision-in-scientific-reasoning-tasks/",
+  "/experience/evidence-uncertainty-and-decision-guarantees-in-investment-research/",
+];
 const ROUTES = [
   "/",
-  "/education/",
   "/coursework/",
-  "/education/certified-valuation-arithmetic-asian-options/",
-  "/education/certified-rough-heston-valuation/",
-  "/education/critical-dependence-stress-for-portfolio-diversification/",
+  ...RESEARCH_PAPER_ROUTES,
   "/experience/",
+  ...AI_ARTICLE_ROUTES,
+  "/experience/autonomous-authority-in-space/",
+  "/experience/small-states-and-strategic-space-dependence/",
+  "/experience/solar-geoengineering-comparison-and-continuity/",
+  "/experience/mangrove-restoration-and-compensatory-mitigation/",
   "/experience/jiritsu-network/",
   "/experience/euromonitor-international/",
   "/experience/china-construction-bank/",
@@ -25,26 +38,8 @@ const ROUTES = [
   "/experience/ey-parthenon/",
   "/experience/independent-stem-olympiad-training/",
   "/experience/stem-olympiad-competitions/",
-  "/past-experience/",
-  "/past-experience/artificial-intelligence/",
-  "/past-experience/artificial-intelligence/statistical-inference-and-resource-allocation-in-expert-data-production/",
-  "/past-experience/artificial-intelligence/task-validity-in-financial-synthetic-data/",
-  "/past-experience/artificial-intelligence/verification-and-supervision-in-scientific-reasoning-tasks/",
-  "/past-experience/artificial-intelligence/evidence-uncertainty-and-decision-guarantees-in-investment-research/",
-  "/past-experience/data-science/",
-  "/past-experience/legal-research-and-policy-analysis/",
-  "/past-experience/finance/",
-  "/past-experience/stem-academic-competitions-and-training/",
-  "/past-experience/legal-research-and-policy-analysis/autonomous-authority-in-space/",
-  "/past-experience/legal-research-and-policy-analysis/small-states-and-strategic-space-dependence/",
-  "/past-experience/legal-research-and-policy-analysis/solar-geoengineering-comparison-and-continuity/",
-  "/past-experience/legal-research-and-policy-analysis/mangrove-restoration-and-compensatory-mitigation/",
-  "/now/",
 ];
-const RESEARCH_ARTICLE_ROUTES = new Set(ROUTES.filter((route) =>
-  /^\/past-experience\/artificial-intelligence\/[^/]+\/$/u.test(route) ||
-  /^\/education\/[^/]+\/$/u.test(route),
-));
+const RESEARCH_ARTICLE_ROUTES = new Set([...RESEARCH_PAPER_ROUTES, ...AI_ARTICLE_ROUTES]);
 
 function decodeHtml(value) {
   return value

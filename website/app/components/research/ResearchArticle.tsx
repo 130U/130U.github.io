@@ -11,7 +11,7 @@ import { buildArticleHeadingMap, formatArticleHeadings, linkArticleSectionRefere
 import type { ActivePage } from "../../lib/content/site";
 import { ResearchMath } from "./ResearchMath";
 import { InlineContent } from "./ResearchInline";
-import readingStyles from "../../past-experience/components/LegalPaperPage.module.css";
+import readingStyles from "../legal/LegalPaperPage.module.css";
 import mathStyles from "./ResearchMath.module.css";
 import styles from "./ResearchArticle.module.css";
 import experienceStyles from "../experience/Experience.module.css";

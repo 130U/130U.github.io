@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import styles from "../../past-experience/components/LegalPaperPage.module.css";
+import styles from "../legal/LegalPaperPage.module.css";
 
 export type ArticleContentsItem = { id: string; text: string; level?: number };
 

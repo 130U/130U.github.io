@@ -18,13 +18,12 @@ function ExperienceEntry({ entry }: { entry: ShowcaseEntry }) {
     </article>
   );
 }
-export function ExperienceSection({ domain, standalone = false }: { domain: ShowcaseDomain; standalone?: boolean }) {
-  const Heading = standalone ? "h1" : "h2";
+function ExperienceSection({ domain }: { domain: ShowcaseDomain }) {
   return (
     <section className={styles.section} id={domain.slug} aria-labelledby={`${domain.slug}-heading`}>
       <span className={styles.sectionIndex} aria-hidden="true">{domain.number}</span>
       <div className={styles.sectionBody}>
-        <Heading className={styles.sectionTitle} id={`${domain.slug}-heading`} tabIndex={-1}>{domain.name}</Heading>
+        <h2 className={styles.sectionTitle} id={`${domain.slug}-heading`} tabIndex={-1}>{domain.name}</h2>
         {/* The note introduces "the following four projects", so it opens the section. */}
         {domain.disclosure && <aside className={styles.indexDisclosure} aria-labelledby={`${domain.slug}-disclosure`} data-experience-disclosure>
           <h3 className="visually-hidden" id={`${domain.slug}-disclosure`}>{domain.disclosure.title}</h3>

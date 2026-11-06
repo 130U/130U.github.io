@@ -32,10 +32,10 @@ function rejectsIncompleteContract(script) {
 test("visible-copy contracts reject omitted and unregistered routes before reading HTML", async (t) => {
   const { script, manifestPath, manifest } = await fixture(t);
   const original = structuredClone(manifest);
-  delete manifest.routes["/education/"];
+  delete manifest.routes["/coursework/"];
   await writeFile(manifestPath, JSON.stringify(manifest));
   rejectsIncompleteContract(script);
-  original.routes["/unregistered/"] = original.routes["/education/"];
+  original.routes["/unregistered/"] = original.routes["/coursework/"];
   await writeFile(manifestPath, JSON.stringify(original));
   rejectsIncompleteContract(script);
 });
