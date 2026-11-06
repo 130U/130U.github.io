@@ -140,7 +140,7 @@ About, Experience, and Coursework. Category introductions are omitted.
 
 On About, Experience, Coursework and the ten detail pages, content hangs on two axes
 of the ten-column field (`--hang-columns`, 4fr / 6fr). A section's entries share one
-frame (`.entries` on Experience, `.rows` on About). From 1200px each title sits alone
+frame, built from the shared `ledger` classes in `globals.css`. From 1200px each title sits alone
 on the left, and one continuous dashed spine runs down the frame between titles and
 prose, with 72px of space between entries. Below 1200px each title stacks above its
 prose and entries are separated by a dashed line inside the frame. On About, the
@@ -170,7 +170,8 @@ reflows into a vertical sequence (parallel nodes side by side from 480px) and th
 loop becomes a labelled return note. A prose caption follows. Every stage must have
 one node or as many as the widest stage; the module throws at build time otherwise.
 
-Prose stays within `--reading-measure` (40rem). On wide article layouts the reading
+Prose stays within `--reading-measure` (36rem, about seventy characters of Source
+Serif 4 at the reading size) at every width. On wide article layouts the reading
 column takes seven grid columns and the contents rail three, so the split lands on
 the column-12 guide; the rail lists chapters and opens subsections only for the
 chapter being read.
@@ -230,9 +231,10 @@ Focus remains a visible blue outline, and hover feedback respects pointer capabi
 The desktop frame is capped at 1440px and divided into 15 columns, with a three-column
 sticky navigation rail. The content field reserves one internal track for indices and
 aligns headings and prose to the reading track. Tablet uses 12 outer columns.
-The shared `--reading-measure` caps narrative containers at 40rem. Page introductions,
-the education list and Coursework sections, Experience records and detail pages,
-and AI project articles align their headings and prose to this common right edge.
+The shared `--reading-measure` caps narrative containers at 36rem. Introductions,
+standfirsts, stacked ledger prose, detail pages, captions, and article reading columns
+share this measure; phones run at 30 to 45 characters per line and desktops at about
+seventy.
 Nested paragraphs fill their container with natural ragged-right wrapping. Each
 coursework category uses one text column at every width; legal articles retain
 their own reading and contents layout.
@@ -286,8 +288,8 @@ without forced line breaks. Section headings, entry headings, and reading text u
 the shared title, heading, subheading and reading hierarchy; scoped spacing overrides do not affect other pages.
 
 Page titles own the H1 position. About's two-line "Theodore / Ouyang" supplies its
-main heading. The "Thinking mathematically / Working in AI" introduction
-is an H2 below the hero; it remains the H1 on the `/education/` compatibility page.
+main heading. The "Thinking Mathematically / Working in AI" introduction
+is an H2 below the hero; it is the H1 on the `/education/` alias page.
 Its two lines share the title size, the second in the muted tone, and the biography
 sits below on the same left edge within the reading measure.
 Experience domains use `01`–`05` indices; individual entries have no leading markers.
@@ -358,10 +360,10 @@ Legal section symbols, paragraph symbols, mathematical notation, and author name
 with diacritics remain part of the source text.
 
 Top-level pages retain the About and Experience primary navigation, including the
-`/education/`, `/now/`, and `/past-experience/` compatibility pages. The 27 detail
+`/education/`, `/now/`, and `/past-experience/` alias pages. The 27 detail
 pages replace those primary links with parent navigation while retaining the home
 wordmark: Coursework, three Selected Research manuscripts, eighteen Experience
-detail pages, and five Experience domain compatibility pages. About at
+detail pages, and five Experience domain alias pages. About at
 `/` combines the introduction, Selected Research, Education with a coursework
 entrance, and contact details in sections 01 through 04. The first-person
 introduction opens the reading content beneath the hero; both
@@ -369,11 +371,11 @@ Duke degrees, the advisor, scholarships, and all 49 courses are
 available. The canonical `/coursework/` page presents the four subject groups,
 returns to Education through its parent navigation, and appears in the sitemap. The
 homepage's `#coursework` anchor remains a valid entrance to this page.
-The `/education/` compatibility
+The `/education/` alias
 page shares the About content without repeating the clarinet hero, uses `/`
 as its canonical URL, and remains outside primary navigation and the sitemap.
 Experience contains all five domains and eighteen entries. The five category
-URLs provide compatibility pages with `/experience/` as their canonical URL and a
+URLs are alias pages with `/experience/` as their canonical URL and a
 return link to the matching Experience section. Domain `03` is Legal Research and
 Policy Analysis; its four selected papers
 use dedicated article URLs. Domain `01`, AI Research and Engineering,
@@ -408,7 +410,7 @@ section references link to the matching heading and preserve their source numera
 
 The website has twenty-four canonical content routes: About, Experience, Coursework,
 three Selected Research articles, eight Experience manuscripts, and ten other Experience
-detail pages. Eight compatibility pages bring the content export to thirty-two routes. The
+detail pages. Eight alias pages bring the content export to thirty-two routes. The
 architecture viewer adds one technical reference route, making thirty-three exported
 routes in total, excluding 404.
 Keep factual claims, metadata, copy, and content order aligned with the integrity manifests.

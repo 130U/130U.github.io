@@ -18,7 +18,6 @@ type SourceEntry = {
   keyContributions: string[];
   keyContributionDetails?: Record<string, { ordered: boolean; items: string[] }>;
   notes: string[];
-  disclosure?: CopySection;
   architecturalContext?: CopySection;
 };
 

@@ -576,7 +576,7 @@ We froze the six-month configuration at \(\alpha=13/25\), \(\nu=2897/10000\), \(
 
 For N2L, the dimensionless damping is \(\lambda T^\alpha\approx0.075205\) (about 0.075205153821), so dissipation is weak over this horizon, consistent with the kernel gain of about 0.485% of the complete frozen-fast bound reported below. The complete budget also contains the fixed centre, finite omitted nodes and other remainders.
 
-Table 9 reports upper endpoints in index points, rounded upward to nine decimals. “Global state” first bounds the state by its global residual and then applies the exponent functional; “global curve” propagates that same residual maximum directly through the curve. The final two rows use the identical 128 binwise envelopes and differ only in the pricing kernel.
+Table 9 reports upper endpoints in index points, rounded upward to nine decimals. "Global state" first bounds the state by its global residual and then applies the exponent functional; "global curve" propagates that same residual maximum directly through the curve. The final two rows use the identical 128 binwise envelopes and differ only in the pricing kernel.
 
 **Table 9. N2L matched propagation for the half-year unit 4400–4500 spread, in index points; the residual bank and all other inputs are fixed.**
 

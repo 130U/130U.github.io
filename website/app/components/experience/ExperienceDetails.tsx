@@ -15,16 +15,6 @@ export function ExperienceMetadata({ entry }: { entry: ShowcaseEntry }) {
   );
 }
 
-export function ExperienceDisclosure({ entry }: { entry: ShowcaseEntry }) {
-  if (!entry.disclosure) return null;
-  return (
-    <aside className={styles.disclosure} aria-labelledby="confidentiality-disclosure" data-experience-disclosure>
-      <h2 id="confidentiality-disclosure">{entry.disclosure.title}</h2>
-      <p><InlineMarkdown text={entry.disclosure.text} /></p>
-    </aside>
-  );
-}
-
 /** The project's logic architecture, shown under the record strip as the article's visual abstract. */
 export function ExperienceDiagram({ entry }: { entry: ShowcaseEntry }) {
   const diagram = architectureDiagrams[entry.id];

@@ -7,7 +7,9 @@ across five fields. Dedicated readers present coursework and research
 articles with mathematical notation, chapter navigation, and legal footnotes.
 
 The visual system pairs Inter headings with Source Serif 4 prose, a warm paper
-background, and a restrained editorial grid. About opens with a two-column name
+background, and a restrained editorial grid: faint frames hold each list, dashed
+hairlines divide them, and each AI and legal article opens with a logic architecture
+diagram. About opens with a two-column name
 and recognizable clarinet hero. The dense Canvas 2D particle field aggregates on entry,
 responds locally to the pointer, disperses with scrolling, and returns to its
 shape, with six silver ring keys, joint bands and pads, two long rods, and
@@ -17,8 +19,8 @@ The name and institutions use Inter; the credential roles use Source Serif 4.
 Blue corner marks, a single solid blue oval, and four solid, continuously breathing
 musical notes accompany the field. The open blue arc has larger, more closely
 spaced points and retains its occlusion behind the instrument.
-Selected Research and Education use the same Read More link pattern as Experience.
-Experience and Coursework share a numbered section directory.
+Selected Research, Education, and Experience share the framed ledger and Read More
+link; Experience and Coursework share a framed section index.
 
 ## Local development
 

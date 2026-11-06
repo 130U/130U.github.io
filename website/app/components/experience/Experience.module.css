@@ -41,29 +41,7 @@
   text-wrap: balance;
 }
 
-/* A section's entries share one unfilled frame with room inside. From 1200px a
-   continuous dashed spine runs between the titles and the summaries. */
-.entries {
-  position: relative;
-  padding: var(--frame-pad) var(--frame-pad) calc(var(--frame-pad) - 10px);
-  border: 1px solid var(--frame);
-}
-.entry { scroll-margin-top: 40px; }
-.entry + .entry { margin-top: 72px; }
-.entryTitle {
-  margin: 0;
-  color: var(--ink);
-  font-size: var(--type-subheading);
-  font-weight: 500;
-  line-height: var(--subheading-leading);
-  letter-spacing: var(--subheading-tracking);
-  text-wrap: pretty;
-}
-.entryBody { min-width: 0; max-width: var(--reading-measure); }
-.summary { margin: 0; font-size: var(--type-reading); line-height: var(--reading-leading); text-wrap: pretty; }
-.summary,
 .indexDisclosure p,
-.disclosure p,
 .architecturalContext p,
 .contributions > ol {
   font-family: var(--font-prose);
@@ -72,14 +50,7 @@
 /* The AI section's note is its standfirst: under the heading, on the same edge. */
 .indexDisclosure { max-width: var(--reading-measure); margin: -24px 0 72px; }
 .indexDisclosure p { color: var(--supporting-ink); }
-.disclosure h2 {
-  margin: 0 0 8px;
-  font-size: var(--type-subheading);
-  line-height: var(--subheading-leading);
-  font-weight: 500;
-  letter-spacing: var(--subheading-tracking);
-}
-.indexDisclosure p, .disclosure p, .architecturalContext p {
+.indexDisclosure p, .architecturalContext p {
   margin: 0;
   font-size: var(--type-reading);
   line-height: var(--reading-leading);
@@ -94,29 +65,10 @@
   scroll-margin-top: 6rem;
 }
 .architecturalContext p + p { margin-top: 1.25rem; }
-.summary code, .contributions code, .architecturalContext code {
+.contributions code, .architecturalContext code {
   font: inherit;
   overflow-wrap: anywhere;
 }
-
-.readMore {
-  display: flex;
-  width: fit-content;
-  align-items: center;
-  min-height: 44px;
-  margin-top: 8px;
-  gap: 6px;
-  font-size: var(--type-action);
-  font-weight: 500;
-  line-height: var(--interface-leading);
-  text-decoration: underline;
-  text-decoration-color: var(--link-rule);
-  text-underline-offset: var(--link-underline-offset);
-  cursor: pointer;
-  transition: color 180ms var(--ease-out), text-decoration-color 180ms var(--ease-out);
-}
-.readMore svg { width: 14px; height: 14px; flex-shrink: 0; transition: transform 180ms var(--ease-out); }
-.readMore:focus-visible { outline: 2px solid var(--accent); outline-offset: 4px; }
 
 /* Detail pages */
 .detailPage { min-width: 0; }
@@ -203,14 +155,8 @@
   line-height: var(--reading-leading);
 }
 
-@media (hover: hover) and (pointer: fine) {
-  .readMore:hover { color: var(--accent); text-decoration-color: var(--accent); }
-  .readMore:hover svg { transform: translateX(2px); }
-}
-
 @media (min-width: 1200px) {
   .intro,
-  .entry,
   .detailPage > .contributions {
     display: grid;
     grid-template-columns: var(--hang-columns);
@@ -218,18 +164,7 @@
   }
   .intro h1 { max-width: none; padding-right: var(--hang-gap); text-wrap: balance; }
   .intro > nav { margin-top: 0; }
-  .entries::before {
-    position: absolute;
-    top: var(--frame-pad);
-    bottom: var(--frame-pad);
-    left: calc(var(--frame-pad) + (100% - 2 * var(--frame-pad)) * 0.4);
-    width: 1px;
-    background: var(--dash-y);
-    content: "";
-  }
-  .entryTitle,
   .detailPage > .contributions h2 { padding-right: var(--hang-gap); }
-  .entryBody { max-width: none; padding-left: var(--hang-gap); }
   .detailPage > .contributions h2 { margin: 0; }
   .detailPage > .contributions > ol { padding-right: var(--prose-inset); }
 }
@@ -240,8 +175,6 @@
 }
 
 @media (width < 1200px) {
-  .entryTitle { margin-bottom: 12px; }
-  .entry + .entry { margin-top: 36px; padding-top: 36px; background: var(--dash-x) left top / 100% 1px no-repeat; }
   .metadata { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .metadata > div + div { background: none; }
   .metadata > div:nth-child(2) { background: var(--dash-y) left top / 1px 100% no-repeat; }
@@ -263,9 +196,6 @@
   .sectionIndex { display: block; margin-bottom: 10px; padding-top: 0; }
   .sectionTitle { margin-bottom: 32px; }
   .indexDisclosure { margin: -8px 0 48px; }
-  .entries { padding: 28px 20px 18px; }
-  .entry { scroll-margin-top: 6rem; }
-  .entry + .entry { margin-top: 28px; padding-top: 28px; }
   .metadata { margin-top: 32px; }
   .metadata > div { padding: 14px 16px 16px; }
   .contributions > ol > li { grid-template-columns: 1.75rem minmax(0, 1fr); }
@@ -274,9 +204,4 @@
 @media (width < 420px) {
   .metadata { grid-template-columns: 1fr; }
   .metadata > div:nth-child(n + 2) { background: var(--dash-x) left top / 100% 1px no-repeat; }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .readMore,
-  .readMore svg { transition: none; }
 }

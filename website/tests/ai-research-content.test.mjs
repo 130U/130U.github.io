@@ -9,7 +9,7 @@ const ROOT = fileURLToPath(new URL("../", import.meta.url));
 const AI_ROUTE = "/past-experience/artificial-intelligence/";
 const SOURCE_FILE = "content/sources/ai-portfolio/ai-research-and-engineering.md";
 const CANONICAL_DOCUMENT = path.join(ROOT, SOURCE_FILE);
-const SOURCE_SHA256 = "6b1b487c986316b97aee42299b11414bc2584baed104cd92bb57973252f989e0";
+const SOURCE_SHA256 = "b5d6a1b86108c5b4f5d84f64bf50ff262c84cc11736946afa8ea925564323c13";
 // Structure and benchmark-table shapes are checked independently of the renderer.
 const PROJECTS = [
   {

@@ -52,7 +52,7 @@ manuscripts, and ten ordinary detail pages.
 About's Education section links to the dedicated Coursework page through Read More.
 The page presents all 49 courses in four subject groups.
 
-Compatibility routes remain functional: `/education/` renders shared About content;
+Alias routes: `/education/` renders shared About content;
 `/past-experience/` and `/now/` render Experience; the five
 `/past-experience/[slug]/` category pages filter the same approved entries. Their
 canonical URLs point to the corresponding primary page. Keep these shared renderers
@@ -148,8 +148,12 @@ return to the originating Education, Selected Research, or Experience anchor.
 `ArticleReadingLayout`/`ArticleContents` own the article structure and responsive
 navigation. `ExperienceSection` and `ExperienceDetails` keep all categories and
 detail pages consistent. `SectionDirectory` owns the shared numbered anchor directory
-for Experience and Coursework, including row rules, decorative indices, and View
-feedback for pointer, keyboard, and touch input. Browser interaction stays in focused client components;
+for Experience and Coursework, including its frame, dashed row dividers, decorative
+indices, and View feedback for pointer, keyboard, and touch input. Framed lists use the
+global `ledger`, `ledger-item`, `ledger-title`, `ledger-body`, and `ledger-prose` classes,
+and every Read More link uses `read-more` with the shared `ReadingArrow`; reuse them for
+any new list. `LogicDiagram` renders the article diagrams from
+`app/lib/content/architecture-diagrams.ts`. Browser interaction stays in focused client components;
 the About hero is isolated in `app/components/clarinet-hero/`.
 
 `ResearchArticle` serves AI and Selected Research. The Markdown parser supports

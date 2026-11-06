@@ -19,7 +19,7 @@ Statistical inference and resource allocation in expert data production
 Duke University × Leading Foundation Model Developer
 
 **Title**
-Large-scale domain expert feedback governance and adaptive review
+Large-Scale Domain Expert Feedback Governance and Adaptive Review
 
 **URL**
 https://www.theodoreoy.com/past-experience/artificial-intelligence/statistical-inference-and-resource-allocation-in-expert-data-production/
@@ -31,7 +31,7 @@ Researcher
 Durham, North Carolina; Palo Alto, California
 
 **Dates**
-September 2023 to September 2026
+September 2023 – September 2026
 
 **Read More Label**
 Read More
@@ -248,7 +248,7 @@ Task validity in financial synthetic data
 Duke University × Leading Foundation Model Developer
 
 **Title**
-Financial task design and synthetic data engineering
+Financial Task Design and Synthetic Data Engineering
 
 **URL**
 https://www.theodoreoy.com/past-experience/artificial-intelligence/task-validity-in-financial-synthetic-data/
@@ -260,7 +260,7 @@ Researcher
 Durham, North Carolina; Palo Alto, California
 
 **Dates**
-September 2023 to September 2026
+September 2023 – September 2026
 
 **Read More Label**
 Read More
@@ -439,7 +439,7 @@ Verification and supervision in reasoning tasks
 Duke University × Frontier AI Research Laboratory
 
 **Title**
-General reasoning evaluation and layered verification
+General Reasoning Evaluation and Layered Verification
 
 **URL**
 https://www.theodoreoy.com/past-experience/artificial-intelligence/verification-and-supervision-in-scientific-reasoning-tasks/
@@ -451,7 +451,7 @@ Researcher
 Durham, North Carolina; Palo Alto, California
 
 **Dates**
-September 2023 to September 2026
+September 2023 – September 2026
 
 **Read More Label**
 Read More
@@ -633,7 +633,7 @@ Evidence uncertainty and decision guarantees in investment research
 Duke University × Leading Global Alternative Asset Manager
 
 **Title**
-Evidence verification and robust comparison in investment research
+Evidence Verification and Robust Comparison in Investment Research
 
 **URL**
 https://www.theodoreoy.com/past-experience/artificial-intelligence/evidence-uncertainty-and-decision-guarantees-in-investment-research/
@@ -645,7 +645,7 @@ Researcher
 Durham, North Carolina; Washington, DC
 
 **Dates**
-September 2023 to September 2026
+September 2023 – September 2026
 
 **Read More Label**
 Read More

@@ -36,7 +36,7 @@ All three papers can be read on the site, with equations, chapter navigation, re
 | **Finance and Consulting** | Real estate underwriting at JLL, satellite commercialization research for Hubble, investment diligence at SAIF, equity research at CITIC, and business restructuring at EY-Parthenon. |
 | **STEM Academic Competitions and Training** | Advanced physics and mathematics training, competition awards, peer mentoring, and independent Olympiad instruction. |
 
-Every entry has a Read More page with its role, location, dates, and Key Contributions. The AI and legal pages also include the research articles, so visitors can follow the underlying reasoning.
+Every entry has a Read More page with its role, location, dates, and Key Contributions. The AI and legal pages also include the research articles, each opening with a diagram of its system or argument, so visitors can follow the underlying reasoning.
 
 ## About the site
 

@@ -1,2 +1,2 @@
-// Serve Experience at /now/ for retained bookmarks.
+// /now/ is an alias of Experience.
 export { default, metadata } from "../experience/page";
