@@ -1,24 +1,34 @@
+/* A framed index: one faint frame, dashed hairlines between rows. */
 .directory {
   display: grid;
   grid-template-columns: 1fr;
   margin-top: 48px;
+  border: 1px solid var(--frame);
+  background: var(--panel);
   font-family: var(--font-text);
 }
 
 .directory a {
   display: grid;
-  grid-template-columns: 1rem minmax(0, 1fr) auto;
+  grid-template-columns: 1.75rem minmax(0, 1fr) auto;
   align-items: baseline;
-  gap: 16px;
+  gap: 12px;
   width: 100%;
-  min-height: 52px;
-  padding-block: 10px;
+  min-height: 56px;
+  padding: 15px 24px;
   color: var(--ink);
-  font-size: var(--type-heading);
+  font-size: var(--type-subheading);
   font-weight: 400;
-  letter-spacing: var(--heading-tracking);
-  line-height: var(--heading-leading);
-  transition: color 180ms var(--ease-out);
+  letter-spacing: var(--subheading-tracking);
+  line-height: var(--subheading-leading);
+  transition: color 180ms var(--ease-out), background-color 180ms var(--ease-out);
+}
+
+.directory a + a {
+  background-image: var(--dash-x);
+  background-position: 24px 0;
+  background-repeat: no-repeat;
+  background-size: calc(100% - 48px) 1px;
 }
 
 .index {
@@ -37,11 +47,13 @@
 }
 
 .action {
-  font-size: var(--type-action);
+  color: var(--muted);
+  font-size: var(--type-label);
   font-weight: 400;
-  line-height: var(--interface-leading);
+  letter-spacing: 0;
+  line-height: var(--label-leading);
   opacity: 0;
-  transition: opacity 180ms var(--ease-out);
+  transition: opacity 180ms var(--ease-out), color 180ms var(--ease-out);
 }
 
 .directory a:focus-visible,
@@ -51,20 +63,23 @@
 
 .directory a:focus-visible {
   outline: 2px solid var(--accent);
-  outline-offset: 4px;
+  outline-offset: -2px;
 }
 
 .directory a:focus-visible .action,
 .directory a:active .action {
+  color: var(--accent);
   opacity: 1;
 }
 
 @media (hover: hover) and (pointer: fine) {
   .directory a:hover {
     color: var(--accent);
+    background-color: rgba(34, 0, 255, 0.025);
   }
 
   .directory a:hover .action {
+    color: var(--accent);
     opacity: 1;
   }
 }
@@ -72,6 +87,17 @@
 @media (hover: none), (pointer: coarse) {
   .action {
     opacity: 1;
+  }
+}
+
+@media (width < 768px) {
+  .directory a {
+    padding-inline: 16px;
+  }
+
+  .directory a + a {
+    background-position: 16px 0;
+    background-size: calc(100% - 32px) 1px;
   }
 }
 

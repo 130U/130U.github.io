@@ -94,10 +94,16 @@
   letter-spacing: var(--heading-tracking);
 }
 
-/* A hanging row: the item title on axis A, its prose on axis B. Whitespace,
-   not rules, separates rows. */
+/* A framed row: the item title hangs on the left and a dashed hairline divides
+   it from its prose. */
+.row {
+  padding: var(--frame-pad) 36px 22px;
+  border: 1px solid var(--frame);
+  background: var(--panel);
+}
+
 .row + .row {
-  margin-top: 64px;
+  margin-top: 16px;
 }
 
 .rowTitle,
@@ -131,7 +137,9 @@
 }
 
 .educationList :global(.education-entry) + :global(.education-entry) {
-  margin-top: 28px;
+  margin-top: 24px;
+  padding-top: 24px;
+  background: var(--dash-x) left top / 100% 1px no-repeat;
 }
 
 .educationList :global(.education-degree) {
@@ -190,11 +198,14 @@
   outline-offset: 4px;
 }
 
+/* Contact fields share one frame, divided by dashed hairlines. */
 .contactStrip {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
   margin: 0;
   padding: 0;
+  border: 1px solid var(--frame);
+  background: var(--panel);
   list-style: none;
 }
 
@@ -203,10 +214,11 @@
   min-width: 0;
   align-content: start;
   gap: 6px;
+  padding: 18px 24px 20px;
 }
 
 .contactStrip li + li {
-  padding-left: 24px;
+  background: var(--dash-y) left top / 1px 100% no-repeat;
 }
 
 .contactLabel {
@@ -270,15 +282,12 @@
 
   .rowBody {
     max-width: none;
-    padding-right: var(--prose-inset);
+    padding-left: var(--hang-gap);
+    background: var(--dash-y) left top / 1px 100% no-repeat;
   }
 
   .contactStrip {
     grid-template-columns: minmax(0, 4fr) minmax(0, 3fr) minmax(0, 3fr);
-  }
-
-  .contactStrip li + li {
-    padding-left: 0;
   }
 }
 
@@ -334,19 +343,26 @@
     margin-bottom: 28px;
   }
 
+  .row {
+    padding: 24px 20px 16px;
+  }
+
   .row + .row {
-    margin-top: 48px;
+    margin-top: 12px;
   }
 }
 
 @media (max-width: 540px) {
   .contactStrip {
     grid-template-columns: 1fr;
-    gap: 20px;
+  }
+
+  .contactStrip li {
+    padding: 14px 16px 16px;
   }
 
   .contactStrip li + li {
-    padding: 0;
+    background: var(--dash-x) left top / 100% 1px no-repeat;
   }
 }
 
