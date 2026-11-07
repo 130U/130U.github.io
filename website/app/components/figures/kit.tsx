@@ -255,7 +255,7 @@ export function BarRow({ label, value, valueNote, grid = [], rules = [], rowClas
       <div className={styles.barLabel}><span className={styles.labelText}>{typeof label === "string" ? <Tx>{label}</Tx> : label}</span></div>
       <div className={styles.track}>{children}</div>
       <div className={styles.value}>
-        <span className={styles.valueText}>{typeof value === "string" ? <Tx>{value}</Tx> : value}</span>
+        <span>{typeof value === "string" ? <Tx>{value}</Tx> : value}</span>
         {valueNote && <small>{typeof valueNote === "string" ? <Tx>{valueNote}</Tx> : valueNote}</small>}
       </div>
     </div>
@@ -265,7 +265,7 @@ export function BarRow({ label, value, valueNote, grid = [], rules = [], rowClas
 /** Labels for the dashed reference rules, set above the first row. */
 export function BarHeader({ marks }: { marks: Array<{ at: number; label: string; tone?: Tone; anchor?: "left" | "right" | "center" }> }) {
   return (
-    <div className={`${styles.row} ${styles.headerRow}`}>
+    <div className={styles.row}>
       <div className={styles.barHeader}>
         {marks.map((mark, index) => (
           <span key={index} className={`${styles.headerMark} ${styles[mark.tone ?? "ink"]}`} data-anchor={mark.anchor ?? "center"} style={{ left: `${mark.at}%` }}><Tx>{mark.label}</Tx></span>
@@ -277,7 +277,7 @@ export function BarHeader({ marks }: { marks: Array<{ at: number; label: string;
 
 export function BarAxis({ x, ticks, title }: { x: Scale; ticks: Tick[]; title?: string }) {
   return <>
-    <div className={`${styles.row} ${styles.axisRow}`}>
+    <div className={styles.row}>
       <div className={styles.axis}>
         {ticks.map((tick, index) => {
           const left = x(tick.at);

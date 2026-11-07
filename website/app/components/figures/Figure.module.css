@@ -366,7 +366,7 @@
 }
 
 /* A wrapping label takes its natural width up to its maximum, wherever it is
-   anchored; near the right edge it would otherwise shrink to one word a line. */
+   anchored. */
 .mark[data-wrap] {
   width: max-content;
   white-space: normal;
@@ -856,10 +856,6 @@
   clip-path: inset(-12px 100% -12px -12px);
 }
 
-.figure[data-reveal="pending"] .grow {
-  transform: translateY(-50%) scaleX(0);
-}
-
 .figure[data-reveal="pending"] .fade {
   opacity: 0;
 }
@@ -872,10 +868,6 @@
 .figure[data-reveal="in"] .track {
   clip-path: inset(-12px -12px -12px -12px);
   transition: clip-path 800ms var(--ease-out);
-}
-
-.figure[data-reveal="in"] .grow {
-  transition: transform 700ms var(--ease-out);
 }
 
 .figure[data-reveal="in"] .fade {

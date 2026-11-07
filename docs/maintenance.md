@@ -119,7 +119,7 @@ reconcile the edition with the new import.
 The dependence source tree includes supporting TeX inputs needed to resolve
 cross-references. Its four PNG figures are source evidence; copies in
 `public/assets/research/dependence/` stay published, and tests check their byte
-identity. The article draws these figures natively instead (see Article figures). The readers link appendices and supplementary proofs to the pinned full
+identity. The article draws these figures natively (see Article figures). The readers link appendices and supplementary proofs to the pinned full
 manuscripts and return to the corresponding About research entry.
 
 ### Legal research

@@ -1425,9 +1425,9 @@
 .budgetLabel.budgetLabelEnd {
   padding-right: 9px;
   padding-left: 0;
+  text-align: right;
 }
 
-.budgetLabelEnd,
 .alignEnd {
   text-align: right;
 }
