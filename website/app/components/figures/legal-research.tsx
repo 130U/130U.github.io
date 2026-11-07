@@ -252,7 +252,7 @@ export function EvidentiaryChain() {
         <ol className={styles.ladder} aria-label="Evidentiary chain">
           {links.map((link, index) => (
             <li key={link.title}>
-              <span className={`${kit.node} ${styles.ladderNode}`} data-tone={index === links.length - 1 ? "quiet" : undefined}>
+              <span className={`${kit.node} ${styles.ladderNode}`}>
                 <span className={styles.stepIndex} aria-hidden="true">{String(index + 1).padStart(2, "0")}</span>
                 {link.title}
               </span>
@@ -286,7 +286,7 @@ export function DeepBay() {
     <Figure
       id="deep-bay"
       title="Deep Bay: canopy gained, mudflat lost"
-      caption="Each panel keeps its own observation window and denominator. Together they show why added canopy cannot stand in for the performance of the whole wetland mosaic."
+      caption="Mangrove cover rose from 8 to 15 percent of the mapped area and mudflat fell from 56 to 43 percent; twelve of 42 wintering waterbird species declined significantly. Added canopy cannot stand in for the performance of the whole wetland mosaic."
     >
       <div className={styles.panels}>
         <div>

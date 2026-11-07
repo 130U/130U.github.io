@@ -424,9 +424,9 @@
       "formulaCount": 982
     },
     "/certified-valuation-arithmetic-asian-options/": {
-      "textSha256": "56271ffc2639679bb403af5efba4d352e8067a6bb93b2988b78c68f91bbdf5f6",
-      "characterCount": 48917,
-      "wordCount": 7069,
+      "textSha256": "fa11d2c003719ab399ea4795ec5bb599034e16742e1e3466944e58556b73f04b",
+      "characterCount": 48819,
+      "wordCount": 7055,
       "preview": "Skip to Main Content Theodore Ouyang Back to Selected Research Certified Valuation of Arithmetic Asian Options GitHub Full Manuscript Abstract We develop finite",
       "altTexts": [],
       "ariaLabels": [
@@ -576,7 +576,7 @@
         "Research data table",
         "Show the width budget, the change at the finest step or the signed enclosure",
         "Change in width from h=1/768 to h=1/1536: payoff remainder −0.000307, linear projection −0.000008, Q frequency tail +0.000383; total from 0.021667063872 to 0.021734290027.",
-        "Width contributions by Euler step. h=1/384: total 0.028009519599, 95.5% nonlinear. h=1/768: 0.021667063872, 94.5%. h=1/1536: 0.021734290027, 92.8%. h=1/192 has no certificate.",
+        "Width contributions by Euler step. h=1/384: total 0.028009519599, 95.5% nonlinear. h=1/768: 0.021667063872, 94.5%. h=1/1536: 0.021734290027, 92.8%.",
         "Signed Euler-minus-continuous enclosures. h=1/384: −0.014169989568 to 0.013839530031. h=1/768: −0.011024692273 to 0.010642371599. h=1/1536: −0.010967952032 to 0.010766337995.",
         "Scrollable mathematical expression",
         "Research data table",
@@ -602,8 +602,8 @@
         "twitterTitle": "Certified Valuation of Arithmetic Asian Options",
         "twitterDescription": "Certified bounds on the pricing error of arithmetic Asian options under projected Euler, built on common Gaussian smoothing, with weak expansions and a transfer result for posterior quantiles."
       },
-      "mathSourceSha256": "12c69e9db2c3e7823a257afb4c760860f8c6f9760b5ce97b7c83e3790eb84c95",
-      "formulaCount": 365
+      "mathSourceSha256": "36a5104b8896a6123437b62136c805800bf40abce779533896d858d67d0cfd68",
+      "formulaCount": 363
     },
     "/certified-rough-heston-valuation/": {
       "textSha256": "7388585aecee4da2deb401707ff8f537a92cd9eed1dad71f8cd2912c602295d2",
@@ -871,9 +871,9 @@
       "formulaCount": 164
     },
     "/experience/task-validity-in-financial-synthetic-data/": {
-      "textSha256": "40f50af7018e55697254e62d1efec1fe92134eb910a09e1f7657d301b981dba2",
-      "characterCount": 24032,
-      "wordCount": 3296,
+      "textSha256": "875bffbfd036f133b5482cf3fdbfa0a1dae90e71d57e3821aae9441ae4bac85d",
+      "characterCount": 24035,
+      "wordCount": 3297,
       "preview": "Skip to Main Content Theodore Ouyang Back to Experience Financial Task Design and Synthetic Data Engineering Organization Duke University × Leading Foundation M",
       "altTexts": [],
       "ariaLabels": [
@@ -997,9 +997,9 @@
       "formulaCount": 143
     },
     "/experience/evidence-uncertainty-and-decision-guarantees-in-investment-research/": {
-      "textSha256": "68511c85ef0c70321b4b7dd6289670497182728b61b280f939bed1db8573bbc6",
-      "characterCount": 18884,
-      "wordCount": 2778,
+      "textSha256": "d42edf8cb7d4f8fffc1e172e413e1cd6004ba735a0632e45e88f6043a9383de1",
+      "characterCount": 18894,
+      "wordCount": 2776,
       "preview": "Skip to Main Content Theodore Ouyang Back to Experience Evidence Verification and Robust Comparison in Investment Research Organization Duke University × Leadin",
       "altTexts": [],
       "ariaLabels": [
@@ -1328,9 +1328,9 @@
       }
     },
     "/experience/mangrove-restoration-and-compensatory-mitigation/": {
-      "textSha256": "c1e1d5572c916c7880668db6fd4be8b59e15640d3f9285597940d611f217e591",
-      "characterCount": 66251,
-      "wordCount": 9228,
+      "textSha256": "9736c0925c341161cf0cd23cb8250c844d3d6a5c8da15db4b350fb5ac40d92a0",
+      "characterCount": 66332,
+      "wordCount": 9243,
       "preview": "Skip to Main Content Theodore Ouyang Back to Experience Mangrove Restoration and the Limits of Compensatory Mitigation: Lessons from Florida for the Greater Bay",
       "altTexts": [],
       "ariaLabels": [

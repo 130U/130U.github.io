@@ -21,7 +21,6 @@ export const articleFigures: Readonly<Record<string, readonly FigurePlacement[]>
       figure: "asian-width",
       after: { paragraph: "The entries of Table 8 are width contributions" },
       evidence: [
-        "No certificate: projection guard fails",
         "$`[-0.014169989568,0.013839530031]`$ | 0.028009519599",
         "$`[-0.011024692273,0.010642371599]`$ | 0.021667063872",
         "$`[-0.010967952032,0.010766337995]`$ | 0.021734290027",
