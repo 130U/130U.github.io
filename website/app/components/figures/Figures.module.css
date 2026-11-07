@@ -1,14 +1,4 @@
 /* Figure-specific geometry. Shared roles, colours and rows live in Figure.module.css. */
-.lead {
-  position: absolute;
-  top: 50%;
-  left: 0;
-  height: 0;
-  border-top: 1.5px dashed currentColor;
-  transform: translateY(-50%);
-  transform-origin: left center;
-}
-
 .id {
   display: inline-block;
   min-width: 1.9em;
@@ -1018,4 +1008,426 @@
   color: var(--muted);
   font-size: var(--type-label);
   line-height: var(--label-leading);
+}
+
+/* ---------- Manuscript figures drawn natively (Critical Dependence Stress) ---------- */
+/* Side-by-side panels share their title row, so the drawings align even when
+   one title wraps; the shorter title sits on its drawing. */
+.panels {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  column-gap: 28px;
+}
+
+.panels > .panel {
+  display: grid;
+  grid-row: span 2;
+  grid-template-rows: subgrid;
+  row-gap: 0;
+}
+
+.panels > .panel > .panelTitle {
+  align-self: end;
+}
+
+@container figure (max-width: 540px) {
+  .panels {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .panels > .panel + .panel {
+    margin-top: 30px;
+  }
+}
+
+.panel {
+  display: flex;
+  min-width: 0;
+  flex-direction: column;
+}
+
+.panelTitle {
+  margin: 0 0 14px;
+  color: var(--ink);
+  font-size: var(--type-interface);
+  font-weight: 500;
+  line-height: var(--interface-leading);
+  text-wrap: balance;
+}
+
+.note {
+  color: var(--supporting-ink);
+}
+
+.layerBand {
+  fill: var(--chart-tint-strong);
+}
+
+.discrepancyShade {
+  fill: var(--chart-tint-strong);
+  stroke: none;
+}
+
+/* Figure 2: the source region, the corner demand and the return triangles. */
+.corner {
+  display: grid;
+  grid-template-columns: minmax(0, 1.05fr) minmax(0, 1fr);
+  gap: 28px;
+  align-items: center;
+}
+
+@container figure (max-width: 540px) {
+  .corner {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+.omega {
+  fill: rgba(0, 0, 0, 0.035);
+  stroke: var(--chart-steel);
+  stroke-width: 1;
+}
+
+.demand {
+  fill: var(--accent);
+  fill-opacity: 0.88;
+  transition: fill-opacity 200ms ease, opacity 200ms ease;
+}
+
+.capacity polygon {
+  stroke: var(--ink);
+  stroke-width: 1.1;
+  stroke-linejoin: round;
+}
+
+.hatchLine.hatchLine {
+  stroke: var(--ink);
+  stroke-width: 0.9;
+  stroke-opacity: 0.6;
+  vector-effect: none;
+}
+
+.capacity {
+  transition: opacity 200ms ease;
+}
+
+.omegaLabel {
+  font-size: var(--type-subheading);
+}
+
+.diagonal.diagonal {
+  transform: translate(-50%, -50%) rotate(-45deg);
+}
+
+.bounds {
+  display: grid;
+  gap: 0;
+  margin: 0;
+  font-size: var(--type-interface);
+  line-height: var(--interface-leading);
+}
+
+.bounds > div {
+  padding: 16px 0;
+  border-top: 1px dashed var(--rule-medium);
+  transition: opacity 200ms ease;
+}
+
+.bounds > div:first-child {
+  padding-top: 0;
+  border-top: 0;
+}
+
+.bounds dt {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  margin-bottom: 8px;
+  color: var(--ink);
+  font-weight: 500;
+}
+
+.bounds dd {
+  margin: 4px 0 0 19px;
+  color: var(--supporting-ink);
+}
+
+.bounds dd[data-tone="accent"] {
+  color: var(--accent);
+}
+
+.cornerFigure[data-focus="demand"] [data-key="capacity"],
+.cornerFigure[data-focus="capacity"] [data-key="demand"] {
+  opacity: 0.28;
+}
+
+/* Figure 3: the proved range, the critical band and the inset. */
+.rangeFill {
+  color: var(--chart-tint-strong);
+}
+
+.criticalBand {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.045);
+  pointer-events: none;
+}
+
+.criticalLabel {
+  color: var(--ink);
+}
+
+.zoomWindow {
+  position: absolute;
+  border: 1px dashed var(--chart-steel);
+  pointer-events: none;
+}
+
+.inset {
+  margin-top: 22px;
+  padding-top: 18px;
+  border-top: 1px dashed var(--rule-medium);
+}
+
+.insetTitle {
+  margin: 0 0 4px;
+  color: var(--ink);
+  font-size: var(--type-label);
+  font-weight: 500;
+  line-height: var(--label-leading);
+}
+
+.greenRule {
+  border-left: 1px dotted var(--chart-green);
+}
+
+/* Figure 4: small multiples of the three shares under models U and D. */
+.defs {
+  position: absolute;
+  width: 0;
+  height: 0;
+  overflow: hidden;
+}
+
+.shares {
+  display: grid;
+  grid-template-columns: auto repeat(3, minmax(0, 1fr));
+  gap: 24px 22px;
+  align-items: center;
+  padding-right: 14px;
+  font-size: var(--type-label);
+  line-height: var(--label-leading);
+}
+
+.shareRow {
+  display: contents;
+}
+
+.shareAxisY,
+.shareAxisX {
+  position: absolute;
+  color: var(--muted);
+  white-space: nowrap;
+  pointer-events: none;
+}
+
+.shareAxisY {
+  right: calc(100% + 6px);
+  bottom: calc(100% + 4px);
+}
+
+.shareAxisX {
+  left: calc(100% + 6px);
+  top: 100%;
+  transform: translateY(-50%);
+}
+
+.shareHead {
+  align-self: end;
+  color: var(--ink);
+  font-weight: 500;
+  text-align: center;
+  text-wrap: balance;
+}
+
+.shareRowHead {
+  display: flex;
+  flex-direction: column;
+  padding-right: 16px;
+  color: var(--supporting-ink);
+  white-space: nowrap;
+}
+
+.shareRowHead strong {
+  color: var(--ink);
+  font-size: var(--type-interface);
+  font-weight: 500;
+}
+
+.sharePanel {
+  position: relative;
+  aspect-ratio: 1;
+}
+
+.sharePanel[data-last-row] {
+  margin-bottom: 18px;
+}
+
+.sharePanel svg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+}
+
+.sharePanel polygon[data-key] {
+  transition: opacity 200ms ease;
+}
+
+.shareOutline {
+  fill: none;
+  stroke: var(--rule-strong);
+  stroke-width: 1;
+  vector-effect: non-scaling-stroke;
+}
+
+.sharePanel [data-axis] {
+  stroke: var(--rule-strong);
+  stroke-width: 1;
+  vector-effect: non-scaling-stroke;
+}
+
+.flowFigure[data-focus] .sharePanel polygon[data-key]:not([data-key-active]) {
+  opacity: 0.22;
+}
+
+.shareTickY,
+.shareTickX {
+  position: absolute;
+  color: var(--muted);
+  white-space: nowrap;
+  pointer-events: none;
+}
+
+.shareTickY {
+  right: calc(100% + 6px);
+  transform: translateY(-50%);
+}
+
+.shareTickX {
+  top: calc(100% + 4px);
+  transform: translateX(-50%);
+}
+
+.colorbar {
+  display: grid;
+  grid-template-columns: auto minmax(0, 15rem);
+  grid-template-areas: "label ramp" ". ticks";
+  gap: 4px 14px;
+  align-items: center;
+  justify-content: start;
+  margin-top: 24px;
+  color: var(--supporting-ink);
+  font-size: var(--type-label);
+  line-height: var(--label-leading);
+}
+
+.colorbarLabel {
+  grid-area: label;
+}
+
+.colorbarRamp {
+  grid-area: ramp;
+  height: 10px;
+}
+
+.colorbarTicks {
+  display: flex;
+  grid-area: ticks;
+  justify-content: space-between;
+  color: var(--muted);
+}
+
+@container figure (max-width: 480px) {
+  .colorbar {
+    grid-template-columns: minmax(0, 1fr);
+    grid-template-areas: "label" "ramp" "ticks";
+  }
+}
+
+/* ---------- The critical-budget ruler ---------- */
+.budgetBand {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  border-inline: 1px solid rgba(34, 0, 255, 0.28);
+  background: var(--chart-tint);
+}
+
+.budgetBand::after {
+  position: absolute;
+  inset: 0;
+  content: "";
+}
+
+.budgetBar {
+  position: absolute;
+  bottom: 0;
+  height: 6px;
+  transform-origin: left center;
+  background: var(--accent);
+  pointer-events: none;
+}
+
+.ruler[data-reveal="pending"] .budgetBar {
+  transform: scaleX(0);
+}
+
+.ruler[data-reveal="in"] .budgetBar {
+  transition: transform 700ms var(--ease-out);
+}
+
+.budgetRule {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 0;
+  border-left: 1px dashed var(--ink);
+  pointer-events: none;
+}
+
+.budgetGap {
+  position: absolute;
+  height: 0;
+  border-top: 1.5px solid var(--accent);
+  pointer-events: none;
+}
+
+.budgetGap::after {
+  position: absolute;
+  top: -5px;
+  right: -1px;
+  width: 0;
+  height: 0;
+  border-top: 4.25px solid transparent;
+  border-bottom: 4.25px solid transparent;
+  border-left: 7px solid var(--accent);
+  content: "";
+}
+
+.budgetLabel {
+  padding-left: 9px;
+  line-height: 1.6;
+}
+
+.budgetLabel.budgetLabelEnd {
+  padding-right: 9px;
+  padding-left: 0;
+  text-align: right;
+}
+
+.alignEnd {
+  text-align: right;
 }

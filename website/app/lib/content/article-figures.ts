@@ -225,6 +225,59 @@ export const tableEmphasis: Readonly<Record<string, readonly TableEmphasis[]>> =
   ],
 };
 
+// Manuscript figures drawn natively in place of their image files, keyed by
+// the image path. Each drawing evaluates the formulas that produced the
+// manuscript image (130U/mathematical-finance-project at the pinned commit:
+// code/generate_mechanism_figures.py and
+// new-computations/plot_profiles_and_flows.py); `evidence` ties its labels and
+// plotted functions to the article text, and the build fails if any is missing.
+export const manuscriptFigures: Readonly<Record<string, { figure: string; evidence: string[] }>> = {
+  "/assets/research/dependence/tail-layer-repair.png": {
+    figure: "dependence-tail-layer",
+    evidence: [
+      "A layer with thickness and mass of order $`O(\\varepsilon)`$, transported over distances of order $`O(\\varepsilon)`$, incurs second-order cost.",
+      "Their integrated absolute values give the compensation lower bound, with leading coefficients $`\\|j_i\\|_1`$",
+      "\\mathcal C(\\alpha)=I(\\alpha)+\\sum_{i=1}^3\\gamma_i\\|j_i\\|_{L^1(I_i)}",
+    ],
+  },
+  "/assets/research/dependence/corner-capacity.png": {
+    figure: "dependence-corner",
+    evidence: [
+      "illustrated on $`I=I_3=[0,2]`$ for $`\\beta=7/4`$, $`v=15/4`$, $`\\delta=0.35`$",
+      "The blue region $`E_\\delta`$ stays away from the diagonal",
+      "Return sources lie in the hatched triangles",
+      "with $`\\lambda=\\min f`$, $`\\Lambda=\\max f`$, and $`\\Delta=\\xi_+-\\xi_-`$, violate $`M_\\delta\\le N_1+N_2`$",
+    ],
+  },
+  "/assets/research/dependence/budget-comparison.png": {
+    figure: "dependence-envelopes",
+    evidence: [
+      "2s-5/16,&0\\le s\\le1/96,\\\\\ns-29/96,&1/96\\le s\\le29/96.",
+      "\\overline F(s):=\\min\\left\\{2s-\\frac5{16},\\frac43s-\\frac{13}{48}\\right\\}",
+      "The inset shows the exact initial interval $`[0,1/96]`$ in green. The dashed line extrapolates its slope to $`J=5/32`$, whereas the critical budget lies in $`[13/64,29/96]`$.",
+      "The guaranteed linear segment $`[0,s_{\\rm lin}]`$",
+    ],
+  },
+  "/assets/research/dependence/optimal-flow-shares.png": {
+    figure: "dependence-flow-shares",
+    evidence: [
+      "for $`\\vartheta=0`$ (U, top) and $`\\vartheta=1/4`$ (D, bottom). The panels evaluate the explicit shares $`a,b,1-a-b`$",
+      "all use the same scale from zero to one",
+      "Blank regions lie outside $`D`$.",
+    ],
+  },
+};
+
+/** The native drawing for a manuscript image, after checking its evidence. */
+export function manuscriptFigureFor(slug: string, src: string, source: string) {
+  const entry = manuscriptFigures[src];
+  if (!entry) return undefined;
+  for (const evidence of entry.evidence) {
+    if (!source.includes(evidence)) throw new Error(`Figure ${entry.figure} in ${slug} restates text missing from the article: ${evidence}`);
+  }
+  return entry.figure;
+}
+
 function anchorMatches(anchor: FigureAnchor, block: { type: string; source?: string; text?: string; firstCell?: string }) {
   if ("table" in anchor) return block.type === "table" && (block.firstCell ?? "").startsWith(anchor.table);
   return block.type === "paragraph" && (block.source ?? block.text ?? "").trimStart().startsWith(anchor.paragraph);

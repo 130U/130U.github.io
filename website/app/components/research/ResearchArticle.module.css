@@ -73,16 +73,44 @@
   overflow-wrap: anywhere;
 }
 
+/* Tables share the figures' frame. A manuscript caption becomes the frame's
+   title; the header is a tinted band in label type over a firm rule; rows part
+   on hairlines; the hovered row and column take a quiet tint and the hovered
+   column's header turns accent. Numbers align right in tabular figures. */
+.tableFrame {
+  --table-pad: clamp(16px, 4cqi, 24px);
+  container: table-frame / inline-size;
+  min-width: 0;
+  max-width: 100%;
+  margin: 2.75rem 0;
+  border: 1px solid var(--frame);
+}
+
+.tableTitle {
+  max-width: 34rem;
+  margin: 0;
+  padding: 22px var(--table-pad) 18px;
+  color: var(--ink);
+  font-family: var(--font-text);
+  font-size: var(--type-interface);
+  font-weight: 500;
+  line-height: var(--interface-leading);
+  text-wrap: pretty;
+}
+
+.tableTitle strong {
+  font-weight: inherit;
+}
+
 .tableRegion:focus-visible {
   outline: 2px solid var(--accent);
-  outline-offset: 2px;
+  outline-offset: -2px;
 }
 
 .tableRegion {
   min-width: 0;
   max-width: 100%;
-  margin: 2rem 0;
-  padding-bottom: 0.5rem;
+  margin: 0;
   overflow-x: auto;
   overflow-y: hidden;
   overscroll-behavior-x: contain;
@@ -103,7 +131,7 @@
 
 .cell {
   min-width: 8rem;
-  padding: 1rem 1.25rem;
+  padding: 0.875rem 1rem;
   border-bottom: 1px solid var(--rule);
   vertical-align: top;
   overflow-wrap: normal;
@@ -111,17 +139,40 @@
   white-space: normal;
 }
 
+.cell:first-child {
+  padding-left: var(--table-pad);
+}
+
+.cell:last-child {
+  padding-right: var(--table-pad);
+}
+
 .cell code {
   overflow-wrap: normal;
   word-break: normal;
 }
 
-/* Tables read like the figures: a firm rule under the header, a quiet row
-   tint on hover, the hovered column in the accent tint, and numbers aligned on
-   the right in tabular figures. An emphasized row or column carries the tint. */
 .table thead .cell {
+  padding-top: 0.75rem;
+  padding-bottom: 0.75rem;
   vertical-align: bottom;
+  border-top: 1px solid var(--rule);
   border-bottom: 1px solid var(--rule-strong);
+  background: rgba(0, 0, 0, 0.028);
+  color: var(--ink);
+  font-family: var(--font-text);
+  font-size: var(--type-label);
+  font-weight: 500;
+  line-height: var(--label-leading);
+  transition: color 160ms ease, box-shadow 160ms ease;
+}
+
+.tableRegion:first-child thead .cell {
+  border-top: 0;
+}
+
+.table tbody tr:last-child > .cell {
+  border-bottom: 0;
 }
 
 .table tbody tr {
@@ -136,6 +187,25 @@
 
 .table .cell[data-column-hover] {
   background: rgba(0, 0, 0, 0.035);
+}
+
+.table thead .cell[data-column-hover] {
+  background: rgba(0, 0, 0, 0.05);
+  color: var(--accent);
+  box-shadow: inset 0 -2px 0 var(--accent);
+}
+
+/* Rows below the fold enter once, top to bottom, as the table scrolls in. */
+.tableFrame[data-reveal="pending"] tbody tr {
+  opacity: 0;
+  transform: translateY(6px);
+}
+
+.tableFrame[data-reveal="in"] tbody tr {
+  transition:
+    opacity 420ms ease calc(var(--row, 0) * 40ms),
+    transform 560ms var(--ease-out) calc(var(--row, 0) * 40ms),
+    background-color 160ms ease;
 }
 
 .table .cell[data-emphasis],

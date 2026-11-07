@@ -192,14 +192,13 @@ export function ExitPaths() {
       id="exit-paths"
       title="Separating the decision to stop from the act of stopping"
       caption="A severe termination shock needs substantial cooling, sudden cessation and a prolonged interruption. Treating program control, operation and the physical trajectory as separate decisions lets authority change without making abrupt cessation the price of dissent."
-      legend={[{ label: "Abrupt cessation", tone: "steel", shape: "dash" }, { label: "Tapering pathway", tone: "accent", shape: "line" }]}
     >
       <Plot
         label="Injection intensity rises and holds; when authorization expires, an automatic stop would drop it at once, while a tapering pathway lowers it gradually."
         x={x}
         y={y}
-        height="clamp(200px, 44cqi, 250px)"
-        inset={{ left: 14, top: 36 }}
+        height="clamp(250px, 46cqi, 262px)"
+        inset={{ left: 14, top: 36, bottom: 46 }}
         yTicks={[{ at: 0, label: "", solid: true }]}
         yTitle="Injection intensity"
         xTitle="Time"
@@ -211,8 +210,8 @@ export function ExitPaths() {
       >
         <Dot left={x(decision)} top={100 - y(1)} tone="ink" />
         <Mark left={x(decision)} top={100 - y(1)} anchor="bottom-left" wrap className={kit.muted}>Authorization expires or support is withdrawn</Mark>
-        <Mark left={x(decision)} top={72} anchor="right" tone="steel" className={kit.fade}>Abrupt cessation</Mark>
-        <Mark left={x(0.74)} top={100 - y(0.58)} anchor="left" tone="accent" wrap className={kit.fade}>Tapering pathway</Mark>
+        <Mark left={x(decision)} top={100 - y(0.2)} anchor="right" tone="steel" className={kit.fade}>Abrupt cessation</Mark>
+        <Mark left={100} top={100 - y(0.8)} anchor="right" tone="accent" wrap className={`${kit.fade} ${styles.alignEnd}`} style={{ maxWidth: "4.5rem" }}>Tapering pathway</Mark>
       </Plot>
       <dl className={styles.lanes} aria-label="Three separate decisions">
         <dt>Program control</dt><dd>Political authority can change.</dd>
@@ -362,7 +361,7 @@ export function SanTinLoss() {
         <span className={styles.vline} style={{ left: `${x(filling)}%` }} />
         <Mark left={x(0.1)} top={4} anchor="center" tag className={kit.muted}>1</Mark>
         <Mark left={x(filling)} top={4} anchor="center" tag className={kit.muted}>9</Mark>
-        <Mark left={x(0.66)} top={100 - y(0.86)} anchor="center" tone="accent" className={kit.fade}>Period of loss</Mark>
+        <Mark left={x(0.6)} top={100 - y(0.86)} anchor="center" tone="accent" className={kit.fade}>Period of loss</Mark>
       </Plot>
       <dl className={styles.lanes} aria-label="Approval conditions">
         <dt>Condition 1</dt><dd>Habitat Creation and Management Plan submitted for approval at least nine months before pond filling.</dd>

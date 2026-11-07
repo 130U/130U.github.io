@@ -159,10 +159,12 @@ export function LabelFlip() {
   const y = linear(0, 50);
   const curve = sample(0, 3, 121, (ratio) => 100 * normalCdf(-ratio));
   const every = curve.filter((_, index) => index % 4 === 0);
+  // Labels sit above and right of each point, clear of the falling curve; the
+  // last starts a little earlier, where the curve is already flat, to fit narrow figures.
   const points = [
-    { ratio: 0.25, rate: "40.13%", anchor: "left" as const },
-    { ratio: 1, rate: "15.87%", anchor: "left" as const },
-    { ratio: 2, rate: "2.28%", anchor: "bottom" as const },
+    { ratio: 0.25, rate: "40.13%", nudge: 0 },
+    { ratio: 1, rate: "15.87%", nudge: 0 },
+    { ratio: 2, rate: "2.28%", nudge: -2 },
   ];
   return (
     <Figure
@@ -192,7 +194,7 @@ export function LabelFlip() {
           const rate = Number.parseFloat(point.rate);
           return <span key={point.ratio}>
             <Dot left={x(point.ratio)} top={100 - y(rate)} tone="ink" className={kit.fade} />
-            <Mark left={x(point.ratio)} top={100 - y(rate)} anchor={point.anchor} className={kit.fade} tag>{`$\\gamma/s=${point.ratio}$: ${point.rate}`}</Mark>
+            <Mark left={x(point.ratio) + point.nudge} top={100 - y(rate)} anchor="above-right" className={kit.fade} tag>{`$\\gamma/s=${point.ratio}$: ${point.rate}`}</Mark>
           </span>;
         })}
       </Plot>
@@ -239,7 +241,7 @@ export function BridgeLeakage() {
           <span className={styles.bracket} style={{ left: `${x(0.5)}%`, top: `${100 - y(0.5)}%`, height: `${y(0.5) - y(0.25)}%` }} />
           <Dot left={x(0.5)} top={100 - y(0.5)} tone="ink" className={kit.fade} />
           <Dot left={x(0.5)} top={100 - y(0.25)} tone="accent" className={kit.fade} />
-          <Mark left={x(0.5)} top={100 - y(0.375)} anchor="left" tone="accent" wrap className={kit.fade}>Variance halves</Mark>
+          <Mark left={x(0.5)} top={100 - y(0.375)} anchor="left" tone="accent" className={kit.fade}>Variance halves</Mark>
           <Mark left={x(-0.19)} top={50} anchor="center" className={kit.muted}>History</Mark>
         </Plot>
         <div className={styles.info} style={{ "--split": `${x(0)}%` } as CSSProperties} aria-label="Information sets" role="img">
@@ -288,7 +290,7 @@ export function RankingReversal() {
               <Mark left={100} top={100 - y(model.score)} anchor="left" tone={model.tone}><>{model.score}% <strong>{model.name}</strong></></Mark>
             </span>
           ))}
-          <Mark left={x(0.44)} top={100 - y(65.6)} anchor="center" tone="accent" className={kit.fade}>$\alpha_B=36\%$</Mark>
+          <Mark left={x(0.44)} top={100 - y(65)} anchor="center" tone="accent" className={kit.fade}>$\alpha_B=36\%$</Mark>
           <Mark left={x(0.36)} top={100 - y(74.6)} anchor="center" className={kit.fade}>$\alpha_A=4\%$</Mark>
         </Plot>
       </div>
@@ -442,9 +444,9 @@ export function CoverageCollapse() {
       >
         <span className={styles.hline} style={{ top: `${100 - y(95)}%` }} />
         <Dot left={x(100)} top={100 - y(48.4)} tone="ink" className={kit.fade} />
-        <Mark left={x(100)} top={100 - y(48.4)} anchor="left" tag className={kit.fade}>48.40% at $n=100$</Mark>
+        <Mark left={x(100)} top={100 - y(48.4)} anchor="above-right" tag className={kit.fade}>48.40% at $n=100$</Mark>
         <Dot left={x(1000)} top={100 - y(0.000637)} tone="ink" className={kit.fade} />
-        <Mark left={100} top={100 - y(0.000637)} anchor="bottom-right" tag className={kit.fade}>{"0.000637% at $n=1{,}000$"}</Mark>
+        <Mark left={100} top={100 - y(0.000637)} anchor="bottom-right" tag wrap className={`${kit.fade} ${styles.alignEnd}`} style={{ maxWidth: `${100 - x(1000)}%` }}>{"0.000637% at $n=1{,}000$"}</Mark>
         <Mark left={100} top={100 - y(97.5)} anchor="bottom-right" tone="accent" className={kit.fade}>97.50%</Mark>
       </Plot>
     </Figure>

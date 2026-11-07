@@ -118,8 +118,8 @@ reconcile the edition with the new import.
 
 The dependence source tree includes supporting TeX inputs needed to resolve
 cross-references. Its four PNG figures are source evidence; copies in
-`public/assets/research/dependence/` are served assets. Tests check their byte
-identity. The readers link appendices and supplementary proofs to the pinned full
+`public/assets/research/dependence/` stay published, and tests check their byte
+identity. The article draws these figures natively (see Article figures). The readers link appendices and supplementary proofs to the pinned full
 manuscripts and return to the corresponding About research entry.
 
 ### Legal research
@@ -158,15 +158,23 @@ any new list. `LogicDiagram` renders the article diagrams from
 the About hero is isolated in `app/components/clarinet-hero/`.
 
 Article figures live in `app/components/figures/`: `kit.tsx` holds the frame, scales,
-plot and bar primitives, `selected-research.tsx`, `ai-research.tsx` and
-`legal-research.tsx` hold the figures, and `FigureController` adds view switches,
-readouts, the proof-obligation graph, table column highlighting and the entrance.
+plot, schematic and bar primitives, `selected-research.tsx`, `ai-research.tsx` and
+`legal-research.tsx` hold the figures, `dependence-manuscript.tsx` draws the
+dependence manuscript's four figures from the formulas in
+`130U/mathematical-finance-project` (`code/generate_mechanism_figures.py` and
+`new-computations/plot_profiles_and_flows.py` at the pinned commit), and
+`FigureController` adds view switches, readouts, linked emphasis, the
+proof-obligation graph, table column highlighting and the entrances of figures and
+table rows. The research renderer frames every table and sets a directly preceding
+"**Table N.**" caption paragraph inside the frame as its title.
 `app/lib/content/article-figures.ts` places each figure after one existing block,
 named by the opening of its source text or a table's first header cell, and lists the
 manuscript text each figure restates. The build fails when an anchor matches no block
 or several, or when any listed text is missing from the article, so edit a figure's
-data and its evidence together. The same module names the row or column a table
-emphasizes. Manuscript checks in the tests read articles without these figures.
+data and its evidence together. The same module maps each dependence image path to
+its native drawing, with evidence checked the same way, and names the row or column a
+table emphasizes. Manuscript checks in the tests read articles without these figures
+and without the labels of the native drawings, keeping their manuscript captions.
 
 `ResearchArticle` serves AI and Selected Research. The Markdown parser supports
 typed prose, emphasis, links, headings, tables, and formulas rather than arbitrary
