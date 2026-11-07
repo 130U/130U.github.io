@@ -1,0 +1,1030 @@
+/* Figure-specific geometry. Shared roles, colours and rows live in Figure.module.css. */
+.lead {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  height: 0;
+  border-top: 1.5px dashed currentColor;
+  transform: translateY(-50%);
+  transform-origin: left center;
+}
+
+.trackNote {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  right: 0;
+  transform: translateY(-50%);
+  color: var(--muted);
+}
+
+.id {
+  display: inline-block;
+  min-width: 1.9em;
+  color: var(--ink);
+  font-weight: 500;
+}
+
+.stageText {
+  color: var(--supporting-ink);
+}
+
+.link {
+  position: absolute;
+  top: 50%;
+  height: 1.5px;
+  margin-top: -0.75px;
+  background: currentColor;
+}
+
+/* Rough Heston candidates: one bar per candidate, moved between layers. */
+.candidate {
+  left: var(--from-b);
+  width: var(--width-b);
+  color: var(--ink);
+  transition: left 650ms var(--ease-out), width 650ms var(--ease-out), color 300ms ease;
+}
+
+.candidates[data-view="n1024"] .candidate {
+  left: var(--from-a);
+  width: var(--width-a);
+}
+
+.candidates[data-view="n1024"] .unresolved .candidate {
+  color: var(--chart-steel);
+}
+
+.candidates[data-view="n2048"] .best .candidate {
+  color: var(--accent);
+}
+
+.candidates .layerA {
+  display: none;
+}
+
+.candidates[data-view="n1024"] .layerA {
+  display: inline;
+}
+
+.candidates[data-view="n1024"] .layerB {
+  display: none;
+}
+
+.tally {
+  margin: 14px 0 0;
+  color: var(--supporting-ink);
+  font-size: var(--type-label);
+  line-height: var(--label-leading);
+}
+
+/* ---------- Line-chart annotations ---------- */
+
+.hline {
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: 0;
+  border-top: 1px dashed var(--rule-strong);
+  pointer-events: none;
+}
+
+.vline {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 0;
+  border-left: 1px dashed var(--rule-strong);
+  pointer-events: none;
+}
+
+.bracket {
+  position: absolute;
+  width: 0;
+  border-left: 1.5px solid var(--accent);
+  pointer-events: none;
+}
+
+.bracket::before,
+.bracket::after {
+  position: absolute;
+  left: -4px;
+  width: 7px;
+  height: 0;
+  border-top: 1.5px solid var(--accent);
+  content: "";
+}
+
+.bracket::before { top: 0; }
+
+.bracket::after { bottom: 0; }
+
+/* ---------- Slope chart ---------- */
+.columnHead {
+  width: max-content;
+  max-width: 6.5rem;
+  color: var(--muted);
+  text-align: center;
+}
+
+/* ---------- Timelines below a chart ---------- */
+/* Information-set bands share the plot's horizontal scale. */
+.info {
+  display: grid;
+  grid-template-columns: var(--split) minmax(0, 1fr);
+  row-gap: 8px;
+  margin: 26px var(--pr, 14px) 0 var(--pl, 46px);
+  font-size: var(--type-label);
+  line-height: var(--label-leading);
+}
+
+.infoBand {
+  display: flex;
+  min-width: 0;
+  min-height: 28px;
+  align-items: center;
+  padding: 3px 6px;
+  border: 1px solid currentColor;
+}
+
+.infoBand[data-span] {
+  grid-column: 1 / -1;
+}
+
+.infoBand[data-fill] {
+  background: var(--chart-tint);
+}
+
+.infoBand[data-hatch] {
+  background: var(--chart-hatch);
+}
+
+.infoBand > span {
+  padding: 0 4px;
+  background: var(--page);
+  color: var(--ink);
+}
+
+.infoBand[data-fill] > span {
+  background: transparent;
+}
+
+/* ---------- Scenario explorer (investment research) ---------- */
+.scenarios {
+  position: relative;
+  height: 196px;
+  margin: 0 var(--pr, 14px) 0 var(--pl, 46px);
+}
+
+.scenarioDot {
+  position: absolute;
+  left: var(--x);
+  top: var(--y-none);
+  width: 13px;
+  height: 13px;
+  margin: -6.5px 0 0 -6.5px;
+  border-radius: 50%;
+  background: currentColor;
+  transition: top 600ms var(--ease-out), opacity 300ms ease;
+}
+
+.scenarioDot[data-sign="negative"] {
+  border: 1.5px solid currentColor;
+  background: var(--page);
+}
+
+.scenarioDot::after {
+  position: absolute;
+  inset: -8px;
+  content: "";
+}
+
+.scenarioFigure[data-view="shap"] .scenarioDot { top: var(--y-shap); }
+
+.scenarioFigure[data-view="z2"] .scenarioDot { top: var(--y-z2); }
+
+.scenarioFigure[data-view="z1"] .scenarioDot { top: var(--y-z1); }
+
+.laneSet {
+  position: absolute;
+  inset: 0;
+}
+
+.laneSet[hidden] {
+  display: none;
+}
+
+.scenarioAxis {
+  position: relative;
+  height: 30px;
+  margin: 0 var(--pr, 14px) 0 var(--pl, 46px);
+  border-top: 1px solid var(--rule-strong);
+  font-size: var(--type-label);
+}
+
+.scenarioAxis > span {
+  top: 7px;
+}
+
+.mini {
+  height: 5px;
+}
+
+.mini[data-row="0"] { top: calc(50% - 7px); }
+
+.mini[data-row="2"] { top: calc(50% + 7px); }
+
+.zero {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 0;
+  border-left: 1px solid var(--rule-strong);
+}
+
+.lane {
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: 0;
+  border-top: 1px dashed var(--rule-medium);
+}
+
+.laneLabel {
+  position: absolute;
+  left: 0;
+  transform: translateY(calc(-100% - 6px));
+  color: var(--muted);
+  font-size: var(--type-label);
+  white-space: nowrap;
+}
+
+.laneRegret {
+  position: absolute;
+  right: 0;
+  transform: translateY(calc(-100% - 6px));
+  color: var(--ink);
+  font-size: var(--type-label);
+  white-space: nowrap;
+}
+
+.laneRegret[data-zero] {
+  color: var(--accent);
+}
+
+/* ---------- Proof-obligation graph ---------- */
+.dag {
+  position: relative;
+  height: clamp(190px, 44cqi, 250px);
+}
+
+.dagField {
+  position: absolute;
+  inset: 0 24px;
+}
+
+.dagEdges {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+}
+
+.dagEdges line {
+  stroke: rgba(11, 11, 11, 0.45);
+  stroke-width: 1.25;
+  vector-effect: non-scaling-stroke;
+  transition: stroke 200ms ease;
+}
+
+.dagEdges line[data-state="unverified"] {
+  stroke: var(--chart-steel);
+  stroke-dasharray: 3 4;
+}
+
+.dagNode {
+  position: absolute;
+  display: inline-flex;
+  min-width: 40px;
+  min-height: 36px;
+  align-items: center;
+  justify-content: center;
+  padding: 4px 10px;
+  transform: translate(-50%, -50%);
+  border: 1px solid var(--ink);
+  background: var(--panel);
+  color: var(--ink);
+  font: inherit;
+  font-size: var(--type-interface);
+  line-height: 1;
+  cursor: pointer;
+  transition: border-color 200ms ease, background-color 200ms ease, color 200ms ease;
+}
+
+.dagNode:disabled {
+  cursor: default;
+}
+
+.dagNode[data-fixed] {
+  border-color: var(--rule-strong);
+  cursor: default;
+}
+
+.dagNode[data-state="failed"] {
+  border-color: var(--accent);
+  background: var(--accent);
+  color: #fff;
+}
+
+.dagNode[data-state="unverified"] {
+  border-style: dashed;
+  border-color: var(--chart-steel);
+  background: var(--chart-hatch), var(--page);
+  color: var(--supporting-ink);
+}
+
+@media (pointer: coarse) {
+  button.dagNode {
+    min-width: 44px;
+    min-height: 44px;
+  }
+}
+
+.dagNode:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .dagNode:not(:disabled):not([data-fixed]):hover {
+    border-color: var(--accent);
+  }
+}
+
+.readout {
+  min-height: 1.45em;
+  margin: 18px 0 0;
+  color: var(--ink);
+  font-size: var(--type-label);
+  line-height: var(--label-leading);
+}
+
+/* ---------- Diagrams: matrices, flows and chains ---------- */
+.matrix {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr) minmax(0, 1fr);
+  font-size: var(--type-label);
+  line-height: var(--label-leading);
+}
+
+.axisCell {
+  display: flex;
+  align-items: flex-end;
+  padding: 0 0 10px;
+  color: var(--muted);
+}
+
+.cell {
+  min-height: 112px;
+  margin: -1px 0 0 -1px;
+  padding: 14px 16px;
+  border: 1px solid var(--rule-medium);
+  transition: background-color 160ms ease;
+}
+
+.cell[data-tone="accent"] {
+  background: rgba(34, 0, 255, 0.03);
+}
+
+.cellTitle {
+  display: block;
+  color: var(--ink);
+  font-size: var(--type-interface);
+  font-weight: 500;
+  line-height: var(--interface-leading);
+}
+
+.cellText {
+  display: block;
+  margin-top: 4px;
+  color: var(--supporting-ink);
+}
+
+.cellExample {
+  display: block;
+  margin-top: 10px;
+  padding-top: 8px;
+  border-top: 1px dashed var(--dash);
+  color: var(--ink);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .cell:hover {
+    background: var(--chart-tint-strong);
+  }
+}
+
+.flow {
+  position: relative;
+  display: grid;
+  grid-template-columns: minmax(0, 1.25fr) 52px minmax(0, 1fr);
+  font-size: var(--type-label);
+  line-height: var(--label-leading);
+}
+
+/* The hatched result lane, as in a two-lane agent diagram. */
+.flow::before {
+  position: absolute;
+  top: 31px;
+  right: 0;
+  bottom: 0;
+  width: calc((100% - 52px) / 2.25);
+  border: 1px solid var(--rule-medium);
+  background-image: repeating-linear-gradient(135deg, rgba(11, 11, 11, 0.06) 0 1px, transparent 1px 7px);
+  content: "";
+}
+
+.flowHead {
+  padding: 0 0 12px;
+  color: var(--muted);
+}
+
+.flowHeadOut {
+  padding-left: 12px;
+}
+
+.flowStep {
+  position: relative;
+  grid-column: 1;
+}
+
+.flowOut {
+  position: relative;
+  z-index: 1;
+  grid-column: 3;
+  align-self: center;
+  margin: 10px 12px;
+}
+
+.flowArrow {
+  position: relative;
+  grid-column: 2;
+  align-self: center;
+  height: 0;
+  border-top: 1px solid rgba(11, 11, 11, 0.5);
+}
+
+.flowArrow::after {
+  position: absolute;
+  top: -4.5px;
+  right: 0;
+  width: 0;
+  height: 0;
+  border-top: 4px solid transparent;
+  border-bottom: 4px solid transparent;
+  border-left: 6px solid rgba(11, 11, 11, 0.6);
+  content: "";
+}
+
+.flowArrow > span {
+  position: absolute;
+  bottom: 4px;
+  left: 6px;
+  color: var(--muted);
+  white-space: nowrap;
+}
+
+.flowDown {
+  position: relative;
+  grid-column: 1 / -1;
+  height: 34px;
+}
+
+.flowDown::before {
+  position: absolute;
+  top: 0;
+  bottom: 5px;
+  left: 22px;
+  width: 0;
+  border-left: 1px solid rgba(11, 11, 11, 0.5);
+  content: "";
+}
+
+.flowDown::after {
+  position: absolute;
+  bottom: 0;
+  left: 18px;
+  width: 0;
+  height: 0;
+  border-left: 4px solid transparent;
+  border-right: 4px solid transparent;
+  border-top: 6px solid rgba(11, 11, 11, 0.6);
+  content: "";
+}
+
+.flowDown > span {
+  position: absolute;
+  top: 50%;
+  left: 32px;
+  transform: translateY(-50%);
+  color: var(--muted);
+}
+
+.stepIndex {
+  display: block;
+  margin-bottom: 2px;
+  color: var(--muted);
+  font-family: var(--font-prose);
+  font-size: var(--type-index);
+}
+
+.options {
+  display: grid;
+  gap: 6px;
+  margin-top: 8px;
+}
+
+.options > span {
+  padding: 6px 10px;
+  border: 1px solid var(--accent);
+  background: var(--panel);
+  color: var(--ink);
+}
+
+@container figure (max-width: 520px) {
+  .flow {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .flow::before,
+  .flow > .flowHead,
+  .flow > span:empty {
+    display: none;
+  }
+
+  .flowArrow {
+    grid-column: 1;
+    height: 30px;
+    margin-left: 22px;
+    border-top: 0;
+    border-left: 1px dashed rgba(11, 11, 11, 0.45);
+  }
+
+  .flowArrow::after {
+    display: none;
+  }
+
+  .flowArrow > span {
+    top: 50%;
+    bottom: auto;
+    left: 10px;
+    transform: translateY(-50%);
+  }
+
+  .flowOut {
+    grid-column: 1;
+    margin: 0 0 0 22px;
+    background: var(--chart-hatch), var(--page);
+  }
+}
+
+/* Comparison table-figure with column emphasis on hover. */
+.compare {
+  display: grid;
+  grid-template-columns: minmax(6.5rem, auto) repeat(var(--count), minmax(0, 1fr));
+  font-size: var(--type-label);
+  line-height: var(--label-leading);
+}
+
+.compareCorner,
+.compareHead,
+.compareLabel,
+.compareValue {
+  padding: 12px 14px;
+  border-bottom: 1px dashed var(--dash);
+}
+
+.compareHead {
+  padding-top: 0;
+  border-bottom: 1px solid var(--rule-strong);
+  color: var(--ink);
+  font-size: var(--type-interface);
+  font-weight: 500;
+  line-height: var(--interface-leading);
+}
+
+.compareCorner {
+  padding-top: 0;
+  border-bottom: 1px solid var(--rule-strong);
+}
+
+.compareLabel {
+  padding-left: 0;
+  color: var(--muted);
+}
+
+.compareValue {
+  color: var(--ink);
+  transition: background-color 160ms ease;
+}
+
+.compareValue[data-strong] {
+  font-size: var(--type-interface);
+  font-weight: 500;
+  line-height: var(--interface-leading);
+}
+
+[role="row"]:last-child > .compareLabel,
+[role="row"]:last-child > .compareValue {
+  border-bottom: 0;
+}
+
+.compare [data-key-active] {
+  background: var(--chart-tint);
+}
+
+@container figure (max-width: 520px) {
+  .compare {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .compare [role="row"] > * {
+    order: var(--order, 0);
+  }
+
+  .compare .compareLabel,
+  .compare .compareCorner {
+    display: none;
+  }
+
+  .compareHead {
+    margin-top: 18px;
+    padding-left: 0;
+  }
+
+  .compareValue {
+    padding-left: 0;
+    border-bottom: 0;
+  }
+
+  .compareValue::before {
+    display: block;
+    color: var(--muted);
+    font-size: var(--type-label);
+    font-weight: 400;
+    content: attr(data-label);
+  }
+}
+
+/* Waffle of species counts. */
+.waffle {
+  display: grid;
+  grid-template-columns: repeat(14, 14px);
+  gap: 4px;
+}
+
+.waffle > span {
+  width: 14px;
+  height: 14px;
+  background: currentColor;
+}
+
+.waffle > span[data-ring] {
+  outline: 1px solid var(--rule-strong);
+  outline-offset: -1px;
+  background: transparent;
+}
+
+.panels {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: 28px;
+}
+
+.panelTitle {
+  margin: 0 0 14px;
+  color: var(--ink);
+  font-size: var(--type-label);
+  line-height: var(--label-leading);
+}
+
+@container figure (max-width: 560px) {
+  .panels {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+/* Lanes under a schematic timeline. */
+.lanes {
+  display: grid;
+  grid-template-columns: minmax(7rem, auto) minmax(0, 1fr);
+  margin-top: 22px;
+  font-size: var(--type-label);
+  line-height: var(--label-leading);
+}
+
+.lanes {
+  margin-bottom: 0;
+}
+
+.lanes > * {
+  margin: 0;
+  padding: 10px 0;
+  border-top: 1px dashed var(--dash);
+}
+
+.lanes > :nth-child(odd) {
+  padding-right: 16px;
+  color: var(--muted);
+}
+
+.lanes > :nth-child(even) {
+  color: var(--ink);
+}
+
+@container figure (max-width: 460px) {
+  .lanes {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .lanes > :nth-child(even) {
+    padding-top: 0;
+    border-top: 0;
+  }
+}
+
+.tiers {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 10px;
+  font-size: var(--type-label);
+  line-height: var(--label-leading);
+}
+
+.tier {
+  position: relative;
+  padding: 14px 14px 12px;
+  border: 1px solid var(--rule-medium);
+  background: var(--panel);
+}
+
+@container figure (max-width: 520px) {
+  .tiers {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+.rowHead {
+  align-items: center;
+  padding: 0 14px 0 0;
+}
+
+/* Sequence with side brackets. */
+.sequence {
+  display: grid;
+  grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr);
+  column-gap: 18px;
+  row-gap: 8px;
+  font-size: var(--type-label);
+  line-height: var(--label-leading);
+}
+
+.sequenceStep {
+  grid-column: 1;
+  padding: 8px 12px;
+  color: var(--ink);
+}
+
+.sequenceStep .stepIndex,
+.ladderNode .stepIndex {
+  display: inline-block;
+  min-width: 1.6rem;
+  margin: 0;
+}
+
+.sequenceNote {
+  position: relative;
+  grid-column: 2;
+  display: flex;
+  align-items: center;
+  margin: 0;
+  padding: 4px 0 4px 16px;
+  border-left: 1.5px solid var(--chart-steel);
+  color: var(--ink);
+}
+
+.sequenceNote::before,
+.sequenceNote::after {
+  position: absolute;
+  left: -1.5px;
+  width: 7px;
+  height: 0;
+  border-top: 1.5px solid var(--chart-steel);
+  content: "";
+}
+
+.sequenceNote::before { top: 0; }
+
+.sequenceNote::after { bottom: 0; }
+
+.sequenceNote[data-tone="accent"],
+.sequenceNote[data-tone="accent"]::before,
+.sequenceNote[data-tone="accent"]::after {
+  border-color: var(--accent);
+}
+
+/* Vertical chain with an example beside each link. */
+.ladder {
+  margin: 0;
+  padding: 0;
+  font-size: var(--type-label);
+  line-height: var(--label-leading);
+  list-style: none;
+}
+
+.ladder li {
+  position: relative;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  column-gap: 18px;
+  align-items: center;
+  padding-bottom: 16px;
+}
+
+.ladder li:last-child {
+  padding-bottom: 0;
+}
+
+.ladder li:not(:last-child)::after {
+  position: absolute;
+  bottom: 2px;
+  left: 22px;
+  width: 0;
+  height: 0;
+  border-left: 4px solid transparent;
+  border-right: 4px solid transparent;
+  border-top: 6px solid rgba(11, 11, 11, 0.55);
+  content: "";
+}
+
+.ladder li:not(:last-child)::before {
+  position: absolute;
+  bottom: 8px;
+  left: 25.5px;
+  height: 8px;
+  border-left: 1px solid rgba(11, 11, 11, 0.5);
+  content: "";
+}
+
+.ladderNode {
+  padding: 8px 12px;
+  color: var(--ink);
+}
+
+.ladderExample {
+  color: var(--supporting-ink);
+}
+
+.ladderExample:not(:empty) {
+  padding-left: 14px;
+  border-left: 1px dashed var(--rule-strong);
+}
+
+.claims {
+  margin: 0;
+  font-size: var(--type-label);
+  line-height: var(--label-leading);
+}
+
+.claims > div {
+  display: grid;
+  grid-template-columns: minmax(8rem, 0.6fr) minmax(0, 1.4fr);
+  gap: 16px;
+  padding: 12px 0;
+  border-top: 1px dashed var(--dash);
+}
+
+.claims > div:first-child {
+  padding-top: 0;
+  border-top: 0;
+}
+
+.claims dt {
+  color: var(--ink);
+  font-weight: 500;
+}
+
+.claims dd {
+  margin: 0;
+  color: var(--supporting-ink);
+}
+
+@container figure (max-width: 460px) {
+  .claims > div {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 4px;
+  }
+}
+
+.tiers {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.pips {
+  display: flex;
+  gap: 4px;
+  margin-bottom: 12px;
+}
+
+.pips > span {
+  width: 22px;
+  height: 4px;
+  background: var(--chart-mist);
+}
+
+.pips > span[data-on] {
+  background: var(--accent);
+}
+
+.waffleLegend {
+  flex-direction: column;
+  gap: 6px;
+  margin-top: 16px;
+}
+
+.lossFill {
+  color: rgba(34, 0, 255, 0.09);
+}
+
+.tierAxis {
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  margin: 0 0 14px;
+  color: var(--muted);
+  font-size: var(--type-label);
+  line-height: var(--label-leading);
+}
+
+.tierAxis::before {
+  position: absolute;
+  top: 50%;
+  left: calc(8.5rem);
+  right: calc(8.5rem);
+  height: 0;
+  border-top: 1px solid var(--rule-strong);
+  content: "";
+}
+
+.tierAxis::after {
+  position: absolute;
+  top: calc(50% - 4px);
+  right: calc(8.5rem - 1px);
+  border-top: 4px solid transparent;
+  border-bottom: 4px solid transparent;
+  border-left: 6px solid var(--rule-strong);
+  content: "";
+}
+
+.tier:not(:last-child)::after {
+  position: absolute;
+  top: 50%;
+  right: -9px;
+  z-index: 1;
+  border-top: 4px solid transparent;
+  border-bottom: 4px solid transparent;
+  border-left: 6px solid rgba(11, 11, 11, 0.5);
+  content: "";
+  transform: translateY(-50%);
+}
+
+@container figure (max-width: 520px) {
+  .tierAxis {
+    display: none;
+  }
+
+  .tier:not(:last-child)::after {
+    top: auto;
+    right: auto;
+    bottom: -9px;
+    left: 22px;
+    border-top: 6px solid rgba(11, 11, 11, 0.5);
+    border-right: 4px solid transparent;
+    border-bottom: 0;
+    border-left: 4px solid transparent;
+    transform: none;
+  }
+}
+
+.ladderHead {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  column-gap: 18px;
+  margin: 0 0 12px;
+  color: var(--muted);
+  font-size: var(--type-label);
+  line-height: var(--label-leading);
+}

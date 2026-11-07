@@ -41,6 +41,9 @@ The mark's editable master is
 | Frame edge (`--frame`) | `rgba(0, 0, 0, 0.08)` |
 | Dashed hairline (`--dash`, drawn by `--dash-x` / `--dash-y`) | `rgba(0, 0, 0, 0.15)`, 4px dash, 4px gap |
 | Diagram node surface (`--panel`) | `#fcfbfa` |
+| Figure second series (`--chart-sky`) | `#4fb0e3` |
+| Figure context (`--chart-steel`, `--chart-mist`) | `#8d8d88`, `#d9d8d4` |
+| Figure emphasis (`--chart-tint`, `--chart-tint-strong`) | `rgba(34, 0, 255, 0.05)`, `rgba(34, 0, 255, 0.1)` |
 
 Inter 4.1 remains the typeface for headings, navigation, directory labels, controls,
 metadata, and the architecture viewer. Source Serif 4 supplies narrative prose and
@@ -110,9 +113,10 @@ entries, the section index, the record strip, contact details, a course list), w
 (the spine between titles and prose, field | field, row / row, column | column).
 Frames have square corners, no fill and no shadow. Never stack frames with a gap
 between them: entries of one section share a frame and are separated by space.
-Do not add metric rows, pills, badges, or other pulled-out figures: a result belongs in
-its sentence. A summary on About or Experience carries at most one headline figure;
-the other figures stay on the entry's detail page.
+Do not add metric rows, pills, badges, or other pulled-out figures to summaries and
+records: a result belongs in its sentence. A summary on About or Experience carries at
+most one headline figure; the other figures stay on the entry's detail page, where
+article figures may chart them.
 
 Text roles use rem units and scale with the user's text setting. Titles and headings
 step down below 768px, including in the architecture viewer; the other roles remain
@@ -170,6 +174,31 @@ keeps the site's roles and works without JavaScript. Below 640px of figure width
 reflows into a vertical sequence (parallel nodes side by side from 480px) and the
 loop becomes a labelled return note. A prose caption follows. Every stage must have
 one node or as many as the widest stage; the module throws at build time otherwise.
+
+### Article figures
+
+Inside the eleven full articles, figures take their grammar from Cognition's research
+posts: a faint 1px frame, a title at the interface size and weight 500, every chart
+label at the label size, axis names in flat grey pills, dashed hairline grids and a
+caption in the reading face and supporting ink below the frame. Ink and the accent carry
+the argument; `--chart-sky` marks a second series, `--chart-steel` and `--chart-mist`
+hold context, and `--chart-tint` marks an emphasized row, column or region. Text is
+HTML at its true size, so labels stay legible at every width; only curves live in a
+stretched SVG layer whose strokes keep their width. Bar charts set long labels above
+their bars, and their reference rules run through the rows.
+
+Figures are interactive without depending on it. A segmented switch swaps views, a
+hover readout follows line charts, marks show their exact values, the proof-obligation
+graph accepts a chosen failure, and each figure draws in once as it scrolls into view,
+except under reduced motion. Without JavaScript every figure renders its default view.
+Every plotted value restates the manuscript, and conceptual figures carry no numeric
+scale. Titles, captions, legends and axis names use sentence case, like the manuscripts'
+table captions; view switches are controls and use title case. Captions state what the
+figure shows in the article's own terms, without disclaimers.
+
+Research tables share the same treatment: a firm rule under the header, numeric
+columns right-aligned in tabular figures, a quiet tint on the hovered row and column,
+and the accent tint on a row or column a table emphasizes.
 
 Prose stays within `--reading-measure` (36rem, about seventy characters of Source
 Serif 4 at the reading size) at every width. On wide article layouts the reading

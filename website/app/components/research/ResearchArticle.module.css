@@ -116,6 +116,51 @@
   word-break: normal;
 }
 
+/* Tables read like the figures: a firm rule under the header, a quiet row
+   tint on hover, the hovered column in the accent tint, and numbers aligned on
+   the right in tabular figures. An emphasized row or column carries the tint. */
+.table thead .cell {
+  vertical-align: bottom;
+  border-bottom: 1px solid var(--rule-strong);
+}
+
+.table tbody tr {
+  transition: background-color 160ms ease;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .table tbody tr:hover {
+    background: rgba(0, 0, 0, 0.022);
+  }
+}
+
+.table .cell[data-column-hover] {
+  background: rgba(0, 0, 0, 0.035);
+}
+
+.table .cell[data-emphasis],
+.table tr[data-emphasis] > .cell {
+  background: var(--chart-tint);
+}
+
+.table .cell[data-emphasis][data-column-hover],
+.table tr[data-emphasis] > .cell[data-column-hover] {
+  background: var(--chart-tint-strong);
+}
+
+.table tr[data-emphasis] > .cell:first-child {
+  box-shadow: inset 2px 0 0 var(--accent);
+}
+
+.table thead .cell[data-emphasis] {
+  box-shadow: inset 0 2px 0 var(--accent);
+}
+
+.numeric {
+  text-align: right;
+  font-variant-numeric: lining-nums tabular-nums;
+}
+
 .cell [data-research-formula="inline"] {
   max-width: none;
   overflow: visible;

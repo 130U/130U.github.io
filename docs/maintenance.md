@@ -157,6 +157,17 @@ any new list. `LogicDiagram` renders the article diagrams from
 `app/lib/content/architecture-diagrams.ts`. Browser interaction stays in focused client components;
 the About hero is isolated in `app/components/clarinet-hero/`.
 
+Article figures live in `app/components/figures/`: `kit.tsx` holds the frame, scales,
+plot and bar primitives, `selected-research.tsx`, `ai-research.tsx` and
+`legal-research.tsx` hold the figures, and `FigureController` adds view switches,
+readouts, the proof-obligation graph, table column highlighting and the entrance.
+`app/lib/content/article-figures.ts` places each figure after one existing block,
+named by the opening of its source text or a table's first header cell, and lists the
+manuscript text each figure restates. The build fails when an anchor matches no block
+or several, or when any listed text is missing from the article, so edit a figure's
+data and its evidence together. The same module names the row or column a table
+emphasizes. Manuscript checks in the tests read articles without these figures.
+
 `ResearchArticle` serves AI and Selected Research. The Markdown parser supports
 typed prose, emphasis, links, headings, tables, and formulas rather than arbitrary
 HTML. `ResearchMath` renders TeX to self-contained SVG and assistive MathML during

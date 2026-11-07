@@ -5,6 +5,8 @@ import { ArticleReadingLayout } from "../article/ArticleReadingLayout";
 import { ExperienceDiagram, ExperienceMetadata, KeyContributions } from "../experience/ExperienceDetails";
 import { type LegalPaper, type PaperRun } from "../../lib/content/legal-papers";
 import type { ShowcaseEntry } from "../../lib/content/experience-showcase";
+import { placeFigures } from "../../lib/content/article-figures";
+import { ArticleFigure, FigureController } from "../figures";
 import { LegalPaperReader } from "./LegalPaperReader";
 import styles from "./LegalPaperPage.module.css";
 import experienceStyles from "../experience/Experience.module.css";
@@ -59,6 +61,7 @@ export function LegalPaperPage({ paper, showcase }: { paper: LegalPaper; showcas
   paper.abstract.forEach(({ runs }, index) => collect(runs, `abstract-${index}`));
   paper.blocks.forEach(({ runs }, index) => collect(runs, `body-${index}`));
   const acknowledgment = paper.acknowledgment;
+  const figures = placeFigures(paper.slug, paper.blocks, paper.blocks.map(({ text }) => text).join("\n"));
 
   function Backlinks({ number }: { number: number | string }) {
     return <span className={styles.backlinks}>{(references.get(noteKey(number)) ?? []).map((id, index) => <a key={id} href={`#${id}`} role="doc-backlink" aria-label={`Return to footnote ${number} in the text${index ? `, reference ${index + 1}` : ""}`}>Return to Text{index ? ` ${index + 1}` : ""}</a>)}</span>;
@@ -97,9 +100,13 @@ export function LegalPaperPage({ paper, showcase }: { paper: LegalPaper; showcas
             <div className={styles.body}>
               {paper.blocks.map((block, index) => {
                 const content = <RunText runs={block.runs} prefix={`body-${index}`} />;
-                if (block.type !== "heading") return <p data-paper-block={index} key={index}>{content}</p>;
-                const Heading = (block.level ?? 1) > 1 ? "h3" : "h2";
-                return <Heading id={block.id} tabIndex={-1} data-paper-block={index} key={index}>{content}</Heading>;
+                if (block.type === "heading") {
+                  const Heading = (block.level ?? 1) > 1 ? "h3" : "h2";
+                  return <Heading id={block.id} tabIndex={-1} data-paper-block={index} key={index}>{content}</Heading>;
+                }
+                const paragraph = <p data-paper-block={index}>{content}</p>;
+                const placed = figures.get(index);
+                return <Fragment key={index}>{paragraph}{placed?.map((id) => <ArticleFigure key={id} id={id} />)}</Fragment>;
               })}
             </div>
 
@@ -111,6 +118,7 @@ export function LegalPaperPage({ paper, showcase }: { paper: LegalPaper; showcas
           </ArticleReadingLayout>
 
           <footer className={styles.paperFooter}><Link className="back-link" href={`/experience/#${showcase.slug}`}><span aria-hidden="true">←</span> Experience</Link><a href="#paper-title">Back to Top</a></footer>
+          {figures.size > 0 && <FigureController key={paper.slug} />}
         </LegalPaperReader>
       </article>
     </SiteShell>

@@ -9,7 +9,9 @@ articles with mathematical notation, chapter navigation, and legal footnotes.
 The visual system pairs Inter headings with Source Serif 4 prose, a warm paper
 background, and a restrained editorial grid: faint frames hold each list, dashed
 hairlines divide them, and each AI and legal article opens with a logic architecture
-diagram. About opens with the name beside a recognizable clarinet hero, stacked
+diagram. Interactive figures inside the eleven full articles chart their tables and
+illustrate their arguments, and research tables highlight rows and columns on hover.
+About opens with the name beside a recognizable clarinet hero, stacked
 above it on phones and portrait tablets. The dense Canvas 2D particle field aggregates on entry,
 responds locally to the pointer, disperses with scrolling, and returns to its
 shape, with six silver ring keys, joint bands and pads, two long rods, and
@@ -64,8 +66,9 @@ generated JSON records the corresponding source version. Read the content owners
 table in the maintenance guide before editing generated article data.
 
 The main site's browser interactions are the clarinet particle field, top-level navigation
-menu, article contents, and legal-note previews. Page content, ordinary navigation,
-chapter links, and endnotes also work without JavaScript. The clarinet has a
+menu, article contents, legal-note previews, and article figures. Page content, ordinary
+navigation, chapter links, endnotes, and each figure's default view also work without
+JavaScript. The clarinet has a
 same-shape SVG dot-pattern fallback and a complete static field for reduced motion.
 The fallback retains transparent gaps during loading and without JavaScript.
 Clean paths supply temporary sampling masks for the point field, which are released
