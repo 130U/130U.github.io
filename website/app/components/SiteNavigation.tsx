@@ -115,7 +115,10 @@ export function SiteNavigation({
       <div className="rail-header">
         <Link className="wordmark" href="/" aria-label="Theodore Ouyang home">
           <span className="wordmark-lockup">
-            <span aria-hidden="true" className="wordmark-mark" />
+            <svg aria-hidden="true" className="wordmark-mark" fill="currentColor" focusable="false" height="20" viewBox="0 0 20 20" width="20">
+              <path d="M0 0h2v18h18v2H0Z" />
+              <path d="M12 0a8 8 0 1 0 0 16 8 8 0 1 0 0-16Zm0 2a6 6 0 1 1 0 12 6 6 0 1 1 0-12Z" fillRule="evenodd" />
+            </svg>
             <span className="wordmark-name">Theodore Ouyang</span>
           </span>
         </Link>

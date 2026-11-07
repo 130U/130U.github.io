@@ -389,11 +389,17 @@ written `Sequoia Fellow` everywhere: the hero, site metadata from
 
 ## Identity
 
-The compact LO mark appears in the navigation and browser icons; its editable master
-is `website/source-assets/brand/lo-mark.svg`. The social card master,
-`website/source-assets/brand/og.png`, repeats the hero on the paper background: the
-name, Duke Alumnus and Sequoia Fellow, the dotted clarinet with its blue corner marks,
-and the domain in the lower band. The repository README displays the same card.
+The LO mark is drawn on a 20-unit grid: the L forms the left and bottom axes, two units
+thick, and the O is a ring in the quadrant they enclose, two units clear of each axis.
+The rail sets it at 20px beside the name, which is interface type at weight 500, and
+draws it inline so it takes the link's color. Its editable master,
+`website/source-assets/brand/lo-mark.svg`, is also the browser icon: ink on light
+browser chrome and white on dark. The ICO (16, 32, and 48px) and the touch icon place
+the same geometry, aligned to whole pixels, in white on an ink tile.
+
+The social card master, `website/source-assets/brand/og.png`, repeats the hero on the
+paper background: the name, Duke Alumnus and Sequoia Fellow, the dotted clarinet with
+its blue corner marks, and the domain in the lower band. The repository README displays the same card.
 
 ## Review
 
