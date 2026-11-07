@@ -17,6 +17,15 @@
   --dash-y: repeating-linear-gradient(to bottom, var(--dash) 0 4px, transparent 4px 8px);
   --frame-pad: 44px;
   --accent: #2200ff;
+  /* Article figures: ink and the accent carry the argument, sky marks a second
+     series, greys hold context, and the tint marks an emphasized row or column. */
+  --chart-sky: #4fb0e3;
+  --chart-steel: #8d8d88;
+  --chart-mist: #d9d8d4;
+  --chart-tint: rgba(34, 0, 255, 0.05);
+  --chart-tint-strong: rgba(34, 0, 255, 0.1);
+  --chart-pill: rgba(0, 0, 0, 0.05);
+  --chart-hatch: repeating-linear-gradient(135deg, rgba(11, 11, 11, 0.16) 0 1px, transparent 1px 6px);
   /* One size per role, everywhere: title 36, heading 24, subheading 18,
      reading 16, interface 15, label 13, index 11. */
   --type-title: 2.25rem;

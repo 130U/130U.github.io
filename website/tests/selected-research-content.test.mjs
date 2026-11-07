@@ -5,6 +5,12 @@ import test from "node:test";
 import { parseResearchMarkdown } from "../app/lib/content/research-markdown.ts";
 import { renderResearchMath } from "../app/lib/content/research-math.ts";
 
+// Article figures restate manuscript values in their own captions and labels;
+// manuscript checks read the article without them.
+function withoutArticleFigures(html) {
+  return html.replace(/<figure\b[^>]*\bdata-article-figure="[^"]*"[^>]*>[\s\S]*?<\/figure>/gu, "");
+}
+
 const PROJECTS = [
   { key: "asian", slug: "certified-valuation-arithmetic-asian-options", commit: "846bbe6acbaa4eaac07e20d5d2c566b3abc5456d", blob: "970c7fe3449a3a44fb32f6ae68d21c28d3cde3df", sections: 10, tables: 11, formulas: 349 },
   { key: "rough", slug: "certified-rough-heston-valuation", commit: "8d7264ce2f269a2e01f0b9dd80680bf70e50dcee", blob: "e1185699a3e0b5dc9a95a02f190cb4f52c715e49", sections: 8, tables: 13, formulas: 262 },
@@ -70,7 +76,7 @@ for (const expected of PROJECTS) {
 
   test(`${expected.key} published article retains every equation and all section links`, async () => {
     const markdown = await siteEdition(expected.slug);
-    const html = await readFile(new URL(`../out/${expected.slug}/index.html`, import.meta.url), "utf8");
+    const html = withoutArticleFigures(await readFile(new URL(`../out/${expected.slug}/index.html`, import.meta.url), "utf8"));
     const rendered = [...html.matchAll(/<math\b[^>]*data-research-math="(inline|display)"[^>]*>[\s\S]*?<annotation\b[^>]*encoding="application\/x-tex"[^>]*>([\s\S]*?)<\/annotation>[\s\S]*?<\/math>/gu)].map((match) => ({ tex: decodeHtml(match[2]), display: match[1] === "display" }));
     assert.deepEqual(rendered, sourceFormulas(markdown));
     const blocks = parseResearchMarkdown(markdown, { joinSoftLines: true });

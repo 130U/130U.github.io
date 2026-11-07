@@ -1,0 +1,704 @@
+/* Article figures share one frame, one plot grammar and two text roles:
+   the title at interface size and every label at label size. Text is HTML at
+   its true size, so charts keep legible labels at every width; only the curves
+   live in a stretched SVG layer with non-scaling strokes. */
+
+.figure {
+  container: figure / inline-size;
+  min-width: 0;
+  margin: 2.75rem 0;
+  color: var(--ink);
+}
+
+.frame {
+  position: relative;
+  padding: clamp(16px, 5cqi, 28px);
+  border: 1px solid var(--frame);
+  font-family: var(--font-text);
+  font-variant-numeric: lining-nums tabular-nums;
+}
+
+.head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 10px 20px;
+  margin-bottom: 22px;
+}
+
+.title {
+  max-width: 34rem;
+  margin: 0;
+  color: var(--ink);
+  font-size: var(--type-interface);
+  font-weight: 500;
+  line-height: var(--interface-leading);
+  text-wrap: balance;
+}
+
+.switch {
+  display: inline-flex;
+  flex-wrap: wrap;
+  gap: 2px;
+  padding: 2px;
+  background: var(--chart-pill);
+}
+
+.switch[hidden] {
+  display: none;
+}
+
+.switch button {
+  min-height: 30px;
+  padding: 3px 10px;
+  border: 0;
+  background: transparent;
+  color: var(--supporting-ink);
+  cursor: pointer;
+  font: inherit;
+  font-size: var(--type-label);
+  line-height: var(--label-leading);
+  transition: color 160ms ease, background-color 160ms ease;
+}
+
+.switch button[aria-pressed="true"] {
+  background: var(--panel);
+  color: var(--ink);
+  outline: 1px solid var(--rule-medium);
+  outline-offset: -1px;
+}
+
+.switch button:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 1px;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .switch button:hover {
+    color: var(--accent);
+  }
+}
+
+@media (pointer: coarse) {
+  .switch button {
+    min-height: 44px;
+  }
+}
+
+.caption {
+  max-width: var(--reading-measure);
+  margin: 14px 0 0;
+  color: var(--supporting-ink);
+  font-family: var(--font-prose);
+  font-size: var(--type-reading);
+  line-height: var(--reading-leading);
+}
+
+.legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 20px;
+  margin: 22px 0 0;
+  padding: 0;
+  color: var(--supporting-ink);
+  font-size: var(--type-label);
+  line-height: var(--label-leading);
+  list-style: none;
+}
+
+.legend li {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+}
+
+.swatch {
+  flex: none;
+  width: 10px;
+  height: 10px;
+  background: currentColor;
+}
+
+.swatch[data-shape="line"] {
+  width: 18px;
+  height: 2px;
+}
+
+.swatch[data-shape="dash"] {
+  width: 18px;
+  height: 0;
+  border-top: 1px dashed currentColor;
+  background: none;
+}
+
+.swatch[data-shape="dot"] {
+  border-radius: 50%;
+}
+
+.swatch[data-shape="ring"] {
+  border: 1.5px solid currentColor;
+  border-radius: 50%;
+  background: var(--page);
+}
+
+.swatch[data-shape="box"] {
+  outline: 1px solid currentColor;
+  outline-offset: -1px;
+  background: var(--panel);
+}
+
+.swatch[data-shape="hatch"] {
+  outline: 1px solid var(--rule-strong);
+  outline-offset: -1px;
+  background: var(--chart-hatch);
+}
+
+/* Colour roles. Every mark takes its colour from currentColor. */
+.ink { color: var(--ink); }
+.accent { color: var(--accent); }
+.sky { color: var(--chart-sky); }
+.steel { color: var(--chart-steel); }
+.mist { color: var(--chart-mist); }
+
+/* ---------- Plot: HTML text around a stretched curve layer ---------- */
+
+.plot {
+  position: relative;
+  height: var(--plot-h, clamp(230px, 52cqi, 300px));
+  color: var(--ink);
+  font-size: var(--type-label);
+  line-height: var(--label-leading);
+}
+
+.area {
+  position: absolute;
+  inset: var(--pt, 34px) var(--pr, 14px) var(--pb, 58px) var(--pl, 46px);
+}
+
+.gridY,
+.gridX {
+  position: absolute;
+  pointer-events: none;
+}
+
+.gridY {
+  left: 0;
+  right: 0;
+  height: 1px;
+  margin-top: -0.5px;
+  background: var(--dash-x);
+}
+
+.gridX {
+  top: 0;
+  bottom: 0;
+  width: 1px;
+  margin-left: -0.5px;
+  background: var(--dash-y);
+}
+
+.gridY[data-solid] {
+  background: var(--rule-strong);
+}
+
+.gridX[data-solid] {
+  background: var(--rule-strong);
+}
+
+.tickY,
+.tickX {
+  position: absolute;
+  color: var(--muted);
+  white-space: nowrap;
+  pointer-events: none;
+}
+
+.tickY {
+  right: calc(100% + 9px);
+  transform: translateY(-50%);
+}
+
+.tickX {
+  top: calc(100% + 9px);
+  transform: translateX(-50%);
+}
+
+.tickX[data-edge="start"] {
+  transform: none;
+}
+
+.tickX[data-edge="end"] {
+  transform: translateX(-100%);
+}
+
+.pill {
+  display: inline-block;
+  padding: 3px 8px;
+  background: var(--chart-pill);
+  color: var(--ink);
+  font-size: var(--type-label);
+  line-height: var(--label-leading);
+  white-space: nowrap;
+}
+
+.yTitle {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.xTitle {
+  position: absolute;
+  right: var(--pr, 14px);
+  bottom: 0;
+}
+
+.curves {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+  pointer-events: none;
+}
+
+.curves path,
+.curves line,
+.curves polyline {
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.6;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  vector-effect: non-scaling-stroke;
+}
+
+.curves [data-dash] {
+  stroke-dasharray: 4 4;
+  stroke-linecap: butt;
+}
+
+.curves [data-fill] {
+  fill: currentColor;
+  stroke: none;
+}
+
+.dot {
+  position: absolute;
+  width: 9px;
+  height: 9px;
+  margin: -4.5px 0 0 -4.5px;
+  border-radius: 50%;
+  background: currentColor;
+}
+
+.dot[data-ring] {
+  border: 1.5px solid currentColor;
+  background: var(--page);
+}
+
+.dot[data-tip] {
+  cursor: default;
+}
+
+.dot[data-tip]::after {
+  position: absolute;
+  inset: -10px;
+  content: "";
+}
+
+/* A positioned label. --ax/--ay pick the anchor point of the label box. */
+.mark {
+  position: absolute;
+  max-width: 13rem;
+  transform: translate(var(--ax, 0%), var(--ay, -50%));
+  color: currentColor;
+  font-size: var(--type-label);
+  line-height: var(--label-leading);
+  white-space: nowrap;
+  pointer-events: none;
+}
+
+.mark[data-wrap] {
+  white-space: normal;
+}
+
+.mark[data-tag] {
+  padding: 1px 6px;
+  background: var(--page);
+}
+
+.markStrong {
+  font-weight: 500;
+}
+
+.muted {
+  color: var(--muted);
+}
+
+/* ---------- Bar rows: label | track | value ---------- */
+
+.bars {
+  display: grid;
+  grid-template-columns: minmax(0, var(--label-w, 11rem)) minmax(0, 1fr) minmax(max-content, var(--value-w, 5.5rem));
+  column-gap: 14px;
+  align-items: center;
+  font-size: var(--type-label);
+  line-height: var(--label-leading);
+}
+
+.barLabel {
+  min-width: 0;
+  padding: 8px 0;
+  color: var(--ink);
+}
+
+.barLabel small {
+  display: block;
+  color: var(--muted);
+  font-size: inherit;
+}
+
+.track {
+  position: relative;
+  align-self: stretch;
+  min-height: 36px;
+}
+
+.seg {
+  position: absolute;
+  top: 50%;
+  height: var(--bar-h, 14px);
+  transform: translateY(-50%);
+  transform-origin: left center;
+  background: currentColor;
+}
+
+.seg[data-hatch] {
+  outline: 1px solid currentColor;
+  outline-offset: -1px;
+  background: var(--chart-hatch);
+}
+
+.seg[data-tip]::after {
+  position: absolute;
+  inset: -6px 0;
+  content: "";
+}
+
+.seg + .seg {
+  box-shadow: inset 1px 0 0 var(--page);
+}
+
+.range {
+  position: absolute;
+  top: 50%;
+  height: 10px;
+  transform: translateY(-50%);
+  border-inline: 1.5px solid currentColor;
+}
+
+.range::before {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  right: 0;
+  height: 2px;
+  margin-top: -1px;
+  background: currentColor;
+  content: "";
+}
+
+.value {
+  color: var(--ink);
+  text-align: right;
+  white-space: nowrap;
+}
+
+.value small {
+  display: block;
+  color: var(--muted);
+  font-size: inherit;
+}
+
+.rule {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 0;
+  border-left: 1px dashed var(--ink);
+  pointer-events: none;
+}
+
+.rule[data-tone="soft"] {
+  border-left-color: var(--rule-strong);
+}
+
+.rule[data-tone="accent"] {
+  border-left-color: var(--accent);
+}
+
+.rowRule {
+  grid-column: 1 / -1;
+  height: 1px;
+  background: var(--dash-x);
+}
+
+.groupLabel {
+  grid-column: 1 / -1;
+  padding: 14px 0 2px;
+  color: var(--muted);
+}
+
+.groupLabel:first-child {
+  padding-top: 0;
+}
+
+.axis {
+  position: relative;
+  height: 30px;
+  border-top: 1px solid var(--rule-strong);
+  color: var(--muted);
+}
+
+.axis .tickX {
+  top: 7px;
+}
+
+.axisTitle {
+  grid-column: 1 / -1;
+  justify-self: end;
+  padding-top: 2px;
+}
+
+.barHeader {
+  position: relative;
+  height: 26px;
+}
+
+.headerMark {
+  position: absolute;
+  bottom: 6px;
+  transform: translateX(-50%);
+  font-size: var(--type-label);
+  line-height: var(--label-leading);
+  white-space: nowrap;
+}
+
+.headerMark[data-anchor="left"] {
+  transform: translateX(-8px);
+}
+
+.headerMark[data-anchor="right"] {
+  transform: translateX(calc(-100% + 8px));
+}
+
+.spacer {
+  min-height: 0;
+}
+
+/* Stacked bars put each label above its bar, as wide as the figure, and the
+   grid and reference rules continue up through the label rows. "narrow"
+   stacks only below 480px of figure width. */
+.bars[data-stack="always"] {
+  grid-template-columns: minmax(0, 1fr) minmax(max-content, var(--value-w, 5.5rem));
+}
+
+.bars[data-stack="always"] > .barLabel {
+  position: relative;
+  z-index: 1;
+  grid-column: 1 / -1;
+  height: 29px;
+  padding: 10px 0 0;
+}
+
+.bars[data-stack="always"] .labelText {
+  padding-right: 8px;
+  background: var(--page);
+}
+
+.bars[data-stack="always"] > .spacer {
+  display: none;
+}
+
+.bars[data-stack="always"] .track > .gridX,
+.bars[data-stack="always"] .track > .rule {
+  top: -29px;
+}
+
+.bars[data-stack="always"] .track {
+  min-height: 34px;
+}
+
+@container figure (max-width: 480px) {
+  .bars[data-stack="narrow"] {
+    grid-template-columns: minmax(0, 1fr) minmax(max-content, var(--value-w, 5.5rem));
+  }
+
+  .bars[data-stack="narrow"] > .barLabel {
+    grid-column: 1 / -1;
+    padding: 10px 0 0;
+  }
+
+  .bars[data-stack="narrow"] > .spacer {
+    display: none;
+  }
+
+  .bars[data-stack="narrow"] .track {
+    min-height: 34px;
+  }
+}
+
+/* ---------- Diagrams ---------- */
+
+.node {
+  position: relative;
+  padding: 12px 14px;
+  border: 1px solid var(--rule-medium);
+  background: var(--panel);
+  font-size: var(--type-label);
+  line-height: var(--label-leading);
+}
+
+.node[data-tone="ink"] {
+  border-color: var(--ink);
+}
+
+.node[data-tone="accent"] {
+  border-color: var(--accent);
+}
+
+.node[data-tone="quiet"] {
+  border-style: dashed;
+  border-color: var(--rule-strong);
+  background: transparent;
+  color: var(--supporting-ink);
+}
+
+.nodeTitle {
+  display: block;
+  color: var(--ink);
+  font-size: var(--type-interface);
+  font-weight: 500;
+  line-height: var(--interface-leading);
+}
+
+.nodeText {
+  display: block;
+  margin-top: 4px;
+  color: var(--supporting-ink);
+}
+
+.lane {
+  background: var(--chart-hatch);
+  background-color: transparent;
+}
+
+.hatchPanel {
+  position: relative;
+  border: 1px solid var(--rule-medium);
+  background-image: repeating-linear-gradient(135deg, rgba(11, 11, 11, 0.07) 0 1px, transparent 1px 7px);
+}
+
+/* ---------- Interaction: tooltip, crosshair, reveal ---------- */
+
+.tooltip {
+  position: absolute;
+  z-index: 3;
+  max-width: min(18rem, calc(100% - 16px));
+  padding: 8px 10px;
+  border: 1px solid var(--rule-medium);
+  background: var(--panel);
+  color: var(--ink);
+  font-size: var(--type-label);
+  line-height: var(--label-leading);
+  white-space: pre-line;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 120ms ease;
+}
+
+.tooltip[data-open] {
+  opacity: 1;
+}
+
+.crossRule {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 1px;
+  margin-left: -0.5px;
+  background: rgba(11, 11, 11, 0.35);
+  pointer-events: none;
+}
+
+.crossDot {
+  position: absolute;
+  width: 9px;
+  height: 9px;
+  margin: -4.5px 0 0 -4.5px;
+  border: 2px solid var(--page);
+  border-radius: 50%;
+  background: currentColor;
+  box-sizing: content-box;
+  transform: translate(-2px, -2px);
+  pointer-events: none;
+}
+
+.crosshair {
+  touch-action: pan-y;
+}
+
+/* Figures below the fold enter once as they scroll into view. */
+.figure[data-reveal="pending"] .curves {
+  clip-path: inset(-12px 100% -12px -12px);
+}
+
+.figure[data-reveal="pending"] .track {
+  clip-path: inset(-40px 100% -12px -12px);
+}
+
+.figure[data-reveal="pending"] .grow {
+  transform: translateY(-50%) scaleX(0);
+}
+
+.figure[data-reveal="pending"] .fade {
+  opacity: 0;
+}
+
+.figure[data-reveal="in"] .curves {
+  clip-path: inset(-12px -12px -12px -12px);
+  transition: clip-path 900ms var(--ease-out);
+}
+
+.figure[data-reveal="in"] .track {
+  clip-path: inset(-40px -12px -12px -12px);
+  transition: clip-path 800ms var(--ease-out);
+}
+
+.figure[data-reveal="in"] .grow {
+  transition: transform 700ms var(--ease-out);
+}
+
+.figure[data-reveal="in"] .fade {
+  transition: opacity 500ms ease 450ms;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .figure * {
+    transition: none !important;
+  }
+}
+
+.visuallyHidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+  border: 0;
+}

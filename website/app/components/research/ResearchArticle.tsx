@@ -1,13 +1,15 @@
 import Link from "next/link";
 import { join } from "node:path";
-import { cache } from "react";
+import { Fragment, cache } from "react";
 import sharp from "sharp";
 import { SiteShell } from "../SiteShell";
 import { ArticleReadingLayout } from "../article/ArticleReadingLayout";
 import { ArchitecturalContext, ExperienceDiagram, ExperienceMetadata, KeyContributions } from "../experience/ExperienceDetails";
 import type { ShowcaseEntry } from "../../lib/content/experience-showcase";
-import type { ResearchArticleContent } from "../../lib/content/research-markdown";
+import type { ResearchArticleContent, ResearchCell } from "../../lib/content/research-markdown";
 import { buildArticleHeadingMap, formatArticleHeadings, linkArticleSectionReferences } from "../../lib/content/article-headings";
+import { emphasisFor, placeFigures } from "../../lib/content/article-figures";
+import { ArticleFigure, FigureController } from "../figures";
 import type { ActivePage } from "../../lib/content/site";
 import { ResearchMath } from "./ResearchMath";
 import { InlineContent } from "./ResearchInline";
@@ -29,6 +31,24 @@ async function FigureImage({ src, label, captionId }: { src: string; label: stri
   return <img src={src} {...dimensions} alt={label} aria-describedby={captionId} loading="lazy" decoding="async" />;
 }
 
+// A numeric cell holds a number, a list of numbers, an interval or a dash; such
+// columns align on the right with tabular figures.
+const NUMBER = String.raw`[-+−]?(?:\d[\d,]*(?:\.\d+)?|\.\d+)(?:[eE][-+]?\d+)?%?`;
+const NUMERIC_CELL = new RegExp(String.raw`^(?:${NUMBER}(?:\s*\/\s*${NUMBER})*|\[\s*${NUMBER}\s*,\s*${NUMBER}\s*\]|—)$`, "u");
+
+function numericCell({ source }: ResearchCell) {
+  const value = source.trim().replace(/^\*\*([\s\S]+)\*\*$/u, "$1");
+  const formula = value.match(/^\$`([^`]*)`\$$/u);
+  return NUMERIC_CELL.test(formula ? formula[1].replace(/\s+/gu, "") : value);
+}
+
+function numericColumns(rows: ResearchCell[][], headerRow: boolean) {
+  const body = headerRow ? rows.slice(1) : rows;
+  return rows[0].map((_, column) => column > 0 && body.length > 0
+    && body.every((row) => numericCell(row[column]))
+    && body.some((row) => row[column].source.trim() !== "—"));
+}
+
 export function ResearchArticle({ project, active, returnPath, returnLabel, titleId, showcase }: {
   project: ResearchArticleContent;
   active: ActivePage;
@@ -43,7 +63,18 @@ export function ResearchArticle({ project, active, returnPath, returnLabel, titl
   const bodyStart = hasAbstract ? project.blocks.findIndex((block, index) => index > firstHeading && block.type === "heading") : firstHeading;
   const headingMap = buildArticleHeadingMap(project.blocks);
   const headingPresentations = formatArticleHeadings(project.blocks);
+  const figures = placeFigures(
+    project.slug,
+    project.blocks.map((block) => ({ type: block.type, source: block.source, firstCell: block.type === "table" ? block.rows[0][0].source : undefined })),
+    project.markdown,
+  );
+  const enhanced = figures.size > 0 || project.blocks.some((block) => block.type === "table");
   const renderedBlocks = project.blocks.map((block, index) => {
+    const rendered = renderBlock(block, index);
+    const placed = figures.get(index);
+    return placed ? <Fragment key={index}>{rendered}{placed.map((id) => <ArticleFigure key={id} id={id} />)}</Fragment> : rendered;
+  });
+  function renderBlock(block: ResearchArticleContent["blocks"][number], index: number) {
     const marker = { "data-research-block": index, "data-research-block-type": block.type };
     if (block.type === "paragraph") return <p {...marker} id={block.id} key={index}><InlineContent inlines={linkArticleSectionReferences(block.inlines, project.slug, headingMap)} /></p>;
     if (block.type === "heading") {
@@ -65,21 +96,33 @@ export function ResearchArticle({ project, active, returnPath, returnLabel, titl
         <figcaption id={captionId}><InlineContent inlines={linkArticleSectionReferences(block.inlines, project.slug, headingMap)} /></figcaption>
       </figure>;
     }
+    const numeric = numericColumns(block.rows, block.headerRow);
+    const emphasis = emphasisFor(project.slug, block.rows[0][0].source);
+    const bodyOffset = block.headerRow ? 1 : 0;
     const tableRows = block.rows.map((row, rowIndex) => (
-      <tr key={rowIndex}>{row.map((cell, cellIndex) => {
+      <tr key={rowIndex} data-emphasis={emphasis?.row !== undefined && rowIndex - bodyOffset === emphasis.row ? "" : undefined}>{row.map((cell, cellIndex) => {
         const Cell = block.headerRow && rowIndex === 0 ? "th" : "td";
-        return <Cell key={cellIndex} scope={Cell === "th" ? "col" : undefined} className={styles.cell}><InlineContent inlines={linkArticleSectionReferences(cell.inlines, project.slug, headingMap)} /></Cell>;
+        return (
+          <Cell
+            key={cellIndex}
+            scope={Cell === "th" ? "col" : undefined}
+            className={numeric[cellIndex] ? `${styles.cell} ${styles.numeric}` : styles.cell}
+            data-emphasis={emphasis?.column === cellIndex ? "" : undefined}
+          >
+            <InlineContent inlines={linkArticleSectionReferences(cell.inlines, project.slug, headingMap)} />
+          </Cell>
+        );
       })}</tr>
     ));
     return (
       <div key={index} tabIndex={0} role="region" aria-label="Research data table" className={styles.tableRegion}>
-        <table {...marker} id={block.id} className={styles.table}>
+        <table {...marker} id={block.id} className={styles.table} data-research-table>
           {block.headerRow && <thead>{tableRows[0]}</thead>}
           <tbody>{block.headerRow ? tableRows.slice(1) : tableRows}</tbody>
         </table>
       </div>
     );
-  });
+  }
   return (
     <SiteShell active={active} parent={{ href: returnPath, label: returnLabel }} frameClassName={showcase ? experienceStyles.frame : undefined}>
       <article className={readingStyles.paper} aria-labelledby={titleId}>
@@ -105,6 +148,7 @@ export function ResearchArticle({ project, active, returnPath, returnLabel, titl
           <Link className="back-link" href={returnPath}><span aria-hidden="true">←</span> {returnLabel}</Link>
           <a href={`#${titleId}`}>Back to Top</a>
         </footer>
+        {enhanced && <FigureController key={project.slug} />}
       </article>
     </SiteShell>
   );
