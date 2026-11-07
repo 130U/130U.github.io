@@ -9,15 +9,6 @@
   transform-origin: left center;
 }
 
-.trackNote {
-  position: absolute;
-  top: 50%;
-  left: 0;
-  right: 0;
-  transform: translateY(-50%);
-  color: var(--muted);
-}
-
 .id {
   display: inline-block;
   min-width: 1.9em;

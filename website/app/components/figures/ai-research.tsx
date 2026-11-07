@@ -140,7 +140,7 @@ export function RejectionCost() {
     <Figure
       id="rejection-cost"
       title="Expected candidate draws per valid input under rejection sampling"
-      caption="Tolerance $\epsilon=0.05$ residual standard deviations, on a logarithmic scale. Each added constraint multiplies the expected draws, and four constraints need nearly 400,000 candidates for one valid input."
+      caption="Tolerance $\epsilon=0.05$ residual standard deviations, on a logarithmic scale. Each added constraint multiplies the expected draws, and four constraints need an expected 395,442.59 draws for one valid input."
     >
       <Bars label="Expected candidate draws per valid input: one constraint 25.08, two constraints 628.84, four constraints 395,442.59." labelWidth="3.5rem" valueWidth="9rem" stack="narrow">
         {rows.map((row) => (
@@ -478,7 +478,7 @@ export function SharedErrorCancellation() {
 }
 
 const SCENARIO_VIEWS = [
-  { id: "none", label: "No Query" },
+  { id: "none", label: "Before Verification" },
   { id: "shap", label: "Recheck SHAP Field" },
   { id: "z2", label: <>Verify z<sub>2</sub></> },
   { id: "z1", label: <>Verify z<sub>1</sub></> },
@@ -489,7 +489,7 @@ export function RegretScenarios() {
   const scenarios = [-1, 1].flatMap((s) => [-0.4, 0.4].flatMap((z1) => [-0.2, 0.2].map((z2) => ({ s, z1, z2, delta: Math.round((0.15 * s + z1 + 0.3 * s * z2) * 100) / 100 }))));
   const lanes: Record<string, Array<{ top: number; label: string; regret: string }>> = {
     none: [{ top: 56, label: "All scenarios", regret: "Regret 0.61" }],
-    shap: [{ top: 56, label: "None excluded", regret: "Regret 0.61" }],
+    shap: [{ top: 56, label: "Unchanged", regret: "Regret 0.61" }],
     z2: [{ top: 34, label: "Observe $z_2=-0.2$", regret: "Regret 0.49" }, { top: 80, label: "Observe $z_2=0.2$", regret: "Regret 0.61" }],
     z1: [{ top: 34, label: "Observe $z_1=-0.4$", regret: "Regret 0" }, { top: 80, label: "Observe $z_1=0.4$", regret: "Regret 0" }],
   };
@@ -547,7 +547,7 @@ export function RegretScenarios() {
       </div>
       {SCENARIO_VIEWS.map((view) => (
         <p key={view.id} className={styles.readout} data-fig-panel={view.id} hidden={view.id !== "none"}>
-          {view.id === "none" ? "Before any query, either choice can leave a regret of 0.61." : <>Remaining regret under the worst observation: {value(view.id)[0]}; guaranteed reduction <Tx>{"$V(q)$"}</Tx> = {value(view.id)[1]}.</>}
+          {view.id === "none" ? "Before verification, either choice can leave a regret of 0.61." : <>Remaining regret under the worst observation: {value(view.id)[0]}; guaranteed reduction <Tx>{"$V(q)$"}</Tx> = {value(view.id)[1]}.</>}
         </p>
       ))}
     </Figure>

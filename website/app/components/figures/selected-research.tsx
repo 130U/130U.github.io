@@ -50,7 +50,6 @@ export function AsianWidthPlateau() {
   const widthTicks = [0, 0.01, 0.02, 0.03].map((at) => ({ at, label: at === 0 ? "0" : at.toFixed(2) }));
   const signed = linear(-0.016, 0.016);
   const signedTicks = [-0.015, 0, 0.015].map((at) => ({ at, label: at === 0 ? "0" : at.toFixed(3).replace(/^-/u, "−"), solid: at === 0 }));
-  const failed = <BarRow label="$h=1/192$" value="—" valueNote="No certificate"><span className={styles.trackNote}>Projection guard fails</span></BarRow>;
   // The change between the two finest grids, term by term (Table 8, columns 1/768 and 1/1536).
   const [coarse, fine] = [ASIAN_STEPS[1], ASIAN_STEPS[2]];
   const change = linear(0.0213, 0.0218);
@@ -89,8 +88,7 @@ export function AsianWidthPlateau() {
         <p className={styles.tally}>Hatched terms shrink; the periodization and P frequency-tail terms are unchanged.</p>
       </Panel>
       <Panel view="width" active>
-        <Bars label="Width contributions by Euler step. h=1/384: total 0.028009519599, 95.5% nonlinear. h=1/768: 0.021667063872, 94.5%. h=1/1536: 0.021734290027, 92.8%. h=1/192 has no certificate." labelWidth="5rem" valueWidth="6.5rem" stack="narrow">
-          {failed}
+        <Bars label="Width contributions by Euler step. h=1/384: total 0.028009519599, 95.5% nonlinear. h=1/768: 0.021667063872, 94.5%. h=1/1536: 0.021734290027, 92.8%." labelWidth="5rem" valueWidth="6.5rem" stack="narrow">
           {ASIAN_STEPS.map((row) => {
             let start = 0;
             return (
@@ -109,7 +107,6 @@ export function AsianWidthPlateau() {
       </Panel>
       <Panel view="enclosure" active={false}>
         <Bars label="Signed Euler-minus-continuous enclosures. h=1/384: −0.014169989568 to 0.013839530031. h=1/768: −0.011024692273 to 0.010642371599. h=1/1536: −0.010967952032 to 0.010766337995." labelWidth="5rem" valueWidth="6.5rem" stack="narrow">
-          {failed}
           {ASIAN_STEPS.map((row) => (
             <BarRow key={row.step} label={`$h=${row.step}$`} value={row.total.toFixed(5)} valueNote="width" grid={signedTicks.map((tick) => signed(tick.at))} rules={[{ at: signed(0) }]}>
               <Range x={signed} from={row.enclosure[0]} to={row.enclosure[1]} tone="ink" tip={`h = ${row.step}\n[${row.enclosure[0]}, ${row.enclosure[1]}]`} />
