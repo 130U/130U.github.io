@@ -72,7 +72,7 @@ export function formatArticleHeading(heading: ResearchHeading): ArticleHeadingPr
   };
 }
 
-/** Assign letters in actual webpage order, including originally unnumbered subsections. */
+/** Assign letters in page order, including subsections the manuscript leaves unnumbered. */
 export function formatArticleHeadings(blocks: readonly ResearchBlock[]) {
   const headings = new Map<string, ArticleHeadingPresentation>();
   let chapter: ArticleHeadingPresentation | undefined;
@@ -147,7 +147,7 @@ const internalReferenceContexts: Readonly<Record<string, readonly string[]>> = {
   ],
 };
 
-/** Link only audited internal Section references; retain every original displayed numeral. */
+/** Link only audited internal Section references; every numeral displays as the source writes it. */
 export function linkArticleSectionReferences(
   inlines: readonly ArticleInline[],
   slug: string,
@@ -191,7 +191,7 @@ export function linkArticleSectionReferences(
   return inlines.flatMap((inline): ArticleInline[] => {
     if (inline.type === "text") return linkText(inline.text);
     if (inline.type === "strong" || inline.type === "emphasis") return [{ ...inline, inlines: linkArticleSectionReferences(inline.inlines, slug, headings) }];
-    // Existing links, code and mathematics retain their identity and contents.
+    // Links, code and mathematics pass through unchanged.
     return [inline];
   });
 }

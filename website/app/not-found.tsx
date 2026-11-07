@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import { ReturnArrow } from "./components/ReturnArrow";
 import { SiteShell } from "./components/SiteShell";
 import { forwardScript } from "./lib/content/forwarded-paths";
 import { createPageMetadata } from "./lib/content/site";
@@ -21,7 +22,7 @@ export default function NotFound() {
           The page you requested may have moved or may no longer exist.
         </p>
         <Link className="back-link" href="/">
-          <span aria-hidden="true">←</span> Return Home
+          <ReturnArrow />Return Home
         </Link>
       </header>
     </SiteShell>

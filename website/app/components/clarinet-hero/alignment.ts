@@ -1,4 +1,4 @@
-// The scene keeps the same 1286 × 1223 model; layout remains owned by its stage.
+// The scene is a fixed 1286 × 1223 model; its stage owns the layout.
 const HEIGHT_PER_WIDTH = 1223 / 1286;
 
 /**

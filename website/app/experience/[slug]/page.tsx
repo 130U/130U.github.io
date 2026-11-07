@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
+import { ReturnArrow } from "../../components/ReturnArrow";
 import { SiteShell } from "../../components/SiteShell";
 import { ExperienceMetadata, KeyContributions } from "../../components/experience/ExperienceDetails";
 import { LegalPaperPage } from "../../components/legal/LegalPaperPage";
@@ -64,7 +65,7 @@ export default async function ExperienceEntryPage({ params }: PageProps) {
         </header>
         <KeyContributions entry={entry} />
         <footer className={styles.detailFooter}>
-          <Link className="back-link" href={returnPath}><span aria-hidden="true">←</span> Experience</Link>
+          <Link className="back-link" href={returnPath}><ReturnArrow />Back to Experience</Link>
           <a href="#experience-title">Back to Top</a>
         </footer>
       </article>

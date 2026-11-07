@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
 import { navigation, type ActivePage, type ParentPage } from "../lib/content/site";
+import { ReturnArrow } from "./ReturnArrow";
 
 export function SiteNavigation({
   active,
@@ -143,9 +144,7 @@ export function SiteNavigation({
       {parent ? (
         <nav className="parent-nav" aria-label="Parent navigation">
           <Link className="parent-link" href={parent.href}>
-            <svg aria-hidden="true" viewBox="0 0 16 16" width="16" height="16" fill="none">
-              <path d="M13 8H3m0 0 4-4M3 8l4 4" stroke="currentColor" strokeWidth="1.25" strokeLinecap="round" strokeLinejoin="round" />
-            </svg>
+            <ReturnArrow />
             <span>Back to {parent.label}</span>
           </Link>
         </nav>

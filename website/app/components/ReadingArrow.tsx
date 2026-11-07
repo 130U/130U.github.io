@@ -1,4 +1,4 @@
-/** The decorative chevron that follows every Read More link. */
+/** The decorative chevron after Read More and View Now. */
 export function ReadingArrow() {
   return (
     <svg viewBox="0 0 24 24" fill="none" aria-hidden="true" focusable="false">

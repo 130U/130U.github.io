@@ -7,7 +7,7 @@ installed ESLint plugins while delegating all matching to the official
 The package has no installation scripts and bundles no other matching engine.
 
 Both CommonJS and ESM expose the v11 named API. Callable constructors,
-static helpers, and chained `defaults()` retain the same option precedence.
+static helpers, and chained `defaults()` follow the engine's option precedence.
 The `GLOBSTAR` symbol is the engine's symbol, including for consumers such as glob.
 
 The installed `eslint-plugin-import` uses `makeRe(pattern)` only by calling

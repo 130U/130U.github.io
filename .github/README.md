@@ -44,6 +44,6 @@ Jiritsu Network · Euromonitor International · China Construction Bank · Jones
 
 ## This Repository
 
-The site is built with the same care as the work it presents: a Next.js static export, a Canvas 2D clarinet drawn from separated particles, mathematics rendered to SVG at build time, legal footnotes that open in place, a strict content security policy, and tests that cover every route and every line of visible copy.
+The site is built with the same care as the work it presents: a Next.js static export, a Canvas 2D clarinet drawn from separated particles, mathematics rendered to SVG at build time, figures drawn from each manuscript's own numbers, legal footnotes that open in place, a strict content security policy, and tests that cover every route and every line of visible copy.
 
 [Design](../docs/design.md) · [Maintenance](../docs/maintenance.md) · [Development](../website/README.md) · [Architecture](https://www.theodoreoy.com/architecture/)

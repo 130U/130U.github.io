@@ -3,6 +3,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { BlogImage } from "../../components/blog/BlogImage";
 import { ReadingArrow } from "../../components/ReadingArrow";
+import { ReturnArrow } from "../../components/ReturnArrow";
 import { InlineContent } from "../../components/research/ResearchInline";
 import { SiteShell } from "../../components/SiteShell";
 import { blogPosts, formatBlogDate, getBlogPost, type BlogBlock, type BlogPost } from "../../lib/content/blog";
@@ -85,7 +86,7 @@ export default async function BlogPostPage({ params }: PageProps) {
           {post.blocks.map((block, index) => <Block block={block} key={index} />)}
         </div>
         <footer className={styles.footer}>
-          <Link className="back-link" href={returnPath}><span aria-hidden="true">←</span> Blog</Link>
+          <Link className="back-link" href={returnPath}><ReturnArrow />Back to Blog</Link>
           <a href="#post-title">Back to Top</a>
         </footer>
       </article>

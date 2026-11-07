@@ -1,537 +1,406 @@
 # Design
 
-Theodore Ouyang's site uses a precise editorial reading frame: warm paper, black ink,
-clear typography, a monochrome LO mark, and selective blue feedback. Its grid, paper
-color, restrained rules, and spacing take their reference from [Cognition](https://cognition.com/).
-The site pairs self-hosted Inter with Source Serif 4 and its own content hierarchy.
+Theodore Ouyang's site is a precise editorial reading frame: warm paper, black ink, a
+monochrome LO mark, and blue reserved for feedback. Its grid, paper color, rules, and
+spacing take their reference from [Cognition](https://cognition.com/); its typography
+pairs self-hosted Inter with Source Serif 4 inside the site's own content hierarchy.
+The aim is restraint, not absence.
 
-## Identity
+## Principles
 
-The compact LO mark appears in the navigation and browser icons. About opens with
-Theodore Ouyang's name and the identities Duke Alumnus and Sequoia Fellow on the
-left, with a recognizable clarinet particle field on the right. The clarinet
-follows the selected reference's slender silhouette, reflective mouthpiece face,
-six silver ring keys, joint bands and pads, two long rods, and a flared
-bell with an elliptical rim. The body, fittings, ring-key centers, and bell cavity
-are all composed of separated points; the cavity uses denser ink points.
-Its open arc uses larger, more closely spaced blue points, with occlusion where
-the instrument passes in front; it remains an open curve. A single solid blue oval
-and restrained trails retain the composition's graphic character. Four
-short blue vertical marks define the stage corners; four solid, clearly recognizable
-musical notes accompany the particle field. The hero has no call-to-action or
-playback buttons. The same-shape SVG fallback keeps the instrument's separated dot
-patterns, so loading and no-JavaScript states have no solid instrument surface underneath. Preserve
-the reduced-motion behavior.
-The mark's editable master is
-`website/source-assets/brand/lo-mark.svg`.
+- **One size per role.** Text with the same role has the same size on every page at a
+  given viewport. Weight, color, spacing, and italics carry emphasis within a role.
+- **Few styles per component.** Each component uses at most two text styles. Small gray
+  labels appear only where a field needs naming: the record strip, contact details,
+  diagrams, and figures.
+- **Structure in three weights.** A strong solid rule opens each page-level section;
+  one faint, unfilled frame holds each group of content; dashed hairlines divide the
+  inside of a frame.
+- **A result belongs in its sentence.** Summaries and records carry no metric rows,
+  pills, or badges. A summary on About or Experience states at most one headline
+  figure; the other figures live on the entry's own page, where article figures may
+  chart them.
+- **Reading comes first.** Every page, figure, and link works without JavaScript;
+  interaction refines what is already there.
 
-## Color and type
+## Color
 
-| Role | Value |
-| --- | --- |
-| Paper | `#f7f6f5` |
-| Ink | `#0b0b0b` |
-| Supporting text | `#70706c` |
-| Supporting prose and source links | `#5c5c58` |
-| Text-link underline | `#a6a6a1` |
-| Active state and focus | `#2200ff` |
-| Structural rule | `rgba(0, 0, 0, 0.06)` |
-| Diagram node border | `rgba(0, 0, 0, 0.12)` |
-| Strong rule | `rgba(0, 0, 0, 0.24)` |
-| Frame edge (`--frame`) | `rgba(0, 0, 0, 0.08)` |
-| Dashed hairline (`--dash`, drawn by `--dash-x` / `--dash-y`) | `rgba(0, 0, 0, 0.15)`, 4px dash, 4px gap |
-| Diagram node surface (`--panel`) | `#fcfbfa` |
-| Figure second series (`--chart-sky`) | `#4fb0e3` |
-| Figure exact segment (`--chart-green`) | `#0d8a57` |
-| Figure context (`--chart-steel`, `--chart-mist`) | `#8d8d88`, `#d9d8d4` |
-| Figure emphasis (`--chart-tint`, `--chart-tint-strong`) | `rgba(34, 0, 255, 0.05)`, `rgba(34, 0, 255, 0.1)` |
+| Role | Token | Value |
+| --- | --- | --- |
+| Paper | `--page` | `#f7f6f5` |
+| Ink | `--ink` | `#0b0b0b` |
+| Supporting text | `--muted` | `#70706c` |
+| Supporting prose and source links | `--supporting-ink` | `#5c5c58` |
+| Text-link underline | `--link-rule` | `#a6a6a1` |
+| Active state, focus, and feedback | `--accent` | `#2200ff` |
+| Structural rule | `--rule` | `rgba(0, 0, 0, 0.06)` |
+| Diagram node border | `--rule-medium` | `rgba(0, 0, 0, 0.12)` |
+| Strong rule | `--rule-strong` | `rgba(0, 0, 0, 0.24)` |
+| Frame edge | `--frame` | `rgba(0, 0, 0, 0.08)` |
+| Dashed hairline, drawn by `--dash-x` and `--dash-y` | `--dash` | `rgba(0, 0, 0, 0.15)`, 4px dash, 4px gap |
+| Diagram node surface | `--panel` | `#fcfbfa` |
+| Figure second series | `--chart-sky` | `#4fb0e3` |
+| Figure exact segment | `--chart-green` | `#0d8a57` |
+| Figure context | `--chart-steel`, `--chart-mist` | `#8d8d88`, `#d9d8d4` |
+| Figure emphasis | `--chart-tint`, `--chart-tint-strong` | `rgba(34, 0, 255, 0.05)`, `rgba(34, 0, 255, 0.1)` |
 
-Inter 4.1 remains the typeface for headings, navigation, directory labels, controls,
-metadata, and the architecture viewer. Source Serif 4 supplies narrative prose and
-the small section and directory indices. This sans-serif/serif pairing follows
-Cognition's distinction between headings and reading text within the site's
-content hierarchy.
-`website/public/assets/fonts/inter.css` owns `--font-text`, the fixed optical sizing,
-lining numerals, and the Inter faces. `source-serif.css` owns `--font-prose` and the
-Source Serif 4 faces. Both families use self-hosted variable WOFF2 files with true
-italics and bundled licenses. Inter retains automatic optical sizing disabled and
-the `opsz` axis fixed at 14. Prose numerals use proportional widths; section indices
-and numeric tables can use tabular widths. Shared bold emphasis uses weight 600.
-The LO mark uses independent artwork. The hero name and the institution names
-Duke and Sequoia retain Inter; the supporting roles Alumnus and Fellow use Source
-Serif 4, preserving the site's heading/prose pairing.
-The decorative clarinet uses opaque ink, silver-gray, and blue point samples in
-Canvas 2D, with transparent gaps between the points. Clean mother-shape paths are
-rasterized into temporary construction masks only when the field is built or
-resized. Those masks identify the body, fittings, and outlines; they never become
-visible filled surfaces. Silver fittings use separated dark outline points and
-sparse gray interior points. The four musical notes and the single blue oval are
-the illustration's solid accents: they use filled `Path2D` shapes rather than
-point sampling. The instrument itself has no solid bitmap, continuous metal fill,
-or gradient surface. No decorative typeface is loaded, and the reference image's
-existing texture is not converted into the particle field.
+Body copy uses the ink colors. Blue marks active navigation, hover, keyboard focus, and
+the decision or feedback path in diagrams and figures.
 
-Settled points align to device pixels. Their transparent cached layer copies at
-native resolution without another scaling pass. `alignCanvas` derives responsive
-dimensions from the stage, aligns the displayed canvas origin to device pixels,
-and matches its CSS box to the backing store. Canvas resolution follows device
-pixel ratio, capped at 3, independently of the CSS coordinates used for physics.
-Moving points use subpixel edge coverage rather than a blur filter; they return
-to the exact pixel-aligned cached positions when they settle.
+## Typography
 
-Typography follows semantic roles. At any viewport, text with the same role uses
-the same size across every section and page. Weight, color, spacing, and italics
-provide emphasis within a role. Research prose and table cells use the same reading
-size as the biography, experience record, and legal articles. Mathematical expressions
-scale relative to surrounding text without changing the prose size.
+Inter 4.1 sets headings, navigation, directory labels, controls, metadata, and the
+architecture viewer. Source Serif 4 sets narrative prose and the small section and
+directory indices: Inter marks structure, Source Serif 4 marks reading.
+`public/assets/fonts/inter.css` owns `--font-text` and the Inter faces, with automatic
+optical sizing disabled, the `opsz` axis fixed at 14, and lining numerals.
+`source-serif.css` owns `--font-prose` and the Source Serif 4 faces. Both families are
+variable WOFF2 files with true italics and bundled licenses; no other typeface is
+loaded. Prose numerals are proportional; indices and numeric table columns are tabular.
+Bold is weight 600.
 
-| Role | Shared token | Size and face | Leading |
+| Role | Token | Size and face | Leading |
 | --- | --- | --- | --- |
-| Page title | `--type-title` | 36px desktop / 30px mobile, Inter 400, -0.022em | 1.12 |
-| Section or chapter heading, directory item | `--type-heading` | 24px desktop / 22px mobile, Inter 400, -0.015em | 1.25 |
-| Item or subsection title: project, paper, institution, article subsection | `--type-subheading` | 18px, Inter 500 | 1.4 |
-| Prose: body, summaries, record values, course names, table cells, captions | `--type-reading` | 16px, Source Serif 4 400 | 1.65 |
-| Interface: navigation, contents, Read More, degree names, diagram node titles | `--type-interface`, `--type-action` | 15px, Inter 400 (500 for actions and node titles) | 1.5 |
-| Label: field labels, diagram stage and detail text, footer | `--type-label` | 13px, Inter 400 | 1.45 |
-| Section margin index, directory number, contribution number | `--type-index` | 11px, Source Serif 4 400 | 1.5 |
-| Inline mathematical expression | Relative to surrounding text | 1em | Intrinsic mathematical geometry |
-| Displayed mathematical expression | `--type-math` | 1.15em | Intrinsic mathematical geometry |
+| Page title | `--type-title` | 36px, 30px below 768px; Inter 400, -0.022em | 1.12 |
+| Section or chapter heading | `--type-heading` | 24px, 22px below 768px; Inter 400, -0.015em | 1.25 |
+| Item title: project, paper, institution, subsection; directory label | `--type-subheading` | 18px, Inter 500; 400 for directory labels | 1.4 |
+| Reading: body, summaries, record values, courses, table cells, captions | `--type-reading` | 16px, Source Serif 4 400 | 1.65 |
+| Interface: navigation, contents, Read More, degree names, node titles | `--type-interface`, `--type-action` | 15px, Inter 400; 500 for actions and node titles | 1.5 |
+| Label: field labels, diagram and chart text, footer | `--type-label` | 13px, Inter 400 | 1.45 |
+| Index: section margin index, directory and contribution numbers | `--type-index` | 11px, Source Serif 4 400 | 1.5 |
+| Inline mathematics | | 1em of the surrounding text | Intrinsic |
+| Displayed mathematics | `--type-math` | 1.15em | Intrinsic |
 
-Seven roles carry the site, each with one size. A level looks the same on every page,
-so hierarchy comes from size, weight and space. Inter marks structure and Source Serif 4
-marks reading. Inline `code` inherits the surrounding face. Summaries carry no bold.
-In Key Contributions, the lead sentence and results authored in bold in the AI
-manuscript render at weight 600, so each contribution opens with its claim; italic
-run-ins and bold theorem labels remain inside mathematics papers. The hero name is the
-one display exception.
+Roles use rem units and scale with the reader's text setting. Only titles and headings
+step down below 768px. Titles, headings, and item titles use `--title-tracking`,
+`--heading-tracking`, and `--subheading-tracking`; reading text and indices use none.
+Inline `code` inherits the surrounding face, and summaries carry no bold. In Key
+Contributions, the lead sentence and results set in bold in the AI manuscript render at
+weight 600, so each contribution opens with its claim; italic run-ins and bold theorem
+labels belong to the mathematics papers. The hero name is the one display exception:
+it scales with the viewport.
 
-Restraint, not absence. Each component uses at most two text styles, and small gray
-labels appear only where a field needs naming (the record strip, contact details,
-diagrams). Structure has three weights: a strong solid rule opens each page-level
-section; one faint, unfilled 1px frame holds each group of content (a section's
-entries, the section index, the record strip, contact details, a course list), with
-`--frame-pad` (44px) of room inside; and divisions inside a frame are dashed hairlines
-(the spine between titles and prose, field | field, row / row, column | column).
-Frames have square corners, no fill and no shadow. Never stack frames with a gap
-between them: entries of one section share a frame and are separated by space.
-Do not add metric rows, pills, badges, or other pulled-out figures to summaries and
-records: a result belongs in its sentence. A summary on About or Experience carries at
-most one headline figure; the other figures stay on the entry's detail page, where
-article figures may chart them.
+Apply a role by meaning: an institution or paper name is an item title even when it is
+the page's H1.
 
-Text roles use rem units and scale with the user's text setting. Titles and headings
-step down below 768px, including in the architecture viewer; the other roles remain
-the same at every viewport. Titles, headings and item titles use the `--title-tracking`,
-`--heading-tracking` and `--subheading-tracking` tokens; reading text and indices use
-zero tracking.
-Blue marks active navigation, focus, and link feedback. Editorial surfaces use flat
-rules and typography; the note-preview dialog uses a rounded surface to distinguish
-its temporary reading state.
+## Layout
 
-### Experience presentation
+### Reading frame
 
-Experience shares About's Inter headings, Source Serif 4 prose, role sizes, grid, and
-paper/ink palette. It is one page with five numbered sections and an anchor
-directory headed Experience: Areas of Focus that stays in one column at every screen width.
-Experience and Coursework use the same `SectionDirectory` component: a framed index
-whose rows are divided by inset dashed hairlines, with small serif numbers at the left
-and labels in the subheading size at weight 400. From 1200px the page title hangs on
-axis A and the index sits beside it on axis B. A right-aligned View label appears on
-hover and keyboard focus and remains visible on touch devices; the complete row turns
-blue on hover or focus. Directory numbers run from 01 through 05 for Experience
-and 01 through 04 for Coursework. Both the decorative numbers and repeated View
-actions are hidden from assistive technology, leaving the section title as each
-link's accessible name. Section margin indices use the shared serif index role on
-About, Experience, and Coursework. Category introductions are omitted.
+The desktop frame is capped at 1440px and divided into 15 columns: a three-column
+sticky navigation rail and a twelve-column content field. Tablets between 768px and
+1024px use 12 columns. Horizontal gutters are 64px on desktop, 32px on tablets, and 20px
+on phones. The content field reserves one internal track for margin indices and aligns
+headings and prose to the reading track. Structural column guides are decorative,
+hidden from assistive technology, and omitted on phones.
 
-On About, Experience, Coursework and the ten detail pages, content hangs on two axes
-of the ten-column field (`--hang-columns`, 4fr / 6fr). A section's entries share one
-frame, built from the shared `ledger` classes in `globals.css`. From 1200px each title sits alone
-on the left, and one continuous dashed spine runs down the frame between titles and
-prose, with 72px of space between entries. Below 1200px each title stacks above its
-prose and entries are separated by a dashed line inside the frame. On About, the
-contact strip's first divider falls on the same axis as the spine.
-Summaries use upright black body text. No content is truncated to fit a frame.
-Sections end on the reading-end guide (11 of the 12 content columns).
+The rail's minimum width follows the interface type size, indent, padding, and
+scrollbar allowance, so the rail, reading field, and guides reflow together when text
+is enlarged. The rail scrolls internally when its contents exceed the viewport height.
+Below 768px, top-level pages use a 4rem sticky header with a Menu / Close panel; detail
+pages show the wordmark and their parent link in the header without a menu. Without
+JavaScript, the links stay visible in normal document flow. Media-query ranges cover
+fractional viewport widths continuously.
 
-All body copy uses the shared ink colors. Blue marks navigation, hover, keyboard
-focus, and the decision or feedback path in architecture figures.
+### Measure
 
-AI entries lead with the project name. The confidentiality note introduces "the
-following four projects", so it opens the AI section as its standfirst: directly under
-the heading, on the same edge, in the reading face and supporting-ink color. Its
-heading is visually hidden and labels the aside for assistive technology.
+`--reading-measure` (36rem, about seventy characters of Source Serif 4 at the reading
+size) caps every narrative container: introductions, standfirsts, stacked ledger prose,
+detail pages, captions, posts, and article reading columns. Lines run from about 32
+characters on a 320px phone to about 70 on a desk. Paragraphs wrap ragged-right with no
+forced breaks, and long unbroken strings wrap in an emergency.
 
-Each of the eight AI and legal articles opens with a `LogicDiagram` in its header,
-under the record strip, as the article's visual abstract. Its data lives in
-`app/lib/content/architecture-diagrams.ts`, keyed by Experience entry ID: four stages
-read left to right, each holding one node or one node per lane, with an optional
-feedback loop to an earlier stage. Stage labels sit on short rules with the site's
-blue ticks; nodes are flat panels with a 1px border, and the stage holding the
-decisive mechanism is set in ink. Connectors are drawn in CSS on the same grid as the
-nodes (arrows, fan-out and fan-in buses), and the loop is the one blue path, labeled
-beneath. Node details accept inline TeX. The figure is pure HTML and CSS, so its text
-keeps the site's roles and works without JavaScript. Below 640px of figure width it
-reflows into a vertical sequence (parallel nodes side by side from 480px) and the
-loop becomes a labeled return note. A prose caption follows. Every stage must have
-one node or as many as the widest stage; the module throws at build time otherwise.
+### Hanging layout
 
-### Article figures
+About, Experience, Coursework, Blog, and the ten detail pages hang content on two axes
+of the ten-column field (`--hang-columns`, 4fr / 6fr). From 1200px each title sits alone
+on axis A and its prose on axis B; below 1200px each title stacks above its prose.
+Sections end on the reading-end guide, 11 of the 12 content columns. On wide article
+layouts the reading column takes seven grid columns and the contents rail three, so the
+split lands on the column-12 guide.
 
-Inside the eleven full articles, figures take their grammar from Cognition's research
-posts: a faint 1px frame, a title at the interface size and weight 500, every chart
-label at the label size, axis names in flat gray pills, dashed hairline grids and a
-caption in the reading face and supporting ink below the frame. Ink and the accent carry
-the argument; `--chart-sky` marks a second series, `--chart-green` an exactly known
-segment, `--chart-steel` and `--chart-mist` hold context, and `--chart-tint` marks an
-emphasized row, column or region. Text is HTML at its true size, so labels stay legible
-at every width; only curves live in a stretched SVG layer whose strokes keep their
-width, and schematics scale uniformly so arrows and angles keep their shape. Labels
-sit in open space beside the marks they name and never cover a curve. Bar rows align
-on one grid; where a figure is narrow, each label shares a line with its value above
-a full-width bar, and the reference rules run through the rows behind the text. A
-title stands alone on its line, with any view switch beneath it as one segmented
-control.
+## Structure
 
-The dependence article's four manuscript figures are drawn the same way from the
-formulas that produced the original images, with the manuscript's captions unchanged
-below them.
+### Frames and ledgers
 
-Figures are interactive without depending on it. A segmented switch swaps views, a
-hover readout follows line charts, marks show their exact values, the proof-obligation
-graph accepts a chosen failure, and each figure draws in once as it scrolls into view,
-except under reduced motion. Without JavaScript every figure renders its default view.
-Every plotted value restates the manuscript, and conceptual figures carry no numeric
-scale. Titles, captions, legends and axis names use sentence case, like the manuscripts'
-table captions; view switches are controls and use title case. Captions state what the
-figure shows in the article's own terms, without disclaimers.
+One faint, unfilled 1px frame holds each group of content: a section's entries, the
+section index, the record strip, contact details, a course list. Frames have square
+corners, no fill, no shadow, and `--frame-pad` (44px) of room inside. Entries of one
+section share a frame and are separated by space; frames never stack with a gap between
+them.
 
-Research tables share the figures' frame. A manuscript table caption becomes the
-title inside the frame; the header is a faintly tinted band in label type over a firm
-rule; rows part on hairlines; numeric columns align right in tabular figures. The
-hovered row and column take a quiet tint and the hovered column's header turns accent,
-a row or column the table emphasizes carries the accent tint, and rows enter once, top
-to bottom, as a table scrolls into view.
+Framed lists use the global `ledger`, `ledger-item`, `ledger-title`, `ledger-body`, and
+`ledger-prose` classes. From 1200px one continuous dashed spine runs down the frame
+between titles and prose, with 72px between entries; below 1200px entries are divided
+by a dashed line inside the frame. On About, the contact strip's first divider falls on
+the same axis as the spine.
 
-Prose stays within `--reading-measure` (36rem, about seventy characters of Source
-Serif 4 at the reading size) at every width. On wide article layouts the reading
-column takes seven grid columns and the contents rail three, so the split lands on
-the column-12 guide; the rail lists chapters and opens subsections only for the
-chapter being read.
+### Links and actions
 
-All eighteen entries use real Read More links to dedicated pages. The eight AI and
-legal articles use their manuscript URLs; the other ten entries have pages at
-`/experience/{slug}/`. AI entries lead with the project name, other outer entries with
-the organization, and legal entries with `Duke Law School: {research area} Research`.
-Detail-page H1s use the project or paper title in the page-title role. Organization,
-Position, Location, and Dates form a framed record strip with dashed hairlines between
-fields: four fields on desktop, two per row below 1200px and one below 420px, each a
-label-role caption above a value in the reading face. The browser title keeps `{institution}: {project title}`.
-The strip is followed by the approved Key Contributions as an ordered list with
-decorative serif indices (01, 02, ...), with contextual notes as the final items in
-the same list and type style. On the ten non-article detail pages the Key
-Contributions heading hangs on axis A beside its list. Links work without JavaScript and have accessible
-keyboard focus and touch targets. Do not repeat the outer summary in the detail view.
+Text links share a 1px underline in `--link-rule` at `--link-underline-offset`; hover
+and focus turn them blue. Read More is underlined interface text at weight 500 with the
+decorative chevron from `ReadingArrow`; its accessible name identifies the destination.
+View Now on a post uses the same chevron.
 
-AI pages include the scope disclosure, Key Contributions with any nested method
-lists, Architectural Context, and the numbered manuscript chapters. A single authoritative
-AI manuscript supplies the introductory copy, nested lists, and complete mathematical body.
-Legal pages place Key Contributions
-before the complete Abstract and manuscript. The shared contents rail includes
-the contribution block and source chapter links. Return links target the matching
-entry on Experience.
+Every return action reads "Back to {destination}" with the decorative arrow from
+`ReturnArrow`: Back to Education, Back to Selected Research, Back to Experience, and
+Back to Blog. On detail pages it is the parent link beside the wordmark; article,
+detail-page, and post footers repeat it beside Back to Top. The destination is the
+originating section or entry, so the link works after opening a page directly. The 404
+page offers Return Home with the same arrow. Parent links have 44px targets; coarse
+pointers also receive 44px primary navigation and standalone link targets.
 
-Research article prose, emphasis, citations, and table cells use the shared
-reading size. Subsection headings use the subheading role. Inline
-formulas use 1em; standalone formulas use 1.15em. Pure inline numerical values,
-including scientific notation and percentages, use the surrounding prose family
-with native superscripts while retaining their accessible MathML and original TeX.
-Genuine expressions retain the mathematical glyph renderer. Subscripts,
-superscripts, fractions, accents, and equation labels retain their mathematical
-hierarchy. Multiline equations have explicit row spacing and generous surrounding
-space. Equation blocks use symmetric 2.25rem margins and 0.75rem vertical padding.
-Wide equations scroll locally at their natural size. Displayed equations omit
-sentence-ending punctuation while original TeX annotations preserve the authored
-source. Mathematical SVG glyphs are artwork rather than an additional prose font.
+### Section directory
 
-Research tables preserve normal word boundaries and a minimum useful column width.
-Only tables wider than the reading column scroll horizontally; their formulas move
-with the table instead of creating nested scrolling areas. Table and equation
-regions retain native touch, trackpad, scrollbar, and keyboard navigation. Article
-paragraphs have 1.5rem separation. New main chapters begin after 5rem of space, a
-fine rule, and 2rem of inset; phone spacing is 4rem and 1.5rem. Subsections use
-3rem of separation. These boundaries distinguish argument levels without changing
-the site's fonts or type sizes.
+Experience and Coursework share `SectionDirectory`: a framed index whose rows are
+divided by inset dashed hairlines, with serif numbers at the left (01–05 on Experience,
+01–04 on Coursework) and labels at the item-title size and weight 400. From 1200px the
+page title hangs on axis A and the index on axis B; the index keeps one column at every
+width. A right-aligned View label appears on hover and keyboard focus and stays visible
+on touch devices; the whole row turns blue. The numbers and View labels are hidden from
+assistive technology, so each link's accessible name is the section title.
 
-Section margin indices use `--type-index`; metadata labels use `--type-label`.
-Top-level directories use the heading role. Navigation, the wordmark name,
-the mobile menu, and return links share `--type-interface` at every breakpoint.
-Text links share a 1px underline, `--link-rule`, and `--link-underline-offset`.
-Focus remains a visible blue outline, and hover feedback respects pointer capability.
+### Record strip
 
-## Reading frame
+Organization, Position, Location, and Dates form a framed strip divided by dashed
+hairlines: four fields on desktop, two per row below 1200px, and one below 420px. Each
+field is a label above a value in the reading face; long values wrap without narrowing
+the prose.
 
-The desktop frame is capped at 1440px and divided into 15 columns, with a three-column
-sticky navigation rail. The content field reserves one internal track for indices and
-aligns headings and prose to the reading track. Tablet uses 12 outer columns.
-The shared `--reading-measure` caps narrative containers at 36rem. Introductions,
-standfirsts, stacked ledger prose, detail pages, captions, and article reading columns
-share this measure; phones run at 30 to 45 characters per line and desktops at about
-seventy.
-Nested paragraphs fill their container with natural ragged-right wrapping. Each
-coursework category uses one text column at every width; legal articles retain
-their own reading and contents layout.
-Below 768px, top-level pages use a 4rem sticky header with a Menu / Close panel.
-Detail pages keep the wordmark and their parent link visible in the header without
-a menu toggle. On desktop, both forms use the existing sticky navigation rail.
-Media-query ranges cover fractional viewport widths continuously.
-Without JavaScript, the links remain visible in normal document flow.
+## Pages
 
-Horizontal gutters are 64px on desktop, 32px on tablet, and 20px on phones.
-Structural guides are decorative and hidden from assistive technology; phone layouts
-omit them.
-Experience metadata remains in one column at every width. Long values wrap without
-narrowing the prose.
-Below 768px, About hides its margin indices; Experience and Coursework place their
-indices above the section headings. The mobile header scales with the user's text
-size. The wordmark wraps at word boundaries,
-and the desktop navigation rail scrolls internally when its contents exceed the
-viewport height. Its minimum track width follows the interface type size, navigation
-indent, padding, and scrollbar allowance. The reading field and structural guides
-reflow together when enlarged text needs more rail space. Long reading content has
-emergency wrapping when an unbroken word would exceed its container.
-Coursework opens at `/coursework/` from the Read More link below the Education
-records. It uses the same underlined text and decorative right arrow as Experience,
-with visible keyboard focus and a descriptive accessible name;
-the About page keeps its `#coursework` anchor around this entrance. The dedicated
-page has four subject sections, indexed 01 through 04, and uses the same numbered,
-framed index and View interaction as Experience.
-Each section has a shared section heading and a framed list of course names
-at the shared reading size and leading, in three columns from 1200px and two from
-768px, divided by dashed column rules. All 49 courses retain their original
-wording and order as static text, available without JavaScript. The rail's
-Back to Education link returns to the Education section. Duke University appears
-once above the two degree records;
-degree names use the interface size at weight 500, on axis B beside the institution. Compact notes and a dashed hairline
-separate the degree records. Profile details and contact values also use the reading
-scale; field labels use the label scale. Email, GitHub, and X share one frame with
-dashed dividers, in three columns above 540px and stacked at 540px and below. Long contact values can wrap
-when text is enlarged.
-Parent links have 44px targets; coarse pointers also receive 44px primary navigation
-and standalone link targets.
+### About
 
-About uses compact spacing inside each research or education record and larger
-breaks between its numbered sections. Each Research entry contains its title,
-complete summary, and a separate Read More manuscript link, separated from the
-next entry by a thin rule. Titles use weight 600 without underlines. The action
-matches Experience's underlined text and decorative right arrow, with blue hover
-and keyboard-focus feedback. Its accessible name identifies the manuscript.
-The list omits dates. Paragraphs wrap naturally
-without forced line breaks. Section headings, entry headings, and reading text use
-the shared title, heading, subheading and reading hierarchy; scoped spacing overrides do not affect other pages.
+About opens with the name beside the clarinet hero; phones and portrait tablets stack
+the name above the instrument. The name and the institutions Duke and Sequoia use Inter;
+the roles Alumnus and Fellow use Source Serif 4. The two-line "Thinking Mathematically /
+Working in AI" introduction is an H2 at the title size, its second line in the muted
+tone, with the biography below on the same edge within the measure.
 
-Page titles own the H1 position. About's two-line "Theodore / Ouyang" supplies its
-main heading. The "Thinking Mathematically / Working in AI" introduction
-is an H2 below the hero.
-Its two lines share the title size, the second in the muted tone, and the biography
-sits below on the same left edge within the reading measure.
-Experience domains use `01`–`05` indices; individual entries have no leading markers.
-Top-level contributions are plain paragraphs without bullets or rules. Narrative lines stay within
-the shared reading measure and reflow with the viewport.
+Four numbered sections follow: the introduction, Selected Research, Education, and
+Contact. Margin indices use the index role; below 768px About hides them, while
+Experience and Coursework set theirs above the section headings. Selected Research
+lists three manuscripts in one ledger, each with its title, complete summary, and a
+Read More link; titles stay outside the link and summaries keep selected bold. Education
+names Duke University once above both degree records; degree names use the interface
+size at weight 500 on axis B, with compact notes and a dashed hairline between records.
+Read More beneath them opens Coursework, and the `#coursework` anchor marks that
+entrance. Email, GitHub, and X share one frame with dashed dividers, in three columns
+above 540px and stacked at 540px and below.
 
-## Interaction
+### Experience and Coursework
 
-About's Canvas 2D clarinet aggregates from seeded peripheral positions. Fine-pointer
-movement gently displaces nearby points, which spring back to their
-sampled positions; the bell remains the most stable part of the instrument.
-Scrolling away disperses the points in response to actual
-scroll progress, and returning restores the composition; ordinary document
-scrolling remains native. Four musical notes move continuously while the hero is
-visible, with independent periods for restrained drift, rotation, scale, and opacity.
-The body breathes subtly through opacity while its settled point positions
-remain fixed and sharp. Phones and portrait tablets stack the name above the
-instrument and reframe the surrounding whitespace to give it more space; landscape
-tablets and desktops keep the two columns. Physics advances at a fixed 60 Hz using the discrete spring
-rule, with interpolation between simulation states for rendering. Rendering pauses
-offscreen and in hidden tabs, preserving the active animation
-time so it resumes without a jump. Reduced motion displays the
-complete static field immediately and disables decorative movement and scroll
-dispersion. Resize preserves the shape's aspect ratio and does not replay the
-entrance. The body cache contains points and transparent gaps. A spatial index
-activates nearby particles for pointer interaction, and only affected regions are
-repainted while those particles return; the other points remain in the native
-cache. Construction masks are released after instrument sampling. Reusable filled
-paths draw the notes and blue node with the same continuous decorative movement.
-These choices reduce repeated work;
-actual frame time still depends on the device and browser. Routine links use color and underline feedback.
-Anchor navigation uses native scrolling. The mobile menu uses a short opening
-transition, with reduced-motion support.
-Focus outlines remain visible. The mobile menu traps keyboard focus, closes on Escape
-or navigation, and releases the page when the viewport reaches desktop width.
-Detail pages use one native parent link beside the wordmark. Its visible
-label is Back to Education, Back to Selected Research, or Back to Experience,
-with a small decorative left arrow. The destination is the originating section
-or entry, so it works after opening a detail page directly as well as after
-following an internal link. This return action stays outside the mobile menu.
-Reading headers begin with their title rather than repeating the return action;
-existing article and experience footer links remain available after long content.
+Experience is one page of five numbered sections under the directory headed Experience:
+Areas of Focus. Entries have no leading markers or category introductions. AI entries
+lead with the project name, legal entries with `Duke Law School: {research area}
+Research`, and the others with the organization. The AI section opens with its confidentiality note as a
+standfirst: directly under the heading, on the same edge, in the reading face and
+supporting ink, with a visually hidden heading that labels the aside.
 
-## Content and extension
+Coursework presents 49 courses in four subject sections, each a framed list at the
+reading size: three columns from 1200px and two from 768px, divided by dashed column
+rules. Courses keep their official wording and order.
 
-Page, domain, institution, project, and course titles use title case, and so do
-post titles and post section headings. Main-site navigation and action labels use
-title case, including Skip to Main Content, Read More, Back to Education, Back to
-Selected Research, Back to Experience, Back to Blog, Back to Top, Full Manuscript,
-Author Note, View in Footnotes, and View Now. Function words such as "to" and "in"
-stay lowercase.
-Research article titles and chapters preserve their
-authored capitalization. Supporting sentences and accessibility descriptions use
-sentence case. The architecture viewer uses sentence case for tool commands and
-export menus, including Share card and Copy share card. Preserve official spellings
-and acronyms such as GitHub, AI, ESG, LLM, SHAP, and IPhO; sentence case does not
-lowercase proper names.
-Use "and" in editorial category labels. Preserve official course and organization
-names, including their ampersands. The fellowship name is `Sequoia Fellow` in every
-place it appears: the About hero, site metadata from `app/lib/content/site.ts`, the
-social card, and the repository README.
+### Detail pages
 
-Public prose uses the first person singular in the active voice: past tense for
-Experience summaries and contributions, present tense for research summaries.
-Manuscripts keep their authored voice; the mathematical papers use the conventional
-authorial "we". The home page title is the name alone, and descriptions state the
-work directly, without hedging verbs such as "exploring".
+Each of the eighteen Experience entries opens its own page. The H1 is the project or
+paper title; the browser title is `{institution}: {title}`. The record strip follows,
+then Key Contributions as an ordered list with decorative serif indices and any
+contextual notes as its final items. On the ten pages that are not articles, the Key
+Contributions heading hangs on axis A beside its list. A page never repeats the summary
+shown on Experience.
 
-The social card master, `website/source-assets/brand/og.png`, repeats the hero on
-the paper background: the name, Duke Alumnus and Sequoia Fellow, the dotted clarinet
-with its blue corner marks, and the domain in the lower band. The repository README
-displays the same card.
+### Articles
 
-Use English punctuation in public copy and metadata, including the architecture
-viewer. Site copy, posts included, uses straight apostrophes and quotation marks;
-manuscripts keep the marks they were written with.
-Preserve source date punctuation and meaningful mathematical
-symbols, collaboration marks, and navigation arrows. An em dash can separate
-clauses. Unicode English dashes, ©, ×, and navigation arrows are intentional;
-Chinese full-width punctuation is not used in public interface copy.
-Legal section symbols, paragraph symbols, mathematical notation, and author names
-with diacritics remain part of the source text.
+The four AI articles, four legal articles, and three Selected Research manuscripts
+share `ArticleReadingLayout`. The contents rail lists chapters and opens subsections
+only for the chapter being read; it is a sticky column when the field has room and a
+disclosure when the viewport or text size narrows it. Each AI and legal article opens
+with its logic diagram under the record strip.
 
-The site has three sections, and every URL sits inside one of them. About is `/`;
-its children are `/coursework/` and the three Selected Research manuscripts at
-`/<slug>/`. Experience is `/experience/`; each of its eighteen entries opens at
-`/experience/<slug>/`, whether a full AI or legal article or a detail page. Blog is
-`/blog/`; each post opens at `/blog/<slug>/`. A work that a post presents is published
-on the same domain at its own address named after the work, as The Étude Sky is at
-`/etude-sky/`. The three top-level pages carry the About, Experience and Blog primary
-navigation. The 23 detail pages replace those primary links with parent navigation
-while retaining the home wordmark. About at
-`/` combines the introduction, Selected Research, Education with a coursework
-entrance, and contact details in sections 01 through 04. The first-person
-introduction opens the reading content beneath the hero and states the through-line
-of the work, making high-stakes conclusions verifiable; both
-Duke degrees, the advisor, scholarships, and all 49 courses are
-available. The canonical `/coursework/` page presents the four subject groups,
-returns to Education through its parent navigation, and appears in the sitemap. The
-homepage's `#coursework` anchor remains a valid entrance to this page.
-Experience contains all five domains and eighteen entries; each domain is a section
-of `/experience/` with its own anchor. Domain `01`, AI Research and Engineering, and
-domain `03`, Legal Research and Policy Analysis, open their eight entries as full
-articles; the other ten entries open detail pages.
-About's Selected Research section presents three on-site manuscripts: Critical
-Dependence Stress for Portfolio Diversification, followed by the Asian-options and
-Rough Heston papers. Each entry has a separate Read More manuscript link with blue
-hover and keyboard-focus feedback. Titles and complete summaries remain outside
-the link. Summaries retain selected bold emphasis. Numerical guarantees retain their
-model, horizon, payoff, and comparison scope.
-It does not repeat the abstracts. Titles use the same
-subheading role on axis A; supporting paragraphs use the reading role on axis B.
-The entries share one frame with a dashed spine, as on Experience. Typography, spacing,
-and wrapping adapt within the shared reading frame without changing the palette.
+AI pages present the scope disclosure, Key Contributions, Architectural Context, and
+the numbered manuscript chapters. Selected Research headers hold the title, GitHub
+link, and Full Manuscript link; reading begins at Abstract, and appendices and
+supporting material link to the pinned manuscript on GitHub. Chapter headings display
+Roman numerals and subsections letters in reading order, while source numbering and
+anchors stay intact; verified internal section references link to their headings.
 
-Each research page provides a contents list and the manuscript's abstract, core
-chapters, formulas, and references. The dependence-stress paper includes chapters
-1–5, the Asian-options paper chapters 1–10, and the Rough Heston paper chapters 1–8.
-Article headers contain the title, GitHub link, and Full Manuscript link. The
-Back to Selected Research link lives in the left rail. Reading content begins at
-Abstract; source front matter before Abstract is
-kept in the protected source. Appendices and supporting material are
-linked on GitHub. Each JSON source records the exact source commit, blob, and manuscript
-URL; source links should continue to identify that version. The full manuscript is
-available from the article header, and return links lead to the corresponding
-research entry on About.
+Paragraphs are 1.5rem apart. A new chapter begins after 5rem of space, a fine rule, and
+2rem of inset (4rem and 1.5rem on phones); subsections are 3rem apart. Equation blocks
+have symmetric 2.25rem margins and 0.75rem vertical padding, explicit row spacing, and
+no sentence-ending punctuation; wide equations and tables scroll locally at their
+natural size with native touch, trackpad, scrollbar, and keyboard navigation. Plain
+numbers, including scientific notation and percentages, use the prose face with native
+superscripts while keeping accessible MathML and the original TeX. Mathematical SVG
+glyphs are artwork, not an additional prose font.
 
-Research chapter headings display Roman numerals, and subsections display letters
-in reading order. Source numbering and anchors remain intact. Verified internal
-section references link to the matching heading and preserve their source numerals.
-
-The website has twenty-six content routes: About, Experience, Coursework, three
-Selected Research articles, eight Experience articles, ten other Experience
-detail pages, Blog, and one post. The architecture viewer adds one technical reference
-route, making twenty-seven exported routes, excluding 404. Addresses outside the three
-sections are not exported, so the host answers 404 for them; the 404 page forwards the
-addresses listed in `app/lib/content/forwarded-paths.ts` to the page that holds their
-content. Keep factual claims, metadata, copy, and content order aligned with the
-integrity manifests.
+Legal articles keep the source title, subtitle, author, date, abstract, chapter
+numbering, paragraph order, citations, and acknowledgments. Chapters are H2 headings in
+the heading role at weight 400 and subsections H3 headings in the item-title role;
+italics inside subsection headings render upright. Citations, including text marked as
+small capitals, use the reading size. Numbered footnote references open the note in a
+native dialog: centered on desktop, a bottom sheet with 44px controls on phones. Escape,
+the backdrop, and Close return focus to the cited passage; View in Footnotes focuses the
+full endnote. Full notes and two-way links work without JavaScript.
 
 ### Blog
 
-Blog follows Cognition's blog: an index of posts, and posts that present a work and
-link to it. The index has the title alone and one ledger frame of posts, newest first;
-each entry hangs its title, with the date beneath it in the label role, on axis A and
-its summary and Read More link on axis B, exactly as on About and Experience.
+Blog follows Cognition's blog: an index of posts and posts that present a work and link
+to it. The index has the title alone and one ledger of posts, newest first; each entry
+hangs its title, with the date beneath in the label role, on axis A and its summary and
+Read More on axis B.
 
-A post is one column no wider than the reading measure, starting on the reading-start
-guide, the same measure as the research articles' prose. The title
-sits above a byline in the label role (author on the left, date on the right) and a
-hairline. A hero image follows, then the work: a band tinted 3% ink, without a frame,
-that holds the work's name in the subheading role, its one-line description in muted
-serif, and View Now with the reading arrow. The band deepens on hover and View Now turns
-blue. Prose uses the reading role; section headings use the heading role at weight 400.
-An epigraph hangs off the dashed spine in italic serif, with its source in the label
-role. Figures sit in a faint frame at the column's width with a caption in supporting
-ink. A panorama, an image at least two and a half times as wide as it is tall, keeps a
-legible height on phones and scrolls sideways. The rail carries Back to Blog, and the
-post ends with the Blog return link and Back to Top.
+A post is one column at the reading measure, starting on the reading-start guide. The
+title sits above a byline in the label role (author left, date right) and a hairline. A
+hero image follows, then the work: a band tinted 3% ink, without a frame, holding the
+work's name in the item-title role, its one-line description in muted serif, and View
+Now. The band deepens on hover and View Now turns blue. Section headings use the heading
+role at weight 400. An epigraph hangs off the dashed spine in italic serif with its
+source in the label role. Figures sit in a faint frame at the column's width with a
+caption in supporting ink; a panorama, at least two and a half times as wide as it is
+tall, keeps a legible height on phones and scrolls sideways.
 
-### Legal articles
+## Figures and diagrams
 
-Each paper uses the shared shell, Inter headings, and Source Serif 4 prose with a restrained reading
-measure. Preserve the source title, subtitle, author name, date, abstract, original
-chapter numbering, paragraph order, legal citations, and acknowledgments. The
-detail-page H1 is the approved project title; chapters and subsections use semantic
-H2 and H3 headings.
-Chapter headings use the heading role at weight 400; subsections use the
-subheading role at weight 500. Preserve source capitalization and emphasis; italics
-in subsection headings render upright so a heading stays in one face.
-Legal citations within a paragraph use its body size and spacing, including text
-marked as small capitals in the source. Note previews use the same reading role;
-their headings use the section role at weight 500.
+### Logic diagrams
 
-A contents navigation links to Key Contributions, the abstract, chapters, and
-footnotes. It occupies a
-sticky side column when the reading field has enough space, and collapses into a
-single-column disclosure as the viewport or text size narrows. Section tracking
-identifies the current reading location without changing the document order.
+Each AI and legal article opens with a `LogicDiagram`, its visual abstract, drawn from
+`app/lib/content/architecture-diagrams.ts`. Four stages read left to right, each holding
+one node or one node per lane, with an optional feedback loop to an earlier stage.
+Stage labels sit on short rules with blue ticks; nodes are flat panels with a 1px
+border, and the stage holding the decisive mechanism is set in ink. Connectors are CSS
+on the same grid as the nodes; the loop is the one blue path, labeled beneath. Node
+details accept inline TeX. Below 640px of figure width the diagram becomes a vertical
+sequence (parallel nodes side by side from 480px) and the loop a labeled return note.
+A prose caption follows. The build fails if a stage holds neither one node nor as many
+as the widest stage.
 
-Numbered superscript references open the original note in a native dialog. Desktop
-previews are centered; phones use a bottom sheet with a scrollable note body and
-44px controls. Escape, background activation, and Close return focus to the cited
-passage. View in Footnotes closes the preview and focuses the complete endnote.
-Full notes and bidirectional links remain available without JavaScript.
+### Article figures
 
-Reading pages retain a visible parent link in the rail and their existing footer
-return link to the corresponding Experience entry. Contents,
-long citations, and note previews adapt to phone widths, enlarged text, keyboard
-navigation, and reduced motion. Keep the original PDFs outside public assets and
-the static export; article pages publish the text and its citation structure.
+Figures inside the eleven full articles take their grammar from Cognition's research
+posts: a faint 1px frame, a title at the interface size and weight 500, every chart
+label at the label size, axis names in flat gray pills, dashed hairline grids, and a
+caption in the reading face and supporting ink below the frame. Ink and the accent carry
+the argument; `--chart-sky` marks a second series, `--chart-green` an exactly known
+segment, `--chart-steel` and `--chart-mist` hold context, and `--chart-tint` marks an
+emphasized row, column, or region.
 
-Use shared tokens in `website/app/globals.css`, focused CSS Modules for local surfaces,
-and semantic HTML for new content. Match the existing type, reading measure, and
-spacing before adding a new component pattern. Keep interactions focused on navigation
-and reading while preserving the approved interactive clarinet composition. Visual
-identity may be expressive; biographical and research claims remain measured.
+Text is HTML at its true size, so labels stay legible at every width; only curves live
+in a stretched SVG layer whose strokes keep their width, and schematics scale uniformly
+so arrows and angles keep their shape. Labels sit in open space beside the marks they
+name and never cover a curve. Bar rows align on one grid; in a narrow figure each label
+shares a line with its value above a full-width bar. A title stands alone on its line,
+with any view switch beneath it as one segmented control.
 
-Review widths from 320 through 2560 pixels, including both sides of the 768, 1024,
-and 1200px breakpoints, iPad portrait and landscape sizes, keyboard use, and
-reduced-motion settings. The [architecture viewer](../architecture/) is a separate
-technical reference with its own light and dark viewing controls.
+A segmented switch swaps views, a readout follows the pointer on line charts, marks
+show exact values, the proof-obligation graph accepts a chosen failure, and each figure
+draws in once as it scrolls into view, except under reduced motion. Every plotted value
+restates the manuscript, and conceptual figures carry no numeric scale. Titles,
+captions, legends, and axis names use sentence case; view switches use title case.
+Captions state what the figure shows in the article's own terms. The dependence
+article's four manuscript figures are drawn the same way from the formulas behind the
+original images, with the manuscript's captions below them.
+
+### Research tables
+
+Research tables share the figures' frame. A manuscript caption ("Table N.") becomes the
+title inside the frame; the header is a faintly tinted band in label type over a firm
+rule; rows part on hairlines; numeric columns align right in tabular figures. The
+hovered row and column take a quiet tint and the hovered column's header turns blue; a
+row or column the table emphasizes carries the accent tint. Rows enter once, top to
+bottom, as a table scrolls into view. Tables keep normal word boundaries and a minimum
+useful column width, and only tables wider than the reading column scroll.
+
+## Clarinet hero
+
+The hero is a Canvas 2D particle field in the shape of a clarinet: a slender beak,
+reflective mouthpiece face, six silver ring keys, joint bands and pads, two long rods,
+and a flared bell with an elliptical rim and a dark cavity. Every part, including the
+ring-key centers and the bell cavity, is made of separated points with transparent gaps;
+the cavity uses denser ink points. Four short blue marks define the stage corners. An
+open arc of larger, closely spaced blue points passes behind the instrument. A single
+solid blue oval and four solid musical notes are the composition's only filled shapes,
+drawn with reusable `Path2D` paths. The hero has no call to action or playback control.
+
+Clean mother-shape paths are rasterized into temporary masks when the field is built
+or resized; the masks identify the body, fittings, and outlines and are released after
+sampling. Silver fittings use separated dark outline points and sparse gray interior
+points. Settled points align to device pixels in a transparent cache copied at native
+resolution; canvas resolution follows the device pixel ratio, capped at 3, independent
+of the CSS coordinates used for physics. Moving points use subpixel edge coverage
+instead of a blur filter and return to their exact cached positions. `alignCanvas`
+derives dimensions from the stage and matches the canvas box and origin to its backing
+store, including at fractional pixel ratios.
+
+The points gather from seeded positions on entry. A fine pointer gently displaces
+nearby points, which spring back; the bell is the steadiest part. Scrolling away
+disperses the points in step with scroll progress, and scrolling back restores the
+shape, with native document scrolling. The body breathes subtly through opacity while
+its points stay fixed and sharp, and the notes drift, turn, scale, and fade on
+independent periods while the hero is visible. Physics advances at a fixed 60 Hz with
+interpolated rendering; a spatial index activates only nearby particles and repaints
+only affected regions. Rendering pauses offscreen and in hidden tabs and resumes without
+a jump. Resizing keeps the aspect ratio without replaying the entrance. Reduced motion
+shows the complete static field at once. Before the script runs, and without
+JavaScript, a same-shape SVG of separated dots stands in.
+
+## Interaction and motion
+
+Hover feedback applies only to fine pointers, and focus is always a visible blue
+outline. Anchor links use native scrolling. The mobile menu opens with a short
+transition, traps keyboard focus, closes on Escape or navigation, and releases the page
+when the viewport reaches desktop width. Editorial surfaces are flat; the note-preview
+dialog alone has rounded corners, marking its temporary state. Reduced motion removes
+every decorative transition, entrance, and scroll effect.
+
+## Copy
+
+### Case
+
+Page, section, domain, institution, project, course, and post titles use title case,
+as do post section headings, navigation, and action labels: Skip to Main Content,
+Read More, View Now, Back to Education, Back to Selected Research, Back to Experience,
+Back to Blog, Back to Top, Return Home, Full Manuscript, Author Note, and View in
+Footnotes. Function words such as "to" and "in" stay lowercase. Manuscript titles and
+chapters keep their authored capitalization. Supporting sentences, accessibility
+labels, and figure text use sentence case; the architecture viewer uses sentence case
+for its tool commands and export menus. Official spellings and acronyms such as GitHub,
+AI, ESG, LLM, SHAP, and IPhO are kept, and editorial category labels use "and" while
+official course and organization names keep their ampersands.
+
+### Punctuation
+
+Site copy, posts included, uses English punctuation with straight apostrophes and
+quotation marks; manuscripts keep the marks they were written with. An em dash may
+separate clauses, and an en dash marks ranges. The multiplication sign, ©, mathematical
+symbols, legal section and paragraph marks, and diacritics in names are part of the text,
+and the architecture viewer's controls use arrows and symbols as icons. No full-width or
+CJK punctuation appears anywhere.
+
+### Voice
+
+Public prose is first person singular in the active voice: past tense for Experience
+summaries and contributions, present tense for research summaries. Manuscripts keep
+their authored voice, and the mathematics papers keep the authorial "we". The home page
+title is the name alone. Descriptions state the work directly, without hedges such as
+"exploring", and biographical and research claims stay measured. The fellowship is
+written `Sequoia Fellow` everywhere: the hero, site metadata from
+`app/lib/content/site.ts`, the social card, and the repository README.
+
+## Identity
+
+The compact LO mark appears in the navigation and browser icons; its editable master
+is `website/source-assets/brand/lo-mark.svg`. The social card master,
+`website/source-assets/brand/og.png`, repeats the hero on the paper background: the
+name, Duke Alumnus and Sequoia Fellow, the dotted clarinet with its blue corner marks,
+and the domain in the lower band. The repository README displays the same card.
+
+## Review
+
+Before a release, review every width from 320 to 2560 pixels, including both sides of
+the 768, 1024, and 1200px breakpoints and iPad portrait and landscape sizes; check
+keyboard use, enlarged text, reduced motion, and pages without JavaScript. Use the
+shared tokens in `app/globals.css`, focused CSS Modules for local surfaces, and semantic
+HTML, and match the existing type, measure, and spacing before adding a new pattern. The
+[architecture viewer](../architecture/) is a separate technical reference with its own
+light and dark themes.

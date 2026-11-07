@@ -139,7 +139,7 @@ test("ESLint still distinguishes source files and generated directories using ab
 
 test("globparts amplification is bounded by the upstream security patch", () => {
   // Based on the official fix's preprocess-limits.ts cases. A separate process
-  // with a hard timeout also bounds failure if a vulnerable engine returns.
+  // with a hard timeout keeps a vulnerable engine from hanging the suite.
   const result = execFileSync(process.execPath, ["--input-type=module", "-e", `
     import assert from "node:assert/strict";
     import { Minimatch } from "minimatch";

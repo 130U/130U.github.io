@@ -58,7 +58,11 @@ Every URL belongs to About (`/`, `/coursework/`, `/[paper]/`), Experience
 `app/experience/[slug]/page.tsx` renders an entry as an AI article, a legal article,
 or a detail page from its category. `app/lib/content/forwarded-paths.ts` lists
 addresses outside the three sections and the page each one forwards to from the 404
-page; add an entry there when a public URL changes.
+page; add an entry there when a public URL changes. The export holds twenty-six content
+routes (About, Coursework, three Selected Research articles, Experience and its eighteen
+entries, Blog, and one post), the architecture viewer, and the 404 page. A work that a
+post presents is published on this domain at its own address named after the work, as
+The Étude Sky is at `/etude-sky/`.
 
 ### Blog
 
@@ -83,10 +87,10 @@ manifest and the `app/lib/content/routes.ts` hash only if that file changes.
 
 Edit `content/sources/ai-portfolio/ai-research-and-engineering.md` as the single
 authority for all four AI projects. It contains the directory disclosure, project
-metadata, summaries, contributions and nested lists,
-Architectural Context, and complete numbered manuscripts with citations, tables,
-and TeX. Preserve the project's metadata labels, ordered section structure, and
-chapter sequence so the importer can validate the complete input before writing.
+metadata, summaries, contributions and nested lists, Architectural Context, and complete
+numbered manuscripts with citations, tables, and TeX. Preserve the project's metadata
+labels, ordered section structure, and chapter sequence so the importer can validate
+the complete input before writing.
 
 ```sh
 node scripts/import-ai-portfolio.mjs
@@ -101,10 +105,10 @@ AI fields. Citation links and mathematical definitions belong in that manuscript
 The list presents the single portfolio-wide disclosure and four briefs. Keep NDA
 and disclosure permissions in that opening note rather than repeating them in
 the briefs or manuscripts. Detail pages show the institution and project title,
-Position, Location, Dates, Key Contributions,
-Architectural Context, and numbered body. Each article returns to its project
-anchor on Experience. Tests compare the full generated fields and manuscript
-blocks with the maintained source and verify mathematical rendering independently.
+Position, Location, Dates, Key Contributions, Architectural Context, and numbered body.
+Each article returns to its project anchor on Experience. Tests compare the full
+generated fields and manuscript blocks with the maintained source and verify
+mathematical rendering independently.
 
 ### Selected Research
 
@@ -137,10 +141,11 @@ edition for wording; rerun the importers only when the upstream manuscript chang
 reconcile the edition with the new import.
 
 The dependence source tree includes supporting TeX inputs needed to resolve
-cross-references. Its four PNG figures are source evidence; copies in
-`public/assets/research/dependence/` stay published, and tests check their byte
-identity. The article draws these figures natively (see Article figures). The readers link appendices and supplementary proofs to the pinned full
-manuscripts and return to the corresponding About research entry.
+cross-references. Its four PNG figures are frozen source evidence and are not
+published: the article draws them natively from their formulas (see the article figures
+under Shared rendering and extension). The readers link appendices and supplementary
+proofs to the pinned full manuscripts and return to the corresponding About research
+entry.
 
 ### Legal research
 
@@ -171,11 +176,12 @@ navigation. `ExperienceSection` and `ExperienceDetails` keep all categories and
 detail pages consistent. `SectionDirectory` owns the shared numbered anchor directory
 for Experience and Coursework, including its frame, dashed row dividers, decorative
 indices, and View feedback for pointer, keyboard, and touch input. Framed lists use the
-global `ledger`, `ledger-item`, `ledger-title`, `ledger-body`, and `ledger-prose` classes,
-and every Read More link uses `read-more` with the shared `ReadingArrow`; reuse them for
-any new list. `LogicDiagram` renders the article diagrams from
-`app/lib/content/architecture-diagrams.ts`. Browser interaction stays in focused client components;
-the About hero is isolated in `app/components/clarinet-hero/`.
+global `ledger`, `ledger-item`, `ledger-title`, `ledger-body`, and `ledger-prose`
+classes, every Read More link uses `read-more` with the shared `ReadingArrow`, and every
+return link uses `ReturnArrow`; reuse them for any new list or page. `LogicDiagram`
+renders the article diagrams from `app/lib/content/architecture-diagrams.ts`. Browser
+interaction lives in focused client components, and the About hero is isolated in
+`app/components/clarinet-hero/`.
 
 Article figures live in `app/components/figures/`: `kit.tsx` holds the frame, scales,
 plot, schematic and bar primitives, `selected-research.tsx`, `ai-research.tsx` and
@@ -199,14 +205,14 @@ and without the labels of the native drawings, keeping their manuscript captions
 `ResearchArticle` serves AI and Selected Research. The Markdown parser supports
 typed prose, emphasis, links, headings, tables, and formulas rather than arbitrary
 HTML. `ResearchMath` renders TeX to self-contained SVG and assistive MathML during
-the build; no browser math engine is loaded. Original TeX remains in accessible
+the build; no browser math engine is loaded. The original TeX is carried in accessible
 annotations. Invalid formulas fail the build. Wide equations and tables scroll
 locally without shrinking the reading text.
 
 Use the semantic typography tokens in `app/globals.css` and the shared font files.
-The [design guide](design.md#color-and-type) defines each role's size, weight, family,
+The [design guide](design.md#typography) defines each role's size, weight, family,
 and responsive behavior. Apply a role by meaning: an institution or paper name is
-a subheading even when it is the page's H1. Shared components own the corresponding
+an item title (the subheading token) even when it is the page's H1. Shared components own the corresponding
 layout and interaction rules.
 
 When adding content, update its source, loader/slug registry, route mapping, sitemap
@@ -222,7 +228,9 @@ Keep independent route, link, figure, and mathematical checks when updating a lo
 
 `tooling/directory-glob/` adapts pinned Tinyglobby for Next.js lint directory
 discovery. Its override is scoped to the lint plugin; preserve its directory-path
-behavior and consumer tests when changing dependencies.
+behavior and consumer tests when changing dependencies. `tooling/minimatch-compat/`
+routes the lint plugins' `minimatch` calls to the patched v11 engine; its README names
+the advisory it addresses and the condition for removing it.
 
 ## Assets and static assembly
 
@@ -233,11 +241,11 @@ behavior and consumer tests when changing dependencies.
 The repository README displays the same card from `public/assets/brand/og-1774.jpg`.
 
 The Inter and Source Serif 4 variable fonts and their SIL Open Font Licenses live
-in `public/assets/fonts/`. The site and architecture viewer share `inter.css`;
-Inter retains automatic optical sizing disabled, the optical axis fixed at 14,
-and lining numerals. The main site also loads `source-serif.css` for prose and
+in `public/assets/fonts/`. The site and architecture viewer share `inter.css`,
+which disables automatic optical sizing, fixes the optical axis at 14, and sets lining
+numerals. The main site also loads `source-serif.css` for prose and
 small indices. The architecture tool UI, hero name, and institution names use
-Inter. Retain both font licenses when updating or redistributing the assets.
+Inter. Keep both font licenses with the assets when updating or redistributing them.
 
 `npm run build` runs Next.js, then `scripts/assemble-static.mjs`. Assembly includes
 the architecture viewer and its license, normalizes segment payload filenames, and

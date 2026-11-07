@@ -490,7 +490,11 @@ button:focus-visible {
   margin-bottom: 58px;
   font-size: var(--type-interface);
   line-height: var(--interface-leading);
-  gap: 8px;
+  gap: 10px;
+}
+
+.back-link svg {
+  flex: 0 0 16px;
 }
 
 .education-entry {
