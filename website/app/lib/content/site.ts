@@ -9,7 +9,8 @@ export const DEFAULT_DESCRIPTION =
 
 export type ActivePage =
   | "about"
-  | "experience";
+  | "experience"
+  | "blog";
 
 export type ParentPage = Readonly<{ href: string; label: string }>;
 
@@ -20,6 +21,7 @@ export const navigation: ReadonlyArray<{
 }> = [
   { key: "about", label: "About", href: "/" },
   { key: "experience", label: "Experience", href: "/experience/" },
+  { key: "blog", label: "Blog", href: "/blog/" },
 ];
 
 export const coreRoutes = [...navigation.map(({ href }) => href), "/coursework/"];

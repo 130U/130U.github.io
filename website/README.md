@@ -3,8 +3,9 @@
 Theodore Ouyang's personal site uses Next.js App Router, React, TypeScript, and
 native CSS. GitHub Pages serves a static export. About introduces the profile,
 education, and selected research; Experience organizes eighteen projects and roles
-across five fields. Dedicated readers present coursework and research
-articles with mathematical notation, chapter navigation, and legal footnotes.
+across five fields; Blog presents works, each post linking to the work itself.
+Dedicated readers present coursework and research articles with mathematical
+notation, chapter navigation, and legal footnotes.
 
 The visual system pairs Inter headings with Source Serif 4 prose, a warm paper
 background, and a restrained editorial grid: faint frames hold each list, dashed

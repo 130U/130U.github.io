@@ -1,0 +1,310 @@
+.frame {
+  font-family: var(--font-text);
+}
+
+.frame :global(.content-column) {
+  padding-top: 112px;
+}
+
+/* Index: the title alone, then one framed ledger of posts, newest first. Each
+   entry hangs its title and date on the left and its summary on the right. */
+.intro {
+  margin-bottom: 80px;
+}
+
+.intro h1 {
+  margin: 0;
+  font-size: var(--type-title);
+  font-weight: 400;
+  line-height: var(--title-leading);
+  letter-spacing: var(--title-tracking);
+}
+
+.entryHead {
+  min-width: 0;
+}
+
+.entryHead :global(.ledger-title) {
+  margin: 0;
+}
+
+.date {
+  display: block;
+  margin-top: 6px;
+  color: var(--muted);
+  font-size: var(--type-label);
+  line-height: var(--label-leading);
+  letter-spacing: 0.015em;
+}
+
+/* Post: one column from the reading start to the reading-measure guide. The
+   title and byline sit over a hairline, then the hero, the work and the prose. */
+.post {
+  grid-column: 2 / span 7;
+  min-width: 0;
+}
+
+.header h1 {
+  margin: 0;
+  font-size: var(--type-title);
+  font-weight: 400;
+  line-height: var(--title-leading);
+  letter-spacing: var(--title-tracking);
+  text-wrap: balance;
+}
+
+.byline {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 4px 24px;
+  margin: 20px 0 0;
+  padding-bottom: 28px;
+  border-bottom: 1px solid var(--rule-medium);
+  color: var(--muted);
+  font-size: var(--type-label);
+  line-height: var(--label-leading);
+  letter-spacing: 0.015em;
+}
+
+.hero {
+  display: block;
+  width: 100%;
+  height: auto;
+  margin-top: 32px;
+}
+
+/* The work itself: a tinted band that opens the published piece. */
+.work {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px 24px;
+  margin-top: 32px;
+  padding: 14px 20px;
+  color: var(--ink);
+  background: rgba(0, 0, 0, 0.03);
+  transition: background-color 180ms var(--ease-out);
+}
+
+.workText {
+  display: grid;
+  gap: 2px;
+  min-width: 0;
+}
+
+.workTitle {
+  font-size: var(--type-subheading);
+  font-weight: 500;
+  line-height: var(--subheading-leading);
+  letter-spacing: var(--subheading-tracking);
+}
+
+.workDescription {
+  color: var(--supporting-ink);
+  font-family: var(--font-prose);
+  font-size: var(--type-reading);
+  line-height: var(--reading-leading);
+}
+
+.workAction {
+  display: inline-flex;
+  flex-shrink: 0;
+  align-items: center;
+  gap: 6px;
+  min-height: 44px;
+  font-size: var(--type-action);
+  font-weight: 500;
+  line-height: var(--interface-leading);
+  transition: color 180ms var(--ease-out);
+}
+
+.workAction svg {
+  width: 14px;
+  height: 14px;
+  transition: transform 180ms var(--ease-out);
+}
+
+.body {
+  margin-top: 56px;
+  font-family: var(--font-prose);
+  font-size: var(--type-reading);
+  line-height: var(--reading-leading);
+}
+
+.body > p {
+  margin: 0;
+  text-wrap: pretty;
+}
+
+.body > p + p {
+  margin-top: 1.25rem;
+}
+
+.body > h2 {
+  margin: 3.5rem 0 1.25rem;
+  font-family: var(--font-text);
+  font-size: var(--type-heading);
+  font-weight: 400;
+  line-height: var(--heading-leading);
+  letter-spacing: var(--heading-tracking);
+  scroll-margin-top: 32px;
+}
+
+.body > h2:focus {
+  outline: none;
+}
+
+/* The epigraph hangs off the dashed spine used between titles and prose. */
+.epigraph {
+  margin: 0 0 2.5rem;
+  padding: 2px 0 2px 24px;
+  background: var(--dash-y) left top / 1px 100% no-repeat;
+}
+
+.epigraph blockquote,
+.epigraph p {
+  margin: 0;
+}
+
+.epigraph p {
+  font-style: italic;
+}
+
+.epigraph figcaption {
+  margin-top: 8px;
+  color: var(--muted);
+  font-family: var(--font-text);
+  font-size: var(--type-label);
+  line-height: var(--label-leading);
+  letter-spacing: 0.015em;
+}
+
+.figure {
+  margin: 2.5rem 0;
+}
+
+.media {
+  overflow-x: auto;
+  overscroll-behavior-x: contain;
+  scrollbar-width: thin;
+  scrollbar-color: var(--rule-strong) transparent;
+}
+
+.media img {
+  display: block;
+  width: 100%;
+  height: auto;
+  border: 1px solid var(--frame);
+}
+
+.figure figcaption {
+  margin-top: 0.75rem;
+  color: var(--supporting-ink);
+  text-wrap: pretty;
+}
+
+.footer {
+  display: flex;
+  justify-content: space-between;
+  gap: 24px;
+  margin-top: 72px;
+  padding-top: 24px;
+  border-top: 1px solid var(--rule);
+  font-family: var(--font-text);
+  font-size: var(--type-interface);
+  line-height: var(--interface-leading);
+}
+
+.footer a {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+}
+
+.footer :global(.back-link) {
+  margin-bottom: 0;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .work:hover {
+    background: rgba(0, 0, 0, 0.05);
+  }
+
+  .work:hover .workAction {
+    color: var(--accent);
+  }
+
+  .work:hover .workAction svg {
+    transform: translateX(2px);
+  }
+}
+
+.work:active .workAction {
+  color: var(--accent);
+}
+
+@media (min-width: 1200px) {
+  .entryHead {
+    padding-right: var(--hang-gap);
+  }
+
+  .entryHead :global(.ledger-title) {
+    padding-right: 0;
+  }
+}
+
+@media (width < 1200px) {
+  .entryHead {
+    margin-bottom: 12px;
+  }
+}
+
+@media (width < 768px) {
+  .frame :global(.content-column) {
+    padding-top: 52px;
+  }
+
+  .intro {
+    margin-bottom: 40px;
+  }
+
+  .work {
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 14px 16px 6px;
+  }
+
+  .body {
+    margin-top: 44px;
+  }
+
+  .body > h2 {
+    margin-top: 2.75rem;
+    scroll-margin-top: 6rem;
+  }
+
+  .figure {
+    margin: 2rem 0;
+  }
+
+  /* A panorama such as a handscroll keeps a legible height and unrolls sideways. */
+  .media img[data-panorama] {
+    width: 640px;
+    max-width: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .work,
+  .workAction,
+  .workAction svg {
+    transition: none;
+  }
+}
+
+@media (forced-colors: active) {
+  .work {
+    border: 1px solid CanvasText;
+  }
+}

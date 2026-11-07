@@ -414,13 +414,15 @@ Chinese full-width punctuation is not used in public interface copy.
 Legal section symbols, paragraph symbols, mathematical notation, and author names
 with diacritics remain part of the source text.
 
-The site has two sections, and every URL sits inside one of them. About is `/`;
+The site has three sections, and every URL sits inside one of them. About is `/`;
 its children are `/coursework/` and the three Selected Research manuscripts at
 `/<slug>/`. Experience is `/experience/`; each of its eighteen entries opens at
-`/experience/<slug>/`, whether a full AI or legal article or a detail page. The two
-top-level pages carry the About and Experience primary navigation. The 22 detail
-pages replace those primary links with parent navigation while retaining the home
-wordmark. About at
+`/experience/<slug>/`, whether a full AI or legal article or a detail page. Blog is
+`/blog/`; each post opens at `/blog/<slug>/`. A work that a post presents is published
+on the same domain at its own address named after the work, as The Étude Sky is at
+`/etude-sky/`. The three top-level pages carry the About, Experience and Blog primary
+navigation. The 23 detail pages replace those primary links with parent navigation
+while retaining the home wordmark. About at
 `/` combines the introduction, Selected Research, Education with a coursework
 entrance, and contact details in sections 01 through 04. The first-person
 introduction opens the reading content beneath the hero and states the through-line
@@ -460,13 +462,33 @@ Research chapter headings display Roman numerals, and subsections display letter
 in reading order. Source numbering and anchors remain intact. Verified internal
 section references link to the matching heading and preserve their source numerals.
 
-The website has twenty-four content routes: About, Experience, Coursework, three
-Selected Research articles, eight Experience articles, and ten other Experience
-detail pages. The architecture viewer adds one technical reference route, making
-twenty-five exported routes, excluding 404. Addresses outside the two sections are
-not exported, so the host answers 404 for them; the 404 page forwards the addresses
-listed in `app/lib/content/forwarded-paths.ts` to the page that holds their content.
-Keep factual claims, metadata, copy, and content order aligned with the integrity manifests.
+The website has twenty-six content routes: About, Experience, Coursework, three
+Selected Research articles, eight Experience articles, ten other Experience
+detail pages, Blog, and one post. The architecture viewer adds one technical reference
+route, making twenty-seven exported routes, excluding 404. Addresses outside the three
+sections are not exported, so the host answers 404 for them; the 404 page forwards the
+addresses listed in `app/lib/content/forwarded-paths.ts` to the page that holds their
+content. Keep factual claims, metadata, copy, and content order aligned with the
+integrity manifests.
+
+### Blog
+
+Blog follows Cognition's blog: an index of posts, and posts that present a work and
+link to it. The index has the title alone and one ledger frame of posts, newest first;
+each entry hangs its title, with the date beneath it in the label role, on axis A and
+its summary and Read More link on axis B, exactly as on About and Experience.
+
+A post is one column from the reading start to the reading-measure guide. The title
+sits above a byline in the label role (author on the left, date on the right) and a
+hairline. A hero image follows, then the work: a band tinted 3% ink, without a frame,
+that holds the work's name in the subheading role, its one-line description in muted
+serif, and View Now with the reading arrow. The band deepens on hover and View Now turns
+blue. Prose uses the reading role; section headings use the heading role at weight 400.
+An epigraph hangs off the dashed spine in italic serif, with its source in the label
+role. Figures sit in a faint frame at the column's width with a caption in supporting
+ink. A panorama, an image at least two and a half times as wide as it is tall, keeps a
+legible height on phones and scrolls sideways. The rail carries Back to Blog, and the
+post ends with the Blog return link and Back to Top.
 
 ### Legal articles
 

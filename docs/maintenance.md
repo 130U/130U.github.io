@@ -42,6 +42,7 @@ Paths below are relative to `website/`.
 | AI research | `content/sources/ai-portfolio/ai-research-and-engineering.md` | `scripts/import-ai-portfolio.mjs`, `app/lib/content/ai-projects.ts` | `/experience/[slug]/` |
 | Selected Research | `content/sources/selected-research/` (frozen import), `content/selected-research/site-edition/` (published text) | Research import scripts, `app/lib/content/selected-research.ts` | `/[paper]/` |
 | Legal research | `content/legal-papers/` structured manuscripts | `app/lib/content/legal-papers.ts` | `/experience/[slug]/` |
+| Blog | `content/blog/<slug>.md`, images in `public/assets/blog/<slug>/` | `app/lib/content/blog.ts` | `/blog/`, `/blog/[slug]/` |
 | Architecture | `../architecture/site.json` | Archify and `scripts/integrate-architecture.mjs` | `/architecture/` |
 
 `app/lib/content/site.ts` owns site identity, core routes, and navigation types;
@@ -52,12 +53,31 @@ manuscripts, and ten ordinary detail pages.
 About's Education section links to the dedicated Coursework page through Read More.
 The page presents all 49 courses in four subject groups.
 
-Every URL belongs to About (`/`, `/coursework/`, `/[paper]/`) or Experience
-(`/experience/`, `/experience/[slug]/`). `app/experience/[slug]/page.tsx` renders an
-entry as an AI article, a legal article, or a detail page from its category.
-`app/lib/content/forwarded-paths.ts` lists addresses outside the two sections and the
-page each one forwards to from the 404 page; add an entry there when a public URL
-changes.
+Every URL belongs to About (`/`, `/coursework/`, `/[paper]/`), Experience
+(`/experience/`, `/experience/[slug]/`) or Blog (`/blog/`, `/blog/[slug]/`).
+`app/experience/[slug]/page.tsx` renders an entry as an AI article, a legal article,
+or a detail page from its category. `app/lib/content/forwarded-paths.ts` lists
+addresses outside the three sections and the page each one forwards to from the 404
+page; add an entry there when a public URL changes.
+
+### Blog
+
+Each post is one Markdown file, `content/blog/<slug>.md`; its file name is its slug and
+its URL is `/blog/<slug>/`. The front matter holds exactly `title`, `date`
+(YYYY-MM-DD), `summary` (the index summary and page description), `hero` and `heroAlt`,
+`image` and `imageAlt` (the 1200 × 630 social card), `work` (the work's address on this
+domain) and `workDescription`. The body holds paragraphs with `*emphasis*` and links,
+`## headings`, an epigraph written as `> quote` followed by `> — source`, and figures
+written as `![caption](/assets/blog/<slug>/<image>.jpg "alt")`. `app/lib/content/blog.ts`
+rejects anything else at build time. Images live in `public/assets/blog/<slug>/` and
+are sized for a 2× display of the 612px column.
+
+A work presented by a post, such as The Étude Sky (`130U/etude-sky`), is a separate
+repository published by GitHub Pages under this domain at `/<repository>/`; this
+repository links to it and never builds it. When adding a post, add its route to
+`scripts/verify-visible-copy.mjs`, its slug to `BLOG_SLUGS` and its images to
+`EXPECTED_PUBLIC_ASSETS` in `tests/rendered-html.test.mjs`, and refresh the visible-copy
+manifest and the `app/lib/content/routes.ts` hash only if that file changes.
 
 ### AI research
 

@@ -71,9 +71,9 @@ function exportedPages() {
   return pagesPromise ??= (async () => {
     const sitemap = await readFile(new URL("../out/sitemap.xml", import.meta.url), "utf8");
     const routes = [...sitemap.matchAll(/<loc>([^<]+)<\/loc>/gu)].map((match) => new URL(decodeHtml(match[1])).pathname);
-    assert.equal(routes.length, 24, "About, Coursework, Experience, eleven full articles and ten experience detail pages remain canonical.");
+    assert.equal(routes.length, 26, "About, Coursework, Experience, eleven full articles, ten experience detail pages, Blog and one post remain canonical.");
     routes.push("/architecture/");
-    assert.equal(new Set(routes).size, 25, "Audit every canonical page and the architecture viewer.");
+    assert.equal(new Set(routes).size, 27, "Audit every canonical page and the architecture viewer.");
     const entries = await Promise.all(routes.map(async (route) => {
       const html = await readFile(new URL(`../out/${route.replace(/^\//u, "")}index.html`, import.meta.url), "utf8");
       const tree = readTree(html);

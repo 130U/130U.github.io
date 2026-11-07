@@ -56,9 +56,15 @@ const RESEARCH_SLUGS = [
   "certified-valuation-arithmetic-asian-options",
   "certified-rough-heston-valuation",
 ];
-// About's children sit at /<slug>/; every Experience entry at /experience/<slug>/.
+// About's children sit at /<slug>/; every Experience entry at /experience/<slug>/;
+// every post at /blog/<slug>/.
 const RESEARCH_ROUTES = RESEARCH_SLUGS.map((slug) => `/${slug}/`);
 const AI_ROUTES = AI_PROJECT_SLUGS.map((slug) => `${EXPERIENCE_ROUTE}${slug}/`);
+const BLOG_ROUTE = "/blog/";
+const BLOG_SLUGS = ["the-etude-sky"];
+const BLOG_POST_ROUTES = BLOG_SLUGS.map((slug) => `${BLOG_ROUTE}${slug}/`);
+// A work linked from a post is published on this domain at its own address.
+const WORK_ADDRESSES = ["/etude-sky/"];
 const ROUTES = [
   "/",
   "/coursework/",
@@ -67,10 +73,13 @@ const ROUTES = [
   ...EXPERIENCE_DETAIL_ROUTES,
   ...ARTICLE_ROUTES,
   ...AI_ROUTES,
+  BLOG_ROUTE,
+  ...BLOG_POST_ROUTES,
 ];
 const NAVIGATION = [
   ["About", "/"],
   ["Experience", "/experience/"],
+  ["Blog", "/blog/"],
 ];
 const CANONICAL_ROUTES = ROUTES;
 // Expected category placement is independent of the renderer and route registry.
@@ -92,8 +101,14 @@ const DETAIL_PARENTS = new Map([
   ...[...ARTICLES.map(([slug]) => slug), ...AI_PROJECT_SLUGS].map((slug) => [
     `${EXPERIENCE_ROUTE}${slug}/`, ["Back to Experience", `/experience/#${slug}`],
   ]),
+  ...BLOG_SLUGS.map((slug) => [`${BLOG_ROUTE}${slug}/`, ["Back to Blog", `${BLOG_ROUTE}#${slug}`]]),
 ]);
 const EXPECTED_PUBLIC_ASSETS = [
+  "assets/blog/the-etude-sky/chart.jpg",
+  "assets/blog/the-etude-sky/handscroll-op10-12.jpg",
+  "assets/blog/the-etude-sky/og.jpg",
+  "assets/blog/the-etude-sky/plate-op10-12.jpg",
+  "assets/blog/the-etude-sky/plates.jpg",
   "assets/brand/apple-touch-icon.png",
   "assets/brand/favicon-16.png",
   "assets/brand/favicon-32.png",
@@ -347,16 +362,16 @@ async function exportedRoutes() {
     .sort();
 }
 
-test("the static export contains exactly the two sections' pages and the architecture viewer", async () => {
+test("the static export contains exactly the three sections' pages and the architecture viewer", async () => {
   assert.deepEqual(await exportedRoutes(), [...ROUTES, "/architecture/"].sort());
   assert.ok(existsSync(path.join(OUT, "404.html")));
   for (const route of ROUTES.slice(1)) {
-    assert.ok(route === "/coursework/" || route.startsWith(EXPERIENCE_ROUTE) || RESEARCH_ROUTES.includes(route), `${route} belongs to About or Experience`);
+    assert.ok(route === "/coursework/" || route.startsWith(EXPERIENCE_ROUTE) || route.startsWith(BLOG_ROUTE) || RESEARCH_ROUTES.includes(route), `${route} belongs to About, Experience or Blog`);
   }
 });
 
-test("addresses outside the two sections answer 404 and the 404 page forwards them", async () => {
-  for (const directory of ["education", "now", "past-experience"]) assert.ok(!existsSync(path.join(OUT, directory)), `/${directory}/ is not exported`);
+test("addresses outside the three sections answer 404 and the 404 page forwards them", async () => {
+  for (const directory of ["education", "now", "past-experience", "atelier"]) assert.ok(!existsSync(path.join(OUT, directory)), `/${directory}/ is not exported`);
   const notFound = await readFile(path.join(OUT, "404.html"), "utf8");
   const script = [...notFound.matchAll(/<script\b[^>]*>([\s\S]*?)<\/script>/giu)].map((match) => match[1]).find((source) => source.includes("location.replace"));
   assert.ok(script, "The 404 page carries the forwarding script");
@@ -365,13 +380,17 @@ test("addresses outside the two sections answer 404 and the 404 page forwards th
     "/education/": "/",
     "/now/": "/experience/",
     "/past-experience/": "/experience/",
+    "/atelier/": "/etude-sky/",
     ...Object.fromEntries(RESEARCH_SLUGS.map((slug) => [`/education/${slug}/`, `/${slug}/`])),
     ...Object.fromEntries(DOMAINS.map(([, slug]) => [`/past-experience/${slug}/`, `/experience/#${slug}`])),
     ...Object.fromEntries(AI_PROJECT_SLUGS.map((slug) => [`/past-experience/artificial-intelligence/${slug}/`, `/experience/${slug}/`])),
     ...Object.fromEntries(ARTICLES.map(([slug]) => [`/past-experience/legal-research-and-policy-analysis/${slug}/`, `/experience/${slug}/`])),
   };
   assert.deepEqual(paths, expected);
-  for (const target of Object.values(paths)) assert.ok(ROUTES.includes(target.replace(/#.*$/u, "")), `${target} is an exported page`);
+  for (const target of Object.values(paths)) {
+    const page = target.replace(/#.*$/u, "");
+    assert.ok(ROUTES.includes(page) || WORK_ADDRESSES.includes(page), `${target} is an exported page or a published work`);
+  }
 });
 
 test("the architecture viewer preserves its source with a static security policy", async () => {
@@ -405,8 +424,8 @@ test("every route keeps canonical metadata, CSP, and navigation appropriate to i
   }
 });
 
-test("all 22 detail pages keep their wordmark and a direct parent link outside the mobile menu", async () => {
-  assert.equal(DETAIL_PARENTS.size, 22);
+test("all 23 detail pages keep their wordmark and a direct parent link outside the mobile menu", async () => {
+  assert.equal(DETAIL_PARENTS.size, 23);
   const targetPages = new Map();
   for (const [route, expectedParent] of DETAIL_PARENTS) {
     const html = await routeHtml(route);
