@@ -9,6 +9,9 @@ const ROOT = fileURLToPath(new URL("../", import.meta.url));
 const OUT = path.join(ROOT, "out");
 const POSTS = path.join(ROOT, "content", "blog");
 
+// Function words that stay lowercase inside a title-case heading.
+const MINOR_WORDS = new Set(["a", "an", "and", "as", "at", "by", "for", "from", "in", "of", "on", "or", "the", "to", "with"]);
+
 const html = (route) => readFile(path.join(OUT, ...route.split("/").filter(Boolean), "index.html"), "utf8");
 const text = (value) => value.replace(/<[^>]+>/gu, " ").replace(/&#x27;|&#39;/gu, "'").replace(/&amp;/gu, "&").replace(/&quot;/gu, '"').replace(/\s+/gu, " ").trim();
 const attribute = (tag, name) => tag.match(new RegExp(`\\s${name}="([^"]*)"`, "u"))?.[1];
@@ -24,6 +27,12 @@ async function posts() {
     return { slug: file.replace(/\.md$/u, ""), ...front };
   }));
 }
+
+test("posts use the main site's straight apostrophes and quotation marks", async () => {
+  for (const file of (await readdir(POSTS)).filter((name) => name.endsWith(".md"))) {
+    assert.doesNotMatch(await readFile(path.join(POSTS, file), "utf8"), /[‘’“”]/u, `${file} uses straight quotes, as the rest of the site does`);
+  }
+});
 
 test("the Blog index lists every post, newest first, in one framed ledger", async () => {
   const index = await html("/blog/");
@@ -60,6 +69,11 @@ test("each post opens with its title, byline, hero and a link to the work, then 
     assert.equal(attribute(work[0], "href"), post.work);
     assert.equal(text(work[1]), `${post.title} ${post.workDescription} View Now`);
     assert.ok(article.indexOf(work[0]) > article.indexOf(images[0]), "The work follows the hero.");
+    for (const heading of article.matchAll(/<h2\b[^>]*>([\s\S]*?)<\/h2>/gu)) {
+      const words = text(heading[1]).split(" ");
+      const titleCase = words.every((word, index) => /^\p{Lu}/u.test(word) || (index > 0 && MINOR_WORDS.has(word)));
+      assert.ok(titleCase, `${text(heading[1])}: section headings use title case`);
+    }
     const figures = [...article.matchAll(/<figure\b[^>]*>([\s\S]*?)<\/figure>/gu)].filter((figure) => figure[1].includes("<img"));
     for (const figure of figures) assert.ok(text(figure[1].match(/<figcaption\b[^>]*>([\s\S]*?)<\/figcaption>/u)?.[1] ?? ""), "Every figure has a caption.");
     assert.equal(attribute(page.match(/<meta\b[^>]*property="og:type"[^>]*>/u)[0], "content"), "article");

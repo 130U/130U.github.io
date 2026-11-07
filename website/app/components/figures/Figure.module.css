@@ -183,7 +183,7 @@
   background: var(--chart-hatch);
 }
 
-/* Colour roles. Every mark takes its colour from currentColor. */
+/* Color roles. Every mark takes its color from currentColor. */
 .ink { color: var(--ink); }
 
 .accent { color: var(--accent); }
