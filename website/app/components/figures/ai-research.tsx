@@ -21,13 +21,13 @@ export function AuditPolicies() {
   const sd = linear(0, 1);
   const sdTicks = [0, 0.25, 0.5, 0.75, 1].map((at) => ({ at, label: at === 0 ? "0" : String(at) }));
   const share = linear(0, 50);
-  const shareTicks = [0, 10, 20, 30, 40, 50].map((at) => ({ at, label: `${at}%` }));
+  const shareTicks = [0, 25, 50].map((at) => ({ at, label: `${at}%`, minor: at === 25 }));
   return (
     <Figure
       id="audit-policies"
       title="Five audit policies at the same expected cost"
-      caption="Each policy spends the budget $B=2{,}000$ with the floor $\pi_{\min}=3\%$. Residual- and cost-aware allocation is the only policy more precise than uniform sampling; chasing predicted error oversamples the expensive third stratum, and reversing the residual ordering roughly doubles the standard deviation."
-      views={[{ id: "precision", label: "Precision" }, { id: "sampling", label: "Sampling by stratum" }]}
+      caption="Each policy spends the budget $B=2{,}000$ with the floor $\pi_{\min}=3\%$. Residual- and cost-aware allocation is the only policy more precise than uniform sampling; prioritizing predicted error oversamples the expensive third stratum, and reversing the residual ordering triples the variance."
+      views={[{ id: "precision", label: "Precision" }, { id: "sampling", label: "Sampling by Stratum" }]}
       viewsLabel="Show precision or sampling probabilities"
     >
       <Panel view="precision" active>
@@ -142,7 +142,7 @@ export function RejectionCost() {
       title="Expected candidate draws per valid input under rejection sampling"
       caption="Tolerance $\epsilon=0.05$ residual standard deviations, on a logarithmic scale. Each added constraint multiplies the expected draws, and four constraints need nearly 400,000 candidates for one valid input."
     >
-      <Bars label="Expected candidate draws per valid input: one constraint 25.08, two constraints 628.84, four constraints 395,442.59." labelWidth="3.5rem" valueWidth="9rem">
+      <Bars label="Expected candidate draws per valid input: one constraint 25.08, two constraints 628.84, four constraints 395,442.59." labelWidth="3.5rem" valueWidth="9rem" stack="narrow">
         {rows.map((row) => (
           <BarRow key={row.m} label={`$m=${row.m}$`} value={grouped(row.draws)} valueNote={`accepts ${row.rate}`} grid={grid}>
             <Seg x={x} from={1} to={row.draws} tone={row.m === 4 ? "accent" : "ink"} tip={`${row.m} simultaneous constraint${row.m > 1 ? "s" : ""}\nAcceptance rate ${row.rate}\nExpected draws ${grouped(row.draws)}`} />
@@ -211,7 +211,7 @@ export function BridgeLeakage() {
     <Figure
       id="bridge-leakage"
       title="What the endpoint reveals between $s$ and $T$"
-      caption="Variance is in units of $\sigma^2(T-s)$. Conditioning on $X_T$ halves the variance at the midpoint, an apparent 29.29% RMSE improvement that comes entirely from information the forecasting task may not permit. The bands mark the three information sets the task specification keeps apart."
+      caption="Variance is in units of $\sigma^2(T-s)$. Conditioning on $X_T$ halves the variance at the midpoint, an apparent 29.29% RMSE improvement that comes entirely from the endpoint; where a forecasting task withholds $X_T$, that gain is leakage. The bands mark the three information sets the task specification keeps apart."
       legend={[{ label: "Given $\\mathcal{F}_s$ only", tone: "ink", shape: "line" }, { label: "Given $\\mathcal{F}_s$ and $X_T$", tone: "accent", shape: "line" }]}
     >
       <div style={style}>
@@ -239,15 +239,13 @@ export function BridgeLeakage() {
           <span className={styles.bracket} style={{ left: `${x(0.5)}%`, top: `${100 - y(0.5)}%`, height: `${y(0.5) - y(0.25)}%` }} />
           <Dot left={x(0.5)} top={100 - y(0.5)} tone="ink" className={kit.fade} />
           <Dot left={x(0.5)} top={100 - y(0.25)} tone="accent" className={kit.fade} />
-          <Mark left={x(0.5)} top={100 - y(0.375)} anchor="left" tone="accent" className={kit.fade}>Variance halves</Mark>
+          <Mark left={x(0.5)} top={100 - y(0.375)} anchor="left" tone="accent" wrap className={kit.fade}>Variance halves</Mark>
           <Mark left={x(-0.19)} top={50} anchor="center" className={kit.muted}>History</Mark>
         </Plot>
-        <div className={styles.info} aria-label="Information sets" role="img">
-          <div className={styles.infoRow}><span className={`${styles.infoSpan} ${kit.steel}`} data-hatch="" style={{ left: 0, right: 0 }}><Tx>{"Construction $\\mathcal{F}_{\\text{gen}}$: complete path and endpoint"}</Tx></span></div>
-          <div className={styles.infoRow}>
-            <span className={`${styles.infoSpan} ${kit.accent}`} data-fill="" style={{ left: 0, width: `${x(0)}%` }}><Tx>{"Permitted $\\mathcal{F}_s$"}</Tx></span>
-            <span className={`${styles.infoSpan} ${kit.ink}`} style={{ left: `${x(0)}%`, right: 0 }}><Tx>{"Evaluation $\\mathcal{F}_{\\text{eval}}$: outcomes after $s$"}</Tx></span>
-          </div>
+        <div className={styles.info} style={{ "--split": `${x(0)}%` } as CSSProperties} aria-label="Information sets" role="img">
+          <span className={`${styles.infoBand} ${kit.steel}`} data-span="" data-hatch=""><span><Tx>{"Construction $\\mathcal{F}_{\\text{gen}}$: complete path and endpoint"}</Tx></span></span>
+          <span className={`${styles.infoBand} ${kit.accent}`} data-fill=""><span><Tx>{"Permitted $\\mathcal{F}_s$"}</Tx></span></span>
+          <span className={`${styles.infoBand} ${kit.ink}`}><span><Tx>{"Evaluation $\\mathcal{F}_{\\text{eval}}$: outcomes after $s$"}</Tx></span></span>
         </div>
       </div>
     </Figure>
@@ -269,29 +267,29 @@ export function RankingReversal() {
       title="Final-answer checks can reverse a ranking"
       caption="Model A produces more fully valid solutions, but Model B's invalid trajectories pass the final-answer check nine times as often. With $\beta_A=\beta_B=0$, the observed score adds $\alpha_m(1-\theta_m)$, and B overtakes A."
     >
-      <div className={styles.slope}>
+      <div>
         <Plot
           label="Model A: true validity 72%, observed score 73.12%. Model B: true validity 64%, observed score 76.96%. The ranking reverses."
           x={x}
           y={y}
           height="clamp(240px, 56cqi, 300px)"
-          inset={{ top: 34, right: 92, bottom: 16, left: 72 }}
+          inset={{ top: 50, right: 88, bottom: 16, left: 68 }}
           yTicks={[60, 65, 70, 75, 80].map((at) => ({ at, label: "" }))}
           xTicks={[{ at: 0, label: "", solid: true }, { at: 1, label: "", solid: true }]}
           curves={models.map((model) => <path key={model.name} className={kit[model.tone]} d={path([[0, model.theta], [1, model.score]], x, y)} />)}
         >
-          <Mark left={0} top={-9} anchor="bottom" className={kit.muted}>True validity $\theta_m$</Mark>
-          <Mark left={100} top={-9} anchor="bottom" className={kit.muted}>Observed score $s_m$</Mark>
+          <Mark left={0} top={-4} anchor="bottom" wrap className={styles.columnHead}>True validity $\theta_m$</Mark>
+          <Mark left={100} top={-4} anchor="bottom" wrap className={styles.columnHead}>Observed score $s_m$</Mark>
           {models.map((model) => (
             <span key={model.name}>
               <Dot left={0} top={100 - y(model.theta)} tone={model.tone} tip={`Model ${model.name}\nθ = ${model.theta}%, α = ${model.alpha}, β = 0%`} />
               <Dot left={100} top={100 - y(model.score)} tone={model.tone} tip={`Model ${model.name}\ns = ${model.score}%`} />
-              <Mark left={0} top={100 - y(model.theta)} anchor="right" tone={model.tone} strong>{`${model.name} · ${model.theta}%`}</Mark>
-              <Mark left={100} top={100 - y(model.score)} anchor="left" tone={model.tone} strong>{`${model.score}% · ${model.name}`}</Mark>
+              <Mark left={0} top={100 - y(model.theta)} anchor="right" tone={model.tone}><><strong>{model.name}</strong> {model.theta}%</></Mark>
+              <Mark left={100} top={100 - y(model.score)} anchor="left" tone={model.tone}><>{model.score}% <strong>{model.name}</strong></></Mark>
             </span>
           ))}
-          <Mark left={x(0.36)} top={100 - y(66.4)} anchor="center" tone="accent" className={kit.fade}>$\alpha_B=36\%$</Mark>
-          <Mark left={x(0.36)} top={100 - y(73.9)} anchor="center" className={kit.fade}>$\alpha_A=4\%$</Mark>
+          <Mark left={x(0.44)} top={100 - y(65.6)} anchor="center" tone="accent" className={kit.fade}>$\alpha_B=36\%$</Mark>
+          <Mark left={x(0.36)} top={100 - y(74.6)} anchor="center" className={kit.fade}>$\alpha_A=4\%$</Mark>
         </Plot>
       </div>
     </Figure>
@@ -310,7 +308,7 @@ const DAG = {
 };
 
 export function ProofObligations() {
-  const position: Record<string, [number, number]> = { G: [6, 50], C: [93, 50] };
+  const position: Record<string, [number, number]> = { G: [4, 50], C: [96, 50] };
   for (const node of DAG.nodes) position[node.id] = [node.left, node.top];
   const failed = "v2";
   const unverified = new Set(DAG.nodes.find((node) => node.id === failed)!.descendants);
@@ -325,30 +323,32 @@ export function ProofObligations() {
       legend={[{ label: "First failed obligation", tone: "accent" }, { label: "Unverified descendant", tone: "steel", shape: "hatch" }, { label: "Verified", tone: "ink", shape: "box" }]}
     >
       <div className={styles.dag} role="group" aria-label="Proof-obligation dependency graph. Choose a node to mark it as the first failed obligation.">
-        <svg className={styles.dagEdges} viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true" focusable="false">
-          {DAG.edges.map(([from, to]) => (
-            <line key={`${from}-${to}`} data-dag-edge={`${from} ${to}`} data-state={from === failed || unverified.has(from) ? "unverified" : "verified"} x1={position[from][0]} y1={position[from][1]} x2={position[to][0]} y2={position[to][1]} />
+        <div className={styles.dagField}>
+          <svg className={styles.dagEdges} viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true" focusable="false">
+            {DAG.edges.map(([from, to]) => (
+              <line key={`${from}-${to}`} data-dag-edge={`${from} ${to}`} data-state={from === failed || unverified.has(from) ? "unverified" : "verified"} x1={position[from][0]} y1={position[from][1]} x2={position[to][0]} y2={position[to][1]} />
+            ))}
+          </svg>
+          <span className={styles.dagNode} data-fixed="" style={{ left: `${position.G[0]}%`, top: `${position.G[1]}%` }}><Tx>{"$\\Gamma_q$"}</Tx></span>
+          {DAG.nodes.map((node) => (
+            <button
+              key={node.id}
+              type="button"
+              className={styles.dagNode}
+              data-dag-node={node.id}
+              data-dag-descendants={node.descendants.join(" ")}
+              data-dag-readout={readout(node.id, node.descendants)}
+              data-state={state(node.id)}
+              aria-pressed={node.id === failed}
+              aria-label={`Mark ${subscript(node.id)} as the first failed obligation`}
+              disabled
+              style={{ left: `${node.left}%`, top: `${node.top}%` }}
+            >
+              <Tx>{node.label}</Tx>
+            </button>
           ))}
-        </svg>
-        <span className={styles.dagNode} data-fixed="" style={{ left: `${position.G[0]}%`, top: `${position.G[1]}%` }}><Tx>{"$\\Gamma_q$"}</Tx></span>
-        {DAG.nodes.map((node) => (
-          <button
-            key={node.id}
-            type="button"
-            className={styles.dagNode}
-            data-dag-node={node.id}
-            data-dag-descendants={node.descendants.join(" ")}
-            data-dag-readout={readout(node.id, node.descendants)}
-            data-state={state(node.id)}
-            aria-pressed={node.id === failed}
-            aria-label={`Mark ${subscript(node.id)} as the first failed obligation`}
-            disabled
-            style={{ left: `${node.left}%`, top: `${node.top}%` }}
-          >
-            <Tx>{node.label}</Tx>
-          </button>
-        ))}
-        <span className={styles.dagNode} data-fixed="" data-dag-node="C" data-state={state("C")} style={{ left: `${position.C[0]}%`, top: `${position.C[1]}%` }}><Tx>{"$C_q$"}</Tx></span>
+          <span className={styles.dagNode} data-fixed="" data-dag-node="C" data-state={state("C")} style={{ left: `${position.C[0]}%`, top: `${position.C[1]}%` }}><Tx>{"$C_q$"}</Tx></span>
+        </div>
       </div>
       <p className={styles.readout} data-dag-status aria-live="polite">{readout(failed, [...unverified])}</p>
     </Figure>
@@ -378,12 +378,12 @@ export function ProtocolOutcomes() {
       caption="The first 1,200 submissions in each bar are valid certificates and the remaining 2,400 carry controlled defects. Final-answer matching accepts the 1,800 defective submissions that report $v^*$; strict path matching rejects the 600 valid elimination proofs; semantic verification makes neither error."
       legend={OUTCOMES.map((outcome) => ({ label: outcome.name, tone: outcome.tone }))}
     >
-      <Bars label="Final-answer matching: 1,200 valid accepted, 1,800 invalid accepted, 600 invalid rejected; 40.0% of accepted submissions are valid. Strict reference-path matching: 600 valid accepted, 600 valid rejected, 2,400 invalid rejected. Semantic certificate verification: 1,200 valid accepted, 2,400 invalid rejected." labelWidth="12rem" valueWidth="6.5rem" stack>
-        <BarHeader marks={[{ at: x(600), label: "Valid 1,200", tone: "steel" }, { at: x(2400), label: "Invalid 2,400", tone: "steel" }]} />
+      <Bars label="Final-answer matching: 1,200 valid accepted, 1,800 invalid accepted, 600 invalid rejected; 40.0% of accepted submissions are valid. Strict reference-path matching: 600 valid accepted, 600 valid rejected, 2,400 invalid rejected. Semantic certificate verification: 1,200 valid accepted, 2,400 invalid rejected." valueWidth="6rem" stack>
+        <BarHeader marks={[{ at: x(0), label: "Valid", tone: "steel", anchor: "left" }, { at: x(1200), label: "Invalid", tone: "steel", anchor: "left" }]} />
         {PROTOCOLS.map((protocol) => {
           let start = 0;
           return (
-            <BarRow key={protocol.name} label={protocol.name} value={protocol.share} valueNote="valid when accepted" grid={grid} rules={[{ at: x(1200), tone: "soft" }]}>
+            <BarRow key={protocol.name} label={protocol.name} value={protocol.share} valueNote="valid share" grid={grid} rules={[{ at: x(1200), tone: "soft" }]}>
               {protocol.parts.map((count, index) => {
                 const from = start;
                 start += count;
@@ -416,7 +416,7 @@ export function CoverageCollapse() {
     <Figure
       id="coverage-collapse"
       title="Coverage of a nominal 95% interval under a shared reporting bias"
-      caption="Shared bias $b=0.2$ and noise $\sigma=1$. Ignoring $b$, more records only tighten the interval around the wrong centre, and coverage falls toward zero; once verification bounds $|b|\le0.2$, the widened half-width $0.2+1.96/\sqrt{n}$ holds coverage at 97.50%."
+      caption="Shared bias $b=0.2$ and noise $\sigma=1$. Ignoring $b$, more records only tighten the interval around the wrong center, and coverage falls toward zero; once verification bounds $|b|\le0.2$, the widened half-width $0.2+1.96/\sqrt{n}$ holds coverage at 97.50%."
       legend={[{ label: "Bias ignored", tone: "ink", shape: "line" }, { label: "Half-width widened by the verified bound", tone: "accent", shape: "line" }, { label: "Nominal 95%", tone: "steel", shape: "dash" }]}
     >
       <Plot
@@ -463,7 +463,7 @@ export function SharedErrorCancellation() {
       caption="Nominal score difference 0.6 with a shared sector-benchmark error in $[-1,1]$. Subtracting separate intervals lets the shared error move in opposite directions at once and crosses zero; the joint support function cancels it exactly."
     >
       <Bars label="Bounds on the score difference between companies i and k. Separate intervals: from minus 1.4 to 2.6, which crosses zero and cannot certify the ordering. Joint support function: exactly 0.6, which certifies the ranking." labelWidth="11rem" valueWidth="8rem" stack>
-        <BarHeader marks={[{ at: x(0), label: "Decision boundary", tone: "steel", anchor: "right" }]} />
+        <BarHeader marks={[{ at: x(0), label: "Decision boundary", tone: "steel", anchor: "left" }]} />
         <BarRow label="Separate company intervals" value="$[-1.4,2.6]$" valueNote="cannot certify" grid={grid} rules={rules}>
           <Range x={x} from={-1.4} to={2.6} tone="steel" tip={"Separately constructed intervals\n[−1.4, 2.6]"} />
           <span className={`${kit.dot} ${kit.steel}`} style={{ left: `${x(0.6)}%`, top: "50%", width: 7, height: 7, margin: "-3.5px 0 0 -3.5px" }} />
@@ -478,8 +478,8 @@ export function SharedErrorCancellation() {
 }
 
 const SCENARIO_VIEWS = [
-  { id: "none", label: "No query" },
-  { id: "shap", label: "Recheck SHAP field" },
+  { id: "none", label: "No Query" },
+  { id: "shap", label: "Recheck SHAP Field" },
   { id: "z2", label: <>Verify z<sub>2</sub></> },
   { id: "z1", label: <>Verify z<sub>1</sub></> },
 ];
@@ -488,8 +488,8 @@ export function RegretScenarios() {
   const x = linear(-0.72, 0.72);
   const scenarios = [-1, 1].flatMap((s) => [-0.4, 0.4].flatMap((z1) => [-0.2, 0.2].map((z2) => ({ s, z1, z2, delta: Math.round((0.15 * s + z1 + 0.3 * s * z2) * 100) / 100 }))));
   const lanes: Record<string, Array<{ top: number; label: string; regret: string }>> = {
-    none: [{ top: 56, label: "All eight scenarios", regret: "Worst-case regret 0.61" }],
-    shap: [{ top: 56, label: "Verified field: no scenario excluded", regret: "Worst-case regret 0.61" }],
+    none: [{ top: 56, label: "All scenarios", regret: "Regret 0.61" }],
+    shap: [{ top: 56, label: "None excluded", regret: "Regret 0.61" }],
     z2: [{ top: 34, label: "Observe $z_2=-0.2$", regret: "Regret 0.49" }, { top: 80, label: "Observe $z_2=0.2$", regret: "Regret 0.61" }],
     z1: [{ top: 34, label: "Observe $z_1=-0.4$", regret: "Regret 0" }, { top: 80, label: "Observe $z_1=0.4$", regret: "Regret 0" }],
   };

@@ -1,5 +1,4 @@
 /* Figure-specific geometry. Shared roles, colours and rows live in Figure.module.css. */
-
 .lead {
   position: absolute;
   top: 50%;
@@ -14,9 +13,9 @@
   position: absolute;
   top: 50%;
   left: 0;
+  right: 0;
   transform: translateY(-50%);
   color: var(--muted);
-  white-space: nowrap;
 }
 
 .id {
@@ -80,18 +79,6 @@
 
 /* ---------- Line-chart annotations ---------- */
 
-.band {
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  background: var(--chart-tint);
-  pointer-events: none;
-}
-
-.band[data-tone="grey"] {
-  background: rgba(0, 0, 0, 0.035);
-}
-
 .hline {
   position: absolute;
   left: 0;
@@ -99,10 +86,6 @@
   height: 0;
   border-top: 1px dashed var(--rule-strong);
   pointer-events: none;
-}
-
-.hline[data-tone="accent"] {
-  border-top-color: var(--accent);
 }
 
 .vline {
@@ -132,65 +115,60 @@
 }
 
 .bracket::before { top: 0; }
+
 .bracket::after { bottom: 0; }
 
 /* ---------- Slope chart ---------- */
-
-.slope {
-  --pl: 72px;
-  --pr: 92px;
+.columnHead {
+  width: max-content;
+  max-width: 6.5rem;
+  color: var(--muted);
+  text-align: center;
 }
 
 /* ---------- Timelines below a chart ---------- */
-
+/* Information-set bands share the plot's horizontal scale. */
 .info {
   display: grid;
-  gap: 8px;
-  margin: 26px 0 0 var(--pl, 46px);
-  margin-right: var(--pr, 14px);
+  grid-template-columns: var(--split) minmax(0, 1fr);
+  row-gap: 8px;
+  margin: 26px var(--pr, 14px) 0 var(--pl, 46px);
   font-size: var(--type-label);
   line-height: var(--label-leading);
 }
 
-.infoRow {
-  position: relative;
-  height: 26px;
-}
-
-.infoSpan {
-  position: absolute;
-  top: 0;
-  bottom: 0;
+.infoBand {
   display: flex;
+  min-width: 0;
+  min-height: 28px;
   align-items: center;
-  padding: 0 8px;
-  overflow: hidden;
+  padding: 3px 6px;
   border: 1px solid currentColor;
-  white-space: nowrap;
 }
 
-.infoSpan[data-fill] {
+.infoBand[data-span] {
+  grid-column: 1 / -1;
+}
+
+.infoBand[data-fill] {
   background: var(--chart-tint);
 }
 
-.infoSpan[data-hatch] {
+.infoBand[data-hatch] {
   background: var(--chart-hatch);
 }
 
-.infoSpan > span {
-  overflow: hidden;
+.infoBand > span {
   padding: 0 4px;
   background: var(--page);
   color: var(--ink);
-  text-overflow: ellipsis;
 }
 
-.infoSpan[data-fill] > span {
+.infoBand[data-fill] > span {
   background: transparent;
 }
 
 /* ---------- Scenario explorer (investment research) ---------- */
-
 .scenarios {
   position: relative;
   height: 196px;
@@ -221,7 +199,9 @@
 }
 
 .scenarioFigure[data-view="shap"] .scenarioDot { top: var(--y-shap); }
+
 .scenarioFigure[data-view="z2"] .scenarioDot { top: var(--y-z2); }
+
 .scenarioFigure[data-view="z1"] .scenarioDot { top: var(--y-z1); }
 
 .laneSet {
@@ -250,6 +230,7 @@
 }
 
 .mini[data-row="0"] { top: calc(50% - 7px); }
+
 .mini[data-row="2"] { top: calc(50% + 7px); }
 
 .zero {
@@ -258,17 +239,6 @@
   bottom: 0;
   width: 0;
   border-left: 1px solid var(--rule-strong);
-}
-
-.zeroLabel {
-  position: absolute;
-  top: 0;
-  transform: translateX(-50%);
-  padding: 0 6px;
-  background: var(--page);
-  color: var(--muted);
-  font-size: var(--type-label);
-  white-space: nowrap;
 }
 
 .lane {
@@ -302,11 +272,14 @@
 }
 
 /* ---------- Proof-obligation graph ---------- */
-
 .dag {
   position: relative;
-  aspect-ratio: 2.3 / 1;
-  min-height: 210px;
+  height: clamp(190px, 44cqi, 250px);
+}
+
+.dagField {
+  position: absolute;
+  inset: 0 24px;
 }
 
 .dagEdges {
@@ -332,7 +305,7 @@
 .dagNode {
   position: absolute;
   display: inline-flex;
-  min-width: 46px;
+  min-width: 40px;
   min-height: 36px;
   align-items: center;
   justify-content: center;
@@ -370,6 +343,13 @@
   color: var(--supporting-ink);
 }
 
+@media (pointer: coarse) {
+  button.dagNode {
+    min-width: 44px;
+    min-height: 44px;
+  }
+}
+
 .dagNode:focus-visible {
   outline: 2px solid var(--accent);
   outline-offset: 3px;
@@ -390,7 +370,6 @@
 }
 
 /* ---------- Diagrams: matrices, flows and chains ---------- */
-
 .matrix {
   display: grid;
   grid-template-columns: auto minmax(0, 1fr) minmax(0, 1fr);
@@ -403,14 +382,6 @@
   align-items: flex-end;
   padding: 0 0 10px;
   color: var(--muted);
-}
-
-.axisCell[data-side] {
-  align-items: center;
-  padding: 0 14px 0 0;
-  writing-mode: vertical-rl;
-  transform: rotate(180deg);
-  justify-content: center;
 }
 
 .cell {
@@ -617,120 +588,6 @@
   }
 }
 
-.chain {
-  display: grid;
-  grid-template-columns: repeat(var(--count), minmax(0, 1fr));
-  column-gap: 18px;
-  row-gap: 10px;
-  font-size: var(--type-label);
-  line-height: var(--label-leading);
-}
-
-.chainNode {
-  position: relative;
-  display: flex;
-  min-height: 74px;
-  flex-direction: column;
-  justify-content: flex-start;
-  padding: 10px 12px;
-  border: 1px solid var(--rule-medium);
-  background: var(--panel);
-}
-
-.chainNode[data-tone="accent"] {
-  border-color: var(--accent);
-}
-
-.chainNode[data-tone="quiet"] {
-  border-style: dashed;
-  border-color: var(--rule-strong);
-  background: transparent;
-}
-
-.chainNode:not(:last-child)::after {
-  position: absolute;
-  top: 50%;
-  right: -14px;
-  width: 0;
-  height: 0;
-  border-top: 4px solid transparent;
-  border-bottom: 4px solid transparent;
-  border-left: 6px solid rgba(11, 11, 11, 0.55);
-  content: "";
-  transform: translateY(-50%);
-}
-
-.chainTitle {
-  color: var(--ink);
-  font-weight: 500;
-}
-
-.chainText {
-  margin-top: 4px;
-  color: var(--supporting-ink);
-}
-
-.chainNote {
-  color: var(--supporting-ink);
-}
-
-.chainNote[data-span] {
-  position: relative;
-  padding-top: 12px;
-  border-top: 1.5px solid var(--accent);
-  color: var(--ink);
-}
-
-.chainNote[data-span]::before,
-.chainNote[data-span]::after {
-  position: absolute;
-  top: -6px;
-  width: 0;
-  height: 9px;
-  border-left: 1.5px solid var(--accent);
-  content: "";
-}
-
-.chainNote[data-span]::before { left: 0; }
-.chainNote[data-span]::after { right: 0; }
-
-.chainNote[data-span="quiet"] {
-  border-top-color: var(--chart-steel);
-}
-
-.chainNote[data-span="quiet"]::before,
-.chainNote[data-span="quiet"]::after {
-  border-left-color: var(--chart-steel);
-}
-
-@container figure (max-width: 560px) {
-  .chain {
-    grid-template-columns: minmax(0, 1fr);
-  }
-
-  .chain > * {
-    grid-column: 1 !important;
-    grid-row: auto !important;
-  }
-
-  .chainNode:not(:last-child)::after {
-    top: auto;
-    right: auto;
-    bottom: -10px;
-    left: 18px;
-    border-top: 6px solid rgba(11, 11, 11, 0.55);
-    border-right: 4px solid transparent;
-    border-bottom: 0;
-    border-left: 4px solid transparent;
-    transform: none;
-  }
-
-  .chainNode {
-    min-height: 0;
-    margin-bottom: 6px;
-  }
-}
-
 /* Comparison table-figure with column emphasis on hover. */
 .compare {
   display: grid;
@@ -851,13 +708,6 @@
   line-height: var(--label-leading);
 }
 
-.panelNote {
-  margin: 12px 0 0;
-  color: var(--supporting-ink);
-  font-size: var(--type-label);
-  line-height: var(--label-leading);
-}
-
 @container figure (max-width: 560px) {
   .panels {
     grid-template-columns: minmax(0, 1fr);
@@ -974,6 +824,7 @@
 }
 
 .sequenceNote::before { top: 0; }
+
 .sequenceNote::after { bottom: 0; }
 
 .sequenceNote[data-tone="accent"],
@@ -1106,7 +957,6 @@
 .lossFill {
   color: rgba(34, 0, 255, 0.09);
 }
-
 
 .tierAxis {
   position: relative;

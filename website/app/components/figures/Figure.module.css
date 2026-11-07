@@ -2,7 +2,6 @@
    the title at interface size and every label at label size. Text is HTML at
    its true size, so charts keep legible labels at every width; only the curves
    live in a stretched SVG layer with non-scaling strokes. */
-
 .figure {
   container: figure / inline-size;
   min-width: 0;
@@ -156,13 +155,16 @@
 
 /* Colour roles. Every mark takes its colour from currentColor. */
 .ink { color: var(--ink); }
+
 .accent { color: var(--accent); }
+
 .sky { color: var(--chart-sky); }
+
 .steel { color: var(--chart-steel); }
+
 .mist { color: var(--chart-mist); }
 
 /* ---------- Plot: HTML text around a stretched curve layer ---------- */
-
 .plot {
   position: relative;
   height: var(--plot-h, clamp(230px, 52cqi, 300px));
@@ -230,6 +232,12 @@
 
 .tickX[data-edge="end"] {
   transform: translateX(-100%);
+}
+
+@container figure (max-width: 420px) {
+  .tickX[data-minor] {
+    display: none;
+  }
 }
 
 .pill {
@@ -338,7 +346,6 @@
 }
 
 /* ---------- Bar rows: label | track | value ---------- */
-
 .bars {
   display: grid;
   grid-template-columns: minmax(0, var(--label-w, 11rem)) minmax(0, 1fr) minmax(max-content, var(--value-w, 5.5rem));
@@ -352,12 +359,6 @@
   min-width: 0;
   padding: 8px 0;
   color: var(--ink);
-}
-
-.barLabel small {
-  display: block;
-  color: var(--muted);
-  font-size: inherit;
 }
 
 .track {
@@ -437,12 +438,6 @@
 
 .rule[data-tone="accent"] {
   border-left-color: var(--accent);
-}
-
-.rowRule {
-  grid-column: 1 / -1;
-  height: 1px;
-  background: var(--dash-x);
 }
 
 .groupLabel {
@@ -551,7 +546,6 @@
 }
 
 /* ---------- Diagrams ---------- */
-
 .node {
   position: relative;
   padding: 12px 14px;
@@ -590,19 +584,7 @@
   color: var(--supporting-ink);
 }
 
-.lane {
-  background: var(--chart-hatch);
-  background-color: transparent;
-}
-
-.hatchPanel {
-  position: relative;
-  border: 1px solid var(--rule-medium);
-  background-image: repeating-linear-gradient(135deg, rgba(11, 11, 11, 0.07) 0 1px, transparent 1px 7px);
-}
-
 /* ---------- Interaction: tooltip, crosshair, reveal ---------- */
-
 .tooltip {
   position: absolute;
   z-index: 3;
@@ -689,16 +671,4 @@
   .figure * {
     transition: none !important;
   }
-}
-
-.visuallyHidden {
-  position: absolute;
-  width: 1px;
-  height: 1px;
-  margin: -1px;
-  padding: 0;
-  overflow: hidden;
-  clip: rect(0 0 0 0);
-  white-space: nowrap;
-  border: 0;
 }

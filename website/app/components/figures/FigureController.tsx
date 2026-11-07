@@ -79,7 +79,7 @@ export function FigureController() {
       });
       listen(frame, "focusout", () => delete tooltip.dataset.open);
 
-      // Linked emphasis: hovering any [data-key] dims the other keys.
+      // Linked emphasis: hovering any [data-key] marks every element with that key.
       const keyed = [...figure.querySelectorAll<HTMLElement>("[data-key]")];
       if (keyed.length) {
         listen(frame, "pointerover", (event) => {

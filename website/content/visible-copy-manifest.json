@@ -424,9 +424,9 @@
       "formulaCount": 982
     },
     "/certified-valuation-arithmetic-asian-options/": {
-      "textSha256": "486e058462d5924ededb69f43a3f7c23b0b5792795a963dce1338114bcb3b64b",
-      "characterCount": 48980,
-      "wordCount": 7079,
+      "textSha256": "56271ffc2639679bb403af5efba4d352e8067a6bb93b2988b78c68f91bbdf5f6",
+      "characterCount": 48917,
+      "wordCount": 7069,
       "preview": "Skip to Main Content Theodore Ouyang Back to Selected Research Certified Valuation of Arithmetic Asian Options GitHub Full Manuscript Abstract We develop finite",
       "altTexts": [],
       "ariaLabels": [
@@ -606,9 +606,9 @@
       "formulaCount": 365
     },
     "/certified-rough-heston-valuation/": {
-      "textSha256": "e53008197a089d4931c7fe67e4f5015164f2f22160fd071648b280686a274461",
-      "characterCount": 61038,
-      "wordCount": 8760,
+      "textSha256": "7388585aecee4da2deb401707ff8f537a92cd9eed1dad71f8cd2912c602295d2",
+      "characterCount": 60957,
+      "wordCount": 8744,
       "preview": "Skip to Main Content Theodore Ouyang Back to Selected Research Certified Joint Pricing Errors in Rough Heston GitHub Full Manuscript Abstract We give determinis",
       "altTexts": [],
       "ariaLabels": [
@@ -757,8 +757,8 @@
         "twitterTitle": "Certified Joint Pricing Errors in Rough Heston",
         "twitterDescription": "Deterministic joint pricing-error certificates for stored rough Heston outputs, covering finite-history propagation, portfolios and finite-candidate decisions."
       },
-      "mathSourceSha256": "1c1153632e44e6e202b64ca44b03adea2a1dbdd7b328adf66cfd9748ec30dff3",
-      "formulaCount": 272
+      "mathSourceSha256": "198ad0c1240f95b196012516df8cb08b33e4da42ce7c6272da686790510245cc",
+      "formulaCount": 271
     },
     "/experience/": {
       "textSha256": "c5a8982f90387eafdf23a5966191fd3b208272bff1220a6594f84a5f849aa24c",
@@ -801,9 +801,9 @@
       }
     },
     "/experience/statistical-inference-and-resource-allocation-in-expert-data-production/": {
-      "textSha256": "87b85b901d2252cc561c052b8784fd221f57b99982026ba6a1a9abb998bbbde9",
-      "characterCount": 24882,
-      "wordCount": 3549,
+      "textSha256": "66088325897ce50de223a6d5f60968a0630be0087d30785155f56b01219c8735",
+      "characterCount": 24857,
+      "wordCount": 3544,
       "preview": "Skip to Main Content Theodore Ouyang Back to Experience Large-Scale Domain Expert Feedback Governance and Adaptive Review Organization Duke University × Leading",
       "altTexts": [],
       "ariaLabels": [
@@ -871,9 +871,9 @@
       "formulaCount": 164
     },
     "/experience/task-validity-in-financial-synthetic-data/": {
-      "textSha256": "ce6a6419616c3d2c1e9a4b7a4fe8837bac9d1e6b8ece1f8e1a422289a823a42b",
-      "characterCount": 23999,
-      "wordCount": 3290,
+      "textSha256": "40f50af7018e55697254e62d1efec1fe92134eb910a09e1f7657d301b981dba2",
+      "characterCount": 24032,
+      "wordCount": 3296,
       "preview": "Skip to Main Content Theodore Ouyang Back to Experience Financial Task Design and Synthetic Data Engineering Organization Duke University × Leading Foundation M",
       "altTexts": [],
       "ariaLabels": [
@@ -922,13 +922,13 @@
         "twitterTitle": "Duke University × Leading Foundation Model Developer: Financial Task Design and Synthetic Data Engineering",
         "twitterDescription": "I designed the data strategy for financial post-training in a frontier foundation model program, pioneering constraint-preserving synthetic data and structured expert preference supervision for financial LLM post-training in engineering practice."
       },
-      "mathSourceSha256": "0da04cd11d67aba5f050cdf94c2a922106a526fc536da9d6560ec1af14e00e87",
-      "formulaCount": 136
+      "mathSourceSha256": "c5e1423af117a27407494c4ca91600bcdacfc7a99418a1cc5b14fb0aaed655f2",
+      "formulaCount": 137
     },
     "/experience/verification-and-supervision-in-scientific-reasoning-tasks/": {
-      "textSha256": "8a1f78a5522fd5bba3fd8740ed9bc86f3c7a2b56a9b1da39cb1e04cc888ba6ff",
-      "characterCount": 24302,
-      "wordCount": 3468,
+      "textSha256": "ff83f4dc581033d1b176cad1b1f83bc3bedbc42df44f8180aee438b5af2142a3",
+      "characterCount": 24266,
+      "wordCount": 3463,
       "preview": "Skip to Main Content Theodore Ouyang Back to Experience General Reasoning Evaluation and Layered Verification Organization Duke University × Frontier AI Researc",
       "altTexts": [],
       "ariaLabels": [
@@ -997,9 +997,9 @@
       "formulaCount": 143
     },
     "/experience/evidence-uncertainty-and-decision-guarantees-in-investment-research/": {
-      "textSha256": "4e31f08e86982fbfa36d08a7b9dac37586a23b353cd53cc1558fae8ac034a412",
-      "characterCount": 18935,
-      "wordCount": 2784,
+      "textSha256": "68511c85ef0c70321b4b7dd6289670497182728b61b280f939bed1db8573bbc6",
+      "characterCount": 18884,
+      "wordCount": 2778,
       "preview": "Skip to Main Content Theodore Ouyang Back to Experience Evidence Verification and Robust Comparison in Investment Research Organization Duke University × Leadin",
       "altTexts": [],
       "ariaLabels": [
@@ -1065,7 +1065,7 @@
       "formulaCount": 163
     },
     "/experience/autonomous-authority-in-space/": {
-      "textSha256": "4ba195ae67fe6ae988b4046e1eb3b6350838c294e39c3e6e48fcb4cab4f36e82",
+      "textSha256": "0e386ed0bb0ac614bc1965b2bbef86678b1973a2456db03ce25398b5b19ef207",
       "characterCount": 69732,
       "wordCount": 9759,
       "preview": "Skip to Main Content Theodore Ouyang Back to Experience Autonomous Authority in Space: Risk Tradeoffs and the Law of Delegation Organization Duke Law School Pos",
@@ -1241,9 +1241,9 @@
       }
     },
     "/experience/solar-geoengineering-comparison-and-continuity/": {
-      "textSha256": "0d2e61df9c4669576108c10f674a6f841b0de69a6df77ad2ccb1da3b2b2eaddb",
-      "characterCount": 50972,
-      "wordCount": 7071,
+      "textSha256": "20b8f4a86f8ed7901907f6ad582f2f945db64b711e2eeeafac31ce0cc015f584",
+      "characterCount": 50947,
+      "wordCount": 7067,
       "preview": "Skip to Main Content Theodore Ouyang Back to Experience Who May Choose the Lesser Risk: Solar Geoengineering and the Legal Duties of Comparison and Continuity O",
       "altTexts": [],
       "ariaLabels": [
@@ -1277,7 +1277,7 @@
         "Footnote 23",
         "Footnote 24",
         "Footnote 25",
-        "Schematic: injection intensity rises and holds; when authorization expires, an automatic stop would drop it at once, while a tapering pathway lowers it gradually.",
+        "Injection intensity rises and holds; when authorization expires, an automatic stop would drop it at once, while a tapering pathway lowers it gradually.",
         "Three separate decisions",
         "Footnote 26",
         "Footnote 27",
@@ -1328,9 +1328,9 @@
       }
     },
     "/experience/mangrove-restoration-and-compensatory-mitigation/": {
-      "textSha256": "67a3029b4dafad207334650b17959376031e617f2b29b9091a0f9d52bf9dc70b",
-      "characterCount": 66353,
-      "wordCount": 9243,
+      "textSha256": "c1e1d5572c916c7880668db6fd4be8b59e15640d3f9285597940d611f217e591",
+      "characterCount": 66251,
+      "wordCount": 9228,
       "preview": "Skip to Main Content Theodore Ouyang Back to Experience Mangrove Restoration and the Limits of Compensatory Mitigation: Lessons from Florida for the Greater Bay",
       "altTexts": [],
       "ariaLabels": [
@@ -1377,7 +1377,7 @@
         "Footnote 33",
         "Footnote 34",
         "Footnote 35",
-        "Schematic: existing wetland function ends at pond filling, while replacement function rises only gradually afterwards; the gap between them is the period of loss.",
+        "Existing wetland function ends at pond filling, while replacement function rises only gradually afterwards; the gap between them is the period of loss.",
         "Approval conditions",
         "Footnote 36",
         "Footnote 37",

@@ -107,7 +107,7 @@ export function CollisionSequence() {
             {step}
           </div>
         ))}
-        <p className={styles.sequenceNote} data-tone="accent" style={{ gridRow: "2 / span 2" }}>{"Forecasting: where the ESA challenge’s predictors operate"}</p>
+        <p className={styles.sequenceNote} data-tone="accent" style={{ gridRow: "2 / span 2" }}>{"Forecasting: where the ESA challenge's predictors operate"}</p>
         <p className={styles.sequenceNote} style={{ gridRow: "4 / span 4" }}>Maneuver policy: requires assurance beyond prediction performance</p>
       </div>
     </Figure>
@@ -191,17 +191,17 @@ export function ExitPaths() {
     <Figure
       id="exit-paths"
       title="Separating the decision to stop from the act of stopping"
-      caption="Schematic, not to scale. A severe termination shock needs substantial cooling, sudden cessation and a prolonged interruption. Treating program control, operation and the physical trajectory as separate decisions lets authority change without making abrupt cessation the price of dissent."
+      caption="A severe termination shock needs substantial cooling, sudden cessation and a prolonged interruption. Treating program control, operation and the physical trajectory as separate decisions lets authority change without making abrupt cessation the price of dissent."
       legend={[{ label: "Abrupt cessation", tone: "steel", shape: "dash" }, { label: "Tapering pathway", tone: "accent", shape: "line" }]}
     >
       <Plot
-        label="Schematic: injection intensity rises and holds; when authorization expires, an automatic stop would drop it at once, while a tapering pathway lowers it gradually."
+        label="Injection intensity rises and holds; when authorization expires, an automatic stop would drop it at once, while a tapering pathway lowers it gradually."
         x={x}
         y={y}
         height="clamp(200px, 44cqi, 250px)"
         inset={{ left: 14, top: 36 }}
         yTicks={[{ at: 0, label: "", solid: true }]}
-        yTitle="Injection intensity, schematic"
+        yTitle="Injection intensity"
         xTitle="Time"
         curves={<>
           <path className={kit.ink} d={path(sustained, x, y)} />
@@ -212,7 +212,7 @@ export function ExitPaths() {
         <Dot left={x(decision)} top={100 - y(1)} tone="ink" />
         <Mark left={x(decision)} top={100 - y(1)} anchor="bottom-left" wrap className={kit.muted}>Authorization expires or support is withdrawn</Mark>
         <Mark left={x(decision)} top={72} anchor="right" tone="steel" className={kit.fade}>Abrupt cessation</Mark>
-        <Mark left={x(0.78)} top={100 - y(0.52)} anchor="left" tone="accent" className={kit.fade}>Tapering pathway</Mark>
+        <Mark left={x(0.74)} top={100 - y(0.58)} anchor="left" tone="accent" wrap className={kit.fade}>Tapering pathway</Mark>
       </Plot>
       <dl className={styles.lanes} aria-label="Three separate decisions">
         <dt>Program control</dt><dd>Political authority can change.</dd>
@@ -244,7 +244,7 @@ export function EvidentiaryChain() {
       id="evidentiary-chain"
       title="From legal duty to durable function"
       caption="Each observation supports a different link, so aerial photographs of canopy expansion cannot establish the whole chain. The counterfactual also changes with the claim being tested."
-      views={[{ id: "chain", label: "Evidentiary chain" }, { id: "counterfactual", label: "Counterfactual by claim" }]}
+      views={[{ id: "chain", label: "Evidentiary Chain" }, { id: "counterfactual", label: "Counterfactual by Claim" }]}
       viewsLabel="Show the evidentiary chain or the counterfactuals"
     >
       <Panel view="chain" active>
@@ -286,7 +286,7 @@ export function DeepBay() {
     <Figure
       id="deep-bay"
       title="Deep Bay: canopy gained, mudflat lost"
-      caption="Two different observation windows and denominators, not one causal series: these findings do not show that mangrove expansion caused the declines. They show why added canopy cannot stand in for the performance of the whole wetland mosaic."
+      caption="Each panel keeps its own observation window and denominator. Together they show why added canopy cannot stand in for the performance of the whole wetland mosaic."
     >
       <div className={styles.panels}>
         <div>
@@ -339,17 +339,17 @@ export function SanTinLoss() {
     <Figure
       id="san-tin-loss"
       title="Construction is a milestone; replacement function is an outcome"
-      caption="Schematic, not to scale. Condition 9 ties pond filling to the start of construction of ecologically enhanced fishponds, which shows that work has begun, not that replacement functions operate. The shaded interval is the period of loss the compensation package must address, with measures ready if enhancement falls behind."
+      caption="Condition 9 ties pond filling to the start of construction of ecologically enhanced fishponds, which shows that work has begun, not that replacement functions operate. The shaded interval is the period of loss the compensation package must address, with measures ready if enhancement falls behind."
       legend={[{ label: "Existing wetland function", tone: "ink", shape: "line" }, { label: "Expected replacement function", tone: "accent", shape: "line" }, { label: "Enhancement falls behind", tone: "steel", shape: "dash" }, { label: "Period of loss", tone: "accent", shape: "square" }]}
     >
       <Plot
-        label="Schematic: existing wetland function ends at pond filling, while replacement function rises only gradually afterwards; the gap between them is the period of loss."
+        label="Existing wetland function ends at pond filling, while replacement function rises only gradually afterwards; the gap between them is the period of loss."
         x={x}
         y={y}
         height="clamp(220px, 50cqi, 280px)"
         inset={{ left: 14, top: 36 }}
         yTicks={[{ at: 0, label: "", solid: true }]}
-        yTitle="Wetland function, schematic"
+        yTitle="Wetland function"
         xTitle="Time"
         curves={<>
           <path className={styles.lossFill} data-fill="" d={path(gap, x, y, true)} />
@@ -360,8 +360,8 @@ export function SanTinLoss() {
       >
         <span className={styles.vline} style={{ left: `${x(0.1)}%` }} />
         <span className={styles.vline} style={{ left: `${x(filling)}%` }} />
-        <Mark left={x(0.1)} top={4} anchor="center" tag className={kit.muted}>Condition 1</Mark>
-        <Mark left={x(filling)} top={4} anchor="center" tag className={kit.muted}>Condition 9</Mark>
+        <Mark left={x(0.1)} top={4} anchor="center" tag className={kit.muted}>1</Mark>
+        <Mark left={x(filling)} top={4} anchor="center" tag className={kit.muted}>9</Mark>
         <Mark left={x(0.66)} top={100 - y(0.86)} anchor="center" tone="accent" className={kit.fade}>Period of loss</Mark>
       </Plot>
       <dl className={styles.lanes} aria-label="Approval conditions">

@@ -13,7 +13,7 @@ export function Tx({ children }: { children: string }) {
   return children.includes("$") ? <InlineMarkdown text={children} /> : <>{children}</>;
 }
 
-export const tone = (value: Tone) => styles[value];
+const tone = (value: Tone) => styles[value];
 
 /**
  * The shared figure frame. A figure with views renders every panel on the
@@ -93,7 +93,7 @@ export function sample(from: number, to: number, count: number, fn: (value: numb
   });
 }
 
-export type Tick = { at: number; label: ReactNode; solid?: boolean; edge?: "start" | "end" };
+export type Tick = { at: number; label: ReactNode; solid?: boolean; edge?: "start" | "end"; minor?: boolean };
 
 export type Crosshair = {
   x: number[];
@@ -137,7 +137,7 @@ export function Plot({ label, x, y, xTicks = [], yTicks = [], xTitle, yTitle, cu
         {yTicks.map((tick, index) => <span key={`gy${index}`} className={styles.gridY} data-solid={tick.solid ? "" : undefined} style={{ top: `${100 - y(tick.at)}%` }} />)}
         {xTicks.map((tick, index) => <span key={`gx${index}`} className={styles.gridX} data-solid={tick.solid ? "" : undefined} style={{ left: `${x(tick.at)}%` }} />)}
         {yTicks.map((tick, index) => <span key={`ty${index}`} className={styles.tickY} style={{ top: `${100 - y(tick.at)}%` }}>{tick.label}</span>)}
-        {xTicks.map((tick, index) => <span key={`tx${index}`} className={styles.tickX} data-edge={tick.edge} style={{ left: `${x(tick.at)}%` }}>{tick.label}</span>)}
+        {xTicks.map((tick, index) => <span key={`tx${index}`} className={styles.tickX} data-edge={tick.edge} data-minor={tick.minor ?? (xTicks.length >= 4 && index % 2 === 1) ? "" : undefined} style={{ left: `${x(tick.at)}%` }}>{tick.label}</span>)}
         {curves && <svg className={styles.curves} viewBox="0 0 100 100" preserveAspectRatio="none" focusable="false">{curves}</svg>}
         {children}
       </div>
@@ -205,26 +205,23 @@ export function Bars({ label, stack, labelWidth, valueWidth, children, className
 
 export type Rule = { at: number; tone?: "ink" | "soft" | "accent" };
 
-export function BarRow({ label, note, value, valueNote, grid = [], rules = [], keyName, rowClass, children }: {
+export function BarRow({ label, value, valueNote, grid = [], rules = [], rowClass, children }: {
   label: ReactNode;
-  note?: ReactNode;
   value?: ReactNode;
   valueNote?: ReactNode;
   grid?: number[];
   rules?: Rule[];
-  keyName?: string;
   rowClass?: string;
   children?: ReactNode;
 }) {
-  const key = keyName ? { "data-key": keyName } : {};
   return <>
-    <div className={`${styles.barLabel} ${rowClass ?? ""}`} {...key}><span className={styles.labelText}>{typeof label === "string" ? <Tx>{label}</Tx> : label}</span>{note && <small>{typeof note === "string" ? <Tx>{note}</Tx> : note}</small>}</div>
-    <div className={`${styles.track} ${rowClass ?? ""}`} {...key}>
+    <div className={`${styles.barLabel} ${rowClass ?? ""}`}><span className={styles.labelText}>{typeof label === "string" ? <Tx>{label}</Tx> : label}</span></div>
+    <div className={`${styles.track} ${rowClass ?? ""}`}>
       {grid.map((left, index) => <span key={`g${index}`} className={styles.gridX} style={{ left: `${left}%` }} />)}
       {rules.map((rule, index) => <span key={`r${index}`} className={styles.rule} data-tone={rule.tone === "ink" ? undefined : rule.tone} style={{ left: `${rule.at}%` }} />)}
       {children}
     </div>
-    <div className={`${styles.value} ${rowClass ?? ""}`} {...key}>{typeof value === "string" ? <Tx>{value}</Tx> : value}{valueNote && <small>{typeof valueNote === "string" ? <Tx>{valueNote}</Tx> : valueNote}</small>}</div>
+    <div className={`${styles.value} ${rowClass ?? ""}`}>{typeof value === "string" ? <Tx>{value}</Tx> : value}{valueNote && <small>{typeof valueNote === "string" ? <Tx>{valueNote}</Tx> : valueNote}</small>}</div>
   </>;
 }
 
@@ -247,8 +244,8 @@ export function BarAxis({ x, ticks, title }: { x: Scale; ticks: Tick[]; title?: 
     <div className={styles.axis}>
       {ticks.map((tick, index) => {
         const left = x(tick.at);
-        const edge = tick.edge ?? (left <= 0.5 ? "start" : left >= 99.5 ? "end" : undefined);
-        return <span key={index} className={styles.tickX} data-edge={edge} style={{ left: `${left}%` }}>{tick.label}</span>;
+        const edge = tick.edge ?? (left < 5 ? "start" : left > 95 ? "end" : undefined);
+        return <span key={index} className={styles.tickX} data-edge={edge} data-minor={tick.minor ?? (ticks.length >= 4 && index % 2 === 1) ? "" : undefined} style={{ left: `${left}%` }}>{tick.label}</span>;
       })}
     </div>
     <div />
@@ -260,8 +257,8 @@ export function Seg({ x, from, to, tone: color, hatch, tip, className }: { x: Sc
   return <span className={`${styles.seg} ${styles[color]} ${className ?? ""}`} data-hatch={hatch ? "" : undefined} data-tip={tip} style={{ left: `${x(from)}%`, width: `${Math.max(x(to) - x(from), 0)}%` }} />;
 }
 
-export function Range({ x, from, to, tone: color, tip, className, style }: { x: Scale; from: number; to: number; tone: Tone; tip?: string; className?: string; style?: CSSProperties }) {
-  return <span className={`${styles.range} ${styles[color]} ${className ?? ""}`} data-tip={tip} style={{ left: `${x(from)}%`, width: `${Math.max(x(to) - x(from), 0)}%`, ...style }} />;
+export function Range({ x, from, to, tone: color, tip, className }: { x: Scale; from: number; to: number; tone: Tone; tip?: string; className?: string }) {
+  return <span className={`${styles.range} ${styles[color]} ${className ?? ""}`} data-tip={tip} style={{ left: `${x(from)}%`, width: `${Math.max(x(to) - x(from), 0)}%` }} />;
 }
 
 /** Format a number for a chart label without changing its value's meaning. */

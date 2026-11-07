@@ -54,7 +54,7 @@ export function AsianWidthPlateau() {
   // The change between the two finest grids, term by term (Table 8, columns 1/768 and 1/1536).
   const [coarse, fine] = [ASIAN_STEPS[1], ASIAN_STEPS[2]];
   const change = linear(0.0213, 0.0218);
-  const changeTicks = [0.0213, 0.0215, 0.0217].map((at) => ({ at, label: at.toFixed(4) }));
+  const changeTicks = [0.0213, 0.0215, 0.0217].map((at) => ({ at, label: at.toFixed(4), minor: at === 0.0215 }));
   const changes = [0, 1, 3].map((part) => ({ name: ASIAN_PARTS[part].name, tone: ASIAN_PARTS[part].tone, delta: fine.parts[part] - coarse.parts[part] }));
   let running = coarse.total;
   const steps = changes.map((item) => {
@@ -67,8 +67,8 @@ export function AsianWidthPlateau() {
     <Figure
       id="asian-width"
       title="Certified width by Euler step"
-      caption="The payoff remainder supplies most of each width. From $h=1/768$ to $h=1/1536$ it and the projection term shrink, but the discrete frequency tail grows by more, so the total no longer improves. The plateau describes the enclosure, not the true price error."
-      views={[{ id: "width", label: "Width budget" }, { id: "change", label: "Finest-step change" }, { id: "enclosure", label: "Signed enclosure" }]}
+      caption="The payoff remainder supplies most of each width. From $h=1/768$ to $h=1/1536$ it and the projection term shrink, but the discrete frequency tail grows by more, so the total no longer improves."
+      views={[{ id: "width", label: "Width Budget" }, { id: "change", label: "Finest-Step Change" }, { id: "enclosure", label: "Signed Enclosure" }]}
       viewsLabel="Show the width budget, the change at the finest step or the signed enclosure"
     >
       <Panel view="change" active={false}>
@@ -89,7 +89,7 @@ export function AsianWidthPlateau() {
         <p className={styles.tally}>Hatched terms shrink; the periodization and P frequency-tail terms are unchanged.</p>
       </Panel>
       <Panel view="width" active>
-        <Bars label="Width contributions by Euler step. h=1/384: total 0.028009519599, 95.5% nonlinear. h=1/768: 0.021667063872, 94.5%. h=1/1536: 0.021734290027, 92.8%. h=1/192 has no certificate." labelWidth="5rem" valueWidth="6.5rem">
+        <Bars label="Width contributions by Euler step. h=1/384: total 0.028009519599, 95.5% nonlinear. h=1/768: 0.021667063872, 94.5%. h=1/1536: 0.021734290027, 92.8%. h=1/192 has no certificate." labelWidth="5rem" valueWidth="6.5rem" stack="narrow">
           {failed}
           {ASIAN_STEPS.map((row) => {
             let start = 0;
@@ -98,7 +98,7 @@ export function AsianWidthPlateau() {
                 {row.parts.map((part, index) => {
                   const from = start;
                   start += part;
-                  return <Seg key={index} x={width} from={from} to={start} tone={ASIAN_PARTS[index].tone} tip={`h = ${row.step} · ${ASIAN_PARTS[index].name}\n${part}`} />;
+                  return <Seg key={index} x={width} from={from} to={start} tone={ASIAN_PARTS[index].tone} tip={`h = ${row.step}, ${ASIAN_PARTS[index].name}\n${part}`} />;
                 })}
               </BarRow>
             );
@@ -108,7 +108,7 @@ export function AsianWidthPlateau() {
         <Legend items={ASIAN_PARTS.map((part) => ({ label: part.name, tone: part.tone }))} />
       </Panel>
       <Panel view="enclosure" active={false}>
-        <Bars label="Signed Euler-minus-continuous enclosures. h=1/384: −0.014169989568 to 0.013839530031. h=1/768: −0.011024692273 to 0.010642371599. h=1/1536: −0.010967952032 to 0.010766337995." labelWidth="5rem" valueWidth="6.5rem">
+        <Bars label="Signed Euler-minus-continuous enclosures. h=1/384: −0.014169989568 to 0.013839530031. h=1/768: −0.011024692273 to 0.010642371599. h=1/1536: −0.010967952032 to 0.010766337995." labelWidth="5rem" valueWidth="6.5rem" stack="narrow">
           {failed}
           {ASIAN_STEPS.map((row) => (
             <BarRow key={row.step} label={`$h=${row.step}$`} value={row.total.toFixed(5)} valueNote="width" grid={signedTicks.map((tick) => signed(tick.at))} rules={[{ at: signed(0) }]}>
@@ -145,7 +145,7 @@ export function HestonStageBounds() {
     <Figure
       id="heston-stages"
       title="Complete unit-spread bounds through the ablation"
-      caption="Each row is one configuration from Table 3, on a logarithmic scale; a bound left of the dashed line certifies the 0.25-point task. Finite-history propagation does most of the work, and at Q2 only the joint aggregation passes."
+      caption="Each row is one configuration from Table 3, on a logarithmic scale; a bound left of the dashed line certifies the 0.25-point task. Finite-history propagation delivers the largest reduction, and at Q2 only the joint aggregation passes."
       legend={[{ label: "Complete joint bound", tone: "accent", shape: "dot" }, { label: "Matched signed marginal bound", tone: "steel", shape: "ring" }]}
     >
       <Bars label="Complete joint bounds in index points: H0 1.398, H1 0.379, H2 0.367, H3 0.132, H4 0.115, Q0 1.208, Q1 0.351, Q2 0.233. Marginal bounds: H3 0.159, H4 0.138, Q0 1.545, Q1 0.408, Q2 0.252. The task budget is 0.25 points." labelWidth="11.5rem" valueWidth="3rem" stack="narrow">
@@ -154,7 +154,7 @@ export function HestonStageBounds() {
           if (!("id" in row)) return <p key={index} className={kit.groupLabel}>{row.group}</p>;
           const marginal = "marginal" in row ? row.marginal : undefined;
           const passes = row.joint <= 0.25;
-          const tip = `${row.id} · ${row.text}\nJoint ${row.joint}${marginal ? `\nMarginal ${marginal}` : ""}\n${row.note}`;
+          const tip = `${row.id}: ${row.text}\nJoint ${row.joint}${marginal ? `\nMarginal ${marginal}` : ""}\n${row.note}`;
           return (
             <BarRow key={row.id} label={<><span className={styles.id}>{row.id}</span><span className={styles.stageText}>{row.text}</span></>} value={row.joint.toFixed(3)} grid={grid} rules={[{ at: task, tone: "accent" }]}>
               {marginal && <span className={`${styles.link} ${kit.steel}`} style={{ left: `${x(row.joint)}%`, width: `${x(marginal) - x(row.joint)}%` }} />}
@@ -193,7 +193,7 @@ export function HestonCandidateSeparation() {
       defaultView="n2048"
       viewsLabel="Choose the generated layer"
     >
-      <Bars label="Joint objective enclosures, J times 10 to the 8. With 1024 cells: alpha 0.520 from 4.825 to 6.778, 0.525 from 5.645 to 7.501, 0.530 from 6.749 to 8.518, 0.540 from 9.807 to 11.422, 0.550 from 14.001 to 15.482. With 2048 cells: 0.520 from 5.293 to 6.024, 0.525 from 6.098 to 6.798, 0.530 from 7.187 to 7.860, 0.540 from 10.219 to 10.839, 0.550 from 14.387 to 14.961." labelWidth="5rem" valueWidth="8.5rem">
+      <Bars label="Joint objective enclosures, J times 10 to the 8. With 1024 cells: alpha 0.520 from 4.825 to 6.778, 0.525 from 5.645 to 7.501, 0.530 from 6.749 to 8.518, 0.540 from 9.807 to 11.422, 0.550 from 14.001 to 15.482. With 2048 cells: 0.520 from 5.293 to 6.024, 0.525 from 6.098 to 6.798, 0.530 from 7.187 to 7.860, 0.540 from 10.219 to 10.839, 0.550 from 14.387 to 14.961." labelWidth="5rem" valueWidth="8.5rem" stack="narrow">
         {HESTON_CANDIDATES.map((row) => {
           const style = {
             "--from-a": `${x(row.n1024[0])}%`, "--width-a": `${x(row.n1024[1]) - x(row.n1024[0])}%`,
@@ -214,8 +214,8 @@ export function HestonCandidateSeparation() {
         <BarAxis x={x} ticks={ticks} title="$J\times10^8$" />
       </Bars>
       <p className={styles.tally}>
-        <span className={styles.layerA}>Joint certificate: 7 of 10 pairs separated · matched marginal: 3 of 10</span>
-        <span className={styles.layerB}>Joint certificate: 10 of 10 pairs separated · matched marginal: 7 of 10</span>
+        <span className={styles.layerA}>The joint certificate separates 7 of 10 pairs; the matched marginal, 3 of 10.</span>
+        <span className={styles.layerB}>The joint certificate separates all 10 pairs; the matched marginal, 7 of 10.</span>
       </p>
     </Figure>
   );
@@ -242,11 +242,11 @@ export function HestonLedger() {
     <Figure
       id="heston-ledger"
       title="Q2 quarter-year ledger against the 0.25-point budget"
-      caption="Both columns share the output, the reference centre, the 1025 node radii and every remainder. Only the aggregation of shared node errors differs, and that 0.019075095-point difference decides the task. The strip remainder, about 0.00003, and reference arithmetic, about $4\times10^{-16}$, are too small to draw."
+      caption="Both columns share the output, the reference centre, the 1025 node radii and every remainder. Only the aggregation of shared node errors differs, and that 0.019075095-point difference decides the task."
       legend={LEDGER_PARTS.filter((part) => part.tone !== "mist").map((part) => ({ label: part.name, tone: part.tone }))}
     >
       <Bars label="Q2 complete bounds in index points. Joint 0.233318843, which passes the 0.25 budget; signed marginal 0.252393939, which does not. Shared components: absolute centre charge 0.149775146827, strip remainder 0.000026654230, true infinite-tail remainder 0.038055248032. Used-node support: joint 0.045461793432, marginal 0.064536889507." labelWidth="8rem" valueWidth="7rem" stack>
-        <BarHeader marks={[{ at: budget, label: "0.25-point budget", tone: "accent", anchor: "right" }]} />
+        <BarHeader marks={[{ at: budget, label: "0.25-point budget", tone: "accent", anchor: "left" }]} />
         {rows.map((row) => {
           let start = 0;
           return (
@@ -254,7 +254,7 @@ export function HestonLedger() {
               {LEDGER_PARTS.map((part) => {
                 const from = start;
                 start += part[row.key];
-                return <Seg key={part.name} x={x} from={from} to={start} tone={part.tone} tip={`${row.name} · ${part.name}\n${part[row.key]}`} />;
+                return <Seg key={part.name} x={x} from={from} to={start} tone={part.tone} tip={`${row.name}: ${part.name}\n${part[row.key]}`} />;
               })}
             </BarRow>
           );

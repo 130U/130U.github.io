@@ -191,8 +191,10 @@ Figures are interactive without depending on it. A segmented switch swaps views,
 hover readout follows line charts, marks show their exact values, the proof-obligation
 graph accepts a chosen failure, and each figure draws in once as it scrolls into view,
 except under reduced motion. Without JavaScript every figure renders its default view.
-Every plotted value restates the manuscript; schematic figures say so in their
-captions and carry no scale.
+Every plotted value restates the manuscript, and conceptual figures carry no numeric
+scale. Titles, captions, legends and axis names use sentence case, like the manuscripts'
+table captions; view switches are controls and use title case. Captions state what the
+figure shows in the article's own terms, without disclaimers.
 
 Research tables share the same treatment: a firm rule under the header, numeric
 columns right-aligned in tabular figures, a quiet tint on the hovered row and column,
