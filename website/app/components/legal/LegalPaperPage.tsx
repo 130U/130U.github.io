@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { Fragment, type ReactNode } from "react";
+import { ReturnArrow } from "../ReturnArrow";
 import { SiteShell } from "../SiteShell";
 import { ArticleReadingLayout } from "../article/ArticleReadingLayout";
 import { ExperienceDiagram, ExperienceMetadata, KeyContributions } from "../experience/ExperienceDetails";
@@ -117,7 +118,7 @@ export function LegalPaperPage({ paper, showcase }: { paper: LegalPaper; showcas
             </section>
           </ArticleReadingLayout>
 
-          <footer className={styles.paperFooter}><Link className="back-link" href={`/experience/#${showcase.slug}`}><span aria-hidden="true">←</span> Experience</Link><a href="#paper-title">Back to Top</a></footer>
+          <footer className={styles.paperFooter}><Link className="back-link" href={`/experience/#${showcase.slug}`}><ReturnArrow />Back to Experience</Link><a href="#paper-title">Back to Top</a></footer>
           {figures.size > 0 && <FigureController key={paper.slug} />}
         </LegalPaperReader>
       </article>

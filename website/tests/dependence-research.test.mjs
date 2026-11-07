@@ -147,11 +147,11 @@ test("dependence figures are drawn natively with complete captions, source bytes
     const caption = rendered[index][2].match(/<figcaption\b[^>]*>([\s\S]*?)<\/figcaption>/u)?.[1] ?? "";
     const prose = caption.replace(/<svg\b[\s\S]*?<\/svg>|<math\b[\s\S]*?<\/math>|<[^>]+>/gu, "");
     assert.equal(normalize(decodeHtml(prose)), normalize(captionText(figure.inlines)), "Rendered figure captions retain all non-mathematical text.");
-    // The original images stay published beside the native drawings.
+    // The manuscript's image is frozen source evidence; the page draws the figure and serves no copy.
     const frozen = await readFile(path.join(SOURCE, "figures", path.basename(figure.src)));
-    assert.equal(frozen.subarray(0, 8).toString("hex"), "89504e470d0a1a0a", "Original figures must retain their PNG signature.");
+    assert.equal(frozen.subarray(0, 8).toString("hex"), "89504e470d0a1a0a", "Source figures must be PNG files.");
     assert.equal(frozen.subarray(12, 16).toString(), "IHDR");
-    for (const directory of ["public", "out"]) assert.deepEqual(await readFile(path.join(ROOT, directory, figure.src.slice(1))), frozen, `${directory}${figure.src} must retain the original PNG bytes`);
+    for (const directory of ["public", "out"]) await assert.rejects(readFile(path.join(ROOT, directory, figure.src.slice(1))), { code: "ENOENT" }, `${directory}${figure.src} must not be published`);
   }
   const appendix = "https://github.com/130U/mathematical-finance-project/blob/" + COMMIT + "/paper/source/technical-quantitative.tex#L80";
   assert.ok(rendered[3][2].includes(`href="${appendix}"`), "The flow-share figure retains its original equation (B.2) appendix link.");

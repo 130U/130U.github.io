@@ -118,7 +118,7 @@ export function sampleClarinet(width: number, dpr: number): SampleDot[] {
     outline.lineWidth = Math.max(3.5, .9 / scale);
     outline.stroke(geometry.rods);
 
-    // Clear the same fittings from the body. Evenodd annuli retain all six cores.
+    // Clear the same fittings from the body; the even-odd annuli leave all six cores in it.
     body.save();
     body.setTransform(1, 0, 0, 1, 0, 0);
     body.globalCompositeOperation = "destination-out";

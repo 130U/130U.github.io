@@ -2,7 +2,7 @@
   "schema_version": 1,
   "diagram_type": "architecture",
   "meta": {
-    "title": "Theodore - Website Architecture",
+    "title": "Website Architecture",
     "locale": "en",
     "quality_profile": "showcase",
     "viewBox": [
@@ -129,7 +129,7 @@
       "id": "browser-islands",
       "type": "frontend",
       "label": "Reader Interactions",
-      "sublabel": "Navigation / Contents / Notes",
+      "sublabel": "Menu / Contents / Figures / Notes",
       "pos": [
         1145,
         535
@@ -234,7 +234,7 @@
       "dot": "cyan",
       "title": "Content First",
       "items": [
-        "49 courses, 5 Experience domains, 18 entries, and 3 Selected Research papers",
+        "49 courses, 18 Experience entries in 5 domains, 3 Selected Research papers, and Blog",
         "Shared route registry and protected source text"
       ]
     },
@@ -242,7 +242,7 @@
       "dot": "emerald",
       "title": "Static Delivery",
       "items": [
-        "24 content pages in two sections, architecture viewer, and 404",
+        "26 content pages in three sections, architecture viewer, and 404",
         "No runtime API, database, or authentication"
       ]
     },
@@ -250,7 +250,7 @@
       "dot": "violet",
       "title": "Focused Interactions",
       "items": [
-        "Clarinet hero, navigation, contents, and footnote previews",
+        "Clarinet hero, navigation, contents, article figures, and note previews",
         "Architecture search, themes, tracing, and export"
       ]
     }

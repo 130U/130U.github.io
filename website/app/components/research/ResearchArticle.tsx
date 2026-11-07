@@ -2,6 +2,7 @@ import Link from "next/link";
 import { join } from "node:path";
 import { Fragment, cache } from "react";
 import sharp from "sharp";
+import { ReturnArrow } from "../ReturnArrow";
 import { SiteShell } from "../SiteShell";
 import { ArticleReadingLayout } from "../article/ArticleReadingLayout";
 import { ArchitecturalContext, ExperienceDiagram, ExperienceMetadata, KeyContributions } from "../experience/ExperienceDetails";
@@ -175,7 +176,7 @@ export function ResearchArticle({ project, active, returnPath, returnLabel, titl
         </ArticleReadingLayout>
 
         <footer className={readingStyles.paperFooter}>
-          <Link className="back-link" href={returnPath}><span aria-hidden="true">←</span> {returnLabel}</Link>
+          <Link className="back-link" href={returnPath}><ReturnArrow />Back to {returnLabel}</Link>
           <a href={`#${titleId}`}>Back to Top</a>
         </footer>
         {enhanced && <FigureController key={project.slug} />}

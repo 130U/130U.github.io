@@ -123,10 +123,6 @@ const EXPECTED_PUBLIC_ASSETS = [
   "assets/fonts/SourceSerif4Variable-Roman.woff2",
   "assets/fonts/inter.css",
   "assets/fonts/source-serif.css",
-  "assets/research/dependence/budget-comparison.png",
-  "assets/research/dependence/corner-capacity.png",
-  "assets/research/dependence/optimal-flow-shares.png",
-  "assets/research/dependence/tail-layer-repair.png",
 ];
 
 function decodeHtml(value) {
