@@ -145,8 +145,8 @@ test("all eleven full articles retain introduction, contents and body order with
       const id = heading.attrs.get("id");
       assert.ok(id, `${route}: heading ${readable(heading)} needs an anchor.`);
       const destinations = new Set([`#${id}`]);
-      // A labelled section may be the intended destination (for example,
-      // #footnotes is labelled by its nested #footnotes-heading).
+      // A labeled section may be the intended destination (for example,
+      // #footnotes is labeled by its nested #footnotes-heading).
       for (let ancestor = heading.parent; ancestor; ancestor = ancestor.parent) {
         if (ancestor.tag === "section" && ancestor.attrs.has("id") && (ancestor.attrs.get("aria-labelledby") ?? "").split(/\s+/u).includes(id)) destinations.add(`#${ancestor.attrs.get("id")}`);
       }

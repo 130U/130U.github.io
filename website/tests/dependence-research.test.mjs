@@ -123,7 +123,7 @@ test("dependence figures are drawn natively with complete captions, source bytes
   const drawings = [...page.matchAll(/<figure\b([^>]*\bdata-manuscript-figure="([^"]+)"[^>]*)>([\s\S]*?)<figcaption\b/gu)];
   assert.deepEqual(drawings.map((match) => match[2]), ["dependence-tail-layer", "dependence-corner", "dependence-envelopes", "dependence-flow-shares"]);
   for (const [, , , drawing] of drawings) {
-    assert.match(drawing, /\brole="img"[^>]*\baria-label="[^"]{40,}"/u, "Each native drawing is one labelled image.");
+    assert.match(drawing, /\brole="img"[^>]*\baria-label="[^"]{40,}"/u, "Each native drawing is one labeled image.");
     assert.doesNotMatch(drawing, /<img\b/u, "Each manuscript figure is a native drawing.");
   }
   const html = withoutArticleFigures(page);

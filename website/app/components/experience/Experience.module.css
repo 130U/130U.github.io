@@ -84,7 +84,7 @@
 .detailFooter a { display: inline-flex; align-items: center; min-height: 44px; }
 .detailFooter :global(.back-link) { margin-bottom: 0; }
 
-/* Record strip: four labelled fields in one frame, divided by dashed hairlines,
+/* Record strip: four labeled fields in one frame, divided by dashed hairlines,
    values in the reading face. */
 .metadata {
   display: grid;

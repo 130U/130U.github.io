@@ -18,7 +18,7 @@
   --frame-pad: 44px;
   --accent: #2200ff;
   /* Article figures: ink and the accent carry the argument, sky marks a second
-     series, green marks an exactly known segment, greys hold context, and the
+     series, green marks an exactly known segment, grays hold context, and the
      tint marks an emphasized row or column. */
   --chart-sky: #4fb0e3;
   --chart-green: #0d8a57;

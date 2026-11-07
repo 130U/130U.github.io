@@ -105,7 +105,7 @@ manuscript render at weight 600, so each contribution opens with its claim; ital
 run-ins and bold theorem labels remain inside mathematics papers. The hero name is the
 one display exception.
 
-Restraint, not absence. Each component uses at most two text styles, and small grey
+Restraint, not absence. Each component uses at most two text styles, and small gray
 labels appear only where a field needs naming (the record strip, contact details,
 diagrams). Structure has three weights: a strong solid rule opens each page-level
 section; one faint, unfilled 1px frame holds each group of content (a section's
@@ -159,7 +159,7 @@ focus, and the decision or feedback path in architecture figures.
 
 AI entries lead with the project name. The confidentiality note introduces "the
 following four projects", so it opens the AI section as its standfirst: directly under
-the heading, on the same edge, in the reading face and supporting-ink colour. Its
+the heading, on the same edge, in the reading face and supporting-ink color. Its
 heading is visually hidden and labels the aside for assistive technology.
 
 Each of the eight AI and legal articles opens with a `LogicDiagram` in its header,
@@ -169,18 +169,18 @@ read left to right, each holding one node or one node per lane, with an optional
 feedback loop to an earlier stage. Stage labels sit on short rules with the site's
 blue ticks; nodes are flat panels with a 1px border, and the stage holding the
 decisive mechanism is set in ink. Connectors are drawn in CSS on the same grid as the
-nodes (arrows, fan-out and fan-in buses), and the loop is the one blue path, labelled
+nodes (arrows, fan-out and fan-in buses), and the loop is the one blue path, labeled
 beneath. Node details accept inline TeX. The figure is pure HTML and CSS, so its text
 keeps the site's roles and works without JavaScript. Below 640px of figure width it
 reflows into a vertical sequence (parallel nodes side by side from 480px) and the
-loop becomes a labelled return note. A prose caption follows. Every stage must have
+loop becomes a labeled return note. A prose caption follows. Every stage must have
 one node or as many as the widest stage; the module throws at build time otherwise.
 
 ### Article figures
 
 Inside the eleven full articles, figures take their grammar from Cognition's research
 posts: a faint 1px frame, a title at the interface size and weight 500, every chart
-label at the label size, axis names in flat grey pills, dashed hairline grids and a
+label at the label size, axis names in flat gray pills, dashed hairline grids and a
 caption in the reading face and supporting ink below the frame. Ink and the accent carry
 the argument; `--chart-sky` marks a second series, `--chart-green` an exactly known
 segment, `--chart-steel` and `--chart-mist` hold context, and `--chart-tint` marks an
@@ -378,11 +378,12 @@ existing article and experience footer links remain available after long content
 
 ## Content and extension
 
-Page, domain, institution, project, and course titles use title case. Main-site
-navigation and action labels use title case, including Skip to Main Content, Read More,
-Back to Education, Back to Selected Research, Back to Experience, Back to Top,
-Full Manuscript, Author Note, and View in Footnotes. Function words such as "to"
-and "in" stay lowercase.
+Page, domain, institution, project, and course titles use title case, and so do
+post titles and post section headings. Main-site navigation and action labels use
+title case, including Skip to Main Content, Read More, Back to Education, Back to
+Selected Research, Back to Experience, Back to Blog, Back to Top, Full Manuscript,
+Author Note, View in Footnotes, and View Now. Function words such as "to" and "in"
+stay lowercase.
 Research article titles and chapters preserve their
 authored capitalization. Supporting sentences and accessibility descriptions use
 sentence case. The architecture viewer uses sentence case for tool commands and
@@ -406,7 +407,8 @@ with its blue corner marks, and the domain in the lower band. The repository REA
 displays the same card.
 
 Use English punctuation in public copy and metadata, including the architecture
-viewer. Straight and curly apostrophes and quotation marks are both valid.
+viewer. Site copy, posts included, uses straight apostrophes and quotation marks;
+manuscripts keep the marks they were written with.
 Preserve source date punctuation and meaningful mathematical
 symbols, collaboration marks, and navigation arrows. An em dash can separate
 clauses. Unicode English dashes, ©, ×, and navigation arrows are intentional;
@@ -478,7 +480,8 @@ link to it. The index has the title alone and one ledger frame of posts, newest 
 each entry hangs its title, with the date beneath it in the label role, on axis A and
 its summary and Read More link on axis B, exactly as on About and Experience.
 
-A post is one column from the reading start to the reading-measure guide. The title
+A post is one column no wider than the reading measure, starting on the reading-start
+guide, the same measure as the research articles' prose. The title
 sits above a byline in the label role (author on the left, date on the right) and a
 hairline. A hero image follows, then the work: a band tinted 3% ink, without a frame,
 that holds the work's name in the subheading role, its one-line description in muted

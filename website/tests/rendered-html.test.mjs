@@ -687,7 +687,7 @@ test("all eighteen approved Experience entries use institution titles and real l
   ], "All seven original nested contributions must survive under their correct parent items");
 });
 
-test("the ten nonresearch detail routes keep metadata in a labelled record strip", async () => {
+test("the ten nonresearch detail routes keep metadata in a labeled record strip", async () => {
   const metadataStyles = (await readFile(path.join(ROOT, "app", "components", "experience", "Experience.module.css"), "utf8")).replace(/\r\n?/gu, "\n");
   assert.match(metadataStyles, /(?:^|\n)\.metadata\s*\{[^}]*grid-template-columns:\s*repeat\(4,\s*minmax\(0,\s*1fr\)\)[^}]*border:\s*1px solid var\(--frame\)/u, "Desktop sets the four fields in one frame");
   assert.match(metadataStyles, /\.metadata > div \+ div\s*\{\s*background:\s*var\(--dash-y\)/u, "Dashed hairlines divide the fields");

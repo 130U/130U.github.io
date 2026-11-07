@@ -37,11 +37,11 @@
   letter-spacing: 0.015em;
 }
 
-/* Post: one column from the reading start to the reading-measure guide. The
-   title and byline sit over a hairline, then the hero, the work and the prose. */
+/* Post: one column at the reading measure, from the reading start. The title
+   and byline sit over a hairline, then the hero, the work and the prose. */
 .post {
-  grid-column: 2 / span 7;
   min-width: 0;
+  max-width: var(--reading-measure);
 }
 
 .header h1 {
