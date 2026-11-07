@@ -110,8 +110,6 @@ const EXPECTED_PUBLIC_ASSETS = [
   "assets/blog/the-etude-sky/plate-op10-12.jpg",
   "assets/blog/the-etude-sky/plates.jpg",
   "assets/brand/apple-touch-icon.png",
-  "assets/brand/favicon-16.png",
-  "assets/brand/favicon-32.png",
   "assets/brand/favicon.ico",
   "assets/brand/lo-mark.svg",
   "assets/brand/og-1774.jpg",
@@ -929,10 +927,26 @@ test("the LO identity stays monochrome across browser and touch icons", async ()
   const sourceMark = await readFile(path.join(ROOT, "source-assets", "brand", "lo-mark.svg"));
   const publicMark = await readFile(path.join(ROOT, "public", "assets", "brand", "lo-mark.svg"));
   assert.deepEqual(publicMark, sourceMark);
-  assert.match(sourceMark.toString("utf8"), /fill="#0b0b0b"/u);
+  const masterSource = sourceMark.toString("utf8");
+  assert.match(masterSource, /viewBox="0 0 20 20"/u);
+  assert.match(masterSource, /fill="#0b0b0b"/u);
+  assert.match(masterSource, /@media \(prefers-color-scheme: dark\) \{ path \{ fill: #ffffff; \} \}/u);
 
-  for (const [asset, size] of [["favicon-16.png", 16], ["favicon-32.png", 32], ["apple-touch-icon.png", 180]]) {
-    const { data, info } = await sharp(path.join(ROOT, "public", "assets", "brand", asset))
+  const navigation = await readFile(path.join(ROOT, "app", "components", "SiteNavigation.tsx"), "utf8");
+  const pathData = (source) => [...source.matchAll(/<path[^>]*\sd="([^"]+)"/gu)].map((match) => match[1]);
+  assert.deepEqual(pathData(navigation), pathData(masterSource), "The rail draws the master mark's geometry");
+
+  const ico = await readFile(path.join(ROOT, "public", "assets", "brand", "favicon.ico"));
+  const icoImages = Array.from({ length: ico.readUInt16LE(4) }, (_, index) => {
+    const entry = 6 + index * 16;
+    const start = ico.readUInt32LE(entry + 12);
+    return [`favicon.ico ${ico.readUInt8(entry)}px`, ico.readUInt8(entry), ico.subarray(start, start + ico.readUInt32LE(entry + 8))];
+  });
+  assert.deepEqual(icoImages.map(([, size]) => size), [16, 32, 48]);
+
+  const touchIcon = path.join(ROOT, "public", "assets", "brand", "apple-touch-icon.png");
+  for (const [asset, size, input] of [...icoImages, ["apple-touch-icon.png", 180, touchIcon]]) {
+    const { data, info } = await sharp(input)
       .removeAlpha()
       .raw()
       .toBuffer({ resolveWithObject: true });
@@ -1013,7 +1027,7 @@ test("the production design contract is restrained and dependency-light", async 
   assert.match(navigation, /desktopQuery\.addEventListener\("change", onViewportChange\)[\s\S]*?desktopQuery\.removeEventListener\("change", onViewportChange\)/u);
   assert.match(globals, /\.site-rail\[data-enhanced="true"\] \.rail-panel\s*\{[^}]*visibility:\s*hidden/u);
   assert.match(navigation, /wordmark-lockup[\s\S]*?wordmark-mark[\s\S]*?wordmark-name[\s\S]*?>Theodore Ouyang<\/span>/u);
-  assert.match(layout, /assets\/brand\/lo-mark\.svg/u);
+  assert.match(layout, /assets\/brand\/favicon\.ico[\s\S]*?assets\/brand\/lo-mark\.svg[\s\S]*?sizes: "any"/u);
   assert.match(experience, /\.metadata\s*\{[^}]*grid-template-columns:\s*repeat\(4,/u);
   assert.match(globals, /\.ledger-title\s*\{[^}]*font-size:\s*var\(--type-subheading\)/u);
   assert.match(experience, /\.contributions > ol\s*\{[^}]*padding:\s*0\s*;[^}]*list-style:\s*none\s*;/u);

@@ -319,19 +319,16 @@ button:focus-visible {
 
 .wordmark-mark {
   display: block;
-  width: 18px;
-  height: 11.25px;
-  flex: 0 0 18px;
-  background: currentColor;
-  -webkit-mask: url("/assets/brand/lo-mark.svg") center / contain no-repeat;
-  mask: url("/assets/brand/lo-mark.svg") center / contain no-repeat;
+  width: 20px;
+  height: 20px;
+  flex: 0 0 20px;
 }
 
 .wordmark-name {
   display: block;
   min-width: min-content;
   font-size: var(--type-interface);
-  font-weight: 400;
+  font-weight: 500;
   letter-spacing: 0;
   line-height: var(--interface-leading);
   overflow-wrap: normal;
@@ -985,10 +982,6 @@ button:focus-visible {
 
   .wordmark-lockup {
     color: CanvasText;
-  }
-
-  .wordmark-mark {
-    background: CanvasText;
   }
 
   .primary-nav a::before {
