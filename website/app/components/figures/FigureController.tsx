@@ -21,7 +21,7 @@ export function FigureController() {
       target.addEventListener(type, handler as EventListener);
       cleanups.push(() => target.removeEventListener(type, handler as EventListener));
     };
-    const figures = [...document.querySelectorAll<HTMLElement>("[data-article-figure]")];
+    const figures = [...document.querySelectorAll<HTMLElement>("[data-figure]")];
 
     for (const figure of figures) {
       const frame = figure.firstElementChild as HTMLElement;
@@ -165,8 +165,9 @@ export function FigureController() {
       }
     }
 
-    // Research tables: highlight the hovered column.
-    for (const table of document.querySelectorAll<HTMLTableElement>("[data-research-table]")) {
+    // Research tables: highlight the hovered column and its header.
+    const tables = [...document.querySelectorAll<HTMLTableElement>("[data-research-table]")];
+    for (const table of tables) {
       let column = -1;
       const paint = (next: number) => {
         if (next === column) return;
@@ -182,9 +183,26 @@ export function FigureController() {
       listen(table as unknown as HTMLElement, "pointerleave", () => paint(-1));
     }
 
-    // One entrance per figure, only for figures that start below the fold.
+    // One entrance per figure or table, only for those that start below the fold.
     const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     if (!reduced && "IntersectionObserver" in window) {
+      const frames = tables.map((table) => table.closest<HTMLElement>("[data-table-frame]")).filter((frame): frame is HTMLElement => Boolean(frame));
+      const pendingFrames = frames.filter((frame) => frame.getBoundingClientRect().top > window.innerHeight);
+      const tableObserver = new IntersectionObserver((entries) => {
+        for (const entry of entries) {
+          if (!entry.isIntersecting) continue;
+          const frame = entry.target as HTMLElement;
+          tableObserver.unobserve(frame);
+          requestAnimationFrame(() => { frame.dataset.reveal = "in"; });
+        }
+      }, { rootMargin: "0px 0px -10% 0px" });
+      for (const frame of pendingFrames) {
+        [...frame.querySelectorAll<HTMLTableRowElement>("tbody tr")].forEach((row, index) => row.style.setProperty("--row", String(Math.min(index, 12))));
+        frame.dataset.reveal = "pending";
+        tableObserver.observe(frame);
+      }
+      cleanups.push(() => tableObserver.disconnect());
+
       const pending = figures.filter((figure) => figure.getBoundingClientRect().top > window.innerHeight);
       const observer = new IntersectionObserver((entries) => {
         for (const entry of entries) {

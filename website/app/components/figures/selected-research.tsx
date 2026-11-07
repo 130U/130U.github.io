@@ -1,32 +1,42 @@
 import type { CSSProperties } from "react";
-import { BarAxis, BarHeader, BarRow, Bars, Figure, Legend, Panel, Range, Seg, linear, logarithmic, styles as kit } from "./kit";
+import { BarAxis, BarHeader, BarRow, Bars, Dot, Figure, Legend, Mark, Panel, Plot, Range, Seg, Tx, linear, logarithmic, styles as kit } from "./kit";
 import styles from "./Figures.module.css";
 
-/* Critical Dependence Stress: the benchmark's headline comparison. */
+/* Critical Dependence Stress: the benchmark's headline comparison. The
+   prediction is a single budget, the proved critical budget a band, and the
+   gap between them the result. */
 export function DependenceBudgetRuler() {
   const x = linear(0, 0.32);
-  const ticks = [0, 0.1, 0.2, 0.3].map((at) => ({ at, label: at === 0 ? "0" : at.toFixed(1) }));
-  const grid = ticks.map((tick) => x(tick.at));
+  const y = linear(0, 1);
   const slope = 5 / 32;
   const [low, high] = [13 / 64, 29 / 96];
-  const rules = [{ at: x(slope), tone: "soft" as const }, { at: x(low), tone: "soft" as const }];
   return (
     <Figure
       id="dependence-budget"
+      className={styles.ruler}
       title="Uniform benchmark: the critical budget against its initial-slope prediction"
       caption="Independent uniform losses on $[0,2]^3$ with $\beta=1$, $p=1/2$ and $\gamma=(1,1,2)$. Extrapolating the exact initial slope predicts a reversal at $s=5/32$; the proved critical budget lies in $[13/64,29/96]$, at least 30% beyond that prediction."
     >
-      <Bars label="Rescaled stress budget. Initial-slope extrapolation reaches zero at 5/32; the proved critical budget lies between 13/64 and 29/96." labelWidth="10.5rem" valueWidth="7rem" stack>
-        <BarHeader marks={[{ at: (x(slope) + x(low)) / 2, label: "+30%", tone: "accent" }]} />
-        <BarRow label="Initial-slope extrapolation" value="$5/32$" grid={grid} rules={rules}>
-          <span className={`${kit.dot} ${kit.ink}`} data-tip="Initial-slope extrapolation: s = 5/32 = 0.15625" style={{ left: `${x(slope)}%`, top: "50%" }} />
-          <span className={`${styles.lead} ${kit.ink} ${kit.grow}`} style={{ width: `${x(slope)}%` }} />
-        </BarRow>
-        <BarRow label="Proved critical budget" value="$[13/64,29/96]$" grid={grid} rules={rules}>
-          <Seg x={x} from={low} to={high} tone="accent" tip={"Critical budget s* in [13/64, 29/96]\n= [0.203125, 0.302083…]"} />
-        </BarRow>
-        <BarAxis x={x} ticks={ticks} title="Rescaled stress budget $s$" />
-      </Bars>
+      <Plot
+        label="Rescaled stress budget. Initial-slope extrapolation reaches zero at 5/32; the proved critical budget lies between 13/64 and 29/96, at least 30% beyond it."
+        x={x}
+        y={y}
+        height="clamp(224px, 42cqi, 244px)"
+        inset={{ top: 4, left: 14, right: 14 }}
+        xTicks={[0, 0.1, 0.2, 0.3].map((at) => ({ at, label: at === 0 ? "0" : at.toFixed(1), edge: at === 0 ? "start" as const : undefined }))}
+        yTicks={[{ at: 0, label: "", solid: true }]}
+        xGrid={false}
+        xTitle="Rescaled stress budget $s$"
+      >
+        <span className={`${styles.budgetBand} ${kit.fade}`} data-tip={"Proved critical budget s*\n[13/64, 29/96] = [0.203125, 0.302083…]"} style={{ left: `${x(low)}%`, width: `${x(high) - x(low)}%` }} />
+        <span className={styles.budgetBar} style={{ left: `${x(low)}%`, width: `${x(high) - x(low)}%` }} />
+        <span className={styles.budgetRule} style={{ left: `${x(slope)}%` }} />
+        <span className={`${styles.budgetGap} ${kit.fade}`} style={{ left: `${x(slope)}%`, width: `${x(low) - x(slope)}%`, top: `${100 - y(0.36)}%` }} />
+        <Mark left={(x(slope) + x(low)) / 2} top={100 - y(0.36)} anchor="bottom" tone="accent" strong className={kit.fade}>+30%</Mark>
+        <Dot left={x(slope)} top={100} tone="ink" tip={"Initial-slope extrapolation\ns = 5/32 = 0.15625"} />
+        <Mark left={x(slope)} top={0} anchor="top-right" wrap className={`${styles.budgetLabel} ${styles.budgetLabelEnd}`} style={{ maxWidth: `calc(${x(slope)}% + 10px)` }}><>Initial-slope extrapolation<br /><Tx>$5/32$</Tx></></Mark>
+        <Mark left={x(low)} top={0} anchor="top-left" tone="accent" wrap className={styles.budgetLabel} style={{ maxWidth: `calc(${100 - x(low)}% + 12px)` }}><>Proved critical budget<br /><Tx>$[13/64,29/96]$</Tx></></Mark>
+      </Plot>
     </Figure>
   );
 }
@@ -243,7 +253,7 @@ export function HestonLedger() {
       legend={LEDGER_PARTS.filter((part) => part.tone !== "mist").map((part) => ({ label: part.name, tone: part.tone }))}
     >
       <Bars label="Q2 complete bounds in index points. Joint 0.233318843, which passes the 0.25 budget; signed marginal 0.252393939, which does not. Shared components: absolute centre charge 0.149775146827, strip remainder 0.000026654230, true infinite-tail remainder 0.038055248032. Used-node support: joint 0.045461793432, marginal 0.064536889507." labelWidth="8rem" valueWidth="7rem" stack>
-        <BarHeader marks={[{ at: budget, label: "0.25-point budget", tone: "accent", anchor: "left" }]} />
+        <BarHeader marks={[{ at: budget, label: "0.25-point budget", tone: "accent", anchor: "right" }]} />
         {rows.map((row) => {
           let start = 0;
           return (

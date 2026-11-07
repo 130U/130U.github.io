@@ -7,10 +7,13 @@ import test from "node:test";
 import { fileURLToPath } from "node:url";
 import { parseResearchMarkdown } from "../app/lib/content/research-markdown.ts";
 
-// Article figures restate manuscript values in their own captions and labels;
-// manuscript checks read the article without them.
+// Article figures restate manuscript values in their own captions and labels,
+// and natively drawn manuscript figures label their drawings; manuscript checks
+// read the article without those, keeping each manuscript figure's caption.
 function withoutArticleFigures(html) {
-  return html.replace(/<figure\b[^>]*\bdata-article-figure="[^"]*"[^>]*>[\s\S]*?<\/figure>/gu, "");
+  return html
+    .replace(/<figure\b[^>]*\bdata-article-figure="[^"]*"[^>]*>[\s\S]*?<\/figure>/gu, "")
+    .replace(/(<figure\b[^>]*\bdata-manuscript-figure="[^"]*"[^>]*>)[\s\S]*?(<figcaption\b)/gu, "$1$2");
 }
 
 const ROOT = fileURLToPath(new URL("../", import.meta.url));
@@ -112,11 +115,18 @@ test("dependence parsing and published mathematics retain the complete source le
   for (const href of links.filter((href) => href.startsWith("#"))) assert.ok(ids.includes(href.slice(1)), `Broken internal link ${href}`);
 });
 
-test("dependence figures preserve source bytes, complete captions and appendix references", async () => {
+test("dependence figures are drawn natively with complete captions, source bytes and appendix references", async () => {
   const { provenance, blocks } = await manuscript();
   const figures = blocks.filter((block) => block.type === "figure");
   assert.deepEqual(figures.map(({ src }) => path.basename(src)), ["tail-layer-repair.png", "corner-capacity.png", "budget-comparison.png", "optimal-flow-shares.png"]);
-  const html = withoutArticleFigures(await readFile(path.join(ROOT, "out", SLUG, "index.html"), "utf8"));
+  const page = (await readFile(path.join(ROOT, "out", SLUG, "index.html"), "utf8")).replace(/<figure\b[^>]*\bdata-article-figure="[^"]*"[^>]*>[\s\S]*?<\/figure>/gu, "");
+  const drawings = [...page.matchAll(/<figure\b([^>]*\bdata-manuscript-figure="([^"]+)"[^>]*)>([\s\S]*?)<figcaption\b/gu)];
+  assert.deepEqual(drawings.map((match) => match[2]), ["dependence-tail-layer", "dependence-corner", "dependence-envelopes", "dependence-flow-shares"]);
+  for (const [, , , drawing] of drawings) {
+    assert.match(drawing, /\brole="img"[^>]*\baria-label="[^"]{40,}"/u, "Each native drawing is one labelled image.");
+    assert.doesNotMatch(drawing, /<img\b/u, "Manuscript figures are drawn, not embedded as images.");
+  }
+  const html = withoutArticleFigures(page);
   const rendered = [...html.matchAll(/<figure\b([^>]*)>([\s\S]*?)<\/figure>/gu)];
   assert.equal(rendered.length, 4);
   const sourceText = (await Promise.all(provenance.sourceFiles.filter(({ local }) => local.endsWith(".tex")).map(({ local }) => readFile(path.join(SOURCE, local), "utf8")))).join("\n").replace(/\r\n?/gu, "\n");
@@ -131,20 +141,16 @@ test("dependence figures preserve source bytes, complete captions and appendix r
     });
     assert.equal(normalize(captionText(figure.inlines)), normalize(`Figure ${receipt.number}. ${sourceCaption}`));
     assert.equal(attribute(rendered[index][1], "id"), figure.id);
-    const image = rendered[index][2].match(/<img\b([^>]*)>/u)?.[1] ?? "";
-    assert.equal(attribute(image, "src"), figure.src);
-    assert.equal(attribute(image, "alt"), `Figure ${receipt.number}`);
+    assert.equal(attribute(rendered[index][1], "data-research-block-type"), "figure");
     const captionId = attribute(rendered[index][2].match(/<figcaption\b([^>]*)>/u)?.[1] ?? "", "id");
     assert.ok(captionId, "The original caption must have an accessible description target.");
-    assert.equal(attribute(image, "aria-describedby"), captionId);
     const caption = rendered[index][2].match(/<figcaption\b[^>]*>([\s\S]*?)<\/figcaption>/u)?.[1] ?? "";
     const prose = caption.replace(/<svg\b[\s\S]*?<\/svg>|<math\b[\s\S]*?<\/math>|<[^>]+>/gu, "");
     assert.equal(normalize(decodeHtml(prose)), normalize(captionText(figure.inlines)), "Rendered figure captions retain all non-mathematical text.");
+    // The original images stay published beside the native drawings.
     const frozen = await readFile(path.join(SOURCE, "figures", path.basename(figure.src)));
     assert.equal(frozen.subarray(0, 8).toString("hex"), "89504e470d0a1a0a", "Original figures must retain their PNG signature.");
     assert.equal(frozen.subarray(12, 16).toString(), "IHDR");
-    assert.equal(Number(attribute(image, "width")), frozen.readUInt32BE(16), "The image reserves its original PNG width before lazy loading.");
-    assert.equal(Number(attribute(image, "height")), frozen.readUInt32BE(20), "The image reserves its original PNG height before lazy loading.");
     for (const directory of ["public", "out"]) assert.deepEqual(await readFile(path.join(ROOT, directory, figure.src.slice(1))), frozen, `${directory}${figure.src} must retain the original PNG bytes`);
   }
   const appendix = "https://github.com/130U/mathematical-finance-project/blob/" + COMMIT + "/paper/source/technical-quantitative.tex#L80";

@@ -5,10 +5,13 @@ import test from "node:test";
 import { parseResearchMarkdown } from "../app/lib/content/research-markdown.ts";
 import { renderResearchMath } from "../app/lib/content/research-math.ts";
 
-// Article figures restate manuscript values in their own captions and labels;
-// manuscript checks read the article without them.
+// Article figures restate manuscript values in their own captions and labels,
+// and natively drawn manuscript figures label their drawings; manuscript checks
+// read the article without those, keeping each manuscript figure's caption.
 function withoutArticleFigures(html) {
-  return html.replace(/<figure\b[^>]*\bdata-article-figure="[^"]*"[^>]*>[\s\S]*?<\/figure>/gu, "");
+  return html
+    .replace(/<figure\b[^>]*\bdata-article-figure="[^"]*"[^>]*>[\s\S]*?<\/figure>/gu, "")
+    .replace(/(<figure\b[^>]*\bdata-manuscript-figure="[^"]*"[^>]*>)[\s\S]*?(<figcaption\b)/gu, "$1$2");
 }
 
 const PROJECTS = [

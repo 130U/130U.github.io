@@ -42,6 +42,7 @@ The mark's editable master is
 | Dashed hairline (`--dash`, drawn by `--dash-x` / `--dash-y`) | `rgba(0, 0, 0, 0.15)`, 4px dash, 4px gap |
 | Diagram node surface (`--panel`) | `#fcfbfa` |
 | Figure second series (`--chart-sky`) | `#4fb0e3` |
+| Figure exact segment (`--chart-green`) | `#0d8a57` |
 | Figure context (`--chart-steel`, `--chart-mist`) | `#8d8d88`, `#d9d8d4` |
 | Figure emphasis (`--chart-tint`, `--chart-tint-strong`) | `rgba(34, 0, 255, 0.05)`, `rgba(34, 0, 255, 0.1)` |
 
@@ -181,11 +182,20 @@ Inside the eleven full articles, figures take their grammar from Cognition's res
 posts: a faint 1px frame, a title at the interface size and weight 500, every chart
 label at the label size, axis names in flat grey pills, dashed hairline grids and a
 caption in the reading face and supporting ink below the frame. Ink and the accent carry
-the argument; `--chart-sky` marks a second series, `--chart-steel` and `--chart-mist`
-hold context, and `--chart-tint` marks an emphasized row, column or region. Text is
-HTML at its true size, so labels stay legible at every width; only curves live in a
-stretched SVG layer whose strokes keep their width. Bar charts set long labels above
-their bars, and their reference rules run through the rows.
+the argument; `--chart-sky` marks a second series, `--chart-green` an exactly known
+segment, `--chart-steel` and `--chart-mist` hold context, and `--chart-tint` marks an
+emphasized row, column or region. Text is HTML at its true size, so labels stay legible
+at every width; only curves live in a stretched SVG layer whose strokes keep their
+width, and schematics scale uniformly so arrows and angles keep their shape. Labels
+sit in open space beside the marks they name and never cover a curve. Bar rows align
+on one grid; where a figure is narrow, each label shares a line with its value above
+a full-width bar, and the reference rules run through the rows behind the text. A
+title stands alone on its line, with any view switch beneath it as one segmented
+control.
+
+The dependence article's four manuscript figures are drawn the same way from the
+formulas that produced the original images, with the manuscript's captions unchanged
+below them.
 
 Figures are interactive without depending on it. A segmented switch swaps views, a
 hover readout follows line charts, marks show their exact values, the proof-obligation
@@ -196,9 +206,12 @@ scale. Titles, captions, legends and axis names use sentence case, like the manu
 table captions; view switches are controls and use title case. Captions state what the
 figure shows in the article's own terms, without disclaimers.
 
-Research tables share the same treatment: a firm rule under the header, numeric
-columns right-aligned in tabular figures, a quiet tint on the hovered row and column,
-and the accent tint on a row or column a table emphasizes.
+Research tables share the figures' frame. A manuscript table caption becomes the
+title inside the frame; the header is a faintly tinted band in label type over a firm
+rule; rows part on hairlines; numeric columns align right in tabular figures. The
+hovered row and column take a quiet tint and the hovered column's header turns accent,
+a row or column the table emphasizes carries the accent tint, and rows enter once, top
+to bottom, as a table scrolls into view.
 
 Prose stays within `--reading-measure` (36rem, about seventy characters of Source
 Serif 4 at the reading size) at every width. On wide article layouts the reading

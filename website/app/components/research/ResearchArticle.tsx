@@ -8,8 +8,8 @@ import { ArchitecturalContext, ExperienceDiagram, ExperienceMetadata, KeyContrib
 import type { ShowcaseEntry } from "../../lib/content/experience-showcase";
 import type { ResearchArticleContent, ResearchCell } from "../../lib/content/research-markdown";
 import { buildArticleHeadingMap, formatArticleHeadings, linkArticleSectionReferences } from "../../lib/content/article-headings";
-import { emphasisFor, placeFigures } from "../../lib/content/article-figures";
-import { ArticleFigure, FigureController } from "../figures";
+import { emphasisFor, manuscriptFigureFor, placeFigures } from "../../lib/content/article-figures";
+import { ArticleFigure, FigureController, ManuscriptFigure } from "../figures";
 import type { ActivePage } from "../../lib/content/site";
 import { ResearchMath } from "./ResearchMath";
 import { InlineContent } from "./ResearchInline";
@@ -49,6 +49,15 @@ function numericColumns(rows: ResearchCell[][], headerRow: boolean) {
     && body.some((row) => row[column].source.trim() !== "—"));
 }
 
+// A manuscript table caption is a bold "Table N." paragraph directly before its
+// table; it is set as the title inside the table's frame.
+const TABLE_CAPTION = /^\*\*Table \d+\./u;
+
+function captionsTable(blocks: ResearchArticleContent["blocks"], index: number) {
+  const block = blocks[index];
+  return block?.type === "paragraph" && TABLE_CAPTION.test(block.source.trimStart()) && blocks[index + 1]?.type === "table";
+}
+
 export function ResearchArticle({ project, active, returnPath, returnLabel, titleId, showcase }: {
   project: ResearchArticleContent;
   active: ActivePage;
@@ -68,7 +77,11 @@ export function ResearchArticle({ project, active, returnPath, returnLabel, titl
     project.blocks.map((block) => ({ type: block.type, source: block.source, firstCell: block.type === "table" ? block.rows[0][0].source : undefined })),
     project.markdown,
   );
-  const enhanced = figures.size > 0 || project.blocks.some((block) => block.type === "table");
+  const native = new Map(project.blocks.flatMap((block, index) => {
+    const figure = block.type === "figure" ? manuscriptFigureFor(project.slug, block.src, project.markdown) : undefined;
+    return figure ? [[index, figure] as const] : [];
+  }));
+  const enhanced = figures.size > 0 || native.size > 0 || project.blocks.some((block) => block.type === "table");
   const renderedBlocks = project.blocks.map((block, index) => {
     const rendered = renderBlock(block, index);
     const placed = figures.get(index);
@@ -76,7 +89,11 @@ export function ResearchArticle({ project, active, returnPath, returnLabel, titl
   });
   function renderBlock(block: ResearchArticleContent["blocks"][number], index: number) {
     const marker = { "data-research-block": index, "data-research-block-type": block.type };
-    if (block.type === "paragraph") return <p {...marker} id={block.id} key={index}><InlineContent inlines={linkArticleSectionReferences(block.inlines, project.slug, headingMap)} /></p>;
+    if (block.type === "paragraph") {
+      // A table caption renders inside the frame of the table that follows it.
+      if (captionsTable(project.blocks, index)) return null;
+      return <p {...marker} id={block.id} key={index}><InlineContent inlines={linkArticleSectionReferences(block.inlines, project.slug, headingMap)} /></p>;
+    }
     if (block.type === "heading") {
       const Heading = block.level === 3 ? "h3" : "h2";
       const heading = headingPresentations.get(block.id)!;
@@ -89,6 +106,11 @@ export function ResearchArticle({ project, active, returnPath, returnLabel, titl
       const captionId = `research-figure-${index}-caption`;
       const opening = block.inlines[0];
       const label = (opening?.type === "text" && opening.text.match(/^Figure \d+/u)?.[0]) || "Research figure";
+      const figure = native.get(index);
+      if (figure) {
+        const caption = <InlineContent inlines={linkArticleSectionReferences(block.inlines, project.slug, headingMap)} />;
+        return <ManuscriptFigure key={index} id={figure} anchor={block.id} captionId={captionId} attributes={marker} caption={caption} />;
+      }
       return <figure {...marker} id={block.id} className={styles.figure} key={index}>
         <a href={block.src} aria-label={`Open ${label.toLowerCase()} at full resolution`}>
           <FigureImage src={block.src} label={label} captionId={captionId} />
@@ -114,12 +136,20 @@ export function ResearchArticle({ project, active, returnPath, returnLabel, titl
         );
       })}</tr>
     ));
+    const captionBlock = captionsTable(project.blocks, index - 1) ? project.blocks[index - 1] : undefined;
     return (
-      <div key={index} tabIndex={0} role="region" aria-label="Research data table" className={styles.tableRegion}>
-        <table {...marker} id={block.id} className={styles.table} data-research-table>
-          {block.headerRow && <thead>{tableRows[0]}</thead>}
-          <tbody>{block.headerRow ? tableRows.slice(1) : tableRows}</tbody>
-        </table>
+      <div key={index} className={styles.tableFrame} data-table-frame>
+        {captionBlock?.type === "paragraph" && (
+          <p data-research-block={index - 1} data-research-block-type="paragraph" id={captionBlock.id} className={styles.tableTitle}>
+            <InlineContent inlines={linkArticleSectionReferences(captionBlock.inlines, project.slug, headingMap)} />
+          </p>
+        )}
+        <div tabIndex={0} role="region" aria-label="Research data table" className={styles.tableRegion}>
+          <table {...marker} id={block.id} className={styles.table} data-research-table>
+            {block.headerRow && <thead>{tableRows[0]}</thead>}
+            <tbody>{block.headerRow ? tableRows.slice(1) : tableRows}</tbody>
+          </table>
+        </div>
       </div>
     );
   }

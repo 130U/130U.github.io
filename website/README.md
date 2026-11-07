@@ -10,7 +10,9 @@ The visual system pairs Inter headings with Source Serif 4 prose, a warm paper
 background, and a restrained editorial grid: faint frames hold each list, dashed
 hairlines divide them, and each AI and legal article opens with a logic architecture
 diagram. Interactive figures inside the eleven full articles chart their tables and
-illustrate their arguments, and research tables highlight rows and columns on hover.
+illustrate their arguments, the dependence article draws its manuscript figures in the
+same style, and research tables sit in titled frames that highlight rows and columns on
+hover.
 About opens with the name beside a recognizable clarinet hero, stacked
 above it on phones and portrait tablets. The dense Canvas 2D particle field aggregates on entry,
 responds locally to the pointer, disperses with scrolling, and returns to its

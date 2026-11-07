@@ -18,8 +18,10 @@
   --frame-pad: 44px;
   --accent: #2200ff;
   /* Article figures: ink and the accent carry the argument, sky marks a second
-     series, greys hold context, and the tint marks an emphasized row or column. */
+     series, green marks an exactly known segment, greys hold context, and the
+     tint marks an emphasized row or column. */
   --chart-sky: #4fb0e3;
+  --chart-green: #0d8a57;
   --chart-steel: #8d8d88;
   --chart-mist: #d9d8d4;
   --chart-tint: rgba(34, 0, 255, 0.05);

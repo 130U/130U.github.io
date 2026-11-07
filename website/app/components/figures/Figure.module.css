@@ -11,19 +11,21 @@
 
 .frame {
   position: relative;
+  overflow-x: clip;
   padding: clamp(16px, 5cqi, 28px);
   border: 1px solid var(--frame);
   font-family: var(--font-text);
   font-variant-numeric: lining-nums tabular-nums;
 }
 
+/* The title sits alone on its line; a view switch follows it as one segmented
+   control whose segments share the width evenly. */
 .head {
   display: flex;
-  flex-wrap: wrap;
+  flex-direction: column;
   align-items: flex-start;
-  justify-content: space-between;
-  gap: 10px 20px;
-  margin-bottom: 22px;
+  gap: 14px;
+  margin-bottom: 26px;
 }
 
 .title {
@@ -37,9 +39,11 @@
 }
 
 .switch {
-  display: inline-flex;
-  flex-wrap: wrap;
+  display: inline-grid;
+  grid-auto-columns: minmax(0, 1fr);
+  grid-auto-flow: column;
   gap: 2px;
+  max-width: 100%;
   padding: 2px;
   background: var(--chart-pill);
 }
@@ -48,9 +52,20 @@
   display: none;
 }
 
+@container figure (max-width: 520px) {
+  .switch {
+    align-self: stretch;
+  }
+
+  .switch[data-count="4"] {
+    grid-auto-flow: row;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
 .switch button {
   min-height: 30px;
-  padding: 3px 10px;
+  padding: 4px 12px;
   border: 0;
   background: transparent;
   color: var(--supporting-ink);
@@ -58,7 +73,16 @@
   font: inherit;
   font-size: var(--type-label);
   line-height: var(--label-leading);
+  text-align: center;
+  white-space: nowrap;
   transition: color 160ms ease, background-color 160ms ease;
+}
+
+@container figure (max-width: 520px) {
+  .switch button {
+    white-space: normal;
+    text-wrap: balance;
+  }
 }
 
 .switch button[aria-pressed="true"] {
@@ -147,6 +171,12 @@
   background: var(--panel);
 }
 
+.swatch[data-shape="tint"] {
+  outline: 1px solid rgba(34, 0, 255, 0.35);
+  outline-offset: -1px;
+  background: var(--chart-tint-strong);
+}
+
 .swatch[data-shape="hatch"] {
   outline: 1px solid var(--rule-strong);
   outline-offset: -1px;
@@ -159,6 +189,8 @@
 .accent { color: var(--accent); }
 
 .sky { color: var(--chart-sky); }
+
+.green { color: var(--chart-green); }
 
 .steel { color: var(--chart-steel); }
 
@@ -175,7 +207,7 @@
 
 .area {
   position: absolute;
-  inset: var(--pt, 34px) var(--pr, 14px) var(--pb, 58px) var(--pl, 46px);
+  inset: var(--pt, 42px) var(--pr, 14px) var(--pb, 58px) var(--pl, 46px);
 }
 
 .gridY,
@@ -292,6 +324,11 @@
   stroke: none;
 }
 
+.curves [data-thick] {
+  stroke-width: 3.5;
+  stroke-linecap: butt;
+}
+
 .dot {
   position: absolute;
   width: 9px;
@@ -328,7 +365,10 @@
   pointer-events: none;
 }
 
+/* A wrapping label takes its natural width up to its maximum, wherever it is
+   anchored; near the right edge it would otherwise shrink to one word a line. */
 .mark[data-wrap] {
+  width: max-content;
   white-space: normal;
 }
 
@@ -350,12 +390,58 @@
   display: grid;
   grid-template-columns: minmax(0, var(--label-w, 11rem)) minmax(0, 1fr) minmax(max-content, var(--value-w, 5.5rem));
   column-gap: 14px;
-  align-items: center;
   font-size: var(--type-label);
   line-height: var(--label-leading);
 }
 
+/* One row of the chart: a subgrid line holding label, track and value, with
+   the grid lines and reference rules drawn behind the track column. */
+.row {
+  position: relative;
+  display: grid;
+  grid-column: 1 / -1;
+  grid-template-columns: subgrid;
+  grid-template-rows: auto;
+  align-items: center;
+}
+
+.row > .lines {
+  grid-row: 1;
+  grid-column: 2;
+  align-self: stretch;
+}
+
+.row > .barLabel {
+  grid-row: 1;
+  grid-column: 1;
+}
+
+.row > .track {
+  grid-row: 1;
+  grid-column: 2;
+}
+
+.row > .value {
+  grid-row: 1;
+  grid-column: 3;
+}
+
+.row > .barHeader,
+.row > .axis {
+  grid-row: 1;
+  grid-column: 2;
+}
+
+.lines {
+  position: relative;
+  z-index: 0;
+  min-height: 1px;
+  pointer-events: none;
+}
+
 .barLabel {
+  position: relative;
+  z-index: 1;
   min-width: 0;
   padding: 8px 0;
   color: var(--ink);
@@ -363,6 +449,7 @@
 
 .track {
   position: relative;
+  z-index: 1;
   align-self: stretch;
   min-height: 36px;
 }
@@ -412,6 +499,8 @@
 }
 
 .value {
+  position: relative;
+  z-index: 1;
   color: var(--ink);
   text-align: right;
   white-space: nowrap;
@@ -464,12 +553,12 @@
 .axisTitle {
   grid-column: 1 / -1;
   justify-self: end;
-  padding-top: 2px;
+  padding-top: 4px;
 }
 
 .barHeader {
   position: relative;
-  height: 26px;
+  height: 28px;
 }
 
 .headerMark {
@@ -489,60 +578,186 @@
   transform: translateX(calc(-100% + 8px));
 }
 
-.spacer {
-  min-height: 0;
-}
-
-/* Stacked bars put each label above its bar, as wide as the figure, and the
-   grid and reference rules continue up through the label rows. "narrow"
-   stacks only below 480px of figure width. */
+/* Stacked rows: the label and its value share one line above a full-width
+   track, and the grid continues up through that line behind knocked-out text.
+   "narrow" stacks only below 480px of figure width. */
 .bars[data-stack="always"] {
-  grid-template-columns: minmax(0, 1fr) minmax(max-content, var(--value-w, 5.5rem));
+  grid-template-columns: minmax(0, 1fr);
 }
 
-.bars[data-stack="always"] > .barLabel {
-  position: relative;
-  z-index: 1;
+.bars[data-stack="always"] > .row {
+  grid-template-columns: minmax(0, 1fr) auto;
+  grid-template-rows: auto auto;
+  column-gap: 16px;
+}
+
+.bars[data-stack="always"] > .row > .lines {
+  grid-row: 1 / 3;
   grid-column: 1 / -1;
-  height: 29px;
-  padding: 10px 0 0;
+}
+
+.bars[data-stack="always"] > .row > .barLabel,
+.bars[data-stack="always"] > .row > .value {
+  grid-row: 1;
+  align-self: end;
+  padding: 12px 0 2px;
+}
+
+.bars[data-stack="always"] > .row > .barLabel {
+  grid-column: 1;
+}
+
+.bars[data-stack="always"] > .row > .value {
+  grid-column: 2;
+}
+
+.bars[data-stack="always"] > .row > .track {
+  grid-row: 2;
+  grid-column: 1 / -1;
+  min-height: 32px;
+}
+
+.bars[data-stack="always"] > .row > .barHeader,
+.bars[data-stack="always"] > .row > .axis {
+  grid-column: 1 / -1;
+}
+
+.bars[data-stack="always"] .labelText,
+.bars[data-stack="always"] .value > * {
+  background: var(--page);
+  box-decoration-break: clone;
+  -webkit-box-decoration-break: clone;
 }
 
 .bars[data-stack="always"] .labelText {
   padding-right: 8px;
-  background: var(--page);
 }
 
-.bars[data-stack="always"] > .spacer {
-  display: none;
+.bars[data-stack="always"] .value > * {
+  padding-left: 8px;
 }
 
-.bars[data-stack="always"] .track > .gridX,
-.bars[data-stack="always"] .track > .rule {
-  top: -29px;
-}
-
-.bars[data-stack="always"] .track {
-  min-height: 34px;
+.bars[data-stack="always"] .value small {
+  display: inline;
+  margin-left: 0;
 }
 
 @container figure (max-width: 480px) {
   .bars[data-stack="narrow"] {
-    grid-template-columns: minmax(0, 1fr) minmax(max-content, var(--value-w, 5.5rem));
+    grid-template-columns: minmax(0, 1fr);
   }
 
-  .bars[data-stack="narrow"] > .barLabel {
+  .bars[data-stack="narrow"] > .row {
+    grid-template-columns: minmax(0, 1fr) auto;
+    grid-template-rows: auto auto;
+    column-gap: 16px;
+  }
+
+  .bars[data-stack="narrow"] > .row > .lines {
+    grid-row: 1 / 3;
     grid-column: 1 / -1;
-    padding: 10px 0 0;
   }
 
-  .bars[data-stack="narrow"] > .spacer {
-    display: none;
+  .bars[data-stack="narrow"] > .row > .barLabel,
+  .bars[data-stack="narrow"] > .row > .value {
+    grid-row: 1;
+    align-self: end;
+    padding: 12px 0 2px;
   }
 
-  .bars[data-stack="narrow"] .track {
-    min-height: 34px;
+  .bars[data-stack="narrow"] > .row > .barLabel {
+    grid-column: 1;
   }
+
+  .bars[data-stack="narrow"] > .row > .value {
+    grid-column: 2;
+  }
+
+  .bars[data-stack="narrow"] > .row > .track {
+    grid-row: 2;
+    grid-column: 1 / -1;
+    min-height: 32px;
+  }
+
+  .bars[data-stack="narrow"] > .row > .barHeader,
+  .bars[data-stack="narrow"] > .row > .axis {
+    grid-column: 1 / -1;
+  }
+
+  .bars[data-stack="narrow"] .labelText,
+  .bars[data-stack="narrow"] .value > * {
+    background: var(--page);
+    box-decoration-break: clone;
+    -webkit-box-decoration-break: clone;
+  }
+
+  .bars[data-stack="narrow"] .labelText {
+    padding-right: 8px;
+  }
+
+  .bars[data-stack="narrow"] .value > * {
+    padding-left: 8px;
+  }
+
+  .bars[data-stack="narrow"] .value small {
+    display: inline;
+  }
+}
+
+/* ---------- Schematic drawings ---------- */
+.schematic {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  min-width: 0;
+  color: var(--ink);
+  font-size: var(--type-label);
+  line-height: var(--label-leading);
+}
+
+.schematicArea {
+  position: relative;
+  align-self: stretch;
+  margin: var(--pt, 12px) var(--pr, 0) var(--pb, 30px) var(--pl, 0);
+}
+
+.schematicArt {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+}
+
+.schematicArt :is(path, line, polyline, polygon, rect, circle) {
+  vector-effect: non-scaling-stroke;
+}
+
+.schematicArt :is(line, polyline, path:not([data-fill])) {
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.5;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.schematicArt [data-dash] {
+  stroke-dasharray: 4 4;
+  stroke-linecap: butt;
+}
+
+.schematicArt [data-head] {
+  fill: currentColor;
+  stroke: none;
+}
+
+.schematicArt [data-axis] {
+  stroke: var(--rule-strong);
+  stroke-width: 1;
+}
+
+.schematicXTitle {
+  align-self: flex-end;
 }
 
 /* ---------- Diagrams ---------- */
@@ -638,7 +853,7 @@
 }
 
 .figure[data-reveal="pending"] .track {
-  clip-path: inset(-40px 100% -12px -12px);
+  clip-path: inset(-12px 100% -12px -12px);
 }
 
 .figure[data-reveal="pending"] .grow {
@@ -655,7 +870,7 @@
 }
 
 .figure[data-reveal="in"] .track {
-  clip-path: inset(-40px -12px -12px -12px);
+  clip-path: inset(-12px -12px -12px -12px);
   transition: clip-path 800ms var(--ease-out);
 }
 
