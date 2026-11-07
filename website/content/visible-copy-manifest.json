@@ -6,10 +6,10 @@
   ],
   "routes": {
     "/": {
-      "textSha256": "97bdfdb6513b2bdc98951607a53c4c17e223b6c7e490a4563750eb68c8e95a83",
-      "characterCount": 3079,
-      "wordCount": 428,
-      "preview": "Skip to Main Content Theodore Ouyang Duke Alumnus Sequoia Fellow Theodore Ouyang About Experience Thinking Mathematically Working in AI Mathematics is how I mak",
+      "textSha256": "1c3c8c01f8e4f7258c516a18a74f18740c7fcf5546dab7d582b93a648bdf7df2",
+      "characterCount": 3084,
+      "wordCount": 429,
+      "preview": "Skip to Main Content Theodore Ouyang Duke Alumnus Sequoia Fellow Theodore Ouyang About Experience Blog Thinking Mathematically Working in AI Mathematics is how ",
       "altTexts": [],
       "ariaLabels": [
         "Theodore Ouyang home",
@@ -764,10 +764,10 @@
       "formulaCount": 271
     },
     "/experience/": {
-      "textSha256": "c5a8982f90387eafdf23a5966191fd3b208272bff1220a6594f84a5f849aa24c",
-      "characterCount": 8933,
-      "wordCount": 1175,
-      "preview": "Skip to Main Content Theodore Ouyang About Experience Experience: Areas of Focus AI Research and Engineering Data Science Legal Research and Policy Analysis Fin",
+      "textSha256": "c029f18f06ea96ef77a412adbfd9c64989173ff35d2a920e1000166bdbd55175",
+      "characterCount": 8938,
+      "wordCount": 1176,
+      "preview": "Skip to Main Content Theodore Ouyang About Experience Blog Experience: Areas of Focus AI Research and Engineering Data Science Legal Research and Policy Analysi",
       "altTexts": [],
       "ariaLabels": [
         "Theodore Ouyang home",
@@ -1650,6 +1650,54 @@
         "openGraphUrl": "https://www.theodoreoy.com/experience/stem-olympiad-competitions/",
         "twitterTitle": "The High School Attached to Hunan Normal University: Advanced Olympiad Training, Awards, and Peer Mentoring",
         "twitterDescription": "I trained in physics and mathematics Olympiads and served as a peer mentor in the school's nationally leading physics competition program, combining advanced study with collaborative problem solving."
+      }
+    },
+    "/blog/": {
+      "textSha256": "2e368cc9d9b67719a60d3f59a0f0543444dde14acc3845cfb28fe680832d6dd5",
+      "characterCount": 309,
+      "wordCount": 52,
+      "preview": "Skip to Main Content Theodore Ouyang About Experience Blog Blog The Étude Sky November 7, 2026 Chopin’s twenty-four études charted as stars on the circle of fif",
+      "altTexts": [],
+      "ariaLabels": [
+        "Theodore Ouyang home",
+        "Primary navigation",
+        "Read more about The Étude Sky"
+      ],
+      "metadata": {
+        "title": "Blog | Theodore Ouyang",
+        "description": "Writing on the works I make and how each one is built.",
+        "canonical": "https://www.theodoreoy.com/blog/",
+        "openGraphTitle": "Blog",
+        "openGraphDescription": "Writing on the works I make and how each one is built.",
+        "openGraphUrl": "https://www.theodoreoy.com/blog/",
+        "twitterTitle": "Blog",
+        "twitterDescription": "Writing on the works I make and how each one is built."
+      }
+    },
+    "/blog/the-etude-sky/": {
+      "textSha256": "feba8311ce19b8ef94259011470e03e39673b63f7be68f76891b4cbee0f6185c",
+      "characterCount": 3112,
+      "wordCount": 584,
+      "preview": "Skip to Main Content Theodore Ouyang Back to Blog The Étude Sky By Theodore Ouyang November 7, 2026 The Étude Sky Chopin’s twenty-four études, charted as stars ",
+      "altTexts": [
+        "The twenty-four plates of The Étude Sky, Op. 10 in the upper two rows and Op. 25 in the lower two",
+        "Twenty-four stars on the circle of fifths, colored by key and joined into two asterisms",
+        "A watercolor polar plot of Op. 10 No. 12 inside a gilded astrolabe ring",
+        "Twelve rows of watercolor strokes, one row for each pitch class"
+      ],
+      "ariaLabels": [
+        "Theodore Ouyang home",
+        "Parent navigation"
+      ],
+      "metadata": {
+        "title": "The Étude Sky | Theodore Ouyang",
+        "description": "Chopin’s twenty-four études charted as stars on the circle of fifths, with a plate drawn from each recording and a watercolor handscroll that unrolls as you listen.",
+        "canonical": "https://www.theodoreoy.com/blog/the-etude-sky/",
+        "openGraphTitle": "The Étude Sky",
+        "openGraphDescription": "Chopin’s twenty-four études charted as stars on the circle of fifths, with a plate drawn from each recording and a watercolor handscroll that unrolls as you listen.",
+        "openGraphUrl": "https://www.theodoreoy.com/blog/the-etude-sky/",
+        "twitterTitle": "The Étude Sky",
+        "twitterDescription": "Chopin’s twenty-four études charted as stars on the circle of fifths, with a plate drawn from each recording and a watercolor handscroll that unrolls as you listen."
       }
     }
   }
