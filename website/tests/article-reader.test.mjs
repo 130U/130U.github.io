@@ -1,5 +1,5 @@
 import assert from "node:assert/strict";
-import { readFile } from "node:fs/promises";
+import { readFile, readdir } from "node:fs/promises";
 import test from "node:test";
 
 const ORIGIN = "https://www.theodoreoy.com";
@@ -71,9 +71,10 @@ function exportedPages() {
   return pagesPromise ??= (async () => {
     const sitemap = await readFile(new URL("../out/sitemap.xml", import.meta.url), "utf8");
     const routes = [...sitemap.matchAll(/<loc>([^<]+)<\/loc>/gu)].map((match) => new URL(decodeHtml(match[1])).pathname);
-    assert.equal(routes.length, 27, "About, Coursework, Experience, eleven full articles, ten experience detail pages, Blog and two posts remain canonical.");
+    const posts = (await readdir(new URL("../content/blog/", import.meta.url))).filter((file) => file.endsWith(".md"));
+    assert.equal(routes.length, 25 + posts.length, "About, Coursework, Experience, eleven full articles, ten experience detail pages, Blog and one page per post remain canonical.");
     routes.push("/architecture/");
-    assert.equal(new Set(routes).size, 28, "Audit every canonical page and the architecture viewer.");
+    assert.equal(new Set(routes).size, 26 + posts.length, "Audit every canonical page and the architecture viewer.");
     const entries = await Promise.all(routes.map(async (route) => {
       const html = await readFile(new URL(`../out/${route.replace(/^\//u, "")}index.html`, import.meta.url), "utf8");
       const tree = readTree(html);
@@ -84,7 +85,7 @@ function exportedPages() {
   })();
 }
 
-test("33 exported pages contain no encoding corruption, exposed math markup, duplicate IDs or broken local anchors", async () => {
+test("every exported page is free of encoding corruption, exposed math markup, duplicate IDs and broken local anchors", async () => {
   const pages = await exportedPages();
   for (const [route, page] of pages) {
     const text = readable(page.tree);

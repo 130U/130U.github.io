@@ -1653,14 +1653,15 @@
       }
     },
     "/blog/": {
-      "textSha256": "87bf459dab39c47571b3e35a46cffcf17b230751644b384d4931c87e93014443",
-      "characterCount": 542,
-      "wordCount": 95,
-      "preview": "Skip to Main Content Theodore Ouyang About Experience Blog Blog The Étude Sky November 7, 2026 Chopin's twenty-four études charted as stars on the circle of fif",
+      "textSha256": "e6177421378f430f09c181746c2c086b7549f975f9b0f90095ae4b4c21007c7b",
+      "characterCount": 740,
+      "wordCount": 127,
+      "preview": "Skip to Main Content Theodore Ouyang About Experience Blog Blog Landscape Photography November 8, 2026 Ten landscapes of Alaska and Yellowstone, each holding wa",
       "altTexts": [],
       "ariaLabels": [
         "Theodore Ouyang home",
         "Primary navigation",
+        "Read more about Landscape Photography",
         "Read more about The Étude Sky",
         "Read more about As If Leaving, As If Returning"
       ],
@@ -1699,6 +1700,32 @@
         "openGraphUrl": "https://www.theodoreoy.com/blog/as-if-returning/",
         "twitterTitle": "As If Leaving, As If Returning",
         "twitterDescription": "A new arrangement of the Der Freischütz fantasy beneath a Song dynasty handscroll that unrolls as you listen, with an essay on beauty across time and aesthetics in the age of AI."
+      }
+    },
+    "/blog/landscape-photography/": {
+      "textSha256": "1f29d24704d6e6fdf19956f680436db45f037dcd0c649663c952f31b4d2209e0",
+      "characterCount": 2757,
+      "wordCount": 503,
+      "preview": "Skip to Main Content Theodore Ouyang Back to Blog Landscape Photography By Theodore Ouyang November 8, 2026 Landscape Photography Ten landscapes of Alaska and Y",
+      "altTexts": [
+        "The cover of Landscape Photography: the name Theodore Ouyang written across the sky above a snowy ridge, a sunset horizon, and winding tidewater",
+        "Ten landscapes in two rows of five, seven of Alaska followed by three of Yellowstone",
+        "A blue tidewater glacier at dawn beside a deep blue hot spring ringed in orange",
+        "Snow-covered Denali glowing in low sun above a braided river and red frosted tundra"
+      ],
+      "ariaLabels": [
+        "Theodore Ouyang home",
+        "Parent navigation"
+      ],
+      "metadata": {
+        "title": "Landscape Photography | Theodore Ouyang",
+        "description": "Ten landscapes of Alaska and Yellowstone, each holding water in a different state, with a reading of its light and structure set beside every image.",
+        "canonical": "https://www.theodoreoy.com/blog/landscape-photography/",
+        "openGraphTitle": "Landscape Photography",
+        "openGraphDescription": "Ten landscapes of Alaska and Yellowstone, each holding water in a different state, with a reading of its light and structure set beside every image.",
+        "openGraphUrl": "https://www.theodoreoy.com/blog/landscape-photography/",
+        "twitterTitle": "Landscape Photography",
+        "twitterDescription": "Ten landscapes of Alaska and Yellowstone, each holding water in a different state, with a reading of its light and structure set beside every image."
       }
     },
     "/blog/the-etude-sky/": {

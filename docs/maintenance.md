@@ -56,9 +56,9 @@ The page presents all 49 courses in four subject groups.
 Every URL belongs to About (`/`, `/coursework/`, `/[paper]/`), Experience
 (`/experience/`, `/experience/[slug]/`) or Blog (`/blog/`, `/blog/[slug]/`).
 `app/experience/[slug]/page.tsx` renders an entry as an AI article, a legal article,
-or a detail page from its category. The export holds twenty-seven content
+or a detail page from its category. The export holds the content
 routes (About, Coursework, three Selected Research articles, Experience and its eighteen
-entries, Blog, and two posts), the architecture viewer, and the 404 page. A work that a
+entries, Blog, and one page per post), the architecture viewer, and the 404 page. A work that a
 post presents is published on this domain at its own address named after the work, as
 The Étude Sky is at `/etude-sky/`.
 
