@@ -1,6 +1,6 @@
 ---
 title: The Étude Sky
-date: 2026-11-07
+date: 2026-06-01
 summary: Chopin's twenty-four études charted as stars on the circle of fifths, with a plate drawn from each recording and a watercolor handscroll that unrolls as you listen.
 hero: /assets/blog/the-etude-sky/plates.jpg
 heroAlt: The twenty-four plates of The Étude Sky, Op. 10 in the upper two rows and Op. 25 in the lower two
