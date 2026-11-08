@@ -58,9 +58,9 @@ Every URL belongs to About (`/`, `/coursework/`, `/[paper]/`), Experience
 `app/experience/[slug]/page.tsx` renders an entry as an AI article, a legal article,
 or a detail page from its category. `app/lib/content/forwarded-paths.ts` lists
 addresses outside the three sections and the page each one forwards to from the 404
-page; add an entry there when a public URL changes. The export holds twenty-six content
+page; add an entry there when a public URL changes. The export holds twenty-seven content
 routes (About, Coursework, three Selected Research articles, Experience and its eighteen
-entries, Blog, and one post), the architecture viewer, and the 404 page. A work that a
+entries, Blog, and two posts), the architecture viewer, and the 404 page. A work that a
 post presents is published on this domain at its own address named after the work, as
 The Étude Sky is at `/etude-sky/`.
 

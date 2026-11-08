@@ -1653,15 +1653,16 @@
       }
     },
     "/blog/": {
-      "textSha256": "0c3a7f366b1ace3a45f768de315a4fbf1fc127b96d8ea43e5383b292862c5e4f",
-      "characterCount": 309,
-      "wordCount": 52,
+      "textSha256": "87bf459dab39c47571b3e35a46cffcf17b230751644b384d4931c87e93014443",
+      "characterCount": 542,
+      "wordCount": 95,
       "preview": "Skip to Main Content Theodore Ouyang About Experience Blog Blog The Étude Sky November 7, 2026 Chopin's twenty-four études charted as stars on the circle of fif",
       "altTexts": [],
       "ariaLabels": [
         "Theodore Ouyang home",
         "Primary navigation",
-        "Read more about The Étude Sky"
+        "Read more about The Étude Sky",
+        "Read more about As If Leaving, As If Returning"
       ],
       "metadata": {
         "title": "Blog | Theodore Ouyang",
@@ -1672,6 +1673,32 @@
         "openGraphUrl": "https://www.theodoreoy.com/blog/",
         "twitterTitle": "Blog",
         "twitterDescription": "Writing on the works I make and how each one is built."
+      }
+    },
+    "/blog/as-if-returning/": {
+      "textSha256": "fd7ec922ee4b1ea0d7b36fb4dd6f03c3397eb1a5a41258418de7ecc8ad9e37d6",
+      "characterCount": 3442,
+      "wordCount": 617,
+      "preview": "Skip to Main Content Theodore Ouyang Back to Blog As If Leaving, As If Returning By Theodore Ouyang June 8, 2025 As If Leaving, As If Returning The Der Freischü",
+      "altTexts": [
+        "A section of the Nymph of the Luo River handscroll above the ink shadow of the recording",
+        "Cao Zhi's carriage and outriders crossing the riverbank at the end of the handscroll",
+        "The spectrum of the recording drawn as a long band of ink, with four vermilion marks along its upper edge",
+        "A dark ravine with a skeleton rider overhead and two huntsmen kneeling at a magic circle"
+      ],
+      "ariaLabels": [
+        "Theodore Ouyang home",
+        "Parent navigation"
+      ],
+      "metadata": {
+        "title": "As If Leaving, As If Returning | Theodore Ouyang",
+        "description": "A new arrangement of the Der Freischütz fantasy beneath a Song dynasty handscroll that unrolls as you listen, with an essay on beauty across time and aesthetics in the age of AI.",
+        "canonical": "https://www.theodoreoy.com/blog/as-if-returning/",
+        "openGraphTitle": "As If Leaving, As If Returning",
+        "openGraphDescription": "A new arrangement of the Der Freischütz fantasy beneath a Song dynasty handscroll that unrolls as you listen, with an essay on beauty across time and aesthetics in the age of AI.",
+        "openGraphUrl": "https://www.theodoreoy.com/blog/as-if-returning/",
+        "twitterTitle": "As If Leaving, As If Returning",
+        "twitterDescription": "A new arrangement of the Der Freischütz fantasy beneath a Song dynasty handscroll that unrolls as you listen, with an essay on beauty across time and aesthetics in the age of AI."
       }
     },
     "/blog/the-etude-sky/": {

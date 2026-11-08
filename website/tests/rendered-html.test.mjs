@@ -61,10 +61,10 @@ const RESEARCH_SLUGS = [
 const RESEARCH_ROUTES = RESEARCH_SLUGS.map((slug) => `/${slug}/`);
 const AI_ROUTES = AI_PROJECT_SLUGS.map((slug) => `${EXPERIENCE_ROUTE}${slug}/`);
 const BLOG_ROUTE = "/blog/";
-const BLOG_SLUGS = ["the-etude-sky"];
+const BLOG_SLUGS = ["as-if-returning", "the-etude-sky"];
 const BLOG_POST_ROUTES = BLOG_SLUGS.map((slug) => `${BLOG_ROUTE}${slug}/`);
 // A work linked from a post is published on this domain at its own address.
-const WORK_ADDRESSES = ["/etude-sky/"];
+const WORK_ADDRESSES = ["/as-if-returning/", "/etude-sky/"];
 const ROUTES = [
   "/",
   "/coursework/",
@@ -104,6 +104,11 @@ const DETAIL_PARENTS = new Map([
   ...BLOG_SLUGS.map((slug) => [`${BLOG_ROUTE}${slug}/`, ["Back to Blog", `${BLOG_ROUTE}#${slug}`]]),
 ]);
 const EXPECTED_PUBLIC_ASSETS = [
+  "assets/blog/as-if-returning/departure.jpg",
+  "assets/blog/as-if-returning/og.jpg",
+  "assets/blog/as-if-returning/scroll.jpg",
+  "assets/blog/as-if-returning/shadow.jpg",
+  "assets/blog/as-if-returning/wolfs-glen.jpg",
   "assets/blog/the-etude-sky/chart.jpg",
   "assets/blog/the-etude-sky/handscroll-op10-12.jpg",
   "assets/blog/the-etude-sky/og.jpg",
@@ -418,8 +423,8 @@ test("every route keeps canonical metadata, CSP, and navigation appropriate to i
   }
 });
 
-test("all 23 detail pages keep their wordmark and a direct parent link outside the mobile menu", async () => {
-  assert.equal(DETAIL_PARENTS.size, 23);
+test("all 24 detail pages keep their wordmark and a direct parent link outside the mobile menu", async () => {
+  assert.equal(DETAIL_PARENTS.size, 24);
   const targetPages = new Map();
   for (const [route, expectedParent] of DETAIL_PARENTS) {
     const html = await routeHtml(route);
