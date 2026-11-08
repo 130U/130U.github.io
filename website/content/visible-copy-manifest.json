@@ -22,13 +22,13 @@
       ],
       "metadata": {
         "title": "Theodore Ouyang",
-        "description": "Theodore Ouyang makes high-stakes conclusions verifiable across derivative pricing, frontier AI evaluation, and law. Duke alumnus and Sequoia Fellow.",
+        "description": "Theodore Ouyang makes high-stakes conclusions verifiable across derivative pricing, frontier AI evaluation, and law. Duke Alumnus and Sequoia Fellow.",
         "canonical": "https://www.theodoreoy.com/",
         "openGraphTitle": "Theodore Ouyang",
-        "openGraphDescription": "Theodore Ouyang makes high-stakes conclusions verifiable across derivative pricing, frontier AI evaluation, and law. Duke alumnus and Sequoia Fellow.",
+        "openGraphDescription": "Theodore Ouyang makes high-stakes conclusions verifiable across derivative pricing, frontier AI evaluation, and law. Duke Alumnus and Sequoia Fellow.",
         "openGraphUrl": "https://www.theodoreoy.com/",
         "twitterTitle": "Theodore Ouyang",
-        "twitterDescription": "Theodore Ouyang makes high-stakes conclusions verifiable across derivative pricing, frontier AI evaluation, and law. Duke alumnus and Sequoia Fellow."
+        "twitterDescription": "Theodore Ouyang makes high-stakes conclusions verifiable across derivative pricing, frontier AI evaluation, and law. Duke Alumnus and Sequoia Fellow."
       }
     },
     "/coursework/": {
@@ -54,7 +54,7 @@
       }
     },
     "/critical-dependence-stress-for-portfolio-diversification/": {
-      "textSha256": "e4c0df09a98f692fac9d59ae7f58bb476b5dada2edb3b32cb46cf0382f089376",
+      "textSha256": "faaefbf1845eb8c3b588877bc520ce7769696274de11e036339ae67d3df78b63",
       "characterCount": 76708,
       "wordCount": 11596,
       "preview": "Skip to Main Content Theodore Ouyang Back to Selected Research Critical Dependence Stress for Portfolio Diversification GitHub Full Manuscript Abstract We ask h",
@@ -427,7 +427,7 @@
       "formulaCount": 1021
     },
     "/certified-valuation-arithmetic-asian-options/": {
-      "textSha256": "e9dbbc0002bcce0cd18b5e52ca648728c83dfcd1e9de8443cf9d868dd71b9c2a",
+      "textSha256": "02381af9ed5b6c582a9dc013666eccb687300615cf1f9b70397715b795250f00",
       "characterCount": 48827,
       "wordCount": 7057,
       "preview": "Skip to Main Content Theodore Ouyang Back to Selected Research Certified Valuation of Arithmetic Asian Options GitHub Full Manuscript Abstract We develop finite",
@@ -609,7 +609,7 @@
       "formulaCount": 363
     },
     "/certified-rough-heston-valuation/": {
-      "textSha256": "2667922c7abb48c4c5305afd343b21fd34681510c5d62c6749e2ab7fc8e122fb",
+      "textSha256": "ab10a3231d033e8cf3fdaf1ea8843c180dd9aefe159c32062a93b1fec2cbe5b3",
       "characterCount": 60965,
       "wordCount": 8746,
       "preview": "Skip to Main Content Theodore Ouyang Back to Selected Research Certified Joint Pricing Errors in Rough Heston GitHub Full Manuscript Abstract We give determinis",
@@ -764,8 +764,8 @@
       "formulaCount": 271
     },
     "/experience/": {
-      "textSha256": "c029f18f06ea96ef77a412adbfd9c64989173ff35d2a920e1000166bdbd55175",
-      "characterCount": 8938,
+      "textSha256": "7c4caab9c7835f98c0ff0a83f2bdf15ace5d6a7244e089bc7f0c3313ba2426a6",
+      "characterCount": 8940,
       "wordCount": 1176,
       "preview": "Skip to Main Content Theodore Ouyang About Experience Blog Experience: Areas of Focus AI Research and Engineering Data Science Legal Research and Policy Analysi",
       "altTexts": [],
@@ -804,7 +804,7 @@
       }
     },
     "/experience/statistical-inference-and-resource-allocation-in-expert-data-production/": {
-      "textSha256": "ecbc60e36bd5c25dd80ebf292dd0c21c9da0aacc414739ceb3b5c36729237754",
+      "textSha256": "23e54d5129e2a9f887b52765d429990c65f9aeb9499ae43bc3b06161970dc5c7",
       "characterCount": 24865,
       "wordCount": 3546,
       "preview": "Skip to Main Content Theodore Ouyang Back to Experience Large-Scale Domain Expert Feedback Governance and Adaptive Review Organization Duke University × Leading",
@@ -874,7 +874,7 @@
       "formulaCount": 164
     },
     "/experience/task-validity-in-financial-synthetic-data/": {
-      "textSha256": "d760a07e9c16d9c5d54744c6e416682e91966a79a6c1e3bf8222f44e4688a70b",
+      "textSha256": "d2a9dffae6df93b301ba148c905039f7aa9c8e7b58f14d697583a38c148d36b0",
       "characterCount": 24043,
       "wordCount": 3299,
       "preview": "Skip to Main Content Theodore Ouyang Back to Experience Financial Task Design and Synthetic Data Engineering Organization Duke University × Leading Foundation M",
@@ -929,7 +929,7 @@
       "formulaCount": 137
     },
     "/experience/verification-and-supervision-in-scientific-reasoning-tasks/": {
-      "textSha256": "d958520d5a4d80f72651cddfa5e96187146b1bc7d35dd973fbc75bfc8059dcc6",
+      "textSha256": "3f0f88c15db8081e700848c363e5a76e1f0e48e1ba6a88e782b4103c4e2e25cb",
       "characterCount": 24274,
       "wordCount": 3465,
       "preview": "Skip to Main Content Theodore Ouyang Back to Experience General Reasoning Evaluation and Layered Verification Organization Duke University × Frontier AI Researc",
@@ -1000,7 +1000,7 @@
       "formulaCount": 143
     },
     "/experience/evidence-uncertainty-and-decision-guarantees-in-investment-research/": {
-      "textSha256": "fbc81c19c807b34e2af85e05369c615a239a00e6c57dedb3e99fb6f8960cc3df",
+      "textSha256": "d849ccb35eb089f0c2995da1920c93907c1189b83a5cf8c9bd9780e32beb8d5e",
       "characterCount": 18902,
       "wordCount": 2778,
       "preview": "Skip to Main Content Theodore Ouyang Back to Experience Evidence Verification and Robust Comparison in Investment Research Organization Duke University × Leadin",

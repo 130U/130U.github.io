@@ -89,7 +89,8 @@ the page's H1.
 
 The desktop frame is capped at 1440px and divided into 15 columns: a three-column
 sticky navigation rail and a twelve-column content field. Tablets between 768px and
-1024px use 12 columns. Horizontal gutters are 64px on desktop, 32px on tablets, and 20px
+1024px use 12 columns, with content running to the right gutter so portrait iPads keep
+a full line of prose. Horizontal gutters are 64px on desktop, 32px on tablets, and 20px
 on phones. The content field reserves one internal track for margin indices and aligns
 headings and prose to the reading track. Structural column guides are decorative,
 hidden from assistive technology, and omitted on phones.
@@ -106,8 +107,9 @@ fractional viewport widths continuously.
 
 `--reading-measure` (36rem, about seventy characters of Source Serif 4 at the reading
 size) caps every narrative container: introductions, standfirsts, stacked ledger prose,
-detail pages, captions, posts, and article reading columns. Lines run from about 32
-characters on a 320px phone to about 70 on a desk. Paragraphs wrap ragged-right with no
+detail pages, captions, posts, and article reading columns. Lines run from about 30
+characters on a 320px phone and 50 to 60 on a portrait iPad to about 70 in a full reading
+column; prose on the hanging axis holds 45 to 52. Paragraphs wrap ragged-right with no
 forced breaks, and long unbroken strings wrap in an emergency.
 
 ### Hanging layout
@@ -125,7 +127,8 @@ split lands on the column-12 guide.
 
 One faint, unfilled 1px frame holds each group of content: a section's entries, the
 section index, the record strip, contact details, a course list. Frames have square
-corners, no fill, no shadow, and `--frame-pad` (44px) of room inside. Entries of one
+corners, no fill, no shadow, and `--frame-pad` (44px, easing to 32px at 1200px) of room
+inside. Entries of one
 section share a frame and are separated by space; frames never stack with a gap between
 them.
 
@@ -298,8 +301,8 @@ draws in once as it scrolls into view, except under reduced motion. Every plotte
 restates the manuscript, and conceptual figures carry no numeric scale. Titles,
 captions, legends, and axis names use sentence case; view switches use title case.
 Captions state what the figure shows in the article's own terms. The dependence
-article's four manuscript figures are drawn the same way from the formulas behind the
-original images, with the manuscript's captions below them.
+article's four manuscript figures are drawn the same way from the manuscript's formulas,
+with its captions below them.
 
 ### Research tables
 

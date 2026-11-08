@@ -17,7 +17,7 @@ Use Node.js 24 to match deployment. Run application commands from `website/`, or
 | `website/content/` | Maintained content, research source inputs, provenance, and integrity contracts |
 | `website/public/` | Assets included in the static export |
 | `website/source-assets/` | Editable brand masters |
-| `website/scripts/`, `website/tests/`, `website/tooling/` | Import, build, verification, and lint utilities |
+| `website/scripts/`, `website/tests/` | Import, build, and verification utilities |
 
 `website/.gitignore` excludes installed dependencies, build output, caches, logs,
 generated Next.js types, and TypeScript build metadata. Keep local screenshots,
@@ -56,9 +56,7 @@ The page presents all 49 courses in four subject groups.
 Every URL belongs to About (`/`, `/coursework/`, `/[paper]/`), Experience
 (`/experience/`, `/experience/[slug]/`) or Blog (`/blog/`, `/blog/[slug]/`).
 `app/experience/[slug]/page.tsx` renders an entry as an AI article, a legal article,
-or a detail page from its category. `app/lib/content/forwarded-paths.ts` lists
-addresses outside the three sections and the page each one forwards to from the 404
-page; add an entry there when a public URL changes. The export holds twenty-seven content
+or a detail page from its category. The export holds twenty-seven content
 routes (About, Coursework, three Selected Research articles, Experience and its eighteen
 entries, Blog, and two posts), the architecture viewer, and the 404 page. A work that a
 post presents is published on this domain at its own address named after the work, as
@@ -78,10 +76,10 @@ are sized for a 2× display of the 612px column.
 
 A work presented by a post, such as The Étude Sky (`130U/etude-sky`), is a separate
 repository published by GitHub Pages under this domain at `/<repository>/`; this
-repository links to it and never builds it. When adding a post, add its route to
-`scripts/verify-visible-copy.mjs`, its slug to `BLOG_SLUGS` and its images to
-`EXPECTED_PUBLIC_ASSETS` in `tests/rendered-html.test.mjs`, and refresh the visible-copy
-manifest and the `app/lib/content/routes.ts` hash only if that file changes.
+repository links to it and never builds it. Routes, the sitemap, and the tests follow
+the files in `content/blog/`, and every image in `public/assets/blog/` must be cited by
+its post. After adding a post, refresh the visible-copy manifest with
+`node scripts/verify-visible-copy.mjs --emit > content/visible-copy-manifest.json`.
 
 ### AI research
 
@@ -141,11 +139,10 @@ edition for wording; rerun the importers only when the upstream manuscript chang
 reconcile the edition with the new import.
 
 The dependence source tree includes supporting TeX inputs needed to resolve
-cross-references. Its four PNG figures are frozen source evidence and are not
-published: the article draws them natively from their formulas (see the article figures
-under Shared rendering and extension). The readers link appendices and supplementary
-proofs to the pinned full manuscripts and return to the corresponding About research
-entry.
+cross-references. The article draws its four figures natively from their formulas (see
+the article figures under Shared rendering and extension). The readers link appendices
+and supplementary proofs to the pinned full manuscripts and return to the corresponding
+About research entry.
 
 ### Legal research
 
@@ -225,12 +222,6 @@ for missing routes, duplicate slugs, and mismatched AI or legal manuscript route
 alt text, and ARIA labels. Review intended content changes before updating either
 contract. Presentation changes preserve approved prose and formula annotations.
 Keep independent route, link, figure, and mathematical checks when updating a loader.
-
-`tooling/directory-glob/` adapts pinned Tinyglobby for Next.js lint directory
-discovery. Its override is scoped to the lint plugin; preserve its directory-path
-behavior and consumer tests when changing dependencies. `tooling/minimatch-compat/`
-routes the lint plugins' `minimatch` calls to the patched v11 engine; its README names
-the advisory it addresses and the condition for removing it.
 
 ## Assets and static assembly
 

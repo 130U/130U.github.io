@@ -226,9 +226,9 @@ export const tableEmphasis: Readonly<Record<string, readonly TableEmphasis[]>> =
 };
 
 // Manuscript figures drawn natively, keyed by the image path the manuscript
-// cites; the site publishes no image file for them. Each drawing evaluates the
-// formulas that produced the manuscript image (130U/mathematical-finance-project
-// at the pinned commit: code/generate_mechanism_figures.py and
+// cites. Each drawing evaluates the manuscript's formulas
+// (130U/mathematical-finance-project at the pinned commit:
+// code/generate_mechanism_figures.py and
 // new-computations/plot_profiles_and_flows.py); `evidence` ties its labels and
 // plotted functions to the article text, and the build fails if any is missing.
 export const manuscriptFigures: Readonly<Record<string, { figure: string; evidence: string[] }>> = {

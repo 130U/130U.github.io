@@ -10,12 +10,13 @@
   --rule-strong: rgba(0, 0, 0, 0.24);
   --panel: #fcfbfa;
   /* Frames: one faint, unfilled edge around each group of content, with room
-     inside; divisions inside a frame are dashed hairlines. */
+     inside that eases from 44px at 1440px to 32px at 1200px; divisions inside a
+     frame are dashed hairlines. */
   --frame: rgba(0, 0, 0, 0.08);
   --dash: rgba(0, 0, 0, 0.15);
   --dash-x: repeating-linear-gradient(to right, var(--dash) 0 4px, transparent 4px 8px);
   --dash-y: repeating-linear-gradient(to bottom, var(--dash) 0 4px, transparent 4px 8px);
-  --frame-pad: 44px;
+  --frame-pad: clamp(32px, calc(32px + (100vw - 1200px) * 0.05), 44px);
   --accent: #2200ff;
   /* Article figures: ink and the accent carry the argument, sky marks a second
      series, green marks an exactly known segment, grays hold context, and the
@@ -53,10 +54,11 @@
   --subheading-tracking: -0.006em;
   /* Hanging layout: titles on axis A (4 of 10 columns), prose on axis B (6 of 10).
      The gap belongs to the title cell so axis B lands exactly on a grid line,
-     and prose keeps an inset from the reading-end guide. */
+     and prose keeps an inset from the reading-end guide. Gap and inset narrow
+     with the frame so laptops hold a full line of prose. */
   --hang-columns: minmax(0, 4fr) minmax(0, 6fr);
-  --hang-gap: 40px;
-  --prose-inset: 32px;
+  --hang-gap: clamp(28px, calc(28px + (100vw - 1200px) * 0.05), 40px);
+  --prose-inset: clamp(0px, calc((100vw - 1200px) * 0.1333), 32px);
   --link-underline-offset: 0.18em;
   --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
   --drawer-ease: cubic-bezier(0.32, 0.72, 0, 1);
@@ -724,6 +726,7 @@ button:focus-visible {
 
   .structural-guide-reading-end {
     grid-column: 12;
+    justify-self: end;
   }
 
   .site-rail {
@@ -738,7 +741,11 @@ button:focus-visible {
   }
 
   .content-column > * {
-    grid-column: 2 / span 7;
+    grid-column: 2 / -1;
+  }
+
+  .ledger {
+    padding-inline: 24px;
   }
 
   .site-footer {

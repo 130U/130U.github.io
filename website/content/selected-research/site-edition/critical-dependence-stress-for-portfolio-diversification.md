@@ -1196,7 +1196,7 @@ Characterizing the boundaries between the active and stationary regions of an op
 
 In the compact-box benchmark, a restoration premium can arise from dependence geometry and full marginal conservation even with bounded marginal tails. For unbounded marginals such as integrable Pareto or lognormal laws, the inverse-CDF derivative is unbounded near probability one, so the uniform displacement estimate in the recovery argument would need a tail-weighted substitute. Since one-dimensional $`W_1`$ remains the $`L^1`$ integral of the CDF discrepancy, this loss of a uniform quantile bound does not by itself imply a different restoration-cost exponent. The open problem is to control that integral jointly with the paired-risk error and determine whether the $`\varepsilon^2`$ critical scale persists under suitable tail assumptions. Higher-dimensional projected-flow representations and estimation of critical budgets from loss data raise related questions, alongside recent work on ES estimation under weak tail assumptions [[3](#ref-bartleckstein2026)].
 
-## Appendices and supporting material
+## Appendices and Supporting Material
 
 This page includes the complete abstract, five main sections, all four main-text figures, and references. Technical appendices and declarations are available in the [full manuscript](https://github.com/130U/mathematical-finance-project/blob/3cc4c7e9b36e77027962999b932a1df7972cd2ed/paper/paper.pdf) and the [GitHub repository](https://github.com/130U/mathematical-finance-project).
 

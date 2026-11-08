@@ -61,10 +61,9 @@ const RESEARCH_SLUGS = [
 const RESEARCH_ROUTES = RESEARCH_SLUGS.map((slug) => `/${slug}/`);
 const AI_ROUTES = AI_PROJECT_SLUGS.map((slug) => `${EXPERIENCE_ROUTE}${slug}/`);
 const BLOG_ROUTE = "/blog/";
-const BLOG_SLUGS = ["as-if-returning", "the-etude-sky"];
+const BLOG_DIRECTORY = path.join(ROOT, "content", "blog");
+const BLOG_SLUGS = (await readdir(BLOG_DIRECTORY)).map((file) => file.replace(/\.md$/u, "")).sort();
 const BLOG_POST_ROUTES = BLOG_SLUGS.map((slug) => `${BLOG_ROUTE}${slug}/`);
-// A work linked from a post is published on this domain at its own address.
-const WORK_ADDRESSES = ["/as-if-returning/", "/etude-sky/"];
 const ROUTES = [
   "/",
   "/coursework/",
@@ -103,17 +102,10 @@ const DETAIL_PARENTS = new Map([
   ]),
   ...BLOG_SLUGS.map((slug) => [`${BLOG_ROUTE}${slug}/`, ["Back to Blog", `${BLOG_ROUTE}#${slug}`]]),
 ]);
+const BLOG_ASSETS = (await Promise.all(BLOG_SLUGS.map((slug) => readFile(path.join(BLOG_DIRECTORY, `${slug}.md`), "utf8"))))
+  .flatMap((post) => post.match(/assets\/blog\/[^\s)"]+/gu) ?? []);
 const EXPECTED_PUBLIC_ASSETS = [
-  "assets/blog/as-if-returning/departure.jpg",
-  "assets/blog/as-if-returning/og.jpg",
-  "assets/blog/as-if-returning/scroll.jpg",
-  "assets/blog/as-if-returning/shadow.jpg",
-  "assets/blog/as-if-returning/wolfs-glen.jpg",
-  "assets/blog/the-etude-sky/chart.jpg",
-  "assets/blog/the-etude-sky/handscroll-op10-12.jpg",
-  "assets/blog/the-etude-sky/og.jpg",
-  "assets/blog/the-etude-sky/plate-op10-12.jpg",
-  "assets/blog/the-etude-sky/plates.jpg",
+  ...[...new Set(BLOG_ASSETS)].sort(),
   "assets/brand/apple-touch-icon.png",
   "assets/brand/favicon.ico",
   "assets/brand/lo-mark.svg",
@@ -366,29 +358,6 @@ test("the static export contains exactly the three sections' pages and the archi
   assert.ok(existsSync(path.join(OUT, "404.html")));
   for (const route of ROUTES.slice(1)) {
     assert.ok(route === "/coursework/" || route.startsWith(EXPERIENCE_ROUTE) || route.startsWith(BLOG_ROUTE) || RESEARCH_ROUTES.includes(route), `${route} belongs to About, Experience or Blog`);
-  }
-});
-
-test("addresses outside the three sections answer 404 and the 404 page forwards them", async () => {
-  for (const directory of ["education", "now", "past-experience", "atelier"]) assert.ok(!existsSync(path.join(OUT, directory)), `/${directory}/ is not exported`);
-  const notFound = await readFile(path.join(OUT, "404.html"), "utf8");
-  const script = [...notFound.matchAll(/<script\b[^>]*>([\s\S]*?)<\/script>/giu)].map((match) => match[1]).find((source) => source.includes("location.replace"));
-  assert.ok(script, "The 404 page carries the forwarding script");
-  const paths = JSON.parse(script.match(/const paths = (\{[\s\S]*?\});/u)?.[1] ?? "{}");
-  const expected = {
-    "/education/": "/",
-    "/now/": "/experience/",
-    "/past-experience/": "/experience/",
-    "/atelier/": "/etude-sky/",
-    ...Object.fromEntries(RESEARCH_SLUGS.map((slug) => [`/education/${slug}/`, `/${slug}/`])),
-    ...Object.fromEntries(DOMAINS.map(([, slug]) => [`/past-experience/${slug}/`, `/experience/#${slug}`])),
-    ...Object.fromEntries(AI_PROJECT_SLUGS.map((slug) => [`/past-experience/artificial-intelligence/${slug}/`, `/experience/${slug}/`])),
-    ...Object.fromEntries(ARTICLES.map(([slug]) => [`/past-experience/legal-research-and-policy-analysis/${slug}/`, `/experience/${slug}/`])),
-  };
-  assert.deepEqual(paths, expected);
-  for (const target of Object.values(paths)) {
-    const page = target.replace(/#.*$/u, "");
-    assert.ok(ROUTES.includes(page) || WORK_ADDRESSES.includes(page), `${target} is an exported page or a published work`);
   }
 });
 

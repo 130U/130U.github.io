@@ -55,7 +55,7 @@ function contributions(text) {
 const boundaries = [...source.matchAll(/^# Project (\d{2}): ([a-z0-9-]+)$/gmu)];
 assert.equal(boundaries.length, projects.length, "Expected four complete AI projects");
 const introduction = source.slice(0, boundaries[0].index);
-const intro = one(introduction, /^# AI Research and Engineering\n\n\*\*Author\*\*\n([^\n]+)\n\n\*\*Updated\*\*\n(\d{4}-\d{2}-\d{2})\n\n## (Confidentiality & Disclosure Note)\n\n([^\n]+)\n\n$/gu, "portfolio introduction");
+const intro = one(introduction, /^# AI Research and Engineering\n\n\*\*Author\*\*\n([^\n]+)\n\n\*\*Updated\*\*\n(\d{4}-\d{2}-\d{2})\n\n## (Confidentiality and Disclosure Note)\n\n([^\n]+)\n\n$/gu, "portfolio introduction");
 showcase.aiSourceDocument = sourceDocument;
 const category = showcase.categories.find(({ id }) => id === "01");
 assert.ok(category, "Missing AI showcase category");

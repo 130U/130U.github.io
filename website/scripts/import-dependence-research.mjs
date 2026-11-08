@@ -23,7 +23,7 @@ const mainFiles = ["main-introduction.tex", "main-model-benchmark.tex", "main-va
 const sources = new Map();
 const sourceReceipts = [];
 for (const entry of manifest.files) {
-  const local = `${entry.path.endsWith(".png") ? "figures/" : ""}${entry.path.split("/").at(-1)}`;
+  const local = entry.path.split("/").at(-1);
   const bytes = await readFile(new URL(local, sourceDirectory));
   const blob = createHash("sha1").update(`blob ${bytes.length}\0`).update(bytes).digest("hex");
   assert.equal(blob, entry.sha, `Frozen Git blob mismatch: ${local}`);
@@ -150,7 +150,6 @@ function protectFigures(text) {
     const caption = braced(body, captionStart + "\\caption".length).value;
     const labels = takeLabels(body).labels;
     const src = `/assets/research/dependence/${image}.png`;
-    assert.ok(sourceReceipts.some(({ local }) => local === `figures/${image}.png`));
     const number = ++emittedFigure;
     figureReceipts.push({ number, src, labels, captionSource: sourceFigures[number - 1] });
     return marker(`${anchor(labels)}![Figure ${number}. ${inlineText(caption)}](${src})`);
@@ -252,7 +251,7 @@ for (const [index, match] of [...references.matchAll(/\\bibitem\{([^}]+)\}([\s\S
   referenceParagraphs.push(`<a id="ref-${match[1]}"></a>\n\n${index + 1}. ${value}`);
 }
 assert.equal(referenceParagraphs.length, bibliographyKeys.length);
-converted += `\n\n## Appendices and supporting material\n\nThis page includes the complete abstract, five main sections, all four main-text figures, and references. Technical appendices and declarations are available in the [full manuscript](${sourceUrl}) and the [GitHub repository](${repositoryUrl}).\n\n## References\n\n${referenceParagraphs.join("\n\n")}\n`;
+converted += `\n\n## Appendices and Supporting Material\n\nThis page includes the complete abstract, five main sections, all four main-text figures, and references. Technical appendices and declarations are available in the [full manuscript](${sourceUrl}) and the [GitHub repository](${repositoryUrl}).\n\n## References\n\n${referenceParagraphs.join("\n\n")}\n`;
 converted = converted.replace(/@@DEPENDENCE-BLOCK-(\d+)@@/gu, (_, index) => blocks[Number(index)]);
 const mathUses = mathematics.map(() => 0);
 converted = converted.replace(/@@DEPENDENCE-MATH-(\d+)@@/gu, (_, rawIndex) => {

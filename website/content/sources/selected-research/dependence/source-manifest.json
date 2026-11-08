@@ -5,26 +5,6 @@
   "fetchedWith": "GitHub connector commit/tree pinning and fetch_file base64 downloads checked against Git blob SHA-1",
   "files": [
     {
-      "path": "computation/source/en/figures/budget-comparison.png",
-      "sha": "26049b53bce1aa46a7e76dd256a41a7b8f047b2f",
-      "size": 131904
-    },
-    {
-      "path": "computation/source/en/figures/corner-capacity.png",
-      "sha": "1b0448f98bb83f1bf298c792e8ce6dd6e0b87f3e",
-      "size": 56176
-    },
-    {
-      "path": "computation/source/en/figures/optimal-flow-shares.png",
-      "sha": "109cbcf481ff5fd0eb991cb1bb441f90490d2cdc",
-      "size": 61333
-    },
-    {
-      "path": "computation/source/en/figures/tail-layer-repair.png",
-      "sha": "af03ddccc5c9deecad2efa1d786989ee7d2c9425",
-      "size": 94807
-    },
-    {
       "path": "paper/source/declarations.tex",
       "sha": "89f601719f90503b89a8a062ffe8f83a36f16ccb",
       "size": 932

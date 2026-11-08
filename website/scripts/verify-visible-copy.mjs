@@ -1,4 +1,5 @@
 import { createHash } from "node:crypto";
+import { readdirSync } from "node:fs";
 import { readFile } from "node:fs/promises";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
@@ -39,8 +40,7 @@ const ROUTES = [
   "/experience/independent-stem-olympiad-training/",
   "/experience/stem-olympiad-competitions/",
   "/blog/",
-  "/blog/as-if-returning/",
-  "/blog/the-etude-sky/",
+  ...readdirSync(path.join(ROOT, "content", "blog")).map((file) => `/blog/${file.replace(/\.md$/u, "")}/`).sort(),
 ];
 const RESEARCH_ARTICLE_ROUTES = new Set([...RESEARCH_PAPER_ROUTES, ...AI_ARTICLE_ROUTES]);
 

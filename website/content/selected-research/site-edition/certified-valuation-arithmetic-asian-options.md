@@ -1058,7 +1058,7 @@ The common Gaussian structure connects classical lognormal conditioning with sto
 
 The step-grid study shows that payoff conversion dominates the interval width and that the fixed discrete-tail bound can offset what a finer Euler grid gains. We also confirm a complete parameter-specific execution at a second stochastic-variance point, and the deterministic example in Appendix I gives a strictly narrower coupled nonlinear interval. On their stated parameter families, the common Gaussian expansion and the posterior coupling give additional formula-level and price-unit bounds.
 
-## Appendices and supporting material
+## Appendices and Supporting Material
 
 This page includes the complete main text and references. Appendices, supplementary proofs, code, and verification material are available in the [GitHub repository](https://github.com/130U/certified-valuation-arithmetic-asian-options) and the [full manuscript](https://github.com/130U/certified-valuation-arithmetic-asian-options/blob/846bbe6acbaa4eaac07e20d5d2c566b3abc5456d/manuscript/report.md#appendix-a-finite-certification-of-the-weighted-second-moment).
 
