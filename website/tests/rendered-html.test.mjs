@@ -392,8 +392,8 @@ test("every route keeps canonical metadata, CSP, and navigation appropriate to i
   }
 });
 
-test("all 24 detail pages keep their wordmark and a direct parent link outside the mobile menu", async () => {
-  assert.equal(DETAIL_PARENTS.size, 24);
+test("every detail page keeps its wordmark and a direct parent link outside the mobile menu", async () => {
+  assert.equal(DETAIL_PARENTS.size, 22 + BLOG_SLUGS.length);
   const targetPages = new Map();
   for (const [route, expectedParent] of DETAIL_PARENTS) {
     const html = await routeHtml(route);

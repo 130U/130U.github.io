@@ -330,8 +330,8 @@ or resized; the masks identify the body, fittings, and outlines and are released
 sampling. Silver fittings use separated dark outline points and sparse gray interior
 points. Settled points align to device pixels in a transparent cache copied at native
 resolution; canvas resolution follows the device pixel ratio, capped at 3, independent
-of the CSS coordinates used for physics. Moving points use subpixel edge coverage
-instead of a blur filter and return to their exact cached positions. `alignCanvas`
+of the CSS coordinates used for physics. Moving points use subpixel edge coverage and
+return to their exact cached positions. `alignCanvas`
 derives dimensions from the stage and matches the canvas box and origin to its backing
 store, including at fractional pixel ratios.
 
