@@ -648,7 +648,7 @@ button:focus-visible {
   }
 }
 
-@media (min-width: 1200px) {
+@media (width >= 1200px) {
   .ledger::before {
     position: absolute;
     top: var(--frame-pad);
@@ -697,7 +697,7 @@ button:focus-visible {
   }
 }
 
-@media (min-width: 768px) {
+@media (width >= 768px) {
   .site-rail {
     overflow-y: auto;
     scrollbar-width: thin;
@@ -930,7 +930,7 @@ button:focus-visible {
   }
 }
 
-@media (max-width: 540px) {
+@media (width <= 540px) {
   .site-footer {
     display: grid;
     gap: 4px;

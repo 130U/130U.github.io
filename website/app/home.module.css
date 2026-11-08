@@ -196,7 +196,7 @@
   }
 }
 
-@media (min-width: 1200px) {
+@media (width >= 1200px) {
   /* The first divider falls on the same axis as the ledger spine above,
      and each value starts where their titles and prose start. */
   .contactStrip {
@@ -258,7 +258,7 @@
   }
 }
 
-@media (max-width: 540px) {
+@media (width <= 540px) {
   .contactStrip {
     grid-template-columns: 1fr;
   }

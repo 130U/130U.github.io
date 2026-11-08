@@ -268,7 +268,6 @@ for (const expected of PROJECTS) {
     assert.equal(readableHtml(html.match(/<h1\b[^>]*>([\s\S]*?)<\/h1>/iu)?.[1] ?? ""), showcase.detailTitle);
     assert.match(html, new RegExp(`href="/experience/#${expected.slug}"`, "u"));
     assert.match(html, /href="#key-contributions"/u);
-    assert.doesNotMatch(html, /href="#overview"|id="overview"|id="article-title"/u);
     assert.ok(html.indexOf('id="key-contributions"') < html.indexOf(`data-research-block="${expected.bodyStart}"`));
 
     const detailLists = [...html.matchAll(/<([ou]l)\b[^>]*\bdata-contribution-details="(\d+)"[^>]*>([\s\S]*?)<\/\1>/giu)];

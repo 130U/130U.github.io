@@ -7,7 +7,7 @@ export type ArticleInline =
 
 type ResearchHeading = Extract<ResearchBlock, { type: "heading" }>;
 
-export type ArticleHeadingPresentation = {
+type ArticleHeadingPresentation = {
   id: string;
   displayInlines: ArticleInline[];
   text: string;

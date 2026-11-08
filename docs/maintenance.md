@@ -19,8 +19,8 @@ Use Node.js 24 to match deployment. Run application commands from `website/`, or
 | `website/source-assets/` | Editable brand masters |
 | `website/scripts/`, `website/tests/` | Import, build, and verification utilities |
 
-`website/.gitignore` excludes installed dependencies, build output, caches, logs,
-generated Next.js types, and TypeScript build metadata. Keep local screenshots,
+`website/.gitignore` excludes installed dependencies, build output, logs, generated
+Next.js types, and TypeScript build metadata. Keep local screenshots,
 audit logs, and original source documents outside the repository unless they are
 explicitly maintained research inputs. Only visitor-facing assets belong in `public/`.
 

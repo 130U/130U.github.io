@@ -1,7 +1,5 @@
 import Link from "next/link";
-import { join } from "node:path";
-import { Fragment, cache } from "react";
-import sharp from "sharp";
+import { Fragment } from "react";
 import { ReturnArrow } from "../ReturnArrow";
 import { SiteShell } from "../SiteShell";
 import { ArticleReadingLayout } from "../article/ArticleReadingLayout";
@@ -18,19 +16,6 @@ import readingStyles from "../legal/LegalPaperPage.module.css";
 import mathStyles from "./ResearchMath.module.css";
 import styles from "./ResearchArticle.module.css";
 import experienceStyles from "../experience/Experience.module.css";
-
-const figureDimensions = cache(async (src: string) => {
-  const { width, height } = await sharp(join(process.cwd(), "public", src.slice(1))).metadata();
-  if (!width || !height) throw new Error(`Research figure has no intrinsic dimensions: ${src}`);
-  return { width, height };
-});
-
-async function FigureImage({ src, label, captionId }: { src: string; label: string; captionId: string }) {
-  const dimensions = await figureDimensions(src);
-  // Intrinsic dimensions reserve the manuscript image's aspect ratio before loading.
-  // eslint-disable-next-line @next/next/no-img-element
-  return <img src={src} {...dimensions} alt={label} aria-describedby={captionId} loading="lazy" decoding="async" />;
-}
 
 // A numeric cell holds a number, a list of numbers, an interval or a dash; such
 // columns align on the right with tabular figures.
@@ -78,11 +63,7 @@ export function ResearchArticle({ project, active, returnPath, returnLabel, titl
     project.blocks.map((block) => ({ type: block.type, source: block.source, firstCell: block.type === "table" ? block.rows[0][0].source : undefined })),
     project.markdown,
   );
-  const native = new Map(project.blocks.flatMap((block, index) => {
-    const figure = block.type === "figure" ? manuscriptFigureFor(project.slug, block.src, project.markdown) : undefined;
-    return figure ? [[index, figure] as const] : [];
-  }));
-  const enhanced = figures.size > 0 || native.size > 0 || project.blocks.some((block) => block.type === "table");
+  const enhanced = figures.size > 0 || project.blocks.some((block) => block.type === "figure" || block.type === "table");
   const renderedBlocks = project.blocks.map((block, index) => {
     const rendered = renderBlock(block, index);
     const placed = figures.get(index);
@@ -104,20 +85,8 @@ export function ResearchArticle({ project, active, returnPath, returnLabel, titl
       return <div {...marker} id={block.id} className={mathStyles.equation} key={index} tabIndex={0} role="region" aria-label="Mathematical equation"><ResearchMath tex={block.tex} display /></div>;
     }
     if (block.type === "figure") {
-      const captionId = `research-figure-${index}-caption`;
-      const opening = block.inlines[0];
-      const label = (opening?.type === "text" && opening.text.match(/^Figure \d+/u)?.[0]) || "Research figure";
-      const figure = native.get(index);
-      if (figure) {
-        const caption = <InlineContent inlines={linkArticleSectionReferences(block.inlines, project.slug, headingMap)} />;
-        return <ManuscriptFigure key={index} id={figure} anchor={block.id} captionId={captionId} attributes={marker} caption={caption} />;
-      }
-      return <figure {...marker} id={block.id} className={styles.figure} key={index}>
-        <a href={block.src} aria-label={`Open ${label.toLowerCase()} at full resolution`}>
-          <FigureImage src={block.src} label={label} captionId={captionId} />
-        </a>
-        <figcaption id={captionId}><InlineContent inlines={linkArticleSectionReferences(block.inlines, project.slug, headingMap)} /></figcaption>
-      </figure>;
+      const caption = <InlineContent inlines={linkArticleSectionReferences(block.inlines, project.slug, headingMap)} />;
+      return <ManuscriptFigure key={index} id={manuscriptFigureFor(project.slug, block.src, project.markdown)} anchor={block.id} captionId={`research-figure-${index}-caption`} attributes={marker} caption={caption} />;
     }
     const numeric = numericColumns(block.rows, block.headerRow);
     const emphasis = emphasisFor(project.slug, block.rows[0][0].source);

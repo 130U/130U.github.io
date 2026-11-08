@@ -4,9 +4,9 @@ import styles from "./Figure.module.css";
 
 export { styles };
 
-export type Tone = "ink" | "accent" | "sky" | "steel" | "mist" | "green";
+type Tone = "ink" | "accent" | "sky" | "steel" | "mist" | "green";
 export type View = { id: string; label: ReactNode };
-export type LegendItem = { label: ReactNode; tone: Tone; shape?: "square" | "line" | "dash" | "dot" | "ring" | "hatch" | "box" | "tint" };
+type LegendItem = { label: ReactNode; tone: Tone; shape?: "square" | "line" | "dash" | "dot" | "ring" | "hatch" | "box" | "tint" };
 
 /** Short copy that may contain inline TeX in the manuscripts' `$...$` form. */
 export function Tx({ children }: { children: string }) {
@@ -20,9 +20,9 @@ const tone = (value: Tone) => styles[value];
  * server; the controller reveals the switch and swaps panels, and without
  * JavaScript the default panel stays visible.
  *
- * Added figures carry their own title and caption. A manuscript figure drawn
- * natively (`manuscript`) keeps the manuscript's caption, passed as rendered
- * inline content, and its block anchor and marker attributes.
+ * The site's own figures carry their title and caption. A manuscript figure
+ * (`manuscript`) takes the manuscript's caption, passed as rendered inline
+ * content, and its block anchor and marker attributes.
  */
 export function Figure({ id, title, caption, views, defaultView, viewsLabel, legend, children, className, manuscript }: {
   id: string;
@@ -103,7 +103,7 @@ export function sample(from: number, to: number, count: number, fn: (value: numb
   });
 }
 
-export type Tick = { at: number; label: ReactNode; solid?: boolean; edge?: "start" | "end"; minor?: boolean };
+type Tick = { at: number; label: ReactNode; solid?: boolean; edge?: "start" | "end"; minor?: boolean };
 
 export type Crosshair = {
   x: number[];
@@ -228,7 +228,7 @@ export function Bars({ label, stack, labelWidth, valueWidth, children, className
   return <div className={`${styles.bars} ${className ?? ""}`} data-stack={stack === "narrow" ? "narrow" : stack ? "always" : undefined} style={style} role="img" aria-label={label}>{children}</div>;
 }
 
-export type Rule = { at: number; tone?: "ink" | "soft" | "accent" };
+type Rule = { at: number; tone?: "ink" | "soft" | "accent" };
 
 /** Grid lines and reference rules behind a row; they run through the whole row height. */
 function Lines({ grid, rules }: { grid: number[]; rules: Rule[] }) {

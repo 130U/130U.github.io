@@ -18,7 +18,7 @@ const pct = (value: number, span: number) => (value / span) * 100;
 
 /* ---------- Figure 1: local transport and full marginal compensation ---------- */
 
-export function TailLayerFigure({ manuscript, caption }: ManuscriptFigureProps) {
+function TailLayerFigure({ manuscript, caption }: ManuscriptFigureProps) {
   // Panel (a): position u in [0, 1] across, normal coordinate B - v in [-0.5, 0.5] up.
   const [aw, ah] = [300, 230];
   const ax = (u: number) => u * aw;
@@ -102,7 +102,7 @@ export function TailLayerFigure({ manuscript, caption }: ManuscriptFigureProps) 
 
 /* ---------- Figure 2: corner demand and return capacity ---------- */
 
-export function CornerCapacityFigure({ manuscript, caption }: ManuscriptFigureProps) {
+function CornerCapacityFigure({ manuscript, caption }: ManuscriptFigureProps) {
   const delta = 0.35;
   // Coordinates from xi_- = 0 to xi_+ = 2, with a margin for the axes and labels.
   const [from, to] = [-0.1, 2.34];
@@ -181,7 +181,7 @@ const lowerEnvelope = (s: number) => (s <= S_LIN ? 2 * s - 5 / 16 : s - HIGH);
 const upperEnvelope = (s: number) => Math.min(2 * s - 5 / 16, (4 / 3) * s - 13 / 48);
 const signed = (value: number, digits = 4) => value.toFixed(digits).replace(/^-/u, "−");
 
-export function BudgetEnvelopesFigure({ manuscript, caption }: ManuscriptFigureProps) {
+function BudgetEnvelopesFigure({ manuscript, caption }: ManuscriptFigureProps) {
   const x = linear(0, 0.32);
   const y = linear(-0.34, 0.16);
   // Both envelopes are piecewise linear; their corners are exact.
@@ -339,7 +339,7 @@ function ramp(value: number) {
 
 const RAMP_STOPS = Array.from({ length: 11 }, (_, index) => ramp(index / 10));
 
-export function FlowSharesFigure({ manuscript, caption }: ManuscriptFigureProps) {
+function FlowSharesFigure({ manuscript, caption }: ManuscriptFigureProps) {
   const side = 120;
   const X = (u: number) => (u / 2) * side;
   const Y = (v: number) => ((2 - v) / 2) * side;

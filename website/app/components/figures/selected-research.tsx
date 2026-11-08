@@ -5,7 +5,7 @@ import styles from "./Figures.module.css";
 /* Critical Dependence Stress: the benchmark's headline comparison. The
    prediction is a single budget, the proved critical budget a band, and the
    gap between them the result. */
-export function DependenceBudgetRuler() {
+function DependenceBudgetRuler() {
   const x = linear(0, 0.32);
   const y = linear(0, 1);
   const slope = 5 / 32;
@@ -55,7 +55,7 @@ const ASIAN_PARTS = [
   { name: "Periodization", tone: "ink" },
 ] as const;
 
-export function AsianWidthPlateau() {
+function AsianWidthPlateau() {
   const width = linear(0, 0.03);
   const widthTicks = [0, 0.01, 0.02, 0.03].map((at) => ({ at, label: at === 0 ? "0" : at.toFixed(2) }));
   const signed = linear(-0.016, 0.016);
@@ -143,7 +143,7 @@ const HESTON_STAGES = [
   { id: "Q2", text: "Through 128, local envelope", joint: 0.233318843, marginal: 0.252393939, note: "Only the joint method certifies 0.25 points" },
 ] as const;
 
-export function HestonStageBounds() {
+function HestonStageBounds() {
   const x = logarithmic(0.09, 2);
   const ticks = [0.1, 0.25, 0.5, 1, 2].map((at) => ({ at, label: String(at) }));
   const grid = [0.1, 0.5, 1, 2].map(x);
@@ -185,7 +185,7 @@ const HESTON_CANDIDATES = [
   { alpha: "0.550", n1024: [14.000658, 15.482012], n2048: [14.387007, 14.96068] },
 ] as const;
 
-export function HestonCandidateSeparation() {
+function HestonCandidateSeparation() {
   const x = linear(4, 16);
   const ticks = [4, 8, 12, 16].map((at) => ({ at, label: String(at) }));
   const grid = ticks.map((tick) => x(tick.at));
@@ -236,7 +236,7 @@ const LEDGER_PARTS = [
   { name: "True infinite-tail remainder", tone: "sky", joint: 0.038055248032, marginal: 0.038055248032 },
 ] as const;
 
-export function HestonLedger() {
+function HestonLedger() {
   const x = linear(0, 0.3);
   const ticks = [0, 0.1, 0.2, 0.3].map((at) => ({ at, label: at === 0 ? "0" : at.toFixed(1) }));
   const grid = ticks.map((tick) => x(tick.at));

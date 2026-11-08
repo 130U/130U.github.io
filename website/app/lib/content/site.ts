@@ -3,7 +3,7 @@ import type { Metadata } from "next";
 export const SITE_URL = "https://www.theodoreoy.com";
 export const SITE_NAME = "Theodore Ouyang";
 export const HOME_TITLE = SITE_NAME;
-export const FELLOWSHIP = "Sequoia Fellow";
+const FELLOWSHIP = "Sequoia Fellow";
 export const DEFAULT_DESCRIPTION =
   `Theodore Ouyang makes high-stakes conclusions verifiable across derivative pricing, frontier AI evaluation, and law. Duke Alumnus and ${FELLOWSHIP}.`;
 
