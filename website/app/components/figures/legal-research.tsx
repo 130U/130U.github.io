@@ -4,7 +4,7 @@ import styles from "./Figures.module.css";
 
 /* ---------- Autonomous authority in space ---------- */
 
-export function RiskTaxonomy() {
+function RiskTaxonomy() {
   const cells = [
     { title: "Offset", text: "The same type of harm to the same population", example: "Automation trades loss of a spacecraft through delayed response for loss of the same spacecraft through an erroneous command." },
     { title: "Transfer", text: "Changes the population", example: "An avoidance maneuver protects one spacecraft and raises collision exposure for a neighboring satellite's owner and users." },
@@ -40,7 +40,7 @@ export function RiskTaxonomy() {
   );
 }
 
-export function TwoThresholds() {
+function TwoThresholds() {
   const steps = [
     { index: "01", title: "Authority", text: "Does the actor have authority to undertake the activity and impose the relevant exposure?", branch: "No", outcome: "Not authorized. Evidence for delegation cannot substitute for authority.", next: "Yes" },
     { index: "02", title: "Evidence", text: "Does the evidence justify delegating this class of action under these conditions?", branch: "No", outcome: "Do not delegate this class of action.", next: "Yes" },
@@ -84,7 +84,7 @@ export function TwoThresholds() {
   );
 }
 
-export function CollisionSequence() {
+function CollisionSequence() {
   const steps = [
     "Detect and track objects",
     "Estimate future states and uncertainty",
@@ -116,7 +116,7 @@ export function CollisionSequence() {
 
 /* ---------- Small states ---------- */
 
-export function StateCases() {
+function StateCases() {
   const cases = [
     { key: "nz", name: "New Zealand", decision: "Permission", question: "Can the state apply its own assessment to an externally connected activity?", remedy: "Usable standards and supervisory information" },
     { key: "no", name: "Norway", decision: "Operation", question: "Can cooperation deliver a function under specified national control?", remedy: "Clarity about interruption and recovery" },
@@ -154,7 +154,7 @@ export function StateCases() {
 
 /* ---------- Solar geoengineering ---------- */
 
-export function EvidenceTiers() {
+function EvidenceTiers() {
   const tiers = [
     { title: "Aerosol cooling", text: "Established physical basis", strength: 3 },
     { title: "Regional outcomes", text: "Depend on deployment design and background conditions", strength: 2 },
@@ -180,7 +180,7 @@ export function EvidenceTiers() {
   );
 }
 
-export function ExitPaths() {
+function ExitPaths() {
   const x = linear(0, 1);
   const y = linear(0, 1.5);
   const decision = 0.52;
@@ -224,7 +224,7 @@ export function ExitPaths() {
 
 /* ---------- Mangrove restoration ---------- */
 
-export function EvidentiaryChain() {
+function EvidentiaryChain() {
   const links = [
     { title: "Applicable legal duty" },
     { title: "Changed decision", example: "A permit requires a tidal creek." },
@@ -269,7 +269,7 @@ export function EvidentiaryChain() {
   );
 }
 
-export function DeepBay() {
+function DeepBay() {
   const x = linear(0, 1);
   const y = linear(0, 64);
   const series = [
@@ -325,7 +325,7 @@ export function DeepBay() {
   );
 }
 
-export function SanTinLoss() {
+function SanTinLoss() {
   const x = linear(0, 1);
   const y = linear(0, 1.6);
   const filling = 0.4;

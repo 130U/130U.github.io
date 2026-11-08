@@ -1,14 +1,14 @@
-// Figures added to the eleven full articles, keyed by article slug. Each figure
-// follows one existing block, named by the opening of its source text (or, for
-// a table, by its first header cell), so the manuscripts themselves stay
-// unchanged. `evidence` lists source text that every plotted value or label
-// restates; the build fails if any of it is missing from the article.
+// The site's own figures for the eleven full articles, keyed by article slug.
+// Each figure follows one manuscript block, named by the opening of its source
+// text (or, for a table, by its first header cell). `evidence` lists source text
+// that every plotted value or label restates; the build fails if any of it is
+// missing from the article.
 
-export type FigureAnchor = { paragraph: string } | { table: string };
-export type FigurePlacement = { figure: string; after: FigureAnchor; evidence: string[] };
-export type TableEmphasis = { table: string; row?: number; column?: number };
+type FigureAnchor = { paragraph: string } | { table: string };
+type FigurePlacement = { figure: string; after: FigureAnchor; evidence: string[] };
+type TableEmphasis = { table: string; row?: number; column?: number };
 
-export const articleFigures: Readonly<Record<string, readonly FigurePlacement[]>> = {
+const articleFigures: Readonly<Record<string, readonly FigurePlacement[]>> = {
   "critical-dependence-stress-for-portfolio-diversification": [
     {
       figure: "dependence-budget",
@@ -214,7 +214,7 @@ export const articleFigures: Readonly<Record<string, readonly FigurePlacement[]>
   ],
 };
 
-export const tableEmphasis: Readonly<Record<string, readonly TableEmphasis[]>> = {
+const tableEmphasis: Readonly<Record<string, readonly TableEmphasis[]>> = {
   "statistical-inference-and-resource-allocation-in-expert-data-production": [{ table: "Audit policy", row: 2 }],
   "verification-and-supervision-in-scientific-reasoning-tasks": [{ table: "Acceptance protocol", row: 2 }],
   "evidence-uncertainty-and-decision-guarantees-in-investment-research": [{ table: "Verification query", row: 2 }],
@@ -271,7 +271,7 @@ export const manuscriptFigures: Readonly<Record<string, { figure: string; eviden
 /** The native drawing for a manuscript image, after checking its evidence. */
 export function manuscriptFigureFor(slug: string, src: string, source: string) {
   const entry = manuscriptFigures[src];
-  if (!entry) return undefined;
+  if (!entry) throw new Error(`Manuscript image ${src} in ${slug} has no native drawing.`);
   for (const evidence of entry.evidence) {
     if (!source.includes(evidence)) throw new Error(`Figure ${entry.figure} in ${slug} restates text missing from the article: ${evidence}`);
   }

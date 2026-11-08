@@ -18,7 +18,7 @@ import "@mathjax/src/js/input/tex/newcommand/NewcommandConfiguration.js";
 import "@mathjax/src/js/input/tex/textmacros/TextMacrosConfiguration.js";
 import "@mathjax/src/js/input/tex/boldsymbol/BoldsymbolConfiguration.js";
 
-export type ResearchMathMarkup = Readonly<{
+type ResearchMathMarkup = Readonly<{
   svg: string;
   mathml: string;
   widthEm: number;

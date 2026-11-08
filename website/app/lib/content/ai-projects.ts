@@ -10,7 +10,7 @@ export const aiResearchProjectSlugs = [
   "evidence-uncertainty-and-decision-guarantees-in-investment-research",
 ] as const;
 
-export const aiResearchProjects: readonly ResearchArticleContent[] = aiResearchProjectSlugs.map((slug) => {
+const aiResearchProjects: readonly ResearchArticleContent[] = aiResearchProjectSlugs.map((slug) => {
   const source = JSON.parse(readFileSync(join(process.cwd(), "content", "artificial-intelligence", `${slug}.json`), "utf8")) as Omit<ResearchArticleContent, "blocks">;
   if (source.slug !== slug || !source.title || !source.markdown || !source.sourceUrl || !source.sourceEditedAt) {
     throw new Error(`Incomplete AI research project: ${slug}`);

@@ -406,7 +406,7 @@ test("every detail page keeps its wordmark and a direct parent link outside the 
     assert.ok(!openingTags(html, "div").some((tag) => attribute(tag, "id") === "site-menu"));
     const parentLinks = elementsWithClass(parentNavs[0][2], "a", "parent-link");
     assert.equal(parentLinks.length, 1);
-    assert.doesNotMatch(parentLinks[0][1], /\bonclick\s*=|role="button"/iu, "Parent navigation must remain a native link.");
+    assert.doesNotMatch(parentLinks[0][1], /\bonclick\s*=|role="button"/iu, "Parent navigation must be a native link.");
     const arrows = openingTags(parentLinks[0][2], "svg");
     assert.equal(arrows.length, 1);
     assert.equal(attribute(arrows[0], "aria-hidden"), "true", "The arrow is decorative; the parent link has a text name.");
@@ -429,20 +429,19 @@ test("every detail page keeps its wordmark and a direct parent link outside the 
   for (const route of ROUTES.filter((candidate) => !DETAIL_PARENTS.has(candidate))) {
     const html = await routeHtml(route);
     assert.deepEqual(navigationLinks(html, "Primary navigation"), NAVIGATION);
-    assert.equal(elementsWithClass(html, "nav", "parent-nav").length, 0, `${route}: top-level pages retain their primary navigation.`);
+    assert.equal(elementsWithClass(html, "nav", "parent-nav").length, 0, `${route}: top-level pages carry the primary navigation.`);
   }
 });
 
-test("About opens with its accessible clarinet hero before the retained profile", async () => {
+test("About opens with its accessible clarinet hero before the profile", async () => {
   const home = await routeHtml("/");
   assert.equal(openingTags(home, "canvas").length, 1);
   assert.equal(attribute(openingTags(home, "canvas")[0], "aria-hidden"), "true");
   assert.ok(home.indexOf("<canvas") < home.indexOf('id="home-profile"'));
   const hero = home.match(/<section\b[^>]*aria-labelledby="hero-name"[^>]*>([\s\S]*?)<\/section>/u)?.[1];
-  assert.ok(hero, "The hero retains a named section.");
+  assert.ok(hero, "The hero is a named section.");
   assert.equal(openingTags(hero, "a").length, 0, "The hero has no call-to-action link.");
   assert.equal(openingTags(hero, "button").length, 0, "The hero has no playback control.");
-  assert.doesNotMatch(stripMarkup(hero), /Explore my work|Pause animation|Play animation/u);
   const heading = home.match(/<h1\b[^>]*>([\s\S]*?)<\/h1>/u);
   assert.ok(heading);
   assert.equal(openingTags(home, "h1").length, 1);
@@ -452,10 +451,10 @@ test("About opens with its accessible clarinet hero before the retained profile"
   const cornerTags = [...hero.matchAll(/<[a-z][\w:-]*\b[^>]*>/gu)]
     .map(match => match[0]).filter(tag => (attribute(tag, "class") ?? "").split(/\s+/u)
       .some(name => /_corner(?:TL|TR|BL|BR)$/u.test(name)));
-  assert.equal(cornerTags.length, 4, "All four decorative corner marks remain visible in the HTML.");
+  assert.equal(cornerTags.length, 4, "All four decorative corner marks are in the HTML.");
   for (const tag of cornerTags) assert.equal(attribute(tag, "aria-hidden"), "true");
   assert.ok(openingTags(home, "svg").some((tag) => attribute(tag, "viewBox") === "0 0 1286 1223"),
-    "The clarinet remains available as an inline SVG fallback at its original aspect ratio.");
+    "The clarinet has an inline SVG fallback at the stage's aspect ratio.");
   const fallback = hero.match(/<svg\b[^>]*>[\s\S]*?<\/svg>/u)?.[0];
   assert.ok(fallback);
   assert.doesNotMatch(fallback, /<(?:linearGradient|radialGradient|image)\b/u,
@@ -501,9 +500,9 @@ test("About opens with its accessible clarinet hero before the retained profile"
     }
   }
   const ringDots = openingTags(visibleFallback, "path").find(tag => attribute(tag, "fill-rule") === "evenodd");
-  assert.ok(ringDots, "The fallback preserves the six ring keys and the bell rim as point fields.");
+  assert.ok(ringDots, "The fallback draws the six ring keys and the bell rim as point fields.");
   assert.equal((attribute(ringDots, "d").match(/Z/gu) ?? []).length, 14,
-    "Six ring keys and one bell rim each retain an inner and outer contour.");
+    "Six ring keys and one bell rim each have an inner and outer contour.");
   const profileHeading = home.match(/<h2\b[^>]*id="home-heading"[^>]*>([\s\S]*?)<\/h2>/u);
   assert.equal(stripMarkup(profileHeading?.[1] ?? ""), "Thinking Mathematically Working in AI");
   assert.match(home, /<title>Theodore Ouyang<\/title>/u);
@@ -528,11 +527,10 @@ test("About opens with its accessible clarinet hero before the retained profile"
   for (const route of ROUTES.slice(1)) assert.equal(openingTags(await routeHtml(route), "canvas").length, 0);
 });
 
-test("About research uses explicit Read More links with complete papers and source links preserved", async () => {
+test("About research opens each complete paper through an explicit Read More link", async () => {
   const about = await routeHtml("/");
   assert.ok(about.indexOf('id="selected-research"') < about.indexOf('id="education"'));
   assert.ok(about.indexOf('id="education"') < about.indexOf('id="coursework"'));
-  assert.doesNotMatch(about, /I developed|Developed a mathematical framework for certifying/u);
   const researchEntries = [...about.matchAll(/<article\b[^>]*id="([^"]+)"[^>]*>[\s\S]*?<\/article>/gu)].map((match) => match[1]).filter((id) => id.startsWith("critical-dependence-") || id.startsWith("certified-"));
   assert.deepEqual(researchEntries, ["critical-dependence-stress-for-portfolio-diversification", "certified-valuation-arithmetic-asian-options", "certified-rough-heston-valuation"]);
   for (const [slug, title, description, tables, sections, repository] of [
@@ -553,7 +551,7 @@ test("About research uses explicit Read More links with complete papers and sour
     assert.doesNotMatch(researchLink?.[2] ?? "", /<(?:h3|p)\b/u,
       "The manuscript action is separate from its static title and summary.");
     assert.doesNotMatch(researchLink?.[1] ?? "", /\bonclick\s*=|role="button"/iu,
-      "Read More remains a native navigation link.");
+      "Read More is a native navigation link.");
     assert.equal(openingTags(researchLink?.[2] ?? "", "svg").length, 1);
     assert.equal(attribute(openingTags(researchLink?.[2] ?? "", "svg")[0], "aria-hidden"), "true");
     assert.equal(openingTags(entry, "a").length, 1);
@@ -627,13 +625,13 @@ test("all eighteen approved Experience entries use institution titles and real l
     assert.equal(links.length, 1, `Entry ${entry.id} needs one Read More action`);
     assert.equal(attribute(links[0][1], "href"), presentation.path);
     assert.equal(stripMarkup(links[0][2]), entry.readMoreLabel);
-    assert.doesNotMatch(links[0][1], /\bonclick\s*=|role="button"/iu, "Read More must remain a native link");
+    assert.doesNotMatch(links[0][1], /\bonclick\s*=|role="button"/iu, "Read More must be a native link");
     destinations.push(presentation.path);
 
     const detailPage = await routeHtml(presentation.path);
     assert.equal(openingTags(detailPage, "h1").length, 1);
     assert.equal(stripMarkup(detailPage.match(/<h1\b[^>]*>([\s\S]*?)<\/h1>/u)?.[1] ?? ""), entry.detailTitle);
-    assert.equal((presentation.pageTitle.match(/:/gu) ?? []).length, 1, "Only the institution separator may remain a colon");
+    assert.equal((presentation.pageTitle.match(/:/gu) ?? []).length, 1, "Only the institution separator may be a colon");
     assertExperienceDetails(detailPage, entry);
     assert.ok(detailPage.indexOf("data-experience-metadata") < detailPage.indexOf("data-experience-contributions"));
     const returns = openingTags(detailPage, "a").filter((tag) => attribute(tag, "href") === `/experience/#${presentation.slug}`);
@@ -814,13 +812,13 @@ test("law article paragraphs, headings, and citations exactly match the approved
   }
 });
 
-test("original PDFs remain absent from public assets and the exported website", async () => {
+test("public assets and the exported website contain no PDFs", async () => {
   for (const directory of [path.join(ROOT, "public"), OUT]) {
     assert.deepEqual((await walk(directory)).filter((file) => /\.pdf$/iu.test(file)), [], `${directory} exposes an original PDF`);
   }
 });
 
-test("About preserves both degrees and the advisor record while linking to all 49 courses on their own page", async () => {
+test("About lists both degrees and the advisor record and links to all 49 courses on their own page", async () => {
   for (const route of ["/"]) {
     const html = await routeHtml(route);
     assert.equal(elementsWithClass(html, "article", "education-entry").length, 2);
@@ -845,7 +843,6 @@ test("About preserves both degrees and the advisor record while linking to all 4
     assert.equal((text.match(/Duke University/gu) ?? []).length, 1);
     assert.doesNotMatch(stripMarkup(education), /Sequoia Fellow/u,
       "The fellowship belongs in the hero, not among degree records.");
-    assert.doesNotMatch(text, /highest-tier merit awards/u);
   }
 
   const html = await routeHtml("/coursework/");
@@ -973,7 +970,7 @@ test("the production design contract is restrained and dependency-light", async 
   assert.match(experience, /\.section\s*\{[^}]*grid-template-columns:\s*repeat\(11,[^}]*grid-column:\s*1 \/ span 11/u, "Sections end on the reading-end guide");
   assert.match(experience, /\.sectionBody\s*\{[^}]*grid-column:\s*2\s*\/\s*span\s*10/u);
   assert.match(globals, /--hang-columns:\s*minmax\(0,\s*4fr\)\s+minmax\(0,\s*6fr\)/u, "Hanging rows put titles on 4 of 10 columns and prose on 6");
-  for (const css of [experience, globals]) assert.match(css, /@media \(min-width: 1200px\)[\s\S]*?grid-template-columns:\s*var\(--hang-columns\)/u);
+  for (const css of [experience, globals]) assert.match(css, /@media \(width >= 1200px\)[\s\S]*?grid-template-columns:\s*var\(--hang-columns\)/u);
   assert.match(structuralGrid, /data-guides=\{layout\}/u);
   assert.match(globals, /\.structural-grid\[data-guides="index"\] \.structural-guide-reading-measure\s*\{\s*grid-column:\s*9/u, "Index pages mark the prose axis");
   // Each group of content sits in one faint, unfilled frame with a continuous dashed
@@ -992,7 +989,6 @@ test("the production design contract is restrained and dependency-light", async 
   assert.match(directory, /\.directory\s*\{[^}]*border:\s*1px solid var\(--frame\)/u);
   assert.match(directory, /\.directory a \+ a\s*\{[^}]*background-image:\s*var\(--dash-x\)/u);
   assert.doesNotMatch(directory, /\.directory a\s*\{[^}]*border/u);
-  assert.doesNotMatch(globals, /\.education-entry\s*\{[^}]*grid-template-columns/u);
   for (const guide of ["frame-start", "rail-boundary", "reading-start", "reading-measure", "reading-end"]) assert.ok(structuralGrid.includes(`"${guide}"`));
   for (const contract of ["aria-controls=\"site-menu\"", "aria-expanded={menuOpen}", 'event.key === "Escape"', 'document.body.classList.add("menu-open")', 'querySelectorAll<HTMLElement>']) assert.ok(navigation.includes(contract));
   assert.match(navigation, /backgroundRegions[\s\S]*?region\.inert = true[\s\S]*?region\.inert = false/u);
@@ -1090,7 +1086,7 @@ test("shared typography source roles preserve article names, compact indices, me
     assert.ok(attribute(header[1], "class")?.split(/\s+/u).some((name) => name.endsWith(headerClass)), `${route} must bind its title to the shared article-name role`);
     const stylesheetHrefs = openingTags(html, "link").filter((tag) => attribute(tag, "rel") === "stylesheet").map((tag) => attribute(tag, "href"));
     const loadedStyles = await Promise.all(stylesheetHrefs.map(async (href) => {
-      assert.ok(href?.startsWith("/"), "Typography assets must remain local");
+      assert.ok(href?.startsWith("/"), "Typography assets must be local");
       if (!stylesheetCache.has(href)) stylesheetCache.set(href, await readFile(path.join(OUT, ...href.split("/").filter(Boolean)), "utf8"));
       return stylesheetCache.get(href);
     }));

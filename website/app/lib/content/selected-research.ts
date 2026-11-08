@@ -28,7 +28,7 @@ function readResearch(slug: string, repository = slug) {
   return { ...source, ...edition, path: `/${slug}/`, blocks: parseResearchMarkdown(edition.markdown, { joinSoftLines: true }) };
 }
 
-export const selectedResearch = readResearch("certified-valuation-arithmetic-asian-options");
-export const roughHestonResearch = readResearch("certified-rough-heston-valuation");
-export const dependenceResearch = readResearch("critical-dependence-stress-for-portfolio-diversification", "mathematical-finance-project");
+const selectedResearch = readResearch("certified-valuation-arithmetic-asian-options");
+const roughHestonResearch = readResearch("certified-rough-heston-valuation");
+const dependenceResearch = readResearch("critical-dependence-stress-for-portfolio-diversification", "mathematical-finance-project");
 export const selectedResearchProjects = [dependenceResearch, selectedResearch, roughHestonResearch];

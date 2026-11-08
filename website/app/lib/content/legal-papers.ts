@@ -10,13 +10,13 @@ export type PaperRun = {
   footnoteRef?: number | string;
 };
 
-export type PaperParagraph = {
+type PaperParagraph = {
   text: string;
   runs: PaperRun[];
   sourcePages?: number[];
 };
 
-export type PaperBlock = PaperParagraph & {
+type PaperBlock = PaperParagraph & {
   type: "heading" | "paragraph";
   level?: number;
   id?: string;
@@ -41,7 +41,7 @@ export const legalPaperSlugs = [
   "mangrove-restoration-and-compensatory-mitigation",
 ] as const;
 
-export const legalPapers: readonly LegalPaper[] = legalPaperSlugs.map((slug) => {
+const legalPapers: readonly LegalPaper[] = legalPaperSlugs.map((slug) => {
   const paper = JSON.parse(readFileSync(join(process.cwd(), "content", "legal-papers", `${slug}.json`), "utf8")) as LegalPaper;
   if (paper.slug !== slug || !paper.title || !paper.author || !paper.abstract.length || !paper.blocks.length) {
     throw new Error(`Incomplete legal paper: ${slug}`);

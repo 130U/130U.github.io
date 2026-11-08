@@ -4,9 +4,9 @@
 // optional loop marks the feedback path that returns to an earlier stage.
 // Node details accept the same inline TeX as the manuscripts.
 
-export type DiagramNode = { title: string; detail?: string; tag?: string };
-export type DiagramStage = { label: string; nodes: DiagramNode[]; emphasis?: boolean };
-export type DiagramLoop = { from: number; to: number; label: string };
+type DiagramNode = { title: string; detail?: string; tag?: string };
+type DiagramStage = { label: string; nodes: DiagramNode[]; emphasis?: boolean };
+type DiagramLoop = { from: number; to: number; label: string };
 export type ArchitectureDiagram = {
   label: string;
   stages: DiagramStage[];

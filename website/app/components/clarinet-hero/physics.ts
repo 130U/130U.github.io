@@ -19,7 +19,7 @@ export interface Particle {
 export type MotionState = "entering" | "ready" | "static";
 export type Pointer = { x: number; y: number } | null;
 
-export const STEP_SECONDS = 1 / 60;
+const STEP_SECONDS = 1 / 60;
 const MAX_STEPS_PER_FRAME = 5;
 
 /** Reproducible entry positions and sampling; never call this during drawing. */

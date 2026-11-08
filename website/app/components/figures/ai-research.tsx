@@ -17,7 +17,7 @@ const STRATA = [
   { label: "Stratum 3: 1,000 items, unit cost 3", tone: "ink" },
 ] as const;
 
-export function AuditPolicies() {
+function AuditPolicies() {
   const sd = linear(0, 1);
   const sdTicks = [0, 0.25, 0.5, 0.75, 1].map((at) => ({ at, label: at === 0 ? "0" : String(at) }));
   const share = linear(0, 50);
@@ -58,7 +58,7 @@ export function AuditPolicies() {
   );
 }
 
-export function ResidualMoment() {
+function ResidualMoment() {
   const x = linear(0, 1);
   const y = linear(0, 0.3);
   const curve = sample(0, 1, 101, (q) => q * (1 - q));
@@ -93,7 +93,7 @@ export function ResidualMoment() {
   );
 }
 
-export function RemediationExchange() {
+function RemediationExchange() {
   const x = linear(0, 50);
   const ticks = [0, 10, 20, 30, 40, 50].map((at) => ({ at, label: String(at) }));
   const grid = ticks.map((tick) => x(tick.at));
@@ -126,7 +126,7 @@ export function RemediationExchange() {
 
 /* ---------- Financial synthetic data ---------- */
 
-export function RejectionCost() {
+function RejectionCost() {
   const x = logarithmic(1, 1e6);
   const powers = [0, 2, 4, 6];
   const ticks = powers.map((power) => ({ at: 10 ** power, label: power === 0 ? "1" : <>10<sup>{power}</sup></> }));
@@ -154,7 +154,7 @@ export function RejectionCost() {
   );
 }
 
-export function LabelFlip() {
+function LabelFlip() {
   const x = linear(0, 3);
   const y = linear(0, 50);
   const curve = sample(0, 3, 121, (ratio) => 100 * normalCdf(-ratio));
@@ -202,7 +202,7 @@ export function LabelFlip() {
   );
 }
 
-export function BridgeLeakage() {
+function BridgeLeakage() {
   const x = linear(-0.38, 1);
   const y = linear(0, 1.08);
   const history = sample(0, 1, 2, (u) => u);
@@ -256,7 +256,7 @@ export function BridgeLeakage() {
 
 /* ---------- Scientific reasoning ---------- */
 
-export function RankingReversal() {
+function RankingReversal() {
   const x = linear(0, 1);
   const y = linear(60, 80);
   const models = [
@@ -309,7 +309,7 @@ const DAG = {
   edges: [["G", "v1"], ["G", "v2"], ["v1", "v3"], ["v2", "v3"], ["v2", "v4"], ["v3", "v5"], ["v5", "C"], ["v4", "C"]],
 };
 
-export function ProofObligations() {
+function ProofObligations() {
   const position: Record<string, [number, number]> = { G: [4, 50], C: [96, 50] };
   for (const node of DAG.nodes) position[node.id] = [node.left, node.top];
   const failed = "v2";
@@ -369,7 +369,7 @@ const OUTCOMES = [
   { name: "Invalid, rejected", tone: "mist" },
 ] as const;
 
-export function ProtocolOutcomes() {
+function ProtocolOutcomes() {
   const x = linear(0, 3600);
   const ticks = [0, 1200, 2400, 3600].map((at) => ({ at, label: grouped(at) }));
   const grid = ticks.map((tick) => x(tick.at));
@@ -407,7 +407,7 @@ function coverage(n: number, widened: boolean) {
   return widened ? normalCdf(1.96) - normalCdf(-1.96 - 2 * shift) : normalCdf(1.96 - shift) - normalCdf(-1.96 - shift);
 }
 
-export function CoverageCollapse() {
+function CoverageCollapse() {
   const x = logarithmic(10, 10000);
   const y = linear(0, 100);
   const naive = sample(10, 10000, 121, (n) => 100 * coverage(n, false), "log");
@@ -453,7 +453,7 @@ export function CoverageCollapse() {
   );
 }
 
-export function SharedErrorCancellation() {
+function SharedErrorCancellation() {
   const x = linear(-1.6, 2.8);
   const ticks = [-1, 0, 1, 2].map((at) => ({ at, label: fixed(at, 0) }));
   const grid = ticks.map((tick) => x(tick.at));
@@ -486,7 +486,7 @@ const SCENARIO_VIEWS = [
   { id: "z1", label: <>Verify z<sub>1</sub></> },
 ];
 
-export function RegretScenarios() {
+function RegretScenarios() {
   const x = linear(-0.72, 0.72);
   const scenarios = [-1, 1].flatMap((s) => [-0.4, 0.4].flatMap((z1) => [-0.2, 0.2].map((z2) => ({ s, z1, z2, delta: Math.round((0.15 * s + z1 + 0.3 * s * z2) * 100) / 100 }))));
   const lanes: Record<string, Array<{ top: number; label: string; regret: string }>> = {

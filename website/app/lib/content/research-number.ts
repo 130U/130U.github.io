@@ -1,4 +1,4 @@
-export type ProseNumber = { base: string; exponent?: string; suffix?: string };
+type ProseNumber = { base: string; exponent?: string; suffix?: string };
 
 /** Recognize only complete numeric literals; mathematical relations stay in TeX. */
 export function proseNumber(tex: string): ProseNumber | undefined {

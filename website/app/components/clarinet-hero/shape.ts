@@ -20,7 +20,7 @@ export const BELL_OPENING = ellipse(690, 1051, 79, 20, Math.PI / 18);
 export const BELL_RIM = `${ellipse(690, 1051, 84, 26, Math.PI / 18)} ${BELL_OPENING}`;
 
 // Ring-key centers show the tube's dark particle texture.
-export const HOLES = [
+const HOLES = [
   { x: 841, y: 389, rx: 10.5, ry: 12.5, rotation: .16 },
   { x: 827, y: 450, rx: 10.5, ry: 12.5, rotation: .16 },
   { x: 811, y: 511, rx: 10.5, ry: 12.5, rotation: .16 },
