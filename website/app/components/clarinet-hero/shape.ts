@@ -1,4 +1,4 @@
-// Hand-traced from the approved clarinet reference in 1286 × 1223 space.
+// Hand-traced in 1286 × 1223 space.
 // Continuous geometry supplies the particle masks and SVG fallback.
 export const VIEW_WIDTH = 1286;
 export const VIEW_HEIGHT = 1223;
@@ -44,7 +44,7 @@ export const BANDS = [
   "M672 925 C696 918 730 925 755 936 L752 945 C731 934 696 928 671 934 Z",
 ].join(" ");
 
-// Only the two prominent rods and short key connections shown in the reference.
+// The two prominent rods and their short key connections.
 export const RODS = [
   "M881 332 L824 570 M801 650 L748 887",
   "M855 394 L866 397 M841 454 L852 457 M825 516 L837 518",

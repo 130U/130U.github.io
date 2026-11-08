@@ -14,7 +14,7 @@
     {
       "id": "content-registry",
       "type": "external",
-      "label": "Content & Routes",
+      "label": "Content and Routes",
       "sublabel": "Registry / Markdown / JSON",
       "pos": [
         45,
@@ -29,7 +29,7 @@
       "id": "static-render",
       "type": "frontend",
       "label": "Next.js 16",
-      "sublabel": "Static rendering / React 19",
+      "sublabel": "Static Rendering / React 19",
       "brand": "next-js",
       "tag": "output: export",
       "pos": [
@@ -143,7 +143,7 @@
   "boundaries": [
     {
       "kind": "region",
-      "label": "Content & Brand",
+      "label": "Content and Brand",
       "wraps": [
         "content-registry",
         "brand-library"
@@ -152,7 +152,7 @@
     },
     {
       "kind": "region",
-      "label": "Build & Validation",
+      "label": "Build and Validation",
       "wraps": [
         "static-render",
         "site-bundle",
@@ -242,7 +242,7 @@
       "dot": "emerald",
       "title": "Static Delivery",
       "items": [
-        "26 content pages in three sections, architecture viewer, and 404",
+        "27 content pages in three sections, architecture viewer, and 404",
         "No runtime API, database, or authentication"
       ]
     },

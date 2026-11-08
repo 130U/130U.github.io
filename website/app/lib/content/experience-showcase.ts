@@ -56,7 +56,7 @@ const entrySlugs: Readonly<Record<number, string>> = {
   17: "independent-stem-olympiad-training",
   18: "stem-olympiad-competitions",
 };
-// Presentation labels are separate from the approved Experience copy.
+// Presentation labels are separate from the Experience copy.
 const legalResearchAreas: Record<number, string> = {
   8: "Space Law and Autonomous Systems Research",
   9: "Space Law and Strategic Infrastructure Research",

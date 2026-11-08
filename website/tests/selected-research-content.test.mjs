@@ -61,7 +61,7 @@ for (const expected of PROJECTS) {
     const main = upstream.slice(upstream.indexOf("\n") + 1, upstream.indexOf("\n## Appendix A.")).trim()
       .replace(/\]\((\.\.\/[^\s)]+)\)/gu, (_, relative) => `](https://github.com/130U/${expected.slug}/blob/${expected.commit}/${relative.slice(3)})`);
     const references = upstream.slice(upstream.indexOf("\n## References")).trim();
-    assert.ok(article.markdown.startsWith(main + "\n\n## Appendices and supporting material\n"), "Every main-text character must survive import, except resolved relative link targets.");
+    assert.ok(article.markdown.startsWith(main + "\n\n## Appendices and Supporting Material\n"), "Every main-text character must survive import, except resolved relative link targets.");
     assert.ok(article.markdown.endsWith(references + "\n"), "The complete bibliography must survive import.");
     assert.doesNotMatch(article.markdown, /^## Appendix [A-Z]\./mu);
     const blocks = parseResearchMarkdown(article.markdown, { joinSoftLines: true });

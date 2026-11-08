@@ -8,34 +8,6 @@
   "fetchedWith": "GitHub connector at the pinned commit; all frozen bytes verified against the connector Git-tree blob SHA-1 and size.",
   "sourceFiles": [
     {
-      "path": "computation/source/en/figures/budget-comparison.png",
-      "local": "figures/budget-comparison.png",
-      "gitBlob": "26049b53bce1aa46a7e76dd256a41a7b8f047b2f",
-      "sha256": "1f05258c963223f1421aff597bed8c699eff69caec1c7ec08d6d24f19a517820",
-      "bytes": 131904
-    },
-    {
-      "path": "computation/source/en/figures/corner-capacity.png",
-      "local": "figures/corner-capacity.png",
-      "gitBlob": "1b0448f98bb83f1bf298c792e8ce6dd6e0b87f3e",
-      "sha256": "208b2f88f3a40bd495f2c65a77262785059ddba8581d68422e05e044da8e6dbd",
-      "bytes": 56176
-    },
-    {
-      "path": "computation/source/en/figures/optimal-flow-shares.png",
-      "local": "figures/optimal-flow-shares.png",
-      "gitBlob": "109cbcf481ff5fd0eb991cb1bb441f90490d2cdc",
-      "sha256": "205e88a23bfcb0ecf5bd3e00df74aae72196356ddebbb6e601bb55125f192252",
-      "bytes": 61333
-    },
-    {
-      "path": "computation/source/en/figures/tail-layer-repair.png",
-      "local": "figures/tail-layer-repair.png",
-      "gitBlob": "af03ddccc5c9deecad2efa1d786989ee7d2c9425",
-      "sha256": "83d2c85deb3ee5cc670bb61d609b99323830218644d8754c73f5fb875ecca6e0",
-      "bytes": 94807
-    },
-    {
       "path": "paper/source/declarations.tex",
       "local": "declarations.tex",
       "gitBlob": "89f601719f90503b89a8a062ffe8f83a36f16ccb",
@@ -6785,7 +6757,7 @@
       "labels": []
     }
   ],
-  "importedMarkdownSha256": "3bbd1432c2acf4e76d5bff895dd08fced706b74691075dfcf73cb2abfcd66b8e",
+  "importedMarkdownSha256": "914cd2a95f797a30933bdf83b6738d8dbbbec15258df58e39ab3889261bc06b0",
   "transformations": [
     "Seven main TeX input files contain five numbered sections and eleven subsections; recursively included main-text proofs are retained.",
     "TeX line wrapping, layout commands, font styling, and text accents are converted to equivalent web markup.",

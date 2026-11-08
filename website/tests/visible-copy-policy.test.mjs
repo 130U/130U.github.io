@@ -14,7 +14,7 @@ async function fixture(t) {
   const root = await mkdtemp(path.join(tmpdir(), "site-visible-copy-"));
   t.after(() => rm(root, { recursive: true, force: true }));
   await mkdir(path.join(root, "scripts"));
-  await mkdir(path.join(root, "content"));
+  await mkdir(path.join(root, "content", "blog"), { recursive: true });
   const script = path.join(root, "scripts", "verify-visible-copy.mjs");
   await copyFile(path.join(ROOT, "scripts", "verify-visible-copy.mjs"), script);
   const manifestPath = path.join(root, "content", "visible-copy-manifest.json");

@@ -8,7 +8,7 @@
 
 **I make high-stakes conclusions verifiable:** certified error bounds in derivative pricing, layered verification in frontier AI evaluation, and evidence standards for delegating authority to autonomous systems.
 
-Duke alumnus, B.S. in Mathematics and M.Eng. in Risk Engineering · Sequoia Fellow
+Duke Alumnus, B.S. in Mathematics and M.Eng. in Risk Engineering · Sequoia Fellow
 
 [theodoreoy.com](https://www.theodoreoy.com/) · [Email](mailto:10@alumni.duke.edu) · [X](https://x.com/D3rfr31schutz)
 
@@ -40,7 +40,7 @@ Four papers written at Duke Law School: [autonomous authority in space](https://
 
 Jiritsu Network · Euromonitor International · China Construction Bank · Jones Lang LaSalle · Hubble Network · SAIF Partners · CITIC Securities · EY-Parthenon
 
-[All experience →](https://www.theodoreoy.com/experience/)
+[All Experience](https://www.theodoreoy.com/experience/)
 
 ## This Repository
 

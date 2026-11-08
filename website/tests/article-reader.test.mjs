@@ -132,7 +132,7 @@ test("all eleven full articles retain introduction, contents and body order with
       assert.equal(sourceBlocks[0].tag, "h2", `${route}: enter the first numbered chapter directly after the architectural context and contents.`);
       assert.equal(Number(sourceBlocks[0].attrs.get("data-research-block")), 0, `${route}: retain the complete imported manuscript from its first chapter.`);
       assert.equal(sourceBlocks[0].attrs.get("data-source-number"), "1");
-      assert.match(readable(headings[1]), /^Architectural Context:/u, `${route}: include the approved architectural bridge before the manuscript.`);
+      assert.match(readable(headings[1]), /^Architectural Context:/u, `${route}: include the architectural bridge before the manuscript.`);
       assert.equal(headings[2], sourceBlocks[0], `${route}: no repeated title or Overview heading may precede the first source chapter.`);
       assert.equal(elements(body[0], (node) => node.tag === "p" && node.start < sourceBlocks[0].start).length, 0, `${route}: no repeated Project/Author or overview prose may precede the first source chapter.`);
     }

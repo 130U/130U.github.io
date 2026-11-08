@@ -67,7 +67,7 @@ test("dependence import reproduces its pinned sources and checked-in artifacts",
   assert.equal(article.sourceCommit, COMMIT);
   assert.equal(provenance.sourceCommit, COMMIT);
   assert.equal(article.sourceBlob, PAPER_BLOB);
-  assert.equal(provenance.sourceFiles.length, 28);
+  assert.equal(provenance.sourceFiles.length, 24);
   assert.deepEqual(provenance.sourceFiles.map(({ path: sourcePath }) => sourcePath), manifest.files.map(({ path: sourcePath }) => sourcePath));
   for (const receipt of provenance.sourceFiles) {
     const bytes = await readFile(path.join(SOURCE, receipt.local));
@@ -115,7 +115,7 @@ test("dependence parsing and published mathematics retain the complete source le
   for (const href of links.filter((href) => href.startsWith("#"))) assert.ok(ids.includes(href.slice(1)), `Broken internal link ${href}`);
 });
 
-test("dependence figures are drawn natively with complete captions, source bytes and appendix references", async () => {
+test("dependence figures are drawn natively with complete captions and appendix references", async () => {
   const { provenance, blocks } = await manuscript();
   const figures = blocks.filter((block) => block.type === "figure");
   assert.deepEqual(figures.map(({ src }) => path.basename(src)), ["tail-layer-repair.png", "corner-capacity.png", "budget-comparison.png", "optimal-flow-shares.png"]);
@@ -147,11 +147,6 @@ test("dependence figures are drawn natively with complete captions, source bytes
     const caption = rendered[index][2].match(/<figcaption\b[^>]*>([\s\S]*?)<\/figcaption>/u)?.[1] ?? "";
     const prose = caption.replace(/<svg\b[\s\S]*?<\/svg>|<math\b[\s\S]*?<\/math>|<[^>]+>/gu, "");
     assert.equal(normalize(decodeHtml(prose)), normalize(captionText(figure.inlines)), "Rendered figure captions retain all non-mathematical text.");
-    // The manuscript's image is frozen source evidence; the page draws the figure and serves no copy.
-    const frozen = await readFile(path.join(SOURCE, "figures", path.basename(figure.src)));
-    assert.equal(frozen.subarray(0, 8).toString("hex"), "89504e470d0a1a0a", "Source figures must be PNG files.");
-    assert.equal(frozen.subarray(12, 16).toString(), "IHDR");
-    for (const directory of ["public", "out"]) await assert.rejects(readFile(path.join(ROOT, directory, figure.src.slice(1))), { code: "ENOENT" }, `${directory}${figure.src} must not be published`);
   }
   const appendix = "https://github.com/130U/mathematical-finance-project/blob/" + COMMIT + "/paper/source/technical-quantitative.tex#L80";
   assert.ok(rendered[3][2].includes(`href="${appendix}"`), "The flow-share figure retains its original equation (B.2) appendix link.");

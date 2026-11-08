@@ -5,7 +5,7 @@
       "id": "01",
       "title": "AI Research and Engineering",
       "disclosure": {
-        "title": "Confidentiality & Disclosure Note",
+        "title": "Confidentiality and Disclosure Note",
         "text": "I conducted the following four projects through Duke University collaborations from September 2023 to September 2026. Partner names and proprietary internal system identifiers are withheld under nondisclosure agreements. The collaborators include a leading multimodal foundation model developer, a frontier AI research laboratory, and a leading global alternative asset manager with more than $300 billion in assets under management. The project titles, my role as a researcher, locations, dates, system architectures, mathematical formulations, and reproducible synthetic benchmarks are cleared for public disclosure."
       }
     },
@@ -50,7 +50,7 @@
       ],
       "notes": [],
       "architecturalContext": {
-        "title": "Architectural Context: Statistical governance for expert data production",
+        "title": "Architectural Context: Statistical Governance for Expert Data Production",
         "text": "When review succeeds in targeting the tasks with higher true error probabilities, the resulting selection bias is positive ($\\operatorname{Cov}(\\pi(X), q(X)) > 0$), so a raw inspection error rate has to be corrected before it can support population quality inference. Audit allocation has a related problem, since directing expert capacity toward the tasks that improve estimation precision means accounting for residual uncertainty and verification cost. The project's expert feedback governance framework for post-training had to deal with both across multiple domains. I began leading its development in September 2023. I coordinated hundreds of distributed specialists and external vendor queues and defined the mathematical specifications for quality measurement and resource allocation under selective review. The seven sections below formalize the production design and compare it with the methods literature, including references published from 2024 to 2026."
       }
     },
@@ -76,7 +76,7 @@
       ],
       "notes": [],
       "architecturalContext": {
-        "title": "Architectural Context: Task specifications and data strategy for financial post-training",
+        "title": "Architectural Context: Task Specifications and Data Strategy for Financial Post-Training",
         "text": "In September 2023, frontier foundation models could reproduce corporate finance definitions and still made unpredictable errors in financial workflows, where a small numerical change or an accounting footnote could reverse an investment recommendation. I developed a data strategy around the capability objectives and data requirements of post-training research teams, connecting task specifications, synthesis methods, and expert calibration to address two problems:\n1. **Diagnosing reasoning limits through task design.** I designed prompts around subtle business failure modes, including covenant breaches, off-balance-sheet adjustments, and valuation differences close to a decision boundary, because simple prompts may give little basis for telling candidate responses apart. Paired with the five-level preference protocol, these prompts turn a domain judgment such as *\"Response A is better because it isolates the working-capital constraint and cites Footnote 4\"* into structured preference supervision for post-training.\n2. **Matching the generator to the financial structure.** Synthetic financial data has to satisfy structural constraints, stay consistent with reference judgments, and respect the task's information boundaries. A corporate table that violates Total Assets $=$ Total Liabilities $+$ Equity, even by a fraction of a percentage point, introduces a structural error. An interest-rate path that exposes a future terminal rate to a historical forecasting task introduces temporal leakage. Sections 1 through 6 give the conditions, analytical results, and validation designs for each method. Batch Zero then turns these requirements into acceptance criteria, under which experts have to be able to execute the task specification independently, reproduce reference solutions, and calibrate their judgments."
       },
       "keyContributionDetails": {
@@ -114,7 +114,7 @@
       ],
       "notes": [],
       "architecturalContext": {
-        "title": "Architectural Context: Visible reasoning and execution evidence",
+        "title": "Architectural Context: Visible Reasoning and Execution Evidence",
         "text": "The collaboration began in fall 2023 with an evaluation of general reasoning in frontier models. In my workflow a correct answer could coexist with unsupported assumptions, misapplied rules, or tool use that violated the task specification. Repeated calls that left the evidence and intermediate results unchanged exposed opportunities to improve execution as well. So I cross-checked final answers, the model's visible reasoning, execution records and efficiency measures, and divided the responsibilities among programmatic checks, LLM-assisted semantic screening and review by specialist scholars. The project ran to September 2026. Sections 1 through 7 describe the acceptance criteria, the mathematical certificates for a programmatically verifiable subfamily, and the associated experiments, and compare them with the methods literature, including papers published during the project."
       },
       "keyContributionDetails": {
@@ -151,7 +151,7 @@
       ],
       "notes": [],
       "architecturalContext": {
-        "title": "Architectural Context: Corporate evidence and the allocation of verification effort",
+        "title": "Architectural Context: Corporate Evidence and the Allocation of Verification Effort",
         "text": "AI-polished narratives, unverified sustainability claims and common reporting errors can all move ESG and investment scores, so institutional diligence has to account for uncertainty in the corporate evidence as well as in the scoring models. The architecture I developed takes a traceable evidence state as its input and builds in model multiplicity, joint measurement error and the costs of verification. Sections 1 through 6 go through the limits of attribution methods, the joint uncertainty model, ranking bounds, the query criterion, versioned updates, and analytical benchmarks."
       }
     },
@@ -467,6 +467,6 @@
   "aiSourceDocument": {
     "fileName": "ai-research-and-engineering.md",
     "path": "content/sources/ai-portfolio/ai-research-and-engineering.md",
-    "sha256": "2e2c46bf0573668a93b767f851e6f106c9653aa181c58caca400eb1eeaec839f"
+    "sha256": "9f432984eced61211d23777df407bdcc35f82c8b598ad4e7f5cc38628f37de08"
   }
 }

@@ -1,4 +1,4 @@
-/** Whole-device-pixel footprints; moving dots use coverage, never a blur filter. */
+/** Whole-device-pixel footprints; moving dots use subpixel coverage. */
 export function drawPixel(target: CanvasRenderingContext2D, x: number, y: number, size: number, dpr: number, snap = true) {
   const pixels = Math.max(1, Math.round(size * dpr));
   const left = x * dpr - pixels / 2;

@@ -695,7 +695,7 @@ Appendices A–E contain the main proofs and experiments. Appendices F–G give 
 
 The construction certifies stored outputs and reuses a common Fourier bank across financial directions. If output replacement is allowed and a certified reference is available, returning the reference is a direct alternative. A comparison with true solver error requires a rigorous error interval, and when that interval crosses zero we report no finite upper ratio of certificate width to true error.
 
-## Appendices and supporting material
+## Appendices and Supporting Material
 
 This page includes the complete main text and references. Appendices, supplementary proofs, code, and verification material are available in the [GitHub repository](https://github.com/130U/certified-rough-heston-valuation) and the [full manuscript](https://github.com/130U/certified-rough-heston-valuation/blob/8d7264ce2f269a2e01f0b9dd80680bf70e50dcee/manuscript/merged-heston-en.md#appendix-a-probability-model-and-strip-transform).
 

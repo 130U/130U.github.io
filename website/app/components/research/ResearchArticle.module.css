@@ -167,6 +167,10 @@
   transition: color 160ms ease, box-shadow 160ms ease;
 }
 
+.table thead .cell::first-letter {
+  text-transform: uppercase;
+}
+
 .tableRegion:first-child thead .cell {
   border-top: 0;
 }

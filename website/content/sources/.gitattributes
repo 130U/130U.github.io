@@ -1,0 +1,3 @@
+# Source manuscripts stay byte-identical to their pinned upstream files.
+*.md text eol=lf
+*.tex -text

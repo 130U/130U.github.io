@@ -85,7 +85,7 @@ export function sampleClarinet(width: number, dpr: number): SampleDot[] {
       context.lineJoin = "round";
     }
 
-    // Alpha is a retention probability at the fringe, never a blurred dot opacity.
+    // Alpha is a retention probability at the fringe.
     for (const [offset, alpha] of [[25, .035], [16, .055], [8, .08]]) {
       body.save();
       body.translate(-offset, 0);

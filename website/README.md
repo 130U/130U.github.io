@@ -41,7 +41,6 @@ assembled export through the Pages workflow.
 | `source-assets/` | Editable brand masters |
 | `scripts/` | Content import and validation, asset generation, build assembly, and local preview |
 | `tests/` | Content, rendering, interaction, static output, and repository policy checks |
-| `tooling/` | Private build and lint utilities |
 
 Content is maintained in its source document or data file and passed through shared
 loaders. AI and Selected Research articles have deterministic importers whose generated

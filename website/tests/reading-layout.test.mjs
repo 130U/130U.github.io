@@ -16,8 +16,8 @@ function declarations(css, selector) {
 
 test("research tables protect words and formula widths before using native horizontal scrolling", async () => {
   const css = await readFile(new URL("../app/components/research/ResearchArticle.module.css", import.meta.url), "utf8");
-  // The surrounding reading layout permits emergency word breaks. Tables must
-  // override that inheritance, or a label such as Object can become Objec / t.
+  // The surrounding reading layout permits emergency word breaks; tables
+  // override that inheritance so their labels stay whole.
   for (const selector of [".cell", ".cell code"]) {
     const rule = declarations(css, selector);
     assert.equal(rule.get("overflow-wrap"), "normal", `${selector} must not inherit anywhere wrapping.`);

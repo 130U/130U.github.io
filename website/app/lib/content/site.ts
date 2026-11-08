@@ -5,7 +5,7 @@ export const SITE_NAME = "Theodore Ouyang";
 export const HOME_TITLE = SITE_NAME;
 export const FELLOWSHIP = "Sequoia Fellow";
 export const DEFAULT_DESCRIPTION =
-  `Theodore Ouyang makes high-stakes conclusions verifiable across derivative pricing, frontier AI evaluation, and law. Duke alumnus and ${FELLOWSHIP}.`;
+  `Theodore Ouyang makes high-stakes conclusions verifiable across derivative pricing, frontier AI evaluation, and law. Duke Alumnus and ${FELLOWSHIP}.`;
 
 export type ActivePage =
   | "about"

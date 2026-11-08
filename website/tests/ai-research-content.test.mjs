@@ -9,7 +9,7 @@ const ROOT = fileURLToPath(new URL("../", import.meta.url));
 const AI_ROUTE = "/experience/";
 const SOURCE_FILE = "content/sources/ai-portfolio/ai-research-and-engineering.md";
 const CANONICAL_DOCUMENT = path.join(ROOT, SOURCE_FILE);
-const SOURCE_SHA256 = "2e2c46bf0573668a93b767f851e6f106c9653aa181c58caca400eb1eeaec839f";
+const SOURCE_SHA256 = "9f432984eced61211d23777df407bdcc35f82c8b598ad4e7f5cc38628f37de08";
 // Structure and benchmark-table shapes are checked independently of the renderer.
 const PROJECTS = [
   {
@@ -70,7 +70,7 @@ function readableMarkdown(markdown) {
 
 async function canonicalPortfolio() {
   const document = (await readFile(CANONICAL_DOCUMENT, "utf8")).replace(/\r\n?/gu, "\n");
-  assert.equal(createHash("sha256").update(document).digest("hex"), SOURCE_SHA256, "The canonical manuscript must match its approved content hash after LF normalization");
+  assert.equal(createHash("sha256").update(document).digest("hex"), SOURCE_SHA256, "The canonical manuscript must match its content hash after LF normalization");
   const parts = document.split(/^# Project (\d{2}): ([a-z0-9-]+)$/gmu);
   assert.equal(parts.length, 13, "The canonical portfolio must contain exactly four projects");
   const projects = PROJECTS.map(({ slug }, index) => {
@@ -83,8 +83,8 @@ async function canonicalPortfolio() {
     sourceDocument: { fileName: path.basename(SOURCE_FILE), path: SOURCE_FILE, sha256: SOURCE_SHA256 },
     updated: parts[0].match(/\*\*Updated\*\*\n(\d{4}-\d{2}-\d{2})/u)?.[1],
     disclosure: {
-      title: "Confidentiality & Disclosure Note",
-      text: parts[0].split("## Confidentiality & Disclosure Note\n")[1].trim(),
+      title: "Confidentiality and Disclosure Note",
+      text: parts[0].split("## Confidentiality and Disclosure Note\n")[1].trim(),
     },
   };
 }

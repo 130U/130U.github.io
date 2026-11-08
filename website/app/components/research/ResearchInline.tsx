@@ -22,7 +22,7 @@ export function InlineContent({ inlines }: { inlines: ArticleInline[] }) {
   });
 }
 
-/** Render approved copy with the same inline mathematics as the manuscript. */
+/** Render copy with the same inline mathematics as the manuscript. */
 export function InlineMarkdown({ text }: { text: string }) {
   const blocks = parseResearchMarkdown(text, { joinSoftLines: true });
   if (blocks.length !== 1 || blocks[0].type !== "paragraph") {
