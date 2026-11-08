@@ -1653,15 +1653,15 @@
       }
     },
     "/blog/": {
-      "textSha256": "e6177421378f430f09c181746c2c086b7549f975f9b0f90095ae4b4c21007c7b",
-      "characterCount": 740,
-      "wordCount": 127,
-      "preview": "Skip to Main Content Theodore Ouyang About Experience Blog Blog Landscape Photography November 8, 2026 Ten landscapes of Alaska and Yellowstone, each holding wa",
+      "textSha256": "d6aa389363dc295509b9c91f61866c81dbcba1f834097891515127c8be6801da",
+      "characterCount": 734,
+      "wordCount": 129,
+      "preview": "Skip to Main Content Theodore Ouyang About Experience Blog Blog Ten States of Water November 8, 2026 Ten landscapes of Alaska and Yellowstone, each holding wate",
       "altTexts": [],
       "ariaLabels": [
         "Theodore Ouyang home",
         "Primary navigation",
-        "Read more about Landscape Photography",
+        "Read more about Ten States of Water",
         "Read more about The Étude Sky",
         "Read more about As If Leaving, As If Returning"
       ],
@@ -1702,13 +1702,13 @@
         "twitterDescription": "A new arrangement of the Der Freischütz fantasy beneath a Song dynasty handscroll that unrolls as you listen, with an essay on beauty across time and aesthetics in the age of AI."
       }
     },
-    "/blog/landscape-photography/": {
-      "textSha256": "1f29d24704d6e6fdf19956f680436db45f037dcd0c649663c952f31b4d2209e0",
-      "characterCount": 2757,
-      "wordCount": 503,
-      "preview": "Skip to Main Content Theodore Ouyang Back to Blog Landscape Photography By Theodore Ouyang November 8, 2026 Landscape Photography Ten landscapes of Alaska and Y",
+    "/blog/ten-states-of-water/": {
+      "textSha256": "52f38fdaa2defb5deab42a56a91220d02b4e8a1c0807ffa5c3e17d928473a241",
+      "characterCount": 2751,
+      "wordCount": 509,
+      "preview": "Skip to Main Content Theodore Ouyang Back to Blog Ten States of Water By Theodore Ouyang November 8, 2026 Ten States of Water Ten landscapes of Alaska and Yello",
       "altTexts": [
-        "The cover of Landscape Photography: the name Theodore Ouyang written across the sky above a snowy ridge, a sunset horizon, and winding tidewater",
+        "The cover of Ten States of Water: the name Theodore Ouyang written across the sky above a snowy ridge, a sunset horizon, and winding tidewater",
         "Ten landscapes in two rows of five, seven of Alaska followed by three of Yellowstone",
         "A blue tidewater glacier at dawn beside a deep blue hot spring ringed in orange",
         "Snow-covered Denali glowing in low sun above a braided river and red frosted tundra"
@@ -1718,21 +1718,21 @@
         "Parent navigation"
       ],
       "metadata": {
-        "title": "Landscape Photography | Theodore Ouyang",
+        "title": "Ten States of Water | Theodore Ouyang",
         "description": "Ten landscapes of Alaska and Yellowstone, each holding water in a different state, with a reading of its light and structure set beside every image.",
-        "canonical": "https://www.theodoreoy.com/blog/landscape-photography/",
-        "openGraphTitle": "Landscape Photography",
+        "canonical": "https://www.theodoreoy.com/blog/ten-states-of-water/",
+        "openGraphTitle": "Ten States of Water",
         "openGraphDescription": "Ten landscapes of Alaska and Yellowstone, each holding water in a different state, with a reading of its light and structure set beside every image.",
-        "openGraphUrl": "https://www.theodoreoy.com/blog/landscape-photography/",
-        "twitterTitle": "Landscape Photography",
+        "openGraphUrl": "https://www.theodoreoy.com/blog/ten-states-of-water/",
+        "twitterTitle": "Ten States of Water",
         "twitterDescription": "Ten landscapes of Alaska and Yellowstone, each holding water in a different state, with a reading of its light and structure set beside every image."
       }
     },
     "/blog/the-etude-sky/": {
-      "textSha256": "15c6ef470bd5531a3a0ceff6302129f8ba0d8d1631dbf5516ec37170c13ffe97",
-      "characterCount": 3120,
+      "textSha256": "4d1ccf340778e0d5da5547d7af1564bf210158133ec8771b1c1b174eea6584f7",
+      "characterCount": 3116,
       "wordCount": 586,
-      "preview": "Skip to Main Content Theodore Ouyang Back to Blog The Étude Sky By Theodore Ouyang November 7, 2026 The Étude Sky Chopin's twenty-four études, charted as stars ",
+      "preview": "Skip to Main Content Theodore Ouyang Back to Blog The Étude Sky By Theodore Ouyang June 1, 2026 The Étude Sky Chopin's twenty-four études, charted as stars View",
       "altTexts": [
         "The twenty-four plates of The Étude Sky, Op. 10 in the upper two rows and Op. 25 in the lower two",
         "Twenty-four stars on the circle of fifths, colored by key and joined into two asterisms",

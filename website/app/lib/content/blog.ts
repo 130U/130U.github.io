@@ -116,7 +116,7 @@ export function getBlogPost(slug: string) {
 
 const dateFormat = new Intl.DateTimeFormat("en-US", { dateStyle: "long", timeZone: "UTC" });
 
-/** "2026-11-07" as "November 7, 2026". */
+/** "2026-06-01" as "June 1, 2026". */
 export function formatBlogDate(date: string) {
   return dateFormat.format(new Date(`${date}T00:00:00Z`));
 }
