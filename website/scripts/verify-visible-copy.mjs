@@ -39,6 +39,7 @@ const ROUTES = [
   "/experience/independent-stem-olympiad-training/",
   "/experience/stem-olympiad-competitions/",
   "/blog/",
+  "/blog/as-if-returning/",
   "/blog/the-etude-sky/",
 ];
 const RESEARCH_ARTICLE_ROUTES = new Set([...RESEARCH_PAPER_ROUTES, ...AI_ARTICLE_ROUTES]);
