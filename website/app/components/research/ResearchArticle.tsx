@@ -1,17 +1,19 @@
 import Link from "next/link";
-import { Fragment } from "react";
+import { Fragment, type CSSProperties } from "react";
 import { ReturnArrow } from "../ReturnArrow";
 import { SiteShell } from "../SiteShell";
 import { ArticleReadingLayout } from "../article/ArticleReadingLayout";
 import { ArchitecturalContext, ExperienceDiagram, ExperienceMetadata, KeyContributions } from "../experience/ExperienceDetails";
 import type { ShowcaseEntry } from "../../lib/content/experience-showcase";
-import type { ResearchArticleContent, ResearchCell } from "../../lib/content/research-markdown";
+import type { ResearchArticleContent, ResearchCell, ResearchInline } from "../../lib/content/research-markdown";
+import { renderResearchMath } from "../../lib/content/research-math";
 import { buildArticleHeadingMap, formatArticleHeadings, linkArticleSectionReferences } from "../../lib/content/article-headings";
 import { emphasisFor, manuscriptFigureFor, placeFigures } from "../../lib/content/article-figures";
 import { ArticleFigure, FigureController, ManuscriptFigure } from "../figures";
 import type { ActivePage } from "../../lib/content/site";
 import { ResearchMath } from "./ResearchMath";
 import { InlineContent } from "./ResearchInline";
+import { TableStage } from "./TableStage";
 import readingStyles from "../legal/LegalPaperPage.module.css";
 import mathStyles from "./ResearchMath.module.css";
 import styles from "./ResearchArticle.module.css";
@@ -33,6 +35,49 @@ function numericColumns(rows: ResearchCell[][], headerRow: boolean) {
   return rows[0].map((_, column) => column > 0 && body.length > 0
     && body.every((row) => numericCell(row[column]))
     && body.some((row) => row[column].source.trim() !== "—"));
+}
+
+// Values and labels hold one line, so a row reads as one line; a column wraps
+// only when its widest cell is a sentence. Widths are estimated in ems.
+const AVERAGE_GLYPH_EM = 0.5;
+const SENTENCE_EM = 26;
+
+function contentWidth(inlines: ResearchInline[]): number {
+  let widest = 0;
+  let line = 0;
+  for (const inline of inlines) {
+    if (inline.type === "line-break") {
+      widest = Math.max(widest, line);
+      line = 0;
+    } else if (inline.type === "text" || inline.type === "code") {
+      line += inline.text.length * AVERAGE_GLYPH_EM;
+    } else if (inline.type === "math") {
+      line += renderResearchMath(inline.tex).widthEm;
+    } else {
+      line += contentWidth(inline.inlines);
+    }
+  }
+  return Math.max(widest, line);
+}
+
+function sentenceColumns(rows: ResearchCell[][], headerRow: boolean) {
+  const body = headerRow ? rows.slice(1) : rows;
+  return rows[0].map((_, column) => body.some((row) => contentWidth(row[column].inlines) > SENTENCE_EM));
+}
+
+// A heading may take two lines beside short values, never more.
+function headingFloor(cell: ResearchCell) {
+  return { "--heading-floor": `${(contentWidth(cell.inlines) * 0.6).toFixed(2)}em` } as CSSProperties;
+}
+
+function ZoomGlyph() {
+  return (
+    <svg aria-hidden="true" focusable="false" viewBox="0 0 16 16" width="16" height="16" fill="none" stroke="currentColor" strokeWidth="1.25" strokeLinecap="round">
+      <circle cx="7" cy="7" r="4.75" />
+      <path d="m10.5 10.5 3 3M5 7h4" />
+      <path d="M7 5v4" data-zoom-plus />
+    </svg>
+  );
 }
 
 // A manuscript table caption is a bold "Table N." paragraph directly before its
@@ -89,6 +134,7 @@ export function ResearchArticle({ project, active, returnPath, returnLabel, titl
       return <ManuscriptFigure key={index} id={manuscriptFigureFor(project.slug, block.src, project.markdown)} anchor={block.id} captionId={`research-figure-${index}-caption`} attributes={marker} caption={caption} />;
     }
     const numeric = numericColumns(block.rows, block.headerRow);
+    const sentences = sentenceColumns(block.rows, block.headerRow);
     const emphasis = emphasisFor(project.slug, block.rows[0][0].source);
     const bodyOffset = block.headerRow ? 1 : 0;
     const tableRows = block.rows.map((row, rowIndex) => (
@@ -98,7 +144,8 @@ export function ResearchArticle({ project, active, returnPath, returnLabel, titl
           <Cell
             key={cellIndex}
             scope={Cell === "th" ? "col" : undefined}
-            className={numeric[cellIndex] ? `${styles.cell} ${styles.numeric}` : styles.cell}
+            className={[styles.cell, numeric[cellIndex] && styles.numeric, sentences[cellIndex] && styles.sentence].filter(Boolean).join(" ")}
+            style={Cell === "th" ? headingFloor(cell) : undefined}
             data-emphasis={emphasis?.column === cellIndex ? "" : undefined}
           >
             <InlineContent inlines={linkArticleSectionReferences(cell.inlines, project.slug, headingMap)} />
@@ -114,6 +161,7 @@ export function ResearchArticle({ project, active, returnPath, returnLabel, titl
             <InlineContent inlines={linkArticleSectionReferences(captionBlock.inlines, project.slug, headingMap)} />
           </p>
         )}
+        <button type="button" className={styles.zoom} data-table-zoom aria-label="Zoom In" aria-haspopup="dialog" hidden><ZoomGlyph /></button>
         <div tabIndex={0} role="region" aria-label="Research data table" className={styles.tableRegion}>
           <table {...marker} id={block.id} className={styles.table} data-research-table>
             {block.headerRow && <thead>{tableRows[0]}</thead>}
@@ -149,6 +197,7 @@ export function ResearchArticle({ project, active, returnPath, returnLabel, titl
           <a href={`#${titleId}`}>Back to Top</a>
         </footer>
         {enhanced && <FigureController key={project.slug} />}
+        {project.blocks.some((block) => block.type === "table") && <TableStage key={`${project.slug}-tables`} />}
       </article>
     </SiteShell>
   );

@@ -12,7 +12,7 @@
     "app/components/AboutContent.tsx": "189798137ab7d995b7ef773a0774fd922a32b93f77babfa66f5915145f6a41f1",
     "app/lib/content/about.ts": "8d79e72133dcbcae9523771a099f53f0aecb879cea384769ff6bb0144e05626f",
     "app/coursework/page.tsx": "a1caf4bd363d652ce401c237e06336be26e15296a3ffa19890b3d1c53b6ab63c",
-    "app/components/research/ResearchArticle.tsx": "9ba317899e7a6e4e69b3f33c7e9aa76edf68d8d2aa52424ead21ab63055e560a",
+    "app/components/research/ResearchArticle.tsx": "2081b25f4a7bc59ec72aa57038d91bf4affa067be3623dc6a51807681503c804",
     "app/components/research/ResearchInline.tsx": "0c2ddb5c269f5c4882b34d652ec395197a80285c7e5464acb156536677cade61",
     "app/components/research/ResearchMath.tsx": "a61ffe67375e2c50a7cac7167f39ff39ef7a115d6aa240c14f9240b9361e54cf",
     "app/lib/content/research-markdown.ts": "d2d03cfc6b7bc38d5a409d134f517c9ccdff3a3977b3af0495b437b96850e001",

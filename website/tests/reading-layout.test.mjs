@@ -14,7 +14,7 @@ function declarations(css, selector) {
   return result;
 }
 
-test("research tables protect words and formula widths before using native horizontal scrolling", async () => {
+test("research tables hold each row of values on one line and scroll natively before folding", async () => {
   const css = await readFile(new URL("../app/components/research/ResearchArticle.module.css", import.meta.url), "utf8");
   // The surrounding reading layout permits emergency word breaks; tables
   // override that inheritance so their labels stay whole.
@@ -23,9 +23,11 @@ test("research tables protect words and formula widths before using native horiz
     assert.equal(rule.get("overflow-wrap"), "normal", `${selector} must not inherit anywhere wrapping.`);
     assert.equal(rule.get("word-break"), "normal", `${selector} must preserve complete words.`);
   }
-  const cell = declarations(css, ".cell");
-  const minimum = /^(\d+(?:\.\d+)?)(rem|em|ch)$/u.exec(cell.get("min-width") ?? "");
-  assert.ok(minimum && Number(minimum[1]) >= (minimum[2] === "ch" ? 12 : 8), "Columns need a readable font-relative minimum width, not merely freedom from page overflow.");
+  assert.equal(declarations(css, ".cell").get("white-space"), "nowrap", "A value or label holds one line.");
+  const sentence = declarations(css, ".sentence");
+  assert.equal(sentence.get("white-space"), "normal", "Only a column of sentences wraps.");
+  const minimum = /^(\d+(?:\.\d+)?)(rem|em|ch)$/u.exec(sentence.get("min-width") ?? "");
+  assert.ok(minimum && Number(minimum[1]) >= (minimum[2] === "ch" ? 24 : 12), "A column of sentences needs a readable font-relative measure.");
   assert.equal(declarations(css, ".table").get("font"), "inherit", "Table readability must not depend on shrinking its type.");
   const region = declarations(css, ".tableRegion");
   assert.ok(["auto", "scroll"].includes(region.get("overflow-x")), "Wide tables must remain natively scrollable.");
@@ -56,5 +58,21 @@ test("all research tables retain native table semantics inside named keyboard-ac
       assert.match(table, /\bdata-research-block-type="table"/u);
     }
     for (const [, header] of html.matchAll(/<th\b([^>]*)>/gu)) assert.match(header, /\bscope="col"/u);
+    const controls = [...html.matchAll(/<button\b([^>]*\bdata-table-zoom\b[^>]*)>/gu)];
+    assert.equal(controls.length, count, `${route}: every table carries one zoom control.`);
+    for (const [, control] of controls) {
+      assert.match(control, /\baria-label="Zoom In"/u);
+      assert.match(control, /\baria-haspopup="dialog"/u);
+      assert.match(control, /\bhidden\b/u, "The control appears only once the page's script can open the stage.");
+    }
+    assert.equal([...html.matchAll(/<dialog\b/gu)].length, count > 0 ? 1 : 0, `${route}: one stage serves all of a page's tables.`);
   }
+});
+
+test("a table of values never wraps its rows, and a table of sentences wraps only those columns", async () => {
+  const html = await readFile(new URL("../out/certified-rough-heston-valuation/index.html", import.meta.url), "utf8");
+  const tables = [...html.matchAll(/<table\b[\s\S]*?<\/table>/gu)].map(([table]) => table);
+  const sentenceCells = (table) => [...table.matchAll(/<t[dh]\b[^>]*class="([^"]*)"/gu)].filter(([, classes]) => /sentence/u.test(classes)).length;
+  assert.equal(sentenceCells(tables[1]), 0, "Fixed configurations hold only values.");
+  assert.ok(sentenceCells(tables[7]) > 0, "Typed deterministic work is set in sentences.");
 });

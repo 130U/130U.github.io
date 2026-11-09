@@ -59,9 +59,14 @@
 /* Tables share the figures' frame. A manuscript caption becomes the frame's
    title; the header is a tinted band in label type over a firm rule; rows part
    on hairlines; the hovered row and column take a quiet tint and the hovered
-   column's header turns accent. Numbers align right in tabular figures. */
+   column's header turns accent. Numbers align right in tabular figures. A row
+   holds one line of values, and only a column of sentences wraps, so a table
+   wider than the column scrolls instead of folding. */
 .tableFrame {
   --table-pad: clamp(16px, 4cqi, 24px);
+  --table-surface: var(--page);
+  --table-band: color-mix(in srgb, #000 2.8%, var(--table-surface));
+  position: relative;
   container: table-frame / inline-size;
   min-width: 0;
   max-width: 100%;
@@ -70,9 +75,9 @@
 }
 
 .tableTitle {
-  max-width: 34rem;
+  max-width: calc(34rem + 36px);
   margin: 0;
-  padding: 22px var(--table-pad) 18px;
+  padding: 22px calc(var(--table-pad) + 36px) 18px var(--table-pad);
   color: var(--ink);
   font-family: var(--font-text);
   font-size: var(--type-interface);
@@ -83,6 +88,61 @@
 
 .tableTitle strong {
   font-weight: inherit;
+}
+
+/* The zoom control holds the frame's top-right corner, on the title's first
+   line, or on the header band of a table without a title. */
+.zoom {
+  position: absolute;
+  z-index: 4;
+  top: calc(22px + var(--type-interface) * var(--interface-leading) * var(--zoom, 1) / 2 - 16px);
+  right: calc(var(--table-pad) - 8px);
+  display: grid;
+  width: 32px;
+  height: 32px;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: var(--supporting-ink);
+  cursor: zoom-in;
+  place-items: center;
+  touch-action: manipulation;
+  transition: color 160ms ease, background-color 160ms ease;
+}
+
+.zoom::before {
+  position: absolute;
+  inset: -6px;
+  content: "";
+}
+
+.zoom[hidden] {
+  display: none;
+}
+
+.zoom:first-child {
+  top: 6px;
+  background: var(--table-band);
+}
+
+.zoom:focus-visible {
+  outline-offset: -2px;
+}
+
+.zoom svg {
+  display: block;
+  transition: transform 120ms var(--ease-out);
+}
+
+.zoom:active svg {
+  transform: scale(0.9);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .zoom:hover {
+    background: color-mix(in srgb, #000 5%, var(--table-surface));
+    color: var(--accent);
+  }
 }
 
 .tableRegion:focus-visible {
@@ -99,12 +159,15 @@
   overscroll-behavior-x: contain;
   scrollbar-width: thin;
   scrollbar-color: var(--rule-strong) transparent;
+  -webkit-mask-image: linear-gradient(to right, #000 calc(100% - var(--edge-fade, 0px)), transparent);
+  mask-image: linear-gradient(to right, #000 calc(100% - var(--edge-fade, 0px)), transparent);
 }
 
 .table {
   width: 100%;
   min-width: 100%;
-  border-collapse: collapse;
+  border-collapse: separate;
+  border-spacing: 0;
   table-layout: auto;
   text-align: left;
   font: inherit;
@@ -112,14 +175,23 @@
   word-break: normal;
 }
 
+.tableRegion[data-dense] {
+  --cell-gap: 0.625rem;
+}
+
 .cell {
-  min-width: 8rem;
-  padding: 0.875rem 1rem;
+  padding: 0.875rem var(--cell-gap, 1rem);
   border-bottom: 1px solid var(--rule);
   vertical-align: top;
   overflow-wrap: normal;
   word-break: normal;
+  white-space: nowrap;
+}
+
+.sentence {
+  min-width: 16rem;
   white-space: normal;
+  text-wrap: pretty;
 }
 
 .cell:first-child {
@@ -136,17 +208,19 @@
 }
 
 .table thead .cell {
+  min-width: calc(var(--heading-floor, 0em) + 2 * var(--cell-gap, 1rem));
   padding-top: 0.75rem;
   padding-bottom: 0.75rem;
   vertical-align: bottom;
-  border-top: 1px solid var(--rule);
   border-bottom: 1px solid var(--rule-strong);
-  background: rgba(0, 0, 0, 0.028);
+  background: var(--table-band);
   color: var(--ink);
   font-family: var(--font-text);
   font-size: var(--type-label);
   font-weight: 500;
   line-height: var(--label-leading);
+  white-space: normal;
+  text-wrap: balance;
   transition: color 160ms ease, box-shadow 160ms ease;
 }
 
@@ -154,8 +228,22 @@
   text-transform: uppercase;
 }
 
-.tableRegion:first-child thead .cell {
-  border-top: 0;
+.tableTitle ~ .tableRegion thead .cell {
+  border-top: 1px solid var(--rule);
+}
+
+.zoom:first-child ~ .tableRegion thead .cell:last-child {
+  padding-right: calc(var(--table-pad) + 32px);
+}
+
+.table[data-one-line] {
+  width: min-content;
+  min-width: 0;
+}
+
+.table[data-one-line] .cell {
+  min-width: 0;
+  white-space: nowrap;
 }
 
 .table tbody tr:last-child > .cell {
@@ -177,9 +265,32 @@
 }
 
 .table thead .cell[data-column-hover] {
-  background: rgba(0, 0, 0, 0.05);
+  background: color-mix(in srgb, #000 5%, var(--table-surface));
   color: var(--accent);
   box-shadow: inset 0 -2px 0 var(--accent);
+}
+
+/* Row labels stay in view while a wide table scrolls past them. */
+.tableRegion[data-pinned] .cell:first-child {
+  position: sticky;
+  z-index: 1;
+  left: 0;
+  background-color: var(--table-surface);
+}
+
+.tableRegion[data-pinned] thead .cell:first-child {
+  z-index: 3;
+  background-color: var(--table-band);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .tableRegion[data-pinned] tbody tr:hover > .cell:first-child {
+    background-color: color-mix(in srgb, #000 2.2%, var(--table-surface));
+  }
+}
+
+.tableRegion[data-pinned][data-scrolled] .cell:first-child {
+  box-shadow: 1px 0 0 var(--rule-medium);
 }
 
 /* Rows below the fold enter once, top to bottom, as the table scrolls in. */
@@ -210,7 +321,16 @@
 }
 
 .table thead .cell[data-emphasis] {
+  background: color-mix(in srgb, var(--accent) 5%, var(--table-surface));
   box-shadow: inset 0 2px 0 var(--accent);
+}
+
+.tableRegion[data-pinned] tr[data-emphasis] > .cell:first-child {
+  background: color-mix(in srgb, var(--accent) 5%, var(--table-surface));
+}
+
+.tableRegion[data-pinned][data-scrolled] tr[data-emphasis] > .cell:first-child {
+  box-shadow: inset 2px 0 0 var(--accent), 1px 0 0 var(--rule-medium);
 }
 
 .numeric {
@@ -221,4 +341,185 @@
 .cell [data-research-formula="inline"] {
   max-width: none;
   overflow: visible;
+}
+
+/* Zoomed, the table lifts onto a sheet over the blurred page. The stage sets it
+   at the largest step of type that holds every row on one line; a table of
+   long sentences wraps those columns across the full width instead. */
+.stage {
+  --stage-gutter: clamp(8px, 3.5vw, 48px);
+  position: fixed;
+  inset: 0;
+  width: 100%;
+  max-width: none;
+  height: 100vh;
+  height: 100dvh;
+  max-height: none;
+  margin: 0;
+  padding: var(--stage-gutter);
+  overflow: hidden;
+  overscroll-behavior: contain;
+  border: 0;
+  background: transparent;
+  color: var(--ink);
+  font-family: var(--font-prose);
+  font-size: var(--type-reading);
+  line-height: var(--reading-leading);
+}
+
+.stage[open] {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  grid-template-rows: minmax(0, 1fr);
+  place-items: center;
+}
+
+.stage::backdrop {
+  background: transparent;
+}
+
+.scrim {
+  position: fixed;
+  inset: 0;
+  background: color-mix(in srgb, var(--page) 58%, transparent);
+  -webkit-backdrop-filter: blur(7px);
+  backdrop-filter: blur(7px);
+  cursor: zoom-out;
+}
+
+.tableFrame[data-zoomed] {
+  --table-pad: clamp(16px, 2.4vw, 32px);
+  --table-surface: var(--panel);
+  display: flex;
+  flex-direction: column;
+  max-height: 100%;
+  margin: 0;
+  border-color: var(--rule-medium);
+  background: var(--table-surface);
+  box-shadow: 0 1px 3px rgb(0 0 0 / 0.04), 0 28px 72px -20px rgb(0 0 0 / 0.2);
+  container-type: normal;
+  transform-origin: 0 0;
+}
+
+.tableFrame[data-zoomed] .tableTitle {
+  flex: none;
+  max-width: none;
+  padding-bottom: 20px;
+  font-size: calc(var(--type-interface) * var(--zoom, 1));
+}
+
+.tableFrame[data-zoomed] .zoom {
+  cursor: zoom-out;
+}
+
+.tableFrame[data-zoomed] .zoom [data-zoom-plus] {
+  animation: zoom-plus-out 240ms var(--ease-out) both;
+  transform-box: fill-box;
+  transform-origin: center;
+}
+
+@keyframes zoom-plus-out {
+  to {
+    opacity: 0;
+    transform: scaleY(0);
+  }
+}
+
+.tableFrame[data-zoomed] .tableRegion {
+  flex: 0 1 auto;
+  min-height: 0;
+  overflow: auto;
+  overscroll-behavior: contain;
+}
+
+.tableFrame[data-zoomed] .table {
+  font-size: calc(var(--type-reading) * var(--zoom, 1));
+}
+
+.tableFrame[data-zoomed] .tableRegion[data-dense] {
+  --cell-gap: 0.625em;
+}
+
+.tableFrame[data-zoomed] .cell {
+  min-width: 0;
+  padding: 0.625em var(--cell-gap, 1em);
+}
+
+.tableFrame[data-zoomed] .cell:first-child {
+  padding-left: var(--table-pad);
+}
+
+.tableFrame[data-zoomed] .cell:last-child {
+  padding-right: var(--table-pad);
+}
+
+.tableFrame[data-zoomed] thead .cell {
+  position: sticky;
+  z-index: 2;
+  top: 0;
+  padding-block: 0.8em;
+  font-size: calc(var(--type-label) * var(--zoom, 1));
+  white-space: nowrap;
+}
+
+.tableFrame[data-zoomed] .tableRegion[data-headings-wrap] thead .cell {
+  min-width: calc(var(--heading-floor, 0em) + 2 * var(--cell-gap, 1em));
+  white-space: normal;
+}
+
+.tableFrame[data-zoomed][data-fit="line"] .sentence {
+  white-space: nowrap;
+}
+
+.tableFrame[data-zoomed][data-fit="wrap"] .sentence {
+  min-width: 12em;
+}
+
+@media (prefers-reduced-transparency: reduce) {
+  .scrim {
+    background: color-mix(in srgb, var(--page) 92%, transparent);
+    -webkit-backdrop-filter: none;
+    backdrop-filter: none;
+  }
+}
+
+@media (prefers-contrast: more) {
+  .tableFrame[data-zoomed] {
+    border-color: var(--ink);
+  }
+
+  .scrim {
+    background: rgb(0 0 0 / 0.35);
+    -webkit-backdrop-filter: none;
+    backdrop-filter: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .zoom,
+  .zoom svg {
+    transition: none;
+  }
+
+  .tableFrame[data-zoomed] .zoom [data-zoom-plus] {
+    animation-duration: 1ms;
+  }
+}
+
+@media print {
+  .zoom {
+    display: none;
+  }
+
+  .tableRegion {
+    overflow: visible;
+    -webkit-mask-image: none;
+    mask-image: none;
+  }
+
+  .table .cell,
+  .table thead .cell {
+    min-width: 0;
+    white-space: normal;
+  }
 }
