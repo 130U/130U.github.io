@@ -122,7 +122,7 @@ export function TableStage() {
       panel.querySelectorAll("[data-column-hover]").forEach((node) => node.removeAttribute("data-column-hover"));
       panel.querySelectorAll<HTMLElement>("tbody tr").forEach((row) => row.style.removeProperty("--row"));
       const control = panel.querySelector<HTMLButtonElement>("[data-table-zoom]")!;
-      control.setAttribute("aria-label", "Zoom Out");
+      control.setAttribute("aria-label", "Zoom out");
       control.removeAttribute("aria-haspopup");
       const sourceRegion = source.querySelector<HTMLElement>("[role=region]")!;
       const region = panel.querySelector<HTMLElement>("[role=region]")!;
@@ -174,7 +174,7 @@ export function TableStage() {
       panel.animate({ transform: [current, flightFrom(source, panel)] }, { duration: CLOSE_MS, easing: EASE_OUT, fill: "forwards" });
       panel.animate({ opacity: [1, 0] }, { delay: CLOSE_MS * 0.5, duration: CLOSE_MS * 0.5, fill: "forwards" });
       scrim.animate({ opacity: [1, 0] }, { duration: CLOSE_MS, easing: "ease-out", fill: "forwards" });
-      // A timer, not the animation's promise: a background tab's animations do not advance.
+      // Timed so that a background tab, whose animations do not advance, still closes.
       window.setTimeout(dismiss, CLOSE_MS);
     };
 
@@ -197,7 +197,7 @@ export function TableStage() {
       control: frame.querySelector<HTMLButtonElement>("[data-table-zoom]")!,
     }));
     const settleFrame = ({ region, table }: (typeof frames)[number]) => {
-      // A table just wider than its column closes up rather than scroll.
+      // A table just wider than its column closes up to fit.
       region.removeAttribute("data-dense");
       if (table.offsetWidth > region.clientWidth + 1) {
         region.setAttribute("data-dense", "");

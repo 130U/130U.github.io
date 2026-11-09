@@ -72,7 +72,7 @@ domain) and `workDescription`. The body holds paragraphs with `*emphasis*` and l
 `## headings`, an epigraph written as `> quote` followed by `> — source`, and figures
 written as `![caption](/assets/blog/<slug>/<image>.jpg "alt")`. `app/lib/content/blog.ts`
 rejects anything else at build time. Images live in `public/assets/blog/<slug>/` and
-are sized for a 2× display of the 612px column.
+are sized for a 2× display of the 576px column.
 
 A work presented by a post, such as The Étude Sky (`130U/etude-sky`), is a separate
 repository published by GitHub Pages under this domain at `/<repository>/`; this
@@ -191,7 +191,9 @@ dependence manuscript's four figures from the formulas in
 `FigureController` adds view switches, readouts, linked emphasis, the
 proof-obligation graph, table column highlighting and the entrances of figures and
 table rows. The research renderer frames every table and sets a directly preceding
-"**Table N.**" caption paragraph inside the frame as its title.
+"**Table N.**" caption paragraph inside the frame as its title; `TableStage` keeps row
+labels in view, fades the scrolling edge, and opens the zoomed view of any table, so a
+new table needs no registration.
 `app/lib/content/article-figures.ts` places each figure after one existing block,
 named by the opening of its source text or a table's first header cell, and lists the
 manuscript text each figure restates. The build fails when an anchor matches no block
@@ -264,8 +266,8 @@ visible copy. The static preview binds to `127.0.0.1:8123` by default and serves
 development security policy required by Next.js tooling.
 
 Review desktop and phone layouts, including 320px, keyboard navigation, menu
-dismissal, reduced motion, JavaScript-free content, local links, equations, tables,
-note previews, and architecture exports. Run `git diff --check` and inspect staged
+dismissal, reduced motion, JavaScript-free content, local links, equations, tables and
+their zoom, note previews, and architecture exports. Run `git diff --check` and inspect staged
 files for credentials, temporary files, and unintended generated output.
 
 The workflow validates pull requests with read-only repository access. A push to

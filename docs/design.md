@@ -107,10 +107,11 @@ fractional viewport widths continuously.
 
 `--reading-measure` (36rem, about seventy characters of Source Serif 4 at the reading
 size) caps every narrative container: introductions, standfirsts, stacked ledger prose,
-detail pages, captions, posts, and article reading columns. Lines run from about 30
-characters on a 320px phone and 50 to 60 on a portrait iPad to about 70 in a full reading
-column; prose on the hanging axis holds 45 to 52. Paragraphs wrap ragged-right with no
-forced breaks, and long unbroken strings wrap in an emergency.
+detail pages, captions, posts, and article reading columns. Lines average about 33
+characters on a 320px phone (26 inside a frame), 51 to 66 on a portrait iPad, and 72 in a
+full reading column; prose on the hanging axis holds 42 at 1200px and 52 from 1440px.
+Paragraphs wrap ragged-right with no forced breaks, and long unbroken strings wrap in an
+emergency.
 
 ### Hanging layout
 
@@ -311,8 +312,21 @@ title inside the frame; the header is a faintly tinted band in label type over a
 rule; rows part on hairlines; numeric columns align right in tabular figures. The
 hovered row and column take a quiet tint and the hovered column's header turns blue; a
 row or column the table emphasizes carries the accent tint. Rows enter once, top to
-bottom, as a table scrolls into view. Tables keep normal word boundaries and a minimum
-useful column width, and only tables wider than the reading column scroll.
+bottom, as a table scrolls into view.
+
+A row of values holds one line. Only a column whose widest cell is a sentence wraps, at
+a 16rem minimum, and headings take at most two lines. A table wider than the reading
+column closes up its columns if that makes it fit, and otherwise scrolls: its row labels
+stay in view when they leave room for the values, and the right edge fades while more
+remains.
+
+Every table carries a magnifier in the top-right corner of its frame, on the title's
+first line or on the header band. Zoom lifts the table from its place to the center of
+the window, on a square sheet with the page blurred behind it. The stage sets the
+largest type that keeps every row on one line: 20px, then 18px, then 16px, then closer
+columns, then headings on two lines, and only then does it wrap the sentence columns
+across the full width. The magnifier, the blurred page, and Escape close the stage and
+return focus to the table's own control.
 
 ## Clarinet hero
 
@@ -352,9 +366,10 @@ JavaScript, a same-shape SVG of separated dots stands in.
 Hover feedback applies only to fine pointers, and focus is always a visible blue
 outline. Anchor links use native scrolling. The mobile menu opens with a short
 transition, traps keyboard focus, closes on Escape or navigation, and releases the page
-when the viewport reaches desktop width. Editorial surfaces are flat; the note-preview
-dialog alone has rounded corners, marking its temporary state. Reduced motion removes
-every decorative transition, entrance, and scroll effect.
+when the viewport reaches desktop width. Editorial surfaces are flat. Two temporary
+surfaces lift off the page with a shadow: the note-preview dialog, whose rounded corners
+mark its state, and the zoomed table's square sheet. Reduced motion removes every
+decorative transition, entrance, and scroll effect.
 
 ## Copy
 

@@ -34,8 +34,6 @@
   position: relative;
   z-index: 2;
   padding: 64px 0 80px 28px;
-  opacity: var(--hero-copy-opacity, 1);
-  transform: translate3d(0, var(--hero-copy-y, 0px), 0);
 }
 .copy h1 {
   margin: 0;
@@ -90,7 +88,6 @@
   position: absolute;
   inset: 0;
   pointer-events: none;
-  opacity: var(--hero-frame-opacity, 1);
 }
 .markers i { position: absolute; width: 2px; height: 11px; background: var(--accent); }
 .cornerTL { left: 5.1%; top: 4.6%; }

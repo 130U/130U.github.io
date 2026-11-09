@@ -1,18 +1,3 @@
-.frontMatter {
-  margin-top: 1.5rem;
-  font-family: var(--font-prose);
-  font-size: var(--type-reading);
-  line-height: var(--reading-leading);
-}
-
-.frontMatter p {
-  margin: 0;
-}
-
-.frontMatter p + p {
-  margin-top: 0.75rem;
-}
-
 .body {
   max-width: var(--reading-measure);
   font-size: var(--type-reading);
@@ -60,8 +45,8 @@
    title; the header is a tinted band in label type over a firm rule; rows part
    on hairlines; the hovered row and column take a quiet tint and the hovered
    column's header turns accent. Numbers align right in tabular figures. A row
-   holds one line of values, and only a column of sentences wraps, so a table
-   wider than the column scrolls instead of folding. */
+   holds one line of values and only a column of sentences wraps; a table wider
+   than the column scrolls. */
 .tableFrame {
   --table-pad: clamp(16px, 4cqi, 24px);
   --table-surface: var(--page);
@@ -344,8 +329,8 @@
 }
 
 /* Zoomed, the table lifts onto a sheet over the blurred page. The stage sets it
-   at the largest step of type that holds every row on one line; a table of
-   long sentences wraps those columns across the full width instead. */
+   at the largest step of type that holds every row on one line. In a table of
+   long sentences, those columns wrap across the full width. */
 .stage {
   --stage-gutter: clamp(8px, 3.5vw, 48px);
   position: fixed;

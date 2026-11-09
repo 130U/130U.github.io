@@ -61,7 +61,7 @@ test("all research tables retain native table semantics inside named keyboard-ac
     const controls = [...html.matchAll(/<button\b([^>]*\bdata-table-zoom\b[^>]*)>/gu)];
     assert.equal(controls.length, count, `${route}: every table carries one zoom control.`);
     for (const [, control] of controls) {
-      assert.match(control, /\baria-label="Zoom In"/u);
+      assert.match(control, /\baria-label="Zoom in"/u);
       assert.match(control, /\baria-haspopup="dialog"/u);
       assert.match(control, /\bhidden\b/u, "The control appears only once the page's script can open the stage.");
     }

@@ -30,8 +30,8 @@ Next.js exports HTML, CSS, and JavaScript to `website/out/`. Build assembly incl
 this viewer and applies the production content security policy before GitHub Actions
 deploys the artifact to GitHub Pages. There is no request-time API, database,
 authentication, or analytics. The browser interactions are the Canvas 2D clarinet hero,
-the top-level navigation menu, article contents, article figures, and legal-note
-previews; reading and ordinary links work without JavaScript.
+the top-level navigation menu, article contents, article figures, research-table zoom,
+and legal-note previews; reading and ordinary links work without JavaScript.
 
 ## Update the viewer
 

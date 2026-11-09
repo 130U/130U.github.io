@@ -13,7 +13,6 @@ export type PaperRun = {
 type PaperParagraph = {
   text: string;
   runs: PaperRun[];
-  sourcePages?: number[];
 };
 
 type PaperBlock = PaperParagraph & {

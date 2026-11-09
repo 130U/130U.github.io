@@ -457,7 +457,7 @@
 .seg {
   position: absolute;
   top: 50%;
-  height: var(--bar-h, 14px);
+  height: 14px;
   transform: translateY(-50%);
   transform-origin: left center;
   background: currentColor;
