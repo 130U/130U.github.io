@@ -3,8 +3,8 @@ const HEIGHT_PER_WIDTH = 1223 / 1286;
 
 /**
  * Match the CSS box to its integer backing store and align its viewport origin.
- * Observe the stage, not this canvas: inline rounding must never become the
- * source of the next responsive measurement. Backing-store allocation stays
+ * The stage is the observed box, so inline rounding never becomes the source
+ * of the next responsive measurement. Backing-store allocation stays
  * with the renderer, so calling this on scroll cannot clear the bitmap.
  */
 export function alignCanvas(canvas: HTMLCanvasElement) {

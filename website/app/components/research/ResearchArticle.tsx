@@ -30,8 +30,8 @@ function numericCell({ source }: ResearchCell) {
   return NUMERIC_CELL.test(formula ? formula[1].replace(/\s+/gu, "") : value);
 }
 
-function numericColumns(rows: ResearchCell[][], headerRow: boolean) {
-  const body = headerRow ? rows.slice(1) : rows;
+function numericColumns(rows: ResearchCell[][]) {
+  const body = rows.slice(1);
   return rows[0].map((_, column) => column > 0 && body.length > 0
     && body.every((row) => numericCell(row[column]))
     && body.some((row) => row[column].source.trim() !== "—"));
@@ -60,8 +60,8 @@ function contentWidth(inlines: ResearchInline[]): number {
   return Math.max(widest, line);
 }
 
-function sentenceColumns(rows: ResearchCell[][], headerRow: boolean) {
-  const body = headerRow ? rows.slice(1) : rows;
+function sentenceColumns(rows: ResearchCell[][]) {
+  const body = rows.slice(1);
   return rows[0].map((_, column) => body.some((row) => contentWidth(row[column].inlines) > SENTENCE_EM));
 }
 
@@ -98,9 +98,8 @@ export function ResearchArticle({ project, active, returnPath, returnLabel, titl
   showcase?: ShowcaseEntry;
 }) {
   const firstHeading = project.blocks.findIndex((block) => block.type === "heading");
-  const hasAbstract = project.blocks[firstHeading]?.source.trim() === "## Abstract";
-  const frontMatterCount = hasAbstract ? firstHeading : 1;
-  const bodyStart = hasAbstract ? project.blocks.findIndex((block, index) => index > firstHeading && block.type === "heading") : firstHeading;
+  // A paper's abstract stands before its first chapter; an AI article opens on its first chapter.
+  const bodyStart = showcase ? firstHeading : project.blocks.findIndex((block, index) => index > firstHeading && block.type === "heading");
   const headingMap = buildArticleHeadingMap(project.blocks);
   const headingPresentations = formatArticleHeadings(project.blocks);
   const figures = placeFigures(
@@ -133,13 +132,12 @@ export function ResearchArticle({ project, active, returnPath, returnLabel, titl
       const caption = <InlineContent inlines={linkArticleSectionReferences(block.inlines, project.slug, headingMap)} />;
       return <ManuscriptFigure key={index} id={manuscriptFigureFor(project.slug, block.src, project.markdown)} anchor={block.id} captionId={`research-figure-${index}-caption`} attributes={marker} caption={caption} />;
     }
-    const numeric = numericColumns(block.rows, block.headerRow);
-    const sentences = sentenceColumns(block.rows, block.headerRow);
+    const numeric = numericColumns(block.rows);
+    const sentences = sentenceColumns(block.rows);
     const emphasis = emphasisFor(project.slug, block.rows[0][0].source);
-    const bodyOffset = block.headerRow ? 1 : 0;
     const tableRows = block.rows.map((row, rowIndex) => (
-      <tr key={rowIndex} data-emphasis={emphasis?.row !== undefined && rowIndex - bodyOffset === emphasis.row ? "" : undefined}>{row.map((cell, cellIndex) => {
-        const Cell = block.headerRow && rowIndex === 0 ? "th" : "td";
+      <tr key={rowIndex} data-emphasis={emphasis?.row !== undefined && rowIndex - 1 === emphasis.row ? "" : undefined}>{row.map((cell, cellIndex) => {
+        const Cell = rowIndex === 0 ? "th" : "td";
         return (
           <Cell
             key={cellIndex}
@@ -161,11 +159,11 @@ export function ResearchArticle({ project, active, returnPath, returnLabel, titl
             <InlineContent inlines={linkArticleSectionReferences(captionBlock.inlines, project.slug, headingMap)} />
           </p>
         )}
-        <button type="button" className={styles.zoom} data-table-zoom aria-label="Zoom In" aria-haspopup="dialog" hidden><ZoomGlyph /></button>
+        <button type="button" className={styles.zoom} data-table-zoom aria-label="Zoom in" aria-haspopup="dialog" hidden><ZoomGlyph /></button>
         <div tabIndex={0} role="region" aria-label="Research data table" className={styles.tableRegion}>
           <table {...marker} id={block.id} className={styles.table} data-research-table>
-            {block.headerRow && <thead>{tableRows[0]}</thead>}
-            <tbody>{block.headerRow ? tableRows.slice(1) : tableRows}</tbody>
+            <thead>{tableRows[0]}</thead>
+            <tbody>{tableRows.slice(1)}</tbody>
           </table>
         </div>
       </div>
@@ -176,15 +174,15 @@ export function ResearchArticle({ project, active, returnPath, returnLabel, titl
       <article className={readingStyles.paper} aria-labelledby={titleId}>
         <header className={`page-intro ${readingStyles.header}`}>
           <h1 id={titleId} tabIndex={-1}>{showcase?.headline ?? project.title}</h1>
-          {showcase ? <ExperienceMetadata entry={showcase} /> : !project.repositoryUrl && frontMatterCount > 0 && <div className={styles.frontMatter}>{renderedBlocks.slice(0, frontMatterCount)}</div>}
+          {showcase && <ExperienceMetadata entry={showcase} />}
           {project.repositoryUrl && <p className={styles.sourceLinks}><a href={project.repositoryUrl}>GitHub</a><a href={project.sourceUrl}>Full Manuscript</a></p>}
           {showcase && <ExperienceDiagram entry={showcase} />}
         </header>
 
         <ArticleReadingLayout
-          overview={showcase ? <><KeyContributions entry={showcase} /><ArchitecturalContext entry={showcase} /></> : <>{!hasAbstract && <h2 id="overview" tabIndex={-1}>Overview</h2>}{renderedBlocks.slice(frontMatterCount, bodyStart)}</>}
+          overview={showcase ? <><KeyContributions entry={showcase} /><ArchitecturalContext entry={showcase} /></> : renderedBlocks.slice(firstHeading, bodyStart)}
           items={[
-            ...(showcase ? [{ id: "key-contributions", text: showcase.contributionsLabel, level: 1 }] : !hasAbstract ? [{ id: "overview", text: "Overview", level: 1 }] : []),
+            ...(showcase ? [{ id: "key-contributions", text: showcase.contributionsLabel, level: 1 }] : []),
             ...(showcase?.architecturalContext ? [{ id: "architectural-context", text: showcase.architecturalContext.title, level: 1 }] : []),
             ...project.blocks.filter((block) => block.type === "heading").map((heading) => ({ id: heading.id, text: headingPresentations.get(heading.id)!.text, level: heading.level - 1 })),
           ]}

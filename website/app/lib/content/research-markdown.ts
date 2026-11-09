@@ -13,7 +13,7 @@ export type ResearchBlock =
   | { type: "heading"; source: string; level: 2 | 3; id: string; inlines: ResearchInline[] }
   | { type: "equation"; source: string; tex: string; id?: string }
   | { type: "figure"; source: string; src: string; inlines: ResearchInline[]; id?: string }
-  | { type: "table"; source: string; headerRow: boolean; rows: ResearchCell[][]; id?: string };
+  | { type: "table"; source: string; rows: ResearchCell[][]; id?: string };
 
 export type ResearchArticleContent = {
   slug: string;
@@ -88,6 +88,7 @@ export function parseResearchMarkdown(markdown: string, options: { joinSoftLines
   function table(source: string): ResearchBlock {
     const match = source.match(/^<table\b([^>]*)>([\s\S]*?)<\/table>$/u);
     if (!match) throw new Error("Incomplete Research table.");
+    if (!/\bheader-row="true"/u.test(match[1])) throw new Error("A Research table needs a header row.");
     const rows: ResearchCell[][] = [];
     let rowOffset = 0;
     for (const row of match[2].matchAll(/<tr>\s*([\s\S]*?)\s*<\/tr>/gu)) {
@@ -106,7 +107,7 @@ export function parseResearchMarkdown(markdown: string, options: { joinSoftLines
     if (!rows.length || match[2].slice(rowOffset).trim() || rows.some((row) => row.length !== rows[0].length)) {
       throw new Error("Research tables must retain complete rectangular rows.");
     }
-    return { type: "table", source: restoreSource(source), headerRow: /\bheader-row="true"/u.test(match[1]), rows };
+    return { type: "table", source: restoreSource(source), rows };
   }
 
   const blocks: ResearchBlock[] = [];
@@ -169,7 +170,7 @@ export function parseResearchMarkdown(markdown: string, options: { joinSoftLines
       }
       const rows = [tableLines[0], ...tableLines.slice(2)].map((row) => cells(row).map((cell) => ({ source: restoreSource(cell), inlines: inlines(cell) })));
       if (!rows[0].length || rows.some((row) => row.length !== rows[0].length)) throw new Error("Research tables must retain complete rectangular rows.");
-      blocks.push({ type: "table", source: restoreSource(tableLines.join("\n")), headerRow: true, rows, ...takeAnchor() });
+      blocks.push({ type: "table", source: restoreSource(tableLines.join("\n")), rows, ...takeAnchor() });
       continue;
     }
 

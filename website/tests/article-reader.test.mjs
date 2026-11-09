@@ -134,13 +134,12 @@ test("all eleven full articles retain introduction, contents and body order with
       assert.equal(Number(sourceBlocks[0].attrs.get("data-research-block")), 0, `${route}: retain the complete imported manuscript from its first chapter.`);
       assert.equal(sourceBlocks[0].attrs.get("data-source-number"), "1");
       assert.match(readable(headings[1]), /^Architectural Context:/u, `${route}: include the architectural bridge before the manuscript.`);
-      assert.equal(headings[2], sourceBlocks[0], `${route}: no repeated title or Overview heading may precede the first source chapter.`);
-      assert.equal(elements(body[0], (node) => node.tag === "p" && node.start < sourceBlocks[0].start).length, 0, `${route}: no repeated Project/Author or overview prose may precede the first source chapter.`);
+      assert.equal(headings[2], sourceBlocks[0], `${route}: the first source chapter follows the architectural context directly.`);
+      assert.equal(elements(body[0], (node) => node.tag === "p" && node.start < sourceBlocks[0].start).length, 0, `${route}: no prose precedes the first source chapter.`);
     }
     if (isExperience) {
       assert.equal(links[0], "#key-contributions", `${route}: contribution points open the article directory.`);
-      assert.equal(readable(headings[0]), "Key Contributions", `${route}: contribution points replace the generic introductory label.`);
-      assert.ok(!links.includes("#overview"), `${route}: do not duplicate the contribution lead with an Overview entry.`);
+      assert.equal(readable(headings[0]), "Key Contributions", `${route}: contribution points open the article body.`);
     }
     for (const heading of headings) {
       const id = heading.attrs.get("id");
