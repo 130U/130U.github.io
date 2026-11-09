@@ -165,23 +165,29 @@ export function FigureController() {
       }
     }
 
-    // Research tables: highlight the hovered column and its header.
+    // Research tables: highlight the hovered column and its header, in the
+    // article and on the zoomed stage alike.
     const tables = [...document.querySelectorAll<HTMLTableElement>("[data-research-table]")];
-    for (const table of tables) {
-      let column = -1;
-      const paint = (next: number) => {
-        if (next === column) return;
-        column = next;
-        for (const row of table.rows) {
-          [...row.cells].forEach((cell, index) => cell.toggleAttribute("data-column-hover", index === column && index > 0));
+    let litTable: HTMLTableElement | null = null;
+    let litColumn = -1;
+    const lightColumn = (table: HTMLTableElement | null, column: number) => {
+      if (table === litTable && column === litColumn) return;
+      const paint = (target: HTMLTableElement | null, index: number) => {
+        if (!target) return;
+        for (const row of target.rows) {
+          [...row.cells].forEach((cell, position) => cell.toggleAttribute("data-column-hover", position === index && position > 0));
         }
       };
-      listen(table as unknown as HTMLElement, "pointerover", (event) => {
-        const cell = (event.target as HTMLElement).closest("td, th") as HTMLTableCellElement | null;
-        paint(cell ? cell.cellIndex : -1);
-      });
-      listen(table as unknown as HTMLElement, "pointerleave", () => paint(-1));
-    }
+      if (table !== litTable) paint(litTable, -1);
+      paint(table, column);
+      litTable = table;
+      litColumn = column;
+    };
+    listen(document.documentElement, "pointerover", (event) => {
+      const cell = (event.target as Element).closest<HTMLTableCellElement>("[data-research-table] td, [data-research-table] th");
+      lightColumn(cell?.closest<HTMLTableElement>("[data-research-table]") ?? null, cell ? cell.cellIndex : -1);
+    });
+    listen(document.documentElement, "pointerleave", () => lightColumn(null, -1));
 
     // One entrance per figure or table, only for those that start below the fold.
     const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
