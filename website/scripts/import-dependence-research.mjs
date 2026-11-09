@@ -272,10 +272,8 @@ assert.equal(emittedAnchors.size, [...normalized.matchAll(/<a id="([^"]+)"><\/a>
 const content = {
   slug: "critical-dependence-stress-for-portfolio-diversification",
   title: "Critical Dependence Stress for Portfolio Diversification",
-  sourceTitle,
   description: "Critical dependence stress for diversification gains under fixed marginals, with variational limits, marginal-restoration premiums, and projected flow duality.",
-  introduction: [], sourceUrl, repositoryUrl, sourceEditedAt: manifest.commitDate, sourceCommit: commit, sourceBlob: paperBlob,
-  coverage: { mainFiles: mainFiles.length, mainSections: 5, mainSubsections: 11, figures: 4, references: bibliographyKeys.length, omitted: "Technical appendices and declarations only; all abstract and main-text words, mathematical formulas, numbered results, four figures, and references are retained." },
+  sourceUrl, repositoryUrl, sourceEditedAt: manifest.commitDate, sourceCommit: commit, sourceBlob: paperBlob,
   markdown: normalized,
 };
 await writeOrCheck(outputUrl, JSON.stringify(content, null, 2) + "\n");

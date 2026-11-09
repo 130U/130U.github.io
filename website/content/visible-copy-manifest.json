@@ -6,9 +6,9 @@
   ],
   "routes": {
     "/": {
-      "textSha256": "1c3c8c01f8e4f7258c516a18a74f18740c7fcf5546dab7d582b93a648bdf7df2",
-      "characterCount": 3084,
-      "wordCount": 429,
+      "textSha256": "eefbf9538d012eb06acd74644849fa7f3f26115478dad9d719d5c17794d73646",
+      "characterCount": 3109,
+      "wordCount": 431,
       "preview": "Skip to Main Content Theodore Ouyang Duke Alumnus Sequoia Fellow Theodore Ouyang About Experience Blog Thinking Mathematically Working in AI Mathematics is how ",
       "altTexts": [],
       "ariaLabels": [
@@ -609,10 +609,10 @@
       "formulaCount": 363
     },
     "/certified-rough-heston-valuation/": {
-      "textSha256": "ab10a3231d033e8cf3fdaf1ea8843c180dd9aefe159c32062a93b1fec2cbe5b3",
-      "characterCount": 60965,
-      "wordCount": 8746,
-      "preview": "Skip to Main Content Theodore Ouyang Back to Selected Research Certified Joint Pricing Errors in Rough Heston GitHub Full Manuscript Abstract We give determinis",
+      "textSha256": "ee9469084b7993018601ace81032b4467fdb7845b884187c39572506493357ea",
+      "characterCount": 61215,
+      "wordCount": 8776,
+      "preview": "Skip to Main Content Theodore Ouyang Back to Selected Research Certified Joint Pricing Errors in Rough Heston GitHub Full Manuscript Abstract We develop a metho",
       "altTexts": [],
       "ariaLabels": [
         "Theodore Ouyang home",
@@ -752,21 +752,21 @@
       ],
       "metadata": {
         "title": "Certified Joint Pricing Errors in Rough Heston | Theodore Ouyang",
-        "description": "Deterministic joint pricing-error certificates for stored rough Heston outputs, covering finite-history propagation, portfolios and finite-candidate decisions.",
+        "description": "A method for certifying portfolio valuation errors in rough Heston, carrying continuous Riccati residual bounds through to complete pricing guarantees.",
         "canonical": "https://www.theodoreoy.com/certified-rough-heston-valuation/",
         "openGraphTitle": "Certified Joint Pricing Errors in Rough Heston",
-        "openGraphDescription": "Deterministic joint pricing-error certificates for stored rough Heston outputs, covering finite-history propagation, portfolios and finite-candidate decisions.",
+        "openGraphDescription": "A method for certifying portfolio valuation errors in rough Heston, carrying continuous Riccati residual bounds through to complete pricing guarantees.",
         "openGraphUrl": "https://www.theodoreoy.com/certified-rough-heston-valuation/",
         "twitterTitle": "Certified Joint Pricing Errors in Rough Heston",
-        "twitterDescription": "Deterministic joint pricing-error certificates for stored rough Heston outputs, covering finite-history propagation, portfolios and finite-candidate decisions."
+        "twitterDescription": "A method for certifying portfolio valuation errors in rough Heston, carrying continuous Riccati residual bounds through to complete pricing guarantees."
       },
       "mathSourceSha256": "198ad0c1240f95b196012516df8cb08b33e4da42ce7c6272da686790510245cc",
       "formulaCount": 271
     },
     "/experience/": {
-      "textSha256": "7c4caab9c7835f98c0ff0a83f2bdf15ace5d6a7244e089bc7f0c3313ba2426a6",
-      "characterCount": 8940,
-      "wordCount": 1176,
+      "textSha256": "ac7f7d7452a12dae126fc1a8acdb44dd291bcbd2d4474ad3d9825b5b024f19f8",
+      "characterCount": 8857,
+      "wordCount": 1164,
       "preview": "Skip to Main Content Theodore Ouyang About Experience Blog Experience: Areas of Focus AI Research and Engineering Data Science Legal Research and Policy Analysi",
       "altTexts": [],
       "ariaLabels": [
@@ -804,9 +804,9 @@
       }
     },
     "/experience/statistical-inference-and-resource-allocation-in-expert-data-production/": {
-      "textSha256": "23e54d5129e2a9f887b52765d429990c65f9aeb9499ae43bc3b06161970dc5c7",
-      "characterCount": 24865,
-      "wordCount": 3546,
+      "textSha256": "722cd679ec7a8030f0fee04bac29da6e076dda9da2c5e2a923454581b93e56d1",
+      "characterCount": 26136,
+      "wordCount": 3791,
       "preview": "Skip to Main Content Theodore Ouyang Back to Experience Large-Scale Domain Expert Feedback Governance and Adaptive Review Organization Duke University × Leading",
       "altTexts": [],
       "ariaLabels": [
@@ -862,21 +862,21 @@
       ],
       "metadata": {
         "title": "Duke University × Leading Foundation Model Developer: Large-Scale Domain Expert Feedback Governance and Adaptive Review | Theodore Ouyang",
-        "description": "With a leading foundation model developer, I led the statistical system behind expert feedback for LLM post-training, the first engineering implementation of prediction-assisted statistical inference and capacity-constrained review allocation in expert data...",
+        "description": "I developed a statistical decision framework for measuring and improving expert-generated training data.",
         "canonical": "https://www.theodoreoy.com/experience/statistical-inference-and-resource-allocation-in-expert-data-production/",
         "openGraphTitle": "Duke University × Leading Foundation Model Developer: Large-Scale Domain Expert Feedback Governance and Adaptive Review",
-        "openGraphDescription": "With a leading foundation model developer, I led the statistical system behind expert feedback for LLM post-training, the first engineering implementation of prediction-assisted statistical inference and capacity-constrained review allocation in expert data...",
+        "openGraphDescription": "I developed a statistical decision framework for measuring and improving expert-generated training data.",
         "openGraphUrl": "https://www.theodoreoy.com/experience/statistical-inference-and-resource-allocation-in-expert-data-production/",
         "twitterTitle": "Duke University × Leading Foundation Model Developer: Large-Scale Domain Expert Feedback Governance and Adaptive Review",
-        "twitterDescription": "With a leading foundation model developer, I led the statistical system behind expert feedback for LLM post-training, the first engineering implementation of prediction-assisted statistical inference and capacity-constrained review allocation in expert data..."
+        "twitterDescription": "I developed a statistical decision framework for measuring and improving expert-generated training data."
       },
-      "mathSourceSha256": "1c7fe0dd993c6bceba21c59d7773a33d0974604576af14cfad1713957ce592f6",
+      "mathSourceSha256": "bfb84796e88f9ae01b5e621d5a961a046424b711d12aaa8ace6e6934e9bbb5d3",
       "formulaCount": 164
     },
     "/experience/task-validity-in-financial-synthetic-data/": {
-      "textSha256": "d2a9dffae6df93b301ba148c905039f7aa9c8e7b58f14d697583a38c148d36b0",
-      "characterCount": 24043,
-      "wordCount": 3299,
+      "textSha256": "e8b4789333144b57aba37a2db537977f1e90c0d2003f692339778b2201fa9551",
+      "characterCount": 24922,
+      "wordCount": 3445,
       "preview": "Skip to Main Content Theodore Ouyang Back to Experience Financial Task Design and Synthetic Data Engineering Organization Duke University × Leading Foundation M",
       "altTexts": [],
       "ariaLabels": [
@@ -917,21 +917,21 @@
       ],
       "metadata": {
         "title": "Duke University × Leading Foundation Model Developer: Financial Task Design and Synthetic Data Engineering | Theodore Ouyang",
-        "description": "I designed the data strategy for financial post-training in a frontier foundation model program, pioneering constraint-preserving synthetic data and structured expert preference supervision for financial LLM post-training in engineering practice.",
+        "description": "I developed a framework for scaling financial training data while preserving the validity of its supervision. It connects synthetic scenarios to the decisions, evidence and expert preferences those scenarios are meant to teach.",
         "canonical": "https://www.theodoreoy.com/experience/task-validity-in-financial-synthetic-data/",
         "openGraphTitle": "Duke University × Leading Foundation Model Developer: Financial Task Design and Synthetic Data Engineering",
-        "openGraphDescription": "I designed the data strategy for financial post-training in a frontier foundation model program, pioneering constraint-preserving synthetic data and structured expert preference supervision for financial LLM post-training in engineering practice.",
+        "openGraphDescription": "I developed a framework for scaling financial training data while preserving the validity of its supervision. It connects synthetic scenarios to the decisions, evidence and expert preferences those scenarios are meant to teach.",
         "openGraphUrl": "https://www.theodoreoy.com/experience/task-validity-in-financial-synthetic-data/",
         "twitterTitle": "Duke University × Leading Foundation Model Developer: Financial Task Design and Synthetic Data Engineering",
-        "twitterDescription": "I designed the data strategy for financial post-training in a frontier foundation model program, pioneering constraint-preserving synthetic data and structured expert preference supervision for financial LLM post-training in engineering practice."
+        "twitterDescription": "I developed a framework for scaling financial training data while preserving the validity of its supervision. It connects synthetic scenarios to the decisions, evidence and expert preferences those scenarios are meant to teach."
       },
-      "mathSourceSha256": "c5e1423af117a27407494c4ca91600bcdacfc7a99418a1cc5b14fb0aaed655f2",
+      "mathSourceSha256": "13fbcd83b67a4a0b7677ab5bf402c2071088a1289b2ad507b96099dcfb86e052",
       "formulaCount": 137
     },
     "/experience/verification-and-supervision-in-scientific-reasoning-tasks/": {
-      "textSha256": "3f0f88c15db8081e700848c363e5a76e1f0e48e1ba6a88e782b4103c4e2e25cb",
-      "characterCount": 24274,
-      "wordCount": 3465,
+      "textSha256": "e9ee7d99143881c8dfdfea771b53d43b1115ba6073d89a999026be22f6d85b47",
+      "characterCount": 25043,
+      "wordCount": 3583,
       "preview": "Skip to Main Content Theodore Ouyang Back to Experience General Reasoning Evaluation and Layered Verification Organization Duke University × Frontier AI Researc",
       "altTexts": [],
       "ariaLabels": [
@@ -988,21 +988,21 @@
       ],
       "metadata": {
         "title": "Duke University × Frontier AI Research Laboratory: General Reasoning Evaluation and Layered Verification | Theodore Ouyang",
-        "description": "I developed a framework for evaluating and supervising general reasoning with a frontier AI research laboratory, the first to put joint verification across final answers, visible reasoning and execution evidence into engineering practice for frontier model...",
+        "description": "I developed a proof-obligation framework for reasoning verification, linking conclusions to their assumptions, derivations and execution evidence.",
         "canonical": "https://www.theodoreoy.com/experience/verification-and-supervision-in-scientific-reasoning-tasks/",
         "openGraphTitle": "Duke University × Frontier AI Research Laboratory: General Reasoning Evaluation and Layered Verification",
-        "openGraphDescription": "I developed a framework for evaluating and supervising general reasoning with a frontier AI research laboratory, the first to put joint verification across final answers, visible reasoning and execution evidence into engineering practice for frontier model...",
+        "openGraphDescription": "I developed a proof-obligation framework for reasoning verification, linking conclusions to their assumptions, derivations and execution evidence.",
         "openGraphUrl": "https://www.theodoreoy.com/experience/verification-and-supervision-in-scientific-reasoning-tasks/",
         "twitterTitle": "Duke University × Frontier AI Research Laboratory: General Reasoning Evaluation and Layered Verification",
-        "twitterDescription": "I developed a framework for evaluating and supervising general reasoning with a frontier AI research laboratory, the first to put joint verification across final answers, visible reasoning and execution evidence into engineering practice for frontier model..."
+        "twitterDescription": "I developed a proof-obligation framework for reasoning verification, linking conclusions to their assumptions, derivations and execution evidence."
       },
       "mathSourceSha256": "5ef4514f8cd6eac8045ccdf212cf1d2516771c328cb893a03283a57fcbb903a2",
       "formulaCount": 143
     },
     "/experience/evidence-uncertainty-and-decision-guarantees-in-investment-research/": {
-      "textSha256": "d849ccb35eb089f0c2995da1920c93907c1189b83a5cf8c9bd9780e32beb8d5e",
-      "characterCount": 18902,
-      "wordCount": 2778,
+      "textSha256": "7e598a415444d88e5a694f5f51d6f84fd443991276f624ecdfb93b526d191dc0",
+      "characterCount": 20280,
+      "wordCount": 3002,
       "preview": "Skip to Main Content Theodore Ouyang Back to Experience Evidence Verification and Robust Comparison in Investment Research Organization Duke University × Leadin",
       "altTexts": [],
       "ariaLabels": [
@@ -1056,15 +1056,15 @@
       ],
       "metadata": {
         "title": "Duke University × Leading Global Alternative Asset Manager: Evidence Verification and Robust Comparison in Investment Research | Theodore Ouyang",
-        "description": "I developed and implemented a framework for evidence verification and decision assurance with a leading global alternative asset manager, the first engineering implementation in institutional investment research to treat model multiplicity, unverified...",
+        "description": "I developed a decision-theoretic framework for investment due diligence that determines which conclusions the evidence supports and which facts are most valuable to verify next.",
         "canonical": "https://www.theodoreoy.com/experience/evidence-uncertainty-and-decision-guarantees-in-investment-research/",
         "openGraphTitle": "Duke University × Leading Global Alternative Asset Manager: Evidence Verification and Robust Comparison in Investment Research",
-        "openGraphDescription": "I developed and implemented a framework for evidence verification and decision assurance with a leading global alternative asset manager, the first engineering implementation in institutional investment research to treat model multiplicity, unverified...",
+        "openGraphDescription": "I developed a decision-theoretic framework for investment due diligence that determines which conclusions the evidence supports and which facts are most valuable to verify next.",
         "openGraphUrl": "https://www.theodoreoy.com/experience/evidence-uncertainty-and-decision-guarantees-in-investment-research/",
         "twitterTitle": "Duke University × Leading Global Alternative Asset Manager: Evidence Verification and Robust Comparison in Investment Research",
-        "twitterDescription": "I developed and implemented a framework for evidence verification and decision assurance with a leading global alternative asset manager, the first engineering implementation in institutional investment research to treat model multiplicity, unverified..."
+        "twitterDescription": "I developed a decision-theoretic framework for investment due diligence that determines which conclusions the evidence supports and which facts are most valuable to verify next."
       },
-      "mathSourceSha256": "d9ea12da8d992dd5cb18b664931a3ef8b8544703cae339b2dca3c88272adbdb9",
+      "mathSourceSha256": "9d042591ffe1335c4569abcd4aade0dbc0382c1f02b31a727d786388c160a837",
       "formulaCount": 163
     },
     "/experience/autonomous-authority-in-space/": {

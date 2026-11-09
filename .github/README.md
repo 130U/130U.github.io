@@ -19,18 +19,18 @@ Duke Alumnus, B.S. in Mathematics and M.Eng. in Risk Engineering · Sequoia Fell
 - **[Certified Valuation of Arithmetic Asian Options](https://www.theodoreoy.com/certified-valuation-arithmetic-asian-options/)**
   A weighted payoff-remainder method that turns an exact conditional price representation into certified valuations, with a complete Heston discretization-error bound below 0.011025 price units.
 - **[Certified Joint Pricing Errors in Rough Heston](https://www.theodoreoy.com/certified-rough-heston-valuation/)**
-  Joint error enclosures for rough Heston portfolios. Finite-history propagation tightens the complete pricing-error bound by 72.91% with the pricing output unchanged.
+  A method for certifying portfolio valuation errors in rough Heston. By preserving numerical errors shared across options, it can certify portfolio tolerances that separate price bounds cannot.
 
 ## AI Research and Engineering
 
 - **[Large-Scale Domain Expert Feedback Governance and Adaptive Review](https://www.theodoreoy.com/experience/statistical-inference-and-resource-allocation-in-expert-data-production/)**
-  The statistical system behind expert feedback for LLM post-training, coordinating more than 300 specialists.
+  A statistical decision framework for measuring and improving expert-generated training data, supporting a program of more than 300 specialists.
 - **[Financial Task Design and Synthetic Data Engineering](https://www.theodoreoy.com/experience/task-validity-in-financial-synthetic-data/)**
-  The data strategy for financial post-training, including Batch Zero, the calibration protocol since reused across other post-training programs.
+  A framework for scaling financial training data while preserving the validity of its supervision. I created Batch Zero to establish these standards, and the partner company adopted it across other post-training programs.
 - **[General Reasoning Evaluation and Layered Verification](https://www.theodoreoy.com/experience/verification-and-supervision-in-scientific-reasoning-tasks/)**
-  Joint verification of final answers, visible reasoning and execution evidence. Certificate checking made no false acceptances where final-answer matching falsely accepted 75.0%.
+  A proof-obligation framework linking conclusions to their assumptions, derivations and execution evidence. Across 3,600 constructed submissions, the certificate verifier accepted every valid proof and rejected every invalid one.
 - **[Evidence Verification and Robust Comparison in Investment Research](https://www.theodoreoy.com/experience/evidence-uncertainty-and-decision-guarantees-in-investment-research/)**
-  A framework that tells analysts which fact to verify next under model multiplicity and unverified evidence.
+  A decision-theoretic framework for investment due diligence that determines which conclusions the evidence supports and which facts are most valuable to verify next.
 
 ## Legal Research
 

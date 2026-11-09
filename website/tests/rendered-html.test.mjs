@@ -536,7 +536,7 @@ test("About research opens each complete paper through an explicit Read More lin
   for (const [slug, title, description, tables, sections, repository] of [
     ["critical-dependence-stress-for-portfolio-diversification", "Critical Dependence Stress for Portfolio Diversification", "I develop a variational framework", 0, 5, "mathematical-finance-project"],
     ["certified-valuation-arithmetic-asian-options", "Certified Valuation of Arithmetic Asian Options", "discretization-error bound below 0.011025 price units", 11, 10, "certified-valuation-arithmetic-asian-options"],
-    ["certified-rough-heston-valuation", "Certified Joint Pricing Errors in Rough Heston", "finite-history propagation tightens the complete pricing-error upper bound by 72.91%", 13, 8, "certified-rough-heston-valuation"],
+    ["certified-rough-heston-valuation", "Certified Joint Pricing Errors in Rough Heston", "bringing the complete error bound below a 0.25-index-point budget", 13, 8, "certified-rough-heston-valuation"],
   ]) {
     assert.match(about, new RegExp(`id="${slug}"`, "u"));
     const headings = [...about.matchAll(/<h3\b[^>]*>([\s\S]*?)<\/h3>/gu)].map((match) => stripMarkup(match[1]));
@@ -574,7 +574,7 @@ test("Experience presents five numbered sections and all eighteen approved entri
   const html = await routeHtml("/experience/");
   const expected = await approvedExperience();
   assert.deepEqual(expected.map(({ id }) => id), Array.from({ length: 18 }, (_, index) => index + 1));
-  assert.deepEqual(expected.map(({ keyContributions }) => keyContributions.length), [6, 5, 6, 6, 9, 7, 6, 5, 5, 5, 5, 7, 5, 6, 1, 1, 2, 4]);
+  assert.deepEqual(expected.map(({ keyContributions }) => keyContributions.length), [7, 6, 6, 6, 9, 7, 6, 5, 5, 5, 5, 7, 5, 6, 1, 1, 2, 4]);
   assert.deepEqual(experienceEntries(html).map(({ id }) => id), expected.map(({ id }) => id));
   assert.equal(openingTags(html, "h1").length, 1);
   assert.match(html, /<h1>Experience: Areas of Focus<\/h1>/u);
@@ -648,8 +648,8 @@ test("all eighteen approved Experience entries use institution titles and real l
     id: entry.id,
     groups: Object.entries(entry.keyContributionDetails).map(([index, detail]) => ({ index, ordered: detail.ordered, count: detail.items.length })),
   })), [
-    { id: 2, groups: [{ index: "2", ordered: false, count: 4 }] },
-    { id: 3, groups: [{ index: "0", ordered: true, count: 3 }] },
+    { id: 2, groups: [{ index: "4", ordered: false, count: 4 }] },
+    { id: 3, groups: [{ index: "3", ordered: true, count: 3 }] },
   ], "All seven original nested contributions must survive under their correct parent items");
 });
 
