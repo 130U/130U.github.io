@@ -25,7 +25,6 @@ type PaperBlock = PaperParagraph & {
 export type LegalPaper = {
   slug: string;
   title: string;
-  subtitle?: string;
   author: string;
   date: string;
   abstract: PaperParagraph[];

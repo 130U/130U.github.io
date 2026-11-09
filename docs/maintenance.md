@@ -136,7 +136,9 @@ with a one-line `description` and revises expository prose only. The frozen JSON
 pinned to upstream. `tests/site-edition.test.mjs` requires the edition to keep the frozen
 mathematics, formal statements, tables, references, and chapter structure. Edit the
 edition for wording; rerun the importers only when the upstream manuscript changes, then
-reconcile the edition with the new import.
+reconcile the edition with the new import. The Rough Heston page's Full Manuscript
+action is set in `app/lib/content/selected-research.ts` and points at the public
+paper's fixed commit.
 
 The dependence source tree includes supporting TeX inputs needed to resolve
 cross-references. The article draws its four figures natively from their formulas (see

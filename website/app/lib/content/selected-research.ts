@@ -4,7 +4,6 @@ import { parseResearchMarkdown, type ResearchArticleContent } from "./research-m
 
 type SelectedResearchSource = Omit<ResearchArticleContent, "blocks"> & {
   description: string;
-  introduction: string[];
   repositoryUrl: string;
   sourceCommit: string;
   sourceBlob: string;
