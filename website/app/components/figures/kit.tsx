@@ -194,9 +194,8 @@ export function Mark({ left, top, anchor = "left", tone: color = "ink", strong, 
     "below-left": ["calc(-100% - 5px)", "5px"],
   };
   const [ax, ay] = offsets[anchor];
-  // Directional labels can use the room on the side they extend to. Centered
-  // labels also use the plot's insets, so their width belongs to their CSS or
-  // explicit style; at an edge, an area-only calculation would give zero.
+  // Directional labels use the space on their anchored side. Centered labels
+  // use their CSS or explicit width, including the plot's insets.
   const extendsLeft = anchor === "right" || anchor.endsWith("-right") && !anchor.startsWith("above") && !anchor.startsWith("below") || anchor === "above-left" || anchor === "below-left";
   const centered = anchor === "top" || anchor === "bottom" || anchor === "center";
   const room = extendsLeft ? left : 100 - left;
