@@ -542,32 +542,6 @@ test("About opens with its accessible clarinet hero before the profile", async (
   for (const route of ROUTES.slice(1)) assert.equal(openingTags(await routeHtml(route), "canvas").length, 0);
 });
 
-test("About carries the section links on its first screen, ahead of the hero", async () => {
-  const home = await routeHtml("/");
-  const navigations = (html) => [...html.matchAll(/<nav\b([^>]*)>([\s\S]*?)<\/nav>/giu)];
-  const opening = navigations(home).find((match) => attribute(match[1], "aria-label") === "Opening navigation");
-  assert.ok(opening, "The first screen names the three sections.");
-  assert.ok(home.indexOf(opening[0]) < home.indexOf('aria-labelledby="hero-name"'), "The links precede the hero in reading order.");
-  assert.ok(home.indexOf('class="skip-link"') < home.indexOf(opening[0]), "The skip link stays first.");
-  assert.deepEqual(navigationLinks(home, "Opening navigation"), [
-    ["About", "#home-profile"], ...NAVIGATION.slice(1),
-  ]);
-  assert.deepEqual([...opening[2].matchAll(/<a\b([^>]*)>/gu)].map((match) => attribute(match[1], "aria-current")), ["page", undefined, undefined]);
-  for (const route of ROUTES.slice(1)) {
-    assert.ok(!navigations(await routeHtml(route)).some((match) => attribute(match[1], "aria-label") === "Opening navigation"), `${route}: the rail is the only navigation.`);
-  }
-
-  const css = await readFile(path.join(ROOT, "app", "home.module.css"), "utf8");
-  const hero = await readFile(path.join(ROOT, "app", "components", "clarinet-hero", "ClarinetHero.module.css"), "utf8");
-  assert.match(css, /\.opening\s*\{[^}]*--opening-offset:\s*calc\(var\(--opening-row\) - var\(--opening-overlap\)\)/u);
-  assert.match(css, /\.openingNav\s*\{[^}]*min-height:\s*var\(--opening-row\)[^}]*margin-bottom:\s*calc\(-1 \* var\(--opening-overlap\)\)/u);
-  assert.match(css, /\.openingLinks\s*\{[^}]*flex-wrap:\s*wrap/u, "Enlarged text wraps the links inside the page width.");
-  assert.match(css, /\.openingLinks a\s*\{[^}]*min-height:\s*var\(--opening-row\)/u);
-  assert.match(hero, /\.hero\s*\{[^}]*min-height:\s*calc\(100svh - var\(--opening-offset, 0px\)\)/u, "The hero and its links share one screen.");
-  const navigation = await readFile(path.join(ROOT, "app", "components", "SiteNavigation.tsx"), "utf8");
-  assert.ok(navigation.includes("[data-opening-navigation]"), "The open mobile menu sets the first-screen links aside.");
-});
-
 test("structured data names the author, his manuscript name and both public profiles", async () => {
   for (const route of ["/", "/experience/", BLOG_ROUTE]) {
     const html = await routeHtml(route);

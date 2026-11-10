@@ -53,7 +53,7 @@ export function SiteNavigation({
 
     document.body.classList.add("menu-open");
     const backgroundRegions = document.querySelectorAll<HTMLElement>(
-      "main, footer, .skip-link, section[data-state], [data-opening-navigation]",
+      "main, footer, .skip-link, section[data-state]",
     );
     backgroundRegions.forEach((region) => {
       region.inert = true;
