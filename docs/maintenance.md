@@ -170,9 +170,7 @@ focus restoration; chapter and endnote links also work without JavaScript.
 ## Shared rendering and extension
 
 `SiteShell` owns the reading frame. `SiteNavigation` renders the primary navigation
-and mobile menu on top-level pages, or one parent link on detail pages. `ClarinetHero`
-renders the same three links from `navigation` under the credentials, styled by
-`.sections` in its CSS module. Detail links
+and mobile menu on top-level pages, or one parent link on detail pages. Detail links
 return to the originating Education, Selected Research, or Experience anchor.
 `ArticleReadingLayout`/`ArticleContents` own the article structure and responsive
 navigation. `ExperienceSection` and `ExperienceDetails` keep all categories and

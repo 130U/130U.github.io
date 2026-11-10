@@ -1,8 +1,6 @@
 "use client";
 
-import Link from "next/link";
 import { useEffect, useRef } from "react";
-import { navigation } from "../../lib/content/site";
 import { ARC, BANDS, BEAMED_NOTE, BELL_OPENING, BELL_RIM, BODY, DETAILS, NODE, NOTE, PADS, PAD_SHADOWS, RINGS, RODS, TIP_OPENING, TRAILS, VIEW_HEIGHT, VIEW_WIDTH, cubicPoint } from "./shape";
 import { mountClarinet } from "./renderer";
 import styles from "./ClarinetHero.module.css";
@@ -26,13 +24,6 @@ export function ClarinetHero() {
             <li><strong>Duke</strong>{" "}<span>Alumnus</span></li>
             <li><strong>Sequoia</strong>{" "}<span>Fellow</span></li>
           </ul>
-          <nav className={styles.sections} aria-label="Opening navigation" data-opening-navigation>
-            {navigation.map((item) => item.key === "about" ? (
-              <a aria-current="page" href="#home-profile" key={item.key}>{item.label}</a>
-            ) : (
-              <Link href={item.href} key={item.key}>{item.label}</Link>
-            ))}
-          </nav>
         </div>
         <div className={styles.visual}>
           <div className={styles.stage}>

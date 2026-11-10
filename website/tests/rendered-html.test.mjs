@@ -440,7 +440,7 @@ test("About opens with its accessible clarinet hero before the profile", async (
   assert.ok(home.indexOf("<canvas") < home.indexOf('id="home-profile"'));
   const hero = home.match(/<section\b[^>]*aria-labelledby="hero-name"[^>]*>([\s\S]*?)<\/section>/u)?.[1];
   assert.ok(hero, "The hero is a named section.");
-  assert.deepEqual(openingTags(hero, "a").map((tag) => attribute(tag, "href")), ["#home-profile", "/experience/", "/blog/"], "The hero links only to the three sections.");
+  assert.equal(openingTags(hero, "a").length, 0, "The hero has no call-to-action link.");
   assert.equal(openingTags(hero, "button").length, 0, "The hero has no playback control.");
   const heading = home.match(/<h1\b[^>]*>([\s\S]*?)<\/h1>/u);
   assert.ok(heading);
@@ -540,36 +540,6 @@ test("About opens with its accessible clarinet hero before the profile", async (
   assert.ok(stripMarkup(contact).includes("@D3rfr31schutz"));
   assert.equal(openingTags(home, "img").length, 0);
   for (const route of ROUTES.slice(1)) assert.equal(openingTags(await routeHtml(route), "canvas").length, 0);
-});
-
-test("About's name block ends with the section links", async () => {
-  const home = await routeHtml("/");
-  const navigations = (html) => [...html.matchAll(/<nav\b([^>]*)>([\s\S]*?)<\/nav>/giu)];
-  const hero = home.match(/<section\b[^>]*aria-labelledby="hero-name"[^>]*>([\s\S]*?)<\/section>/u)?.[1] ?? "";
-  const opening = navigations(hero).find((match) => attribute(match[1], "aria-label") === "Opening navigation");
-  assert.ok(opening, "The first screen names the three sections inside the hero.");
-  assert.equal(navigations(home).filter((match) => attribute(match[1], "aria-label") === "Opening navigation").length, 1);
-  const credentials = hero.indexOf("</ul>");
-  assert.ok(credentials >= 0 && credentials < hero.indexOf(opening[0]) && hero.indexOf(opening[0]) < hero.indexOf("<canvas"), "The links follow the credentials and precede the instrument.");
-  assert.deepEqual(navigationLinks(hero, "Opening navigation"), [
-    ["About", "#home-profile"], ...NAVIGATION.slice(1),
-  ]);
-  assert.deepEqual([...opening[2].matchAll(/<a\b([^>]*)>/gu)].map((match) => attribute(match[1], "aria-current")), ["page", undefined, undefined]);
-  for (const route of ROUTES.slice(1)) {
-    assert.ok(!navigations(await routeHtml(route)).some((match) => attribute(match[1], "aria-label") === "Opening navigation"), `${route}: the rail is the only navigation.`);
-  }
-
-  const css = await readFile(path.join(ROOT, "app", "components", "clarinet-hero", "ClarinetHero.module.css"), "utf8");
-  const sections = css.match(/\.sections\s*\{([^}]+)\}/u)?.[1] ?? "";
-  assert.match(sections, /flex-wrap:\s*wrap/u, "Enlarged text wraps the links inside the page width.");
-  assert.match(sections, /width:\s*min\(100%,\s*330px\)/u, "The links share the credentials' measure.");
-  assert.match(sections, /background:\s*var\(--dash-x\) left top \/ 100% 1px no-repeat/u, "A dashed hairline divides the links from the credentials.");
-  assert.match(sections, /font-size:\s*var\(--type-interface\)/u);
-  assert.match(css, /\.sections a\s*\{[^}]*min-height:\s*44px/u);
-  assert.match(css, /\.sections a\[aria-current="page"\]\s*\{[^}]*color:\s*var\(--accent\)/u);
-  assert.match(css, /\.sections a\[aria-current="page"\]::before\s*\{[^}]*width:\s*2px[^}]*height:\s*12px/u, "The current page carries the blue tick.");
-  const navigation = await readFile(path.join(ROOT, "app", "components", "SiteNavigation.tsx"), "utf8");
-  assert.ok(navigation.includes("[data-opening-navigation]"), "The open mobile menu sets the first-screen links aside.");
 });
 
 test("structured data names the author, his manuscript name and both public profiles", async () => {
