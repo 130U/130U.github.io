@@ -1,14 +1,14 @@
 {
-  "fetchedAt": "2026-11-09",
+  "fetchedAt": "2026-11-10",
   "fetchedWith": "Authenticated Git checkout at the exact commit; bytes read with git show and checked against Git blob SHA-1",
   "sources": [
     {
       "slug": "certified-valuation-arithmetic-asian-options",
-      "sourceUrl": "https://github.com/130U/certified-valuation-arithmetic-asian-options/blob/1b00094de08ce5e9d53f76c683120403de7bd3c3/manuscript/report.md",
-      "sourceCommit": "1b00094de08ce5e9d53f76c683120403de7bd3c3",
-      "sourceBlob": "85f34bd6d106046566fc50396e8329f4a7124f70",
-      "sourceSha256": "7d3f835acd07eeb0b4c54376cd7d79d7eb0694731e7e0516f9659d4697b22aa1",
-      "importedMarkdownSha256": "830265a54c139d4e42ea94ee6bf115f5340814d2c3bdf04a6a1881ec93eadd35",
+      "sourceUrl": "https://github.com/130U/certified-valuation-arithmetic-asian-options/blob/92547dc2e486408134dcfec864eebe9bb8f0aa92/manuscript/report.md",
+      "sourceCommit": "92547dc2e486408134dcfec864eebe9bb8f0aa92",
+      "sourceBlob": "05ccca8c440de2159e2087316343c10fcaafcad1",
+      "sourceSha256": "87aedfc643dcd60be8ca84a08b3930601251b5e38b578173823f4a76e7c58d79",
+      "importedMarkdownSha256": "167541fe1148aae0dedb5af16b29b4d3e82fc502d742c11820d58fd435a19602",
       "includedHeadings": [
         "Abstract",
         "1. Introduction",
