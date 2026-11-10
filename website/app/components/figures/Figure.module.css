@@ -18,6 +18,31 @@
   font-variant-numeric: lining-nums tabular-nums;
 }
 
+/* Keep comparison diagrams legible when their columns cannot reflow. */
+.scrollViewport {
+  max-width: 100%;
+  overflow-x: auto;
+  overscroll-behavior-x: contain;
+  scrollbar-width: thin;
+}
+
+.scrollViewport:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+}
+
+.frame [data-figure-scroll][data-scroll-overflow]::after {
+  position: sticky;
+  left: 0;
+  display: block;
+  width: 100%;
+  padding-top: 10px;
+  color: var(--supporting-ink);
+  font-size: var(--type-label);
+  line-height: var(--label-leading);
+  content: "Scroll to compare →";
+}
+
 /* The title sits alone on its line; a view switch follows it as one segmented
    control whose segments share the width evenly. */
 .head {
@@ -75,7 +100,15 @@
   line-height: var(--label-leading);
   text-align: center;
   white-space: nowrap;
+  overflow-wrap: normal;
   transition: color 160ms ease, background-color 160ms ease;
+}
+
+@container figure (max-width: 24rem) {
+  .switch[data-count="3"] {
+    grid-auto-flow: row;
+    grid-template-columns: minmax(0, 1fr);
+  }
 }
 
 @container figure (max-width: 520px) {
@@ -580,7 +613,7 @@
 
 /* Stacked rows: the label and its value share one line above a full-width
    track, and the grid continues up through that line behind knocked-out text.
-   "narrow" stacks only below 480px of figure width. */
+   "narrow" stacks below 30rem so text enlargement shares the same breakpoint. */
 .bars[data-stack="always"] {
   grid-template-columns: minmax(0, 1fr);
 }
@@ -642,7 +675,7 @@
   margin-left: 0;
 }
 
-@container figure (max-width: 480px) {
+@container figure (max-width: 30rem) {
   .bars[data-stack="narrow"] {
     grid-template-columns: minmax(0, 1fr);
   }
@@ -701,6 +734,49 @@
 
   .bars[data-stack="narrow"] .value small {
     display: inline;
+  }
+}
+
+/* On narrow figures, a long value must not consume the label's entire track.
+   Keep each label, value and bar on its own row, with all numbers intact. */
+@container figure (max-width: 30rem) {
+  .bars[data-stack] > .row:has(> .barLabel) {
+    grid-template-columns: minmax(0, 1fr);
+    grid-template-rows: auto auto auto;
+  }
+
+  .bars[data-stack] > .row > .lines {
+    grid-row: 1 / 4;
+  }
+
+  .bars[data-stack] > .row > .barLabel {
+    grid-column: 1;
+    grid-row: 1;
+    padding-bottom: 4px;
+    overflow-wrap: normal;
+  }
+
+  .bars[data-stack] > .row > .value {
+    grid-column: 1;
+    grid-row: 2;
+    min-width: 0;
+    padding: 0 0 2px;
+    white-space: normal;
+    overflow-wrap: normal;
+    text-align: left;
+  }
+
+  .bars[data-stack] > .row > .track {
+    grid-column: 1;
+    grid-row: 3;
+  }
+
+  .bars[data-stack] .value > * {
+    padding-left: 0;
+  }
+
+  .bars[data-stack] .value small {
+    display: block;
   }
 }
 

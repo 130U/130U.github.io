@@ -26,6 +26,16 @@ export function FigureController() {
     for (const figure of figures) {
       const frame = figure.firstElementChild as HTMLElement;
 
+      // Make a wide comparison's sideways continuation visible on small screens.
+      for (const region of figure.querySelectorAll<HTMLElement>("[data-figure-scroll]")) {
+        const update = () => region.toggleAttribute("data-scroll-overflow", region.scrollWidth > region.clientWidth + 2);
+        update();
+        const observer = new ResizeObserver(update);
+        observer.observe(region);
+        if (region.firstElementChild) observer.observe(region.firstElementChild);
+        cleanups.push(() => observer.disconnect());
+      }
+
       // View switches.
       const switcher = figure.querySelector<HTMLElement>("[data-fig-switch]");
       if (switcher) {

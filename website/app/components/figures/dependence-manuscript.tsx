@@ -397,6 +397,7 @@ function FlowSharesFigure({ manuscript, caption }: ManuscriptFigureProps) {
           ))}
         </defs>
       </svg>
+      <div className={kit.scrollViewport} data-figure-scroll role="region" tabIndex={0} aria-label="Normal displacement shares, scroll horizontally to compare">
       <div className={styles.shares} role="img" aria-label="Six panels on the square from 0 to 2: for models U and D, the shares of normal displacement assigned to the first coordinate, the second coordinate and the background on the tail surface D, each on the same scale from zero to one.">
         <span aria-hidden="true" />
         {columns.map((column) => <span key={column.key} className={styles.shareHead} aria-hidden="true"><Tx>{column.title}</Tx></span>)}
@@ -423,6 +424,7 @@ function FlowSharesFigure({ manuscript, caption }: ManuscriptFigureProps) {
             ))}
           </div>
         ))}
+      </div>
       </div>
       <div className={styles.colorbar} aria-hidden="true">
         <span className={styles.colorbarLabel}>Share of normal displacement</span>

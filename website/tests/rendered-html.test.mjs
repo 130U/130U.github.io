@@ -134,7 +134,7 @@ function normalizeSpace(value) {
 }
 
 function stripMarkup(value) {
-  return normalizeSpace(value.replace(/<script\b[\s\S]*?<\/script>/giu, " ").replace(/<style\b[\s\S]*?<\/style>/giu, " ").replace(/<[^>]+>/gu, " "));
+  return normalizeSpace(value.replace(/<script\b[\s\S]*?<\/script>/giu, " ").replace(/<style\b[\s\S]*?<\/style>/giu, " ").replace(/<wbr\b[^>]*>/giu, "").replace(/<[^>]+>/gu, " "));
 }
 
 function inlineText(value) {

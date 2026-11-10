@@ -17,6 +17,7 @@ function RiskTaxonomy() {
       title="Four kinds of countervailing risk"
       caption="A countervailing effect is classified against the target harm and the population that bears it, so whether an effect counts as a transfer depends on where the analysis draws the population boundary."
     >
+      <div className={kit.scrollViewport} data-figure-scroll role="region" tabIndex={0} aria-label="Risk-risk taxonomy, scroll horizontally to compare">
       <div className={styles.matrix} role="table" aria-label="Risk-risk taxonomy">
         <div role="row" style={{ display: "contents" }}>
           <span className={styles.axisCell} role="columnheader" />
@@ -35,6 +36,7 @@ function RiskTaxonomy() {
             ))}
           </div>
         ))}
+      </div>
       </div>
     </Figure>
   );

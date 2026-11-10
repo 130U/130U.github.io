@@ -47,6 +47,13 @@ test("visible-copy contracts reject unsupported versions before reading HTML", a
   rejectsIncompleteContract(script);
 });
 
+test("optional word breaks preserve copy identity without erasing forced breaks", () => {
+  const whole = snapshotHtml("<body><p>crossdisciplinary analysis</p></body>");
+  const optional = snapshotHtml("<body><p>cross<wbr>disciplinary analy<WBR />sis</p></body>");
+  assert.deepEqual(optional, whole);
+  assert.notEqual(snapshotHtml("<body><p>cross<br>disciplinary analysis</p></body>").textSha256, whole.textSha256);
+});
+
 test("large research HTML preserves visible copy, formula positions and metadata without regex stack growth", () => {
   const hiddenPayload = "hidden payload ".repeat(240_000);
   const svg = `<svg aria-hidden="true"><svg><path d="${"M0 0 ".repeat(500_000)}"/></svg></svg>`;

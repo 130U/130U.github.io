@@ -33,6 +33,7 @@
 .copy {
   position: relative;
   z-index: 2;
+  min-width: 0;
   padding: 64px 0 80px 28px;
 }
 .copy h1 {
@@ -105,7 +106,7 @@
 }
 /* Phones and portrait tablets stack the name above the instrument. */
 @media (width < 768px), (width < 1024px) and (orientation: portrait) {
-  .frame { grid-template-columns: 1fr; min-height: 0; padding: 44px 0 22px; }
+  .frame { grid-template-columns: minmax(0, 1fr); min-height: 0; padding: 44px 0 22px; }
   .copy { padding: 0 12px; }
   .copy h1 { font-size: clamp(3.25rem, 13.5vw, 5.5rem); line-height: 1.03; }
   .credentials { margin-top: 24px; padding-top: 14px; width: min(100%, 290px); font-size: 18px; }

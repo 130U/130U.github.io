@@ -8,7 +8,8 @@
 
 .inline {
   display: inline-block;
-  max-width: 100%;
+  /* Include the two negative 0.25em margins supplied by ResearchMath. */
+  max-width: calc(100% + 0.5em);
   overflow-x: auto;
   overflow-y: hidden;
   scrollbar-width: none;
@@ -26,6 +27,16 @@
   font-size: 0.75em;
   line-height: 0;
   vertical-align: super;
+}
+
+.numberScroll {
+  display: inline-block;
+  max-width: 100%;
+  overflow-x: auto;
+  overflow-y: hidden;
+  vertical-align: bottom;
+  scrollbar-width: thin;
+  scrollbar-color: var(--rule-strong) transparent;
 }
 
 .inline::-webkit-scrollbar {
@@ -63,6 +74,7 @@
 }
 
 .inline:focus-visible,
+.numberScroll:focus-visible,
 .equation:focus-visible {
   outline: 2px solid var(--accent);
   outline-offset: 2px;

@@ -100,11 +100,46 @@
 .bracket::after { bottom: 0; }
 
 /* ---------- Slope chart ---------- */
-.columnHead {
-  width: max-content;
-  max-width: 6.5rem;
+.rankingViewport,
+.bridgeViewport {
+  overflow-x: auto;
+  overscroll-behavior-x: contain;
+  scrollbar-width: thin;
+}
+
+.rankingViewport:focus-visible,
+.bridgeViewport:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 4px;
+}
+
+.rankingCanvas {
+  --pl: 4.25rem;
+  --pr: 5.5rem;
+  --pt: 0.5rem;
+  --pb: 1rem;
+  min-width: 15rem;
+}
+
+.rankingHeads {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 6.5rem));
+  justify-content: space-between;
+  column-gap: 1rem;
+  margin: 0 max(0px, calc(var(--pr) - 3.25rem)) 0.75rem max(0px, calc(var(--pl) - 3.25rem));
   color: var(--muted);
+  font-size: var(--type-label);
+  line-height: var(--label-leading);
   text-align: center;
+  overflow-wrap: normal;
+}
+
+.numericAnnotation {
+  overflow-wrap: normal;
+}
+
+.bridgeCanvas {
+  min-width: 24rem;
 }
 
 /* ---------- Timelines below a chart ---------- */
@@ -125,6 +160,7 @@
   align-items: center;
   padding: 3px 6px;
   border: 1px solid currentColor;
+  overflow-wrap: normal;
 }
 
 .infoBand[data-span] {
@@ -252,6 +288,16 @@
   color: var(--accent);
 }
 
+@container figure (max-width: 420px) {
+  .scenarios {
+    height: 216px;
+  }
+
+  .laneRegret {
+    transform: translateY(8px);
+  }
+}
+
 /* ---------- Proof-obligation graph ---------- */
 .dag {
   position: relative;
@@ -353,6 +399,7 @@
 /* ---------- Diagrams: matrices, flows and chains ---------- */
 .matrix {
   display: grid;
+  min-width: 30rem;
   grid-template-columns: auto minmax(0, 1fr) minmax(0, 1fr);
   font-size: var(--type-label);
   line-height: var(--label-leading);
@@ -1212,6 +1259,7 @@
 
 .shares {
   display: grid;
+  min-width: 30rem;
   grid-template-columns: auto repeat(3, minmax(0, 1fr));
   gap: 24px 22px;
   align-items: center;
@@ -1274,7 +1322,7 @@
   margin-bottom: 18px;
 }
 
-.sharePanel svg {
+.sharePanel > svg {
   position: absolute;
   inset: 0;
   width: 100%;
