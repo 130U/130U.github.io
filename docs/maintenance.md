@@ -257,13 +257,19 @@ npm ci --ignore-scripts
 npm run check
 npm run typecheck
 npm audit --audit-level=low
+npx playwright install chromium
+npm run test:browser
 npm run preview:static
 ```
 
 `check` verifies protected sources, lints, builds, tests the artifact, and compares
 visible copy. The static preview binds to `127.0.0.1:8123` by default and serves
 `out/`; use it to inspect production behavior. `npm run dev` uses the separate
-development security policy required by Next.js tooling.
+development security policy required by Next.js tooling. `test:browser` uses isolated
+Chromium contexts and the actual static export to check every figure and view at
+six viewport widths, plus enlarged-text and keyboard-scroll regressions. It reports
+geometry and failure screenshots in `website/test-results/figure-layout/`. CI installs
+Chromium and requires these checks to pass before publishing.
 
 Review desktop and phone layouts, including 320px, keyboard navigation, menu
 dismissal, reduced motion, JavaScript-free content, local links, equations, tables and

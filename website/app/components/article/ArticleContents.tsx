@@ -11,8 +11,11 @@ export function ArticleContents({ items }: { items: ArticleContentsItem[] }) {
   const [active, setActive] = useState<string | null>(null);
 
   useEffect(() => {
+    const container = sidebar.current;
+    if (!container) return;
+    container.dataset.enhanced = "true";
     const desktop = window.matchMedia("(min-width: 1200px)");
-    const layout = sidebar.current?.parentElement;
+    const layout = container.parentElement;
     const targets = items.map(({ id }) => document.getElementById(id)).filter((target): target is HTMLElement => Boolean(target));
     let frame = 0;
     const update = () => {
@@ -43,6 +46,7 @@ export function ArticleContents({ items }: { items: ArticleContentsItem[] }) {
     window.addEventListener("scroll", scroll, { passive: true });
     window.addEventListener("resize", resize);
     return () => {
+      delete container.dataset.enhanced;
       desktop.removeEventListener("change", resize);
       observer.disconnect();
       window.removeEventListener("scroll", scroll);

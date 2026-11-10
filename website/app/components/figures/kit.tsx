@@ -194,12 +194,13 @@ export function Mark({ left, top, anchor = "left", tone: color = "ink", strong, 
     "below-left": ["calc(-100% - 5px)", "5px"],
   };
   const [ax, ay] = offsets[anchor];
-  // A wrapping label may use the room between its point and the area's edge on
-  // the side it extends to, and no more.
+  // Directional labels can use the room on the side they extend to. Centered
+  // labels also use the plot's insets, so their width belongs to their CSS or
+  // explicit style; at an edge, an area-only calculation would give zero.
   const extendsLeft = anchor === "right" || anchor.endsWith("-right") && !anchor.startsWith("above") && !anchor.startsWith("below") || anchor === "above-left" || anchor === "below-left";
   const centered = anchor === "top" || anchor === "bottom" || anchor === "center";
-  const room = centered ? 2 * Math.min(left, 100 - left) : extendsLeft ? left : 100 - left;
-  const fit = wrap && style?.maxWidth === undefined ? { maxWidth: `min(13rem, calc(${room.toFixed(2)}% - 8px))` } : undefined;
+  const room = extendsLeft ? left : 100 - left;
+  const fit = wrap && !centered && room > 0 && style?.maxWidth === undefined ? { maxWidth: `min(13rem, calc(${room.toFixed(2)}% - 8px))` } : undefined;
   return (
     <span
       className={`${styles.mark} ${styles[color]} ${strong ? styles.markStrong : ""} ${className ?? ""}`}

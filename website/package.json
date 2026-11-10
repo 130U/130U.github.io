@@ -14,6 +14,7 @@
     "typecheck": "tsc --noEmit",
     "test": "npm run build && npm run test:artifact && npm run check:visible-copy",
     "test:artifact": "node --test",
+    "test:browser": "node scripts/check-browser-layout.mjs",
     "check": "npm run check:protected-sources && npm run lint && npm test",
     "generate:brand-icons": "node scripts/generate-brand-icons.mjs",
     "lint": "eslint .",
@@ -32,6 +33,7 @@
     "@types/react-dom": "19.2.3",
     "eslint": "9.39.4",
     "eslint-config-next": "16.4.3",
+    "playwright": "1.62.1",
     "sharp": "0.35.5",
     "typescript": "5.9.3"
   },

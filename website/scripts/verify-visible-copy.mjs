@@ -206,7 +206,8 @@ function visibleText(html, preserveFormulaPositions = false) {
   }
   body = replaceElements(body, /<([a-z][\w:-]*)\b[^>]*data-visible-copy-role=["']visual-identity["'][^>]*>/giu);
   body = replaceElements(body, /<([a-z][\w:-]*)\b[^>]*aria-hidden=["']true["'][^>]*>/giu);
-  return stripInterfaceStrings(withoutComments(body).replace(/<[^>]+>/gu, " "));
+  // A word-break opportunity adds no text or word boundary.
+  return stripInterfaceStrings(withoutComments(body).replace(/<wbr\b[^>]*>/giu, "").replace(/<[^>]+>/gu, " "));
 }
 
 function metadataSnapshot(html) {

@@ -4,14 +4,19 @@ import styles from "./ResearchMath.module.css";
 
 export function ResearchMath({ tex, display = false }: { tex: string; display?: boolean }) {
   const formula = renderResearchMath(tex, display);
+  const scrollableInline = !display && formula.widthEm - 2 * RESEARCH_MATH_GUTTER_EM > 5;
   const numeric = display ? undefined : proseNumber(tex);
   if (numeric) {
-    return <span className={styles.number} data-research-formula="inline">
+    return <span
+      className={`${styles.number}${scrollableInline ? ` ${styles.numberScroll}` : ""}`}
+      data-research-formula="inline"
+      tabIndex={scrollableInline ? 0 : undefined}
+      aria-label={scrollableInline ? "Scrollable mathematical expression" : undefined}
+    >
       <span data-research-number aria-hidden="true">{numeric.base}{numeric.exponent !== undefined && <sup>{numeric.exponent}</sup>}{numeric.suffix}</span>
       <span className={styles.assistive} dangerouslySetInnerHTML={{ __html: formula.mathml }} />
     </span>;
   }
-  const scrollableInline = !display && formula.widthEm - 2 * RESEARCH_MATH_GUTTER_EM > 5;
   return (
     <span
       className={`${styles.formula} ${display ? styles.display : styles.inline}`}

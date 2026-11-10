@@ -159,8 +159,8 @@ function LabelFlip() {
   const y = linear(0, 50);
   const curve = sample(0, 3, 121, (ratio) => 100 * normalCdf(-ratio));
   const every = curve.filter((_, index) => index % 4 === 0);
-  // Labels sit above and right of each point, clear of the falling curve; the
-  // last starts a little earlier, where the curve is already flat, to fit narrow figures.
+  // The final annotation ends at the plot's right edge, leaving room for the
+  // full percentage even when the plot is narrow.
   const points = [
     { ratio: 0.25, rate: "40.13%", nudge: 0 },
     { ratio: 1, rate: "15.87%", nudge: 0 },
@@ -194,7 +194,7 @@ function LabelFlip() {
           const rate = Number.parseFloat(point.rate);
           return <span key={point.ratio}>
             <Dot left={x(point.ratio)} top={100 - y(rate)} tone="ink" className={kit.fade} />
-            <Mark left={x(point.ratio) + point.nudge} top={100 - y(rate)} anchor="above-right" className={kit.fade} tag>{`$\\gamma/s=${point.ratio}$: ${point.rate}`}</Mark>
+            <Mark left={point.ratio === 2 ? 100 : x(point.ratio) + point.nudge} top={100 - y(rate)} anchor={point.ratio === 2 ? "bottom-right" : "above-right"} className={`${kit.fade} ${styles.numericAnnotation}`} tag wrap={point.ratio === 2} style={point.ratio === 2 ? { maxWidth: "min(6.5rem, 100%)" } : undefined}>{`$\\gamma/s=${point.ratio}$: ${point.rate}`}</Mark>
           </span>;
         })}
       </Plot>
@@ -216,7 +216,8 @@ function BridgeLeakage() {
       caption="Variance is in units of $\sigma^2(T-s)$. Conditioning on $X_T$ halves the variance at the midpoint, an apparent 29.29% RMSE improvement that comes entirely from the endpoint; where a forecasting task withholds $X_T$, that gain is leakage. The bands mark the three information sets the task specification keeps apart."
       legend={[{ label: "Given $\\mathcal{F}_s$ only", tone: "ink", shape: "line" }, { label: "Given $\\mathcal{F}_s$ and $X_T$", tone: "accent", shape: "line" }]}
     >
-      <div style={style}>
+      <div className={styles.bridgeViewport} data-figure-scroll role="region" tabIndex={0} aria-label="Conditional variance and information sets">
+      <div className={styles.bridgeCanvas} style={style}>
         <Plot
           label="Conditional variance of X_t: growing linearly from zero given history only, and following a bridge that returns to zero at T when the endpoint is known; at the midpoint the bridge variance is half."
           x={x}
@@ -241,7 +242,7 @@ function BridgeLeakage() {
           <span className={styles.bracket} style={{ left: `${x(0.5)}%`, top: `${100 - y(0.5)}%`, height: `${y(0.5) - y(0.25)}%` }} />
           <Dot left={x(0.5)} top={100 - y(0.5)} tone="ink" className={kit.fade} />
           <Dot left={x(0.5)} top={100 - y(0.25)} tone="accent" className={kit.fade} />
-          <Mark left={x(0.5)} top={100 - y(0.375)} anchor="left" tone="accent" className={kit.fade}>Variance halves</Mark>
+          <Mark left={x(0.5)} top={100 - y(0.375)} anchor="left" tone="accent" wrap className={kit.fade}>Variance halves</Mark>
           <Mark left={x(-0.19)} top={50} anchor="center" className={kit.muted}>History</Mark>
         </Plot>
         <div className={styles.info} style={{ "--split": `${x(0)}%` } as CSSProperties} aria-label="Information sets" role="img">
@@ -249,6 +250,7 @@ function BridgeLeakage() {
           <span className={`${styles.infoBand} ${kit.accent}`} data-fill=""><span><Tx>{"Permitted $\\mathcal{F}_s$"}</Tx></span></span>
           <span className={`${styles.infoBand} ${kit.ink}`}><span><Tx>{"Evaluation $\\mathcal{F}_{\\text{eval}}$: outcomes after $s$"}</Tx></span></span>
         </div>
+      </div>
       </div>
     </Figure>
   );
@@ -269,19 +271,21 @@ function RankingReversal() {
       title="Final-answer checks can reverse a ranking"
       caption="Model A produces more fully valid solutions, but Model B's invalid trajectories pass the final-answer check nine times as often. With $\beta_A=\beta_B=0$, the observed score adds $\alpha_m(1-\theta_m)$, and B overtakes A."
     >
-      <div>
+      <div className={styles.rankingViewport} data-figure-scroll role="region" tabIndex={0} aria-label="Ranking comparison">
+        <div className={styles.rankingCanvas}>
+          <div className={styles.rankingHeads} aria-hidden="true">
+            <span data-ranking-heading><Tx>True validity $\theta_m$</Tx></span>
+            <span data-ranking-heading><Tx>Observed score $s_m$</Tx></span>
+          </div>
         <Plot
           label="Model A: true validity 72%, observed score 73.12%. Model B: true validity 64%, observed score 76.96%. The ranking reverses."
           x={x}
           y={y}
-          height="clamp(240px, 56cqi, 300px)"
-          inset={{ top: 50, right: 88, bottom: 16, left: 68 }}
+          height="clamp(12.75rem, calc(56cqi - 2.25rem), 16.5rem)"
           yTicks={[60, 65, 70, 75, 80].map((at) => ({ at, label: "" }))}
           xTicks={[{ at: 0, label: "", solid: true }, { at: 1, label: "", solid: true }]}
           curves={models.map((model) => <path key={model.name} className={kit[model.tone]} d={path([[0, model.theta], [1, model.score]], x, y)} />)}
         >
-          <Mark left={0} top={-4} anchor="bottom" wrap className={styles.columnHead}>True validity $\theta_m$</Mark>
-          <Mark left={100} top={-4} anchor="bottom" wrap className={styles.columnHead}>Observed score $s_m$</Mark>
           {models.map((model) => (
             <span key={model.name}>
               <Dot left={0} top={100 - y(model.theta)} tone={model.tone} tip={`Model ${model.name}\nθ = ${model.theta}%, α = ${model.alpha}, β = 0%`} />
@@ -293,6 +297,7 @@ function RankingReversal() {
           <Mark left={x(0.44)} top={100 - y(65)} anchor="center" tone="accent" className={kit.fade}>$\alpha_B=36\%$</Mark>
           <Mark left={x(0.36)} top={100 - y(74.6)} anchor="center" className={kit.fade}>$\alpha_A=4\%$</Mark>
         </Plot>
+        </div>
       </div>
     </Figure>
   );
@@ -446,7 +451,7 @@ function CoverageCollapse() {
         <Dot left={x(100)} top={100 - y(48.4)} tone="ink" className={kit.fade} />
         <Mark left={x(100)} top={100 - y(48.4)} anchor="above-right" tag className={kit.fade}>48.40% at $n=100$</Mark>
         <Dot left={x(1000)} top={100 - y(0.000637)} tone="ink" className={kit.fade} />
-        <Mark left={100} top={100 - y(0.000637)} anchor="bottom-right" tag wrap className={`${kit.fade} ${styles.alignEnd}`} style={{ maxWidth: `${100 - x(1000)}%` }}>{"0.000637% at $n=1{,}000$"}</Mark>
+        <Mark left={100} top={100 - y(0.000637)} anchor="bottom-right" tag wrap className={`${kit.fade} ${styles.alignEnd} ${styles.numericAnnotation}`} style={{ maxWidth: "min(12rem, 100%)" }}>{"0.000637% at $n=1{,}000$"}</Mark>
         <Mark left={100} top={100 - y(97.5)} anchor="bottom-right" tone="accent" className={kit.fade}>97.50%</Mark>
       </Plot>
     </Figure>

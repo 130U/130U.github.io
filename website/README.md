@@ -23,11 +23,16 @@ For the production export:
 npm run check
 npm run typecheck
 npm audit --audit-level=low
+npx playwright install chromium
+npm run test:browser
 npm run preview:static
 ```
 
 `check` verifies protected sources, lints, builds, tests the exported artifact, and
-checks visible text and metadata. The static preview serves `out/` at
+checks visible text and metadata. `test:browser` renders the exported figures in
+Chromium at phone, tablet, and desktop widths, exercises every view, and checks
+label bounds, enlarged text, and keyboard scrolling. CI runs this before deployment;
+diagnostics are written to `test-results/figure-layout/`. The static preview serves `out/` at
 `http://127.0.0.1:8123`. Pull requests run validation; pushes to `main` also deploy the
 assembled export through the Pages workflow.
 

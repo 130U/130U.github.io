@@ -309,7 +309,7 @@
       display: none;
     }
 
-    .subsectionLink:not([data-open-chapter]) {
+    .contents[data-enhanced="true"] .subsectionLink:not([data-open-chapter]) {
       display: none;
     }
 

@@ -14,7 +14,7 @@
     "app/coursework/page.tsx": "a1caf4bd363d652ce401c237e06336be26e15296a3ffa19890b3d1c53b6ab63c",
     "app/components/research/ResearchArticle.tsx": "34334f3fd7168db461cb194d4b4136cd682a3aa7ee10ef5f4895cee39811ad85",
     "app/components/research/ResearchInline.tsx": "0c2ddb5c269f5c4882b34d652ec395197a80285c7e5464acb156536677cade61",
-    "app/components/research/ResearchMath.tsx": "a61ffe67375e2c50a7cac7167f39ff39ef7a115d6aa240c14f9240b9361e54cf",
+    "app/components/research/ResearchMath.tsx": "feea911e2404a44c83e6b363856b9ed2811a9cfbb576b94aa04ecb7aefa4c8cf",
     "app/lib/content/research-markdown.ts": "d0fe23c0f91b76bdeb761dd7981db6b19b3b148dc754d6fe1a1ca57e35a40237",
     "app/lib/content/research-math.ts": "b7a934d9d718ddf5a4e9ca3821ce03a8683e0386727169793b14daf14491c3a6",
     "app/lib/content/research-number.ts": "0422523c87a5bd67914d6ead0a2411c93e3ced16e2d464f83052645fea5135e7",
