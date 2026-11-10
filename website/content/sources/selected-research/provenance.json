@@ -1,14 +1,14 @@
 {
   "fetchedAt": "2026-11-09",
-  "fetchedWith": "GitHub REST contents API at the exact commit; bytes checked against the Git blob SHA-1",
+  "fetchedWith": "Authenticated Git checkout at the exact commit; bytes read with git show and checked against Git blob SHA-1",
   "sources": [
     {
       "slug": "certified-valuation-arithmetic-asian-options",
-      "sourceUrl": "https://github.com/130U/certified-valuation-arithmetic-asian-options/blob/625b5d3a9598972fe025c00944e9bc3ffbf76ac2/manuscript/report.md",
-      "sourceCommit": "625b5d3a9598972fe025c00944e9bc3ffbf76ac2",
-      "sourceBlob": "a314382648a37fcce53bffc2b1537c8c1c035943",
-      "sourceSha256": "5cc832257fcf1f02599f486057815533d48b8f658ade532697d43d08a8c28aa6",
-      "importedMarkdownSha256": "b1260799d1ab805eb977281b5c1bddae5f7e5e0892afd2f66aa2f4ba42533f06",
+      "sourceUrl": "https://github.com/130U/certified-valuation-arithmetic-asian-options/blob/1b00094de08ce5e9d53f76c683120403de7bd3c3/manuscript/report.md",
+      "sourceCommit": "1b00094de08ce5e9d53f76c683120403de7bd3c3",
+      "sourceBlob": "85f34bd6d106046566fc50396e8329f4a7124f70",
+      "sourceSha256": "7d3f835acd07eeb0b4c54376cd7d79d7eb0694731e7e0516f9659d4697b22aa1",
+      "importedMarkdownSha256": "830265a54c139d4e42ea94ee6bf115f5340814d2c3bdf04a6a1881ec93eadd35",
       "includedHeadings": [
         "Abstract",
         "1. Introduction",
@@ -67,11 +67,11 @@
     },
     {
       "slug": "certified-rough-heston-valuation",
-      "sourceUrl": "https://github.com/130U/certified-rough-heston-valuation/blob/7b6293bd1ac0877e373cc2aeb5e8dcb038ccaf65/manuscript/merged-heston-en.md",
-      "sourceCommit": "7b6293bd1ac0877e373cc2aeb5e8dcb038ccaf65",
-      "sourceBlob": "86ebfd16a543d96c61a179b6c8d650c4ded2b84d",
-      "sourceSha256": "7ead82af34b8f4ebbc014a79963770f5736b7e210f4fd80c3a6a7e7c046c5cce",
-      "importedMarkdownSha256": "f0abad09372ea040373b1db071accefb6fe00214430bbb0b338fbf9e908663bc",
+      "sourceUrl": "https://github.com/130U/certified-rough-heston-valuation/blob/89e322a2a3ef5d8a8db78b5ddac9f3a6698d9f03/manuscript/merged-heston-en.md",
+      "sourceCommit": "89e322a2a3ef5d8a8db78b5ddac9f3a6698d9f03",
+      "sourceBlob": "96fc56455e57ef342e171a4345a6b91dfb2044c2",
+      "sourceSha256": "a3013d8cf5124dd5a5bf3e5bbd327e7b322e2e01e9dd21e867cbde482637a317",
+      "importedMarkdownSha256": "5f47355d75a85570c032ef8eae774be2ddf4e57d35994e36f2802cb20861672d",
       "includedHeadings": [
         "Abstract",
         "1. Introduction",
@@ -94,7 +94,7 @@
         "7.1. Fixed contracts, units and complete ablation",
         "7.2. Twenty-eight portfolio directions",
         "7.3. Prespecified nearby candidates under fixed quotes",
-        "7.4. Why certify a frozen fast output?",
+        "7.4. Certifying stored and replaceable outputs",
         "7.5. Matched dissipative-kernel evaluation",
         "Verification scope and mathematical work",
         "7.6. Matched ledgers and certificate resolution",

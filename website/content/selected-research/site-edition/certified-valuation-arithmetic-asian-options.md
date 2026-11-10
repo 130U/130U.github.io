@@ -2,7 +2,7 @@
 description: Certified bounds on the pricing error of arithmetic Asian options under projected Euler, built on common Gaussian smoothing, with weak expansions and a transfer result for posterior quantiles.
 ---
 
-[English PDF](https://github.com/130U/certified-valuation-arithmetic-asian-options/blob/625b5d3a9598972fe025c00944e9bc3ffbf76ac2/paper/paper.pdf) · [Repository](https://github.com/130U/certified-valuation-arithmetic-asian-options/blob/625b5d3a9598972fe025c00944e9bc3ffbf76ac2/README.md) · [Code and evidence](https://github.com/130U/certified-valuation-arithmetic-asian-options/blob/625b5d3a9598972fe025c00944e9bc3ffbf76ac2/EVIDENCE.md)
+[English PDF](https://github.com/130U/certified-valuation-arithmetic-asian-options/blob/1b00094de08ce5e9d53f76c683120403de7bd3c3/paper/paper.pdf) · [Repository](https://github.com/130U/certified-valuation-arithmetic-asian-options/blob/1b00094de08ce5e9d53f76c683120403de7bd3c3/README.md) · [Code and evidence](https://github.com/130U/certified-valuation-arithmetic-asian-options/blob/1b00094de08ce5e9d53f76c683120403de7bd3c3/EVIDENCE.md)
 
 Conditional Representation, Geometric Reference and Heston Error Bounds
 
@@ -81,7 +81,7 @@ Page references in Table 1 follow the accepted manuscript linked in [[4](#ref-4)
 | Payoff approximation | Optimized conditional lower bound and conditional-variance error (Theorem 4, p. 15). | Exact linear-reference decomposition with nonnegative remainder controlled by a weighted second moment (Lemma 3.1). |
 | Discrete numerical law | QE simulation benchmark (Appendix B, p. 22); no certificate for kernel (2.2) is reported. | Projection correction between an algebraic transform recursion and the specified original positive-part variance Euler law, using current variance in the stock update (Appendix B). |
 | Transform computation | Fourier conditional moments (equations (55)–(56), pp. 15–16) and FFT implementation (Section 5, pp. 16–17). | Finite real and complex loading catalogs, certified quadrature and infinite-tail bounds, and complex-logarithm branch checks (Appendices A–C). |
-| Finite arithmetic | An outward-rounded error budget is not reported in the reviewed source. | Rational endpoint combination and ball-arithmetic enclosures include rounding with the other finite errors (Appendices A–C and G). |
+| Finite arithmetic | An outward-rounded error budget is not reported in the cited paper. | Rational endpoint combination and ball-arithmetic enclosures include rounding with the other finite errors (Appendices A–C and G). |
 | Certified output | Lower-bound approximation error (Theorem 4); no executable signed Euler-minus-continuous enclosure is reported. | Signed $`p_h-p_c`$ interval at the specified parameters and grid (Theorem 4.1 and Corollary 4.2), traceable to the accompanying executable package. |
 
 Relative to Fusai and Kyriakou, this paper adds the weighted remainder and its combination with error control for the original projected kernel. Section 4 analyzes the width of the certificate that results.
@@ -1104,7 +1104,7 @@ The same decomposition identifies the limitation of the result. Separate bounds 
 
 ## Appendices and Supporting Material
 
-This page includes the complete main text and references. Appendices, supplementary proofs, code, and verification material are available in the [GitHub repository](https://github.com/130U/certified-valuation-arithmetic-asian-options) and the [full manuscript](https://github.com/130U/certified-valuation-arithmetic-asian-options/blob/625b5d3a9598972fe025c00944e9bc3ffbf76ac2/manuscript/report.md#appendix-a-finite-certification-of-the-weighted-second-moment).
+This page includes the complete main text and references. Appendices, supplementary proofs, code, and verification material are available in the [GitHub repository](https://github.com/130U/certified-valuation-arithmetic-asian-options) and the [full manuscript](https://github.com/130U/certified-valuation-arithmetic-asian-options/blob/1b00094de08ce5e9d53f76c683120403de7bd3c3/manuscript/report.md#appendix-a-finite-certification-of-the-weighted-second-moment).
 
 ## References
 

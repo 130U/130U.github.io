@@ -1,8 +1,8 @@
 {
-  "repository": "130U/mathematical-finance-project",
-  "commit": "dbb0a1003d5c37b13041229e8a1a707e3f247cde",
-  "commitDate": "2026-11-09T22:58:19Z",
-  "fetchedWith": "GitHub connector commit/tree pinning and fetch_file base64 downloads checked against Git blob SHA-1",
+  "repository": "130U/Critical-Dependence-Stress",
+  "commit": "4dcf48c0f19c0095001441f0bcaa674ad9dbcc35",
+  "commitDate": "2026-11-09T20:23:27-05:00",
+  "fetchedWith": "Authenticated Git checkout at the exact commit; git show bytes checked against Git blob SHA-1",
   "files": [
     {
       "path": "paper/source/declarations.tex",
@@ -51,8 +51,8 @@
     },
     {
       "path": "paper/source/main-quantitative.tex",
-      "sha": "5894323e2758084810b76b9bc207e006c1140824",
-      "size": 11553
+      "sha": "b4cba8a317df04293d8dfa84fa1f08380ea80dc3",
+      "size": 13355
     },
     {
       "path": "paper/source/main-scope.tex",
