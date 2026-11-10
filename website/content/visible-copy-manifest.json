@@ -54,9 +54,9 @@
       }
     },
     "/critical-dependence-stress-for-portfolio-diversification/": {
-      "textSha256": "a1c158ef50f6f827cd42f4d957b803926d2f67c0ca66a17f883e7632b66d72a2",
-      "characterCount": 76826,
-      "wordCount": 11616,
+      "textSha256": "f44a925a9c10075a0c004ca287f66db9729337b7f28509de441d684708bf0b5a",
+      "characterCount": 78508,
+      "wordCount": 11855,
       "preview": "Skip to Main Content Theodore Ouyang Back to Selected Research Critical Dependence Stress for Portfolio Diversification GitHub Full Manuscript Abstract We ask h",
       "altTexts": [],
       "ariaLabels": [
@@ -383,6 +383,7 @@
         "Inset on budgets from 0 to 0.02: the two profiles coincide with the exact initial segment 2s minus 5/16 up to s = 1/96, then separate.",
         "Scrollable mathematical expression",
         "Scrollable mathematical expression",
+        "Scrollable mathematical expression",
         "Mathematical equation",
         "Scrollable mathematical expression",
         "Scrollable mathematical expression",
@@ -423,12 +424,12 @@
         "twitterTitle": "Critical Dependence Stress for Portfolio Diversification",
         "twitterDescription": "How much dependence stress erases a diversification gain under fixed marginals: a variational limit, a quadratic critical budget, the marginal-restoration premium and projected flow duality."
       },
-      "mathSourceSha256": "c2e4ebc9a99e55a7648ff610ea1b127d83906dd3b903868d5a2c6aed9c76191c",
-      "formulaCount": 1021
+      "mathSourceSha256": "099939efc2614ec463b0fa015d8711e3e09944c2e848ed5058d6c397400b1127",
+      "formulaCount": 1033
     },
     "/certified-valuation-arithmetic-asian-options/": {
-      "textSha256": "5b765c3d22d664df095ddacaa7d49899964cecb2d2baa3767254d6b60843f3aa",
-      "characterCount": 53214,
+      "textSha256": "fd14fc679b7fad3baa72b5ebc69ce7c43d70283925759bd18a5f360c777ccb76",
+      "characterCount": 53210,
       "wordCount": 7685,
       "preview": "Skip to Main Content Theodore Ouyang Back to Selected Research Certified Valuation of Arithmetic Asian Options GitHub Full Manuscript Abstract How much numerica",
       "altTexts": [],
@@ -623,9 +624,9 @@
       "formulaCount": 365
     },
     "/certified-rough-heston-valuation/": {
-      "textSha256": "967a673f5a3b13d6cb307004bbef7693334d45a3da4100b7855a64fa11d81747",
-      "characterCount": 67675,
-      "wordCount": 9815,
+      "textSha256": "c4edc3baa3aa26f32cbaf97b511462fe13d1e7ef48ce56a3fd43a8e56f0a28d6",
+      "characterCount": 67700,
+      "wordCount": 9814,
       "preview": "Skip to Main Content Theodore Ouyang Back to Selected Research Certified Joint Pricing Errors in Rough Heston GitHub Full Manuscript Abstract How much numerical",
       "altTexts": [],
       "ariaLabels": [
@@ -813,9 +814,9 @@
       "formulaCount": 315
     },
     "/experience/": {
-      "textSha256": "a3aa88eb22e040d32c56c6538b465e6a1fae95025a8ead985d83f6ff9713a005",
-      "characterCount": 9036,
-      "wordCount": 1272,
+      "textSha256": "8d036aff45d61c7df5788a4c3a6e588a7892388bc693747022ac53f3b87b851d",
+      "characterCount": 9094,
+      "wordCount": 1274,
       "preview": "Skip to Main Content Theodore Ouyang About Experience Blog Experience: Areas of Focus AI Research and Engineering Data Science Legal Research and Policy Analysi",
       "altTexts": [],
       "ariaLabels": [
@@ -853,9 +854,9 @@
       }
     },
     "/experience/statistical-inference-and-resource-allocation-in-expert-data-production/": {
-      "textSha256": "712f06e974fee27a0c656525620990fca1901a7ac613772e9f9e6e210c4ee7b8",
-      "characterCount": 26145,
-      "wordCount": 3808,
+      "textSha256": "ff48a724d88e25ef7aac6c21090239080360699f44cbfd86bce030c881774db9",
+      "characterCount": 26065,
+      "wordCount": 3801,
       "preview": "Skip to Main Content Theodore Ouyang Back to Experience Large-Scale Domain Expert Feedback Governance and Adaptive Review Organization Duke University × Leading",
       "altTexts": [],
       "ariaLabels": [
@@ -912,21 +913,21 @@
       ],
       "metadata": {
         "title": "Duke University × Leading Foundation Model Developer: Large-Scale Domain Expert Feedback Governance and Adaptive Review | Theodore Ouyang",
-        "description": "Sending the riskiest submissions to review is the usual way to spend expert time, and it biases the quality estimate the review is meant to protect.",
+        "description": "Sending the riskiest submissions to review concentrates expert attention where errors are most likely, but the uncorrected review results overstate the batch's defect rate.",
         "canonical": "https://www.theodoreoy.com/experience/statistical-inference-and-resource-allocation-in-expert-data-production/",
         "openGraphTitle": "Duke University × Leading Foundation Model Developer: Large-Scale Domain Expert Feedback Governance and Adaptive Review",
-        "openGraphDescription": "Sending the riskiest submissions to review is the usual way to spend expert time, and it biases the quality estimate the review is meant to protect.",
+        "openGraphDescription": "Sending the riskiest submissions to review concentrates expert attention where errors are most likely, but the uncorrected review results overstate the batch's defect rate.",
         "openGraphUrl": "https://www.theodoreoy.com/experience/statistical-inference-and-resource-allocation-in-expert-data-production/",
         "twitterTitle": "Duke University × Leading Foundation Model Developer: Large-Scale Domain Expert Feedback Governance and Adaptive Review",
-        "twitterDescription": "Sending the riskiest submissions to review is the usual way to spend expert time, and it biases the quality estimate the review is meant to protect."
+        "twitterDescription": "Sending the riskiest submissions to review concentrates expert attention where errors are most likely, but the uncorrected review results overstate the batch's defect rate."
       },
       "mathSourceSha256": "f7af9a2c1b27c8357165f9b726faf0f20e9a670c6d27352c20f7b0f30170400b",
       "formulaCount": 164
     },
     "/experience/task-validity-in-financial-synthetic-data/": {
-      "textSha256": "5a09b135ed473570239d48d23fc4314986562f9547ad1d44ac3d71ebeaef69e7",
-      "characterCount": 24846,
-      "wordCount": 3453,
+      "textSha256": "62646eff00d54cfde25ec5c870e283fbb9d42493f790998b04bf244f606f81c6",
+      "characterCount": 25142,
+      "wordCount": 3497,
       "preview": "Skip to Main Content Theodore Ouyang Back to Experience Financial Task Design and Synthetic Data Engineering Organization Duke University × Leading Foundation M",
       "altTexts": [],
       "ariaLabels": [
@@ -981,9 +982,9 @@
       "formulaCount": 136
     },
     "/experience/verification-and-supervision-in-scientific-reasoning-tasks/": {
-      "textSha256": "c5d22b7ac29d79b4fb16bf4346b57696d96fbf2aacd0e82a126671bc782a6947",
-      "characterCount": 24079,
-      "wordCount": 3452,
+      "textSha256": "8db5e4006278738d1003e7a7a67f010e709dd878d16d33f2569d4bd490f551c9",
+      "characterCount": 24289,
+      "wordCount": 3483,
       "preview": "Skip to Main Content Theodore Ouyang Back to Experience General Reasoning Evaluation and Layered Verification Organization Duke University × Frontier AI Researc",
       "altTexts": [],
       "ariaLabels": [
@@ -1210,7 +1211,7 @@
       }
     },
     "/experience/small-states-and-strategic-space-dependence/": {
-      "textSha256": "b9d331f742d355e717f8e408ea2a53b330b4d3ad44af74966e725a987950f38f",
+      "textSha256": "e856753f2d06e63047e3efa0650395ae24da8a75c6b5071257888f84969d4390",
       "characterCount": 51972,
       "wordCount": 7121,
       "preview": "Skip to Main Content Theodore Ouyang Back to Experience Small States and the Governance of Strategic Space Dependence Organization Duke Law School Position Auth",

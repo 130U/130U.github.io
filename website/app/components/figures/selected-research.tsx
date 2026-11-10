@@ -134,7 +134,7 @@ const HESTON_STAGES = [
   { group: "Six months" },
   { id: "H0", text: "Global state propagation", joint: 1.397612096, note: "One-point budget not met" },
   { id: "H1", text: "Finite history, same global residual", joint: 0.378598956, note: "Principal propagation improvement; unchanged output and centre" },
-  { id: "H2", text: "Local envelope, original used nodes", joint: 0.367258782, note: "About 3% further bound reduction" },
+  { id: "H2", text: "Local envelope, same reference nodes", joint: 0.367258782, note: "About 3% further bound reduction" },
   { id: "H3", text: "All finite high nodes, global envelope", joint: 0.132245064, marginal: 0.158585551, note: "High-frequency certification and centre change are included" },
   { id: "H4", text: "All finite high nodes, local envelope", joint: 0.115215934, marginal: 0.137896018, note: "Both methods certify 0.25 points" },
   { group: "Three months" },

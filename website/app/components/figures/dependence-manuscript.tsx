@@ -5,7 +5,7 @@ import styles from "./Figures.module.css";
 /* The four figures of "Critical Dependence Stress", drawn natively from the
    formulas that produced the manuscript images: Figures 1 and 2 follow
    code/generate_mechanism_figures.py, Figures 3 and 4 follow
-   new-computations/plot_profiles_and_flows.py (130U/mathematical-finance-project
+   new-computations/plot_profiles_and_flows.py (130U/Critical-Dependence-Stress
    at the pinned source commit). Captions stay the manuscript's own. */
 
 export type ManuscriptFigureProps = {

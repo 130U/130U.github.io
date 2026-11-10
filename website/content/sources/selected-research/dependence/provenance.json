@@ -1,11 +1,11 @@
 {
-  "repositoryUrl": "https://github.com/130U/mathematical-finance-project",
-  "sourceUrl": "https://github.com/130U/mathematical-finance-project/blob/dbb0a1003d5c37b13041229e8a1a707e3f247cde/paper/paper.pdf",
+  "repositoryUrl": "https://github.com/130U/Critical-Dependence-Stress",
+  "sourceUrl": "https://github.com/130U/Critical-Dependence-Stress/blob/9c40db55ca5b3d2fae85798d95ef75e63e1f8c84/paper/paper.pdf",
   "sourceTitle": "Critical Dependence Stress for Diversification Gains under Fixed Marginals",
-  "sourceCommit": "dbb0a1003d5c37b13041229e8a1a707e3f247cde",
+  "sourceCommit": "9c40db55ca5b3d2fae85798d95ef75e63e1f8c84",
   "sourceBlob": "6ae3b86691b81075188d4cf73f091ac078f961bd",
-  "sourceEditedAt": "2026-11-09T22:58:19Z",
-  "fetchedWith": "GitHub connector at the pinned commit; all frozen bytes verified against the connector Git-tree blob SHA-1 and size.",
+  "sourceEditedAt": "2026-11-09T20:08:06-05:00",
+  "fetchedWith": "Authenticated Git checkout at the exact commit; git show bytes checked against Git blob SHA-1",
   "sourceFiles": [
     {
       "path": "paper/source/declarations.tex",
@@ -73,9 +73,9 @@
     {
       "path": "paper/source/main-quantitative.tex",
       "local": "main-quantitative.tex",
-      "gitBlob": "5894323e2758084810b76b9bc207e006c1140824",
-      "sha256": "946da38102e56e295ad0225358ebe48dfaddcb49b7d2e26c42425c2b06e2e07b",
-      "bytes": 11553
+      "gitBlob": "b4cba8a317df04293d8dfa84fa1f08380ea80dc3",
+      "sha256": "a047278830cb484185d16c35c22d09d452e530b2f219c0d3529e220d83619dd5",
+      "bytes": 13355
     },
     {
       "path": "paper/source/main-scope.tex",
@@ -347,7 +347,7 @@
   "crossReferences": [
     {
       "label": "eq:B.2",
-      "href": "https://github.com/130U/mathematical-finance-project/blob/dbb0a1003d5c37b13041229e8a1a707e3f247cde/paper/source/technical-quantitative.tex#L80",
+      "href": "https://github.com/130U/Critical-Dependence-Stress/blob/9c40db55ca5b3d2fae85798d95ef75e63e1f8c84/paper/source/technical-quantitative.tex#L80",
       "number": "B.2"
     },
     {
@@ -422,17 +422,17 @@
     },
     {
       "label": "lemma:general-variation",
-      "href": "https://github.com/130U/mathematical-finance-project/blob/dbb0a1003d5c37b13041229e8a1a707e3f247cde/paper/source/technical-reference.tex#L4",
+      "href": "https://github.com/130U/Critical-Dependence-Stress/blob/9c40db55ca5b3d2fae85798d95ef75e63e1f8c84/paper/source/technical-reference.tex#L4",
       "number": "A.1"
     },
     {
       "label": "lemma:general-variation",
-      "href": "https://github.com/130U/mathematical-finance-project/blob/dbb0a1003d5c37b13041229e8a1a707e3f247cde/paper/source/technical-reference.tex#L4",
+      "href": "https://github.com/130U/Critical-Dependence-Stress/blob/9c40db55ca5b3d2fae85798d95ef75e63e1f8c84/paper/source/technical-reference.tex#L4",
       "number": "A.1"
     },
     {
       "label": "lemma:general-variation",
-      "href": "https://github.com/130U/mathematical-finance-project/blob/dbb0a1003d5c37b13041229e8a1a707e3f247cde/paper/source/technical-reference.tex#L4",
+      "href": "https://github.com/130U/Critical-Dependence-Stress/blob/9c40db55ca5b3d2fae85798d95ef75e63e1f8c84/paper/source/technical-reference.tex#L4",
       "number": "A.1"
     },
     {
@@ -502,7 +502,7 @@
     },
     {
       "label": "lem:threshold-convexity",
-      "href": "https://github.com/130U/mathematical-finance-project/blob/dbb0a1003d5c37b13041229e8a1a707e3f247cde/paper/source/technical-limit.tex#L103",
+      "href": "https://github.com/130U/Critical-Dependence-Stress/blob/9c40db55ca5b3d2fae85798d95ef75e63e1f8c84/paper/source/technical-limit.tex#L103",
       "number": "A.4"
     },
     {
@@ -532,17 +532,17 @@
     },
     {
       "label": "proof:threshold-localization",
-      "href": "https://github.com/130U/mathematical-finance-project/blob/dbb0a1003d5c37b13041229e8a1a707e3f247cde/paper/source/technical-limit.tex#L2",
+      "href": "https://github.com/130U/Critical-Dependence-Stress/blob/9c40db55ca5b3d2fae85798d95ef75e63e1f8c84/paper/source/technical-limit.tex#L2",
       "number": "A.2"
     },
     {
       "label": "b-l2-all-optimal-thresholds-under-a-budget-of-order-varepsilon2",
-      "href": "https://github.com/130U/mathematical-finance-project/blob/dbb0a1003d5c37b13041229e8a1a707e3f247cde/paper/source/technical-threshold-statement.tex#L1",
+      "href": "https://github.com/130U/Critical-Dependence-Stress/blob/9c40db55ca5b3d2fae85798d95ef75e63e1f8c84/paper/source/technical-threshold-statement.tex#L1",
       "number": "A.2"
     },
     {
       "label": "eq:A.13",
-      "href": "https://github.com/130U/mathematical-finance-project/blob/dbb0a1003d5c37b13041229e8a1a707e3f247cde/paper/source/technical-limit.tex#L136",
+      "href": "https://github.com/130U/Critical-Dependence-Stress/blob/9c40db55ca5b3d2fae85798d95ef75e63e1f8c84/paper/source/technical-limit.tex#L136",
       "number": "A.13"
     },
     {
@@ -552,12 +552,12 @@
     },
     {
       "label": "lem:threshold-convexity",
-      "href": "https://github.com/130U/mathematical-finance-project/blob/dbb0a1003d5c37b13041229e8a1a707e3f247cde/paper/source/technical-limit.tex#L103",
+      "href": "https://github.com/130U/Critical-Dependence-Stress/blob/9c40db55ca5b3d2fae85798d95ef75e63e1f8c84/paper/source/technical-limit.tex#L103",
       "number": "A.4"
     },
     {
       "label": "lem:projected-imbalance",
-      "href": "https://github.com/130U/mathematical-finance-project/blob/dbb0a1003d5c37b13041229e8a1a707e3f247cde/paper/source/technical-limit.tex#L54",
+      "href": "https://github.com/130U/Critical-Dependence-Stress/blob/9c40db55ca5b3d2fae85798d95ef75e63e1f8c84/paper/source/technical-limit.tex#L54",
       "number": "A.3"
     },
     {
@@ -617,7 +617,7 @@
     },
     {
       "label": "lem:threshold-convexity",
-      "href": "https://github.com/130U/mathematical-finance-project/blob/dbb0a1003d5c37b13041229e8a1a707e3f247cde/paper/source/technical-limit.tex#L103",
+      "href": "https://github.com/130U/Critical-Dependence-Stress/blob/9c40db55ca5b3d2fae85798d95ef75e63e1f8c84/paper/source/technical-limit.tex#L103",
       "number": "A.4"
     },
     {
@@ -747,12 +747,12 @@
     },
     {
       "label": "app:flow-proof",
-      "href": "https://github.com/130U/mathematical-finance-project/blob/dbb0a1003d5c37b13041229e8a1a707e3f247cde/paper/source/technical-flow-proof.tex#L1",
+      "href": "https://github.com/130U/Critical-Dependence-Stress/blob/9c40db55ca5b3d2fae85798d95ef75e63e1f8c84/paper/source/technical-flow-proof.tex#L1",
       "number": "A.8"
     },
     {
       "label": "app:cost-proofs",
-      "href": "https://github.com/130U/mathematical-finance-project/blob/dbb0a1003d5c37b13041229e8a1a707e3f247cde/paper/source/technical-cost-proof.tex#L1",
+      "href": "https://github.com/130U/Critical-Dependence-Stress/blob/9c40db55ca5b3d2fae85798d95ef75e63e1f8c84/paper/source/technical-cost-proof.tex#L1",
       "number": "A.7"
     },
     {
@@ -772,7 +772,7 @@
     },
     {
       "label": "app:potential-proof",
-      "href": "https://github.com/130U/mathematical-finance-project/blob/dbb0a1003d5c37b13041229e8a1a707e3f247cde/paper/source/technical-quantitative.tex#L3",
+      "href": "https://github.com/130U/Critical-Dependence-Stress/blob/9c40db55ca5b3d2fae85798d95ef75e63e1f8c84/paper/source/technical-quantitative.tex#L3",
       "number": "B.1"
     },
     {
@@ -802,7 +802,7 @@
     },
     {
       "label": "app:uniform-bound-proof",
-      "href": "https://github.com/130U/mathematical-finance-project/blob/dbb0a1003d5c37b13041229e8a1a707e3f247cde/paper/source/technical-quantitative.tex#L32",
+      "href": "https://github.com/130U/Critical-Dependence-Stress/blob/9c40db55ca5b3d2fae85798d95ef75e63e1f8c84/paper/source/technical-quantitative.tex#L32",
       "number": "B.2"
     },
     {
@@ -816,8 +816,23 @@
       "number": "3"
     },
     {
+      "label": "eq:3.1",
+      "href": "#dep-eq-3-1",
+      "number": "3.1"
+    },
+    {
+      "label": "eq:5.2",
+      "href": "#dep-eq-5-2",
+      "number": "5.2"
+    },
+    {
+      "label": "eq:3.6",
+      "href": "#dep-eq-3-6",
+      "number": "3.6"
+    },
+    {
       "label": "app:dependence-family-proof",
-      "href": "https://github.com/130U/mathematical-finance-project/blob/dbb0a1003d5c37b13041229e8a1a707e3f247cde/paper/source/technical-quantitative.tex#L49",
+      "href": "https://github.com/130U/Critical-Dependence-Stress/blob/9c40db55ca5b3d2fae85798d95ef75e63e1f8c84/paper/source/technical-quantitative.tex#L49",
       "number": "B.3"
     },
     {
@@ -6358,6 +6373,78 @@
     },
     {
       "display": false,
+      "sourceTex": "0.23",
+      "tex": "0.23",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "0.229",
+      "tex": "0.229",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "0.233",
+      "tex": "0.233",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "A_\\varepsilon",
+      "tex": "A_\\varepsilon",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "B",
+      "tex": "B",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "\\varepsilon=0.2,0.1,0.05,0.025",
+      "tex": "\\varepsilon=0.2,0.1,0.05,0.025",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "\\varepsilon=0.1",
+      "tex": "\\varepsilon=0.1",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "-0.0781",
+      "tex": "-0.0781",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "-0.2637",
+      "tex": "-0.2637",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "-0.2903",
+      "tex": "-0.2903",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "-0.31229",
+      "tex": "-0.31229",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "\\varepsilon=0.025",
+      "tex": "\\varepsilon=0.025",
+      "labels": []
+    },
+    {
+      "display": false,
       "sourceTex": "a_+",
       "tex": "a_+",
       "labels": []
@@ -6757,7 +6844,7 @@
       "labels": []
     }
   ],
-  "importedMarkdownSha256": "05acf9d4fbf1672f1723f33add85e586d8d4d3b03f31151e7527ce8c15b160b4",
+  "importedMarkdownSha256": "3fbc3ed583bfca4377a587b3a9231b2c691abb81a00a38b338132c2a5e544359",
   "transformations": [
     "Seven main TeX input files contain five numbered sections and eleven subsections; recursively included main-text proofs are retained.",
     "TeX line wrapping, layout commands, font styling, and text accents are converted to equivalent web markup.",

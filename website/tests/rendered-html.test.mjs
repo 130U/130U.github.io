@@ -534,7 +534,7 @@ test("About research opens each complete paper through an explicit Read More lin
   const researchEntries = [...about.matchAll(/<article\b[^>]*id="([^"]+)"[^>]*>[\s\S]*?<\/article>/gu)].map((match) => match[1]).filter((id) => id.startsWith("critical-dependence-") || id.startsWith("certified-"));
   assert.deepEqual(researchEntries, ["critical-dependence-stress-for-portfolio-diversification", "certified-valuation-arithmetic-asian-options", "certified-rough-heston-valuation"]);
   for (const [slug, title, description, tables, sections, repository] of [
-    ["critical-dependence-stress-for-portfolio-diversification", "Critical Dependence Stress for Portfolio Diversification", "I prove that the critical stress budget is quadratic in the trade size", 0, 5, "mathematical-finance-project"],
+    ["critical-dependence-stress-for-portfolio-diversification", "Critical Dependence Stress for Portfolio Diversification", "I prove that the critical stress budget is quadratic in the trade size", 0, 5, "Critical-Dependence-Stress"],
     ["certified-valuation-arithmetic-asian-options", "Certified Valuation of Arithmetic Asian Options", "the complete discretization-error bound is below 0.17% of the price", 11, 10, "certified-valuation-arithmetic-asian-options"],
     ["certified-rough-heston-valuation", "Certified Joint Pricing Errors in Rough Heston", "the joint bounds bring all 28 spread, butterfly and basket positions tested within a half-point error budget", 13, 8, "certified-rough-heston-valuation"],
   ]) {

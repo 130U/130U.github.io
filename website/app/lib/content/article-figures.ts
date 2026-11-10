@@ -40,7 +40,7 @@ const articleFigures: Readonly<Record<string, readonly FigurePlacement[]>> = {
       evidence: [
         "H0: Six months: global state propagation | 1.397612096 | — | One-point budget not met",
         "H1: Six months: finite history, same global residual | 0.378598956 | — | Principal propagation improvement; unchanged output and centre",
-        "H2: Six months: local envelope, original used nodes | 0.367258782 | — | About 3% further bound reduction",
+        "H2: Six months: local envelope, same reference nodes | 0.367258782 | — | About 3% further bound reduction",
         "H3: Six months: all finite high nodes, global envelope | 0.132245064 | 0.158585551 | High-frequency certification and centre change are included",
         "H4: Six months: all finite high nodes, local envelope | 0.115215934 | 0.137896018 | Both methods certify 0.25 points",
         "Q0: Three months: through 64, global envelope | 1.207557898 | 1.545191542 | 0.25-point budget not met",
@@ -227,7 +227,7 @@ const tableEmphasis: Readonly<Record<string, readonly TableEmphasis[]>> = {
 
 // Manuscript figures drawn natively, keyed by the image path the manuscript
 // cites. Each drawing evaluates the manuscript's formulas
-// (130U/mathematical-finance-project at the pinned commit:
+// (130U/Critical-Dependence-Stress at the pinned commit:
 // code/generate_mechanism_figures.py and
 // new-computations/plot_profiles_and_flows.py); `evidence` ties its labels and
 // plotted functions to the article text, and the build fails if any is missing.

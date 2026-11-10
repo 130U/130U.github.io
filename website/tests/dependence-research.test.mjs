@@ -19,7 +19,7 @@ function withoutArticleFigures(html) {
 const ROOT = fileURLToPath(new URL("../", import.meta.url));
 const SOURCE = path.join(ROOT, "content", "sources", "selected-research", "dependence");
 const SLUG = "critical-dependence-stress-for-portfolio-diversification";
-const COMMIT = "dbb0a1003d5c37b13041229e8a1a707e3f247cde";
+const COMMIT = "9c40db55ca5b3d2fae85798d95ef75e63e1f8c84";
 const PAPER_BLOB = "6ae3b86691b81075188d4cf73f091ac078f961bd";
 
 async function manuscript() {
@@ -92,7 +92,7 @@ test("dependence import reproduces its pinned sources and checked-in artifacts",
 
 test("dependence parsing and published mathematics retain the complete source ledger in order", async () => {
   const { provenance, blocks } = await manuscript();
-  assert.equal(provenance.mathematics.length, 965);
+  assert.equal(provenance.mathematics.length, 977);
   assert.equal(provenance.mathematics.filter(({ display }) => display).length, 91);
   for (const { sourceTex, tex } of provenance.mathematics) {
     assert.equal(tex, sourceTex.replace(/\\label\{[^}]+\}/gu, "").trim(), "Only source labels may leave mathematical bodies.");
@@ -104,7 +104,7 @@ test("dependence parsing and published mathematics retain the complete source le
   const rendered = [...html.matchAll(/<math\b[^>]*data-research-math="(inline|display)"[^>]*>[\s\S]*?<annotation\b[^>]*encoding="application\/x-tex"[^>]*>([\s\S]*?)<\/annotation>[\s\S]*?<\/math>/gu)].map((match) => ({ tex: decodeHtml(match[2]), display: match[1] === "display" }));
   const published = await editionBlocks();
   assert.deepEqual(rendered, parsedMath(published), "Rendered annotations preserve every TeX byte, equation tag and mode of the site edition.");
-  assert.equal(blocks.length, 343);
+  assert.equal(blocks.length, 345);
   assert.deepEqual([...html.matchAll(/data-research-block="(\d+)"/gu)].map((match) => Number(match[1])), published.map((_, index) => index));
   assert.doesNotMatch(html, /data-mjx-error|<merror\b|@@DEPENDENCE|@@FINAL-MATH/u);
   const ids = [...html.matchAll(/\bid="([^"]+)"/gu)].map((match) => match[1]);
@@ -148,6 +148,6 @@ test("dependence figures are drawn natively with complete captions and appendix 
     const prose = caption.replace(/<svg\b[\s\S]*?<\/svg>|<math\b[\s\S]*?<\/math>|<[^>]+>/gu, "");
     assert.equal(normalize(decodeHtml(prose)), normalize(captionText(figure.inlines)), "Rendered figure captions retain all non-mathematical text.");
   }
-  const appendix = "https://github.com/130U/mathematical-finance-project/blob/" + COMMIT + "/paper/source/technical-quantitative.tex#L80";
+  const appendix = "https://github.com/130U/Critical-Dependence-Stress/blob/" + COMMIT + "/paper/source/technical-quantitative.tex#L80";
   assert.ok(rendered[3][2].includes(`href="${appendix}"`), "The flow-share figure retains its original equation (B.2) appendix link.");
 });

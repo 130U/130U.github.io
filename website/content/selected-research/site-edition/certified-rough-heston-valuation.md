@@ -590,7 +590,7 @@ Table 3 compares the complete \(K=4400\) minus \(K=4500\) task bound. Rows H0–
 |---|---:|---:|---|
 | H0: Six months: global state propagation | 1.397612096 | — | One-point budget not met |
 | H1: Six months: finite history, same global residual | 0.378598956 | — | Principal propagation improvement; unchanged output and centre |
-| H2: Six months: local envelope, original used nodes | 0.367258782 | — | About 3% further bound reduction |
+| H2: Six months: local envelope, same reference nodes | 0.367258782 | — | About 3% further bound reduction |
 | H3: Six months: all finite high nodes, global envelope | 0.132245064 | 0.158585551 | High-frequency certification and centre change are included |
 | H4: Six months: all finite high nodes, local envelope | 0.115215934 | 0.137896018 | Both methods certify 0.25 points |
 | Q0: Three months: through 64, global envelope | 1.207557898 | 1.545191542 | 0.25-point budget not met |
@@ -641,7 +641,7 @@ The first layer retained its unresolved close pairs, which triggered the prespec
 
 The two layers generate every closed-cell residual entry: 15,754,230 entries, 5,130 reference exponents and 10,250 true-transform envelopes in total. Separate readers check complete coverage and maxima, reconstruct the exponents, coefficients and objectives, and reject deliberate corruptions. They share the rigorous arithmetic primitives and the generator's residual-derivative bounds.
 
-### 7.4. Why certify a frozen fast output?
+### 7.4. Certifying stored and replaceable outputs
 
 A stored-output certificate applies to pricing-library audits, historical calculations and production outputs fixed by the task. If replacement is allowed and the reference is available, returning its certified centre gives a direct control; correcting the fast output by that centre also requires the rounding of the stored correction and final addition. The experiments compare these choices, and any assessment of an online workload has to include the reference construction and verification.
 
@@ -651,7 +651,7 @@ A separately fixed control, N2L, reuses the complete \(N_t=2048,\alpha=.52\) res
 
 | Output | Complete joint, points | Matched marginal, points | Joint 0.25-point decision |
 |---|---:|---:|---|
-| Frozen Padé | 0.394999331 | 0.514096070 | Unresolved |
+| Stored Padé output | 0.394999331 | 0.514096070 | Unresolved |
 | Direct reference (binary64) | 0.228237113 | 0.347333852 | Pass |
 | Fast + stored correction | 0.228237113 | 0.347333852 | Pass |
 | BL core, 512 steps | 0.229082759 | 0.348179497 | Pass |
@@ -794,7 +794,7 @@ The [online article](https://github.com/130U/certified-rough-heston-valuation/bl
 
 ## Appendices and Supporting Material
 
-This page includes the complete main text and references. Appendices, supplementary proofs, code, and verification material are available in the [GitHub repository](https://github.com/130U/certified-rough-heston-valuation) and the [full manuscript](https://github.com/130U/certified-rough-heston-valuation/blob/7b6293bd1ac0877e373cc2aeb5e8dcb038ccaf65/manuscript/merged-heston-en.md#appendix-a-probability-model-and-strip-transform).
+This page includes the complete main text and references. Appendices, supplementary proofs, code, and verification material are available in the [GitHub repository](https://github.com/130U/certified-rough-heston-valuation) and the [full manuscript](https://github.com/130U/certified-rough-heston-valuation/blob/89e322a2a3ef5d8a8db78b5ddac9f3a6698d9f03/manuscript/merged-heston-en.md#appendix-a-probability-model-and-strip-transform).
 
 ## References
 

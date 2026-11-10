@@ -951,6 +951,7 @@ button:focus-visible {
   .primary-nav a::before,
   .back-link,
   .rail-panel,
+  .site-rail[data-menu-interacted="true"] .rail-panel,
   .read-more,
   .read-more svg {
     transition: none;

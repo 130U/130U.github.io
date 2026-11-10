@@ -38,7 +38,7 @@ Read More
 
 ## Summary
 
-Sending the riskiest submissions to review is the usual way to spend expert time, and it biases the quality estimate the review is meant to protect. I separated the two things a review buys, information about the whole batch and repair of the data that ships, and derived the allocation each one calls for. The design ran a program of more than 300 specialists and was reused in later post-training programs.
+Sending the riskiest submissions to review concentrates expert attention where errors are most likely, but the uncorrected review results overstate the batch's defect rate. I separated the two things a review buys, information about the whole batch and repair of the data that ships, and derived the allocation each one calls for. The design coordinated more than 300 specialists on weekly batches of over 10,000 tasks and was reused in later post-training programs.
 
 ## Problem and Approach
 
@@ -240,7 +240,7 @@ I defined separate production evaluations for statistical quality inference and 
 1. **Inference on frozen, adjudicated batches.** Uniform sampling, legacy high-risk routing, cost-aware residual allocation and defensive mixtures are each set against complete independent adjudication, and judged on bias, mean squared error (MSE) and interval coverage within task strata and rubric versions.
 2. **Remediation trials at matched capacity.** Legacy tiered rules are set against marginal-gain ($`\Delta_i`$) action allocation at equal total specialist hours, and judged on the severe defects remaining in the final post-training corpus and the fully loaded cost per accepted submission.
 
-Contributor reliability records, tiered review workflows and random reference audits carried both instruments, the quality estimate and the review assignment, into daily operation across more than 300 specialists, and they became the project's operating standards for expert collaboration, quality measurement and resource allocation.
+The program worked through roughly one batch a week, with more than 10,000 tasks per batch. Contributor reliability records, tiered review workflows and random reference audits became its operating standards for quality measurement and review allocation.
 
 # Project 02: task-validity-in-financial-synthetic-data
 
@@ -277,6 +277,8 @@ When a synthetic financial case changes one number, its reference answer, the ev
 In late 2023, frontier foundation models could reproduce corporate finance definitions and still made unpredictable errors in financial workflows, where a small numerical change or an accounting footnote could reverse an investment recommendation. Adding synthetic data helps only if the supervision moves with the scenario. I built the data strategy around that requirement, connecting task specifications, synthesis methods and expert calibration to the capability objectives of post-training research teams and to two problems:
 1. **Diagnosing reasoning limits through task design.** I designed prompts around subtle business failure modes, including covenant breaches, off-balance-sheet adjustments and valuation differences close to a decision boundary, because simple prompts may give little basis for telling candidate responses apart. Paired with the five-level preference protocol, these prompts carry a domain judgment such as *"Response A is better because it isolates the working-capital constraint and cites Footnote 4"* into structured preference supervision for post-training.
 2. **Matching the generator to the financial structure.** Synthetic financial data has to satisfy structural constraints, stay consistent with reference judgments and respect the task's information boundaries. A corporate table that violates Total Assets $=$ Total Liabilities $+$ Equity, even by a fraction of a percentage point, introduces a structural error. An interest-rate path that exposes a future terminal rate to a historical forecasting task introduces temporal leakage. Sections 1 through 6 give the conditions, analytical results and validation designs for each method. Batch Zero makes these requirements its acceptance criteria: experts have to be able to execute the task specification independently, reproduce reference solutions and calibrate their judgments.
+
+The team averaged roughly 500 completed financial tasks a week, or about 2,000 over a four-week cycle. Each task combined synthetic financial data with a reference solution and expert review. A typical financial task took about three specialist-hours across drafting, three reviews and revision.
 
 ## Key Contributions
 
@@ -471,6 +473,8 @@ A model can reach the right answer through an unsupported step, and a grader tha
 ## Problem and Approach
 
 The question I took up in late 2023 was what should entitle a model's reasoning to be accepted. A correct answer can coexist with unsupported assumptions, misapplied rules or tool use that violates the task specification, and a fixed reference path will reject sound work that takes another route. I designed an acceptance rule around proof obligations: a conclusion stands when its assumptions, derivations and execution evidence support it, whichever valid route the model took, and a failed obligation removes support from everything that depends on it. Programmatic certificates discharge checkable obligations, LLM-assisted screening identifies possible gaps, and specialist scholars adjudicate disputed semantic questions. I kept refining the framework through September 2026. Sections 1 through 7 set out the acceptance criteria, the certificates for a programmatically verifiable subfamily, the experiments and the related literature.
+
+The team produced roughly 500 scientific reasoning tasks a week, or about 2,000 over a four-week cycle. Each task included a detailed, step-by-step reference solution and repeated verification of the argument.
 
 ## Key Contributions
 

@@ -13,10 +13,10 @@ async function writeOrCheck(url, content) {
   else await writeFile(url, content);
 }
 const manifest = JSON.parse(await readFile(new URL("source-manifest.json", sourceDirectory), "utf8"));
-const commit = "dbb0a1003d5c37b13041229e8a1a707e3f247cde";
+const commit = "9c40db55ca5b3d2fae85798d95ef75e63e1f8c84";
 const paperBlob = "6ae3b86691b81075188d4cf73f091ac078f961bd";
 assert.equal(manifest.commit, commit);
-assert.equal(manifest.repository, "130U/mathematical-finance-project");
+assert.equal(manifest.repository, "130U/Critical-Dependence-Stress");
 const repositoryUrl = `https://github.com/${manifest.repository}`;
 const sourceUrl = `${repositoryUrl}/blob/${commit}/paper/paper.pdf`;
 const mainFiles = ["main-introduction.tex", "main-model-benchmark.tex", "main-variational.tex", "main-crossing.tex", "main-classification-flow.tex", "main-quantitative.tex", "main-scope.tex"];
@@ -279,7 +279,7 @@ const content = {
 await writeOrCheck(outputUrl, JSON.stringify(content, null, 2) + "\n");
 await writeOrCheck(new URL("provenance.json", sourceDirectory), JSON.stringify({
   repositoryUrl, sourceUrl, sourceTitle, sourceCommit: commit, sourceBlob: paperBlob, sourceEditedAt: manifest.commitDate,
-  fetchedWith: "GitHub connector at the pinned commit; all frozen bytes verified against the connector Git-tree blob SHA-1 and size.",
+  fetchedWith: manifest.fetchedWith,
   sourceFiles: sourceReceipts, includedFiles: ["paper.tex (abstract)", ...includedFiles, "references.tex"],
   includedHeadings: headings,
   results: resultReceipts.map((result) => ({ ...result, title: result.title?.replace(/@@DEPENDENCE-MATH-(\d+)@@/gu, (_, index) => `\\(${mathematics[Number(index)].sourceTex}\\)`) })),
