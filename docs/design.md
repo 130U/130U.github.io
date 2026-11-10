@@ -181,7 +181,8 @@ the roles Alumnus and Fellow use Source Serif 4. One row above the hero frame, o
 name's edge, links About, Experience, and Blog at the interface size: About carries the
 blue tick of the current page and leads down to the profile. The row is 48px tall and
 lies in the hero's top margin from 1024px; below that it is 44px and overlaps the
-margin, and the hero is shorter by the difference so both share the first screen. The
+margin, and the hero is shorter by the difference so both share the first screen. With
+enlarged text the links wrap onto further lines inside the page width. The
 two-line "Thinking Mathematically / Working in AI" introduction is an H2 at the title
 size, its second line in the muted tone, with the biography below on the same edge
 within the measure. Links inside the biography and the Fellowship paragraph are

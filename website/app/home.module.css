@@ -1,6 +1,7 @@
 /* The first screen carries the section links on the name's edge, above the hero
    frame. The row overlaps the hero's top margin, and the hero gives up the rest
-   of the row's height through --opening-offset. */
+   of the row's height through --opening-offset. Enlarged text wraps the links
+   onto further lines of the same height. */
 .opening {
   --opening-row: 48px;
   --opening-overlap: 48px;
@@ -10,7 +11,7 @@
 .openingNav {
   position: relative;
   z-index: 2;
-  height: var(--opening-row);
+  min-height: var(--opening-row);
   margin-bottom: calc(-1 * var(--opening-overlap));
   padding: 0 64px;
   font-family: var(--font-text);
@@ -20,17 +21,17 @@
 
 .openingLinks {
   display: flex;
+  flex-wrap: wrap;
   width: min(100%, 1312px);
-  height: 100%;
   margin: 0 auto;
-  align-items: stretch;
-  gap: 22px;
+  column-gap: 22px;
   padding-left: 28px;
 }
 
 .openingLinks a {
   position: relative;
   display: flex;
+  min-height: var(--opening-row);
   align-items: center;
   padding-left: 13px;
   transition: color 180ms var(--ease-out);

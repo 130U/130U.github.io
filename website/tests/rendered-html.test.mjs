@@ -560,7 +560,9 @@ test("About carries the section links on its first screen, ahead of the hero", a
   const css = await readFile(path.join(ROOT, "app", "home.module.css"), "utf8");
   const hero = await readFile(path.join(ROOT, "app", "components", "clarinet-hero", "ClarinetHero.module.css"), "utf8");
   assert.match(css, /\.opening\s*\{[^}]*--opening-offset:\s*calc\(var\(--opening-row\) - var\(--opening-overlap\)\)/u);
-  assert.match(css, /\.openingNav\s*\{[^}]*margin-bottom:\s*calc\(-1 \* var\(--opening-overlap\)\)/u);
+  assert.match(css, /\.openingNav\s*\{[^}]*min-height:\s*var\(--opening-row\)[^}]*margin-bottom:\s*calc\(-1 \* var\(--opening-overlap\)\)/u);
+  assert.match(css, /\.openingLinks\s*\{[^}]*flex-wrap:\s*wrap/u, "Enlarged text wraps the links inside the page width.");
+  assert.match(css, /\.openingLinks a\s*\{[^}]*min-height:\s*var\(--opening-row\)/u);
   assert.match(hero, /\.hero\s*\{[^}]*min-height:\s*calc\(100svh - var\(--opening-offset, 0px\)\)/u, "The hero and its links share one screen.");
   const navigation = await readFile(path.join(ROOT, "app", "components", "SiteNavigation.tsx"), "utf8");
   assert.ok(navigation.includes("[data-opening-navigation]"), "The open mobile menu sets the first-screen links aside.");
