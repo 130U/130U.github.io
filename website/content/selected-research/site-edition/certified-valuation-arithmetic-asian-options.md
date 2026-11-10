@@ -2,7 +2,7 @@
 description: Certified bounds on the pricing error of arithmetic Asian options under projected Euler, built on common Gaussian smoothing, with weak expansions and a transfer result for posterior quantiles.
 ---
 
-[English PDF](https://github.com/130U/certified-valuation-arithmetic-asian-options/blob/1b00094de08ce5e9d53f76c683120403de7bd3c3/paper/paper.pdf) · [Repository](https://github.com/130U/certified-valuation-arithmetic-asian-options/blob/1b00094de08ce5e9d53f76c683120403de7bd3c3/README.md) · [Code and evidence](https://github.com/130U/certified-valuation-arithmetic-asian-options/blob/1b00094de08ce5e9d53f76c683120403de7bd3c3/EVIDENCE.md)
+[English PDF](https://github.com/130U/certified-valuation-arithmetic-asian-options/blob/92547dc2e486408134dcfec864eebe9bb8f0aa92/paper/paper.pdf) · [Repository](https://github.com/130U/certified-valuation-arithmetic-asian-options/blob/92547dc2e486408134dcfec864eebe9bb8f0aa92/README.md) · [Code and evidence](https://github.com/130U/certified-valuation-arithmetic-asian-options/blob/92547dc2e486408134dcfec864eebe9bb8f0aa92/EVIDENCE.md)
 
 Conditional Representation, Geometric Reference and Heston Error Bounds
 
@@ -1104,7 +1104,7 @@ The same decomposition identifies the limitation of the result. Separate bounds 
 
 ## Appendices and Supporting Material
 
-This page includes the complete main text and references. Appendices, supplementary proofs, code, and verification material are available in the [GitHub repository](https://github.com/130U/certified-valuation-arithmetic-asian-options) and the [full manuscript](https://github.com/130U/certified-valuation-arithmetic-asian-options/blob/1b00094de08ce5e9d53f76c683120403de7bd3c3/manuscript/report.md#appendix-a-finite-certification-of-the-weighted-second-moment).
+This page includes the complete main text and references. Appendices, supplementary proofs, code, and verification material are available in the [GitHub repository](https://github.com/130U/certified-valuation-arithmetic-asian-options) and the [full manuscript](https://github.com/130U/certified-valuation-arithmetic-asian-options/blob/92547dc2e486408134dcfec864eebe9bb8f0aa92/manuscript/report.md#appendix-a-finite-certification-of-the-weighted-second-moment).
 
 ## References
 
