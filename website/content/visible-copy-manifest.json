@@ -54,9 +54,9 @@
       }
     },
     "/critical-dependence-stress-for-portfolio-diversification/": {
-      "textSha256": "f44a925a9c10075a0c004ca287f66db9729337b7f28509de441d684708bf0b5a",
-      "characterCount": 78508,
-      "wordCount": 11855,
+      "textSha256": "89e6eb036d62e1e602df85eea8759c6ab33e04bf5d572dfa7cb3c6a93cdd43eb",
+      "characterCount": 78293,
+      "wordCount": 11845,
       "preview": "Skip to Main Content Theodore Ouyang Back to Selected Research Critical Dependence Stress for Portfolio Diversification GitHub Full Manuscript Abstract We ask h",
       "altTexts": [],
       "ariaLabels": [
@@ -383,7 +383,6 @@
         "Inset on budgets from 0 to 0.02: the two profiles coincide with the exact initial segment 2s minus 5/16 up to s = 1/96, then separate.",
         "Scrollable mathematical expression",
         "Scrollable mathematical expression",
-        "Scrollable mathematical expression",
         "Mathematical equation",
         "Scrollable mathematical expression",
         "Scrollable mathematical expression",
@@ -424,8 +423,8 @@
         "twitterTitle": "Critical Dependence Stress for Portfolio Diversification",
         "twitterDescription": "How much dependence stress erases a diversification gain under fixed marginals: a variational limit, a quadratic critical budget, the marginal-restoration premium and projected flow duality."
       },
-      "mathSourceSha256": "099939efc2614ec463b0fa015d8711e3e09944c2e848ed5058d6c397400b1127",
-      "formulaCount": 1033
+      "mathSourceSha256": "18c82f848024b238b7a5788248ee326315e22a80b0b8bc4ec3961da8f956aba5",
+      "formulaCount": 1030
     },
     "/certified-valuation-arithmetic-asian-options/": {
       "textSha256": "fd14fc679b7fad3baa72b5ebc69ce7c43d70283925759bd18a5f360c777ccb76",
@@ -925,9 +924,9 @@
       "formulaCount": 164
     },
     "/experience/task-validity-in-financial-synthetic-data/": {
-      "textSha256": "62646eff00d54cfde25ec5c870e283fbb9d42493f790998b04bf244f606f81c6",
-      "characterCount": 25142,
-      "wordCount": 3497,
+      "textSha256": "2e941fd370e4160b6a0b5da74540cd08b71ef3af460409e53c4e947828562872",
+      "characterCount": 25103,
+      "wordCount": 3490,
       "preview": "Skip to Main Content Theodore Ouyang Back to Experience Financial Task Design and Synthetic Data Engineering Organization Duke University × Leading Foundation M",
       "altTexts": [],
       "ariaLabels": [
@@ -982,9 +981,9 @@
       "formulaCount": 136
     },
     "/experience/verification-and-supervision-in-scientific-reasoning-tasks/": {
-      "textSha256": "8db5e4006278738d1003e7a7a67f010e709dd878d16d33f2569d4bd490f551c9",
-      "characterCount": 24289,
-      "wordCount": 3483,
+      "textSha256": "4c167a24d20bfeff7ffd9dab3b48ca36482cbf059962ae0f284f3b20ddcb0cdc",
+      "characterCount": 24250,
+      "wordCount": 3476,
       "preview": "Skip to Main Content Theodore Ouyang Back to Experience General Reasoning Evaluation and Layered Verification Organization Duke University × Frontier AI Researc",
       "altTexts": [],
       "ariaLabels": [
