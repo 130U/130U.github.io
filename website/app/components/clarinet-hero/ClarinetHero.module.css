@@ -1,7 +1,7 @@
 .hero {
   position: relative;
   z-index: 1;
-  min-height: calc(100svh - var(--opening-offset, 0px));
+  min-height: 100svh;
   display: grid;
   align-items: center;
   background: var(--page);
@@ -15,7 +15,7 @@
   align-items: center;
   width: min(100%, 1312px);
   margin: 0 auto;
-  min-height: min(760px, calc(100svh - 96px - var(--opening-offset, 0px)));
+  min-height: min(760px, calc(100svh - 96px));
   border-block: 1px solid var(--rule-strong);
 }
 
@@ -65,6 +65,43 @@
   font-family: var(--font-text);
   font-weight: 500;
 }
+/* The section links close the name block: a dashed hairline under the
+   credentials, then one row in the interface face that wraps when text is
+   enlarged. The current page carries the blue tick on the block's left edge. */
+.sections {
+  display: flex;
+  flex-wrap: wrap;
+  column-gap: 26px;
+  width: min(100%, 330px);
+  margin-top: 20px;
+  padding-top: 6px;
+  background: var(--dash-x) left top / 100% 1px no-repeat;
+  font-family: var(--font-text);
+  font-size: var(--type-interface);
+  line-height: var(--interface-leading);
+}
+.sections a {
+  position: relative;
+  display: flex;
+  min-height: 44px;
+  align-items: center;
+  transition: color 180ms var(--ease-out);
+}
+.sections a[aria-current="page"] { padding-left: 13px; color: var(--accent); }
+.sections a[aria-current="page"]::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 0;
+  width: 2px;
+  height: 12px;
+  background: currentColor;
+  transform: translateY(-50%);
+}
+.sections a:active { color: var(--accent); }
+@media (hover: hover) and (pointer: fine) {
+  .sections a:hover { color: var(--accent); }
+}
 .visual { position: relative; min-width: 0; padding: 26px 0; }
 .stage {
   --canvas-scale: 1;
@@ -100,7 +137,7 @@
   .frame::before, .frame::after { top: -32px; bottom: -32px; }
 }
 @media (768px <= width < 1024px) and (orientation: landscape) {
-  .frame { min-height: calc(100svh - 64px - var(--opening-offset, 0px)); grid-template-columns: 43% 57%; }
+  .frame { min-height: calc(100svh - 64px); grid-template-columns: 43% 57%; }
   .copy { padding-left: 20px; }
   .copy h1 { font-size: clamp(3rem, 6.5vw, 4.5rem); }
 }
@@ -110,6 +147,8 @@
   .copy { padding: 0 12px; }
   .copy h1 { font-size: clamp(3.25rem, 13.5vw, 5.5rem); line-height: 1.03; }
   .credentials { margin-top: 24px; padding-top: 14px; width: min(100%, 290px); font-size: 18px; }
+  /* The 44px link row holds air below its text, so the instrument follows closer. */
+  .sections { width: min(100%, 290px); margin: 14px 0 -10px; padding-top: 2px; }
   .visual { width: min(100%, 480px); margin: 24px auto 0; padding: 0; }
   /* Reframe the surrounding whitespace without changing the mother shape. */
   .stage {
@@ -126,4 +165,5 @@
 @media (prefers-reduced-motion: reduce) {
   .copy { opacity: 1 !important; transform: none !important; }
   .markers { opacity: 1 !important; }
+  .sections a { transition: none; }
 }

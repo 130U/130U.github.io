@@ -440,7 +440,7 @@ test("About opens with its accessible clarinet hero before the profile", async (
   assert.ok(home.indexOf("<canvas") < home.indexOf('id="home-profile"'));
   const hero = home.match(/<section\b[^>]*aria-labelledby="hero-name"[^>]*>([\s\S]*?)<\/section>/u)?.[1];
   assert.ok(hero, "The hero is a named section.");
-  assert.equal(openingTags(hero, "a").length, 0, "The hero has no call-to-action link.");
+  assert.deepEqual(openingTags(hero, "a").map((tag) => attribute(tag, "href")), ["#home-profile", "/experience/", "/blog/"], "The hero links only to the three sections.");
   assert.equal(openingTags(hero, "button").length, 0, "The hero has no playback control.");
   const heading = home.match(/<h1\b[^>]*>([\s\S]*?)<\/h1>/u);
   assert.ok(heading);
@@ -542,14 +542,16 @@ test("About opens with its accessible clarinet hero before the profile", async (
   for (const route of ROUTES.slice(1)) assert.equal(openingTags(await routeHtml(route), "canvas").length, 0);
 });
 
-test("About carries the section links on its first screen, ahead of the hero", async () => {
+test("About's name block ends with the section links", async () => {
   const home = await routeHtml("/");
   const navigations = (html) => [...html.matchAll(/<nav\b([^>]*)>([\s\S]*?)<\/nav>/giu)];
-  const opening = navigations(home).find((match) => attribute(match[1], "aria-label") === "Opening navigation");
-  assert.ok(opening, "The first screen names the three sections.");
-  assert.ok(home.indexOf(opening[0]) < home.indexOf('aria-labelledby="hero-name"'), "The links precede the hero in reading order.");
-  assert.ok(home.indexOf('class="skip-link"') < home.indexOf(opening[0]), "The skip link stays first.");
-  assert.deepEqual(navigationLinks(home, "Opening navigation"), [
+  const hero = home.match(/<section\b[^>]*aria-labelledby="hero-name"[^>]*>([\s\S]*?)<\/section>/u)?.[1] ?? "";
+  const opening = navigations(hero).find((match) => attribute(match[1], "aria-label") === "Opening navigation");
+  assert.ok(opening, "The first screen names the three sections inside the hero.");
+  assert.equal(navigations(home).filter((match) => attribute(match[1], "aria-label") === "Opening navigation").length, 1);
+  const credentials = hero.indexOf("</ul>");
+  assert.ok(credentials >= 0 && credentials < hero.indexOf(opening[0]) && hero.indexOf(opening[0]) < hero.indexOf("<canvas"), "The links follow the credentials and precede the instrument.");
+  assert.deepEqual(navigationLinks(hero, "Opening navigation"), [
     ["About", "#home-profile"], ...NAVIGATION.slice(1),
   ]);
   assert.deepEqual([...opening[2].matchAll(/<a\b([^>]*)>/gu)].map((match) => attribute(match[1], "aria-current")), ["page", undefined, undefined]);
@@ -557,13 +559,15 @@ test("About carries the section links on its first screen, ahead of the hero", a
     assert.ok(!navigations(await routeHtml(route)).some((match) => attribute(match[1], "aria-label") === "Opening navigation"), `${route}: the rail is the only navigation.`);
   }
 
-  const css = await readFile(path.join(ROOT, "app", "home.module.css"), "utf8");
-  const hero = await readFile(path.join(ROOT, "app", "components", "clarinet-hero", "ClarinetHero.module.css"), "utf8");
-  assert.match(css, /\.opening\s*\{[^}]*--opening-offset:\s*calc\(var\(--opening-row\) - var\(--opening-overlap\)\)/u);
-  assert.match(css, /\.openingNav\s*\{[^}]*min-height:\s*var\(--opening-row\)[^}]*margin-bottom:\s*calc\(-1 \* var\(--opening-overlap\)\)/u);
-  assert.match(css, /\.openingLinks\s*\{[^}]*flex-wrap:\s*wrap/u, "Enlarged text wraps the links inside the page width.");
-  assert.match(css, /\.openingLinks a\s*\{[^}]*min-height:\s*var\(--opening-row\)/u);
-  assert.match(hero, /\.hero\s*\{[^}]*min-height:\s*calc\(100svh - var\(--opening-offset, 0px\)\)/u, "The hero and its links share one screen.");
+  const css = await readFile(path.join(ROOT, "app", "components", "clarinet-hero", "ClarinetHero.module.css"), "utf8");
+  const sections = css.match(/\.sections\s*\{([^}]+)\}/u)?.[1] ?? "";
+  assert.match(sections, /flex-wrap:\s*wrap/u, "Enlarged text wraps the links inside the page width.");
+  assert.match(sections, /width:\s*min\(100%,\s*330px\)/u, "The links share the credentials' measure.");
+  assert.match(sections, /background:\s*var\(--dash-x\) left top \/ 100% 1px no-repeat/u, "A dashed hairline divides the links from the credentials.");
+  assert.match(sections, /font-size:\s*var\(--type-interface\)/u);
+  assert.match(css, /\.sections a\s*\{[^}]*min-height:\s*44px/u);
+  assert.match(css, /\.sections a\[aria-current="page"\]\s*\{[^}]*color:\s*var\(--accent\)/u);
+  assert.match(css, /\.sections a\[aria-current="page"\]::before\s*\{[^}]*width:\s*2px[^}]*height:\s*12px/u, "The current page carries the blue tick.");
   const navigation = await readFile(path.join(ROOT, "app", "components", "SiteNavigation.tsx"), "utf8");
   assert.ok(navigation.includes("[data-opening-navigation]"), "The open mobile menu sets the first-screen links aside.");
 });

@@ -177,12 +177,12 @@ the prose.
 
 About opens with the name beside the clarinet hero; phones and portrait tablets stack
 the name above the instrument. The name and the institutions Duke and Sequoia use Inter;
-the roles Alumnus and Fellow use Source Serif 4. One row above the hero frame, on the
-name's edge, links About, Experience, and Blog at the interface size: About carries the
-blue tick of the current page and leads down to the profile. The row is 48px tall and
-lies in the hero's top margin from 1024px; below that it is 44px and overlaps the
-margin, and the hero is shorter by the difference so both share the first screen. With
-enlarged text the links wrap onto further lines inside the page width. The
+the roles Alumnus and Fellow use Source Serif 4. The name block ends with the section
+links: a dashed hairline under the credentials, on their measure, then About,
+Experience, and Blog in one row at the interface size. About carries the blue tick of
+the current page on the block's left edge and leads down to the profile. Each link is
+44px tall, and with enlarged text the row wraps inside the measure. The block sits in
+the middle of the first screen, clear of the browser's own bars at either end. The
 two-line "Thinking Mathematically / Working in AI" introduction is an H2 at the title
 size, its second line in the muted tone, with the biography below on the same edge
 within the measure. Links inside the biography and the Fellowship paragraph are
@@ -347,7 +347,7 @@ the cavity uses denser ink points. Four short blue marks define the stage corner
 open arc of larger, closely spaced blue points passes behind the instrument. A single
 solid blue oval and four solid musical notes are the composition's only filled shapes,
 drawn with reusable `Path2D` paths. The hero has no call to action or playback control;
-the section links sit in their own row above it.
+its only links are the three section links that close the name block.
 
 Clean mother-shape paths are rasterized into temporary masks when the field is built
 or resized; the masks identify the body, fittings, and outlines and are released after

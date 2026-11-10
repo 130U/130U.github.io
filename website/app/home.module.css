@@ -1,63 +1,3 @@
-/* The first screen carries the section links on the name's edge, above the hero
-   frame. The row overlaps the hero's top margin, and the hero gives up the rest
-   of the row's height through --opening-offset. Enlarged text wraps the links
-   onto further lines of the same height. */
-.opening {
-  --opening-row: 48px;
-  --opening-overlap: 48px;
-  --opening-offset: calc(var(--opening-row) - var(--opening-overlap));
-}
-
-.openingNav {
-  position: relative;
-  z-index: 2;
-  min-height: var(--opening-row);
-  margin-bottom: calc(-1 * var(--opening-overlap));
-  padding: 0 64px;
-  font-family: var(--font-text);
-  font-size: var(--type-interface);
-  line-height: var(--interface-leading);
-}
-
-.openingLinks {
-  display: flex;
-  flex-wrap: wrap;
-  width: min(100%, 1312px);
-  margin: 0 auto;
-  column-gap: 22px;
-  padding-left: 28px;
-}
-
-.openingLinks a {
-  position: relative;
-  display: flex;
-  min-height: var(--opening-row);
-  align-items: center;
-  padding-left: 13px;
-  transition: color 180ms var(--ease-out);
-}
-
-.openingLinks a::before {
-  position: absolute;
-  top: 50%;
-  left: 0;
-  width: 2px;
-  height: 12px;
-  background: currentColor;
-  content: "";
-  opacity: 0;
-  transform: translateY(-50%);
-}
-
-.openingLinks a[aria-current="page"],
-.openingLinks a:active {
-  color: var(--accent);
-}
-
-.openingLinks a[aria-current="page"]::before {
-  opacity: 1;
-}
-
 .homeFrame {
   font-family: var(--font-text);
 }
@@ -269,10 +209,6 @@
     color: var(--accent);
     text-decoration-color: var(--accent);
   }
-
-  .openingLinks a:hover {
-    color: var(--accent);
-  }
 }
 
 @media (pointer: coarse) {
@@ -304,19 +240,6 @@
 }
 
 @media (768px <= width < 1024px) {
-  .opening {
-    --opening-row: 44px;
-    --opening-overlap: 32px;
-  }
-
-  .openingNav {
-    padding: 0 32px;
-  }
-
-  .openingLinks {
-    padding-left: 20px;
-  }
-
   .homeFrame .profileSection {
     grid-column: 1 / -1;
   }
@@ -331,23 +254,7 @@
   }
 }
 
-/* Where the hero stacks, the links keep the name's edge. */
-@media (width < 768px), (width < 1024px) and (orientation: portrait) {
-  .openingLinks {
-    padding-left: 12px;
-  }
-}
-
 @media (width < 768px) {
-  .opening {
-    --opening-row: 44px;
-    --opening-overlap: 24px;
-  }
-
-  .openingNav {
-    padding: 0 20px;
-  }
-
   .sectionBody .fellowship {
     padding-bottom: 28px;
   }
@@ -398,8 +305,7 @@
 
 @media (prefers-reduced-motion: reduce) {
   .contactStrip a,
-  .inlineLink,
-  .openingLinks a {
+  .inlineLink {
     transition: none;
   }
 }
