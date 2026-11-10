@@ -507,14 +507,29 @@ test("About opens with its accessible clarinet hero before the profile", async (
   assert.equal(stripMarkup(profileHeading?.[1] ?? ""), "Thinking Mathematically Working in AI");
   assert.match(home, /<title>Theodore Ouyang<\/title>/u);
   assert.match(home, /id="home-profile"/u);
-  for (const index of ["01", "02", "03", "04"]) {
+  for (const index of ["01", "02", "03", "04", "05"]) {
     assert.match(home, new RegExp(`aria-hidden="true"[^>]*>${index}<`, "u"));
   }
   assert.ok(stripMarkup(home).includes("Mathematics is how I make sense of things. I want to know which assumptions underlie a conclusion, what happens when they change, and where intuition stops being reliable."));
   assert.ok(stripMarkup(home).includes("My work makes high-stakes conclusions verifiable: certified error bounds in derivative pricing, layered verification in frontier AI evaluation, and evidence standards for delegating authority to autonomous systems."));
-  assert.ok(stripMarkup(home).includes("AI is now the center of that work. I build and experiment to understand these systems firsthand, and to work out what is worth doing with them."));
-  for (const id of ["selected-research", "education", "coursework", "contact"]) {
+  assert.ok(decodeHtml(stripMarkup(home)).includes("Most of it is in finance and AI. From 2023 to 2026 I designed review and verification systems with a foundation model developer, a frontier AI lab, and a global alternative asset manager. I also build systems of my own: a language model trained from scratch on financial text, and a gate that decides which evaluation feedback an agent's optimizer may act on."));
+  const profileLinks = [...elementHtmlById(home, "home-profile").matchAll(/<a\b([^>]*)>([\s\S]*?)<\/a>/gu)];
+  assert.deepEqual(profileLinks.map((match) => [decodeHtml(stripMarkup(match[2])), attribute(match[1], "href")]), [
+    ["a language model", "https://github.com/130U/130U-FinLLM"],
+    ["a gate", "https://github.com/130U/agent-evaluation-methodology"],
+  ]);
+  for (const id of ["selected-research", "education", "coursework", "fellowship", "contact"]) {
     assert.match(home, new RegExp(`id="${id}"`, "u"));
+  }
+  const fellowship = elementHtmlById(home, "fellowship");
+  assert.equal(stripMarkup(fellowship.match(/<h2\b[^>]*>([\s\S]*?)<\/h2>/u)?.[1] ?? ""), "Fellowship");
+  assert.equal(stripMarkup(fellowship.match(/<h3\b[^>]*>([\s\S]*?)<\/h3>/u)?.[1] ?? ""), "Sequoia Fellow");
+  assert.deepEqual(openingTags(fellowship, "a").map((tag) => attribute(tag, "href")), ["https://www.hongshan.com/"]);
+  const fellowshipText = decodeHtml(stripMarkup(fellowship));
+  assert.ok(fellowshipText.includes("the venture firm formerly known as Sequoia China, runs with its portfolio companies. It selects people early in their careers by application and brings them into the firm's circle of founders, mentors, and peers in technology and entrepreneurship. Fellows stay on as an alumni community, with access to the firm's closed-door events and industry exchanges."));
+  for (const tag of [...profileLinks.map((match) => `<a${match[1]}>`), ...openingTags(fellowship, "a")]) {
+    assert.equal(attribute(tag, "target"), "_blank");
+    assert.equal(attribute(tag, "rel"), "noopener noreferrer");
   }
   assert.match(home, /href="mailto:10@alumni\.duke\.edu"/u);
   assert.match(home, /href="https:\/\/github\.com\/130U"/u);
@@ -525,6 +540,44 @@ test("About opens with its accessible clarinet hero before the profile", async (
   assert.ok(stripMarkup(contact).includes("@D3rfr31schutz"));
   assert.equal(openingTags(home, "img").length, 0);
   for (const route of ROUTES.slice(1)) assert.equal(openingTags(await routeHtml(route), "canvas").length, 0);
+});
+
+test("About carries the section links on its first screen, ahead of the hero", async () => {
+  const home = await routeHtml("/");
+  const navigations = (html) => [...html.matchAll(/<nav\b([^>]*)>([\s\S]*?)<\/nav>/giu)];
+  const opening = navigations(home).find((match) => attribute(match[1], "aria-label") === "Opening navigation");
+  assert.ok(opening, "The first screen names the three sections.");
+  assert.ok(home.indexOf(opening[0]) < home.indexOf('aria-labelledby="hero-name"'), "The links precede the hero in reading order.");
+  assert.ok(home.indexOf('class="skip-link"') < home.indexOf(opening[0]), "The skip link stays first.");
+  assert.deepEqual(navigationLinks(home, "Opening navigation"), [
+    ["About", "#home-profile"], ...NAVIGATION.slice(1),
+  ]);
+  assert.deepEqual([...opening[2].matchAll(/<a\b([^>]*)>/gu)].map((match) => attribute(match[1], "aria-current")), ["page", undefined, undefined]);
+  for (const route of ROUTES.slice(1)) {
+    assert.ok(!navigations(await routeHtml(route)).some((match) => attribute(match[1], "aria-label") === "Opening navigation"), `${route}: the rail is the only navigation.`);
+  }
+
+  const css = await readFile(path.join(ROOT, "app", "home.module.css"), "utf8");
+  const hero = await readFile(path.join(ROOT, "app", "components", "clarinet-hero", "ClarinetHero.module.css"), "utf8");
+  assert.match(css, /\.opening\s*\{[^}]*--opening-offset:\s*calc\(var\(--opening-row\) - var\(--opening-overlap\)\)/u);
+  assert.match(css, /\.openingNav\s*\{[^}]*margin-bottom:\s*calc\(-1 \* var\(--opening-overlap\)\)/u);
+  assert.match(hero, /\.hero\s*\{[^}]*min-height:\s*calc\(100svh - var\(--opening-offset, 0px\)\)/u, "The hero and its links share one screen.");
+  const navigation = await readFile(path.join(ROOT, "app", "components", "SiteNavigation.tsx"), "utf8");
+  assert.ok(navigation.includes("[data-opening-navigation]"), "The open mobile menu sets the first-screen links aside.");
+});
+
+test("structured data names the author, his manuscript name and both public profiles", async () => {
+  for (const route of ["/", "/experience/", BLOG_ROUTE]) {
+    const html = await routeHtml(route);
+    const scripts = [...html.matchAll(/<script\b([^>]*)>([\s\S]*?)<\/script>/giu)].filter((match) => attribute(match[1], "type") === "application/ld+json");
+    assert.equal(scripts.length, 1, `${route}: one Person record.`);
+    const person = JSON.parse(scripts[0][2]);
+    assert.equal(person["@type"], "Person");
+    assert.equal(person.name, "Theodore Ouyang");
+    assert.equal(person.alternateName, "Letao Ouyang");
+    assert.equal(person.url, `${SITE_ORIGIN}/`);
+    assert.deepEqual(person.sameAs, ["https://github.com/130U", "https://x.com/D3rfr31schutz"]);
+  }
 });
 
 test("About research opens each complete paper through an explicit Read More link", async () => {
@@ -841,7 +894,7 @@ test("About lists both degrees and the advisor record and links to all 49 course
     }
     assert.equal((text.match(/Duke University/gu) ?? []).length, 1);
     assert.doesNotMatch(stripMarkup(education), /Sequoia Fellow/u,
-      "The fellowship belongs in the hero, not among degree records.");
+      "The fellowship has its own section, apart from the degree records.");
   }
 
   const html = await routeHtml("/coursework/");

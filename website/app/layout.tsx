@@ -81,8 +81,9 @@ const personJsonLd = {
   "@context": "https://schema.org",
   "@type": "Person",
   name: SITE_NAME,
+  alternateName: "Letao Ouyang",
   url: absoluteUrl("/"),
-  sameAs: ["https://github.com/130U"],
+  sameAs: ["https://github.com/130U", "https://x.com/D3rfr31schutz"],
   alumniOf: {
     "@type": "CollegeOrUniversity",
     name: "Duke University",

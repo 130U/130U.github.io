@@ -6,12 +6,13 @@
   ],
   "routes": {
     "/": {
-      "textSha256": "e603a90b6cac8b7f93b1c2aace50290d4625f2601c7f9cb964f31f5f6bc7e3f0",
-      "characterCount": 3148,
-      "wordCount": 457,
-      "preview": "Skip to Main Content Theodore Ouyang Duke Alumnus Sequoia Fellow Theodore Ouyang About Experience Blog Thinking Mathematically Working in AI Mathematics is how ",
+      "textSha256": "906d6323ae93e3acb87b474b078edcf310e3bee30c4b9a8091cc9a6a8e1dd8fe",
+      "characterCount": 3814,
+      "wordCount": 564,
+      "preview": "Skip to Main Content About Experience Blog Theodore Ouyang Duke Alumnus Sequoia Fellow Theodore Ouyang About Experience Blog Thinking Mathematically Working in ",
       "altTexts": [],
       "ariaLabels": [
+        "Opening navigation",
         "Theodore Ouyang home",
         "Primary navigation",
         "Read more about Critical Dependence Stress for Portfolio Diversification",
@@ -824,9 +825,9 @@
       "formulaCount": 315
     },
     "/experience/": {
-      "textSha256": "8d036aff45d61c7df5788a4c3a6e588a7892388bc693747022ac53f3b87b851d",
-      "characterCount": 9094,
-      "wordCount": 1274,
+      "textSha256": "f812e6669d76badc267c5cdf85fd76676f7da48ab6b43eb2d127efeb358d207e",
+      "characterCount": 9225,
+      "wordCount": 1329,
       "preview": "Skip to Main Content Theodore Ouyang About Experience Blog Experience: Areas of Focus AI Research and Engineering Data Science Legal Research and Policy Analysi",
       "altTexts": [],
       "ariaLabels": [
@@ -1538,9 +1539,9 @@
       }
     },
     "/experience/euromonitor-international/": {
-      "textSha256": "ed3c8621fc59bed1bdc70795ff6469c59af616643a313e218f251d48e85c90c5",
-      "characterCount": 2342,
-      "wordCount": 302,
+      "textSha256": "7766e1a709e55e9a49efb4bb2a45950082e678d01bcd67f1cbd503b23e95f7d4",
+      "characterCount": 2338,
+      "wordCount": 320,
       "preview": "Skip to Main Content Theodore Ouyang Back to Experience China Market Entry for a Premium European Appliance Brand Organization Euromonitor International Positio",
       "altTexts": [],
       "ariaLabels": [
@@ -1549,19 +1550,19 @@
       ],
       "metadata": {
         "title": "Euromonitor International: China Market Entry for a Premium European Appliance Brand | Theodore Ouyang",
-        "description": "I led the China workstream of a global market-entry engagement covering China, Japan, and the Middle East for a premium European appliance brand. I analyzed approximately 50,000 e-commerce listings alongside consumer evidence and policy research to recommend local products, pricing, channels, and marketing while maintaining the client's global positioning.",
+        "description": "A premium European appliance brand was planning its entry into China, Japan, and the Middle East, and I led the China workstream. Working from approximately 50,000 e-commerce listings, consumer reviews, and policy research, I recommended the products, prices, channels, and marketing for China that would keep the brand's global positioning intact.",
         "canonical": "https://www.theodoreoy.com/experience/euromonitor-international/",
         "openGraphTitle": "Euromonitor International: China Market Entry for a Premium European Appliance Brand",
-        "openGraphDescription": "I led the China workstream of a global market-entry engagement covering China, Japan, and the Middle East for a premium European appliance brand. I analyzed approximately 50,000 e-commerce listings alongside consumer evidence and policy research to recommend local products, pricing, channels, and marketing while maintaining the client's global positioning.",
+        "openGraphDescription": "A premium European appliance brand was planning its entry into China, Japan, and the Middle East, and I led the China workstream. Working from approximately 50,000 e-commerce listings, consumer reviews, and policy research, I recommended the products, prices, channels, and marketing for China that would keep the brand's global positioning intact.",
         "openGraphUrl": "https://www.theodoreoy.com/experience/euromonitor-international/",
         "twitterTitle": "Euromonitor International: China Market Entry for a Premium European Appliance Brand",
-        "twitterDescription": "I led the China workstream of a global market-entry engagement covering China, Japan, and the Middle East for a premium European appliance brand. I analyzed approximately 50,000 e-commerce listings alongside consumer evidence and policy research to recommend local products, pricing, channels, and marketing while maintaining the client's global positioning."
+        "twitterDescription": "A premium European appliance brand was planning its entry into China, Japan, and the Middle East, and I led the China workstream. Working from approximately 50,000 e-commerce listings, consumer reviews, and policy research, I recommended the products, prices, channels, and marketing for China that would keep the brand's global positioning intact."
       }
     },
     "/experience/china-construction-bank/": {
-      "textSha256": "cc6741312914d10e39c0f0357f71687ddffe9dc0efd1fd96117953d3f2b08e1f",
-      "characterCount": 1641,
-      "wordCount": 219,
+      "textSha256": "9c0f4adeae68cffed8ab1ea154eda26e0b18116121698d7b4a3bc1e895dcff83",
+      "characterCount": 1644,
+      "wordCount": 227,
       "preview": "Skip to Main Content Theodore Ouyang Back to Experience PCA-Based Sustainability Analysis and Green-Credit Screening Organization China Construction Bank Positi",
       "altTexts": [],
       "ariaLabels": [
@@ -1570,19 +1571,19 @@
       ],
       "metadata": {
         "title": "China Construction Bank: PCA-Based Sustainability Analysis and Green-Credit Screening | Theodore Ouyang",
-        "description": "I applied statistical methods to sustainability assessment and green-credit screening within China Construction Bank's internal framework. I combined company data, historical assessments, and explicit eligibility rules to support candidate review, then documented the method for product managers and risk officers evaluating its use on a platform.",
+        "description": "China Construction Bank's internal framework assessed sustainability on more than 30 indicators, some of which carried overlapping information. I used PCA and historically labeled cases to compare green-credit candidates on fewer dimensions, tested the ranked shortlist against the framework's minimum requirements, and documented the method for the product managers and risk officers evaluating it for platform use.",
         "canonical": "https://www.theodoreoy.com/experience/china-construction-bank/",
         "openGraphTitle": "China Construction Bank: PCA-Based Sustainability Analysis and Green-Credit Screening",
-        "openGraphDescription": "I applied statistical methods to sustainability assessment and green-credit screening within China Construction Bank's internal framework. I combined company data, historical assessments, and explicit eligibility rules to support candidate review, then documented the method for product managers and risk officers evaluating its use on a platform.",
+        "openGraphDescription": "China Construction Bank's internal framework assessed sustainability on more than 30 indicators, some of which carried overlapping information. I used PCA and historically labeled cases to compare green-credit candidates on fewer dimensions, tested the ranked shortlist against the framework's minimum requirements, and documented the method for the product managers and risk officers evaluating it for platform use.",
         "openGraphUrl": "https://www.theodoreoy.com/experience/china-construction-bank/",
         "twitterTitle": "China Construction Bank: PCA-Based Sustainability Analysis and Green-Credit Screening",
-        "twitterDescription": "I applied statistical methods to sustainability assessment and green-credit screening within China Construction Bank's internal framework. I combined company data, historical assessments, and explicit eligibility rules to support candidate review, then documented the method for product managers and risk officers evaluating its use on a platform."
+        "twitterDescription": "China Construction Bank's internal framework assessed sustainability on more than 30 indicators, some of which carried overlapping information. I used PCA and historically labeled cases to compare green-credit candidates on fewer dimensions, tested the ranked shortlist against the framework's minimum requirements, and documented the method for the product managers and risk officers evaluating it for platform use."
       }
     },
     "/experience/jones-lang-lasalle/": {
-      "textSha256": "cb817abb7622e1f010c233b981bf66c71b83e01efa5d11bbdbb2225bbf87f3ce",
-      "characterCount": 2333,
-      "wordCount": 298,
+      "textSha256": "02e08be2833ebd9d9d9ab92ca1be761e2d033a77fd57a51a7716d52590be8696",
+      "characterCount": 2350,
+      "wordCount": 302,
       "preview": "Skip to Main Content Theodore Ouyang Back to Experience Office Investment Underwriting and ESG Due Diligence Organization Jones Lang LaSalle Capital Markets Tea",
       "altTexts": [],
       "ariaLabels": [
@@ -1591,19 +1592,19 @@
       ],
       "metadata": {
         "title": "Jones Lang LaSalle Capital Markets Team: Office Investment Underwriting and ESG Due Diligence | Theodore Ouyang",
-        "description": "I served as the project team's ESG lead on acquisition advisory for a Southeast Asian conglomerate seeking Chinese office properties. Working with JLL's internal ESG team, I connected asset screening, property valuation, and site-level diligence with the client's investment requirements and potential refurbishment or repositioning plans.",
+        "description": "A Southeast Asian conglomerate was looking to buy office properties in China, and I was the project team's ESG lead on the acquisition advisory. Working with JLL's internal ESG team, I screened the candidate assets, underwrote the shortlist, and set site-diligence priorities against the client's investment requirements and its options to refurbish or reposition each building.",
         "canonical": "https://www.theodoreoy.com/experience/jones-lang-lasalle/",
         "openGraphTitle": "Jones Lang LaSalle Capital Markets Team: Office Investment Underwriting and ESG Due Diligence",
-        "openGraphDescription": "I served as the project team's ESG lead on acquisition advisory for a Southeast Asian conglomerate seeking Chinese office properties. Working with JLL's internal ESG team, I connected asset screening, property valuation, and site-level diligence with the client's investment requirements and potential refurbishment or repositioning plans.",
+        "openGraphDescription": "A Southeast Asian conglomerate was looking to buy office properties in China, and I was the project team's ESG lead on the acquisition advisory. Working with JLL's internal ESG team, I screened the candidate assets, underwrote the shortlist, and set site-diligence priorities against the client's investment requirements and its options to refurbish or reposition each building.",
         "openGraphUrl": "https://www.theodoreoy.com/experience/jones-lang-lasalle/",
         "twitterTitle": "Jones Lang LaSalle Capital Markets Team: Office Investment Underwriting and ESG Due Diligence",
-        "twitterDescription": "I served as the project team's ESG lead on acquisition advisory for a Southeast Asian conglomerate seeking Chinese office properties. Working with JLL's internal ESG team, I connected asset screening, property valuation, and site-level diligence with the client's investment requirements and potential refurbishment or repositioning plans."
+        "twitterDescription": "A Southeast Asian conglomerate was looking to buy office properties in China, and I was the project team's ESG lead on the acquisition advisory. Working with JLL's internal ESG team, I screened the candidate assets, underwrote the shortlist, and set site-diligence priorities against the client's investment requirements and its options to refurbish or reposition each building."
       }
     },
     "/experience/hubble-technology-investment/": {
-      "textSha256": "95d3825e207181a7a67d4308fe7ba098f480cd2d4056999cbe580b77f9206f72",
-      "characterCount": 1803,
-      "wordCount": 232,
+      "textSha256": "89275562b91b623b78769b7523d52a005bc41d84c4d7b5fc01f61f99282839c7",
+      "characterCount": 1807,
+      "wordCount": 237,
       "preview": "Skip to Main Content Theodore Ouyang Back to Experience Bluetooth Satellite Commercialization and Market Selection Organization Hubble Network Position Student ",
       "altTexts": [],
       "ariaLabels": [
@@ -1612,19 +1613,19 @@
       ],
       "metadata": {
         "title": "Hubble Network: Bluetooth Satellite Commercialization and Market Selection | Theodore Ouyang",
-        "description": "Through a Duke Practicum, I led shipping, logistics, and industrial asset-tracking research for Hubble's Bluetooth satellite commercialization. I assessed where the technology's cost, accuracy, power consumption, and periodic reporting capabilities matched customer needs, translating technical and market evidence into recommendations for early applications.",
+        "description": "Hubble was commercializing its Bluetooth satellite technology and had to choose its first markets. Through a Duke Practicum, I led the research on shipping, logistics, and industrial asset tracking, assessed where the technology's cost, accuracy, power consumption, and periodic reporting matched what customers needed, and recommended which applications to pursue first.",
         "canonical": "https://www.theodoreoy.com/experience/hubble-technology-investment/",
         "openGraphTitle": "Hubble Network: Bluetooth Satellite Commercialization and Market Selection",
-        "openGraphDescription": "Through a Duke Practicum, I led shipping, logistics, and industrial asset-tracking research for Hubble's Bluetooth satellite commercialization. I assessed where the technology's cost, accuracy, power consumption, and periodic reporting capabilities matched customer needs, translating technical and market evidence into recommendations for early applications.",
+        "openGraphDescription": "Hubble was commercializing its Bluetooth satellite technology and had to choose its first markets. Through a Duke Practicum, I led the research on shipping, logistics, and industrial asset tracking, assessed where the technology's cost, accuracy, power consumption, and periodic reporting matched what customers needed, and recommended which applications to pursue first.",
         "openGraphUrl": "https://www.theodoreoy.com/experience/hubble-technology-investment/",
         "twitterTitle": "Hubble Network: Bluetooth Satellite Commercialization and Market Selection",
-        "twitterDescription": "Through a Duke Practicum, I led shipping, logistics, and industrial asset-tracking research for Hubble's Bluetooth satellite commercialization. I assessed where the technology's cost, accuracy, power consumption, and periodic reporting capabilities matched customer needs, translating technical and market evidence into recommendations for early applications."
+        "twitterDescription": "Hubble was commercializing its Bluetooth satellite technology and had to choose its first markets. Through a Duke Practicum, I led the research on shipping, logistics, and industrial asset tracking, assessed where the technology's cost, accuracy, power consumption, and periodic reporting matched what customers needed, and recommended which applications to pursue first."
       }
     },
     "/experience/saif-partners/": {
-      "textSha256": "f2d9558790a41df44e80e462000de7fbc78a38ad4deb0234912c2dc16362ff10",
-      "characterCount": 1873,
-      "wordCount": 244,
+      "textSha256": "60166f85cbf391b6bf4b46333e19e041fd2ca63ccaa71c9a66d5e6e6df7c318e",
+      "characterCount": 1877,
+      "wordCount": 247,
       "preview": "Skip to Main Content Theodore Ouyang Back to Experience Dental Investment Research and Governance Due Diligence Organization SAIF Partners Position Summer Inter",
       "altTexts": [],
       "ariaLabels": [
@@ -1633,19 +1634,19 @@
       ],
       "metadata": {
         "title": "SAIF Partners: Dental Investment Research and Governance Due Diligence | Theodore Ouyang",
-        "description": "I owned public-data research and governance screening for a Greater China dental-investment theme. Working with the VP and investment team, I prioritized subsectors and candidates, then translated governance concerns into investment recommendations, management questions, and on-site diligence priorities.",
+        "description": "SAIF Partners was researching a dental-investment theme in Greater China, and I owned the public-data research and governance screening. Working with the VP and investment team, I narrowed a longlist of over 100 targets to a shortlist of more than ten, and wrote up the governance concerns as investment recommendations, questions for management, and priorities for on-site diligence.",
         "canonical": "https://www.theodoreoy.com/experience/saif-partners/",
         "openGraphTitle": "SAIF Partners: Dental Investment Research and Governance Due Diligence",
-        "openGraphDescription": "I owned public-data research and governance screening for a Greater China dental-investment theme. Working with the VP and investment team, I prioritized subsectors and candidates, then translated governance concerns into investment recommendations, management questions, and on-site diligence priorities.",
+        "openGraphDescription": "SAIF Partners was researching a dental-investment theme in Greater China, and I owned the public-data research and governance screening. Working with the VP and investment team, I narrowed a longlist of over 100 targets to a shortlist of more than ten, and wrote up the governance concerns as investment recommendations, questions for management, and priorities for on-site diligence.",
         "openGraphUrl": "https://www.theodoreoy.com/experience/saif-partners/",
         "twitterTitle": "SAIF Partners: Dental Investment Research and Governance Due Diligence",
-        "twitterDescription": "I owned public-data research and governance screening for a Greater China dental-investment theme. Working with the VP and investment team, I prioritized subsectors and candidates, then translated governance concerns into investment recommendations, management questions, and on-site diligence priorities."
+        "twitterDescription": "SAIF Partners was researching a dental-investment theme in Greater China, and I owned the public-data research and governance screening. Working with the VP and investment team, I narrowed a longlist of over 100 targets to a shortlist of more than ten, and wrote up the governance concerns as investment recommendations, questions for management, and priorities for on-site diligence."
       }
     },
     "/experience/citic-securities/": {
-      "textSha256": "15d9c3e1ebed4eea0dc9e67049814dffac72bd1061fccb1e2d019e4c255be67b",
-      "characterCount": 576,
-      "wordCount": 76,
+      "textSha256": "e0aaf6845a8818146bcff32325aa5024a8e9795698721c5f5bcddb4e14453bf4",
+      "characterCount": 493,
+      "wordCount": 67,
       "preview": "Skip to Main Content Theodore Ouyang Back to Experience Agriculture Equity Research and Valuation Organization CITIC Securities Position Equity Research Intern ",
       "altTexts": [],
       "ariaLabels": [
@@ -1654,19 +1655,19 @@
       ],
       "metadata": {
         "title": "CITIC Securities: Agriculture Equity Research and Valuation | Theodore Ouyang",
-        "description": "I supported the Agriculture Research Group's sector analysis and research-report work, contributing evidence for internal investment-strategy discussions.",
+        "description": "I worked on sector analysis and research reports in the Agriculture Research Group and prepared material for its internal investment-strategy discussions.",
         "canonical": "https://www.theodoreoy.com/experience/citic-securities/",
         "openGraphTitle": "CITIC Securities: Agriculture Equity Research and Valuation",
-        "openGraphDescription": "I supported the Agriculture Research Group's sector analysis and research-report work, contributing evidence for internal investment-strategy discussions.",
+        "openGraphDescription": "I worked on sector analysis and research reports in the Agriculture Research Group and prepared material for its internal investment-strategy discussions.",
         "openGraphUrl": "https://www.theodoreoy.com/experience/citic-securities/",
         "twitterTitle": "CITIC Securities: Agriculture Equity Research and Valuation",
-        "twitterDescription": "I supported the Agriculture Research Group's sector analysis and research-report work, contributing evidence for internal investment-strategy discussions."
+        "twitterDescription": "I worked on sector analysis and research reports in the Agriculture Research Group and prepared material for its internal investment-strategy discussions."
       }
     },
     "/experience/ey-parthenon/": {
-      "textSha256": "89431ea705bb065a8be658ac82e8da81840062c1a90d663d60bcd1b937fadc5c",
-      "characterCount": 471,
-      "wordCount": 67,
+      "textSha256": "836f62cb91317bc336046a997ad84ccdb46e15359337a88843cfc089f187dc03",
+      "characterCount": 484,
+      "wordCount": 71,
       "preview": "Skip to Main Content Theodore Ouyang Back to Experience Business-Line Restructuring for Digital Transformation Organization EY-Parthenon Position Summer Intern ",
       "altTexts": [],
       "ariaLabels": [
@@ -1675,19 +1676,19 @@
       ],
       "metadata": {
         "title": "EY-Parthenon: Business-Line Restructuring for Digital Transformation | Theodore Ouyang",
-        "description": "I supported a digital-transformation engagement for a leading Chinese company preparing to list, with a focus on business-line restructuring.",
+        "description": "I worked on the business-line restructuring in a digital-transformation engagement for a leading Chinese company preparing to list.",
         "canonical": "https://www.theodoreoy.com/experience/ey-parthenon/",
         "openGraphTitle": "EY-Parthenon: Business-Line Restructuring for Digital Transformation",
-        "openGraphDescription": "I supported a digital-transformation engagement for a leading Chinese company preparing to list, with a focus on business-line restructuring.",
+        "openGraphDescription": "I worked on the business-line restructuring in a digital-transformation engagement for a leading Chinese company preparing to list.",
         "openGraphUrl": "https://www.theodoreoy.com/experience/ey-parthenon/",
         "twitterTitle": "EY-Parthenon: Business-Line Restructuring for Digital Transformation",
-        "twitterDescription": "I supported a digital-transformation engagement for a leading Chinese company preparing to list, with a focus on business-line restructuring."
+        "twitterDescription": "I worked on the business-line restructuring in a digital-transformation engagement for a leading Chinese company preparing to list."
       }
     },
     "/experience/independent-stem-olympiad-training/": {
-      "textSha256": "961fedf02fa7e164ca74cdb5d3c436e5ef7af3daa7b06479e1fee8d389abac26",
-      "characterCount": 772,
-      "wordCount": 99,
+      "textSha256": "1ff7f34a8656e2ad3f3dd7c486e5bed68e5610fd7bf13f85c162f345b612e81e",
+      "characterCount": 764,
+      "wordCount": 101,
       "preview": "Skip to Main Content Theodore Ouyang Back to Experience Advanced Physics Olympiad Instruction Organization Independent STEM Olympiad Training Practice Position ",
       "altTexts": [],
       "ariaLabels": [
@@ -1696,19 +1697,19 @@
       ],
       "metadata": {
         "title": "Independent STEM Olympiad Training Practice: Advanced Physics Olympiad Instruction | Theodore Ouyang",
-        "description": "I independently coached students preparing for advanced physics Olympiads through online and in-person instruction, combining subject teaching with competition problem-solving practice.",
+        "description": "I ran my own coaching practice for students preparing for advanced physics Olympiads, online and in person. I taught the physics and wrote original problems for competition practice.",
         "canonical": "https://www.theodoreoy.com/experience/independent-stem-olympiad-training/",
         "openGraphTitle": "Independent STEM Olympiad Training Practice: Advanced Physics Olympiad Instruction",
-        "openGraphDescription": "I independently coached students preparing for advanced physics Olympiads through online and in-person instruction, combining subject teaching with competition problem-solving practice.",
+        "openGraphDescription": "I ran my own coaching practice for students preparing for advanced physics Olympiads, online and in person. I taught the physics and wrote original problems for competition practice.",
         "openGraphUrl": "https://www.theodoreoy.com/experience/independent-stem-olympiad-training/",
         "twitterTitle": "Independent STEM Olympiad Training Practice: Advanced Physics Olympiad Instruction",
-        "twitterDescription": "I independently coached students preparing for advanced physics Olympiads through online and in-person instruction, combining subject teaching with competition problem-solving practice."
+        "twitterDescription": "I ran my own coaching practice for students preparing for advanced physics Olympiads, online and in person. I taught the physics and wrote original problems for competition practice."
       }
     },
     "/experience/stem-olympiad-competitions/": {
-      "textSha256": "86d36229d343911d2b8a47e73c226df287a9b30743e010ab0cf7f13a9361ca13",
-      "characterCount": 1598,
-      "wordCount": 213,
+      "textSha256": "c38321fdfcd45c20def06bd9759b14beea4930de62bdeb080d5083862c6cd242",
+      "characterCount": 1571,
+      "wordCount": 215,
       "preview": "Skip to Main Content Theodore Ouyang Back to Experience Advanced Olympiad Training, Awards, and Peer Mentoring Organization The High School Attached to Hunan No",
       "altTexts": [],
       "ariaLabels": [
@@ -1717,13 +1718,13 @@
       ],
       "metadata": {
         "title": "The High School Attached to Hunan Normal University: Advanced Olympiad Training, Awards, and Peer Mentoring | Theodore Ouyang",
-        "description": "I trained in physics and mathematics Olympiads and served as a peer mentor in the school's nationally leading physics competition program, combining advanced study with collaborative problem solving.",
+        "description": "I trained for physics and mathematics Olympiads in the school's nationally leading physics competition program and mentored teammates in its study groups.",
         "canonical": "https://www.theodoreoy.com/experience/stem-olympiad-competitions/",
         "openGraphTitle": "The High School Attached to Hunan Normal University: Advanced Olympiad Training, Awards, and Peer Mentoring",
-        "openGraphDescription": "I trained in physics and mathematics Olympiads and served as a peer mentor in the school's nationally leading physics competition program, combining advanced study with collaborative problem solving.",
+        "openGraphDescription": "I trained for physics and mathematics Olympiads in the school's nationally leading physics competition program and mentored teammates in its study groups.",
         "openGraphUrl": "https://www.theodoreoy.com/experience/stem-olympiad-competitions/",
         "twitterTitle": "The High School Attached to Hunan Normal University: Advanced Olympiad Training, Awards, and Peer Mentoring",
-        "twitterDescription": "I trained in physics and mathematics Olympiads and served as a peer mentor in the school's nationally leading physics competition program, combining advanced study with collaborative problem solving."
+        "twitterDescription": "I trained for physics and mathematics Olympiads in the school's nationally leading physics competition program and mentored teammates in its study groups."
       }
     },
     "/blog/": {
@@ -1777,9 +1778,9 @@
       }
     },
     "/blog/ten-states-of-water/": {
-      "textSha256": "52f38fdaa2defb5deab42a56a91220d02b4e8a1c0807ffa5c3e17d928473a241",
-      "characterCount": 2751,
-      "wordCount": 509,
+      "textSha256": "4fd58afd8f94557b477596d805ea0db30c5828cf46cf8752f9da80dae3119535",
+      "characterCount": 2691,
+      "wordCount": 496,
       "preview": "Skip to Main Content Theodore Ouyang Back to Blog Ten States of Water By Theodore Ouyang November 8, 2026 Ten States of Water Ten landscapes of Alaska and Yello",
       "altTexts": [
         "The cover of Ten States of Water: the name Theodore Ouyang written across the sky above a snowy ridge, a sunset horizon, and winding tidewater",

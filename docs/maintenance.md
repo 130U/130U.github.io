@@ -51,7 +51,9 @@ Paths below are relative to `website/`.
 Experience entries have dedicated reading pages: four AI manuscripts, four legal
 manuscripts, and ten ordinary detail pages.
 About's Education section links to the dedicated Coursework page through Read More.
-The page presents all 49 courses in four subject groups.
+The page presents all 49 courses in four subject groups. About's biography and its
+Fellowship paragraph live in `app/components/AboutContent.tsx`, and the Person record
+in `app/layout.tsx` lists the manuscript name and the public profiles.
 
 Every URL belongs to About (`/`, `/coursework/`, `/[paper]/`), Experience
 (`/experience/`, `/experience/[slug]/`) or Blog (`/blog/`, `/blog/[slug]/`).
@@ -168,7 +170,10 @@ focus restoration; chapter and endnote links also work without JavaScript.
 ## Shared rendering and extension
 
 `SiteShell` owns the reading frame. `SiteNavigation` renders the primary navigation
-and mobile menu on top-level pages, or one parent link on detail pages. Detail links
+and mobile menu on top-level pages, or one parent link on detail pages. `app/page.tsx`
+renders the same three links from `navigation` as a row above the hero, sized by the
+`--opening-*` properties in `app/home.module.css`; the hero reads `--opening-offset`
+to share the first screen with that row. Detail links
 return to the originating Education, Selected Research, or Experience anchor.
 `ArticleReadingLayout`/`ArticleContents` own the article structure and responsive
 navigation. `ExperienceSection` and `ExperienceDetails` keep all categories and

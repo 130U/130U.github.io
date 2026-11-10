@@ -177,12 +177,20 @@ the prose.
 
 About opens with the name beside the clarinet hero; phones and portrait tablets stack
 the name above the instrument. The name and the institutions Duke and Sequoia use Inter;
-the roles Alumnus and Fellow use Source Serif 4. The two-line "Thinking Mathematically /
-Working in AI" introduction is an H2 at the title size, its second line in the muted
-tone, with the biography below on the same edge within the measure.
+the roles Alumnus and Fellow use Source Serif 4. One row above the hero frame, on the
+name's edge, links About, Experience, and Blog at the interface size: About carries the
+blue tick of the current page and leads down to the profile. The row is 48px tall and
+lies in the hero's top margin from 1024px; below that it is 44px and overlaps the
+margin, and the hero is shorter by the difference so both share the first screen. The
+two-line "Thinking Mathematically / Working in AI" introduction is an H2 at the title
+size, its second line in the muted tone, with the biography below on the same edge
+within the measure. Links inside the biography and the Fellowship paragraph are
+underlined in the link rule and open in a new tab.
 
-Four numbered sections follow: the introduction, Selected Research, Education, and
-Contact. Margin indices use the index role; below 768px About hides them, while
+Five numbered sections follow: the introduction, Selected Research, Education,
+Fellowship, and Contact. Fellowship is one ledger with Sequoia Fellow on axis A and a
+paragraph on axis B that names the program's organizer and what its fellows share.
+Margin indices use the index role; below 768px About hides them, while
 Experience and Coursework set theirs above the section headings. Selected Research
 lists three manuscripts in one ledger, each with its title, complete summary, and a
 Read More link; titles stay outside the link and summaries keep selected bold. Education
@@ -337,7 +345,8 @@ ring-key centers and the bell cavity, is made of separated points with transpare
 the cavity uses denser ink points. Four short blue marks define the stage corners. An
 open arc of larger, closely spaced blue points passes behind the instrument. A single
 solid blue oval and four solid musical notes are the composition's only filled shapes,
-drawn with reusable `Path2D` paths. The hero has no call to action or playback control.
+drawn with reusable `Path2D` paths. The hero has no call to action or playback control;
+the section links sit in their own row above it.
 
 Clean mother-shape paths are rasterized into temporary masks when the field is built
 or resized; the masks identify the body, fittings, and outlines and are released after
@@ -402,8 +411,10 @@ summaries and contributions, present tense for research summaries. Manuscripts k
 their authored voice, and the mathematics papers keep the authorial "we". The home page
 title is the name alone. Descriptions state the work directly, without hedges such as
 "exploring", and biographical and research claims stay measured. The fellowship is
-written `Sequoia Fellow` everywhere: the hero, site metadata from
-`app/lib/content/site.ts`, the social card, and the repository README.
+written `Sequoia Fellow` everywhere: the hero, About's Fellowship section, site metadata
+from `app/lib/content/site.ts`, the social card, and the repository README. The
+Fellowship paragraph names HongShan as the organizer and describes the program as a
+selected community.
 
 ## Identity
 
