@@ -13,7 +13,7 @@ async function writeOrCheck(url, content) {
   else await writeFile(url, content);
 }
 const manifest = JSON.parse(await readFile(new URL("source-manifest.json", sourceDirectory), "utf8"));
-const commit = "3cc4c7e9b36e77027962999b932a1df7972cd2ed";
+const commit = "dbb0a1003d5c37b13041229e8a1a707e3f247cde";
 const paperBlob = "6ae3b86691b81075188d4cf73f091ac078f961bd";
 assert.equal(manifest.commit, commit);
 assert.equal(manifest.repository, "130U/mathematical-finance-project");

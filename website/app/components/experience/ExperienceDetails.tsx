@@ -21,12 +21,12 @@ export function ExperienceDiagram({ entry }: { entry: ShowcaseEntry }) {
   return diagram ? <LogicDiagram diagram={diagram} /> : null;
 }
 
-export function ArchitecturalContext({ entry }: { entry: ShowcaseEntry }) {
-  if (!entry.architecturalContext) return null;
+export function ProblemAndApproach({ entry }: { entry: ShowcaseEntry }) {
+  if (!entry.problemAndApproach) return null;
   return (
-    <section className={styles.architecturalContext} aria-labelledby="architectural-context" data-architectural-context>
-      <h2 id="architectural-context" tabIndex={-1}>{entry.architecturalContext.title}</h2>
-      {entry.architecturalContext.text.split(/\n+/u).map((text, index) => <p key={index}><InlineMarkdown text={text} /></p>)}
+    <section className={styles.problemAndApproach} aria-labelledby="problem-and-approach" data-problem-and-approach>
+      <h2 id="problem-and-approach" tabIndex={-1}>{entry.problemAndApproach.title}</h2>
+      {entry.problemAndApproach.text.split(/\n+/u).map((text, index) => <p key={index}><InlineMarkdown text={text} /></p>)}
     </section>
   );
 }

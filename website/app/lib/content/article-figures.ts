@@ -38,13 +38,13 @@ const articleFigures: Readonly<Record<string, readonly FigurePlacement[]>> = {
       figure: "heston-stages",
       after: { paragraph: "Finite-history propagation reduces the H0 complete bound" },
       evidence: [
-        "H0: Six months: global state propagation | 1.397612096 | — | Original failed one-point task",
+        "H0: Six months: global state propagation | 1.397612096 | — | One-point budget not met",
         "H1: Six months: finite history, same global residual | 0.378598956 | — | Principal propagation improvement; unchanged output and centre",
         "H2: Six months: local envelope, original used nodes | 0.367258782 | — | About 3% further bound reduction",
         "H3: Six months: all finite high nodes, global envelope | 0.132245064 | 0.158585551 | High-frequency certification and centre change are included",
         "H4: Six months: all finite high nodes, local envelope | 0.115215934 | 0.137896018 | Both methods certify 0.25 points",
-        "Q0: Three months: through 64, global envelope | 1.207557898 | 1.545191542 | Failed 0.25-point task",
-        "Q1: Three months: through 128, global envelope | 0.351318692 | 0.408293698 | Failed 0.25-point task",
+        "Q0: Three months: through 64, global envelope | 1.207557898 | 1.545191542 | 0.25-point budget not met",
+        "Q1: Three months: through 128, global envelope | 0.351318692 | 0.408293698 | 0.25-point budget not met",
         "Q2: Three months: through 128, local envelope | 0.233318843 | 0.252393939 | Only the joint method certifies 0.25 points",
       ],
     },
@@ -84,7 +84,7 @@ const articleFigures: Readonly<Record<string, readonly FigurePlacement[]>> = {
     },
     {
       figure: "audit-policies",
-      after: { paragraph: "Under ideal residual calibration, the standard deviation" },
+      after: { paragraph: "At the same expected budget, high-risk-first routing" },
       evidence: [
         "<td>14.81% / 14.81% / 14.81%</td><td>0.568</td><td>Baseline</td>",
         "<td>3.00% / 11.56% / 43.33%</td><td>0.657</td><td>+33.77% increase</td>",

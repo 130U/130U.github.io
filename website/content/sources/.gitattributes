@@ -1,3 +1,4 @@
 # Source manuscripts stay byte-identical to their pinned upstream files.
 *.md text eol=lf
+selected-research/rough-source.md -text
 *.tex -text

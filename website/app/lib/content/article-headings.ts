@@ -33,9 +33,6 @@ function letter(number: number) {
 
 const headingMathLabels = new Map([
   [String.raw`\mathsfH_s`, "Hₛ"],
-  [String.raw`\mathsfH_v`, "Hᵥ"],
-  [String.raw`\mathsfA\Rightarrow\mathsfH`, "A ⇒ H"],
-  [String.raw`\mathsfC\Rightarrow\mathsfH`, "C ⇒ H"],
 ]);
 
 function headingMathText(tex: string) {
@@ -121,15 +118,19 @@ export function buildArticleHeadingMap(blocks: readonly ResearchBlock[]) {
 // distinguish a reference to this article from a citation of somebody else's paper.
 const internalReferenceContexts: Readonly<Record<string, readonly string[]>> = {
   "certified-valuation-arithmetic-asian-options": [
-    "Section 2 defines these objects precisely",
-    "Sections 3–5 prove the main chain of implications",
-    "Sections 6 and 7 develop the weak expansion and posterior transfer",
-    "Section 8 presents the numerical certificates and their financial use",
-    "Section 9 specifies the domain of validity",
-    "Section 4 analyzes the resulting certificate width",
+    "Section 4 identifies this obstruction analytically",
+    "Sections 2 and 3 develop the exact conditional representation",
+    "Section 4 states the price certificate",
+    "Section 5 verifies the common-factor structure",
+    "Sections 6 and 7 study weak expansions",
+    "Section 8 uses the numerical certificates",
+    "Section 9 records the boundaries of the results",
+    "Section 4 analyzes the width of the certificate that results",
     "point in Section 8.3, only",
+    "Section 4.1 characterizes the scale",
     "transform loadings required in Section 3",
     "Section 5 establishes the common Gaussian structure",
+    "which Section 9 lists among the extensions",
     "Section 5 verifies a deterministic-variance class",
     "Section 8 varies the step at the principal point",
     "box in Section 7 is a separate certified region",
@@ -137,13 +138,20 @@ const internalReferenceContexts: Readonly<Record<string, readonly string[]>> = {
     "width plateau in Section 8",
   ],
   "certified-rough-heston-valuation": [
-    "Sections 2–5 develop the pricing certificate",
-    "Sections 7.1 and 7.5–7.6 give the matched experiments",
-    "Section 6 and Appendix B treat the rational construction",
+    "Section 4 derives the startup coefficients",
+    "Section 6 proves structural properties",
+    "The quarter-year spread in Section 7 uses",
+    "affine transform used in Section 2",
+    "Section 2 defines the exact problem",
+    "Sections 3 and 4 pass from the continuous residual",
+    "Section 5 derives the portfolio error set",
+    "Section 6 records the rational output used in the experiments, and Section 7 presents the matched comparisons",
     "Section 7 compares curve and dissipative-kernel weights on matched inputs",
+    "banks are distinguished in Section 7",
     "For the Lewis rule in Section 4, set",
-    "numerical comparison in Section 7 is the evidence",
+    "numerical comparison in Section 7 is our evidence",
     "independent reference residual in Section 4",
+    "those of Sections 7.2 and 7.3",
   ],
 };
 

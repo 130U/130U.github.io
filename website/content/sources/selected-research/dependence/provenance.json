@@ -1,10 +1,10 @@
 {
   "repositoryUrl": "https://github.com/130U/mathematical-finance-project",
-  "sourceUrl": "https://github.com/130U/mathematical-finance-project/blob/3cc4c7e9b36e77027962999b932a1df7972cd2ed/paper/paper.pdf",
+  "sourceUrl": "https://github.com/130U/mathematical-finance-project/blob/dbb0a1003d5c37b13041229e8a1a707e3f247cde/paper/paper.pdf",
   "sourceTitle": "Critical Dependence Stress for Diversification Gains under Fixed Marginals",
-  "sourceCommit": "3cc4c7e9b36e77027962999b932a1df7972cd2ed",
+  "sourceCommit": "dbb0a1003d5c37b13041229e8a1a707e3f247cde",
   "sourceBlob": "6ae3b86691b81075188d4cf73f091ac078f961bd",
-  "sourceEditedAt": "2026-10-26T17:39:13Z",
+  "sourceEditedAt": "2026-11-09T22:58:19Z",
   "fetchedWith": "GitHub connector at the pinned commit; all frozen bytes verified against the connector Git-tree blob SHA-1 and size.",
   "sourceFiles": [
     {
@@ -38,23 +38,23 @@
     {
       "path": "paper/source/main-classification-flow.tex",
       "local": "main-classification-flow.tex",
-      "gitBlob": "679500583a2df9c46c106e3a3b4ec3a7018e4e27",
-      "sha256": "8decd17471ba80a20351792a395694cd2ff1a4deb338e8afdd8cfa7ad7eedddc",
-      "bytes": 20185
+      "gitBlob": "5fda8f5f4dad9e3b830c1b173cc9869c331b759e",
+      "sha256": "7f339fbc9feaaf36f17b0fa0947aab65f5b7cfd404e6ed9880014482450f957c",
+      "bytes": 19905
     },
     {
       "path": "paper/source/main-crossing-proof.tex",
       "local": "main-crossing-proof.tex",
-      "gitBlob": "ed061612967d87cec33ffe8c667d3052d810f75c",
-      "sha256": "a844da72ff9141b6b568f031ddaecfef87a82514b321050b1c00f418c855b4a7",
-      "bytes": 4373
+      "gitBlob": "394d003c1bdea0f52c5e4ea99559c7fce43d83e8",
+      "sha256": "9b13fb1ddb3b081ef5ffc7c7df9a64fc0f36b39468367cc14f28aaee86dfa3d4",
+      "bytes": 4308
     },
     {
       "path": "paper/source/main-crossing.tex",
       "local": "main-crossing.tex",
-      "gitBlob": "f62b71011445d97f76ce606b6f80967ed490b08a",
-      "sha256": "dbbba989f51315065f0be4808feb4e725ddb81707e0b30f552e886b854c76203",
-      "bytes": 8624
+      "gitBlob": "d2fab123bf585ebd7d6fb342be26c0fa4f80c995",
+      "sha256": "ba421d854b6a34726c3f5dde1e0076b5be91ba3af88f2d2ba9c688849853468f",
+      "bytes": 8575
     },
     {
       "path": "paper/source/main-introduction.tex",
@@ -66,37 +66,37 @@
     {
       "path": "paper/source/main-model-benchmark.tex",
       "local": "main-model-benchmark.tex",
-      "gitBlob": "11a21a33732f4dde16faab00c50f1e31acd991ac",
-      "sha256": "780e1b3a4e93e1cbd7836daa336c20e083182b78157a19e26b7b8611f72547f0",
-      "bytes": 23329
+      "gitBlob": "3875f876ef314419bd26acdb2901f7fee78b3fe2",
+      "sha256": "d179041eb67a1540914a3cce337292c46fe691f2c7df9d43c7becf33e98a59c8",
+      "bytes": 23162
     },
     {
       "path": "paper/source/main-quantitative.tex",
       "local": "main-quantitative.tex",
-      "gitBlob": "05800ce07c7cf521d7871b3dcfde8dd307e0d9dc",
-      "sha256": "bd4776002483b60392e93e924fcc00dea7628ca15b9230768bbd9bfd33237313",
-      "bytes": 11615
+      "gitBlob": "5894323e2758084810b76b9bc207e006c1140824",
+      "sha256": "946da38102e56e295ad0225358ebe48dfaddcb49b7d2e26c42425c2b06e2e07b",
+      "bytes": 11553
     },
     {
       "path": "paper/source/main-scope.tex",
       "local": "main-scope.tex",
-      "gitBlob": "8af333921870657878dbeed566884da28215b644",
-      "sha256": "55a0e1768f66575278e34d802e1855b251be1a05fe1765fd0266eb31303553d9",
-      "bytes": 4057
+      "gitBlob": "c0a61a09427979aa752b14e2f852000d325281bd",
+      "sha256": "9c3628901b221e775d99a39a14d5668dca9a7e7094d079228690c554569cec4e",
+      "bytes": 4043
     },
     {
       "path": "paper/source/main-variational-proof.tex",
       "local": "main-variational-proof.tex",
-      "gitBlob": "a439c57d8164c99b27e868d44e8dc8807cfbc833",
-      "sha256": "8a116d6eb3a3337f1bfaf39574e1848e146ff349fc288ac9a12924048ac0fe1f",
-      "bytes": 3674
+      "gitBlob": "ba3c91ec9c92fdfd2c6ad71f232bb81887d34de5",
+      "sha256": "59fab0a5d40f44a34a8d4a608ae13c450ba4f50a1a53ba09c33aaa83c45b283c",
+      "bytes": 3667
     },
     {
       "path": "paper/source/main-variational.tex",
       "local": "main-variational.tex",
-      "gitBlob": "0f9ced9de7af17a0d5751358ae76c984887816a6",
-      "sha256": "a69bed91c410a4587a84aada505feb6f4fe1d68d04706ef3aced025a384171f8",
-      "bytes": 9320
+      "gitBlob": "dd95fd911c5caf43794595d56688407ef711fd6b",
+      "sha256": "588e7be8e99e8ad553e7da671f4e932deb4edb2433c40d29fc32ad182ea46f40",
+      "bytes": 9264
     },
     {
       "path": "paper/source/paper.tex",
@@ -115,44 +115,44 @@
     {
       "path": "paper/source/technical-cost-proof.tex",
       "local": "technical-cost-proof.tex",
-      "gitBlob": "c40ce68d78a89c723ab8aa6eb0eed1c6b306cd0b",
-      "sha256": "89fd82b325bc6a6463a186f3787cb894aa0e8364d57dfdf1038e8b23a78af93d",
-      "bytes": 2817
+      "gitBlob": "971784fbb37c00ffbfd8244d5f4c941cb33db2a3",
+      "sha256": "6cd543bc80cc0705c214a64463ecfd00cac00c647e36de0399d19957a37c4b30",
+      "bytes": 2773
     },
     {
       "path": "paper/source/technical-efficiency-identity.tex",
       "local": "technical-efficiency-identity.tex",
-      "gitBlob": "428f2d1c87c98240ddf300f6e2bead93935fed0a",
-      "sha256": "7c130b843c152d08139140df56e151b5c3a5be35948d5d7f238c719d6769e71f",
-      "bytes": 1603
+      "gitBlob": "b188c94e0d4745dc71fa48167de7e0e4b62be369",
+      "sha256": "b5b1fc8f177b88aab5418e4c31673ce570e261868c1f8d44bbba637b190d2b4d",
+      "bytes": 1589
     },
     {
       "path": "paper/source/technical-flow-proof.tex",
       "local": "technical-flow-proof.tex",
-      "gitBlob": "d11550c25c734569593f8047c11769261f140411",
-      "sha256": "c899d84e515e7c0d2365eea603c49d273072362530b08162e575a3e8d53507b3",
-      "bytes": 7861
+      "gitBlob": "734c3b233033bbedf3015185685a227a14edb945",
+      "sha256": "a8d5111e9db4c4152a47f693e8e24830af267f4b3083108e749e727a73a52987",
+      "bytes": 7787
     },
     {
       "path": "paper/source/technical-limit.tex",
       "local": "technical-limit.tex",
-      "gitBlob": "b7f280ebf1472ec9ce9a9864842936b60a6c3666",
-      "sha256": "b0852db99502628183d42bd0d184478259ae1c1b41f87656fd4d25ed6573808c",
-      "bytes": 12651
+      "gitBlob": "fb04ad1228419c5affc10a3d266734345d3f2bc3",
+      "sha256": "cc827adbab6dc383d0e85d9840da0fab9c7e11daf64ee045b74424229b09643a",
+      "bytes": 12423
     },
     {
       "path": "paper/source/technical-mixture-obstruction.tex",
       "local": "technical-mixture-obstruction.tex",
-      "gitBlob": "d3b3f854872e12fd31e1c35f3dfc44c5a5f3805d",
-      "sha256": "7d0a78228da73388b522e72cb209428b31bd915a5ae3213bb3c485f30586559a",
-      "bytes": 1423
+      "gitBlob": "7172e4ab665902cd3ab060a47ffea3ed4954f818",
+      "sha256": "1ad7643a5aa542ba8492b6dbf02da666b224612116703387e3b9b2712cb8db3c",
+      "bytes": 1416
     },
     {
       "path": "paper/source/technical-quantitative.tex",
       "local": "technical-quantitative.tex",
-      "gitBlob": "ce04cb9bf6d5c6c10385b0f5159a4da9598026a0",
-      "sha256": "69169dcb889a16a73b09478dc630f5004a2ce971442e4caef499215a54a611bd",
-      "bytes": 6569
+      "gitBlob": "9c1c919e4bb9709defe13fb8873d27cb77618991",
+      "sha256": "5ad429e9c4ed97a2453900d3c8fd9cdb620fc65853b8dcbafa95f66ef66026ba",
+      "bytes": 6520
     },
     {
       "path": "paper/source/technical-reference.tex",
@@ -164,16 +164,16 @@
     {
       "path": "paper/source/technical-threshold-statement.tex",
       "local": "technical-threshold-statement.tex",
-      "gitBlob": "fef5cc5c5d8cd4c1154957062c7eda42bc5627e2",
-      "sha256": "dcaa858e99472c12a066ad6eb1892c63f5ff36aa8c85e8033b18d113fbdf1de1",
-      "bytes": 481
+      "gitBlob": "4955c4f0e239365098d4c2c71d53ff6c56fad2ed",
+      "sha256": "1c16a52b68e35157c650be7e17e65654afc73283031df94677dd3ea559bd0c85",
+      "bytes": 474
     },
     {
       "path": "paper/source/technical-variational-proof.tex",
       "local": "technical-variational-proof.tex",
-      "gitBlob": "ebb9c6f3db465e375ed4960691ef00a437e58f59",
-      "sha256": "0662cb2299153ae2b8f03ac2d089a994a7b39289961e07317308845238acfd9f",
-      "bytes": 19100
+      "gitBlob": "f60f6fa47576f16977f548a3b95bffb8c32a1286",
+      "sha256": "69b4d9df40d226ec6d71915653422bc9e2eba4e920fef7b57f4e7981e5406273",
+      "bytes": 18761
     }
   ],
   "includedFiles": [
@@ -298,7 +298,7 @@
       "labels": [
         "fig:flow-shares"
       ],
-      "captionSource": "An optimal allocation of normal displacement on the tail\nsurface \\(D\\), at the equal-cost boundary, for\n\\(\\vartheta=0\\) (U, top) and \\(\\vartheta=1/4\\) (D, bottom).\nThe panels evaluate the explicit shares \\(a,b,1-a-b\\) in\n\\eqref{eq:legacy-K.7}; all use the same scale from zero to one.\nOn each same-side section we allocate displacement to a rebalanced\ncoordinate and match its projection using the cross-region.\nWe allocate the remainder to the background coordinate.\nBlank regions lie outside \\(D\\)."
+      "captionSource": "An optimal allocation of normal displacement on the tail\nsurface \\(D\\), at the equal-cost boundary, for\n\\(\\vartheta=0\\) (U, top) and \\(\\vartheta=1/4\\) (D, bottom).\nThe panels evaluate the explicit shares \\(a,b,1-a-b\\) in\n\\eqref{eq:B.2}; all use the same scale from zero to one.\nOn each same-side section we allocate displacement to a rebalanced\ncoordinate and match its projection using the cross-region.\nWe allocate the remainder to the background coordinate.\nBlank regions lie outside \\(D\\)."
     }
   ],
   "references": [
@@ -346,8 +346,8 @@
   ],
   "crossReferences": [
     {
-      "label": "eq:legacy-K.7",
-      "href": "https://github.com/130U/mathematical-finance-project/blob/3cc4c7e9b36e77027962999b932a1df7972cd2ed/paper/source/technical-quantitative.tex#L80",
+      "label": "eq:B.2",
+      "href": "https://github.com/130U/mathematical-finance-project/blob/dbb0a1003d5c37b13041229e8a1a707e3f247cde/paper/source/technical-quantitative.tex#L80",
       "number": "B.2"
     },
     {
@@ -396,8 +396,8 @@
       "number": "4.3"
     },
     {
-      "label": "eq:legacy-A.1",
-      "href": "#dep-eq-legacy-A-1",
+      "label": "eq:2.2",
+      "href": "#dep-eq-2-2",
       "number": "2.2"
     },
     {
@@ -406,8 +406,8 @@
       "number": "2.1"
     },
     {
-      "label": "eq:legacy-2.2",
-      "href": "#dep-eq-legacy-2-2",
+      "label": "eq:2.3",
+      "href": "#dep-eq-2-3",
       "number": "2.3"
     },
     {
@@ -416,38 +416,38 @@
       "number": "3.3"
     },
     {
-      "label": "eq:legacy-2.2",
-      "href": "#dep-eq-legacy-2-2",
+      "label": "eq:2.3",
+      "href": "#dep-eq-2-3",
       "number": "2.3"
     },
     {
       "label": "lemma:general-variation",
-      "href": "https://github.com/130U/mathematical-finance-project/blob/3cc4c7e9b36e77027962999b932a1df7972cd2ed/paper/source/technical-reference.tex#L4",
+      "href": "https://github.com/130U/mathematical-finance-project/blob/dbb0a1003d5c37b13041229e8a1a707e3f247cde/paper/source/technical-reference.tex#L4",
       "number": "A.1"
     },
     {
       "label": "lemma:general-variation",
-      "href": "https://github.com/130U/mathematical-finance-project/blob/3cc4c7e9b36e77027962999b932a1df7972cd2ed/paper/source/technical-reference.tex#L4",
+      "href": "https://github.com/130U/mathematical-finance-project/blob/dbb0a1003d5c37b13041229e8a1a707e3f247cde/paper/source/technical-reference.tex#L4",
       "number": "A.1"
     },
     {
       "label": "lemma:general-variation",
-      "href": "https://github.com/130U/mathematical-finance-project/blob/3cc4c7e9b36e77027962999b932a1df7972cd2ed/paper/source/technical-reference.tex#L4",
+      "href": "https://github.com/130U/mathematical-finance-project/blob/dbb0a1003d5c37b13041229e8a1a707e3f247cde/paper/source/technical-reference.tex#L4",
       "number": "A.1"
     },
     {
-      "label": "eq:legacy-3.2",
-      "href": "#dep-eq-legacy-3-2",
+      "label": "eq:2.6",
+      "href": "#dep-eq-2-6",
       "number": "2.6"
     },
     {
-      "label": "eq:legacy-B.2",
-      "href": "#dep-eq-legacy-B-2",
+      "label": "eq:2.7",
+      "href": "#dep-eq-2-7",
       "number": "2.7"
     },
     {
-      "label": "eq:legacy-3.3",
-      "href": "#dep-eq-legacy-3-3",
+      "label": "eq:2.8",
+      "href": "#dep-eq-2-8",
       "number": "2.8"
     },
     {
@@ -456,23 +456,23 @@
       "number": "2.1"
     },
     {
-      "label": "eq:legacy-3.4",
-      "href": "#dep-eq-legacy-3-4",
+      "label": "eq:2.9",
+      "href": "#dep-eq-2-9",
       "number": "2.9"
     },
     {
-      "label": "eq:legacy-3.3",
-      "href": "#dep-eq-legacy-3-3",
+      "label": "eq:2.8",
+      "href": "#dep-eq-2-8",
       "number": "2.8"
     },
     {
-      "label": "eq:legacy-3.5",
-      "href": "#dep-eq-legacy-3-5",
+      "label": "eq:2.10",
+      "href": "#dep-eq-2-10",
       "number": "2.10"
     },
     {
-      "label": "eq:legacy-3.4",
-      "href": "#dep-eq-legacy-3-4",
+      "label": "eq:2.9",
+      "href": "#dep-eq-2-9",
       "number": "2.9"
     },
     {
@@ -496,13 +496,13 @@
       "number": "1"
     },
     {
-      "label": "eq:legacy-B.2",
-      "href": "#dep-eq-legacy-B-2",
+      "label": "eq:2.7",
+      "href": "#dep-eq-2-7",
       "number": "2.7"
     },
     {
       "label": "lem:threshold-convexity",
-      "href": "https://github.com/130U/mathematical-finance-project/blob/3cc4c7e9b36e77027962999b932a1df7972cd2ed/paper/source/technical-limit.tex#L103",
+      "href": "https://github.com/130U/mathematical-finance-project/blob/dbb0a1003d5c37b13041229e8a1a707e3f247cde/paper/source/technical-limit.tex#L103",
       "number": "A.4"
     },
     {
@@ -516,8 +516,8 @@
       "number": "2.2"
     },
     {
-      "label": "eq:legacy-4.3",
-      "href": "#dep-eq-legacy-4-3",
+      "label": "eq:3.3",
+      "href": "#dep-eq-3-3",
       "number": "3.3"
     },
     {
@@ -532,32 +532,32 @@
     },
     {
       "label": "proof:threshold-localization",
-      "href": "https://github.com/130U/mathematical-finance-project/blob/3cc4c7e9b36e77027962999b932a1df7972cd2ed/paper/source/technical-limit.tex#L2",
+      "href": "https://github.com/130U/mathematical-finance-project/blob/dbb0a1003d5c37b13041229e8a1a707e3f247cde/paper/source/technical-limit.tex#L2",
       "number": "A.2"
     },
     {
       "label": "b-l2-all-optimal-thresholds-under-a-budget-of-order-varepsilon2",
-      "href": "https://github.com/130U/mathematical-finance-project/blob/3cc4c7e9b36e77027962999b932a1df7972cd2ed/paper/source/technical-threshold-statement.tex#L1",
+      "href": "https://github.com/130U/mathematical-finance-project/blob/dbb0a1003d5c37b13041229e8a1a707e3f247cde/paper/source/technical-threshold-statement.tex#L1",
       "number": "A.2"
     },
     {
-      "label": "eq:legacy-B.26",
-      "href": "https://github.com/130U/mathematical-finance-project/blob/3cc4c7e9b36e77027962999b932a1df7972cd2ed/paper/source/technical-limit.tex#L136",
+      "label": "eq:A.13",
+      "href": "https://github.com/130U/mathematical-finance-project/blob/dbb0a1003d5c37b13041229e8a1a707e3f247cde/paper/source/technical-limit.tex#L136",
       "number": "A.13"
     },
     {
-      "label": "eq:legacy-A.19",
-      "href": "#dep-eq-legacy-A-19",
+      "label": "eq:3.7",
+      "href": "#dep-eq-3-7",
       "number": "3.7"
     },
     {
       "label": "lem:threshold-convexity",
-      "href": "https://github.com/130U/mathematical-finance-project/blob/3cc4c7e9b36e77027962999b932a1df7972cd2ed/paper/source/technical-limit.tex#L103",
+      "href": "https://github.com/130U/mathematical-finance-project/blob/dbb0a1003d5c37b13041229e8a1a707e3f247cde/paper/source/technical-limit.tex#L103",
       "number": "A.4"
     },
     {
       "label": "lem:projected-imbalance",
-      "href": "https://github.com/130U/mathematical-finance-project/blob/3cc4c7e9b36e77027962999b932a1df7972cd2ed/paper/source/technical-limit.tex#L54",
+      "href": "https://github.com/130U/mathematical-finance-project/blob/dbb0a1003d5c37b13041229e8a1a707e3f247cde/paper/source/technical-limit.tex#L54",
       "number": "A.3"
     },
     {
@@ -576,8 +576,8 @@
       "number": "3.1"
     },
     {
-      "label": "eq:legacy-2.3",
-      "href": "#dep-eq-legacy-2-3",
+      "label": "eq:2.4",
+      "href": "#dep-eq-2-4",
       "number": "2.4"
     },
     {
@@ -596,8 +596,8 @@
       "number": "2.2"
     },
     {
-      "label": "eq:legacy-3.4",
-      "href": "#dep-eq-legacy-3-4",
+      "label": "eq:2.9",
+      "href": "#dep-eq-2-9",
       "number": "2.9"
     },
     {
@@ -606,28 +606,28 @@
       "number": "3.2"
     },
     {
-      "label": "eq:legacy-E.5",
-      "href": "#dep-eq-legacy-E-5",
+      "label": "eq:4.2",
+      "href": "#dep-eq-4-2",
       "number": "4.2"
     },
     {
-      "label": "eq:legacy-E.5",
-      "href": "#dep-eq-legacy-E-5",
+      "label": "eq:4.2",
+      "href": "#dep-eq-4-2",
       "number": "4.2"
     },
     {
       "label": "lem:threshold-convexity",
-      "href": "https://github.com/130U/mathematical-finance-project/blob/3cc4c7e9b36e77027962999b932a1df7972cd2ed/paper/source/technical-limit.tex#L103",
+      "href": "https://github.com/130U/mathematical-finance-project/blob/dbb0a1003d5c37b13041229e8a1a707e3f247cde/paper/source/technical-limit.tex#L103",
       "number": "A.4"
     },
     {
-      "label": "eq:legacy-D.2",
-      "href": "#dep-eq-legacy-D-2",
+      "label": "eq:4.7",
+      "href": "#dep-eq-4-7",
       "number": "4.7"
     },
     {
-      "label": "eq:legacy-6.3",
-      "href": "#dep-eq-legacy-6-3",
+      "label": "eq:4.1",
+      "href": "#dep-eq-4-1",
       "number": "4.1"
     },
     {
@@ -651,13 +651,13 @@
       "number": "4.1"
     },
     {
-      "label": "eq:legacy-D.2",
-      "href": "#dep-eq-legacy-D-2",
+      "label": "eq:4.7",
+      "href": "#dep-eq-4-7",
       "number": "4.7"
     },
     {
-      "label": "eq:legacy-D.3",
-      "href": "#dep-eq-legacy-D-3",
+      "label": "eq:4.8",
+      "href": "#dep-eq-4-8",
       "number": "4.8"
     },
     {
@@ -666,23 +666,23 @@
       "number": "4.1"
     },
     {
-      "label": "eq:legacy-6.2",
-      "href": "#dep-eq-legacy-6-2",
+      "label": "eq:4.10",
+      "href": "#dep-eq-4-10",
       "number": "4.10"
     },
     {
-      "label": "eq:legacy-D.2",
-      "href": "#dep-eq-legacy-D-2",
+      "label": "eq:4.7",
+      "href": "#dep-eq-4-7",
       "number": "4.7"
     },
     {
-      "label": "eq:legacy-D.3",
-      "href": "#dep-eq-legacy-D-3",
+      "label": "eq:4.8",
+      "href": "#dep-eq-4-8",
       "number": "4.8"
     },
     {
-      "label": "eq:legacy-D.2",
-      "href": "#dep-eq-legacy-D-2",
+      "label": "eq:4.7",
+      "href": "#dep-eq-4-7",
       "number": "4.7"
     },
     {
@@ -691,18 +691,18 @@
       "number": "4.1"
     },
     {
-      "label": "eq:legacy-6.3",
-      "href": "#dep-eq-legacy-6-3",
+      "label": "eq:4.1",
+      "href": "#dep-eq-4-1",
       "number": "4.1"
     },
     {
-      "label": "eq:legacy-E.15",
-      "href": "#dep-eq-legacy-E-15",
+      "label": "eq:4.15",
+      "href": "#dep-eq-4-15",
       "number": "4.15"
     },
     {
-      "label": "eq:legacy-E.16",
-      "href": "#dep-eq-legacy-E-16",
+      "label": "eq:4.16",
+      "href": "#dep-eq-4-16",
       "number": "4.16"
     },
     {
@@ -716,23 +716,23 @@
       "number": "2.3"
     },
     {
-      "label": "eq:legacy-E.16",
-      "href": "#dep-eq-legacy-E-16",
+      "label": "eq:4.16",
+      "href": "#dep-eq-4-16",
       "number": "4.16"
     },
     {
-      "label": "eq:legacy-E.15",
-      "href": "#dep-eq-legacy-E-15",
+      "label": "eq:4.15",
+      "href": "#dep-eq-4-15",
       "number": "4.15"
     },
     {
-      "label": "eq:legacy-D.7",
-      "href": "#dep-eq-legacy-D-7",
+      "label": "eq:4.13",
+      "href": "#dep-eq-4-13",
       "number": "4.13"
     },
     {
-      "label": "eq:legacy-6.2",
-      "href": "#dep-eq-legacy-6-2",
+      "label": "eq:4.10",
+      "href": "#dep-eq-4-10",
       "number": "4.10"
     },
     {
@@ -741,38 +741,38 @@
       "number": "4.1"
     },
     {
-      "label": "eq:legacy-6.9",
-      "href": "#dep-eq-legacy-6-9",
+      "label": "eq:4.21",
+      "href": "#dep-eq-4-21",
       "number": "4.21"
     },
     {
       "label": "app:flow-proof",
-      "href": "https://github.com/130U/mathematical-finance-project/blob/3cc4c7e9b36e77027962999b932a1df7972cd2ed/paper/source/technical-flow-proof.tex#L1",
+      "href": "https://github.com/130U/mathematical-finance-project/blob/dbb0a1003d5c37b13041229e8a1a707e3f247cde/paper/source/technical-flow-proof.tex#L1",
       "number": "A.8"
     },
     {
       "label": "app:cost-proofs",
-      "href": "https://github.com/130U/mathematical-finance-project/blob/3cc4c7e9b36e77027962999b932a1df7972cd2ed/paper/source/technical-cost-proof.tex#L1",
+      "href": "https://github.com/130U/mathematical-finance-project/blob/dbb0a1003d5c37b13041229e8a1a707e3f247cde/paper/source/technical-cost-proof.tex#L1",
       "number": "A.7"
     },
     {
-      "label": "eq:legacy-6.5",
-      "href": "#dep-eq-legacy-6-5",
+      "label": "eq:4.19",
+      "href": "#dep-eq-4-19",
       "number": "4.19"
     },
     {
-      "label": "eq:legacy-6.8",
-      "href": "#dep-eq-legacy-6-8",
+      "label": "eq:4.20",
+      "href": "#dep-eq-4-20",
       "number": "4.20"
     },
     {
-      "label": "eq:legacy-6.9",
-      "href": "#dep-eq-legacy-6-9",
+      "label": "eq:4.21",
+      "href": "#dep-eq-4-21",
       "number": "4.21"
     },
     {
       "label": "app:potential-proof",
-      "href": "https://github.com/130U/mathematical-finance-project/blob/3cc4c7e9b36e77027962999b932a1df7972cd2ed/paper/source/technical-quantitative.tex#L3",
+      "href": "https://github.com/130U/mathematical-finance-project/blob/dbb0a1003d5c37b13041229e8a1a707e3f247cde/paper/source/technical-quantitative.tex#L3",
       "number": "B.1"
     },
     {
@@ -786,8 +786,8 @@
       "number": "5.1"
     },
     {
-      "label": "eq:legacy-J.6",
-      "href": "#dep-eq-legacy-J-6",
+      "label": "eq:5.1",
+      "href": "#dep-eq-5-1",
       "number": "5.1"
     },
     {
@@ -796,18 +796,18 @@
       "number": "3.2"
     },
     {
-      "label": "eq:legacy-D.1",
-      "href": "#dep-eq-legacy-D-1",
+      "label": "eq:4.11",
+      "href": "#dep-eq-4-11",
       "number": "4.11"
     },
     {
       "label": "app:uniform-bound-proof",
-      "href": "https://github.com/130U/mathematical-finance-project/blob/3cc4c7e9b36e77027962999b932a1df7972cd2ed/paper/source/technical-quantitative.tex#L32",
+      "href": "https://github.com/130U/mathematical-finance-project/blob/dbb0a1003d5c37b13041229e8a1a707e3f247cde/paper/source/technical-quantitative.tex#L32",
       "number": "B.2"
     },
     {
-      "label": "eq:legacy-E.5",
-      "href": "#dep-eq-legacy-E-5",
+      "label": "eq:4.2",
+      "href": "#dep-eq-4-2",
       "number": "4.2"
     },
     {
@@ -817,12 +817,12 @@
     },
     {
       "label": "app:dependence-family-proof",
-      "href": "https://github.com/130U/mathematical-finance-project/blob/3cc4c7e9b36e77027962999b932a1df7972cd2ed/paper/source/technical-quantitative.tex#L49",
+      "href": "https://github.com/130U/mathematical-finance-project/blob/dbb0a1003d5c37b13041229e8a1a707e3f247cde/paper/source/technical-quantitative.tex#L49",
       "number": "B.3"
     },
     {
-      "label": "eq:legacy-K.9",
-      "href": "#dep-eq-legacy-K-9",
+      "label": "eq:5.3",
+      "href": "#dep-eq-5-3",
       "number": "5.3"
     },
     {
@@ -831,8 +831,8 @@
       "number": "4"
     },
     {
-      "label": "eq:legacy-3.4",
-      "href": "#dep-eq-legacy-3-4",
+      "label": "eq:2.9",
+      "href": "#dep-eq-2-9",
       "number": "2.9"
     },
     {
@@ -851,8 +851,8 @@
       "number": "4.3"
     },
     {
-      "label": "eq:legacy-7.2",
-      "href": "#dep-eq-legacy-7-2",
+      "label": "eq:5.4",
+      "href": "#dep-eq-5-4",
       "number": "5.4"
     },
     {
@@ -1452,10 +1452,10 @@
     },
     {
       "display": true,
-      "sourceTex": "ES_p^P(L)=\\min_{t\\in\\mathbb R}\n\\left\\{t+\\frac1pE_P(L-t)_+\\right\\}.\n\\tag{2.1}\\label{eq:legacy-2.1}",
+      "sourceTex": "ES_p^P(L)=\\min_{t\\in\\mathbb R}\n\\left\\{t+\\frac1pE_P(L-t)_+\\right\\}.\n\\tag{2.1}\\label{eq:2.1}",
       "tex": "ES_p^P(L)=\\min_{t\\in\\mathbb R}\n\\left\\{t+\\frac1pE_P(L-t)_+\\right\\}.\n\\tag{2.1}",
       "labels": [
-        "eq:legacy-2.1"
+        "eq:2.1"
       ]
     },
     {
@@ -1466,10 +1466,10 @@
     },
     {
       "display": true,
-      "sourceTex": "t\\in\\arg\\min_{u}\\mathscr E_L(P;u)\n\\quad\\Longleftrightarrow\\quad P(L>t)\\le p\\le P(L\\ge t).\n\\tag{2.2}\\label{eq:legacy-A.1}",
+      "sourceTex": "t\\in\\arg\\min_{u}\\mathscr E_L(P;u)\n\\quad\\Longleftrightarrow\\quad P(L>t)\\le p\\le P(L\\ge t).\n\\tag{2.2}\\label{eq:2.2}",
       "tex": "t\\in\\arg\\min_{u}\\mathscr E_L(P;u)\n\\quad\\Longleftrightarrow\\quad P(L>t)\\le p\\le P(L\\ge t).\n\\tag{2.2}",
       "labels": [
-        "eq:legacy-A.1"
+        "eq:2.2"
       ]
     },
     {
@@ -1510,18 +1510,18 @@
     },
     {
       "display": true,
-      "sourceTex": "\\mathcal A_\\rho=\\{P\\in\\Pi:W_\\gamma(P,P_0)\\le\\rho\\},\\quad\nD_\\varepsilon(\\rho)=\\max_{P\\in\\mathcal A_\\rho}\\Phi_\\varepsilon(P),\\quad\nm_\\varepsilon=-\\Phi_\\varepsilon(P_0).\n\\tag{2.3}\\label{eq:legacy-2.2}",
+      "sourceTex": "\\mathcal A_\\rho=\\{P\\in\\Pi:W_\\gamma(P,P_0)\\le\\rho\\},\\quad\nD_\\varepsilon(\\rho)=\\max_{P\\in\\mathcal A_\\rho}\\Phi_\\varepsilon(P),\\quad\nm_\\varepsilon=-\\Phi_\\varepsilon(P_0).\n\\tag{2.3}\\label{eq:2.3}",
       "tex": "\\mathcal A_\\rho=\\{P\\in\\Pi:W_\\gamma(P,P_0)\\le\\rho\\},\\quad\nD_\\varepsilon(\\rho)=\\max_{P\\in\\mathcal A_\\rho}\\Phi_\\varepsilon(P),\\quad\nm_\\varepsilon=-\\Phi_\\varepsilon(P_0).\n\\tag{2.3}",
       "labels": [
-        "eq:legacy-2.2"
+        "eq:2.3"
       ]
     },
     {
       "display": true,
-      "sourceTex": "\\rho^-_\\varepsilon=\\inf\\{\\rho\\ge0:D_\\varepsilon(\\rho)\\ge0\\},\n\\qquad\n\\rho^+_\\varepsilon=\\inf\\{\\rho\\ge0:D_\\varepsilon(\\rho)>0\\},\n\\tag{2.4}\\label{eq:legacy-2.3}",
+      "sourceTex": "\\rho^-_\\varepsilon=\\inf\\{\\rho\\ge0:D_\\varepsilon(\\rho)\\ge0\\},\n\\qquad\n\\rho^+_\\varepsilon=\\inf\\{\\rho\\ge0:D_\\varepsilon(\\rho)>0\\},\n\\tag{2.4}\\label{eq:2.4}",
       "tex": "\\rho^-_\\varepsilon=\\inf\\{\\rho\\ge0:D_\\varepsilon(\\rho)\\ge0\\},\n\\qquad\n\\rho^+_\\varepsilon=\\inf\\{\\rho\\ge0:D_\\varepsilon(\\rho)>0\\},\n\\tag{2.4}",
       "labels": [
-        "eq:legacy-2.3"
+        "eq:2.4"
       ]
     },
     {
@@ -2132,10 +2132,10 @@
     },
     {
       "display": true,
-      "sourceTex": "g=\\sigma(\\Omega)>0,\\qquad J=\\frac12\\int_\\Omega H^2\\,d\\sigma>0.\n\\tag{2.5}\\label{eq:legacy-3.1}",
+      "sourceTex": "g=\\sigma(\\Omega)>0,\\qquad J=\\frac12\\int_\\Omega H^2\\,d\\sigma>0.\n\\tag{2.5}\\label{eq:2.5}",
       "tex": "g=\\sigma(\\Omega)>0,\\qquad J=\\frac12\\int_\\Omega H^2\\,d\\sigma>0.\n\\tag{2.5}",
       "labels": [
-        "eq:legacy-3.1"
+        "eq:2.5"
       ]
     },
     {
@@ -2176,10 +2176,10 @@
     },
     {
       "display": true,
-      "sourceTex": "t_\\varepsilon-v=o(\\varepsilon),\\qquad\nm_\\varepsilon=\\frac Jp\\varepsilon^2+o(\\varepsilon^2).\n\\tag{2.6}\\label{eq:legacy-3.2}",
+      "sourceTex": "t_\\varepsilon-v=o(\\varepsilon),\\qquad\nm_\\varepsilon=\\frac Jp\\varepsilon^2+o(\\varepsilon^2).\n\\tag{2.6}\\label{eq:2.6}",
       "tex": "t_\\varepsilon-v=o(\\varepsilon),\\qquad\nm_\\varepsilon=\\frac Jp\\varepsilon^2+o(\\varepsilon^2).\n\\tag{2.6}",
       "labels": [
-        "eq:legacy-3.2"
+        "eq:2.6"
       ]
     },
     {
@@ -2226,10 +2226,10 @@
     },
     {
       "display": true,
-      "sourceTex": "\\mathscr E_{L_{c,\\varepsilon}}(P_0;v+\\varepsilon\\tau)\n=ES_p^{P_0}(B)+\\frac{\\varepsilon^2}{p}\n\\left(c^2J+\\frac g2\\tau^2\\right)+o(\\varepsilon^2).\n\\tag{2.7}\\label{eq:legacy-B.2}",
+      "sourceTex": "\\mathscr E_{L_{c,\\varepsilon}}(P_0;v+\\varepsilon\\tau)\n=ES_p^{P_0}(B)+\\frac{\\varepsilon^2}{p}\n\\left(c^2J+\\frac g2\\tau^2\\right)+o(\\varepsilon^2).\n\\tag{2.7}\\label{eq:2.7}",
       "tex": "\\mathscr E_{L_{c,\\varepsilon}}(P_0;v+\\varepsilon\\tau)\n=ES_p^{P_0}(B)+\\frac{\\varepsilon^2}{p}\n\\left(c^2J+\\frac g2\\tau^2\\right)+o(\\varepsilon^2).\n\\tag{2.7}",
       "labels": [
-        "eq:legacy-B.2"
+        "eq:2.7"
       ]
     },
     {
@@ -2240,10 +2240,10 @@
     },
     {
       "display": true,
-      "sourceTex": "|\\Phi_\\varepsilon(P)-\\Phi_\\varepsilon(Q)|\\le \\kappa_\\varepsilon W_\\gamma(P,Q),\\quad\n\\kappa_\\varepsilon=\\frac1p\\max\\left\\{\\frac{1+\\varepsilon/2}{\\gamma_1},\n\\frac{1-\\varepsilon/2}{\\gamma_2},\\frac\\beta{\\gamma_3}\\right\\}.\n\\tag{2.8}\\label{eq:legacy-3.3}",
+      "sourceTex": "|\\Phi_\\varepsilon(P)-\\Phi_\\varepsilon(Q)|\\le \\kappa_\\varepsilon W_\\gamma(P,Q),\\quad\n\\kappa_\\varepsilon=\\frac1p\\max\\left\\{\\frac{1+\\varepsilon/2}{\\gamma_1},\n\\frac{1-\\varepsilon/2}{\\gamma_2},\\frac\\beta{\\gamma_3}\\right\\}.\n\\tag{2.8}\\label{eq:2.8}",
       "tex": "|\\Phi_\\varepsilon(P)-\\Phi_\\varepsilon(Q)|\\le \\kappa_\\varepsilon W_\\gamma(P,Q),\\quad\n\\kappa_\\varepsilon=\\frac1p\\max\\left\\{\\frac{1+\\varepsilon/2}{\\gamma_1},\n\\frac{1-\\varepsilon/2}{\\gamma_2},\\frac\\beta{\\gamma_3}\\right\\}.\n\\tag{2.8}",
       "labels": [
-        "eq:legacy-3.3"
+        "eq:2.8"
       ]
     },
     {
@@ -2254,10 +2254,10 @@
     },
     {
       "display": true,
-      "sourceTex": "\\frac{1+\\varepsilon/2}{\\gamma_1}\n\\ge\\max\\left\\{\\frac{1-\\varepsilon/2}{\\gamma_2},\\frac\\beta{\\gamma_3}\\right\\},\n\\tag{2.9}\\label{eq:legacy-3.4}",
+      "sourceTex": "\\frac{1+\\varepsilon/2}{\\gamma_1}\n\\ge\\max\\left\\{\\frac{1-\\varepsilon/2}{\\gamma_2},\\frac\\beta{\\gamma_3}\\right\\},\n\\tag{2.9}\\label{eq:2.9}",
       "tex": "\\frac{1+\\varepsilon/2}{\\gamma_1}\n\\ge\\max\\left\\{\\frac{1-\\varepsilon/2}{\\gamma_2},\\frac\\beta{\\gamma_3}\\right\\},\n\\tag{2.9}",
       "labels": [
-        "eq:legacy-3.4"
+        "eq:2.9"
       ]
     },
     {
@@ -2268,10 +2268,10 @@
     },
     {
       "display": true,
-      "sourceTex": "K_\\varepsilon=\\frac{1+\\varepsilon/2}{p\\gamma_1},\\qquad\nD_\\varepsilon(\\rho)=-m_\\varepsilon+K_\\varepsilon\\rho\n\\quad(0\\le\\rho\\le r_\\varepsilon).\n\\tag{2.10}\\label{eq:legacy-3.5}",
+      "sourceTex": "K_\\varepsilon=\\frac{1+\\varepsilon/2}{p\\gamma_1},\\qquad\nD_\\varepsilon(\\rho)=-m_\\varepsilon+K_\\varepsilon\\rho\n\\quad(0\\le\\rho\\le r_\\varepsilon).\n\\tag{2.10}\\label{eq:2.10}",
       "tex": "K_\\varepsilon=\\frac{1+\\varepsilon/2}{p\\gamma_1},\\qquad\nD_\\varepsilon(\\rho)=-m_\\varepsilon+K_\\varepsilon\\rho\n\\quad(0\\le\\rho\\le r_\\varepsilon).\n\\tag{2.10}",
       "labels": [
-        "eq:legacy-3.5"
+        "eq:2.10"
       ]
     },
     {
@@ -2462,10 +2462,10 @@
     },
     {
       "display": true,
-      "sourceTex": "\\Phi_\\varepsilon(P)-\\Phi_\\varepsilon(Q)\n=p^{-1}\\int h_{u,t}\\,d(P-Q)-\\Delta_B-\\Delta_A.\n\\tag{2.11}\\label{eq:legacy-A.14}",
+      "sourceTex": "\\Phi_\\varepsilon(P)-\\Phi_\\varepsilon(Q)\n=p^{-1}\\int h_{u,t}\\,d(P-Q)-\\Delta_B-\\Delta_A.\n\\tag{2.11}\\label{eq:2.11}",
       "tex": "\\Phi_\\varepsilon(P)-\\Phi_\\varepsilon(Q)\n=p^{-1}\\int h_{u,t}\\,d(P-Q)-\\Delta_B-\\Delta_A.\n\\tag{2.11}",
       "labels": [
-        "eq:legacy-A.14"
+        "eq:2.11"
       ]
     },
     {
@@ -2910,10 +2910,10 @@
     },
     {
       "display": true,
-      "sourceTex": "P_\\theta=P_0-\\theta(\\nu_++\\nu_-)\n+\\theta(T_+)_\\#\\nu_++\\theta(T_-)_\\#\\nu_-,\\qquad 0\\le\\theta\\le1.\n\\tag{2.13}\\label{eq:legacy-A.16a}",
+      "sourceTex": "P_\\theta=P_0-\\theta(\\nu_++\\nu_-)\n+\\theta(T_+)_\\#\\nu_++\\theta(T_-)_\\#\\nu_-,\\qquad 0\\le\\theta\\le1.\n\\tag{2.13}\\label{eq:2.13}",
       "tex": "P_\\theta=P_0-\\theta(\\nu_++\\nu_-)\n+\\theta(T_+)_\\#\\nu_++\\theta(T_-)_\\#\\nu_-,\\qquad 0\\le\\theta\\le1.\n\\tag{2.13}",
       "labels": [
-        "eq:legacy-A.16a"
+        "eq:2.13"
       ]
     },
     {
@@ -2936,10 +2936,10 @@
     },
     {
       "display": true,
-      "sourceTex": "\\Phi_\\varepsilon(P_\\theta)-\\Phi_\\varepsilon(P_0)\n=\\frac{(2+\\varepsilon)\\theta\\mu\\delta_x}{p}\n=K_\\varepsilon(2\\gamma_1\\theta\\mu\\delta_x).\n\\tag{2.14}\\label{eq:legacy-A.16b}",
+      "sourceTex": "\\Phi_\\varepsilon(P_\\theta)-\\Phi_\\varepsilon(P_0)\n=\\frac{(2+\\varepsilon)\\theta\\mu\\delta_x}{p}\n=K_\\varepsilon(2\\gamma_1\\theta\\mu\\delta_x).\n\\tag{2.14}\\label{eq:2.14}",
       "tex": "\\Phi_\\varepsilon(P_\\theta)-\\Phi_\\varepsilon(P_0)\n=\\frac{(2+\\varepsilon)\\theta\\mu\\delta_x}{p}\n=K_\\varepsilon(2\\gamma_1\\theta\\mu\\delta_x).\n\\tag{2.14}",
       "labels": [
-        "eq:legacy-A.16b"
+        "eq:2.14"
       ]
     },
     {
@@ -3046,10 +3046,10 @@
     },
     {
       "display": true,
-      "sourceTex": "ES_p^P(B)\\le\\tfrac12 ES_p^P(B-\\varepsilon H)+\\tfrac12 ES_p^P(B+\\varepsilon H)\n=ES_p^P(A_\\varepsilon).\n\\tag{2.15}\\label{eq:legacy-3.6}",
+      "sourceTex": "ES_p^P(B)\\le\\tfrac12 ES_p^P(B-\\varepsilon H)+\\tfrac12 ES_p^P(B+\\varepsilon H)\n=ES_p^P(A_\\varepsilon).\n\\tag{2.15}\\label{eq:2.15}",
       "tex": "ES_p^P(B)\\le\\tfrac12 ES_p^P(B-\\varepsilon H)+\\tfrac12 ES_p^P(B+\\varepsilon H)\n=ES_p^P(A_\\varepsilon).\n\\tag{2.15}",
       "labels": [
-        "eq:legacy-3.6"
+        "eq:2.15"
       ]
     },
     {
@@ -3246,10 +3246,10 @@
     },
     {
       "display": true,
-      "sourceTex": "j_i(q)dq=(\\xi_i)_\\#(d_i\\,d\\Pi_\\alpha),\\qquad\n\\mathcal C(\\alpha)=I(\\alpha)+\\sum_{i=1}^3\\gamma_i\\|j_i\\|_{L^1(I_i)}.\n\\tag{3.1}\\label{eq:legacy-4.1}",
+      "sourceTex": "j_i(q)dq=(\\xi_i)_\\#(d_i\\,d\\Pi_\\alpha),\\qquad\n\\mathcal C(\\alpha)=I(\\alpha)+\\sum_{i=1}^3\\gamma_i\\|j_i\\|_{L^1(I_i)}.\n\\tag{3.1}\\label{eq:3.1}",
       "tex": "j_i(q)dq=(\\xi_i)_\\#(d_i\\,d\\Pi_\\alpha),\\qquad\n\\mathcal C(\\alpha)=I(\\alpha)+\\sum_{i=1}^3\\gamma_i\\|j_i\\|_{L^1(I_i)}.\n\\tag{3.1}",
       "labels": [
-        "eq:legacy-4.1"
+        "eq:3.1"
       ]
     },
     {
@@ -3392,10 +3392,10 @@
     },
     {
       "display": true,
-      "sourceTex": "G_c^\\alpha(\\tau)=\\frac g2\\tau^2+T_c^\\alpha(\\tau),\\qquad\n\\mathcal V(\\alpha)=-\\frac Jp+\n\\frac{\\min_{\\tau_B}G_0^\\alpha(\\tau_B)-\\min_{\\tau_A}G_1^\\alpha(\\tau_A)}p.\n\\tag{3.2}\\label{eq:legacy-4.2}",
+      "sourceTex": "G_c^\\alpha(\\tau)=\\frac g2\\tau^2+T_c^\\alpha(\\tau),\\qquad\n\\mathcal V(\\alpha)=-\\frac Jp+\n\\frac{\\min_{\\tau_B}G_0^\\alpha(\\tau_B)-\\min_{\\tau_A}G_1^\\alpha(\\tau_A)}p.\n\\tag{3.2}\\label{eq:3.2}",
       "tex": "G_c^\\alpha(\\tau)=\\frac g2\\tau^2+T_c^\\alpha(\\tau),\\qquad\n\\mathcal V(\\alpha)=-\\frac Jp+\n\\frac{\\min_{\\tau_B}G_0^\\alpha(\\tau_B)-\\min_{\\tau_A}G_1^\\alpha(\\tau_A)}p.\n\\tag{3.2}",
       "labels": [
-        "eq:legacy-4.2"
+        "eq:3.2"
       ]
     },
     {
@@ -3448,10 +3448,10 @@
     },
     {
       "display": true,
-      "sourceTex": "F(s)=\\max_{\\mathcal C(\\alpha)\\le s}\\mathcal V(\\alpha),\\qquad s\\ge0.\n\\tag{3.3}\\label{eq:legacy-4.3}",
+      "sourceTex": "F(s)=\\max_{\\mathcal C(\\alpha)\\le s}\\mathcal V(\\alpha),\\qquad s\\ge0.\n\\tag{3.3}\\label{eq:3.3}",
       "tex": "F(s)=\\max_{\\mathcal C(\\alpha)\\le s}\\mathcal V(\\alpha),\\qquad s\\ge0.\n\\tag{3.3}",
       "labels": [
-        "eq:legacy-4.3"
+        "eq:3.3"
       ]
     },
     {
@@ -3672,10 +3672,10 @@
     },
     {
       "display": true,
-      "sourceTex": "\\mathcal C(\\alpha)\\le\\liminf_n\\frac{W_\\gamma(P_n,P_0)}{\\varepsilon_n^2},\\qquad\n\\frac{\\Phi_{\\varepsilon_n}(P_n)}{\\varepsilon_n^2}\\longrightarrow\\mathcal V(\\alpha).\n\\tag{3.4}\\label{eq:legacy-4.5}",
+      "sourceTex": "\\mathcal C(\\alpha)\\le\\liminf_n\\frac{W_\\gamma(P_n,P_0)}{\\varepsilon_n^2},\\qquad\n\\frac{\\Phi_{\\varepsilon_n}(P_n)}{\\varepsilon_n^2}\\longrightarrow\\mathcal V(\\alpha).\n\\tag{3.4}\\label{eq:3.4}",
       "tex": "\\mathcal C(\\alpha)\\le\\liminf_n\\frac{W_\\gamma(P_n,P_0)}{\\varepsilon_n^2},\\qquad\n\\frac{\\Phi_{\\varepsilon_n}(P_n)}{\\varepsilon_n^2}\\longrightarrow\\mathcal V(\\alpha).\n\\tag{3.4}",
       "labels": [
-        "eq:legacy-4.5"
+        "eq:3.4"
       ]
     },
     {
@@ -3686,10 +3686,10 @@
     },
     {
       "display": true,
-      "sourceTex": "\\limsup_{\\varepsilon\\downarrow0}\\frac{W_\\gamma(P_\\varepsilon,P_0)}{\\varepsilon^2}\\le\\mathcal C(\\alpha),\\qquad\n\\frac{\\Phi_\\varepsilon(P_\\varepsilon)}{\\varepsilon^2}\\longrightarrow\\mathcal V(\\alpha).\n\\tag{3.5}\\label{eq:legacy-4.6}",
+      "sourceTex": "\\limsup_{\\varepsilon\\downarrow0}\\frac{W_\\gamma(P_\\varepsilon,P_0)}{\\varepsilon^2}\\le\\mathcal C(\\alpha),\\qquad\n\\frac{\\Phi_\\varepsilon(P_\\varepsilon)}{\\varepsilon^2}\\longrightarrow\\mathcal V(\\alpha).\n\\tag{3.5}\\label{eq:3.5}",
       "tex": "\\limsup_{\\varepsilon\\downarrow0}\\frac{W_\\gamma(P_\\varepsilon,P_0)}{\\varepsilon^2}\\le\\mathcal C(\\alpha),\\qquad\n\\frac{\\Phi_\\varepsilon(P_\\varepsilon)}{\\varepsilon^2}\\longrightarrow\\mathcal V(\\alpha).\n\\tag{3.5}",
       "labels": [
-        "eq:legacy-4.6"
+        "eq:3.5"
       ]
     },
     {
@@ -3718,10 +3718,10 @@
     },
     {
       "display": true,
-      "sourceTex": "\\sup_{0\\le s\\le S_0}\\left|\\frac{D_\\varepsilon(s\\varepsilon^2)}{\\varepsilon^2}-F(s)\\right|\\longrightarrow0.\n\\tag{3.6}\\label{eq:legacy-4.4}",
+      "sourceTex": "\\sup_{0\\le s\\le S_0}\\left|\\frac{D_\\varepsilon(s\\varepsilon^2)}{\\varepsilon^2}-F(s)\\right|\\longrightarrow0.\n\\tag{3.6}\\label{eq:3.6}",
       "tex": "\\sup_{0\\le s\\le S_0}\\left|\\frac{D_\\varepsilon(s\\varepsilon^2)}{\\varepsilon^2}-F(s)\\right|\\longrightarrow0.\n\\tag{3.6}",
       "labels": [
-        "eq:legacy-4.4"
+        "eq:3.6"
       ]
     },
     {
@@ -3930,10 +3930,10 @@
     },
     {
       "display": true,
-      "sourceTex": "\\ell_-(x)=\\frac1{2\\beta}\\int_I(x-y)_+^2k(x,y)\\,dy,\\qquad\n\\ell_+(x)=\\frac1{2\\beta}\\int_I(y-x)_+^2k(x,y)\\,dy.\n\\tag{3.7}\\label{eq:legacy-A.19}",
+      "sourceTex": "\\ell_-(x)=\\frac1{2\\beta}\\int_I(x-y)_+^2k(x,y)\\,dy,\\qquad\n\\ell_+(x)=\\frac1{2\\beta}\\int_I(y-x)_+^2k(x,y)\\,dy.\n\\tag{3.7}\\label{eq:3.7}",
       "tex": "\\ell_-(x)=\\frac1{2\\beta}\\int_I(x-y)_+^2k(x,y)\\,dy,\\qquad\n\\ell_+(x)=\\frac1{2\\beta}\\int_I(y-x)_+^2k(x,y)\\,dy.\n\\tag{3.7}",
       "labels": [
-        "eq:legacy-A.19"
+        "eq:3.7"
       ]
     },
     {
@@ -4274,10 +4274,10 @@
     },
     {
       "display": true,
-      "sourceTex": "\\mathcal C(\\widehat\\alpha)\\le\\mathcal C(\\alpha)+\\delta,\\qquad\n\\mathcal V(\\widehat\\alpha)\\ge\\mathcal V(\\alpha)+c_M\\delta.\n\\tag{3.8}\\label{eq:legacy-5.1}",
+      "sourceTex": "\\mathcal C(\\widehat\\alpha)\\le\\mathcal C(\\alpha)+\\delta,\\qquad\n\\mathcal V(\\widehat\\alpha)\\ge\\mathcal V(\\alpha)+c_M\\delta.\n\\tag{3.8}\\label{eq:3.8}",
       "tex": "\\mathcal C(\\widehat\\alpha)\\le\\mathcal C(\\alpha)+\\delta,\\qquad\n\\mathcal V(\\widehat\\alpha)\\ge\\mathcal V(\\alpha)+c_M\\delta.\n\\tag{3.8}",
       "labels": [
-        "eq:legacy-5.1"
+        "eq:3.8"
       ]
     },
     {
@@ -4300,10 +4300,10 @@
     },
     {
       "display": true,
-      "sourceTex": "F(t)-F(s)\\ge c_{S_0}(t-s)>0\\qquad(0\\le s<t\\le S_0).\n\\tag{3.9}\\label{eq:legacy-5.2}",
+      "sourceTex": "F(t)-F(s)\\ge c_{S_0}(t-s)>0\\qquad(0\\le s<t\\le S_0).\n\\tag{3.9}\\label{eq:3.9}",
       "tex": "F(t)-F(s)\\ge c_{S_0}(t-s)>0\\qquad(0\\le s<t\\le S_0).\n\\tag{3.9}",
       "labels": [
-        "eq:legacy-5.2"
+        "eq:3.9"
       ]
     },
     {
@@ -4320,18 +4320,18 @@
     },
     {
       "display": true,
-      "sourceTex": "s^*=\\min_{\\alpha:\\,\\mathcal V(\\alpha)\\ge0}\\mathcal C(\\alpha)\n=\\min_{\\alpha:\\,\\mathcal V(\\alpha)=0}\\mathcal C(\\alpha)\n=\\inf_{\\alpha:\\,\\mathcal V(\\alpha)>0}\\mathcal C(\\alpha).\n\\tag{3.10}\\label{eq:legacy-5.3}",
+      "sourceTex": "s^*=\\min_{\\alpha:\\,\\mathcal V(\\alpha)\\ge0}\\mathcal C(\\alpha)\n=\\min_{\\alpha:\\,\\mathcal V(\\alpha)=0}\\mathcal C(\\alpha)\n=\\inf_{\\alpha:\\,\\mathcal V(\\alpha)>0}\\mathcal C(\\alpha).\n\\tag{3.10}\\label{eq:3.10}",
       "tex": "s^*=\\min_{\\alpha:\\,\\mathcal V(\\alpha)\\ge0}\\mathcal C(\\alpha)\n=\\min_{\\alpha:\\,\\mathcal V(\\alpha)=0}\\mathcal C(\\alpha)\n=\\inf_{\\alpha:\\,\\mathcal V(\\alpha)>0}\\mathcal C(\\alpha).\n\\tag{3.10}",
       "labels": [
-        "eq:legacy-5.3"
+        "eq:3.10"
       ]
     },
     {
       "display": true,
-      "sourceTex": "\\rho^-_\\varepsilon=s^*\\varepsilon^2+o(\\varepsilon^2),\\qquad\n\\rho^+_\\varepsilon=s^*\\varepsilon^2+o(\\varepsilon^2).\n\\tag{3.11}\\label{eq:legacy-5.4}",
+      "sourceTex": "\\rho^-_\\varepsilon=s^*\\varepsilon^2+o(\\varepsilon^2),\\qquad\n\\rho^+_\\varepsilon=s^*\\varepsilon^2+o(\\varepsilon^2).\n\\tag{3.11}\\label{eq:3.11}",
       "tex": "\\rho^-_\\varepsilon=s^*\\varepsilon^2+o(\\varepsilon^2),\\qquad\n\\rho^+_\\varepsilon=s^*\\varepsilon^2+o(\\varepsilon^2).\n\\tag{3.11}",
       "labels": [
-        "eq:legacy-5.4"
+        "eq:3.11"
       ]
     },
     {
@@ -4522,10 +4522,10 @@
     },
     {
       "display": true,
-      "sourceTex": "\\begin{aligned}\nb\\cdot d=\\zeta,\\qquad |d|_\\gamma=c_{\\min}|\\zeta|\n&\\quad\\Pi_\\alpha\\text{-almost everywhere},\\\\\n(\\xi_i)_\\#(d_i\\,d\\Pi_\\alpha)=0\n&\\quad i=1,2,3.\n\\end{aligned}\n\\tag{4.1}\\label{eq:legacy-6.3}",
+      "sourceTex": "\\begin{aligned}\nb\\cdot d=\\zeta,\\qquad |d|_\\gamma=c_{\\min}|\\zeta|\n&\\quad\\Pi_\\alpha\\text{-almost everywhere},\\\\\n(\\xi_i)_\\#(d_i\\,d\\Pi_\\alpha)=0\n&\\quad i=1,2,3.\n\\end{aligned}\n\\tag{4.1}\\label{eq:4.1}",
       "tex": "\\begin{aligned}\nb\\cdot d=\\zeta,\\qquad |d|_\\gamma=c_{\\min}|\\zeta|\n&\\quad\\Pi_\\alpha\\text{-almost everywhere},\\\\\n(\\xi_i)_\\#(d_i\\,d\\Pi_\\alpha)=0\n&\\quad i=1,2,3.\n\\end{aligned}\n\\tag{4.1}",
       "labels": [
-        "eq:legacy-6.3"
+        "eq:4.1"
       ]
     },
     {
@@ -4590,10 +4590,10 @@
     },
     {
       "display": true,
-      "sourceTex": "\\begin{aligned}\n\\frac{\\mathcal C}{c_{\\min}}-(p\\mathcal V+J)\n={}&\\underbrace{\\frac{\\mathcal C-I}{c_{\\min}}}_{\\mathrm{I}}\n+\\underbrace{\\left(\\frac I {c_{\\min}}-\\int |w|\\,d\\Pi_\\alpha\\right)}_{\\mathrm{II}}\n+\\underbrace{\\frac g2\\tau_A^2}_{\\mathrm{III}}\\\\\n&+\\underbrace{\\int[|w|-\\Delta_+(u,w)+\\Delta_+(u+H-\\tau_A,w)]\\,d\\Pi_\\alpha}_{\\mathrm{IV}}\\\\\n&+\\underbrace{G_0(0)-\\min_{\\tau_B}G_0(\\tau_B)}_{\\mathrm{V}}.\n\\end{aligned}\n\\tag{4.2}\\label{eq:legacy-E.5}",
+      "sourceTex": "\\begin{aligned}\n\\frac{\\mathcal C}{c_{\\min}}-(p\\mathcal V+J)\n={}&\\underbrace{\\frac{\\mathcal C-I}{c_{\\min}}}_{\\mathrm{I}}\n+\\underbrace{\\left(\\frac I {c_{\\min}}-\\int |w|\\,d\\Pi_\\alpha\\right)}_{\\mathrm{II}}\n+\\underbrace{\\frac g2\\tau_A^2}_{\\mathrm{III}}\\\\\n&+\\underbrace{\\int[|w|-\\Delta_+(u,w)+\\Delta_+(u+H-\\tau_A,w)]\\,d\\Pi_\\alpha}_{\\mathrm{IV}}\\\\\n&+\\underbrace{G_0(0)-\\min_{\\tau_B}G_0(\\tau_B)}_{\\mathrm{V}}.\n\\end{aligned}\n\\tag{4.2}\\label{eq:4.2}",
       "tex": "\\begin{aligned}\n\\frac{\\mathcal C}{c_{\\min}}-(p\\mathcal V+J)\n={}&\\underbrace{\\frac{\\mathcal C-I}{c_{\\min}}}_{\\mathrm{I}}\n+\\underbrace{\\left(\\frac I {c_{\\min}}-\\int |w|\\,d\\Pi_\\alpha\\right)}_{\\mathrm{II}}\n+\\underbrace{\\frac g2\\tau_A^2}_{\\mathrm{III}}\\\\\n&+\\underbrace{\\int[|w|-\\Delta_+(u,w)+\\Delta_+(u+H-\\tau_A,w)]\\,d\\Pi_\\alpha}_{\\mathrm{IV}}\\\\\n&+\\underbrace{G_0(0)-\\min_{\\tau_B}G_0(\\tau_B)}_{\\mathrm{V}}.\n\\end{aligned}\n\\tag{4.2}",
       "labels": [
-        "eq:legacy-E.5"
+        "eq:4.2"
       ]
     },
     {
@@ -4652,10 +4652,10 @@
     },
     {
       "display": true,
-      "sourceTex": "\\mathcal V=0,\\qquad \\mathcal C=I=c_{\\min}J,\\qquad\n\\int|w|\\,d\\Pi_\\alpha=J,\\qquad j_i=0\\quad(i=1,2,3).\n\\tag{4.3}\\label{eq:legacy-E.7}",
+      "sourceTex": "\\mathcal V=0,\\qquad \\mathcal C=I=c_{\\min}J,\\qquad\n\\int|w|\\,d\\Pi_\\alpha=J,\\qquad j_i=0\\quad(i=1,2,3).\n\\tag{4.3}\\label{eq:4.3}",
       "tex": "\\mathcal V=0,\\qquad \\mathcal C=I=c_{\\min}J,\\qquad\n\\int|w|\\,d\\Pi_\\alpha=J,\\qquad j_i=0\\quad(i=1,2,3).\n\\tag{4.3}",
       "labels": [
-        "eq:legacy-E.7"
+        "eq:4.3"
       ]
     },
     {
@@ -4672,10 +4672,10 @@
     },
     {
       "display": true,
-      "sourceTex": "|d|_\\gamma-c_{\\min}|b\\cdot d|\n=\\sum_i(\\gamma_i-c_{\\min}b_i)|d_i|\n+c_{\\min}\\left(\\sum_i b_i|d_i|-\\left|\\sum_i b_id_i\\right|\\right)\n\\tag{4.4}\\label{eq:legacy-E.8}",
+      "sourceTex": "|d|_\\gamma-c_{\\min}|b\\cdot d|\n=\\sum_i(\\gamma_i-c_{\\min}b_i)|d_i|\n+c_{\\min}\\left(\\sum_i b_i|d_i|-\\left|\\sum_i b_id_i\\right|\\right)\n\\tag{4.4}\\label{eq:4.4}",
       "tex": "|d|_\\gamma-c_{\\min}|b\\cdot d|\n=\\sum_i(\\gamma_i-c_{\\min}b_i)|d_i|\n+c_{\\min}\\left(\\sum_i b_i|d_i|-\\left|\\sum_i b_id_i\\right|\\right)\n\\tag{4.4}",
       "labels": [
-        "eq:legacy-E.8"
+        "eq:4.4"
       ]
     },
     {
@@ -4746,10 +4746,10 @@
     },
     {
       "display": true,
-      "sourceTex": "\\int_{\\mathbb R}K\\,du=H^2/2,\\qquad\n\\int_{\\mathbb R}\\zeta\\,du=-H|H|/2,\n\\tag{4.5}\\label{eq:legacy-E.12}",
+      "sourceTex": "\\int_{\\mathbb R}K\\,du=H^2/2,\\qquad\n\\int_{\\mathbb R}\\zeta\\,du=-H|H|/2,\n\\tag{4.5}\\label{eq:4.5}",
       "tex": "\\int_{\\mathbb R}K\\,du=H^2/2,\\qquad\n\\int_{\\mathbb R}\\zeta\\,du=-H|H|/2,\n\\tag{4.5}",
       "labels": [
-        "eq:legacy-E.12"
+        "eq:4.5"
       ]
     },
     {
@@ -4760,10 +4760,10 @@
     },
     {
       "display": true,
-      "sourceTex": "b\\cdot d=\\zeta\\quad\\Pi_\\alpha\\text{-almost everywhere},\n\\tag{4.6}\\label{eq:legacy-6.4}",
+      "sourceTex": "b\\cdot d=\\zeta\\quad\\Pi_\\alpha\\text{-almost everywhere},\n\\tag{4.6}\\label{eq:4.6}",
       "tex": "b\\cdot d=\\zeta\\quad\\Pi_\\alpha\\text{-almost everywhere},\n\\tag{4.6}",
       "labels": [
-        "eq:legacy-6.4"
+        "eq:4.6"
       ]
     },
     {
@@ -4774,10 +4774,10 @@
     },
     {
       "display": true,
-      "sourceTex": "T_0(0)=J/2,\\qquad T_1(0)=-J/2,\\qquad\n\\int_{H>0}H^2\\,d\\sigma=\\int_{H<0}H^2\\,d\\sigma=J.\n\\tag{4.7}\\label{eq:legacy-D.2}",
+      "sourceTex": "T_0(0)=J/2,\\qquad T_1(0)=-J/2,\\qquad\n\\int_{H>0}H^2\\,d\\sigma=\\int_{H<0}H^2\\,d\\sigma=J.\n\\tag{4.7}\\label{eq:4.7}",
       "tex": "T_0(0)=J/2,\\qquad T_1(0)=-J/2,\\qquad\n\\int_{H>0}H^2\\,d\\sigma=\\int_{H<0}H^2\\,d\\sigma=J.\n\\tag{4.7}",
       "labels": [
-        "eq:legacy-D.2"
+        "eq:4.7"
       ]
     },
     {
@@ -4806,10 +4806,10 @@
     },
     {
       "display": true,
-      "sourceTex": "G_{1,-}'(0)=-m_-<0,\\qquad G_{1,+}'(0)=m_+>0.\n\\tag{4.8}\\label{eq:legacy-D.3}",
+      "sourceTex": "G_{1,-}'(0)=-m_-<0,\\qquad G_{1,+}'(0)=m_+>0.\n\\tag{4.8}\\label{eq:4.8}",
       "tex": "G_{1,-}'(0)=-m_-<0,\\qquad G_{1,+}'(0)=m_+>0.\n\\tag{4.8}",
       "labels": [
-        "eq:legacy-D.3"
+        "eq:4.8"
       ]
     },
     {
@@ -4886,10 +4886,10 @@
     },
     {
       "display": true,
-      "sourceTex": "s^*=Jc_{\\min}\\quad\\Longleftrightarrow\\quad\nc_3\\le\\min\\{\\gamma_1,\\gamma_2\\}.\n\\tag{4.9}\\label{eq:legacy-6.1}",
+      "sourceTex": "s^*=Jc_{\\min}\\quad\\Longleftrightarrow\\quad\nc_3\\le\\min\\{\\gamma_1,\\gamma_2\\}.\n\\tag{4.9}\\label{eq:4.9}",
       "tex": "s^*=Jc_{\\min}\\quad\\Longleftrightarrow\\quad\nc_3\\le\\min\\{\\gamma_1,\\gamma_2\\}.\n\\tag{4.9}",
       "labels": [
-        "eq:legacy-6.1"
+        "eq:4.9"
       ]
     },
     {
@@ -4924,10 +4924,10 @@
     },
     {
       "display": true,
-      "sourceTex": "1<\\frac{s^*}{\\gamma_1J}\\le\\min\\{1+\\chi,c_3/\\gamma_1\\}<2,\n\\tag{4.10}\\label{eq:legacy-6.2}",
+      "sourceTex": "1<\\frac{s^*}{\\gamma_1J}\\le\\min\\{1+\\chi,c_3/\\gamma_1\\}<2,\n\\tag{4.10}\\label{eq:4.10}",
       "tex": "1<\\frac{s^*}{\\gamma_1J}\\le\\min\\{1+\\chi,c_3/\\gamma_1\\}<2,\n\\tag{4.10}",
       "labels": [
-        "eq:legacy-6.2"
+        "eq:4.10"
       ]
     },
     {
@@ -4968,10 +4968,10 @@
     },
     {
       "display": true,
-      "sourceTex": "\\alpha^{(1)}=\\delta_{\\zeta e_1},\\qquad\n\\alpha^{(2)}=\\delta_{\\zeta e_2},\\qquad\n\\alpha^{(3)}=\\delta_{(\\zeta/\\beta)e_3}\n\\tag{4.11}\\label{eq:legacy-D.1}",
+      "sourceTex": "\\alpha^{(1)}=\\delta_{\\zeta e_1},\\qquad\n\\alpha^{(2)}=\\delta_{\\zeta e_2},\\qquad\n\\alpha^{(3)}=\\delta_{(\\zeta/\\beta)e_3}\n\\tag{4.11}\\label{eq:4.11}",
       "tex": "\\alpha^{(1)}=\\delta_{\\zeta e_1},\\qquad\n\\alpha^{(2)}=\\delta_{\\zeta e_2},\\qquad\n\\alpha^{(3)}=\\delta_{(\\zeta/\\beta)e_3}\n\\tag{4.11}",
       "labels": [
-        "eq:legacy-D.1"
+        "eq:4.11"
       ]
     },
     {
@@ -5012,10 +5012,10 @@
     },
     {
       "display": true,
-      "sourceTex": "\\int\\varphi(\\xi_3)d_3^{(3)}d\\nu\n=-\\int\\varphi(\\xi_3)d_3^{(3)}d\\nu=0.\n\\tag{4.12}\\label{eq:legacy-D.6}",
+      "sourceTex": "\\int\\varphi(\\xi_3)d_3^{(3)}d\\nu\n=-\\int\\varphi(\\xi_3)d_3^{(3)}d\\nu=0.\n\\tag{4.12}\\label{eq:4.12}",
       "tex": "\\int\\varphi(\\xi_3)d_3^{(3)}d\\nu\n=-\\int\\varphi(\\xi_3)d_3^{(3)}d\\nu=0.\n\\tag{4.12}",
       "labels": [
-        "eq:legacy-D.6"
+        "eq:4.12"
       ]
     },
     {
@@ -5026,10 +5026,10 @@
     },
     {
       "display": true,
-      "sourceTex": "\\mathcal C(\\alpha^{(1)})=\\gamma_1J(1+\\chi),\\quad\n\\mathcal C(\\alpha^{(2)})=\\gamma_2J(1+\\chi),\\quad\n\\mathcal C(\\alpha^{(3)})=c_3J.\n\\tag{4.13}\\label{eq:legacy-D.7}",
+      "sourceTex": "\\mathcal C(\\alpha^{(1)})=\\gamma_1J(1+\\chi),\\quad\n\\mathcal C(\\alpha^{(2)})=\\gamma_2J(1+\\chi),\\quad\n\\mathcal C(\\alpha^{(3)})=c_3J.\n\\tag{4.13}\\label{eq:4.13}",
       "tex": "\\mathcal C(\\alpha^{(1)})=\\gamma_1J(1+\\chi),\\quad\n\\mathcal C(\\alpha^{(2)})=\\gamma_2J(1+\\chi),\\quad\n\\mathcal C(\\alpha^{(3)})=c_3J.\n\\tag{4.13}",
       "labels": [
-        "eq:legacy-D.7"
+        "eq:4.13"
       ]
     },
     {
@@ -5082,10 +5082,10 @@
     },
     {
       "display": true,
-      "sourceTex": "\\mathcal V=-(1-\\theta)J/p.\n\\tag{4.14}\\label{eq:legacy-D.9}",
+      "sourceTex": "\\mathcal V=-(1-\\theta)J/p.\n\\tag{4.14}\\label{eq:4.14}",
       "tex": "\\mathcal V=-(1-\\theta)J/p.\n\\tag{4.14}",
       "labels": [
-        "eq:legacy-D.9"
+        "eq:4.14"
       ]
     },
     {
@@ -5138,10 +5138,10 @@
     },
     {
       "display": true,
-      "sourceTex": "\\begin{aligned}\n&m_1+m_2=-H|H|/2,\\qquad |m_i|\\le H^2/2,\\\\\n&m_i\\ge0\\quad\\text{for}\\ x<y,\\qquad\nm_i\\le0\\quad\\text{for}\\ x>y.\n\\end{aligned}\n\\tag{4.15}\\label{eq:legacy-E.15}",
+      "sourceTex": "\\begin{aligned}\n&m_1+m_2=-H|H|/2,\\qquad |m_i|\\le H^2/2,\\\\\n&m_i\\ge0\\quad\\text{for}\\ x<y,\\qquad\nm_i\\le0\\quad\\text{for}\\ x>y.\n\\end{aligned}\n\\tag{4.15}\\label{eq:4.15}",
       "tex": "\\begin{aligned}\n&m_1+m_2=-H|H|/2,\\qquad |m_i|\\le H^2/2,\\\\\n&m_i\\ge0\\quad\\text{for}\\ x<y,\\qquad\nm_i\\le0\\quad\\text{for}\\ x>y.\n\\end{aligned}\n\\tag{4.15}",
       "labels": [
-        "eq:legacy-E.15"
+        "eq:4.15"
       ]
     },
     {
@@ -5152,10 +5152,10 @@
     },
     {
       "display": true,
-      "sourceTex": "\\int_{\\Omega\\cap\\{x\\in A\\}}m_1d\\sigma=0,\\qquad\n\\int_{\\Omega\\cap\\{y\\in B\\}}m_2d\\sigma=0.\n\\tag{4.16}\\label{eq:legacy-E.16}",
+      "sourceTex": "\\int_{\\Omega\\cap\\{x\\in A\\}}m_1d\\sigma=0,\\qquad\n\\int_{\\Omega\\cap\\{y\\in B\\}}m_2d\\sigma=0.\n\\tag{4.16}\\label{eq:4.16}",
       "tex": "\\int_{\\Omega\\cap\\{x\\in A\\}}m_1d\\sigma=0,\\qquad\n\\int_{\\Omega\\cap\\{y\\in B\\}}m_2d\\sigma=0.\n\\tag{4.16}",
       "labels": [
-        "eq:legacy-E.16"
+        "eq:4.16"
       ]
     },
     {
@@ -5340,10 +5340,10 @@
     },
     {
       "display": true,
-      "sourceTex": "M_\\delta:=\\int_{E_\\delta}(m_1+m_2)d\\sigma\n\\ge c_\\Omega\\delta^2.\n\\tag{4.17}\\label{eq:legacy-E.20}",
+      "sourceTex": "M_\\delta:=\\int_{E_\\delta}(m_1+m_2)d\\sigma\n\\ge c_\\Omega\\delta^2.\n\\tag{4.17}\\label{eq:4.17}",
       "tex": "M_\\delta:=\\int_{E_\\delta}(m_1+m_2)d\\sigma\n\\ge c_\\Omega\\delta^2.\n\\tag{4.17}",
       "labels": [
-        "eq:legacy-E.20"
+        "eq:4.17"
       ]
     },
     {
@@ -5420,10 +5420,10 @@
     },
     {
       "display": true,
-      "sourceTex": "N_1+N_2\\le C_\\Omega\\int_0^\\delta\\int_0^x(x-y)^2\\,dy\\,dx\n=\\frac{C_\\Omega}{12}\\delta^4.\n\\tag{4.18}\\label{eq:legacy-E.22}",
+      "sourceTex": "N_1+N_2\\le C_\\Omega\\int_0^\\delta\\int_0^x(x-y)^2\\,dy\\,dx\n=\\frac{C_\\Omega}{12}\\delta^4.\n\\tag{4.18}\\label{eq:4.18}",
       "tex": "N_1+N_2\\le C_\\Omega\\int_0^\\delta\\int_0^x(x-y)^2\\,dy\\,dx\n=\\frac{C_\\Omega}{12}\\delta^4.\n\\tag{4.18}",
       "labels": [
-        "eq:legacy-E.22"
+        "eq:4.18"
       ]
     },
     {
@@ -5632,10 +5632,10 @@
     },
     {
       "display": true,
-      "sourceTex": "\\pi(\\eta)=a_+\\eta+o(\\eta),\\qquad\na_+=\\frac\\beta J\\min_{\\alpha\\in\\mathcal Z_0}\n\\int|d_3|\\,d\\Pi_\\alpha\\in[0,1].\n\\tag{4.19}\\label{eq:legacy-6.5}",
+      "sourceTex": "\\pi(\\eta)=a_+\\eta+o(\\eta),\\qquad\na_+=\\frac\\beta J\\min_{\\alpha\\in\\mathcal Z_0}\n\\int|d_3|\\,d\\Pi_\\alpha\\in[0,1].\n\\tag{4.19}\\label{eq:4.19}",
       "tex": "\\pi(\\eta)=a_+\\eta+o(\\eta),\\qquad\na_+=\\frac\\beta J\\min_{\\alpha\\in\\mathcal Z_0}\n\\int|d_3|\\,d\\Pi_\\alpha\\in[0,1].\n\\tag{4.19}",
       "labels": [
-        "eq:legacy-6.5"
+        "eq:4.19"
       ]
     },
     {
@@ -5670,10 +5670,10 @@
     },
     {
       "display": true,
-      "sourceTex": "a_+=1-\\frac{2\\mathfrak F_\\mu}{J}\\in(0,1),\\qquad\n\\mathfrak F_\\mu=\\inf_{\\substack{\\varphi\\text{ measurable}\\\\|\\varphi|\\le1}}\n\\int_D\\max\\{0,1-\\varphi(x),1+\\varphi(y)\\}\\,d\\mu.\\tag{4.20}\\label{eq:legacy-6.8}",
+      "sourceTex": "a_+=1-\\frac{2\\mathfrak F_\\mu}{J}\\in(0,1),\\qquad\n\\mathfrak F_\\mu=\\inf_{\\substack{\\varphi\\text{ measurable}\\\\|\\varphi|\\le1}}\n\\int_D\\max\\{0,1-\\varphi(x),1+\\varphi(y)\\}\\,d\\mu.\\tag{4.20}\\label{eq:4.20}",
       "tex": "a_+=1-\\frac{2\\mathfrak F_\\mu}{J}\\in(0,1),\\qquad\n\\mathfrak F_\\mu=\\inf_{\\substack{\\varphi\\text{ measurable}\\\\|\\varphi|\\le1}}\n\\int_D\\max\\{0,1-\\varphi(x),1+\\varphi(y)\\}\\,d\\mu.\\tag{4.20}",
       "labels": [
-        "eq:legacy-6.8"
+        "eq:4.20"
       ]
     },
     {
@@ -5684,10 +5684,10 @@
     },
     {
       "display": true,
-      "sourceTex": "a_+=\\frac2J\\sup_{U\\cap V=\\varnothing}\n\\left[\\mu(D\\cap(U\\times V))-\n\\mu\\bigl(D\\cap((V\\times I)\\cup(I\\times U))\\bigr)\\right].\\tag{4.21}\\label{eq:legacy-6.9}",
+      "sourceTex": "a_+=\\frac2J\\sup_{U\\cap V=\\varnothing}\n\\left[\\mu(D\\cap(U\\times V))-\n\\mu\\bigl(D\\cap((V\\times I)\\cup(I\\times U))\\bigr)\\right].\\tag{4.21}\\label{eq:4.21}",
       "tex": "a_+=\\frac2J\\sup_{U\\cap V=\\varnothing}\n\\left[\\mu(D\\cap(U\\times V))-\n\\mu\\bigl(D\\cap((V\\times I)\\cup(I\\times U))\\bigr)\\right].\\tag{4.21}",
       "labels": [
-        "eq:legacy-6.9"
+        "eq:4.21"
       ]
     },
     {
@@ -5782,10 +5782,10 @@
     },
     {
       "display": true,
-      "sourceTex": "s^*(\\gamma)=\\inf_{\\mathcal V(\\alpha)\\ge0}\\sum_i\\gamma_i A_i(\\alpha).\n\\tag{4.22}\\label{eq:legacy-D.11}",
+      "sourceTex": "s^*(\\gamma)=\\inf_{\\mathcal V(\\alpha)\\ge0}\\sum_i\\gamma_i A_i(\\alpha).\n\\tag{4.22}\\label{eq:4.22}",
       "tex": "s^*(\\gamma)=\\inf_{\\mathcal V(\\alpha)\\ge0}\\sum_i\\gamma_i A_i(\\alpha).\n\\tag{4.22}",
       "labels": [
-        "eq:legacy-D.11"
+        "eq:4.22"
       ]
     },
     {
@@ -5886,10 +5886,10 @@
     },
     {
       "display": true,
-      "sourceTex": "\\mathcal C(\\alpha)\\ge\n\\lambda\\left(J+p\\mathcal V+\\frac g2\\tau^2\\right)\n-\\frac{\\lambda}{2}\\int_\\Omega(H-\\tau)^2\n\\left(\\frac{\\lambda}{k(\\xi,H-\\tau)}-1\\right)_+\\,d\\sigma,\n\\tag{5.1}\\label{eq:legacy-J.6}",
+      "sourceTex": "\\mathcal C(\\alpha)\\ge\n\\lambda\\left(J+p\\mathcal V+\\frac g2\\tau^2\\right)\n-\\frac{\\lambda}{2}\\int_\\Omega(H-\\tau)^2\n\\left(\\frac{\\lambda}{k(\\xi,H-\\tau)}-1\\right)_+\\,d\\sigma,\n\\tag{5.1}\\label{eq:5.1}",
       "tex": "\\mathcal C(\\alpha)\\ge\n\\lambda\\left(J+p\\mathcal V+\\frac g2\\tau^2\\right)\n-\\frac{\\lambda}{2}\\int_\\Omega(H-\\tau)^2\n\\left(\\frac{\\lambda}{k(\\xi,H-\\tau)}-1\\right)_+\\,d\\sigma,\n\\tag{5.1}",
       "labels": [
-        "eq:legacy-J.6"
+        "eq:5.1"
       ]
     },
     {
@@ -6050,10 +6050,10 @@
     },
     {
       "display": true,
-      "sourceTex": "\\frac{13}{64}\\le\\frac{s^*}{\\gamma_0}\\le\\frac{29}{96},\n\\qquad \\frac{s^*}{\\gamma_0J}\\ge\\frac{13}{10}.\n\\tag{5.2}\\label{eq:legacy-7.1}",
+      "sourceTex": "\\frac{13}{64}\\le\\frac{s^*}{\\gamma_0}\\le\\frac{29}{96},\n\\qquad \\frac{s^*}{\\gamma_0J}\\ge\\frac{13}{10}.\n\\tag{5.2}\\label{eq:5.2}",
       "tex": "\\frac{13}{64}\\le\\frac{s^*}{\\gamma_0}\\le\\frac{29}{96},\n\\qquad \\frac{s^*}{\\gamma_0J}\\ge\\frac{13}{10}.\n\\tag{5.2}",
       "labels": [
-        "eq:legacy-7.1"
+        "eq:5.2"
       ]
     },
     {
@@ -6478,10 +6478,10 @@
     },
     {
       "display": true,
-      "sourceTex": "J_\\vartheta=\\frac{75-14\\vartheta}{480},\\qquad\nM_{\\vartheta,-}=M_{\\vartheta,+}=\\frac{3-2\\vartheta}{1152},\n\\qquad\na_{+,\\vartheta}\n=1-\\frac{4(M_{\\vartheta,-}+M_{\\vartheta,+})}{J_\\vartheta}.\n\\tag{5.3}\\label{eq:legacy-K.9}",
+      "sourceTex": "J_\\vartheta=\\frac{75-14\\vartheta}{480},\\qquad\nM_{\\vartheta,-}=M_{\\vartheta,+}=\\frac{3-2\\vartheta}{1152},\n\\qquad\na_{+,\\vartheta}\n=1-\\frac{4(M_{\\vartheta,-}+M_{\\vartheta,+})}{J_\\vartheta}.\n\\tag{5.3}\\label{eq:5.3}",
       "tex": "J_\\vartheta=\\frac{75-14\\vartheta}{480},\\qquad\nM_{\\vartheta,-}=M_{\\vartheta,+}=\\frac{3-2\\vartheta}{1152},\n\\qquad\na_{+,\\vartheta}\n=1-\\frac{4(M_{\\vartheta,-}+M_{\\vartheta,+})}{J_\\vartheta}.\n\\tag{5.3}",
       "labels": [
-        "eq:legacy-K.9"
+        "eq:5.3"
       ]
     },
     {
@@ -6516,10 +6516,10 @@
     },
     {
       "display": true,
-      "sourceTex": "a_{+,\\vartheta}-a_{+,0}\n=\\frac{24\\vartheta}{5(75-14\\vartheta)}>0,\\qquad\nJ_\\vartheta a_{+,\\vartheta}-J_0a_{+,0}\n=-\\frac{11\\vartheta}{720}<0.\n\\tag{5.4}\\label{eq:legacy-7.2}",
+      "sourceTex": "a_{+,\\vartheta}-a_{+,0}\n=\\frac{24\\vartheta}{5(75-14\\vartheta)}>0,\\qquad\nJ_\\vartheta a_{+,\\vartheta}-J_0a_{+,0}\n=-\\frac{11\\vartheta}{720}<0.\n\\tag{5.4}\\label{eq:5.4}",
       "tex": "a_{+,\\vartheta}-a_{+,0}\n=\\frac{24\\vartheta}{5(75-14\\vartheta)}>0,\\qquad\nJ_\\vartheta a_{+,\\vartheta}-J_0a_{+,0}\n=-\\frac{11\\vartheta}{720}<0.\n\\tag{5.4}",
       "labels": [
-        "eq:legacy-7.2"
+        "eq:5.4"
       ]
     },
     {
@@ -6757,7 +6757,7 @@
       "labels": []
     }
   ],
-  "importedMarkdownSha256": "914cd2a95f797a30933bdf83b6738d8dbbbec15258df58e39ab3889261bc06b0",
+  "importedMarkdownSha256": "05acf9d4fbf1672f1723f33add85e586d8d4d3b03f31151e7527ce8c15b160b4",
   "transformations": [
     "Seven main TeX input files contain five numbered sections and eleven subsections; recursively included main-text proofs are retained.",
     "TeX line wrapping, layout commands, font styling, and text accents are converted to equivalent web markup.",

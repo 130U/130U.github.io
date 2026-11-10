@@ -30,7 +30,7 @@ function readResearch(slug: string, repository = slug) {
 const selectedResearch = readResearch("certified-valuation-arithmetic-asian-options");
 const roughHestonResearch = {
   ...readResearch("certified-rough-heston-valuation"),
-  sourceUrl: "https://github.com/130U/certified-rough-heston-valuation/blob/f97a4a183f671bdd89716974bb581dce4aeff499/ARTICLE.md",
+  sourceUrl: "https://github.com/130U/certified-rough-heston-valuation/blob/7b6293bd1ac0877e373cc2aeb5e8dcb038ccaf65/ARTICLE.md",
 };
 const dependenceResearch = readResearch("critical-dependence-stress-for-portfolio-diversification", "mathematical-finance-project");
 export const selectedResearchProjects = [dependenceResearch, selectedResearch, roughHestonResearch];

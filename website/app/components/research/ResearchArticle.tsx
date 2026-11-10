@@ -3,7 +3,7 @@ import { Fragment, type CSSProperties } from "react";
 import { ReturnArrow } from "../ReturnArrow";
 import { SiteShell } from "../SiteShell";
 import { ArticleReadingLayout } from "../article/ArticleReadingLayout";
-import { ArchitecturalContext, ExperienceDiagram, ExperienceMetadata, KeyContributions } from "../experience/ExperienceDetails";
+import { ExperienceDiagram, ExperienceMetadata, KeyContributions, ProblemAndApproach } from "../experience/ExperienceDetails";
 import type { ShowcaseEntry } from "../../lib/content/experience-showcase";
 import type { ResearchArticleContent, ResearchCell, ResearchInline } from "../../lib/content/research-markdown";
 import { renderResearchMath } from "../../lib/content/research-math";
@@ -180,10 +180,10 @@ export function ResearchArticle({ project, active, returnPath, returnLabel, titl
         </header>
 
         <ArticleReadingLayout
-          overview={showcase ? <><KeyContributions entry={showcase} /><ArchitecturalContext entry={showcase} /></> : renderedBlocks.slice(firstHeading, bodyStart)}
+          overview={showcase ? <><ProblemAndApproach entry={showcase} /><KeyContributions entry={showcase} /></> : renderedBlocks.slice(firstHeading, bodyStart)}
           items={[
+            ...(showcase?.problemAndApproach ? [{ id: "problem-and-approach", text: showcase.problemAndApproach.title, level: 1 }] : []),
             ...(showcase ? [{ id: "key-contributions", text: showcase.contributionsLabel, level: 1 }] : []),
-            ...(showcase?.architecturalContext ? [{ id: "architectural-context", text: showcase.architecturalContext.title, level: 1 }] : []),
             ...project.blocks.filter((block) => block.type === "heading").map((heading) => ({ id: heading.id, text: headingPresentations.get(heading.id)!.text, level: heading.level - 1 })),
           ]}
         >

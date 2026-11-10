@@ -1,7 +1,7 @@
 {
   "repository": "130U/mathematical-finance-project",
-  "commit": "3cc4c7e9b36e77027962999b932a1df7972cd2ed",
-  "commitDate": "2026-10-26T17:39:13Z",
+  "commit": "dbb0a1003d5c37b13041229e8a1a707e3f247cde",
+  "commitDate": "2026-11-09T22:58:19Z",
   "fetchedWith": "GitHub connector commit/tree pinning and fetch_file base64 downloads checked against Git blob SHA-1",
   "files": [
     {
@@ -26,18 +26,18 @@
     },
     {
       "path": "paper/source/main-classification-flow.tex",
-      "sha": "679500583a2df9c46c106e3a3b4ec3a7018e4e27",
-      "size": 20185
+      "sha": "5fda8f5f4dad9e3b830c1b173cc9869c331b759e",
+      "size": 19905
     },
     {
       "path": "paper/source/main-crossing-proof.tex",
-      "sha": "ed061612967d87cec33ffe8c667d3052d810f75c",
-      "size": 4373
+      "sha": "394d003c1bdea0f52c5e4ea99559c7fce43d83e8",
+      "size": 4308
     },
     {
       "path": "paper/source/main-crossing.tex",
-      "sha": "f62b71011445d97f76ce606b6f80967ed490b08a",
-      "size": 8624
+      "sha": "d2fab123bf585ebd7d6fb342be26c0fa4f80c995",
+      "size": 8575
     },
     {
       "path": "paper/source/main-introduction.tex",
@@ -46,28 +46,28 @@
     },
     {
       "path": "paper/source/main-model-benchmark.tex",
-      "sha": "11a21a33732f4dde16faab00c50f1e31acd991ac",
-      "size": 23329
+      "sha": "3875f876ef314419bd26acdb2901f7fee78b3fe2",
+      "size": 23162
     },
     {
       "path": "paper/source/main-quantitative.tex",
-      "sha": "05800ce07c7cf521d7871b3dcfde8dd307e0d9dc",
-      "size": 11615
+      "sha": "5894323e2758084810b76b9bc207e006c1140824",
+      "size": 11553
     },
     {
       "path": "paper/source/main-scope.tex",
-      "sha": "8af333921870657878dbeed566884da28215b644",
-      "size": 4057
+      "sha": "c0a61a09427979aa752b14e2f852000d325281bd",
+      "size": 4043
     },
     {
       "path": "paper/source/main-variational-proof.tex",
-      "sha": "a439c57d8164c99b27e868d44e8dc8807cfbc833",
-      "size": 3674
+      "sha": "ba3c91ec9c92fdfd2c6ad71f232bb81887d34de5",
+      "size": 3667
     },
     {
       "path": "paper/source/main-variational.tex",
-      "sha": "0f9ced9de7af17a0d5751358ae76c984887816a6",
-      "size": 9320
+      "sha": "dd95fd911c5caf43794595d56688407ef711fd6b",
+      "size": 9264
     },
     {
       "path": "paper/source/paper.tex",
@@ -81,33 +81,33 @@
     },
     {
       "path": "paper/source/technical-cost-proof.tex",
-      "sha": "c40ce68d78a89c723ab8aa6eb0eed1c6b306cd0b",
-      "size": 2817
+      "sha": "971784fbb37c00ffbfd8244d5f4c941cb33db2a3",
+      "size": 2773
     },
     {
       "path": "paper/source/technical-efficiency-identity.tex",
-      "sha": "428f2d1c87c98240ddf300f6e2bead93935fed0a",
-      "size": 1603
+      "sha": "b188c94e0d4745dc71fa48167de7e0e4b62be369",
+      "size": 1589
     },
     {
       "path": "paper/source/technical-flow-proof.tex",
-      "sha": "d11550c25c734569593f8047c11769261f140411",
-      "size": 7861
+      "sha": "734c3b233033bbedf3015185685a227a14edb945",
+      "size": 7787
     },
     {
       "path": "paper/source/technical-limit.tex",
-      "sha": "b7f280ebf1472ec9ce9a9864842936b60a6c3666",
-      "size": 12651
+      "sha": "fb04ad1228419c5affc10a3d266734345d3f2bc3",
+      "size": 12423
     },
     {
       "path": "paper/source/technical-mixture-obstruction.tex",
-      "sha": "d3b3f854872e12fd31e1c35f3dfc44c5a5f3805d",
-      "size": 1423
+      "sha": "7172e4ab665902cd3ab060a47ffea3ed4954f818",
+      "size": 1416
     },
     {
       "path": "paper/source/technical-quantitative.tex",
-      "sha": "ce04cb9bf6d5c6c10385b0f5159a4da9598026a0",
-      "size": 6569
+      "sha": "9c1c919e4bb9709defe13fb8873d27cb77618991",
+      "size": 6520
     },
     {
       "path": "paper/source/technical-reference.tex",
@@ -116,13 +116,13 @@
     },
     {
       "path": "paper/source/technical-threshold-statement.tex",
-      "sha": "fef5cc5c5d8cd4c1154957062c7eda42bc5627e2",
-      "size": 481
+      "sha": "4955c4f0e239365098d4c2c71d53ff6c56fad2ed",
+      "size": 474
     },
     {
       "path": "paper/source/technical-variational-proof.tex",
-      "sha": "ebb9c6f3db465e375ed4960691ef00a437e58f59",
-      "size": 19100
+      "sha": "f60f6fa47576f16977f548a3b95bffb8c32a1286",
+      "size": 18761
     }
   ]
 }
