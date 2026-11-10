@@ -175,7 +175,7 @@
       "id": 6,
       "categoryId": "02",
       "organization": "Euromonitor International",
-      "summary": "I led the China workstream of a global market-entry engagement covering China, Japan, and the Middle East for a premium European appliance brand. I analyzed approximately 50,000 e-commerce listings alongside consumer evidence and policy research to recommend local products, pricing, channels, and marketing while maintaining the client's global positioning.",
+      "summary": "A premium European appliance brand was planning its entry into China, Japan, and the Middle East, and I led the China workstream. Working from approximately 50,000 e-commerce listings, consumer reviews, and policy research, I recommended the products, prices, channels, and marketing for China that would keep the brand's global positioning intact.",
       "readMoreLabel": "Read More",
       "detailTitle": "China Market Entry for a Premium European Appliance Brand",
       "metadata": {
@@ -185,12 +185,12 @@
       },
       "contributionsLabel": "Key Contributions",
       "keyContributions": [
-        "I built a MECE analytical framework spanning product fit, pricing, channels, marketing, and policy, defining which elements of the client's premium positioning should remain consistent globally and where the China strategy required local adaptation.",
-        "I specified data requirements across five e-commerce platforms and seven appliance categories, coordinating with data scientists on collection and local analysts on validation. I owned downstream processing and interpretation of approximately 50,000 listings in Python, standardizing attributes, efficiency labels, prices, promotions, and reviews while preserving channel-specific observations.",
-        "I mapped competitors in Tableau by category, price band, efficiency, and features. Combining product comparisons with consumer reviews, I identified relatively underserved segments, including high-efficiency products at mid- to high-price points, and assessed opportunities in tier-1 and tier-2 cities.",
-        "I evaluated the European portfolio against Chinese usage needs, product dimensions, and efficiency requirements. I recommended local assortments and compared the brand's website, e-commerce, physical retail, and channel partnerships, incorporating Xiaohongshu and Douyin into marketing analysis.",
-        "I researched efficiency standards, subsidies, certification, and market access through published sources and expert interviews, including think-tank discussions. I built entry scenarios by category and city tier, translating current requirements and expected policy changes into product-introduction and timing recommendations.",
-        "I delivered the China market report and represented the workstream in global project meetings, presenting the evidence behind product, pricing, channel, and marketing recommendations and coordinating green-product definitions and policy assumptions. I documented field mappings and processing rules in a reusable template for subsequent regional analysis.",
+        "I structured the analysis as a MECE framework of product fit, pricing, channels, marketing, and policy, and set out for each which elements of the client's premium positioning had to stay consistent worldwide and where China required local adaptation.",
+        "I specified the data to collect across five e-commerce platforms and seven appliance categories, working with data scientists on collection and local analysts on validation. I processed and interpreted approximately 50,000 listings in Python myself, standardizing attributes, efficiency labels, prices, promotions, and reviews and keeping channel-specific observations.",
+        "I mapped competitors in Tableau by category, price band, efficiency, and features. From product comparisons and consumer reviews, I identified relatively underserved segments, including high-efficiency products at mid- to high-price points, and assessed opportunities in tier-1 and tier-2 cities.",
+        "I checked the European portfolio against Chinese usage needs, product dimensions, and efficiency requirements, and recommended local assortments. I compared the brand's website, e-commerce, physical retail, and channel partnerships as routes to market, and brought Xiaohongshu and Douyin into the marketing analysis.",
+        "I researched efficiency standards, subsidies, certification, and market access through published sources and expert interviews, including think-tank discussions. I built entry scenarios by category and city tier, and used current requirements and expected policy changes to recommend which products to introduce and when.",
+        "I delivered the China market report and represented the workstream in global project meetings, where I presented the evidence behind the product, pricing, channel, and marketing recommendations and coordinated green-product definitions and policy assumptions. I documented field mappings and processing rules in a reusable template for subsequent regional analysis.",
         "I received a full-time offer from Euromonitor's consulting team during the internship."
       ],
       "notes": []
@@ -199,7 +199,7 @@
       "id": 7,
       "categoryId": "02",
       "organization": "China Construction Bank",
-      "summary": "I applied statistical methods to sustainability assessment and green-credit screening within China Construction Bank's internal framework. I combined company data, historical assessments, and explicit eligibility rules to support candidate review, then documented the method for product managers and risk officers evaluating its use on a platform.",
+      "summary": "China Construction Bank's internal framework assessed sustainability on more than 30 indicators, some of which carried overlapping information. I used PCA and historically labeled cases to compare green-credit candidates on fewer dimensions, tested the ranked shortlist against the framework's minimum requirements, and documented the method for the product managers and risk officers evaluating it for platform use.",
       "readMoreLabel": "Read More",
       "detailTitle": "PCA-Based Sustainability Analysis and Green-Credit Screening",
       "metadata": {
@@ -210,8 +210,8 @@
       "contributionsLabel": "Key Contributions",
       "keyContributions": [
         "I analyzed financial, operational, and environmental data for approximately 2,000 entities within CCB's framework of more than 30 indicators, assessing overall scores alongside minimum requirements for individual metrics.",
-        "I used PCA to identify overlapping indicator information and construct compact representations for candidate comparison. I applied supervised learning to historically labeled cases, examining feature patterns associated with positive and negative assessments and adding empirical evidence to candidate assessment.",
-        "I incorporated life cycle assessment principles into sustainability analysis, examining operating and environmental factors alongside financial performance.",
+        "I used PCA to find where the indicators overlapped and to build compact representations for comparing candidates. I applied supervised learning to historically labeled cases to see which feature patterns went with positive and negative assessments, and used those patterns as empirical evidence in candidate assessment.",
+        "I applied life cycle assessment principles to the sustainability analysis, examining operating and environmental factors alongside financial performance.",
         "I tested the initial top 30% of ranked candidates against individual-metric and overall-score minimums, retaining approximately 28% of the full pool for further research and review.",
         "I reviewed selection and exclusion patterns across the pool, separating ranking cutoffs from threshold failures, and converted borderline cases, unmet requirements, and follow-up questions into a reusable checklist linked to the applicable screening rules.",
         "I delivered a methodology note explaining scoring logic, data sources, model behavior, and edge cases to product managers and risk officers assessing the method for platform use."
@@ -310,7 +310,7 @@
       "id": 12,
       "categoryId": "04",
       "organization": "Jones Lang LaSalle Capital Markets Team",
-      "summary": "I served as the project team's ESG lead on acquisition advisory for a Southeast Asian conglomerate seeking Chinese office properties. Working with JLL's internal ESG team, I connected asset screening, property valuation, and site-level diligence with the client's investment requirements and potential refurbishment or repositioning plans.",
+      "summary": "A Southeast Asian conglomerate was looking to buy office properties in China, and I was the project team's ESG lead on the acquisition advisory. Working with JLL's internal ESG team, I screened the candidate assets, underwrote the shortlist, and set site-diligence priorities against the client's investment requirements and its options to refurbish or reposition each building.",
       "readMoreLabel": "Read More",
       "detailTitle": "Office Investment Underwriting and ESG Due Diligence",
       "metadata": {
@@ -324,7 +324,7 @@
         "I developed a GRESB-informed desktop screen with approximately 40 ESG and operating indicators, coordinating with JLL's internal ESG team. It flagged environmental, operating, and capital-expenditure concerns that excluded approximately 40% of candidates before full valuation and due diligence.",
         "I structured diligence across management, performance, and development: ownership and SPV transparency, policy coverage, compliance, safety, and 12 months of continuous operating records. I benchmarked energy, carbon, water, waste, certifications, and upgrades against comparable properties matched by city, submarket, vintage, and building systems.",
         "I assessed upgrade, refurbishment, and extension risks through capital-expenditure and cash-flow analysis, using equipment age, chiller efficiency, building-management systems, sub-metering, air monitoring, and maintenance records as proxies where utility data were unavailable. I converted findings into red, amber, and green signals and asset-specific diligence priorities.",
-        "I underwrote shortlisted properties using discounted cash flow, replacement cost, and comparable transactions, incorporating operating conditions and upgrade requirements into valuation assumptions, cash-flow scenarios, and exit-risk assessments.",
+        "I underwrote shortlisted properties using discounted cash flow, replacement cost, and comparable transactions, and carried each property's operating conditions and upgrade requirements into its valuation assumptions, cash-flow scenarios, and exit-risk assessment.",
         "I built ten dashboards in Excel, Python, and Tableau to compare market fundamentals, valuations, ESG indicators, and scenario exposures across cities, assets, and the investment pipeline.",
         "I led bilingual briefings for capital-markets leadership and client managers, shaped site-visit sequencing and ESG questions, and delivered standardized asset books covering tenant concentration, weighted average lease expiry, vacancy, rents, operating costs, valuation models, and diligence findings."
       ],
@@ -334,7 +334,7 @@
       "id": 13,
       "categoryId": "04",
       "organization": "Hubble Network",
-      "summary": "Through a Duke Practicum, I led shipping, logistics, and industrial asset-tracking research for Hubble's Bluetooth satellite commercialization. I assessed where the technology's cost, accuracy, power consumption, and periodic reporting capabilities matched customer needs, translating technical and market evidence into recommendations for early applications.",
+      "summary": "Hubble was commercializing its Bluetooth satellite technology and had to choose its first markets. Through a Duke Practicum, I led the research on shipping, logistics, and industrial asset tracking, assessed where the technology's cost, accuracy, power consumption, and periodic reporting matched what customers needed, and recommended which applications to pursue first.",
       "readMoreLabel": "Read More",
       "detailTitle": "Bluetooth Satellite Commercialization and Market Selection",
       "metadata": {
@@ -345,10 +345,10 @@
       "contributionsLabel": "Key Contributions",
       "keyContributions": [
         "I led the shipping, logistics, and industrial tracking workstreams after Hubble's $20 million Series A and before its first satellite launches, and helped refocus the go-to-market brief on vertical-market selection by organizing opportunity scans, elimination criteria, detailed assessment, market sizing, and prioritization.",
-        "I translated stakeholder objectives, company cost data, and technical parameters into application assessments, comparing customer needs, incumbent solutions, accuracy, power consumption, and reporting frequency to identify promising uses for periodic location tracking.",
+        "I assessed each application from stakeholder objectives, company cost data, and technical parameters, comparing customer needs, incumbent solutions, accuracy, power consumption, and reporting frequency to identify promising uses for periodic location tracking.",
         "I prepared and conducted workstream interviews through Duke Pratt's alumni network, including sales professionals, contributing to a team research program covering approximately 20 fields, typically two or three alumni per field, and more than 100 hours of expert interviews.",
-        "I triangulated Fuqua business databases, official statistics, industry reports, competitor research, and interviews, applying SWOT and PESTLE and contributing market-sizing models, scenario forecasts, and sensitivity analyses to compare priority applications.",
-        "I integrated workstream findings into the team's evaluation of approximately 20 use cases, five recommended market directions, and 100-page strategy report, and presented conclusions to management and the board, explaining market attractiveness, competition, and the requirements for commercialization."
+        "I cross-checked Fuqua business databases, official statistics, industry reports, competitor research, and interviews, applied SWOT and PESTLE, and contributed market-sizing models, scenario forecasts, and sensitivity analyses to the comparison of priority applications.",
+        "My workstream's findings went into the team's evaluation of approximately 20 use cases, its five recommended market directions, and its 100-page strategy report. I presented the conclusions to management and the board, covering market attractiveness, competition, and what commercialization would require."
       ],
       "notes": []
     },
@@ -356,7 +356,7 @@
       "id": 14,
       "categoryId": "04",
       "organization": "SAIF Partners",
-      "summary": "I owned public-data research and governance screening for a Greater China dental-investment theme. Working with the VP and investment team, I prioritized subsectors and candidates, then translated governance concerns into investment recommendations, management questions, and on-site diligence priorities.",
+      "summary": "SAIF Partners was researching a dental-investment theme in Greater China, and I owned the public-data research and governance screening. Working with the VP and investment team, I narrowed a longlist of over 100 targets to a shortlist of more than ten, and wrote up the governance concerns as investment recommendations, questions for management, and priorities for on-site diligence.",
       "readMoreLabel": "Read More",
       "detailTitle": "Dental Investment Research and Governance Due Diligence",
       "metadata": {
@@ -371,7 +371,7 @@
         "I worked with the VP and investment team to narrow a longlist of 100+ targets to more than ten candidates. I profiled financing histories, valuation ranges, and investor bases, and assigned pass, watch, or exclude recommendations with regulatory, reputational, shareholder, and supplier-risk flags.",
         "I converted MSCI Corporate Governance and Corporate Behavior topics into ten subcategories and 33 diligence checks covering control complexity, related-party exposure, disclosure, audit quality, and business ethics.",
         "I authored pass, conditional, and deny memoranda to guide diligence depth and valuation discussions, specifying evidence requirements and management questions for governance issues requiring further investigation.",
-        "I presented governance and risk findings to partners, prompting two management meetings and additional auditor-tenure checks. I identified accounting and related-party concerns in two finalists and translated them into management questions and on-site diligence priorities."
+        "I presented governance and risk findings to partners, prompting two management meetings and additional auditor-tenure checks. I identified accounting and related-party concerns in two finalists and wrote them up as questions for management and priorities for on-site diligence."
       ],
       "notes": []
     },
@@ -379,7 +379,7 @@
       "id": 15,
       "categoryId": "04",
       "organization": "CITIC Securities",
-      "summary": "I supported the Agriculture Research Group's sector analysis and research-report work, contributing evidence for internal investment-strategy discussions.",
+      "summary": "I worked on sector analysis and research reports in the Agriculture Research Group and prepared material for its internal investment-strategy discussions.",
       "readMoreLabel": "Read More",
       "detailTitle": "Agriculture Equity Research and Valuation",
       "metadata": {
@@ -389,7 +389,7 @@
       },
       "contributionsLabel": "Key Contributions",
       "keyContributions": [
-        "I compiled sector datasets and stress-tested valuation assumptions, and synthesized market and trading commentary for internal investment-strategy discussions, connecting industry evidence with the team's evaluation of investment cases and research-report collaboration."
+        "I compiled sector datasets, stress-tested valuation assumptions, and summarized market and trading commentary for the team's internal investment-strategy discussions and research reports."
       ],
       "notes": []
     },
@@ -397,7 +397,7 @@
       "id": 16,
       "categoryId": "04",
       "organization": "EY-Parthenon",
-      "summary": "I supported a digital-transformation engagement for a leading Chinese company preparing to list, with a focus on business-line restructuring.",
+      "summary": "I worked on the business-line restructuring in a digital-transformation engagement for a leading Chinese company preparing to list.",
       "readMoreLabel": "Read More",
       "detailTitle": "Business-Line Restructuring for Digital Transformation",
       "metadata": {
@@ -407,7 +407,7 @@
       },
       "contributionsLabel": "Key Contributions",
       "keyContributions": [
-        "I contributed to the team's review and restructuring of business lines, helping improve visibility into operations and supplying inputs for cost and efficiency analysis."
+        "I worked on the team's review and restructuring of the client's business lines, aimed at clearer visibility into operations, and prepared inputs for the cost and efficiency analysis."
       ],
       "notes": []
     },
@@ -415,7 +415,7 @@
       "id": 17,
       "categoryId": "05",
       "organization": "Independent STEM Olympiad Training Practice",
-      "summary": "I independently coached students preparing for advanced physics Olympiads through online and in-person instruction, combining subject teaching with competition problem-solving practice.",
+      "summary": "I ran my own coaching practice for students preparing for advanced physics Olympiads, online and in person. I taught the physics and wrote original problems for competition practice.",
       "readMoreLabel": "Read More",
       "detailTitle": "Advanced Physics Olympiad Instruction",
       "metadata": {
@@ -425,7 +425,7 @@
       },
       "contributionsLabel": "Key Contributions",
       "keyContributions": [
-        "I coached multiple students participating in USAPhO and U.S. Physics Team selection, developing rigorous derivations, clearly structured written solutions, and problem-solving methods suited to competition time constraints.",
+        "I coached several students competing in USAPhO and U.S. Physics Team selection. We worked on rigorous derivations, clearly structured written solutions, and problem-solving methods suited to competition time limits.",
         "I delivered online and in-person IPhO-level training camps in mechanics, electromagnetism, thermodynamics, optics, modern physics, and advanced mathematical methods."
       ],
       "notes": []
@@ -434,7 +434,7 @@
       "id": 18,
       "categoryId": "05",
       "organization": "The High School Attached to Hunan Normal University",
-      "summary": "I trained in physics and mathematics Olympiads and served as a peer mentor in the school's nationally leading physics competition program, combining advanced study with collaborative problem solving.",
+      "summary": "I trained for physics and mathematics Olympiads in the school's nationally leading physics competition program and mentored teammates in its study groups.",
       "readMoreLabel": "Read More",
       "detailTitle": "Advanced Olympiad Training, Awards, and Peer Mentoring",
       "metadata": {
@@ -444,7 +444,7 @@
       },
       "contributionsLabel": "Key Contributions",
       "keyContributions": [
-        "I mentored teammates in mechanics and electromagnetism study groups, working through advanced problems and explaining the derivations behind solution methods, and presented findings to the full competition team, sharing methods developed through individual study and collaborative discussion.",
+        "I mentored teammates in the mechanics and electromagnetism study groups, working through advanced problems and explaining the derivations behind each solution method. I also presented methods from my own study and from group discussion to the full competition team.",
         "I earned provincial- and national-level competition awards across physics and mathematics Olympiads.",
         "I completed intensive training in mechanics, electromagnetism, thermodynamics, optics, and modern physics, including undergraduate-level classical mechanics, electrodynamics, statistical physics, and quantum mechanics.",
         "I studied mathematical analysis, linear algebra, calculus, ordinary differential equations, and numerical analysis, applying these tools to nonstandard physics problems and extended derivations."

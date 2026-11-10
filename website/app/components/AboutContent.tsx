@@ -36,9 +36,14 @@ export function AboutContent({ hasHero = false }: { hasHero?: boolean }) {
               autonomous systems.
             </p>
             <p>
-              AI is now the center of that work. I build and experiment to
-              understand these systems firsthand, and to work out what is worth
-              doing with them.
+              Most of it is in finance and AI. From 2023 to 2026 I designed
+              review and verification systems with a foundation model
+              developer, a frontier AI lab, and a global alternative asset
+              manager. I also build systems of my own:{" "}
+              <a className={styles.inlineLink} href="https://github.com/130U/130U-FinLLM" target="_blank" rel="noopener noreferrer">a language model</a>{" "}
+              trained from scratch on financial text, and{" "}
+              <a className={styles.inlineLink} href="https://github.com/130U/agent-evaluation-methodology" target="_blank" rel="noopener noreferrer">a gate</a>{" "}
+              that decides which evaluation feedback an agent&apos;s optimizer may act on.
             </p>
           </div>
         </div>
@@ -99,8 +104,26 @@ export function AboutContent({ hasHero = false }: { hasHero?: boolean }) {
         </div>
       </section>
 
-      <section className={styles.section} id="contact" aria-label="Contact">
+      <section className={styles.section} id="fellowship" aria-labelledby="fellowship-heading">
         <p className={styles.sectionIndex} aria-hidden="true">04</p>
+        <div className={styles.sectionBody}>
+          <h2 className={styles.sectionTitle} id="fellowship-heading">Fellowship</h2>
+          <div className={`ledger ${styles.fellowship}`}>
+            <div className="ledger-item">
+              <h3 className="ledger-title">Sequoia Fellow</h3>
+              <div className="ledger-body">
+                <p className="ledger-prose">
+                  I am a fellow of the program that{" "}
+                  <a className={styles.inlineLink} href="https://www.hongshan.com/" target="_blank" rel="noopener noreferrer">HongShan</a>, the venture firm formerly known as Sequoia China, runs with its portfolio companies. It selects people early in their careers by application and brings them into the firm&apos;s circle of founders, mentors, and peers in technology and entrepreneurship. Fellows stay on as an alumni community, with access to the firm&apos;s closed-door events and industry exchanges.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section className={styles.section} id="contact" aria-label="Contact">
+        <p className={styles.sectionIndex} aria-hidden="true">05</p>
         <div className={styles.sectionBody}>
           <ul className={styles.contactStrip}>
             <li>
