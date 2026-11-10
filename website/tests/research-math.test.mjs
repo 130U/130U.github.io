@@ -10,7 +10,7 @@ const ROOT = fileURLToPath(new URL("../", import.meta.url));
 const PROJECTS = [
   ["statistical-inference-and-resource-allocation-in-expert-data-production", 140],
   ["task-validity-in-financial-synthetic-data", 98],
-  ["verification-and-supervision-in-scientific-reasoning-tasks", 120],
+  ["verification-and-supervision-in-scientific-reasoning-tasks", 121],
   ["evidence-uncertainty-and-decision-guarantees-in-investment-research", 126],
 ];
 
@@ -65,7 +65,7 @@ function assertCompleteFormula(rendered, tex) {
   }
 }
 
-test("all 484 reviewed formulas have complete vector glyphs and exact accessible TeX", async () => {
+test("all 485 reviewed formulas have complete vector glyphs and exact accessible TeX", async () => {
   let total = 0;
   const mathematicalPaths = [];
   for (const [slug, expected] of PROJECTS) {
@@ -84,8 +84,8 @@ test("all 484 reviewed formulas have complete vector glyphs and exact accessible
     }
     total += formulas.length;
   }
-  assert.equal(total, 484);
-  assert.equal(createHash("sha256").update(JSON.stringify(mathematicalPaths)).digest("hex"), "b4e50040552babb5532d9b06f6a77ba910b7f061d244c9531c7c648963113a17", "All mathematical glyphs must retain the reviewed shapes and order");
+  assert.equal(total, 485);
+  assert.equal(createHash("sha256").update(JSON.stringify(mathematicalPaths)).digest("hex"), "6b4a25d027210cb196ecde66fb106062e894b1eb964cec59475f6bdef9386869", "All mathematical glyphs must retain the reviewed shapes and order");
 });
 
 test("display punctuation normalization changes only true sentence and equation-row termini", () => {

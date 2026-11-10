@@ -6,15 +6,15 @@ const sourceDirectory = new URL("../content/sources/selected-research/", import.
 const sources = [
   {
     key: "asian", slug: "certified-valuation-arithmetic-asian-options", file: "manuscript/report.md",
-    sourceCommit: "846bbe6acbaa4eaac07e20d5d2c566b3abc5456d", sourceBlob: "970c7fe3449a3a44fb32f6ae68d21c28d3cde3df",
-    sourceEditedAt: "2026-10-08T11:16:02Z", mainSections: 10,
+    sourceCommit: "625b5d3a9598972fe025c00944e9bc3ffbf76ac2", sourceBlob: "a314382648a37fcce53bffc2b1537c8c1c035943",
+    sourceEditedAt: "2026-10-26T09:52:39Z", mainSections: 10,
     appendixAnchor: "appendix-a-finite-certification-of-the-weighted-second-moment",
     description: "Certified pricing-error bounds for arithmetic Asian options under projected Euler, with common Gaussian smoothing, weak expansions, and posterior quantile transfer.",
   },
   {
     key: "rough", slug: "certified-rough-heston-valuation", file: "manuscript/merged-heston-en.md",
-    sourceCommit: "8d7264ce2f269a2e01f0b9dd80680bf70e50dcee", sourceBlob: "e1185699a3e0b5dc9a95a02f190cb4f52c715e49",
-    sourceEditedAt: "2026-10-08T11:08:15Z", mainSections: 8,
+    sourceCommit: "7b6293bd1ac0877e373cc2aeb5e8dcb038ccaf65", sourceBlob: "86ebfd16a543d96c61a179b6c8d650c4ded2b84d",
+    sourceEditedAt: "2026-11-10T00:02:57Z", mainSections: 8,
     appendixAnchor: "appendix-a-probability-model-and-strip-transform",
     description: "Deterministic joint pricing-error certificates for stored rough Heston outputs, finite-history propagation, portfolios, and finite-candidate decisions.",
   },
@@ -24,7 +24,7 @@ const receipts = [];
 for (const config of sources) {
   const contentUrl = new URL(`../content/selected-research/${config.slug}.json`, import.meta.url);
   const bytes = await readFile(new URL(`${config.key}-source.md`, sourceDirectory));
-  const source = bytes.toString("utf8");
+  const source = bytes.toString("utf8").replace(/\r\n/gu, "\n");
   const blob = createHash("sha1").update(`blob ${bytes.length}\0`).update(bytes).digest("hex");
   if (blob !== config.sourceBlob) throw new Error(`The frozen ${config.key} manuscript does not match its GitHub blob.`);
   const title = source.match(/^# (.+)$/mu)?.[1];
@@ -57,5 +57,5 @@ for (const config of sources) {
     transformations: ["The title is rendered once by the page header.", "Relative file links resolve to the frozen GitHub commit.", "A paragraph links omitted appendices and supporting material to GitHub.", "Main text, all main-text tables, mathematical TeX and references are otherwise retained verbatim."],
   });
 }
-await writeFile(new URL("provenance.json", sourceDirectory), JSON.stringify({ fetchedAt: "2026-10-08", fetchedWith: "GitHub plugin: github_fetch branches and commits; github_fetch_file at exact commit", sources: receipts }, null, 2) + "\n");
+await writeFile(new URL("provenance.json", sourceDirectory), JSON.stringify({ fetchedAt: "2026-11-09", fetchedWith: "GitHub REST contents API at the exact commit; bytes checked against the Git blob SHA-1", sources: receipts }, null, 2) + "\n");
 console.log(`Imported ${receipts.length} complete main texts; provenance: ${fileURLToPath(new URL("provenance.json", sourceDirectory))}`);

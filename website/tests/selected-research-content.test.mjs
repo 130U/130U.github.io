@@ -15,8 +15,8 @@ function withoutArticleFigures(html) {
 }
 
 const PROJECTS = [
-  { key: "asian", slug: "certified-valuation-arithmetic-asian-options", commit: "846bbe6acbaa4eaac07e20d5d2c566b3abc5456d", blob: "970c7fe3449a3a44fb32f6ae68d21c28d3cde3df", sections: 10, tables: 11, formulas: 349 },
-  { key: "rough", slug: "certified-rough-heston-valuation", commit: "8d7264ce2f269a2e01f0b9dd80680bf70e50dcee", blob: "e1185699a3e0b5dc9a95a02f190cb4f52c715e49", sections: 8, tables: 13, formulas: 262 },
+  { key: "asian", slug: "certified-valuation-arithmetic-asian-options", commit: "625b5d3a9598972fe025c00944e9bc3ffbf76ac2", blob: "a314382648a37fcce53bffc2b1537c8c1c035943", sections: 10, tables: 11, formulas: 355 },
+  { key: "rough", slug: "certified-rough-heston-valuation", commit: "7b6293bd1ac0877e373cc2aeb5e8dcb038ccaf65", blob: "86ebfd16a543d96c61a179b6c8d650c4ded2b84d", sections: 8, tables: 13, formulas: 306 },
 ];
 
 function sourceFormulas(markdown) {
@@ -53,7 +53,7 @@ for (const expected of PROJECTS) {
   test(`${expected.key} main text and references are complete and match the frozen GitHub source`, async () => {
     const bytes = await readFile(new URL(`../content/sources/selected-research/${expected.key}-source.md`, import.meta.url));
     assert.equal(createHash("sha1").update(`blob ${bytes.length}\0`).update(bytes).digest("hex"), expected.blob);
-    const upstream = bytes.toString("utf8");
+    const upstream = bytes.toString("utf8").replace(/\r\n/gu, "\n");
     const article = JSON.parse(await readFile(new URL(`../content/selected-research/${expected.slug}.json`, import.meta.url), "utf8"));
     assert.equal(article.sourceCommit, expected.commit);
     assert.equal(article.sourceBlob, expected.blob);

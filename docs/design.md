@@ -222,7 +222,7 @@ only for the chapter being read; it is a sticky column when the field has room a
 disclosure when the viewport or text size narrows it. Each AI and legal article opens
 with its logic diagram under the record strip.
 
-AI pages present the scope disclosure, Key Contributions, Architectural Context, and
+AI pages present the scope disclosure, Problem and Approach, Key Contributions, and
 the numbered manuscript chapters. Selected Research headers hold the title, GitHub
 link, and Full Manuscript link; reading begins at Abstract, and appendices and
 supporting material link to the pinned manuscript on GitHub. Chapter headings display

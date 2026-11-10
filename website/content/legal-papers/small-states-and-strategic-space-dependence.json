@@ -99,15 +99,6 @@
     },
     {
       "type": "paragraph",
-      "text": "This Article makes five contributions. First, it builds a structured comparison around specific public functions and the decisions needed to perform them, and it defines practical autonomy as the capacity to make and implement a specified lawful public decision. Second, it identifies a distinct mechanism in each case: retained launch-permission authority in New Zealand, operational capability through divided responsibilities in Norway, and the planning and legislative information required alongside asset ownership in Luxembourg. Third, it formulates accountable acceptance as a decision standard for authorizing or procuring essential functions. Fourth, it translates that standard into proposed licensing and procurement terms covering operator information, significant changes, suspension, recovery, and service transition. Fifth, it analyzes collective agency through anti-satellite-testing commitments, UN consensus procedures, and ESA programme and voting rules, connecting national safeguards to collective restraint on debris and cross-border service disruption.",
-      "runs": [
-        {
-          "text": "This Article makes five contributions. First, it builds a structured comparison around specific public functions and the decisions needed to perform them, and it defines practical autonomy as the capacity to make and implement a specified lawful public decision. Second, it identifies a distinct mechanism in each case: retained launch-permission authority in New Zealand, operational capability through divided responsibilities in Norway, and the planning and legislative information required alongside asset ownership in Luxembourg. Third, it formulates accountable acceptance as a decision standard for authorizing or procuring essential functions. Fourth, it translates that standard into proposed licensing and procurement terms covering operator information, significant changes, suspension, recovery, and service transition. Fifth, it analyzes collective agency through anti-satellite-testing commitments, UN consensus procedures, and ESA programme and voting rules, connecting national safeguards to collective restraint on debris and cross-border service disruption."
-        }
-      ]
-    },
-    {
-      "type": "paragraph",
       "text": "Part II defines the comparison, its unit of analysis, and practical autonomy. Part III examines what international law supplies and what it leaves open. Part IV applies the comparison to New Zealand, Norway, and Luxembourg and sets out what it explains. Part V turns to participation and influence in multilateral governance. Part VI proposes safeguards for authorization, essential services, and public finance, and answers the principal objections. Part VII concludes.",
       "runs": [
         {
@@ -128,7 +119,7 @@
     },
     {
       "type": "paragraph",
-      "text": "\"Small state\" is a research category here, not a status recognized by space law. This Article uses a population ceiling of ten million as a transparent sampling screen, drawing on the founding membership convention of the Forum of Small States. This avoids defining small states by the very powerlessness this Article seeks to investigate.2 New Zealand, Norway, and Luxembourg fall comfortably within that screen. Population identifies the category; it does not establish a state's technical sophistication, fiscal position, or bargaining strength.",
+      "text": "\"Small state\" is a research category here, not a status recognized by space law. This Article uses a population ceiling of ten million as a transparent sampling screen, drawing on the founding membership convention of the Forum of Small States. This avoids defining small states by the very powerlessness this Article seeks to investigate.2 New Zealand, Norway, and Luxembourg fall comfortably within that screen. Population identifies the category and leaves technical sophistication, fiscal position, and bargaining strength to be examined case by case.",
       "runs": [
         {
           "text": "\"Small state\" is a research category here, not a status recognized by space law. This Article uses a population ceiling of ten million as a transparent sampling screen, drawing on the founding membership convention of the Forum of Small States. This avoids defining small states by the very powerlessness this Article seeks to investigate."
@@ -139,7 +130,7 @@
           "footnoteRef": "2"
         },
         {
-          "text": " New Zealand, Norway, and Luxembourg fall comfortably within that screen. Population identifies the category; it does not establish a state's technical sophistication, fiscal position, or bargaining strength."
+          "text": " New Zealand, Norway, and Luxembourg fall comfortably within that screen. Population identifies the category and leaves technical sophistication, fiscal position, and bargaining strength to be examined case by case."
         }
       ]
     },
@@ -375,10 +366,10 @@
     },
     {
       "type": "paragraph",
-      "text": "Small states have rights of use, jurisdictional powers, and procedural protections. They also bear responsibilities and encounter remedial limits. The resulting policy problem concerns how those rights are implemented through domestic administration and particular arrangements. Procurement and licensing are therefore central to international space governance, even though they cannot replace international obligations or eliminate shared orbital hazards.",
+      "text": "Small states have rights of use, jurisdictional powers, and procedural protections. They also bear responsibilities and encounter remedial limits. The resulting policy problem concerns how those rights are implemented through domestic administration and particular arrangements. Procurement and licensing are therefore central to international space governance, alongside the international obligations and shared orbital hazards that lie beyond their reach.",
       "runs": [
         {
-          "text": "Small states have rights of use, jurisdictional powers, and procedural protections. They also bear responsibilities and encounter remedial limits. The resulting policy problem concerns how those rights are implemented through domestic administration and particular arrangements. Procurement and licensing are therefore central to international space governance, even though they cannot replace international obligations or eliminate shared orbital hazards."
+          "text": "Small states have rights of use, jurisdictional powers, and procedural protections. They also bear responsibilities and encounter remedial limits. The resulting policy problem concerns how those rights are implemented through domestic administration and particular arrangements. Procurement and licensing are therefore central to international space governance, alongside the international obligations and shared orbital hazards that lie beyond their reach."
         }
       ]
     },
@@ -407,7 +398,7 @@
     },
     {
       "type": "paragraph",
-      "text": "New Zealand's public objective combines a viable launch sector with the ability to determine which activities may proceed from its territory. The relevant external actors include foreign payload operators and suppliers of sensitive technology. Its 2016 technology safeguards agreement with the United States facilitated safeguarded access to American technology; the official treaty record also identifies a side arrangement concerning the exercise of specified New Zealand agency powers.15 Technology access and retained domestic authority thus coexist in the institutional design. The treaty summary alone, however, cannot establish how every conflict between them would be resolved.",
+      "text": "New Zealand's public objective combines a viable launch sector with the ability to determine which activities may proceed from its territory. The relevant external actors include foreign payload operators and suppliers of sensitive technology. Its 2016 technology safeguards agreement with the United States facilitated safeguarded access to American technology; the official treaty record also identifies a side arrangement concerning the exercise of specified New Zealand agency powers.15 Technology access and retained domestic authority thus coexist in the institutional design. How a conflict between them would be resolved is a question the treaty summary leaves open.",
       "runs": [
         {
           "text": "New Zealand's public objective combines a viable launch sector with the ability to determine which activities may proceed from its territory. The relevant external actors include foreign payload operators and suppliers of sensitive technology. Its 2016 technology safeguards agreement with the United States facilitated safeguarded access to American technology; the official treaty record also identifies a side arrangement concerning the exercise of specified New Zealand agency powers."
@@ -418,7 +409,7 @@
           "footnoteRef": "15"
         },
         {
-          "text": " Technology access and retained domestic authority thus coexist in the institutional design. The treaty summary alone, however, cannot establish how every conflict between them would be resolved."
+          "text": " Technology access and retained domestic authority thus coexist in the institutional design. How a conflict between them would be resolved is a question the treaty summary leaves open."
         }
       ]
     },
@@ -629,7 +620,7 @@
     },
     {
       "type": "paragraph",
-      "text": "Luxembourg's LUXEOSys programme supplies an adverse check on the sufficiency of acquiring a national asset. Here the relevant public decision concerned the resources and organization necessary for an observation system, including its ground segment and operation. The Cour des comptes' 2022 special audit identified planning omissions, underestimated staffing, and coordination problems in explaining the increase in the legislatively authorized envelope from EUR170 million to EUR309 million, excluding VAT, in 2020.24 These figures are expenditure authorizations, not two measurements of money already spent.",
+      "text": "Luxembourg's LUXEOSys programme supplies an adverse check on the sufficiency of acquiring a national asset. Here the relevant public decision concerned the resources and organization necessary for an observation system, including its ground segment and operation. The Cour des comptes' 2022 special audit identified planning omissions, underestimated staffing, and coordination problems in explaining the increase in the legislatively authorized envelope from EUR170 million to EUR309 million, excluding VAT, in 2020.24 Both figures are expenditure authorizations.",
       "runs": [
         {
           "text": "Luxembourg's LUXEOSys programme supplies an adverse check on the sufficiency of acquiring a national asset. Here the relevant public decision concerned the resources and organization necessary for an observation system, including its ground segment and operation. The Cour des comptes' 2022 special audit identified planning omissions, underestimated staffing, and coordination problems in explaining the increase in the legislatively authorized envelope from EUR170 million to EUR309 million, excluding VAT, in 2020."
@@ -640,16 +631,16 @@
           "footnoteRef": "24"
         },
         {
-          "text": " These figures are expenditure authorizations, not two measurements of money already spent."
+          "text": " Both figures are expenditure authorizations."
         }
       ]
     },
     {
       "type": "paragraph",
-      "text": "The mechanism concerns information and implementation. Parliament can authorize a satellite purchase while lacking a reliable account of the associated organization and lifetime obligations. Contractors may supply hardware or expertise, but a public buyer still needs the ability to define requirements and integrate the system. Legal title cannot perform those functions. Conversely, obtaining outside expertise can improve national decision-making rather than replace it. The audit does not establish whether purchased imagery or a pooled programme would have achieved the same objectives more cheaply.",
+      "text": "The mechanism concerns information and implementation. Parliament can authorize a satellite purchase while lacking a reliable account of the associated organization and lifetime obligations. Contractors may supply hardware or expertise, but a public buyer still needs the ability to define requirements and integrate the system. Legal title cannot perform those functions. Conversely, obtaining outside expertise can improve national decision-making rather than replace it. Whether purchased imagery or a pooled programme would have achieved the same objectives more cheaply lay outside the audit.",
       "runs": [
         {
-          "text": "The mechanism concerns information and implementation. Parliament can authorize a satellite purchase while lacking a reliable account of the associated organization and lifetime obligations. Contractors may supply hardware or expertise, but a public buyer still needs the ability to define requirements and integrate the system. Legal title cannot perform those functions. Conversely, obtaining outside expertise can improve national decision-making rather than replace it. The audit does not establish whether purchased imagery or a pooled programme would have achieved the same objectives more cheaply."
+          "text": "The mechanism concerns information and implementation. Parliament can authorize a satellite purchase while lacking a reliable account of the associated organization and lifetime obligations. Contractors may supply hardware or expertise, but a public buyer still needs the ability to define requirements and integrate the system. Legal title cannot perform those functions. Conversely, obtaining outside expertise can improve national decision-making rather than replace it. Whether purchased imagery or a pooled programme would have achieved the same objectives more cheaply lay outside the audit."
         }
       ]
     },
@@ -693,10 +684,10 @@
     },
     {
       "type": "paragraph",
-      "text": "The cases test three decisions within a common problem. New Zealand concerns permission: can the state apply its own assessment to an externally connected activity? Norway concerns operation: can cooperation deliver a function under specified national control? Luxembourg concerns informed commitment: can public institutions understand and govern what they have authorized? Permission, operational capability, and information are complementary conditions, not substitutes. Stronger control at one stage does not answer the questions arising at another.",
+      "text": "The cases test three decisions within a common problem. New Zealand concerns permission: can the state apply its own assessment to an externally connected activity? Norway concerns operation: can cooperation deliver a function under specified national control? Luxembourg concerns informed commitment: can public institutions understand and govern what they have authorized? Permission, operational capability, and information are complementary conditions, and each stage raises its own questions.",
       "runs": [
         {
-          "text": "The cases test three decisions within a common problem. New Zealand concerns permission: can the state apply its own assessment to an externally connected activity? Norway concerns operation: can cooperation deliver a function under specified national control? Luxembourg concerns informed commitment: can public institutions understand and govern what they have authorized? Permission, operational capability, and information are complementary conditions, not substitutes. Stronger control at one stage does not answer the questions arising at another."
+          "text": "The cases test three decisions within a common problem. New Zealand concerns permission: can the state apply its own assessment to an externally connected activity? Norway concerns operation: can cooperation deliver a function under specified national control? Luxembourg concerns informed commitment: can public institutions understand and govern what they have authorized? Permission, operational capability, and information are complementary conditions, and each stage raises its own questions."
         }
       ]
     },
@@ -906,10 +897,10 @@
     },
     {
       "type": "paragraph",
-      "text": "Alignment presents a further challenge. A reliable partner may provide continuity because interests coincide even without elaborate legal safeguards; a determined government may disregard contractual expectations when they diverge. The cases do not establish continuity after a severe rupture in the partners' interests. These points reduce the plausibility of treating contract drafting as a complete solution. They do not remove the value of clarification, monitoring, and review during ordinary operations or limited disputes. The appropriate test is whether a safeguard improves a feasible arrangement relative to its cost, not whether it guarantees independence under every contingency.",
+      "text": "Alignment presents a further challenge. A reliable partner may provide continuity because interests coincide even without elaborate legal safeguards; a determined government may disregard contractual expectations when they diverge. The cases do not establish continuity after a severe rupture in the partners' interests. These points reduce the plausibility of treating contract drafting as a complete solution. They do not remove the value of clarification, monitoring, and review during ordinary operations or limited disputes. The appropriate test is whether a safeguard improves a feasible arrangement relative to its cost.",
       "runs": [
         {
-          "text": "Alignment presents a further challenge. A reliable partner may provide continuity because interests coincide even without elaborate legal safeguards; a determined government may disregard contractual expectations when they diverge. The cases do not establish continuity after a severe rupture in the partners' interests. These points reduce the plausibility of treating contract drafting as a complete solution. They do not remove the value of clarification, monitoring, and review during ordinary operations or limited disputes. The appropriate test is whether a safeguard improves a feasible arrangement relative to its cost, not whether it guarantees independence under every contingency."
+          "text": "Alignment presents a further challenge. A reliable partner may provide continuity because interests coincide even without elaborate legal safeguards; a determined government may disregard contractual expectations when they diverge. The cases do not establish continuity after a severe rupture in the partners' interests. These points reduce the plausibility of treating contract drafting as a complete solution. They do not remove the value of clarification, monitoring, and review during ordinary operations or limited disputes. The appropriate test is whether a safeguard improves a feasible arrangement relative to its cost."
         }
       ]
     },
@@ -935,10 +926,10 @@
     },
     {
       "type": "paragraph",
-      "text": "Small states' relationship with foreign space infrastructure cannot be adequately described as a choice between dependence and sovereignty. The legally significant questions concern the distribution of particular decisions, the information needed to make them, and the capability to implement them. International law protects participation and allocates authority, but does not automatically supply operational control or dependable access to another actor's services.",
+      "text": "Small states' relationship with foreign space infrastructure cannot be adequately described as a choice between dependence and sovereignty. The legally significant questions concern the distribution of particular decisions, the information needed to make them, and the capability to implement them. International law protects participation and allocates authority. Operational control and dependable access to another actor's services have to be secured by other means.",
       "runs": [
         {
-          "text": "Small states' relationship with foreign space infrastructure cannot be adequately described as a choice between dependence and sovereignty. The legally significant questions concern the distribution of particular decisions, the information needed to make them, and the capability to implement them. International law protects participation and allocates authority, but does not automatically supply operational control or dependable access to another actor's services."
+          "text": "Small states' relationship with foreign space infrastructure cannot be adequately described as a choice between dependence and sovereignty. The legally significant questions concern the distribution of particular decisions, the information needed to make them, and the capability to implement them. International law protects participation and allocates authority. Operational control and dependable access to another actor's services have to be secured by other means."
         }
       ]
     },

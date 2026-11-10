@@ -2,17 +2,23 @@
 
 ## Abstract
 
-We give deterministic error bounds for stored rough Heston pricing outputs, retaining the complex Fourier perturbation shared by different strikes. A finite-history theorem carries a continuous fractional Riccati residual into the pricing exponent, with the curve initial term and physical scaling intact. It gives a curve-weighted bound under nonexpansion and a sharper resolvent bound under positive dissipation. Certified transform disks, finite omitted frequencies, strip quadrature, the infinite tail and arithmetic then yield complete price, portfolio and finite-candidate objective enclosures. For a quarter-year spread, the joint bound is 0.233318843 index points and the marginal bound is 0.252393939: retaining the shared errors changes the decision at a quarter-point budget. A fixed five-point roughness grid and direct-reference, corrected-output and modified-Adams controls use the same market quotes. Their error accounts separate history weighting, shared geometry, reference uncertainty and changes of centre. An exact algebraic cover also establishes the specified rational construction on a narrow continuous parameter domain. The price certificate uses an independent reference field. Appendices give the regularity and residual proofs, verification procedures, and classical common-state extensions. The bounds concern numerical error relative to the model price; market fit and the true error of a nominal solver are assessed separately.
+How much numerical uncertainty remains in a portfolio of options when every strike is priced from the same approximate transform? In the rough Heston model, separate price intervals lose the common complex error at each Fourier frequency. We construct a joint error set by first deriving a residual bound for the fractional Riccati equation and then applying the portfolio pricing functional to the shared transform errors. The propagation kernel is determined by the forward variance curve and the positive fractional resolvent; it retains the full history and the initial curve term. The resulting support formula gives a precise equality condition for the loss incurred by separate price bounds. It also encloses an already computed pricing output, including its displacement from a certified reference, quadrature, the infinite tail and arithmetic. A matched quarter-year call spread illustrates the distinction: the complete joint upper bound is 0.233318843 index points, compared with 0.252393939 from signed marginal aggregation, against a 0.25-point budget. Further experiments separate the effects of history weighting, reference refinement and output replacement. The method certifies numerical error relative to the specified model; it does not identify that error with market mispricing.
 
-**Keywords:** rough Heston; continuous residual; finite history; actual output; joint pricing error; deterministic certification.
-
-Sections 2–5 develop the pricing certificate; Sections 7.1 and 7.5–7.6 give the matched experiments. Appendices C–E contain the proofs, residual construction and verification procedures. Section 6 and Appendix B treat the rational construction, Appendices F–G the classical extensions, and Appendix H the research timeline.
+**Keywords:** rough Heston; fractional Riccati equation; a posteriori error; portfolio valuation; shared Fourier errors.
 
 ## 1. Introduction
 
-At a fixed model parameter and maturity, different strikes use the same Fourier transform values. Bounding each price separately discards a constraint: the error at each frequency is one common complex number. We retain these common variables in the price-error set and ask whether they can change a financial certification decision. The resulting dependence is deterministic and comes from the pricing formula.
+A portfolio is often valued by adding prices that were computed separately. Its numerical uncertainty need not add in the same way. Options with a common maturity and model parameter use the same characteristic function, so an error in that function enters every strike through a known Fourier coefficient. For a call spread, these coefficients can nearly cancel. A sum of separate absolute error bounds discards this information before the portfolio is formed.
 
-Let \(c^*\) denote the model-price vector, \(c^{\rm fast}\) the stored pricing output, and \(\bar c\) an independent reference centre. The complete inclusion is
+We study the following question. Given a stored vector of rough Heston option prices, can its error in a specified portfolio direction be certified below a monetary tolerance? The output is held fixed. The task is to bound its difference from the exact model value, rather than to infer accuracy from agreement with another numerical solver. This distinction matters when a valuation must be checked as delivered, or when several portfolio directions must be assessed from one common pricing calculation.
+
+Let \(c^*\) be the vector of exact, normalized model prices, \(c^{\rm fast}\) the stored output, and \(\bar c\) a finite reference sum. For a real portfolio vector \(w\), forward \(F_T\), discount factor \(D\), and tolerance \(\tau\), the question is whether
+
+\[
+DF_T\left|w^\top(c^*-c^{\rm fast})\right|\le\tau.
+\]
+
+The reference is useful only if its own uncertainty is controlled. Subtracting and adding that reference gives the exact decomposition
 
 \[
 c^*-c^{\rm fast}=d+\operatorname{Re}(A\delta)+r,
@@ -20,39 +26,37 @@ c^*-c^{\rm fast}=d+\operatorname{Re}(A\delta)+r,
 \tag{1.1}
 \]
 
-Each component of \(\delta\) is a rigorously enclosed common Fourier error. Finite omitted frequencies remain in \(\delta\); the remainder \(r\) retains strip quadrature, the true infinite tail and arithmetic, without charging those finite nodes twice. A reference refinement changes \(d\) and its certified uncertainty together. Neither the reference price nor the fast output is identified with the exact model price.
+Here \(A\) contains the known pricing coefficients and \(\delta_n\) is the single transform error at frequency \(u_n\), common to all strikes. The remainder \(r\) contains the discrepancies outside this finite transform representation. Thus two questions arise in a definite order: how can the transform errors be bounded, and what is the correct way to combine those bounds for the portfolio?
 
-### 1.1. Contributions and dependencies
+### 1.1. From the Riccati equation to the portfolio error
 
-The main analytical result connects a complex Riccati residual to the Heston exponent through a finite-history kernel. Theorem 3.1 gives the nonexpansive curve bound and the positive-dissipation envelope, including the initial curve term and physical factor \(\nu^{-1}\). The comparison uses established Caputo convexity and positive-resolvent results. We compose that comparison with the model's pricing functional, certify the history weights, and include them in the complete output budget.
+The transform is determined by a nonlinear fractional Riccati equation. We first specify its unique exact solution and the pricing functional. The fractional derivative prevents the usual ordinary-differential-equation argument from being restarted at an intermediate time: the accumulated history remains part of the equation. For an absolutely continuous reference trajectory, subtraction nevertheless gives an exact linear error equation with a state-dependent coefficient. Its real part is controlled by the left half-plane geometry of the Riccati flow.
 
-The second result is a certificate for the actual pricing output. Shared transform disks are translated to that output and evaluated in portfolio and finite-objective directions. A matched quarter-year comparison isolates the contribution of shared errors to the budget decision. The ablation separates propagation, time-local envelopes, omitted-frequency certification and recentering. Support functions, convexity and sorting a fully known unit-cost menu are the tools used in this construction.
+The exponent error has a second useful identity. Integration by parts transfers the fractional derivative from the state error to the forward variance curve. Combining this identity with the positive scalar resolvent produces a history weight for the residual. The weight is fixed by the equation and the payoff transform; it is not chosen to reproduce a numerical price. Theorem 3.1 gives the resulting bound, with nonexpansion as a limiting case and a sharper bound when there is positive dissipation.
 
-The third result certifies a structural domain for the Gatheral–Radoicic rational construction. The all-frequency statement has explicit restrictions on correlation, fractional order and mean reversion. An independently generated reference field supplies the residual certificate used for prices. Nearby candidates and output controls test the financial decisions and the reuse of that certificate.
+Once a complex disk encloses each transform error, (1.1) determines a convex set of possible price errors. Evaluating its support in direction \(w\) combines the Fourier coefficients before taking their moduli. Theorem 5.1 gives the exact support of this outer set. The equality case of the complex triangle inequality then identifies precisely when separate price bounds lose nothing and when retaining the common errors gives a strictly smaller width. The condition is structural and is established before any numerical example is considered.
 
-**Table 1. Dependencies of the rational-output and independent-reference proof chains.**
+This leads to a complete certificate for the stored output. The centre displacement \(d\), finite omitted frequencies, strip quadrature, the true infinite tail and arithmetic all remain in the bound. A smaller transform radius alone need not improve the error of the stored output if the reference centre also changes. Keeping these terms explicit is therefore part of the mathematical construction, rather than an implementation detail.
 
-| Proof chain | Inputs and conclusion | Role in the price certificate |
-|---|---|---|
-| Rational construction | Endpoint matching, raw determinant and numerator signs; well-defined Padé output and left-half-plane structure | Defines and checks the specified production formula on its stated domain |
-| Independent reference | Fixed field, full continuous residual, dissipation, finite-history exponent and complete Fourier error | Certifies the reference transform and model-price inclusion |
-| Output translation | Stored fast values and independently enclosed reference centre | Converts the reference inclusion into error of the actual output |
+### 1.2. The role of approximation
 
-The two proof chains share the model but certify different objects. The algebraic signs establish the rational output's structural properties; the continuous residual establishes the reference error. Output translation connects the latter to the stored Padé price.
+The error theorem is stated for a general reference trajectory satisfying its hypotheses. For computation we use a fractional integral of a piecewise affine function after removing the first startup powers forced by the Riccati equation. This choice has two purposes: it represents the singular behaviour at time zero explicitly, and it permits continuous residual bounds by exact fractional integration. Section 4 derives the startup coefficients before introducing their stored numerical counterparts. The certificate concerns the full residual on closed time cells; a small residual at sampled nodes is insufficient.
 
-### 1.2. Related work
+The output checked in the principal example uses the established third-order rational approximation of Gatheral and Radoicic. Its endpoint matching gives a compact production formula, and Section 6 proves structural properties on a specified parameter domain. Those properties do not by themselves establish pricing accuracy. The independent reference supplies the error enclosure, which is then translated to the production output by (1.1). The two constructions consequently have distinct mathematical roles.
 
-Gatheral--Radoicic [GR2019, GR2023] construct two-end rational approximations. Jeng--Kilicman [JK2020, JK2021] analyse global Padé approximations and public SPX data. The formula and endpoint-matching method used here are theirs. Our structural statement concerns the raw matching system throughout its explicitly certified domain.
+The quarter-year spread in Section 7 uses the same stored output, reference centre, node radii and remaining error terms in the joint and marginal calculations. Only the aggregation changes. The complete bounds fall on opposite sides of a quarter-point budget. Other examples expose the limits of the improvement: reference generation has a cost, returning the reference is an alternative when output replacement is permitted, and a numerical-error certificate does not establish agreement with market quotes. The finite-candidate experiment keeps the forward variance curve fixed and reports quote compatibility separately from objective ranking.
 
-Abi Jaber–El Euch [AbiJaberElEuch2018] give the Volterra model and affine transform. Li–Liu [LiLiu2018] establish Caputo convexity through regularization; Kopteva [Kopteva2021] propagates a time-dependent residual with a positive fractional inverse. Simon [SimonCM2015] gives Mittag–Leffler positivity, and Trefethen–Weideman [TrefethenWeideman2014] give strip trapezoidal analysis. Appendix C proves the regularity statements needed to apply these results to the pricing functional.
+### 1.3. Relation to the literature
 
-Ben Hammouda et al. [BenHammouda2026, Section 3.2] develop error-controlled multilevel rough-Heston quadrature. Their practical tolerance procedure replaces unavailable constants with numerical error indicators and assesses tolerance attainment numerically. Our certificate instead encloses a stored output a posteriori, including tails and arithmetic. This comparison concerns the tolerance procedure in the cited paper.
+Gatheral and Radoicic [GR2019, GR2023] derive rational approximations by matching the short- and long-time behaviour of the fractional Riccati solution. Jeng and Kilicman [JK2020, JK2021] study global Pade approximations and SPX pricing data. We use their approximation framework. The structural results here concern the raw matching system on an explicitly stated domain; they are separate from the residual certificate.
 
-Boyarchenko–de Innocentis–Levendorskii [BL2025] study reliable pricing, numerical bias and incorrect calibration. We use their modified Adams method as a numerical control. They describe Conformal Bootstrap as an ad-hoc principle; it does not supply a deterministic interval enclosure. Hager–Kreher [HK2026] study analytic expansions in the Hurst parameter and local convergence. Bayer–Breneis [BBWeak2023, BBSimulation2023] bound Markovian kernel approximations and investigate low-dimensional simulation. Each comparison below specifies the model, numerical output and error guarantee.
+Abi Jaber and El Euch [AbiJaberElEuch2018] provide the Volterra model and affine transform used in Section 2. The analytical ingredients for error propagation are also established: Caputo convexity [LiLiu2018], positive fractional residual comparison [Kopteva2021], Mittag-Leffler positivity [SimonCM2015], and strip trapezoidal analysis [TrefethenWeideman2014]. We apply these results to the model's exponent functional, retain its initial curve term and physical scaling, and propagate the resulting common transform errors to portfolio directions. Appendix C gives the regularity and endpoint arguments required for this composition.
 
-Appendices F–G give a separate classical Heston extension based on common occupation probabilities and an inexact trial field. Its terminal witness establishes strict improvement of an outer error set. A complete annual monetary certificate remains open.
+Bayer and Breneis [BBWeak2023, BBSimulation2023] study Markovian kernel approximations and simulation methods. Boyarchenko, de Innocentis and Levendorskii [BL2025] study reliable rough Heston pricing and calibration; their modified Adams method is one of our numerical controls. Ben Hammouda et al. [BenHammouda2026] allocate time-discretization and Fourier-quadrature errors in single- and multilevel methods. Hager and Kreher [HK2026] study expansions in the Hurst parameter. Our question concerns a posteriori enclosure of a specified output, including its complete remainder. This scope differs from a complexity bound, an observed convergence rate, or a comparison between nominal solvers.
 
-## 2. Model, units and fixed configurations
+Section 2 defines the exact problem. Sections 3 and 4 pass from the continuous residual to certified transform values. Section 5 derives the portfolio error set and its financial consequences. Section 6 records the rational output used in the experiments, and Section 7 presents the matched comparisons. Appendices A--E contain the model justification, detailed proofs and reproducibility record.
+
+## 2. The exact pricing problem
 
 Our conventions for the fractional integral and Caputo derivative are
 \[
@@ -79,7 +83,7 @@ F(z)=-b+dz+z^2/2.
 \]
 Then \(D_{C,x}^\alpha H=F(H)\) and \(D_{C,t}^\alpha Z=\nu F(Z)\). Dividing the normalised state error by \(\nu\) gives the physical \(h\) error. Likewise, dividing the physical residual \(r_t=D_t^\alpha\widehat Z-\nu F(\widehat Z)\) by \(\nu\) gives the residual bound for the normalised equation.
 
-For pricing and the numerical example, we fix \(\kappa=0\) and the entire forward variance curve
+For the probability model and the numerical examples, we fix \(\kappa=0\) and the entire forward variance curve
 \[
 \xi_*(t)=\theta+(V_0-\theta)E_{\alpha_0}(-\lambda_\xi t^{\alpha_0}),
 \quad
@@ -107,39 +111,60 @@ c=1-\frac{\sqrt m}{\pi}\int_0^\infty
 \operatorname{Re}\frac{e^{-iuk}\phi_T(u-i/2)}{u^2+1/4}\,du.
 \tag{2.7}
 \]
-The model specification, decimal inputs, and normalisation jointly define the prices considered below.
+The model specification, decimal inputs, and normalisation jointly define the prices considered below. The deterministic propagation theorem allows the more general coefficient in (2.2); the stochastic valuation and experiments in this paper use the zero-mean-reversion forward variance model (2.5).
 
-All experiments use model parameter $\nu=0.2897$, $\rho=-0.7445$, Riccati mean reversion zero, Fourier step $1/8$, a finite reference/error grid through 128 (1025 nodes), 100-bit outward dyadic arithmetic and 64 forward-moment series terms. The actual Padé output uses composite Gauss–Legendre order 8 through 200 (352 nodes) and Jacobi order 256; its Fourier cutoff is distinct from the certificate cutoff. $N_t$ counts source time cells. The number of frequency nodes is written explicitly to avoid confusing it with $\nu$.
+### 2.1. The solution to be approximated
 
-**Table 2. Fixed configurations: maturity in years; time cells, reference nodes, residual subcells and history bins are counts.**
+The exact object is the solution of the Volterra equation
 
-| ID | T | alpha | N_t source cells | nonzero ref nodes | zero finite nodes | subcells | history bins |
-| --- | --- | --- | --- | --- | --- | --- | --- |
-| H0 | 1/2 | 13/25, 3/5, 9/10 | 2048 / 2048 / 1024 | 513 | 512 | 4 | 0 |
-| H1 | 1/2 | 13/25, 3/5, 9/10 | 2048 / 2048 / 1024 | 513 | 512 | 4 | 1 |
-| H2 | 1/2 | 13/25 | 2048 | 513 | 512 | 4 | 128 |
-| H3 | 1/2 | 13/25 | 2048 | 1025 | 0 | 4 | low128; high1 |
-| H4 | 1/2 | 13/25 | 2048 | 1025 | 0 | 4 | 128 |
-| Q0 | 1/4 | 13/25, 3/5, 9/10 | 1429 / 1352 / 549 | 513 | 512 | 4 | 1 |
-| Q1 | 1/4 | 13/25 | 1429 | 1025 | 0 | 4 | 1 |
-| Q2 | 1/4 | 13/25 | 1429 | 1025 | 0 | 4 | 128 |
-| N1 | 1/2 | 13/25, 21/40, 53/100, 27/50, 11/20 | 1024 | 513 | 512 | 2 | 1 |
-| N2 | 1/2 | 13/25, 21/40, 53/100, 27/50, 11/20 | 2048 | 513 | 512 | 2 | 1 |
-| N2L | 1/2 | 13/25 | 2048 | 513 | 512 | 2 | 128 |
+\[
+H(x)=\frac{1}{\Gamma(\alpha)}\int_0^x(x-s)^{\alpha-1}F(H(s))\,ds.
+\tag{2.8}
+\]
 
-H0 uses uniform-state propagation; H1 uses finite-horizon global propagation on the same field. H2 uses the low-frequency 128-bin bank. H3/H4 extend the reference through 128, retaining that low bank and using global/128-bin propagation for the high bank. Q0/Q1/Q2 retain the full history from zero and use exact quarter-terminal interpolation of the half-year field: Q0 has 1430/1353/550 time knots, and Q1/Q2 have 1430 knots. They reuse the larger-horizon continuous banks and recompute quarter moments, output and tails. The alpha=.9 source field has 1025 time knots and 641 stored frequencies through 80; 513 of these are nonzero reference nodes in H0/H1/Q0. The .52/.60 fields have 2049 knots and 1025 stored frequencies through 128.
+**Proposition 2.1 (the exact Riccati trajectory).** Let \(\alpha\in(1/2,1)\), \(|\rho|\le1\), \(s_0\ge0\), and \(u\in\mathbb R\). Equation (2.8) has a unique global solution. It is absolutely continuous on every finite interval, locally continuously differentiable at positive times, and satisfies \(\operatorname{Re}H(x)<0\) for \(x>0\). If \(s_0>0\),
 
-N1/N2 generate each five-point field and continuous residual bank, using two nonstartup subcells (2047/4095 closed cells). N2L is a separate descriptive 128-bin reuse of N2 at alpha=.52. The nearby-grid objective experiment uses N1/N2. The H low and high banks each have 8189 closed cells (four nonstartup subcells), for 513 and 512 frequencies respectively. Thus the 0.115215934-point H4 certificate and 0.394999331-point N2L certificate use different reference centres, node coverage and residual banks; their difference includes more than 128-bin propagation. BL-core512/1024 are nominal history-stepping controls whose complete guarantees use the identified N1/N2/N2L reference bank.
+\[
+|H(x)|\le\frac b{s_0}\{1-E_\alpha(-s_0x^\alpha)\}
+\le\min\left\{\frac b{s_0},\frac{bx^\alpha}{\Gamma(1+\alpha)}\right\}.
+\tag{2.9}
+\]
 
-The H and N field generators use a uniform auxiliary grid \(y_j\) from zero to \(\nu T^\alpha\), followed by \(x_j=y_j^{1/\alpha}\) and \(t_j=x_j/\nu^{1/\alpha}\). In exact arithmetic this is the graded rule \(t_j=T(j/N_t)^{1/\alpha}\). Generation uses binary64 arithmetic and forces the endpoints to zero and one half; certification uses the saved nodes as exact dyadics, rather than identifying them with the analytical rule. For quarter-year restriction it keeps every original knot strictly below \(T_q=1/4\), appends the exact endpoint, and encloses the linear interpolation of the original bracketing field coefficients in rational interval arithmetic. All preceding history is retained.
+For \(s_0=0\), the last time-dependent bound remains valid.
+
+**Proof.** Local Volterra contraction gives existence and uniqueness. On the boundary of the left half-plane, completing the square in \(\operatorname{Re}F\) gives a strictly negative term. The fractional maximum principle therefore prevents exit. Convexity of a regularized modulus and comparison with the scalar linear equation give (2.9), which excludes finite-time blow-up. The continuation retains the preceding history. Appendix C.1 proves these steps and the absolute-continuity assertion. \(\square\)
+
+This proposition identifies the solution independently of any numerical construction. We use its integral representation and invariant half-plane; no closed-form solution of the general nonlinear fractional equation is assumed. The distinction between existence of the exact solution and construction of an approximation is maintained throughout.
+
+### 2.2. The financial quantity
+
+The state is an intermediate object. The quantity to be bounded is the error after applying the exponent functional (2.6), the Fourier price (2.7), and finally the portfolio vector. A uniform state estimate can discard the time weights in that sequence. The next section keeps those weights by deriving an exact identity for the exponent error before taking absolute values.
 
 
 ## 3. Finite-history propagation: nonexpansion and dissipation
 
-Caputo comparison and norm convexity are established tools [LiLiu2018; Kopteva2021; SimonCM2015]. Appendix C.1 proves the required absolute-continuity statement, including almost-everywhere passage and the continuous endpoint. Under the hypotheses below, the complex divided difference has real part at most \(-\nu\sigma\). Composing its error bound with the pricing functional gives Theorem 3.1; Appendix C.2 contains the proof.
+Let \(\widehat Z\) be a zero-initial-value reference trajectory and define its physical residual by \(r=D_C^\alpha\widehat Z-\nu F(\widehat Z)\). Subtraction of the exact and reference equations gives, for \(e=Z-\widehat Z\),
+
+\[
+D_C^\alpha e=\nu\left[d+\frac{Z+\widehat Z}{2}\right]e-r,
+\qquad e(0)=0.
+\tag{3.1}
+\]
+
+This identity uses the quadratic structure of the Riccati equation. The unknown exact state remains in the coefficient, but Proposition 2.1 controls the real part that matters for stability. If \(\operatorname{Re}\widehat Z\le\epsilon_R\), the coefficient has real part at most \(-\nu(s_0-\epsilon_R/2)\). Thus a bound on the reference half-plane is sufficient; a fitted approximation to the exact coefficient is unnecessary.
+
+The second identity concerns the pricing functional. For \(\beta>0\), write \(g_\beta(t)=t^{\beta-1}/\Gamma(\beta)\), with all convolutions starting at zero. Define the reference exponent using its fractional derivative, and write \(q_\alpha=(I^{1-\alpha}\xi)'\). Under the regularity assumptions of Theorem 3.1, Fubini's theorem and integration by parts give
+
+\[
+L_T-\widehat L_T=\nu^{-1}(q_\alpha*e)(T),
+\qquad q_\alpha=\xi(0)g_{1-\alpha}+g_{1-\alpha}*\xi'.
+\tag{3.2}
+\]
+
+The initial curve value survives the integration by parts. It cannot be removed by differentiating the curve only at positive times. These identities determine the subsequent construction: compare (3.1) with a positive scalar fractional equation, then apply the nonnegative weight in (3.2). Caputo convexity and positive-resolvent comparison are established tools [LiLiu2018; Kopteva2021; SimonCM2015]; Appendix C supplies the regularity and endpoint details needed here.
 
 
-For \(\beta>0\), write \(g_\beta(t)=t^{\beta-1}/\Gamma(\beta)\). Define \(k_\lambda(t)=t^{\alpha-1}E_{\alpha,\alpha}(-\lambda t^\alpha)\), with \(k_0=g_\alpha\). All convolutions below start at time zero.
+Define \(k_\lambda(t)=t^{\alpha-1}E_{\alpha,\alpha}(-\lambda t^\alpha)\), with \(k_0=g_\alpha\). All convolutions below start at time zero.
 
 **Theorem 3.1 (finite-history pricing envelope).** Let \(0<\alpha<1\), \(\nu>0\), \(T>0\), and \(Z,\widehat Z\in AC([0,T];\mathbb C)\) have zero initial value. Let
 
@@ -147,7 +172,7 @@ For \(\beta>0\), write \(g_\beta(t)=t^{\beta-1}/\Gamma(\beta)\). Define \(k_\lam
 D_C^\alpha Z=\nu F(Z),\quad
 r=D_C^\alpha\widehat Z-\nu F(\widehat Z),\quad
 |r|\le R\in L^\infty(0,T),\qquad R\ge0,
-\tag{3.1}
+\tag{3.3}
 \]
 
 where \(F(z)=-b+dz+z^2/2\), \(\Re d=-s_0\), \(\Re Z\le0\), \(\Re\widehat Z\le\epsilon_R\), and \(\sigma=s_0-\epsilon_R/2\ge0\). These equations and inequalities hold almost everywhere; the state bounds hold everywhere by continuity. Let \(\xi\in AC[0,T]\), \(\xi(0)=V_0\ge0\), and assume
@@ -155,7 +180,7 @@ where \(F(z)=-b+dz+z^2/2\), \(\Re d=-s_0\), \(\Re Z\le0\), \(\Re\widehat Z\le\ep
 \[
 q_\alpha=(I^{1-\alpha}\xi)'
 =V_0g_{1-\alpha}+g_{1-\alpha}*\xi'\ge0\quad\text{a.e.}
-\tag{3.2}
+\tag{3.4}
 \]
 
 Define \(L_T\) and \(\widehat L_T\) from \(\nu^{-1}\int_0^T\xi(T-t)D_C^\alpha Z(t)\,dt\) and the same expression with \(\widehat Z\). With \(\lambda=\nu\sigma\),
@@ -166,14 +191,14 @@ Define \(L_T\) and \(\widehat L_T\) from \(\nu^{-1}\int_0^T\xi(T-t)D_C^\alpha Z(
 |L_T-\widehat L_T|
 \le\nu^{-1}(q_\alpha*k_\lambda*R)(T)
 \le\nu^{-1}(\xi*R)(T).
-\tag{3.3}
+\tag{3.5}
 \]
 
 In particular, \(R/\nu\le\delta_F\) implies
 
 \[
 |L_T-\widehat L_T|\le\delta_F\int_0^T\xi(s)\,ds.
-\tag{3.4}
+\tag{3.6}
 \]
 
 **Proof route.** Set \(e=Z-\widehat Z\); the physical equation's divided-difference coefficient has real part at most \(-\nu\sigma\). The AC convexity lemma applied to a smooth modulus and the positive zero-initial inverse gives the state bound, including its continuous endpoint. Absolute Fubini and AC integration by parts then express the exponent difference as \(\nu^{-1}(q_\alpha*e)(T)\), retaining the zero state initial values and the curve term \(V_0g_{1-\alpha}\). Positivity of \(q_\alpha\) propagates that state bound, and \(0\le q_\alpha*k_\lambda\le\xi\) gives the curve envelope. The argument keeps the entire fractional history and removes \(\nu^{-1}\) only upon normalizing the physical residual by \(\nu\); Appendix C.1–C.2 gives the full proof.
@@ -187,21 +212,21 @@ For a full-history residual envelope \(R\le R_j\) on each closed cell \([a_j,b_j
 |L_T-\widehat L_T|
 \le\nu^{-1}\sum_jR_j\int_{a_j}^{b_j}(q_\alpha*k_\lambda)(T-s)\,ds
 \le\nu^{-1}\sum_jR_j\int_{a_j}^{b_j}\xi(T-s)\,ds.
-\tag{3.5}
+\tag{3.7}
 \]
 
 Every weight integrates the history from time zero. An integration bin takes the maximum over every intersecting closed residual cell, including boundary cells. Section 7 compares curve and dissipative-kernel weights on matched inputs. Appendix C.3–C.4 proves decreasing-curve and constant-curve variants and a complementary global-state bound.
 
 
-### Strict computation of the dissipative pricing kernel
+### 3.1. The pricing kernel and its computation
 
-The positive kernel in Theorem 3.1 admits a direct interval calculation. For \(\sigma\ge0\), set \(\lambda=\nu\sigma\) and
+Theorem 3.1 determines the pricing kernel by convolution. Its dependence on the forward curve and dissipation is explicit, and its cumulative weights can be enclosed directly. For \(\sigma\ge0\), set \(\lambda=\nu\sigma\) and
 
 \[
 K_\lambda=q_\alpha*k_\lambda,\qquad
 \eta_{\rm res}=\nu^{-1}(K_\lambda*R)(T),\qquad
 0\le K_\lambda=\xi-\lambda\,\xi*k_\lambda\le\xi.
-\tag{3.6}
+\tag{3.8}
 \]
 
 The assumptions and scaling are those of Theorem 3.1. The positive fractional inverse follows from [Kopteva2021, SimonCM2015]. We enclose the pricing-kernel weights and use them in the same actual-output certificate.
@@ -211,7 +236,7 @@ The assumptions and scaling are those of Theorem 3.1. The positive fractional in
 \[
 k_0=g_\alpha,\qquad K_0=\xi,\qquad
 |L_T-\widehat L_T|\le\nu^{-1}(\xi*R)(T).
-\tag{3.7}
+\tag{3.9}
 \]
 
 The estimate uses \(q_\alpha\ge0\) and preserves the physical scaling at zero damping. Appendix C gives the AC regularity and comparison proofs; Appendix A treats the stochastic-model hypotheses.
@@ -226,20 +251,55 @@ W_\lambda(t)=\int_0^tK_\lambda(s)\,ds
 +(V_0-\theta)E_{A_0,2+n\alpha}
 (-\lambda_\xi t^{A_0})
 \right].
-\tag{3.8}
+\tag{3.10}
 \]
 
 A cell \([a_j,b_j]\) has weight \(W_\lambda(T-a_j)-W_\lambda(T-b_j)\). Appendix C provides the absolute series tails and interval-difference proof. The implementation uses twelve outer terms, sixty-four inner curve terms and 100-bit outward dyadic primitives. It is an enclosure of the full Mittag–Leffler kernel functional, with explicit truncation and rounding remainders; ordinary floating-point Mittag–Leffler values do not enter a guarantee.
 
-## 4. Continuous certificates and complete Fourier prices
+## 4. From a reference trajectory to transform disks
 
-The reference is a fixed \(\widehat Z=I^\alpha\bar G\), with recorded coefficients interpreted as exact dyadics. A startup power expansion and closed-cell derivative bounds certify its full physical residual. Appendix D.1 gives the construction, arithmetic and history integrals. The configuration table distinguishes the four-subcell H/Q banks from the two-subcell nearby banks. The reference is this continuous field, not the nominal nodal solver states.
+### 4.1. A reference dictated by the startup expansion
 
-The derivative-based reference exponent is \(\widehat L_T=\nu^{-1}\int_0^T\xi(T-t)\bar G(t)dt\). Once \(\eta_n\) encloses its exponent error, the transform disk follows by the exponential difference and the true half-shift modulus bound. A substitution-based exponent would require an additional residual-conversion term.
+The preceding theorem separates the choice of reference from the validity of its certificate. A useful computational reference should make the fractional derivative and its residual accessible on a whole time interval. It should also retain the startup singularity of the exact solution.
 
+Write \(G=\nu F(Z)\), so that \(Z=I^\alpha G\). For fixed model parameters and Fourier frequency, successive substitution into the Volterra equation gives, as \(t\downarrow0\),
 
 \[
-|\phi_n-\widehat\phi_n|\le \min\{1,|\widehat\phi_n|\}(e^{\eta_n}-1).\tag{4.1}
+G(t)=G_0+A_1t^\alpha+A_2t^{2\alpha}+O(t^{3\alpha}),
+\qquad G_0=-\nu b,
+\tag{4.1}
+\]
+
+where the coefficients are determined recursively by
+
+\[
+\begin{aligned}
+B_1&=\frac{G_0}{\Gamma(1+\alpha)},&
+A_1&=\nu d B_1,\\
+B_2&=\frac{A_1\Gamma(1+\alpha)}{\Gamma(1+2\alpha)},&
+A_2&=\nu\left(dB_2+\frac{B_1^2}{2}\right).
+\end{aligned}
+\tag{4.2}
+\]
+
+Indeed \(Z=O(t^\alpha)\) locally by Proposition 2.1. Substitution first gives \(G=G_0+O(t^\alpha)\), then \(Z=B_1t^\alpha+O(t^{2\alpha})\), and successive substitution gives the displayed coefficients. The identity \(I^\alpha t^\beta=\Gamma(1+\beta)t^{\alpha+\beta}/\Gamma(1+\alpha+\beta)\) controls each remainder. This is a local finite-order expansion at a fixed frequency; it is neither a uniform all-frequency statement nor a global error estimate for a truncated series.
+
+We therefore represent \(\bar G\) by these startup powers and a continuous piecewise affine remainder, and set \(\widehat Z=I^\alpha\bar G\). The powers come from the equation; the piecewise affine part permits explicit integration against the fractional kernel. It represents the remaining trajectory rather than an additional fitted price correction. Its nodal values may be generated by a numerical solver, but their accuracy is not an assumption of Theorem 3.1.
+
+In the implementation, all saved nodes and coefficients, including the startup coefficients, are interpreted as exact dyadic numbers. They need not equal their ideal analytical counterparts. The full residual
+
+\[
+r_t=\bar G-\nu F(I^\alpha\bar G)
+\]
+
+includes these coefficient discrepancies. Appendix D.1 bounds it on the startup interval and every subsequent closed cell, and verifies the reference half-plane. The certificate belongs to this continuous trajectory, rather than merely to the nominal solver's nodal states. Four-subcell and two-subcell banks are distinguished in Section 7.
+
+### 4.2. Completing the transform and price bound
+
+The derivative-based reference exponent is \(\widehat L_T=\nu^{-1}\int_0^T\xi(T-t)\bar G(t)dt\). Once \(\eta_n\) encloses its exponent error, the transform disk follows by the exponential difference and the true half-shift modulus bound. If the substitution-based exponent is \(\widehat L_T^F=\int_0^T\xi(T-t)F(\widehat Z(t))dt\), then \(\widehat L_T-\widehat L_T^F=\nu^{-1}(\xi*r_t)(T)\). Using \(\widehat L_T^F\) therefore requires this additional conversion term to be enclosed.
+
+\[
+|\phi_n-\widehat\phi_n|\le \min\{1,|\widehat\phi_n|\}(e^{\eta_n}-1).\tag{4.3}
 \]
 
 **Theorem 4.1.** Suppose \(M_T>0,\mathbb E M_T=1\). For any \(0<a_*<1/2,h_*>0\), let
@@ -248,7 +308,7 @@ The derivative-based reference exponent is \(\widehat L_T=\nu^{-1}\int_0^T\xi(T-
 \epsilon_{\rm grid}
 =\frac{\sqrt m\,e^{a_*|k|}}
 {(1/2-a_*)(e^{2\pi a_*/h_*}-1)}.
-\tag{4.2}
+\tag{4.4}
 \]
 
 
@@ -261,7 +321,7 @@ Suppose the node values \(\widehat\phi_n\) have exact-error bounds \(\varepsilon
 \left(2\operatorname{Re}\widehat\phi_0+
 \sum_{n=1}^{N_u}\frac{\operatorname{Re}(e^{-inh_*k}\widehat\phi_n)}
 {(nh_*)^2+1/4}\right)
-\tag{4.3}
+\tag{4.5}
 \]
 satisfies
 \[
@@ -270,16 +330,16 @@ satisfies
 \left(2\varepsilon_0+
 \sum_{n=1}^{N_u}\frac{\varepsilon_n}{(nh_*)^2+1/4}\right)
  +\epsilon_{\rm arithmetic}.
-\tag{4.4}
+\tag{4.6}
 \]
 
 In these equations \(N_u\) is the Fourier sum cutoff, whereas \(N_t\) denotes time-grid cells. The origin coefficient is the trapezoidal half-weight multiplied by \(1/(1/4)\). The exact arithmetic remainder encloses phase, square root, exponential and summation operations.
 
-## 5. Shared errors and financial decisions
+## 5. Portfolio errors from a common transform
 
-### 5.1. Joint inclusion at the frozen output
+### 5.1. The joint error set and the loss from separate bounds
 
-Fix one model parameter, maturity, contour, and reference grid. Let \(c^*\in\mathbb R^p\) be the continuous-model price vector, \(\bar c\) the exact finite reference sum, and \(c^{\rm fast}\) the frozen rational output. For each included frequency let \(\bar\phi_n\) be the reference transform and put \(z_n=\phi(u_n-i/2)-\bar\phi_n\). Appendix D.1 supplies bounds \(|z_n|\le\epsilon_n\); at a deliberately omitted finite node \(\bar\phi_n=0\), the true-transform envelope supplies the radius. The same \(z_n\) enters every strike at this parameter and maturity.
+The transform disks now have a mathematical justification. The remaining question is how to use them for several contracts. Fix one model parameter, maturity, contour, and reference grid. Let \(c^*\in\mathbb R^p\) be the continuous-model price vector, \(\bar c\) the exact finite reference sum, and \(c^{\rm fast}\) the frozen rational output. For each included frequency let \(\bar\phi_n\) be the reference transform and put \(z_n=\phi(u_n-i/2)-\bar\phi_n\). Appendix D.1 supplies bounds \(|z_n|\le\epsilon_n\); at a deliberately omitted finite node \(\bar\phi_n=0\), the true-transform envelope supplies the radius. The same \(z_n\) enters every strike at this parameter and maturity.
 
 For the Lewis rule in Section 4, set \(m_i=K_i/F\), \(k_i=\log m_i\), and
 \[
@@ -366,6 +426,16 @@ Combining the coefficients before taking their modulus preserves cancellation. W
 \]
 To prove it, separate the difference in amplitudes from the phase difference using the smaller amplitude, then apply \(|e^{ix}-e^{iy}|\le\min(2,|x-y|)\). At zero, the spread coefficient is \(2h|b_i-b_j|/\pi\). Low-frequency error therefore cancels for nearby strikes even when the individual node radii are large. High-frequency and tail contributions are still retained.
 
+A simple limiting case explains the mechanism without a numerical fit. Fix the model, maturity, node radius and frequency, and let two positive normalized strikes coalesce. With \(\Delta k=\log(m_j/m_i)\), the pricing coefficients satisfy
+
+\[
+a_{jn}=a_{in}e^{(1/2-iu_n)\Delta k},\qquad
+|a_{in}-a_{jn}|=|a_{in}|\left|1-e^{(1/2-iu_n)\Delta k}\right|.
+\tag{5.11}
+\]
+
+The identity also holds at the half-weighted zero node. Thus the shared spread contribution \(\epsilon_n|a_{in}-a_{jn}|\) tends to zero, whereas the separate contribution \(\epsilon_n(|a_{in}|+|a_{jn}|)\) tends to \(2\epsilon_n|a_{in}|\). For a positive radius this latter limit is strictly positive. At coincident strikes the two payoff functions agree, so the cancellation is already present in the contract. The joint representation preserves it. This statement concerns each fixed finite node; the complete output bound still includes its centre displacement and remainder.
+
 The implementation below uses rational outward bounds for logarithms, trigonometric functions, square roots, and the circle constant. It encloses the exact coefficient difference before multiplying by the saved radius. Reference-sum and frozen-output intervals supply the signed centre. Taking interval midpoints for display never substitutes for the outward endpoint arithmetic used in a decision.
 
 If the target quote \(m^*\) is enclosed around a stored centre \(\bar m\) with \(m^*-\bar m\in\mathcal M\), use \(r=c^{\rm fast}-\bar m\) and replace the output-error set by \(\mathcal E-\mathcal M\). This includes quote-conversion arithmetic with the correct sign. The following formulas otherwise take \(m\) to be exact.
@@ -374,7 +444,7 @@ Let \(J(e)=(r+e)^\top W(r+e)/(2p)\), where \(r=c^{\rm fast}-m\), \(W\succeq0\), 
 \[
 \inf_{e\in\mathcal E}J(e)\ge
 J(e_0)-g_0^\top e_0-h_{\mathcal E}(-g_0).
-\tag{5.11}
+\tag{5.12}
 \]
 This follows by taking the infimum of the supporting affine function \(J(e_0)+g_0^\top(e-e_0)\). Feasibility of \(e_0\) is unnecessary for validity; it affects sharpness. A numerical primal minimizer becomes a lower-bound certificate only after its support or dual obligation has also been bounded correctly.
 
@@ -382,11 +452,11 @@ If \(M^2\ge\sup_{e\in\mathcal E}e^\top We\), expansion yields
 \[
 \sup_{e\in\mathcal E}J(e)\le
 J(0)+\frac{h_{\mathcal E}(Wr)}p+\frac{M^2}{2p}.
-\tag{5.12}
+\tag{5.13}
 \]
 A safe choice is any valid coordinate box \(|e_i|\le b_i\): with \(W\) represented exactly, \(M^2=\sum_{ij}|W_{ij}|b_i b_j\) is sufficient. Tighter validated norm bounds may replace it. Maximization of this convex quadratic is not certified by a local stationary point. A supporting function, norm bound, interval subdivision, or valid relaxation must establish the upper direction.
 
-For a finite candidate collection, form valid objective intervals by intersecting (5.11)--(5.12), when used, with the original interval-square bounds in Theorem 5.3. A unique candidate is certified only if its upper endpoint is smaller than every competing lower endpoint. If this condition is absent, return the nonempty set of candidates whose lower endpoint is at most the least upper endpoint. It contains every exact minimizer. Different candidates have different transform errors; (5.4) does not identify their error variables.
+For a finite candidate collection, form valid objective intervals by intersecting (5.12)--(5.13), when used, with the original interval-square bounds in Theorem 5.3. A unique candidate is certified only if its upper endpoint is smaller than every competing lower endpoint. If this condition is absent, return the nonempty set of candidates whose lower endpoint is at most the least upper endpoint. It contains every exact minimizer. Different candidates have different transform errors; (5.4) does not identify their error variables.
 
 The support formula, the equality case of the triangle inequality, and the convexity bounds are established tools. Their role here is to join the model-specific continuous residual certificate to the actual multi-strike pricing output, preserving every required budget and its centre. The numerical comparison in Section 7 is the evidence for the resulting financial improvement.
 
@@ -398,7 +468,7 @@ c_i(\alpha_j)\in[p^-_{ij},p^+_{ij}],\quad
 B_i\in[b_i^-,b_i^+],\quad
 A_i\in[a_i^-,a_i^+],\quad
 M_i\in[m_i^-,m_i^+].
-\tag{5.13}
+\tag{5.14}
 \]
 Assume \(b_i^-\le b_i^+\le a_i^-\le a_i^+\). Define
 \[
@@ -412,27 +482,27 @@ L_j=\frac1{24}\sum_i
 \ell(p^-_{ij}-m_i^+,p^+_{ij}-m_i^-),\qquad
 U_j=\frac1{24}\sum_i
 v(p^-_{ij}-m_i^+,p^+_{ij}-m_i^-).
-\tag{5.14}
+\tag{5.15}
 \]
 Then \(J(\alpha_j)\in[L_j,U_j]\). Writing \(L_*=\min_jL_j,U_*=\min_jU_j\), the exact finite-set optimum satisfies
 \[
 J_*=\min_{\Theta_{\rm finite}}J\in[L_*,U_*].
-\tag{5.15}
+\tag{5.16}
 \]
 For \(\varepsilon\ge0\), every exact \(\varepsilon\)-near-optimal candidate belongs to
 \[
 \{\alpha_j:L_j\le U_*+\varepsilon\};
-\tag{5.16}
+\tag{5.17}
 \]
 The condition \(U_j-L_*\le\varepsilon\) is sufficient for that candidate to be near-optimal for the exact objective. If
 \[
 g:=\min_{j\ne j_0}L_j-U_{j_0}>0,
-\tag{5.17}
+\tag{5.18}
 \]
 then \(\alpha_{j_0}\) is the unique minimiser of the model objective on the finite set. If
 \[
 \min_{\alpha_j\ge.6}L_j>U_*+\varepsilon,
-\tag{5.18}
+\tag{5.19}
 \]
 then every exact near-optimal candidate in the finite set satisfies \(\alpha_j<.6\).
 
@@ -440,9 +510,11 @@ Quote consistency is checked separately. If any row satisfies \(p^+_{ij}<b_i^-\)
 
 The interval-square and finite-selection proof is in Appendix D.4. A continuous parameter optimum, market identification and dependence across candidate errors are outside this statement.
 
-## 6. Structure of the specified rational output
+## 6. A rational output with a separate structural guarantee
 
-The Gatheral–Radoicic third-order construction matches three startup and three large-time coefficients. Write \(\widehat H(y)=P(y)/Q(y)\), \(Q=1+q_1y+q_2y^2+q_3y^3\), with \(y=\nu t^\alpha\). Appendix B.1 defines the raw matching matrix, determinant and numerator polynomials, proves their exact identities and gives the full sign proof. No numerical division precedes the determinant lower bound.
+The certificate above can be applied to any stored price output once its displacement from the reference is enclosed. To make the distinction concrete, we use the Gatheral--Radoicic third-order rational construction. Matching both endpoints reflects two analytical constraints: the fractional startup expansion and the large-time Riccati behaviour. The approximation is thus selected by known features of the equation, while its pricing accuracy is assessed separately.
+
+The construction matches three startup and three large-time coefficients. Write \(\widehat H(y)=P(y)/Q(y)\), \(Q=1+q_1y+q_2y^2+q_3y^3\), with \(y=\nu t^\alpha\). Appendix B.1 defines the raw matching matrix, determinant and numerator polynomials, proves their exact identities and gives the full sign proof. No numerical division precedes the determinant lower bound.
 
 
 **Theorem 6.1 (full-frequency structure).** For
@@ -476,7 +548,42 @@ at every real Fourier frequency and every positive time.
 
 The correlation width quantifies local persistence around the public-data parameter. Appendix B.2 gives the complete closed cover and derivative/direct fallback, with derivative bounds for the compactified quantities. Prices use the independent reference residual in Section 4.
 
+**Table 1. Dependencies of the rational-output and independent-reference proof chains.**
+
+| Proof chain | Inputs and conclusion | Role in the price certificate |
+|---|---|---|
+| Rational construction | Endpoint matching, raw determinant and numerator signs; well-defined Padé output and left-half-plane structure | Defines and checks the specified production formula on its stated domain |
+| Independent reference | Fixed field, full continuous residual, dissipation, finite-history exponent and complete Fourier error | Certifies the reference transform and model-price inclusion |
+| Output translation | Stored fast values and independently enclosed reference centre | Converts the reference inclusion into error of the actual output |
+
 ## 7. Matched decisions and scientific controls
+
+The experiments address three distinct questions: whether preserving shared errors changes a portfolio tolerance decision; how much the complete bound changes under a different history weight or reference; and whether the resulting model prices agree with the original quote bands. A comparison isolates one mechanism only when its remaining inputs are held fixed.
+
+All experiments use model parameter $\nu=0.2897$, $\rho=-0.7445$, Riccati mean reversion zero, Fourier step $1/8$, a finite reference/error grid through 128 (1025 nodes), 100-bit outward dyadic arithmetic and 64 forward-moment series terms. The actual Padé output uses composite Gauss–Legendre order 8 through 200 (352 nodes) and Jacobi order 256; its Fourier cutoff is distinct from the certificate cutoff. $N_t$ counts source time cells. The number of frequency nodes is written explicitly to avoid confusing it with $\nu$.
+
+**Table 2. Fixed configurations: maturity in years; time cells, reference nodes, residual subcells and history bins are counts.**
+
+| ID | T | alpha | N_t source cells | nonzero ref nodes | zero finite nodes | subcells | history bins |
+| --- | --- | --- | --- | --- | --- | --- | --- |
+| H0 | 1/2 | 13/25, 3/5, 9/10 | 2048 / 2048 / 1024 | 513 | 512 | 4 | 0 |
+| H1 | 1/2 | 13/25, 3/5, 9/10 | 2048 / 2048 / 1024 | 513 | 512 | 4 | 1 |
+| H2 | 1/2 | 13/25 | 2048 | 513 | 512 | 4 | 128 |
+| H3 | 1/2 | 13/25 | 2048 | 1025 | 0 | 4 | low128; high1 |
+| H4 | 1/2 | 13/25 | 2048 | 1025 | 0 | 4 | 128 |
+| Q0 | 1/4 | 13/25, 3/5, 9/10 | 1429 / 1352 / 549 | 513 | 512 | 4 | 1 |
+| Q1 | 1/4 | 13/25 | 1429 | 1025 | 0 | 4 | 1 |
+| Q2 | 1/4 | 13/25 | 1429 | 1025 | 0 | 4 | 128 |
+| N1 | 1/2 | 13/25, 21/40, 53/100, 27/50, 11/20 | 1024 | 513 | 512 | 2 | 1 |
+| N2 | 1/2 | 13/25, 21/40, 53/100, 27/50, 11/20 | 2048 | 513 | 512 | 2 | 1 |
+| N2L | 1/2 | 13/25 | 2048 | 513 | 512 | 2 | 128 |
+
+H0 uses uniform-state propagation; H1 uses finite-horizon global propagation on the same field. H2 uses the low-frequency 128-bin bank. H3/H4 extend the reference through 128, retaining that low bank and using global/128-bin propagation for the high bank. Q0/Q1/Q2 retain the full history from zero and use exact quarter-terminal interpolation of the half-year field: Q0 has 1430/1353/550 time knots, and Q1/Q2 have 1430 knots. They reuse the larger-horizon continuous banks and recompute quarter moments, output and tails. The alpha=.9 source field has 1025 time knots and 641 stored frequencies through 80; 513 of these are nonzero reference nodes in H0/H1/Q0. The .52/.60 fields have 2049 knots and 1025 stored frequencies through 128.
+
+N1/N2 generate each five-point field and continuous residual bank, using two nonstartup subcells (2047/4095 closed cells). N2L is a separate descriptive 128-bin reuse of N2 at alpha=.52. The nearby-grid objective experiment uses N1/N2. The H low and high banks each have 8189 closed cells (four nonstartup subcells), for 513 and 512 frequencies respectively. Thus the 0.115215934-point H4 certificate and 0.394999331-point N2L certificate use different reference centres, node coverage and residual banks; their difference includes more than 128-bin propagation. BL-core512/1024 are nominal history-stepping controls whose complete guarantees use the identified N1/N2/N2L reference bank.
+
+The H and N field generators use a uniform auxiliary grid \(y_j\) from zero to \(\nu T^\alpha\), followed by \(x_j=y_j^{1/\alpha}\) and \(t_j=x_j/\nu^{1/\alpha}\). In exact arithmetic this is the graded rule \(t_j=T(j/N_t)^{1/\alpha}\). Generation uses binary64 arithmetic and forces the endpoints to zero and one half; certification uses the saved nodes as exact dyadics, rather than identifying them with the analytical rule. For quarter-year restriction it keeps every original knot strictly below \(T_q=1/4\), appends the exact endpoint, and encloses the linear interpolation of the original bracketing field coefficients in rational interval arithmetic. All preceding history is retained.
+
 
 ### 7.1. Fixed contracts, units and complete ablation
 
@@ -488,20 +595,18 @@ Table 3 compares the complete \(K=4400\) minus \(K=4500\) task bound. Each row r
 
 | Maturity and stage | Complete joint bound, points | Matched signed marginal bound, points | Interpretation |
 |---|---:|---:|---|
-| H0: Six months: global state propagation | 1.397612096 | — | Original failed one-point task |
+| H0: Six months: global state propagation | 1.397612096 | — | One-point budget not met |
 | H1: Six months: finite history, same global residual | 0.378598956 | — | Principal propagation improvement; unchanged output and centre |
 | H2: Six months: local envelope, original used nodes | 0.367258782 | — | About 3% further bound reduction |
 | H3: Six months: all finite high nodes, global envelope | 0.132245064 | 0.158585551 | High-frequency certification and centre change are included |
 | H4: Six months: all finite high nodes, local envelope | 0.115215934 | 0.137896018 | Both methods certify 0.25 points |
-| Q0: Three months: through 64, global envelope | 1.207557898 | 1.545191542 | Failed 0.25-point task |
-| Q1: Three months: through 128, global envelope | 0.351318692 | 0.408293698 | Failed 0.25-point task |
+| Q0: Three months: through 64, global envelope | 1.207557898 | 1.545191542 | 0.25-point budget not met |
+| Q1: Three months: through 128, global envelope | 0.351318692 | 0.408293698 | 0.25-point budget not met |
 | Q2: Three months: through 128, local envelope | 0.233318843 | 0.252393939 | Only the joint method certifies 0.25 points |
 
 Finite-history propagation reduces the H0 complete bound by about 72.91%. This measures a guaranteed upper bound. The six-month high-frequency refinement also changes the centre from approximately \(-0.166762218\) to \(-0.081698202\) points, so its reduction combines centre and uncertainty changes. In Q2, the output, centre, node radii and remainders are matched; retaining the shared errors changes the decision. The time-local quarter-year refinement was specified after the global budget failed and is an exploratory transfer experiment.
 
 ### 7.2. Twenty-eight portfolio directions
-
-The following matched pass-count table uses H1 at each stated alpha.
 
 Let \(e_i\) select strike \(K_i\). We keep the exact holdings below, without rescaling them to make a budget pass. Gross weight means \(\sum_i|w_i|\). Every threshold is an absolute error in index points for the specified holding vector.
 
@@ -514,11 +619,9 @@ Let \(e_i\) select strike \(K_i\). We keep the exact holdings below, without res
 | Wide spreads | \(e_0-e_3,e_3-e_6,e_6-e_9,e_0-e_{11}\) | 4 | 2 |
 | Positive baskets | \(\frac1{12}\sum_{i=0}^{11}e_i,\ \frac16\sum_{i=0}^5e_i,\ \frac16\sum_{i=6}^{11}e_i\) | 3 | 1 |
 
-All methods in each matched comparison use identical upstream radii. At a 0.5-point budget and \(\alpha=.52\), finite-history joint bounds certify 28/28 portfolios, compared with 13/28 signed marginal bounds. At a 0.25-point budget, the counts are 10/28 against 1/28 for \(\alpha=.60\), and 20/28 against 13/28 for \(\alpha=.90\). At the one-point budget for \(.52\), both finite-history methods certify 28/28. That threshold does not distinguish the shared structure. A valid payoff intersection gives no further tightening in this setting. Failure to certify leaves the budget unresolved.
+The pass counts use configuration H1 at each stated alpha, and all methods in each matched comparison use identical upstream radii. At a 0.5-point budget and \(\alpha=.52\), finite-history joint bounds certify 28/28 portfolios, compared with 13/28 signed marginal bounds. At a 0.25-point budget, the counts are 10/28 against 1/28 for \(\alpha=.60\), and 20/28 against 13/28 for \(\alpha=.90\). At the one-point budget for \(.52\), both finite-history methods certify 28/28. That threshold does not distinguish the shared structure. A valid payoff intersection gives no further tightening in this setting. Failure to certify leaves the budget unresolved.
 
-### 7.3. Prespecified nearby candidates under the original quotes
-
-The two objective columns refer to N1 and N2 respectively.
+### 7.3. Prespecified nearby candidates under fixed quotes
 
 The original twelve half-year quotes, forward F=4221.86, discount D=1,
 and all other model parameters are fixed. Before computing new results we
@@ -540,7 +643,7 @@ quadratic remainder. Its same-radius marginal comparison uses the identical
 upstream certificate. Errors across different alpha candidates are not
 assumed jointly correlated.
 
-**Table 5. N1 and N2 five-candidate objective enclosures under the original quotes; displayed values are normalized J multiplied by 10^8.**
+**Table 5. N1 and N2 five-candidate objective enclosures under the fixed quotes; displayed values are normalized J multiplied by 10^8.**
 
 | alpha | N_t=1024 joint J ×10^8 | N_t=2048 joint J ×10^8 |
 |---:|---:|---:|
@@ -568,8 +671,6 @@ The two layers generate every closed-cell residual entry: 15,754,230 entries, 5,
 
 ### 7.4. Why certify a frozen fast output?
 
-The detailed matched output table uses N2L; the preceding failed levels are N1 and N2.
-
 A stored-output certificate applies to pricing-library audits, historical calculations and production outputs fixed by the task. If replacement is allowed and the reference is available, returning its certified centre gives a direct control. Correcting the fast output by that centre also requires the rounding of the stored correction and final addition. The experiments compare these choices. The reference construction and verification must be included when assessing an online workload.
 
 A separately frozen descriptive control reuses the complete \(N_t=2048,\alpha=.52\) residual bank with 128 history bins. Every intersected closed source cell contributes to each bin maximum, and all weights are outwardly enclosed. All five methods below use the same model, six-month \(4400-4500\) spread, 0.25-point tolerance, reference centre, node radii, strip and true-tail budget. This control does not change the prespecified nearby-grid experiment.
@@ -578,11 +679,11 @@ A separately frozen descriptive control reuses the complete \(N_t=2048,\alpha=.5
 
 | Output | Complete joint, points | Matched marginal, points | Joint 0.25-point decision |
 |---|---:|---:|---|
-| Frozen Padé | 0.394999331 | 0.514096070 | UNRESOLVED |
-| Direct reference (binary64) | 0.228237113 | 0.347333852 | PASS |
-| Fast + stored correction | 0.228237113 | 0.347333852 | PASS |
-| BL core, 512 steps | 0.229082759 | 0.348179497 | PASS |
-| BL core, 1024 steps | 0.228534686 | 0.347631424 | PASS |
+| Frozen Padé | 0.394999331 | 0.514096070 | Unresolved |
+| Direct reference (binary64) | 0.228237113 | 0.347333852 | Pass |
+| Fast + stored correction | 0.228237113 | 0.347333852 | Pass |
+| BL core, 512 steps | 0.229082759 | 0.348179497 | Pass |
+| BL core, 1024 steps | 0.228534686 | 0.347631424 | Pass |
 
 All five matched marginal bounds remain above 0.25 points. Direct reference and corrected fast values happen to have the same complete bound in this instance; their actual stored values are checked separately. Exact dyadic arithmetic charges the reference return, stored correction and final addition. For these freely replaceable outputs, the reference is simpler than delivering the unchanged fast result. The joint structure still changes the decision for the reference and BL outputs. The BL 512-to-1024 difference is a diagnostic, not its certified error.
 
@@ -592,7 +693,7 @@ Certificate generation encloses 2,100,735 continuous frequency-by-cell residual 
 
 | Additional output construction | Deterministic mathematical work |
 |---|---|
-| Original Padé output | 352 Fourier values; 256 Jacobi samples per frequency |
+| Stored Padé output | 352 Fourier values; 256 Jacobi samples per frequency |
 | Direct returned reference | Return the already generated, fully charged centre with binary64 rounding |
 | Corrected fast output | Store one correction and perform one binary64 addition per price |
 | BL core, 512 steps | 67,371,264 history scalar-vector products; 2,626,560 transformed Riccati evaluations |
@@ -681,7 +782,7 @@ Every portfolio curve uses the 28 originally fixed and fully specified direction
 
 The two nearby levels retain all ten unordered pairs, including unresolved ones:
 
-**Table 12. Complete unresolved-pair lists for N1 and N2 under the original quotes, alongside strict separation counts.**
+**Table 12. Complete unresolved-pair lists for N1 and N2 under the fixed quotes, alongside strict separation counts.**
 
 | N_t | Method | Separated pairs | Complete unresolved list |
 | --- | --- | --- | --- |
@@ -712,19 +813,13 @@ The modern-method comparison reimplements the modified-Adams Riccati core descri
 
 The fixed refinement menu terminates reliably when the complete task radius meets the budget. Minimum action count assumes that all alternative radii have been certified and each action has unit cost. Constructing those alternatives is part of certificate generation. Model fit, market uncertainty, transaction costs and continuous calibration require additional analysis.
 
-## 8. Scope and reproducibility
+## 8. Conclusion and reproducibility
 
-The certificate uses the stated model, affine transform, regular reference and outward enclosures. Appendix A establishes stochastic admissibility for the experimental curve. The structural theorem covers its narrow parameter domain. Unresolved intervals, failed budgets and quote incompatibilities are reported alongside successful certificates.
+The construction follows the valuation map. The Riccati equation determines the exact state and its stability; the forward variance curve determines the residual's history weight; and the portfolio determines the linear functional applied to the common transform errors. Each stage retains information that would be lost by an earlier absolute-value bound. The resulting certificate is independent of how the reference trajectory was generated, provided that its continuous residual, half-plane and arithmetic obligations are verified.
 
-The [online paper](https://github.com/130U/certified-rough-heston-valuation/blob/paper/ARTICLE.md), scientific source and verification procedures are available in this repository. The complete numerical banks are retained in the author's local evidence archive. `python reproduce.py --full` requires those banks; the public checkout alone does not provide a complete saved-bank replay. The source is under `science/`, and `python verify_source.py` checks the published source hashes.
+The matched spread shows that retaining shared Fourier errors can change a complete tolerance decision without changing the stored prices. It does not show that every portfolio improves, that the upper bound is the actual error, or that a numerically certified model fits market quotes. The finite-candidate comparison is confined to its declared set, and the rational structural theorem is confined to its stated parameter domain. When output replacement is allowed, a certified reference is itself a valid pricing alternative.
 
-Tables E.6, E.7 and E.10 list the generation commands, reading commands, recomputation scope and shared dependencies. `--full` reads the specified banks, reconstructs downstream prices and objectives, and additionally checks the original structural cover. Continuous residual regeneration has separate commands. Saved derivative bounds and common rigorous primitives remain inputs to the readers. The reported acceptance runs were performed by the author.
-
-The supplement records software dependencies, evidence volume and mathematical work counts. Closed cells, interval terms, history products and support terms count different operations. At a fixed parameter and maturity, further directions reuse one certified bank; generating that bank remains part of the complete task.
-
-Appendices A–E contain the main proofs and experiments. Appendices F–G give classical Heston common-state inclusion and the four-part identity for inexact trial functions. Their terminal certificate and thirteen-dimensional diagnostic do not supply the full coefficient bank needed for annual monetary pricing.
-
-The construction certifies stored outputs and reuses a common Fourier bank across financial directions. If output replacement is allowed and a certified reference is available, returning the reference is a direct alternative. A comparison with true solver error requires a rigorous error interval; when that interval crosses zero, no finite upper ratio of certificate width to true error is reported.
+The [online article](https://github.com/130U/certified-rough-heston-valuation/blob/main/ARTICLE.md), scientific source and verification commands accompany the paper. All 27 numerical banks are identified by size and SHA-256 in `SCIENTIFIC-MANIFEST.json`. `verify_source.py` checks the publication identities. `reproduce.py` reads the saved banks and reconstructs downstream prices, objectives and decisions; `--full` additionally recomputes the original structural-sign cover. These modes do not regenerate every continuous residual derivative bound. Appendix E and `COMMANDS.md` distinguish the generators, readers and shared arithmetic dependencies.
 
 ## Appendix A. Probability model and strip transform
 
@@ -765,7 +860,7 @@ t^{\alpha_0-\alpha}+O(t^{2\alpha_0-\alpha})
 \]
 Its worst exponent is \(-.3714>-.5\), so it belongs to \(L^2_{\rm loc}\); also \(\xi_*=V_0+K_\alpha*b_\alpha\). The nonnegative input measure meets Example 2.2(ii). This verifies the model specification with a varying kernel and fixed forward variance curve.
 
-Theorem 2.3 of the source requires \(\operatorname{Re}\psi_1\in[0,1]\), a second-state initial transform with nonpositive real part, and a variance forcing term with nonpositive real part. Taking \(\psi_1=ia=1/2+iu\) and zero for the other initial and forcing terms gives (2.2), (2.6), and uniqueness in weak law. With \(\psi_1=1\), the Riccati solution is zero and \(\mathbb E S_T=S_0\) follows. A positive local martingale with constant expectation is a true martingale. Thus the probability strip in (4.2) follows from the continuous-time model. This argument applies established existence and affine-transform theory.
+Theorem 2.3 of the source requires \(\operatorname{Re}\psi_1\in[0,1]\), a second-state initial transform with nonpositive real part, and a variance forcing term with nonpositive real part. Taking \(\psi_1=ia=1/2+iu\) and zero for the other initial and forcing terms gives (2.2), (2.6), and uniqueness in weak law. With \(\psi_1=1\), the Riccati solution is zero and \(\mathbb E S_T=S_0\) follows. A positive local martingale with constant expectation is a true martingale. Thus the probability strip in (4.4) follows from the continuous-time model. This argument applies established existence and affine-transform theory.
 
 ## Appendix B. Exact construction and structural certificates
 
@@ -950,7 +1045,7 @@ The stronger rational margins in the complete certificate imply the following bo
 | \(-\bar D_4,-\bar D_5,-\bar D_6\) | \(1/8000,\ 1/15000000,\ 1/100000\) |
 | \(|\bar\Delta|^2\) | \(1/14400\) |
 
-The proof consists of rigorous interval inclusion and a complete finite covering. The supplementary material provides the interval implementation, all leaf rectangles, and the tree-structure check for independent verification.
+The proof consists of rigorous interval inclusion and a complete finite covering. The scientific source provides the interval implementation, all leaf rectangles, and the tree-structure check for independent verification.
 
 ### B.2. Continuous correlation persistence
 
@@ -1147,7 +1242,7 @@ D_C^\alpha v_\varepsilon+\lambda v_\varepsilon\le R\quad\text{a.e.}
 \tag{C.13}
 \]
 
-Equation (C.10) and the limit \(\varepsilon\downarrow0\) yield the first state inequality at every time. Absolute Fubini gives \(I^{1-\alpha}\xi=V_0g_{2-\alpha}+g_{2-\alpha}*\xi'\), whose derivative is (3.2), and \(g_\alpha*q_\alpha=\xi\). In particular, \(q_\alpha\in L^1\) and \(\xi\ge0\). Writing \(A_\alpha=I^{1-\alpha}\xi\), another absolute Fubini step followed by \(AC\) integration by parts gives
+Equation (C.10) and the limit \(\varepsilon\downarrow0\) yield the first state inequality at every time. Absolute Fubini gives \(I^{1-\alpha}\xi=V_0g_{2-\alpha}+g_{2-\alpha}*\xi'\), whose derivative is (3.4), and \(g_\alpha*q_\alpha=\xi\). In particular, \(q_\alpha\in L^1\) and \(\xi\ge0\). Writing \(A_\alpha=I^{1-\alpha}\xi\), another absolute Fubini step followed by \(AC\) integration by parts gives
 
 \[
 L_T-\widehat L_T
@@ -1171,7 +1266,7 @@ The proof also covers \(\lambda=0\): the resolvent is \(g_\alpha\), every convol
 ### C.3. Curve positivity and explicit constant-curve bounds
 
 
-The curve condition in Theorem 3.1 is the nonnegativity of \(q_\alpha=(I^{1-\alpha}\xi)'\), rather than monotonicity of \(\xi\). The state and reference still belong to \(AC[0,T]\), have the same zero initial value, and satisfy the full-time residual and dissipation hypotheses in (3.1). The physical residual remains \(R\), the normalized residual is \(R/\nu\), and physical damping is \(\lambda=\nu\sigma>0\). Both exponents retain the D-type definitions in Section 3. These assumptions are required for each application; the condition on the pricing kernel does not prove stochastic-model existence or extend the verified Riccati regularity domain.
+The curve condition in Theorem 3.1 is the nonnegativity of \(q_\alpha=(I^{1-\alpha}\xi)'\), rather than monotonicity of \(\xi\). The state and reference still belong to \(AC[0,T]\), have the same zero initial value, and satisfy the full-time residual and dissipation hypotheses in (3.3). The physical residual remains \(R\), the normalized residual is \(R/\nu\), and physical damping is \(\lambda=\nu\sigma>0\). Both exponents retain the D-type definitions in Section 3. These assumptions are required for each application; the condition on the pricing kernel does not prove stochastic-model existence or extend the verified Riccati regularity domain.
 
 For a real curve \(\xi\in AC[0,T]\) with \(\xi(0)=V_0\ge0\), the precise sufficient condition is
 
@@ -1198,7 +1293,7 @@ Absolute Fubini proves the second identity even for signed \(\xi'\), using \(g_\
 \tag{C.18}
 \]
 
-The Fubini step for the exponent is bounded by \(\|\xi\|_\infty T^{1-\alpha}\|e'\|_1/\Gamma(2-\alpha)\); its boundary terms vanish because \(e(0)=A_\alpha(0)=0\). The AC Caputo convexity and the positive zero-initial-value inverse remain the prior tools [LiLiu2018, Kopteva2021]. The finite-history convolution, cell-weight bound (3.5), and outward node-radius construction therefore remain valid under (C.16). Cells still carry the complete Caputo history.
+The Fubini step for the exponent is bounded by \(\|\xi\|_\infty T^{1-\alpha}\|e'\|_1/\Gamma(2-\alpha)\); its boundary terms vanish because \(e(0)=A_\alpha(0)=0\). The AC Caputo convexity and the positive zero-initial-value inverse remain the prior tools [LiLiu2018, Kopteva2021]. The finite-history convolution, cell-weight bound (3.7), and outward node-radius construction therefore remain valid under (C.16). Cells still carry the complete Caputo history.
 
 This is a strict relaxation of a sufficient curve condition, not a necessary condition for every conceivable certificate. If \(q_\alpha\) changes sign, the safe general estimate is \(\nu^{-1}(|q_\alpha|*k_\lambda*R)(T)\); the positive collapse to \(\xi*R\) cannot be used without further proof. Fractional forward-variance representations and their model-admissibility restrictions already occur in [ElEuchRosenbaum2017, Proposition 3.1 and Corollary 3.3]. Our analytical condition does not replace those restrictions.
 
@@ -1315,16 +1410,16 @@ If a model-transform envelope \(B(u)\) and an approximate-modulus bound \(\wideh
 \]
 The first bound is the triangle inequality. The second follows from
 \((L_T-\bar L_T)\int_0^1e^{(1-\tau)\bar L_T+\tau L_T}d\tau\)
-and the convexity bound \(e^{(1-\tau)a+\tau b}\le(1-\tau)e^a+\tau e^b\). It can be combined with (C.28) by taking the minimum, or compared with the error bound \(B(u)\) obtained by explicitly setting the node approximation to zero. The calculation uses the smallest of the applicable bounds.
+and the convexity bound \(e^{(1-\tau)a+\tau b}\le(1-\tau)e^a+\tau e^b\). Since (C.28) and (C.29) refer to the same approximate transform, their radii may be minimized. Setting the reference to zero instead gives a disk of radius \(B(u)\) about a different centre. It may be compared only after translating the centres as in Proposition 5.2, or by intersecting the complete price intervals. Radii about distinct centres are not directly minimized.
 
 ### C.5. Certified dissipative-kernel weights
 
 
-Theorem 3.1 already includes zero damping; specialize its full assumptions and AC comparison proof to \(\sigma=0\). The regularized error modulus satisfies \(D_C^\alpha v_\varepsilon+\nu\sigma v_\varepsilon\le R\) almost everywhere. The same positive inverse applies when \(\lambda=\nu\sigma=0\): \(k_0=g_\alpha\). Passing to the continuous endpoint and then composing with the pricing functional gives (3.6)–(3.7). In particular the zero-damping assertion introduces no \(1/\sigma\). The initial contribution \(V_0g_{1-\alpha}\) in \(q_\alpha\) and the factor \(\nu^{-1}\) are unchanged.
+Theorem 3.1 already includes zero damping; specialize its full assumptions and AC comparison proof to \(\sigma=0\). The regularized error modulus satisfies \(D_C^\alpha v_\varepsilon+\nu\sigma v_\varepsilon\le R\) almost everywhere. The same positive inverse applies when \(\lambda=\nu\sigma=0\): \(k_0=g_\alpha\). Passing to the continuous endpoint and then composing with the pricing functional gives (3.8)–(3.9). In particular the zero-damping assertion introduces no \(1/\sigma\). The initial contribution \(V_0g_{1-\alpha}\) in \(q_\alpha\) and the factor \(\nu^{-1}\) are unchanged.
 
 **Proposition (a rigorous cumulative-weight series).** Suppose
 \(0<\alpha,A_0<1\), \(0\le V_0\le\theta\), and the fixed curve is
-\(\xi(t)=\theta+(V_0-\theta)E_{A_0}(-\lambda_\xi t^{A_0})\), with \(\lambda_\xi\ge0\). Retain \(q_\alpha\ge0\). For \(\lambda\ge0\) and \(\lambda T^\alpha<1\), (3.8) holds on \([0,T]\). If it is truncated before index \(M\), the entire omitted outer series satisfies
+\(\xi(t)=\theta+(V_0-\theta)E_{A_0}(-\lambda_\xi t^{A_0})\), with \(\lambda_\xi\ge0\). Retain \(q_\alpha\ge0\). For \(\lambda\ge0\) and \(\lambda T^\alpha<1\), (3.10) holds on \([0,T]\). If it is truncated before index \(M\), the entire omitted outer series satisfies
 
 \[
 \left|W_\lambda(t)-\sum_{n=0}^{M-1}(-\lambda)^nW_n(t)\right|
@@ -1496,7 +1591,7 @@ For matrix multiplication with rigorous weight centres \(W_c\), radii \(W_r\), a
 \quad \gamma_{2n}=\frac{2n\,2^{-53}}{1-2n\,2^{-53}},
 \tag{D.9}
 \]
-and an additional underflow-error allowance. Induction on products of basic rounding factors gives this estimate and permits different summation association orders. Norm sums are also rounded outward. The calculation assumes round-to-nearest IEEE basic operations, correctly rounded square roots, gradual underflow, and no overflow or NaNs. The supplement identifies the implementation and arithmetic dependencies; interval inclusion uses these assumptions and the stated remainder bounds.
+and an additional underflow-error allowance. Induction on products of basic rounding factors gives this estimate and permits different summation association orders. Norm sums are also rounded outward. The calculation assumes round-to-nearest IEEE basic operations, correctly rounded square roots, gradual underflow, and no overflow or NaNs. Appendix E identifies the implementation and arithmetic dependencies; interval inclusion uses these assumptions and the stated remainder bounds.
 
 For the fixed curve, define
 \[
@@ -1536,7 +1631,7 @@ Shift the real-axis Fourier integration contour to the upper and lower boundarie
 The absolutely and uniformly convergent periodisation \(\sum_{j\in\mathbb Z}g(x+jh_*)\) has Fourier coefficients
 \(h_*^{-1}\widetilde g(2\pi n/h_*)\). Summing at zero and subtracting \(n=0\) gives a two-sided error of at most
 \(2M_* /(e^{2\pi a_*/h_*}-1)\).
-Conjugate symmetry halves both the two-sided integral and its sum. Multiplication by \(\sqrt m/\pi\) gives (4.2). ∎
+Conjugate symmetry halves both the two-sided integral and its sum. Multiplication by \(\sqrt m/\pi\) gives (4.4). ∎
 
 This is a specific application of the analytic-strip trapezoidal theory of Trefethen and Weideman [TrefethenWeideman2014]. Each pricing node uses its own continuous-time residual bound; the analytic strip controls the quadrature error between nodes.
 
@@ -1623,7 +1718,7 @@ Choosing the current largest \(U_n\varepsilon_n\) is a valid scheduling policy, 
 
 ### D.4. Finite-objective and perturbation proofs
 
-**Proof.** The exact difference \(c_i-M_i\) belongs to the closed interval used in (5.14). The minimum of its square is \(\ell\) and the maximum is \(v\), so the weighted sum encloses every \(J_j\). Each \(J_j\ge L_j\ge L_*\); a candidate attaining the smallest \(U_j\) gives \(J_*\le J_j\le U_*\), proving (5.15). If \(J_j\le J_*+\varepsilon\), then \(L_j\le J_j\le U_*+\varepsilon\), proving (5.16). Conversely, \(J_j-J_*\le U_j-L_*\) gives the stated sufficient inner condition. Under (5.17), every competitor satisfies \(J_j-J_{j_0}\ge L_j-U_{j_0}\ge g>0\), proving uniqueness. Condition (5.18) places the model objective of every selected higher-H candidate above \(J_*+\varepsilon\) and therefore excludes it. No independence assumption on quote errors across candidates is needed.
+**Proof.** The exact difference \(c_i-M_i\) belongs to the closed interval used in (5.15). The minimum of its square is \(\ell\) and the maximum is \(v\), so the weighted sum encloses every \(J_j\). Each \(J_j\ge L_j\ge L_*\); a candidate attaining the smallest \(U_j\) gives \(J_*\le J_j\le U_*\), proving (5.16). If \(J_j\le J_*+\varepsilon\), then \(L_j\le J_j\le U_*+\varepsilon\), proving (5.17). Conversely, \(J_j-J_*\le U_j-L_*\) gives the stated sufficient inner condition. Under (5.18), every competitor satisfies \(J_j-J_{j_0}\ge L_j-U_{j_0}\ge g>0\), proving uniqueness. Condition (5.19) places the model objective of every selected higher-H candidate above \(J_*+\varepsilon\) and therefore excludes it. No independence assumption on quote errors across candidates is needed.
 
 If \(p^+<b^-\), then the exact price satisfies \(c<B\); if \(p^->a^+\), then \(c>A\). A single such row rules out simultaneous consistency. In the opposite direction, the inner-band conditions give \(B\le b^+\le c\le a^-\le A\). Applying these statements row by row proves the consistency assertions. ∎
 
@@ -1637,7 +1732,7 @@ J(\widehat\alpha)-J_*
 Indeed, \(J(\widehat\alpha)\le\widetilde J(\widehat\alpha)+\delta_J
 \le\min\widetilde J+\varepsilon_{\rm alg}+\delta_J
 \le J_*+2\delta_J+\varepsilon_{\rm alg}\).
-If the strict gap in (5.17) satisfies \(g>2\delta_J+\varepsilon_{\rm alg}\), the same unique finite-set minimiser must be selected. This selection stability follows from the finite-objective gap and applies to the fixed candidate sets in Section 7 and Appendix E.
+If the strict gap in (5.18) satisfies \(g>2\delta_J+\varepsilon_{\rm alg}\), the same unique finite-set minimiser must be selected. This selection stability follows from the finite-objective gap and applies to the fixed candidate sets in Section 7 and Appendix E.
 
 ### D.5. Legal restriction to another maturity
 
@@ -1772,7 +1867,7 @@ The H0 benchmark uses the uniform-state barrier in Appendix C.1. Section 3 gives
 
 ### E.2. Numerical identities, scope and evidence map
 
-In this matrix, IDs label proof obligations. They are separate from the configuration IDs in Section 2; obligation N2 covers the N2L local-bin refinement.
+In this matrix, IDs label proof obligations. They are separate from the configuration IDs in Section 7; obligation N2 covers the N2L local-bin refinement.
 
 `configuration-registry.json` fixes the configuration IDs and mathematical dimensions. The matrix lists what each reader recomputes and which interval primitives, generator bounds and saved inputs it shares. The acceptance records document the author's runs.
 
@@ -1844,7 +1939,7 @@ The separate returned-reference ratio also pays binary64 return rounding and is 
 
 `portfolio-pass-counts.svg` and `portfolio-pass-counts.pdf` plot exact-endpoint pass counts for the three candidates and the alpha=.52 nearby controls. Coordinates are converted to decimals after exact counting. The shown range is 0–2 index points; the CSV/JSON retains every threshold. Within-bank comparisons use matched radii, while cross-bank curves describe different configurations.
 
-The complete driver also runs the dissipative-kernel reader, exact experimental-ledger reader and classical extension readers. These supplement the bank reconstruction and reuse the upstream continuous derivative bounds.
+The complete driver also runs the dissipative-kernel reader and exact experimental-ledger reader. These complement the bank reconstruction and reuse the upstream continuous derivative bounds.
 
 **Table E.10. Supplementary readers: recomputed obligations and shared inputs.**
 
@@ -1852,513 +1947,13 @@ The complete driver also runs the dissipative-kernel reader, exact experimental-
 |---|---|---|---|
 | Dissipative weights and complete prices | `generate.py` ([K1](https://github.com/130U/certified-rough-heston-valuation/blob/paper/COMMANDS.md#k1)) | `independent.py` ([K1](https://github.com/130U/certified-rough-heston-valuation/blob/paper/COMMANDS.md#k1)) | 14-layer direct series versus 12-layer moments; all 128 bins, 1025 nodes, 12 prices and 8 controls; strict primitives and upstream residual proof shared |
 | Exact experiment ledgers and thresholds | `produce_audit.py` ([A1](https://github.com/130U/certified-rough-heston-valuation/blob/paper/COMMANDS.md#a1)) | `read_audit_independent.py` ([A1](https://github.com/130U/certified-rough-heston-valuation/blob/paper/COMMANDS.md#a1)) | Exact saved-bank accounts, pair gaps, 504 thresholds and 9 controls; inherited derivative validity |
-| Classical terminal and trial-field evidence | Terminal inputs and saved interval banks | `verify_extensions.py` ([G1](https://github.com/130U/certified-rough-heston-valuation/blob/paper/COMMANDS.md#g1)) | Original-law moment and terminal readers; saved-field aggregation checks the supplied intervals |
 
 
 ### E.3. Budget sensitivity of every fixed direction
 
 Figure E.1 uses exact endpoints for all 28 declared half-year directions. Solid curves denote joint certificates and dashed curves signed-marginal certificates; radii are matched within each configuration. Comparisons between different banks are descriptive. The shown range is zero to two index points; the machine table retains every threshold, including those beyond this plotting range.
 
-![Figure E.1. Exact-threshold budget–pass-count curves; 28 fixed directions per configuration.](audit-experiments/portfolio-pass-counts.png)
-
-## Appendix F. Original-chain classical Heston inclusion
-
-This appendix constructs a classical-Heston input to the joint-error interface. The correlated positive-part chain supplies common original-law occupation probabilities. Standard convex analysis then gives support functions and financial propagation. The terminal witness certifies strict improvement of an outer set; completing an annual monetary pricing certificate also requires the full-price inputs in (F.21).
-
-### F.1. The two laws and admissible modes
-
-Write \(s=S/100=e^Z\), \(d=\kappa\bar v\), \(r=1/100\), \(h=1/768\), and \(s_0=1\). The continuous law \(P\) and the original discrete law \(Q\) are
-
-\[
-\begin{aligned}
-dZ_t&=(r-V_t/2)dt+\sqrt{V_t}(\rho\,dW_t+\sqrt{1-\rho^2}\,dB_t),\\
-dV_t&=(d-\kappa V_t)dt+\xi\sqrt{V_t}\,dW_t,\\
-Y&=dh+(1-\kappa h)v+\xi\sqrt{hv}\,G,\qquad V'=Y^+,\\
-Z'&=z+rh-hv/2+\sqrt{hv}(\rho G+\sqrt{1-\rho^2}H).
-\end{aligned}\tag{F.1}
-\]
-
-Here \(G,H\) are independent standard normal variables, and the same \(G\) drives both discrete updates. Throughout the common-moment argument,
-
-\[
-\kappa\in[2,4],\quad \bar v,v_0\in[3/100,3/50],\quad
-\xi\in[9/50,7/25],\quad \rho\in[-4/5,-3/10].\tag{F.2}
-\]
-
-A finite multidate mode has loadings \(\alpha_{i,n}\in\mathbb C\) satisfying
-
-\[
-\Re\alpha_{i,n}\le0,\qquad \sum_n|\Re\alpha_{i,n}|\le1/2.\tag{F.3}
-\]
-
-The realized prefix is \(H_{ji}\); the remaining stock loading is \(q_{ji}=p_{ji}+i\omega_{ji}\). All observation dates lie on the grid. A fixing moves one loading from the remaining sum to the realized prefix, without changing the underlying mode.
-
-### F.2. Exact continuation, the full kernel, and integrability
-
-**Lemma (exact continuous continuation).** The affine continuation \(u=e^{qz+a+bv}\), initialized with terminal \(a=b=0\), is the continuous conditional expectation of the mode. Between fixings, in remaining-time coordinates,
-
-\[
-b'=\tfrac12\xi^2b^2+(\rho\xi q-\kappa)b+\tfrac12(q^2-q),
-\qquad a'=rq+db.\tag{F.4}
-\]
-
-At fixings \(q\) changes and \(a,b\) continue without resetting. To prove existence, set \(\kappa_p=\kappa-p\rho\xi\), \(\gamma_p=(p^2-p)/2\). On \(\Re b=1\), the real drift is
-
-\[
-\tfrac12\xi^2-\kappa_p+\gamma_p
--\tfrac12\{(\xi\Im b+\rho\omega)^2+(1-\rho^2)\omega^2\}<0,
-\qquad
-\frac{d|b|}{dt}\le(\xi^2/2-\kappa_p)|b|+|q^2-q|/2.\tag{F.5}
-\]
-
-Indeed \(p\in[-1/2,0]\), \(\kappa_p\ge1.888\), and \(\gamma_p\le3/8\). The first-crossing argument gives \(\Re b\le1\); the radial estimate excludes explosion on every finite segment. Also \(\Re a\le(6/25)T\).
-
-The identification with an expectation requires more than formal Riccati algebra. Multiply the real loadings by \(5/4\), and let \(L_*(t),p_*(t)\) be the resulting realized and remaining contributions. Then
-
-\[
-\mathcal Y_t=e^{L_*(t)+p_*(t)Z_t+4V_t-(24/25)t},\qquad
-|\mathcal M_\tau|^{5/4}
-\le e^{(5/4)(6/25)T+(24/25)T}\mathcal Y_\tau.\tag{F.6}
-\]
-
-Here \(\mathcal M\) is the stopped affine local martingale associated with the mode. The process \(\mathcal Y\) is a nonnegative local supermartingale: its constant drift is nonpositive, and its variance drift is at most \(65/128-4(1.86)+8(7/25)^2<0\). Loading changes cancel at each fixing. Compact stopping and (F.6) give a uniform \(5/4\)-moment bound. Uniform integrability removes stopping, proves the conditional-expectation identity, and covers \(v=0\) and every finite initial state.
-
-The actual one-step propagation retains the entire positive-part Gaussian kernel. For next-step coefficients \(a,b,q\), integration over \(H\) gives
-
-\[
-\frac{Q_hu(z,v)}{e^{qz}}=
-e^{a+qrh-qhv/2+q^2(1-\rho^2)hv/2}
-\int_{\mathbb R}\varphi(g)
-e^{q\rho\sqrt{hv}g+b[dh+(1-\kappa h)v+\xi\sqrt{hv}g]^+}\,dg.\tag{F.7}
-\]
-
-For \(v>0\) the integral splits at \(g_0=-(dh+(1-\kappa h)v)/(\xi\sqrt{hv})\): the first part has variance exponent zero, and the second uses the positive candidate. Both parts are retained. At \(v=0\), \(V'=dh\) deterministically. Completing a real Gaussian square is an integration device, not a replacement of \(Q\) by a mode-dependent probability law.
-
-Let \(D_{ji}(v)\) be this actual propagation minus the exact continuous continuation, after removal of the common \(e^{q_{ji}z}\). Finite conditional telescoping, including each fixing exactly once, yields
-
-\[
-\Phi_{Q,i}-\Phi_{P,i}=\sum_{j=0}^{N-1}r_{ji},\qquad
-r_{ji}=E_Q[H_{ji}e^{q_{ji}Z_j}D_{ji}(V_j)].\tag{F.8}
-\]
-
-The integrability in the next subsection justifies every discrete expectation in this identity.
-
-### F.3. Original-law moments and shared occupation probabilities
-
-**Lemma (discrete exponential moment).** For nonpositive real multidate loadings of total absolute value at most one,
-
-\[
-E_Q\exp\!\left\{\sum_{n\le j}\beta_n Z_n+4V_j\right\}
-\le K_j:=e^{6/25+(73/75)jh}.\tag{F.9}
-\]
-
-To prove it, complete the real stock square for \(p\in[-1,0]\). The candidate mean becomes \(dh+\eta_pv\), where \(\eta_p=1-\kappa_ph\ge191/192\). Since \((-y)^+\le h(25e)^{-1}e^{-25y/h}\),
-
-\[
-E(-Y_p)^+\le\frac{h}{25e}
-\exp\!\left\{-25d+\frac{[-25\eta_p+(625/2)\xi^2]v}{h}\right\}
-\le\frac{h}{25e^{5/2}}<h/300.\tag{F.10}
-\]
-
-The parameter bounds imply \(d\ge3/50\), the variance coefficient is at most \(-71/192\), and \(e^{5/2}>12\). The negative part is exactly zero at \(v=0\). For \(B\ge0\), \(e^{By^+}\le e^{By}+B(-y)^+\). Defining \(F_p(B)=\gamma_ph+\eta_pB+\xi^2hB^2/2\), Gaussian integration therefore gives
-
-\[
-\begin{aligned}
-E_Q[e^{pZ'+BV'}\mid z,v]
-&\le e^{pz+prh}\{e^{Bdh+F_p(B)v}+Bh\,e^{\gamma_phv}/300\},\\
-E_Q[e^{pZ'+4V'}\mid z,v]
-&\le e^{pz+4v}(e^{4dh}+4h/300)
-\le e^{pz+4v+(73/75)h}.
-\end{aligned}\tag{F.11}
-\]
-
-Here \(F_p(4)\le4\), \(rp\le0\), and \(4d\le24/25\). Successive conditioning and cancellation of loading changes prove (F.9), using \(4v_0\le6/25\).
-
-For a finite partition \(I_r\) of \([0,\infty\)), retain the zero atom and the unbounded tail, and set
-
-\[
-\pi_{jr}=Q(V_j\in I_r),\quad
-h_{jir}\ge\sup_{v\in I_r}|e^{-2v}D_{ji}(v)|^2,\quad
-|r_{ji}|^2\le K_j\sum_rh_{jir}\pi_{jr}=:\mathbf a_{ji}\cdot\pi_j.\tag{F.12}
-\]
-
-The last inequality is complex Cauchy–Schwarz applied to \(H_{ji}e^{q_{ji}Z_j}e^{2V_j}\) and \(e^{-2V_j}D_{ji}(V_j)\); its first squared moment is covered by the doubled loadings in (F.9). Thus every mode uses the same original-chain probability vector. If a trial defect depends on additional states, one must bound uniformly over those states or enlarge the partition. Continuous-law residuals do not inherit these \(Q\)-probabilities.
-
-### F.4. A valid terminal probability polytope
-
-Fix \(\theta_*=(\kappa,\bar v,\xi,\rho,v_0)=(3,9/200,23/100,-11/20,9/200)\), \(j=767\), \(d=27/200\), and \(\eta=255/256\). Use
-
-\[
-I_0=\{0\},\quad I_r=((r-1)/100,r/100]\ (1\le r\le100),
-\quad I_{101}=(1,\infty).\tag{F.13}
-\]
-
-For \(v>0\) the next-step zero mass is \(\Phi(-(dh+\eta v)/(\xi\sqrt{hv}))\); at \(v=0\) it is zero. Projection excess satisfies \(E[-dh-\eta v-\xi\sqrt{hv}G]^+\le h\xi^2e^{-d\eta/\xi^2}/(\eta\sqrt{2\pi e})<h/200\). This follows by writing \(v=hz\), bounding the normal negative part by its density term, and maximizing \(\sqrt z e^{-\eta^2z/(2\xi^2)}\). The mean recursion and the positive-exponential recursion give
-
-\[
-EV_n\le\mu:=7/150,\qquad
-M_{n+1}\le e^{4dh}M_n^{\beta}+h/50,\qquad
-Ee^{4V_n}\le5/4,\quad Ee^{-tV_n}\ge e^{-t\mu}.\tag{F.14}
-\]
-
-Here \(M_n=Ee^{4V_n}\), \(\lambda=\kappa-2\xi^2=14471/5000\), and \(\beta=1-\lambda h\in(0,1)\). Concavity of \(x^\beta\) gives the displayed recursion. At \(M=5/4\), use \(\log(5/4)\ge1/5\), \(4d-\lambda/5=-971/25000\), and \(1-e^{-x}\ge x/2\) for \(0\le x\le1\); the decrease exceeds \(h/50\). Since \(M_0=e^{.18}<5/4\), induction proves the positive-exponential bound. Jensen gives the Laplace lower bound.
-
-For \(t\in\mathcal T=\{1,4,16,64,256,(191/192)^2/[2(49/625)h]\}\), define
-
-\[
-t_0=t,\quad t_{n+1}=\eta_*t_n-c_*t_n^2,\qquad
-L_{767}(t)=\exp\!\left[-d_*h\sum_{n=0}^{766}t_n-v_*t_{767}\right].\tag{F.15}
-\]
-
-The reference quadruple is \((\eta_*,c_*,d_*,v_*)=(191/192,(49/625)h/2,3/50,3/100)\), and the point quadruple is \((255/256,\xi^2h/2,27/200,9/200)\). The bound \(e^{-tY^+}\le e^{-tY}\) and Gaussian integration give \(E[e^{-tV'}\mid v]\le e^{-dht}e^{-(\eta t-\xi^2ht^2/2)v}\). All 767 recursion steps satisfy \(0\le t_n\le\eta_* /(2c_*)\). Consequently the recursion is monotone on the certified enclosures; the conservative reference choices yield a valid upper bound throughout (F.2).
-
-The true terminal probability vector satisfies
-
-\[
-\begin{aligned}
-\sum_r\inf_{I_r}e^{-tv}\pi_r&\le L^{\rm ref}_{767}(t),&
-\sum_r\inf_{I_r}e^{-tv}\pi_r&\le L^{\rm point}_{767}(t),\\
-\sum_r\sup_{I_r}e^{-tv}\pi_r&\ge e^{-t\mu},&
-\sum_r\ell_r\pi_r&\le\mu,\quad \sum_re^{4\ell_r}\pi_r\le5/4,
-\end{aligned}\tag{F.16}
-\]
-
-together with nonnegativity and mass one; \(\ell_r=\inf I_r\). The zero Laplace coefficient is one, and the tail infimum/supremum are zero/\(e^{-t}\). The six triples, two moment rows, and two signed mass rows give 22 inequalities. Upper-bound rows use lower coefficient endpoints and upper right endpoints; lower-bound rows use upper coefficients and lower right endpoints before sign reversal. Thus the saved rational \(\mathcal P_{767}=\{\pi\ge0:A\pi\le b\}\) contains the actual probabilities and is a nonempty compact subset of the simplex.
-
-### F.5. Certified terminal profiles on the entire variance axis
-
-At the final step the future variance exponent is zero, so its positive-part correction vanishes exactly. For \(q=p+i\omega\), write \(g=(q^2-q)/2\), \(L=\rho\xi q-\kappa\), \(c=\xi^2/2\). Then
-
-\[
-D_q(v)=e^{rqh+hgv}-e^{a(h)+B(h)v},\quad
-B'=g+LB+cB^2,\ B(0)=0,\qquad a(h)=rqh+d\int_0^hB(t)dt.\tag{F.17}
-\]
-
-At \(\theta_*\), the Asian representative is \((p,\omega)=(-1/48,64)\), and the put representatives are \((-1/4,-8),(-1/4,-24),\ldots,(-1/4,-120)\). On \(\Re B=0\) the real drift is at most \(p(p-1)/2-(279/800)\omega^2<0\); hence \(\Re B\le0\) and \(\lvert B(t)\rvert\le|g|t\).
-
-Let \(P_3(t)=b_1t+b_2t^2+b_3t^3\), where \(b_1=g\), \(b_2=Lg/2\), \(b_3=(L^2g+2cg^2)/6\). The exact guard \(\Re b_1+\max(\Re b_2,0)h+\max(\Re b_3,0)h^2<0\) proves \(\Re P_3\le0\). Its residual is \(-\sum_{k=3}^6r_kt^k\), with \(r_3=Lb_3+2cb_1b_2\), \(r_4=c(2b_1b_3+b_2^2)\), \(r_5=2cb_2b_3\), \(r_6=cb_3^2\). Since \(\Re[L+c(B+P_3)]\le-\kappa_p\), variation of constants gives
-
-\[
-E_B=\sum_{k=3}^6|r_k|_+\frac{h^{k+1}}{k+1},\qquad
-E_A=d\sum_{k=3}^6|r_k|_+\frac{h^{k+2}}{(k+1)(k+2)}.\tag{F.18}
-\]
-
-The notation \(|\cdot|_+\) denotes a certified upper modulus. Set
-
-\[
-\begin{aligned}
-A_q&=\min\{|{-d\int_0^hP_3}|_++E_A,\ d|g|_+h^2/2\},\\
-B_q&=\min\{|hg-P_3(h)|_++E_B,\ (|L|_++\xi^2|g|_+h)|g|_+h^2/2\},\\
-m_q&=2-\max\{h\Re g,\min(0,\Re P_3(h)+E_B)\}>0.
-\end{aligned}\tag{F.19}
-\]
-
-The exponential-difference integral formula, and the coarse modulus bound for the two exponentials, imply
-
-\[
-|e^{-2v}D_q(v)|\le e^{prh}(A_q+B_qv)e^{-m_qv},\qquad
-h_{qr}=\min\{[4e^{2prh-4\ell_r}]_+,[e^{2prh}S_{qr}^2]_+\},\quad
-S_{qr}=\sup_{v\in I_r}(A_q+B_qv)e^{-m_qv}.\tag{F.20}
-\]
-
-The supremum uses finite endpoints of each band closure and the stationary point \(1/m_q-A_q/B_q\) when present. For \(B_q=0\), use the monotone branch without division. The tail limit is zero, and the zero band is evaluated at zero. Exact outward arithmetic verifies both Riccati guards and all 918 entries (nine modes, 102 bands), including the tail. The Asian conjugate has the identical profile.
-
-### F.6. Joint inclusion and its exact strictness criterion
-
-Suppose the same finite mode catalog gives the complete discounted-price decomposition
-
-\[
-e_k=p_{h,k}-p_{c,k}=\Re\sum_{j,i}c_{ki}r_{ji}+R_k,\qquad |R_k|\le\varrho_k.\tag{F.21}
-\]
-
-The coefficients and the remainder bounds must include all required conversion, truncation, and arithmetic contributions. The terminal witness alone does not establish this full-price premise. Let \(\mathcal F\) be nonempty, compact, convex, and contain the actual full occupation tuple \(\Pi=(\pi_j)_j\). Define
-
-\[
-\mathcal E=\left\{\left(\Re\sum_{j,i}c_{ki}z_{ji}\right)_k:
-\Pi\in\mathcal F,\ |z_{ji}|^2\le\mathbf a_{ji}\cdot\pi_j\right\}
-+\prod_k[-\varrho_k,\varrho_k].\tag{F.22}
-\]
-
-**Proposition (joint price inclusion).** This set is nonempty, compact, convex, centrally symmetric, and contains the actual \(e\). Its support is
-
-\[
-s_{\mathcal E}(w)=\max_{\Pi\in\mathcal F}\sum_{j,i}
-\left|\sum_kw_kc_{ki}\right|\sqrt{\mathbf a_{ji}\cdot\pi_j}
-+\sum_k|w_k|\varrho_k.\tag{F.23}
-\]
-
-**Proof.** The lifted constraints are convex because \(\lvert z\rvert^2\) is convex and the right side is affine; they are closed and bounded over compact \(\mathcal F\). Their linear image plus the remainder box has the stated geometric properties. The actual \((\Pi,r)\) is feasible by (F.12). For fixed \(\Pi\), the support of each complex disk is its radius times the modulus of the real-linear coefficient. Independent disk phases attain the sum; the common maximization then gives (F.23). With cross-time constraints retain \(\max_{\mathcal F}\sum_j\), rather than \(\sum_j\max\); separation is justified only for \(\mathcal F=\prod_j\mathcal P_j\). ∎
-
-Put \(F_k(\Pi)=\sum_{j,i}|c_{ki}|\sqrt{\mathbf a_{ji}\cdot\pi_j}\), \(m_k=\max_{\mathcal F}F_k\), and \(\mathcal B=\operatorname{rect}(\mathcal E)=\prod_k[-m_k-\varrho_k,m_k+\varrho_k]\). Then
-
-\[
-\begin{aligned}
-s_{\mathcal B}(w)-s_{\mathcal E}(w)
-=\min_{\Pi\in\mathcal F}\Big\{
-&\sum_k|w_k|[m_k-F_k(\Pi)]\\
-&+\sum_{j,i}\big[\sum_k|w_kc_{ki}|-|\sum_kw_kc_{ki}|\big]
-\sqrt{\mathbf a_{ji}\cdot\pi_j}\Big\}.
-\end{aligned}\tag{F.24}
-\]
-
-Every summand is nonnegative. The gap is zero precisely when one common \(\Pi_*\) maximizes every active complete pricing row and all nonzero \(w_kc_{ki}\) in each positive-radius disk lie on a common nonnegative complex ray. No phase condition is required at zero radius; \(w=0\) has zero gap. Adding and subtracting the common row values proves (F.24), and compactness makes the minimum attained. Absence of such a witness therefore proves strict improvement over the smallest coordinate box of the same outer set. It proves neither boundary attainment by the actual bias nor an actual-error lower bound. After payoff intersections, apply the criterion anew to the resulting set.
-
-### F.7. A complete terminal-row separation witness
-
-The instruments are European puts at maturities \(1/4,1/2,1\) and strikes (90,100,110), followed by the twelve-fixing arithmetic Asian call spread \((A-95)^+-(A-110)^+\), \(A=\sum_{m=1}^{12}S_{m/12}/12\). The eighth instrument is the annual at-the-money put; \(w=\mathbf e_{10}-\mathbf e_8\) is a prespecified bias comparison, not an optimized hedge.
-
-After conjugate reduction, the complete terminal rows are
-
-\[
-F_A(\pi)=C_A\sqrt{K_{767}}\sqrt{a\cdot\pi},\quad C_A>0,\qquad
-F_P(\pi)=\frac{1600e^{-.01}}{\pi_{\rm circ}}\sqrt{K_{767}}
-\sum_{\omega=8,24,\ldots,120}
-\frac{\sqrt{d_\omega\cdot\pi}}
-{\sqrt{(\omega^2+1/16)(\omega^2+25/16)}}.\tag{F.25}
-\]
-
-Here \(\pi_{\rm circ}\) is the circle constant, while \(\pi\) is the probability vector. The strict inequality \(C_A>0\) is substantive: the simplex Beta coefficient is \(\mathcal M_K(\zeta)=K(12K/100)^{\sum_m\zeta_m}\prod_m\Gamma(\zeta_m)/\Gamma(2+\sum_m\zeta_m)\). The original catalog retains the difference between strikes 95 and 110. Its Gamma factors are finite and nonzero, and the strike factors have unequal magnitudes \(95(11.4)^{1/4}\) and \(110(13.2)^{1/4}\), so at least one coefficient is nonzero.
-
-The exact Asian primal and dual satisfy \(\pi^A\ge0\), \(A\pi^A\le b\), \(y\ge0\), \(A^Ty\ge a\), and \(a\cdot\pi^A=b\cdot y\). Let \(S=\{1,2,6\}\) and let \(J\) be the three positive-dual rows (point \(t=256\) Laplace, mean, mass). The exact compact expression for the witness is
-
-\[
-\pi^A_{S}=A_{J,S}^{-1}b_J,\quad \pi^A_{S^c}=0,\qquad
-\det A_{J,S}\ne0,\qquad (A^Ty-a)_{S^c}>0.\tag{F.26}
-\]
-
-Its nonzero coordinates are approximately \((.0276833515163,\ .0487291439380,\ .923587504546)\). Weak duality proves optimality. Complementary slackness forces any optimizer onto \(S\) and onto the three active equalities; nonsingularity proves uniqueness. The strictly increasing square root transfers uniqueness to \(F_A\).
-
-The same polytope contains an exact \(\pi^B\) supported on \(\{5,6\}\). Let \(D_\omega=(\omega^2+1/16)(\omega^2+25/16)\) and \(x_\omega=d_\omega\cdot\pi^A>0\). For the auxiliary put row \(\mathscr B(\pi)=\sum_\omega\sqrt{d_\omega\cdot\pi}/\sqrt{D_\omega}\),
-
-\[
-\left.\frac d{dt}\mathscr B((1-t)\pi^A+t\pi^B)\right|_{t=0}
-=\sum_\omega\frac{d_\omega\cdot(\pi^B-\pi^A)}{2\sqrt{D_\omega x_\omega}}
-\in[L,U],\qquad L>3\cdot10^{-9}.\tag{F.27}
-\]
-
-The exact rational \(L,U\) are the `put_direction.derivative` endpoints in `terminal767-result.json`. This reference specifies them exactly without a large printed fraction. Each coefficient enclosure \([l_\omega,u_\omega]\) obeys \(0<l_\omega\le u_\omega\) and \(4l_\omega^2D_\omega x_\omega\le1\le4u_\omega^2D_\omega x_\omega\); negative profile changes reverse endpoints before summation. Thus the signed full-row derivative is positive. The Asian maximizer is not a put maximizer, so
-
-\[
-g^{\rm row}_{767}=\max F_A+\max F_P-\max(F_A+F_P)>0,
-\qquad s_{\mathcal B_{767}}(w)-s_{\mathcal E_{767}}(w)\ge g^{\rm row}_{767}>0.\tag{F.28}
-\]
-
-The second inequality follows from the coefficient triangle inequality; possible phase cancellation can only further reduce the joint support. With valid timewise product sets and the same complete catalog, the accumulated un-intersected support gap is at least this positive terminal gap. A modified catalog, probability set, or payoff intersection requires renewed analysis.
-
-Within `science/baseline/reference/code/classical/`, the machine appendices are `terminal767-input.json`, `terminal767-result.json`, `verify_input_bounds.py`, and `verify_terminal.py`. The first reader regenerates 22 rows, twelve 767-step Laplace recursions, and all 918 profile entries; the second verifies the 407 exact witness checks. These establish the terminal claims and leave the complete-price premise (F.21), annual monetary endpoints, and any trading interpretation unproved by this example.
-
-### F.8. Standard financial propagation corollary
-
-For compact valid sets \(e=p_h-p_c\in\mathcal E\) and \(n=p_h-\widehat p_h\in\mathcal N\),
-
-\[
-\begin{aligned}
-w^Tp_h-s_{\mathcal E}(w)&\le w^Tp_c\le w^Tp_h+s_{\mathcal E}(-w),\\
-w^T\widehat p_h-s_{\mathcal N}(-w)-s_{\mathcal E}(w)
-&\le w^Tp_c\le
-w^T\widehat p_h+s_{\mathcal N}(w)+s_{\mathcal E}(-w).
-\end{aligned}\tag{F.29}
-\]
-
-If the actual \((n,e)\) belongs to a common compact \(\mathcal K\), replace the lower subtraction by \(s_{\mathcal K}(-w,w)\) and the upper addition by \(s_{\mathcal K}(w,-w)\). For a closed calibration acceptance set \(\mathcal Y\),
-
-\[
-\begin{aligned}
-\mathcal T_\theta&=\{(n,e)\in\mathcal K_\theta:
-\widehat p_{h,\rm cal}+n_{\rm cal}-e_{\rm cal}\in\mathcal Y\},\\
-\mathcal A_\theta&=\{\widehat p_{h,10}+n_{10}-e_{10}:(n,e)\in\mathcal T_\theta\}.
-\end{aligned}\tag{F.30}
-\]
-
-The identities \(p_c=p_h-e=\widehat p_h+n-e\) prove these statements. Nonempty \(\mathcal T_\theta\) is compact and attains the target endpoints; emptiness excludes compatibility with the acceptance rule. Enlarging the common input set to a coordinate box enlarges or preserves the target set. These are standard set-propagation consequences, conditional on a valid center and complete error inputs.
-
-## Appendix G. Nonexact trial fields and the signed error identity
-
-This appendix extends the continuous–discrete comparison to one deterministic trial field that need not solve the backward equation. It states sufficient conditions independently of the unknown exact solution, proves the four signed terms, and gives an explicit globally integrable nonexact field. Expectations below are undiscounted; multiply the identity and its bounds by the common discount factor when converting a payoff to a price.
-
-### G.1. State, traces, and admissibility
-
-Use the original laws \(P,Q\), parameters, and correlated positive-part update of Appendix F. Between monthly fixings the state is \(x=(s,v,A_m,\ell_m)\), where \(A_m\) is the sum of the realized normalized stock values and \(\ell_m\) the sum of their logarithms. The fixing map \(J_i\) adds the current \(s,\log s\) to these histories. Between fixings,
-
-\[
-\mathcal L=rs\partial_s+(d-\kappa v)\partial_v
-+\tfrac12vs^2\partial_{ss}+\rho\xi vs\partial_{sv}
-+\tfrac12\xi^2v\partial_{vv}.\tag{G.1}
-\]
-
-Choose one fixed nonnegative weight for the entire horizon, for example
-
-\[
-\begin{aligned}
-W&=e^v\{s^{-1/2}+e^{-\ell_m/24}s^{-(12-m)/24}\},\\
-W^{\rm nat}&=e^v\{\mathfrak B_m^{-1/2}+\mathfrak G_m^{-1/2}\},\qquad
-\mathfrak B_m=(A_m+(12-m)s)/12,\quad
-\mathfrak G_m=e^{\ell_m/12}s^{(12-m)/12}.
-\end{aligned}\tag{G.2}
-\]
-
-Both weights match exactly across the fixing map. Since the arithmetic mean is at least the geometric mean, \(W^{\rm nat}\le2e^v\mathfrak G_m^{-1/2}\). The history factors in both weights are multidate nonpositive real loadings with total absolute value at most \(1/2\).
-
-**Lemma (weight moments).** At \(\theta_*\), over \(0\le t\le1\), either weight satisfies
-
-\[
-\sup_tE_PW(t,X_t)<5/2,\qquad \max_jE_QW(t_j,X_j)<5/2,
-\qquad \sup_{\tau\le1}E_PW(\tau,X_\tau)^2<\infty.\tag{G.3}
-\]
-
-The last supremum is over the compact-localization stopping times used below. To prove the first bound for a branch, use the generator on \(e^{L+pZ+V}\), with \(p\in[-1/2,0]\). Its variance coefficient is \(\gamma_p-\kappa_p+\xi^2/2<0\), and its constant drift is \(rp+d\le d\). Loading changes cancel at fixings. Nonnegative stopped supermartingales give branch expectation at most \(e^{v_0+d}=e^{9/50}<5/4\). For the discrete law, (F.10)–(F.11) with \(B=1\) and \(F_p(1)\le1\) give a branch bound \(e^{v_0+d+1/300}=e^{11/60}<5/4\). Sum two branches, or use \(W^{\rm nat}\le2e^v\mathfrak G_m^{-1/2}\). The strict comparisons follow from \(\log(5/4)\ge1/5\).
-
-For the squared bound, \((a+b)^2\le2(a^2+b^2)\). Each squared branch has total stock loading at most one and variance loading two. Increasing the latter to four dominates it; the continuous exponential-supermartingale variance coefficient is bounded by \(1-4(1.776)+8(7/25)^2<0\), with constant drift at most \(24/25\). Stopping therefore gives a uniform finite second moment. The same argument covers the natural weight. This is enough for uniform integrability of fields dominated by \(W\); no ordinary martingale assumption on the stopped limiting stochastic integral is needed.
-
-Let \(R\) be the same terminal payoff, or the same exact finite conversion remainder, under both laws. The deterministic field \(\widetilde u\) is locally \(C^{1,2}\) between fixings, admits a right-sided extension at \(v=0\) suitable for Itô's formula, and has genuine one-sided traces uniformly on compact state sets. Require global bounds
-
-\[
-\begin{aligned}
-|\widetilde u|&\le CW,&
-|\mathfrak r(t,x)|&\le\eta_c(t)W(t,x),& \int_0^1\eta_c(t)dt&<\infty,\\
-|d_i(x)|&\le\eta_iW(t_i-,x),&
-|\delta(x)|&\le\eta_TW(1,x),& C,\eta_i,\eta_T&<\infty.
-\end{aligned}\tag{G.4}
-\]
-
-Domination includes all states, \(v=0\), and the unbounded tail. Define
-
-\[
-\begin{aligned}
-\mathscr D_j&=Q_j\widetilde u_{j+1}-\widetilde u_j,&
-\mathfrak r&=(\partial_t+\mathcal L)\widetilde u,\\
-d_i(x)&=\widetilde u(t_i-,x)-\widetilde u(t_i+,J_ix),&
-\delta&=R-\widetilde u_N.
-\end{aligned}\tag{G.5}
-\]
-
-The jump defect is the left trace minus the right trace after the fixing. The operator \(Q_j\) includes the original kernel and the step-end fixing. Both laws use the same post-fixing terminal convention, counting each update once. The defects \(\mathscr D_j\) must be integrable under \(Q\); a full-horizon enclosure is \(\sum_jE_Q\mathscr D_j\in[L_Q,U_Q]\). A sufficient alternative is \(\lvert\mathscr D_j\rvert\le h\eta_{Q,j}W\).
-
-An exact future-value field belongs to this class after its regularity and domination bounds are verified. A finite representation requires the same growth, residual, trace, terminal-value and original-kernel checks.
-
-### G.2. The four-term signed identity
-
-**Theorem (one-field residual identity).** Under (G.3)–(G.5) and the integrable original-\(Q\) defects,
-
-\[
-\boxed{E_QR-E_PR=
-\sum_jE_Q\mathscr D_j-E_P\int_0^1\mathfrak r(t,X_t)dt
-+\sum_iE_Pd_i+(E_Q-E_P)\delta.}\tag{G.6}
-\]
-
-**Proof.** Finite conditional telescoping under \(Q\) gives
-
-\[
-E_Q\widetilde u_N-\widetilde u_0=\sum_jE_Q\mathscr D_j.\tag{G.7}
-\]
-
-For \(P\), localize in compact state domains, on closed subintervals away from fixings. Itô's formula then has a stochastic integral of expectation zero. The second-moment bound in (G.3) and \(|\widetilde u|\le CW\) make the stopped field values uniformly integrable, so they converge in \(L^1\) when stopping is removed. Tonelli and (G.4) give \(E_P\int|\mathfrak r|\le\int\eta_c(t)E_PW(t,X_t)dt<\infty\), which removes stopping from the time integral by absolute integrable domination. As the subinterval endpoints approach a fixing, compact-uniform genuine traces and continuous paths give almost-sure trace convergence; the same uniform integrability gives \(L^1\) convergence. The actual field jump is \(-d_i\). Summing all intervals and jumps therefore gives
-
-\[
-E_P\widetilde u_N-\widetilde u_0
-=E_P\int_0^1\mathfrak r(t,X_t)dt-\sum_iE_Pd_i.\tag{G.8}
-\]
-
-Subtract (G.8) from (G.7), and add the two terminal defects \(\delta=R-\widetilde u_N\). The common deterministic initial value cancels, giving (G.6). The argument also includes a fixing at the terminal date using the specified post-fixing convention. ∎
-
-If one instead defines \(J_i^{\rm jump}=\widetilde u(t_i+,J_ix)-\widetilde u(t_i-,x)\), its term in (G.6) is \(-\sum_iE_PJ_i^{\rm jump}\). This explicit sign convention avoids mixing the two definitions. For an exact continuation, the backward residual, fixing defects, and terminal discrepancy vanish, recovering (F.8). For a nonexact field all four signed terms remain.
-
-### G.3. Effective sufficient bounds
-
-At \(\theta_*\), (G.6) and the moment lemma imply
-
-\[
-\begin{aligned}
-|E_QR-E_PR|&\le\max(|L_Q|,|U_Q|)
-+\tfrac52\left(\int_0^1\eta_c(t)dt+\sum_i\eta_i\right)+5\eta_T,\\
-|E_QR-E_PR|&\le\tfrac52\left(h\sum_j\eta_{Q,j}
-+\int_0^1\eta_c(t)dt+\sum_i\eta_i\right)+5\eta_T
-\quad\text{if }|\mathscr D_j|\le h\eta_{Q,j}W.
-\end{aligned}\tag{G.9}
-\]
-
-These are sufficient nonnegative bounds obtained by the triangle inequality. A joint signed enclosure of the four contributions can instead be propagated by its linear image. Separate price intervals alone supply no shared-state compatibility witness. In particular, a necessary lower bound on a residual envelope is not an evaluation of either sufficient upper bound in (G.9).
-
-### G.4. A self-contained nonexact analytic field
-
-Fix \(T=1\), \(\varepsilon>0\), and \(R=s_T^{-1/2}\). Consider
-
-\[
-a_\varepsilon(t)=1+\varepsilon t(1-t),\qquad
-\widetilde u_\varepsilon(t,x)=a_\varepsilon(t)s^{-1/2},\qquad
-1\le a_\varepsilon\le C_\varepsilon:=1+\varepsilon/4.\tag{G.10}
-\]
-
-Use \(W_A=s^{-1/2}e^v\), which is a single branch of the preceding weight proof. The field is globally regular for \(s>0,v\ge0\), is independent of the histories, has exact matching fixing traces and terminal value, and obeys \(|\widetilde u_\varepsilon|\le C_\varepsilon W_A\). Its generator residual is
-
-\[
-\mathfrak r_\varepsilon=s^{-1/2}
-\{\varepsilon(1-2t)+a_\varepsilon(t)(3v/8-r/2)\}.\tag{G.11}
-\]
-
-Because \(ve^{-v}\le1/e\), a global dominating function, constant in time, is
-
-\[
-\eta_c=\varepsilon+C_\varepsilon(r/2+3/(8e)),\qquad
-\int_0^1\eta_c(t)dt=\eta_c<\infty,\qquad \eta_i=\eta_T=0.\tag{G.12}
-\]
-
-The original stock Gaussian integral is exact even though the stock and variance share \(G\): this field does not depend on next-step variance. It gives
-
-\[
-\mathscr D_j=s^{-1/2}\{a_\varepsilon(t_{j+1})e^{h(3v/8-r/2)}-a_\varepsilon(t_j)\},\qquad
-|\mathscr D_j|\le h\eta_QW_A,\quad
-\eta_Q=\varepsilon+C_\varepsilon\{r/2+3/[8e(1-3h/8)]\}.\tag{G.13}
-\]
-
-For the bound, write the difference as \((a_{j+1}-a_j)e^{h(3v/8-r/2)}+a_j(e^{h(3v/8-r/2)}-1)\). Use \(|a_{j+1}-a_j|\le\varepsilon h\), \(|e^x-1|\le|x|e^{\max(x,0)}\), and \(ve^{-cv}\le1/(ec)\) for \(c=1-3h/8>0\). Thus every discrete defect is integrable, with the explicit full-horizon enclosure \(\sum_jE_Q\mathscr D_j\in[-(5/2)\eta_Q,(5/2)\eta_Q]\), because \(Nh=1\). Substitution into (G.9) gives the finite sufficient bound \((5/2)(\eta_Q+\eta_c)\).
-
-At \(t=1/2,v=r>0\), (G.11) equals \(-rC_\varepsilon s^{-1/2}/8<0\). Therefore this field is not the exact future-value function. The exact field for the same negative-power payoff exists by the affine continuation and moment proof of Appendix F, with loading \(-1/2\). The same admissible object class contains both exact and nonexact fields; the four-term identity applies to each. This example is an analytic scope witness, not a numerical certificate for the original market instruments.
-
-### G.5. The thirteen-function diagnostic
-
-The saved classical trial-field diagnostic has a distinct, conditional role. With \(n=12-m\), \(B=(A_m+ns)/12\), \(y=A_m/(A_m+ns)\), \(\beta=1-y\), and \(z=v/(1+v)\), its branch is \(B^{-q}P(y,v)\). In this subsection \(\Re q=1/2\), so \(B^{-q}\) corresponds to negative stock damping; this \(q\) is not the negative loading \(q\) used in Appendix F. The conjugated generator is
-
-\[
-\begin{aligned}
-\mathcal L_qP={}&-ry\beta P_y+dP_v-qr\beta P\\
-&+v\{\tfrac12y^2\beta^2P_{yy}-\rho\xi y\beta P_{yv}
-+\tfrac12\xi^2P_{vv}+(1+q)y\beta^2P_y\\
-&\hspace{12mm}-(\kappa+q\rho\xi\beta)P_v+\tfrac12q(q+1)\beta^2P\}.
-\end{aligned}\tag{G.14}
-\]
-
-The basis consists of \(\phi_{ij}=\beta y^iz^j\), \(0\le i\le2,0\le j\le3\), and \(\psi=v\beta^2\). It exactly represents the terminal forcing \(\mathcal L_q1=-qr\phi_{00}+q(q+1)\psi/2\). This is completion of the terminal generator, not closure under every generator image. For finite endpoint constants, the field uses cubic Hermite interpolation with exact physical slopes \(-Kc-g(q)\), where \(g(q)=-qr e_{00}+q(q+1)e_\psi/2\). The exact fixing carry, with \(\gamma=(n-1)/n\), is
-
-\[
-(T_nc)_{\ell j}=\gamma\sum_{i=\ell}^2\binom i\ell\gamma^\ell n^{-i+\ell}c_{ij},
-\qquad T_n\psi=\gamma^2\psi.\tag{G.15}
-\]
-
-It follows from \(y'=\gamma y+1/n\), \(B'=B\), and \(\beta'=\gamma\beta\). Terminal correction nodes are zero. Exact carries and slopes specify the traces; floating generation values do not replace these definitions. The finite field has \(|P|\le C_0+C_1v\le(C_0+2C_1/e)e^{v/2}\). Its continuous residual is a polynomial of degree at most two in \(v\) with bounded \(y,z\) coefficients, so \(e^{-v}|F|\le a_0+a_1/e+4a_2/e^2\). A complete application of (G.9) still requires the actual coefficient bank, all-state original-\(Q\) envelopes, and full-horizon sufficient upper bounds.
-
-For the saved first-month state \(m=0,y=0,v=9/200\), let \(w=(1,z,z^2,z^3,0,\ldots,0,v)\), \(\ell\) be the generator-value row of the basis, and \(\ell_0=-qr+q(q+1)v/2\). Exact integration over one piece gives
-
-\[
-\int F_{A,q}dt=
-\left[w+\frac{h^2}{12}\ell K\right](c_R-c_L)
-+\frac h2\ell(c_L+c_R)+h\ell_0.\tag{G.16}
-\]
-
-Indeed \(\int c(t)dt=h(c_L+c_R)/2+h^2(s_L-s_R)/12\), and \(s_L-s_R=K(c_R-c_L)\). The archive contains all 3080 weighted complex integral intervals (385 modes and eight cells, covering the original 64 time pieces). At common phase zero, sum the real mode intervals on each cell, apply \(\int|F|\ge|\int F|\), and subtract the integrated geometric-branch upper bound. The exact aggregate is specified by the mathematical field `whole_lower` in `field-result.json`:
-
-\[
-\int_0^{1/12}\eta_c(t)dt\ge L_*,\qquad
-L_*>0.003407444052031154>0.\tag{G.17}
-\]
-
-The bound rejects the selected allocation \(\int\eta_c\le1/1000\), recorded as `FAIL_SELECTED_INTEGRATED_PDE_CONTRACT_ONLY`. It is a necessary-condition diagnostic for this field. The reader `verify_field_receipt.py` checks the exact aggregation of saved intervals; the absent coefficient bank prevents regeneration of the direct integration. The diagnostic does not optimize over the trial space or give a lower bound on signed price bias. The explicit field (G.10) separately proves nonexact admissibility, and a complete annual monetary certificate remains open.
-
-The files in `science/baseline/reference/code/classical/` are `field-cell-integrals.json`, `field-result.json`, `field-independent-readback.json`, `provenance.json`, and `verify_field_receipt.py`. Publication manifests fix their identities.
-
-## Appendix H. Research timeline
-
-Research began in the second half of 2023, and the main writing took place in the first half of 2024. Some final work was completed in 2026, when the paper and code were uploaded to GitHub.
+![Figure E.1. Exact-threshold budget–pass-count curves; 28 fixed directions per configuration.](../audit-experiments/portfolio-pass-counts.png)
 
 ## References
 

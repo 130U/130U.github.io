@@ -18,7 +18,7 @@ type SourceEntry = {
   keyContributions: string[];
   keyContributionDetails?: Record<string, { ordered: boolean; items: string[] }>;
   notes: string[];
-  architecturalContext?: CopySection;
+  problemAndApproach?: CopySection;
 };
 
 export type ShowcaseEntry = SourceEntry & {

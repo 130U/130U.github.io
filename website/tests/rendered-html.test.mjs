@@ -18,7 +18,7 @@ const ARTICLES = [
   ["autonomous-authority-in-space", "Autonomous Authority in Space: Risk Tradeoffs and the Law of Delegation", "", 30],
   ["small-states-and-strategic-space-dependence", "Small States and the Governance of Strategic Space Dependence", "", 32],
   ["solar-geoengineering-comparison-and-continuity", "Who May Choose the Lesser Risk", "Solar Geoengineering and the Legal Duties of Comparison and Continuity", 30],
-  ["mangrove-restoration-and-compensatory-mitigation", "Mangrove Restoration and the Limits of Compensatory Mitigation", "Lessons from Florida for the Greater Bay Area", 41],
+  ["mangrove-restoration-and-compensatory-mitigation", "Mangrove Restoration and the Limits of Compensatory Mitigation", "Lessons from Florida for the Greater Bay Area", 42],
 ];
 const ARTICLE_ROUTES = ARTICLES.map(([slug]) => `${EXPERIENCE_ROUTE}${slug}/`);
 const AI_PROJECT_SLUGS = [
@@ -313,14 +313,14 @@ function assertExperienceDetails(html, expected) {
     assert.equal(disclosure, undefined, "AI detail pages must not repeat the directory's confidentiality disclosure");
     assert.equal(expected.disclosure, undefined);
     const context = [...html.matchAll(/<section\b([^>]*)>([\s\S]*?)<\/section>/giu)]
-      .find((match) => attribute(match[1], "data-architectural-context") !== undefined);
-    assert.ok(context, "AI contributions need the approved architectural bridge");
-    assert.equal(stripMarkup(context[2].match(/<h2\b[^>]*>([\s\S]*?)<\/h2>/iu)?.[1] ?? ""), expected.architecturalContext.title);
+      .find((match) => attribute(match[1], "data-problem-and-approach") !== undefined);
+    assert.ok(context, "AI pages open with the problem and approach");
+    assert.equal(stripMarkup(context[2].match(/<h2\b[^>]*>([\s\S]*?)<\/h2>/iu)?.[1] ?? ""), expected.problemAndApproach.title);
     const paragraphs = [...context[2].matchAll(/<p\b[^>]*>([\s\S]*?)<\/p>/giu)];
-    const approvedParagraphs = expected.architecturalContext.text.split(/\n+/u);
+    const approvedParagraphs = expected.problemAndApproach.text.split(/\n+/u);
     assert.equal(paragraphs.length, approvedParagraphs.length);
     paragraphs.forEach((paragraph, index) => assertApprovedInline(paragraph[1], approvedParagraphs[index]));
-    assert.ok(metadata[0].index < contributions.index && contributions.index < context.index, "Metadata, contributions, and architectural context must retain their reading order");
+    assert.ok(metadata[0].index < context.index && context.index < contributions.index, "Metadata, problem and approach, and contributions must retain their reading order");
   }
 }
 
@@ -534,9 +534,9 @@ test("About research opens each complete paper through an explicit Read More lin
   const researchEntries = [...about.matchAll(/<article\b[^>]*id="([^"]+)"[^>]*>[\s\S]*?<\/article>/gu)].map((match) => match[1]).filter((id) => id.startsWith("critical-dependence-") || id.startsWith("certified-"));
   assert.deepEqual(researchEntries, ["critical-dependence-stress-for-portfolio-diversification", "certified-valuation-arithmetic-asian-options", "certified-rough-heston-valuation"]);
   for (const [slug, title, description, tables, sections, repository] of [
-    ["critical-dependence-stress-for-portfolio-diversification", "Critical Dependence Stress for Portfolio Diversification", "I develop a variational framework", 0, 5, "mathematical-finance-project"],
-    ["certified-valuation-arithmetic-asian-options", "Certified Valuation of Arithmetic Asian Options", "discretization-error bound below 0.011025 price units", 11, 10, "certified-valuation-arithmetic-asian-options"],
-    ["certified-rough-heston-valuation", "Certified Joint Pricing Errors in Rough Heston", "bringing the complete error bound below a 0.25-index-point budget", 13, 8, "certified-rough-heston-valuation"],
+    ["critical-dependence-stress-for-portfolio-diversification", "Critical Dependence Stress for Portfolio Diversification", "I prove that the critical stress budget is quadratic in the trade size", 0, 5, "mathematical-finance-project"],
+    ["certified-valuation-arithmetic-asian-options", "Certified Valuation of Arithmetic Asian Options", "the complete discretization-error bound is below 0.17% of the price", 11, 10, "certified-valuation-arithmetic-asian-options"],
+    ["certified-rough-heston-valuation", "Certified Joint Pricing Errors in Rough Heston", "the joint bounds bring all 28 spread, butterfly and basket positions tested within a half-point error budget", 13, 8, "certified-rough-heston-valuation"],
   ]) {
     assert.match(about, new RegExp(`id="${slug}"`, "u"));
     const headings = [...about.matchAll(/<h3\b[^>]*>([\s\S]*?)<\/h3>/gu)].map((match) => stripMarkup(match[1]));
@@ -574,7 +574,7 @@ test("Experience presents five numbered sections and all eighteen approved entri
   const html = await routeHtml("/experience/");
   const expected = await approvedExperience();
   assert.deepEqual(expected.map(({ id }) => id), Array.from({ length: 18 }, (_, index) => index + 1));
-  assert.deepEqual(expected.map(({ keyContributions }) => keyContributions.length), [7, 6, 6, 6, 9, 7, 6, 5, 5, 5, 5, 7, 5, 6, 1, 1, 2, 4]);
+  assert.deepEqual(expected.map(({ keyContributions }) => keyContributions.length), [7, 6, 6, 6, 8, 7, 6, 5, 5, 5, 5, 7, 5, 6, 1, 1, 2, 4]);
   assert.deepEqual(experienceEntries(html).map(({ id }) => id), expected.map(({ id }) => id));
   assert.equal(openingTags(html, "h1").length, 1);
   assert.match(html, /<h1>Experience: Areas of Focus<\/h1>/u);
@@ -642,15 +642,14 @@ test("all eighteen approved Experience entries use institution titles and real l
   assert.equal(new Set(destinations).size, 18);
   assert.deepEqual([...destinations].sort(), [...AI_ROUTES, ...ARTICLE_ROUTES, ...EXPERIENCE_DETAIL_ROUTES].sort(), "Every entry opens at /experience/<slug>/");
   assert.equal(expected.find(({ id }) => id === 16).metadata.location, "Beijing, China");
-  assert.deepEqual(expected.filter(({ categoryId }) => ["02", "04", "05"].includes(categoryId)).map(({ keyContributions }) => keyContributions.length), [9, 7, 6, 7, 5, 6, 1, 1, 2, 4]);
+  assert.deepEqual(expected.filter(({ categoryId }) => ["02", "04", "05"].includes(categoryId)).map(({ keyContributions }) => keyContributions.length), [8, 7, 6, 7, 5, 6, 1, 1, 2, 4]);
   assert.equal(expected.find(({ id }) => id === 18).notes.length, 1, "The school-program context must survive the detailed-bullet merge");
   assert.deepEqual(expected.filter(({ keyContributionDetails }) => keyContributionDetails).map((entry) => ({
     id: entry.id,
     groups: Object.entries(entry.keyContributionDetails).map(([index, detail]) => ({ index, ordered: detail.ordered, count: detail.items.length })),
   })), [
     { id: 2, groups: [{ index: "4", ordered: false, count: 4 }] },
-    { id: 3, groups: [{ index: "3", ordered: true, count: 3 }] },
-  ], "All seven original nested contributions must survive under their correct parent items");
+  ], "The four nested contributions must stay under their parent item");
 });
 
 test("the ten nonresearch detail routes keep metadata in a labeled record strip", async () => {

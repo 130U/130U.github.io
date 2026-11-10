@@ -42,7 +42,7 @@
 }
 
 .indexDisclosure p,
-.architecturalContext p,
+.problemAndApproach p,
 .contributions > ol {
   font-family: var(--font-prose);
 }
@@ -50,13 +50,13 @@
 /* The AI section's note is its standfirst: under the heading, on the same edge. */
 .indexDisclosure { max-width: var(--reading-measure); margin: -24px 0 72px; }
 .indexDisclosure p { color: var(--supporting-ink); }
-.indexDisclosure p, .architecturalContext p {
+.indexDisclosure p, .problemAndApproach p {
   margin: 0;
   font-size: var(--type-reading);
   line-height: var(--reading-leading);
 }
-.architecturalContext { margin-top: 5rem; }
-.architecturalContext h2 {
+.problemAndApproach + .contributions { margin-top: 5rem; }
+.problemAndApproach h2 {
   margin: 0 0 1.25rem;
   font-size: var(--type-heading);
   line-height: var(--heading-leading);
@@ -64,8 +64,8 @@
   letter-spacing: var(--heading-tracking);
   scroll-margin-top: 6rem;
 }
-.architecturalContext p + p { margin-top: 1.25rem; }
-.contributions code, .architecturalContext code {
+.problemAndApproach p + p { margin-top: 1.25rem; }
+.contributions code, .problemAndApproach code {
   font: inherit;
   overflow-wrap: anywhere;
 }

@@ -124,22 +124,24 @@ test("all eleven full articles retain introduction, contents and body order with
     const links = elements(menus[0], (node) => node.tag === "a").map((node) => node.attrs.get("href"));
     const headings = [...elements(overview[0], (node) => /^h[23]$/u.test(node.tag)), ...elements(body[0], (node) => /^h[23]$/u.test(node.tag))];
     const isExperience = route.startsWith("/experience/");
-    const isAiExperience = isExperience && page.nodes.some((node) => node.attrs.has("data-architectural-context"));
+    const isAiExperience = isExperience && page.nodes.some((node) => node.attrs.has("data-problem-and-approach"));
     const manuscriptTitles = headings.filter((node) => node.attrs.get("id") === "article-title");
     assert.equal(manuscriptTitles.length, 0, `${route}: do not repeat the technical manuscript title below the contribution lead.`);
     if (isAiExperience) {
       const sourceBlocks = elements(body[0], (node) => node.attrs.has("data-research-block"));
       assert.ok(sourceBlocks.length, `${route}: retain the numbered manuscript.`);
-      assert.equal(sourceBlocks[0].tag, "h2", `${route}: enter the first numbered chapter directly after the architectural context and contents.`);
+      assert.equal(sourceBlocks[0].tag, "h2", `${route}: enter the first numbered chapter directly after the overview and contents.`);
       assert.equal(Number(sourceBlocks[0].attrs.get("data-research-block")), 0, `${route}: retain the complete imported manuscript from its first chapter.`);
       assert.equal(sourceBlocks[0].attrs.get("data-source-number"), "1");
-      assert.match(readable(headings[1]), /^Architectural Context:/u, `${route}: include the architectural bridge before the manuscript.`);
-      assert.equal(headings[2], sourceBlocks[0], `${route}: the first source chapter follows the architectural context directly.`);
+      assert.equal(readable(headings[0]), "Problem and Approach", `${route}: open with the problem before the contributions.`);
+      assert.equal(links[0], "#problem-and-approach", `${route}: the problem opens the article directory.`);
+      assert.equal(headings[2], sourceBlocks[0], `${route}: the first source chapter follows the overview directly.`);
       assert.equal(elements(body[0], (node) => node.tag === "p" && node.start < sourceBlocks[0].start).length, 0, `${route}: no prose precedes the first source chapter.`);
     }
     if (isExperience) {
-      assert.equal(links[0], "#key-contributions", `${route}: contribution points open the article directory.`);
-      assert.equal(readable(headings[0]), "Key Contributions", `${route}: contribution points open the article body.`);
+      const lead = isAiExperience ? 1 : 0;
+      assert.equal(links[lead], "#key-contributions", `${route}: contribution points sit in the article directory.`);
+      assert.equal(readable(headings[lead]), "Key Contributions", `${route}: contribution points sit in the article overview.`);
     }
     for (const heading of headings) {
       const id = heading.attrs.get("id");
@@ -168,7 +170,7 @@ test("all eleven full articles retain introduction, contents and body order with
     }
   }
   const asian = pages.get("/certified-valuation-arithmetic-asian-options/");
-  assert.equal((readable(asian.tree).match(/Q\.E\.D\./gu) ?? []).length, 5, "The five proof endings must be readable labels, not interpreted as missing characters.");
+  assert.equal((readable(asian.tree).match(/Q\.E\.D\./gu) ?? []).length, 6, "The six proof endings must be readable labels, not interpreted as missing characters.");
   const annotations = asian.nodes.filter((node) => node.tag === "annotation" && node.attrs.get("encoding") === "application/x-tex");
-  assert.equal(annotations.filter((node) => node.children.map((child) => child.text ?? "").join("") === "\\square").length, 5, "Preserve the original QED TeX in the exported mathematical source.");
+  assert.equal(annotations.filter((node) => node.children.map((child) => child.text ?? "").join("") === "\\square").length, 6, "Preserve the original QED TeX in the exported mathematical source.");
 });

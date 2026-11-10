@@ -33,7 +33,7 @@ test("heading presentation converts existing identities to Roman chapters and le
     assert.equal(formatted.id, heading.id);
     assert.equal(JSON.stringify(heading), snapshot);
   }
-  for (const source of ["## Abstract", "## References", "### Strict computation of the dissipative pricing kernel", "## IV. Existing law", "### A. Legal principle"]) {
+  for (const source of ["## Abstract", "## References", "### Verification scope and mathematical work", "## IV. Existing law", "### A. Legal principle"]) {
     const heading = parseResearchMarkdown(source)[0];
     assert.deepEqual(formatArticleHeading(heading).displayInlines, heading.inlines);
     assert.equal(formatArticleHeading(heading).sourceNumber, undefined);
@@ -50,7 +50,7 @@ test("formatting a mathematical heading preserves every non-prefix inline and it
 });
 
 test("all actual mathematical heading labels are readable without exposing or dropping TeX", () => {
-  const expected = ["Hₛ", "Hᵥ", "A ⇒ H", "C ⇒ H"];
+  const expected = ["Hₛ"];
   const headings = manuscript(ASIAN).filter((block) => block.type === "heading" && block.inlines.some((inline) => inline.type === "math"));
   assert.equal(headings.length, expected.length);
   headings.forEach((heading, index) => {
@@ -63,19 +63,16 @@ test("all actual mathematical heading labels are readable without exposing or dr
   assert.throws(() => formatArticleHeading(unknown), /reviewed plain-text label/u, "Unreviewed notation must not silently lose its mathematical structure in the directory.");
 });
 
-test("contextual subsection letters include both unnumbered rough-Heston headings without inventing source numbers", () => {
+test("contextual subsection letters include the unnumbered rough-Heston heading without inventing a source number", () => {
   const blocks = manuscript(ROUGH);
   const contextual = formatArticleHeadings(blocks);
   const sourceMap = buildArticleHeadingMap(blocks);
-  const first = contextual.get(blocks.find((block) => block.source === "### Strict computation of the dissipative pricing kernel").id);
-  assert.equal(first.text, "A. Strict computation of the dissipative pricing kernel");
-  assert.equal(first.referenceLabel, "III.A.");
-  assert.equal(first.sourceNumber, undefined);
-  const second = contextual.get(blocks.find((block) => block.source === "### Verification scope and mathematical work").id);
-  assert.equal(second.text, "F. Verification scope and mathematical work");
-  assert.equal(second.referenceLabel, "VII.F.");
-  assert.equal(second.sourceNumber, undefined);
-  assert.equal(sourceMap.has("3.1"), false, "Theorem 3.1 must not become an invented Section 3.1 alias.");
+  const unnumbered = contextual.get(blocks.find((block) => block.source === "### Verification scope and mathematical work").id);
+  assert.equal(unnumbered.text, "F. Verification scope and mathematical work");
+  assert.equal(unnumbered.referenceLabel, "VII.F.");
+  assert.equal(unnumbered.sourceNumber, undefined);
+  assert.equal(sourceMap.get("3.1").id, blocks.find((block) => block.type === "heading" && block.source.startsWith("### 3.1.")).id);
+  assert.equal(sourceMap.get("3.1").referenceLabel, "III.A.");
   assert.equal(sourceMap.get("7.3").referenceLabel, "VII.C.");
   assert.equal(sourceMap.get("7.5").referenceLabel, "VII.E.");
   assert.equal(sourceMap.get("7.6").referenceLabel, "VII.G.");
@@ -91,13 +88,13 @@ test("contextual subsection letters include both unnumbered rough-Heston heading
 test("compound internal references retain original numbers and link each precise endpoint", () => {
   const blocks = manuscript(ROUGH);
   const map = buildArticleHeadingMap(blocks);
-  const introduction = blocks.find((block) => block.type === "paragraph" && block.source.startsWith("Sections 2–5 develop"));
+  const introduction = blocks.find((block) => block.type === "paragraph" && block.source.startsWith("Section 2 defines the exact problem."));
   const linked = linkArticleSectionReferences(introduction.inlines, ROUGH, map);
   assert.equal(text(linked), text(introduction.inlines));
-  assert.deepEqual(links(linked).map((link) => text(link.inlines)), ["2", "5", "7.1", "7.5", "7.6", "6"]);
+  assert.deepEqual(links(linked).map((link) => text(link.inlines)), ["2", "3", "4", "5", "6", "7"]);
   for (const link of links(linked)) assert.equal(link.href, `#${map.get(text(link.inlines)).id}`);
-  assert.equal(links(linked)[2].title, "Section 7.1; web heading VII.A.");
-  assert.equal(links(linked)[4].title, "Section 7.6; web heading VII.G.");
+  assert.equal(links(linked)[1].title, "Section 3; web heading III.");
+  assert.equal(links(linked)[5].title, "Section 7; web heading VII.");
   assert.equal(map.get("7.3").displayNumber, "C.");
   assert.equal(map.get("7.3").id, blocks.find((block) => block.type === "heading" && block.source.startsWith("### 7.3.")).id);
 });
@@ -117,13 +114,16 @@ test("external sections, existing citation labels, equation and theorem numbers 
 test("linking is limited to audited article contexts and never changes mathematical tokens", () => {
   const blocks = manuscript(ASIAN);
   const map = buildArticleHeadingMap(blocks);
-  const paragraph = blocks.find((block) => block.type === "paragraph" && block.source.startsWith("Here $`\\mathcal S`$"));
-  const linked = linkArticleSectionReferences(paragraph.inlines, ASIAN, map);
-  assert.equal(text(linked), text(paragraph.inlines));
-  assert.deepEqual(links(linked).map((link) => text(link.inlines)), ["2", "3", "5", "6", "7", "8", "9"]);
-  assert.deepEqual(linked.filter((inline) => inline.type === "math"), paragraph.inlines.filter((inline) => inline.type === "math"));
-  assert.deepEqual(linkArticleSectionReferences(paragraph.inlines, "unreviewed-source", map), paragraph.inlines);
-  const incomplete = new Map(map); incomplete.delete("5");
-  const partial = linkArticleSectionReferences(paragraph.inlines, ASIAN, incomplete);
-  assert.ok(!links(partial).some((link) => text(link.inlines) === "3"), "An unresolved range must remain entirely unlinked.");
+  const roadmap = blocks.find((block) => block.type === "paragraph" && block.source.startsWith("Sections 2 and 3 develop"));
+  const linked = linkArticleSectionReferences(roadmap.inlines, ASIAN, map);
+  assert.equal(text(linked), text(roadmap.inlines));
+  assert.deepEqual(links(linked).map((link) => text(link.inlines)), ["2", "3", "4", "5", "6", "7", "8", "9"]);
+  assert.deepEqual(linkArticleSectionReferences(roadmap.inlines, "unreviewed-source", map), roadmap.inlines);
+  const incomplete = new Map(map); incomplete.delete("3");
+  const partial = linkArticleSectionReferences(roadmap.inlines, ASIAN, incomplete);
+  assert.ok(!links(partial).some((link) => text(link.inlines) === "2"), "An unresolved pair must remain entirely unlinked.");
+  const scope = blocks.find((block) => block.type === "paragraph" && block.source.startsWith("The structural conditions are sufficient for certification."));
+  const scopeLinked = linkArticleSectionReferences(scope.inlines, ASIAN, map);
+  assert.deepEqual(links(scopeLinked).map((link) => text(link.inlines)), ["5", "8", "7"]);
+  assert.deepEqual(scopeLinked.filter((inline) => inline.type === "math"), scope.inlines.filter((inline) => inline.type === "math"));
 });

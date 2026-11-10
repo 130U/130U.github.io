@@ -37,10 +37,10 @@
     },
     {
       "type": "paragraph",
-      "text": "A spacecraft may need to act before its operators can approve a command. A satellite may avoid one collision by moving into a trajectory that changes another operator's risk. A radio telescope may detect an unusual signal with no evidence that the signal is extraterrestrial. The decisions differ in the interests they affect and the institutions competent to govern them. A regulator deciding whether to permit a maneuver policy faces a legal problem that scientific investigators assessing a possible technosignature do not. As Part III shows, existing law governs the actors in space activities but leaves operational choices open. The space treaties supply responsibility, supervision, liability, and due-regard obligations without prescribing an algorithmic control architecture.",
+      "text": "A spacecraft may need to act before its operators can approve a command. A satellite may avoid one collision by moving into a trajectory that changes another operator's risk. A radio telescope may detect an unusual signal with no evidence that the signal is extraterrestrial. The decisions differ in the interests they affect and the institutions competent to govern them. A regulator deciding whether to permit a maneuver policy faces a legal problem that scientific investigators assessing a possible technosignature do not. As Part III shows, existing law governs the actors in space activities but leaves operational choices open.",
       "runs": [
         {
-          "text": "A spacecraft may need to act before its operators can approve a command. A satellite may avoid one collision by moving into a trajectory that changes another operator's risk. A radio telescope may detect an unusual signal with no evidence that the signal is extraterrestrial. The decisions differ in the interests they affect and the institutions competent to govern them. A regulator deciding whether to permit a maneuver policy faces a legal problem that scientific investigators assessing a possible technosignature do not. As Part III shows, existing law governs the actors in space activities but leaves operational choices open. The space treaties supply responsibility, supervision, liability, and due-regard obligations without prescribing an algorithmic control architecture."
+          "text": "A spacecraft may need to act before its operators can approve a command. A satellite may avoid one collision by moving into a trajectory that changes another operator's risk. A radio telescope may detect an unusual signal with no evidence that the signal is extraterrestrial. The decisions differ in the interests they affect and the institutions competent to govern them. A regulator deciding whether to permit a maneuver policy faces a legal problem that scientific investigators assessing a possible technosignature do not. As Part III shows, existing law governs the actors in space activities but leaves operational choices open."
         }
       ]
     },
@@ -55,10 +55,10 @@
     },
     {
       "type": "paragraph",
-      "text": "This Article contributes a two-threshold decision procedure. The first threshold asks whether the actor has authority to undertake the activity and impose the relevant exposure; the second asks whether the evidence justifies delegating it. Where both are met, the procedure turns to the time at which human review can still change the outcome, and it treats individual approval, advance-constrained action, and fallback behavior as separate supervisory choices. The Article then proposes a task-specific authorization record naming responsible actors, permitted actions, operating conditions, exposed interests, and reassessment triggers, backed by independent scrutiny and by event records from which consequential decisions can be reconstructed. It uses debris capture and SETI to distinguish technical capability from permission to affect another party's interests or confirm a scientific interpretation. It also integrates review delays, compliance costs, disclosure risks, and correlated failures into the proposed controls, making the burdens of supervision part of the authorization decision.",
+      "text": "This Article contributes a two-threshold decision procedure. The first threshold asks whether the actor has authority to undertake the activity and impose the relevant exposure; the second asks whether the evidence justifies delegating it. Where both are met, the procedure turns to the time at which human review can still change the outcome, and it treats individual approval, advance-constrained action, and fallback behavior as separate supervisory choices. The Article then proposes a task-specific authorization record naming responsible actors, permitted actions, operating conditions, exposed interests, and reassessment triggers, backed by independent scrutiny and by event records from which consequential decisions can be reconstructed.",
       "runs": [
         {
-          "text": "This Article contributes a two-threshold decision procedure. The first threshold asks whether the actor has authority to undertake the activity and impose the relevant exposure; the second asks whether the evidence justifies delegating it. Where both are met, the procedure turns to the time at which human review can still change the outcome, and it treats individual approval, advance-constrained action, and fallback behavior as separate supervisory choices. The Article then proposes a task-specific authorization record naming responsible actors, permitted actions, operating conditions, exposed interests, and reassessment triggers, backed by independent scrutiny and by event records from which consequential decisions can be reconstructed. It uses debris capture and SETI to distinguish technical capability from permission to affect another party's interests or confirm a scientific interpretation. It also integrates review delays, compliance costs, disclosure risks, and correlated failures into the proposed controls, making the burdens of supervision part of the authorization decision."
+          "text": "This Article contributes a two-threshold decision procedure. The first threshold asks whether the actor has authority to undertake the activity and impose the relevant exposure; the second asks whether the evidence justifies delegating it. Where both are met, the procedure turns to the time at which human review can still change the outcome, and it treats individual approval, advance-constrained action, and fallback behavior as separate supervisory choices. The Article then proposes a task-specific authorization record naming responsible actors, permitted actions, operating conditions, exposed interests, and reassessment triggers, backed by independent scrutiny and by event records from which consequential decisions can be reconstructed."
         }
       ]
     },
@@ -205,19 +205,19 @@
     },
     {
       "type": "paragraph",
-      "text": "For each arrangement, the decision maker should identify the target harm, the pathways through which intervention reduces it, and the pathways through which intervention creates new burdens. The same inquiry applies to regulation. A requirement for individual approval may reduce erroneous commands but create delay, overload reviewers, or encourage routine approval without meaningful scrutiny. A certification requirement may reveal defects but consume resources otherwise available for tracking, redundancy, or collision coordination. A disclosure requirement may improve external scrutiny while exposing information useful to an adversary. The task is comparative evaluation of these mechanisms, not a presumption that either innovation or regulation has only benefits.",
+      "text": "For each arrangement, the decision maker should identify the target harm, the pathways through which intervention reduces it, and the pathways through which intervention creates new burdens. The same inquiry applies to regulation. A requirement for individual approval may reduce erroneous commands but create delay, overload reviewers, or encourage routine approval without meaningful scrutiny. A certification requirement may reveal defects but consume resources otherwise available for tracking, redundancy, or collision coordination. A disclosure requirement may improve external scrutiny while exposing information useful to an adversary. The task is to evaluate these mechanisms comparatively, because innovation and regulation each carry costs as well as benefits.",
       "runs": [
         {
-          "text": "For each arrangement, the decision maker should identify the target harm, the pathways through which intervention reduces it, and the pathways through which intervention creates new burdens. The same inquiry applies to regulation. A requirement for individual approval may reduce erroneous commands but create delay, overload reviewers, or encourage routine approval without meaningful scrutiny. A certification requirement may reveal defects but consume resources otherwise available for tracking, redundancy, or collision coordination. A disclosure requirement may improve external scrutiny while exposing information useful to an adversary. The task is comparative evaluation of these mechanisms, not a presumption that either innovation or regulation has only benefits."
+          "text": "For each arrangement, the decision maker should identify the target harm, the pathways through which intervention reduces it, and the pathways through which intervention creates new burdens. The same inquiry applies to regulation. A requirement for individual approval may reduce erroneous commands but create delay, overload reviewers, or encourage routine approval without meaningful scrutiny. A certification requirement may reveal defects but consume resources otherwise available for tracking, redundancy, or collision coordination. A disclosure requirement may improve external scrutiny while exposing information useful to an adversary. The task is to evaluate these mechanisms comparatively, because innovation and regulation each carry costs as well as benefits."
         }
       ]
     },
     {
       "type": "paragraph",
-      "text": "Distribution remains a separate question. A maneuver that saves its operator substantial money while imposing smaller losses on many others may look beneficial in aggregate without being legally authorized or fairly allocated. Unconsenting third parties, users dependent on satellite services, and future entrants into a damaged orbital environment cannot simply be treated as residual terms in the operator's objective. Risk-risk analysis identifies these interests; applicable rights and duties constrain how they may be traded. It is not a license to override ownership or other legal protections whenever a private estimate of total benefit is positive.",
+      "text": "Distribution remains a separate question. A maneuver that saves its operator substantial money while imposing smaller losses on many others may look beneficial in aggregate without being legally authorized or fairly allocated. Unconsenting third parties, users dependent on satellite services, and future entrants into a damaged orbital environment cannot simply be treated as residual terms in the operator's objective. Risk-risk analysis identifies these interests; applicable rights and duties constrain how they may be traded. A positive private estimate of total benefit leaves ownership and other legal protections in force.",
       "runs": [
         {
-          "text": "Distribution remains a separate question. A maneuver that saves its operator substantial money while imposing smaller losses on many others may look beneficial in aggregate without being legally authorized or fairly allocated. Unconsenting third parties, users dependent on satellite services, and future entrants into a damaged orbital environment cannot simply be treated as residual terms in the operator's objective. Risk-risk analysis identifies these interests; applicable rights and duties constrain how they may be traded. It is not a license to override ownership or other legal protections whenever a private estimate of total benefit is positive."
+          "text": "Distribution remains a separate question. A maneuver that saves its operator substantial money while imposing smaller losses on many others may look beneficial in aggregate without being legally authorized or fairly allocated. Unconsenting third parties, users dependent on satellite services, and future entrants into a damaged orbital environment cannot simply be treated as residual terms in the operator's objective. Risk-risk analysis identifies these interests; applicable rights and duties constrain how they may be traded. A positive private estimate of total benefit leaves ownership and other legal protections in force."
         }
       ]
     },
@@ -495,7 +495,7 @@
     },
     {
       "type": "paragraph",
-      "text": "Communications delay creates a real constraint, but it does not make all ground expertise useless. A NASA analysis of prospective crewed Mars missions describes one-way delays reaching approximately twenty-two minutes, alongside disruptions and blackouts. It does not demonstrate that an AI system can safely manage every emergency arising during those intervals.14 Long-range planning can remain on Earth while local systems execute time-sensitive responses. Where a crew is present, onboard human judgment is another comparator; it should not be silently equated with delayed ground approval.",
+      "text": "Communications delay creates a real constraint, but it does not make all ground expertise useless. A NASA analysis of prospective crewed Mars missions describes one-way delays reaching approximately twenty-two minutes, alongside disruptions and blackouts. It does not demonstrate that an AI system can safely manage every emergency arising during those intervals.14 Long-range planning can remain on Earth while local systems execute time-sensitive responses. Where a crew is present, onboard human judgment is a further comparator, distinct from delayed ground approval.",
       "runs": [
         {
           "text": "Communications delay creates a real constraint, but it does not make all ground expertise useless. A NASA analysis of prospective crewed Mars missions describes one-way delays reaching approximately twenty-two minutes, alongside disruptions and blackouts. It does not demonstrate that an AI system can safely manage every emergency arising during those intervals."
@@ -506,7 +506,7 @@
           "footnoteRef": "14"
         },
         {
-          "text": " Long-range planning can remain on Earth while local systems execute time-sensitive responses. Where a crew is present, onboard human judgment is another comparator; it should not be silently equated with delayed ground approval."
+          "text": " Long-range planning can remain on Earth while local systems execute time-sensitive responses. Where a crew is present, onboard human judgment is a further comparator, distinct from delayed ground approval."
         }
       ]
     },
@@ -542,7 +542,7 @@
     },
     {
       "type": "paragraph",
-      "text": "NASA's Deep Space 1 Remote Agent experiment demonstrated autonomous planning and execution for selected subsystems under high-level goals. The mission account also records a software bug that interrupted the first experiment before subsequent work completed the remaining objectives.15 This is evidence that meaningful autonomy can operate on a spacecraft and that integration failures remain relevant. It is not evidence for unrestricted crew-safety decisions by a general-purpose language model.",
+      "text": "NASA's Deep Space 1 Remote Agent experiment demonstrated autonomous planning and execution for selected subsystems under high-level goals. The mission account also records a software bug that interrupted the first experiment before subsequent work completed the remaining objectives.15 This is evidence that meaningful autonomy can operate on a spacecraft and that integration failures remain relevant. Unrestricted crew-safety decisions by a general-purpose language model would need evidence of their own.",
       "runs": [
         {
           "text": "NASA's Deep Space 1 Remote Agent experiment demonstrated autonomous planning and execution for selected subsystems under high-level goals. The mission account also records a software bug that interrupted the first experiment before subsequent work completed the remaining objectives."
@@ -553,7 +553,7 @@
           "footnoteRef": "15"
         },
         {
-          "text": " This is evidence that meaningful autonomy can operate on a spacecraft and that integration failures remain relevant. It is not evidence for unrestricted crew-safety decisions by a general-purpose language model."
+          "text": " This is evidence that meaningful autonomy can operate on a spacecraft and that integration failures remain relevant. Unrestricted crew-safety decisions by a general-purpose language model would need evidence of their own."
         }
       ]
     },
@@ -705,7 +705,7 @@
     },
     {
       "type": "paragraph",
-      "text": "The ESA spacecraft collision-avoidance challenge illustrates this distinction. The competition used earlier conjunction data messages to predict the estimated risk in the final available message. Its target was thus another risk estimate rather than observed collisions or measured harm avoided. The authors discussed class imbalance, generalization problems, and limitations of evaluation practices.19 Those findings support development of forecasting tools. They do not show that a high-performing predictor can safely choose and execute maneuvers in a multi-operator environment.",
+      "text": "The ESA spacecraft collision-avoidance challenge illustrates this distinction. The competition used earlier conjunction data messages to predict the estimated risk in the final available message. Its target was thus another risk estimate rather than observed collisions or measured harm avoided. The authors discussed class imbalance, generalization problems, and limitations of evaluation practices.19 Those findings support development of forecasting tools. Whether a high-performing predictor can safely choose and execute maneuvers in a multi-operator environment is a further question, and prediction scores leave it open.",
       "runs": [
         {
           "text": "The ESA spacecraft collision-avoidance challenge illustrates this distinction. The competition used earlier conjunction data messages to predict the estimated risk in the final available message. Its target was thus another risk estimate rather than observed collisions or measured harm avoided. The authors discussed class imbalance, generalization problems, and limitations of evaluation practices."
@@ -716,7 +716,7 @@
           "footnoteRef": "19"
         },
         {
-          "text": " Those findings support development of forecasting tools. They do not show that a high-performing predictor can safely choose and execute maneuvers in a multi-operator environment."
+          "text": " Those findings support development of forecasting tools. Whether a high-performing predictor can safely choose and execute maneuvers in a multi-operator environment is a further question, and prediction scores leave it open."
         }
       ]
     },
@@ -817,7 +817,7 @@
     },
     {
       "type": "paragraph",
-      "text": "Work on runtime assurance for autonomous spacecraft inspection provides a technically serious way to constrain proposed commands. Dunlap, van Wijk, and Hobbs compare centralized and decentralized approaches. In their simulations, decentralized filters sometimes could not satisfy a sensor Sun-exclusion constraint because assumed acceleration was unavailable when constraints conflicted. The authors discuss modifying or relaxing that constraint as mitigation.21 This is evidence about specified dynamics and tradeoffs, not observed commercial-satellite collisions or proof of safety across the orbital population.",
+      "text": "Work on runtime assurance for autonomous spacecraft inspection provides a technically serious way to constrain proposed commands. Dunlap, van Wijk, and Hobbs compare centralized and decentralized approaches. In their simulations, decentralized filters sometimes could not satisfy a sensor Sun-exclusion constraint because assumed acceleration was unavailable when constraints conflicted. The authors discuss modifying or relaxing that constraint as mitigation.21 The evidence concerns specified dynamics and tradeoffs in simulation. Observed commercial-satellite collisions and safety across the orbital population lie beyond it.",
       "runs": [
         {
           "text": "Work on runtime assurance for autonomous spacecraft inspection provides a technically serious way to constrain proposed commands. Dunlap, van Wijk, and Hobbs compare centralized and decentralized approaches. In their simulations, decentralized filters sometimes could not satisfy a sensor Sun-exclusion constraint because assumed acceleration was unavailable when constraints conflicted. The authors discuss modifying or relaxing that constraint as mitigation."
@@ -828,7 +828,7 @@
           "footnoteRef": "21"
         },
         {
-          "text": " This is evidence about specified dynamics and tradeoffs, not observed commercial-satellite collisions or proof of safety across the orbital population."
+          "text": " The evidence concerns specified dynamics and tradeoffs in simulation. Observed commercial-satellite collisions and safety across the orbital population lie beyond it."
         }
       ]
     },
@@ -864,7 +864,7 @@
     },
     {
       "type": "paragraph",
-      "text": "Active debris removal adds a boundary that collision forecasting cannot cross. Changing one's own trajectory differs from approaching, attaching to, controlling, and disposing of another actor's object. RemoveDEBRIS demonstrated specific technologies using mission-provided experimental targets. Its full report describes an unsuccessful drag-sail outcome as well as successful components.22 It does not establish routine, safe removal of arbitrary legacy debris. A laboratory controller or successful capture mechanism likewise cannot validate the complete sequence from identification through disposal.",
+      "text": "Active debris removal adds a boundary that collision forecasting cannot cross. Changing one's own trajectory differs from approaching, attaching to, controlling, and disposing of another actor's object. RemoveDEBRIS demonstrated specific technologies using mission-provided experimental targets. Its full report describes an unsuccessful drag-sail outcome as well as successful components.22 Routine, safe removal of arbitrary legacy debris remains to be shown. So does the complete sequence from identification through disposal, of which a laboratory controller or a successful capture mechanism covers one part.",
       "runs": [
         {
           "text": "Active debris removal adds a boundary that collision forecasting cannot cross. Changing one's own trajectory differs from approaching, attaching to, controlling, and disposing of another actor's object. RemoveDEBRIS demonstrated specific technologies using mission-provided experimental targets. Its full report describes an unsuccessful drag-sail outcome as well as successful components."
@@ -875,7 +875,7 @@
           "footnoteRef": "22"
         },
         {
-          "text": " It does not establish routine, safe removal of arbitrary legacy debris. A laboratory controller or successful capture mechanism likewise cannot validate the complete sequence from identification through disposal."
+          "text": " Routine, safe removal of arbitrary legacy debris remains to be shown. So does the complete sequence from identification through disposal, of which a laboratory controller or a successful capture mechanism covers one part."
         }
       ]
     },
@@ -936,10 +936,10 @@
     },
     {
       "type": "paragraph",
-      "text": "SETI tests whether a framework built around physical action becomes overbroad when applied to knowledge production. An analogy between recognizing whale sounds and identifying an extraterrestrial signal can obscure the evidence each task requires. The underlying whale research concerns known-species evidence and matched visual and acoustic observations. It supplies an analogy for sorting signals, not validation of alien detection or semantic decoding.24 The relevant analogy concerns prioritizing observations. Interpreting the meaning of an unknown communication system would require evidence of a different kind.",
+      "text": "SETI tests whether a framework built around physical action becomes overbroad when applied to knowledge production. Recognizing whale calls in long-term acoustic recordings is a tempting model for identifying an extraterrestrial signal. That research worked from known-species evidence and from matched visual and acoustic observations, so what it offers SETI is a method for sorting and prioritizing signals.24 Interpreting the meaning of an unknown communication system would require evidence of a different kind.",
       "runs": [
         {
-          "text": "SETI tests whether a framework built around physical action becomes overbroad when applied to knowledge production. An analogy between recognizing whale sounds and identifying an extraterrestrial signal can obscure the evidence each task requires. The underlying whale research concerns known-species evidence and matched visual and acoustic observations. It supplies an analogy for sorting signals, not validation of alien detection or semantic decoding."
+          "text": "SETI tests whether a framework built around physical action becomes overbroad when applied to knowledge production. Recognizing whale calls in long-term acoustic recordings is a tempting model for identifying an extraterrestrial signal. That research worked from known-species evidence and from matched visual and acoustic observations, so what it offers SETI is a method for sorting and prioritizing signals."
         },
         {
           "text": "24",
@@ -947,7 +947,7 @@
           "footnoteRef": "24"
         },
         {
-          "text": " The relevant analogy concerns prioritizing observations. Interpreting the meaning of an unknown communication system would require evidence of a different kind."
+          "text": " Interpreting the meaning of an unknown communication system would require evidence of a different kind."
         }
       ]
     },
@@ -1048,10 +1048,10 @@
     },
     {
       "type": "paragraph",
-      "text": "Observatories and research funders could adopt provenance, preservation, and reporting conditions suited to their relationships with investigators. Such conditions would need to respect applicable law and scientific freedom. A supervisory power over national space activities does not automatically establish governmental authority over a terrestrial research team's interpretation or speech. Proposed restrictions on communication would require their own legal basis and justification. This limit is a reason to prefer scientific verification arrangements for scientific claims, not an oversight defect to be repaired by borrowing spacecraft licensing powers.",
+      "text": "Observatories and research funders could adopt provenance, preservation, and reporting conditions suited to their relationships with investigators. Such conditions would need to respect applicable law and scientific freedom. A supervisory power over national space activities does not automatically establish governmental authority over a terrestrial research team's interpretation or speech. Proposed restrictions on communication would require their own legal basis and justification. This limit is a reason to prefer scientific verification arrangements for scientific claims over borrowed spacecraft licensing powers.",
       "runs": [
         {
-          "text": "Observatories and research funders could adopt provenance, preservation, and reporting conditions suited to their relationships with investigators. Such conditions would need to respect applicable law and scientific freedom. A supervisory power over national space activities does not automatically establish governmental authority over a terrestrial research team's interpretation or speech. Proposed restrictions on communication would require their own legal basis and justification. This limit is a reason to prefer scientific verification arrangements for scientific claims, not an oversight defect to be repaired by borrowing spacecraft licensing powers."
+          "text": "Observatories and research funders could adopt provenance, preservation, and reporting conditions suited to their relationships with investigators. Such conditions would need to respect applicable law and scientific freedom. A supervisory power over national space activities does not automatically establish governmental authority over a terrestrial research team's interpretation or speech. Proposed restrictions on communication would require their own legal basis and justification. This limit is a reason to prefer scientific verification arrangements for scientific claims over borrowed spacecraft licensing powers."
         }
       ]
     },
@@ -1320,10 +1320,10 @@
     },
     {
       "type": "paragraph",
-      "text": "Proportionality requires the evidence and process to track the consequences and uncertainty of the action. Shared infrastructure may lower the cost of producing that evidence, but high compliance costs cannot justify unlimited exposure of other operators. Where no proportionate control makes the activity defensible, the relevant conclusion is a limit on permission, not an exemption from the underlying concern.",
+      "text": "Proportionality requires the evidence and process to track the consequences and uncertainty of the action. Shared infrastructure may lower the cost of producing that evidence, but high compliance costs cannot justify unlimited exposure of other operators. Where no proportionate control makes the activity defensible, the conclusion is a limit on permission.",
       "runs": [
         {
-          "text": "Proportionality requires the evidence and process to track the consequences and uncertainty of the action. Shared infrastructure may lower the cost of producing that evidence, but high compliance costs cannot justify unlimited exposure of other operators. Where no proportionate control makes the activity defensible, the relevant conclusion is a limit on permission, not an exemption from the underlying concern."
+          "text": "Proportionality requires the evidence and process to track the consequences and uncertainty of the action. Shared infrastructure may lower the cost of producing that evidence, but high compliance costs cannot justify unlimited exposure of other operators. Where no proportionate control makes the activity defensible, the conclusion is a limit on permission."
         }
       ]
     },
@@ -1380,10 +1380,10 @@
     },
     {
       "type": "paragraph",
-      "text": "One alternative is to rely primarily on liability and insurance. Actors facing the full cost of their choices have incentives to select efficient precautions without detailed regulatory review. That argument is strongest where harm is compensable, causation can be shown, assets or insurance can meet the claim, and injured parties can obtain a remedy. The treaty distinctions discussed above, together with the possibility of diffuse orbital or scientific losses, weaken any assumption that those conditions always hold. Liability remains valuable, but cannot be treated as a complete substitute for preventive coordination.",
+      "text": "One alternative is to rely primarily on liability and insurance. Actors facing the full cost of their choices have incentives to select efficient precautions without detailed regulatory review. That argument is strongest where harm is compensable, causation can be shown, assets or insurance can meet the claim, and injured parties can obtain a remedy. The treaty distinctions discussed above, together with the possibility of diffuse orbital or scientific losses, weaken any assumption that those conditions always hold. Liability remains valuable as a complement to preventive coordination.",
       "runs": [
         {
-          "text": "One alternative is to rely primarily on liability and insurance. Actors facing the full cost of their choices have incentives to select efficient precautions without detailed regulatory review. That argument is strongest where harm is compensable, causation can be shown, assets or insurance can meet the claim, and injured parties can obtain a remedy. The treaty distinctions discussed above, together with the possibility of diffuse orbital or scientific losses, weaken any assumption that those conditions always hold. Liability remains valuable, but cannot be treated as a complete substitute for preventive coordination."
+          "text": "One alternative is to rely primarily on liability and insurance. Actors facing the full cost of their choices have incentives to select efficient precautions without detailed regulatory review. That argument is strongest where harm is compensable, causation can be shown, assets or insurance can meet the claim, and injured parties can obtain a remedy. The treaty distinctions discussed above, together with the possibility of diffuse orbital or scientific losses, weaken any assumption that those conditions always hold. Liability remains valuable as a complement to preventive coordination."
         }
       ]
     },

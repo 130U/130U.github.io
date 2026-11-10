@@ -132,14 +132,14 @@ function AsianWidthPlateau() {
 /* Rough Heston, Table 3: complete unit-spread bounds against the 0.25-point task. */
 const HESTON_STAGES = [
   { group: "Six months" },
-  { id: "H0", text: "Global state propagation", joint: 1.397612096, note: "Original failed one-point task" },
+  { id: "H0", text: "Global state propagation", joint: 1.397612096, note: "One-point budget not met" },
   { id: "H1", text: "Finite history, same global residual", joint: 0.378598956, note: "Principal propagation improvement; unchanged output and centre" },
   { id: "H2", text: "Local envelope, original used nodes", joint: 0.367258782, note: "About 3% further bound reduction" },
   { id: "H3", text: "All finite high nodes, global envelope", joint: 0.132245064, marginal: 0.158585551, note: "High-frequency certification and centre change are included" },
   { id: "H4", text: "All finite high nodes, local envelope", joint: 0.115215934, marginal: 0.137896018, note: "Both methods certify 0.25 points" },
   { group: "Three months" },
-  { id: "Q0", text: "Through 64, global envelope", joint: 1.207557898, marginal: 1.545191542, note: "Failed 0.25-point task" },
-  { id: "Q1", text: "Through 128, global envelope", joint: 0.351318692, marginal: 0.408293698, note: "Failed 0.25-point task" },
+  { id: "Q0", text: "Through 64, global envelope", joint: 1.207557898, marginal: 1.545191542, note: "0.25-point budget not met" },
+  { id: "Q1", text: "Through 128, global envelope", joint: 0.351318692, marginal: 0.408293698, note: "0.25-point budget not met" },
   { id: "Q2", text: "Through 128, local envelope", joint: 0.233318843, marginal: 0.252393939, note: "Only the joint method certifies 0.25 points" },
 ] as const;
 
@@ -195,7 +195,7 @@ function HestonCandidateSeparation() {
       id="heston-candidates"
       className={styles.candidates}
       title="Objective enclosures for the five fixed candidates"
-      caption="Normalized midpoint loss $J\times10^8$ under the original quotes. On the first layer three close candidates still overlap; the frozen upgrade to $N_t=2048$ separates every pair and certifies $\alpha=0.520$ as the strict minimizer among the five fixed points."
+      caption="Normalized midpoint loss $J\times10^8$ under the fixed quotes. On the first layer three close candidates still overlap; the prespecified upgrade to $N_t=2048$ separates every pair and certifies $\alpha=0.520$ as the strict minimizer among the five fixed points."
       views={[{ id: "n1024", label: <>N<sub>t</sub> = 1024</> }, { id: "n2048", label: <>N<sub>t</sub> = 2048</> }]}
       defaultView="n2048"
       viewsLabel="Choose the generated layer"

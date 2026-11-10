@@ -9,7 +9,7 @@ const ROOT = fileURLToPath(new URL("../", import.meta.url));
 const AI_ROUTE = "/experience/";
 const SOURCE_FILE = "content/sources/ai-portfolio/ai-research-and-engineering.md";
 const CANONICAL_DOCUMENT = path.join(ROOT, SOURCE_FILE);
-const SOURCE_SHA256 = "1c555bc6cbf222b79eba3d74b1083b96d08fce0308f0b9cf27e37a2ed27c335f";
+const SOURCE_SHA256 = "bc00ca99e7fd35b4986469c1ef8b87b4e228d18efed649f75b270d30ee72978b";
 // Structure and benchmark-table shapes are checked independently of the renderer.
 const PROJECTS = [
   {
@@ -25,7 +25,7 @@ const PROJECTS = [
   {
     slug: "verification-and-supervision-in-scientific-reasoning-tasks",
     title: "Verification and supervision in reasoning tasks",
-    bodyStart: 0, display: 15, inline: 105, headings: 7, tables: [[4, 4, 4, 4]],
+    bodyStart: 0, display: 15, inline: 106, headings: 7, tables: [[4, 4, 4, 4]],
   },
   {
     slug: "evidence-uncertainty-and-decision-guarantees-in-investment-research",
@@ -95,7 +95,7 @@ function canonicalEntry(project, index) {
     assert.ok(value, `Missing canonical field ${label}`);
     return value;
   };
-  const contributions = project.split("## Key Contributions\n")[1].split("\n## Architectural Context:")[0];
+  const contributions = project.split("## Key Contributions\n")[1].split("\n## Manuscript")[0];
   const parents = contributions.split(/^\* /gmu).slice(1);
   const details = Object.fromEntries(parents.flatMap((parent, i) => {
     const lines = [...parent.matchAll(/^ {2}(\*|\d+\.) (.+)$/gmu)];
@@ -105,16 +105,16 @@ function canonicalEntry(project, index) {
     id: index + 1,
     categoryId: "01",
     organization: field("Organization"),
-    summary: project.split("## Summary\n")[1].split("\n## Key Contributions")[0].trim(),
+    summary: project.split("## Summary\n")[1].split("\n## Problem and Approach")[0].trim(),
     readMoreLabel: field("Read More Label"),
     detailTitle: field("Title"),
     metadata: { position: field("Position"), location: field("Location"), dates: field("Dates") },
     contributionsLabel: "Key Contributions",
     keyContributions: parents.map((parent) => parent.split("\n")[0]),
     notes: [],
-    architecturalContext: {
-      title: project.match(/^## (Architectural Context:[^\n]+)$/mu)?.[1],
-      text: project.match(/^## Architectural Context:[^\n]+\n([\s\S]+?)\n## Manuscript/mu)?.[1].trim(),
+    problemAndApproach: {
+      title: "Problem and Approach",
+      text: project.match(/^## Problem and Approach\n([\s\S]+?)\n## Key Contributions/mu)?.[1].trim(),
     },
   };
   if (Object.keys(details).length) entry.keyContributionDetails = details;
@@ -264,7 +264,7 @@ for (const expected of PROJECTS) {
     assert.equal(canonical.url, `https://www.theodoreoy.com${AI_ROUTE}${expected.slug}/`);
     assert.deepEqual(formulas(source.markdown), formulas(canonicalBody), "Every mathematical expression must retain its exact TeX and order");
     const canonicalDetails = canonical.entry.keyContributionDetails ?? {};
-    assert.equal(Object.values(canonicalDetails).reduce((count, detail) => count + detail.items.length, 0), [0, 4, 3, 0][index]);
+    assert.equal(Object.values(canonicalDetails).reduce((count, detail) => count + detail.items.length, 0), [0, 4, 0, 0][index]);
     assert.equal(readableHtml(html.match(/<h1\b[^>]*>([\s\S]*?)<\/h1>/iu)?.[1] ?? ""), showcase.detailTitle);
     assert.match(html, new RegExp(`href="/experience/#${expected.slug}"`, "u"));
     assert.match(html, /href="#key-contributions"/u);
@@ -278,7 +278,7 @@ for (const expected of PROJECTS) {
       assert.equal(list[1], details.ordered ? "ol" : "ul");
       const children = [...list[3].matchAll(/<li\b[^>]*\bdata-contribution-detail="(\d+)"[^>]*>([\s\S]*?)<\/li>/giu)];
       assert.deepEqual(children.map((child) => Number(child[1])), details.items.map((_, child) => child));
-      assert.deepEqual(children.map((child) => readableHtml(child[2])), details.items.map(readableMarkdown), "All seven nested details must retain their canonical text and order");
+      assert.deepEqual(children.map((child) => readableHtml(child[2])), details.items.map(readableMarkdown), "Every nested detail must retain its canonical text and order");
       for (const [childIndex, child] of children.entries()) {
         const annotations = [...child[2].matchAll(/<annotation\b[^>]*encoding="application\/x-tex"[^>]*>([\s\S]*?)<\/annotation>/giu)].map((item) => decodeHtml(item[1]));
         assert.deepEqual(annotations, formulas(details.items[childIndex]).map(({ tex }) => tex), "Nested contribution TeX must remain exact");

@@ -10,7 +10,7 @@ We ask how much dependence uncertainty a diversification benefit can withstand w
 
 ## 1. Introduction
 
-A risk desk may have agreed marginal models for its individual positions without an equally well-determined model for their joint losses with the background book [[31](#ref-pflugpohl2018)]. That leaves open how much of a portfolio's diversification benefit survives uncertainty about dependence. We study the question by keeping the marginal models, letting the coupling change, and looking for the smallest dependence perturbation that reverses the Expected Shortfall (ES) advantage of a proposed reallocation when both allocations face the same stressed law. We develop a variational framework for this critical stress. It yields a critical-scale $`\Gamma`$-limit, a common critical coefficient for a tie and a strict reversal, the marginal-restoration premium with its zero-premium classification, a flow–cut characterization, at equal effective costs, of the premium's sensitivity to background cost, and a uniform benchmark in which the asymptotic reversal budget is at least $`30\%`$ above the initial-slope prediction.
+A risk desk may have agreed marginal models for its individual positions without an equally well-determined model for their joint losses with the background book [[31](#ref-pflugpohl2018)]. That leaves open how much of a portfolio's diversification benefit survives uncertainty about dependence. We study the question by keeping the marginal models, letting the coupling change, and looking for the smallest dependence perturbation that reverses the Expected Shortfall (ES) advantage of a proposed reallocation when both allocations face the same stressed law. We develop a variational framework for this critical stress. It yields a critical-scale $`\Gamma`$-limit, a common critical coefficient for a tie and a strict reversal, the marginal-restoration premium with its zero-premium classification, a flow–cut characterization, at equal effective costs, of the premium's sensitivity to background cost, and a uniform benchmark in which the asymptotic reversal budget is at least $`30\%`$ above the initial-slope prediction. In that benchmark the sensitivity at zero stress understates the stress the trade can absorb by at least that margin.
 
 Let $`X_1,X_2`$ be the unit losses of two positions of equal initial cost. A transfer from holdings $`(1+\varepsilon,1-\varepsilon)`$ to $`(1,1)`$, with an unchanged background loss $`\beta X_3`$, changes the portfolio loss from $`A_\varepsilon=(1+\varepsilon)X_1+(1-\varepsilon)X_2+\beta X_3=B+\varepsilon H`$ to $`B`$, where
 
@@ -58,7 +58,7 @@ s^*=Jc_{\min}\quad\Longleftrightarrow\quad
 c_3\le\min\{\gamma_1,\gamma_2\}.
 $$
 
-When background displacement is cheapest, exchangeability lets opposite shifts balance on every fixed-background slice. When only traded directions are cheapest, a corner region needs a displacement moment of order $`\delta^2`$, while its coordinate projections admit only $`O(\delta^4)`$ of compensating moment near the diagonal (Figure [2](#dep-fig-corner)), so the premium is strictly positive. Under the attained-slope condition of Proposition [2.2](#dep-prop-nominal-benchmark), with $`c_{\min}=\gamma_1<c_3`$, this mismatch gives $`\rho^\pm_\varepsilon/r_{0,\varepsilon}\to s^*/(\gamma_1J)>1`$, and [(4.10)](#dep-eq-legacy-6-2) bounds this limit explicitly.
+When background displacement is cheapest, exchangeability lets opposite shifts balance on every fixed-background slice. When only traded directions are cheapest, a corner region needs a displacement moment of order $`\delta^2`$, while its coordinate projections admit only $`O(\delta^4)`$ of compensating moment near the diagonal (Figure [2](#dep-fig-corner)), so the premium is strictly positive. Under the attained-slope condition of Proposition [2.2](#dep-prop-nominal-benchmark), with $`c_{\min}=\gamma_1<c_3`$, this mismatch gives $`\rho^\pm_\varepsilon/r_{0,\varepsilon}\to s^*/(\gamma_1J)>1`$, and [(4.10)](#dep-eq-4-10) bounds this limit explicitly.
 
 *The uniform benchmark.* Take independent uniform losses on $`[0,2]^3`$, with $`\beta=1`$, $`p=1/2`$, and $`\gamma=(1,1,2)`$. Then $`g=3/8`$ and $`J=5/32`$, so Proposition [2.2](#dep-prop-nominal-benchmark) gives $`m_\varepsilon=(5/16)\varepsilon^2+o(\varepsilon^2)`$. Corollary [5.2](#dep-prop-uniform-variable-cost) proves that the profile is exactly $`F(s)=2s-5/16`$ for $`0\le s\le1/96`$, yet its zero satisfies $`13/64\le s^*\le29/96`$. So even in this uniform model, and despite an attainable initial slope, the marginal-restoration premium is at least $`30\%`$: the lower bound we prove on reversal is $`30\%`$ above the local-efficiency prediction $`5/32`$.
 
@@ -86,7 +86,7 @@ Let $`n\ge2`$, let $`\mu_1,\ldots,\mu_n`$ have finite first moments, and fix $`P
 
 For exposure vectors $`b,h\in\mathbb R^n`$, the losses before and after the proposed reallocation are $`A_\varepsilon=B+\varepsilon H`$ and $`B`$, with $`B=b\cdot X`$ and $`H=h\cdot X`$. We use the upper-tail mass $`p\in(0,1)`$ and the Expected Shortfall representation of Rockafellar and Uryasev [[32](#ref-rockafellar2002)],
 
-<a id="dep-eq-legacy-2-1"></a>
+<a id="dep-eq-2-1"></a>
 
 $$
 ES_p^P(L)=\min_{t\in\mathbb R}
@@ -96,7 +96,7 @@ $$
 
 We write $`\mathscr E_L(P;t)=t+p^{-1}E_P(L-t)_+`$ for the threshold objective. For an integrable loss, its minimum is attained on the nonempty compact interval characterized by
 
-<a id="dep-eq-legacy-A-1"></a>
+<a id="dep-eq-2-2"></a>
 
 $$
 t\in\arg\min_{u}\mathscr E_L(P;u)
@@ -104,7 +104,7 @@ t\in\arg\min_{u}\mathscr E_L(P;u)
 \tag{2.2}
 $$
 
-Without a continuity assumption on the stressed loss law, support gaps can leave a nondegenerate interval of minimizing thresholds. We therefore keep the set-valued characterization [(2.2)](#dep-eq-legacy-A-1), so that subsequent estimates apply to every minimizer, including for laws with atoms.
+Without a continuity assumption on the stressed loss law, support gaps can leave a nondegenerate interval of minimizing thresholds. We therefore keep the set-valued characterization [(2.2)](#dep-eq-2-2), so that subsequent estimates apply to every minimizer, including for laws with atoms.
 
 Under a common candidate law $`P\in\Pi`$, we compare $`\Phi_\varepsilon(P)=ES_p^P(B)-ES_p^P(A_\varepsilon)`$, minimizing each loss over its own threshold. Maximizing this paired difference tests whether a single dependence scenario can erase the nominal gain, whereas separate maximizations of the two ES values may select different joint laws. We measure changes in dependence with positive weights $`\gamma_i`$ and ground cost
 
@@ -115,7 +115,7 @@ $$
 
 Within $`\Pi=\Pi(\mu_1,\ldots,\mu_n)`$, transport changes how component losses are paired across joint states. With the weights and all marginal laws held fixed, we define the worst comparison at budget $`\rho`$ and the nominal gain by
 
-<a id="dep-eq-legacy-2-2"></a>
+<a id="dep-eq-2-3"></a>
 
 $$
 \mathcal A_\rho=\{P\in\Pi:W_\gamma(P,P_0)\le\rho\},\quad
@@ -124,9 +124,9 @@ m_\varepsilon=-\Phi_\varepsilon(P_0).
 \tag{2.3}
 $$
 
-Proposition [2.1](#dep-prop-general-wellposedness) guarantees attainment in [(2.3)](#dep-eq-legacy-2-2), allowing atoms, singular dependence, and unbounded marginal supports. A nondecreasing profile can vanish on a whole interval, so we distinguish the infimal budgets for a tie and a strict reversal,
+Proposition [2.1](#dep-prop-general-wellposedness) guarantees attainment in [(2.3)](#dep-eq-2-3), allowing atoms, singular dependence, and unbounded marginal supports. A nondecreasing profile can vanish on a whole interval, so we distinguish the infimal budgets for a tie and a strict reversal,
 
-<a id="dep-eq-legacy-2-3"></a>
+<a id="dep-eq-2-4"></a>
 
 $$
 \rho^-_\varepsilon=\inf\{\rho\ge0:D_\varepsilon(\rho)\ge0\},
@@ -139,7 +139,7 @@ which, by Theorem [3.3](#dep-thm-strict-crossing), have the same leading asympto
 
 <a id="dep-prop-general-wellposedness"></a>
 
-**Proposition 2.1 (Existence under integrable marginal laws).** Let $`n\ge2`$, let $`\mu_1,\ldots,\mu_n`$ have finite first moments, and fix $`P_0\in\Pi(\mu_1,\ldots,\mu_n)`$, positive weights $`\gamma_i`$, exposure vectors $`b,h\in\mathbb R^n`$, and $`p\in(0,1)`$. Then $`\Pi`$ and every $`\mathcal A_\rho`$ are compact for $`W_\gamma`$, and the maximum in [(2.3)](#dep-eq-legacy-2-2) is attained. For each fixed $`\varepsilon`$, the profile $`D_\varepsilon`$ is nondecreasing and Lipschitz on $`[0,\infty)`$.
+**Proposition 2.1 (Existence under integrable marginal laws).** Let $`n\ge2`$, let $`\mu_1,\ldots,\mu_n`$ have finite first moments, and fix $`P_0\in\Pi(\mu_1,\ldots,\mu_n)`$, positive weights $`\gamma_i`$, exposure vectors $`b,h\in\mathbb R^n`$, and $`p\in(0,1)`$. Then $`\Pi`$ and every $`\mathcal A_\rho`$ are compact for $`W_\gamma`$, and the maximum in [(2.3)](#dep-eq-2-3) is attained. For each fixed $`\varepsilon`$, the profile $`D_\varepsilon`$ is nondecreasing and Lipschitz on $`[0,\infty)`$.
 
 *Proof.* The fixed-marginal class is tight and weakly closed. Moreover, along any weakly convergent sequence $`P_k\to P`$ in $`\Pi`$, the first moments satisfy $`\int|x|_\gamma\,dP_k=\sum_i\gamma_i\int|x_i|\,d\mu_i=\int|x|_\gamma\,dP`$, so the Wasserstein convergence criterion [[40](#ref-villani2003)] implies $`W_\gamma`$-compactness of $`\Pi`$ and its closed subsets $`\mathcal A_\rho`$. For a linear loss $`L=a\cdot X`$, coupling the laws and minimizing the uniformly Lipschitz hinges over their thresholds gives
 
@@ -200,7 +200,7 @@ We work on a compact box with a positive continuous density because that lets us
 
 Under the reference model of Section 2.2, let $`v`$ be the upper-tail $`p`$ threshold of $`B`$. The marginal expected shortfall (MES) of a unit position $`X_i`$, namely $`E_{P_0}[X_i\mid B>v]`$, is the ES derivative with respect to its holding, and multiplying by that holding gives its Euler contribution [[36](#ref-scaillet2004), [38](#ref-tasche2001)]. The first two holdings in $`B`$ both equal one, so the directional derivative along $`H=X_1-X_2`$ is their MES difference: with $`T_H=E_{P_0}[H1_{\{B>v\}}]`$, it equals $`p^{-1}T_H=E_{P_0}[X_1-X_2\mid B>v]=0`$ by exchangeability. To find the gain from a nonzero trade we then have to differentiate the moving tail boundary, which leads to a conditional variance on the tail section.
 
-We record the classical section differentiation formula under our continuity assumptions in Lemma [A.1](https://github.com/130U/mathematical-finance-project/blob/3cc4c7e9b36e77027962999b932a1df7972cd2ed/paper/source/technical-reference.tex#L4).
+We record the classical section differentiation formula under our continuity assumptions in Lemma [A.1](https://github.com/130U/mathematical-finance-project/blob/dbb0a1003d5c37b13041229e8a1a707e3f247cde/paper/source/technical-reference.tex#L4).
 
 The tail boundary can be parameterized by
 
@@ -216,7 +216,7 @@ Since $`p\in(0,1)`$ and $`f>0`$, the threshold satisfies $`2\ell+\beta\ell_3<v<2
 
 By the coarea formula, integration in the normal coordinate $`B-v`$ gives the section measure $`d\sigma=f(\xi)\,dx\,dy/\beta`$. We denote the density of $`B`$ at $`v`$ and the nominal gain coefficient by
 
-<a id="dep-eq-legacy-3-1"></a>
+<a id="dep-eq-2-5"></a>
 
 $$
 g=\sigma(\Omega)>0,\qquad J=\frac12\int_\Omega H^2\,d\sigma>0.
@@ -231,7 +231,7 @@ Here $`g=f_B(v)`$ is the loss density at the threshold, and $`d\sigma/g`$ is its
 
 (i)  *Nominal gain and threshold curvature.* The reference thresholds and nominal gain satisfy
 
-<a id="dep-eq-legacy-3-2"></a>
+<a id="dep-eq-2-6"></a>
 
 $$
 t_\varepsilon-v=o(\varepsilon),\qquad
@@ -241,7 +241,7 @@ $$
 
 The threshold of $`B+\eta H`$ is unique for every $`|\eta|<1`$, and $`m_\varepsilon>0`$ for $`0<\varepsilon<1`$. With $`L_{c,\varepsilon}=B+c\varepsilon H`$, the unoptimized objective satisfies, uniformly for $`c=0,1`$ and $`|\tau|\le T<\infty`$,
 
-<a id="dep-eq-legacy-B-2"></a>
+<a id="dep-eq-2-7"></a>
 
 $$
 \mathscr E_{L_{c,\varepsilon}}(P_0;v+\varepsilon\tau)
@@ -252,7 +252,7 @@ $$
 
 (ii)  *Fixed-marginal Lipschitz bound and initial slope.* For every $`P,Q\in\Pi`$,
 
-<a id="dep-eq-legacy-3-3"></a>
+<a id="dep-eq-2-8"></a>
 
 $$
 |\Phi_\varepsilon(P)-\Phi_\varepsilon(Q)|\le \kappa_\varepsilon W_\gamma(P,Q),\quad
@@ -263,7 +263,7 @@ $$
 
 For fixed $`0<\varepsilon<1`$, if
 
-<a id="dep-eq-legacy-3-4"></a>
+<a id="dep-eq-2-9"></a>
 
 $$
 \frac{1+\varepsilon/2}{\gamma_1}
@@ -273,7 +273,7 @@ $$
 
 then there exists $`r_\varepsilon>0`$ such that
 
-<a id="dep-eq-legacy-3-5"></a>
+<a id="dep-eq-2-10"></a>
 
 $$
 K_\varepsilon=\frac{1+\varepsilon/2}{p\gamma_1},\qquad
@@ -282,9 +282,9 @@ D_\varepsilon(\rho)=-m_\varepsilon+K_\varepsilon\rho
 \tag{2.10}
 $$
 
-*Proof.* For part (i), the coefficients of $`B+\eta H`$ are positive whenever $`|\eta|<1`$, and its support is $`[2\ell+\beta\ell_3,2r+\beta r_3]`$. Since every interior level meets $`\operatorname{int}S`$, Lemma [A.1](https://github.com/130U/mathematical-finance-project/blob/3cc4c7e9b36e77027962999b932a1df7972cd2ed/paper/source/technical-reference.tex#L4) gives a positive continuous loss density and a unique threshold. The gradients of $`H`$ and $`B+\eta H`$ are linearly independent, so $`H`$ is nonconstant on each such section. Its conditional variance is therefore strictly positive, and the same lemma implies strict convexity of $`\eta\mapsto ES_p^{P_0}(B+\eta H)`$ on $`(-1,1)`$.
+*Proof.* For part (i), the coefficients of $`B+\eta H`$ are positive whenever $`|\eta|<1`$, and its support is $`[2\ell+\beta\ell_3,2r+\beta r_3]`$. Since every interior level meets $`\operatorname{int}S`$, Lemma [A.1](https://github.com/130U/mathematical-finance-project/blob/dbb0a1003d5c37b13041229e8a1a707e3f247cde/paper/source/technical-reference.tex#L4) gives a positive continuous loss density and a unique threshold. The gradients of $`H`$ and $`B+\eta H`$ are linearly independent, so $`H`$ is nonconstant on each such section. Its conditional variance is therefore strictly positive, and the same lemma implies strict convexity of $`\eta\mapsto ES_p^{P_0}(B+\eta H)`$ on $`(-1,1)`$.
 
-At $`\eta=0`$, exchanging the first two coordinates preserves both the reference tail and its boundary measure and reverses $`H`$, giving $`T_H=m_1=0`$. In the notation of Lemma [A.1](https://github.com/130U/mathematical-finance-project/blob/3cc4c7e9b36e77027962999b932a1df7972cd2ed/paper/source/technical-reference.tex#L4), the remaining section moments at $`(0,v)`$ are $`m_0=g`$ and $`m_2=2J`$. Thus the threshold derivative vanishes and the optimized second derivative is $`2J/p`$, which yield [(2.6)](#dep-eq-legacy-3-2) by Taylor expansion at zero. Strict convexity makes this stationary point the strict minimum, so $`m_\varepsilon>0`$ for all $`0<\varepsilon<1`$. For the unoptimized objective $`\Psi`$, the Hessian at $`(0,v)`$ is $`\operatorname{diag}(2J/p,g/p)`$. Expanding at the trade size and threshold displacement $`(c\varepsilon,\varepsilon\tau)`$ gives [(2.7)](#dep-eq-legacy-B-2), uniformly on bounded $`\tau`$-intervals.
+At $`\eta=0`$, exchanging the first two coordinates preserves both the reference tail and its boundary measure and reverses $`H`$, giving $`T_H=m_1=0`$. In the notation of Lemma [A.1](https://github.com/130U/mathematical-finance-project/blob/dbb0a1003d5c37b13041229e8a1a707e3f247cde/paper/source/technical-reference.tex#L4), the remaining section moments at $`(0,v)`$ are $`m_0=g`$ and $`m_2=2J`$. Thus the threshold derivative vanishes and the optimized second derivative is $`2J/p`$, which yield [(2.6)](#dep-eq-2-6) by Taylor expansion at zero. Strict convexity makes this stationary point the strict minimum, so $`m_\varepsilon>0`$ for all $`0<\varepsilon<1`$. For the unoptimized objective $`\Psi`$, the Hessian at $`(0,v)`$ is $`\operatorname{diag}(2J/p,g/p)`$. Expanding at the trade size and threshold displacement $`(c\varepsilon,\varepsilon\tau)`$ gives [(2.7)](#dep-eq-2-7), uniformly on bounded $`\tau`$-intervals.
 
 *The fixed-marginal Lipschitz bound.* We next establish the uniform Lipschitz bound over $`\Pi`$. Given any minimizing $`u`$ for $`B`$ under $`Q`$ and any minimizing $`t`$ for $`A_\varepsilon`$ under $`P`$, let
 
@@ -298,7 +298,7 @@ $$
 
 Both gaps are nonnegative, and direct subtraction gives
 
-<a id="dep-eq-legacy-A-14"></a>
+<a id="dep-eq-2-11"></a>
 
 $$
 \Phi_\varepsilon(P)-\Phi_\varepsilon(Q)
@@ -324,7 +324,7 @@ $$
 +(1-\varepsilon/2)|Y_2-X_2|+\beta|Y_3-X_3|.
 $$
 
-Integrating against an optimal transport plan and then interchanging $`P,Q`$ proves [(2.8)](#dep-eq-legacy-3-3). The mixing argument in Proposition [2.1](#dep-prop-general-wellposedness), now with this sharp constant, also gives
+Integrating against an optimal transport plan and then interchanging $`P,Q`$ proves [(2.8)](#dep-eq-2-8). The mixing argument in Proposition [2.1](#dep-prop-general-wellposedness), now with this sharp constant, also gives
 
 <a id="dep-eq-sharp-budget-continuity"></a>
 
@@ -336,7 +336,7 @@ $$
 
 <a id="dep-a-3-an-interior-intersection-and-attainment-of-the-initial-slope"></a>
 
-*Attaining the initial slope.* Under [(2.9)](#dep-eq-legacy-3-4), we construct an attaining exchange near an interior intersection of the reference tail planes $`\{B=v\}`$ and $`\{A_\varepsilon=t_\varepsilon\}`$. To locate such an intersection, fix $`\varepsilon\in(0,1)`$ and let $`[m_F,M_F]`$ be the nondegenerate range of $`A_\varepsilon`$ on $`F_v=\{B=v\}\cap S`$. Both losses increase along each nonconstant segment from the lower vertex $`x_{\min}=(\ell,\ell,\ell_3)`$. Any point with $`B>v`$ lies beyond an intersection of that segment with $`F_v`$, so $`t_\varepsilon\le m_F`$ would imply $`\{B>v\}\subset\{A_\varepsilon>t_\varepsilon\}`$. Since $`A_\varepsilon`$ is nonconstant on $`F_v`$, the second tail would also contain an open set below $`B=v`$, contradicting the equal tail probabilities and $`f>0`$. Rays toward the upper corner similarly exclude $`t_\varepsilon\ge M_F`$, which leaves $`t_\varepsilon\in(m_F,M_F)`$. The relative-interior property of a linear map on a convex section gives an intersection $`c=(x_*,y_*,z_*)\in\operatorname{int}S`$.
+*Attaining the initial slope.* Under [(2.9)](#dep-eq-2-9), we construct an attaining exchange near an interior intersection of the reference tail planes $`\{B=v\}`$ and $`\{A_\varepsilon=t_\varepsilon\}`$. To locate such an intersection, fix $`\varepsilon\in(0,1)`$ and let $`[m_F,M_F]`$ be the nondegenerate range of $`A_\varepsilon`$ on $`F_v=\{B=v\}\cap S`$. Both losses increase along each nonconstant segment from the lower vertex $`x_{\min}=(\ell,\ell,\ell_3)`$. Any point with $`B>v`$ lies beyond an intersection of that segment with $`F_v`$, so $`t_\varepsilon\le m_F`$ would imply $`\{B>v\}\subset\{A_\varepsilon>t_\varepsilon\}`$. Since $`A_\varepsilon`$ is nonconstant on $`F_v`$, the second tail would also contain an open set below $`B=v`$, contradicting the equal tail probabilities and $`f>0`$. Rays toward the upper corner similarly exclude $`t_\varepsilon\ge M_F`$, which leaves $`t_\varepsilon\in(m_F,M_F)`$. The relative-interior property of a linear map on a convex section gives an intersection $`c=(x_*,y_*,z_*)\in\operatorname{int}S`$.
 
 To exchange the first-coordinate marginal intervals of two small source cubes in opposite disagreement regions along $`e_1`$, we first choose reference points with the same coordinate $`x_*`$ and seek equal and opposite changes in the two losses. From the interior intersection $`c`$, a displacement $`(0,-\zeta_0,a\zeta_0)`$ changes $`B`$ by $`(-1+\beta a)\zeta_0`$ and $`A_\varepsilon`$ by $`(-(1-\varepsilon)+\beta a)\zeta_0`$. Equating their sum to zero determines $`a=(1-\varepsilon/2)/\beta`$. Thus the points
 
@@ -348,7 +348,7 @@ have opposite strict tail memberships for small $`\zeta_0>0`$: at $`c_+`$, the l
 
 The uniform subdensities $`\nu_\pm=\lambda1_{E_\pm}\,dx\,dy\,dz`$, where $`\lambda=\min_Sf`$, have equal mass $`\mu=\lambda(2\eta_0)^3`$ and sum at most $`P_0`$. The translations $`T_\pm(x)=x\mp\delta_xe_1`$ therefore define the admissible perturbation
 
-<a id="dep-eq-legacy-A-16a"></a>
+<a id="dep-eq-2-13"></a>
 
 $$
 P_\theta=P_0-\theta(\nu_++\nu_-)
@@ -358,7 +358,7 @@ $$
 
 The translations exchange the first-coordinate marginal intervals, fix the other coordinates, and cross neither tail plane. Thus $`P_\theta`$ preserves all marginals and both reference tail probabilities, leaving $`v`$ and $`t_\varepsilon`$ optimal. Integrating the affine hinges on the two cubes gives
 
-<a id="dep-eq-legacy-A-16b"></a>
+<a id="dep-eq-2-14"></a>
 
 $$
 \Phi_\varepsilon(P_\theta)-\Phi_\varepsilon(P_0)
@@ -367,15 +367,15 @@ $$
 \tag{2.14}
 $$
 
-The plan has cost $`2\gamma_1\theta\mu\delta_x`$, and the sharp bound [(2.8)](#dep-eq-legacy-3-3) forces this to equal $`W_\gamma(P_\theta,P_0)`$. Varying $`\theta\in[0,1]`$ proves [(2.10)](#dep-eq-legacy-3-5) with $`r_\varepsilon=2\gamma_1\mu\delta_x>0`$. ∎
+The plan has cost $`2\gamma_1\theta\mu\delta_x`$, and the sharp bound [(2.8)](#dep-eq-2-8) forces this to equal $`W_\gamma(P_\theta,P_0)`$. Varying $`\theta\in[0,1]`$ proves [(2.10)](#dep-eq-2-10) with $`r_\varepsilon=2\gamma_1\mu\delta_x>0`$. ∎
 
-If $`\gamma_2\ge\gamma_1`$ and $`\gamma_3\ge\beta\gamma_1`$, condition [(2.9)](#dep-eq-legacy-3-4) holds for every $`\varepsilon\in(0,1)`$, which suggests the extrapolated reversal budget $`r_{0,\varepsilon}=m_\varepsilon/K_\varepsilon`$. The construction gives $`r_\varepsilon>0`$ for each fixed trade size, but the disagreement regions narrow with $`\varepsilon`$, so it leaves $`r_\varepsilon/\varepsilon^2`$ uncontrolled. Indeed, the unscaled bound $`|D_\varepsilon(\rho)|\le\varepsilon\|H\|_\infty`$ makes both iterated limits in $`(\rho,\varepsilon)`$ vanish even though $`K_\varepsilon\to1/(p\gamma_1)>0`$, which is why Section 3 tracks the profile under the joint scaling $`\rho=s\varepsilon^2`$.
+If $`\gamma_2\ge\gamma_1`$ and $`\gamma_3\ge\beta\gamma_1`$, condition [(2.9)](#dep-eq-2-9) holds for every $`\varepsilon\in(0,1)`$, which suggests the extrapolated reversal budget $`r_{0,\varepsilon}=m_\varepsilon/K_\varepsilon`$. The construction gives $`r_\varepsilon>0`$ for each fixed trade size, but the disagreement regions narrow with $`\varepsilon`$, so it leaves $`r_\varepsilon/\varepsilon^2`$ uncontrolled. Indeed, the unscaled bound $`|D_\varepsilon(\rho)|\le\varepsilon\|H\|_\infty`$ makes both iterated limits in $`(\rho,\varepsilon)`$ vanish even though $`K_\varepsilon\to1/(p\gamma_1)>0`$, which is why Section 3 tracks the profile under the joint scaling $`\rho=s\varepsilon^2`$.
 
 <a id="dep-prop-exchangeable-protection"></a>
 
 **Reference symmetry and stressed dependence** Our stress class allows asymmetric dependence between the two traded positions. If every candidate law were exchangeable, the losses $`B-\varepsilon H`$ and $`B+\varepsilon H`$ would have the same distribution, and convexity of ES would give
 
-<a id="dep-eq-legacy-3-6"></a>
+<a id="dep-eq-2-15"></a>
 
 $$
 ES_p^P(B)\le\tfrac12 ES_p^P(B-\varepsilon H)+\tfrac12 ES_p^P(B+\varepsilon H)
@@ -420,7 +420,7 @@ $$
 
 Across a coordinate cut $`\{X_i\le q\}`$, upward movements remove mass from below the cut and downward movements add mass to it. The resulting signed flux has a Lebesgue density $`j_i\in L^1(I_i)`$, as shown by the section formulas in Appendix A.3, and we define
 
-<a id="dep-eq-legacy-4-1"></a>
+<a id="dep-eq-3-1"></a>
 
 $$
 j_i(q)dq=(\xi_i)_\#(d_i\,d\Pi_\alpha),\qquad
@@ -440,9 +440,9 @@ In words, $`j_i`$ is the signed displacement moment projected onto the $`i`$-th 
 
 Under the same local plan, each loss has its own minimizing threshold. At threshold $`v+\varepsilon\tau`$, a displacement $`d`$ changes the leading centered and rescaled loss of $`L_{c,\varepsilon}=B+c\varepsilon H`$ from $`u+cH`$ to $`u+b\cdot d+cH`$. Denote the corresponding hinge increment by $`\mathfrak q_c(\tau)=(u+b\cdot d+cH-\tau)_+-(u+cH-\tau)_+`$. We write $`T_c^\alpha(\tau)=\int\mathfrak q_c(\tau)\,d\Pi_\alpha`$ for its integral.
 
-**Definition (Limiting paired risk)**  Moving the threshold away from $`v`$ contributes the curvature term $`g\tau^2/2`$ from [(2.7)](#dep-eq-legacy-B-2). Adding the local transport increment gives the two limiting threshold objectives, which must still be minimized separately:
+**Definition (Limiting paired risk)**  Moving the threshold away from $`v`$ contributes the curvature term $`g\tau^2/2`$ from [(2.7)](#dep-eq-2-7). Adding the local transport increment gives the two limiting threshold objectives, which must still be minimized separately:
 
-<a id="dep-eq-legacy-4-2"></a>
+<a id="dep-eq-3-2"></a>
 
 $$
 G_c^\alpha(\tau)=\frac g2\tau^2+T_c^\alpha(\tau),\qquad
@@ -453,9 +453,9 @@ $$
 
 The energy $`\mathcal C`$ depends only on the absolute displacement moment and the signed coordinate projections, and it is convex under mixtures of kernels. The paired risk also depends on how the displacements are distributed relative to the normal coordinate $`u`$: each of the two hinge objectives optimizes its own threshold, so their difference need not be concave in the common kernel.
 
-We omit the superscript $`\alpha`$ when the kernel is clear, and write $`\kappa_B=\max_i b_i/\gamma_i`$, $`\kappa_H=\max\{\gamma_1^{-1},\gamma_2^{-1}\}`$. Since $`|T_c^\alpha|\le\kappa_BI`$, the quadratic term gives coercivity and confines every minimizer to $`g\tau^2/2\le2\kappa_BI`$. Together with convexity from Lemma [A.4](https://github.com/130U/mathematical-finance-project/blob/3cc4c7e9b36e77027962999b932a1df7972cd2ed/paper/source/technical-limit.tex#L103), these properties justify the threshold minimizations in $`\mathcal V`$. We then optimize the paired value over the energy budget, with attainment proved in Theorem [3.1](#dep-thm-critical-limit):
+We omit the superscript $`\alpha`$ when the kernel is clear, and write $`\kappa_B=\max_i b_i/\gamma_i`$, $`\kappa_H=\max\{\gamma_1^{-1},\gamma_2^{-1}\}`$. Since $`|T_c^\alpha|\le\kappa_BI`$, the quadratic term gives coercivity and confines every minimizer to $`g\tau^2/2\le2\kappa_BI`$. Together with convexity from Lemma [A.4](https://github.com/130U/mathematical-finance-project/blob/dbb0a1003d5c37b13041229e8a1a707e3f247cde/paper/source/technical-limit.tex#L103), these properties justify the threshold minimizations in $`\mathcal V`$. We then optimize the paired value over the energy budget, with attainment proved in Theorem [3.1](#dep-thm-critical-limit):
 
-<a id="dep-eq-legacy-4-3"></a>
+<a id="dep-eq-3-3"></a>
 
 $$
 F(s)=\max_{\mathcal C(\alpha)\le s}\mathcal V(\alpha),\qquad s\ge0.
@@ -498,7 +498,7 @@ Here we identify $`\Pi_\alpha`$ with a measure on $`Z`$ through $`(\xi,u,d)\maps
 
 (ii)  *Target laws and exact recovery.* For every sequence $`\varepsilon_n\downarrow0`$ and every feasible sequence satisfying $`W_\gamma(P_n,P_0)=O(\varepsilon_n^2)`$, there are a subsequence and a kernel with finite $`I`$ such that
 
-<a id="dep-eq-legacy-4-5"></a>
+<a id="dep-eq-3-4"></a>
 
 $$
 \mathcal C(\alpha)\le\liminf_n\frac{W_\gamma(P_n,P_0)}{\varepsilon_n^2},\qquad
@@ -508,7 +508,7 @@ $$
 
 Conversely, every kernel with finite $`I`$ admits a recovery sequence of distributions preserving the original three full marginals, with
 
-<a id="dep-eq-legacy-4-6"></a>
+<a id="dep-eq-3-5"></a>
 
 $$
 \limsup_{\varepsilon\downarrow0}\frac{W_\gamma(P_\varepsilon,P_0)}{\varepsilon^2}\le\mathcal C(\alpha),\qquad
@@ -516,9 +516,9 @@ $$
 \tag{3.5}
 $$
 
-(iii)  *The stress profile.* The maximum in [(3.3)](#dep-eq-legacy-4-3) is attained. The function $`F`$ is finite, continuous, and nondecreasing, with $`F(0)=-J/p`$ and $`F>0`$ at some finite budget. For every finite $`S_0`$,
+(iii)  *The stress profile.* The maximum in [(3.3)](#dep-eq-3-3) is attained. The function $`F`$ is finite, continuous, and nondecreasing, with $`F(0)=-J/p`$ and $`F>0`$ at some finite budget. For every finite $`S_0`$,
 
-<a id="dep-eq-legacy-4-4"></a>
+<a id="dep-eq-3-6"></a>
 
 $$
 \sup_{0\le s\le S_0}\left|\frac{D_\varepsilon(s\varepsilon^2)}{\varepsilon^2}-F(s)\right|\longrightarrow0.
@@ -527,11 +527,11 @@ $$
 
 **Proof strategy** Theorem [3.1](#dep-thm-critical-limit)(i) gives $`\Gamma`$-convergence of the transport energy and convergence of the paired risk along bounded-energy plans, and the exact marginal recovery in part (ii) makes the limiting kernel values asymptotically attainable in $`\Pi`$. Part (iii) gives uniform convergence of the optimized profiles on compact budget intervals, which, together with the strict crossing in Theorem [3.3](#dep-thm-strict-crossing), locates the reversal budget $`s^*`$.
 
-*Step 1: Localization and the energy lower bound.* Because the two ES thresholds are optimized independently, comparison of the objectives requires a common threshold window for stresses with bounded rescaled energy. In Appendix [A.2](https://github.com/130U/mathematical-finance-project/blob/3cc4c7e9b36e77027962999b932a1df7972cd2ed/paper/source/technical-limit.tex#L2), Lemma [A.2](https://github.com/130U/mathematical-finance-project/blob/3cc4c7e9b36e77027962999b932a1df7972cd2ed/paper/source/technical-threshold-statement.tex#L1) places every minimizing threshold in an $`O_M(\varepsilon)`$ window. On bounded windows the lifted plans are locally compact; outside them, marginal conservation requires compensation for the projected local flux. The compensation bound above then gives the energy lower bound for arbitrary admissible plans. Choosing optimal plans yields the corresponding Wasserstein bound for their target laws.
+*Step 1: Localization and the energy lower bound.* Because the two ES thresholds are optimized independently, comparison of the objectives requires a common threshold window for stresses with bounded rescaled energy. In Appendix [A.2](https://github.com/130U/mathematical-finance-project/blob/dbb0a1003d5c37b13041229e8a1a707e3f247cde/paper/source/technical-limit.tex#L2), Lemma [A.2](https://github.com/130U/mathematical-finance-project/blob/dbb0a1003d5c37b13041229e8a1a707e3f247cde/paper/source/technical-threshold-statement.tex#L1) places every minimizing threshold in an $`O_M(\varepsilon)`$ window. On bounded windows the lifted plans are locally compact; outside them, marginal conservation requires compensation for the projected local flux. The compensation bound above then gives the energy lower bound for arbitrary admissible plans. Choosing optimal plans yields the corresponding Wasserstein bound for their target laws.
 
 *Step 2: Convergence of the paired risk.* Bounded first moments make each hinge increment integrable, but need not give uniform integrability along convergent plans. The two objectives share the same large-displacement contribution, so we subtract $`\mathfrak q_0(0)`$ from both. The relative increments are bounded on the common threshold window. Outside a normal window enlarged to account for the bounded reallocation $`H`$, a nonzero relative increment requires a sufficiently large displacement, so the first moment controls the far-field contributions. The baseline integral is finite but need not converge. Since it translates both threshold objectives by the same amount independently of the threshold, it cancels exactly from their difference of minima.
 
-*Step 3: Exact marginal recovery.* Let $`\mathcal K_{\rm fin}^c`$ denote probability kernels with compactly supported continuous weights on finitely many fixed displacement vectors and the remaining mass at zero, as in [(A.13)](https://github.com/130U/mathematical-finance-project/blob/3cc4c7e9b36e77027962999b932a1df7972cd2ed/paper/source/technical-limit.tex#L136). For a fixed kernel in this class, local translations yield a preliminary law $`Q_\varepsilon`$ with uniform marginal CDF expansion $`F_{i,\varepsilon}-F_i=-\varepsilon^2j_i+o(\varepsilon^2)`$, where $`F_i`$ is the reference CDF. The quantile maps $`F_i^{-1}\circ F_{i,\varepsilon}`$ restore all three marginals at cost $`\varepsilon^2\sum_i\gamma_i\|j_i\|_1+o(\varepsilon^2)`$, with $`O_\alpha(\varepsilon^2)`$ displacements.
+*Step 3: Exact marginal recovery.* Let $`\mathcal K_{\rm fin}^c`$ denote probability kernels with compactly supported continuous weights on finitely many fixed displacement vectors and the remaining mass at zero, as in [(A.13)](https://github.com/130U/mathematical-finance-project/blob/dbb0a1003d5c37b13041229e8a1a707e3f247cde/paper/source/technical-limit.tex#L136). For a fixed kernel in this class, local translations yield a preliminary law $`Q_\varepsilon`$ with uniform marginal CDF expansion $`F_{i,\varepsilon}-F_i=-\varepsilon^2j_i+o(\varepsilon^2)`$, where $`F_i`$ is the reference CDF. The quantile maps $`F_i^{-1}\circ F_{i,\varepsilon}`$ restore all three marginals at cost $`\varepsilon^2\sum_i\gamma_i\|j_i\|_1+o(\varepsilon^2)`$, with $`O_\alpha(\varepsilon^2)`$ displacements.
 
 To see why this correction does not alter the leading paired risk, compare its displacement scale with the $`O_\alpha(\varepsilon)`$ threshold band. Outside a sufficiently wide band, the paired hinge has gradient $`-\varepsilon h`$ above both thresholds and zero below both, so multiplying by the restoration displacement gives an $`O_\alpha(\varepsilon^3)`$ contribution. Inside the band the gradient is bounded, but the $`Q_\varepsilon`$-mass is only $`O_\alpha(\varepsilon)`$, giving the same order after integration. The restoration error is therefore $`O_\alpha(\varepsilon^3)`$, uniformly over all minimizing threshold pairs.
 
@@ -545,7 +545,7 @@ Approximation by $`\mathcal K_{\rm fin}^c`$ in cost, paired risk, and the vague 
 
 At zero threshold shifts, the portfolios disagree on tail membership precisely on $`W=\{u(u+H)<0\}`$. The displacement $`\zeta=-(u+H)1_W`$ moves a source in this wedge to the limiting $`A_\varepsilon`$-boundary and attains the maximal paired hinge increment per unit of normal movement. When $`c_{\min}=\gamma_1`$, we can assign this movement along $`e_1`$ provided its downward and upward moments balance on each $`x`$-fiber. On active sources in $`W`$, $`\zeta<0`$ for $`y<x`$ and $`\zeta>0`$ for $`y>x`$, with $`\int\zeta\,du=-H|H|/2`$. Writing $`k(x,y)=f(x,y,(v-x-y)/\beta)1_{\{\beta\ell_3<v-x-y<\beta r_3\}}`$, the available fiber moments are
 
-<a id="dep-eq-legacy-A-19"></a>
+<a id="dep-eq-3-7"></a>
 
 $$
 \ell_-(x)=\frac1{2\beta}\int_I(x-y)_+^2k(x,y)\,dy,\qquad
@@ -566,7 +566,7 @@ $$
 
 <a id="dep-prop-balanced-linear-profile"></a>
 
-**Proposition 3.2 (Capacity of the initial linear segment).** In the exchangeable box model of Section 2.2, suppose $`\gamma_1=\min\{\gamma_1,\gamma_2,\gamma_3/\beta\}`$. With $`\ell_\pm`$ as in [(3.7)](#dep-eq-legacy-A-19) and $`s_{\rm lin}=\gamma_1J(1-\chi)>0`$ as above,
+**Proposition 3.2 (Capacity of the initial linear segment).** In the exchangeable box model of Section 2.2, suppose $`\gamma_1=\min\{\gamma_1,\gamma_2,\gamma_3/\beta\}`$. With $`\ell_\pm`$ as in [(3.7)](#dep-eq-3-7) and $`s_{\rm lin}=\gamma_1J(1-\chi)>0`$ as above,
 
 $$
 F(s)=-J/p+s/(p\gamma_1),\qquad 0\le s\le s_{\rm lin}.
@@ -593,7 +593,7 @@ G'_{1,-}(0)=-\theta \mathfrak m_-\le0,\qquad
 G'_{1,+}(0)=\theta \mathfrak m_+\ge0.
 $$
 
-By Lemma [A.4](https://github.com/130U/mathematical-finance-project/blob/3cc4c7e9b36e77027962999b932a1df7972cd2ed/paper/source/technical-limit.tex#L103), zero is globally optimal for both objectives. Evaluating the nonzero wedge integrals, $`H^2/2`$ for $`B`$ on $`H<0`$ and $`-H^2/2`$ for $`A_\varepsilon`$ on $`H>0`$, we obtain $`T_0(0)=\theta Q_{\rm bal}`$ and $`T_1(0)=-\theta Q_{\rm bal}`$, which yield $`\mathcal V(\alpha^\theta)=-J/p+\theta s_{\rm lin}/(p\gamma_1)`$. Since $`0<\chi<1`$ by Lemma [A.3](https://github.com/130U/mathematical-finance-project/blob/3cc4c7e9b36e77027962999b932a1df7972cd2ed/paper/source/technical-limit.tex#L54), we may choose $`\theta=s/s_{\rm lin}`$ to attain the upper bound inherited from Proposition [2.2](#dep-prop-nominal-benchmark). ∎
+By Lemma [A.4](https://github.com/130U/mathematical-finance-project/blob/dbb0a1003d5c37b13041229e8a1a707e3f247cde/paper/source/technical-limit.tex#L103), zero is globally optimal for both objectives. Evaluating the nonzero wedge integrals, $`H^2/2`$ for $`B`$ on $`H<0`$ and $`-H^2/2`$ for $`A_\varepsilon`$ on $`H>0`$, we obtain $`T_0(0)=\theta Q_{\rm bal}`$ and $`T_1(0)=-\theta Q_{\rm bal}`$, which yield $`\mathcal V(\alpha^\theta)=-J/p+\theta s_{\rm lin}/(p\gamma_1)`$. Since $`0<\chi<1`$ by Lemma [A.3](https://github.com/130U/mathematical-finance-project/blob/dbb0a1003d5c37b13041229e8a1a707e3f247cde/paper/source/technical-limit.tex#L54), we may choose $`\theta=s/s_{\rm lin}`$ to attain the upper bound inherited from Proposition [2.2](#dep-prop-nominal-benchmark). ∎
 
 **Strict growth**  To identify a common leading budget for a tie and a strict reversal, we improve every bounded-first-moment kernel at arbitrarily small additional cost. If the paired risk were concave in the kernel, mixing with a kernel of larger paired risk would do this directly, but the two threshold objectives are minimized separately and their difference need not be concave along mixtures. We also cannot assume that a kernel leaves stationary mass available for an added displacement, since an everywhere nonzero shift proportional to $`e^{-u^2}e_1`$ already has finite first moment.
 
@@ -605,7 +605,7 @@ We instead replace a small fraction of the existing kernel on two exchanged norm
 
 (i)  *Quantitative local improvement.* For every $`0\le M<\infty`$ there exists $`c_M>0`$ such that every kernel satisfying $`I(\alpha)\le M`$ and every $`0<\delta\le1`$ admit a feasible kernel $`\widehat\alpha`$ with
 
-<a id="dep-eq-legacy-5-1"></a>
+<a id="dep-eq-3-8"></a>
 
 $$
 \mathcal C(\widehat\alpha)\le\mathcal C(\alpha)+\delta,\qquad
@@ -626,7 +626,7 @@ $$
 
 For every finite $`S_0>0`$,
 
-<a id="dep-eq-legacy-5-2"></a>
+<a id="dep-eq-3-9"></a>
 
 $$
 F(t)-F(s)\ge c_{S_0}(t-s)>0\qquad(0\le s<t\le S_0).
@@ -635,7 +635,7 @@ $$
 
 (ii)  *Critical budgets.* Together with the continuity, negative initial value, and positive value at a finite budget in Theorem [3.1](#dep-thm-critical-limit)(iii), strict growth of $`F`$ gives a unique zero $`s^*>0`$. Over the finite-first-moment kernel class,
 
-<a id="dep-eq-legacy-5-3"></a>
+<a id="dep-eq-3-10"></a>
 
 $$
 s^*=\min_{\alpha:\,\mathcal V(\alpha)\ge0}\mathcal C(\alpha)
@@ -646,7 +646,7 @@ $$
 
 The corresponding pre-limit critical budgets satisfy
 
-<a id="dep-eq-legacy-5-4"></a>
+<a id="dep-eq-3-11"></a>
 
 $$
 \rho^-_\varepsilon=s^*\varepsilon^2+o(\varepsilon^2),\qquad
@@ -660,7 +660,7 @@ The first two minima are attained, whereas the infimum over strictly positive ri
 
 **Execution costs** A positive execution cost proportional to $`\varepsilon`$ exceeds the second-order nominal gain for small trades. To retain a critical-budget comparison, suppose instead that the deterministic cost paid to implement the new allocation $`B`$ satisfies $`c_{\mathrm{exec},\varepsilon}\ge0`$ and $`c_{\mathrm{exec},\varepsilon}/\varepsilon^2\to\theta\in[0,J/p)`$. With the stress class and metric fixed, cash invariance gives $`D^{\rm net}_\varepsilon=D_\varepsilon+c_{\mathrm{exec},\varepsilon}`$, whose rescaled profile converges locally uniformly to $`F+\theta`$.
 
-Applying the tie and strict-reversal definitions in [(2.4)](#dep-eq-legacy-2-3) to the net profile, we obtain by strict growth and local uniform convergence $`\rho^{\pm,\rm net}_\varepsilon=s_\theta\varepsilon^2+o(\varepsilon^2)`$, where $`s_\theta`$ is the unique solution of $`F(s_\theta)=-\theta`$. As the rescaled execution cost $`\theta`$ increases to $`J/p`$, this solution decreases continuously from $`s^*`$ to zero. For example, in the cheap-background case of Section 4.1, the explicit linear profile gives $`s_\theta=c_3(J-p\theta)`$.
+Applying the tie and strict-reversal definitions in [(2.4)](#dep-eq-2-4) to the net profile, we obtain by strict growth and local uniform convergence $`\rho^{\pm,\rm net}_\varepsilon=s_\theta\varepsilon^2+o(\varepsilon^2)`$, where $`s_\theta`$ is the unique solution of $`F(s_\theta)=-\theta`$. As the rescaled execution cost $`\theta`$ increases to $`J/p`$, this solution decreases continuously from $`s^*`$ to zero. For example, in the cheap-background case of Section 4.1, the explicit linear profile gives $`s_\theta=c_3(J-p\theta)`$.
 
 <a id="dep-background-substitutability-and-minimum-cost-feasibility"></a>
 
@@ -682,13 +682,13 @@ Here $`\phi_i(q)`$ acts as a dual shadow price for the projected displacement mo
 
 With $`c_1=\gamma_1`$, $`c_2=\gamma_2`$, $`c_3=\gamma_3/\beta`$, and $`c_{\min}=\min\{c_1,c_2,c_3\}`$, Proposition [2.2](#dep-prop-nominal-benchmark) and Theorem [3.1](#dep-thm-critical-limit) already give $`F(s)\le-J/p+s/(pc_{\min})`$. The issue at zero risk difference is whether a kernel can satisfy the pointwise efficiency conditions while conserving every marginal projection, and we characterize those simultaneous equality conditions below.
 
-Proposition [2.2](#dep-prop-nominal-benchmark) gives initial efficiency at each fixed trade size under [(2.9)](#dep-eq-legacy-3-4), and when $`\gamma_1=c_{\min}`$, Proposition [3.2](#dep-prop-balanced-linear-profile) separately realizes the limiting slope by matching opposite first-coordinate moments on each fiber. When only traded coordinates are cheapest, that matching is enough for the initial linear segment but cannot cover the whole tail section. If the background coordinate is cheapest, exchanging $`x,y`$ and reversing $`u`$ instead balances the required displacement on every background slice, which sustains the efficiency bound up to zero risk.
+Proposition [2.2](#dep-prop-nominal-benchmark) gives initial efficiency at each fixed trade size under [(2.9)](#dep-eq-2-9), and when $`\gamma_1=c_{\min}`$, Proposition [3.2](#dep-prop-balanced-linear-profile) separately realizes the limiting slope by matching opposite first-coordinate moments on each fiber. When only traded coordinates are cheapest, that matching is enough for the initial linear segment but cannot cover the whole tail section. If the background coordinate is cheapest, exchanging $`x,y`$ and reversing $`u`$ instead balances the required displacement on every background slice, which sustains the efficiency bound up to zero risk.
 
 <a id="dep-lem-efficiency-bound"></a>
 
 **Lemma 4.1 (Local-efficiency bound and critical-level optimality).** In the exchangeable box model of Section 2.2, every kernel with $`I(\alpha)<\infty`$ satisfies $`p\mathcal V(\alpha)+J\le\mathcal C(\alpha)/c_{\min}`$, so $`s^*\ge c_{\min}J`$. Set $`b=(1,1,\beta)`$ and $`\zeta=-(u+H)1_{\{u(u+H)<0\}}`$. Then $`s^*=c_{\min}J`$ if and only if there is a measurable probability kernel satisfying
 
-<a id="dep-eq-legacy-6-3"></a>
+<a id="dep-eq-4-1"></a>
 
 $$
 \begin{aligned}
@@ -704,7 +704,7 @@ Such a kernel has $`\mathcal C=I=c_{\min}J`$ and $`\mathcal V=0`$; every kernel 
 
 *Proof.* Set $`w=b\cdot d`$, $`\Delta_+(t,w)=(t+w)_+-t_+`$, and choose any $`\tau_A\in\arg\min G_1`$. To compare the risk gain with its transport cost, we evaluate the $`B`$-objective at zero, bound the difference of hinge increments by $`|w|`$, and use $`c_{\min}|w|\le |d|_\gamma`$. Recording the loss in each comparison gives
 
-<a id="dep-eq-legacy-E-5"></a>
+<a id="dep-eq-4-2"></a>
 
 $$
 \begin{aligned}
@@ -718,11 +718,11 @@ $$
 \tag{4.2}
 $$
 
-The five terms (I)–(V) in [(4.2)](#dep-eq-legacy-E-5) have distinct roles: (I) the marginal-restoration penalty; (II) the excess transport cost over the cheapest normal movement, including cancellation between coordinate displacements; (III) the curvature cost of shifting the $`A_\varepsilon`$-threshold; (IV) the unsaturated hinge gain; and (V) the gap from evaluating the $`B`$-objective at zero instead of its minimum. For the fourth term, $`\Delta_+(t,w)\in[\min\{0,w\},\max\{0,w\}]`$, an interval of length $`|w|`$, so the difference of the two hinge increments cannot exceed $`|w|`$. All five terms are consequently nonnegative, proving the efficiency bound. Since $`\tau_A`$ was an arbitrary minimizer, equality forces each defect to vanish for every optimal $`A_\varepsilon`$-threshold.
+The five terms (I)–(V) in [(4.2)](#dep-eq-4-2) have distinct roles: (I) the marginal-restoration penalty; (II) the excess transport cost over the cheapest normal movement, including cancellation between coordinate displacements; (III) the curvature cost of shifting the $`A_\varepsilon`$-threshold; (IV) the unsaturated hinge gain; and (V) the gap from evaluating the $`B`$-objective at zero instead of its minimum. For the fourth term, $`\Delta_+(t,w)\in[\min\{0,w\},\max\{0,w\}]`$, an interval of length $`|w|`$, so the difference of the two hinge increments cannot exceed $`|w|`$. All five terms are consequently nonnegative, proving the efficiency bound. Since $`\tau_A`$ was an arbitrary minimizer, equality forces each defect to vanish for every optimal $`A_\varepsilon`$-threshold.
 
-To reach zero risk at the local-efficiency budget, none of these defects can remain. Indeed, if $`\mathcal V\ge0`$ and $`\mathcal C\le c_{\min}J`$, the left side of [(4.2)](#dep-eq-legacy-E-5) is nonpositive, so every nonnegative term must vanish and
+To reach zero risk at the local-efficiency budget, none of these defects can remain. Indeed, if $`\mathcal V\ge0`$ and $`\mathcal C\le c_{\min}J`$, the left side of [(4.2)](#dep-eq-4-2) is nonpositive, so every nonnegative term must vanish and
 
-<a id="dep-eq-legacy-E-7"></a>
+<a id="dep-eq-4-3"></a>
 
 $$
 \mathcal V=0,\qquad \mathcal C=I=c_{\min}J,\qquad
@@ -732,7 +732,7 @@ $$
 
 In addition, $`\arg\min G_1=\{0\}`$ and $`0\in\arg\min G_0`$. The vanishing metric defect
 
-<a id="dep-eq-legacy-E-8"></a>
+<a id="dep-eq-4-4"></a>
 
 $$
 |d|_\gamma-c_{\min}|b\cdot d|
@@ -743,7 +743,7 @@ $$
 
 allows only cheapest coordinates, with all nonzero components having the sign of $`w`$. At $`\tau_A=0`$, equality in the hinge bound requires $`u\ge0`$, $`u+H\le-w`$ if $`w>0`$, and $`u\le0`$, $`u+H\ge-w`$ if $`w<0`$. Thus $`|w|\le K:=|u+H|1_{\{u(u+H)<0\}}`$, with the sign of $`\zeta`$ wherever $`w\ne0`$. Since
 
-<a id="dep-eq-legacy-E-12"></a>
+<a id="dep-eq-4-5"></a>
 
 $$
 \int_{\mathbb R}K\,du=H^2/2,\qquad
@@ -753,7 +753,7 @@ $$
 
 and every conditional kernel has mass one, $`\int K\,d\Pi_\alpha=J=\int|w|\,d\Pi_\alpha`$. Saturation of this nonnegative bound forces
 
-<a id="dep-eq-legacy-6-4"></a>
+<a id="dep-eq-4-6"></a>
 
 $$
 b\cdot d=\zeta\quad\Pi_\alpha\text{-almost everywhere},
@@ -764,7 +764,7 @@ which, with the metric and flux equalities, proves necessity.
 
 For the converse, the threshold calculation depends only on the normal displacement $`w=\zeta`$. We integrate over the disagreement wedge and use exchangeability to obtain
 
-<a id="dep-eq-legacy-D-2"></a>
+<a id="dep-eq-4-7"></a>
 
 $$
 T_0(0)=J/2,\qquad T_1(0)=-J/2,\qquad
@@ -774,20 +774,20 @@ $$
 
 Because the transformed $`B`$-loss retains its strict tail sign and places no atom at zero, we have $`G_0'(0)=0`$. With $`m_\pm=\int(\pm H)_+\,d\sigma>0`$, the mass placed at the $`A_\varepsilon`$-threshold kink gives
 
-<a id="dep-eq-legacy-D-3"></a>
+<a id="dep-eq-4-8"></a>
 
 $$
 G_{1,-}'(0)=-m_-<0,\qquad G_{1,+}'(0)=m_+>0.
 \tag{4.8}
 $$
 
-By convexity, these strict one-sided inequalities make zero the unique minimizer of $`G_1`$. For $`G_0`$, the stationary regions $`\{H>0,u>0\}`$ and $`\{H<0,u<0\}`$ each have section mass $`g/2`$, and their unchanged normal coordinates cover the positive and negative half-lines, respectively. Hence $`\lambda_0\ge(g/2)\,dt`$ on $`\mathbb R`$, and Lemma [A.4](https://github.com/130U/mathematical-finance-project/blob/3cc4c7e9b36e77027962999b932a1df7972cd2ed/paper/source/technical-limit.tex#L103) yields $`G_0(\tau)-G_0(0)\ge g\tau^2/4`$, so zero is also the unique minimizer of $`G_0`$. Combining these minima with [(4.7)](#dep-eq-legacy-D-2) gives $`\mathcal V=0`$. Under [(4.1)](#dep-eq-legacy-6-3), we have $`I=c_{\min}J`$ and vanishing fluxes, so $`\mathcal C=c_{\min}J`$. Together with attainment of the critical cost in Theorem [3.3](#dep-thm-strict-crossing), this proves the equivalence. ∎
+By convexity, these strict one-sided inequalities make zero the unique minimizer of $`G_1`$. For $`G_0`$, the stationary regions $`\{H>0,u>0\}`$ and $`\{H<0,u<0\}`$ each have section mass $`g/2`$, and their unchanged normal coordinates cover the positive and negative half-lines, respectively. Hence $`\lambda_0\ge(g/2)\,dt`$ on $`\mathbb R`$, and Lemma [A.4](https://github.com/130U/mathematical-finance-project/blob/dbb0a1003d5c37b13041229e8a1a707e3f247cde/paper/source/technical-limit.tex#L103) yields $`G_0(\tau)-G_0(0)\ge g\tau^2/4`$, so zero is also the unique minimizer of $`G_0`$. Combining these minima with [(4.7)](#dep-eq-4-7) gives $`\mathcal V=0`$. Under [(4.1)](#dep-eq-4-1), we have $`I=c_{\min}J`$ and vanishing fluxes, so $`\mathcal C=c_{\min}J`$. Together with attainment of the critical cost in Theorem [3.3](#dep-thm-strict-crossing), this proves the equivalence. ∎
 
 <a id="dep-thm-zero-premium"></a>
 
 **Theorem 4.2 (Zero-premium classification).** For the exchangeable box model of [Section 2.2](#dep-model-critical-box) and every positive weight vector,
 
-<a id="dep-eq-legacy-6-1"></a>
+<a id="dep-eq-4-9"></a>
 
 $$
 s^*=Jc_{\min}\quad\Longleftrightarrow\quad
@@ -799,7 +799,7 @@ If $`c_3=c_{\min}`$, the profile is explicitly $`F(s)=-J/p+s/(pc_3)`$ for $`0\le
 
 If $`\gamma_2\ge\gamma_1`$ and $`c_3>\gamma_1`$, then
 
-<a id="dep-eq-legacy-6-2"></a>
+<a id="dep-eq-4-10"></a>
 
 $$
 1<\frac{s^*}{\gamma_1J}\le\min\{1+\chi,c_3/\gamma_1\}<2,
@@ -816,7 +816,7 @@ By Lemma [4.1](#dep-lem-efficiency-bound), it suffices to allocate the prescribe
 
 **Comparison kernels and the sufficient direction** Assigning the prescribed displacement to one coordinate gives
 
-<a id="dep-eq-legacy-D-1"></a>
+<a id="dep-eq-4-11"></a>
 
 $$
 \alpha^{(1)}=\delta_{\zeta e_1},\qquad
@@ -825,9 +825,9 @@ $$
 \tag{4.11}
 $$
 
-with finite first moments and zero risk differences by the normal-displacement calculation [(4.7)](#dep-eq-legacy-D-2)–[(4.8)](#dep-eq-legacy-D-3) in Lemma [4.1](#dep-lem-efficiency-bound). The first two kernels have respective fluxes $`j_1=\ell_+-\ell_-`$ and $`j_2=\ell_--\ell_+`$, all other fluxes being zero. To verify the background projection, we use the exchange $`(x,y,u)\mapsto(y,x,-u)`$, which preserves $`\nu,\xi_3`$ and reverses $`\zeta`$. Absolute integrability then allows us to test against every bounded measurable $`\varphi`$, obtaining
+with finite first moments and zero risk differences by the normal-displacement calculation [(4.7)](#dep-eq-4-7)–[(4.8)](#dep-eq-4-8) in Lemma [4.1](#dep-lem-efficiency-bound). The first two kernels have respective fluxes $`j_1=\ell_+-\ell_-`$ and $`j_2=\ell_--\ell_+`$, all other fluxes being zero. To verify the background projection, we use the exchange $`(x,y,u)\mapsto(y,x,-u)`$, which preserves $`\nu,\xi_3`$ and reverses $`\zeta`$. Absolute integrability then allows us to test against every bounded measurable $`\varphi`$, obtaining
 
-<a id="dep-eq-legacy-D-6"></a>
+<a id="dep-eq-4-12"></a>
 
 $$
 \int\varphi(\xi_3)d_3^{(3)}d\nu
@@ -837,7 +837,7 @@ $$
 
 All three projections of $`\alpha^{(3)}`$ vanish, yielding
 
-<a id="dep-eq-legacy-D-7"></a>
+<a id="dep-eq-4-13"></a>
 
 $$
 \mathcal C(\alpha^{(1)})=\gamma_1J(1+\chi),\quad
@@ -846,11 +846,11 @@ $$
 \tag{4.13}
 $$
 
-The background kernel proves sufficiency, including ties, and the least of these costs gives $`s^*\le J\min\{\gamma_1(1+\chi),\gamma_2(1+\chi),c_3\}`$, which yields the upper bound in [(4.10)](#dep-eq-legacy-6-2) when $`\gamma_2\ge\gamma_1`$ and $`c_3>\gamma_1`$.
+The background kernel proves sufficiency, including ties, and the least of these costs gives $`s^*\le J\min\{\gamma_1(1+\chi),\gamma_2(1+\chi),c_3\}`$, which yields the upper bound in [(4.10)](#dep-eq-4-10) when $`\gamma_2\ge\gamma_1`$ and $`c_3>\gamma_1`$.
 
-When $`c_3=c_{\min}`$, mix the background kernel $`\alpha^{(3)}`$ with the identity using weight $`\theta=s/(c_3J)\in[0,1]`$. Both kernels have zero projected flux and both threshold objectives attain their minima at zero, by [(4.7)](#dep-eq-legacy-D-2)–[(4.8)](#dep-eq-legacy-D-3) and $`G_c^{\delta_0}(\tau)=g\tau^2/2`$, so cost and paired risk are affine along the mixture. Its cost is $`\theta c_3J=s`$, and [(4.7)](#dep-eq-legacy-D-2) gives
+When $`c_3=c_{\min}`$, mix the background kernel $`\alpha^{(3)}`$ with the identity using weight $`\theta=s/(c_3J)\in[0,1]`$. Both kernels have zero projected flux and both threshold objectives attain their minima at zero, by [(4.7)](#dep-eq-4-7)–[(4.8)](#dep-eq-4-8) and $`G_c^{\delta_0}(\tau)=g\tau^2/2`$, so cost and paired risk are affine along the mixture. Its cost is $`\theta c_3J=s`$, and [(4.7)](#dep-eq-4-7) gives
 
-<a id="dep-eq-legacy-D-9"></a>
+<a id="dep-eq-4-14"></a>
 
 $$
 \mathcal V=-(1-\theta)J/p.
@@ -861,9 +861,9 @@ Thus the mixture attains the efficiency bound on the stated interval.
 
 <a id="dep-e-3-a-local-obstruction-to-zero-flux-in-the-two-asset-directions"></a>
 
-**The obstruction for arbitrary randomized kernels** For necessity, suppose $`c_3>c_{\min}`$ and a kernel with $`\mathcal V\ge0`$ attains cost $`c_{\min}J`$. Lemma [4.1](#dep-lem-efficiency-bound) then requires $`d_3=0`$, $`d_1+d_2=\zeta`$, and both traded components to have the sign of $`\zeta`$. Since the kernel has finite first moment, its averaged displacement fields $`m_i(x,y)=\int_{\mathbb R}\int d_i\,\alpha_{\xi,u}(dd)\,du`$, $`i=1,2`$, are integrable on the section and satisfy, by [(4.1)](#dep-eq-legacy-6-3),
+**The obstruction for arbitrary randomized kernels** For necessity, suppose $`c_3>c_{\min}`$ and a kernel with $`\mathcal V\ge0`$ attains cost $`c_{\min}J`$. Lemma [4.1](#dep-lem-efficiency-bound) then requires $`d_3=0`$, $`d_1+d_2=\zeta`$, and both traded components to have the sign of $`\zeta`$. Since the kernel has finite first moment, its averaged displacement fields $`m_i(x,y)=\int_{\mathbb R}\int d_i\,\alpha_{\xi,u}(dd)\,du`$, $`i=1,2`$, are integrable on the section and satisfy, by [(4.1)](#dep-eq-4-1),
 
-<a id="dep-eq-legacy-E-15"></a>
+<a id="dep-eq-4-15"></a>
 
 $$
 \begin{aligned}
@@ -876,7 +876,7 @@ $$
 
 Projected conservation gives, for every pair of Borel sets $`A,B\subset I`$,
 
-<a id="dep-eq-legacy-E-16"></a>
+<a id="dep-eq-4-16"></a>
 
 $$
 \int_{\Omega\cap\{x\in A\}}m_1d\sigma=0,\qquad
@@ -884,7 +884,7 @@ $$
 \tag{4.16}
 $$
 
-We test [(4.15)](#dep-eq-legacy-E-15)–[(4.16)](#dep-eq-legacy-E-16) near the upper-left off-diagonal corner of $`\Omega`$, where $`x`$ is small, $`y`$ is large, and the positive moment $`(y-x)^2/2`$ is bounded away from zero. Compensating this moment at the same coordinate levels requires negative moment from $`\{x>y\}`$, where the small value of $`x`$ or large value of $`y`$ confines available sources to a small triangle near the diagonal (Figure [2](#dep-fig-corner)).
+We test [(4.15)](#dep-eq-4-15)–[(4.16)](#dep-eq-4-16) near the upper-left off-diagonal corner of $`\Omega`$, where $`x`$ is small, $`y`$ is large, and the positive moment $`(y-x)^2/2`$ is bounded away from zero. Compensating this moment at the same coordinate levels requires negative moment from $`\{x>y\}`$, where the small value of $`x`$ or large value of $`y`$ confines available sources to a small triangle near the diagonal (Figure [2](#dep-fig-corner)).
 
 <a id="dep-lem-v21-corner-geometry"></a>
 
@@ -908,7 +908,7 @@ $$
 
 Because $`f`$ is bounded below on $`S`$ and $`y-x\ge\Delta/2`$ on this region, there is a constant $`c_\Omega>0`$, independent of $`\delta`$, such that
 
-<a id="dep-eq-legacy-E-20"></a>
+<a id="dep-eq-4-17"></a>
 
 $$
 M_\delta:=\int_{E_\delta}(m_1+m_2)d\sigma
@@ -916,7 +916,7 @@ M_\delta:=\int_{E_\delta}(m_1+m_2)d\sigma
 \tag{4.17}
 $$
 
-Testing [(4.16)](#dep-eq-legacy-E-16) on $`A_\delta=(\xi_-,\xi_-+\delta)`$ and $`B_\delta=(\xi_+-\delta,\xi_+)`$ requires $`M_\delta\le N_1+N_2`$, where
+Testing [(4.16)](#dep-eq-4-16) on $`A_\delta=(\xi_-,\xi_-+\delta)`$ and $`B_\delta=(\xi_+-\delta,\xi_+)`$ requires $`M_\delta\le N_1+N_2`$, where
 
 $$
 N_1=\int_{\Omega\cap\{x\in A_\delta,\ x>y\}}(-m_1)d\sigma,
@@ -924,9 +924,9 @@ N_1=\int_{\Omega\cap\{x\in A_\delta,\ x>y\}}(-m_1)d\sigma,
 N_2=\int_{\Omega\cap\{y\in B_\delta,\ x>y\}}(-m_2)d\sigma.
 $$
 
-In $`N_1`$, the conditions $`x\in A_\delta`$ and $`y<x`$ force $`\xi_-<y<x<\xi_-+\delta`$; in $`N_2`$, the sources similarly satisfy $`\xi_+-\delta<y<x<\xi_+`$. Each triangle has area $`O(\delta^2)`$, and [(4.15)](#dep-eq-legacy-E-15) bounds the corresponding displacement moment by $`-m_i\le H^2/2=(x-y)^2/2=O(\delta^2)`$. Applying the upper density bound gives
+In $`N_1`$, the conditions $`x\in A_\delta`$ and $`y<x`$ force $`\xi_-<y<x<\xi_-+\delta`$; in $`N_2`$, the sources similarly satisfy $`\xi_+-\delta<y<x<\xi_+`$. Each triangle has area $`O(\delta^2)`$, and [(4.15)](#dep-eq-4-15) bounds the corresponding displacement moment by $`-m_i\le H^2/2=(x-y)^2/2=O(\delta^2)`$. Applying the upper density bound gives
 
-<a id="dep-eq-legacy-E-22"></a>
+<a id="dep-eq-4-18"></a>
 
 $$
 N_1+N_2\le C_\Omega\int_0^\delta\int_0^x(x-y)^2\,dy\,dx
@@ -934,7 +934,7 @@ N_1+N_2\le C_\Omega\int_0^\delta\int_0^x(x-y)^2\,dy\,dx
 \tag{4.18}
 $$
 
-Here $`C_\Omega<\infty`$ is independent of $`\delta`$. For small $`\delta`$, the bound contradicts $`c_\Omega\delta^2\le M_\delta\le N_1+N_2`$. Attainment of the critical cost then implies $`s^*>Jc_{\min}`$ when $`c_3>c_{\min}`$, and [(4.13)](#dep-eq-legacy-D-7) gives [(4.10)](#dep-eq-legacy-6-2). ∎
+Here $`C_\Omega<\infty`$ is independent of $`\delta`$. For small $`\delta`$, the bound contradicts $`c_\Omega\delta^2\le M_\delta\le N_1+N_2`$. Attainment of the critical cost then implies $`s^*>Jc_{\min}`$ when $`c_3>c_{\min}`$, and [(4.13)](#dep-eq-4-13) gives [(4.10)](#dep-eq-4-10). ∎
 
 <a id="dep-fig-corner"></a>
 
@@ -957,7 +957,7 @@ $$
 
 Let $`\mathcal C_0`$ be the cost at $`\eta=0`$, and let $`\mathcal Z_0=\{\alpha:I(\alpha)<\infty,\ \mathcal V(\alpha)=0,\ \mathcal C_0(\alpha)=\gamma J\}`$. When kernels are identified with their measures $`\Pi_\alpha`$, the set $`\mathcal Z_0`$ is nonempty and compact in the vague topology on $`\mathscr X`$ from Section 3.2. The following minimum is attained, and
 
-<a id="dep-eq-legacy-6-5"></a>
+<a id="dep-eq-4-19"></a>
 
 $$
 \pi(\eta)=a_+\eta+o(\eta),\qquad
@@ -975,7 +975,7 @@ $$
 
 The optimum is attained and satisfies $`0<\mathfrak F_\mu<J/2`$. Moreover,
 
-<a id="dep-eq-legacy-6-8"></a>
+<a id="dep-eq-4-20"></a>
 
 $$
 a_+=1-\frac{2\mathfrak F_\mu}{J}\in(0,1),\qquad
@@ -985,7 +985,7 @@ $$
 
 Equivalently, $`a_+`$ is the supremum of the projected cut deficits
 
-<a id="dep-eq-legacy-6-9"></a>
+<a id="dep-eq-4-21"></a>
 
 $$
 a_+=\frac2J\sup_{U\cap V=\varnothing}
@@ -995,15 +995,15 @@ $$
 
 Here $`U,V\subset I`$ are disjoint measurable sets.
 
-In words, $`2\mathfrak F_\mu`$ is the largest normal-displacement moment that the traded coordinates can accommodate while balancing their marginal projections. The cut formula [(4.21)](#dep-eq-legacy-6-9) writes $`a_+`$ as $`2/J`$ times the maximal deficit between the moment required on $`D\cap(U\times V)`$ and the compensating capacity on $`D\cap((V\times I)\cup(I\times U))`$.
+In words, $`2\mathfrak F_\mu`$ is the largest normal-displacement moment that the traded coordinates can accommodate while balancing their marginal projections. The cut formula [(4.21)](#dep-eq-4-21) writes $`a_+`$ as $`2/J`$ times the maximal deficit between the moment required on $`D\cap(U\times V)`$ and the compensating capacity on $`D\cap((V\times I)\cup(I\times U))`$.
 
-*Proof sketch.* For $`\alpha\in\mathcal Z_0`$, normal integration and exchange symmetrization yield shares satisfying $`(x)_\#(a\mu)=(y)_\#(b\mu)`$ and background amount $`\beta\int|d_3|\,d\Pi_\alpha=J-2\int_D(a+b)\,d\mu`$. Conversely, every feasible pair of shares lifts to a kernel in $`\mathcal Z_0`$, so the minimum background amount is $`J-2\mathfrak F_\mu`$ (Appendix [A.8](https://github.com/130U/mathematical-finance-project/blob/3cc4c7e9b36e77027962999b932a1df7972cd2ed/paper/source/technical-flow-proof.tex#L1)). Dividing by $`J`$ gives $`a_+`$, and Appendix [A.7](https://github.com/130U/mathematical-finance-project/blob/3cc4c7e9b36e77027962999b932a1df7972cd2ed/paper/source/technical-cost-proof.tex#L1) establishes [(4.19)](#dep-eq-legacy-6-5) by comparing perturbed minimizers with a least-background kernel. Sion's theorem with continuous coordinate potentials gives [(4.20)](#dep-eq-legacy-6-8); signed layer-cake reduction then gives [(4.21)](#dep-eq-legacy-6-9).
+*Proof sketch.* For $`\alpha\in\mathcal Z_0`$, normal integration and exchange symmetrization yield shares satisfying $`(x)_\#(a\mu)=(y)_\#(b\mu)`$ and background amount $`\beta\int|d_3|\,d\Pi_\alpha=J-2\int_D(a+b)\,d\mu`$. Conversely, every feasible pair of shares lifts to a kernel in $`\mathcal Z_0`$, so the minimum background amount is $`J-2\mathfrak F_\mu`$ (Appendix [A.8](https://github.com/130U/mathematical-finance-project/blob/dbb0a1003d5c37b13041229e8a1a707e3f247cde/paper/source/technical-flow-proof.tex#L1)). Dividing by $`J`$ gives $`a_+`$, and Appendix [A.7](https://github.com/130U/mathematical-finance-project/blob/dbb0a1003d5c37b13041229e8a1a707e3f247cde/paper/source/technical-cost-proof.tex#L1) establishes [(4.19)](#dep-eq-4-19) by comparing perturbed minimizers with a least-background kernel. Sion's theorem with continuous coordinate potentials gives [(4.20)](#dep-eq-4-20); signed layer-cake reduction then gives [(4.21)](#dep-eq-4-21).
 
 <a id="dep-d-4-weights-the-tail-surface-and-the-order-of-limits"></a>
 
 **Dependence on the transport weights** Varying the positive transport weights leaves the finite-first-moment kernel class and $`\mathcal V`$ unchanged. With $`A_i(\alpha)=\int|d_i|\,d\Pi_\alpha+\|j_i\|_1`$, the coordinate cost including marginal restoration, we may therefore write
 
-<a id="dep-eq-legacy-D-11"></a>
+<a id="dep-eq-4-22"></a>
 
 $$
 s^*(\gamma)=\inf_{\mathcal V(\alpha)\ge0}\sum_i\gamma_i A_i(\alpha).
@@ -1028,7 +1028,7 @@ Assigning a bounded shadow price $`\phi_i`$ to each marginal flux lets us bound 
 
 **Proposition 5.1 (A projection-potential bound).** In the exchangeable box model, let $`b=(1,1,\beta)`$ and let $`|\phi_i|\le\gamma_i`$ be bounded measurable potentials on the coordinate intervals such that $`k_\pm(\xi)=\min_{1\le i\le3}(\gamma_i\pm\phi_i(\xi_i))/b_i`$ are bounded below by a positive constant. For every finite-first-moment kernel, every $`\tau\in\arg\min G_1`$, and every $`\lambda>0`$,
 
-<a id="dep-eq-legacy-J-6"></a>
+<a id="dep-eq-5-1"></a>
 
 $$
 \mathcal C(\alpha)\ge
@@ -1040,7 +1040,7 @@ $$
 
 where $`k(\xi,h)=k_+(\xi)`$ for $`h<0`$ and $`k_-(\xi)`$ for $`h>0`$. The integrand is zero when $`h=0`$.
 
-The proof in [Appendix B.1](https://github.com/130U/mathematical-finance-project/blob/3cc4c7e9b36e77027962999b932a1df7972cd2ed/paper/source/technical-quantitative.tex#L3) optimizes the hinge gain against the adjusted cost $`k_+w_++k_-(-w)_+`$, where $`w=b\cdot d`$. To quantify how far the reversal budget can exceed the initial-slope prediction, we use an analytically tractable reference with independent uniform losses on $`[0,2]`$, $`\beta=1`$, $`p=1/2`$, and $`\gamma=(\gamma_0,\gamma_0,2\gamma_0)`$. Equal exposures and the median tail make the section invariant under central reflection, so $`v=3`$, $`d\sigma=dx\,dy/8`$, $`g=3/8`$, and $`J=5/32`$.
+The proof in [Appendix B.1](https://github.com/130U/mathematical-finance-project/blob/dbb0a1003d5c37b13041229e8a1a707e3f247cde/paper/source/technical-quantitative.tex#L3) optimizes the hinge gain against the adjusted cost $`k_+w_++k_-(-w)_+`$, where $`w=b\cdot d`$. To quantify how far the reversal budget can exceed the initial-slope prediction, we use an analytically tractable reference with independent uniform losses on $`[0,2]`$, $`\beta=1`$, $`p=1/2`$, and $`\gamma=(\gamma_0,\gamma_0,2\gamma_0)`$. Equal exposures and the median tail make the section invariant under central reflection, so $`v=3`$, $`d\sigma=dx\,dy/8`$, $`g=3/8`$, and $`J=5/32`$.
 
 In the cut representation of Theorem [4.3](#dep-prop-boundary-sensitivity), the midpoint partition corresponds to $`\varphi(q)=1_{[0,1)}(q)-1_{(1,2]}(q)`$. Scaling this potential by $`\gamma_0/2`$ and using opposite signs on the two traded coordinates carries the same partition over to the marginal-flux penalty in Proposition [5.1](#dep-prop-projection-potential-bound), giving the admissible two-level potentials
 
@@ -1049,13 +1049,13 @@ $$
 \phi_2(y)=\frac{\gamma_0}{2}\operatorname{sgn}(y-1),\qquad \phi_3=0.
 $$
 
-Their signs distinguish low-loss from high-loss coordinate halves. At zero threshold shift, a positive paired hinge gain requires normal movement $`w=b\cdot d>0`$ when $`x<y`$, and $`w<0`$ when $`x>y`$. With amplitude $`\gamma_0/2`$, the effective cost in this direction across the midpoint is $`k(\xi,H)=3\gamma_0/2`$, and both directional costs on either same-side region are $`\gamma_0/2`$. Choosing $`\lambda=3\gamma_0/2`$ in [(5.1)](#dep-eq-legacy-J-6) therefore removes the cross-region penalty at zero threshold. The proof below keeps the correction for shifted minimizing thresholds, which makes the bound valid without prescribing either ES threshold.
+Their signs distinguish low-loss from high-loss coordinate halves. At zero threshold shift, a positive paired hinge gain requires normal movement $`w=b\cdot d>0`$ when $`x<y`$, and $`w<0`$ when $`x>y`$. With amplitude $`\gamma_0/2`$, the effective cost in this direction across the midpoint is $`k(\xi,H)=3\gamma_0/2`$, and both directional costs on either same-side region are $`\gamma_0/2`$. Choosing $`\lambda=3\gamma_0/2`$ in [(5.1)](#dep-eq-5-1) therefore removes the cross-region penalty at zero threshold. The proof below keeps the correction for shifted minimizing thresholds, which makes the bound valid without prescribing either ES threshold.
 
 <a id="dep-prop-uniform-variable-cost"></a>
 
 **Corollary 5.2 (Uniform reference with costly background displacement).** For this uniform reference,
 
-<a id="dep-eq-legacy-7-1"></a>
+<a id="dep-eq-5-2"></a>
 
 $$
 \frac{13}{64}\le\frac{s^*}{\gamma_0}\le\frac{29}{96},
@@ -1065,7 +1065,7 @@ $$
 
 The initial linear profile holds on $`0\le s\le\gamma_0/96`$.
 
-*Proof.* For $`1/2\le x\le1`$, the negative-moment section has $`1-x<y<x`$, so integrating $`(x-y)^2/16`$ over this interval gives $`\ell_-(x)=(2x-1)^3/48`$. For $`0\le x\le1/2`$, the section is empty and $`\ell_-(x)=0`$. Reflection gives $`\ell_+(x)=\ell_-(2-x)`$. On the lower half of $`I`$, $`\ell_-`$ is the smaller moment, which gives $`Q_{\rm bal}=2\int_{1/2}^1\ell_-(x)\,dx=1/192`$. Using $`\int_I(\ell_-+\ell_+)\,dx=J`$ then gives $`\|\ell_--\ell_+\|_1=J-2Q_{\rm bal}=7/48`$, and Proposition [3.2](#dep-prop-balanced-linear-profile) yields $`s_{\rm lin}=\gamma_0/96`$. The first-coordinate kernel $`\delta_{\zeta e_1}`$ from [(4.11)](#dep-eq-legacy-D-1) reaches zero risk at cost $`\gamma_0(J+\|\ell_--\ell_+\|_1)=29\gamma_0/96`$. For the lower bound, the midpoint potentials with $`\lambda=3\gamma_0/2`$ give
+*Proof.* For $`1/2\le x\le1`$, the negative-moment section has $`1-x<y<x`$, so integrating $`(x-y)^2/16`$ over this interval gives $`\ell_-(x)=(2x-1)^3/48`$. For $`0\le x\le1/2`$, the section is empty and $`\ell_-(x)=0`$. Reflection gives $`\ell_+(x)=\ell_-(2-x)`$. On the lower half of $`I`$, $`\ell_-`$ is the smaller moment, which gives $`Q_{\rm bal}=2\int_{1/2}^1\ell_-(x)\,dx=1/192`$. Using $`\int_I(\ell_-+\ell_+)\,dx=J`$ then gives $`\|\ell_--\ell_+\|_1=J-2Q_{\rm bal}=7/48`$, and Proposition [3.2](#dep-prop-balanced-linear-profile) yields $`s_{\rm lin}=\gamma_0/96`$. The first-coordinate kernel $`\delta_{\zeta e_1}`$ from [(4.11)](#dep-eq-4-11) reaches zero risk at cost $`\gamma_0(J+\|\ell_--\ell_+\|_1)=29\gamma_0/96`$. For the lower bound, the midpoint potentials with $`\lambda=3\gamma_0/2`$ give
 
 $$
 \frac{\mathcal C}{\gamma_0}\ge
@@ -1076,7 +1076,7 @@ $$
 \end{cases}
 $$
 
-For $`|\tau|\le1`$, the section integrations in [Appendix B.2](https://github.com/130U/mathematical-finance-project/blob/3cc4c7e9b36e77027962999b932a1df7972cd2ed/paper/source/technical-quantitative.tex#L32) give the first line. For $`|\tau|\ge1`$, the efficiency decomposition [(4.2)](#dep-eq-legacy-E-5) gives the second. Every kernel with $`\mathcal V\ge0`$ therefore costs at least $`13\gamma_0/64`$, which is $`30\%`$ above $`\gamma_0J`$. ∎
+For $`|\tau|\le1`$, the section integrations in [Appendix B.2](https://github.com/130U/mathematical-finance-project/blob/dbb0a1003d5c37b13041229e8a1a707e3f247cde/paper/source/technical-quantitative.tex#L32) give the first line. For $`|\tau|\ge1`$, the efficiency decomposition [(4.2)](#dep-eq-4-2) gives the second. Every kernel with $`\mathcal V\ge0`$ therefore costs at least $`13\gamma_0/64`$, which is $`30\%`$ above $`\gamma_0J`$. ∎
 
 <a id="dep-app-quantitative-benchmarks"></a>
 
@@ -1126,7 +1126,7 @@ After rescaling the losses to $`[0,1]`$, this is a one-parameter subfamily of th
 
 **Proposition 5.3 (Background share along the dependence family).** For $`|\vartheta|<1/2`$, the boundary flow is attained and
 
-<a id="dep-eq-legacy-K-9"></a>
+<a id="dep-eq-5-3"></a>
 
 $$
 J_\vartheta=\frac{75-14\vartheta}{480},\qquad
@@ -1147,11 +1147,11 @@ J_\vartheta a_{+,\vartheta}=\frac{195-22\vartheta}{1440},\qquad
 =-\frac{11}{720}.
 $$
 
-To obtain the explicit value, we use all the mass in $`D_-`$ and $`D_+`$ and match their projections in two disjoint parts of the cross-region. The section inequalities in [Appendix B.3](https://github.com/130U/mathematical-finance-project/blob/3cc4c7e9b36e77027962999b932a1df7972cd2ed/paper/source/technical-quantitative.tex#L49) give the required capacity throughout $`|\vartheta|<1/2`$, and the midpoint potential gives the same value in the dual problem, so this feasible flow is optimal.
+To obtain the explicit value, we use all the mass in $`D_-`$ and $`D_+`$ and match their projections in two disjoint parts of the cross-region. The section inequalities in [Appendix B.3](https://github.com/130U/mathematical-finance-project/blob/dbb0a1003d5c37b13041229e8a1a707e3f247cde/paper/source/technical-quantitative.tex#L49) give the required capacity throughout $`|\vartheta|<1/2`$, and the midpoint potential gives the same value in the dual problem, so this feasible flow is optimal.
 
 As reference dependence varies through $`0<\vartheta<1/2`$, the minimum background share and the corresponding unnormalized displacement moment move in opposite directions:
 
-<a id="dep-eq-legacy-7-2"></a>
+<a id="dep-eq-5-4"></a>
 
 $$
 a_{+,\vartheta}-a_{+,0}
@@ -1161,19 +1161,19 @@ J_\vartheta a_{+,\vartheta}-J_0a_{+,0}
 \tag{5.4}
 $$
 
-The contrast comes from the median plane $`x+y+z=3`$, on which the centered factors satisfy $`z-1=-(x+y-2)`$. Increasing $`\vartheta`$ thus favors equal signs in the full box but reduces the section density away from $`x+y=2`$ by the factor $`1-\vartheta(x+y-2)^2`$. Across both exchanged half-sections, the traded-coordinate matching capacity is $`4(M_{\vartheta,-}+M_{\vartheta,+})`$. By [(5.3)](#dep-eq-legacy-K-9), $`J_\vartheta`$ decreases faster in absolute units than this capacity, so their difference $`J_\vartheta a_{+,\vartheta}`$ declines. In proportion, though, the matching capacity falls faster than $`J_\vartheta`$ throughout $`0<\vartheta<1/2`$, which leaves a larger relative share for the background coordinate.
+The contrast comes from the median plane $`x+y+z=3`$, on which the centered factors satisfy $`z-1=-(x+y-2)`$. Increasing $`\vartheta`$ thus favors equal signs in the full box but reduces the section density away from $`x+y=2`$ by the factor $`1-\vartheta(x+y-2)^2`$. Across both exchanged half-sections, the traded-coordinate matching capacity is $`4(M_{\vartheta,-}+M_{\vartheta,+})`$. By [(5.3)](#dep-eq-5-3), $`J_\vartheta`$ decreases faster in absolute units than this capacity, so their difference $`J_\vartheta a_{+,\vartheta}`$ declines. In proportion, though, the matching capacity falls faster than $`J_\vartheta`$ throughout $`0<\vartheta<1/2`$, which leaves a larger relative share for the background coordinate.
 
 Figure [4](#dep-fig-flow-shares) compares two examples: independence ($`\vartheta=0`$, model U) and $`\vartheta=1/4`$ (model D). The triples $`(J_\vartheta,a_{+,\vartheta},J_\vartheta a_{+,\vartheta})`$ are $`(5/32,13/15,13/96)`$ and $`(143/960,379/429,379/2880)`$, so the minimum background share rises from about $`0.8667`$ to $`0.8834`$ while its unnormalized displacement moment falls from about $`0.1354`$ to $`0.1316`$.
 
 <a id="dep-fig-flow-shares"></a>
 
-![Figure 4. An optimal allocation of normal displacement on the tail surface $`D`$, at the equal-cost boundary, for $`\vartheta=0`$ (U, top) and $`\vartheta=1/4`$ (D, bottom). The panels evaluate the explicit shares $`a,b,1-a-b`$ in [(B.2)](https://github.com/130U/mathematical-finance-project/blob/3cc4c7e9b36e77027962999b932a1df7972cd2ed/paper/source/technical-quantitative.tex#L80); all use the same scale from zero to one. On each same-side section we allocate displacement to a rebalanced coordinate and match its projection using the cross-region. We allocate the remainder to the background coordinate. Blank regions lie outside $`D`$.](/assets/research/dependence/optimal-flow-shares.png)
+![Figure 4. An optimal allocation of normal displacement on the tail surface $`D`$, at the equal-cost boundary, for $`\vartheta=0`$ (U, top) and $`\vartheta=1/4`$ (D, bottom). The panels evaluate the explicit shares $`a,b,1-a-b`$ in [(B.2)](https://github.com/130U/mathematical-finance-project/blob/dbb0a1003d5c37b13041229e8a1a707e3f247cde/paper/source/technical-quantitative.tex#L80); all use the same scale from zero to one. On each same-side section we allocate displacement to a rebalanced coordinate and match its projection using the cross-region. We allocate the remainder to the background coordinate. Blank regions lie outside $`D`$.](/assets/research/dependence/optimal-flow-shares.png)
 
 <a id="dep-conclusions"></a>
 
 ### 5.3 Implications for reverse stress testing and further questions
 
-Theorem [4.2](#dep-thm-zero-premium) shows that an exact initial sensitivity need not predict how much dependence stress is required to reverse a diversification trade. This bears on reverse sensitivity analysis [[28](#ref-pesenti2019), [29](#ref-pesenti2022)], where the quantity of interest is the distance to a decision reversal. Under the traded-coordinate dominance condition [(2.9)](#dep-eq-legacy-3-4), $`r_{0,\varepsilon}=m_\varepsilon/K_\varepsilon`$ extrapolates an attained initial slope, yet if $`\gamma_1=c_{\min}<c_3`$,
+Theorem [4.2](#dep-thm-zero-premium) shows that an exact initial sensitivity need not predict how much dependence stress is required to reverse a diversification trade. This bears on reverse sensitivity analysis [[28](#ref-pesenti2019), [29](#ref-pesenti2022)], where the quantity of interest is the distance to a decision reversal. Under the traded-coordinate dominance condition [(2.9)](#dep-eq-2-9), $`r_{0,\varepsilon}=m_\varepsilon/K_\varepsilon`$ extrapolates an attained initial slope, yet if $`\gamma_1=c_{\min}<c_3`$,
 
 $$
 \frac{\rho^\pm_\varepsilon}{r_{0,\varepsilon}}\longrightarrow\frac{s^*}{\gamma_1J}>1.
@@ -1190,7 +1190,7 @@ $$
 \mathcal R_\vartheta'(0+)=p\gamma_0a_{+,\vartheta}.
 $$
 
-Theorem [4.3](#dep-prop-boundary-sensitivity) gives the absolute right derivative $`(s^*_\vartheta)'(0+)=\gamma_0J_\vartheta a_{+,\vartheta}`$. By [(5.4)](#dep-eq-legacy-7-2), increasing $`\vartheta`$ raises the gain-normalized response $`\mathcal R_\vartheta'(0+)`$ but lowers the absolute response: $`\frac{d}{d\vartheta}(\gamma_0J_\vartheta a_{+,\vartheta})=\gamma_0(J_\vartheta'a_{+,\vartheta}+J_\vartheta a_{+,\vartheta}')<0`$, so the decline in the nominal-gain scale outweighs the increase in background share. Reporting both boundary sensitivities to a risk committee separates a greater relative need for background displacement from a smaller absolute response in budget units.
+Theorem [4.3](#dep-prop-boundary-sensitivity) gives the absolute right derivative $`(s^*_\vartheta)'(0+)=\gamma_0J_\vartheta a_{+,\vartheta}`$. By [(5.4)](#dep-eq-5-4), increasing $`\vartheta`$ raises the gain-normalized response $`\mathcal R_\vartheta'(0+)`$ but lowers the absolute response: $`\frac{d}{d\vartheta}(\gamma_0J_\vartheta a_{+,\vartheta})=\gamma_0(J_\vartheta'a_{+,\vartheta}+J_\vartheta a_{+,\vartheta}')<0`$, so the decline in the nominal-gain scale outweighs the increase in background share. Reporting both boundary sensitivities to a risk committee separates a greater relative need for background displacement from a smaller absolute response in budget units.
 
 Characterizing the boundaries between the active and stationary regions of an optimal kernel could help determine the full profile $`F`$ between the analytical envelopes, beyond the guaranteed initial linear interval. A uniform rate for $`\sup_{s\le S_0}|\varepsilon^{-2}D_\varepsilon(s\varepsilon^2)-F(s)|`$, combined with the lower growth estimate in Theorem [3.3](#dep-thm-strict-crossing), would yield finite-trade error bounds for the critical budgets.
 
@@ -1198,7 +1198,7 @@ In the compact-box benchmark, a restoration premium can arise from dependence ge
 
 ## Appendices and Supporting Material
 
-This page includes the complete abstract, five main sections, all four main-text figures, and references. Technical appendices and declarations are available in the [full manuscript](https://github.com/130U/mathematical-finance-project/blob/3cc4c7e9b36e77027962999b932a1df7972cd2ed/paper/paper.pdf) and the [GitHub repository](https://github.com/130U/mathematical-finance-project).
+This page includes the complete abstract, five main sections, all four main-text figures, and references. Technical appendices and declarations are available in the [full manuscript](https://github.com/130U/mathematical-finance-project/blob/dbb0a1003d5c37b13041229e8a1a707e3f247cde/paper/paper.pdf) and the [GitHub repository](https://github.com/130U/mathematical-finance-project).
 
 ## References
 

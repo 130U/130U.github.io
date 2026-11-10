@@ -85,7 +85,7 @@ its post. After adding a post, refresh the visible-copy manifest with
 
 Edit `content/sources/ai-portfolio/ai-research-and-engineering.md` as the single
 authority for all four AI projects. It contains the directory disclosure, project
-metadata, summaries, contributions and nested lists, Architectural Context, and complete
+metadata, summaries, Problem and Approach, contributions and nested lists, and complete
 numbered manuscripts with citations, tables, and TeX. Preserve the project's metadata
 labels, ordered section structure, and chapter sequence so the importer can validate
 the complete input before writing.
@@ -103,7 +103,7 @@ AI fields. Citation links and mathematical definitions belong in that manuscript
 The list presents the single portfolio-wide disclosure and four briefs. Keep NDA
 and disclosure permissions in that opening note rather than repeating them in
 the briefs or manuscripts. Detail pages show the institution and project title,
-Position, Location, Dates, Key Contributions, Architectural Context, and numbered body.
+Position, Location, Dates, Problem and Approach, Key Contributions, and numbered body.
 Each article returns to its project anchor on Experience. Tests compare the full
 generated fields and manuscript blocks with the maintained source and verify
 mathematical rendering independently.
