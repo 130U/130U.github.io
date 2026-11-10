@@ -19,7 +19,7 @@ function withoutArticleFigures(html) {
 const ROOT = fileURLToPath(new URL("../", import.meta.url));
 const SOURCE = path.join(ROOT, "content", "sources", "selected-research", "dependence");
 const SLUG = "critical-dependence-stress-for-portfolio-diversification";
-const COMMIT = "4dcf48c0f19c0095001441f0bcaa674ad9dbcc35";
+const COMMIT = "16710d22a50b712629ab03176cf5c6ab7ba3940d";
 const PAPER_BLOB = "6ae3b86691b81075188d4cf73f091ac078f961bd";
 
 async function manuscript() {
@@ -92,7 +92,7 @@ test("dependence import reproduces its pinned sources and checked-in artifacts",
 
 test("dependence parsing and published mathematics retain the complete source ledger in order", async () => {
   const { provenance, blocks } = await manuscript();
-  assert.equal(provenance.mathematics.length, 977);
+  assert.equal(provenance.mathematics.length, 974);
   assert.equal(provenance.mathematics.filter(({ display }) => display).length, 91);
   for (const { sourceTex, tex } of provenance.mathematics) {
     assert.equal(tex, sourceTex.replace(/\\label\{[^}]+\}/gu, "").trim(), "Only source labels may leave mathematical bodies.");

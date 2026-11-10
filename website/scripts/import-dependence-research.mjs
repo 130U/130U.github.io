@@ -13,7 +13,7 @@ async function writeOrCheck(url, content) {
   else await writeFile(url, content);
 }
 const manifest = JSON.parse(await readFile(new URL("source-manifest.json", sourceDirectory), "utf8"));
-const commit = "4dcf48c0f19c0095001441f0bcaa674ad9dbcc35";
+const commit = "16710d22a50b712629ab03176cf5c6ab7ba3940d";
 const paperBlob = "6ae3b86691b81075188d4cf73f091ac078f961bd";
 assert.equal(manifest.commit, commit);
 assert.equal(manifest.repository, "130U/Critical-Dependence-Stress");
