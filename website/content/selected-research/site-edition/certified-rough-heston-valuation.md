@@ -794,7 +794,7 @@ The [online article](https://github.com/130U/certified-rough-heston-valuation/bl
 
 ## Appendices and Supporting Material
 
-This page includes the complete main text and references. Appendices, supplementary proofs, code, and verification material are available in the [GitHub repository](https://github.com/130U/certified-rough-heston-valuation) and the [full manuscript](https://github.com/130U/certified-rough-heston-valuation/blob/89e322a2a3ef5d8a8db78b5ddac9f3a6698d9f03/manuscript/merged-heston-en.md#appendix-a-probability-model-and-strip-transform).
+This page includes the complete main text and references. Appendices, supplementary proofs, code, and verification material are available in the [GitHub repository](https://github.com/130U/certified-rough-heston-valuation) and the [full manuscript](https://github.com/130U/certified-rough-heston-valuation/blob/V_20261101/manuscript/merged-heston-en.md#appendix-a-probability-model-and-strip-transform).
 
 ## References
 

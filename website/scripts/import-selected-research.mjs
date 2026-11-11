@@ -6,8 +6,8 @@ const sourceDirectory = new URL("../content/sources/selected-research/", import.
 const sources = [
   {
     key: "asian", slug: "certified-valuation-arithmetic-asian-options", file: "manuscript/report.md",
-    sourceCommit: "92547dc2e486408134dcfec864eebe9bb8f0aa92", sourceBlob: "05ccca8c440de2159e2087316343c10fcaafcad1",
-    sourceEditedAt: "2026-11-10T09:02:37-05:00", mainSections: 10,
+    sourceCommit: "38dbac78cf00043239b90bcecada564d399abb31", sourceBlob: "b14303e50dcdfc293fa91586afb061de1b4bfb5b",
+    sourceEditedAt: "2026-11-11T08:19:01-05:00", mainSections: 10,
     appendixAnchor: "appendix-a-finite-certification-of-the-weighted-second-moment",
     description: "Certified pricing-error bounds for arithmetic Asian options under projected Euler, with common Gaussian smoothing, weak expansions, and posterior quantile transfer.",
   },
@@ -57,5 +57,5 @@ for (const config of sources) {
     transformations: ["The title is rendered once by the page header.", "Relative file links resolve to the frozen GitHub commit.", "A paragraph links omitted appendices and supporting material to GitHub.", "Main text, all main-text tables, mathematical TeX and references are otherwise retained verbatim."],
   });
 }
-await writeFile(new URL("provenance.json", sourceDirectory), JSON.stringify({ fetchedAt: "2026-11-10", fetchedWith: "Authenticated Git checkout at the exact commit; bytes read with git show and checked against Git blob SHA-1", sources: receipts }, null, 2) + "\n");
+await writeFile(new URL("provenance.json", sourceDirectory), JSON.stringify({ fetchedAt: "2026-11-11", fetchedWith: "Authenticated Git checkout at the exact commit; bytes read with git show and checked against Git blob SHA-1", sources: receipts }, null, 2) + "\n");
 console.log(`Imported ${receipts.length} complete main texts; provenance: ${fileURLToPath(new URL("provenance.json", sourceDirectory))}`);
