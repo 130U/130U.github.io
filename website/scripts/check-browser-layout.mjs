@@ -205,9 +205,10 @@ function inspectFigure(figure) {
   return { bounds, issues, ranking, wrappedLabels: marks.length };
 }
 
-// Manuscript tables and numbered equations: a table heading takes at most two
-// lines, and an equation that fits its column is centered with its number on
-// the column's right edge, clear of the expression.
+// Manuscript tables and displayed equations: a table heading takes at most two
+// lines; every equation on a page starts on one axis, whatever its length; and
+// every equation number stands at its column's right edge, clear of the
+// expression once the equation is in full view.
 function inspectManuscript() {
   const issues = [];
   const lineCount = element => {
@@ -227,16 +228,23 @@ function inspectManuscript() {
     const lines = lineCount(heading);
     if (lines > 2) issues.push({ kind: "table-heading-over-two-lines", heading: heading.textContent.trim(), lines });
   }
+  const starts = new Map();
   for (const equation of document.querySelectorAll('[data-research-block-type="equation"]')) {
-    const number = equation.querySelector("[data-equation-number]");
-    if (!number || equation.scrollWidth > equation.clientWidth) continue;
+    const drawing = equation.querySelector("svg[data-research-svg]");
     const column = equation.getBoundingClientRect();
-    const drawing = equation.querySelector("svg[data-research-svg]").getBoundingClientRect();
-    const label = number.getBoundingClientRect();
-    if (Math.abs(column.right - label.right) > 1) issues.push({ kind: "equation-number-off-right-edge", number: number.textContent, gap: column.right - label.right });
-    if (drawing.right > label.left + 1) issues.push({ kind: "equation-number-overlaps-expression", number: number.textContent });
-    if (drawing.left + drawing.right > column.left + column.right + 2) issues.push({ kind: "equation-right-of-center", number: number.textContent });
+    const start = Math.round((drawing.getBoundingClientRect().left - column.left) * 2) / 2;
+    starts.set(start, (starts.get(start) ?? 0) + 1);
+    const number = equation.querySelector("[data-equation-number]");
+    if (!number) continue;
+    const text = document.createRange();
+    text.selectNodeContents(number);
+    const gap = column.right - text.getBoundingClientRect().right;
+    if (Math.abs(gap) > 1) issues.push({ kind: "equation-number-off-right-edge", number: number.textContent, gap });
+    equation.scrollLeft = equation.scrollWidth;
+    if (drawing.getBoundingClientRect().right > text.getBoundingClientRect().left) issues.push({ kind: "equation-number-overlaps-expression", number: number.textContent });
+    equation.scrollLeft = 0;
   }
+  if (starts.size > 1) issues.push({ kind: "equations-start-on-different-axes", starts: [...starts] });
   return issues;
 }
 
@@ -245,7 +253,7 @@ async function discoverManuscripts(directory = OUT) {
   for (const entry of await readdir(directory, { withFileTypes: true })) {
     if (entry.isDirectory() && !["_next", "assets"].includes(entry.name)) routes.push(...await discoverManuscripts(path.join(directory, entry.name)));
     if (!entry.isFile() || entry.name !== "index.html") continue;
-    if (/data-research-table|data-equation-number/u.test(await readFile(path.join(directory, entry.name), "utf8"))) {
+    if (/data-research-table|data-research-block-type="equation"/u.test(await readFile(path.join(directory, entry.name), "utf8"))) {
       routes.push("/" + path.relative(OUT, directory).split(path.sep).filter(Boolean).join("/") + "/");
     }
   }
@@ -322,7 +330,7 @@ try {
   }
   if (!filter) {
     const manuscriptRoutes = await discoverManuscripts();
-    assert.ok(manuscriptRoutes.length >= 7, `Expected at least 7 manuscripts with tables or numbered equations; found ${manuscriptRoutes.length}.`);
+    assert.ok(manuscriptRoutes.length >= 7, `Expected at least 7 manuscripts with tables or equations; found ${manuscriptRoutes.length}.`);
     for (const width of WIDTHS) {
       const context = await browser.newContext({ viewport: { width, height: 1100 }, reducedMotion: "reduce", serviceWorkers: "block" });
       await serveExport(context, missing);
