@@ -1,10 +1,10 @@
 {
   "repositoryUrl": "https://github.com/130U/Critical-Dependence-Stress",
-  "sourceUrl": "https://github.com/130U/Critical-Dependence-Stress/blob/77dfa1601709c5408d6eeee94d4858daab869079/paper/paper.pdf",
+  "sourceUrl": "https://github.com/130U/Critical-Dependence-Stress/blob/ac2de4b0f2623cae3e5aaf85c42c778650f6ebed/paper/paper.pdf",
   "sourceTitle": "Critical Dependence Stress for Diversification Gains under Fixed Marginals",
-  "sourceCommit": "77dfa1601709c5408d6eeee94d4858daab869079",
-  "sourceBlob": "6ae3b86691b81075188d4cf73f091ac078f961bd",
-  "sourceEditedAt": "2026-11-12T05:26:54-05:00",
+  "sourceCommit": "ac2de4b0f2623cae3e5aaf85c42c778650f6ebed",
+  "sourceBlob": "e9efa283fc4b8efe2cac0ca483fa3e5da81e01e5",
+  "sourceEditedAt": "2026-11-12T09:03:18-05:00",
   "fetchedWith": "Authenticated Git checkout at the exact commit; git show bytes checked against Git blob SHA-1",
   "sourceFiles": [
     {
@@ -59,9 +59,9 @@
     {
       "path": "paper/source/main-introduction.tex",
       "local": "main-introduction.tex",
-      "gitBlob": "0b661c8663a41f04ac473e6525bf4a5e74bfe74f",
-      "sha256": "1664a034bd3534d4b6ea1febf5352d5fd0f66a940812936cbfb963e59ed055fb",
-      "bytes": 12031
+      "gitBlob": "637cf0d47fd21be707f7f7821f35c72d281191db",
+      "sha256": "6de76a53ce9cb48c99df3b44649d08b3c9f08701295b5ae9814c3d603d29f519",
+      "bytes": 12283
     },
     {
       "path": "paper/source/main-model-benchmark.tex",
@@ -101,9 +101,9 @@
     {
       "path": "paper/source/paper.tex",
       "local": "paper.tex",
-      "gitBlob": "6ae3b86691b81075188d4cf73f091ac078f961bd",
-      "sha256": "5cd1e32ff2f23b5287a860a5b7c6c87cfe79fdfc28f7a50abd7b2b8bdf78ad32",
-      "bytes": 5595
+      "gitBlob": "e9efa283fc4b8efe2cac0ca483fa3e5da81e01e5",
+      "sha256": "18176ac22f5e98d4e13b30d054eb6369639e5d86bb7f7f52abc3946777533aa5",
+      "bytes": 5755
     },
     {
       "path": "paper/source/references.tex",
@@ -347,7 +347,7 @@
   "crossReferences": [
     {
       "label": "eq:B.2",
-      "href": "https://github.com/130U/Critical-Dependence-Stress/blob/77dfa1601709c5408d6eeee94d4858daab869079/paper/source/technical-quantitative.tex#L80",
+      "href": "https://github.com/130U/Critical-Dependence-Stress/blob/ac2de4b0f2623cae3e5aaf85c42c778650f6ebed/paper/source/technical-quantitative.tex#L80",
       "number": "B.2"
     },
     {
@@ -422,17 +422,17 @@
     },
     {
       "label": "lemma:general-variation",
-      "href": "https://github.com/130U/Critical-Dependence-Stress/blob/77dfa1601709c5408d6eeee94d4858daab869079/paper/source/technical-reference.tex#L4",
+      "href": "https://github.com/130U/Critical-Dependence-Stress/blob/ac2de4b0f2623cae3e5aaf85c42c778650f6ebed/paper/source/technical-reference.tex#L4",
       "number": "A.1"
     },
     {
       "label": "lemma:general-variation",
-      "href": "https://github.com/130U/Critical-Dependence-Stress/blob/77dfa1601709c5408d6eeee94d4858daab869079/paper/source/technical-reference.tex#L4",
+      "href": "https://github.com/130U/Critical-Dependence-Stress/blob/ac2de4b0f2623cae3e5aaf85c42c778650f6ebed/paper/source/technical-reference.tex#L4",
       "number": "A.1"
     },
     {
       "label": "lemma:general-variation",
-      "href": "https://github.com/130U/Critical-Dependence-Stress/blob/77dfa1601709c5408d6eeee94d4858daab869079/paper/source/technical-reference.tex#L4",
+      "href": "https://github.com/130U/Critical-Dependence-Stress/blob/ac2de4b0f2623cae3e5aaf85c42c778650f6ebed/paper/source/technical-reference.tex#L4",
       "number": "A.1"
     },
     {
@@ -502,7 +502,7 @@
     },
     {
       "label": "lem:threshold-convexity",
-      "href": "https://github.com/130U/Critical-Dependence-Stress/blob/77dfa1601709c5408d6eeee94d4858daab869079/paper/source/technical-limit.tex#L103",
+      "href": "https://github.com/130U/Critical-Dependence-Stress/blob/ac2de4b0f2623cae3e5aaf85c42c778650f6ebed/paper/source/technical-limit.tex#L103",
       "number": "A.4"
     },
     {
@@ -532,17 +532,17 @@
     },
     {
       "label": "proof:threshold-localization",
-      "href": "https://github.com/130U/Critical-Dependence-Stress/blob/77dfa1601709c5408d6eeee94d4858daab869079/paper/source/technical-limit.tex#L2",
+      "href": "https://github.com/130U/Critical-Dependence-Stress/blob/ac2de4b0f2623cae3e5aaf85c42c778650f6ebed/paper/source/technical-limit.tex#L2",
       "number": "A.2"
     },
     {
       "label": "b-l2-all-optimal-thresholds-under-a-budget-of-order-varepsilon2",
-      "href": "https://github.com/130U/Critical-Dependence-Stress/blob/77dfa1601709c5408d6eeee94d4858daab869079/paper/source/technical-threshold-statement.tex#L1",
+      "href": "https://github.com/130U/Critical-Dependence-Stress/blob/ac2de4b0f2623cae3e5aaf85c42c778650f6ebed/paper/source/technical-threshold-statement.tex#L1",
       "number": "A.2"
     },
     {
       "label": "eq:A.13",
-      "href": "https://github.com/130U/Critical-Dependence-Stress/blob/77dfa1601709c5408d6eeee94d4858daab869079/paper/source/technical-limit.tex#L136",
+      "href": "https://github.com/130U/Critical-Dependence-Stress/blob/ac2de4b0f2623cae3e5aaf85c42c778650f6ebed/paper/source/technical-limit.tex#L136",
       "number": "A.13"
     },
     {
@@ -552,12 +552,12 @@
     },
     {
       "label": "lem:threshold-convexity",
-      "href": "https://github.com/130U/Critical-Dependence-Stress/blob/77dfa1601709c5408d6eeee94d4858daab869079/paper/source/technical-limit.tex#L103",
+      "href": "https://github.com/130U/Critical-Dependence-Stress/blob/ac2de4b0f2623cae3e5aaf85c42c778650f6ebed/paper/source/technical-limit.tex#L103",
       "number": "A.4"
     },
     {
       "label": "lem:projected-imbalance",
-      "href": "https://github.com/130U/Critical-Dependence-Stress/blob/77dfa1601709c5408d6eeee94d4858daab869079/paper/source/technical-limit.tex#L54",
+      "href": "https://github.com/130U/Critical-Dependence-Stress/blob/ac2de4b0f2623cae3e5aaf85c42c778650f6ebed/paper/source/technical-limit.tex#L54",
       "number": "A.3"
     },
     {
@@ -617,7 +617,7 @@
     },
     {
       "label": "lem:threshold-convexity",
-      "href": "https://github.com/130U/Critical-Dependence-Stress/blob/77dfa1601709c5408d6eeee94d4858daab869079/paper/source/technical-limit.tex#L103",
+      "href": "https://github.com/130U/Critical-Dependence-Stress/blob/ac2de4b0f2623cae3e5aaf85c42c778650f6ebed/paper/source/technical-limit.tex#L103",
       "number": "A.4"
     },
     {
@@ -747,12 +747,12 @@
     },
     {
       "label": "app:flow-proof",
-      "href": "https://github.com/130U/Critical-Dependence-Stress/blob/77dfa1601709c5408d6eeee94d4858daab869079/paper/source/technical-flow-proof.tex#L1",
+      "href": "https://github.com/130U/Critical-Dependence-Stress/blob/ac2de4b0f2623cae3e5aaf85c42c778650f6ebed/paper/source/technical-flow-proof.tex#L1",
       "number": "A.8"
     },
     {
       "label": "app:cost-proofs",
-      "href": "https://github.com/130U/Critical-Dependence-Stress/blob/77dfa1601709c5408d6eeee94d4858daab869079/paper/source/technical-cost-proof.tex#L1",
+      "href": "https://github.com/130U/Critical-Dependence-Stress/blob/ac2de4b0f2623cae3e5aaf85c42c778650f6ebed/paper/source/technical-cost-proof.tex#L1",
       "number": "A.7"
     },
     {
@@ -772,7 +772,7 @@
     },
     {
       "label": "app:potential-proof",
-      "href": "https://github.com/130U/Critical-Dependence-Stress/blob/77dfa1601709c5408d6eeee94d4858daab869079/paper/source/technical-quantitative.tex#L3",
+      "href": "https://github.com/130U/Critical-Dependence-Stress/blob/ac2de4b0f2623cae3e5aaf85c42c778650f6ebed/paper/source/technical-quantitative.tex#L3",
       "number": "B.1"
     },
     {
@@ -802,7 +802,7 @@
     },
     {
       "label": "app:uniform-bound-proof",
-      "href": "https://github.com/130U/Critical-Dependence-Stress/blob/77dfa1601709c5408d6eeee94d4858daab869079/paper/source/technical-quantitative.tex#L32",
+      "href": "https://github.com/130U/Critical-Dependence-Stress/blob/ac2de4b0f2623cae3e5aaf85c42c778650f6ebed/paper/source/technical-quantitative.tex#L32",
       "number": "B.2"
     },
     {
@@ -832,7 +832,7 @@
     },
     {
       "label": "app:dependence-family-proof",
-      "href": "https://github.com/130U/Critical-Dependence-Stress/blob/77dfa1601709c5408d6eeee94d4858daab869079/paper/source/technical-quantitative.tex#L49",
+      "href": "https://github.com/130U/Critical-Dependence-Stress/blob/ac2de4b0f2623cae3e5aaf85c42c778650f6ebed/paper/source/technical-quantitative.tex#L49",
       "number": "B.3"
     },
     {
@@ -897,8 +897,20 @@
     },
     {
       "display": false,
+      "sourceTex": "30\\%",
+      "tex": "30\\%",
+      "labels": []
+    },
+    {
+      "display": false,
       "sourceTex": "\\Gamma",
       "tex": "\\Gamma",
+      "labels": []
+    },
+    {
+      "display": false,
+      "sourceTex": "30\\%",
+      "tex": "30\\%",
       "labels": []
     },
     {
@@ -6832,7 +6844,7 @@
       "labels": []
     }
   ],
-  "importedMarkdownSha256": "627be7f9753cee4a919ccad2e1a1fda2b33f765f0bcb2d979b98d23dba44a7fd",
+  "importedMarkdownSha256": "dcdcf2210e183e357ced02ceb4664c9310c9a1ddc617ff3389ba03c8ec72af75",
   "transformations": [
     "Seven main TeX input files contain five numbered sections and eleven subsections; recursively included main-text proofs are retained.",
     "TeX line wrapping, layout commands, font styling, and text accents are converted to equivalent web markup.",

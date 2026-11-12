@@ -54,9 +54,9 @@
       }
     },
     "/critical-dependence-stress-for-portfolio-diversification/": {
-      "textSha256": "ad12d41c196f26683e32f2e253b1f552982d8b231596b7a4ad92b839b76f435d",
-      "characterCount": 76768,
-      "wordCount": 11604,
+      "textSha256": "3b6deac16d5611bd1f7ff45c610a16cecd132a8f2cb115a91e14317f30e3d1ae",
+      "characterCount": 77183,
+      "wordCount": 11674,
       "preview": "Skip to Main Content Theodore Ouyang Back to Selected Research Critical Dependence Stress for Portfolio Diversification GitHub Full Manuscript Abstract How much",
       "altTexts": [],
       "ariaLabels": [
@@ -423,13 +423,13 @@
         "twitterTitle": "Critical Dependence Stress for Portfolio Diversification",
         "twitterDescription": "How much dependence stress erases a diversification gain under fixed marginals: a variational limit, a quadratic critical budget, the marginal-restoration premium and projected flow duality."
       },
-      "mathSourceSha256": "a5cf2f0e4d37e139c23197624109ef705a854bfd6943b9ca6954469db743f254",
-      "formulaCount": 1023
+      "mathSourceSha256": "d31d21b93ee2cd9e32595eee5228e469588a65f6a3a7ee02e359ff2a4a17b153",
+      "formulaCount": 1025
     },
     "/certified-valuation-arithmetic-asian-options/": {
-      "textSha256": "d667acb3d2a62c0f78f63eee46c4a69e39ea621aaeb77caba0a9e56481948208",
-      "characterCount": 52733,
-      "wordCount": 7629,
+      "textSha256": "ff690459663a8219986e7bd034baf3c94a060d7c1a7823a7c0bbe1d3d29cb97a",
+      "characterCount": 53150,
+      "wordCount": 7700,
       "preview": "Skip to Main Content Theodore Ouyang Back to Selected Research Certified Valuation of Arithmetic Asian Options GitHub Full Manuscript Abstract How much numerica",
       "altTexts": [],
       "ariaLabels": [
@@ -631,9 +631,9 @@
       "formulaCount": 365
     },
     "/certified-rough-heston-valuation/": {
-      "textSha256": "a7e6ac72cc68e7279844040d9196d167489a40a1d2bafb75fbe126c1abe40c7c",
-      "characterCount": 66839,
-      "wordCount": 9668,
+      "textSha256": "648330be571360a786c19e3cf41691c25034f8f6c21dadab87cde3d652a97e1b",
+      "characterCount": 67073,
+      "wordCount": 9706,
       "preview": "Skip to Main Content Theodore Ouyang Back to Selected Research Certified Joint Pricing Errors in Rough Heston GitHub Full Manuscript Abstract How much numerical",
       "altTexts": [],
       "ariaLabels": [
