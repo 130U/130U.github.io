@@ -31,7 +31,8 @@ npm run preview:static
 `check` verifies protected sources, lints, builds, tests the exported artifact, and
 checks visible text and metadata. `test:browser` renders the exported figures in
 Chromium at phone, tablet, and desktop widths, exercises every view, and checks
-label bounds, enlarged text, and keyboard scrolling. CI runs this before deployment;
+label bounds, enlarged text, keyboard scrolling, two-line table headings, and the
+placement of equation numbers. CI runs this before deployment;
 diagnostics are written to `test-results/figure-layout/`. The static preview serves `out/` at
 `http://127.0.0.1:8123`. Pull requests run validation; pushes to `main` also deploy the
 assembled export through the Pages workflow.

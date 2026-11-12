@@ -24,10 +24,15 @@ type ResearchMathMarkup = Readonly<{
   widthEm: number;
   heightEm: number;
   depthEm: number;
+  /** The equation number of a numbered display, set beside its expression. */
+  number?: string;
 }>;
 
 export const RESEARCH_MATH_GUTTER_EM = 0.375;
+export const RESEARCH_MATH_INLINE_SPACE_EM = 0.125;
 export const RESEARCH_MATH_ROW_SPACING_EM = 0.6;
+
+const EQUATION_NUMBER = /\\tag\{([^{}]+)\}\s*$/u;
 
 const equationEnvironments = new Set(["aligned", "gathered"]);
 
@@ -177,52 +182,32 @@ function intrinsicSvg(container: LiteElement, display: boolean) {
   const style = String(adaptor.getAttribute(root, "style") ?? "");
   const depthMatch = /vertical-align:\s*(-?\d+(?:\.\d+)?)ex/iu.exec(style);
   const depthEm = (depthMatch ? -Number(depthMatch[1]) * xHeight : 0) + RESEARCH_MATH_GUTTER_EM;
-  const numbered = adaptor.getAttribute(root, "width") === "100%";
-  const widthEx = lengthInEx(
-    numbered ? adaptor.getStyle(root, "min-width") : adaptor.getAttribute(root, "width"),
-    "width",
-  );
+  const widthEx = lengthInEx(adaptor.getAttribute(root, "width"), "width");
   const widthEm = dimension(widthEx * xHeight + 2 * RESEARCH_MATH_GUTTER_EM, "width");
   const heightEm = dimension(heightEx * xHeight + 2 * RESEARCH_MATH_GUTTER_EM, "height");
   if (!Number.isFinite(depthEm)) throw new Error("Research equation has an invalid baseline.");
   cleanSvg(root);
 
-  let svgRoot = root;
-  if (numbered) {
-    // A native SVG frame sets the numbered equation's responsive geometry at
-    // its intrinsic width, then scales the entire layout with the math size.
-    const widthPx = widthEx * EX;
-    const heightPx = heightEx * EX;
-    adaptor.setAttribute(root, "width", decimal(widthPx));
-    adaptor.setAttribute(root, "height", decimal(heightPx));
-    adaptor.setAttribute(root, "style", "overflow:visible;");
-    svgRoot = adaptor.node("svg", {
-      xmlns: "http://www.w3.org/2000/svg",
-      width: `${decimal(widthEm)}em`,
-      height: `${decimal(heightEm)}em`,
-      viewBox: `${decimal(-RESEARCH_MATH_GUTTER_EM * EM)} ${decimal(-RESEARCH_MATH_GUTTER_EM * EM)} ${decimal(widthPx + 2 * RESEARCH_MATH_GUTTER_EM * EM)} ${decimal(heightPx + 2 * RESEARCH_MATH_GUTTER_EM * EM)}`,
-      style: "overflow:visible;",
-    }, [root], "http://www.w3.org/2000/svg");
-  } else {
-    const viewBox = String(adaptor.getAttribute(root, "viewBox")).split(/\s+/u).map(Number);
-    if (viewBox.length !== 4 || viewBox.some((value) => !Number.isFinite(value))) {
-      throw new Error("Research equation has an invalid SVG canvas.");
-    }
-    const gutter = RESEARCH_MATH_GUTTER_EM * 1000;
-    adaptor.setAttribute(root, "viewBox", [
-      viewBox[0] - gutter,
-      viewBox[1] - gutter,
-      viewBox[2] + 2 * gutter,
-      viewBox[3] + 2 * gutter,
-    ].map(decimal).join(" "));
-    adaptor.setAttribute(root, "width", `${decimal(widthEm)}em`);
-    adaptor.setAttribute(root, "height", `${decimal(heightEm)}em`);
-    adaptor.setAttribute(root, "style", "overflow:visible;");
+  const viewBox = String(adaptor.getAttribute(root, "viewBox")).split(/\s+/u).map(Number);
+  if (viewBox.length !== 4 || viewBox.some((value) => !Number.isFinite(value))) {
+    throw new Error("Research equation has an invalid SVG canvas.");
   }
-  adaptor.setAttribute(svgRoot, "aria-hidden", "true");
-  adaptor.setAttribute(svgRoot, "focusable", "false");
-  adaptor.setAttribute(svgRoot, "data-research-svg", display ? "display" : "inline");
-  return { svg: adaptor.outerHTML(svgRoot), widthEm, heightEm, depthEm };
+  const gutter = RESEARCH_MATH_GUTTER_EM * 1000;
+  adaptor.setAttribute(root, "viewBox", [
+    viewBox[0] - gutter,
+    viewBox[1] - gutter,
+    viewBox[2] + 2 * gutter,
+    viewBox[3] + 2 * gutter,
+  ].map(decimal).join(" "));
+  adaptor.setAttribute(root, "width", `${decimal(widthEm)}em`);
+  adaptor.setAttribute(root, "height", `${decimal(heightEm)}em`);
+  // A display sits on its own baseline, where its equation number aligns; an
+  // inline formula takes the same offset from the element that holds it.
+  adaptor.setAttribute(root, "style", display ? `overflow:visible;vertical-align:${decimal(-depthEm)}em;` : "overflow:visible;");
+  adaptor.setAttribute(root, "aria-hidden", "true");
+  adaptor.setAttribute(root, "focusable", "false");
+  adaptor.setAttribute(root, "data-research-svg", display ? "display" : "inline");
+  return { svg: adaptor.outerHTML(root), widthEm, heightEm, depthEm };
 }
 
 function assistiveMathml(tex: string, display: boolean) {
@@ -248,12 +233,19 @@ export function renderResearchMath(tex: string, display = false): ResearchMathMa
   const key = `${display ? "display" : "inline"}\u0000${tex}`;
   const cached = cache.get(key);
   if (cached) return cached;
-  input.reset();
+  const convert = (source: string) => {
+    input.reset();
+    return document.convert(source, { display, em: EM, ex: EX, containerWidth: 80 * EM }) as LiteElement;
+  };
   const visibleTex = display ? normalizeResearchDisplayTex(tex) : tex;
-  const node = document.convert(visibleTex, { display, em: EM, ex: EX, containerWidth: 80 * EM }) as LiteElement;
-  const geometry = intrinsicSvg(node, display);
+  const number = display ? EQUATION_NUMBER.exec(visibleTex) : null;
+  let node = convert(visibleTex);
+  // The assistive expression keeps the number with its equation; the drawing is
+  // the expression alone, and the page sets the number beside it.
   const mathml = assistiveMathml(tex, display);
-  const result = Object.freeze({ ...geometry, mathml });
+  if (number) node = convert(visibleTex.slice(0, number.index));
+  const geometry = intrinsicSvg(node, display);
+  const result = Object.freeze({ ...geometry, mathml, ...(number ? { number: number[1] } : {}) });
   cache.set(key, result);
   return result;
 }

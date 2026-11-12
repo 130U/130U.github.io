@@ -59,9 +59,12 @@ function assertCompleteFormula(rendered, tex) {
   assert.ok(rendered.widthEm > 0 && rendered.heightEm > 0);
   const ids = [...rendered.svg.matchAll(/\bid="([^"]+)"/giu)].map((match) => match[1]);
   assert.equal(new Set(ids).size, ids.length, "One formula must not contain colliding glyph IDs");
+  // A numbered display draws its expression; the row that carries the number
+  // lives in the assistive expression, and the page sets the number beside it.
+  const numberRow = rendered.number === undefined ? {} : { mtable: 1, mlabeledtr: 1 };
   for (const semantic of ["mfrac", "msqrt", "mover", "munder", "msup", "msubsup", "mtable", "mlabeledtr"]) {
     const visualCount = (rendered.svg.match(new RegExp(`data-mml-node="${semantic}"`, "gu")) ?? []).length;
-    assert.equal(visualCount, tagCount(rendered.mathml, semantic), `${tex} must preserve every ${semantic} in its visible geometry`);
+    assert.equal(visualCount, tagCount(rendered.mathml, semantic) - (numberRow[semantic] ?? 0), `${tex} must preserve every ${semantic} in its visible geometry`);
   }
 }
 
@@ -176,7 +179,8 @@ test("aligned equations preserve rows, fractions, and all nine science equation 
     const label = rendered.mathml.match(/<mlabeledtr\b[^>]*>\s*<mtd\b[^>]*>([\s\S]*?)<\/mtd>/iu)?.[1] ?? "";
     const labelText = [...label.matchAll(/<mtext\b[^>]*>([\s\S]*?)<\/mtext>/giu)].map((match) => decodeXml(match[1])).join("");
     assert.equal(labelText, `(${number})`, "Equation labels must retain the correct numeral and parentheses");
-    assert.match(rendered.svg, /data-mml-node="mlabeledtr"/u);
+    assert.equal(rendered.number, String(number), "The page sets the same number beside the drawn expression");
+    assert.equal(rendered.svg, (await renderResearchMath(String.raw`x=\frac{1}{2}`, true)).svg, "The drawing is the expression alone");
   }
 });
 
@@ -204,9 +208,9 @@ J'(\Phi(u))-v'\le a\delta+2\varepsilon,
 \tag{5}
 `,
       display: true,
-      widthEm: 24.125686, heightEm: 4.435912, depthEm: 1.967784,
-      viewBox: [0, 0, 386.010976, 70.974592], numbered: true,
-      pathCount: 69, pathGeometrySha256: "5f03e5829453d96262499c5dba0a2eebcd689eb68950d66340fbcef08ef612e8",
+      widthEm: 19.970002, heightEm: 4.435912, depthEm: 1.967784,
+      viewBox: [0, -2468, 19969.8, 4435.9], number: "5",
+      pathCount: 66, pathGeometrySha256: "fdf8b95f9328741adc3575820c0d4a231c75aa52ea248a929af71b81ba22e335",
     },
     {
       tex: String.raw`
@@ -218,14 +222,14 @@ J'(\Phi(u))-v'\le a\delta+2\varepsilon,
 `,
       display: true,
       widthEm: 28.503254, heightEm: 2.20116, depthEm: 1.168206,
-      viewBox: [0, -1033, 28503.3, 2201.1], numbered: false,
+      viewBox: [0, -1033, 28503.3, 2201.1],
       pathCount: 63, pathGeometrySha256: "4ba2daeeea8ad99a6d08749790eb5efd2cab9526b8fa0ad42c8a66d6bde95dcd",
     },
     {
       tex: String.raw`\underline\Delta_{ik}>0`,
       display: false,
       widthEm: 3.361852, heightEm: 1.07627, depthEm: 0.36023,
-      viewBox: [0, -716, 3361.9, 1076.1], numbered: false,
+      viewBox: [0, -716, 3361.9, 1076.1],
       pathCount: 6, pathGeometrySha256: "8af038a117b5a0595e72f3f92338d7b7337e442ee08c26206f15020ecb559975",
     },
   ];
@@ -240,19 +244,14 @@ J'(\Phi(u))-v'\le a\delta+2\varepsilon,
     const root = rendered.svg.match(/^<svg\b[^>]*>/iu)?.[0] ?? "";
     const viewBox = (root.match(/\bviewBox="([^"]+)"/u)?.[1] ?? "").split(/\s+/u).map(Number);
     assert.equal(viewBox.length, 4);
-    const gutter = fixture.numbered ? 6 : 375;
-    assert.deepEqual(viewBox, [fixture.viewBox[0] - gutter, fixture.viewBox[1] - gutter, fixture.viewBox[2] + 2 * gutter, fixture.viewBox[3] + 2 * gutter]);
+    assert.deepEqual(viewBox, [fixture.viewBox[0] - 375, fixture.viewBox[1] - 375, fixture.viewBox[2] + 750, fixture.viewBox[3] + 750]);
+    assert.equal(rendered.number, fixture.number, "Only a numbered display carries an equation number");
+    assert.equal(/vertical-align:-[\d.]+em/u.test(root), fixture.display, "A display sits on its own baseline; an inline formula takes its offset from its container");
     close(rendered.widthEm / viewBox[2], fixture.widthEm / fixture.viewBox[2], "Canvas space must not rescale equation glyphs horizontally", 1e-7);
     close(rendered.heightEm / viewBox[3], fixture.heightEm / fixture.viewBox[3], "Canvas space must not rescale equation glyphs vertically", 1e-7);
     const paths = [...rendered.svg.matchAll(/<path\b[^>]*\bd="([^"]+)"/gu)].map((match) => match[1]);
     assert.equal(paths.length, fixture.pathCount);
     assert.equal(createHash("sha256").update(JSON.stringify(paths)).digest("hex"), fixture.pathGeometrySha256, "Original mathematical glyph paths must remain exact");
     for (const svg of rendered.svg.matchAll(/<svg\b[^>]*>/giu)) assert.match(svg[0], /style="[^"]*overflow:\s*visible/iu, "Nested accent and equation canvases must expose their full ink");
-    if (fixture.numbered) {
-      const inner = rendered.svg.slice(root.length).match(/^<svg\b[^>]*>/iu)?.[0] ?? "";
-      close(Number(inner.match(/\bwidth="([^"]+)"/u)?.[1]), fixture.viewBox[2], "Numbered equation width must retain its original native pixel coordinates");
-      close(Number(inner.match(/\bheight="([^"]+)"/u)?.[1]), fixture.viewBox[3], "Numbered equation height must retain its original native pixel coordinates");
-      assert.match(rendered.svg, /transform="scale\(0\.016,-0\.016\)/u);
-    }
   }
 });

@@ -11,6 +11,7 @@
   font-weight: 400;
   line-height: var(--title-leading);
   letter-spacing: var(--title-tracking);
+  text-wrap: balance;
 }
 
 .sectionIndex {
@@ -162,7 +163,7 @@
     grid-template-columns: var(--hang-columns);
     align-items: start;
   }
-  .intro h1 { max-width: none; padding-right: var(--hang-gap); text-wrap: balance; }
+  .intro h1 { max-width: none; padding-right: var(--hang-gap); }
   .intro > nav { margin-top: 0; }
   .detailPage > .contributions h2 { padding-right: var(--hang-gap); }
   .detailPage > .contributions h2 { margin: 0; }

@@ -9,14 +9,14 @@ const sources = [
     sourceCommit: "249987d23616804998683ac9eeead21c5a3473f6", sourceBlob: "69e67323db7a2a97e1fa0ad6264f4078aac1cb7e",
     sourceEditedAt: "2026-11-12T09:37:12-05:00", mainSections: 10,
     appendixAnchor: "appendix-a-finite-certification-of-the-weighted-second-moment",
-    description: "Certified pricing-error bounds for arithmetic Asian options under projected Euler, with common Gaussian smoothing, weak expansions, and posterior quantile transfer.",
+    description: "Certified bounds on the pricing error of arithmetic Asian options under projected Euler, built on common Gaussian smoothing, with weak expansions and a transfer result for posterior quantiles.",
   },
   {
     key: "rough", slug: "certified-rough-heston-valuation", file: "manuscript/merged-heston-en.md",
     sourceCommit: "de721f78cec277e390cd9dc2ebc4efa9ae9681e4", sourceBlob: "2b52caa1ad3e58a2f411c9c1f1b651d01f3a8d39",
     sourceEditedAt: "2026-11-12T09:54:24-05:00", mainSections: 8,
     appendixAnchor: "appendix-a-probability-model-and-strip-transform",
-    description: "Deterministic joint pricing-error certificates for stored rough Heston outputs, finite-history propagation, portfolios, and finite-candidate decisions.",
+    description: "A method for certifying portfolio valuation errors in rough Heston, carrying continuous Riccati residual bounds through to complete pricing guarantees.",
   },
 ];
 

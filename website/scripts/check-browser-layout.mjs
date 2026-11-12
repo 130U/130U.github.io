@@ -205,6 +205,53 @@ function inspectFigure(figure) {
   return { bounds, issues, ranking, wrappedLabels: marks.length };
 }
 
+// Manuscript tables and numbered equations: a table heading takes at most two
+// lines, and an equation that fits its column is centered with its number on
+// the column's right edge, clear of the expression.
+function inspectManuscript() {
+  const issues = [];
+  const lineCount = element => {
+    const tops = [];
+    const walker = document.createTreeWalker(element, NodeFilter.SHOW_TEXT);
+    for (let node = walker.nextNode(); node; node = walker.nextNode()) {
+      if (!node.data.trim() || node.parentElement.closest("math, svg")) continue;
+      const range = document.createRange();
+      range.selectNodeContents(node);
+      for (const box of range.getClientRects()) {
+        if (box.width > 0 && !tops.some(top => Math.abs(top - box.top) < box.height / 2)) tops.push(box.top);
+      }
+    }
+    return tops.length;
+  };
+  for (const heading of document.querySelectorAll("[data-research-table] thead th")) {
+    const lines = lineCount(heading);
+    if (lines > 2) issues.push({ kind: "table-heading-over-two-lines", heading: heading.textContent.trim(), lines });
+  }
+  for (const equation of document.querySelectorAll('[data-research-block-type="equation"]')) {
+    const number = equation.querySelector("[data-equation-number]");
+    if (!number || equation.scrollWidth > equation.clientWidth) continue;
+    const column = equation.getBoundingClientRect();
+    const drawing = equation.querySelector("svg[data-research-svg]").getBoundingClientRect();
+    const label = number.getBoundingClientRect();
+    if (Math.abs(column.right - label.right) > 1) issues.push({ kind: "equation-number-off-right-edge", number: number.textContent, gap: column.right - label.right });
+    if (drawing.right > label.left + 1) issues.push({ kind: "equation-number-overlaps-expression", number: number.textContent });
+    if (drawing.left + drawing.right > column.left + column.right + 2) issues.push({ kind: "equation-right-of-center", number: number.textContent });
+  }
+  return issues;
+}
+
+async function discoverManuscripts(directory = OUT) {
+  const routes = [];
+  for (const entry of await readdir(directory, { withFileTypes: true })) {
+    if (entry.isDirectory() && !["_next", "assets"].includes(entry.name)) routes.push(...await discoverManuscripts(path.join(directory, entry.name)));
+    if (!entry.isFile() || entry.name !== "index.html") continue;
+    if (/data-research-table|data-equation-number/u.test(await readFile(path.join(directory, entry.name), "utf8"))) {
+      routes.push("/" + path.relative(OUT, directory).split(path.sep).filter(Boolean).join("/") + "/");
+    }
+  }
+  return routes;
+}
+
 await mkdir(ARTIFACTS, { recursive: true });
 const pages = await discover();
 const unique = new Set(pages.flatMap(page => page.figures));
@@ -214,6 +261,7 @@ const records = [];
 const home = [];
 const noScript = [];
 const longNumbers = [];
+const manuscripts = [];
 const missing = new Set();
 try {
   for (const width of WIDTHS) {
@@ -273,6 +321,20 @@ try {
     }
   }
   if (!filter) {
+    const manuscriptRoutes = await discoverManuscripts();
+    assert.ok(manuscriptRoutes.length >= 7, `Expected at least 7 manuscripts with tables or numbered equations; found ${manuscriptRoutes.length}.`);
+    for (const width of WIDTHS) {
+      const context = await browser.newContext({ viewport: { width, height: 1100 }, reducedMotion: "reduce", serviceWorkers: "block" });
+      await serveExport(context, missing);
+      try {
+        const page = await context.newPage();
+        for (const route of manuscriptRoutes) {
+          await page.goto(ORIGIN + route, { waitUntil: "networkidle" });
+          await page.evaluate(() => document.fonts.ready);
+          manuscripts.push({ route, width, issues: await page.evaluate(inspectManuscript) });
+        }
+      } finally { await context.close(); }
+    }
     for (const width of [320, 390]) {
       for (const textScale of [1, 2]) {
         const context = await browser.newContext({ viewport: { width, height: 1100 }, reducedMotion: "reduce", serviceWorkers: "block" });
@@ -352,10 +414,10 @@ try {
   await browser.close();
 }
 const failures = records.filter(record => record.issues.length || record.pageErrors.length);
-const otherFailures = [...home, ...longNumbers, ...noScript].filter(record => record.issues.length);
-const report = { figures: unique.size, widths: WIDTHS, cases: records.length, missingAssets: [...missing], failures: failures.length + otherFailures.length, records, home, longNumbers, noScript };
+const otherFailures = [...manuscripts, ...home, ...longNumbers, ...noScript].filter(record => record.issues.length);
+const report = { figures: unique.size, widths: WIDTHS, cases: records.length, missingAssets: [...missing], failures: failures.length + otherFailures.length, records, manuscripts, home, longNumbers, noScript };
 await writeFile(path.join(ARTIFACTS, "results.json"), JSON.stringify(report, null, 2) + "\n");
 console.log(JSON.stringify({ figures: unique.size, cases: records.length, failures: failures.map(({ id, view, width, textScale, issues, pageErrors }) => ({ id, view, width, textScale, issues, pageErrors })), otherFailures, missingAssets: [...missing], artifacts: ARTIFACTS }, null, 2));
 assert.equal(missing.size, 0, "The static export is missing requested assets.");
 assert.equal(failures.length, 0, "Browser layout regression found collapsed labels, frame escapes, or broken interactions. Inspect results.json and screenshots.");
-assert.equal(otherFailures.length, 0, "Homepage text resizing, long-number scrolling, or no-JavaScript navigation regressed.");
+assert.equal(otherFailures.length, 0, "Manuscript tables or equation numbers, homepage text resizing, long-number scrolling, or no-JavaScript navigation regressed.");

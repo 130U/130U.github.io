@@ -20,11 +20,12 @@
 }
 
 .sectionBody h2 {
-  margin: 0;
+  margin: 0 0 32px;
   font-size: var(--type-heading);
   font-weight: 400;
   line-height: var(--heading-leading);
   letter-spacing: var(--heading-tracking);
+  text-wrap: balance;
 }
 
 .section {
@@ -56,10 +57,6 @@
 .sectionBody {
   grid-column: 2 / span 10;
   min-width: 0;
-}
-
-.sectionBody h2 {
-  margin-bottom: 32px;
 }
 
 /* Each subject's courses sit in one faint frame; columns are divided by dashed

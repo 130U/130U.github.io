@@ -272,7 +272,7 @@ assert.equal(emittedAnchors.size, [...normalized.matchAll(/<a id="([^"]+)"><\/a>
 const content = {
   slug: "critical-dependence-stress-for-portfolio-diversification",
   title: "Critical Dependence Stress for Portfolio Diversification",
-  description: "Critical dependence stress for diversification gains under fixed marginals, with variational limits, marginal-restoration premiums, and projected flow duality.",
+  description: "How much dependence stress erases a diversification gain under fixed marginals: a variational limit, a quadratic critical budget, the marginal-restoration premium and projected flow duality.",
   sourceUrl, repositoryUrl, sourceEditedAt: manifest.commitDate, sourceCommit: commit, sourceBlob: paperBlob,
   markdown: normalized,
 };
