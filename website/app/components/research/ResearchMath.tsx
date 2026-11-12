@@ -9,7 +9,7 @@ export function ResearchMath({ tex, display = false }: { tex: string; display?: 
     return (
       <span className={`${styles.formula} ${styles.display}${formula.number ? ` ${styles.numbered}` : ""}`} data-research-formula="display">
         <span className={styles.expression} dangerouslySetInnerHTML={{ __html: formula.svg }} />
-        {formula.number && <span className={styles.equationNumber} data-equation-number aria-hidden="true">({formula.number})</span>}
+        {formula.number && <span className={styles.equationNumber} data-equation-number aria-hidden="true">{`(${formula.number})`}</span>}
         {assistive}
       </span>
     );

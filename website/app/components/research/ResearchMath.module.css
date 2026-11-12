@@ -50,9 +50,9 @@
 }
 
 /* A numbered display centers its expression in the column and sets its number
-   flush right, in the prose face of the references that cite it. In a narrow
-   column the expression moves to the left edge, and the two scroll together
-   once they no longer fit. */
+   flush right, in the prose face of the references that cite it, a full em
+   clear of the expression. In a narrow column the expression moves to the left
+   edge, and the two scroll together once they no longer fit. */
 .numbered {
   display: flex;
   align-items: baseline;
@@ -72,7 +72,7 @@
 .equationNumber {
   flex: 1 0 0;
   min-width: max-content;
-  padding-inline-start: 0.125em;
+  padding-inline-start: 1em;
   font-family: var(--font-prose);
   font-size: var(--type-reading);
   font-variant-numeric: lining-nums proportional-nums;
