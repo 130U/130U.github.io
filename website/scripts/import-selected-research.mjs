@@ -6,15 +6,15 @@ const sourceDirectory = new URL("../content/sources/selected-research/", import.
 const sources = [
   {
     key: "asian", slug: "certified-valuation-arithmetic-asian-options", file: "manuscript/report.md",
-    sourceCommit: "38dbac78cf00043239b90bcecada564d399abb31", sourceBlob: "b14303e50dcdfc293fa91586afb061de1b4bfb5b",
-    sourceEditedAt: "2026-11-11T08:19:01-05:00", mainSections: 10,
+    sourceCommit: "8d3b2f32c79731e150ee46bafc44fca590aa516a", sourceBlob: "39176e13c1a5fcbf8b054e8c6145201fc721b3a0",
+    sourceEditedAt: "2026-11-12T05:26:59-05:00", mainSections: 10,
     appendixAnchor: "appendix-a-finite-certification-of-the-weighted-second-moment",
     description: "Certified pricing-error bounds for arithmetic Asian options under projected Euler, with common Gaussian smoothing, weak expansions, and posterior quantile transfer.",
   },
   {
     key: "rough", slug: "certified-rough-heston-valuation", file: "manuscript/merged-heston-en.md",
-    sourceCommit: "89e322a2a3ef5d8a8db78b5ddac9f3a6698d9f03", sourceBlob: "96fc56455e57ef342e171a4345a6b91dfb2044c2",
-    sourceEditedAt: "2026-11-09T20:14:59-05:00", mainSections: 8,
+    sourceCommit: "861c81c27b3516fa3eae29fd446ebbc10aca1d85", sourceBlob: "fe04fcbcd3da4c35dd202b835324218d202b35ef",
+    sourceEditedAt: "2026-11-12T05:27:04-05:00", mainSections: 8,
     appendixAnchor: "appendix-a-probability-model-and-strip-transform",
     description: "Deterministic joint pricing-error certificates for stored rough Heston outputs, finite-history propagation, portfolios, and finite-candidate decisions.",
   },
@@ -57,5 +57,5 @@ for (const config of sources) {
     transformations: ["The title is rendered once by the page header.", "Relative file links resolve to the frozen GitHub commit.", "A paragraph links omitted appendices and supporting material to GitHub.", "Main text, all main-text tables, mathematical TeX and references are otherwise retained verbatim."],
   });
 }
-await writeFile(new URL("provenance.json", sourceDirectory), JSON.stringify({ fetchedAt: "2026-11-11", fetchedWith: "Authenticated Git checkout at the exact commit; bytes read with git show and checked against Git blob SHA-1", sources: receipts }, null, 2) + "\n");
+await writeFile(new URL("provenance.json", sourceDirectory), JSON.stringify({ fetchedAt: "2026-11-12", fetchedWith: "Authenticated Git checkout at the exact commit; bytes read with git show and checked against Git blob SHA-1", sources: receipts }, null, 2) + "\n");
 console.log(`Imported ${receipts.length} complete main texts; provenance: ${fileURLToPath(new URL("provenance.json", sourceDirectory))}`);

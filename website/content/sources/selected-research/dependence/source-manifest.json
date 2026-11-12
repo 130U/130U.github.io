@@ -1,7 +1,7 @@
 {
   "repository": "130U/Critical-Dependence-Stress",
-  "commit": "16710d22a50b712629ab03176cf5c6ab7ba3940d",
-  "commitDate": "2026-11-10T08:21:28-05:00",
+  "commit": "77dfa1601709c5408d6eeee94d4858daab869079",
+  "commitDate": "2026-11-12T05:26:54-05:00",
   "fetchedWith": "Authenticated Git checkout at the exact commit; git show bytes checked against Git blob SHA-1",
   "files": [
     {
@@ -26,8 +26,8 @@
     },
     {
       "path": "paper/source/main-classification-flow.tex",
-      "sha": "5fda8f5f4dad9e3b830c1b173cc9869c331b759e",
-      "size": 19905
+      "sha": "6298f9fbeb2c561a2045ef6a8e207647f81a0921",
+      "size": 19892
     },
     {
       "path": "paper/source/main-crossing-proof.tex",
@@ -36,38 +36,38 @@
     },
     {
       "path": "paper/source/main-crossing.tex",
-      "sha": "d2fab123bf585ebd7d6fb342be26c0fa4f80c995",
-      "size": 8575
+      "sha": "8bcfa49229edb4320a2fbc077d74906267a42d07",
+      "size": 8585
     },
     {
       "path": "paper/source/main-introduction.tex",
-      "sha": "24ed3bdc5206a73c4d4b18845ecc8ac9dc8eb2a8",
-      "size": 11929
+      "sha": "0b661c8663a41f04ac473e6525bf4a5e74bfe74f",
+      "size": 12031
     },
     {
       "path": "paper/source/main-model-benchmark.tex",
-      "sha": "3875f876ef314419bd26acdb2901f7fee78b3fe2",
-      "size": 23162
+      "sha": "d01f26b9fc7f72d36aaaf92b3642046643c64e2e",
+      "size": 23212
     },
     {
       "path": "paper/source/main-quantitative.tex",
-      "sha": "977e2d04cee2c411a4e695f095abca70c8d42daf",
-      "size": 13098
+      "sha": "169003cf20576b49ff370332fe15e428844e4687",
+      "size": 13038
     },
     {
       "path": "paper/source/main-scope.tex",
-      "sha": "c0a61a09427979aa752b14e2f852000d325281bd",
-      "size": 4043
+      "sha": "2b87f6db400a97cd97ec3ac0e51a4d76e3de66fd",
+      "size": 4014
     },
     {
       "path": "paper/source/main-variational-proof.tex",
-      "sha": "ba3c91ec9c92fdfd2c6ad71f232bb81887d34de5",
-      "size": 3667
+      "sha": "c588e8c6021270004c6a84046c35c4a66bfd9ae1",
+      "size": 3676
     },
     {
       "path": "paper/source/main-variational.tex",
-      "sha": "dd95fd911c5caf43794595d56688407ef711fd6b",
-      "size": 9264
+      "sha": "d828d74fb7dac3b40780bb300927765307b23faa",
+      "size": 9246
     },
     {
       "path": "paper/source/paper.tex",

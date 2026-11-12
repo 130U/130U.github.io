@@ -12,8 +12,8 @@ const articleFigures: Readonly<Record<string, readonly FigurePlacement[]>> = {
   "critical-dependence-stress-for-portfolio-diversification": [
     {
       figure: "dependence-budget",
-      after: { paragraph: "A risk desk may have agreed marginal models" },
-      evidence: ["at least $`30\\%`$ above the initial-slope prediction", "extrapolates its slope to $`J=5/32`$", "the critical budget lies in $`[13/64,29/96]`$", "$`\\gamma=(1,1,2)`$"],
+      after: { paragraph: "How much of a portfolio's diversification benefit survives" },
+      evidence: ["already $`30\\%`$ above the local-efficiency prediction $`5/32`$", "extrapolates its slope to $`J=5/32`$", "the critical budget lies in $`[13/64,29/96]`$", "$`\\gamma=(1,1,2)`$"],
     },
   ],
   "certified-valuation-arithmetic-asian-options": [
@@ -50,7 +50,7 @@ const articleFigures: Readonly<Record<string, readonly FigurePlacement[]>> = {
     },
     {
       figure: "heston-candidates",
-      after: { paragraph: "The first layer retained its unresolved close pairs" },
+      after: { paragraph: "The unresolved close pairs in the first layer" },
       evidence: [
         "0.520 | [4.825094, 6.778350] | [5.293449, 6.024095]",
         "0.525 | [5.645378, 7.501414] | [6.097920, 6.798485]",
@@ -59,7 +59,7 @@ const articleFigures: Readonly<Record<string, readonly FigurePlacement[]>> = {
         "0.550 | [14.000658, 15.482012] | [14.387007, 14.960680]",
         "N_t=1024 | 7/10 | 3/10",
         "N_t=2048 | 10/10 | 7/10",
-        "we certify alpha=0.520 as the strict minimizer of the midpoint objective among the five fixed points",
+        "The final finite grid has alpha=0.520 as a strict minimum.",
       ],
     },
     {
@@ -71,7 +71,7 @@ const articleFigures: Readonly<Record<string, readonly FigurePlacement[]>> = {
         "Strip remainder | 0.000026654230 | 0.000026654230",
         "True infinite-tail remainder | 0.038055248032 | 0.038055248032",
         "Complete upper bound | 0.233318843 | 0.252393939",
-        "The difference of 0.019075095 points is entirely the node-support aggregation difference.",
+        "The difference 0.019075095 points is entirely the node-support aggregation difference.",
         "1025 node radii",
       ],
     },

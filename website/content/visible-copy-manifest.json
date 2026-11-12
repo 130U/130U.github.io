@@ -54,15 +54,14 @@
       }
     },
     "/critical-dependence-stress-for-portfolio-diversification/": {
-      "textSha256": "89e6eb036d62e1e602df85eea8759c6ab33e04bf5d572dfa7cb3c6a93cdd43eb",
-      "characterCount": 78293,
-      "wordCount": 11845,
-      "preview": "Skip to Main Content Theodore Ouyang Back to Selected Research Critical Dependence Stress for Portfolio Diversification GitHub Full Manuscript Abstract We ask h",
+      "textSha256": "ad12d41c196f26683e32f2e253b1f552982d8b231596b7a4ad92b839b76f435d",
+      "characterCount": 76768,
+      "wordCount": 11604,
+      "preview": "Skip to Main Content Theodore Ouyang Back to Selected Research Critical Dependence Stress for Portfolio Diversification GitHub Full Manuscript Abstract How much",
       "altTexts": [],
       "ariaLabels": [
         "Theodore Ouyang home",
         "Parent navigation",
-        "Scrollable mathematical expression",
         "Article contents",
         "Rescaled stress budget. Initial-slope extrapolation reaches zero at 5/32; the proved critical budget lies between 13/64 and 29/96, at least 30% beyond it.",
         "Scrollable mathematical expression",
@@ -424,13 +423,13 @@
         "twitterTitle": "Critical Dependence Stress for Portfolio Diversification",
         "twitterDescription": "How much dependence stress erases a diversification gain under fixed marginals: a variational limit, a quadratic critical budget, the marginal-restoration premium and projected flow duality."
       },
-      "mathSourceSha256": "18c82f848024b238b7a5788248ee326315e22a80b0b8bc4ec3961da8f956aba5",
-      "formulaCount": 1030
+      "mathSourceSha256": "a5cf2f0e4d37e139c23197624109ef705a854bfd6943b9ca6954469db743f254",
+      "formulaCount": 1023
     },
     "/certified-valuation-arithmetic-asian-options/": {
-      "textSha256": "fd14fc679b7fad3baa72b5ebc69ce7c43d70283925759bd18a5f360c777ccb76",
-      "characterCount": 53210,
-      "wordCount": 7685,
+      "textSha256": "d667acb3d2a62c0f78f63eee46c4a69e39ea621aaeb77caba0a9e56481948208",
+      "characterCount": 52733,
+      "wordCount": 7629,
       "preview": "Skip to Main Content Theodore Ouyang Back to Selected Research Certified Valuation of Arithmetic Asian Options GitHub Full Manuscript Abstract How much numerica",
       "altTexts": [],
       "ariaLabels": [
@@ -628,13 +627,13 @@
         "twitterTitle": "Certified Valuation of Arithmetic Asian Options",
         "twitterDescription": "Certified bounds on the pricing error of arithmetic Asian options under projected Euler, built on common Gaussian smoothing, with weak expansions and a transfer result for posterior quantiles."
       },
-      "mathSourceSha256": "01e57baef53ba538013c3d11f6f38d6450fd2eb0341b877ba4063c534be6ca58",
+      "mathSourceSha256": "8c902b12823ab3fe2547a24050ea36764d3b7756a6b6fe82082505672939b1e7",
       "formulaCount": 365
     },
     "/certified-rough-heston-valuation/": {
-      "textSha256": "c4edc3baa3aa26f32cbaf97b511462fe13d1e7ef48ce56a3fd43a8e56f0a28d6",
-      "characterCount": 67700,
-      "wordCount": 9814,
+      "textSha256": "a7e6ac72cc68e7279844040d9196d167489a40a1d2bafb75fbe126c1abe40c7c",
+      "characterCount": 66839,
+      "wordCount": 9668,
       "preview": "Skip to Main Content Theodore Ouyang Back to Selected Research Certified Joint Pricing Errors in Rough Heston GitHub Full Manuscript Abstract How much numerical",
       "altTexts": [],
       "ariaLabels": [

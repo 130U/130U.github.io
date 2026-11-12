@@ -4,7 +4,7 @@ description: A method for certifying portfolio valuation errors in rough Heston,
 
 ## Abstract
 
-How much numerical uncertainty remains in a portfolio of options when every strike is priced from the same approximate transform? In the rough Heston model, separate price intervals lose the common complex error at each Fourier frequency. We construct a joint error set by first deriving a residual bound for the fractional Riccati equation and then applying the portfolio pricing functional to the shared transform errors. The propagation kernel is determined by the forward variance curve and the positive fractional resolvent; it retains the full history and the initial curve term. The resulting support formula gives a precise equality condition for the loss incurred by separate price bounds. It also encloses an already computed pricing output, including its displacement from a certified reference, quadrature, the infinite tail and arithmetic. On twelve half-year strikes, the joint bounds bring all 28 fixed spread, butterfly and basket directions within a half-point error budget, against 13 for separate bounds. A matched quarter-year call spread, in a refinement specified after the first bound exceeded a quarter-point budget, shows the same distinction at a single decision: the complete joint upper bound is 0.233318843 index points, compared with 0.252393939 from signed marginal aggregation. Further experiments separate the effects of history weighting, reference refinement and output replacement. The method certifies numerical error relative to the specified model, which is a separate question from market mispricing.
+How much numerical uncertainty remains in a portfolio of options when every strike is priced from the same approximate transform? In the rough Heston model, separate price intervals lose the common complex error at each Fourier frequency. We construct a joint error set by first deriving a residual bound for the fractional Riccati equation and then applying the portfolio pricing functional to the shared transform errors. The propagation kernel is determined by the forward variance curve and the positive fractional resolvent; it retains the full history and the initial curve term. The resulting support formula gives a precise equality condition for the loss incurred by separate price bounds. It also encloses an already computed pricing output, including its displacement from a certified reference, quadrature, the infinite tail and arithmetic. A matched quarter-year call spread illustrates the distinction: the complete joint upper bound is 0.233318843 index points, compared with 0.252393939 from signed marginal aggregation, against a 0.25-point budget. Further experiments separate the effects of history weighting, reference refinement and output replacement. The method certifies numerical error relative to the specified model, which is a separate question from market mispricing.
 
 **Keywords:** rough Heston; fractional Riccati equation; a posteriori error; portfolio valuation; shared Fourier errors.
 
@@ -12,7 +12,7 @@ How much numerical uncertainty remains in a portfolio of options when every stri
 
 A portfolio is often valued by adding prices that were computed separately. Its numerical uncertainty need not add in the same way. Options with a common maturity and model parameter use the same characteristic function, so an error in that function enters every strike through a known Fourier coefficient. For a call spread, these coefficients can nearly cancel. A sum of separate absolute error bounds discards this information before the portfolio is formed.
 
-We study the following question. Given a stored vector of rough Heston option prices, can its error in a specified portfolio direction be certified below a monetary tolerance? The output is held fixed. The task is to bound its difference from the exact model value, rather than to infer accuracy from agreement with another numerical solver. This distinction matters when a valuation must be checked as delivered, or when several portfolio directions must be assessed from one common pricing calculation.
+Our question is the following. Given a stored vector of rough Heston option prices, can its error in a specified portfolio direction be certified below a monetary tolerance? The output is held fixed, and the task is to bound its difference from the exact model value; agreement with another numerical solver is not taken as evidence of accuracy. This matters when a valuation has to be checked as delivered, or when several portfolio directions have to be assessed from one common pricing calculation.
 
 Let \(c^*\) be the vector of exact, normalized model prices, \(c^{\rm fast}\) the stored output, and \(\bar c\) a finite reference sum. For a real portfolio vector \(w\), forward \(F_T\), discount factor \(D\), and tolerance \(\tau\), the question is whether
 
@@ -28,7 +28,7 @@ c^*-c^{\rm fast}=d+\operatorname{Re}(A\delta)+r,
 \tag{1.1}
 \]
 
-Here \(A\) contains the known pricing coefficients and \(\delta_n\) is the single transform error at frequency \(u_n\), common to all strikes. The remainder \(r\) contains the discrepancies outside this finite transform representation. Thus two questions arise in a definite order: how can the transform errors be bounded, and what is the correct way to combine those bounds for the portfolio?
+Here \(A\) contains the known pricing coefficients and \(\delta_n\) is the single transform error at frequency \(u_n\), common to all strikes. The remainder \(r\) contains the discrepancies outside this finite transform representation. Two questions follow, in this order: how can the transform errors be bounded, and how should those bounds be combined for the portfolio?
 
 ### 1.1. From the Riccati equation to the portfolio error
 
@@ -36,15 +36,15 @@ The transform is determined by a nonlinear fractional Riccati equation. We first
 
 The exponent error has a second useful identity. Integration by parts transfers the fractional derivative from the state error to the forward variance curve. Combining this identity with the positive scalar resolvent produces a history weight for the residual. The weight is fixed by the equation and the payoff transform; it is not chosen to reproduce a numerical price. Theorem 3.1 gives the resulting bound, with nonexpansion as a limiting case and a sharper bound when there is positive dissipation.
 
-Once a complex disk encloses each transform error, (1.1) determines a convex set of possible price errors. Evaluating its support in direction \(w\) combines the Fourier coefficients before taking their moduli. Theorem 5.1 gives the exact support of this outer set. The equality case of the complex triangle inequality then identifies precisely when separate price bounds lose nothing and when retaining the common errors gives a strictly smaller width. The condition is structural and is established before any numerical example is considered.
+Once a complex disk encloses each transform error, (1.1) determines a convex set of possible price errors. Evaluating its support in direction \(w\) combines the Fourier coefficients before taking their moduli. Theorem 5.1 gives the exact support of this outer set. The equality case of the complex triangle inequality then identifies precisely when separate price bounds lose nothing and when retaining the common errors gives a strictly smaller width. The condition is structural and does not depend on any numerical example.
 
-This leads to a complete certificate for the stored output. The centre displacement \(d\), finite omitted frequencies, strip quadrature, the true infinite tail and arithmetic all remain in the bound. A smaller transform radius alone need not improve the error of the stored output if the reference centre also changes. Keeping these terms explicit is therefore part of the mathematical construction, rather than an implementation detail.
+This leads to a complete certificate for the stored output. The centre displacement \(d\), finite omitted frequencies, strip quadrature, the true infinite tail and arithmetic all remain in the bound. A smaller transform radius alone need not improve the error of the stored output if the reference centre also changes. Keeping these terms explicit is therefore part of the mathematical construction and not an implementation detail.
 
 ### 1.2. The role of approximation
 
-The error theorem is stated for a general reference trajectory satisfying its hypotheses. For computation we use a fractional integral of a piecewise affine function after removing the first startup powers forced by the Riccati equation. This choice has two purposes: it represents the singular behaviour at time zero explicitly, and it permits continuous residual bounds by exact fractional integration. Section 4 derives the startup coefficients before introducing their stored numerical counterparts. The certificate concerns the full residual on closed time cells; a small residual at sampled nodes is insufficient.
+The error theorem is stated for a general reference trajectory satisfying its hypotheses. For computation we use a fractional integral of a piecewise affine function after removing the first startup powers forced by the Riccati equation. The choice does two things: it represents the singular behaviour at time zero explicitly, and it allows continuous residual bounds by exact fractional integration. Section 4 derives the startup coefficients before introducing their stored numerical counterparts. The certificate concerns the full residual on closed time cells; a small residual at sampled nodes is not enough.
 
-The output checked in the principal example uses the established third-order rational approximation of Gatheral and Radoicic. Its endpoint matching gives a compact production formula, and Section 6 proves structural properties on a specified parameter domain. Those properties do not by themselves establish pricing accuracy. The independent reference supplies the error enclosure, which is then translated to the production output by (1.1). The two constructions consequently have distinct mathematical roles.
+The output checked in the principal example uses the established third-order rational approximation of Gatheral and Radoicic. Its endpoint matching gives a compact production formula, and Section 6 proves structural properties on a specified parameter domain. Those properties do not by themselves establish pricing accuracy. The error enclosure comes from the independent reference and is carried over to the production output by (1.1), so the two constructions play different mathematical roles.
 
 The quarter-year spread in Section 7 uses the same stored output, reference centre, node radii and remaining error terms in the joint and marginal calculations. Only the aggregation changes. The complete bounds fall on opposite sides of a quarter-point budget. Other examples expose the limits of the improvement: reference generation has a cost, returning the reference is an alternative when output replacement is permitted, and a numerical-error certificate does not establish agreement with market quotes. The finite-candidate experiment keeps the forward variance curve fixed and reports quote compatibility separately from objective ranking.
 
@@ -54,7 +54,7 @@ Gatheral and Radoicic [GR2019, GR2023] derive rational approximations by matchin
 
 Abi Jaber and El Euch [AbiJaberElEuch2018] provide the Volterra model and affine transform used in Section 2. The analytical ingredients for error propagation are also established: Caputo convexity [LiLiu2018], positive fractional residual comparison [Kopteva2021], Mittag-Leffler positivity [SimonCM2015], and strip trapezoidal analysis [TrefethenWeideman2014]. We apply these results to the model's exponent functional, retain its initial curve term and physical scaling, and propagate the resulting common transform errors to portfolio directions. Appendix C gives the regularity and endpoint arguments required for this composition.
 
-Bayer and Breneis [BBWeak2023, BBSimulation2023] study Markovian kernel approximations and simulation methods. Boyarchenko, de Innocentis and Levendorskii [BL2025] study reliable rough Heston pricing and calibration; their modified Adams method is one of our numerical controls. Ben Hammouda et al. [BenHammouda2026] allocate time-discretization and Fourier-quadrature errors in single- and multilevel methods. Hager and Kreher [HK2026] study expansions in the Hurst parameter. Our question concerns a posteriori enclosure of a specified output, including its complete remainder. This scope differs from a complexity bound, an observed convergence rate, or a comparison between nominal solvers.
+Bayer and Breneis [BBWeak2023, BBSimulation2023] study Markovian kernel approximations and simulation methods. Boyarchenko, de Innocentis and Levendorskii [BL2025] study reliable rough Heston pricing and calibration; their modified Adams method is one of our numerical controls. Ben Hammouda et al. [BenHammouda2026] allocate time-discretization and Fourier-quadrature errors in single- and multilevel methods. Hager and Kreher [HK2026] study expansions in the Hurst parameter. Our question is the a posteriori enclosure of a specified output, complete remainder included. That is a different matter from a complexity bound, an observed convergence rate, or a comparison between nominal solvers.
 
 Section 2 defines the exact problem. Sections 3 and 4 pass from the continuous residual to certified transform values. Section 5 derives the portfolio error set and its financial consequences. Section 6 records the rational output used in the experiments, and Section 7 presents the matched comparisons. Appendices A–E contain the model justification, detailed proofs and reproducibility record.
 
@@ -136,11 +136,12 @@ For \(s_0=0\), the last time-dependent bound remains valid.
 
 **Proof.** Local Volterra contraction gives existence and uniqueness. On the boundary of the left half-plane, completing the square in \(\operatorname{Re}F\) gives a strictly negative term. The fractional maximum principle therefore prevents exit. Convexity of a regularized modulus and comparison with the scalar linear equation give (2.9), which excludes finite-time blow-up. The continuation retains the preceding history. Appendix C.1 proves these steps and the absolute-continuity assertion. \(\square\)
 
-This proposition identifies the solution independently of any numerical construction. We use its integral representation and invariant half-plane; no closed-form solution of the general nonlinear fractional equation is assumed. The distinction between existence of the exact solution and construction of an approximation is maintained throughout.
+The proposition identifies the solution independently of any numerical construction. We use its integral representation and its invariant half-plane, and we assume no closed-form solution of the general nonlinear fractional equation. Throughout, existence of the exact solution is kept apart from the construction of an approximation.
 
 ### 2.2. The financial quantity
 
 The state is an intermediate object. The quantity to be bounded is the error after applying the exponent functional (2.6), the Fourier price (2.7), and finally the portfolio vector. A uniform state estimate can discard the time weights in that sequence. The next section keeps those weights by deriving an exact identity for the exponent error before taking absolute values.
+
 
 ## 3. Finite-history propagation: nonexpansion and dissipation
 
@@ -152,7 +153,7 @@ D_C^\alpha e=\nu\left[d+\frac{Z+\widehat Z}{2}\right]e-r,
 \tag{3.1}
 \]
 
-This identity uses the quadratic structure of the Riccati equation. The unknown exact state remains in the coefficient, but Proposition 2.1 controls the real part that matters for stability. If \(\operatorname{Re}\widehat Z\le\epsilon_R\), the coefficient has real part at most \(-\nu(s_0-\epsilon_R/2)\). Thus a bound on the reference half-plane is sufficient; a fitted approximation to the exact coefficient is unnecessary.
+This identity uses the quadratic structure of the Riccati equation. The unknown exact state remains in the coefficient, but Proposition 2.1 controls the real part that matters for stability. If \(\operatorname{Re}\widehat Z\le\epsilon_R\), the coefficient has real part at most \(-\nu(s_0-\epsilon_R/2)\). A bound on the reference half-plane is therefore enough, and no fitted approximation to the exact coefficient is needed.
 
 The second identity concerns the pricing functional. For \(\beta>0\), write \(g_\beta(t)=t^{\beta-1}/\Gamma(\beta)\), with all convolutions starting at zero. Define the reference exponent using its fractional derivative, and write \(q_\alpha=(I^{1-\alpha}\xi)'\). Under the regularity assumptions of Theorem 3.1, Fubini's theorem and integration by parts give
 
@@ -162,7 +163,7 @@ L_T-\widehat L_T=\nu^{-1}(q_\alpha*e)(T),
 \tag{3.2}
 \]
 
-The initial curve value survives the integration by parts. It cannot be removed by differentiating the curve only at positive times. These identities determine the subsequent construction: compare (3.1) with a positive scalar fractional equation, then apply the nonnegative weight in (3.2). Caputo convexity and positive-resolvent comparison are established tools [LiLiu2018; Kopteva2021; SimonCM2015]; Appendix C supplies the regularity and endpoint details needed here.
+The initial curve value survives the integration by parts and cannot be removed by differentiating the curve only at positive times. The two identities fix the rest of the construction: compare (3.1) with a positive scalar fractional equation, then apply the nonnegative weight in (3.2). Caputo convexity and positive-resolvent comparison are established tools [LiLiu2018; Kopteva2021; SimonCM2015]; Appendix C supplies the regularity and endpoint details needed here.
 
 
 Define \(k_\lambda(t)=t^{\alpha-1}E_{\alpha,\alpha}(-\lambda t^\alpha)\), with \(k_0=g_\alpha\). All convolutions below start at time zero.
@@ -205,6 +206,7 @@ In particular, \(R/\nu\le\delta_F\) implies
 **Proof route.** Set \(e=Z-\widehat Z\); the physical equation's divided-difference coefficient has real part at most \(-\nu\sigma\). The AC convexity lemma applied to a smooth modulus and the positive zero-initial inverse gives the state bound, including its continuous endpoint. Absolute Fubini and AC integration by parts then express the exponent difference as \(\nu^{-1}(q_\alpha*e)(T)\), retaining the zero state initial values and the curve term \(V_0g_{1-\alpha}\). Positivity of \(q_\alpha\) propagates that state bound, and \(0\le q_\alpha*k_\lambda\le\xi\) gives the curve envelope. The argument keeps the entire fractional history and removes \(\nu^{-1}\) only upon normalizing the physical residual by \(\nu\); Appendix C.1–C.2 gives the full proof.
 
 At \(\sigma=0\), set \(k_0=g_\alpha\); the two exponent envelopes coincide. Positive dissipation permits further reduction. The initial term \(V_0g_{1-\alpha}\) and the factor \(\nu^{-1}\) remain in both bounds. Stochastic admissibility of the experimental curve is verified separately in Appendix A.
+
 
 For a full-history residual envelope \(R\le R_j\) on each closed cell \([a_j,b_j]\), the computable cell-weight form is
 
@@ -260,7 +262,7 @@ A cell \([a_j,b_j]\) has weight \(W_\lambda(T-a_j)-W_\lambda(T-b_j)\); Appendix 
 
 ### 4.1. A reference dictated by the startup expansion
 
-The preceding theorem separates the choice of reference from the validity of its certificate. A useful computational reference should make the fractional derivative and its residual accessible on a whole time interval. It should also retain the startup singularity of the exact solution.
+The preceding theorem separates the choice of reference from the validity of its certificate. A useful computational reference should make the fractional derivative and its residual accessible on a whole time interval, and it should keep the startup singularity of the exact solution.
 
 Write \(G=\nu F(Z)\), so that \(Z=I^\alpha G\). For fixed model parameters and Fourier frequency, successive substitution into the Volterra equation gives, as \(t\downarrow0\),
 
@@ -284,7 +286,7 @@ A_2&=\nu\left(dB_2+\frac{B_1^2}{2}\right).
 
 Indeed \(Z=O(t^\alpha)\) locally by Proposition 2.1. Substitution first gives \(G=G_0+O(t^\alpha)\), then \(Z=B_1t^\alpha+O(t^{2\alpha})\), and successive substitution gives the displayed coefficients. The identity \(I^\alpha t^\beta=\Gamma(1+\beta)t^{\alpha+\beta}/\Gamma(1+\alpha+\beta)\) controls each remainder. This is a local finite-order expansion at a fixed frequency; it is neither a uniform all-frequency statement nor a global error estimate for a truncated series.
 
-We therefore represent \(\bar G\) by these startup powers and a continuous piecewise affine remainder, and set \(\widehat Z=I^\alpha\bar G\). The powers come from the equation; the piecewise affine part permits explicit integration against the fractional kernel. It represents the remaining trajectory rather than an additional fitted price correction. Its nodal values may be generated by a numerical solver, but their accuracy is not an assumption of Theorem 3.1.
+We therefore represent \(\bar G\) by these startup powers and a continuous piecewise affine remainder, and set \(\widehat Z=I^\alpha\bar G\). The powers come from the equation, and the piecewise affine part allows explicit integration against the fractional kernel. That part represents the rest of the trajectory and is not a fitted price correction. Its nodal values may come from a numerical solver, but Theorem 3.1 does not assume that they are accurate.
 
 In the implementation, all saved nodes and coefficients, including the startup coefficients, are interpreted as exact dyadic numbers. They need not equal their ideal analytical counterparts. The full residual
 
@@ -292,7 +294,7 @@ In the implementation, all saved nodes and coefficients, including the startup c
 r_t=\bar G-\nu F(I^\alpha\bar G)
 \]
 
-includes these coefficient discrepancies. Appendix D.1 bounds it on the startup interval and every subsequent closed cell, and verifies the reference half-plane. The certificate belongs to this continuous trajectory, rather than merely to the nominal solver's nodal states. Four-subcell and two-subcell banks are distinguished in Section 7.
+includes these coefficient discrepancies. Appendix D.1 bounds it on the startup interval and every subsequent closed cell, and verifies the reference half-plane. The certificate belongs to this continuous trajectory and not merely to the nominal solver's nodal states. Four-subcell and two-subcell banks are distinguished in Section 7.
 
 ### 4.2. Completing the transform and price bound
 
@@ -310,6 +312,8 @@ The derivative-based reference exponent is \(\widehat L_T=\nu^{-1}\int_0^T\xi(T-
 {(1/2-a_*)(e^{2\pi a_*/h_*}-1)}.
 \tag{4.4}
 \]
+
+
 
 Appendix D.2 contains the strip proof and the exact-solution high-frequency comparison. A finite omitted reference value is charged explicitly, independently of the true infinite tail.
 
@@ -337,7 +341,7 @@ In these equations \(N_u\) is the Fourier sum cutoff, whereas \(N_t\) denotes ti
 
 ### 5.1. The joint error set and the loss from separate bounds
 
-The transform disks now have a mathematical justification. The remaining question is how to use them for several contracts. Fix one model parameter, maturity, contour, and reference grid. Let \(c^*\in\mathbb R^p\) be the continuous-model price vector, \(\bar c\) the exact finite reference sum, and \(c^{\rm fast}\) the frozen rational output. For each included frequency let \(\bar\phi_n\) be the reference transform and put \(z_n=\phi(u_n-i/2)-\bar\phi_n\). Appendix D.1 supplies bounds \(|z_n|\le\epsilon_n\); at a deliberately omitted finite node \(\bar\phi_n=0\), the true-transform envelope supplies the radius. The same \(z_n\) enters every strike at this parameter and maturity.
+The transform disks are now justified mathematically. What remains is how to use them for several contracts. Fix one model parameter, maturity, contour, and reference grid. Let \(c^*\in\mathbb R^p\) be the continuous-model price vector, \(\bar c\) the exact finite reference sum, and \(c^{\rm fast}\) the frozen rational output. For each included frequency let \(\bar\phi_n\) be the reference transform and put \(z_n=\phi(u_n-i/2)-\bar\phi_n\). Appendix D.1 supplies bounds \(|z_n|\le\epsilon_n\); at a deliberately omitted finite node \(\bar\phi_n=0\), the true-transform envelope supplies the radius. The same \(z_n\) enters every strike at this parameter and maturity.
 
 For the Lewis rule in Section 4, set \(m_i=K_i/F\), \(k_i=\log m_i\), and
 \[
@@ -422,9 +426,9 @@ Cancellation survives because we combine the coefficients before taking their mo
 \le |b_i-b_j|+\min(b_i,b_j)\min\{2,|u|\,|k_i-k_j|\}.
 \tag{5.10}
 \]
-To prove it, separate the difference in amplitudes from the phase difference using the smaller amplitude, then apply \(|e^{ix}-e^{iy}|\le\min(2,|x-y|)\). At zero, the spread coefficient is \(2h|b_i-b_j|/\pi\), so low-frequency error cancels for nearby strikes even when the individual node radii are large. High-frequency and tail contributions are still retained.
+To prove it, separate the difference in amplitudes from the phase difference using the smaller amplitude, then apply \(|e^{ix}-e^{iy}|\le\min(2,|x-y|)\). At zero, the spread coefficient is \(2h|b_i-b_j|/\pi\), so low-frequency error cancels for nearby strikes even when the individual node radii are large. High-frequency and tail contributions stay in the bound.
 
-A simple limiting case explains the mechanism without a numerical fit. Fix the model, maturity, node radius and frequency, and let two positive normalized strikes coalesce. With \(\Delta k=\log(m_j/m_i)\), the pricing coefficients satisfy
+A simple limiting case shows the mechanism without any numerical fit. Fix the model, maturity, node radius and frequency, and let two positive normalized strikes coalesce. With \(\Delta k=\log(m_j/m_i)\), the pricing coefficients satisfy
 
 \[
 a_{jn}=a_{in}e^{(1/2-iu_n)\Delta k},\qquad
@@ -432,7 +436,7 @@ a_{jn}=a_{in}e^{(1/2-iu_n)\Delta k},\qquad
 \tag{5.11}
 \]
 
-The identity also holds at the half-weighted zero node. Thus the shared spread contribution \(\epsilon_n|a_{in}-a_{jn}|\) tends to zero, whereas the separate contribution \(\epsilon_n(|a_{in}|+|a_{jn}|)\) tends to \(2\epsilon_n|a_{in}|\). For a positive radius this latter limit is strictly positive. At coincident strikes the two payoff functions agree, so the cancellation is already present in the contract. The joint representation preserves it. This statement concerns each fixed finite node; the complete output bound still includes its centre displacement and remainder.
+The identity also holds at the half-weighted zero node. Thus the shared spread contribution \(\epsilon_n|a_{in}-a_{jn}|\) tends to zero, whereas the separate contribution \(\epsilon_n(|a_{in}|+|a_{jn}|)\) tends to \(2\epsilon_n|a_{in}|\). For a positive radius this latter limit is strictly positive. At coincident strikes the two payoff functions agree, so the cancellation is already in the contract, and the joint representation preserves it. The statement is about each fixed finite node; the complete output bound still includes its centre displacement and remainder.
 
 The implementation below uses rational outward bounds for logarithms, trigonometric functions, square roots and the circle constant, and it encloses the exact coefficient difference before multiplying by the saved radius. The signed centre comes from reference-sum and frozen-output intervals. Interval midpoints taken for display never stand in for the outward endpoint arithmetic used in a decision.
 
@@ -506,13 +510,14 @@ then every exact near-optimal candidate in the finite set satisfies \(\alpha_j<.
 
 Quote consistency is checked separately. If any row satisfies \(p^+_{ij}<b_i^-\) or \(p^-_{ij}>a_i^+\), the candidate cannot lie in all quote bands simultaneously. Conversely, if every row satisfies \(p^-_{ij}\ge b_i^+\) and \(p^+_{ij}\le a_i^-\), then quote consistency is certified. Overlapping intervals without this inner-band condition retain possible consistency; overlap alone does not certify it.
 
-Appendix D.4 contains the interval-square and finite-selection proof. Theorem 5.3 certifies objective intervals and selection statements on the finite set from each candidate's own enclosures; a continuous parameter optimum, market identification and dependence across candidate errors lie outside it.
+Appendix D.4 contains the interval-square and finite-selection proof. A continuous parameter optimum, market identification and dependence across candidate errors lie outside this statement.
 
 ## 6. A rational output with a separate structural guarantee
 
 The certificate above can be applied to any stored price output once its displacement from the reference is enclosed. To make the distinction concrete, we use the Gatheral–Radoicic third-order rational construction. Matching both endpoints reflects two analytical constraints: the fractional startup expansion and the large-time Riccati behaviour. The approximation is thus selected by known features of the equation, while its pricing accuracy is assessed separately.
 
 The construction matches three startup and three large-time coefficients. Write \(\widehat H(y)=P(y)/Q(y)\), \(Q=1+q_1y+q_2y^2+q_3y^3\), with \(y=\nu t^\alpha\). Appendix B.1 defines the raw matching matrix, determinant and numerator polynomials, proves their exact identities and gives the full sign proof. No numerical division precedes the determinant lower bound.
+
 
 **Theorem 6.1 (full-frequency structure).** For
 \[
@@ -528,6 +533,8 @@ the established matching system (B.4) is nonsingular. Its normalised denominator
 \]
 Moreover, for \(y>0\), \(\operatorname{Re}\widehat H(y)<0\). The result holds at every positive time and every finite real frequency. Its domain is the stated parameter set; \(\alpha>.6\), a continuous \(\rho\) domain, and nonzero \(\kappa\) are outside the scope of this theorem.
 
+
+
 **Theorem 6.2 (certified correlation persistence).** The conclusions of Theorem 6.1 hold for
 
 \[
@@ -538,6 +545,8 @@ Moreover, for \(y>0\), \(\operatorname{Re}\widehat H(y)<0\). The result holds at
 \]
 
 at every real Fourier frequency and every positive time.
+
+
 
 The correlation width quantifies local persistence around the public-data parameter. Appendix B.2 gives the complete closed cover and the derivative/direct fallback, with derivative bounds for the compactified quantities. For prices we use the independent reference residual in Section 4.
 
@@ -551,7 +560,7 @@ The correlation width quantifies local persistence around the public-data parame
 
 ## 7. Matched decisions and scientific controls
 
-The experiments address three distinct questions: whether preserving shared errors changes a portfolio tolerance decision; how much the complete bound changes under a different history weight or reference; and whether the resulting model prices agree with the quote bands. A comparison isolates one mechanism only when its remaining inputs are held fixed.
+The experiments address three distinct questions: whether preserving shared errors changes a portfolio tolerance decision; how much the complete bound changes under a different history weight or reference; and whether the resulting model prices agree with the original quote bands. A comparison isolates one mechanism only when its remaining inputs are held fixed.
 
 All experiments use model parameter $\nu=0.2897$, $\rho=-0.7445$, Riccati mean reversion zero, Fourier step $1/8$, a finite reference/error grid through 128 (1025 nodes), 100-bit outward dyadic arithmetic and 64 forward-moment series terms. The stored Padé output uses composite Gauss–Legendre order 8 through 200 (352 nodes) and Jacobi order 256; its Fourier cutoff is distinct from the certificate cutoff. $N_t$ counts source time cells. The number of frequency nodes is written explicitly to avoid confusing it with $\nu$.
 
@@ -580,9 +589,9 @@ The H and N field generators use a uniform auxiliary grid \(y_j\) from zero to \
 
 ### 7.1. Fixed contracts, units and complete ablation
 
-The six-month contract uses twelve strikes \(K_i=3700+100i\), \(0\le i\le11\), forward \(F=4221.86\), discount \(D=1\), and the fixed forward-variance curve (2.4). Prices and task errors are in index points, with position multiplier one and no exchange-specific currency notional assigned. For scale, the bid/ask widths of the twelve half-year quotes run from about 0.80 to 2.51 index points and are about 1.30 and 1.21 points at the 4400 and 4500 strikes, so a quarter-point budget is roughly a fifth of the quoted width at the strikes of the spread studied below. Moving between candidates changes \(\alpha\) while the curve and other parameters remain fixed. The three-candidate profile \(.52,.60,.90\) compares this finite set, and each candidate is incompatible with several market bid/ask bands.
+The six-month contract uses twelve strikes \(K_i=3700+100i\), \(0\le i\le11\), forward \(F=4221.86\), discount \(D=1\), and the fixed forward-variance curve (2.4). Prices and task errors are in index points, with position multiplier one. Candidate changes affect \(\alpha\) while the curve and other parameters remain fixed. The three-candidate profile \(.52,.60,.90\) compares this finite set; each candidate is incompatible with several market bid/ask bands. No exchange-specific currency notional is assigned.
 
-Table 3 compares the complete \(K=4400\) minus \(K=4500\) task bound. Rows H0–H4 and Q0–Q2 are the configurations of Table 2. Each row retains its stored output, signed centre, included finite frequencies, strip, true tail and arithmetic. Displayed upper bounds are rounded upward. The quarter-year study reuses no six-month exponent or tail value. It recomputes its maturity-specific reference integral, true-transform envelopes and tails, and its upstream full-history certificate restricts validly to the shorter horizon.
+Table 3 compares the complete \(K=4400\) minus \(K=4500\) task bound. Each row retains its stored output, signed centre, included finite frequencies, strip, true tail and arithmetic. Displayed upper bounds are rounded upward. The quarter-year study recomputes the reference integral, true-transform envelopes and tails at the shorter maturity and restricts the full-history certificate to that horizon.
 
 **Table 3. H0–H4 and Q0–Q2 complete unit-spread certificates, in index points; outputs and reference changes are identified by configuration.**
 
@@ -597,11 +606,11 @@ Table 3 compares the complete \(K=4400\) minus \(K=4500\) task bound. Rows H0–
 | Q1: Three months: through 128, global envelope | 0.351318692 | 0.408293698 | 0.25-point budget not met |
 | Q2: Three months: through 128, local envelope | 0.233318843 | 0.252393939 | Only the joint method certifies 0.25 points |
 
-Finite-history propagation reduces the H0 complete bound by about 72.91%, and this figure measures a guaranteed upper bound. The six-month high-frequency refinement also changes the centre from approximately \(-0.166762218\) to \(-0.081698202\) points, so its reduction combines centre and uncertainty changes. In Q2, by contrast, the output, centre, node radii and remainders are all matched, and retaining the shared errors changes the decision. We specified the time-local quarter-year refinement after the global-envelope bound exceeded the budget, so Q2 is a post hoc transfer experiment and the prespecified tests are those of Sections 7.2 and 7.3.
+Finite-history propagation reduces the H0 complete bound by about 72.91%. This measures a guaranteed upper bound. The six-month high-frequency refinement also changes the centre from approximately \(-0.166762218\) to \(-0.081698202\) points, so its reduction combines centre and uncertainty changes. In Q2, the output, centre, node radii and remainders are matched; retaining the shared errors changes the decision. The time-local quarter-year refinement was specified after the global budget failed and is an exploratory transfer experiment.
 
 ### 7.2. Twenty-eight portfolio directions
 
-Let \(e_i\) select strike \(K_i\). We keep the exact holdings below, without rescaling them to make a budget pass, so every threshold is an absolute error in index points for the specified holding vector. Gross weight means \(\sum_i|w_i|\).
+Let \(e_i\) select strike \(K_i\). We keep the exact holdings below, without rescaling them to make a budget pass. Gross weight means \(\sum_i|w_i|\). Every threshold is an absolute error in index points for the specified holding vector.
 
 **Table 4. The 28 fixed portfolio directions on the twelve strikes; gross weight is the sum of absolute position weights.**
 
@@ -612,13 +621,28 @@ Let \(e_i\) select strike \(K_i\). We keep the exact holdings below, without res
 | Wide spreads | \(e_0-e_3,e_3-e_6,e_6-e_9,e_0-e_{11}\) | 4 | 2 |
 | Positive baskets | \(\frac1{12}\sum_{i=0}^{11}e_i,\ \frac16\sum_{i=0}^5e_i,\ \frac16\sum_{i=6}^{11}e_i\) | 3 | 1 |
 
-The pass counts use configuration H1 at each stated alpha, and all methods in each matched comparison use identical upstream radii. At a 0.5-point budget and \(\alpha=.52\), finite-history joint bounds certify 28/28 portfolios, compared with 13/28 for signed marginal bounds. At a 0.25-point budget the counts are 10/28 against 1/28 for \(\alpha=.60\), and 20/28 against 13/28 for \(\alpha=.90\). The one-point budget for \(.52\) does not distinguish the shared structure, because both finite-history methods certify 28/28 there. A valid payoff intersection gives no further tightening in this setting. Failure to certify leaves the budget unresolved.
+The pass counts use configuration H1 at each stated alpha, and all methods in each matched comparison use identical upstream radii. At a 0.5-point budget and \(\alpha=.52\), finite-history joint bounds certify 28/28 portfolios, compared with 13/28 signed marginal bounds. At a 0.25-point budget, the counts are 10/28 against 1/28 for \(\alpha=.60\), and 20/28 against 13/28 for \(\alpha=.90\). At the one-point budget for \(.52\), both finite-history methods certify 28/28. That threshold does not distinguish the shared structure. A valid payoff intersection gives no further tightening in this setting. Failure to certify leaves the budget unresolved.
 
 ### 7.3. Prespecified nearby candidates under fixed quotes
 
-The twelve half-year quotes, forward F=4221.86, discount D=1 and all other model parameters are fixed. Before computing these results we fixed alpha={0.520,0.525,0.530,0.540,0.550}, a first layer N_t=1024 (N1), and an upgrade of all five candidates to N_t=2048 (N2) if any adjacent joint comparison remained unresolved. Every point has a newly generated continuous reference field and a complete closed-time residual bank, and the budget includes Fourier nodes through 64, all omitted finite nodes through 128, true infinite tails, strip remainder, reference arithmetic and the quote-conversion intervals.
+The original twelve half-year quotes, forward F=4221.86, discount D=1,
+and all other model parameters are fixed. The prespecified design uses alpha={0.520,0.525,0.530,0.540,0.550}, a first
+layer N_t=1024, and an upgrade of all five candidates to N_t=2048 if any
+adjacent joint comparison remains unresolved. Every point has a newly generated continuous reference
+field and a complete closed-time residual bank. The complete error account includes Fourier nodes through 64,
+all omitted finite nodes through 128, true infinite tails, the strip remainder,
+reference arithmetic and the fixed quote-conversion intervals.
 
-The objective is the normalized midpoint loss \(J=\frac1{24}\sum_i(c_i-m_i)^2\), using normalized calls; index-point squared units would require multiplication by \(F^2\). The tiny target interval halfwidth here consists of outward arithmetic error in converting the fixed bid/ask-price midpoint, and it is distinct from the market bid/ask halfwidth. The ranking is certified for that fixed midpoint target and establishes no uniform winner for arbitrary quote targets inside those market bands. A Taylor support enclosure preserves common Fourier disks in its linear term and charges the full coordinate-radius quadratic remainder, and its same-radius marginal comparison uses the identical upstream certificate. The comparison across alpha candidates uses each candidate's own enclosure, so it requires no assumption about correlation between their errors.
+The objective is the original normalized midpoint loss
+\(J=\frac1{24}\sum_i(c_i-m_i)^2\), using normalized calls. Index-point squared units would require multiplication by \(F^2\). Here the tiny target interval halfwidth is only
+outward arithmetic error in converting the fixed bid/ask-price midpoint;
+it is not the market bid/ask halfwidth. Ranking does not establish a uniform
+winner for arbitrary quote targets inside those market bands.
+A Taylor support enclosure preserves common
+Fourier disks in its linear term and charges the full coordinate-radius
+quadratic remainder. Its same-radius marginal comparison uses the identical
+upstream certificate. Errors across different alpha candidates are not
+assumed jointly correlated.
 
 **Table 5. N1 and N2 five-candidate objective enclosures under the fixed quotes; displayed values are normalized J multiplied by 10^8.**
 
@@ -637,15 +661,20 @@ The objective is the normalized midpoint loss \(J=\frac1{24}\sum_i(c_i-m_i)^2\),
 | N_t=1024 | 7/10 | 3/10 |
 | N_t=2048 | 10/10 | 7/10 |
 
-The first layer retained its unresolved close pairs, which triggered the prespecified all-candidate upgrade. On the final grid we certify alpha=0.520 as the strict minimizer of the midpoint objective among the five fixed points. The comparison is over a finite set under the midpoint loss: all five candidates, alpha=0.520 included, lie outside at least one bid/ask row, so the result ranks these candidates and selects no market-calibrated model or continuous calibration optimum.
+The unresolved close pairs in the first layer triggered the prespecified
+upgrade of all five candidates. The final finite grid has alpha=0.520 as a strict minimum.
+This is a five-point comparison, not a continuous calibration optimum. All
+five candidates remain incompatible with at least one original bid/ask row;
+the finite-set result therefore does not identify a market-calibrated model.
 
-The two layers generate every closed-cell residual entry: 15,754,230 entries, 5,130 reference exponents and 10,250 true-transform envelopes in total. Separate readers check complete coverage and maxima, reconstruct the exponents, coefficients and objectives, and reject deliberate corruptions. They share the rigorous arithmetic primitives and the generator's residual-derivative bounds.
+
+The two layers generate every closed-cell residual entry: 15,754,230 entries, 5,130 reference exponents and 10,250 true-transform envelopes in total. Separate readers check complete coverage and maxima, reconstruct the exponents, coefficients and objectives, and reject deliberate corruptions. They use common rigorous primitives and the generator's residual-derivative bounds.
 
 ### 7.4. Certifying stored and replaceable outputs
 
-A stored-output certificate applies to pricing-library audits, historical calculations and production outputs fixed by the task. If replacement is allowed and the reference is available, returning its certified centre gives a direct control; correcting the fast output by that centre also requires the rounding of the stored correction and final addition. The experiments compare these choices, and any assessment of an online workload has to include the reference construction and verification.
+A stored-output certificate applies to pricing-library audits, historical calculations and production outputs fixed by the task. If replacement is allowed and the reference is available, returning its certified centre gives a direct control. Correcting the fast output by that centre also requires the rounding of the stored correction and final addition. The experiments compare these choices. The reference construction and verification must be included when assessing an online workload.
 
-A separately fixed control, N2L, reuses the complete \(N_t=2048,\alpha=.52\) residual bank with 128 history bins and leaves the prespecified nearby-grid experiment unchanged. Every intersected closed source cell contributes to each bin maximum, and all weights are outwardly enclosed. All five methods below use the same model, six-month \(4400-4500\) spread, 0.25-point tolerance, reference centre, node radii, strip and true-tail budget.
+A separate descriptive control, with its configuration fixed in advance, reuses the complete \(N_t=2048,\alpha=.52\) residual bank with 128 history bins. Every intersected closed source cell contributes to each bin maximum, and all weights are outwardly enclosed. All five methods below use the same model, six-month \(4400-4500\) spread, 0.25-point tolerance, reference centre, node radii, strip and true-tail budget. This control does not change the prespecified nearby-grid experiment.
 
 **Table 7. N2L stored-output controls for the half-year unit 4400–4500 spread; complete bounds and the budget are in index points.**
 
@@ -657,9 +686,9 @@ A separately fixed control, N2L, reuses the complete \(N_t=2048,\alpha=.52\) res
 | BL core, 512 steps | 0.229082759 | 0.348179497 | Pass |
 | BL core, 1024 steps | 0.228534686 | 0.347631424 | Pass |
 
-All five matched marginal bounds remain above 0.25 points, so the joint structure still changes the decision for the reference and BL outputs. Direct reference and corrected fast values have the same complete bound here, and their stored values are checked separately. Exact dyadic arithmetic charges the reference return, stored correction and final addition. The BL 512-to-1024 difference is a diagnostic, not its certified error.
+All five matched marginal bounds remain above 0.25 points. Direct reference and corrected fast values have the same complete bound in this instance, with their stored values checked separately. Exact dyadic arithmetic accounts for rounding in the reference return, stored correction and final addition. For these freely replaceable outputs, the reference is simpler than delivering the unchanged fast result. The joint structure still changes the decision for the reference and BL outputs. The BL 512-to-1024 difference is a diagnostic, not its certified error.
 
-Certificate generation encloses 2,100,735 continuous frequency-by-cell residual entries, 513 reference exponents and 1,025 true-transform node bounds, together with the infinite tail and 12,300 price coefficients. Reading checks every entry and reconstructs the exponents, coefficients and decisions. The 28 portfolios reuse the same bank at one parameter and maturity, and an additional portfolio needs 1,025 shared-disk support terms and the complete remainder.
+Certificate generation encloses 2,100,735 continuous frequency-by-cell residual entries, 513 reference exponents and 1,025 true-transform node bounds, together with the infinite tail and 12,300 price coefficients. Reading checks every entry and reconstructs the exponents, coefficients and decisions. An additional portfolio needs 1,025 shared-disk support terms and the complete remainder. The 28 portfolios reuse the same bank at one parameter and maturity.
 
 **Table 8. Typed deterministic work for the additional output constructions; these counts do not measure total computational cost.**
 
@@ -671,15 +700,16 @@ Certificate generation encloses 2,100,735 continuous frequency-by-cell residual 
 | BL core, 512 steps | 67,371,264 history scalar-vector products; 2,626,560 transformed Riccati evaluations |
 | BL core, 1024 steps | 269,222,400 history scalar-vector products; 5,253,120 transformed Riccati evaluations |
 
-These counts measure different operations. We record reference generation, outward transcendental evaluations and verification separately from nominal-output construction, and the complete ledger also includes exponent quadrature and the two coarse-envelope stages.
+These counts measure different operations. Reference generation, outward transcendental evaluations and verification are recorded separately from nominal-output construction. The complete ledger also includes exponent quadrature and the two failed coarse-envelope stages. Actual online cost has not been measured.
+
 
 ### 7.5. Matched dissipative-kernel evaluation
 
-We fixed the six-month configuration at \(\alpha=13/25\), \(\nu=2897/10000\), \(\rho=-1489/2000\), and \(\sigma=1489/4000\) before computing the resolvent weights, so the physical damping is \(\lambda=\nu\sigma=4313633/40000000\). All four comparisons reuse the same N2L (N_t=2048) closed-cell residual bank, the same stored binary64 fast prices, the same reference exponents and signed centres, and the same finite omission, analytic strip, true infinite tail and reference arithmetic terms. The financial direction is the unit 4400–4500 call spread. The full finite grid contains 1025 frequencies, including 513 used reference frequencies and 512 retained finite omitted frequencies. We reconstruct the complete twelve-price certificate for every method.
+The six-month configuration was fixed at \(\alpha=13/25\), \(\nu=2897/10000\), \(\rho=-1489/2000\), and \(\sigma=1489/4000\) before computing the resolvent weights. The physical damping is therefore \(\lambda=\nu\sigma=4313633/40000000\). All four comparisons reuse the same N2L (N_t=2048) closed-cell residual bank, the same stored binary64 fast prices, the same reference exponents and signed centres, and the same finite omission, analytic strip, true infinite tail and reference arithmetic terms. The financial direction is the unit 4400–4500 call spread; the full finite grid contains 1025 frequencies, including 513 used reference frequencies and 512 retained finite omitted frequencies. The complete twelve-price certificate is reconstructed for every method.
 
-For N2L, the dimensionless damping is \(\lambda T^\alpha\approx0.075205\) (about 0.075205153821), so dissipation is weak over this horizon, consistent with the kernel gain of about 0.485% of the complete frozen-fast bound reported below. The complete budget also contains the fixed centre, finite omitted nodes and other remainders.
+For N2L, the dimensionless damping is \(\lambda T^\alpha\approx0.075205\) (about 0.075205153821). Dissipation is weak over this horizon, consistent with the modest kernel gain. The complete budget also contains the fixed centre, finite omitted nodes and other remainders.
 
-Table 9 reports upper endpoints in index points, rounded upward to nine decimals. "Global state" first bounds the state by its global residual and then applies the exponent functional; "global curve" propagates that same residual maximum directly through the curve. The final two rows use the identical 128 binwise envelopes and differ only in the pricing kernel.
+Table 9 reports upper endpoints in index points, rounded upward to nine decimals. “Global state” first bounds the state by its global residual and then applies the exponent functional; “global curve” propagates that same residual maximum directly through the curve. The final two rows use the identical 128 binwise envelopes and differ only in the pricing kernel.
 
 **Table 9. N2L matched propagation for the half-year unit 4400–4500 spread, in index points; the residual bank and all other inputs are fixed.**
 
@@ -690,23 +720,23 @@ Table 9 reports upper endpoints in index points, rounded upward to nine decimals
 | Local curve | 0.514096070 | 0.394999331 | 0.228237113 | 0.042372598 |
 | Local dissipative resolvent | 0.509733613 | 0.393082828 | 0.226320610 | 0.040456094 |
 
-In this configuration the binary64 corrected-fast output has the same certified bounds as the stored reference, conversion and rounding included. The exact rational reduction from local curve to local resolvent is positive and approximately 0.001916504 points, about 0.485% of the complete frozen-fast bound and 4.523% of its used-node joint radius; these percentages compare upper bounds. The one-point and half-point frozen-output tasks pass, and the quarter-point task remains unresolved. Both local methods certify the stored reference and corrected output at a quarter point, so dissipation does not change that decision.
+The binary64 corrected-fast output has the same certified bounds as the stored reference in this configuration, including conversion and rounding. The exact rational reduction from local curve to local resolvent is positive and approximately 0.001916504 points: about 0.485% of the complete frozen-fast bound and 4.523% of its used-node joint radius. These percentages compare upper bounds. The one-point and half-point frozen-output tasks pass; the quarter-point task remains unresolved. Both local methods certify the stored reference and corrected output at a quarter point, so dissipation does not change that decision.
 
-The fixed terms limit further reduction. Even if all 513 used reference-node contributions vanished, the same symmetric budget would retain the absolute centre, the finite omitted-node radius and the other remainders, and their exact rational sum is strictly greater than the downward decimal endpoint 0.352626733 points. This lower limit belongs to the stated budget formula. With those terms fixed, refining used nodes alone cannot certify a quarter point, so the omitted finite frequencies and the reference centre have to be addressed as well.
+The fixed terms limit further reduction. Even if all 513 used reference-node contributions vanished, the same symmetric budget would retain the absolute centre, finite omitted-node radius and other remainders. Their exact rational sum is strictly greater than the downward decimal endpoint 0.352626733 points. This lower limit belongs to the stated budget formula. With those terms fixed, refining used nodes alone cannot certify a quarter point; the omitted finite frequencies and reference centre must also be addressed.
 
 The reconstructed global-curve and local-curve endpoints agree exactly with the saved baseline rational endpoints, including all twelve individual radii and frozen-output bounds; the table displays strict nine-decimal upward endpoints.
 
 ### Verification scope and mathematical work
 
-The separate reader reads all 2,100,735 entries of the complete residual bank, checks closed-cell coverage from zero, and recomputes the maxima for all 128 propagation bins. It expands the cumulative resolvent independently by the direct double Gamma series with fourteen outer terms, whereas the producer uses twelve outer terms and a strict power-field moment; both enclose all inner tails with sixty-four retained terms. The reader then checks all 513 transform-radius minima in all four comparisons and rebuilds all twelve prices with all 1025 finite frequencies. At \(\sigma=0\), it replays all 129 cumulative endpoints and all 128 cell weights against the curve-kernel conclusion. It rejects eight negative controls: negative damping, an incorrect physical \(\nu\) scale, a missing initial closed cell, a removed finite omitted node, an erased true infinite tail, an altered signed centre, an understated resolvent exponent enclosure, and a zero-damping weight that does not reproduce the curve kernel.
+The separate reader reads all 2,100,735 entries of the complete residual bank, checks closed-cell coverage from zero, and recomputes the maxima for all 128 propagation bins. It independently expands the cumulative resolvent by the direct double Gamma series with fourteen outer terms, while the producer uses twelve outer terms and a strict power-field moment. Both enclose all inner tails with sixty-four retained terms. The reader checks all 513 transform-radius minima in all four comparisons and rebuilds all twelve prices with all 1025 finite frequencies. At \(\sigma=0\), it replays all 129 cumulative endpoints and all 128 cell weights against the curve-kernel conclusion. The reader rejects eight negative controls: negative damping, an incorrect physical \(\nu\) scale, a missing initial closed cell, a removed finite omitted node, an erased true infinite tail, an altered signed centre, an understated resolvent exponent enclosure, and a zero-damping weight that does not reproduce the curve kernel.
 
-The reader reconstructs the cumulative-weight algebra and certificate assembly, but it shares the dyadic arithmetic, Gamma, logarithm and exponential primitives, together with the validated residual-derivative bounds and reference exponents. The execution receipts record these dependencies.
+The reader reconstructs the cumulative-weight algebra and certificate assembly. It shares the dyadic arithmetic, Gamma, logarithm and exponential primitives, together with the validated residual-derivative bounds and reference exponents. The execution receipts record these dependencies.
 
-This propagation reuses the residual bank. Its weighted sum contains \(513\times128=65,664\) terms and 129 cumulative endpoint enclosures, with twelve outer series terms per producer endpoint and sixty-four inner curve terms. These counts describe that calculation; workloads that generate residuals or reference prices perform additional work. The kernel evidence component contains the fixed contract, interval outputs and separate reader.
+This propagation reuses the residual bank. The weighted sum contains \(513\times128=65,664\) terms and 129 cumulative endpoint enclosures, with twelve outer series terms per producer endpoint and sixty-four inner curve terms. These counts describe that calculation; workloads that generate residuals or reference prices perform additional work. The kernel evidence component contains the fixed contract, interval outputs and separate reader.
 
 ### 7.6. Matched ledgers and certificate resolution
 
-We can attribute the quarter-maturity decision to shared aggregation, because Q2 uses identical stored output, reference centre, 1025 node radii and all remainders in both columns. Every finite node has a nonzero reference, so finite omitted-node support is zero. Values below are in index points, and exact fractions are retained in quarter-exact-ledger.json.
+The quarter-maturity decision is attributable to shared aggregation. Q2 uses identical stored output, reference centre, 1025 node radii and all remainders in both columns. Finite omitted-node support is zero because every finite node has a nonzero reference. Values below are in index points; exact fractions are retained in quarter-exact-ledger.json.
 
 **Table 10. Q2 quarter-year unit-spread ledger, in index points; only aggregation of the shared node errors differs between columns.**
 
@@ -721,9 +751,9 @@ We can attribute the quarter-maturity decision to shared aggregation, because Q2
 | Reference arithmetic | 4.148871871727e-16 | 4.148871871727e-16 |
 | Complete upper bound | 0.233318843 | 0.252393939 |
 
-The joint complete bound is 0.233318843 points against 0.252393939 points for signed marginal aggregation, and only the joint certificate passes the 0.25-point budget. The difference of 0.019075095 points is entirely the node-support aggregation difference. Complete-bound displays are rounded upward to nine decimal places and component/centre and gap displays are approximate, but every decision and ledger identity uses exact fractional endpoints. Tiny reference arithmetic is displayed separately. The signed centre is a locator, not an extra additive charge on top of its absolute value.
+The joint complete bound is 0.233318843 points versus 0.252393939 points for signed marginal aggregation; only the joint certificate passes the 0.25-point budget. The difference 0.019075095 points is entirely the node-support aggregation difference. Complete-bound displays are rounded upward to nine decimal places; component/centre and gap displays are approximate. Every decision and ledger identity uses exact fractional endpoints. Tiny reference arithmetic is displayed separately, and the signed centre is a locator, not an extra additive charge on top of its absolute value.
 
-Every portfolio curve uses the 28 originally fixed and fully specified directions. The files portfolio-exact-thresholds.csv and portfolio-budget-counts.json hold the exact endpoints, all threshold breakpoints and the pass counts. Certification uses the complete rational endpoint condition $B\leq\tau$, including equality. Between-bank plots show descriptive changes, whereas joint versus signed marginal within one bank uses matched radii. We infer no 28-direction quarterly dataset from the single quarter spread.
+Every portfolio curve uses the 28 originally fixed and fully specified directions. Exact endpoints, all threshold breakpoints and pass counts are supplied in portfolio-exact-thresholds.csv and portfolio-budget-counts.json. Certification uses the complete rational endpoint condition $B\leq\tau$, including equality. Between-bank plots show descriptive changes; joint versus signed marginal within one bank uses matched radii. No 28-direction quarterly dataset is inferred from the single quarter spread.
 
 **Table 11. Complete-budget pass counts for all 28 fixed half-year directions; budgets are in index points and equality is included.**
 
@@ -762,9 +792,9 @@ The two nearby levels retain all ten unordered pairs, including unresolved ones:
 | 2048 | joint | 10/10 | none |
 | 2048 | marginal | 7/10 | (0.520, 0.525), (0.520, 0.530), (0.525, 0.530) |
 
-The closest N2 joint separation, alpha=.520 versus .525, is a positive gap of approximately 7.382643478687e-10 in normalized squared-midpoint loss. Its endpoint identity is $J_{0, B}-J_{0, A}-H_B-H_A-Q_A$ plus any box-intersection endpoint adjustment. The gap decomposition, including used nodes, finite zero nodes, reference strip/tail/arithmetic and midpoint-conversion arithmetic, is recorded exactly in nearby-pair-resolution.json.
+The closest N2 joint separation, alpha=.520 versus .525, is a positive gap of approximately 7.382643478687e-10 in normalized squared-midpoint loss. Its endpoint identity is $J_{0, B}-J_{0, A}-H_B-H_A-Q_A$ plus any box-intersection endpoint adjustment. The gap decomposition, including used nodes, finite zero nodes, reference strip/tail/arithmetic and midpoint-conversion arithmetic, is recorded exactly in nearby-pair-resolution.json. This is a fixed original midpoint-loss ranking. The midpoint-conversion arithmetic interval does not represent the market bid/ask width; all five candidates remain separately bid/ask-incompatible.
 
-The complete centre accounting for the stored half-year 4400–4500 output follows. Signed centres are approximate displays and the radius and complete-bound columns are decimal upper endpoints, so independently rounded columns need not add exactly:
+The unchanged stored half-year 4400–4500 output admits the following complete centre accounting. Signed centres are approximate displays; radius and complete-bound columns are decimal upper endpoints, so independently rounded columns need not add exactly:
 
 **Table 13. Half-year frozen-output centre accounting for H2–H4, N2 and N2L, in index points; upper-endpoint rounding is applied independently.**
 
@@ -776,25 +806,25 @@ The complete centre accounting for the stored half-year 4400–4500 output follo
 | N2 | -0.166762218 | 0.261808769 | 0.428570987 |
 | N2L | -0.166762218 | 0.228237113 | 0.394999331 |
 
-Expanding H2 to H3 changes the absolute centre charge as well as the reference radius in the budget, and H3 to H4 retains that new centre. N2 to N2L retains its own reference centre and full remainders. H4 to N2L is a descriptive cross-bank identity, not an ablation. These transitions are exact in frozen-output-centre-account.json, which also reports the common strict-reference certificate floor as a fraction of each BL-core bound; a dominant floor limits what this comparison can establish about intrinsic solver accuracy.
+Expanding H2 to H3 changes the absolute centre charge as well as the certified reference radius; H3 to H4 retains that new centre. N2 to N2L retains its own reference centre and full remainders. H4 to N2L is a descriptive cross-bank identity, not an ablation. These transitions are exact in frozen-output-centre-account.json, which also reports the common strict-reference certificate floor as a fraction of each BL-core bound. A dominant floor limits what this comparison can establish about intrinsic solver accuracy. When replacement is permitted and the strict reference is already available, returning that reference directly is the simpler workload; frozen-output audit and free replacement answer different tasks.
 
 ### 7.7. Scope of the experiments
 
-The modern-method comparison reimplements the modified-Adams Riccati core described by Boyarchenko et al., without reproducing their full SINH deformation or Conformal Bootstrap. Agreement between two discretizations is a numerical diagnostic, not an interval certificate, and any comparison to a complete certified output has to include the independent reference, tails, arithmetic and verification that the guarantee requires.
+The modern-method comparison reimplements the modified-Adams Riccati core described by Boyarchenko et al.; it does not reproduce their full SINH deformation or Conformal Bootstrap. Agreement between two discretizations is a numerical diagnostic, not an interval certificate. A comparison of complete certified outputs includes the costs of the independent reference, tails, arithmetic and verification.
 
-The fixed refinement menu terminates reliably when the complete task radius meets the budget. Its minimum action count assumes that all alternative radii have been certified and that each action has unit cost, and constructing those alternatives is part of certificate generation. The experiments certify numerical-error bounds and budget and finite-candidate decisions under the stated model and quotes; model fit, market uncertainty, transaction costs and continuous calibration require additional analysis.
+The fixed refinement menu terminates reliably when the complete task radius meets the budget. Minimum action count assumes that all alternative radii have been certified and each action has unit cost. Constructing those alternatives is part of certificate generation. Model fit, market uncertainty, transaction costs and continuous calibration require additional analysis.
 
 ## 8. Conclusion and reproducibility
 
-The construction follows the valuation map. The Riccati equation determines the exact state and its stability; the forward variance curve determines the residual's history weight; and the portfolio determines the linear functional applied to the common transform errors. Each stage retains information that would be lost by an earlier absolute-value bound. The resulting certificate is independent of how the reference trajectory was generated, provided that its continuous residual, half-plane and arithmetic obligations are verified.
+The construction follows the valuation map. The Riccati equation determines the exact state and its stability; the forward variance curve determines the residual's history weight; and the portfolio determines the linear functional applied to the common transform errors. Each stage keeps information that an earlier absolute-value bound would lose. The resulting certificate does not depend on how the reference trajectory was generated, provided that its continuous residual, half-plane and arithmetic obligations are verified.
 
 The matched spread shows that retaining shared Fourier errors can change a complete tolerance decision without changing the stored prices. It does not show that every portfolio improves, that the upper bound is the actual error, or that a numerically certified model fits market quotes. The finite-candidate comparison is confined to its declared set, and the rational structural theorem is confined to its stated parameter domain. When output replacement is allowed, a certified reference is itself a valid pricing alternative.
 
-The [online article](https://github.com/130U/certified-rough-heston-valuation/blob/main/ARTICLE.md), scientific source and verification commands accompany the paper. All 27 numerical banks are identified by size and SHA-256 in `SCIENTIFIC-MANIFEST.json`. `verify_source.py` checks the publication identities. `reproduce.py` reads the saved banks and reconstructs downstream prices, objectives and decisions; `--full` additionally recomputes the structural-sign cover. These modes do not regenerate every continuous residual derivative bound. Appendix E and `COMMANDS.md` distinguish the generators, readers and shared arithmetic dependencies.
+The [online article](https://github.com/130U/certified-rough-heston-valuation/blob/main/ARTICLE.md), scientific source and verification commands accompany the paper. All 27 numerical banks are identified by size and SHA-256 in `SCIENTIFIC-MANIFEST.json`. `verify_source.py` checks the publication identities. `reproduce.py` reads the saved banks and reconstructs downstream prices, objectives and decisions; `--full` additionally recomputes the original structural-sign cover. These modes do not regenerate every continuous residual derivative bound. Appendix E and `COMMANDS.md` distinguish the generators, readers and shared arithmetic dependencies.
 
 ## Appendices and Supporting Material
 
-This page includes the complete main text and references. Appendices, supplementary proofs, code, and verification material are available in the [GitHub repository](https://github.com/130U/certified-rough-heston-valuation) and the [full manuscript](https://github.com/130U/certified-rough-heston-valuation/blob/V_20261101/manuscript/merged-heston-en.md#appendix-a-probability-model-and-strip-transform).
+This page includes the complete main text and references. Appendices, supplementary proofs, code, and verification material are available in the [GitHub repository](https://github.com/130U/certified-rough-heston-valuation) and the [full manuscript](https://github.com/130U/certified-rough-heston-valuation/blob/861c81c27b3516fa3eae29fd446ebbc10aca1d85/manuscript/merged-heston-en.md#appendix-a-probability-model-and-strip-transform).
 
 ## References
 

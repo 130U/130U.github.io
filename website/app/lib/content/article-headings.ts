@@ -130,7 +130,6 @@ const internalReferenceContexts: Readonly<Record<string, readonly string[]>> = {
     "Section 4.1 characterizes the scale",
     "transform loadings required in Section 3",
     "Section 5 establishes the common Gaussian structure",
-    "which Section 9 lists among the extensions",
     "Section 5 verifies a deterministic-variance class",
     "Section 8 varies the step at the principal point",
     "box in Section 7 is a separate certified region",
@@ -151,7 +150,6 @@ const internalReferenceContexts: Readonly<Record<string, readonly string[]>> = {
     "For the Lewis rule in Section 4, set",
     "numerical comparison in Section 7 is our evidence",
     "independent reference residual in Section 4",
-    "those of Sections 7.2 and 7.3",
   ],
 };
 
