@@ -72,7 +72,7 @@
 .equationNumber {
   flex: 1 0 0;
   min-width: max-content;
-  padding-inline-start: 0.75em;
+  padding-inline-start: 0.125em;
   font-family: var(--font-prose);
   font-size: var(--type-reading);
   font-variant-numeric: lining-nums proportional-nums;

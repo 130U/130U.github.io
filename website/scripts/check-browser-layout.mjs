@@ -229,7 +229,7 @@ function inspectManuscript() {
   }
   for (const equation of document.querySelectorAll('[data-research-block-type="equation"]')) {
     const number = equation.querySelector("[data-equation-number]");
-    if (!number || equation.scrollWidth > equation.clientWidth + 1) continue;
+    if (!number || equation.scrollWidth > equation.clientWidth) continue;
     const column = equation.getBoundingClientRect();
     const drawing = equation.querySelector("svg[data-research-svg]").getBoundingClientRect();
     const label = number.getBoundingClientRect();
