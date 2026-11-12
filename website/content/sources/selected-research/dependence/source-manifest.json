@@ -1,7 +1,7 @@
 {
   "repository": "130U/Critical-Dependence-Stress",
-  "commit": "ac2de4b0f2623cae3e5aaf85c42c778650f6ebed",
-  "commitDate": "2026-11-12T09:03:18-05:00",
+  "commit": "3c5f66c1b3faa1d0014b6034806cf7eb925fafc4",
+  "commitDate": "2026-11-12T09:37:09-05:00",
   "fetchedWith": "Authenticated Git checkout at the exact commit; git show bytes checked against Git blob SHA-1",
   "files": [
     {
@@ -26,8 +26,8 @@
     },
     {
       "path": "paper/source/main-classification-flow.tex",
-      "sha": "6298f9fbeb2c561a2045ef6a8e207647f81a0921",
-      "size": 19892
+      "sha": "5d10d0e4f87b084bc57560693156903f7e8eb48d",
+      "size": 20134
     },
     {
       "path": "paper/source/main-crossing-proof.tex",

@@ -4,11 +4,11 @@
   "sources": [
     {
       "slug": "certified-valuation-arithmetic-asian-options",
-      "sourceUrl": "https://github.com/130U/certified-valuation-arithmetic-asian-options/blob/4db7da462b24a26029159e219ff0a0ede747a2a7/manuscript/report.md",
-      "sourceCommit": "4db7da462b24a26029159e219ff0a0ede747a2a7",
-      "sourceBlob": "9b5f118b1cd8078a06c4ba1e133938cc80d25731",
-      "sourceSha256": "91d994e392935a5899548273c0940a4e7413fe451861b0819941412c15655731",
-      "importedMarkdownSha256": "414e1f86f4eb008dcb531a2fb9c6b4d94034810fd81253ebe19f7bedbcf5a0ec",
+      "sourceUrl": "https://github.com/130U/certified-valuation-arithmetic-asian-options/blob/249987d23616804998683ac9eeead21c5a3473f6/manuscript/report.md",
+      "sourceCommit": "249987d23616804998683ac9eeead21c5a3473f6",
+      "sourceBlob": "69e67323db7a2a97e1fa0ad6264f4078aac1cb7e",
+      "sourceSha256": "7f7ccced6e8c9d4f37859028633db14ead260a4a907ba461f1dc54b5fd95cac4",
+      "importedMarkdownSha256": "b6f4794f09db5327053922af4539aa312bca9e5f2721d1ea4ce2a7c44d274e54",
       "includedHeadings": [
         "Abstract",
         "1. Introduction",
@@ -67,11 +67,11 @@
     },
     {
       "slug": "certified-rough-heston-valuation",
-      "sourceUrl": "https://github.com/130U/certified-rough-heston-valuation/blob/577629177d98729f4c79f9f70a82cab149b76586/manuscript/merged-heston-en.md",
-      "sourceCommit": "577629177d98729f4c79f9f70a82cab149b76586",
-      "sourceBlob": "918b1ade5deaf3d4407cf4f38f7bf3e66b0791a1",
-      "sourceSha256": "09cdbef4db2bfd947310d4ff2bba162af71e82abfb86795459a87d6145689ac4",
-      "importedMarkdownSha256": "19c1f35fbf647f05515a403fb9915bd4edcb9110d4ecef3fa459bd1736edcce6",
+      "sourceUrl": "https://github.com/130U/certified-rough-heston-valuation/blob/de721f78cec277e390cd9dc2ebc4efa9ae9681e4/manuscript/merged-heston-en.md",
+      "sourceCommit": "de721f78cec277e390cd9dc2ebc4efa9ae9681e4",
+      "sourceBlob": "2b52caa1ad3e58a2f411c9c1f1b651d01f3a8d39",
+      "sourceSha256": "bc18078a28cec6e6cf69b78b9b477423966e1686dbd9c0707ad7655aba9c9070",
+      "importedMarkdownSha256": "d2af9c5b796c429a89e456f17bfae479929f7237746067a6c86a0d926e2aa1b6",
       "includedHeadings": [
         "Abstract",
         "1. Introduction",
