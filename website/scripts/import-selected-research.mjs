@@ -6,15 +6,15 @@ const sourceDirectory = new URL("../content/sources/selected-research/", import.
 const sources = [
   {
     key: "asian", slug: "certified-valuation-arithmetic-asian-options", file: "manuscript/report.md",
-    sourceCommit: "8d3b2f32c79731e150ee46bafc44fca590aa516a", sourceBlob: "39176e13c1a5fcbf8b054e8c6145201fc721b3a0",
-    sourceEditedAt: "2026-11-12T05:26:59-05:00", mainSections: 10,
+    sourceCommit: "4db7da462b24a26029159e219ff0a0ede747a2a7", sourceBlob: "9b5f118b1cd8078a06c4ba1e133938cc80d25731",
+    sourceEditedAt: "2026-11-12T09:03:21-05:00", mainSections: 10,
     appendixAnchor: "appendix-a-finite-certification-of-the-weighted-second-moment",
     description: "Certified pricing-error bounds for arithmetic Asian options under projected Euler, with common Gaussian smoothing, weak expansions, and posterior quantile transfer.",
   },
   {
     key: "rough", slug: "certified-rough-heston-valuation", file: "manuscript/merged-heston-en.md",
-    sourceCommit: "861c81c27b3516fa3eae29fd446ebbc10aca1d85", sourceBlob: "fe04fcbcd3da4c35dd202b835324218d202b35ef",
-    sourceEditedAt: "2026-11-12T05:27:04-05:00", mainSections: 8,
+    sourceCommit: "577629177d98729f4c79f9f70a82cab149b76586", sourceBlob: "918b1ade5deaf3d4407cf4f38f7bf3e66b0791a1",
+    sourceEditedAt: "2026-11-12T09:16:32-05:00", mainSections: 8,
     appendixAnchor: "appendix-a-probability-model-and-strip-transform",
     description: "Deterministic joint pricing-error certificates for stored rough Heston outputs, finite-history propagation, portfolios, and finite-candidate decisions.",
   },

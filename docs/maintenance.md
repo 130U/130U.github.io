@@ -189,7 +189,7 @@ plot, schematic and bar primitives, `selected-research.tsx`, `ai-research.tsx` a
 `legal-research.tsx` hold the figures, `dependence-manuscript.tsx` draws the
 dependence manuscript's four figures from the formulas in
 `130U/Critical-Dependence-Stress` (`code/generate_mechanism_figures.py` and
-`new-computations/plot_profiles_and_flows.py` at the pinned commit), and
+`calculations/plot_profiles_and_flows.py` at the pinned commit), and
 `FigureController` adds view switches, readouts, linked emphasis, the
 proof-obligation graph, table column highlighting and the entrances of figures and
 table rows. The research renderer frames every table and sets a directly preceding

@@ -15,8 +15,8 @@ function withoutArticleFigures(html) {
 }
 
 const PROJECTS = [
-  { key: "asian", slug: "certified-valuation-arithmetic-asian-options", commit: "8d3b2f32c79731e150ee46bafc44fca590aa516a", blob: "39176e13c1a5fcbf8b054e8c6145201fc721b3a0", sections: 10, tables: 11, formulas: 355 },
-  { key: "rough", slug: "certified-rough-heston-valuation", commit: "861c81c27b3516fa3eae29fd446ebbc10aca1d85", blob: "fe04fcbcd3da4c35dd202b835324218d202b35ef", sections: 8, tables: 13, formulas: 306 },
+  { key: "asian", slug: "certified-valuation-arithmetic-asian-options", commit: "4db7da462b24a26029159e219ff0a0ede747a2a7", blob: "9b5f118b1cd8078a06c4ba1e133938cc80d25731", sections: 10, tables: 11, formulas: 355 },
+  { key: "rough", slug: "certified-rough-heston-valuation", commit: "577629177d98729f4c79f9f70a82cab149b76586", blob: "918b1ade5deaf3d4407cf4f38f7bf3e66b0791a1", sections: 8, tables: 13, formulas: 306 },
 ];
 
 function sourceFormulas(markdown) {

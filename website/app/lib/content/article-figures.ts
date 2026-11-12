@@ -229,7 +229,7 @@ const tableEmphasis: Readonly<Record<string, readonly TableEmphasis[]>> = {
 // cites. Each drawing evaluates the manuscript's formulas
 // (130U/Critical-Dependence-Stress at the pinned commit:
 // code/generate_mechanism_figures.py and
-// new-computations/plot_profiles_and_flows.py); `evidence` ties its labels and
+// calculations/plot_profiles_and_flows.py); `evidence` ties its labels and
 // plotted functions to the article text, and the build fails if any is missing.
 export const manuscriptFigures: Readonly<Record<string, { figure: string; evidence: string[] }>> = {
   "/assets/research/dependence/tail-layer-repair.png": {

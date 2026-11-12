@@ -1,7 +1,7 @@
 {
   "repository": "130U/Critical-Dependence-Stress",
-  "commit": "77dfa1601709c5408d6eeee94d4858daab869079",
-  "commitDate": "2026-11-12T05:26:54-05:00",
+  "commit": "ac2de4b0f2623cae3e5aaf85c42c778650f6ebed",
+  "commitDate": "2026-11-12T09:03:18-05:00",
   "fetchedWith": "Authenticated Git checkout at the exact commit; git show bytes checked against Git blob SHA-1",
   "files": [
     {
@@ -41,8 +41,8 @@
     },
     {
       "path": "paper/source/main-introduction.tex",
-      "sha": "0b661c8663a41f04ac473e6525bf4a5e74bfe74f",
-      "size": 12031
+      "sha": "637cf0d47fd21be707f7f7821f35c72d281191db",
+      "size": 12283
     },
     {
       "path": "paper/source/main-model-benchmark.tex",
@@ -71,8 +71,8 @@
     },
     {
       "path": "paper/source/paper.tex",
-      "sha": "6ae3b86691b81075188d4cf73f091ac078f961bd",
-      "size": 5595
+      "sha": "e9efa283fc4b8efe2cac0ca483fa3e5da81e01e5",
+      "size": 5755
     },
     {
       "path": "paper/source/references.tex",
