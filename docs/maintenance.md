@@ -268,8 +268,8 @@ visible copy. The static preview binds to `127.0.0.1:8123` by default and serves
 development security policy required by Next.js tooling. `test:browser` uses isolated
 Chromium contexts and the actual static export to check every figure and view at
 six viewport widths, plus enlarged-text and keyboard-scroll regressions, and holds every
-manuscript table heading to two lines and every equation number to the column's right
-edge. It reports
+manuscript table heading to two lines, every displayed equation to one starting axis,
+and every equation number to the column's right edge. It reports
 geometry and failure screenshots in `website/test-results/figure-layout/`. CI installs
 Chromium and requires these checks to pass before publishing.
 

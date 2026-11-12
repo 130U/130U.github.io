@@ -48,7 +48,7 @@
    holds one line of values and only a column of sentences wraps; a table wider
    than the column scrolls. */
 .tableFrame {
-  --table-pad: clamp(16px, 4cqi, 24px);
+  --table-pad: var(--manuscript-inset);
   --table-surface: var(--page);
   --table-band: color-mix(in srgb, #000 2.8%, var(--table-surface));
   position: relative;

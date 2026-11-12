@@ -237,10 +237,15 @@ Paragraphs are 1.5rem apart. A new chapter begins after 5rem of space, a fine ru
 2rem of inset (4rem and 1.5rem on phones); subsections are 3rem apart. Equation blocks
 have symmetric 2.25rem margins and 0.75rem vertical padding, explicit row spacing, and
 no sentence-ending punctuation; wide equations and tables scroll locally at their
-natural size with native touch, trackpad, scrollbar, and keyboard navigation. A numbered
-equation centers in the column and sets its number flush right on the equation's
-baseline, in the reading face of the references that cite it; in a narrow column the
-equation starts at the left edge and the number follows it. Plain
+natural size with native touch, trackpad, scrollbar, and keyboard navigation. Every
+displayed equation follows one pattern, whatever its length: its ink starts on the
+manuscript inset (`--manuscript-inset`, 16 to 24px from the column's edge), the axis it
+shares with table text, and its number stands at the column's right edge on the
+equation's baseline, in the reading face of the references that cite it, set clear of
+the expression. An equation wider than its column scrolls in place: its number keeps
+its position, and the expression fades beneath that edge while more remains, as a wide
+table fades at its right edge. A page can therefore be read with the paper beside it.
+Plain
 numbers, including scientific notation and percentages, use the prose face with native
 superscripts while keeping accessible MathML and the original TeX. Mathematical SVG
 glyphs are artwork, not an additional prose font.

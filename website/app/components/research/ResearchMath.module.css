@@ -43,36 +43,31 @@
   display: none;
 }
 
+/* Every displayed equation follows one pattern, whatever its length. Its ink
+   starts on the manuscript inset, the axis its column shares with the text of a
+   framed table (the inset, inside the frame's 1px edge). It closes on an edge
+   at the column's right side, which holds the equation's number on the
+   equation's baseline, in the prose face of the references that cite it, set
+   clear of the expression. An equation wider than its column scrolls in place:
+   the edge keeps its position, and the expression fades out over an em beneath
+   it, half an em short of the number, while more remains. */
 .display {
-  display: block;
-  width: max-content;
-  margin-inline: auto;
-}
-
-/* A numbered display centers its expression in the column and sets its number
-   flush right, in the prose face of the references that cite it, a full em
-   clear of the expression. In a narrow column the expression moves to the left
-   edge, and the two scroll together once they no longer fit. */
-.numbered {
   display: flex;
   align-items: baseline;
-  width: auto;
   min-width: max-content;
-}
-
-.numbered::before {
-  flex: 1 1 0;
-  content: "";
+  padding-inline-start: calc(var(--manuscript-inset) + 1px - var(--math-gutter));
 }
 
 .expression {
   flex: none;
 }
 
-.equationNumber {
-  flex: 1 0 0;
-  min-width: max-content;
-  padding-inline-start: 1em;
+.equationEdge {
+  position: sticky;
+  inset-inline-end: 0;
+  flex: 1 0 auto;
+  padding-inline-start: 1.5em;
+  border-image: linear-gradient(to right, transparent, var(--page) 1em) fill 0 // 100vmax 0;
   font-family: var(--font-prose);
   font-size: var(--type-reading);
   font-variant-numeric: lining-nums proportional-nums;
@@ -93,6 +88,7 @@
 }
 
 .equation {
+  container-type: inline-size;
   min-width: 0;
   max-width: 100%;
   padding-block: 0.75rem;
@@ -109,4 +105,13 @@
 .equation:focus-visible {
   outline: 2px solid var(--accent);
   outline-offset: 2px;
+}
+
+/* On paper, and where the system paints its own colors, the edge follows its
+   equation. */
+@media print, (forced-colors: active) {
+  .equationEdge {
+    position: static;
+    border-image: none;
+  }
 }

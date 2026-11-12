@@ -17,6 +17,9 @@
   --dash-x: repeating-linear-gradient(to right, var(--dash) 0 4px, transparent 4px 8px);
   --dash-y: repeating-linear-gradient(to bottom, var(--dash) 0 4px, transparent 4px 8px);
   --frame-pad: clamp(32px, calc(32px + (100vw - 1200px) * 0.05), 44px);
+  /* Manuscript inset: table text and displayed equations start on one axis,
+     measured from the edge of the column that holds them. */
+  --manuscript-inset: clamp(16px, 4cqi, 24px);
   --accent: #2200ff;
   /* Article figures: ink and the accent carry the argument, sky marks a second
      series, green marks an exactly known segment, grays hold context, and the

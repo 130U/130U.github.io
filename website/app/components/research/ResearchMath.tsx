@@ -1,3 +1,4 @@
+import type { CSSProperties } from "react";
 import { RESEARCH_MATH_GUTTER_EM, RESEARCH_MATH_INLINE_SPACE_EM, renderResearchMath } from "../../lib/content/research-math";
 import { proseNumber } from "../../lib/content/research-number";
 import styles from "./ResearchMath.module.css";
@@ -7,9 +8,9 @@ export function ResearchMath({ tex, display = false }: { tex: string; display?: 
   const assistive = <span className={styles.assistive} dangerouslySetInnerHTML={{ __html: formula.mathml }} />;
   if (display) {
     return (
-      <span className={`${styles.formula} ${styles.display}${formula.number ? ` ${styles.numbered}` : ""}`} data-research-formula="display">
+      <span className={`${styles.formula} ${styles.display}`} data-research-formula="display" style={{ "--math-gutter": `${RESEARCH_MATH_GUTTER_EM}em` } as CSSProperties}>
         <span className={styles.expression} dangerouslySetInnerHTML={{ __html: formula.svg }} />
-        {formula.number && <span className={styles.equationNumber} data-equation-number aria-hidden="true">{`(${formula.number})`}</span>}
+        <span className={styles.equationEdge} data-equation-number={formula.number ? true : undefined} aria-hidden="true">{formula.number && `(${formula.number})`}</span>
         {assistive}
       </span>
     );
