@@ -40,11 +40,6 @@ function parsedFormulas(blocks) {
   return formulas;
 }
 
-async function siteEdition(slug) {
-  const source = await readFile(new URL(`../content/selected-research/site-edition/${slug}.md`, import.meta.url), "utf8");
-  return source.replace(/\r\n?/gu, "\n").replace(/^---\n[\s\S]*?\n---\n\n/u, "");
-}
-
 function decodeHtml(value) {
   return value.replace(/&(amp|lt|gt|quot|apos);/gu, (_, name) => ({ amp: "&", lt: "<", gt: ">", quot: '"', apos: "'" })[name]);
 }
@@ -78,7 +73,7 @@ for (const expected of PROJECTS) {
   });
 
   test(`${expected.key} published article retains every equation and all section links`, async () => {
-    const markdown = await siteEdition(expected.slug);
+    const { markdown } = JSON.parse(await readFile(new URL(`../content/selected-research/${expected.slug}.json`, import.meta.url), "utf8"));
     const html = withoutArticleFigures(await readFile(new URL(`../out/${expected.slug}/index.html`, import.meta.url), "utf8"));
     const rendered = [...html.matchAll(/<math\b[^>]*data-research-math="(inline|display)"[^>]*>[\s\S]*?<annotation\b[^>]*encoding="application\/x-tex"[^>]*>([\s\S]*?)<\/annotation>[\s\S]*?<\/math>/gu)].map((match) => ({ tex: decodeHtml(match[2]), display: match[1] === "display" }));
     assert.deepEqual(rendered, sourceFormulas(markdown));

@@ -1,7 +1,7 @@
 {
   "slug": "certified-valuation-arithmetic-asian-options",
   "title": "Certified Valuation of Arithmetic Asian Options",
-  "description": "Certified pricing-error bounds for arithmetic Asian options under projected Euler, with common Gaussian smoothing, weak expansions, and posterior quantile transfer.",
+  "description": "Certified bounds on the pricing error of arithmetic Asian options under projected Euler, built on common Gaussian smoothing, with weak expansions and a transfer result for posterior quantiles.",
   "sourceUrl": "https://github.com/130U/certified-valuation-arithmetic-asian-options/blob/249987d23616804998683ac9eeead21c5a3473f6/manuscript/report.md",
   "repositoryUrl": "https://github.com/130U/certified-valuation-arithmetic-asian-options",
   "sourceEditedAt": "2026-11-12T09:37:12-05:00",

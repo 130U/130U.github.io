@@ -6,7 +6,7 @@ import { ArticleReadingLayout } from "../article/ArticleReadingLayout";
 import { ExperienceDiagram, ExperienceMetadata, KeyContributions, ProblemAndApproach } from "../experience/ExperienceDetails";
 import type { ShowcaseEntry } from "../../lib/content/experience-showcase";
 import type { ResearchArticleContent, ResearchCell, ResearchInline } from "../../lib/content/research-markdown";
-import { renderResearchMath } from "../../lib/content/research-math";
+import { RESEARCH_MATH_GUTTER_EM, RESEARCH_MATH_INLINE_SPACE_EM, renderResearchMath } from "../../lib/content/research-math";
 import { buildArticleHeadingMap, formatArticleHeadings, linkArticleSectionReferences } from "../../lib/content/article-headings";
 import { emphasisFor, manuscriptFigureFor, placeFigures } from "../../lib/content/article-figures";
 import { ArticleFigure, FigureController, ManuscriptFigure } from "../figures";
@@ -65,9 +65,62 @@ function sentenceColumns(rows: ResearchCell[][]) {
   return rows[0].map((_, column) => body.some((row) => contentWidth(row[column].inlines) > SENTENCE_EM));
 }
 
-// A heading may take two lines beside short values, never more.
+// A heading may take two lines beside short values, never more: its column is
+// at least as wide as the longer line of its most even two-line break. Advances
+// of the label face are estimated by glyph class, in ems of the label size.
+const LABEL_SPACE_EM = 0.27;
+const LABEL_SLACK_EM = 0.25;
+
+function labelAdvance(text: string) {
+  let advance = 0;
+  for (const glyph of text) {
+    advance += /[ijlI]/u.test(glyph) ? 0.27
+      : /[.,:;'()[\]/ftr1]/u.test(glyph) ? 0.36
+      : /[mwM%—]/u.test(glyph) ? 0.92
+      : glyph === "W" ? 1.03
+      : /[A-Z]/u.test(glyph) ? 0.72
+      : /[0-9×=+–-]/u.test(glyph) ? 0.64
+      : 0.6;
+  }
+  return advance;
+}
+
+/** The advance of each unbreakable word of a heading; mathematics joins the word it touches. */
+function headingWords(inlines: ResearchInline[]) {
+  const words: number[] = [];
+  let joined = false;
+  const extend = (advance: number) => {
+    if (joined) words[words.length - 1] += advance;
+    else words.push(advance);
+    joined = true;
+  };
+  const read = (list: ResearchInline[]) => {
+    for (const inline of list) {
+      if (inline.type === "line-break") {
+        joined = false;
+      } else if (inline.type === "math") {
+        extend(renderResearchMath(inline.tex).widthEm - 2 * RESEARCH_MATH_GUTTER_EM + 2 * RESEARCH_MATH_INLINE_SPACE_EM);
+      } else if (inline.type === "text" || inline.type === "code") {
+        for (const part of inline.text.split(/(\s+)/u)) {
+          if (!part) continue;
+          if (/^\s/u.test(part)) joined = false;
+          else extend(labelAdvance(part));
+        }
+      } else {
+        read(inline.inlines);
+      }
+    }
+  };
+  read(inlines);
+  return words;
+}
+
 function headingFloor(cell: ResearchCell) {
-  return { "--heading-floor": `${(contentWidth(cell.inlines) * 0.6).toFixed(2)}em` } as CSSProperties;
+  const words = headingWords(cell.inlines);
+  const line = (from: number, to: number) => words.slice(from, to).reduce((sum, word) => sum + word, 0) + LABEL_SPACE_EM * Math.max(0, to - from - 1);
+  let floor = line(0, words.length);
+  for (let split = 1; split < words.length; split += 1) floor = Math.min(floor, Math.max(line(0, split), line(split, words.length)));
+  return { "--heading-floor": `${(floor + LABEL_SLACK_EM).toFixed(2)}em` } as CSSProperties;
 }
 
 function ZoomGlyph() {

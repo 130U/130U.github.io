@@ -1,7 +1,7 @@
 {
   "slug": "certified-rough-heston-valuation",
   "title": "Certified Joint Pricing Errors in Rough Heston",
-  "description": "Deterministic joint pricing-error certificates for stored rough Heston outputs, finite-history propagation, portfolios, and finite-candidate decisions.",
+  "description": "A method for certifying portfolio valuation errors in rough Heston, carrying continuous Riccati residual bounds through to complete pricing guarantees.",
   "sourceUrl": "https://github.com/130U/certified-rough-heston-valuation/blob/de721f78cec277e390cd9dc2ebc4efa9ae9681e4/manuscript/merged-heston-en.md",
   "repositoryUrl": "https://github.com/130U/certified-rough-heston-valuation",
   "sourceEditedAt": "2026-11-12T09:54:24-05:00",

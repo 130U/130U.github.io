@@ -43,6 +43,7 @@
 
 .title {
   min-width: 0;
+  text-wrap: balance;
 }
 
 .action {

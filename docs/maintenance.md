@@ -40,7 +40,7 @@ Paths below are relative to `website/`.
 | Coursework | `app/lib/content/about.ts` | `app/coursework/page.tsx` | `/coursework/` |
 | Experience | `content/experience-showcase.json`; AI fields are generated from the manuscript below | `app/lib/content/experience-showcase.ts` | `/experience/`, `/experience/[slug]/` |
 | AI research | `content/sources/ai-portfolio/ai-research-and-engineering.md` | `scripts/import-ai-portfolio.mjs`, `app/lib/content/ai-projects.ts` | `/experience/[slug]/` |
-| Selected Research | `content/sources/selected-research/` (frozen import), `content/selected-research/site-edition/` (published text) | Research import scripts, `app/lib/content/selected-research.ts` | `/[paper]/` |
+| Selected Research | `content/sources/selected-research/` (pinned manuscripts), `content/selected-research/` (generated articles) | Research import scripts, `app/lib/content/selected-research.ts` | `/[paper]/` |
 | Legal research | `content/legal-papers/` structured manuscripts | `app/lib/content/legal-papers.ts` | `/experience/[slug]/` |
 | Blog | `content/blog/<slug>.md`, images in `public/assets/blog/<slug>/` | `app/lib/content/blog.ts` | `/blog/`, `/blog/[slug]/` |
 | Architecture | `../architecture/site.json` | Archify and `scripts/integrate-architecture.mjs` | `/architecture/` |
@@ -133,14 +133,12 @@ limits. Distinguish the Asian paper's projected-Euler certificate from its
 continuous-model comparison, and retain the Rough Heston paper's stated
 configurations and finite-candidate scope.
 
-Each page publishes its file in `content/selected-research/site-edition/`, which begins
-with a one-line `description` and revises expository prose only. The frozen JSON stays
-pinned to upstream. `tests/site-edition.test.mjs` requires the edition to keep the frozen
-mathematics, formal statements, tables, references, and chapter structure. Edit the
-edition for wording; rerun the importers only when the upstream manuscript changes, then
-reconcile the edition with the new import. The Rough Heston page's Full Manuscript
-action is set in `app/lib/content/selected-research.ts` and points at the public
-paper's fixed commit.
+Each page publishes its generated article in `content/selected-research/`: the imported
+main text and references, the page description, and the upstream commit and blob. The
+paper repositories are the authority for the text. Change wording there, pin the new
+commit, and rerun the importer; each importer holds its page's description. The Rough
+Heston page's Full Manuscript action is set in `app/lib/content/selected-research.ts`
+and opens the article of the paper's release.
 
 The dependence source tree includes supporting TeX inputs needed to resolve
 cross-references. The article draws its four figures natively from their formulas (see
@@ -269,7 +267,9 @@ visible copy. The static preview binds to `127.0.0.1:8123` by default and serves
 `out/`; use it to inspect production behavior. `npm run dev` uses the separate
 development security policy required by Next.js tooling. `test:browser` uses isolated
 Chromium contexts and the actual static export to check every figure and view at
-six viewport widths, plus enlarged-text and keyboard-scroll regressions. It reports
+six viewport widths, plus enlarged-text and keyboard-scroll regressions, and holds every
+manuscript table heading to two lines and every equation number to the column's right
+edge. It reports
 geometry and failure screenshots in `website/test-results/figure-layout/`. CI installs
 Chromium and requires these checks to pass before publishing.
 
