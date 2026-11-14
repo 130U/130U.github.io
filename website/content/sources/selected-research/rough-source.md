@@ -850,7 +850,7 @@ The repository contains the interval implementation, all leaf rectangles and the
 
 **Proposition B.1 (a neighbourhood of the calibrated correlation).** The conclusions of Proposition 6.1 hold for every \(\rho\in[-0.744501,-0.744499]\), at every real frequency and every positive time.
 
-**Proof.** Retain the frequency compactification \(\eta=u/(1+u)\), \(0\le\eta\le1\), and the original unnormalized polynomials \(\Delta,F_j,B_j,D_j\). Write \(S_b=-\rho[(1-\eta)+2i\eta]/(2h)\), \(h^2=\eta^2+(1-\eta)^2/4\). Then \(|S_b|=|\rho|\), \(\operatorname{Re} S_b\ge0\) for negative \(\rho\), \(A^2=1+S_b^2\), and \(R=(A+S_b)^{-1}=A-S_b\). Throughout \(|\rho|\le3/4\), the square-root branch remains fixed because \(\operatorname{Re} A^2\ge1-\rho^2>0\). Consequently,
+**Proof.** Retain the frequency compactification \(\eta=u/(1+u)\), \(0\le\eta\le1\), and the original unnormalised polynomials \(\Delta,F_j,B_j,D_j\). Write \(S_b=-\rho[(1-\eta)+2i\eta]/(2h)\), \(h^2=\eta^2+(1-\eta)^2/4\). Then \(|S_b|=|\rho|\), \(\operatorname{Re} S_b\ge0\) for negative \(\rho\), \(A^2=1+S_b^2\), and \(R=(A+S_b)^{-1}=A-S_b\). Throughout \(|\rho|\le3/4\), the square-root branch remains fixed because \(\operatorname{Re} A^2\ge1-\rho^2>0\). Consequently,
 
 \[
 |A|^{-1}\le8/5,\quad |A'|\le6/5,\quad
@@ -890,7 +890,7 @@ m_{D,j}(C)-10^{-6}L_{D,j}>0
 
 hold. By the mean-value theorem the test is sufficient. It certifies 182002 original leaves and 79758 finer leaves. For the remaining cells, directly evaluate the original complex polynomial formulas with \(\rho\), \(\alpha\) and \(\eta\) all interval valued. Exact outward dyadic arithmetic certifies strict \(B_j>0\) and \(D_j<0\) on 19808 additional closed cells.
 
-The original complete midpoint tree and the exact local splice trees verify that these 281568 cells cover the entire \((\alpha,\eta)\) rectangle without gaps or interior overlap. Their exact area is \(2/25\); each cell carries the entire correlation interval, giving exact three-dimensional volume \(1/6250000\). Hence the raw signs hold for every point of the stated domain. In particular \(\Delta\ne0\), the normalized denominator coefficients have positive real part, and all real numerator coefficients of the half-plane test are negative. The algebraic implication of B.1 gives the conclusions of Proposition 6.1, including \(\eta=1\), the infinite-frequency limit. Conjugacy supplies negative frequencies. \(\square\)
+The original complete midpoint tree and the exact local splice trees verify that these 281568 cells cover the entire \((\alpha,\eta)\) rectangle without gaps or interior overlap. Their exact area is \(2/25\); each cell carries the entire correlation interval, giving exact three-dimensional volume \(1/6250000\). Hence the raw signs hold for every point of the stated domain. In particular \(\Delta\ne0\), the normalised denominator coefficients have positive real part, and all real numerator coefficients of the half-plane test are negative. The algebraic implication of B.1 gives the conclusions of Proposition 6.1, including \(\eta=1\), the infinite-frequency limit. Conjugacy supplies negative frequencies. \(\square\)
 
 A separate reader checks every saved sign, the 422481-node partition tree, the local refinements, the derivative majorants and all 19808 direct cells through separately assembled Cramer matrices and numerator convolutions; it shares the dyadic primitives with the generator. The interval is the one covered by the stored computation, which confirms stability at the calibrated value.
 
@@ -984,7 +984,7 @@ If \(\widehat H\) corresponds to the physical-time trajectory \(\widehat Z\) and
 \]
 In the numerical example, \(s_0=1489/4000\). Appendix D.1 supplies the residual \(\delta_F\).
 
-Li and Liu (2018, Proposition 3.11(ii)) give Caputo convexity by regularization and a distributional limit; their Proposition 4.12 treats specified vector gradient and Hamiltonian flows. Kopteva (2022, Lemma 2.8 and Theorem 2.2) uses norm convexity and a positive fractional inverse under positive-time Lipschitz hypotheses. The following lemma proves the vector \(AC\) form needed here, including the terminal-time conclusion.
+Li and Liu (2018, Proposition 3.11(ii)) give Caputo convexity by regularisation and a distributional limit; their Proposition 4.12 treats specified vector gradient and Hamiltonian flows. Kopteva (2022, Lemma 2.8 and Theorem 2.2) uses norm convexity and a positive fractional inverse under positive-time Lipschitz hypotheses. The following lemma proves the vector \(AC\) form needed here, including the terminal-time conclusion.
 
 **Lemma C.3 (AC convexity and the continuous endpoint).** Let \(0<\alpha<1\), \(T>0\), \(v\in AC([0,T];\mathbb R^d)\), and let \(\Phi\in C^1(\mathbb R^d)\) be convex. With \(D_C^\alpha v=g_{1-\alpha}*v'\),
 \[
@@ -1588,7 +1588,7 @@ A candidate is inconsistent with the quotes when some row has \(p^+_{ij}<b_i^-\)
 
 If \(p^+<b^-\), then the exact price satisfies \(c<B\); if \(p^->a^+\), then \(c>A\). A single such row rules out simultaneous consistency. In the opposite direction, the inner-band conditions give \(B\le b^+\le c\le a^-\le A\). Applying these statements row by row proves the consistency assertions. \(\square\)
 
-**Table E.2. H0 half-year three-candidate benchmark: normalized objective, price RMS and actual Padé-output objective enclosures.**
+**Table E.2. H0 half-year three-candidate benchmark: normalised objective, price RMS and actual Padé-output objective enclosures.**
 
 | α | H | Rigorous model J interval | Rigorous model-price RMS interval | Rigorous implemented Padé J interval |
 |---|---|---|---|---|
@@ -1610,7 +1610,7 @@ The following tables give the prices behind these results.
 
 #### α=0.52, H=0.02
 
-**Table E.4. H0 alpha=0.52 price accounts: normalized quotes, model prices, actual output and its total error bound.**
+**Table E.4. H0 alpha=0.52 price accounts: normalised quotes, model prices, actual output and its total error bound.**
 
 | K | Rigorous quote-midpoint interval | Rigorous normalised model-price interval | Implemented Padé dyadic output (displayed value) | Total model-price error bound for this output |
 |---|---|---|---|---|
@@ -1629,7 +1629,7 @@ The following tables give the prices behind these results.
 
 #### α=0.60, H=0.10
 
-**Table E.5. H0 alpha=0.60 price accounts, with the same normalization and column meanings as Table E.4.**
+**Table E.5. H0 alpha=0.60 price accounts, with the same normalisation and column meanings as Table E.4.**
 
 | K | Rigorous quote-midpoint interval | Rigorous normalised model-price interval | Implemented Padé dyadic output (displayed value) | Total model-price error bound for this output |
 |---|---|---|---|---|
@@ -1648,7 +1648,7 @@ The following tables give the prices behind these results.
 
 #### α=0.90, H=0.40
 
-**Table E.6. H0 alpha=0.90 price accounts, with the same normalization and column meanings as Table E.4.**
+**Table E.6. H0 alpha=0.90 price accounts, with the same normalisation and column meanings as Table E.4.**
 
 | K | Rigorous quote-midpoint interval | Rigorous normalised model-price interval | Implemented Padé dyadic output (displayed value) | Total model-price error bound for this output |
 |---|---|---|---|---|
@@ -1729,9 +1729,9 @@ The centre and radius of the six-month 4400–4500 certificate on each bank are 
 
 The step from H2 to H3 changes the centre and the radius, H3 to H4 keeps the centre, and N2 to N2L keeps the centre and the remainders. `frozen-output-centre-account.json` records these transitions exactly.
 
-**Table E.10. Signed contributions to the closest-pair normalized objective gap; scientific notation displays the exact ledger.**
+**Table E.10. Signed contributions to the closest-pair normalised objective gap; scientific notation displays the exact ledger.**
 
-| Gap contribution | Normalized loss contribution |
+| Gap contribution | Normalised loss contribution |
 | --- | --- |
 | reference_midpoint_objective_difference | 7.939186982887e-09 |
 | used_node_support_both_candidates | -4.690368762320e-09 |
@@ -1780,7 +1780,7 @@ Table E.13 lists the proof obligations, the reader of each, what it recomputes a
 
 | ID | Obligation | Verification command | Recomputed | Inherited / shared |
 | --- | --- | --- | --- | --- |
-| S1 | Padé coefficient signs on the original parameter rectangle | `full_structure_verify.py` ([S1](https://github.com/130U/certified-rough-heston-valuation/blob/main/COMMANDS.md#s1)) | 211241 structural sign leaves and rectangle cover | model/parameter definitions; original strict interval algebra and generalized-power primitives |
+| S1 | Padé coefficient signs on the original parameter rectangle | `full_structure_verify.py` ([S1](https://github.com/130U/certified-rough-heston-valuation/blob/main/COMMANDS.md#s1)) | 211241 structural sign leaves and rectangle cover | model/parameter definitions; original strict interval algebra and generalised-power primitives |
 | S2 | Startup Caputo residual and left-halfplane enclosure | `startup_independent.py` ([S2](https://github.com/130U/certified-rough-heston-valuation/blob/main/COMMANDS.md#s2)) | all 513 frequencies for each of the three original startup cells | stored field dyadics and later-time continuous residuals; Gamma/power/dyadic outward primitives |
 | R1 | Full original alpha=.52 low-frequency continuous residual cover | `check-time-envelope.py` ([R1](https://github.com/130U/certified-rough-heston-valuation/blob/main/COMMANDS.md#r1)) | 8189 closed cells ×513 entries: cover, saved dyadic values and per-node maxima; startup audited separately | derivative inequalities in identified continuous generator; NumPy enclosure with proved dot-product error and strict scalar primitives |
 | R2 | Full alpha=.52 high-frequency continuous residual cover | `omission-verify.py` ([R2](https://github.com/130U/certified-rough-heston-valuation/blob/main/COMMANDS.md#r2)) | 8189 closed cells ×512 entries: exact bank, startup/halfplane, saved-node maxima | identified Caputo derivative-generator inequalities; strict scalar primitives and original continuous generator |
