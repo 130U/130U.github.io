@@ -87,13 +87,16 @@ the page's H1.
 
 ### Reading frame
 
-The desktop frame is capped at 1440px and divided into 15 columns: a three-column
-sticky navigation rail and a twelve-column content field. Tablets between 768px and
-1024px use 12 columns, with content running to the right gutter so portrait iPads keep
-a full line of prose. Horizontal gutters are 64px on desktop, 32px on tablets, and 20px
-on phones. The content field reserves one internal track for margin indices and aligns
-headings and prose to the reading track. Structural column guides are decorative,
-hidden from assistive technology, and omitted on phones.
+The desktop frame is capped at 1440px and divided into 15 columns: a three-column sticky
+navigation rail and a twelve-column content field. Tablets between 768px and 1024px use
+12 columns, with content running to the right gutter so portrait iPads keep a full line
+of prose. Horizontal gutters are 64px on desktop, 32px on tablets, and 20px on phones.
+The content field reserves one internal track for margin indices and aligns headings and
+prose to the reading track. Structural column guides are decorative, hidden from
+assistive technology, and omitted on phones. A guide meets the content edge it marks at
+every width; the closing guide on tablets sits on the last column's end. Every page
+title starts 112px below the top of the content field on desktop and 52px below the
+header on phones.
 
 The rail's minimum width follows the interface type size, indent, padding, and
 scrollbar allowance, so the rail, reading field, and guides reflow together when text
@@ -108,10 +111,14 @@ fractional viewport widths continuously.
 `--reading-measure` (36rem, about seventy characters of Source Serif 4 at the reading
 size) caps every narrative container: introductions, standfirsts, stacked ledger prose,
 detail pages, captions, posts, and article reading columns. Lines average about 33
-characters on a 320px phone (26 inside a frame), 51 to 66 on a portrait iPad, and 72 in a
-full reading column; prose on the hanging axis holds 42 at 1200px and 52 from 1440px.
+characters on a 320px phone (26 inside a frame), 51 to 66 on a portrait iPad, and 72 in
+a full reading column; prose on the hanging axis holds 42 at 1200px and 52 from 1440px.
 Paragraphs wrap ragged-right with no forced breaks, and long unbroken strings wrap in an
-emergency.
+emergency. Text never runs onto a hairline that bounds it: `--frame-inset` (20 to 24px)
+separates the rail's links, a section's margin index, a framed list's numbers, the
+contents rail and right-aligned footer actions from their lines, and on tablets, where
+running text would otherwise reach the closing guide, `--reading-width` keeps the same
+inset. Frames themselves may meet a guide.
 
 ### Hanging layout
 
@@ -149,7 +156,9 @@ View Now on a post uses the same chevron.
 Every return action reads "Back to {destination}" with the decorative arrow from
 `ReturnArrow`: Back to Education, Back to Selected Research, Back to Experience, and
 Back to Blog. On detail pages it is the parent link beside the wordmark; article,
-detail-page, and post footers repeat it beside Back to Top. The destination is the
+detail-page, and post footers repeat it beside Back to Top, in one footer: a hairline,
+then both actions on one centered 44px row, the return link underlined and Back to Top
+plain. On articles and posts the footer spans the reading column. The destination is the
 originating section or entry, so the link works after opening a page directly. The 404
 page offers Return Home with the same arrow. Parent links have 44px targets; coarse
 pointers also receive 44px primary navigation and standalone link targets.

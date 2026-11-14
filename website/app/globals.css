@@ -45,7 +45,13 @@
   --type-math: 1.15em;
   /* About seventy characters of Source Serif 4 at the reading size. */
   --reading-measure: 36rem;
-  --rail-min-width: calc(5 * var(--type-interface) + 13px + clamp(20px, 2vw, 24px) + 22px + 10px);
+  /* Running text at the measure; on tablets, where it would reach the hairline
+     that closes the column, it keeps the frames' inset from that line. */
+  --reading-width: var(--reading-measure);
+  /* The inset of text from the hairline that bounds it: the rail's links, a
+     section's index, a framed list's numbers. */
+  --frame-inset: clamp(20px, 2vw, 24px);
+  --rail-min-width: calc(5 * var(--type-interface) + 13px + var(--frame-inset) + 22px + 10px);
   --title-leading: 1.12;
   --heading-leading: 1.25;
   --subheading-leading: 1.4;
@@ -61,7 +67,7 @@
      with the frame so laptops hold a full line of prose. */
   --hang-columns: minmax(0, 4fr) minmax(0, 6fr);
   --hang-gap: clamp(28px, calc(28px + (100vw - 1200px) * 0.05), 40px);
-  --prose-inset: clamp(0px, calc((100vw - 1200px) * 0.1333), 32px);
+  --prose-inset: clamp(var(--frame-inset), calc((100vw - 1200px) * 0.1333), 32px);
   --link-underline-offset: 0.18em;
   --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
   --drawer-ease: cubic-bezier(0.32, 0.72, 0, 1);
@@ -275,8 +281,14 @@ button:focus-visible {
   opacity: 0.55;
 }
 
+@media (768px <= width < 1200px) {
+  :root {
+    --reading-width: min(var(--reading-measure), 100% - var(--frame-inset));
+  }
+}
+
 .site-rail {
-  --rail-safe-inset: clamp(20px, 2vw, 24px);
+  --rail-safe-inset: var(--frame-inset);
 
   position: sticky;
   z-index: 30;
@@ -443,7 +455,7 @@ button:focus-visible {
   align-content: start;
   min-width: 0;
   overflow-wrap: anywhere;
-  padding: 176px 0 144px;
+  padding: 112px 0 144px;
 }
 
 .content-column > * {
@@ -727,6 +739,8 @@ button:focus-visible {
   .structural-guide-reading-end {
     grid-column: 12;
     justify-self: end;
+    /* Zero width puts the line, drawn on the guide's left edge, on the column's end. */
+    width: 0;
   }
 
   .site-rail {
@@ -888,7 +902,7 @@ button:focus-visible {
 
   .content-column {
     display: block;
-    padding: 88px 0 100px;
+    padding: 52px 0 100px;
   }
 
   .page-intro {

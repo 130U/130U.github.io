@@ -235,7 +235,7 @@
 }
 
 .caption {
-  max-width: var(--reading-measure);
+  max-width: var(--reading-width);
   margin-top: 36px;
   color: var(--supporting-ink);
   font-family: var(--font-prose);

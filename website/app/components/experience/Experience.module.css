@@ -31,7 +31,7 @@
   padding: 72px 0 104px;
   scroll-margin-top: 32px;
 }
-.sectionIndex { grid-column: 1; padding-top: 0.5rem; }
+.sectionIndex { grid-column: 1; padding: 0.5rem 0 0 var(--frame-inset); }
 .sectionBody { grid-column: 2 / span 10; min-width: 0; }
 .sectionTitle {
   margin: 0 0 56px;
@@ -49,7 +49,7 @@
 }
 
 /* The AI section's note is its standfirst: under the heading, on the same edge. */
-.indexDisclosure { max-width: var(--reading-measure); margin: -24px 0 72px; }
+.indexDisclosure { max-width: var(--reading-width); margin: -24px 0 72px; }
 .indexDisclosure p { color: var(--supporting-ink); }
 .indexDisclosure p, .problemAndApproach p {
   margin: 0;
@@ -84,6 +84,8 @@
 .detailFooter { display: flex; justify-content: space-between; gap: 24px; border-top: 1px solid var(--rule); margin-top: 72px; padding-top: 24px; font-size: var(--type-interface); }
 .detailFooter a { display: inline-flex; align-items: center; min-height: 44px; }
 .detailFooter :global(.back-link) { margin-bottom: 0; }
+/* Back to Top keeps the frames' inset from the column's closing line. */
+@media (width >= 768px) { .detailFooter { padding-right: var(--frame-inset); } }
 
 /* Record strip: four labeled fields in one frame, divided by dashed hairlines,
    values in the reading face. */
@@ -185,7 +187,7 @@
       var(--dash-y) left top / 1px 100% no-repeat,
       var(--dash-x) left top / 100% 1px no-repeat;
   }
-  .detailPage > .contributions > ol { max-width: var(--reading-measure); }
+  .detailPage > .contributions > ol { max-width: var(--reading-width); }
 }
 
 @media (width < 768px) {
@@ -194,7 +196,7 @@
   .intro h1,
   .detailPage .detailHeader h1 { max-width: none; }
   .section { display: block; padding: 40px 0 56px; scroll-margin-top: 6rem; }
-  .sectionIndex { display: block; margin-bottom: 10px; padding-top: 0; }
+  .sectionIndex { display: block; margin-bottom: 10px; padding: 0; }
   .sectionTitle { margin-bottom: 32px; }
   .indexDisclosure { margin: -8px 0 48px; }
   .metadata { margin-top: 32px; }

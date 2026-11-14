@@ -41,7 +41,7 @@
    and byline sit over a hairline, then the hero, the work and the prose. */
 .post {
   min-width: 0;
-  max-width: var(--reading-measure);
+  max-width: var(--reading-width);
 }
 
 .header h1 {
