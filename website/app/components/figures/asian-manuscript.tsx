@@ -1,5 +1,5 @@
 import type { ReactNode } from "react";
-import data from "../../../content/selected-research/certified-valuation-arithmetic-asian-options.figures.json";
+import data from "../../../content/selected-research/certified-valuation-of-arithmetic-asian-options.figures.json";
 import { cubicLaw, kinkBoundPerStrike } from "../../lib/content/asian-kink-bound";
 import type { ManuscriptFigureProps } from "./dependence-manuscript";
 import { Dot, Figure, Mark, Plot, fixed, grouped, linear, logarithmic, path, styles as kit, type Crosshair } from "./kit";

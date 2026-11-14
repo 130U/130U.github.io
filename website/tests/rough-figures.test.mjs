@@ -5,7 +5,7 @@ import test from "node:test";
 import { parseResearchMarkdown } from "../app/lib/content/research-markdown.ts";
 import { ROUGH_HESTON, forwardVariance, halfShareDamping, herfindahlLevel, nettingRatio, position } from "../app/lib/content/rough-heston-curves.ts";
 
-const SLUG = "certified-rough-heston-valuation";
+const SLUG = "certified-joint-pricing-errors-in-rough-heston";
 const STUDIES = [
   ["finite-history-nodes-alpha-13_25.json", "science/baseline/finite-history/finite-history-nodes-alpha-13_25.json", "c6ae3634bd49abcf1ce00f1abc9cd1e9648acdb6"],
   ["transfer-time-local-nodes.json", "science/baseline/frontier/transfer-time-local-nodes.json", "085f5093feb64a2d51bfea8e25e5090875b78345"],

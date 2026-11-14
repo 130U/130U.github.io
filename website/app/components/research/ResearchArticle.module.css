@@ -36,6 +36,13 @@
   text-decoration: none;
 }
 
+/* A formula with the punctuation around it, and a number range, each hold one
+   line. */
+.glued,
+.range {
+  white-space: nowrap;
+}
+
 .body code {
   font-size: var(--type-reading);
   overflow-wrap: anywhere;
@@ -78,56 +85,16 @@
 /* The zoom control holds the frame's top-right corner, on the title's first
    line, or on the header band of a table without a title. */
 .zoom {
+  --control-surface: var(--table-surface);
   position: absolute;
   z-index: 4;
   top: calc(22px + var(--type-interface) * var(--interface-leading) * var(--zoom, 1) / 2 - 16px);
   right: calc(var(--table-pad) - 8px);
-  display: grid;
-  width: 32px;
-  height: 32px;
-  padding: 0;
-  border: 0;
-  background: transparent;
-  color: var(--supporting-ink);
-  cursor: zoom-in;
-  place-items: center;
-  touch-action: manipulation;
-  transition: color 160ms ease, background-color 160ms ease;
-}
-
-.zoom::before {
-  position: absolute;
-  inset: -6px;
-  content: "";
-}
-
-.zoom[hidden] {
-  display: none;
 }
 
 .zoom:first-child {
   top: 6px;
   background: var(--table-band);
-}
-
-.zoom:focus-visible {
-  outline-offset: -2px;
-}
-
-.zoom svg {
-  display: block;
-  transition: transform 120ms var(--ease-out);
-}
-
-.zoom:active svg {
-  transform: scale(0.9);
-}
-
-@media (hover: hover) and (pointer: fine) {
-  .zoom:hover {
-    background: color-mix(in srgb, #000 5%, var(--table-surface));
-    color: var(--accent);
-  }
 }
 
 .tableRegion:focus-visible {
@@ -319,8 +286,13 @@
   box-shadow: inset 2px 0 0 var(--accent), 1px 0 0 var(--rule-medium);
 }
 
+/* Values take tabular figures; a heading keeps the text's proportional
+   figures, whose hyphen is narrower. */
 .numeric {
   text-align: right;
+}
+
+td.numeric {
   font-variant-numeric: lining-nums tabular-nums;
 }
 
@@ -332,47 +304,6 @@
 /* Zoomed, the table lifts onto a sheet over the blurred page. The stage sets it
    at the largest step of type that holds every row on one line. In a table of
    long sentences, those columns wrap across the full width. */
-.stage {
-  --stage-gutter: clamp(8px, 3.5vw, 48px);
-  position: fixed;
-  inset: 0;
-  width: 100%;
-  max-width: none;
-  height: 100vh;
-  height: 100dvh;
-  max-height: none;
-  margin: 0;
-  padding: var(--stage-gutter);
-  overflow: hidden;
-  overscroll-behavior: contain;
-  border: 0;
-  background: transparent;
-  color: var(--ink);
-  font-family: var(--font-prose);
-  font-size: var(--type-reading);
-  line-height: var(--reading-leading);
-}
-
-.stage[open] {
-  display: grid;
-  grid-template-columns: minmax(0, 1fr);
-  grid-template-rows: minmax(0, 1fr);
-  place-items: center;
-}
-
-.stage::backdrop {
-  background: transparent;
-}
-
-.scrim {
-  position: fixed;
-  inset: 0;
-  background: color-mix(in srgb, var(--page) 58%, transparent);
-  -webkit-backdrop-filter: blur(7px);
-  backdrop-filter: blur(7px);
-  cursor: zoom-out;
-}
-
 .tableFrame[data-zoomed] {
   --table-pad: clamp(16px, 2.4vw, 32px);
   --table-surface: var(--panel);
@@ -392,23 +323,6 @@
   max-width: none;
   padding-bottom: 20px;
   font-size: calc(var(--type-interface) * var(--zoom, 1));
-}
-
-.tableFrame[data-zoomed] .zoom {
-  cursor: zoom-out;
-}
-
-.tableFrame[data-zoomed] .zoom [data-zoom-plus] {
-  animation: zoom-plus-out 240ms var(--ease-out) both;
-  transform-box: fill-box;
-  transform-origin: center;
-}
-
-@keyframes zoom-plus-out {
-  to {
-    opacity: 0;
-    transform: scaleY(0);
-  }
 }
 
 .tableFrame[data-zoomed] .tableRegion {

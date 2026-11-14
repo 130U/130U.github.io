@@ -16,10 +16,10 @@ Duke Alumnus, B.S. in Mathematics and M.Eng. in Risk Engineering · Sequoia Fell
 
 - **[Critical Dependence Stress for Portfolio Diversification](https://www.theodoreoy.com/critical-dependence-stress-for-portfolio-diversification/)**
   How much dependence stress reverses a portfolio's Expected Shortfall advantage while every loss distribution stays fixed. The asymptotic reversal budget is at least 30% above the initial-sensitivity prediction.
-- **[Certified Valuation of Arithmetic Asian Options](https://www.theodoreoy.com/certified-valuation-arithmetic-asian-options/)**
+- **[Certified Valuation of Arithmetic Asian Options](https://www.theodoreoy.com/certified-valuation-of-arithmetic-asian-options/)**
   What an arithmetic Asian option loses when exercise is decided on the geometric average of its fixings. The proved bound is below a hundredth of a cent per barrel for a one-month crude oil option, and under Heston it becomes a certified price interval.
-- **[Certified Joint Pricing Errors in Rough Heston](https://www.theodoreoy.com/certified-rough-heston-valuation/)**
-  A method for certifying portfolio valuation errors in rough Heston. By preserving numerical errors shared across options, it can certify portfolio tolerances that separate price bounds cannot.
+- **[Certified Joint Pricing Errors in Rough Heston](https://www.theodoreoy.com/certified-joint-pricing-errors-in-rough-heston/)**
+  How far stored option prices can sit from the exact model prices across a whole portfolio, when one transform error is common to every strike. Netting the legs certifies a half-point tolerance for all 28 six-month S&P 500 positions tested, against 13 without.
 
 ## AI Research and Engineering
 

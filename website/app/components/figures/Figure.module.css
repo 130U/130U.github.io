@@ -9,13 +9,30 @@
   color: var(--ink);
 }
 
+/* Text in a figure keeps the face's proportional figures, so a hyphenated
+   label reads as one word; ticks and values take tabular figures. */
 .frame {
+  --frame-pad: clamp(16px, 5cqi, 28px);
   position: relative;
   overflow-x: clip;
-  padding: clamp(16px, 5cqi, 28px);
+  padding: var(--frame-pad);
   border: 1px solid var(--frame);
   font-family: var(--font-text);
-  font-variant-numeric: lining-nums tabular-nums;
+  font-variant-numeric: lining-nums;
+}
+
+/* The zoom control holds the frame's top-right corner, level with the first
+   line of the title or of the plot's axis title. */
+.zoom {
+  position: absolute;
+  z-index: 4;
+  top: calc(var(--frame-pad) - 5px);
+  right: calc(var(--frame-pad) - 8px);
+}
+
+/* Where a label holds that corner, the control takes a row of its own. */
+.frame[data-zoom-row] {
+  padding-top: calc(var(--frame-pad) + 32px);
 }
 
 /* Keep comparison diagrams legible when their columns cannot reflow. */
@@ -51,6 +68,7 @@
   align-items: flex-start;
   gap: 14px;
   margin-bottom: 26px;
+  padding-right: 32px;
 }
 
 .title {
@@ -151,6 +169,19 @@
   line-height: var(--reading-leading);
 }
 
+/* "Figure N." of a manuscript caption, in the face and weight of a table's
+   title. */
+.captionLabel {
+  color: var(--ink);
+  font-family: var(--font-text);
+  font-size: var(--type-interface);
+  font-weight: 500;
+}
+
+.caption strong {
+  font-weight: inherit;
+}
+
 .legend {
   display: flex;
   flex-wrap: wrap;
@@ -167,11 +198,6 @@
   display: inline-flex;
   align-items: center;
   gap: 7px;
-}
-
-/* A formula in a label keeps its width; the words beside it wrap. */
-.legend li [data-research-formula] {
-  flex: none;
 }
 
 .swatch {
@@ -293,6 +319,7 @@
 .tickX {
   position: absolute;
   color: var(--muted);
+  font-variant-numeric: lining-nums tabular-nums;
   white-space: nowrap;
   pointer-events: none;
 }
@@ -331,6 +358,8 @@
   white-space: nowrap;
 }
 
+/* Every axis title starts on the frame's left edge, where the head and the
+   legend start. */
 .yTitle {
   position: absolute;
   top: 0;
@@ -339,8 +368,8 @@
 
 .xTitle {
   position: absolute;
-  right: var(--pr, 14px);
   bottom: 0;
+  left: 0;
 }
 
 .curves {
@@ -569,6 +598,7 @@
   position: relative;
   z-index: 1;
   color: var(--ink);
+  font-variant-numeric: lining-nums tabular-nums;
   text-align: right;
   white-space: nowrap;
 }
@@ -619,7 +649,7 @@
 
 .axisTitle {
   grid-column: 1 / -1;
-  justify-self: end;
+  justify-self: start;
   padding-top: 4px;
 }
 
@@ -864,10 +894,6 @@
 .schematicArt [data-axis] {
   stroke: var(--rule-strong);
   stroke-width: 1;
-}
-
-.schematicXTitle {
-  align-self: flex-end;
 }
 
 /* ---------- Diagrams ---------- */

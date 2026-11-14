@@ -2,7 +2,7 @@
   "fetchedWith": "Authenticated Git checkout at the exact commit; bytes read with git show and checked against Git blob SHA-1",
   "sources": [
     {
-      "slug": "certified-valuation-arithmetic-asian-options",
+      "slug": "certified-valuation-of-arithmetic-asian-options",
       "fetchedAt": "2026-11-14",
       "sourceUrl": "https://github.com/130U/certified-valuation-arithmetic-asian-options/blob/2efeaf1580e139001744eab48ffd1c0c1e3058c8/manuscript/report.md",
       "sourceCommit": "2efeaf1580e139001744eab48ffd1c0c1e3058c8",
@@ -101,7 +101,7 @@
       "figureDataSha256": "bdf15c5413f7e2908aee5edcd90184288671f3266c6c774d95b15b93ee204612"
     },
     {
-      "slug": "certified-rough-heston-valuation",
+      "slug": "certified-joint-pricing-errors-in-rough-heston",
       "fetchedAt": "2026-11-14",
       "sourceUrl": "https://github.com/130U/certified-rough-heston-valuation/blob/64b8ef2bbff044e93ded82d2694bf1afe8d92b41/manuscript/merged-heston-en.md",
       "sourceCommit": "64b8ef2bbff044e93ded82d2694bf1afe8d92b41",

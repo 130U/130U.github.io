@@ -1,5 +1,8 @@
 import type { CSSProperties, ReactNode } from "react";
-import { InlineMarkdown } from "../research/ResearchInline";
+import type { ArticleInline } from "../../lib/content/article-headings";
+import { InlineContent, InlineMarkdown, KeepRanges } from "../research/ResearchInline";
+import { ZoomGlyph } from "../ZoomGlyph";
+import zoomStyles from "../research/Stage.module.css";
 import styles from "./Figure.module.css";
 
 export { styles };
@@ -10,7 +13,26 @@ type LegendItem = { label: ReactNode; tone: Tone; shape?: "square" | "line" | "d
 
 /** Short copy that may contain inline TeX in the manuscripts' `$...$` form. */
 export function Tx({ children }: { children: string }) {
-  return children.includes("$") ? <InlineMarkdown text={children} /> : <>{children}</>;
+  return children.includes("$") ? <InlineMarkdown text={children} /> : <KeepRanges text={children} />;
+}
+
+const FIGURE_LABEL = /^(Figure \d+\.)\s*/u;
+
+/**
+ * A manuscript caption with its "Figure N." set as the label all three papers
+ * share. The rest reads as one caption, so emphasis on its opening words
+ * belongs to the label alone.
+ */
+export function FigureCaption({ inlines }: { inlines: ArticleInline[] }) {
+  const [first, ...rest] = inlines;
+  const lead = first?.type === "strong" ? first.inlines[0] : first;
+  const match = lead?.type === "text" ? FIGURE_LABEL.exec(lead.text) : null;
+  if (!match || lead?.type !== "text") return <InlineContent inlines={inlines} />;
+  const remainder = (text: string): ArticleInline[] => (text ? [{ type: "text", text }] : []);
+  const body: ArticleInline[] = first.type === "strong"
+    ? [...remainder(lead.text.slice(match[0].length)), ...first.inlines.slice(1), ...rest]
+    : [...remainder(lead.text.slice(match[0].length)), ...rest];
+  return <><span className={styles.captionLabel} data-figure-label>{match[1]}</span> <InlineContent inlines={body} /></>;
 }
 
 const tone = (value: Tone) => styles[value];
@@ -43,9 +65,10 @@ export function Figure({ id, title, caption, views, defaultView, viewsLabel, leg
   return (
     <figure className={`${styles.figure} ${className ?? ""}`} {...identity} data-figure={id} data-view={view}>
       <div className={styles.frame}>
+        <button type="button" className={`${zoomStyles.control} ${styles.zoom}`} data-figure-zoom aria-label="Zoom in" aria-haspopup="dialog" hidden><ZoomGlyph /></button>
         {(title || views) && (
           <div className={styles.head}>
-            {title && <p className={styles.title}><Tx>{title}</Tx></p>}
+            {title && <p className={styles.title} data-figure-title><Tx>{title}</Tx></p>}
             {views && (
               <div className={styles.switch} role="group" aria-label={viewsLabel ?? "Figure view"} data-fig-switch data-count={views.length} hidden>
                 {views.map((item) => <button key={item.id} type="button" data-fig-view={item.id} aria-pressed={item.id === view}>{item.label}</button>)}
@@ -69,7 +92,7 @@ export function Legend({ items }: { items: LegendItem[] }) {
   return (
     <ul className={styles.legend} aria-hidden="true">
       {items.map((item, index) => (
-        <li key={index}><span className={`${styles.swatch} ${tone(item.tone)}`} data-shape={item.shape ?? "square"} />{typeof item.label === "string" ? <Tx>{item.label}</Tx> : item.label}</li>
+        <li key={index}><span className={`${styles.swatch} ${tone(item.tone)}`} data-shape={item.shape ?? "square"} /><span>{typeof item.label === "string" ? <Tx>{item.label}</Tx> : item.label}</span></li>
       ))}
     </ul>
   );
@@ -318,7 +341,7 @@ export function Schematic({ label, size, inset, xTitle, yTitle, art, children, c
         <svg className={styles.schematicArt} viewBox={`0 0 ${width} ${height}`} focusable="false">{art}</svg>
         {children}
       </div>
-      {xTitle && <span className={`${styles.pill} ${styles.schematicXTitle}`} aria-hidden="true"><Tx>{xTitle}</Tx></span>}
+      {xTitle && <span className={styles.pill} aria-hidden="true"><Tx>{xTitle}</Tx></span>}
     </div>
   );
 }

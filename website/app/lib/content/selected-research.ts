@@ -18,9 +18,9 @@ function readResearch(slug: string, repository = slug) {
   return { ...source, path: `/${slug}/`, blocks: parseResearchMarkdown(source.markdown, { joinSoftLines: true }) };
 }
 
-const selectedResearch = readResearch("certified-valuation-arithmetic-asian-options");
+const selectedResearch = readResearch("certified-valuation-of-arithmetic-asian-options", "certified-valuation-arithmetic-asian-options");
 const roughHestonResearch = {
-  ...readResearch("certified-rough-heston-valuation"),
+  ...readResearch("certified-joint-pricing-errors-in-rough-heston", "certified-rough-heston-valuation"),
   sourceUrl: "https://github.com/130U/certified-rough-heston-valuation/blob/V_20261101/ARTICLE.md",
 };
 const dependenceResearch = readResearch("critical-dependence-stress-for-portfolio-diversification", "Critical-Dependence-Stress");

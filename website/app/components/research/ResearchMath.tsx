@@ -3,7 +3,8 @@ import { RESEARCH_MATH_GUTTER_EM, RESEARCH_MATH_INLINE_SPACE_EM, renderResearchM
 import { proseNumber } from "../../lib/content/research-number";
 import styles from "./ResearchMath.module.css";
 
-export function ResearchMath({ tex, display = false }: { tex: string; display?: boolean }) {
+/** `tightStart` and `tightEnd` close the formula's side up to a bracket or punctuation mark, as in the papers. */
+export function ResearchMath({ tex, display = false, tightStart = false, tightEnd = false }: { tex: string; display?: boolean; tightStart?: boolean; tightEnd?: boolean }) {
   const formula = renderResearchMath(tex, display);
   const assistive = <span className={styles.assistive} dangerouslySetInnerHTML={{ __html: formula.mathml }} />;
   if (display) {
@@ -35,7 +36,8 @@ export function ResearchMath({ tex, display = false }: { tex: string; display?: 
       tabIndex={scrollableInline ? 0 : undefined}
       aria-label={scrollableInline ? "Scrollable mathematical expression" : undefined}
       style={{
-        marginInline: `${RESEARCH_MATH_INLINE_SPACE_EM - RESEARCH_MATH_GUTTER_EM}em`,
+        marginInlineStart: `${(tightStart ? 0 : RESEARCH_MATH_INLINE_SPACE_EM) - RESEARCH_MATH_GUTTER_EM}em`,
+        marginInlineEnd: `${(tightEnd ? 0 : RESEARCH_MATH_INLINE_SPACE_EM) - RESEARCH_MATH_GUTTER_EM}em`,
         verticalAlign: `${-formula.depthEm}em`,
       }}
     >

@@ -1,5 +1,5 @@
 {
-  "slug": "certified-valuation-arithmetic-asian-options",
+  "slug": "certified-valuation-of-arithmetic-asian-options",
   "title": "Certified Valuation of Arithmetic Asian Options",
   "description": "The cost of exercising an arithmetic Asian option on the geometric average: a proved bound, its cubic law in Black's model, and a certified Heston price interval with its Euler discretization error.",
   "sourceUrl": "https://github.com/130U/certified-valuation-arithmetic-asian-options/blob/2efeaf1580e139001744eab48ffd1c0c1e3058c8/manuscript/report.md",

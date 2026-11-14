@@ -40,8 +40,8 @@ test("research tables hold each row of values on one line and scroll natively be
 test("all research tables retain native table semantics inside named keyboard-accessible scroll regions", async () => {
   const routes = [
     ["critical-dependence-stress-for-portfolio-diversification", 0],
-    ["certified-valuation-arithmetic-asian-options", 11],
-    ["certified-rough-heston-valuation", 10],
+    ["certified-valuation-of-arithmetic-asian-options", 11],
+    ["certified-joint-pricing-errors-in-rough-heston", 10],
     ["experience/statistical-inference-and-resource-allocation-in-expert-data-production", 1],
     ["experience/task-validity-in-financial-synthetic-data", 2],
     ["experience/verification-and-supervision-in-scientific-reasoning-tasks", 1],
@@ -65,12 +65,20 @@ test("all research tables retain native table semantics inside named keyboard-ac
       assert.match(control, /\baria-haspopup="dialog"/u);
       assert.match(control, /\bhidden\b/u, "The control appears only once the page's script can open the stage.");
     }
-    assert.equal([...html.matchAll(/<dialog\b/gu)].length, count > 0 ? 1 : 0, `${route}: one stage serves all of a page's tables.`);
+    const figures = [...html.matchAll(/<figure\b[^>]*\bdata-figure="/gu)].length;
+    const figureControls = [...html.matchAll(/<button\b([^>]*\bdata-figure-zoom\b[^>]*)>/gu)];
+    assert.equal(figureControls.length, figures, `${route}: every figure carries one zoom control.`);
+    for (const [, control] of figureControls) {
+      assert.match(control, /\baria-label="Zoom in"/u);
+      assert.match(control, /\baria-haspopup="dialog"/u);
+      assert.match(control, /\bhidden\b/u, "The control appears only once the page's script can open the stage.");
+    }
+    assert.equal([...html.matchAll(/<dialog\b/gu)].length, count + figures > 0 ? 1 : 0, `${route}: one stage serves all of a page's tables and figures.`);
   }
 });
 
 test("a table of values never wraps its rows, and a table of sentences wraps only those columns", async () => {
-  const html = await readFile(new URL("../out/certified-rough-heston-valuation/index.html", import.meta.url), "utf8");
+  const html = await readFile(new URL("../out/certified-joint-pricing-errors-in-rough-heston/index.html", import.meta.url), "utf8");
   const tables = [...html.matchAll(/<table\b[\s\S]*?<\/table>/gu)].map(([table]) => table);
   const sentenceCells = (table) => [...table.matchAll(/<t[dh]\b[^>]*class="([^"]*)"/gu)].filter(([, classes]) => /sentence/u.test(classes)).length;
   assert.equal(sentenceCells(tables[0]), 0, "Quotes hold only values.");

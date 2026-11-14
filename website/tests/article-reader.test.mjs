@@ -169,7 +169,7 @@ test("all eleven full articles retain introduction, contents and body order with
       }
     }
   }
-  const asian = pages.get("/certified-valuation-arithmetic-asian-options/");
+  const asian = pages.get("/certified-valuation-of-arithmetic-asian-options/");
   assert.equal((readable(asian.tree).match(/Q\.E\.D\./gu) ?? []).length, 11, "The eleven proof endings must be readable labels, not interpreted as missing characters.");
   const annotations = asian.nodes.filter((node) => node.tag === "annotation" && node.attrs.get("encoding") === "application/x-tex");
   assert.equal(annotations.filter((node) => node.children.map((child) => child.text ?? "").join("") === "\\square").length, 11, "Preserve the original QED TeX in the exported mathematical source.");

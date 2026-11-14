@@ -226,12 +226,17 @@ only for the chapter being read; it is a sticky column when the field has room a
 disclosure when the viewport or text size narrows it. Each AI and legal article opens
 with its logic diagram under the record strip.
 
-AI pages present the scope disclosure, Problem and Approach, Key Contributions, and
-the numbered manuscript chapters. Selected Research headers hold the title, GitHub
-link, and Full Manuscript link; reading begins at Abstract, and appendices and
-supporting material link to the pinned manuscript on GitHub. Chapter headings display
-Roman numerals and subsections letters in reading order, while source numbering and
-anchors stay intact; verified internal section references link to their headings.
+AI pages present the scope disclosure, Problem and Approach, Key Contributions, and the
+numbered manuscript chapters. Selected Research headers hold the title, GitHub link, and
+Full Manuscript link; reading begins at Abstract, and appendices and supporting material
+link to the pinned manuscript on GitHub. Chapter headings display Roman numerals and
+subsections letters in reading order, while source numbering and anchors stay intact;
+verified internal section references link to their headings. The three manuscripts link
+their own references alike: an equation by its parenthesized number, a statement, table,
+or figure by its number. The dependence manuscript carries these links from its TeX
+source; the Asian and Rough Heston manuscripts cite in plain text, and each reference to
+an equation, statement, table, or figure the page carries links to it, while a label
+cited from another paper stays plain.
 
 Paragraphs are 1.5rem apart. A new chapter begins after 5rem of space, a fine rule, and
 2rem of inset (4rem and 1.5rem on phones); subsections are 3rem apart. Equation blocks
@@ -242,13 +247,16 @@ displayed equation follows one pattern, whatever its length: its ink starts on t
 manuscript inset (`--manuscript-inset`, 16 to 24px from the column's edge), the axis it
 shares with table text, and its number stands at the column's right edge on the
 equation's baseline, in the reading face of the references that cite it, set clear of
-the expression. An equation wider than its column scrolls in place: its number keeps
-its position, and the expression fades beneath that edge while more remains, as a wide
-table fades at its right edge. A page can therefore be read with the paper beside it.
-Plain
+the expression. An equation wider than its column scrolls in place: its number keeps its
+position, and the expression fades beneath that edge while more remains, as a wide table
+fades at its right edge. A page can therefore be read with the paper beside it. Plain
 numbers, including scientific notation and percentages, use the prose face with native
 superscripts while keeping accessible MathML and the original TeX. Mathematical SVG
-glyphs are artwork, not an additional prose font.
+glyphs are artwork, not an additional prose font. An inline formula keeps the
+punctuation that closes against it and the bracket that opens onto it on its own line,
+set tight as the papers set them, unless the formula alone fills a phone's line; a
+number range such as 4400–4500 holds one line. "Proof." is italic in all three
+manuscripts, as in their PDFs.
 
 Legal articles keep the source title, subtitle, author, date, abstract, chapter
 numbering, paragraph order, citations, and acknowledgments. Chapters are H2 headings in
@@ -296,10 +304,14 @@ as the widest stage.
 Figures inside the eleven full articles take their grammar from Cognition's research
 posts: a faint 1px frame, a title at the interface size and weight 500, every chart
 label at the label size, axis names in flat gray pills, dashed hairline grids, and a
-caption in the reading face and supporting ink below the frame. Ink and the accent carry
-the argument; `--chart-sky` marks a second series, `--chart-green` an exactly known
-segment, `--chart-steel` and `--chart-mist` hold context, and `--chart-tint` marks an
-emphasized row, column, or region.
+caption in the reading face and supporting ink below the frame. Every axis name starts
+on the frame's left edge, with the title and the legend. Figure text keeps the interface
+face's proportional figures, so a hyphenated label reads as one word; ticks and values
+take tabular figures. A manuscript caption opens with its "Figure N." in the interface
+face at weight 500, the face of a table's title, and the rest of the caption follows in
+the caption style. Ink and the accent carry the argument; `--chart-sky` marks a second
+series, `--chart-green` an exactly known segment, `--chart-steel` and `--chart-mist`
+hold context, and `--chart-tint` marks an emphasized row, column, or region.
 
 Text is HTML at its true size, so labels stay legible at every width; only curves live
 in a stretched SVG layer whose strokes keep their width, and schematics scale uniformly
@@ -326,10 +338,10 @@ for each on a shared axis.
 
 Research tables share the figures' frame. A manuscript caption ("Table N.") becomes the
 title inside the frame; the header is a faintly tinted band in label type over a firm
-rule; rows part on hairlines; numeric columns align right in tabular figures. The
-hovered row and column take a quiet tint and the hovered column's header turns blue; a
-row or column the table emphasizes carries the accent tint. Rows enter once, top to
-bottom, as a table scrolls into view.
+rule; rows part on hairlines; numeric columns align right in tabular figures, while
+their headings keep proportional figures. The hovered row and column take a quiet tint
+and the hovered column's header turns blue; a row or column the table emphasizes carries
+the accent tint. Rows enter once, top to bottom, as a table scrolls into view.
 
 A row of values holds one line. Only a column whose widest cell is a sentence wraps, at
 a 16rem minimum, and headings take at most two lines. A table wider than the reading
@@ -344,6 +356,15 @@ largest type that keeps every row on one line: 20px, then 18px, then 16px, then 
 columns, then headings on two lines, and only then does it wrap the sentence columns
 across the full width. The magnifier, the blurred page, and Escape close the stage and
 return focus to the table's own control.
+
+Every figure carries the same magnifier in the top-right corner of its frame, level
+with the first line of its title or axis name; where a label holds that corner at the
+current width, the control takes a row of its own above the figure. Zoom enlarges the
+figure on the same stage as one picture, laid out at its width in the article so every
+label keeps its place: whole within the window up to 1.75 times its size, or, when that
+would enlarge it by less than 1.15 times, at up to 1.5 times its size with the stage
+scrolling from its top. Readouts and view switches work on the stage; the caption stays
+in the article. One stage serves every table and figure of a page.
 
 ## Clarinet hero
 
@@ -385,8 +406,8 @@ outline. Anchor links use native scrolling. The mobile menu opens with a short
 transition, traps keyboard focus, closes on Escape or navigation, and releases the page
 when the viewport reaches desktop width. Editorial surfaces are flat. Two temporary
 surfaces lift off the page with a shadow: the note-preview dialog, whose rounded corners
-mark its state, and the zoomed table's square sheet. Reduced motion removes every
-decorative transition, entrance, and scroll effect.
+mark its state, and the square sheet of a zoomed table or figure. Reduced motion removes
+every decorative transition, entrance, and scroll effect.
 
 ## Copy
 

@@ -5,7 +5,7 @@ import test from "node:test";
 import { cubicLaw, kinkBoundPerStrike } from "../app/lib/content/asian-kink-bound.ts";
 import { parseResearchMarkdown } from "../app/lib/content/research-markdown.ts";
 
-const SLUG = "certified-valuation-arithmetic-asian-options";
+const SLUG = "certified-valuation-of-arithmetic-asian-options";
 const STUDIES = [
   ["gap-profile.json", "30e1676f4cc0c72d0b0dbdb1cac384c41a70370b"],
   ["euler-ladder.json", "5359e2b42d32881df6fd678301feb0051cf4095c"],

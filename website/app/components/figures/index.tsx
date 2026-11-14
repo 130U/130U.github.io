@@ -7,6 +7,7 @@ import { roughManuscriptFigures } from "./rough-manuscript";
 import { selectedResearchFigures } from "./selected-research";
 
 export { FigureController } from "./FigureController";
+export { FigureCaption } from "./kit";
 
 const figures: Readonly<Record<string, ComponentType>> = { ...selectedResearchFigures, ...aiResearchFigures, ...legalResearchFigures };
 const manuscriptFigures: Readonly<Record<string, ComponentType<ManuscriptFigureProps>>> = { ...dependenceManuscriptFigures, ...asianManuscriptFigures, ...roughManuscriptFigures };

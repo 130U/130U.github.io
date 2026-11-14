@@ -146,11 +146,11 @@ the article figures under Shared rendering and extension). The Asian manuscript 
 each figure as an image line followed by its caption paragraph; the importer joins the
 two into one captioned figure, checks the two study results in `asian-studies/` against
 their upstream blobs, and writes the values the four drawings plot to
-`content/selected-research/certified-valuation-arithmetic-asian-options.figures.json`.
+`content/selected-research/certified-valuation-of-arithmetic-asian-options.figures.json`.
 The Rough Heston manuscript sets each figure as one captioned image line; the importer
 gives it a local path, checks the three saved banks in `rough-studies/` against their
 upstream blobs, and writes the node-charge shares, the joint error set and the exact
-thresholds to `content/selected-research/certified-rough-heston-valuation.figures.json`.
+thresholds to `content/selected-research/certified-joint-pricing-errors-in-rough-heston.figures.json`.
 The readers link appendices and supplementary proofs to the pinned full manuscripts and
 return to the corresponding About research entry.
 
@@ -192,28 +192,32 @@ interaction lives in focused client components, and the About hero is isolated i
 
 Article figures live in `app/components/figures/`: `kit.tsx` holds the frame, scales,
 plot, schematic and bar primitives, `selected-research.tsx`, `ai-research.tsx` and
-`legal-research.tsx` hold the figures, `dependence-manuscript.tsx` draws the
-dependence manuscript's four figures from the formulas in
-`130U/Critical-Dependence-Stress` (`code/generate_mechanism_figures.py` and
-`calculations/plot_profiles_and_flows.py` at the pinned commit),
-`asian-manuscript.tsx` draws the Asian manuscript's four figures from its imported
-study results and from Proposition 4.1 as `app/lib/content/asian-kink-bound.ts`
-evaluates it, `rough-manuscript.tsx` draws the Rough Heston manuscript's four figures
-from its imported banks and from the forward variance curve and netting ratio in
-`app/lib/content/rough-heston-curves.ts`, and `FigureController` adds view switches, readouts, linked emphasis, the
-proof-obligation graph, table column highlighting and the entrances of figures and
-table rows. The research renderer frames every table and sets a directly preceding
-"**Table N.**" caption paragraph inside the frame as its title; `TableStage` keeps row
-labels in view, fades the scrolling edge, and opens the zoomed view of any table, so a
-new table needs no registration.
-`app/lib/content/article-figures.ts` places each figure after one existing block,
-named by the opening of its source text or a table's first header cell, and lists the
-manuscript text each figure restates. The build fails when an anchor matches no block
-or several, or when any listed text is missing from the article, so edit a figure's
-data and its evidence together. The same module maps each manuscript image path to
-its native drawing, with evidence checked the same way, and names the row or column a
-table emphasizes. Manuscript checks in the tests read articles without these figures
-and without the labels of the native drawings, keeping their manuscript captions.
+`legal-research.tsx` hold the figures, `dependence-manuscript.tsx` draws the dependence
+manuscript's four figures from the formulas in `130U/Critical-Dependence-Stress`
+(`code/generate_mechanism_figures.py` and `calculations/plot_profiles_and_flows.py` at
+the pinned commit), `asian-manuscript.tsx` draws the Asian manuscript's four figures
+from its imported study results and from Proposition 4.1 as
+`app/lib/content/asian-kink-bound.ts` evaluates it, `rough-manuscript.tsx` draws the
+Rough Heston manuscript's four figures from its imported banks and from the forward
+variance curve and netting ratio in `app/lib/content/rough-heston-curves.ts`, and
+`FigureController` adds view switches, readouts, linked emphasis, the proof-obligation
+graph (each through `enhanceFigure`, which the zoom stage applies to its enlarged copy
+as well), table column highlighting and the entrances of figures and table rows. The
+research renderer frames every table and sets a directly preceding "**Table N.**"
+caption paragraph inside the frame as its title; `ZoomStage` keeps row labels in view,
+fades the scrolling edge, and opens the zoomed view of any table or figure on one stage
+per page, so a new table or figure needs no registration. `buildReferenceTargets` in
+`app/lib/content/article-headings.ts` anchors the numbered equations, statements, tables
+and figures of the Asian and Rough Heston manuscripts and links their references; a
+re-import that numbers a label twice fails the build.
+`app/lib/content/article-figures.ts` places each figure after one existing block, named
+by the opening of its source text or a table's first header cell, and lists the
+manuscript text each figure restates. The build fails when an anchor matches no block or
+several, or when any listed text is missing from the article, so edit a figure's data
+and its evidence together. The same module maps each manuscript image path to its native
+drawing, with evidence checked the same way, and names the row or column a table
+emphasizes. Manuscript checks in the tests read articles without these figures and
+without the labels of the native drawings, keeping their manuscript captions.
 
 `ResearchArticle` serves AI and Selected Research. The Markdown parser supports
 typed prose, emphasis, links, headings, tables, and formulas rather than arbitrary

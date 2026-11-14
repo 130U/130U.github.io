@@ -7,13 +7,15 @@ import { ExperienceDiagram, ExperienceMetadata, KeyContributions, ProblemAndAppr
 import type { ShowcaseEntry } from "../../lib/content/experience-showcase";
 import type { ResearchArticleContent, ResearchCell, ResearchInline } from "../../lib/content/research-markdown";
 import { RESEARCH_MATH_GUTTER_EM, RESEARCH_MATH_INLINE_SPACE_EM, renderResearchMath } from "../../lib/content/research-math";
-import { buildArticleHeadingMap, formatArticleHeadings, linkArticleSectionReferences } from "../../lib/content/article-headings";
+import { buildArticleHeadingMap, buildReferenceTargets, formatArticleHeadings, linkArticleSectionReferences, type ArticleInline } from "../../lib/content/article-headings";
 import { emphasisFor, manuscriptFigureFor, placeFigures } from "../../lib/content/article-figures";
-import { ArticleFigure, FigureController, ManuscriptFigure } from "../figures";
+import { ArticleFigure, FigureCaption, FigureController, ManuscriptFigure } from "../figures";
 import type { ActivePage } from "../../lib/content/site";
 import { ResearchMath } from "./ResearchMath";
 import { InlineContent } from "./ResearchInline";
-import { TableStage } from "./TableStage";
+import { ZoomStage } from "./ZoomStage";
+import { ZoomGlyph } from "../ZoomGlyph";
+import stageStyles from "./Stage.module.css";
 import readingStyles from "../legal/LegalPaperPage.module.css";
 import mathStyles from "./ResearchMath.module.css";
 import styles from "./ResearchArticle.module.css";
@@ -123,14 +125,11 @@ function headingFloor(cell: ResearchCell) {
   return { "--heading-floor": `${(floor + LABEL_SLACK_EM).toFixed(2)}em` } as CSSProperties;
 }
 
-function ZoomGlyph() {
-  return (
-    <svg aria-hidden="true" focusable="false" viewBox="0 0 16 16" width="16" height="16" fill="none" stroke="currentColor" strokeWidth="1.25" strokeLinecap="round">
-      <circle cx="7" cy="7" r="4.75" />
-      <path d="m10.5 10.5 3 3M5 7h4" />
-      <path d="M7 5v4" data-zoom-plus />
-    </svg>
-  );
+// The papers set "Proof." in italic; a manuscript that bolds it reads the same here.
+function proofLabel(inlines: ArticleInline[]): ArticleInline[] {
+  const [first, ...rest] = inlines;
+  const label = first?.type === "strong" && first.inlines.length === 1 && first.inlines[0].type === "text" && /^Proof(?: of [^.]+)?\.$/u.test(first.inlines[0].text);
+  return label ? [{ type: "emphasis", inlines: first.inlines }, ...rest] : inlines;
 }
 
 // A manuscript table caption is a bold "Table N." paragraph directly before its
@@ -154,6 +153,8 @@ export function ResearchArticle({ project, active, returnPath, returnLabel, titl
   // A paper's abstract stands before its first chapter; an AI article opens on its first chapter.
   const bodyStart = showcase ? firstHeading : project.blocks.findIndex((block, index) => index > firstHeading && block.type === "heading");
   const headingMap = buildArticleHeadingMap(project.blocks);
+  const { targets, anchors } = buildReferenceTargets(project.slug, project.blocks);
+  const link = (inlines: ArticleInline[], index: number) => linkArticleSectionReferences(inlines, project.slug, headingMap, targets, anchors.get(index));
   const headingPresentations = formatArticleHeadings(project.blocks);
   const figures = placeFigures(
     project.slug,
@@ -171,7 +172,7 @@ export function ResearchArticle({ project, active, returnPath, returnLabel, titl
     if (block.type === "paragraph") {
       // A table caption renders inside the frame of the table that follows it.
       if (captionsTable(project.blocks, index)) return null;
-      return <p {...marker} id={block.id} key={index}><InlineContent inlines={linkArticleSectionReferences(block.inlines, project.slug, headingMap)} /></p>;
+      return <p {...marker} id={block.id ?? anchors.get(index)} key={index}><InlineContent inlines={proofLabel(link(block.inlines, index))} /></p>;
     }
     if (block.type === "heading") {
       const Heading = block.level === 3 ? "h3" : "h2";
@@ -179,11 +180,11 @@ export function ResearchArticle({ project, active, returnPath, returnLabel, titl
       return <Heading {...marker} data-source-number={heading.sourceNumber} id={block.id} tabIndex={-1} key={index}><InlineContent inlines={heading.displayInlines} /></Heading>;
     }
     if (block.type === "equation") {
-      return <div {...marker} id={block.id} className={mathStyles.equation} key={index} tabIndex={0} role="region" aria-label="Mathematical equation"><ResearchMath tex={block.tex} display /></div>;
+      return <div {...marker} id={block.id ?? anchors.get(index)} className={mathStyles.equation} key={index} tabIndex={0} role="region" aria-label="Mathematical equation"><ResearchMath tex={block.tex} display /></div>;
     }
     if (block.type === "figure") {
-      const caption = <InlineContent inlines={linkArticleSectionReferences(block.inlines, project.slug, headingMap)} />;
-      return <ManuscriptFigure key={index} id={manuscriptFigureFor(project.slug, block.src, project.markdown)} anchor={block.id} captionId={`research-figure-${index}-caption`} attributes={marker} caption={caption} />;
+      const caption = <FigureCaption inlines={link(block.inlines, index)} />;
+      return <ManuscriptFigure key={index} id={manuscriptFigureFor(project.slug, block.src, project.markdown)} anchor={block.id ?? anchors.get(index)} captionId={`research-figure-${index}-caption`} attributes={marker} caption={caption} />;
     }
     const numeric = numericColumns(block.rows);
     const sentences = sentenceColumns(block.rows);
@@ -199,7 +200,7 @@ export function ResearchArticle({ project, active, returnPath, returnLabel, titl
             style={Cell === "th" ? headingFloor(cell) : undefined}
             data-emphasis={emphasis?.column === cellIndex ? "" : undefined}
           >
-            <InlineContent inlines={linkArticleSectionReferences(cell.inlines, project.slug, headingMap)} />
+            <InlineContent inlines={link(cell.inlines, index)} />
           </Cell>
         );
       })}</tr>
@@ -208,11 +209,11 @@ export function ResearchArticle({ project, active, returnPath, returnLabel, titl
     return (
       <div key={index} className={styles.tableFrame} data-table-frame>
         {captionBlock?.type === "paragraph" && (
-          <p data-research-block={index - 1} data-research-block-type="paragraph" id={captionBlock.id} className={styles.tableTitle}>
-            <InlineContent inlines={linkArticleSectionReferences(captionBlock.inlines, project.slug, headingMap)} />
+          <p data-research-block={index - 1} data-research-block-type="paragraph" id={captionBlock.id ?? anchors.get(index - 1)} className={styles.tableTitle} data-table-title>
+            <InlineContent inlines={link(captionBlock.inlines, index - 1)} />
           </p>
         )}
-        <button type="button" className={styles.zoom} data-table-zoom aria-label="Zoom in" aria-haspopup="dialog" hidden><ZoomGlyph /></button>
+        <button type="button" className={`${stageStyles.control} ${styles.zoom}`} data-table-zoom aria-label="Zoom in" aria-haspopup="dialog" hidden><ZoomGlyph /></button>
         <div tabIndex={0} role="region" aria-label="Research data table" className={styles.tableRegion}>
           <table {...marker} id={block.id} className={styles.table} data-research-table>
             <thead>{tableRows[0]}</thead>
@@ -248,7 +249,7 @@ export function ResearchArticle({ project, active, returnPath, returnLabel, titl
           <a href={`#${titleId}`}>Back to Top</a>
         </footer>
         {enhanced && <FigureController key={project.slug} />}
-        {project.blocks.some((block) => block.type === "table") && <TableStage key={`${project.slug}-tables`} />}
+        {(figures.size > 0 || project.blocks.some((block) => block.type === "figure" || block.type === "table")) && <ZoomStage key={`${project.slug}-stage`} />}
       </article>
     </SiteShell>
   );
