@@ -17,7 +17,7 @@ Duke Alumnus, B.S. in Mathematics and M.Eng. in Risk Engineering · Sequoia Fell
 - **[Critical Dependence Stress for Portfolio Diversification](https://www.theodoreoy.com/critical-dependence-stress-for-portfolio-diversification/)**
   How much dependence stress reverses a portfolio's Expected Shortfall advantage while every loss distribution stays fixed. The asymptotic reversal budget is at least 30% above the initial-sensitivity prediction.
 - **[Certified Valuation of Arithmetic Asian Options](https://www.theodoreoy.com/certified-valuation-arithmetic-asian-options/)**
-  A weighted payoff-remainder method that turns an exact conditional price representation into certified valuations, with a complete Heston discretization-error bound below 0.011025 price units.
+  What an arithmetic Asian option loses when exercise is decided on the geometric average of its fixings. The proved bound is below a hundredth of a cent per barrel for a one-month crude oil option, and under Heston it becomes a certified price interval.
 - **[Certified Joint Pricing Errors in Rough Heston](https://www.theodoreoy.com/certified-rough-heston-valuation/)**
   A method for certifying portfolio valuation errors in rough Heston. By preserving numerical errors shared across options, it can certify portfolio tolerances that separate price bounds cannot.
 

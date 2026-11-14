@@ -6,7 +6,7 @@ export { styles };
 
 type Tone = "ink" | "accent" | "sky" | "steel" | "mist" | "green";
 export type View = { id: string; label: ReactNode };
-type LegendItem = { label: ReactNode; tone: Tone; shape?: "square" | "line" | "dash" | "dot" | "ring" | "hatch" | "box" | "tint" };
+type LegendItem = { label: ReactNode; tone: Tone; shape?: "square" | "line" | "dash" | "dotted" | "dot" | "ring" | "triangle" | "hatch" | "box" | "tint" };
 
 /** Short copy that may contain inline TeX in the manuscripts' `$...$` form. */
 export function Tx({ children }: { children: string }) {
@@ -157,8 +157,8 @@ export function Plot({ label, x, y, xTicks = [], yTicks = [], xGrid = true, xTit
   );
 }
 
-export function Dot({ left, top, tone: color = "ink", ring, tip, className }: { left: number; top: number; tone?: Tone; ring?: boolean; tip?: string; className?: string }) {
-  return <span className={`${styles.dot} ${styles[color]} ${className ?? ""}`} data-ring={ring ? "" : undefined} data-tip={tip} style={{ left: `${left}%`, top: `${top}%` }} />;
+export function Dot({ left, top, tone: color = "ink", ring, shape, tip, className }: { left: number; top: number; tone?: Tone; ring?: boolean; shape?: "square" | "triangle"; tip?: string; className?: string }) {
+  return <span className={`${styles.dot} ${styles[color]} ${className ?? ""}`} data-ring={ring ? "" : undefined} data-shape={shape} data-tip={tip} style={{ left: `${left}%`, top: `${top}%` }} />;
 }
 
 /**

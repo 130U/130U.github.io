@@ -19,17 +19,17 @@ const articleFigures: Readonly<Record<string, readonly FigurePlacement[]>> = {
   "certified-valuation-arithmetic-asian-options": [
     {
       figure: "asian-width",
-      after: { paragraph: "The entries of Table 8 are width contributions" },
+      after: { paragraph: "At $`h=1/192`$ the sufficient condition of Appendix B fails" },
       evidence: [
-        "$`[-0.014169989568,0.013839530031]`$ | 0.028009519599",
-        "$`[-0.011024692273,0.010642371599]`$ | 0.021667063872",
-        "$`[-0.010967952032,0.010766337995]`$ | 0.021734290027",
-        "Payoff remainder | 0.026754977094 | 0.020478587752 | 0.020171631177",
-        "Linear projection | 0.000265787793 | 0.000008620825 | 2.65628E-7",
-        "P frequency tail | 0.000028191423 | 0.000028191423 | 0.000028191423",
-        "Q frequency tail | 0.000177646019 | 0.000368746602 | 0.000751284529",
-        "Periodization | 0.000782917272 | 0.000782917272 | 0.000782917272",
-        "approximately 95.5, 94.5, and 92.8 percent",
+        "| $`1/384`$ | $`[-0.014169989568,\\;0.013839530031]`$ | 0.028009519599 |",
+        "| $`1/768`$ | $`[-0.011024692273,\\;0.010642371599]`$ | 0.021667063872 |",
+        "| $`1/1536`$ | $`[-0.010967952032,\\;0.010766337995]`$ | 0.021734290027 |",
+        "| Cost of the kink | 0.026754977094 | 0.020478587752 | 0.020171631177 |",
+        "| Projection | 0.000265787793 | 0.000008620825 | 0.000000265628 |",
+        "| Frequency tail under $`P`$ | 0.000028191423 | 0.000028191423 | 0.000028191423 |",
+        "| Frequency tail under $`Q`$ | 0.000177646019 | 0.000368746602 | 0.000751284529 |",
+        "| Periodization | 0.000782917272 | 0.000782917272 | 0.000782917272 |",
+        "the cost of the kink is 95.5, 94.5 and 92.8 percent of the width",
       ],
     },
   ],
@@ -226,12 +226,62 @@ const tableEmphasis: Readonly<Record<string, readonly TableEmphasis[]>> = {
 };
 
 // Manuscript figures drawn natively, keyed by the image path the manuscript
-// cites. Each drawing evaluates the manuscript's formulas
+// cites. The dependence drawings evaluate the manuscript's formulas
 // (130U/Critical-Dependence-Stress at the pinned commit:
 // code/generate_mechanism_figures.py and
-// calculations/plot_profiles_and_flows.py); `evidence` ties its labels and
-// plotted functions to the article text, and the build fails if any is missing.
+// calculations/plot_profiles_and_flows.py); the Asian drawings plot the study
+// results of 130U/certified-valuation-arithmetic-asian-options at the pinned
+// commit and evaluate Proposition 4.1. `evidence` ties each drawing's labels,
+// plotted functions and restated values to the article text, and the build
+// fails if any is missing.
 export const manuscriptFigures: Readonly<Record<string, { figure: string; evidence: string[] }>> = {
+  "/assets/research/asian/disagreement.png": {
+    figure: "asian-disagreement",
+    evidence: [
+      "If the proxy is below the strike while $`A`$ is above, she forgoes $`A-K`$. If the proxy is above while $`A`$ is below, she pays $`K-A`$.",
+      "with $`88\\lt cG\\lt 102`$, 2,231 of a sample of 6,000, and strike $`K=95`$",
+      "which happens on 34 of them: the shaded wedges",
+      "its horizontal distance to the dashed line $`A=K`$",
+    ],
+  },
+  "/assets/research/asian/cubic-law.png": {
+    figure: "asian-cubic-law",
+    evidence: [
+      "R_{c_*}(K)\\le\\frac{K}{v\\sqrt{2\\pi t_1}}\\Bigl[\\log E\\,X-(E\\,X-1)+\\tfrac12E(X-1)^2\\Bigr].",
+      "K\\,\\frac{v^3\\tau^2}{360\\sqrt{2\\pi t_1}}\\quad(n\\to\\infty).",
+      "at 35 percent volatility, for three averaging windows, against the time before the first fixing",
+      "Dotted lines are the leading term (4.4) under continuous monitoring. The markers are the four crude oil options of Table 1. Below the dashed line the proxy value prices a 70-dollar barrel to within one cent.",
+      "| Crude oil call, 1 month ahead | 3.206408 | 0.0000805 |",
+      "| Crude oil call, 3 months ahead | 5.058865 | 0.0000462 |",
+      "| Crude oil call, 6 months ahead | 6.906596 | 0.0000324 |",
+      "| Crude oil call, 12 months ahead | 9.431726 | 0.0000224 |",
+      "a calendar month of 21 daily settlements of a futures price of 70 dollars with 35 percent volatility, struck at 70",
+      "A year has 252 trading days.",
+    ],
+  },
+  "/assets/research/asian/profile.png": {
+    figure: "asian-profile",
+    evidence: [
+      "by simulation on $`2^{20}`$ paths",
+      "The shaded area is the conservation law (3.4). The dotted curve is the second-order term of (3.8). The upper curve is the smaller of the two bounds of Theorem 3.3",
+      "per unit of strike the cost peaks near $`K=77`$",
+      "a 95–110 call spread on twelve monthly fixings",
+    ],
+  },
+  "/assets/research/asian/euler-ladder.png": {
+    figure: "asian-euler-ladder",
+    evidence: [
+      "Circles: the bias of the proxy value, from Table 8 and the full ladder of twelve steps. Squares: the proved bound on the Euler gap of the option at the three certified steps (Table 5). Triangles: the simulated change in the cost of the kink, shown as its absolute value plus two standard errors.",
+      "| 384 (certified sums) | $`-0.000406686`$ | $`-0.156167`$ |",
+      "| 768 (certified sums) | $`-0.000202992`$ | $`-0.155898`$ |",
+      "| 1536 (certified sums) | $`-0.000101409`$ | $`-0.155764`$ |",
+      "\\approx-0.15563\\,h-0.205\\,h^2",
+      "| $`1/384`$ | $`[-0.014169989568,\\;0.013839530031]`$ | 0.028009519599 |",
+      "| $`1/768`$ | $`[-0.011024692273,\\;0.010642371599]`$ | 0.021667063872 |",
+      "| $`1/1536`$ | $`[-0.010967952032,\\;0.010766337995]`$ | 0.021734290027 |",
+      "$`-1.2\\cdot10^{-7}`$ for the spread with standard error $`1.2\\cdot10^{-7}`$",
+    ],
+  },
   "/assets/research/dependence/tail-layer-repair.png": {
     figure: "dependence-tail-layer",
     evidence: [

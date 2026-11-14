@@ -1,5 +1,6 @@
 import type { ComponentType, ReactNode } from "react";
 import { aiResearchFigures } from "./ai-research";
+import { asianManuscriptFigures } from "./asian-manuscript";
 import { dependenceManuscriptFigures, type ManuscriptFigureProps } from "./dependence-manuscript";
 import { legalResearchFigures } from "./legal-research";
 import { selectedResearchFigures } from "./selected-research";
@@ -7,7 +8,7 @@ import { selectedResearchFigures } from "./selected-research";
 export { FigureController } from "./FigureController";
 
 const figures: Readonly<Record<string, ComponentType>> = { ...selectedResearchFigures, ...aiResearchFigures, ...legalResearchFigures };
-const manuscriptFigures: Readonly<Record<string, ComponentType<ManuscriptFigureProps>>> = dependenceManuscriptFigures;
+const manuscriptFigures: Readonly<Record<string, ComponentType<ManuscriptFigureProps>>> = { ...dependenceManuscriptFigures, ...asianManuscriptFigures };
 
 /** One registered article figure, placed by `app/lib/content/article-figures.ts`. */
 export function ArticleFigure({ id }: { id: string }) {

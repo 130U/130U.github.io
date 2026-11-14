@@ -1,50 +1,53 @@
 {
-  "fetchedAt": "2026-11-12",
   "fetchedWith": "Authenticated Git checkout at the exact commit; bytes read with git show and checked against Git blob SHA-1",
   "sources": [
     {
       "slug": "certified-valuation-arithmetic-asian-options",
-      "sourceUrl": "https://github.com/130U/certified-valuation-arithmetic-asian-options/blob/249987d23616804998683ac9eeead21c5a3473f6/manuscript/report.md",
-      "sourceCommit": "249987d23616804998683ac9eeead21c5a3473f6",
-      "sourceBlob": "69e67323db7a2a97e1fa0ad6264f4078aac1cb7e",
-      "sourceSha256": "7f7ccced6e8c9d4f37859028633db14ead260a4a907ba461f1dc54b5fd95cac4",
-      "importedMarkdownSha256": "b6f4794f09db5327053922af4539aa312bca9e5f2721d1ea4ce2a7c44d274e54",
+      "fetchedAt": "2026-11-14",
+      "sourceUrl": "https://github.com/130U/certified-valuation-arithmetic-asian-options/blob/fc5e0f611bf90f18599bd999d77ab483230f0395/manuscript/report.md",
+      "sourceCommit": "fc5e0f611bf90f18599bd999d77ab483230f0395",
+      "sourceBlob": "306e62757575de9b50796e8bd93287968243f366",
+      "sourceSha256": "57b4a89969b040aac0033304cced7463bca2c187231b74bd867e54447390cf6d",
+      "importedMarkdownSha256": "f9ec49a7a144275d97e9aa12c862b52a5719fe84564e846929b70af7b05bf934",
       "includedHeadings": [
         "Abstract",
         "1. Introduction",
-        "1.1 Comparison with conditional Asian bounds",
-        "1.2 Three distinct domains of validity",
-        "2. The valuation problem and its exact conditional representation",
-        "2.1 The continuous model, discrete kernel, and payoff",
-        "2.2 The common Gaussian structure $`\\mathsf H_s`$",
-        "2.3 Exact conditional valuation",
-        "3. A geometric reference and the weighted payoff remainder",
-        "3.1 Why the geometric average is a tractable reference",
-        "3.2 Conditional curvature and the remainder",
-        "3.3 The payoff decomposition",
-        "4. The main theorem and the complete price certificate",
-        "4.1 The optimal reference scale and the loss of cancellation",
-        "5. How the models supply the common factor",
-        "5.1 The deterministic-variance benchmark",
-        "5.2 Heston dynamics and the projected variance kernel",
-        "5.3 Why a boundary atom does not destroy smoothing",
-        "6. An exact Gaussian benchmark for weak expansions",
-        "6.1 Asian coefficient bounds and numerical illustration",
-        "7. What the forward bounds imply after calibration",
-        "7.1 Price transfer for small positive volatility of volatility",
-        "7.2 The full joint posterior",
-        "7.3 A transfer theorem for every quantile level",
-        "7.4 Effective inputs and numerical conclusions",
-        "8. Numerical consequences of the error decomposition",
-        "8.1 From formulas to certified monetary bounds",
-        "8.2 Step-grid certificates and the width plateau",
-        "8.3 A second stochastic-variance parameter point",
-        "8.4 Coverage and sensitivity design",
-        "8.5 Independent path diagnostics for boundary and fixing sensitivity",
-        "8.6 Continuous-model valuation and numerical risk budgets",
-        "8.7 Stability of the price distribution after calibration",
-        "8.8 Posterior grid refinement",
-        "9. Domain of validity",
+        "1.1 The idea",
+        "1.2 Results",
+        "1.3 Related work",
+        "2. Average-price contracts and their two averages",
+        "2.1 The contract",
+        "2.2 The gap between the averages is dispersion",
+        "3. Exercising on a proxy",
+        "3.1 The cost of the kink",
+        "3.2 A common factor",
+        "3.3 The bound",
+        "3.4 The best scale",
+        "3.5 Reading the bound",
+        "4. How large is the cost? A cubic law",
+        "4.1 Black's model",
+        "4.2 Contracts that trade",
+        "4.3 Stochastic volatility",
+        "5. A proved price interval under Heston",
+        "5.1 Model, scheme and contract",
+        "5.2 The common factor and the boundary",
+        "5.3 The proxy value and the second moment",
+        "5.4 The certificate",
+        "5.5 What the interval contains",
+        "5.6 Scale, steps and a second point",
+        "6. What discretization does to the price",
+        "6.1 Euler on the price is Euler on the Riccati equation",
+        "6.2 The bias of the proxy value is first order",
+        "6.3 Deterministic variance: a vega times a quadrature error",
+        "6.4 Why the certificate cannot follow",
+        "7. After calibration",
+        "7.1 Price transfer for small volatility of volatility",
+        "7.2 The posterior",
+        "7.3 Numbers",
+        "8. Two uses",
+        "8.1 An acceptance test for a pricing engine",
+        "8.2 A numerical line in the valuation reserve",
+        "9. Limits",
         "10. Conclusion"
       ],
       "mainSections": 10,
@@ -55,18 +58,52 @@
         "## Appendix D. Gaussian density expansions and finite-step bounds",
         "## Appendix E. Perturbation constants for positive volatility of volatility",
         "## Appendix F. Posterior inputs, normalization, and finite coupling",
-        "## Appendix G. Reproducible implementation",
-        "## Appendix H. A direct coupled-remainder inequality"
+        "## Appendix G. Programs and evidence",
+        "## Appendix H. A coupled bound on the change in the cost of the kink",
+        "## Appendix I. Black's model: dispersion and the proxy value"
       ],
       "transformations": [
         "The title is rendered once by the page header.",
         "Relative file links resolve to the frozen GitHub commit.",
+        "Each figure's image line joins its caption paragraph as one captioned figure at a local path, and the page draws the figure from the pinned study results.",
         "A paragraph links omitted appendices and supporting material to GitHub.",
         "Main text, all main-text tables, mathematical TeX and references are otherwise retained verbatim."
-      ]
+      ],
+      "figures": [
+        {
+          "label": "Figure 1. Where exercising on the geometric average goes wrong.",
+          "src": "/assets/research/asian/disagreement.png"
+        },
+        {
+          "label": "Figure 2. The cubic law.",
+          "src": "/assets/research/asian/cubic-law.png"
+        },
+        {
+          "label": "Figure 3. The cost of the kink across strikes.",
+          "src": "/assets/research/asian/profile.png"
+        },
+        {
+          "label": "Figure 4. Three sizes of Euler error.",
+          "src": "/assets/research/asian/euler-ladder.png"
+        }
+      ],
+      "studies": [
+        {
+          "sourceUrl": "https://github.com/130U/certified-valuation-arithmetic-asian-options/blob/fc5e0f611bf90f18599bd999d77ab483230f0395/studies/results/gap-profile.json",
+          "sourceBlob": "05876fab0abc6b251f530eb9d97daeeb709854ea",
+          "sourceSha256": "62f8a2033d913b7a4e26b4a5ed74193578b88000b1e44d85c7416c0eafefa443"
+        },
+        {
+          "sourceUrl": "https://github.com/130U/certified-valuation-arithmetic-asian-options/blob/fc5e0f611bf90f18599bd999d77ab483230f0395/studies/results/euler-ladder.json",
+          "sourceBlob": "5359e2b42d32881df6fd678301feb0051cf4095c",
+          "sourceSha256": "8df582b58273fe949af1e892fcfe987c5dafe69425bd0ab76b3a219907d05e1f"
+        }
+      ],
+      "figureDataSha256": "bdf15c5413f7e2908aee5edcd90184288671f3266c6c774d95b15b93ee204612"
     },
     {
       "slug": "certified-rough-heston-valuation",
+      "fetchedAt": "2026-11-12",
       "sourceUrl": "https://github.com/130U/certified-rough-heston-valuation/blob/de721f78cec277e390cd9dc2ebc4efa9ae9681e4/manuscript/merged-heston-en.md",
       "sourceCommit": "de721f78cec277e390cd9dc2ebc4efa9ae9681e4",
       "sourceBlob": "2b52caa1ad3e58a2f411c9c1f1b651d01f3a8d39",

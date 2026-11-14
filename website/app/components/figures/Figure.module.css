@@ -188,8 +188,19 @@
   background: none;
 }
 
+.swatch[data-shape="dotted"] {
+  width: 18px;
+  height: 0;
+  border-top: 2px dotted currentColor;
+  background: none;
+}
+
 .swatch[data-shape="dot"] {
   border-radius: 50%;
+}
+
+.swatch[data-shape="triangle"] {
+  clip-path: polygon(0 8%, 100% 8%, 50% 96%);
 }
 
 .swatch[data-shape="ring"] {
@@ -357,9 +368,19 @@
   stroke: none;
 }
 
+.curves [data-dotted] {
+  stroke-dasharray: 0.1 5;
+}
+
 .curves [data-thick] {
   stroke-width: 3.5;
   stroke-linecap: butt;
+}
+
+/* A scatter is one path of zero-length strokes, each drawn as a round point. */
+.curves [data-scatter] {
+  stroke-width: 3.2;
+  opacity: 0.55;
 }
 
 .dot {
@@ -374,6 +395,14 @@
 .dot[data-ring] {
   border: 1.5px solid currentColor;
   background: var(--page);
+}
+
+.dot[data-shape] {
+  border-radius: 0;
+}
+
+.dot[data-shape="triangle"] {
+  clip-path: polygon(0 8%, 100% 8%, 50% 96%);
 }
 
 .dot[data-tip] {

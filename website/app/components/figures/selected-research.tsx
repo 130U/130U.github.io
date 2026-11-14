@@ -41,18 +41,18 @@ function DependenceBudgetRuler() {
   );
 }
 
-/* Asian options, Tables 7 and 8: certified width and signed enclosure by Euler step. */
+/* Asian options, Tables 5 and 6: the proved interval for the Euler gap and its width by Euler step. */
 const ASIAN_STEPS = [
   { step: "1/384", total: 0.028009519599, share: "95.5%", enclosure: [-0.014169989568, 0.013839530031], parts: [0.026754977094, 0.000265787793, 0.000028191423, 0.000177646019, 0.000782917272] },
   { step: "1/768", total: 0.021667063872, share: "94.5%", enclosure: [-0.011024692273, 0.010642371599], parts: [0.020478587752, 0.000008620825, 0.000028191423, 0.000368746602, 0.000782917272] },
-  { step: "1/1536", total: 0.021734290027, share: "92.8%", enclosure: [-0.010967952032, 0.010766337995], parts: [0.020171631177, 2.65628e-7, 0.000028191423, 0.000751284529, 0.000782917272] },
+  { step: "1/1536", total: 0.021734290027, share: "92.8%", enclosure: [-0.010967952032, 0.010766337995], parts: [0.020171631177, 0.000000265628, 0.000028191423, 0.000751284529, 0.000782917272] },
 ] as const;
 const ASIAN_PARTS = [
-  { name: "Payoff remainder", tone: "accent" },
-  { name: "Linear projection", tone: "steel" },
-  { name: "P frequency tail", tone: "mist" },
-  { name: "Q frequency tail", tone: "sky" },
-  { name: "Periodization", tone: "ink" },
+  { name: "Cost of the kink", label: "Cost of the kink", tone: "accent" },
+  { name: "Projection", label: "Projection", tone: "steel" },
+  { name: "Frequency tail under P", label: "Frequency tail under $P$", tone: "mist" },
+  { name: "Frequency tail under Q", label: "Frequency tail under $Q$", tone: "sky" },
+  { name: "Periodization", label: "Periodization", tone: "ink" },
 ] as const;
 
 function AsianWidthPlateau() {
@@ -60,11 +60,11 @@ function AsianWidthPlateau() {
   const widthTicks = [0, 0.01, 0.02, 0.03].map((at) => ({ at, label: at === 0 ? "0" : at.toFixed(2) }));
   const signed = linear(-0.016, 0.016);
   const signedTicks = [-0.015, 0, 0.015].map((at) => ({ at, label: at === 0 ? "0" : at.toFixed(3).replace(/^-/u, "−"), solid: at === 0 }));
-  // The change between the two finest grids, term by term (Table 8, columns 1/768 and 1/1536).
+  // The change between the two finest steps, term by term (Table 6, columns 1/768 and 1/1536).
   const [coarse, fine] = [ASIAN_STEPS[1], ASIAN_STEPS[2]];
   const change = linear(0.0213, 0.0218);
   const changeTicks = [0.0213, 0.0215, 0.0217].map((at) => ({ at, label: at.toFixed(4), minor: at === 0.0215 }));
-  const changes = [0, 1, 3].map((part) => ({ name: ASIAN_PARTS[part].name, tone: ASIAN_PARTS[part].tone, delta: fine.parts[part] - coarse.parts[part] }));
+  const changes = [0, 1, 3].map((part) => ({ ...ASIAN_PARTS[part], delta: fine.parts[part] - coarse.parts[part] }));
   let running = coarse.total;
   const steps = changes.map((item) => {
     const from = running;
@@ -75,18 +75,18 @@ function AsianWidthPlateau() {
   return (
     <Figure
       id="asian-width"
-      title="Certified width by Euler step"
-      caption="The payoff remainder supplies most of each width. From $h=1/768$ to $h=1/1536$ it and the projection term shrink, but the discrete frequency tail grows by more, so the total no longer improves."
-      views={[{ id: "width", label: "Width Budget" }, { id: "change", label: "Finest-Step Change" }, { id: "enclosure", label: "Signed Enclosure" }]}
-      viewsLabel="Show the width budget, the change at the finest step or the signed enclosure"
+      title="Width of the proved interval by Euler step"
+      caption="The allowance for the cost of the kink supplies most of each width. From $h=1/768$ to $h=1/1536$ it and the projection term shrink, but the frequency tail under $Q$ grows by more, so the width stops improving."
+      views={[{ id: "width", label: "Width Budget" }, { id: "change", label: "Finest-Step Change" }, { id: "enclosure", label: "Gap Interval" }]}
+      viewsLabel="Show the width budget, the change at the finest step or the interval for the Euler gap"
     >
       <Panel view="change" active={false}>
-        <Bars label={`Change in width from h=1/768 to h=1/1536: payoff remainder ${signedDelta(changes[0].delta)}, linear projection ${signedDelta(changes[1].delta)}, Q frequency tail ${signedDelta(changes[2].delta)}; total from 0.021667063872 to 0.021734290027.`} valueWidth="6.5rem" stack>
+        <Bars label={`Change in width from h=1/768 to h=1/1536: cost of the kink ${signedDelta(changes[0].delta)}, projection ${signedDelta(changes[1].delta)}, frequency tail under Q ${signedDelta(changes[2].delta)}; width from 0.021667063872 to 0.021734290027.`} valueWidth="6.5rem" stack>
           <BarRow label="Width at $h=1/768$" value={coarse.total.toFixed(5)} grid={changeTicks.map((tick) => change(tick.at))}>
             <span className={`${kit.dot} ${kit.ink}`} data-tip={`Width at h = 1/768\n${coarse.total}`} style={{ left: `${change(coarse.total)}%`, top: "50%" }} />
           </BarRow>
           {steps.map((item) => (
-            <BarRow key={item.name} label={item.name} value={signedDelta(item.delta)} grid={changeTicks.map((tick) => change(tick.at))} rules={[{ at: change(item.from), tone: "soft" }]}>
+            <BarRow key={item.name} label={item.label} value={signedDelta(item.delta)} grid={changeTicks.map((tick) => change(tick.at))} rules={[{ at: change(item.from), tone: "soft" }]}>
               <Seg x={change} from={Math.min(item.from, item.to)} to={Math.max(item.from, item.to)} tone={item.tone} hatch={item.delta < 0} tip={`${item.name}\n${signedDelta(item.delta)}`} />
             </BarRow>
           ))}
@@ -95,34 +95,34 @@ function AsianWidthPlateau() {
           </BarRow>
           <BarAxis x={change} ticks={changeTicks} title="Width, price units" />
         </Bars>
-        <p className={styles.tally}>Hatched terms shrink; the periodization and P frequency-tail terms are unchanged.</p>
+        <p className={styles.tally}><Tx>{"Hatched terms shrink; the periodization term and the frequency tail under $P$ are unchanged."}</Tx></p>
       </Panel>
       <Panel view="width" active>
-        <Bars label="Width contributions by Euler step. h=1/384: total 0.028009519599, 95.5% nonlinear. h=1/768: 0.021667063872, 94.5%. h=1/1536: 0.021734290027, 92.8%." labelWidth="5rem" valueWidth="6.5rem" stack="narrow">
+        <Bars label="Width contributions by Euler step. h=1/384: width 0.028009519599, 95.5% from the cost of the kink. h=1/768: 0.021667063872, 94.5%. h=1/1536: 0.021734290027, 92.8%." labelWidth="5rem" valueWidth="6.5rem" stack="narrow">
           {ASIAN_STEPS.map((row) => {
             let start = 0;
             return (
-              <BarRow key={row.step} label={`$h=${row.step}$`} value={row.total.toFixed(5)} valueNote={`${row.share} nonlinear`} grid={widthTicks.map((tick) => width(tick.at))}>
+              <BarRow key={row.step} label={`$h=${row.step}$`} value={row.total.toFixed(5)} valueNote={`${row.share} from the kink`} grid={widthTicks.map((tick) => width(tick.at))}>
                 {row.parts.map((part, index) => {
                   const from = start;
                   start += part;
-                  return <Seg key={index} x={width} from={from} to={start} tone={ASIAN_PARTS[index].tone} tip={`h = ${row.step}, ${ASIAN_PARTS[index].name}\n${part}`} />;
+                  return <Seg key={index} x={width} from={from} to={start} tone={ASIAN_PARTS[index].tone} tip={`h = ${row.step}, ${ASIAN_PARTS[index].name}\n${part.toFixed(12)}`} />;
                 })}
               </BarRow>
             );
           })}
           <BarAxis x={width} ticks={widthTicks} title="Width, price units" />
         </Bars>
-        <Legend items={ASIAN_PARTS.map((part) => ({ label: part.name, tone: part.tone }))} />
+        <Legend items={ASIAN_PARTS.map((part) => ({ label: part.label, tone: part.tone }))} />
       </Panel>
       <Panel view="enclosure" active={false}>
-        <Bars label="Signed Euler-minus-continuous enclosures. h=1/384: −0.014169989568 to 0.013839530031. h=1/768: −0.011024692273 to 0.010642371599. h=1/1536: −0.010967952032 to 0.010766337995." labelWidth="5rem" valueWidth="6.5rem" stack="narrow">
+        <Bars label="Proved intervals for the Euler gap, the price under the scheme minus the continuous price. h=1/384: −0.014169989568 to 0.013839530031. h=1/768: −0.011024692273 to 0.010642371599. h=1/1536: −0.010967952032 to 0.010766337995." labelWidth="5rem" valueWidth="6.5rem" stack="narrow">
           {ASIAN_STEPS.map((row) => (
             <BarRow key={row.step} label={`$h=${row.step}$`} value={row.total.toFixed(5)} valueNote="width" grid={signedTicks.map((tick) => signed(tick.at))} rules={[{ at: signed(0) }]}>
               <Range x={signed} from={row.enclosure[0]} to={row.enclosure[1]} tone="ink" tip={`h = ${row.step}\n[${row.enclosure[0]}, ${row.enclosure[1]}]`} />
             </BarRow>
           ))}
-          <BarAxis x={signed} ticks={signedTicks} title="Euler minus continuous" />
+          <BarAxis x={signed} ticks={signedTicks} title="Euler gap $e_h$" />
         </Bars>
       </Panel>
     </Figure>
