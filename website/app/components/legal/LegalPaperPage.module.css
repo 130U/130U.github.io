@@ -18,7 +18,7 @@
 }
 
 .paper .header h1 {
-  max-width: 80%;
+  max-width: var(--title-width);
   font-size: var(--type-title);
   font-weight: 400;
   line-height: var(--title-leading);

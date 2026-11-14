@@ -115,8 +115,8 @@ function inspectFigure(figure) {
   }
   // Math is rendered as SVG, so its enclosing inline box needs its own check.
   for (const formula of [...frame.querySelectorAll('[data-research-formula="inline"]')].filter(shown)) {
-    // The SVG canvas includes transparent safety gutters. Test its glyph group
-    // instead, so a gutter does not masquerade as clipped mathematical content.
+    // The SVG canvas includes transparent safety gutters, so the check measures
+    // its glyph group: only ink counts as mathematical content.
     const ink = formula.querySelector('svg[data-research-svg] g');
     const box = rect(ink ?? formula);
     if (!inFrame(box, formula)) issues.push({ kind: "formula-outside-frame", text: formula.getAttribute("aria-label") ?? formula.textContent.trim(), box });
@@ -206,9 +206,10 @@ function inspectFigure(figure) {
 }
 
 // Manuscript tables and displayed equations: a table heading takes at most two
-// lines; every equation on a page starts on one axis, whatever its length; and
-// every equation number stands at its column's right edge, clear of the
-// expression once the equation is in full view.
+// lines and stays clear of the table's zoom control at either end of its scroll;
+// every equation on a page starts on one axis, whatever its length; and every
+// equation number stands at its column's right edge, clear of the expression
+// once the equation is in full view.
 function inspectManuscript() {
   const issues = [];
   const lineCount = element => {
@@ -227,6 +228,22 @@ function inspectManuscript() {
   for (const heading of document.querySelectorAll("[data-research-table] thead th")) {
     const lines = lineCount(heading);
     if (lines > 2) issues.push({ kind: "table-heading-over-two-lines", heading: heading.textContent.trim(), lines });
+  }
+  for (const frame of document.querySelectorAll("[data-table-frame]")) {
+    const control = frame.querySelector("[data-table-zoom]");
+    const region = frame.querySelector('[role="region"]');
+    if (!control || control.hidden) continue;
+    for (const atScrollEnd of [false, true]) {
+      region.scrollLeft = atScrollEnd ? region.scrollWidth : 0;
+      const zone = control.getBoundingClientRect();
+      for (const heading of frame.querySelectorAll("thead th")) {
+        const text = document.createRange();
+        text.selectNodeContents(heading);
+        const covered = [...text.getClientRects()].some(box => box.width > 0 && box.right > zone.left && box.left < zone.right && box.bottom > zone.top && box.top < zone.bottom);
+        if (covered) issues.push({ kind: "table-heading-under-zoom-control", heading: heading.textContent.trim(), atScrollEnd });
+      }
+    }
+    region.scrollLeft = 0;
   }
   const starts = new Map();
   for (const equation of document.querySelectorAll('[data-research-block-type="equation"]')) {

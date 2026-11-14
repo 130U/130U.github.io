@@ -1,5 +1,5 @@
 import type { CSSProperties } from "react";
-import { BarAxis, BarHeader, BarRow, Bars, Dot, Figure, Legend, Mark, Panel, Plot, Range, Seg, Tx, linear, logarithmic, styles as kit } from "./kit";
+import { BarAxis, BarHeader, BarRow, Bars, Dot, Figure, Legend, Mark, Panel, Plot, Range, Seg, Tx, classes, linear, logarithmic, styles as kit } from "./kit";
 import styles from "./Figures.module.css";
 
 /* Critical Dependence Stress: the benchmark's headline comparison. The
@@ -212,7 +212,7 @@ function HestonCandidateSeparation() {
               label={`$\\alpha=${row.alpha}$`}
               value={<><span className={styles.layerA}>{interval(row.n1024)}</span><span className={styles.layerB}>{interval(row.n2048)}</span></>}
               grid={grid}
-              rowClass={`${"unresolved" in row ? styles.unresolved : ""} ${"best" in row ? styles.best : ""}`}
+              rowClass={classes("unresolved" in row && styles.unresolved, "best" in row && styles.best)}
             >
               <span className={`${kit.range} ${styles.candidate}`} style={style} data-tip={`α = ${row.alpha}\nNt = 1024: [${row.n1024.join(", ")}]\nNt = 2048: [${row.n2048.join(", ")}]`} />
             </BarRow>

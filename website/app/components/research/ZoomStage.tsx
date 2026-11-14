@@ -51,6 +51,11 @@ function pinRowLabels(region: HTMLElement, table: HTMLTableElement) {
   paintEdges(region);
 }
 
+/** A table without a title that scrolls would carry its headings beneath the zoom control, so the control takes a row of its own. */
+function clearTableControl(frame: HTMLElement, region: HTMLElement, table: HTMLTableElement) {
+  frame.toggleAttribute("data-zoom-row", !frame.querySelector("[data-table-title]") && table.offsetWidth > region.clientWidth + 1);
+}
+
 /** Whether any visible text or formula of a figure lies under its zoom control. */
 function coversControl(frame: HTMLElement, control: HTMLElement) {
   const zone = control.getBoundingClientRect();
@@ -112,7 +117,7 @@ export function ZoomStage() {
       const roomWidth = Math.min(stage.clientWidth - inset, STAGE_MAX_WIDTH) - 2;
       const roomHeight = stage.clientHeight - inset - 2;
       const title = panel.querySelector<HTMLElement>("[data-table-title]");
-      const fitsHeight = () => table.offsetHeight + (title?.offsetHeight ?? 0) <= roomHeight;
+      const fitsHeight = () => table.offsetHeight + (title?.offsetHeight ?? 0) + parseFloat(getComputedStyle(panel).paddingTop) <= roomHeight;
       const place = (mode: "line" | "wrap", zoom: number, width: number, dense = false, headings = false) => {
         panel.dataset.fit = mode;
         panel.style.setProperty("--zoom", String(zoom));
@@ -136,6 +141,7 @@ export function ZoomStage() {
       };
       settle();
       pinRowLabels(region, table);
+      clearTableControl(panel, region, table);
     };
 
     const fitFigure = (panel: HTMLElement, figure: HTMLElement) => {
@@ -274,7 +280,7 @@ export function ZoomStage() {
       region: frame.querySelector<HTMLElement>("[role=region]")!,
       control: frame.querySelector<HTMLButtonElement>("[data-table-zoom]")!,
     }));
-    const settleFrame = ({ region, table }: (typeof frames)[number]) => {
+    const settleFrame = ({ frame, region, table }: (typeof frames)[number]) => {
       // A table just wider than its column closes up to fit.
       region.removeAttribute("data-dense");
       if (table.offsetWidth > region.clientWidth + 1) {
@@ -282,6 +288,7 @@ export function ZoomStage() {
         if (table.offsetWidth > region.clientWidth + 1) region.removeAttribute("data-dense");
       }
       pinRowLabels(region, table);
+      clearTableControl(frame, region, table);
     };
     const observer = new ResizeObserver((entries) => {
       for (const entry of entries) settleFrame(frames.find(({ region }) => region === entry.target)!);

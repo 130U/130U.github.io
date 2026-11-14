@@ -82,7 +82,7 @@
   font-weight: inherit;
 }
 
-/* The zoom control holds the frame's top-right corner, on the title's first
+/* The zoom control holds the frame's top-right corner: on the title's first
    line, or on the header band of a table without a title. */
 .zoom {
   --control-surface: var(--table-surface);
@@ -95,6 +95,20 @@
 .zoom:first-child {
   top: 6px;
   background: var(--table-band);
+}
+
+/* A table without a title that scrolls would carry its headings beneath the
+   control, so the control takes a row of its own above the header. */
+.tableFrame[data-zoom-row] {
+  padding-top: 44px;
+}
+
+:where([data-zoom-row]) > .zoom:first-child {
+  background: transparent;
+}
+
+.tableFrame[data-zoom-row] thead .cell {
+  border-top: 1px solid var(--rule);
 }
 
 .tableRegion:focus-visible {
@@ -375,42 +389,13 @@ td.numeric {
   min-width: 12em;
 }
 
-@media (prefers-reduced-transparency: reduce) {
-  .scrim {
-    background: color-mix(in srgb, var(--page) 92%, transparent);
-    -webkit-backdrop-filter: none;
-    backdrop-filter: none;
-  }
-}
-
 @media (prefers-contrast: more) {
   .tableFrame[data-zoomed] {
     border-color: var(--ink);
   }
-
-  .scrim {
-    background: rgb(0 0 0 / 0.35);
-    -webkit-backdrop-filter: none;
-    backdrop-filter: none;
-  }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .zoom,
-  .zoom svg {
-    transition: none;
-  }
-
-  .tableFrame[data-zoomed] .zoom [data-zoom-plus] {
-    animation-duration: 1ms;
-  }
 }
 
 @media print {
-  .zoom {
-    display: none;
-  }
-
   .tableRegion {
     overflow: visible;
     -webkit-mask-image: none;
