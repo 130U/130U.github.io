@@ -129,44 +129,44 @@ function AsianWidthPlateau() {
   );
 }
 
-/* Rough Heston, Table 3: complete unit-spread bounds against the 0.25-point task. */
+/* Rough Heston, Table 2: complete bounds for the 4400–4500 spread against a quarter-point tolerance. */
 const HESTON_STAGES = [
   { group: "Six months" },
-  { id: "H0", text: "Global state propagation", joint: 1.397612096, note: "One-point budget not met" },
-  { id: "H1", text: "Finite history, same global residual", joint: 0.378598956, note: "Principal propagation improvement; unchanged output and centre" },
-  { id: "H2", text: "Local envelope, same reference nodes", joint: 0.367258782, note: "About 3% further bound reduction" },
-  { id: "H3", text: "All finite high nodes, global envelope", joint: 0.132245064, marginal: 0.158585551, note: "High-frequency certification and centre change are included" },
-  { id: "H4", text: "All finite high nodes, local envelope", joint: 0.115215934, marginal: 0.137896018, note: "Both methods certify 0.25 points" },
+  { id: "H0", text: "Uniform state bound", joint: 1.397612096, marginal: 2.679930311, note: "none" },
+  { id: "H1", text: "Theorem 3.1, global residual", joint: 0.378598956, marginal: 0.476401716, note: "1/2 point, both" },
+  { id: "H2", text: "Theorem 3.1, 128 time bins", joint: 0.367258782, note: "1/2 point" },
+  { id: "H3", text: "Reference through 128, upper band global", joint: 0.132245064, marginal: 0.158585551, note: "1/4 point, both" },
+  { id: "H4", text: "Reference through 128, 128 bins", joint: 0.115215934, marginal: 0.137896018, note: "1/4 point, both" },
   { group: "Three months" },
-  { id: "Q0", text: "Through 64, global envelope", joint: 1.207557898, marginal: 1.545191542, note: "0.25-point budget not met" },
-  { id: "Q1", text: "Through 128, global envelope", joint: 0.351318692, marginal: 0.408293698, note: "0.25-point budget not met" },
-  { id: "Q2", text: "Through 128, local envelope", joint: 0.233318843, marginal: 0.252393939, note: "Only the joint method certifies 0.25 points" },
+  { id: "Q0", text: "Reference through 64, global", joint: 1.207557898, marginal: 1.545191542, note: "none" },
+  { id: "Q1", text: "Reference through 128, global", joint: 0.351318692, marginal: 0.408293698, note: "1/2 point, both" },
+  { id: "Q2", text: "Reference through 128, 128 bins", joint: 0.233318843, marginal: 0.252393939, note: "1/4 point, joint only" },
 ] as const;
 
 function HestonStageBounds() {
-  const x = logarithmic(0.09, 2);
+  const x = logarithmic(0.09, 3);
   const ticks = [0.1, 0.25, 0.5, 1, 2].map((at) => ({ at, label: String(at) }));
   const grid = [0.1, 0.5, 1, 2].map(x);
-  const task = x(0.25);
+  const tolerance = x(0.25);
   return (
     <Figure
       id="heston-stages"
-      title="Complete unit-spread bounds through the ablation"
-      caption="Each row is one configuration from Table 3, on a logarithmic scale; a bound left of the dashed line certifies the 0.25-point task. Finite-history propagation delivers the largest reduction, and at Q2 only the joint aggregation passes."
-      legend={[{ label: "Complete joint bound", tone: "accent", shape: "dot" }, { label: "Matched signed marginal bound", tone: "steel", shape: "ring" }]}
+      title="Complete bounds for the 4400–4500 spread as the certificate is refined"
+      caption="Each row is one certificate of Table 2, on a logarithmic scale; a bound left of the dashed line certifies a quarter point. The forward variance weight of Theorem 3.1 gives the largest reduction, from H0 to H1, and at Q2 only the joint bound certifies."
+      legend={[{ label: "Joint bound", tone: "accent", shape: "dot" }, { label: "Leg-by-leg bound", tone: "steel", shape: "ring" }]}
     >
-      <Bars label="Complete joint bounds in index points: H0 1.398, H1 0.379, H2 0.367, H3 0.132, H4 0.115, Q0 1.208, Q1 0.351, Q2 0.233. Marginal bounds: H3 0.159, H4 0.138, Q0 1.545, Q1 0.408, Q2 0.252. The task budget is 0.25 points." labelWidth="11.5rem" valueWidth="3rem" stack="narrow">
-        <BarHeader marks={[{ at: task, label: "0.25-point task", tone: "accent", anchor: "left" }]} />
+      <Bars label="Joint bounds in index points: H0 1.398, H1 0.379, H2 0.367, H3 0.132, H4 0.115, Q0 1.208, Q1 0.351, Q2 0.233. Leg-by-leg bounds: H0 2.680, H1 0.476, H3 0.159, H4 0.138, Q0 1.545, Q1 0.408, Q2 0.252. The tolerance is a quarter point." labelWidth="11.5rem" valueWidth="3rem" stack="narrow">
+        <BarHeader marks={[{ at: tolerance, label: "Quarter-point tolerance", tone: "accent", anchor: "left" }]} />
         {HESTON_STAGES.map((row, index) => {
           if (!("id" in row)) return <p key={index} className={kit.groupLabel}>{row.group}</p>;
           const marginal = "marginal" in row ? row.marginal : undefined;
-          const passes = row.joint <= 0.25;
-          const tip = `${row.id}: ${row.text}\nJoint ${row.joint}${marginal ? `\nMarginal ${marginal}` : ""}\n${row.note}`;
+          const certified = row.joint <= 0.25;
+          const tip = `${row.id}: ${row.text}\nJoint ${row.joint}${marginal ? `\nLeg by leg ${marginal}` : ""}\nTolerance met: ${row.note}`;
           return (
-            <BarRow key={row.id} label={<><span className={styles.id}>{row.id}</span><span className={styles.stageText}>{row.text}</span></>} value={row.joint.toFixed(3)} grid={grid} rules={[{ at: task, tone: "accent" }]}>
+            <BarRow key={row.id} label={<><span className={styles.id}>{row.id}</span><span className={styles.stageText}>{row.text}</span></>} value={row.joint.toFixed(3)} grid={grid} rules={[{ at: tolerance, tone: "accent" }]}>
               {marginal && <span className={`${styles.link} ${kit.steel}`} style={{ left: `${x(row.joint)}%`, width: `${x(marginal) - x(row.joint)}%` }} />}
               {marginal && <span className={`${kit.dot} ${kit.steel}`} data-ring="" data-tip={tip} style={{ left: `${x(marginal)}%`, top: "50%" }} />}
-              <span className={`${kit.dot} ${passes ? kit.accent : kit.ink}`} data-tip={tip} style={{ left: `${x(row.joint)}%`, top: "50%" }} />
+              <span className={`${kit.dot} ${certified ? kit.accent : kit.ink}`} data-tip={tip} style={{ left: `${x(row.joint)}%`, top: "50%" }} />
             </BarRow>
           );
         })}
@@ -176,7 +176,7 @@ function HestonStageBounds() {
   );
 }
 
-/* Rough Heston, Tables 5 and 6: the five fixed candidates under both layers. */
+/* Rough Heston, Table 9: the objective enclosures of five roughness candidates at both levels. */
 const HESTON_CANDIDATES = [
   { alpha: "0.520", n1024: [4.825094, 6.77835], n2048: [5.293449, 6.024095], unresolved: true, best: true },
   { alpha: "0.525", n1024: [5.645378, 7.501414], n2048: [6.09792, 6.798485], unresolved: true },
@@ -194,11 +194,11 @@ function HestonCandidateSeparation() {
     <Figure
       id="heston-candidates"
       className={styles.candidates}
-      title="Objective enclosures for the five fixed candidates"
-      caption="Normalized midpoint loss $J\times10^8$ under the fixed quotes. On the first layer three close candidates still overlap; the prespecified upgrade to $N_t=2048$ separates every pair and certifies $\alpha=0.520$ as the strict minimizer among the five fixed points."
+      title="Objective enclosures for five roughness candidates"
+      caption="Normalized least-squares distance to the mid prices, as $J\times10^8$. At $N_t=1024$ three close candidates overlap; at $N_t=2048$ the five enclosures are disjoint and ordered, and $\alpha=0.520$ is the certified minimizer on this grid."
       views={[{ id: "n1024", label: <>N<sub>t</sub> = 1024</> }, { id: "n2048", label: <>N<sub>t</sub> = 2048</> }]}
       defaultView="n2048"
-      viewsLabel="Choose the generated layer"
+      viewsLabel="Choose the number of time cells"
     >
       <Bars label="Joint objective enclosures, J times 10 to the 8. With 1024 cells: alpha 0.520 from 4.825 to 6.778, 0.525 from 5.645 to 7.501, 0.530 from 6.749 to 8.518, 0.540 from 9.807 to 11.422, 0.550 from 14.001 to 15.482. With 2048 cells: 0.520 from 5.293 to 6.024, 0.525 from 6.098 to 6.798, 0.530 from 7.187 to 7.860, 0.540 from 10.219 to 10.839, 0.550 from 14.387 to 14.961." labelWidth="5rem" valueWidth="8.5rem" stack="narrow">
         {HESTON_CANDIDATES.map((row) => {
@@ -221,47 +221,47 @@ function HestonCandidateSeparation() {
         <BarAxis x={x} ticks={ticks} title="$J\times10^8$" />
       </Bars>
       <p className={styles.tally}>
-        <span className={styles.layerA}>The joint certificate separates 7 of 10 pairs; the matched marginal, 3 of 10.</span>
-        <span className={styles.layerB}>The joint certificate separates all 10 pairs; the matched marginal, 7 of 10.</span>
+        <span className={styles.layerA}>The joint enclosures separate 7 of 10 pairs; the leg-by-leg enclosures, 3 of 10.</span>
+        <span className={styles.layerB}>The joint enclosures separate all 10 pairs; the leg-by-leg enclosures, 7 of 10.</span>
       </p>
     </Figure>
   );
 }
 
-/* Rough Heston, Table 10: the Q2 ledger, joint against signed marginal. */
+/* Rough Heston, Table 4: the ledger of the three-month spread (Q2), joint against leg-by-leg. */
 const LEDGER_PARTS = [
-  { name: "Absolute centre charge", tone: "ink", joint: 0.149775146827, marginal: 0.149775146827 },
-  { name: "Used-node support", tone: "accent", joint: 0.045461793432, marginal: 0.064536889507 },
-  { name: "Strip remainder", tone: "mist", joint: 0.00002665423, marginal: 0.00002665423 },
-  { name: "True infinite-tail remainder", tone: "sky", joint: 0.038055248032, marginal: 0.038055248032 },
+  { name: "Absolute centre", tone: "ink", joint: 0.149775147, marginal: 0.149775147 },
+  { name: "Node support, 1,025 nodes", tone: "accent", joint: 0.045461793, marginal: 0.06453689 },
+  { name: "Strip remainder", tone: "mist", joint: 0.000026654, marginal: 0.000026654 },
+  { name: "Exact infinite tail", tone: "sky", joint: 0.038055248, marginal: 0.038055248 },
 ] as const;
 
 function HestonLedger() {
   const x = linear(0, 0.3);
   const ticks = [0, 0.1, 0.2, 0.3].map((at) => ({ at, label: at === 0 ? "0" : at.toFixed(1) }));
   const grid = ticks.map((tick) => x(tick.at));
-  const budget = x(0.25);
+  const tolerance = x(0.25);
   const rows = [
-    { name: "Joint", key: "joint", total: "0.233318843", verdict: "Passes" },
-    { name: "Signed marginal", key: "marginal", total: "0.252393939", verdict: "Does not pass" },
+    { name: "Joint", key: "joint", total: "0.233318843", verdict: "Certified" },
+    { name: "Leg-by-leg", key: "marginal", total: "0.252393939", verdict: "Not certified" },
   ] as const;
   return (
     <Figure
       id="heston-ledger"
-      title="Q2 quarter-year ledger against the 0.25-point budget"
-      caption="Both columns share the output, the reference centre, the 1025 node radii and every remainder. Only the aggregation of shared node errors differs, and that 0.019075095-point difference decides the task."
+      title="Ledger of the three-month spread (Q2) against a quarter-point tolerance"
+      caption="Both rows share the stored output, the reference centre, all 1,025 node radii and every remainder. Only the aggregation of the node errors differs: netting lowers the node term by 30 percent and takes the complete bound from above a quarter point to below it."
       legend={LEDGER_PARTS.filter((part) => part.tone !== "mist").map((part) => ({ label: part.name, tone: part.tone }))}
     >
-      <Bars label="Q2 complete bounds in index points. Joint 0.233318843, which passes the 0.25 budget; signed marginal 0.252393939, which does not. Shared components: absolute centre charge 0.149775146827, strip remainder 0.000026654230, true infinite-tail remainder 0.038055248032. Used-node support: joint 0.045461793432, marginal 0.064536889507." labelWidth="8rem" valueWidth="7rem" stack>
-        <BarHeader marks={[{ at: budget, label: "0.25-point budget", tone: "accent", anchor: "right" }]} />
+      <Bars label="Complete bounds of the three-month spread in index points. Joint 0.233318843, below a quarter point; leg-by-leg 0.252393939, above it. Shared components: absolute centre 0.149775147, strip remainder 0.000026654, exact infinite tail 0.038055248. Node support: joint 0.045461793, leg-by-leg 0.064536890." labelWidth="8rem" valueWidth="7rem" stack>
+        <BarHeader marks={[{ at: tolerance, label: "Quarter-point tolerance", tone: "accent", anchor: "right" }]} />
         {rows.map((row) => {
           let start = 0;
           return (
-            <BarRow key={row.key} label={row.name} value={row.total} valueNote={row.verdict} grid={grid} rules={[{ at: budget, tone: "accent" }]}>
+            <BarRow key={row.key} label={row.name} value={row.total} valueNote={row.verdict} grid={grid} rules={[{ at: tolerance, tone: "accent" }]}>
               {LEDGER_PARTS.map((part) => {
                 const from = start;
                 start += part[row.key];
-                return <Seg key={part.name} x={x} from={from} to={start} tone={part.tone} tip={`${row.name}: ${part.name}\n${part[row.key]}`} />;
+                return <Seg key={part.name} x={x} from={from} to={start} tone={part.tone} tip={`${row.name}: ${part.name}\n${part[row.key].toFixed(9)}`} />;
               })}
             </BarRow>
           );

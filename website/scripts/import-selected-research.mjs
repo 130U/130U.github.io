@@ -21,10 +21,19 @@ const sources = [
   },
   {
     key: "rough", slug: "certified-rough-heston-valuation", file: "manuscript/merged-heston-en.md",
-    sourceCommit: "de721f78cec277e390cd9dc2ebc4efa9ae9681e4", sourceBlob: "2b52caa1ad3e58a2f411c9c1f1b651d01f3a8d39",
-    sourceEditedAt: "2026-11-12T09:54:24-05:00", fetchedAt: "2026-11-12", mainSections: 8,
-    appendixAnchor: "appendix-a-probability-model-and-strip-transform",
+    sourceCommit: "5460e487a85e8d164db47f55aae666e593790895", sourceBlob: "b25e5531b9a3d120732c276f3779e520b8968f58",
+    sourceEditedAt: "2026-11-14T01:39:13-05:00", fetchedAt: "2026-11-14", mainSections: 8,
+    appendixAnchor: "appendix-a-rescaled-variables-model-and-transform",
     description: "A method for certifying portfolio valuation errors in rough Heston, carrying continuous Riccati residual bounds through to complete pricing guarantees.",
+    figures: {
+      directory: "rough", count: 4,
+      studies: [
+        { name: "finite-history-nodes-alpha-13_25.json", file: "science/baseline/finite-history/finite-history-nodes-alpha-13_25.json", blob: "c6ae3634bd49abcf1ce00f1abc9cd1e9648acdb6" },
+        { name: "transfer-time-local-nodes.json", file: "science/baseline/frontier/transfer-time-local-nodes.json", blob: "085f5093feb64a2d51bfea8e25e5090875b78345" },
+        { name: "portfolio-budget-counts.json", file: "audit-experiments/portfolio-budget-counts.json", blob: "c54490b525090394fec3773dc497a5cc6ff463a0" },
+      ],
+      data: roughFigureData,
+    },
   },
 ];
 
@@ -57,6 +66,73 @@ function asianFigureData({ "gap-profile.json": profile, "euler-ladder.json": lad
   };
 }
 
+/** An exact rational of the saved banks, such as "5/8", as a binary64 number. */
+function rational(text) {
+  const [numerator, denominator = "1"] = text.split("/");
+  return Number(BigInt(numerator)) / Number(BigInt(denominator));
+}
+
+/**
+ * The values Figures 2 to 4 of the Rough Heston paper plot, read from its saved
+ * banks as scripts/build_figures.py of that repository reads them.
+ */
+function roughFigureData({
+  "finite-history-nodes-alpha-13_25.json": history,
+  "transfer-time-local-nodes.json": transfer,
+  "portfolio-budget-counts.json": budgets,
+}) {
+  const forward = 4221.86;
+  const step = 1 / 8;
+  const weight = (u) => (u === 0 ? 0.5 : 1) / (u * u + 0.25);
+
+  // Figure 2: the share of the leg-by-leg node charge in each band of four units of frequency.
+  const charge = history.all_node_radii.map((radius, node) => rational(radius) * weight(node * step));
+  const total = charge.reduce((sum, value) => sum + value, 0);
+  const shares = Array.from({ length: 32 }, () => 0);
+  charge.forEach((value, node) => { shares[Math.min(Math.floor((node * step) / 4), 31)] += value / total; });
+
+  // Figure 3: the node error set of the 4400 and 4500 calls, a sum of one ellipse for each frequency.
+  const moneyness = [4400, 4500].map((strike) => strike / forward);
+  const ellipses = transfer.nodes.map((node) => {
+    const u = rational(node.u);
+    const scale = -(step / Math.PI) * weight(u) * rational(node.time_CF_radius_upper) * forward;
+    return moneyness.map((m) => [scale * Math.sqrt(m) * Math.cos(u * Math.log(m)), -scale * Math.sqrt(m) * Math.sin(u * Math.log(m))]);
+  });
+  const boundary = Array.from({ length: 360 }, (_, degree) => {
+    const direction = [Math.cos((degree * Math.PI) / 180), Math.sin((degree * Math.PI) / 180)];
+    const point = [0, 0];
+    for (const legs of ellipses) {
+      const real = legs[0][0] * direction[0] + legs[1][0] * direction[1];
+      const imaginary = legs[0][1] * direction[0] + legs[1][1] * direction[1];
+      const modulus = Math.hypot(real, imaginary);
+      if (modulus === 0) continue;
+      legs.forEach((leg, index) => { point[index] += (leg[0] * real + leg[1] * imaginary) / modulus; });
+    }
+    return point.map((value) => Number(value.toFixed(7)));
+  });
+  const half = [0, 1].map((index) => ellipses.reduce((sum, legs) => sum + Math.hypot(...legs[index]), 0));
+  const joint = ellipses.reduce((sum, legs) => sum + Math.hypot(legs[0][0] - legs[1][0], legs[0][1] - legs[1][1]), 0);
+  const stored = (field) => transfer.nodes.reduce((sum, node) => sum + rational(node[field]), 0) * forward;
+  if (Math.abs(joint - stored("joint_node_support_exact")) > 1e-9 || Math.abs(half[0] + half[1] - stored("signed_marginal_node_support_exact")) > 1e-9) {
+    throw new Error("The node error set does not reproduce the saved node supports.");
+  }
+
+  // Figure 4: the exact thresholds of the 28 positions on bank H1, in index points.
+  const thresholds = (alpha, method) => {
+    const values = budgets.threshold_rows
+      .filter((row) => row.configuration_id === "H1" && row.alpha === alpha && row.method === method)
+      .map((row) => Number(rational(row.exact_threshold_points).toPrecision(12)))
+      .sort((a, b) => a - b);
+    if (values.length !== 28) throw new Error("A roughness candidate needs the thresholds of all 28 positions.");
+    return values;
+  };
+  return {
+    netting: { shares },
+    errorSet: { boundary, half, joint, legByLeg: half[0] + half[1] },
+    passCounts: ["13/25", "3/5", "9/10"].map((alpha) => ({ alpha: rational(alpha), joint: thresholds(alpha, "joint"), legByLeg: thresholds(alpha, "marginal") })),
+  };
+}
+
 const receipts = [];
 for (const config of sources) {
   const contentUrl = new URL(`../content/selected-research/${config.slug}.json`, import.meta.url);
@@ -72,15 +148,21 @@ for (const config of sources) {
   const refs = source.slice(references).trim();
   const repositoryUrl = `https://github.com/130U/${config.slug}`;
   const sourceUrl = `${repositoryUrl}/blob/${config.sourceCommit}/${config.file}`;
-  // A manuscript figure is an image line followed by its caption paragraph,
-  // whose bold opening repeats the image's label. The page draws the figure
-  // from the image's local path and sets the caption beneath it.
+  // A manuscript figure is an image line that either carries its caption or is
+  // followed by a caption paragraph whose bold opening repeats the image's
+  // label. The page draws the figure from the image's local path and sets the
+  // caption beneath it.
   const figures = [];
-  const captioned = main.replace(/^!\[([^\]\n]+)\]\(figures\/([a-z0-9-]+)\.png\)\n\n\*\*\1\*\*([^\n]*)$/gmu, (_, label, image, caption) => {
-    const src = `/assets/research/${config.figures?.directory}/${image}.png`;
-    figures.push({ label, src });
-    return `![**${label}**${caption}](${src})`;
-  });
+  const local = (image) => `/assets/research/${config.figures?.directory}/${image}.png`;
+  const captioned = main
+    .replace(/^!\[([^\]\n]+)\]\(figures\/([a-z0-9-]+)\.png\)\n\n\*\*\1\*\*([^\n]*)$/gmu, (_, label, image, caption) => {
+      figures.push({ label, src: local(image) });
+      return `![**${label}**${caption}](${local(image)})`;
+    })
+    .replace(/^!\[((Figure \d+\.)[^\n]*)\]\(\.\.\/figures\/([a-z0-9-]+)\.png\)$/gmu, (_, caption, label, image) => {
+      figures.push({ label, src: local(image) });
+      return `![${caption}](${local(image)})`;
+    });
   if (figures.length !== (config.figures?.count ?? 0) || /^!\[/mu.test(captioned.replace(/^!\[[^\n]*\]\(\/assets\/research\/[a-z0-9/-]+\.png\)$/gmu, ""))) {
     throw new Error(`The ${config.key} manuscript's figures do not match their reviewed form.`);
   }
@@ -106,7 +188,7 @@ for (const config of sources) {
     transformations: [
       "The title is rendered once by the page header.",
       "Relative file links resolve to the frozen GitHub commit.",
-      ...(figures.length ? ["Each figure's image line joins its caption paragraph as one captioned figure at a local path, and the page draws the figure from the pinned study results."] : []),
+      ...(figures.length ? ["Each figure is one captioned figure at a local path, which the page draws from the manuscript's formulas and the pinned study results."] : []),
       "A paragraph links omitted appendices and supporting material to GitHub.",
       "Main text, all main-text tables, mathematical TeX and references are otherwise retained verbatim.",
     ],

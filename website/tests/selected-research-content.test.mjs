@@ -16,7 +16,7 @@ function withoutArticleFigures(html) {
 
 const PROJECTS = [
   { key: "asian", slug: "certified-valuation-arithmetic-asian-options", commit: "2efeaf1580e139001744eab48ffd1c0c1e3058c8", blob: "43026cce8d246868ae16faa0ea76e3d341db7b4d", sections: 9, tables: 11, formulas: 724, figures: "asian" },
-  { key: "rough", slug: "certified-rough-heston-valuation", commit: "de721f78cec277e390cd9dc2ebc4efa9ae9681e4", blob: "2b52caa1ad3e58a2f411c9c1f1b651d01f3a8d39", sections: 8, tables: 13, formulas: 306 },
+  { key: "rough", slug: "certified-rough-heston-valuation", commit: "5460e487a85e8d164db47f55aae666e593790895", blob: "b25e5531b9a3d120732c276f3779e520b8968f58", sections: 8, tables: 10, formulas: 437, figures: "rough" },
 ];
 
 function sourceFormulas(markdown) {
@@ -55,9 +55,10 @@ for (const expected of PROJECTS) {
     assert.equal(article.title, upstream.match(/^# (.+)$/mu)[1]);
     const main = upstream.slice(upstream.indexOf("\n") + 1, upstream.indexOf("\n## Appendix A.")).trim()
       .replace(/^!\[([^\]\n]+)\]\(figures\/([a-z0-9-]+)\.png\)\n\n\*\*\1\*\*([^\n]*)$/gmu, (_, label, image, caption) => `![**${label}**${caption}](/assets/research/${expected.figures}/${image}.png)`)
+      .replace(/^!\[(Figure \d+\.[^\n]*)\]\(\.\.\/figures\/([a-z0-9-]+)\.png\)$/gmu, (_, caption, image) => `![${caption}](/assets/research/${expected.figures}/${image}.png)`)
       .replace(/\]\((\.\.\/[^\s)]+)\)/gu, (_, relative) => `](https://github.com/130U/${expected.slug}/blob/${expected.commit}/${relative.slice(3)})`);
     const references = upstream.slice(upstream.indexOf("\n## References")).trim();
-    assert.ok(article.markdown.startsWith(main + "\n\n## Appendices and Supporting Material\n"), "Every main-text character must survive import, except resolved relative link targets and each figure's image line, whose label its caption repeats.");
+    assert.ok(article.markdown.startsWith(main + "\n\n## Appendices and Supporting Material\n"), "Every main-text character must survive import, except resolved relative link targets and each figure's image path, with an image label its caption repeats.");
     assert.ok(article.markdown.endsWith(references + "\n"), "The complete bibliography must survive import.");
     assert.doesNotMatch(article.markdown, /^## Appendix [A-Z]\./mu);
     const blocks = parseResearchMarkdown(article.markdown, { joinSoftLines: true });

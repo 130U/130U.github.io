@@ -64,7 +64,7 @@
       "transformations": [
         "The title is rendered once by the page header.",
         "Relative file links resolve to the frozen GitHub commit.",
-        "Each figure's image line joins its caption paragraph as one captioned figure at a local path, and the page draws the figure from the pinned study results.",
+        "Each figure is one captioned figure at a local path, which the page draws from the manuscript's formulas and the pinned study results.",
         "A paragraph links omitted appendices and supporting material to GitHub.",
         "Main text, all main-text tables, mathematical TeX and references are otherwise retained verbatim."
       ],
@@ -102,55 +102,96 @@
     },
     {
       "slug": "certified-rough-heston-valuation",
-      "fetchedAt": "2026-11-12",
-      "sourceUrl": "https://github.com/130U/certified-rough-heston-valuation/blob/de721f78cec277e390cd9dc2ebc4efa9ae9681e4/manuscript/merged-heston-en.md",
-      "sourceCommit": "de721f78cec277e390cd9dc2ebc4efa9ae9681e4",
-      "sourceBlob": "2b52caa1ad3e58a2f411c9c1f1b651d01f3a8d39",
-      "sourceSha256": "bc18078a28cec6e6cf69b78b9b477423966e1686dbd9c0707ad7655aba9c9070",
-      "importedMarkdownSha256": "d2af9c5b796c429a89e456f17bfae479929f7237746067a6c86a0d926e2aa1b6",
+      "fetchedAt": "2026-11-14",
+      "sourceUrl": "https://github.com/130U/certified-rough-heston-valuation/blob/5460e487a85e8d164db47f55aae666e593790895/manuscript/merged-heston-en.md",
+      "sourceCommit": "5460e487a85e8d164db47f55aae666e593790895",
+      "sourceBlob": "b25e5531b9a3d120732c276f3779e520b8968f58",
+      "sourceSha256": "27e1ed0f64ff23003d1a846996abcd185e547b16ade501c9c2bbf925ccb70139",
+      "importedMarkdownSha256": "b46c3f3b527ed9f00d8ec33d3f182dc2421584713118b8e540ba087d0df879ec",
       "includedHeadings": [
         "Abstract",
         "1. Introduction",
-        "1.1. From the Riccati equation to the portfolio error",
-        "1.2. The role of approximation",
-        "1.3. Relation to the literature",
-        "2. The exact pricing problem",
-        "2.1. The solution to be approximated",
-        "2.2. The financial quantity",
-        "3. Finite-history propagation: nonexpansion and dissipation",
-        "3.1. The pricing kernel and its computation",
-        "4. From a reference trajectory to transform disks",
-        "4.1. A reference dictated by the startup expansion",
-        "4.2. Completing the transform and price bound",
-        "5. Portfolio errors from a common transform",
-        "5.1. The joint error set and the loss from separate bounds",
-        "5.2. Directional and finite-objective certificates",
-        "6. A rational output with a separate structural guarantee",
-        "7. Matched decisions and scientific controls",
-        "7.1. Fixed contracts, units and complete ablation",
-        "7.2. Twenty-eight portfolio directions",
-        "7.3. Prespecified nearby candidates under fixed quotes",
-        "7.4. Certifying stored and replaceable outputs",
-        "7.5. Matched dissipative-kernel evaluation",
-        "Verification scope and mathematical work",
-        "7.6. Matched ledgers and certificate resolution",
-        "7.7. Scope of the experiments",
-        "8. Conclusion and reproducibility"
+        "1.1. What a Riccati residual costs",
+        "1.2. Transform error as a common factor",
+        "1.3. Evidence and economic scale",
+        "1.4. Relation to the literature",
+        "2. The pricing problem",
+        "2.1. Model, transform and price",
+        "2.2. Two faces of the exponent",
+        "3. What a Riccati residual costs",
+        "3.1. A martingale that fails to be one",
+        "3.2. The residual bound",
+        "3.3. The weight is a forward variance curve",
+        "3.4. Cell weights",
+        "4. From residuals to prices",
+        "4.1. A reference shaped by the startup expansion",
+        "4.2. Transform disks and the price bound",
+        "5. Portfolios: transform error as a common factor",
+        "5.1. The joint error set",
+        "5.2. The netting ratio",
+        "5.3. The calibration objective is a portfolio",
+        "6. The stored output",
+        "7. Evidence from S&P 500 options",
+        "7.1. Data and market scale",
+        "7.2. What the forward variance weight buys",
+        "7.3. A decision that turns on netting",
+        "7.4. Twenty-eight positions",
+        "7.5. Is the roughness ranking numerical?",
+        "7.6. Model misfit without solver doubt",
+        "7.7. Auditing an output or replacing it",
+        "8. Conclusion"
       ],
       "mainSections": 8,
       "omitted": [
-        "## Appendix A. Probability model and strip transform",
-        "## Appendix B. Exact construction and structural certificates",
-        "## Appendix C. Complete propagation proofs and analytic variants",
-        "## Appendix D. Continuous certification and reliable refinement",
-        "## Appendix E. Complete experiments and verification duties"
+        "## Appendix A. Rescaled variables, model and transform",
+        "## Appendix B. The rational output",
+        "## Appendix C. Propagation proofs",
+        "## Appendix D. The certified reference",
+        "## Appendix E. Experimental record"
       ],
       "transformations": [
         "The title is rendered once by the page header.",
         "Relative file links resolve to the frozen GitHub commit.",
+        "Each figure is one captioned figure at a local path, which the page draws from the manuscript's formulas and the pinned study results.",
         "A paragraph links omitted appendices and supporting material to GitHub.",
         "Main text, all main-text tables, mathematical TeX and references are otherwise retained verbatim."
-      ]
+      ],
+      "figures": [
+        {
+          "label": "Figure 1.",
+          "src": "/assets/research/rough/residual-kernel.png"
+        },
+        {
+          "label": "Figure 2.",
+          "src": "/assets/research/rough/netting-ratio.png"
+        },
+        {
+          "label": "Figure 3.",
+          "src": "/assets/research/rough/joint-error-set.png"
+        },
+        {
+          "label": "Figure 4.",
+          "src": "/assets/research/rough/pass-counts.png"
+        }
+      ],
+      "studies": [
+        {
+          "sourceUrl": "https://github.com/130U/certified-rough-heston-valuation/blob/5460e487a85e8d164db47f55aae666e593790895/science/baseline/finite-history/finite-history-nodes-alpha-13_25.json",
+          "sourceBlob": "c6ae3634bd49abcf1ce00f1abc9cd1e9648acdb6",
+          "sourceSha256": "a0b2df22264e111b177541383eecf01bba63f47aac6296c3428f832a0c5ceca7"
+        },
+        {
+          "sourceUrl": "https://github.com/130U/certified-rough-heston-valuation/blob/5460e487a85e8d164db47f55aae666e593790895/science/baseline/frontier/transfer-time-local-nodes.json",
+          "sourceBlob": "085f5093feb64a2d51bfea8e25e5090875b78345",
+          "sourceSha256": "60e0cc82268facc9af3523847a707e1fda5ed7142060f4bf02a648db18e839f8"
+        },
+        {
+          "sourceUrl": "https://github.com/130U/certified-rough-heston-valuation/blob/5460e487a85e8d164db47f55aae666e593790895/audit-experiments/portfolio-budget-counts.json",
+          "sourceBlob": "c54490b525090394fec3773dc497a5cc6ff463a0",
+          "sourceSha256": "8655215cef79ab6995f4472bd64fcd2e21b6daf5824d30d4b27c819520cfaf20"
+        }
+      ],
+      "figureDataSha256": "790a793fcad7c3def3f3f5ae97a81208291977d7feec44d9d166a5f49e2e2c22"
     }
   ]
 }

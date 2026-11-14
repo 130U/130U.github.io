@@ -118,7 +118,7 @@ The three papers use pinned research inputs and deterministic importers:
 | --- | --- | --- |
 | Critical Dependence Stress for Portfolio Diversification | `content/sources/selected-research/dependence/`; `scripts/import-dependence-research.mjs` | Abstract, chapters 1–5, references, and supporting-material links |
 | Certified Valuation of Arithmetic Asian Options | `content/sources/selected-research/asian-source.md` and the study results in `asian-studies/`; `scripts/import-selected-research.mjs` | Abstract, chapters 1–9 with their four figures, references, and supporting-material links |
-| Certified Joint Pricing Errors in Rough Heston | `content/sources/selected-research/rough-source.md`; `scripts/import-selected-research.mjs` | Abstract, chapters 1–8, references, and supporting-material links |
+| Certified Joint Pricing Errors in Rough Heston | `content/sources/selected-research/rough-source.md` and the saved banks in `rough-studies/`; `scripts/import-selected-research.mjs` | Abstract, chapters 1–8 with their four figures, references, and supporting-material links |
 
 ```sh
 node scripts/import-selected-research.mjs
@@ -147,6 +147,10 @@ each figure as an image line followed by its caption paragraph; the importer joi
 two into one captioned figure, checks the two study results in `asian-studies/` against
 their upstream blobs, and writes the values the four drawings plot to
 `content/selected-research/certified-valuation-arithmetic-asian-options.figures.json`.
+The Rough Heston manuscript sets each figure as one captioned image line; the importer
+gives it a local path, checks the three saved banks in `rough-studies/` against their
+upstream blobs, and writes the node-charge shares, the joint error set and the exact
+thresholds to `content/selected-research/certified-rough-heston-valuation.figures.json`.
 The readers link appendices and supplementary proofs to the pinned full manuscripts and
 return to the corresponding About research entry.
 
@@ -194,7 +198,9 @@ dependence manuscript's four figures from the formulas in
 `calculations/plot_profiles_and_flows.py` at the pinned commit),
 `asian-manuscript.tsx` draws the Asian manuscript's four figures from its imported
 study results and from Proposition 4.1 as `app/lib/content/asian-kink-bound.ts`
-evaluates it, and `FigureController` adds view switches, readouts, linked emphasis, the
+evaluates it, `rough-manuscript.tsx` draws the Rough Heston manuscript's four figures
+from its imported banks and from the forward variance curve and netting ratio in
+`app/lib/content/rough-heston-curves.ts`, and `FigureController` adds view switches, readouts, linked emphasis, the
 proof-obligation graph, table column highlighting and the entrances of figures and
 table rows. The research renderer frames every table and sets a directly preceding
 "**Table N.**" caption paragraph inside the frame as its title; `TableStage` keeps row

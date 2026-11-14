@@ -41,7 +41,7 @@ test("all research tables retain native table semantics inside named keyboard-ac
   const routes = [
     ["critical-dependence-stress-for-portfolio-diversification", 0],
     ["certified-valuation-arithmetic-asian-options", 11],
-    ["certified-rough-heston-valuation", 13],
+    ["certified-rough-heston-valuation", 10],
     ["experience/statistical-inference-and-resource-allocation-in-expert-data-production", 1],
     ["experience/task-validity-in-financial-synthetic-data", 2],
     ["experience/verification-and-supervision-in-scientific-reasoning-tasks", 1],
@@ -73,6 +73,6 @@ test("a table of values never wraps its rows, and a table of sentences wraps onl
   const html = await readFile(new URL("../out/certified-rough-heston-valuation/index.html", import.meta.url), "utf8");
   const tables = [...html.matchAll(/<table\b[\s\S]*?<\/table>/gu)].map(([table]) => table);
   const sentenceCells = (table) => [...table.matchAll(/<t[dh]\b[^>]*class="([^"]*)"/gu)].filter(([, classes]) => /sentence/u.test(classes)).length;
-  assert.equal(sentenceCells(tables[1]), 0, "Fixed configurations hold only values.");
-  assert.ok(sentenceCells(tables[7]) > 0, "Typed deterministic work is set in sentences.");
+  assert.equal(sentenceCells(tables[0]), 0, "Quotes hold only values.");
+  assert.ok(sentenceCells(tables[1]) > 0, "The descriptions of the certificates are set in sentences.");
 });

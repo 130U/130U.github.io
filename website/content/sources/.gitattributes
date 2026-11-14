@@ -3,3 +3,4 @@
 selected-research/rough-source.md -text
 *.tex -text
 selected-research/asian-studies/*.json -text
+selected-research/rough-studies/*.json -text
