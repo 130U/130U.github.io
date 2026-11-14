@@ -4,8 +4,8 @@ import test from "node:test";
 import { formatArticleHeading, formatArticleHeadings, buildArticleHeadingMap, linkArticleSectionReferences } from "../app/lib/content/article-headings.ts";
 import { parseResearchMarkdown } from "../app/lib/content/research-markdown.ts";
 
-const ASIAN = "certified-valuation-arithmetic-asian-options";
-const ROUGH = "certified-rough-heston-valuation";
+const ASIAN = "certified-valuation-of-arithmetic-asian-options";
+const ROUGH = "certified-joint-pricing-errors-in-rough-heston";
 function manuscript(slug) {
   const source = JSON.parse(readFileSync(new URL(`../content/selected-research/${slug}.json`, import.meta.url), "utf8"));
   return parseResearchMarkdown(source.markdown, { joinSoftLines: true });

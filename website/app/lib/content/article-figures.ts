@@ -16,7 +16,7 @@ const articleFigures: Readonly<Record<string, readonly FigurePlacement[]>> = {
       evidence: ["already $`30\\%`$ above the local-efficiency prediction $`5/32`$", "extrapolates its slope to $`J=5/32`$", "the critical budget lies in $`[13/64,29/96]`$", "$`\\gamma=(1,1,2)`$"],
     },
   ],
-  "certified-valuation-arithmetic-asian-options": [
+  "certified-valuation-of-arithmetic-asian-options": [
     {
       figure: "asian-width",
       after: { paragraph: "At the three steps the cost of the kink is 95.5, 94.5 and 92.8 percent of the width" },
@@ -35,7 +35,7 @@ const articleFigures: Readonly<Record<string, readonly FigurePlacement[]>> = {
       ],
     },
   ],
-  "certified-rough-heston-valuation": [
+  "certified-joint-pricing-errors-in-rough-heston": [
     {
       figure: "heston-stages",
       after: { paragraph: "The step from H0 to H1 changes one thing." },
@@ -222,7 +222,7 @@ const tableEmphasis: Readonly<Record<string, readonly TableEmphasis[]>> = {
   "statistical-inference-and-resource-allocation-in-expert-data-production": [{ table: "Audit policy", row: 2 }],
   "verification-and-supervision-in-scientific-reasoning-tasks": [{ table: "Acceptance protocol", row: 2 }],
   "evidence-uncertainty-and-decision-guarantees-in-investment-research": [{ table: "Verification query", row: 2 }],
-  "certified-rough-heston-valuation": [
+  "certified-joint-pricing-errors-in-rough-heston": [
     { table: "Maturity and certificate", column: 1 },
     { table: "Output", column: 1 },
     { table: "Component", column: 1 },

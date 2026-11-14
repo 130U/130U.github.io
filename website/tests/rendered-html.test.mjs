@@ -53,8 +53,8 @@ const DISPLAY_DETAIL_TITLES = new Map([
 ]);
 const RESEARCH_SLUGS = [
   "critical-dependence-stress-for-portfolio-diversification",
-  "certified-valuation-arithmetic-asian-options",
-  "certified-rough-heston-valuation",
+  "certified-valuation-of-arithmetic-asian-options",
+  "certified-joint-pricing-errors-in-rough-heston",
 ];
 // About's children sit at /<slug>/; every Experience entry at /experience/<slug>/;
 // every post at /blog/<slug>/.
@@ -561,11 +561,11 @@ test("About research opens each complete paper through an explicit Read More lin
   assert.ok(about.indexOf('id="selected-research"') < about.indexOf('id="education"'));
   assert.ok(about.indexOf('id="education"') < about.indexOf('id="coursework"'));
   const researchEntries = [...about.matchAll(/<article\b[^>]*id="([^"]+)"[^>]*>[\s\S]*?<\/article>/gu)].map((match) => match[1]).filter((id) => id.startsWith("critical-dependence-") || id.startsWith("certified-"));
-  assert.deepEqual(researchEntries, ["critical-dependence-stress-for-portfolio-diversification", "certified-valuation-arithmetic-asian-options", "certified-rough-heston-valuation"]);
+  assert.deepEqual(researchEntries, ["critical-dependence-stress-for-portfolio-diversification", "certified-valuation-of-arithmetic-asian-options", "certified-joint-pricing-errors-in-rough-heston"]);
   for (const [slug, title, description, tables, sections, repository] of [
     ["critical-dependence-stress-for-portfolio-diversification", "Critical Dependence Stress for Portfolio Diversification", "I prove that the critical stress budget is quadratic in the trade size", 0, 5, "Critical-Dependence-Stress"],
-    ["certified-valuation-arithmetic-asian-options", "Certified Valuation of Arithmetic Asian Options", "the bound is below a hundredth of a cent per barrel", 11, 9, "certified-valuation-arithmetic-asian-options"],
-    ["certified-rough-heston-valuation", "Certified Joint Pricing Errors in Rough Heston", "the joint bounds bring all 28 spread, butterfly and basket positions tested within a half-point error budget", 10, 8, "certified-rough-heston-valuation"],
+    ["certified-valuation-of-arithmetic-asian-options", "Certified Valuation of Arithmetic Asian Options", "the bound is below a hundredth of a cent per barrel", 11, 9, "certified-valuation-arithmetic-asian-options"],
+    ["certified-joint-pricing-errors-in-rough-heston", "Certified Joint Pricing Errors in Rough Heston", "netting the legs certifies a half-point tolerance for all 28 six-month spreads, butterflies and baskets tested", 10, 8, "certified-rough-heston-valuation"],
   ]) {
     assert.match(about, new RegExp(`id="${slug}"`, "u"));
     const headings = [...about.matchAll(/<h3\b[^>]*>([\s\S]*?)<\/h3>/gu)].map((match) => stripMarkup(match[1]));

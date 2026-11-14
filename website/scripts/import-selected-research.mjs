@@ -5,7 +5,7 @@ import { fileURLToPath } from "node:url";
 const sourceDirectory = new URL("../content/sources/selected-research/", import.meta.url);
 const sources = [
   {
-    key: "asian", slug: "certified-valuation-arithmetic-asian-options", file: "manuscript/report.md",
+    key: "asian", slug: "certified-valuation-of-arithmetic-asian-options", repository: "certified-valuation-arithmetic-asian-options", file: "manuscript/report.md",
     sourceCommit: "2efeaf1580e139001744eab48ffd1c0c1e3058c8", sourceBlob: "43026cce8d246868ae16faa0ea76e3d341db7b4d",
     sourceEditedAt: "2026-11-14T06:28:35-05:00", fetchedAt: "2026-11-14", mainSections: 9,
     appendixAnchor: "appendix-a-finite-certification-of-the-weighted-second-moment",
@@ -20,11 +20,11 @@ const sources = [
     },
   },
   {
-    key: "rough", slug: "certified-rough-heston-valuation", file: "manuscript/merged-heston-en.md",
+    key: "rough", slug: "certified-joint-pricing-errors-in-rough-heston", repository: "certified-rough-heston-valuation", file: "manuscript/merged-heston-en.md",
     sourceCommit: "64b8ef2bbff044e93ded82d2694bf1afe8d92b41", sourceBlob: "b25e5531b9a3d120732c276f3779e520b8968f58",
     sourceEditedAt: "2026-11-14T01:39:13-05:00", fetchedAt: "2026-11-14", mainSections: 8,
     appendixAnchor: "appendix-a-rescaled-variables-model-and-transform",
-    description: "A method for certifying portfolio valuation errors in rough Heston, carrying continuous Riccati residual bounds through to complete pricing guarantees.",
+    description: "Numerical pricing error as a common factor across strikes: a Riccati residual priced by forward variance in rough Heston, the netting of portfolio errors in strike space, and certified tolerances for S&P 500 option positions.",
     figures: {
       directory: "rough", count: 4,
       studies: [
@@ -146,7 +146,7 @@ for (const config of sources) {
   if (!title || appendix < 0 || references <= appendix) throw new Error("Missing manuscript boundaries.");
   const main = source.slice(source.indexOf("\n") + 1, appendix).trim();
   const refs = source.slice(references).trim();
-  const repositoryUrl = `https://github.com/130U/${config.slug}`;
+  const repositoryUrl = `https://github.com/130U/${config.repository}`;
   const sourceUrl = `${repositoryUrl}/blob/${config.sourceCommit}/${config.file}`;
   // A manuscript figure is an image line that either carries its caption or is
   // followed by a caption paragraph whose bold opening repeats the image's

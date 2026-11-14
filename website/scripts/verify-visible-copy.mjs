@@ -10,8 +10,8 @@ const MANIFEST_PATH = path.join(ROOT, "content", "visible-copy-manifest.json");
 const IGNORED_INTERFACE_STRINGS = ["Menu", "Close"];
 const RESEARCH_PAPER_ROUTES = [
   "/critical-dependence-stress-for-portfolio-diversification/",
-  "/certified-valuation-arithmetic-asian-options/",
-  "/certified-rough-heston-valuation/",
+  "/certified-valuation-of-arithmetic-asian-options/",
+  "/certified-joint-pricing-errors-in-rough-heston/",
 ];
 const AI_ARTICLE_ROUTES = [
   "/experience/statistical-inference-and-resource-allocation-in-expert-data-production/",

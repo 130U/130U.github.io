@@ -8,6 +8,7 @@ import { type LegalPaper, type PaperRun } from "../../lib/content/legal-papers";
 import type { ShowcaseEntry } from "../../lib/content/experience-showcase";
 import { placeFigures } from "../../lib/content/article-figures";
 import { ArticleFigure, FigureController } from "../figures";
+import { ZoomStage } from "../research/ZoomStage";
 import { LegalPaperReader } from "./LegalPaperReader";
 import styles from "./LegalPaperPage.module.css";
 import experienceStyles from "../experience/Experience.module.css";
@@ -119,7 +120,7 @@ export function LegalPaperPage({ paper, showcase }: { paper: LegalPaper; showcas
           </ArticleReadingLayout>
 
           <footer className={styles.paperFooter}><Link className="back-link" href={`/experience/#${showcase.slug}`}><ReturnArrow />Back to Experience</Link><a href="#paper-title">Back to Top</a></footer>
-          {figures.size > 0 && <FigureController key={paper.slug} />}
+          {figures.size > 0 && <><FigureController key={paper.slug} /><ZoomStage key={`${paper.slug}-stage`} /></>}
         </LegalPaperReader>
       </article>
     </SiteShell>

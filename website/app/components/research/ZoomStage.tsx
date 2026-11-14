@@ -1,7 +1,8 @@
 "use client";
 
 import { useEffect, useRef } from "react";
-import styles from "./ResearchArticle.module.css";
+import { enhanceFigure } from "../figures/FigureController";
+import styles from "./Stage.module.css";
 
 // From the most generous setting down: larger type first, then closer columns,
 // then headings on two lines, all before any row gives up its single line.
@@ -17,6 +18,11 @@ const ONE_LINE_STEPS = [
 const WRAPPED_STEPS = [{ zoom: 1.125, headings: false }, { zoom: 1, headings: false }, { zoom: 1, headings: true }];
 const STAGE_MAX_WIDTH = 1472;
 const STAGE_MIN_WIDTH = 640;
+// A figure is enlarged as one picture: whole within the window when that
+// enlarges it enough, otherwise at a reading size that scrolls from its top.
+const FIGURE_MAX_ZOOM = 1.75;
+const FIGURE_FIT_FLOOR = 1.15;
+const FIGURE_SCROLL_ZOOM = 1.5;
 const EDGE_FADE = 40;
 const PIN_SHARE = 0.45;
 const OPEN_MS = 480;
@@ -45,13 +51,45 @@ function pinRowLabels(region: HTMLElement, table: HTMLTableElement) {
   paintEdges(region);
 }
 
+/** Whether any visible text or formula of a figure lies under its zoom control. */
+function coversControl(frame: HTMLElement, control: HTMLElement) {
+  const zone = control.getBoundingClientRect();
+  const meets = (rect: DOMRect) => rect.width > 0 && rect.right > zone.left && rect.left < zone.right && rect.bottom > zone.top && rect.top < zone.bottom;
+  const walker = document.createTreeWalker(frame, NodeFilter.SHOW_TEXT);
+  const range = document.createRange();
+  for (let node = walker.nextNode(); node; node = walker.nextNode()) {
+    const parent = node.parentElement;
+    if (!node.textContent?.trim() || !parent || parent.closest("[hidden], math, [data-figure-layer]") || control.contains(parent)) continue;
+    range.selectNodeContents(node);
+    if ([...range.getClientRects()].some(meets)) return true;
+  }
+  return [...frame.querySelectorAll("[data-research-formula] > span > svg")].some((formula) => !formula.closest("[hidden]") && meets(formula.getBoundingClientRect()));
+}
+
+/** A copy for the stage that keeps its look and state but no anchors or block markers of the article. */
+function stageCopy(source: HTMLElement) {
+  const copy = source.cloneNode(true) as HTMLElement;
+  copy.removeAttribute("id");
+  copy.removeAttribute("data-reveal");
+  copy.dataset.zoomed = "";
+  copy.querySelectorAll<HTMLElement>("[id]").forEach((node) => { if (!node.closest("svg")) node.removeAttribute("id"); });
+  copy.querySelectorAll<HTMLElement>("[data-research-block]").forEach((node) => {
+    node.removeAttribute("data-research-block");
+    node.removeAttribute("data-research-block-type");
+  });
+  return copy;
+}
+
+type Staged = { source: HTMLElement; panel: HTMLElement; scrim: HTMLElement; fit: () => void; release?: () => void; closing: boolean };
+
 /**
- * Enhances the article's research tables: row labels that stay in view, a right
- * edge that fades while there is more to scroll, and a zoom into a stage that
- * sets the whole table at the largest size the window allows. Every table is
- * complete without it.
+ * Enlarges the article's research tables and figures on one stage over the
+ * blurred page. A table is set at the largest size the window allows, with
+ * row labels that stay in view and a right edge that fades while there is more
+ * to scroll; a figure is enlarged as one picture and keeps its readouts and
+ * view switches. Every table and figure is complete without it.
  */
-export function TableStage() {
+export function ZoomStage() {
   const stageRef = useRef<HTMLDialogElement>(null);
 
   useEffect(() => {
@@ -65,17 +103,15 @@ export function TableStage() {
       cleanups.push(() => target.removeEventListener(type, handler as EventListener, options));
     };
 
-    let open: { source: HTMLElement; panel: HTMLElement; region: HTMLElement; table: HTMLTableElement; scrim: HTMLElement; closing: boolean } | undefined;
+    let open: Staged | undefined;
 
     const gutter = () => parseFloat(getComputedStyle(stage).paddingLeft);
 
-    const fit = () => {
-      if (!open) return;
-      const { panel, region, table } = open;
+    const fitTable = (panel: HTMLElement, region: HTMLElement, table: HTMLTableElement) => {
       const inset = gutter() * 2;
       const roomWidth = Math.min(stage.clientWidth - inset, STAGE_MAX_WIDTH) - 2;
       const roomHeight = stage.clientHeight - inset - 2;
-      const title = panel.querySelector<HTMLElement>(`.${styles.tableTitle}`);
+      const title = panel.querySelector<HTMLElement>("[data-table-title]");
       const fitsHeight = () => table.offsetHeight + (title?.offsetHeight ?? 0) <= roomHeight;
       const place = (mode: "line" | "wrap", zoom: number, width: number, dense = false, headings = false) => {
         panel.dataset.fit = mode;
@@ -102,55 +138,97 @@ export function TableStage() {
       pinRowLabels(region, table);
     };
 
+    const fitFigure = (panel: HTMLElement, figure: HTMLElement) => {
+      const frame = figure.firstElementChild as HTMLElement;
+      const width = figure.offsetWidth;
+      const height = frame.offsetHeight;
+      const inset = gutter() * 2;
+      const widthScale = Math.min((stage.clientWidth - inset) / width, FIGURE_MAX_ZOOM);
+      const fitScale = Math.min(widthScale, (stage.clientHeight - inset) / height);
+      const scrolls = fitScale < Math.min(widthScale, FIGURE_FIT_FLOOR);
+      const scale = scrolls ? Math.min(widthScale, FIGURE_SCROLL_ZOOM) : fitScale;
+      stage.toggleAttribute("data-scrolls", scrolls);
+      figure.style.transform = `scale(${scale})`;
+      panel.style.width = `${width * scale}px`;
+      panel.style.height = `${height * scale}px`;
+    };
+
     const flightFrom = (source: HTMLElement, panel: HTMLElement) => {
       const from = source.getBoundingClientRect();
       const to = panel.getBoundingClientRect();
       return `translate(${from.left - to.left}px, ${from.top - to.top}px) scale(${from.width / to.width})`;
     };
 
-    const zoomIn = (source: HTMLElement) => {
-      if (open) return;
-      const panel = source.cloneNode(true) as HTMLElement;
-      panel.removeAttribute("data-table-frame");
-      panel.removeAttribute("data-reveal");
-      panel.dataset.zoomed = "";
-      panel.querySelectorAll<HTMLElement>("[id]").forEach((node) => { if (!node.closest("svg")) node.removeAttribute("id"); });
-      panel.querySelectorAll<HTMLElement>("[data-research-block]").forEach((node) => {
-        node.removeAttribute("data-research-block");
-        node.removeAttribute("data-research-block-type");
-      });
-      panel.querySelectorAll("[data-column-hover]").forEach((node) => node.removeAttribute("data-column-hover"));
-      panel.querySelectorAll<HTMLElement>("tbody tr").forEach((row) => row.style.removeProperty("--row"));
-      const control = panel.querySelector<HTMLButtonElement>("[data-table-zoom]")!;
-      control.setAttribute("aria-label", "Zoom out");
-      control.removeAttribute("aria-haspopup");
-      const sourceRegion = source.querySelector<HTMLElement>("[role=region]")!;
-      const region = panel.querySelector<HTMLElement>("[role=region]")!;
-      region.setAttribute("autofocus", "");
-      const table = panel.querySelector("table")!;
-      const scrim = document.createElement("div");
-      scrim.className = styles.scrim;
-      scrim.dataset.stageScrim = "";
-      region.addEventListener("scroll", () => paintEdges(region), { passive: true });
-
-      stage.setAttribute("aria-label", panel.querySelector(`.${styles.tableTitle}`)?.textContent ?? "Research data table");
-      stage.replaceChildren(scrim, panel);
+    const show = (staged: Staged, label: string) => {
+      stage.setAttribute("aria-label", label);
+      stage.replaceChildren(staged.scrim, staged.panel);
       root.style.overflowY = "hidden";
       stage.showModal();
-      open = { source, panel, region, table, scrim, closing: false };
-      fit();
-      region.scrollLeft = sourceRegion.scrollLeft;
+      open = staged;
+      staged.fit();
+    };
 
+    const enter = ({ source, panel, scrim }: Staged) => {
       if (reduced) return;
       panel.animate({ transform: [flightFrom(source, panel), "none"] }, { duration: OPEN_MS, easing: EASE_OUT });
       panel.animate({ opacity: [0, 1] }, { duration: 140, easing: "linear" });
       scrim.animate({ opacity: [0, 1] }, { duration: 320, easing: "ease-out" });
     };
 
+    const newScrim = () => {
+      const scrim = document.createElement("div");
+      scrim.className = styles.scrim;
+      scrim.dataset.stageScrim = "";
+      return scrim;
+    };
+
+    const zoomOutControl = (panel: HTMLElement, selector: string) => {
+      const control = panel.querySelector<HTMLButtonElement>(selector)!;
+      control.setAttribute("aria-label", "Zoom out");
+      control.removeAttribute("aria-haspopup");
+      return control;
+    };
+
+    const zoomTable = (source: HTMLElement) => {
+      if (open) return;
+      const panel = stageCopy(source);
+      panel.removeAttribute("data-table-frame");
+      panel.querySelectorAll("[data-column-hover]").forEach((node) => node.removeAttribute("data-column-hover"));
+      panel.querySelectorAll<HTMLElement>("tbody tr").forEach((row) => row.style.removeProperty("--row"));
+      zoomOutControl(panel, "[data-table-zoom]");
+      const sourceRegion = source.querySelector<HTMLElement>("[role=region]")!;
+      const region = panel.querySelector<HTMLElement>("[role=region]")!;
+      region.setAttribute("autofocus", "");
+      const table = panel.querySelector("table")!;
+      region.addEventListener("scroll", () => paintEdges(region), { passive: true });
+      const staged: Staged = { source, panel, scrim: newScrim(), fit: () => fitTable(panel, region, table), closing: false };
+      show(staged, panel.querySelector("[data-table-title]")?.textContent ?? "Research data table");
+      region.scrollLeft = sourceRegion.scrollLeft;
+      enter(staged);
+    };
+
+    const zoomFigure = (source: HTMLElement) => {
+      if (open) return;
+      const figure = stageCopy(source);
+      figure.querySelectorAll("[data-figure-layer]").forEach((node) => node.remove());
+      figure.style.width = `${source.offsetWidth}px`;
+      zoomOutControl(figure, "[data-figure-zoom]").setAttribute("autofocus", "");
+      const panel = document.createElement("div");
+      panel.className = styles.figurePanel;
+      panel.append(figure);
+      const staged: Staged = { source: source.firstElementChild as HTMLElement, panel, scrim: newScrim(), fit: () => fitFigure(panel, figure), closing: false };
+      const label = source.querySelector("[data-figure-title]")?.textContent ?? source.querySelector("[data-figure-label]")?.textContent ?? "Figure";
+      show(staged, label.replace(/\.$/u, ""));
+      staged.release = enhanceFigure(figure);
+      enter(staged);
+    };
+
     const release = () => {
       if (!open) return;
+      open.release?.();
       stage.replaceChildren();
       stage.removeAttribute("aria-label");
+      stage.removeAttribute("data-scrolls");
       root.style.overflowY = "";
       open = undefined;
     };
@@ -186,9 +264,9 @@ export function TableStage() {
     on<MouseEvent>(stage, "click", (event) => {
       const target = event.target as Element;
       if (target.closest("a[href]")) dismiss();
-      else if (target === stage || target.closest("[data-stage-scrim], [data-table-zoom]")) zoomOut();
+      else if (target === stage || target.closest("[data-stage-scrim], [data-table-zoom], [data-figure-zoom]")) zoomOut();
     });
-    on(window, "resize", fit);
+    on(window, "resize", () => open?.fit());
 
     const frames = [...document.querySelectorAll<HTMLElement>("[data-table-frame]")].map((frame) => ({
       frame,
@@ -222,9 +300,38 @@ export function TableStage() {
     });
     for (const item of frames) {
       on(item.region, "scroll", () => paintEdges(item.region), { passive: true });
-      on(item.control, "click", () => zoomIn(item.frame));
+      on(item.control, "click", () => zoomTable(item.frame));
       item.control.hidden = false;
     }
+
+    const figureControls = [...document.querySelectorAll<HTMLElement>("[data-figure]")].flatMap((figure) => {
+      const control = figure.querySelector<HTMLButtonElement>("[data-figure-zoom]");
+      return control ? [{ figure, frame: figure.firstElementChild as HTMLElement, control }] : [];
+    });
+    // A figure whose top-right corner holds a label at the current width
+    // opens a row of its own for the control.
+    const clearControl = ({ frame, control }: (typeof figureControls)[number]) => {
+      frame.removeAttribute("data-zoom-row");
+      if (coversControl(frame, control)) frame.setAttribute("data-zoom-row", "");
+    };
+    const figureObserver = new ResizeObserver((entries) => {
+      for (const entry of entries) {
+        const item = figureControls.find(({ frame }) => frame === entry.target);
+        if (item) clearControl(item);
+      }
+    });
+    cleanups.push(() => figureObserver.disconnect());
+    for (const item of figureControls) {
+      on(item.control, "click", () => zoomFigure(item.figure));
+      item.control.hidden = false;
+    }
+    document.fonts.ready.then(() => {
+      if (!active) return;
+      for (const item of figureControls) {
+        clearControl(item);
+        figureObserver.observe(item.frame);
+      }
+    });
 
     return () => {
       cleanups.forEach((cleanup) => cleanup());

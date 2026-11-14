@@ -10,9 +10,181 @@ type Crosshair = {
 };
 
 /**
- * Enhances the article's server-rendered figures and tables: view switches,
- * hover readouts, the proof-obligation graph, column highlighting and a single
- * entrance as each figure scrolls into view. Every figure is complete without it.
+ * Gives one server-rendered figure its view switches, hover readouts, linked
+ * emphasis and proof-obligation graph, in the article or enlarged on the zoom
+ * stage, and returns what removes them. Readouts are placed in the frame's own
+ * units, so they keep their place while the stage scales the figure.
+ */
+export function enhanceFigure(figure: HTMLElement): () => void {
+  const cleanups: Array<() => void> = [];
+  const listen = <K extends keyof HTMLElementEventMap>(target: HTMLElement, type: K, handler: (event: HTMLElementEventMap[K]) => void) => {
+    target.addEventListener(type, handler as EventListener);
+    cleanups.push(() => target.removeEventListener(type, handler as EventListener));
+  };
+  const frame = figure.firstElementChild as HTMLElement;
+  const scale = () => frame.getBoundingClientRect().width / frame.offsetWidth || 1;
+
+  // Make a wide comparison's sideways continuation visible on small screens.
+  for (const region of figure.querySelectorAll<HTMLElement>("[data-figure-scroll]")) {
+    const update = () => region.toggleAttribute("data-scroll-overflow", region.scrollWidth > region.clientWidth + 2);
+    update();
+    const observer = new ResizeObserver(update);
+    observer.observe(region);
+    if (region.firstElementChild) observer.observe(region.firstElementChild);
+    cleanups.push(() => observer.disconnect());
+  }
+
+  // View switches.
+  const switcher = figure.querySelector<HTMLElement>("[data-fig-switch]");
+  if (switcher) {
+    switcher.hidden = false;
+    const buttons = [...switcher.querySelectorAll<HTMLButtonElement>("[data-fig-view]")];
+    const show = (view: string) => {
+      figure.dataset.view = view;
+      for (const button of buttons) button.setAttribute("aria-pressed", String(button.dataset.figView === view));
+      for (const panel of figure.querySelectorAll<HTMLElement>("[data-fig-panel]")) panel.hidden = panel.dataset.figPanel !== view;
+    };
+    for (const button of buttons) listen(button, "click", () => show(button.dataset.figView!));
+  }
+
+  // Tooltips for marks that carry data-tip.
+  const tooltip = document.createElement("div");
+  tooltip.className = styles.tooltip;
+  tooltip.setAttribute("aria-hidden", "true");
+  tooltip.dataset.figureLayer = "";
+  frame.append(tooltip);
+  cleanups.push(() => tooltip.remove());
+  let tipTarget: HTMLElement | null = null;
+  const placeTip = (target: HTMLElement) => {
+    const factor = scale();
+    const box = frame.getBoundingClientRect();
+    const mark = target.getBoundingClientRect();
+    tooltip.textContent = target.dataset.tip ?? "";
+    tooltip.dataset.open = "";
+    const width = tooltip.offsetWidth;
+    const height = tooltip.offsetHeight;
+    let left = (mark.left + mark.width / 2 - box.left) / factor - width / 2;
+    left = Math.max(8, Math.min(left, frame.offsetWidth - width - 8));
+    let top = (mark.top - box.top) / factor - height - 10;
+    if (top < 4) top = (mark.bottom - box.top) / factor + 10;
+    tooltip.style.left = `${left}px`;
+    tooltip.style.top = `${top}px`;
+  };
+  listen(frame, "pointerover", (event) => {
+    const target = (event.target as HTMLElement).closest<HTMLElement>("[data-tip]");
+    if (!target || target === tipTarget) return;
+    tipTarget = target;
+    placeTip(target);
+  });
+  listen(frame, "pointerout", (event) => {
+    const next = (event.relatedTarget as HTMLElement | null)?.closest?.("[data-tip]");
+    if (tipTarget && next !== tipTarget) {
+      tipTarget = null;
+      delete tooltip.dataset.open;
+    }
+  });
+  listen(frame, "focusin", (event) => {
+    const target = (event.target as HTMLElement).closest<HTMLElement>("[data-tip]");
+    if (target) placeTip(target);
+  });
+  listen(frame, "focusout", () => delete tooltip.dataset.open);
+
+  // Linked emphasis: hovering any [data-key] marks every element with that key.
+  const keyed = [...figure.querySelectorAll<HTMLElement>("[data-key]")];
+  if (keyed.length) {
+    listen(frame, "pointerover", (event) => {
+      const key = (event.target as HTMLElement).closest<HTMLElement>("[data-key]")?.dataset.key;
+      if (key === figure.dataset.focus) return;
+      if (key) figure.dataset.focus = key; else delete figure.dataset.focus;
+      for (const node of keyed) node.toggleAttribute("data-key-active", node.dataset.key === key);
+    });
+    listen(frame, "pointerleave", () => {
+      delete figure.dataset.focus;
+      for (const node of keyed) node.removeAttribute("data-key-active");
+    });
+  }
+
+  // Crosshair readouts on line charts.
+  for (const area of figure.querySelectorAll<HTMLElement>("[data-crosshair]")) {
+    const spec = JSON.parse(area.dataset.crosshair!) as Crosshair;
+    const rule = document.createElement("span");
+    rule.className = styles.crossRule;
+    const dots = spec.series.map((series) => {
+      const dot = document.createElement("span");
+      dot.className = `${styles.crossDot} ${styles[series.tone] ?? ""}`;
+      return dot;
+    });
+    const layer = [rule, ...dots];
+    for (const node of layer) {
+      node.hidden = true;
+      node.dataset.figureLayer = "";
+    }
+    area.append(...layer);
+    cleanups.push(() => layer.forEach((node) => node.remove()));
+    const hide = () => {
+      for (const node of layer) node.hidden = true;
+      delete tooltip.dataset.open;
+    };
+    listen(area, "pointermove", (event) => {
+      const factor = scale();
+      const box = area.getBoundingClientRect();
+      const at = ((event.clientX - box.left) / box.width) * 100;
+      let index = 0;
+      for (let candidate = 1; candidate < spec.x.length; candidate += 1) {
+        if (Math.abs(spec.x[candidate] - at) < Math.abs(spec.x[index] - at)) index = candidate;
+      }
+      rule.hidden = false;
+      rule.style.left = `${spec.x[index]}%`;
+      spec.series.forEach((series, position) => {
+        const y = series.y[index];
+        dots[position].hidden = !Number.isFinite(y);
+        dots[position].style.left = `${spec.x[index]}%`;
+        dots[position].style.top = `${100 - y}%`;
+      });
+      tooltip.textContent = [spec.heading[index], ...spec.series.map((series) => `${series.name}: ${series.value[index]}`)].join("\n");
+      tooltip.dataset.open = "";
+      const frameBox = frame.getBoundingClientRect();
+      const width = tooltip.offsetWidth;
+      const pointX = (box.left - frameBox.left) / factor + (spec.x[index] / 100) * area.offsetWidth;
+      const left = pointX + 14 + width > frame.offsetWidth - 8 ? pointX - width - 14 : pointX + 14;
+      tooltip.style.left = `${Math.max(8, left)}px`;
+      tooltip.style.top = `${(box.top - frameBox.top) / factor}px`;
+    });
+    listen(area, "pointerleave", hide);
+  }
+
+  // Proof-obligation graph: choosing a node marks it as the first failed
+  // obligation and its descendants as unverified.
+  const nodes = [...figure.querySelectorAll<HTMLButtonElement>("[data-dag-node]")];
+  if (nodes.length) {
+    const readout = figure.querySelector<HTMLElement>("[data-dag-status]");
+    const select = (id: string) => {
+      const chosen = nodes.find((node) => node.dataset.dagNode === id)!;
+      const unverified = new Set((chosen.dataset.dagDescendants ?? "").split(" ").filter(Boolean));
+      for (const node of nodes) {
+        const state = node === chosen ? "failed" : unverified.has(node.dataset.dagNode!) ? "unverified" : "verified";
+        node.dataset.state = state;
+        node.setAttribute("aria-pressed", String(node === chosen));
+      }
+      for (const edge of figure.querySelectorAll<SVGElement>("[data-dag-edge]")) {
+        const [from] = edge.dataset.dagEdge!.split(" ");
+        edge.dataset.state = from === id || unverified.has(from) ? "unverified" : "verified";
+      }
+      if (readout) readout.textContent = chosen.dataset.dagReadout ?? "";
+    };
+    for (const node of nodes) {
+      node.disabled = false;
+      listen(node, "click", () => select(node.dataset.dagNode!));
+    }
+  }
+
+  return () => cleanups.forEach((cleanup) => cleanup());
+}
+
+/**
+ * Enhances the article's server-rendered figures and tables: each figure's
+ * interactions, column highlighting and a single entrance as each figure
+ * scrolls into view. Every figure is complete without it.
  */
 export function FigureController() {
   useEffect(() => {
@@ -22,158 +194,7 @@ export function FigureController() {
       cleanups.push(() => target.removeEventListener(type, handler as EventListener));
     };
     const figures = [...document.querySelectorAll<HTMLElement>("[data-figure]")];
-
-    for (const figure of figures) {
-      const frame = figure.firstElementChild as HTMLElement;
-
-      // Make a wide comparison's sideways continuation visible on small screens.
-      for (const region of figure.querySelectorAll<HTMLElement>("[data-figure-scroll]")) {
-        const update = () => region.toggleAttribute("data-scroll-overflow", region.scrollWidth > region.clientWidth + 2);
-        update();
-        const observer = new ResizeObserver(update);
-        observer.observe(region);
-        if (region.firstElementChild) observer.observe(region.firstElementChild);
-        cleanups.push(() => observer.disconnect());
-      }
-
-      // View switches.
-      const switcher = figure.querySelector<HTMLElement>("[data-fig-switch]");
-      if (switcher) {
-        switcher.hidden = false;
-        const buttons = [...switcher.querySelectorAll<HTMLButtonElement>("[data-fig-view]")];
-        const show = (view: string) => {
-          figure.dataset.view = view;
-          for (const button of buttons) button.setAttribute("aria-pressed", String(button.dataset.figView === view));
-          for (const panel of figure.querySelectorAll<HTMLElement>("[data-fig-panel]")) panel.hidden = panel.dataset.figPanel !== view;
-        };
-        for (const button of buttons) listen(button, "click", () => show(button.dataset.figView!));
-      }
-
-      // Tooltips for marks that carry data-tip.
-      const tooltip = document.createElement("div");
-      tooltip.className = styles.tooltip;
-      tooltip.setAttribute("aria-hidden", "true");
-      frame.append(tooltip);
-      cleanups.push(() => tooltip.remove());
-      let tipTarget: HTMLElement | null = null;
-      const placeTip = (target: HTMLElement) => {
-        const box = frame.getBoundingClientRect();
-        const mark = target.getBoundingClientRect();
-        tooltip.textContent = target.dataset.tip ?? "";
-        tooltip.dataset.open = "";
-        const width = tooltip.offsetWidth;
-        const height = tooltip.offsetHeight;
-        let left = mark.left + mark.width / 2 - box.left - width / 2;
-        left = Math.max(8, Math.min(left, box.width - width - 8));
-        let top = mark.top - box.top - height - 10;
-        if (top < 4) top = mark.bottom - box.top + 10;
-        tooltip.style.left = `${left}px`;
-        tooltip.style.top = `${top}px`;
-      };
-      listen(frame, "pointerover", (event) => {
-        const target = (event.target as HTMLElement).closest<HTMLElement>("[data-tip]");
-        if (!target || target === tipTarget) return;
-        tipTarget = target;
-        placeTip(target);
-      });
-      listen(frame, "pointerout", (event) => {
-        const next = (event.relatedTarget as HTMLElement | null)?.closest?.("[data-tip]");
-        if (tipTarget && next !== tipTarget) {
-          tipTarget = null;
-          delete tooltip.dataset.open;
-        }
-      });
-      listen(frame, "focusin", (event) => {
-        const target = (event.target as HTMLElement).closest<HTMLElement>("[data-tip]");
-        if (target) placeTip(target);
-      });
-      listen(frame, "focusout", () => delete tooltip.dataset.open);
-
-      // Linked emphasis: hovering any [data-key] marks every element with that key.
-      const keyed = [...figure.querySelectorAll<HTMLElement>("[data-key]")];
-      if (keyed.length) {
-        listen(frame, "pointerover", (event) => {
-          const key = (event.target as HTMLElement).closest<HTMLElement>("[data-key]")?.dataset.key;
-          if (key === figure.dataset.focus) return;
-          if (key) figure.dataset.focus = key; else delete figure.dataset.focus;
-          for (const node of keyed) node.toggleAttribute("data-key-active", node.dataset.key === key);
-        });
-        listen(frame, "pointerleave", () => {
-          delete figure.dataset.focus;
-          for (const node of keyed) node.removeAttribute("data-key-active");
-        });
-      }
-
-      // Crosshair readouts on line charts.
-      for (const area of figure.querySelectorAll<HTMLElement>("[data-crosshair]")) {
-        const spec = JSON.parse(area.dataset.crosshair!) as Crosshair;
-        const rule = document.createElement("span");
-        rule.className = styles.crossRule;
-        const dots = spec.series.map((series) => {
-          const dot = document.createElement("span");
-          dot.className = `${styles.crossDot} ${styles[series.tone] ?? ""}`;
-          return dot;
-        });
-        const layer = [rule, ...dots];
-        for (const node of layer) node.hidden = true;
-        area.append(...layer);
-        cleanups.push(() => layer.forEach((node) => node.remove()));
-        const hide = () => {
-          for (const node of layer) node.hidden = true;
-          delete tooltip.dataset.open;
-        };
-        listen(area, "pointermove", (event) => {
-          const box = area.getBoundingClientRect();
-          const at = ((event.clientX - box.left) / box.width) * 100;
-          let index = 0;
-          for (let candidate = 1; candidate < spec.x.length; candidate += 1) {
-            if (Math.abs(spec.x[candidate] - at) < Math.abs(spec.x[index] - at)) index = candidate;
-          }
-          rule.hidden = false;
-          rule.style.left = `${spec.x[index]}%`;
-          spec.series.forEach((series, position) => {
-            const y = series.y[index];
-            dots[position].hidden = !Number.isFinite(y);
-            dots[position].style.left = `${spec.x[index]}%`;
-            dots[position].style.top = `${100 - y}%`;
-          });
-          tooltip.textContent = [spec.heading[index], ...spec.series.map((series) => `${series.name}: ${series.value[index]}`)].join("\n");
-          tooltip.dataset.open = "";
-          const frameBox = frame.getBoundingClientRect();
-          const width = tooltip.offsetWidth;
-          const pointX = box.left - frameBox.left + (spec.x[index] / 100) * box.width;
-          const left = pointX + 14 + width > frameBox.width - 8 ? pointX - width - 14 : pointX + 14;
-          tooltip.style.left = `${Math.max(8, left)}px`;
-          tooltip.style.top = `${box.top - frameBox.top}px`;
-        });
-        listen(area, "pointerleave", hide);
-      }
-
-      // Proof-obligation graph: choosing a node marks it as the first failed
-      // obligation and its descendants as unverified.
-      const nodes = [...figure.querySelectorAll<HTMLButtonElement>("[data-dag-node]")];
-      if (nodes.length) {
-        const readout = figure.querySelector<HTMLElement>("[data-dag-status]");
-        const select = (id: string) => {
-          const chosen = nodes.find((node) => node.dataset.dagNode === id)!;
-          const unverified = new Set((chosen.dataset.dagDescendants ?? "").split(" ").filter(Boolean));
-          for (const node of nodes) {
-            const state = node === chosen ? "failed" : unverified.has(node.dataset.dagNode!) ? "unverified" : "verified";
-            node.dataset.state = state;
-            node.setAttribute("aria-pressed", String(node === chosen));
-          }
-          for (const edge of figure.querySelectorAll<SVGElement>("[data-dag-edge]")) {
-            const [from] = edge.dataset.dagEdge!.split(" ");
-            edge.dataset.state = from === id || unverified.has(from) ? "unverified" : "verified";
-          }
-          if (readout) readout.textContent = chosen.dataset.dagReadout ?? "";
-        };
-        for (const node of nodes) {
-          node.disabled = false;
-          listen(node, "click", () => select(node.dataset.dagNode!));
-        }
-      }
-    }
+    for (const figure of figures) cleanups.push(enhanceFigure(figure));
 
     // Research tables: highlight the hovered column and its header, in the
     // article and on the zoomed stage alike.

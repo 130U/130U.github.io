@@ -55,10 +55,11 @@ guide before editing generated article data.
 
 The browser interactions are the clarinet particle field in
 `app/components/clarinet-hero/`, the top-level navigation menu, article contents,
-legal-note previews, article figures, and research-table zoom. Page content, navigation, chapter links,
-endnotes, and each figure's default view work without JavaScript; the clarinet shows a
-same-shape SVG of separated dots before its script runs and a complete static field
-under reduced motion. The build also publishes the standalone architecture viewer.
+legal-note previews, article figures, and table and figure zoom. Page content,
+navigation, chapter links, endnotes, and each figure's default view work without
+JavaScript; the clarinet shows a same-shape SVG of separated dots before its script runs
+and a complete static field under reduced motion. The build also publishes the
+standalone architecture viewer.
 
 ## Maintained references
 

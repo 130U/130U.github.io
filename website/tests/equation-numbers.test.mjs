@@ -7,8 +7,8 @@ import test from "node:test";
 // carries it in the manuscript, and every section's numbers run without a gap.
 const PAPERS = [
   ["critical-dependence-stress-for-portfolio-diversification", 52],
-  ["certified-valuation-arithmetic-asian-options", 72],
-  ["certified-rough-heston-valuation", 40],
+  ["certified-valuation-of-arithmetic-asian-options", 72],
+  ["certified-joint-pricing-errors-in-rough-heston", 40],
 ];
 const NUMBER = /\\tag\{([^{}]+)\}\s*$/u;
 

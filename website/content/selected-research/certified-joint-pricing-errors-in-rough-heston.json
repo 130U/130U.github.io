@@ -1,7 +1,7 @@
 {
-  "slug": "certified-rough-heston-valuation",
+  "slug": "certified-joint-pricing-errors-in-rough-heston",
   "title": "Certified Joint Pricing Errors in Rough Heston",
-  "description": "A method for certifying portfolio valuation errors in rough Heston, carrying continuous Riccati residual bounds through to complete pricing guarantees.",
+  "description": "Numerical pricing error as a common factor across strikes: a Riccati residual priced by forward variance in rough Heston, the netting of portfolio errors in strike space, and certified tolerances for S&P 500 option positions.",
   "sourceUrl": "https://github.com/130U/certified-rough-heston-valuation/blob/64b8ef2bbff044e93ded82d2694bf1afe8d92b41/manuscript/merged-heston-en.md",
   "repositoryUrl": "https://github.com/130U/certified-rough-heston-valuation",
   "sourceEditedAt": "2026-11-14T01:39:13-05:00",

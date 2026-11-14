@@ -1,0 +1,139 @@
+/* One stage per page enlarges a table or a figure over the blurred article.
+   The zoom control that opens it looks the same on both; each frame places
+   it in its own top-right corner. */
+.control {
+  display: grid;
+  width: 32px;
+  height: 32px;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: var(--supporting-ink);
+  cursor: zoom-in;
+  place-items: center;
+  touch-action: manipulation;
+  transition: color 160ms ease, background-color 160ms ease;
+}
+
+.control::before {
+  position: absolute;
+  inset: -6px;
+  content: "";
+}
+
+.control[hidden] {
+  display: none;
+}
+
+.control:focus-visible {
+  outline-offset: -2px;
+}
+
+.control svg {
+  display: block;
+  transition: transform 120ms var(--ease-out);
+}
+
+.control:active svg {
+  transform: scale(0.9);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .control:hover {
+    background: color-mix(in srgb, #000 5%, var(--control-surface, var(--page)));
+    color: var(--accent);
+  }
+}
+
+[data-zoomed] .control {
+  cursor: zoom-out;
+}
+
+[data-zoomed] .control [data-zoom-plus] {
+  animation: zoom-plus-out 240ms var(--ease-out) both;
+  transform-box: fill-box;
+  transform-origin: center;
+}
+
+@keyframes zoom-plus-out {
+  to {
+    opacity: 0;
+    transform: scaleY(0);
+  }
+}
+
+.stage {
+  --stage-gutter: clamp(8px, 3.5vw, 48px);
+  position: fixed;
+  inset: 0;
+  width: 100%;
+  max-width: none;
+  height: 100vh;
+  height: 100dvh;
+  max-height: none;
+  margin: 0;
+  padding: var(--stage-gutter);
+  overflow: hidden;
+  overscroll-behavior: contain;
+  border: 0;
+  background: transparent;
+  color: var(--ink);
+  font-family: var(--font-prose);
+  font-size: var(--type-reading);
+  line-height: var(--reading-leading);
+}
+
+.stage[open] {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  grid-template-rows: minmax(0, 1fr);
+  place-items: center;
+}
+
+/* A figure taller than the window at its enlarged size scrolls from its top. */
+.stage[open][data-scrolls] {
+  overflow-y: auto;
+  place-items: start center;
+}
+
+.stage::backdrop {
+  background: transparent;
+}
+
+.scrim {
+  position: fixed;
+  inset: 0;
+  background: color-mix(in srgb, var(--page) 58%, transparent);
+  -webkit-backdrop-filter: blur(7px);
+  backdrop-filter: blur(7px);
+  cursor: zoom-out;
+}
+
+/* The enlarged figure is laid out at its width in the article, so every label
+   keeps its place, and scaled as one picture. The panel reserves the scaled
+   size. */
+.figurePanel {
+  position: relative;
+  box-shadow: 0 1px 3px rgb(0 0 0 / 0.04), 0 28px 72px -20px rgb(0 0 0 / 0.2);
+  transform-origin: 0 0;
+}
+
+.figurePanel > figure {
+  position: absolute;
+  top: 0;
+  left: 0;
+  margin: 0;
+  transform-origin: 0 0;
+}
+
+/* On the stage the figure lifts onto the sheet a zoomed table uses; its
+   caption stays in the article. */
+.figurePanel > figure > :first-child {
+  --control-surface: var(--panel);
+  border-color: var(--rule-medium);
+  background: var(--panel);
+}
+
+.figurePanel figcaption {
+  display: none;
+}

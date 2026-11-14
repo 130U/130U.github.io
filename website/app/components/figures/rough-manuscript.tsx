@@ -1,4 +1,4 @@
-import data from "../../../content/selected-research/certified-rough-heston-valuation.figures.json";
+import data from "../../../content/selected-research/certified-joint-pricing-errors-in-rough-heston.figures.json";
 import { ROUGH_HESTON, forwardVariance, halfShareDamping, herfindahlLevel, nettingRatio, position } from "../../lib/content/rough-heston-curves";
 import type { ManuscriptFigureProps } from "./dependence-manuscript";
 import { Figure, Mark, Plot, Schematic, Tx, linear, path, styles as kit, type Crosshair } from "./kit";

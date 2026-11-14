@@ -108,7 +108,7 @@ export function buildArticleHeadingMap(blocks: readonly ResearchBlock[]) {
 // sources. Unknown text stays unchanged: matching a section number alone cannot
 // distinguish a reference to this article from a citation of somebody else's paper.
 const internalReferenceContexts: Readonly<Record<string, readonly string[]>> = {
-  "certified-valuation-arithmetic-asian-options": [
+  "certified-valuation-of-arithmetic-asian-options": [
     "for the contract of Section 5",
     "twelve-fixing Heston contract of Section 5 with",
     "Section 3 proves the general statements",
@@ -130,7 +130,7 @@ const internalReferenceContexts: Readonly<Record<string, readonly string[]>> = {
     "or the spread of Section 5, the interval",
     "Section 6 gives its order",
   ],
-  "certified-rough-heston-valuation": [
+  "certified-joint-pricing-errors-in-rough-heston": [
     "On the six-month example of Section 7, replacing",
     "Section 7 applies the certificate to S&P 500 index options",
     "Section 6 records a structural property",
@@ -154,16 +154,61 @@ const internalReferenceContexts: Readonly<Record<string, readonly string[]>> = {
   ],
 };
 
-/** Link only audited internal Section references; every numeral displays as the source writes it. */
+// The papers whose manuscripts cite their own equations, statements, tables
+// and figures in plain text. Each such reference links to its target, as the
+// dependence paper's do from its TeX source: an equation by its parenthesized
+// number, a statement, table or figure by its number.
+const CROSS_REFERENCED = new Set(["certified-valuation-of-arithmetic-asian-options", "certified-joint-pricing-errors-in-rough-heston"]);
+const LABELLED = "Theorem|Proposition|Lemma|Corollary|Remark|Definition|Assumption|Example|Table|Figure";
+const LABEL_NUMBER = String.raw`[A-Z]?\d+(?:\.\d+)?`;
+const STATEMENT = new RegExp(String.raw`^(?:!\[)?\*\*(${LABELLED}) (${LABEL_NUMBER})[ .(]`, "u");
+const CITED_STATEMENTS = new RegExp(String.raw`\b(${LABELLED})s? (${LABEL_NUMBER}(?:(?:,\s*(?:and\s+)?|\s+and\s+|\s*[–-]\s*)${LABEL_NUMBER})*)`, "gu");
+const CITED_EQUATION = /\(((?:[A-Z]\.)?\d+\.\d+)\)/gu;
+// A label right after a year or "their" belongs to another paper.
+const OTHER_PAPER = /(?:\d{4}[a-z]?,|\btheir)\s*$/u;
+
+/** The anchor of every numbered equation, statement, table and figure of a cross-referenced paper, and the label each block carries. */
+export function buildReferenceTargets(slug: string, blocks: readonly ResearchBlock[]) {
+  const targets = new Map<string, string>();
+  const anchors = new Map<number, string>();
+  if (!CROSS_REFERENCED.has(slug)) return { targets, anchors };
+  const anchor = (index: number, key: string, id: string) => {
+    if (targets.has(key)) throw new Error(`${slug}: ${key} is numbered twice.`);
+    targets.set(key, id);
+    anchors.set(index, id);
+  };
+  blocks.forEach((block, index) => {
+    if (block.type === "equation") {
+      const tag = /\\tag\{([^}]+)\}/u.exec(block.tex)?.[1];
+      if (tag) anchor(index, `(${tag})`, `equation-${tag.replaceAll(".", "-")}`);
+      return;
+    }
+    if (block.type !== "paragraph" && block.type !== "figure") return;
+    const label = STATEMENT.exec(block.source.trimStart()) ?? /^!\[(Figure) (\d+)\./u.exec(block.source.trimStart());
+    if (label) anchor(index, `${label[1]} ${label[2]}`, `${label[1].toLowerCase()}-${label[2].replaceAll(".", "-")}`);
+  });
+  return { targets, anchors };
+}
+
+type Reference = { start: number; end: number; href: string; title?: string };
+
+/**
+ * Link audited internal Section references and, in a cross-referenced paper,
+ * every reference to its own numbered equations, statements, tables and
+ * figures; every numeral displays as the source writes it. `self` is the
+ * anchor of the block being linked, which never links to itself.
+ */
 export function linkArticleSectionReferences(
   inlines: readonly ArticleInline[],
   slug: string,
   headings: ReadonlyMap<string, ArticleHeadingPresentation>,
+  targets: ReadonlyMap<string, string> = new Map(),
+  self?: string,
 ): ArticleInline[] {
   const contexts = internalReferenceContexts[slug] ?? [];
-  if (!contexts.length) return [...inlines];
+  if (!contexts.length && !targets.size) return [...inlines];
   function linkText(text: string): ArticleInline[] {
-    const links: Array<{ start: number; end: number; heading: ArticleHeadingPresentation }> = [];
+    const links: Reference[] = [];
     for (const context of contexts) {
       let offset = 0;
       for (let start = text.indexOf(context, offset); start >= 0; start = text.indexOf(context, offset)) {
@@ -173,10 +218,27 @@ export function linkArticleSectionReferences(
           const numberOffset = reference.index + reference[0].indexOf(reference[1]);
           for (const number of numbers) {
             const from = start + numberOffset + number.index;
-            links.push({ start: from, end: from + number[0].length, heading: headings.get(number[0])! });
+            const heading = headings.get(number[0])!;
+            links.push({ start: from, end: from + number[0].length, href: `#${heading.id}`, title: `Section ${heading.sourceNumber}; web heading ${heading.referenceLabel}` });
           }
         }
         offset = start + context.length;
+      }
+    }
+    const target = (key: string) => {
+      const id = targets.get(key);
+      return id && id !== self ? `#${id}` : undefined;
+    };
+    for (const equation of text.matchAll(CITED_EQUATION)) {
+      const href = target(equation[0]);
+      if (href) links.push({ start: equation.index, end: equation.index + equation[0].length, href });
+    }
+    for (const reference of text.matchAll(CITED_STATEMENTS)) {
+      if (OTHER_PAPER.test(text.slice(0, reference.index))) continue;
+      const listOffset = reference.index + reference[0].indexOf(reference[2], reference[1].length);
+      for (const number of reference[2].matchAll(new RegExp(LABEL_NUMBER, "gu"))) {
+        const href = target(`${reference[1]} ${number[0]}`);
+        if (href) links.push({ start: listOffset + number.index, end: listOffset + number.index + number[0].length, href });
       }
     }
     links.sort((left, right) => left.start - right.start);
@@ -185,11 +247,7 @@ export function linkArticleSectionReferences(
     for (const link of links) {
       if (link.start < offset) continue;
       if (link.start > offset) result.push({ type: "text", text: text.slice(offset, link.start) });
-      result.push({
-        type: "link", href: `#${link.heading.id}`,
-        title: `Section ${link.heading.sourceNumber}; web heading ${link.heading.referenceLabel}`,
-        inlines: [{ type: "text", text: text.slice(link.start, link.end) }],
-      });
+      result.push({ type: "link", href: link.href, ...(link.title ? { title: link.title } : {}), inlines: [{ type: "text", text: text.slice(link.start, link.end) }] });
       offset = link.end;
     }
     if (offset < text.length || !result.length) result.push({ type: "text", text: text.slice(offset) });
@@ -197,7 +255,7 @@ export function linkArticleSectionReferences(
   }
   return inlines.flatMap((inline): ArticleInline[] => {
     if (inline.type === "text") return linkText(inline.text);
-    if (inline.type === "strong" || inline.type === "emphasis") return [{ ...inline, inlines: linkArticleSectionReferences(inline.inlines, slug, headings) }];
+    if (inline.type === "strong" || inline.type === "emphasis") return [{ ...inline, inlines: linkArticleSectionReferences(inline.inlines, slug, headings, targets, self) }];
     // Links, code and mathematics pass through unchanged.
     return [inline];
   });

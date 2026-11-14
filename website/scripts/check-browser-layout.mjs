@@ -378,7 +378,7 @@ try {
       await serveExport(context, missing);
       try {
         const page = await context.newPage();
-        const route = "/certified-valuation-arithmetic-asian-options/";
+        const route = "/certified-valuation-of-arithmetic-asian-options/";
         await page.goto(ORIGIN + route, { waitUntil: "networkidle" });
         await page.evaluate(() => document.fonts.ready);
         await page.addStyleTag({ content: "html { font-size: 200% !important; }" });
@@ -404,7 +404,7 @@ try {
         longNumbers.push({ route, width: 320, textScale: 2, text: await value.textContent(), ...dimensions, issues, screenshot });
       } finally { await context.close(); }
     }
-    for (const route of ["/certified-valuation-arithmetic-asian-options/", "/experience/mangrove-restoration-and-compensatory-mitigation/"]) {
+    for (const route of ["/certified-valuation-of-arithmetic-asian-options/", "/experience/mangrove-restoration-and-compensatory-mitigation/"]) {
       const context = await browser.newContext({ viewport: { width: 1440, height: 1100 }, javaScriptEnabled: false, serviceWorkers: "block" });
       await serveExport(context, missing);
       try {
