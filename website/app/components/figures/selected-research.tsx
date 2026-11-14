@@ -76,7 +76,7 @@ function AsianWidthPlateau() {
     <Figure
       id="asian-width"
       title="Width of the proved interval by Euler step"
-      caption="The allowance for the cost of the kink supplies most of each width. From $h=1/768$ to $h=1/1536$ it and the projection term shrink, but the frequency tail under $Q$ grows by more, so the width stops improving."
+      caption="The allowance for the cost of the kink supplies most of each width, which settles near 0.0217. From $h=1/768$ to $h=1/1536$ that allowance and the projection term shrink while the frequency tail under $Q$ doubles."
       views={[{ id: "width", label: "Width Budget" }, { id: "change", label: "Finest-Step Change" }, { id: "enclosure", label: "Gap Interval" }]}
       viewsLabel="Show the width budget, the change at the finest step or the interval for the Euler gap"
     >

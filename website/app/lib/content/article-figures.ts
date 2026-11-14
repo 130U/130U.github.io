@@ -19,7 +19,7 @@ const articleFigures: Readonly<Record<string, readonly FigurePlacement[]>> = {
   "certified-valuation-arithmetic-asian-options": [
     {
       figure: "asian-width",
-      after: { paragraph: "At $`h=1/192`$ the sufficient condition of Appendix B fails" },
+      after: { paragraph: "At the three steps the cost of the kink is 95.5, 94.5 and 92.8 percent of the width" },
       evidence: [
         "| $`1/384`$ | $`[-0.014169989568,\\;0.013839530031]`$ | 0.028009519599 |",
         "| $`1/768`$ | $`[-0.011024692273,\\;0.010642371599]`$ | 0.021667063872 |",
@@ -30,6 +30,8 @@ const articleFigures: Readonly<Record<string, readonly FigurePlacement[]>> = {
         "| Frequency tail under $`Q`$ | 0.000177646019 | 0.000368746602 | 0.000751284529 |",
         "| Periodization | 0.000782917272 | 0.000782917272 | 0.000782917272 |",
         "the cost of the kink is 95.5, 94.5 and 92.8 percent of the width",
+        "The width settles near $`.0217`$.",
+        "roughly doubles when the step is halved",
       ],
     },
   ],

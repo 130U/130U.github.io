@@ -4,11 +4,11 @@
     {
       "slug": "certified-valuation-arithmetic-asian-options",
       "fetchedAt": "2026-11-14",
-      "sourceUrl": "https://github.com/130U/certified-valuation-arithmetic-asian-options/blob/fc5e0f611bf90f18599bd999d77ab483230f0395/manuscript/report.md",
-      "sourceCommit": "fc5e0f611bf90f18599bd999d77ab483230f0395",
-      "sourceBlob": "306e62757575de9b50796e8bd93287968243f366",
-      "sourceSha256": "57b4a89969b040aac0033304cced7463bca2c187231b74bd867e54447390cf6d",
-      "importedMarkdownSha256": "f9ec49a7a144275d97e9aa12c862b52a5719fe84564e846929b70af7b05bf934",
+      "sourceUrl": "https://github.com/130U/certified-valuation-arithmetic-asian-options/blob/2efeaf1580e139001744eab48ffd1c0c1e3058c8/manuscript/report.md",
+      "sourceCommit": "2efeaf1580e139001744eab48ffd1c0c1e3058c8",
+      "sourceBlob": "43026cce8d246868ae16faa0ea76e3d341db7b4d",
+      "sourceSha256": "201ecf9803af852e66b3fa3235a22e49c33a2f7283545f46114d55fb4dce3c9d",
+      "importedMarkdownSha256": "ba39d42c418cd1d991069ce535ac92da88fd7f4382b452d3a7d3c02d3214dae9",
       "includedHeadings": [
         "Abstract",
         "1. Introduction",
@@ -39,7 +39,7 @@
         "6.1 Euler on the price is Euler on the Riccati equation",
         "6.2 The bias of the proxy value is first order",
         "6.3 Deterministic variance: a vega times a quadrature error",
-        "6.4 Why the certificate cannot follow",
+        "6.4 Coupling the two laws",
         "7. After calibration",
         "7.1 Price transfer for small volatility of volatility",
         "7.2 The posterior",
@@ -47,10 +47,9 @@
         "8. Two uses",
         "8.1 An acceptance test for a pricing engine",
         "8.2 A numerical line in the valuation reserve",
-        "9. Limits",
-        "10. Conclusion"
+        "9. Conclusion"
       ],
-      "mainSections": 10,
+      "mainSections": 9,
       "omitted": [
         "## Appendix A. Finite certification of the weighted second moment",
         "## Appendix B. The actual projection kernel and affine identification",
@@ -89,12 +88,12 @@
       ],
       "studies": [
         {
-          "sourceUrl": "https://github.com/130U/certified-valuation-arithmetic-asian-options/blob/fc5e0f611bf90f18599bd999d77ab483230f0395/studies/results/gap-profile.json",
-          "sourceBlob": "05876fab0abc6b251f530eb9d97daeeb709854ea",
-          "sourceSha256": "62f8a2033d913b7a4e26b4a5ed74193578b88000b1e44d85c7416c0eafefa443"
+          "sourceUrl": "https://github.com/130U/certified-valuation-arithmetic-asian-options/blob/2efeaf1580e139001744eab48ffd1c0c1e3058c8/studies/results/gap-profile.json",
+          "sourceBlob": "30e1676f4cc0c72d0b0dbdb1cac384c41a70370b",
+          "sourceSha256": "c90aa118de02bff2d85bf816639e9b9883d47de60f829dc7085e0321931d8bac"
         },
         {
-          "sourceUrl": "https://github.com/130U/certified-valuation-arithmetic-asian-options/blob/fc5e0f611bf90f18599bd999d77ab483230f0395/studies/results/euler-ladder.json",
+          "sourceUrl": "https://github.com/130U/certified-valuation-arithmetic-asian-options/blob/2efeaf1580e139001744eab48ffd1c0c1e3058c8/studies/results/euler-ladder.json",
           "sourceBlob": "5359e2b42d32881df6fd678301feb0051cf4095c",
           "sourceSha256": "8df582b58273fe949af1e892fcfe987c5dafe69425bd0ab76b3a219907d05e1f"
         }

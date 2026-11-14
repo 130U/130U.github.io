@@ -6,14 +6,14 @@ const sourceDirectory = new URL("../content/sources/selected-research/", import.
 const sources = [
   {
     key: "asian", slug: "certified-valuation-arithmetic-asian-options", file: "manuscript/report.md",
-    sourceCommit: "fc5e0f611bf90f18599bd999d77ab483230f0395", sourceBlob: "306e62757575de9b50796e8bd93287968243f366",
-    sourceEditedAt: "2026-11-14T01:42:54-05:00", fetchedAt: "2026-11-14", mainSections: 10,
+    sourceCommit: "2efeaf1580e139001744eab48ffd1c0c1e3058c8", sourceBlob: "43026cce8d246868ae16faa0ea76e3d341db7b4d",
+    sourceEditedAt: "2026-11-14T06:28:35-05:00", fetchedAt: "2026-11-14", mainSections: 9,
     appendixAnchor: "appendix-a-finite-certification-of-the-weighted-second-moment",
     description: "The cost of exercising an arithmetic Asian option on the geometric average: a proved bound, its cubic law in Black's model, and a certified Heston price interval with its Euler discretization error.",
     figures: {
       directory: "asian", count: 4,
       studies: [
-        { name: "gap-profile.json", file: "studies/results/gap-profile.json", blob: "05876fab0abc6b251f530eb9d97daeeb709854ea" },
+        { name: "gap-profile.json", file: "studies/results/gap-profile.json", blob: "30e1676f4cc0c72d0b0dbdb1cac384c41a70370b" },
         { name: "euler-ladder.json", file: "studies/results/euler-ladder.json", blob: "5359e2b42d32881df6fd678301feb0051cf4095c" },
       ],
       data: asianFigureData,
