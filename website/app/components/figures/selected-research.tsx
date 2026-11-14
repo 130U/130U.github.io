@@ -195,7 +195,7 @@ function HestonCandidateSeparation() {
       id="heston-candidates"
       className={styles.candidates}
       title="Objective enclosures for five roughness candidates"
-      caption="Normalized least-squares distance to the mid prices, as $J\times10^8$. At $N_t=1024$ three close candidates overlap; at $N_t=2048$ the five enclosures are disjoint and ordered, and $\alpha=0.520$ is the certified minimizer on this grid."
+      caption="Normalised least-squares distance to the mid prices, as $J\times10^8$. At $N_t=1024$ three close candidates overlap; at $N_t=2048$ the five enclosures are disjoint and ordered, and $\alpha=0.520$ is the certified minimiser on this grid."
       views={[{ id: "n1024", label: <>N<sub>t</sub> = 1024</> }, { id: "n2048", label: <>N<sub>t</sub> = 2048</> }]}
       defaultView="n2048"
       viewsLabel="Choose the number of time cells"
@@ -249,7 +249,7 @@ function HestonLedger() {
     <Figure
       id="heston-ledger"
       title="Ledger of the three-month spread (Q2) against a quarter-point tolerance"
-      caption="Both rows share the stored output, the reference centre, all 1,025 node radii and every remainder. Only the aggregation of the node errors differs: netting lowers the node term by 30 percent and takes the complete bound from above a quarter point to below it."
+      caption="Both rows share the stored output, the reference centre, all 1,025 node radii and every remainder. Only the aggregation of the node errors differs: netting lowers the node term by 30 per cent and takes the complete bound from above a quarter point to below it."
       legend={LEDGER_PARTS.filter((part) => part.tone !== "mist").map((part) => ({ label: part.name, tone: part.tone }))}
     >
       <Bars label="Complete bounds of the three-month spread in index points. Joint 0.233318843, below a quarter point; leg-by-leg 0.252393939, above it. Shared components: absolute centre 0.149775147, strip remainder 0.000026654, exact infinite tail 0.038055248. Node support: joint 0.045461793, leg-by-leg 0.064536890." labelWidth="8rem" valueWidth="7rem" stack>
