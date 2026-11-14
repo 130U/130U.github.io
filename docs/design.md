@@ -313,9 +313,12 @@ show exact values, the proof-obligation graph accepts a chosen failure, and each
 draws in once as it scrolls into view, except under reduced motion. Every plotted value
 restates the manuscript, and conceptual figures carry no numeric scale. Titles,
 captions, legends, and axis names use sentence case; view switches use title case.
-Captions state what the figure shows in the article's own terms. The dependence
-article's four manuscript figures are drawn the same way from the manuscript's formulas,
-with its captions below them.
+Captions state what the figure shows in the article's own terms. The four manuscript
+figures of the dependence article and the four of the Asian article are drawn the same
+way, from the manuscript's formulas and its pinned study results, with the manuscript's
+captions below them. A scatter is a field of gray points with the paths that matter as
+toned markers; a leading term is a dotted line beside its solid curve; circles, squares
+and triangles keep the roles a caption gives them.
 
 ### Research tables
 

@@ -382,10 +382,11 @@ try {
         await page.goto(ORIGIN + route, { waitUntil: "networkidle" });
         await page.evaluate(() => document.fonts.ready);
         await page.addStyleTag({ content: "html { font-size: 200% !important; }" });
-        const exact = "−.000202992309237006";
+        const exact = ".000000012711979137";
         const value = page.locator('[data-research-number]').filter({ hasText: exact });
         assert.equal(await value.count(), 1, "The long-number regression target must remain unique.");
-        const number = value.locator('..');
+        // The number stands in a table cell; the table's region is the scroller that reveals it.
+        const number = value.locator('xpath=ancestor::*[@role="region"][1]');
         const issues = [];
         if (await value.textContent() !== exact) issues.push("long-number-text-changed");
         const dimensions = await page.evaluate(() => ({ scrollWidth: document.documentElement.scrollWidth, viewport: innerWidth }));

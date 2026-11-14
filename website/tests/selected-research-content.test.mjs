@@ -15,7 +15,7 @@ function withoutArticleFigures(html) {
 }
 
 const PROJECTS = [
-  { key: "asian", slug: "certified-valuation-arithmetic-asian-options", commit: "249987d23616804998683ac9eeead21c5a3473f6", blob: "69e67323db7a2a97e1fa0ad6264f4078aac1cb7e", sections: 10, tables: 11, formulas: 355 },
+  { key: "asian", slug: "certified-valuation-arithmetic-asian-options", commit: "fc5e0f611bf90f18599bd999d77ab483230f0395", blob: "306e62757575de9b50796e8bd93287968243f366", sections: 10, tables: 11, formulas: 736, figures: "asian" },
   { key: "rough", slug: "certified-rough-heston-valuation", commit: "de721f78cec277e390cd9dc2ebc4efa9ae9681e4", blob: "2b52caa1ad3e58a2f411c9c1f1b651d01f3a8d39", sections: 8, tables: 13, formulas: 306 },
 ];
 
@@ -54,9 +54,10 @@ for (const expected of PROJECTS) {
     assert.equal(article.sourceBlob, expected.blob);
     assert.equal(article.title, upstream.match(/^# (.+)$/mu)[1]);
     const main = upstream.slice(upstream.indexOf("\n") + 1, upstream.indexOf("\n## Appendix A.")).trim()
+      .replace(/^!\[([^\]\n]+)\]\(figures\/([a-z0-9-]+)\.png\)\n\n\*\*\1\*\*([^\n]*)$/gmu, (_, label, image, caption) => `![**${label}**${caption}](/assets/research/${expected.figures}/${image}.png)`)
       .replace(/\]\((\.\.\/[^\s)]+)\)/gu, (_, relative) => `](https://github.com/130U/${expected.slug}/blob/${expected.commit}/${relative.slice(3)})`);
     const references = upstream.slice(upstream.indexOf("\n## References")).trim();
-    assert.ok(article.markdown.startsWith(main + "\n\n## Appendices and Supporting Material\n"), "Every main-text character must survive import, except resolved relative link targets.");
+    assert.ok(article.markdown.startsWith(main + "\n\n## Appendices and Supporting Material\n"), "Every main-text character must survive import, except resolved relative link targets and each figure's image line, whose label its caption repeats.");
     assert.ok(article.markdown.endsWith(references + "\n"), "The complete bibliography must survive import.");
     assert.doesNotMatch(article.markdown, /^## Appendix [A-Z]\./mu);
     const blocks = parseResearchMarkdown(article.markdown, { joinSoftLines: true });

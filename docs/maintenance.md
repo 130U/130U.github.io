@@ -117,7 +117,7 @@ The three papers use pinned research inputs and deterministic importers:
 | Paper | Input and importer | On-site scope |
 | --- | --- | --- |
 | Critical Dependence Stress for Portfolio Diversification | `content/sources/selected-research/dependence/`; `scripts/import-dependence-research.mjs` | Abstract, chapters 1–5, references, and supporting-material links |
-| Certified Valuation of Arithmetic Asian Options | `content/sources/selected-research/asian-source.md`; `scripts/import-selected-research.mjs` | Abstract, chapters 1–10, references, and supporting-material links |
+| Certified Valuation of Arithmetic Asian Options | `content/sources/selected-research/asian-source.md` and the study results in `asian-studies/`; `scripts/import-selected-research.mjs` | Abstract, chapters 1–10 with their four figures, references, and supporting-material links |
 | Certified Joint Pricing Errors in Rough Heston | `content/sources/selected-research/rough-source.md`; `scripts/import-selected-research.mjs` | Abstract, chapters 1–8, references, and supporting-material links |
 
 ```sh
@@ -129,9 +129,9 @@ node scripts/import-dependence-research.mjs --check
 The source records identify the upstream repository, commit, blob, and file hashes.
 Refresh these only for the version actually imported. Retain complete core chapters,
 tables, references, theorem assumptions, error definitions, and reproducibility
-limits. Distinguish the Asian paper's projected-Euler certificate from its
-continuous-model comparison, and retain the Rough Heston paper's stated
-configurations and finite-candidate scope.
+limits. Distinguish the Asian paper's proved intervals from its simulation
+estimates, and retain the Rough Heston paper's stated configurations and
+finite-candidate scope.
 
 Each page publishes its generated article in `content/selected-research/`: the imported
 main text and references, the page description, and the upstream commit and blob. The
@@ -142,9 +142,13 @@ and opens the article of the paper's release.
 
 The dependence source tree includes supporting TeX inputs needed to resolve
 cross-references. The article draws its four figures natively from their formulas (see
-the article figures under Shared rendering and extension). The readers link appendices
-and supplementary proofs to the pinned full manuscripts and return to the corresponding
-About research entry.
+the article figures under Shared rendering and extension). The Asian manuscript sets
+each figure as an image line followed by its caption paragraph; the importer joins the
+two into one captioned figure, checks the two study results in `asian-studies/` against
+their upstream blobs, and writes the values the four drawings plot to
+`content/selected-research/certified-valuation-arithmetic-asian-options.figures.json`.
+The readers link appendices and supplementary proofs to the pinned full manuscripts and
+return to the corresponding About research entry.
 
 ### Legal research
 
@@ -187,8 +191,10 @@ plot, schematic and bar primitives, `selected-research.tsx`, `ai-research.tsx` a
 `legal-research.tsx` hold the figures, `dependence-manuscript.tsx` draws the
 dependence manuscript's four figures from the formulas in
 `130U/Critical-Dependence-Stress` (`code/generate_mechanism_figures.py` and
-`calculations/plot_profiles_and_flows.py` at the pinned commit), and
-`FigureController` adds view switches, readouts, linked emphasis, the
+`calculations/plot_profiles_and_flows.py` at the pinned commit),
+`asian-manuscript.tsx` draws the Asian manuscript's four figures from its imported
+study results and from Proposition 4.1 as `app/lib/content/asian-kink-bound.ts`
+evaluates it, and `FigureController` adds view switches, readouts, linked emphasis, the
 proof-obligation graph, table column highlighting and the entrances of figures and
 table rows. The research renderer frames every table and sets a directly preceding
 "**Table N.**" caption paragraph inside the frame as its title; `TableStage` keeps row
@@ -198,7 +204,7 @@ new table needs no registration.
 named by the opening of its source text or a table's first header cell, and lists the
 manuscript text each figure restates. The build fails when an anchor matches no block
 or several, or when any listed text is missing from the article, so edit a figure's
-data and its evidence together. The same module maps each dependence image path to
+data and its evidence together. The same module maps each manuscript image path to
 its native drawing, with evidence checked the same way, and names the row or column a
 table emphasizes. Manuscript checks in the tests read articles without these figures
 and without the labels of the native drawings, keeping their manuscript captions.

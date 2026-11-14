@@ -31,20 +31,11 @@ function letter(number: number) {
   return String.fromCharCode(64 + number);
 }
 
-const headingMathLabels = new Map([
-  [String.raw`\mathsfH_s`, "Hₛ"],
-]);
-
-function headingMathText(tex: string) {
-  const label = headingMathLabels.get(tex.replace(/\s+/gu, ""));
-  if (label !== undefined) return label;
-  throw new Error(`Heading mathematics needs a reviewed plain-text label: ${tex}`);
-}
-
+/** A heading's label in the article contents, where every heading reads as plain text. */
 function inlineText(inlines: readonly ArticleInline[]): string {
   return inlines.map((inline) => {
     if (inline.type === "text" || inline.type === "code") return inline.text;
-    if (inline.type === "math") return headingMathText(inline.tex);
+    if (inline.type === "math") throw new Error(`Heading mathematics needs a reviewed plain-text label: ${inline.tex}`);
     if (inline.type === "line-break") return " ";
     return inlineText(inline.inlines);
   }).join("");
@@ -118,23 +109,30 @@ export function buildArticleHeadingMap(blocks: readonly ResearchBlock[]) {
 // distinguish a reference to this article from a citation of somebody else's paper.
 const internalReferenceContexts: Readonly<Record<string, readonly string[]>> = {
   "certified-valuation-arithmetic-asian-options": [
-    "Section 4 identifies this obstruction analytically",
-    "Sections 2 and 3 develop the exact conditional representation",
-    "Section 4 states the price certificate",
-    "Section 5 verifies the common-factor structure",
-    "Sections 6 and 7 study weak expansions",
-    "Section 8 uses the numerical certificates",
-    "Section 9 records the boundaries of the results",
-    "Section 4 analyzes the width of the certificate that results",
-    "point in Section 8.3, only",
-    "Section 4.1 characterizes the scale",
-    "transform loadings required in Section 3",
-    "Section 5 establishes the common Gaussian structure",
-    "Section 5 verifies a deterministic-variance class",
-    "Section 8 varies the step at the principal point",
-    "box in Section 7 is a separate certified region",
-    "Section 6 gives a common expansion formula",
-    "width plateau in Section 8",
+    "for the contract of Section 5",
+    "twelve-fixing Heston contract of Section 5 with",
+    "Section 3 proves the general statements",
+    "Section 4 evaluates the bound where contracts trade",
+    "Section 5 turns the bound into a certificate",
+    "Section 6 explains the Euler error",
+    "Section 7 carries the fixed-parameter bounds",
+    "Section 8 describes two uses",
+    "Section 9 states the limits",
+    "(Section 4), so",
+    "numerical profile of Section 5",
+    "such as the Euler kernel of Section 5",
+    "The Heston certificate of Section 5 uses",
+    "are the contract of Section 5 with its variance frozen",
+    "positive part (Section 6 and Appendix B)",
+    "Three features agree with Section 3",
+    "The contract and model of Section 5",
+    "is the subject of Section 6",
+    "fixed-parameter intervals of Section 5 do not say",
+    "or the spread of Section 5, the interval",
+    "Section 6 gives its order",
+    "The certificate of Section 5 is pointwise",
+    "The posterior bounds of Section 7 hold",
+    "The market examples of Section 4 use round inputs",
   ],
   "certified-rough-heston-valuation": [
     "Section 4 derives the startup coefficients",

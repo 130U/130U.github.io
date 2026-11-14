@@ -40,27 +40,15 @@ test("heading presentation converts existing identities to Roman chapters and le
   }
 });
 
-test("formatting a mathematical heading preserves every non-prefix inline and its exact TeX", () => {
-  const heading = parseResearchMarkdown("### 2.2 The common Gaussian structure $`\\mathsf H_s`$")[0];
-  const formatted = formatArticleHeading(heading);
-  assert.equal(formatted.displayInlines[0].text, "B. The common Gaussian structure ");
-  assert.equal(formatted.displayInlines[1], heading.inlines[1]);
-  assert.equal(formatted.displayInlines[1].tex, String.raw`\mathsf H_s`);
-  assert.equal(formatted.text, "B. The common Gaussian structure Hₛ");
-});
-
-test("all actual mathematical heading labels are readable without exposing or dropping TeX", () => {
-  const expected = ["Hₛ"];
-  const headings = manuscript(ASIAN).filter((block) => block.type === "heading" && block.inlines.some((inline) => inline.type === "math"));
-  assert.equal(headings.length, expected.length);
-  headings.forEach((heading, index) => {
-    const formatted = formatArticleHeading(heading);
-    assert.ok(formatted.text.endsWith(expected[index]));
-    assert.doesNotMatch(formatted.text, /\\|\$|[{}]/u);
-    assert.deepEqual(formatted.displayInlines.filter((inline) => inline.type === "math"), heading.inlines.filter((inline) => inline.type === "math"));
-  });
-  const unknown = parseResearchMarkdown("### 2.4 An expression $`\\frac{a}{b}`$")[0];
-  assert.throws(() => formatArticleHeading(unknown), /reviewed plain-text label/u, "Unreviewed notation must not silently lose its mathematical structure in the directory.");
+test("every manuscript heading reads as plain text, and heading mathematics stops the build until it has a reviewed label", () => {
+  for (const slug of [ASIAN, ROUGH]) {
+    for (const heading of manuscript(slug).filter((block) => block.type === "heading")) {
+      assert.ok(heading.inlines.every((inline) => inline.type !== "math"), `${slug}: ${heading.source}`);
+      assert.doesNotMatch(formatArticleHeading(heading).text, /\\|\$|[{}]/u);
+    }
+  }
+  const mathematical = parseResearchMarkdown("### 2.4 An expression $`\\frac{a}{b}`$")[0];
+  assert.throws(() => formatArticleHeading(mathematical), /reviewed plain-text label/u, "Notation must not silently lose its mathematical structure in the directory.");
 });
 
 test("contextual subsection letters include the unnumbered rough-Heston heading without inventing a source number", () => {
@@ -103,7 +91,7 @@ test("external sections, existing citation labels, equation and theorem numbers 
   for (const slug of [ASIAN, ROUGH]) {
     const blocks = manuscript(slug);
     const map = buildArticleHeadingMap(blocks);
-    const external = blocks.filter((block) => block.type === "paragraph" && /^(?:Fusai and Kyriakou|Ben Hammouda et al\.|15\. \*\*BL2025|16\. \*\*BenHammouda2026)/u.test(block.source));
+    const external = blocks.filter((block) => block.type === "paragraph" && /^(?:Geometric conditioning starts with Curran|Ben Hammouda et al\.|15\. \*\*BL2025|16\. \*\*BenHammouda2026)/u.test(block.source));
     assert.ok(external.length > 0);
     for (const block of external) assert.deepEqual(linkArticleSectionReferences(block.inlines, slug, map), block.inlines);
     const specimen = parseResearchMarkdown("Theorem 4.1 and equation (4.1); Section 7.3 of an unspecified paper. $`x_{7.3}=1`$ [Section 3.3](https://example.com/paper)")[0].inlines;
@@ -114,16 +102,18 @@ test("external sections, existing citation labels, equation and theorem numbers 
 test("linking is limited to audited article contexts and never changes mathematical tokens", () => {
   const blocks = manuscript(ASIAN);
   const map = buildArticleHeadingMap(blocks);
-  const roadmap = blocks.find((block) => block.type === "paragraph" && block.source.startsWith("Sections 2 and 3 develop"));
+  const roadmap = blocks.find((block) => block.type === "paragraph" && block.source.startsWith("Section 7 carries the fixed-parameter bounds"));
   const linked = linkArticleSectionReferences(roadmap.inlines, ASIAN, map);
   assert.equal(text(linked), text(roadmap.inlines));
-  assert.deepEqual(links(linked).map((link) => text(link.inlines)), ["2", "3", "4", "5", "6", "7", "8", "9"]);
+  assert.deepEqual(links(linked).map((link) => text(link.inlines)), ["7", "8", "9"]);
   assert.deepEqual(linkArticleSectionReferences(roadmap.inlines, "unreviewed-source", map), roadmap.inlines);
-  const incomplete = new Map(map); incomplete.delete("3");
-  const partial = linkArticleSectionReferences(roadmap.inlines, ASIAN, incomplete);
-  assert.ok(!links(partial).some((link) => text(link.inlines) === "2"), "An unresolved pair must remain entirely unlinked.");
-  const scope = blocks.find((block) => block.type === "paragraph" && block.source.startsWith("The structural conditions are sufficient for certification."));
-  const scopeLinked = linkArticleSectionReferences(scope.inlines, ASIAN, map);
-  assert.deepEqual(links(scopeLinked).map((link) => text(link.inlines)), ["5", "8", "7"]);
-  assert.deepEqual(scopeLinked.filter((inline) => inline.type === "math"), scope.inlines.filter((inline) => inline.type === "math"));
+  const rough = manuscript(ROUGH);
+  const pair = rough.find((block) => block.type === "paragraph" && block.source.startsWith("Section 2 defines the exact problem."));
+  const incomplete = buildArticleHeadingMap(rough); incomplete.delete("4");
+  const partial = linkArticleSectionReferences(pair.inlines, ROUGH, incomplete);
+  assert.ok(!links(partial).some((link) => text(link.inlines) === "3"), "An unresolved pair must remain entirely unlinked.");
+  const dispersion = blocks.find((block) => block.type === "paragraph" && block.source.includes("(Section 4), so"));
+  const dispersionLinked = linkArticleSectionReferences(dispersion.inlines, ASIAN, map);
+  assert.deepEqual(links(dispersionLinked).map((link) => text(link.inlines)), ["4", "5"]);
+  assert.deepEqual(dispersionLinked.filter((inline) => inline.type === "math"), dispersion.inlines.filter((inline) => inline.type === "math"));
 });
