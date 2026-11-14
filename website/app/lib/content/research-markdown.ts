@@ -62,7 +62,8 @@ export function parseResearchMarkdown(markdown: string, options: { joinSoftLines
   function inlines(source: string): ResearchInline[] {
     const result: ResearchInline[] = [];
     let offset = 0;
-    for (const match of source.matchAll(/<br\s*\/?>|@@RESEARCH-MATH-(\d+)@@|\*\*([\s\S]+?)\*\*|\*([^*]+)\*|`([^`]+)`|\[([^\[\]]+)\]\(((?:https?:\/\/|mailto:|#)[^\s)]+)\)/giu)) {
+    // A link target may hold balanced parentheses, as DOIs such as 10.1016/0304-405X(76)90024-6 do.
+    for (const match of source.matchAll(/<br\s*\/?>|@@RESEARCH-MATH-(\d+)@@|\*\*([\s\S]+?)\*\*|\*([^*]+)\*|`([^`]+)`|\[([^\[\]]+)\]\(((?:https?:\/\/|mailto:|#)(?:[^\s()]|\([^\s()]*\))+)\)/giu)) {
       if (match.index > offset) result.push({ type: "text", text: source.slice(offset, match.index) });
       if (match[2] !== undefined || match[3] !== undefined) {
         result.push({ type: match[2] !== undefined ? "strong" : "emphasis", inlines: inlines(match[2] ?? match[3]) });

@@ -15,7 +15,7 @@
     "app/components/research/ResearchArticle.tsx": "a7a8ede0d60600e926b1288b0ee7651193ab599ef4d8221e8ffae21da7f6f921",
     "app/components/research/ResearchInline.tsx": "29571c974b8ae4d4014f8acb750f120f3abf2e3daf6c333207bc6ed68e22ed42",
     "app/components/research/ResearchMath.tsx": "b28c87b1d7e7238aca38009ce2856b4109478ae25d0431b042e921bf12288180",
-    "app/lib/content/research-markdown.ts": "d0fe23c0f91b76bdeb761dd7981db6b19b3b148dc754d6fe1a1ca57e35a40237",
+    "app/lib/content/research-markdown.ts": "abf3b2b65b4c8be391d3642acdec618794d47d717805771af720abe2dcc1f7f7",
     "app/lib/content/research-math.ts": "8e0c7015c812567685d62dd9ebd88e78ab11cfe1a89d9e1de0c62a0f46e3be47",
     "app/lib/content/research-number.ts": "0422523c87a5bd67914d6ead0a2411c93e3ced16e2d464f83052645fea5135e7",
     "app/[paper]/page.tsx": "118091a0ca8862bba6d3e0baaaaee0c1af0516c9b457a1e893ac7cbc10980a85",

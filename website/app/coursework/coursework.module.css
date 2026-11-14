@@ -44,7 +44,7 @@
 
 .sectionIndex {
   grid-column: 1;
-  padding-top: 0.5rem;
+  padding: 0.5rem 0 0 var(--frame-inset);
   color: var(--muted);
   font-family: var(--font-prose);
   font-size: var(--type-index);
@@ -128,7 +128,7 @@
 
 @media (width < 768px) {
   .frame :global(.content-column) {
-    padding-top: 88px;
+    padding-top: 52px;
   }
 
   .section {

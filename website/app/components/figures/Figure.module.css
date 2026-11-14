@@ -12,10 +12,10 @@
 /* Text in a figure keeps the face's proportional figures, so a hyphenated
    label reads as one word; ticks and values take tabular figures. */
 .frame {
-  --frame-pad: clamp(16px, 5cqi, 28px);
+  --figure-pad: clamp(16px, 5cqi, 28px);
   position: relative;
   overflow-x: clip;
-  padding: var(--frame-pad);
+  padding: var(--figure-pad);
   border: 1px solid var(--frame);
   font-family: var(--font-text);
   font-variant-numeric: lining-nums;
@@ -26,13 +26,13 @@
 .zoom {
   position: absolute;
   z-index: 4;
-  top: calc(var(--frame-pad) - 5px);
-  right: calc(var(--frame-pad) - 8px);
+  top: calc(var(--figure-pad) - 5px);
+  right: calc(var(--figure-pad) - 8px);
 }
 
 /* Where a label holds that corner, the control takes a row of its own. */
 .frame[data-zoom-row] {
-  padding-top: calc(var(--frame-pad) + 32px);
+  padding-top: calc(var(--figure-pad) + 32px);
 }
 
 /* Keep comparison diagrams legible when their columns cannot reflow. */
@@ -665,6 +665,11 @@
   font-size: var(--type-label);
   line-height: var(--label-leading);
   white-space: nowrap;
+}
+
+/* A label in the steel tone of a context rule reads in muted ink. */
+.headerMark.steel {
+  color: var(--muted);
 }
 
 .headerMark[data-anchor="left"] {

@@ -40,7 +40,7 @@
 .sectionIndex {
   grid-column: 1;
   margin: 0;
-  padding-top: 0.5rem;
+  padding: 0.5rem 0 0 var(--frame-inset);
   color: var(--muted);
   font-family: var(--font-prose);
   font-size: var(--type-index);
@@ -70,7 +70,7 @@
 }
 
 .biographyCopy {
-  max-width: var(--reading-measure);
+  max-width: var(--reading-width);
   margin-top: 40px;
   font-family: var(--font-prose);
   font-size: var(--type-reading);
