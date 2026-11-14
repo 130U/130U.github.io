@@ -43,6 +43,9 @@
   --type-interface: 0.9375rem;
   --type-action: var(--type-interface);
   --type-math: 1.15em;
+  /* A page title keeps to four fifths of its column; on a phone it takes the
+     whole column. */
+  --title-width: 80%;
   /* About seventy characters of Source Serif 4 at the reading size. */
   --reading-measure: 36rem;
   /* Running text at the measure; on tablets, where it would reach the hairline
@@ -468,7 +471,7 @@ button:focus-visible {
 }
 
 .page-intro h1 {
-  max-width: 80%;
+  max-width: var(--title-width);
   margin: 0;
   color: var(--ink);
   font-size: var(--type-title);
@@ -941,6 +944,10 @@ button:focus-visible {
 }
 
 @media (width <= 540px) {
+  :root {
+    --title-width: 100%;
+  }
+
   .site-footer {
     display: grid;
     gap: 4px;

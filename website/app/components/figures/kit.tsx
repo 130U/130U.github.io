@@ -37,6 +37,9 @@ export function FigureCaption({ inlines }: { inlines: ArticleInline[] }) {
 
 const tone = (value: Tone) => styles[value];
 
+/** A class list of the names given, leaving out absent ones. */
+export const classes =(...names: (string | false | undefined)[]) => names.filter(Boolean).join(" ");
+
 /**
  * The shared figure frame. A figure with views renders every panel on the
  * server; the controller reveals the switch and swaps panels, and without
@@ -63,7 +66,7 @@ export function Figure({ id, title, caption, views, defaultView, viewsLabel, leg
     ? { id: manuscript.anchor, "data-manuscript-figure": id, ...manuscript.attributes }
     : { id: `figure-${id}`, "data-article-figure": id };
   return (
-    <figure className={`${styles.figure} ${className ?? ""}`} {...identity} data-figure={id} data-view={view}>
+    <figure className={classes(styles.figure, className)} {...identity} data-figure={id} data-view={view}>
       <div className={styles.frame}>
         <button type="button" className={`${zoomStyles.control} ${styles.zoom}`} data-figure-zoom aria-label="Zoom in" aria-haspopup="dialog" hidden><ZoomGlyph /></button>
         {(title || views) && (
@@ -164,7 +167,7 @@ export function Plot({ label, x, y, xTicks = [], yTicks = [], xGrid = true, xTit
     <div className={styles.plot} style={style} role="img" aria-label={label}>
       {yTitle && <span className={`${styles.pill} ${styles.yTitle}`} aria-hidden="true"><Tx>{yTitle}</Tx></span>}
       <div
-        className={`${styles.area} ${crosshair ? styles.crosshair : ""}`}
+        className={classes(styles.area, crosshair && styles.crosshair)}
         data-crosshair={crosshair ? JSON.stringify(crosshair) : undefined}
         aria-hidden="true"
       >
@@ -181,7 +184,7 @@ export function Plot({ label, x, y, xTicks = [], yTicks = [], xGrid = true, xTit
 }
 
 export function Dot({ left, top, tone: color = "ink", ring, shape, tip, className }: { left: number; top: number; tone?: Tone; ring?: boolean; shape?: "square" | "triangle"; tip?: string; className?: string }) {
-  return <span className={`${styles.dot} ${styles[color]} ${className ?? ""}`} data-ring={ring ? "" : undefined} data-shape={shape} data-tip={tip} style={{ left: `${left}%`, top: `${top}%` }} />;
+  return <span className={classes(styles.dot, styles[color], className)} data-ring={ring ? "" : undefined} data-shape={shape} data-tip={tip} style={{ left: `${left}%`, top: `${top}%` }} />;
 }
 
 /**
@@ -225,7 +228,7 @@ export function Mark({ left, top, anchor = "left", tone: color = "ink", strong, 
   const fit = wrap && !centered && room > 0 && style?.maxWidth === undefined ? { maxWidth: `min(13rem, calc(${room.toFixed(2)}% - 8px))` } : undefined;
   return (
     <span
-      className={`${styles.mark} ${styles[color]} ${strong ? styles.markStrong : ""} ${className ?? ""}`}
+      className={classes(styles.mark, styles[color], strong && styles.markStrong, className)}
       data-wrap={wrap ? "" : undefined}
       data-tag={tag ? "" : undefined}
       style={{ ...fit, ...style, left: `${left}%`, top: `${top}%`, "--ax": ax, "--ay": ay } as CSSProperties}
@@ -248,7 +251,7 @@ export function Bars({ label, stack, labelWidth, valueWidth, children, className
   className?: string;
 }) {
   const style = { "--label-w": labelWidth, "--value-w": valueWidth } as CSSProperties;
-  return <div className={`${styles.bars} ${className ?? ""}`} data-stack={stack === "narrow" ? "narrow" : stack ? "always" : undefined} style={style} role="img" aria-label={label}>{children}</div>;
+  return <div className={classes(styles.bars, className)} data-stack={stack === "narrow" ? "narrow" : stack ? "always" : undefined} style={style} role="img" aria-label={label}>{children}</div>;
 }
 
 type Rule = { at: number; tone?: "ink" | "soft" | "accent" };
@@ -273,7 +276,7 @@ export function BarRow({ label, value, valueNote, grid = [], rules = [], rowClas
   children?: ReactNode;
 }) {
   return (
-    <div className={`${styles.row} ${rowClass ?? ""}`}>
+    <div className={classes(styles.row, rowClass)}>
       <Lines grid={grid} rules={rules} />
       <div className={styles.barLabel}><span className={styles.labelText}>{typeof label === "string" ? <Tx>{label}</Tx> : label}</span></div>
       <div className={styles.track}>{children}</div>
@@ -335,7 +338,7 @@ export function Schematic({ label, size, inset, xTitle, yTitle, art, children, c
     "--pl": inset?.left !== undefined ? `${inset.left}px` : undefined,
   } as CSSProperties;
   return (
-    <div className={`${styles.schematic} ${className ?? ""}`} style={style} role="img" aria-label={label}>
+    <div className={classes(styles.schematic, className)} style={style} role="img" aria-label={label}>
       {yTitle && <span className={styles.pill} aria-hidden="true"><Tx>{yTitle}</Tx></span>}
       <div className={styles.schematicArea} style={{ aspectRatio: `${width} / ${height}` }} aria-hidden="true">
         <svg className={styles.schematicArt} viewBox={`0 0 ${width} ${height}`} focusable="false">{art}</svg>
@@ -371,11 +374,11 @@ export function Arrow({ from, to, head = 6, both, className, dash }: { from: rea
 }
 
 export function Seg({ x, from, to, tone: color, hatch, tip, className }: { x: Scale; from: number; to: number; tone: Tone; hatch?: boolean; tip?: string; className?: string }) {
-  return <span className={`${styles.seg} ${styles[color]} ${className ?? ""}`} data-hatch={hatch ? "" : undefined} data-tip={tip} style={{ left: `${x(from)}%`, width: `${Math.max(x(to) - x(from), 0)}%` }} />;
+  return <span className={classes(styles.seg, styles[color], className)} data-hatch={hatch ? "" : undefined} data-tip={tip} style={{ left: `${x(from)}%`, width: `${Math.max(x(to) - x(from), 0)}%` }} />;
 }
 
 export function Range({ x, from, to, tone: color, tip, className }: { x: Scale; from: number; to: number; tone: Tone; tip?: string; className?: string }) {
-  return <span className={`${styles.range} ${styles[color]} ${className ?? ""}`} data-tip={tip} style={{ left: `${x(from)}%`, width: `${Math.max(x(to) - x(from), 0)}%` }} />;
+  return <span className={classes(styles.range, styles[color], className)} data-tip={tip} style={{ left: `${x(from)}%`, width: `${Math.max(x(to) - x(from), 0)}%` }} />;
 }
 
 /** Format a number for a chart label without changing its value's meaning. */

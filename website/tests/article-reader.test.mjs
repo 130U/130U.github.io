@@ -91,8 +91,8 @@ test("every exported page is free of encoding corruption, exposed math markup, d
     const text = readable(page.tree);
     const labels = page.nodes.flatMap((node) => ["aria-label", "alt", "title", "placeholder"].map((name) => node.attrs.get(name) ?? "")).join(" ");
     assert.doesNotMatch(text + labels, /\uFFFD|[\u0000-\u0008\u000B\u000C\u000E-\u001F\u007F-\u009F]/u, `${route}: invalid decoded text.`);
-    // Exact common UTF-8/Windows-1252 corruption sequences, not legitimate
-    // accented Portuguese names, mathematical squares, arrows or other symbols.
+    // Exact sequences of common UTF-8/Windows-1252 corruption; accented
+    // Portuguese names, mathematical squares, arrows and other symbols pass.
     assert.doesNotMatch(text, /â€™|â€œ|â€“|â€”|â€¦|Ã©|Ã±|Ã¼|Ã¶|Ã£|Ã§/u, `${route}: recognizable encoding corruption.`);
     assert.doesNotMatch(text, /@@RESEARCH-MATH-\d+@@|\$`[^`]+`\$|\\\([\s\S]*?\\\)|\\\[[\s\S]*?\\\]|\\(?:frac|sqrt|begin|end|mathbb|operatorname|square)\b|\[[^\]\n]+\]\((?:https?:\/\/|#)[^)]+\)|\*\*[^*\n]+\*\*|```(?:math|tex|latex)?/u, `${route}: source markup leaked into visible prose.`);
     assert.equal(page.nodes.filter((node) => node.tag === "merror" || node.attrs.has("data-mjx-error")).length, 0, `${route}: MathJax error output.`);

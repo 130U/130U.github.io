@@ -4,7 +4,7 @@ import test from "node:test";
 import ts from "typescript";
 
 // Exercise the actual renderer, sampler and physics with controlled browser
-// services. Synthetic masks test composition and scheduling, not visual fidelity.
+// services. Synthetic masks test composition and scheduling.
 const base = new URL("../app/components/clarinet-hero/", import.meta.url);
 const moduleUrl = source => "data:text/javascript;base64," + Buffer.from(source).toString("base64");
 async function compile(name) {

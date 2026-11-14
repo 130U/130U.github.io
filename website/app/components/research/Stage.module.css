@@ -137,3 +137,40 @@
 .figurePanel figcaption {
   display: none;
 }
+
+@media (prefers-reduced-transparency: reduce) {
+  .scrim {
+    background: color-mix(in srgb, var(--page) 92%, transparent);
+    -webkit-backdrop-filter: none;
+    backdrop-filter: none;
+  }
+}
+
+@media (prefers-contrast: more) {
+  .scrim {
+    background: rgb(0 0 0 / 0.35);
+    -webkit-backdrop-filter: none;
+    backdrop-filter: none;
+  }
+
+  .figurePanel > figure > :first-child {
+    border-color: var(--ink);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .control,
+  .control svg {
+    transition: none;
+  }
+
+  [data-zoomed] .control [data-zoom-plus] {
+    animation-duration: 1ms;
+  }
+}
+
+@media print {
+  .control {
+    display: none;
+  }
+}

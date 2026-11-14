@@ -96,7 +96,9 @@ prose to the reading track. Structural column guides are decorative, hidden from
 assistive technology, and omitted on phones. A guide meets the content edge it marks at
 every width; the closing guide on tablets sits on the last column's end. Every page
 title starts 112px below the top of the content field on desktop and 52px below the
-header on phones.
+header on phones. A page title keeps to four fifths of its column (`--title-width`);
+at 540px and below it takes the whole column, so a long title holds a few balanced
+lines on a phone.
 
 The rail's minimum width follows the interface type size, indent, padding, and
 scrollbar allowance, so the rail, reading field, and guides reflow together when text
@@ -359,7 +361,9 @@ stay in view when they leave room for the values, and the right edge fades while
 remains.
 
 Every table carries a magnifier in the top-right corner of its frame, on the title's
-first line or on the header band. Zoom lifts the table from its place to the center of
+first line or on the header band; a table without a title that scrolls would carry its
+headings beneath it, so there the control takes a row of its own above the header.
+Zoom lifts the table from its place to the center of
 the window, on a square sheet with the page blurred behind it. The stage sets the
 largest type that keeps every row on one line: 20px, then 18px, then 16px, then closer
 columns, then headings on two lines, and only then does it wrap the sentence columns

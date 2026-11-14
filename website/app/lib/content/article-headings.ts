@@ -104,9 +104,9 @@ export function buildArticleHeadingMap(blocks: readonly ResearchBlock[]) {
   return headings;
 }
 
-// These manuscript-specific contexts have been checked against the two frozen
-// sources. Unknown text stays unchanged: matching a section number alone cannot
-// distinguish a reference to this article from a citation of somebody else's paper.
+// These manuscript-specific contexts match the two frozen sources. Unknown text
+// stays unchanged: matching a section number alone cannot distinguish a
+// reference to this article from a citation of somebody else's paper.
 const internalReferenceContexts: Readonly<Record<string, readonly string[]>> = {
   "certified-valuation-of-arithmetic-asian-options": [
     "for the contract of Section 5",

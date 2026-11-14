@@ -11,7 +11,7 @@
 }
 
 .intro h1 {
-  max-width: 80%;
+  max-width: var(--title-width);
   margin: 0;
   font-size: var(--type-title);
   font-weight: 400;

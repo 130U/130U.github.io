@@ -47,7 +47,7 @@ test("normal 60, 120 and 144 Hz RAF sequences produce identical simulation and r
   assert.ok(Math.hypot(baseline.particles[0].x - 100, baseline.particles[0].y - 200) < 0.00001);
 });
 
-test("120 and 144 Hz displays move between fixed steps instead of repeating 60 Hz positions", () => {
+test("120 and 144 Hz displays interpolate between the fixed 60 Hz steps", () => {
   for (const hz of [120, 144]) {
     const clock = createClock();
     const p = particle({ x: 114 });

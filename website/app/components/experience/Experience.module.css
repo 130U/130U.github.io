@@ -5,7 +5,7 @@
 
 .intro { margin-bottom: 80px; }
 .intro h1 {
-  max-width: 80%;
+  max-width: var(--title-width);
   margin: 0;
   font-size: var(--type-title);
   font-weight: 400;
@@ -75,7 +75,7 @@
 .detailPage { min-width: 0; }
 .detailHeader { margin-bottom: 4.5rem; }
 .detailPage .detailHeader h1 {
-  max-width: 80%;
+  max-width: var(--title-width);
   font-size: var(--type-title);
   font-weight: 400;
   line-height: var(--title-leading);

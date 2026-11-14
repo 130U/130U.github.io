@@ -2,8 +2,8 @@ import assert from "node:assert/strict";
 import { createHash } from "node:crypto";
 import { readFile, writeFile } from "node:fs/promises";
 
-// This importer deliberately supports the pinned manuscript, not arbitrary TeX.
-// Unknown prose commands fail closed; mathematical contents are never rewritten.
+// This importer reads exactly the TeX of the pinned manuscript. Unknown prose
+// commands fail closed; mathematical contents are never rewritten.
 const sourceDirectory = new URL("../content/sources/selected-research/dependence/", import.meta.url);
 const outputUrl = new URL("../content/selected-research/critical-dependence-stress-for-portfolio-diversification.json", import.meta.url);
 assert.ok(process.argv.slice(2).every((argument) => argument === "--check"), "Usage: node scripts/import-dependence-research.mjs [--check]");
