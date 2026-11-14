@@ -7,7 +7,7 @@ import { parseResearchMarkdown } from "../app/lib/content/research-markdown.ts";
 
 const SLUG = "certified-valuation-arithmetic-asian-options";
 const STUDIES = [
-  ["gap-profile.json", "05876fab0abc6b251f530eb9d97daeeb709854ea"],
+  ["gap-profile.json", "30e1676f4cc0c72d0b0dbdb1cac384c41a70370b"],
   ["euler-ladder.json", "5359e2b42d32881df6fd678301feb0051cf4095c"],
 ];
 

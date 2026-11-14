@@ -117,7 +117,7 @@ The three papers use pinned research inputs and deterministic importers:
 | Paper | Input and importer | On-site scope |
 | --- | --- | --- |
 | Critical Dependence Stress for Portfolio Diversification | `content/sources/selected-research/dependence/`; `scripts/import-dependence-research.mjs` | Abstract, chapters 1–5, references, and supporting-material links |
-| Certified Valuation of Arithmetic Asian Options | `content/sources/selected-research/asian-source.md` and the study results in `asian-studies/`; `scripts/import-selected-research.mjs` | Abstract, chapters 1–10 with their four figures, references, and supporting-material links |
+| Certified Valuation of Arithmetic Asian Options | `content/sources/selected-research/asian-source.md` and the study results in `asian-studies/`; `scripts/import-selected-research.mjs` | Abstract, chapters 1–9 with their four figures, references, and supporting-material links |
 | Certified Joint Pricing Errors in Rough Heston | `content/sources/selected-research/rough-source.md`; `scripts/import-selected-research.mjs` | Abstract, chapters 1–8, references, and supporting-material links |
 
 ```sh

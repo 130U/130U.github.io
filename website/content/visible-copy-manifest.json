@@ -427,9 +427,9 @@
       "formulaCount": 1025
     },
     "/certified-valuation-arithmetic-asian-options/": {
-      "textSha256": "ecf25e0c996b7ee2c94745d49750ef2e99b8a22adac7b33bad37451e210fedd2",
-      "characterCount": 71949,
-      "wordCount": 11803,
+      "textSha256": "db52a929f980f763b53f960be8349e180604339e3b9fec9b29987d8e7437428a",
+      "characterCount": 69537,
+      "wordCount": 11398,
       "preview": "Skip to Main Content Theodore Ouyang Back to Selected Research Certified Valuation of Arithmetic Asian Options GitHub Full Manuscript Abstract An arithmetic Asi",
       "altTexts": [],
       "ariaLabels": [
@@ -586,7 +586,6 @@
         "Scrollable mathematical expression",
         "Zoom in",
         "Research data table",
-        "Scrollable mathematical expression",
         "Show the width budget, the change at the finest step or the interval for the Euler gap",
         "Change in width from h=1/768 to h=1/1536: cost of the kink −0.000307, projection −0.000008, frequency tail under Q +0.000383; width from 0.021667063872 to 0.021734290027.",
         "Width contributions by Euler step. h=1/384: width 0.028009519599, 95.5% from the cost of the kink. h=1/768: 0.021667063872, 94.5%. h=1/1536: 0.021734290027, 92.8%.",
@@ -681,9 +680,7 @@
         "Mathematical equation",
         "Scrollable mathematical expression",
         "Scrollable mathematical expression",
-        "Mathematical equation",
-        "Scrollable mathematical expression",
-        "Scrollable mathematical expression"
+        "Mathematical equation"
       ],
       "metadata": {
         "title": "Certified Valuation of Arithmetic Asian Options | Theodore Ouyang",
@@ -695,8 +692,8 @@
         "twitterTitle": "Certified Valuation of Arithmetic Asian Options",
         "twitterDescription": "The cost of exercising an arithmetic Asian option on the geometric average: a proved bound, its cubic law in Black's model, and a certified Heston price interval with its Euler discretization error."
       },
-      "mathSourceSha256": "700c24d4cbdc10fc36daab5b07d3cb2b310965c50da462801c2fd60dd6053e70",
-      "formulaCount": 763
+      "mathSourceSha256": "1271725ab3eecb5de9bf342e34b34c6bc6f5ff76b70bad2a1b6a78482f6d69c8",
+      "formulaCount": 751
     },
     "/certified-rough-heston-valuation/": {
       "textSha256": "da70706d555411d5044864e1025dd270e4284f067456253d6e7bbfcc84cb134c",

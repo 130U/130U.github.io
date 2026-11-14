@@ -105,7 +105,7 @@ test("linking is limited to audited article contexts and never changes mathemati
   const roadmap = blocks.find((block) => block.type === "paragraph" && block.source.startsWith("Section 7 carries the fixed-parameter bounds"));
   const linked = linkArticleSectionReferences(roadmap.inlines, ASIAN, map);
   assert.equal(text(linked), text(roadmap.inlines));
-  assert.deepEqual(links(linked).map((link) => text(link.inlines)), ["7", "8", "9"]);
+  assert.deepEqual(links(linked).map((link) => text(link.inlines)), ["7", "8"]);
   assert.deepEqual(linkArticleSectionReferences(roadmap.inlines, "unreviewed-source", map), roadmap.inlines);
   const rough = manuscript(ROUGH);
   const pair = rough.find((block) => block.type === "paragraph" && block.source.startsWith("Section 2 defines the exact problem."));

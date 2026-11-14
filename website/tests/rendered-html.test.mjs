@@ -564,7 +564,7 @@ test("About research opens each complete paper through an explicit Read More lin
   assert.deepEqual(researchEntries, ["critical-dependence-stress-for-portfolio-diversification", "certified-valuation-arithmetic-asian-options", "certified-rough-heston-valuation"]);
   for (const [slug, title, description, tables, sections, repository] of [
     ["critical-dependence-stress-for-portfolio-diversification", "Critical Dependence Stress for Portfolio Diversification", "I prove that the critical stress budget is quadratic in the trade size", 0, 5, "Critical-Dependence-Stress"],
-    ["certified-valuation-arithmetic-asian-options", "Certified Valuation of Arithmetic Asian Options", "the bound is below a hundredth of a cent per barrel", 11, 10, "certified-valuation-arithmetic-asian-options"],
+    ["certified-valuation-arithmetic-asian-options", "Certified Valuation of Arithmetic Asian Options", "the bound is below a hundredth of a cent per barrel", 11, 9, "certified-valuation-arithmetic-asian-options"],
     ["certified-rough-heston-valuation", "Certified Joint Pricing Errors in Rough Heston", "the joint bounds bring all 28 spread, butterfly and basket positions tested within a half-point error budget", 13, 8, "certified-rough-heston-valuation"],
   ]) {
     assert.match(about, new RegExp(`id="${slug}"`, "u"));
