@@ -169,6 +169,11 @@
   gap: 7px;
 }
 
+/* A formula in a label keeps its width; the words beside it wrap. */
+.legend li [data-research-formula] {
+  flex: none;
+}
+
 .swatch {
   flex: none;
   width: 10px;
