@@ -103,11 +103,11 @@
     {
       "slug": "certified-rough-heston-valuation",
       "fetchedAt": "2026-11-14",
-      "sourceUrl": "https://github.com/130U/certified-rough-heston-valuation/blob/5460e487a85e8d164db47f55aae666e593790895/manuscript/merged-heston-en.md",
-      "sourceCommit": "5460e487a85e8d164db47f55aae666e593790895",
+      "sourceUrl": "https://github.com/130U/certified-rough-heston-valuation/blob/64b8ef2bbff044e93ded82d2694bf1afe8d92b41/manuscript/merged-heston-en.md",
+      "sourceCommit": "64b8ef2bbff044e93ded82d2694bf1afe8d92b41",
       "sourceBlob": "b25e5531b9a3d120732c276f3779e520b8968f58",
       "sourceSha256": "27e1ed0f64ff23003d1a846996abcd185e547b16ade501c9c2bbf925ccb70139",
-      "importedMarkdownSha256": "b46c3f3b527ed9f00d8ec33d3f182dc2421584713118b8e540ba087d0df879ec",
+      "importedMarkdownSha256": "114372b91cc43b1a8de0fb1ac425006ba4ef66df38291443a33f535f1932bbf8",
       "includedHeadings": [
         "Abstract",
         "1. Introduction",
@@ -176,17 +176,17 @@
       ],
       "studies": [
         {
-          "sourceUrl": "https://github.com/130U/certified-rough-heston-valuation/blob/5460e487a85e8d164db47f55aae666e593790895/science/baseline/finite-history/finite-history-nodes-alpha-13_25.json",
+          "sourceUrl": "https://github.com/130U/certified-rough-heston-valuation/blob/64b8ef2bbff044e93ded82d2694bf1afe8d92b41/science/baseline/finite-history/finite-history-nodes-alpha-13_25.json",
           "sourceBlob": "c6ae3634bd49abcf1ce00f1abc9cd1e9648acdb6",
           "sourceSha256": "a0b2df22264e111b177541383eecf01bba63f47aac6296c3428f832a0c5ceca7"
         },
         {
-          "sourceUrl": "https://github.com/130U/certified-rough-heston-valuation/blob/5460e487a85e8d164db47f55aae666e593790895/science/baseline/frontier/transfer-time-local-nodes.json",
+          "sourceUrl": "https://github.com/130U/certified-rough-heston-valuation/blob/64b8ef2bbff044e93ded82d2694bf1afe8d92b41/science/baseline/frontier/transfer-time-local-nodes.json",
           "sourceBlob": "085f5093feb64a2d51bfea8e25e5090875b78345",
           "sourceSha256": "60e0cc82268facc9af3523847a707e1fda5ed7142060f4bf02a648db18e839f8"
         },
         {
-          "sourceUrl": "https://github.com/130U/certified-rough-heston-valuation/blob/5460e487a85e8d164db47f55aae666e593790895/audit-experiments/portfolio-budget-counts.json",
+          "sourceUrl": "https://github.com/130U/certified-rough-heston-valuation/blob/64b8ef2bbff044e93ded82d2694bf1afe8d92b41/audit-experiments/portfolio-budget-counts.json",
           "sourceBlob": "c54490b525090394fec3773dc497a5cc6ff463a0",
           "sourceSha256": "8655215cef79ab6995f4472bd64fcd2e21b6daf5824d30d4b27c819520cfaf20"
         }

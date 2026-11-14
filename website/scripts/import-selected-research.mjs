@@ -21,7 +21,7 @@ const sources = [
   },
   {
     key: "rough", slug: "certified-rough-heston-valuation", file: "manuscript/merged-heston-en.md",
-    sourceCommit: "5460e487a85e8d164db47f55aae666e593790895", sourceBlob: "b25e5531b9a3d120732c276f3779e520b8968f58",
+    sourceCommit: "64b8ef2bbff044e93ded82d2694bf1afe8d92b41", sourceBlob: "b25e5531b9a3d120732c276f3779e520b8968f58",
     sourceEditedAt: "2026-11-14T01:39:13-05:00", fetchedAt: "2026-11-14", mainSections: 8,
     appendixAnchor: "appendix-a-rescaled-variables-model-and-transform",
     description: "A method for certifying portfolio valuation errors in rough Heston, carrying continuous Riccati residual bounds through to complete pricing guarantees.",
