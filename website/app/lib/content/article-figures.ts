@@ -38,43 +38,45 @@ const articleFigures: Readonly<Record<string, readonly FigurePlacement[]>> = {
   "certified-rough-heston-valuation": [
     {
       figure: "heston-stages",
-      after: { paragraph: "Finite-history propagation reduces the H0 complete bound" },
+      after: { paragraph: "The step from H0 to H1 changes one thing." },
       evidence: [
-        "H0: Six months: global state propagation | 1.397612096 | — | One-point budget not met",
-        "H1: Six months: finite history, same global residual | 0.378598956 | — | Principal propagation improvement; unchanged output and centre",
-        "H2: Six months: local envelope, same reference nodes | 0.367258782 | — | About 3% further bound reduction",
-        "H3: Six months: all finite high nodes, global envelope | 0.132245064 | 0.158585551 | High-frequency certification and centre change are included",
-        "H4: Six months: all finite high nodes, local envelope | 0.115215934 | 0.137896018 | Both methods certify 0.25 points",
-        "Q0: Three months: through 64, global envelope | 1.207557898 | 1.545191542 | 0.25-point budget not met",
-        "Q1: Three months: through 128, global envelope | 0.351318692 | 0.408293698 | 0.25-point budget not met",
-        "Q2: Three months: through 128, local envelope | 0.233318843 | 0.252393939 | Only the joint method certifies 0.25 points",
-      ],
-    },
-    {
-      figure: "heston-candidates",
-      after: { paragraph: "The unresolved close pairs in the first layer" },
-      evidence: [
-        "0.520 | [4.825094, 6.778350] | [5.293449, 6.024095]",
-        "0.525 | [5.645378, 7.501414] | [6.097920, 6.798485]",
-        "0.530 | [6.748974, 8.517584] | [7.187004, 7.859529]",
-        "0.540 | [9.807435, 11.422182] | [10.218707, 10.839486]",
-        "0.550 | [14.000658, 15.482012] | [14.387007, 14.960680]",
-        "N_t=1024 | 7/10 | 3/10",
-        "N_t=2048 | 10/10 | 7/10",
-        "The final finite grid has alpha=0.520 as a strict minimum.",
+        "| H0: six months, uniform state bound | 1.397612096 | 2.679930311 | none |",
+        "| H1: six months, Theorem 3.1, global residual | 0.378598956 | 0.476401716 | 1/2 point, both |",
+        "| H2: six months, Theorem 3.1, 128 time bins | 0.367258782 | — | 1/2 point |",
+        "| H3: six months, reference through 128, upper band global | 0.132245064 | 0.158585551 | 1/4 point, both |",
+        "| H4: six months, reference through 128, 128 bins | 0.115215934 | 0.137896018 | 1/4 point, both |",
+        "| Q0: three months, reference through 64, global | 1.207557898 | 1.545191542 | none |",
+        "| Q1: three months, reference through 128, global | 0.351318692 | 0.408293698 | 1/2 point, both |",
+        "| Q2: three months, reference through 128, 128 bins | 0.233318843 | 0.252393939 | 1/4 point, joint only |",
+        "H1 applies (3.5), which weights each residual by the forward variance that remains. The complete bound falls by 72.91 per cent.",
       ],
     },
     {
       figure: "heston-ledger",
-      after: { paragraph: "The joint complete bound is 0.233318843 points" },
+      after: { paragraph: "Netting lowers the node term by 30 per cent" },
       evidence: [
-        "Absolute centre charge | 0.149775146827 | 0.149775146827",
-        "Used-node support | 0.045461793432 | 0.064536889507",
-        "Strip remainder | 0.000026654230 | 0.000026654230",
-        "True infinite-tail remainder | 0.038055248032 | 0.038055248032",
-        "Complete upper bound | 0.233318843 | 0.252393939",
-        "The difference 0.019075095 points is entirely the node-support aggregation difference.",
-        "1025 node radii",
+        "| Absolute centre \\(|w^\\top d|\\) | 0.149775147 | 0.149775147 |",
+        "| Node support, 1,025 nodes | 0.045461793 | 0.064536890 |",
+        "| Strip remainder | 0.000026654 | 0.000026654 |",
+        "| Exact infinite tail | 0.038055248 | 0.038055248 |",
+        "| Complete bound | 0.233318843 | 0.252393939 |",
+        "The two columns share the stored output, the reference centre, all 1,025 node radii and every remainder.",
+        "Netting lowers the node term by 30 per cent and the complete bound by 7.56 per cent, from above a quarter point to below it.",
+      ],
+    },
+    {
+      figure: "heston-candidates",
+      after: { paragraph: "At the finer level the five enclosures are disjoint and ordered" },
+      evidence: [
+        "| 0.520 | 0.020 | [4.825094, 6.778350] | [5.293449, 6.024095] |",
+        "| 0.525 | 0.025 | [5.645378, 7.501414] | [6.097920, 6.798485] |",
+        "| 0.530 | 0.030 | [6.748974, 8.517584] | [7.187004, 7.859529] |",
+        "| 0.540 | 0.040 | [9.807435, 11.422182] | [10.218707, 10.839486] |",
+        "| 0.550 | 0.050 | [14.000658, 15.482012] | [14.387007, 14.960680] |",
+        "| Pairs separated, joint | | 7 of 10 | 10 of 10 |",
+        "| Pairs separated, leg-by-leg | | 3 of 10 | 7 of 10 |",
+        "\\(\\alpha=0.520\\) is the certified minimiser on this grid",
+        "The objective is the normalised least-squares distance to the mid prices",
       ],
     },
   ],
@@ -221,7 +223,7 @@ const tableEmphasis: Readonly<Record<string, readonly TableEmphasis[]>> = {
   "verification-and-supervision-in-scientific-reasoning-tasks": [{ table: "Acceptance protocol", row: 2 }],
   "evidence-uncertainty-and-decision-guarantees-in-investment-research": [{ table: "Verification query", row: 2 }],
   "certified-rough-heston-valuation": [
-    { table: "Maturity and stage", column: 1 },
+    { table: "Maturity and certificate", column: 1 },
     { table: "Output", column: 1 },
     { table: "Component", column: 1 },
   ],
@@ -233,7 +235,9 @@ const tableEmphasis: Readonly<Record<string, readonly TableEmphasis[]>> = {
 // code/generate_mechanism_figures.py and
 // calculations/plot_profiles_and_flows.py); the Asian drawings plot the study
 // results of 130U/certified-valuation-arithmetic-asian-options at the pinned
-// commit and evaluate Proposition 4.1. `evidence` ties each drawing's labels,
+// commit and evaluate Proposition 4.1; the Rough Heston drawings plot the saved
+// banks of 130U/certified-rough-heston-valuation at the pinned commit and
+// evaluate (3.9), (5.7) and (7.1). `evidence` ties each drawing's labels,
 // plotted functions and restated values to the article text, and the build
 // fails if any is missing.
 export const manuscriptFigures: Readonly<Record<string, { figure: string; evidence: string[] }>> = {
@@ -282,6 +286,51 @@ export const manuscriptFigures: Readonly<Record<string, { figure: string; eviden
       "| $`1/768`$ | $`[-0.011024692273,\\;0.010642371599]`$ | 0.021667063872 |",
       "| $`1/1536`$ | $`[-0.010967952032,\\;0.010766337995]`$ | 0.021734290027 |",
       "$`-1.2\\cdot10^{-7}`$ for the spread with standard error $`1.2\\cdot10^{-7}`$",
+    ],
+  },
+  "/assets/research/rough/residual-kernel.png": {
+    figure: "rough-residual-kernel",
+    evidence: [
+      "the forward variance curve of the calibrated model under the pricing measure and under the half-share measure of Proposition 3.2. Six-month horizon",
+      "(\\alpha_0,V_0,\\theta,\\lambda_\\xi)=(0.5286,\\,0.0262,\\,0.0721,\\,0.5037)",
+      "\\(\\nu=0.2897\\), \\(\\rho=-0.7445\\)",
+      "W_\\lambda(t)=\\sum_{n=0}^\\infty(-\\lambda)^n\\,t^{1+n\\alpha}",
+      "since \\(\\lambda_*T^\\alpha\\approx0.075\\)",
+    ],
+  },
+  "/assets/research/rough/netting-ratio.png": {
+    figure: "rough-netting-ratio",
+    evidence: [
+      "Netting ratios of an adjacent call spread, an adjacent butterfly and an equal-weight basket of twelve calls on the strike ladder of Section 7, with the Herfindahl levels of Proposition 5.3. The shaded profile is the share of the leg-by-leg node charge carried by each frequency in the six-month certificate.",
+      "\\chi_w(u)=\\frac{|\\widehat w(u)|}{\\sum_i|w_i|\\sqrt{m_i}}\\in[0,1].",
+      "Its square root is \\(1/\\sqrt2\\approx0.707\\) for a two-leg spread, \\(\\sqrt6/4\\approx0.612\\) for a butterfly with weights \\((1,-2,1)\\), and \\(1/\\sqrt p\\) for an equal-weight basket of \\(p\\) strikes.",
+      "| Equal-weight baskets | twelve, lower six, upper six strikes | 3 | 0.076–0.156–0.221 | 0.289, 0.408 | 0.344 |",
+      "strikes 3700 to 4800 in steps of 100",
+      "We use the index level 4221.86 of that data set as the forward",
+      "three quarters of the node charge of this bank sits between \\(u=64\\) and \\(u=96\\)",
+    ],
+  },
+  "/assets/research/rough/joint-error-set.png": {
+    figure: "rough-joint-error-set",
+    evidence: [
+      "The node error set of the three-month 4400 and 4500 calls (Q2) and its bounding box, in index points. The width of the set in the direction of the spread is the joint node support of Table 4; the box gives the leg-by-leg support.",
+      "| Node support, 1,025 nodes | 0.045461793 | 0.064536890 |",
+      "each frequency contributes an ellipse to \\(\\mathcal E\\)",
+    ],
+  },
+  "/assets/research/rough/pass-counts.png": {
+    figure: "rough-pass-counts",
+    evidence: [
+      "Number of the 28 fixed six-month positions certified as a function of the tolerance, on bank H1 for three roughness candidates, from exact endpoints. The shaded area between the joint and the leg-by-leg count is the gain from netting.",
+      "| 0.52 | 1/4 | 0 | 2 |",
+      "| 0.52 | 1/2 | 13 | 28 |",
+      "| 0.52 | 1 | 28 | 28 |",
+      "| 0.60 | 1/4 | 1 | 10 |",
+      "| 0.60 | 1/2 | 22 | 28 |",
+      "| 0.60 | 1 | 28 | 28 |",
+      "| 0.90 | 1/4 | 13 | 20 |",
+      "| 0.90 | 1/2 | 25 | 25 |",
+      "| 0.90 | 1 | 27 | 28 |",
     ],
   },
   "/assets/research/dependence/tail-layer-repair.png": {

@@ -1249,6 +1249,12 @@
   border-left: 1px dotted var(--chart-green);
 }
 
+/* Rough Heston, Figure 4: one panel for each roughness candidate on a shared tolerance axis. */
+.stack {
+  display: grid;
+  gap: 22px;
+}
+
 /* Asian options, Figure 1: one marker for each simulated path inside a wedge. */
 span.pathDot {
   width: 7px;

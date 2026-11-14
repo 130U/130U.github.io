@@ -314,11 +314,13 @@ draws in once as it scrolls into view, except under reduced motion. Every plotte
 restates the manuscript, and conceptual figures carry no numeric scale. Titles,
 captions, legends, and axis names use sentence case; view switches use title case.
 Captions state what the figure shows in the article's own terms. The four manuscript
-figures of the dependence article and the four of the Asian article are drawn the same
-way, from the manuscript's formulas and its pinned study results, with the manuscript's
-captions below them. A scatter is a field of gray points with the paths that matter as
-toned markers; a leading term is a dotted line beside its solid curve; circles, squares
-and triangles keep the roles a caption gives them.
+figures of each of the three papers are drawn the same way, from the manuscript's
+formulas and its pinned results, with the manuscript's captions below them. A scatter is
+a field of gray points with the paths that matter as toned markers; a leading term is a
+dotted line beside its solid curve; circles, squares and triangles keep the roles a
+caption gives them. Two bounds on one quantity are two solid curves in distinct tones
+with the gap between them tinted, and a comparison across candidates stacks one panel
+for each on a shared axis.
 
 ### Research tables
 

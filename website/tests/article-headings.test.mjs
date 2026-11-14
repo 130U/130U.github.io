@@ -51,32 +51,35 @@ test("every manuscript heading reads as plain text, and heading mathematics stop
   assert.throws(() => formatArticleHeading(mathematical), /reviewed plain-text label/u, "Notation must not silently lose its mathematical structure in the directory.");
 });
 
-test("contextual subsection letters include the unnumbered rough-Heston heading without inventing a source number", () => {
-  const blocks = manuscript(ROUGH);
-  const contextual = formatArticleHeadings(blocks);
-  const sourceMap = buildArticleHeadingMap(blocks);
-  const unnumbered = contextual.get(blocks.find((block) => block.source === "### Verification scope and mathematical work").id);
-  assert.equal(unnumbered.text, "F. Verification scope and mathematical work");
-  assert.equal(unnumbered.referenceLabel, "VII.F.");
-  assert.equal(unnumbered.sourceNumber, undefined);
-  assert.equal(sourceMap.get("3.1").id, blocks.find((block) => block.type === "heading" && block.source.startsWith("### 3.1.")).id);
+test("subsection letters follow page order, with or without a source number", () => {
+  const unnumbered = parseResearchMarkdown("## 7. Evidence\n\n### 7.1. Data\n\n### Verification duties\n\n### 7.2. Results");
+  const contextual = formatArticleHeadings(unnumbered);
+  const [, , duties, results] = unnumbered;
+  assert.equal(contextual.get(duties.id).text, "B. Verification duties");
+  assert.equal(contextual.get(duties.id).referenceLabel, "VII.B.");
+  assert.equal(contextual.get(duties.id).sourceNumber, undefined);
+  assert.equal(contextual.get(results.id).referenceLabel, "VII.C.");
+  assert.equal(buildArticleHeadingMap(unnumbered).get("7.2").id, results.id);
+  const rough = manuscript(ROUGH);
+  const sourceMap = buildArticleHeadingMap(rough);
+  assert.equal(sourceMap.get("3.1").id, rough.find((block) => block.type === "heading" && block.source.startsWith("### 3.1.")).id);
   assert.equal(sourceMap.get("3.1").referenceLabel, "III.A.");
   assert.equal(sourceMap.get("7.3").referenceLabel, "VII.C.");
-  assert.equal(sourceMap.get("7.5").referenceLabel, "VII.E.");
-  assert.equal(sourceMap.get("7.6").referenceLabel, "VII.G.");
-  assert.equal(sourceMap.get("7.7").referenceLabel, "VII.H.");
-  assert.equal(contextual.size, blocks.filter((block) => block.type === "heading").length);
-  const asian = manuscript(ASIAN);
-  const asianContext = formatArticleHeadings(asian);
-  for (const heading of asian.filter((block) => block.type === "heading")) {
-    assert.deepEqual(asianContext.get(heading.id), formatArticleHeading(heading), "Asian headings already follow their source subsection sequence.");
+  assert.equal(sourceMap.get("7.7").referenceLabel, "VII.G.");
+  for (const slug of [ASIAN, ROUGH]) {
+    const blocks = manuscript(slug);
+    const context = formatArticleHeadings(blocks);
+    assert.equal(context.size, blocks.filter((block) => block.type === "heading").length);
+    for (const heading of blocks.filter((block) => block.type === "heading")) {
+      assert.deepEqual(context.get(heading.id), formatArticleHeading(heading), `${slug}: headings follow their source subsection sequence.`);
+    }
   }
 });
 
-test("compound internal references retain original numbers and link each precise endpoint", () => {
+test("internal references retain original numbers and link each precise endpoint", () => {
   const blocks = manuscript(ROUGH);
   const map = buildArticleHeadingMap(blocks);
-  const introduction = blocks.find((block) => block.type === "paragraph" && block.source.startsWith("Section 2 defines the exact problem."));
+  const introduction = blocks.find((block) => block.type === "paragraph" && block.source.startsWith("Section 2 states the pricing problem."));
   const linked = linkArticleSectionReferences(introduction.inlines, ROUGH, map);
   assert.equal(text(linked), text(introduction.inlines));
   assert.deepEqual(links(linked).map((link) => text(link.inlines)), ["2", "3", "4", "5", "6", "7"]);
@@ -91,7 +94,7 @@ test("external sections, existing citation labels, equation and theorem numbers 
   for (const slug of [ASIAN, ROUGH]) {
     const blocks = manuscript(slug);
     const map = buildArticleHeadingMap(blocks);
-    const external = blocks.filter((block) => block.type === "paragraph" && /^(?:Geometric conditioning starts with Curran|Ben Hammouda et al\.|15\. \*\*BL2025|16\. \*\*BenHammouda2026)/u.test(block.source));
+    const external = blocks.filter((block) => block.type === "paragraph" && /^(?:Geometric conditioning starts with Curran|The setting is one that supervisors already describe in portfolio terms)/u.test(block.source));
     assert.ok(external.length > 0);
     for (const block of external) assert.deepEqual(linkArticleSectionReferences(block.inlines, slug, map), block.inlines);
     const specimen = parseResearchMarkdown("Theorem 4.1 and equation (4.1); Section 7.3 of an unspecified paper. $`x_{7.3}=1`$ [Section 3.3](https://example.com/paper)")[0].inlines;
@@ -108,10 +111,10 @@ test("linking is limited to audited article contexts and never changes mathemati
   assert.deepEqual(links(linked).map((link) => text(link.inlines)), ["7", "8"]);
   assert.deepEqual(linkArticleSectionReferences(roadmap.inlines, "unreviewed-source", map), roadmap.inlines);
   const rough = manuscript(ROUGH);
-  const pair = rough.find((block) => block.type === "paragraph" && block.source.startsWith("Section 2 defines the exact problem."));
+  const outline = rough.find((block) => block.type === "paragraph" && block.source.startsWith("Section 2 states the pricing problem."));
   const incomplete = buildArticleHeadingMap(rough); incomplete.delete("4");
-  const partial = linkArticleSectionReferences(pair.inlines, ROUGH, incomplete);
-  assert.ok(!links(partial).some((link) => text(link.inlines) === "3"), "An unresolved pair must remain entirely unlinked.");
+  const partial = linkArticleSectionReferences(outline.inlines, ROUGH, incomplete);
+  assert.deepEqual(links(partial).map((link) => text(link.inlines)), ["2", "3", "5", "6", "7"], "A reference to a section the page lacks stays plain text.");
   const dispersion = blocks.find((block) => block.type === "paragraph" && block.source.includes("(Section 4), so"));
   const dispersionLinked = linkArticleSectionReferences(dispersion.inlines, ASIAN, map);
   assert.deepEqual(links(dispersionLinked).map((link) => text(link.inlines)), ["4", "5"]);
