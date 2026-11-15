@@ -15,8 +15,8 @@ function withoutArticleFigures(html) {
 }
 
 const PROJECTS = [
-  { key: "asian", slug: "certified-valuation-of-arithmetic-asian-options", repository: "certified-valuation-arithmetic-asian-options", commit: "37212915410d2d9b9062f476127fe0fe0798d5b8", blob: "caf0a8187cadb73b7a501a135cc3159cb40cd73c", sections: 9, tables: 11, formulas: 724, figures: "asian" },
-  { key: "rough", slug: "certified-joint-pricing-errors-in-rough-heston", repository: "certified-rough-heston-valuation", commit: "a2551a6153fe737f041d1cec6223e9a94be88102", blob: "a24095caeb7bd8f44144ccf16e737af22bfaf02b", sections: 8, tables: 10, formulas: 437, figures: "rough" },
+  { key: "asian", slug: "certified-valuation-of-arithmetic-asian-options", repository: "certified-valuation-arithmetic-asian-options", commit: "1f2877045619fc41e27b0a25097b3ed54bb725f8", blob: "88ec73c2037b6907252d0c8166a0fd9f24a70046", sections: 9, tables: 11, formulas: 724, figures: "asian" },
+  { key: "rough", slug: "certified-joint-pricing-errors-in-rough-heston", repository: "certified-rough-heston-valuation", commit: "c2a4908a5f1672d01a8b39cd3d677bc9fbf7f8d4", blob: "c6f0450110e18cdbb04f126a6de8afcbf462c069", sections: 8, tables: 10, formulas: 437, figures: "rough" },
 ];
 
 function sourceFormulas(markdown) {

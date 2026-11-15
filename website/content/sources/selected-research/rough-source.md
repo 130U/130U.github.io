@@ -1818,6 +1818,12 @@ For the matched propagation experiment of Table 3, the separate reader reads all
 
 The weighted sum of that experiment has \(513\times128=65{,}664\) terms and 129 cumulative endpoint enclosures, with twelve outer series terms for each endpoint and sixty-four inner terms.
 
+## Declarations
+
+### Use of artificial intelligence
+
+In accordance with editorial policies on the use of artificial intelligence, the author reports using DeepSeek to assist with brainstorming, literature review, language editing, and adversarial stress-testing. The author independently verified all mathematical arguments, derivations, and cited references, and assumes full responsibility for all content.
+
 ## References
 
 Abi Jaber, E. (2019). Lifting the Heston model. *Quantitative Finance* 19(12), 1995–2013.
