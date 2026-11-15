@@ -3,12 +3,12 @@
   "sources": [
     {
       "slug": "certified-valuation-of-arithmetic-asian-options",
-      "fetchedAt": "2026-11-14",
-      "sourceUrl": "https://github.com/130U/certified-valuation-arithmetic-asian-options/blob/37212915410d2d9b9062f476127fe0fe0798d5b8/manuscript/report.md",
-      "sourceCommit": "37212915410d2d9b9062f476127fe0fe0798d5b8",
-      "sourceBlob": "caf0a8187cadb73b7a501a135cc3159cb40cd73c",
-      "sourceSha256": "65291b5808e760f5792c700c5d13d2448778a640e753d071c43b5b45bf3dfa31",
-      "importedMarkdownSha256": "e75309e001794d863d12d1901dce8dc8bfef22d2fea14c0501a9fc7d947835c6",
+      "fetchedAt": "2026-11-15",
+      "sourceUrl": "https://github.com/130U/certified-valuation-arithmetic-asian-options/blob/1f2877045619fc41e27b0a25097b3ed54bb725f8/manuscript/report.md",
+      "sourceCommit": "1f2877045619fc41e27b0a25097b3ed54bb725f8",
+      "sourceBlob": "88ec73c2037b6907252d0c8166a0fd9f24a70046",
+      "sourceSha256": "dfe8216e88243f92647a40500ee19c566b64396d66241fb1d4e17a4038fff1b0",
+      "importedMarkdownSha256": "bed378d568386781cbe9376f64f861014b40d075bf97e8f8ecfcd8b0abb50879",
       "includedHeadings": [
         "Abstract",
         "1. Introduction",
@@ -88,12 +88,12 @@
       ],
       "studies": [
         {
-          "sourceUrl": "https://github.com/130U/certified-valuation-arithmetic-asian-options/blob/37212915410d2d9b9062f476127fe0fe0798d5b8/studies/results/gap-profile.json",
+          "sourceUrl": "https://github.com/130U/certified-valuation-arithmetic-asian-options/blob/1f2877045619fc41e27b0a25097b3ed54bb725f8/studies/results/gap-profile.json",
           "sourceBlob": "30e1676f4cc0c72d0b0dbdb1cac384c41a70370b",
           "sourceSha256": "c90aa118de02bff2d85bf816639e9b9883d47de60f829dc7085e0321931d8bac"
         },
         {
-          "sourceUrl": "https://github.com/130U/certified-valuation-arithmetic-asian-options/blob/37212915410d2d9b9062f476127fe0fe0798d5b8/studies/results/euler-ladder.json",
+          "sourceUrl": "https://github.com/130U/certified-valuation-arithmetic-asian-options/blob/1f2877045619fc41e27b0a25097b3ed54bb725f8/studies/results/euler-ladder.json",
           "sourceBlob": "5359e2b42d32881df6fd678301feb0051cf4095c",
           "sourceSha256": "8df582b58273fe949af1e892fcfe987c5dafe69425bd0ab76b3a219907d05e1f"
         }
@@ -102,12 +102,12 @@
     },
     {
       "slug": "certified-joint-pricing-errors-in-rough-heston",
-      "fetchedAt": "2026-11-14",
-      "sourceUrl": "https://github.com/130U/certified-rough-heston-valuation/blob/a2551a6153fe737f041d1cec6223e9a94be88102/manuscript/merged-heston-en.md",
-      "sourceCommit": "a2551a6153fe737f041d1cec6223e9a94be88102",
-      "sourceBlob": "a24095caeb7bd8f44144ccf16e737af22bfaf02b",
-      "sourceSha256": "587fd2af9b78d51953151859e994af01045e23e3b7179de87a5a56d5a87ca982",
-      "importedMarkdownSha256": "b829a080547f403d6af781d60e60581d242b708bbf25a8300f1708e91c6e0783",
+      "fetchedAt": "2026-11-15",
+      "sourceUrl": "https://github.com/130U/certified-rough-heston-valuation/blob/c2a4908a5f1672d01a8b39cd3d677bc9fbf7f8d4/manuscript/merged-heston-en.md",
+      "sourceCommit": "c2a4908a5f1672d01a8b39cd3d677bc9fbf7f8d4",
+      "sourceBlob": "c6f0450110e18cdbb04f126a6de8afcbf462c069",
+      "sourceSha256": "70801fca9552ff8004afc283c30ac567ac86b25f47886f7c8cddbae2fd544ff2",
+      "importedMarkdownSha256": "f026e6e75f8f030dec9b5768b6c1ed893f6b621458dfb13b9826a5e769c543ac",
       "includedHeadings": [
         "Abstract",
         "1. Introduction",
@@ -176,17 +176,17 @@
       ],
       "studies": [
         {
-          "sourceUrl": "https://github.com/130U/certified-rough-heston-valuation/blob/a2551a6153fe737f041d1cec6223e9a94be88102/science/baseline/finite-history/finite-history-nodes-alpha-13_25.json",
+          "sourceUrl": "https://github.com/130U/certified-rough-heston-valuation/blob/c2a4908a5f1672d01a8b39cd3d677bc9fbf7f8d4/science/baseline/finite-history/finite-history-nodes-alpha-13_25.json",
           "sourceBlob": "c6ae3634bd49abcf1ce00f1abc9cd1e9648acdb6",
           "sourceSha256": "a0b2df22264e111b177541383eecf01bba63f47aac6296c3428f832a0c5ceca7"
         },
         {
-          "sourceUrl": "https://github.com/130U/certified-rough-heston-valuation/blob/a2551a6153fe737f041d1cec6223e9a94be88102/science/baseline/frontier/transfer-time-local-nodes.json",
+          "sourceUrl": "https://github.com/130U/certified-rough-heston-valuation/blob/c2a4908a5f1672d01a8b39cd3d677bc9fbf7f8d4/science/baseline/frontier/transfer-time-local-nodes.json",
           "sourceBlob": "085f5093feb64a2d51bfea8e25e5090875b78345",
           "sourceSha256": "60e0cc82268facc9af3523847a707e1fda5ed7142060f4bf02a648db18e839f8"
         },
         {
-          "sourceUrl": "https://github.com/130U/certified-rough-heston-valuation/blob/a2551a6153fe737f041d1cec6223e9a94be88102/audit-experiments/portfolio-budget-counts.json",
+          "sourceUrl": "https://github.com/130U/certified-rough-heston-valuation/blob/c2a4908a5f1672d01a8b39cd3d677bc9fbf7f8d4/audit-experiments/portfolio-budget-counts.json",
           "sourceBlob": "c54490b525090394fec3773dc497a5cc6ff463a0",
           "sourceSha256": "8655215cef79ab6995f4472bd64fcd2e21b6daf5824d30d4b27c819520cfaf20"
         }
