@@ -62,7 +62,7 @@ or a detail page from its category. The export holds the content
 routes (About, Coursework, three Selected Research articles, Experience and its eighteen
 entries, Blog, and one page per post), the architecture viewer, and the 404 page. A work that a
 post presents is published on this domain at its own address named after the work, as
-The Étude Sky is at `/etude-sky/`.
+The Étude Sky is at `/BLOG-Etude-Sky/`.
 
 ### Blog
 
@@ -76,7 +76,7 @@ written as `![caption](/assets/blog/<slug>/<image>.jpg "alt")`. `app/lib/content
 rejects anything else at build time. Images live in `public/assets/blog/<slug>/` and
 are sized for a 2× display of the 576px column.
 
-A work presented by a post, such as The Étude Sky (`130U/etude-sky`), is a separate
+A work presented by a post, such as The Étude Sky (`130U/BLOG-Etude-Sky`), is a separate
 repository published by GitHub Pages under this domain at `/<repository>/`; this
 repository links to it and never builds it. Routes, the sitemap, and the tests follow
 the files in `content/blog/`, and every image in `public/assets/blog/` must be cited by

@@ -6,7 +6,7 @@ hero: /assets/blog/the-etude-sky/plates.jpg
 heroAlt: The twenty-four plates of The Étude Sky, Op. 10 in the upper two rows and Op. 25 in the lower two
 image: /assets/blog/the-etude-sky/og.jpg
 imageAlt: The Étude Sky: Chopin's twenty-four études, charted as stars
-work: /etude-sky/
+work: /BLOG-Etude-Sky/
 workDescription: Chopin's twenty-four études, charted as stars
 ---
 
