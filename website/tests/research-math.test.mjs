@@ -8,10 +8,10 @@ import { RESEARCH_MATH_GUTTER_EM, RESEARCH_MATH_ROW_SPACING_EM, normalizeResearc
 
 const ROOT = fileURLToPath(new URL("../", import.meta.url));
 const PROJECTS = [
-  ["statistical-inference-and-resource-allocation-in-expert-data-production", 140],
-  ["task-validity-in-financial-synthetic-data", 98],
-  ["verification-and-supervision-in-scientific-reasoning-tasks", 121],
-  ["evidence-uncertainty-and-decision-guarantees-in-investment-research", 126],
+  ["statistical-inference-and-resource-allocation-in-expert-data-production", 167],
+  ["task-validity-in-financial-synthetic-data", 148],
+  ["verification-and-supervision-in-scientific-reasoning-tasks", 175],
+  ["evidence-uncertainty-and-decision-guarantees-in-investment-research", 176],
 ];
 
 function decodeXml(value) {
@@ -68,7 +68,7 @@ function assertCompleteFormula(rendered, tex) {
   }
 }
 
-test("all 485 reviewed formulas have complete vector glyphs and exact accessible TeX", async () => {
+test("all 666 reviewed formulas have complete vector glyphs and exact accessible TeX", async () => {
   let total = 0;
   const mathematicalPaths = [];
   for (const [slug, expected] of PROJECTS) {
@@ -82,13 +82,13 @@ test("all 485 reviewed formulas have complete vector glyphs and exact accessible
       mathematicalPaths.push(glyphPaths(rendered.svg).filter(({ code }) => code !== "2C" && code !== "2E"));
       assert.equal(tagCount(rendered.mathml, "mfrac"), (tex.match(/\\(?:t|d)?frac(?![A-Za-z])/gu) ?? []).length, `${slug} must preserve each fraction`);
       assert.equal(tagCount(rendered.mathml, "msqrt"), (tex.match(/\\sqrt(?![A-Za-z])/gu) ?? []).length, `${slug} must preserve each square root`);
-      assert.equal(tagCount(rendered.mathml, "mover"), (tex.match(/\\(?:bar|overline|hat|widehat|tilde|widetilde)(?![A-Za-z])/gu) ?? []).length, `${slug} must preserve each source accent`);
+      assert.equal(tagCount(rendered.mathml, "mover"), (tex.match(/\\(?:bar|overline|hat|widehat|tilde|widetilde|xrightarrow(?!\[))(?![A-Za-z])/gu) ?? []).length, `${slug} must preserve each source accent and labelled arrow`);
       assert.equal(tagCount(rendered.mathml, "mlabeledtr"), (tex.match(/\\tag(?![A-Za-z])/gu) ?? []).length, `${slug} must preserve each equation number`);
     }
     total += formulas.length;
   }
-  assert.equal(total, 485);
-  assert.equal(createHash("sha256").update(JSON.stringify(mathematicalPaths)).digest("hex"), "6b4a25d027210cb196ecde66fb106062e894b1eb964cec59475f6bdef9386869", "All mathematical glyphs must retain the reviewed shapes and order");
+  assert.equal(total, 666);
+  assert.equal(createHash("sha256").update(JSON.stringify(mathematicalPaths)).digest("hex"), "a9c1101656a436c7edb2e4a3c670fcbe01652dc0a00799451846d22dc53687e4", "All mathematical glyphs must retain the reviewed shapes and order");
 });
 
 test("display punctuation normalization changes only true sentence and equation-row termini", () => {

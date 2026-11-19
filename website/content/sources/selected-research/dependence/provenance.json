@@ -1,10 +1,10 @@
 {
-  "repositoryUrl": "https://github.com/130U/Critical-Dependence-Stress",
-  "sourceUrl": "https://github.com/130U/Critical-Dependence-Stress/blob/1b034c8c7179a6054f19be1161f47a8f74b20bfc/paper/paper.pdf",
+  "repositoryUrl": "https://github.com/130U/RESEARCH-Critical-Dependence-Stress",
+  "sourceUrl": "https://github.com/130U/RESEARCH-Critical-Dependence-Stress/blob/bacd66b09e1f66a135360a960943a6df7572ad88/paper/paper.pdf",
   "sourceTitle": "Critical Dependence Stress for Diversification Gains under Fixed Marginals",
-  "sourceCommit": "1b034c8c7179a6054f19be1161f47a8f74b20bfc",
+  "sourceCommit": "bacd66b09e1f66a135360a960943a6df7572ad88",
   "sourceBlob": "e9efa283fc4b8efe2cac0ca483fa3e5da81e01e5",
-  "sourceEditedAt": "2026-11-15T16:17:58-05:00",
+  "sourceEditedAt": "2026-11-19T00:47:42-05:00",
   "fetchedWith": "Authenticated Git checkout at the exact commit; git show bytes checked against Git blob SHA-1",
   "sourceFiles": [
     {
@@ -347,7 +347,7 @@
   "crossReferences": [
     {
       "label": "eq:B.2",
-      "href": "https://github.com/130U/Critical-Dependence-Stress/blob/1b034c8c7179a6054f19be1161f47a8f74b20bfc/paper/source/technical-quantitative.tex#L80",
+      "href": "https://github.com/130U/RESEARCH-Critical-Dependence-Stress/blob/bacd66b09e1f66a135360a960943a6df7572ad88/paper/source/technical-quantitative.tex#L80",
       "number": "B.2"
     },
     {
@@ -422,17 +422,17 @@
     },
     {
       "label": "lemma:general-variation",
-      "href": "https://github.com/130U/Critical-Dependence-Stress/blob/1b034c8c7179a6054f19be1161f47a8f74b20bfc/paper/source/technical-reference.tex#L4",
+      "href": "https://github.com/130U/RESEARCH-Critical-Dependence-Stress/blob/bacd66b09e1f66a135360a960943a6df7572ad88/paper/source/technical-reference.tex#L4",
       "number": "A.1"
     },
     {
       "label": "lemma:general-variation",
-      "href": "https://github.com/130U/Critical-Dependence-Stress/blob/1b034c8c7179a6054f19be1161f47a8f74b20bfc/paper/source/technical-reference.tex#L4",
+      "href": "https://github.com/130U/RESEARCH-Critical-Dependence-Stress/blob/bacd66b09e1f66a135360a960943a6df7572ad88/paper/source/technical-reference.tex#L4",
       "number": "A.1"
     },
     {
       "label": "lemma:general-variation",
-      "href": "https://github.com/130U/Critical-Dependence-Stress/blob/1b034c8c7179a6054f19be1161f47a8f74b20bfc/paper/source/technical-reference.tex#L4",
+      "href": "https://github.com/130U/RESEARCH-Critical-Dependence-Stress/blob/bacd66b09e1f66a135360a960943a6df7572ad88/paper/source/technical-reference.tex#L4",
       "number": "A.1"
     },
     {
@@ -502,7 +502,7 @@
     },
     {
       "label": "lem:threshold-convexity",
-      "href": "https://github.com/130U/Critical-Dependence-Stress/blob/1b034c8c7179a6054f19be1161f47a8f74b20bfc/paper/source/technical-limit.tex#L103",
+      "href": "https://github.com/130U/RESEARCH-Critical-Dependence-Stress/blob/bacd66b09e1f66a135360a960943a6df7572ad88/paper/source/technical-limit.tex#L103",
       "number": "A.4"
     },
     {
@@ -532,17 +532,17 @@
     },
     {
       "label": "proof:threshold-localization",
-      "href": "https://github.com/130U/Critical-Dependence-Stress/blob/1b034c8c7179a6054f19be1161f47a8f74b20bfc/paper/source/technical-limit.tex#L2",
+      "href": "https://github.com/130U/RESEARCH-Critical-Dependence-Stress/blob/bacd66b09e1f66a135360a960943a6df7572ad88/paper/source/technical-limit.tex#L2",
       "number": "A.2"
     },
     {
       "label": "b-l2-all-optimal-thresholds-under-a-budget-of-order-varepsilon2",
-      "href": "https://github.com/130U/Critical-Dependence-Stress/blob/1b034c8c7179a6054f19be1161f47a8f74b20bfc/paper/source/technical-threshold-statement.tex#L1",
+      "href": "https://github.com/130U/RESEARCH-Critical-Dependence-Stress/blob/bacd66b09e1f66a135360a960943a6df7572ad88/paper/source/technical-threshold-statement.tex#L1",
       "number": "A.2"
     },
     {
       "label": "eq:A.13",
-      "href": "https://github.com/130U/Critical-Dependence-Stress/blob/1b034c8c7179a6054f19be1161f47a8f74b20bfc/paper/source/technical-limit.tex#L136",
+      "href": "https://github.com/130U/RESEARCH-Critical-Dependence-Stress/blob/bacd66b09e1f66a135360a960943a6df7572ad88/paper/source/technical-limit.tex#L136",
       "number": "A.13"
     },
     {
@@ -552,12 +552,12 @@
     },
     {
       "label": "lem:threshold-convexity",
-      "href": "https://github.com/130U/Critical-Dependence-Stress/blob/1b034c8c7179a6054f19be1161f47a8f74b20bfc/paper/source/technical-limit.tex#L103",
+      "href": "https://github.com/130U/RESEARCH-Critical-Dependence-Stress/blob/bacd66b09e1f66a135360a960943a6df7572ad88/paper/source/technical-limit.tex#L103",
       "number": "A.4"
     },
     {
       "label": "lem:projected-imbalance",
-      "href": "https://github.com/130U/Critical-Dependence-Stress/blob/1b034c8c7179a6054f19be1161f47a8f74b20bfc/paper/source/technical-limit.tex#L54",
+      "href": "https://github.com/130U/RESEARCH-Critical-Dependence-Stress/blob/bacd66b09e1f66a135360a960943a6df7572ad88/paper/source/technical-limit.tex#L54",
       "number": "A.3"
     },
     {
@@ -617,7 +617,7 @@
     },
     {
       "label": "lem:threshold-convexity",
-      "href": "https://github.com/130U/Critical-Dependence-Stress/blob/1b034c8c7179a6054f19be1161f47a8f74b20bfc/paper/source/technical-limit.tex#L103",
+      "href": "https://github.com/130U/RESEARCH-Critical-Dependence-Stress/blob/bacd66b09e1f66a135360a960943a6df7572ad88/paper/source/technical-limit.tex#L103",
       "number": "A.4"
     },
     {
@@ -747,12 +747,12 @@
     },
     {
       "label": "app:flow-proof",
-      "href": "https://github.com/130U/Critical-Dependence-Stress/blob/1b034c8c7179a6054f19be1161f47a8f74b20bfc/paper/source/technical-flow-proof.tex#L1",
+      "href": "https://github.com/130U/RESEARCH-Critical-Dependence-Stress/blob/bacd66b09e1f66a135360a960943a6df7572ad88/paper/source/technical-flow-proof.tex#L1",
       "number": "A.8"
     },
     {
       "label": "app:cost-proofs",
-      "href": "https://github.com/130U/Critical-Dependence-Stress/blob/1b034c8c7179a6054f19be1161f47a8f74b20bfc/paper/source/technical-cost-proof.tex#L1",
+      "href": "https://github.com/130U/RESEARCH-Critical-Dependence-Stress/blob/bacd66b09e1f66a135360a960943a6df7572ad88/paper/source/technical-cost-proof.tex#L1",
       "number": "A.7"
     },
     {
@@ -772,7 +772,7 @@
     },
     {
       "label": "app:potential-proof",
-      "href": "https://github.com/130U/Critical-Dependence-Stress/blob/1b034c8c7179a6054f19be1161f47a8f74b20bfc/paper/source/technical-quantitative.tex#L3",
+      "href": "https://github.com/130U/RESEARCH-Critical-Dependence-Stress/blob/bacd66b09e1f66a135360a960943a6df7572ad88/paper/source/technical-quantitative.tex#L3",
       "number": "B.1"
     },
     {
@@ -802,7 +802,7 @@
     },
     {
       "label": "app:uniform-bound-proof",
-      "href": "https://github.com/130U/Critical-Dependence-Stress/blob/1b034c8c7179a6054f19be1161f47a8f74b20bfc/paper/source/technical-quantitative.tex#L32",
+      "href": "https://github.com/130U/RESEARCH-Critical-Dependence-Stress/blob/bacd66b09e1f66a135360a960943a6df7572ad88/paper/source/technical-quantitative.tex#L32",
       "number": "B.2"
     },
     {
@@ -832,7 +832,7 @@
     },
     {
       "label": "app:dependence-family-proof",
-      "href": "https://github.com/130U/Critical-Dependence-Stress/blob/1b034c8c7179a6054f19be1161f47a8f74b20bfc/paper/source/technical-quantitative.tex#L49",
+      "href": "https://github.com/130U/RESEARCH-Critical-Dependence-Stress/blob/bacd66b09e1f66a135360a960943a6df7572ad88/paper/source/technical-quantitative.tex#L49",
       "number": "B.3"
     },
     {
@@ -6844,7 +6844,7 @@
       "labels": []
     }
   ],
-  "importedMarkdownSha256": "1a21eb8895100e653487a9c5f00a4e11c276998a01dd44617c5e46c8f438a4d6",
+  "importedMarkdownSha256": "03e1c2a7f25bf1da7cef7a43920e0dca3278f0dcaceff5ff966562025231d477",
   "transformations": [
     "Seven main TeX input files contain five numbered sections and eleven subsections; recursively included main-text proofs are retained.",
     "TeX line wrapping, layout commands, font styling, and text accents are converted to equivalent web markup.",

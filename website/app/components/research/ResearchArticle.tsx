@@ -32,7 +32,7 @@ function numericCell({ source }: ResearchCell) {
   return NUMERIC_CELL.test(formula ? formula[1].replace(/\s+/gu, "") : value);
 }
 
-function numericColumns(rows: ResearchCell[][]) {
+export function numericColumns(rows: ResearchCell[][]) {
   const body = rows.slice(1);
   return rows[0].map((_, column) => column > 0 && body.length > 0
     && body.every((row) => numericCell(row[column]))
@@ -62,7 +62,7 @@ function contentWidth(inlines: ResearchInline[]): number {
   return Math.max(widest, line);
 }
 
-function sentenceColumns(rows: ResearchCell[][]) {
+export function sentenceColumns(rows: ResearchCell[][]) {
   const body = rows.slice(1);
   return rows[0].map((_, column) => body.some((row) => contentWidth(row[column].inlines) > SENTENCE_EM));
 }
@@ -117,7 +117,7 @@ function headingWords(inlines: ResearchInline[]) {
   return words;
 }
 
-function headingFloor(cell: ResearchCell) {
+export function headingFloor(cell: ResearchCell) {
   const words = headingWords(cell.inlines);
   const line = (from: number, to: number) => words.slice(from, to).reduce((sum, word) => sum + word, 0) + LABEL_SPACE_EM * Math.max(0, to - from - 1);
   let floor = line(0, words.length);

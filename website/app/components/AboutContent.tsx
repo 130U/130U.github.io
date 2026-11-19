@@ -40,9 +40,9 @@ export function AboutContent({ hasHero = false }: { hasHero?: boolean }) {
               review and verification systems with a foundation model
               developer, a frontier AI lab, and a global alternative asset
               manager. I also build systems of my own:{" "}
-              <a className={styles.inlineLink} href="https://github.com/130U/130U-FinLLM" target="_blank" rel="noopener noreferrer">a language model</a>{" "}
+              <a className={styles.inlineLink} href="https://github.com/130U/RESEARCH-Financial-Large-Language-Model" target="_blank" rel="noopener noreferrer">a language model</a>{" "}
               trained from scratch on financial text, and{" "}
-              <a className={styles.inlineLink} href="https://github.com/130U/agent-evaluation-methodology" target="_blank" rel="noopener noreferrer">a gate</a>{" "}
+              <a className={styles.inlineLink} href="https://github.com/130U/RESEARCH-Agent-Evaluation-Methodology" target="_blank" rel="noopener noreferrer">a gate</a>{" "}
               that decides which evaluation feedback an agent&apos;s optimizer may act on.
             </p>
           </div>

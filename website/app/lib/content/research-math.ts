@@ -207,7 +207,9 @@ function intrinsicSvg(container: LiteElement, display: boolean) {
   adaptor.setAttribute(root, "aria-hidden", "true");
   adaptor.setAttribute(root, "focusable", "false");
   adaptor.setAttribute(root, "data-research-svg", display ? "display" : "inline");
-  return { svg: adaptor.outerHTML(root), widthEm, heightEm, depthEm };
+  // An extensible arrow (\xrightarrow) leaves an empty group without a TeX class; it draws nothing.
+  const svg = adaptor.outerHTML(root).replace(/<g data-mml-node="TeXAtom" data-mjx-texclass="undefined"><\/g>/gu, "");
+  return { svg, widthEm, heightEm, depthEm };
 }
 
 function assistiveMathml(tex: string, display: boolean) {

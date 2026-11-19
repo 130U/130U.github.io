@@ -2,14 +2,16 @@
   "slug": "autonomous-authority-in-space",
   "title": "Autonomous Authority in Space: Risk Tradeoffs and the Law of Delegation",
   "author": "Letao Ouyang",
-  "date": "December 2024",
+  "date": "December 2024; revised November 2026",
+  "repositoryUrl": "https://github.com/130U/LAW-Autonomous-Authority-in-Space",
+  "sourceUrl": "https://github.com/130U/LAW-Autonomous-Authority-in-Space/blob/main/manuscript/autonomous-authority-in-space.md",
   "abstract": [
     {
       "type": "paragraph",
-      "text": "Autonomous space systems require legal rules allocating authority among states, operators, and reviewers. Waiting for a command may expose a spacecraft to avoidable loss; delegating the command may allow its operator to impose risks on others. This Article argues that supervision should distinguish lawful authority to undertake an activity from evidence justifying autonomous execution. It proposes a two-threshold decision procedure and a task-specific authorization record that implement this distinction. States should authorize defined classes of action, require renewed justification when material assumptions change, and reserve individual approval for decisions where review remains effective or separate legal permission is required. The argument compares delayed spacecraft operations with orbital collision avoidance. Debris capture exposes the limits imposed by ownership and registry-state interests, while SETI shows why scientific verification cannot simply borrow spacecraft licensing powers. The space treaties supply responsibility, supervision, liability, and due-regard obligations without prescribing an algorithmic control architecture. Risk-risk analysis requires assessment of the proposed controls as well as the systems they constrain. Advance authorization is defensible only where its factual basis can be examined, its external effects justified, and its exercise reconstructed after a consequential event.",
+      "text": "Autonomous space systems require legal rules allocating authority among states, operators, and reviewers. Waiting for a command may expose a spacecraft to avoidable loss; delegating the command may allow its operator to impose risks on others. This Article argues that supervision should distinguish lawful authority to undertake an activity from evidence justifying autonomous execution. It proposes a two-threshold decision procedure and a task-specific authorization record that implement this distinction. The two thresholds and the timing test restate, for autonomous systems, what the law of delegation already asks of human delegates. States should authorize defined classes of action, require renewed justification when material assumptions change, and reserve individual approval for decisions where review remains effective or separate legal permission is required. The argument compares delayed spacecraft operations with orbital collision avoidance. Debris capture exposes the limits imposed by ownership and registry-state interests, while SETI shows why scientific verification cannot simply borrow spacecraft licensing powers. The space treaties supply responsibility, supervision, liability, and due-regard obligations without prescribing an algorithmic control architecture. Risk-risk analysis requires assessment of the proposed controls as well as the systems they constrain. Advance authorization is defensible only where its factual basis can be examined, its external effects justified, and its exercise reconstructed after a consequential event.",
       "runs": [
         {
-          "text": "Autonomous space systems require legal rules allocating authority among states, operators, and reviewers. Waiting for a command may expose a spacecraft to avoidable loss; delegating the command may allow its operator to impose risks on others. This Article argues that supervision should distinguish lawful authority to undertake an activity from evidence justifying autonomous execution. It proposes a two-threshold decision procedure and a task-specific authorization record that implement this distinction. States should authorize defined classes of action, require renewed justification when material assumptions change, and reserve individual approval for decisions where review remains effective or separate legal permission is required. The argument compares delayed spacecraft operations with orbital collision avoidance. Debris capture exposes the limits imposed by ownership and registry-state interests, while SETI shows why scientific verification cannot simply borrow spacecraft licensing powers. The space treaties supply responsibility, supervision, liability, and due-regard obligations without prescribing an algorithmic control architecture. Risk-risk analysis requires assessment of the proposed controls as well as the systems they constrain. Advance authorization is defensible only where its factual basis can be examined, its external effects justified, and its exercise reconstructed after a consequential event."
+          "text": "Autonomous space systems require legal rules allocating authority among states, operators, and reviewers. Waiting for a command may expose a spacecraft to avoidable loss; delegating the command may allow its operator to impose risks on others. This Article argues that supervision should distinguish lawful authority to undertake an activity from evidence justifying autonomous execution. It proposes a two-threshold decision procedure and a task-specific authorization record that implement this distinction. The two thresholds and the timing test restate, for autonomous systems, what the law of delegation already asks of human delegates. States should authorize defined classes of action, require renewed justification when material assumptions change, and reserve individual approval for decisions where review remains effective or separate legal permission is required. The argument compares delayed spacecraft operations with orbital collision avoidance. Debris capture exposes the limits imposed by ownership and registry-state interests, while SETI shows why scientific verification cannot simply borrow spacecraft licensing powers. The space treaties supply responsibility, supervision, liability, and due-regard obligations without prescribing an algorithmic control architecture. Risk-risk analysis requires assessment of the proposed controls as well as the systems they constrain. Advance authorization is defensible only where its factual basis can be examined, its external effects justified, and its exercise reconstructed after a consequential event."
         }
       ]
     }
@@ -55,10 +57,10 @@
     },
     {
       "type": "paragraph",
-      "text": "This Article contributes a two-threshold decision procedure. The first threshold asks whether the actor has authority to undertake the activity and impose the relevant exposure; the second asks whether the evidence justifies delegating it. Where both are met, the procedure turns to the time at which human review can still change the outcome, and it treats individual approval, advance-constrained action, and fallback behavior as separate supervisory choices. The Article then proposes a task-specific authorization record naming responsible actors, permitted actions, operating conditions, exposed interests, and reassessment triggers, backed by independent scrutiny and by event records from which consequential decisions can be reconstructed.",
+      "text": "This Article contributes a two-threshold decision procedure. The first threshold asks whether the actor has authority to undertake the activity and impose the relevant exposure; the second asks whether the evidence justifies delegating it. Where both are met, the procedure turns to the time at which human review can still change the outcome, and it treats individual approval, advance-constrained action, and fallback behavior as separate supervisory choices. The Article then proposes a task-specific authorization record naming responsible actors, permitted actions, operating conditions, exposed interests, and reassessment triggers, backed by independent scrutiny and by event records from which consequential decisions can be reconstructed. The procedure has a doctrinal pedigree that the Article makes explicit. Its first threshold restates the rule that a private actor may not be given power over its rivals; its second, the requirement that a delegation be justified on a record; and its timing test, the principle that a retained veto which cannot be exercised in time is no retention at all.",
       "runs": [
         {
-          "text": "This Article contributes a two-threshold decision procedure. The first threshold asks whether the actor has authority to undertake the activity and impose the relevant exposure; the second asks whether the evidence justifies delegating it. Where both are met, the procedure turns to the time at which human review can still change the outcome, and it treats individual approval, advance-constrained action, and fallback behavior as separate supervisory choices. The Article then proposes a task-specific authorization record naming responsible actors, permitted actions, operating conditions, exposed interests, and reassessment triggers, backed by independent scrutiny and by event records from which consequential decisions can be reconstructed."
+          "text": "This Article contributes a two-threshold decision procedure. The first threshold asks whether the actor has authority to undertake the activity and impose the relevant exposure; the second asks whether the evidence justifies delegating it. Where both are met, the procedure turns to the time at which human review can still change the outcome, and it treats individual approval, advance-constrained action, and fallback behavior as separate supervisory choices. The Article then proposes a task-specific authorization record naming responsible actors, permitted actions, operating conditions, exposed interests, and reassessment triggers, backed by independent scrutiny and by event records from which consequential decisions can be reconstructed. The procedure has a doctrinal pedigree that the Article makes explicit. Its first threshold restates the rule that a private actor may not be given power over its rivals; its second, the requirement that a delegation be justified on a record; and its timing test, the principle that a retained veto which cannot be exercised in time is no retention at all."
         }
       ]
     },
@@ -108,33 +110,32 @@
     },
     {
       "type": "paragraph",
-      "text": "Part II explains what risk-risk analysis contributes to a legal decision and develops the two-threshold decision procedure. Part III identifies existing duties and the limits of their operational specification. Parts IV and V examine delayed spacecraft operations and orbital safety, including debris capture; Part VI tests the argument against SETI. Part VII proposes the task-specific authorization record, an authorization process that can be revised as its factual basis changes. Part VIII answers the objections that could require narrower permission or defeat a particular application. Part IX concludes.",
+      "text": "Part II explains what risk-risk analysis contributes to a legal decision and develops the two-threshold decision procedure and its counterparts in the law of delegation. Part III identifies existing duties and the limits of their operational specification. Parts IV and V examine delayed spacecraft operations and orbital safety, including debris capture; Part VI tests the argument against SETI. Part VII proposes the task-specific authorization record, an authorization process that can be revised as its factual basis changes. Part VIII answers the objections that could require narrower permission or defeat a particular application. Part IX concludes.",
       "runs": [
         {
-          "text": "Part II explains what risk-risk analysis contributes to a legal decision and develops the two-threshold decision procedure. Part III identifies existing duties and the limits of their operational specification. Parts IV and V examine delayed spacecraft operations and orbital safety, including debris capture; Part VI tests the argument against SETI. Part VII proposes the task-specific authorization record, an authorization process that can be revised as its factual basis changes. Part VIII answers the objections that could require narrower permission or defeat a particular application. Part IX concludes."
+          "text": "Part II explains what risk-risk analysis contributes to a legal decision and develops the two-threshold decision procedure and its counterparts in the law of delegation. Part III identifies existing duties and the limits of their operational specification. Parts IV and V examine delayed spacecraft operations and orbital safety, including debris capture; Part VI tests the argument against SETI. Part VII proposes the task-specific authorization record, an authorization process that can be revised as its factual basis changes. Part VIII answers the objections that could require narrower permission or defeat a particular application. Part IX concludes."
         }
       ]
     },
     {
       "type": "heading",
       "level": 1,
-      "id": "section-9",
-      "text": "II. From risk classification to a comparative decision procedure",
+      "id": "section-10",
+      "text": "II. From Risk Classification to a Comparative Decision Procedure",
       "runs": [
         {
-          "text": "II. From risk classification to a comparative decision procedure"
+          "text": "II. From Risk Classification to a Comparative Decision Procedure"
         }
       ]
     },
     {
       "type": "heading",
       "level": 2,
-      "id": "section-10",
-      "text": "A. Define the harm before naming the quadrant",
+      "id": "section-11",
+      "text": "A. Define the Harm Before Naming the Quadrant",
       "runs": [
         {
-          "text": "A. Define the harm before naming the quadrant",
-          "italic": true
+          "text": "A. Define the Harm Before Naming the Quadrant"
         }
       ]
     },
@@ -185,12 +186,11 @@
     {
       "type": "heading",
       "level": 2,
-      "id": "section-15",
-      "text": "B. Compare institutions against feasible baselines",
+      "id": "section-16",
+      "text": "B. Compare Institutions Against Feasible Baselines",
       "runs": [
         {
-          "text": "B. Compare institutions against feasible baselines",
-          "italic": true
+          "text": "B. Compare Institutions Against Feasible Baselines"
         }
       ]
     },
@@ -224,12 +224,11 @@
     {
       "type": "heading",
       "level": 2,
-      "id": "section-19",
-      "text": "C. Identify the point at which review can still change the outcome",
+      "id": "section-20",
+      "text": "C. Identify the Point at Which Review Can Still Change the Outcome",
       "runs": [
         {
-          "text": "C. Identify the point at which review can still change the outcome",
-          "italic": true
+          "text": "C. Identify the Point at Which Review Can Still Change the Outcome"
         }
       ]
     },
@@ -269,39 +268,71 @@
       ]
     },
     {
-      "type": "heading",
-      "level": 1,
-      "id": "section-23",
-      "text": "III. Existing law governs the actors but leaves operational choices",
+      "type": "paragraph",
+      "text": "Each element of that procedure has a counterpart in the law that governs delegation among human institutions. The first threshold corresponds to the oldest objection to private delegation. The Supreme Court called a statute that let one group of producers set terms for their competitors \"legislative delegation in its most obnoxious form,\" because the power ran to private persons whose interests may be adverse to those of others in the same business.4 An operator whose maneuver policy moves risk onto a neighboring operator exercises power of that kind, and a better predictor does not answer the objection. The second threshold corresponds to the requirement of reasoned decision: an agency must \"examine the relevant data and articulate a satisfactory explanation for its action,\" and it acts arbitrarily when it has \"entirely failed to consider an important aspect of the problem\" or an obvious alternative.5 The timing test corresponds to the law of subdelegation, under which an agency may rely on an outside party's work so long as it keeps the final decision for itself.6 A final decision that arrives after the action is complete is kept in name only. When review cannot change the outcome, the principal's judgment has to be exercised earlier and embodied in bounded terms, which is what an advance authorization of an action class does.",
       "runs": [
         {
-          "text": "III. Existing law governs the actors but leaves operational choices"
+          "text": "Each element of that procedure has a counterpart in the law that governs delegation among human institutions. The first threshold corresponds to the oldest objection to private delegation. The Supreme Court called a statute that let one group of producers set terms for their competitors \"legislative delegation in its most obnoxious form,\" because the power ran to private persons whose interests may be adverse to those of others in the same business."
+        },
+        {
+          "text": "4",
+          "superscript": true,
+          "footnoteRef": "4"
+        },
+        {
+          "text": " An operator whose maneuver policy moves risk onto a neighboring operator exercises power of that kind, and a better predictor does not answer the objection. The second threshold corresponds to the requirement of reasoned decision: an agency must \"examine the relevant data and articulate a satisfactory explanation for its action,\" and it acts arbitrarily when it has \"entirely failed to consider an important aspect of the problem\" or an obvious alternative."
+        },
+        {
+          "text": "5",
+          "superscript": true,
+          "footnoteRef": "5"
+        },
+        {
+          "text": " The timing test corresponds to the law of subdelegation, under which an agency may rely on an outside party's work so long as it keeps the final decision for itself."
+        },
+        {
+          "text": "6",
+          "superscript": true,
+          "footnoteRef": "6"
+        },
+        {
+          "text": " A final decision that arrives after the action is complete is kept in name only. When review cannot change the outcome, the principal's judgment has to be exercised earlier and embodied in bounded terms, which is what an advance authorization of an action class does."
+        }
+      ]
+    },
+    {
+      "type": "heading",
+      "level": 1,
+      "id": "section-25",
+      "text": "III. Existing Law Governs the Actors but Leaves Operational Choices",
+      "runs": [
+        {
+          "text": "III. Existing Law Governs the Actors but Leaves Operational Choices"
         }
       ]
     },
     {
       "type": "heading",
       "level": 2,
-      "id": "section-24",
-      "text": "A. International responsibility and continuing supervision",
+      "id": "section-26",
+      "text": "A. International Responsibility and Continuing Supervision",
       "runs": [
         {
-          "text": "A. International responsibility and continuing supervision",
-          "italic": true
+          "text": "A. International Responsibility and Continuing Supervision"
         }
       ]
     },
     {
       "type": "paragraph",
-      "text": "The Outer Space Treaty supplies the first legal constraints on delegated space activity. Article VI makes states internationally responsible for national activities in outer space and requires authorization and continuing supervision of nongovernmental activities. Article VII addresses international liability through launch-related connections. Article VIII preserves jurisdiction and control for the state of registry and provides that ownership is not displaced by an object's presence in outer space. Article IX imposes due regard and provides for prior international consultation when its specified potentially harmful interference conditions arise.4",
+      "text": "The Outer Space Treaty supplies the first legal constraints on delegated space activity. Article VI makes states internationally responsible for national activities in outer space and requires authorization and continuing supervision of nongovernmental activities. Article VII addresses international liability through launch-related connections. Article VIII preserves jurisdiction and control for the state of registry and provides that ownership is not displaced by an object's presence in outer space. Article IX imposes due regard and provides for prior international consultation when its specified potentially harmful interference conditions arise.7",
       "runs": [
         {
           "text": "The Outer Space Treaty supplies the first legal constraints on delegated space activity. Article VI makes states internationally responsible for national activities in outer space and requires authorization and continuing supervision of nongovernmental activities. Article VII addresses international liability through launch-related connections. Article VIII preserves jurisdiction and control for the state of registry and provides that ownership is not displaced by an object's presence in outer space. Article IX imposes due regard and provides for prior international consultation when its specified potentially harmful interference conditions arise."
         },
         {
-          "text": "4",
+          "text": "7",
           "superscript": true,
-          "footnoteRef": "4"
+          "footnoteRef": "7"
         }
       ]
     },
@@ -316,15 +347,40 @@
     },
     {
       "type": "paragraph",
-      "text": "International responsibility also needs to be distinguished from the proposition that every private command is attributable to a state under ordinary attribution rules. The International Law Commission's articles separately address attribution and breach, and recognize that special rules may govern the conditions or consequences of responsibility.5 Article VI expressly addresses national activities by governmental and nongovernmental entities. The treaty analysis should begin with that obligation, without treating a private actor's use of autonomous software as either automatic general-law attribution or an escape from the state's space-law duties. For present purposes, the relevant obligation is the state's responsibility to assure treaty conformity and supervise the national nongovernmental activity. A damages claim presents further questions under the separate liability regime.",
+      "text": "International adjudication supports reading continuing supervision as a duty that moves with the facts. The Seabed Disputes Chamber has described a sponsoring state's obligation to ensure a contractor's compliance as an obligation \"of conduct\" and of \"due diligence,\" and has called due diligence \"a variable concept\" that \"may change over time\" with new scientific or technological knowledge and \"in relation to the risks involved in the activity.\"8 The International Law Commission's articles on prevention draw the procedural consequence: prior authorization for a hazardous activity, fresh authorization for any major change, and termination where the terms of authorization are not met.9 Reassessment triggers and revisable permissions are therefore what due diligence ordinarily requires of a supervising state, and Part VII applies them to delegated execution.",
+      "runs": [
+        {
+          "text": "International adjudication supports reading continuing supervision as a duty that moves with the facts. The Seabed Disputes Chamber has described a sponsoring state's obligation to ensure a contractor's compliance as an obligation \"of conduct\" and of \"due diligence,\" and has called due diligence \"a variable concept\" that \"may change over time\" with new scientific or technological knowledge and \"in relation to the risks involved in the activity.\""
+        },
+        {
+          "text": "8",
+          "superscript": true,
+          "footnoteRef": "8"
+        },
+        {
+          "text": " The International Law Commission's articles on prevention draw the procedural consequence: prior authorization for a hazardous activity, fresh authorization for any major change, and termination where the terms of authorization are not met."
+        },
+        {
+          "text": "9",
+          "superscript": true,
+          "footnoteRef": "9"
+        },
+        {
+          "text": " Reassessment triggers and revisable permissions are therefore what due diligence ordinarily requires of a supervising state, and Part VII applies them to delegated execution."
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "International responsibility also needs to be distinguished from the proposition that every private command is attributable to a state under ordinary attribution rules. The International Law Commission's articles separately address attribution and breach, and recognize that special rules may govern the conditions or consequences of responsibility.10 Article VI expressly addresses national activities by governmental and nongovernmental entities. The treaty analysis should begin with that obligation, without treating a private actor's use of autonomous software as either automatic general-law attribution or an escape from the state's space-law duties. For present purposes, the relevant obligation is the state's responsibility to assure treaty conformity and supervise the national nongovernmental activity. A damages claim presents further questions under the separate liability regime.",
       "runs": [
         {
           "text": "International responsibility also needs to be distinguished from the proposition that every private command is attributable to a state under ordinary attribution rules. The International Law Commission's articles separately address attribution and breach, and recognize that special rules may govern the conditions or consequences of responsibility."
         },
         {
-          "text": "5",
+          "text": "10",
           "superscript": true,
-          "footnoteRef": "5"
+          "footnoteRef": "10"
         },
         {
           "text": " Article VI expressly addresses national activities by governmental and nongovernmental entities. The treaty analysis should begin with that obligation, without treating a private actor's use of autonomous software as either automatic general-law attribution or an escape from the state's space-law duties. For present purposes, the relevant obligation is the state's responsibility to assure treaty conformity and supervise the national nongovernmental activity. A damages claim presents further questions under the separate liability regime."
@@ -333,15 +389,15 @@
     },
     {
       "type": "paragraph",
-      "text": "Article IX requires due regard for other states parties' corresponding interests. Where a state has reason to believe that a planned activity by it or its nationals would cause potentially harmful interference with other states parties' peaceful exploration and use, it must undertake appropriate international consultations before proceeding. Another state party may request consultation when the stated conditions are met.6 Consultation supplies no express universal veto. Due regard also supplies no numerical collision threshold. The authorization mechanism proposed below is an implementation choice designed to give these duties practical effect by requiring consideration of external exposure.",
+      "text": "Article IX requires due regard for other states parties' corresponding interests. Where a state has reason to believe that a planned activity by it or its nationals would cause potentially harmful interference with other states parties' peaceful exploration and use, it must undertake appropriate international consultations before proceeding. Another state party may request consultation when the stated conditions are met.11 Consultation supplies no express universal veto. Due regard also supplies no numerical collision threshold. The authorization mechanism proposed below is an implementation choice designed to give these duties practical effect by requiring consideration of external exposure.",
       "runs": [
         {
           "text": "Article IX requires due regard for other states parties' corresponding interests. Where a state has reason to believe that a planned activity by it or its nationals would cause potentially harmful interference with other states parties' peaceful exploration and use, it must undertake appropriate international consultations before proceeding. Another state party may request consultation when the stated conditions are met."
         },
         {
-          "text": "6",
+          "text": "11",
           "superscript": true,
-          "footnoteRef": "6"
+          "footnoteRef": "11"
         },
         {
           "text": " Consultation supplies no express universal veto. Due regard also supplies no numerical collision threshold. The authorization mechanism proposed below is an implementation choice designed to give these duties practical effect by requiring consideration of external exposure."
@@ -351,40 +407,39 @@
     {
       "type": "heading",
       "level": 2,
-      "id": "section-29",
-      "text": "B. Liability supplies incentives but incomplete prevention",
+      "id": "section-32",
+      "text": "B. Liability Supplies Incentives but Incomplete Prevention",
       "runs": [
         {
-          "text": "B. Liability supplies incentives but incomplete prevention",
-          "italic": true
+          "text": "B. Liability Supplies Incentives but Incomplete Prevention"
         }
       ]
     },
     {
       "type": "paragraph",
-      "text": "The Liability Convention distinguishes two kinds of covered damage. For damage on Earth's surface or to aircraft in flight, launching-state liability is absolute. For damage elsewhere to another launching state's space object, or to persons or property aboard it, Article III applies a fault standard. Article I defines damage in terms of death, injury or impaired health, and property loss or damage. Article VI provides specified conditions for exoneration from absolute liability. These distinctions prevent a single characterization of all space harm as either strict liability or an unregulated technological accident.7",
+      "text": "The Liability Convention distinguishes two kinds of covered damage. For damage on Earth's surface or to aircraft in flight, launching-state liability is absolute. For damage elsewhere to another launching state's space object, or to persons or property aboard it, Article III applies a fault standard. Article I defines damage in terms of death, injury or impaired health, and property loss or damage. Article VI provides specified conditions for exoneration from absolute liability. These distinctions prevent a single characterization of all space harm as either strict liability or an unregulated technological accident.12",
       "runs": [
         {
           "text": "The Liability Convention distinguishes two kinds of covered damage. For damage on Earth's surface or to aircraft in flight, launching-state liability is absolute. For damage elsewhere to another launching state's space object, or to persons or property aboard it, Article III applies a fault standard. Article I defines damage in terms of death, injury or impaired health, and property loss or damage. Article VI provides specified conditions for exoneration from absolute liability. These distinctions prevent a single characterization of all space harm as either strict liability or an unregulated technological accident."
         },
         {
-          "text": "7",
+          "text": "12",
           "superscript": true,
-          "footnoteRef": "7"
+          "footnoteRef": "12"
         }
       ]
     },
     {
       "type": "paragraph",
-      "text": "The Convention's remedies have significant limits. Claims proceed through states and diplomatic channels. Article XI preserves domestic proceedings, subject to its restriction on concurrent pursuit of the same damage, but creates no universal private cause of action. A Claims Commission's award binds the parties only if they have so agreed; otherwise it is recommendatory. Article VII excludes launching-state nationals and specified participants or invited persons. A lost scientific opportunity or diffuse environmental interest without a clear connection to covered damage raises an additional scope question.8 These limits affect the incentives and accessibility of compensation even though the underlying treaty obligations remain binding.",
+      "text": "The Convention's remedies have significant limits. Claims proceed through states and diplomatic channels. Article XI preserves domestic proceedings, subject to its restriction on concurrent pursuit of the same damage, but creates no universal private cause of action. A Claims Commission's award binds the parties only if they have so agreed; otherwise it is recommendatory. Article VII excludes launching-state nationals and specified participants or invited persons. A lost scientific opportunity or diffuse environmental interest without a clear connection to covered damage raises an additional scope question.13 These limits affect the incentives and accessibility of compensation even though the underlying treaty obligations remain binding.",
       "runs": [
         {
           "text": "The Convention's remedies have significant limits. Claims proceed through states and diplomatic channels. Article XI preserves domestic proceedings, subject to its restriction on concurrent pursuit of the same damage, but creates no universal private cause of action. A Claims Commission's award binds the parties only if they have so agreed; otherwise it is recommendatory. Article VII excludes launching-state nationals and specified participants or invited persons. A lost scientific opportunity or diffuse environmental interest without a clear connection to covered damage raises an additional scope question."
         },
         {
-          "text": "8",
+          "text": "13",
           "superscript": true,
-          "footnoteRef": "8"
+          "footnoteRef": "13"
         },
         {
           "text": " These limits affect the incentives and accessibility of compensation even though the underlying treaty obligations remain binding."
@@ -393,15 +448,15 @@
     },
     {
       "type": "paragraph",
-      "text": "Autonomous execution can complicate proof of fault without eliminating the relevant state or operator. Article III refers to fault of the launching state or persons for whom it is responsible. An argument that the machine is not a legal person does not establish immunity for negligent design, delegation, maintenance, or use. The text leaves room to examine failures of design, maintenance, delegation, and use by the relevant actors.9 It does not settle the precautions an autonomous maneuver policy must take. That determination requires a standard of fault, proof of causation, and an account of the information and precautions reasonably available before the event. An inquiry confined to whether the final command was generated by a machine would miss the decisions that placed the machine in that position.",
+      "text": "Autonomous execution can complicate proof of fault without eliminating the relevant state or operator. Article III refers to fault of the launching state or persons for whom it is responsible. An argument that the machine is not a legal person does not establish immunity for negligent design, delegation, maintenance, or use. The text leaves room to examine failures of design, maintenance, delegation, and use by the relevant actors.14 It does not settle the precautions an autonomous maneuver policy must take. That determination requires a standard of fault, proof of causation, and an account of the information and precautions reasonably available before the event. An inquiry confined to whether the final command was generated by a machine would miss the decisions that placed the machine in that position.",
       "runs": [
         {
           "text": "Autonomous execution can complicate proof of fault without eliminating the relevant state or operator. Article III refers to fault of the launching state or persons for whom it is responsible. An argument that the machine is not a legal person does not establish immunity for negligent design, delegation, maintenance, or use. The text leaves room to examine failures of design, maintenance, delegation, and use by the relevant actors."
         },
         {
-          "text": "9",
+          "text": "14",
           "superscript": true,
-          "footnoteRef": "9"
+          "footnoteRef": "14"
         },
         {
           "text": " It does not settle the precautions an autonomous maneuver policy must take. That determination requires a standard of fault, proof of causation, and an account of the information and precautions reasonably available before the event. An inquiry confined to whether the final command was generated by a machine would miss the decisions that placed the machine in that position."
@@ -411,34 +466,33 @@
     {
       "type": "heading",
       "level": 2,
-      "id": "section-33",
-      "text": "C. Operational detail can enter through different institutions",
+      "id": "section-36",
+      "text": "C. Operational Detail Can Enter Through Different Institutions",
       "runs": [
         {
-          "text": "C. Operational detail can enter through different institutions",
-          "italic": true
+          "text": "C. Operational Detail Can Enter Through Different Institutions"
         }
       ]
     },
     {
       "type": "paragraph",
-      "text": "Registration assists identification, but the Registration Convention's required information is not a complete operational record. It does not specify a log of model versions, maneuver permissions, or decision inputs.10 The COPUOS Long-term Sustainability Guidelines recommend supervision, contact and information exchange, improved orbital information, and conjunction assessment. They expressly remain voluntary under international law.11 Their existence nevertheless helps distinguish a technical coordination problem from an alleged vacuum of all norms.",
+      "text": "Registration assists identification, but the Registration Convention's required information is not a complete operational record. It does not specify a log of model versions, maneuver permissions, or decision inputs.15 The COPUOS Long-term Sustainability Guidelines recommend supervision, contact and information exchange, improved orbital information, and conjunction assessment. They expressly remain voluntary under international law.16 Their existence nevertheless helps distinguish a technical coordination problem from an alleged vacuum of all norms.",
       "runs": [
         {
           "text": "Registration assists identification, but the Registration Convention's required information is not a complete operational record. It does not specify a log of model versions, maneuver permissions, or decision inputs."
         },
         {
-          "text": "10",
+          "text": "15",
           "superscript": true,
-          "footnoteRef": "10"
+          "footnoteRef": "15"
         },
         {
           "text": " The COPUOS Long-term Sustainability Guidelines recommend supervision, contact and information exchange, improved orbital information, and conjunction assessment. They expressly remain voluntary under international law."
         },
         {
-          "text": "11",
+          "text": "16",
           "superscript": true,
-          "footnoteRef": "11"
+          "footnoteRef": "16"
         },
         {
           "text": " Their existence nevertheless helps distinguish a technical coordination problem from an alleged vacuum of all norms."
@@ -447,23 +501,23 @@
     },
     {
       "type": "paragraph",
-      "text": "Within its own licensing and market-access regime, the FCC requires covered applicants to disclose maneuverability and plans for sharing operational information. Its accompanying order identifies guidance and operations schemes and collision-avoidance thresholds as relevant disclosure details. Covered operators also certify that they will review conjunction warnings, assess collision risk, and mitigate where necessary, including appropriate coordination. The relevant information-collection provisions became effective in September 2024. The agency grounds its regime in domestic communications authority.12 Article VI does not itself confer general regulatory power on the FCC. The rule does not resolve every question about contemporaneous human review. An additional condition governing autonomy would need to fit the Communications Act and the lawful scope of the agency's licensing function.13 A useful safety condition does not supply missing statutory power. Where existing authority cannot sustain the condition, the proposal requires legislation or another competent institution.",
+      "text": "Within its own licensing and market-access regime, the FCC requires covered applicants to disclose maneuverability and plans for sharing operational information. Its accompanying order identifies guidance and operations schemes and collision-avoidance thresholds as relevant disclosure details. Covered operators also certify that they will review conjunction warnings, assess collision risk, and mitigate where necessary, including appropriate coordination. The relevant information-collection provisions became effective in September 2024. The agency grounds its regime in domestic communications authority.17 Article VI does not itself confer general regulatory power on the FCC. The rule does not resolve every question about contemporaneous human review. An additional condition governing autonomy would need to fit the Communications Act and the lawful scope of the agency's licensing function.18 A useful safety condition does not supply missing statutory power. Where existing authority cannot sustain the condition, the proposal requires legislation or another competent institution.",
       "runs": [
         {
           "text": "Within its own licensing and market-access regime, the FCC requires covered applicants to disclose maneuverability and plans for sharing operational information. Its accompanying order identifies guidance and operations schemes and collision-avoidance thresholds as relevant disclosure details. Covered operators also certify that they will review conjunction warnings, assess collision risk, and mitigate where necessary, including appropriate coordination. The relevant information-collection provisions became effective in September 2024. The agency grounds its regime in domestic communications authority."
         },
         {
-          "text": "12",
+          "text": "17",
           "superscript": true,
-          "footnoteRef": "12"
+          "footnoteRef": "17"
         },
         {
           "text": " Article VI does not itself confer general regulatory power on the FCC. The rule does not resolve every question about contemporaneous human review. An additional condition governing autonomy would need to fit the Communications Act and the lawful scope of the agency's licensing function."
         },
         {
-          "text": "13",
+          "text": "18",
           "superscript": true,
-          "footnoteRef": "13"
+          "footnoteRef": "18"
         },
         {
           "text": " A useful safety condition does not supply missing statutory power. Where existing authority cannot sustain the condition, the proposal requires legislation or another competent institution."
@@ -471,39 +525,55 @@
       ]
     },
     {
-      "type": "heading",
-      "level": 1,
-      "id": "section-36",
-      "text": "IV. Delayed spacecraft operations and the case for advance permission",
+      "type": "paragraph",
+      "text": "That caution has become more pressing. Since 2024 a reviewing court decides for itself whether an agency has acted within its statutory authority and no longer defers to the agency's reading of an ambiguous statute.19 A condition on autonomous maneuvering would be tested against the text of the Communications Act by a court exercising independent judgment, which makes the choice of institution a first-order question for any proposal of this kind.",
       "runs": [
         {
-          "text": "IV. Delayed spacecraft operations and the case for advance permission"
+          "text": "That caution has become more pressing. Since 2024 a reviewing court decides for itself whether an agency has acted within its statutory authority and no longer defers to the agency's reading of an ambiguous statute."
+        },
+        {
+          "text": "19",
+          "superscript": true,
+          "footnoteRef": "19"
+        },
+        {
+          "text": " A condition on autonomous maneuvering would be tested against the text of the Communications Act by a court exercising independent judgment, which makes the choice of institution a first-order question for any proposal of this kind."
+        }
+      ]
+    },
+    {
+      "type": "heading",
+      "level": 1,
+      "id": "section-40",
+      "text": "IV. Delayed Spacecraft Operations and the Case for Advance Permission",
+      "runs": [
+        {
+          "text": "IV. Delayed Spacecraft Operations and the Case for Advance Permission"
         }
       ]
     },
     {
       "type": "heading",
       "level": 2,
-      "id": "section-37",
-      "text": "A. Latency changes the comparator",
+      "id": "section-41",
+      "text": "A. Latency Changes the Comparator",
       "runs": [
         {
-          "text": "A. Latency changes the comparator",
-          "italic": true
+          "text": "A. Latency Changes the Comparator"
         }
       ]
     },
     {
       "type": "paragraph",
-      "text": "Communications delay creates a real constraint, but it does not make all ground expertise useless. A NASA analysis of prospective crewed Mars missions describes one-way delays reaching approximately twenty-two minutes, alongside disruptions and blackouts. It does not demonstrate that an AI system can safely manage every emergency arising during those intervals.14 Long-range planning can remain on Earth while local systems execute time-sensitive responses. Where a crew is present, onboard human judgment is a further comparator, distinct from delayed ground approval.",
+      "text": "Communications delay creates a real constraint, but it does not make all ground expertise useless. A NASA analysis of prospective crewed Mars missions describes one-way delays reaching approximately twenty-two minutes, alongside disruptions and blackouts. It does not demonstrate that an AI system can safely manage every emergency arising during those intervals.20 Long-range planning can remain on Earth while local systems execute time-sensitive responses. Where a crew is present, onboard human judgment is a further comparator, distinct from delayed ground approval.",
       "runs": [
         {
           "text": "Communications delay creates a real constraint, but it does not make all ground expertise useless. A NASA analysis of prospective crewed Mars missions describes one-way delays reaching approximately twenty-two minutes, alongside disruptions and blackouts. It does not demonstrate that an AI system can safely manage every emergency arising during those intervals."
         },
         {
-          "text": "14",
+          "text": "20",
           "superscript": true,
-          "footnoteRef": "14"
+          "footnoteRef": "20"
         },
         {
           "text": " Long-range planning can remain on Earth while local systems execute time-sensitive responses. Where a crew is present, onboard human judgment is a further comparator, distinct from delayed ground approval."
@@ -531,26 +601,25 @@
     {
       "type": "heading",
       "level": 2,
-      "id": "section-41",
-      "text": "B. Flight experience supports a narrow claim",
+      "id": "section-45",
+      "text": "B. Flight Experience Supports a Narrow Claim",
       "runs": [
         {
-          "text": "B. Flight experience supports a narrow claim",
-          "italic": true
+          "text": "B. Flight Experience Supports a Narrow Claim"
         }
       ]
     },
     {
       "type": "paragraph",
-      "text": "NASA's Deep Space 1 Remote Agent experiment demonstrated autonomous planning and execution for selected subsystems under high-level goals. The mission account also records a software bug that interrupted the first experiment before subsequent work completed the remaining objectives.15 This is evidence that meaningful autonomy can operate on a spacecraft and that integration failures remain relevant. Unrestricted crew-safety decisions by a general-purpose language model would need evidence of their own.",
+      "text": "NASA's Deep Space 1 Remote Agent experiment demonstrated autonomous planning and execution for selected subsystems under high-level goals. The mission account also records a software bug that interrupted the first experiment before subsequent work completed the remaining objectives.21 This is evidence that meaningful autonomy can operate on a spacecraft and that integration failures remain relevant. Unrestricted crew-safety decisions by a general-purpose language model would need evidence of their own.",
       "runs": [
         {
           "text": "NASA's Deep Space 1 Remote Agent experiment demonstrated autonomous planning and execution for selected subsystems under high-level goals. The mission account also records a software bug that interrupted the first experiment before subsequent work completed the remaining objectives."
         },
         {
-          "text": "15",
+          "text": "21",
           "superscript": true,
-          "footnoteRef": "15"
+          "footnoteRef": "21"
         },
         {
           "text": " This is evidence that meaningful autonomy can operate on a spacecraft and that integration failures remain relevant. Unrestricted crew-safety decisions by a general-purpose language model would need evidence of their own."
@@ -559,23 +628,23 @@
     },
     {
       "type": "paragraph",
-      "text": "AEGIS provides a more sustained example of bounded scientific autonomy. The Curiosity study describes autonomous target selection using parameters supplied by scientists.16 A 2024 Perseverance paper describes adjustable target filtering and ranking, alongside separate flight-software protections against unsafe pointing or laser firing into rover hardware. Observations are invalidated when relevant mechanisms have moved after target selection, and deployment proceeded through testing and stages. A protective rejection can sacrifice an observation while protecting the instrument.17",
+      "text": "AEGIS provides a more sustained example of bounded scientific autonomy. The Curiosity study describes autonomous target selection using parameters supplied by scientists.22 A 2024 Perseverance paper describes adjustable target filtering and ranking, alongside separate flight-software protections against unsafe pointing or laser firing into rover hardware. Observations are invalidated when relevant mechanisms have moved after target selection, and deployment proceeded through testing and stages. A protective rejection can sacrifice an observation while protecting the instrument.23",
       "runs": [
         {
           "text": "AEGIS provides a more sustained example of bounded scientific autonomy. The Curiosity study describes autonomous target selection using parameters supplied by scientists."
         },
         {
-          "text": "16",
+          "text": "22",
           "superscript": true,
-          "footnoteRef": "16"
+          "footnoteRef": "22"
         },
         {
           "text": " A 2024 Perseverance paper describes adjustable target filtering and ranking, alongside separate flight-software protections against unsafe pointing or laser firing into rover hardware. Observations are invalidated when relevant mechanisms have moved after target selection, and deployment proceeded through testing and stages. A protective rejection can sacrifice an observation while protecting the instrument."
         },
         {
-          "text": "17",
+          "text": "23",
           "superscript": true,
-          "footnoteRef": "17"
+          "footnoteRef": "23"
         }
       ]
     },
@@ -590,15 +659,15 @@
     },
     {
       "type": "paragraph",
-      "text": "NASA's software requirements reinforce this distinction. Within their stated scope, they address safe states, input integrity, prerequisites for hazardous commands, and response within the time required to prevent a hazard. Applicability to contractors depends on the specified contractual setting.18 These requirements are a concrete institutional baseline against which an AI component should be assessed. Compliance remains a baseline for evaluating the added component, whose hazards require assessment within the mission.",
+      "text": "NASA's software requirements reinforce this distinction. Within their stated scope, they address safe states, input integrity, prerequisites for hazardous commands, and response within the time required to prevent a hazard. Applicability to contractors depends on the specified contractual setting.24 These requirements are a concrete institutional baseline against which an AI component should be assessed. Compliance remains a baseline for evaluating the added component, whose hazards require assessment within the mission.",
       "runs": [
         {
           "text": "NASA's software requirements reinforce this distinction. Within their stated scope, they address safe states, input integrity, prerequisites for hazardous commands, and response within the time required to prevent a hazard. Applicability to contractors depends on the specified contractual setting."
         },
         {
-          "text": "18",
+          "text": "24",
           "superscript": true,
-          "footnoteRef": "18"
+          "footnoteRef": "24"
         },
         {
           "text": " These requirements are a concrete institutional baseline against which an AI component should be assessed. Compliance remains a baseline for evaluating the added component, whose hazards require assessment within the mission."
@@ -608,12 +677,11 @@
     {
       "type": "heading",
       "level": 2,
-      "id": "section-46",
-      "text": "C. Compare the burdens of three arrangements",
+      "id": "section-50",
+      "text": "C. Compare the Burdens of Three Arrangements",
       "runs": [
         {
-          "text": "C. Compare the burdens of three arrangements",
-          "italic": true
+          "text": "C. Compare the Burdens of Three Arrangements"
         }
       ]
     },
@@ -632,6 +700,23 @@
       "runs": [
         {
           "text": "For the hypothetical fault, the permission should identify the observations on which the response depends, permissible commands, resource limits, forbidden effects, and conditions requiring a different mode. The fallback might be a protective action rather than passivity. A spacecraft on an unsafe trajectory does not become safe merely by declining to decide. The appropriate fallback must be established through the dynamics and hazards of that mission; calling it a \"safe mode\" supplies no proof."
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "United States launch regulation already contains a rule of this form. A licensed operator must \"determine and use flight safety limits that define when an operator must initiate flight abort,\" the vehicle data needed to evaluate its abort rules \"must be available to the flight safety system,\" and a flight need not be aborted where abort \"would not materially decrease the risk from a high consequence event.\"25 The regulation delegates a drastic action to limits set in advance, and it treats the fallback as a choice whose risks have to be compared with those of continuing.",
+      "runs": [
+        {
+          "text": "United States launch regulation already contains a rule of this form. A licensed operator must \"determine and use flight safety limits that define when an operator must initiate flight abort,\" the vehicle data needed to evaluate its abort rules \"must be available to the flight safety system,\" and a flight need not be aborted where abort \"would not materially decrease the risk from a high consequence event.\""
+        },
+        {
+          "text": "25",
+          "superscript": true,
+          "footnoteRef": "25"
+        },
+        {
+          "text": " The regulation delegates a drastic action to limits set in advance, and it treats the fallback as a choice whose risks have to be compared with those of continuing."
         }
       ]
     },
@@ -674,23 +759,22 @@
     {
       "type": "heading",
       "level": 1,
-      "id": "section-53",
-      "text": "V. Orbital safety and risks imposed on other operators",
+      "id": "section-58",
+      "text": "V. Orbital Safety and Risks Imposed on Other Operators",
       "runs": [
         {
-          "text": "V. Orbital safety and risks imposed on other operators"
+          "text": "V. Orbital Safety and Risks Imposed on Other Operators"
         }
       ]
     },
     {
       "type": "heading",
       "level": 2,
-      "id": "section-54",
-      "text": "A. A better prediction is only one part of avoidance",
+      "id": "section-59",
+      "text": "A. A Better Prediction Is Only One Part of Avoidance",
       "runs": [
         {
-          "text": "A. A better prediction is only one part of avoidance",
-          "italic": true
+          "text": "A. A Better Prediction Is Only One Part of Avoidance"
         }
       ]
     },
@@ -705,15 +789,15 @@
     },
     {
       "type": "paragraph",
-      "text": "The ESA spacecraft collision-avoidance challenge illustrates this distinction. The competition used earlier conjunction data messages to predict the estimated risk in the final available message. Its target was thus another risk estimate rather than observed collisions or measured harm avoided. The authors discussed class imbalance, generalization problems, and limitations of evaluation practices.19 Those findings support development of forecasting tools. Whether a high-performing predictor can safely choose and execute maneuvers in a multi-operator environment is a further question, and prediction scores leave it open.",
+      "text": "The ESA spacecraft collision-avoidance challenge illustrates this distinction. The competition used earlier conjunction data messages to predict the estimated risk in the final available message. Its target was thus another risk estimate rather than observed collisions or measured harm avoided. The authors discussed class imbalance, generalization problems, and limitations of evaluation practices.26 Those findings support development of forecasting tools. Whether a high-performing predictor can safely choose and execute maneuvers in a multi-operator environment is a further question, and prediction scores leave it open.",
       "runs": [
         {
           "text": "The ESA spacecraft collision-avoidance challenge illustrates this distinction. The competition used earlier conjunction data messages to predict the estimated risk in the final available message. Its target was thus another risk estimate rather than observed collisions or measured harm avoided. The authors discussed class imbalance, generalization problems, and limitations of evaluation practices."
         },
         {
-          "text": "19",
+          "text": "26",
           "superscript": true,
-          "footnoteRef": "19"
+          "footnoteRef": "26"
         },
         {
           "text": " Those findings support development of forecasting tools. Whether a high-performing predictor can safely choose and execute maneuvers in a multi-operator environment is a further question, and prediction scores leave it open."
@@ -731,15 +815,15 @@
     },
     {
       "type": "paragraph",
-      "text": "Routine conjunction management can provide time for human assessment; the ESA challenge used a planning horizon measured in days.20 The case for advance emergency authority concerns later information or operational constraints that leave insufficient time for useful review. The frequency of those exceptional orbital conditions remains a separate empirical question. On the evidence reviewed, forecasting assistance is justified more readily than independent maneuver execution. The latter needs a policy-level assurance case beyond prediction performance; routine approval and coordination remain reasonable where they can improve the decision in time.",
+      "text": "Routine conjunction management can provide time for human assessment; the ESA challenge used a planning horizon measured in days.27 The case for advance emergency authority concerns later information or operational constraints that leave insufficient time for useful review. The frequency of those exceptional orbital conditions remains a separate empirical question. On the evidence reviewed, forecasting assistance is justified more readily than independent maneuver execution. The latter needs a policy-level assurance case beyond prediction performance; routine approval and coordination remain reasonable where they can improve the decision in time.",
       "runs": [
         {
           "text": "Routine conjunction management can provide time for human assessment; the ESA challenge used a planning horizon measured in days."
         },
         {
-          "text": "20",
+          "text": "27",
           "superscript": true,
-          "footnoteRef": "20"
+          "footnoteRef": "27"
         },
         {
           "text": " The case for advance emergency authority concerns later information or operational constraints that leave insufficient time for useful review. The frequency of those exceptional orbital conditions remains a separate empirical question. On the evidence reviewed, forecasting assistance is justified more readily than independent maneuver execution. The latter needs a policy-level assurance case beyond prediction performance; routine approval and coordination remain reasonable where they can improve the decision in time."
@@ -749,12 +833,11 @@
     {
       "type": "heading",
       "level": 2,
-      "id": "section-59",
-      "text": "B. Collision avoidance can redistribute exposure",
+      "id": "section-64",
+      "text": "B. Collision Avoidance Can Redistribute Exposure",
       "runs": [
         {
-          "text": "B. Collision avoidance can redistribute exposure",
-          "italic": true
+          "text": "B. Collision Avoidance Can Redistribute Exposure"
         }
       ]
     },
@@ -764,6 +847,23 @@
       "runs": [
         {
           "text": "Suppose two operators receive warnings about a close approach. Each can move, but each estimates the other's future motion imperfectly. A maneuver selected to reduce one conjunction may change exposure elsewhere. These are hypothetical mechanisms for evaluating a policy, not accounts of a verified AI-caused collision. Orbital avoidance therefore requires analysis of interactions absent from a solitary spacecraft's response to a local fault."
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "State practice has since supplied an instance. In December 2021 China informed the Secretary-General that its space station had twice carried out \"preventive collision avoidance control\" after close encounters with Starlink satellites, and that on the second occasion, because the satellite \"was continuously manoeuvring, the manoeuvre strategy was unknown and orbital errors were hard to be assessed.\" The note closed by quoting Article VI. The United States replied that its Space Command \"did not estimate a significant probability of collision\" and that, because the encounters \"did not meet the threshold of established emergency collision criteria, emergency notifications were not warranted.\"28 The two states did not disagree about physics. They disagreed about whose threshold governed and about what one operator is owed concerning another's maneuver policy, which are the questions an authorization record is meant to answer in advance.",
+      "runs": [
+        {
+          "text": "State practice has since supplied an instance. In December 2021 China informed the Secretary-General that its space station had twice carried out \"preventive collision avoidance control\" after close encounters with Starlink satellites, and that on the second occasion, because the satellite \"was continuously manoeuvring, the manoeuvre strategy was unknown and orbital errors were hard to be assessed.\" The note closed by quoting Article VI. The United States replied that its Space Command \"did not estimate a significant probability of collision\" and that, because the encounters \"did not meet the threshold of established emergency collision criteria, emergency notifications were not warranted.\""
+        },
+        {
+          "text": "28",
+          "superscript": true,
+          "footnoteRef": "28"
+        },
+        {
+          "text": " The two states did not disagree about physics. They disagreed about whose threshold governed and about what one operator is owed concerning another's maneuver policy, which are the questions an authorization record is meant to answer in advance."
         }
       ]
     },
@@ -806,26 +906,25 @@
     {
       "type": "heading",
       "level": 2,
-      "id": "section-65",
-      "text": "C. Individual safety constraints do not establish collective safety",
+      "id": "section-71",
+      "text": "C. Individual Safety Constraints Do Not Establish Collective Safety",
       "runs": [
         {
-          "text": "C. Individual safety constraints do not establish collective safety",
-          "italic": true
+          "text": "C. Individual Safety Constraints Do Not Establish Collective Safety"
         }
       ]
     },
     {
       "type": "paragraph",
-      "text": "Work on runtime assurance for autonomous spacecraft inspection provides a technically serious way to constrain proposed commands. Dunlap, van Wijk, and Hobbs compare centralized and decentralized approaches. In their simulations, decentralized filters sometimes could not satisfy a sensor Sun-exclusion constraint because assumed acceleration was unavailable when constraints conflicted. The authors discuss modifying or relaxing that constraint as mitigation.21 The evidence concerns specified dynamics and tradeoffs in simulation. Observed commercial-satellite collisions and safety across the orbital population lie beyond it.",
+      "text": "Work on runtime assurance for autonomous spacecraft inspection provides a technically serious way to constrain proposed commands. Dunlap, van Wijk, and Hobbs compare centralized and decentralized approaches. In their simulations, decentralized filters sometimes could not satisfy a sensor Sun-exclusion constraint because assumed acceleration was unavailable when constraints conflicted. The authors discuss modifying or relaxing that constraint as mitigation.29 The evidence concerns specified dynamics and tradeoffs in simulation. Observed commercial-satellite collisions and safety across the orbital population lie beyond it.",
       "runs": [
         {
           "text": "Work on runtime assurance for autonomous spacecraft inspection provides a technically serious way to constrain proposed commands. Dunlap, van Wijk, and Hobbs compare centralized and decentralized approaches. In their simulations, decentralized filters sometimes could not satisfy a sensor Sun-exclusion constraint because assumed acceleration was unavailable when constraints conflicted. The authors discuss modifying or relaxing that constraint as mitigation."
         },
         {
-          "text": "21",
+          "text": "29",
           "superscript": true,
-          "footnoteRef": "21"
+          "footnoteRef": "29"
         },
         {
           "text": " The evidence concerns specified dynamics and tradeoffs in simulation. Observed commercial-satellite collisions and safety across the orbital population lie beyond it."
@@ -843,6 +942,31 @@
     },
     {
       "type": "paragraph",
+      "text": "The older transport regimes mark the same distinction. Vessels at sea avoid collision under rules that assign each encounter a give-way vessel and a stand-on vessel; neither is told how to predict the other's course.30 Airborne collision avoidance coordinates complementary maneuvers between two aircraft, and the collision over Überlingen in 2002 occurred when one crew followed a controller's instruction against the system's advisory.31 What these regimes share is a common protocol for who moves and how intentions are signaled, with prediction left to each participant. Orbital operations have the predictors and lack the protocol. A licensing condition should therefore ask for interoperable right-of-way rules and maneuver-intent messages before it asks for any particular model.",
+      "runs": [
+        {
+          "text": "The older transport regimes mark the same distinction. Vessels at sea avoid collision under rules that assign each encounter a give-way vessel and a stand-on vessel; neither is told how to predict the other's course."
+        },
+        {
+          "text": "30",
+          "superscript": true,
+          "footnoteRef": "30"
+        },
+        {
+          "text": " Airborne collision avoidance coordinates complementary maneuvers between two aircraft, and the collision over Überlingen in 2002 occurred when one crew followed a controller's instruction against the system's advisory."
+        },
+        {
+          "text": "31",
+          "superscript": true,
+          "footnoteRef": "31"
+        },
+        {
+          "text": " What these regimes share is a common protocol for who moves and how intentions are signaled, with prediction left to each participant. Orbital operations have the predictors and lack the protocol. A licensing condition should therefore ask for interoperable right-of-way rules and maneuver-intent messages before it asks for any particular model."
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
       "text": "Sensitive telemetry need not be broadcast universally. A competent institution could receive detailed information while other operators receive the minimum timely information needed to coordinate. That proposal has costs: trusted intermediaries can fail, withhold information, or become attractive targets. The tradeoff should be explicit, and the fallback should not depend on an information service that the operator has no reliable right or ability to use.",
       "runs": [
         {
@@ -853,26 +977,25 @@
     {
       "type": "heading",
       "level": 2,
-      "id": "section-69",
-      "text": "D. Capture changes both the physical act and the legal interest",
+      "id": "section-76",
+      "text": "D. Capture Changes Both the Physical Act and the Legal Interest",
       "runs": [
         {
-          "text": "D. Capture changes both the physical act and the legal interest",
-          "italic": true
+          "text": "D. Capture Changes Both the Physical Act and the Legal Interest"
         }
       ]
     },
     {
       "type": "paragraph",
-      "text": "Active debris removal adds a boundary that collision forecasting cannot cross. Changing one's own trajectory differs from approaching, attaching to, controlling, and disposing of another actor's object. RemoveDEBRIS demonstrated specific technologies using mission-provided experimental targets. Its full report describes an unsuccessful drag-sail outcome as well as successful components.22 Routine, safe removal of arbitrary legacy debris remains to be shown. So does the complete sequence from identification through disposal, of which a laboratory controller or a successful capture mechanism covers one part.",
+      "text": "Active debris removal adds a boundary that collision forecasting cannot cross. Changing one's own trajectory differs from approaching, attaching to, controlling, and disposing of another actor's object. RemoveDEBRIS demonstrated specific technologies using mission-provided experimental targets. Its full report describes an unsuccessful drag-sail outcome as well as successful components.32 Routine, safe removal of arbitrary legacy debris remains to be shown. So does the complete sequence from identification through disposal, of which a laboratory controller or a successful capture mechanism covers one part.",
       "runs": [
         {
           "text": "Active debris removal adds a boundary that collision forecasting cannot cross. Changing one's own trajectory differs from approaching, attaching to, controlling, and disposing of another actor's object. RemoveDEBRIS demonstrated specific technologies using mission-provided experimental targets. Its full report describes an unsuccessful drag-sail outcome as well as successful components."
         },
         {
-          "text": "22",
+          "text": "32",
           "superscript": true,
-          "footnoteRef": "22"
+          "footnoteRef": "32"
         },
         {
           "text": " Routine, safe removal of arbitrary legacy debris remains to be shown. So does the complete sequence from identification through disposal, of which a laboratory controller or a successful capture mechanism covers one part."
@@ -881,15 +1004,15 @@
     },
     {
       "type": "paragraph",
-      "text": "Article VIII makes it unsafe to assume that labeling an object \"debris\" extinguishes ownership or registry-state interests. The treaty is not a detailed salvage code, and the applicable consent arrangements require mission-specific legal analysis. Nevertheless, an algorithmic risk ranking cannot itself supply authority to take control of the selected object.23 The distinction is independent of whether a human would choose the same target.",
+      "text": "Article VIII makes it unsafe to assume that labeling an object \"debris\" extinguishes ownership or registry-state interests. The treaty is not a detailed salvage code, and the applicable consent arrangements require mission-specific legal analysis. Nevertheless, an algorithmic risk ranking cannot itself supply authority to take control of the selected object.33 The distinction is independent of whether a human would choose the same target.",
       "runs": [
         {
           "text": "Article VIII makes it unsafe to assume that labeling an object \"debris\" extinguishes ownership or registry-state interests. The treaty is not a detailed salvage code, and the applicable consent arrangements require mission-specific legal analysis. Nevertheless, an algorithmic risk ranking cannot itself supply authority to take control of the selected object."
         },
         {
-          "text": "23",
+          "text": "33",
           "superscript": true,
-          "footnoteRef": "23"
+          "footnoteRef": "33"
         },
         {
           "text": " The distinction is independent of whether a human would choose the same target."
@@ -926,25 +1049,25 @@
     {
       "type": "heading",
       "level": 1,
-      "id": "section-75",
-      "text": "VI. SETI and the difference between a candidate and a conclusion",
+      "id": "section-82",
+      "text": "VI. SETI and the Difference Between a Candidate and a Conclusion",
       "runs": [
         {
-          "text": "VI. SETI and the difference between a candidate and a conclusion"
+          "text": "VI. SETI and the Difference Between a Candidate and a Conclusion"
         }
       ]
     },
     {
       "type": "paragraph",
-      "text": "SETI tests whether a framework built around physical action becomes overbroad when applied to knowledge production. Recognizing whale calls in long-term acoustic recordings is a tempting model for identifying an extraterrestrial signal. That research worked from known-species evidence and from matched visual and acoustic observations, so what it offers SETI is a method for sorting and prioritizing signals.24 Interpreting the meaning of an unknown communication system would require evidence of a different kind.",
+      "text": "SETI tests whether a framework built around physical action becomes overbroad when applied to knowledge production. Recognizing whale calls in long-term acoustic recordings is a tempting model for identifying an extraterrestrial signal. That research worked from known-species evidence and from matched visual and acoustic observations, so what it offers SETI is a method for sorting and prioritizing signals.34 Interpreting the meaning of an unknown communication system would require evidence of a different kind.",
       "runs": [
         {
           "text": "SETI tests whether a framework built around physical action becomes overbroad when applied to knowledge production. Recognizing whale calls in long-term acoustic recordings is a tempting model for identifying an extraterrestrial signal. That research worked from known-species evidence and from matched visual and acoustic observations, so what it offers SETI is a method for sorting and prioritizing signals."
         },
         {
-          "text": "24",
+          "text": "34",
           "superscript": true,
-          "footnoteRef": "24"
+          "footnoteRef": "34"
         },
         {
           "text": " Interpreting the meaning of an unknown communication system would require evidence of a different kind."
@@ -953,15 +1076,15 @@
     },
     {
       "type": "paragraph",
-      "text": "The more relevant evidence is Peter Ma and colleagues' search of observations from 820 nearby stars. Their machine-learning pipeline used synthetic signal injections and produced candidates that underwent further filtering and visual inspection. Eight signals were selected for examination, and follow-up did not redetect them. Reported test performance concerns the specified simulated task, not a measured probability that a candidate is extraterrestrial.25 Machine learning supplied a different route for prioritizing observations within that search design.",
+      "text": "The more relevant evidence is Peter Ma and colleagues' search of observations from 820 nearby stars. Their machine-learning pipeline used synthetic signal injections and produced candidates that underwent further filtering and visual inspection. Eight signals were selected for examination, and follow-up did not redetect them. Reported test performance concerns the specified simulated task, not a measured probability that a candidate is extraterrestrial.35 Machine learning supplied a different route for prioritizing observations within that search design.",
       "runs": [
         {
           "text": "The more relevant evidence is Peter Ma and colleagues' search of observations from 820 nearby stars. Their machine-learning pipeline used synthetic signal injections and produced candidates that underwent further filtering and visual inspection. Eight signals were selected for examination, and follow-up did not redetect them. Reported test performance concerns the specified simulated task, not a measured probability that a candidate is extraterrestrial."
         },
         {
-          "text": "25",
+          "text": "35",
           "superscript": true,
-          "footnoteRef": "25"
+          "footnoteRef": "35"
         },
         {
           "text": " Machine learning supplied a different route for prioritizing observations within that search design."
@@ -970,15 +1093,15 @@
     },
     {
       "type": "paragraph",
-      "text": "The blc1 candidate demonstrates the need for further investigation. Sheikh and colleagues attributed it to local electronic interference and developed a verification framework.26 A candidate can survive initial screening while its origin remains unresolved. Claims that such an error would cause diplomatic escalation require additional evidence about how institutions would respond.",
+      "text": "The blc1 candidate demonstrates the need for further investigation. Sheikh and colleagues attributed it to local electronic interference and developed a verification framework.36 A candidate can survive initial screening while its origin remains unresolved. Claims that such an error would cause diplomatic escalation require additional evidence about how institutions would respond.",
       "runs": [
         {
           "text": "The blc1 candidate demonstrates the need for further investigation. Sheikh and colleagues attributed it to local electronic interference and developed a verification framework."
         },
         {
-          "text": "26",
+          "text": "36",
           "superscript": true,
-          "footnoteRef": "26"
+          "footnoteRef": "36"
         },
         {
           "text": " A candidate can survive initial screening while its origin remains unresolved. Claims that such an error would cause diplomatic escalation require additional evidence about how institutions would respond."
@@ -987,15 +1110,15 @@
     },
     {
       "type": "paragraph",
-      "text": "The target harm should be defined as lost or distorted scientific knowledge under limited observing and analytical capacity. The baseline already contains extensive data reduction and automated analysis.27 The choice is not between AI and humans listening unaided. A useful comparison asks which search policy identifies worthwhile candidates, which kinds of signals it may systematically miss, and how follow-up capacity is allocated. Raising a screening threshold reduces workload but may suppress unusual evidence. Lowering it can overwhelm follow-up resources. Without a confirmed corpus of extraterrestrial signals, synthetic tests cannot determine real-world sensitivity to all possible technosignatures.",
+      "text": "The target harm should be defined as lost or distorted scientific knowledge under limited observing and analytical capacity. The baseline already contains extensive data reduction and automated analysis.37 The choice is not between AI and humans listening unaided. A useful comparison asks which search policy identifies worthwhile candidates, which kinds of signals it may systematically miss, and how follow-up capacity is allocated. Raising a screening threshold reduces workload but may suppress unusual evidence. Lowering it can overwhelm follow-up resources. Without a confirmed corpus of extraterrestrial signals, synthetic tests cannot determine real-world sensitivity to all possible technosignatures.",
       "runs": [
         {
           "text": "The target harm should be defined as lost or distorted scientific knowledge under limited observing and analytical capacity. The baseline already contains extensive data reduction and automated analysis."
         },
         {
-          "text": "27",
+          "text": "37",
           "superscript": true,
-          "footnoteRef": "27"
+          "footnoteRef": "37"
         },
         {
           "text": " The choice is not between AI and humans listening unaided. A useful comparison asks which search policy identifies worthwhile candidates, which kinds of signals it may systematically miss, and how follow-up capacity is allocated. Raising a screening threshold reduces workload but may suppress unusual evidence. Lowering it can overwhelm follow-up resources. Without a confirmed corpus of extraterrestrial signals, synthetic tests cannot determine real-world sensitivity to all possible technosignatures."
@@ -1022,15 +1145,15 @@
     },
     {
       "type": "paragraph",
-      "text": "The International Academy of Astronautics' 2010 declaration provides an existing professional precedent. It distinguishes handling candidates, verification, confirmed announcements, and preservation of observations. Principle 8 commits signatories to seek the guidance and consent of a broadly representative international body before responding to a confirmed signal. The declaration is a voluntary commitment by individuals and institutions.28 It supports scientific coordination without establishing a treaty-based power for the United Nations to approve every research communication.",
+      "text": "The International Academy of Astronautics' 2010 declaration provides an existing professional precedent. It distinguishes handling candidates, verification, confirmed announcements, and preservation of observations. Principle 8 commits signatories to seek the guidance and consent of a broadly representative international body before responding to a confirmed signal. The declaration is a voluntary commitment by individuals and institutions.38 It supports scientific coordination without establishing a treaty-based power for the United Nations to approve every research communication.",
       "runs": [
         {
           "text": "The International Academy of Astronautics' 2010 declaration provides an existing professional precedent. It distinguishes handling candidates, verification, confirmed announcements, and preservation of observations. Principle 8 commits signatories to seek the guidance and consent of a broadly representative international body before responding to a confirmed signal. The declaration is a voluntary commitment by individuals and institutions."
         },
         {
-          "text": "28",
+          "text": "38",
           "superscript": true,
-          "footnoteRef": "28"
+          "footnoteRef": "38"
         },
         {
           "text": " It supports scientific coordination without establishing a treaty-based power for the United Nations to approve every research communication."
@@ -1057,6 +1180,20 @@
     },
     {
       "type": "paragraph",
+      "text": "In the United States the limit is constitutional as well as jurisdictional. A requirement that an announcement be cleared in advance would be a prior restraint, and \"[a]ny system of prior restraints of expression comes to this Court bearing a heavy presumption against its constitutional validity.\"39",
+      "runs": [
+        {
+          "text": "In the United States the limit is constitutional as well as jurisdictional. A requirement that an announcement be cleared in advance would be a prior restraint, and \"[a]ny system of prior restraints of expression comes to this Court bearing a heavy presumption against its constitutional validity.\""
+        },
+        {
+          "text": "39",
+          "superscript": true,
+          "footnoteRef": "39"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
       "text": "Transmission of a deliberate response is a further act, distinct from detecting, interpreting, or reporting. Classifier performance supplies no evidence about the effects of a deliberate response. Permission to search cannot, by itself, authorize an institution to speak for humanity or choose that response. With those decisions separated, institutions retain the benefit of automated search and refuse to infer new authority from technical success.",
       "runs": [
         {
@@ -1067,23 +1204,22 @@
     {
       "type": "heading",
       "level": 1,
-      "id": "section-86",
-      "text": "VII. Implementing authority that can be revised",
+      "id": "section-94",
+      "text": "VII. Implementing Authority That Can Be Revised",
       "runs": [
         {
-          "text": "VII. Implementing authority that can be revised"
+          "text": "VII. Implementing Authority That Can Be Revised"
         }
       ]
     },
     {
       "type": "heading",
       "level": 2,
-      "id": "section-87",
-      "text": "A. A task-specific authorization record",
+      "id": "section-95",
+      "text": "A. A Task-Specific Authorization Record",
       "runs": [
         {
-          "text": "A. A task-specific authorization record",
-          "italic": true
+          "text": "A. A Task-Specific Authorization Record"
         }
       ]
     },
@@ -1117,12 +1253,11 @@
     {
       "type": "heading",
       "level": 2,
-      "id": "section-91",
-      "text": "B. An independent opportunity to challenge the authorization",
+      "id": "section-99",
+      "text": "B. An Independent Opportunity to Challenge the Authorization",
       "runs": [
         {
-          "text": "B. An independent opportunity to challenge the authorization",
-          "italic": true
+          "text": "B. An Independent Opportunity to Challenge the Authorization"
         }
       ]
     },
@@ -1165,12 +1300,11 @@
     {
       "type": "heading",
       "level": 2,
-      "id": "section-96",
-      "text": "C. Records of consequential decisions",
+      "id": "section-104",
+      "text": "C. Records of Consequential Decisions",
       "runs": [
         {
-          "text": "C. Records of consequential decisions",
-          "italic": true
+          "text": "C. Records of Consequential Decisions"
         }
       ]
     },
@@ -1194,6 +1328,23 @@
     },
     {
       "type": "paragraph",
+      "text": "The record also connects supervision before the event to liability after it. A fault standard requires an account of the precautions reasonably available before the event, and that account is what claimants under the Liability Convention have lacked. A documented operating range supplies it. Departure from the range is evidence of fault, in the way a violated safety standard is evidence of negligence, and operation within it is evidence of care without being a defense, as compliance with a statute is in the common law of torts.40 The authorization record thus gives the liability regime the proof it has been missing, and the two forms of control reinforce each other.",
+      "runs": [
+        {
+          "text": "The record also connects supervision before the event to liability after it. A fault standard requires an account of the precautions reasonably available before the event, and that account is what claimants under the Liability Convention have lacked. A documented operating range supplies it. Departure from the range is evidence of fault, in the way a violated safety standard is evidence of negligence, and operation within it is evidence of care without being a defense, as compliance with a statute is in the common law of torts."
+        },
+        {
+          "text": "40",
+          "superscript": true,
+          "footnoteRef": "40"
+        },
+        {
+          "text": " The authorization record thus gives the liability regime the proof it has been missing, and the two forms of control reinforce each other."
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
       "text": "Suppliers should provide operators with the information and change notices needed to satisfy these obligations. Contracts can allocate audit access, cooperation, and recourse among private parties. Such arrangements should not be described as rewriting the launching states' treaty obligations. They may improve internal incentives while leaving the international claimant's rights and applicable domestic law unchanged. The operator should remain answerable for the decision to integrate and use a component within its authorization, while supplier responsibility depends on the governing legal and contractual rules.",
       "runs": [
         {
@@ -1204,26 +1355,25 @@
     {
       "type": "heading",
       "level": 2,
-      "id": "section-100",
-      "text": "D. Use existing institutions without overstating their powers",
+      "id": "section-109",
+      "text": "D. Use Existing Institutions Without Overstating Their Powers",
       "runs": [
         {
-          "text": "D. Use existing institutions without overstating their powers",
-          "italic": true
+          "text": "D. Use Existing Institutions Without Overstating Their Powers"
         }
       ]
     },
     {
       "type": "paragraph",
-      "text": "For covered communications satellites, FCC disclosures provide a concrete starting point for asking applicants to describe autonomous maneuver policy and its assumptions. The 2024 reconsideration is instructive: the agency declined to preserve an assumption of zero or near-zero collision risk where the record showed insufficient avoidance capability.29 A favorable modeling convention is not a finding that autonomy eliminates risk. Further requirements would still need a lawful rulemaking or other applicable process and a reasoned connection to the FCC's statutory responsibilities.",
+      "text": "For covered communications satellites, FCC disclosures provide a concrete starting point for asking applicants to describe autonomous maneuver policy and its assumptions. The 2024 reconsideration is instructive: the agency declined to preserve an assumption of zero or near-zero collision risk where the record showed insufficient avoidance capability.41 A favorable modeling convention is not a finding that autonomy eliminates risk. Further requirements would still need a lawful rulemaking or other applicable process and a reasoned connection to the FCC's statutory responsibilities.",
       "runs": [
         {
           "text": "For covered communications satellites, FCC disclosures provide a concrete starting point for asking applicants to describe autonomous maneuver policy and its assumptions. The 2024 reconsideration is instructive: the agency declined to preserve an assumption of zero or near-zero collision risk where the record showed insufficient avoidance capability."
         },
         {
-          "text": "29",
+          "text": "41",
           "superscript": true,
-          "footnoteRef": "29"
+          "footnoteRef": "41"
         },
         {
           "text": " A favorable modeling convention is not a finding that autonomy eliminates risk. Further requirements would still need a lawful rulemaking or other applicable process and a reasoned connection to the FCC's statutory responsibilities."
@@ -1242,23 +1392,22 @@
     {
       "type": "heading",
       "level": 1,
-      "id": "section-103",
-      "text": "VIII. Objections and the risks of regulation",
+      "id": "section-112",
+      "text": "VIII. Objections and the Risks of Regulation",
       "runs": [
         {
-          "text": "VIII. Objections and the risks of regulation"
+          "text": "VIII. Objections and the Risks of Regulation"
         }
       ]
     },
     {
       "type": "heading",
       "level": 2,
-      "id": "section-104",
-      "text": "A. The authorization may conceal the real political choice",
+      "id": "section-113",
+      "text": "A. The Authorization May Conceal the Real Political Choice",
       "runs": [
         {
-          "text": "A. The authorization may conceal the real political choice",
-          "italic": true
+          "text": "A. The Authorization May Conceal the Real Political Choice"
         }
       ]
     },
@@ -1283,12 +1432,11 @@
     {
       "type": "heading",
       "level": 2,
-      "id": "section-107",
-      "text": "B. Regulators may make safe action slower and more expensive",
+      "id": "section-116",
+      "text": "B. Regulators May Make Safe Action Slower and More Expensive",
       "runs": [
         {
-          "text": "B. Regulators may make safe action slower and more expensive",
-          "italic": true
+          "text": "B. Regulators May Make Safe Action Slower and More Expensive"
         }
       ]
     },
@@ -1303,18 +1451,35 @@
     },
     {
       "type": "paragraph",
-      "text": "The costs of those requirements depend on the institution and mission. Review should therefore compare the proposed requirement with less burdensome precautions that can accomplish the same protective purpose. Common test resources, reusable evidence for shared components whose use and conditions are equivalent, recognition of equivalent review, and focused reassessment of material changes can reduce burdens. The regulator should explain what additional harm a requirement prevents and what lower-cost alternative was rejected. COPUOS guidance expressly supports examining costs, time, risks, and feasible alternatives and seeking affected entities' input when developing regulation.30 The guidance expressly makes regulation itself an object of comparison.",
+      "text": "The costs of those requirements depend on the institution and mission. Review should therefore compare the proposed requirement with less burdensome precautions that can accomplish the same protective purpose. Common test resources, reusable evidence for shared components whose use and conditions are equivalent, recognition of equivalent review, and focused reassessment of material changes can reduce burdens. The regulator should explain what additional harm a requirement prevents and what lower-cost alternative was rejected. COPUOS guidance expressly supports examining costs, time, risks, and feasible alternatives and seeking affected entities' input when developing regulation.42 The guidance expressly makes regulation itself an object of comparison.",
       "runs": [
         {
           "text": "The costs of those requirements depend on the institution and mission. Review should therefore compare the proposed requirement with less burdensome precautions that can accomplish the same protective purpose. Common test resources, reusable evidence for shared components whose use and conditions are equivalent, recognition of equivalent review, and focused reassessment of material changes can reduce burdens. The regulator should explain what additional harm a requirement prevents and what lower-cost alternative was rejected. COPUOS guidance expressly supports examining costs, time, risks, and feasible alternatives and seeking affected entities' input when developing regulation."
         },
         {
-          "text": "30",
+          "text": "42",
           "superscript": true,
-          "footnoteRef": "30"
+          "footnoteRef": "42"
         },
         {
           "text": " The guidance expressly makes regulation itself an object of comparison."
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "The comparison has to run in both directions. Risk-tradeoff analysis as usually practiced counts the harms a regulation causes and neglects the benefits it produces beyond its stated aim.43 Approval, certification, and disclosure have such benefits. Records kept for supervision later support claims and investigations, assurance exercises train the operators who run them, and a decision that can be reconstructed deters carelessness. A regulator applying this Article's procedure should enter those benefits in the same ledger as the delay and expense.",
+      "runs": [
+        {
+          "text": "The comparison has to run in both directions. Risk-tradeoff analysis as usually practiced counts the harms a regulation causes and neglects the benefits it produces beyond its stated aim."
+        },
+        {
+          "text": "43",
+          "superscript": true,
+          "footnoteRef": "43"
+        },
+        {
+          "text": " Approval, certification, and disclosure have such benefits. Records kept for supervision later support claims and investigations, assurance exercises train the operators who run them, and a decision that can be reconstructed deters carelessness. A regulator applying this Article's procedure should enter those benefits in the same ledger as the delay and expense."
         }
       ]
     },
@@ -1330,12 +1495,11 @@
     {
       "type": "heading",
       "level": 2,
-      "id": "section-111",
-      "text": "C. A validated boundary may fail outside its assumptions",
+      "id": "section-121",
+      "text": "C. A Validated Boundary May Fail Outside Its Assumptions",
       "runs": [
         {
-          "text": "C. A validated boundary may fail outside its assumptions",
-          "italic": true
+          "text": "C. A Validated Boundary May Fail Outside Its Assumptions"
         }
       ]
     },
@@ -1345,6 +1509,23 @@
       "runs": [
         {
           "text": "A third objection concerns technical and institutional common failure. A monitor may rely on the same flawed sensor or state estimate as the controller. A fallback can become unsafe under unexpected dynamics. Multiple operators can each satisfy local constraints while their combined actions remain dangerous. These possibilities make the language of a \"safety envelope\" misleading if it is understood as a guarantee."
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "The failure has occurred in flight. In NASA's 2005 DART mission an autonomous rendezvous vehicle collided with its target although its collision-avoidance function had activated, because \"[t]he software logic for collision avoidance was dependent on the same navigational data source as the guidance system.\"44 A protection that shares the controller's picture of the world protects only against errors the controller does not make.",
+      "runs": [
+        {
+          "text": "The failure has occurred in flight. In NASA's 2005 DART mission an autonomous rendezvous vehicle collided with its target although its collision-avoidance function had activated, because \"[t]he software logic for collision avoidance was dependent on the same navigational data source as the guidance system.\""
+        },
+        {
+          "text": "44",
+          "superscript": true,
+          "footnoteRef": "44"
+        },
+        {
+          "text": " A protection that shares the controller's picture of the world protects only against errors the controller does not make."
         }
       ]
     },
@@ -1369,12 +1550,11 @@
     {
       "type": "heading",
       "level": 2,
-      "id": "section-115",
-      "text": "D. Liability alone or global control might be preferable",
+      "id": "section-126",
+      "text": "D. Liability Alone or Global Control Might Be Preferable",
       "runs": [
         {
-          "text": "D. Liability alone or global control might be preferable",
-          "italic": true
+          "text": "D. Liability Alone or Global Control Might Be Preferable"
         }
       ]
     },
@@ -1408,7 +1588,7 @@
     {
       "type": "heading",
       "level": 1,
-      "id": "section-119",
+      "id": "section-130",
       "text": "IX. Conclusion",
       "runs": [
         {
@@ -1418,10 +1598,10 @@
     },
     {
       "type": "paragraph",
-      "text": "The law of autonomous space activity should attach responsibility to the decisions that grant and shape authority. Delayed operations can justify advance permission for validated local action. Orbital avoidance adds coordination and third-party exposure. Capture adds legal interests that prediction cannot resolve. SETI requires a distinction between searching, confirming, communicating, and responding.",
+      "text": "The law of autonomous space activity should attach responsibility to the decisions that grant and shape authority. Delayed operations can justify advance permission for validated local action. Orbital avoidance adds coordination and third-party exposure. Capture adds legal interests that prediction cannot resolve. SETI requires a distinction between searching, confirming, communicating, and responding. The procedure asks of an autonomous system what the law already asks of any delegate: authority first, a justification on the record, and control exercised while it can still matter.",
       "runs": [
         {
-          "text": "The law of autonomous space activity should attach responsibility to the decisions that grant and shape authority. Delayed operations can justify advance permission for validated local action. Orbital avoidance adds coordination and third-party exposure. Capture adds legal interests that prediction cannot resolve. SETI requires a distinction between searching, confirming, communicating, and responding."
+          "text": "The law of autonomous space activity should attach responsibility to the decisions that grant and shape authority. Delayed operations can justify advance permission for validated local action. Orbital avoidance adds coordination and third-party exposure. Capture adds legal interests that prediction cannot resolve. SETI requires a distinction between searching, confirming, communicating, and responding. The procedure asks of an autonomous system what the law already asks of any delegate: authority first, a justification on the record, and control exercised while it can still matter."
         }
       ]
     },
@@ -1442,6 +1622,15 @@
           "text": "Risk-risk analysis requires evaluation of the controls themselves. Human review, certification, information sharing, and restrictions all impose costs and can create hazards. A defensible arrangement explains why its combination of action and restraint is preferable to feasible alternatives, for the people who actually bear the consequences. A permission resting on assumptions that can no longer be defended should be narrowed, transferred to an adequately supported alternative, or withdrawn."
         }
       ]
+    },
+    {
+      "type": "paragraph",
+      "text": "---",
+      "runs": [
+        {
+          "text": "---"
+        }
+      ]
     }
   ],
   "footnotes": [
@@ -1450,133 +1639,7 @@
       "text": "TYLER FELGENHAUER ET AL., SOLAR RADIATION MODIFICATION: A RISK-RISK ANALYSIS 13-16 & tbls. 1-2 (2022), https://www.c2g2.net/wp-content/uploads/202203-C2G-RR-Full.pdf. See generally RISK VS. RISK: TRADEOFFS IN PROTECTING HEALTH AND THE ENVIRONMENT (John D. Graham & Jonathan B. Wiener eds., 1995).",
       "runs": [
         {
-          "text": "T"
-        },
-        {
-          "text": "YLER ",
-          "smallCaps": true
-        },
-        {
-          "text": "F"
-        },
-        {
-          "text": "ELGENHAUER ET AL",
-          "smallCaps": true
-        },
-        {
-          "text": ".,"
-        },
-        {
-          "text": " ",
-          "smallCaps": true
-        },
-        {
-          "text": "S"
-        },
-        {
-          "text": "OLAR ",
-          "smallCaps": true
-        },
-        {
-          "text": "R"
-        },
-        {
-          "text": "ADIATION ",
-          "smallCaps": true
-        },
-        {
-          "text": "M"
-        },
-        {
-          "text": "ODIFICATION",
-          "smallCaps": true
-        },
-        {
-          "text": ":"
-        },
-        {
-          "text": " ",
-          "smallCaps": true
-        },
-        {
-          "text": "A"
-        },
-        {
-          "text": " ",
-          "smallCaps": true
-        },
-        {
-          "text": "R"
-        },
-        {
-          "text": "ISK",
-          "smallCaps": true
-        },
-        {
-          "text": "-R"
-        },
-        {
-          "text": "ISK ",
-          "smallCaps": true
-        },
-        {
-          "text": "A"
-        },
-        {
-          "text": "NALYSIS",
-          "smallCaps": true
-        },
-        {
-          "text": " 13-16 & tbls. 1-2 (2022), https://www.c2g2.net/wp-content/uploads/202203-C2G-RR-Full.pdf. See generally R"
-        },
-        {
-          "text": "ISK VS",
-          "smallCaps": true
-        },
-        {
-          "text": "."
-        },
-        {
-          "text": " ",
-          "smallCaps": true
-        },
-        {
-          "text": "R"
-        },
-        {
-          "text": "ISK",
-          "smallCaps": true
-        },
-        {
-          "text": ": T"
-        },
-        {
-          "text": "RADEOFFS IN ",
-          "smallCaps": true
-        },
-        {
-          "text": "P"
-        },
-        {
-          "text": "ROTECTING ",
-          "smallCaps": true
-        },
-        {
-          "text": "H"
-        },
-        {
-          "text": "EALTH AND THE ",
-          "smallCaps": true
-        },
-        {
-          "text": "E"
-        },
-        {
-          "text": "NVIRONMENT",
-          "smallCaps": true
-        },
-        {
-          "text": " (John D. Graham & Jonathan B. Wiener eds., 1995)."
+          "text": "TYLER FELGENHAUER ET AL., SOLAR RADIATION MODIFICATION: A RISK-RISK ANALYSIS 13-16 & tbls. 1-2 (2022), https://www.c2g2.net/wp-content/uploads/202203-C2G-RR-Full.pdf. See generally RISK VS. RISK: TRADEOFFS IN PROTECTING HEALTH AND THE ENVIRONMENT (John D. Graham & Jonathan B. Wiener eds., 1995)."
         }
       ]
     },
@@ -1585,14 +1648,7 @@
       "text": "FELGENHAUER ET AL., supra note 1, at 13-16 & tbls. 1-2.",
       "runs": [
         {
-          "text": "F"
-        },
-        {
-          "text": "ELGENHAUER ET AL",
-          "smallCaps": true
-        },
-        {
-          "text": "., "
+          "text": "FELGENHAUER ET AL., "
         },
         {
           "text": "supra",
@@ -1611,44 +1667,43 @@
           "text": "Filippo Santoni de Sio & Jeroen van den Hoven, "
         },
         {
-          "text": "Meaningful Human Control over Autonomous Systems: A",
+          "text": "Meaningful Human Control over Autonomous Systems: A Philosophical Account",
           "italic": true
         },
         {
-          "text": " "
-        },
-        {
-          "text": "Philosophical Account",
-          "italic": true
-        },
-        {
-          "text": ", 5 F"
-        },
-        {
-          "text": "RONTIERS ",
-          "smallCaps": true
-        },
-        {
-          "text": "R"
-        },
-        {
-          "text": "OBOTICS ",
-          "smallCaps": true
-        },
-        {
-          "text": "&"
-        },
-        {
-          "text": " ",
-          "smallCaps": true
-        },
-        {
-          "text": "A.I. art. 15, §§ \"Tracking,\" \"Tracing\" (2018)."
+          "text": ", 5 FRONTIERS ROBOTICS & A.I. art. 15, §§ \"Tracking,\" \"Tracing\" (2018)."
         }
       ]
     },
     {
       "number": 4,
+      "text": "Carter v. Carter Coal Co., 298 U.S. 238, 311 (1936).",
+      "runs": [
+        {
+          "text": "Carter v. Carter Coal Co., 298 U.S. 238, 311 (1936)."
+        }
+      ]
+    },
+    {
+      "number": 5,
+      "text": "Motor Vehicle Mfrs. Ass'n of the U.S., Inc. v. State Farm Mut. Auto. Ins. Co., 463 U.S. 29, 43, 46-51 (1983).",
+      "runs": [
+        {
+          "text": "Motor Vehicle Mfrs. Ass'n of the U.S., Inc. v. State Farm Mut. Auto. Ins. Co., 463 U.S. 29, 43, 46-51 (1983)."
+        }
+      ]
+    },
+    {
+      "number": 6,
+      "text": "U.S. Telecom Ass'n v. FCC, 359 F.3d 554, 565-68 (D.C. Cir. 2004).",
+      "runs": [
+        {
+          "text": "U.S. Telecom Ass'n v. FCC, 359 F.3d 554, 565-68 (D.C. Cir. 2004)."
+        }
+      ]
+    },
+    {
+      "number": 7,
       "text": "Treaty on Principles Governing the Activities of States in the Exploration and Use of Outer Space, Including the Moon and Other Celestial Bodies arts. III, VI-IX, Jan. 27, 1967, 18 U.S.T. 2410, 610 U.N.T.S. 205 [hereinafter Outer Space Treaty].",
       "runs": [
         {
@@ -1657,80 +1712,35 @@
       ]
     },
     {
-      "number": 5,
-      "text": "Int'l Law Comm'n, Draft Articles on Responsibility of States for Internationally Wrongful Acts, with Commentaries, arts. 2, 4, 8, 55, in REPORT OF THE INTERNATIONAL LAW COMMISSION ON THE WORK OF ITS FIFTY-THIRD SESSION, at 34, 40, 47-48, 140-41, U.N. Doc. A/56/10 (2001). The articles address general responsibility rules and their relationship to special regimes; the application to Article VI is the analysis advanced here.",
+      "number": 8,
+      "text": "Responsibilities and Obligations of States Sponsoring Persons and Entities with Respect to Activities in the Area, Case No. 17, Advisory Opinion of Feb. 1, 2011, ITLOS Rep. 10, ¶¶ 110, 117.",
       "runs": [
         {
-          "text": "Int'l Law Comm'n, Draft Articles on Responsibility of States for Internationally Wrongful Acts, with Commentaries, arts. 2, 4, 8, 55, in R"
-        },
-        {
-          "text": "EPORT OF THE ",
-          "smallCaps": true
-        },
-        {
-          "text": "I"
-        },
-        {
-          "text": "NTERNATIONAL ",
-          "smallCaps": true
-        },
-        {
-          "text": "L"
-        },
-        {
-          "text": "AW ",
-          "smallCaps": true
-        },
-        {
-          "text": "C"
-        },
-        {
-          "text": "OMMISSION ON THE ",
-          "smallCaps": true
-        },
-        {
-          "text": "W"
-        },
-        {
-          "text": "ORK OF ",
-          "smallCaps": true
-        },
-        {
-          "text": "I"
-        },
-        {
-          "text": "TS",
-          "smallCaps": true
-        },
-        {
-          "text": " F"
-        },
-        {
-          "text": "IFTY",
-          "smallCaps": true
-        },
-        {
-          "text": "-T"
-        },
-        {
-          "text": "HIRD ",
-          "smallCaps": true
-        },
-        {
-          "text": "S"
-        },
-        {
-          "text": "ESSION",
-          "smallCaps": true
-        },
-        {
-          "text": ", at 34, 40, 47-48, 140-41, U.N. Doc. A/56/10 (2001). The articles address general responsibility rules and their relationship to special regimes; the application to Article VI is the analysis advanced here."
+          "text": "Responsibilities and Obligations of States Sponsoring Persons and Entities with Respect to Activities in the Area, Case No. 17, Advisory Opinion of Feb. 1, 2011, ITLOS Rep. 10, ¶¶ 110, 117."
         }
       ]
     },
     {
-      "number": 6,
-      "text": "Outer Space Treaty, supra note 4, arts. VI-IX.",
+      "number": 9,
+      "text": "Int'l Law Comm'n, Draft Articles on Prevention of Transboundary Harm from Hazardous Activities art. 6, in Rep. of the Int'l Law Comm'n on the Work of Its Fifty-Third Session, U.N. Doc. A/56/10 (2001).",
+      "runs": [
+        {
+          "text": "Int'l Law Comm'n, Draft Articles on Prevention of Transboundary Harm from Hazardous Activities art. 6, in Rep. of the Int'l Law Comm'n on the Work of Its Fifty-Third Session, U.N. Doc. A/56/10 (2001)."
+        }
+      ]
+    },
+    {
+      "number": 10,
+      "text": "Int'l Law Comm'n, Draft Articles on Responsibility of States for Internationally Wrongful Acts, with Commentaries, arts. 2, 4, 8, 55, in REPORT OF THE INTERNATIONAL LAW COMMISSION ON THE WORK OF ITS FIFTY-THIRD SESSION, at 34, 40, 47-48, 140-41, U.N. Doc. A/56/10 (2001). The articles address general responsibility rules and their relationship to special regimes; the application to Article VI is the analysis advanced here.",
+      "runs": [
+        {
+          "text": "Int'l Law Comm'n, Draft Articles on Responsibility of States for Internationally Wrongful Acts, with Commentaries, arts. 2, 4, 8, 55, in REPORT OF THE INTERNATIONAL LAW COMMISSION ON THE WORK OF ITS FIFTY-THIRD SESSION, at 34, 40, 47-48, 140-41, U.N. Doc. A/56/10 (2001). The articles address general responsibility rules and their relationship to special regimes; the application to Article VI is the analysis advanced here."
+        }
+      ]
+    },
+    {
+      "number": 11,
+      "text": "Outer Space Treaty, supra note 7, arts. VI-IX.",
       "runs": [
         {
           "text": "Outer Space Treaty, "
@@ -1740,12 +1750,12 @@
           "italic": true
         },
         {
-          "text": " note 4, arts. VI-IX."
+          "text": " note 7, arts. VI-IX."
         }
       ]
     },
     {
-      "number": 7,
+      "number": 12,
       "text": "Convention on International Liability for Damage Caused by Space Objects arts. I-III, V-XII, XIV-XIX, Mar. 29, 1972, 24 U.S.T. 2389, 961 U.N.T.S. 187 [hereinafter Liability Convention].",
       "runs": [
         {
@@ -1754,8 +1764,8 @@
       ]
     },
     {
-      "number": 8,
-      "text": "Liability Convention, supra note 7, arts. I, III, VII-XI, XIX.",
+      "number": 13,
+      "text": "Liability Convention, supra note 12, arts. I, III, VII-XI, XIX.",
       "runs": [
         {
           "text": "Liability Convention, "
@@ -1765,13 +1775,13 @@
           "italic": true
         },
         {
-          "text": " note 7, arts. I, III, VII-XI, XIX."
+          "text": " note 12, arts. I, III, VII-XI, XIX."
         }
       ]
     },
     {
-      "number": 9,
-      "text": "Liability Convention, supra note 7, arts. I, III, VII-XI, XIX.",
+      "number": 14,
+      "text": "Liability Convention, supra note 12, arts. I, III, VII-XI, XIX.",
       "runs": [
         {
           "text": "Liability Convention, "
@@ -1781,12 +1791,12 @@
           "italic": true
         },
         {
-          "text": " note 7, arts. I, III, VII-XI, XIX."
+          "text": " note 12, arts. I, III, VII-XI, XIX."
         }
       ]
     },
     {
-      "number": 10,
+      "number": 15,
       "text": "Convention on Registration of Objects Launched into Outer Space arts. II-IV, VI, Jan. 14, 1975, 28 U.S.T. 695, 1023 U.N.T.S. 15.",
       "runs": [
         {
@@ -1795,7 +1805,7 @@
       ]
     },
     {
-      "number": 11,
+      "number": 16,
       "text": "Comm. on the Peaceful Uses of Outer Space, Report of the Committee on the Peaceful Uses of Outer Space, annex II, pmbl. ¶¶ 14-16, guidelines A.2-A.3, B.1-B.4, at 52, 55-56, 59-61, U.N. Doc. A/74/20 (2019) [hereinafter LTS Guidelines].",
       "runs": [
         {
@@ -1804,7 +1814,7 @@
       ]
     },
     {
-      "number": 12,
+      "number": 17,
       "text": "Mitigation of Orbital Debris in the New Space Age, 85 Fed. Reg. 52,422, 52,424-25, 52,429-30, 52,432-33, 52,451 (Aug. 25, 2020) (codified at 47 C.F.R. § 25.114(d)(14)(iv)(A)(4)-(5), (v)(C)); Space Innovation; Mitigation of Orbital Debris in the New Space Age, 89 Fed. Reg. 65,217, 65,217 (Aug. 9, 2024) (announcing Sept. 9, 2024 effective date).",
       "runs": [
         {
@@ -1813,7 +1823,7 @@
       ]
     },
     {
-      "number": 13,
+      "number": 18,
       "text": "Mitigation of Orbital Debris in the New Space Age, 85 Fed. Reg. 52,422, 52,424-25, 52,447 (Aug. 25, 2020) (identifying the agency's statutory basis and listing 47 U.S.C. §§ 151, 154(i), 301, 303, 307-310).",
       "runs": [
         {
@@ -1822,21 +1832,23 @@
       ]
     },
     {
-      "number": 14,
+      "number": 19,
+      "text": "Loper Bright Enters. v. Raimondo, 603 U.S. 369 (2024).",
+      "runs": [
+        {
+          "text": "Loper Bright Enters. v. Raimondo, 603 U.S. 369 (2024)."
+        }
+      ]
+    },
+    {
+      "number": 20,
       "text": "Katherine T. McBrayer, Patrick R. Chai & Emily L. Judd, Communication Delays, Disruptions, and Blackouts for Crewed Mars Missions, at 2-8 (ASCEND 2022), https://ntrs.nasa.gov/citations/20220013418.",
       "runs": [
         {
           "text": "Katherine T. McBrayer, Patrick R. Chai & Emily L. Judd, "
         },
         {
-          "text": "Communication Delays, Disruptions, and Blackouts",
-          "italic": true
-        },
-        {
-          "text": " "
-        },
-        {
-          "text": "for Crewed Mars Missions",
+          "text": "Communication Delays, Disruptions, and Blackouts for Crewed Mars Missions",
           "italic": true
         },
         {
@@ -1845,81 +1857,11 @@
       ]
     },
     {
-      "number": 15,
+      "number": 21,
       "text": "NAT'L AERONAUTICS & SPACE ADMIN., JET PROPULSION LAB., Remote Agent Experiment Meets All Objectives (June 7, 1999), https://www.jpl.nasa.gov/news/remote-agent-experiment-meets-all-objectives/.",
       "runs": [
         {
-          "text": "N"
-        },
-        {
-          "text": "AT",
-          "smallCaps": true
-        },
-        {
-          "text": "'"
-        },
-        {
-          "text": "L ",
-          "smallCaps": true
-        },
-        {
-          "text": "A"
-        },
-        {
-          "text": "ERONAUTICS ",
-          "smallCaps": true
-        },
-        {
-          "text": "&"
-        },
-        {
-          "text": " ",
-          "smallCaps": true
-        },
-        {
-          "text": "S"
-        },
-        {
-          "text": "PACE ",
-          "smallCaps": true
-        },
-        {
-          "text": "A"
-        },
-        {
-          "text": "DMIN",
-          "smallCaps": true
-        },
-        {
-          "text": ".,"
-        },
-        {
-          "text": " ",
-          "smallCaps": true
-        },
-        {
-          "text": "J"
-        },
-        {
-          "text": "ET ",
-          "smallCaps": true
-        },
-        {
-          "text": "P"
-        },
-        {
-          "text": "ROPULSION ",
-          "smallCaps": true
-        },
-        {
-          "text": "L"
-        },
-        {
-          "text": "AB",
-          "smallCaps": true
-        },
-        {
-          "text": "., "
+          "text": "NAT'L AERONAUTICS & SPACE ADMIN., JET PROPULSION LAB., "
         },
         {
           "text": "Remote Agent Experiment Meets All Objectives",
@@ -1931,65 +1873,30 @@
       ]
     },
     {
-      "number": 16,
+      "number": 22,
       "text": "Raymond Francis et al., AEGIS Autonomous Targeting for ChemCam on Mars Science Laboratory: Deployment and Results of Initial Science Team Use, 2 SCI. ROBOTICS eaan4582, abstract (2017).",
       "runs": [
         {
           "text": "Raymond Francis et al., "
         },
         {
-          "text": "AEGIS Autonomous Targeting for ChemCam on Mars Science Laboratory: Deployment",
+          "text": "AEGIS Autonomous Targeting for ChemCam on Mars Science Laboratory: Deployment and Results of Initial Science Team Use",
           "italic": true
         },
         {
-          "text": " "
-        },
-        {
-          "text": "and Results of Initial Science Team Use",
-          "italic": true
-        },
-        {
-          "text": ", 2 S"
-        },
-        {
-          "text": "CI",
-          "smallCaps": true
-        },
-        {
-          "text": "."
-        },
-        {
-          "text": " ",
-          "smallCaps": true
-        },
-        {
-          "text": "R"
-        },
-        {
-          "text": "OBOTICS",
-          "smallCaps": true
-        },
-        {
-          "text": " eaan4582, abstract (2017)."
+          "text": ", 2 SCI. ROBOTICS eaan4582, abstract (2017)."
         }
       ]
     },
     {
-      "number": 17,
+      "number": 23,
       "text": "Raymond Francis et al., AEGIS Autonomous Targeting for the SuperCam Instrument on the Mars 2020 Perseverance Rover, at 3-5 (i-SAIRAS 2024), https://ai.jpl.nasa.gov/public/documents/papers/francis-isairas-2024.pdf.",
       "runs": [
         {
           "text": "Raymond Francis et al., "
         },
         {
-          "text": "AEGIS Autonomous Targeting for the SuperCam Instrument on the Mars 2020",
-          "italic": true
-        },
-        {
-          "text": " "
-        },
-        {
-          "text": "Perseverance Rover",
+          "text": "AEGIS Autonomous Targeting for the SuperCam Instrument on the Mars 2020 Perseverance Rover",
           "italic": true
         },
         {
@@ -1998,100 +1905,32 @@
       ]
     },
     {
-      "number": 18,
+      "number": 24,
       "text": "NAT'L AERONAUTICS & SPACE ADMIN., SOFTWARE ENGINEERING REQUIREMENTS, NPR 7150.2D, preface P.2, §§ 3.6-3.7 (Mar. 8, 2022).",
       "runs": [
         {
-          "text": "N"
-        },
-        {
-          "text": "AT",
-          "smallCaps": true
-        },
-        {
-          "text": "'"
-        },
-        {
-          "text": "L ",
-          "smallCaps": true
-        },
-        {
-          "text": "A"
-        },
-        {
-          "text": "ERONAUTICS ",
-          "smallCaps": true
-        },
-        {
-          "text": "&"
-        },
-        {
-          "text": " ",
-          "smallCaps": true
-        },
-        {
-          "text": "S"
-        },
-        {
-          "text": "PACE ",
-          "smallCaps": true
-        },
-        {
-          "text": "A"
-        },
-        {
-          "text": "DMIN",
-          "smallCaps": true
-        },
-        {
-          "text": ".,"
-        },
-        {
-          "text": " ",
-          "smallCaps": true
-        },
-        {
-          "text": "S"
-        },
-        {
-          "text": "OFTWARE ",
-          "smallCaps": true
-        },
-        {
-          "text": "E"
-        },
-        {
-          "text": "NGINEERING ",
-          "smallCaps": true
-        },
-        {
-          "text": "R"
-        },
-        {
-          "text": "EQUIREMENTS",
-          "smallCaps": true
-        },
-        {
-          "text": ", NPR 7150.2D, preface P.2, §§ 3.6-3.7 (Mar. 8, 2022)."
+          "text": "NAT'L AERONAUTICS & SPACE ADMIN., SOFTWARE ENGINEERING REQUIREMENTS, NPR 7150.2D, preface P.2, §§ 3.6-3.7 (Mar. 8, 2022)."
         }
       ]
     },
     {
-      "number": 19,
+      "number": 25,
+      "text": "14 C.F.R. § 450.108(c), (e)-(f) (2024).",
+      "runs": [
+        {
+          "text": "14 C.F.R. § 450.108(c), (e)-(f) (2024)."
+        }
+      ]
+    },
+    {
+      "number": 26,
       "text": "Thomas Uriot et al., Spacecraft Collision Avoidance Challenge: Design and Results of a Machine Learning Competition, §§ 2-4, 7-8 (Oct. 12, 2020) (arXiv:2008.03069v2), https://arxiv.org/abs/2008.03069v2.",
       "runs": [
         {
           "text": "Thomas Uriot et al., "
         },
         {
-          "text": "Spacecraft Collision Avoidance Challenge: Design and Results of a Machine Learning",
-          "italic": true
-        },
-        {
-          "text": " "
-        },
-        {
-          "text": "Competition",
+          "text": "Spacecraft Collision Avoidance Challenge: Design and Results of a Machine Learning Competition",
           "italic": true
         },
         {
@@ -2100,8 +1939,8 @@
       ]
     },
     {
-      "number": 20,
-      "text": "Uriot et al., supra note 19, §§ 2, 4.",
+      "number": 27,
+      "text": "Uriot et al., supra note 26, §§ 2, 4.",
       "runs": [
         {
           "text": "Uriot et al., "
@@ -2111,26 +1950,28 @@
           "italic": true
         },
         {
-          "text": " note 19, §§ 2, 4."
+          "text": " note 26, §§ 2, 4."
         }
       ]
     },
     {
-      "number": 21,
+      "number": 28,
+      "text": "Permanent Mission of China to the United Nations (Vienna), Note Verbale Dated 3 December 2021 Addressed to the Secretary-General, U.N. Doc. A/AC.105/1262 (Dec. 6, 2021); Permanent Mission of the United States of America to the United Nations (Vienna), Note Verbale Dated 28 January 2022 Addressed to the Secretary-General, U.N. Doc. A/AC.105/1265 (Jan. 28, 2022).",
+      "runs": [
+        {
+          "text": "Permanent Mission of China to the United Nations (Vienna), Note Verbale Dated 3 December 2021 Addressed to the Secretary-General, U.N. Doc. A/AC.105/1262 (Dec. 6, 2021); Permanent Mission of the United States of America to the United Nations (Vienna), Note Verbale Dated 28 January 2022 Addressed to the Secretary-General, U.N. Doc. A/AC.105/1265 (Jan. 28, 2022)."
+        }
+      ]
+    },
+    {
+      "number": 29,
       "text": "Kyle Dunlap, David van Wijk & Kerianne L. Hobbs, Run Time Assurance for Autonomous Spacecraft Inspection, §§ 3, 4.2, 5 (Aug. 7, 2023) (arXiv:2302.02885v2), https://arxiv.org/abs/2302.02885v2.",
       "runs": [
         {
           "text": "Kyle Dunlap, David van Wijk & Kerianne L. Hobbs, "
         },
         {
-          "text": "Run Time Assurance for Autonomous Spacecraft",
-          "italic": true
-        },
-        {
-          "text": " "
-        },
-        {
-          "text": "Inspection",
+          "text": "Run Time Assurance for Autonomous Spacecraft Inspection",
           "italic": true
         },
         {
@@ -2139,38 +1980,42 @@
       ]
     },
     {
-      "number": 22,
+      "number": 30,
+      "text": "Convention on the International Regulations for Preventing Collisions at Sea rules 16-17, Oct. 20, 1972, 28 U.S.T. 3459, 1050 U.N.T.S. 16.",
+      "runs": [
+        {
+          "text": "Convention on the International Regulations for Preventing Collisions at Sea rules 16-17, Oct. 20, 1972, 28 U.S.T. 3459, 1050 U.N.T.S. 16."
+        }
+      ]
+    },
+    {
+      "number": 31,
+      "text": "GERMAN FEDERAL BUREAU OF AIRCRAFT ACCIDENTS INVESTIGATION, INVESTIGATION REPORT AX001-1-2/02 (May 2004).",
+      "runs": [
+        {
+          "text": "GERMAN FEDERAL BUREAU OF AIRCRAFT ACCIDENTS INVESTIGATION, INVESTIGATION REPORT AX001-1-2/02 (May 2004)."
+        }
+      ]
+    },
+    {
+      "number": 32,
       "text": "Guglielmo S. Aglietti et al., RemoveDEBRIS: An In-Orbit Demonstration of Technologies for the Removal of Space Debris, 124 AERONAUTICAL J. 1, §§ 3-7 (2020).",
       "runs": [
         {
           "text": "Guglielmo S. Aglietti et al., "
         },
         {
-          "text": "RemoveDEBRIS: An In-Orbit Demonstration of Technologies for the Removal of",
+          "text": "RemoveDEBRIS: An In-Orbit Demonstration of Technologies for the Removal of Space Debris",
           "italic": true
         },
         {
-          "text": " "
-        },
-        {
-          "text": "Space Debris",
-          "italic": true
-        },
-        {
-          "text": ", 124 A"
-        },
-        {
-          "text": "ERONAUTICAL ",
-          "smallCaps": true
-        },
-        {
-          "text": "J. 1, §§ 3-7 (2020)."
+          "text": ", 124 AERONAUTICAL J. 1, §§ 3-7 (2020)."
         }
       ]
     },
     {
-      "number": 23,
-      "text": "Outer Space Treaty, supra note 4, arts. VI-IX.",
+      "number": 33,
+      "text": "Outer Space Treaty, supra note 7, arts. VI-IX.",
       "runs": [
         {
           "text": "Outer Space Treaty, "
@@ -2180,56 +2025,28 @@
           "italic": true
         },
         {
-          "text": " note 4, arts. VI-IX."
+          "text": " note 7, arts. VI-IX."
         }
       ]
     },
     {
-      "number": 24,
+      "number": 34,
       "text": "Ann N. Allen et al., Bryde's Whales Produce Biotwang Calls, Which Occur Seasonally in Long-Term Acoustic Recordings from the Central and Western North Pacific, 11 FRONTIERS MARINE SCI. art. 1394695, §§ 2-3 (2024).",
       "runs": [
         {
           "text": "Ann N. Allen et al., "
         },
         {
-          "text": "Bryde's Whales Produce Biotwang Calls, Which Occur Seasonally in Long-Term Acoustic",
+          "text": "Bryde's Whales Produce Biotwang Calls, Which Occur Seasonally in Long-Term Acoustic Recordings from the Central and Western North Pacific",
           "italic": true
         },
         {
-          "text": " "
-        },
-        {
-          "text": "Recordings from the Central and Western North Pacific",
-          "italic": true
-        },
-        {
-          "text": ", 11 F"
-        },
-        {
-          "text": "RONTIERS ",
-          "smallCaps": true
-        },
-        {
-          "text": "M"
-        },
-        {
-          "text": "ARINE ",
-          "smallCaps": true
-        },
-        {
-          "text": "S"
-        },
-        {
-          "text": "CI",
-          "smallCaps": true
-        },
-        {
-          "text": ". art. 1394695, §§ 2-3 (2024)."
+          "text": ", 11 FRONTIERS MARINE SCI. art. 1394695, §§ 2-3 (2024)."
         }
       ]
     },
     {
-      "number": 25,
+      "number": 35,
       "text": "Peter Xiangyuan Ma et al., A Deep-Learning Search for Technosignatures from 820 Nearby Stars, 7 NAT. ASTRONOMY 492, §§ \"Training Procedure,\" \"Model Evaluation and Demonstration,\" \"Search Results,\" \"Discussion\" (2023) (author manuscript), https://arxiv.org/abs/2301.12670v1.",
       "runs": [
         {
@@ -2240,149 +2057,51 @@
           "italic": true
         },
         {
-          "text": ", 7 N"
-        },
-        {
-          "text": "AT",
-          "smallCaps": true
-        },
-        {
-          "text": ". A"
-        },
-        {
-          "text": "STRONOMY",
-          "smallCaps": true
-        },
-        {
-          "text": " 492, §§ \"Training Procedure,\" \"Model Evaluation and Demonstration,\" \"Search Results,\" \"Discussion\" (2023) (author manuscript), https://arxiv.org/abs/2301.12670v1."
+          "text": ", 7 NAT. ASTRONOMY 492, §§ \"Training Procedure,\" \"Model Evaluation and Demonstration,\" \"Search Results,\" \"Discussion\" (2023) (author manuscript), https://arxiv.org/abs/2301.12670v1."
         }
       ]
     },
     {
-      "number": 26,
+      "number": 36,
       "text": "Sofia Z. Sheikh et al., Analysis of the Breakthrough Listen Signal of Interest blc1 with a Technosignature Verification Framework, 5 NAT. ASTRONOMY 1153, §§ 4-5 (2021) (author manuscript), https://arxiv.org/abs/2111.06350v1.",
       "runs": [
         {
           "text": "Sofia Z. Sheikh et al., "
         },
         {
-          "text": "Analysis of the Breakthrough Listen Signal of Interest blc1 with a Technosignature",
+          "text": "Analysis of the Breakthrough Listen Signal of Interest blc1 with a Technosignature Verification Framework",
           "italic": true
         },
         {
-          "text": " "
-        },
-        {
-          "text": "Verification Framework",
-          "italic": true
-        },
-        {
-          "text": ", 5 N"
-        },
-        {
-          "text": "AT",
-          "smallCaps": true
-        },
-        {
-          "text": "."
-        },
-        {
-          "text": " ",
-          "smallCaps": true
-        },
-        {
-          "text": "A"
-        },
-        {
-          "text": "STRONOMY",
-          "smallCaps": true
-        },
-        {
-          "text": " 1153, §§ 4-5 (2021) (author manuscript), https://arxiv.org/abs/2111.06350v1."
+          "text": ", 5 NAT. ASTRONOMY 1153, §§ 4-5 (2021) (author manuscript), https://arxiv.org/abs/2111.06350v1."
         }
       ]
     },
     {
-      "number": 27,
+      "number": 37,
       "text": "Matt Lebofsky et al., The Breakthrough Listen Search for Intelligent Life: Public Data, Formats, Reduction, and Archiving, 131 PUBL'NS ASTRONOMICAL SOC'Y PAC. 124505, §§ I, II.1-II.3, III (2019) (author manuscript, Dec. 29, 2020), https://arxiv.org/abs/1906.07391v3.",
       "runs": [
         {
           "text": "Matt Lebofsky et al., "
         },
         {
-          "text": "The Breakthrough Listen Search for Intelligent Life: Public Data, Formats, Reduction, and",
+          "text": "The Breakthrough Listen Search for Intelligent Life: Public Data, Formats, Reduction, and Archiving",
           "italic": true
         },
         {
-          "text": " "
-        },
-        {
-          "text": "Archiving",
-          "italic": true
-        },
-        {
-          "text": ", 131 P"
-        },
-        {
-          "text": "UBL",
-          "smallCaps": true
-        },
-        {
-          "text": "'"
-        },
-        {
-          "text": "NS ",
-          "smallCaps": true
-        },
-        {
-          "text": "A"
-        },
-        {
-          "text": "STRONOMICAL ",
-          "smallCaps": true
-        },
-        {
-          "text": "S"
-        },
-        {
-          "text": "OC",
-          "smallCaps": true
-        },
-        {
-          "text": "'"
-        },
-        {
-          "text": "Y ",
-          "smallCaps": true
-        },
-        {
-          "text": "P"
-        },
-        {
-          "text": "AC",
-          "smallCaps": true
-        },
-        {
-          "text": ". 124505, §§ I, II.1-II.3, III (2019) (author manuscript, Dec. 29, 2020), https://arxiv.org/abs/1906.07391v3."
+          "text": ", 131 PUBL'NS ASTRONOMICAL SOC'Y PAC. 124505, §§ I, II.1-II.3, III (2019) (author manuscript, Dec. 29, 2020), https://arxiv.org/abs/1906.07391v3."
         }
       ]
     },
     {
-      "number": 28,
+      "number": 38,
       "text": "Int'l Acad. of Astronautics, SETI Permanent Study Grp., Declaration of Principles Concerning the Conduct of the Search for Extraterrestrial Intelligence, pmbl. & principles 1-5, 8 (Sept. 30, 2010), https://www.setileague.org/iaaseti/protocols_rev2010.pdf.",
       "runs": [
         {
           "text": "Int'l Acad. of Astronautics, SETI Permanent Study Grp., "
         },
         {
-          "text": "Declaration of Principles Concerning the Conduct of",
-          "italic": true
-        },
-        {
-          "text": " "
-        },
-        {
-          "text": "the Search for Extraterrestrial Intelligence",
+          "text": "Declaration of Principles Concerning the Conduct of the Search for Extraterrestrial Intelligence",
           "italic": true
         },
         {
@@ -2391,7 +2110,25 @@
       ]
     },
     {
-      "number": 29,
+      "number": 39,
+      "text": "N.Y. Times Co. v. United States, 403 U.S. 713, 714 (1971) (per curiam) (quoting Bantam Books, Inc. v. Sullivan, 372 U.S. 58, 70 (1963)).",
+      "runs": [
+        {
+          "text": "N.Y. Times Co. v. United States, 403 U.S. 713, 714 (1971) (per curiam) (quoting Bantam Books, Inc. v. Sullivan, 372 U.S. 58, 70 (1963))."
+        }
+      ]
+    },
+    {
+      "number": 40,
+      "text": "RESTATEMENT (THIRD) OF TORTS: LIABILITY FOR PHYSICAL AND EMOTIONAL HARM §§ 14, 16 (AM. L. INST. 2010).",
+      "runs": [
+        {
+          "text": "RESTATEMENT (THIRD) OF TORTS: LIABILITY FOR PHYSICAL AND EMOTIONAL HARM §§ 14, 16 (AM. L. INST. 2010)."
+        }
+      ]
+    },
+    {
+      "number": 41,
       "text": "Mitigation of Orbital Debris in the New Space Age, 89 Fed. Reg. 13,276, 13,277-78 (Feb. 22, 2024) (order on reconsideration).",
       "runs": [
         {
@@ -2400,8 +2137,8 @@
       ]
     },
     {
-      "number": 30,
-      "text": "LTS Guidelines, supra note 11, guideline A.2(2)(g)-(h), at 55.",
+      "number": 42,
+      "text": "LTS Guidelines, supra note 16, guideline A.2(2)(g)-(h), at 55.",
       "runs": [
         {
           "text": "LTS Guidelines, "
@@ -2411,7 +2148,32 @@
           "italic": true
         },
         {
-          "text": " note 11, guideline A.2(2)(g)-(h), at 55."
+          "text": " note 16, guideline A.2(2)(g)-(h), at 55."
+        }
+      ]
+    },
+    {
+      "number": 43,
+      "text": "Samuel J. Rascoff & Richard L. Revesz, The Biases of Risk Tradeoff Analysis: Towards Parity in Environmental and Health-and-Safety Regulation, 69 U. CHI. L. REV. 1763 (2002).",
+      "runs": [
+        {
+          "text": "Samuel J. Rascoff & Richard L. Revesz, "
+        },
+        {
+          "text": "The Biases of Risk Tradeoff Analysis: Towards Parity in Environmental and Health-and-Safety Regulation",
+          "italic": true
+        },
+        {
+          "text": ", 69 U. CHI. L. REV. 1763 (2002)."
+        }
+      ]
+    },
+    {
+      "number": 44,
+      "text": "NATIONAL AERONAUTICS & SPACE ADMINISTRATION, OVERVIEW OF THE DART MISHAP INVESTIGATION RESULTS 6 (2006), https://www.nasa.gov/pdf/148072main_DART_mishap_overview.pdf.",
+      "runs": [
+        {
+          "text": "NATIONAL AERONAUTICS & SPACE ADMINISTRATION, OVERVIEW OF THE DART MISHAP INVESTIGATION RESULTS 6 (2006), https://www.nasa.gov/pdf/148072main_DART_mishap_overview.pdf."
         }
       ]
     }

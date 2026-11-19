@@ -1,13 +1,14 @@
 import { createHash } from "node:crypto";
 import { readFile, writeFile } from "node:fs/promises";
 import { fileURLToPath } from "node:url";
+import { restoreGithubMath } from "../app/lib/content/github-math.ts";
 
 const sourceDirectory = new URL("../content/sources/selected-research/", import.meta.url);
 const sources = [
   {
-    key: "asian", slug: "certified-valuation-of-arithmetic-asian-options", repository: "certified-valuation-arithmetic-asian-options", file: "manuscript/report.md",
-    sourceCommit: "1f2877045619fc41e27b0a25097b3ed54bb725f8", sourceBlob: "88ec73c2037b6907252d0c8166a0fd9f24a70046",
-    sourceEditedAt: "2026-11-15T15:51:46-05:00", fetchedAt: "2026-11-15", mainSections: 9,
+    key: "asian", slug: "certified-valuation-of-arithmetic-asian-options", repository: "RESEARCH-Certified-Valuation-Arithmetic-Asian-Options", file: "manuscript/report.md",
+    sourceCommit: "68f7d8c691181d9ce2c299b42c5f7ea36b8835e2", sourceBlob: "21fd78c9d1d9baef709a6e14345985fec1de1cdc",
+    sourceEditedAt: "2026-11-19T01:20:11-05:00", fetchedAt: "2026-11-19", mainSections: 9,
     appendixAnchor: "appendix-a-finite-certification-of-the-weighted-second-moment",
     description: "The cost of exercising an arithmetic Asian option on the geometric average: a proved bound, its cubic law in Black's model, and a certified Heston price interval with its Euler discretization error.",
     figures: {
@@ -20,9 +21,9 @@ const sources = [
     },
   },
   {
-    key: "rough", slug: "certified-joint-pricing-errors-in-rough-heston", repository: "certified-rough-heston-valuation", file: "manuscript/merged-heston-en.md",
-    sourceCommit: "c2a4908a5f1672d01a8b39cd3d677bc9fbf7f8d4", sourceBlob: "c6f0450110e18cdbb04f126a6de8afcbf462c069",
-    sourceEditedAt: "2026-11-15T15:51:46-05:00", fetchedAt: "2026-11-15", mainSections: 8,
+    key: "rough", slug: "certified-joint-pricing-errors-in-rough-heston", repository: "RESEARCH-Certified-Rough-Heston-Valuation", file: "manuscript/merged-heston-en.md",
+    sourceCommit: "89e3378d068d9bcc266511085679ab8c5a70d2ff", sourceBlob: "e0defb8c778e5dc1d11e938896621a7633c3dd79",
+    sourceEditedAt: "2026-11-19T01:08:04-05:00", fetchedAt: "2026-11-19", mainSections: 8,
     appendixAnchor: "appendix-a-rescaled-variables-model-and-transform",
     description: "Numerical pricing error as a common factor across strikes: a Riccati residual priced by forward variance in rough Heston, the netting of portfolio errors in strike space, and certified tolerances for S&P 500 option positions.",
     figures: {
@@ -137,7 +138,9 @@ const receipts = [];
 for (const config of sources) {
   const contentUrl = new URL(`../content/selected-research/${config.slug}.json`, import.meta.url);
   const bytes = await readFile(new URL(`${config.key}-source.md`, sourceDirectory));
-  const source = bytes.toString("utf8").replace(/\r\n/gu, "\n");
+  // The Asian manuscript is written for GitHub: its displays are pictures that carry their TeX.
+  const text = bytes.toString("utf8").replace(/\r\n/gu, "\n");
+  const source = config.key === "asian" ? restoreGithubMath(text) : text;
   const blob = gitBlob(bytes);
   if (blob !== config.sourceBlob) throw new Error(`The frozen ${config.key} manuscript does not match its GitHub blob.`);
   const title = source.match(/^# (.+)$/mu)?.[1];
