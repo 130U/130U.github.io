@@ -99,7 +99,9 @@ title starts 112px below the top of the content field on desktop and 52px below 
 header on phones; the rail's wordmark starts at the same 112px (`--content-top`), so it
 sits on the title's line. A page title keeps to four fifths of its column
 (`--title-width`); below 1024px it takes the whole column, so a long title holds a few
-balanced lines on tablets and phones.
+balanced lines on tablets and phones. On a reading page (papers, AI and legal articles) the
+title also keeps to the reading measure, so it closes on the same edge as the text and
+never reaches the guide that marks the measure.
 
 The rail's minimum width follows the interface type size, indent, padding, and
 scrollbar allowance, so the rail, reading field, and guides reflow together when text
