@@ -13,10 +13,10 @@ async function writeOrCheck(url, content) {
   else await writeFile(url, content);
 }
 const manifest = JSON.parse(await readFile(new URL("source-manifest.json", sourceDirectory), "utf8"));
-const commit = "1b034c8c7179a6054f19be1161f47a8f74b20bfc";
+const commit = "bacd66b09e1f66a135360a960943a6df7572ad88";
 const paperBlob = "e9efa283fc4b8efe2cac0ca483fa3e5da81e01e5";
 assert.equal(manifest.commit, commit);
-assert.equal(manifest.repository, "130U/Critical-Dependence-Stress");
+assert.equal(manifest.repository, "130U/RESEARCH-Critical-Dependence-Stress");
 const repositoryUrl = `https://github.com/${manifest.repository}`;
 const sourceUrl = `${repositoryUrl}/blob/${commit}/paper/paper.pdf`;
 const mainFiles = ["main-introduction.tex", "main-model-benchmark.tex", "main-variational.tex", "main-crossing.tex", "main-classification-flow.tex", "main-quantitative.tex", "main-scope.tex"];

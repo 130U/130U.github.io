@@ -15,10 +15,10 @@ const OUT = path.join(ROOT, "out");
 const SITE_ORIGIN = "https://www.theodoreoy.com";
 const EXPERIENCE_ROUTE = "/experience/";
 const ARTICLES = [
-  ["autonomous-authority-in-space", "Autonomous Authority in Space: Risk Tradeoffs and the Law of Delegation", "", 30],
-  ["small-states-and-strategic-space-dependence", "Small States and the Governance of Strategic Space Dependence", "", 32],
-  ["solar-geoengineering-comparison-and-continuity", "Who May Choose the Lesser Risk", "Solar Geoengineering and the Legal Duties of Comparison and Continuity", 30],
-  ["mangrove-restoration-and-compensatory-mitigation", "Mangrove Restoration and the Limits of Compensatory Mitigation", "Lessons from Florida for the Greater Bay Area", 42],
+  ["autonomous-authority-in-space", "Autonomous Authority in Space: Risk Tradeoffs and the Law of Delegation", "", 44],
+  ["small-states-and-strategic-space-dependence", "Small States and the Governance of Strategic Space Dependence", "", 45],
+  ["solar-geoengineering-comparison-and-continuity", "Who May Choose the Lesser Risk", "Solar Geoengineering and the Legal Duties of Comparison and Continuity", 49],
+  ["mangrove-restoration-and-compensatory-mitigation", "Mangrove Restoration and the Limits of Compensatory Mitigation", "Lessons from Florida for the Greater Bay Area", 54],
 ];
 const ARTICLE_ROUTES = ARTICLES.map(([slug]) => `${EXPERIENCE_ROUTE}${slug}/`);
 const AI_PROJECT_SLUGS = [
@@ -515,8 +515,8 @@ test("About opens with its accessible clarinet hero before the profile", async (
   assert.ok(decodeHtml(stripMarkup(home)).includes("Most of it is in finance and AI. From 2023 to 2026 I designed review and verification systems with a foundation model developer, a frontier AI lab, and a global alternative asset manager. I also build systems of my own: a language model trained from scratch on financial text, and a gate that decides which evaluation feedback an agent's optimizer may act on."));
   const profileLinks = [...elementHtmlById(home, "home-profile").matchAll(/<a\b([^>]*)>([\s\S]*?)<\/a>/gu)];
   assert.deepEqual(profileLinks.map((match) => [decodeHtml(stripMarkup(match[2])), attribute(match[1], "href")]), [
-    ["a language model", "https://github.com/130U/130U-FinLLM"],
-    ["a gate", "https://github.com/130U/agent-evaluation-methodology"],
+    ["a language model", "https://github.com/130U/RESEARCH-Financial-Large-Language-Model"],
+    ["a gate", "https://github.com/130U/RESEARCH-Agent-Evaluation-Methodology"],
   ]);
   for (const id of ["selected-research", "education", "coursework", "fellowship", "contact"]) {
     assert.match(home, new RegExp(`id="${id}"`, "u"));
@@ -563,9 +563,9 @@ test("About research opens each complete paper through an explicit Read More lin
   const researchEntries = [...about.matchAll(/<article\b[^>]*id="([^"]+)"[^>]*>[\s\S]*?<\/article>/gu)].map((match) => match[1]).filter((id) => id.startsWith("critical-dependence-") || id.startsWith("certified-"));
   assert.deepEqual(researchEntries, ["critical-dependence-stress-for-portfolio-diversification", "certified-valuation-of-arithmetic-asian-options", "certified-joint-pricing-errors-in-rough-heston"]);
   for (const [slug, title, description, tables, sections, repository] of [
-    ["critical-dependence-stress-for-portfolio-diversification", "Critical Dependence Stress for Portfolio Diversification", "I prove that the critical stress budget is quadratic in the trade size", 0, 5, "Critical-Dependence-Stress"],
-    ["certified-valuation-of-arithmetic-asian-options", "Certified Valuation of Arithmetic Asian Options", "the bound is below a hundredth of a cent per barrel", 11, 9, "certified-valuation-arithmetic-asian-options"],
-    ["certified-joint-pricing-errors-in-rough-heston", "Certified Joint Pricing Errors in Rough Heston", "netting the legs certifies a half-point tolerance for all 28 six-month spreads, butterflies and baskets tested", 10, 8, "certified-rough-heston-valuation"],
+    ["critical-dependence-stress-for-portfolio-diversification", "Critical Dependence Stress for Portfolio Diversification", "I prove that the critical stress budget is quadratic in the trade size", 0, 5, "RESEARCH-Critical-Dependence-Stress"],
+    ["certified-valuation-of-arithmetic-asian-options", "Certified Valuation of Arithmetic Asian Options", "the bound is below a hundredth of a cent per barrel", 11, 9, "RESEARCH-Certified-Valuation-Arithmetic-Asian-Options"],
+    ["certified-joint-pricing-errors-in-rough-heston", "Certified Joint Pricing Errors in Rough Heston", "netting the legs certifies a half-point tolerance for all 28 six-month spreads, butterflies and baskets tested", 10, 8, "RESEARCH-Certified-Rough-Heston-Valuation"],
   ]) {
     assert.match(about, new RegExp(`id="${slug}"`, "u"));
     const headings = [...about.matchAll(/<h3\b[^>]*>([\s\S]*?)<\/h3>/gu)].map((match) => stripMarkup(match[1]));
@@ -603,7 +603,7 @@ test("Experience presents five numbered sections and all eighteen approved entri
   const html = await routeHtml("/experience/");
   const expected = await approvedExperience();
   assert.deepEqual(expected.map(({ id }) => id), Array.from({ length: 18 }, (_, index) => index + 1));
-  assert.deepEqual(expected.map(({ keyContributions }) => keyContributions.length), [7, 6, 6, 6, 8, 7, 6, 5, 5, 5, 5, 7, 5, 6, 1, 1, 2, 4]);
+  assert.deepEqual(expected.map(({ keyContributions }) => keyContributions.length), [9, 6, 8, 7, 8, 7, 6, 5, 5, 5, 5, 7, 5, 6, 1, 1, 2, 4]);
   assert.deepEqual(experienceEntries(html).map(({ id }) => id), expected.map(({ id }) => id));
   assert.equal(openingTags(html, "h1").length, 1);
   assert.match(html, /<h1>Experience: Areas of Focus<\/h1>/u);
@@ -826,7 +826,14 @@ test("law article paragraphs, headings, and citations exactly match the approved
     const blocks = [...html.matchAll(/<(p|h2|h3)\b([^>]*)>([\s\S]*?)<\/\1>/giu)]
       .filter((match) => attribute(match[2], "data-paper-block") !== undefined)
       .map((match) => ({ index: Number(attribute(match[2], "data-paper-block")), tag: match[1], text: inlineText(match[3]) }));
-    assert.deepEqual(blocks, source.blocks.map(({ type, level, text }, index) => ({ index, tag: type === "heading" ? (level > 1 ? "h3" : "h2") : "p", text: normalizeSpace(text) })), `${slug} changed or omitted body text or heading structure`);
+    for (const [index, block] of source.blocks.entries()) {
+      if (block.type !== "table") continue;
+      const frame = html.match(new RegExp(`<div\\b[^>]*\\bdata-paper-block="${index}"[^>]*>([\\s\\S]*?)<\\/table>`, "u"));
+      assert.ok(frame, `${slug} lost its table at block ${index}`);
+      const cells = [...frame[1].matchAll(/<tr\b[^>]*>([\s\S]*?)<\/tr>/giu)].map((row) => [...row[1].matchAll(/<(th|td)\b[^>]*>([\s\S]*?)<\/\1>/giu)].map((cell) => inlineText(cell[2])));
+      assert.deepEqual(cells, block.rows.map((row) => row.map(({ text }) => normalizeSpace(text))), `${slug} changed a table cell at block ${index}`);
+    }
+    assert.deepEqual(blocks, source.blocks.flatMap(({ type, level, text }, index) => type === "table" ? [] : [{ index, tag: type === "heading" ? (level > 1 ? "h3" : "h2") : "p", text: normalizeSpace(text) }]), `${slug} changed or omitted body text or heading structure`);
 
     for (const note of source.footnotes) {
       const noteHtml = elementHtmlById(html, `fn-${note.number}`);

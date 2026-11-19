@@ -42,12 +42,15 @@ test("all research tables retain native table semantics inside named keyboard-ac
     ["critical-dependence-stress-for-portfolio-diversification", 0],
     ["certified-valuation-of-arithmetic-asian-options", 11],
     ["certified-joint-pricing-errors-in-rough-heston", 10],
-    ["experience/statistical-inference-and-resource-allocation-in-expert-data-production", 1],
-    ["experience/task-validity-in-financial-synthetic-data", 2],
-    ["experience/verification-and-supervision-in-scientific-reasoning-tasks", 1],
-    ["experience/evidence-uncertainty-and-decision-guarantees-in-investment-research", 1],
+    ["experience/statistical-inference-and-resource-allocation-in-expert-data-production", 6],
+    ["experience/task-validity-in-financial-synthetic-data", 4],
+    ["experience/verification-and-supervision-in-scientific-reasoning-tasks", 3],
+    ["experience/evidence-uncertainty-and-decision-guarantees-in-investment-research", 2],
+    ["experience/small-states-and-strategic-space-dependence", 1, 1],
+    ["experience/mangrove-restoration-and-compensatory-mitigation", 1, 1],
   ];
-  for (const [route, count] of routes) {
+  // A legal paper also holds its footnote preview dialog.
+  for (const [route, count, noteDialogs = 0] of routes) {
     const html = await readFile(new URL(`../out/${route}/index.html`, import.meta.url), "utf8");
     const regions = [...html.matchAll(/<div\b([^>]*)>\s*<table\b([^>]*)>/gu)];
     assert.equal(regions.length, count, `${route}: every table needs its own scroll region.`);
@@ -73,7 +76,7 @@ test("all research tables retain native table semantics inside named keyboard-ac
       assert.match(control, /\baria-haspopup="dialog"/u);
       assert.match(control, /\bhidden\b/u, "The control appears only once the page's script can open the stage.");
     }
-    assert.equal([...html.matchAll(/<dialog\b/gu)].length, count + figures > 0 ? 1 : 0, `${route}: one stage serves all of a page's tables and figures.`);
+    assert.equal([...html.matchAll(/<dialog\b/gu)].length - noteDialogs, count + figures > 0 ? 1 : 0, `${route}: one stage serves all of a page's tables and figures.`);
   }
 });
 

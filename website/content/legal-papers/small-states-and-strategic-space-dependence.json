@@ -2,14 +2,16 @@
   "slug": "small-states-and-strategic-space-dependence",
   "title": "Small States and the Governance of Strategic Space Dependence",
   "author": "Letao Ouyang",
-  "date": "December 2024",
+  "date": "December 2024; revised November 2026",
+  "repositoryUrl": "https://github.com/130U/LAW-Small-States-and-the-Governance-of-Strategic-Space-Dependence",
+  "sourceUrl": "https://github.com/130U/LAW-Small-States-and-the-Governance-of-Strategic-Space-Dependence/blob/main/manuscript/small-states-and-strategic-space-dependence.md",
   "abstract": [
     {
       "type": "paragraph",
-      "text": "Great-power competition makes the reliability and permissible uses of space infrastructure matters of public authority. Yet foreign dependence does not have a uniform relationship with small-state autonomy. A structured comparison of New Zealand's launch regulation, Norway's Arctic satellite partnership, and Luxembourg's LUXEOSys procurement identifies distinct institutional mechanisms and shows why authorization, ownership, operational capability, and political influence require separate analysis. International space law preserves important state rights while assigning responsibilities that may exceed a state's practical supervisory reach. This Article argues that cooperation can supply otherwise unavailable capabilities, but that its value depends on the allocation of decision rights and the capacity to exercise them. It proposes a standard of accountable acceptance: authorities should identify interruption powers, usable response rights, and funded implementation capacity, and justify material gaps before commitment. It translates that standard into proposed licensing and procurement terms. Multilateral participation and collective restraint remain necessary for harms that national arrangements cannot contain.",
+      "text": "Great-power competition makes the reliability and permissible uses of space infrastructure matters of public authority. Yet foreign dependence does not have a uniform relationship with small-state autonomy. A structured comparison of New Zealand's launch regulation, Norway's Arctic satellite partnership, and Luxembourg's LUXEOSys procurement identifies distinct institutional mechanisms and shows why authorization, ownership, operational capability, and political influence require separate analysis. Control over infrastructure is a bundle of separable entitlements, and the residual power to decide in a crisis follows the chokepoint more than the title. International space law preserves important state rights while assigning responsibilities that may exceed a state's practical supervisory reach. This Article argues that cooperation can supply otherwise unavailable capabilities, but that its value depends on the allocation of decision rights and the capacity to exercise them. It proposes a standard of accountable acceptance: authorities should identify interruption powers, usable response rights, and funded implementation capacity, and justify material gaps before commitment. The standard is procedural in the way environmental review is procedural: it forbids uninformed dependence and leaves the choice to depend with the responsible authority. It translates that standard into proposed licensing and procurement terms. Multilateral participation and collective restraint remain necessary for harms that national arrangements cannot contain.",
       "runs": [
         {
-          "text": "Great-power competition makes the reliability and permissible uses of space infrastructure matters of public authority. Yet foreign dependence does not have a uniform relationship with small-state autonomy. A structured comparison of New Zealand's launch regulation, Norway's Arctic satellite partnership, and Luxembourg's LUXEOSys procurement identifies distinct institutional mechanisms and shows why authorization, ownership, operational capability, and political influence require separate analysis. International space law preserves important state rights while assigning responsibilities that may exceed a state's practical supervisory reach. This Article argues that cooperation can supply otherwise unavailable capabilities, but that its value depends on the allocation of decision rights and the capacity to exercise them. It proposes a standard of accountable acceptance: authorities should identify interruption powers, usable response rights, and funded implementation capacity, and justify material gaps before commitment. It translates that standard into proposed licensing and procurement terms. Multilateral participation and collective restraint remain necessary for harms that national arrangements cannot contain."
+          "text": "Great-power competition makes the reliability and permissible uses of space infrastructure matters of public authority. Yet foreign dependence does not have a uniform relationship with small-state autonomy. A structured comparison of New Zealand's launch regulation, Norway's Arctic satellite partnership, and Luxembourg's LUXEOSys procurement identifies distinct institutional mechanisms and shows why authorization, ownership, operational capability, and political influence require separate analysis. Control over infrastructure is a bundle of separable entitlements, and the residual power to decide in a crisis follows the chokepoint more than the title. International space law preserves important state rights while assigning responsibilities that may exceed a state's practical supervisory reach. This Article argues that cooperation can supply otherwise unavailable capabilities, but that its value depends on the allocation of decision rights and the capacity to exercise them. It proposes a standard of accountable acceptance: authorities should identify interruption powers, usable response rights, and funded implementation capacity, and justify material gaps before commitment. The standard is procedural in the way environmental review is procedural: it forbids uninformed dependence and leaves the choice to depend with the responsible authority. It translates that standard into proposed licensing and procurement terms. Multilateral participation and collective restraint remain necessary for harms that national arrangements cannot contain."
         }
       ]
     }
@@ -99,21 +101,30 @@
     },
     {
       "type": "paragraph",
-      "text": "Part II defines the comparison, its unit of analysis, and practical autonomy. Part III examines what international law supplies and what it leaves open. Part IV applies the comparison to New Zealand, Norway, and Luxembourg and sets out what it explains. Part V turns to participation and influence in multilateral governance. Part VI proposes safeguards for authorization, essential services, and public finance, and answers the principal objections. Part VII concludes.",
+      "text": "The Article makes three contributions. First, it supplies a concept that the debate about space \"sovereignty\" lacks. Property theory has long treated ownership as a bundle of separable incidents, and the economics of incomplete contracts locates real ownership in the residual right to decide what a contract did not foresee. Applied to space infrastructure, the two ideas explain why a permit, a title, an operating role, a power to interrupt, and a voice in rule-making can sit in different hands, and why the decisive one in a crisis tends to follow the chokepoint. Second, it tests that account against administrative records in place of capability rankings: an intelligence oversight review, a statutory review, a parliamentary financing recommendation, and a public audit. Third, it identifies the kind of duty that accountable acceptance is. Like environmental review in American law, it prohibits uninformed commitment and leaves the substantive choice to the responsible authority.",
       "runs": [
         {
-          "text": "Part II defines the comparison, its unit of analysis, and practical autonomy. Part III examines what international law supplies and what it leaves open. Part IV applies the comparison to New Zealand, Norway, and Luxembourg and sets out what it explains. Part V turns to participation and influence in multilateral governance. Part VI proposes safeguards for authorization, essential services, and public finance, and answers the principal objections. Part VII concludes."
+          "text": "The Article makes three contributions. First, it supplies a concept that the debate about space \"sovereignty\" lacks. Property theory has long treated ownership as a bundle of separable incidents, and the economics of incomplete contracts locates real ownership in the residual right to decide what a contract did not foresee. Applied to space infrastructure, the two ideas explain why a permit, a title, an operating role, a power to interrupt, and a voice in rule-making can sit in different hands, and why the decisive one in a crisis tends to follow the chokepoint. Second, it tests that account against administrative records in place of capability rankings: an intelligence oversight review, a statutory review, a parliamentary financing recommendation, and a public audit. Third, it identifies the kind of duty that accountable acceptance is. Like environmental review in American law, it prohibits uninformed commitment and leaves the substantive choice to the responsible authority."
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "Part II defines the comparison, its unit of analysis, and practical autonomy, and separates the entitlements that make up control. Part III examines what international law supplies and what it leaves open. Part IV applies the comparison to New Zealand, Norway, and Luxembourg and sets out what it explains. Part V turns to participation and influence in multilateral governance. Part VI proposes safeguards for authorization, essential services, and public finance, and answers the principal objections. Part VII concludes.",
+      "runs": [
+        {
+          "text": "Part II defines the comparison, its unit of analysis, and practical autonomy, and separates the entitlements that make up control. Part III examines what international law supplies and what it leaves open. Part IV applies the comparison to New Zealand, Norway, and Luxembourg and sets out what it explains. Part V turns to participation and influence in multilateral governance. Part VI proposes safeguards for authorization, essential services, and public finance, and answers the principal objections. Part VII concludes."
         }
       ]
     },
     {
       "type": "heading",
       "level": 1,
-      "id": "section-8",
-      "text": "II. Defining the comparison and the mechanisms",
+      "id": "section-10",
+      "text": "II. Defining the Comparison and the Mechanisms",
       "runs": [
         {
-          "text": "II. Defining the comparison and the mechanisms"
+          "text": "II. Defining the Comparison and the Mechanisms"
         }
       ]
     },
@@ -167,6 +178,48 @@
     },
     {
       "type": "paragraph",
+      "text": "A third body of thought supplies the vocabulary for what the cases show. Hohfeld analyzed legal relations into distinct entitlements, and Honoré catalogued the incidents of ownership, among them the rights to possess, to use, and to manage, the right to the income, and the power to exclude. Nothing requires one person to hold them all.5 Grossman, Hart, and Moore identified what makes an owner an owner when contracts are incomplete: the residual right to decide in circumstances the contract does not cover.6 This Article reads control over a space system the same way and separates five entitlements. Permission is the power to allow or refuse an activity in advance. Title is ownership of the asset. Operation is command of the system in use. Interruption and priority concern who can stop the service or claim it first. Voice is participation in the rules that govern everyone. Part IV shows these entitlements divided among a regulator, an owner, an operator, and a supplier's government, and it shows that the residual right in a crisis follows the party that holds a chokepoint, such as a control segment, an export licence, or a ground station, whatever the title says.",
+      "runs": [
+        {
+          "text": "A third body of thought supplies the vocabulary for what the cases show. Hohfeld analyzed legal relations into distinct entitlements, and Honoré catalogued the incidents of ownership, among them the rights to possess, to use, and to manage, the right to the income, and the power to exclude. Nothing requires one person to hold them all."
+        },
+        {
+          "text": "5",
+          "superscript": true,
+          "footnoteRef": "5"
+        },
+        {
+          "text": " Grossman, Hart, and Moore identified what makes an owner an owner when contracts are incomplete: the residual right to decide in circumstances the contract does not cover."
+        },
+        {
+          "text": "6",
+          "superscript": true,
+          "footnoteRef": "6"
+        },
+        {
+          "text": " This Article reads control over a space system the same way and separates five entitlements. Permission is the power to allow or refuse an activity in advance. Title is ownership of the asset. Operation is command of the system in use. Interruption and priority concern who can stop the service or claim it first. Voice is participation in the rules that govern everyone. Part IV shows these entitlements divided among a regulator, an owner, an operator, and a supplier's government, and it shows that the residual right in a crisis follows the party that holds a chokepoint, such as a control segment, an export licence, or a ground station, whatever the title says."
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "The disaggregation also answers a rival account. Shelter theory explains small states' alignments as the purchase of political, economic, and societal protection from larger powers.7 That account explains why a small state enters a dependent relationship. It does not say how decisions are allocated inside the relationship once it exists, which is the part law can design and the subject of this Article.",
+      "runs": [
+        {
+          "text": "The disaggregation also answers a rival account. Shelter theory explains small states' alignments as the purchase of political, economic, and societal protection from larger powers."
+        },
+        {
+          "text": "7",
+          "superscript": true,
+          "footnoteRef": "7"
+        },
+        {
+          "text": " That account explains why a small state enters a dependent relationship. It does not say how decisions are allocated inside the relationship once it exists, which is the part law can design and the subject of this Article."
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
       "text": "The unit of analysis is consequently a specified public function and the decisions necessary to perform it. Every case asks the same questions: What objective is the state pursuing? Which indispensable input or decision involves an external actor? How are legal and operational rights allocated? What domestic capability supports those rights? What result is documented, and what remains untested? Relevant inputs include permit conditions, tasking authority, information access, trained personnel, and replacement arrangements. Relevant outcomes include an administered authorization process, an activated service, and the timeliness and adequacy of information available for legislative oversight.",
       "runs": [
         {
@@ -185,23 +238,23 @@
     },
     {
       "type": "paragraph",
-      "text": "Strategic rivalry raises the stakes of these arrangements without explaining every observed difficulty. NASA researchers reported at least 1,500 trackable fragments from Russia's November 2021 destruction of Cosmos 1408. That establishes a physical externality, not that smaller states suffered the greatest losses.5 Viasat reported that the February 2022 KA-SAT cyberattack disrupted customers in Ukraine and elsewhere in Europe while leaving its directly managed government and mobility users unaffected; the European Union attributed the attack to Russia.6 Network partitioning thus mattered to exposure. Neither episode establishes that the national projects examined in Part IV were caused by an arms race. They explain why continuity and third-party effects deserve scrutiny when states choose space arrangements.",
+      "text": "Strategic rivalry raises the stakes of these arrangements without explaining every observed difficulty. NASA researchers reported at least 1,500 trackable fragments from Russia's November 2021 destruction of Cosmos 1408. That establishes a physical externality, not that smaller states suffered the greatest losses.8 Viasat reported that the February 2022 KA-SAT cyberattack disrupted customers in Ukraine and elsewhere in Europe while leaving its directly managed government and mobility users unaffected; the European Union attributed the attack to Russia.9 Network partitioning thus mattered to exposure. Neither episode establishes that the national projects examined in Part IV were caused by an arms race. They explain why continuity and third-party effects deserve scrutiny when states choose space arrangements.",
       "runs": [
         {
           "text": "Strategic rivalry raises the stakes of these arrangements without explaining every observed difficulty. NASA researchers reported at least 1,500 trackable fragments from Russia's November 2021 destruction of Cosmos 1408. That establishes a physical externality, not that smaller states suffered the greatest losses."
         },
         {
-          "text": "5",
+          "text": "8",
           "superscript": true,
-          "footnoteRef": "5"
+          "footnoteRef": "8"
         },
         {
           "text": " Viasat reported that the February 2022 KA-SAT cyberattack disrupted customers in Ukraine and elsewhere in Europe while leaving its directly managed government and mobility users unaffected; the European Union attributed the attack to Russia."
         },
         {
-          "text": "6",
+          "text": "9",
           "superscript": true,
-          "footnoteRef": "6"
+          "footnoteRef": "9"
         },
         {
           "text": " Network partitioning thus mattered to exposure. Neither episode establishes that the national projects examined in Part IV were caused by an arms race. They explain why continuity and third-party effects deserve scrutiny when states choose space arrangements."
@@ -211,91 +264,45 @@
     {
       "type": "heading",
       "level": 1,
-      "id": "section-15",
-      "text": "III. What international law supplies and what it leaves open",
+      "id": "section-19",
+      "text": "III. What International Law Supplies and What It Leaves Open",
       "runs": [
         {
-          "text": "III. What international law supplies and what it leaves open"
+          "text": "III. What International Law Supplies and What It Leaves Open"
         }
       ]
     },
     {
       "type": "heading",
       "level": 2,
-      "id": "section-16",
-      "text": "A. Equality of access and the allocation of authority",
+      "id": "section-20",
+      "text": "A. Equality of Access and the Allocation of Authority",
       "runs": [
         {
-          "text": "A. Equality of access and the allocation of authority",
-          "italic": true
+          "text": "A. Equality of Access and the Allocation of Authority"
         }
       ]
     },
     {
       "type": "paragraph",
-      "text": "Article I of the Outer Space Treaty requires exploration and use for the benefit and interests of all countries and recognizes freedom of exploration and use on a nondiscriminatory basis of equality. Its reference to countries irrespective of economic or scientific development is significant for smaller states. Yet the provision specifies neither a right to purchase a particular foreign satellite service nor an allocation of its capacity during a crisis. The distinction does not empty Article I of normative content. It identifies the institutional work needed to translate an entitlement to participate into an ability to use infrastructure.7",
+      "text": "Article I of the Outer Space Treaty requires exploration and use for the benefit and interests of all countries and recognizes freedom of exploration and use on a nondiscriminatory basis of equality. Its reference to countries irrespective of economic or scientific development is significant for smaller states. Yet the provision specifies neither a right to purchase a particular foreign satellite service nor an allocation of its capacity during a crisis. The distinction does not empty Article I of normative content. It identifies the institutional work needed to translate an entitlement to participate into an ability to use infrastructure.10",
       "runs": [
         {
           "text": "Article I of the Outer Space Treaty requires exploration and use for the benefit and interests of all countries and recognizes freedom of exploration and use on a nondiscriminatory basis of equality. Its reference to countries irrespective of economic or scientific development is significant for smaller states. Yet the provision specifies neither a right to purchase a particular foreign satellite service nor an allocation of its capacity during a crisis. The distinction does not empty Article I of normative content. It identifies the institutional work needed to translate an entitlement to participate into an ability to use infrastructure."
         },
         {
-          "text": "7",
-          "superscript": true,
-          "footnoteRef": "7"
-        }
-      ]
-    },
-    {
-      "type": "paragraph",
-      "text": "The Treaty also does not establish a comprehensive prohibition of military activity in Earth orbit. Article IV prohibits the specified placement of nuclear or other weapons of mass destruction and imposes broader restrictions on the Moon and other celestial bodies. Article III applies international law, including the United Nations Charter. Communications or observation used by armed forces therefore cannot be treated as prohibited weapons merely because their users are military. Any legality assessment must identify the activity, applicable obligation, and circumstances.8",
-      "runs": [
-        {
-          "text": "The Treaty also does not establish a comprehensive prohibition of military activity in Earth orbit. Article IV prohibits the specified placement of nuclear or other weapons of mass destruction and imposes broader restrictions on the Moon and other celestial bodies. Article III applies international law, including the United Nations Charter. Communications or observation used by armed forces therefore cannot be treated as prohibited weapons merely because their users are military. Any legality assessment must identify the activity, applicable obligation, and circumstances."
-        },
-        {
-          "text": "8",
-          "superscript": true,
-          "footnoteRef": "8"
-        }
-      ]
-    },
-    {
-      "type": "paragraph",
-      "text": "Article VI is especially relevant to states hosting commercial activity. It makes states internationally responsible for national activities and requires authorization and continuing supervision of nongovernmental entities by the appropriate state. Commercialization does not erase that responsibility. At the same time, the provision does not itself specify a complete domestic licensing system or resolve every allocation problem involving multinational operations. Domestic implementation must provide for competent authorities to obtain information and act on it. A state may bear responsibility without acquiring all the practical means necessary to supervise.9",
-      "runs": [
-        {
-          "text": "Article VI is especially relevant to states hosting commercial activity. It makes states internationally responsible for national activities and requires authorization and continuing supervision of nongovernmental entities by the appropriate state. Commercialization does not erase that responsibility. At the same time, the provision does not itself specify a complete domestic licensing system or resolve every allocation problem involving multinational operations. Domestic implementation must provide for competent authorities to obtain information and act on it. A state may bear responsibility without acquiring all the practical means necessary to supervise."
-        },
-        {
-          "text": "9",
-          "superscript": true,
-          "footnoteRef": "9"
-        }
-      ]
-    },
-    {
-      "type": "paragraph",
-      "text": "Space-law scholarship distinguishes treaty responsibility from its domestic implementation. In his analysis of private spaceflight, Frans von der Dunk identifies authorization, monitoring, and control as responses to Article VI, while emphasizing uncertainty over \"national activities\" and the limits of exclusively domestic regulation.10 This Article applies that concern to a specific implementation question: which decisions can a small administration actually supervise within a transnational activity? Retained authority becomes usable only when the administration has the information and capacity needed to exercise it.",
-      "runs": [
-        {
-          "text": "Space-law scholarship distinguishes treaty responsibility from its domestic implementation. In his analysis of private spaceflight, Frans von der Dunk identifies authorization, monitoring, and control as responses to Article VI, while emphasizing uncertainty over \"national activities\" and the limits of exclusively domestic regulation."
-        },
-        {
           "text": "10",
           "superscript": true,
           "footnoteRef": "10"
-        },
-        {
-          "text": " This Article applies that concern to a specific implementation question: which decisions can a small administration actually supervise within a transnational activity? Retained authority becomes usable only when the administration has the information and capacity needed to exercise it."
         }
       ]
     },
     {
       "type": "paragraph",
-      "text": "Article VIII provides that the state of registry retains jurisdiction and control over a space object and its personnel. It also preserves ownership despite the object's presence in space or return to Earth. Registry jurisdiction, private or public ownership, and operational command nevertheless answer different questions. The legal power to regulate does not supply access to a foreign operator's technical systems, while ownership of a platform does not establish authority over every hosted payload. Registration cannot serve as a shorthand for complete operational independence.11",
+      "text": "The Treaty also does not establish a comprehensive prohibition of military activity in Earth orbit. Article IV prohibits the specified placement of nuclear or other weapons of mass destruction and imposes broader restrictions on the Moon and other celestial bodies. Article III applies international law, including the United Nations Charter. Communications or observation used by armed forces therefore cannot be treated as prohibited weapons merely because their users are military. Any legality assessment must identify the activity, applicable obligation, and circumstances.11",
       "runs": [
         {
-          "text": "Article VIII provides that the state of registry retains jurisdiction and control over a space object and its personnel. It also preserves ownership despite the object's presence in space or return to Earth. Registry jurisdiction, private or public ownership, and operational command nevertheless answer different questions. The legal power to regulate does not supply access to a foreign operator's technical systems, while ownership of a platform does not establish authority over every hosted payload. Registration cannot serve as a shorthand for complete operational independence."
+          "text": "The Treaty also does not establish a comprehensive prohibition of military activity in Earth orbit. Article IV prohibits the specified placement of nuclear or other weapons of mass destruction and imposes broader restrictions on the Moon and other celestial bodies. Article III applies international law, including the United Nations Charter. Communications or observation used by armed forces therefore cannot be treated as prohibited weapons merely because their users are military. Any legality assessment must identify the activity, applicable obligation, and circumstances."
         },
         {
           "text": "11",
@@ -305,23 +312,11 @@
       ]
     },
     {
-      "type": "heading",
-      "level": 2,
-      "id": "section-22",
-      "text": "B. Interference and the limits of remedial protection",
-      "runs": [
-        {
-          "text": "B. Interference and the limits of remedial protection",
-          "italic": true
-        }
-      ]
-    },
-    {
       "type": "paragraph",
-      "text": "Article IX requires due regard for other states' corresponding interests and provides for consultations concerning potentially harmful interference from relevant activities or experiments. A smaller treaty party can request consultation; the text supplies no general veto. Article XI's information provision is also qualified by feasibility and practicability. These rules give states legal grounds to seek consideration, consultation, and information, but do not create a universal disclosure or continuity regime. In particular, cancellation of a ground-based commercial service is not automatically an Article IX violation. The activity and interference must fall within the provision's scope.12",
+      "text": "Article VI is especially relevant to states hosting commercial activity. It makes states internationally responsible for national activities and requires authorization and continuing supervision of nongovernmental entities by the appropriate state. Commercialization does not erase that responsibility. At the same time, the provision does not itself specify a complete domestic licensing system or resolve every allocation problem involving multinational operations. Domestic implementation must provide for competent authorities to obtain information and act on it. A state may bear responsibility without acquiring all the practical means necessary to supervise.12",
       "runs": [
         {
-          "text": "Article IX requires due regard for other states' corresponding interests and provides for consultations concerning potentially harmful interference from relevant activities or experiments. A smaller treaty party can request consultation; the text supplies no general veto. Article XI's information provision is also qualified by feasibility and practicability. These rules give states legal grounds to seek consideration, consultation, and information, but do not create a universal disclosure or continuity regime. In particular, cancellation of a ground-based commercial service is not automatically an Article IX violation. The activity and interference must fall within the provision's scope."
+          "text": "Article VI is especially relevant to states hosting commercial activity. It makes states internationally responsible for national activities and requires authorization and continuing supervision of nongovernmental entities by the appropriate state. Commercialization does not erase that responsibility. At the same time, the provision does not itself specify a complete domestic licensing system or resolve every allocation problem involving multinational operations. Domestic implementation must provide for competent authorities to obtain information and act on it. A state may bear responsibility without acquiring all the practical means necessary to supervise."
         },
         {
           "text": "12",
@@ -332,15 +327,99 @@
     },
     {
       "type": "paragraph",
-      "text": "The Liability Convention addresses another part of the problem. It establishes absolute liability for qualifying damage on Earth or to aircraft and fault-based liability for damage in space to another launching state's space object or persons or property aboard it. Its definition of damage centers on death, injury, impairment of health, and property loss or damage. Claims concerning interrupted services or purely economic losses cannot simply be presumed to fit those categories; causation by a space object presents an additional issue. Article XIX makes a Claims Commission's award binding only if the parties agree, otherwise recommendatory.13 These provisions do not promise immediate restoration of an interrupted service; even a compensation claim may face uncertainty and delay. Other international rules and domestic or contractual remedies may remain available, but their availability must be separately established.",
+      "text": "Space-law scholarship distinguishes treaty responsibility from its domestic implementation. In his analysis of private spaceflight, Frans von der Dunk identifies authorization, monitoring, and control as responses to Article VI, while emphasizing uncertainty over \"national activities\" and the limits of exclusively domestic regulation.13 This Article applies that concern to a specific implementation question: which decisions can a small administration actually supervise within a transnational activity? Retained authority becomes usable only when the administration has the information and capacity needed to exercise it.",
       "runs": [
         {
-          "text": "The Liability Convention addresses another part of the problem. It establishes absolute liability for qualifying damage on Earth or to aircraft and fault-based liability for damage in space to another launching state's space object or persons or property aboard it. Its definition of damage centers on death, injury, impairment of health, and property loss or damage. Claims concerning interrupted services or purely economic losses cannot simply be presumed to fit those categories; causation by a space object presents an additional issue. Article XIX makes a Claims Commission's award binding only if the parties agree, otherwise recommendatory."
+          "text": "Space-law scholarship distinguishes treaty responsibility from its domestic implementation. In his analysis of private spaceflight, Frans von der Dunk identifies authorization, monitoring, and control as responses to Article VI, while emphasizing uncertainty over \"national activities\" and the limits of exclusively domestic regulation."
         },
         {
           "text": "13",
           "superscript": true,
           "footnoteRef": "13"
+        },
+        {
+          "text": " This Article applies that concern to a specific implementation question: which decisions can a small administration actually supervise within a transnational activity? Retained authority becomes usable only when the administration has the information and capacity needed to exercise it."
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "Between the treaty and national statutes lies a layer of agreed guidance. The General Assembly's 2013 recommendations on national space legislation provide that space activities \"should require authorization by a competent national authority,\" with the conditions and procedures for granting, modifying, suspending, and revoking it set out clearly. They call for \"continuing supervision and monitoring of authorized space activities by applying, for example, a system of on-site inspections or a more general reporting requirement,\" and for supervision to continue \"in the event of the transfer of ownership or control of a space object in orbit.\"14 The licensing terms proposed in Part VI apply those recommendations to a risk they do not name, dependence on a foreign input.",
+      "runs": [
+        {
+          "text": "Between the treaty and national statutes lies a layer of agreed guidance. The General Assembly's 2013 recommendations on national space legislation provide that space activities \"should require authorization by a competent national authority,\" with the conditions and procedures for granting, modifying, suspending, and revoking it set out clearly. They call for \"continuing supervision and monitoring of authorized space activities by applying, for example, a system of on-site inspections or a more general reporting requirement,\" and for supervision to continue \"in the event of the transfer of ownership or control of a space object in orbit.\""
+        },
+        {
+          "text": "14",
+          "superscript": true,
+          "footnoteRef": "14"
+        },
+        {
+          "text": " The licensing terms proposed in Part VI apply those recommendations to a risk they do not name, dependence on a foreign input."
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "Article VIII provides that the state of registry retains jurisdiction and control over a space object and its personnel. It also preserves ownership despite the object's presence in space or return to Earth. Registry jurisdiction, private or public ownership, and operational command nevertheless answer different questions. The legal power to regulate does not supply access to a foreign operator's technical systems, while ownership of a platform does not establish authority over every hosted payload. Registration cannot serve as a shorthand for complete operational independence.15 United States export law draws the same line by regulation. A commercial spacecraft \"remains a spacecraft subject to the EAR even when incorporating a hosted payload\" that performs a listed military function, while the payload itself stays on the Munitions List.16 Platform and payload are different legal objects before any contract is signed.",
+      "runs": [
+        {
+          "text": "Article VIII provides that the state of registry retains jurisdiction and control over a space object and its personnel. It also preserves ownership despite the object's presence in space or return to Earth. Registry jurisdiction, private or public ownership, and operational command nevertheless answer different questions. The legal power to regulate does not supply access to a foreign operator's technical systems, while ownership of a platform does not establish authority over every hosted payload. Registration cannot serve as a shorthand for complete operational independence."
+        },
+        {
+          "text": "15",
+          "superscript": true,
+          "footnoteRef": "15"
+        },
+        {
+          "text": " United States export law draws the same line by regulation. A commercial spacecraft \"remains a spacecraft subject to the EAR even when incorporating a hosted payload\" that performs a listed military function, while the payload itself stays on the Munitions List."
+        },
+        {
+          "text": "16",
+          "superscript": true,
+          "footnoteRef": "16"
+        },
+        {
+          "text": " Platform and payload are different legal objects before any contract is signed."
+        }
+      ]
+    },
+    {
+      "type": "heading",
+      "level": 2,
+      "id": "section-27",
+      "text": "B. Interference and the Limits of Remedial Protection",
+      "runs": [
+        {
+          "text": "B. Interference and the Limits of Remedial Protection"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "Article IX requires due regard for other states' corresponding interests and provides for consultations concerning potentially harmful interference from relevant activities or experiments. A smaller treaty party can request consultation; the text supplies no general veto. Article XI's information provision is also qualified by feasibility and practicability. These rules give states legal grounds to seek consideration, consultation, and information, but do not create a universal disclosure or continuity regime. In particular, cancellation of a ground-based commercial service is not automatically an Article IX violation. The activity and interference must fall within the provision's scope.17",
+      "runs": [
+        {
+          "text": "Article IX requires due regard for other states' corresponding interests and provides for consultations concerning potentially harmful interference from relevant activities or experiments. A smaller treaty party can request consultation; the text supplies no general veto. Article XI's information provision is also qualified by feasibility and practicability. These rules give states legal grounds to seek consideration, consultation, and information, but do not create a universal disclosure or continuity regime. In particular, cancellation of a ground-based commercial service is not automatically an Article IX violation. The activity and interference must fall within the provision's scope."
+        },
+        {
+          "text": "17",
+          "superscript": true,
+          "footnoteRef": "17"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "The Liability Convention addresses another part of the problem. It establishes absolute liability for qualifying damage on Earth or to aircraft and fault-based liability for damage in space to another launching state's space object or persons or property aboard it. Its definition of damage centers on death, injury, impairment of health, and property loss or damage. Claims concerning interrupted services or purely economic losses cannot simply be presumed to fit those categories; causation by a space object presents an additional issue. Article XIX makes a Claims Commission's award binding only if the parties agree, otherwise recommendatory.18 These provisions do not promise immediate restoration of an interrupted service; even a compensation claim may face uncertainty and delay. Other international rules and domestic or contractual remedies may remain available, but their availability must be separately established.",
+      "runs": [
+        {
+          "text": "The Liability Convention addresses another part of the problem. It establishes absolute liability for qualifying damage on Earth or to aircraft and fault-based liability for damage in space to another launching state's space object or persons or property aboard it. Its definition of damage centers on death, injury, impairment of health, and property loss or damage. Claims concerning interrupted services or purely economic losses cannot simply be presumed to fit those categories; causation by a space object presents an additional issue. Article XIX makes a Claims Commission's award binding only if the parties agree, otherwise recommendatory."
+        },
+        {
+          "text": "18",
+          "superscript": true,
+          "footnoteRef": "18"
         },
         {
           "text": " These provisions do not promise immediate restoration of an interrupted service; even a compensation claim may face uncertainty and delay. Other international rules and domestic or contractual remedies may remain available, but their availability must be separately established."
@@ -349,15 +428,15 @@
     },
     {
       "type": "paragraph",
-      "text": "Spectrum governance similarly offers important but bounded protection. Article 44 of the ITU Constitution links efficient use of radio frequencies and associated orbits with equitable access, including the needs of developing countries and particular geographical situations. Article 45 addresses harmful interference. Article 48 preserves freedom regarding military radio installations while requiring observance of specified provisions so far as possible.14 These provisions cannot guarantee affordable terminals, dependable suppliers, or crisis allocation. They also caution against describing orbital resources as simply owned by whoever files first.",
+      "text": "Spectrum governance similarly offers important but bounded protection. Article 44 of the ITU Constitution links efficient use of radio frequencies and associated orbits with equitable access, including the needs of developing countries and particular geographical situations. Article 45 addresses harmful interference. Article 48 preserves freedom regarding military radio installations while requiring observance of specified provisions so far as possible.19 These provisions cannot guarantee affordable terminals, dependable suppliers, or crisis allocation. They also caution against describing orbital resources as simply owned by whoever files first.",
       "runs": [
         {
           "text": "Spectrum governance similarly offers important but bounded protection. Article 44 of the ITU Constitution links efficient use of radio frequencies and associated orbits with equitable access, including the needs of developing countries and particular geographical situations. Article 45 addresses harmful interference. Article 48 preserves freedom regarding military radio installations while requiring observance of specified provisions so far as possible."
         },
         {
-          "text": "14",
+          "text": "19",
           "superscript": true,
-          "footnoteRef": "14"
+          "footnoteRef": "19"
         },
         {
           "text": " These provisions cannot guarantee affordable terminals, dependable suppliers, or crisis allocation. They also caution against describing orbital resources as simply owned by whoever files first."
@@ -376,37 +455,36 @@
     {
       "type": "heading",
       "level": 1,
-      "id": "section-27",
-      "text": "IV. Three arrangements and their limits",
+      "id": "section-32",
+      "text": "IV. Three Arrangements and Their Limits",
       "runs": [
         {
-          "text": "IV. Three arrangements and their limits"
+          "text": "IV. Three Arrangements and Their Limits"
         }
       ]
     },
     {
       "type": "heading",
       "level": 2,
-      "id": "section-28",
-      "text": "A. New Zealand and the difference between permission and supervision",
+      "id": "section-33",
+      "text": "A. New Zealand and the Difference Between Permission and Supervision",
       "runs": [
         {
-          "text": "A. New Zealand and the difference between permission and supervision",
-          "italic": true
+          "text": "A. New Zealand and the Difference Between Permission and Supervision"
         }
       ]
     },
     {
       "type": "paragraph",
-      "text": "New Zealand's public objective combines a viable launch sector with the ability to determine which activities may proceed from its territory. The relevant external actors include foreign payload operators and suppliers of sensitive technology. Its 2016 technology safeguards agreement with the United States facilitated safeguarded access to American technology; the official treaty record also identifies a side arrangement concerning the exercise of specified New Zealand agency powers.15 Technology access and retained domestic authority thus coexist in the institutional design. How a conflict between them would be resolved is a question the treaty summary leaves open.",
+      "text": "New Zealand's public objective combines a viable launch sector with the ability to determine which activities may proceed from its territory. The relevant external actors include foreign payload operators and suppliers of sensitive technology. Its 2016 technology safeguards agreement with the United States facilitated safeguarded access to American technology; the official treaty record also identifies a side arrangement concerning the exercise of specified New Zealand agency powers.20 Technology access and retained domestic authority thus coexist in the institutional design. How a conflict between them would be resolved is a question the treaty summary leaves open.",
       "runs": [
         {
           "text": "New Zealand's public objective combines a viable launch sector with the ability to determine which activities may proceed from its territory. The relevant external actors include foreign payload operators and suppliers of sensitive technology. Its 2016 technology safeguards agreement with the United States facilitated safeguarded access to American technology; the official treaty record also identifies a side arrangement concerning the exercise of specified New Zealand agency powers."
         },
         {
-          "text": "15",
+          "text": "20",
           "superscript": true,
-          "footnoteRef": "15"
+          "footnoteRef": "20"
         },
         {
           "text": " Technology access and retained domestic authority thus coexist in the institutional design. How a conflict between them would be resolved is a question the treaty summary leaves open."
@@ -415,15 +493,15 @@
     },
     {
       "type": "paragraph",
-      "text": "The 2017 Outer Space and High-altitude Activities Act provides the domestic authorization framework. In December 2019, the government announced payload principles excluding contributions to nuclear weapons, intended harm to spacecraft or space systems, certain security operations inconsistent with government policy, and serious or irreversible environmental harm. The announcement presented these principles as consistent with earlier approvals rather than a sweeping reversal of policy.16 The relevant distinction is between regulating a payload's intended use and excluding every payload with a military connection.",
+      "text": "The 2017 Outer Space and High-altitude Activities Act provides the domestic authorization framework. In December 2019, the government announced payload principles excluding contributions to nuclear weapons, intended harm to spacecraft or space systems, certain security operations inconsistent with government policy, and serious or irreversible environmental harm. The announcement presented these principles as consistent with earlier approvals rather than a sweeping reversal of policy.21 The relevant distinction is between regulating a payload's intended use and excluding every payload with a military connection.",
       "runs": [
         {
           "text": "The 2017 Outer Space and High-altitude Activities Act provides the domestic authorization framework. In December 2019, the government announced payload principles excluding contributions to nuclear weapons, intended harm to spacecraft or space systems, certain security operations inconsistent with government policy, and serious or irreversible environmental harm. The announcement presented these principles as consistent with earlier approvals rather than a sweeping reversal of policy."
         },
         {
-          "text": "16",
+          "text": "21",
           "superscript": true,
-          "footnoteRef": "16"
+          "footnoteRef": "21"
         },
         {
           "text": " The relevant distinction is between regulating a payload's intended use and excluding every payload with a military connection."
@@ -432,15 +510,15 @@
     },
     {
       "type": "paragraph",
-      "text": "The official regulatory impact statement explains how this authority can coexist with international cooperation. Relevant foreign licences may reduce duplicative assessment, but New Zealand must still consider its own national-interest, security, and fitness requirements. Tailored conditions permit differentiated decisions. The national-interest refusal power is discretionary; a certificate of significant national-security risk prevents authorization.17 This is a concrete allocation of responsibility: foreign expertise may inform the decision without determining it. Whether officials can apply the distinction consistently remains an empirical question.",
+      "text": "The official regulatory impact statement explains how this authority can coexist with international cooperation. Relevant foreign licences may reduce duplicative assessment, but New Zealand must still consider its own national-interest, security, and fitness requirements. Tailored conditions permit differentiated decisions. The national-interest refusal power is discretionary; a certificate of significant national-security risk prevents authorization.22 This is a concrete allocation of responsibility: foreign expertise may inform the decision without determining it. Whether officials can apply the distinction consistently remains an empirical question.",
       "runs": [
         {
           "text": "The official regulatory impact statement explains how this authority can coexist with international cooperation. Relevant foreign licences may reduce duplicative assessment, but New Zealand must still consider its own national-interest, security, and fitness requirements. Tailored conditions permit differentiated decisions. The national-interest refusal power is discretionary; a certificate of significant national-security risk prevents authorization."
         },
         {
-          "text": "17",
+          "text": "22",
           "superscript": true,
-          "footnoteRef": "17"
+          "footnoteRef": "22"
         },
         {
           "text": " This is a concrete allocation of responsibility: foreign expertise may inform the decision without determining it. Whether officials can apply the distinction consistently remains an empirical question."
@@ -458,15 +536,15 @@
     },
     {
       "type": "paragraph",
-      "text": "An independent review gives substance to the question of consistent application. In April 2021, the Inspector-General of Intelligence and Security examined the intelligence agencies' assessment role, including four selected files. The report found generally developed compliance systems and no systemic noncompliance, but identified insufficient guidance on the distinction between national security and national interest, unclear risk-assessment thresholds, and incomplete procedural guidance. It recommended clearer standards and greater public explanation of the agencies' regulatory roles.18 The finding is narrower than a conclusion that a permit was unlawful or imposed by a foreign partner. It nevertheless identifies a failure mechanism: discretion is difficult to exercise consistently when officials lack an agreed account of what risks should change the decision.",
+      "text": "An independent review gives substance to the question of consistent application. In April 2021, the Inspector-General of Intelligence and Security examined the intelligence agencies' assessment role, including four selected files. The report found generally developed compliance systems and no systemic noncompliance, but identified insufficient guidance on the distinction between national security and national interest, unclear risk-assessment thresholds, and incomplete procedural guidance. It recommended clearer standards and greater public explanation of the agencies' regulatory roles.23 The finding is narrower than a conclusion that a permit was unlawful or imposed by a foreign partner. It nevertheless identifies a failure mechanism: discretion is difficult to exercise consistently when officials lack an agreed account of what risks should change the decision.",
       "runs": [
         {
           "text": "An independent review gives substance to the question of consistent application. In April 2021, the Inspector-General of Intelligence and Security examined the intelligence agencies' assessment role, including four selected files. The report found generally developed compliance systems and no systemic noncompliance, but identified insufficient guidance on the distinction between national security and national interest, unclear risk-assessment thresholds, and incomplete procedural guidance. It recommended clearer standards and greater public explanation of the agencies' regulatory roles."
         },
         {
-          "text": "18",
+          "text": "23",
           "superscript": true,
-          "footnoteRef": "18"
+          "footnoteRef": "23"
         },
         {
           "text": " The finding is narrower than a conclusion that a permit was unlawful or imposed by a foreign partner. It nevertheless identifies a failure mechanism: discretion is difficult to exercise consistently when officials lack an agreed account of what risks should change the decision."
@@ -475,18 +553,43 @@
     },
     {
       "type": "paragraph",
-      "text": "The government's May 2022 announcement of the statutory review subsequently reported no material safety or security issues and legally compliant regulatory decisions.19 The two reviews addressed different questions, and the later assurance does not demonstrate the resolution of the earlier procedural concerns. Commercial screening and pre-application adjustments may also shape which proposals reach formal assessment.",
+      "text": "The government's May 2022 announcement of the statutory review subsequently reported no material safety or security issues and legally compliant regulatory decisions.24 The two reviews addressed different questions, and the later assurance does not demonstrate the resolution of the earlier procedural concerns. Commercial screening and pre-application adjustments may also shape which proposals reach formal assessment.",
       "runs": [
         {
           "text": "The government's May 2022 announcement of the statutory review subsequently reported no material safety or security issues and legally compliant regulatory decisions."
         },
         {
-          "text": "19",
+          "text": "24",
           "superscript": true,
-          "footnoteRef": "19"
+          "footnoteRef": "24"
         },
         {
           "text": " The two reviews addressed different questions, and the later assurance does not demonstrate the resolution of the earlier procedural concerns. Commercial screening and pre-application adjustments may also shape which proposals reach formal assessment."
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "The review itself is more informative than its announcement. Between December 2017 and April 2022 the regulator granted seventy payload permits, and by the end of that period \"no applications for licences or permits have been declined, and every payload permit and licence has had ministerial conditions imposed.\"25 The lever New Zealand uses is the condition, not the refusal. The same document records the limit of that lever: remote-sensing products \"can be resold on the open market so there is simply no guarantee about where they will end up.\"26 An official review thus states in terms the distinction this Part draws between permission and supervision.",
+      "runs": [
+        {
+          "text": "The review itself is more informative than its announcement. Between December 2017 and April 2022 the regulator granted seventy payload permits, and by the end of that period \"no applications for licences or permits have been declined, and every payload permit and licence has had ministerial conditions imposed.\""
+        },
+        {
+          "text": "25",
+          "superscript": true,
+          "footnoteRef": "25"
+        },
+        {
+          "text": " The lever New Zealand uses is the condition, not the refusal. The same document records the limit of that lever: remote-sensing products \"can be resold on the open market so there is simply no guarantee about where they will end up.\""
+        },
+        {
+          "text": "26",
+          "superscript": true,
+          "footnoteRef": "26"
+        },
+        {
+          "text": " An official review thus states in terms the distinction this Part draws between permission and supervision."
         }
       ]
     },
@@ -511,26 +614,25 @@
     {
       "type": "heading",
       "level": 2,
-      "id": "section-37",
-      "text": "B. Norway and differentiated control within cooperation",
+      "id": "section-43",
+      "text": "B. Norway and Differentiated Control Within Cooperation",
       "runs": [
         {
-          "text": "B. Norway and differentiated control within cooperation",
-          "italic": true
+          "text": "B. Norway and Differentiated Control Within Cooperation"
         }
       ]
     },
     {
       "type": "paragraph",
-      "text": "Norway sought broadband capacity suited to Arctic conditions. ASBM brought together Space Norway, the Norwegian defence sector, the United States, and commercial communications interests. The satellites' foreign manufacture and launch are well documented. So is the allocation of specific roles: the platforms were owned by Space Norway and carried distinct Norwegian, American, and Viasat payloads.20 This arrangement creates several relationships of dependence, rather than one undifferentiated transfer of national control.",
+      "text": "Norway sought broadband capacity suited to Arctic conditions. ASBM brought together Space Norway, the Norwegian defence sector, the United States, and commercial communications interests. The satellites' foreign manufacture and launch are well documented. So is the allocation of specific roles: the platforms were owned by Space Norway and carried distinct Norwegian, American, and Viasat payloads.27 This arrangement creates several relationships of dependence, rather than one undifferentiated transfer of national control.",
       "runs": [
         {
           "text": "Norway sought broadband capacity suited to Arctic conditions. ASBM brought together Space Norway, the Norwegian defence sector, the United States, and commercial communications interests. The satellites' foreign manufacture and launch are well documented. So is the allocation of specific roles: the platforms were owned by Space Norway and carried distinct Norwegian, American, and Viasat payloads."
         },
         {
-          "text": "20",
+          "text": "27",
           "superscript": true,
-          "footnoteRef": "20"
+          "footnoteRef": "27"
         },
         {
           "text": " This arrangement creates several relationships of dependence, rather than one undifferentiated transfer of national control."
@@ -539,15 +641,15 @@
     },
     {
       "type": "paragraph",
-      "text": "In October 2024, Space Norway announced that it had taken ownership and command of the satellites following in-orbit testing. Its account distinguished that milestone from subsequent payload arrangements and described Viasat's lease of its payload for the satellites' lifetime. In December, Norway's Ministry of Defence announced activation of the Norwegian military network, including a demonstration connecting its ground organization and a Coast Guard vessel.21 The observed outcome is therefore more substantial than a launch or memorandum of understanding: a Norwegian service had been activated. The August launch announcement and October platform handover do not establish operational acceptance of the American payloads.",
+      "text": "In October 2024, Space Norway announced that it had taken ownership and command of the satellites following in-orbit testing. Its account distinguished that milestone from subsequent payload arrangements and described Viasat's lease of its payload for the satellites' lifetime. In December, Norway's Ministry of Defence announced activation of the Norwegian military network, including a demonstration connecting its ground organization and a Coast Guard vessel.28 The observed outcome is therefore more substantial than a launch or memorandum of understanding: a Norwegian service had been activated. The August launch announcement and October platform handover do not establish operational acceptance of the American payloads.",
       "runs": [
         {
           "text": "In October 2024, Space Norway announced that it had taken ownership and command of the satellites following in-orbit testing. Its account distinguished that milestone from subsequent payload arrangements and described Viasat's lease of its payload for the satellites' lifetime. In December, Norway's Ministry of Defence announced activation of the Norwegian military network, including a demonstration connecting its ground organization and a Coast Guard vessel."
         },
         {
-          "text": "21",
+          "text": "28",
           "superscript": true,
-          "footnoteRef": "21"
+          "footnoteRef": "28"
         },
         {
           "text": " The observed outcome is therefore more substantial than a launch or memorandum of understanding: a Norwegian service had been activated. The August launch announcement and October platform handover do not establish operational acceptance of the American payloads."
@@ -565,18 +667,35 @@
     },
     {
       "type": "paragraph",
-      "text": "Public financing remained necessary. A 2023 Norwegian budget proposition described the state's equity commitment of up to US$101 million and an additional NOK6.1 million currency adjustment. It also discussed pandemic-related delays and expected cost overruns in considering the company's financing.22 These are specific financial commitments, not a measure of welfare expenditure displaced by space competition. Their significance is that shared procurement still requires public risk-bearing and continuing financial oversight. A partnership announcement cannot establish a project's eventual cost effectiveness.",
+      "text": "Public financing remained necessary. A 2023 Norwegian budget proposition described the state's equity commitment of up to US$101 million and an additional NOK6.1 million currency adjustment. It also discussed pandemic-related delays and expected cost overruns in considering the company's financing.29 These are specific financial commitments, not a measure of welfare expenditure displaced by space competition. Their significance is that shared procurement still requires public risk-bearing and continuing financial oversight. A partnership announcement cannot establish a project's eventual cost effectiveness.",
       "runs": [
         {
           "text": "Public financing remained necessary. A 2023 Norwegian budget proposition described the state's equity commitment of up to US$101 million and an additional NOK6.1 million currency adjustment. It also discussed pandemic-related delays and expected cost overruns in considering the company's financing."
         },
         {
-          "text": "22",
+          "text": "29",
           "superscript": true,
-          "footnoteRef": "22"
+          "footnoteRef": "29"
         },
         {
           "text": " These are specific financial commitments, not a measure of welfare expenditure displaced by space competition. Their significance is that shared procurement still requires public risk-bearing and continuing financial oversight. A partnership announcement cannot establish a project's eventual cost effectiveness."
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "The financing record also shows conditions of the kind this Article proposes. When the Storting considered the state's equity commitment in 2018, the ministry's assessment was that the project must meet the armed forces' need for military broadband under Norwegian control, and that no funds would be released until binding customer agreements were concluded and all capacity had been sold in advance for the life of the project. The project description placed the ground station and operations centre in Norway in order to secure national control of the system.30 The legislature financed a partnership on stated terms about who would control what.",
+      "runs": [
+        {
+          "text": "The financing record also shows conditions of the kind this Article proposes. When the Storting considered the state's equity commitment in 2018, the ministry's assessment was that the project must meet the armed forces' need for military broadband under Norwegian control, and that no funds would be released until binding customer agreements were concluded and all capacity had been sold in advance for the life of the project. The project description placed the ground station and operations centre in Norway in order to secure national control of the system."
+        },
+        {
+          "text": "30",
+          "superscript": true,
+          "footnoteRef": "30"
+        },
+        {
+          "text": " The legislature financed a partnership on stated terms about who would control what."
         }
       ]
     },
@@ -591,15 +710,15 @@
     },
     {
       "type": "paragraph",
-      "text": "Co-hosting military and civilian functions also raises risks for other users. During armed conflict, the military-objective test codified in Article 52(2) of Additional Protocol I requires both an effective contribution to military action and a definite military advantage from destruction, capture, or neutralization in the circumstances. A military connection does not automatically make every civilian component a lawful target. Proportionality and feasible precautions remain relevant. The ICRC's 2024 observations emphasize foreseeable civilian service losses and feasible limits on effects upon civilian payloads.23 Whether effects can actually be confined within a particular architecture requires technical evidence. Legal distinctions alone do not insulate an integrated system from conflict.",
+      "text": "Co-hosting military and civilian functions also raises risks for other users. During armed conflict, the military-objective test codified in Article 52(2) of Additional Protocol I requires both an effective contribution to military action and a definite military advantage from destruction, capture, or neutralization in the circumstances. A military connection does not automatically make every civilian component a lawful target. Proportionality and feasible precautions remain relevant. The ICRC's 2024 observations emphasize foreseeable civilian service losses and feasible limits on effects upon civilian payloads.31 Whether effects can actually be confined within a particular architecture requires technical evidence. Legal distinctions alone do not insulate an integrated system from conflict.",
       "runs": [
         {
           "text": "Co-hosting military and civilian functions also raises risks for other users. During armed conflict, the military-objective test codified in Article 52(2) of Additional Protocol I requires both an effective contribution to military action and a definite military advantage from destruction, capture, or neutralization in the circumstances. A military connection does not automatically make every civilian component a lawful target. Proportionality and feasible precautions remain relevant. The ICRC's 2024 observations emphasize foreseeable civilian service losses and feasible limits on effects upon civilian payloads."
         },
         {
-          "text": "23",
+          "text": "31",
           "superscript": true,
-          "footnoteRef": "23"
+          "footnoteRef": "31"
         },
         {
           "text": " Whether effects can actually be confined within a particular architecture requires technical evidence. Legal distinctions alone do not insulate an integrated system from conflict."
@@ -609,29 +728,53 @@
     {
       "type": "heading",
       "level": 2,
-      "id": "section-44",
-      "text": "C. Luxembourg and the administrative demands of ownership",
+      "id": "section-51",
+      "text": "C. Luxembourg and the Administrative Demands of Ownership",
       "runs": [
         {
-          "text": "C. Luxembourg and the administrative demands of ownership",
-          "italic": true
+          "text": "C. Luxembourg and the Administrative Demands of Ownership"
         }
       ]
     },
     {
       "type": "paragraph",
-      "text": "Luxembourg's LUXEOSys programme supplies an adverse check on the sufficiency of acquiring a national asset. Here the relevant public decision concerned the resources and organization necessary for an observation system, including its ground segment and operation. The Cour des comptes' 2022 special audit identified planning omissions, underestimated staffing, and coordination problems in explaining the increase in the legislatively authorized envelope from EUR170 million to EUR309 million, excluding VAT, in 2020.24 Both figures are expenditure authorizations.",
+      "text": "Luxembourg's LUXEOSys programme supplies an adverse check on the sufficiency of acquiring a national asset. Here the relevant public decision concerned the resources and organization necessary for an observation system, including its ground segment and operation. The Cour des comptes' 2022 special audit identified planning omissions, underestimated staffing, and coordination problems in explaining the increase in the legislatively authorized envelope from EUR170 million to EUR309 million, excluding VAT, in 2020.32 Both figures are expenditure authorizations.",
       "runs": [
         {
           "text": "Luxembourg's LUXEOSys programme supplies an adverse check on the sufficiency of acquiring a national asset. Here the relevant public decision concerned the resources and organization necessary for an observation system, including its ground segment and operation. The Cour des comptes' 2022 special audit identified planning omissions, underestimated staffing, and coordination problems in explaining the increase in the legislatively authorized envelope from EUR170 million to EUR309 million, excluding VAT, in 2020."
         },
         {
-          "text": "24",
+          "text": "32",
           "superscript": true,
-          "footnoteRef": "24"
+          "footnoteRef": "32"
         },
         {
           "text": " Both figures are expenditure authorizations."
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "The audit shows what the title did not include. Operation of the system, meaning control and piloting of the satellite and the management centre that handles image requests, was to be performed by a third-party provider at a cost of EUR75 million, and the antennas were to be installed on rented infrastructure at Redu, in Belgium.33 The record before commitment had already flagged the gap in information. In its opinion on the 2018 bill, the Conseil d'État regretted that, on the ground of confidential negotiations, the documentation contained no details, even summary ones, and no indication of the split between investment and operating expenditure.34 Ownership was acquired; the capacity to operate was bought separately, and the legislature authorized the first without an account of the second.",
+      "runs": [
+        {
+          "text": "The audit shows what the title did not include. Operation of the system, meaning control and piloting of the satellite and the management centre that handles image requests, was to be performed by a third-party provider at a cost of EUR75 million, and the antennas were to be installed on rented infrastructure at Redu, in Belgium."
+        },
+        {
+          "text": "33",
+          "superscript": true,
+          "footnoteRef": "33"
+        },
+        {
+          "text": " The record before commitment had already flagged the gap in information. In its opinion on the 2018 bill, the Conseil d'État regretted that, on the ground of confidential negotiations, the documentation contained no details, even summary ones, and no indication of the split between investment and operating expenditure."
+        },
+        {
+          "text": "34",
+          "superscript": true,
+          "footnoteRef": "34"
+        },
+        {
+          "text": " Ownership was acquired; the capacity to operate was bought separately, and the legislature authorized the first without an account of the second."
         }
       ]
     },
@@ -646,15 +789,15 @@
     },
     {
       "type": "paragraph",
-      "text": "The record also contains an accountability response. The court criticized the timeliness of information supplied to Parliament. The minister's annexed reply explained the need for external review to establish the project's position and disputed aspects of the accounting comparison.25 A public audit therefore exposed the problem and supplied grounds for scrutiny. Together with the ministerial response, it left a public record for evaluating both the procurement failures and the disputed accounting.",
+      "text": "The record also contains an accountability response. The court criticized the timeliness of information supplied to Parliament. The minister's annexed reply explained the need for external review to establish the project's position and disputed aspects of the accounting comparison.35 A public audit therefore exposed the problem and supplied grounds for scrutiny. Together with the ministerial response, it left a public record for evaluating both the procurement failures and the disputed accounting.",
       "runs": [
         {
           "text": "The record also contains an accountability response. The court criticized the timeliness of information supplied to Parliament. The minister's annexed reply explained the need for external review to establish the project's position and disputed aspects of the accounting comparison."
         },
         {
-          "text": "25",
+          "text": "35",
           "superscript": true,
-          "footnoteRef": "25"
+          "footnoteRef": "35"
         },
         {
           "text": " A public audit therefore exposed the problem and supplied grounds for scrutiny. Together with the ministerial response, it left a public record for evaluating both the procurement failures and the disputed accounting."
@@ -673,12 +816,11 @@
     {
       "type": "heading",
       "level": 2,
-      "id": "section-49",
-      "text": "D. What the comparison explains",
+      "id": "section-57",
+      "text": "D. What the Comparison Explains",
       "runs": [
         {
-          "text": "D. What the comparison explains",
-          "italic": true
+          "text": "D. What the Comparison Explains"
         }
       ]
     },
@@ -701,13 +843,208 @@
       ]
     },
     {
-      "type": "heading",
-      "level": 1,
-      "id": "section-52",
-      "text": "V. Participation and influence in multilateral governance",
+      "type": "paragraph",
+      "text": "Read together, the cases fill in the entitlements separated in Part II. Voice, the fifth, is taken up in Part V.",
       "runs": [
         {
-          "text": "V. Participation and influence in multilateral governance"
+          "text": "Read together, the cases fill in the entitlements separated in Part II. Voice, the fifth, is taken up in Part V."
+        }
+      ]
+    },
+    {
+      "type": "table",
+      "text": "",
+      "runs": [],
+      "rows": [
+        [
+          {
+            "text": "Entitlement",
+            "runs": [
+              {
+                "text": "Entitlement"
+              }
+            ]
+          },
+          {
+            "text": "New Zealand (launch regulation)",
+            "runs": [
+              {
+                "text": "New Zealand (launch regulation)"
+              }
+            ]
+          },
+          {
+            "text": "Norway (ASBM)",
+            "runs": [
+              {
+                "text": "Norway (ASBM)"
+              }
+            ]
+          },
+          {
+            "text": "Luxembourg (LUXEOSys)",
+            "runs": [
+              {
+                "text": "Luxembourg (LUXEOSys)"
+              }
+            ]
+          }
+        ],
+        [
+          {
+            "text": "Permission",
+            "runs": [
+              {
+                "text": "Permission"
+              }
+            ]
+          },
+          {
+            "text": "Held, and exercised through conditions on every permit",
+            "runs": [
+              {
+                "text": "Held, and exercised through conditions on every permit"
+              }
+            ]
+          },
+          {
+            "text": "Not at issue: the state owns the operator",
+            "runs": [
+              {
+                "text": "Not at issue: the state owns the operator"
+              }
+            ]
+          },
+          {
+            "text": "Not at issue: a state programme",
+            "runs": [
+              {
+                "text": "Not at issue: a state programme"
+              }
+            ]
+          }
+        ],
+        [
+          {
+            "text": "Title",
+            "runs": [
+              {
+                "text": "Title"
+              }
+            ]
+          },
+          {
+            "text": "Not held: the payloads belong to foreign operators",
+            "runs": [
+              {
+                "text": "Not held: the payloads belong to foreign operators"
+              }
+            ]
+          },
+          {
+            "text": "Held: Space Norway owns the platforms",
+            "runs": [
+              {
+                "text": "Held: Space Norway owns the platforms"
+              }
+            ]
+          },
+          {
+            "text": "Held",
+            "runs": [
+              {
+                "text": "Held"
+              }
+            ]
+          }
+        ],
+        [
+          {
+            "text": "Operation",
+            "runs": [
+              {
+                "text": "Operation"
+              }
+            ]
+          },
+          {
+            "text": "Not held",
+            "runs": [
+              {
+                "text": "Not held"
+              }
+            ]
+          },
+          {
+            "text": "Platform command held; the American and commercial payloads are separate",
+            "runs": [
+              {
+                "text": "Platform command held; the American and commercial payloads are separate"
+              }
+            ]
+          },
+          {
+            "text": "Contracted to a third-party provider, with antennas on rented infrastructure abroad",
+            "runs": [
+              {
+                "text": "Contracted to a third-party provider, with antennas on rented infrastructure abroad"
+              }
+            ]
+          }
+        ],
+        [
+          {
+            "text": "Interruption and priority",
+            "runs": [
+              {
+                "text": "Interruption and priority"
+              }
+            ]
+          },
+          {
+            "text": "Before launch only",
+            "runs": [
+              {
+                "text": "Before launch only"
+              }
+            ]
+          },
+          {
+            "text": "Not resolved by the published terms",
+            "runs": [
+              {
+                "text": "Not resolved by the published terms"
+              }
+            ]
+          },
+          {
+            "text": "Not documented in the audit",
+            "runs": [
+              {
+                "text": "Not documented in the audit"
+              }
+            ]
+          }
+        ]
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "The table states the thesis of this Article in one view. No case combines all the entitlements, and the one that decides a crisis, the power to interrupt, is the one the public record leaves least defined. Where it can be located, it sits with whoever controls a necessary input: the launch state before launch, a payload's own control arrangements, a contracted operator. Residual control follows the chokepoint, and a title or a licence shows where it lies only by coincidence.",
+      "runs": [
+        {
+          "text": "The table states the thesis of this Article in one view. No case combines all the entitlements, and the one that decides a crisis, the power to interrupt, is the one the public record leaves least defined. Where it can be located, it sits with whoever controls a necessary input: the launch state before launch, a payload's own control arrangements, a contracted operator. Residual control follows the chokepoint, and a title or a licence shows where it lies only by coincidence."
+        }
+      ]
+    },
+    {
+      "type": "heading",
+      "level": 1,
+      "id": "section-63",
+      "text": "V. Participation and Influence in Multilateral Governance",
+      "runs": [
+        {
+          "text": "V. Participation and Influence in Multilateral Governance"
         }
       ]
     },
@@ -722,15 +1059,15 @@
     },
     {
       "type": "paragraph",
-      "text": "The General Assembly's 2022 resolution on destructive direct-ascent anti-satellite missile testing illustrates that distinction. Resolution 77/41 called on states to make commitments against such testing and received 155 votes in favor, nine against, and nine abstentions. New Zealand, Norway, and Luxembourg supported it; China and Russia opposed it.26 The measure expresses a widely supported restraint directed at a specific source of debris. It is neither a comprehensive prohibition of counterspace capabilities nor, by itself, evidence of a universal customary rule. Its practical value depends on conduct and broader acceptance, including by actors capable of producing the harm.",
+      "text": "The General Assembly's 2022 resolution on destructive direct-ascent anti-satellite missile testing illustrates that distinction. Resolution 77/41 called on states to make commitments against such testing and received 155 votes in favor, nine against, and nine abstentions. New Zealand, Norway, and Luxembourg supported it; China and Russia opposed it.36 The measure expresses a widely supported restraint directed at a specific source of debris. It is neither a comprehensive prohibition of counterspace capabilities nor, by itself, evidence of a universal customary rule. Its practical value depends on conduct and broader acceptance, including by actors capable of producing the harm.",
       "runs": [
         {
           "text": "The General Assembly's 2022 resolution on destructive direct-ascent anti-satellite missile testing illustrates that distinction. Resolution 77/41 called on states to make commitments against such testing and received 155 votes in favor, nine against, and nine abstentions. New Zealand, Norway, and Luxembourg supported it; China and Russia opposed it."
         },
         {
-          "text": "26",
+          "text": "36",
           "superscript": true,
-          "footnoteRef": "26"
+          "footnoteRef": "36"
         },
         {
           "text": " The measure expresses a widely supported restraint directed at a specific source of debris. It is neither a comprehensive prohibition of counterspace capabilities nor, by itself, evidence of a universal customary rule. Its practical value depends on conduct and broader acceptance, including by actors capable of producing the harm."
@@ -739,15 +1076,15 @@
     },
     {
       "type": "paragraph",
-      "text": "Procedure affects whose proposals can advance. The 2022-2023 open-ended working group on reducing space threats operated under a consensus mandate and did not adopt a substantive or procedural report. The chair's September 2023 summary recorded discussion but was issued under his own authority.27 Consensus can protect smaller participants against being formally outvoted while allowing persistent opposition to prevent a shared product. Equality in the decision rule does not equalize the resources needed to sustain negotiation or the consequences of failure.",
+      "text": "Procedure affects whose proposals can advance. The 2022-2023 open-ended working group on reducing space threats operated under a consensus mandate and did not adopt a substantive or procedural report. The chair's September 2023 summary recorded discussion but was issued under his own authority.37 Consensus can protect smaller participants against being formally outvoted while allowing persistent opposition to prevent a shared product. Equality in the decision rule does not equalize the resources needed to sustain negotiation or the consequences of failure.",
       "runs": [
         {
           "text": "Procedure affects whose proposals can advance. The 2022-2023 open-ended working group on reducing space threats operated under a consensus mandate and did not adopt a substantive or procedural report. The chair's September 2023 summary recorded discussion but was issued under his own authority."
         },
         {
-          "text": "27",
+          "text": "37",
           "superscript": true,
-          "footnoteRef": "27"
+          "footnoteRef": "37"
         },
         {
           "text": " Consensus can protect smaller participants against being formally outvoted while allowing persistent opposition to prevent a shared product. Equality in the decision rule does not equalize the resources needed to sustain negotiation or the consequences of failure."
@@ -756,23 +1093,23 @@
     },
     {
       "type": "paragraph",
-      "text": "New Zealand's October 2023 statement is unusually direct evidence of this problem. It supported continuation of the responsible-behaviours process and warned that competing groups would strain the capacity of smaller and emerging space states.28 That is an expressed institutional concern, not a quantified measure of diplomatic exclusion. In December 2024, the Assembly adopted decision 79/512, replacing the two previously mandated groups with a single process while retaining consensus. The recorded vote was 174-2-9.29 Consolidation addressed a procedural problem within the observation period; the record does not establish that New Zealand caused the change or that the new process would produce substantive agreement.",
+      "text": "New Zealand's October 2023 statement is unusually direct evidence of this problem. It supported continuation of the responsible-behaviours process and warned that competing groups would strain the capacity of smaller and emerging space states.38 That is an expressed institutional concern, not a quantified measure of diplomatic exclusion. In December 2024, the Assembly adopted decision 79/512, replacing the two previously mandated groups with a single process while retaining consensus. The recorded vote was 174-2-9.39 Consolidation addressed a procedural problem within the observation period; the record does not establish that New Zealand caused the change or that the new process would produce substantive agreement.",
       "runs": [
         {
           "text": "New Zealand's October 2023 statement is unusually direct evidence of this problem. It supported continuation of the responsible-behaviours process and warned that competing groups would strain the capacity of smaller and emerging space states."
         },
         {
-          "text": "28",
+          "text": "38",
           "superscript": true,
-          "footnoteRef": "28"
+          "footnoteRef": "38"
         },
         {
           "text": " That is an expressed institutional concern, not a quantified measure of diplomatic exclusion. In December 2024, the Assembly adopted decision 79/512, replacing the two previously mandated groups with a single process while retaining consensus. The recorded vote was 174-2-9."
         },
         {
-          "text": "29",
+          "text": "39",
           "superscript": true,
-          "footnoteRef": "29"
+          "footnoteRef": "39"
         },
         {
           "text": " Consolidation addressed a procedural problem within the observation period; the record does not establish that New Zealand caused the change or that the new process would produce substantive agreement."
@@ -781,15 +1118,15 @@
     },
     {
       "type": "paragraph",
-      "text": "A separate Group of Governmental Experts adopted a consensus report in August 2024. The report expressly distinguished agreement on the document from common views on all proposed substantive elements and did not seek a common understanding of responsible behaviours.30 Consensus remained possible at one level while important disagreements persisted at another. This reinforces the need to identify what was agreed, rather than treating either a failed report or an adopted document as a verdict on the entire system.",
+      "text": "A separate Group of Governmental Experts adopted a consensus report in August 2024. The report expressly distinguished agreement on the document from common views on all proposed substantive elements and did not seek a common understanding of responsible behaviours.40 Consensus remained possible at one level while important disagreements persisted at another. This reinforces the need to identify what was agreed, rather than treating either a failed report or an adopted document as a verdict on the entire system.",
       "runs": [
         {
           "text": "A separate Group of Governmental Experts adopted a consensus report in August 2024. The report expressly distinguished agreement on the document from common views on all proposed substantive elements and did not seek a common understanding of responsible behaviours."
         },
         {
-          "text": "30",
+          "text": "40",
           "superscript": true,
-          "footnoteRef": "30"
+          "footnoteRef": "40"
         },
         {
           "text": " Consensus remained possible at one level while important disagreements persisted at another. This reinforces the need to identify what was agreed, rather than treating either a failed report or an adopted document as a verdict on the entire system."
@@ -798,15 +1135,15 @@
     },
     {
       "type": "paragraph",
-      "text": "Regional cooperation offers a different allocation of authority. The ESA Convention combines mandatory activities with optional programmes, contribution rules, industrial participation objectives, and Council voting rights. Each member has one Council vote, but cannot vote on matters concerning exclusively an accepted programme in which it does not participate. Industrial participation is linked to financial contributions, rather than distributed equally.31 Pooling organizes shared technical capacity while participation carries financial commitments and limits on unilateral choice. Whether a separate national programme would perform better requires a programme-specific comparison. ESA supplies an institutional route for collective agency, without guaranteeing equal national influence or returns.",
+      "text": "Regional cooperation offers a different allocation of authority. The ESA Convention combines mandatory activities with optional programmes, contribution rules, industrial participation objectives, and Council voting rights. Each member has one Council vote, but cannot vote on matters concerning exclusively an accepted programme in which it does not participate. Industrial participation is linked to financial contributions, rather than distributed equally.41 Pooling organizes shared technical capacity while participation carries financial commitments and limits on unilateral choice. Whether a separate national programme would perform better requires a programme-specific comparison. ESA supplies an institutional route for collective agency, without guaranteeing equal national influence or returns.",
       "runs": [
         {
           "text": "Regional cooperation offers a different allocation of authority. The ESA Convention combines mandatory activities with optional programmes, contribution rules, industrial participation objectives, and Council voting rights. Each member has one Council vote, but cannot vote on matters concerning exclusively an accepted programme in which it does not participate. Industrial participation is linked to financial contributions, rather than distributed equally."
         },
         {
-          "text": "31",
+          "text": "41",
           "superscript": true,
-          "footnoteRef": "31"
+          "footnoteRef": "41"
         },
         {
           "text": " Pooling organizes shared technical capacity while participation carries financial commitments and limits on unilateral choice. Whether a separate national programme would perform better requires a programme-specific comparison. ESA supplies an institutional route for collective agency, without guaranteeing equal national influence or returns."
@@ -816,11 +1153,11 @@
     {
       "type": "heading",
       "level": 1,
-      "id": "section-59",
-      "text": "VI. Safeguards for accountable choice",
+      "id": "section-70",
+      "text": "VI. Safeguards for Accountable Choice",
       "runs": [
         {
-          "text": "VI. Safeguards for accountable choice"
+          "text": "VI. Safeguards for Accountable Choice"
         }
       ]
     },
@@ -830,6 +1167,48 @@
       "runs": [
         {
           "text": "States should evaluate cooperation by the public decisions it makes possible and the decisions it places beyond effective review. This Article proposes a decision standard of accountable acceptance, which goes further than the obligations the Outer Space Treaty imposes. Before authorizing or procuring an essential function, the responsible authority should identify who can interrupt or materially change it, what information and rights permit a response, and what funded capability makes that response feasible. Any material gap should require reasoned acceptance by an identified public decision maker, with legislative or independent scrutiny where the importance of the function warrants it. Some dependencies will rationally be accepted because eliminating them costs more than the public benefit. The legal contribution is to make that acceptance explicit and reviewable, instead of inferring adequate control from ownership, consent, or treaty membership."
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "The standard belongs to a familiar class of legal duty. The National Environmental Policy Act does not require an agency to choose the environmentally preferable course. It \"does not mandate particular results, but simply prescribes the necessary process,\" and it \"merely prohibits uninformed—rather than unwise—agency action.\"42 Accountable acceptance has the same structure applied to dependence. It leaves the choice to depend with the responsible authority and forbids making that choice uninformed. The comparison also answers the concern that the standard would deter suppliers: a duty to identify and explain is a burden on the buyer's own process, and it imposes on the seller only what the buyer then chooses to negotiate.",
+      "runs": [
+        {
+          "text": "The standard belongs to a familiar class of legal duty. The National Environmental Policy Act does not require an agency to choose the environmentally preferable course. It \"does not mandate particular results, but simply prescribes the necessary process,\" and it \"merely prohibits uninformed—rather than unwise—agency action.\""
+        },
+        {
+          "text": "42",
+          "superscript": true,
+          "footnoteRef": "42"
+        },
+        {
+          "text": " Accountable acceptance has the same structure applied to dependence. It leaves the choice to depend with the responsible authority and forbids making that choice uninformed. The comparison also answers the concern that the standard would deter suppliers: a duty to identify and explain is a burden on the buyer's own process, and it imposes on the seller only what the buyer then chooses to negotiate."
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "The terms such a process would examine are well developed elsewhere. European financial regulation requires firms that rely on outside technology providers for critical functions to \"put in place exit strategies\" and to contract for termination rights, notice periods, and \"a mandatory adequate transition period.\"43 European defence procurement lets a buyer require a tenderer to indicate any restriction on \"disclosure, transfer or use\" arising from export-control or security arrangements, to commit to \"the capacity required to meet additional needs\" in a crisis, and to give notice of changes in its organisation or supply chain.44 This Article does not claim those clauses as its own. Its claim is that their absence from an arrangement for an essential space function should be something a named public decision maker has to explain, in a form that can be reviewed.",
+      "runs": [
+        {
+          "text": "The terms such a process would examine are well developed elsewhere. European financial regulation requires firms that rely on outside technology providers for critical functions to \"put in place exit strategies\" and to contract for termination rights, notice periods, and \"a mandatory adequate transition period.\""
+        },
+        {
+          "text": "43",
+          "superscript": true,
+          "footnoteRef": "43"
+        },
+        {
+          "text": " European defence procurement lets a buyer require a tenderer to indicate any restriction on \"disclosure, transfer or use\" arising from export-control or security arrangements, to commit to \"the capacity required to meet additional needs\" in a crisis, and to give notice of changes in its organisation or supply chain."
+        },
+        {
+          "text": "44",
+          "superscript": true,
+          "footnoteRef": "44"
+        },
+        {
+          "text": " This Article does not claim those clauses as its own. Its claim is that their absence from an arrangement for an essential space function should be something a named public decision maker has to explain, in a form that can be reviewed."
         }
       ]
     },
@@ -871,15 +1250,15 @@
     },
     {
       "type": "paragraph",
-      "text": "An existing institutional foundation is available in the twenty-one long-term sustainability guidelines adopted by COPUOS in 2019. Their provisions on operational contacts, information quality, cooperation, and capacity-building could support shared technical assistance and supervisory expertise.32 The guidelines are voluntary and create no new legal obligations. Using them for this purpose would require participating governments to fund and organize the support, define confidentiality rules, and preserve responsibility for national decisions. Technical assistance would also need evaluation by its usefulness to actual supervision, rather than attendance at training sessions alone.",
+      "text": "An existing institutional foundation is available in the twenty-one long-term sustainability guidelines adopted by COPUOS in 2019. Their provisions on operational contacts, information quality, cooperation, and capacity-building could support shared technical assistance and supervisory expertise.45 The guidelines are voluntary and create no new legal obligations. Using them for this purpose would require participating governments to fund and organize the support, define confidentiality rules, and preserve responsibility for national decisions. Technical assistance would also need evaluation by its usefulness to actual supervision, rather than attendance at training sessions alone.",
       "runs": [
         {
           "text": "An existing institutional foundation is available in the twenty-one long-term sustainability guidelines adopted by COPUOS in 2019. Their provisions on operational contacts, information quality, cooperation, and capacity-building could support shared technical assistance and supervisory expertise."
         },
         {
-          "text": "32",
+          "text": "45",
           "superscript": true,
-          "footnoteRef": "32"
+          "footnoteRef": "45"
         },
         {
           "text": " The guidelines are voluntary and create no new legal obligations. Using them for this purpose would require participating governments to fund and organize the support, define confidentiality rules, and preserve responsibility for national decisions. Technical assistance would also need evaluation by its usefulness to actual supervision, rather than attendance at training sessions alone."
@@ -916,7 +1295,7 @@
     {
       "type": "heading",
       "level": 1,
-      "id": "section-69",
+      "id": "section-82",
       "text": "VII. Conclusion",
       "runs": [
         {
@@ -926,10 +1305,10 @@
     },
     {
       "type": "paragraph",
-      "text": "Small states' relationship with foreign space infrastructure cannot be adequately described as a choice between dependence and sovereignty. The legally significant questions concern the distribution of particular decisions, the information needed to make them, and the capability to implement them. International law protects participation and allocates authority. Operational control and dependable access to another actor's services have to be secured by other means.",
+      "text": "Small states' relationship with foreign space infrastructure cannot be adequately described as a choice between dependence and sovereignty. The legally significant questions concern the distribution of particular decisions, the information needed to make them, and the capability to implement them. International law protects participation and allocates authority. Operational control and dependable access to another actor's services have to be secured by other means. Control over space infrastructure is a bundle of entitlements, and the one that matters most in a crisis follows the chokepoint.",
       "runs": [
         {
-          "text": "Small states' relationship with foreign space infrastructure cannot be adequately described as a choice between dependence and sovereignty. The legally significant questions concern the distribution of particular decisions, the information needed to make them, and the capability to implement them. International law protects participation and allocates authority. Operational control and dependable access to another actor's services have to be secured by other means."
+          "text": "Small states' relationship with foreign space infrastructure cannot be adequately described as a choice between dependence and sovereignty. The legally significant questions concern the distribution of particular decisions, the information needed to make them, and the capability to implement them. International law protects participation and allocates authority. Operational control and dependable access to another actor's services have to be secured by other means. Control over space infrastructure is a bundle of entitlements, and the one that matters most in a crisis follows the chokepoint."
         }
       ]
     },
@@ -950,6 +1329,15 @@
           "text": "If this argument is right, the policy objective should be accountable acceptance of important dependencies. Authorities should identify the decisions others can withhold, establish usable response arrangements, and fund the competence to exercise retained rights. Material gaps should lead to reasoned acceptance or revision before commitment. This standard permits beneficial cooperation while requiring an explanation of its limits. It must accompany restraint against harms that national bargains cannot contain. Small states strengthen their agency when cooperation makes lawful choices usable and accountable and when they recognize that other states and civilian users have corresponding claims."
         }
       ]
+    },
+    {
+      "type": "paragraph",
+      "text": "---",
+      "runs": [
+        {
+          "text": "---"
+        }
+      ]
     }
   ],
   "footnotes": [
@@ -958,73 +1346,17 @@
       "text": "NORWEGIAN MINISTRY OF DEFENCE, Norway Switches on Arctic Broadband Network (Dec. 18, 2024), https://www.regjeringen.no/en/whats-new/norway-activates-arctic-broadband-network/id3079294/; U.S. SPACE SYSTEMS COMMAND, Enhanced Polar System-Recapitalization (EPS-R) Payloads Launched for U.S. Space Force 1-2 (Aug. 15, 2024), https://www.ssc.spaceforce.mil/Portals/3/EPS-R%20Launch%20Norway.pdf.",
       "runs": [
         {
-          "text": "N"
-        },
-        {
-          "text": "ORWEGIAN ",
-          "smallCaps": true
-        },
-        {
-          "text": "M"
-        },
-        {
-          "text": "INISTRY OF ",
-          "smallCaps": true
-        },
-        {
-          "text": "D"
-        },
-        {
-          "text": "EFENCE",
-          "smallCaps": true
-        },
-        {
-          "text": ", "
+          "text": "NORWEGIAN MINISTRY OF DEFENCE, "
         },
         {
           "text": "Norway Switches on Arctic Broadband Network",
           "italic": true
         },
         {
-          "text": " (Dec. 18, 2024), https://www.regjeringen.no/en/whats-new/norway-activates-arctic-broadband-network/id3079294/; U.S."
+          "text": " (Dec. 18, 2024), https://www.regjeringen.no/en/whats-new/norway-activates-arctic-broadband-network/id3079294/; U.S. SPACE SYSTEMS COMMAND, "
         },
         {
-          "text": " ",
-          "smallCaps": true
-        },
-        {
-          "text": "S"
-        },
-        {
-          "text": "PACE",
-          "smallCaps": true
-        },
-        {
-          "text": " S"
-        },
-        {
-          "text": "YSTEMS ",
-          "smallCaps": true
-        },
-        {
-          "text": "C"
-        },
-        {
-          "text": "OMMAND",
-          "smallCaps": true
-        },
-        {
-          "text": ", "
-        },
-        {
-          "text": "Enhanced Polar System-Recapitalization (EPS-R) Payloads Launched for U.S. Space",
-          "italic": true
-        },
-        {
-          "text": " "
-        },
-        {
-          "text": "Force",
+          "text": "Enhanced Polar System-Recapitalization (EPS-R) Payloads Launched for U.S. Space Force",
           "italic": true
         },
         {
@@ -1040,14 +1372,7 @@
           "text": "K. Shanmugam, Minister for Foreign Affairs & Minister for Law, "
         },
         {
-          "text": "Introductory Remarks at the Forum of Small",
-          "italic": true
-        },
-        {
-          "text": " "
-        },
-        {
-          "text": "States Conference",
+          "text": "Introductory Remarks at the Forum of Small States Conference",
           "italic": true
         },
         {
@@ -1067,42 +1392,7 @@
           "italic": true
         },
         {
-          "text": ", 19 I"
-        },
-        {
-          "text": "NT",
-          "smallCaps": true
-        },
-        {
-          "text": "'"
-        },
-        {
-          "text": "L ",
-          "smallCaps": true
-        },
-        {
-          "text": "S"
-        },
-        {
-          "text": "TUD",
-          "smallCaps": true
-        },
-        {
-          "text": "."
-        },
-        {
-          "text": " ",
-          "smallCaps": true
-        },
-        {
-          "text": "R"
-        },
-        {
-          "text": "EV",
-          "smallCaps": true
-        },
-        {
-          "text": ". 185, 185-205 (2017)."
+          "text": ", 19 INT'L STUD. REV. 185, 185-205 (2017)."
         }
       ]
     },
@@ -1114,130 +1404,108 @@
           "text": "Henry Farrell & Abraham L. Newman, "
         },
         {
-          "text": "Weaponized Interdependence: How Global Economic Networks Shape",
+          "text": "Weaponized Interdependence: How Global Economic Networks Shape State Coercion",
           "italic": true
         },
         {
-          "text": " "
-        },
-        {
-          "text": "State Coercion",
-          "italic": true
-        },
-        {
-          "text": ", 44 I"
-        },
-        {
-          "text": "NT",
-          "smallCaps": true
-        },
-        {
-          "text": "'"
-        },
-        {
-          "text": "L ",
-          "smallCaps": true
-        },
-        {
-          "text": "S"
-        },
-        {
-          "text": "EC",
-          "smallCaps": true
-        },
-        {
-          "text": ". 42, 54-58 (2019)."
+          "text": ", 44 INT'L SEC. 42, 54-58 (2019)."
         }
       ]
     },
     {
       "number": 5,
+      "text": "Wesley Newcomb Hohfeld, Some Fundamental Legal Conceptions as Applied in Judicial Reasoning, 23 YALE L.J. 16 (1913); A.M. Honoré, Ownership, in OXFORD ESSAYS IN JURISPRUDENCE 107 (A.G. Guest ed., 1961).",
+      "runs": [
+        {
+          "text": "Wesley Newcomb Hohfeld, "
+        },
+        {
+          "text": "Some Fundamental Legal Conceptions as Applied in Judicial Reasoning",
+          "italic": true
+        },
+        {
+          "text": ", 23 YALE L.J. 16 (1913); A.M. Honoré, "
+        },
+        {
+          "text": "Ownership",
+          "italic": true
+        },
+        {
+          "text": ", in OXFORD ESSAYS IN JURISPRUDENCE 107 (A.G. Guest ed., 1961)."
+        }
+      ]
+    },
+    {
+      "number": 6,
+      "text": "Sanford J. Grossman & Oliver D. Hart, The Costs and Benefits of Ownership: A Theory of Vertical and Lateral Integration, 94 J. POL. ECON. 691 (1986); Oliver Hart & John Moore, Property Rights and the Nature of the Firm, 98 J. POL. ECON. 1119 (1990).",
+      "runs": [
+        {
+          "text": "Sanford J. Grossman & Oliver D. Hart, "
+        },
+        {
+          "text": "The Costs and Benefits of Ownership: A Theory of Vertical and Lateral Integration",
+          "italic": true
+        },
+        {
+          "text": ", 94 J. POL. ECON. 691 (1986); Oliver Hart & John Moore, "
+        },
+        {
+          "text": "Property Rights and the Nature of the Firm",
+          "italic": true
+        },
+        {
+          "text": ", 98 J. POL. ECON. 1119 (1990)."
+        }
+      ]
+    },
+    {
+      "number": 7,
+      "text": "Baldur Thorhallsson, Studying Small States: A Review, 1 SMALL STATES & TERRITORIES 17 (2018).",
+      "runs": [
+        {
+          "text": "Baldur Thorhallsson, "
+        },
+        {
+          "text": "Studying Small States: A Review",
+          "italic": true
+        },
+        {
+          "text": ", 1 SMALL STATES & TERRITORIES 17 (2018)."
+        }
+      ]
+    },
+    {
+      "number": 8,
       "text": "James Murray et al., Observations of Small Debris from the Cosmos 1408 Anti-Satellite Test Using the HUSIR and Goldstone Radars, AMOS CONFERENCE (2022), https://ntrs.nasa.gov/citations/20220011989.",
       "runs": [
         {
           "text": "James Murray et al., "
         },
         {
-          "text": "Observations of Small Debris from the Cosmos 1408 Anti-Satellite Test Using the HUSIR",
+          "text": "Observations of Small Debris from the Cosmos 1408 Anti-Satellite Test Using the HUSIR and Goldstone Radars",
           "italic": true
         },
         {
-          "text": " "
-        },
-        {
-          "text": "and Goldstone Radars",
-          "italic": true
-        },
-        {
-          "text": ", AMOS"
-        },
-        {
-          "text": " ",
-          "smallCaps": true
-        },
-        {
-          "text": "C"
-        },
-        {
-          "text": "ONFERENCE",
-          "smallCaps": true
-        },
-        {
-          "text": " (2022), https://ntrs.nasa.gov/citations/20220011989."
+          "text": ", AMOS CONFERENCE (2022), https://ntrs.nasa.gov/citations/20220011989."
         }
       ]
     },
     {
-      "number": 6,
+      "number": 9,
       "text": "VIASAT, KA-SAT Network Cyber Attack Overview (Mar. 30, 2022), https://www.viasat.com/perspectives/corporate/2022/ka-sat-network-cyber-attack-overview/; COUNCIL OF THE EUROPEAN UNION, Russian Cyber Operations Against Ukraine: Declaration by the High Representative on Behalf of the European Union (May 10, 2022), https://www.consilium.europa.eu/en/press/press-releases/2022/05/10/russian-cyber-operations-against-ukraine-declaration-by-the-high-representative-on-behalf-of-the-european-union/.",
       "runs": [
         {
-          "text": "V"
-        },
-        {
-          "text": "IASAT",
-          "smallCaps": true
-        },
-        {
-          "text": ", "
+          "text": "VIASAT, "
         },
         {
           "text": "KA-SAT Network Cyber Attack Overview",
           "italic": true
         },
         {
-          "text": " (Mar. 30, 2022), https://www.viasat.com/perspectives/corporate/2022/ka-sat-network-cyber-attack-overview/; C"
+          "text": " (Mar. 30, 2022), https://www.viasat.com/perspectives/corporate/2022/ka-sat-network-cyber-attack-overview/; COUNCIL OF THE EUROPEAN UNION, "
         },
         {
-          "text": "OUNCIL OF THE",
-          "smallCaps": true
-        },
-        {
-          "text": " E"
-        },
-        {
-          "text": "UROPEAN ",
-          "smallCaps": true
-        },
-        {
-          "text": "U"
-        },
-        {
-          "text": "NION",
-          "smallCaps": true
-        },
-        {
-          "text": ", "
-        },
-        {
-          "text": "Russian Cyber Operations Against Ukraine: Declaration by the High Representative on",
-          "italic": true
-        },
-        {
-          "text": " "
-        },
-        {
-          "text": "Behalf of the European Union",
+          "text": "Russian Cyber Operations Against Ukraine: Declaration by the High Representative on Behalf of the European Union",
           "italic": true
         },
         {
@@ -1246,7 +1514,7 @@
       ]
     },
     {
-      "number": 7,
+      "number": 10,
       "text": "Treaty on Principles Governing the Activities of States in the Exploration and Use of Outer Space, Including the Moon and Other Celestial Bodies arts. I, III-IV, Jan. 27, 1967, 18 U.S.T. 2410, 610 U.N.T.S. 205 [hereinafter Outer Space Treaty].",
       "runs": [
         {
@@ -1255,8 +1523,8 @@
       ]
     },
     {
-      "number": 8,
-      "text": "Outer Space Treaty, supra note 7, arts. III-IV.",
+      "number": 11,
+      "text": "Outer Space Treaty, supra note 10, arts. III-IV.",
       "runs": [
         {
           "text": "Outer Space Treaty, "
@@ -1266,13 +1534,13 @@
           "italic": true
         },
         {
-          "text": " note 7, arts. III-IV."
+          "text": " note 10, arts. III-IV."
         }
       ]
     },
     {
-      "number": 9,
-      "text": "Outer Space Treaty, supra note 7, arts. VI-VIII.",
+      "number": 12,
+      "text": "Outer Space Treaty, supra note 10, arts. VI-VIII.",
       "runs": [
         {
           "text": "Outer Space Treaty, "
@@ -1282,12 +1550,12 @@
           "italic": true
         },
         {
-          "text": " note 7, arts. VI-VIII."
+          "text": " note 10, arts. VI-VIII."
         }
       ]
     },
     {
-      "number": 10,
+      "number": 13,
       "text": "Frans G. von der Dunk, Space Tourism, Private Spaceflight and the Law: Key Aspects, 27 SPACE POL'Y 146, 148, 152 (2011).",
       "runs": [
         {
@@ -1298,34 +1566,22 @@
           "italic": true
         },
         {
-          "text": ", 27 S"
-        },
-        {
-          "text": "PACE ",
-          "smallCaps": true
-        },
-        {
-          "text": "P"
-        },
-        {
-          "text": "OL",
-          "smallCaps": true
-        },
-        {
-          "text": "'"
-        },
-        {
-          "text": "Y",
-          "smallCaps": true
-        },
-        {
-          "text": " 146, 148, 152 (2011)."
+          "text": ", 27 SPACE POL'Y 146, 148, 152 (2011)."
         }
       ]
     },
     {
-      "number": 11,
-      "text": "Outer Space Treaty, supra note 7, arts. VI-VIII.",
+      "number": 14,
+      "text": "G.A. Res. 68/74, ¶¶ 3, 5, 8 (Dec. 11, 2013).",
+      "runs": [
+        {
+          "text": "G.A. Res. 68/74, ¶¶ 3, 5, 8 (Dec. 11, 2013)."
+        }
+      ]
+    },
+    {
+      "number": 15,
+      "text": "Outer Space Treaty, supra note 10, arts. VI-VIII.",
       "runs": [
         {
           "text": "Outer Space Treaty, "
@@ -1335,13 +1591,22 @@
           "italic": true
         },
         {
-          "text": " note 7, arts. VI-VIII."
+          "text": " note 10, arts. VI-VIII."
         }
       ]
     },
     {
-      "number": 12,
-      "text": "Outer Space Treaty, supra note 7, arts. IX, XI.",
+      "number": 16,
+      "text": "22 C.F.R. § 121.1, Category XV(e)(17) & note 2 to para. (e)(17) (2026).",
+      "runs": [
+        {
+          "text": "22 C.F.R. § 121.1, Category XV(e)(17) & note 2 to para. (e)(17) (2026)."
+        }
+      ]
+    },
+    {
+      "number": 17,
+      "text": "Outer Space Treaty, supra note 10, arts. IX, XI.",
       "runs": [
         {
           "text": "Outer Space Treaty, "
@@ -1351,12 +1616,12 @@
           "italic": true
         },
         {
-          "text": " note 7, arts. IX, XI."
+          "text": " note 10, arts. IX, XI."
         }
       ]
     },
     {
-      "number": 13,
+      "number": 18,
       "text": "Convention on International Liability for Damage Caused by Space Objects arts. I(a), II-III, XIX(2), XXIII, Mar. 29, 1972, 24 U.S.T. 2389, 961 U.N.T.S. 187.",
       "runs": [
         {
@@ -1365,118 +1630,27 @@
       ]
     },
     {
-      "number": 14,
-      "text": "Constitution of the International Telecommunication Union arts. 44-45, 48, Dec. 22, 1992, S. Treaty Doc. No. 104-34 (1996) (as amended in the 2023 basic texts); INTERNATIONAL TELECOMMUNICATION UNION, RADIO REGULATIONS vol. 1, nos. 8.1, 8.3 (2020); Outer Space Treaty, supra note 7, art. II.",
+      "number": 19,
+      "text": "Constitution of the International Telecommunication Union arts. 44-45, 48, Dec. 22, 1992, S. Treaty Doc. No. 104-34 (1996) (as amended in the 2023 basic texts); INTERNATIONAL TELECOMMUNICATION UNION, RADIO REGULATIONS vol. 1, nos. 8.1, 8.3 (2020); Outer Space Treaty, supra note 10, art. II.",
       "runs": [
         {
-          "text": "Constitution of the International Telecommunication Union arts. 44-45, 48, Dec. 22, 1992, S. Treaty Doc. No. 104-34 (1996) (as amended in the 2023 basic texts); I"
-        },
-        {
-          "text": "NTERNATIONAL ",
-          "smallCaps": true
-        },
-        {
-          "text": "T"
-        },
-        {
-          "text": "ELECOMMUNICATION ",
-          "smallCaps": true
-        },
-        {
-          "text": "U"
-        },
-        {
-          "text": "NION",
-          "smallCaps": true
-        },
-        {
-          "text": ","
-        },
-        {
-          "text": " ",
-          "smallCaps": true
-        },
-        {
-          "text": "R"
-        },
-        {
-          "text": "ADIO",
-          "smallCaps": true
-        },
-        {
-          "text": " R"
-        },
-        {
-          "text": "EGULATIONS",
-          "smallCaps": true
-        },
-        {
-          "text": " vol. 1, nos. 8.1, 8.3 (2020); Outer Space Treaty, "
+          "text": "Constitution of the International Telecommunication Union arts. 44-45, 48, Dec. 22, 1992, S. Treaty Doc. No. 104-34 (1996) (as amended in the 2023 basic texts); INTERNATIONAL TELECOMMUNICATION UNION, RADIO REGULATIONS vol. 1, nos. 8.1, 8.3 (2020); Outer Space Treaty, "
         },
         {
           "text": "supra",
           "italic": true
         },
         {
-          "text": " note 7, art. II."
+          "text": " note 10, art. II."
         }
       ]
     },
     {
-      "number": 15,
+      "number": 20,
       "text": "Agreement on Technology Safeguards Associated with United States Participation in Space Launches from New Zealand, N.Z.-U.S., June 16, 2016, 2016 N.Z.T.S. 14; NEW ZEALAND MINISTRY OF FOREIGN AFFAIRS & TRADE, Treaty Record B2016-07, Treaty Summary, https://www.treaties.mfat.govt.nz/search/details/t/3858.",
       "runs": [
         {
-          "text": "Agreement on Technology Safeguards Associated with United States Participation in Space Launches from New Zealand, N.Z.-U.S., June 16, 2016, 2016 N.Z.T.S. 14; N"
-        },
-        {
-          "text": "EW ",
-          "smallCaps": true
-        },
-        {
-          "text": "Z"
-        },
-        {
-          "text": "EALAND ",
-          "smallCaps": true
-        },
-        {
-          "text": "M"
-        },
-        {
-          "text": "INISTRY OF ",
-          "smallCaps": true
-        },
-        {
-          "text": "F"
-        },
-        {
-          "text": "OREIGN ",
-          "smallCaps": true
-        },
-        {
-          "text": "A"
-        },
-        {
-          "text": "FFAIRS ",
-          "smallCaps": true
-        },
-        {
-          "text": "&"
-        },
-        {
-          "text": " ",
-          "smallCaps": true
-        },
-        {
-          "text": "T"
-        },
-        {
-          "text": "RADE",
-          "smallCaps": true
-        },
-        {
-          "text": ", "
+          "text": "Agreement on Technology Safeguards Associated with United States Participation in Space Launches from New Zealand, N.Z.-U.S., June 16, 2016, 2016 N.Z.T.S. 14; NEW ZEALAND MINISTRY OF FOREIGN AFFAIRS & TRADE, "
         },
         {
           "text": "Treaty Record B2016-07",
@@ -1488,7 +1662,7 @@
       ]
     },
     {
-      "number": 16,
+      "number": 21,
       "text": "Phil Twyford, New Space Payload Principles Protect the National Interest, BEEHIVE.GOVT.NZ (Dec. 17, 2019), https://www.beehive.govt.nz/release/new-space-payload-principles-protect-national-interest.",
       "runs": [
         {
@@ -1499,359 +1673,30 @@
           "italic": true
         },
         {
-          "text": ", B"
-        },
-        {
-          "text": "EEHIVE",
-          "smallCaps": true
-        },
-        {
-          "text": "."
-        },
-        {
-          "text": "GOVT",
-          "smallCaps": true
-        },
-        {
-          "text": "."
-        },
-        {
-          "text": "NZ",
-          "smallCaps": true
-        },
-        {
-          "text": " (Dec. 17, 2019), https://www.beehive.govt.nz/release/new-space-payload-principles-protect-national-interest."
+          "text": ", BEEHIVE.GOVT.NZ (Dec. 17, 2019), https://www.beehive.govt.nz/release/new-space-payload-principles-protect-national-interest."
         }
       ]
     },
     {
-      "number": 17,
+      "number": 22,
       "text": "NEW ZEALAND MINISTRY OF BUSINESS, INNOVATION & EMPLOYMENT, REGULATORY IMPACT STATEMENT: THE OUTER SPACE AND HIGH-ALTITUDE ACTIVITIES ACT 2017 REGULATIONS 7-8, ¶¶ 7, 17, 19-21 (Aug. 21, 2017).",
       "runs": [
         {
-          "text": "N"
-        },
-        {
-          "text": "EW ",
-          "smallCaps": true
-        },
-        {
-          "text": "Z"
-        },
-        {
-          "text": "EALAND ",
-          "smallCaps": true
-        },
-        {
-          "text": "M"
-        },
-        {
-          "text": "INISTRY OF ",
-          "smallCaps": true
-        },
-        {
-          "text": "B"
-        },
-        {
-          "text": "USINESS",
-          "smallCaps": true
-        },
-        {
-          "text": ","
-        },
-        {
-          "text": " ",
-          "smallCaps": true
-        },
-        {
-          "text": "I"
-        },
-        {
-          "text": "NNOVATION ",
-          "smallCaps": true
-        },
-        {
-          "text": "&"
-        },
-        {
-          "text": " ",
-          "smallCaps": true
-        },
-        {
-          "text": "E"
-        },
-        {
-          "text": "MPLOYMENT",
-          "smallCaps": true
-        },
-        {
-          "text": ","
-        },
-        {
-          "text": " ",
-          "smallCaps": true
-        },
-        {
-          "text": "R"
-        },
-        {
-          "text": "EGULATORY ",
-          "smallCaps": true
-        },
-        {
-          "text": "I"
-        },
-        {
-          "text": "MPACT ",
-          "smallCaps": true
-        },
-        {
-          "text": "S"
-        },
-        {
-          "text": "TATEMENT",
-          "smallCaps": true
-        },
-        {
-          "text": ":"
-        },
-        {
-          "text": " ",
-          "smallCaps": true
-        },
-        {
-          "text": "T"
-        },
-        {
-          "text": "HE",
-          "smallCaps": true
-        },
-        {
-          "text": " O"
-        },
-        {
-          "text": "UTER ",
-          "smallCaps": true
-        },
-        {
-          "text": "S"
-        },
-        {
-          "text": "PACE AND ",
-          "smallCaps": true
-        },
-        {
-          "text": "H"
-        },
-        {
-          "text": "IGH",
-          "smallCaps": true
-        },
-        {
-          "text": "-"
-        },
-        {
-          "text": "ALTITUDE ",
-          "smallCaps": true
-        },
-        {
-          "text": "A"
-        },
-        {
-          "text": "CTIVITIES ",
-          "smallCaps": true
-        },
-        {
-          "text": "A"
-        },
-        {
-          "text": "CT ",
-          "smallCaps": true
-        },
-        {
-          "text": "2017"
-        },
-        {
-          "text": " ",
-          "smallCaps": true
-        },
-        {
-          "text": "R"
-        },
-        {
-          "text": "EGULATIONS",
-          "smallCaps": true
-        },
-        {
-          "text": " 7-8, ¶¶ 7, 17, 19-21 (Aug. 21, 2017)."
+          "text": "NEW ZEALAND MINISTRY OF BUSINESS, INNOVATION & EMPLOYMENT, REGULATORY IMPACT STATEMENT: THE OUTER SPACE AND HIGH-ALTITUDE ACTIVITIES ACT 2017 REGULATIONS 7-8, ¶¶ 7, 17, 19-21 (Aug. 21, 2017)."
         }
       ]
     },
     {
-      "number": 18,
+      "number": 23,
       "text": "BRENDAN HORSLEY, INSPECTOR-GENERAL OF INTELLIGENCE & SECURITY, REPORT INTO A REVIEW OF GCSB AND NZSIS ACTIVITY AND ASSESSMENTS UNDER THE OUTER SPACE AND HIGH-ALTITUDE ACTIVITIES ACT 2017 3-5, 7-13 (Apr. 20, 2021).",
       "runs": [
         {
-          "text": "B"
-        },
-        {
-          "text": "RENDAN ",
-          "smallCaps": true
-        },
-        {
-          "text": "H"
-        },
-        {
-          "text": "ORSLEY",
-          "smallCaps": true
-        },
-        {
-          "text": ","
-        },
-        {
-          "text": " ",
-          "smallCaps": true
-        },
-        {
-          "text": "I"
-        },
-        {
-          "text": "NSPECTOR",
-          "smallCaps": true
-        },
-        {
-          "text": "-G"
-        },
-        {
-          "text": "ENERAL OF ",
-          "smallCaps": true
-        },
-        {
-          "text": "I"
-        },
-        {
-          "text": "NTELLIGENCE ",
-          "smallCaps": true
-        },
-        {
-          "text": "&"
-        },
-        {
-          "text": " ",
-          "smallCaps": true
-        },
-        {
-          "text": "S"
-        },
-        {
-          "text": "ECURITY",
-          "smallCaps": true
-        },
-        {
-          "text": ","
-        },
-        {
-          "text": " ",
-          "smallCaps": true
-        },
-        {
-          "text": "R"
-        },
-        {
-          "text": "EPORT INTO A ",
-          "smallCaps": true
-        },
-        {
-          "text": "R"
-        },
-        {
-          "text": "EVIEW OF ",
-          "smallCaps": true
-        },
-        {
-          "text": "GCSB "
-        },
-        {
-          "text": "AND ",
-          "smallCaps": true
-        },
-        {
-          "text": "NZSIS"
-        },
-        {
-          "text": " ",
-          "smallCaps": true
-        },
-        {
-          "text": "A"
-        },
-        {
-          "text": "CTIVITY AND ",
-          "smallCaps": true
-        },
-        {
-          "text": "A"
-        },
-        {
-          "text": "SSESSMENTS ",
-          "smallCaps": true
-        },
-        {
-          "text": "U"
-        },
-        {
-          "text": "NDER THE ",
-          "smallCaps": true
-        },
-        {
-          "text": "O"
-        },
-        {
-          "text": "UTER ",
-          "smallCaps": true
-        },
-        {
-          "text": "S"
-        },
-        {
-          "text": "PACE AND ",
-          "smallCaps": true
-        },
-        {
-          "text": "H"
-        },
-        {
-          "text": "IGH",
-          "smallCaps": true
-        },
-        {
-          "text": "-"
-        },
-        {
-          "text": "ALTITUDE ",
-          "smallCaps": true
-        },
-        {
-          "text": "A"
-        },
-        {
-          "text": "CTIVITIES ",
-          "smallCaps": true
-        },
-        {
-          "text": "A"
-        },
-        {
-          "text": "CT ",
-          "smallCaps": true
-        },
-        {
-          "text": "2017 3-5, 7-13 (Apr. 20, 2021)."
+          "text": "BRENDAN HORSLEY, INSPECTOR-GENERAL OF INTELLIGENCE & SECURITY, REPORT INTO A REVIEW OF GCSB AND NZSIS ACTIVITY AND ASSESSMENTS UNDER THE OUTER SPACE AND HIGH-ALTITUDE ACTIVITIES ACT 2017 3-5, 7-13 (Apr. 20, 2021)."
         }
       ]
     },
     {
-      "number": 19,
+      "number": 24,
       "text": "Stuart Nash, Next Steps Signalled for Space Activity Laws, BEEHIVE.GOVT.NZ (May 12, 2022), https://www.beehive.govt.nz/release/next-steps-signalled-space-activity-laws.",
       "runs": [
         {
@@ -1862,75 +1707,41 @@
           "italic": true
         },
         {
-          "text": ", B"
-        },
-        {
-          "text": "EEHIVE",
-          "smallCaps": true
-        },
-        {
-          "text": "."
-        },
-        {
-          "text": "GOVT",
-          "smallCaps": true
-        },
-        {
-          "text": "."
-        },
-        {
-          "text": "NZ",
-          "smallCaps": true
-        },
-        {
-          "text": " (May 12, 2022), https://www.beehive.govt.nz/release/next-steps-signalled-space-activity-laws."
+          "text": ", BEEHIVE.GOVT.NZ (May 12, 2022), https://www.beehive.govt.nz/release/next-steps-signalled-space-activity-laws."
         }
       ]
     },
     {
-      "number": 20,
-      "text": "U.S. SPACE SYSTEMS COMMAND, Enhanced Polar System-Recapitalization (EPS-R) Payloads Launched for U.S. Space Force 1-2 (Aug. 15, 2024), https://www.ssc.spaceforce.mil/Portals/3/EPS-R%20Launch%20Norway.pdf.",
+      "number": 25,
+      "text": "NEW ZEALAND MINISTRY OF BUSINESS, INNOVATION & EMPLOYMENT, STATUTORY REVIEW OF THE OUTER SPACE AND HIGH-ALTITUDE ACTIVITIES ACT 2017, at 9 tbl.1 & ¶ 31 (2022), https://www.mbie.govt.nz/assets/report-on-the-statutory-review-of-the-oshaa-2017.pdf.",
       "runs": [
         {
-          "text": "U.S."
-        },
+          "text": "NEW ZEALAND MINISTRY OF BUSINESS, INNOVATION & EMPLOYMENT, STATUTORY REVIEW OF THE OUTER SPACE AND HIGH-ALTITUDE ACTIVITIES ACT 2017, at 9 tbl.1 & ¶ 31 (2022), https://www.mbie.govt.nz/assets/report-on-the-statutory-review-of-the-oshaa-2017.pdf."
+        }
+      ]
+    },
+    {
+      "number": 26,
+      "text": "Id. at 34.",
+      "runs": [
         {
-          "text": " ",
-          "smallCaps": true
-        },
-        {
-          "text": "S"
-        },
-        {
-          "text": "PACE ",
-          "smallCaps": true
-        },
-        {
-          "text": "S"
-        },
-        {
-          "text": "YSTEMS ",
-          "smallCaps": true
-        },
-        {
-          "text": "C"
-        },
-        {
-          "text": "OMMAND",
-          "smallCaps": true
-        },
-        {
-          "text": ", "
-        },
-        {
-          "text": "Enhanced Polar System-Recapitalization (EPS-R) Payloads Launched for U.S.",
+          "text": "Id.",
           "italic": true
         },
         {
-          "text": " "
+          "text": " at 34."
+        }
+      ]
+    },
+    {
+      "number": 27,
+      "text": "U.S. SPACE SYSTEMS COMMAND, Enhanced Polar System-Recapitalization (EPS-R) Payloads Launched for U.S. Space Force 1-2 (Aug. 15, 2024), https://www.ssc.spaceforce.mil/Portals/3/EPS-R%20Launch%20Norway.pdf.",
+      "runs": [
+        {
+          "text": "U.S. SPACE SYSTEMS COMMAND, "
         },
         {
-          "text": "Space Force",
+          "text": "Enhanced Polar System-Recapitalization (EPS-R) Payloads Launched for U.S. Space Force",
           "italic": true
         },
         {
@@ -1939,60 +1750,18 @@
       ]
     },
     {
-      "number": 21,
+      "number": 28,
       "text": "SPACE NORWAY, ASBM Handover Marks an Important Milestone (Oct. 17, 2024), https://spacenorway.com/press-release/asbm-handover-marks-an-important-milestone/; NORWEGIAN MINISTRY OF DEFENCE, Norway Switches on Arctic Broadband Network (Dec. 18, 2024), https://www.regjeringen.no/en/whats-new/norway-activates-arctic-broadband-network/id3079294/.",
       "runs": [
         {
-          "text": "S"
-        },
-        {
-          "text": "PACE ",
-          "smallCaps": true
-        },
-        {
-          "text": "N"
-        },
-        {
-          "text": "ORWAY",
-          "smallCaps": true
-        },
-        {
-          "text": ", "
+          "text": "SPACE NORWAY, "
         },
         {
           "text": "ASBM Handover Marks an Important Milestone",
           "italic": true
         },
         {
-          "text": " (Oct. 17, 2024), https://spacenorway.com/press-release/asbm-handover-marks-an-important-milestone/; N"
-        },
-        {
-          "text": "ORWEGIAN ",
-          "smallCaps": true
-        },
-        {
-          "text": "M"
-        },
-        {
-          "text": "INISTRY",
-          "smallCaps": true
-        },
-        {
-          "text": " "
-        },
-        {
-          "text": "OF ",
-          "smallCaps": true
-        },
-        {
-          "text": "D"
-        },
-        {
-          "text": "EFENCE",
-          "smallCaps": true
-        },
-        {
-          "text": ", "
+          "text": " (Oct. 17, 2024), https://spacenorway.com/press-release/asbm-handover-marks-an-important-milestone/; NORWEGIAN MINISTRY OF DEFENCE, "
         },
         {
           "text": "Norway Switches on Arctic Broadband Network",
@@ -2004,330 +1773,84 @@
       ]
     },
     {
-      "number": 22,
+      "number": 29,
       "text": "NORWEGIAN MINISTRY OF TRADE, INDUSTRY & FISHERIES, PROP. 25 S (2023-2024), ch. 3, ch. 922, item 95 (2023).",
       "runs": [
         {
-          "text": "N"
-        },
-        {
-          "text": "ORWEGIAN ",
-          "smallCaps": true
-        },
-        {
-          "text": "M"
-        },
-        {
-          "text": "INISTRY OF ",
-          "smallCaps": true
-        },
-        {
-          "text": "T"
-        },
-        {
-          "text": "RADE",
-          "smallCaps": true
-        },
-        {
-          "text": ","
-        },
-        {
-          "text": " ",
-          "smallCaps": true
-        },
-        {
-          "text": "I"
-        },
-        {
-          "text": "NDUSTRY ",
-          "smallCaps": true
-        },
-        {
-          "text": "&"
-        },
-        {
-          "text": " ",
-          "smallCaps": true
-        },
-        {
-          "text": "F"
-        },
-        {
-          "text": "ISHERIES",
-          "smallCaps": true
-        },
-        {
-          "text": ","
-        },
-        {
-          "text": " ",
-          "smallCaps": true
-        },
-        {
-          "text": "P"
-        },
-        {
-          "text": "ROP",
-          "smallCaps": true
-        },
-        {
-          "text": "."
-        },
-        {
-          "text": " ",
-          "smallCaps": true
-        },
-        {
-          "text": "25"
-        },
-        {
-          "text": " ",
-          "smallCaps": true
-        },
-        {
-          "text": "S"
-        },
-        {
-          "text": " ",
-          "smallCaps": true
-        },
-        {
-          "text": "(2023-2024), ch. 3, ch. 922, item 95 (2023)."
+          "text": "NORWEGIAN MINISTRY OF TRADE, INDUSTRY & FISHERIES, PROP. 25 S (2023-2024), ch. 3, ch. 922, item 95 (2023)."
         }
       ]
     },
     {
-      "number": 23,
+      "number": 30,
+      "text": "STORTINGET, INNST. 330 S (2017-2018), \"Om prosjektet\" & \"Departementets vurderinger\" (Nor.), https://stortinget.no/no/Saker-og-publikasjoner/Publikasjoner/Innstillinger/Stortinget/2017-2018/inns-201718-330s/?m=0 (\"Prosjektet må ivareta Forsvarets behov for militært bredbånd under norsk kontroll\").",
+      "runs": [
+        {
+          "text": "STORTINGET, INNST. 330 S (2017-2018), \"Om prosjektet\" & \"Departementets vurderinger\" (Nor.), https://stortinget.no/no/Saker-og-publikasjoner/Publikasjoner/Innstillinger/Stortinget/2017-2018/inns-201718-330s/?m=0 (\"Prosjektet må ivareta Forsvarets behov for militært bredbånd under norsk kontroll\")."
+        }
+      ]
+    },
+    {
+      "number": 31,
       "text": "Protocol Additional to the Geneva Conventions of 12 August 1949, and Relating to the Protection of Victims of International Armed Conflicts (Protocol I) arts. 51(5)(b), 52(2), 57, June 8, 1977, 1125 U.N.T.S. 3; INTERNATIONAL COMMITTEE OF THE RED CROSS, OBSERVATIONS ON THE CONSULTANTS' REPORT: PROTECTING ESSENTIAL CIVILIAN SERVICES ON EARTH FROM DISRUPTION BY MILITARY SPACE OPERATIONS 5-6 (June 2024), https://www.icrc.org/sites/default/files/media_file/2024-06/4781.02_002_icrc_observations_web.pdf.",
       "runs": [
         {
-          "text": "Protocol Additional to the Geneva Conventions of 12 August 1949, and Relating to the Protection of Victims of International Armed Conflicts (Protocol I) arts. 51(5)(b), 52(2), 57, June 8, 1977, 1125 U.N.T.S. 3; I"
-        },
-        {
-          "text": "NTERNATIONAL ",
-          "smallCaps": true
-        },
-        {
-          "text": "C"
-        },
-        {
-          "text": "OMMITTEE OF THE ",
-          "smallCaps": true
-        },
-        {
-          "text": "R"
-        },
-        {
-          "text": "ED ",
-          "smallCaps": true
-        },
-        {
-          "text": "C"
-        },
-        {
-          "text": "ROSS",
-          "smallCaps": true
-        },
-        {
-          "text": ","
-        },
-        {
-          "text": " ",
-          "smallCaps": true
-        },
-        {
-          "text": "O"
-        },
-        {
-          "text": "BSERVATIONS ON THE ",
-          "smallCaps": true
-        },
-        {
-          "text": "C"
-        },
-        {
-          "text": "ONSULTANTS",
-          "smallCaps": true
-        },
-        {
-          "text": "'"
-        },
-        {
-          "text": " ",
-          "smallCaps": true
-        },
-        {
-          "text": "R"
-        },
-        {
-          "text": "EPORT",
-          "smallCaps": true
-        },
-        {
-          "text": ":"
-        },
-        {
-          "text": " ",
-          "smallCaps": true
-        },
-        {
-          "text": "P"
-        },
-        {
-          "text": "ROTECTING",
-          "smallCaps": true
-        },
-        {
-          "text": " E"
-        },
-        {
-          "text": "SSENTIAL ",
-          "smallCaps": true
-        },
-        {
-          "text": "C"
-        },
-        {
-          "text": "IVILIAN ",
-          "smallCaps": true
-        },
-        {
-          "text": "S"
-        },
-        {
-          "text": "ERVICES ON ",
-          "smallCaps": true
-        },
-        {
-          "text": "E"
-        },
-        {
-          "text": "ARTH FROM ",
-          "smallCaps": true
-        },
-        {
-          "text": "D"
-        },
-        {
-          "text": "ISRUPTION BY ",
-          "smallCaps": true
-        },
-        {
-          "text": "M"
-        },
-        {
-          "text": "ILITARY ",
-          "smallCaps": true
-        },
-        {
-          "text": "S"
-        },
-        {
-          "text": "PACE ",
-          "smallCaps": true
-        },
-        {
-          "text": "O"
-        },
-        {
-          "text": "PERATIONS",
-          "smallCaps": true
-        },
-        {
-          "text": " 5-6 (June 2024), https://www.icrc.org/sites/default/files/media_file/2024-06/4781.02_002_icrc_observations_web.pdf."
+          "text": "Protocol Additional to the Geneva Conventions of 12 August 1949, and Relating to the Protection of Victims of International Armed Conflicts (Protocol I) arts. 51(5)(b), 52(2), 57, June 8, 1977, 1125 U.N.T.S. 3; INTERNATIONAL COMMITTEE OF THE RED CROSS, OBSERVATIONS ON THE CONSULTANTS' REPORT: PROTECTING ESSENTIAL CIVILIAN SERVICES ON EARTH FROM DISRUPTION BY MILITARY SPACE OPERATIONS 5-6 (June 2024), https://www.icrc.org/sites/default/files/media_file/2024-06/4781.02_002_icrc_observations_web.pdf."
         }
       ]
     },
     {
-      "number": 24,
+      "number": 32,
       "text": "COUR DES COMPTES DU GRAND-DUCHÉ DE LUXEMBOURG, RAPPORT SPÉCIAL SUR LA GESTION FINANCIÈRE DU PROJET LUXEOSYS 8-10, 33-35 (June 16, 2022).",
       "runs": [
         {
-          "text": "C"
-        },
-        {
-          "text": "OUR DES COMPTES DU ",
-          "smallCaps": true
-        },
-        {
-          "text": "G"
-        },
-        {
-          "text": "RAND",
-          "smallCaps": true
-        },
-        {
-          "text": "-D"
-        },
-        {
-          "text": "UCHÉ DE ",
-          "smallCaps": true
-        },
-        {
-          "text": "L"
-        },
-        {
-          "text": "UXEMBOURG",
-          "smallCaps": true
-        },
-        {
-          "text": ","
-        },
-        {
-          "text": " ",
-          "smallCaps": true
-        },
-        {
-          "text": "R"
-        },
-        {
-          "text": "APPORT SPÉCIAL SUR LA GESTION FINANCIÈRE DU",
-          "smallCaps": true
-        },
-        {
-          "text": " "
-        },
-        {
-          "text": "PROJET ",
-          "smallCaps": true
-        },
-        {
-          "text": "LUXEOS"
-        },
-        {
-          "text": "YS",
-          "smallCaps": true
-        },
-        {
-          "text": " 8-10, 33-35 (June 16, 2022)."
+          "text": "COUR DES COMPTES DU GRAND-DUCHÉ DE LUXEMBOURG, RAPPORT SPÉCIAL SUR LA GESTION FINANCIÈRE DU PROJET LUXEOSYS 8-10, 33-35 (June 16, 2022)."
         }
       ]
     },
     {
-      "number": 25,
-      "text": "COUR DES COMPTES, supra note 24, at 52-56 (including the ministry's response of June 8, 2022).",
+      "number": 33,
+      "text": "COUR DES COMPTES, supra note 32, at 26-27.",
       "runs": [
         {
-          "text": "C"
-        },
-        {
-          "text": "OUR DES COMPTES",
-          "smallCaps": true
-        },
-        {
-          "text": ", "
+          "text": "COUR DES COMPTES, "
         },
         {
           "text": "supra",
           "italic": true
         },
         {
-          "text": " note 24, at 52-56 (including the ministry's response of June 8, 2022)."
+          "text": " note 32, at 26-27."
         }
       ]
     },
     {
-      "number": 26,
+      "number": 34,
+      "text": "CONSEIL D'ÉTAT DU GRAND-DUCHÉ DE LUXEMBOURG, AVIS N° 52.735 SUR LE PROJET DE LOI N° 7264, at 2 (July 17, 2018).",
+      "runs": [
+        {
+          "text": "CONSEIL D'ÉTAT DU GRAND-DUCHÉ DE LUXEMBOURG, AVIS N° 52.735 SUR LE PROJET DE LOI N° 7264, at 2 (July 17, 2018)."
+        }
+      ]
+    },
+    {
+      "number": 35,
+      "text": "COUR DES COMPTES, supra note 32, at 52-56 (including the ministry's response of June 8, 2022).",
+      "runs": [
+        {
+          "text": "COUR DES COMPTES, "
+        },
+        {
+          "text": "supra",
+          "italic": true
+        },
+        {
+          "text": " note 32, at 52-56 (including the ministry's response of June 8, 2022)."
+        }
+      ]
+    },
+    {
+      "number": 36,
       "text": "G.A. Res. 77/41, Destructive Direct-Ascent Anti-Satellite Missile Testing, ¶¶ 1-3 (Dec. 7, 2022); U.N. GAOR, 77th Sess., 46th plen. mtg. at 9, U.N. Doc. A/77/PV.46 (Dec. 7, 2022).",
       "runs": [
         {
@@ -2343,7 +1866,7 @@
       ]
     },
     {
-      "number": 27,
+      "number": 37,
       "text": "G.A. Res. 76/231, ¶¶ 5-6 (Dec. 24, 2021); Open-ended Working Group on Reducing Space Threats, Chairperson's Summary, ¶¶ 8-10, 17-18, 35, U.N. Doc. A/AC.294/2023/WP.22 (Sept. 1, 2023); U.N. GAOR, 78th Sess., 1st Comm., 16th mtg. at 1, 8, U.N. Doc. A/C.1/78/PV.16 (Oct. 19, 2023).",
       "runs": [
         {
@@ -2359,7 +1882,7 @@
       ]
     },
     {
-      "number": 28,
+      "number": 38,
       "text": "U.N. GAOR, 78th Sess., 1st Comm., 17th mtg. at 3-4, U.N. Doc. A/C.1/78/PV.17 (Oct. 20, 2023).",
       "runs": [
         {
@@ -2368,21 +1891,14 @@
       ]
     },
     {
-      "number": 29,
+      "number": 39,
       "text": "G.A. Dec. 79/512, Open-ended Working Group on the Prevention of an Arms Race in Outer Space in All Its Aspects (Dec. 2, 2024); U.N. GAOR, 79th Sess., 43d plen. mtg. at 25, U.N. Doc. A/79/PV.43 (Dec. 2, 2024); First Committee, Report on Prevention of an Arms Race in Outer Space, ¶¶ 18-19, 21, U.N. Doc. A/79/406 (Nov. 14, 2024).",
       "runs": [
         {
           "text": "G.A. Dec. 79/512, "
         },
         {
-          "text": "Open-ended Working Group on the Prevention of an Arms Race in Outer Space in All Its",
-          "italic": true
-        },
-        {
-          "text": " "
-        },
-        {
-          "text": "Aspects",
+          "text": "Open-ended Working Group on the Prevention of an Arms Race in Outer Space in All Its Aspects",
           "italic": true
         },
         {
@@ -2398,21 +1914,14 @@
       ]
     },
     {
-      "number": 30,
+      "number": 40,
       "text": "Group of Governmental Experts, Further Practical Measures for the Prevention of an Arms Race in Outer Space, ¶¶ 29, 45, U.N. Doc. A/79/364 (2024).",
       "runs": [
         {
           "text": "Group of Governmental Experts, "
         },
         {
-          "text": "Further Practical Measures for the Prevention of an Arms Race in Outer",
-          "italic": true
-        },
-        {
-          "text": " "
-        },
-        {
-          "text": "Space",
+          "text": "Further Practical Measures for the Prevention of an Arms Race in Outer Space",
           "italic": true
         },
         {
@@ -2421,7 +1930,7 @@
       ]
     },
     {
-      "number": 31,
+      "number": 41,
       "text": "Convention for the Establishment of a European Space Agency arts. V(1), VII(1)(c), XI(6), XIII, May 30, 1975, 1297 U.N.T.S. 161.",
       "runs": [
         {
@@ -2430,7 +1939,34 @@
       ]
     },
     {
-      "number": 32,
+      "number": 42,
+      "text": "Robertson v. Methow Valley Citizens Council, 490 U.S. 332, 350-51 (1989).",
+      "runs": [
+        {
+          "text": "Robertson v. Methow Valley Citizens Council, 490 U.S. 332, 350-51 (1989)."
+        }
+      ]
+    },
+    {
+      "number": 43,
+      "text": "Regulation (EU) 2022/2554, arts. 28(8), 30(2)(h), 30(3)(f), 2022 O.J. (L 333) 1.",
+      "runs": [
+        {
+          "text": "Regulation (EU) 2022/2554, arts. 28(8), 30(2)(h), 30(3)(f), 2022 O.J. (L 333) 1."
+        }
+      ]
+    },
+    {
+      "number": 44,
+      "text": "Directive 2009/81/EC, art. 23(b), (d), (g), 2009 O.J. (L 216) 76.",
+      "runs": [
+        {
+          "text": "Directive 2009/81/EC, art. 23(b), (d), (g), 2009 O.J. (L 216) 76."
+        }
+      ]
+    },
+    {
+      "number": 45,
       "text": "Committee on the Peaceful Uses of Outer Space, Report of the Committee on Its Sixty-Second Session, ¶ 163, annex II, preamble ¶ 15 & guidelines B.1-B.2, C.1-C.3, U.N. Doc. A/74/20 (2019).",
       "runs": [
         {

@@ -88,34 +88,50 @@ const articleFigures: Readonly<Record<string, readonly FigurePlacement[]>> = {
     },
     {
       figure: "audit-policies",
-      after: { paragraph: "At the same expected budget, high-risk-first routing" },
+      after: { paragraph: "Three results hold everywhere in the envelope" },
       evidence: [
-        "<td>14.81% / 14.81% / 14.81%</td><td>0.568</td><td>Baseline</td>",
-        "<td>3.00% / 11.56% / 43.33%</td><td>0.657</td><td>+33.77% increase</td>",
-        "<td>7.89% / 19.37% / 21.84%</td><td>**0.515**</td><td>**-17.79% reduction**</td>",
-        "<td>23.00% / 11.77% / 3.00%</td><td>0.983</td><td>+199.66% increase</td>",
-        "<td>17.27% / 13.90% / 11.27%</td><td>0.615</td><td>+17.07% increase</td>",
-        "three strata of $`6,000`$, $`3,000`$ and $`1,000`$ items",
-        "Unit audit costs across the three strata are $`1`$, $`1.5`$ and $`3`$",
-        "$`B = 2,000`$ units and a minimum sampling probability of $`\\pi_{\\min} = 3\\%`$",
+        "| Uniform sampling | 14.81% / 14.81% / 14.81% | 0.568 | Baseline |",
+        "| Risk-first (probability proportional to $`f_i`$) | 3.00% / 11.56% / 43.33% | 0.657 | +33.8% |",
+        "| Residual- and cost-aware (Section 3) | 7.89% / 19.37% / 21.84% | **0.515** | **-17.8%** |",
+        "| Share of the batch | 60% | 30% | 10% |",
+        "| Cost of an independent reference audit ($`c`$, routine = 1) | 1 | 1.5 | 3 |",
+        "The audit budget is $`2,000`$ cost units",
+        "a sampling floor of $`\\pi_{\\min} = 3\\%`$",
       ],
     },
     {
       figure: "remediation-exchange",
-      after: { paragraph: "A separate exact allocation experiment" },
-      evidence: ["Two task groups of $`100`$ items each have initial error risks of $`0.40`$ and $`0.15`$", "$`0.30`$ ($`\\Delta_1 = 0.10`$) and $`0.01`$ ($`\\Delta_2 = 0.14`$)", "capacity is $`100`$ items", "$`100(0.30) + 100(0.15) = 45`$", "$`100(0.40) + 100(0.01) = 41`$", "**8.89%**"],
+      after: { paragraph: "Whenever $`\\Delta_k > \\Delta_i`$, the exchange strictly reduces delivered defect loss" },
+      evidence: [
+        "Two task groups of $`100`$ items each have initial error risks of $`0.40`$ and $`0.15`$",
+        "$`0.30`$ ($`\\Delta_1 = 0.10`$) and $`0.01`$ ($`\\Delta_2 = 0.14`$)",
+        "capacity is $`100`$ items",
+        "$`100(0.30) + 100(0.15) = 45`$",
+        "$`100(0.40) + 100(0.01) = 41`$",
+        "**8.89%**",
+      ],
     },
   ],
   "task-validity-in-financial-synthetic-data": [
     {
       figure: "rejection-cost",
       after: { table: "Simultaneous constraints" },
-      evidence: ["<td>**1**</td><td>3.9878%</td><td>25.08</td>", "<td>**2**</td><td>0.1590%</td><td>628.84</td>", "<td>**4**</td><td>**0.0002529%**</td><td>**395,442.59**</td>", "$`\\epsilon = 0.05`$ residual standard deviations"],
+      evidence: [
+        "| **1** | 3.9878% | 25.08 |",
+        "| **2** | 0.1590% | 628.84 |",
+        "| **4** | **0.0002529%** | **395,442.59** |",
+        "$`\\epsilon = 0.05`$ residual standard deviations",
+      ],
     },
     {
       figure: "label-flip",
       after: { paragraph: "• Near a diagnostic decision boundary" },
-      evidence: ["\\Phi\\left(-\\frac{\\gamma}{s}\\right)", "$`\\gamma / s = 2`$, the error rate was **2.28%**", "$`\\gamma / s = 1`$, it was **15.87%**", "$`\\gamma / s = 0.25`$, it was **40.13%**"],
+      evidence: [
+        "\\Phi\\left(-\\frac{\\gamma}{s}\\right)",
+        "$`\\gamma / s = 2`$, the error rate is **2.28%**",
+        "$`\\gamma / s = 1`$, it is **15.87%**",
+        "$`\\gamma / s = 0.25`$, it is **40.13%**",
+      ],
     },
     {
       figure: "bridge-leakage",
@@ -132,15 +148,18 @@ const articleFigures: Readonly<Record<string, readonly FigurePlacement[]>> = {
     {
       figure: "proof-obligations",
       after: { paragraph: "For feedback, I record the first failed obligation" },
-      evidence: ["mark its descendant subgraph $`\\operatorname{desc}(v_j)`$ as unverified", "\\Gamma_q \\cup \\{v_j : j \\in \\operatorname{sink}(G)\\} \\vdash C_q"],
+      evidence: [
+        "mark its descendant subgraph $`\\mathrm{desc}(v_j)`$ as unverified",
+        "\\Gamma_q \\cup \\{v_j : j \\in \\mathrm{sink}(G)\\} \\vdash C_q",
+      ],
     },
     {
       figure: "protocol-outcomes",
-      after: { paragraph: "Within this exact-arithmetic benchmark" },
+      after: { paragraph: "Certificate verification accepted 1,800 fewer invalid proofs" },
       evidence: [
-        "<td>Final-answer matching only</td><td>75.0% (accepts 1,800 flawed solutions)</td><td>0.0%</td><td>40.0%</td>",
-        "<td>Strict reference-path matching (ablation)</td><td>0.0%</td><td>50.0% (rejects 600 valid elimination proofs)</td><td>100.0%</td>",
-        "<td>0.0%</td><td>0.0%</td><td>100.0%</td>",
+        "| Final-answer matching only | 75.0% (accepts 1,800 flawed solutions) | 0.0% | 40.0% |",
+        "| Strict reference-path matching | 0.0% | 50.0% (rejects 600 valid elimination proofs) | 100.0% |",
+        "| Certificate verification | 0.0% | 0.0% | 100.0% |",
         "1,200 valid certificates, 2 per family",
         "2,400 submissions with controlled defects",
       ],
@@ -150,7 +169,11 @@ const articleFigures: Readonly<Record<string, readonly FigurePlacement[]>> = {
     {
       figure: "coverage-collapse",
       after: { paragraph: "• Set the shared bias" },
-      evidence: ["$`b = 0.2`$ and independent noise to $`\\sigma = 1`$", "48.40% at $`n = 100`$ records and 0.000637% at $`n = 1,000`$", "$`0.2 + 1.96/\\sqrt{n}`$ gives 97.50% actual coverage"],
+      evidence: [
+        "$`b = 0.2`$ and independent noise to $`\\sigma = 1`$",
+        "48.40% at $`n = 100`$ records and 0.000637% at $`n = 1,000`$",
+        "$`0.2 + 1.96/\\sqrt{n}`$ gives 97.50% coverage",
+      ],
     },
     {
       figure: "shared-error",
@@ -160,7 +183,13 @@ const articleFigures: Readonly<Record<string, readonly FigurePlacement[]>> = {
     {
       figure: "regret-scenarios",
       after: { paragraph: "Enumerating the eight scenarios" },
-      evidence: ["$`s \\in \\{-1, 1\\}`$", "$`z_1 \\in \\{-0.4, 0.4\\}`$, $`z_2 \\in \\{-0.2, 0.2\\}`$", "$`\\Delta_s = 0.15s + z_1 + 0.3s z_2`$", "<td>0.61</td><td>0</td>", "<td>0</td><td>0.61</td>"],
+      evidence: [
+        "$`s \\in \\{-1, 1\\}`$",
+        "$`z_1 \\in \\{-0.4, 0.4\\}`$, $`z_2 \\in \\{-0.2, 0.2\\}`$",
+        "$`\\Delta_s = 0.15s + z_1 + 0.3s z_2`$",
+        "| 0.61 | 0 |",
+        "| 0 | 0.61 |",
+      ],
     },
   ],
   "autonomous-authority-in-space": [
@@ -208,7 +237,11 @@ const articleFigures: Readonly<Record<string, readonly FigurePlacement[]>> = {
     {
       figure: "deep-bay",
       after: { paragraph: "Deep Bay supplies a reason to reject mangrove acreage" },
-      evidence: ["Between 2000 and 2018, mapped mangrove coverage increased from 8 to 15 percent while mudflat coverage declined from 56 to 43 percent.", "Among 42 bird species analyzed over 1998-2017, twelve declined significantly and nine increased.", "These are different observation windows and denominators, not a single causal time series."],
+      evidence: [
+        "Between 2000 and 2018, mapped mangrove coverage increased from 8 to 15 percent and other vegetation from 3 to 14 percent, while mudflat coverage declined from 56 to 43 percent.",
+        "Among 42 bird species analyzed over 1998-2017, twelve declined significantly and nine increased.",
+        "These are different observation windows and denominators, not a single causal time series.",
+      ],
     },
     {
       figure: "san-tin-loss",
@@ -231,12 +264,12 @@ const tableEmphasis: Readonly<Record<string, readonly TableEmphasis[]>> = {
 
 // Manuscript figures drawn natively, keyed by the image path the manuscript
 // cites. The dependence drawings evaluate the manuscript's formulas
-// (130U/Critical-Dependence-Stress at the pinned commit:
+// (130U/RESEARCH-Critical-Dependence-Stress at the pinned commit:
 // code/generate_mechanism_figures.py and
 // calculations/plot_profiles_and_flows.py); the Asian drawings plot the study
-// results of 130U/certified-valuation-arithmetic-asian-options at the pinned
+// results of 130U/RESEARCH-Certified-Valuation-Arithmetic-Asian-Options at the pinned
 // commit and evaluate Proposition 4.1; the Rough Heston drawings plot the saved
-// banks of 130U/certified-rough-heston-valuation at the pinned commit and
+// banks of 130U/RESEARCH-Certified-Rough-Heston-Valuation at the pinned commit and
 // evaluate (3.9), (5.7) and (7.1). `evidence` ties each drawing's labels,
 // plotted functions and restated values to the article text, and the build
 // fails if any is missing.

@@ -195,7 +195,9 @@ if (source.includes("data-site-typography")) {
 
   let viewer = replaceOnce(source, /  <!-- Async font load:[\s\S]*?<\/noscript>/u,
     '  <link data-site-typography rel="stylesheet" href="../assets/fonts/inter.css">\n' +
-    '  <link rel="preload" href="../assets/fonts/InterVariable.woff2" as="font" type="font/woff2" crossorigin>');
+    '  <link rel="preload" href="../assets/fonts/InterVariable.woff2" as="font" type="font/woff2" crossorigin>\n' +
+    '  <link rel="icon" href="/assets/brand/favicon.ico" sizes="16x16 32x32 48x48">\n' +
+    '  <link rel="icon" href="/assets/brand/lo-mark.svg" type="image/svg+xml" sizes="any">');
 
   viewer = replaceOnce(viewer, /  <style>\n([\s\S]*?)  <\/style>/u, (_, stylesheet) => {
     let css = stylesheet.replace(/font-family:\s*[^;}]+;/gu, "font-family: var(--font-text, 'Inter', sans-serif);");

@@ -6,33 +6,31 @@ import styles from "./Figures.module.css";
 
 const AUDIT_POLICIES = [
   { name: "Uniform sampling", sd: 0.568, change: "Baseline", strata: [14.81, 14.81, 14.81], tone: "steel" },
-  { name: "Prioritize predicted error", sd: 0.657, change: "+33.77% variance", strata: [3.0, 11.56, 43.33], tone: "ink" },
-  { name: "Residual- and cost-aware", sd: 0.515, change: "−17.79% variance", strata: [7.89, 19.37, 21.84], tone: "accent" },
-  { name: "Reversed residual ordering", sd: 0.983, change: "+199.66% variance", strata: [23.0, 11.77, 3.0], tone: "ink" },
-  { name: "Reversed, 70% uniform weight", sd: 0.615, change: "+17.07% variance", strata: [17.27, 13.9, 11.27], tone: "ink" },
+  { name: "Risk-first", sd: 0.657, change: "+33.8% variance", strata: [3.0, 11.56, 43.33], tone: "ink" },
+  { name: "Residual- and cost-aware", sd: 0.515, change: "−17.8% variance", strata: [7.89, 19.37, 21.84], tone: "accent" },
 ] as const;
 const STRATA = [
-  { label: "Stratum 1: 6,000 items, unit cost 1", tone: "steel" },
-  { label: "Stratum 2: 3,000 items, unit cost 1.5", tone: "sky" },
-  { label: "Stratum 3: 1,000 items, unit cost 3", tone: "ink" },
+  { label: "Routine: 60%, cost 1", tone: "steel" },
+  { label: "Intermediate: 30%, cost 1.5", tone: "sky" },
+  { label: "Hardest: 10%, cost 3", tone: "ink" },
 ] as const;
 
 function AuditPolicies() {
-  const sd = linear(0, 1);
-  const sdTicks = [0, 0.25, 0.5, 0.75, 1].map((at) => ({ at, label: at === 0 ? "0" : String(at) }));
+  const sd = linear(0, 0.8);
+  const sdTicks = [0, 0.2, 0.4, 0.6, 0.8].map((at) => ({ at, label: at === 0 ? "0" : String(at) }));
   const share = linear(0, 50);
   const shareTicks = [0, 25, 50].map((at) => ({ at, label: `${at}%`, minor: at === 25 }));
   return (
     <Figure
       id="audit-policies"
-      title="Five audit policies at the same expected cost"
-      caption="Each policy spends the budget $B=2{,}000$ with the floor $\pi_{\min}=3\%$. Residual- and cost-aware allocation is the only policy more precise than uniform sampling; prioritizing predicted error oversamples the expensive third stratum, and reversing the residual ordering triples the variance."
+      title="Three audit policies at the same expected budget"
+      caption="Each policy spends $2{,}000$ cost units with the floor $\pi_{\min}=3\%$ on a batch of 10,000 submissions. Residual- and cost-aware allocation is the only policy more precise than uniform sampling; risk-first routing oversamples the expensive hardest stratum and raises the variance by a third."
       views={[{ id: "precision", label: "Precision" }, { id: "sampling", label: "Sampling by Stratum" }]}
       viewsLabel="Show precision or sampling probabilities"
     >
       <Panel view="precision" active>
-        <Bars label="Standard deviation of the corrected estimate in percentage points: uniform 0.568, prioritize predicted error 0.657, residual- and cost-aware 0.515, reversed residual ordering 0.983, reversed with 70% uniform weight 0.615." labelWidth="12rem" valueWidth="8.5rem" stack>
-          <BarHeader marks={[{ at: sd(0.568), label: "Uniform baseline", tone: "steel", anchor: "left" }]} />
+        <Bars label="Standard deviation of the corrected estimate in percentage points: uniform 0.568, risk-first 0.657, residual- and cost-aware 0.515." labelWidth="12rem" valueWidth="8.5rem" stack>
+          <BarHeader marks={[{ at: sd(0.568), label: "Uniform baseline", tone: "steel", anchor: "right" }]} />
           {AUDIT_POLICIES.map((policy) => (
             <BarRow key={policy.name} label={policy.name} value={policy.sd.toFixed(3)} valueNote={policy.change} grid={sdTicks.map((tick) => sd(tick.at))} rules={[{ at: sd(0.568), tone: "soft" }]}>
               <Seg x={sd} from={0} to={policy.sd} tone={policy.tone} tip={`${policy.name}\nStandard deviation ${policy.sd.toFixed(3)} pp\n${policy.change}`} />
@@ -42,7 +40,7 @@ function AuditPolicies() {
         </Bars>
       </Panel>
       <Panel view="sampling" active={false}>
-        <Bars label="Sampling probabilities for strata 1, 2 and 3: uniform 14.81% each; prioritize predicted error 3.00%, 11.56%, 43.33%; residual- and cost-aware 7.89%, 19.37%, 21.84%; reversed 23.00%, 11.77%, 3.00%; reversed with 70% uniform weight 17.27%, 13.90%, 11.27%." labelWidth="12rem" valueWidth="8.5rem" stack>
+        <Bars label="Audit probabilities for the routine, intermediate and hardest strata: uniform 14.81% each; risk-first 3.00%, 11.56%, 43.33%; residual- and cost-aware 7.89%, 19.37%, 21.84%." labelWidth="12rem" valueWidth="8.5rem" stack>
           {AUDIT_POLICIES.map((policy) => (
             <BarRow key={policy.name} label={policy.name} value={policy.strata.map((value) => value.toFixed(2)).join(" / ")} valueNote="percent" grid={shareTicks.map((tick) => share(tick.at))}>
               {policy.strata.map((value, index) => (
@@ -50,7 +48,7 @@ function AuditPolicies() {
               ))}
             </BarRow>
           ))}
-          <BarAxis x={share} ticks={shareTicks} title="Sampling probability" />
+          <BarAxis x={share} ticks={shareTicks} title="Audit probability" />
         </Bars>
         <Legend items={STRATA.map((stratum) => ({ label: stratum.label, tone: stratum.tone }))} />
       </Panel>

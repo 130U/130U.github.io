@@ -32,7 +32,7 @@ function numericCell({ source }: ResearchCell) {
   return NUMERIC_CELL.test(formula ? formula[1].replace(/\s+/gu, "") : value);
 }
 
-function numericColumns(rows: ResearchCell[][]) {
+export function numericColumns(rows: ResearchCell[][]) {
   const body = rows.slice(1);
   return rows[0].map((_, column) => column > 0 && body.length > 0
     && body.every((row) => numericCell(row[column]))
@@ -62,7 +62,7 @@ function contentWidth(inlines: ResearchInline[]): number {
   return Math.max(widest, line);
 }
 
-function sentenceColumns(rows: ResearchCell[][]) {
+export function sentenceColumns(rows: ResearchCell[][]) {
   const body = rows.slice(1);
   return rows[0].map((_, column) => body.some((row) => contentWidth(row[column].inlines) > SENTENCE_EM));
 }
@@ -117,7 +117,7 @@ function headingWords(inlines: ResearchInline[]) {
   return words;
 }
 
-function headingFloor(cell: ResearchCell) {
+export function headingFloor(cell: ResearchCell) {
   const words = headingWords(cell.inlines);
   const line = (from: number, to: number) => words.slice(from, to).reduce((sum, word) => sum + word, 0) + LABEL_SPACE_EM * Math.max(0, to - from - 1);
   let floor = line(0, words.length);
@@ -172,6 +172,13 @@ export function ResearchArticle({ project, active, returnPath, returnLabel, titl
     if (block.type === "paragraph") {
       // A table caption renders inside the frame of the table that follows it.
       if (captionsTable(project.blocks, index)) return null;
+      // A list item, written "• " or "1. " at the start of its line, hangs its marker.
+      const first = block.inlines[0];
+      const item = first?.type === "text" ? /^(?:•|\d+\.)\s+/u.exec(first.text) : null;
+      if (item && first?.type === "text") {
+        const rest = [{ ...first, text: first.text.slice(item[0].length) }, ...block.inlines.slice(1)];
+        return <p {...marker} data-list-item="" id={block.id ?? anchors.get(index)} key={index}><span className={styles.listMarker}>{item[0]}</span><InlineContent inlines={proofLabel(link(rest, index))} /></p>;
+      }
       return <p {...marker} id={block.id ?? anchors.get(index)} key={index}><InlineContent inlines={proofLabel(link(block.inlines, index))} /></p>;
     }
     if (block.type === "heading") {

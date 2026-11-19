@@ -51,9 +51,12 @@ function pinRowLabels(region: HTMLElement, table: HTMLTableElement) {
   paintEdges(region);
 }
 
-/** A table without a title that scrolls would carry its headings beneath the zoom control, so the control takes a row of its own. */
-function clearTableControl(frame: HTMLElement, region: HTMLElement, table: HTMLTableElement) {
-  frame.toggleAttribute("data-zoom-row", !frame.querySelector("[data-table-title]") && table.offsetWidth > region.clientWidth + 1);
+/** A table without a title that scrolls, or whose last heading reaches the zoom control, would carry
+ * headings beneath the control, so the control takes a row of its own. */
+function clearTableControl(frame: HTMLElement, region: HTMLElement, table: HTMLTableElement, control?: HTMLElement) {
+  frame.removeAttribute("data-zoom-row");
+  if (frame.querySelector("[data-table-title]")) return;
+  if (table.offsetWidth > region.clientWidth + 1 || (control && coversControl(frame, control))) frame.setAttribute("data-zoom-row", "");
 }
 
 /** Whether any visible text or formula of a figure lies under its zoom control. */
@@ -280,7 +283,7 @@ export function ZoomStage() {
       region: frame.querySelector<HTMLElement>("[role=region]")!,
       control: frame.querySelector<HTMLButtonElement>("[data-table-zoom]")!,
     }));
-    const settleFrame = ({ frame, region, table }: (typeof frames)[number]) => {
+    const settleFrame = ({ frame, region, table, control }: (typeof frames)[number]) => {
       // A table just wider than its column closes up to fit.
       region.removeAttribute("data-dense");
       if (table.offsetWidth > region.clientWidth + 1) {
@@ -288,7 +291,7 @@ export function ZoomStage() {
         if (table.offsetWidth > region.clientWidth + 1) region.removeAttribute("data-dense");
       }
       pinRowLabels(region, table);
-      clearTableControl(frame, region, table);
+      clearTableControl(frame, region, table, control);
     };
     const observer = new ResizeObserver((entries) => {
       for (const entry of entries) settleFrame(frames.find(({ region }) => region === entry.target)!);

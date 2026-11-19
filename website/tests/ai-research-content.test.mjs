@@ -9,28 +9,28 @@ const ROOT = fileURLToPath(new URL("../", import.meta.url));
 const AI_ROUTE = "/experience/";
 const SOURCE_FILE = "content/sources/ai-portfolio/ai-research-and-engineering.md";
 const CANONICAL_DOCUMENT = path.join(ROOT, SOURCE_FILE);
-const SOURCE_SHA256 = "2132bc1862c045b7ad2312609bf8ac3be485e40462d362d44cdcb5f73d80d946";
+const SOURCE_SHA256 = "ac8e9b5f5d5a7808d0d2771a202f081272bbe82d30c8275280d84f33736a2de3";
 // Structure and benchmark-table shapes are checked independently of the renderer.
 const PROJECTS = [
   {
     slug: "statistical-inference-and-resource-allocation-in-expert-data-production",
     title: "Statistical inference and resource allocation in expert data production",
-    bodyStart: 0, display: 20, inline: 120, headings: 7, tables: [[4, 4, 4, 4, 4, 4]],
+    bodyStart: 0, display: 22, inline: 145, headings: 7, tables: [[4, 4, 4, 4, 4, 4], [5, 5, 5, 5], [3, 3, 3, 3, 3], [3, 3, 3, 3, 3], [5, 5, 5, 5, 5, 5], [2, 2, 2, 2]],
   },
   {
     slug: "task-validity-in-financial-synthetic-data",
     title: "Task validity in financial synthetic data",
-    bodyStart: 0, display: 13, inline: 85, headings: 6, tables: [[3, 3, 3, 3], [3, 3, 3, 3, 3]],
+    bodyStart: 0, display: 19, inline: 129, headings: 6, tables: [[3, 3, 3, 3], [4, 4, 4, 4], [6, 6], [3, 3, 3, 3, 3]],
   },
   {
     slug: "verification-and-supervision-in-scientific-reasoning-tasks",
     title: "Verification and supervision in reasoning tasks",
-    bodyStart: 0, display: 15, inline: 106, headings: 7, tables: [[4, 4, 4, 4]],
+    bodyStart: 0, display: 19, inline: 156, headings: 7, tables: [[4, 4, 4, 4, 4, 4], [6, 6, 6], [4, 4, 4, 4]],
   },
   {
     slug: "evidence-uncertainty-and-decision-guarantees-in-investment-research",
     title: "Evidence uncertainty and decision guarantees in investment research",
-    bodyStart: 0, display: 11, inline: 115, headings: 6, tables: [[3, 3, 3, 3]],
+    bodyStart: 0, display: 15, inline: 161, headings: 6, tables: [[3, 3, 3, 3], [4, 4, 4]],
   },
 ];
 
@@ -188,6 +188,13 @@ function expectedBlocks(markdown) {
   for (let index = 0; index < lines.length; index += 1) {
     const line = lines[index];
     if (!line.trim()) continue;
+    if (line.startsWith("|")) {
+      // A Markdown table: its rows run until the first line that is not a table row.
+      const content = [line];
+      while (lines[index + 1]?.startsWith("|")) content.push(lines[(index += 1)]);
+      blocks.push({ type: "table", source: content.join("\n") });
+      continue;
+    }
     if (line === "$$" || line.startsWith("<table")) {
       const end = line === "$$" ? "$$" : "</table>";
       const content = [line];
@@ -228,7 +235,13 @@ function renderedBlocks(html) {
   });
 }
 
+function markdownTableCells(source) {
+  return source.split("\n").filter((row, index) => index !== 1).map((row) =>
+    row.trim().replace(/^\||\|$/gu, "").split(/(?<!\\)\|/u).map((cell) => readableMarkdown(cell.trim())));
+}
+
 function tableCells(html, source) {
+  if (source && html.startsWith("|")) return markdownTableCells(html);
   const cellTag = source ? "td" : "t[hd]";
   return [...html.matchAll(/<tr\b[^>]*>([\s\S]*?)<\/tr>/giu)].map((row) =>
     [...row[1].matchAll(new RegExp(`<${cellTag}\\b[^>]*>([\\s\\S]*?)<\\/${cellTag}>`, "giu"))]
@@ -255,7 +268,9 @@ for (const expected of PROJECTS) {
     assert.deepEqual(source, {
       slug: expected.slug,
       title: canonical.articleTitle,
-      sourceUrl: `https://github.com/130U/130U.github.io/blob/main/website/${SOURCE_FILE}`,
+      // each project's manuscript is published in the repository named after its title
+      repositoryUrl: `https://github.com/130U/RESEARCH-${canonical.entry.detailTitle.replace(/ /gu, "-")}`,
+      sourceUrl: `https://github.com/130U/RESEARCH-${canonical.entry.detailTitle.replace(/ /gu, "-")}/blob/main/manuscript/${expected.slug}.md`,
       sourceEditedAt: updated,
       markdown: canonicalBody,
       sourceDocument,
@@ -295,8 +310,12 @@ for (const expected of PROJECTS) {
       const original = bodyBlocks[index];
       assert.equal(actual.index, expected.bodyStart + index, "Every numbered-manuscript block must appear exactly once, in order, with its original source index");
       assert.equal(actual.type, original.type);
-      const actualText = readableHtml(actual.html);
-      const originalText = readableMarkdown(original.source);
+      // A numbered display carries its number beside the formula; the number is checked against its equation number below.
+      const actualText = readableHtml(actual.html.replace(/<span\b[^>]*\bdata-equation-number\b[^>]*>[^<]*<\/span>/gu, ""));
+      // A Markdown table reads as its cells: the delimiter row and the pipes are syntax.
+      const originalText = original.type === "table" && original.source.startsWith("|")
+        ? readableMarkdown(original.source.split("\n").filter((row, rowIndex) => rowIndex !== 1).join("\n").replace(/(?<!\\)\|/gu, " "))
+        : readableMarkdown(original.source);
       assert.equal(
         original.type === "heading" ? actualText.replace(/^[IVXLCDM]+\. /u, "") : actualText,
         original.type === "heading" ? originalText.replace(/^\d+\.? /u, "") : originalText,
@@ -357,12 +376,18 @@ for (const expected of PROJECTS) {
       const fallbackText = [...visual.matchAll(/<text\b[^>]*>([\s\S]*?)<\/text>/giu)]
         .map((match) => normalized(match[1].replace(/<[^>]+>/gu, ""))).filter(Boolean);
       assert.deepEqual(fallbackText, [], "Exported math must not fall back to browser text glyphs");
+      // A numbered display sets its number at the column edge, outside the labelled row MathML gives it.
+      const tagged = /\\tag\{/u.test(sourceFormulas[vectorIndices[index]].tex) ? 1 : 0;
       for (const semantic of ["mfrac", "msqrt", "mover", "munder", "msup", "msubsup", "mtable", "mlabeledtr"]) {
         const visualCount = (visual.match(new RegExp(`data-mml-node="${semantic}"`, "gu")) ?? []).length;
         const semanticCount = (math[vectorIndices[index]][2].match(new RegExp(`<${semantic}\\b`, "giu")) ?? []).length;
-        assert.equal(visualCount, semanticCount, `Exported formula ${index} must preserve its ${semantic} geometry`);
+        assert.equal(visualCount, semantic === "mtable" || semantic === "mlabeledtr" ? semanticCount - tagged : semanticCount, `Exported formula ${index} must preserve its ${semantic} geometry`);
       }
     }
+    // Every equation number on the page is the number its TeX carries, in the order of the manuscript.
+    const shownNumbers = [...content.matchAll(/<span\b[^>]*\bdata-equation-number\b[^>]*>([^<]*)<\/span>/gu)].map((match) => match[1]);
+    const taggedNumbers = sourceFormulas.flatMap(({ tex }) => (/\\tag\{([^{}]+)\}/u.exec(tex)?.slice(1) ?? []).map((number) => `(${number})`));
+    assert.deepEqual(shownNumbers, taggedNumbers, "Each display shows the number of its manuscript equation");
     assert.equal(math.filter((match) => attr(match[1], "data-research-math") === "display").length, expected.display);
     assert.equal(sourceFormulas.filter(({ kind }) => kind === "inline").length, expected.inline, "The canonical inline formula count must remain exact");
     assert.equal(math.filter((match) => attr(match[1], "data-research-math") === "inline").length, sourceFormulas.filter(({ kind }) => kind === "inline").length);

@@ -153,7 +153,7 @@ function decimal(value: number) {
   return Number(value.toFixed(6)).toString();
 }
 
-function cleanSvg(node: LiteElement) {
+function cleanSvg(node: LiteElement, root = true) {
   const kind = adaptor.kind(node);
   if (!svgElements.has(kind)) throw new Error(`Research equation produced an unsupported SVG element: ${kind}.`);
   for (const { name, value } of adaptor.allAttributes(node)) {
@@ -166,9 +166,11 @@ function cleanSvg(node: LiteElement) {
   if (kind === "text" && adaptor.textContent(node).trim()) {
     throw new Error("Research equation requires an unavailable SVG glyph.");
   }
-  if (kind === "svg") adaptor.setStyle(node, "overflow", "visible");
+  // Only the root may paint past its canvas (accents and labels); the nested canvases MathJax uses
+  // to clip the extender pieces of braces, arrows, bars and radicals keep their clipping.
+  if (kind === "svg" && root) adaptor.setStyle(node, "overflow", "visible");
   for (const child of adaptor.childNodes(node)) {
-    if (adaptor.kind(child) !== "#text" && adaptor.kind(child) !== "#comment") cleanSvg(child as LiteElement);
+    if (adaptor.kind(child) !== "#text" && adaptor.kind(child) !== "#comment") cleanSvg(child as LiteElement, false);
   }
 }
 
@@ -207,7 +209,9 @@ function intrinsicSvg(container: LiteElement, display: boolean) {
   adaptor.setAttribute(root, "aria-hidden", "true");
   adaptor.setAttribute(root, "focusable", "false");
   adaptor.setAttribute(root, "data-research-svg", display ? "display" : "inline");
-  return { svg: adaptor.outerHTML(root), widthEm, heightEm, depthEm };
+  // An extensible arrow (\xrightarrow) leaves an empty group without a TeX class; it draws nothing.
+  const svg = adaptor.outerHTML(root).replace(/<g data-mml-node="TeXAtom" data-mjx-texclass="undefined"><\/g>/gu, "");
+  return { svg, widthEm, heightEm, depthEm };
 }
 
 function assistiveMathml(tex: string, display: boolean) {

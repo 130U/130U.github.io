@@ -619,7 +619,7 @@
 /* Comparison table-figure with column emphasis on hover. */
 .compare {
   display: grid;
-  grid-template-columns: minmax(6.5rem, auto) repeat(var(--count), minmax(0, 1fr));
+  grid-template-columns: minmax(6.5rem, auto) repeat(var(--count), minmax(min-content, 1fr));
   font-size: var(--type-label);
   line-height: var(--label-leading);
 }

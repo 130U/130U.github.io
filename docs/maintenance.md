@@ -193,7 +193,7 @@ interaction lives in focused client components, and the About hero is isolated i
 Article figures live in `app/components/figures/`: `kit.tsx` holds the frame, scales,
 plot, schematic and bar primitives, `selected-research.tsx`, `ai-research.tsx` and
 `legal-research.tsx` hold the figures, `dependence-manuscript.tsx` draws the dependence
-manuscript's four figures from the formulas in `130U/Critical-Dependence-Stress`
+manuscript's four figures from the formulas in `130U/RESEARCH-Critical-Dependence-Stress`
 (`code/generate_mechanism_figures.py` and `calculations/plot_profiles_and_flows.py` at
 the pinned commit), `asian-manuscript.tsx` draws the Asian manuscript's four figures
 from its imported study results and from Proposition 4.1 as

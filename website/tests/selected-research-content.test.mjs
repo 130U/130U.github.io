@@ -4,6 +4,7 @@ import { readFile } from "node:fs/promises";
 import test from "node:test";
 import { parseResearchMarkdown } from "../app/lib/content/research-markdown.ts";
 import { renderResearchMath } from "../app/lib/content/research-math.ts";
+import { restoreGithubMath } from "../app/lib/content/github-math.ts";
 
 // Article figures restate manuscript values in their own captions and labels,
 // and natively drawn manuscript figures label their drawings; manuscript checks
@@ -15,8 +16,8 @@ function withoutArticleFigures(html) {
 }
 
 const PROJECTS = [
-  { key: "asian", slug: "certified-valuation-of-arithmetic-asian-options", repository: "certified-valuation-arithmetic-asian-options", commit: "1f2877045619fc41e27b0a25097b3ed54bb725f8", blob: "88ec73c2037b6907252d0c8166a0fd9f24a70046", sections: 9, tables: 11, formulas: 724, figures: "asian" },
-  { key: "rough", slug: "certified-joint-pricing-errors-in-rough-heston", repository: "certified-rough-heston-valuation", commit: "c2a4908a5f1672d01a8b39cd3d677bc9fbf7f8d4", blob: "c6f0450110e18cdbb04f126a6de8afcbf462c069", sections: 8, tables: 10, formulas: 437, figures: "rough" },
+  { key: "asian", slug: "certified-valuation-of-arithmetic-asian-options", repository: "RESEARCH-Certified-Valuation-Arithmetic-Asian-Options", commit: "68f7d8c691181d9ce2c299b42c5f7ea36b8835e2", blob: "21fd78c9d1d9baef709a6e14345985fec1de1cdc", sections: 9, tables: 11, formulas: 724, figures: "asian" },
+  { key: "rough", slug: "certified-joint-pricing-errors-in-rough-heston", repository: "RESEARCH-Certified-Rough-Heston-Valuation", commit: "89e3378d068d9bcc266511085679ab8c5a70d2ff", blob: "e0defb8c778e5dc1d11e938896621a7633c3dd79", sections: 8, tables: 10, formulas: 437, figures: "rough" },
 ];
 
 function sourceFormulas(markdown) {
@@ -48,7 +49,8 @@ for (const expected of PROJECTS) {
   test(`${expected.key} main text and references are complete and match the frozen GitHub source`, async () => {
     const bytes = await readFile(new URL(`../content/sources/selected-research/${expected.key}-source.md`, import.meta.url));
     assert.equal(createHash("sha1").update(`blob ${bytes.length}\0`).update(bytes).digest("hex"), expected.blob);
-    const upstream = bytes.toString("utf8").replace(/\r\n/gu, "\n");
+    const text = bytes.toString("utf8").replace(/\r\n/gu, "\n");
+    const upstream = expected.key === "asian" ? restoreGithubMath(text) : text;
     const article = JSON.parse(await readFile(new URL(`../content/selected-research/${expected.slug}.json`, import.meta.url), "utf8"));
     assert.equal(article.sourceCommit, expected.commit);
     assert.equal(article.sourceBlob, expected.blob);

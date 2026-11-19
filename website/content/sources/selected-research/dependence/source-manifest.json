@@ -1,7 +1,7 @@
 {
-  "repository": "130U/Critical-Dependence-Stress",
-  "commit": "1b034c8c7179a6054f19be1161f47a8f74b20bfc",
-  "commitDate": "2026-11-15T16:17:58-05:00",
+  "repository": "130U/RESEARCH-Critical-Dependence-Stress",
+  "commit": "bacd66b09e1f66a135360a960943a6df7572ad88",
+  "commitDate": "2026-11-19T00:47:42-05:00",
   "fetchedWith": "Authenticated Git checkout at the exact commit; git show bytes checked against Git blob SHA-1",
   "files": [
     {

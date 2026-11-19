@@ -7,11 +7,12 @@ import { fileURLToPath } from "node:url";
 const root = fileURLToPath(new URL("../", import.meta.url));
 const sourceFile = "content/sources/ai-portfolio/ai-research-and-engineering.md";
 const source = readFileSync(path.join(root, sourceFile), "utf8").replace(/\r\n?/gu, "\n");
+// Each project's manuscript is published in its own repository, named after the project title.
 const projects = [
-  ["statistical-inference-and-resource-allocation-in-expert-data-production", 7],
-  ["task-validity-in-financial-synthetic-data", 6],
-  ["verification-and-supervision-in-scientific-reasoning-tasks", 7],
-  ["evidence-uncertainty-and-decision-guarantees-in-investment-research", 6],
+  ["statistical-inference-and-resource-allocation-in-expert-data-production", 7, "RESEARCH-Large-Scale-Domain-Expert-Feedback-Governance-and-Adaptive-Review"],
+  ["task-validity-in-financial-synthetic-data", 6, "RESEARCH-Financial-Task-Design-and-Synthetic-Data-Engineering"],
+  ["verification-and-supervision-in-scientific-reasoning-tasks", 7, "RESEARCH-General-Reasoning-Evaluation-and-Layered-Verification"],
+  ["evidence-uncertainty-and-decision-guarantees-in-investment-research", 6, "RESEARCH-Evidence-Verification-and-Robust-Comparison-in-Investment-Research"],
 ];
 const sourceDocument = {
   fileName: path.basename(sourceFile),
@@ -61,7 +62,7 @@ const category = showcase.categories.find(({ id }) => id === "01");
 assert.ok(category, "Missing AI showcase category");
 category.disclosure = { title: intro[3], text: intro[4] };
 
-for (const [index, [slug, chapterCount]] of projects.entries()) {
+for (const [index, [slug, chapterCount, repository]] of projects.entries()) {
   const boundary = boundaries[index];
   assert.equal(Number(boundary[1]), index + 1, "Projects must retain their directory order");
   assert.equal(boundary[2], slug, "Unexpected AI project route");
@@ -86,6 +87,7 @@ for (const [index, [slug, chapterCount]] of projects.entries()) {
   assert.equal(metadataText.replace(metadataPattern, "").trim(), "", `Unexpected metadata content for ${slug}`);
   const metadata = Object.fromEntries(metadataFields.map((field) => [field[1], field[2]]));
   assert.equal(metadata.URL, `https://www.theodoreoy.com/experience/${slug}/`, "The source URL must match the project route");
+  assert.equal(repository, `RESEARCH-${metadata.Title.replace(/ /gu, "-")}`, "The repository must be named after the project title");
   const entry = showcase.entries[index];
   assert.equal(entry.id, index + 1);
   assert.equal(entry.categoryId, "01");
@@ -108,7 +110,8 @@ for (const [index, [slug, chapterCount]] of projects.entries()) {
   assert.equal(article.slug, slug);
   article.title = metadata["Article Title"];
   article.markdown = body;
-  article.sourceUrl = `https://github.com/130U/130U.github.io/blob/main/website/${sourceFile}`;
+  article.repositoryUrl = `https://github.com/130U/${repository}`;
+  article.sourceUrl = `https://github.com/130U/${repository}/blob/main/manuscript/${slug}.md`;
   article.sourceEditedAt = intro[2];
   article.sourceDocument = sourceDocument;
   generated.set(articleFile, article);

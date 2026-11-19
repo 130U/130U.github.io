@@ -20,13 +20,18 @@ export function KeepRanges({ text }: { text: string }) {
 
 // Punctuation that closes against a formula, and brackets that open onto one,
 // share its line as they do in the papers. A formula wide enough to fill a
-// phone's line keeps its break opportunities.
+// phone's line keeps that punctuation too: its scroll box leaves room for it.
 const CLOSING = /^[.,;:!?%)\]}’”]+/u;
 const OPENING = /[([{‘“]$/u;
 const GLUED_WIDTH_EM = 14 + 2 * RESEARCH_MATH_GUTTER_EM;
 
 function gluable(inline: ArticleInline | undefined): inline is Extract<ArticleInline, { type: "math" }> {
-  return inline?.type === "math" && inline.tex.trim() !== "\\square" && !proseNumber(inline.tex) && renderResearchMath(inline.tex).widthEm <= GLUED_WIDTH_EM;
+  return inline?.type === "math" && inline.tex.trim() !== "\\square" && !proseNumber(inline.tex);
+}
+
+/** The width a wide formula leaves on its line for the punctuation glued to it, in ch. */
+function reserveFor(tex: string, glued: string) {
+  return renderResearchMath(tex).widthEm > GLUED_WIDTH_EM ? glued.length + 0.5 : undefined;
 }
 
 function textNodes(text: string, key: number) {
@@ -56,7 +61,7 @@ export function InlineContent({ inlines }: { inlines: ArticleInline[] }) {
       const opening = tail.get(index - 1);
       const closing = lead.get(index + 1);
       if (!opening && !closing) return <ResearchMath key={index} tex={inline.tex} />;
-      return <span key={index} className={styles.glued}>{opening}<ResearchMath tex={inline.tex} tightStart={Boolean(opening)} tightEnd={Boolean(closing)} />{closing}</span>;
+      return <span key={index} className={styles.glued}>{opening}<ResearchMath tex={inline.tex} tightStart={Boolean(opening)} tightEnd={Boolean(closing)} reserveCh={reserveFor(inline.tex, `${opening ?? ""}${closing ?? ""}`)} />{closing}</span>;
     }
     if (inline.type === "line-break") return <br key={index} />;
     if (inline.type === "strong") return <strong key={index}><InlineContent inlines={inline.inlines} /></strong>;

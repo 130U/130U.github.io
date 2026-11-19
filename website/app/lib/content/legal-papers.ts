@@ -16,9 +16,11 @@ type PaperParagraph = {
 };
 
 type PaperBlock = PaperParagraph & {
-  type: "heading" | "paragraph";
+  type: "heading" | "paragraph" | "table";
   level?: number;
   id?: string;
+  /** A table's rows; the first row holds the column headings. */
+  rows?: PaperParagraph[][];
 };
 
 export type LegalPaper = {
@@ -26,6 +28,9 @@ export type LegalPaper = {
   title: string;
   author: string;
   date: string;
+  /** The paper's repository and its manuscript there. */
+  repositoryUrl: string;
+  sourceUrl: string;
   abstract: PaperParagraph[];
   acknowledgment: PaperParagraph;
   blocks: PaperBlock[];
@@ -41,12 +46,16 @@ export const legalPaperSlugs = [
 
 const legalPapers: readonly LegalPaper[] = legalPaperSlugs.map((slug) => {
   const paper = JSON.parse(readFileSync(join(process.cwd(), "content", "legal-papers", `${slug}.json`), "utf8")) as LegalPaper;
-  if (paper.slug !== slug || !paper.title || !paper.author || !paper.abstract.length || !paper.blocks.length) {
+  if (paper.slug !== slug || !paper.title || !paper.author || !paper.abstract.length || !paper.blocks.length ||
+      !paper.repositoryUrl.startsWith("https://github.com/130U/LAW-") || !paper.sourceUrl.startsWith(`${paper.repositoryUrl}/blob/main/manuscript/`)) {
     throw new Error(`Incomplete legal paper: ${slug}`);
   }
   const ids = paper.blocks.filter(({ type }) => type === "heading").map(({ id }) => id);
   if (ids.some((id) => !id) || new Set(ids).size !== ids.length) {
     throw new Error(`Legal paper headings need unique anchors: ${slug}`);
+  }
+  if (paper.blocks.some(({ type, rows }) => type === "table" && (!rows || rows.length < 2 || rows.some((row) => row.length !== rows[0].length)))) {
+    throw new Error(`Legal paper tables need a heading row and rows of equal width: ${slug}`);
   }
   if (paper.footnotes.some(({ number }, index) => number !== index + 1)) {
     throw new Error(`Legal paper footnotes must remain sequential: ${slug}`);

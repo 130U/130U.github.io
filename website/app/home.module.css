@@ -289,17 +289,20 @@
   }
 }
 
-@media (width <= 540px) {
+/* Below the width that holds all three addresses whole, the strip stacks. */
+@media (width < 1100px) {
   .contactStrip {
     grid-template-columns: 1fr;
   }
 
-  .contactStrip li {
-    padding: 14px 16px 16px;
-  }
-
   .contactStrip li + li {
     background: var(--dash-x) left top / 100% 1px no-repeat;
+  }
+}
+
+@media (width <= 540px) {
+  .contactStrip li {
+    padding: 14px 16px 16px;
   }
 }
 
