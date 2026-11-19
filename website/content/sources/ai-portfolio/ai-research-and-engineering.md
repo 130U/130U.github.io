@@ -251,6 +251,8 @@ The ratio $`\nu / \lambda`$ is the exchange rate between the two products: the n
 
 **Reference batch.** Production records and operating figures are withheld under the nondisclosure agreement. The results below are stated on a reference batch at the program's scale: one week of work, $`N = 10,000`$ submissions in three strata by difficulty, most of them routine and a tenth of them hard, with defect rates and audit costs that rise with difficulty. Every result is given twice: at the reference batch, and as its range over an envelope in which each entry of the batch moves independently by up to 20% in either direction. A conclusion stated in this section holds across the whole envelope; none of them rests on a single operating point.
 
+**Table 1. The reference batch in three strata by difficulty.**
+
 | | Routine | Intermediate | Hardest |
 | --- | --- | --- | --- |
 | Share of the batch | 60% | 30% | 10% |
@@ -263,6 +265,8 @@ The batch defect rate is $`\mu = 7.10\%`$. One review costs half of a reference 
 
 **Measurement at equal audit budget.** Every policy below uses the estimator of Section 2 and spends the same expected audit budget.
 
+**Table 2. Audit policies at an equal expected audit budget.**
+
 | Audit policy | Audit probability by stratum | Standard deviation of the estimate (percentage points) | Variance relative to uniform | Range over the envelope |
 | --- | --- | --- | --- | --- |
 | Uniform sampling | 14.81% / 14.81% / 14.81% | 0.568 | Baseline | Baseline |
@@ -273,6 +277,8 @@ Three results hold everywhere in the envelope. The uncorrected error rate in the
 
 **The price of precision.** The budget ratio of Section 4 is $`\kappa = 0.848`$: the residual- and cost-aware allocation reaches any precision target with **15.2%** less audit budget than uniform sampling, and with 7.5% to 27.3% less across the envelope.
 
+**Table 3. Audit budget needed to reach each precision target.**
+
 | Target standard deviation (percentage points) | Audit budget, residual- and cost-aware | Audit budget, uniform |
 | --- | --- | --- |
 | 0.50 | 2,100 | 2,475 |
@@ -281,6 +287,8 @@ Three results hold everywhere in the envelope. The uncorrected error rate in the
 | 0.25 | 5,419 | 6,387 |
 
 **Calibration tolerance.** With relative errors of alternating sign and size $`e`$ in the three stratum residual estimates, the variance rises above the optimum as follows.
+
+**Table 4. Variance cost of errors in the stratum residual estimates.**
 
 | Relative error in the residual estimates | Variance above the optimum | Quarter-variance law |
 | --- | --- | --- |
@@ -293,6 +301,8 @@ The stress case is a residual ordering reversed across the strata, which sends t
 
 **One budget, two products.** The total budget is $`5,000`$ cost units, 37% of the cost of auditing everything, to be divided between audits and reviews. With no handling the batch ships 710 defects.
 
+**Table 5. One budget of 5,000 cost units divided between audits and reviews.**
+
 | Plan | Audit probability by stratum | Share of each stratum reviewed | Standard deviation of the estimate (percentage points) | Defects shipped |
 | --- | --- | --- | --- | --- |
 | Risk-first for audits and for reviews | 3.00% / 11.56% / 43.33% | 0% / 67% / 100% | 0.657 | 320.9 |
@@ -303,7 +313,7 @@ The stress case is a residual ordering reversed across the strata, which sends t
 
 At the same budget and the same precision, the joint rule ships **38.6%** fewer defects than risk-first routing, and 19% to 67% fewer across the envelope. Held to the tighter precision of uniform sampling it still ships 34.6% fewer.
 
-The table also shows why the two jobs cannot be planned one after the other. Choosing audits for measurement and then spending the rest on repair gives the best estimate in the table and ships more defects than the legacy policy, because it ignores the repair that audits perform. The joint rule sends every item of the hardest stratum to an independent reference solution: there a review removes 30% of the defects and a reference audit removes all of them, at a risk per unit cost of $`0.35 / 3 = 0.117`$ against a budget price $`\lambda`$ of 0.093 to 0.096. In the two easier strata the audit probabilities follow the closed form of Section 5: the $`\nu`$ implied by the routine stratum and the $`\nu`$ implied by the intermediate stratum agree to six digits in both joint plans.
+Table 5 also shows why the two jobs cannot be planned one after the other. Choosing audits for measurement and then spending the rest on repair gives the best estimate in the table and ships more defects than the legacy policy, because it ignores the repair that audits perform. The joint rule sends every item of the hardest stratum to an independent reference solution: there a review removes 30% of the defects and a reference audit removes all of them, at a risk per unit cost of $`0.35 / 3 = 0.117`$ against a budget price $`\lambda`$ of 0.093 to 0.096. In the two easier strata the audit probabilities follow the closed form of Section 5: the $`\nu`$ implied by the routine stratum and the $`\nu`$ implied by the intermediate stratum agree to six digits in both joint plans.
 
 The last three rows are the exchange rate. Holding the estimate at 0.657 points costs 22 shipped defects relative to no ceiling, and tightening it to 0.568 costs 13 more. A program that knows this number can decide how much it wants to know.
 
@@ -320,6 +330,8 @@ $$
 where $`I`$ is the regularized incomplete beta function. Contributors enter the action list in decreasing order of $`t_j`$ until the average of $`1 - t_j`$ over the list reaches a set false-selection rate, which treats selection as the compound decision it is ([Gu and Koenker](https://doi.org/10.3982/ECTA19304)). A worked example with prior $`\mathrm{Beta}(18, 2)`$ and standard $`a_0 = 0.85`$ shows what the rule corrects. A contributor with 33 of 40 audited tasks correct has $`t = 0.47`$; one with 6 of 8 correct has $`t = 0.41`$; one with 57 of 60 correct has $`t = 0.005`$. Raw accuracy would send the second contributor to coaching first on eight audits. The tail probability puts the first one ahead, on five times the evidence.
 
 **What an auditor's error costs.** The estimator measures the rate of audit labels, and audit labels are themselves a measurement. Let the auditor's sensitivity and specificity be estimated from blind re-audits, with $`J = \text{sens} + \text{spec} - 1`$. The true rate is recovered by the classical correction $`\mu = (\tilde{\mu} - (1 - \text{spec})) / J`$ ([Rogan and Gladen](https://pubmed.ncbi.nlm.nih.gov/623091/)), at $`1/J^2`$ times the variance, and the budget identity of Section 4 converts that into audit hours. On the reference batch, holding the true rate to a standard deviation of 0.568 points:
+
+**Table 6. Audit budget with an imperfect auditor, at a standard deviation of 0.568 points.**
 
 | Auditor error | Audit budget relative to an error-free auditor |
 | --- | --- |
@@ -431,6 +443,8 @@ $$
 
 so each additional accounting or ratio constraint multiplies the expected candidate count. With a tolerance of $`\epsilon = 0.05`$ residual standard deviations, the exact analytical values are:
 
+**Table 1. Acceptance rate of rejection sampling under simultaneous constraints.**
+
 | Simultaneous constraints ($`m`$) | Rejection-sampling acceptance rate $`\alpha_m(\epsilon)`$ | Expected candidate draws per valid input |
 | --- | --- | --- |
 | **1** | 3.9878% | 25.08 |
@@ -508,6 +522,8 @@ $$
 I(g) = \sum_{k} \frac{\big( \partial_g\, p_k(g) \big)^2}{p_k(g)}, \qquad p_k(g) = \Phi(c_k - g) - \Phi(c_{k-1} - g) \tag{3.4}
 $$
 
+**Table 2. Fisher information of a binary and a five-level judgment by quality gap.**
+
 | Quality gap $`g`$ | Binary judgment | Five-level judgment (cutpoints at $`\pm 0.5`$, $`\pm 1.5`$) | Ratio |
 | --- | --- | --- | --- |
 | 0 (a tie) | 0.637 | 0.912 | 1.43 |
@@ -537,6 +553,8 @@ Interest rates and spreads revert to a mean, and for them the leak has its own c
 $$
 \frac{\mathrm{Var}(X_t \mid \mathcal{F}_s, X_T)}{\mathrm{Var}(X_t \mid \mathcal{F}_s)} = \frac{1}{1 + e^{-2\kappa h}}, \qquad \text{apparent RMSE reduction} = 1 - \big( 1 + e^{-2\kappa h} \big)^{-1/2} \tag{4.3}
 $$
+
+**Table 3. Apparent RMSE reduction from endpoint leakage under mean reversion.**
 
 | $`\kappa h`$ | 0 (Brownian) | 0.25 | 0.5 | 1 | 2 |
 | --- | --- | --- | --- | --- | --- |
@@ -583,6 +601,8 @@ With a seed that costs twenty variants and $`\rho = 0.5`$, $`k^* \approx 4.5`$, 
 ## 6 Staged evaluation design and coverage efficiency
 
 Staged, blinded comparisons across independent task families test whether constraint-preserving synthesis and preference supervision meet the data requirements of post-training research teams. The task mix, generator training budget, expert review budget, and final acceptance criteria stay fixed as each method is introduced:
+
+**Table 4. The staged evaluation design.**
 
 | Comparison stage | Method introduced | What the stage measures |
 | --- | --- | --- |
@@ -740,6 +760,8 @@ The operator $`P_{\ker A}`$ is the orthogonal projection onto the space of feasi
 
 The same three parts, a residual, a verified constant and an inequality between them, give a certificate for each of the following task types.
 
+**Table 1. Error certificates by task type.**
+
 | Task type | Residual the submission exposes | Constant the task designer verifies | Certificate |
 | --- | --- | --- | --- |
 | Equality-constrained quadratic program (above) | $`P_{\ker A} r`$ | $`\mu = \lambda_{\min}(Z^\top H Z)`$ | $`f(x) - v^* \le \lVert P_{\ker A} r\rVert _2^2 / (2\mu)`$ |
@@ -816,6 +838,8 @@ $$
 
 The limit is the grader's positive predictive value at the starting policy, and the observed score goes to 100% along the way. For Model B of Section 1 under final-answer matching:
 
+**Table 2. Observed score of Model B under final-answer matching as optimization strengthens.**
+
 | Optimization strength $`\eta`$ | 0 | 1 | 2 | 4 | Limit |
 | --- | --- | --- | --- | --- | --- |
 | Observed score | 77.0% | 90.1% | 96.1% | 99.5% | 100% |
@@ -835,6 +859,8 @@ Measuring a grader's two error rates requires submissions whose validity is know
 • 2,400 submissions with controlled defects, 4 per family: (1) an infeasible construction, $`Ax \neq b`$, that yields the exact optimal value $`v^*`$; (2) failure of stationarity along a feasible direction in $`\ker A`$ while reporting $`v^*`$; (3) a claimed multiplier that fails the stationarity equation while reporting $`v^*`$; and (4) an incorrect final objective value. The first three classes, comprising 1,800 submissions or 75% of all invalid submissions, report the correct final answer $`v^*`$.
 
 The composition is the instrument's design: three ways of being wrong with the right answer, one way of being wrong with the wrong answer, and two ways of being right. I compared three deterministic acceptance protocols on all 3,600 submissions:
+
+**Table 3. Three acceptance protocols on 3,600 submissions with known verdicts.**
 
 | Acceptance protocol | False acceptance rate on invalid submissions ($`2,400`$) | False rejection rate on valid certificates ($`1,200`$) | Valid share of accepted submissions |
 | --- | --- | --- | --- |
@@ -1081,6 +1107,8 @@ Five worked examples fix the size of each effect under stated inputs.
 3. **Minimax-regret verification compared with [SHAP](https://arxiv.org/abs/1705.07874) magnitude.**
 • Consider a single query, with the same cost for each query option. The example has 8 scenarios, which come from 2 candidate models in the Rashomon set ($`s \in \{-1, 1\}`$) and 4 unresolved evidence configurations ($`z_1 \in \{-0.4, 0.4\}`$, $`z_2 \in \{-0.2, 0.2\}`$). The pairwise score difference is $`\Delta_s = 0.15s + z_1 + 0.3s z_2`$. A further shared feature has a large [SHAP](https://arxiv.org/abs/1705.07874) attribution but is already verified ($`d_0 = 0`$). The action is to select company $`i`$ or company $`k`$, and regret is measured in model-score units.
 
+**Table 1. Guaranteed regret reduction of each verification query.**
+
 | Verification query | Remaining regret under the worst observation | Guaranteed regret reduction $`V(q)`$ |
 | --- | --- | --- |
 | Recheck the verified field with a large [SHAP](https://arxiv.org/abs/1705.07874) attribution | 0.61 | 0 |
@@ -1091,6 +1119,8 @@ Enumerating the eight scenarios shows that rechecking the verified field with a 
 
 4. **A verification plan under an analyst budget.**
 • One company leads another by $`m = 0.6`$ score points. Five fields are unresolved, with swings $`0.9, 0.5, 0.4, 0.3, 0.2`$ and verification costs of $`4, 1, 2, 1, 1`$ analyst hours. The total swing is $`2.3`$, so the ranking is open and the worst-case regret is $`1.7`$. Only the first field passes the pivot rule, with guaranteed value $`0.3`$; each of the others alone guarantees nothing, and the second and third together are worth $`0.3`$. With four hours available:
+
+**Table 2. Two verification plans under a budget of four analyst hours.**
 
 | Plan | Fields verified | Hours | Regret remaining |
 | --- | --- | --- | --- |

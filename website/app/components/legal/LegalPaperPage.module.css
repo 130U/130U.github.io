@@ -200,9 +200,11 @@
   scroll-margin-top: 6rem;
 }
 
+/* A citation's small-caps field (authors and titles of books, periodicals,
+   institutional authors) in the serif's own small capitals, lightly tracked. */
 .smallCaps {
-  font-size: inherit;
-  letter-spacing: inherit;
+  font-variant-caps: small-caps;
+  letter-spacing: 0.025em;
 }
 
 .reference {

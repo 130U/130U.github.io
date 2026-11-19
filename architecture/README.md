@@ -3,7 +3,7 @@
 [Open the interactive system map](https://www.theodoreoy.com/architecture/).
 
 The viewer maps content inputs, static rendering, validation, GitHub Pages delivery,
-and browser interactions. It supports label search, light and dark themes,
+and browser interactions in the website's palette. It supports label search,
 relationship tracing, and image export.
 
 | File | Responsibility |

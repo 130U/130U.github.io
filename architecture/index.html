@@ -5040,6 +5040,46 @@
       .diagram-nav [data-view="reset"][data-detail-visible] { min-width: min(88px, 100%); }
     }
   </style>
+  <style data-site-theme>
+    :root, [data-theme], [data-preset] {
+      --bg: #f7f6f5 !important;
+      --grid: transparent !important;
+      --text: #0b0b0b !important;
+      --text-muted: #70706c !important;
+      --text-dim: #a6a6a1 !important;
+      --text-faint: #70706c !important;
+      --panel: #f7f6f5 !important;
+      --panel-border: rgba(0, 0, 0, 0.08) !important;
+      --lane-fill: transparent !important;
+      --lane-stroke: rgba(0, 0, 0, 0.24) !important;
+      --arrow: #a6a6a1 !important;
+      --arrow-emphasis: #0b0b0b !important;
+      --mask: #f7f6f5 !important;
+      --frontend-fill: #f7f6f5 !important;
+      --frontend-stroke: #0b0b0b !important;
+      --backend-fill: #f7f6f5 !important;
+      --backend-stroke: #0b0b0b !important;
+      --database-fill: #f7f6f5 !important;
+      --database-stroke: #0b0b0b !important;
+      --cloud-fill: #f7f6f5 !important;
+      --cloud-stroke: #0b0b0b !important;
+      --security-fill: #f7f6f5 !important;
+      --security-stroke: #0b0b0b !important;
+      --messagebus-fill: #f7f6f5 !important;
+      --messagebus-stroke: #0b0b0b !important;
+      --external-fill: #f7f6f5 !important;
+      --external-stroke: #70706c !important;
+      --toolbar-bg: #f7f6f5 !important;
+      --toolbar-border: rgba(0, 0, 0, 0.12) !important;
+      --toolbar-text: #0b0b0b !important;
+      --toolbar-hover: #f7f6f5 !important;
+      --toolbar-menu-bg: #f7f6f5 !important;
+    }
+    body { background: var(--bg); }
+    #btn-theme, #btn-preset, .preset-wrap { display: none !important; }
+    .pulse-dot, .card-dot { background: var(--text) !important; box-shadow: none !important; }
+    *:not(.pulse-dot):not(.motion-control-dot) { border-radius: 0 !important; }
+  </style>
 </head>
 <body>
   <!-- Toolbar: theme, live visual style, trace motion, presentation stage, and export.

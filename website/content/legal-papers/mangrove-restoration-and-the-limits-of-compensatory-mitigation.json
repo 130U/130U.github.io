@@ -1249,7 +1249,16 @@
             ]
           }
         ]
-      ]
+      ],
+      "caption": {
+        "text": "Table 1. Share of a promised gain credited under the Florida rule, by time lag and risk score.",
+        "runs": [
+          {
+            "text": "Table 1. Share of a promised gain credited under the Florida rule, by time lag and risk score.",
+            "bold": true
+          }
+        ]
+      }
     },
     {
       "type": "paragraph",
@@ -1690,16 +1699,20 @@
   "footnotes": [
     {
       "number": 1,
-      "text": "DIRECTOR OF ENVIRONMENTAL PROTECTION, APPROVAL OF EIA REPORT FOR SAN TIN/LOK MA CHAU DEVELOPMENT NODE, EIA-302/2023, Register AEIAR-261/2024, annex 1, condition 9, at 4 (May 17, 2024).",
+      "text": "Director of Environmental Protection, Approval of EIA Report for San Tin/Lok Ma Chau Development Node, EIA-302/2023, Register AEIAR-261/2024, annex 1, condition 9, at 4 (May 17, 2024).",
       "runs": [
         {
-          "text": "DIRECTOR OF ENVIRONMENTAL PROTECTION, APPROVAL OF EIA REPORT FOR SAN TIN/LOK MA CHAU DEVELOPMENT NODE, EIA-302/2023, Register AEIAR-261/2024, annex 1, condition 9, at 4 (May 17, 2024)."
+          "text": "Director of Environmental Protection, Approval of EIA Report for San Tin/Lok Ma Chau Development Node, EIA",
+          "smallCaps": true
+        },
+        {
+          "text": "-302/2023, Register AEIAR-261/2024, annex 1, condition 9, at 4 (May 17, 2024)."
         }
       ]
     },
     {
       "number": 2,
-      "text": "Wetland Protection Law of the People's Republic of China art. 34 (promulgated by the Standing Comm. Nat'l People's Cong., Dec. 24, 2021, effective June 1, 2022); Roy R. Lewis III, Ecological Engineering for Successful Management and Restoration of Mangrove Forests, 24 ECOLOGICAL ENGINEERING 403, 413 & fig. 6 (2005).",
+      "text": "Wetland Protection Law of the People's Republic of China art. 34 (promulgated by the Standing Comm. Nat'l People's Cong., Dec. 24, 2021, effective June 1, 2022); Roy R. Lewis III, Ecological Engineering for Successful Management and Restoration of Mangrove Forests, 24 Ecological Engineering 403, 413 & fig. 6 (2005).",
       "runs": [
         {
           "text": "Wetland Protection Law of the People's Republic of China art. 34 (promulgated by the Standing Comm. Nat'l People's Cong., Dec. 24, 2021, effective June 1, 2022); Roy R. Lewis III, "
@@ -1709,13 +1722,20 @@
           "italic": true
         },
         {
-          "text": ", 24 ECOLOGICAL ENGINEERING 403, 413 & fig. 6 (2005)."
+          "text": ", 24 "
+        },
+        {
+          "text": "Ecological Engineering",
+          "smallCaps": true
+        },
+        {
+          "text": " 403, 413 & fig. 6 (2005)."
         }
       ]
     },
     {
       "number": 3,
-      "text": "Martine Maron et al., Faustian Bargains? Restoration Realities in the Context of Biodiversity Offset Policies, 155 BIOLOGICAL CONSERVATION 141 (2012); see also Joseph W. Bull et al., Biodiversity Offsets in Theory and Practice, 47 ORYX 369 (2013); BUSINESS & BIODIVERSITY OFFSETS PROGRAMME, THE BBOP PRINCIPLES ON BIODIVERSITY OFFSETS princ. 2 (2012) (recognizing limits to what can be offset).",
+      "text": "Martine Maron et al., Faustian Bargains? Restoration Realities in the Context of Biodiversity Offset Policies, 155 Biological Conservation 141 (2012); see also Joseph W. Bull et al., Biodiversity Offsets in Theory and Practice, 47 Oryx 369 (2013); Business & Biodiversity Offsets Programme, The BBOP Principles on Biodiversity Offsets princ. 2 (2012) (recognizing limits to what can be offset).",
       "runs": [
         {
           "text": "Martine Maron et al., "
@@ -1725,7 +1745,14 @@
           "italic": true
         },
         {
-          "text": ", 155 BIOLOGICAL CONSERVATION 141 (2012); "
+          "text": ", 155 "
+        },
+        {
+          "text": "Biological Conservation",
+          "smallCaps": true
+        },
+        {
+          "text": " 141 (2012); "
         },
         {
           "text": "see also",
@@ -1739,22 +1766,40 @@
           "italic": true
         },
         {
-          "text": ", 47 ORYX 369 (2013); BUSINESS & BIODIVERSITY OFFSETS PROGRAMME, THE BBOP PRINCIPLES ON BIODIVERSITY OFFSETS princ. 2 (2012) (recognizing limits to what can be offset)."
+          "text": ", 47 "
+        },
+        {
+          "text": "Oryx",
+          "smallCaps": true
+        },
+        {
+          "text": " 369 (2013); "
+        },
+        {
+          "text": "Business & Biodiversity Offsets Programme, The BBOP Principles on Biodiversity Offsets",
+          "smallCaps": true
+        },
+        {
+          "text": " princ. 2 (2012) (recognizing limits to what can be offset)."
         }
       ]
     },
     {
       "number": 4,
-      "text": "NATIONAL RESEARCH COUNCIL, COMPENSATING FOR WETLAND LOSSES UNDER THE CLEAN WATER ACT (2001) (concluding that the mitigation program was not meeting the goal of no net loss for wetland functions).",
+      "text": "National Research Council, Compensating for Wetland Losses Under the Clean Water Act (2001) (concluding that the mitigation program was not meeting the goal of no net loss for wetland functions).",
       "runs": [
         {
-          "text": "NATIONAL RESEARCH COUNCIL, COMPENSATING FOR WETLAND LOSSES UNDER THE CLEAN WATER ACT (2001) (concluding that the mitigation program was not meeting the goal of no net loss for wetland functions)."
+          "text": "National Research Council, Compensating for Wetland Losses Under the Clean Water Act",
+          "smallCaps": true
+        },
+        {
+          "text": " (2001) (concluding that the mitigation program was not meeting the goal of no net loss for wetland functions)."
         }
       ]
     },
     {
       "number": 5,
-      "text": "Mark Van Hoecke, Methodology of Comparative Legal Research, LAW AND METHOD, 2015, at 1, 6-10.",
+      "text": "Mark Van Hoecke, Methodology of Comparative Legal Research, Law and Method, 2015, at 1, 6-10.",
       "runs": [
         {
           "text": "Mark Van Hoecke, "
@@ -1764,7 +1809,14 @@
           "italic": true
         },
         {
-          "text": ", LAW AND METHOD, 2015, at 1, 6-10."
+          "text": ", "
+        },
+        {
+          "text": "Law and Method",
+          "smallCaps": true
+        },
+        {
+          "text": ", 2015, at 1, 6-10."
         }
       ]
     },
@@ -1845,19 +1897,30 @@
     },
     {
       "number": 13,
-      "text": "MINISTRY OF NATURAL RESOURCES & NATIONAL FORESTRY & GRASSLAND ADMINISTRATION, SPECIAL ACTION PLAN FOR MANGROVE PROTECTION AND RESTORATION (2020-2025) pt. I(3), actions 4, 6 (Aug. 14, 2020).",
+      "text": "Ministry of Natural Resources & National Forestry & Grassland Administration, Special Action Plan for Mangrove Protection and Restoration (2020-2025) pt. I(3), actions 4, 6 (Aug. 14, 2020).",
       "runs": [
         {
-          "text": "MINISTRY OF NATURAL RESOURCES & NATIONAL FORESTRY & GRASSLAND ADMINISTRATION, SPECIAL ACTION PLAN FOR MANGROVE PROTECTION AND RESTORATION (2020-2025) pt. I(3), actions 4, 6 (Aug. 14, 2020)."
+          "text": "Ministry of Natural Resources & National Forestry & Grassland Administration, Special Action Plan for Mangrove Protection and Restoration",
+          "smallCaps": true
+        },
+        {
+          "text": " (2020-2025) pt. I(3), actions 4, 6 (Aug. 14, 2020)."
         }
       ]
     },
     {
       "number": 14,
-      "text": "Guangdong Wetland Protection Regulation arts. 30, 34 (as amended Nov. 30, 2022), GUANGDONG PROVINCIAL PEOPLE'S CONGRESS STANDING COMMITTEE GAZETTE, No. 8 of 2022, at 69-70 (Jan. 6, 2023). The land-quota incentive expressly refers to both area and prescribed standards.",
+      "text": "Guangdong Wetland Protection Regulation arts. 30, 34 (as amended Nov. 30, 2022), Guangdong Provincial People's Congress Standing Committee Gazette, No. 8 of 2022, at 69-70 (Jan. 6, 2023). The land-quota incentive expressly refers to both area and prescribed standards.",
       "runs": [
         {
-          "text": "Guangdong Wetland Protection Regulation arts. 30, 34 (as amended Nov. 30, 2022), GUANGDONG PROVINCIAL PEOPLE'S CONGRESS STANDING COMMITTEE GAZETTE, No. 8 of 2022, at 69-70 (Jan. 6, 2023). The land-quota incentive expressly refers to both area and prescribed standards."
+          "text": "Guangdong Wetland Protection Regulation arts. 30, 34 (as amended Nov. 30, 2022), "
+        },
+        {
+          "text": "Guangdong Provincial People's Congress Standing Committee Gazette",
+          "smallCaps": true
+        },
+        {
+          "text": ", No. 8 of 2022, at 69-70 (Jan. 6, 2023). The land-quota incentive expressly refers to both area and prescribed standards."
         }
       ]
     },
@@ -1879,28 +1942,71 @@
     },
     {
       "number": 16,
-      "text": "Environmental Impact Assessment Ordinance, (1997) Cap. 499, §§ 5-10, scheds. 2-3 (H.K.); ADVISORY COUNCIL ON THE ENVIRONMENT, EIA SUBCOMMITTEE PAPER EIA-158/2024: SAN TIN/LOK MA CHAU DEVELOPMENT NODE ¶ 10 & nn.1-8, at 3 (2024); ENVIRONMENTAL PROTECTION DEPARTMENT, ENVIRONMENTAL AUDIT PROTOCOL ON ENVIRONMENTAL IMPACT ASSESSMENT EIA-1 (1999).",
+      "text": "Environmental Impact Assessment Ordinance, (1997) Cap. 499, §§ 5-10, scheds. 2-3 (H.K.); Advisory Council on the Environment, EIA Subcommittee Paper EIA-158/2024: San Tin/Lok Ma Chau Development Node ¶ 10 & nn.1-8, at 3 (2024); Environmental Protection Department, Environmental Audit Protocol on Environmental Impact Assessment EIA-1 (1999).",
       "runs": [
         {
-          "text": "Environmental Impact Assessment Ordinance, (1997) Cap. 499, §§ 5-10, scheds. 2-3 (H.K.); ADVISORY COUNCIL ON THE ENVIRONMENT, EIA SUBCOMMITTEE PAPER EIA-158/2024: SAN TIN/LOK MA CHAU DEVELOPMENT NODE ¶ 10 & nn.1-8, at 3 (2024); ENVIRONMENTAL PROTECTION DEPARTMENT, ENVIRONMENTAL AUDIT PROTOCOL ON ENVIRONMENTAL IMPACT ASSESSMENT EIA-1 (1999)."
+          "text": "Environmental Impact Assessment Ordinance, (1997) Cap. 499, §§ 5-10, scheds. 2-3 (H.K.); "
+        },
+        {
+          "text": "Advisory Council on the Environment, EIA Subcommittee Paper EIA",
+          "smallCaps": true
+        },
+        {
+          "text": "-158/2024: "
+        },
+        {
+          "text": "San Tin/Lok Ma Chau Development Node",
+          "smallCaps": true
+        },
+        {
+          "text": " ¶ 10 & nn.1-8, at 3 (2024); "
+        },
+        {
+          "text": "Environmental Protection Department, Environmental Audit Protocol on Environmental Impact Assessment EIA",
+          "smallCaps": true
+        },
+        {
+          "text": "-1 (1999)."
         }
       ]
     },
     {
       "number": 17,
-      "text": "ENVIRONMENTAL PROTECTION DEPARTMENT, TECHNICAL MEMORANDUM ON ENVIRONMENTAL IMPACT ASSESSMENT PROCESS annex 16, ¶¶ 5.4-5.5 (1997); TOWN PLANNING BOARD, GUIDELINES FOR APPLICATION FOR DEVELOPMENTS WITHIN DEEP BAY AREA UNDER SECTION 16 OF THE TOWN PLANNING ORDINANCE, TPB PG-No. 12C, ¶¶ 4-6.5, at 3-6 (May 2014). Applications under the guidelines remain subject to the Board's case-specific determination.",
+      "text": "Environmental Protection Department, Technical Memorandum on Environmental Impact Assessment Process annex 16, ¶¶ 5.4-5.5 (1997); Town Planning Board, Guidelines for Application for Developments Within Deep Bay Area Under Section 16 of the Town Planning Ordinance, TPB PG-No. 12C, ¶¶ 4-6.5, at 3-6 (May 2014). Applications under the guidelines remain subject to the Board's case-specific determination.",
       "runs": [
         {
-          "text": "ENVIRONMENTAL PROTECTION DEPARTMENT, TECHNICAL MEMORANDUM ON ENVIRONMENTAL IMPACT ASSESSMENT PROCESS annex 16, ¶¶ 5.4-5.5 (1997); TOWN PLANNING BOARD, GUIDELINES FOR APPLICATION FOR DEVELOPMENTS WITHIN DEEP BAY AREA UNDER SECTION 16 OF THE TOWN PLANNING ORDINANCE, TPB PG-No. 12C, ¶¶ 4-6.5, at 3-6 (May 2014). Applications under the guidelines remain subject to the Board's case-specific determination."
+          "text": "Environmental Protection Department, Technical Memorandum on Environmental Impact Assessment Process",
+          "smallCaps": true
+        },
+        {
+          "text": " annex 16, ¶¶ 5.4-5.5 (1997); "
+        },
+        {
+          "text": "Town Planning Board, Guidelines for Application for Developments Within Deep Bay Area Under Section",
+          "smallCaps": true
+        },
+        {
+          "text": " 16 "
+        },
+        {
+          "text": "of the Town Planning Ordinance, TPB PG",
+          "smallCaps": true
+        },
+        {
+          "text": "-No. 12C, ¶¶ 4-6.5, at 3-6 (May 2014). Applications under the guidelines remain subject to the Board's case-specific determination."
         }
       ]
     },
     {
       "number": 18,
-      "text": "TOWN PLANNING BOARD, supra note 17, ¶¶ 4-5, at 3.",
+      "text": "Town Planning Board, supra note 17, ¶¶ 4-5, at 3.",
       "runs": [
         {
-          "text": "TOWN PLANNING BOARD, "
+          "text": "Town Planning Board",
+          "smallCaps": true
+        },
+        {
+          "text": ", "
         },
         {
           "text": "supra",
@@ -1913,10 +2019,14 @@
     },
     {
       "number": 19,
-      "text": "ADVISORY COUNCIL ON THE ENVIRONMENT, supra note 16, ¶¶ 13-15, at 4-5. The paper identifies the previous Technical Memorandum as governing ecology and several other San Tin assessments, while air and noise assessments used the revised memorandum.",
+      "text": "Advisory Council on the Environment, supra note 16, ¶¶ 13-15, at 4-5. The paper identifies the previous Technical Memorandum as governing ecology and several other San Tin assessments, while air and noise assessments used the revised memorandum.",
       "runs": [
         {
-          "text": "ADVISORY COUNCIL ON THE ENVIRONMENT, "
+          "text": "Advisory Council on the Environment",
+          "smallCaps": true
+        },
+        {
+          "text": ", "
         },
         {
           "text": "supra",
@@ -1929,19 +2039,51 @@
     },
     {
       "number": 20,
-      "text": "Lei n.º 2/91/M [Environmental Framework Law], art. 28(1), BOLETIM OFICIAL, Mar. 11, 1991, at 974 (Macao), discussed in MACAO LEGISLATIVE ASSEMBLY, SECOND STANDING COMMITTEE, OPINION NO. 2/IV/2013 ON THE URBAN PLANNING BILL (Aug. 2, 2013), reprinted in COLECTÂNEA DE LEGISLAÇÃO: LEI DO PLANEAMENTO URBANÍSTICO 120-21 (2017).",
+      "text": "Lei n.º 2/91/M [Environmental Framework Law], art. 28(1), Boletim Oficial, Mar. 11, 1991, at 974 (Macao), discussed in Macao Legislative Assembly, Second Standing Committee, Opinion No. 2/IV/2013 on the Urban Planning Bill (Aug. 2, 2013), reprinted in Colectânea de Legislação: Lei do Planeamento Urbanístico 120-21 (2017).",
       "runs": [
         {
-          "text": "Lei n.º 2/91/M [Environmental Framework Law], art. 28(1), BOLETIM OFICIAL, Mar. 11, 1991, at 974 (Macao), discussed in MACAO LEGISLATIVE ASSEMBLY, SECOND STANDING COMMITTEE, OPINION NO. 2/IV/2013 ON THE URBAN PLANNING BILL (Aug. 2, 2013), reprinted in COLECTÂNEA DE LEGISLAÇÃO: LEI DO PLANEAMENTO URBANÍSTICO 120-21 (2017)."
+          "text": "Lei n.º 2/91/M [Environmental Framework Law], art. 28(1), "
+        },
+        {
+          "text": "Boletim Oficial",
+          "smallCaps": true
+        },
+        {
+          "text": ", Mar. 11, 1991, at 974 (Macao), discussed in "
+        },
+        {
+          "text": "Macao Legislative Assembly, Second Standing Committee, Opinion No.",
+          "smallCaps": true
+        },
+        {
+          "text": " 2/IV/2013 "
+        },
+        {
+          "text": "on the Urban Planning Bill",
+          "smallCaps": true
+        },
+        {
+          "text": " (Aug. 2, 2013), reprinted in "
+        },
+        {
+          "text": "Colectânea de Legislação: Lei do Planeamento Urbanístico",
+          "smallCaps": true
+        },
+        {
+          "text": " 120-21 (2017)."
         }
       ]
     },
     {
       "number": 21,
-      "text": "MACAO ENVIRONMENTAL PROTECTION BUREAU, REPLY TO LEGISLATOR LEONG SUN IOK'S WRITTEN QUESTION 1-2 (2024), https://www.al.gov.mo/uploads/attachment/2024-03/7904565e19672213b8.pdf. The reply addresses the January 19, 2024 question transmitted on January 31, 2024. Its Cotai management account is distinct from its report of municipal coastal planting.",
+      "text": "Macao Environmental Protection Bureau, Reply to Legislator Leong Sun Iok's Written Question 1-2 (2024), https://www.al.gov.mo/uploads/attachment/2024-03/7904565e19672213b8.pdf. The reply addresses the January 19, 2024 question transmitted on January 31, 2024. Its Cotai management account is distinct from its report of municipal coastal planting.",
       "runs": [
         {
-          "text": "MACAO ENVIRONMENTAL PROTECTION BUREAU, REPLY TO LEGISLATOR LEONG SUN IOK'S WRITTEN QUESTION 1-2 (2024), https://www.al.gov.mo/uploads/attachment/2024-03/7904565e19672213b8.pdf. The reply addresses the January 19, 2024 question transmitted on January 31, 2024. Its Cotai management account is distinct from its report of municipal coastal planting."
+          "text": "Macao Environmental Protection Bureau, Reply to Legislator Leong Sun Iok's Written Question",
+          "smallCaps": true
+        },
+        {
+          "text": " 1-2 (2024), https://www.al.gov.mo/uploads/attachment/2024-03/7904565e19672213b8.pdf. The reply addresses the January 19, 2024 question transmitted on January 31, 2024. Its Cotai management account is distinct from its report of municipal coastal planting."
         }
       ]
     },
@@ -2060,16 +2202,20 @@
     },
     {
       "number": 33,
-      "text": "ROY R. LEWIS III & BEN BROWN, ECOLOGICAL MANGROVE REHABILITATION: A FIELD MANUAL FOR PRACTITIONERS 202-03, 241 (2014), https://mangroveactionproject.org/wp-content/uploads/2023/11/Ecological-Mangrove-Rehabilitation-Field-Manual.pdf. Lewis's practitioner account describes land assembly and mitigation for development beginning in 1985; its reported area is not a functional balance for the whole development package.",
+      "text": "Roy R. Lewis III & Ben Brown, Ecological Mangrove Rehabilitation: A Field Manual for Practitioners 202-03, 241 (2014), https://mangroveactionproject.org/wp-content/uploads/2023/11/Ecological-Mangrove-Rehabilitation-Field-Manual.pdf. Lewis's practitioner account describes land assembly and mitigation for development beginning in 1985; its reported area is not a functional balance for the whole development package.",
       "runs": [
         {
-          "text": "ROY R. LEWIS III & BEN BROWN, ECOLOGICAL MANGROVE REHABILITATION: A FIELD MANUAL FOR PRACTITIONERS 202-03, 241 (2014), https://mangroveactionproject.org/wp-content/uploads/2023/11/Ecological-Mangrove-Rehabilitation-Field-Manual.pdf. Lewis's practitioner account describes land assembly and mitigation for development beginning in 1985; its reported area is not a functional balance for the whole development package."
+          "text": "Roy R. Lewis III & Ben Brown, Ecological Mangrove Rehabilitation: A Field Manual for Practitioners",
+          "smallCaps": true
+        },
+        {
+          "text": " 202-03, 241 (2014), https://mangroveactionproject.org/wp-content/uploads/2023/11/Ecological-Mangrove-Rehabilitation-Field-Manual.pdf. Lewis's practitioner account describes land assembly and mitigation for development beginning in 1985; its reported area is not a functional balance for the whole development package."
         }
       ]
     },
     {
       "number": 34,
-      "text": "Roy R. Lewis III & R. Grant Gilmore, Important Considerations to Achieve Successful Mangrove Forest Restoration with Optimum Fish Habitat, 80 BULLETIN OF MARINE SCIENCE 823, 831-33 (2007); Karen Roberts, The Distributions of Fish Populations in the Natural and Mitigated Mangroves Forests in Southeast Florida (1994) (M.S. thesis, Nova Southeastern University), https://nsuworks.nova.edu/occ_stuetd/349/. The propositions concerning Roberts are limited to the abstract's stated results.",
+      "text": "Roy R. Lewis III & R. Grant Gilmore, Important Considerations to Achieve Successful Mangrove Forest Restoration with Optimum Fish Habitat, 80 Bulletin of Marine Science 823, 831-33 (2007); Karen Roberts, The Distributions of Fish Populations in the Natural and Mitigated Mangroves Forests in Southeast Florida (1994) (M.S. thesis, Nova Southeastern University), https://nsuworks.nova.edu/occ_stuetd/349/. The propositions concerning Roberts are limited to the abstract's stated results.",
       "runs": [
         {
           "text": "Roy R. Lewis III & R. Grant Gilmore, "
@@ -2079,7 +2225,14 @@
           "italic": true
         },
         {
-          "text": ", 80 BULLETIN OF MARINE SCIENCE 823, 831-33 (2007); Karen Roberts, "
+          "text": ", 80 "
+        },
+        {
+          "text": "Bulletin of Marine Science",
+          "smallCaps": true
+        },
+        {
+          "text": " 823, 831-33 (2007); Karen Roberts, "
         },
         {
           "text": "The Distributions of Fish Populations in the Natural and Mitigated Mangroves Forests in Southeast Florida",
@@ -2092,16 +2245,20 @@
     },
     {
       "number": 35,
-      "text": "MILLER LEGG, WEST LAKE PARK MASTER MITIGATION PLAN, Project 99-37503, at 1-2, 21, 42-47 (Aug. 28, 2008), https://dpep.broward.org/Enviros/download.aspx?PosseObjectId=46911516&hash=D0758920086B4A25D0D99B0C85C6ACC109642429. The plan identifies 2004 and 2006 permits and provides for time-zero and quarterly monitoring over five years, followed by continuing maintenance.",
+      "text": "Miller Legg, West Lake Park Master Mitigation Plan, Project 99-37503, at 1-2, 21, 42-47 (Aug. 28, 2008), https://dpep.broward.org/Enviros/download.aspx?PosseObjectId=46911516&hash=D0758920086B4A25D0D99B0C85C6ACC109642429. The plan identifies 2004 and 2006 permits and provides for time-zero and quarterly monitoring over five years, followed by continuing maintenance.",
       "runs": [
         {
-          "text": "MILLER LEGG, WEST LAKE PARK MASTER MITIGATION PLAN, Project 99-37503, at 1-2, 21, 42-47 (Aug. 28, 2008), https://dpep.broward.org/Enviros/download.aspx?PosseObjectId=46911516&hash=D0758920086B4A25D0D99B0C85C6ACC109642429. The plan identifies 2004 and 2006 permits and provides for time-zero and quarterly monitoring over five years, followed by continuing maintenance."
+          "text": "Miller Legg, West Lake Park Master Mitigation Plan",
+          "smallCaps": true
+        },
+        {
+          "text": ", Project 99-37503, at 1-2, 21, 42-47 (Aug. 28, 2008), https://dpep.broward.org/Enviros/download.aspx?PosseObjectId=46911516&hash=D0758920086B4A25D0D99B0C85C6ACC109642429. The plan identifies 2004 and 2006 permits and provides for time-zero and quarterly monitoring over five years, followed by continuing maintenance."
         }
       ]
     },
     {
       "number": 36,
-      "text": "Yik-Hei Sung et al., Ecological Correlates of 20-Year Population Trends of Wintering Waterbirds in Deep Bay, South China, 9 FRONTIERS IN ECOLOGY AND EVOLUTION, art. 658084, Methods, Results & Discussion (2021). The habitat percentages concern the mapped study area; sixteen survey transects included fifteen in Hong Kong and one in Shenzhen.",
+      "text": "Yik-Hei Sung et al., Ecological Correlates of 20-Year Population Trends of Wintering Waterbirds in Deep Bay, South China, 9 Frontiers in Ecology and Evolution, art. 658084, Methods, Results & Discussion (2021). The habitat percentages concern the mapped study area; sixteen survey transects included fifteen in Hong Kong and one in Shenzhen.",
       "runs": [
         {
           "text": "Yik-Hei Sung et al., "
@@ -2111,13 +2268,20 @@
           "italic": true
         },
         {
-          "text": ", 9 FRONTIERS IN ECOLOGY AND EVOLUTION, art. 658084, Methods, Results & Discussion (2021). The habitat percentages concern the mapped study area; sixteen survey transects included fifteen in Hong Kong and one in Shenzhen."
+          "text": ", 9 "
+        },
+        {
+          "text": "Frontiers in Ecology and Evolution",
+          "smallCaps": true
+        },
+        {
+          "text": ", art. 658084, Methods, Results & Discussion (2021). The habitat percentages concern the mapped study area; sixteen survey transects included fifteen in Hong Kong and one in Shenzhen."
         }
       ]
     },
     {
       "number": 37,
-      "text": "Mingming Jia et al., Evaluating the Effectiveness of Conservation on Mangroves: A Remote Sensing-Based Comparison for Two Adjacent Protected Areas in Shenzhen and Hong Kong, China, 8 REMOTE SENSING, art. 627, §§ 3.1, 4-5 (2016). The study uses eleven Landsat images spanning 1973-2015.",
+      "text": "Mingming Jia et al., Evaluating the Effectiveness of Conservation on Mangroves: A Remote Sensing-Based Comparison for Two Adjacent Protected Areas in Shenzhen and Hong Kong, China, 8 Remote Sensing, art. 627, §§ 3.1, 4-5 (2016). The study uses eleven Landsat images spanning 1973-2015.",
       "runs": [
         {
           "text": "Mingming Jia et al., "
@@ -2127,13 +2291,20 @@
           "italic": true
         },
         {
-          "text": ", 8 REMOTE SENSING, art. 627, §§ 3.1, 4-5 (2016). The study uses eleven Landsat images spanning 1973-2015."
+          "text": ", 8 "
+        },
+        {
+          "text": "Remote Sensing",
+          "smallCaps": true
+        },
+        {
+          "text": ", art. 627, §§ 3.1, 4-5 (2016). The study uses eleven Landsat images spanning 1973-2015."
         }
       ]
     },
     {
       "number": 38,
-      "text": "Zijian Huang et al., Coastal Nutrient Enrichments Facilitated Reproductive Output in Exotic Mangrove Species over Two Decades, 6 FRONTIERS IN FORESTS AND GLOBAL CHANGE, art. 1183432, Methods, Results & Discussion (2023). Monthly litterfall observations span 1999-2019. Exotic status is relative to Futian.",
+      "text": "Zijian Huang et al., Coastal Nutrient Enrichments Facilitated Reproductive Output in Exotic Mangrove Species over Two Decades, 6 Frontiers in Forests and Global Change, art. 1183432, Methods, Results & Discussion (2023). Monthly litterfall observations span 1999-2019. Exotic status is relative to Futian.",
       "runs": [
         {
           "text": "Zijian Huang et al., "
@@ -2143,13 +2314,20 @@
           "italic": true
         },
         {
-          "text": ", 6 FRONTIERS IN FORESTS AND GLOBAL CHANGE, art. 1183432, Methods, Results & Discussion (2023). Monthly litterfall observations span 1999-2019. Exotic status is relative to Futian."
+          "text": ", 6 "
+        },
+        {
+          "text": "Frontiers in Forests and Global Change",
+          "smallCaps": true
+        },
+        {
+          "text": ", art. 1183432, Methods, Results & Discussion (2023). Monthly litterfall observations span 1999-2019. Exotic status is relative to Futian."
         }
       ]
     },
     {
       "number": 39,
-      "text": "Chi-Yeung Choi et al., An Emerging Coastal Wetland Management Dilemma Between Mangrove Expansion and Shorebird Conservation, 36 CONSERVATION BIOLOGY, art. e13905 (2022). The analysis includes a habitat-sensitive site-selection framework.",
+      "text": "Chi-Yeung Choi et al., An Emerging Coastal Wetland Management Dilemma Between Mangrove Expansion and Shorebird Conservation, 36 Conservation Biology, art. e13905 (2022). The analysis includes a habitat-sensitive site-selection framework.",
       "runs": [
         {
           "text": "Chi-Yeung Choi et al., "
@@ -2159,7 +2337,14 @@
           "italic": true
         },
         {
-          "text": ", 36 CONSERVATION BIOLOGY, art. e13905 (2022). The analysis includes a habitat-sensitive site-selection framework."
+          "text": ", 36 "
+        },
+        {
+          "text": "Conservation Biology",
+          "smallCaps": true
+        },
+        {
+          "text": ", art. e13905 (2022). The analysis includes a habitat-sensitive site-selection framework."
         }
       ]
     },
@@ -2181,19 +2366,27 @@
     },
     {
       "number": 41,
-      "text": "HONG KONG BIRD WATCHING SOCIETY, COMMENTS ON THE EIA REPORT FOR SAN TIN/LOK MA CHAU DEVELOPMENT NODE §§ 23-25, 28, at 28-31 (Mar. 2, 2024), https://cms.hkbws.org.hk/cms/phocadownload/submissions/EIA/20240302_STLMC_EIA_HKBWS.pdf.",
+      "text": "Hong Kong Bird Watching Society, Comments on the EIA Report for San Tin/Lok Ma Chau Development Node §§ 23-25, 28, at 28-31 (Mar. 2, 2024), https://cms.hkbws.org.hk/cms/phocadownload/submissions/EIA/20240302_STLMC_EIA_HKBWS.pdf.",
       "runs": [
         {
-          "text": "HONG KONG BIRD WATCHING SOCIETY, COMMENTS ON THE EIA REPORT FOR SAN TIN/LOK MA CHAU DEVELOPMENT NODE §§ 23-25, 28, at 28-31 (Mar. 2, 2024), https://cms.hkbws.org.hk/cms/phocadownload/submissions/EIA/20240302_STLMC_EIA_HKBWS.pdf."
+          "text": "Hong Kong Bird Watching Society, Comments on the EIA Report for San Tin/Lok Ma Chau Development Node",
+          "smallCaps": true
+        },
+        {
+          "text": " §§ 23-25, 28, at 28-31 (Mar. 2, 2024), https://cms.hkbws.org.hk/cms/phocadownload/submissions/EIA/20240302_STLMC_EIA_HKBWS.pdf."
         }
       ]
     },
     {
       "number": 42,
-      "text": "HONG KONG BIRD WATCHING SOCIETY, supra note 41, § 23, at 28.",
+      "text": "Hong Kong Bird Watching Society, supra note 41, § 23, at 28.",
       "runs": [
         {
-          "text": "HONG KONG BIRD WATCHING SOCIETY, "
+          "text": "Hong Kong Bird Watching Society",
+          "smallCaps": true
+        },
+        {
+          "text": ", "
         },
         {
           "text": "supra",
@@ -2219,10 +2412,14 @@
     },
     {
       "number": 44,
-      "text": "DIRECTOR OF ENVIRONMENTAL PROTECTION, supra note 1, annex 1, conditions 1, 4-6, at 3-4. This is an EIA-report approval under section 8(3), distinct from environmental permits for individual designated works.",
+      "text": "Director of Environmental Protection, supra note 1, annex 1, conditions 1, 4-6, at 3-4. This is an EIA-report approval under section 8(3), distinct from environmental permits for individual designated works.",
       "runs": [
         {
-          "text": "DIRECTOR OF ENVIRONMENTAL PROTECTION, "
+          "text": "Director of Environmental Protection",
+          "smallCaps": true
+        },
+        {
+          "text": ", "
         },
         {
           "text": "supra",
@@ -2248,10 +2445,14 @@
     },
     {
       "number": 46,
-      "text": "ENVIRONMENTAL PROTECTION DEPARTMENT, supra note 17, annex 16, ¶¶ 5.4.2-5.4.5(g), at 58-59. Paragraph 5.4.3 expresses a preference for mitigation on site and before the works. Paragraph 5.4.5 governs off-site compensation, including confirmation of feasibility, reliability, design, timescale, monitoring, management, and maintenance during the assessment.",
+      "text": "Environmental Protection Department, supra note 17, annex 16, ¶¶ 5.4.2-5.4.5(g), at 58-59. Paragraph 5.4.3 expresses a preference for mitigation on site and before the works. Paragraph 5.4.5 governs off-site compensation, including confirmation of feasibility, reliability, design, timescale, monitoring, management, and maintenance during the assessment.",
       "runs": [
         {
-          "text": "ENVIRONMENTAL PROTECTION DEPARTMENT, "
+          "text": "Environmental Protection Department",
+          "smallCaps": true
+        },
+        {
+          "text": ", "
         },
         {
           "text": "supra",
@@ -2291,14 +2492,21 @@
     },
     {
       "number": 50,
-      "text": "See supra notes 11, 18, 25, 29-30 and accompanying text; ENVIRONMENTAL PROTECTION DEPARTMENT, supra note 17, annex 16, ¶ 5.4.3; Wetland Protection Law of the People's Republic of China art. 21 (2021).",
+      "text": "See supra notes 11, 18, 25, 29-30 and accompanying text; Environmental Protection Department, supra note 17, annex 16, ¶ 5.4.3; Wetland Protection Law of the People's Republic of China art. 21 (2021).",
       "runs": [
         {
           "text": "See supra",
           "italic": true
         },
         {
-          "text": " notes 11, 18, 25, 29-30 and accompanying text; ENVIRONMENTAL PROTECTION DEPARTMENT, "
+          "text": " notes 11, 18, 25, 29-30 and accompanying text; "
+        },
+        {
+          "text": "Environmental Protection Department",
+          "smallCaps": true
+        },
+        {
+          "text": ", "
         },
         {
           "text": "supra",
@@ -2320,17 +2528,31 @@
     },
     {
       "number": 52,
-      "text": "Wetland Protection Law of the People's Republic of China art. 36 (2021); MINISTRY OF NATURAL RESOURCES & NATIONAL FORESTRY & GRASSLAND ADMINISTRATION, supra note 13, action 2; Guangdong Wetland Protection Regulation arts. 24, 30, 35 (as amended Nov. 30, 2022), GUANGDONG PROVINCIAL PEOPLE'S CONGRESS STANDING COMMITTEE GAZETTE, No. 8 of 2022, at 68-70 (Jan. 6, 2023). Article 36 addresses damage to lawful rights; it does not grant every informal user a compensation entitlement.",
+      "text": "Wetland Protection Law of the People's Republic of China art. 36 (2021); Ministry of Natural Resources & National Forestry & Grassland Administration, supra note 13, action 2; Guangdong Wetland Protection Regulation arts. 24, 30, 35 (as amended Nov. 30, 2022), Guangdong Provincial People's Congress Standing Committee Gazette, No. 8 of 2022, at 68-70 (Jan. 6, 2023). Article 36 addresses damage to lawful rights; it does not grant every informal user a compensation entitlement.",
       "runs": [
         {
-          "text": "Wetland Protection Law of the People's Republic of China art. 36 (2021); MINISTRY OF NATURAL RESOURCES & NATIONAL FORESTRY & GRASSLAND ADMINISTRATION, "
+          "text": "Wetland Protection Law of the People's Republic of China art. 36 (2021); "
+        },
+        {
+          "text": "Ministry of Natural Resources & National Forestry & Grassland Administration",
+          "smallCaps": true
+        },
+        {
+          "text": ", "
         },
         {
           "text": "supra",
           "italic": true
         },
         {
-          "text": " note 13, action 2; Guangdong Wetland Protection Regulation arts. 24, 30, 35 (as amended Nov. 30, 2022), GUANGDONG PROVINCIAL PEOPLE'S CONGRESS STANDING COMMITTEE GAZETTE, No. 8 of 2022, at 68-70 (Jan. 6, 2023). Article 36 addresses damage to lawful rights; it does not grant every informal user a compensation entitlement."
+          "text": " note 13, action 2; Guangdong Wetland Protection Regulation arts. 24, 30, 35 (as amended Nov. 30, 2022), "
+        },
+        {
+          "text": "Guangdong Provincial People's Congress Standing Committee Gazette",
+          "smallCaps": true
+        },
+        {
+          "text": ", No. 8 of 2022, at 68-70 (Jan. 6, 2023). Article 36 addresses damage to lawful rights; it does not grant every informal user a compensation entitlement."
         }
       ]
     },
@@ -2359,10 +2581,21 @@
     },
     {
       "number": 54,
-      "text": "U.S. GOVERNMENT ACCOUNTABILITY OFFICE, GAO-05-898, WETLANDS PROTECTION: CORPS OF ENGINEERS DOES NOT HAVE AN EFFECTIVE OVERSIGHT APPROACH TO ENSURE THAT COMPENSATORY MITIGATION IS OCCURRING, Highlights (2005). The seven-district review found monitoring requirements in eighty-nine of 152 permittee-mitigation files, receipt evidence in twenty-one, and inspection evidence in fifteen percent of the 152 files.",
+      "text": "U.S. Government Accountability Office, GAO-05-898, Wetlands Protection: Corps of Engineers Does Not Have an Effective Oversight Approach to Ensure that Compensatory Mitigation Is Occurring, Highlights (2005). The seven-district review found monitoring requirements in eighty-nine of 152 permittee-mitigation files, receipt evidence in twenty-one, and inspection evidence in fifteen percent of the 152 files.",
       "runs": [
         {
-          "text": "U.S. GOVERNMENT ACCOUNTABILITY OFFICE, GAO-05-898, WETLANDS PROTECTION: CORPS OF ENGINEERS DOES NOT HAVE AN EFFECTIVE OVERSIGHT APPROACH TO ENSURE THAT COMPENSATORY MITIGATION IS OCCURRING, Highlights (2005). The seven-district review found monitoring requirements in eighty-nine of 152 permittee-mitigation files, receipt evidence in twenty-one, and inspection evidence in fifteen percent of the 152 files."
+          "text": "U.S. Government Accountability Office, GAO",
+          "smallCaps": true
+        },
+        {
+          "text": "-05-898, "
+        },
+        {
+          "text": "Wetlands Protection: Corps of Engineers Does Not Have an Effective Oversight Approach to Ensure that Compensatory Mitigation Is Occurring",
+          "smallCaps": true
+        },
+        {
+          "text": ", Highlights (2005). The seven-district review found monitoring requirements in eighty-nine of 152 permittee-mitigation files, receipt evidence in twenty-one, and inspection evidence in fifteen percent of the 152 files."
         }
       ]
     }
