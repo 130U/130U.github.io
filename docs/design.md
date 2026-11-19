@@ -272,8 +272,11 @@ manuscripts, as in their PDFs.
 Legal articles keep the source title, subtitle, author, date, abstract, chapter
 numbering, paragraph order, citations, and acknowledgments. Chapters are H2 headings in
 the heading role at weight 400 and subsections H3 headings in the item-title role;
-italics inside subsection headings render upright. Citations, including text marked as
-small capitals, use the reading size. Numbered footnote references open the note in a
+italics inside subsection headings render upright. Citations use the reading size. The
+manuscripts write a citation's small-capitals fields (authors and titles of books,
+periodicals, institutional authors) in capitals; the page sets them in their proper case
+in Source Serif 4's own small capitals, with acronyms, initials and Roman numerals at full
+height, as a printed law review does. Numbered footnote references open the note in a
 native dialog: centered on desktop, a bottom sheet with 44px controls on phones. Escape,
 the backdrop, and Close return focus to the cited passage; View in Footnotes focuses the
 full endnote. Full notes and two-way links work without JavaScript.
@@ -347,8 +350,8 @@ for each on a shared axis.
 
 ### Research tables
 
-Research tables share the figures' frame. A manuscript caption ("Table N.") becomes the
-title inside the frame; the header is a faintly tinted band in label type over a firm
+Research and legal tables share the figures' frame. Every table carries a manuscript
+caption ("Table N." and one sentence), which becomes the title inside the frame; the header is a faintly tinted band in label type over a firm
 rule; rows part on hairlines; numeric columns align right in tabular figures, while
 their headings keep proportional figures. The hovered row and column take a quiet tint
 and the hovered column's header turns blue; a row or column the table emphasizes carries
@@ -479,5 +482,5 @@ the 768, 1024, and 1200px breakpoints and iPad portrait and landscape sizes; che
 keyboard use, enlarged text, reduced motion, and pages without JavaScript. Use the
 shared tokens in `app/globals.css`, focused CSS Modules for local surfaces, and semantic
 HTML, and match the existing type, measure, and spacing before adding a new pattern. The
-[architecture viewer](../architecture/) is a separate technical reference with its own
-light and dark themes.
+[architecture viewer](../architecture/) is a technical reference drawn in the site's
+palette: paper, ink and hairlines, square corners, one theme.

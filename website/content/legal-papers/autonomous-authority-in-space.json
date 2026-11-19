@@ -1636,19 +1636,34 @@
   "footnotes": [
     {
       "number": 1,
-      "text": "TYLER FELGENHAUER ET AL., SOLAR RADIATION MODIFICATION: A RISK-RISK ANALYSIS 13-16 & tbls. 1-2 (2022), https://www.c2g2.net/wp-content/uploads/202203-C2G-RR-Full.pdf. See generally RISK VS. RISK: TRADEOFFS IN PROTECTING HEALTH AND THE ENVIRONMENT (John D. Graham & Jonathan B. Wiener eds., 1995).",
+      "text": "Tyler Felgenhauer et al., Solar Radiation Modification: A Risk-Risk Analysis 13-16 & tbls. 1-2 (2022), https://www.c2g2.net/wp-content/uploads/202203-C2G-RR-Full.pdf. See generally Risk vs. Risk: Tradeoffs in Protecting Health and the Environment (John D. Graham & Jonathan B. Wiener eds., 1995).",
       "runs": [
         {
-          "text": "TYLER FELGENHAUER ET AL., SOLAR RADIATION MODIFICATION: A RISK-RISK ANALYSIS 13-16 & tbls. 1-2 (2022), https://www.c2g2.net/wp-content/uploads/202203-C2G-RR-Full.pdf. See generally RISK VS. RISK: TRADEOFFS IN PROTECTING HEALTH AND THE ENVIRONMENT (John D. Graham & Jonathan B. Wiener eds., 1995)."
+          "text": "Tyler Felgenhauer et al., Solar Radiation Modification: A Risk-Risk Analysis",
+          "smallCaps": true
+        },
+        {
+          "text": " 13-16 & tbls. 1-2 (2022), https://www.c2g2.net/wp-content/uploads/202203-C2G-RR-Full.pdf. See generally "
+        },
+        {
+          "text": "Risk vs. Risk: Tradeoffs in Protecting Health and the Environment",
+          "smallCaps": true
+        },
+        {
+          "text": " (John D. Graham & Jonathan B. Wiener eds., 1995)."
         }
       ]
     },
     {
       "number": 2,
-      "text": "FELGENHAUER ET AL., supra note 1, at 13-16 & tbls. 1-2.",
+      "text": "Felgenhauer ET AL., supra note 1, at 13-16 & tbls. 1-2.",
       "runs": [
         {
-          "text": "FELGENHAUER ET AL., "
+          "text": "Felgenhauer",
+          "smallCaps": true
+        },
+        {
+          "text": " ET AL., "
         },
         {
           "text": "supra",
@@ -1661,7 +1676,7 @@
     },
     {
       "number": 3,
-      "text": "Filippo Santoni de Sio & Jeroen van den Hoven, Meaningful Human Control over Autonomous Systems: A Philosophical Account, 5 FRONTIERS ROBOTICS & A.I. art. 15, §§ \"Tracking,\" \"Tracing\" (2018).",
+      "text": "Filippo Santoni de Sio & Jeroen van den Hoven, Meaningful Human Control over Autonomous Systems: A Philosophical Account, 5 Frontiers Robotics & A.I. art. 15, §§ \"Tracking,\" \"Tracing\" (2018).",
       "runs": [
         {
           "text": "Filippo Santoni de Sio & Jeroen van den Hoven, "
@@ -1671,7 +1686,14 @@
           "italic": true
         },
         {
-          "text": ", 5 FRONTIERS ROBOTICS & A.I. art. 15, §§ \"Tracking,\" \"Tracing\" (2018)."
+          "text": ", 5 "
+        },
+        {
+          "text": "Frontiers Robotics & A.I.",
+          "smallCaps": true
+        },
+        {
+          "text": " art. 15, §§ \"Tracking,\" \"Tracing\" (2018)."
         }
       ]
     },
@@ -1731,10 +1753,17 @@
     },
     {
       "number": 10,
-      "text": "Int'l Law Comm'n, Draft Articles on Responsibility of States for Internationally Wrongful Acts, with Commentaries, arts. 2, 4, 8, 55, in REPORT OF THE INTERNATIONAL LAW COMMISSION ON THE WORK OF ITS FIFTY-THIRD SESSION, at 34, 40, 47-48, 140-41, U.N. Doc. A/56/10 (2001). The articles address general responsibility rules and their relationship to special regimes; the application to Article VI is the analysis advanced here.",
+      "text": "Int'l Law Comm'n, Draft Articles on Responsibility of States for Internationally Wrongful Acts, with Commentaries, arts. 2, 4, 8, 55, in Report of the International Law Commission on the Work of Its Fifty-Third Session, at 34, 40, 47-48, 140-41, U.N. Doc. A/56/10 (2001). The articles address general responsibility rules and their relationship to special regimes; the application to Article VI is the analysis advanced here.",
       "runs": [
         {
-          "text": "Int'l Law Comm'n, Draft Articles on Responsibility of States for Internationally Wrongful Acts, with Commentaries, arts. 2, 4, 8, 55, in REPORT OF THE INTERNATIONAL LAW COMMISSION ON THE WORK OF ITS FIFTY-THIRD SESSION, at 34, 40, 47-48, 140-41, U.N. Doc. A/56/10 (2001). The articles address general responsibility rules and their relationship to special regimes; the application to Article VI is the analysis advanced here."
+          "text": "Int'l Law Comm'n, Draft Articles on Responsibility of States for Internationally Wrongful Acts, with Commentaries, arts. 2, 4, 8, 55, in "
+        },
+        {
+          "text": "Report of the International Law Commission on the Work of Its Fifty-Third Session",
+          "smallCaps": true
+        },
+        {
+          "text": ", at 34, 40, 47-48, 140-41, U.N. Doc. A/56/10 (2001). The articles address general responsibility rules and their relationship to special regimes; the application to Article VI is the analysis advanced here."
         }
       ]
     },
@@ -1858,10 +1887,14 @@
     },
     {
       "number": 21,
-      "text": "NAT'L AERONAUTICS & SPACE ADMIN., JET PROPULSION LAB., Remote Agent Experiment Meets All Objectives (June 7, 1999), https://www.jpl.nasa.gov/news/remote-agent-experiment-meets-all-objectives/.",
+      "text": "Nat'l Aeronautics & Space Admin., Jet Propulsion Lab., Remote Agent Experiment Meets All Objectives (June 7, 1999), https://www.jpl.nasa.gov/news/remote-agent-experiment-meets-all-objectives/.",
       "runs": [
         {
-          "text": "NAT'L AERONAUTICS & SPACE ADMIN., JET PROPULSION LAB., "
+          "text": "Nat'l Aeronautics & Space Admin., Jet Propulsion Lab.",
+          "smallCaps": true
+        },
+        {
+          "text": ", "
         },
         {
           "text": "Remote Agent Experiment Meets All Objectives",
@@ -1874,7 +1907,7 @@
     },
     {
       "number": 22,
-      "text": "Raymond Francis et al., AEGIS Autonomous Targeting for ChemCam on Mars Science Laboratory: Deployment and Results of Initial Science Team Use, 2 SCI. ROBOTICS eaan4582, abstract (2017).",
+      "text": "Raymond Francis et al., AEGIS Autonomous Targeting for ChemCam on Mars Science Laboratory: Deployment and Results of Initial Science Team Use, 2 Sci. Robotics eaan4582, abstract (2017).",
       "runs": [
         {
           "text": "Raymond Francis et al., "
@@ -1884,7 +1917,14 @@
           "italic": true
         },
         {
-          "text": ", 2 SCI. ROBOTICS eaan4582, abstract (2017)."
+          "text": ", 2 "
+        },
+        {
+          "text": "Sci. Robotics",
+          "smallCaps": true
+        },
+        {
+          "text": " eaan4582, abstract (2017)."
         }
       ]
     },
@@ -1906,10 +1946,14 @@
     },
     {
       "number": 24,
-      "text": "NAT'L AERONAUTICS & SPACE ADMIN., SOFTWARE ENGINEERING REQUIREMENTS, NPR 7150.2D, preface P.2, §§ 3.6-3.7 (Mar. 8, 2022).",
+      "text": "Nat'l Aeronautics & Space Admin., Software Engineering Requirements, NPR 7150.2D, preface P.2, §§ 3.6-3.7 (Mar. 8, 2022).",
       "runs": [
         {
-          "text": "NAT'L AERONAUTICS & SPACE ADMIN., SOFTWARE ENGINEERING REQUIREMENTS, NPR 7150.2D, preface P.2, §§ 3.6-3.7 (Mar. 8, 2022)."
+          "text": "Nat'l Aeronautics & Space Admin., Software Engineering Requirements, NPR",
+          "smallCaps": true
+        },
+        {
+          "text": " 7150.2D, preface P.2, §§ 3.6-3.7 (Mar. 8, 2022)."
         }
       ]
     },
@@ -1990,16 +2034,20 @@
     },
     {
       "number": 31,
-      "text": "GERMAN FEDERAL BUREAU OF AIRCRAFT ACCIDENTS INVESTIGATION, INVESTIGATION REPORT AX001-1-2/02 (May 2004).",
+      "text": "German Federal Bureau of Aircraft Accidents Investigation, Investigation Report AX001-1-2/02 (May 2004).",
       "runs": [
         {
-          "text": "GERMAN FEDERAL BUREAU OF AIRCRAFT ACCIDENTS INVESTIGATION, INVESTIGATION REPORT AX001-1-2/02 (May 2004)."
+          "text": "German Federal Bureau of Aircraft Accidents Investigation, Investigation Report",
+          "smallCaps": true
+        },
+        {
+          "text": " AX001-1-2/02 (May 2004)."
         }
       ]
     },
     {
       "number": 32,
-      "text": "Guglielmo S. Aglietti et al., RemoveDEBRIS: An In-Orbit Demonstration of Technologies for the Removal of Space Debris, 124 AERONAUTICAL J. 1, §§ 3-7 (2020).",
+      "text": "Guglielmo S. Aglietti et al., RemoveDEBRIS: An In-Orbit Demonstration of Technologies for the Removal of Space Debris, 124 Aeronautical J. 1, §§ 3-7 (2020).",
       "runs": [
         {
           "text": "Guglielmo S. Aglietti et al., "
@@ -2009,7 +2057,14 @@
           "italic": true
         },
         {
-          "text": ", 124 AERONAUTICAL J. 1, §§ 3-7 (2020)."
+          "text": ", 124 "
+        },
+        {
+          "text": "Aeronautical J.",
+          "smallCaps": true
+        },
+        {
+          "text": " 1, §§ 3-7 (2020)."
         }
       ]
     },
@@ -2031,7 +2086,7 @@
     },
     {
       "number": 34,
-      "text": "Ann N. Allen et al., Bryde's Whales Produce Biotwang Calls, Which Occur Seasonally in Long-Term Acoustic Recordings from the Central and Western North Pacific, 11 FRONTIERS MARINE SCI. art. 1394695, §§ 2-3 (2024).",
+      "text": "Ann N. Allen et al., Bryde's Whales Produce Biotwang Calls, Which Occur Seasonally in Long-Term Acoustic Recordings from the Central and Western North Pacific, 11 Frontiers Marine Sci. art. 1394695, §§ 2-3 (2024).",
       "runs": [
         {
           "text": "Ann N. Allen et al., "
@@ -2041,13 +2096,20 @@
           "italic": true
         },
         {
-          "text": ", 11 FRONTIERS MARINE SCI. art. 1394695, §§ 2-3 (2024)."
+          "text": ", 11 "
+        },
+        {
+          "text": "Frontiers Marine Sci.",
+          "smallCaps": true
+        },
+        {
+          "text": " art. 1394695, §§ 2-3 (2024)."
         }
       ]
     },
     {
       "number": 35,
-      "text": "Peter Xiangyuan Ma et al., A Deep-Learning Search for Technosignatures from 820 Nearby Stars, 7 NAT. ASTRONOMY 492, §§ \"Training Procedure,\" \"Model Evaluation and Demonstration,\" \"Search Results,\" \"Discussion\" (2023) (author manuscript), https://arxiv.org/abs/2301.12670v1.",
+      "text": "Peter Xiangyuan Ma et al., A Deep-Learning Search for Technosignatures from 820 Nearby Stars, 7 Nat. Astronomy 492, §§ \"Training Procedure,\" \"Model Evaluation and Demonstration,\" \"Search Results,\" \"Discussion\" (2023) (author manuscript), https://arxiv.org/abs/2301.12670v1.",
       "runs": [
         {
           "text": "Peter Xiangyuan Ma et al., "
@@ -2057,13 +2119,20 @@
           "italic": true
         },
         {
-          "text": ", 7 NAT. ASTRONOMY 492, §§ \"Training Procedure,\" \"Model Evaluation and Demonstration,\" \"Search Results,\" \"Discussion\" (2023) (author manuscript), https://arxiv.org/abs/2301.12670v1."
+          "text": ", 7 "
+        },
+        {
+          "text": "Nat. Astronomy",
+          "smallCaps": true
+        },
+        {
+          "text": " 492, §§ \"Training Procedure,\" \"Model Evaluation and Demonstration,\" \"Search Results,\" \"Discussion\" (2023) (author manuscript), https://arxiv.org/abs/2301.12670v1."
         }
       ]
     },
     {
       "number": 36,
-      "text": "Sofia Z. Sheikh et al., Analysis of the Breakthrough Listen Signal of Interest blc1 with a Technosignature Verification Framework, 5 NAT. ASTRONOMY 1153, §§ 4-5 (2021) (author manuscript), https://arxiv.org/abs/2111.06350v1.",
+      "text": "Sofia Z. Sheikh et al., Analysis of the Breakthrough Listen Signal of Interest blc1 with a Technosignature Verification Framework, 5 Nat. Astronomy 1153, §§ 4-5 (2021) (author manuscript), https://arxiv.org/abs/2111.06350v1.",
       "runs": [
         {
           "text": "Sofia Z. Sheikh et al., "
@@ -2073,13 +2142,20 @@
           "italic": true
         },
         {
-          "text": ", 5 NAT. ASTRONOMY 1153, §§ 4-5 (2021) (author manuscript), https://arxiv.org/abs/2111.06350v1."
+          "text": ", 5 "
+        },
+        {
+          "text": "Nat. Astronomy",
+          "smallCaps": true
+        },
+        {
+          "text": " 1153, §§ 4-5 (2021) (author manuscript), https://arxiv.org/abs/2111.06350v1."
         }
       ]
     },
     {
       "number": 37,
-      "text": "Matt Lebofsky et al., The Breakthrough Listen Search for Intelligent Life: Public Data, Formats, Reduction, and Archiving, 131 PUBL'NS ASTRONOMICAL SOC'Y PAC. 124505, §§ I, II.1-II.3, III (2019) (author manuscript, Dec. 29, 2020), https://arxiv.org/abs/1906.07391v3.",
+      "text": "Matt Lebofsky et al., The Breakthrough Listen Search for Intelligent Life: Public Data, Formats, Reduction, and Archiving, 131 Publ'ns Astronomical Soc'y Pac. 124505, §§ I, II.1-II.3, III (2019) (author manuscript, Dec. 29, 2020), https://arxiv.org/abs/1906.07391v3.",
       "runs": [
         {
           "text": "Matt Lebofsky et al., "
@@ -2089,7 +2165,14 @@
           "italic": true
         },
         {
-          "text": ", 131 PUBL'NS ASTRONOMICAL SOC'Y PAC. 124505, §§ I, II.1-II.3, III (2019) (author manuscript, Dec. 29, 2020), https://arxiv.org/abs/1906.07391v3."
+          "text": ", 131 "
+        },
+        {
+          "text": "Publ'ns Astronomical Soc'y Pac.",
+          "smallCaps": true
+        },
+        {
+          "text": " 124505, §§ I, II.1-II.3, III (2019) (author manuscript, Dec. 29, 2020), https://arxiv.org/abs/1906.07391v3."
         }
       ]
     },
@@ -2120,10 +2203,21 @@
     },
     {
       "number": 40,
-      "text": "RESTATEMENT (THIRD) OF TORTS: LIABILITY FOR PHYSICAL AND EMOTIONAL HARM §§ 14, 16 (AM. L. INST. 2010).",
+      "text": "Restatement (Third) of Torts: Liability for Physical and Emotional Harm §§ 14, 16 (Am. L. Inst. 2010).",
       "runs": [
         {
-          "text": "RESTATEMENT (THIRD) OF TORTS: LIABILITY FOR PHYSICAL AND EMOTIONAL HARM §§ 14, 16 (AM. L. INST. 2010)."
+          "text": "Restatement (Third) of Torts: Liability for Physical and Emotional Harm",
+          "smallCaps": true
+        },
+        {
+          "text": " §§ 14, 16 ("
+        },
+        {
+          "text": "Am. L. Inst.",
+          "smallCaps": true
+        },
+        {
+          "text": " 2010)."
         }
       ]
     },
@@ -2154,7 +2248,7 @@
     },
     {
       "number": 43,
-      "text": "Samuel J. Rascoff & Richard L. Revesz, The Biases of Risk Tradeoff Analysis: Towards Parity in Environmental and Health-and-Safety Regulation, 69 U. CHI. L. REV. 1763 (2002).",
+      "text": "Samuel J. Rascoff & Richard L. Revesz, The Biases of Risk Tradeoff Analysis: Towards Parity in Environmental and Health-and-Safety Regulation, 69 U. Chi. L. Rev. 1763 (2002).",
       "runs": [
         {
           "text": "Samuel J. Rascoff & Richard L. Revesz, "
@@ -2164,16 +2258,27 @@
           "italic": true
         },
         {
-          "text": ", 69 U. CHI. L. REV. 1763 (2002)."
+          "text": ", 69 "
+        },
+        {
+          "text": "U. Chi. L. Rev.",
+          "smallCaps": true
+        },
+        {
+          "text": " 1763 (2002)."
         }
       ]
     },
     {
       "number": 44,
-      "text": "NATIONAL AERONAUTICS & SPACE ADMINISTRATION, OVERVIEW OF THE DART MISHAP INVESTIGATION RESULTS 6 (2006), https://www.nasa.gov/pdf/148072main_DART_mishap_overview.pdf.",
+      "text": "National Aeronautics & Space Administration, Overview of the DART Mishap Investigation Results 6 (2006), https://www.nasa.gov/pdf/148072main_DART_mishap_overview.pdf.",
       "runs": [
         {
-          "text": "NATIONAL AERONAUTICS & SPACE ADMINISTRATION, OVERVIEW OF THE DART MISHAP INVESTIGATION RESULTS 6 (2006), https://www.nasa.gov/pdf/148072main_DART_mishap_overview.pdf."
+          "text": "National Aeronautics & Space Administration, Overview of the DART Mishap Investigation Results",
+          "smallCaps": true
+        },
+        {
+          "text": " 6 (2006), https://www.nasa.gov/pdf/148072main_DART_mishap_overview.pdf."
         }
       ]
     }

@@ -21,6 +21,8 @@ type PaperBlock = PaperParagraph & {
   id?: string;
   /** A table's rows; the first row holds the column headings. */
   rows?: PaperParagraph[][];
+  /** A table's numbered caption, "Table N." and its sentence. */
+  caption?: PaperParagraph;
 };
 
 export type LegalPaper = {

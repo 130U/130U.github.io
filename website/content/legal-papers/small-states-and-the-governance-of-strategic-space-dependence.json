@@ -1026,7 +1026,16 @@
             ]
           }
         ]
-      ]
+      ],
+      "caption": {
+        "text": "Table 1. The entitlements in the three cases.",
+        "runs": [
+          {
+            "text": "Table 1. The entitlements in the three cases.",
+            "bold": true
+          }
+        ]
+      }
     },
     {
       "type": "paragraph",
@@ -1343,17 +1352,28 @@
   "footnotes": [
     {
       "number": 1,
-      "text": "NORWEGIAN MINISTRY OF DEFENCE, Norway Switches on Arctic Broadband Network (Dec. 18, 2024), https://www.regjeringen.no/en/whats-new/norway-activates-arctic-broadband-network/id3079294/; U.S. SPACE SYSTEMS COMMAND, Enhanced Polar System-Recapitalization (EPS-R) Payloads Launched for U.S. Space Force 1-2 (Aug. 15, 2024), https://www.ssc.spaceforce.mil/Portals/3/EPS-R%20Launch%20Norway.pdf.",
+      "text": "Norwegian Ministry of Defence, Norway Switches on Arctic Broadband Network (Dec. 18, 2024), https://www.regjeringen.no/en/whats-new/norway-activates-arctic-broadband-network/id3079294/; U.S. Space Systems Command, Enhanced Polar System-Recapitalization (EPS-R) Payloads Launched for U.S. Space Force 1-2 (Aug. 15, 2024), https://www.ssc.spaceforce.mil/Portals/3/EPS-R%20Launch%20Norway.pdf.",
       "runs": [
         {
-          "text": "NORWEGIAN MINISTRY OF DEFENCE, "
+          "text": "Norwegian Ministry of Defence",
+          "smallCaps": true
+        },
+        {
+          "text": ", "
         },
         {
           "text": "Norway Switches on Arctic Broadband Network",
           "italic": true
         },
         {
-          "text": " (Dec. 18, 2024), https://www.regjeringen.no/en/whats-new/norway-activates-arctic-broadband-network/id3079294/; U.S. SPACE SYSTEMS COMMAND, "
+          "text": " (Dec. 18, 2024), https://www.regjeringen.no/en/whats-new/norway-activates-arctic-broadband-network/id3079294/; "
+        },
+        {
+          "text": "U.S. Space Systems Command",
+          "smallCaps": true
+        },
+        {
+          "text": ", "
         },
         {
           "text": "Enhanced Polar System-Recapitalization (EPS-R) Payloads Launched for U.S. Space Force",
@@ -1382,7 +1402,7 @@
     },
     {
       "number": 3,
-      "text": "Tom Long, Small States, Great Power? Gaining Influence Through Intrinsic, Derivative, and Collective Power, 19 INT'L STUD. REV. 185, 185-205 (2017).",
+      "text": "Tom Long, Small States, Great Power? Gaining Influence Through Intrinsic, Derivative, and Collective Power, 19 Int'l Stud. Rev. 185, 185-205 (2017).",
       "runs": [
         {
           "text": "Tom Long, "
@@ -1392,13 +1412,20 @@
           "italic": true
         },
         {
-          "text": ", 19 INT'L STUD. REV. 185, 185-205 (2017)."
+          "text": ", 19 "
+        },
+        {
+          "text": "Int'l Stud. Rev.",
+          "smallCaps": true
+        },
+        {
+          "text": " 185, 185-205 (2017)."
         }
       ]
     },
     {
       "number": 4,
-      "text": "Henry Farrell & Abraham L. Newman, Weaponized Interdependence: How Global Economic Networks Shape State Coercion, 44 INT'L SEC. 42, 54-58 (2019).",
+      "text": "Henry Farrell & Abraham L. Newman, Weaponized Interdependence: How Global Economic Networks Shape State Coercion, 44 Int'l Sec. 42, 54-58 (2019).",
       "runs": [
         {
           "text": "Henry Farrell & Abraham L. Newman, "
@@ -1408,13 +1435,20 @@
           "italic": true
         },
         {
-          "text": ", 44 INT'L SEC. 42, 54-58 (2019)."
+          "text": ", 44 "
+        },
+        {
+          "text": "Int'l Sec.",
+          "smallCaps": true
+        },
+        {
+          "text": " 42, 54-58 (2019)."
         }
       ]
     },
     {
       "number": 5,
-      "text": "Wesley Newcomb Hohfeld, Some Fundamental Legal Conceptions as Applied in Judicial Reasoning, 23 YALE L.J. 16 (1913); A.M. Honoré, Ownership, in OXFORD ESSAYS IN JURISPRUDENCE 107 (A.G. Guest ed., 1961).",
+      "text": "Wesley Newcomb Hohfeld, Some Fundamental Legal Conceptions as Applied in Judicial Reasoning, 23 Yale L.J. 16 (1913); A.M. Honoré, Ownership, in Oxford Essays in Jurisprudence 107 (A.G. Guest ed., 1961).",
       "runs": [
         {
           "text": "Wesley Newcomb Hohfeld, "
@@ -1424,20 +1458,34 @@
           "italic": true
         },
         {
-          "text": ", 23 YALE L.J. 16 (1913); A.M. Honoré, "
+          "text": ", 23 "
+        },
+        {
+          "text": "Yale L.J.",
+          "smallCaps": true
+        },
+        {
+          "text": " 16 (1913); A.M. Honoré, "
         },
         {
           "text": "Ownership",
           "italic": true
         },
         {
-          "text": ", in OXFORD ESSAYS IN JURISPRUDENCE 107 (A.G. Guest ed., 1961)."
+          "text": ", in "
+        },
+        {
+          "text": "Oxford Essays in Jurisprudence",
+          "smallCaps": true
+        },
+        {
+          "text": " 107 (A.G. Guest ed., 1961)."
         }
       ]
     },
     {
       "number": 6,
-      "text": "Sanford J. Grossman & Oliver D. Hart, The Costs and Benefits of Ownership: A Theory of Vertical and Lateral Integration, 94 J. POL. ECON. 691 (1986); Oliver Hart & John Moore, Property Rights and the Nature of the Firm, 98 J. POL. ECON. 1119 (1990).",
+      "text": "Sanford J. Grossman & Oliver D. Hart, The Costs and Benefits of Ownership: A Theory of Vertical and Lateral Integration, 94 J. Pol. Econ. 691 (1986); Oliver Hart & John Moore, Property Rights and the Nature of the Firm, 98 J. Pol. Econ. 1119 (1990).",
       "runs": [
         {
           "text": "Sanford J. Grossman & Oliver D. Hart, "
@@ -1447,20 +1495,34 @@
           "italic": true
         },
         {
-          "text": ", 94 J. POL. ECON. 691 (1986); Oliver Hart & John Moore, "
+          "text": ", 94 "
+        },
+        {
+          "text": "J. Pol. Econ.",
+          "smallCaps": true
+        },
+        {
+          "text": " 691 (1986); Oliver Hart & John Moore, "
         },
         {
           "text": "Property Rights and the Nature of the Firm",
           "italic": true
         },
         {
-          "text": ", 98 J. POL. ECON. 1119 (1990)."
+          "text": ", 98 "
+        },
+        {
+          "text": "J. Pol. Econ.",
+          "smallCaps": true
+        },
+        {
+          "text": " 1119 (1990)."
         }
       ]
     },
     {
       "number": 7,
-      "text": "Baldur Thorhallsson, Studying Small States: A Review, 1 SMALL STATES & TERRITORIES 17 (2018).",
+      "text": "Baldur Thorhallsson, Studying Small States: A Review, 1 Small States & Territories 17 (2018).",
       "runs": [
         {
           "text": "Baldur Thorhallsson, "
@@ -1470,13 +1532,20 @@
           "italic": true
         },
         {
-          "text": ", 1 SMALL STATES & TERRITORIES 17 (2018)."
+          "text": ", 1 "
+        },
+        {
+          "text": "Small States & Territories",
+          "smallCaps": true
+        },
+        {
+          "text": " 17 (2018)."
         }
       ]
     },
     {
       "number": 8,
-      "text": "James Murray et al., Observations of Small Debris from the Cosmos 1408 Anti-Satellite Test Using the HUSIR and Goldstone Radars, AMOS CONFERENCE (2022), https://ntrs.nasa.gov/citations/20220011989.",
+      "text": "James Murray et al., Observations of Small Debris from the Cosmos 1408 Anti-Satellite Test Using the HUSIR and Goldstone Radars, AMOS Conference (2022), https://ntrs.nasa.gov/citations/20220011989.",
       "runs": [
         {
           "text": "James Murray et al., "
@@ -1486,23 +1555,41 @@
           "italic": true
         },
         {
-          "text": ", AMOS CONFERENCE (2022), https://ntrs.nasa.gov/citations/20220011989."
+          "text": ", "
+        },
+        {
+          "text": "AMOS Conference",
+          "smallCaps": true
+        },
+        {
+          "text": " (2022), https://ntrs.nasa.gov/citations/20220011989."
         }
       ]
     },
     {
       "number": 9,
-      "text": "VIASAT, KA-SAT Network Cyber Attack Overview (Mar. 30, 2022), https://www.viasat.com/perspectives/corporate/2022/ka-sat-network-cyber-attack-overview/; COUNCIL OF THE EUROPEAN UNION, Russian Cyber Operations Against Ukraine: Declaration by the High Representative on Behalf of the European Union (May 10, 2022), https://www.consilium.europa.eu/en/press/press-releases/2022/05/10/russian-cyber-operations-against-ukraine-declaration-by-the-high-representative-on-behalf-of-the-european-union/.",
+      "text": "Viasat, KA-SAT Network Cyber Attack Overview (Mar. 30, 2022), https://www.viasat.com/perspectives/corporate/2022/ka-sat-network-cyber-attack-overview/; Council of the European Union, Russian Cyber Operations Against Ukraine: Declaration by the High Representative on Behalf of the European Union (May 10, 2022), https://www.consilium.europa.eu/en/press/press-releases/2022/05/10/russian-cyber-operations-against-ukraine-declaration-by-the-high-representative-on-behalf-of-the-european-union/.",
       "runs": [
         {
-          "text": "VIASAT, "
+          "text": "Viasat",
+          "smallCaps": true
+        },
+        {
+          "text": ", "
         },
         {
           "text": "KA-SAT Network Cyber Attack Overview",
           "italic": true
         },
         {
-          "text": " (Mar. 30, 2022), https://www.viasat.com/perspectives/corporate/2022/ka-sat-network-cyber-attack-overview/; COUNCIL OF THE EUROPEAN UNION, "
+          "text": " (Mar. 30, 2022), https://www.viasat.com/perspectives/corporate/2022/ka-sat-network-cyber-attack-overview/; "
+        },
+        {
+          "text": "Council of the European Union",
+          "smallCaps": true
+        },
+        {
+          "text": ", "
         },
         {
           "text": "Russian Cyber Operations Against Ukraine: Declaration by the High Representative on Behalf of the European Union",
@@ -1556,7 +1643,7 @@
     },
     {
       "number": 13,
-      "text": "Frans G. von der Dunk, Space Tourism, Private Spaceflight and the Law: Key Aspects, 27 SPACE POL'Y 146, 148, 152 (2011).",
+      "text": "Frans G. von der Dunk, Space Tourism, Private Spaceflight and the Law: Key Aspects, 27 Space Pol'y 146, 148, 152 (2011).",
       "runs": [
         {
           "text": "Frans G. von der Dunk, "
@@ -1566,7 +1653,14 @@
           "italic": true
         },
         {
-          "text": ", 27 SPACE POL'Y 146, 148, 152 (2011)."
+          "text": ", 27 "
+        },
+        {
+          "text": "Space Pol'y",
+          "smallCaps": true
+        },
+        {
+          "text": " 146, 148, 152 (2011)."
         }
       ]
     },
@@ -1631,10 +1725,17 @@
     },
     {
       "number": 19,
-      "text": "Constitution of the International Telecommunication Union arts. 44-45, 48, Dec. 22, 1992, S. Treaty Doc. No. 104-34 (1996) (as amended in the 2023 basic texts); INTERNATIONAL TELECOMMUNICATION UNION, RADIO REGULATIONS vol. 1, nos. 8.1, 8.3 (2020); Outer Space Treaty, supra note 10, art. II.",
+      "text": "Constitution of the International Telecommunication Union arts. 44-45, 48, Dec. 22, 1992, S. Treaty Doc. No. 104-34 (1996) (as amended in the 2023 basic texts); International Telecommunication Union, Radio Regulations vol. 1, nos. 8.1, 8.3 (2020); Outer Space Treaty, supra note 10, art. II.",
       "runs": [
         {
-          "text": "Constitution of the International Telecommunication Union arts. 44-45, 48, Dec. 22, 1992, S. Treaty Doc. No. 104-34 (1996) (as amended in the 2023 basic texts); INTERNATIONAL TELECOMMUNICATION UNION, RADIO REGULATIONS vol. 1, nos. 8.1, 8.3 (2020); Outer Space Treaty, "
+          "text": "Constitution of the International Telecommunication Union arts. 44-45, 48, Dec. 22, 1992, S. Treaty Doc. No. 104-34 (1996) (as amended in the 2023 basic texts); "
+        },
+        {
+          "text": "International Telecommunication Union, Radio Regulations",
+          "smallCaps": true
+        },
+        {
+          "text": " vol. 1, nos. 8.1, 8.3 (2020); Outer Space Treaty, "
         },
         {
           "text": "supra",
@@ -1647,10 +1748,17 @@
     },
     {
       "number": 20,
-      "text": "Agreement on Technology Safeguards Associated with United States Participation in Space Launches from New Zealand, N.Z.-U.S., June 16, 2016, 2016 N.Z.T.S. 14; NEW ZEALAND MINISTRY OF FOREIGN AFFAIRS & TRADE, Treaty Record B2016-07, Treaty Summary, https://www.treaties.mfat.govt.nz/search/details/t/3858.",
+      "text": "Agreement on Technology Safeguards Associated with United States Participation in Space Launches from New Zealand, N.Z.-U.S., June 16, 2016, 2016 N.Z.T.S. 14; New Zealand Ministry of Foreign Affairs & Trade, Treaty Record B2016-07, Treaty Summary, https://www.treaties.mfat.govt.nz/search/details/t/3858.",
       "runs": [
         {
-          "text": "Agreement on Technology Safeguards Associated with United States Participation in Space Launches from New Zealand, N.Z.-U.S., June 16, 2016, 2016 N.Z.T.S. 14; NEW ZEALAND MINISTRY OF FOREIGN AFFAIRS & TRADE, "
+          "text": "Agreement on Technology Safeguards Associated with United States Participation in Space Launches from New Zealand, N.Z.-U.S., June 16, 2016, 2016 N.Z.T.S. 14; "
+        },
+        {
+          "text": "New Zealand Ministry of Foreign Affairs & Trade",
+          "smallCaps": true
+        },
+        {
+          "text": ", "
         },
         {
           "text": "Treaty Record B2016-07",
@@ -1663,7 +1771,7 @@
     },
     {
       "number": 21,
-      "text": "Phil Twyford, New Space Payload Principles Protect the National Interest, BEEHIVE.GOVT.NZ (Dec. 17, 2019), https://www.beehive.govt.nz/release/new-space-payload-principles-protect-national-interest.",
+      "text": "Phil Twyford, New Space Payload Principles Protect the National Interest, Beehive.govt.nz (Dec. 17, 2019), https://www.beehive.govt.nz/release/new-space-payload-principles-protect-national-interest.",
       "runs": [
         {
           "text": "Phil Twyford, "
@@ -1673,31 +1781,53 @@
           "italic": true
         },
         {
-          "text": ", BEEHIVE.GOVT.NZ (Dec. 17, 2019), https://www.beehive.govt.nz/release/new-space-payload-principles-protect-national-interest."
+          "text": ", "
+        },
+        {
+          "text": "Beehive.govt.nz",
+          "smallCaps": true
+        },
+        {
+          "text": " (Dec. 17, 2019), https://www.beehive.govt.nz/release/new-space-payload-principles-protect-national-interest."
         }
       ]
     },
     {
       "number": 22,
-      "text": "NEW ZEALAND MINISTRY OF BUSINESS, INNOVATION & EMPLOYMENT, REGULATORY IMPACT STATEMENT: THE OUTER SPACE AND HIGH-ALTITUDE ACTIVITIES ACT 2017 REGULATIONS 7-8, ¶¶ 7, 17, 19-21 (Aug. 21, 2017).",
+      "text": "New Zealand Ministry of Business, Innovation & Employment, Regulatory Impact Statement: The Outer Space and High-Altitude Activities Act 2017 Regulations 7-8, ¶¶ 7, 17, 19-21 (Aug. 21, 2017).",
       "runs": [
         {
-          "text": "NEW ZEALAND MINISTRY OF BUSINESS, INNOVATION & EMPLOYMENT, REGULATORY IMPACT STATEMENT: THE OUTER SPACE AND HIGH-ALTITUDE ACTIVITIES ACT 2017 REGULATIONS 7-8, ¶¶ 7, 17, 19-21 (Aug. 21, 2017)."
+          "text": "New Zealand Ministry of Business, Innovation & Employment, Regulatory Impact Statement: The Outer Space and High-Altitude Activities Act",
+          "smallCaps": true
+        },
+        {
+          "text": " 2017 "
+        },
+        {
+          "text": "Regulations",
+          "smallCaps": true
+        },
+        {
+          "text": " 7-8, ¶¶ 7, 17, 19-21 (Aug. 21, 2017)."
         }
       ]
     },
     {
       "number": 23,
-      "text": "BRENDAN HORSLEY, INSPECTOR-GENERAL OF INTELLIGENCE & SECURITY, REPORT INTO A REVIEW OF GCSB AND NZSIS ACTIVITY AND ASSESSMENTS UNDER THE OUTER SPACE AND HIGH-ALTITUDE ACTIVITIES ACT 2017 3-5, 7-13 (Apr. 20, 2021).",
+      "text": "Brendan Horsley, Inspector-General of Intelligence & Security, Report into a Review of GCSB and NZSIS Activity and Assessments Under the Outer Space and High-Altitude Activities Act 2017 3-5, 7-13 (Apr. 20, 2021).",
       "runs": [
         {
-          "text": "BRENDAN HORSLEY, INSPECTOR-GENERAL OF INTELLIGENCE & SECURITY, REPORT INTO A REVIEW OF GCSB AND NZSIS ACTIVITY AND ASSESSMENTS UNDER THE OUTER SPACE AND HIGH-ALTITUDE ACTIVITIES ACT 2017 3-5, 7-13 (Apr. 20, 2021)."
+          "text": "Brendan Horsley, Inspector-General of Intelligence & Security, Report into a Review of GCSB and NZSIS Activity and Assessments Under the Outer Space and High-Altitude Activities Act",
+          "smallCaps": true
+        },
+        {
+          "text": " 2017 3-5, 7-13 (Apr. 20, 2021)."
         }
       ]
     },
     {
       "number": 24,
-      "text": "Stuart Nash, Next Steps Signalled for Space Activity Laws, BEEHIVE.GOVT.NZ (May 12, 2022), https://www.beehive.govt.nz/release/next-steps-signalled-space-activity-laws.",
+      "text": "Stuart Nash, Next Steps Signalled for Space Activity Laws, Beehive.govt.nz (May 12, 2022), https://www.beehive.govt.nz/release/next-steps-signalled-space-activity-laws.",
       "runs": [
         {
           "text": "Stuart Nash, "
@@ -1707,16 +1837,27 @@
           "italic": true
         },
         {
-          "text": ", BEEHIVE.GOVT.NZ (May 12, 2022), https://www.beehive.govt.nz/release/next-steps-signalled-space-activity-laws."
+          "text": ", "
+        },
+        {
+          "text": "Beehive.govt.nz",
+          "smallCaps": true
+        },
+        {
+          "text": " (May 12, 2022), https://www.beehive.govt.nz/release/next-steps-signalled-space-activity-laws."
         }
       ]
     },
     {
       "number": 25,
-      "text": "NEW ZEALAND MINISTRY OF BUSINESS, INNOVATION & EMPLOYMENT, STATUTORY REVIEW OF THE OUTER SPACE AND HIGH-ALTITUDE ACTIVITIES ACT 2017, at 9 tbl.1 & ¶ 31 (2022), https://www.mbie.govt.nz/assets/report-on-the-statutory-review-of-the-oshaa-2017.pdf.",
+      "text": "New Zealand Ministry of Business, Innovation & Employment, Statutory Review of the Outer Space and High-Altitude Activities Act 2017, at 9 tbl.1 & ¶ 31 (2022), https://www.mbie.govt.nz/assets/report-on-the-statutory-review-of-the-oshaa-2017.pdf.",
       "runs": [
         {
-          "text": "NEW ZEALAND MINISTRY OF BUSINESS, INNOVATION & EMPLOYMENT, STATUTORY REVIEW OF THE OUTER SPACE AND HIGH-ALTITUDE ACTIVITIES ACT 2017, at 9 tbl.1 & ¶ 31 (2022), https://www.mbie.govt.nz/assets/report-on-the-statutory-review-of-the-oshaa-2017.pdf."
+          "text": "New Zealand Ministry of Business, Innovation & Employment, Statutory Review of the Outer Space and High-Altitude Activities Act",
+          "smallCaps": true
+        },
+        {
+          "text": " 2017, at 9 tbl.1 & ¶ 31 (2022), https://www.mbie.govt.nz/assets/report-on-the-statutory-review-of-the-oshaa-2017.pdf."
         }
       ]
     },
@@ -1735,10 +1876,14 @@
     },
     {
       "number": 27,
-      "text": "U.S. SPACE SYSTEMS COMMAND, Enhanced Polar System-Recapitalization (EPS-R) Payloads Launched for U.S. Space Force 1-2 (Aug. 15, 2024), https://www.ssc.spaceforce.mil/Portals/3/EPS-R%20Launch%20Norway.pdf.",
+      "text": "U.S. Space Systems Command, Enhanced Polar System-Recapitalization (EPS-R) Payloads Launched for U.S. Space Force 1-2 (Aug. 15, 2024), https://www.ssc.spaceforce.mil/Portals/3/EPS-R%20Launch%20Norway.pdf.",
       "runs": [
         {
-          "text": "U.S. SPACE SYSTEMS COMMAND, "
+          "text": "U.S. Space Systems Command",
+          "smallCaps": true
+        },
+        {
+          "text": ", "
         },
         {
           "text": "Enhanced Polar System-Recapitalization (EPS-R) Payloads Launched for U.S. Space Force",
@@ -1751,17 +1896,28 @@
     },
     {
       "number": 28,
-      "text": "SPACE NORWAY, ASBM Handover Marks an Important Milestone (Oct. 17, 2024), https://spacenorway.com/press-release/asbm-handover-marks-an-important-milestone/; NORWEGIAN MINISTRY OF DEFENCE, Norway Switches on Arctic Broadband Network (Dec. 18, 2024), https://www.regjeringen.no/en/whats-new/norway-activates-arctic-broadband-network/id3079294/.",
+      "text": "Space Norway, ASBM Handover Marks an Important Milestone (Oct. 17, 2024), https://spacenorway.com/press-release/asbm-handover-marks-an-important-milestone/; Norwegian Ministry of Defence, Norway Switches on Arctic Broadband Network (Dec. 18, 2024), https://www.regjeringen.no/en/whats-new/norway-activates-arctic-broadband-network/id3079294/.",
       "runs": [
         {
-          "text": "SPACE NORWAY, "
+          "text": "Space Norway",
+          "smallCaps": true
+        },
+        {
+          "text": ", "
         },
         {
           "text": "ASBM Handover Marks an Important Milestone",
           "italic": true
         },
         {
-          "text": " (Oct. 17, 2024), https://spacenorway.com/press-release/asbm-handover-marks-an-important-milestone/; NORWEGIAN MINISTRY OF DEFENCE, "
+          "text": " (Oct. 17, 2024), https://spacenorway.com/press-release/asbm-handover-marks-an-important-milestone/; "
+        },
+        {
+          "text": "Norwegian Ministry of Defence",
+          "smallCaps": true
+        },
+        {
+          "text": ", "
         },
         {
           "text": "Norway Switches on Arctic Broadband Network",
@@ -1774,46 +1930,69 @@
     },
     {
       "number": 29,
-      "text": "NORWEGIAN MINISTRY OF TRADE, INDUSTRY & FISHERIES, PROP. 25 S (2023-2024), ch. 3, ch. 922, item 95 (2023).",
+      "text": "Norwegian Ministry of Trade, Industry & Fisheries, Prop. 25 S (2023-2024), ch. 3, ch. 922, item 95 (2023).",
       "runs": [
         {
-          "text": "NORWEGIAN MINISTRY OF TRADE, INDUSTRY & FISHERIES, PROP. 25 S (2023-2024), ch. 3, ch. 922, item 95 (2023)."
+          "text": "Norwegian Ministry of Trade, Industry & Fisheries, Prop.",
+          "smallCaps": true
+        },
+        {
+          "text": " 25 S (2023-2024), ch. 3, ch. 922, item 95 (2023)."
         }
       ]
     },
     {
       "number": 30,
-      "text": "STORTINGET, INNST. 330 S (2017-2018), \"Om prosjektet\" & \"Departementets vurderinger\" (Nor.), https://stortinget.no/no/Saker-og-publikasjoner/Publikasjoner/Innstillinger/Stortinget/2017-2018/inns-201718-330s/?m=0 (\"Prosjektet må ivareta Forsvarets behov for militært bredbånd under norsk kontroll\").",
+      "text": "Stortinget, Innst. 330 S (2017-2018), \"Om prosjektet\" & \"Departementets vurderinger\" (Nor.), https://stortinget.no/no/Saker-og-publikasjoner/Publikasjoner/Innstillinger/Stortinget/2017-2018/inns-201718-330s/?m=0 (\"Prosjektet må ivareta Forsvarets behov for militært bredbånd under norsk kontroll\").",
       "runs": [
         {
-          "text": "STORTINGET, INNST. 330 S (2017-2018), \"Om prosjektet\" & \"Departementets vurderinger\" (Nor.), https://stortinget.no/no/Saker-og-publikasjoner/Publikasjoner/Innstillinger/Stortinget/2017-2018/inns-201718-330s/?m=0 (\"Prosjektet må ivareta Forsvarets behov for militært bredbånd under norsk kontroll\")."
+          "text": "Stortinget, Innst.",
+          "smallCaps": true
+        },
+        {
+          "text": " 330 S (2017-2018), \"Om prosjektet\" & \"Departementets vurderinger\" (Nor.), https://stortinget.no/no/Saker-og-publikasjoner/Publikasjoner/Innstillinger/Stortinget/2017-2018/inns-201718-330s/?m=0 (\"Prosjektet må ivareta Forsvarets behov for militært bredbånd under norsk kontroll\")."
         }
       ]
     },
     {
       "number": 31,
-      "text": "Protocol Additional to the Geneva Conventions of 12 August 1949, and Relating to the Protection of Victims of International Armed Conflicts (Protocol I) arts. 51(5)(b), 52(2), 57, June 8, 1977, 1125 U.N.T.S. 3; INTERNATIONAL COMMITTEE OF THE RED CROSS, OBSERVATIONS ON THE CONSULTANTS' REPORT: PROTECTING ESSENTIAL CIVILIAN SERVICES ON EARTH FROM DISRUPTION BY MILITARY SPACE OPERATIONS 5-6 (June 2024), https://www.icrc.org/sites/default/files/media_file/2024-06/4781.02_002_icrc_observations_web.pdf.",
+      "text": "Protocol Additional to the Geneva Conventions of 12 August 1949, and Relating to the Protection of Victims of International Armed Conflicts (Protocol I) arts. 51(5)(b), 52(2), 57, June 8, 1977, 1125 U.N.T.S. 3; International Committee of the Red Cross, Observations on the Consultants' Report: Protecting Essential Civilian Services on Earth from Disruption by Military Space Operations 5-6 (June 2024), https://www.icrc.org/sites/default/files/media_file/2024-06/4781.02_002_icrc_observations_web.pdf.",
       "runs": [
         {
-          "text": "Protocol Additional to the Geneva Conventions of 12 August 1949, and Relating to the Protection of Victims of International Armed Conflicts (Protocol I) arts. 51(5)(b), 52(2), 57, June 8, 1977, 1125 U.N.T.S. 3; INTERNATIONAL COMMITTEE OF THE RED CROSS, OBSERVATIONS ON THE CONSULTANTS' REPORT: PROTECTING ESSENTIAL CIVILIAN SERVICES ON EARTH FROM DISRUPTION BY MILITARY SPACE OPERATIONS 5-6 (June 2024), https://www.icrc.org/sites/default/files/media_file/2024-06/4781.02_002_icrc_observations_web.pdf."
+          "text": "Protocol Additional to the Geneva Conventions of 12 August 1949, and Relating to the Protection of Victims of International Armed Conflicts (Protocol I) arts. 51(5)(b), 52(2), 57, June 8, 1977, 1125 U.N.T.S. 3; "
+        },
+        {
+          "text": "International Committee of the Red Cross, Observations on the Consultants' Report: Protecting Essential Civilian Services on Earth from Disruption by Military Space Operations",
+          "smallCaps": true
+        },
+        {
+          "text": " 5-6 (June 2024), https://www.icrc.org/sites/default/files/media_file/2024-06/4781.02_002_icrc_observations_web.pdf."
         }
       ]
     },
     {
       "number": 32,
-      "text": "COUR DES COMPTES DU GRAND-DUCHÉ DE LUXEMBOURG, RAPPORT SPÉCIAL SUR LA GESTION FINANCIÈRE DU PROJET LUXEOSYS 8-10, 33-35 (June 16, 2022).",
+      "text": "Cour des comptes du Grand-Duché de Luxembourg, Rapport spécial sur la gestion financière du projet LuxEOSys 8-10, 33-35 (June 16, 2022).",
       "runs": [
         {
-          "text": "COUR DES COMPTES DU GRAND-DUCHÉ DE LUXEMBOURG, RAPPORT SPÉCIAL SUR LA GESTION FINANCIÈRE DU PROJET LUXEOSYS 8-10, 33-35 (June 16, 2022)."
+          "text": "Cour des comptes du Grand-Duché de Luxembourg, Rapport spécial sur la gestion financière du projet LuxEOSys",
+          "smallCaps": true
+        },
+        {
+          "text": " 8-10, 33-35 (June 16, 2022)."
         }
       ]
     },
     {
       "number": 33,
-      "text": "COUR DES COMPTES, supra note 32, at 26-27.",
+      "text": "Cour des comptes, supra note 32, at 26-27.",
       "runs": [
         {
-          "text": "COUR DES COMPTES, "
+          "text": "Cour des comptes",
+          "smallCaps": true
+        },
+        {
+          "text": ", "
         },
         {
           "text": "supra",
@@ -1826,19 +2005,34 @@
     },
     {
       "number": 34,
-      "text": "CONSEIL D'ÉTAT DU GRAND-DUCHÉ DE LUXEMBOURG, AVIS N° 52.735 SUR LE PROJET DE LOI N° 7264, at 2 (July 17, 2018).",
+      "text": "Conseil d'État du Grand-Duché de Luxembourg, Avis n° 52.735 sur le projet de loi n° 7264, at 2 (July 17, 2018).",
       "runs": [
         {
-          "text": "CONSEIL D'ÉTAT DU GRAND-DUCHÉ DE LUXEMBOURG, AVIS N° 52.735 SUR LE PROJET DE LOI N° 7264, at 2 (July 17, 2018)."
+          "text": "Conseil d'État du Grand-Duché de Luxembourg, Avis n",
+          "smallCaps": true
+        },
+        {
+          "text": "° 52.735 "
+        },
+        {
+          "text": "sur le projet de loi n",
+          "smallCaps": true
+        },
+        {
+          "text": "° 7264, at 2 (July 17, 2018)."
         }
       ]
     },
     {
       "number": 35,
-      "text": "COUR DES COMPTES, supra note 32, at 52-56 (including the ministry's response of June 8, 2022).",
+      "text": "Cour des comptes, supra note 32, at 52-56 (including the ministry's response of June 8, 2022).",
       "runs": [
         {
-          "text": "COUR DES COMPTES, "
+          "text": "Cour des comptes",
+          "smallCaps": true
+        },
+        {
+          "text": ", "
         },
         {
           "text": "supra",

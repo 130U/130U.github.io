@@ -99,6 +99,39 @@ const readerRules = `  <style data-site-reader-layout>
     }
   </style>`;
 
+// The site has one palette: the paper, the ink and hairlines. Every viewer
+// theme and preset resolves to it, so the theme and preset switches have
+// nothing to switch and are hidden.
+const site = Object.fromEntries(["page", "ink", "muted", "link-rule", "frame", "rule-medium", "rule-strong"].map((token) => {
+  const value = globals.match(new RegExp(`--${token}:\\s*([^;]+);`, "u"))?.[1];
+  assert.ok(value, `Missing shared color token: --${token}`);
+  return [token, value.trim()];
+}));
+const categories = ["frontend", "backend", "database", "cloud", "security", "messagebus", "external"];
+const palette = {
+  bg: site.page, grid: "transparent", text: site.ink, "text-muted": site.muted, "text-dim": site["link-rule"], "text-faint": site.muted,
+  panel: site.page, "panel-border": site.frame, "lane-fill": "transparent", "lane-stroke": site["rule-strong"],
+  arrow: site["link-rule"], "arrow-emphasis": site.ink, mask: site.page,
+  ...Object.fromEntries(categories.flatMap((category) => [[`${category}-fill`, site.page], [`${category}-stroke`, category === "external" ? site.muted : site.ink]])),
+  "toolbar-bg": site.page, "toolbar-border": site["rule-medium"], "toolbar-text": site.ink, "toolbar-hover": site.page, "toolbar-menu-bg": site.page,
+};
+const themeRules = `  <style data-site-theme>
+    :root, [data-theme], [data-preset] {
+${Object.entries(palette).map(([name, value]) => `      --${name}: ${value} !important;`).join("\n")}
+    }
+    body { background: var(--bg); }
+    #btn-theme, #btn-preset, .preset-wrap { display: none !important; }
+    .pulse-dot, .card-dot { background: var(--text) !important; box-shadow: none !important; }
+    *:not(.pulse-dot):not(.motion-control-dot) { border-radius: 0 !important; }
+  </style>`;
+
+function applySiteTheme(viewer) {
+  if (viewer.includes("data-site-theme")) {
+    return viewer.replace(/  <style data-site-theme>[\s\S]*?  <\/style>/u, themeRules);
+  }
+  return viewer.replace("</head>", `${themeRules}\n</head>`);
+}
+
 function applyReaderLayout(viewer) {
   if (viewer.includes("data-site-reader-layout")) {
     return viewer.replace(/  <style data-site-reader-layout>[\s\S]*?  <\/style>/u, readerRules);
@@ -174,7 +207,7 @@ if (source.includes("data-site-typography")) {
   assert.doesNotMatch(source, /fonts\.googleapis|fonts\.gstatic|JetBrains|Georgia|Times New Roman/u);
   source = source.replace(/    :root \{\n(?:      --[^\n]+\n)+    \}(?:\n\n    @media \(width < 768px\) \{\n      :root \{[\s\S]*?\n      \}\n    \})?/u, typeRules);
   assert.ok(source.includes(typeRules));
-  source = applyReaderLayout(source);
+  source = applySiteTheme(applyReaderLayout(source));
   if (source !== original) await writeFile(viewerUrl, source);
   console.log("Architecture typography matches the website.");
 } else {
@@ -278,7 +311,7 @@ if (source.includes("data-site-typography")) {
   viewer = replaceOnce(viewer, /Promise\.resolve\(serializeSvg\(1, \{ autoTheme: true \}\)\)/u,
     "prepareExportFonts().then(function () { return serializeSvg(1, { autoTheme: true }); })");
 
-  viewer = applyReaderLayout(viewer);
+  viewer = applySiteTheme(applyReaderLayout(viewer));
   assert.doesNotMatch(viewer, /fonts\.googleapis|fonts\.gstatic|JetBrains|Georgia|Times New Roman/u);
   const svgMarkup = (source) => [...source.matchAll(/<svg\b[\s\S]*?<\/svg>/gu)].map(([svg]) => svg);
   assert.deepEqual(svgMarkup(viewer), svgMarkup(original), "Typography integration must preserve SVG markup.");
