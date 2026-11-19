@@ -8,7 +8,7 @@ Theodore Ouyang
 
 ## Confidentiality and Disclosure Note
 
-I conducted the following four projects through Duke University collaborations from September 2023 to September 2026. Partner names and proprietary internal system identifiers are withheld under nondisclosure agreements. The collaborators include a leading multimodal foundation model developer, a frontier AI research laboratory, and a leading global alternative asset manager with more than $300 billion in assets under management. The project titles, my role as a researcher, locations, dates, system architectures, mathematical formulations, and reproducible synthetic benchmarks are cleared for public disclosure.
+I conducted the following four projects through Duke University collaborations from September 2023 to September 2026. Partner names and proprietary internal system identifiers are withheld under nondisclosure agreements. The collaborators include a leading foundation model developer, a frontier AI research laboratory, and a leading global alternative asset manager with more than $300 billion in assets under management. The project titles, my role as a researcher, locations, dates, system architectures and mathematical formulations are cleared for public disclosure. Production records and operating figures are withheld; the numerical results are closed-form values, reference runs and worked examples with their inputs stated.
 
 # Project 01: statistical-inference-and-resource-allocation-in-expert-data-production
 

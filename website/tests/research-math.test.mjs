@@ -252,6 +252,10 @@ J'(\Phi(u))-v'\le a\delta+2\varepsilon,
     const paths = [...rendered.svg.matchAll(/<path\b[^>]*\bd="([^"]+)"/gu)].map((match) => match[1]);
     assert.equal(paths.length, fixture.pathCount);
     assert.equal(createHash("sha256").update(JSON.stringify(paths)).digest("hex"), fixture.pathGeometrySha256, "Original mathematical glyph paths must remain exact");
-    for (const svg of rendered.svg.matchAll(/<svg\b[^>]*>/giu)) assert.match(svg[0], /style="[^"]*overflow:\s*visible/iu, "Nested accent and equation canvases must expose their full ink");
+    // The root canvas exposes accents and labels past its edge; the nested canvases that clip the
+    // extender pieces of bars, braces, arrows and radicals keep their clipping.
+    const [rootCanvas, ...nestedCanvases] = [...rendered.svg.matchAll(/<svg\b[^>]*>/giu)].map((svg) => svg[0]);
+    assert.match(rootCanvas, /style="[^"]*overflow:\s*visible/iu, "The root canvas must expose its full ink");
+    for (const svg of nestedCanvases) assert.doesNotMatch(svg, /overflow:\s*visible/iu, "Nested canvases must clip their stretched pieces");
   }
 });

@@ -43,6 +43,35 @@
   display: none;
 }
 
+/* An inline formula wider than its line scrolls in place. While more of it
+   remains to the right, its last em fades out, as a display fades beneath its
+   number; at the end of the scroll the fade is gone. A formula that fits has
+   no scroll timeline and no fade. */
+@property --inline-remaining {
+  syntax: "<length>";
+  inherits: false;
+  initial-value: 0px;
+}
+
+@keyframes inline-remaining {
+  from, 96% { --inline-remaining: 1em; }
+  to { --inline-remaining: 0px; }
+}
+
+@supports (animation-timeline: scroll()) {
+  .inline[tabindex] {
+    animation: inline-remaining linear both;
+    animation-timeline: scroll(self inline);
+    -webkit-mask-image: linear-gradient(to left, transparent, #000 var(--inline-remaining));
+    mask-image: linear-gradient(to left, transparent, #000 var(--inline-remaining));
+  }
+
+  .inline[tabindex]:focus-visible {
+    -webkit-mask-image: none;
+    mask-image: none;
+  }
+}
+
 /* Every displayed equation follows one pattern, whatever its length. Its ink
    starts on the manuscript inset, the axis its column shares with the text of a
    framed table (the inset, inside the frame's 1px edge). It closes on an edge

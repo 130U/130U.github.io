@@ -237,9 +237,16 @@ function inspectManuscript() {
       region.scrollLeft = atScrollEnd ? region.scrollWidth : 0;
       const zone = control.getBoundingClientRect();
       for (const heading of frame.querySelectorAll("thead th")) {
-        const text = document.createRange();
-        text.selectNodeContents(heading);
-        const covered = [...text.getClientRects()].some(box => box.width > 0 && box.right > zone.left && box.left < zone.right && box.bottom > zone.top && box.top < zone.bottom);
+        // Visible ink only: heading text and drawn formulas, not the clipped assistive MathML.
+        const boxes = [...heading.querySelectorAll("svg")].map(svg => svg.getBoundingClientRect());
+        const walker = document.createTreeWalker(heading, NodeFilter.SHOW_TEXT);
+        for (let node = walker.nextNode(); node; node = walker.nextNode()) {
+          if (!node.textContent.trim() || node.parentElement.closest("math")) continue;
+          const text = document.createRange();
+          text.selectNodeContents(node);
+          boxes.push(...text.getClientRects());
+        }
+        const covered = boxes.some(box => box.width > 0 && box.right > zone.left && box.left < zone.right && box.bottom > zone.top && box.top < zone.bottom);
         if (covered) issues.push({ kind: "table-heading-under-zoom-control", heading: heading.textContent.trim(), atScrollEnd });
       }
     }

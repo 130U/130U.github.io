@@ -3,8 +3,9 @@ import { RESEARCH_MATH_GUTTER_EM, RESEARCH_MATH_INLINE_SPACE_EM, renderResearchM
 import { proseNumber } from "../../lib/content/research-number";
 import styles from "./ResearchMath.module.css";
 
-/** `tightStart` and `tightEnd` close the formula's side up to a bracket or punctuation mark, as in the papers. */
-export function ResearchMath({ tex, display = false, tightStart = false, tightEnd = false }: { tex: string; display?: boolean; tightStart?: boolean; tightEnd?: boolean }) {
+/** `tightStart` and `tightEnd` close the formula's side up to a bracket or punctuation mark, as in the papers.
+ * `reserveCh` narrows a wide formula's scroll box so the punctuation glued to it stays on its line. */
+export function ResearchMath({ tex, display = false, tightStart = false, tightEnd = false, reserveCh }: { tex: string; display?: boolean; tightStart?: boolean; tightEnd?: boolean; reserveCh?: number }) {
   const formula = renderResearchMath(tex, display);
   const assistive = <span className={styles.assistive} dangerouslySetInnerHTML={{ __html: formula.mathml }} />;
   if (display) {
@@ -39,6 +40,8 @@ export function ResearchMath({ tex, display = false, tightStart = false, tightEn
         marginInlineStart: `${(tightStart ? 0 : RESEARCH_MATH_INLINE_SPACE_EM) - RESEARCH_MATH_GUTTER_EM}em`,
         marginInlineEnd: `${(tightEnd ? 0 : RESEARCH_MATH_INLINE_SPACE_EM) - RESEARCH_MATH_GUTTER_EM}em`,
         verticalAlign: `${-formula.depthEm}em`,
+        // The box may span the line less the negative margins' overlap and the glued punctuation.
+        ...(reserveCh ? { maxWidth: `calc(100% + ${2 * RESEARCH_MATH_GUTTER_EM - (tightStart ? 0 : RESEARCH_MATH_INLINE_SPACE_EM) - (tightEnd ? 0 : RESEARCH_MATH_INLINE_SPACE_EM)}em - ${reserveCh}ch)` } : {}),
       }}
     >
       <span dangerouslySetInnerHTML={{ __html: formula.svg }} />

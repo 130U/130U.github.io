@@ -5,7 +5,7 @@
       "title": "AI Research and Engineering",
       "disclosure": {
         "title": "Confidentiality and Disclosure Note",
-        "text": "I conducted the following four projects through Duke University collaborations from September 2023 to September 2026. Partner names and proprietary internal system identifiers are withheld under nondisclosure agreements. The collaborators include a leading multimodal foundation model developer, a frontier AI research laboratory, and a leading global alternative asset manager with more than $300 billion in assets under management. The project titles, my role as a researcher, locations, dates, system architectures, mathematical formulations, and reproducible synthetic benchmarks are cleared for public disclosure."
+        "text": "I conducted the following four projects through Duke University collaborations from September 2023 to September 2026. Partner names and proprietary internal system identifiers are withheld under nondisclosure agreements. The collaborators include a leading foundation model developer, a frontier AI research laboratory, and a leading global alternative asset manager with more than $300 billion in assets under management. The project titles, my role as a researcher, locations, dates, system architectures and mathematical formulations are cleared for public disclosure. Production records and operating figures are withheld; the numerical results are closed-form values, reference runs and worked examples with their inputs stated."
       }
     },
     {
@@ -233,7 +233,7 @@
       "metadata": {
         "position": "Author (Letao Ouyang)",
         "location": "Durham, North Carolina",
-        "dates": "December 2024 (manuscript date)"
+        "dates": "December 2024; revised November 2026"
       },
       "contributionsLabel": "Key Contributions",
       "keyContributions": [
@@ -255,7 +255,7 @@
       "metadata": {
         "position": "Author (Letao Ouyang)",
         "location": "Durham, North Carolina",
-        "dates": "December 2024 (manuscript date)"
+        "dates": "December 2024; revised November 2026"
       },
       "contributionsLabel": "Key Contributions",
       "keyContributions": [
@@ -277,7 +277,7 @@
       "metadata": {
         "position": "Author (Letao Ouyang)",
         "location": "Durham, North Carolina",
-        "dates": "December 2024 (manuscript date)"
+        "dates": "December 2024; revised November 2026"
       },
       "contributionsLabel": "Key Contributions",
       "keyContributions": [
@@ -299,7 +299,7 @@
       "metadata": {
         "position": "Author (Letao Ouyang)",
         "location": "Durham, North Carolina",
-        "dates": "December 2024 (manuscript date)"
+        "dates": "December 2024; revised November 2026"
       },
       "contributionsLabel": "Key Contributions",
       "keyContributions": [
@@ -462,6 +462,6 @@
   "aiSourceDocument": {
     "fileName": "ai-research-and-engineering.md",
     "path": "content/sources/ai-portfolio/ai-research-and-engineering.md",
-    "sha256": "ab7c59f302cafc183300babe04024b8b7162d1c4a59ad0278fe00d473bf21636"
+    "sha256": "ac8e9b5f5d5a7808d0d2771a202f081272bbe82d30c8275280d84f33736a2de3"
   }
 }

@@ -10,14 +10,14 @@ const AUDIT_POLICIES = [
   { name: "Residual- and cost-aware", sd: 0.515, change: "−17.8% variance", strata: [7.89, 19.37, 21.84], tone: "accent" },
 ] as const;
 const STRATA = [
-  { label: "Routine: 60% of the batch, audit cost 1", tone: "steel" },
-  { label: "Intermediate: 30%, audit cost 1.5", tone: "sky" },
-  { label: "Hardest: 10%, audit cost 3", tone: "ink" },
+  { label: "Routine: 60%, cost 1", tone: "steel" },
+  { label: "Intermediate: 30%, cost 1.5", tone: "sky" },
+  { label: "Hardest: 10%, cost 3", tone: "ink" },
 ] as const;
 
 function AuditPolicies() {
-  const sd = linear(0, 0.75);
-  const sdTicks = [0, 0.25, 0.5, 0.75].map((at) => ({ at, label: at === 0 ? "0" : String(at) }));
+  const sd = linear(0, 0.8);
+  const sdTicks = [0, 0.2, 0.4, 0.6, 0.8].map((at) => ({ at, label: at === 0 ? "0" : String(at) }));
   const share = linear(0, 50);
   const shareTicks = [0, 25, 50].map((at) => ({ at, label: `${at}%`, minor: at === 25 }));
   return (

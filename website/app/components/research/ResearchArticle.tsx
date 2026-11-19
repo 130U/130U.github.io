@@ -172,6 +172,13 @@ export function ResearchArticle({ project, active, returnPath, returnLabel, titl
     if (block.type === "paragraph") {
       // A table caption renders inside the frame of the table that follows it.
       if (captionsTable(project.blocks, index)) return null;
+      // A list item, written "• " or "1. " at the start of its line, hangs its marker.
+      const first = block.inlines[0];
+      const item = first?.type === "text" ? /^(?:•|\d+\.)\s+/u.exec(first.text) : null;
+      if (item && first?.type === "text") {
+        const rest = [{ ...first, text: first.text.slice(item[0].length) }, ...block.inlines.slice(1)];
+        return <p {...marker} data-list-item="" id={block.id ?? anchors.get(index)} key={index}><span className={styles.listMarker}>{item[0]}</span><InlineContent inlines={proofLabel(link(rest, index))} /></p>;
+      }
       return <p {...marker} id={block.id ?? anchors.get(index)} key={index}><InlineContent inlines={proofLabel(link(block.inlines, index))} /></p>;
     }
     if (block.type === "heading") {
