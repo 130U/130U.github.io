@@ -53,9 +53,9 @@
       }
     },
     "/critical-dependence-stress-for-diversification-gains-under-fixed-marginals/": {
-      "textSha256": "bc3c4f75c8cb461cf420c71de90f5bdf5c401dc474ebd1c8a5816faf276fb1a5",
-      "characterCount": 77457,
-      "wordCount": 11711,
+      "textSha256": "a2529a73260af1ab27c2f8049a1958867237a58397f47546bb60809f8b7ddd28",
+      "characterCount": 77456,
+      "wordCount": 11710,
       "preview": "Skip to Main Content Theodore Ouyang Back to Selected Research Critical Dependence Stress for Diversification Gains under Fixed Marginals GitHub Full Manuscript",
       "altTexts": [],
       "ariaLabels": [
@@ -431,9 +431,9 @@
       "formulaCount": 1025
     },
     "/certified-valuation-of-arithmetic-asian-options/": {
-      "textSha256": "d4ddc8d9414f88523a878540f7d3f9db5440e3017d37f9a0e6778a32faced22a",
-      "characterCount": 69658,
-      "wordCount": 11483,
+      "textSha256": "635872832a204fc7c8d23fa0a5bea1a838d410ced91bfee782410c317e48cf12",
+      "characterCount": 69689,
+      "wordCount": 11493,
       "preview": "Skip to Main Content Theodore Ouyang Back to Selected Research Certified Valuation of Arithmetic Asian Options: The Cost of Exercising on the Geometric Average ",
       "altTexts": [],
       "ariaLabels": [
@@ -701,13 +701,13 @@
         "twitterTitle": "Certified Valuation of Arithmetic Asian Options: The Cost of Exercising on the Geometric Average",
         "twitterDescription": "The cost of exercising an arithmetic Asian option on the geometric average: a proved bound, its cubic law in Black's model, and a certified Heston price interval with its Euler discretization error."
       },
-      "mathSourceSha256": "03f6d5bc1411109aef5f3063d00088f9b30fb3faaf48bf5044dae5b0b1a7da90",
+      "mathSourceSha256": "6b27445e28276f9adfcb080776f1c1a8497f69399741a22969195b159b0d7f05",
       "formulaCount": 751
     },
     "/certified-joint-pricing-errors-in-rough-heston/": {
-      "textSha256": "ab038c5222016b2875e59b5163d4404ae10bffc04fe418aaa425692c82fc2839",
-      "characterCount": 65431,
-      "wordCount": 10578,
+      "textSha256": "48aad8fd769e9aabe90491e89fe4320328ac6bfc02549d4deaef091c0955efd6",
+      "characterCount": 65645,
+      "wordCount": 10615,
       "preview": "Skip to Main Content Theodore Ouyang Back to Selected Research Certified Joint Pricing Errors in Rough Heston GitHub Full Manuscript Abstract Every option on on",
       "altTexts": [],
       "ariaLabels": [
@@ -907,8 +907,8 @@
         "twitterTitle": "Certified Joint Pricing Errors in Rough Heston",
         "twitterDescription": "Numerical pricing error as a common factor across strikes: a Riccati residual priced by forward variance in rough Heston, the netting of portfolio errors in strike space, and certified tolerances for S&P 500 option positions."
       },
-      "mathSourceSha256": "5230e304025818d361f0b5c67d1c055ff1606d65b3741dd15b41a5baadb1e65a",
-      "formulaCount": 457
+      "mathSourceSha256": "ee3203993173a45a329f04da7271a14d1efce66641690ac0e2197fefcd698dce",
+      "formulaCount": 460
     },
     "/experience/": {
       "textSha256": "8b76b2d82047a27707a4b5ee80f88ef01d7018c7548b37c7aaefbe42f920e3b0",

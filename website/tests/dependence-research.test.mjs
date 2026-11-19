@@ -19,8 +19,8 @@ function withoutArticleFigures(html) {
 const ROOT = fileURLToPath(new URL("../", import.meta.url));
 const SOURCE = path.join(ROOT, "content", "sources", "selected-research", "dependence");
 const SLUG = "critical-dependence-stress-for-diversification-gains-under-fixed-marginals";
-const COMMIT = "a62cc41106e58e5d2df1387a1cf39ebfa65e36e8";
-const PAPER_BLOB = "e9efa283fc4b8efe2cac0ca483fa3e5da81e01e5";
+const COMMIT = "c0782609a95f9887c248631c56174615233c7ae4";
+const PAPER_BLOB = "72d5cf95d6812da8198cca12f313c59d254ef3d0";
 
 async function manuscript() {
   const article = JSON.parse(await readFile(path.join(ROOT, "content", "selected-research", `${SLUG}.json`), "utf8"));

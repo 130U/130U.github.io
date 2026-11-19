@@ -1,6 +1,6 @@
 \keepproofstart{6\baselineskip}
-\section{5. Analytical illustrations and financial implications}\label{critical-cost-premia-background-dependence-and-finite-reallocations}\label{v21-quantitative}
-\subsection{5.1 Projection potentials and a uniform reference}\label{strict-premium-despite-equal-efficiency}
+\section{5. Analytical illustrations and financial implications}\label{sec:illustrations}
+\subsection{5.1 Projection potentials and a uniform reference}\label{sec:uniform-reference}
 
 Assigning a bounded shadow price \(\phi_i\) to each marginal flux lets us bound the strict premium without solving the full risk optimization. For a prescribed normal displacement we first minimize the adjusted coordinate costs \(\gamma_i\pm\phi_i(\xi_i)\), and then we compare that minimum with the paired hinge gain.
 
@@ -27,7 +27,7 @@ In the cut representation of Theorem~\ref{thm:projected-flow}, the midpoint part
 \]
 Their signs distinguish low-loss from high-loss coordinate halves. At zero threshold shift, a positive paired hinge gain requires normal movement \(w=b\cdot d>0\) when \(x<y\), and \(w<0\) when \(x>y\). With amplitude \(\gamma_0/2\), the effective cost in this direction across the midpoint is \(k(\xi,H)=3\gamma_0/2\), and both directional costs on either same-side region are \(\gamma_0/2\). Choosing \(\lambda=3\gamma_0/2\) in \eqref{eq:5.1} therefore removes the cross-region penalty at zero threshold. The proof below keeps the correction for shifted minimizing thresholds, which makes the bound valid without prescribing either ES threshold.
 
-\resultnumber{5.2}\begin{corollary}[Uniform reference with costly background displacement]\label{prop:uniform-variable-cost}
+\resultnumber{5.2}\begin{corollary}[Uniform reference with costly background displacement]\label{cor:uniform-reference}
 For this uniform reference,
 \begin{equation}
 \frac{13}{64}\le\frac{s^*}{\gamma_0}\le\frac{29}{96},
@@ -50,7 +50,7 @@ For \(1/2\le x\le1\), the negative-moment section has \(1-x<y<x\), so integratin
 For \(|\tau|\le1\), the section integrations in \hyperref[app:uniform-bound-proof]{Appendix B.2} give the first line. For \(|\tau|\ge1\), the efficiency decomposition \eqref{eq:4.2} gives the second. Every kernel with \(\mathcal V\ge0\) therefore costs at least \(13\gamma_0/64\), which is \(30\%\) above \(\gamma_0J\).
 \end{proof}
 
-\phantomsection\label{app:quantitative-benchmarks}
+\phantomsection\label{par:uniform-envelopes}
 Setting \(\gamma_0=1\), we obtain analytical envelopes for \(F(s)\) on \([0,U]\), where \(U=29/96\). The balanced kernel has cost \(s_0=1/96\), zero projected flux, and risk \(-7/24\), and the first-coordinate comparison kernel has cost \(U\) and risk zero. Their convex mixtures have affine paired risk because zero minimizes both threshold objectives for each kernel, and affine cost because the balanced kernel has zero flux. Joining these mixtures to the exact initial linear segment realizes the lower envelope
 \[
 \underline F(s)=
@@ -72,7 +72,7 @@ F(s)&\le\min\left\{2s-\frac5{16},
 The last equality holds because the branches inside the maximum meet only at \(s=5/8>U\). Figure~\ref{fig:budget} plots the analytical envelopes \(\underline F\le F\le\overline F\) on \([0,U]\). The guaranteed linear segment \([0,s_{\rm lin}]\) covers one fifteenth of the tangent prediction \(J=5/32\), whereas the critical coefficient \(s^*\) lies between \(13/10\) and \(29/15\) times \(J\). So the initial slope is attained on a positive interval, and the required reversal budget is still at least \(30\%\) higher than its tangent prediction.
 \input{figure-budget.tex}
 
-\paragraph{Numerical approximation.}
+\paragraph{Numerical approximation}
 The computational companion also discretizes a symmetric family of local
 kernels, using pure-coordinate moves to the two hinge breakpoints and
 retaining the absolute projected-flux penalty in \eqref{eq:3.1}.
@@ -82,21 +82,21 @@ estimates increase with the grid from \(0.2292\) to \(0.2324\).
 The calculation reproduces the proved initial linear segment, and the paired
 risk of each computed kernel, evaluated again at its own minimizing
 thresholds, vanishes to rounding error. Because the family lies inside the
-admissible class, its zero is an upper estimate of \(s^*\), subject to
-discretization error. On this evidence \(s^*\) falls in the lower third of
+admissible class, its zero is an upper estimate of \(s^*\) at the stated grid
+resolution. On this evidence \(s^*\) falls in the lower third of
 the interval in \eqref{eq:5.2}, and the reversal premium over the tangent
-prediction lies between the proved \(30\%\) and about \(49\%\). The upper
-figure is numerical and is not a proof; normal-window checks and solver
-residuals are recorded in the companion's numerical study.
+prediction lies between the proved \(30\%\) and a computed figure of about
+\(49\%\). The companion's numerical study records the normal-window checks
+and solver residuals behind that figure.
 
 For finite trade sizes, the companion solves the discretized problem
 globally on cubic midpoint lattices with up to 24 points per marginal, for
-trade sizes from \(\varepsilon=0.2\) down to \(\varepsilon=0.025\). These
-lattices do not resolve the quadratic scale as the trade size decreases, so
-the recorded values measure discretization sensitivity, and a convergence
-study of \eqref{eq:3.6} requires finer grids.
+trade sizes from \(\varepsilon=0.2\) down to \(\varepsilon=0.025\). As the
+trade size decreases, the quadratic scale falls below the lattice spacing, so
+the recorded values measure discretization sensitivity; a convergence study
+of \eqref{eq:3.6} refines the lattice with the trade size.
 
-\subsection{5.2 A dependence family with fixed marginal laws}\label{background-dependence-changes-substitutability-even-with-identical-marginals}
+\subsection{5.2 A dependence family with fixed marginal laws}\label{sec:dependence-family}
 
 Section~5.1 used an independent uniform reference with background displacement twice as costly as either traded direction. We now move to the equal-effective-cost boundary to see how changing the reference dependence affects the required background share \(a_+\) and the budget derivative \(\gamma_0Ja_+\). Keeping uniform marginals, \(\beta=1\), and \(p=1/2\), we perturb the independent density by the product of the centered losses \(x+y-2\) and \(z-1\):
 \[

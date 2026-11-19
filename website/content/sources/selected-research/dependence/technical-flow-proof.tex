@@ -1,6 +1,6 @@
 \subsection{A.8 Equality kernels and continuous flow duality}\label{app:flow-proof}
 
-\leavevmode\phantomsection\label{i.2.-from-arbitrary-randomized-kernels-in-mathcal-z_0-to-linear-fields-and-flows}
+\leavevmode\phantomsection\label{proof:flow-representation}
 \textit{Proof of the flow representation in Theorem~\ref{thm:projected-flow}.} We reduce the background-cost minimization over \(\mathcal Z_0\) to a flow on \(D=\Omega\cap\{x<y\}\) by integrating out the normal coordinate and then identifying the two exchanged surface halves. The sign condition in Lemma~\ref{lem:efficiency-bound} is essential: on each half, all nonzero coordinate displacements have the sign of \(\zeta\), so integration in \(u\) introduces no cancellation in the absolute background displacement. For \(\alpha\in\mathcal Z_0\), set \(m_i(x,y)=\int_{\mathbb R}\int d_i\,\alpha_{\xi,u}(dd)du\) and \(\mathbf m=(m_1,m_2,\beta m_3)\). On \(D\), \(\mathbf m_i\ge0\) and \(\sum_i \mathbf m_i=w\); on its exchanged half, the signs reverse and the sum is \(-w\). Thus \(\beta\int|d_3|d\Pi_\alpha=\int_\Omega|\mathbf m_3|d\sigma\). To express the allocation using shares on \(D\) alone, we average the field with its exchanged counterpart:
 \begin{equation}
 (\mathscr S\mathbf m)(x,y)=(-\mathbf m_2(y,x),-\mathbf m_1(y,x),-\mathbf m_3(y,x)),
@@ -15,7 +15,7 @@ The exchange interchanges the first two zero projections and preserves \(\xi_3=(
 \tag{A.56}\label{eq:A.56}
 \end{equation}
 
-\paragraph{Lifting flows to probability kernels}\label{lem:v21-flow-lift}
+\paragraph{Lifting flows to probability kernels}\label{par:flow-lift}
 Conversely, for feasible shares set \(\boldsymbol\theta=(a,b,1-a-b)\) on \(D\) and use \((b(y,x),a(y,x),1-a(y,x)-b(y,x))\) on the exchanged half. Since \(w>0\) on \(D\), the shares also define a simplex-valued allocation \(\sigma\)-almost everywhere. The kernel
 \begin{equation}
 \alpha_{\xi,u}=\delta_{\zeta(\theta_1,\theta_2,\theta_3/\beta)}

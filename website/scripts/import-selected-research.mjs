@@ -7,8 +7,8 @@ const sourceDirectory = new URL("../content/sources/selected-research/", import.
 const sources = [
   {
     key: "asian", slug: "certified-valuation-of-arithmetic-asian-options", repository: "RESEARCH-Certified-Valuation-of-Arithmetic-Asian-Options", file: "manuscript/report.md",
-    sourceCommit: "41a814f6e5aa1eddddb4412e57ce68ec506c323e", sourceBlob: "6f573b14c4c172e394688333b22726438bbed461",
-    sourceEditedAt: "2026-11-19T03:29:58-05:00", fetchedAt: "2026-11-19", mainSections: 9,
+    sourceCommit: "dd4b147d822d45a4ca12a66294fae2a32cd252bb", sourceBlob: "73fd58c109bca144a8809e3fc9832e8ad258cae6",
+    sourceEditedAt: "2026-11-19T11:43:56-05:00", fetchedAt: "2026-11-19", mainSections: 9,
     appendixAnchor: "appendix-a-finite-certification-of-the-weighted-second-moment",
     description: "The cost of exercising an arithmetic Asian option on the geometric average: a proved bound, its cubic law in Black's model, and a certified Heston price interval with its Euler discretization error.",
     figures: {
@@ -22,8 +22,8 @@ const sources = [
   },
   {
     key: "rough", slug: "certified-joint-pricing-errors-in-rough-heston", repository: "RESEARCH-Certified-Joint-Pricing-Errors-in-Rough-Heston", file: "manuscript/merged-heston-en.md",
-    sourceCommit: "46c85b4b256dfbc597ed56b3b2b526681334e60f", sourceBlob: "27bd396d79cfe3d99072f23d9799641c898442e7",
-    sourceEditedAt: "2026-11-19T03:44:46-05:00", fetchedAt: "2026-11-19", mainSections: 8,
+    sourceCommit: "038db24a3aadf9600edef385dfd7508e612d53c8", sourceBlob: "12b074bc25984ea11f9fc7d75768800c267a43eb",
+    sourceEditedAt: "2026-11-19T11:45:08-05:00", fetchedAt: "2026-11-19", mainSections: 8,
     // The manuscript is the TeX build source; the appendix link opens the GitHub-form article.
     appendixFile: "ARTICLE.md", appendixAnchor: "appendix-a-rescaled-variables-model-and-transform",
     description: "Numerical pricing error as a common factor across strikes: a Riccati residual priced by forward variance in rough Heston, the netting of portfolio errors in strike space, and certified tolerances for S&P 500 option positions.",

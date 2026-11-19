@@ -16,8 +16,8 @@ function withoutArticleFigures(html) {
 }
 
 const PROJECTS = [
-  { key: "asian", slug: "certified-valuation-of-arithmetic-asian-options", title: "Certified Valuation of Arithmetic Asian Options: The Cost of Exercising on the Geometric Average", repository: "RESEARCH-Certified-Valuation-of-Arithmetic-Asian-Options", commit: "41a814f6e5aa1eddddb4412e57ce68ec506c323e", blob: "6f573b14c4c172e394688333b22726438bbed461", sections: 9, tables: 11, formulas: 724, figures: "asian" },
-  { key: "rough", slug: "certified-joint-pricing-errors-in-rough-heston", title: "Certified Joint Pricing Errors in Rough Heston", repository: "RESEARCH-Certified-Joint-Pricing-Errors-in-Rough-Heston", commit: "46c85b4b256dfbc597ed56b3b2b526681334e60f", blob: "27bd396d79cfe3d99072f23d9799641c898442e7", sections: 8, tables: 10, formulas: 437, figures: "rough" },
+  { key: "asian", slug: "certified-valuation-of-arithmetic-asian-options", title: "Certified Valuation of Arithmetic Asian Options: The Cost of Exercising on the Geometric Average", repository: "RESEARCH-Certified-Valuation-of-Arithmetic-Asian-Options", commit: "dd4b147d822d45a4ca12a66294fae2a32cd252bb", blob: "73fd58c109bca144a8809e3fc9832e8ad258cae6", sections: 9, tables: 11, formulas: 724, figures: "asian" },
+  { key: "rough", slug: "certified-joint-pricing-errors-in-rough-heston", title: "Certified Joint Pricing Errors in Rough Heston", repository: "RESEARCH-Certified-Joint-Pricing-Errors-in-Rough-Heston", commit: "038db24a3aadf9600edef385dfd7508e612d53c8", blob: "12b074bc25984ea11f9fc7d75768800c267a43eb", sections: 8, tables: 10, formulas: 440, figures: "rough" },
 ];
 
 function sourceFormulas(markdown) {
@@ -62,7 +62,7 @@ for (const expected of PROJECTS) {
       .replace(/^!\[(Figure \d+\.[^\n]*)\]\(\.\.\/figures\/([a-z0-9-]+)\.png\)$/gmu, (_, caption, image) => `![${caption}](/assets/research/${expected.figures}/${image}.png)`)
       .replace(/\]\((\.\.\/[^\s)]+)\)/gu, (_, relative) => `](https://github.com/130U/${expected.repository}/blob/${expected.commit}/${relative.slice(3)})`);
     const references = upstream.slice(upstream.indexOf("\n## References")).trim();
-    assert.ok(article.markdown.startsWith(main + "\n\n## Appendices and Supporting Material\n"), "Every main-text character must survive import, except resolved relative link targets and each figure's image path, with an image label its caption repeats.");
+    assert.ok(article.markdown.startsWith(main + "\n\n## Appendices and supporting material\n"), "Every main-text character must survive import, except resolved relative link targets and each figure's image path, with an image label its caption repeats.");
     assert.ok(article.markdown.endsWith(references + "\n"), "The complete bibliography must survive import.");
     assert.doesNotMatch(article.markdown, /^## Appendix [A-Z]\./mu);
     const blocks = parseResearchMarkdown(article.markdown, { joinSoftLines: true });

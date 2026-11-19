@@ -51,7 +51,7 @@ Once each \(z_n\) lies in a disk of radius \(\epsilon_n\), the set of price erro
 \]
 where \(k_i=\log m_i\) is log-moneyness, \(h_*\) is the grid step and \(\omega_n\) are the trapezoidal weights. The function \(\widehat w\) is the Fourier transform of the payoff of the portfolio. A portfolio of options with a common expiry is one payoff, and (1.4) prices its error as one payoff. Bounding each leg separately replaces \(|\widehat w(u)|\) by \(\sum_i|w_i|\sqrt{m_i}\), and the ratio of the two, which we call the netting ratio, measures what is lost.
 
-The netting ratio has a simple anatomy. For a vertical spread with log-strike gap \(\Delta\) it is \(|\sin(u\Delta/2)|\) up to terms of order \(\Delta\): the spread is hedged against transform error of wavelength longer than twice its strike spacing and fully exposed at the Nyquist frequency \(\pi/\Delta\). For a butterfly the ratio is squared. For any portfolio its mean square over a long band of frequencies is the Herfindahl index of the position (Propositions 5.2 and 5.3). Transform error therefore behaves like a factor model in frequency. Low-frequency error is systematic across strikes and is removed by hedging. High-frequency error is idiosyncratic across strikes and is removed by diversification. On the S&P 500 example the eleven adjacent call spreads keep on average 0.708 of their leg-by-leg node error, against a Herfindahl benchmark of \(1/\sqrt2\approx0.707\); an equal-weight basket of all twelve calls keeps 0.076.
+The netting ratio has a simple anatomy. For a vertical spread with log-strike gap \(\Delta\) it is \(|\sin(u\Delta/2)|\) up to terms of order \(\Delta\): the spread is hedged against transform error whose wavelength is long compared with its strike spacing and fully exposed at the Nyquist frequency \(\pi/\Delta\). For a butterfly the ratio is squared. For any portfolio its mean square over a long band of frequencies is the Herfindahl index of the position (Propositions 5.2 and 5.3). Transform error therefore behaves like a factor model in frequency. Low-frequency error is systematic across strikes and is removed by hedging. High-frequency error is idiosyncratic across strikes and is removed by diversification. On the S&P 500 example the eleven adjacent call spreads keep on average 0.708 of their leg-by-leg node error, against a Herfindahl benchmark of \(1/\sqrt2\approx0.707\); an equal-weight basket of all twelve calls keeps 0.076.
 
 This part of the paper is model-free. It applies to any pricer that obtains a strip of options from one transform, whatever the model and whatever the method that produced the transform.
 
@@ -227,13 +227,13 @@ Four remarks place the statement.
 
 **Remark 3.3 (the classical model).** At \(\alpha=1\) the resolvent is \(k_\lambda(t)=e^{-\lambda t}\) and \(\xi^\lambda(t)=V_0e^{-\lambda t}+\int_0^te^{-\lambda(t-s)}\theta(s)\,ds\). Inequality (3.5) is then variation of constants for the Heston Riccati equation, in which the error is transported by a flow that contracts at rate \(\lambda\). For \(\alpha<1\) there is no flow to transport it. Convexity of the Caputo derivative and positivity of \(k_\lambda\) recover the same conclusion with the same constant.
 
-**Remark 3.4 (the constant).** The constant one in (3.5) is sharp. At \(a=0\), the point of zero frequency on the undamped contour, the exact solution vanishes, \(\lambda=0\), and a residual of constant sign produces \(\widehat L_T-L_T=\int_0^T\xi(T-t)r(t)\,dt\) up to terms of second order in \(r\). On the Lewis contour the exact solution adds damping of its own through \(\operatorname{Re}h<0\), growing with the frequency, and Theorem 3.1 uses the part that is uniform in the frequency.
+**Remark 3.4 (the constant).** The constant one in (3.5) is sharp. Write \(a\) for the argument of \(\phi_T\), so that the Lewis contour is \(a=u-\tfrac i2\). At \(a=0\), the point of zero frequency on the undamped contour, the exact solution vanishes, \(\lambda=0\), and a residual of constant sign produces \(\widehat L_T-L_T=\int_0^T\xi(T-t)r(t)\,dt\) up to terms of second order in \(r\). On the Lewis contour the exact solution adds damping of its own through \(\operatorname{Re}h<0\), growing with the frequency, and Theorem 3.1 uses the part that is uniform in the frequency.
 
 **Remark 3.5 (other contours and positive correlation).** On a contour \(\operatorname{Im}a=-\eta\) with \(0<\eta<1\) the linear coefficient of the Riccati polynomial has real part \(\eta\rho\nu\), the left half-plane is again invariant, and the proof gives (3.5) with \(\lambda=\eta|\rho|\nu\) and the measure \(\mathbb Q^\eta\). The damping available to an error bound thus rises linearly from nothing at the pricing measure to \(|\rho|\nu\) at the share measure. For \(\rho>0\) the same argument gives (3.4) and the first inequality of (3.5) with a negative \(\lambda\), the resolvent being positive term by term; the kernel \(\xi^\lambda\) then lies above \(\xi\), and residuals compound at the rate at which variance runs away under the tilted measure.
 
 **Remark 3.6 (other kernels).** The fractional kernel enters the proof through three facts: \(g_\alpha*g_{1-\alpha}=1\) with \(g_{1-\alpha}\) nonnegative and nonincreasing, which gives the convexity inequality; positivity of the resolvent \(k_\lambda\); and \(\xi=g_\alpha*q\) with \(q\ge0\), which is the second face. Every completely monotone kernel \(K\) has a resolvent of the first kind with the same monotonicity and a completely monotone resolvent (Gripenberg, Londen and Staffans 1990, Chapter 5), its admissible curves are again of the form \(\xi=K*q\) with \(q\) a nonnegative measure (Abi Jaber and El Euch 2019a, Example 2.2), and the left half-plane is invariant for its Riccati–Volterra equation (Abi Jaber, Larsson and Pulido 2019, Theorem 7.1). The argument therefore gives (3.5) for Volterra Heston models with completely monotone kernels, with \(\xi^\lambda\) defined by \(\xi^\lambda+\lambda K*\xi^\lambda=\xi\): the classical Heston model, where \(K\equiv1\) and the statement is Remark 3.3; the lifted Heston model of Abi Jaber (2019), where \(K\) is a finite sum of exponentials; and gamma kernels. Appendix C writes out the regularity for the fractional kernel.
 
-Figure 1 shows the two weights for the curve calibrated in Section 7. At six months the half-share curve lies below the risk-neutral one by at most a few per cent, since \(\lambda_*T^\alpha\approx0.075\). The large gain in the experiments comes from the first inequality in (3.5), which weights each residual by the variance still to come, in place of a uniform bound on the state.
+Figure 1 shows the two weights for the curve calibrated in Section 7. At six months the half-share curve lies below the risk-neutral one by at most 7.5 per cent, the order of \(\lambda_*T^\alpha\approx0.075\). The large gain in the experiments comes from the first inequality in (3.5), which weights each residual by the variance still to come, in place of a uniform bound on the state.
 
 ![Figure 1. The price of a unit Riccati residual as a function of time to maturity: the forward variance curve of the calibrated model under the pricing measure and under the half-share measure of Proposition 3.2. Six-month horizon, parameters of Section 7.](../figures/residual-kernel.png)
 
@@ -423,9 +423,9 @@ The proof in Appendix B reduces (6.1) to the signs of nine real functions on a c
 
 ### 7.1. Data and market scale
 
-The quotes are the bid and ask implied volatilities of twelve SPX options with six months to expiry, strikes 3700 to 4800 in steps of 100, recorded on 18 June 2021 and published by Jeng and Kiliçman (2021). We use the index level 4221.86 of that data set as the forward, with zero carry, and convert each implied volatility to a call price by the Black–Scholes formula in exact arithmetic. Table 1 gives the result in index points. One point is 100 dollars per contract.
+The quotes are the bid and ask implied volatilities of twelve SPX options with six months to expiry, strikes 3700 to 4800 in steps of 100, recorded on 18 June 2021 and published by Jeng and Kiliçman (2021). We use the index level 4221.86 of that data set as the forward, with zero carry, and convert each implied volatility to a call price by the Black–Scholes formula in rigorous interval arithmetic. Table 1 gives the result in index points. One point is 100 dollars per contract.
 
-**Table 1. Six-month SPX call quotes of 18 June 2021 in index points: bid, ask and quoted width.**
+**Table 1. Six-month SPX call quotes of 18 June 2021 in index points: bid, ask and quoted width, each width computed from the unrounded quotes.**
 
 | Strike | Bid | Ask | Width | Strike | Bid | Ask | Width |
 |---:|---:|---:|---:|---:|---:|---:|---:|
@@ -541,7 +541,7 @@ The six-month experiment fixes 28 portfolio directions on the twelve strikes bef
 | Wide spreads | \(e_0-e_3,\ e_3-e_6,\ e_6-e_9,\ e_0-e_{11}\) | 4 | 0.474–0.570–0.651 | 0.707 | 0.235 |
 | Equal-weight baskets | twelve, lower six, upper six strikes | 3 | 0.076–0.156–0.221 | 0.289, 0.408 | 0.344 |
 
-The adjacent spreads keep 0.708 of their leg-by-leg node error on average, against the Herfindahl level 0.707 of a two-leg position. The butterflies keep 0.524. The baskets keep least of all: an equal-weight position in all twelve calls keeps 0.076 of its leg-by-leg node error, because three quarters of the node charge of this bank sits between \(u=64\) and \(u=96\), where twelve strikes spread over a quarter of a unit of log-moneyness respond out of phase. The centre runs the other way. The stored rational output lies above the reference at every strike, by 0.04 points at the ends of the ladder and by up to 0.65 points near the money. A displacement of one sign cancels in part in spreads and butterflies and accumulates in baskets, where it makes up 0.344 of a complete bound of 0.356 points. The approximation error of the stored formula is systematic across strikes and the uncertainty of the certificate is idiosyncratic, as Section 5.2 anticipated, and the joint bound accounts for each correctly.
+The adjacent spreads keep 0.708 of their leg-by-leg node error on average, against the Herfindahl level 0.707 of a two-leg position. The butterflies keep 0.524. The baskets keep least of all: an equal-weight position in all twelve calls keeps 0.076 of its leg-by-leg node error, because three quarters of the node charge of this bank sits between \(u=64\) and \(u=96\), where twelve strikes spread over a quarter of a unit of log-moneyness respond out of phase. The centre runs the other way. The stored rational output lies above the reference at every strike, by 0.04 and 0.07 points at the two ends of the ladder and by up to 0.65 points near the money. A displacement of one sign cancels in part in spreads and butterflies and accumulates in baskets, where it makes up 0.344 of a complete bound of 0.356 points. The approximation error of the stored formula is systematic across strikes and the uncertainty of the certificate is idiosyncratic, as Section 5.2 anticipated, and the joint bound accounts for each correctly.
 
 Table 8 counts the positions certified at three tolerances. Within a row the two methods use identical radii.
 
@@ -565,7 +565,7 @@ At half a point and \(\alpha=0.52\) the joint bound certifies every position and
 
 ### 7.5. Is the roughness ranking numerical?
 
-The roughness fitted to this surface is \(H=0.0286\), and candidates a few thousandths apart in \(H\) produce prices that differ by fractions of an index point. Whether a calibration can tell them apart depends on the accuracy of the pricer. We test five candidates, \(\alpha\in\{0.520,0.525,0.530,0.540,0.550\}\), with the curve (7.1), the quotes and all other parameters fixed. The design was set in advance: every candidate receives a freshly generated reference field and a complete residual bank at \(N_t=1024\), and all five are regenerated at \(N_t=2048\) if any pair remains unresolved. The objective is the normalised least-squares distance to the mid prices, enclosed by Proposition 5.4.
+The roughness fitted to this surface is \(H=0.0286\), and candidates a few thousandths apart in \(H\) produce prices that differ by fractions of an index point. Whether a calibration can tell them apart depends on the accuracy of the pricer. We test five candidates, \(\alpha\in\{0.520,0.525,0.530,0.540,0.550\}\), with the curve (7.1), the quotes and all other parameters fixed. The design was set in advance: every candidate receives a freshly generated reference field and a complete residual bank at \(N_t=1024\), and all five are regenerated at \(N_t=2048\) if any pair remains unresolved. The objective is the normalised least-squares distance to the mid prices, enclosed by Proposition 5.4; Table 9 gives the enclosures at both levels.
 
 **Table 9. Objective enclosures for five roughness candidates, as \(J\times10^8\), and the number of the ten pairs strictly separated.**
 
@@ -583,7 +583,7 @@ At the finer level the five enclosures are disjoint and ordered, and \(\alpha=0.
 
 ### 7.6. Model misfit without solver doubt
 
-A certificate also settles the opposite question. Each of the five candidates is inconsistent with at least one quoted bid–ask band, and for a certified price this is a statement about the model. At \(\alpha=0.52\), on the coarsest bank H0, the exact model price of the 4400 call lies in an interval whose lower end is 92.887 points, while the quoted ask is 92.396: the model is above the ask by at least 0.491 points. For the 4500 call the excess is at least 0.068 points. At the other ten strikes the certified interval meets the quoted band. A desk that sees its rough Heston calibration miss the 4400 and 4500 strikes on this date can rule out the pricer as the cause.
+A certificate also settles the opposite question. Each of the five candidates is inconsistent with at least one quoted bid–ask band, and for a certified price this is a statement about the model. At \(\alpha=0.52\), on the coarsest bank H0, the exact model price of the 4400 call lies in an interval whose lower end is 92.886 points, while the quoted ask is 92.396: the model is above the ask by at least 0.490 points. For the 4500 call the excess is at least 0.067 points. At the other ten strikes the certified interval meets the quoted band. A desk that sees its rough Heston calibration miss the 4400 and 4500 strikes on this date can rule out the pricer as the cause.
 
 ### 7.7. Auditing an output or replacing it
 
@@ -663,7 +663,7 @@ The curve (7.1) is nondecreasing, has a nonnegative initial value, and is locall
 b_\alpha(t)=D_C^\alpha\xi_*(t)=I^{1-\alpha}\xi_*'(t)\ge0,\quad
 b_\alpha(t)=
 \frac{(\theta-V_0)\lambda_\xi}{\Gamma(1+\alpha_0-\alpha)}
-t^{\alpha_0-\alpha}+O(t^{2\alpha_0-\alpha})
+t^{\alpha_0-\alpha}+O(t^{2\alpha_0-\alpha}).
 \tag{A.7}
 \]
 Its worst exponent is \(-.3714>-.5\), so it belongs to \(L^2_{\rm loc}\); also \(\xi_*=V_0+K_\alpha*b_\alpha\). The nonnegative input measure meets Example 2.2(ii). This verifies the model specification with a varying kernel and fixed forward variance curve.
@@ -858,7 +858,7 @@ The repository contains the interval implementation, all leaf rectangles and the
 \tag{B.16}
 \]
 
-where primes denote real \(\rho\) derivatives. The identity \(|R|\le1\) follows from \(|A+S_b|^2\ge1\): the terms \(\operatorname{Re} A\,\operatorname{Re} S_b\) and \(\operatorname{Im} A\,\operatorname{Im} S_b\) are nonnegative, while \(|A|^2=|1+S_b^2|\ge1-|S_b|^2\). Also \(\operatorname{Re} R>0\), since \((\operatorname{Re} A)^2-(\operatorname{Re} S_b)^2=(|1+S_b^2|+1-|S_b|^2)/2>0\).
+where primes denote real \(\rho\) derivatives. The bound \(|R|\le1\) follows from \(|A+S_b|^2\ge1\): the terms \(\operatorname{Re} A\,\operatorname{Re} S_b\) and \(\operatorname{Im} A\,\operatorname{Im} S_b\) are nonnegative, while \(|A|^2=|1+S_b^2|\ge1-|S_b|^2\). Also \(\operatorname{Re} R>0\), since \((\operatorname{Re} A)^2-(\operatorname{Re} S_b)^2=(|1+S_b^2|+1-|S_b|^2)/2>0\).
 
 For the \(\alpha\)-dependent scalars of Proposition 6.1, exact outward endpoint enclosures give
 
@@ -890,7 +890,7 @@ m_{D,j}(C)-10^{-6}L_{D,j}>0
 
 hold. By the mean-value theorem the test is sufficient. It certifies 182002 original leaves and 79758 finer leaves. For the remaining cells, directly evaluate the original complex polynomial formulas with \(\rho\), \(\alpha\) and \(\eta\) all interval valued. Exact outward dyadic arithmetic certifies strict \(B_j>0\) and \(D_j<0\) on 19808 additional closed cells.
 
-The original complete midpoint tree and the exact local splice trees verify that these 281568 cells cover the entire \((\alpha,\eta)\) rectangle without gaps or interior overlap. Their exact area is \(2/25\); each cell carries the entire correlation interval, giving exact three-dimensional volume \(1/6250000\). Hence the raw signs hold for every point of the stated domain. In particular \(\Delta\ne0\), the normalised denominator coefficients have positive real part, and all real numerator coefficients of the half-plane test are negative. The algebraic implication of B.1 gives the conclusions of Proposition 6.1, including \(\eta=1\), the infinite-frequency limit. Conjugacy supplies negative frequencies. \(\square\)
+The original complete midpoint tree and the exact local splice trees verify that these 281568 cells cover the entire \((\alpha,\eta)\) rectangle without gaps or interior overlap. Their exact area is \(2/25\); each cell carries the entire correlation interval, giving exact three-dimensional volume \(1/6250000\). Hence the raw signs hold for every point of the stated domain. In particular \(\Delta\ne0\), the normalised denominator coefficients have positive real part, and all real numerator coefficients of the half-plane test are negative. The algebraic implication of Appendix B.1 gives the conclusions of Proposition 6.1, including \(\eta=1\), the infinite-frequency limit. Conjugacy supplies negative frequencies. \(\square\)
 
 A separate reader checks every saved sign, the 422481-node partition tree, the local refinements, the derivative majorants and all 19808 direct cells through separately assembled Cramer matrices and numerator convolutions; it shares the dyadic primitives with the generator. The interval is the one covered by the stored computation, which confirms stability at the calibrated value.
 
@@ -908,7 +908,7 @@ H'(x)=\frac{q(x)x^{\alpha-1}}{\Gamma(\alpha)}
 The bound 
 
 \[
-|H'(x)|\le\frac{\|q\|_\infty x^{\alpha-1}}{\Gamma(\alpha)}+\frac{(1-\alpha)[q]_{C^\alpha}x^{2\alpha-1}}{\Gamma(\alpha)(2\alpha-1)}.
+|H'(x)|\le\frac{\|q\|_\infty x^{\alpha-1}}{\Gamma(\alpha)}+\frac{(1-\alpha)[q]_{C^\alpha}x^{2\alpha-1}}{\Gamma(\alpha)(2\alpha-1)}
 \tag{C.2}
 \]
 
@@ -956,7 +956,7 @@ In the variables of (2.3) this is Proposition 2.1.
 **Theorem C.2 (dissipative residual bound).** Suppose \(s_0>0\), \(\widehat H(0)=0\), and \(\widehat H\in AC\), with local Lipschitz regularity at positive times. Assume, for every \(x\in(0,X]\), that
 \[
 \operatorname{Re}\widehat H\le\epsilon_R<2s_0,\qquad
-|D_C^\alpha\widehat H-F(\widehat H)|\le\delta,
+|D_C^\alpha\widehat H-F(\widehat H)|\le\delta.
 \]
 Set \(\sigma=s_0-\epsilon_R/2>0\). Then
 \[
@@ -1154,7 +1154,7 @@ q_\alpha(t)=\frac{V_0t^{-\alpha}}{\Gamma(1-\alpha)}
 \[
 A_\alpha(t)=\frac{\theta t^{1-\alpha}}{\Gamma(2-\alpha)}
  +(V_0-\theta)t^{1-\alpha}
- E_{\alpha_0,2-\alpha}(-\lambda_\xi t^{\alpha_0}),\quad A_\alpha(0)=0.
+ E_{\alpha_0,2-\alpha}(-\lambda_\xi t^{\alpha_0}),\quad A_\alpha(0)=0,
 \tag{C.25}
 \]
 where \(E_{a,b}(z)=\sum_{n=0}^\infty z^n/\Gamma(an+b)\).
@@ -1162,7 +1162,7 @@ where \(E_{a,b}(z)=\sum_{n=0}^\infty z^n/\Gamma(an+b)\).
 **Theorem C.7 (uniform-state exponent bound).** For a zero-initial-value AC trajectory \(Z,\widehat Z\), use the derivative-based exponent
 \[
 L_T=\nu^{-1}\int_0^T\xi_*(T-t)D_t^\alpha Z(t)\,dt,\quad
-\bar L_T=\nu^{-1}\int_0^T\xi_*(T-t)D_t^\alpha\widehat Z(t)\,dt,
+\bar L_T=\nu^{-1}\int_0^T\xi_*(T-t)D_t^\alpha\widehat Z(t)\,dt.
 \]
 Then
 \[
@@ -1206,8 +1206,8 @@ and the convexity bound \(e^{(1-\tau)a+\tau b}\le(1-\tau)e^a+\tau e^b\). Since (
 Write \(K_\lambda=q_\alpha*k_\lambda=\xi^\lambda\); at \(\lambda=0\) the resolvent is \(g_\alpha\) and \(K_0=\xi\).
 
 **Proposition C.8 (cumulative-weight series).** Suppose
-\(0<\alpha,A_0<1\), \(0\le V_0\le\theta\), and the fixed curve is
-\(\xi(t)=\theta+(V_0-\theta)E_{A_0}(-\lambda_\xi t^{A_0})\), with \(\lambda_\xi\ge0\). Assume \(q_\alpha\ge0\). For \(\lambda\ge0\) and \(\lambda T^\alpha<1\), (3.9) holds on \([0,T]\). If it is truncated before index \(M\), the entire omitted outer series satisfies
+\(0<\alpha,\alpha_0<1\), \(0\le V_0\le\theta\), and the fixed curve is
+\(\xi(t)=\theta+(V_0-\theta)E_{\alpha_0}(-\lambda_\xi t^{\alpha_0})\), with \(\lambda_\xi\ge0\). Assume \(q_\alpha\ge0\). For \(\lambda\ge0\) and \(\lambda T^\alpha<1\), (3.9) holds on \([0,T]\). If it is truncated before index \(M\), the entire omitted outer series satisfies
 \[
 \left|W_\lambda(t)-\sum_{n=0}^{M-1}(-\lambda)^nW_n(t)\right|
 \le
@@ -1240,17 +1240,17 @@ W_n(t)=t^{1+n\alpha}
 \left[
 \frac{\theta}{\Gamma(2+n\alpha)}
 +(V_0-\theta)\sum_{m=0}^{\infty}
-\frac{(-\lambda_\xi t^{A_0})^m}
-{\Gamma(2+n\alpha+mA_0)}
+\frac{(-\lambda_\xi t^{\alpha_0})^m}
+{\Gamma(2+n\alpha+m\alpha_0)}
 \right].
 \tag{C.32}
 \]
 
-When \(w=\lambda_\xi t^{A_0}<1\), every inner denominator also has argument at least two, and its tail before index \(L\) is bounded by
+When \(w=\lambda_\xi t^{\alpha_0}<1\), every inner denominator also has argument at least two, and its tail before index \(L\) is bounded by
 
 \[
 \left|\sum_{m=L}^{\infty}
-\frac{(-w)^m}{\Gamma(2+n\alpha+mA_0)}\right|
+\frac{(-w)^m}{\Gamma(2+n\alpha+m\alpha_0)}\right|
 \le \frac{w^L}{1-w}.
 \tag{C.33}
 \]
@@ -1284,13 +1284,13 @@ The producer evaluates \(W_n\) through the strict power-field moment divided by 
 
 This appendix works in the variables of A.1. The stored function \(\bar G\) approximates \(D^\alpha Z=\nu g\), so its coefficients are \(\nu\) times those of (4.1)–(4.2).
 
-For each candidate \(\alpha=\beta\in\{.52,.6,.9\}\) and each \(u=n/8,\ n=0,\ldots,512\), we store
+For each candidate \(\alpha=\beta\in\{.52,.6,.9\}\) and each stored frequency \(u=n/8\), we store
 \[
 \bar G(t)=\nu c_0+A_1t^\beta+A_2t^{2\beta}+\bar L(t),\quad
 c_0=-(u^2+1/4)/2,\quad \widehat Z=I^\alpha\bar G,\quad T=1/2.
 \tag{D.1}
 \]
-Here \(\bar L\) is the continuous piecewise-linear interpolation in physical time at nodes \((t_j,L_j)\), with \(L_0=0\). Nodes and complex coefficients are interpreted as the exact dyadic rationals represented by their binary64 values. The following independent residual controls the continuous-time error of this reference trajectory:
+The fields for \(\alpha=.52\) and \(.6\) store \(n\le1024\) on 2049 time knots and the field for \(\alpha=.9\) stores \(n\le640\) on 1025 knots; residual banks certify \(n\le512\) for all three and, for \(\alpha=.52\), also \(512<n\le1024\). Here \(\bar L\) is the continuous piecewise-linear interpolation in physical time at nodes \((t_j,L_j)\), with \(L_0=0\). Nodes and complex coefficients are interpreted as the exact dyadic rationals represented by their binary64 values. The following independent residual controls the continuous-time error of this reference trajectory:
 \[
 r_t=\bar G-\nu F(\widehat Z),\quad
 \delta_F=\nu^{-1}\sup_{0\le t\le T}|r_t|.
@@ -1482,7 +1482,7 @@ The recorded exponent is derivative-based: \(\bar L_T=\nu^{-1}\int\xi_*(T-t)\bar
 \]
 Gamma and Mittag–Leffler curve moments, trajectory integrals, exponents, phases, and sums for the fixed curve use outward-rounded 100-bit rational intervals.
 
-The positive-half-axis price rule has \(h=1/8\) and analytic-strip width \(a=9/20\). At the available nodes \(u=0:1/8:64\), the recorded trajectories use their actual residual certificates. For nodes above 64 through 128, the approximate transform is explicitly zero and each error is bounded by the exact-transform envelope. Above 128, the proved infinite discrete-rule tail bound obtained from the proved continuous-integral envelope is included. A comparison bound for the real part of the exact Riccati solution and a 64-cell lower sum over the entire positive-kernel curve give the high-frequency envelope. The analytic-strip trapezoidal error is estimated separately. Passage from the full-axis integral to the positive half-axis, including the half-weight at zero, is handled explicitly. The resulting enclosures cover all twelve model prices in Appendix E.
+The positive-half-axis price rule has \(h=1/8\) and analytic-strip width \(a=9/20\). The finite grid runs through \(u=128\). With the reference band \(u\le64\) (H0–H2, Q0 and the nearby banks), the nodes \(u=0:1/8:64\) use their certified residual banks, and at the nodes above 64 the approximate transform is explicitly zero and each error is bounded by the exact-transform envelope; with the band \(u\le128\) (H3, H4, Q1 and Q2) every finite node uses its certified residual bank. Above 128, the proved infinite discrete-rule tail bound obtained from the proved continuous-integral envelope is included. A comparison bound for the real part of the exact Riccati solution and a 64-cell lower sum over the entire positive-kernel curve give the high-frequency envelope. The analytic-strip trapezoidal error is estimated separately. Passage from the full-axis integral to the positive half-axis, including the half-weight at zero, is handled explicitly. The resulting enclosures cover all twelve model prices in Appendix E.
 
 Here \(E_{\rm state}\) is a certified state radius: \(E_\delta\) in Proposition C.6 requires \(\delta_F<s_0^2/2\); at other nodes the half-plane bound gives \(E_{\rm state}=\delta_F/\sigma\). The finite-history experiments use Theorem 3.1 and retain the global alternative when valid and tighter. The nearby fields use the same construction with independently generated coefficients and continuous residual banks.
 
@@ -1512,7 +1512,7 @@ All experiments use \(\nu=0.2897\), \(\rho=-0.7445\), the curve (7.1), Fourier s
 | N2 | 1/2 | 13/25, 21/40, 53/100, 27/50, 11/20 | 2048 | 513 | 512 | 2 | 1 |
 | N2L | 1/2 | 13/25 | 2048 | 513 | 512 | 2 | 128 |
 
-H0 uses the uniform state bound and H1 the bound (3.5) with one global residual maximum, on the same field. H2 uses 128 time bins on the band \(u\le64\). H3 and H4 extend the reference through \(u=128\), with the upper band propagated globally in H3 and in 128 bins in H4. Q0, Q1 and Q2 restrict the six-month field to three months as in D.3, with 1430, 1353 and 550 time knots for the three candidates in Q0 and 1430 knots in Q1 and Q2; Q2 adds the 128 time bins and was specified after Q1. The field for \(\alpha=0.9\) has 1025 time knots and 641 stored frequencies through 80, of which 513 are reference nodes; the fields for 0.52 and 0.60 have 2049 knots and 1025 stored frequencies through 128.
+H0 uses the uniform state bound and H1 the bound (3.5) with one global residual maximum, on the same field. H2 uses 128 time bins on the band \(u\le64\). H3 and H4 extend the reference through \(u=128\), with the upper band propagated globally in H3 and in 128 bins in H4. Q0, Q1 and Q2 restrict the six-month field to three months as in D.3, with 1430, 1353 and 550 time knots for the three candidates in Q0 and 1430 knots in Q1 and Q2; Q2 adds the 128 time bins to Q1 and lies outside the prespecified design. The field for \(\alpha=0.9\) has 1025 time knots and 641 stored frequencies through 80, of which 513 are reference nodes; the fields for 0.52 and 0.60 have 2049 knots and 1025 stored frequencies through 128.
 
 N1 and N2 generate a field and a residual bank for each of the five nearby candidates, with two subcells per time cell (2047 and 4095 closed cells), and N2L applies 128 time bins to the N2 bank at \(\alpha=0.52\). The low and high banks of the H configurations each have 8189 closed cells, for 513 and 512 frequencies. H4 and N2L differ in reference centre, node coverage and residual bank as well as in propagation. The modified Adams outputs of Section 7.7 are certified against the reference bank of the N configurations.
 
@@ -1567,7 +1567,7 @@ J_*=\min_{\Theta_{\rm finite}}J\in[L_*,U_*].
 \]
 For \(\varepsilon\ge0\), every exact \(\varepsilon\)-near-optimal candidate belongs to
 \[
-\{\alpha_j:L_j\le U_*+\varepsilon\};
+\{\alpha_j:L_j\le U_*+\varepsilon\}.
 \tag{E.6}
 \]
 The condition \(U_j-L_*\le\varepsilon\) is sufficient for that candidate to be near-optimal for the exact objective. If
@@ -1598,7 +1598,7 @@ If \(p^+<b^-\), then the exact price satisfies \(c<B\); if \(p^->a^+\), then \(c
 
 Displayed endpoints are outward decimal roundings of the exact rational bounds. The unique minimiser of the model objective is \(\alpha=0.52\), with a gap of at least 0.0000002702052 to its competitors, and the stored rational output has the same unique minimiser.
 
-**Table E.3. Three-candidate quote-band objective and consistency decisions, using the original twelve quotes.**
+**Table E.3. Three-candidate quote-band objective and consistency decisions, using the twelve quotes of Section 7.1.**
 
 | α | Rigorous model J_band interval | Rows strictly excluding quote consistency | All-row quote consistency certified |
 |---|---|---|---|
@@ -1780,13 +1780,13 @@ Table E.13 lists the proof obligations, the reader of each, what it recomputes a
 
 | ID | Obligation | Verification command | Recomputed | Inherited / shared |
 | --- | --- | --- | --- | --- |
-| S1 | Padé coefficient signs on the original parameter rectangle | `full_structure_verify.py` ([S1](https://github.com/130U/RESEARCH-Certified-Joint-Pricing-Errors-in-Rough-Heston/blob/main/COMMANDS.md#s1)) | 211241 structural sign leaves and rectangle cover | model/parameter definitions; original strict interval algebra and generalised-power primitives |
-| S2 | Startup Caputo residual and left-halfplane enclosure | `startup_independent.py` ([S2](https://github.com/130U/RESEARCH-Certified-Joint-Pricing-Errors-in-Rough-Heston/blob/main/COMMANDS.md#s2)) | all 513 frequencies for each of the three original startup cells | stored field dyadics and later-time continuous residuals; Gamma/power/dyadic outward primitives |
-| R1 | Full original alpha=.52 low-frequency continuous residual cover | `check-time-envelope.py` ([R1](https://github.com/130U/RESEARCH-Certified-Joint-Pricing-Errors-in-Rough-Heston/blob/main/COMMANDS.md#r1)) | 8189 closed cells ×513 entries: cover, saved dyadic values and per-node maxima; startup audited separately | derivative inequalities in identified continuous generator; NumPy enclosure with proved dot-product error and strict scalar primitives |
-| R2 | Full alpha=.52 high-frequency continuous residual cover | `omission-verify.py` ([R2](https://github.com/130U/RESEARCH-Certified-Joint-Pricing-Errors-in-Rough-Heston/blob/main/COMMANDS.md#r2)) | 8189 closed cells ×512 entries: exact bank, startup/halfplane, saved-node maxima | identified Caputo derivative-generator inequalities; strict scalar primitives and original continuous generator |
+| S1 | Padé coefficient signs on the parameter rectangle of Proposition 6.1 | `full_structure_verify.py` ([S1](https://github.com/130U/RESEARCH-Certified-Joint-Pricing-Errors-in-Rough-Heston/blob/main/COMMANDS.md#s1)) | 211241 structural sign leaves and rectangle cover | model/parameter definitions; strict interval algebra and generalised-power primitives |
+| S2 | Startup Caputo residual and left half-plane enclosure | `startup_independent.py` ([S2](https://github.com/130U/RESEARCH-Certified-Joint-Pricing-Errors-in-Rough-Heston/blob/main/COMMANDS.md#s2)) | all 513 frequencies for each of the three startup cells | stored field dyadics and later-time continuous residuals; Gamma/power/dyadic outward primitives |
+| R1 | Full alpha=.52 low-frequency continuous residual cover | `check-time-envelope.py` ([R1](https://github.com/130U/RESEARCH-Certified-Joint-Pricing-Errors-in-Rough-Heston/blob/main/COMMANDS.md#r1)) | 8189 closed cells ×513 entries: cover, saved dyadic values and per-node maxima; startup audited separately | derivative inequalities in identified continuous generator; NumPy enclosure with proved dot-product error and strict scalar primitives |
+| R2 | Full alpha=.52 high-frequency continuous residual cover | `omission-verify.py` ([R2](https://github.com/130U/RESEARCH-Certified-Joint-Pricing-Errors-in-Rough-Heston/blob/main/COMMANDS.md#r2)) | 8189 closed cells ×512 entries: exact bank, startup/half-plane, saved-node maxima | identified Caputo derivative-generator inequalities; strict scalar primitives and continuous generator |
 | P1 | Global finite-history and low-frequency 128-bin price accounts | `verify-finite-history-independent.py`; `independent-time-local.py` ([P1](https://github.com/130U/RESEARCH-Certified-Joint-Pricing-Errors-in-Rough-Heston/blob/main/COMMANDS.md#p1)) | forward masses, complete cell intersections, 513 tightened radii, all 1025 finite terms and complete spread remainder | continuous residual theorem/validity and identified stored field; strict forward-moment, exponent and true-tail primitives |
-| P2 | Expanded-reference frozen half-year output account | `independent-omission.py` ([P2](https://github.com/130U/RESEARCH-Certified-Joint-Pricing-Errors-in-Rough-Heston/blob/main/COMMANDS.md#p2)) | changed reference centre, all 1025 support terms, old/new complete interval intersection, global/local high-frequency accounts | same actual fast output and continuous residual banks; original strict moment/scalar primitives |
-| Q1 | Quarter-maturity used 64 certificate and actual fast output | `independent-transfer.py` ([Q1](https://github.com/130U/RESEARCH-Certified-Joint-Pricing-Errors-in-Rough-Heston/blob/main/COMMANDS.md#q1)) | all three exact terminal interpolations, 1539 restricted exponents, three original fast-output calculations, all 3075 true finite CF/tail/price terms | larger-horizon continuous residuals and halfplane certificate; strict moment/trig/dyadic/true-tail libraries; original fast implementation used only for output replay |
+| P2 | Expanded-reference frozen half-year output account | `independent-omission.py` ([P2](https://github.com/130U/RESEARCH-Certified-Joint-Pricing-Errors-in-Rough-Heston/blob/main/COMMANDS.md#p2)) | changed reference centre, all 1025 support terms, intersection of both complete intervals, global/local high-frequency accounts | same actual fast output and continuous residual banks; strict moment/scalar primitives |
+| Q1 | Quarter-maturity used 64 certificate and actual fast output | `independent-transfer.py` ([Q1](https://github.com/130U/RESEARCH-Certified-Joint-Pricing-Errors-in-Rough-Heston/blob/main/COMMANDS.md#q1)) | all three exact terminal interpolations, 1539 restricted exponents, three fast-output calculations, all 3075 true finite CF/tail/price terms | larger-horizon continuous residuals and half-plane certificate; strict moment/trig/dyadic/true-tail libraries; fast implementation used only for output replay |
 | Q2 | Quarter full 128 global and 128-bin complete certificate | `independent-transfer-supplement.py` ([Q2](https://github.com/130U/RESEARCH-Certified-Joint-Pricing-Errors-in-Rough-Heston/blob/main/COMMANDS.md#q2)) | all 1025 restricted exponents, all 1025 CF/tail/coefficient/radius terms, all high bank entries, all 128 local weights and exact account | low/high continuous derivative validity; actual fast replay is separately performed by Q1; strict moment/trig/dyadic/true-tail libraries; path helpers of Q1 |
 | N1 | Fresh fields/residuals at the five nearby alpha points | `nearby_independent.py` ([N1](https://github.com/130U/RESEARCH-Certified-Joint-Pricing-Errors-in-Rough-Heston/blob/main/COMMANDS.md#n1)) | all cells, startup, halfplane, 513 exponents and 1025 CF/coefficient terms per point; all objective/pair decisions | strict proof of continuous residual generator and final propagation theorem; declared sdk outward primitives, stored reference data |
 | N2 | Descriptive 128-bin reused-bank control, outside nearby objective grid | `local_output_independent.py` ([N2](https://github.com/130U/RESEARCH-Certified-Joint-Pricing-Errors-in-Rough-Heston/blob/main/COMMANDS.md#n2)) | 128 exact positive weights, every intersecting closed-bank maximum, 513 tightened radii, all 12 prices and all actual output rounding | complete identity-matched N2048 point proof and continuous residual generator; same strict moment/trig/dyadic primitives |

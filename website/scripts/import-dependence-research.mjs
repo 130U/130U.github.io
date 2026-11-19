@@ -13,8 +13,8 @@ async function writeOrCheck(url, content) {
   else await writeFile(url, content);
 }
 const manifest = JSON.parse(await readFile(new URL("source-manifest.json", sourceDirectory), "utf8"));
-const commit = "a62cc41106e58e5d2df1387a1cf39ebfa65e36e8";
-const paperBlob = "e9efa283fc4b8efe2cac0ca483fa3e5da81e01e5";
+const commit = "c0782609a95f9887c248631c56174615233c7ae4";
+const paperBlob = "72d5cf95d6812da8198cca12f313c59d254ef3d0";
 assert.equal(manifest.commit, commit);
 assert.equal(manifest.repository, "130U/RESEARCH-Critical-Dependence-Stress-for-Diversification-Gains-under-Fixed-Marginals");
 const repositoryUrl = `https://github.com/${manifest.repository}`;
@@ -250,7 +250,7 @@ for (const [index, match] of [...references.matchAll(/\\bibitem\{([^}]+)\}([\s\S
   referenceParagraphs.push(`<a id="ref-${match[1]}"></a>\n\n${index + 1}. ${value}`);
 }
 assert.equal(referenceParagraphs.length, bibliographyKeys.length);
-converted += `\n\n## Appendices and Supporting Material\n\nThis page includes the complete abstract, five main sections, all four main-text figures, and references. Technical appendices and declarations are available in the [full manuscript](${sourceUrl}) and the [GitHub repository](${repositoryUrl}).\n\n## References\n\n${referenceParagraphs.join("\n\n")}\n`;
+converted += `\n\n## Appendices and supporting material\n\nThis page includes the complete abstract, five main sections, all four main-text figures, and references. Technical appendices and declarations are available in the [full manuscript](${sourceUrl}) and the [GitHub repository](${repositoryUrl}).\n\n## References\n\n${referenceParagraphs.join("\n\n")}\n`;
 converted = converted.replace(/@@DEPENDENCE-BLOCK-(\d+)@@/gu, (_, index) => blocks[Number(index)]);
 const mathUses = mathematics.map(() => 0);
 converted = converted.replace(/@@DEPENDENCE-MATH-(\d+)@@/gu, (_, rawIndex) => {

@@ -1,4 +1,4 @@
-\section{2. Model formulation and the local benchmark}\label{the-model-and-ranking-thresholds}
+\section{2. Model formulation and the local benchmark}\label{sec:model}
 
 We first formulate the comparison for arbitrary integrable marginal laws, which are enough for a worst stressed model to exist. The critical-scale analysis will use a positive continuous density and exchangeability of the two traded positions, both introduced in Section~2.2.
 
@@ -86,16 +86,16 @@ The stressed law may be any coupling in \(\Pi((P_0)_1,(P_0)_2,(P_0)_3)\); exchan
 
 We work on a compact box with a positive continuous density because that lets us study this dependence mechanism with uniform control of marginal restoration. Positivity on the closed box gives both the interior mass that local exchanges need and lower bounds on the marginal densities, hence Lipschitz bounds for their inverse CDFs, and these bounds enter the quantile recovery in Section~3.2 and Appendix A.5. Section~5.3 takes up the additional difficulties posed by unbounded marginals.
 
-\paragraph{Loss units and effective stress costs}\label{m-units}
+\paragraph{Loss units and effective stress costs}\label{par:effective-costs}
 A shift \(\Delta X_3\) changes the portfolio loss by \(\beta\Delta X_3\) at cost \(\gamma_3|\Delta X_3|=(\gamma_3/\beta)|\beta\Delta X_3|\). So \(c_1=\gamma_1\), \(c_2=\gamma_2\), and \(c_3=\gamma_3/\beta\) are the costs per unit change of \(B\) along the three coordinate axes, and the ratio \(c_3/\gamma_1\) compares a background displacement with a first-position displacement having the same effect on portfolio loss.
 
 \paragraph{Canonical box normalization} Writing the original coordinates as \(X=T_{\rm box}(u)=(\ell+\kappa u_1,\ell+\kappa u_2,\ell_3+\kappa_3u_3)\), with \(\kappa=\Delta_I/2\) and \(\kappa_3=\Delta_3/2\), gives a normalized model on \([0,2]^3\) with \(\widehat\beta=\beta\kappa_3/\kappa\) and \(\widehat\gamma=(\kappa\gamma_1,\kappa\gamma_2,\kappa_3\gamma_3)\). By cash invariance and positive homogeneity of ES, the original paired risk is \(\kappa\) times its normalized counterpart, while corresponding transport plans have equal cost; hence the critical budgets agree and \(p\) is unchanged. A common rescaling of all transport weights rescales those budgets.
 
-\subsection{2.3 Nominal curvature and the exact initial slope}\label{nominal-improvement-initial-slope-and-the-protection-benchmark}
+\subsection{2.3 Nominal curvature and the exact initial slope}\label{sec:nominal-curvature}
 
 Under the reference model of Section~2.2, let \(v\) be the upper-tail \(p\) threshold of \(B\). The marginal expected shortfall (MES) of a unit position \(X_i\), namely \(E_{P_0}[X_i\mid B>v]\), is the ES derivative with respect to its holding, and multiplying by that holding gives its Euler contribution \cite{scaillet2004,tasche2001}. The first two holdings in \(B\) both equal one, so the directional derivative along \(H=X_1-X_2\) is their MES difference: with \(T_H=E_{P_0}[H1_{\{B>v\}}]\), it equals \(p^{-1}T_H=E_{P_0}[X_1-X_2\mid B>v]=0\) by exchangeability. To find the gain from a nonzero trade we then have to differentiate the moving tail boundary, which leads to a conditional variance on the tail section.
 
-We record the classical section differentiation formula under our continuity assumptions in Lemma~\ref{lemma:general-variation}.
+We record the classical section differentiation formula under our continuity assumptions in Lemma~\ref{lem:general-variation}.
 
 The tail boundary can be parameterized by
 \[
@@ -153,9 +153,9 @@ D_\varepsilon(\rho)=-m_\varepsilon+K_\varepsilon\rho
 \end{resultparts}
 \end{proposition}
 \begin{proof}
-For part~(i), the coefficients of \(B+\eta H\) are positive whenever \(|\eta|<1\), and its support is \([2\ell+\beta\ell_3,2r+\beta r_3]\). Since every interior level meets \(\operatorname{int}S\), Lemma~\ref{lemma:general-variation} gives a positive continuous loss density and a unique threshold. The gradients of \(H\) and \(B+\eta H\) are linearly independent, so \(H\) is nonconstant on each such section. Its conditional variance is therefore strictly positive, and the same lemma implies strict convexity of \(\eta\mapsto ES_p^{P_0}(B+\eta H)\) on \((-1,1)\).
+For part~(i), the coefficients of \(B+\eta H\) are positive whenever \(|\eta|<1\), and its support is \([2\ell+\beta\ell_3,2r+\beta r_3]\). Since every interior level meets \(\operatorname{int}S\), Lemma~\ref{lem:general-variation} gives a positive continuous loss density and a unique threshold. The gradients of \(H\) and \(B+\eta H\) are linearly independent, so \(H\) is nonconstant on each such section. Its conditional variance is therefore strictly positive, and the same lemma implies strict convexity of \(\eta\mapsto ES_p^{P_0}(B+\eta H)\) on \((-1,1)\).
 
-At \(\eta=0\), exchanging the first two coordinates preserves both the reference tail and its boundary measure and reverses \(H\), giving \(T_H=m_1=0\). In the notation of Lemma~\ref{lemma:general-variation}, the remaining section moments at \((0,v)\) are \(m_0=g\) and \(m_2=2J\). Thus the threshold derivative vanishes and the optimized second derivative is \(2J/p\), which yield \eqref{eq:2.6} by Taylor expansion at zero. Strict convexity makes this stationary point the strict minimum, so \(m_\varepsilon>0\) for all \(0<\varepsilon<1\). For the unoptimized objective \(\Psi\), the Hessian at \((0,v)\) is \(\operatorname{diag}(2J/p,g/p)\). Expanding at the trade size and threshold displacement \((c\varepsilon,\varepsilon\tau)\) gives \eqref{eq:2.7}, uniformly on bounded \(\tau\)-intervals.
+At \(\eta=0\), exchanging the first two coordinates preserves both the reference tail and its boundary measure and reverses \(H\), giving \(T_H=m_1=0\). In the notation of Lemma~\ref{lem:general-variation}, the remaining section moments at \((0,v)\) are \(m_0=g\) and \(m_2=2J\). Thus the threshold derivative vanishes and the optimized second derivative is \(2J/p\), which yield \eqref{eq:2.6} by Taylor expansion at zero. Strict convexity makes this stationary point the strict minimum, so \(m_\varepsilon>0\) for all \(0<\varepsilon<1\). For the unoptimized objective \(\Psi\), the Hessian at \((0,v)\) is \(\operatorname{diag}(2J/p,g/p)\). Expanding at the trade size and threshold displacement \((c\varepsilon,\varepsilon\tau)\) gives \eqref{eq:2.7}, uniformly on bounded \(\tau\)-intervals.
 
 \emph{The fixed-marginal Lipschitz bound.} We next establish the uniform Lipschitz bound over \(\Pi\). Given any minimizing \(u\) for \(B\) under \(Q\) and any minimizing \(t\) for \(A_\varepsilon\) under \(P\), let
 \[
@@ -192,7 +192,7 @@ Integrating against an optimal transport plan and then interchanging \(P,Q\) pro
 \tag{2.12}\label{eq:sharp-budget-continuity}
 \end{equation}
 
-\label{a.3-an-interior-intersection-and-attainment-of-the-initial-slope}
+\label{par:initial-slope-attainment}
 \emph{Attaining the initial slope.} Under \eqref{eq:2.9}, we construct an attaining exchange near an interior intersection of the reference tail planes \(\{B=v\}\) and \(\{A_\varepsilon=t_\varepsilon\}\). To locate such an intersection, fix \(\varepsilon\in(0,1)\) and let \([m_F,M_F]\) be the nondegenerate range of \(A_\varepsilon\) on \(F_v=\{B=v\}\cap S\). Both losses increase along each nonconstant segment from the lower vertex \(x_{\min}=(\ell,\ell,\ell_3)\). Any point with \(B>v\) lies beyond an intersection of that segment with \(F_v\), so \(t_\varepsilon\le m_F\) would imply \(\{B>v\}\subset\{A_\varepsilon>t_\varepsilon\}\). Since \(A_\varepsilon\) is nonconstant on \(F_v\), the second tail would also contain an open set below \(B=v\), contradicting the equal tail probabilities and \(f>0\). Rays toward the upper corner similarly exclude \(t_\varepsilon\ge M_F\), which leaves \(t_\varepsilon\in(m_F,M_F)\). The relative-interior property of a linear map on a convex section gives an intersection \(c=(x_*,y_*,z_*)\in\operatorname{int}S\).
 
 To exchange the first-coordinate marginal intervals of two small source cubes in opposite disagreement regions along \(e_1\), we first choose reference points with the same coordinate \(x_*\) and seek equal and opposite changes in the two losses. From the interior intersection \(c\), a displacement \((0,-\zeta_0,a\zeta_0)\) changes \(B\) by \((-1+\beta a)\zeta_0\) and \(A_\varepsilon\) by \((-(1-\varepsilon)+\beta a)\zeta_0\). Equating their sum to zero determines \(a=(1-\varepsilon/2)/\beta\). Thus the points
@@ -221,7 +221,7 @@ The plan has cost \(2\gamma_1\theta\mu\delta_x\), and the sharp bound \eqref{eq:
 
 If \(\gamma_2\ge\gamma_1\) and \(\gamma_3\ge\beta\gamma_1\), condition~\eqref{eq:2.9} holds for every \(\varepsilon\in(0,1)\), which suggests the extrapolated reversal budget \(r_{0,\varepsilon}=m_\varepsilon/K_\varepsilon\). The construction gives \(r_\varepsilon>0\) for each fixed trade size, but the disagreement regions narrow with \(\varepsilon\), so it leaves \(r_\varepsilon/\varepsilon^2\) uncontrolled. Indeed, the unscaled bound \(|D_\varepsilon(\rho)|\le\varepsilon\|H\|_\infty\) makes both iterated limits in \((\rho,\varepsilon)\) vanish even though \(K_\varepsilon\to1/(p\gamma_1)>0\), which is why Section~3 tracks the profile under the joint scaling \(\rho=s\varepsilon^2\).
 
-\paragraph{Reference symmetry and stressed dependence}\label{prop:exchangeable-protection}\label{rem:reference-symmetry}
+\paragraph{Reference symmetry and stressed dependence}\label{par:reference-symmetry}
 Our stress class allows asymmetric dependence between the two traded positions. If every candidate law were exchangeable, the losses \(B-\varepsilon H\) and \(B+\varepsilon H\) would have the same distribution, and convexity of ES would give
 \begin{equation}
 ES_p^P(B)\le\tfrac12 ES_p^P(B-\varepsilon H)+\tfrac12 ES_p^P(B+\varepsilon H)

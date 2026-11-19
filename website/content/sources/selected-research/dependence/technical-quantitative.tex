@@ -1,5 +1,5 @@
 \keepproofstart{8\baselineskip}
-\section{Appendix B. Proofs for the analytical illustrations}\label{app:technical-quantitative}
+\section{Appendix B. Proofs for the analytical illustrations}\label{app:illustration-proofs}
 \subsection{B.1 The projection-potential estimate}\label{app:potential-proof}
 \begin{proof}[Proof of Proposition~\ref{prop:projection-potential-bound}]
 Fix any minimizing threshold \(\tau\in\arg\min G_1\). With \(w=b\cdot d\), \(\Delta_+(u,w)=(u+w)_+-u_+\), and \(B_h(u,w)=\Delta_+(u,w)-\Delta_+(u+h,w)\), evaluating \(G_0\) at zero and \(G_1\) at \(\tau\) gives
@@ -31,7 +31,7 @@ The value is zero for \(h=0\). Since \(H\) is bounded and \(k_\pm\) are bounded 
 
 \subsection{B.2 The uniform midpoint-potential bound}\label{app:uniform-bound-proof}
 
-To establish the two threshold branches used for the lower bound in Corollary~\ref{prop:uniform-variable-cost}, we normalize costs and potentials by \(\gamma_0\), substitute the midpoint potentials of \hyperref[strict-premium-despite-equal-efficiency]{Section~5.1}, and take \(\lambda=3/2\) in these normalized units. We first evaluate the penalty on the same-side regions \(\{x<y<1\}\) and \(\{1<x<y\}\), intersected with \(\Omega\), together with their exchanged images. On these regions, both effective directional costs equal \(1/2\). Their total section mass is \(1/8\), their \(H^2\)-moment is \(1/48\), and their \(H\)-moment is zero. Their contribution to the integral of \((H-\tau)^2\) is consequently \(1/48+\tau^2/8\).
+To establish the two threshold branches used for the lower bound in Corollary~\ref{cor:uniform-reference}, we normalize costs and potentials by \(\gamma_0\), substitute the midpoint potentials of \hyperref[sec:uniform-reference]{Section~5.1}, and take \(\lambda=3/2\) in these normalized units. We first evaluate the penalty on the same-side regions \(\{x<y<1\}\) and \(\{1<x<y\}\), intersected with \(\Omega\), together with their exchanged images. On these regions, both effective directional costs equal \(1/2\). Their total section mass is \(1/8\), their \(H^2\)-moment is \(1/48\), and their \(H\)-moment is zero. Their contribution to the integral of \((H-\tau)^2\) is consequently \(1/48+\tau^2/8\).
 
 On the cross-region, \(k(\xi,H)=3/2=\lambda\): the direction that increases the paired hinge gain has sign opposite to \(H\), so the penalty vanishes at \(\tau=0\). For \(0<|\tau|\le1\), a penalty appears only where the threshold shift reverses the sign of \(H-\tau\). In that triangular strip, the coordinates \(h=|H|\) and \(t=x+y\) satisfy \(0<h<|\tau|\), \(2-h<t<2+h\), and \(d\sigma=dt\,dh/16\). Thus the additional integral is
 \[

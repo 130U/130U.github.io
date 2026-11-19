@@ -328,7 +328,7 @@ export const manuscriptFigures: Readonly<Record<string, { figure: string; eviden
       "(\\alpha_0,V_0,\\theta,\\lambda_\\xi)=(0.5286,\\,0.0262,\\,0.0721,\\,0.5037)",
       "\\(\\nu=0.2897\\), \\(\\rho=-0.7445\\)",
       "W_\\lambda(t)=\\sum_{n=0}^\\infty(-\\lambda)^n\\,t^{1+n\\alpha}",
-      "since \\(\\lambda_*T^\\alpha\\approx0.075\\)",
+      "by at most 7.5 per cent, the order of \\(\\lambda_*T^\\alpha\\approx0.075\\)",
     ],
   },
   "/assets/research/rough/netting-ratio.png": {
