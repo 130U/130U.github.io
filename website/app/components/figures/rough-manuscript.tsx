@@ -5,7 +5,7 @@ import { Figure, Mark, Plot, Schematic, Tx, linear, path, styles as kit, type Cr
 import styles from "./Figures.module.css";
 
 /* The four figures of "Certified Joint Pricing Errors in Rough Heston", drawn
-   natively as scripts/build_figures.py of 130U/RESEARCH-Certified-Rough-Heston-Valuation
+   natively as scripts/build_figures.py of 130U/RESEARCH-Certified-Joint-Pricing-Errors-in-Rough-Heston
    draws them at the pinned source commit. Figure 1 evaluates the curve (7.1)
    and the series (3.9); Figures 2 to 4 plot the saved banks, as
    scripts/import-selected-research.mjs extracts them, with the netting ratio

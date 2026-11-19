@@ -39,9 +39,9 @@ export type LegalPaper = {
 
 export const legalPaperSlugs = [
   "autonomous-authority-in-space",
-  "small-states-and-strategic-space-dependence",
-  "solar-geoengineering-comparison-and-continuity",
-  "mangrove-restoration-and-compensatory-mitigation",
+  "small-states-and-the-governance-of-strategic-space-dependence",
+  "who-may-choose-the-lesser-risk",
+  "mangrove-restoration-and-the-limits-of-compensatory-mitigation",
 ] as const;
 
 const legalPapers: readonly LegalPaper[] = legalPaperSlugs.map((slug) => {

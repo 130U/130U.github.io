@@ -6,7 +6,7 @@ hero: /assets/blog/ten-states-of-water/cover.jpg
 heroAlt: The cover of Ten States of Water: the name Theodore Ouyang written across the sky above a snowy ridge, a sunset horizon, and winding tidewater
 image: /assets/blog/ten-states-of-water/og.jpg
 imageAlt: Ten States of Water: a snowy ridge above tidal flats at sunset, beneath the name Theodore Ouyang
-work: /ten-states-of-water/
+work: /BLOG-Ten-States-of-Water/
 workDescription: Ten landscapes of Alaska and Yellowstone
 ---
 

@@ -37,9 +37,9 @@ test("sentence endings include closing English quotation marks", () => {
 test("all four legal abstracts produce complete descriptions within 260 characters", async () => {
   const slugs = [
     "autonomous-authority-in-space",
-    "small-states-and-strategic-space-dependence",
-    "solar-geoengineering-comparison-and-continuity",
-    "mangrove-restoration-and-compensatory-mitigation",
+    "small-states-and-the-governance-of-strategic-space-dependence",
+    "who-may-choose-the-lesser-risk",
+    "mangrove-restoration-and-the-limits-of-compensatory-mitigation",
   ];
   for (const slug of slugs) {
     const paper = JSON.parse(await readFile(new URL(`../content/legal-papers/${slug}.json`, import.meta.url), "utf8"));

@@ -5,7 +5,7 @@ import { readFile, writeFile } from "node:fs/promises";
 // This importer reads exactly the TeX of the pinned manuscript. Unknown prose
 // commands fail closed; mathematical contents are never rewritten.
 const sourceDirectory = new URL("../content/sources/selected-research/dependence/", import.meta.url);
-const outputUrl = new URL("../content/selected-research/critical-dependence-stress-for-portfolio-diversification.json", import.meta.url);
+const outputUrl = new URL("../content/selected-research/critical-dependence-stress-for-diversification-gains-under-fixed-marginals.json", import.meta.url);
 assert.ok(process.argv.slice(2).every((argument) => argument === "--check"), "Usage: node scripts/import-dependence-research.mjs [--check]");
 const checkOnly = process.argv.includes("--check");
 async function writeOrCheck(url, content) {
@@ -13,10 +13,10 @@ async function writeOrCheck(url, content) {
   else await writeFile(url, content);
 }
 const manifest = JSON.parse(await readFile(new URL("source-manifest.json", sourceDirectory), "utf8"));
-const commit = "bacd66b09e1f66a135360a960943a6df7572ad88";
+const commit = "a62cc41106e58e5d2df1387a1cf39ebfa65e36e8";
 const paperBlob = "e9efa283fc4b8efe2cac0ca483fa3e5da81e01e5";
 assert.equal(manifest.commit, commit);
-assert.equal(manifest.repository, "130U/RESEARCH-Critical-Dependence-Stress");
+assert.equal(manifest.repository, "130U/RESEARCH-Critical-Dependence-Stress-for-Diversification-Gains-under-Fixed-Marginals");
 const repositoryUrl = `https://github.com/${manifest.repository}`;
 const sourceUrl = `${repositoryUrl}/blob/${commit}/paper/paper.pdf`;
 const mainFiles = ["main-introduction.tex", "main-model-benchmark.tex", "main-variational.tex", "main-crossing.tex", "main-classification-flow.tex", "main-quantitative.tex", "main-scope.tex"];
@@ -270,8 +270,8 @@ const emittedAnchors = new Set([...normalized.matchAll(/<a id="([^"]+)"><\/a>/gu
 for (const { href } of referenceUses) if (href.startsWith("#")) assert.ok(emittedAnchors.has(href.slice(1)), `Internal reference has no target: ${href}`);
 assert.equal(emittedAnchors.size, [...normalized.matchAll(/<a id="([^"]+)"><\/a>/gu)].length, "Duplicate emitted anchors.");
 const content = {
-  slug: "critical-dependence-stress-for-portfolio-diversification",
-  title: "Critical Dependence Stress for Portfolio Diversification",
+  slug: "critical-dependence-stress-for-diversification-gains-under-fixed-marginals",
+  title: "Critical Dependence Stress for Diversification Gains under Fixed Marginals",
   description: "How much dependence stress erases a diversification gain under fixed marginals: a variational limit, a quadratic critical budget, the marginal-restoration premium and projected flow duality.",
   sourceUrl, repositoryUrl, sourceEditedAt: manifest.commitDate, sourceCommit: commit, sourceBlob: paperBlob,
   markdown: normalized,

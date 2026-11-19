@@ -18,8 +18,8 @@ function withoutArticleFigures(html) {
 
 const ROOT = fileURLToPath(new URL("../", import.meta.url));
 const SOURCE = path.join(ROOT, "content", "sources", "selected-research", "dependence");
-const SLUG = "critical-dependence-stress-for-portfolio-diversification";
-const COMMIT = "bacd66b09e1f66a135360a960943a6df7572ad88";
+const SLUG = "critical-dependence-stress-for-diversification-gains-under-fixed-marginals";
+const COMMIT = "a62cc41106e58e5d2df1387a1cf39ebfa65e36e8";
 const PAPER_BLOB = "e9efa283fc4b8efe2cac0ca483fa3e5da81e01e5";
 
 async function manuscript() {
@@ -142,6 +142,6 @@ test("dependence figures are drawn natively with complete captions and appendix 
     const prose = caption.replace(/<svg\b[\s\S]*?<\/svg>|<math\b[\s\S]*?<\/math>|<[^>]+>/gu, "");
     assert.equal(normalize(decodeHtml(prose)), normalize(captionText(figure.inlines)), "Rendered figure captions retain all non-mathematical text.");
   }
-  const appendix = "https://github.com/130U/RESEARCH-Critical-Dependence-Stress/blob/" + COMMIT + "/paper/source/technical-quantitative.tex#L80";
+  const appendix = "https://github.com/130U/RESEARCH-Critical-Dependence-Stress-for-Diversification-Gains-under-Fixed-Marginals/blob/" + COMMIT + "/paper/source/technical-quantitative.tex#L80";
   assert.ok(rendered[3][2].includes(`href="${appendix}"`), "The flow-share figure retains its original equation (B.2) appendix link.");
 });

@@ -16,8 +16,8 @@ function withoutArticleFigures(html) {
 }
 
 const PROJECTS = [
-  { key: "asian", slug: "certified-valuation-of-arithmetic-asian-options", repository: "RESEARCH-Certified-Valuation-Arithmetic-Asian-Options", commit: "68f7d8c691181d9ce2c299b42c5f7ea36b8835e2", blob: "21fd78c9d1d9baef709a6e14345985fec1de1cdc", sections: 9, tables: 11, formulas: 724, figures: "asian" },
-  { key: "rough", slug: "certified-joint-pricing-errors-in-rough-heston", repository: "RESEARCH-Certified-Rough-Heston-Valuation", commit: "89e3378d068d9bcc266511085679ab8c5a70d2ff", blob: "e0defb8c778e5dc1d11e938896621a7633c3dd79", sections: 8, tables: 10, formulas: 437, figures: "rough" },
+  { key: "asian", slug: "certified-valuation-of-arithmetic-asian-options", title: "Certified Valuation of Arithmetic Asian Options: The Cost of Exercising on the Geometric Average", repository: "RESEARCH-Certified-Valuation-of-Arithmetic-Asian-Options", commit: "41a814f6e5aa1eddddb4412e57ce68ec506c323e", blob: "6f573b14c4c172e394688333b22726438bbed461", sections: 9, tables: 11, formulas: 724, figures: "asian" },
+  { key: "rough", slug: "certified-joint-pricing-errors-in-rough-heston", title: "Certified Joint Pricing Errors in Rough Heston", repository: "RESEARCH-Certified-Joint-Pricing-Errors-in-Rough-Heston", commit: "46c85b4b256dfbc597ed56b3b2b526681334e60f", blob: "27bd396d79cfe3d99072f23d9799641c898442e7", sections: 8, tables: 10, formulas: 437, figures: "rough" },
 ];
 
 function sourceFormulas(markdown) {
@@ -54,7 +54,9 @@ for (const expected of PROJECTS) {
     const article = JSON.parse(await readFile(new URL(`../content/selected-research/${expected.slug}.json`, import.meta.url), "utf8"));
     assert.equal(article.sourceCommit, expected.commit);
     assert.equal(article.sourceBlob, expected.blob);
-    assert.equal(article.title, upstream.match(/^# (.+)$/mu)[1]);
+    const subtitle = upstream.match(/^# .+\n\n\[[^\n]+\n\n([A-Z][^\n*[\]$`]+)\n/u)?.[1];
+    assert.equal(article.title, upstream.match(/^# (.+)$/mu)[1] + (subtitle ? `: ${subtitle}` : ""));
+    assert.equal(article.title, expected.title, "The page title is the paper's full PDF title.");
     const main = upstream.slice(upstream.indexOf("\n") + 1, upstream.indexOf("\n## Appendix A.")).trim()
       .replace(/^!\[([^\]\n]+)\]\(figures\/([a-z0-9-]+)\.png\)\n\n\*\*\1\*\*([^\n]*)$/gmu, (_, label, image, caption) => `![**${label}**${caption}](/assets/research/${expected.figures}/${image}.png)`)
       .replace(/^!\[(Figure \d+\.[^\n]*)\]\(\.\.\/figures\/([a-z0-9-]+)\.png\)$/gmu, (_, caption, image) => `![${caption}](/assets/research/${expected.figures}/${image}.png)`)

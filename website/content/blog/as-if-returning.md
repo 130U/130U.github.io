@@ -6,7 +6,7 @@ hero: /assets/blog/as-if-returning/scroll.jpg
 heroAlt: A section of the Nymph of the Luo River handscroll above the ink shadow of the recording
 image: /assets/blog/as-if-returning/og.jpg
 imageAlt: As If Leaving, As If Returning: a section of the Nymph of the Luo River handscroll
-work: /as-if-returning/
+work: /BLOG-As-If-Returning/
 workDescription: The Der Freischütz fantasy, unrolled on a handscroll
 ---
 

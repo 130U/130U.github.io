@@ -9,7 +9,7 @@ type FigurePlacement = { figure: string; after: FigureAnchor; evidence: string[]
 type TableEmphasis = { table: string; row?: number; column?: number };
 
 const articleFigures: Readonly<Record<string, readonly FigurePlacement[]>> = {
-  "critical-dependence-stress-for-portfolio-diversification": [
+  "critical-dependence-stress-for-diversification-gains-under-fixed-marginals": [
     {
       figure: "dependence-budget",
       after: { paragraph: "How much of a portfolio's diversification benefit survives" },
@@ -80,7 +80,7 @@ const articleFigures: Readonly<Record<string, readonly FigurePlacement[]>> = {
       ],
     },
   ],
-  "statistical-inference-and-resource-allocation-in-expert-data-production": [
+  "large-scale-domain-expert-feedback-governance-and-adaptive-review": [
     {
       figure: "residual-moment",
       after: { paragraph: "The first is the conditional Bernoulli variance" },
@@ -112,7 +112,7 @@ const articleFigures: Readonly<Record<string, readonly FigurePlacement[]>> = {
       ],
     },
   ],
-  "task-validity-in-financial-synthetic-data": [
+  "financial-task-design-and-synthetic-data-engineering": [
     {
       figure: "rejection-cost",
       after: { table: "Simultaneous constraints" },
@@ -139,7 +139,7 @@ const articleFigures: Readonly<Record<string, readonly FigurePlacement[]>> = {
       evidence: ["\\sigma^2(t - s)\\frac{T - t}{T - s}", "conditioning on $`X_T`$ halves the conditional variance", "**29.29% apparent reduction in RMSE**", "**Construction information ($`\\mathcal{F}_{\\text{gen}}`$):**", "**Permitted predictor filtration ($`\\mathcal{F}_s`$):**", "**Evaluation and oracle information ($`\\mathcal{F}_{\\text{eval}}`$):** outcomes realized after $`s`$"],
     },
   ],
-  "verification-and-supervision-in-scientific-reasoning-tasks": [
+  "general-reasoning-evaluation-and-layered-verification": [
     {
       figure: "ranking-reversal",
       after: { paragraph: "To see what this does to a score" },
@@ -165,7 +165,7 @@ const articleFigures: Readonly<Record<string, readonly FigurePlacement[]>> = {
       ],
     },
   ],
-  "evidence-uncertainty-and-decision-guarantees-in-investment-research": [
+  "evidence-verification-and-robust-comparison-in-investment-research": [
     {
       figure: "coverage-collapse",
       after: { paragraph: "• Set the shared bias" },
@@ -209,14 +209,14 @@ const articleFigures: Readonly<Record<string, readonly FigurePlacement[]>> = {
       evidence: ["detecting and tracking objects, estimating their future states and uncertainty, screening conjunctions, selecting a response, coordinating where possible, executing the command, and evaluating the resulting trajectory", "used earlier conjunction data messages to predict the estimated risk in the final available message", "needs a policy-level assurance case beyond prediction performance"],
     },
   ],
-  "small-states-and-strategic-space-dependence": [
+  "small-states-and-the-governance-of-strategic-space-dependence": [
     {
       figure: "state-cases",
       after: { paragraph: "This comparison also changes the relevant policy alternatives" },
       evidence: ["New Zealand concerns permission: can the state apply its own assessment to an externally connected activity?", "Norway concerns operation: can cooperation deliver a function under specified national control?", "Luxembourg concerns informed commitment: can public institutions understand and govern what they have authorized?", "A licensing problem calls for usable standards and supervisory information; a service dependency calls for clarity about interruption and recovery; a procurement failure calls for credible requirements and financial scrutiny.", "More national hardware cannot solve all three."],
     },
   ],
-  "solar-geoengineering-comparison-and-continuity": [
+  "who-may-choose-the-lesser-risk": [
     {
       figure: "evidence-tiers",
       after: { paragraph: "Evidence should therefore be organized by mechanism and strength" },
@@ -228,7 +228,7 @@ const articleFigures: Readonly<Record<string, readonly FigurePlacement[]>> = {
       evidence: ["who governs the program, who operates it, and what physical trajectory it follows", "temporary operation transfers to a previously designated public successor under a reviewed continuity plan", "A political decision to end SAI could initiate a tapering pathway evaluated against emissions and atmospheric conditions", "The conditions are substantial cooling, sudden cessation, and a sufficiently prolonged interruption."],
     },
   ],
-  "mangrove-restoration-and-compensatory-mitigation": [
+  "mangrove-restoration-and-the-limits-of-compensatory-mitigation": [
     {
       figure: "evidentiary-chain",
       after: { paragraph: "Evidence about legal requirements and evidence about ecological performance" },
@@ -252,9 +252,9 @@ const articleFigures: Readonly<Record<string, readonly FigurePlacement[]>> = {
 };
 
 const tableEmphasis: Readonly<Record<string, readonly TableEmphasis[]>> = {
-  "statistical-inference-and-resource-allocation-in-expert-data-production": [{ table: "Audit policy", row: 2 }],
-  "verification-and-supervision-in-scientific-reasoning-tasks": [{ table: "Acceptance protocol", row: 2 }],
-  "evidence-uncertainty-and-decision-guarantees-in-investment-research": [{ table: "Verification query", row: 2 }],
+  "large-scale-domain-expert-feedback-governance-and-adaptive-review": [{ table: "Audit policy", row: 2 }],
+  "general-reasoning-evaluation-and-layered-verification": [{ table: "Acceptance protocol", row: 2 }],
+  "evidence-verification-and-robust-comparison-in-investment-research": [{ table: "Verification query", row: 2 }],
   "certified-joint-pricing-errors-in-rough-heston": [
     { table: "Maturity and certificate", column: 1 },
     { table: "Output", column: 1 },
@@ -264,12 +264,12 @@ const tableEmphasis: Readonly<Record<string, readonly TableEmphasis[]>> = {
 
 // Manuscript figures drawn natively, keyed by the image path the manuscript
 // cites. The dependence drawings evaluate the manuscript's formulas
-// (130U/RESEARCH-Critical-Dependence-Stress at the pinned commit:
+// (130U/RESEARCH-Critical-Dependence-Stress-for-Diversification-Gains-under-Fixed-Marginals at the pinned commit:
 // code/generate_mechanism_figures.py and
 // calculations/plot_profiles_and_flows.py); the Asian drawings plot the study
-// results of 130U/RESEARCH-Certified-Valuation-Arithmetic-Asian-Options at the pinned
+// results of 130U/RESEARCH-Certified-Valuation-of-Arithmetic-Asian-Options at the pinned
 // commit and evaluate Proposition 4.1; the Rough Heston drawings plot the saved
-// banks of 130U/RESEARCH-Certified-Rough-Heston-Valuation at the pinned commit and
+// banks of 130U/RESEARCH-Certified-Joint-Pricing-Errors-in-Rough-Heston at the pinned commit and
 // evaluate (3.9), (5.7) and (7.1). `evidence` ties each drawing's labels,
 // plotted functions and restated values to the article text, and the build
 // fails if any is missing.

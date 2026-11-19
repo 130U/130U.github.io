@@ -9,15 +9,15 @@ const OUT = path.join(ROOT, "out");
 const MANIFEST_PATH = path.join(ROOT, "content", "visible-copy-manifest.json");
 const IGNORED_INTERFACE_STRINGS = ["Menu", "Close"];
 const RESEARCH_PAPER_ROUTES = [
-  "/critical-dependence-stress-for-portfolio-diversification/",
+  "/critical-dependence-stress-for-diversification-gains-under-fixed-marginals/",
   "/certified-valuation-of-arithmetic-asian-options/",
   "/certified-joint-pricing-errors-in-rough-heston/",
 ];
 const AI_ARTICLE_ROUTES = [
-  "/experience/statistical-inference-and-resource-allocation-in-expert-data-production/",
-  "/experience/task-validity-in-financial-synthetic-data/",
-  "/experience/verification-and-supervision-in-scientific-reasoning-tasks/",
-  "/experience/evidence-uncertainty-and-decision-guarantees-in-investment-research/",
+  "/experience/large-scale-domain-expert-feedback-governance-and-adaptive-review/",
+  "/experience/financial-task-design-and-synthetic-data-engineering/",
+  "/experience/general-reasoning-evaluation-and-layered-verification/",
+  "/experience/evidence-verification-and-robust-comparison-in-investment-research/",
 ];
 const ROUTES = [
   "/",
@@ -26,9 +26,9 @@ const ROUTES = [
   "/experience/",
   ...AI_ARTICLE_ROUTES,
   "/experience/autonomous-authority-in-space/",
-  "/experience/small-states-and-strategic-space-dependence/",
-  "/experience/solar-geoengineering-comparison-and-continuity/",
-  "/experience/mangrove-restoration-and-compensatory-mitigation/",
+  "/experience/small-states-and-the-governance-of-strategic-space-dependence/",
+  "/experience/who-may-choose-the-lesser-risk/",
+  "/experience/mangrove-restoration-and-the-limits-of-compensatory-mitigation/",
   "/experience/jiritsu-network/",
   "/experience/euromonitor-international/",
   "/experience/china-construction-bank/",

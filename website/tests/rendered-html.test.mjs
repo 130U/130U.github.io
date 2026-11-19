@@ -16,16 +16,16 @@ const SITE_ORIGIN = "https://www.theodoreoy.com";
 const EXPERIENCE_ROUTE = "/experience/";
 const ARTICLES = [
   ["autonomous-authority-in-space", "Autonomous Authority in Space: Risk Tradeoffs and the Law of Delegation", "", 44],
-  ["small-states-and-strategic-space-dependence", "Small States and the Governance of Strategic Space Dependence", "", 45],
-  ["solar-geoengineering-comparison-and-continuity", "Who May Choose the Lesser Risk", "Solar Geoengineering and the Legal Duties of Comparison and Continuity", 49],
-  ["mangrove-restoration-and-compensatory-mitigation", "Mangrove Restoration and the Limits of Compensatory Mitigation", "Lessons from Florida for the Greater Bay Area", 54],
+  ["small-states-and-the-governance-of-strategic-space-dependence", "Small States and the Governance of Strategic Space Dependence", "", 45],
+  ["who-may-choose-the-lesser-risk", "Who May Choose the Lesser Risk", "Solar Geoengineering and the Legal Duties of Comparison and Continuity", 49],
+  ["mangrove-restoration-and-the-limits-of-compensatory-mitigation", "Mangrove Restoration and the Limits of Compensatory Mitigation", "Lessons from Florida for the Greater Bay Area", 54],
 ];
 const ARTICLE_ROUTES = ARTICLES.map(([slug]) => `${EXPERIENCE_ROUTE}${slug}/`);
 const AI_PROJECT_SLUGS = [
-  "statistical-inference-and-resource-allocation-in-expert-data-production",
-  "task-validity-in-financial-synthetic-data",
-  "verification-and-supervision-in-scientific-reasoning-tasks",
-  "evidence-uncertainty-and-decision-guarantees-in-investment-research",
+  "large-scale-domain-expert-feedback-governance-and-adaptive-review",
+  "financial-task-design-and-synthetic-data-engineering",
+  "general-reasoning-evaluation-and-layered-verification",
+  "evidence-verification-and-robust-comparison-in-investment-research",
 ];
 const EXPERIENCE_DETAIL_SLUGS = new Map([
   [5, "jiritsu-network"],
@@ -52,7 +52,7 @@ const DISPLAY_DETAIL_TITLES = new Map([
   [11, "Mangrove Restoration and the Limits of Compensatory Mitigation — Lessons from Florida for the Greater Bay Area"],
 ]);
 const RESEARCH_SLUGS = [
-  "critical-dependence-stress-for-portfolio-diversification",
+  "critical-dependence-stress-for-diversification-gains-under-fixed-marginals",
   "certified-valuation-of-arithmetic-asian-options",
   "certified-joint-pricing-errors-in-rough-heston",
 ];
@@ -561,11 +561,11 @@ test("About research opens each complete paper through an explicit Read More lin
   assert.ok(about.indexOf('id="selected-research"') < about.indexOf('id="education"'));
   assert.ok(about.indexOf('id="education"') < about.indexOf('id="coursework"'));
   const researchEntries = [...about.matchAll(/<article\b[^>]*id="([^"]+)"[^>]*>[\s\S]*?<\/article>/gu)].map((match) => match[1]).filter((id) => id.startsWith("critical-dependence-") || id.startsWith("certified-"));
-  assert.deepEqual(researchEntries, ["critical-dependence-stress-for-portfolio-diversification", "certified-valuation-of-arithmetic-asian-options", "certified-joint-pricing-errors-in-rough-heston"]);
+  assert.deepEqual(researchEntries, ["critical-dependence-stress-for-diversification-gains-under-fixed-marginals", "certified-valuation-of-arithmetic-asian-options", "certified-joint-pricing-errors-in-rough-heston"]);
   for (const [slug, title, description, tables, sections, repository] of [
-    ["critical-dependence-stress-for-portfolio-diversification", "Critical Dependence Stress for Portfolio Diversification", "I prove that the critical stress budget is quadratic in the trade size", 0, 5, "RESEARCH-Critical-Dependence-Stress"],
-    ["certified-valuation-of-arithmetic-asian-options", "Certified Valuation of Arithmetic Asian Options", "the bound is below a hundredth of a cent per barrel", 11, 9, "RESEARCH-Certified-Valuation-Arithmetic-Asian-Options"],
-    ["certified-joint-pricing-errors-in-rough-heston", "Certified Joint Pricing Errors in Rough Heston", "netting the legs certifies a half-point tolerance for all 28 six-month spreads, butterflies and baskets tested", 10, 8, "RESEARCH-Certified-Rough-Heston-Valuation"],
+    ["critical-dependence-stress-for-diversification-gains-under-fixed-marginals", "Critical Dependence Stress for Diversification Gains under Fixed Marginals", "I prove that the critical stress budget is quadratic in the trade size", 0, 5, "RESEARCH-Critical-Dependence-Stress-for-Diversification-Gains-under-Fixed-Marginals"],
+    ["certified-valuation-of-arithmetic-asian-options", "Certified Valuation of Arithmetic Asian Options: The Cost of Exercising on the Geometric Average", "the bound is below a hundredth of a cent per barrel", 11, 9, "RESEARCH-Certified-Valuation-of-Arithmetic-Asian-Options"],
+    ["certified-joint-pricing-errors-in-rough-heston", "Certified Joint Pricing Errors in Rough Heston", "netting the legs certifies a half-point tolerance for all 28 six-month spreads, butterflies and baskets tested", 10, 8, "RESEARCH-Certified-Joint-Pricing-Errors-in-Rough-Heston"],
   ]) {
     assert.match(about, new RegExp(`id="${slug}"`, "u"));
     const headings = [...about.matchAll(/<h3\b[^>]*>([\s\S]*?)<\/h3>/gu)].map((match) => stripMarkup(match[1]));

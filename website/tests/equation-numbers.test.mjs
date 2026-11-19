@@ -6,7 +6,7 @@ import test from "node:test";
 // the paper beside it: each number on the page stands beside the equation that
 // carries it in the manuscript, and every section's numbers run without a gap.
 const PAPERS = [
-  ["critical-dependence-stress-for-portfolio-diversification", 52],
+  ["critical-dependence-stress-for-diversification-gains-under-fixed-marginals", 52],
   ["certified-valuation-of-arithmetic-asian-options", 72],
   ["certified-joint-pricing-errors-in-rough-heston", 40],
 ];
