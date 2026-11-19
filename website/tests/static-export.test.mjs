@@ -23,16 +23,16 @@ async function fixture(t, files) {
 
 test("segment payloads have stable filenames and preserve route assets", async (t) => {
   const root = await fixture(t, {
-    "education/__next.education/__PAGE__.txt": "education payload",
+    "coursework/__next.coursework/__PAGE__.txt": "coursework payload",
     "experience/__next.experience/$d$slug/__PAGE__.txt": "domain payload",
     "experience/__next.experience/$d$slug.txt": "slug payload",
-    "education/index.html": "education HTML",
+    "coursework/index.html": "coursework HTML",
     "architecture/index.html": "architecture HTML",
   });
   assert.equal(await normalizeSegmentPayloads(root), 3);
-  assert.equal(await readFile(path.join(root, "education/__next.education.__PAGE__.txt"), "utf8"), "education payload");
+  assert.equal(await readFile(path.join(root, "coursework/__next.coursework.__PAGE__.txt"), "utf8"), "coursework payload");
   assert.equal(await readFile(path.join(root, "experience/__next.experience.$d$slug.__PAGE__.txt"), "utf8"), "domain payload");
-  assert.equal(await readFile(path.join(root, "education/index.html"), "utf8"), "education HTML");
+  assert.equal(await readFile(path.join(root, "coursework/index.html"), "utf8"), "coursework HTML");
   assert.equal(await readFile(path.join(root, "architecture/index.html"), "utf8"), "architecture HTML");
   assert.deepEqual((await readdir(path.join(root, "experience"))).sort(), ["__next.experience.$d$slug.__PAGE__.txt", "__next.experience.$d$slug.txt"]);
   assert.equal(await normalizeSegmentPayloads(root), 0);
@@ -40,16 +40,16 @@ test("segment payloads have stable filenames and preserve route assets", async (
 
 test("segment filename collisions fail before changing any files", async (t) => {
   const root = await fixture(t, {
-    "education/__next.education/__PAGE__.txt": "nested",
-    "education/__next.education.__PAGE__.txt": "existing",
+    "coursework/__next.coursework/__PAGE__.txt": "nested",
+    "coursework/__next.coursework.__PAGE__.txt": "existing",
   });
   await assert.rejects(normalizeSegmentPayloads(root), /already exists/u);
-  assert.equal(await readFile(path.join(root, "education/__next.education/__PAGE__.txt"), "utf8"), "nested");
-  assert.equal(await readFile(path.join(root, "education/__next.education.__PAGE__.txt"), "utf8"), "existing");
+  assert.equal(await readFile(path.join(root, "coursework/__next.coursework/__PAGE__.txt"), "utf8"), "nested");
+  assert.equal(await readFile(path.join(root, "coursework/__next.coursework.__PAGE__.txt"), "utf8"), "existing");
 });
 
 test("segment directories reject non-payload files", async (t) => {
-  const root = await fixture(t, { "education/__next.education/index.html": "HTML" });
+  const root = await fixture(t, { "coursework/__next.coursework/index.html": "HTML" });
   await assert.rejects(normalizeSegmentPayloads(root), /only text payload/u);
-  assert.equal(await readFile(path.join(root, "education/__next.education/index.html"), "utf8"), "HTML");
+  assert.equal(await readFile(path.join(root, "coursework/__next.coursework/index.html"), "utf8"), "HTML");
 });

@@ -62,7 +62,7 @@ keep their SVG coordinate sizes.
 
 SVG exports embed the local regular and italic Inter files with the same optical
 settings; PNG and WebM exports render from those prepared fonts. After regeneration,
-check theme switching, search, tracing, keyboard controls, responsive layout, and
+check search, tracing, keyboard controls, responsive layout, and
 export. The complete build also verifies the viewer's production security policy and
 local assets.
 

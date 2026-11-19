@@ -55,8 +55,8 @@ function inspectFigure(figure) {
   const bounds = rect(frame);
   const issues = [];
   const shown = element => {
-    if (!element.checkVisibility({ checkVisibilityCSS: true, checkOpacity: true }) || element.closest('[hidden], mjx-assistive-mml, script, style')) return false;
-    // Accessibility MathML remains in the layout tree even when CSS clips its
+    if (!element.checkVisibility({ checkVisibilityCSS: true, checkOpacity: true }) || element.closest('[hidden], math, script, style')) return false;
+    // Visually hidden text remains in the layout tree even when CSS clips its
     // entire box. Range rectangles from that hidden copy are not visible ink.
     for (let ancestor = element; ancestor && ancestor !== frame.parentElement; ancestor = ancestor.parentElement) {
       const style = getComputedStyle(ancestor);
@@ -104,7 +104,7 @@ function inspectFigure(figure) {
   const walker = document.createTreeWalker(frame, NodeFilter.SHOW_TEXT);
   for (let node = walker.nextNode(); node; node = walker.nextNode()) {
     const element = node.parentElement;
-    if (!node.textContent.trim() || !shown(element) || element.closest('svg, mjx-assistive-mml')) continue;
+    if (!node.textContent.trim() || !shown(element) || element.closest('svg, math')) continue;
     const range = document.createRange();
     range.selectNodeContents(node);
     for (const fragment of range.getClientRects()) {

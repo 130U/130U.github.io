@@ -47,7 +47,8 @@ test("the Pages workflow deploys only main and pins every action", async () => {
   assert.match(workflow, /path: website\/out/u);
   assert.match(
     workflow,
-    /group: pages-\$\{\{ github\.event_name == 'push' && 'production' \|\| github\.ref \}\}/u,
+    /group: pages-\$\{\{ github\.event_name == 'push' && 'production' \|\| github\.ref \}\}\r?\n\s+cancel-in-progress: \$\{\{ github\.event_name != 'push' \}\}/u,
+    "A production deployment always completes; only pull-request runs cancel their predecessors.",
   );
   assert.match(
     workflow,

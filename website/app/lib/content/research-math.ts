@@ -214,10 +214,16 @@ function intrinsicSvg(container: LiteElement, display: boolean) {
   return { svg, widthEm, heightEm, depthEm };
 }
 
+// Attributes that \mmlToken could carry into the page's markup; mathematics never needs them.
+const markupAttributes = new Set(["href", "style", "class"]);
+
 function assistiveMathml(tex: string, display: boolean) {
   const root = output.math.root;
   root.walkTree((node) => {
     if (node.kind === "merror") throw new Error("Research equation contains a MathML error.");
+    if (node.attributes?.getExplicitNames().some((name) => markupAttributes.has(name))) {
+      throw new Error("Research equation sets a markup attribute.");
+    }
     node.attributes?.unset("data-latex");
     node.attributes?.unset("data-latex-item");
     node.attributes?.unset("id");

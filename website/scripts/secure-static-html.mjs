@@ -16,9 +16,10 @@ export function secureStaticHtml(source) {
     "script-src-attr 'none'",
     "style-src 'self' 'unsafe-inline'",
     "font-src 'self'",
-    `img-src 'self' data:${isArchitecture ? " blob:" : ""}`,
+    // Only the architecture viewer draws images from data and blob URLs, for its exports.
+    `img-src 'self'${isArchitecture ? " data: blob:" : ""}`,
     "connect-src 'self'",
-    "media-src 'self' blob:",
+    "media-src 'none'",
     "frame-src 'none'",
     "object-src 'none'",
     "base-uri 'self'",

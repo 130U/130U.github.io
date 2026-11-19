@@ -60,7 +60,6 @@ function braced(text, start, open = "{", close = "}") {
     if (text[index] === "\\") { index += 1; continue; }
     if (text[index] === open) depth += 1;
     if (text[index] === close && --depth === 0) return { value: text.slice(start + 1, index), end: index + 1 };
-    if (text[index] !== close) continue;
   }
   throw new Error(`Unclosed ${open}: ${text.slice(start, start + 90)}`);
 }

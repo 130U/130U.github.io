@@ -35,6 +35,9 @@ test("every exported HTML page permits only its authored inline scripts", async 
     assert.ok(!scripts.includes(hash("alert('unauthorized')")));
     assert.ok(policy.includes("object-src 'none'"));
     assert.ok(policy.includes("form-action 'none'"));
+    assert.ok(policy.includes("media-src 'none'"));
+    const images = filename.includes(`${path.sep}architecture${path.sep}`) ? "img-src 'self' data: blob:" : "img-src 'self'";
+    assert.ok(policy.split("; ").includes(images), `${filename}: ${images}`);
   }
 });
 

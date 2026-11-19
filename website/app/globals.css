@@ -484,14 +484,6 @@ button:focus-visible {
   text-wrap: balance;
 }
 
-.section-kicker {
-  margin: 0 0 24px;
-  color: var(--muted);
-  font-size: var(--type-label);
-  line-height: var(--label-leading);
-  letter-spacing: 0.015em;
-}
-
 .lede {
   margin: 27px 0 0;
   color: var(--ink);

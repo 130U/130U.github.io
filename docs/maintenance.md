@@ -302,8 +302,9 @@ files for credentials, temporary files, and unintended generated output.
 The workflow validates pull requests with read-only repository access. A push to
 `main` runs validation and the dependency audit, uploads `website/out/`, and deploys
 with Pages write and OIDC permissions confined to the deployment job. Every action
-is SHA-pinned. After publishing, verify the workflow for the exact commit and read
-back the live routes separately.
+is SHA-pinned. A newer pull-request run cancels the older one; production runs queue,
+so a deployment in progress always completes. After publishing, verify the workflow
+for the exact commit and read back the live routes separately.
 
 Review the repository's Dependabot alerts, secret scanning, and push-protection
 settings when maintaining a release. The workflow's dependency audit checks the
@@ -311,9 +312,12 @@ installed lockfile on every build.
 
 Each exported HTML page receives hashes for its exact inline scripts before any
 script executes. Production CSP blocks arbitrary inline scripts, eval, inline event
-handlers, embedded frames/objects, and form submission; fonts and network fetches
-use the same origin. Inline styles support framework and viewer geometry.
+handlers, embedded frames/objects, media, and form submission; fonts, images, and
+network fetches use the same origin, and only the architecture viewer adds the data and
+blob images its exports draw. Inline styles support framework and viewer geometry.
+Formulas are rendered at build time; a formula that sets a link, style, or class
+attribute stops the build.
 GitHub Pages controls HTTP response headers: a meta policy cannot enforce
-`frame-ancestors` or supply host-level security headers. Keep the lockfile, pinned
-dependencies, and scoped overrides aligned. An advisory check is current only when
-the npm endpoint returns a successful result.
+`frame-ancestors` or supply host-level security headers. Keep the lockfile and pinned
+dependencies aligned. An advisory check is current only when the npm endpoint returns
+a successful result.

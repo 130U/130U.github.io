@@ -184,8 +184,12 @@ test("aligned equations preserve rows, fractions, and all nine science equation 
   }
 });
 
-test("unsupported and malformed TeX fail the render with an error", async () => {
-  for (const tex of [String.raw`\unknownCommand{x}`, String.raw`\frac{x}{`, String.raw`\href{javascript:alert(1)}{x}`]) {
+test("unsupported, malformed and markup-bearing TeX fail the render with an error", async () => {
+  for (const tex of [
+    String.raw`\unknownCommand{x}`, String.raw`\frac{x}{`, String.raw`\href{javascript:alert(1)}{x}`,
+    String.raw`\mmlToken{mi}[href="javascript:alert(1)"]{x}`, String.raw`\mmlToken{mi}[style="position:fixed"]{x}`,
+    String.raw`\mmlToken{mi}[class="site-rail"]{x}`, String.raw`\text{\mmlToken{mi}[style="color:red"]{x}}`,
+  ]) {
     await assert.rejects(async () => renderResearchMath(tex, false), /.+/u);
   }
 });
