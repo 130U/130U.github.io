@@ -15,7 +15,7 @@ Duke Alumnus, B.S. in Mathematics and M.Eng. in Risk Engineering · Sequoia Fell
 ## Selected Research
 
 - **[Critical Dependence Stress for Diversification Gains under Fixed Marginals](https://www.theodoreoy.com/critical-dependence-stress-for-diversification-gains-under-fixed-marginals/)**
-  How much dependence stress reverses a portfolio's Expected Shortfall advantage while every loss distribution stays fixed. The asymptotic reversal budget is at least 30% above the initial-sensitivity prediction.
+  How much dependence stress reverses a portfolio's Expected Shortfall advantage while every loss distribution stays fixed. In the uniform benchmark, the critical budget is at least 30% above the tangent prediction.
 - **[Certified Valuation of Arithmetic Asian Options](https://www.theodoreoy.com/certified-valuation-of-arithmetic-asian-options/)**
   What an arithmetic Asian option loses when exercise is decided on the geometric average of its fixings. The proved bound is below a hundredth of a cent per barrel for a one-month crude oil option, and under Heston it becomes a certified price interval.
 - **[Certified Joint Pricing Errors in Rough Heston](https://www.theodoreoy.com/certified-joint-pricing-errors-in-rough-heston/)**

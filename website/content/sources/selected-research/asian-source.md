@@ -1,10 +1,8 @@
-# Certified Valuation of Arithmetic Asian Options
+# Certified Valuation of Arithmetic Asian Options: The Cost of Exercising on the Geometric Average
 
 [English PDF](../paper/paper.pdf) · [Repository](../README.md) · [Code and evidence](../docs/EVIDENCE.md)
 
-The Cost of Exercising on the Geometric Average
-
-**Theodore Ouyang**
+**Letao (Theodore) Ouyang**
 
 [theodore.oy2025@gmail.com](mailto:theodore.oy2025@gmail.com) · [10@alumni.duke.edu](mailto:10@alumni.duke.edu)
 
@@ -496,7 +494,7 @@ The crude oil rows are options on a calendar month of 21 daily settlements of a 
 
 Four observations follow.
 
-For the monthly contracts the proxy value is the price for every commercial purpose. The exchange quotes these options in dollars and cents per barrel; the proved bound is between a 120th and a 440th of a cent. A market maker who exercises on the geometric average gives up less than ten dollars on a hundred contracts of a thousand barrels, whose premium exceeds three hundred thousand.
+For the monthly contracts the proxy value is the price for every commercial purpose. The exchange quotes these options in dollars and cents per barrel; the proved bound is between a 124th and a 446th of a cent. A market maker who exercises on the geometric average gives up less than ten dollars on a hundred contracts of a thousand barrels, whose premium exceeds three hundred thousand.
 
 The bound is nearly attained. Its ratio to the simulated cost is 1.54, 1.19, 1.10 and 1.07 at one, three, six and twelve months, as the factor in (3.12) predicts: with a long lead the strike is within a small multiple of $`\sigma`$ of both averages on almost every path. The classical first-order estimate is 2.6 cents at every lead time, between 320 and 1,140 times larger.
 
@@ -518,7 +516,7 @@ Theorem 3.3 holds for every model that satisfies (CF), and under stochastic vola
 | Crude oil call, 12 months ahead | 8.891 | 0.0000496 | 0.0000576 | 1.16 | 3.41 |
 | Annual-average oil put at 70 | 2.053 | 0.00965 | 0.0296 | 3.06 | 5.05 |
 
-Each row uses $`2^{19}`$ paths ($`2^{18}`$ for the annual put) of absorbed Euler with four steps per trading day (two for the annual put). Standard errors are below 0.8 percent of each cost and bound, except 1.1 and 1.6 percent for the cost and bound of the annual put, and about 0.003 for the option values (0.009 for the annual put). The bound is the smaller of (3.10) at $`c_*`$ and (3.11) at $`c_\dagger`$.
+Each row uses $`2^{19}`$ paths ($`2^{18}`$ for the annual put) of absorbed Euler with four steps per trading day (two for the annual put). Standard errors are below 0.8 percent of each cost and bound, except 1.2 and 1.6 percent for the cost and bound of the annual put, and about 0.003 for the option values (0.009 for the annual put). The bound is the smaller of (3.10) at $`c_*`$ and (3.11) at $`c_\dagger`$.
 
 Volatility of volatility roughly doubles the cost of the kink at three months and beyond, and the bound stays within a factor of 1.3 of it. For the monthly options the cost stays below a hundredth of a cent. For the annual put it is 0.96 cents per barrel and the bound 2.96 cents: 3.2 and 9.8 million dollars on 330 million barrels, against a value of 677 million. A long window is where a model with random volatility makes exercising on the geometric average expensive enough to measure, and where the interval of the next section earns its place.
 
@@ -783,7 +781,7 @@ Reported widths are computed from exact rational endpoints and rounded outward, 
 
 ### 5.5 What the interval contains
 
-The interval for $`p_c`$ is $`.0105`$ wide, 16 basis points of the price. Its center is the proxy value, known to $`\pm.00021`$, and almost all of its width is the allowance for the two costs of the kink, $`.005407`$ above and $`.004670`$ below.
+The interval for $`p_c`$ is $`.0105`$ wide, 16 basis points of the price. It is built around the proxy value, known to $`\pm.00021`$, and almost all of its width is the allowance for the two costs of the kink, $`.005407`$ above and $`.004670`$ below.
 
 A simulation locates the price inside the interval. On $`2^{20}`$ paths with the first-period factor integrated in closed form, the discounted cost of the kink is $`.000813`$ at $`K_1`$ and $`.000711`$ at $`K_2`$, with standard errors below $`4\cdot10^{-6}`$. The two enter the spread with opposite signs, so the spread exceeds its proxy value by $`.000102`$ with standard error $`.000004`$, and the continuous price is close to $`6.51335`$. The certificate bounds each cost on its own and from one side, so its allowances add. They are about 6.6 times the simulated costs, in line with the Black rows of Table 1, where the ratio is 4.7 before volatility of volatility is added. The lower bound (3.12), evaluated on the same paths, is $`.000777`$ and $`.000682`$, within five percent of the two costs. The distance between the upper bound and the cost is therefore the Gaussian factor in (3.12): on most paths that carry dispersion the strike is several $`\sigma`$ away from both averages.
 
@@ -859,7 +857,7 @@ The certificate also holds at a second parameter point, $`v_0=.04`$ with everyth
 | Euler gap | $`[-0.011798506840,\;0.011383739259]`$ |
 | Width of the gap interval | 0.023182246099 |
 
-The gap interval is 7.0 percent wider than at $`v_0=.045`$, and 83 percent of the increase comes from the discrete frequency tail, which rises from $`.000368746601`$ to $`.001629880668`$: a smaller $`v_0`$ lowers the floor in (5.8) and raises the first-month Laplace bound in (C.7). Theorem 5.1 itself holds for any spread, fixing schedule and parameter point; each certificate is one run of the validated computation that supplies its inputs.
+The gap interval is 7.0 percent wider than at $`v_0=.045`$, and 83 percent of the increase comes from the discrete frequency tail, which rises from $`.000368746602`$ to $`.001629880669`$: a smaller $`v_0`$ lowers the floor in (5.8) and raises the first-month Laplace bound in (C.7). Theorem 5.1 itself holds for any spread, fixing schedule and parameter point; each certificate is one run of the validated computation that supplies its inputs.
 
 ## 6. What discretization does to the price
 
@@ -1160,7 +1158,7 @@ A put is $`K`$-Lipschitz in the log price, and the spread is $`K_2`$-Lipschitz i
 </picture>
 </p>
 
-the resulting bound on the Euler gap is $`.020948`$ for the Asian spread and $`.016702`$ for each of the nine puts with maturities $`1/4,1/2,1`$ and strikes $`90,100,110`$.
+the resulting bound on the Euler gap is $`.020920`$ for the Asian spread and $`.016701`$ for each of the nine puts with maturities $`1/4,1/2,1`$ and strikes $`90,100,110`$.
 
 ### 7.2 The posterior
 
@@ -1248,7 +1246,7 @@ Partition $`[.03,.06]`$ into 4096 cells. On each cell and over the whole $`\zeta
 </picture>
 </p>
 
-In volatility terms the fitted initial variance moves by at most $`1.5\cdot10^{-5}`$ and $`3.7\cdot10^{-5}`$, less than a hundredth of a volatility point. The transport term is 39 percent of the first bound and 62 percent of the second: with nine quotes the envelopes of the posterior are wider and the coupling takes more steps. Table 11 refines the cells.
+The fitted initial variance moves by at most $`1.5\cdot10^{-5}`$ and $`3.7\cdot10^{-5}`$; in volatility terms that is at most 0.43 and 1.06 hundredths of a volatility point. The transport term is 39 percent of the first bound and 62 percent of the second: with nine quotes the envelopes of the posterior are wider and the coupling takes more steps. Table 11 refines the cells.
 
 **Table 11. Bound on the displacement of every quantile of the Asian price.**
 
@@ -1258,7 +1256,7 @@ In volatility terms the fitted initial variance moves by at most $`1.5\cdot10^{-
 | 8192 | 0.006452960804 | 0.010367612938 | 2 / 7 |
 | 16384 | 0.006061495591 | 0.009584682511 | 3 / 12 |
 
-At 16384 cells the bounds are 24.4 and 24.6 percent smaller than at 4096, with more coupling steps at each refinement. For the continuous-model posterior at 4096 cells, the 2.5, 50 and 97.5 percent quantiles of the initial variance lie in
+At 16384 cells the bounds are 24.4 and 24.6 percent smaller than at 4096, with couplings of 3 and 12 steps instead of 2 and 5. For the continuous-model posterior at 4096 cells, the 2.5, 50 and 97.5 percent quantiles of the initial variance lie in
 
 <p align="center">
 <picture>
@@ -1522,7 +1520,7 @@ Set $`s_b=\lambda+h\left\vert b\right\vert`$. The Gaussian moment formula reduce
 </picture>
 </p>
 
-Take $`\lambda=12`$. Suppose $`p`$ lies in the specified loading range, $`\eta_p\ge\eta_*`$, $`\gamma_p\le\gamma_*`$, and $`\left\vert b\right\vert\le b_*`$. Checking lower bounds for the concave quadratic at the two endpoints $`s_b=12`$ and $`s_b=12+b_*h`$ suffices to ensure that the expression in parentheses is at least 8.
+Take $`\lambda=12`$. Suppose $`p`$ lies in the specified loading range, $`\eta_p\ge\eta_*`$, $`\gamma_p\le\gamma_*`$, and $`\left\vert b\right\vert\le b_*`$. Checking lower bounds for the concave quadratic at the two endpoints $`s_b=12`$ and $`s_b=12+b_*h`$ suffices to ensure that the expression in parentheses exceeds 8.
 
 ### B.2 From local error bounds to true prefixes
 
@@ -2222,7 +2220,7 @@ The target radii from Appendix E, together with (F.3) and (F.7), yield (7.8). Th
 
 ## Appendix G. Programs and evidence
 
-The publication is the `V_20261101` tag of [github.com/130U/RESEARCH-Certified-Valuation-of-Arithmetic-Asian-Options](https://github.com/130U/RESEARCH-Certified-Valuation-of-Arithmetic-Asian-Options/tree/V_20261101). It has two computational parts. The directory `code/` is the certified package: every number in Corollary 5.2, Tables 3–7, 9 and 11 and Appendix H is an outward-rounded enclosure produced there, and its file `code/MANIFEST.json` identifies the sources. The directory `studies/` holds the calculations of Sections 4 and 6 and the simulations quoted in Section 5: closed forms in ball arithmetic for Black's model, and binary64 estimates that are labeled as such wherever they appear. The root `PUBLICATION-MANIFEST.json` lists every file with its hash.
+The publication is the `V_202611` tag of [github.com/130U/RESEARCH-Certified-Valuation-of-Arithmetic-Asian-Options](https://github.com/130U/RESEARCH-Certified-Valuation-of-Arithmetic-Asian-Options/tree/V_202611). It has two computational parts. The directory `code/` is the certified package: every number in Corollary 5.2, Tables 3–7, 9 and 11 and Appendix H is an outward-rounded enclosure produced there, and its file `code/MANIFEST.json` identifies the sources. The directory `studies/` holds the calculations of Sections 4 and 6 and the simulations quoted in Section 5: closed forms in ball arithmetic for Black's model, and binary64 estimates that are labeled as such wherever they appear. The root `PUBLICATION-MANIFEST.json` lists every file with its hash.
 
 **Table G.1. Modules of the certified package.**
 
@@ -2463,9 +2461,9 @@ Define
 
 <p align="center">
 <picture>
-  <source media="(prefers-color-scheme: dark)" srcset="math/formula-mbd120897b45cf4886006-dark.svg">
-  <source media="(prefers-color-scheme: light)" srcset="math/formula-mbd120897b45cf4886006-light.svg">
-  <img src="math/formula-mbd120897b45cf4886006-light.svg" width="608" alt="q_\nu=E(a_\nu-b_\nu)^2,\quad Z_2=q_P+q_Q,\quad D_a=E(a_Q-a_P)^2,\quad D_b=E(b_Q-b_P)^2.">
+  <source media="(prefers-color-scheme: dark)" srcset="math/formula-me1c661e85b70170525e8-dark.svg">
+  <source media="(prefers-color-scheme: light)" srcset="math/formula-me1c661e85b70170525e8-light.svg">
+  <img src="math/formula-me1c661e85b70170525e8-light.svg" width="601" alt="q_\nu=E(a_\nu-b_\nu)^2,\quad \Omega=q_P+q_Q,\quad D_a=E(a_Q-a_P)^2,\quad D_b=E(b_Q-b_P)^2.">
 </picture>
 </p>
 
@@ -2473,9 +2471,9 @@ For the deterministic $`M_K,N_K`$ in the coupling proposition, the pointwise bou
 
 <p align="center">
 <picture>
-  <source media="(prefers-color-scheme: dark)" srcset="math/formula-mef06cad1f8e0a7dee2b2-dark.svg">
-  <source media="(prefers-color-scheme: light)" srcset="math/formula-mef06cad1f8e0a7dee2b2-light.svg">
-  <img src="math/formula-mef06cad1f8e0a7dee2b2-light.svg" width="472" alt="E\Xi_K\le B_K:= M_K\sqrt{Z_2}(\sqrt{D_a}+\sqrt{D_b}) +\frac12N_KZ_2|\sigma_Q-\sigma_P|.">
+  <source media="(prefers-color-scheme: dark)" srcset="math/formula-m6d2898353f7ef9fc8a85-dark.svg">
+  <source media="(prefers-color-scheme: light)" srcset="math/formula-m6d2898353f7ef9fc8a85-light.svg">
+  <img src="math/formula-m6d2898353f7ef9fc8a85-light.svg" width="454" alt="E\Xi_K\le B_K:= M_K\sqrt{\Omega}(\sqrt{D_a}+\sqrt{D_b}) +\frac12N_K\Omega|\sigma_Q-\sigma_P|.">
 </picture>
 </p>
 

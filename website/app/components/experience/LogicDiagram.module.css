@@ -79,12 +79,12 @@
   flex: 0 0 auto;
 }
 
+/* A lane's name is a label, in the diagram's one face. */
 .tag {
   color: var(--muted);
-  font-family: var(--font-prose);
-  font-size: var(--type-index);
-  line-height: 1.4;
-  letter-spacing: 0.02em;
+  font-family: var(--font-text);
+  font-size: var(--type-label);
+  line-height: var(--label-leading);
 }
 
 .nodeTitle {

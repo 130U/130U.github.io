@@ -96,9 +96,10 @@ prose to the reading track. Structural column guides are decorative, hidden from
 assistive technology, and omitted on phones. A guide meets the content edge it marks at
 every width; the closing guide on tablets sits on the last column's end. Every page
 title starts 112px below the top of the content field on desktop and 52px below the
-header on phones. A page title keeps to four fifths of its column (`--title-width`);
-at 540px and below it takes the whole column, so a long title holds a few balanced
-lines on a phone.
+header on phones; the rail's wordmark starts at the same 112px (`--content-top`), so it
+sits on the title's line. A page title keeps to four fifths of its column
+(`--title-width`); below 1024px it takes the whole column, so a long title holds a few
+balanced lines on tablets and phones.
 
 The rail's minimum width follows the interface type size, indent, padding, and
 scrollbar allowance, so the rail, reading field, and guides reflow together when text
@@ -240,9 +241,10 @@ with its logic diagram under the record strip.
 AI pages present the scope disclosure, Problem and Approach, Key Contributions, and the
 numbered manuscript chapters. Selected Research headers hold the title, GitHub link, and
 Full Manuscript link; reading begins at Abstract, and appendices and supporting material
-link to the pinned manuscript on GitHub. Chapter headings display Roman numerals and
-subsections letters in reading order, while source numbering and anchors stay intact;
-verified internal section references link to their headings. The three manuscripts link
+link to the pinned manuscript on GitHub. AI and Selected Research headings show the
+manuscript's own numbers (1., 2.1, 7.3.), so "Section 5", "(5.1)" and "Appendix A.5" in
+the text match what the reader sees; legal articles keep their manuscripts' Parts (I.,
+A.). Anchors stay intact, and verified internal section references link to their headings. The three manuscripts link
 their own references alike: an equation by its parenthesized number, a statement, table,
 or figure by its number. The dependence manuscript carries these links from its TeX
 source; the Asian and Rough Heston manuscripts cite in plain text, and each reference to
@@ -306,7 +308,8 @@ Each AI and legal article opens with a `LogicDiagram`, its visual abstract, draw
 `app/lib/content/architecture-diagrams.ts`. Four stages read left to right, each holding
 one node or one node per lane, with an optional feedback loop to an earlier stage.
 Stage labels sit on short rules with blue ticks; nodes are flat panels with a 1px
-border, and the stage holding the decisive mechanism is set in ink. Connectors are CSS
+border, and the stage holding the decisive mechanism is set in ink. A lane's name above a
+node title is in the label role of the diagram's one face. Connectors are CSS
 on the same grid as the nodes; the loop is the one blue path, labeled beneath. Node
 details accept inline TeX. Below 640px of figure width the diagram becomes a vertical
 sequence (parallel nodes side by side from 480px) and the loop a labeled return note.
@@ -331,8 +334,10 @@ Text is HTML at its true size, so labels stay legible at every width; only curve
 in a stretched SVG layer whose strokes keep their width, and schematics scale uniformly
 so arrows and angles keep their shape. Labels sit in open space beside the marks they
 name and never cover a curve. Bar rows align on one grid; in a narrow figure each label
-shares a line with its value above a full-width bar. A title stands alone on its line,
-with any view switch beneath it as one segmented control.
+and its value stand above a full-width bar, and the grid and reference rules run through
+the bar's own row only. A comparison wider than its column scrolls sideways and fades at
+its right edge, as a wide table does. A title stands alone on its line, with any view
+switch beneath it as one segmented control.
 
 A segmented switch swaps views, a readout follows the pointer on line charts, marks
 show exact values, the proof-obligation graph accepts a chosen failure, and each figure
@@ -483,4 +488,5 @@ keyboard use, enlarged text, reduced motion, and pages without JavaScript. Use t
 shared tokens in `app/globals.css`, focused CSS Modules for local surfaces, and semantic
 HTML, and match the existing type, measure, and spacing before adding a new pattern. The
 [architecture viewer](../architecture/) is a technical reference drawn in the site's
-palette: paper, ink and hairlines, square corners, one theme.
+palette: paper, ink and hairlines, square corners, one theme, no bullets before titles,
+and the site's Return Home link above its title.

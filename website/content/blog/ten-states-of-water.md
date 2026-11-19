@@ -15,7 +15,7 @@ workDescription: Ten landscapes of Alaska and Yellowstone
 
 Ten States of Water is ten images of Alaska and Yellowstone, with water in a different state in each. The water arrives as tide, stands as a glacier, lies frozen on a lake, falls through a canyon, and leaves a hot spring as steam.
 
-The site is built to be looked at slowly. A cover opens it, two albums follow, and every image keeps a short reading beside it. I add to the albums as new work is finished.
+The site is built to be looked at slowly. A cover opens it, two albums follow, and every image keeps a short reading beside it.
 
 ## The Water
 

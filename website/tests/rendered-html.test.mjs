@@ -512,11 +512,11 @@ test("About opens with its accessible clarinet hero before the profile", async (
   }
   assert.ok(stripMarkup(home).includes("Mathematics is how I make sense of things. I want to know which assumptions underlie a conclusion, what happens when they change, and where intuition stops being reliable."));
   assert.ok(stripMarkup(home).includes("My work makes high-stakes conclusions verifiable: certified error bounds in derivative pricing, layered verification in frontier AI evaluation, and evidence standards for delegating authority to autonomous systems."));
-  assert.ok(decodeHtml(stripMarkup(home)).includes("Most of it is in finance and AI. From 2023 to 2026 I designed review and verification systems with a foundation model developer, a frontier AI lab, and a global alternative asset manager. I also build systems of my own: a language model trained from scratch on financial text, and a gate that decides which evaluation feedback an agent's optimizer may act on."));
+  assert.ok(decodeHtml(stripMarkup(home)).includes("Most of it is in finance and AI. From 2023 to 2026 I designed review and verification systems with a foundation model developer, a frontier AI lab, and a global alternative asset manager. I also build systems of my own: a language model trained from scratch for financial research, and four gates that decide which evaluation feedback may change an agent."));
   const profileLinks = [...elementHtmlById(home, "home-profile").matchAll(/<a\b([^>]*)>([\s\S]*?)<\/a>/gu)];
   assert.deepEqual(profileLinks.map((match) => [decodeHtml(stripMarkup(match[2])), attribute(match[1], "href")]), [
     ["a language model", "https://github.com/130U/RESEARCH-Financial-Large-Language-Model"],
-    ["a gate", "https://github.com/130U/RESEARCH-Agent-Evaluation-Methodology"],
+    ["four gates", "https://github.com/130U/RESEARCH-Agent-Evaluation-Methodology"],
   ]);
   for (const id of ["selected-research", "education", "coursework", "fellowship", "contact"]) {
     assert.match(home, new RegExp(`id="${id}"`, "u"));
@@ -538,6 +538,7 @@ test("About opens with its accessible clarinet hero before the profile", async (
     "mailto:10@alumni.duke.edu", "https://github.com/130U", "https://x.com/D3rfr31schutz",
   ]);
   assert.ok(stripMarkup(contact).includes("@D3rfr31schutz"));
+  assert.equal(stripMarkup(contact.match(/<h2\b[^>]*>([\s\S]*?)<\/h2>/u)?.[1] ?? ""), "Contact");
   assert.equal(openingTags(home, "img").length, 0);
   for (const route of ROUTES.slice(1)) assert.equal(openingTags(await routeHtml(route), "canvas").length, 0);
 });
@@ -603,7 +604,7 @@ test("Experience presents five numbered sections and all eighteen approved entri
   const html = await routeHtml("/experience/");
   const expected = await approvedExperience();
   assert.deepEqual(expected.map(({ id }) => id), Array.from({ length: 18 }, (_, index) => index + 1));
-  assert.deepEqual(expected.map(({ keyContributions }) => keyContributions.length), [9, 6, 8, 7, 8, 7, 6, 5, 5, 5, 5, 7, 5, 6, 1, 1, 2, 4]);
+  assert.deepEqual(expected.map(({ keyContributions }) => keyContributions.length), [9, 6, 8, 7, 8, 7, 6, 6, 6, 5, 5, 7, 5, 6, 1, 1, 2, 4]);
   assert.deepEqual(experienceEntries(html).map(({ id }) => id), expected.map(({ id }) => id));
   assert.equal(openingTags(html, "h1").length, 1);
   assert.match(html, /<h1>Experience: Areas of Focus<\/h1>/u);
@@ -730,7 +731,7 @@ test("law papers preserve article identity, chapter navigation, and bidirectiona
     assert.equal(stripMarkup(titleMatch[1]), approved.find(({ id }) => id === index + 8).detailTitle);
     assert.ok(text.includes(title.split(": ").join(" — ")), `${route} lost its original article-title wording`);
     if (subtitle) assert.ok(text.includes(subtitle), `${route} lost its original subtitle`);
-    assert.ok(text.includes("Letao Ouyang"), `${route} lost its original author name`);
+    assert.ok(text.includes("Author, Letao (Theodore) Ouyang"), `${route} lost its author name`);
     assert.ok(text.includes("December 2024"), `${route} lost its original date`);
     assert.ok(text.includes("Abstract"), `${route} is missing its abstract`);
     assert.equal(openingTags(html, "article").length, 1, `${route} must have one article reading region`);
@@ -999,7 +1000,10 @@ test("the production design contract is restrained and dependency-light", async 
   assert.match(globals, /@media \(pointer:\s*coarse\)[\s\S]*?\.primary-nav a\s*\{[^}]*min-height:\s*44px/u);
   assert.match(home, /@media \(pointer:\s*coarse\)[\s\S]*?\.contactStrip a[\s\S]*?min-height:\s*44px/u);
   assert.match(globals, /width:\s*min\(100%,\s*1440px\)/u);
-  assert.match(globals, /\.content-column\s*\{[\s\S]*?grid-template-columns:\s*repeat\(12,[\s\S]*?padding:\s*112px 0 144px/u);
+  assert.match(globals, /--content-top:\s*112px;/u);
+  assert.match(globals, /\.content-column\s*\{[\s\S]*?grid-template-columns:\s*repeat\(12,[\s\S]*?padding:\s*var\(--content-top\) 0 144px/u);
+  assert.match(globals, /\.site-rail\s*\{[^}]*padding:\s*var\(--content-top\) /u, "The rail's wordmark starts on the title's line.");
+  assert.match(home, /\.homeFrame \.profileSection\s*\{[^}]*padding-top:\s*var\(--content-top\)/u);
   assert.match(globals, /\.structural-guide-tick\s*\{[\s\S]*?position:\s*sticky[\s\S]*?height:\s*20px/u);
   assert.match(directory, /\.directory\s*\{[^}]*grid-template-columns:\s*1fr/u);
   assert.match(experience, /\.section\s*\{[^}]*grid-template-columns:\s*repeat\(11,[^}]*grid-column:\s*1 \/ span 11/u, "Sections end on the reading-end guide");

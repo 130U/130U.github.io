@@ -5,9 +5,9 @@ import styles from "../home.module.css";
 
 const researchSummaries: Record<string, string> = {
   "critical-dependence-stress-for-diversification-gains-under-fixed-marginals":
-    "How far can the dependence between positions move before a diversification trade stops reducing Expected Shortfall, when every individual loss distribution stays fixed? I prove that the critical stress budget is quadratic in the trade size and identify its leading coefficient through a variational limit. The sensitivity at zero stress understates that budget. I introduce the marginal-restoration premium to measure the gap, characterize exactly when it is positive, and prove that it is at least 30% in a uniform benchmark. At equal effective costs, continuous flow–cut duality gives the premium's response to background displacement costs.",
+    "How far can the dependence between positions move before a diversification trade stops reducing Expected Shortfall, when every individual loss distribution stays fixed? I prove that the critical stress budget is quadratic in the trade size and identify its leading coefficient through a variational limit. The sensitivity at zero stress can understate that budget. I introduce the marginal-restoration premium to measure the gap, characterize exactly when it is positive, and prove that it is at least 30% in a uniform benchmark. At equal effective costs, continuous flow–cut duality gives the premium's response to background displacement costs.",
   "certified-valuation-of-arithmetic-asian-options":
-    "What does an arithmetic Asian option lose when exercise is decided on the geometric average of its fixings? I prove that the loss is at most the dispersion of the fixings divided by the level risk that precedes them, and that in Black's model it grows with the cube of volatility and the square of the averaging window. For a one-month crude oil average price option the bound is below a hundredth of a cent per barrel, against 2.6 cents for the classical first-order bound. Under Heston, validated transforms turn the bound into a proved price interval for a twelve-fixing call spread and a proved bound on its Euler discretization error, with executable certificates.",
+    "What does an arithmetic Asian option lose when exercise is decided on the geometric average of its fixings? I prove that the loss is at most the dispersion of the fixings divided by the level risk that precedes them, and that in Black's model the bound grows with the cube of volatility and the square of the averaging window. For a one-month crude oil average price option the bound is below a hundredth of a cent per barrel, against 2.6 cents for the classical first-order bound. Under Heston, validated transforms turn the bound into a proved price interval for a twelve-fixing call spread and a proved bound on its Euler discretization error, with executable certificates.",
   "certified-joint-pricing-errors-in-rough-heston":
     "How far can stored option prices sit from the exact model prices, measured across a whole portfolio? Every strike at one expiry is priced from the same characteristic function, so its numerical error is a common factor. I prove that a portfolio's exposure to that error at each frequency is the Fourier transform of its payoff: spreads and butterflies hedge it, and baskets over many strikes diversify it. In rough Heston, a residual in the fractional Riccati equation moves the log-characteristic function by at most the residual integrated against a forward variance curve, with constant one. On S&P 500 options, netting the legs certifies a half-point tolerance for all 28 six-month spreads, butterflies and baskets tested, against 13 without.",
 };
@@ -41,9 +41,9 @@ export function AboutContent({ hasHero = false }: { hasHero?: boolean }) {
               developer, a frontier AI lab, and a global alternative asset
               manager. I also build systems of my own:{" "}
               <a className={styles.inlineLink} href="https://github.com/130U/RESEARCH-Financial-Large-Language-Model" target="_blank" rel="noopener noreferrer">a language model</a>{" "}
-              trained from scratch on financial text, and{" "}
-              <a className={styles.inlineLink} href="https://github.com/130U/RESEARCH-Agent-Evaluation-Methodology" target="_blank" rel="noopener noreferrer">a gate</a>{" "}
-              that decides which evaluation feedback an agent&apos;s optimizer may act on.
+              trained from scratch for financial research, and{" "}
+              <a className={styles.inlineLink} href="https://github.com/130U/RESEARCH-Agent-Evaluation-Methodology" target="_blank" rel="noopener noreferrer">four gates</a>{" "}
+              that decide which evaluation feedback may change an agent.
             </p>
           </div>
         </div>
@@ -122,9 +122,10 @@ export function AboutContent({ hasHero = false }: { hasHero?: boolean }) {
         </div>
       </section>
 
-      <section className={styles.section} id="contact" aria-label="Contact">
+      <section className={styles.section} id="contact" aria-labelledby="contact-heading">
         <p className={styles.sectionIndex} aria-hidden="true">05</p>
         <div className={styles.sectionBody}>
+          <h2 className={styles.sectionTitle} id="contact-heading">Contact</h2>
           <ul className={styles.contactStrip}>
             <li>
               <span className={styles.contactLabel}>Email</span>

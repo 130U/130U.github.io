@@ -1,18 +1,18 @@
 {
   "repositoryUrl": "https://github.com/130U/RESEARCH-Critical-Dependence-Stress-for-Diversification-Gains-under-Fixed-Marginals",
-  "sourceUrl": "https://github.com/130U/RESEARCH-Critical-Dependence-Stress-for-Diversification-Gains-under-Fixed-Marginals/blob/a62cc41106e58e5d2df1387a1cf39ebfa65e36e8/paper/paper.pdf",
+  "sourceUrl": "https://github.com/130U/RESEARCH-Critical-Dependence-Stress-for-Diversification-Gains-under-Fixed-Marginals/blob/c0782609a95f9887c248631c56174615233c7ae4/paper/paper.pdf",
   "sourceTitle": "Critical Dependence Stress for Diversification Gains under Fixed Marginals",
-  "sourceCommit": "a62cc41106e58e5d2df1387a1cf39ebfa65e36e8",
-  "sourceBlob": "e9efa283fc4b8efe2cac0ca483fa3e5da81e01e5",
-  "sourceEditedAt": "2026-11-19T03:29:40-05:00",
+  "sourceCommit": "c0782609a95f9887c248631c56174615233c7ae4",
+  "sourceBlob": "72d5cf95d6812da8198cca12f313c59d254ef3d0",
+  "sourceEditedAt": "2026-11-19T11:43:47-05:00",
   "fetchedWith": "Authenticated Git checkout at the exact commit; git show bytes checked against Git blob SHA-1",
   "sourceFiles": [
     {
       "path": "paper/source/declarations.tex",
       "local": "declarations.tex",
-      "gitBlob": "89f601719f90503b89a8a062ffe8f83a36f16ccb",
-      "sha256": "9d9dea327e9a340b93ea9e470a2a52238c0e6dd92b39fbc7c59cf8033deb790f",
-      "bytes": 932
+      "gitBlob": "af7fa007c564ae03964b4ff6794298fde311774b",
+      "sha256": "8c7cd1e1ebbd5e23f977cbc877c07b38b8c387ccba446e2559ca56d5f739a552",
+      "bytes": 929
     },
     {
       "path": "paper/source/figure-budget.tex",
@@ -38,72 +38,72 @@
     {
       "path": "paper/source/main-classification-flow.tex",
       "local": "main-classification-flow.tex",
-      "gitBlob": "5d10d0e4f87b084bc57560693156903f7e8eb48d",
-      "sha256": "79be7f50ffeb003bfed2249b00950b5e23e7056dd814cd0c1a6d8f71a484955d",
-      "bytes": 20134
+      "gitBlob": "10cd64c31c40954ccfb78c304a026574722f7c21",
+      "sha256": "61374c8ae5dc4f3801d8c63c573f2d2fca70e9fe184a3a8b558ec526d9db125f",
+      "bytes": 19601
     },
     {
       "path": "paper/source/main-crossing-proof.tex",
       "local": "main-crossing-proof.tex",
-      "gitBlob": "394d003c1bdea0f52c5e4ea99559c7fce43d83e8",
-      "sha256": "9b13fb1ddb3b081ef5ffc7c7df9a64fc0f36b39468367cc14f28aaee86dfa3d4",
-      "bytes": 4308
+      "gitBlob": "c45aaa4c98e0af2f8ccb004bcd6e5a884b2d07a2",
+      "sha256": "31b44ccdf5ee40aa6637608a482eb3a3f46a703f36399dd6cc8970e870cfae75",
+      "bytes": 4201
     },
     {
       "path": "paper/source/main-crossing.tex",
       "local": "main-crossing.tex",
-      "gitBlob": "8bcfa49229edb4320a2fbc077d74906267a42d07",
-      "sha256": "b40839ba26652ff83fe52e5d2c1b660c2f574e4177e7eebb41580c7d1607d13a",
-      "bytes": 8585
+      "gitBlob": "b132bc78e96f5be64b8963ea08e59e78715d783a",
+      "sha256": "e5b8bb86b3eb6bc96ec6d655cffb4c63fe51b1db14354972e1ec87470183e8fd",
+      "bytes": 8510
     },
     {
       "path": "paper/source/main-introduction.tex",
       "local": "main-introduction.tex",
-      "gitBlob": "637cf0d47fd21be707f7f7821f35c72d281191db",
-      "sha256": "6de76a53ce9cb48c99df3b44649d08b3c9f08701295b5ae9814c3d603d29f519",
-      "bytes": 12283
+      "gitBlob": "fcea6eafa21b135bcdbe060cb2499ae60c2eda9f",
+      "sha256": "ad8a1733e9a4eeef931a4c0a345884936763f421b325d869c240ee7783fd27bd",
+      "bytes": 12229
     },
     {
       "path": "paper/source/main-model-benchmark.tex",
       "local": "main-model-benchmark.tex",
-      "gitBlob": "d01f26b9fc7f72d36aaaf92b3642046643c64e2e",
-      "sha256": "b3eb1da3b723f6fbe19b805a1532b140fe0a7bb1d26feb988e4267ea3e151716",
-      "bytes": 23212
+      "gitBlob": "45f274bad2930d2a417c8717ab2d44db4f2c12b3",
+      "sha256": "3cdd22399e671b53fd5f10f5ee0d097a68e07a1f219c07f71e47611af7a09a60",
+      "bytes": 23082
     },
     {
       "path": "paper/source/main-quantitative.tex",
       "local": "main-quantitative.tex",
-      "gitBlob": "169003cf20576b49ff370332fe15e428844e4687",
-      "sha256": "86544582aeb27420b676364656e8cd470dbfbfeb854182c7cf9b79c2c51b5140",
-      "bytes": 13038
+      "gitBlob": "c29019e57b7308207ddcdc01d9dd8a4308a2de38",
+      "sha256": "0fa7cf11258e4593070cf3742dd9bc404730c9a07c5cbddd48fa4f3282fa7321",
+      "bytes": 12880
     },
     {
       "path": "paper/source/main-scope.tex",
       "local": "main-scope.tex",
-      "gitBlob": "2b87f6db400a97cd97ec3ac0e51a4d76e3de66fd",
-      "sha256": "7d86109df3511118ab08215d74cf4e300db01164367c3596c3bf0efd76ccabc1",
-      "bytes": 4014
+      "gitBlob": "ccdaef8cda3df6c3d5c4217e4c9fc19381770a15",
+      "sha256": "b857c903798bf0e9c6cf24f68e533eaa00ae7632b8513a283b73041eae486b40",
+      "bytes": 3954
     },
     {
       "path": "paper/source/main-variational-proof.tex",
       "local": "main-variational-proof.tex",
-      "gitBlob": "c588e8c6021270004c6a84046c35c4a66bfd9ae1",
-      "sha256": "1e347e0efeb8b5614737d4f9e74e35e6c4ca2d5d06eb4d580a1f0558245d2966",
-      "bytes": 3676
+      "gitBlob": "4214352cc0a9f158ddc87ec37b4fd3126abe02fd",
+      "sha256": "5931642da24a3984b289baabb3fd0c19faeb81ecf946c17991f38cc0e30e39d3",
+      "bytes": 3639
     },
     {
       "path": "paper/source/main-variational.tex",
       "local": "main-variational.tex",
-      "gitBlob": "d828d74fb7dac3b40780bb300927765307b23faa",
-      "sha256": "bb099b84d0c395f3a94fc50d75ffeebc850211d025e3104ff5c070b0d8d45fff",
-      "bytes": 9246
+      "gitBlob": "9a9609383ae8bb36e4b77150fbdfc346540511de",
+      "sha256": "d3a32bd24a49173b292064e79a7ebd6b64ded4461140c28c7f9d99d1dff91d1f",
+      "bytes": 9209
     },
     {
       "path": "paper/source/paper.tex",
       "local": "paper.tex",
-      "gitBlob": "e9efa283fc4b8efe2cac0ca483fa3e5da81e01e5",
-      "sha256": "18176ac22f5e98d4e13b30d054eb6369639e5d86bb7f7f52abc3946777533aa5",
-      "bytes": 5755
+      "gitBlob": "72d5cf95d6812da8198cca12f313c59d254ef3d0",
+      "sha256": "047d09bab900538f6f7dddc1680a355aa174b5cdb54456afca76b311d565e0c4",
+      "bytes": 6004
     },
     {
       "path": "paper/source/references.tex",
@@ -115,9 +115,9 @@
     {
       "path": "paper/source/technical-cost-proof.tex",
       "local": "technical-cost-proof.tex",
-      "gitBlob": "971784fbb37c00ffbfd8244d5f4c941cb33db2a3",
-      "sha256": "6cd543bc80cc0705c214a64463ecfd00cac00c647e36de0399d19957a37c4b30",
-      "bytes": 2773
+      "gitBlob": "ea715352f8899c7bc66d3cc9ff605c801064775a",
+      "sha256": "02d33b0e6e12834d7cdcaa40ea90f18d86c50b3921ab119dab26c7a24265e05c",
+      "bytes": 2740
     },
     {
       "path": "paper/source/technical-efficiency-identity.tex",
@@ -129,51 +129,51 @@
     {
       "path": "paper/source/technical-flow-proof.tex",
       "local": "technical-flow-proof.tex",
-      "gitBlob": "734c3b233033bbedf3015185685a227a14edb945",
-      "sha256": "a8d5111e9db4c4152a47f693e8e24830af267f4b3083108e749e727a73a52987",
-      "bytes": 7787
+      "gitBlob": "e95bd18d25be9329ec063c12d1e5e46befe9362d",
+      "sha256": "6a36b874257df4cdff79cd98be329dd5945ecb7b6b85e85c6f465412b2a725e8",
+      "bytes": 7728
     },
     {
       "path": "paper/source/technical-limit.tex",
       "local": "technical-limit.tex",
-      "gitBlob": "fb04ad1228419c5affc10a3d266734345d3f2bc3",
-      "sha256": "cc827adbab6dc383d0e85d9840da0fab9c7e11daf64ee045b74424229b09643a",
-      "bytes": 12423
+      "gitBlob": "2d6b7883cb179a58f9d0bed5c664624188ce0e99",
+      "sha256": "63fccd3e3fdbb894d4ed60bbe77525b131089aa6d6c115a07e509097ea9af956",
+      "bytes": 12160
     },
     {
       "path": "paper/source/technical-mixture-obstruction.tex",
       "local": "technical-mixture-obstruction.tex",
-      "gitBlob": "7172e4ab665902cd3ab060a47ffea3ed4954f818",
-      "sha256": "1ad7643a5aa542ba8492b6dbf02da666b224612116703387e3b9b2712cb8db3c",
-      "bytes": 1416
+      "gitBlob": "0b82578a62446d1c75fe7176c156dceee12bdff3",
+      "sha256": "ca664dedc995a0417c2d6ddd1384704d2ecf3a73e22b15ed79cb1b17f1886492",
+      "bytes": 1420
     },
     {
       "path": "paper/source/technical-quantitative.tex",
       "local": "technical-quantitative.tex",
-      "gitBlob": "9c1c919e4bb9709defe13fb8873d27cb77618991",
-      "sha256": "5ad429e9c4ed97a2453900d3c8fd9cdb620fc65853b8dcbafa95f66ef66026ba",
-      "bytes": 6520
+      "gitBlob": "2008838b2847da91fe1bf496147cacf3b91644ed",
+      "sha256": "2b5f129af4df6424e62ff7abed959d107bfefab1cf1197020cdaaff2391fc32f",
+      "bytes": 6494
     },
     {
       "path": "paper/source/technical-reference.tex",
       "local": "technical-reference.tex",
-      "gitBlob": "44c7620f618c98ed96da2343ed6bba1c8126afcd",
-      "sha256": "8c63a00a731b208d87a08340569d4017c09895e1d6f457e74d1c6c321cd69785",
-      "bytes": 3244
+      "gitBlob": "0ee665753aee525c8b898fcf4d0ff4f5955c84d8",
+      "sha256": "24d84f944ef1225492b90850691033cf7d6eb944aa49ee6dff077e33e74f7eec",
+      "bytes": 3207
     },
     {
       "path": "paper/source/technical-threshold-statement.tex",
       "local": "technical-threshold-statement.tex",
-      "gitBlob": "4955c4f0e239365098d4c2c71d53ff6c56fad2ed",
-      "sha256": "1c16a52b68e35157c650be7e17e65654afc73283031df94677dd3ea559bd0c85",
-      "bytes": 474
+      "gitBlob": "5e71c0fd445b34ce0ae2a17515b142dc7ad1f382",
+      "sha256": "cb6f203a7fc9b71ff3038e35eb6304126adc9707b170d339dcc7ad1cddc6c717",
+      "bytes": 437
     },
     {
       "path": "paper/source/technical-variational-proof.tex",
       "local": "technical-variational-proof.tex",
-      "gitBlob": "f60f6fa47576f16977f548a3b95bffb8c32a1286",
-      "sha256": "69b4d9df40d226ec6d71915653422bc9e2eba4e920fef7b57f4e7981e5406273",
-      "bytes": 18761
+      "gitBlob": "8b4987f3cb404513f2a0fdbc29850412ef224aa9",
+      "sha256": "d2d627e542ffa793f9debe9bf5e7f9edf24843d6eac0666770cdf9830ea6e314",
+      "bytes": 18024
     }
   ],
   "includedFiles": [
@@ -347,7 +347,7 @@
   "crossReferences": [
     {
       "label": "eq:B.2",
-      "href": "https://github.com/130U/RESEARCH-Critical-Dependence-Stress-for-Diversification-Gains-under-Fixed-Marginals/blob/a62cc41106e58e5d2df1387a1cf39ebfa65e36e8/paper/source/technical-quantitative.tex#L80",
+      "href": "https://github.com/130U/RESEARCH-Critical-Dependence-Stress-for-Diversification-Gains-under-Fixed-Marginals/blob/c0782609a95f9887c248631c56174615233c7ae4/paper/source/technical-quantitative.tex#L80",
       "number": "B.2"
     },
     {
@@ -386,13 +386,13 @@
       "number": "2.2"
     },
     {
-      "label": "prop:uniform-variable-cost",
-      "href": "#dep-prop-uniform-variable-cost",
+      "label": "cor:uniform-reference",
+      "href": "#dep-cor-uniform-reference",
       "number": "5.2"
     },
     {
       "label": "thm:projected-flow",
-      "href": "#dep-prop-boundary-sensitivity",
+      "href": "#dep-thm-projected-flow",
       "number": "4.3"
     },
     {
@@ -421,18 +421,18 @@
       "number": "2.3"
     },
     {
-      "label": "lemma:general-variation",
-      "href": "https://github.com/130U/RESEARCH-Critical-Dependence-Stress-for-Diversification-Gains-under-Fixed-Marginals/blob/a62cc41106e58e5d2df1387a1cf39ebfa65e36e8/paper/source/technical-reference.tex#L4",
+      "label": "lem:general-variation",
+      "href": "https://github.com/130U/RESEARCH-Critical-Dependence-Stress-for-Diversification-Gains-under-Fixed-Marginals/blob/c0782609a95f9887c248631c56174615233c7ae4/paper/source/technical-reference.tex#L4",
       "number": "A.1"
     },
     {
-      "label": "lemma:general-variation",
-      "href": "https://github.com/130U/RESEARCH-Critical-Dependence-Stress-for-Diversification-Gains-under-Fixed-Marginals/blob/a62cc41106e58e5d2df1387a1cf39ebfa65e36e8/paper/source/technical-reference.tex#L4",
+      "label": "lem:general-variation",
+      "href": "https://github.com/130U/RESEARCH-Critical-Dependence-Stress-for-Diversification-Gains-under-Fixed-Marginals/blob/c0782609a95f9887c248631c56174615233c7ae4/paper/source/technical-reference.tex#L4",
       "number": "A.1"
     },
     {
-      "label": "lemma:general-variation",
-      "href": "https://github.com/130U/RESEARCH-Critical-Dependence-Stress-for-Diversification-Gains-under-Fixed-Marginals/blob/a62cc41106e58e5d2df1387a1cf39ebfa65e36e8/paper/source/technical-reference.tex#L4",
+      "label": "lem:general-variation",
+      "href": "https://github.com/130U/RESEARCH-Critical-Dependence-Stress-for-Diversification-Gains-under-Fixed-Marginals/blob/c0782609a95f9887c248631c56174615233c7ae4/paper/source/technical-reference.tex#L4",
       "number": "A.1"
     },
     {
@@ -502,7 +502,7 @@
     },
     {
       "label": "lem:threshold-convexity",
-      "href": "https://github.com/130U/RESEARCH-Critical-Dependence-Stress-for-Diversification-Gains-under-Fixed-Marginals/blob/a62cc41106e58e5d2df1387a1cf39ebfa65e36e8/paper/source/technical-limit.tex#L103",
+      "href": "https://github.com/130U/RESEARCH-Critical-Dependence-Stress-for-Diversification-Gains-under-Fixed-Marginals/blob/c0782609a95f9887c248631c56174615233c7ae4/paper/source/technical-limit.tex#L101",
       "number": "A.4"
     },
     {
@@ -532,17 +532,17 @@
     },
     {
       "label": "proof:threshold-localization",
-      "href": "https://github.com/130U/RESEARCH-Critical-Dependence-Stress-for-Diversification-Gains-under-Fixed-Marginals/blob/a62cc41106e58e5d2df1387a1cf39ebfa65e36e8/paper/source/technical-limit.tex#L2",
+      "href": "https://github.com/130U/RESEARCH-Critical-Dependence-Stress-for-Diversification-Gains-under-Fixed-Marginals/blob/c0782609a95f9887c248631c56174615233c7ae4/paper/source/technical-limit.tex#L1",
       "number": "A.2"
     },
     {
-      "label": "b-l2-all-optimal-thresholds-under-a-budget-of-order-varepsilon2",
-      "href": "https://github.com/130U/RESEARCH-Critical-Dependence-Stress-for-Diversification-Gains-under-Fixed-Marginals/blob/a62cc41106e58e5d2df1387a1cf39ebfa65e36e8/paper/source/technical-threshold-statement.tex#L1",
+      "label": "lem:threshold-localization",
+      "href": "https://github.com/130U/RESEARCH-Critical-Dependence-Stress-for-Diversification-Gains-under-Fixed-Marginals/blob/c0782609a95f9887c248631c56174615233c7ae4/paper/source/technical-threshold-statement.tex#L1",
       "number": "A.2"
     },
     {
       "label": "eq:A.13",
-      "href": "https://github.com/130U/RESEARCH-Critical-Dependence-Stress-for-Diversification-Gains-under-Fixed-Marginals/blob/a62cc41106e58e5d2df1387a1cf39ebfa65e36e8/paper/source/technical-limit.tex#L136",
+      "href": "https://github.com/130U/RESEARCH-Critical-Dependence-Stress-for-Diversification-Gains-under-Fixed-Marginals/blob/c0782609a95f9887c248631c56174615233c7ae4/paper/source/technical-limit.tex#L134",
       "number": "A.13"
     },
     {
@@ -552,12 +552,12 @@
     },
     {
       "label": "lem:threshold-convexity",
-      "href": "https://github.com/130U/RESEARCH-Critical-Dependence-Stress-for-Diversification-Gains-under-Fixed-Marginals/blob/a62cc41106e58e5d2df1387a1cf39ebfa65e36e8/paper/source/technical-limit.tex#L103",
+      "href": "https://github.com/130U/RESEARCH-Critical-Dependence-Stress-for-Diversification-Gains-under-Fixed-Marginals/blob/c0782609a95f9887c248631c56174615233c7ae4/paper/source/technical-limit.tex#L101",
       "number": "A.4"
     },
     {
       "label": "lem:projected-imbalance",
-      "href": "https://github.com/130U/RESEARCH-Critical-Dependence-Stress-for-Diversification-Gains-under-Fixed-Marginals/blob/a62cc41106e58e5d2df1387a1cf39ebfa65e36e8/paper/source/technical-limit.tex#L54",
+      "href": "https://github.com/130U/RESEARCH-Critical-Dependence-Stress-for-Diversification-Gains-under-Fixed-Marginals/blob/c0782609a95f9887c248631c56174615233c7ae4/paper/source/technical-limit.tex#L52",
       "number": "A.3"
     },
     {
@@ -617,7 +617,7 @@
     },
     {
       "label": "lem:threshold-convexity",
-      "href": "https://github.com/130U/RESEARCH-Critical-Dependence-Stress-for-Diversification-Gains-under-Fixed-Marginals/blob/a62cc41106e58e5d2df1387a1cf39ebfa65e36e8/paper/source/technical-limit.tex#L103",
+      "href": "https://github.com/130U/RESEARCH-Critical-Dependence-Stress-for-Diversification-Gains-under-Fixed-Marginals/blob/c0782609a95f9887c248631c56174615233c7ae4/paper/source/technical-limit.tex#L101",
       "number": "A.4"
     },
     {
@@ -747,12 +747,12 @@
     },
     {
       "label": "app:flow-proof",
-      "href": "https://github.com/130U/RESEARCH-Critical-Dependence-Stress-for-Diversification-Gains-under-Fixed-Marginals/blob/a62cc41106e58e5d2df1387a1cf39ebfa65e36e8/paper/source/technical-flow-proof.tex#L1",
+      "href": "https://github.com/130U/RESEARCH-Critical-Dependence-Stress-for-Diversification-Gains-under-Fixed-Marginals/blob/c0782609a95f9887c248631c56174615233c7ae4/paper/source/technical-flow-proof.tex#L1",
       "number": "A.8"
     },
     {
-      "label": "app:cost-proofs",
-      "href": "https://github.com/130U/RESEARCH-Critical-Dependence-Stress-for-Diversification-Gains-under-Fixed-Marginals/blob/a62cc41106e58e5d2df1387a1cf39ebfa65e36e8/paper/source/technical-cost-proof.tex#L1",
+      "label": "app:boundary-sensitivity",
+      "href": "https://github.com/130U/RESEARCH-Critical-Dependence-Stress-for-Diversification-Gains-under-Fixed-Marginals/blob/c0782609a95f9887c248631c56174615233c7ae4/paper/source/technical-cost-proof.tex#L1",
       "number": "A.7"
     },
     {
@@ -772,12 +772,12 @@
     },
     {
       "label": "app:potential-proof",
-      "href": "https://github.com/130U/RESEARCH-Critical-Dependence-Stress-for-Diversification-Gains-under-Fixed-Marginals/blob/a62cc41106e58e5d2df1387a1cf39ebfa65e36e8/paper/source/technical-quantitative.tex#L3",
+      "href": "https://github.com/130U/RESEARCH-Critical-Dependence-Stress-for-Diversification-Gains-under-Fixed-Marginals/blob/c0782609a95f9887c248631c56174615233c7ae4/paper/source/technical-quantitative.tex#L3",
       "number": "B.1"
     },
     {
       "label": "thm:projected-flow",
-      "href": "#dep-prop-boundary-sensitivity",
+      "href": "#dep-thm-projected-flow",
       "number": "4.3"
     },
     {
@@ -802,7 +802,7 @@
     },
     {
       "label": "app:uniform-bound-proof",
-      "href": "https://github.com/130U/RESEARCH-Critical-Dependence-Stress-for-Diversification-Gains-under-Fixed-Marginals/blob/a62cc41106e58e5d2df1387a1cf39ebfa65e36e8/paper/source/technical-quantitative.tex#L32",
+      "href": "https://github.com/130U/RESEARCH-Critical-Dependence-Stress-for-Diversification-Gains-under-Fixed-Marginals/blob/c0782609a95f9887c248631c56174615233c7ae4/paper/source/technical-quantitative.tex#L32",
       "number": "B.2"
     },
     {
@@ -832,7 +832,7 @@
     },
     {
       "label": "app:dependence-family-proof",
-      "href": "https://github.com/130U/RESEARCH-Critical-Dependence-Stress-for-Diversification-Gains-under-Fixed-Marginals/blob/a62cc41106e58e5d2df1387a1cf39ebfa65e36e8/paper/source/technical-quantitative.tex#L49",
+      "href": "https://github.com/130U/RESEARCH-Critical-Dependence-Stress-for-Diversification-Gains-under-Fixed-Marginals/blob/c0782609a95f9887c248631c56174615233c7ae4/paper/source/technical-quantitative.tex#L49",
       "number": "B.3"
     },
     {
@@ -862,7 +862,7 @@
     },
     {
       "label": "thm:projected-flow",
-      "href": "#dep-prop-boundary-sensitivity",
+      "href": "#dep-thm-projected-flow",
       "number": "4.3"
     },
     {
@@ -6844,14 +6844,13 @@
       "labels": []
     }
   ],
-  "importedMarkdownSha256": "a38068886bffca76b7bc32cd070c324e22d0cd3b15634824990af864de316404",
+  "importedMarkdownSha256": "1da898ae2988ae838cbb9120cc7b38a3b47cf082ea681b627eb106665d5fe772",
   "transformations": [
     "Seven main TeX input files contain five numbered sections and eleven subsections; recursively included main-text proofs are retained.",
     "TeX line wrapping, layout commands, font styling, and text accents are converted to equivalent web markup.",
     "Every inline/display mathematical body is preserved, apart from moving TeX label commands to HTML anchors; explicit equation tags are retained.",
     "Original theorem numbers, proof endings, result-part numbering, bibliography order, citation targets, and complete figure captions are retained.",
     "Aliases on one original target share one web anchor; references to omitted appendices point to their exact pinned TeX source line.",
-    "The four original PNG siblings of the PDF figures are referenced at local asset paths, with their original Git blob identities recorded.",
-    "The public page title differs from the original paper title, which is recorded separately as sourceTitle."
+    "The four figures are drawn natively from the repository's formulas; their image paths key the native drawings and the complete captions are retained."
   ]
 }

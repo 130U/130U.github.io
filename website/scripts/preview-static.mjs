@@ -7,20 +7,15 @@ const root = resolve(fileURLToPath(new URL("../out/", import.meta.url)));
 const host = process.env.PREVIEW_HOST ?? "127.0.0.1";
 const port = Number(process.env.PREVIEW_PORT ?? 8123);
 const contentTypes = {
-  ".avif": "image/avif",
   ".css": "text/css; charset=utf-8",
   ".html": "text/html; charset=utf-8",
   ".ico": "image/x-icon",
   ".jpg": "image/jpeg",
-  ".jpeg": "image/jpeg",
   ".js": "text/javascript; charset=utf-8",
-  ".json": "application/json; charset=utf-8",
-  ".map": "application/json; charset=utf-8",
   ".md": "text/markdown; charset=utf-8",
   ".png": "image/png",
   ".svg": "image/svg+xml",
   ".txt": "text/plain; charset=utf-8",
-  ".webmanifest": "application/manifest+json",
   ".webp": "image/webp",
   ".woff2": "font/woff2",
   ".xml": "application/xml; charset=utf-8",

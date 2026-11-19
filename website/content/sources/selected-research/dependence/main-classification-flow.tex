@@ -1,4 +1,4 @@
-\section{4. Efficiency premiums and projected flow duality}\label{background-substitutability-and-minimum-cost-feasibility}
+\section{4. Efficiency premiums and projected flow duality}\label{sec:efficiency-premiums}
 
 The critical coefficient reaches the local-efficiency lower bound exactly when background displacement is cheapest per unit change in portfolio loss, and in every other case a strict marginal-restoration premium remains. This section proves that classification and then characterizes the right derivative of the critical budget in the background penalty at equal effective costs. A locally efficient displacement need not preserve the marginal projections, so any unbalanced moment has to be compensated elsewhere. We measure this obstruction by testing each projected flux against a bounded measurable coordinate potential, using the \(L^1\) dual representation of the restoration cost:
 \[
@@ -8,13 +8,13 @@ The critical coefficient reaches the local-efficiency lower bound exactly when b
 \]
 Here \(\phi_i(q)\) acts as a dual shadow price for the projected displacement moment at coordinate level \(q\). For the projections to vanish, opposite signed displacements have to balance at each coordinate level, and then the leading restoration penalty disappears. We first identify the pointwise displacement required for equality in the efficiency bound, and then test its projections near an off-diagonal corner to rule out equality when only traded coordinates are cheapest. At equal effective costs, continuous potentials lead to the flow--cut duality of Section~4.2, and allowing nonzero projected fluxes in the restoration-cost bound leads to the piecewise-constant potential estimates of Section~5.1.
 
-\subsection{4.1 Local efficiency and the zero-premium classification}\label{a-necessary-and-sufficient-condition-for-zero-premium}\label{v21-classification}
+\subsection{4.1 Local efficiency and the zero-premium classification}\label{sec:zero-premium}
 
 With \(c_1=\gamma_1\), \(c_2=\gamma_2\), \(c_3=\gamma_3/\beta\), and \(c_{\min}=\min\{c_1,c_2,c_3\}\), Proposition~\ref{prop:nominal-benchmark} and Theorem~\ref{thm:critical-limit} already give \(F(s)\le-J/p+s/(pc_{\min})\). The issue at zero risk difference is whether a kernel can satisfy the pointwise efficiency conditions while conserving every marginal projection, and we characterize those simultaneous equality conditions below.
 
 Proposition~\ref{prop:nominal-benchmark} gives initial efficiency at each fixed trade size under \eqref{eq:2.9}, and when \(\gamma_1=c_{\min}\), Proposition~\ref{prop:balanced-linear-profile} separately realizes the limiting slope by matching opposite first-coordinate moments on each fiber. When only traded coordinates are cheapest, that matching is enough for the initial linear segment but cannot cover the whole tail section. If the background coordinate is cheapest, exchanging \(x,y\) and reversing \(u\) instead balances the required displacement on every background slice, which sustains the efficiency bound up to zero risk.
 
-\resultnumber{4.1}\begin{lemma}[Local-efficiency bound and critical-level optimality]\label{lem:efficiency-bound}\label{lem:v21-equality}\label{g.3-a-necessary-and-sufficient-condition-for-minimum-cost-feasibility}
+\resultnumber{4.1}\begin{lemma}[Local-efficiency bound and critical-level optimality]\label{lem:efficiency-bound}
 In the exchangeable box model of Section~2.2, every kernel with \(I(\alpha)<\infty\) satisfies \(p\mathcal V(\alpha)+J\le\mathcal C(\alpha)/c_{\min}\), so \(s^*\ge c_{\min}J\). Set \(b=(1,1,\beta)\) and \(\zeta=-(u+H)1_{\{u(u+H)<0\}}\). Then \(s^*=c_{\min}J\) if and only if there is a measurable probability kernel satisfying
 \begin{equation}
 \begin{aligned}
@@ -92,7 +92,7 @@ where \(\chi=\|\ell_--\ell_+\|_{L^1(I)}/J\in(0,1)\) is the projected imbalance o
 
 By Lemma~\ref{lem:efficiency-bound}, it suffices to allocate the prescribed displacement \(\zeta\) among cheapest coordinates while preserving every marginal projection. The background coordinate admits such a balance because exchanging the traded losses and reversing the normal coordinate leaves each background slice fixed and reverses the required displacement. For the traded coordinates, the corresponding balance must instead be found along each \(x\)- or \(y\)-fiber. Near an off-diagonal corner, the required moment is bounded below by a positive multiple of \(\delta^2\), whereas the opposite-side sources available at those coordinate levels have capacity only \(O(\delta^4)\). We prove the background construction first and then use this discrepancy to exclude even randomized splitting among the traded directions.
 
-\paragraph{Comparison kernels and the sufficient direction}\label{d.1-three-zero-risk-difference-kernels-scores-and-optimal-thresholds}\label{d.2-net-fluxes-total-costs-and-general-bounds}
+\paragraph{Comparison kernels and the sufficient direction}\label{par:comparison-kernels}
 Assigning the prescribed displacement to one coordinate gives
 \begin{equation}
 \alpha^{(1)}=\delta_{\zeta e_1},\qquad
@@ -122,7 +122,7 @@ When \(c_3=c_{\min}\), mix the background kernel \(\alpha^{(3)}\) with the ident
 \end{equation}
 Thus the mixture attains the efficiency bound on the stated interval.
 
-\paragraph{The obstruction for arbitrary randomized kernels}\label{e.3-a-local-obstruction-to-zero-flux-in-the-two-asset-directions}
+\paragraph{The obstruction for arbitrary randomized kernels}\label{par:corner-obstruction}
 For necessity, suppose \(c_3>c_{\min}\) and a kernel with \(\mathcal V\ge0\) attains cost \(c_{\min}J\). Lemma~\ref{lem:efficiency-bound} then requires \(d_3=0\), \(d_1+d_2=\zeta\), and both traded components to have the sign of \(\zeta\). Since the kernel has finite first moment, its averaged displacement fields \(m_i(x,y)=\int_{\mathbb R}\int d_i\,\alpha_{\xi,u}(dd)\,du\), \(i=1,2\), are integrable on the section and satisfy, by \eqref{eq:4.1},
 \begin{equation}
 \begin{aligned}
@@ -140,7 +140,7 @@ Projected conservation gives, for every pair of Borel sets \(A,B\subset I\),
 \end{equation}
 We test \eqref{eq:4.15}--\eqref{eq:4.16} near the upper-left off-diagonal corner of \(\Omega\), where \(x\) is small, \(y\) is large, and the positive moment \((y-x)^2/2\) is bounded away from zero. Compensating this moment at the same coordinate levels requires negative moment from \(\{x>y\}\), where the small value of \(x\) or large value of \(y\) confines available sources to a small triangle near the diagonal (Figure~\ref{fig:corner}).
 
-\leavevmode\phantomsection\label{lem:v21-corner-geometry}
+\leavevmode\phantomsection\label{par:corner-geometry}
 The section base is the intersection of an open square with a diagonal strip, \(\Omega=(\ell,r)^2\cap\{q_-<x+y<q_+\}\), whose boundaries and coordinate projection endpoints are
 \[
 \begin{gathered}
@@ -175,13 +175,12 @@ N_1+N_2\le C_\Omega\int_0^\delta\int_0^x(x-y)^2\,dy\,dx
 \end{equation}
 Here \(C_\Omega<\infty\) is independent of \(\delta\). For small \(\delta\), the bound contradicts \(c_\Omega\delta^2\le M_\delta\le N_1+N_2\). Attainment of the critical cost then implies \(s^*>Jc_{\min}\) when \(c_3>c_{\min}\), and \eqref{eq:4.13} gives \eqref{eq:4.10}. \unskip\nobreak\hfill\proofbox
 
-% V21_CORNER_FIGURE
 \input{figure-corner.tex}
 
-\subsection{4.2 Boundary sensitivity and the flow--cut representation}\label{required-background-share-and-the-boundary-response}\label{v21-flow}\label{variational-characterization-and-bounds-for-the-background-share}
+\subsection{4.2 Boundary sensitivity and the flow--cut representation}\label{sec:boundary-sensitivity}
 At equal effective costs, every efficient kernel has total required displacement \(J\). At this critical level, the equality conditions and total-moment saturation in Lemma~\ref{lem:efficiency-bound} fix \(b\cdot d=\zeta\) pointwise almost everywhere, so normal integration and exchange symmetrization reduce the remaining minimum-background allocation problem to shares on the two-dimensional half-section. Raising only the background penalty selects, to first order, the kernels that use the least background displacement, and we can calculate that amount by assigning as much displacement as possible to the traded coordinates under their projected conservation law. On \(D=\Omega\cap\{x<y\}\), the measure \(d\mu=w\,d\sigma=w_\sigma(x,y)\,dx\,dy\), where \(w=(y-x)^2/2\), has mass \(J/2\) and a continuous density, positive in the interior.
 
-\resultnumber{4.3}\begin{theorem}[Boundary derivative and projected flow duality]\label{prop:boundary-sensitivity}\label{thm:projected-flow}
+\resultnumber{4.3}\begin{theorem}[Boundary derivative and projected flow duality]\label{thm:projected-flow}
 Fix the reference model and \(p,\beta,\gamma\), and set
 \[
 \boldsymbol\gamma(\eta)=(\gamma,\gamma,\beta\gamma(1+\eta)),\quad
@@ -218,9 +217,9 @@ Here \(U,V\subset I\) are disjoint measurable sets.
 
 In words, \(2\mathfrak F_\mu\) is the largest normal-displacement moment that the traded coordinates can accommodate while balancing their marginal projections. The cut formula \eqref{eq:4.21} writes \(a_+\) as \(2/J\) times the maximal deficit between the moment required on \(D\cap(U\times V)\) and the compensating capacity on \(D\cap((V\times I)\cup(I\times U))\).
 
-\textit{Proof sketch.} For \(\alpha\in\mathcal Z_0\), normal integration and exchange symmetrization yield shares satisfying \((x)_\#(a\mu)=(y)_\#(b\mu)\) and background amount \(\beta\int|d_3|\,d\Pi_\alpha=J-2\int_D(a+b)\,d\mu\). Conversely, every feasible pair of shares lifts to a kernel in \(\mathcal Z_0\), so the minimum background amount is \(J-2\mathfrak F_\mu\) (Appendix~\hyperref[app:flow-proof]{A.8}). Dividing by \(J\) gives \(a_+\), and Appendix~\hyperref[app:cost-proofs]{A.7} establishes \eqref{eq:4.19} by comparing perturbed minimizers with a least-background kernel. Sion's theorem with continuous coordinate potentials gives \eqref{eq:4.20}; signed layer-cake reduction then gives \eqref{eq:4.21}.
+\textit{Proof sketch.} For \(\alpha\in\mathcal Z_0\), normal integration and exchange symmetrization yield shares satisfying \((x)_\#(a\mu)=(y)_\#(b\mu)\) and background amount \(\beta\int|d_3|\,d\Pi_\alpha=J-2\int_D(a+b)\,d\mu\). Conversely, every feasible pair of shares lifts to a kernel in \(\mathcal Z_0\), so the minimum background amount is \(J-2\mathfrak F_\mu\) (Appendix~\hyperref[app:flow-proof]{A.8}). Dividing by \(J\) gives \(a_+\), and Appendix~\hyperref[app:boundary-sensitivity]{A.7} establishes \eqref{eq:4.19} by comparing perturbed minimizers with a least-background kernel. Sion's theorem with continuous coordinate potentials gives \eqref{eq:4.20}; signed layer-cake reduction then gives \eqref{eq:4.21}.
 
-\paragraph{Dependence on the transport weights}\label{d.4-weights-the-tail-surface-and-the-order-of-limits}
+\paragraph{Dependence on the transport weights}\label{par:transport-weights}
 Varying the positive transport weights leaves the finite-first-moment kernel class and \(\mathcal V\) unchanged. With \(A_i(\alpha)=\int|d_i|\,d\Pi_\alpha+\|j_i\|_1\), the coordinate cost including marginal restoration, we may therefore write
 \begin{equation}
 s^*(\gamma)=\inf_{\mathcal V(\alpha)\ge0}\sum_i\gamma_i A_i(\alpha).

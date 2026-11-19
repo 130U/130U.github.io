@@ -8,9 +8,9 @@ import { RESEARCH_MATH_GUTTER_EM, RESEARCH_MATH_ROW_SPACING_EM, normalizeResearc
 
 const ROOT = fileURLToPath(new URL("../", import.meta.url));
 const PROJECTS = [
-  ["large-scale-domain-expert-feedback-governance-and-adaptive-review", 167],
-  ["financial-task-design-and-synthetic-data-engineering", 148],
-  ["general-reasoning-evaluation-and-layered-verification", 175],
+  ["large-scale-domain-expert-feedback-governance-and-adaptive-review", 165],
+  ["financial-task-design-and-synthetic-data-engineering", 149],
+  ["general-reasoning-evaluation-and-layered-verification", 173],
   ["evidence-verification-and-robust-comparison-in-investment-research", 176],
 ];
 
@@ -68,7 +68,7 @@ function assertCompleteFormula(rendered, tex) {
   }
 }
 
-test("all 666 reviewed formulas have complete vector glyphs and exact accessible TeX", async () => {
+test("all 663 reviewed formulas have complete vector glyphs and exact accessible TeX", async () => {
   let total = 0;
   const mathematicalPaths = [];
   for (const [slug, expected] of PROJECTS) {
@@ -87,8 +87,8 @@ test("all 666 reviewed formulas have complete vector glyphs and exact accessible
     }
     total += formulas.length;
   }
-  assert.equal(total, 666);
-  assert.equal(createHash("sha256").update(JSON.stringify(mathematicalPaths)).digest("hex"), "a9c1101656a436c7edb2e4a3c670fcbe01652dc0a00799451846d22dc53687e4", "All mathematical glyphs must retain the reviewed shapes and order");
+  assert.equal(total, 663);
+  assert.equal(createHash("sha256").update(JSON.stringify(mathematicalPaths)).digest("hex"), "a99f252ad4b1dd8ffffee83d2b0356393464f5e44dc6a58c99fd572f5e2f29cf", "All mathematical glyphs must retain the reviewed shapes and order");
 });
 
 test("display punctuation normalization changes only true sentence and equation-row termini", () => {
@@ -184,8 +184,12 @@ test("aligned equations preserve rows, fractions, and all nine science equation 
   }
 });
 
-test("unsupported and malformed TeX fail the render with an error", async () => {
-  for (const tex of [String.raw`\unknownCommand{x}`, String.raw`\frac{x}{`, String.raw`\href{javascript:alert(1)}{x}`]) {
+test("unsupported, malformed and markup-bearing TeX fail the render with an error", async () => {
+  for (const tex of [
+    String.raw`\unknownCommand{x}`, String.raw`\frac{x}{`, String.raw`\href{javascript:alert(1)}{x}`,
+    String.raw`\mmlToken{mi}[href="javascript:alert(1)"]{x}`, String.raw`\mmlToken{mi}[style="position:fixed"]{x}`,
+    String.raw`\mmlToken{mi}[class="site-rail"]{x}`, String.raw`\text{\mmlToken{mi}[style="color:red"]{x}}`,
+  ]) {
     await assert.rejects(async () => renderResearchMath(tex, false), /.+/u);
   }
 });

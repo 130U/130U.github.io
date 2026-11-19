@@ -1,8 +1,8 @@
 \subsection{A.6 Strict increase and critical-budget inversion}\label{app:strict-crossing-proof}\nopagebreak[4]
 \input{technical-mixture-obstruction.tex}
 
-\begin{proof}[Proof of Theorem~\ref{thm:strict-crossing}]\label{v21-crossing-proof}\label{appendix-c-strict-improvement-for-arbitrary-kernels-and-inversion-of-the-critical-budgets}
-We apply the reflection from \mbox{\hyperref[sec:reflection-construction]{Appendix~A.5}} to an existing kernel, so its contribution on the replacement bands must also be controlled. Fix \(M\), retain the same patches \(E_\pm\), and choose \([-T,T]\) to contain every minimizing threshold for \(I\le M+1\). With \(a_T=\|H\|_\infty+T\), place unit-width bands beyond this window at
+\begin{proof}[Proof of Theorem~\ref{thm:strict-crossing}]\label{proof:strict-crossing}
+We apply the reflection from \mbox{\hyperref[par:reflection]{Appendix~A.5}} to an existing kernel, so its contribution on the replacement bands must also be controlled. Fix \(M\), retain the same patches \(E_\pm\), and choose \([-T,T]\) to contain every minimizing threshold for \(I\le M+1\). With \(a_T=\|H\|_\infty+T\), place unit-width bands beyond this window at
 \(E=(E_+\times[U,U+1])\cup(E_-\times[-U-1,-U])\), \(U>a_T\).
 
 By \eqref{eq:A.45}--\eqref{eq:A.46} with \(R=1\), the reflection \(d^N=-2ue_1\) has moment \(I_N=4\gamma_1m(U+1/2)\) and hinge contribution \(N_c(\tau)=-c\Delta_E\) throughout \([-T,T]\). For any old kernel with \(I\le M\), denote its moment and hinge contribution on \(E\) by \(I_O\le M\) and \(O_c(\tau)\). Subtracting the common baseline \(k_O=O_0(0)\) leaves \(R_c(\tau)=O_c(\tau)-k_O\), whose integrand is bounded by \(a_T\) and can be nonzero only if \(|d|_\gamma\ge(U-a_T)/\kappa_B\). Thus the finite displacement moment gives the uniform estimate

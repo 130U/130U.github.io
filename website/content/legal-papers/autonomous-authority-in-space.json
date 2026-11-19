@@ -1,7 +1,7 @@
 {
   "slug": "autonomous-authority-in-space",
   "title": "Autonomous Authority in Space: Risk Tradeoffs and the Law of Delegation",
-  "author": "Letao Ouyang",
+  "author": "Letao (Theodore) Ouyang",
   "date": "December 2024; revised November 2026",
   "repositoryUrl": "https://github.com/130U/LAW-Autonomous-Authority-in-Space",
   "sourceUrl": "https://github.com/130U/LAW-Autonomous-Authority-in-Space/blob/main/manuscript/autonomous-authority-in-space.md",
@@ -852,10 +852,10 @@
     },
     {
       "type": "paragraph",
-      "text": "State practice has since supplied an instance. In December 2021 China informed the Secretary-General that its space station had twice carried out \"preventive collision avoidance control\" after close encounters with Starlink satellites, and that on the second occasion, because the satellite \"was continuously manoeuvring, the manoeuvre strategy was unknown and orbital errors were hard to be assessed.\" The note closed by quoting Article VI. The United States replied that its Space Command \"did not estimate a significant probability of collision\" and that, because the encounters \"did not meet the threshold of established emergency collision criteria, emergency notifications were not warranted.\"28 The two states did not disagree about physics. They disagreed about whose threshold governed and about what one operator is owed concerning another's maneuver policy, which are the questions an authorization record is meant to answer in advance.",
+      "text": "State practice has supplied an instance. In December 2021 China informed the Secretary-General that its space station had twice carried out \"preventive collision avoidance control\" after close encounters with Starlink satellites, and that on the second occasion, because the satellite \"was continuously manoeuvring, the manoeuvre strategy was unknown and orbital errors were hard to be assessed.\" The note closed by quoting Article VI. The United States replied that its Space Command \"did not estimate a significant probability of collision\" and that, because the encounters \"did not meet the threshold of established emergency collision criteria, emergency notifications were not warranted.\"28 The two states did not disagree about physics. They disagreed about whose threshold governed and about what one operator is owed concerning another's maneuver policy, which are the questions an authorization record is meant to answer in advance.",
       "runs": [
         {
-          "text": "State practice has since supplied an instance. In December 2021 China informed the Secretary-General that its space station had twice carried out \"preventive collision avoidance control\" after close encounters with Starlink satellites, and that on the second occasion, because the satellite \"was continuously manoeuvring, the manoeuvre strategy was unknown and orbital errors were hard to be assessed.\" The note closed by quoting Article VI. The United States replied that its Space Command \"did not estimate a significant probability of collision\" and that, because the encounters \"did not meet the threshold of established emergency collision criteria, emergency notifications were not warranted.\""
+          "text": "State practice has supplied an instance. In December 2021 China informed the Secretary-General that its space station had twice carried out \"preventive collision avoidance control\" after close encounters with Starlink satellites, and that on the second occasion, because the satellite \"was continuously manoeuvring, the manoeuvre strategy was unknown and orbital errors were hard to be assessed.\" The note closed by quoting Article VI. The United States replied that its Space Command \"did not estimate a significant probability of collision\" and that, because the encounters \"did not meet the threshold of established emergency collision criteria, emergency notifications were not warranted.\""
         },
         {
           "text": "28",
@@ -1622,15 +1622,6 @@
           "text": "Risk-risk analysis requires evaluation of the controls themselves. Human review, certification, information sharing, and restrictions all impose costs and can create hazards. A defensible arrangement explains why its combination of action and restraint is preferable to feasible alternatives, for the people who actually bear the consequences. A permission resting on assumptions that can no longer be defended should be narrowed, transferred to an adequately supported alternative, or withdrawn."
         }
       ]
-    },
-    {
-      "type": "paragraph",
-      "text": "---",
-      "runs": [
-        {
-          "text": "---"
-        }
-      ]
     }
   ],
   "footnotes": [
@@ -1643,7 +1634,14 @@
           "smallCaps": true
         },
         {
-          "text": " 13-16 & tbls. 1-2 (2022), https://www.c2g2.net/wp-content/uploads/202203-C2G-RR-Full.pdf. See generally "
+          "text": " 13-16 & tbls. 1-2 (2022), https://www.c2g2.net/wp-content/uploads/202203-C2G-RR-Full.pdf. "
+        },
+        {
+          "text": "See generally",
+          "italic": true
+        },
+        {
+          "text": " "
         },
         {
           "text": "Risk vs. Risk: Tradeoffs in Protecting Health and the Environment",
@@ -1656,14 +1654,14 @@
     },
     {
       "number": 2,
-      "text": "Felgenhauer ET AL., supra note 1, at 13-16 & tbls. 1-2.",
+      "text": "Felgenhauer et al., supra note 1, at 13-16 & tbls. 1-2.",
       "runs": [
         {
-          "text": "Felgenhauer",
+          "text": "Felgenhauer et al.",
           "smallCaps": true
         },
         {
-          "text": " ET AL., "
+          "text": ", "
         },
         {
           "text": "supra",
@@ -1735,10 +1733,10 @@
     },
     {
       "number": 8,
-      "text": "Responsibilities and Obligations of States Sponsoring Persons and Entities with Respect to Activities in the Area, Case No. 17, Advisory Opinion of Feb. 1, 2011, ITLOS Rep. 10, ¶¶ 110, 117.",
+      "text": "Responsibilities and Obligations of States Sponsoring Persons and Entities with Respect to Activities in the Area, Case No. 17, Advisory Opinion of Feb. 1, 2011, 2011 ITLOS Rep. 10, ¶¶ 110, 117.",
       "runs": [
         {
-          "text": "Responsibilities and Obligations of States Sponsoring Persons and Entities with Respect to Activities in the Area, Case No. 17, Advisory Opinion of Feb. 1, 2011, ITLOS Rep. 10, ¶¶ 110, 117."
+          "text": "Responsibilities and Obligations of States Sponsoring Persons and Entities with Respect to Activities in the Area, Case No. 17, Advisory Opinion of Feb. 1, 2011, 2011 ITLOS Rep. 10, ¶¶ 110, 117."
         }
       ]
     },
@@ -1747,29 +1745,43 @@
       "text": "Int'l Law Comm'n, Draft Articles on Prevention of Transboundary Harm from Hazardous Activities art. 6, in Rep. of the Int'l Law Comm'n on the Work of Its Fifty-Third Session, U.N. Doc. A/56/10 (2001).",
       "runs": [
         {
-          "text": "Int'l Law Comm'n, Draft Articles on Prevention of Transboundary Harm from Hazardous Activities art. 6, in Rep. of the Int'l Law Comm'n on the Work of Its Fifty-Third Session, U.N. Doc. A/56/10 (2001)."
+          "text": "Int'l Law Comm'n, Draft Articles on Prevention of Transboundary Harm from Hazardous Activities art. 6, "
+        },
+        {
+          "text": "in",
+          "italic": true
+        },
+        {
+          "text": " Rep. of the Int'l Law Comm'n on the Work of Its Fifty-Third Session, U.N. Doc. A/56/10 (2001)."
         }
       ]
     },
     {
       "number": 10,
-      "text": "Int'l Law Comm'n, Draft Articles on Responsibility of States for Internationally Wrongful Acts, with Commentaries, arts. 2, 4, 8, 55, in Report of the International Law Commission on the Work of Its Fifty-Third Session, at 34, 40, 47-48, 140-41, U.N. Doc. A/56/10 (2001). The articles address general responsibility rules and their relationship to special regimes; the application to Article VI is the analysis advanced here.",
+      "text": "Int'l Law Comm'n, Draft Articles on Responsibility of States for Internationally Wrongful Acts, with Commentaries, arts. 2, 4, 8, 55, in Rep. of the Int'l Law Comm'n on the Work of Its Fifty-Third Session, U.N. Doc. A/56/10 (2001), reprinted in [2001] 2 Y.B. Int'l L. Comm'n 31, 34, 40, 47-48, 140-41. The articles address general responsibility rules and their relationship to special regimes; the application to Article VI is the analysis advanced here.",
       "runs": [
         {
-          "text": "Int'l Law Comm'n, Draft Articles on Responsibility of States for Internationally Wrongful Acts, with Commentaries, arts. 2, 4, 8, 55, in "
+          "text": "Int'l Law Comm'n, Draft Articles on Responsibility of States for Internationally Wrongful Acts, with Commentaries, arts. 2, 4, 8, 55, "
         },
         {
-          "text": "Report of the International Law Commission on the Work of Its Fifty-Third Session",
-          "smallCaps": true
+          "text": "in",
+          "italic": true
         },
         {
-          "text": ", at 34, 40, 47-48, 140-41, U.N. Doc. A/56/10 (2001). The articles address general responsibility rules and their relationship to special regimes; the application to Article VI is the analysis advanced here."
+          "text": " Rep. of the Int'l Law Comm'n on the Work of Its Fifty-Third Session, U.N. Doc. A/56/10 (2001), "
+        },
+        {
+          "text": "reprinted in",
+          "italic": true
+        },
+        {
+          "text": " [2001] 2 Y.B. Int'l L. Comm'n 31, 34, 40, 47-48, 140-41. The articles address general responsibility rules and their relationship to special regimes; the application to Article VI is the analysis advanced here."
         }
       ]
     },
     {
       "number": 11,
-      "text": "Outer Space Treaty, supra note 7, arts. VI-IX.",
+      "text": "Outer Space Treaty, supra note 7, art. IX.",
       "runs": [
         {
           "text": "Outer Space Treaty, "
@@ -1779,7 +1791,7 @@
           "italic": true
         },
         {
-          "text": " note 7, arts. VI-IX."
+          "text": " note 7, art. IX."
         }
       ]
     },
@@ -1794,33 +1806,27 @@
     },
     {
       "number": 13,
-      "text": "Liability Convention, supra note 12, arts. I, III, VII-XI, XIX.",
+      "text": "Id. arts. I, III, VII-XI, XIX.",
       "runs": [
         {
-          "text": "Liability Convention, "
-        },
-        {
-          "text": "supra",
+          "text": "Id.",
           "italic": true
         },
         {
-          "text": " note 12, arts. I, III, VII-XI, XIX."
+          "text": " arts. I, III, VII-XI, XIX."
         }
       ]
     },
     {
       "number": 14,
-      "text": "Liability Convention, supra note 12, arts. I, III, VII-XI, XIX.",
+      "text": "Id. art. III.",
       "runs": [
         {
-          "text": "Liability Convention, "
-        },
-        {
-          "text": "supra",
+          "text": "Id.",
           "italic": true
         },
         {
-          "text": " note 12, arts. I, III, VII-XI, XIX."
+          "text": " art. III."
         }
       ]
     },
@@ -1835,10 +1841,10 @@
     },
     {
       "number": 16,
-      "text": "Comm. on the Peaceful Uses of Outer Space, Report of the Committee on the Peaceful Uses of Outer Space, annex II, pmbl. ¶¶ 14-16, guidelines A.2-A.3, B.1-B.4, at 52, 55-56, 59-61, U.N. Doc. A/74/20 (2019) [hereinafter LTS Guidelines].",
+      "text": "Comm. on the Peaceful Uses of Outer Space, Rep. of the Comm. on the Peaceful Uses of Outer Space, annex II, pmbl. ¶¶ 14-16, guidelines A.2-A.3, B.1-B.4, at 52, 55-56, 59-61, U.N. Doc. A/74/20 (2019) [hereinafter LTS Guidelines].",
       "runs": [
         {
-          "text": "Comm. on the Peaceful Uses of Outer Space, Report of the Committee on the Peaceful Uses of Outer Space, annex II, pmbl. ¶¶ 14-16, guidelines A.2-A.3, B.1-B.4, at 52, 55-56, 59-61, U.N. Doc. A/74/20 (2019) [hereinafter LTS Guidelines]."
+          "text": "Comm. on the Peaceful Uses of Outer Space, Rep. of the Comm. on the Peaceful Uses of Outer Space, annex II, pmbl. ¶¶ 14-16, guidelines A.2-A.3, B.1-B.4, at 52, 55-56, 59-61, U.N. Doc. A/74/20 (2019) [hereinafter LTS Guidelines]."
         }
       ]
     },
@@ -1853,10 +1859,10 @@
     },
     {
       "number": 18,
-      "text": "Mitigation of Orbital Debris in the New Space Age, 85 Fed. Reg. 52,422, 52,424-25, 52,447 (Aug. 25, 2020) (identifying the agency's statutory basis and listing 47 U.S.C. §§ 151, 154(i), 301, 303, 307-310).",
+      "text": "Mitigation of Orbital Debris in the New Space Age, 85 Fed. Reg. at 52,424-25, 52,447 (identifying the agency's statutory basis and listing 47 U.S.C. §§ 151, 154(i), 301, 303, 307-310).",
       "runs": [
         {
-          "text": "Mitigation of Orbital Debris in the New Space Age, 85 Fed. Reg. 52,422, 52,424-25, 52,447 (Aug. 25, 2020) (identifying the agency's statutory basis and listing 47 U.S.C. §§ 151, 154(i), 301, 303, 307-310)."
+          "text": "Mitigation of Orbital Debris in the New Space Age, 85 Fed. Reg. at 52,424-25, 52,447 (identifying the agency's statutory basis and listing 47 U.S.C. §§ 151, 154(i), 301, 303, 307-310)."
         }
       ]
     },
@@ -1890,11 +1896,7 @@
       "text": "Nat'l Aeronautics & Space Admin., Jet Propulsion Lab., Remote Agent Experiment Meets All Objectives (June 7, 1999), https://www.jpl.nasa.gov/news/remote-agent-experiment-meets-all-objectives/.",
       "runs": [
         {
-          "text": "Nat'l Aeronautics & Space Admin., Jet Propulsion Lab.",
-          "smallCaps": true
-        },
-        {
-          "text": ", "
+          "text": "Nat'l Aeronautics & Space Admin., Jet Propulsion Lab., "
         },
         {
           "text": "Remote Agent Experiment Meets All Objectives",
@@ -1930,7 +1932,7 @@
     },
     {
       "number": 23,
-      "text": "Raymond Francis et al., AEGIS Autonomous Targeting for the SuperCam Instrument on the Mars 2020 Perseverance Rover, at 3-5 (i-SAIRAS 2024), https://ai.jpl.nasa.gov/public/documents/papers/francis-isairas-2024.pdf.",
+      "text": "Raymond Francis et al., AEGIS Autonomous Targeting for the SuperCam Instrument on the Mars 2020 Perseverance Rover, at 3-5 (i-SAIRAS 2024), https://superintelligence.jpl.nasa.gov/public/documents/papers/francis-isairas-2024.pdf.",
       "runs": [
         {
           "text": "Raymond Francis et al., "
@@ -1940,7 +1942,7 @@
           "italic": true
         },
         {
-          "text": ", at 3-5 (i-SAIRAS 2024), https://ai.jpl.nasa.gov/public/documents/papers/francis-isairas-2024.pdf."
+          "text": ", at 3-5 (i-SAIRAS 2024), https://superintelligence.jpl.nasa.gov/public/documents/papers/francis-isairas-2024.pdf."
         }
       ]
     },
@@ -1984,17 +1986,14 @@
     },
     {
       "number": 27,
-      "text": "Uriot et al., supra note 26, §§ 2, 4.",
+      "text": "Id. §§ 2, 4.",
       "runs": [
         {
-          "text": "Uriot et al., "
-        },
-        {
-          "text": "supra",
+          "text": "Id.",
           "italic": true
         },
         {
-          "text": " note 26, §§ 2, 4."
+          "text": " §§ 2, 4."
         }
       ]
     },
@@ -2203,14 +2202,14 @@
     },
     {
       "number": 40,
-      "text": "Restatement (Third) of Torts: Liability for Physical and Emotional Harm §§ 14, 16 (Am. L. Inst. 2010).",
+      "text": "Restatement (Third) of Torts: Liability for Physical and Emotional Harm §§ 13(b), 16(a) (Am. L. Inst. 2010).",
       "runs": [
         {
           "text": "Restatement (Third) of Torts: Liability for Physical and Emotional Harm",
           "smallCaps": true
         },
         {
-          "text": " §§ 14, 16 ("
+          "text": " §§ 13(b), 16(a) ("
         },
         {
           "text": "Am. L. Inst.",
@@ -2271,10 +2270,10 @@
     },
     {
       "number": 44,
-      "text": "National Aeronautics & Space Administration, Overview of the DART Mishap Investigation Results 6 (2006), https://www.nasa.gov/pdf/148072main_DART_mishap_overview.pdf.",
+      "text": "Nat'l Aeronautics & Space Admin., Overview of the DART Mishap Investigation Results 6 (2006), https://www.nasa.gov/pdf/148072main_DART_mishap_overview.pdf.",
       "runs": [
         {
-          "text": "National Aeronautics & Space Administration, Overview of the DART Mishap Investigation Results",
+          "text": "Nat'l Aeronautics & Space Admin., Overview of the DART Mishap Investigation Results",
           "smallCaps": true
         },
         {

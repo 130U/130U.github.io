@@ -45,7 +45,7 @@ function ResidualKernelFigure({ manuscript, caption }: ManuscriptFigureProps) {
       ]}
     >
       <Plot
-        label="The weight on a unit Riccati residual against the time to maturity at which the residual occurs, over a six-month horizon. Both weights are forward variance curves: the curve under the pricing measure falls from about 0.040 six months before maturity to 0.0262 at maturity, and the curve under the half-share measure lies below it, by about 0.003 at six months."
+        label="The weight on a unit Riccati residual against the time to maturity at which the residual occurs, over a six-month horizon. Both weights are forward variance curves: the curve under the pricing measure rises from 0.0262 for a residual six months before maturity to about 0.040 for a residual at maturity, and the curve under the half-share measure lies below it, by about 0.003 at maturity."
         x={x}
         y={y}
         height="clamp(250px, 56cqi, 320px)"

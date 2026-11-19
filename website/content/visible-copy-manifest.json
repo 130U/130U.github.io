@@ -6,9 +6,9 @@
   ],
   "routes": {
     "/": {
-      "textSha256": "47931fd0032d04b503c560475b9646dec87cffdba3d187b6cedc325dbd2aac2a",
-      "characterCount": 4049,
-      "wordCount": 622,
+      "textSha256": "403ababdf4e9e92a4a2b9944c2b5dba17abbd85ea008483b8a265aa6af669da4",
+      "characterCount": 4063,
+      "wordCount": 623,
       "preview": "Skip to Main Content Theodore Ouyang Duke Alumnus Sequoia Fellow Theodore Ouyang About Experience Blog Thinking Mathematically Working in AI Mathematics is how ",
       "altTexts": [],
       "ariaLabels": [
@@ -17,8 +17,7 @@
         "Read more about Critical Dependence Stress for Diversification Gains under Fixed Marginals",
         "Read more about Certified Valuation of Arithmetic Asian Options: The Cost of Exercising on the Geometric Average",
         "Read more about Certified Joint Pricing Errors in Rough Heston",
-        "Read more about coursework",
-        "Contact"
+        "Read more about coursework"
       ],
       "metadata": {
         "title": "Theodore Ouyang",
@@ -54,9 +53,9 @@
       }
     },
     "/critical-dependence-stress-for-diversification-gains-under-fixed-marginals/": {
-      "textSha256": "dce47af3082d6d59fbac301503a9bf724bc4c1f89ff356848ff4312d9618b4df",
-      "characterCount": 77443,
-      "wordCount": 11711,
+      "textSha256": "a2529a73260af1ab27c2f8049a1958867237a58397f47546bb60809f8b7ddd28",
+      "characterCount": 77456,
+      "wordCount": 11710,
       "preview": "Skip to Main Content Theodore Ouyang Back to Selected Research Critical Dependence Stress for Diversification Gains under Fixed Marginals GitHub Full Manuscript",
       "altTexts": [],
       "ariaLabels": [
@@ -432,9 +431,9 @@
       "formulaCount": 1025
     },
     "/certified-valuation-of-arithmetic-asian-options/": {
-      "textSha256": "dffbd2ad109d48dff82c091362e7044b7a6f6b8b93d234ee029b4a41d9afd909",
-      "characterCount": 69624,
-      "wordCount": 11483,
+      "textSha256": "635872832a204fc7c8d23fa0a5bea1a838d410ced91bfee782410c317e48cf12",
+      "characterCount": 69689,
+      "wordCount": 11493,
       "preview": "Skip to Main Content Theodore Ouyang Back to Selected Research Certified Valuation of Arithmetic Asian Options: The Cost of Exercising on the Geometric Average ",
       "altTexts": [],
       "ariaLabels": [
@@ -702,13 +701,13 @@
         "twitterTitle": "Certified Valuation of Arithmetic Asian Options: The Cost of Exercising on the Geometric Average",
         "twitterDescription": "The cost of exercising an arithmetic Asian option on the geometric average: a proved bound, its cubic law in Black's model, and a certified Heston price interval with its Euler discretization error."
       },
-      "mathSourceSha256": "03f6d5bc1411109aef5f3063d00088f9b30fb3faaf48bf5044dae5b0b1a7da90",
+      "mathSourceSha256": "6b27445e28276f9adfcb080776f1c1a8497f69399741a22969195b159b0d7f05",
       "formulaCount": 751
     },
     "/certified-joint-pricing-errors-in-rough-heston/": {
-      "textSha256": "43229e7783d999a704b9176d6c2e76bf50c18d05c7cf3cda8b71c258c51d62f4",
-      "characterCount": 65363,
-      "wordCount": 10578,
+      "textSha256": "48aad8fd769e9aabe90491e89fe4320328ac6bfc02549d4deaef091c0955efd6",
+      "characterCount": 65645,
+      "wordCount": 10615,
       "preview": "Skip to Main Content Theodore Ouyang Back to Selected Research Certified Joint Pricing Errors in Rough Heston GitHub Full Manuscript Abstract Every option on on",
       "altTexts": [],
       "ariaLabels": [
@@ -791,7 +790,7 @@
         "Scrollable mathematical expression",
         "Scrollable mathematical expression",
         "Zoom in",
-        "The weight on a unit Riccati residual against the time to maturity at which the residual occurs, over a six-month horizon. Both weights are forward variance curves: the curve under the pricing measure falls from about 0.040 six months before maturity to 0.0262 at maturity, and the curve under the half-share measure lies below it, by about 0.003 at six months.",
+        "The weight on a unit Riccati residual against the time to maturity at which the residual occurs, over a six-month horizon. Both weights are forward variance curves: the curve under the pricing measure rises from 0.0262 for a residual six months before maturity to about 0.040 for a residual at maturity, and the curve under the half-share measure lies below it, by about 0.003 at maturity.",
         "Mathematical equation",
         "Scrollable mathematical expression",
         "Scrollable mathematical expression",
@@ -908,13 +907,13 @@
         "twitterTitle": "Certified Joint Pricing Errors in Rough Heston",
         "twitterDescription": "Numerical pricing error as a common factor across strikes: a Riccati residual priced by forward variance in rough Heston, the netting of portfolio errors in strike space, and certified tolerances for S&P 500 option positions."
       },
-      "mathSourceSha256": "5230e304025818d361f0b5c67d1c055ff1606d65b3741dd15b41a5baadb1e65a",
-      "formulaCount": 457
+      "mathSourceSha256": "ee3203993173a45a329f04da7271a14d1efce66641690ac0e2197fefcd698dce",
+      "formulaCount": 460
     },
     "/experience/": {
-      "textSha256": "945b4c95b04abe74dc1308e7a19aa424a8c562f73f41bcd31033017295bf9cfa",
-      "characterCount": 10270,
-      "wordCount": 1515,
+      "textSha256": "8b76b2d82047a27707a4b5ee80f88ef01d7018c7548b37c7aaefbe42f920e3b0",
+      "characterCount": 10388,
+      "wordCount": 1536,
       "preview": "Skip to Main Content Theodore Ouyang About Experience Blog Experience: Areas of Focus AI Research and Engineering Data Science Legal Research and Policy Analysi",
       "altTexts": [],
       "ariaLabels": [
@@ -952,14 +951,15 @@
       }
     },
     "/experience/large-scale-domain-expert-feedback-governance-and-adaptive-review/": {
-      "textSha256": "a787e056f3f3efaf74652e6ede9b13132c6e0763e9fe649c715a51df8829aa58",
-      "characterCount": 36199,
-      "wordCount": 5726,
+      "textSha256": "d4871101056f03c2211d856816f6c25e9ec6d497b02f5526dec5b5f009795615",
+      "characterCount": 36373,
+      "wordCount": 5766,
       "preview": "Skip to Main Content Theodore Ouyang Back to Experience Large-Scale Domain Expert Feedback Governance and Adaptive Review Organization Duke University × Leading",
       "altTexts": [],
       "ariaLabels": [
         "Theodore Ouyang home",
         "Parent navigation",
+        "Scrollable mathematical expression",
         "Scrollable mathematical expression",
         "Scrollable mathematical expression",
         "Scrollable mathematical expression",
@@ -1011,7 +1011,6 @@
         "Mathematical equation",
         "Mathematical equation",
         "Mathematical equation",
-        "Scrollable mathematical expression",
         "Zoom in",
         "Research data table",
         "Zoom in",
@@ -1043,13 +1042,13 @@
         "twitterTitle": "Duke University × Leading Foundation Model Developer: Large-Scale Domain Expert Feedback Governance and Adaptive Review",
         "twitterDescription": "One pool of expert hours has to do two jobs in a post-training program: tell the team how good a batch is, and fix the data that ships."
       },
-      "mathSourceSha256": "927bfca124668d7ba957f9597b45f5a43746778c69cfd223660d38e52c1ab0bc",
-      "formulaCount": 196
+      "mathSourceSha256": "ca24e7be57fa920da39b71863ba66b48d9aaea29f83f003e9c88617a4c3da6ef",
+      "formulaCount": 195
     },
     "/experience/financial-task-design-and-synthetic-data-engineering/": {
-      "textSha256": "ff48998f283491592177734f230b8e740cc4460e67268fae4a683179d3bdad46",
-      "characterCount": 34092,
-      "wordCount": 5020,
+      "textSha256": "01c0d49a5ee859bd813d8ee328af4c6edd4df00a9fe1f8d15e73e99a711db4d0",
+      "characterCount": 34124,
+      "wordCount": 5023,
       "preview": "Skip to Main Content Theodore Ouyang Back to Experience Financial Task Design and Synthetic Data Engineering Organization Duke University × Leading Foundation M",
       "altTexts": [],
       "ariaLabels": [
@@ -1118,13 +1117,13 @@
         "twitterTitle": "Duke University × Leading Foundation Model Developer: Financial Task Design and Synthetic Data Engineering",
         "twitterDescription": "When a synthetic financial case changes one number, its reference answer, the evidence behind that answer and the expert's preference can all go stale together."
       },
-      "mathSourceSha256": "654eaabaa94a670c74308bd0061b863602223aea3be555923a63f3dda7772454",
-      "formulaCount": 187
+      "mathSourceSha256": "9ac614bce86276bf0e66de1376e49662e28b96c4699acfb79d1eb18c9dfbc35f",
+      "formulaCount": 189
     },
     "/experience/general-reasoning-evaluation-and-layered-verification/": {
-      "textSha256": "f9f938c48eef1ba61e1e583e98ebb39457414a1fd2895a91b0ed7c30129c7c0a",
-      "characterCount": 33444,
-      "wordCount": 5072,
+      "textSha256": "fa1eb0864a9b2717dc26f3430dec7bff463575358886660f93a5e5cb6fe90426",
+      "characterCount": 33426,
+      "wordCount": 5067,
       "preview": "Skip to Main Content Theodore Ouyang Back to Experience General Reasoning Evaluation and Layered Verification Organization Duke University × Frontier AI Researc",
       "altTexts": [],
       "ariaLabels": [
@@ -1199,7 +1198,7 @@
         "Zoom in",
         "Research data table",
         "Zoom in",
-        "Final-answer matching: 1,200 valid accepted, 1,800 invalid accepted, 600 invalid rejected; 40.0% of accepted submissions are valid. Strict reference-path matching: 600 valid accepted, 600 valid rejected, 2,400 invalid rejected. Semantic certificate verification: 1,200 valid accepted, 2,400 invalid rejected.",
+        "Final-answer matching: 1,200 valid accepted, 1,800 invalid accepted, 600 invalid rejected; 40.0% of accepted submissions are valid. Strict reference-path matching: 600 valid accepted, 600 valid rejected, 2,400 invalid rejected. Certificate verification: 1,200 valid accepted, 2,400 invalid rejected.",
         "Scrollable mathematical expression",
         "Mathematical equation",
         "Mathematical equation"
@@ -1214,18 +1213,19 @@
         "twitterTitle": "Duke University × Frontier AI Research Laboratory: General Reasoning Evaluation and Layered Verification",
         "twitterDescription": "A model can reach the right answer through an unsupported step, and a grader that matches a reference solution will reject a correct proof that takes another route."
       },
-      "mathSourceSha256": "2dd747e1fe938074f86aa7fd48b4f064fdddb77c187af5871b94fc2ab2c21345",
-      "formulaCount": 205
+      "mathSourceSha256": "c5b5770fbd85e3ce69f1f8a28ecd0192c581aabbfa5f7640168ee12f5fde3aae",
+      "formulaCount": 203
     },
     "/experience/evidence-verification-and-robust-comparison-in-investment-research/": {
-      "textSha256": "19b4fba1f4ca8abc7f30a9b8e6c9c50eb567edbf624da00a20660c28b9494f90",
-      "characterCount": 29858,
-      "wordCount": 4633,
+      "textSha256": "ea2e2e88b40c336c7fbe39f6ec249304df69f22bd9bd17b241d9a791fc16efd4",
+      "characterCount": 29891,
+      "wordCount": 4638,
       "preview": "Skip to Main Content Theodore Ouyang Back to Experience Evidence Verification and Robust Comparison in Investment Research Organization Duke University × Leadin",
       "altTexts": [],
       "ariaLabels": [
         "Theodore Ouyang home",
         "Parent navigation",
+        "Scrollable mathematical expression",
         "Scrollable mathematical expression",
         "Scrollable mathematical expression",
         "Article contents",
@@ -1299,13 +1299,13 @@
         "twitterTitle": "Duke University × Leading Global Alternative Asset Manager: Evidence Verification and Robust Comparison in Investment Research",
         "twitterDescription": "Due diligence has more facts to check than analyst time to check them."
       },
-      "mathSourceSha256": "8b2ba1f0a5a5ea95169b8861f4ef6e2d236814e9d4b0e3de6866a1187f8cbc6a",
+      "mathSourceSha256": "9b8be759a972114f3f850b35bb9966a2d52a5a25424d78e5661e0174a3a8e7a4",
       "formulaCount": 214
     },
     "/experience/autonomous-authority-in-space/": {
-      "textSha256": "b18750c059b98fb1765f2d9f985488e2561f2af9dcb05cb940737c26e3bba157",
-      "characterCount": 78817,
-      "wordCount": 11134,
+      "textSha256": "80649e4992bc0665e3968d9cc351a849da5e491f93e654d68de5bb024d7e831b",
+      "characterCount": 79482,
+      "wordCount": 11245,
       "preview": "Skip to Main Content Theodore Ouyang Back to Experience Autonomous Authority in Space: Risk Tradeoffs and the Law of Delegation Organization Duke Law School Pos",
       "altTexts": [],
       "ariaLabels": [
@@ -1422,9 +1422,9 @@
       }
     },
     "/experience/small-states-and-the-governance-of-strategic-space-dependence/": {
-      "textSha256": "1218e6d95582fc5077f161f0331bf1a4d54710fe0cb6d0e0db247abf6892d7d6",
-      "characterCount": 62882,
-      "wordCount": 8720,
+      "textSha256": "90661d6fd0d2d8534588a2f3cf6e333dbbb8350a3a48bfd674c18f5448937cf4",
+      "characterCount": 63113,
+      "wordCount": 8779,
       "preview": "Skip to Main Content Theodore Ouyang Back to Experience Small States and the Governance of Strategic Space Dependence Organization Duke Law School Position Auth",
       "altTexts": [],
       "ariaLabels": [
@@ -1540,9 +1540,9 @@
       }
     },
     "/experience/who-may-choose-the-lesser-risk/": {
-      "textSha256": "e8b1fd47670da6b890b3dccb34811782e87666a169914024e32e4fd86c0a9a34",
-      "characterCount": 61695,
-      "wordCount": 8657,
+      "textSha256": "cf73b434706937c92806e99a95b0237ea90011dd2d9f975259bb53a0cef81736",
+      "characterCount": 62183,
+      "wordCount": 8731,
       "preview": "Skip to Main Content Theodore Ouyang Back to Experience Who May Choose the Lesser Risk: Solar Geoengineering and the Legal Duties of Comparison and Continuity O",
       "altTexts": [],
       "ariaLabels": [
@@ -1667,9 +1667,9 @@
       }
     },
     "/experience/mangrove-restoration-and-the-limits-of-compensatory-mitigation/": {
-      "textSha256": "92d8dc08bdbcec4fae150c3dbfc598f516438736b5fc6b308a39fe73f46c9eeb",
-      "characterCount": 77124,
-      "wordCount": 10848,
+      "textSha256": "1e3dc43948e467e9e4a3c771cbefba006e04d8fb745667f7480c9623bd1e4c71",
+      "characterCount": 78724,
+      "wordCount": 11100,
       "preview": "Skip to Main Content Theodore Ouyang Back to Experience Mangrove Restoration and the Limits of Compensatory Mitigation: Lessons from Florida for the Greater Bay",
       "altTexts": [],
       "ariaLabels": [
@@ -2070,9 +2070,9 @@
       }
     },
     "/blog/ten-states-of-water/": {
-      "textSha256": "4fd58afd8f94557b477596d805ea0db30c5828cf46cf8752f9da80dae3119535",
-      "characterCount": 2691,
-      "wordCount": 496,
+      "textSha256": "725ec816a23bc7a4d0e47f86ee22eea3e147c786d403145e34f349d38197032c",
+      "characterCount": 2646,
+      "wordCount": 486,
       "preview": "Skip to Main Content Theodore Ouyang Back to Blog Ten States of Water By Theodore Ouyang November 8, 2026 Ten States of Water Ten landscapes of Alaska and Yello",
       "altTexts": [
         "The cover of Ten States of Water: the name Theodore Ouyang written across the sky above a snowy ridge, a sunset horizon, and winding tidewater",

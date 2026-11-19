@@ -48,16 +48,11 @@
   outline-offset: 3px;
 }
 
-.frame [data-figure-scroll][data-scroll-overflow]::after {
-  position: sticky;
-  left: 0;
-  display: block;
-  width: 100%;
-  padding-top: 10px;
-  color: var(--supporting-ink);
-  font-size: var(--type-label);
-  line-height: var(--label-leading);
-  content: "Scroll to compare →";
+/* A comparison wider than its column fades at the right edge by as much as is
+   left to scroll, as a wide table does. */
+.frame [data-figure-scroll][data-scroll-overflow] {
+  -webkit-mask-image: linear-gradient(to right, #000 calc(100% - var(--edge-fade, 0px)), transparent);
+  mask-image: linear-gradient(to right, #000 calc(100% - var(--edge-fade, 0px)), transparent);
 }
 
 /* The title sits alone on its line; a view switch follows it as one segmented
@@ -814,8 +809,10 @@
     grid-template-rows: auto auto auto;
   }
 
+  /* The grid and the reference rules run through the bar's own row only, so
+     they never cross a label or a value. */
   .bars[data-stack] > .row > .lines {
-    grid-row: 1 / 4;
+    grid-row: 3;
   }
 
   .bars[data-stack] > .row > .barLabel {

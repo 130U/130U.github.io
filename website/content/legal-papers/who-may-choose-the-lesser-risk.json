@@ -1,7 +1,7 @@
 {
   "slug": "who-may-choose-the-lesser-risk",
   "title": "Who May Choose the Lesser Risk: Solar Geoengineering and the Legal Duties of Comparison and Continuity",
-  "author": "Letao Ouyang",
+  "author": "Letao (Theodore) Ouyang",
   "date": "December 2024; revised November 2026",
   "repositoryUrl": "https://github.com/130U/LAW-Who-May-Choose-the-Lesser-Risk",
   "sourceUrl": "https://github.com/130U/LAW-Who-May-Choose-the-Lesser-Risk/blob/main/manuscript/who-may-choose-the-lesser-risk.md",
@@ -39,10 +39,10 @@
     },
     {
       "type": "paragraph",
-      "text": "A government confronting intensifying climate damage might reasonably ask whether reflecting additional sunlight could reduce suffering. A person exposed to the resulting intervention could reasonably ask a different question: who authorized that government to choose the climate under which she must live? Neither question disappears when a model predicts lower global temperatures. Solar radiation modification forces risk regulation to confront both the consequences of action and the authority to determine which consequences others must bear.",
+      "text": "A government confronting intensifying climate damage might reasonably ask whether reflecting additional sunlight could reduce suffering. A person exposed to the resulting intervention could reasonably ask a different question: who authorized that government to choose the climate under which she must live? Neither question disappears when a model predicts lower global temperatures. Solar radiation modification (SRM) forces risk regulation to confront both the consequences of action and the authority to determine which consequences others must bear.",
       "runs": [
         {
-          "text": "A government confronting intensifying climate damage might reasonably ask whether reflecting additional sunlight could reduce suffering. A person exposed to the resulting intervention could reasonably ask a different question: who authorized that government to choose the climate under which she must live? Neither question disappears when a model predicts lower global temperatures. Solar radiation modification forces risk regulation to confront both the consequences of action and the authority to determine which consequences others must bear."
+          "text": "A government confronting intensifying climate damage might reasonably ask whether reflecting additional sunlight could reduce suffering. A person exposed to the resulting intervention could reasonably ask a different question: who authorized that government to choose the climate under which she must live? Neither question disappears when a model predicts lower global temperatures. Solar radiation modification (SRM) forces risk regulation to confront both the consequences of action and the authority to determine which consequences others must bear."
         }
       ]
     },
@@ -198,10 +198,10 @@
     },
     {
       "type": "paragraph",
-      "text": "A second limit concerns causal structure. Physical hazards, political responses, and governance failures interact. If confidence in SAI weakened emissions reductions, that response could increase the cooling subsequently required and the consequences of interruption. This is a plausible mechanism requiring investigation, not an established universal effect of research. The IPCC distinguishes evidence about individual responses from the harder question of effects on societal mitigation, and reports low agreement about a research-to-deployment slippery slope.7 Counting mitigation deterrence, longer deployment, and termination consequences as independent costs could also double-count one causal pathway. An adequate analysis must disclose dependencies as well as enumerate harms.",
+      "text": "A second limit concerns causal structure. Physical hazards, political responses, and governance failures interact. If confidence in SAI weakened emissions reductions, that response could increase the cooling subsequently required and the consequences of interruption. This is a plausible mechanism requiring investigation, not an established universal effect of research. The Intergovernmental Panel on Climate Change (IPCC) distinguishes evidence about individual responses from the harder question of effects on societal mitigation, and reports low agreement about a research-to-deployment slippery slope.7 Counting mitigation deterrence, longer deployment, and termination consequences as independent costs could also double-count one causal pathway. An adequate analysis must disclose dependencies as well as enumerate harms.",
       "runs": [
         {
-          "text": "A second limit concerns causal structure. Physical hazards, political responses, and governance failures interact. If confidence in SAI weakened emissions reductions, that response could increase the cooling subsequently required and the consequences of interruption. This is a plausible mechanism requiring investigation, not an established universal effect of research. The IPCC distinguishes evidence about individual responses from the harder question of effects on societal mitigation, and reports low agreement about a research-to-deployment slippery slope."
+          "text": "A second limit concerns causal structure. Physical hazards, political responses, and governance failures interact. If confidence in SAI weakened emissions reductions, that response could increase the cooling subsequently required and the consequences of interruption. This is a plausible mechanism requiring investigation, not an established universal effect of research. The Intergovernmental Panel on Climate Change (IPCC) distinguishes evidence about individual responses from the harder question of effects on societal mitigation, and reports low agreement about a research-to-deployment slippery slope."
         },
         {
           "text": "7",
@@ -308,7 +308,14 @@
       "text": "Consider a hypothetical proposal justified by reducing heat-related harm in a densely populated region. Suppose its analysis also identifies an uncertain threat to rain-dependent livelihoods elsewhere. Comparing deployment only with unchanged emissions and unfunded adaptation may favor SAI. Adding a feasible package of heat protection and livelihood support may change the comparison, even if it supplies less global cooling. Conversely, if those measures cannot reach the most exposed people soon enough, their nominal availability does not defeat the proposal. The duty requires an account of delivery capacity as well as modeled effects. It also asks whether the sponsoring actors could finance protection for the second group without sacrificing the first group's gains. None of these outcomes follows from the designation risk transfer.",
       "runs": [
         {
-          "text": "Consider a hypothetical proposal justified by reducing heat-related harm in a densely populated region. Suppose its analysis also identifies an uncertain threat to rain-dependent livelihoods elsewhere. Comparing deployment only with unchanged emissions and unfunded adaptation may favor SAI. Adding a feasible package of heat protection and livelihood support may change the comparison, even if it supplies less global cooling. Conversely, if those measures cannot reach the most exposed people soon enough, their nominal availability does not defeat the proposal. The duty requires an account of delivery capacity as well as modeled effects. It also asks whether the sponsoring actors could finance protection for the second group without sacrificing the first group's gains. None of these outcomes follows from the designation risk transfer."
+          "text": "Consider a hypothetical proposal justified by reducing heat-related harm in a densely populated region. Suppose its analysis also identifies an uncertain threat to rain-dependent livelihoods elsewhere. Comparing deployment only with unchanged emissions and unfunded adaptation may favor SAI. Adding a feasible package of heat protection and livelihood support may change the comparison, even if it supplies less global cooling. Conversely, if those measures cannot reach the most exposed people soon enough, their nominal availability does not defeat the proposal. The duty requires an account of delivery capacity as well as modeled effects. It also asks whether the sponsoring actors could finance protection for the second group without sacrificing the first group's gains. None of these outcomes follows from the designation "
+        },
+        {
+          "text": "risk transfer",
+          "italic": true
+        },
+        {
+          "text": "."
         }
       ]
     },
@@ -419,7 +426,14 @@
       "text": "The research-deployment distinction is substantive. Modeling, observation, and limited process experiments can answer questions without producing a climatically significant intervention. A sequence of experiments, however, may build operational capacity, institutions, or political expectations. Regulation should examine physical effects and cumulative program development, rather than accept either the word research as an exemption or the possibility of future use as proof that all inquiry is equivalent to deployment.",
       "runs": [
         {
-          "text": "The research-deployment distinction is substantive. Modeling, observation, and limited process experiments can answer questions without producing a climatically significant intervention. A sequence of experiments, however, may build operational capacity, institutions, or political expectations. Regulation should examine physical effects and cumulative program development, rather than accept either the word research as an exemption or the possibility of future use as proof that all inquiry is equivalent to deployment."
+          "text": "The research-deployment distinction is substantive. Modeling, observation, and limited process experiments can answer questions without producing a climatically significant intervention. A sequence of experiments, however, may build operational capacity, institutions, or political expectations. Regulation should examine physical effects and cumulative program development, rather than accept either the word "
+        },
+        {
+          "text": "research",
+          "italic": true
+        },
+        {
+          "text": " as an exemption or the possibility of future use as proof that all inquiry is equivalent to deployment."
         }
       ]
     },
@@ -493,10 +507,10 @@
     },
     {
       "type": "paragraph",
-      "text": "The Convention on Biological Diversity's Decision X/33, paragraph 8(w), calls for restraint on climate-related geoengineering that may affect biodiversity, subject to conditions and a limited scientific-research exception. Its chapeau and status matter: this guidance is not a universally binding treaty prohibition. Its conditional scientific-research exception is not permission for unrestricted outdoor testing.20",
+      "text": "Under the Convention on Biological Diversity (CBD), Decision X/33, paragraph 8(w), calls for restraint on climate-related geoengineering that may affect biodiversity, subject to conditions and a limited scientific-research exception. Its chapeau and status matter: this guidance is not a universally binding treaty prohibition. Its conditional scientific-research exception is not permission for unrestricted outdoor testing.20",
       "runs": [
         {
-          "text": "The Convention on Biological Diversity's Decision X/33, paragraph 8(w), calls for restraint on climate-related geoengineering that may affect biodiversity, subject to conditions and a limited scientific-research exception. Its chapeau and status matter: this guidance is not a universally binding treaty prohibition. Its conditional scientific-research exception is not permission for unrestricted outdoor testing."
+          "text": "Under the Convention on Biological Diversity (CBD), Decision X/33, paragraph 8(w), calls for restraint on climate-related geoengineering that may affect biodiversity, subject to conditions and a limited scientific-research exception. Its chapeau and status matter: this guidance is not a universally binding treaty prohibition. Its conditional scientific-research exception is not permission for unrestricted outdoor testing."
         },
         {
           "text": "20",
@@ -543,10 +557,10 @@
     },
     {
       "type": "paragraph",
-      "text": "These materials support assessment and preventive responsibility. They do not already create individual standing in a global SAI tribunal, prescribe a voting rule, or impose the proposed financing requirements. Nor should the hostile-use restrictions in ENMOD be mistaken for a general prohibition on peaceful climate intervention; peaceful purpose, in turn, does not exempt an activity from other international law.24",
+      "text": "These materials support assessment and preventive responsibility. They do not already create individual standing in a global SAI tribunal, prescribe a voting rule, or impose the proposed financing requirements. Nor should the hostile-use restrictions in the Environmental Modification Convention (ENMOD) be mistaken for a general prohibition on peaceful climate intervention; peaceful purpose, in turn, does not exempt an activity from other international law.24",
       "runs": [
         {
-          "text": "These materials support assessment and preventive responsibility. They do not already create individual standing in a global SAI tribunal, prescribe a voting rule, or impose the proposed financing requirements. Nor should the hostile-use restrictions in ENMOD be mistaken for a general prohibition on peaceful climate intervention; peaceful purpose, in turn, does not exempt an activity from other international law."
+          "text": "These materials support assessment and preventive responsibility. They do not already create individual standing in a global SAI tribunal, prescribe a voting rule, or impose the proposed financing requirements. Nor should the hostile-use restrictions in the Environmental Modification Convention (ENMOD) be mistaken for a general prohibition on peaceful climate intervention; peaceful purpose, in turn, does not exempt an activity from other international law."
         },
         {
           "text": "24",
@@ -557,7 +571,7 @@
     },
     {
       "type": "paragraph",
-      "text": "Three instruments bear on stratospheric aerosols more directly than those usually invoked. The Vienna Convention for the Protection of the Ozone Layer obliges parties to protect against \"adverse effects resulting or likely to result from human activities which modify or are likely to modify the ozone layer\" and to control such activities under their jurisdiction; sulfate injection is an activity the ozone assessment treats as capable of affecting stratospheric ozone.25 The Framework Convention on Climate Change commits parties to \"employ appropriate methods, for example impact assessments,\" to minimize the adverse effects \"of projects or measures undertaken by them to mitigate or adapt to climate change.\"26 And the International Law Commission's guidelines on the protection of the atmosphere provide that intentional large-scale modification \"should only be conducted with prudence and caution, and subject to any applicable rules of international law, including those relating to environmental impact assessment,\" in a commentary that names stratospheric aerosols.27",
+      "text": "Three instruments bear on stratospheric aerosols more directly than those usually invoked. The Vienna Convention for the Protection of the Ozone Layer obliges parties to protect against \"adverse effects resulting or likely to result from human activities which modify or are likely to modify the ozone layer\" and to control such activities under their jurisdiction; sulfate injection is an activity the ozone assessment treats as capable of affecting stratospheric ozone.25 The United Nations Framework Convention on Climate Change (UNFCCC) commits parties to \"employ appropriate methods, for example impact assessments,\" to minimize the adverse effects \"of projects or measures undertaken by them to mitigate or adapt to climate change.\"26 And the International Law Commission's guidelines on the protection of the atmosphere provide that intentional large-scale modification \"should only be conducted with prudence and caution, and subject to any applicable rules of international law, including those relating to environmental impact assessment,\" in a commentary that names stratospheric aerosols.27",
       "runs": [
         {
           "text": "Three instruments bear on stratospheric aerosols more directly than those usually invoked. The Vienna Convention for the Protection of the Ozone Layer obliges parties to protect against \"adverse effects resulting or likely to result from human activities which modify or are likely to modify the ozone layer\" and to control such activities under their jurisdiction; sulfate injection is an activity the ozone assessment treats as capable of affecting stratospheric ozone."
@@ -568,7 +582,7 @@
           "footnoteRef": "25"
         },
         {
-          "text": " The Framework Convention on Climate Change commits parties to \"employ appropriate methods, for example impact assessments,\" to minimize the adverse effects \"of projects or measures undertaken by them to mitigate or adapt to climate change.\""
+          "text": " The United Nations Framework Convention on Climate Change (UNFCCC) commits parties to \"employ appropriate methods, for example impact assessments,\" to minimize the adverse effects \"of projects or measures undertaken by them to mitigate or adapt to climate change.\""
         },
         {
           "text": "26",
@@ -1141,15 +1155,6 @@
           "text": "A comparative justification duty would make alternatives and distributional choices open to consequential challenge. A continuity duty would require sponsors to confront the obligations created by sustained intervention, while separating changes in political control from dangerous physical interruption. The law already knows how to keep an indispensable system running while control over it changes hands, and the continuity duty asks that the same be arranged for the stratosphere before anyone depends on it. Together, these duties support governed research and withholding deployment authorization where credible comparison, representation, and continuity remain absent. They also require scrutiny of the harms of restraint. Those exposed to the intervention would have no practical means of withdrawing from its effects."
         }
       ]
-    },
-    {
-      "type": "paragraph",
-      "text": "---",
-      "runs": [
-        {
-          "text": "---"
-        }
-      ]
     }
   ],
   "footnotes": [
@@ -1178,7 +1183,14 @@
           "italic": true
         },
         {
-          "text": ", in "
+          "text": ", "
+        },
+        {
+          "text": "in",
+          "italic": true
+        },
+        {
+          "text": " "
         },
         {
           "text": "Climate Change",
@@ -1198,7 +1210,7 @@
     },
     {
       "number": 3,
-      "text": "Bronislaw Szerszynski et al., Why Solar Radiation Management Geoengineering and Democracy Won't Mix, 45 Env't & Plan. A 2809 (2013); Joshua B. Horton et al., Solar Geoengineering and Democracy, 18 Glob. Envtl. Pol. 5 (2018).",
+      "text": "Bronislaw Szerszynski et al., Why Solar Radiation Management Geoengineering and Democracy Won't Mix, 45 Env't & Plan. A 2809 (2013); Joshua B. Horton et al., Solar Geoengineering and Democracy, 18 Glob. Env't Pol. 5 (2018).",
       "runs": [
         {
           "text": "Bronislaw Szerszynski et al., "
@@ -1225,7 +1237,7 @@
           "text": ", 18 "
         },
         {
-          "text": "Glob. Envtl. Pol.",
+          "text": "Glob. Env't Pol.",
           "smallCaps": true
         },
         {
@@ -1235,7 +1247,7 @@
     },
     {
       "number": 4,
-      "text": "John D. Graham & Jonathan B. Wiener, Confronting Risk Tradeoffs, in Risk vs. Risk: Tradeoffs in Protecting Health and the Environment 1 (John D. Graham & Jonathan B. Wiener eds., 1995); see also Tyler Felgenhauer et al., Solar Radiation Modification: A Risk-Risk Analysis 13-16 & tbls. 1-2 (2022), https://www.c2g2.net/wp-content/uploads/202203-C2G-RR-Full.pdf.",
+      "text": "John D. Graham & Jonathan B. Wiener, Confronting Risk Tradeoffs, in Risk vs. Risk: Tradeoffs in Protecting Health and the Environment 1 (John D. Graham & Jonathan B. Wiener eds., 1995).",
       "runs": [
         {
           "text": "John D. Graham & Jonathan B. Wiener, "
@@ -1245,21 +1257,21 @@
           "italic": true
         },
         {
-          "text": ", in "
+          "text": ", "
+        },
+        {
+          "text": "in",
+          "italic": true
+        },
+        {
+          "text": " "
         },
         {
           "text": "Risk vs. Risk: Tradeoffs in Protecting Health and the Environment",
           "smallCaps": true
         },
         {
-          "text": " 1 (John D. Graham & Jonathan B. Wiener eds., 1995); see also "
-        },
-        {
-          "text": "Tyler Felgenhauer et al., Solar Radiation Modification: A Risk-Risk Analysis",
-          "smallCaps": true
-        },
-        {
-          "text": " 13-16 & tbls. 1-2 (2022), https://www.c2g2.net/wp-content/uploads/202203-C2G-RR-Full.pdf."
+          "text": " 1 (John D. Graham & Jonathan B. Wiener eds., 1995)."
         }
       ]
     },
@@ -1303,7 +1315,7 @@
     },
     {
       "number": 8,
-      "text": "Jonathan B. Wiener, Disregard and Due Regard, 29 N.Y.U. Envtl. L.J. 437, 454, 460-64 (2021).",
+      "text": "Jonathan B. Wiener, Disregard and Due Regard, 29 N.Y.U. Env't L.J. 437, 454, 460-64 (2021).",
       "runs": [
         {
           "text": "Jonathan B. Wiener, "
@@ -1316,7 +1328,7 @@
           "text": ", 29 "
         },
         {
-          "text": "N.Y.U. Envtl. L.J.",
+          "text": "N.Y.U. Env't L.J.",
           "smallCaps": true
         },
         {
@@ -1326,7 +1338,7 @@
     },
     {
       "number": 9,
-      "text": "Jane A. Flegal & Aarti Gupta, Evoking Equity as a Rationale for Solar Geoengineering Research? Scrutinizing Emerging Expert Visions of Equity, 18 Int'l Envtl. Agreements 45 (2018).",
+      "text": "Jane A. Flegal & Aarti Gupta, Evoking Equity as a Rationale for Solar Geoengineering Research? Scrutinizing Emerging Expert Visions of Equity, 18 Int'l Env't Agreements 45 (2018).",
       "runs": [
         {
           "text": "Jane A. Flegal & Aarti Gupta, "
@@ -1339,7 +1351,7 @@
           "text": ", 18 "
         },
         {
-          "text": "Int'l Envtl. Agreements",
+          "text": "Int'l Env't Agreements",
           "smallCaps": true
         },
         {
@@ -1349,7 +1361,7 @@
     },
     {
       "number": 10,
-      "text": "Peter J. Irvine & David W. Keith, Halving Warming with Stratospheric Aerosol Geoengineering Moderates Policy-Relevant Climate Hazards, 15 Envtl. Rsch. Letters 044011, at 2-3, 8, 10 (2020).",
+      "text": "Peter J. Irvine & David W. Keith, Halving Warming with Stratospheric Aerosol Geoengineering Moderates Policy-Relevant Climate Hazards, 15 Env't Rsch. Letters 044011, at 2-3, 8, 10 (2020).",
       "runs": [
         {
           "text": "Peter J. Irvine & David W. Keith, "
@@ -1362,7 +1374,7 @@
           "text": ", 15 "
         },
         {
-          "text": "Envtl. Rsch. Letters",
+          "text": "Env't Rsch. Letters",
           "smallCaps": true
         },
         {
@@ -1418,14 +1430,21 @@
     },
     {
       "number": 13,
-      "text": "World Meteorological Organization, Executive Summary: Scientific Assessment of Ozone Depletion: 2022, ch. 6 summary (Global Atmosphere Watch Rep. No. 278, 2022).",
+      "text": "World Meteorological Organization, supra note 1, ch. 6 summary.",
       "runs": [
         {
-          "text": "World Meteorological Organization, Executive Summary: Scientific Assessment of Ozone Depletion",
+          "text": "World Meteorological Organization",
           "smallCaps": true
         },
         {
-          "text": ": 2022, ch. 6 summary (Global Atmosphere Watch Rep. No. 278, 2022)."
+          "text": ", "
+        },
+        {
+          "text": "supra",
+          "italic": true
+        },
+        {
+          "text": " note 1, ch. 6 summary."
         }
       ]
     },
@@ -1499,7 +1518,11 @@
       "text": "Fla. Stat. § 403.411(1) (2025); Act of June 20, 2025, ch. 2025-157, 2025 Fla. Laws (effective July 1, 2025).",
       "runs": [
         {
-          "text": "Fla. Stat. § 403.411(1) (2025); Act of June 20, 2025, ch. 2025-157, 2025 Fla. Laws (effective July 1, 2025)."
+          "text": "Fla. Stat.",
+          "smallCaps": true
+        },
+        {
+          "text": " § 403.411(1) (2025); Act of June 20, 2025, ch. 2025-157, 2025 Fla. Laws (effective July 1, 2025)."
         }
       ]
     },
@@ -1548,10 +1571,10 @@
     },
     {
       "number": 23,
-      "text": "Obligations of States in Respect of Climate Change, Advisory Opinion (I.C.J. July 23, 2025).",
+      "text": "Obligations of States in Respect of Climate Change, Advisory Opinion, ¶ 138 (I.C.J. July 23, 2025).",
       "runs": [
         {
-          "text": "Obligations of States in Respect of Climate Change, Advisory Opinion (I.C.J. July 23, 2025)."
+          "text": "Obligations of States in Respect of Climate Change, Advisory Opinion, ¶ 138 (I.C.J. July 23, 2025)."
         }
       ]
     },
@@ -1560,7 +1583,14 @@
       "text": "Convention on the Prohibition of Military or Any Other Hostile Use of Environmental Modification Techniques arts. I-III, opened for signature May 18, 1977, 31 U.S.T. 333, 1108 U.N.T.S. 151.",
       "runs": [
         {
-          "text": "Convention on the Prohibition of Military or Any Other Hostile Use of Environmental Modification Techniques arts. I-III, opened for signature May 18, 1977, 31 U.S.T. 333, 1108 U.N.T.S. 151."
+          "text": "Convention on the Prohibition of Military or Any Other Hostile Use of Environmental Modification Techniques arts. I-III, "
+        },
+        {
+          "text": "opened for signature",
+          "italic": true
+        },
+        {
+          "text": " May 18, 1977, 31 U.S.T. 333, 1108 U.N.T.S. 151."
         }
       ]
     },
@@ -1608,7 +1638,14 @@
       "text": "Int'l Law Comm'n, Draft Guidelines on the Protection of the Atmosphere, guideline 7 & cmt. ¶¶ (3)-(4), in Rep. of the Int'l Law Comm'n on the Work of Its Seventy-Second Session, U.N. Doc. A/76/10 (2021).",
       "runs": [
         {
-          "text": "Int'l Law Comm'n, Draft Guidelines on the Protection of the Atmosphere, guideline 7 & cmt. ¶¶ (3)-(4), in Rep. of the Int'l Law Comm'n on the Work of Its Seventy-Second Session, U.N. Doc. A/76/10 (2021)."
+          "text": "Int'l Law Comm'n, Draft Guidelines on the Protection of the Atmosphere, guideline 7 & cmt. ¶¶ (3)-(4), "
+        },
+        {
+          "text": "in",
+          "italic": true
+        },
+        {
+          "text": " Rep. of the Int'l Law Comm'n on the Work of Its Seventy-Second Session, U.N. Doc. A/76/10 (2021)."
         }
       ]
     },
@@ -1617,7 +1654,14 @@
       "text": "Int'l Law Comm'n, Draft Articles on Prevention of Transboundary Harm from Hazardous Activities arts. 9(3), 10(d)-(e), in Rep. of the Int'l Law Comm'n on the Work of Its Fifty-Third Session, U.N. Doc. A/56/10 (2001).",
       "runs": [
         {
-          "text": "Int'l Law Comm'n, Draft Articles on Prevention of Transboundary Harm from Hazardous Activities arts. 9(3), 10(d)-(e), in Rep. of the Int'l Law Comm'n on the Work of Its Fifty-Third Session, U.N. Doc. A/56/10 (2001)."
+          "text": "Int'l Law Comm'n, Draft Articles on Prevention of Transboundary Harm from Hazardous Activities arts. 9(3), 10(d)-(e), "
+        },
+        {
+          "text": "in",
+          "italic": true
+        },
+        {
+          "text": " Rep. of the Int'l Law Comm'n on the Work of Its Fifty-Third Session, U.N. Doc. A/56/10 (2001)."
         }
       ]
     },
@@ -1656,14 +1700,10 @@
     },
     {
       "number": 31,
-      "text": "Pulp Mills, 2010 I.C.J. at 71, ¶ 164.",
+      "text": "Pulp Mills on the River Uruguay (Arg. v. Uru.), Judgment, 2010 I.C.J. 14, ¶ 164 (Apr. 20).",
       "runs": [
         {
-          "text": "Pulp Mills",
-          "italic": true
-        },
-        {
-          "text": ", 2010 I.C.J. at 71, ¶ 164."
+          "text": "Pulp Mills on the River Uruguay (Arg. v. Uru.), Judgment, 2010 I.C.J. 14, ¶ 164 (Apr. 20)."
         }
       ]
     },
@@ -1842,7 +1882,7 @@
     },
     {
       "number": 43,
-      "text": "Parker & Irvine, supra note 37, at 456-67; Katharine L. Ricke, Juan B. Moreno-Cruz & Ken Caldeira, Strategic Incentives for Climate Geoengineering Coalitions to Exclude Broad Participation, 8 Envtl. Rsch. Letters 014021 (2013).",
+      "text": "Parker & Irvine, supra note 37, at 456-67; Katharine L. Ricke, Juan B. Moreno-Cruz & Ken Caldeira, Strategic Incentives for Climate Geoengineering Coalitions to Exclude Broad Participation, 8 Env't Rsch. Letters 014021 (2013).",
       "runs": [
         {
           "text": "Parker & Irvine, "
@@ -1862,7 +1902,7 @@
           "text": ", 8 "
         },
         {
-          "text": "Envtl. Rsch. Letters",
+          "text": "Env't Rsch. Letters",
           "smallCaps": true
         },
         {
@@ -1911,10 +1951,10 @@
     },
     {
       "number": 46,
-      "text": "Certain Activities Carried Out by Nicaragua in the Border Area (Costa Rica v. Nicar.) & Construction of a Road in Costa Rica Along the San Juan River (Nicar. v. Costa Rica), Judgment, 2015 I.C.J. 665, ¶¶ 157-58 (Dec. 16).",
+      "text": "Certain Activities Carried Out by Nicaragua in the Border Area (Costa Rica v. Nicar.) & Construction of a Road in Costa Rica Along the San Juan River (Nicar. v. Costa Rica), Judgment, 2015 I.C.J. 665, ¶¶ 157-59 (Dec. 16).",
       "runs": [
         {
-          "text": "Certain Activities Carried Out by Nicaragua in the Border Area (Costa Rica v. Nicar.) & Construction of a Road in Costa Rica Along the San Juan River (Nicar. v. Costa Rica), Judgment, 2015 I.C.J. 665, ¶¶ 157-58 (Dec. 16)."
+          "text": "Certain Activities Carried Out by Nicaragua in the Border Area (Costa Rica v. Nicar.) & Construction of a Road in Costa Rica Along the San Juan River (Nicar. v. Costa Rica), Judgment, 2015 I.C.J. 665, ¶¶ 157-59 (Dec. 16)."
         }
       ]
     },

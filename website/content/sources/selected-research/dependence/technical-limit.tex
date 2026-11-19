@@ -1,8 +1,7 @@
-\label{appendix-a.-initial-slope-and-tail-surface-capacity}
 \subsection{A.2 Threshold localization}\label{proof:threshold-localization}
 \input{technical-threshold-statement.tex}
 \textit{Proof.}
-For every \(P\) in Lemma~\ref{b-l2-all-optimal-thresholds-under-a-budget-of-order-varepsilon2}, the Lipschitz bound for the portfolio loss gives, uniformly in \(t\),
+For every \(P\) in Lemma~\ref{lem:threshold-localization}, the Lipschitz bound for the portfolio loss gives, uniformly in \(t\),
 
 \begin{equation}
 |\mathscr E_{L_{c,\varepsilon}}(P;t)
@@ -11,7 +10,7 @@ For every \(P\) in Lemma~\ref{b-l2-all-optimal-thresholds-under-a-budget-of-orde
 \tag{A.2}\label{eq:A.2}
 \end{equation}
 
-Evaluating \eqref{eq:A.2} at any minimizer \(t\) under \(P\) and at a reference minimizer bounds the reference suboptimality at \(t\) by twice its right-hand side. By continuity of the section density in Lemma~\ref{lemma:general-variation}, \(m_0(c\varepsilon,t)\ge g/2\) on a fixed neighborhood of \(v\) for all sufficiently small \(\varepsilon\). The unique reference minimizers \(v_{c,\varepsilon}\), with \(v_{0,\varepsilon}=v\) and \(v_{1,\varepsilon}=t_\varepsilon\), converge to \(v\). Integrating the curvature bound within this neighborhood, we obtain
+Evaluating \eqref{eq:A.2} at any minimizer \(t\) under \(P\) and at a reference minimizer bounds the reference suboptimality at \(t\) by twice its right-hand side. By continuity of the section density in Lemma~\ref{lem:general-variation}, \(m_0(c\varepsilon,t)\ge g/2\) on a fixed neighborhood of \(v\) for all sufficiently small \(\varepsilon\). The unique reference minimizers \(v_{c,\varepsilon}\), with \(v_{0,\varepsilon}=v\) and \(v_{1,\varepsilon}=t_\varepsilon\), converge to \(v\). Integrating the curvature bound within this neighborhood, we obtain
 \begin{equation}
 \mathscr E_{L_{c,\varepsilon}}(P_0;t)
 -ES_p^{P_0}(L_{c,\varepsilon})
@@ -22,8 +21,7 @@ Evaluating \eqref{eq:A.2} at any minimizer \(t\) under \(P\) and at a reference 
 Every candidate minimizer lies in the compact loss range. Since \(v_{c,\varepsilon}\to v\), \eqref{eq:A.3} gives a positive reference suboptimality gap at the endpoints of a smaller fixed neighborhood of \(v\), uniformly for small \(\varepsilon\). Convexity extends this gap outside the neighborhood, contradicting the uniform \(O(\varepsilon^2)\) bound from \eqref{eq:A.2}. Applying \eqref{eq:A.3} inside gives \(|t-v_{c,\varepsilon}|=O_M(\varepsilon)\), and \eqref{eq:2.6} yields \eqref{eq:A.1} for every minimizing threshold.\unskip\nobreak\hfill\proofbox
 
 \subsection{A.3 Projections and threshold convexity}
-\label{a.4-source-fluxes-and-moving-optimal-thresholds}
-\label{a.5-strict-source-imbalance-on-an-exchangeable-tail-surface}
+\label{app:projections}
 For a finite-\(I\) kernel, the conditional mean \(e_i(\xi,u)=\int d_i\alpha_{\xi,u}(dd)\) belongs to \(L^1(\nu)\), so Fubini's theorem gives
 
 \begin{equation}
@@ -97,7 +95,7 @@ and hence \(\chi<1\).
 
 \keepproofstart{9\baselineskip}
 \paragraph{Convexity of limiting threshold objectives}
-\label{b.0-model-objects-and-main-statement}
+\label{par:threshold-convexity}
 For finite-cost kernels, convexity of \(G_c\) follows by identifying its distributional second derivative with the measure of transported rescaled losses.
 
 \resultnumber{A.4}\begin{lemma}[Threshold objectives of finite-cost kernels]\label{lem:threshold-convexity} For every kernel with finite \(I\) and every \(c\in\{0,1\}\), the transported rescaled loss \(u+b\cdot d+cH\) has a locally finite pushforward measure \(\lambda_c\), and
@@ -159,7 +157,7 @@ w=q-\varepsilon u/\beta-\varepsilon t d_{k3},
 with weight \(\alpha_k(v-y-\beta w,y,u)f(v-y-\beta w,y,w+\varepsilon u/\beta)\), after cancellation of the two Jacobian factors. Compact interior support and uniform continuity give \(a_{ik,\varepsilon}\to a_{ik,0}\) uniformly, including the zero extensions at the endpoints. Since \(j_i=\sum_kd_{ki}a_{ik,0}\), \eqref{eq:A.15} proves \eqref{eq:A.14} for all three coordinates.
 
 \paragraph{Approximation by finite-branch kernels}
-\label{b-l8-bounded-measurable-kernels-arbitrary-finite-i-kernels-and-diagonal-recovery}
+\label{par:finite-branch-approximation}
 To approximate a general finite-\(I\) kernel by kernels in \(\mathcal K_{\rm fin}^c\), we first retain activity on \(A_n=\{\xi\in\Omega_n,\ |u|\le n,\ |d|_\gamma\le n\}\), where \(\Omega_n\uparrow\Omega\) is a compact exhaustion, and return the omitted conditional probability to \(d=0\). With \(I_{\mathrm{tail},n}=\int_{A_n^c}|d|_\gamma\,d\Pi_\alpha\to0\), projection contraction and the displacement-Lipschitz bound for hinge increments give
 \begin{equation}
 |I_n-I|\le I_{\mathrm{tail},n},\qquad

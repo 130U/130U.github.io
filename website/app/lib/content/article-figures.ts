@@ -95,7 +95,7 @@ const articleFigures: Readonly<Record<string, readonly FigurePlacement[]>> = {
         "| Residual- and cost-aware (Section 3) | 7.89% / 19.37% / 21.84% | **0.515** | **-17.8%** |",
         "| Share of the batch | 60% | 30% | 10% |",
         "| Cost of an independent reference audit ($`c`$, routine = 1) | 1 | 1.5 | 3 |",
-        "The audit budget is $`2,000`$ cost units",
+        "The audit budget is 2,000 cost units",
         "a sampling floor of $`\\pi_{\\min} = 3\\%`$",
       ],
     },
@@ -171,7 +171,7 @@ const articleFigures: Readonly<Record<string, readonly FigurePlacement[]>> = {
       after: { paragraph: "• Set the shared bias" },
       evidence: [
         "$`b = 0.2`$ and independent noise to $`\\sigma = 1`$",
-        "48.40% at $`n = 100`$ records and 0.000637% at $`n = 1,000`$",
+        "48.40% at $`n = 100`$ records and 0.000637% at $`n = 1{,}000`$",
         "$`0.2 + 1.96/\\sqrt{n}`$ gives 97.50% coverage",
       ],
     },
@@ -184,9 +184,9 @@ const articleFigures: Readonly<Record<string, readonly FigurePlacement[]>> = {
       figure: "regret-scenarios",
       after: { paragraph: "Enumerating the eight scenarios" },
       evidence: [
-        "$`s \\in \\{-1, 1\\}`$",
+        "$`\\theta \\in \\{-1, 1\\}`$",
         "$`z_1 \\in \\{-0.4, 0.4\\}`$, $`z_2 \\in \\{-0.2, 0.2\\}`$",
-        "$`\\Delta_s = 0.15s + z_1 + 0.3s z_2`$",
+        "$`\\Delta_\\theta = 0.15\\theta + z_1 + 0.3\\theta z_2`$",
         "| 0.61 | 0 |",
         "| 0 | 0.61 |",
       ],
@@ -265,8 +265,8 @@ const tableEmphasis: Readonly<Record<string, readonly TableEmphasis[]>> = {
 // Manuscript figures drawn natively, keyed by the image path the manuscript
 // cites. The dependence drawings evaluate the manuscript's formulas
 // (130U/RESEARCH-Critical-Dependence-Stress-for-Diversification-Gains-under-Fixed-Marginals at the pinned commit:
-// code/generate_mechanism_figures.py and
-// calculations/plot_profiles_and_flows.py); the Asian drawings plot the study
+// computation/code/generate_mechanism_figures.py and
+// computation/calculations/plot_profiles_and_flows.py); the Asian drawings plot the study
 // results of 130U/RESEARCH-Certified-Valuation-of-Arithmetic-Asian-Options at the pinned
 // commit and evaluate Proposition 4.1; the Rough Heston drawings plot the saved
 // banks of 130U/RESEARCH-Certified-Joint-Pricing-Errors-in-Rough-Heston at the pinned commit and
@@ -328,7 +328,7 @@ export const manuscriptFigures: Readonly<Record<string, { figure: string; eviden
       "(\\alpha_0,V_0,\\theta,\\lambda_\\xi)=(0.5286,\\,0.0262,\\,0.0721,\\,0.5037)",
       "\\(\\nu=0.2897\\), \\(\\rho=-0.7445\\)",
       "W_\\lambda(t)=\\sum_{n=0}^\\infty(-\\lambda)^n\\,t^{1+n\\alpha}",
-      "since \\(\\lambda_*T^\\alpha\\approx0.075\\)",
+      "by at most 7.5 per cent, the order of \\(\\lambda_*T^\\alpha\\approx0.075\\)",
     ],
   },
   "/assets/research/rough/netting-ratio.png": {

@@ -13,23 +13,7 @@ type ArticleHeadingPresentation = {
   text: string;
   sourceNumber?: string;
   displayNumber?: string;
-  referenceLabel?: string;
 };
-
-function roman(number: number) {
-  if (!Number.isSafeInteger(number) || number < 1 || number > 3999) return undefined;
-  let remaining = number;
-  let result = "";
-  for (const [value, label] of [[1000, "M"], [900, "CM"], [500, "D"], [400, "CD"], [100, "C"], [90, "XC"], [50, "L"], [40, "XL"], [10, "X"], [9, "IX"], [5, "V"], [4, "IV"], [1, "I"]] as const) {
-    while (remaining >= value) { result += label; remaining -= value; }
-  }
-  return result;
-}
-
-function letter(number: number) {
-  if (!Number.isSafeInteger(number) || number < 1 || number > 26) return undefined;
-  return String.fromCharCode(64 + number);
-}
 
 /** A heading's label in the article contents, where every heading reads as plain text. */
 function inlineText(inlines: readonly ArticleInline[]): string {
@@ -41,52 +25,35 @@ function inlineText(inlines: readonly ArticleInline[]): string {
   }).join("");
 }
 
-/** Present existing section identities without renumbering the source or changing its anchors. */
+/**
+ * Present a heading with the manuscript's own number, so that "Section 5",
+ * "(5.1)" and "Appendix A.5" in the text match what the reader sees. A chapter
+ * reads "5." as the papers and the repositories' manuscripts write it; a
+ * subsection keeps the source's form ("5.1" or "5.1."). The source and its
+ * anchors are never renumbered.
+ */
 export function formatArticleHeading(heading: ResearchHeading): ArticleHeadingPresentation {
   const unchanged = { id: heading.id, displayInlines: heading.inlines, text: inlineText(heading.inlines) };
   const first = heading.inlines[0];
   if (first?.type !== "text") return unchanged;
-  const prefix = first.text.match(heading.level === 2 ? /^([1-9]\d*)\.?\s+/u : /^([1-9]\d*)\.([1-9]\d*)\.?\s+/u);
+  const prefix = first.text.match(heading.level === 2 ? /^([1-9]\d*)\.?\s+/u : /^([1-9]\d*)\.([1-9]\d*)(\.?)\s+/u);
   if (!prefix) return unchanged;
-  const chapter = roman(Number(prefix[1]));
-  const subsection = heading.level === 3 ? letter(Number(prefix[2])) : undefined;
-  if (!chapter || (heading.level === 3 && !subsection)) return unchanged;
   const sourceNumber = heading.level === 3 ? `${prefix[1]}.${prefix[2]}` : prefix[1];
-  const displayNumber = `${subsection ?? chapter}.`;
+  const displayNumber = heading.level === 3 ? `${sourceNumber}${prefix[3]}` : `${sourceNumber}.`;
   const displayInlines: ArticleInline[] = [{ type: "text", text: `${displayNumber} ${first.text.slice(prefix[0].length)}` }, ...heading.inlines.slice(1)];
-  return {
-    id: heading.id, displayInlines, text: inlineText(displayInlines), sourceNumber, displayNumber,
-    referenceLabel: subsection ? `${chapter}.${subsection}.` : `${chapter}.`,
-  };
+  return { id: heading.id, displayInlines, text: inlineText(displayInlines), sourceNumber, displayNumber };
 }
 
-/** Assign letters in page order, including subsections the manuscript leaves unnumbered. */
+/** Present every heading of an article, checking that each numbered subsection belongs to its chapter. */
 export function formatArticleHeadings(blocks: readonly ResearchBlock[]) {
   const headings = new Map<string, ArticleHeadingPresentation>();
   let chapter: ArticleHeadingPresentation | undefined;
-  let subsection = 0;
   for (const block of blocks) {
     if (block.type !== "heading") continue;
-    let heading = formatArticleHeading(block);
-    if (block.level === 2) {
-      chapter = heading;
-      subsection = 0;
-    } else {
-      subsection += 1;
-      const label = letter(subsection);
-      if (!label) throw new Error("Article subsection numbering exceeds the reviewed A–Z range.");
-      if (heading.sourceNumber && heading.sourceNumber.split(".")[0] !== chapter?.sourceNumber) {
-        throw new Error(`Source subsection ${heading.sourceNumber} does not belong to its preceding chapter.`);
-      }
-      const displayNumber = `${label}.`;
-      const first = block.inlines[0];
-      const displayInlines: ArticleInline[] = first?.type === "text"
-        ? [{ type: "text", text: `${displayNumber} ${heading.sourceNumber ? first.text.replace(/^[1-9]\d*\.[1-9]\d*\.?\s+/u, "") : first.text}` }, ...block.inlines.slice(1)]
-        : [{ type: "text", text: `${displayNumber} ` }, ...block.inlines];
-      heading = {
-        ...heading, displayInlines, text: inlineText(displayInlines), displayNumber,
-        referenceLabel: chapter?.displayNumber ? `${chapter.displayNumber}${displayNumber}` : displayNumber,
-      };
+    const heading = formatArticleHeading(block);
+    if (block.level === 2) chapter = heading;
+    else if (heading.sourceNumber && heading.sourceNumber.split(".")[0] !== chapter?.sourceNumber) {
+      throw new Error(`Source subsection ${heading.sourceNumber} does not belong to its preceding chapter.`);
     }
     if (headings.has(heading.id)) throw new Error(`Duplicate heading anchor: ${heading.id}`);
     headings.set(heading.id, heading);
@@ -190,7 +157,7 @@ export function buildReferenceTargets(slug: string, blocks: readonly ResearchBlo
   return { targets, anchors };
 }
 
-type Reference = { start: number; end: number; href: string; title?: string };
+type Reference = { start: number; end: number; href: string };
 
 /**
  * Link audited internal Section references and, in a cross-referenced paper,
@@ -218,8 +185,7 @@ export function linkArticleSectionReferences(
           const numberOffset = reference.index + reference[0].indexOf(reference[1]);
           for (const number of numbers) {
             const from = start + numberOffset + number.index;
-            const heading = headings.get(number[0])!;
-            links.push({ start: from, end: from + number[0].length, href: `#${heading.id}`, title: `Section ${heading.sourceNumber}; web heading ${heading.referenceLabel}` });
+            links.push({ start: from, end: from + number[0].length, href: `#${headings.get(number[0])!.id}` });
           }
         }
         offset = start + context.length;
@@ -247,7 +213,7 @@ export function linkArticleSectionReferences(
     for (const link of links) {
       if (link.start < offset) continue;
       if (link.start > offset) result.push({ type: "text", text: text.slice(offset, link.start) });
-      result.push({ type: "link", href: link.href, ...(link.title ? { title: link.title } : {}), inlines: [{ type: "text", text: text.slice(link.start, link.end) }] });
+      result.push({ type: "link", href: link.href, inlines: [{ type: "text", text: text.slice(link.start, link.end) }] });
       offset = link.end;
     }
     if (offset < text.length || !result.length) result.push({ type: "text", text: text.slice(offset) });
