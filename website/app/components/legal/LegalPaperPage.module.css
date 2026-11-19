@@ -17,12 +17,21 @@
   margin-bottom: 5rem;
 }
 
+/* On a reading page the title keeps to the reading measure, so its last line
+   stays inside the guide that closes the measure; below 1024px it takes the
+   whole column, like every title. */
 .paper .header h1 {
-  max-width: var(--title-width);
+  max-width: min(var(--title-width), var(--reading-measure));
   font-size: var(--type-title);
   font-weight: 400;
   line-height: var(--title-leading);
   letter-spacing: var(--title-tracking);
+}
+
+@media (width < 1024px) {
+  .paper .header h1 {
+    max-width: var(--title-width);
+  }
 }
 
 .readingLayout {

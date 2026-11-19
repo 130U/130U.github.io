@@ -118,6 +118,21 @@
   color: rgba(247, 246, 245, 0.68);
 }
 
+/* A formula in a node fits its card: it scales down instead of scrolling, so
+   no glyph meets the card's edge or the connector beside it. */
+.nodeDetail [data-research-formula] {
+  max-width: 100%;
+  overflow: visible;
+  -webkit-mask-image: none;
+  mask-image: none;
+  animation: none;
+}
+
+.nodeDetail [data-research-formula] svg {
+  max-width: 100%;
+  height: auto;
+}
+
 /* Connectors: one piece per lane in each connector column. */
 .link {
   position: relative;
