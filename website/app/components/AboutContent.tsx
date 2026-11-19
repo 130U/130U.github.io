@@ -4,7 +4,7 @@ import { ReadingArrow } from "./ReadingArrow";
 import styles from "../home.module.css";
 
 const researchSummaries: Record<string, string> = {
-  "critical-dependence-stress-for-portfolio-diversification":
+  "critical-dependence-stress-for-diversification-gains-under-fixed-marginals":
     "How far can the dependence between positions move before a diversification trade stops reducing Expected Shortfall, when every individual loss distribution stays fixed? I prove that the critical stress budget is quadratic in the trade size and identify its leading coefficient through a variational limit. The sensitivity at zero stress understates that budget. I introduce the marginal-restoration premium to measure the gap, characterize exactly when it is positive, and prove that it is at least 30% in a uniform benchmark. At equal effective costs, continuous flow–cut duality gives the premium's response to background displacement costs.",
   "certified-valuation-of-arithmetic-asian-options":
     "What does an arithmetic Asian option lose when exercise is decided on the geometric average of its fixings? I prove that the loss is at most the dispersion of the fixings divided by the level risk that precedes them, and that in Black's model it grows with the cube of volatility and the square of the averaging window. For a one-month crude oil average price option the bound is below a hundredth of a cent per barrel, against 2.6 cents for the classical first-order bound. Under Heston, validated transforms turn the bound into a proved price interval for a twelve-fixing call spread and a proved bound on its Euler discretization error, with executable certificates.",

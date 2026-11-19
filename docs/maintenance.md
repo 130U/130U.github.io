@@ -76,7 +76,7 @@ written as `![caption](/assets/blog/<slug>/<image>.jpg "alt")`. `app/lib/content
 rejects anything else at build time. Images live in `public/assets/blog/<slug>/` and
 are sized for a 2× display of the 576px column.
 
-A work presented by a post, such as The Étude Sky (`130U/etude-sky`), is a separate
+A work presented by a post, such as The Étude Sky (`130U/BLOG-Etude-Sky`), is a separate
 repository published by GitHub Pages under this domain at `/<repository>/`; this
 repository links to it and never builds it. Routes, the sitemap, and the tests follow
 the files in `content/blog/`, and every image in `public/assets/blog/` must be cited by
@@ -116,7 +116,7 @@ The three papers use pinned research inputs and deterministic importers:
 
 | Paper | Input and importer | On-site scope |
 | --- | --- | --- |
-| Critical Dependence Stress for Portfolio Diversification | `content/sources/selected-research/dependence/`; `scripts/import-dependence-research.mjs` | Abstract, chapters 1–5, references, and supporting-material links |
+| Critical Dependence Stress for Diversification Gains under Fixed Marginals | `content/sources/selected-research/dependence/`; `scripts/import-dependence-research.mjs` | Abstract, chapters 1–5, references, and supporting-material links |
 | Certified Valuation of Arithmetic Asian Options | `content/sources/selected-research/asian-source.md` and the study results in `asian-studies/`; `scripts/import-selected-research.mjs` | Abstract, chapters 1–9 with their four figures, references, and supporting-material links |
 | Certified Joint Pricing Errors in Rough Heston | `content/sources/selected-research/rough-source.md` and the saved banks in `rough-studies/`; `scripts/import-selected-research.mjs` | Abstract, chapters 1–8 with their four figures, references, and supporting-material links |
 
@@ -162,10 +162,10 @@ The approved source PDFs are external inputs, not served downloads:
 
 | Structured manuscript | Source PDF |
 | --- | --- |
-| `solar-geoengineering-comparison-and-continuity.json` | `ESSAY1.pdf` |
-| `small-states-and-strategic-space-dependence.json` | `ESSAY2.pdf` |
+| `who-may-choose-the-lesser-risk.json` | `ESSAY1.pdf` |
+| `small-states-and-the-governance-of-strategic-space-dependence.json` | `ESSAY2.pdf` |
 | `autonomous-authority-in-space.json` | `ESSAY3.pdf` |
-| `mangrove-restoration-and-compensatory-mitigation.json` | `ESSAY4.pdf` |
+| `mangrove-restoration-and-the-limits-of-compensatory-mitigation.json` | `ESSAY4.pdf` |
 
 `PaperParagraph.text` must equal the concatenated run text. Preserve emphasis,
 capitalization, superscripts, unique chapter anchors, and sequential notes.
@@ -193,7 +193,7 @@ interaction lives in focused client components, and the About hero is isolated i
 Article figures live in `app/components/figures/`: `kit.tsx` holds the frame, scales,
 plot, schematic and bar primitives, `selected-research.tsx`, `ai-research.tsx` and
 `legal-research.tsx` hold the figures, `dependence-manuscript.tsx` draws the dependence
-manuscript's four figures from the formulas in `130U/RESEARCH-Critical-Dependence-Stress`
+manuscript's four figures from the formulas in `130U/RESEARCH-Critical-Dependence-Stress-for-Diversification-Gains-under-Fixed-Marginals`
 (`code/generate_mechanism_figures.py` and `calculations/plot_profiles_and_flows.py` at
 the pinned commit), `asian-manuscript.tsx` draws the Asian manuscript's four figures
 from its imported study results and from Proposition 4.1 as

@@ -6,16 +6,16 @@
   ],
   "routes": {
     "/": {
-      "textSha256": "3b38eeef8dd36f23c491fcbb3af38a6514e502824de96dd59e5dc4ce3b54f197",
-      "characterCount": 3982,
-      "wordCount": 611,
+      "textSha256": "47931fd0032d04b503c560475b9646dec87cffdba3d187b6cedc325dbd2aac2a",
+      "characterCount": 4049,
+      "wordCount": 622,
       "preview": "Skip to Main Content Theodore Ouyang Duke Alumnus Sequoia Fellow Theodore Ouyang About Experience Blog Thinking Mathematically Working in AI Mathematics is how ",
       "altTexts": [],
       "ariaLabels": [
         "Theodore Ouyang home",
         "Primary navigation",
-        "Read more about Critical Dependence Stress for Portfolio Diversification",
-        "Read more about Certified Valuation of Arithmetic Asian Options",
+        "Read more about Critical Dependence Stress for Diversification Gains under Fixed Marginals",
+        "Read more about Certified Valuation of Arithmetic Asian Options: The Cost of Exercising on the Geometric Average",
         "Read more about Certified Joint Pricing Errors in Rough Heston",
         "Read more about coursework",
         "Contact"
@@ -53,11 +53,11 @@
         "twitterDescription": "Selected coursework in mathematics, AI and data science, finance and economics, and law, ethics, and global affairs."
       }
     },
-    "/critical-dependence-stress-for-portfolio-diversification/": {
-      "textSha256": "ea73f6be894ba6d0d465e27122338317a592e9671b2f4605cb4a4fb94ed625d4",
-      "characterCount": 77425,
-      "wordCount": 11708,
-      "preview": "Skip to Main Content Theodore Ouyang Back to Selected Research Critical Dependence Stress for Portfolio Diversification GitHub Full Manuscript Abstract How much",
+    "/critical-dependence-stress-for-diversification-gains-under-fixed-marginals/": {
+      "textSha256": "dce47af3082d6d59fbac301503a9bf724bc4c1f89ff356848ff4312d9618b4df",
+      "characterCount": 77443,
+      "wordCount": 11711,
+      "preview": "Skip to Main Content Theodore Ouyang Back to Selected Research Critical Dependence Stress for Diversification Gains under Fixed Marginals GitHub Full Manuscript",
       "altTexts": [],
       "ariaLabels": [
         "Theodore Ouyang home",
@@ -419,23 +419,23 @@
         "Scrollable mathematical expression"
       ],
       "metadata": {
-        "title": "Critical Dependence Stress for Portfolio Diversification | Theodore Ouyang",
+        "title": "Critical Dependence Stress for Diversification Gains under Fixed Marginals | Theodore Ouyang",
         "description": "How much dependence stress erases a diversification gain under fixed marginals: a variational limit, a quadratic critical budget, the marginal-restoration premium and projected flow duality.",
-        "canonical": "https://www.theodoreoy.com/critical-dependence-stress-for-portfolio-diversification/",
-        "openGraphTitle": "Critical Dependence Stress for Portfolio Diversification",
+        "canonical": "https://www.theodoreoy.com/critical-dependence-stress-for-diversification-gains-under-fixed-marginals/",
+        "openGraphTitle": "Critical Dependence Stress for Diversification Gains under Fixed Marginals",
         "openGraphDescription": "How much dependence stress erases a diversification gain under fixed marginals: a variational limit, a quadratic critical budget, the marginal-restoration premium and projected flow duality.",
-        "openGraphUrl": "https://www.theodoreoy.com/critical-dependence-stress-for-portfolio-diversification/",
-        "twitterTitle": "Critical Dependence Stress for Portfolio Diversification",
+        "openGraphUrl": "https://www.theodoreoy.com/critical-dependence-stress-for-diversification-gains-under-fixed-marginals/",
+        "twitterTitle": "Critical Dependence Stress for Diversification Gains under Fixed Marginals",
         "twitterDescription": "How much dependence stress erases a diversification gain under fixed marginals: a variational limit, a quadratic critical budget, the marginal-restoration premium and projected flow duality."
       },
       "mathSourceSha256": "d31d21b93ee2cd9e32595eee5228e469588a65f6a3a7ee02e359ff2a4a17b153",
       "formulaCount": 1025
     },
     "/certified-valuation-of-arithmetic-asian-options/": {
-      "textSha256": "22ba359b0bceaed37527e427d522ff20cbcf3a559e0382af7aeba4223c1237a0",
-      "characterCount": 69575,
-      "wordCount": 11475,
-      "preview": "Skip to Main Content Theodore Ouyang Back to Selected Research Certified Valuation of Arithmetic Asian Options GitHub Full Manuscript Abstract An arithmetic Asi",
+      "textSha256": "dffbd2ad109d48dff82c091362e7044b7a6f6b8b93d234ee029b4a41d9afd909",
+      "characterCount": 69624,
+      "wordCount": 11483,
+      "preview": "Skip to Main Content Theodore Ouyang Back to Selected Research Certified Valuation of Arithmetic Asian Options: The Cost of Exercising on the Geometric Average ",
       "altTexts": [],
       "ariaLabels": [
         "Theodore Ouyang home",
@@ -693,13 +693,13 @@
         "Mathematical equation"
       ],
       "metadata": {
-        "title": "Certified Valuation of Arithmetic Asian Options | Theodore Ouyang",
+        "title": "Certified Valuation of Arithmetic Asian Options: The Cost of Exercising on the Geometric Average | Theodore Ouyang",
         "description": "The cost of exercising an arithmetic Asian option on the geometric average: a proved bound, its cubic law in Black's model, and a certified Heston price interval with its Euler discretization error.",
         "canonical": "https://www.theodoreoy.com/certified-valuation-of-arithmetic-asian-options/",
-        "openGraphTitle": "Certified Valuation of Arithmetic Asian Options",
+        "openGraphTitle": "Certified Valuation of Arithmetic Asian Options: The Cost of Exercising on the Geometric Average",
         "openGraphDescription": "The cost of exercising an arithmetic Asian option on the geometric average: a proved bound, its cubic law in Black's model, and a certified Heston price interval with its Euler discretization error.",
         "openGraphUrl": "https://www.theodoreoy.com/certified-valuation-of-arithmetic-asian-options/",
-        "twitterTitle": "Certified Valuation of Arithmetic Asian Options",
+        "twitterTitle": "Certified Valuation of Arithmetic Asian Options: The Cost of Exercising on the Geometric Average",
         "twitterDescription": "The cost of exercising an arithmetic Asian option on the geometric average: a proved bound, its cubic law in Black's model, and a certified Heston price interval with its Euler discretization error."
       },
       "mathSourceSha256": "03f6d5bc1411109aef5f3063d00088f9b30fb3faaf48bf5044dae5b0b1a7da90",
@@ -951,7 +951,7 @@
         "twitterDescription": "AI research and engineering, data science, legal research, finance and consulting, and STEM competitions and training."
       }
     },
-    "/experience/statistical-inference-and-resource-allocation-in-expert-data-production/": {
+    "/experience/large-scale-domain-expert-feedback-governance-and-adaptive-review/": {
       "textSha256": "54e5d92efb1d08ef373d538c7299d5e8b68e108747bbd374e1f237872953c90f",
       "characterCount": 35787,
       "wordCount": 5657,
@@ -1036,17 +1036,17 @@
       "metadata": {
         "title": "Duke University × Leading Foundation Model Developer: Large-Scale Domain Expert Feedback Governance and Adaptive Review | Theodore Ouyang",
         "description": "One pool of expert hours has to do two jobs in a post-training program: tell the team how good a batch is, and fix the data that ships.",
-        "canonical": "https://www.theodoreoy.com/experience/statistical-inference-and-resource-allocation-in-expert-data-production/",
+        "canonical": "https://www.theodoreoy.com/experience/large-scale-domain-expert-feedback-governance-and-adaptive-review/",
         "openGraphTitle": "Duke University × Leading Foundation Model Developer: Large-Scale Domain Expert Feedback Governance and Adaptive Review",
         "openGraphDescription": "One pool of expert hours has to do two jobs in a post-training program: tell the team how good a batch is, and fix the data that ships.",
-        "openGraphUrl": "https://www.theodoreoy.com/experience/statistical-inference-and-resource-allocation-in-expert-data-production/",
+        "openGraphUrl": "https://www.theodoreoy.com/experience/large-scale-domain-expert-feedback-governance-and-adaptive-review/",
         "twitterTitle": "Duke University × Leading Foundation Model Developer: Large-Scale Domain Expert Feedback Governance and Adaptive Review",
         "twitterDescription": "One pool of expert hours has to do two jobs in a post-training program: tell the team how good a batch is, and fix the data that ships."
       },
       "mathSourceSha256": "927bfca124668d7ba957f9597b45f5a43746778c69cfd223660d38e52c1ab0bc",
       "formulaCount": 196
     },
-    "/experience/task-validity-in-financial-synthetic-data/": {
+    "/experience/financial-task-design-and-synthetic-data-engineering/": {
       "textSha256": "b3a63d2707b097e7f0e877cac8798b2da30033d5b486a96bef368997db31cf22",
       "characterCount": 33815,
       "wordCount": 4979,
@@ -1111,17 +1111,17 @@
       "metadata": {
         "title": "Duke University × Leading Foundation Model Developer: Financial Task Design and Synthetic Data Engineering | Theodore Ouyang",
         "description": "When a synthetic financial case changes one number, its reference answer, the evidence behind that answer and the expert's preference can all go stale together.",
-        "canonical": "https://www.theodoreoy.com/experience/task-validity-in-financial-synthetic-data/",
+        "canonical": "https://www.theodoreoy.com/experience/financial-task-design-and-synthetic-data-engineering/",
         "openGraphTitle": "Duke University × Leading Foundation Model Developer: Financial Task Design and Synthetic Data Engineering",
         "openGraphDescription": "When a synthetic financial case changes one number, its reference answer, the evidence behind that answer and the expert's preference can all go stale together.",
-        "openGraphUrl": "https://www.theodoreoy.com/experience/task-validity-in-financial-synthetic-data/",
+        "openGraphUrl": "https://www.theodoreoy.com/experience/financial-task-design-and-synthetic-data-engineering/",
         "twitterTitle": "Duke University × Leading Foundation Model Developer: Financial Task Design and Synthetic Data Engineering",
         "twitterDescription": "When a synthetic financial case changes one number, its reference answer, the evidence behind that answer and the expert's preference can all go stale together."
       },
       "mathSourceSha256": "654eaabaa94a670c74308bd0061b863602223aea3be555923a63f3dda7772454",
       "formulaCount": 187
     },
-    "/experience/verification-and-supervision-in-scientific-reasoning-tasks/": {
+    "/experience/general-reasoning-evaluation-and-layered-verification/": {
       "textSha256": "aa361c44efbc17429a1712ed9de587c8e254e5ab9edaba93184b0f700ae6b97c",
       "characterCount": 33232,
       "wordCount": 5041,
@@ -1207,17 +1207,17 @@
       "metadata": {
         "title": "Duke University × Frontier AI Research Laboratory: General Reasoning Evaluation and Layered Verification | Theodore Ouyang",
         "description": "A model can reach the right answer through an unsupported step, and a grader that matches a reference solution will reject a correct proof that takes another route.",
-        "canonical": "https://www.theodoreoy.com/experience/verification-and-supervision-in-scientific-reasoning-tasks/",
+        "canonical": "https://www.theodoreoy.com/experience/general-reasoning-evaluation-and-layered-verification/",
         "openGraphTitle": "Duke University × Frontier AI Research Laboratory: General Reasoning Evaluation and Layered Verification",
         "openGraphDescription": "A model can reach the right answer through an unsupported step, and a grader that matches a reference solution will reject a correct proof that takes another route.",
-        "openGraphUrl": "https://www.theodoreoy.com/experience/verification-and-supervision-in-scientific-reasoning-tasks/",
+        "openGraphUrl": "https://www.theodoreoy.com/experience/general-reasoning-evaluation-and-layered-verification/",
         "twitterTitle": "Duke University × Frontier AI Research Laboratory: General Reasoning Evaluation and Layered Verification",
         "twitterDescription": "A model can reach the right answer through an unsupported step, and a grader that matches a reference solution will reject a correct proof that takes another route."
       },
       "mathSourceSha256": "2dd747e1fe938074f86aa7fd48b4f064fdddb77c187af5871b94fc2ab2c21345",
       "formulaCount": 205
     },
-    "/experience/evidence-uncertainty-and-decision-guarantees-in-investment-research/": {
+    "/experience/evidence-verification-and-robust-comparison-in-investment-research/": {
       "textSha256": "305c00b718120c5749851ce7b2accc9230fbf1f9e9760b646e1578d2f6f10f9f",
       "characterCount": 29723,
       "wordCount": 4612,
@@ -1292,10 +1292,10 @@
       "metadata": {
         "title": "Duke University × Leading Global Alternative Asset Manager: Evidence Verification and Robust Comparison in Investment Research | Theodore Ouyang",
         "description": "Due diligence has more facts to check than analyst time to check them.",
-        "canonical": "https://www.theodoreoy.com/experience/evidence-uncertainty-and-decision-guarantees-in-investment-research/",
+        "canonical": "https://www.theodoreoy.com/experience/evidence-verification-and-robust-comparison-in-investment-research/",
         "openGraphTitle": "Duke University × Leading Global Alternative Asset Manager: Evidence Verification and Robust Comparison in Investment Research",
         "openGraphDescription": "Due diligence has more facts to check than analyst time to check them.",
-        "openGraphUrl": "https://www.theodoreoy.com/experience/evidence-uncertainty-and-decision-guarantees-in-investment-research/",
+        "openGraphUrl": "https://www.theodoreoy.com/experience/evidence-verification-and-robust-comparison-in-investment-research/",
         "twitterTitle": "Duke University × Leading Global Alternative Asset Manager: Evidence Verification and Robust Comparison in Investment Research",
         "twitterDescription": "Due diligence has more facts to check than analyst time to check them."
       },
@@ -1421,7 +1421,7 @@
         "twitterDescription": "A spacecraft sometimes has to act before anyone on the ground can approve the command, and waiting carries risks of its own."
       }
     },
-    "/experience/small-states-and-strategic-space-dependence/": {
+    "/experience/small-states-and-the-governance-of-strategic-space-dependence/": {
       "textSha256": "b6ff850955644c5b2c479098157678910d4ff46403a201463c4998bfd9528d64",
       "characterCount": 62824,
       "wordCount": 8700,
@@ -1531,15 +1531,15 @@
       "metadata": {
         "title": "Duke Law School: Small States and the Governance of Strategic Space Dependence | Theodore Ouyang",
         "description": "A small state can license a launch, own a satellite, or buy a service and still lack the decision it meant to keep.",
-        "canonical": "https://www.theodoreoy.com/experience/small-states-and-strategic-space-dependence/",
+        "canonical": "https://www.theodoreoy.com/experience/small-states-and-the-governance-of-strategic-space-dependence/",
         "openGraphTitle": "Duke Law School: Small States and the Governance of Strategic Space Dependence",
         "openGraphDescription": "A small state can license a launch, own a satellite, or buy a service and still lack the decision it meant to keep.",
-        "openGraphUrl": "https://www.theodoreoy.com/experience/small-states-and-strategic-space-dependence/",
+        "openGraphUrl": "https://www.theodoreoy.com/experience/small-states-and-the-governance-of-strategic-space-dependence/",
         "twitterTitle": "Duke Law School: Small States and the Governance of Strategic Space Dependence",
         "twitterDescription": "A small state can license a launch, own a satellite, or buy a service and still lack the decision it meant to keep."
       }
     },
-    "/experience/solar-geoengineering-comparison-and-continuity/": {
+    "/experience/who-may-choose-the-lesser-risk/": {
       "textSha256": "ac7dfd71b315fce7dffa6055467ab54cf7e1b4a0b4da815fb234841de05b4867",
       "characterCount": 61688,
       "wordCount": 8650,
@@ -1658,15 +1658,15 @@
       "metadata": {
         "title": "Duke Law School: Who May Choose the Lesser Risk — Solar Geoengineering and the Legal Duties of Comparison and Continuity | Theodore Ouyang",
         "description": "Who may choose among climate risks for people who cannot leave the resulting climate? I proposed two legal duties for solar geoengineering.",
-        "canonical": "https://www.theodoreoy.com/experience/solar-geoengineering-comparison-and-continuity/",
+        "canonical": "https://www.theodoreoy.com/experience/who-may-choose-the-lesser-risk/",
         "openGraphTitle": "Duke Law School: Who May Choose the Lesser Risk — Solar Geoengineering and the Legal Duties of Comparison and Continuity",
         "openGraphDescription": "Who may choose among climate risks for people who cannot leave the resulting climate? I proposed two legal duties for solar geoengineering.",
-        "openGraphUrl": "https://www.theodoreoy.com/experience/solar-geoengineering-comparison-and-continuity/",
+        "openGraphUrl": "https://www.theodoreoy.com/experience/who-may-choose-the-lesser-risk/",
         "twitterTitle": "Duke Law School: Who May Choose the Lesser Risk — Solar Geoengineering and the Legal Duties of Comparison and Continuity",
         "twitterDescription": "Who may choose among climate risks for people who cannot leave the resulting climate? I proposed two legal duties for solar geoengineering."
       }
     },
-    "/experience/mangrove-restoration-and-compensatory-mitigation/": {
+    "/experience/mangrove-restoration-and-the-limits-of-compensatory-mitigation/": {
       "textSha256": "edae18e2adfd0d675f5d819fd9ba8798fe1babee9239535cedfa8aad23862944",
       "characterCount": 77007,
       "wordCount": 10808,
@@ -1801,10 +1801,10 @@
       "metadata": {
         "title": "Duke Law School: Mangrove Restoration and the Limits of Compensatory Mitigation — Lessons from Florida for the Greater Bay Area | Theodore Ouyang",
         "description": "Restoring a wetland is one decision, and relying on that restoration to permit the loss of another is a second.",
-        "canonical": "https://www.theodoreoy.com/experience/mangrove-restoration-and-compensatory-mitigation/",
+        "canonical": "https://www.theodoreoy.com/experience/mangrove-restoration-and-the-limits-of-compensatory-mitigation/",
         "openGraphTitle": "Duke Law School: Mangrove Restoration and the Limits of Compensatory Mitigation — Lessons from Florida for the Greater Bay Area",
         "openGraphDescription": "Restoring a wetland is one decision, and relying on that restoration to permit the loss of another is a second.",
-        "openGraphUrl": "https://www.theodoreoy.com/experience/mangrove-restoration-and-compensatory-mitigation/",
+        "openGraphUrl": "https://www.theodoreoy.com/experience/mangrove-restoration-and-the-limits-of-compensatory-mitigation/",
         "twitterTitle": "Duke Law School: Mangrove Restoration and the Limits of Compensatory Mitigation — Lessons from Florida for the Greater Bay Area",
         "twitterDescription": "Restoring a wetland is one decision, and relying on that restoration to permit the loss of another is a second."
       }

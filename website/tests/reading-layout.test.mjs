@@ -39,15 +39,15 @@ test("research tables hold each row of values on one line and scroll natively be
 
 test("all research tables retain native table semantics inside named keyboard-accessible scroll regions", async () => {
   const routes = [
-    ["critical-dependence-stress-for-portfolio-diversification", 0],
+    ["critical-dependence-stress-for-diversification-gains-under-fixed-marginals", 0],
     ["certified-valuation-of-arithmetic-asian-options", 11],
     ["certified-joint-pricing-errors-in-rough-heston", 10],
-    ["experience/statistical-inference-and-resource-allocation-in-expert-data-production", 6],
-    ["experience/task-validity-in-financial-synthetic-data", 4],
-    ["experience/verification-and-supervision-in-scientific-reasoning-tasks", 3],
-    ["experience/evidence-uncertainty-and-decision-guarantees-in-investment-research", 2],
-    ["experience/small-states-and-strategic-space-dependence", 1, 1],
-    ["experience/mangrove-restoration-and-compensatory-mitigation", 1, 1],
+    ["experience/large-scale-domain-expert-feedback-governance-and-adaptive-review", 6],
+    ["experience/financial-task-design-and-synthetic-data-engineering", 4],
+    ["experience/general-reasoning-evaluation-and-layered-verification", 3],
+    ["experience/evidence-verification-and-robust-comparison-in-investment-research", 2],
+    ["experience/small-states-and-the-governance-of-strategic-space-dependence", 1, 1],
+    ["experience/mangrove-restoration-and-the-limits-of-compensatory-mitigation", 1, 1],
   ];
   // A legal paper also holds its footnote preview dialog.
   for (const [route, count, noteDialogs = 0] of routes) {

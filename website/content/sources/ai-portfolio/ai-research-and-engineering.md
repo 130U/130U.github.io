@@ -10,10 +10,10 @@ Theodore Ouyang
 
 I conducted the following four projects through Duke University collaborations from September 2023 to September 2026. Partner names and proprietary internal system identifiers are withheld under nondisclosure agreements. The collaborators include a leading foundation model developer, a frontier AI research laboratory, and a leading global alternative asset manager with more than $300 billion in assets under management. The project titles, my role as a researcher, locations, dates, system architectures and mathematical formulations are cleared for public disclosure. Production records and operating figures are withheld; the numerical results are closed-form values, reference runs and worked examples with their inputs stated.
 
-# Project 01: statistical-inference-and-resource-allocation-in-expert-data-production
+# Project 01: large-scale-domain-expert-feedback-governance-and-adaptive-review
 
 **Article Title**
-Statistical inference and resource allocation in expert data production
+Large-Scale Domain Expert Feedback Governance and Adaptive Review
 
 **Organization**
 Duke University × Leading Foundation Model Developer
@@ -22,7 +22,7 @@ Duke University × Leading Foundation Model Developer
 Large-Scale Domain Expert Feedback Governance and Adaptive Review
 
 **URL**
-https://www.theodoreoy.com/experience/statistical-inference-and-resource-allocation-in-expert-data-production/
+https://www.theodoreoy.com/experience/large-scale-domain-expert-feedback-governance-and-adaptive-review/
 
 **Position**
 Researcher
@@ -338,10 +338,10 @@ False flags cost about eight times what misses cost here. More than nine items i
 
 The program worked through roughly one batch a week, with more than 10,000 tasks per batch and more than 300 specialists. Contributor reliability records, tiered review workflows and random reference audits became its operating standards for quality measurement and review allocation, and later post-training programs took over the design.
 
-# Project 02: task-validity-in-financial-synthetic-data
+# Project 02: financial-task-design-and-synthetic-data-engineering
 
 **Article Title**
-Task validity in financial synthetic data
+Financial Task Design and Synthetic Data Engineering
 
 **Organization**
 Duke University × Leading Foundation Model Developer
@@ -350,7 +350,7 @@ Duke University × Leading Foundation Model Developer
 Financial Task Design and Synthetic Data Engineering
 
 **URL**
-https://www.theodoreoy.com/experience/task-validity-in-financial-synthetic-data/
+https://www.theodoreoy.com/experience/financial-task-design-and-synthetic-data-engineering/
 
 **Position**
 Researcher
@@ -601,10 +601,10 @@ Once a cell reaches its target of $`n_j^*`$ independent task families, further v
 
 The team averaged roughly 500 completed financial tasks a week under these rules, and the partner company carried Batch Zero into its other post-training programs.
 
-# Project 03: verification-and-supervision-in-scientific-reasoning-tasks
+# Project 03: general-reasoning-evaluation-and-layered-verification
 
 **Article Title**
-Verification and supervision in reasoning tasks
+General Reasoning Evaluation and Layered Verification
 
 **Organization**
 Duke University × Frontier AI Research Laboratory
@@ -613,7 +613,7 @@ Duke University × Frontier AI Research Laboratory
 General Reasoning Evaluation and Layered Verification
 
 **URL**
-https://www.theodoreoy.com/experience/verification-and-supervision-in-scientific-reasoning-tasks/
+https://www.theodoreoy.com/experience/general-reasoning-evaluation-and-layered-verification/
 
 **Position**
 Researcher
@@ -866,10 +866,10 @@ For a certificate family whose engineering costs as much as 400 expert reviews, 
 
 The team produced roughly 500 scientific reasoning tasks a week under this design, and later programs reused its layered structure.
 
-# Project 04: evidence-uncertainty-and-decision-guarantees-in-investment-research
+# Project 04: evidence-verification-and-robust-comparison-in-investment-research
 
 **Article Title**
-Evidence uncertainty and decision guarantees in investment research
+Evidence Verification and Robust Comparison in Investment Research
 
 **Organization**
 Duke University × Leading Global Alternative Asset Manager
@@ -878,7 +878,7 @@ Duke University × Leading Global Alternative Asset Manager
 Evidence Verification and Robust Comparison in Investment Research
 
 **URL**
-https://www.theodoreoy.com/experience/evidence-uncertainty-and-decision-guarantees-in-investment-research/
+https://www.theodoreoy.com/experience/evidence-verification-and-robust-comparison-in-investment-research/
 
 **Position**
 Researcher

@@ -9,27 +9,27 @@ const ROOT = fileURLToPath(new URL("../", import.meta.url));
 const AI_ROUTE = "/experience/";
 const SOURCE_FILE = "content/sources/ai-portfolio/ai-research-and-engineering.md";
 const CANONICAL_DOCUMENT = path.join(ROOT, SOURCE_FILE);
-const SOURCE_SHA256 = "ac8e9b5f5d5a7808d0d2771a202f081272bbe82d30c8275280d84f33736a2de3";
+const SOURCE_SHA256 = "d548a42aa520320b1abbec58e6f517c7e63a64e18802e7adfbc19132de76a098";
 // Structure and benchmark-table shapes are checked independently of the renderer.
 const PROJECTS = [
   {
-    slug: "statistical-inference-and-resource-allocation-in-expert-data-production",
-    title: "Statistical inference and resource allocation in expert data production",
+    slug: "large-scale-domain-expert-feedback-governance-and-adaptive-review",
+    title: "Large-Scale Domain Expert Feedback Governance and Adaptive Review",
     bodyStart: 0, display: 22, inline: 145, headings: 7, tables: [[4, 4, 4, 4, 4, 4], [5, 5, 5, 5], [3, 3, 3, 3, 3], [3, 3, 3, 3, 3], [5, 5, 5, 5, 5, 5], [2, 2, 2, 2]],
   },
   {
-    slug: "task-validity-in-financial-synthetic-data",
-    title: "Task validity in financial synthetic data",
+    slug: "financial-task-design-and-synthetic-data-engineering",
+    title: "Financial Task Design and Synthetic Data Engineering",
     bodyStart: 0, display: 19, inline: 129, headings: 6, tables: [[3, 3, 3, 3], [4, 4, 4, 4], [6, 6], [3, 3, 3, 3, 3]],
   },
   {
-    slug: "verification-and-supervision-in-scientific-reasoning-tasks",
-    title: "Verification and supervision in reasoning tasks",
+    slug: "general-reasoning-evaluation-and-layered-verification",
+    title: "General Reasoning Evaluation and Layered Verification",
     bodyStart: 0, display: 19, inline: 156, headings: 7, tables: [[4, 4, 4, 4, 4, 4], [6, 6, 6], [4, 4, 4, 4]],
   },
   {
-    slug: "evidence-uncertainty-and-decision-guarantees-in-investment-research",
-    title: "Evidence uncertainty and decision guarantees in investment research",
+    slug: "evidence-verification-and-robust-comparison-in-investment-research",
+    title: "Evidence Verification and Robust Comparison in Investment Research",
     bodyStart: 0, display: 15, inline: 161, headings: 6, tables: [[3, 3, 3, 3], [4, 4, 4]],
   },
 ];

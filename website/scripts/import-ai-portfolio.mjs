@@ -9,10 +9,10 @@ const sourceFile = "content/sources/ai-portfolio/ai-research-and-engineering.md"
 const source = readFileSync(path.join(root, sourceFile), "utf8").replace(/\r\n?/gu, "\n");
 // Each project's manuscript is published in its own repository, named after the project title.
 const projects = [
-  ["statistical-inference-and-resource-allocation-in-expert-data-production", 7, "RESEARCH-Large-Scale-Domain-Expert-Feedback-Governance-and-Adaptive-Review"],
-  ["task-validity-in-financial-synthetic-data", 6, "RESEARCH-Financial-Task-Design-and-Synthetic-Data-Engineering"],
-  ["verification-and-supervision-in-scientific-reasoning-tasks", 7, "RESEARCH-General-Reasoning-Evaluation-and-Layered-Verification"],
-  ["evidence-uncertainty-and-decision-guarantees-in-investment-research", 6, "RESEARCH-Evidence-Verification-and-Robust-Comparison-in-Investment-Research"],
+  ["large-scale-domain-expert-feedback-governance-and-adaptive-review", 7, "RESEARCH-Large-Scale-Domain-Expert-Feedback-Governance-and-Adaptive-Review"],
+  ["financial-task-design-and-synthetic-data-engineering", 6, "RESEARCH-Financial-Task-Design-and-Synthetic-Data-Engineering"],
+  ["general-reasoning-evaluation-and-layered-verification", 7, "RESEARCH-General-Reasoning-Evaluation-and-Layered-Verification"],
+  ["evidence-verification-and-robust-comparison-in-investment-research", 6, "RESEARCH-Evidence-Verification-and-Robust-Comparison-in-Investment-Research"],
 ];
 const sourceDocument = {
   fileName: path.basename(sourceFile),

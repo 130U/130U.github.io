@@ -7,7 +7,7 @@ import styles from "./Figures.module.css";
 
 /* The four figures of "Certified Valuation of Arithmetic Asian Options", drawn
    natively. Figures 1, 3 and 4 plot the study results of
-   130U/RESEARCH-Certified-Valuation-Arithmetic-Asian-Options at the pinned source
+   130U/RESEARCH-Certified-Valuation-of-Arithmetic-Asian-Options at the pinned source
    commit (studies/results/gap-profile.json and euler-ladder.json), as
    scripts/import-selected-research.mjs extracts them; Figure 2 evaluates
    Proposition 4.1. Captions stay the manuscript's own. */

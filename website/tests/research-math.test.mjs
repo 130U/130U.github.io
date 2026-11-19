@@ -8,10 +8,10 @@ import { RESEARCH_MATH_GUTTER_EM, RESEARCH_MATH_ROW_SPACING_EM, normalizeResearc
 
 const ROOT = fileURLToPath(new URL("../", import.meta.url));
 const PROJECTS = [
-  ["statistical-inference-and-resource-allocation-in-expert-data-production", 167],
-  ["task-validity-in-financial-synthetic-data", 148],
-  ["verification-and-supervision-in-scientific-reasoning-tasks", 175],
-  ["evidence-uncertainty-and-decision-guarantees-in-investment-research", 176],
+  ["large-scale-domain-expert-feedback-governance-and-adaptive-review", 167],
+  ["financial-task-design-and-synthetic-data-engineering", 148],
+  ["general-reasoning-evaluation-and-layered-verification", 175],
+  ["evidence-verification-and-robust-comparison-in-investment-research", 176],
 ];
 
 function decodeXml(value) {

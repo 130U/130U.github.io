@@ -4,10 +4,10 @@ import { join } from "node:path";
 import { parseResearchMarkdown, type ResearchArticleContent } from "./research-markdown";
 
 export const aiResearchProjectSlugs = [
-  "statistical-inference-and-resource-allocation-in-expert-data-production",
-  "task-validity-in-financial-synthetic-data",
-  "verification-and-supervision-in-scientific-reasoning-tasks",
-  "evidence-uncertainty-and-decision-guarantees-in-investment-research",
+  "large-scale-domain-expert-feedback-governance-and-adaptive-review",
+  "financial-task-design-and-synthetic-data-engineering",
+  "general-reasoning-evaluation-and-layered-verification",
+  "evidence-verification-and-robust-comparison-in-investment-research",
 ] as const;
 
 const aiResearchProjects: readonly ResearchArticleContent[] = aiResearchProjectSlugs.map((slug) => {

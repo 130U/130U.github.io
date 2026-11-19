@@ -428,7 +428,7 @@ try {
         longNumbers.push({ route, width: 320, textScale: 2, text: await value.textContent(), ...dimensions, issues, screenshot });
       } finally { await context.close(); }
     }
-    for (const route of ["/certified-valuation-of-arithmetic-asian-options/", "/experience/mangrove-restoration-and-compensatory-mitigation/"]) {
+    for (const route of ["/certified-valuation-of-arithmetic-asian-options/", "/experience/mangrove-restoration-and-the-limits-of-compensatory-mitigation/"]) {
       const context = await browser.newContext({ viewport: { width: 1440, height: 1100 }, javaScriptEnabled: false, serviceWorkers: "block" });
       await serveExport(context, missing);
       try {

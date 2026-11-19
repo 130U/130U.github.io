@@ -52,7 +52,7 @@ function parseFrontMatter(source: string, slug: string) {
   const value = (field: (typeof FIELDS)[number]) => fields.get(field)!;
   if (!/^\d{4}-\d{2}-\d{2}$/u.test(value("date"))) throw new Error(`${slug}: the date is written YYYY-MM-DD.`);
   for (const field of ["hero", "image"] as const) if (!ASSET.test(value(field))) throw new Error(`${slug}: ${field} is a local blog image.`);
-  if (!/^\/[a-z0-9-]+\/$/u.test(value("work"))) throw new Error(`${slug}: the work lives at its own address on this site.`);
+  if (!/^\/[A-Za-z0-9-]+\/$/u.test(value("work"))) throw new Error(`${slug}: the work lives at its own address on this site.`);
   return { fields: value, body: source.slice(match[0].length) };
 }
 
