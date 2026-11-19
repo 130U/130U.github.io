@@ -291,8 +291,7 @@ await writeOrCheck(new URL("provenance.json", sourceDirectory), JSON.stringify({
     "Every inline/display mathematical body is preserved, apart from moving TeX label commands to HTML anchors; explicit equation tags are retained.",
     "Original theorem numbers, proof endings, result-part numbering, bibliography order, citation targets, and complete figure captions are retained.",
     "Aliases on one original target share one web anchor; references to omitted appendices point to their exact pinned TeX source line.",
-    "The four original PNG siblings of the PDF figures are referenced at local asset paths, with their original Git blob identities recorded.",
-    "The public page title differs from the original paper title, which is recorded separately as sourceTitle.",
+    "The four figures are drawn natively from the repository's formulas; their image paths key the native drawings and the complete captions are retained.",
   ],
 }, null, 2) + "\n");
 console.log(`${checkOnly ? "Verified" : "Imported"} ${headings.length} main headings, ${resultReceipts.length} numbered results, ${mathematics.length} formulas, ${emittedFigure} figures and ${bibliographyKeys.length} references.`);

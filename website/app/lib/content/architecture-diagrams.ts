@@ -26,14 +26,14 @@ export const architectureDiagrams: Readonly<Record<number, ArchitectureDiagram>>
         label: "Allocate",
         emphasis: true,
         nodes: [
-          { tag: "Measure", title: "Reference audit", detail: "Random audits sampled by information per cost, $m_i / c_i$" },
-          { tag: "Correct", title: "Review allocation", detail: "Ranked by removable loss $\\Delta_i$ under capacity $H_j$" },
+          { tag: "Measure", title: "Reference audit", detail: "$\\pi_i^* = \\mathrm{clip}\\,\\sqrt{\\nu m_i/(\\lambda c_i - r_i)_+}$: risk is a rebate on the audit's price" },
+          { tag: "Correct", title: "Review allocation", detail: "Ranked by removable loss $\\Delta_i$ under capacity $H_j$, at the same budget price $\\lambda$" },
         ],
       },
       {
         label: "Decide",
         nodes: [
-          { title: "Prediction-assisted estimate", detail: "Corrects the selection bias $\\operatorname{Cov}(\\pi, q) > 0$" },
+          { title: "Prediction-assisted estimate", detail: "Corrects the selection bias $\\mathrm{Cov}(\\pi, q) > 0$" },
           { title: "Expert adjudication", detail: "Tiered review from Beta-Binomial reliability posteriors" },
         ],
       },
@@ -46,7 +46,7 @@ export const architectureDiagrams: Readonly<Record<number, ArchitectureDiagram>>
       },
     ],
     loop: { from: 2, to: 1, label: "Adjudications update reliability posteriors and review intensity" },
-    caption: "Measurement and correction run as separate decisions over the same submissions. Adjudications update reliability posteriors, acceptance criteria and review intensity.",
+    caption: "One rule prices measurement and correction against the same budget: an audited defect ships corrected, so an item's risk lowers the price of auditing it. Adjudications update reliability posteriors, acceptance criteria and review intensity.",
   },
   2: {
     label: SYSTEM,
@@ -56,13 +56,13 @@ export const architectureDiagrams: Readonly<Record<number, ArchitectureDiagram>>
         label: "Generate",
         nodes: [
           { title: "Gaussian and vine copulas", detail: "Corporate fundamentals keep their joint dependence" },
-          { title: "Constrained projection", detail: "Accounting identities, ratio bounds and date order hold" },
-          { title: "CTGAN and TabDDPM", detail: "Mixed records pass business rules and margin $\\gamma/s$ checks" },
+          { title: "Constrained sampling", detail: "Identities by projection; ratio bounds and date order by transformation" },
+          { title: "CTGAN and TabDDPM", detail: "Mixed-type records pass mandatory business-rule checks" },
           { title: "SDEs and Brownian bridges", detail: "Price and rate paths respect the filtration $\\mathcal{F}_s$" },
         ],
       },
       { label: "Calibrate", emphasis: true, nodes: [{ title: "Batch Zero", detail: "Independent execution, reference solutions and five-level pairwise preferences" }] },
-      { label: "Scale", nodes: [{ title: "Batch One", detail: "Large-scale data construction for RLHF and DPO supervision" }] },
+      { label: "Scale", nodes: [{ title: "Batch One", detail: "Variants below $z_{1-\\alpha}$ in $\\gamma/s$ get a recomputed reference; large-scale construction for RLHF and DPO" }] },
     ],
     loop: { from: 2, to: 0, label: "Failures and disagreements revise task specifications" },
     caption: "Batch Zero gates each task family before large-scale data construction. Failures and disagreements revise task instructions, reference solutions and acceptance criteria.",
@@ -97,16 +97,16 @@ export const architectureDiagrams: Readonly<Record<number, ArchitectureDiagram>>
       { label: "Evidence", nodes: [{ title: "Versioned evidence", detail: "Reports, audited statements, disclosures and questionnaires with source records" }] },
       { label: "Score", nodes: [{ title: "Rashomon scoring", detail: "Near-optimal models $\\mathcal{F}_\\alpha$ with SHAP attributions across the set" }] },
       { label: "Bound", nodes: [{ title: "Ranking bounds", detail: "Support functions over the joint uncertainty set $\\Omega(E)$" }] },
-      { label: "Query", emphasis: true, nodes: [{ title: "Verification query", detail: "Largest guaranteed cut in worst-case regret per cost, $V(q)/c_q$" }] },
+      { label: "Plan", emphasis: true, nodes: [{ title: "Verification plan", detail: "Knapsack on verified swing per analyst hour, $(1-\\lambda_j)s_j/c_j$" }] },
     ],
     loop: { from: 3, to: 0, label: "Each correction triggers rescoring and attribution updates" },
-    caption: "Minimax regret picks the next fact to verify, and each correction triggers rescoring and attribution updates through versioned evidence.",
+    caption: "Minimax regret sets the verification plan, a knapsack on verified swing per analyst hour, and each correction triggers rescoring and attribution updates through versioned evidence.",
   },
   8: {
     label: FRAMEWORK,
     stages: [
       { label: "Task", nodes: [{ title: "Autonomous space task", detail: "Delayed spacecraft operations, orbital avoidance, debris capture, SETI" }] },
-      { label: "Test", emphasis: true, nodes: [{ title: "Two-threshold test", detail: "Authority to act, then evidence to delegate while human review can still change the outcome" }] },
+      { label: "Test", emphasis: true, nodes: [{ title: "Two-threshold test", detail: "Authority to act, then evidence to delegate, then the point at which human review can still change the outcome" }] },
       {
         label: "Supervise",
         nodes: [
@@ -157,7 +157,7 @@ export const architectureDiagrams: Readonly<Record<number, ArchitectureDiagram>>
         ],
       },
       { label: "Justify", emphasis: true, nodes: [{ title: "Comparative justification", detail: "Defend alternatives, disclose distributional choices, answer objections from exposed constituencies" }] },
-      { label: "Authorize", nodes: [{ title: "Authorization", detail: "Assessment, notification and consultation scaled to expected effects" }] },
+      { label: "Authorize", nodes: [{ title: "Authorization", detail: "Review council and independent science panel; separate concurrence of sponsors and exposed constituencies" }] },
       {
         label: "Continue",
         nodes: [
@@ -168,7 +168,7 @@ export const architectureDiagrams: Readonly<Record<number, ArchitectureDiagram>>
       },
     ],
     loop: { from: 3, to: 0, label: "Periodic reassessment of intervention and nondeployment" },
-    caption: "The comparison duty ties risk-risk analysis to authorization. The continuity duty keeps program control, operator succession and the cooling trajectory apart, so a change in political authority does not force abrupt cessation.",
+    caption: "The comparative justification duty ties risk-risk analysis to authorization. The continuity duty keeps program control, operator succession and the cooling trajectory apart, so a change in political authority does not force abrupt cessation.",
   },
   11: {
     label: FRAMEWORK,
@@ -181,7 +181,7 @@ export const architectureDiagrams: Readonly<Record<number, ArchitectureDiagram>>
           { title: "Compensation for new loss" },
         ],
       },
-      { label: "Evidence", nodes: [{ title: "Functional replacement", detail: "Additionality and timing, not canopy growth or construction alone; West Lake, Deep Bay, San Tin" }] },
+      { label: "Evidence", nodes: [{ title: "Functional replacement", detail: "Additionality, timing and a discount for delay and risk, not canopy growth or construction alone; West Lake, Deep Bay, San Tin" }] },
       { label: "Accept", emphasis: true, nodes: [{ title: "Staged acceptance", detail: "Site baselines, functional objectives, monitoring periods, seasonal coverage" }] },
       {
         label: "Decide",
@@ -193,7 +193,7 @@ export const architectureDiagrams: Readonly<Record<number, ArchitectureDiagram>>
       },
     ],
     loop: { from: 2, to: 1, label: "Delayed or failed recovery triggers funded monitoring and correction" },
-    caption: "Engineering completion and ecological performance are accepted separately. Only functions that have been demonstrated can release funds, discharge responsibility or permit the next phase of development.",
+    caption: "Engineering completion and ecological performance are accepted separately: verified works earn payment, demonstrated functions discharge responsibility, and a promised function is discounted for delay and risk and credited in full only when it exists before the loss.",
   },
 };
 

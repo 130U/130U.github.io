@@ -9,23 +9,23 @@ const ROOT = fileURLToPath(new URL("../", import.meta.url));
 const AI_ROUTE = "/experience/";
 const SOURCE_FILE = "content/sources/ai-portfolio/ai-research-and-engineering.md";
 const CANONICAL_DOCUMENT = path.join(ROOT, SOURCE_FILE);
-const SOURCE_SHA256 = "337a665b87865c723552fcb25da4a5492bc811d5cd4b01b36cc34fa10d718bf1";
+const SOURCE_SHA256 = "be8f32d6ed3d2975e4ed53cde38db23fdc45b231618ec337cbf555c2acddf9c0";
 // Structure and benchmark-table shapes are checked independently of the renderer.
 const PROJECTS = [
   {
     slug: "large-scale-domain-expert-feedback-governance-and-adaptive-review",
     title: "Large-Scale Domain Expert Feedback Governance and Adaptive Review",
-    bodyStart: 0, display: 22, inline: 145, headings: 7, tables: [[4, 4, 4, 4, 4, 4], [5, 5, 5, 5], [3, 3, 3, 3, 3], [3, 3, 3, 3, 3], [5, 5, 5, 5, 5, 5], [2, 2, 2, 2]],
+    bodyStart: 0, display: 22, inline: 143, headings: 7, tables: [[4, 4, 4, 4, 4, 4], [5, 5, 5, 5], [3, 3, 3, 3, 3], [3, 3, 3, 3, 3], [5, 5, 5, 5, 5, 5], [2, 2, 2, 2]],
   },
   {
     slug: "financial-task-design-and-synthetic-data-engineering",
     title: "Financial Task Design and Synthetic Data Engineering",
-    bodyStart: 0, display: 19, inline: 129, headings: 6, tables: [[3, 3, 3, 3], [4, 4, 4, 4], [6, 6], [3, 3, 3, 3, 3]],
+    bodyStart: 0, display: 19, inline: 130, headings: 6, tables: [[3, 3, 3, 3], [4, 4, 4, 4], [6, 6], [3, 3, 3, 3, 3]],
   },
   {
     slug: "general-reasoning-evaluation-and-layered-verification",
     title: "General Reasoning Evaluation and Layered Verification",
-    bodyStart: 0, display: 19, inline: 156, headings: 7, tables: [[4, 4, 4, 4, 4, 4], [6, 6, 6], [4, 4, 4, 4]],
+    bodyStart: 0, display: 19, inline: 154, headings: 7, tables: [[4, 4, 4, 4, 4, 4], [6, 6, 6], [4, 4, 4, 4]],
   },
   {
     slug: "evidence-verification-and-robust-comparison-in-investment-research",
@@ -317,8 +317,9 @@ for (const expected of PROJECTS) {
         ? readableMarkdown(original.source.split("\n").filter((row, rowIndex) => rowIndex !== 1).join("\n").replace(/(?<!\\)\|/gu, " "))
         : readableMarkdown(original.source);
       assert.equal(
-        original.type === "heading" ? actualText.replace(/^[IVXLCDM]+\. /u, "") : actualText,
-        original.type === "heading" ? originalText.replace(/^\d+\.? /u, "") : originalText,
+        actualText,
+        // A chapter shows its manuscript number as the repository writes it, "5. Title".
+        original.type === "heading" ? originalText.replace(/^(\d+)\.? /u, "$1. ") : originalText,
         `${expected.slug} changed source block ${expected.bodyStart + index}`,
       );
       if (original.type === "heading") assert.equal(actual.tag, "h2");

@@ -156,7 +156,14 @@ test("all eleven full articles retain introduction, contents and body order with
     }
     const chapters = elements(body[0], (node) => node.tag === "h2" && (node.attrs.has("data-research-block") || node.attrs.has("data-paper-block"))).filter((node) => !/^(?:Appendix|Appendices|References|Footnotes|Acknowledgments|Acknowledgements)\b/iu.test(readable(node)));
     assert.ok(chapters.length > 0, `${route}: missing body chapters.`);
-    chapters.forEach((chapter, index) => assert.match(readable(chapter), new RegExp(`^${roman[index]}(?:[.)])?\\s+`, "u"), `${route}: main chapters must use consecutive Roman numerals.`));
+    // Legal articles number their Parts in Roman numerals; the research, AI and paper manuscripts number chapters 1, 2, 3, and the page shows those numbers.
+    chapters.forEach((chapter, index) => {
+      if (chapter.attrs.has("data-paper-block")) assert.match(readable(chapter), new RegExp(`^${roman[index]}(?:[.)])?\\s+`, "u"), `${route}: Parts must use consecutive Roman numerals.`);
+      else {
+        assert.match(readable(chapter), new RegExp(`^${index + 1}\\.\\s+`, "u"), `${route}: chapters must show the manuscript's consecutive numbers.`);
+        assert.equal(chapter.attrs.get("data-source-number"), String(index + 1), `${route}: the shown number is the source number.`);
+      }
+    });
     for (const proofEnd of page.nodes.filter((node) => node.attrs.has("data-proof-end"))) {
       const label = elements(proofEnd, (node) => node.tag === "abbr");
       assert.equal(label.length, 1, `${route}: one readable proof-end abbreviation.`);

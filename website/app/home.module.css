@@ -8,7 +8,7 @@
 
 .homeFrame .profileSection {
   grid-column: 1 / span 11;
-  padding-top: 176px;
+  padding-top: var(--content-top);
 }
 
 .identity,

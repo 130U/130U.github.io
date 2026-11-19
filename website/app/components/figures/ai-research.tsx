@@ -363,7 +363,7 @@ function ProofObligations() {
 const PROTOCOLS = [
   { name: "Final-answer matching only", parts: [1200, 0, 1800, 600], share: "40.0%" },
   { name: "Strict reference-path matching", parts: [600, 600, 0, 2400], share: "100.0%" },
-  { name: "Semantic certificate verification", parts: [1200, 0, 0, 2400], share: "100.0%" },
+  { name: "Certificate verification", parts: [1200, 0, 0, 2400], share: "100.0%" },
 ] as const;
 const OUTCOMES = [
   { name: "Valid, accepted", tone: "ink" },
@@ -380,10 +380,10 @@ function ProtocolOutcomes() {
     <Figure
       id="protocol-outcomes"
       title="What each acceptance protocol does with 3,600 submissions"
-      caption="The first 1,200 submissions in each bar are valid certificates and the remaining 2,400 carry controlled defects. Final-answer matching accepts the 1,800 defective submissions that report $v^*$; strict path matching rejects the 600 valid elimination proofs; semantic verification makes neither error."
+      caption="The first 1,200 submissions in each bar are valid certificates and the remaining 2,400 carry controlled defects. Final-answer matching accepts the 1,800 defective submissions that report $v^*$; strict reference-path matching rejects the 600 valid elimination proofs; certificate verification makes neither error."
       legend={OUTCOMES.map((outcome) => ({ label: outcome.name, tone: outcome.tone }))}
     >
-      <Bars label="Final-answer matching: 1,200 valid accepted, 1,800 invalid accepted, 600 invalid rejected; 40.0% of accepted submissions are valid. Strict reference-path matching: 600 valid accepted, 600 valid rejected, 2,400 invalid rejected. Semantic certificate verification: 1,200 valid accepted, 2,400 invalid rejected." valueWidth="6rem" stack>
+      <Bars label="Final-answer matching: 1,200 valid accepted, 1,800 invalid accepted, 600 invalid rejected; 40.0% of accepted submissions are valid. Strict reference-path matching: 600 valid accepted, 600 valid rejected, 2,400 invalid rejected. Certificate verification: 1,200 valid accepted, 2,400 invalid rejected." valueWidth="6rem" stack>
         <BarHeader marks={[{ at: x(0), label: "Valid", tone: "steel", anchor: "left" }, { at: x(1200), label: "Invalid", tone: "steel", anchor: "left" }]} />
         {PROTOCOLS.map((protocol) => {
           let start = 0;
@@ -491,7 +491,7 @@ const SCENARIO_VIEWS = [
 
 function RegretScenarios() {
   const x = linear(-0.72, 0.72);
-  const scenarios = [-1, 1].flatMap((s) => [-0.4, 0.4].flatMap((z1) => [-0.2, 0.2].map((z2) => ({ s, z1, z2, delta: Math.round((0.15 * s + z1 + 0.3 * s * z2) * 100) / 100 }))));
+  const scenarios = [-1, 1].flatMap((theta) => [-0.4, 0.4].flatMap((z1) => [-0.2, 0.2].map((z2) => ({ theta, z1, z2, delta: Math.round((0.15 * theta + z1 + 0.3 * theta * z2) * 100) / 100 }))));
   const lanes: Record<string, Array<{ top: number; label: string; regret: string }>> = {
     none: [{ top: 56, label: "All scenarios", regret: "Regret 0.61" }],
     shap: [{ top: 56, label: "Unchanged", regret: "Regret 0.61" }],
@@ -509,8 +509,8 @@ function RegretScenarios() {
     <Figure
       id="regret-scenarios"
       className={styles.scenarioFigure}
-      title="Eight scenarios for the score difference $\Delta_s=0.15s+z_1+0.3sz_2$"
-      caption="Two Rashomon models, $s\in\{-1,1\}$, and four evidence configurations give eight scenarios. A query splits them by what it would reveal. Only $z_1$ puts every remaining scenario on one side of zero, so only verifying $z_1$ removes the worst-case regret of 0.61."
+      title="Eight scenarios for the score difference $\Delta_\theta=0.15\theta+z_1+0.3\theta z_2$"
+      caption="Two Rashomon models, $\theta\in\{-1,1\}$, and four evidence configurations give eight scenarios. A query splits them by what it would reveal. Only $z_1$ puts every remaining scenario on one side of zero, so only verifying $z_1$ removes the worst-case regret of 0.61."
       views={SCENARIO_VIEWS}
       viewsLabel="Choose a verification query"
       legend={[{ label: "$\\Delta>0$: company $i$ scores higher", tone: "accent", shape: "dot" }, { label: "$\\Delta<0$: company $k$ scores higher", tone: "ink", shape: "ring" }]}
@@ -538,10 +538,10 @@ function RegretScenarios() {
           } as CSSProperties;
           return (
             <span
-              key={`${scenario.s}${scenario.z1}${scenario.z2}`}
+              key={`${scenario.theta}${scenario.z1}${scenario.z2}`}
               className={`${styles.scenarioDot} ${scenario.delta > 0 ? kit.accent : kit.ink}`}
               data-sign={scenario.delta > 0 ? "positive" : "negative"}
-              data-tip={`s = ${scenario.s}, z₁ = ${scenario.z1}, z₂ = ${scenario.z2}\nΔ = ${fixed(scenario.delta, 2)}`}
+              data-tip={`θ = ${scenario.theta}, z₁ = ${scenario.z1}, z₂ = ${scenario.z2}\nΔ = ${fixed(scenario.delta, 2)}`}
               style={style}
             />
           );

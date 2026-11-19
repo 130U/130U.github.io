@@ -24,7 +24,8 @@ const sources = [
     key: "rough", slug: "certified-joint-pricing-errors-in-rough-heston", repository: "RESEARCH-Certified-Joint-Pricing-Errors-in-Rough-Heston", file: "manuscript/merged-heston-en.md",
     sourceCommit: "46c85b4b256dfbc597ed56b3b2b526681334e60f", sourceBlob: "27bd396d79cfe3d99072f23d9799641c898442e7",
     sourceEditedAt: "2026-11-19T03:44:46-05:00", fetchedAt: "2026-11-19", mainSections: 8,
-    appendixAnchor: "appendix-a-rescaled-variables-model-and-transform",
+    // The manuscript is the TeX build source; the appendix link opens the GitHub-form article.
+    appendixFile: "ARTICLE.md", appendixAnchor: "appendix-a-rescaled-variables-model-and-transform",
     description: "Numerical pricing error as a common factor across strikes: a Riccati residual priced by forward variance in rough Heston, the netting of portfolio errors in strike space, and certified tolerances for S&P 500 option positions.",
     figures: {
       directory: "rough", count: 4,
@@ -173,10 +174,11 @@ for (const config of sources) {
   if (figures.length !== (config.figures?.count ?? 0) || /^!\[/mu.test(captioned.replace(/^!\[[^\n]*\]\(\/assets\/research\/[a-z0-9/-]+\.png\)$/gmu, ""))) {
     throw new Error(`The ${config.key} manuscript's figures do not match their reviewed form.`);
   }
+  const appendixUrl = `${repositoryUrl}/blob/${config.sourceCommit}/${config.appendixFile ?? config.file}#${config.appendixAnchor}`;
   const markdown = [
     captioned,
-    "## Appendices and Supporting Material",
-    `This page includes the complete main text and references. Appendices, supplementary proofs, code, and verification material are available in the [GitHub repository](${repositoryUrl}) and the [full manuscript](${sourceUrl}#${config.appendixAnchor}).`,
+    "## Appendices and supporting material",
+    `This page includes the complete main text and references. Appendices, supplementary proofs, code and verification material are available in the [GitHub repository](${repositoryUrl}) and the [full manuscript](${appendixUrl}).`,
     refs,
   ].join("\n\n").replace(/\]\((\.\.\/[^\s)]+)\)/gu, (_, relative) => `](${repositoryUrl}/blob/${config.sourceCommit}/${relative.slice(3)})`) + "\n";
   const content = {

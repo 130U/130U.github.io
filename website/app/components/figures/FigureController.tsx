@@ -24,10 +24,16 @@ export function enhanceFigure(figure: HTMLElement): () => void {
   const frame = figure.firstElementChild as HTMLElement;
   const scale = () => frame.getBoundingClientRect().width / frame.offsetWidth || 1;
 
-  // Make a wide comparison's sideways continuation visible on small screens.
+  // Make a wide comparison's sideways continuation visible on small screens:
+  // its right edge fades by as much as is left to scroll.
   for (const region of figure.querySelectorAll<HTMLElement>("[data-figure-scroll]")) {
-    const update = () => region.toggleAttribute("data-scroll-overflow", region.scrollWidth > region.clientWidth + 2);
+    const update = () => {
+      const remaining = region.scrollWidth - region.clientWidth - region.scrollLeft;
+      region.toggleAttribute("data-scroll-overflow", region.scrollWidth > region.clientWidth + 2);
+      region.style.setProperty("--edge-fade", `${Math.max(0, Math.min(40, remaining))}px`);
+    };
     update();
+    listen(region, "scroll", update);
     const observer = new ResizeObserver(update);
     observer.observe(region);
     if (region.firstElementChild) observer.observe(region.firstElementChild);

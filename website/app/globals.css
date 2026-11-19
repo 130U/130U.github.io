@@ -43,8 +43,8 @@
   --type-interface: 0.9375rem;
   --type-action: var(--type-interface);
   --type-math: 1.15em;
-  /* A page title keeps to four fifths of its column; on a phone it takes the
-     whole column. */
+  /* A page title keeps to four fifths of its column; on tablets and phones it
+     takes the whole column. */
   --title-width: 80%;
   /* About seventy characters of Source Serif 4 at the reading size. */
   --reading-measure: 36rem;
@@ -54,6 +54,9 @@
   /* The inset of text from the hairline that bounds it: the rail's links, a
      section's index, a framed list's numbers. */
   --frame-inset: clamp(20px, 2vw, 24px);
+  /* The top of the rail and of the content column: the wordmark sits on the
+     line of the page title. */
+  --content-top: 112px;
   --rail-min-width: calc(5 * var(--type-interface) + 13px + var(--frame-inset) + 22px + 10px);
   --title-leading: 1.12;
   --heading-leading: 1.25;
@@ -301,7 +304,7 @@ button:focus-visible {
   min-width: 0;
   height: 100vh;
   height: 100dvh;
-  padding: 176px 22px 36px var(--rail-safe-inset);
+  padding: var(--content-top) 22px 36px var(--rail-safe-inset);
 }
 
 .rail-header {
@@ -458,7 +461,7 @@ button:focus-visible {
   align-content: start;
   min-width: 0;
   overflow-wrap: anywhere;
-  padding: 112px 0 144px;
+  padding: var(--content-top) 0 144px;
 }
 
 .content-column > * {
@@ -943,11 +946,13 @@ button:focus-visible {
   }
 }
 
-@media (width <= 540px) {
+@media (width < 1024px) {
   :root {
     --title-width: 100%;
   }
+}
 
+@media (width <= 540px) {
   .site-footer {
     display: grid;
     gap: 4px;

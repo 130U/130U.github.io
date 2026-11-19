@@ -36,6 +36,29 @@ const readerRules = `  <style data-site-reader-layout>
     .toolbar > button, .toolbar > .preset-wrap, .toolbar > .export-wrap { min-width: 0; }
     .toolbar button { max-width: 100%; white-space: normal; }
     .diagram-container { container: diagram / inline-size; }
+    .site-return {
+      display: inline-flex;
+      min-height: 44px;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 1rem;
+      color: var(--text);
+      font-size: var(--type-interface);
+      line-height: var(--interface-leading);
+      text-decoration: underline;
+      text-decoration-color: var(--text-dim);
+      text-decoration-thickness: 1px;
+      text-underline-offset: 0.18em;
+    }
+    .site-return svg {
+      flex: 0 0 16px;
+      width: 16px;
+      min-width: 0;
+      height: 16px;
+      transform: none;
+      transition: none;
+    }
+    html[data-embed="true"] .site-return, html[data-present="true"] .site-return { display: none; }
 
     @container viewer (width < 60rem) {
       html:not([data-embed="true"]):not([data-present="true"]) .toolbar {
@@ -121,9 +144,19 @@ ${Object.entries(palette).map(([name, value]) => `      --${name}: ${value} !imp
     }
     body { background: var(--bg); }
     #btn-theme, #btn-preset, .preset-wrap { display: none !important; }
-    .pulse-dot, .card-dot { background: var(--text) !important; box-shadow: none !important; }
+    .pulse-dot, .card-dot { display: none !important; }
     *:not(.pulse-dot):not(.motion-control-dot) { border-radius: 0 !important; }
   </style>`;
+
+// The viewer returns to the site the way every page does: the Return Home link
+// with the site's return arrow, above the title.
+const returnLink = '      <a class="site-return" href="/" data-site-return><svg aria-hidden="true" focusable="false" viewBox="0 0 16 16" width="16" height="16" fill="none"><path d="M13 8H3m0 0 4-4M3 8l4 4" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"/></svg>Return Home</a>\n';
+
+function applyReturnLink(viewer) {
+  const cleared = viewer.replace(/      <a class="site-return"[^\n]*<\/a>\n/u, "");
+  assert.ok(/    <div class="header">\n/u.test(cleared), "Missing viewer header.");
+  return cleared.replace(/    <div class="header">\n/u, (header) => header + returnLink);
+}
 
 function applySiteTheme(viewer) {
   if (viewer.includes("data-site-theme")) {
@@ -207,7 +240,7 @@ if (source.includes("data-site-typography")) {
   assert.doesNotMatch(source, /fonts\.googleapis|fonts\.gstatic|JetBrains|Georgia|Times New Roman/u);
   source = source.replace(/    :root \{\n(?:      --[^\n]+\n)+    \}(?:\n\n    @media \(width < 768px\) \{\n      :root \{[\s\S]*?\n      \}\n    \})?/u, typeRules);
   assert.ok(source.includes(typeRules));
-  source = applySiteTheme(applyReaderLayout(source));
+  source = applyReturnLink(applySiteTheme(applyReaderLayout(source)));
   if (source !== original) await writeFile(viewerUrl, source);
   console.log("Architecture typography matches the website.");
 } else {
@@ -315,6 +348,7 @@ if (source.includes("data-site-typography")) {
   assert.doesNotMatch(viewer, /fonts\.googleapis|fonts\.gstatic|JetBrains|Georgia|Times New Roman/u);
   const svgMarkup = (source) => [...source.matchAll(/<svg\b[\s\S]*?<\/svg>/gu)].map(([svg]) => svg);
   assert.deepEqual(svgMarkup(viewer), svgMarkup(original), "Typography integration must preserve SVG markup.");
+  viewer = applyReturnLink(viewer);
   await writeFile(viewerUrl, viewer);
   console.log("Integrated shared Inter, HTML type roles, and embedded export fonts.");
 }

@@ -48,7 +48,8 @@ npm --prefix website run check
 
 The integration applies the site's type roles, a responsive reader layout, major-section
 heading semantics, control labels, and export-font settings while preserving SVG
-geometry. It accepts both freshly generated and integrated viewers, and running it again
+geometry. It sets the site's palette with no bullet before the title or the card
+headings, and adds the site's Return Home link, with its return arrow, above the title. It accepts both freshly generated and integrated viewers, and running it again
 leaves an integrated viewer unchanged.
 
 The viewer loads `../assets/fonts/inter.css`, preloads regular Inter, and shares the

@@ -17,19 +17,19 @@ function links(inlines) {
   return inlines.flatMap((inline) => inline.type === "link" ? [inline] : inline.inlines ? links(inline.inlines) : []);
 }
 
-test("heading presentation converts existing identities to Roman chapters and letter subsections", () => {
-  for (const [source, expected, number, label] of [
-    ["## 1 AI method", "I. AI method", "1", "I."],
-    ["## 10. Conclusion", "X. Conclusion", "10", "X."],
-    ["### 7.3. Prespecified candidates", "C. Prespecified candidates", "7.3", "VII.C."],
-    ["### 8.8 Posterior grid refinement", "H. Posterior grid refinement", "8.8", "VIII.H."],
+test("heading presentation shows the manuscript's own chapter and subsection numbers", () => {
+  for (const [source, expected, number, display] of [
+    ["## 1 AI method", "1. AI method", "1", "1."],
+    ["## 10. Conclusion", "10. Conclusion", "10", "10."],
+    ["### 7.3. Prespecified candidates", "7.3. Prespecified candidates", "7.3", "7.3."],
+    ["### 8.8 Posterior grid refinement", "8.8 Posterior grid refinement", "8.8", "8.8"],
   ]) {
     const heading = parseResearchMarkdown(source)[0];
     const snapshot = JSON.stringify(heading);
     const formatted = formatArticleHeading(heading);
     assert.equal(formatted.text, expected);
     assert.equal(formatted.sourceNumber, number);
-    assert.equal(formatted.referenceLabel, label);
+    assert.equal(formatted.displayNumber, display);
     assert.equal(formatted.id, heading.id);
     assert.equal(JSON.stringify(heading), snapshot);
   }
@@ -51,21 +51,25 @@ test("every manuscript heading reads as plain text, and heading mathematics stop
   assert.throws(() => formatArticleHeading(mathematical), /reviewed plain-text label/u, "Notation must not silently lose its mathematical structure in the directory.");
 });
 
-test("subsection letters follow page order, with or without a source number", () => {
+test("subsections keep their source numbers, an unnumbered subsection stays unnumbered, and a misplaced number stops the build", () => {
   const unnumbered = parseResearchMarkdown("## 7. Evidence\n\n### 7.1. Data\n\n### Verification duties\n\n### 7.2. Results");
   const contextual = formatArticleHeadings(unnumbered);
-  const [, , duties, results] = unnumbered;
-  assert.equal(contextual.get(duties.id).text, "B. Verification duties");
-  assert.equal(contextual.get(duties.id).referenceLabel, "VII.B.");
+  const [, data, duties, results] = unnumbered;
+  assert.equal(contextual.get(data.id).text, "7.1. Data");
+  assert.equal(contextual.get(duties.id).text, "Verification duties");
   assert.equal(contextual.get(duties.id).sourceNumber, undefined);
-  assert.equal(contextual.get(results.id).referenceLabel, "VII.C.");
+  assert.equal(contextual.get(results.id).text, "7.2. Results");
   assert.equal(buildArticleHeadingMap(unnumbered).get("7.2").id, results.id);
+  assert.throws(() => formatArticleHeadings(parseResearchMarkdown("## 7. Evidence\n\n### 6.1. Data")), /does not belong to its preceding chapter/u);
   const rough = manuscript(ROUGH);
   const sourceMap = buildArticleHeadingMap(rough);
   assert.equal(sourceMap.get("3.1").id, rough.find((block) => block.type === "heading" && block.source.startsWith("### 3.1.")).id);
-  assert.equal(sourceMap.get("3.1").referenceLabel, "III.A.");
-  assert.equal(sourceMap.get("7.3").referenceLabel, "VII.C.");
-  assert.equal(sourceMap.get("7.7").referenceLabel, "VII.G.");
+  assert.equal(sourceMap.get("3.1").text, "3.1. A martingale that fails to be one");
+  assert.equal(sourceMap.get("7").text, "7. Evidence from S&P 500 options");
+  assert.equal(sourceMap.get("7.7").displayNumber, "7.7.");
+  const asian = buildArticleHeadingMap(manuscript(ASIAN));
+  assert.equal(asian.get("5.4").text, "5.4 The certificate");
+  assert.equal(asian.get("5").text, "5. A proved price interval under Heston");
   for (const slug of [ASIAN, ROUGH]) {
     const blocks = manuscript(slug);
     const context = formatArticleHeadings(blocks);
@@ -84,9 +88,10 @@ test("internal references retain original numbers and link each precise endpoint
   assert.equal(text(linked), text(introduction.inlines));
   assert.deepEqual(links(linked).map((link) => text(link.inlines)), ["2", "3", "4", "5", "6", "7"]);
   for (const link of links(linked)) assert.equal(link.href, `#${map.get(text(link.inlines)).id}`);
-  assert.equal(links(linked)[1].title, "Section 3; web heading III.");
-  assert.equal(links(linked)[5].title, "Section 7; web heading VII.");
-  assert.equal(map.get("7.3").displayNumber, "C.");
+  // The heading a reference opens shows the number the reference names, so the link needs no explanation.
+  for (const link of links(linked)) assert.equal(link.title, undefined);
+  for (const link of links(linked)) assert.ok(map.get(text(link.inlines)).text.startsWith(`${text(link.inlines)}.`));
+  assert.equal(map.get("7.3").displayNumber, "7.3.");
   assert.equal(map.get("7.3").id, blocks.find((block) => block.type === "heading" && block.source.startsWith("### 7.3.")).id);
 });
 
