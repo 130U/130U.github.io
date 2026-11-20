@@ -225,6 +225,14 @@ function inspectFigure(figure) {
     const below = link.nextElementSibling ? rect(link.nextElementSibling) : null;
     if (!below || Math.abs(strip.left - below.left) > 1 || Math.abs(strip.right - below.right) > 1) issues.push({ kind: "lens-link-misaligned", strip, below });
   }
+  // A key result's numbers stand over its caps and its notes beside its marks:
+  // no two of them may touch, so each reads as its own number.
+  const resultLabels = [...frame.querySelectorAll('[data-result-label]')].filter(laidOut).map(label => ({ text: label.textContent.trim(), box: rect(label) }));
+  resultLabels.forEach((a, index) => {
+    for (const b of resultLabels.slice(index + 1)) {
+      if (a.box.left < b.box.right + 4 && b.box.left < a.box.right + 4 && a.box.top < b.box.bottom - 0.5 && b.box.top < a.box.bottom - 0.5) issues.push({ kind: "result-labels-touch", labels: [a.text, b.text], boxes: [a.box, b.box] });
+    }
+  });
   if (figure.dataset.figure === "heston-candidates") {
     const bars = frame.querySelector('[class*="_bars"]');
     const axis = bars?.querySelector('[class$="_axis"]');

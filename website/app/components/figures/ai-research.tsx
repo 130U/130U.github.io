@@ -1,6 +1,7 @@
 import type { CSSProperties } from "react";
 import { BarAxis, BarHeader, BarRow, Bars, Dot, Figure, Legend, Mark, Panel, Plot, Range, Seg, Tx, fixed, grouped, linear, logarithmic, normalCdf, path, sample, styles as kit, type Crosshair } from "./kit";
 import styles from "./Figures.module.css";
+import results from "./Results.module.css";
 
 /* ---------- Expert data production ---------- */
 
@@ -335,7 +336,7 @@ function GraderCeiling() {
     <Figure
       id="grader-ceiling"
       title="What a policy learns from its grader as optimization strengthens"
-      caption="Model B of Section 1 under final-answer matching, from equation (5.5), with the points of Table 2. False acceptance sets the ceiling: the observed score climbs toward 100% while true validity stops at the grader's positive predictive value, 83.2%. False rejection removes routes: a valid route the grader always rejects falls from 50% of valid work to 26.9%, 11.9% and 1.8% at $\eta=1,2,4$."
+      caption="Model B of Section 1 under final-answer matching, from equation (5.5), with the points of Table 2."
       views={[{ id: "acceptance", label: "False Acceptance" }, { id: "rejection", label: "False Rejection" }]}
       viewsLabel="Show the cost of false acceptance or of false rejection"
     >
@@ -366,9 +367,11 @@ function GraderCeiling() {
             <Dot left={x(point.eta)} top={100 - yCeiling(Number.parseFloat(point.observed))} tone="ink" className={kit.fade} tip={`η = ${point.eta}\nObserved score ${point.observed}`} />
             <Dot left={x(point.eta)} top={100 - yCeiling(Number.parseFloat(point.valid))} tone="accent" className={kit.fade} tip={`η = ${point.eta}\nTrue validity ${point.valid}`} />
           </span>)}
-          <Mark left={100} top={100 - yCeiling(limit)} anchor="bottom-right" tone="accent" className={kit.fade}>Limit 83.2%</Mark>
+          {/* Each line is named at its right end, where it settles. */}
+          <Mark left={100} top={100 - yCeiling(100)} anchor="top-right" className={kit.fade}>Observed score</Mark>
+          <Mark left={100} top={100 - yCeiling(limit)} anchor="bottom-right" className={kit.fade}><span className={results.accentText}>Limit 83.2%</span></Mark>
+          <Mark left={100} top={100 - yCeiling(limit)} anchor="top-right" className={kit.fade}><span className={results.accentText}>True validity</span></Mark>
         </Plot>
-        <Legend items={[{ label: "Observed score", tone: "ink", shape: "line" }, { label: "True validity", tone: "accent", shape: "line" }, { label: "The grader's positive predictive value", tone: "accent", shape: "dash" }]} />
       </Panel>
       <Panel view="rejection" active={false}>
         <Plot
@@ -399,29 +402,26 @@ function GraderCeiling() {
 /* Section 6, Table 5: the five plans for one budget of 5,000 cost units, as the
    precision of the estimate against the defects shipped. */
 const BUDGET_PLANS = [
-  { name: "Risk-first for audits and for reviews", sd: 0.657, shipped: "320.9", tone: "ink", shape: "square" },
-  { name: "Measurement rule of Section 3, then reviews by removable loss", sd: 0.515, shipped: "336.2", tone: "steel", shape: "triangle" },
-  { name: "Joint rule at the precision of uniform sampling", sd: 0.568, shipped: "209.9", tone: "accent" },
-  { name: "Joint rule at the precision of risk-first routing", sd: 0.657, shipped: "197.1", tone: "accent" },
-  { name: "Joint rule with no precision ceiling", sd: 1.035, shipped: "174.9", tone: "accent" },
+  { name: "Risk-first for audits and for reviews", label: "Risk-first", sd: 0.657, shipped: "320.9", tone: "ink", shape: "square", anchor: "left" },
+  { name: "Measurement rule of Section 3, then reviews by removable loss", label: "Measurement first", sd: 0.515, shipped: "336.2", tone: "steel", shape: "triangle", anchor: "above-right" },
+  { name: "Joint rule at the precision of uniform sampling", sd: 0.568, shipped: "209.9", tone: "accent", anchor: "above-left" },
+  { name: "Joint rule at the precision of risk-first routing", sd: 0.657, shipped: "197.1", tone: "accent", anchor: "top" },
+  { name: "Joint rule with no precision ceiling", sd: 1.035, shipped: "174.9", tone: "accent", anchor: "bottom" },
 ] as const;
 
 function BudgetFrontier() {
   const x = linear(0.45, 1.1);
   const y = linear(150, 350);
   const joint = BUDGET_PLANS.filter((plan) => plan.tone === "accent").map((plan) => [plan.sd, Number(plan.shipped)] as const);
-  const [legacy, , , matched] = BUDGET_PLANS;
-  const anchors: Record<string, "left" | "above-left" | "below-right" | "above-right"> = { "320.9": "left", "336.2": "left", "209.9": "above-left", "197.1": "below-right", "174.9": "above-left" };
+  const [legacy, , , matched, open] = BUDGET_PLANS;
+  // The joint rule is named once, on its line between the two ceilings it joins.
+  const along = 0.75;
+  const shippedAt = Number(matched.shipped) + ((along - matched.sd) / (open.sd - matched.sd)) * (Number(open.shipped) - Number(matched.shipped));
   return (
     <Figure
       id="budget-frontier"
       title="One budget of 5,000 cost units: precision against defects shipped"
-      caption="Each point is a plan of Table 5; lower and further left is better. At the precision of risk-first routing the joint rule ships 38.6% fewer defects. Choosing audits for measurement and spending the rest on repair gives the best estimate and ships the most defects. The joint plans trace the exchange rate: holding the estimate at 0.657 points costs 22 shipped defects relative to no ceiling, and tightening it to 0.568 costs 13 more."
-      legend={[
-        { label: "Risk-first for audits and reviews", tone: "ink", shape: "square" },
-        { label: "Audits for measurement, then reviews", tone: "steel", shape: "triangle" },
-        { label: "Joint rule at three precision ceilings", tone: "accent", shape: "dot" },
-      ]}
+      caption="Each point is a plan of Table 5; lower and further left is better. The joint rule's three plans, one per precision ceiling, trace the exchange rate."
     >
       <Plot
         label="Standard deviation of the estimate against defects shipped, for one budget of 5,000 cost units. Risk-first for audits and reviews: 0.657 points, 320.9 defects. Measurement rule, then reviews: 0.515 points, 336.2 defects. Joint rule: 0.568 points and 209.9 defects, 0.657 points and 197.1 defects, 1.035 points and 174.9 defects. At 0.657 points the joint rule ships 38.6% fewer defects than risk-first routing."
@@ -429,6 +429,7 @@ function BudgetFrontier() {
         y={y}
         xTicks={[0.5, 0.6, 0.7, 0.8, 0.9, 1].map((at) => ({ at, label: at.toFixed(1) }))}
         yTicks={[150, 200, 250, 300, 350].map((at) => ({ at, label: String(at) }))}
+        height="clamp(15.5rem, calc(60cqi + 1rem), 18.75rem)"
         yTitle="Defects shipped"
         xTitle="Standard deviation of the estimate, pp"
         curves={<>
@@ -438,9 +439,10 @@ function BudgetFrontier() {
       >
         {BUDGET_PLANS.map((plan) => <span key={plan.name}>
           <Dot left={x(plan.sd)} top={100 - y(Number(plan.shipped))} tone={plan.tone} shape={"shape" in plan ? plan.shape : undefined} className={kit.fade} tip={`${plan.name}\nStandard deviation ${plan.sd.toFixed(3)} points\n${plan.shipped} defects shipped`} />
-          <Mark left={x(plan.sd)} top={100 - y(Number(plan.shipped))} anchor={anchors[plan.shipped]} className={`${kit.fade} ${styles.numericAnnotation}`}>{plan.shipped}</Mark>
+          <Mark left={x(plan.sd)} top={100 - y(Number(plan.shipped))} anchor={plan.anchor} className={`${kit.fade} ${styles.numericAnnotation}`}>{"label" in plan ? `${plan.label} ${plan.shipped}` : <span className={results.accentText}>{plan.shipped}</span>}</Mark>
         </span>)}
-        <Mark left={x(legacy.sd)} top={100 - y((Number(legacy.shipped) + Number(matched.shipped)) / 2)} anchor="left" tone="accent" strong className={kit.fade}>38.6% fewer</Mark>
+        <Mark left={x(legacy.sd)} top={100 - y((Number(legacy.shipped) + Number(matched.shipped)) / 2)} anchor="left" strong className={kit.fade}><span className={results.accentText}>38.6% fewer</span></Mark>
+        <Mark left={x(along)} top={100 - y(shippedAt)} anchor="above-right" className={kit.fade}><span className={results.accentText}>Joint rule</span></Mark>
       </Plot>
     </Figure>
   );
