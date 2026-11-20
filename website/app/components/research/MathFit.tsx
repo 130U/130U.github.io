@@ -40,6 +40,23 @@ function fitDisplay(region: HTMLElement) {
   if (scale < MATH_FIT_FLOOR || overflow(region) > 0) naturalDisplay(region);
 }
 
+// A tabular display that scrolls keeps its row labels in view when they take no more than this
+// share of its room, as a research table does.
+const PIN_SHARE = 0.45;
+
+/** Marks whether a tabular display has scrolled past its start, where its pinned labels take an edge. */
+function markScrolled(region: HTMLElement) {
+  region.toggleAttribute("data-scrolled", region.scrollLeft > 0);
+}
+
+/** Pins a tabular display's row labels while it scrolls, when they leave room for the values. */
+function pinRowLabels(region: HTMLElement) {
+  const labels = region.querySelector<HTMLElement>("[data-display-table] > :first-child > :first-child");
+  const pinned = Boolean(labels) && overflow(region) > 0 && labels!.getBoundingClientRect().width <= region.clientWidth * PIN_SHARE;
+  region.toggleAttribute("data-pinned", pinned);
+  markScrolled(region);
+}
+
 const inlineAlign = new WeakMap<HTMLElement, string>();
 
 /** Sets an inline formula at its natural size. */
@@ -69,12 +86,16 @@ function fitInline(formula: HTMLElement) {
 /**
  * Fits the article's displayed equations and the inline formulas wide enough
  * to scroll, whenever their room changes. An equation or formula that would
- * need more than the floor allows scrolls in place at its natural size. Every
- * formula is complete without it.
+ * need more than the floor allows scrolls in place at its natural size; a
+ * tabular display that scrolls keeps its row labels in view. Every formula is
+ * complete without it.
  */
 export function MathFit() {
   useEffect(() => {
     const displays = [...document.querySelectorAll<HTMLElement>('[data-research-block-type="equation"]')];
+    const tables = displays.filter((region) => region.querySelector("[data-display-table]"));
+    const onScroll = (event: Event) => markScrolled(event.currentTarget as HTMLElement);
+    tables.forEach((region) => region.addEventListener("scroll", onScroll, { passive: true }));
     const inline = [...document.querySelectorAll<HTMLElement>('[data-research-formula="inline"][tabindex]')]
       .filter((formula) => formula.querySelector(":scope > span > svg"));
     // An inline formula's room is the block that holds its line.
@@ -91,6 +112,7 @@ export function MathFit() {
         if (widths.get(entry.target) === entry.contentRect.width) continue;
         widths.set(entry.target, entry.contentRect.width);
         if (displays.includes(entry.target as HTMLElement)) fitDisplay(entry.target as HTMLElement);
+        if (tables.includes(entry.target as HTMLElement)) pinRowLabels(entry.target as HTMLElement);
         holders.get(entry.target)?.forEach(fitInline);
       }
     });
@@ -103,6 +125,11 @@ export function MathFit() {
     return () => {
       active = false;
       observer.disconnect();
+      tables.forEach((region) => {
+        region.removeEventListener("scroll", onScroll);
+        region.removeAttribute("data-pinned");
+        region.removeAttribute("data-scrolled");
+      });
       displays.forEach(naturalDisplay);
       inline.forEach(naturalInline);
     };

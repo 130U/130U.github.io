@@ -268,24 +268,26 @@ proof's end mark, as amsthm sets a theorem and a proof off and LaTeX a run-in he
 the steps of an argument read as steps. A display stands in two and a half lines, and a
 subsection opens after three lines of margin, more white than a display. Mathematics has
 one measure. Every displayed equation is set at 1.15em of the reading size, and one line
-of displayed mathematics is one line of the manuscript and a jot (28px and 0.3em,
-1.8217em of the math size), the pitch LaTeX gives aligned rows: aligned, gathered, cases,
-arrays, and matrices, nested or not, set their rows that far apart, and a row break that
-asks for more space (`\\[2pt]`) adds it, as in TeX. Arrays draw their column and row
-rules. A display stands in two and a half lines of white space (70px), measured from its
-expression to the descenders of the line above and to the x-height of the line below, and
-the same between two displays: its block has 0.75rem of padding and margins of two lines
-less 0.5625rem above and less 1.0625rem below, since the reading face's line box keeps
-more empty room above its x-height than below its descenders (two and a half lines less
-2.375rem between two displays). Inline mathematics is set at the reading size, where the
-drawing's x-height and capitals fall within 2.5% of Source Serif 4's; the room its
-drawing keeps for accents lies outside the line, so a line of prose keeps its leading
-unless the expression itself reaches past it. An inline formula stands at the word
-space, as TeX sets mathematics in a line: nothing widens the space beside it, so a
-formula reads as a word of its sentence and a hyphen or a mark of punctuation closes
-against it (x₁-slope). Displays carry no sentence-ending punctuation; wide equations and
-tables scroll locally at their natural size with native touch, trackpad, scrollbar, and keyboard
-navigation. Nothing
+of displayed mathematics is one line of the manuscript and a jot (28px and 0.3em, 1.8217em
+of the math size), the pitch LaTeX gives aligned rows: aligned, gathered, cases, arrays,
+and matrices, nested or not, set their rows that far apart, and a row break that asks for
+more space (`\\[2pt]`) adds it, as in TeX. An array inside a formula draws its column and
+row rules, which are part of its notation; a display that is one array is a table of
+mathematics (see Research tables). A display stands in two and a half lines of white space
+(70px), measured from its expression to the descenders of the line above and to the
+x-height of the line below, and the same between two displays: its block has 0.75rem of
+padding and margins of two lines less 0.5625rem above and less 1.0625rem below, since the
+reading face's line box keeps more empty room above its x-height than below its descenders
+(two and a half lines less 2.375rem between two displays). Inline mathematics is set at
+the reading size, where the drawing's x-height and capitals fall within 2.5% of Source
+Serif 4's; the room its drawing keeps for accents lies outside the line, so a line of
+prose keeps its leading unless the expression itself reaches past it. An inline formula
+stands at the word space, as TeX sets mathematics in a line: nothing widens the space
+beside it, so a formula reads as a word of its sentence and a hyphen or a mark of
+punctuation closes against it (x₁-slope). Displays carry no sentence-ending punctuation,
+after an expression or after the last cell of a table of mathematics; wide equations and
+tables scroll locally at their natural size with native touch, trackpad, scrollbar, and
+keyboard navigation. Nothing
 scrolls for a near miss: a box shows a scrollbar, or a formula its fade, only when its
 content is genuinely wider or taller than its room. What overshoots by a little is
 fitted, within a bound: a formula is set smaller, to no less than nine tenths of
@@ -444,6 +446,26 @@ column closes up its columns, by as much as it needs and to no less than an em b
 them, if that makes it fit, and otherwise scrolls at its natural spacing: its row labels
 stay in view when they leave room for the values, and the right edge fades while more
 remains.
+
+A display that is one array, and nothing else but its equation number, is a table of
+mathematics and stays a display: it ends its sentence, keeps the display's size, white
+space, inset and number, and takes no frame, title or magnifier. It is set as a formal
+table, the form of booktabs and of the SIAM and ASA style manuals. Each cell's TeX is
+typeset in text style, as TeX sets an array's cells, in the alignment the manuscript
+gives its column. Columns stand an em apart, and where the manuscript rules between
+two columns the rule becomes a second em of space, so no vertical rule is drawn. The
+row that heads the columns, the row the manuscript rules off, or the first row of a
+table whose first column it rules off (its first cell then heads the row labels),
+stands over the firm rule, with booktabs' 0.4ex of space above the rule and 0.65ex
+below; a rule between later rows is a hairline, and one above the first row or below
+the last is left to the display's white space. Rows stand one line of mathematics
+apart, each as tall as an array row's strut (0.75em above the baseline, 0.25em below)
+or its tallest cell. The table keeps a drawing's gutter, so its ink starts on the
+manuscript inset, and it is centred on the math axis, as TeX centres an array, so its
+number stands where the paper's does. Its drawing is decorative: one assistive
+expression carries the whole display and its TeX. A table of mathematics that scrolls
+keeps its row labels in view when they take no more than 45% of its room, as a
+research table does, and the values pass beneath them.
 
 Every table carries a magnifier in the top-right corner of its frame, on the title's
 first line or on the header band; a table without a title that scrolls would carry its
