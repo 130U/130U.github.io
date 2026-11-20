@@ -68,8 +68,8 @@ Bold is weight 600.
 | Interface: navigation, contents, Read More, degree names, node titles | `--type-interface`, `--type-action` | 15px, Inter 400; 500 for actions and node titles | 1.5 |
 | Label: field labels, diagram and chart text, footer | `--type-label` | 13px, Inter 400 | 1.45 |
 | Index: section margin index, directory and contribution numbers | `--type-index` | 11px, Source Serif 4 400 | 1.5 |
-| Inline mathematics | | 1em of the surrounding text | Intrinsic |
-| Displayed mathematics | `--type-math` | 1.15em | Intrinsic |
+| Inline mathematics | | 1em of the surrounding text | The surrounding text's |
+| Displayed mathematics | `--type-math` | 1.15em | Rows 1.7348em apart |
 
 Roles use rem units and scale with the reader's text setting. Only titles and headings
 step down below 768px. Titles, headings, and item titles use `--title-tracking`,
@@ -119,7 +119,8 @@ detail pages, captions, posts, and article reading columns. Lines average about 
 characters on a 320px phone (26 inside a frame), 51 to 66 on a portrait iPad, and 72 in
 a full reading column; prose on the hanging axis holds 42 at 1200px and 52 from 1440px.
 Paragraphs wrap ragged-right with no forced breaks, and long unbroken strings wrap in an
-emergency. Text never runs onto a hairline that bounds it: `--frame-inset` (20 to 24px)
+emergency; a word still sets the narrowest width of the column, cell, or label that
+holds it, so no word splits because its box was narrowed. Text never runs onto a hairline that bounds it: `--frame-inset` (20 to 24px)
 separates the rail's links, a section's margin index, a framed list's numbers, the
 contents rail and right-aligned footer actions from their lines, and on tablets, where
 running text would otherwise reach the closing guide, `--reading-width` keeps the same
@@ -254,24 +255,57 @@ an equation, statement, table, or figure the page carries links to it, while a l
 cited from another paper stays plain.
 
 Paragraphs are 1.5rem apart. A new chapter begins after 5rem of space, a fine rule, and
-2rem of inset (4rem and 1.5rem on phones); subsections are 3rem apart. Equation blocks
-have symmetric 2.25rem margins and 0.75rem vertical padding, explicit row spacing, and
-no sentence-ending punctuation; wide equations and tables scroll locally at their
-natural size with native touch, trackpad, scrollbar, and keyboard navigation. Every
+2rem of inset (4rem and 1.5rem on phones); subsections are 3rem apart. Mathematics has
+one measure. Every displayed equation is set at 1.15em of the reading size, and one line
+of displayed mathematics is one reading line and a jot (26.4px and 0.3em, 1.7348em of
+the math size), the pitch LaTeX gives aligned rows: aligned, gathered, cases, arrays,
+and matrices, nested or not, set their rows that far apart, and a row break that asks
+for more space (`\\[2pt]`) adds it, as in TeX. Arrays draw their column and row rules.
+A display stands in 2.5 reading lines of white space (66px), measured from its expression to
+the descenders of the line above and to the x-height of the line below, and the same
+between two displays: its block has 0.75rem of padding and margins of 2.75rem above
+and 2.25rem below, since the reading face's line box keeps more empty room above its
+x-height than below its descenders (1.75rem between two displays). Inline mathematics
+is set at the reading size, where the drawing's x-height and capitals fall within 2.5%
+of Source Serif 4's; the room its drawing keeps for accents lies outside the line, so
+a line of prose keeps the reading leading unless the expression itself reaches past
+it. Displays carry no sentence-ending punctuation; wide equations and tables scroll
+locally at their natural size with native touch, trackpad, scrollbar, and keyboard
+navigation. Nothing
+scrolls for a near miss: a box shows a scrollbar, or a formula its fade, only when its
+content is genuinely wider or taller than its room. What overshoots by a little is
+fitted, within a bound: a formula is set smaller, to no less than nine tenths of
+its size; a table closes up its columns, to no less than an em between them; a figure
+comparison or panorama takes its room until that is a tenth short of its scroll width;
+a zoomed figure or table is set whole. The browser layout check fails any scroll box
+that overflows by less than 16px, or 8% of its room. Every
 displayed equation follows one pattern, whatever its length: its ink starts on the
 manuscript inset (`--manuscript-inset`, 16 to 24px from the column's edge), the axis it
 shares with table text, and its number stands at the column's right edge on the
 equation's baseline, in the reading face of the references that cite it, set clear of
-the expression. An equation wider than its column scrolls in place: its number keeps its
-position, and the expression fades beneath that edge while more remains, as a wide table
-fades at its right edge. A page can therefore be read with the paper beside it. Plain
-numbers, including scientific notation and percentages, use the prose face with native
+the expression. An equation that overshoots its column by a little is fitted: the gap
+before its number closes from 1.5em to 1em, and the expression is set smaller, to no
+less than nine tenths of its size, so a fitted display still stands above the reading
+size. An equation wider than that scrolls in place at its natural size: its number keeps
+its position, and the expression fades beneath that edge while more remains, as a wide
+table fades at its right edge. An inline formula a little wider than a phone's line is
+set smaller by the same bound. A page can therefore be read with the paper beside it.
+Plain numbers, including scientific notation and percentages, use the prose face with native
 superscripts while keeping accessible MathML and the original TeX. Mathematical SVG
 glyphs are artwork, not an additional prose font. An inline formula keeps the
 punctuation that closes against it and the bracket that opens onto it on its own line,
 set tight as the papers set them, unless the formula alone fills a phone's line; a
 number range such as 4400–4500 holds one line. "Proof." is italic in all three
 manuscripts, as in their PDFs.
+
+Lists and references are set as printed ones. A list hangs its markers in one column
+as wide as its widest number: each number stands whole with its period, right-aligned
+in tabular figures, so the text keeps the same gap from 9. as from 10.; a bullet stands
+at the column's start. A web address or DOI written out in a reference or note breaks
+only after "//" or its scheme's colon and before a slash, question mark, or other
+separator, never after its own hyphen, and its short ending stays with it. A long
+identifier breaks before an inner capital. A contents entry hangs its number, so a
+wrapped title continues under its first word.
 
 Legal articles keep the source title, subtitle, author, date, abstract, chapter
 numbering, paragraph order, citations, and acknowledgments. Chapters are H2 headings in
@@ -283,7 +317,9 @@ in Source Serif 4's own small capitals, with acronyms, initials and Roman numera
 height, as a printed law review does. Numbered footnote references open the note in a
 native dialog: centered on desktop, a bottom sheet with 44px controls on phones. Escape,
 the backdrop, and Close return focus to the cited passage; View in Footnotes focuses the
-full endnote. Full notes and two-way links work without JavaScript.
+full endnote. Full notes and two-way links work without JavaScript. Note numbers stand
+right-aligned in their column, each Return to Text link holds one line, and a page or
+section range written with a hyphen (373-81, §§ 3.6-3.7) holds one line.
 
 ### Blog
 
@@ -300,7 +336,8 @@ Now. The band deepens on hover and View Now turns blue. Section headings use the
 role at weight 400. An epigraph hangs off the dashed spine in italic serif with its
 source in the label role. Figures sit in a faint frame at the column's width with a
 caption in supporting ink; a panorama, at least two and a half times as wide as it is
-tall, keeps a legible height on phones and scrolls sideways.
+tall, keeps a legible height on phones: it takes the column's width down to 576px and,
+in a narrower column, is set 640px wide and scrolls sideways.
 
 ## Figures and diagrams
 
@@ -337,9 +374,11 @@ in a stretched SVG layer whose strokes keep their width, and schematics scale un
 so arrows and angles keep their shape. Labels sit in open space beside the marks they
 name and never cover a curve. Bar rows align on one grid; in a narrow figure each label
 and its value stand above a full-width bar, and the grid and reference rules run through
-the bar's own row only. A comparison wider than its column scrolls sideways and fades at
-its right edge, as a wide table does. A title stands alone on its line, with any view
-switch beneath it as one segmented control.
+the bar's own row only. A comparison has a scroll width below which its columns cannot
+reflow; it takes its column's width down to nine tenths of that, and in less room it is
+set at its scroll width, scrolls sideways and fades at its right edge, as a wide table
+does. Labels that hang beside its last marks keep their room inside it. A title stands
+alone on its line, with any view switch beneath it as one segmented control.
 
 A segmented switch swaps views, a readout follows the pointer on line charts, marks
 show exact values, the proof-obligation graph accepts a chosen failure, and each figure
@@ -355,6 +394,15 @@ caption gives them. Two bounds on one quantity are two solid curves in distinct 
 with the gap between them tinted, and a comparison across candidates stacks one panel
 for each on a shared axis.
 
+A key result stated as an interval or a bound is drawn on its own scale, after the
+sentence that states it, beside what it is measured against: an earlier bound, a quoted
+band, a tolerance, or a value it rules out. A proved interval is a line with end caps in
+the accent; an interval known by one end has a cap there and runs to an arrowhead at the
+end of the axis. Where an interval is too narrow for its axis, a strip beneath magnifies
+a window: the window is tinted on the rows above, its edges run down through the axis
+row, clear of its labels, and open onto the full width of the strip. Panels of one figure
+stack, each under a title in the interface face, parted by a dashed hairline.
+
 ### Research tables
 
 Research and legal tables share the figures' frame. Every table carries a manuscript
@@ -366,7 +414,8 @@ the accent tint. Rows enter once, top to bottom, as a table scrolls into view.
 
 A row of values holds one line. Only a column whose widest cell is a sentence wraps, at
 a 16rem minimum, and headings take at most two lines. A table wider than the reading
-column closes up its columns if that makes it fit, and otherwise scrolls: its row labels
+column closes up its columns, by as much as it needs and to no less than an em between
+them, if that makes it fit, and otherwise scrolls at its natural spacing: its row labels
 stay in view when they leave room for the values, and the right edge fades while more
 remains.
 
@@ -386,7 +435,10 @@ current width, the control takes a row of its own above the figure. Zoom enlarge
 figure on the same stage as one picture, laid out at its width in the article so every
 label keeps its place: whole within the window up to 1.75 times its size, or, when that
 would enlarge it by less than 1.15 times, at up to 1.5 times its size with the stage
-scrolling from its top. Readouts and view switches work on the stage; the caption stays
+scrolling from its top, unless the whole figure fits at nine tenths of that size, where
+it is set whole. A zoomed table a little taller than the window is set smaller, to no
+less than nine tenths of the reading size, and one a little wider closes up its columns,
+before either scrolls. Readouts and view switches work on the stage; the caption stays
 in the article. One stage serves every table and figure of a page.
 
 ## Clarinet hero

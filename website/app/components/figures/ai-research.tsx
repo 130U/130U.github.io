@@ -301,6 +301,148 @@ function RankingReversal() {
   );
 }
 
+/* Section 5: Model B (theta = 64%, alpha = 36%, beta = 0) as optimization against
+   final-answer matching strengthens, from (5.5), with the points of Table 2;
+   and the share of valid work left on a route the grader always rejects. */
+const MODEL_B = { theta: 0.64, alpha: 0.36 };
+const GRADER_POINTS = [
+  { eta: 0, observed: "77.0%", valid: "64.0%", rejected: "50%" },
+  { eta: 1, observed: "90.1%", valid: "74.9%", rejected: "26.9%" },
+  { eta: 2, observed: "96.1%", valid: "79.9%", rejected: "11.9%" },
+  { eta: 4, observed: "99.5%", valid: "82.7%", rejected: "1.8%" },
+] as const;
+
+function GraderCeiling() {
+  const { theta, alpha } = MODEL_B;
+  // (5.5) with beta = 0: the observed score and the true validity after reweighting by e^(eta V).
+  const accepted = theta + (1 - theta) * alpha;
+  const total = (eta: number) => accepted * Math.exp(eta) + (1 - theta) * (1 - alpha);
+  const observed = (eta: number) => (100 * accepted * Math.exp(eta)) / total(eta);
+  const valid = (eta: number) => (100 * theta * Math.exp(eta)) / total(eta);
+  const limit = (100 * theta) / accepted;
+  // Two valid routes start equally common; the grader rejects one, whose weight falls by e^(-eta).
+  const rejected = (eta: number) => 100 / (1 + Math.exp(eta));
+  const x = linear(0, 6);
+  const xTicks = [0, 1, 2, 3, 4, 5, 6].map((at) => ({ at, label: String(at), edge: at === 0 ? "start" as const : undefined }));
+  const yCeiling = linear(60, 100);
+  const yRoute = linear(0, 50);
+  const at = GRADER_POINTS.map((point) => x(point.eta));
+  const heading = GRADER_POINTS.map((point) => `η = ${point.eta}`);
+  return (
+    <Figure
+      id="grader-ceiling"
+      title="What a policy learns from its grader as optimization strengthens"
+      caption="Model B of Section 1 under final-answer matching, from equation (5.5), with the points of Table 2. False acceptance sets the ceiling: the observed score climbs toward 100% while true validity stops at the grader's positive predictive value, 83.2%. False rejection removes routes: a valid route the grader always rejects falls from 50% of valid work to 26.9%, 11.9% and 1.8% at $\eta=1,2,4$."
+      views={[{ id: "acceptance", label: "False Acceptance" }, { id: "rejection", label: "False Rejection" }]}
+      viewsLabel="Show the cost of false acceptance or of false rejection"
+    >
+      <Panel view="acceptance" active>
+        <Plot
+          label="Model B under final-answer matching. Observed score 77.0%, 90.1%, 96.1% and 99.5% at optimization strength 0, 1, 2 and 4, with limit 100%. True validity 64.0%, 74.9%, 79.9% and 82.7%, with limit 83.2%, the grader's positive predictive value."
+          x={x}
+          y={yCeiling}
+          xTicks={xTicks}
+          yTicks={[60, 70, 80, 90, 100].map((value) => ({ at: value, label: `${value}%` }))}
+          yTitle="Share of the policy's work"
+          xTitle="Optimization strength $\eta$"
+          crosshair={{
+            x: at,
+            heading,
+            series: [
+              { name: "Observed score", tone: "ink", y: GRADER_POINTS.map((point) => yCeiling(Number.parseFloat(point.observed))), value: GRADER_POINTS.map((point) => point.observed) },
+              { name: "True validity", tone: "accent", y: GRADER_POINTS.map((point) => yCeiling(Number.parseFloat(point.valid))), value: GRADER_POINTS.map((point) => point.valid) },
+            ],
+          }}
+          curves={<>
+            <path className={kit.accent} data-dash="" d={path([[0, limit], [6, limit]], x, yCeiling)} />
+            <path className={kit.ink} d={path(sample(0, 6, 121, observed), x, yCeiling)} />
+            <path className={kit.accent} d={path(sample(0, 6, 121, valid), x, yCeiling)} />
+          </>}
+        >
+          {GRADER_POINTS.map((point) => <span key={point.eta}>
+            <Dot left={x(point.eta)} top={100 - yCeiling(Number.parseFloat(point.observed))} tone="ink" className={kit.fade} tip={`η = ${point.eta}\nObserved score ${point.observed}`} />
+            <Dot left={x(point.eta)} top={100 - yCeiling(Number.parseFloat(point.valid))} tone="accent" className={kit.fade} tip={`η = ${point.eta}\nTrue validity ${point.valid}`} />
+          </span>)}
+          <Mark left={100} top={100 - yCeiling(limit)} anchor="bottom-right" tone="accent" className={kit.fade}>Limit 83.2%</Mark>
+        </Plot>
+        <Legend items={[{ label: "Observed score", tone: "ink", shape: "line" }, { label: "True validity", tone: "accent", shape: "line" }, { label: "The grader's positive predictive value", tone: "accent", shape: "dash" }]} />
+      </Panel>
+      <Panel view="rejection" active={false}>
+        <Plot
+          label="Two valid routes start equally common and the grader accepts only one. The other falls from 50% of valid work to 26.9%, 11.9% and 1.8% at optimization strength 1, 2 and 4."
+          x={x}
+          y={yRoute}
+          xTicks={xTicks}
+          yTicks={[0, 10, 20, 30, 40, 50].map((value) => ({ at: value, label: `${value}%`, solid: value === 0 }))}
+          yTitle="Valid work on the rejected route"
+          xTitle="Optimization strength $\eta$"
+          crosshair={{
+            x: at,
+            heading,
+            series: [{ name: "Rejected route", tone: "accent", y: GRADER_POINTS.map((point) => yRoute(Number.parseFloat(point.rejected))), value: GRADER_POINTS.map((point) => point.rejected) }],
+          }}
+          curves={<path className={kit.accent} d={path(sample(0, 6, 121, rejected), x, yRoute)} />}
+        >
+          {GRADER_POINTS.map((point) => <span key={point.eta}>
+            <Dot left={x(point.eta)} top={100 - yRoute(Number.parseFloat(point.rejected))} tone="accent" className={kit.fade} tip={`η = ${point.eta}\nRejected route ${point.rejected} of valid work`} />
+            {point.eta > 0 && <Mark left={x(point.eta)} top={100 - yRoute(Number.parseFloat(point.rejected))} anchor="above-right" className={`${kit.fade} ${styles.numericAnnotation}`} tag>{point.rejected}</Mark>}
+          </span>)}
+        </Plot>
+      </Panel>
+    </Figure>
+  );
+}
+
+/* Section 6, Table 5: the five plans for one budget of 5,000 cost units, as the
+   precision of the estimate against the defects shipped. */
+const BUDGET_PLANS = [
+  { name: "Risk-first for audits and for reviews", sd: 0.657, shipped: "320.9", tone: "ink", shape: "square" },
+  { name: "Measurement rule of Section 3, then reviews by removable loss", sd: 0.515, shipped: "336.2", tone: "steel", shape: "triangle" },
+  { name: "Joint rule at the precision of uniform sampling", sd: 0.568, shipped: "209.9", tone: "accent" },
+  { name: "Joint rule at the precision of risk-first routing", sd: 0.657, shipped: "197.1", tone: "accent" },
+  { name: "Joint rule with no precision ceiling", sd: 1.035, shipped: "174.9", tone: "accent" },
+] as const;
+
+function BudgetFrontier() {
+  const x = linear(0.45, 1.1);
+  const y = linear(150, 350);
+  const joint = BUDGET_PLANS.filter((plan) => plan.tone === "accent").map((plan) => [plan.sd, Number(plan.shipped)] as const);
+  const [legacy, , , matched] = BUDGET_PLANS;
+  const anchors: Record<string, "left" | "above-left" | "below-right" | "above-right"> = { "320.9": "left", "336.2": "left", "209.9": "above-left", "197.1": "below-right", "174.9": "above-left" };
+  return (
+    <Figure
+      id="budget-frontier"
+      title="One budget of 5,000 cost units: precision against defects shipped"
+      caption="Each point is a plan of Table 5; lower and further left is better. At the precision of risk-first routing the joint rule ships 38.6% fewer defects. Choosing audits for measurement and spending the rest on repair gives the best estimate and ships the most defects. The joint plans trace the exchange rate: holding the estimate at 0.657 points costs 22 shipped defects relative to no ceiling, and tightening it to 0.568 costs 13 more."
+      legend={[
+        { label: "Risk-first for audits and reviews", tone: "ink", shape: "square" },
+        { label: "Audits for measurement, then reviews", tone: "steel", shape: "triangle" },
+        { label: "Joint rule at three precision ceilings", tone: "accent", shape: "dot" },
+      ]}
+    >
+      <Plot
+        label="Standard deviation of the estimate against defects shipped, for one budget of 5,000 cost units. Risk-first for audits and reviews: 0.657 points, 320.9 defects. Measurement rule, then reviews: 0.515 points, 336.2 defects. Joint rule: 0.568 points and 209.9 defects, 0.657 points and 197.1 defects, 1.035 points and 174.9 defects. At 0.657 points the joint rule ships 38.6% fewer defects than risk-first routing."
+        x={x}
+        y={y}
+        xTicks={[0.5, 0.6, 0.7, 0.8, 0.9, 1].map((at) => ({ at, label: at.toFixed(1) }))}
+        yTicks={[150, 200, 250, 300, 350].map((at) => ({ at, label: String(at) }))}
+        yTitle="Defects shipped"
+        xTitle="Standard deviation of the estimate, pp"
+        curves={<>
+          <path className={kit.accent} data-dash="" d={path([[legacy.sd, Number(legacy.shipped)], [matched.sd, Number(matched.shipped)]], x, y)} />
+          <path className={kit.accent} d={path(joint, x, y)} />
+        </>}
+      >
+        {BUDGET_PLANS.map((plan) => <span key={plan.name}>
+          <Dot left={x(plan.sd)} top={100 - y(Number(plan.shipped))} tone={plan.tone} shape={"shape" in plan ? plan.shape : undefined} className={kit.fade} tip={`${plan.name}\nStandard deviation ${plan.sd.toFixed(3)} points\n${plan.shipped} defects shipped`} />
+          <Mark left={x(plan.sd)} top={100 - y(Number(plan.shipped))} anchor={anchors[plan.shipped]} className={`${kit.fade} ${styles.numericAnnotation}`}>{plan.shipped}</Mark>
+        </span>)}
+        <Mark left={x(legacy.sd)} top={100 - y((Number(legacy.shipped) + Number(matched.shipped)) / 2)} anchor="left" tone="accent" strong className={kit.fade}>38.6% fewer</Mark>
+      </Plot>
+    </Figure>
+  );
+}
+
 const DAG = {
   nodes: [
     { id: "v1", label: "$v_1$", left: 27, top: 25, descendants: ["v3", "v5", "C"] },
@@ -563,10 +705,12 @@ export const aiResearchFigures = {
   "audit-policies": AuditPolicies,
   "residual-moment": ResidualMoment,
   "remediation-exchange": RemediationExchange,
+  "budget-frontier": BudgetFrontier,
   "rejection-cost": RejectionCost,
   "label-flip": LabelFlip,
   "bridge-leakage": BridgeLeakage,
   "ranking-reversal": RankingReversal,
+  "grader-ceiling": GraderCeiling,
   "proof-obligations": ProofObligations,
   "protocol-outcomes": ProtocolOutcomes,
   "coverage-collapse": CoverageCollapse,

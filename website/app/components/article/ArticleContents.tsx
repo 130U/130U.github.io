@@ -5,6 +5,16 @@ import styles from "../legal/LegalPaperPage.module.css";
 
 export type ArticleContentsItem = { id: string; text: string; level?: number };
 
+// A chapter or section number at the start of an entry: "2.", "2.1", "IV.", "A.".
+const ENTRY_NUMBER = /^((?:[IVXLC]+|[A-Z])\.|\d+(?:\.\d+)+\.?|\d+\.)\s+/u;
+
+/** An entry's number hangs: a title that wraps continues under its first word. */
+function EntryLabel({ text }: { text: string }) {
+  const number = ENTRY_NUMBER.exec(text);
+  if (!number) return text;
+  return <><span>{number[1]}</span> <span>{text.slice(number[0].length)}</span></>;
+}
+
 export function ArticleContents({ items }: { items: ArticleContentsItem[] }) {
   const sidebar = useRef<HTMLElement>(null);
   const details = useRef<HTMLDetailsElement>(null);
@@ -85,7 +95,7 @@ export function ArticleContents({ items }: { items: ArticleContentsItem[] }) {
           <ol>
             {items.map(({ id, text, level }) => (
               <li key={id} className={(level ?? 1) > 1 ? styles.subsectionLink : undefined} data-open-chapter={(level ?? 1) > 1 && chapters.get(id) === activeChapter ? "" : undefined}>
-                <a href={`#${id}`} aria-current={active === id ? "location" : undefined}>{text}</a>
+                <a href={`#${id}`} aria-current={active === id ? "location" : undefined} data-numbered={ENTRY_NUMBER.test(text) ? "" : undefined}><EntryLabel text={text} /></a>
               </li>
             ))}
           </ol>

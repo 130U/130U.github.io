@@ -6,14 +6,23 @@
   line-height: 0;
 }
 
+/* An inline formula takes the room of its expression in the line: its canvas
+   gutters lie in negative block margins, so a line of prose keeps the reading
+   leading unless the expression itself reaches past it. */
 .inline {
   display: inline-block;
+  margin-block: calc(-0.125em - var(--math-gutter));
   /* Include the two negative 0.25em margins supplied by ResearchMath. */
   max-width: calc(100% + 0.5em);
   overflow-x: auto;
   overflow-y: hidden;
   scrollbar-width: none;
   font-size: 1em;
+}
+
+/* A formula a little wider than its line is set slightly smaller (MathFit). */
+.inline > :first-child {
+  font-size: calc(var(--formula-fit, 1) * 1em);
 }
 
 .number {
@@ -77,18 +86,23 @@
    framed table (the inset, inside the frame's 1px edge). It closes on an edge
    at the column's right side, which holds the equation's number on the
    equation's baseline, in the prose face of the references that cite it, set
-   clear of the expression. An equation wider than its column scrolls in place:
-   the edge keeps its position, and the expression fades out over an em beneath
-   it, half an em short of the number, while more remains. */
+   clear of the expression. An equation that overshoots its column by a little
+   is fitted (MathFit): the gap before the number closes to an em, and the
+   expression is set smaller, never below nine tenths of its size, its gutter
+   scaling with it so the ink keeps its axis. An equation wider than that
+   scrolls in place at its natural size: the edge keeps its position, and the
+   expression fades out over an em beneath it, half an em short of the number,
+   while more remains. */
 .display {
   display: flex;
   align-items: baseline;
   min-width: max-content;
-  padding-inline-start: calc(var(--manuscript-inset) + 1px - var(--math-gutter));
+  padding-inline-start: calc(var(--manuscript-inset) + 1px - var(--math-gutter) * var(--equation-fit, 1));
 }
 
 .expression {
   flex: none;
+  font-size: calc(var(--equation-fit, 1) * 1em);
 }
 
 .equationEdge {
@@ -104,6 +118,10 @@
   white-space: nowrap;
 }
 
+.equation[data-fit] .equationEdge {
+  padding-inline-start: 1em;
+}
+
 .assistive {
   position: absolute;
   width: 1px;
@@ -116,17 +134,31 @@
   border: 0;
 }
 
+/* A display stands in two and a half reading lines of white space (66px at the
+   reading size), measured from its expression to the descenders of the line
+   above and to the x-height of the line below. The reading face's line box holds more
+   empty room above its x-height than below its descenders, so the margin above
+   is half a rem larger than the one below. Consecutive displays keep the same
+   white space between them. */
 .equation {
   container-type: inline-size;
   min-width: 0;
   max-width: 100%;
   padding-block: 0.75rem;
-  margin-block: 2.25rem;
+  margin-block: 2.75rem 2.25rem;
   overflow-x: auto;
   overflow-y: hidden;
   overscroll-behavior-x: contain;
   scrollbar-width: thin;
   scrollbar-color: var(--rule-strong) transparent;
+}
+
+.equation:has(+ .equation) {
+  margin-block-end: 1.75rem;
+}
+
+.equation + .equation {
+  margin-block-start: 1.75rem;
 }
 
 .inline:focus-visible,
@@ -141,6 +173,6 @@
 @media print, (forced-colors: active) {
   .equationEdge {
     position: static;
-    border-image: none;
+    border-image-source: none;
   }
 }

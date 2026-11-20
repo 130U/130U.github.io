@@ -9,6 +9,7 @@ const OUT = path.join(ROOT, "out");
 const ARTIFACTS = path.resolve(process.env.LAYOUT_ARTIFACT_DIR ?? path.join(ROOT, "test-results/figure-layout"));
 const ORIGIN = "http://127.0.0.1:8127";
 const WIDTHS = [320, 390, 768, 1024, 1440, 1920];
+const TEXT_WIDTHS = [320, 390, 768, 1024, 1280, 1440, 1920];
 const filter = process.argv.find(arg => arg.startsWith("--figure="))?.slice("--figure=".length);
 const MIME = { ".html": "text/html", ".css": "text/css", ".js": "text/javascript", ".json": "application/json", ".txt": "text/plain", ".svg": "image/svg+xml", ".woff2": "font/woff2", ".woff": "font/woff", ".png": "image/png", ".jpg": "image/jpeg", ".jpeg": "image/jpeg", ".webp": "image/webp", ".ico": "image/x-icon" };
 
@@ -184,6 +185,24 @@ function inspectFigure(figure) {
       if (!svg || !ink || rect(svg).width < fontSize / 4 || rect(svg).width > fontSize * 3 || rect(ink).width < 1 || rect(ink).height < 1) issues.push({ kind: "share-axis-not-rendered", text: axis.querySelector('annotation')?.textContent, svg: svg && rect(svg), ink: ink && rect(ink) });
     }
   }
+  // A magnified strip: its window runs down through the axis row above the
+  // strip, so no tick label of that axis may sit in the window, and the
+  // hairlines that join the two must reach the strip's full width.
+  // Its parts fade in as the figure enters, so they are found by layout alone.
+  const laidOut = element => !element.closest('[hidden]');
+  for (const link of [...frame.querySelectorAll('[data-lens-link]')].filter(laidOut)) {
+    const windows = [...frame.querySelectorAll('[data-lens-window]')].filter(laidOut).map(rect);
+    const axis = link.previousElementSibling?.querySelector('[class$="_axis"]');
+    if (!windows.length || !axis) { issues.push({ kind: "missing-lens-geometry" }); continue; }
+    const [left, right] = [Math.min(...windows.map(box => box.left)), Math.max(...windows.map(box => box.right))];
+    for (const tick of [...axis.querySelectorAll('[class*="_tickX"]')].filter(shown)) {
+      const box = rect(tick);
+      if (box.left < right + 2 && box.right > left - 2) issues.push({ kind: "tick-label-in-lens-window", text: tick.textContent.trim(), box, window: { left, right } });
+    }
+    const strip = rect(link);
+    const below = link.nextElementSibling ? rect(link.nextElementSibling) : null;
+    if (!below || Math.abs(strip.left - below.left) > 1 || Math.abs(strip.right - below.right) > 1) issues.push({ kind: "lens-link-misaligned", strip, below });
+  }
   if (figure.dataset.figure === "heston-candidates") {
     const bars = frame.querySelector('[class*="_bars"]');
     const axis = bars?.querySelector('[class$="_axis"]');
@@ -253,11 +272,17 @@ function inspectManuscript() {
     region.scrollLeft = 0;
   }
   const starts = new Map();
+  const edges = [];
   for (const equation of document.querySelectorAll('[data-research-block-type="equation"]')) {
     const drawing = equation.querySelector("svg[data-research-svg]");
     const column = equation.getBoundingClientRect();
-    const start = Math.round((drawing.getBoundingClientRect().left - column.left) * 2) / 2;
-    starts.set(start, (starts.get(start) ?? 0) + 1);
+    // The ink starts past the drawing's transparent gutter, 0.375em at the drawing's own
+    // size, which a fitted equation sets smaller.
+    const gutter = 0.375 * parseFloat(getComputedStyle(drawing).fontSize);
+    const start = drawing.getBoundingClientRect().left + gutter - column.left;
+    const axis = Math.round(start * 2) / 2;
+    starts.set(axis, (starts.get(axis) ?? 0) + 1);
+    edges.push(start);
     const number = equation.querySelector("[data-equation-number]");
     if (!number) continue;
     const text = document.createRange();
@@ -268,8 +293,270 @@ function inspectManuscript() {
     if (drawing.getBoundingClientRect().right > text.getBoundingClientRect().left) issues.push({ kind: "equation-number-overlaps-expression", number: number.textContent });
     equation.scrollLeft = 0;
   }
-  if (starts.size > 1) issues.push({ kind: "equations-start-on-different-axes", starts: [...starts] });
+  if (edges.length && Math.max(...edges) - Math.min(...edges) > 0.5) issues.push({ kind: "equations-start-on-different-axes", starts: [...starts] });
+
+  // Mathematics keeps the page's rhythm. A line of prose is taller than the
+  // reading leading only where an inline expression itself reaches past the
+  // line; every display stands in the same white space, from its expression to
+  // the descenders of the line above, to the x-height of the line below, and to
+  // a neighboring display.
+  const prose = document.querySelector('[data-research-block-type="paragraph"]');
+  if (!prose) return issues;
+  const style = getComputedStyle(prose);
+  const size = parseFloat(style.fontSize);
+  const leading = parseFloat(style.lineHeight);
+  const face = document.createElement("canvas").getContext("2d");
+  face.font = `1000px ${style.fontFamily}`;
+  const metric = (glyph, name) => face.measureText(glyph)[name] / 1000 * size;
+  const ascent = metric("x", "fontBoundingBoxAscent");
+  const descent = metric("x", "fontBoundingBoxDescent");
+  const strutAbove = ascent + (leading - ascent - descent) / 2;
+  const strutBelow = descent + (leading - ascent - descent) / 2;
+  const xHeight = metric("x", "actualBoundingBoxAscent");
+  const descender = metric("p", "actualBoundingBoxDescent");
+  const baselines = element => {
+    const found = [];
+    const walker = document.createTreeWalker(element, NodeFilter.SHOW_TEXT);
+    for (let node = walker.nextNode(); node; node = walker.nextNode()) {
+      if (!node.data.trim() || node.parentElement.closest("math, svg, [data-research-formula]")) continue;
+      if (Math.abs(parseFloat(getComputedStyle(node.parentElement).fontSize) - size) > 0.5) continue;
+      const range = document.createRange();
+      range.selectNodeContents(node);
+      for (const box of range.getClientRects()) if (box.width > 0) found.push(box.bottom - descent);
+    }
+    return found.sort((a, b) => a - b).reduce((lines, baseline) => (!lines.length || baseline - lines.at(-1) > 3 ? [...lines, baseline] : lines), []);
+  };
+  // A drawing's box less the gutters its canvas keeps around the expression.
+  const expression = formula => {
+    const box = formula.querySelector("svg[data-research-svg]").getBoundingClientRect();
+    const gutter = parseFloat(getComputedStyle(formula).getPropertyValue("--math-gutter")) * parseFloat(getComputedStyle(formula).fontSize);
+    return { top: box.top + gutter, bottom: box.bottom - gutter };
+  };
+  for (const paragraph of document.querySelectorAll('p[data-research-block-type="paragraph"]')) {
+    const formulas = [...paragraph.querySelectorAll('[data-research-formula="inline"]')].filter(formula => formula.querySelector("svg"));
+    if (!formulas.length) continue;
+    const lines = baselines(paragraph);
+    const boxes = formulas.map(expression);
+    for (let index = 1; index < lines.length; index += 1) {
+      const [above, below] = [lines[index - 1], lines[index]];
+      if (below - above <= leading + 0.5) continue;
+      const reaches = boxes.some(box => (box.bottom > above + strutBelow + 0.5 && box.top < below) || (box.top < below - strutAbove - 0.5 && box.bottom > above));
+      if (!reaches) issues.push({ kind: "prose-line-stretched-by-formula-canvas", block: paragraph.dataset.researchBlock, pitch: below - above, leading });
+    }
+  }
+  // Text is measured from its line boxes: the descenders of a line sit above its
+  // box's lower edge by the strut's depth less the descender, and its x-height
+  // below the upper edge by the strut's height less the x-height. A line that a
+  // tall inline expression enlarges keeps the same white space from its edge.
+  const whites = [];
+  for (const block of document.querySelectorAll('[data-research-block-type="equation"]')) {
+    const own = expression(block.querySelector('[data-research-formula="display"]'));
+    const previous = block.previousElementSibling;
+    const next = block.nextElementSibling;
+    if (previous?.matches('p[data-research-block-type="paragraph"]')) {
+      whites.push({ side: "above", block: block.dataset.researchBlock, white: own.top - (previous.getBoundingClientRect().bottom - strutBelow + descender) });
+    } else if (previous?.matches('[data-research-block-type="equation"]')) {
+      whites.push({ side: "between", block: block.dataset.researchBlock, white: own.top - expression(previous.querySelector('[data-research-formula="display"]')).bottom });
+    }
+    if (next?.matches('p[data-research-block-type="paragraph"]')) {
+      whites.push({ side: "below", block: block.dataset.researchBlock, white: next.getBoundingClientRect().top + strutAbove - xHeight - own.bottom });
+    }
+  }
+  if (whites.length) {
+    const values = whites.map(entry => entry.white);
+    if (Math.max(...values) - Math.min(...values) > 2) {
+      const typical = values.sort((a, b) => a - b)[Math.floor(values.length / 2)];
+      issues.push({ kind: "display-white-space-uneven", typical, outliers: whites.filter(entry => Math.abs(entry.white - typical) > 1) });
+    }
+  }
   return issues;
+}
+
+// Text that breaks or aligns like a mistake, on every page at every width:
+// a list marker whose number and period part, that is wider than its column or
+// that touches its text; numbers of one list that do not share their right edge
+// and their gap to the text; punctuation pushed to the next line by the formula,
+// link or marker it closes against; a word, a number, a number range or a part
+// of a written-out address split mid-token; a contents entry whose wrapped title
+// returns under its number; and a Return to Text or footer link that wraps.
+function inspectText() {
+  const issues = [];
+  const visibility = new Map();
+  const shown = element => {
+    if (visibility.has(element)) return visibility.get(element);
+    let result = element.checkVisibility({ checkVisibilityCSS: true }) && !element.closest("math, [hidden], script, style, noscript, template");
+    for (let node = element; result && node && node !== document.body; node = node.parentElement) {
+      const style = getComputedStyle(node);
+      if (style.clipPath === "inset(50%)" || /^rect\(0px,? 0px,? 0px,? 0px\)$/u.test(style.clip)) result = false;
+    }
+    visibility.set(element, result);
+    return result;
+  };
+  const sameLine = (a, b) => Math.min(a.bottom, b.bottom) - Math.max(a.top, b.top) > 0.3 * Math.min(a.height, b.height);
+  const lineCount = rects => rects.reduce((lines, rect) => lines.some(line => sameLine(line, rect)) ? lines : [...lines, rect], []).length;
+  const textRects = (node, start, end) => {
+    const range = document.createRange();
+    range.setStart(node, start);
+    range.setEnd(node, end);
+    return [...range.getClientRects()].filter(rect => rect.width > 0.5);
+  };
+  const contentRects = element => {
+    const range = document.createRange();
+    range.selectNodeContents(element);
+    return [...range.getClientRects()].filter(rect => rect.width > 0.5);
+  };
+  const where = element => {
+    const owner = element.closest("[id]");
+    return `${element.tagName.toLowerCase()}${owner ? ` in #${owner.id}` : ""}`;
+  };
+  // The first visible glyph or formula of an element after a given descendant.
+  const firstInk = (root, skip) => {
+    const walker = document.createTreeWalker(root, NodeFilter.SHOW_ELEMENT | NodeFilter.SHOW_TEXT);
+    for (let node = walker.nextNode(); node; node = walker.nextNode()) {
+      if (skip?.contains(node)) continue;
+      if (node.nodeType === Node.ELEMENT_NODE) {
+        if (node.matches('[data-research-formula="inline"]') && shown(node)) return node.getBoundingClientRect();
+        continue;
+      }
+      if (node.parentElement.closest('[data-research-formula="inline"]') || !shown(node.parentElement)) continue;
+      const offset = node.data.search(/\S/u);
+      if (offset >= 0) return textRects(node, offset, offset + 1)[0];
+    }
+    return null;
+  };
+
+  const lists = new Map();
+  const markers = [
+    ...[...document.querySelectorAll("[data-list-item]")].map(item => ({ item, marker: item.firstElementChild })),
+    ...[...document.querySelectorAll('[role="doc-endnotes"] li, [role="doc-endnotes"] #fn-author')].map(item => ({ item, marker: item.querySelector(':scope > span[aria-hidden="true"]') })),
+  ];
+  for (const { item, marker } of markers) {
+    if (!marker || !shown(item)) continue;
+    const ink = contentRects(marker);
+    const text = firstInk(item, marker);
+    if (!ink.length || !text) continue;
+    const label = marker.textContent.trim();
+    const left = Math.min(...ink.map(rect => rect.left));
+    const right = Math.max(...ink.map(rect => rect.right));
+    const column = item.getBoundingClientRect().left;
+    if (lineCount(ink) > 1) issues.push({ kind: "list-marker-split", marker: label, item: where(item) });
+    if (left < column - 0.5) issues.push({ kind: "list-marker-wider-than-column", marker: label, overhang: +(column - left).toFixed(2), item: where(item) });
+    if (text.left - right < 2) issues.push({ kind: "list-marker-touches-text", marker: label, gap: +(text.left - right).toFixed(2), item: where(item) });
+    if (!/^\d+\.?$/u.test(label)) continue;
+    if (!lists.has(item.parentElement)) lists.set(item.parentElement, []);
+    lists.get(item.parentElement).push({ label, right, gap: text.left - right, start: text.left });
+  }
+  for (const entries of lists.values()) {
+    // Items whose text starts on one edge form one list.
+    const groups = [];
+    for (const entry of entries) {
+      const group = groups.find(candidate => Math.abs(candidate[0].start - entry.start) < 0.75);
+      if (group) group.push(entry); else groups.push([entry]);
+    }
+    for (const group of groups.filter(candidate => candidate.length > 1)) {
+      const spread = values => Math.max(...values) - Math.min(...values);
+      if (spread(group.map(entry => entry.right)) > 0.75) issues.push({ kind: "list-numbers-not-right-aligned", markers: group.map(entry => `${entry.label}@${entry.right.toFixed(1)}`).join(" ") });
+      if (spread(group.map(entry => entry.gap)) > 0.75) issues.push({ kind: "list-marker-gaps-differ", markers: group.map(entry => `${entry.label}:${entry.gap.toFixed(1)}`).join(" ") });
+    }
+  }
+
+  // Punctuation closing against a formula, a link or a marker shares its line.
+  const BLOCK = "p, li, td, th, dd, dt, figcaption, h1, h2, h3, h4, blockquote";
+  for (const element of document.querySelectorAll('[data-research-formula="inline"], a, [data-list-item] > :first-child')) {
+    if (!shown(element) || element.parentElement.closest("[data-research-formula]")) continue;
+    const block = element.parentElement.closest(BLOCK);
+    if (!block) continue;
+    const before = (element.matches('[data-research-formula="inline"]') ? [element.getBoundingClientRect()] : contentRects(element)).at(-1);
+    const walker = document.createTreeWalker(block, NodeFilter.SHOW_TEXT);
+    walker.currentNode = element;
+    let next = walker.nextNode();
+    while (next && element.contains(next)) next = walker.nextNode();
+    if (!before || !next || !shown(next.parentElement) || next.parentElement.closest("math") || !/^[,.;:!?)\]}’”%…]/u.test(next.data)) continue;
+    const after = textRects(next, 0, 1)[0];
+    if (after && !sameLine(before, after) && after.top > before.top) issues.push({ kind: "punctuation-starts-line", mark: next.data[0], after: where(element) });
+  }
+
+  // Words, numbers, number ranges and address parts hold one line.
+  const TOKEN = /[\p{L}\p{N}][\p{L}\p{N}\p{M}'’]*(?:[.,][\p{L}\p{N}]+)*%?|\d[\d.,]*[-–]\d[\d.,]*/gu;
+  const walker = document.createTreeWalker(document.body, NodeFilter.SHOW_TEXT);
+  for (let node = walker.nextNode(); node; node = walker.nextNode()) {
+    if (!node.data.trim() || !shown(node.parentElement)) continue;
+    for (const match of node.data.matchAll(TOKEN)) {
+      if (match[0].length < 2) continue;
+      if (lineCount(textRects(node, match.index, match.index + match[0].length)) > 1) issues.push({ kind: "token-split", text: match[0], in: where(node.parentElement) });
+    }
+  }
+
+  // A numbered contents entry hangs its number.
+  for (const link of document.querySelectorAll('nav[aria-label="Article contents"] a[data-numbered]')) {
+    if (!shown(link)) continue;
+    const [number, title] = link.children;
+    const titleLines = contentRects(title);
+    if (lineCount(titleLines) < 2) continue;
+    const starts = titleLines.map(rect => rect.left);
+    if (Math.max(...starts) - Math.min(...starts) > 0.75 || Math.max(...contentRects(number).map(rect => rect.right)) > Math.min(...starts)) issues.push({ kind: "contents-number-not-hanging", entry: link.textContent.trim() });
+  }
+
+  // Return links hold one line.
+  for (const link of document.querySelectorAll('[role="doc-backlink"], footer a')) {
+    if (shown(link) && lineCount(contentRects(link)) > 1) issues.push({ kind: "return-link-wraps", text: link.textContent.trim() });
+  }
+
+  // Whole words set the narrowest width of their tracks, so a page never scrolls sideways.
+  if (document.documentElement.scrollWidth > innerWidth + 1) issues.push({ kind: "page-scrolls-sideways", scrollWidth: document.documentElement.scrollWidth });
+  return issues;
+}
+
+// A box shows a scrollbar, or an inline formula's fade, only when its content is
+// genuinely wider or taller than its room. The components fit anything that
+// overshoots by a little: MathFit sets an equation or formula slightly smaller,
+// ZoomStage closes up a table's columns and sets a staged figure whole, and each
+// figure comparison and panorama takes its room until that is a tenth short. So
+// an overflow, where there is one, is at least a near-miss threshold: 16px, or
+// 8% of the room when that is less. Classic scrollbars take room here, as they
+// do on Windows, so a scrollbar that forces the other axis to scroll is caught.
+const SCROLL_WIDTHS = [[320, 640], [390, 844], [768, 1024], [1024, 768], [1280, 800], [1440, 900], [1920, 1080]];
+const NEAR_MISS_PX = 16;
+const NEAR_MISS_SHARE = 0.08;
+
+function inspectScrollers({ scope, nearMissPx, nearMissShare }) {
+  const root = scope ? document.querySelector(scope) : document.body;
+  const owner = element => {
+    const figure = element.closest("[data-figure]");
+    if (figure) return `figure ${figure.dataset.figure}`;
+    const table = element.closest("[data-table-frame]");
+    if (table) return `table ${(table.querySelector("[data-table-title]")?.textContent ?? "untitled").trim().slice(0, 60)}`;
+    const equation = element.closest('[data-research-block-type="equation"]');
+    if (equation) return `equation ${equation.querySelector("[data-equation-number]")?.textContent || equation.id}`;
+    if (element.matches("[data-research-formula]")) return `formula ${element.querySelector("annotation")?.textContent.slice(0, 80)}`;
+    return [element.tagName.toLowerCase(), ...[...element.classList].map(name => name.replace(/^[\w-]{6}_/u, ""))].join(".");
+  };
+  const issues = [];
+  for (const element of scope ? [root, ...root.querySelectorAll("*")] : root.querySelectorAll("*")) {
+    const style = getComputedStyle(element);
+    const axes = [
+      ["x", style.overflowX, element.scrollWidth - element.clientWidth, element.clientWidth],
+      ["y", style.overflowY, element.scrollHeight - element.clientHeight, element.clientHeight],
+    ].filter(([, mode]) => /auto|scroll/u.test(mode));
+    if (!axes.length || !element.checkVisibility({ checkVisibilityCSS: true }) || !element.getClientRects().length) continue;
+    // A box that shows neither a scrollbar nor a fade, such as the contents rail, shows no overflow.
+    if (style.scrollbarWidth === "none" && !element.matches("[data-research-formula]")) continue;
+    for (const [axis, , overflow, room] of axes) {
+      if (overflow > 0 && overflow < Math.min(nearMissPx, nearMissShare * room)) issues.push({ kind: "scroll-near-miss", axis, overflow, room, container: owner(element) });
+    }
+    // A figure's comparison scrolls sideways only.
+    if (element.matches("[data-figure-scroll]") && element.scrollHeight > element.clientHeight) issues.push({ kind: "figure-scroll-vertical-overflow", overflow: element.scrollHeight - element.clientHeight, container: owner(element) });
+  }
+  return issues;
+}
+
+async function discoverPages(directory = OUT) {
+  const routes = [];
+  for (const entry of await readdir(directory, { withFileTypes: true })) {
+    if (entry.isDirectory() && !["_next", "assets", "architecture", "_not-found", "404"].includes(entry.name)) routes.push(...await discoverPages(path.join(directory, entry.name)));
+    if (entry.isFile() && entry.name === "index.html") routes.push("/" + path.relative(OUT, directory).split(path.sep).filter(Boolean).join("/") + (directory === OUT ? "" : "/"));
+  }
+  return routes;
 }
 
 async function discoverManuscripts(directory = OUT) {
@@ -294,6 +581,8 @@ const home = [];
 const noScript = [];
 const longNumbers = [];
 const manuscripts = [];
+const texts = [];
+const scrolls = [];
 const missing = new Set();
 try {
   for (const width of WIDTHS) {
@@ -364,6 +653,20 @@ try {
           await page.goto(ORIGIN + route, { waitUntil: "networkidle" });
           await page.evaluate(() => document.fonts.ready);
           manuscripts.push({ route, width, issues: await page.evaluate(inspectManuscript) });
+        }
+      } finally { await context.close(); }
+    }
+    const pageRoutes = await discoverPages();
+    assert.ok(pageRoutes.length >= 28, `Expected at least 28 pages; found ${pageRoutes.length}.`);
+    for (const width of TEXT_WIDTHS) {
+      const context = await browser.newContext({ viewport: { width, height: 1100 }, reducedMotion: "reduce", serviceWorkers: "block" });
+      await serveExport(context, missing);
+      try {
+        const page = await context.newPage();
+        for (const route of pageRoutes) {
+          await page.goto(ORIGIN + route, { waitUntil: "networkidle" });
+          await page.evaluate(() => document.fonts.ready);
+          texts.push({ route, width, issues: await page.evaluate(inspectText) });
         }
       } finally { await context.close(); }
     }
@@ -442,15 +745,51 @@ try {
         noScript.push({ route, links: count, hidden, issues: count > 0 && hidden.length === 0 ? [] : ["article-contents-hidden-without-javascript"] });
       } finally { await context.close(); }
     }
+    const scrollRoutes = await discoverPages();
+    assert.ok(scrollRoutes.length >= 25, `Expected at least 25 pages; found ${scrollRoutes.length}.`);
+    const scrollBrowser = await chromium.launch({ headless: true, ignoreDefaultArgs: ["--hide-scrollbars"], ...(process.env.PLAYWRIGHT_EXECUTABLE_PATH ? { executablePath: process.env.PLAYWRIGHT_EXECUTABLE_PATH } : {}) });
+    const rule = { nearMissPx: NEAR_MISS_PX, nearMissShare: NEAR_MISS_SHARE };
+    try {
+      const jobs = SCROLL_WIDTHS.flatMap(size => scrollRoutes.map(route => [size, route]));
+      await Promise.all(Array.from({ length: 3 }, async () => {
+        for (let job = jobs.shift(); job; job = jobs.shift()) {
+          const [[width, height], route] = job;
+          const context = await scrollBrowser.newContext({ viewport: { width, height }, reducedMotion: "reduce", serviceWorkers: "block" });
+          await serveExport(context, missing);
+          try {
+            const page = await context.newPage();
+            await page.goto(ORIGIN + route, { waitUntil: "networkidle" });
+            await page.evaluate(() => document.fonts.ready);
+            // The zoom stage shows its controls in the same pass as the fitters start;
+            // their first measurements land within two frames.
+            await page.waitForFunction(() => !document.querySelector("[data-figure-zoom][hidden], [data-table-zoom][hidden]"));
+            await page.evaluate(() => new Promise(resolve => requestAnimationFrame(() => requestAnimationFrame(() => setTimeout(resolve, 100)))));
+            const issues = await page.evaluate(inspectScrollers, { ...rule, scope: null });
+            const controls = page.locator("[data-figure-zoom], [data-table-zoom]");
+            for (let index = 0; index < await controls.count(); index += 1) {
+              const control = controls.nth(index);
+              if (!await control.isVisible()) continue;
+              const label = await control.evaluate(element => element.closest("[data-figure]")?.dataset.figure ?? element.closest("[data-table-frame]")?.querySelector("[data-table-title]")?.textContent.slice(0, 60) ?? "table");
+              await control.click();
+              await page.evaluate(() => new Promise(resolve => requestAnimationFrame(() => requestAnimationFrame(resolve))));
+              issues.push(...(await page.evaluate(inspectScrollers, { ...rule, scope: "dialog[open]" })).map(issue => ({ ...issue, stage: label })));
+              await page.keyboard.press("Escape");
+              await page.waitForFunction(() => !document.querySelector("dialog[open]"));
+            }
+            scrolls.push({ route, width, height, issues });
+          } finally { await context.close(); }
+        }
+      }));
+    } finally { await scrollBrowser.close(); }
   }
 } finally {
   await browser.close();
 }
 const failures = records.filter(record => record.issues.length || record.pageErrors.length);
-const otherFailures = [...manuscripts, ...home, ...longNumbers, ...noScript].filter(record => record.issues.length);
-const report = { figures: unique.size, widths: WIDTHS, cases: records.length, missingAssets: [...missing], failures: failures.length + otherFailures.length, records, manuscripts, home, longNumbers, noScript };
+const otherFailures = [...manuscripts, ...texts, ...home, ...longNumbers, ...noScript, ...scrolls].filter(record => record.issues.length);
+const report = { figures: unique.size, widths: WIDTHS, cases: records.length, missingAssets: [...missing], failures: failures.length + otherFailures.length, records, manuscripts, texts, home, longNumbers, noScript, scrolls };
 await writeFile(path.join(ARTIFACTS, "results.json"), JSON.stringify(report, null, 2) + "\n");
 console.log(JSON.stringify({ figures: unique.size, cases: records.length, failures: failures.map(({ id, view, width, textScale, issues, pageErrors }) => ({ id, view, width, textScale, issues, pageErrors })), otherFailures, missingAssets: [...missing], artifacts: ARTIFACTS }, null, 2));
 assert.equal(missing.size, 0, "The static export is missing requested assets.");
 assert.equal(failures.length, 0, "Browser layout regression found collapsed labels, frame escapes, or broken interactions. Inspect results.json and screenshots.");
-assert.equal(otherFailures.length, 0, "Manuscript tables or equation numbers, homepage text resizing, long-number scrolling, or no-JavaScript navigation regressed.");
+assert.equal(otherFailures.length, 0, "Manuscript tables or equation numbers, text breaks and list markers, homepage text resizing, long-number scrolling, no-JavaScript navigation, or scroll near-misses regressed.");

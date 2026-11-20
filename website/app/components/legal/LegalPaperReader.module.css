@@ -79,7 +79,7 @@
   font-family: var(--font-prose);
   padding: 0 1.5rem 1.5rem;
   overflow-y: auto;
-  overflow-wrap: anywhere;
+  overflow-wrap: break-word;
   overscroll-behavior: contain;
   scrollbar-gutter: stable;
 }

@@ -14,6 +14,7 @@ import type { ActivePage } from "../../lib/content/site";
 import { ResearchMath } from "./ResearchMath";
 import { InlineContent } from "./ResearchInline";
 import { ZoomStage } from "./ZoomStage";
+import { MathFit } from "./MathFit";
 import { ZoomGlyph } from "../ZoomGlyph";
 import stageStyles from "./Stage.module.css";
 import readingStyles from "../legal/LegalPaperPage.module.css";
@@ -141,6 +142,27 @@ function captionsTable(blocks: ResearchArticleContent["blocks"], index: number) 
   return block?.type === "paragraph" && TABLE_CAPTION.test(block.source.trimStart()) && blocks[index + 1]?.type === "table";
 }
 
+// A list item is a paragraph written "• " or "1. " at the start of its line.
+const LIST_MARKER = /^(?:•|\d+\.)\s+/u;
+
+function listMarker(block: ResearchArticleContent["blocks"][number] | undefined) {
+  const first = block?.type === "paragraph" ? block.inlines[0] : undefined;
+  return first?.type === "text" ? LIST_MARKER.exec(first.text)?.[0] : undefined;
+}
+
+/** The digits of the widest number among each run of consecutive list items, by block index. */
+export function listMarkerDigits(blocks: ResearchArticleContent["blocks"]) {
+  const digits = new Map<number, number>();
+  for (let start = 0; start < blocks.length;) {
+    let end = start;
+    while (end < blocks.length && listMarker(blocks[end])) end += 1;
+    const widest = Math.max(1, ...blocks.slice(start, end).map((block) => /\d+/u.exec(listMarker(block)!)?.[0].length ?? 1));
+    for (let index = start; index < end; index += 1) digits.set(index, widest);
+    start = Math.max(end, start + 1);
+  }
+  return digits;
+}
+
 export function ResearchArticle({ project, active, returnPath, returnLabel, titleId, showcase }: {
   project: ResearchArticleContent;
   active: ActivePage;
@@ -156,6 +178,7 @@ export function ResearchArticle({ project, active, returnPath, returnLabel, titl
   const { targets, anchors } = buildReferenceTargets(project.slug, project.blocks);
   const link = (inlines: ArticleInline[], index: number) => linkArticleSectionReferences(inlines, project.slug, headingMap, targets, anchors.get(index));
   const headingPresentations = formatArticleHeadings(project.blocks);
+  const markerDigits = listMarkerDigits(project.blocks);
   const figures = placeFigures(
     project.slug,
     project.blocks.map((block) => ({ type: block.type, source: block.source, firstCell: block.type === "table" ? block.rows[0][0].source : undefined })),
@@ -172,12 +195,17 @@ export function ResearchArticle({ project, active, returnPath, returnLabel, titl
     if (block.type === "paragraph") {
       // A table caption renders inside the frame of the table that follows it.
       if (captionsTable(project.blocks, index)) return null;
-      // A list item, written "• " or "1. " at the start of its line, hangs its marker.
+      // A list item hangs its marker in a column shared by its run of items.
       const first = block.inlines[0];
-      const item = first?.type === "text" ? /^(?:•|\d+\.)\s+/u.exec(first.text) : null;
+      const item = listMarker(block);
       if (item && first?.type === "text") {
-        const rest = [{ ...first, text: first.text.slice(item[0].length) }, ...block.inlines.slice(1)];
-        return <p {...marker} data-list-item="" id={block.id ?? anchors.get(index)} key={index}><span className={styles.listMarker}>{item[0]}</span><InlineContent inlines={proofLabel(link(rest, index))} /></p>;
+        const rest = [{ ...first, text: first.text.slice(item.length) }, ...block.inlines.slice(1)];
+        const digits = markerDigits.get(index) ?? 1;
+        return (
+          <p {...marker} data-list-item="" id={block.id ?? anchors.get(index)} key={index} style={digits > 1 ? { "--marker-digits": digits } as CSSProperties : undefined}>
+            <span className={styles.listMarker} data-marker={item.startsWith("•") ? "bullet" : "number"}>{item}</span><InlineContent inlines={proofLabel(link(rest, index))} />
+          </p>
+        );
       }
       return <p {...marker} id={block.id ?? anchors.get(index)} key={index}><InlineContent inlines={proofLabel(link(block.inlines, index))} /></p>;
     }
@@ -256,6 +284,7 @@ export function ResearchArticle({ project, active, returnPath, returnLabel, titl
           <a href={`#${titleId}`}>Back to Top</a>
         </footer>
         {enhanced && <FigureController key={project.slug} />}
+        <MathFit key={`${project.slug}-math`} />
         {(figures.size > 0 || project.blocks.some((block) => block.type === "figure" || block.type === "table")) && <ZoomStage key={`${project.slug}-stage`} />}
       </article>
     </SiteShell>

@@ -510,9 +510,9 @@ test("About opens with its accessible clarinet hero before the profile", async (
   for (const index of ["01", "02", "03", "04", "05"]) {
     assert.match(home, new RegExp(`aria-hidden="true"[^>]*>${index}<`, "u"));
   }
-  assert.ok(stripMarkup(home).includes("Mathematics is how I make sense of things. I want to know which assumptions underlie a conclusion, what happens when they change, and where intuition stops being reliable."));
+  assert.ok(stripMarkup(home).includes("Mathematics is how I understand a problem. I want to know which assumptions underlie a conclusion, what happens when they change, and where intuition stops being reliable."));
   assert.ok(stripMarkup(home).includes("My work makes high-stakes conclusions verifiable: certified error bounds in derivative pricing, layered verification in frontier AI evaluation, and evidence standards for delegating authority to autonomous systems."));
-  assert.ok(decodeHtml(stripMarkup(home)).includes("Most of it is in finance and AI. From 2023 to 2026 I designed review and verification systems with a foundation model developer, a frontier AI lab, and a global alternative asset manager. I also build systems of my own: a language model trained from scratch for financial research, and four gates that decide which evaluation feedback may change an agent."));
+  assert.ok(decodeHtml(stripMarkup(home)).includes("Finance and AI are at its center. From 2023 to 2026 I designed review and verification systems with a leading foundation model developer, a frontier AI lab, and a leading global alternative asset manager. I also build systems of my own: a language model trained from scratch for financial research, and four gates that decide which evaluation feedback may change an agent."));
   const profileLinks = [...elementHtmlById(home, "home-profile").matchAll(/<a\b([^>]*)>([\s\S]*?)<\/a>/gu)];
   assert.deepEqual(profileLinks.map((match) => [decodeHtml(stripMarkup(match[2])), attribute(match[1], "href")]), [
     ["a language model", "https://github.com/130U/RESEARCH-Financial-Large-Language-Model"],

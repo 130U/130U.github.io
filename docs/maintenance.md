@@ -229,7 +229,10 @@ typed prose, emphasis, links, headings, tables, and formulas rather than arbitra
 HTML. `ResearchMath` renders TeX to self-contained SVG and assistive MathML during
 the build; no browser math engine is loaded. The original TeX is carried in accessible
 annotations. Invalid formulas fail the build. Wide equations and tables scroll
-locally without shrinking the reading text.
+locally without shrinking the reading text. The renderer derives the row pitch of
+displayed mathematics from `--reading-leading` and `--type-math`, which it holds as
+`RESEARCH_READING_LEADING` and `RESEARCH_DISPLAY_MATH_SCALE`; change a token and its
+constant together (`tests/research-math.test.mjs` compares them).
 
 Use the semantic typography tokens in `app/globals.css` and the shared font files.
 The [design guide](design.md#typography) defines each role's size, weight, family,

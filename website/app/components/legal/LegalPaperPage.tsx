@@ -10,6 +10,7 @@ import type { ShowcaseEntry } from "../../lib/content/experience-showcase";
 import { placeFigures } from "../../lib/content/article-figures";
 import { ArticleFigure, FigureController } from "../figures";
 import { ZoomStage } from "../research/ZoomStage";
+import { AddressText, KeepNumberJoins } from "../research/ResearchInline";
 import { headingFloor, numericColumns, sentenceColumns } from "../research/ResearchArticle";
 import { ZoomGlyph } from "../ZoomGlyph";
 import researchStyles from "../research/ResearchArticle.module.css";
@@ -27,12 +28,14 @@ function referenceParts(run: PaperRun) {
 }
 
 // An address may hold balanced parentheses ("…Plan%20(Ref.%20Z22-03).pdf"); a closing
-// parenthesis without its partner ends the address, as in "(see https://…)".
+// parenthesis without its partner ends the address, as in "(see https://…)". The
+// address breaks only where a printed citation breaks one, and a page or section
+// range such as 373-81 holds one line.
 function linkedText(text: string) {
   return text.split(/(https?:\/\/(?:[^\s<>"\]()]|\([^\s<>"()]*\))+)/u).map((part, index) => {
-    if (!/^https?:\/\//u.test(part)) return part;
+    if (!/^https?:\/\//u.test(part)) return <KeepNumberJoins key={index} text={part} />;
     const url = part.replace(/[.,;:]+$/u, "");
-    return <Fragment key={index}><a href={url}>{url}</a>{part.slice(url.length)}</Fragment>;
+    return <Fragment key={index}><a href={url} className={researchStyles.address}><AddressText text={url} /></a>{part.slice(url.length)}</Fragment>;
   });
 }
 

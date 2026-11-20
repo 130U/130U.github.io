@@ -460,7 +460,10 @@ button:focus-visible {
   grid-column: 4 / -1;
   align-content: start;
   min-width: 0;
-  overflow-wrap: anywhere;
+  /* A string longer than its line breaks in an emergency, but a word still
+     sets the narrowest width of the grid track or flex item that holds it, so
+     no label, heading or cell is narrowed until its words split. */
+  overflow-wrap: break-word;
   padding: var(--content-top) 0 144px;
 }
 

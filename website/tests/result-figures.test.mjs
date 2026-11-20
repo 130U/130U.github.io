@@ -1,0 +1,140 @@
+import assert from "node:assert/strict";
+import { readFile } from "node:fs/promises";
+import test from "node:test";
+import { parseResearchMarkdown } from "../app/lib/content/research-markdown.ts";
+
+// Figures that draw a paper's or an article's key result on its own scale:
+// every drawn value must be one the text states, and each figure must follow
+// the sentence that states it.
+
+const read = (relative) => readFile(new URL(`../${relative}`, import.meta.url), "utf8");
+const json = async (relative) => JSON.parse(await read(relative));
+const decode = (text) => text.replace(/&#x27;|&#39;/gu, "'").replace(/&quot;/gu, '"').replace(/&amp;/gu, "&").replace(/&lt;/gu, "<").replace(/&gt;/gu, ">").replace(/&#10;|&#xa;/giu, "\n");
+
+/** The site figure with this id in a built page, with its tips and labels. */
+function figure(html, id) {
+  const start = html.indexOf(`data-article-figure="${id}"`);
+  assert.ok(start > 0, `${id} is on the page.`);
+  const open = html.lastIndexOf("<figure", start);
+  const close = html.indexOf("</figure>", start);
+  const markup = html.slice(open, close);
+  return {
+    open,
+    markup,
+    tips: [...markup.matchAll(/\bdata-tip="([^"]*)"/gu)].map((match) => decode(match[1])),
+    labels: [...markup.matchAll(/\baria-label="([^"]*)"/gu)].map((match) => decode(match[1])).join("\n"),
+  };
+}
+
+/** The block that ends right before a placed figure: the last research block opened before it. */
+function precedingBlock(html, offset) {
+  const blocks = [...html.slice(0, offset).matchAll(/data-research-block="(\d+)"/gu)];
+  return Number(blocks.at(-1)[1]);
+}
+
+/** The rows of the manuscript table whose caption opens with `title`, as arrays of cell text. */
+function tableRows(blocks, title) {
+  const caption = blocks.findIndex((block) => block.type === "paragraph" && block.source.startsWith(`**${title}`));
+  assert.ok(caption >= 0 && blocks[caption + 1].type === "table", `${title} is a captioned table.`);
+  return blocks[caption + 1].rows.slice(1).map((row) => row.map((cell) => cell.source.replace(/\*\*/gu, "")));
+}
+
+test("the Asian number line follows the sentence of (1.3) and restates its intervals and Table 1", async () => {
+  const slug = "certified-valuation-of-arithmetic-asian-options";
+  const { markdown } = await json(`content/selected-research/${slug}.json`);
+  const blocks = parseResearchMarkdown(markdown, { joinSoftLines: true });
+  const html = await read(`out/${slug}/index.html`);
+  const drawing = figure(html, "asian-interval");
+
+  // (1.3) ends in a comma, so the figure follows the paragraph that finishes its sentence.
+  const after = precedingBlock(html, drawing.open);
+  assert.ok(blocks[after].source.startsWith("the price under absorbed Euler with step $`h=1/768`$ lies in"));
+  assert.equal(blocks[after - 1].type, "equation");
+  assert.match(blocks[after - 1].tex, /\[6\.508371733,\\;6\.518868974\]/u);
+
+  for (const interval of ["[6.508371733, 6.518868974]", "[6.507844281, 6.519014106]"]) {
+    assert.ok(drawing.labels.includes(interval) && drawing.markup.includes(interval), `The figure draws ${interval}.`);
+    assert.ok(markdown.includes(interval.replace(", ", ",\\;")), `The text states ${interval}.`);
+  }
+  assert.ok(drawing.tips.some((tip) => tip.startsWith("Proxy value 6.513251661289")));
+  assert.ok(markdown.includes("known to $`\\pm.00021`$") && markdown.includes("close to $`6.51335`$") && markdown.includes("A library that prints 6.52"));
+
+  // Each contract marker carries Table 1's proved bound, its quote steps and its first-order bound.
+  const table = new Map(tableRows(blocks, "Table 1.").map((row) => [row[0], row]));
+  const contracts = drawing.tips.filter((tip) => /\n(Proved|First-order) bound /u.test(tip));
+  assert.equal(contracts.length, 12, "Six contracts, each with a proved and a first-order marker.");
+  for (const tip of contracts) {
+    const [name, line] = tip.split("\n");
+    const row = table.get(name);
+    assert.ok(row, `${name} is a row of Table 1.`);
+    const proved = /^Proved bound ([\d.]+), ([\d.]+) quote steps$/u.exec(line);
+    if (proved) assert.deepEqual([proved[1], proved[2]], [row[2], row[3]], `${name}: bound and quote steps.`);
+    else assert.equal(line, `First-order bound ${row[5]}`, `${name}: first-order bound.`);
+  }
+});
+
+test("the Rough Heston misfit figure restates Section 7.6 and the quoted bands of Table 1", async () => {
+  const slug = "certified-joint-pricing-errors-in-rough-heston";
+  const { markdown } = await json(`content/selected-research/${slug}.json`);
+  const blocks = parseResearchMarkdown(markdown, { joinSoftLines: true });
+  const html = await read(`out/${slug}/index.html`);
+  const drawing = figure(html, "heston-misfit");
+  assert.ok(blocks[precedingBlock(html, drawing.open)].source.startsWith("A certificate also settles the opposite question."));
+
+  const quotes = new Map(tableRows(blocks, "Table 1.").flatMap((row) => [row.slice(0, 4), row.slice(4, 8)]).map((row) => [row[0], row]));
+  for (const [strike, excess] of [["4400", "0.490"], ["4500", "0.067"]]) {
+    const [, bid, ask, width] = quotes.get(strike);
+    assert.ok(drawing.tips.includes(`${strike} call, quoted band\nBid ${bid}, ask ${ask}, width ${width}`), `${strike}: the band of Table 1.`);
+    assert.ok(drawing.tips.some((tip) => tip.startsWith(`${strike} call, certified model price\nAt least ${excess} above the ask`)), `${strike}: the excess of Section 7.6.`);
+    assert.ok(markdown.includes(`at least ${excess} points`), `The text states the excess at ${strike}.`);
+  }
+  assert.ok(drawing.tips.some((tip) => tip.endsWith("\nLower end 92.886, ask 92.396")));
+  assert.ok(markdown.includes("lower end is 92.886 points, while the quoted ask is 92.396"));
+});
+
+test("the grader figure evaluates (5.5) for Model B and meets every value of Table 2", async () => {
+  const slug = "general-reasoning-evaluation-and-layered-verification";
+  const { markdown } = await json(`content/artificial-intelligence/${slug}.json`);
+  const blocks = parseResearchMarkdown(markdown);
+  const html = await read(`out/experience/${slug}/index.html`);
+  const drawing = figure(html, "grader-ceiling");
+  assert.ok(blocks[precedingBlock(html, drawing.open)].source.startsWith("• *False rejection removes routes.*"));
+
+  // Model B of Section 1: theta 64%, alpha 36%, beta 0.
+  assert.ok(markdown.includes("$`\\theta_A = 72\\%`$ and $`\\theta_B = 64\\%`$") && markdown.includes("$`\\alpha_A = 4\\%`$ and $`\\alpha_B = 36\\%`$, with $`\\beta_A = \\beta_B = 0\\%`$"));
+  const [theta, alpha] = [0.64, 0.36];
+  const total = (eta) => (theta + (1 - theta) * alpha) * Math.exp(eta) + (1 - theta) * (1 - alpha);
+  const observed = (eta) => (100 * (theta + (1 - theta) * alpha) * Math.exp(eta)) / total(eta);
+  const valid = (eta) => (100 * theta * Math.exp(eta)) / total(eta);
+  const [header, scores, validity] = parseResearchMarkdown(markdown).find((block) => block.type === "table" && block.rows[0][0].source.startsWith("Optimization strength")).rows.map((row) => row.map((cell) => cell.source));
+  for (const [column, label] of header.slice(1, 5).entries()) {
+    const eta = Number(label);
+    assert.equal(`${observed(eta).toFixed(1)}%`, scores[column + 1], `Observed score at eta = ${eta}.`);
+    assert.equal(`${valid(eta).toFixed(1)}%`, validity[column + 1], `True validity at eta = ${eta}.`);
+    assert.ok(drawing.tips.includes(`η = ${eta}\nObserved score ${scores[column + 1]}`) && drawing.tips.includes(`η = ${eta}\nTrue validity ${validity[column + 1]}`));
+  }
+  assert.equal(`${((100 * theta) / (theta + (1 - theta) * alpha)).toFixed(1)}%`, validity[5], "The limit is the positive predictive value.");
+
+  // The rejected route keeps 1 / (1 + e^eta) of valid work.
+  for (const [eta, share] of [[1, "26.9%"], [2, "11.9%"], [4, "1.8%"]]) {
+    assert.equal(`${(100 / (1 + Math.exp(eta))).toFixed(1)}%`, share);
+    assert.ok(drawing.tips.includes(`η = ${eta}\nRejected route ${share} of valid work`));
+  }
+});
+
+test("the budget frontier draws the five plans of Table 5", async () => {
+  const slug = "large-scale-domain-expert-feedback-governance-and-adaptive-review";
+  const { markdown } = await json(`content/artificial-intelligence/${slug}.json`);
+  const blocks = parseResearchMarkdown(markdown);
+  const html = await read(`out/experience/${slug}/index.html`);
+  const drawing = figure(html, "budget-frontier");
+  assert.ok(blocks[precedingBlock(html, drawing.open)].source.startsWith("The last three rows are the exchange rate."));
+
+  const plans = blocks.find((block) => block.type === "table" && block.rows[0][0].source === "Plan").rows.slice(1).map((row) => row.map((cell) => cell.source.replace(/\*\*/gu, "")));
+  assert.equal(plans.length, 5);
+  for (const [name, , , deviation, shipped] of plans) {
+    assert.ok(drawing.tips.includes(`${name}\nStandard deviation ${deviation} points\n${shipped} defects shipped`), `${name} is drawn at its row of Table 5.`);
+  }
+  const shipped = Object.fromEntries(plans.map((row) => [row[0], Number(row[4])]));
+  assert.equal((100 * (1 - shipped["Joint rule at the precision of risk-first routing"] / shipped["Risk-first for audits and for reviews"])).toFixed(1), "38.6");
+});
