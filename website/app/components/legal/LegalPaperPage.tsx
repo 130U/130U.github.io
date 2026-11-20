@@ -26,8 +26,10 @@ function referenceParts(run: PaperRun) {
   return (run.text || String(run.footnoteRef)).split(/([,;])/u);
 }
 
+// An address may hold balanced parentheses ("…Plan%20(Ref.%20Z22-03).pdf"); a closing
+// parenthesis without its partner ends the address, as in "(see https://…)".
 function linkedText(text: string) {
-  return text.split(/(https?:\/\/[^\s<>"\])]+)/u).map((part, index) => {
+  return text.split(/(https?:\/\/(?:[^\s<>"\]()]|\([^\s<>"()]*\))+)/u).map((part, index) => {
     if (!/^https?:\/\//u.test(part)) return part;
     const url = part.replace(/[.,;:]+$/u, "");
     return <Fragment key={index}><a href={url}>{url}</a>{part.slice(url.length)}</Fragment>;
