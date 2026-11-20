@@ -119,7 +119,8 @@ detail pages, captions, posts, and article reading columns. Lines average about 
 characters on a 320px phone (26 inside a frame), 51 to 66 on a portrait iPad, and 72 in
 a full reading column; prose on the hanging axis holds 42 at 1200px and 52 from 1440px.
 Paragraphs wrap ragged-right with no forced breaks, and long unbroken strings wrap in an
-emergency. Text never runs onto a hairline that bounds it: `--frame-inset` (20 to 24px)
+emergency; a word still sets the narrowest width of the column, cell, or label that
+holds it, so no word splits because its box was narrowed. Text never runs onto a hairline that bounds it: `--frame-inset` (20 to 24px)
 separates the rail's links, a section's margin index, a framed list's numbers, the
 contents rail and right-aligned footer actions from their lines, and on tablets, where
 running text would otherwise reach the closing guide, `--reading-width` keeps the same
@@ -285,6 +286,15 @@ set tight as the papers set them, unless the formula alone fills a phone's line;
 number range such as 4400–4500 holds one line. "Proof." is italic in all three
 manuscripts, as in their PDFs.
 
+Lists and references are set as printed ones. A list hangs its markers in one column
+as wide as its widest number: each number stands whole with its period, right-aligned
+in tabular figures, so the text keeps the same gap from 9. as from 10.; a bullet stands
+at the column's start. A web address or DOI written out in a reference or note breaks
+only after "//" or its scheme's colon and before a slash, question mark, or other
+separator, never after its own hyphen, and its short ending stays with it. A long
+identifier breaks before an inner capital. A contents entry hangs its number, so a
+wrapped title continues under its first word.
+
 Legal articles keep the source title, subtitle, author, date, abstract, chapter
 numbering, paragraph order, citations, and acknowledgments. Chapters are H2 headings in
 the heading role at weight 400 and subsections H3 headings in the item-title role;
@@ -295,7 +305,9 @@ in Source Serif 4's own small capitals, with acronyms, initials and Roman numera
 height, as a printed law review does. Numbered footnote references open the note in a
 native dialog: centered on desktop, a bottom sheet with 44px controls on phones. Escape,
 the backdrop, and Close return focus to the cited passage; View in Footnotes focuses the
-full endnote. Full notes and two-way links work without JavaScript.
+full endnote. Full notes and two-way links work without JavaScript. Note numbers stand
+right-aligned in their column, each Return to Text link holds one line, and a page or
+section range written with a hyphen (373-81, §§ 3.6-3.7) holds one line.
 
 ### Blog
 
