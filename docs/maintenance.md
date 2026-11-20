@@ -234,9 +234,13 @@ HTML. `ResearchMath` renders TeX to self-contained SVG and assistive MathML duri
 the build; no browser math engine is loaded. The original TeX is carried in accessible
 annotations. Invalid formulas fail the build. Wide equations and tables scroll
 locally without shrinking the reading text. The renderer derives the row pitch of
-displayed mathematics from `--reading-leading` and `--type-math`, which it holds as
-`RESEARCH_READING_LEADING` and `RESEARCH_DISPLAY_MATH_SCALE`; change a token and its
-constant together (`tests/research-math.test.mjs` compares them).
+displayed mathematics from `--manuscript-leading` and `--type-math`, which it holds as
+`RESEARCH_MANUSCRIPT_LEADING` and `RESEARCH_DISPLAY_MATH_SCALE`; change a token and its
+constant together (`tests/research-math.test.mjs` compares them). The manuscript's
+vertical spaces are written in `--manuscript-line`; `app/lib/content/argument-units.ts`
+marks the paragraphs that open a statement, a proof or a run-in head and the paragraph
+that closes a proof, and `tests/manuscript-rhythm.test.mjs` pins the counts per
+manuscript, so a manuscript update that adds a statement updates the count with it.
 
 Use the semantic typography tokens in `app/globals.css` and the shared font files.
 The [design guide](design.md#typography) defines each role's size, weight, family,

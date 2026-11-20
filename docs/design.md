@@ -64,12 +64,12 @@ Bold is weight 600.
 | Page title | `--type-title` | 36px, 30px below 768px; Inter 400, -0.022em | 1.12 |
 | Section or chapter heading | `--type-heading` | 24px, 22px below 768px; Inter 400, -0.015em | 1.25 |
 | Item title: project, paper, institution, subsection; directory label | `--type-subheading` | 18px, Inter 500; 400 for directory labels | 1.4 |
-| Reading: body, summaries, record values, courses, table cells, captions | `--type-reading` | 16px, Source Serif 4 400 | 1.65 |
+| Reading: body, summaries, record values, courses, table cells, captions | `--type-reading` | 16px, Source Serif 4 400 | 1.65; 1.75 in manuscripts with mathematics (`--manuscript-leading`) |
 | Interface: navigation, contents, Read More, degree names, node titles | `--type-interface`, `--type-action` | 15px, Inter 400; 500 for actions and node titles | 1.5 |
 | Label: field labels, diagram and chart text, footer | `--type-label` | 13px, Inter 400 | 1.45 |
 | Index: section margin index, directory and contribution numbers | `--type-index` | 11px, Source Serif 4 400 | 1.5 |
 | Inline mathematics | | 1em of the surrounding text | The surrounding text's |
-| Displayed mathematics | `--type-math` | 1.15em | Rows 1.7348em apart |
+| Displayed mathematics | `--type-math` | 1.15em | Rows 1.8217em apart |
 
 Roles use rem units and scale with the reader's text setting. Only titles and headings
 step down below 768px. Titles, headings, and item titles use `--title-tracking`,
@@ -255,22 +255,36 @@ an equation, statement, table, or figure the page carries links to it, while a l
 cited from another paper stays plain.
 
 Paragraphs are 1.5rem apart. A new chapter begins after 5rem of space, a fine rule, and
-2rem of inset (4rem and 1.5rem on phones); subsections are 3rem apart. Mathematics has
+2rem of inset (4rem and 1.5rem on phones); subsections are 3rem apart. The manuscripts
+that carry mathematics, the three papers and the four AI articles, read at a leading of
+1.75 (`--manuscript-leading`, 28px): nine in ten of their lines that hold a formula
+reach at most 2px past the reading face's ascenders and descenders, so at 28px such a
+line keeps the white a line of prose keeps at 26.4px. Their vertical spaces are measured
+in that line (`--manuscript-line`), as a printed page measures them in its leading. A
+paragraph break is one line. A statement (Theorem, Lemma, Proposition, Corollary,
+Definition, Assumption, Remark), a proof, and a paragraph that opens on a run-in head
+start a line and a half below the paragraph before them, as does the paragraph after a
+proof's end mark, as amsthm sets a theorem and a proof off and LaTeX a run-in head, so
+the steps of an argument read as steps. A display stands in two and a half lines, and a
+subsection opens after three lines of margin, more white than a display. Mathematics has
 one measure. Every displayed equation is set at 1.15em of the reading size, and one line
-of displayed mathematics is one reading line and a jot (26.4px and 0.3em, 1.7348em of
-the math size), the pitch LaTeX gives aligned rows: aligned, gathered, cases, arrays,
-and matrices, nested or not, set their rows that far apart, and a row break that asks
-for more space (`\\[2pt]`) adds it, as in TeX. Arrays draw their column and row rules.
-A display stands in 2.5 reading lines of white space (66px), measured from its expression to
-the descenders of the line above and to the x-height of the line below, and the same
-between two displays: its block has 0.75rem of padding and margins of 2.75rem above
-and 2.25rem below, since the reading face's line box keeps more empty room above its
-x-height than below its descenders (1.75rem between two displays). Inline mathematics
-is set at the reading size, where the drawing's x-height and capitals fall within 2.5%
-of Source Serif 4's; the room its drawing keeps for accents lies outside the line, so
-a line of prose keeps the reading leading unless the expression itself reaches past
-it. Displays carry no sentence-ending punctuation; wide equations and tables scroll
-locally at their natural size with native touch, trackpad, scrollbar, and keyboard
+of displayed mathematics is one line of the manuscript and a jot (28px and 0.3em,
+1.8217em of the math size), the pitch LaTeX gives aligned rows: aligned, gathered, cases,
+arrays, and matrices, nested or not, set their rows that far apart, and a row break that
+asks for more space (`\\[2pt]`) adds it, as in TeX. Arrays draw their column and row
+rules. A display stands in two and a half lines of white space (70px), measured from its
+expression to the descenders of the line above and to the x-height of the line below, and
+the same between two displays: its block has 0.75rem of padding and margins of two lines
+less 0.5625rem above and less 1.0625rem below, since the reading face's line box keeps
+more empty room above its x-height than below its descenders (two and a half lines less
+2.375rem between two displays). Inline mathematics is set at the reading size, where the
+drawing's x-height and capitals fall within 2.5% of Source Serif 4's; the room its
+drawing keeps for accents lies outside the line, so a line of prose keeps its leading
+unless the expression itself reaches past it. An inline formula stands at the word
+space, as TeX sets mathematics in a line: nothing widens the space beside it, so a
+formula reads as a word of its sentence and a hyphen or a mark of punctuation closes
+against it (x₁-slope). Displays carry no sentence-ending punctuation; wide equations and
+tables scroll locally at their natural size with native touch, trackpad, scrollbar, and keyboard
 navigation. Nothing
 scrolls for a near miss: a box shows a scrollbar, or a formula its fade, only when its
 content is genuinely wider or taller than its room. What overshoots by a little is

@@ -6,9 +6,10 @@ import { ArticleReadingLayout } from "../article/ArticleReadingLayout";
 import { ExperienceDiagram, ExperienceMetadata, KeyContributions, ProblemAndApproach } from "../experience/ExperienceDetails";
 import type { ShowcaseEntry } from "../../lib/content/experience-showcase";
 import type { ResearchArticleContent, ResearchCell, ResearchInline } from "../../lib/content/research-markdown";
-import { RESEARCH_MATH_GUTTER_EM, RESEARCH_MATH_INLINE_SPACE_EM, renderResearchMath } from "../../lib/content/research-math";
+import { RESEARCH_MATH_GUTTER_EM, renderResearchMath } from "../../lib/content/research-math";
 import { buildArticleHeadingMap, buildReferenceTargets, formatArticleHeadings, linkArticleSectionReferences, type ArticleInline } from "../../lib/content/article-headings";
 import { emphasisFor, manuscriptFigureFor, placeFigures } from "../../lib/content/article-figures";
+import { argumentUnit, closesProof } from "../../lib/content/argument-units";
 import { ArticleFigure, FigureCaption, FigureController, ManuscriptFigure } from "../figures";
 import type { ActivePage } from "../../lib/content/site";
 import { ResearchMath } from "./ResearchMath";
@@ -102,7 +103,7 @@ function headingWords(inlines: ResearchInline[]) {
       if (inline.type === "line-break") {
         joined = false;
       } else if (inline.type === "math") {
-        extend(renderResearchMath(inline.tex).widthEm - 2 * RESEARCH_MATH_GUTTER_EM + 2 * RESEARCH_MATH_INLINE_SPACE_EM);
+        extend(renderResearchMath(inline.tex).widthEm - 2 * RESEARCH_MATH_GUTTER_EM);
       } else if (inline.type === "text" || inline.type === "code") {
         for (const part of inline.text.split(/(\s+)/u)) {
           if (!part) continue;
@@ -207,7 +208,9 @@ export function ResearchArticle({ project, active, returnPath, returnLabel, titl
           </p>
         );
       }
-      return <p {...marker} id={block.id ?? anchors.get(index)} key={index}><InlineContent inlines={proofLabel(link(block.inlines, index))} /></p>;
+      // In the chapters, a statement, a proof or a run-in head opens a unit of the argument.
+      const unit = index >= bodyStart ? { "data-unit": argumentUnit(block), "data-proof-close": closesProof(block) ? "" : undefined } : {};
+      return <p {...marker} {...unit} id={block.id ?? anchors.get(index)} key={index}><InlineContent inlines={proofLabel(link(block.inlines, index))} /></p>;
     }
     if (block.type === "heading") {
       const Heading = block.level === 3 ? "h3" : "h2";
@@ -260,7 +263,7 @@ export function ResearchArticle({ project, active, returnPath, returnLabel, titl
   }
   return (
     <SiteShell active={active} parent={{ href: returnPath, label: returnLabel }} frameClassName={showcase ? experienceStyles.frame : undefined}>
-      <article className={readingStyles.paper} aria-labelledby={titleId}>
+      <article className={`${readingStyles.paper} ${styles.manuscript}`} aria-labelledby={titleId}>
         <header className={`page-intro ${readingStyles.header}`}>
           <h1 id={titleId} tabIndex={-1}>{showcase?.headline ?? project.title}</h1>
           {showcase && <ExperienceMetadata entry={showcase} />}

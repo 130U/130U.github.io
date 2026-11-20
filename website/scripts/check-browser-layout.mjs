@@ -394,9 +394,48 @@ function inspectManuscript() {
   }
   if (whites.length) {
     const values = whites.map(entry => entry.white);
+    const typical = [...values].sort((a, b) => a - b)[Math.floor(values.length / 2)];
     if (Math.max(...values) - Math.min(...values) > 2) {
-      const typical = values.sort((a, b) => a - b)[Math.floor(values.length / 2)];
       issues.push({ kind: "display-white-space-uneven", typical, outliers: whites.filter(entry => Math.abs(entry.white - typical) > 1) });
+    }
+    // The white space is two and a half lines of the manuscript.
+    if (Math.abs(typical - 2.5 * leading) > 1.5) issues.push({ kind: "display-white-space-off-the-line", typical, expected: 2.5 * leading });
+    // A subsection opens after more white than a display stands in, measured from the
+    // descenders of the paragraph above to the heading's capitals.
+    for (const heading of document.querySelectorAll("[data-article-body] h3")) {
+      const previous = heading.previousElementSibling;
+      if (!previous?.matches('p[data-research-block-type="paragraph"]')) continue;
+      const own = getComputedStyle(heading);
+      const headingSize = parseFloat(own.fontSize);
+      face.font = `${own.fontWeight} 1000px ${own.fontFamily}`;
+      const measure = face.measureText("H");
+      const [headingAscent, headingDescent, cap] = [measure.fontBoundingBoxAscent, measure.fontBoundingBoxDescent, measure.actualBoundingBoxAscent].map(value => value / 1000 * headingSize);
+      const capTop = heading.getBoundingClientRect().top + (parseFloat(own.lineHeight) - headingAscent - headingDescent) / 2 + headingAscent - cap;
+      const white = capTop - (previous.getBoundingClientRect().bottom - strutBelow + descender);
+      if (white <= typical + 8) issues.push({ kind: "subsection-opens-closer-than-a-display", heading: heading.textContent.trim().slice(0, 40), white, display: typical });
+    }
+  }
+  // A paragraph break is one line of the manuscript; a statement, a proof, a
+  // paragraph that opens on a run-in head, and the paragraph after a proof's end
+  // start a line and a half below the paragraph before them.
+  for (const paragraph of document.querySelectorAll('[data-article-body] p[data-research-block-type="paragraph"]')) {
+    const previous = paragraph.previousElementSibling;
+    if (!previous?.matches('p[data-research-block-type="paragraph"]')) continue;
+    if (paragraph.hasAttribute("data-list-item") && previous.hasAttribute("data-list-item")) continue;
+    const unit = paragraph.hasAttribute("data-unit") || previous.hasAttribute("data-proof-close");
+    const gap = paragraph.getBoundingClientRect().top - previous.getBoundingClientRect().bottom;
+    const expected = (unit ? 1.5 : 1) * leading;
+    if (Math.abs(gap - expected) > 0.5) issues.push({ kind: unit ? "argument-unit-not-set-off" : "paragraph-break-off-the-line", block: paragraph.dataset.researchBlock, gap, expected });
+  }
+  // An inline formula stands at the word space: its canvas gutters lie wholly in
+  // its negative margins, so nothing widens the space beside it.
+  for (const formula of document.querySelectorAll('[data-research-formula="inline"]')) {
+    if (!formula.querySelector("svg[data-research-svg]")) continue;
+    const own = getComputedStyle(formula);
+    const gutter = parseFloat(own.getPropertyValue("--math-gutter")) * parseFloat(own.fontSize);
+    if (Math.abs(parseFloat(own.marginLeft) + gutter) > 0.1 || Math.abs(parseFloat(own.marginRight) + gutter) > 0.1) {
+      issues.push({ kind: "inline-formula-spaced-past-word-space", tex: formula.querySelector("annotation")?.textContent.slice(0, 40), margins: [own.marginLeft, own.marginRight] });
+      break;
     }
   }
   return issues;
