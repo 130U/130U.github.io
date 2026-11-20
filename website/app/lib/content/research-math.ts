@@ -30,7 +30,31 @@ type ResearchMathMarkup = Readonly<{
 
 export const RESEARCH_MATH_GUTTER_EM = 0.375;
 export const RESEARCH_MATH_INLINE_SPACE_EM = 0.125;
-export const RESEARCH_MATH_ROW_SPACING_EM = 0.6;
+/** The reading leading and the size of displayed mathematics against the reading
+ * text, as `--reading-leading` and `--type-math` set them. */
+export const RESEARCH_READING_LEADING = 1.65;
+export const RESEARCH_DISPLAY_MATH_SCALE = 1.15;
+/** LaTeX's \jot, the space aligned equations add to the line between their rows. */
+const JOT_EM = 0.3;
+/** One line of displayed mathematics, in ems of its size: one reading line and a
+ * jot, the pitch LaTeX gives the rows of aligned equations. Every multi-row display
+ * takes it; MathJax adds row spacing to rows of a 1em strut. */
+export const RESEARCH_MATH_LINE_EM = Number((RESEARCH_READING_LEADING / RESEARCH_DISPLAY_MATH_SCALE + JOT_EM).toFixed(4));
+export const RESEARCH_MATH_ROW_SPACING_EM = Number((RESEARCH_MATH_LINE_EM - 1).toFixed(4));
+
+// The row spacing MathJax gives each multi-row environment, in ems (10pt to the
+// em). A display row break \\[dim] adds its dimension to this spacing.
+const environmentRowSpacingEm = new Map([
+  ["aligned", 0.3], ["gathered", 0.3], ["cases", 0.2], ["array", 0.4],
+  ["matrix", 0.4], ["pmatrix", 0.4], ["bmatrix", 0.4], ["Bmatrix", 0.4], ["vmatrix", 0.4], ["Vmatrix", 0.4],
+]);
+const ENVIRONMENT = /^(?:\\begin\s*)?\{([A-Za-z]+)\}/u;
+
+function lengthInEm(value: string) {
+  const match = /^(-?(?:\d+\.?\d*|\.\d+))(em|pt)$/u.exec(value);
+  if (!match) return undefined;
+  return Number(match[1]) / (match[2] === "pt" ? 10 : 1);
+}
 
 const EQUATION_NUMBER = /\\tag\{([^{}]+)\}\s*$/u;
 
@@ -113,14 +137,20 @@ const input = new TeX<LiteElement, LiteText, LiteDocument>({
     throw new Error(`Research equation could not be rendered: ${error.message}`);
   },
 });
+// Every multi-row environment in a display (aligned, gathered, cases, arrays and
+// matrices, nested or not) sets its rows one line of mathematics apart, plus any
+// space its row breaks ask for. Subscript stacks keep their own spacing.
 input.postFilters.add((value: unknown) => {
   const { math, data } = value as { math: MathItem<LiteElement, LiteText, LiteDocument>; data: ParseOptions };
   if (!math.display) return;
   for (const table of data.getList("mtable")) {
-    const source = String(table.attributes.get("data-latex") ?? "");
-    if (table.childNodes.length > 1 && /^(?:\{(?:aligned|gathered)\}|\\begin\{(?:aligned|gathered)\})/u.test(source)) {
-      table.attributes.set("rowspacing", `${RESEARCH_MATH_ROW_SPACING_EM}em`);
-    }
+    const source = String(table.attributes.get("data-latex") || table.parent?.attributes?.get("data-latex") || "");
+    const base = environmentRowSpacingEm.get(ENVIRONMENT.exec(source)?.[1] ?? "");
+    const rowspacing = String(table.attributes.getExplicit("rowspacing") ?? "").trim();
+    if (base === undefined || !rowspacing) continue;
+    const spacing = rowspacing.split(/\s+/u).map(lengthInEm);
+    if (spacing.some((entry) => entry === undefined)) throw new Error(`Research equation has an unreadable row spacing: ${rowspacing}.`);
+    table.attributes.set("rowspacing", spacing.map((entry) => `${decimal(Math.max(0, RESEARCH_MATH_ROW_SPACING_EM + entry! - base))}em`).join(" "));
   }
 });
 const output = new SVG<LiteElement, LiteText, LiteDocument>({
@@ -165,6 +195,18 @@ function cleanSvg(node: LiteElement, root = true) {
   }
   if (kind === "text" && adaptor.textContent(node).trim()) {
     throw new Error("Research equation requires an unavailable SVG glyph.");
+  }
+  // The rules an array draws between its columns and rows, and around it, carry
+  // the stroke MathJax's stylesheet would give them, so the drawing needs no stylesheet.
+  if ((kind === "line" && adaptor.hasAttribute(node, "data-line")) || (kind === "rect" && adaptor.hasAttribute(node, "data-frame"))) {
+    const style = String(adaptor.getAttribute(node, "class") ?? "");
+    adaptor.setAttribute(node, "stroke-width", "70");
+    adaptor.setAttribute(node, "fill", "none");
+    if (style.includes("mjx-dashed")) adaptor.setAttribute(node, "stroke-dasharray", "140");
+    if (style.includes("mjx-dotted")) {
+      adaptor.setAttribute(node, "stroke-linecap", "round");
+      adaptor.setAttribute(node, "stroke-dasharray", "0,140");
+    }
   }
   // Only the root may paint past its canvas (accents and labels); the nested canvases MathJax uses
   // to clip the extender pieces of braces, arrows, bars and radicals keep their clipping.

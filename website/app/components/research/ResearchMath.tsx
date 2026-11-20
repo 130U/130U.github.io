@@ -37,12 +37,14 @@ export function ResearchMath({ tex, display = false, tightStart = false, tightEn
       tabIndex={scrollableInline ? 0 : undefined}
       aria-label={scrollableInline ? "Scrollable mathematical expression" : undefined}
       style={{
+        "--math-gutter": `${RESEARCH_MATH_GUTTER_EM}em`,
         marginInlineStart: `${(tightStart ? 0 : RESEARCH_MATH_INLINE_SPACE_EM) - RESEARCH_MATH_GUTTER_EM}em`,
         marginInlineEnd: `${(tightEnd ? 0 : RESEARCH_MATH_INLINE_SPACE_EM) - RESEARCH_MATH_GUTTER_EM}em`,
-        verticalAlign: `${-formula.depthEm}em`,
+        // The box's baseline is its lower margin edge, the expression's own depth below the text baseline.
+        verticalAlign: `${Number((RESEARCH_MATH_GUTTER_EM - formula.depthEm).toFixed(6))}em`,
         // The box may span the line less the negative margins' overlap and the glued punctuation.
         ...(reserveCh ? { maxWidth: `calc(100% + ${2 * RESEARCH_MATH_GUTTER_EM - (tightStart ? 0 : RESEARCH_MATH_INLINE_SPACE_EM) - (tightEnd ? 0 : RESEARCH_MATH_INLINE_SPACE_EM)}em - ${reserveCh}ch)` } : {}),
-      }}
+      } as CSSProperties}
     >
       <span dangerouslySetInnerHTML={{ __html: formula.svg }} />
       {assistive}

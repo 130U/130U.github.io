@@ -6,8 +6,12 @@
   line-height: 0;
 }
 
+/* An inline formula takes the room of its expression in the line: its canvas
+   gutters lie in negative block margins, so a line of prose keeps the reading
+   leading unless the expression itself reaches past it. */
 .inline {
   display: inline-block;
+  margin-block: calc(-0.125em - var(--math-gutter));
   /* Include the two negative 0.25em margins supplied by ResearchMath. */
   max-width: calc(100% + 0.5em);
   overflow-x: auto;
@@ -116,17 +120,31 @@
   border: 0;
 }
 
+/* A display stands in two and a half reading lines of white space (66px at the
+   reading size), measured from its expression to the descenders of the line
+   above and to the x-height of the line below. The reading face's line box holds more
+   empty room above its x-height than below its descenders, so the margin above
+   is half a rem larger than the one below. Consecutive displays keep the same
+   white space between them. */
 .equation {
   container-type: inline-size;
   min-width: 0;
   max-width: 100%;
   padding-block: 0.75rem;
-  margin-block: 2.25rem;
+  margin-block: 2.75rem 2.25rem;
   overflow-x: auto;
   overflow-y: hidden;
   overscroll-behavior-x: contain;
   scrollbar-width: thin;
   scrollbar-color: var(--rule-strong) transparent;
+}
+
+.equation:has(+ .equation) {
+  margin-block-end: 1.75rem;
+}
+
+.equation + .equation {
+  margin-block-start: 1.75rem;
 }
 
 .inline:focus-visible,
@@ -141,6 +159,6 @@
 @media print, (forced-colors: active) {
   .equationEdge {
     position: static;
-    border-image: none;
+    border-image-source: none;
   }
 }

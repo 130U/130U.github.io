@@ -68,8 +68,8 @@ Bold is weight 600.
 | Interface: navigation, contents, Read More, degree names, node titles | `--type-interface`, `--type-action` | 15px, Inter 400; 500 for actions and node titles | 1.5 |
 | Label: field labels, diagram and chart text, footer | `--type-label` | 13px, Inter 400 | 1.45 |
 | Index: section margin index, directory and contribution numbers | `--type-index` | 11px, Source Serif 4 400 | 1.5 |
-| Inline mathematics | | 1em of the surrounding text | Intrinsic |
-| Displayed mathematics | `--type-math` | 1.15em | Intrinsic |
+| Inline mathematics | | 1em of the surrounding text | The surrounding text's |
+| Displayed mathematics | `--type-math` | 1.15em | Rows 1.7348em apart |
 
 Roles use rem units and scale with the reader's text setting. Only titles and headings
 step down below 768px. Titles, headings, and item titles use `--title-tracking`,
@@ -254,11 +254,23 @@ an equation, statement, table, or figure the page carries links to it, while a l
 cited from another paper stays plain.
 
 Paragraphs are 1.5rem apart. A new chapter begins after 5rem of space, a fine rule, and
-2rem of inset (4rem and 1.5rem on phones); subsections are 3rem apart. Equation blocks
-have symmetric 2.25rem margins and 0.75rem vertical padding, explicit row spacing, and
-no sentence-ending punctuation; wide equations and tables scroll locally at their
-natural size with native touch, trackpad, scrollbar, and keyboard navigation. Every
-displayed equation follows one pattern, whatever its length: its ink starts on the
+2rem of inset (4rem and 1.5rem on phones); subsections are 3rem apart. Mathematics has
+one measure. Every displayed equation is set at 1.15em of the reading size, and one line
+of displayed mathematics is one reading line and a jot (26.4px and 0.3em, 1.7348em of
+the math size), the pitch LaTeX gives aligned rows: aligned, gathered, cases, arrays,
+and matrices, nested or not, set their rows that far apart, and a row break that asks
+for more space (`\\[2pt]`) adds it, as in TeX. Arrays draw their column and row rules.
+A display stands in 2.5 reading lines of white space (66px), measured from its expression to
+the descenders of the line above and to the x-height of the line below, and the same
+between two displays: its block has 0.75rem of padding and margins of 2.75rem above
+and 2.25rem below, since the reading face's line box keeps more empty room above its
+x-height than below its descenders (1.75rem between two displays). Inline mathematics
+is set at the reading size, where the drawing's x-height and capitals fall within 2.5%
+of Source Serif 4's; the room its drawing keeps for accents lies outside the line, so
+a line of prose keeps the reading leading unless the expression itself reaches past
+it. Displays carry no sentence-ending punctuation; wide equations and tables scroll
+locally at their natural size with native touch, trackpad, scrollbar, and keyboard
+navigation. Every displayed equation follows one pattern, whatever its length: its ink starts on the
 manuscript inset (`--manuscript-inset`, 16 to 24px from the column's edge), the axis it
 shares with table text, and its number stands at the column's right edge on the
 equation's baseline, in the reading face of the references that cite it, set clear of

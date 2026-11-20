@@ -4,7 +4,8 @@ import { readFile } from "node:fs/promises";
 import path from "node:path";
 import test from "node:test";
 import { fileURLToPath } from "node:url";
-import { RESEARCH_MATH_GUTTER_EM, RESEARCH_MATH_ROW_SPACING_EM, normalizeResearchDisplayTex, renderResearchMath } from "../app/lib/content/research-math.ts";
+import { RESEARCH_DISPLAY_MATH_SCALE, RESEARCH_MATH_GUTTER_EM, RESEARCH_MATH_LINE_EM, RESEARCH_MATH_ROW_SPACING_EM, RESEARCH_READING_LEADING, normalizeResearchDisplayTex, renderResearchMath } from "../app/lib/content/research-math.ts";
+import { parseResearchMarkdown } from "../app/lib/content/research-markdown.ts";
 
 const ROOT = fileURLToPath(new URL("../", import.meta.url));
 const PROJECTS = [
@@ -127,15 +128,67 @@ test("visible display math preserves internal punctuation, original annotations,
   assert.match(display.mathml, /<mo>,<\/mo>/u);
 });
 
-test("display aligned and gathered rows get reading space while cases and matrices retain their spacing", () => {
-  assert.equal(RESEARCH_MATH_ROW_SPACING_EM, 0.6);
-  for (const environment of ["aligned", "gathered"]) {
-    const tex = `\\begin{${environment}}x=1\\\\y=2\\end{${environment}}`;
-    assert.match(renderResearchMath(tex, true).mathml, /<mtable\b[^>]*rowspacing="0\.6em"/u);
-    assert.match(renderResearchMath(tex, false).mathml, /<mtable\b[^>]*rowspacing="3pt"/u);
+test("every multi-row display sets its rows one line of mathematics apart, plus the space its row breaks ask for", async () => {
+  // One reading line in ems of the display size, and a jot, as LaTeX spaces aligned rows.
+  const css = await readFile(path.join(ROOT, "app", "globals.css"), "utf8");
+  assert.equal(Number(css.match(/--reading-leading:\s*([\d.]+);/u)?.[1]), RESEARCH_READING_LEADING);
+  assert.equal(Number(css.match(/--type-math:\s*([\d.]+)em;/u)?.[1]), RESEARCH_DISPLAY_MATH_SCALE);
+  assert.equal(RESEARCH_MATH_LINE_EM, 1.7348);
+  assert.equal(RESEARCH_MATH_ROW_SPACING_EM, 0.7348);
+  for (const tex of [
+    String.raw`\begin{aligned}a&=b\\c&=d\end{aligned}`,
+    String.raw`\begin{gathered}a\\b\end{gathered}`,
+    String.raw`\begin{cases}a,&x\\b,&y\end{cases}`,
+    String.raw`\begin{array}{c|c}a&b\\c&d\end{array}`,
+    String.raw`\begin{matrix}a&b\\c&d\end{matrix}`,
+    String.raw`\begin{pmatrix}a&b\\c&d\end{pmatrix}`,
+  ]) {
+    const display = renderResearchMath(tex, true);
+    assert.match(display.mathml, /<mtable\b[^>]*rowspacing="0\.7348em"/u, tex);
+    // Two rows of 1em struts stand one line apart: their baselines are 1.7348em apart.
+    const rows = [...display.svg.matchAll(/<g data-mml-node="mtr"[^>]*transform="translate\([-\d.]+,\s*([-\d.]+)\)"/gu)].map((match) => Number(match[1]));
+    assert.equal(rows.length, 2, tex);
+    assert.equal(Math.round(rows[0] - rows[1]), 1735, tex);
   }
-  assert.match(renderResearchMath(String.raw`\begin{cases}x,&y=1\\z,&y=2\end{cases}`, true).mathml, /<mtable\b[^>]*rowspacing="\.2em"/u);
-  assert.match(renderResearchMath(String.raw`\begin{matrix}a&b\\c&d\end{matrix}`, true).mathml, /<mtable\b[^>]*rowspacing="4pt"/u);
+  // Inline formulas keep MathJax's spacing; script stacks keep theirs.
+  assert.match(renderResearchMath(String.raw`\begin{aligned}x&=1\\y&=2\end{aligned}`, false).mathml, /<mtable\b[^>]*rowspacing="3pt"/u);
+  assert.match(renderResearchMath(String.raw`\begin{cases}x,&y=1\\z,&y=2\end{cases}`, false).mathml, /<mtable\b[^>]*rowspacing="\.2em"/u);
+  assert.match(renderResearchMath(String.raw`\sup_{\substack{P\in\Pi\\ W\le\rho}}x`, true).mathml, /<mtable\b[^>]*rowspacing="0\.1em"/u);
+  // A row break \\[dim] adds its dimension to the line, as in TeX.
+  assert.match(renderResearchMath(String.raw`\begin{cases}a,&x\\[2pt]b,&y\\c,&z\end{cases}`, true).mathml, /rowspacing="0\.9348em 0\.7348em 0\.7348em"/u);
+  assert.match(renderResearchMath(String.raw`\begin{aligned}a&=b\\[4pt]c&=d\\e&=f\end{aligned}`, true).mathml, /rowspacing="1\.1348em 0\.7348em 0\.7348em"/u);
+  // A nested environment takes the same line.
+  assert.equal((renderResearchMath(String.raw`\begin{aligned}x&=\begin{cases}a&b\\c&d\end{cases}\\y&=2\end{aligned}`, true).mathml.match(/rowspacing="0\.7348em"/gu) ?? []).length, 2);
+});
+
+test("the rows of every displayed equation in the manuscripts stand at least one line of mathematics apart", async () => {
+  const sources = [
+    ...["critical-dependence-stress-for-diversification-gains-under-fixed-marginals", "certified-valuation-of-arithmetic-asian-options", "certified-joint-pricing-errors-in-rough-heston"].map((slug) => path.join(ROOT, "content", "selected-research", `${slug}.json`)),
+    ...PROJECTS.map(([slug]) => path.join(ROOT, "content", "artificial-intelligence", `${slug}.json`)),
+  ];
+  let tables = 0;
+  for (const file of sources) {
+    const { markdown } = JSON.parse(await readFile(file, "utf8"));
+    for (const block of parseResearchMarkdown(markdown, { joinSoftLines: true }).filter((entry) => entry.type === "equation")) {
+      for (const [, attributes] of renderResearchMath(block.tex, true).mathml.matchAll(/<mtable\b([^>]*)>/gu)) {
+        const spacing = attributes.match(/rowspacing="([^"]+)"/u)?.[1];
+        if (!spacing || attributes.includes("data-mjx-smallmatrix")) continue;
+        tables += 1;
+        for (const entry of spacing.split(" ")) assert.ok(Number.parseFloat(entry) >= RESEARCH_MATH_ROW_SPACING_EM && entry.endsWith("em"), `${block.tex.slice(0, 60)} sets rows ${entry} apart`);
+      }
+    }
+  }
+  assert.ok(tables >= 89, `Expected the manuscripts' row environments; found ${tables}`);
+});
+
+test("array rules carry their own stroke", () => {
+  const { svg } = renderResearchMath(String.raw`\begin{array}{c|c}a&b\\\hline c&d\end{array}`, true);
+  const rules = [...svg.matchAll(/<line\b[^>]*data-line="([hv])"[^>]*>/gu)];
+  assert.deepEqual(rules.map((rule) => rule[1]).sort(), ["h", "v"]);
+  for (const [rule] of rules) {
+    assert.match(rule, /stroke-width="70"/u);
+    assert.match(rule, /fill="none"/u);
+  }
 });
 
 test("Greek symbols, accents, primes, and fractions retain distinct mathematical geometry", async () => {
@@ -212,8 +265,8 @@ J'(\Phi(u))-v'\le a\delta+2\varepsilon,
 \tag{5}
 `,
       display: true,
-      widthEm: 19.970002, heightEm: 4.435912, depthEm: 1.967784,
-      viewBox: [0, -2468, 19969.8, 4435.9], number: "5",
+      widthEm: 19.970002, heightEm: 4.705532, depthEm: 2.102594,
+      viewBox: [0, -2602.8, 19969.8, 4705.5], number: "5",
       pathCount: 66, pathGeometrySha256: "fdf8b95f9328741adc3575820c0d4a231c75aa52ea248a929af71b81ba22e335",
     },
     {
