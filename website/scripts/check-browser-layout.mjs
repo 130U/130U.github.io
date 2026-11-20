@@ -253,11 +253,17 @@ function inspectManuscript() {
     region.scrollLeft = 0;
   }
   const starts = new Map();
+  const edges = [];
   for (const equation of document.querySelectorAll('[data-research-block-type="equation"]')) {
     const drawing = equation.querySelector("svg[data-research-svg]");
     const column = equation.getBoundingClientRect();
-    const start = Math.round((drawing.getBoundingClientRect().left - column.left) * 2) / 2;
-    starts.set(start, (starts.get(start) ?? 0) + 1);
+    // The ink starts past the drawing's transparent gutter, 0.375em at the drawing's own
+    // size, which a fitted equation sets smaller.
+    const gutter = 0.375 * parseFloat(getComputedStyle(drawing).fontSize);
+    const start = drawing.getBoundingClientRect().left + gutter - column.left;
+    const axis = Math.round(start * 2) / 2;
+    starts.set(axis, (starts.get(axis) ?? 0) + 1);
+    edges.push(start);
     const number = equation.querySelector("[data-equation-number]");
     if (!number) continue;
     const text = document.createRange();
@@ -268,8 +274,60 @@ function inspectManuscript() {
     if (drawing.getBoundingClientRect().right > text.getBoundingClientRect().left) issues.push({ kind: "equation-number-overlaps-expression", number: number.textContent });
     equation.scrollLeft = 0;
   }
-  if (starts.size > 1) issues.push({ kind: "equations-start-on-different-axes", starts: [...starts] });
+  if (edges.length && Math.max(...edges) - Math.min(...edges) > 0.5) issues.push({ kind: "equations-start-on-different-axes", starts: [...starts] });
   return issues;
+}
+
+// A box shows a scrollbar, or an inline formula's fade, only when its content is
+// genuinely wider or taller than its room. The components fit anything that
+// overshoots by a little: MathFit sets an equation or formula slightly smaller,
+// ZoomStage closes up a table's columns and sets a staged figure whole, and each
+// figure comparison and panorama takes its room until that is a tenth short. So
+// an overflow, where there is one, is at least a near-miss threshold: 16px, or
+// 8% of the room when that is less. Classic scrollbars take room here, as they
+// do on Windows, so a scrollbar that forces the other axis to scroll is caught.
+const SCROLL_WIDTHS = [[320, 640], [390, 844], [768, 1024], [1024, 768], [1280, 800], [1440, 900], [1920, 1080]];
+const NEAR_MISS_PX = 16;
+const NEAR_MISS_SHARE = 0.08;
+
+function inspectScrollers({ scope, nearMissPx, nearMissShare }) {
+  const root = scope ? document.querySelector(scope) : document.body;
+  const owner = element => {
+    const figure = element.closest("[data-figure]");
+    if (figure) return `figure ${figure.dataset.figure}`;
+    const table = element.closest("[data-table-frame]");
+    if (table) return `table ${(table.querySelector("[data-table-title]")?.textContent ?? "untitled").trim().slice(0, 60)}`;
+    const equation = element.closest('[data-research-block-type="equation"]');
+    if (equation) return `equation ${equation.querySelector("[data-equation-number]")?.textContent || equation.id}`;
+    if (element.matches("[data-research-formula]")) return `formula ${element.querySelector("annotation")?.textContent.slice(0, 80)}`;
+    return [element.tagName.toLowerCase(), ...[...element.classList].map(name => name.replace(/^[\w-]{6}_/u, ""))].join(".");
+  };
+  const issues = [];
+  for (const element of scope ? [root, ...root.querySelectorAll("*")] : root.querySelectorAll("*")) {
+    const style = getComputedStyle(element);
+    const axes = [
+      ["x", style.overflowX, element.scrollWidth - element.clientWidth, element.clientWidth],
+      ["y", style.overflowY, element.scrollHeight - element.clientHeight, element.clientHeight],
+    ].filter(([, mode]) => /auto|scroll/u.test(mode));
+    if (!axes.length || !element.checkVisibility({ checkVisibilityCSS: true }) || !element.getClientRects().length) continue;
+    // A box that shows neither a scrollbar nor a fade, such as the contents rail, shows no overflow.
+    if (style.scrollbarWidth === "none" && !element.matches("[data-research-formula]")) continue;
+    for (const [axis, , overflow, room] of axes) {
+      if (overflow > 0 && overflow < Math.min(nearMissPx, nearMissShare * room)) issues.push({ kind: "scroll-near-miss", axis, overflow, room, container: owner(element) });
+    }
+    // A figure's comparison scrolls sideways only.
+    if (element.matches("[data-figure-scroll]") && element.scrollHeight > element.clientHeight) issues.push({ kind: "figure-scroll-vertical-overflow", overflow: element.scrollHeight - element.clientHeight, container: owner(element) });
+  }
+  return issues;
+}
+
+async function discoverPages(directory = OUT) {
+  const routes = [];
+  for (const entry of await readdir(directory, { withFileTypes: true })) {
+    if (entry.isDirectory() && !["_next", "assets", "_not-found", "404"].includes(entry.name)) routes.push(...await discoverPages(path.join(directory, entry.name)));
+    if (entry.isFile() && entry.name === "index.html") routes.push("/" + path.relative(OUT, directory).split(path.sep).filter(Boolean).map(part => part + "/").join(""));
+  }
+  return routes;
 }
 
 async function discoverManuscripts(directory = OUT) {
@@ -294,6 +352,7 @@ const home = [];
 const noScript = [];
 const longNumbers = [];
 const manuscripts = [];
+const scrolls = [];
 const missing = new Set();
 try {
   for (const width of WIDTHS) {
@@ -442,15 +501,51 @@ try {
         noScript.push({ route, links: count, hidden, issues: count > 0 && hidden.length === 0 ? [] : ["article-contents-hidden-without-javascript"] });
       } finally { await context.close(); }
     }
+    const scrollRoutes = await discoverPages();
+    assert.ok(scrollRoutes.length >= 25, `Expected at least 25 pages; found ${scrollRoutes.length}.`);
+    const scrollBrowser = await chromium.launch({ headless: true, ignoreDefaultArgs: ["--hide-scrollbars"], ...(process.env.PLAYWRIGHT_EXECUTABLE_PATH ? { executablePath: process.env.PLAYWRIGHT_EXECUTABLE_PATH } : {}) });
+    const rule = { nearMissPx: NEAR_MISS_PX, nearMissShare: NEAR_MISS_SHARE };
+    try {
+      const jobs = SCROLL_WIDTHS.flatMap(size => scrollRoutes.map(route => [size, route]));
+      await Promise.all(Array.from({ length: 3 }, async () => {
+        for (let job = jobs.shift(); job; job = jobs.shift()) {
+          const [[width, height], route] = job;
+          const context = await scrollBrowser.newContext({ viewport: { width, height }, reducedMotion: "reduce", serviceWorkers: "block" });
+          await serveExport(context, missing);
+          try {
+            const page = await context.newPage();
+            await page.goto(ORIGIN + route, { waitUntil: "networkidle" });
+            await page.evaluate(() => document.fonts.ready);
+            // The zoom stage shows its controls in the same pass as the fitters start;
+            // their first measurements land within two frames.
+            await page.waitForFunction(() => !document.querySelector("[data-figure-zoom][hidden], [data-table-zoom][hidden]"));
+            await page.evaluate(() => new Promise(resolve => requestAnimationFrame(() => requestAnimationFrame(() => setTimeout(resolve, 100)))));
+            const issues = await page.evaluate(inspectScrollers, { ...rule, scope: null });
+            const controls = page.locator("[data-figure-zoom], [data-table-zoom]");
+            for (let index = 0; index < await controls.count(); index += 1) {
+              const control = controls.nth(index);
+              if (!await control.isVisible()) continue;
+              const label = await control.evaluate(element => element.closest("[data-figure]")?.dataset.figure ?? element.closest("[data-table-frame]")?.querySelector("[data-table-title]")?.textContent.slice(0, 60) ?? "table");
+              await control.click();
+              await page.evaluate(() => new Promise(resolve => requestAnimationFrame(() => requestAnimationFrame(resolve))));
+              issues.push(...(await page.evaluate(inspectScrollers, { ...rule, scope: "dialog[open]" })).map(issue => ({ ...issue, stage: label })));
+              await page.keyboard.press("Escape");
+              await page.waitForFunction(() => !document.querySelector("dialog[open]"));
+            }
+            scrolls.push({ route, width, height, issues });
+          } finally { await context.close(); }
+        }
+      }));
+    } finally { await scrollBrowser.close(); }
   }
 } finally {
   await browser.close();
 }
 const failures = records.filter(record => record.issues.length || record.pageErrors.length);
-const otherFailures = [...manuscripts, ...home, ...longNumbers, ...noScript].filter(record => record.issues.length);
-const report = { figures: unique.size, widths: WIDTHS, cases: records.length, missingAssets: [...missing], failures: failures.length + otherFailures.length, records, manuscripts, home, longNumbers, noScript };
+const otherFailures = [...manuscripts, ...home, ...longNumbers, ...noScript, ...scrolls].filter(record => record.issues.length);
+const report = { figures: unique.size, widths: WIDTHS, cases: records.length, missingAssets: [...missing], failures: failures.length + otherFailures.length, records, manuscripts, home, longNumbers, noScript, scrolls };
 await writeFile(path.join(ARTIFACTS, "results.json"), JSON.stringify(report, null, 2) + "\n");
 console.log(JSON.stringify({ figures: unique.size, cases: records.length, failures: failures.map(({ id, view, width, textScale, issues, pageErrors }) => ({ id, view, width, textScale, issues, pageErrors })), otherFailures, missingAssets: [...missing], artifacts: ARTIFACTS }, null, 2));
 assert.equal(missing.size, 0, "The static export is missing requested assets.");
 assert.equal(failures.length, 0, "Browser layout regression found collapsed labels, frame escapes, or broken interactions. Inspect results.json and screenshots.");
-assert.equal(otherFailures.length, 0, "Manuscript tables or equation numbers, homepage text resizing, long-number scrolling, or no-JavaScript navigation regressed.");
+assert.equal(otherFailures.length, 0, "Manuscript tables or equation numbers, homepage text resizing, long-number scrolling, no-JavaScript navigation, or scroll near-misses regressed.");

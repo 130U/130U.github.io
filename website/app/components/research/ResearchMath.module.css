@@ -16,6 +16,11 @@
   font-size: 1em;
 }
 
+/* A formula a little wider than its line is set slightly smaller (MathFit). */
+.inline > :first-child {
+  font-size: calc(var(--formula-fit, 1) * 1em);
+}
+
 .number {
   position: relative;
   font: inherit;
@@ -77,18 +82,23 @@
    framed table (the inset, inside the frame's 1px edge). It closes on an edge
    at the column's right side, which holds the equation's number on the
    equation's baseline, in the prose face of the references that cite it, set
-   clear of the expression. An equation wider than its column scrolls in place:
-   the edge keeps its position, and the expression fades out over an em beneath
-   it, half an em short of the number, while more remains. */
+   clear of the expression. An equation that overshoots its column by a little
+   is fitted (MathFit): the gap before the number closes to an em, and the
+   expression is set smaller, never below nine tenths of its size, its gutter
+   scaling with it so the ink keeps its axis. An equation wider than that
+   scrolls in place at its natural size: the edge keeps its position, and the
+   expression fades out over an em beneath it, half an em short of the number,
+   while more remains. */
 .display {
   display: flex;
   align-items: baseline;
   min-width: max-content;
-  padding-inline-start: calc(var(--manuscript-inset) + 1px - var(--math-gutter));
+  padding-inline-start: calc(var(--manuscript-inset) + 1px - var(--math-gutter) * var(--equation-fit, 1));
 }
 
 .expression {
   flex: none;
+  font-size: calc(var(--equation-fit, 1) * 1em);
 }
 
 .equationEdge {
@@ -102,6 +112,10 @@
   font-variant-numeric: lining-nums proportional-nums;
   text-align: end;
   white-space: nowrap;
+}
+
+.equation[data-fit] .equationEdge {
+  padding-inline-start: 1em;
 }
 
 .assistive {
