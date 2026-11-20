@@ -396,12 +396,24 @@ for each on a shared axis.
 
 A key result stated as an interval or a bound is drawn on its own scale, after the
 sentence that states it, beside what it is measured against: an earlier bound, a quoted
-band, a tolerance, or a value it rules out. A proved interval is a line with end caps in
-the accent; an interval known by one end has a cap there and runs to an arrowhead at the
-end of the axis. Where an interval is too narrow for its axis, a strip beneath magnifies
-a window: the window is tinted on the rows above, its edges run down through the axis
-row, clear of its labels, and open onto the full width of the strip. Panels of one figure
-stack, each under a title in the interface face, parted by a dashed hairline.
+band, a tolerance, or a value it rules out. Figure and number read as one: a proved
+interval is a line with end caps in the accent, and its endpoints stand over its caps,
+the lower starting at its cap and the upper ending at its own, so the row reads as the
+bracket it draws; the key interval's endpoints take the accent at weight 500. A row that
+restates a numbered display carries the display's number in the reading face of the
+equation numbers, so (1.3) in the figure is the (1.3) of the text. An interval known by
+one end has a cap there, with its bound written over it, and runs to an arrowhead at the
+end of the axis. Every mark and line is named beside it, so a key-result figure carries
+no legend, and secondary numbers (allowances, standard errors, ratios) live in its
+readouts. One figure holds one idea: a comparison the text makes elsewhere is drawn there,
+as Table 1's first-order comparison follows the paragraph that states it. Where an
+interval is too narrow for its axis, a strip beneath magnifies a window: the window is
+tinted on the rows above, its edges run down through the axis row, clear of its labels,
+and open onto the full width of the strip, whose marks carry their own notes. The caption
+says in one or two sentences what the drawing shows and what the reader cannot see in it;
+the argument stays in the text. A test holds each figure to the text it restates and to
+these rules, and the browser layout check fails any two of its numbers or notes that
+touch.
 
 ### Research tables
 

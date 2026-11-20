@@ -4,25 +4,34 @@ import test from "node:test";
 import { parseResearchMarkdown } from "../app/lib/content/research-markdown.ts";
 
 // Figures that draw a paper's or an article's key result on its own scale:
-// every drawn value must be one the text states, and each figure must follow
-// the sentence that states it.
+// every drawn value must be one the text states, each figure must follow the
+// sentence that states it, and a reader reads each number where it lies: an
+// interval's endpoints stand over its caps, every mark is named beside it, and
+// the caption stays a caption.
 
 const read = (relative) => readFile(new URL(`../${relative}`, import.meta.url), "utf8");
 const json = async (relative) => JSON.parse(await read(relative));
 const decode = (text) => text.replace(/&#x27;|&#39;/gu, "'").replace(/&quot;/gu, '"').replace(/&amp;/gu, "&").replace(/&lt;/gu, "<").replace(/&gt;/gu, ">").replace(/&#10;|&#xa;/giu, "\n");
 
-/** The site figure with this id in a built page, with its tips and labels. */
+/** The site figure with this id in a built page, with its tips, labels, written endpoints and caption. */
 function figure(html, id) {
   const start = html.indexOf(`data-article-figure="${id}"`);
   assert.ok(start > 0, `${id} is on the page.`);
   const open = html.lastIndexOf("<figure", start);
   const close = html.indexOf("</figure>", start);
   const markup = html.slice(open, close);
+  const left = (attributes) => Number(/left:\s*([\d.]+)%/u.exec(attributes)?.[1]);
   return {
     open,
     markup,
     tips: [...markup.matchAll(/\bdata-tip="([^"]*)"/gu)].map((match) => decode(match[1])),
     labels: [...markup.matchAll(/\baria-label="([^"]*)"/gu)].map((match) => decode(match[1])).join("\n"),
+    // Ranges in drawing order, with the horizontal span they take.
+    ranges: [...markup.matchAll(/<span class="[^"]*_range [^"]*"[^>]*style="left:([\d.]+)%;width:([\d.]+)%"/gu)].map((match) => ({ from: Number(match[1]), to: Number(match[1]) + Number(match[2]) })),
+    // Numbers written over a cap: their side, their text and where they stand.
+    ends: [...markup.matchAll(/<span class="[^"]*_end"([^>]*)>([^<]*)</gu)].map((match) => ({ side: /data-side="(\w+)"/u.exec(match[1])?.[1], text: decode(match[2]), at: left(match[1]) })),
+    // The caption's words, with each formula counted as one word.
+    caption: decode(/<figcaption[^>]*>([\s\S]*?)<\/figcaption>/u.exec(html.slice(open, close + 20))?.[1].replace(/<math[\s\S]*?<\/math>/gu, "").replace(/<svg[\s\S]*?<\/svg>/gu, "x").replace(/<[^>]+>/gu, "") ?? ""),
   };
 }
 
@@ -39,7 +48,9 @@ function tableRows(blocks, title) {
   return blocks[caption + 1].rows.slice(1).map((row) => row.map((cell) => cell.source.replace(/\*\*/gu, "")));
 }
 
-test("the Asian number line follows the sentence of (1.3) and restates its intervals and Table 1", async () => {
+const near = (a, b) => Math.abs(a - b) < 0.01;
+
+test("the Asian number line follows the sentence of (1.3) and writes each interval at its caps", async () => {
   const slug = "certified-valuation-of-arithmetic-asian-options";
   const { markdown } = await json(`content/selected-research/${slug}.json`);
   const blocks = parseResearchMarkdown(markdown, { joinSoftLines: true });
@@ -51,26 +62,62 @@ test("the Asian number line follows the sentence of (1.3) and restates its inter
   assert.ok(blocks[after].source.startsWith("the price under absorbed Euler with step $`h=1/768`$ lies in"));
   assert.equal(blocks[after - 1].type, "equation");
   assert.match(blocks[after - 1].tex, /\[6\.508371733,\\;6\.518868974\]/u);
+  assert.match(blocks[after - 1].tex, /\\tag\{1\.3\}/u);
 
-  for (const interval of ["[6.508371733, 6.518868974]", "[6.507844281, 6.519014106]"]) {
-    assert.ok(drawing.labels.includes(interval) && drawing.markup.includes(interval), `The figure draws ${interval}.`);
-    assert.ok(markdown.includes(interval.replace(", ", ",\\;")), `The text states ${interval}.`);
+  // The row of (1.3) carries the display's number, and each interval's endpoints
+  // stand over its own caps: the lower one starts at its cap, the upper one ends at its own.
+  assert.match(drawing.markup, /_number"[^>]*>\(1\.3\)</u);
+  const intervals = [["6.508371733", "6.518868974"], ["6.507844281", "6.519014106"]];
+  assert.deepEqual(drawing.ends.map((end) => end.text), intervals.flat());
+  intervals.forEach(([low, high], index) => {
+    const interval = `[${low}, ${high}]`;
+    assert.ok(drawing.labels.includes(interval) && drawing.tips.some((tip) => tip.includes(interval)), `The figure draws ${interval}.`);
+    assert.ok(markdown.includes(`[${low},\\;${high}]`), `The text states ${interval}.`);
+    const [from, to] = drawing.ends.slice(2 * index, 2 * index + 2);
+    assert.deepEqual([from.side, to.side], ["low", "high"]);
+    assert.ok(near(from.at, drawing.ranges[index].from) && near(to.at, drawing.ranges[index].to), `${interval} is written over its caps.`);
+  });
+  assert.ok(drawing.tips.some((tip) => tip.startsWith("Proxy value 6.513251661289\nknown to ±.00021")));
+  assert.ok(drawing.tips.some((tip) => tip.startsWith("Simulated price, close to 6.51335\n.000102 above the proxy value, standard error .000004")));
+  for (const phrase of ["known to $`\\pm.00021`$", "close to $`6.51335`$", "A library that prints 6.52", "by $`.000102`$ with standard error $`.000004`$", "$`.005407`$ above and $`.004670`$ below"]) {
+    assert.ok(markdown.includes(phrase), `The text states ${phrase}.`);
   }
-  assert.ok(drawing.tips.some((tip) => tip.startsWith("Proxy value 6.513251661289")));
-  assert.ok(markdown.includes("known to $`\\pm.00021`$") && markdown.includes("close to $`6.51335`$") && markdown.includes("A library that prints 6.52"));
+});
 
-  // Each contract marker carries Table 1's proved bound, its quote steps and its first-order bound.
+test("the Table 1 comparison stands in its own figure after the paragraph that draws it", async () => {
+  const slug = "certified-valuation-of-arithmetic-asian-options";
+  const { markdown } = await json(`content/selected-research/${slug}.json`);
+  const blocks = parseResearchMarkdown(markdown, { joinSoftLines: true });
+  const html = await read(`out/${slug}/index.html`);
+  const drawing = figure(html, "asian-first-order");
+  const paragraph = blocks[precedingBlock(html, drawing.open)].source;
+  assert.ok(paragraph.startsWith("The bound is nearly attained."));
+  assert.ok(paragraph.includes("1.54, 1.19, 1.10 and 1.07") && paragraph.includes("2.6 cents at every lead time, between 320 and 1,140 times larger"));
+
+  // Each call's markers carry Table 1's proved bound, quote steps and first-order bound,
+  // and the number written beside each proved bound is its Quote steps cell.
   const table = new Map(tableRows(blocks, "Table 1.").map((row) => [row[0], row]));
   const contracts = drawing.tips.filter((tip) => /\n(Proved|First-order) bound /u.test(tip));
-  assert.equal(contracts.length, 12, "Six contracts, each with a proved and a first-order marker.");
+  assert.equal(contracts.length, 8, "Four monthly calls, each with a proved and a first-order marker.");
+  const ratios = ["1.54", "1.19", "1.10", "1.07"];
   for (const tip of contracts) {
-    const [name, line] = tip.split("\n");
+    const [name, line, ratio] = tip.split("\n");
     const row = table.get(name);
-    assert.ok(row, `${name} is a row of Table 1.`);
+    assert.ok(row && /^Crude oil call, \d+ months? ahead$/u.test(name), `${name} is a monthly call of Table 1.`);
     const proved = /^Proved bound ([\d.]+), ([\d.]+) quote steps$/u.exec(line);
-    if (proved) assert.deepEqual([proved[1], proved[2]], [row[2], row[3]], `${name}: bound and quote steps.`);
-    else assert.equal(line, `First-order bound ${row[5]}`, `${name}: first-order bound.`);
+    if (!proved) {
+      assert.equal(line, `First-order bound ${row[5]}`, `${name}: first-order bound.`);
+      continue;
+    }
+    assert.deepEqual([proved[1], proved[2]], [row[2], row[3]], `${name}: bound and quote steps.`);
+    assert.equal(ratio, `${ratios.shift()} times the simulated cost ${row[4]}`, `${name}: the stated ratio to the simulated cost.`);
+    assert.ok(drawing.markup.includes(`>${row[3]}</span>`), `${name}: its quote steps are written beside its bound.`);
   }
+  // The gap the figure names follows from the table: 320 to 1,140 times.
+  const factors = [...table.values()].filter((row) => /^Crude oil call, \d+ months? ahead$/u.test(row[0])).map((row) => Number(row[5]) / Number(row[2]));
+  assert.equal(Math.floor(Math.min(...factors) / 10) * 10, 320);
+  assert.equal(Math.round(Math.max(...factors) / 10) * 10, 1140);
+  assert.ok(drawing.markup.includes("320 to 1,140 times larger"));
 });
 
 test("the Rough Heston misfit figure restates Section 7.6 and the quoted bands of Table 1", async () => {
@@ -82,11 +129,15 @@ test("the Rough Heston misfit figure restates Section 7.6 and the quoted bands o
   assert.ok(blocks[precedingBlock(html, drawing.open)].source.startsWith("A certificate also settles the opposite question."));
 
   const quotes = new Map(tableRows(blocks, "Table 1.").flatMap((row) => [row.slice(0, 4), row.slice(4, 8)]).map((row) => [row[0], row]));
-  for (const [strike, excess] of [["4400", "0.490"], ["4500", "0.067"]]) {
+  const excesses = drawing.ends.filter((end) => end.text.startsWith("≥"));
+  const caps = [...drawing.markup.matchAll(/_openRange [^"]*"[^>]*style="left:([\d.]+)%/gu)].map((match) => Number(match[1]));
+  for (const [index, [strike, excess]] of [["4400", "0.490"], ["4500", "0.067"]].entries()) {
     const [, bid, ask, width] = quotes.get(strike);
     assert.ok(drawing.tips.includes(`${strike} call, quoted band\nBid ${bid}, ask ${ask}, width ${width}`), `${strike}: the band of Table 1.`);
     assert.ok(drawing.tips.some((tip) => tip.startsWith(`${strike} call, certified model price\nAt least ${excess} above the ask`)), `${strike}: the excess of Section 7.6.`);
     assert.ok(markdown.includes(`at least ${excess} points`), `The text states the excess at ${strike}.`);
+    assert.equal(excesses[index].text, `≥ ${excess}`);
+    assert.ok(near(excesses[index].at, caps[index]), `${strike}: the excess is written over its cap.`);
   }
   assert.ok(drawing.tips.some((tip) => tip.endsWith("\nLower end 92.886, ask 92.396")));
   assert.ok(markdown.includes("lower end is 92.886 points, while the quoted ask is 92.396"));
@@ -114,6 +165,8 @@ test("the grader figure evaluates (5.5) for Model B and meets every value of Tab
     assert.ok(drawing.tips.includes(`η = ${eta}\nObserved score ${scores[column + 1]}`) && drawing.tips.includes(`η = ${eta}\nTrue validity ${validity[column + 1]}`));
   }
   assert.equal(`${((100 * theta) / (theta + (1 - theta) * alpha)).toFixed(1)}%`, validity[5], "The limit is the positive predictive value.");
+  // Each line is named at its end.
+  for (const name of ["Observed score", "True validity", `Limit ${validity[5]}`]) assert.ok(drawing.markup.includes(`>${name}<`), `${name} is named on the drawing.`);
 
   // The rejected route keeps 1 / (1 + e^eta) of valid work.
   for (const [eta, share] of [[1, "26.9%"], [2, "11.9%"], [4, "1.8%"]]) {
@@ -134,7 +187,27 @@ test("the budget frontier draws the five plans of Table 5", async () => {
   assert.equal(plans.length, 5);
   for (const [name, , , deviation, shipped] of plans) {
     assert.ok(drawing.tips.includes(`${name}\nStandard deviation ${deviation} points\n${shipped} defects shipped`), `${name} is drawn at its row of Table 5.`);
+    assert.ok(drawing.markup.includes(`${shipped}<`), `${name}: its defects shipped are written at its point.`);
   }
   const shipped = Object.fromEntries(plans.map((row) => [row[0], Number(row[4])]));
   assert.equal((100 * (1 - shipped["Joint rule at the precision of risk-first routing"] / shipped["Risk-first for audits and for reviews"])).toFixed(1), "38.6");
+});
+
+test("a key-result figure names its marks where they lie and keeps a short caption", async () => {
+  const pages = [
+    ["out/certified-valuation-of-arithmetic-asian-options/index.html", ["asian-interval", "asian-first-order"]],
+    ["out/certified-joint-pricing-errors-in-rough-heston/index.html", ["heston-misfit"]],
+    ["out/experience/general-reasoning-evaluation-and-layered-verification/index.html", ["grader-ceiling"]],
+    ["out/experience/large-scale-domain-expert-feedback-governance-and-adaptive-review/index.html", ["budget-frontier"]],
+  ];
+  for (const [page, ids] of pages) {
+    const html = await read(page);
+    for (const id of ids) {
+      const drawing = figure(html, id);
+      assert.doesNotMatch(drawing.markup, /<ul\b/u, `${id} carries no legend.`);
+      const sentences = drawing.caption.split(/(?<=[.:;])\s+(?=[A-Z])/u).filter(Boolean);
+      assert.ok(sentences.length <= 2, `${id}: a caption of at most two sentences, found ${sentences.length}.`);
+      assert.ok(drawing.caption.split(/\s+/u).length <= 60, `${id}: a caption of at most 60 words.`);
+    }
+  }
 });
