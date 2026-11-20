@@ -41,6 +41,127 @@ function DependenceBudgetRuler() {
   );
 }
 
+/* Asian options, Section 1.2: the interval (1.3) for the continuous price of the
+   95–110 spread and the interval under the scheme on one price axis, with a
+   strip magnified around the proxy value (Section 5.5); below, the proved
+   bounds of Table 1 against the Rogers–Shi first-order bound, in quote steps of
+   0.01. Every value is the manuscript's. */
+const SPREAD = {
+  continuous: [6.508371733, 6.518868974],
+  scheme: [6.507844281, 6.519014106],
+  proxy: 6.513251661289,
+  radius: 0.00021,
+  simulated: 6.51335,
+  library: 6.52,
+} as const;
+const QUOTE_STEP = 0.01;
+// Table 1: the proved bound and the first-order bound E[sd(A|G)]/2, in price units.
+const FIRST_ORDER = [
+  {
+    name: "Crude oil calls, 1 to 12 months ahead",
+    value: "0.0023–0.0081",
+    classical: "2.6",
+    contracts: [
+      { name: "Crude oil call, 1 month ahead", bound: "0.0000805", steps: "0.0081", first: "0.0259" },
+      { name: "Crude oil call, 3 months ahead", bound: "0.0000462", steps: "0.0047", first: "0.0262" },
+      { name: "Crude oil call, 6 months ahead", bound: "0.0000324", steps: "0.0033", first: "0.0261" },
+      { name: "Crude oil call, 12 months ahead", bound: "0.0000224", steps: "0.0023", first: "0.0256" },
+    ],
+  },
+  {
+    name: "Twelve monthly fixings, call at 95",
+    value: "0.36",
+    classical: "13.34",
+    contracts: [{ name: "Twelve monthly fixings, call at 95", bound: "0.003573", steps: "0.36", first: "0.1334" }],
+  },
+  {
+    name: "Annual-average oil put at 70",
+    value: "0.91",
+    classical: "52.06",
+    contracts: [{ name: "Annual-average oil put at 70", bound: "0.009084", steps: "0.91", first: "0.5206" }],
+  },
+] as const;
+
+function AsianIntervalLine() {
+  const interval = ([low, high]: readonly [number, number]) => `[${low}, ${high}]`;
+  // The price axis, and a window around the proxy value magnified 25 times.
+  const x = linear(6.506, 6.521);
+  const ticks = [6.51, 6.515, 6.52].map((at) => ({ at, label: at.toFixed(3) }));
+  const grid = ticks.map((tick) => x(tick.at));
+  const zoom = [6.51295, 6.51355] as const;
+  const lens = linear(...zoom);
+  const lensTicks = [6.513, 6.5132, 6.5134].map((at) => ({ at, label: at.toFixed(4) }));
+  const library = [{ at: x(SPREAD.library), tone: "soft" as const }];
+  const windowBand = <span className={styles.lensWindow} data-lens-window="" aria-hidden="true" style={{ left: `${x(zoom[0])}%`, width: `${x(zoom[1]) - x(zoom[0])}%` }} />;
+  const proxyTip = `Proxy value ${SPREAD.proxy}\nknown to ±${SPREAD.radius}`;
+  // Quote steps on a logarithmic scale.
+  const q = logarithmic(0.001, 100);
+  const qTicks = [0.001, 0.01, 0.1, 1, 10, 100].map((at) => ({ at, label: String(at), minor: false }));
+  const steps = (price: string) => Number(price) / QUOTE_STEP;
+  return (
+    <Figure
+      id="asian-interval"
+      title="Proved price intervals and the classical first-order bound"
+      caption="The interval (1.3) for the continuous price of the 95–110 spread under Heston, 16 basis points of the price wide, and the interval for the price under absorbed Euler with $h=1/768$; a library that prints 6.52 lies outside both. The magnified strip shows the proxy value, known to $\pm.00021$, and the simulated price close to $6.51335$: almost all of the width of (1.3) is the allowance for the two costs of the kink. Below, the proved bounds of Table 1 against the Rogers–Shi first-order bound in Black's model, in quote steps: for the monthly crude oil calls the first-order bound is 320 to 1,140 times larger."
+    >
+      <div className={styles.intervalPanel}>
+        <p className={styles.panelTitle}>Price of the 95–110 spread under Heston</p>
+        <Bars label={`The continuous price lies in ${interval(SPREAD.continuous)}, the interval (1.3); the price under absorbed Euler with step 1/768 lies in ${interval(SPREAD.scheme)}. Both contain the proxy value ${SPREAD.proxy} and exclude 6.52.`} stack>
+          <BarHeader marks={[{ at: x(SPREAD.library), label: "A library that prints 6.52", tone: "steel", anchor: "right" }]} />
+          <BarRow label="Continuous price, (1.3)" value={interval(SPREAD.continuous)} grid={grid} rules={library}>
+            {windowBand}
+            <Range x={x} from={SPREAD.continuous[0]} to={SPREAD.continuous[1]} tone="accent" tip={`Continuous price, (1.3)\n${interval(SPREAD.continuous)}\nAllowance .004670 below the proxy value and .005407 above`} />
+            <span className={`${kit.dot} ${kit.ink}`} data-tip={proxyTip} style={{ left: `${x(SPREAD.proxy)}%`, top: "50%" }} />
+          </BarRow>
+          <BarRow label="Price under absorbed Euler, $h=1/768$" value={interval(SPREAD.scheme)} grid={grid} rules={library}>
+            {windowBand}
+            <Range x={x} from={SPREAD.scheme[0]} to={SPREAD.scheme[1]} tone="sky" tip={`Price under absorbed Euler, h = 1/768\n${interval(SPREAD.scheme)}`} />
+          </BarRow>
+          <BarAxis x={x} ticks={ticks} />
+        </Bars>
+        {/* The window runs down through the axis row, clear of its labels, and opens onto the strip. */}
+        <svg className={`${styles.lensLink} ${kit.fade}`} data-lens-link="" viewBox="0 0 100 60" preserveAspectRatio="none" aria-hidden="true" focusable="false">
+          <polygon points={`${x(zoom[0])},0 ${x(zoom[1])},0 ${x(zoom[1])},30 100,60 0,60 ${x(zoom[0])},30`} />
+          <polyline points={`${x(zoom[0])},0 ${x(zoom[0])},30 0,60`} />
+          <polyline points={`${x(zoom[1])},0 ${x(zoom[1])},30 100,60`} />
+        </svg>
+        <Bars label={`Magnified around the proxy value: the proxy value ${SPREAD.proxy}, known to plus or minus ${SPREAD.radius}, and the simulated price, close to ${SPREAD.simulated}, which exceeds the proxy value by 0.000102 with standard error 0.000004.`} stack>
+          <BarRow label="Magnified 25 times around the proxy value" grid={lensTicks.map((tick) => lens(tick.at))}>
+            <Range x={lens} from={SPREAD.proxy - SPREAD.radius} to={SPREAD.proxy + SPREAD.radius} tone="ink" tip={proxyTip} />
+            <span className={`${kit.dot} ${kit.ink}`} data-tip={proxyTip} style={{ left: `${lens(SPREAD.proxy)}%`, top: "50%" }} />
+            <span className={`${kit.dot} ${kit.ink}`} data-ring="" data-tip={`Simulated price, close to ${SPREAD.simulated}\n.000102 above the proxy value, standard error .000004`} style={{ left: `${lens(SPREAD.simulated)}%`, top: "50%" }} />
+          </BarRow>
+          <BarAxis x={lens} ticks={lensTicks} title="Price" />
+        </Bars>
+        <Legend items={[{ label: "Proxy value, known to $\\pm.00021$", tone: "ink", shape: "dot" }, { label: "Simulated price, close to $6.51335$", tone: "ink", shape: "ring" }]} />
+      </div>
+      <div className={styles.intervalPanel}>
+        <p className={styles.panelTitle}>Proved and first-order bounds in Black&apos;s model, Table 1</p>
+        <Bars label="Width of the price interval in quote steps, on a logarithmic scale. Monthly crude oil calls one to twelve months ahead: proved bound 0.0023 to 0.0081, first-order bound 2.6. Twelve monthly fixings, call at 95: proved bound 0.36, first-order bound 13.34. Annual-average oil put at 70: proved bound 0.91, first-order bound 52.06. A quote step is one cent per barrel, or 0.01." stack>
+          <BarHeader marks={[{ at: q(1), label: "One quote step", tone: "steel", anchor: "left" }]} />
+          {FIRST_ORDER.map((row) => {
+            const proved = row.contracts.map((contract) => steps(contract.bound));
+            const classical = row.contracts.map((contract) => steps(contract.first));
+            return (
+              <BarRow key={row.name} label={row.name} value={row.value} valueNote={`first order ${row.classical}`} grid={qTicks.map((tick) => q(tick.at))} rules={[{ at: q(1), tone: "soft" }]}>
+                <span className={`${styles.link} ${kit.steel}`} style={{ left: `${q(Math.max(...proved))}%`, width: `${q(Math.min(...classical)) - q(Math.max(...proved))}%` }} />
+                {row.contracts.map((contract) => (
+                  <span key={`first-${contract.name}`} className={`${kit.dot} ${kit.steel}`} data-ring="" data-tip={`${contract.name}\nFirst-order bound ${contract.first}`} style={{ left: `${q(steps(contract.first))}%`, top: "50%" }} />
+                ))}
+                {row.contracts.map((contract) => (
+                  <span key={`bound-${contract.name}`} className={`${kit.dot} ${kit.accent}`} data-tip={`${contract.name}\nProved bound ${contract.bound}, ${contract.steps} quote steps`} style={{ left: `${q(steps(contract.bound))}%`, top: "50%" }} />
+                ))}
+              </BarRow>
+            );
+          })}
+          <BarAxis x={q} ticks={qTicks} title="Quote steps, log scale" />
+        </Bars>
+        <Legend items={[{ label: "Proved bound", tone: "accent", shape: "dot" }, { label: "First-order bound, $E[\\mathrm{sd}(A\\mid G)]/2$", tone: "steel", shape: "ring" }]} />
+      </div>
+    </Figure>
+  );
+}
+
 /* Asian options, Tables 5 and 6: the proved interval for the Euler gap and its width by Euler step. */
 const ASIAN_STEPS = [
   { step: "1/384", total: 0.028009519599, share: "95.5%", enclosure: [-0.014169989568, 0.013839530031], parts: [0.026754977094, 0.000265787793, 0.000028191423, 0.000177646019, 0.000782917272] },
@@ -176,6 +297,41 @@ function HestonStageBounds() {
   );
 }
 
+/* Rough Heston, Section 7.6 and Table 1: at alpha = 0.52 on bank H0, the certified
+   model price of the 4400 and 4500 calls against the quoted band, in points from
+   the ask. The section states how far above the ask each interval starts, and
+   the drawing carries it on to the end of the axis. */
+const MISFIT = [
+  { strike: "4400", bid: "91.10", ask: "92.40", width: 1.3, excess: 0.49, lower: "\nLower end 92.886, ask 92.396" },
+  { strike: "4500", bid: "55.00", ask: "56.20", width: 1.21, excess: 0.067, lower: "" },
+] as const;
+
+function HestonMisfit() {
+  const x = linear(-1.4, 1);
+  const ticks = [-1, -0.5, 0, 0.5, 1].map((at) => ({ at, label: at === 0 ? "0" : String(at).replace("-", "−") }));
+  const grid = ticks.map((tick) => x(tick.at));
+  const ask = [{ at: x(0), tone: "ink" as const }];
+  return (
+    <Figure
+      id="heston-misfit"
+      title="Certified model price against the quoted band, $\alpha=0.52$"
+      caption="Index points from the quoted ask of each six-month call, on the coarsest bank H0. The certified interval for the model price of the 4400 call starts at 92.886, 0.490 points above the ask of 92.396, and that of the 4500 call 0.067 points above its ask; at the other ten strikes the certified interval meets the quoted band. The miss is a statement about the model, and the pricer is ruled out as its cause."
+      legend={[{ label: "Quoted bid–ask band", tone: "mist" }, { label: "Certified interval for the model price, from its lower end", tone: "accent", shape: "line" }]}
+    >
+      <Bars label="In index points from the quoted ask. The 4400 call: quoted band 1.30 points wide, from bid 91.10 to ask 92.40; the certified model price is at least 0.490 above the ask, with lower end 92.886 against an ask of 92.396. The 4500 call: quoted band 1.21 points wide, from 55.00 to 56.20; the certified model price is at least 0.067 above the ask." stack>
+        <BarHeader marks={[{ at: x(0), label: "Quoted ask", anchor: "right" }]} />
+        {MISFIT.map((row) => (
+          <BarRow key={row.strike} label={`${row.strike} call`} value={`at least ${row.excess.toFixed(3)}`} grid={grid} rules={ask}>
+            <Seg x={x} from={-row.width} to={0} tone="mist" tip={`${row.strike} call, quoted band\nBid ${row.bid}, ask ${row.ask}, width ${row.width.toFixed(2)}`} />
+            <span className={`${styles.openRange} ${kit.accent}`} data-tip={`${row.strike} call, certified model price\nAt least ${row.excess.toFixed(3)} above the ask${row.lower}`} style={{ left: `${x(row.excess)}%`, width: `${100 - x(row.excess)}%` }} />
+          </BarRow>
+        ))}
+        <BarAxis x={x} ticks={ticks} title="Index points from the quoted ask" />
+      </Bars>
+    </Figure>
+  );
+}
+
 /* Rough Heston, Table 9: the objective enclosures of five roughness candidates at both levels. */
 const HESTON_CANDIDATES = [
   { alpha: "0.520", n1024: [4.825094, 6.77835], n2048: [5.293449, 6.024095], unresolved: true, best: true },
@@ -274,8 +430,10 @@ function HestonLedger() {
 
 export const selectedResearchFigures = {
   "dependence-budget": DependenceBudgetRuler,
+  "asian-interval": AsianIntervalLine,
   "asian-width": AsianWidthPlateau,
   "heston-stages": HestonStageBounds,
   "heston-candidates": HestonCandidateSeparation,
+  "heston-misfit": HestonMisfit,
   "heston-ledger": HestonLedger,
 } as const;

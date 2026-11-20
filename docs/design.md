@@ -355,6 +355,15 @@ caption gives them. Two bounds on one quantity are two solid curves in distinct 
 with the gap between them tinted, and a comparison across candidates stacks one panel
 for each on a shared axis.
 
+A key result stated as an interval or a bound is drawn on its own scale, after the
+sentence that states it, beside what it is measured against: an earlier bound, a quoted
+band, a tolerance, or a value it rules out. A proved interval is a line with end caps in
+the accent; an interval known by one end has a cap there and runs to an arrowhead at the
+end of the axis. Where an interval is too narrow for its axis, a strip beneath magnifies
+a window: the window is tinted on the rows above, its edges run down through the axis
+row, clear of its labels, and open onto the full width of the strip. Panels of one figure
+stack, each under a title in the interface face, parted by a dashed hairline.
+
 ### Research tables
 
 Research and legal tables share the figures' frame. Every table carries a manuscript
