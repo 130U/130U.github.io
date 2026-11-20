@@ -374,7 +374,7 @@ function GraderCeiling() {
           y={yRoute}
           xTicks={xTicks}
           yTicks={[0, 10, 20, 30, 40, 50].map((value) => ({ at: value, label: `${value}%`, solid: value === 0 }))}
-          yTitle="Share of valid work on the rejected route"
+          yTitle="Valid work on the rejected route"
           xTitle="Optimization strength $\eta$"
           crosshair={{
             x: at,
