@@ -25,7 +25,7 @@ export function AboutContent({ hasHero = false }: { hasHero?: boolean }) {
           </Heading>
           <div className={styles.biographyCopy}>
             <p>
-              Mathematics is how I make sense of things. I want to know which
+              Mathematics is how I understand a problem. I want to know which
               assumptions underlie a conclusion, what happens when they change,
               and where intuition stops being reliable.
             </p>
@@ -36,10 +36,10 @@ export function AboutContent({ hasHero = false }: { hasHero?: boolean }) {
               autonomous systems.
             </p>
             <p>
-              Most of it is in finance and AI. From 2023 to 2026 I designed
-              review and verification systems with a foundation model
-              developer, a frontier AI lab, and a global alternative asset
-              manager. I also build systems of my own:{" "}
+              Finance and AI are at its center. From 2023 to 2026 I designed
+              review and verification systems with a leading foundation model
+              developer, a frontier AI lab, and a leading global alternative
+              asset manager. I also build systems of my own:{" "}
               <a className={styles.inlineLink} href="https://github.com/130U/RESEARCH-Financial-Large-Language-Model" target="_blank" rel="noopener noreferrer">a language model</a>{" "}
               trained from scratch for financial research, and{" "}
               <a className={styles.inlineLink} href="https://github.com/130U/RESEARCH-Agent-Evaluation-Methodology" target="_blank" rel="noopener noreferrer">four gates</a>{" "}

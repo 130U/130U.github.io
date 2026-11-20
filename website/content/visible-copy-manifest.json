@@ -6,8 +6,8 @@
   ],
   "routes": {
     "/": {
-      "textSha256": "403ababdf4e9e92a4a2b9944c2b5dba17abbd85ea008483b8a265aa6af669da4",
-      "characterCount": 4063,
+      "textSha256": "92cc0490f6f8307388cd86a586caff51922aea0bb85a0d9a2e07a9ba1f46c58c",
+      "characterCount": 4080,
       "wordCount": 623,
       "preview": "Skip to Main Content Theodore Ouyang Duke Alumnus Sequoia Fellow Theodore Ouyang About Experience Blog Thinking Mathematically Working in AI Mathematics is how ",
       "altTexts": [],
@@ -911,9 +911,9 @@
       "formulaCount": 460
     },
     "/experience/": {
-      "textSha256": "8b76b2d82047a27707a4b5ee80f88ef01d7018c7548b37c7aaefbe42f920e3b0",
-      "characterCount": 10388,
-      "wordCount": 1536,
+      "textSha256": "94c6486d844b57dcbe700516a78e94287591728263ded6f050512fb885aeda04",
+      "characterCount": 10502,
+      "wordCount": 1551,
       "preview": "Skip to Main Content Theodore Ouyang About Experience Blog Experience: Areas of Focus AI Research and Engineering Data Science Legal Research and Policy Analysi",
       "altTexts": [],
       "ariaLabels": [
@@ -1821,13 +1821,13 @@
       ],
       "metadata": {
         "title": "Jiritsu Network: Asset-Verification Partnerships and Issuer Ranking | Theodore Ouyang",
-        "description": "I built the data and ranking system behind Jiritsu's partnerships for its asset-verification and privacy-preserving computation services, as the sole dedicated contributor for new issuers. I reported to co-founder Asher Gottesman and ran core-team reviews with technical and financial guidance from Gene Itkis of MIT Lincoln Laboratory and Michael Lustig, former Senior Managing Director at BlackRock. The work combined data engineering, preference ranking, and counterparty discussions, and it ended in partnership recommendations to the board.",
+        "description": "I built the data and ranking system behind Jiritsu's partnerships for its asset-verification and privacy-preserving computation services, as the sole dedicated contributor for new issuers. I reported to co-founder Asher Gottesman and ran core-team reviews with technical and financial guidance from Gene Itkis of MIT Lincoln Laboratory and Michael Lustig, former Senior Managing Director at BlackRock. I screened more than 18,000 token records down to six proposed pilot counterparties and delivered the partnership recommendations to the board.",
         "canonical": "https://www.theodoreoy.com/experience/jiritsu-network/",
         "openGraphTitle": "Jiritsu Network: Asset-Verification Partnerships and Issuer Ranking",
-        "openGraphDescription": "I built the data and ranking system behind Jiritsu's partnerships for its asset-verification and privacy-preserving computation services, as the sole dedicated contributor for new issuers. I reported to co-founder Asher Gottesman and ran core-team reviews with technical and financial guidance from Gene Itkis of MIT Lincoln Laboratory and Michael Lustig, former Senior Managing Director at BlackRock. The work combined data engineering, preference ranking, and counterparty discussions, and it ended in partnership recommendations to the board.",
+        "openGraphDescription": "I built the data and ranking system behind Jiritsu's partnerships for its asset-verification and privacy-preserving computation services, as the sole dedicated contributor for new issuers. I reported to co-founder Asher Gottesman and ran core-team reviews with technical and financial guidance from Gene Itkis of MIT Lincoln Laboratory and Michael Lustig, former Senior Managing Director at BlackRock. I screened more than 18,000 token records down to six proposed pilot counterparties and delivered the partnership recommendations to the board.",
         "openGraphUrl": "https://www.theodoreoy.com/experience/jiritsu-network/",
         "twitterTitle": "Jiritsu Network: Asset-Verification Partnerships and Issuer Ranking",
-        "twitterDescription": "I built the data and ranking system behind Jiritsu's partnerships for its asset-verification and privacy-preserving computation services, as the sole dedicated contributor for new issuers. I reported to co-founder Asher Gottesman and ran core-team reviews with technical and financial guidance from Gene Itkis of MIT Lincoln Laboratory and Michael Lustig, former Senior Managing Director at BlackRock. The work combined data engineering, preference ranking, and counterparty discussions, and it ended in partnership recommendations to the board."
+        "twitterDescription": "I built the data and ranking system behind Jiritsu's partnerships for its asset-verification and privacy-preserving computation services, as the sole dedicated contributor for new issuers. I reported to co-founder Asher Gottesman and ran core-team reviews with technical and financial guidance from Gene Itkis of MIT Lincoln Laboratory and Michael Lustig, former Senior Managing Director at BlackRock. I screened more than 18,000 token records down to six proposed pilot counterparties and delivered the partnership recommendations to the board."
       }
     },
     "/experience/euromonitor-international/": {
@@ -1863,13 +1863,13 @@
       ],
       "metadata": {
         "title": "China Construction Bank: PCA-Based Sustainability Analysis and Green-Credit Screening | Theodore Ouyang",
-        "description": "China Construction Bank's internal framework assessed sustainability on more than 30 indicators, some of which carried overlapping information. I used PCA and historically labeled cases to compare green-credit candidates on fewer dimensions, tested the ranked shortlist against the framework's minimum requirements, and documented the method for the product managers and risk officers evaluating it for platform use.",
+        "description": "China Construction Bank's internal framework assessed sustainability on more than 30 indicators, some of which carried overlapping information. I used PCA and historically labeled cases to compare approximately 2,000 green-credit candidates on a compact set of dimensions, tested the ranked shortlist against the framework's minimum requirements, and documented the method for the product managers and risk officers evaluating it for platform use.",
         "canonical": "https://www.theodoreoy.com/experience/china-construction-bank/",
         "openGraphTitle": "China Construction Bank: PCA-Based Sustainability Analysis and Green-Credit Screening",
-        "openGraphDescription": "China Construction Bank's internal framework assessed sustainability on more than 30 indicators, some of which carried overlapping information. I used PCA and historically labeled cases to compare green-credit candidates on fewer dimensions, tested the ranked shortlist against the framework's minimum requirements, and documented the method for the product managers and risk officers evaluating it for platform use.",
+        "openGraphDescription": "China Construction Bank's internal framework assessed sustainability on more than 30 indicators, some of which carried overlapping information. I used PCA and historically labeled cases to compare approximately 2,000 green-credit candidates on a compact set of dimensions, tested the ranked shortlist against the framework's minimum requirements, and documented the method for the product managers and risk officers evaluating it for platform use.",
         "openGraphUrl": "https://www.theodoreoy.com/experience/china-construction-bank/",
         "twitterTitle": "China Construction Bank: PCA-Based Sustainability Analysis and Green-Credit Screening",
-        "twitterDescription": "China Construction Bank's internal framework assessed sustainability on more than 30 indicators, some of which carried overlapping information. I used PCA and historically labeled cases to compare green-credit candidates on fewer dimensions, tested the ranked shortlist against the framework's minimum requirements, and documented the method for the product managers and risk officers evaluating it for platform use."
+        "twitterDescription": "China Construction Bank's internal framework assessed sustainability on more than 30 indicators, some of which carried overlapping information. I used PCA and historically labeled cases to compare approximately 2,000 green-credit candidates on a compact set of dimensions, tested the ranked shortlist against the framework's minimum requirements, and documented the method for the product managers and risk officers evaluating it for platform use."
       }
     },
     "/experience/jones-lang-lasalle/": {
@@ -1894,9 +1894,9 @@
       }
     },
     "/experience/hubble-technology-investment/": {
-      "textSha256": "89275562b91b623b78769b7523d52a005bc41d84c4d7b5fc01f61f99282839c7",
-      "characterCount": 1807,
-      "wordCount": 237,
+      "textSha256": "94cd7ebaafaf0720afc3be71318a5ffd03376b6701b865883194c4672bde112e",
+      "characterCount": 1806,
+      "wordCount": 236,
       "preview": "Skip to Main Content Theodore Ouyang Back to Experience Bluetooth Satellite Commercialization and Market Selection Organization Hubble Network Position Student ",
       "altTexts": [],
       "ariaLabels": [
@@ -1947,19 +1947,19 @@
       ],
       "metadata": {
         "title": "CITIC Securities: Agriculture Equity Research and Valuation | Theodore Ouyang",
-        "description": "I worked on sector analysis and research reports in the Agriculture Research Group and prepared material for its internal investment-strategy discussions.",
+        "description": "I produced sector analysis and valuation work for the Agriculture Research Group's research reports and its internal investment-strategy discussions.",
         "canonical": "https://www.theodoreoy.com/experience/citic-securities/",
         "openGraphTitle": "CITIC Securities: Agriculture Equity Research and Valuation",
-        "openGraphDescription": "I worked on sector analysis and research reports in the Agriculture Research Group and prepared material for its internal investment-strategy discussions.",
+        "openGraphDescription": "I produced sector analysis and valuation work for the Agriculture Research Group's research reports and its internal investment-strategy discussions.",
         "openGraphUrl": "https://www.theodoreoy.com/experience/citic-securities/",
         "twitterTitle": "CITIC Securities: Agriculture Equity Research and Valuation",
-        "twitterDescription": "I worked on sector analysis and research reports in the Agriculture Research Group and prepared material for its internal investment-strategy discussions."
+        "twitterDescription": "I produced sector analysis and valuation work for the Agriculture Research Group's research reports and its internal investment-strategy discussions."
       }
     },
     "/experience/ey-parthenon/": {
-      "textSha256": "836f62cb91317bc336046a997ad84ccdb46e15359337a88843cfc089f187dc03",
+      "textSha256": "b4ab64ab88f28c427806359dc32b47f866f4f05bbebad67e9b02d01c190f4470",
       "characterCount": 484,
-      "wordCount": 71,
+      "wordCount": 70,
       "preview": "Skip to Main Content Theodore Ouyang Back to Experience Business-Line Restructuring for Digital Transformation Organization EY-Parthenon Position Summer Intern ",
       "altTexts": [],
       "ariaLabels": [
@@ -1968,19 +1968,19 @@
       ],
       "metadata": {
         "title": "EY-Parthenon: Business-Line Restructuring for Digital Transformation | Theodore Ouyang",
-        "description": "I worked on the business-line restructuring in a digital-transformation engagement for a leading Chinese company preparing to list.",
+        "description": "I served on the business-line restructuring workstream of a digital-transformation engagement for a leading Chinese company preparing to list.",
         "canonical": "https://www.theodoreoy.com/experience/ey-parthenon/",
         "openGraphTitle": "EY-Parthenon: Business-Line Restructuring for Digital Transformation",
-        "openGraphDescription": "I worked on the business-line restructuring in a digital-transformation engagement for a leading Chinese company preparing to list.",
+        "openGraphDescription": "I served on the business-line restructuring workstream of a digital-transformation engagement for a leading Chinese company preparing to list.",
         "openGraphUrl": "https://www.theodoreoy.com/experience/ey-parthenon/",
         "twitterTitle": "EY-Parthenon: Business-Line Restructuring for Digital Transformation",
-        "twitterDescription": "I worked on the business-line restructuring in a digital-transformation engagement for a leading Chinese company preparing to list."
+        "twitterDescription": "I served on the business-line restructuring workstream of a digital-transformation engagement for a leading Chinese company preparing to list."
       }
     },
     "/experience/independent-stem-olympiad-training/": {
-      "textSha256": "1ff7f34a8656e2ad3f3dd7c486e5bed68e5610fd7bf13f85c162f345b612e81e",
-      "characterCount": 764,
-      "wordCount": 101,
+      "textSha256": "0ded30a036136c18fa46419851bbd3ced186abfd7c4fa4d956207f6cde46a0c7",
+      "characterCount": 759,
+      "wordCount": 100,
       "preview": "Skip to Main Content Theodore Ouyang Back to Experience Advanced Physics Olympiad Instruction Organization Independent STEM Olympiad Training Practice Position ",
       "altTexts": [],
       "ariaLabels": [
@@ -1989,18 +1989,18 @@
       ],
       "metadata": {
         "title": "Independent STEM Olympiad Training Practice: Advanced Physics Olympiad Instruction | Theodore Ouyang",
-        "description": "I ran my own coaching practice for students preparing for advanced physics Olympiads, online and in person. I taught the physics and wrote original problems for competition practice.",
+        "description": "I ran an independent coaching practice that prepared students for USAPhO and U.S. Physics Team selection, teaching IPhO-level physics online and in person and writing original problems for competition training.",
         "canonical": "https://www.theodoreoy.com/experience/independent-stem-olympiad-training/",
         "openGraphTitle": "Independent STEM Olympiad Training Practice: Advanced Physics Olympiad Instruction",
-        "openGraphDescription": "I ran my own coaching practice for students preparing for advanced physics Olympiads, online and in person. I taught the physics and wrote original problems for competition practice.",
+        "openGraphDescription": "I ran an independent coaching practice that prepared students for USAPhO and U.S. Physics Team selection, teaching IPhO-level physics online and in person and writing original problems for competition training.",
         "openGraphUrl": "https://www.theodoreoy.com/experience/independent-stem-olympiad-training/",
         "twitterTitle": "Independent STEM Olympiad Training Practice: Advanced Physics Olympiad Instruction",
-        "twitterDescription": "I ran my own coaching practice for students preparing for advanced physics Olympiads, online and in person. I taught the physics and wrote original problems for competition practice."
+        "twitterDescription": "I ran an independent coaching practice that prepared students for USAPhO and U.S. Physics Team selection, teaching IPhO-level physics online and in person and writing original problems for competition training."
       }
     },
     "/experience/stem-olympiad-competitions/": {
-      "textSha256": "c38321fdfcd45c20def06bd9759b14beea4930de62bdeb080d5083862c6cd242",
-      "characterCount": 1571,
+      "textSha256": "0eb61518f7e25409f3aa8567f868ab76da1ac6fd1c0901cdc99666a763006924",
+      "characterCount": 1574,
       "wordCount": 215,
       "preview": "Skip to Main Content Theodore Ouyang Back to Experience Advanced Olympiad Training, Awards, and Peer Mentoring Organization The High School Attached to Hunan No",
       "altTexts": [],
@@ -2010,13 +2010,13 @@
       ],
       "metadata": {
         "title": "The High School Attached to Hunan Normal University: Advanced Olympiad Training, Awards, and Peer Mentoring | Theodore Ouyang",
-        "description": "I trained for physics and mathematics Olympiads in the school's nationally leading physics competition program and mentored teammates in its study groups.",
+        "description": "I earned provincial- and national-level awards in physics and mathematics Olympiads as a member of the school's nationally leading physics competition program, and mentored teammates in its study groups.",
         "canonical": "https://www.theodoreoy.com/experience/stem-olympiad-competitions/",
         "openGraphTitle": "The High School Attached to Hunan Normal University: Advanced Olympiad Training, Awards, and Peer Mentoring",
-        "openGraphDescription": "I trained for physics and mathematics Olympiads in the school's nationally leading physics competition program and mentored teammates in its study groups.",
+        "openGraphDescription": "I earned provincial- and national-level awards in physics and mathematics Olympiads as a member of the school's nationally leading physics competition program, and mentored teammates in its study groups.",
         "openGraphUrl": "https://www.theodoreoy.com/experience/stem-olympiad-competitions/",
         "twitterTitle": "The High School Attached to Hunan Normal University: Advanced Olympiad Training, Awards, and Peer Mentoring",
-        "twitterDescription": "I trained for physics and mathematics Olympiads in the school's nationally leading physics competition program and mentored teammates in its study groups."
+        "twitterDescription": "I earned provincial- and national-level awards in physics and mathematics Olympiads as a member of the school's nationally leading physics competition program, and mentored teammates in its study groups."
       }
     },
     "/blog/": {

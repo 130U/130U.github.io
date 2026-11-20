@@ -155,7 +155,7 @@
       "id": 5,
       "categoryId": "02",
       "organization": "Jiritsu Network",
-      "summary": "I built the data and ranking system behind Jiritsu's partnerships for its asset-verification and privacy-preserving computation services, as the sole dedicated contributor for new issuers. I reported to co-founder Asher Gottesman and ran core-team reviews with technical and financial guidance from Gene Itkis of MIT Lincoln Laboratory and Michael Lustig, former Senior Managing Director at BlackRock. The work combined data engineering, preference ranking, and counterparty discussions, and it ended in partnership recommendations to the board.",
+      "summary": "I built the data and ranking system behind Jiritsu's partnerships for its asset-verification and privacy-preserving computation services, as the sole dedicated contributor for new issuers. I reported to co-founder Asher Gottesman and ran core-team reviews with technical and financial guidance from Gene Itkis of MIT Lincoln Laboratory and Michael Lustig, former Senior Managing Director at BlackRock. I screened more than 18,000 token records down to six proposed pilot counterparties and delivered the partnership recommendations to the board.",
       "readMoreLabel": "Read More",
       "detailTitle": "Asset-Verification Partnerships and Issuer Ranking",
       "metadata": {
@@ -204,7 +204,7 @@
       "id": 7,
       "categoryId": "02",
       "organization": "China Construction Bank",
-      "summary": "China Construction Bank's internal framework assessed sustainability on more than 30 indicators, some of which carried overlapping information. I used PCA and historically labeled cases to compare green-credit candidates on fewer dimensions, tested the ranked shortlist against the framework's minimum requirements, and documented the method for the product managers and risk officers evaluating it for platform use.",
+      "summary": "China Construction Bank's internal framework assessed sustainability on more than 30 indicators, some of which carried overlapping information. I used PCA and historically labeled cases to compare approximately 2,000 green-credit candidates on a compact set of dimensions, tested the ranked shortlist against the framework's minimum requirements, and documented the method for the product managers and risk officers evaluating it for platform use.",
       "readMoreLabel": "Read More",
       "detailTitle": "PCA-Based Sustainability Analysis and Green-Credit Screening",
       "metadata": {
@@ -355,7 +355,7 @@
         "I assessed each application from stakeholder objectives, company cost data, and technical parameters, comparing customer needs, incumbent solutions, accuracy, power consumption, and reporting frequency to identify promising uses for periodic location tracking.",
         "I prepared and conducted workstream interviews through Duke Pratt's alumni network, including sales professionals, contributing to a team research program covering approximately 20 fields, typically two or three alumni per field, and more than 100 hours of expert interviews.",
         "I cross-checked Fuqua business databases, official statistics, industry reports, competitor research, and interviews, applied SWOT and PESTLE, and contributed market-sizing models, scenario forecasts, and sensitivity analyses to the comparison of priority applications.",
-        "My workstream's findings went into the team's evaluation of approximately 20 use cases, its five recommended market directions, and its 100-page strategy report. I presented the conclusions to management and the board, covering market attractiveness, competition, and what commercialization would require."
+        "My workstream's findings informed the team's evaluation of approximately 20 use cases, its five recommended market directions, and its 100-page strategy report. I presented the conclusions to management and the board, covering market attractiveness, competition, and what commercialization would require."
       ],
       "notes": []
     },
@@ -386,7 +386,7 @@
       "id": 15,
       "categoryId": "04",
       "organization": "CITIC Securities",
-      "summary": "I worked on sector analysis and research reports in the Agriculture Research Group and prepared material for its internal investment-strategy discussions.",
+      "summary": "I produced sector analysis and valuation work for the Agriculture Research Group's research reports and its internal investment-strategy discussions.",
       "readMoreLabel": "Read More",
       "detailTitle": "Agriculture Equity Research and Valuation",
       "metadata": {
@@ -404,7 +404,7 @@
       "id": 16,
       "categoryId": "04",
       "organization": "EY-Parthenon",
-      "summary": "I worked on the business-line restructuring in a digital-transformation engagement for a leading Chinese company preparing to list.",
+      "summary": "I served on the business-line restructuring workstream of a digital-transformation engagement for a leading Chinese company preparing to list.",
       "readMoreLabel": "Read More",
       "detailTitle": "Business-Line Restructuring for Digital Transformation",
       "metadata": {
@@ -414,7 +414,7 @@
       },
       "contributionsLabel": "Key Contributions",
       "keyContributions": [
-        "I worked on the team's review and restructuring of the client's business lines, aimed at clearer visibility into operations, and prepared inputs for the cost and efficiency analysis."
+        "With the engagement team, I reviewed and restructured the client's business lines for clearer visibility into operations, and prepared the inputs to the cost and efficiency analysis."
       ],
       "notes": []
     },
@@ -422,7 +422,7 @@
       "id": 17,
       "categoryId": "05",
       "organization": "Independent STEM Olympiad Training Practice",
-      "summary": "I ran my own coaching practice for students preparing for advanced physics Olympiads, online and in person. I taught the physics and wrote original problems for competition practice.",
+      "summary": "I ran an independent coaching practice that prepared students for USAPhO and U.S. Physics Team selection, teaching IPhO-level physics online and in person and writing original problems for competition training.",
       "readMoreLabel": "Read More",
       "detailTitle": "Advanced Physics Olympiad Instruction",
       "metadata": {
@@ -432,7 +432,7 @@
       },
       "contributionsLabel": "Key Contributions",
       "keyContributions": [
-        "I coached several students competing in USAPhO and U.S. Physics Team selection. We worked on rigorous derivations, clearly structured written solutions, and problem-solving methods suited to competition time limits.",
+        "I coached students competing in USAPhO and U.S. Physics Team selection, training them in rigorous derivation, clearly structured written solutions, and problem-solving methods built for competition time limits.",
         "I delivered online and in-person IPhO-level training camps in mechanics, electromagnetism, thermodynamics, optics, modern physics, and advanced mathematical methods."
       ],
       "notes": []
@@ -441,18 +441,18 @@
       "id": 18,
       "categoryId": "05",
       "organization": "The High School Attached to Hunan Normal University",
-      "summary": "I trained for physics and mathematics Olympiads in the school's nationally leading physics competition program and mentored teammates in its study groups.",
+      "summary": "I earned provincial- and national-level awards in physics and mathematics Olympiads as a member of the school's nationally leading physics competition program, and mentored teammates in its study groups.",
       "readMoreLabel": "Read More",
       "detailTitle": "Advanced Olympiad Training, Awards, and Peer Mentoring",
       "metadata": {
-        "position": "Physics and Mathematics Olympiad Trainee and Peer Mentor, School Physics Competition Team",
+        "position": "Physics and Mathematics Olympiad Competitor and Peer Mentor, School Physics Competition Team",
         "location": "Changsha, China",
         "dates": "August 2016 – January 2019"
       },
       "contributionsLabel": "Key Contributions",
       "keyContributions": [
-        "I mentored teammates in the mechanics and electromagnetism study groups, working through advanced problems and explaining the derivations behind each solution method. I also presented methods from my own study and from group discussion to the full competition team.",
         "I earned provincial- and national-level competition awards across physics and mathematics Olympiads.",
+        "I mentored teammates in the mechanics and electromagnetism study groups, working through advanced problems and explaining the derivations behind each solution method. I also presented methods from my own study and from group discussion to the full competition team.",
         "I completed intensive training in mechanics, electromagnetism, thermodynamics, optics, and modern physics, including undergraduate-level classical mechanics, electrodynamics, statistical physics, and quantum mechanics.",
         "I studied mathematical analysis, linear algebra, calculus, ordinary differential equations, and numerical analysis, applying these tools to nonstandard physics problems and extended derivations."
       ],
