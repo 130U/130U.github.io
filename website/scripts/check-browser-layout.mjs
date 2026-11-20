@@ -184,6 +184,24 @@ function inspectFigure(figure) {
       if (!svg || !ink || rect(svg).width < fontSize / 4 || rect(svg).width > fontSize * 3 || rect(ink).width < 1 || rect(ink).height < 1) issues.push({ kind: "share-axis-not-rendered", text: axis.querySelector('annotation')?.textContent, svg: svg && rect(svg), ink: ink && rect(ink) });
     }
   }
+  // A magnified strip: its window runs down through the axis row above the
+  // strip, so no tick label of that axis may sit in the window, and the
+  // hairlines that join the two must reach the strip's full width.
+  // Its parts fade in as the figure enters, so they are found by layout, not by opacity.
+  const laidOut = element => !element.closest('[hidden]');
+  for (const link of [...frame.querySelectorAll('[data-lens-link]')].filter(laidOut)) {
+    const windows = [...frame.querySelectorAll('[data-lens-window]')].filter(laidOut).map(rect);
+    const axis = link.previousElementSibling?.querySelector('[class$="_axis"]');
+    if (!windows.length || !axis) { issues.push({ kind: "missing-lens-geometry" }); continue; }
+    const [left, right] = [Math.min(...windows.map(box => box.left)), Math.max(...windows.map(box => box.right))];
+    for (const tick of [...axis.querySelectorAll('[class*="_tickX"]')].filter(shown)) {
+      const box = rect(tick);
+      if (box.left < right + 2 && box.right > left - 2) issues.push({ kind: "tick-label-in-lens-window", text: tick.textContent.trim(), box, window: { left, right } });
+    }
+    const strip = rect(link);
+    const below = link.nextElementSibling ? rect(link.nextElementSibling) : null;
+    if (!below || Math.abs(strip.left - below.left) > 1 || Math.abs(strip.right - below.right) > 1) issues.push({ kind: "lens-link-misaligned", strip, below });
+  }
   if (figure.dataset.figure === "heston-candidates") {
     const bars = frame.querySelector('[class*="_bars"]');
     const axis = bars?.querySelector('[class$="_axis"]');

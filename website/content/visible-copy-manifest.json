@@ -431,9 +431,9 @@
       "formulaCount": 1025
     },
     "/certified-valuation-of-arithmetic-asian-options/": {
-      "textSha256": "635872832a204fc7c8d23fa0a5bea1a838d410ced91bfee782410c317e48cf12",
-      "characterCount": 69689,
-      "wordCount": 11493,
+      "textSha256": "539feae13fdff79f851d7a22c3fd9dfa9c05d0ca74f8f91518b003d44ac4d53f",
+      "characterCount": 70927,
+      "wordCount": 11701,
       "preview": "Skip to Main Content Theodore Ouyang Back to Selected Research Certified Valuation of Arithmetic Asian Options: The Cost of Exercising on the Geometric Average ",
       "altTexts": [],
       "ariaLabels": [
@@ -453,6 +453,11 @@
         "Mathematical equation",
         "Mathematical equation",
         "Scrollable mathematical expression",
+        "Scrollable mathematical expression",
+        "Zoom in",
+        "The continuous price lies in [6.508371733, 6.518868974], the interval (1.3); the price under absorbed Euler with step 1/768 lies in [6.507844281, 6.519014106]. Both contain the proxy value 6.513251661289 and exclude 6.52.",
+        "Magnified around the proxy value: the proxy value 6.513251661289, known to plus or minus 0.00021, and the simulated price, close to 6.51335, which exceeds the proxy value by 0.000102 with standard error 0.000004.",
+        "Width of the price interval in quote steps, on a logarithmic scale. Monthly crude oil calls one to twelve months ahead: proved bound 0.0023 to 0.0081, first-order bound 2.6. Twelve monthly fixings, call at 95: proved bound 0.36, first-order bound 13.34. Annual-average oil put at 70: proved bound 0.91, first-order bound 52.06. A quote step is one cent per barrel, or 0.01.",
         "Scrollable mathematical expression",
         "Scrollable mathematical expression",
         "Scrollable mathematical expression",
@@ -701,13 +706,13 @@
         "twitterTitle": "Certified Valuation of Arithmetic Asian Options: The Cost of Exercising on the Geometric Average",
         "twitterDescription": "The cost of exercising an arithmetic Asian option on the geometric average: a proved bound, its cubic law in Black's model, and a certified Heston price interval with its Euler discretization error."
       },
-      "mathSourceSha256": "6b27445e28276f9adfcb080776f1c1a8497f69399741a22969195b159b0d7f05",
-      "formulaCount": 751
+      "mathSourceSha256": "c03900cf8a6733ce42f51555d8c5b74e98983b617eb7efb0e1fb60f80a2449e9",
+      "formulaCount": 758
     },
     "/certified-joint-pricing-errors-in-rough-heston/": {
-      "textSha256": "48aad8fd769e9aabe90491e89fe4320328ac6bfc02549d4deaef091c0955efd6",
-      "characterCount": 65645,
-      "wordCount": 10615,
+      "textSha256": "294bfca8129d226796b62407de90a06581315e7ce25e326a33d04a340fdd66dd",
+      "characterCount": 66217,
+      "wordCount": 10722,
       "preview": "Skip to Main Content Theodore Ouyang Back to Selected Research Certified Joint Pricing Errors in Rough Heston GitHub Full Manuscript Abstract Every option on on",
       "altTexts": [],
       "ariaLabels": [
@@ -895,6 +900,8 @@
         "Choose the number of time cells",
         "Joint objective enclosures, J times 10 to the 8. With 1024 cells: alpha 0.520 from 4.825 to 6.778, 0.525 from 5.645 to 7.501, 0.530 from 6.749 to 8.518, 0.540 from 9.807 to 11.422, 0.550 from 14.001 to 15.482. With 2048 cells: 0.520 from 5.293 to 6.024, 0.525 from 6.098 to 6.798, 0.530 from 7.187 to 7.860, 0.540 from 10.219 to 10.839, 0.550 from 14.387 to 14.961.",
         "Zoom in",
+        "In index points from the quoted ask. The 4400 call: quoted band 1.30 points wide, from bid 91.10 to ask 92.40; the certified model price is at least 0.490 above the ask, with lower end 92.886 against an ask of 92.396. The 4500 call: quoted band 1.21 points wide, from 55.00 to 56.20; the certified model price is at least 0.067 above the ask.",
+        "Zoom in",
         "Research data table"
       ],
       "metadata": {
@@ -907,8 +914,8 @@
         "twitterTitle": "Certified Joint Pricing Errors in Rough Heston",
         "twitterDescription": "Numerical pricing error as a common factor across strikes: a Riccati residual priced by forward variance in rough Heston, the netting of portfolio errors in strike space, and certified tolerances for S&P 500 option positions."
       },
-      "mathSourceSha256": "ee3203993173a45a329f04da7271a14d1efce66641690ac0e2197fefcd698dce",
-      "formulaCount": 460
+      "mathSourceSha256": "9e1916cd3607edc6f015c7ab8eaff0b0d7b2f9e06efb286a632a5c4479be0b31",
+      "formulaCount": 461
     },
     "/experience/": {
       "textSha256": "94c6486d844b57dcbe700516a78e94287591728263ded6f050512fb885aeda04",
@@ -951,9 +958,9 @@
       }
     },
     "/experience/large-scale-domain-expert-feedback-governance-and-adaptive-review/": {
-      "textSha256": "d4871101056f03c2211d856816f6c25e9ec6d497b02f5526dec5b5f009795615",
-      "characterCount": 36373,
-      "wordCount": 5766,
+      "textSha256": "609872dcef08acb3b4fd54d0f4929d29586b1467d50ece699081877461ea651e",
+      "characterCount": 36872,
+      "wordCount": 5851,
       "preview": "Skip to Main Content Theodore Ouyang Back to Experience Large-Scale Domain Expert Feedback Governance and Adaptive Review Organization Duke University × Leading",
       "altTexts": [],
       "ariaLabels": [
@@ -1026,6 +1033,8 @@
         "Zoom in",
         "Research data table",
         "Scrollable mathematical expression",
+        "Zoom in",
+        "Standard deviation of the estimate against defects shipped, for one budget of 5,000 cost units. Risk-first for audits and reviews: 0.657 points, 320.9 defects. Measurement rule, then reviews: 0.515 points, 336.2 defects. Joint rule: 0.568 points and 209.9 defects, 0.657 points and 197.1 defects, 1.035 points and 174.9 defects. At 0.657 points the joint rule ships 38.6% fewer defects than risk-first routing.",
         "Mathematical equation",
         "Scrollable mathematical expression",
         "Scrollable mathematical expression",
@@ -1121,9 +1130,9 @@
       "formulaCount": 189
     },
     "/experience/general-reasoning-evaluation-and-layered-verification/": {
-      "textSha256": "fa1eb0864a9b2717dc26f3430dec7bff463575358886660f93a5e5cb6fe90426",
-      "characterCount": 33426,
-      "wordCount": 5067,
+      "textSha256": "afb38ab15da8dd8c21594f9cdaca944999e6d8f1b5d864f32dad231b3182a8e5",
+      "characterCount": 33930,
+      "wordCount": 5147,
       "preview": "Skip to Main Content Theodore Ouyang Back to Experience General Reasoning Evaluation and Layered Verification Organization Duke University × Frontier AI Researc",
       "altTexts": [],
       "ariaLabels": [
@@ -1196,6 +1205,10 @@
         "Zoom in",
         "Research data table",
         "Zoom in",
+        "Show the cost of false acceptance or of false rejection",
+        "Model B under final-answer matching. Observed score 77.0%, 90.1%, 96.1% and 99.5% at optimization strength 0, 1, 2 and 4, with limit 100%. True validity 64.0%, 74.9%, 79.9% and 82.7%, with limit 83.2%, the grader's positive predictive value.",
+        "Two valid routes start equally common and the grader accepts only one. The other falls from 50% of valid work to 26.9%, 11.9% and 1.8% at optimization strength 1, 2 and 4.",
+        "Zoom in",
         "Research data table",
         "Zoom in",
         "Final-answer matching: 1,200 valid accepted, 1,800 invalid accepted, 600 invalid rejected; 40.0% of accepted submissions are valid. Strict reference-path matching: 600 valid accepted, 600 valid rejected, 2,400 invalid rejected. Certificate verification: 1,200 valid accepted, 2,400 invalid rejected.",
@@ -1213,8 +1226,8 @@
         "twitterTitle": "Duke University × Frontier AI Research Laboratory: General Reasoning Evaluation and Layered Verification",
         "twitterDescription": "A model can reach the right answer through an unsupported step, and a grader that matches a reference solution will reject a correct proof that takes another route."
       },
-      "mathSourceSha256": "c5b5770fbd85e3ce69f1f8a28ecd0192c581aabbfa5f7640168ee12f5fde3aae",
-      "formulaCount": 203
+      "mathSourceSha256": "f92a1bc72bb97f196c7b4a410b9964d3d9d422b11e46c2ed5b3bba16035c5b72",
+      "formulaCount": 206
     },
     "/experience/evidence-verification-and-robust-comparison-in-investment-research/": {
       "textSha256": "ea2e2e88b40c336c7fbe39f6ec249304df69f22bd9bd17b241d9a791fc16efd4",
