@@ -19,9 +19,9 @@ function naturalDisplay(region: HTMLElement) {
 }
 
 /**
- * A displayed equation that overshoots its column by a little is fitted, not
- * scrolled: the gap before its number closes to 1em, and the expression is set
- * smaller, down to the floor. Its left gutter scales with it and the padding
+ * A displayed equation that overshoots its column by a little is fitted to it:
+ * the gap before its number closes to 1em, and the expression is set smaller,
+ * down to the floor. Its left gutter scales with it and the padding
  * before it grows by as much, so the ink keeps its axis.
  */
 function fitDisplay(region: HTMLElement) {
@@ -51,8 +51,7 @@ function naturalInline(formula: HTMLElement) {
 
 /**
  * An inline formula a little wider than its line is set smaller, down to the
- * floor, rather than scrolled; its baseline offset scales with it, so it keeps
- * the text's baseline.
+ * floor; its baseline offset scales with it, so it keeps the text's baseline.
  */
 function fitInline(formula: HTMLElement) {
   if (!inlineAlign.has(formula)) inlineAlign.set(formula, formula.style.verticalAlign);

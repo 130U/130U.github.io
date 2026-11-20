@@ -274,7 +274,7 @@ locally at their natural size with native touch, trackpad, scrollbar, and keyboa
 navigation. Nothing
 scrolls for a near miss: a box shows a scrollbar, or a formula its fade, only when its
 content is genuinely wider or taller than its room. What overshoots by a little is
-fitted instead, within a bound: a formula is set smaller, to no less than nine tenths of
+fitted, within a bound: a formula is set smaller, to no less than nine tenths of
 its size; a table closes up its columns, to no less than an em between them; a figure
 comparison or panorama takes its room until that is a tenth short of its scroll width;
 a zoomed figure or table is set whole. The browser layout check fails any scroll box

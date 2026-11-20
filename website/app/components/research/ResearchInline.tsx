@@ -14,8 +14,8 @@ function ProofEnd({ source }: { source?: ReactNode }) {
 const RANGE = /(\d[\d,.]*–\d[\d,.]*)/u;
 
 // An identifier longer than a phone's line, written in camel case
-// (AnalyticDiscreteGeometricAveragePriceAsianHestonEngine), breaks before one of
-// its inner capitals rather than at an arbitrary letter.
+// (AnalyticDiscreteGeometricAveragePriceAsianHestonEngine), breaks only before
+// one of its inner capitals.
 const LONG_IDENTIFIER = /\b[A-Za-z]{30,}\b/gu;
 
 function BreakIdentifiers({ text }: { text: string }) {

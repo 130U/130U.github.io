@@ -21,7 +21,7 @@ const STAGE_MIN_WIDTH = 640;
 // A figure is enlarged as one picture: whole within the window when that
 // enlarges it enough, otherwise at a reading size that scrolls from its top.
 // A figure that would scroll by less than a tenth of its height is set whole,
-// at no less than nine tenths of that reading size, instead.
+// at nine tenths of that reading size or more.
 const FIGURE_MAX_ZOOM = 1.75;
 const FIGURE_FIT_FLOOR = 1.15;
 const FIGURE_SCROLL_ZOOM = 1.5;
@@ -183,7 +183,7 @@ export function ZoomStage() {
         }
         closeUp(region, table, parseFloat(getComputedStyle(table).fontSize));
       };
-      // A table that reaches a little past the bottom of the window is set smaller instead.
+      // A table that reaches a little past the bottom of the window is set smaller.
       const settleHeight = () => {
         const zoom = Number(panel.style.getPropertyValue("--zoom"));
         let next = zoom;

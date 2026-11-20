@@ -188,7 +188,7 @@ function inspectFigure(figure) {
   // A magnified strip: its window runs down through the axis row above the
   // strip, so no tick label of that axis may sit in the window, and the
   // hairlines that join the two must reach the strip's full width.
-  // Its parts fade in as the figure enters, so they are found by layout, not by opacity.
+  // Its parts fade in as the figure enters, so they are found by layout alone.
   const laidOut = element => !element.closest('[hidden]');
   for (const link of [...frame.querySelectorAll('[data-lens-link]')].filter(laidOut)) {
     const windows = [...frame.querySelectorAll('[data-lens-window]')].filter(laidOut).map(rect);
@@ -378,8 +378,7 @@ function inspectManuscript() {
 // and their gap to the text; punctuation pushed to the next line by the formula,
 // link or marker it closes against; a word, a number, a number range or a part
 // of a written-out address split mid-token; a contents entry whose wrapped title
-// returns under its number rather than under its first word; and a Return to
-// Text or footer link that wraps.
+// returns under its number; and a Return to Text or footer link that wraps.
 function inspectText() {
   const issues = [];
   const visibility = new Map();
