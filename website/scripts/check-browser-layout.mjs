@@ -274,7 +274,8 @@ function inspectManuscript() {
   const starts = new Map();
   const edges = [];
   for (const equation of document.querySelectorAll('[data-research-block-type="equation"]')) {
-    const drawing = equation.querySelector("svg[data-research-svg]");
+    // A tabular display keeps the drawing's gutter around its table, so it is measured as a drawing.
+    const drawing = equation.querySelector("[data-display-table], svg[data-research-svg]");
     const column = equation.getBoundingClientRect();
     // The ink starts past the drawing's transparent gutter, 0.375em at the drawing's own
     // size, which a fitted equation sets smaller.
@@ -294,6 +295,51 @@ function inspectManuscript() {
     equation.scrollLeft = 0;
   }
   if (edges.length && Math.max(...edges) - Math.min(...edges) > 0.5) issues.push({ kind: "equations-start-on-different-axes", starts: [...starts] });
+
+  // A display that is one array is set as a formal table: every cell of a row
+  // sits on the row's baseline, rows stand at least one line of mathematics
+  // apart, no cell draws a vertical rule, the row that heads the columns stands
+  // over a rule, a numbered table is centred on the math axis beside its number,
+  // and when it scrolls, row labels that leave room for the values stay in view.
+  for (const table of document.querySelectorAll("[data-display-table]")) {
+    const region = table.closest('[data-research-block-type="equation"]');
+    const size = parseFloat(getComputedStyle(table).fontSize);
+    const rows = [...table.children];
+    // Each cell opens with a strut 0.25em deep, so the row's baseline lies 0.25em above its foot.
+    const baselines = rows.map(row => [...row.children].map(cell => cell.firstElementChild.getBoundingClientRect().bottom - 0.25 * size));
+    baselines.forEach((line, index) => {
+      if (Math.max(...line) - Math.min(...line) > 0.5) issues.push({ kind: "display-table-row-off-baseline", row: index, baselines: line });
+      if (index && line[0] - baselines[index - 1][0] < 1.7348 * size - 0.5) issues.push({ kind: "display-table-rows-closer-than-a-line", row: index, pitch: line[0] - baselines[index - 1][0] });
+    });
+    for (const cell of table.querySelectorAll(":scope > * > *")) {
+      const style = getComputedStyle(cell);
+      if (parseFloat(style.borderLeftWidth) || parseFloat(style.borderRightWidth)) issues.push({ kind: "display-table-vertical-rule" });
+    }
+    const heading = table.querySelector(':scope > [data-rule="header"] > *');
+    if (heading && parseFloat(getComputedStyle(heading).borderBottomWidth) < 1) issues.push({ kind: "display-table-heading-without-rule" });
+    const number = region.querySelector("[data-equation-number]");
+    if (number?.textContent) {
+      const face = document.createElement("canvas").getContext("2d");
+      const style = getComputedStyle(number);
+      face.font = `1000px ${style.fontFamily}`;
+      const text = document.createRange();
+      text.selectNodeContents(number);
+      const baseline = text.getBoundingClientRect().bottom - face.measureText("x").fontBoundingBoxDescent / 1000 * parseFloat(style.fontSize);
+      const box = table.getBoundingClientRect();
+      const offset = (box.top + box.bottom) / 2 - (baseline - 0.25 * size);
+      if (Math.abs(offset) > 1) issues.push({ kind: "display-table-off-math-axis", number: number.textContent, offset });
+    }
+    const label = rows[0]?.firstElementChild;
+    const scrolls = region.scrollWidth > region.clientWidth + 1;
+    if (scrolls && label.getBoundingClientRect().width <= 0.45 * region.clientWidth && !region.hasAttribute("data-pinned")) issues.push({ kind: "display-table-labels-not-pinned" });
+    if (region.hasAttribute("data-pinned")) {
+      const start = label.getBoundingClientRect().left;
+      region.scrollLeft = region.scrollWidth;
+      const end = label.getBoundingClientRect().left;
+      region.scrollLeft = 0;
+      if (Math.abs(end - start) > 0.5) issues.push({ kind: "display-table-labels-leave-view", start, end });
+    }
+  }
 
   // Mathematics keeps the page's rhythm. A line of prose is taller than the
   // reading leading only where an inline expression itself reaches past the
@@ -326,9 +372,10 @@ function inspectManuscript() {
     }
     return found.sort((a, b) => a - b).reduce((lines, baseline) => (!lines.length || baseline - lines.at(-1) > 3 ? [...lines, baseline] : lines), []);
   };
-  // A drawing's box less the gutters its canvas keeps around the expression.
+  // A drawing's box less the gutters its canvas keeps around the expression; a
+  // tabular display keeps the same gutter around its table.
   const expression = formula => {
-    const box = formula.querySelector("svg[data-research-svg]").getBoundingClientRect();
+    const box = formula.querySelector("[data-display-table], svg[data-research-svg]").getBoundingClientRect();
     const gutter = parseFloat(getComputedStyle(formula).getPropertyValue("--math-gutter")) * parseFloat(getComputedStyle(formula).fontSize);
     return { top: box.top + gutter, bottom: box.bottom - gutter };
   };
@@ -652,6 +699,10 @@ try {
         for (const route of manuscriptRoutes) {
           await page.goto(ORIGIN + route, { waitUntil: "networkidle" });
           await page.evaluate(() => document.fonts.ready);
+          // MathFit fits displays and pins table labels in the pass that shows the zoom
+          // controls; its first measurements land within two frames.
+          await page.waitForFunction(() => !document.querySelector("[data-figure-zoom][hidden], [data-table-zoom][hidden]"));
+          await page.evaluate(() => new Promise(resolve => requestAnimationFrame(() => requestAnimationFrame(() => setTimeout(resolve, 100)))));
           manuscripts.push({ route, width, issues: await page.evaluate(inspectManuscript) });
         }
       } finally { await context.close(); }

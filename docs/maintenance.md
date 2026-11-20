@@ -232,7 +232,13 @@ annotations. Invalid formulas fail the build. Wide equations and tables scroll
 locally without shrinking the reading text. The renderer derives the row pitch of
 displayed mathematics from `--reading-leading` and `--type-math`, which it holds as
 `RESEARCH_READING_LEADING` and `RESEARCH_DISPLAY_MATH_SCALE`; change a token and its
-constant together (`tests/research-math.test.mjs` compares them).
+constant together (`tests/research-math.test.mjs` compares them). A display that is
+one `array` and nothing else but its `\tag` is drawn as a table of mathematics
+(`renderResearchDisplayTable`): its columns may be `l`, `c`, `r` and `|`, its rules
+`\hline`, and its row breaks `\\` or `\\[dim]`; any other column type or rule
+(`p{}`, `@{}`, `\cline`) fails the build, so a new form is designed before it is
+published. `tests/display-tables.test.mjs` pins the three such displays in the
+manuscripts.
 
 Use the semantic typography tokens in `app/globals.css` and the shared font files.
 The [design guide](design.md#typography) defines each role's size, weight, family,

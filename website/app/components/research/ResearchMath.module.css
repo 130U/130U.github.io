@@ -168,10 +168,114 @@
   outline-offset: 2px;
 }
 
+/* A display that is one array is a table of mathematics, set as a formal
+   table (booktabs): no vertical rules, a vertical rule of the manuscript
+   becoming space; a firm rule under the row that heads the columns, with
+   booktabs' space above and below it; rows one line of mathematics apart,
+   each as tall as its strut or its tallest cell, as TeX sets an array's rows.
+   Every cell is typeset in text style, as TeX sets an array's cells, and sits
+   on its row's baseline in the column's alignment. The table keeps the canvas
+   gutter a drawing keeps, so its ink starts on the manuscript inset, and it is
+   centred on the math axis (the renderer computes the raise), so an equation
+   number stands where the paper's does. */
+.table {
+  display: inline-table;
+  padding: var(--math-gutter);
+  border-collapse: separate;
+  border-spacing: 0;
+}
+
+.row {
+  display: table-row;
+}
+
+.cell {
+  display: table-cell;
+  padding: 0 var(--column-gap, 0em) 0 0;
+  vertical-align: baseline;
+  white-space: nowrap;
+}
+
+.cell[data-align="l"] {
+  text-align: left;
+}
+
+.cell[data-align="c"] {
+  text-align: center;
+}
+
+.cell[data-align="r"] {
+  text-align: right;
+}
+
+.row + .row > .cell {
+  padding-top: calc(var(--row-gap) + var(--row-extra, 0em));
+}
+
+.row[data-rule] > .cell {
+  padding-bottom: calc(var(--row-gap) / 2 + var(--above-rule));
+  border-bottom: 1px solid var(--rule);
+}
+
+.row[data-rule="header"] > .cell {
+  border-bottom-color: var(--rule-strong);
+}
+
+.row[data-rule] + .row > .cell {
+  padding-top: calc(var(--row-gap) / 2 + var(--below-rule) + var(--row-extra, 0em));
+}
+
+/* A row is at least as tall as an array row's strut: 0.75em above the
+   baseline and 0.25em below it. */
+.strut {
+  display: inline-block;
+  height: 1em;
+  vertical-align: -0.25em;
+}
+
+/* A cell's drawing takes the room of its expression; its baseline is its lower
+   margin edge, the expression's depth below the row's baseline. */
+.cellMath {
+  display: inline-block;
+  overflow: hidden;
+  margin: calc(-1 * var(--math-gutter));
+  line-height: 0;
+}
+
+/* A tabular display that scrolls keeps its row labels in view while there is
+   room for the values beside them (MathFit pins them), as a research table
+   does: the labels hold the manuscript inset, the paper behind them covers
+   the values passing beneath, and a hairline marks the edge once the values
+   have moved. */
+.equation[data-pinned] .cell:first-child {
+  --label-edge: 0 0 0 transparent;
+  --label-ends: 0 0 0 transparent, 0 0 0 transparent;
+  position: sticky;
+  z-index: 1;
+  left: calc(var(--manuscript-inset) + 1px);
+  background: var(--page);
+  box-shadow: var(--label-edge), calc(-1 * var(--manuscript-inset) - 1px) 0 0 var(--page), var(--label-ends);
+}
+
+/* The paper also covers the table's gutter above its first row and below its
+   last, where the ink of a passing value may reach. */
+.equation[data-pinned] .row:first-child > .cell:first-child {
+  --label-ends: 0 calc(-1 * var(--math-gutter)) 0 var(--page), calc(-1 * var(--manuscript-inset) - 1px) calc(-1 * var(--math-gutter)) 0 var(--page);
+}
+
+.equation[data-pinned] .row:last-child > .cell:first-child {
+  --label-ends: 0 var(--math-gutter) 0 var(--page), calc(-1 * var(--manuscript-inset) - 1px) var(--math-gutter) 0 var(--page);
+}
+
+.equation[data-pinned][data-scrolled] .cell:first-child {
+  --label-edge: 1px 0 0 var(--rule-medium);
+}
+
 /* On paper, and where the system paints its own colors, the edge follows its
-   equation. */
+   equation and a table's row labels scroll with their rows. */
 @media print, (forced-colors: active) {
-  .equationEdge {
+  .equationEdge,
+  .equation[data-pinned] .cell:first-child {
     position: static;
     border-image-source: none;
   }

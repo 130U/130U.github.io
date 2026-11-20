@@ -280,6 +280,240 @@ function assistiveMathml(tex: string, display: boolean) {
   return visitor.visitTree(root);
 }
 
+/** A column of a tabular display: its alignment, and the space after it in ems of the math size. */
+export type ResearchDisplayTableColumn = Readonly<{ align: "l" | "c" | "r"; gapEm: number }>;
+export type ResearchDisplayTableRow = Readonly<{
+  /** Each cell's TeX as the page draws it, or an empty string for an empty cell. */
+  cells: readonly string[];
+  /** The rule under the row: the firm rule under a header row, or a hairline between rows. */
+  rule?: "header" | "row";
+  /** Space a row break asks for beyond one line of mathematics (`\\[dim]`), in ems. */
+  extraEm?: number;
+}>;
+export type ResearchDisplayTable = Readonly<{
+  columns: readonly ResearchDisplayTableColumn[];
+  rows: readonly ResearchDisplayTableRow[];
+}>;
+export type ResearchDisplayTableMarkup = Readonly<{
+  columns: readonly ResearchDisplayTableColumn[];
+  rows: ReadonlyArray<Readonly<{ cells: readonly (ResearchMathMarkup | null)[]; rule?: "header" | "row"; extraEm?: number }>>;
+  /** How far the table's baseline, its first row's, stands above the display's, so the table is
+   * centred on the math axis as TeX centres an array: ems of the math size plus pixels of rule. */
+  raiseEm: number;
+  raisePx: number;
+  /** The whole display's assistive expression and the original TeX, and its equation number. */
+  mathml: string;
+  number?: string;
+}>;
+
+/** Columns of a tabular display stand an em apart, TeX's \arraycolsep on either side;
+ * where the manuscript rules between two columns, the rule becomes a second em of space. */
+export const RESEARCH_TABLE_COLUMN_GAP_EM = 1;
+export const RESEARCH_TABLE_RULED_GAP_EM = 2;
+/** A rule stands in the middle of the space between two rows, with booktabs'
+ * \aboverulesep (0.4ex) above it and \belowrulesep (0.65ex) below it. */
+export const RESEARCH_TABLE_ABOVE_RULE_EM = Number((0.4 * xHeight).toFixed(4));
+export const RESEARCH_TABLE_BELOW_RULE_EM = Number((0.65 * xHeight).toFixed(4));
+/** TeX centres an array on the math axis; the strut of a row of an array is 0.75em high and 0.25em deep. */
+const AXIS_HEIGHT_EM = output.font.params.axis_height;
+const STRUT_HEIGHT_EM = 0.75;
+const STRUT_DEPTH_EM = 0.25;
+
+type TableToken = { kind: "text"; text: string } | { kind: "cell" } | { kind: "row"; extraEm: number } | { kind: "hline" };
+
+/** Splits an array body at its own cell and row breaks, leaving nested groups and environments whole. */
+function tableTokens(body: string): TableToken[] {
+  const tokens: TableToken[] = [];
+  let text = "";
+  let groups = 0;
+  let environments = 0;
+  const flush = () => {
+    if (text) tokens.push({ kind: "text", text });
+    text = "";
+  };
+  for (let index = 0; index < body.length; index += 1) {
+    const character = body[index];
+    const top = groups === 0 && environments === 0;
+    if (character === "\\") {
+      const rest = body.slice(index);
+      if (top && rest.startsWith("\\\\")) {
+        flush();
+        let extraEm = 0;
+        const space = /^\\\\\s*\[([^\]]*)\]/u.exec(rest);
+        if (space) {
+          const length = lengthInEm(space[1].trim());
+          if (length === undefined) throw new Error(`A tabular display has an unreadable row break: ${space[0]}.`);
+          extraEm = length;
+        }
+        tokens.push({ kind: "row", extraEm });
+        index += (space?.[0].length ?? 2) - 1;
+        continue;
+      }
+      const environment = /^\\(begin|end)\s*\{[A-Za-z*]+\}/u.exec(rest);
+      if (environment) environments += environment[1] === "begin" ? 1 : -1;
+      const command = environment?.[0] ?? /^\\(?:[A-Za-z]+|[\s\S])/u.exec(rest)?.[0] ?? "\\";
+      if (top && /^\\(?:hline|cline|hdashline|toprule|midrule|bottomrule|cmidrule)$/u.test(command)) {
+        if (command !== "\\hline") throw new Error(`A tabular display draws a rule the page does not set: ${command}.`);
+        if (text.trim() || tokens.at(-1)?.kind === "cell") throw new Error("A tabular display draws \\hline inside a row.");
+        text = "";
+        tokens.push({ kind: "hline" });
+      } else {
+        text += command;
+      }
+      index += command.length - 1;
+      continue;
+    }
+    if (character === "{") groups += 1;
+    else if (character === "}") groups -= 1;
+    if (top && character === "&") {
+      flush();
+      tokens.push({ kind: "cell" });
+      continue;
+    }
+    text += character;
+  }
+  flush();
+  return tokens;
+}
+
+/** The array that makes up a whole display, with the text that follows it. */
+function wholeArray(tex: string) {
+  const opening = /^\\begin\s*\{array\}\s*(?=\{)/u.exec(tex);
+  if (!opening) return undefined;
+  // The column specification is the balanced group after \begin{array}.
+  let depth = 0;
+  let close = opening[0].length;
+  for (; close < tex.length; close += 1) {
+    if (tex[close] === "\\") close += 1;
+    else if (tex[close] === "{") depth += 1;
+    else if (tex[close] === "}" && --depth === 0) break;
+  }
+  const begin = [tex.slice(0, close + 1), tex.slice(opening[0].length + 1, close)];
+  let groups = 0;
+  let environments = 1;
+  for (let index = begin[0].length; index < tex.length; index += 1) {
+    const character = tex[index];
+    if (character === "\\") {
+      const environment = /^\\(begin|end)\s*\{[A-Za-z*]+\}/u.exec(tex.slice(index));
+      if (environment && groups === 0) {
+        environments += environment[1] === "begin" ? 1 : -1;
+        if (environments === 0) return { spec: begin[1], body: tex.slice(begin[0].length, index), after: tex.slice(index + environment[0].length) };
+        index += environment[0].length - 1;
+      } else {
+        index += 1;
+      }
+      continue;
+    }
+    if (character === "{") groups += 1;
+    else if (character === "}") groups -= 1;
+  }
+  throw new Error("A tabular display leaves its array open.");
+}
+
+/**
+ * A display that is one array, and nothing else but its equation number, is a
+ * table of mathematics: its cells keep their TeX, rows and columns, and the
+ * page sets it as a formal table. A vertical rule becomes space between its
+ * columns; the row that heads the columns stands over a rule, which is the row
+ * the manuscript rules off, or the first row of a table whose first column the
+ * manuscript rules off (its first cell then heads the row labels). A rule
+ * between later rows is a hairline; one above the first row or below the last
+ * is left to the white space around the display. The sentence's closing
+ * punctuation after the last cell is not drawn, as on every display.
+ */
+export function parseResearchDisplayTable(tex: string): ResearchDisplayTable | undefined {
+  const source = tex.trim().replace(EQUATION_NUMBER, "").trim();
+  const array = wholeArray(source);
+  if (!array || !/^[.,]?\s*$/u.test(array.after)) return undefined;
+  const spec = array.spec.replace(/\s+/gu, "");
+  if (!/^\|*(?:[lcr]\|*)+$/u.test(spec)) throw new Error(`A tabular display has a column specification the page does not set: {${array.spec}}.`);
+  const aligns = [...spec.replace(/\|/gu, "")] as Array<"l" | "c" | "r">;
+  const ruled = [...spec.matchAll(/[lcr](?=\|+[lcr])/gu)].map((match) => [...spec.slice(0, match.index + 1)].filter((entry) => entry !== "|").length - 1);
+  const rows: Array<{ cells: string[]; extraEm: number; ruleAbove: boolean }> = [];
+  let current = { cells: [""], extraEm: 0, ruleAbove: false };
+  let pendingRule = false;
+  for (const token of tableTokens(array.body)) {
+    if (token.kind === "text") current.cells[current.cells.length - 1] += token.text;
+    else if (token.kind === "cell") current.cells.push("");
+    else if (token.kind === "hline") pendingRule = true;
+    else {
+      rows.push({ ...current, ruleAbove: current.ruleAbove || pendingRule });
+      pendingRule = false;
+      current = { cells: [""], extraEm: token.extraEm, ruleAbove: false };
+    }
+    if (token.kind === "text" && token.text.trim() && pendingRule) {
+      current.ruleAbove = true;
+      pendingRule = false;
+    }
+  }
+  if (current.cells.length > 1 || current.cells[0].trim()) rows.push(current);
+  if (!rows.length) return undefined;
+  const cells = rows.map((row) => row.cells.map((cell) => cell.trim()));
+  if (cells.some((row) => row.length > aligns.length)) throw new Error("A tabular display has more cells in a row than its columns.");
+  // The sentence's punctuation after the last cell belongs to the prose, not the table.
+  const last = cells.at(-1)!;
+  last[last.length - 1] = normalizeResearchDisplayTex(last.at(-1)!).trim();
+  const header = rows.length > 1 && (rows[1].ruleAbove || ruled.includes(0));
+  return Object.freeze({
+    columns: aligns.map((align, column) => Object.freeze({
+      align,
+      gapEm: column === aligns.length - 1 ? 0 : ruled.includes(column) ? RESEARCH_TABLE_RULED_GAP_EM : RESEARCH_TABLE_COLUMN_GAP_EM,
+    })),
+    rows: cells.map((row, index) => {
+      const rule = index === 0 && header ? "header" : index < rows.length - 1 && rows[index + 1].ruleAbove ? "row" : undefined;
+      const extraEm = index > 0 ? rows[index].extraEm : 0;
+      return Object.freeze({
+        cells: [...row, ...Array<string>(aligns.length - row.length).fill("")],
+        ...(rule ? { rule } : {}),
+        ...(extraEm ? { extraEm } : {}),
+      } as ResearchDisplayTableRow);
+    }),
+  });
+}
+
+const tableCache = new Map<string, ResearchDisplayTableMarkup | null>();
+
+/** The tabular display a display TeX makes, each cell typeset in text style as TeX sets an array's cells. */
+export function renderResearchDisplayTable(tex: string): ResearchDisplayTableMarkup | undefined {
+  const cached = tableCache.get(tex);
+  if (cached !== undefined) return cached ?? undefined;
+  const table = parseResearchDisplayTable(tex);
+  if (!table) {
+    tableCache.set(tex, null);
+    return undefined;
+  }
+  const whole = renderResearchMath(tex, true);
+  const rows = table.rows.map((row) => Object.freeze({
+    ...row,
+    cells: row.cells.map((cell) => {
+      if (!cell) return null;
+      const markup = renderResearchMath(cell, false);
+      return Object.freeze({ ...markup, svg: markup.svg.replace(/data-research-svg="inline"/u, 'data-research-svg="cell"') });
+    }),
+  }));
+  // Each row is as tall as its tallest cell and its strut; rows stand a line of mathematics apart,
+  // a rule adds booktabs' space and its own pixel, and the table keeps the drawing's gutter around it.
+  const extent = (cell: ResearchMathMarkup | null) => cell ? [cell.heightEm - cell.depthEm - RESEARCH_MATH_GUTTER_EM, cell.depthEm - RESEARCH_MATH_GUTTER_EM] : [0, 0];
+  let heightEm = 2 * RESEARCH_MATH_GUTTER_EM;
+  let rules = 0;
+  rows.forEach((row, index) => {
+    heightEm += Math.max(STRUT_HEIGHT_EM, ...row.cells.map((cell) => extent(cell)[0])) + Math.max(STRUT_DEPTH_EM, ...row.cells.map((cell) => extent(cell)[1]));
+    if (index > 0) heightEm += (row.extraEm ?? 0) + (rows[index - 1].rule ? RESEARCH_MATH_ROW_SPACING_EM + RESEARCH_TABLE_ABOVE_RULE_EM + RESEARCH_TABLE_BELOW_RULE_EM : RESEARCH_MATH_ROW_SPACING_EM);
+    if (row.rule) rules += 1;
+  });
+  const firstAscent = RESEARCH_MATH_GUTTER_EM + Math.max(STRUT_HEIGHT_EM, ...rows[0].cells.map((cell) => extent(cell)[0]));
+  const result = Object.freeze({
+    columns: table.columns,
+    rows,
+    raiseEm: Number((AXIS_HEIGHT_EM + heightEm / 2 - firstAscent).toFixed(6)),
+    raisePx: rules / 2,
+    mathml: whole.mathml,
+    ...(whole.number ? { number: whole.number } : {}),
+  });
+  tableCache.set(tex, result);
+  return result;
+}
+
 export function renderResearchMath(tex: string, display = false): ResearchMathMarkup {
   if (!tex.trim()) throw new Error("Research equations cannot be empty.");
   const key = `${display ? "display" : "inline"}\u0000${tex}`;
