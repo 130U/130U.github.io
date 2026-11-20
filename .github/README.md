@@ -26,7 +26,7 @@ Duke Alumnus, B.S. in Mathematics and M.Eng. in Risk Engineering · Sequoia Fell
 - **[Large-Scale Domain Expert Feedback Governance and Adaptive Review](https://www.theodoreoy.com/experience/large-scale-domain-expert-feedback-governance-and-adaptive-review/)**
   A statistical decision framework that prices the measurement and the repair of expert-generated training data in one rule. It coordinated more than 300 specialists, and later post-training programs reused it.
 - **[Financial Task Design and Synthetic Data Engineering](https://www.theodoreoy.com/experience/financial-task-design-and-synthetic-data-engineering/)**
-  A framework for scaling financial training data while preserving the validity of its supervision. I created Batch Zero to establish these standards, and the partner company adopted it across other post-training programs.
+  A framework for scaling financial training data while preserving the validity of its supervision. I created Batch Zero to test its rules on domain experts before a task family scales, and the partner company adopted the protocol across other post-training programs.
 - **[General Reasoning Evaluation and Layered Verification](https://www.theodoreoy.com/experience/general-reasoning-evaluation-and-layered-verification/)**
   A proof-obligation framework linking conclusions to their assumptions, derivations and execution evidence. On a test set of 3,600 submissions with known verdicts, the certificate verifier accepted every valid proof and rejected every invalid one.
 - **[Evidence Verification and Robust Comparison in Investment Research](https://www.theodoreoy.com/experience/evidence-verification-and-robust-comparison-in-investment-research/)**
