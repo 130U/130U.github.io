@@ -1132,3 +1132,8 @@ test("shared typography source roles preserve article names, compact indices, me
     assert.ok(loadedStyles.some((css) => /font-optical-sizing:\s*none/u.test(css) && /font-variation-settings:\s*"opsz"\s+14/u.test(css) && /font-variant-numeric:\s*lining-nums\s+proportional-nums/u.test(css)), `${route} must load the compiled shared Inter settings`);
   }
 });
+
+test("a footnote address that holds balanced parentheses links in full", async () => {
+  const page = await routeHtml("/experience/mangrove-restoration-and-the-limits-of-compensatory-mitigation/");
+  assert.match(page, /href="https:\/\/www\.epd\.gov\.hk\/[^"]*Management%20Plan%20\(Ref\.%20Z22-03\)\.pdf"/u);
+});
