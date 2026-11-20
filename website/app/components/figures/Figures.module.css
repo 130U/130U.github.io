@@ -119,6 +119,7 @@
   --pt: 0.5rem;
   --pb: 1rem;
   min-width: 15rem;
+  min-width: calc(15rem - round(down, 100%, 13.5rem) * 10 / 9);
 }
 
 .rankingHeads {
@@ -140,6 +141,7 @@
 
 .bridgeCanvas {
   min-width: 24rem;
+  min-width: calc(24rem - round(down, 100%, 21.6rem) * 10 / 9);
 }
 
 /* ---------- Timelines below a chart ---------- */
@@ -400,6 +402,7 @@
 .matrix {
   display: grid;
   min-width: 30rem;
+  min-width: calc(30rem - round(down, 100%, 27rem) * 10 / 9);
   grid-template-columns: auto minmax(0, 1fr) minmax(0, 1fr);
   font-size: var(--type-label);
   line-height: var(--label-leading);
@@ -1272,15 +1275,25 @@ span.pathDot {
   overflow: hidden;
 }
 
+/* The grid holds the axis name and ticks that hang beside its last panels. It
+   fits its room down to 23.4rem, where a panel is about 90px wide; in less room,
+   on phones, it is set at 26rem and scrolls. */
 .shares {
   display: grid;
-  min-width: 30rem;
+  min-width: 26rem;
+  min-width: calc(26rem - round(down, 100%, 23.4rem) * 10 / 9);
   grid-template-columns: auto repeat(3, minmax(0, 1fr));
   gap: 24px 22px;
   align-items: center;
-  padding-right: 14px;
+  padding-right: calc(6px + 1.25em);
   font-size: var(--type-label);
   line-height: var(--label-leading);
+}
+
+@container figure (max-width: 34rem) {
+  .shares {
+    gap: 20px 14px;
+  }
 }
 
 .shareRow {
@@ -1333,8 +1346,9 @@ span.pathDot {
   aspect-ratio: 1;
 }
 
+/* Room for the ticks set 4px beneath the last row. */
 .sharePanel[data-last-row] {
-  margin-bottom: 18px;
+  margin-bottom: calc(4px + 1lh);
 }
 
 .sharePanel > svg {

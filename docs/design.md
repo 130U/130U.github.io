@@ -271,14 +271,26 @@ of Source Serif 4's; the room its drawing keeps for accents lies outside the lin
 a line of prose keeps the reading leading unless the expression itself reaches past
 it. Displays carry no sentence-ending punctuation; wide equations and tables scroll
 locally at their natural size with native touch, trackpad, scrollbar, and keyboard
-navigation. Every displayed equation follows one pattern, whatever its length: its ink starts on the
+navigation. Nothing
+scrolls for a near miss: a box shows a scrollbar, or a formula its fade, only when its
+content is genuinely wider or taller than its room. What overshoots by a little is
+fitted instead, within a bound: a formula is set smaller, to no less than nine tenths of
+its size; a table closes up its columns, to no less than an em between them; a figure
+comparison or panorama takes its room until that is a tenth short of its scroll width;
+a zoomed figure or table is set whole. The browser layout check fails any scroll box
+that overflows by less than 16px, or 8% of its room. Every
+displayed equation follows one pattern, whatever its length: its ink starts on the
 manuscript inset (`--manuscript-inset`, 16 to 24px from the column's edge), the axis it
 shares with table text, and its number stands at the column's right edge on the
 equation's baseline, in the reading face of the references that cite it, set clear of
-the expression. An equation wider than its column scrolls in place: its number keeps its
-position, and the expression fades beneath that edge while more remains, as a wide table
-fades at its right edge. A page can therefore be read with the paper beside it. Plain
-numbers, including scientific notation and percentages, use the prose face with native
+the expression. An equation that overshoots its column by a little is fitted: the gap
+before its number closes from 1.5em to 1em, and the expression is set smaller, to no
+less than nine tenths of its size, so a fitted display still stands above the reading
+size. An equation wider than that scrolls in place at its natural size: its number keeps
+its position, and the expression fades beneath that edge while more remains, as a wide
+table fades at its right edge. An inline formula a little wider than a phone's line is
+set smaller by the same bound. A page can therefore be read with the paper beside it.
+Plain numbers, including scientific notation and percentages, use the prose face with native
 superscripts while keeping accessible MathML and the original TeX. Mathematical SVG
 glyphs are artwork, not an additional prose font. An inline formula keeps the
 punctuation that closes against it and the bracket that opens onto it on its own line,
@@ -324,7 +336,8 @@ Now. The band deepens on hover and View Now turns blue. Section headings use the
 role at weight 400. An epigraph hangs off the dashed spine in italic serif with its
 source in the label role. Figures sit in a faint frame at the column's width with a
 caption in supporting ink; a panorama, at least two and a half times as wide as it is
-tall, keeps a legible height on phones and scrolls sideways.
+tall, keeps a legible height on phones: it takes the column's width down to 576px and,
+in a narrower column, is set 640px wide and scrolls sideways.
 
 ## Figures and diagrams
 
@@ -361,9 +374,11 @@ in a stretched SVG layer whose strokes keep their width, and schematics scale un
 so arrows and angles keep their shape. Labels sit in open space beside the marks they
 name and never cover a curve. Bar rows align on one grid; in a narrow figure each label
 and its value stand above a full-width bar, and the grid and reference rules run through
-the bar's own row only. A comparison wider than its column scrolls sideways and fades at
-its right edge, as a wide table does. A title stands alone on its line, with any view
-switch beneath it as one segmented control.
+the bar's own row only. A comparison has a scroll width below which its columns cannot
+reflow; it takes its column's width down to nine tenths of that, and in less room it is
+set at its scroll width, scrolls sideways and fades at its right edge, as a wide table
+does. Labels that hang beside its last marks keep their room inside it. A title stands
+alone on its line, with any view switch beneath it as one segmented control.
 
 A segmented switch swaps views, a readout follows the pointer on line charts, marks
 show exact values, the proof-obligation graph accepts a chosen failure, and each figure
@@ -399,7 +414,8 @@ the accent tint. Rows enter once, top to bottom, as a table scrolls into view.
 
 A row of values holds one line. Only a column whose widest cell is a sentence wraps, at
 a 16rem minimum, and headings take at most two lines. A table wider than the reading
-column closes up its columns if that makes it fit, and otherwise scrolls: its row labels
+column closes up its columns, by as much as it needs and to no less than an em between
+them, if that makes it fit, and otherwise scrolls at its natural spacing: its row labels
 stay in view when they leave room for the values, and the right edge fades while more
 remains.
 
@@ -419,7 +435,10 @@ current width, the control takes a row of its own above the figure. Zoom enlarge
 figure on the same stage as one picture, laid out at its width in the article so every
 label keeps its place: whole within the window up to 1.75 times its size, or, when that
 would enlarge it by less than 1.15 times, at up to 1.5 times its size with the stage
-scrolling from its top. Readouts and view switches work on the stage; the caption stays
+scrolling from its top, unless the whole figure fits at nine tenths of that size, where
+it is set whole. A zoomed table a little taller than the window is set smaller, to no
+less than nine tenths of the reading size, and one a little wider closes up its columns,
+before either scrolls. Readouts and view switches work on the stage; the caption stays
 in the article. One stage serves every table and figure of a page.
 
 ## Clarinet hero

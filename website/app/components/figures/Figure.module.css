@@ -35,7 +35,12 @@
   padding-top: calc(var(--figure-pad) + 32px);
 }
 
-/* Keep comparison diagrams legible when their columns cannot reflow. */
+/* Keep comparison diagrams legible when their columns cannot reflow. A
+   comparison is set at its scroll width W only where its room is less than nine
+   tenths of W; with more room it fits, so it never scrolls by less than a tenth
+   of its width. Each one writes this as
+   min-width: calc(W - round(down, 100%, 0.9W) * 10 / 9), after a plain W for
+   browsers without round(). */
 .scrollViewport {
   max-width: 100%;
   overflow-x: auto;

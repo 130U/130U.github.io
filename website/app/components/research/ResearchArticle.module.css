@@ -61,8 +61,9 @@
    title; the header is a tinted band in label type over a firm rule; rows part
    on hairlines; the hovered row and column take a quiet tint and the hovered
    column's header turns accent. Numbers align right in tabular figures. A row
-   holds one line of values and only a column of sentences wraps; a table wider
-   than the column scrolls. */
+   holds one line of values and only a column of sentences wraps. A table a
+   little wider than the column closes up its columns (ZoomStage sets
+   --cell-gap), down to half their gap; a table wider than that scrolls. */
 .tableFrame {
   --table-pad: var(--manuscript-inset);
   --table-surface: var(--page);
@@ -148,10 +149,6 @@
   font: inherit;
   overflow-wrap: normal;
   word-break: normal;
-}
-
-.tableRegion[data-dense] {
-  --cell-gap: 0.625rem;
 }
 
 .cell {

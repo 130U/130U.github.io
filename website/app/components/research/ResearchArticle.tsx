@@ -14,6 +14,7 @@ import type { ActivePage } from "../../lib/content/site";
 import { ResearchMath } from "./ResearchMath";
 import { InlineContent } from "./ResearchInline";
 import { ZoomStage } from "./ZoomStage";
+import { MathFit } from "./MathFit";
 import { ZoomGlyph } from "../ZoomGlyph";
 import stageStyles from "./Stage.module.css";
 import readingStyles from "../legal/LegalPaperPage.module.css";
@@ -283,6 +284,7 @@ export function ResearchArticle({ project, active, returnPath, returnLabel, titl
           <a href={`#${titleId}`}>Back to Top</a>
         </footer>
         {enhanced && <FigureController key={project.slug} />}
+        <MathFit key={`${project.slug}-math`} />
         {(figures.size > 0 || project.blocks.some((block) => block.type === "figure" || block.type === "table")) && <ZoomStage key={`${project.slug}-stage`} />}
       </article>
     </SiteShell>

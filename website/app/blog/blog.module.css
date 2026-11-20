@@ -288,9 +288,12 @@
     margin: 2rem 0;
   }
 
-  /* A panorama such as a handscroll keeps a legible height and unrolls sideways. */
+  /* A panorama such as a handscroll keeps a legible height and unrolls sideways.
+     It takes the column's width down to 576px and is set at 640px below that,
+     so it never scrolls by less than a tenth of its width. */
   .media img[data-panorama] {
     width: 640px;
+    width: max(100%, calc(640px - round(down, 100%, 576px) * 10 / 9));
     max-width: none;
   }
 }
