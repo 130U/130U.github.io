@@ -29,17 +29,16 @@ type ResearchMathMarkup = Readonly<{
 }>;
 
 export const RESEARCH_MATH_GUTTER_EM = 0.375;
-export const RESEARCH_MATH_INLINE_SPACE_EM = 0.125;
-/** The reading leading and the size of displayed mathematics against the reading
- * text, as `--reading-leading` and `--type-math` set them. */
-export const RESEARCH_READING_LEADING = 1.65;
+/** The leading of the manuscripts that carry mathematics and the size of displayed
+ * mathematics against their text, as `--manuscript-leading` and `--type-math` set them. */
+export const RESEARCH_MANUSCRIPT_LEADING = 1.75;
 export const RESEARCH_DISPLAY_MATH_SCALE = 1.15;
 /** LaTeX's \jot, the space aligned equations add to the line between their rows. */
 const JOT_EM = 0.3;
-/** One line of displayed mathematics, in ems of its size: one reading line and a
- * jot, the pitch LaTeX gives the rows of aligned equations. Every multi-row display
- * takes it; MathJax adds row spacing to rows of a 1em strut. */
-export const RESEARCH_MATH_LINE_EM = Number((RESEARCH_READING_LEADING / RESEARCH_DISPLAY_MATH_SCALE + JOT_EM).toFixed(4));
+/** One line of displayed mathematics, in ems of its size: one line of the manuscript
+ * and a jot, the pitch LaTeX gives the rows of aligned equations. Every multi-row
+ * display takes it; MathJax adds row spacing to rows of a 1em strut. */
+export const RESEARCH_MATH_LINE_EM = Number((RESEARCH_MANUSCRIPT_LEADING / RESEARCH_DISPLAY_MATH_SCALE + JOT_EM).toFixed(4));
 export const RESEARCH_MATH_ROW_SPACING_EM = Number((RESEARCH_MATH_LINE_EM - 1).toFixed(4));
 
 // The row spacing MathJax gives each multi-row environment, in ems (10pt to the

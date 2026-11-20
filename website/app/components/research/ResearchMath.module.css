@@ -7,13 +7,14 @@
 }
 
 /* An inline formula takes the room of its expression in the line: its canvas
-   gutters lie in negative block margins, so a line of prose keeps the reading
-   leading unless the expression itself reaches past it. */
+   gutters lie in negative margins, so a line of prose keeps its leading unless
+   the expression itself reaches past it, and the word space alone parts the
+   formula from the words beside it, as TeX sets mathematics in a line. */
 .inline {
   display: inline-block;
   margin-block: calc(-0.125em - var(--math-gutter));
-  /* Include the two negative 0.25em margins supplied by ResearchMath. */
-  max-width: calc(100% + 0.5em);
+  /* Include the two negative gutter margins supplied by ResearchMath. */
+  max-width: calc(100% + 2 * var(--math-gutter));
   overflow-x: auto;
   overflow-y: hidden;
   scrollbar-width: none;
@@ -134,18 +135,20 @@
   border: 0;
 }
 
-/* A display stands in two and a half reading lines of white space (66px at the
-   reading size), measured from its expression to the descenders of the line
-   above and to the x-height of the line below. The reading face's line box holds more
-   empty room above its x-height than below its descenders, so the margin above
-   is half a rem larger than the one below. Consecutive displays keep the same
-   white space between them. */
+/* A display stands in two and a half lines of the manuscript of white space
+   (70px at the reading size), measured from its expression to the descenders of
+   the line above and to the x-height of the line below. Each margin is two lines
+   less the room the display's padding, its canvas and the neighboring line box
+   already keep: the reading face's line box holds more empty room above its
+   x-height than below its descenders, so the margin above is half a rem larger
+   than the one below. Consecutive displays keep the same white space between
+   them. */
 .equation {
   container-type: inline-size;
   min-width: 0;
   max-width: 100%;
   padding-block: 0.75rem;
-  margin-block: 2.75rem 2.25rem;
+  margin-block: calc(2 * var(--manuscript-line) - 0.5625rem) calc(2 * var(--manuscript-line) - 1.0625rem);
   overflow-x: auto;
   overflow-y: hidden;
   overscroll-behavior-x: contain;
@@ -154,11 +157,11 @@
 }
 
 .equation:has(+ .equation) {
-  margin-block-end: 1.75rem;
+  margin-block-end: calc(2.5 * var(--manuscript-line) - 2.375rem);
 }
 
 .equation + .equation {
-  margin-block-start: 1.75rem;
+  margin-block-start: calc(2.5 * var(--manuscript-line) - 2.375rem);
 }
 
 .inline:focus-visible,

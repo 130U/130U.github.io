@@ -1,11 +1,37 @@
 .body {
   max-width: var(--reading-measure);
   font-size: var(--type-reading);
-  line-height: var(--reading-leading);
+  line-height: var(--manuscript-leading);
 }
 
 .body h3 {
   font-size: var(--type-subheading);
+}
+
+/* A manuscript's vertical spaces are measured in its line (--manuscript-line):
+   a paragraph break is one line, and a statement, a proof or a paragraph that
+   opens on a run-in head starts a line and a half below the paragraph before
+   it, as does the paragraph after a proof's end. A display stands in two and a
+   half lines (ResearchMath.module.css). A paper's abstract reads at the same
+   leading. */
+.manuscript [data-article-overview] > p {
+  line-height: var(--manuscript-leading);
+}
+
+.manuscript [data-article-overview] > p + p,
+.manuscript .body > p + p {
+  margin-top: var(--manuscript-line);
+}
+
+.manuscript .body > p + p[data-unit],
+.manuscript .body > p[data-proof-close] + p {
+  margin-top: calc(1.5 * var(--manuscript-line));
+}
+
+/* A subsection opens after more white than a display stands in: three lines of
+   margin, about three and a half lines of white to its capitals. */
+.manuscript .body h3 {
+  margin-top: calc(3 * var(--manuscript-line));
 }
 
 .sourceLinks {

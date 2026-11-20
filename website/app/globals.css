@@ -62,6 +62,13 @@
   --heading-leading: 1.25;
   --subheading-leading: 1.4;
   --reading-leading: 1.65;
+  /* Manuscripts with mathematics (the papers and the AI articles) read at a
+     wider leading: a line that carries a formula keeps the white a line of
+     prose keeps at the reading leading. Their vertical spaces are measured in
+     this line: a paragraph break is one line, a statement, proof or run-in head
+     opens after a line and a half, and a display stands in two and a half. */
+  --manuscript-leading: 1.75;
+  --manuscript-line: calc(var(--manuscript-leading) * var(--type-reading));
   --interface-leading: 1.5;
   --label-leading: 1.45;
   --title-tracking: -0.022em;

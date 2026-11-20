@@ -1,11 +1,12 @@
 import type { CSSProperties } from "react";
-import { RESEARCH_MATH_GUTTER_EM, RESEARCH_MATH_INLINE_SPACE_EM, renderResearchMath } from "../../lib/content/research-math";
+import { RESEARCH_MATH_GUTTER_EM, renderResearchMath } from "../../lib/content/research-math";
 import { proseNumber } from "../../lib/content/research-number";
 import styles from "./ResearchMath.module.css";
 
-/** `tightStart` and `tightEnd` close the formula's side up to a bracket or punctuation mark, as in the papers.
+/** An inline formula stands in its line as a word does: its canvas gutters lie in
+ * negative margins, so the word space alone parts it from the words beside it.
  * `reserveCh` narrows a wide formula's scroll box so the punctuation glued to it stays on its line. */
-export function ResearchMath({ tex, display = false, tightStart = false, tightEnd = false, reserveCh }: { tex: string; display?: boolean; tightStart?: boolean; tightEnd?: boolean; reserveCh?: number }) {
+export function ResearchMath({ tex, display = false, reserveCh }: { tex: string; display?: boolean; reserveCh?: number }) {
   const formula = renderResearchMath(tex, display);
   const assistive = <span className={styles.assistive} dangerouslySetInnerHTML={{ __html: formula.mathml }} />;
   if (display) {
@@ -38,12 +39,11 @@ export function ResearchMath({ tex, display = false, tightStart = false, tightEn
       aria-label={scrollableInline ? "Scrollable mathematical expression" : undefined}
       style={{
         "--math-gutter": `${RESEARCH_MATH_GUTTER_EM}em`,
-        marginInlineStart: `${(tightStart ? 0 : RESEARCH_MATH_INLINE_SPACE_EM) - RESEARCH_MATH_GUTTER_EM}em`,
-        marginInlineEnd: `${(tightEnd ? 0 : RESEARCH_MATH_INLINE_SPACE_EM) - RESEARCH_MATH_GUTTER_EM}em`,
+        marginInline: `${-RESEARCH_MATH_GUTTER_EM}em`,
         // The box's baseline is its lower margin edge, the expression's own depth below the text baseline.
         verticalAlign: `${Number((RESEARCH_MATH_GUTTER_EM - formula.depthEm).toFixed(6))}em`,
         // The box may span the line less the negative margins' overlap and the glued punctuation.
-        ...(reserveCh ? { maxWidth: `calc(100% + ${2 * RESEARCH_MATH_GUTTER_EM - (tightStart ? 0 : RESEARCH_MATH_INLINE_SPACE_EM) - (tightEnd ? 0 : RESEARCH_MATH_INLINE_SPACE_EM)}em - ${reserveCh}ch)` } : {}),
+        ...(reserveCh ? { maxWidth: `calc(100% + ${2 * RESEARCH_MATH_GUTTER_EM}em - ${reserveCh}ch)` } : {}),
       } as CSSProperties}
     >
       <span dangerouslySetInnerHTML={{ __html: formula.svg }} />

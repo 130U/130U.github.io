@@ -115,7 +115,7 @@ export function InlineContent({ inlines }: { inlines: ArticleInline[] }) {
       const opening = tail.get(index - 1);
       const closing = lead.get(index + 1);
       if (!opening && !closing) return <ResearchMath key={index} tex={inline.tex} />;
-      return <span key={index} className={styles.glued}>{opening}<ResearchMath tex={inline.tex} tightStart={Boolean(opening)} tightEnd={Boolean(closing)} reserveCh={reserveFor(inline.tex, `${opening ?? ""}${closing ?? ""}`)} />{closing}</span>;
+      return <span key={index} className={styles.glued}>{opening}<ResearchMath tex={inline.tex} reserveCh={reserveFor(inline.tex, `${opening ?? ""}${closing ?? ""}`)} />{closing}</span>;
     }
     if (inline.type === "line-break") return <br key={index} />;
     if (inline.type === "strong") return <strong key={index}><InlineContent inlines={inline.inlines} /></strong>;
