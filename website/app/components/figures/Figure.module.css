@@ -160,21 +160,25 @@
   }
 }
 
+/* The caption is set a step below the prose, in the reading face and
+   supporting ink, so it reads as the figure's caption and not as the next
+   paragraph. */
 .caption {
   max-width: var(--reading-measure);
   margin: 14px 0 0;
   color: var(--supporting-ink);
   font-family: var(--font-prose);
-  font-size: var(--type-reading);
-  line-height: var(--reading-leading);
+  font-size: var(--type-caption);
+  line-height: var(--caption-leading);
+  text-wrap: pretty;
 }
 
 /* "Figure N." of a manuscript caption, in the face and weight of a table's
-   title. */
+   title, at the label size beside the caption's serif. */
 .captionLabel {
   color: var(--ink);
   font-family: var(--font-text);
-  font-size: var(--type-interface);
+  font-size: var(--type-label);
   font-weight: 500;
 }
 

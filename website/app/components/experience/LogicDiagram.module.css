@@ -254,8 +254,8 @@
   margin-top: 36px;
   color: var(--supporting-ink);
   font-family: var(--font-prose);
-  font-size: var(--type-reading);
-  line-height: var(--reading-leading);
+  font-size: var(--type-caption);
+  line-height: var(--caption-leading);
   text-wrap: pretty;
 }
 

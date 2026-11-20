@@ -6,8 +6,8 @@ import styles from "./Figures.module.css";
 
 function RiskTaxonomy() {
   const cells = [
-    { title: "Offset", text: "The same type of harm to the same population", example: "Automation trades loss of a spacecraft through delayed response for loss of the same spacecraft through an erroneous command." },
-    { title: "Transfer", text: "Changes the population", example: "An avoidance maneuver protects one spacecraft and raises collision exposure for a neighboring satellite's owner and users." },
+    { title: "Offset", text: "The same type of harm to the same population", example: "Automation trades loss through delayed response for loss through an erroneous command." },
+    { title: "Transfer", text: "Changes the population", example: "An avoidance maneuver moves collision exposure onto a neighboring satellite's owner and users." },
     { title: "Substitution", text: "Changes the harm" },
     { title: "Transformation", text: "Changes both the harm and the population" },
   ];
@@ -44,15 +44,15 @@ function RiskTaxonomy() {
 
 function TwoThresholds() {
   const steps = [
-    { index: "01", title: "Authority", text: "Does the actor have authority to undertake the activity and impose the relevant exposure?", branch: "No", outcome: "Not authorized. Evidence for delegation cannot substitute for authority.", next: "Yes" },
-    { index: "02", title: "Evidence", text: "Does the evidence justify delegating this class of action under these conditions?", branch: "No", outcome: "Do not delegate this class of action.", next: "Yes" },
-    { index: "03", title: "Review", text: "Can individual review still change the outcome, credibly and in time?", branch: "Yes", outcome: "Require individual review.", next: "No" },
+    { index: "01", title: "Authority", text: "Is the actor authorized to act and impose the exposure?", branch: "No", outcome: "Not authorized", next: "Yes" },
+    { index: "02", title: "Evidence", text: "Does the evidence justify delegating this class of action?", branch: "No", outcome: "Do not delegate", next: "Yes" },
+    { index: "03", title: "Review", text: "Can individual review still protect, credibly and in time?", branch: "Yes", outcome: "Require individual review", next: "No" },
   ];
   return (
     <Figure
       id="two-thresholds"
       title="The two-threshold decision procedure"
-      caption="Authority and evidence are separate gates, taken in order. Where both are met, individual review is required only where it can still protect; where it cannot, the choice is among three bounded alternatives, and lack of time is never by itself a reason for unrestricted autonomy."
+      caption="Authority and evidence are separate gates, taken in order: evidence for delegation cannot substitute for authority. Where review cannot protect in time, the choice is among three bounded alternatives."
     >
       <div className={styles.flow} role="group" aria-label="Decision procedure">
         <span className={styles.flowHead}>Question</span>
@@ -99,8 +99,8 @@ function CollisionSequence() {
   return (
     <Figure
       id="collision-sequence"
-      title="Collision avoidance is a sequence, and prediction is one part of it"
-      caption="The ESA challenge predicted the risk estimate in the final conjunction data message, another estimate rather than observed collisions or harm avoided. Strong forecasting supports the early steps; selecting and executing maneuvers among several operators needs its own policy-level assurance case."
+      title="Where prediction sits in collision avoidance"
+      caption="The ESA challenge predicted the risk estimate in the final conjunction data message, another estimate rather than observed harm avoided. Choosing and executing maneuvers among several operators needs its own policy-level assurance case."
     >
       <div className={styles.sequence} role="group" aria-label="Operational sequence of collision avoidance">
         {steps.map((step, index) => (
@@ -109,8 +109,8 @@ function CollisionSequence() {
             {step}
           </div>
         ))}
-        <p className={styles.sequenceNote} data-tone="accent" style={{ gridRow: "2 / span 2" }}>{"Forecasting: where the ESA challenge's predictors operate"}</p>
-        <p className={styles.sequenceNote} style={{ gridRow: "4 / span 4" }}>Maneuver policy: requires assurance beyond prediction performance</p>
+        <p className={styles.sequenceNote} data-tone="accent" style={{ gridRow: "2 / span 2" }}>Forecasting: the ESA challenge</p>
+        <p className={styles.sequenceNote} style={{ gridRow: "4 / span 4" }}>Maneuver policy: assurance beyond prediction</p>
       </div>
     </Figure>
   );
@@ -119,14 +119,15 @@ function CollisionSequence() {
 /* ---------- Small states ---------- */
 
 function StateCases() {
+  // Each case's question stands in the text just above the figure, so the
+  // comparison carries what it adds: the decision tested and the remedy.
   const cases = [
-    { key: "nz", name: "New Zealand", decision: "Permission", question: "Can the state apply its own assessment to an externally connected activity?", remedy: "Usable standards and supervisory information" },
-    { key: "no", name: "Norway", decision: "Operation", question: "Can cooperation deliver a function under specified national control?", remedy: "Clarity about interruption and recovery" },
-    { key: "lu", name: "Luxembourg", decision: "Informed commitment", question: "Can public institutions understand and govern what they have authorized?", remedy: "Credible requirements and financial scrutiny" },
+    { key: "nz", name: "New Zealand", decision: "Permission", remedy: "Usable standards and supervisory information" },
+    { key: "no", name: "Norway", decision: "Operation", remedy: "Clarity about interruption and recovery" },
+    { key: "lu", name: "Luxembourg", decision: "Informed commitment", remedy: "Credible requirements and financial scrutiny" },
   ];
   const rows = [
     { label: "Decision tested", field: "decision" as const, strong: true },
-    { label: "Question", field: "question" as const },
     { label: "Remedy it calls for", field: "remedy" as const },
   ];
   const order = (column: number, row: number) => ({ "--order": column * 10 + row } as CSSProperties);
@@ -193,7 +194,7 @@ function ExitPaths() {
     <Figure
       id="exit-paths"
       title="Separating the decision to stop from the act of stopping"
-      caption="A severe termination shock needs substantial cooling, sudden cessation and a prolonged interruption. Treating program control, operation and the physical trajectory as separate decisions lets authority change without making abrupt cessation the price of dissent."
+      caption="Treating program control, operation and the physical trajectory as separate decisions lets authority change without making abrupt cessation the price of dissent."
     >
       <Plot
         label="Injection intensity rises and holds; when authorization expires, an automatic stop would drop it at once, while a tapering pathway lowers it gradually."
@@ -217,8 +218,8 @@ function ExitPaths() {
       </Plot>
       <dl className={styles.lanes} aria-label="Three separate decisions">
         <dt>Program control</dt><dd>Political authority can change.</dd>
-        <dt>Operation</dt><dd>Temporary operation passes to a designated public successor under a reviewed continuity plan.</dd>
-        <dt>Physical trajectory</dt><dd>Withdrawal follows a tapering pathway evaluated against emissions and atmospheric conditions.</dd>
+        <dt>Operation</dt><dd>Transfers temporarily to a designated public successor.</dd>
+        <dt>Physical trajectory</dt><dd>A taper evaluated against emissions and atmospheric conditions.</dd>
       </dl>
     </Figure>
   );
@@ -287,7 +288,7 @@ function DeepBay() {
     <Figure
       id="deep-bay"
       title="Deep Bay: canopy gained, mudflat lost"
-      caption="Mangrove cover rose from 8 to 15 percent of the mapped area and mudflat fell from 56 to 43 percent; twelve of 42 wintering waterbird species declined significantly. Added canopy cannot stand in for the performance of the whole wetland mosaic."
+      caption="Mangrove canopy grew while mudflat shrank, and twelve of 42 wintering waterbird species declined significantly. Added canopy cannot stand in for the performance of the whole wetland mosaic."
     >
       <div className={styles.panels}>
         <div>
@@ -340,8 +341,8 @@ function SanTinLoss() {
     <Figure
       id="san-tin-loss"
       title="Construction is a milestone; replacement function is an outcome"
-      caption="Condition 9 ties pond filling to the start of construction of ecologically enhanced fishponds, which shows that work has begun, not that replacement functions operate. The shaded interval is the period of loss the compensation package must address, with measures ready if enhancement falls behind."
-      legend={[{ label: "Existing wetland function", tone: "ink", shape: "line" }, { label: "Expected replacement function", tone: "accent", shape: "line" }, { label: "Enhancement falls behind", tone: "steel", shape: "dash" }, { label: "Period of loss", tone: "accent", shape: "square" }]}
+      caption="Condition 9 ties pond filling to the start of construction, which shows that work has begun, not that replacement functions operate. The shaded interval is the loss the compensation package must address."
+      legend={[{ label: "Existing wetland function", tone: "ink", shape: "line" }, { label: "Expected replacement function", tone: "accent", shape: "line" }, { label: "Enhancement falls behind", tone: "steel", shape: "dash" }]}
     >
       <Plot
         label="Existing wetland function ends at pond filling, while replacement function rises only gradually afterwards; the gap between them is the period of loss."

@@ -223,6 +223,10 @@ and its evidence together. The same module maps each manuscript image path to it
 drawing, with evidence checked the same way, and names the row or column a table
 emphasizes. Manuscript checks in the tests read articles without these figures and
 without the labels of the native drawings, keeping their manuscript captions.
+`tests/figure-reading-load.test.mjs` holds every built figure to the reading budget of
+the design (caption, title, legend and value-note limits), and the browser layout check
+fails a caption set at the reading size or a legend entry that wraps from 390px, so a
+new or edited figure is checked against the same budget.
 
 `ResearchArticle` serves AI and Selected Research. The Markdown parser supports
 typed prose, emphasis, links, headings, tables, and formulas rather than arbitrary

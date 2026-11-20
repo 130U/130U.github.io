@@ -15,7 +15,7 @@ function DependenceBudgetRuler() {
       id="dependence-budget"
       className={styles.ruler}
       title="Uniform benchmark: the critical budget against its initial-slope prediction"
-      caption="Independent uniform losses on $[0,2]^3$ with $\beta=1$, $p=1/2$ and $\gamma=(1,1,2)$. Extrapolating the exact initial slope predicts a reversal at $s=5/32$; the proved critical budget lies in $[13/64,29/96]$, at least 30% beyond that prediction."
+      caption="Independent uniform losses on $[0,2]^3$ with $\beta=1$, $p=1/2$ and $\gamma=(1,1,2)$. The proved critical budget lies at least 30% beyond the reversal that the exact initial slope predicts."
     >
       <Plot
         label="Rescaled stress budget. Initial-slope extrapolation reaches zero at 5/32; the proved critical budget lies between 13/64 and 29/96, at least 30% beyond it."
@@ -218,28 +218,31 @@ function AsianWidthPlateau() {
         </Bars>
         <p className={styles.tally}><Tx>{"Hatched terms shrink; the periodization term and the frequency tail under $P$ are unchanged."}</Tx></p>
       </Panel>
+      {/* One message: the kink supplies most of each width. The four smaller
+          terms share one tone here; the change view names them, and each
+          segment's readout carries its exact value. */}
       <Panel view="width" active>
         <Bars label="Width contributions by Euler step. h=1/384: width 0.028009519599, 95.5% from the cost of the kink. h=1/768: 0.021667063872, 94.5%. h=1/1536: 0.021734290027, 92.8%." labelWidth="5rem" valueWidth="6.5rem" stack="narrow">
           {ASIAN_STEPS.map((row) => {
             let start = 0;
             return (
-              <BarRow key={row.step} label={`$h=${row.step}$`} value={row.total.toFixed(5)} valueNote={`${row.share} from the kink`} grid={widthTicks.map((tick) => width(tick.at))}>
+              <BarRow key={row.step} label={`$h=${row.step}$`} value={row.total.toFixed(5)} grid={widthTicks.map((tick) => width(tick.at))}>
                 {row.parts.map((part, index) => {
                   const from = start;
                   start += part;
-                  return <Seg key={index} x={width} from={from} to={start} tone={ASIAN_PARTS[index].tone} tip={`h = ${row.step}, ${ASIAN_PARTS[index].name}\n${part.toFixed(12)}`} />;
+                  return <Seg key={index} x={width} from={from} to={start} tone={index === 0 ? "accent" : "steel"} tip={`h = ${row.step}, ${ASIAN_PARTS[index].name}\n${part.toFixed(12)}${index === 0 ? `\n${row.share} of the width` : ""}`} />;
                 })}
               </BarRow>
             );
           })}
           <BarAxis x={width} ticks={widthTicks} title="Width, price units" />
         </Bars>
-        <Legend items={ASIAN_PARTS.map((part) => ({ label: part.label, tone: part.tone }))} />
+        <Legend items={[{ label: "Cost of the kink", tone: "accent" }, { label: "Four other terms", tone: "steel" }]} />
       </Panel>
       <Panel view="enclosure" active={false}>
-        <Bars label="Proved intervals for the Euler gap, the price under the scheme minus the continuous price. h=1/384: −0.014169989568 to 0.013839530031. h=1/768: −0.011024692273 to 0.010642371599. h=1/1536: −0.010967952032 to 0.010766337995." labelWidth="5rem" valueWidth="6.5rem" stack="narrow">
+        <Bars label="Proved intervals for the Euler gap, the price under the scheme minus the continuous price. h=1/384: −0.014169989568 to 0.013839530031. h=1/768: −0.011024692273 to 0.010642371599. h=1/1536: −0.010967952032 to 0.010766337995." labelWidth="5rem" valueWidth="0px" stack="narrow">
           {ASIAN_STEPS.map((row) => (
-            <BarRow key={row.step} label={`$h=${row.step}$`} value={row.total.toFixed(5)} valueNote="width" grid={signedTicks.map((tick) => signed(tick.at))} rules={[{ at: signed(0) }]}>
+            <BarRow key={row.step} label={`$h=${row.step}$`} grid={signedTicks.map((tick) => signed(tick.at))} rules={[{ at: signed(0) }]}>
               <Range x={signed} from={row.enclosure[0]} to={row.enclosure[1]} tone="ink" tip={`h = ${row.step}\n[${row.enclosure[0]}, ${row.enclosure[1]}]`} />
             </BarRow>
           ))}
@@ -272,11 +275,13 @@ function HestonStageBounds() {
   return (
     <Figure
       id="heston-stages"
-      title="Complete bounds for the 4400–4500 spread as the certificate is refined"
-      caption="Each row is one certificate of Table 2, on a logarithmic scale; a bound left of the dashed line certifies a quarter point. The forward variance weight of Theorem 3.1 gives the largest reduction, from H0 to H1, and at Q2 only the joint bound certifies."
+      title="Complete bounds on the 4400–4500 spread, certificate by certificate"
+      caption="Each row is a certificate of Table 2; a bound left of the dashed line certifies a quarter point. The forward-variance weight of Theorem 3.1, from H0 to H1, gives the largest reduction."
       legend={[{ label: "Joint bound", tone: "accent", shape: "dot" }, { label: "Leg-by-leg bound", tone: "steel", shape: "ring" }]}
     >
-      <Bars label="Joint bounds in index points: H0 1.398, H1 0.379, H2 0.367, H3 0.132, H4 0.115, Q0 1.208, Q1 0.351, Q2 0.233. Leg-by-leg bounds: H0 2.680, H1 0.476, H3 0.159, H4 0.138, Q0 1.545, Q1 0.408, Q2 0.252. The tolerance is a quarter point." labelWidth="11.5rem" valueWidth="3rem" stack="narrow">
+      {/* Table 2 stands just above, so the rows carry no value column: each
+          marker's readout gives the exact bounds. */}
+      <Bars label="Joint bounds in index points: H0 1.398, H1 0.379, H2 0.367, H3 0.132, H4 0.115, Q0 1.208, Q1 0.351, Q2 0.233. Leg-by-leg bounds: H0 2.680, H1 0.476, H3 0.159, H4 0.138, Q0 1.545, Q1 0.408, Q2 0.252. The tolerance is a quarter point." labelWidth="17rem" valueWidth="0px" stack="narrow">
         <BarHeader marks={[{ at: tolerance, label: "Quarter-point tolerance", tone: "accent", anchor: "left" }]} />
         {HESTON_STAGES.map((row, index) => {
           if (!("id" in row)) return <p key={index} className={kit.groupLabel}>{row.group}</p>;
@@ -284,7 +289,7 @@ function HestonStageBounds() {
           const certified = row.joint <= 0.25;
           const tip = `${row.id}: ${row.text}\nJoint ${row.joint}${marginal ? `\nLeg by leg ${marginal}` : ""}\nTolerance met: ${row.note}`;
           return (
-            <BarRow key={row.id} label={<><span className={styles.id}>{row.id}</span><span className={styles.stageText}>{row.text}</span></>} value={row.joint.toFixed(3)} grid={grid} rules={[{ at: tolerance, tone: "accent" }]}>
+            <BarRow key={row.id} label={<><span className={styles.id}>{row.id}</span><span className={styles.stageText}>{row.text}</span></>} grid={grid} rules={[{ at: tolerance, tone: "accent" }]}>
               {marginal && <span className={`${styles.link} ${kit.steel}`} style={{ left: `${x(row.joint)}%`, width: `${x(marginal) - x(row.joint)}%` }} />}
               {marginal && <span className={`${kit.dot} ${kit.steel}`} data-ring="" data-tip={tip} style={{ left: `${x(marginal)}%`, top: "50%" }} />}
               <span className={`${kit.dot} ${certified ? kit.accent : kit.ink}`} data-tip={tip} style={{ left: `${x(row.joint)}%`, top: "50%" }} />
@@ -397,15 +402,17 @@ function HestonLedger() {
   const ticks = [0, 0.1, 0.2, 0.3].map((at) => ({ at, label: at === 0 ? "0" : at.toFixed(1) }));
   const grid = ticks.map((tick) => x(tick.at));
   const tolerance = x(0.25);
+  // Each total is printed to the third decimal, which places it on either side
+  // of a quarter point; the segments' readouts and Table 4 carry every digit.
   const rows = [
-    { name: "Joint", key: "joint", total: "0.233318843", verdict: "Certified" },
-    { name: "Leg-by-leg", key: "marginal", total: "0.252393939", verdict: "Not certified" },
+    { name: "Joint", key: "joint", total: 0.233318843, verdict: "Certified" },
+    { name: "Leg-by-leg", key: "marginal", total: 0.252393939, verdict: "Not certified" },
   ] as const;
   return (
     <Figure
       id="heston-ledger"
-      title="Ledger of the three-month spread (Q2) against a quarter-point tolerance"
-      caption="Both rows share the stored output, the reference centre, all 1,025 node radii and every remainder. Only the aggregation of the node errors differs: netting lowers the node term by 30 per cent and takes the complete bound from above a quarter point to below it."
+      title="Netting brings the three-month bound (Q2) below a quarter point"
+      caption="Both bars share the stored output, the reference centre, all 1,025 node radii and every remainder; only the aggregation of the node errors differs, and netting lowers that term by 30 per cent."
       legend={LEDGER_PARTS.filter((part) => part.tone !== "mist").map((part) => ({ label: part.name, tone: part.tone }))}
     >
       <Bars label="Complete bounds of the three-month spread in index points. Joint 0.233318843, below a quarter point; leg-by-leg 0.252393939, above it. Shared components: absolute centre 0.149775147, strip remainder 0.000026654, exact infinite tail 0.038055248. Node support: joint 0.045461793, leg-by-leg 0.064536890." labelWidth="8rem" valueWidth="7rem" stack>
@@ -413,11 +420,11 @@ function HestonLedger() {
         {rows.map((row) => {
           let start = 0;
           return (
-            <BarRow key={row.key} label={row.name} value={row.total} valueNote={row.verdict} grid={grid} rules={[{ at: tolerance, tone: "accent" }]}>
+            <BarRow key={row.key} label={row.name} value={row.total.toFixed(3)} valueNote={row.verdict} grid={grid} rules={[{ at: tolerance, tone: "accent" }]}>
               {LEDGER_PARTS.map((part) => {
                 const from = start;
                 start += part[row.key];
-                return <Seg key={part.name} x={x} from={from} to={start} tone={part.tone} tip={`${row.name}: ${part.name}\n${part[row.key].toFixed(9)}`} />;
+                return <Seg key={part.name} x={x} from={from} to={start} tone={part.tone} tip={`${row.name}: ${part.name}\n${part[row.key].toFixed(9)}\nComplete bound ${row.total.toFixed(9)}`} />;
               })}
             </BarRow>
           );

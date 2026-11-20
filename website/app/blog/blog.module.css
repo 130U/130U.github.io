@@ -201,6 +201,8 @@
 .figure figcaption {
   margin-top: 0.75rem;
   color: var(--supporting-ink);
+  font-size: var(--type-caption);
+  line-height: var(--caption-leading);
   text-wrap: pretty;
 }
 

@@ -732,13 +732,6 @@
   gap: 28px;
 }
 
-.panelTitle {
-  margin: 0 0 14px;
-  color: var(--ink);
-  font-size: var(--type-label);
-  line-height: var(--label-leading);
-}
-
 @container figure (max-width: 560px) {
   .panels {
     grid-template-columns: minmax(0, 1fr);
@@ -1103,6 +1096,13 @@
   font-weight: 500;
   line-height: var(--interface-leading);
   text-wrap: balance;
+}
+
+/* Under a figure's own title, a panel title is the next level down: the
+   label size, so the eye lands on the figure's title first. */
+figure:has([data-figure-title]) .panelTitle {
+  font-size: var(--type-label);
+  line-height: var(--label-leading);
 }
 
 .note {
@@ -1507,6 +1507,31 @@ span.pathDot {
 
 .alignEnd {
   text-align: right;
+}
+
+/* A hyphenated term in a wrapping label holds one line. */
+.nowrap {
+  white-space: nowrap;
+}
+
+/* A legal page resets the margins of its body's paragraphs and sets each
+   paragraph apart from the one before; the paragraphs a figure draws keep the
+   figure's own spacing, so a heading row never touches what it heads and a
+   bracket starts on the step it brackets. */
+.panelTitle.panelTitle {
+  margin: 0 0 14px;
+}
+
+.tierAxis.tierAxis {
+  margin: 0 0 14px;
+}
+
+.ladderHead.ladderHead {
+  margin: 0 0 12px;
+}
+
+.sequenceNote.sequenceNote {
+  margin: 0;
 }
 
 /* ---------- Number lines: stacked panels, a magnified strip ---------- */
