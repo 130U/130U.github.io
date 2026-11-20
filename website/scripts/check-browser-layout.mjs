@@ -185,6 +185,28 @@ function inspectFigure(figure) {
       if (!svg || !ink || rect(svg).width < fontSize / 4 || rect(svg).width > fontSize * 3 || rect(ink).width < 1 || rect(ink).height < 1) issues.push({ kind: "share-axis-not-rendered", text: axis.querySelector('annotation')?.textContent, svg: svg && rect(svg), ink: ink && rect(ink) });
     }
   }
+  // The reading budget: a caption is set a step below the prose (the reading
+  // size is 1rem), and from a 390px phone up each legend entry holds one line.
+  // A key result follows its own rule (docs/design.md, Article figures).
+  const caption = figure.querySelector(":scope > figcaption");
+  const rem = parseFloat(getComputedStyle(document.documentElement).fontSize);
+  if (caption && parseFloat(getComputedStyle(caption).fontSize) > 0.9 * rem) issues.push({ kind: "caption-at-reading-size", fontSize: getComputedStyle(caption).fontSize });
+  const keyResult = ["asian-interval", "heston-misfit", "grader-ceiling", "budget-frontier"].includes(figure.dataset.figure);
+  if (!keyResult && innerWidth >= 390 && rem <= 16) {
+    for (const entry of [...frame.querySelectorAll('[class*="_legend"] > li')].filter(shown)) {
+      const label = entry.lastElementChild ?? entry;
+      const lines = new Set([...label.getClientRects()].filter(box => box.width > 0).map(box => Math.round(box.top)));
+      if (rect(entry).height > 1.6 * parseFloat(getComputedStyle(entry).lineHeight) || lines.size > 1) issues.push({ kind: "legend-entry-wraps", text: entry.textContent.trim() });
+    }
+  }
+  // A figure's own paragraphs keep its spacing on every page: a heading row
+  // stands clear of what it heads, and a bracket starts on its first step.
+  for (const head of [...frame.querySelectorAll('[class*="_panelTitle"], [class*="_tierAxis"], [class*="_ladderHead"]')].filter(shown)) {
+    if (parseFloat(getComputedStyle(head).marginBottom) < 8) issues.push({ kind: "figure-heading-touches-content", text: head.textContent.trim() });
+  }
+  for (const note of [...frame.querySelectorAll('[class*="_sequenceNote"]')].filter(shown)) {
+    if (parseFloat(getComputedStyle(note).marginTop) !== 0) issues.push({ kind: "bracket-off-its-steps", text: note.textContent.trim() });
+  }
   // A magnified strip: its window runs down through the axis row above the
   // strip, so no tick label of that axis may sit in the window, and the
   // hairlines that join the two must reach the strip's full width.

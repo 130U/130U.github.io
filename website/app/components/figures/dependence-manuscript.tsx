@@ -204,6 +204,7 @@ function BudgetEnvelopesFigure({ manuscript, caption }: ManuscriptFigureProps) {
   const insetUpper = [[0, -5 / 16], [0.02, upperEnvelope(0.02)]] as const;
   const insetLower = [[0, -5 / 16], [S_LIN, lowerEnvelope(S_LIN)], [0.02, lowerEnvelope(0.02)]] as const;
   const zoom = { left: `${x(0)}%`, width: `${x(0.02)}%`, top: `${100 - y(-0.27)}%`, height: `${y(-0.27) - y(-0.316)}%` };
+  // The caption keys the green initial segment and the dashed extrapolation.
   return (
     <Figure
       id="dependence-envelopes"
@@ -213,8 +214,6 @@ function BudgetEnvelopesFigure({ manuscript, caption }: ManuscriptFigureProps) {
         { label: "Proved range for $F(s)$", tone: "accent", shape: "tint" },
         { label: "Attainable lower profile", tone: "accent", shape: "line" },
         { label: "Upper profile", tone: "ink", shape: "line" },
-        { label: "Initial-slope extrapolation", tone: "steel", shape: "dash" },
-        { label: "Exact initial segment", tone: "green", shape: "line" },
       ]}
     >
       <Plot

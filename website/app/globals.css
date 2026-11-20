@@ -40,6 +40,9 @@
   --type-index: 0.6875rem;
   --type-reading: 1rem;
   --type-label: 0.8125rem;
+  /* A figure's caption: the reading face a step below the prose it follows. */
+  --type-caption: 0.875rem;
+  --caption-leading: 1.55;
   --type-interface: 0.9375rem;
   --type-action: var(--type-interface);
   --type-math: 1.15em;

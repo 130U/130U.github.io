@@ -69,7 +69,7 @@ function ResidualKernelFigure({ manuscript, caption }: ManuscriptFigureProps) {
 const POSITIONS = [
   { name: "Call spread 4400/4500", tone: "ink", weights: position({ 4400: 1, 4500: -1 }) },
   { name: "Butterfly 4300/4400/4500", tone: "accent", weights: position({ 4300: 1, 4400: -2, 4500: 1 }) },
-  { name: "Equal-weight basket, twelve strikes", tone: "sky", weights: ROUGH_HESTON.strikes.map(() => 1 / 12) },
+  { name: "Equal-weight basket", tone: "sky", weights: ROUGH_HESTON.strikes.map(() => 1 / 12) },
 ] as const;
 const TOP_FREQUENCY = 128;
 const BAND = 4;
@@ -90,6 +90,8 @@ function NettingRatioFigure({ manuscript, caption }: ManuscriptFigureProps) {
       { name: `Node charge, band of ${BAND} from u`, tone: "steel" as const, y: read.map((u) => y(shareAt(u))), value: read.map((u) => `${(100 * shareAt(u)).toFixed(1)}%`) },
     ],
   };
+  // The caption keys the shaded profile; the legend names the three positions
+  // and places their Herfindahl levels.
   return (
     <Figure
       id="rough-netting-ratio"
@@ -97,8 +99,7 @@ function NettingRatioFigure({ manuscript, caption }: ManuscriptFigureProps) {
       manuscript={manuscript}
       legend={[
         ...POSITIONS.map((item) => ({ label: item.name, tone: item.tone, shape: "line" as const })),
-        { label: "Herfindahl level of each position, at the right edge", tone: "ink", shape: "square" },
-        { label: "Share of the leg-by-leg node charge by band of four, on the same scale", tone: "accent", shape: "tint" },
+        { label: "Herfindahl levels, at the right edge", tone: "ink", shape: "square" },
       ]}
     >
       <Plot
@@ -202,7 +203,6 @@ function PassCountsFigure({ manuscript, caption }: ManuscriptFigureProps) {
       legend={[
         { label: "Joint", tone: "accent", shape: "line" },
         { label: "Leg by leg", tone: "ink", shape: "line" },
-        { label: "Gain from netting", tone: "accent", shape: "tint" },
       ]}
     >
       <div className={styles.stack}>

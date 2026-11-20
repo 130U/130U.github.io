@@ -64,7 +64,8 @@ Bold is weight 600.
 | Page title | `--type-title` | 36px, 30px below 768px; Inter 400, -0.022em | 1.12 |
 | Section or chapter heading | `--type-heading` | 24px, 22px below 768px; Inter 400, -0.015em | 1.25 |
 | Item title: project, paper, institution, subsection; directory label | `--type-subheading` | 18px, Inter 500; 400 for directory labels | 1.4 |
-| Reading: body, summaries, record values, courses, table cells, captions | `--type-reading` | 16px, Source Serif 4 400 | 1.65 |
+| Reading: body, summaries, record values, courses, table cells | `--type-reading` | 16px, Source Serif 4 400 | 1.65 |
+| Caption: article figures, logic diagrams, post images | `--type-caption` | 14px, Source Serif 4 400 | 1.55 |
 | Interface: navigation, contents, Read More, degree names, node titles | `--type-interface`, `--type-action` | 15px, Inter 400; 500 for actions and node titles | 1.5 |
 | Label: field labels, diagram and chart text, footer | `--type-label` | 13px, Inter 400 | 1.45 |
 | Index: section margin index, directory and contribution numbers | `--type-index` | 11px, Source Serif 4 400 | 1.5 |
@@ -352,7 +353,7 @@ node title is in the label role of the diagram's one face. Connectors are CSS
 on the same grid as the nodes; the loop is the one blue path, labeled beneath. Node
 details accept inline TeX. Below 640px of figure width the diagram becomes a vertical
 sequence (parallel nodes side by side from 480px) and the loop a labeled return note.
-A prose caption follows. The build fails if a stage holds neither one node nor as many
+A caption follows in the caption role. The build fails if a stage holds neither one node nor as many
 as the widest stage.
 
 ### Article figures
@@ -360,14 +361,36 @@ as the widest stage.
 Figures inside the eleven full articles take their grammar from Cognition's research
 posts: a faint 1px frame, a title at the interface size and weight 500, every chart
 label at the label size, axis names in flat gray pills, dashed hairline grids, and a
-caption in the reading face and supporting ink below the frame. Every axis name starts
+caption below the frame in the caption role: the reading face a step below the prose, in
+supporting ink, so it reads as the figure's caption and not as the next paragraph, as
+captions do in Nature, Distill and the printed page. Every axis name starts
 on the frame's left edge, with the title and the legend. Figure text keeps the interface
 face's proportional figures, so a hyphenated label reads as one word; ticks and values
 take tabular figures. A manuscript caption opens with its "Figure N." in the interface
-face at weight 500, the face of a table's title, and the rest of the caption follows in
-the caption style. Ink and the accent carry the argument; `--chart-sky` marks a second
+face at weight 500, the face of a table's title, at the label size beside the caption's
+serif, and the rest of the caption follows in the caption style. Ink and the accent carry the argument; `--chart-sky` marks a second
 series, `--chart-green` an exactly known segment, `--chart-steel` and `--chart-mist`
 hold context, and `--chart-tint` marks an emphasized row, column, or region.
+
+A figure is read in a glance, before its caption, so each keeps a reading budget. A view
+carries one message; whatever does not carry it moves to a readout, a second view, or the
+text. The title names what to see in at most ten words and holds no equation; a
+formula and the parameters belong to the caption. A site figure's caption runs to at most two sentences
+and 36 words: how to read the marks where they need it, and the one result the figure
+shows, in the article's terms; it repeats no number the figure prints except that
+result, and no sentence the paragraph above already gives. Marks are named in place
+where open space lies beside them (a line at its end, a cluster beside its last mark). A
+legend keys only what cannot be named in place, in at most four entries of at most six
+words; an entry is a name, never a definition or a value, and never repeats the title,
+a direct label or the caption. A value column prints one number per row, at the
+precision that carries the message (three decimals for a bound read against a
+tolerance), and the readout keeps the manuscript's every digit; a unit or note is named
+once, on the first row or in the axis name, and a value the table just above already
+prints is left to the readout. Under a figure's title, a panel title takes the label
+size and weight 500, so the eye lands on the title first. A manuscript caption is the
+manuscript's text; the drawing above it names in place, or keys in its legend, only what
+that caption does not already key. The tests hold every figure to this budget except a
+key result, which follows the rule below.
 
 Text is HTML at its true size, so labels stay legible at every width; only curves live
 in a stretched SVG layer whose strokes keep their width, and schematics scale uniformly
@@ -401,7 +424,7 @@ the accent; an interval known by one end has a cap there and runs to an arrowhea
 end of the axis. Where an interval is too narrow for its axis, a strip beneath magnifies
 a window: the window is tinted on the rows above, its edges run down through the axis
 row, clear of its labels, and open onto the full width of the strip. Panels of one figure
-stack, each under a title in the interface face, parted by a dashed hairline.
+stack, each under a panel title, parted by a dashed hairline.
 
 ### Research tables
 

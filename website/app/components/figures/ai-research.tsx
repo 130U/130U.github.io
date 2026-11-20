@@ -24,7 +24,7 @@ function AuditPolicies() {
     <Figure
       id="audit-policies"
       title="Three audit policies at the same expected budget"
-      caption="Each policy spends $2{,}000$ cost units with the floor $\pi_{\min}=3\%$ on a batch of 10,000 submissions. Residual- and cost-aware allocation is the only policy more precise than uniform sampling; risk-first routing oversamples the expensive hardest stratum and raises the variance by a third."
+      caption="Each policy spends 2,000 cost units with a 3% sampling floor. Only residual- and cost-aware allocation is more precise than uniform sampling; risk-first routing oversamples the costly hardest stratum and raises the variance by a third."
       views={[{ id: "precision", label: "Precision" }, { id: "sampling", label: "Sampling by Stratum" }]}
       viewsLabel="Show precision or sampling probabilities"
     >
@@ -42,7 +42,7 @@ function AuditPolicies() {
       <Panel view="sampling" active={false}>
         <Bars label="Audit probabilities for the routine, intermediate and hardest strata: uniform 14.81% each; risk-first 3.00%, 11.56%, 43.33%; residual- and cost-aware 7.89%, 19.37%, 21.84%." labelWidth="12rem" valueWidth="8.5rem" stack>
           {AUDIT_POLICIES.map((policy) => (
-            <BarRow key={policy.name} label={policy.name} value={policy.strata.map((value) => value.toFixed(2)).join(" / ")} valueNote="percent" grid={shareTicks.map((tick) => share(tick.at))}>
+            <BarRow key={policy.name} label={policy.name} value={policy.strata.map((value) => `${value.toFixed(2)}%`).join(" / ")} grid={shareTicks.map((tick) => share(tick.at))}>
               {policy.strata.map((value, index) => (
                 <span key={index} className={`${kit.seg} ${kit[STRATA[index].tone]} ${styles.mini}`} data-row={index} data-tip={`${policy.name}\n${STRATA[index].label}\n${value.toFixed(2)}%`} style={{ left: 0, width: `${share(value)}%` }} />
               ))}
@@ -69,7 +69,7 @@ function ResidualMoment() {
     <Figure
       id="residual-moment"
       title="Where an audit is informative"
-      caption="For a calibrated predictor, $f_i=q_i$, the calibration term vanishes and $m_i=q_i(1-q_i)$. A near-certain error that the predictor already recognizes carries almost no residual; the moment peaks where the outcome is most uncertain. Miscalibration adds $(q_i-f_i)^2$ on top."
+      caption="For a calibrated predictor, $f_i=q_i$, the moment is $m_i=q_i(1-q_i)$: almost nothing for a near-certain error the predictor already recognizes, and a peak where the outcome is most uncertain. Miscalibration adds $(q_i-f_i)^2$."
     >
       <Plot
         label="Expected squared residual m equals q times one minus q for a calibrated predictor: zero at q equal to 0 and 1, maximum 0.25 at q equal to 0.5."
@@ -101,14 +101,13 @@ function RemediationExchange() {
       title="Where 100 reviews remove the most loss"
       caption="Both groups hold 100 items and capacity covers 100 reviews. Review lowers group 1 from 0.40 to 0.30 and group 2 from 0.15 to 0.01, so the smaller initial risk carries the larger reduction, $\Delta_2=0.14>\Delta_1=0.10$."
       legend={[
-        { label: "Group 1, reviewed", tone: "ink" },
-        { label: "Group 1, not reviewed", tone: "ink", shape: "hatch" },
-        { label: "Group 2, reviewed", tone: "sky" },
-        { label: "Group 2, not reviewed", tone: "sky", shape: "hatch" },
+        { label: "Group 1", tone: "ink" },
+        { label: "Group 2", tone: "sky" },
+        { label: "Not reviewed", tone: "steel", shape: "hatch" },
       ]}
     >
       <Bars label="Expected errors left after review. Ranking by initial risk: 30 plus 15 equals 45. Ranking by expected loss reduction: 40 plus 1 equals 41, 8.89% fewer at the same review volume." labelWidth="12rem" valueWidth="7.5rem" stack>
-        <BarRow label="Rank by initial risk" value="45" valueNote="expected errors" grid={grid}>
+        <BarRow label="Rank by initial risk" value="45" grid={grid}>
           <Seg x={x} from={0} to={30} tone="ink" tip={"Group 1 reviewed\n100 × 0.30 = 30"} />
           <Seg x={x} from={30} to={45} tone="sky" hatch tip={"Group 2 not reviewed\n100 × 0.15 = 15"} />
         </BarRow>
@@ -168,7 +167,7 @@ function LabelFlip() {
     <Figure
       id="label-flip"
       title="Probability that an inherited reference label is wrong"
-      caption="For a linear decision rule with margin $\gamma$ and projected perturbation spread $s$, the label flips with probability $\Phi(-\gamma/s)$. Diagnostic tasks sit near the boundary by design, which is where an inherited answer is most often wrong."
+      caption="For a linear decision rule with margin $\gamma$ and projected perturbation spread $s$, the label flips with probability $\Phi(-\gamma/s)$. Diagnostic tasks sit near the boundary by design, where an inherited answer is most often wrong."
     >
       <Plot
         label="Stale-label error rate Phi of minus gamma over s: 40.13% at margin-to-noise ratio 0.25, 15.87% at 1, 2.28% at 2."
@@ -211,8 +210,7 @@ function BridgeLeakage() {
     <Figure
       id="bridge-leakage"
       title="What the endpoint reveals between $s$ and $T$"
-      caption="Variance is in units of $\sigma^2(T-s)$. Conditioning on $X_T$ halves the variance at the midpoint, an apparent 29.29% RMSE improvement that comes entirely from the endpoint; where a forecasting task withholds $X_T$, that gain is leakage. The bands mark the three information sets the task specification keeps apart."
-      legend={[{ label: "Given $\\mathcal{F}_s$ only", tone: "ink", shape: "line" }, { label: "Given $\\mathcal{F}_s$ and $X_T$", tone: "accent", shape: "line" }]}
+      caption="Variance is in units of $\sigma^2(T-s)$. Conditioning on $X_T$ halves it at the midpoint: an apparent 29.29% RMSE improvement that comes entirely from the endpoint, and leakage wherever a forecasting task withholds $X_T$."
     >
       <div className={styles.bridgeViewport} data-figure-scroll role="region" tabIndex={0} aria-label="Conditional variance and information sets">
       <div className={styles.bridgeCanvas} style={style}>
@@ -242,6 +240,11 @@ function BridgeLeakage() {
           <Dot left={x(0.5)} top={100 - y(0.25)} tone="accent" className={kit.fade} />
           <Mark left={x(0.5)} top={100 - y(0.375)} anchor="left" tone="accent" wrap className={kit.fade}>Variance halves</Mark>
           <Mark left={x(-0.19)} top={50} anchor="center" className={kit.muted}>History</Mark>
+          {/* Each curve is named beside itself, left of the three-quarter mark
+              so that a phone shows both names before the plot scrolls: the
+              line in the open space above it, the bridge beneath its peak. */}
+          <Mark left={x(0.62)} top={100 - y(0.62)} anchor="above-left" className={kit.fade}>{"Given $\\mathcal{F}_s$"}</Mark>
+          <Mark left={x(0.74)} top={100 - y(0.74 * 0.26)} anchor="below-left" tone="accent" className={kit.fade}>{"Given $\\mathcal{F}_s$ and $X_T$"}</Mark>
         </Plot>
         <div className={styles.info} style={{ "--split": `${x(0)}%` } as CSSProperties} aria-label="Information sets" role="img">
           <span className={`${styles.infoBand} ${kit.steel}`} data-span="" data-hatch=""><span><Tx>{"Construction $\\mathcal{F}_{\\text{gen}}$: complete path and endpoint"}</Tx></span></span>
@@ -466,7 +469,7 @@ function ProofObligations() {
     <Figure
       id="proof-obligations"
       title="The first failed obligation and the subgraph it leaves unverified"
-      caption="Each node must follow from the assumptions $\Gamma_q$ and its parents. Choose a node to mark it as the first failure: every descendant, including the conclusion $C_q$, becomes unverified, because correct local steps cannot repair a false premise."
+      caption="Choose a node to mark it as the first failure: every descendant, the conclusion $C_q$ included, becomes unverified, because correct local steps cannot repair a false premise."
       legend={[{ label: "First failed obligation", tone: "accent" }, { label: "Unverified descendant", tone: "steel", shape: "hatch" }, { label: "Verified", tone: "ink", shape: "box" }]}
     >
       <div className={styles.dag} role="group" aria-label="Proof-obligation dependency graph. Choose a node to mark it as the first failed obligation.">
@@ -522,15 +525,16 @@ function ProtocolOutcomes() {
     <Figure
       id="protocol-outcomes"
       title="What each acceptance protocol does with 3,600 submissions"
-      caption="The first 1,200 submissions in each bar are valid certificates and the remaining 2,400 carry controlled defects. Final-answer matching accepts the 1,800 defective submissions that report $v^*$; strict reference-path matching rejects the 600 valid elimination proofs; certificate verification makes neither error."
+      caption="Each bar holds 1,200 valid certificates, then 2,400 submissions with controlled defects. Final-answer matching accepts 1,800 flawed solutions; strict reference-path matching rejects 600 valid elimination proofs; certificate verification makes neither error."
       legend={OUTCOMES.map((outcome) => ({ label: outcome.name, tone: outcome.tone }))}
     >
       <Bars label="Final-answer matching: 1,200 valid accepted, 1,800 invalid accepted, 600 invalid rejected; 40.0% of accepted submissions are valid. Strict reference-path matching: 600 valid accepted, 600 valid rejected, 2,400 invalid rejected. Certificate verification: 1,200 valid accepted, 2,400 invalid rejected." valueWidth="6rem" stack>
         <BarHeader marks={[{ at: x(0), label: "Valid", tone: "steel", anchor: "left" }, { at: x(1200), label: "Invalid", tone: "steel", anchor: "left" }]} />
-        {PROTOCOLS.map((protocol) => {
+        {/* The value column is named once, on its first row. */}
+        {PROTOCOLS.map((protocol, row) => {
           let start = 0;
           return (
-            <BarRow key={protocol.name} label={protocol.name} value={protocol.share} valueNote="valid share" grid={grid} rules={[{ at: x(1200), tone: "soft" }]}>
+            <BarRow key={protocol.name} label={protocol.name} value={protocol.share} valueNote={row === 0 ? "of accepted are valid" : undefined} grid={grid} rules={[{ at: x(1200), tone: "soft" }]}>
               {protocol.parts.map((count, index) => {
                 const from = start;
                 start += count;
@@ -562,9 +566,9 @@ function CoverageCollapse() {
   return (
     <Figure
       id="coverage-collapse"
-      title="Coverage of a nominal 95% interval under a shared reporting bias"
+      title="Coverage of a nominal 95% interval under shared bias"
       caption="Shared bias $b=0.2$ and noise $\sigma=1$. Ignoring $b$, more records only tighten the interval around the wrong center, and coverage falls toward zero; once verification bounds $|b|\le0.2$, the widened half-width $0.2+1.96/\sqrt{n}$ holds coverage at 97.50%."
-      legend={[{ label: "Bias ignored", tone: "ink", shape: "line" }, { label: "Half-width widened by the verified bound", tone: "accent", shape: "line" }, { label: "Nominal 95%", tone: "steel", shape: "dash" }]}
+      legend={[{ label: "Bias ignored", tone: "ink", shape: "line" }, { label: "Widened by the verified bound", tone: "accent", shape: "line" }, { label: "Nominal 95%", tone: "steel", shape: "dash" }]}
     >
       <Plot
         label="Actual coverage of a nominal 95% interval with shared bias 0.2: 48.40% at 100 records and 0.000637% at 1,000 records when the bias is ignored; 97.50% with the widened half-width."
@@ -651,11 +655,11 @@ function RegretScenarios() {
     <Figure
       id="regret-scenarios"
       className={styles.scenarioFigure}
-      title="Eight scenarios for the score difference $\Delta_\theta=0.15\theta+z_1+0.3\theta z_2$"
-      caption="Two Rashomon models, $\theta\in\{-1,1\}$, and four evidence configurations give eight scenarios. A query splits them by what it would reveal. Only $z_1$ puts every remaining scenario on one side of zero, so only verifying $z_1$ removes the worst-case regret of 0.61."
+      title="Which verification removes the worst-case regret"
+      caption="Eight scenarios of the score difference $\Delta_\theta=0.15\theta+z_1+0.3\theta z_2$, from two Rashomon models and four evidence configurations. Only verifying $z_1$ puts every remaining scenario on one side of zero and removes the worst-case regret of 0.61."
       views={SCENARIO_VIEWS}
       viewsLabel="Choose a verification query"
-      legend={[{ label: "$\\Delta>0$: company $i$ scores higher", tone: "accent", shape: "dot" }, { label: "$\\Delta<0$: company $k$ scores higher", tone: "ink", shape: "ring" }]}
+      legend={[{ label: "Company $i$ scores higher", tone: "accent", shape: "dot" }, { label: "Company $k$ scores higher", tone: "ink", shape: "ring" }]}
     >
       <div className={styles.scenarios} data-scenarios role="img" aria-label="Score differences for the eight scenarios lie at plus or minus 0.19, 0.31, 0.49 and 0.61. Verifying z1 separates positive from negative differences; rechecking the SHAP field or verifying z2 does not.">
         <span className={styles.zero} style={{ left: `${x(0)}%` }} />
