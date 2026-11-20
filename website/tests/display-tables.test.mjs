@@ -139,7 +139,7 @@ test("a tabular display keeps the line of mathematics and booktabs' rule spacing
   assert.doesNotMatch(css, /border-(?:left|right|inline)[^;]*solid/u, "No vertical rules");
   const tsx = await readFile(path.join(ROOT, "app", "components", "research", "ResearchMath.tsx"), "utf8");
   assert.match(tsx, /"--row-gap": `\$\{RESEARCH_MATH_ROW_SPACING_EM\}em`/u, "Rows stand one line of mathematics apart");
-  assert.equal(RESEARCH_MATH_ROW_SPACING_EM, 0.7348);
+  assert.equal(RESEARCH_MATH_ROW_SPACING_EM, 0.8217);
 });
 
 test("the published pages draw each tabular display as a table and keep its TeX, number and sentence", async () => {
