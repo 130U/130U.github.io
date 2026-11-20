@@ -277,6 +277,11 @@ async function verify() {
       continue;
     }
     const actual = await routeSnapshot(route);
+    if (actual.textSha256 !== expected.textSha256) {
+      // The text read from the page, one sentence per line, so a run can be compared with a local build.
+      const text = visibleText(await readFile(routeHtmlPath(route), "utf8"), RESEARCH_ARTICLE_ROUTES.has(route));
+      console.error(`Visible text of ${route}:\n${text.replace(/([.;:]) /gu, "$1\n")}\n`);
+    }
     const fields = ["textSha256", "characterCount", "wordCount", "altTexts", "ariaLabels", "metadata"];
     if (RESEARCH_ARTICLE_ROUTES.has(route)) fields.push("mathSourceSha256", "formulaCount");
     for (const field of fields) {
