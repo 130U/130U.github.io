@@ -206,8 +206,10 @@ function visibleText(html, preserveFormulaPositions = false) {
   }
   body = replaceElements(body, /<([a-z][\w:-]*)\b[^>]*data-visible-copy-role=["']visual-identity["'][^>]*>/giu);
   body = replaceElements(body, /<([a-z][\w:-]*)\b[^>]*aria-hidden=["']true["'][^>]*>/giu);
-  // A word-break opportunity adds no text or word boundary.
-  return stripInterfaceStrings(withoutComments(body).replace(/<wbr\b[^>]*>/giu, "").replace(/<[^>]+>/gu, " "));
+  // A word-break opportunity adds no text or word boundary, nor do the empty text
+  // separators React writes beside one where its stream divides a run of text.
+  const unbroken = body.replace(/(?:<!--\s*-->)*<wbr\b[^>]*>(?:<!--\s*-->)*/giu, "");
+  return stripInterfaceStrings(withoutComments(unbroken).replace(/<[^>]+>/gu, " "));
 }
 
 function metadataSnapshot(html) {
@@ -279,13 +281,8 @@ async function verify() {
     const actual = await routeSnapshot(route);
     if (actual.textSha256 !== expected.textSha256) {
       // The text read from the page, one sentence per line, so a run can be compared with a local build.
-      const html = await readFile(routeHtmlPath(route), "utf8");
-      const text = visibleText(html, RESEARCH_ARTICLE_ROUTES.has(route));
+      const text = visibleText(await readFile(routeHtmlPath(route), "utf8"), RESEARCH_ARTICLE_ROUTES.has(route));
       console.error(`Visible text of ${route}:\n${text.replace(/([.;:]) /gu, "$1\n")}\n`);
-      // A written-out address whose visible text differs from its href, as markup.
-      for (const link of html.matchAll(/<a href="(https?:[^"]+)"[^>]*>([\s\S]*?)<\/a>/gu)) {
-        if (normalizeWhitespace(link[2].replace(/<wbr\b[^>]*>/giu, "").replace(/<[^>]+>/gu, " ")) !== decodeHtml(link[1]) && link[2].includes("<wbr")) console.error(`Address markup:\n${link[0]}\n`);
-      }
     }
     const fields = ["textSha256", "characterCount", "wordCount", "altTexts", "ariaLabels", "metadata"];
     if (RESEARCH_ARTICLE_ROUTES.has(route)) fields.push("mathSourceSha256", "formulaCount");

@@ -51,6 +51,7 @@ test("optional word breaks preserve copy identity without erasing forced breaks"
   const whole = snapshotHtml("<body><p>crossdisciplinary analysis</p></body>");
   const optional = snapshotHtml("<body><p>cross<wbr>disciplinary analy<WBR />sis</p></body>");
   assert.deepEqual(optional, whole);
+  assert.deepEqual(snapshotHtml("<body><p>cross<!-- --><wbr/>disciplinary analy<wbr/><!-- -->sis</p></body>"), whole);
   assert.notEqual(snapshotHtml("<body><p>cross<br>disciplinary analysis</p></body>").textSha256, whole.textSha256);
 });
 
