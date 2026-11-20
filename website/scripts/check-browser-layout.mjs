@@ -269,6 +269,81 @@ function inspectManuscript() {
     equation.scrollLeft = 0;
   }
   if (starts.size > 1) issues.push({ kind: "equations-start-on-different-axes", starts: [...starts] });
+
+  // Mathematics keeps the page's rhythm. A line of prose is taller than the
+  // reading leading only where an inline expression itself reaches past the
+  // line; every display stands in the same white space, from its expression to
+  // the descenders of the line above, to the x-height of the line below, and to
+  // a neighboring display.
+  const prose = document.querySelector('[data-research-block-type="paragraph"]');
+  if (!prose) return issues;
+  const style = getComputedStyle(prose);
+  const size = parseFloat(style.fontSize);
+  const leading = parseFloat(style.lineHeight);
+  const face = document.createElement("canvas").getContext("2d");
+  face.font = `1000px ${style.fontFamily}`;
+  const metric = (glyph, name) => face.measureText(glyph)[name] / 1000 * size;
+  const ascent = metric("x", "fontBoundingBoxAscent");
+  const descent = metric("x", "fontBoundingBoxDescent");
+  const strutAbove = ascent + (leading - ascent - descent) / 2;
+  const strutBelow = descent + (leading - ascent - descent) / 2;
+  const xHeight = metric("x", "actualBoundingBoxAscent");
+  const descender = metric("p", "actualBoundingBoxDescent");
+  const baselines = element => {
+    const found = [];
+    const walker = document.createTreeWalker(element, NodeFilter.SHOW_TEXT);
+    for (let node = walker.nextNode(); node; node = walker.nextNode()) {
+      if (!node.data.trim() || node.parentElement.closest("math, svg, [data-research-formula]")) continue;
+      if (Math.abs(parseFloat(getComputedStyle(node.parentElement).fontSize) - size) > 0.5) continue;
+      const range = document.createRange();
+      range.selectNodeContents(node);
+      for (const box of range.getClientRects()) if (box.width > 0) found.push(box.bottom - descent);
+    }
+    return found.sort((a, b) => a - b).reduce((lines, baseline) => (!lines.length || baseline - lines.at(-1) > 3 ? [...lines, baseline] : lines), []);
+  };
+  // A drawing's box less the gutters its canvas keeps around the expression.
+  const expression = formula => {
+    const box = formula.querySelector("svg[data-research-svg]").getBoundingClientRect();
+    const gutter = parseFloat(getComputedStyle(formula).getPropertyValue("--math-gutter")) * parseFloat(getComputedStyle(formula).fontSize);
+    return { top: box.top + gutter, bottom: box.bottom - gutter };
+  };
+  for (const paragraph of document.querySelectorAll('p[data-research-block-type="paragraph"]')) {
+    const formulas = [...paragraph.querySelectorAll('[data-research-formula="inline"]')].filter(formula => formula.querySelector("svg"));
+    if (!formulas.length) continue;
+    const lines = baselines(paragraph);
+    const boxes = formulas.map(expression);
+    for (let index = 1; index < lines.length; index += 1) {
+      const [above, below] = [lines[index - 1], lines[index]];
+      if (below - above <= leading + 0.5) continue;
+      const reaches = boxes.some(box => (box.bottom > above + strutBelow + 0.5 && box.top < below) || (box.top < below - strutAbove - 0.5 && box.bottom > above));
+      if (!reaches) issues.push({ kind: "prose-line-stretched-by-formula-canvas", block: paragraph.dataset.researchBlock, pitch: below - above, leading });
+    }
+  }
+  // Text is measured from its line boxes: the descenders of a line sit above its
+  // box's lower edge by the strut's depth less the descender, and its x-height
+  // below the upper edge by the strut's height less the x-height. A line that a
+  // tall inline expression enlarges keeps the same white space from its edge.
+  const whites = [];
+  for (const block of document.querySelectorAll('[data-research-block-type="equation"]')) {
+    const own = expression(block.querySelector('[data-research-formula="display"]'));
+    const previous = block.previousElementSibling;
+    const next = block.nextElementSibling;
+    if (previous?.matches('p[data-research-block-type="paragraph"]')) {
+      whites.push({ side: "above", block: block.dataset.researchBlock, white: own.top - (previous.getBoundingClientRect().bottom - strutBelow + descender) });
+    } else if (previous?.matches('[data-research-block-type="equation"]')) {
+      whites.push({ side: "between", block: block.dataset.researchBlock, white: own.top - expression(previous.querySelector('[data-research-formula="display"]')).bottom });
+    }
+    if (next?.matches('p[data-research-block-type="paragraph"]')) {
+      whites.push({ side: "below", block: block.dataset.researchBlock, white: next.getBoundingClientRect().top + strutAbove - xHeight - own.bottom });
+    }
+  }
+  if (whites.length) {
+    const values = whites.map(entry => entry.white);
+    if (Math.max(...values) - Math.min(...values) > 2) {
+      const typical = values.sort((a, b) => a - b)[Math.floor(values.length / 2)];
+      issues.push({ kind: "display-white-space-uneven", typical, outliers: whites.filter(entry => Math.abs(entry.white - typical) > 1) });
+    }
+  }
   return issues;
 }
 
