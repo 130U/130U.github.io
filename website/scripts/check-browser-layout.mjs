@@ -9,6 +9,7 @@ const OUT = path.join(ROOT, "out");
 const ARTIFACTS = path.resolve(process.env.LAYOUT_ARTIFACT_DIR ?? path.join(ROOT, "test-results/figure-layout"));
 const ORIGIN = "http://127.0.0.1:8127";
 const WIDTHS = [320, 390, 768, 1024, 1440, 1920];
+const TEXT_WIDTHS = [320, 390, 768, 1024, 1280, 1440, 1920];
 const filter = process.argv.find(arg => arg.startsWith("--figure="))?.slice("--figure=".length);
 const MIME = { ".html": "text/html", ".css": "text/css", ".js": "text/javascript", ".json": "application/json", ".txt": "text/plain", ".svg": "image/svg+xml", ".woff2": "font/woff2", ".woff": "font/woff", ".png": "image/png", ".jpg": "image/jpeg", ".jpeg": "image/jpeg", ".webp": "image/webp", ".ico": "image/x-icon" };
 
@@ -272,6 +273,151 @@ function inspectManuscript() {
   return issues;
 }
 
+// Text that breaks or aligns like a mistake, on every page at every width:
+// a list marker whose number and period part, that is wider than its column or
+// that touches its text; numbers of one list that do not share their right edge
+// and their gap to the text; punctuation pushed to the next line by the formula,
+// link or marker it closes against; a word, a number, a number range or a part
+// of a written-out address split mid-token; a contents entry whose wrapped title
+// returns under its number rather than under its first word; and a Return to
+// Text or footer link that wraps.
+function inspectText() {
+  const issues = [];
+  const visibility = new Map();
+  const shown = element => {
+    if (visibility.has(element)) return visibility.get(element);
+    let result = element.checkVisibility({ checkVisibilityCSS: true }) && !element.closest("math, [hidden], script, style, noscript, template");
+    for (let node = element; result && node && node !== document.body; node = node.parentElement) {
+      const style = getComputedStyle(node);
+      if (style.clipPath === "inset(50%)" || /^rect\(0px,? 0px,? 0px,? 0px\)$/u.test(style.clip)) result = false;
+    }
+    visibility.set(element, result);
+    return result;
+  };
+  const sameLine = (a, b) => Math.min(a.bottom, b.bottom) - Math.max(a.top, b.top) > 0.3 * Math.min(a.height, b.height);
+  const lineCount = rects => rects.reduce((lines, rect) => lines.some(line => sameLine(line, rect)) ? lines : [...lines, rect], []).length;
+  const textRects = (node, start, end) => {
+    const range = document.createRange();
+    range.setStart(node, start);
+    range.setEnd(node, end);
+    return [...range.getClientRects()].filter(rect => rect.width > 0.5);
+  };
+  const contentRects = element => {
+    const range = document.createRange();
+    range.selectNodeContents(element);
+    return [...range.getClientRects()].filter(rect => rect.width > 0.5);
+  };
+  const where = element => {
+    const owner = element.closest("[id]");
+    return `${element.tagName.toLowerCase()}${owner ? ` in #${owner.id}` : ""}`;
+  };
+  // The first visible glyph or formula of an element after a given descendant.
+  const firstInk = (root, skip) => {
+    const walker = document.createTreeWalker(root, NodeFilter.SHOW_ELEMENT | NodeFilter.SHOW_TEXT);
+    for (let node = walker.nextNode(); node; node = walker.nextNode()) {
+      if (skip?.contains(node)) continue;
+      if (node.nodeType === Node.ELEMENT_NODE) {
+        if (node.matches('[data-research-formula="inline"]') && shown(node)) return node.getBoundingClientRect();
+        continue;
+      }
+      if (node.parentElement.closest('[data-research-formula="inline"]') || !shown(node.parentElement)) continue;
+      const offset = node.data.search(/\S/u);
+      if (offset >= 0) return textRects(node, offset, offset + 1)[0];
+    }
+    return null;
+  };
+
+  const lists = new Map();
+  const markers = [
+    ...[...document.querySelectorAll("[data-list-item]")].map(item => ({ item, marker: item.firstElementChild })),
+    ...[...document.querySelectorAll('[role="doc-endnotes"] li, [role="doc-endnotes"] #fn-author')].map(item => ({ item, marker: item.querySelector(':scope > span[aria-hidden="true"]') })),
+  ];
+  for (const { item, marker } of markers) {
+    if (!marker || !shown(item)) continue;
+    const ink = contentRects(marker);
+    const text = firstInk(item, marker);
+    if (!ink.length || !text) continue;
+    const label = marker.textContent.trim();
+    const left = Math.min(...ink.map(rect => rect.left));
+    const right = Math.max(...ink.map(rect => rect.right));
+    const column = item.getBoundingClientRect().left;
+    if (lineCount(ink) > 1) issues.push({ kind: "list-marker-split", marker: label, item: where(item) });
+    if (left < column - 0.5) issues.push({ kind: "list-marker-wider-than-column", marker: label, overhang: +(column - left).toFixed(2), item: where(item) });
+    if (text.left - right < 2) issues.push({ kind: "list-marker-touches-text", marker: label, gap: +(text.left - right).toFixed(2), item: where(item) });
+    if (!/^\d+\.?$/u.test(label)) continue;
+    if (!lists.has(item.parentElement)) lists.set(item.parentElement, []);
+    lists.get(item.parentElement).push({ label, right, gap: text.left - right, start: text.left });
+  }
+  for (const entries of lists.values()) {
+    // Items whose text starts on one edge form one list.
+    const groups = [];
+    for (const entry of entries) {
+      const group = groups.find(candidate => Math.abs(candidate[0].start - entry.start) < 0.75);
+      if (group) group.push(entry); else groups.push([entry]);
+    }
+    for (const group of groups.filter(candidate => candidate.length > 1)) {
+      const spread = values => Math.max(...values) - Math.min(...values);
+      if (spread(group.map(entry => entry.right)) > 0.75) issues.push({ kind: "list-numbers-not-right-aligned", markers: group.map(entry => `${entry.label}@${entry.right.toFixed(1)}`).join(" ") });
+      if (spread(group.map(entry => entry.gap)) > 0.75) issues.push({ kind: "list-marker-gaps-differ", markers: group.map(entry => `${entry.label}:${entry.gap.toFixed(1)}`).join(" ") });
+    }
+  }
+
+  // Punctuation closing against a formula, a link or a marker shares its line.
+  const BLOCK = "p, li, td, th, dd, dt, figcaption, h1, h2, h3, h4, blockquote";
+  for (const element of document.querySelectorAll('[data-research-formula="inline"], a, [data-list-item] > :first-child')) {
+    if (!shown(element) || element.parentElement.closest("[data-research-formula]")) continue;
+    const block = element.parentElement.closest(BLOCK);
+    if (!block) continue;
+    const before = (element.matches('[data-research-formula="inline"]') ? [element.getBoundingClientRect()] : contentRects(element)).at(-1);
+    const walker = document.createTreeWalker(block, NodeFilter.SHOW_TEXT);
+    walker.currentNode = element;
+    let next = walker.nextNode();
+    while (next && element.contains(next)) next = walker.nextNode();
+    if (!before || !next || !shown(next.parentElement) || next.parentElement.closest("math") || !/^[,.;:!?)\]}’”%…]/u.test(next.data)) continue;
+    const after = textRects(next, 0, 1)[0];
+    if (after && !sameLine(before, after) && after.top > before.top) issues.push({ kind: "punctuation-starts-line", mark: next.data[0], after: where(element) });
+  }
+
+  // Words, numbers, number ranges and address parts hold one line.
+  const TOKEN = /[\p{L}\p{N}][\p{L}\p{N}\p{M}'’]*(?:[.,][\p{L}\p{N}]+)*%?|\d[\d.,]*[-–]\d[\d.,]*/gu;
+  const walker = document.createTreeWalker(document.body, NodeFilter.SHOW_TEXT);
+  for (let node = walker.nextNode(); node; node = walker.nextNode()) {
+    if (!node.data.trim() || !shown(node.parentElement)) continue;
+    for (const match of node.data.matchAll(TOKEN)) {
+      if (match[0].length < 2) continue;
+      if (lineCount(textRects(node, match.index, match.index + match[0].length)) > 1) issues.push({ kind: "token-split", text: match[0], in: where(node.parentElement) });
+    }
+  }
+
+  // A numbered contents entry hangs its number.
+  for (const link of document.querySelectorAll('nav[aria-label="Article contents"] a[data-numbered]')) {
+    if (!shown(link)) continue;
+    const [number, title] = link.children;
+    const titleLines = contentRects(title);
+    if (lineCount(titleLines) < 2) continue;
+    const starts = titleLines.map(rect => rect.left);
+    if (Math.max(...starts) - Math.min(...starts) > 0.75 || Math.max(...contentRects(number).map(rect => rect.right)) > Math.min(...starts)) issues.push({ kind: "contents-number-not-hanging", entry: link.textContent.trim() });
+  }
+
+  // Return links hold one line.
+  for (const link of document.querySelectorAll('[role="doc-backlink"], footer a')) {
+    if (shown(link) && lineCount(contentRects(link)) > 1) issues.push({ kind: "return-link-wraps", text: link.textContent.trim() });
+  }
+
+  // Whole words set the narrowest width of their tracks, so a page never scrolls sideways.
+  if (document.documentElement.scrollWidth > innerWidth + 1) issues.push({ kind: "page-scrolls-sideways", scrollWidth: document.documentElement.scrollWidth });
+  return issues;
+}
+
+async function discoverPages(directory = OUT) {
+  const routes = [];
+  for (const entry of await readdir(directory, { withFileTypes: true })) {
+    if (entry.isDirectory() && !["_next", "assets", "architecture", "_not-found"].includes(entry.name)) routes.push(...await discoverPages(path.join(directory, entry.name)));
+    if (entry.isFile() && entry.name === "index.html") routes.push("/" + path.relative(OUT, directory).split(path.sep).filter(Boolean).join("/") + (directory === OUT ? "" : "/"));
+  }
+  return routes;
+}
+
 async function discoverManuscripts(directory = OUT) {
   const routes = [];
   for (const entry of await readdir(directory, { withFileTypes: true })) {
@@ -294,6 +440,7 @@ const home = [];
 const noScript = [];
 const longNumbers = [];
 const manuscripts = [];
+const texts = [];
 const missing = new Set();
 try {
   for (const width of WIDTHS) {
@@ -364,6 +511,20 @@ try {
           await page.goto(ORIGIN + route, { waitUntil: "networkidle" });
           await page.evaluate(() => document.fonts.ready);
           manuscripts.push({ route, width, issues: await page.evaluate(inspectManuscript) });
+        }
+      } finally { await context.close(); }
+    }
+    const pageRoutes = await discoverPages();
+    assert.ok(pageRoutes.length >= 28, `Expected at least 28 pages; found ${pageRoutes.length}.`);
+    for (const width of TEXT_WIDTHS) {
+      const context = await browser.newContext({ viewport: { width, height: 1100 }, reducedMotion: "reduce", serviceWorkers: "block" });
+      await serveExport(context, missing);
+      try {
+        const page = await context.newPage();
+        for (const route of pageRoutes) {
+          await page.goto(ORIGIN + route, { waitUntil: "networkidle" });
+          await page.evaluate(() => document.fonts.ready);
+          texts.push({ route, width, issues: await page.evaluate(inspectText) });
         }
       } finally { await context.close(); }
     }
@@ -447,10 +608,10 @@ try {
   await browser.close();
 }
 const failures = records.filter(record => record.issues.length || record.pageErrors.length);
-const otherFailures = [...manuscripts, ...home, ...longNumbers, ...noScript].filter(record => record.issues.length);
-const report = { figures: unique.size, widths: WIDTHS, cases: records.length, missingAssets: [...missing], failures: failures.length + otherFailures.length, records, manuscripts, home, longNumbers, noScript };
+const otherFailures = [...manuscripts, ...texts, ...home, ...longNumbers, ...noScript].filter(record => record.issues.length);
+const report = { figures: unique.size, widths: WIDTHS, cases: records.length, missingAssets: [...missing], failures: failures.length + otherFailures.length, records, manuscripts, texts, home, longNumbers, noScript };
 await writeFile(path.join(ARTIFACTS, "results.json"), JSON.stringify(report, null, 2) + "\n");
 console.log(JSON.stringify({ figures: unique.size, cases: records.length, failures: failures.map(({ id, view, width, textScale, issues, pageErrors }) => ({ id, view, width, textScale, issues, pageErrors })), otherFailures, missingAssets: [...missing], artifacts: ARTIFACTS }, null, 2));
 assert.equal(missing.size, 0, "The static export is missing requested assets.");
 assert.equal(failures.length, 0, "Browser layout regression found collapsed labels, frame escapes, or broken interactions. Inspect results.json and screenshots.");
-assert.equal(otherFailures.length, 0, "Manuscript tables or equation numbers, homepage text resizing, long-number scrolling, or no-JavaScript navigation regressed.");
+assert.equal(otherFailures.length, 0, "Manuscript tables or equation numbers, text breaks and list markers, homepage text resizing, long-number scrolling, or no-JavaScript navigation regressed.");

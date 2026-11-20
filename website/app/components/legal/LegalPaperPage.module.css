@@ -5,7 +5,7 @@
   font-size: var(--type-reading);
   line-height: var(--reading-leading);
   letter-spacing: 0;
-  overflow-wrap: anywhere;
+  overflow-wrap: break-word;
 }
 
 .paper strong,
@@ -181,6 +181,16 @@
   color: var(--supporting-ink);
 }
 
+/* A numbered entry hangs its number, so a title that wraps continues under
+   its first word, as in a printed table of contents. The gap is a word space. */
+.contents a[data-numbered] {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  align-content: center;
+  align-items: baseline;
+  column-gap: 0.28em;
+}
+
 .contents a[aria-current="location"] {
   border-left-color: var(--accent);
   color: var(--ink);
@@ -251,6 +261,9 @@
   list-style: none;
 }
 
+/* A note's number stands whole in a column wide enough for three figures,
+   right-aligned in tabular figures as in a printed list of notes, so the text
+   keeps the same gap from every number. */
 .footnotes li,
 .authorNote {
   display: grid;
@@ -266,6 +279,8 @@
   font-size: var(--type-label);
   line-height: var(--label-leading);
   font-variant-numeric: tabular-nums;
+  text-align: end;
+  white-space: nowrap;
 }
 
 .backlinks,
@@ -276,6 +291,12 @@
   font-size: var(--type-interface);
   line-height: var(--interface-leading);
   gap: 0.5rem 1rem;
+}
+
+/* Each Return to Text link holds one line. */
+.backlinks a,
+.authorNote > div > a {
+  white-space: nowrap;
 }
 
 /* The footer every article, post and detail page closes on: a hairline,

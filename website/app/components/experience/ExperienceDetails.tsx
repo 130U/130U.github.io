@@ -1,7 +1,7 @@
 import { architectureDiagrams } from "../../lib/content/architecture-diagrams";
 import type { ShowcaseEntry } from "../../lib/content/experience-showcase";
 import { LogicDiagram } from "./LogicDiagram";
-import { InlineMarkdown } from "../research/ResearchInline";
+import { InlineMarkdown, KeepNumberJoins } from "../research/ResearchInline";
 import styles from "./Experience.module.css";
 
 export function ExperienceMetadata({ entry }: { entry: ShowcaseEntry }) {
@@ -40,7 +40,7 @@ export function KeyContributions({ entry }: { entry: ShowcaseEntry }) {
         const DetailList = detail?.ordered ? "ol" : "ul";
         return <li key={index} data-contribution-item={index}>
           <div>
-            {entry.categoryId === "01" ? <InlineMarkdown text={text} /> : text}
+            {entry.categoryId === "01" ? <InlineMarkdown text={text} /> : <KeepNumberJoins text={text} />}
             {detail && <DetailList className={styles.contributionDetails} data-contribution-details={index}>
               {detail.items.map((item, childIndex) => <li key={childIndex} data-contribution-detail={childIndex}><InlineMarkdown text={item} /></li>)}
             </DetailList>}

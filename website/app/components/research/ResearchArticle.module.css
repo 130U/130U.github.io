@@ -43,6 +43,15 @@
   white-space: nowrap;
 }
 
+/* A written-out web address or identifier breaks only at the opportunities
+   AddressText marks. In a column under 16em, as with very large text on a
+   phone, it wraps like any word, so it never runs past the column. */
+@container (width >= 16em) {
+  .address {
+    white-space: nowrap;
+  }
+}
+
 .body code {
   font-size: var(--type-reading);
   overflow-wrap: anywhere;
@@ -165,9 +174,17 @@
   min-width: clamp(8rem, 28cqi, 16rem);
 }
 
-/* A list item hangs its marker; consecutive items keep close together. */
+/* A list item hangs its marker in a column as wide as the widest marker of its
+   run of items (--marker-digits, set by the renderer): a number stands whole on
+   its line, period included, right-aligned in tabular figures as in a printed
+   reference list; a bullet stands at the column's start; the text keeps the
+   same gap from the column whatever the number. One digit keeps a 1.25em
+   indent, and each further digit widens the column by one figure (1ch).
+   Consecutive items keep close together. */
 .body p[data-list-item] {
-  padding-inline-start: 1.25em;
+  --list-indent: calc(1.25em + (var(--marker-digits, 1) - 1) * 1ch);
+  --marker-gap: 0.4em;
+  padding-inline-start: var(--list-indent);
 }
 
 .body p[data-list-item] + p[data-list-item] {
@@ -176,8 +193,16 @@
 
 .listMarker {
   display: inline-block;
-  width: 1.25em;
-  margin-inline-start: -1.25em;
+  width: calc(var(--list-indent) - var(--marker-gap));
+  margin-inline: calc(-1 * var(--list-indent)) var(--marker-gap);
+  font-kerning: none;
+  font-variant-numeric: lining-nums tabular-nums;
+  text-align: end;
+  white-space: nowrap;
+}
+
+.listMarker[data-marker="bullet"] {
+  text-align: start;
 }
 
 .cell:first-child {
