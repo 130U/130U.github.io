@@ -179,8 +179,9 @@
    Every cell is typeset in text style, as TeX sets an array's cells, and sits
    on its row's baseline in the column's alignment. The table keeps the canvas
    gutter a drawing keeps, so its ink starts on the manuscript inset, and it is
-   centred on the math axis (the renderer computes the raise), so an equation
-   number stands where the paper's does. */
+   centred on the math axis (the renderer computes the raise); a numbered table
+   sets the row nearest that axis on the display's baseline, so its number
+   stands on that row's baseline. */
 .table {
   display: inline-table;
   padding: var(--math-gutter);
@@ -222,6 +223,13 @@
 
 .row[data-rule="header"] > .cell {
   border-bottom-color: var(--rule-strong);
+}
+
+/* A head stands centred over a column of right-aligned values, as booktabs
+   sets one, so heads over columns of unequal width keep even gaps; the values
+   keep the manuscript's alignment. */
+.row[data-rule="header"] > .cell[data-align="r"] {
+  text-align: center;
 }
 
 .row[data-rule] + .row > .cell {

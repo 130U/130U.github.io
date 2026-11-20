@@ -257,7 +257,12 @@ function EulerLadderFigure({ manuscript, caption }: ManuscriptFigureProps) {
   const x = logarithmic(9, 33000);
   const y = logarithmic(3e-8, 5e-2);
   const [first, last] = [rungs[0][0], rungs[rungs.length - 1][0]];
-  // Squares and triangles are named beside their last marks; the legend keys
+  const highestBound = Math.max(...PROVED_GAP.map(({ bound }) => Number(bound)));
+  const [firstKink] = kink;
+  // Squares and triangles are named in open space, each on one line: the
+  // squares above all three, in the empty band over 10⁻², and the triangles to
+  // the left of the first, where the plot is empty. A figure too narrow for
+  // that leaves the triangles to the caption, which keys them. The legend keys
   // the two kinds of circle and the dashed first-order line.
   return (
     <Figure
@@ -314,8 +319,8 @@ function EulerLadderFigure({ manuscript, caption }: ManuscriptFigureProps) {
             tip={`${grouped(steps)} steps per year\nProved bound on the Euler gap ${bound}`}
           />
         ))}
-        <Mark left={x(PROVED_GAP[PROVED_GAP.length - 1].steps)} top={100 - y(Number(PROVED_GAP[PROVED_GAP.length - 1].bound))} anchor="left" wrap className={kit.fade}><>Proved <span className={styles.nowrap}>Euler-gap</span> bound</></Mark>
-        <Mark left={x(kink[kink.length - 1][0])} top={100 - y(Math.abs(kink[kink.length - 1][1]) + 2 * kink[kink.length - 1][2])} anchor="left" tone="steel" wrap className={`${kit.fade} ${kit.muted}`}>Simulated kink change</Mark>
+        <Mark left={x(PROVED_GAP[1].steps)} top={100 - y(highestBound)} anchor="bottom" className={kit.fade}>Proved Euler-gap bound</Mark>
+        <Mark left={x(firstKink[0])} top={100 - y(Math.abs(firstKink[1]) + 2 * firstKink[2])} anchor="right" tone="steel" className={`${kit.fade} ${styles.kinkLabel}`}>Simulated kink change</Mark>
       </Plot>
     </Figure>
   );

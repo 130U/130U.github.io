@@ -189,9 +189,12 @@ export function Dot({ left, top, tone: color = "ink", ring, shape, tip, classNam
 
 /**
  * A label pinned to a point of the area. `anchor` names the side of the label
- * box that sits on the point: "left" puts the label to the right of it.
+ * box that sits on the point: "left" puts the label to the right of it. In a
+ * plot the label is knocked out of the grid lines behind it; one set on a
+ * tinted region, or held clear of a rule by its own padding, is drawn without
+ * a knockout (`knockout={false}`) and stands clear of the lines instead.
  */
-export function Mark({ left, top, anchor = "left", tone: color = "ink", strong, wrap, tag, children, className, style }: {
+export function Mark({ left, top, anchor = "left", tone: color = "ink", strong, wrap, tag, knockout = true, children, className, style }: {
   left: number;
   top: number;
   anchor?: "left" | "right" | "top" | "bottom" | "center" | "top-left" | "bottom-left" | "top-right" | "bottom-right" | "above-right" | "above-left" | "below-right" | "below-left";
@@ -199,6 +202,7 @@ export function Mark({ left, top, anchor = "left", tone: color = "ink", strong, 
   strong?: boolean;
   wrap?: boolean;
   tag?: boolean;
+  knockout?: boolean;
   children: ReactNode;
   className?: string;
   style?: CSSProperties;
@@ -231,6 +235,7 @@ export function Mark({ left, top, anchor = "left", tone: color = "ink", strong, 
       className={classes(styles.mark, styles[color], strong && styles.markStrong, className)}
       data-wrap={wrap ? "" : undefined}
       data-tag={tag ? "" : undefined}
+      data-bare={knockout ? undefined : ""}
       style={{ ...fit, ...style, left: `${left}%`, top: `${top}%`, "--ax": ax, "--ay": ay } as CSSProperties}
     >
       {typeof children === "string" ? <Tx>{children}</Tx> : children}

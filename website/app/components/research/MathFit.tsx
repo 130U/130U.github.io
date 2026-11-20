@@ -42,7 +42,7 @@ function fitDisplay(region: HTMLElement) {
 
 // A tabular display that scrolls keeps its row labels in view when they take no more than this
 // share of its room, as a research table does.
-const PIN_SHARE = 0.45;
+const PIN_SHARE = 0.5;
 
 /** Marks whether a tabular display has scrolled past its start, where its pinned labels take an edge. */
 function markScrolled(region: HTMLElement) {

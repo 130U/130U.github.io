@@ -388,7 +388,17 @@ hold context, and `--chart-tint` marks an emphasized row, column, or region.
 Text is HTML at its true size, so labels stay legible at every width; only curves live
 in a stretched SVG layer whose strokes keep their width, and schematics scale uniformly
 so arrows and angles keep their shape. Labels sit in open space beside the marks they
-name and never cover a curve. Bar rows align on one grid; in a narrow figure each label
+name and never cover a curve. A label takes the tone of the mark it names: the accent and
+green as they are, ink beside a sky or mist mark and muted ink beside a steel one, since
+those tones are too light to read as text. A plot's labels are knocked out of the grid
+lines and reference rules behind them, on the surface they sit on (the page, or the
+sheet on the zoom stage) and 3px past the text, so no line runs through a word; a
+stacked bar's label and value reach 4px past their outer letters, so a line at either
+end of the scale stops short of them. A label on a tinted region, or one held clear of a
+rule by its own padding, takes no knockout and stands clear of the lines, and a label
+that names a line at the plot's right end stops short of the edge grid line. The browser
+layout check fails any label a line crosses without a knockout that holds it, and any
+label that ignores its tone. Bar rows align on one grid; in a narrow figure each label
 and its value stand above a full-width bar, and the grid and reference rules run through
 the bar's own row only. A comparison has a scroll width below which its columns cannot
 reflow; it takes its column's width down to nine tenths of that, and in less room it is
@@ -425,7 +435,8 @@ readouts. One figure holds one idea: a comparison the text makes elsewhere is dr
 as Table 1's first-order comparison follows the paragraph that states it. Where an
 interval is too narrow for its axis, a strip beneath magnifies a window: the window is
 tinted on the rows above, its edges run down through the axis row, clear of its labels,
-and open onto the full width of the strip, whose marks carry their own notes. The caption
+and open onto the full width of the strip, whose marks carry their own notes, a note to
+the left of its mark standing as far from it as one to the right. The caption
 says in one or two sentences what the drawing shows and what the reader cannot see in it;
 the argument stays in the text. A test holds each figure to the text it restates and to
 these rules, and the browser layout check fails any two of its numbers or notes that
@@ -457,15 +468,19 @@ two columns the rule becomes a second em of space, so no vertical rule is drawn.
 row that heads the columns, the row the manuscript rules off, or the first row of a
 table whose first column it rules off (its first cell then heads the row labels),
 stands over the firm rule, with booktabs' 0.4ex of space above the rule and 0.65ex
-below; a rule between later rows is a hairline, and one above the first row or below
+below, and a head over a column of right-aligned values is centred on it, as booktabs
+sets one, while the values keep the manuscript's alignment; a rule between later rows
+is a hairline, and one above the first row or below
 the last is left to the display's white space. Rows stand one line of mathematics
 apart, each as tall as an array row's strut (0.75em above the baseline, 0.25em below)
 or its tallest cell. The table keeps a drawing's gutter, so its ink starts on the
-manuscript inset, and it is centred on the math axis, as TeX centres an array, so its
-number stands where the paper's does. Its drawing is decorative: one assistive
-expression carries the whole display and its TeX. A table of mathematics that scrolls
-keeps its row labels in view when they take no more than 45% of its room, as a
-research table does, and the values pass beneath them.
+manuscript inset, and it is centred on the math axis, as TeX centres an array. A
+numbered table moves by less than half a row so that the row nearest that axis stands on
+the display's baseline: its number then stands on that row's baseline, as every equation
+number stands on its expression's. Its drawing is decorative: one assistive expression
+carries the whole display and its TeX. A table of mathematics that scrolls keeps its row
+labels in view when they take no more than half of its room, and the values pass beneath
+them in the other half, which holds a column or more of its short expressions.
 
 Every table carries a magnifier in the top-right corner of its frame, on the title's
 first line or on the header band; a table without a title that scrolls would carry its

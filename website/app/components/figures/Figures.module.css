@@ -10,12 +10,13 @@
   color: var(--supporting-ink);
 }
 
+/* A connector is a hairline drawn as a border, which the browser sets on
+   whole device pixels, so every row draws it at one weight. */
 .link {
   position: absolute;
   top: 50%;
-  height: 1.5px;
-  margin-top: -0.75px;
-  background: currentColor;
+  height: 0;
+  border-top: 1px solid currentColor;
 }
 
 /* Rough Heston candidates: one bar per candidate, moved between layers. */
@@ -179,7 +180,7 @@
 
 .infoBand > span {
   padding: 0 4px;
-  background: var(--page);
+  background: var(--control-surface, var(--page));
   color: var(--ink);
 }
 
@@ -208,7 +209,7 @@
 
 .scenarioDot[data-sign="negative"] {
   border: 1.5px solid currentColor;
-  background: var(--page);
+  background: var(--control-surface, var(--page));
 }
 
 .scenarioDot::after {
@@ -268,10 +269,15 @@
   border-top: 1px dashed var(--rule-medium);
 }
 
+/* A lane's name is knocked out of the zero rule it may cross in a narrow
+   figure, 4px past its text, which stays on the lane's start. */
 .laneLabel {
   position: absolute;
   left: 0;
+  margin-left: -4px;
+  padding-inline: 4px;
   transform: translateY(calc(-100% - 6px));
+  background: var(--control-surface, var(--page));
   color: var(--muted);
   font-size: var(--type-label);
   white-space: nowrap;
@@ -368,7 +374,7 @@
 .dagNode[data-state="unverified"] {
   border-style: dashed;
   border-color: var(--chart-steel);
-  background: var(--chart-hatch), var(--page);
+  background: var(--chart-hatch), var(--control-surface, var(--page));
   color: var(--supporting-ink);
 }
 
@@ -615,7 +621,7 @@
   .flowOut {
     grid-column: 1;
     margin: 0 0 0 22px;
-    background: var(--chart-hatch), var(--page);
+    background: var(--chart-hatch), var(--control-surface, var(--page));
   }
 }
 
@@ -1259,12 +1265,13 @@ figure:has([data-figure-title]) .panelTitle {
 }
 
 /* Asian options, Figure 1: one marker for each simulated path inside a wedge,
-   ringed in the page color so that neighboring paths stay apart. */
+   ringed in the color of the surface it sits on, so that neighboring paths
+   stay apart. */
 span.pathDot {
   width: 5px;
   height: 5px;
   margin: -2.5px 0 0 -2.5px;
-  box-shadow: 0 0 0 1px var(--page);
+  box-shadow: 0 0 0 1px var(--control-surface, var(--page));
 }
 
 /* Figure 4: small multiples of the three shares under models U and D. */
@@ -1509,9 +1516,33 @@ span.pathDot {
   text-align: right;
 }
 
-/* A hyphenated term in a wrapping label holds one line. */
-.nowrap {
-  white-space: nowrap;
+/* A label that names a line at the plot's right end stops short of the edge
+   grid line, which keeps running past it. */
+.endLabel {
+  margin-left: -6px;
+}
+
+/* Mangrove restoration, the San Tin figure: in a phone's narrow figure the
+   period of loss is named on two lines in the open part of the shaded interval,
+   clear of the rule at condition 9 and of the replacement curve. The plot keeps
+   its smallest height there, so the shift is fixed. */
+@container figure (max-width: 20rem) {
+  .lossLabel.lossLabel {
+    max-width: 3.6em;
+    margin-left: -7%;
+    translate: 0 19px;
+    white-space: normal;
+    text-align: center;
+  }
+}
+
+/* Asian options, Figure 4: the triangles are named on one line to the left of
+   the first, in the plot's empty corner. A figure too narrow to hold the name
+   there leaves the triangles to the caption, which keys them. */
+@container figure (max-width: 32rem) {
+  .kinkLabel {
+    display: none;
+  }
 }
 
 /* A legal page resets the margins of its body's paragraphs and sets each

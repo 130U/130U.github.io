@@ -211,7 +211,7 @@ function BridgeLeakage() {
     <Figure
       id="bridge-leakage"
       title="What the endpoint reveals between $s$ and $T$"
-      caption="Variance is in units of $\sigma^2(T-s)$. Conditioning on $X_T$ halves it at the midpoint: an apparent 29.29% RMSE improvement that comes entirely from the endpoint, and leakage wherever a forecasting task withholds $X_T$."
+      caption="Variance is in units of $\sigma^2(T-s)$; the bands are the task's three information sets. Conditioning on $X_T$ halves the variance at the midpoint: an apparent 29.29% RMSE improvement, and leakage wherever a forecasting task withholds $X_T$."
     >
       <div className={styles.bridgeViewport} data-figure-scroll role="region" tabIndex={0} aria-label="Conditional variance and information sets">
       <div className={styles.bridgeCanvas} style={style}>
@@ -241,11 +241,12 @@ function BridgeLeakage() {
           <Dot left={x(0.5)} top={100 - y(0.25)} tone="accent" className={kit.fade} />
           <Mark left={x(0.5)} top={100 - y(0.375)} anchor="left" tone="accent" wrap className={kit.fade}>Variance halves</Mark>
           <Mark left={x(-0.19)} top={50} anchor="center" className={kit.muted}>History</Mark>
-          {/* Each curve is named beside itself, left of the three-quarter mark
-              so that a phone shows both names before the plot scrolls: the
-              line in the open space above it, the bridge beneath its peak. */}
-          <Mark left={x(0.62)} top={100 - y(0.62)} anchor="above-left" className={kit.fade}>{"Given $\\mathcal{F}_s$"}</Mark>
-          <Mark left={x(0.74)} top={100 - y(0.74 * 0.26)} anchor="below-left" tone="accent" className={kit.fade}>{"Given $\\mathcal{F}_s$ and $X_T$"}</Mark>
+          {/* Each curve is named beside itself: the line in the open space
+              above it, ending before a phone's scroll fade, and the bridge
+              centred beneath its peak, the one place under the arch wide
+              enough for its name. */}
+          <Mark left={x(0.6)} top={100 - y(0.6)} anchor="above-left" className={kit.fade}>{"Given $\\mathcal{F}_s$"}</Mark>
+          <Mark left={x(0.5)} top={100 - y(0.25)} anchor="top" tone="accent" className={kit.fade}>{"Given $\\mathcal{F}_s$ and $X_T$"}</Mark>
         </Plot>
         <div className={styles.info} style={{ "--split": `${x(0)}%` } as CSSProperties} aria-label="Information sets" role="img">
           <span className={`${styles.infoBand} ${kit.steel}`} data-span="" data-hatch=""><span><Tx>{"Construction $\\mathcal{F}_{\\text{gen}}$: complete path and endpoint"}</Tx></span></span>
@@ -368,9 +369,9 @@ function GraderCeiling() {
             <Dot left={x(point.eta)} top={100 - yCeiling(Number.parseFloat(point.valid))} tone="accent" className={kit.fade} tip={`η = ${point.eta}\nTrue validity ${point.valid}`} />
           </span>)}
           {/* Each line is named at its right end, where it settles. */}
-          <Mark left={100} top={100 - yCeiling(100)} anchor="top-right" className={kit.fade}>Observed score</Mark>
-          <Mark left={100} top={100 - yCeiling(limit)} anchor="bottom-right" className={kit.fade}><span className={results.accentText}>Limit 83.2%</span></Mark>
-          <Mark left={100} top={100 - yCeiling(limit)} anchor="top-right" className={kit.fade}><span className={results.accentText}>True validity</span></Mark>
+          <Mark left={100} top={100 - yCeiling(100)} anchor="top-right" className={`${kit.fade} ${styles.endLabel}`}>Observed score</Mark>
+          <Mark left={100} top={100 - yCeiling(limit)} anchor="bottom-right" className={`${kit.fade} ${styles.endLabel}`}><span className={results.accentText}>Limit 83.2%</span></Mark>
+          <Mark left={100} top={100 - yCeiling(limit)} anchor="top-right" className={`${kit.fade} ${styles.endLabel}`}><span className={results.accentText}>True validity</span></Mark>
         </Plot>
       </Panel>
       <Panel view="rejection" active={false}>
@@ -403,7 +404,7 @@ function GraderCeiling() {
    precision of the estimate against the defects shipped. */
 const BUDGET_PLANS = [
   { name: "Risk-first for audits and for reviews", label: "Risk-first", sd: 0.657, shipped: "320.9", tone: "ink", shape: "square", anchor: "left" },
-  { name: "Measurement rule of Section 3, then reviews by removable loss", label: "Measurement first", sd: 0.515, shipped: "336.2", tone: "steel", shape: "triangle", anchor: "above-right" },
+  { name: "Measurement rule of Section 3, then reviews by removable loss", label: "Measurement-first", sd: 0.515, shipped: "336.2", tone: "steel", shape: "triangle", anchor: "above-right" },
   { name: "Joint rule at the precision of uniform sampling", sd: 0.568, shipped: "209.9", tone: "accent", anchor: "above-left" },
   { name: "Joint rule at the precision of risk-first routing", sd: 0.657, shipped: "197.1", tone: "accent", anchor: "top" },
   { name: "Joint rule with no precision ceiling", sd: 1.035, shipped: "174.9", tone: "accent", anchor: "bottom" },
@@ -414,8 +415,11 @@ function BudgetFrontier() {
   const y = linear(150, 350);
   const joint = BUDGET_PLANS.filter((plan) => plan.tone === "accent").map((plan) => [plan.sd, Number(plan.shipped)] as const);
   const [legacy, , , matched, open] = BUDGET_PLANS;
-  // The joint rule is named once, on its line between the two ceilings it joins.
-  const along = 0.75;
+  // The joint rule is named once, on its line just past the ceiling where it
+  // meets risk-first routing, and the saving midway between the grid lines
+  // its connector crosses, so neither label rides a grid line.
+  const along = 0.68;
+  const saving = 275;
   const shippedAt = Number(matched.shipped) + ((along - matched.sd) / (open.sd - matched.sd)) * (Number(open.shipped) - Number(matched.shipped));
   return (
     <Figure
@@ -441,7 +445,7 @@ function BudgetFrontier() {
           <Dot left={x(plan.sd)} top={100 - y(Number(plan.shipped))} tone={plan.tone} shape={"shape" in plan ? plan.shape : undefined} className={kit.fade} tip={`${plan.name}\nStandard deviation ${plan.sd.toFixed(3)} points\n${plan.shipped} defects shipped`} />
           <Mark left={x(plan.sd)} top={100 - y(Number(plan.shipped))} anchor={plan.anchor} className={`${kit.fade} ${styles.numericAnnotation}`}>{"label" in plan ? `${plan.label} ${plan.shipped}` : <span className={results.accentText}>{plan.shipped}</span>}</Mark>
         </span>)}
-        <Mark left={x(legacy.sd)} top={100 - y((Number(legacy.shipped) + Number(matched.shipped)) / 2)} anchor="left" strong className={kit.fade}><span className={results.accentText}>38.6% fewer</span></Mark>
+        <Mark left={x(legacy.sd)} top={100 - y(saving)} anchor="left" strong className={kit.fade}><span className={results.accentText}>38.6% fewer</span></Mark>
         <Mark left={x(along)} top={100 - y(shippedAt)} anchor="above-right" className={kit.fade}><span className={results.accentText}>Joint rule</span></Mark>
       </Plot>
     </Figure>
@@ -527,7 +531,7 @@ function ProtocolOutcomes() {
     <Figure
       id="protocol-outcomes"
       title="What each acceptance protocol does with 3,600 submissions"
-      caption="Each bar holds 1,200 valid certificates, then 2,400 submissions with controlled defects. Final-answer matching accepts 1,800 flawed solutions; strict reference-path matching rejects 600 valid elimination proofs; certificate verification makes neither error."
+      caption="Each bar holds 1,200 valid certificates, then 2,400 submissions with controlled defects. Final-answer matching accepts the 1,800 defective submissions that report $v^*$; strict reference-path matching rejects 600 valid elimination proofs; certificate verification makes neither error."
       legend={OUTCOMES.map((outcome) => ({ label: outcome.name, tone: outcome.tone }))}
     >
       <Bars label="Final-answer matching: 1,200 valid accepted, 1,800 invalid accepted, 600 invalid rejected; 40.0% of accepted submissions are valid. Strict reference-path matching: 600 valid accepted, 600 valid rejected, 2,400 invalid rejected. Certificate verification: 1,200 valid accepted, 2,400 invalid rejected." valueWidth="6rem" stack>

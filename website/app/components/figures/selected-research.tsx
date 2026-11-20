@@ -35,8 +35,8 @@ function DependenceBudgetRuler() {
         <span className={`${styles.budgetGap} ${kit.fade}`} style={{ left: `${x(slope)}%`, width: `${x(low) - x(slope)}%`, top: `${100 - y(0.36)}%` }} />
         <Mark left={(x(slope) + x(low)) / 2} top={100 - y(0.36)} anchor="bottom" tone="accent" strong className={kit.fade}>+30%</Mark>
         <Dot left={x(slope)} top={100} tone="ink" tip={"Initial-slope extrapolation\ns = 5/32 = 0.15625"} />
-        <Mark left={x(slope)} top={0} anchor="top-right" wrap className={`${styles.budgetLabel} ${styles.budgetLabelEnd}`} style={{ maxWidth: `calc(${x(slope)}% + 10px)` }}><>Initial-slope extrapolation<br /><Tx>$5/32$</Tx></></Mark>
-        <Mark left={x(low)} top={0} anchor="top-left" tone="accent" wrap className={styles.budgetLabel} style={{ maxWidth: `calc(${100 - x(low)}% + 12px)` }}><>Proved critical budget<br /><Tx>$[13/64,29/96]$</Tx></></Mark>
+        <Mark left={x(slope)} top={0} anchor="top-right" wrap knockout={false} className={`${styles.budgetLabel} ${styles.budgetLabelEnd}`} style={{ maxWidth: `calc(${x(slope)}% + 10px)` }}><>Initial-slope extrapolation<br /><Tx>$5/32$</Tx></></Mark>
+        <Mark left={x(low)} top={0} anchor="top-left" tone="accent" wrap knockout={false} className={styles.budgetLabel} style={{ maxWidth: `calc(${100 - x(low)}% + 12px)` }}><>Proved critical budget<br /><Tx>$[13/64,29/96]$</Tx></></Mark>
       </Plot>
     </Figure>
   );
@@ -165,7 +165,7 @@ function AsianIntervalLine() {
                 <span className={`${kit.dot} ${kit.ink}`} data-tip={proxyTip} style={{ left: `${zoomed(SPREAD.proxy)}%`, top: "50%" }} />
                 <span className={`${kit.dot} ${kit.ink}`} data-ring="" data-tip={simulatedTip} style={{ left: `${zoomed(SPREAD.simulated)}%`, top: "50%" }} />
               </div>
-              <span className={`${results.note} ${kit.fade}`} data-side="left" aria-hidden="true" data-result-label="" style={{ left: `calc(${zoomed(SPREAD.proxy)}% - 6px)` }}>Proxy value<small><Tx>{"$\\pm.00021$"}</Tx></small></span>
+              <span className={`${results.note} ${kit.fade}`} data-side="left" aria-hidden="true" data-result-label="" style={{ left: `calc(${zoomed(SPREAD.proxy)}% - 6px)` }}>Proxy value<small>±.00021</small></span>
               <span className={`${results.note} ${kit.fade}`} aria-hidden="true" data-result-label="" style={{ left: `calc(${zoomed(SPREAD.simulated)}% + 6px)` }}>Simulated price<small>close to 6.51335</small></span>
             </div>
           </div>
@@ -200,7 +200,7 @@ function AsianFirstOrder() {
     <Figure
       id="asian-first-order"
       title="Proved and first-order bounds for the monthly crude oil calls"
-      caption="The four monthly crude oil calls of Table 1, in cents per barrel, the quote step. First order is the Rogers–Shi form of the classical first-order bound, $E[\mathrm{sd}(A\mid G)]/2$."
+      caption="The four monthly crude oil calls of Table 1, in cents per barrel (one quote step). First order is the Rogers–Shi form of the classical first-order bound, $E[\mathrm{sd}(A\mid G)]/2$."
     >
       <div className={results.panel} role="img" aria-label="Monthly crude oil calls one to twelve months ahead, in cents per barrel on a logarithmic scale. Proved bound: 0.0081, 0.0047, 0.0033 and 0.0023 cents. Classical first-order estimate: 2.6 cents at every lead time, 320 to 1,140 times larger. A quote step is one cent per barrel.">
         <div className={results.header} aria-hidden="true">

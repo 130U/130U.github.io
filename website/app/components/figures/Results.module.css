@@ -35,8 +35,12 @@
   color: var(--ink);
 }
 
+/* The name's knockout reaches 4px before its first letter, so a grid line at
+   the start of the scale stops short of it. */
 .name > span {
+  margin-left: -4px;
   padding-right: 8px;
+  padding-left: 4px;
   background: var(--control-surface, var(--page));
 }
 
@@ -81,8 +85,10 @@
   white-space: nowrap;
 }
 
+/* The knockout's padding lies outside the text, so the upper endpoint moves
+   back by it to end on its cap. */
 .end[data-side="high"] {
-  transform: translateX(-100%);
+  transform: translateX(calc(-100% + 8px));
 }
 
 .span[data-key] .end,
@@ -108,8 +114,9 @@
   white-space: nowrap;
 }
 
+/* A note to the left of its mark stands as far from it as one to the right. */
 .note[data-side="left"] {
-  transform: translateX(-100%);
+  transform: translateX(calc(-100% + 8px));
   text-align: right;
 }
 

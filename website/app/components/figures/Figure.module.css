@@ -241,7 +241,7 @@
 .swatch[data-shape="ring"] {
   border: 1.5px solid currentColor;
   border-radius: 50%;
-  background: var(--page);
+  background: var(--control-surface, var(--page));
 }
 
 .swatch[data-shape="box"] {
@@ -432,7 +432,7 @@
 
 .dot[data-ring] {
   border: 1.5px solid currentColor;
-  background: var(--page);
+  background: var(--control-surface, var(--page));
 }
 
 .dot[data-shape] {
@@ -458,11 +458,32 @@
   position: absolute;
   max-width: 13rem;
   transform: translate(var(--ax, 0%), var(--ay, -50%));
-  color: currentColor;
   font-size: var(--type-label);
   line-height: var(--label-leading);
   white-space: nowrap;
   pointer-events: none;
+}
+
+/* A label takes the tone of the mark it names. The accent and green read as
+   text on the paper; the light tones do not, so a label beside a sky or mist
+   mark reads in ink and one beside a steel mark in muted ink. */
+.mark.sky,
+.mark.mist {
+  color: var(--ink);
+}
+
+.mark.steel {
+  color: var(--muted);
+}
+
+/* A plot label is knocked out of the grid lines and reference rules behind
+   it, on the surface it sits on: the page in the article, the sheet on the
+   zoom stage. The knockout reaches 3px past the text on either side without
+   moving it. A label set on a tinted region, or held clear of a rule by its
+   own padding, is bare (data-bare) and stands clear of the lines instead. */
+.plot .mark:not([data-tag], [data-bare]) {
+  background: var(--control-surface, var(--page));
+  box-shadow: -3px 0 0 var(--control-surface, var(--page)), 3px 0 0 var(--control-surface, var(--page));
 }
 
 /* A wrapping label takes its natural width up to its maximum, wherever it is
@@ -474,7 +495,7 @@
 
 .mark[data-tag] {
   padding: 1px 6px;
-  background: var(--page);
+  background: var(--control-surface, var(--page));
 }
 
 .markStrong {
@@ -576,7 +597,7 @@
 }
 
 .seg + .seg {
-  box-shadow: inset 1px 0 0 var(--page);
+  box-shadow: inset 1px 0 0 var(--control-surface, var(--page));
 }
 
 .range {
@@ -728,18 +749,24 @@
   grid-column: 1 / -1;
 }
 
+/* The knockout reaches 4px past the text's outer edge, so a grid line at
+   either end of the scale stops short of the first and the last letter. */
 .bars[data-stack="always"] .labelText,
 .bars[data-stack="always"] .value > * {
-  background: var(--page);
+  background: var(--control-surface, var(--page));
   box-decoration-break: clone;
   -webkit-box-decoration-break: clone;
 }
 
 .bars[data-stack="always"] .labelText {
+  margin-left: -4px;
   padding-right: 8px;
+  padding-left: 4px;
 }
 
 .bars[data-stack="always"] .value > * {
+  margin-right: -4px;
+  padding-right: 4px;
   padding-left: 8px;
 }
 
@@ -792,16 +819,20 @@
 
   .bars[data-stack="narrow"] .labelText,
   .bars[data-stack="narrow"] .value > * {
-    background: var(--page);
+    background: var(--control-surface, var(--page));
     box-decoration-break: clone;
     -webkit-box-decoration-break: clone;
   }
 
   .bars[data-stack="narrow"] .labelText {
+    margin-left: -4px;
     padding-right: 8px;
+    padding-left: 4px;
   }
 
   .bars[data-stack="narrow"] .value > * {
+    margin-right: -4px;
+    padding-right: 4px;
     padding-left: 8px;
   }
 
@@ -982,7 +1013,7 @@
   width: 9px;
   height: 9px;
   margin: -4.5px 0 0 -4.5px;
-  border: 2px solid var(--page);
+  border: 2px solid var(--control-surface, var(--page));
   border-radius: 50%;
   background: currentColor;
   box-sizing: content-box;

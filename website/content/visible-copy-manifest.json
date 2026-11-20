@@ -430,9 +430,9 @@
       "formulaCount": 1023
     },
     "/certified-valuation-of-arithmetic-asian-options/": {
-      "textSha256": "82f62c74ccefe348252a9957d3759370545941d18bbbf73b0418c448341cb9ad",
-      "characterCount": 70397,
-      "wordCount": 11613,
+      "textSha256": "0d7087b496c5bb975163add12e0b29caa97b8ae44d42eb77da2ac78773534552",
+      "characterCount": 70389,
+      "wordCount": 11612,
       "preview": "Skip to Main Content Theodore Ouyang Back to Selected Research Certified Valuation of Arithmetic Asian Options: The Cost of Exercising on the Geometric Average ",
       "altTexts": [],
       "ariaLabels": [
@@ -706,8 +706,8 @@
         "twitterTitle": "Certified Valuation of Arithmetic Asian Options: The Cost of Exercising on the Geometric Average",
         "twitterDescription": "The cost of exercising an arithmetic Asian option on the geometric average: a proved bound, its cubic law in Black's model, and a certified Heston price interval with its Euler discretization error."
       },
-      "mathSourceSha256": "8752c61b0c661434432e026f51765e6d4ba3009423af2d526c6d8196e3fcc7b0",
-      "formulaCount": 750
+      "mathSourceSha256": "0d9316ec30a66dc6afcf100723d93f318875dc7b04bbb678ffa0cd3337b1d0b4",
+      "formulaCount": 749
     },
     "/certified-joint-pricing-errors-in-rough-heston/": {
       "textSha256": "ccbe5af9c4b1e33b3c6d53c3c644f512d2b4a2d0c83fa29b2aa04f193d0a4d05",
@@ -1055,9 +1055,9 @@
       "formulaCount": 193
     },
     "/experience/financial-task-design-and-synthetic-data-engineering/": {
-      "textSha256": "b024db8a7c44558351a14ddef4124f55397e4b8c300c02a36ce5b8742a7eccab",
-      "characterCount": 34020,
-      "wordCount": 5006,
+      "textSha256": "b63ab5c79d187d5333dcbfafc036f25430c684d02c17a607fe196fbc8dd3683e",
+      "characterCount": 34041,
+      "wordCount": 5009,
       "preview": "Skip to Main Content Theodore Ouyang Back to Experience Financial Task Design and Synthetic Data Engineering Organization Duke University × Leading Foundation M",
       "altTexts": [],
       "ariaLabels": [
@@ -1130,9 +1130,9 @@
       "formulaCount": 189
     },
     "/experience/general-reasoning-evaluation-and-layered-verification/": {
-      "textSha256": "149d2cab762c2ac03c939e6b590eea869bfee4f6ea8101ba2d6459518daae410",
-      "characterCount": 33495,
-      "wordCount": 5075,
+      "textSha256": "8637bb637415de350671658c39fe3a0ad9b72bf43ad1d79e2fea3d1007272994",
+      "characterCount": 33526,
+      "wordCount": 5080,
       "preview": "Skip to Main Content Theodore Ouyang Back to Experience General Reasoning Evaluation and Layered Verification Organization Duke University × Frontier AI Researc",
       "altTexts": [],
       "ariaLabels": [
@@ -1226,8 +1226,8 @@
         "twitterTitle": "Duke University × Frontier AI Research Laboratory: General Reasoning Evaluation and Layered Verification",
         "twitterDescription": "A model can reach the right answer through an unsupported step, and a grader that matches a reference solution will reject a correct proof that takes another route."
       },
-      "mathSourceSha256": "a3be0f0c00505552905f09c34e2e06c1b84d9ce1246ae54be83ccf0de453a550",
-      "formulaCount": 203
+      "mathSourceSha256": "a566b8f16fed06cd0d8b2072f2f6ef5bebaa143609c1191d7007e38923d3f988",
+      "formulaCount": 204
     },
     "/experience/evidence-verification-and-robust-comparison-in-investment-research/": {
       "textSha256": "813af43d82a3f3362a51f10d969b785f0ecc2e73b457589a32ac04ce830ee34d",
@@ -1316,9 +1316,9 @@
       "formulaCount": 210
     },
     "/experience/autonomous-authority-in-space/": {
-      "textSha256": "fd3f88a416a36b4d5a413c3362a92e85e6b08c3bbd0f7a0c2bf36aa4d34b0f36",
-      "characterCount": 79057,
-      "wordCount": 11178,
+      "textSha256": "c57e4570ccdf01a206ad2e476a43671285c2e290c4ec591faf262a58ff3a5629",
+      "characterCount": 79107,
+      "wordCount": 11187,
       "preview": "Skip to Main Content Theodore Ouyang Back to Experience Autonomous Authority in Space: Risk Tradeoffs and the Law of Delegation Organization Duke Law School Pos",
       "altTexts": [],
       "ariaLabels": [
@@ -1553,9 +1553,9 @@
       }
     },
     "/experience/who-may-choose-the-lesser-risk/": {
-      "textSha256": "04a256e1ab34213f35c6cd887f23c0ceee4d289f3791b7a7dd2995ea290fc767",
-      "characterCount": 62014,
-      "wordCount": 8709,
+      "textSha256": "626fce4a2c19a9727836ef0a9112eb0a5aa69be2bf11285078f81607601a65ef",
+      "characterCount": 62082,
+      "wordCount": 8718,
       "preview": "Skip to Main Content Theodore Ouyang Back to Experience Who May Choose the Lesser Risk: Solar Geoengineering and the Legal Duties of Comparison and Continuity O",
       "altTexts": [],
       "ariaLabels": [

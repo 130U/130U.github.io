@@ -225,6 +225,77 @@ function inspectFigure(figure) {
     const below = link.nextElementSibling ? rect(link.nextElementSibling) : null;
     if (!below || Math.abs(strip.left - below.left) > 1 || Math.abs(strip.right - below.right) > 1) issues.push({ kind: "lens-link-misaligned", strip, below });
   }
+  // A label stands clear of the grid lines and reference rules, or is knocked
+  // out of them: a line that runs within a pixel of its glyphs must lie inside
+  // an opaque box that holds the text (its background, widened by a box-shadow
+  // in the same color), with a pixel to spare on either side of the line.
+  const LINE = /_(gridX|gridY|rule|hline|vline|zero)$/u;
+  const lines = [...frame.querySelectorAll("span, div")]
+    .filter(element => [...element.classList].some(name => LINE.test(name)) && laidOut(element) && shown(element))
+    .map(element => ({ element, box: rect(element), name: [...element.classList].find(name => LINE.test(name)).replace(/^.*_/u, "") }))
+    .filter(({ box }) => box.width > 0 || box.height > 0);
+  const opaque = color => { const alpha = /rgba?\(([^)]+)\)/u.exec(color)?.[1].split(",")[3]; return /^rgb/u.test(color) && (alpha === undefined || Number(alpha) === 1); };
+  const knockout = (host, line) => {
+    for (let element = host; element && element !== frame && !element.contains(line); element = element.parentElement) {
+      const style = getComputedStyle(element);
+      if (!opaque(style.backgroundColor)) continue;
+      const box = rect(element);
+      for (const shadow of style.boxShadow === "none" ? [] : style.boxShadow.split(/,(?![^(]*\))/u)) {
+        if (/inset/u.test(shadow) || !shadow.includes(style.backgroundColor)) continue;
+        const [x = 0, y = 0, , spread = 0] = shadow.replace(/rgba?\([^)]*\)/u, "").trim().split(/\s+/u).map(Number.parseFloat);
+        box.left = Math.min(box.left, box.left + x - spread);
+        box.right = Math.max(box.right, box.right + x + spread);
+        box.top = Math.min(box.top, box.top + y - spread);
+        box.bottom = Math.max(box.bottom, box.bottom + y + spread);
+      }
+      return box;
+    }
+    return null;
+  };
+  const glyphs = [];
+  const labelWalker = document.createTreeWalker(frame, NodeFilter.SHOW_TEXT);
+  for (let node = labelWalker.nextNode(); node; node = labelWalker.nextNode()) {
+    const element = node.parentElement;
+    if (!node.textContent.trim() || !shown(element) || element.closest("svg, math")) continue;
+    const range = document.createRange();
+    range.selectNodeContents(node);
+    for (const box of range.getClientRects()) if (box.width > 0.5 && box.height > 0.5) glyphs.push({ host: element, text: node.textContent.trim(), box });
+  }
+  for (const formula of [...frame.querySelectorAll('[data-research-formula="inline"]')].filter(shown)) {
+    const ink = formula.querySelector("svg[data-research-svg] g");
+    if (ink) glyphs.push({ host: formula, text: formula.querySelector("annotation")?.textContent ?? "formula", box: rect(ink) });
+  }
+  const crossed = new Set();
+  for (const glyph of glyphs) {
+    for (const line of lines) {
+      const a = glyph.box;
+      const b = line.box;
+      if (!(a.left < b.right + 1 && b.left < a.right + 1 && a.top < b.bottom + 1 && b.top < a.bottom + 1)) continue;
+      const cover = knockout(glyph.host, line.element);
+      const vertical = b.height > b.width;
+      const held = cover && cover.top <= a.top + 0.5 && cover.bottom >= a.bottom - 0.5 && cover.left <= a.left + 0.5 && cover.right >= a.right - 0.5
+        && (vertical ? b.left >= cover.left + 1 && b.right <= cover.right - 1 : b.top >= cover.top + 1 && b.bottom <= cover.bottom - 1);
+      const key = `${glyph.text}|${line.name}|${Math.round(vertical ? b.left : b.top)}`;
+      if (held || crossed.has(key)) continue;
+      crossed.add(key);
+      issues.push({ kind: "label-crossed-by-line", text: glyph.text.slice(0, 60), line: line.name, knockout: Boolean(cover), glyph: a, at: vertical ? b.left : b.top });
+    }
+  }
+  // A label takes its mark's tone: the accent and green as they are, the light
+  // sky and mist in ink, and steel in muted ink, so every label reads as text.
+  // A label whose tone had no effect renders in the color it inherits; one that
+  // a role such as muted or a note sets on purpose renders in that role's.
+  const toneProbe = document.createElement("span");
+  frame.append(toneProbe);
+  const color = value => { toneProbe.style.color = value; return getComputedStyle(toneProbe).color; };
+  const toneText = { ink: color("var(--ink)"), accent: color("var(--accent)"), green: color("var(--chart-green)"), sky: color("var(--ink)"), mist: color("var(--ink)"), steel: color("var(--muted)") };
+  toneProbe.remove();
+  for (const mark of [...frame.querySelectorAll('span[style*="--ax"]')].filter(shown)) {
+    const tone = [...mark.classList].map(name => name.replace(/^.*_/u, "")).find(name => name in toneText);
+    const rendered = getComputedStyle(mark).color;
+    const inherited = getComputedStyle(mark.parentElement).color;
+    if (tone && rendered !== toneText[tone] && rendered === inherited) issues.push({ kind: "label-ignores-its-tone", text: mark.textContent.replace(/\s+/gu, " ").trim().slice(0, 60), tone, rendered, expected: toneText[tone] });
+  }
   // A key result's numbers stand over its caps and its notes beside its marks:
   // no two of them may touch, so each reads as its own number.
   const resultLabels = [...frame.querySelectorAll('[data-result-label]')].filter(laidOut).map(label => ({ text: label.textContent.trim(), box: rect(label) }));
@@ -329,8 +400,9 @@ function inspectManuscript() {
   // A display that is one array is set as a formal table: every cell of a row
   // sits on the row's baseline, rows stand at least one line of mathematics
   // apart, no cell draws a vertical rule, the row that heads the columns stands
-  // over a rule, a numbered table is centred on the math axis beside its number,
-  // and when it scrolls, row labels that leave room for the values stay in view.
+  // over a rule, a numbered table stands its number on the baseline of the row
+  // nearest the math axis, and when it scrolls, row labels that take no more
+  // than half its room stay in view.
   for (const table of document.querySelectorAll("[data-display-table]")) {
     const region = table.closest('[data-research-block-type="equation"]');
     const size = parseFloat(getComputedStyle(table).fontSize);
@@ -355,13 +427,15 @@ function inspectManuscript() {
       const text = document.createRange();
       text.selectNodeContents(number);
       const baseline = text.getBoundingClientRect().bottom - face.measureText("x").fontBoundingBoxDescent / 1000 * parseFloat(style.fontSize);
+      // TeX centres a table on the math axis, 0.25em above the baseline it is centred for.
       const box = table.getBoundingClientRect();
-      const offset = (box.top + box.bottom) / 2 - (baseline - 0.25 * size);
-      if (Math.abs(offset) > 1) issues.push({ kind: "display-table-off-math-axis", number: number.textContent, offset });
+      const centred = (box.top + box.bottom) / 2 + 0.25 * size;
+      const row = baselines.map(line => line[0]).reduce((best, line) => (Math.abs(line - centred) < Math.abs(best - centred) ? line : best));
+      if (Math.abs(row - baseline) > 1) issues.push({ kind: "display-table-number-off-its-row", number: number.textContent, offset: row - baseline });
     }
     const label = rows[0]?.firstElementChild;
     const scrolls = region.scrollWidth > region.clientWidth + 1;
-    if (scrolls && label.getBoundingClientRect().width <= 0.45 * region.clientWidth && !region.hasAttribute("data-pinned")) issues.push({ kind: "display-table-labels-not-pinned" });
+    if (scrolls && label.getBoundingClientRect().width <= 0.5 * region.clientWidth && !region.hasAttribute("data-pinned")) issues.push({ kind: "display-table-labels-not-pinned" });
     if (region.hasAttribute("data-pinned")) {
       const start = label.getBoundingClientRect().left;
       region.scrollLeft = region.scrollWidth;

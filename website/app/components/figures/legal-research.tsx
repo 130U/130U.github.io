@@ -6,7 +6,7 @@ import styles from "./Figures.module.css";
 
 function RiskTaxonomy() {
   const cells = [
-    { title: "Offset", text: "The same type of harm to the same population", example: "Automation trades loss through delayed response for loss through an erroneous command." },
+    { title: "Offset", text: "The same type of harm to the same population", example: "Automation trades loss of a spacecraft through delayed response for loss of the same spacecraft through an erroneous command." },
     { title: "Transfer", text: "Changes the population", example: "An avoidance maneuver moves collision exposure onto a neighboring satellite's owner and users." },
     { title: "Substitution", text: "Changes the harm" },
     { title: "Transformation", text: "Changes both the harm and the population" },
@@ -46,7 +46,7 @@ function TwoThresholds() {
   const steps = [
     { index: "01", title: "Authority", text: "Is the actor authorized to act and impose the exposure?", branch: "No", outcome: "Not authorized", next: "Yes" },
     { index: "02", title: "Evidence", text: "Does the evidence justify delegating this class of action?", branch: "No", outcome: "Do not delegate", next: "Yes" },
-    { index: "03", title: "Review", text: "Can individual review still protect, credibly and in time?", branch: "Yes", outcome: "Require individual review", next: "No" },
+    { index: "03", title: "Review", text: "Can individual review still change the outcome, credibly and in time?", branch: "Yes", outcome: "Require individual review", next: "No" },
   ];
   return (
     <Figure
@@ -218,8 +218,8 @@ function ExitPaths() {
       </Plot>
       <dl className={styles.lanes} aria-label="Three separate decisions">
         <dt>Program control</dt><dd>Political authority can change.</dd>
-        <dt>Operation</dt><dd>Transfers temporarily to a designated public successor.</dd>
-        <dt>Physical trajectory</dt><dd>A taper evaluated against emissions and atmospheric conditions.</dd>
+        <dt>Operation</dt><dd>Temporary operation passes to a designated public successor under a reviewed continuity plan.</dd>
+        <dt>Physical trajectory</dt><dd>Withdrawal follows a tapering pathway evaluated against emissions and atmospheric conditions.</dd>
       </dl>
     </Figure>
   );
@@ -364,7 +364,7 @@ function SanTinLoss() {
         <span className={styles.vline} style={{ left: `${x(filling)}%` }} />
         <Mark left={x(0.1)} top={4} anchor="center" tag className={kit.muted}>1</Mark>
         <Mark left={x(filling)} top={4} anchor="center" tag className={kit.muted}>9</Mark>
-        <Mark left={x(0.6)} top={100 - y(0.86)} anchor="center" tone="accent" className={kit.fade}>Period of loss</Mark>
+        <Mark left={x(0.6)} top={100 - y(0.86)} anchor="center" tone="accent" knockout={false} className={`${kit.fade} ${styles.lossLabel}`}>Period of loss</Mark>
       </Plot>
       <dl className={styles.lanes} aria-label="Approval conditions">
         <dt>Condition 1</dt><dd>Habitat Creation and Management Plan submitted for approval at least nine months before pond filling.</dd>

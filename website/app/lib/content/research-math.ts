@@ -296,8 +296,10 @@ export type ResearchDisplayTable = Readonly<{
 export type ResearchDisplayTableMarkup = Readonly<{
   columns: readonly ResearchDisplayTableColumn[];
   rows: ReadonlyArray<Readonly<{ cells: readonly (ResearchMathMarkup | null)[]; rule?: "header" | "row"; extraEm?: number }>>;
-  /** How far the table's baseline, its first row's, stands above the display's, so the table is
-   * centred on the math axis as TeX centres an array: ems of the math size plus pixels of rule. */
+  /** How far the table's baseline, its first row's, stands above the display's: ems of the math
+   * size plus pixels of rule. A table is centred on the math axis as TeX centres an array; a
+   * numbered one moves by less than half a row, so the row nearest that axis stands on the
+   * display's baseline and its number on that row's. */
   raiseEm: number;
   raisePx: number;
   /** The whole display's assistive expression and the original TeX, and its equation number. */
@@ -493,19 +495,31 @@ export function renderResearchDisplayTable(tex: string): ResearchDisplayTableMar
   // Each row is as tall as its tallest cell and its strut; rows stand a line of mathematics apart,
   // a rule adds booktabs' space and its own pixel, and the table keeps the drawing's gutter around it.
   const extent = (cell: ResearchMathMarkup | null) => cell ? [cell.heightEm - cell.depthEm - RESEARCH_MATH_GUTTER_EM, cell.depthEm - RESEARCH_MATH_GUTTER_EM] : [0, 0];
-  let heightEm = 2 * RESEARCH_MATH_GUTTER_EM;
-  let rules = 0;
+  const heights = rows.map((row) => Math.max(STRUT_HEIGHT_EM, ...row.cells.map((cell) => extent(cell)[0])));
+  const depths = rows.map((row) => Math.max(STRUT_DEPTH_EM, ...row.cells.map((cell) => extent(cell)[1])));
+  // Each row's baseline below the first row's, in ems and in pixels of rule.
+  const baselines = [{ em: 0, px: 0 }];
   rows.forEach((row, index) => {
-    heightEm += Math.max(STRUT_HEIGHT_EM, ...row.cells.map((cell) => extent(cell)[0])) + Math.max(STRUT_DEPTH_EM, ...row.cells.map((cell) => extent(cell)[1]));
-    if (index > 0) heightEm += (row.extraEm ?? 0) + (rows[index - 1].rule ? RESEARCH_MATH_ROW_SPACING_EM + RESEARCH_TABLE_ABOVE_RULE_EM + RESEARCH_TABLE_BELOW_RULE_EM : RESEARCH_MATH_ROW_SPACING_EM);
-    if (row.rule) rules += 1;
+    if (index === 0) return;
+    const above = rows[index - 1];
+    const space = (row.extraEm ?? 0) + (above.rule ? RESEARCH_MATH_ROW_SPACING_EM + RESEARCH_TABLE_ABOVE_RULE_EM + RESEARCH_TABLE_BELOW_RULE_EM : RESEARCH_MATH_ROW_SPACING_EM);
+    const previous = baselines[index - 1];
+    baselines.push({ em: previous.em + depths[index - 1] + space + heights[index], px: previous.px + (above.rule ? 1 : 0) });
   });
-  const firstAscent = RESEARCH_MATH_GUTTER_EM + Math.max(STRUT_HEIGHT_EM, ...rows[0].cells.map((cell) => extent(cell)[0]));
+  const last = rows.length - 1;
+  const heightEm = 2 * RESEARCH_MATH_GUTTER_EM + heights[0] + baselines[last].em + depths[last];
+  const rules = rows.filter((row) => row.rule).length;
+  const firstAscent = RESEARCH_MATH_GUTTER_EM + heights[0];
+  const axis = { em: AXIS_HEIGHT_EM + heightEm / 2 - firstAscent, px: rules / 2 };
+  // A numbered table sets the row nearest the axis on the display's baseline, where its number stands.
+  const nearest = whole.number
+    ? baselines.reduce((best, line) => (Math.abs(line.em - axis.em) < Math.abs(best.em - axis.em) ? line : best))
+    : axis;
   const result = Object.freeze({
     columns: table.columns,
     rows,
-    raiseEm: Number((AXIS_HEIGHT_EM + heightEm / 2 - firstAscent).toFixed(6)),
-    raisePx: rules / 2,
+    raiseEm: Number(nearest.em.toFixed(6)),
+    raisePx: nearest.px,
     mathml: whole.mathml,
     ...(whole.number ? { number: whole.number } : {}),
   });

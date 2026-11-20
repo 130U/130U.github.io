@@ -226,7 +226,11 @@ without the labels of the native drawings, keeping their manuscript captions.
 `tests/figure-reading-load.test.mjs` holds every built figure to the reading budget of
 the design (caption, title, legend and value-note limits), and the browser layout check
 fails a caption set at the reading size or a legend entry that wraps from 390px, so a
-new or edited figure is checked against the same budget.
+new or edited figure is checked against the same budget. A `Mark` in a plot is knocked
+out of the grid lines behind it; pass `knockout={false}` for a label set on a tinted
+region or held clear of a rule by its own padding, and place it clear of the lines. The
+browser layout check fails any figure label that a grid line or reference rule crosses
+without a knockout that holds it, and any label that does not take its mark's tone.
 
 `ResearchArticle` serves AI and Selected Research. The Markdown parser supports
 typed prose, emphasis, links, headings, tables, and formulas rather than arbitrary
