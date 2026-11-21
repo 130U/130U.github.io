@@ -90,14 +90,16 @@
   }
 }
 
+/* On phones the rows keep the frames' inset, so the directory's text stands on
+   the same edge as the ledger below it. */
 @media (width < 768px) {
   .directory a {
-    padding-inline: 16px;
+    padding-inline: var(--frame-inset);
   }
 
   .directory a + a {
-    background-position: 16px 0;
-    background-size: calc(100% - 32px) 1px;
+    background-position: var(--frame-inset) 0;
+    background-size: calc(100% - 2 * var(--frame-inset)) 1px;
   }
 }
 

@@ -366,6 +366,26 @@
       display: none;
     }
 
+    /* The rail has no scrollbar, so where its list runs past an edge the
+       entries fade there, as a wide table fades at its edge; the top rule
+       stays whole. ArticleContents marks the clipped edges. */
+    .contents[data-clipped-top],
+    .contents[data-clipped-bottom] {
+      --contents-top-fade: #000;
+      --contents-bottom-fade: #000;
+
+      -webkit-mask-image: linear-gradient(to bottom, #000 1px, var(--contents-top-fade) 1px, #000 calc(1px + 2rem), #000 calc(100% - 2.5rem), var(--contents-bottom-fade));
+      mask-image: linear-gradient(to bottom, #000 1px, var(--contents-top-fade) 1px, #000 calc(1px + 2rem), #000 calc(100% - 2.5rem), var(--contents-bottom-fade));
+    }
+
+    .contents[data-clipped-top] {
+      --contents-top-fade: transparent;
+    }
+
+    .contents[data-clipped-bottom] {
+      --contents-bottom-fade: transparent;
+    }
+
     .contents[data-enhanced="true"] .subsectionLink:not([data-open-chapter]) {
       display: none;
     }

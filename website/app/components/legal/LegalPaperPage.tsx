@@ -1,7 +1,9 @@
 import Link from "next/link";
 import { Fragment, type ReactNode } from "react";
+import { BackToTop } from "../BackToTop";
 import { ReturnArrow } from "../ReturnArrow";
 import { SiteShell } from "../SiteShell";
+import { TitleText } from "../TitleText";
 import { ArticleReadingLayout } from "../article/ArticleReadingLayout";
 import { ExperienceDiagram, ExperienceMetadata, KeyContributions } from "../experience/ExperienceDetails";
 import { type LegalPaper, type PaperRun } from "../../lib/content/legal-papers";
@@ -124,7 +126,7 @@ export function LegalPaperPage({ paper, showcase }: { paper: LegalPaper; showcas
           ...paper.footnotes.map((note) => ({ key: String(note.number), label: String(note.number), content: <RunText runs={note.runs} prefix={`preview-${note.number}`} /> })),
         ]}>
           <header className={`page-intro ${styles.header}`}>
-            <h1 id="paper-title" tabIndex={-1}>{showcase.headline}</h1>
+            <h1 id="paper-title" tabIndex={-1}><TitleText text={showcase.headline} /></h1>
             <ExperienceMetadata entry={showcase} />
             <p className={researchStyles.sourceLinks}><a href={paper.repositoryUrl}>GitHub</a><a href={paper.sourceUrl}>Full Manuscript</a></p>
             <ExperienceDiagram entry={showcase} />
@@ -168,7 +170,7 @@ export function LegalPaperPage({ paper, showcase }: { paper: LegalPaper; showcas
             </section>
           </ArticleReadingLayout>
 
-          <footer className={styles.paperFooter}><Link className="back-link" href={`/experience/#${showcase.slug}`}><ReturnArrow />Back to Experience</Link><a href="#paper-title">Back to Top</a></footer>
+          <footer className={styles.paperFooter}><Link className="back-link" href={`/experience/#${showcase.slug}`}><ReturnArrow />Back to Experience</Link><BackToTop target="paper-title" /></footer>
           {figures.size > 0 && <FigureController key={paper.slug} />}
           {(figures.size > 0 || paper.blocks.some(({ type }) => type === "table")) && <ZoomStage key={`${paper.slug}-stage`} />}
         </LegalPaperReader>

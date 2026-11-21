@@ -25,6 +25,7 @@
 .section {
   border-top: 1px solid var(--rule-strong);
   padding: 72px 0 104px;
+  scroll-margin-top: 32px;
 }
 
 .section:last-child {
@@ -221,7 +222,7 @@
   /* The first divider falls on the same axis as the ledger spine above,
      and each value starts where their titles and prose start. */
   .contactStrip {
-    grid-template-columns: calc(var(--frame-pad) + (100% - 2 * var(--frame-pad)) * 0.4) minmax(0, 1fr) minmax(0, 1fr);
+    grid-template-columns: calc(40% - 0.7px) minmax(0, 1fr) minmax(0, 1fr);
   }
 
   .contactStrip li {
@@ -274,6 +275,7 @@
 
   .section {
     padding: 56px 0 72px;
+    scroll-margin-top: 0.5rem;
   }
 
   .sectionIndex {
@@ -285,7 +287,7 @@
   }
 
   .sectionTitle {
-    margin-bottom: 28px;
+    margin-bottom: 32px;
   }
 }
 
@@ -302,7 +304,7 @@
 
 @media (width <= 540px) {
   .contactStrip li {
-    padding: 14px 16px 16px;
+    padding: 14px var(--frame-inset) 16px;
   }
 }
 

@@ -3,7 +3,7 @@
 }
 
 .frame :global(.content-column) {
-  padding-top: 112px;
+  padding-top: var(--content-top);
 }
 
 /* Index: the title alone, then one framed ledger of posts, newest first. Each
@@ -34,7 +34,6 @@
   color: var(--muted);
   font-size: var(--type-label);
   line-height: var(--label-leading);
-  letter-spacing: 0.015em;
 }
 
 /* Post: one column at the reading measure, from the reading start. The title
@@ -64,7 +63,6 @@
   color: var(--muted);
   font-size: var(--type-label);
   line-height: var(--label-leading);
-  letter-spacing: 0.015em;
 }
 
 .hero {
@@ -151,10 +149,6 @@
   scroll-margin-top: 32px;
 }
 
-.body > h2:focus {
-  outline: none;
-}
-
 /* The epigraph hangs off the dashed spine used between titles and prose. */
 .epigraph {
   margin: 0 0 2.5rem;
@@ -177,7 +171,6 @@
   font-family: var(--font-text);
   font-size: var(--type-label);
   line-height: var(--label-leading);
-  letter-spacing: 0.015em;
 }
 
 .figure {
