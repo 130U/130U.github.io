@@ -57,7 +57,8 @@ test("the Asian number line follows the sentence of (1.3) and writes each interv
   const html = await read(`out/${slug}/index.html`);
   const drawing = figure(html, "asian-interval");
 
-  // (1.3) ends in a comma, so the figure follows the paragraph that finishes its sentence.
+  // (1.3) ends in a comma, so the figure follows the paragraph that finishes its sentence,
+  // which the page sets with (1.3) as the certificate's table: the figure follows that table.
   const after = precedingBlock(html, drawing.open);
   assert.ok(blocks[after].source.startsWith("the price under absorbed Euler with step $`h=1/768`$ lies in"));
   assert.equal(blocks[after - 1].type, "equation");

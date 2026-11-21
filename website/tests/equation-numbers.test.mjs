@@ -5,6 +5,9 @@ import test from "node:test";
 // The papers number their equations by section, and readers follow a page with
 // the paper beside it: each number on the page stands beside the equation that
 // carries it in the manuscript, and every section's numbers run without a gap.
+// An equation is a display, or the row of a research table that presents a
+// display (passage-tables.ts): the row shows the number beside its label and its
+// value carries the display's TeX.
 const PAPERS = [
   ["critical-dependence-stress-for-diversification-gains-under-fixed-marginals", 52],
   ["certified-valuation-of-arithmetic-asian-options", 72],
@@ -21,10 +24,14 @@ for (const [slug, numbered] of PAPERS) {
     const { markdown } = JSON.parse(await readFile(new URL(`../content/selected-research/${slug}.json`, import.meta.url), "utf8"));
     const html = await readFile(new URL(`../out/${slug}/index.html`, import.meta.url), "utf8");
     const manuscript = [...markdown.matchAll(/```math\n([\s\S]*?)\n```|\$\$([\s\S]*?)\$\$|\\\[([\s\S]*?)\\\]/gu)].map((match) => match[1] ?? match[2] ?? match[3]);
-    const page = [...html.matchAll(/<div\b[^>]*data-research-block-type="equation"[^>]*>([\s\S]*?)<\/annotation>/gu)].map(([, block]) => ({
-      shown: block.match(/data-equation-number[^>]*>([^<]*)</u)?.[1],
-      tex: decodeHtml(block.match(/<annotation\b[^>]*>([\s\S]*)$/u)[1]),
-    }));
+    // Displays and table rows that present a display, in the page's order.
+    const page = [...html.matchAll(/<div\b[^>]*data-research-block-type="equation"[^>]*>([\s\S]*?)<\/annotation>|<tr\b[^>]*data-equation-row="[^"]*"[^>]*>([\s\S]*?)<\/tr>/gu)].map(([, display, row]) => {
+      if (display !== undefined) return { shown: display.match(/data-equation-number[^>]*>([^<]*)</u)?.[1], tex: decodeHtml(display.match(/<annotation\b[^>]*>([\s\S]*)$/u)[1]) };
+      // The row's display is the one formula of its cells in display mode.
+      const displays = [...row.matchAll(/<math\b[^>]*data-research-math="display"[^>]*>[\s\S]*?<annotation\b[^>]*>([\s\S]*?)<\/annotation>/gu)];
+      assert.equal(displays.length, 1, "A row that presents a display carries that display and no other.");
+      return { shown: row.match(/data-equation-number[^>]*>([^<]*)</u)?.[1], tex: decodeHtml(displays[0][1]) };
+    });
 
     assert.equal(page.length, manuscript.length, "The page shows every displayed equation of the manuscript.");
     page.forEach(({ shown, tex }, index) => {

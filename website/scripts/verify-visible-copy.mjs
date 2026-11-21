@@ -138,14 +138,30 @@ function replaceRanges(html, ranges, replacement = " ") {
 
 // Match only opening tags. Large manuscript bodies and framework payloads must
 // not pass through a repeated regex group that grows with the enclosed content.
-function replaceElements(html, openingPattern, replacement = " ") {
+// With `nested`, an element of the same name inside a matched one ends inside
+// it, so the match runs to the closing tag of its own element.
+function replaceElements(html, openingPattern, replacement = " ", nested = false) {
   const lower = html.toLowerCase();
   const ranges = [];
   let cursor = 0;
   for (const opening of html.matchAll(openingPattern)) {
     if (opening.index < cursor) continue;
-    const closing = `</${opening[1].toLowerCase()}>`;
-    const end = lower.indexOf(closing, opening.index + opening[0].length);
+    const name = opening[1].toLowerCase();
+    const closing = `</${name}>`;
+    let end = lower.indexOf(closing, opening.index + opening[0].length);
+    if (nested) {
+      const tags = new RegExp(`<\\/?${name}(?=[\\s>/])[^>]*>`, "gu");
+      tags.lastIndex = opening.index + opening[0].length;
+      let depth = 1;
+      end = -1;
+      for (let tag = tags.exec(lower); tag; tag = tags.exec(lower)) {
+        depth += tag[0].startsWith("</") ? -1 : tag[0].endsWith("/>") ? 0 : 1;
+        if (depth === 0) {
+          end = tag.index;
+          break;
+        }
+      }
+    }
     if (end < 0) continue;
     cursor = end + closing.length;
     ranges.push([opening.index, cursor]);
@@ -205,10 +221,16 @@ function visibleText(html, preserveFormulaPositions = false) {
     body = replaceElements(body, new RegExp(`<(${tag})\\b[^>]*>`, "giu"));
   }
   body = replaceElements(body, /<([a-z][\w:-]*)\b[^>]*data-visible-copy-role=["']visual-identity["'][^>]*>/giu);
+  // A table value drawn for a formula holds the spans that group and pad its digits.
+  body = replaceElements(body, /<(span)\b[^>]*\bdata-table-value=""[^>]*aria-hidden=["']true["'][^>]*>/giu, " ", true);
   body = replaceElements(body, /<([a-z][\w:-]*)\b[^>]*aria-hidden=["']true["'][^>]*>/giu);
   // A word-break opportunity adds no text or word boundary, nor do the empty text
-  // separators React writes beside one where its stream divides a run of text.
-  const unbroken = body.replace(/(?:<!--\s*-->)*<wbr\b[^>]*>(?:<!--\s*-->)*/giu, "");
+  // separators React writes beside one where its stream divides a run of text,
+  // nor the spans that group a table value's digits or pad it to its column.
+  const unbroken = body
+    .replace(/(?:<!--\s*-->)*<wbr\b[^>]*>(?:<!--\s*-->)*/giu, "")
+    .replace(/(?:<!--\s*-->)*<span\b[^>]*\bdata-table-pad="[^"]*"[^>]*><\/span>(?:<!--\s*-->)*/giu, "")
+    .replace(/(?:<!--\s*-->)*<span\b[^>]*\bdata-digit-group=""[^>]*>([^<]*)<\/span>(?:<!--\s*-->)*/giu, "$1");
   return stripInterfaceStrings(withoutComments(unbroken).replace(/<[^>]+>/gu, " "));
 }
 

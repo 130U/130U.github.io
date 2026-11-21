@@ -42,7 +42,7 @@ test("research tables hold each row of values on one line and scroll natively be
 test("all research tables retain native table semantics inside named keyboard-accessible scroll regions", async () => {
   const routes = [
     ["critical-dependence-stress-for-diversification-gains-under-fixed-marginals", 0],
-    ["certified-valuation-of-arithmetic-asian-options", 11],
+    ["certified-valuation-of-arithmetic-asian-options", 13],
     ["certified-joint-pricing-errors-in-rough-heston", 10],
     ["experience/large-scale-domain-expert-feedback-governance-and-adaptive-review", 6],
     ["experience/financial-task-design-and-synthetic-data-engineering", 4],

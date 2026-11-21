@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { Fragment, type CSSProperties } from "react";
+import { Fragment, type CSSProperties, type ReactNode } from "react";
 import { BackToTop } from "../BackToTop";
 import { ReturnArrow } from "../ReturnArrow";
 import { SiteShell } from "../SiteShell";
@@ -7,10 +7,13 @@ import { TitleText } from "../TitleText";
 import { ArticleReadingLayout } from "../article/ArticleReadingLayout";
 import { ExperienceDiagram, ExperienceMetadata, KeyContributions, ProblemAndApproach } from "../experience/ExperienceDetails";
 import type { ShowcaseEntry } from "../../lib/content/experience-showcase";
-import type { ResearchArticleContent, ResearchCell, ResearchInline } from "../../lib/content/research-markdown";
+import { parseResearchMarkdown, type ResearchArticleContent, type ResearchCell, type ResearchInline } from "../../lib/content/research-markdown";
 import { RESEARCH_MATH_GUTTER_EM, renderResearchMath } from "../../lib/content/research-math";
 import { buildArticleHeadingMap, buildReferenceTargets, formatArticleHeadings, linkArticleSectionReferences, type ArticleInline } from "../../lib/content/article-headings";
 import { emphasisFor, manuscriptFigureFor, placeFigures } from "../../lib/content/article-figures";
+import { placePassageTables, type PlacedPassageTable } from "../../lib/content/passage-tables";
+import { alignColumn, isInterval, parseTableNumber, type AlignedNumber } from "../../lib/content/research-number";
+import { TableValue } from "./TableValue";
 import { argumentUnit, closesProof } from "../../lib/content/argument-units";
 import { ArticleFigure, FigureCaption, FigureController, ManuscriptFigure } from "../figures";
 import type { ActivePage } from "../../lib/content/site";
@@ -33,7 +36,30 @@ const NUMERIC_CELL = new RegExp(String.raw`^(?:${NUMBER}(?:\s*\/\s*${NUMBER})*|\
 function numericCell({ source }: ResearchCell) {
   const value = source.trim().replace(/^\*\*([\s\S]+)\*\*$/u, "$1");
   const formula = value.match(/^\$`([^`]*)`\$$/u);
-  return NUMERIC_CELL.test(formula ? formula[1].replace(/\s+/gu, "") : value);
+  return NUMERIC_CELL.test(formula ? formula[1].replace(/\s+/gu, "") : value) || parseTableNumber(source) !== undefined;
+}
+
+/**
+ * The values of a table, by row and column, set for the page: each cell that
+ * holds a number, percentage, interval or list of numbers, grouped and, where
+ * every body cell of its column is such a value or a dash, aligned on the
+ * decimal point with the rest of its column. `start` marks the columns that
+ * align from their start, whose values hold different numbers of fields.
+ */
+export function tableValues(rows: ResearchCell[][]) {
+  const values: (AlignedNumber | undefined)[][] = rows.map((row) => row.map(() => undefined));
+  const start = rows[0].map(() => false);
+  rows[0].forEach((_, column) => {
+    const body = rows.slice(1).map((row) => parseTableNumber(row[column].source));
+    const aligned = body.every((value, index) => value || /^(?:—|)$/u.test(rows[index + 1][column].source.trim()));
+    const set = aligned ? alignColumn(body.filter((value) => value !== undefined)) : undefined;
+    start[column] = set?.start ?? false;
+    let next = 0;
+    body.forEach((value, index) => {
+      if (value) values[index + 1][column] = set ? set.values[next++] : alignColumn([value]).values[0];
+    });
+  });
+  return { values, start };
 }
 
 // The row labels' column counts as numeric when it holds numbers (strikes, steps,
@@ -138,10 +164,15 @@ export function tableLayout(rows: ResearchCell[][]) {
   const floors = rows[0].map((_, column) => phrases[column] ? wrapFloor(rows, column) : 0);
   // Sentence columns beyond the row labels share the room left of a label column.
   const shared = sentences.filter((sentence, column) => sentence && column > 0).length;
+  const intervals = rows.slice(1).some((row) => row.some((cell) => {
+    const value = parseTableNumber(cell.source);
+    return value !== undefined && isInterval(value);
+  }));
   return {
     table: {
       "data-hug": sentences.some(Boolean) ? "" : undefined,
       "data-wraps": phrases.some(Boolean) || shared >= 2 ? "" : undefined,
+      "data-breaks": intervals ? "" : undefined,
       "data-label": sentences[0] ? "sentence" : phrases[0] ? "phrase" : undefined,
       "data-sentence-columns": shared >= 2 ? shared : undefined,
       "data-halves": halves || undefined,
@@ -284,12 +315,110 @@ export function ResearchArticle({ project, active, returnPath, returnLabel, titl
     project.blocks.map((block) => ({ type: block.type, source: block.source, firstCell: block.type === "table" ? block.rows[0][0].source : undefined })),
     project.markdown,
   );
-  const enhanced = figures.size > 0 || project.blocks.some((block) => block.type === "figure" || block.type === "table");
+  // Passages the site presents as tables: each block of a passage renders through the table that presents it.
+  const passages = new Map<number, PlacedPassageTable>();
+  for (const passage of placePassageTables(project.slug, project.blocks, project.markdown)) {
+    for (let index = passage.start; index <= passage.end; index += 1) passages.set(index, passage);
+  }
+  const enhanced = figures.size > 0 || passages.size > 0 || project.blocks.some((block) => block.type === "figure" || block.type === "table");
   const renderedBlocks = project.blocks.map((block, index) => {
-    const rendered = renderBlock(block, index);
+    const passage = passages.get(index);
+    const rendered = passage ? renderPassage(passage, index) : renderBlock(block, index);
     const placed = figures.get(index);
     return placed ? <Fragment key={index}>{rendered}{placed.map((id) => <ArticleFigure key={id} id={id} />)}</Fragment> : rendered;
   });
+
+  /**
+   * A research table in its frame: the manuscript's caption, or a passage
+   * table's title, inside the frame; heads in a tinted band; values set in
+   * tabular figures and aligned on the decimal point; a row that presents a
+   * display shows the display's number beside its label and carries its TeX.
+   */
+  function renderTable({ key, rows, index, title, table, rowAttributes, emphasis }: {
+    key: number;
+    rows: (ResearchCell & { display?: { tex: string; number: string } })[][];
+    index: number;
+    title?: ReactNode;
+    table: Record<string, unknown>;
+    rowAttributes?: (row: number) => Record<string, unknown>;
+    emphasis?: ReturnType<typeof emphasisFor>;
+  }) {
+    const layout = tableLayout(rows);
+    const { values, start } = tableValues(rows);
+    const tableRows = rows.map((row, rowIndex) => (
+      <tr key={rowIndex} {...rowAttributes?.(rowIndex)} data-emphasis={emphasis?.row !== undefined && rowIndex - 1 === emphasis.row ? "" : undefined}>{row.map((cell, cellIndex) => {
+        const Cell = rowIndex === 0 ? "th" : "td";
+        const value = values[rowIndex][cellIndex];
+        const display = row.find((entry) => entry.display)?.display;
+        const cellLayout = layout.cell(rowIndex, cellIndex);
+        return (
+          <Cell
+            key={cellIndex}
+            scope={Cell === "th" ? "col" : undefined}
+            {...cellLayout}
+            className={start[cellIndex] ? `${cellLayout.className} ${styles.alignStart}` : cellLayout.className}
+            data-interval={value?.interval ? "" : undefined}
+            data-emphasis={emphasis?.column === cellIndex ? "" : undefined}
+          >
+            {value ? <TableValue value={value} display={cell.display?.tex} /> : <InlineContent inlines={link(cell.inlines, index)} />}
+            {cellIndex === 0 && display && <span className={styles.rowNumber} data-equation-number aria-hidden="true">{`(${display.number})`}</span>}
+          </Cell>
+        );
+      })}</tr>
+    ));
+    return (
+      <div key={key} className={styles.tableFrame} data-table-frame>
+        {title}
+        <button type="button" className={`${stageStyles.control} ${styles.zoom}`} data-table-zoom aria-label="Zoom in" aria-haspopup="dialog" hidden><ZoomGlyph /></button>
+        <div tabIndex={0} role="region" aria-label="Research data table" className={styles.tableRegion}>
+          <table {...table} {...layout.table} className={styles.table} data-research-table data-research-block-type="table">
+            <thead>{tableRows[0]}</thead>
+            <tbody>{tableRows.slice(1)}</tbody>
+          </table>
+        </div>
+      </div>
+    );
+  }
+
+  function paragraphInlines(markdown: string) {
+    const blocks = parseResearchMarkdown(markdown, { joinSoftLines: true });
+    if (blocks.length !== 1 || blocks[0].type !== "paragraph") throw new Error(`A passage table's text must be one paragraph: ${markdown}`);
+    return blocks[0].inlines;
+  }
+
+  /**
+   * The blocks of a passage the site presents as a table: the words before it
+   * stay a paragraph, the table restates the passage, and the words after it
+   * stay a paragraph. Every block keeps its one marker, on the element that
+   * first presents it, and a display's anchor moves to its row.
+   */
+  function renderPassage(passage: PlacedPassageTable, index: number) {
+    if (index !== passage.start) return null;
+    const first = project.blocks[index];
+    const rows = passage.rows.map((row) => row.map((cell) => ({ ...cell, inlines: cell.source ? paragraphInlines(cell.source) : [] })));
+    const rowBlocks = new Map([...passage.blockRows].filter(([, row]) => row >= 0).map(([block, row]) => [row + 1, block]));
+    const unit = index >= bodyStart && first.type === "paragraph" ? { "data-unit": argumentUnit(first), "data-proof-close": closesProof(first) ? "" : undefined } : {};
+    return (
+      <Fragment key={index}>
+        {passage.head && <p data-research-block={index} data-research-block-type="paragraph" {...unit} id={first.id ?? anchors.get(index)}><InlineContent inlines={proofLabel(link(paragraphInlines(passage.head), index))} /></p>}
+        {renderTable({
+          key: -index,
+          rows,
+          index,
+          title: <p className={styles.tableTitle} data-table-title><InlineContent inlines={paragraphInlines(passage.title)} /></p>,
+          table: { "data-passage-table": passage.id, ...(passage.blockRows.get(index) === -1 ? { "data-research-block": index, id: first.id ?? anchors.get(index) } : {}) },
+          rowAttributes: (row) => {
+            const block = rowBlocks.get(row);
+            if (block === undefined) return {};
+            const display = rows[row].find((cell) => cell.display)?.display;
+            return { "data-research-block": block, id: project.blocks[block].id ?? anchors.get(block), "data-equation-row": display?.number };
+          },
+        })}
+        {passage.tail && <p data-research-block-type="paragraph"><InlineContent inlines={link(paragraphInlines(passage.tail), passage.end)} /></p>}
+      </Fragment>
+    );
+  }
+
   function renderBlock(block: ResearchArticleContent["blocks"][number], index: number) {
     const marker = { "data-research-block": index, "data-research-block-type": block.type };
     if (block.type === "paragraph") {
@@ -323,40 +452,19 @@ export function ResearchArticle({ project, active, returnPath, returnLabel, titl
       const caption = <FigureCaption inlines={link(block.inlines, index)} />;
       return <ManuscriptFigure key={index} id={manuscriptFigureFor(project.slug, block.src, project.markdown)} anchor={block.id ?? anchors.get(index)} captionId={`research-figure-${index}-caption`} attributes={marker} caption={caption} />;
     }
-    const layout = tableLayout(block.rows);
-    const emphasis = emphasisFor(project.slug, block.rows[0][0].source);
-    const tableRows = block.rows.map((row, rowIndex) => (
-      <tr key={rowIndex} data-emphasis={emphasis?.row !== undefined && rowIndex - 1 === emphasis.row ? "" : undefined}>{row.map((cell, cellIndex) => {
-        const Cell = rowIndex === 0 ? "th" : "td";
-        return (
-          <Cell
-            key={cellIndex}
-            scope={Cell === "th" ? "col" : undefined}
-            {...layout.cell(rowIndex, cellIndex)}
-            data-emphasis={emphasis?.column === cellIndex ? "" : undefined}
-          >
-            <InlineContent inlines={link(cell.inlines, index)} />
-          </Cell>
-        );
-      })}</tr>
-    ));
     const captionBlock = captionsTable(project.blocks, index - 1) ? project.blocks[index - 1] : undefined;
-    return (
-      <div key={index} className={styles.tableFrame} data-table-frame>
-        {captionBlock?.type === "paragraph" && (
-          <p data-research-block={index - 1} data-research-block-type="paragraph" id={captionBlock.id ?? anchors.get(index - 1)} className={styles.tableTitle} data-table-title>
-            <InlineContent inlines={link(captionBlock.inlines, index - 1)} />
-          </p>
-        )}
-        <button type="button" className={`${stageStyles.control} ${styles.zoom}`} data-table-zoom aria-label="Zoom in" aria-haspopup="dialog" hidden><ZoomGlyph /></button>
-        <div tabIndex={0} role="region" aria-label="Research data table" className={styles.tableRegion}>
-          <table {...marker} {...layout.table} id={block.id} className={styles.table} data-research-table>
-            <thead>{tableRows[0]}</thead>
-            <tbody>{tableRows.slice(1)}</tbody>
-          </table>
-        </div>
-      </div>
-    );
+    return renderTable({
+      key: index,
+      rows: block.rows,
+      index,
+      title: captionBlock?.type === "paragraph" && (
+        <p data-research-block={index - 1} data-research-block-type="paragraph" id={captionBlock.id ?? anchors.get(index - 1)} className={styles.tableTitle} data-table-title>
+          <InlineContent inlines={link(captionBlock.inlines, index - 1)} />
+        </p>
+      ),
+      table: { ...marker, id: block.id },
+      emphasis: emphasisFor(project.slug, block.rows[0][0].source),
+    });
   }
   return (
     <SiteShell active={active} parent={{ href: returnPath, label: returnLabel }} frameClassName={showcase ? experienceStyles.frame : undefined}>

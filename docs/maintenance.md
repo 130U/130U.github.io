@@ -227,6 +227,26 @@ and its evidence together. The same module maps each manuscript image path to it
 drawing, with evidence checked the same way, and names the row or column a table
 emphasizes. Manuscript checks in the tests read articles without these figures and
 without the labels of the native drawings, keeping their manuscript captions.
+`app/lib/content/passage-tables.ts` presents a manuscript passage that reports a list of
+results as a research table, keyed the same way: from the block that opens with `from`
+(and, with `at`, from those words on) through the block that opens with `through` (and,
+with `after`, up to those words). The words before and after stay paragraphs. The build
+fails unless the table carries the passage's formulas whole and in the manuscript's
+order, every number the passage writes outside a formula, only numbers the passage or a
+cited `source` states, and only words of the passage, a cited `source` or the heads of the
+manuscript table whose form it takes (`form`), and unless each display of the passage
+becomes a row that names its equation number (`display`). The row then shows the number
+and carries the display's TeX and anchor, so `tests/equation-numbers.test.mjs` finds it
+as it finds a display. A manuscript update that rewrites such a passage fails the build
+until its table is edited with it; the importers and frozen sources stay as they are.
+`tests/passage-tables.test.mjs` pins each table, and refuses an invented, dropped or
+reordered value. `app/lib/content/research-number.ts` reads every table cell that holds a
+number, percentage, interval or list of numbers, written as text or as one formula of
+numbers, and aligns each column of them on the decimal point with invisible generated
+pads; `TableValue` sets its digits in the groups of `fractionDigitGroups`, the one helper
+every table groups its digits through. Copying a cell returns
+the manuscript's number, and `verify-visible-copy` reads a value's groups and pads as
+the one number they set.
 `tests/figure-reading-load.test.mjs` holds every built figure to the reading budget of
 the design (caption, title, legend and value-note limits), and the browser layout check
 fails a caption set at the reading size or a legend entry that wraps from 390px, so a
@@ -327,7 +347,9 @@ development security policy required by Next.js tooling. `test:browser` uses iso
 Chromium contexts and the actual static export to check every figure and view at
 six viewport widths, plus enlarged-text and keyboard-scroll regressions, and holds every
 manuscript table heading to two lines (three over a column of values) clear of its
-table's zoom control, the row labels of words of a scrolling table in view, every inline
+table's zoom control, the row labels of words of a scrolling table in view, every column
+of values aligned on its decimal point (an interval on one line, or on two where its
+table breaks it), every row that presents a display showing its number, every inline
 formula of the text and tables on its line's baseline and unclipped, every displayed
 equation to one starting axis, every equation number to the column's right edge, and the
 fade of every scrolling display over ink at rest. It reports
