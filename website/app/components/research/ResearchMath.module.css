@@ -145,6 +145,38 @@
   border: 0;
 }
 
+/* A display of formulas the manuscript sets side by side is set as rows, one
+   formula to a row, at every width. The rows stand on the display's axis, one
+   line of mathematics apart, each as tall as an array row's strut (0.75em
+   above the baseline, 0.25em below) or its drawing, as TeX sets the rows of
+   aligned equations: the renderer gives each row the space above it. The
+   stack keeps a drawing's gutter, so its ink starts on the manuscript inset
+   and it stands in a display's white space; its baseline is its last row's,
+   where the equation number stands. A row wider than the column is fitted or
+   scrolls as any display does, the whole stack with it. */
+.stack {
+  display: inline-block;
+  padding: var(--math-gutter);
+}
+
+.stackRow {
+  display: block;
+  white-space: nowrap;
+}
+
+.stackRow + .stackRow {
+  padding-top: var(--row-space);
+}
+
+/* A row's drawing takes the room of its expression, its canvas gutters in
+   negative margins, and stands on the row's baseline as a display drawing
+   stands on its own. */
+.rowMath {
+  display: inline-block;
+  margin: calc(-1 * var(--math-gutter));
+  line-height: 0;
+}
+
 /* A display stands in two and a half lines of the manuscript of white space
    (70px at the reading size), measured from its expression to the descenders of
    the line above and to the x-height of the line below. Each margin is two lines

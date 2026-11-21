@@ -266,7 +266,16 @@ mathematics (`renderResearchDisplayTable`): its columns may be `l`, `c`, `r` and
 rules `\hline`, and its row breaks `\\` or `\\[dim]`; any other column type or rule
 (`p{}`, `@{}`, `\cline`) fails the build, so a new form is designed before it is
 published. `tests/display-tables.test.mjs` pins the three such displays in the
-manuscripts.
+manuscripts. A display whose outer level sets two or more formulas side by side is
+drawn as rows (`researchDisplayRows`, `renderResearchDisplayStack`): the rule reads the
+display, or the rows of the one `gathered` environment it is, or of an `aligned`
+environment flush at its rows' start, and parts it at `\qquad`, `\quad`, `\enspace`, a
+control space or a run of thin spaces before a part that holds a relation of its own and
+does not qualify the one before. Each row names its slice of the TeX in `data-stack-row`;
+one assistive expression carries the whole display. A manuscript update that adds or
+splits such a display updates the counts in `tests/display-stacks.test.mjs` with it; a
+qualifier the rule reads as a formula, or a formula it reads as a qualifier, is fixed in
+the rule, never in the manuscript.
 
 Use the semantic typography tokens in `app/globals.css` and the shared font files.
 The [design guide](design.md#typography) defines each role's size, weight, family,
@@ -329,8 +338,10 @@ six viewport widths, plus enlarged-text and keyboard-scroll regressions, and hol
 manuscript table heading to two lines (three over a column of values) clear of its
 table's zoom control, the row labels of words of a scrolling table in view, every inline
 formula of the text and tables on its line's baseline and unclipped, every displayed
-equation to one starting axis, every equation number to the column's right edge, and the
-fade of every scrolling display over ink at rest. It reports
+equation to one starting axis, every equation number to the column's right edge, the
+fade of every scrolling display over ink at rest, every display row to one formula, and
+the rows of a stacked display to one axis, a line of mathematics apart, with the number
+on the last row's baseline. It reports
 geometry and failure screenshots in `website/test-results/figure-layout/`. CI installs
 Chromium and requires these checks to pass before publishing.
 

@@ -121,9 +121,16 @@
   }
 
   [data-research-svg="display"],
+  [data-research-svg="row"],
   [data-table-frame] svg[data-research-svg] {
     max-width: 100%;
     height: auto;
+  }
+
+  /* A display set as rows sets each row to the page's width as a display on one line is set. */
+  [data-display-stack],
+  [data-display-stack] > * > * {
+    max-width: 100%;
   }
 
   [data-equation-number] {
