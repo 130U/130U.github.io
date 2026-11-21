@@ -772,40 +772,126 @@ function inspectManuscript() {
   // A table of mathematics is set as a research table, and checked as one below; a display
   // set as rows keeps the drawing's gutter around its rows, so it is measured as a drawing.
   const displays = '[data-research-block-type="equation"]:not([data-math-table])';
+  // A drawing's baseline is its canvas's y = 0; its ink lies a gutter, 0.375em at its own size,
+  // inside its box.
+  const baselineOf = svg => {
+    const box = svg.getBoundingClientRect();
+    const view = svg.viewBox.baseVal;
+    return box.top - view.y * (box.height / view.height);
+  };
+  const gutterOf = element => 0.375 * parseFloat(getComputedStyle(element).fontSize);
+  const textBox = element => {
+    const range = document.createRange();
+    range.selectNodeContents(element);
+    return range.getBoundingClientRect();
+  };
+  const numberBaseline = number => {
+    const probe = document.createElement("span");
+    probe.style.cssText = "display:inline-block;width:0;height:0";
+    number.prepend(probe);
+    const line = probe.getBoundingClientRect().bottom;
+    probe.remove();
+    return line;
+  };
+  // A display's lines: each row of a stack, or each part of a row that parts, or the one drawing.
+  const linesOf = formula => {
+    const stack = formula.querySelector("[data-display-stack]");
+    if (!stack) return [{ svgs: [...formula.querySelectorAll("svg[data-research-svg]")], kind: "formula" }];
+    return [...stack.children].flatMap(row => row.hasAttribute("data-row-parted")
+      ? [...row.children].map(part => ({ svgs: [...part.querySelectorAll("svg[data-research-svg]")], kind: part.dataset.rowPart, row }))
+      : [{ svgs: [...row.querySelectorAll("svg[data-research-svg]")], kind: "formula", row }]);
+  };
   for (const equation of document.querySelectorAll(displays)) {
+    const formula = equation.querySelector('[data-research-formula="display"]');
+    const box = equation.querySelector("[data-equation-scroll]");
     const drawing = equation.querySelector("[data-display-stack], svg[data-research-svg]");
     const column = equation.getBoundingClientRect();
     // The ink starts past the drawing's transparent gutter, 0.375em at the drawing's own
     // size, which a fitted equation sets smaller.
-    const gutter = 0.375 * parseFloat(getComputedStyle(drawing).fontSize);
-    const start = drawing.getBoundingClientRect().left + gutter - column.left;
+    const start = drawing.getBoundingClientRect().left + gutterOf(drawing) - column.left;
     const axis = Math.round(start * 2) / 2;
     starts.set(axis, (starts.get(axis) ?? 0) + 1);
     edges.push(start);
+    if (!box || box.getAttribute("role") !== "region" || box.tabIndex !== 0) issues.push({ kind: "equation-box-not-a-keyboard-region", number: equation.id });
     const number = equation.querySelector("[data-equation-number]");
     if (!number) continue;
-    const text = document.createRange();
-    text.selectNodeContents(number);
-    const gap = column.right - text.getBoundingClientRect().right;
-    if (Math.abs(gap) > 1) issues.push({ kind: "equation-number-off-right-edge", number: number.textContent, gap });
-    equation.scrollLeft = equation.scrollWidth;
-    if (drawing.getBoundingClientRect().right > text.getBoundingClientRect().left) issues.push({ kind: "equation-number-overlaps-expression", number: number.textContent });
-    equation.scrollLeft = 0;
+    const label = number.textContent;
+    const text = textBox(number);
+    const gap = column.right - text.right;
+    if (Math.abs(gap) > 1) issues.push({ kind: "equation-number-off-right-edge", number: label, gap });
+    const scrolls = box.scrollWidth > box.clientWidth + 1;
+    const lines = linesOf(formula);
+    // No ink on the number's line comes within 8px of it, and no number shares a line with an
+    // expression that scrolls: it stands beneath, on a line of its own.
+    for (const line of lines) {
+      for (const svg of line.svgs) {
+        const ink = svg.getBoundingClientRect();
+        if (Math.min(ink.bottom, text.bottom) - Math.max(ink.top, text.top) <= 0.3 * text.height) continue;
+        if (scrolls) issues.push({ kind: "equation-number-beside-cut-expression", number: label, overflow: box.scrollWidth - box.clientWidth });
+        else if (ink.right - gutterOf(svg) > text.left - 8) issues.push({ kind: "equation-number-overlaps-expression", number: label, gap: +(text.left - ink.right + gutterOf(svg)).toFixed(2) });
+      }
+    }
+    const beneath = text.top >= box.getBoundingClientRect().bottom - 1;
+    if (scrolls && !beneath) issues.push({ kind: "equation-number-not-beneath-scrolling-expression", number: label });
+    if (!beneath) continue;
+    // Beneath, the number's line is one more row: its baseline stands one line of mathematics
+    // (1.8217em of the mathematics, set as the display is) below the last line's, or the last
+    // line's depth and the rest of that line where the line is deep, below any scrollbar.
+    const last = lines.at(-1).svgs;
+    const lastBaseline = Math.max(...last.map(baselineOf));
+    const size = parseFloat(getComputedStyle(drawing).fontSize);
+    const depth = Math.max(...last.map(svg => svg.getBoundingClientRect().bottom - gutterOf(svg))) - lastBaseline;
+    const scrollbar = box.offsetHeight - box.clientHeight;
+    const expected = Math.max(depth, 0.25 * size) + (1.8217 - 0.25) * size + scrollbar;
+    const pitch = numberBaseline(number) - lastBaseline;
+    if (Math.abs(pitch - expected) > 0.75) issues.push({ kind: "equation-number-beneath-off-the-line", number: label, pitch: +pitch.toFixed(2), expected: +expected.toFixed(2) });
+    // A number goes beneath only where no form leaves it room beside: not beside the expression
+    // set as small as the floor allows with the narrower gap, nor beside a stack's last line.
+    if (!scrolls) {
+      const fit = parseFloat(getComputedStyle(equation).getPropertyValue("--equation-fit")) || 1;
+      const ink = drawing.getBoundingClientRect().width - 2 * gutterOf(drawing);
+      const padding = parseFloat(getComputedStyle(box).paddingLeft);
+      const gutter = gutterOf(drawing) / fit;
+      const em = parseFloat(getComputedStyle(number).fontSize);
+      const smallest = padding + gutter * (fit - 0.9) + (ink / fit) * 0.9 + 2 * gutter * 0.9 + em + text.width;
+      if (smallest < column.width - 1.5) issues.push({ kind: "equation-number-beneath-with-room-beside", number: label, smallest: +smallest.toFixed(1), column: column.width });
+      if (formula.querySelector("[data-display-stack]")) {
+        const right = Math.max(...last.map(svg => svg.getBoundingClientRect().right - gutterOf(svg)));
+        if (right + em + text.width < column.right - 1.5) issues.push({ kind: "equation-number-beneath-with-room-beside-last-line", number: label });
+      }
+    }
   }
   if (edges.length && Math.max(...edges) - Math.min(...edges) > 0.5) issues.push({ kind: "equations-start-on-different-axes", starts: [...starts] });
   // At rest, a display that scrolls visibly fades: the first three quarters of an em of the
-  // fade beneath its number's edge, reaching back as far as MathFit sets it, lie over ink.
+  // fade at the column's edge, reaching back as far as MathFit sets it, lie over ink. A display
+  // that does not scroll shows no fade.
   for (const equation of document.querySelectorAll(displays)) {
-    if (equation.scrollWidth <= equation.clientWidth + 1) continue;
-    equation.scrollLeft = 0;
-    const edge = equation.querySelector("[data-equation-edge]");
-    const em = parseFloat(getComputedStyle(edge).fontSize);
-    const start = edge.getBoundingClientRect().left - (parseFloat(getComputedStyle(equation).getPropertyValue("--fade-reach")) || 0);
-    const inked = [...equation.querySelectorAll("svg path, svg rect, svg line")].some(node => {
+    const box = equation.querySelector("[data-equation-scroll]");
+    const fade = equation.querySelector("[data-equation-fade]");
+    const shown = fade && getComputedStyle(fade).display !== "none";
+    const label = equation.querySelector("[data-equation-number]")?.textContent || equation.id;
+    if (box.scrollWidth <= box.clientWidth + 1) {
+      if (shown) issues.push({ kind: "display-fades-without-scrolling", number: label });
+      continue;
+    }
+    if (!shown) {
+      issues.push({ kind: "display-scrolls-without-fade", number: label });
+      continue;
+    }
+    box.scrollLeft = 0;
+    const em = parseFloat(getComputedStyle(fade).fontSize);
+    const start = fade.getBoundingClientRect().left - (parseFloat(getComputedStyle(equation).getPropertyValue("--fade-reach")) || 0);
+    const inked = [...box.querySelectorAll("svg path, svg rect, svg line")].some(node => {
       const ink = node.getBoundingClientRect();
       return (ink.width || ink.height) && ink.left < start + 0.75 * em && ink.right > start;
     });
-    if (!inked) issues.push({ kind: "display-fades-over-blank", number: equation.querySelector("[data-equation-number]")?.textContent || equation.id });
+    if (!inked) issues.push({ kind: "display-fades-over-blank", number: label });
+    // At the end of the scroll the fade stands past the expression's drawing, over blank paper
+    // (within the pixel the scroll position rounds to).
+    box.scrollLeft = box.scrollWidth;
+    const covered = fade.getBoundingClientRect().left < equation.querySelector("[data-display-stack], svg[data-research-svg]").getBoundingClientRect().right - 1;
+    box.scrollLeft = 0;
+    if (covered) issues.push({ kind: "display-fade-covers-ink-at-scroll-end", number: label });
   }
 
   // A display that is one array is set as a research table (the research-table
@@ -889,35 +975,55 @@ function inspectManuscript() {
 
   // A display of formulas set side by side is set as rows: its rows start on one axis, each
   // stands at least a line of mathematics below the one before, and its equation number stands
-  // on the last row's baseline.
+  // on the last row's baseline unless it stands beneath. A row that parts sets each part on a
+  // line of its own, as rows stand: the connecting word and the formula on the axis, the
+  // qualifier a \qquad in, past any hang; it parts only where it would otherwise scroll. A row
+  // that stands whole sets its parts on its baseline, a manuscript space apart.
   for (const stack of document.querySelectorAll("[data-display-stack]")) {
     const region = stack.closest('[data-research-block-type="equation"]');
+    const box = region.querySelector("[data-equation-scroll]");
     const size = parseFloat(getComputedStyle(stack).fontSize);
     const label = region.querySelector("[data-equation-number]")?.textContent || region.id || region.dataset.researchBlock;
-    const rows = [...stack.querySelectorAll('svg[data-research-svg="row"]')];
-    if (rows.length < 2 || rows.length !== stack.children.length) {
+    const rows = [...stack.children];
+    if (rows.length < (rows.some(row => row.hasAttribute("data-row-parts")) ? 1 : 2) || rows.some(row => !row.querySelector('svg[data-research-svg="row"]'))) {
       issues.push({ kind: "display-stack-without-rows", number: label, rows: rows.length });
       continue;
     }
-    // A drawing's own baseline is its canvas's y = 0.
-    const baselines = rows.map(svg => {
-      const box = svg.getBoundingClientRect();
-      const view = svg.viewBox.baseVal;
-      return box.top - view.y * (box.height / view.height);
+    const lines = linesOf(stack.closest('[data-research-formula="display"]'));
+    const axis = rows[0].querySelector("svg").getBoundingClientRect().left;
+    lines.forEach((line, index) => {
+      const left = line.svgs[0].getBoundingClientRect().left;
+      const indent = line.kind === "qualifier" ? 2 * size + (parseFloat(getComputedStyle(line.row).getPropertyValue("--hang")) || 0) * size : 0;
+      if (Math.abs(left - axis - indent) > 0.5) issues.push({ kind: line.kind === "qualifier" ? "display-qualifier-line-off-its-indent" : "display-stack-rows-off-axis", number: label, line: index, offset: +(left - axis - indent).toFixed(2) });
+      if (index && Math.min(...line.svgs.map(baselineOf)) - Math.max(...lines[index - 1].svgs.map(baselineOf)) < 1.8217 * size - 0.5) {
+        issues.push({ kind: "display-stack-rows-closer-than-a-line", number: label, line: index });
+      }
     });
-    const starts = rows.map(svg => svg.getBoundingClientRect().left);
-    if (Math.max(...starts) - Math.min(...starts) > 0.5) issues.push({ kind: "display-stack-rows-off-axis", number: label, starts });
-    baselines.forEach((line, index) => {
-      if (index && line - baselines[index - 1] < 1.8217 * size - 0.5) issues.push({ kind: "display-stack-rows-closer-than-a-line", number: label, row: index, pitch: line - baselines[index - 1] });
-    });
+    for (const row of rows.filter(row => row.hasAttribute("data-row-parts"))) {
+      const parts = [...row.children];
+      if (row.hasAttribute("data-row-parted")) {
+        // Whole, the row would have run past the column's room for the expression.
+        const joins = parts.slice(1).reduce((sum, part) => sum + parseFloat(getComputedStyle(part).getPropertyValue("--join")) * size, 0);
+        const whole = parts.reduce((sum, part) => sum + part.firstElementChild.getBoundingClientRect().width - 2 * gutterOf(part.firstElementChild), 0) + joins + 2 * gutterOf(stack);
+        const fit = parseFloat(getComputedStyle(region).getPropertyValue("--equation-fit")) || 1;
+        // The column's room for the expression at its natural size, past the manuscript inset.
+        const room = box.parentElement.getBoundingClientRect().width - parseFloat(getComputedStyle(box).paddingLeft) + (gutterOf(stack) / fit) * (1 - fit);
+        if (whole / fit <= room - 1.5) issues.push({ kind: "display-row-parted-without-need", number: label, whole: +(whole / fit).toFixed(1), room });
+        continue;
+      }
+      const drawings = parts.map(part => part.firstElementChild);
+      const baselines = drawings.map(drawing => baselineOf(drawing.querySelector("svg")));
+      if (Math.max(...baselines) - Math.min(...baselines) > 0.5) issues.push({ kind: "display-row-parts-off-baseline", number: label });
+      drawings.slice(1).forEach((drawing, index) => {
+        const space = drawing.getBoundingClientRect().left + gutterOf(drawing) - (drawings[index].getBoundingClientRect().right - gutterOf(drawings[index]));
+        const join = parseFloat(getComputedStyle(parts[index + 1]).getPropertyValue("--join")) * size;
+        if (Math.abs(space - join) > 0.5) issues.push({ kind: "display-row-parts-off-the-manuscript-space", number: label, space, join });
+      });
+    }
     const number = region.querySelector("[data-equation-number]");
-    if (number?.textContent) {
-      const probe = document.createElement("span");
-      probe.style.cssText = "display:inline-block;width:0;height:0";
-      number.prepend(probe);
-      const line = probe.getBoundingClientRect().bottom;
-      probe.remove();
-      if (Math.abs(baselines.at(-1) - line) > 0.5) issues.push({ kind: "display-stack-number-off-last-row", number: label, offset: baselines.at(-1) - line });
+    if (number?.textContent && numberBaseline(number) < box.getBoundingClientRect().bottom) {
+      const last = Math.max(...lines.at(-1).svgs.map(baselineOf));
+      if (Math.abs(last - numberBaseline(number)) > 0.5) issues.push({ kind: "display-stack-number-off-last-row", number: label, offset: last - numberBaseline(number) });
     }
   }
 
@@ -975,15 +1081,23 @@ function inspectManuscript() {
   // box's lower edge by the strut's depth less the descender, and its x-height
   // below the upper edge by the strut's height less the x-height. A line that a
   // tall inline expression enlarges keeps the same white space from its edge.
+  // A display's lower edge is its expression's, or, where its number stands on a line of its own
+  // beneath it, that number's baseline, which keeps a drawing's gutter below it as ink does.
+  const lowest = block => {
+    const own = expression(block.querySelector('[data-research-formula="display"]'));
+    const number = block.querySelector("[data-equation-number]");
+    const box = block.querySelector("[data-equation-scroll]");
+    return number && textBox(number).top >= box.getBoundingClientRect().bottom - 1 ? { ...own, bottom: numberBaseline(number) } : own;
+  };
   const whites = [];
   for (const block of document.querySelectorAll(displays)) {
-    const own = expression(block.querySelector('[data-research-formula="display"]'));
+    const own = lowest(block);
     const previous = block.previousElementSibling;
     const next = block.nextElementSibling;
     if (previous?.matches('p[data-research-block-type="paragraph"]')) {
       whites.push({ side: "above", block: block.dataset.researchBlock, white: own.top - (previous.getBoundingClientRect().bottom - strutBelow + descender) });
     } else if (previous?.matches(displays)) {
-      whites.push({ side: "between", block: block.dataset.researchBlock, white: own.top - expression(previous.querySelector('[data-research-formula="display"]')).bottom });
+      whites.push({ side: "between", block: block.dataset.researchBlock, white: own.top - lowest(previous).bottom });
     }
     if (next?.matches('p[data-research-block-type="paragraph"]')) {
       whites.push({ side: "below", block: block.dataset.researchBlock, white: next.getBoundingClientRect().top + strutAbove - xHeight - own.bottom });

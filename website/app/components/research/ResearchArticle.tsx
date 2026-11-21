@@ -452,7 +452,7 @@ export function ResearchArticle({ project, active, returnPath, returnLabel, titl
     if (block.type === "equation") {
       const table = renderResearchDisplayTable(block.tex);
       if (table) return <ResearchMathTable key={index} table={table} title={mathTableTitle(project.slug, parseResearchDisplayTable(block.tex)!)} id={block.id ?? anchors.get(index)} attributes={marker} />;
-      return <div {...marker} id={block.id ?? anchors.get(index)} className={mathStyles.equation} key={index} tabIndex={0} role="region" aria-label="Mathematical equation"><ResearchMath tex={block.tex} display /></div>;
+      return <div {...marker} id={block.id ?? anchors.get(index)} className={mathStyles.equation} key={index}><ResearchMath tex={block.tex} display /></div>;
     }
     if (block.type === "figure") {
       const caption = <FigureCaption inlines={link(block.inlines, index)} />;

@@ -296,7 +296,17 @@ display, or the rows of the one `gathered` environment it is, or of an `aligned`
 environment flush at its rows' start, and parts it at `\qquad`, `\quad`, `\enspace`, a
 control space or a run of thin spaces before a part that holds a relation of its own and
 does not qualify the one before. Each row names its slice of the TeX in `data-stack-row`;
-one assistive expression carries the whole display. A manuscript update that adds or
+one assistive expression carries the whole display. The same rule names the parts a row
+may part into where it would otherwise scroll: the qualifier that closes it and the
+connecting word that opens it (`parts`; `researchDisplayStackRows` adds a display on one
+line whose qualifier may part); each part names its slice in `data-part` and carries the
+manuscript's space before it (`--join`), and `MathFit` parts a row (`data-row-parted`)
+only after the forms that keep it whole fail. A displayed equation's expression stands in
+a box of its own (`data-equation-scroll`, the keyboard region), and its number after it:
+the formula's line wraps the number beneath where it has no room beside the expression,
+at the drop the renderer computes (`--number-drop`), and `MathFit` sets it beside a
+stack's last line where that line leaves room (`data-number-last`) and marks a display
+that still scrolls (`data-scrolls`), which shows its fade. A manuscript update that adds or
 splits such a display updates the counts in `tests/display-stacks.test.mjs` with it; a
 qualifier the rule reads as a formula, or a formula it reads as a qualifier, is fixed in
 the rule, never in the manuscript.
@@ -370,10 +380,14 @@ table's zoom control, the row labels of words of a scrolling table in view, ever
 of values aligned on its decimal point (an interval on one line, or on two where its
 table breaks it), every row that presents a display showing its number, every inline
 formula of the text and tables on its line's baseline and unclipped, every displayed
-equation to one starting axis, every equation number to the column's right edge, the
-fade of every scrolling display over ink at rest, every display row to one formula, and
-the rows of a stacked display to one axis, a line of mathematics apart, with the number
-on the last row's baseline. It reports
+equation to one starting axis, every equation number to the column's right edge, no
+equation number on a line with an expression that scrolls or within 8px of ink beside
+it, a number beneath its display only where it has no room beside it and then one line
+of mathematics below the last row, the fade of every scrolling display over ink at rest
+and past the expression at the scroll's end, every display row to one formula, and the
+rows of a stacked display to one axis, a line of mathematics apart, with the number on
+the last row's baseline, a parted row's qualifier a `\qquad` in, a row parted only where it
+would otherwise scroll, and the parts of a whole row a manuscript space apart. It reports
 geometry and failure screenshots in `website/test-results/figure-layout/`. CI installs
 Chromium and requires these checks to pass before publishing.
 

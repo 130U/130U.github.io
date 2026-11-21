@@ -364,9 +364,11 @@ for (const expected of PROJECTS) {
       const numericSpans = [...container.matchAll(/<span\b([^>]*\bdata-research-number\b[^>]*)>([\s\S]*?)<\/span>/giu)];
       assert.equal((container.match(/<math\b/giu) ?? []).length, 1, "Every formula retains exactly one assistive MathML expression");
       assert.equal(numericSpans.length, number ? 1 : 0, "Only complete inline numeric literals may use the prose-number presentation");
-      const rows = (container.match(/\bdata-stack-row=/gu) ?? []).length;
-      assert.equal((container.match(/data-research-svg=/gu) ?? []).length, number ? 0 : stacked[index] ? rows : 1, "Numeric prose must not duplicate SVG; every other expression retains SVG, a stacked display one for each row");
-      if (stacked[index]) assert.equal((container.match(/data-research-svg="row"/gu) ?? []).length, rows, "A stacked display draws its rows and nothing else");
+      // A stacked display draws each row once, or each part of a row that may part.
+      const count = (pattern) => (container.match(pattern) ?? []).length;
+      const rows = count(/\bdata-stack-row=/gu) - count(/\bdata-row-parts=/gu) + count(/\bdata-row-part=/gu);
+      assert.equal(count(/data-research-svg=/gu), number ? 0 : stacked[index] ? rows : 1, "Numeric prose must not duplicate SVG; every other expression retains SVG, a stacked display one for each row or part");
+      if (stacked[index]) assert.equal(count(/data-research-svg="row"/gu), rows, "A stacked display draws its rows and nothing else");
       if (number) {
         const [, attributes, markup] = numericSpans[0];
         assert.equal(attr(attributes, "aria-hidden"), "true", "Visible numeric text must not duplicate accessible math");

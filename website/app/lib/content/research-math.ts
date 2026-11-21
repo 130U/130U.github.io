@@ -529,19 +529,50 @@ export function renderResearchDisplayTable(tex: string): ResearchDisplayTableMar
   return result;
 }
 
+/** A part of a row that takes a line of its own where the row would otherwise scroll: the
+ * connecting word that opens the row ("where it equals", "so that"), the formula, or the
+ * qualifier that closes it ("(0<p<1)", "for x<y", "\ell=P,Q"). Each is a slice of the display's
+ * TeX; the space of the manuscript between two parts belongs to neither. */
+export type ResearchDisplayRowPart = Readonly<{ kind: "word" | "formula" | "qualifier"; start: number; end: number }>;
 /** A row of a display set as rows: its TeX, the slice of the display's TeX from `start` to `end`;
- * the space a row break of the manuscript asks for above it beyond one line of mathematics; and,
- * for a constraint after the first, the connecting word and space it hangs under ("s.t." and its
- * quad), so the constraints of a problem start on one line. */
-export type ResearchDisplayRow = Readonly<{ tex: string; start: number; end: number; extraEm?: number; hang?: string }>;
+ * the space a row break of the manuscript asks for above it beyond one line of mathematics; for a
+ * constraint after the first, the connecting word and space it hangs under ("s.t." and its quad),
+ * so the constraints of a problem start on one line; and, for a row that may part, its parts. */
+export type ResearchDisplayRow = Readonly<{
+  tex: string; start: number; end: number; extraEm?: number; hang?: string; parts?: readonly ResearchDisplayRowPart[];
+}>;
+/** A part of a row as drawn: its drawing, from its own slice of the TeX; the space of the
+ * manuscript before it where the row stands whole (`joinEm`, from the end of the part before to
+ * its own start, so the parts stand exactly where the whole row's drawing sets them); and, where
+ * the row parts, the space above it (`spaceEm`, as between rows). */
+export type ResearchDisplayStackPart = ResearchMathMarkup & Readonly<{
+  kind: ResearchDisplayRowPart["kind"]; start: number; end: number; joinEm: number; spaceEm: number;
+}>;
+export type ResearchDisplayStackRow = ResearchMathMarkup & Readonly<{
+  start: number;
+  end: number;
+  /** The space above the row in ems of the math size: none above the first row; above a later
+   * one, one line of mathematics less what the two lines fill of their struts. `spaceEm` holds
+   * where both rows stand whole; the others where the row above parts, this row parts, or both. */
+  spaceEm: number;
+  spaceAfterPartedEm?: number;
+  partedSpaceEm?: number;
+  partedSpaceAfterPartedEm?: number;
+  /** The parts of a row that may part; the drawing (`svg`) of such a row is never drawn. */
+  parts?: readonly ResearchDisplayStackPart[];
+  /** The width, in ems of the math size, of the connecting word a hung constraint stands behind. */
+  hangEm?: number;
+}>;
 export type ResearchDisplayStackMarkup = Readonly<{
-  /** Each row's drawing, from its own slice of the TeX, in display style, and the space above it
-   * in ems of the math size: none above the first row; above a later one, one line of mathematics
-   * less what the two drawings fill of their struts. */
-  rows: ReadonlyArray<ResearchMathMarkup & Readonly<{ start: number; end: number; spaceEm: number }>>;
+  rows: readonly ResearchDisplayStackRow[];
   /** The whole display's assistive expression and the original TeX, and its equation number. */
   mathml: string;
   number?: string;
+  /** Where the equation number takes a line of its own beneath the display, the space between
+   * the display's box and the number's line (researchNumberDropEm), where the last row stands
+   * whole and where it parts. */
+  numberDropEm: number;
+  numberDropPartedEm?: number;
 }>;
 
 type DisplayToken = Readonly<{ text: string; start: number; end: number; top: boolean }>;
@@ -679,15 +710,22 @@ function qualifies(part: string, row: string, constraints: boolean) {
  * after a space does), and does not qualify the row.
  */
 function separates(before: string, after: string, row: string, constraints: boolean) {
-  const previous = significant(displayTokens(before)).filter((token) => token.top);
   const next = significant(displayTokens(after));
-  if (!previous.length || !next.length) return false;
-  const last = previous.at(-1)!.text;
-  if (RELATIONS.has(last) || OPERATORS.has(last)) return false;
-  if (last === "{" && TEXT_COMMANDS.has(previous.at(-2)?.text ?? "")) return false;
+  if (!completes(before) || !next.length) return false;
+  const last = significant(displayTokens(before)).filter((token) => token.top).at(-1)!.text;
   if (RELATIONS.has(next[0].text) || (OPERATORS.has(next[0].text) && next[0].text !== "-" && !PUNCTUATION.has(last))) return false;
   if (!next.some((token) => token.top && RELATIONS.has(token.text))) return false;
   return !qualifies(after, row, constraints);
+}
+
+/** Whether a part of a display closes what it states: it does not end on a relation, an operator
+ * or a word that leads into what follows. */
+function completes(part: string) {
+  const previous = significant(displayTokens(part)).filter((token) => token.top);
+  if (!previous.length) return false;
+  const last = previous.at(-1)!.text;
+  if (RELATIONS.has(last) || OPERATORS.has(last)) return false;
+  return !(last === "{" && TEXT_COMMANDS.has(previous.at(-2)?.text ?? ""));
 }
 
 type DisplayLine = Readonly<{ start: number; end: number; extraEm: number }>;
@@ -740,7 +778,7 @@ function displayLines(tex: string, from: number, to: number): DisplayLine[] | un
 function lineJoins(tex: string, line: DisplayLine) {
   const tokens = displayTokens(tex, line.start, line.end);
   const blank = (token: DisplayToken | undefined) => token !== undefined && token.top && (SPACE.test(token.text) || !token.text.trim());
-  const joins: Array<{ start: number; end: number; word?: string; wordStart?: number }> = [];
+  const joins: Array<{ start: number; end: number; word?: string; wordStart?: number; wordEnd?: number }> = [];
   for (let index = 0; index < tokens.length; index += 1) {
     if (!blank(tokens[index]) || !tokens[index].text.trim()) continue;
     let end = index;
@@ -761,7 +799,7 @@ function lineJoins(tex: string, line: DisplayLine) {
       let next = close + 1;
       while (blank(tokens[next])) next += 1;
       if (tokens.slice(close + 1, next).some((token) => QUAD.test(token.text))) {
-        joins.push({ start: tokens[index].start, end: tokens[next - 1].end, word: tex.slice(tokens[end + 2].end, tokens[close].start).trim(), wordStart: word.start });
+        joins.push({ start: tokens[index].start, end: tokens[next - 1].end, word: tex.slice(tokens[end + 2].end, tokens[close].start).trim(), wordStart: word.start, wordEnd: tokens[close].end });
         index = next - 1;
         continue;
       }
@@ -770,6 +808,91 @@ function lineJoins(tex: string, line: DisplayLine) {
     index = end;
   }
   return joins;
+}
+
+const CONNECTIVES = new Set(["\\iff", "\\Leftrightarrow", "\\Longleftrightarrow", "\\implies", "\\Rightarrow", "\\Longrightarrow"]);
+
+/** Whether a qualifier closes its row and states nothing after it: no connective of logic stands
+ * at its outer level, and no relation follows its opening word, as in "\theta_A>\theta_B for every
+ * grader \iff \bar\alpha<…", where the qualifier belongs to a statement that goes on. */
+function closesAlone(qualifier: string) {
+  const tokens = significant(displayTokens(qualifier));
+  if (tokens.some((token) => token.top && CONNECTIVES.has(token.text))) return false;
+  if (!TEXT_COMMANDS.has(tokens[0]?.text ?? "")) return true;
+  // The first token after the word's group.
+  let depth = 0;
+  let next = 1;
+  for (; next < tokens.length; next += 1) {
+    if (tokens[next].text === "{") depth += 1;
+    else if (tokens[next].text === "}" && --depth === 0) break;
+  }
+  const following = tokens[next + 1];
+  return !(following?.top && RELATIONS.has(following.text));
+}
+
+type DisplayRows = Readonly<{ rows: readonly ResearchDisplayRow[]; lines: number }>;
+
+/** A display's rows, parted at the spaces of the manuscript that set two formulas side by side,
+ * each with the parts it may part into; or its lines as they stand. */
+function displayRows(tex: string): DisplayRows | undefined {
+  const number = EQUATION_NUMBER.exec(tex);
+  const lines = displayLines(tex, 0, number ? number.index : tex.length);
+  if (!lines?.length) return undefined;
+  const rows: ResearchDisplayRow[] = [];
+  const trimmed = (start: number, end: number) => {
+    const text = tex.slice(start, end);
+    const lead = text.length - text.trimStart().length;
+    return { start: start + lead, end: start + lead + text.trim().length };
+  };
+  const push = (start: number, end: number, extraEm: number, hang: string | undefined, parts: ResearchDisplayRowPart[]) => {
+    const slice = trimmed(start, end);
+    rows.push(Object.freeze({
+      tex: tex.slice(slice.start, slice.end), ...slice, ...(extraEm ? { extraEm } : {}), ...(hang ? { hang } : {}),
+      ...(parts.length > 1 ? { parts: Object.freeze(parts.map((part) => Object.freeze({ kind: part.kind, ...trimmed(part.start, part.end) }))) } : {}),
+    }));
+  };
+  for (const line of lines) {
+    const joins = lineJoins(tex, line);
+    const parts = [line.start, ...joins.map((join) => join.end)].map((start, index) => ({ start, end: index < joins.length ? joins[index].start : line.end }));
+    let rowStart = line.start;
+    let extraEm = line.extraEm;
+    // After "s.t." each constraint is a row, hung under the first.
+    let constraints: string | undefined;
+    let hang: string | undefined;
+    // The connecting word that opens the row, where its formula starts, and the part its qualifier opens on.
+    let word: ResearchDisplayRowPart | undefined;
+    let formulaStart = line.start;
+    let qualifier: number | undefined;
+    const close = (end: number) => {
+      const own: ResearchDisplayRowPart[] = word ? [word] : [];
+      if (qualifier !== undefined && closesAlone(tex.slice(parts[qualifier].start, end))) {
+        own.push({ kind: "formula", start: formulaStart, end: parts[qualifier - 1].end }, { kind: "qualifier", start: parts[qualifier].start, end });
+      } else own.push({ kind: "formula", start: formulaStart, end });
+      push(rowStart, end, extraEm, hang, own);
+    };
+    joins.forEach((join, index) => {
+      const before = tex.slice(parts[index].start, parts[index].end);
+      const after = tex.slice(parts[index + 1].start, parts[index + 1].end);
+      const row = tex.slice(rowStart, parts[index].end);
+      const connects = join.word !== undefined && row.trim() !== "" && after.trim() !== "";
+      if (!connects && !separates(before, after, row, constraints !== undefined)) {
+        // A qualifier that closes a complete formula may take a line of its own.
+        if (qualifier === undefined && completes(row) && qualifies(after, row, constraints !== undefined)) qualifier = index + 1;
+        return;
+      }
+      close(parts[index].end);
+      extraEm = 0;
+      rowStart = connects ? join.wordStart! : parts[index + 1].start;
+      // A connecting word may take a line of its own above its formula; "s.t." keeps its constraint.
+      word = connects && !SUCH_THAT.test(join.word!) ? { kind: "word", start: join.wordStart!, end: join.wordEnd! } : undefined;
+      formulaStart = word ? parts[index + 1].start : rowStart;
+      qualifier = undefined;
+      if (connects && SUCH_THAT.test(join.word!)) constraints = tex.slice(join.wordStart, parts[index + 1].start).trim();
+      hang = connects ? undefined : constraints;
+    });
+    close(line.end);
+  }
+  return { rows: Object.freeze(rows), lines: lines.length };
 }
 
 /**
@@ -781,46 +904,53 @@ function lineJoins(tex: string, line: DisplayLine) {
  * row it introduces. A single relation continued after a space (\Longleftrightarrow, \le) is one
  * formula. A display that is one gathered environment, or one aligned environment flush at its
  * rows' start, is read row by row. Undefined for a display of one formula a row.
+ *
+ * A row may part further, and only where it would otherwise scroll: its qualifier, and the
+ * connecting word that opens it (not "s.t.", whose constraints hang under it), each take a line of
+ * their own (`parts`).
  */
 export function researchDisplayRows(tex: string): readonly ResearchDisplayRow[] | undefined {
-  const number = EQUATION_NUMBER.exec(tex);
-  const lines = displayLines(tex, 0, number ? number.index : tex.length);
-  if (!lines?.length) return undefined;
-  const rows: ResearchDisplayRow[] = [];
-  const push = (start: number, end: number, extraEm: number, hang?: string) => {
-    const text = tex.slice(start, end);
-    const lead = text.length - text.trimStart().length;
-    rows.push(Object.freeze({ tex: text.trim(), start: start + lead, end: start + lead + text.trim().length, ...(extraEm ? { extraEm } : {}), ...(hang ? { hang } : {}) }));
-  };
-  for (const line of lines) {
-    const joins = lineJoins(tex, line);
-    const parts = [line.start, ...joins.map((join) => join.end)].map((start, index) => ({ start, end: index < joins.length ? joins[index].start : line.end }));
-    let rowStart = line.start;
-    let extraEm = line.extraEm;
-    // After "s.t." each constraint is a row, hung under the first.
-    let constraints: string | undefined;
-    let hang: string | undefined;
-    joins.forEach((join, index) => {
-      const before = tex.slice(parts[index].start, parts[index].end);
-      const after = tex.slice(parts[index + 1].start, parts[index + 1].end);
-      const row = tex.slice(rowStart, parts[index].end);
-      const connects = join.word !== undefined && row.trim() !== "" && after.trim() !== "";
-      if (!connects && !separates(before, after, row, constraints !== undefined)) return;
-      push(rowStart, parts[index].end, extraEm, hang);
-      extraEm = 0;
-      rowStart = connects ? join.wordStart! : parts[index + 1].start;
-      if (connects && SUCH_THAT.test(join.word!)) constraints = tex.slice(join.wordStart, parts[index + 1].start).trim();
-      hang = connects ? undefined : constraints;
-    });
-    push(rowStart, line.end, extraEm, hang);
-  }
-  return rows.length > lines.length ? Object.freeze(rows) : undefined;
+  const found = displayRows(tex);
+  return found && found.rows.length > found.lines ? found.rows : undefined;
+}
+
+/**
+ * The rows a display is drawn as: the rows of a display set as rows (researchDisplayRows), or the
+ * one row of a display on one line whose qualifier may take a line of its own. Undefined for a
+ * display drawn whole.
+ */
+export function researchDisplayStackRows(tex: string): readonly ResearchDisplayRow[] | undefined {
+  const found = displayRows(tex);
+  if (!found) return undefined;
+  if (found.rows.length > found.lines) return found.rows;
+  return found.lines === 1 && found.rows[0].parts ? found.rows : undefined;
 }
 
 /** A row of displayed mathematics keeps at least TeX's strut: 0.75em above its baseline and 0.25em below. */
 const STRUT_HEIGHT_EM = 0.75;
 const STRUT_DEPTH_EM = 0.25;
 const stackCache = new Map<string, ResearchDisplayStackMarkup | null>();
+
+// A drawing's extent above and below its baseline, without its canvas gutter.
+const heightOf = (markup: ResearchMathMarkup) => markup.heightEm - markup.depthEm - RESEARCH_MATH_GUTTER_EM;
+const depthOf = (markup: ResearchMathMarkup) => markup.depthEm - RESEARCH_MATH_GUTTER_EM;
+
+/** The space between two lines of mathematics, in ems of the math size: one line of mathematics
+ * less what the line above fills of its strut's depth and the line below of its height. */
+function lineSpace(above: ResearchMathMarkup, below: ResearchMathMarkup, extraEm = 0) {
+  return Number((RESEARCH_MATH_ROW_SPACING_EM + extraEm + Math.max(0, STRUT_HEIGHT_EM - heightOf(below)) + Math.max(0, STRUT_DEPTH_EM - depthOf(above))).toFixed(4));
+}
+
+/**
+ * Where an equation number takes a line of its own beneath its display, the line is one more row
+ * of the display: its baseline stands one line of mathematics below the last row's, the row's
+ * depth or a strut's, whichever is deeper, apart. The number's line keeps a strut's height above
+ * its baseline (ResearchMath.module.css), so the space between the drawing's box, which keeps a
+ * gutter below the ink, and the number's line is this, in ems of the math size.
+ */
+export function researchNumberDropEm(last: ResearchMathMarkup) {
+  return Number((Math.max(0, STRUT_DEPTH_EM - depthOf(last)) + RESEARCH_MATH_ROW_SPACING_EM - RESEARCH_MATH_GUTTER_EM).toFixed(4));
+}
 
 /**
  * A display of formulas set side by side, set as rows: each row drawn in display style from its
@@ -830,32 +960,69 @@ const stackCache = new Map<string, ResearchDisplayStackMarkup | null>();
  * rows, plus the space a row break asks for; the stack keeps its drawings' own extent above the
  * first row and below the last, as a display on one line does. One assistive expression carries
  * the whole display and its TeX.
+ *
+ * A row that may part is drawn as its parts, each from its own slice of the TeX, set side by side
+ * at the manuscript's spaces exactly where the whole row's drawing sets them; where the row would
+ * otherwise scroll, each part takes a line of its own, as a row does.
  */
 export function renderResearchDisplayStack(tex: string): ResearchDisplayStackMarkup | undefined {
   const cached = stackCache.get(tex);
   if (cached !== undefined) return cached ?? undefined;
-  const rows = researchDisplayRows(tex);
+  const rows = researchDisplayStackRows(tex);
   if (!rows) {
     stackCache.set(tex, null);
     return undefined;
   }
   const whole = renderResearchMath(tex, true);
-  // A constraint after the first hangs under it, behind the invisible width of "s.t." and its space.
-  const drawn = rows.map((row, index) => renderResearchMath(`${row.hang ? `\\hphantom{${row.hang}}` : ""}${index < rows.length - 1 ? row.tex.replace(/,$/u, "{,}") : row.tex}`, true));
-  // A drawing's extent above and below its baseline, without its canvas gutter.
-  const height = (markup: ResearchMathMarkup) => markup.heightEm - markup.depthEm - RESEARCH_MATH_GUTTER_EM;
-  const depth = (markup: ResearchMathMarkup) => markup.depthEm - RESEARCH_MATH_GUTTER_EM;
-  const result = Object.freeze({
-    rows: drawn.map((markup, index) => Object.freeze({
-      ...markup,
-      svg: markup.svg.replace('data-research-svg="display"', 'data-research-svg="row"'),
-      start: rows[index].start,
-      end: rows[index].end,
-      spaceEm: index === 0 ? 0 : Number((RESEARCH_MATH_ROW_SPACING_EM + (rows[index].extraEm ?? 0)
-        + Math.max(0, STRUT_HEIGHT_EM - height(markup)) + Math.max(0, STRUT_DEPTH_EM - depth(drawn[index - 1]))).toFixed(4)),
+  // A slice of a row as drawn: a constraint after the first hangs under it, behind the invisible
+  // width of "s.t." and its space; a comma that closes a row, or a part, before the display's end
+  // stays with it.
+  const draw = (row: ResearchDisplayRow, start: number, end: number, closes: boolean) => {
+    const slice = tex.slice(start, end);
+    return renderResearchMath(`${row.hang && start === row.start ? `\\hphantom{${row.hang}}` : ""}${closes ? slice : slice.replace(/,$/u, "{,}")}`, true);
+  };
+  const drawn = rows.map((row, index) => draw(row, row.start, row.end, index === rows.length - 1));
+  const parted = rows.map((row, index) => {
+    if (!row.parts) return undefined;
+    const closes = (at: number) => index === rows.length - 1 && at === row.parts!.length - 1;
+    // The row from its start through each part, as the whole row's drawing sets it.
+    const through = row.parts.map((part, at) => draw(row, row.start, part.end, closes(at)));
+    return row.parts.map((part, at) => {
+      const markup = draw(row, part.start, part.end, closes(at));
+      // The space before a part is what the row through it takes beyond the row through the part
+      // before it and the part itself; each drawing keeps a gutter on either side.
+      const joinEm = at === 0 ? 0 : through[at].widthEm - through[at - 1].widthEm - markup.widthEm + 2 * RESEARCH_MATH_GUTTER_EM;
+      return { ...markup, svg: markup.svg.replace('data-research-svg="display"', 'data-research-svg="row"'), kind: part.kind, start: part.start, end: part.end, joinEm: Number(joinEm.toFixed(4)) };
+    });
+  });
+  // The first and the last line of a row, as it stands whole or parts.
+  const first = (index: number, parts: boolean): ResearchMathMarkup => parts ? parted[index]![0] : drawn[index];
+  const last = (index: number, parts: boolean): ResearchMathMarkup => parts ? parted[index]!.at(-1)! : drawn[index];
+  const result: ResearchDisplayStackMarkup = Object.freeze({
+    rows: Object.freeze(drawn.map((markup, index) => {
+      const row = rows[index];
+      const parts = parted[index];
+      const above = index > 0 && parted[index - 1] !== undefined;
+      const space = (afterParted: boolean, own: boolean) => index === 0 ? 0 : lineSpace(last(index - 1, afterParted), first(index, own), row.extraEm ?? 0);
+      return Object.freeze({
+        ...markup,
+        svg: markup.svg.replace('data-research-svg="display"', 'data-research-svg="row"'),
+        start: row.start,
+        end: row.end,
+        spaceEm: space(false, false),
+        ...(above ? { spaceAfterPartedEm: space(true, false) } : {}),
+        ...(parts ? { partedSpaceEm: space(false, true) } : {}),
+        ...(parts && above ? { partedSpaceAfterPartedEm: space(true, true) } : {}),
+        ...(parts ? {
+          parts: Object.freeze(parts.map((part, at) => Object.freeze({ ...part, spaceEm: at === 0 ? 0 : lineSpace(parts[at - 1], part) }))),
+        } : {}),
+        ...(parts && row.hang ? { hangEm: Number((renderResearchMath(`\\hphantom{${row.hang}}`, true).widthEm - 2 * RESEARCH_MATH_GUTTER_EM).toFixed(4)) } : {}),
+      });
     })),
     mathml: whole.mathml,
     ...(whole.number ? { number: whole.number } : {}),
+    numberDropEm: researchNumberDropEm(drawn.at(-1)!),
+    ...(parted.at(-1) ? { numberDropPartedEm: researchNumberDropEm(parted.at(-1)!.at(-1)!) } : {}),
   });
   stackCache.set(tex, result);
   return result;
