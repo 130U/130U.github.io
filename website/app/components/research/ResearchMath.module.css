@@ -93,7 +93,9 @@
    scaling with it so the ink keeps its axis. An equation wider than that
    scrolls in place at its natural size: the edge keeps its position, and the
    expression fades out over an em beneath it, half an em short of the number,
-   while more remains. */
+   while more remains. The edge's paper reaches 2px past the column's edge, so no
+   sliver of the passing expression shows beside the number where the edge and
+   the column's clip fall on different device pixels. */
 .display {
   display: flex;
   align-items: baseline;
@@ -111,7 +113,7 @@
   inset-inline-end: 0;
   flex: 1 0 auto;
   padding-inline-start: 1.5em;
-  border-image: linear-gradient(to right, transparent, var(--page) 1em) fill 0 // 100vmax 0;
+  border-image: linear-gradient(to right, transparent, var(--page) 1em) fill 0 // 100vmax 2px 100vmax 0;
   font-family: var(--font-prose);
   font-size: var(--type-reading);
   font-variant-numeric: lining-nums proportional-nums;
@@ -121,6 +123,14 @@
 
 .equation[data-fit] .equationEdge {
   padding-inline-start: 1em;
+}
+
+/* At rest, where the edge falls in a blank of the expression, its fade reaches
+   back over the last ink before it (MathFit sets --fade-reach), so the
+   expression visibly fades while more remains. Once scrolled, the fade keeps
+   its em beneath the edge. */
+.equation:not([data-scrolled]) .equationEdge {
+  border-image-outset: 100vmax 2px 100vmax var(--fade-reach, 0px);
 }
 
 .assistive {

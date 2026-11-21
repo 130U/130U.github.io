@@ -345,9 +345,44 @@ function inspectManuscript() {
     }
     return tops.length;
   };
+  // A heading takes at most two lines, or three over a column of short values.
   for (const heading of document.querySelectorAll("[data-research-table] thead th")) {
     const lines = lineCount(heading);
-    if (lines > 2) issues.push({ kind: "table-heading-over-two-lines", heading: heading.textContent.trim(), lines });
+    if (lines > (heading.hasAttribute("data-stack") ? 3 : 2)) issues.push({ kind: "table-heading-over-two-lines", heading: heading.textContent.trim(), lines });
+  }
+  // A table whose row labels are words keeps them in view while it scrolls, unless a word of
+  // theirs is wider than half its room.
+  for (const region of document.querySelectorAll('[data-table-frame] [role="region"]')) {
+    const table = region.querySelector("table");
+    const label = table.rows[0].cells[0];
+    if (table.hasAttribute("data-label") && region.scrollWidth > region.clientWidth + 1 && !region.hasAttribute("data-pinned") && label.offsetWidth <= 0.5 * region.clientWidth) {
+      issues.push({ kind: "table-labels-not-pinned", table: region.closest("[data-table-frame]").querySelector("[data-table-title]")?.textContent.trim().slice(0, 60), label: table.rows[0].cells[0].offsetWidth, room: region.clientWidth });
+    }
+  }
+  // An inline formula stands on its line's baseline in prose, lists, captions and table cells
+  // alike: its drawing's own baseline, the canvas's y = 0, meets the line's within half a pixel.
+  // The line's baseline is the foot of an empty inline-block set beside the formula, before it
+  // or, where a line breaks there, after it.
+  for (const formula of document.querySelectorAll('[data-research-formula="inline"]')) {
+    const svg = formula.querySelector(":scope > span > svg[data-research-svg]");
+    if (!svg || formula.closest("[data-figure], [data-logic-diagram], [hidden]") || !formula.getClientRects().length) continue;
+    const box = svg.getBoundingClientRect();
+    const view = svg.viewBox.baseVal;
+    const baseline = box.top - view.y * (box.height / view.height);
+    const offsets = ["before", "after"].map(side => {
+      const probe = document.createElement("span");
+      probe.style.cssText = "display:inline-block;width:0;height:0";
+      formula[side](probe);
+      const line = probe.getBoundingClientRect().bottom;
+      probe.remove();
+      return baseline - line;
+    });
+    const offset = offsets.reduce((best, value) => (Math.abs(value) < Math.abs(best) ? value : best));
+    if (Math.abs(offset) > 0.5) issues.push({ kind: "inline-formula-off-baseline", tex: formula.querySelector("annotation")?.textContent.slice(0, 40), offset: +offset.toFixed(2), in: formula.closest("td, th")?.tagName.toLowerCase() ?? "text" });
+    // The formula clips at its box, as a scroll container does; its ink lies within it.
+    const ink = svg.querySelector("g")?.getBoundingClientRect();
+    const own = formula.getBoundingClientRect();
+    if (ink && (ink.top < own.top - 0.5 || ink.bottom > own.bottom + 0.5)) issues.push({ kind: "inline-formula-ink-clipped", tex: formula.querySelector("annotation")?.textContent.slice(0, 40), ink: [ink.top, ink.bottom], box: [own.top, own.bottom] });
   }
   for (const frame of document.querySelectorAll("[data-table-frame]")) {
     const control = frame.querySelector("[data-table-zoom]");
@@ -396,6 +431,20 @@ function inspectManuscript() {
     equation.scrollLeft = 0;
   }
   if (edges.length && Math.max(...edges) - Math.min(...edges) > 0.5) issues.push({ kind: "equations-start-on-different-axes", starts: [...starts] });
+  // At rest, a display that scrolls visibly fades: the first three quarters of an em of the
+  // fade beneath its number's edge, reaching back as far as MathFit sets it, lie over ink.
+  for (const equation of document.querySelectorAll('[data-research-block-type="equation"]')) {
+    if (equation.scrollWidth <= equation.clientWidth + 1) continue;
+    equation.scrollLeft = 0;
+    const edge = equation.querySelector("[data-equation-edge]");
+    const em = parseFloat(getComputedStyle(edge).fontSize);
+    const start = edge.getBoundingClientRect().left - (parseFloat(getComputedStyle(equation).getPropertyValue("--fade-reach")) || 0);
+    const inked = [...equation.querySelectorAll("svg path, svg rect, svg line")].some(node => {
+      const ink = node.getBoundingClientRect();
+      return (ink.width || ink.height) && ink.left < start + 0.75 * em && ink.right > start;
+    });
+    if (!inked) issues.push({ kind: "display-fades-over-blank", number: equation.querySelector("[data-equation-number]")?.textContent || equation.id });
+  }
 
   // A display that is one array is set as a formal table: every cell of a row
   // sits on the row's baseline, rows stand at least one line of mathematics

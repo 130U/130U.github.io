@@ -304,7 +304,10 @@ before its number closes from 1.5em to 1em, and the expression is set smaller, t
 less than nine tenths of its size, so a fitted display still stands above the reading
 size. An equation wider than that scrolls in place at its natural size: its number keeps
 its position, and the expression fades beneath that edge while more remains, as a wide
-table fades at its right edge. An inline formula a little wider than a phone's line is
+table fades at its right edge. At rest the fade always lies over ink: where the edge falls
+in a blank between two parts of the expression, the fade reaches back over the last ink
+before it, so a display that continues never looks finished. An inline formula that fits
+its line is no keyboard stop; one that scrolls is. An inline formula a little wider than a phone's line is
 set smaller by the same bound. A page can therefore be read with the paper beside it.
 Plain numbers, including scientific notation and percentages, use the prose face with native
 superscripts while keeping accessible MathML and the original TeX. Mathematical SVG
@@ -451,12 +454,28 @@ their headings keep proportional figures. The hovered row and column take a quie
 and the hovered column's header turns blue; a row or column the table emphasizes carries
 the accent tint. Rows enter once, top to bottom, as a table scrolls into view.
 
-A row of values holds one line. Only a column whose widest cell is a sentence wraps, at
-a 16rem minimum, and headings take at most two lines. A table wider than the reading
-column closes up its columns, by as much as it needs and to no less than an em between
-them, if that makes it fit, and otherwise scrolls at its natural spacing: its row labels
-stay in view when they leave room for the values, and the right edge fades while more
-remains.
+A row of values holds one line. A column whose widest cell is a sentence wraps, at a
+16rem minimum; a column of phrases (cells of two words or more, as a contract's name or
+"75.0% (accepts 1,800 flawed solutions)") holds one line while its table fits, and wraps,
+to about half its widest phrase, in a table with a column of sentences or one that would
+otherwise scroll. A heading takes at most two lines, or three over a column of values, as
+a printed table stacks a long head over a narrow column of figures. In a table with a
+column of sentences, the columns of values keep their content's width and leave the rest
+of the row to the text. A column of row labels that holds numbers aligns right in tabular
+figures, as every column of values does, and an inline formula in a cell stands on the
+cell's baseline, as in prose. A table set as two halves side by side under one repeated
+heading parts them by a second em.
+
+A table wider than the reading column closes up its columns, by as much as it needs and
+to no less than an em between them, if that makes it fit; a table of two halves then
+sets its second half under its first, the same rows in the same order under the one
+heading; then its phrases and row labels wrap and two or more sentence columns share the
+room, to no less than 10rem each, closed up again if need be. A table wider than that
+scrolls at its natural spacing: its row labels, wrapped to no more than 45% of its room
+and 16rem, stay in view whenever they take no more than half of it, and the values pass
+beneath them; several sentence columns keep their shared width where the room holds the
+labels and two of them, and otherwise each fills the room beside the labels, at most
+16rem, so one whole column reads at a time; the right edge fades while more remains.
 
 A display that is one array, and nothing else but its equation number, is a table of
 mathematics and stays a display: it ends its sentence, keeps the display's size, white
@@ -482,22 +501,30 @@ carries the whole display and its TeX. A table of mathematics that scrolls keeps
 labels in view when they take no more than half of its room, and the values pass beneath
 them in the other half, which holds a column or more of its short expressions.
 
-Every table carries a magnifier in the top-right corner of its frame, on the title's
-first line or on the header band; a table without a title that scrolls would carry its
-headings beneath it, so there the control takes a row of its own above the header.
-Zoom lifts the table from its place to the center of
+Every table and figure carries a magnifier where the stage shows more than the page:
+where it enlarges the table or figure by at least 1.15 times, or sets whole what the
+page scrolls. On a phone, where the stage is barely wider than the column, a figure that
+fits its column, and a table the stage would not set whole, carry none; the magnifier
+never promises what the stage does not do. A table's magnifier stands in the top-right
+corner of its frame, on the title's first line or on the header band; a table without a
+title that scrolls would carry its headings beneath it, so there the control takes a row
+of its own above the header. Zoom lifts the table from its place to the center of
 the window, on a square sheet with the page blurred behind it. The stage sets the
 largest type that keeps every row on one line: 20px, then 18px, then 16px, then closer
-columns, then headings on two lines, and only then does it wrap the sentence columns
-across the full width. The magnifier, the blurred page, and Escape close the stage and
-return focus to the table's own control.
+columns, then headings on two lines, a table of two halves folding only when no step
+holds it side by side; then it wraps the columns of sentences and phrases across the
+full width, at 18px and 16px and, before the table scrolls, at as little as nine tenths
+of the reading size. A table too wide even then scrolls at the reading size with its row
+labels in view, as in the article. The magnifier, the blurred page, and Escape close the
+stage and return focus to the table's own control.
 
-Every figure carries the same magnifier in the top-right corner of its frame, level
-with the first line of its title or axis name; where a label holds that corner at the
-current width, the control takes a row of its own above the figure. Zoom enlarges the
-figure on the same stage as one picture, laid out at its width in the article so every
-label keeps its place: whole within the window up to 1.75 times its size, or, when that
-would enlarge it by less than 1.15 times, at up to 1.5 times its size with the stage
+A figure's magnifier stands in the top-right corner of its frame, level with the first
+line of its title or axis name; where a label holds that corner at the current width,
+the control takes a row of its own above the figure. Zoom enlarges the figure on the
+same stage as one picture, laid out at its width in the article so every label keeps its
+place, or, where a comparison scrolls in the article, at that comparison's scroll width,
+so the stage shows it whole: whole within the window up to 1.75 times its size, or, when
+that would enlarge it by less than 1.15 times, at up to 1.5 times its size with the stage
 scrolling from its top, unless the whole figure fits at nine tenths of that size, where
 it is set whole. A zoomed table a little taller than the window is set smaller, to no
 less than nine tenths of the reading size, and one a little wider closes up its columns,

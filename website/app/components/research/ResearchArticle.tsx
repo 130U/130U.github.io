@@ -34,9 +34,11 @@ function numericCell({ source }: ResearchCell) {
   return NUMERIC_CELL.test(formula ? formula[1].replace(/\s+/gu, "") : value);
 }
 
+// The row labels' column counts as numeric when it holds numbers (strikes, steps,
+// widths), so its figures align as every column of values does.
 export function numericColumns(rows: ResearchCell[][]) {
   const body = rows.slice(1);
-  return rows[0].map((_, column) => column > 0 && body.length > 0
+  return rows[0].map((_, column) => body.length > 0
     && body.every((row) => numericCell(row[column]))
     && body.some((row) => row[column].source.trim() !== "—"));
 }
@@ -69,9 +71,99 @@ export function sentenceColumns(rows: ResearchCell[][]) {
   return rows[0].map((_, column) => body.some((row) => contentWidth(row[column].inlines) > SENTENCE_EM));
 }
 
-// A heading may take two lines beside short values, never more: its column is
-// at least as wide as the longer line of its most even two-line break. Advances
-// of the label face are estimated by glyph class, in ems of the label size.
+/** The words of a cell's text, formulas and numbers aside. */
+function cellWords(inlines: ResearchInline[]): string[] {
+  return inlines.flatMap((inline) => inline.type === "text" || inline.type === "code"
+    ? inline.text.match(/\p{L}{2,}/gu) ?? []
+    : inline.type === "math" || inline.type === "line-break" ? [] : cellWords(inline.inlines));
+}
+
+/**
+ * Columns of phrases: a column that holds values neither as numbers nor as
+ * sentences, but some of whose cells read as two words or more ("Crude oil
+ * call, 1 month ahead", "75.0% (accepts 1,800 flawed solutions)"). Such a
+ * column holds one line while its table fits, and wraps when the table would
+ * otherwise scroll (ZoomStage).
+ */
+export function phraseColumns(rows: ResearchCell[][]) {
+  const numeric = numericColumns(rows);
+  const sentences = sentenceColumns(rows);
+  const body = rows.slice(1);
+  return rows[0].map((_, column) => !numeric[column] && !sentences[column] && body.some((row) => cellWords(row[column].inlines).length >= 2));
+}
+
+// A wrapping phrase keeps lines of a few words: its column folds to about half
+// its widest phrase, to no less than 6em and no more than 10em, and never wider
+// than the phrase itself.
+const WRAP_FLOOR_MIN_EM = 6;
+const WRAP_FLOOR_MAX_EM = 10;
+
+function wrapFloor(rows: ResearchCell[][], column: number) {
+  const widest = Math.max(...rows.slice(1).map((row) => contentWidth(row[column].inlines)));
+  return Math.min(widest, Math.max(widest / 2 + 1, WRAP_FLOOR_MIN_EM), WRAP_FLOOR_MAX_EM);
+}
+
+/**
+ * A heading over a column of values may take three lines, as a printed table
+ * stacks a long head over a narrow column of figures; every other heading takes
+ * at most two.
+ */
+export const stackedHeadings = numericColumns;
+
+/** A table set as two halves side by side under one heading repeated (Strike, Bid, Ask, Width,
+ * Strike, Bid, Ask, Width): the number of columns in a half, or 0. */
+export function tableHalves(rows: ResearchCell[][]) {
+  const heading = rows[0].map((cell) => cell.source.trim());
+  const half = heading.length / 2;
+  return Number.isInteger(half) && half >= 2 && heading.slice(0, half).every((cell, column) => cell && cell === heading[column + half]) ? half : 0;
+}
+
+/**
+ * The classes and properties every cell of a research or legal table takes, from
+ * its rows: numeric columns align right in tabular figures, a column of
+ * sentences wraps, a column of phrases may wrap, and a heading over values may
+ * stack on three lines. In a table with a column of sentences, its phrases
+ * wrap too, and the numeric columns keep their content's width, leaving the
+ * rest of the row to the text. The second of two halves set side by side stands
+ * a second em from the first, and in less room follows it (ZoomStage).
+ */
+export function tableLayout(rows: ResearchCell[][]) {
+  const numeric = numericColumns(rows);
+  const sentences = sentenceColumns(rows);
+  const phrases = phraseColumns(rows);
+  const stacked = stackedHeadings(rows);
+  const halves = tableHalves(rows);
+  const floors = rows[0].map((_, column) => phrases[column] ? wrapFloor(rows, column) : 0);
+  // Sentence columns beyond the row labels share the room left of a label column.
+  const shared = sentences.filter((sentence, column) => sentence && column > 0).length;
+  return {
+    table: {
+      "data-hug": sentences.some(Boolean) ? "" : undefined,
+      "data-wraps": phrases.some(Boolean) || shared >= 2 ? "" : undefined,
+      "data-label": sentences[0] ? "sentence" : phrases[0] ? "phrase" : undefined,
+      "data-sentence-columns": shared >= 2 ? shared : undefined,
+      "data-halves": halves || undefined,
+      style: shared >= 2 ? { "--sentence-columns": shared } as CSSProperties : undefined,
+    },
+    cell(rowIndex: number, column: number) {
+      const head = rowIndex === 0;
+      return {
+        className: [styles.cell, numeric[column] && styles.numeric, sentences[column] && styles.sentence, phrases[column] && styles.phrase].filter(Boolean).join(" "),
+        style: {
+          ...(head ? headingFloor(rows[0][column], stacked[column] ? 3 : 2) : {}),
+          ...(phrases[column] && !head ? { "--wrap-floor": `${floors[column].toFixed(2)}em` } : {}),
+        } as CSSProperties,
+        "data-stack": head && stacked[column] ? "" : undefined,
+        "data-half": halves && column === halves ? "" : undefined,
+      };
+    },
+  };
+}
+
+// A heading may take two lines beside its values, or three over a column of
+// short values, never more: its column is at least as wide as the longest line
+// of its most even break into that many lines. Advances of the label face are
+// estimated by glyph class, in ems of the label size.
 const LABEL_SPACE_EM = 0.27;
 const LABEL_SLACK_EM = 0.25;
 
@@ -119,12 +211,17 @@ function headingWords(inlines: ResearchInline[]) {
   return words;
 }
 
-export function headingFloor(cell: ResearchCell) {
+export function headingFloor(cell: ResearchCell, lines: 2 | 3 = 2) {
   const words = headingWords(cell.inlines);
   const line = (from: number, to: number) => words.slice(from, to).reduce((sum, word) => sum + word, 0) + LABEL_SPACE_EM * Math.max(0, to - from - 1);
-  let floor = line(0, words.length);
-  for (let split = 1; split < words.length; split += 1) floor = Math.min(floor, Math.max(line(0, split), line(split, words.length)));
-  return { "--heading-floor": `${(floor + LABEL_SLACK_EM).toFixed(2)}em` } as CSSProperties;
+  // The narrowest width at which the words from `from` on fill at most `count` lines.
+  const fill = (from: number, count: number): number => {
+    if (count === 1 || words.length - from <= 1) return line(from, words.length);
+    let best = line(from, words.length);
+    for (let split = from + 1; split < words.length; split += 1) best = Math.min(best, Math.max(line(from, split), fill(split, count - 1)));
+    return best;
+  };
+  return { "--heading-floor": `${(fill(0, lines) + LABEL_SLACK_EM).toFixed(2)}em` } as CSSProperties;
 }
 
 // The papers set "Proof." in italic; a manuscript that bolds it reads the same here.
@@ -224,8 +321,7 @@ export function ResearchArticle({ project, active, returnPath, returnLabel, titl
       const caption = <FigureCaption inlines={link(block.inlines, index)} />;
       return <ManuscriptFigure key={index} id={manuscriptFigureFor(project.slug, block.src, project.markdown)} anchor={block.id ?? anchors.get(index)} captionId={`research-figure-${index}-caption`} attributes={marker} caption={caption} />;
     }
-    const numeric = numericColumns(block.rows);
-    const sentences = sentenceColumns(block.rows);
+    const layout = tableLayout(block.rows);
     const emphasis = emphasisFor(project.slug, block.rows[0][0].source);
     const tableRows = block.rows.map((row, rowIndex) => (
       <tr key={rowIndex} data-emphasis={emphasis?.row !== undefined && rowIndex - 1 === emphasis.row ? "" : undefined}>{row.map((cell, cellIndex) => {
@@ -234,8 +330,7 @@ export function ResearchArticle({ project, active, returnPath, returnLabel, titl
           <Cell
             key={cellIndex}
             scope={Cell === "th" ? "col" : undefined}
-            className={[styles.cell, numeric[cellIndex] && styles.numeric, sentences[cellIndex] && styles.sentence].filter(Boolean).join(" ")}
-            style={Cell === "th" ? headingFloor(cell) : undefined}
+            {...layout.cell(rowIndex, cellIndex)}
             data-emphasis={emphasis?.column === cellIndex ? "" : undefined}
           >
             <InlineContent inlines={link(cell.inlines, index)} />
@@ -253,7 +348,7 @@ export function ResearchArticle({ project, active, returnPath, returnLabel, titl
         )}
         <button type="button" className={`${stageStyles.control} ${styles.zoom}`} data-table-zoom aria-label="Zoom in" aria-haspopup="dialog" hidden><ZoomGlyph /></button>
         <div tabIndex={0} role="region" aria-label="Research data table" className={styles.tableRegion}>
-          <table {...marker} id={block.id} className={styles.table} data-research-table>
+          <table {...marker} {...layout.table} id={block.id} className={styles.table} data-research-table>
             <thead>{tableRows[0]}</thead>
             <tbody>{tableRows.slice(1)}</tbody>
           </table>

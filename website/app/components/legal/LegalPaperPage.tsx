@@ -11,7 +11,7 @@ import { placeFigures } from "../../lib/content/article-figures";
 import { ArticleFigure, FigureController } from "../figures";
 import { ZoomStage } from "../research/ZoomStage";
 import { AddressText, KeepNumberJoins } from "../research/ResearchInline";
-import { headingFloor, numericColumns, sentenceColumns } from "../research/ResearchArticle";
+import { tableLayout } from "../research/ResearchArticle";
 import { ZoomGlyph } from "../ZoomGlyph";
 import researchStyles from "../research/ResearchArticle.module.css";
 import stageStyles from "../research/Stage.module.css";
@@ -60,8 +60,7 @@ function RunText({ runs, prefix }: { runs: PaperRun[]; prefix: string }) {
 /** A legal table in the paper tables' frame: the same title, zoom, column fitting and cell classes. */
 function PaperTable({ rows, caption, index }: { rows: NonNullable<LegalPaper["blocks"][number]["rows"]>; caption?: LegalPaper["blocks"][number]["caption"]; index: number }) {
   const cells: ResearchCell[][] = rows.map((row) => row.map(({ text }) => ({ source: text, inlines: [{ type: "text", text }] })));
-  const numeric = numericColumns(cells);
-  const sentences = sentenceColumns(cells);
+  const layout = tableLayout(cells);
   const tableRows = rows.map((row, rowIndex) => (
     <tr key={rowIndex}>{row.map((cell, cellIndex) => {
       const Cell = rowIndex === 0 ? "th" : "td";
@@ -69,8 +68,7 @@ function PaperTable({ rows, caption, index }: { rows: NonNullable<LegalPaper["bl
         <Cell
           key={cellIndex}
           scope={Cell === "th" ? "col" : undefined}
-          className={[researchStyles.cell, numeric[cellIndex] && researchStyles.numeric, sentences[cellIndex] && researchStyles.sentence].filter(Boolean).join(" ")}
-          style={Cell === "th" ? headingFloor(cells[rowIndex][cellIndex]) : undefined}
+          {...layout.cell(rowIndex, cellIndex)}
         >
           <RunText runs={cell.runs} prefix={`table-${index}-${rowIndex}-${cellIndex}`} />
         </Cell>
@@ -82,7 +80,7 @@ function PaperTable({ rows, caption, index }: { rows: NonNullable<LegalPaper["bl
       {caption && <p className={researchStyles.tableTitle} data-table-title><RunText runs={caption.runs} prefix={`caption-${index}`} /></p>}
       <button type="button" className={`${stageStyles.control} ${researchStyles.zoom}`} data-table-zoom aria-label="Zoom in" aria-haspopup="dialog" hidden><ZoomGlyph /></button>
       <div tabIndex={0} role="region" aria-label="Table" className={researchStyles.tableRegion}>
-        <table className={researchStyles.table} data-research-table data-research-block-type="table">
+        <table {...layout.table} className={researchStyles.table} data-research-table data-research-block-type="table">
           <thead>{tableRows[0]}</thead>
           <tbody>{tableRows.slice(1)}</tbody>
         </table>

@@ -21,7 +21,10 @@
   content: "";
 }
 
-.control[hidden] {
+/* The control appears where the stage shows more than the page (ZoomStage):
+   it enlarges by at least 1.15 times, or sets whole what the page scrolls. */
+.control[hidden],
+.control[data-idle] {
   display: none;
 }
 
