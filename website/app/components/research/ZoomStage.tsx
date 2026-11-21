@@ -407,7 +407,7 @@ export function ZoomStage() {
       const table = panel.querySelector("table")!;
       region.addEventListener("scroll", () => paintEdges(region), { passive: true });
       const staged: Staged = { source, panel, scrim: newScrim(), fit: () => fitTable(panel, region, table), closing: false };
-      show(staged, panel.querySelector("[data-table-title]")?.textContent ?? "Research data table");
+      show(staged, panel.querySelector("[data-table-title]")?.textContent ?? region.getAttribute("aria-label") ?? "Research data table");
       region.scrollLeft = sourceRegion.scrollLeft;
       enter(staged);
     };

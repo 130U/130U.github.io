@@ -8,13 +8,15 @@ import { ArticleReadingLayout } from "../article/ArticleReadingLayout";
 import { ExperienceDiagram, ExperienceMetadata, KeyContributions, ProblemAndApproach } from "../experience/ExperienceDetails";
 import type { ShowcaseEntry } from "../../lib/content/experience-showcase";
 import type { ResearchArticleContent, ResearchCell, ResearchInline } from "../../lib/content/research-markdown";
-import { RESEARCH_MATH_GUTTER_EM, renderResearchMath } from "../../lib/content/research-math";
+import { RESEARCH_MATH_GUTTER_EM, parseResearchDisplayTable, renderResearchDisplayTable, renderResearchMath } from "../../lib/content/research-math";
+import { mathTableTitle } from "../../lib/content/math-tables";
 import { buildArticleHeadingMap, buildReferenceTargets, formatArticleHeadings, linkArticleSectionReferences, type ArticleInline } from "../../lib/content/article-headings";
 import { emphasisFor, manuscriptFigureFor, placeFigures } from "../../lib/content/article-figures";
 import { argumentUnit, closesProof } from "../../lib/content/argument-units";
 import { ArticleFigure, FigureCaption, FigureController, ManuscriptFigure } from "../figures";
 import type { ActivePage } from "../../lib/content/site";
 import { ResearchMath } from "./ResearchMath";
+import { ResearchMathTable } from "./ResearchMathTable";
 import { InlineContent } from "./ResearchInline";
 import { ZoomStage } from "./ZoomStage";
 import { MathFit } from "./MathFit";
@@ -284,7 +286,9 @@ export function ResearchArticle({ project, active, returnPath, returnLabel, titl
     project.blocks.map((block) => ({ type: block.type, source: block.source, firstCell: block.type === "table" ? block.rows[0][0].source : undefined })),
     project.markdown,
   );
-  const enhanced = figures.size > 0 || project.blocks.some((block) => block.type === "figure" || block.type === "table");
+  // A display that is one array is a table of mathematics, set as a research table.
+  const framed = (block: ResearchArticleContent["blocks"][number]) => block.type === "table" || (block.type === "equation" && renderResearchDisplayTable(block.tex) !== undefined);
+  const enhanced = figures.size > 0 || project.blocks.some((block) => block.type === "figure" || framed(block));
   const renderedBlocks = project.blocks.map((block, index) => {
     const rendered = renderBlock(block, index);
     const placed = figures.get(index);
@@ -317,6 +321,8 @@ export function ResearchArticle({ project, active, returnPath, returnLabel, titl
       return <Heading {...marker} data-source-number={heading.sourceNumber} id={block.id} tabIndex={-1} key={index}><InlineContent inlines={heading.displayInlines} /></Heading>;
     }
     if (block.type === "equation") {
+      const table = renderResearchDisplayTable(block.tex);
+      if (table) return <ResearchMathTable key={index} table={table} title={mathTableTitle(project.slug, parseResearchDisplayTable(block.tex)!)} id={block.id ?? anchors.get(index)} attributes={marker} />;
       return <div {...marker} id={block.id ?? anchors.get(index)} className={mathStyles.equation} key={index} tabIndex={0} role="region" aria-label="Mathematical equation"><ResearchMath tex={block.tex} display /></div>;
     }
     if (block.type === "figure") {
@@ -385,7 +391,7 @@ export function ResearchArticle({ project, active, returnPath, returnLabel, titl
         </footer>
         {enhanced && <FigureController key={project.slug} />}
         <MathFit key={`${project.slug}-math`} />
-        {(figures.size > 0 || project.blocks.some((block) => block.type === "figure" || block.type === "table")) && <ZoomStage key={`${project.slug}-stage`} />}
+        {enhanced && <ZoomStage key={`${project.slug}-stage`} />}
       </article>
     </SiteShell>
   );

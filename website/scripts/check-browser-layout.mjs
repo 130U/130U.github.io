@@ -686,10 +686,11 @@ function inspectManuscript() {
   }
   const starts = new Map();
   const edges = [];
-  for (const equation of document.querySelectorAll('[data-research-block-type="equation"]')) {
-    // A tabular display keeps the drawing's gutter around its table, and a display set as rows
-    // around its rows, so each is measured as a drawing.
-    const drawing = equation.querySelector("[data-display-table], [data-display-stack], svg[data-research-svg]");
+  // A table of mathematics is set as a research table, and checked as one below; a display
+  // set as rows keeps the drawing's gutter around its rows, so it is measured as a drawing.
+  const displays = '[data-research-block-type="equation"]:not([data-math-table])';
+  for (const equation of document.querySelectorAll(displays)) {
+    const drawing = equation.querySelector("[data-display-stack], svg[data-research-svg]");
     const column = equation.getBoundingClientRect();
     // The ink starts past the drawing's transparent gutter, 0.375em at the drawing's own
     // size, which a fitted equation sets smaller.
@@ -711,7 +712,7 @@ function inspectManuscript() {
   if (edges.length && Math.max(...edges) - Math.min(...edges) > 0.5) issues.push({ kind: "equations-start-on-different-axes", starts: [...starts] });
   // At rest, a display that scrolls visibly fades: the first three quarters of an em of the
   // fade beneath its number's edge, reaching back as far as MathFit sets it, lie over ink.
-  for (const equation of document.querySelectorAll('[data-research-block-type="equation"]')) {
+  for (const equation of document.querySelectorAll(displays)) {
     if (equation.scrollWidth <= equation.clientWidth + 1) continue;
     equation.scrollLeft = 0;
     const edge = equation.querySelector("[data-equation-edge]");
@@ -724,57 +725,82 @@ function inspectManuscript() {
     if (!inked) issues.push({ kind: "display-fades-over-blank", number: equation.querySelector("[data-equation-number]")?.textContent || equation.id });
   }
 
-  // A display that is one array is set as a formal table: every cell of a row
-  // sits on the row's baseline, rows stand at least one line of mathematics
-  // apart, no cell draws a vertical rule, the row that heads the columns stands
-  // over a rule, a numbered table stands its number on the baseline of the row
-  // nearest the math axis, and when it scrolls, row labels that take no more
-  // than half its room stay in view.
-  for (const table of document.querySelectorAll("[data-display-table]")) {
-    const region = table.closest('[data-research-block-type="equation"]');
-    const size = parseFloat(getComputedStyle(table).fontSize);
-    const rows = [...table.children];
-    // Each cell opens with a strut 0.25em deep, so the row's baseline lies 0.25em above its foot.
-    const baselines = rows.map(row => [...row.children].map(cell => cell.firstElementChild.getBoundingClientRect().bottom - 0.25 * size));
-    baselines.forEach((line, index) => {
-      if (Math.max(...line) - Math.min(...line) > 0.5) issues.push({ kind: "display-table-row-off-baseline", row: index, baselines: line });
-      if (index && line[0] - baselines[index - 1][0] < 1.8217 * size - 0.5) issues.push({ kind: "display-table-rows-closer-than-a-line", row: index, pitch: line[0] - baselines[index - 1][0] });
-    });
-    for (const cell of table.querySelectorAll(":scope > * > *")) {
+  // A display that is one array is set as a research table (the research-table
+  // checks above hold it too). Every cell of a row stands on the row's baseline;
+  // no cell draws a vertical rule; a header band stands over its rule; every
+  // cell's mathematics, the header band's included, is set at the table's size,
+  // which is at least the label type's x-height equivalent, and no script is
+  // smaller than half that size, as in a line of prose; the drawing is
+  // decorative beside one assistive expression; a numbered table stands its
+  // number beneath its frame at the column's right edge, in the face of every
+  // equation number; and row labels kept in view stay put as it scrolls.
+  const numberFace = document.querySelector("[data-equation-edge]") && getComputedStyle(document.querySelector("[data-equation-edge]")).fontFamily;
+  for (const block of document.querySelectorAll("[data-math-table]")) {
+    const frame = block.querySelector("[data-table-frame]");
+    const region = frame.querySelector('[role="region"]');
+    const table = region.querySelector("table");
+    const where = frame.querySelector("[data-table-title]")?.textContent.slice(0, 40) ?? block.id;
+    const size = parseFloat(getComputedStyle(table.tBodies[0].rows[0].cells[0]).fontSize);
+    const face = document.createElement("canvas").getContext("2d");
+    const baseline = cell => {
+      const svg = cell.querySelector("svg[data-research-svg]");
+      if (svg) {
+        const box = svg.getBoundingClientRect();
+        const view = svg.viewBox.baseVal;
+        return box.top - view.y * (box.height / view.height);
+      }
       const style = getComputedStyle(cell);
-      if (parseFloat(style.borderLeftWidth) || parseFloat(style.borderRightWidth)) issues.push({ kind: "display-table-vertical-rule" });
+      face.font = `${style.fontWeight} 1000px ${style.fontFamily}`;
+      const range = document.createRange();
+      range.selectNodeContents(cell);
+      const line = [...range.getClientRects()].find(rect => rect.width > 0);
+      return line && line.bottom - face.measureText("x").fontBoundingBoxDescent / 1000 * parseFloat(style.fontSize);
+    };
+    for (const row of table.rows) {
+      const lines = [...row.cells].map(baseline).filter(value => value !== undefined);
+      if (Math.max(...lines) - Math.min(...lines) > 0.5) issues.push({ kind: "math-table-row-off-baseline", table: where, row: row.rowIndex, baselines: lines.map(value => +value.toFixed(2)) });
+      for (const cell of row.cells) {
+        const style = getComputedStyle(cell);
+        if (parseFloat(style.borderLeftWidth) || parseFloat(style.borderRightWidth)) issues.push({ kind: "math-table-vertical-rule", table: where });
+      }
     }
-    const heading = table.querySelector(':scope > [data-rule="header"] > *');
-    if (heading && parseFloat(getComputedStyle(heading).borderBottomWidth) < 1) issues.push({ kind: "display-table-heading-without-rule" });
-    const number = region.querySelector("[data-equation-number]");
-    if (number?.textContent) {
-      const face = document.createElement("canvas").getContext("2d");
-      const style = getComputedStyle(number);
-      face.font = `1000px ${style.fontFamily}`;
+    const head = table.tHead?.rows[0];
+    if (head && [...head.cells].some(cell => parseFloat(getComputedStyle(cell).borderBottomWidth) < 1)) issues.push({ kind: "math-table-header-without-rule", table: where });
+    // The size at which TeX's x-height (0.442em) meets the label type's.
+    let floor = 0;
+    if (head) {
+      const label = getComputedStyle(head.cells[0]);
+      face.font = `${label.fontWeight} 1000px ${label.fontFamily}`;
+      floor = face.measureText("x").actualBoundingBoxAscent / 1000 * parseFloat(label.fontSize) / 0.442;
+    }
+    for (const svg of table.querySelectorAll('svg[data-research-svg="cell"]')) {
+      const math = parseFloat(getComputedStyle(svg.parentElement).fontSize);
+      if (Math.abs(math - size) > 0.05) issues.push({ kind: "math-table-cell-off-the-table-size", table: where, size: math, expected: size });
+      if (svg.closest("thead") && math < floor - 0.05) issues.push({ kind: "math-table-header-math-below-label-x-height", table: where, size: math, floor: +floor.toFixed(2) });
+      for (const glyph of svg.querySelectorAll("path[data-c]")) {
+        const matrix = glyph.getScreenCTM();
+        const glyphSize = Math.hypot(matrix.a, matrix.b) * 1000;
+        if (glyphSize < size / 2 - 0.05) issues.push({ kind: "math-table-script-below-half-the-size", table: where, size: +glyphSize.toFixed(2) });
+      }
+    }
+    if (table.getAttribute("aria-hidden") !== "true" || block.querySelectorAll("math").length !== 1) issues.push({ kind: "math-table-without-one-assistive-expression", table: where });
+    const number = block.querySelector("[data-equation-number]");
+    if (number) {
       const text = document.createRange();
       text.selectNodeContents(number);
-      const baseline = text.getBoundingClientRect().bottom - face.measureText("x").fontBoundingBoxDescent / 1000 * parseFloat(style.fontSize);
-      // TeX centres a table on the math axis, 0.25em above the baseline it is centred for.
-      const box = table.getBoundingClientRect();
-      const centred = (box.top + box.bottom) / 2 + 0.25 * size;
-      const row = baselines.map(line => line[0]).reduce((best, line) => (Math.abs(line - centred) < Math.abs(best - centred) ? line : best));
-      if (Math.abs(row - baseline) > 1) issues.push({ kind: "display-table-number-off-its-row", number: number.textContent, offset: row - baseline });
+      const box = text.getBoundingClientRect();
+      const gap = block.getBoundingClientRect().right - box.right;
+      if (Math.abs(gap) > 1) issues.push({ kind: "math-table-number-off-right-edge", number: number.textContent, gap });
+      if (box.top < frame.getBoundingClientRect().bottom) issues.push({ kind: "math-table-number-not-beneath-frame", number: number.textContent });
+      if (numberFace && getComputedStyle(number).fontFamily !== numberFace) issues.push({ kind: "math-table-number-off-the-number-face", number: number.textContent, face: getComputedStyle(number).fontFamily });
     }
-    const label = rows[0]?.firstElementChild;
-    const scrolls = region.scrollWidth > region.clientWidth + 1;
-    // Labels stay in view when they take no more than half the room, or when the room they leave
-    // beside them, up to the number's edge, holds the ink of a column of values whole.
-    const regionBox = region.getBoundingClientRect();
-    const labelBox = label.getBoundingClientRect();
-    const beside = region.clientWidth - (labelBox.left - regionBox.left + region.scrollLeft) - labelBox.width - region.querySelector("[data-equation-edge]").getBoundingClientRect().width;
-    const narrowest = Math.min(...[...rows[0].children].slice(1).map(cell => cell.getBoundingClientRect().width - parseFloat(getComputedStyle(cell).paddingRight)));
-    if (scrolls && (labelBox.width <= 0.5 * region.clientWidth || narrowest <= beside) && !region.hasAttribute("data-pinned")) issues.push({ kind: "display-table-labels-not-pinned", label: labelBox.width, beside, narrowest });
     if (region.hasAttribute("data-pinned")) {
+      const label = table.rows[0].cells[0];
       const start = label.getBoundingClientRect().left;
       region.scrollLeft = region.scrollWidth;
       const end = label.getBoundingClientRect().left;
       region.scrollLeft = 0;
-      if (Math.abs(end - start) > 0.5) issues.push({ kind: "display-table-labels-leave-view", start, end });
+      if (Math.abs(end - start) > 0.5) issues.push({ kind: "math-table-labels-leave-view", table: where, start, end });
     }
   }
 
@@ -843,11 +869,10 @@ function inspectManuscript() {
     }
     return found.sort((a, b) => a - b).reduce((lines, baseline) => (!lines.length || baseline - lines.at(-1) > 3 ? [...lines, baseline] : lines), []);
   };
-  // A drawing's box less the gutters its canvas keeps around the expression; a
-  // tabular display keeps the same gutter around its table, and a display set as
-  // rows around its rows.
+  // A drawing's box less the gutters its canvas keeps around the expression; a display set
+  // as rows keeps the same gutter around its rows.
   const expression = formula => {
-    const box = formula.querySelector("[data-display-table], [data-display-stack], svg[data-research-svg]").getBoundingClientRect();
+    const box = formula.querySelector("[data-display-stack], svg[data-research-svg]").getBoundingClientRect();
     const gutter = parseFloat(getComputedStyle(formula).getPropertyValue("--math-gutter")) * parseFloat(getComputedStyle(formula).fontSize);
     return { top: box.top + gutter, bottom: box.bottom - gutter };
   };
@@ -868,13 +893,13 @@ function inspectManuscript() {
   // below the upper edge by the strut's height less the x-height. A line that a
   // tall inline expression enlarges keeps the same white space from its edge.
   const whites = [];
-  for (const block of document.querySelectorAll('[data-research-block-type="equation"]')) {
+  for (const block of document.querySelectorAll(displays)) {
     const own = expression(block.querySelector('[data-research-formula="display"]'));
     const previous = block.previousElementSibling;
     const next = block.nextElementSibling;
     if (previous?.matches('p[data-research-block-type="paragraph"]')) {
       whites.push({ side: "above", block: block.dataset.researchBlock, white: own.top - (previous.getBoundingClientRect().bottom - strutBelow + descender) });
-    } else if (previous?.matches('[data-research-block-type="equation"]')) {
+    } else if (previous?.matches(displays)) {
       whites.push({ side: "between", block: block.dataset.researchBlock, white: own.top - expression(previous.querySelector('[data-research-formula="display"]')).bottom });
     }
     if (next?.matches('p[data-research-block-type="paragraph"]')) {

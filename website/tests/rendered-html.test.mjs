@@ -590,7 +590,8 @@ test("About research opens each complete paper through an explicit Read More lin
     assert.equal(openingTags(article, "h1").length, 1);
     const articleHeader = article.match(/<article\b[^>]*>\s*<header\b[^>]*>([\s\S]*?)<\/header>/u)?.[1] ?? "";
     assert.equal(stripMarkup(articleHeader), `${title} GitHub Full Manuscript`, "Selected Research headers contain the title and source links; return navigation belongs in the rail.");
-    assert.equal(openingTags(article, "table").length, tables);
+    // The manuscript's tables, each carrying its block; a table of mathematics is a display.
+    assert.equal(openingTags(article, "table").filter((tag) => attribute(tag, "data-research-block-type") === "table").length, tables);
     assert.deepEqual(openingTags(article, "h2").map((tag) => attribute(tag, "data-source-number")).filter(Boolean), Array.from({ length: sections }, (_, index) => String(index + 1)), `${slug}: every numbered main chapter is rendered once and in order.`);
     assert.match(article, /aria-label="Article contents"/u);
     assert.match(article, /This page includes the complete (?:main text and references|abstract, five main sections)/u);

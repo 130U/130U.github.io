@@ -40,9 +40,10 @@ test("research tables hold each row of values on one line and scroll natively be
 });
 
 test("all research tables retain native table semantics inside named keyboard-accessible scroll regions", async () => {
+  // Counts include the tables of mathematics: the dependence paper's one, the Asian paper's two.
   const routes = [
-    ["critical-dependence-stress-for-diversification-gains-under-fixed-marginals", 0],
-    ["certified-valuation-of-arithmetic-asian-options", 11],
+    ["critical-dependence-stress-for-diversification-gains-under-fixed-marginals", 1],
+    ["certified-valuation-of-arithmetic-asian-options", 13],
     ["certified-joint-pricing-errors-in-rough-heston", 10],
     ["experience/large-scale-domain-expert-feedback-governance-and-adaptive-review", 6],
     ["experience/financial-task-design-and-synthetic-data-engineering", 4],
@@ -60,8 +61,11 @@ test("all research tables retain native table semantics inside named keyboard-ac
       assert.match(region, /\brole="region"/u);
       assert.match(region, /\btabindex="0"/u);
       assert.match(region, /\baria-label="[^"]+"/u);
-      assert.match(table, /\bdata-research-block-type="table"/u);
+      // A manuscript table carries its block; a table of mathematics is the drawing of a display,
+      // whose block holds it beside the one assistive expression that reads the whole display.
+      if (!/\bdata-research-block-type="table"/u.test(table)) assert.match(table, /\bdata-research-table=""[^>]*\baria-hidden="true"/u);
     }
+    assert.equal(regions.filter(([, , table]) => !/\bdata-research-block-type="table"/u.test(table)).length, (html.match(/\bdata-math-table=""/gu) ?? []).length);
     for (const [, header] of html.matchAll(/<th\b([^>]*)>/gu)) assert.match(header, /\bscope="col"/u);
     const controls = [...html.matchAll(/<button\b([^>]*\bdata-table-zoom\b[^>]*)>/gu)];
     assert.equal(controls.length, count, `${route}: every table carries one zoom control.`);
