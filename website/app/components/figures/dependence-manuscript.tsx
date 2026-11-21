@@ -47,7 +47,8 @@ function TailLayerFigure({ manuscript, caption }: ManuscriptFigureProps) {
           <Schematic
             label="A thin layer around the tail surface B = v, of thickness of order epsilon; points of the layer move over distances of order epsilon, so the local transport cost is of order epsilon squared."
             size={[aw, ah]}
-            inset={{ left: 18, bottom: 30 }}
+            inset={{ left: 18 }}
+            className={styles.unmarkedAxis}
             yTitle="Normal loss coordinate $B-v$"
             xTitle="Position along the tail surface"
             art={<>
@@ -148,7 +149,7 @@ function CornerCapacityFigure({ manuscript, caption }: ManuscriptFigureProps) {
             <Mark {...at(0.62, 1.3)} anchor="center" className={styles.omegaLabel}>$\Omega$</Mark>
             <Mark {...at(0.64, 2.16)} anchor="left">$E_\delta$</Mark>
             <Mark {...at(0.76, 0.2)} anchor="left">$R_1$</Mark>
-            <Mark {...at(2.12, 1.4)} anchor="top">$R_2$</Mark>
+            <Mark {...at(2.15, 1.44)} anchor="top-left">$R_2$</Mark>
             <Mark {...at(1.25, 0.97)} anchor="center" className={`${kit.muted} ${styles.diagonal}`}>$x=y$</Mark>
             <Mark left={0} top={0} anchor="right">$y$</Mark>
             <Mark left={100} top={100} anchor="left">$x$</Mark>
@@ -252,7 +253,9 @@ function BudgetEnvelopesFigure({ manuscript, caption }: ManuscriptFigureProps) {
           y={iy}
           height="clamp(170px, 34cqi, 200px)"
           inset={{ top: 10, left: 52, bottom: 34 }}
-          xTicks={[0, 0.01, 0.02].map((at) => ({ at, label: at === 0 ? "0" : at.toFixed(2), edge: at === 0 ? "start" as const : at === 0.02 ? "end" as const : undefined }))}
+          // The green rule at 1/96 is the inset's one vertical line; the 0.01
+          // tick beside it keeps its label without a grid line.
+          xTicks={[0, 0.01, 0.02].map((at) => ({ at, label: at === 0 ? "0" : at.toFixed(2), grid: at !== 0.01, edge: at === 0 ? "start" as const : at === 0.02 ? "end" as const : undefined }))}
           yTicks={[-0.31, -0.29, -0.27].map((at) => ({ at, label: signed(at, 2) }))}
           curves={<>
             <path className={styles.rangeFill} data-fill="" d={path([...insetUpper, ...[...insetLower].reverse()], ix, iy, true)} />
@@ -416,7 +419,9 @@ function FlowSharesFigure({ manuscript, caption }: ManuscriptFigureProps) {
                   <line data-axis="" x1={0} y1={side} x2={side} y2={side} />
                 </svg>
                 {columnIndex === 0 && [0, 1, 2].map((tick) => <span key={tick} className={styles.shareTickY} style={{ top: `${pct(Y(tick), side)}%` }}>{tick}</span>)}
-                {rowIndex === rows.length - 1 && [0, 1, 2].map((tick) => <span key={tick} className={styles.shareTickX} style={{ left: `${pct(X(tick), side)}%` } as CSSProperties}>{tick}</span>)}
+                {/* The panels share one scale, so only the first labels its 0:
+                    a 2 never stands beside the next panel's 0. */}
+                {rowIndex === rows.length - 1 && [0, 1, 2].filter((tick) => tick > 0 || columnIndex === 0).map((tick) => <span key={tick} className={styles.shareTickX} style={{ left: `${pct(X(tick), side)}%` } as CSSProperties}>{tick}</span>)}
                 {columnIndex === 0 && rowIndex === 0 && <span className={styles.shareAxisY}><Tx>$y$</Tx></span>}
                 {columnIndex === columns.length - 1 && rowIndex === rows.length - 1 && <span className={styles.shareAxisX}><Tx>$x$</Tx></span>}
               </span>

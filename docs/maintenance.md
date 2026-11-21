@@ -230,12 +230,19 @@ new or edited figure is checked against the same budget. A `Mark` in a plot is k
 out of the grid lines behind it; pass `knockout={false}` for a label set on a tinted
 region or held clear of a rule by its own padding, and place it clear of the lines. The
 browser layout check fails any figure label that a grid line or reference rule crosses
-without a knockout that holds it, any label that does not take its mark's tone, any
-label of a legal figure whose text comes within 4px of a plotted curve (sampled along
-each path), and any numbered step whose wrapped title does not hang beside its number.
-It also loads each page with note references on touch phones and tablets and on a
-desktop, and fails a reference that opens a line or stands more than 3px from the word
-it follows.
+without a knockout that holds it, and any label that does not take its mark's tone. It
+also sets each figure at every column width from 280 to 600px and fails any label whose
+text stands less than 4px from a curve (beyond its half stroke), whose knockout or tag
+holds a point of a curve, or that overlaps a dot, bar, bracket or another label, tick labels closer than
+6px, a view switch whose labels leave their segments, and a legend swatch with no mark
+of its form and colour; place such a label in open space (another anchor, a `wrap`ped
+label, or a `narrowOnly`/`wideOnly` pair where a figure's widths need two places),
+never over the curve. A bar chart's reference rule is named through `BarHeader` with
+`rule`, and its group rows are `BarGroup`s, so the rule runs from its name to the axis;
+a tick whose value a drawn rule stands for takes `grid: false`.
+It also fails any numbered step whose wrapped title does not hang beside its number,
+and loads each page with note references on touch phones and tablets and on a desktop,
+failing a reference that opens a line or stands more than 3px from the word it follows.
 
 `ResearchArticle` serves AI and Selected Research. The Markdown parser supports
 typed prose, emphasis, links, headings, tables, and formulas rather than arbitrary

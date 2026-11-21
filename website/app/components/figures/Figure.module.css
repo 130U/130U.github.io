@@ -61,18 +61,19 @@
 }
 
 /* The title sits alone on its line; a view switch follows it as one segmented
-   control whose segments share the width evenly. */
+   control. Whatever stands first in the head keeps clear of the zoom control
+   in the frame's top-right corner; a switch beneath the title takes the head's
+   full width. */
 .head {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
   gap: 14px;
   margin-bottom: 26px;
-  padding-right: 32px;
 }
 
 .title {
-  max-width: 34rem;
+  max-width: min(34rem, calc(100% - 32px));
   margin: 0;
   color: var(--ink);
   font-size: var(--type-interface);
@@ -81,14 +82,26 @@
   text-wrap: balance;
 }
 
+.keep {
+  white-space: nowrap;
+}
+
+/* Segments share the width evenly, and each keeps at least its label's width,
+   so a label never runs out of its segment. Where the labels cannot share one
+   row, the controller stacks them (data-stack): four in two columns, three in
+   one, two side by side with their labels wrapped. */
 .switch {
   display: inline-grid;
-  grid-auto-columns: minmax(0, 1fr);
+  grid-auto-columns: 1fr;
   grid-auto-flow: column;
   gap: 2px;
   max-width: 100%;
   padding: 2px;
   background: var(--chart-pill);
+}
+
+.switch:first-child {
+  max-width: calc(100% - 32px);
 }
 
 .switch[hidden] {
@@ -99,11 +112,16 @@
   .switch {
     align-self: stretch;
   }
+}
 
-  .switch[data-count="4"] {
-    grid-auto-flow: row;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
+.switch[data-stack] {
+  align-self: stretch;
+  grid-auto-flow: row;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.switch[data-stack][data-count="3"] {
+  grid-template-columns: minmax(0, 1fr);
 }
 
 .switch button {
@@ -122,18 +140,15 @@
   transition: color 160ms ease, background-color 160ms ease;
 }
 
-@container figure (max-width: 24rem) {
-  .switch[data-count="3"] {
-    grid-auto-flow: row;
-    grid-template-columns: minmax(0, 1fr);
+@container figure (max-width: 22rem) {
+  .switch button {
+    padding-inline: 6px;
   }
 }
 
-@container figure (max-width: 520px) {
-  .switch button {
-    white-space: normal;
-    text-wrap: balance;
-  }
+.switch[data-stack] button {
+  white-space: normal;
+  text-wrap: balance;
 }
 
 .switch button[aria-pressed="true"] {
@@ -214,6 +229,12 @@
 .swatch[data-shape="line"] {
   width: 18px;
   height: 2px;
+}
+
+/* A short thick bar, as a level is marked at a plot's edge. */
+.swatch[data-shape="thick"] {
+  width: 14px;
+  height: 4px;
 }
 
 .swatch[data-shape="dash"] {
@@ -453,11 +474,14 @@
   content: "";
 }
 
-/* A positioned label. --ax/--ay pick the anchor point of the label box. */
+/* A positioned label. --ax/--ay pick the anchor point of the label box, moved
+   by whole pixels, so a thin glyph such as a subscript plus is never lost to a
+   fractional raster offset. */
 .mark {
   position: absolute;
   max-width: 13rem;
   transform: translate(var(--ax, 0%), var(--ay, -50%));
+  transform: translate(round(var(--ax, 0%), 1px), round(var(--ay, -50%), 1px));
   font-size: var(--type-label);
   line-height: var(--label-leading);
   white-space: nowrap;
@@ -506,10 +530,12 @@
   color: var(--muted);
 }
 
-/* ---------- Bar rows: label | track | value ---------- */
+/* ---------- Bar rows: label | track | value ----------
+   The label column takes at most 42% of the chart, so the track keeps room
+   for its scale where a figure is a little too wide to stack. */
 .bars {
   display: grid;
-  grid-template-columns: minmax(0, var(--label-w, 11rem)) minmax(0, 1fr) minmax(max-content, var(--value-w, 5.5rem));
+  grid-template-columns: minmax(0, min(var(--label-w, 11rem), 42%)) minmax(0, 1fr) minmax(max-content, var(--value-w, 5.5rem));
   column-gap: 14px;
   font-size: var(--type-label);
   line-height: var(--label-leading);
@@ -526,7 +552,8 @@
   align-items: center;
 }
 
-.row > .lines {
+.row > .lines,
+.row > .rules {
   grid-row: 1;
   grid-column: 2;
   align-self: stretch;
@@ -553,7 +580,8 @@
   grid-column: 2;
 }
 
-.lines {
+.lines,
+.rules {
   position: relative;
   z-index: 0;
   min-height: 1px;
@@ -573,6 +601,14 @@
   z-index: 1;
   align-self: stretch;
   min-height: 36px;
+}
+
+/* A value with a note beneath it takes a taller row, so each pair reads as one
+   and rows part visibly. */
+@container figure (width > 30rem) {
+  .bars:not([data-stack="always"]) > .row:has(> .value > small) > .track {
+    min-height: 50px;
+  }
 }
 
 .seg {
@@ -619,6 +655,8 @@
   content: "";
 }
 
+/* A value stands at the row's end in tabular figures; its note stands beneath
+   it in muted ink, so every value of a column shares one right edge. */
 .value {
   position: relative;
   z-index: 1;
@@ -634,11 +672,13 @@
   font-size: inherit;
 }
 
+/* A rule is a 1px dashed border centred on its value, as a grid line is. */
 .rule {
   position: absolute;
   top: 0;
   bottom: 0;
   width: 0;
+  margin-left: -0.5px;
   border-left: 1px dashed var(--ink);
   pointer-events: none;
 }
@@ -651,13 +691,20 @@
   border-left-color: var(--accent);
 }
 
-.groupLabel {
+.group > .groupLabel {
+  grid-row: 1;
   grid-column: 1 / -1;
+}
+
+.groupLabel {
+  position: relative;
+  z-index: 1;
+  margin: 0;
   padding: 14px 0 2px;
   color: var(--muted);
 }
 
-.groupLabel:first-child {
+.group:first-child > .groupLabel {
   padding-top: 0;
 }
 
@@ -683,6 +730,9 @@
   height: 28px;
 }
 
+/* A head names a column from its start or its end; the name of a rule stands
+   beside the top of its rule, which runs up through the header row to it, or
+   centred over it. */
 .headerMark {
   position: absolute;
   bottom: 6px;
@@ -698,11 +748,28 @@
 }
 
 .headerMark[data-anchor="left"] {
-  transform: translateX(-8px);
+  transform: none;
 }
 
 .headerMark[data-anchor="right"] {
-  transform: translateX(calc(-100% + 8px));
+  transform: translateX(-100%);
+}
+
+.headerMark[data-anchor="left"][data-rule] {
+  transform: translateX(6px);
+}
+
+.headerMark[data-anchor="right"][data-rule] {
+  transform: translateX(calc(-100% - 6px));
+}
+
+.barHeader > .rule {
+  top: 8px;
+}
+
+.barHeader > .rule[data-anchor="center"] {
+  top: auto;
+  height: 4px;
 }
 
 /* Stacked rows: the label and its value share one line above a full-width
@@ -718,7 +785,8 @@
   column-gap: 16px;
 }
 
-.bars[data-stack="always"] > .row > .lines {
+.bars[data-stack="always"] > .row > .lines,
+.bars[data-stack="always"] > .row > .rules {
   grid-row: 1 / 3;
   grid-column: 1 / -1;
 }
@@ -726,7 +794,7 @@
 .bars[data-stack="always"] > .row > .barLabel,
 .bars[data-stack="always"] > .row > .value {
   grid-row: 1;
-  align-self: end;
+  align-self: start;
   padding: 12px 0 2px;
 }
 
@@ -745,7 +813,8 @@
 }
 
 .bars[data-stack="always"] > .row > .barHeader,
-.bars[data-stack="always"] > .row > .axis {
+.bars[data-stack="always"] > .row > .axis,
+.bars[data-stack="always"] > .group > .rules {
   grid-column: 1 / -1;
 }
 
@@ -770,119 +839,86 @@
   padding-left: 8px;
 }
 
-.bars[data-stack="always"] .value small {
-  display: inline;
-  margin-left: 0;
-}
-
+/* A narrow figure stacks every bar chart. Each row sets its label and its
+   value on one line above a full-width track, the value wrapping beneath the
+   label only when the two cannot share it. The grid runs through the bar's own
+   row only; a reference rule runs on through the label and the value, behind
+   their knocked-out text, and through the header to its name. Rows part by
+   more than a label stands from its own bar. */
 @container figure (max-width: 30rem) {
-  .bars[data-stack="narrow"] {
+  .bars[data-stack] {
     grid-template-columns: minmax(0, 1fr);
   }
 
-  .bars[data-stack="narrow"] > .row {
-    grid-template-columns: minmax(0, 1fr) auto;
-    grid-template-rows: auto auto;
+  .bars[data-stack] > .row {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .bars[data-stack] > .row:has(> .barLabel) {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-start;
     column-gap: 16px;
+    padding-top: 16px;
   }
 
-  .bars[data-stack="narrow"] > .row > .lines {
-    grid-row: 1 / 3;
-    grid-column: 1 / -1;
+  .bars[data-stack] > .row > .barLabel {
+    flex: 1 1 auto;
+    padding: 0 0 4px;
+    overflow-wrap: normal;
   }
 
-  .bars[data-stack="narrow"] > .row > .barLabel,
-  .bars[data-stack="narrow"] > .row > .value {
-    grid-row: 1;
-    align-self: end;
-    padding: 12px 0 2px;
+  .bars[data-stack] > .row > .value {
+    flex: 0 1 auto;
+    min-width: 0;
+    margin-left: auto;
+    padding: 0 0 4px;
+    white-space: normal;
+    overflow-wrap: normal;
   }
 
-  .bars[data-stack="narrow"] > .row > .barLabel {
+  .bars[data-stack] > .row > .track {
+    flex: 1 0 100%;
+    order: 1;
+    min-height: 24px;
+  }
+
+  .bars[data-stack] > .row:has(> .barLabel) > .lines {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    height: 24px;
+  }
+
+  .bars[data-stack] > .row:has(> .barLabel) > .rules {
+    position: absolute;
+    inset: 0;
+  }
+
+  .bars[data-stack] > .row > .barHeader,
+  .bars[data-stack] > .row > .axis,
+  .bars[data-stack] > .row > .rules {
     grid-column: 1;
   }
 
-  .bars[data-stack="narrow"] > .row > .value {
-    grid-column: 2;
-  }
-
-  .bars[data-stack="narrow"] > .row > .track {
-    grid-row: 2;
-    grid-column: 1 / -1;
-    min-height: 32px;
-  }
-
-  .bars[data-stack="narrow"] > .row > .barHeader,
-  .bars[data-stack="narrow"] > .row > .axis {
-    grid-column: 1 / -1;
-  }
-
-  .bars[data-stack="narrow"] .labelText,
-  .bars[data-stack="narrow"] .value > * {
+  .bars[data-stack] .labelText,
+  .bars[data-stack] .value > * {
     background: var(--control-surface, var(--page));
     box-decoration-break: clone;
     -webkit-box-decoration-break: clone;
   }
 
-  .bars[data-stack="narrow"] .labelText {
+  .bars[data-stack] .labelText {
     margin-left: -4px;
     padding-right: 8px;
     padding-left: 4px;
   }
 
-  .bars[data-stack="narrow"] .value > * {
+  .bars[data-stack] .value > * {
     margin-right: -4px;
     padding-right: 4px;
     padding-left: 8px;
-  }
-
-  .bars[data-stack="narrow"] .value small {
-    display: inline;
-  }
-}
-
-/* On narrow figures, a long value must not consume the label's entire track.
-   Keep each label, value and bar on its own row, with all numbers intact. */
-@container figure (max-width: 30rem) {
-  .bars[data-stack] > .row:has(> .barLabel) {
-    grid-template-columns: minmax(0, 1fr);
-    grid-template-rows: auto auto auto;
-  }
-
-  /* The grid and the reference rules run through the bar's own row only, so
-     they never cross a label or a value. */
-  .bars[data-stack] > .row > .lines {
-    grid-row: 3;
-  }
-
-  .bars[data-stack] > .row > .barLabel {
-    grid-column: 1;
-    grid-row: 1;
-    padding-bottom: 4px;
-    overflow-wrap: normal;
-  }
-
-  .bars[data-stack] > .row > .value {
-    grid-column: 1;
-    grid-row: 2;
-    min-width: 0;
-    padding: 0 0 2px;
-    white-space: normal;
-    overflow-wrap: normal;
-    text-align: left;
-  }
-
-  .bars[data-stack] > .row > .track {
-    grid-column: 1;
-    grid-row: 3;
-  }
-
-  .bars[data-stack] .value > * {
-    padding-left: 0;
-  }
-
-  .bars[data-stack] .value small {
-    display: block;
   }
 }
 

@@ -10,6 +10,28 @@
   color: var(--supporting-ink);
 }
 
+/* A certificate's name wraps beside its ID, never beneath it. */
+.stageLabel {
+  display: inline-grid;
+  grid-template-columns: auto minmax(0, 1fr);
+}
+
+/* A ring drawn over the dot it nearly meets stays hollow, so both show. */
+.hollow.hollow {
+  background: transparent;
+}
+
+/* A total and its verdict follow the row's name on its line. */
+.ledgerTotal {
+  margin-left: 0.75em;
+  font-variant-numeric: lining-nums tabular-nums;
+}
+
+.ledgerVerdict {
+  margin-left: 0.5em;
+  color: var(--muted);
+}
+
 /* A connector is a hairline drawn as a border, which the browser sets on
    whole device pixels, so every row draws it at one weight. */
 .link {
@@ -61,11 +83,14 @@
 
 /* ---------- Line-chart annotations ---------- */
 
+/* A reference line is a 1px dashed border centred on its value, as a grid
+   line is, so a line drawn at a tick's value reads as one line. */
 .hline {
   position: absolute;
   left: 0;
   right: 0;
   height: 0;
+  margin-top: -0.5px;
   border-top: 1px dashed var(--rule-strong);
   pointer-events: none;
 }
@@ -75,6 +100,7 @@
   top: 0;
   bottom: 0;
   width: 0;
+  margin-left: -0.5px;
   border-left: 1px dashed var(--rule-strong);
   pointer-events: none;
 }
@@ -123,12 +149,12 @@
   min-width: calc(15rem - round(down, 100%, 13.5rem) * 10 / 9);
 }
 
+/* Each head stands centred over its axis, its name above its symbol, so the
+   pair matches at every width. Both share one grid cell, so the taller sets
+   the row, and each wraps before it would meet the other. */
 .rankingHeads {
   display: grid;
-  grid-template-columns: repeat(2, minmax(0, 6.5rem));
-  justify-content: space-between;
-  column-gap: 1rem;
-  margin: 0 max(0px, calc(var(--pr) - 3.25rem)) 0.75rem max(0px, calc(var(--pl) - 3.25rem));
+  margin-bottom: 0.75rem;
   color: var(--muted);
   font-size: var(--type-label);
   line-height: var(--label-leading);
@@ -136,13 +162,30 @@
   overflow-wrap: normal;
 }
 
+.rankingHeads > span {
+  grid-area: 1 / 1;
+  justify-self: start;
+  width: max-content;
+  max-width: calc(100% - var(--pl) - var(--pr) - 1rem);
+  transform: translateX(-50%);
+  text-wrap: balance;
+}
+
+.rankingHeads > span:first-child {
+  margin-left: var(--pl);
+}
+
+.rankingHeads > span:last-child {
+  margin-left: calc(100% - var(--pr));
+}
+
 .numericAnnotation {
   overflow-wrap: normal;
 }
 
 .bridgeCanvas {
-  min-width: 24rem;
-  min-width: calc(24rem - round(down, 100%, 21.6rem) * 10 / 9);
+  min-width: 20rem;
+  min-width: calc(20rem - round(down, 100%, 18rem) * 10 / 9);
 }
 
 /* ---------- Timelines below a chart ---------- */
@@ -161,7 +204,7 @@
   min-width: 0;
   min-height: 28px;
   align-items: center;
-  padding: 3px 6px;
+  padding: 3px 4px;
   border: 1px solid currentColor;
   overflow-wrap: normal;
 }
@@ -185,6 +228,7 @@
 }
 
 .infoBand[data-fill] > span {
+  padding: 0;
   background: transparent;
 }
 
@@ -249,6 +293,11 @@
   height: 5px;
 }
 
+/* The three strata start together at zero: no separator before a mini bar. */
+.mini.mini {
+  box-shadow: none;
+}
+
 .mini[data-row="0"] { top: calc(50% - 7px); }
 
 .mini[data-row="2"] { top: calc(50% + 7px); }
@@ -258,6 +307,7 @@
   top: 0;
   bottom: 0;
   width: 0;
+  margin-left: -0.5px;
   border-left: 1px solid var(--rule-strong);
 }
 
@@ -315,6 +365,12 @@
 .dagField {
   position: absolute;
   inset: 0 24px;
+}
+
+@container figure (max-width: 22rem) {
+  .dagField {
+    inset: 0 4px;
+  }
 }
 
 .dagEdges {
@@ -378,10 +434,19 @@
   color: var(--supporting-ink);
 }
 
+/* The hatch stops short of an unverified node's name. */
+.dagNode[data-state="unverified"] > * {
+  padding: 0 2px;
+  background: var(--control-surface, var(--page));
+}
+
+/* A node keeps its drawn size on touch screens; an invisible margin makes its
+   target 44px. */
 @media (pointer: coarse) {
-  button.dagNode {
-    min-width: 44px;
-    min-height: 44px;
+  button.dagNode::after {
+    position: absolute;
+    inset: -4px;
+    content: "";
   }
 }
 
@@ -1304,7 +1369,17 @@
   align-self: end;
 }
 
+/* A panel whose axis carries no tick labels keeps their row only while a
+   neighbour beside it does, so the axis names of side-by-side panels align. */
+.unmarkedAxis {
+  --pb: 30px;
+}
+
 @container figure (max-width: 540px) {
+  .unmarkedAxis {
+    --pb: 8px;
+  }
+
   .panels {
     grid-template-columns: minmax(0, 1fr);
   }
@@ -1428,9 +1503,23 @@ figure:has([data-figure-title]) .panelTitle {
   font-weight: 500;
 }
 
+/* Every term's swatch takes one 18px slot, so its values hang on the term's
+   first letter whatever the swatch's shape. */
+.bounds dt > .swatch:not([data-shape="line"], [data-shape="dash"]) {
+  margin-inline: 4px;
+}
+
 .bounds dd {
-  margin: 4px 0 0 19px;
+  margin: 4px 0 0 27px;
   color: var(--supporting-ink);
+}
+
+/* The return-capacity swatch is drawn as its triangles are: an ink outline
+   over ink hatching. */
+.bounds .swatch[data-shape="hatch"] {
+  outline: 1px solid var(--ink);
+  outline-offset: -1px;
+  background: repeating-linear-gradient(135deg, rgba(11, 11, 11, 0.6) 0 1px, transparent 1px 3.5px);
 }
 
 .bounds dd[data-tone="accent"] {
@@ -1472,7 +1561,7 @@ figure:has([data-figure-title]) .panelTitle {
 }
 
 .insetTitle {
-  margin: 0 0 4px;
+  margin: 0 0 12px;
   color: var(--ink);
   font-size: var(--type-label);
   font-weight: 500;
@@ -1540,9 +1629,11 @@ span.pathDot {
   pointer-events: none;
 }
 
+/* The axis name stands above the top tick, which is centred on the panel's
+   top edge, and 4px clear of it. */
 .shareAxisY {
   right: calc(100% + 6px);
-  bottom: calc(100% + 4px);
+  bottom: calc(100% + 0.5em * var(--label-leading) + 4px);
 }
 
 .shareAxisX {
@@ -1741,6 +1832,23 @@ span.pathDot {
   text-align: right;
 }
 
+/* Critical Dependence Stress, the budget ruler: where the band is too narrow
+   for the interval, its endpoints stand under the bar's ends in place of the
+   0.2 and 0.3 ticks, and the gain stands left of its rule, at its arrow. */
+.narrowOnly {
+  display: none;
+}
+
+@container figure (max-width: 35rem) {
+  .narrowOnly {
+    display: block;
+  }
+
+  .wideOnly {
+    display: none;
+  }
+}
+
 /* A label that names a line at the plot's right end stops short of the edge
    grid line, which keeps running past it. */
 .endLabel {
@@ -1776,24 +1884,4 @@ span.pathDot {
   .kinkLabel {
     display: none;
   }
-}
-
-/* A legal page resets the margins of its body's paragraphs and sets each
-   paragraph apart from the one before; the paragraphs a figure draws keep the
-   figure's own spacing, so a heading row never touches what it heads and a
-   bracket starts on the step it brackets. */
-.panelTitle.panelTitle {
-  margin: 0 0 14px;
-}
-
-.tierAxis.tierAxis {
-  margin: 0 0 14px;
-}
-
-.ladderHead.ladderHead {
-  margin: 0 0 12px;
-}
-
-.sequenceNote.sequenceNote {
-  margin: 0;
 }

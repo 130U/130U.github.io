@@ -466,24 +466,43 @@ hold context, and `--chart-tint` marks an emphasized row, column, or region.
 Text is HTML at its true size, so labels stay legible at every width; only curves live
 in a stretched SVG layer whose strokes keep their width, and schematics scale uniformly
 so arrows and angles keep their shape. Labels sit in open space beside the marks they
-name and never cover a curve; a label over open paper, with no grid line behind it,
-takes no knockout, so nothing cuts a gap in a curve. A label takes the tone of the mark
-it names: the accent and green as they are, ink beside a sky or mist mark and muted ink
-beside a steel one, since those tones are too light to read as text. A plot's labels are knocked out of the grid
+name and never cover a curve: a label is placed clear of every curve, dot, bar and
+bracket, never painted over one, and its text stands 4px clear of every curve beyond the
+curve's half stroke. The browser layout check fails any label whose text comes nearer,
+whose knockout or tag holds a point of a curve, or that overlaps a mark or another label,
+at the six check widths and at every column width from 280 to 600px. A
+narrow axis hides every other interior tick of an odd count of five or more, never an
+end tick, and tick labels keep 6px apart. A grid line gives way to a reference rule
+drawn at or within five percent of its value, keeping its tick label, so the two never
+read as one doubled line; rules are centred on their values as grid lines are. A label over open paper, with no grid line behind it, takes no knockout, so nothing
+cuts a gap in a curve. A label takes the tone of the mark it names: the accent and
+green as they are, ink beside a sky or mist mark and muted ink beside a steel one, since
+those tones are too light to read as text. A plot's labels are knocked out of the grid
 lines and reference rules behind them, on the surface they sit on (the page, or the
 sheet on the zoom stage) and 3px past the text, so no line runs through a word; a
 stacked bar's label and value reach 4px past their outer letters, so a line at either
 end of the scale stops short of them. A label on a tinted region, or one held clear of a
 rule by its own padding, takes no knockout and stands clear of the lines, and a label
 that names a line at the plot's right end stops short of the edge grid line. The browser
-layout check fails any label a line crosses without a knockout that holds it, any label
-that ignores its tone, and any label of a legal figure within 4px of a curve. Bar rows
-align on one grid; in a narrow figure each label and its value stand above a full-width
-bar, and the grid and reference rules run through the bar's own row only. A comparison
-has a scroll width below which its columns cannot reflow; it takes its column's width
-down to nine tenths of that, and in less room it is set at its scroll width, scrolls
-sideways and fades at its right edge, as a wide table does. Labels that hang beside its last marks keep their room inside it. A title stands
-alone on its line, with any view switch beneath it as one segmented control.
+layout check fails any label a line crosses without a knockout that holds it, and any
+label that ignores its tone, and any legend swatch with no mark of its form and colour.
+Bar rows align on one grid, the label column taking at most 42% of the chart; a value's
+note stands beneath it, so a column's values share one right edge. A reference rule's
+name stands beside the top of its rule, 6px clear of it, and the rule runs up through
+the header and any group rows to it; a column's head starts or ends at its position. In
+a narrow figure each row sets its label and value on one line above a full-width bar,
+the value wrapping beneath only when the two cannot share it, and rows part by more
+than a label stands from its own bar; the grid runs through the bar's own row only, and
+a reference rule runs on through the label and value lines behind their knocked-out
+text. A comparison has a scroll width below which its columns cannot
+reflow; it takes its column's width down to nine tenths of that, and in less room it is
+set at its scroll width, scrolls sideways and fades at its right edge, as a wide table
+does. Labels that hang beside its last marks keep their room inside it. A title stands
+alone on its line, its hyphenated compounds held whole, with any view switch beneath it
+as one segmented control across the head's width: its segments share the width evenly
+while each keeps its label's width, and where the labels cannot share one row they
+stack, four in two columns and three in one. Every view of a figure keeps the tallest
+view's height, so switching views never moves the page.
 
 The legal articles' diagrams draw their connectors and arrowheads in the logic
 diagram's one tone, and their plots hold every label's text at least 4px clear of every
@@ -499,7 +518,8 @@ questions stand on one spine, and each answer that ends the procedure leaves it 
 elbow to its result. A chain of links sets each observation beside its link, and
 beneath it, set in to the title, in a phone's figure.
 
-A segmented switch swaps views, a readout follows the pointer on line charts, marks
+A segmented switch swaps views, a readout follows the pointer on line charts (at the
+plot's top, or at its foot where it would cover a label), marks
 show exact values, the proof-obligation graph accepts a chosen failure, and each figure
 draws in once as it scrolls into view, except under reduced motion. Every plotted value
 restates the manuscript, and conceptual figures carry no numeric scale. Titles,
@@ -540,8 +560,8 @@ touch.
 Research and legal tables share the figures' frame. Every table carries a manuscript
 caption ("Table N." and one sentence), which becomes the title inside the frame; the header is a faintly tinted band in label type over a firm
 rule; rows part on hairlines; numeric columns align right in tabular figures, while
-their headings keep proportional figures. The hovered row and column take a quiet tint
-and the hovered column's header turns blue; a row or column the table emphasizes carries
+their headings keep proportional figures. Under a mouse, the hovered row and column take
+a quiet tint and the hovered column's header turns blue, while a tap lights nothing; a row or column the table emphasizes carries
 the accent tint. Rows enter once, top to bottom, as a table scrolls into view.
 
 A row of values holds one line. Only a column whose widest cell is a sentence wraps, at

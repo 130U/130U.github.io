@@ -99,7 +99,7 @@ function NettingRatioFigure({ manuscript, caption }: ManuscriptFigureProps) {
       manuscript={manuscript}
       legend={[
         ...POSITIONS.map((item) => ({ label: item.name, tone: item.tone, shape: "line" as const })),
-        { label: "Herfindahl levels, at the right edge", tone: "ink", shape: "square" },
+        { label: "Herfindahl levels, at the right edge", tone: "ink", shape: "thick" },
       ]}
     >
       <Plot
@@ -229,7 +229,7 @@ function PassCountsFigure({ manuscript, caption }: ManuscriptFigureProps) {
                 y={y}
                 height={first || last ? "clamp(200px, 40cqi, 230px)" : "clamp(160px, 32cqi, 185px)"}
                 inset={{ top: first ? 42 : 10, bottom: last ? 58 : 30 }}
-                xTicks={[0, 0.25, 0.5, 0.75, 1, 1.25].map((at) => ({ at, label: at === 0 ? "0" : String(at), minor: at === 0.25 || at === 0.75 || at === 1.25, edge: at === 0 ? "start" as const : at === TOLERANCE_LIMIT ? "end" as const : undefined }))}
+                xTicks={[0, 0.25, 0.5, 0.75, 1, 1.25].map((at) => ({ at, label: at === 0 ? "0" : String(at), minor: at === 0.25 || at === 0.75, edge: at === 0 ? "start" as const : undefined }))}
                 yTicks={[0, 7, 14, 21, 28].map((at) => ({ at, label: String(at), solid: at === 0 }))}
                 yTitle={first ? "Positions certified" : undefined}
                 xTitle={last ? "Tolerance, index points" : undefined}

@@ -54,6 +54,14 @@
   line-height: 1;
 }
 
+/* The same number where a legend cites the display. */
+.legendNumber {
+  font-family: var(--font-prose);
+  font-size: var(--type-reading);
+  font-variant-numeric: lining-nums proportional-nums;
+  line-height: 1;
+}
+
 .field {
   position: relative;
   height: 46px;
@@ -145,11 +153,15 @@
   background: linear-gradient(var(--chart-steel), var(--chart-steel)) center / 100% 1px no-repeat;
 }
 
+/* A name wider than its span takes two lines, so the span's ends and line
+   stay in view beside it. */
 .gap > span {
+  max-width: calc(100% - 16px);
   padding-inline: 6px;
   background: var(--control-surface, var(--page));
   color: var(--ink);
-  white-space: nowrap;
+  text-align: center;
+  text-wrap: balance;
 }
 
 /* Labels of the reference rules and column heads, set above the first row. A
@@ -193,9 +205,11 @@
   color: var(--accent);
 }
 
-/* The window that the strip below magnifies, marked on the rows above it. */
+/* The window that the strip below magnifies, marked on the rows above it. It
+   lies over the endpoints' knockouts, so none of them cuts its edges. */
 .lensWindow {
   position: absolute;
+  z-index: 2;
   top: 0;
   bottom: 0;
   background: var(--chart-tint);
