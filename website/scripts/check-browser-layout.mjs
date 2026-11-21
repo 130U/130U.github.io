@@ -318,8 +318,11 @@ function inspectFigure(figure) {
     for (const item of legendItems) {
       const swatch = item.querySelector('[class*="_swatch"]');
       if (!swatch) continue;
-      const shape = swatch.dataset.shape ?? "square";
-      const color = getComputedStyle(swatch).color;
+      // An outlined square swatch keys outlined square marks: an empty cell drawn by
+      // its outline, matched by the outline's colour.
+      const outlined = swatch.hasAttribute("data-ring") && !swatch.dataset.shape;
+      const shape = outlined ? "outlined" : swatch.dataset.shape ?? "square";
+      const color = outlined ? getComputedStyle(swatch).outlineColor : getComputedStyle(swatch).color;
       const stroked = shapes => svgShapes.some(element => element.matches(shapes) && getComputedStyle(element).stroke === color);
       const dots = selector => html.some(element => classed(element, /_(dot|scenarioDot)$/u) && element.matches(selector) && getComputedStyle(element).color === color);
       const found = {
@@ -331,6 +334,7 @@ function inspectFigure(figure) {
         ring: () => dots("[data-ring], [data-sign='negative']"),
         triangle: () => dots("[data-shape='triangle']"),
         square: () => html.some(element => !classed(element, /_(dot|scenarioDot)$/u) && getComputedStyle(element).backgroundColor === color) || dots("[data-shape='square']") || svgShapes.some(element => getComputedStyle(element).fill === color),
+        outlined: () => html.some(element => element.matches("[data-ring]") && !classed(element, /_(dot|scenarioDot)$/u) && getComputedStyle(element).outlineStyle !== "none" && getComputedStyle(element).outlineColor === color),
         hatch: () => html.some(element => element.matches("[data-hatch], [data-state='unverified']")) || svgShapes.some(element => /url\(/u.test(getComputedStyle(element).fill)),
         box: () => html.some(element => element.matches("[data-state='verified'], [data-ring]") && !classed(element, /_dot$/u)),
         tint: () => svgShapes.some(element => element.matches("[data-fill]") && classed(element, /_(rangeFill|discrepancyShade)$/u)) || html.some(element => classed(element, /_(budgetBand|criticalBand|lensWindow|layerBand)$/u)),
