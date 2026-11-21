@@ -549,7 +549,9 @@ name what each view shows in one to three words (Precision, Chain, Width Budget,
 z₂), and a legend label names its mark, with any detail after a comma and no colon
 (Node support, 1,025 nodes; Routine, 60%, cost 1). Readouts set a symbol in the
 labels' own notation (qᵢ, mᵢ) and a quantity in the unit its axis names (pp), and a
-label formula stands on one level, a fraction written with a slash.
+label formula stands on one level, a fraction written with a slash. A key sets one
+formula per line, as a display does: two conditions stand as two lines of the entry,
+4px apart, as its other lines are.
 Captions state what the figure shows in the article's own terms. The four manuscript
 figures of each of the three papers are drawn the same way, from the manuscript's
 formulas and its pinned results, with the manuscript's captions below them. A scatter is

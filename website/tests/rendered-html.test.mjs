@@ -717,8 +717,15 @@ test("every Experience organization is a firm or institution, and every page add
     if (entry.categoryId === "03") assert.equal(entry.organization, "Duke Law School");
     const [role] = entry.metadata.position.split(", ");
     assert.doesNotMatch(role, UNIT_WORDS, `Entry ${entry.id}: the role comes first, its unit after the comma`);
+    // A unit the summary names as the one the work was for ("the Agriculture
+    // Research Group's reports") stands in the position.
+    if (["01", "03"].includes(entry.categoryId)) continue;
+    for (const [, unit] of entry.summary.matchAll(/\bthe ((?:[A-Z][\w-]*\s)+(?:Team|Desk|Division|Group|Department))\b/gu)) {
+      assert.ok(entry.metadata.position.endsWith(`, ${unit}`), `Entry ${entry.id}: ${unit} follows the role in Position`);
+    }
   }
   assert.equal(entries.find(({ id }) => id === 12).metadata.position, "Summer Intern, Capital Markets Team");
+  assert.equal(entries.find(({ id }) => id === 15).metadata.position, "Equity Research Intern, Agriculture Research Group");
   // An entry's own page is its organization's name in lowercase words; an AI or
   // legal article keeps its title's words, as its repository and PDF do.
   for (const [id, slug] of EXPERIENCE_DETAIL_SLUGS) {
@@ -763,8 +770,8 @@ test("the ten nonresearch detail routes keep metadata in a labeled record strip"
     assert.match(html, /<h1\b[^>]*\bid="experience-title"/u);
     assert.match(html, /<a class="top-link" href="#experience-title">Back to Top<\/a>/u, "Back to Top shares the footer action's hover and focus");
     const layout = attribute(html.match(/<dl\b([^>]*\bdata-experience-metadata\b[^>]*)>/u)?.[1] ?? "", "data-layout");
-    const expectedLayout = ["/experience/citic-securities/", "/experience/ey-parthenon/", "/experience/saif-partners/"].includes(route) ? "row"
-      : ["/experience/hubble-network/", "/experience/independent-stem-olympiad-training-practice/", "/experience/the-high-school-attached-to-hunan-normal-university/"].includes(route) ? "long" : "pairs";
+    const expectedLayout = ["/experience/ey-parthenon/", "/experience/saif-partners/"].includes(route) ? "row"
+      : ["/experience/citic-securities/", "/experience/hubble-network/", "/experience/independent-stem-olympiad-training-practice/", "/experience/the-high-school-attached-to-hunan-normal-university/"].includes(route) ? "long" : "pairs";
     assert.equal(layout, expectedLayout, `${route}: only entries whose values fit one row of the strip set four across, and only a long value stacks a narrow strip`);
     assert.equal(canonicalUrl(html), `${SITE_ORIGIN}${route}`);
     const main = html.match(/<main\b[^>]*>([\s\S]*?)<\/main>/u)?.[1] ?? "";

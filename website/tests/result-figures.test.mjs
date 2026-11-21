@@ -214,8 +214,9 @@ test("a key-result figure names its marks where they lie and keeps a short capti
 
 // Figure copy in one form on every article: a view is named in title case in one
 // to three words, a legend label names its mark without a colon, a label
-// formula stands on one level, and a readout or tip writes a symbol in the
-// labels' notation and a quantity in its axis's unit.
+// formula stands on one level and a label or key line holds one formula, and
+// a readout or tip writes a symbol in the labels' notation and a quantity in
+// its axis's unit.
 const ARTICLE_PAGES = [
   "critical-dependence-stress-for-diversification-gains-under-fixed-marginals",
   "certified-valuation-of-arithmetic-asian-options",
@@ -247,7 +248,9 @@ test("figure switches, legends, label formulas and readouts follow one form", as
   }
   assert.ok(switches >= 15, "Every article's view switches are read");
   for (const file of ["ai-research", "selected-research", "asian-manuscript", "rough-manuscript", "dependence-manuscript", "legal-research"]) {
-    assert.doesNotMatch(await read(`app/components/figures/${file}.tsx`), /\\[dt]?frac\b/u, `${file}: a label formula stands on one level`);
+    const source = await read(`app/components/figures/${file}.tsx`);
+    assert.doesNotMatch(source, /\\[dt]?frac\b/u, `${file}: a label formula stands on one level`);
+    assert.doesNotMatch(source, /\\q?quad\b/u, `${file}: a label or key holds one formula per line`);
   }
   const html = await read("out/experience/large-scale-domain-expert-feedback-governance-and-adaptive-review/index.html");
   const moment = JSON.parse(decode(/data-figure="residual-moment"[\s\S]*?data-crosshair="([^"]+)"/u.exec(html)[1]));
