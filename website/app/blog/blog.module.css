@@ -185,10 +185,68 @@
 }
 
 .media {
+  position: relative;
   overflow-x: auto;
   overscroll-behavior-x: contain;
   scrollbar-width: thin;
   scrollbar-color: var(--rule-strong) transparent;
+}
+
+/* A figure opens its full-resolution file; from tablets, with JavaScript, the
+   whole image opens it on the zoom stage instead. */
+.full {
+  display: block;
+  cursor: zoom-in;
+}
+
+.full:focus-visible {
+  outline-offset: -2px;
+}
+
+/* The zoom control covers the image, so the image itself is the target; its
+   magnifier stands in the top-right corner on a square of paper, shown on
+   hover and focus where a pointer can hover and always on touch. */
+.media .zoom {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  width: auto;
+  height: auto;
+  padding: 8px;
+  place-items: start end;
+  background: transparent;
+}
+
+.media .zoom::before {
+  display: none;
+}
+
+.media .zoom svg {
+  box-sizing: content-box;
+  padding: 7px;
+  border: 1px solid var(--frame);
+  background: var(--page);
+  transition: opacity 180ms var(--ease-out), transform 120ms var(--ease-out);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .media .zoom:hover {
+    background: transparent;
+  }
+
+  .media .zoom:not(:hover, :focus-visible) svg {
+    opacity: 0;
+  }
+
+  [data-zoomed] .media .zoom svg {
+    opacity: 1;
+  }
+}
+
+@media (width < 768px) {
+  .media .zoom {
+    display: none;
+  }
 }
 
 .media img {
@@ -303,7 +361,8 @@
 @media (prefers-reduced-motion: reduce) {
   .work,
   .workAction,
-  .workAction svg {
+  .workAction svg,
+  .media .zoom svg {
     transition: none;
   }
 }

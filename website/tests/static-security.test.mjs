@@ -52,9 +52,10 @@ test("static policies are deterministic and normalize browser line endings", () 
 });
 
 test("the architecture uses local fonts without inline event permissions", () => {
-  const document = '<html><head><meta name="generator" content="archify 2"></head><body></body></html>';
+  const document = '<html><head></head><body><script id="archify-i18n-data" type="application/json">{}</script></body></html>';
   const secured = secureStaticHtml(document);
   assert.ok(secured.includes("script-src-attr 'none'"));
+  assert.ok(secured.includes("img-src 'self' data: blob:"), "The viewer draws its control icons and exports from data and blob URLs.");
   assert.ok(secured.includes("font-src 'self'"));
   assert.doesNotMatch(secured, /fonts\.googleapis|fonts\.gstatic|'unsafe-hashes'/u);
 });

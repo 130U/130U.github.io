@@ -166,7 +166,8 @@ detail-page, and post footers repeat it beside Back to Top, in one footer: a hai
 then both actions on one centered 44px row, the return link underlined and Back to Top
 plain. On articles and posts the footer spans the reading column. The destination is the
 originating section or entry, so the link works after opening a page directly. The 404
-page offers Return Home with the same arrow. Parent links have 44px targets; coarse
+page, on the index guides, offers Return Home with the same arrow, standing off its
+sentence by the room the title keeps above that sentence. Parent links have 44px targets; coarse
 pointers also receive 44px primary navigation and standalone link targets.
 
 ### Section directory
@@ -190,8 +191,11 @@ the prose.
 
 ### About
 
-About opens with the name beside the clarinet hero; phones and portrait tablets stack
-the name above the instrument. The name and the institutions Duke and Sequoia use Inter;
+About opens with the name beside the clarinet hero; phones and portrait tablets up to
+1100px, the 13-inch iPad included, stack the name above the instrument, and a tall
+portrait tablet gives the instrument the height the name leaves, so the composition
+fills the first screen. From 768px the frame's side lines run the hero's full height
+and meet the column guides below it. Duke and Sequoia stand at the reading size. The name and the institutions Duke and Sequoia use Inter;
 the roles Alumnus and Fellow use Source Serif 4. The two-line "Thinking Mathematically /
 Working in AI" introduction is an H2 at the title size, its second line in the muted
 tone, with the biography below on the same edge within the measure. Links inside the
@@ -206,7 +210,8 @@ Experience and Coursework set theirs above the section headings. Selected Resear
 lists three manuscripts in one ledger, each with its title, complete summary, and a
 Read More link; titles stay outside the link and summaries keep selected bold. Education
 names Duke University once above both degree records; degree names use the interface
-size at weight 500 on axis B, with compact notes and a dashed hairline between records.
+size at weight 500 on axis B, with compact notes and a dashed hairline between records;
+from 1200px the first degree name stands on the baseline of Duke University beside it.
 Read More beneath them opens Coursework, and the `#coursework` anchor marks that
 entrance. Email, GitHub, and X share one frame with dashed dividers, in three columns
 above 540px and stacked at 540px and below.
@@ -221,8 +226,9 @@ standfirst: directly under the heading, on the same edge, in the reading face an
 supporting ink, with a visually hidden heading that labels the aside.
 
 Coursework presents 49 courses in four subject sections, each a framed list at the
-reading size: three columns from 1200px and two from 768px, divided by dashed column
-rules. Courses keep their official wording and order.
+reading size: three columns from 1200px and two from 768px, divided by the site's
+dashed hairline (4px on, 4px off) drawn on the middle of each column gap. Courses keep
+their official wording and order.
 
 ### Detail pages
 
@@ -351,7 +357,11 @@ work's name in the item-title role, its one-line description in muted serif, and
 Now. The band deepens on hover and View Now turns blue. Section headings use the heading
 role at weight 400. An epigraph hangs off the dashed spine in italic serif with its
 source in the label role. Figures sit in a faint frame at the column's width with a
-caption in supporting ink; a panorama, at least two and a half times as wide as it is
+caption in supporting ink. An image opens its full-resolution file, so it reads at full
+size without JavaScript and can be pinched on a phone; from 768px the whole image is
+the zoom control of the stage article figures use, its magnifier shown on a square of
+paper in the corner on hover and focus, and always on touch, and the stage enlarges it
+as one picture with its caption as the stage's name. A panorama, at least two and a half times as wide as it is
 tall, keeps a legible height on phones: it takes the column's width down to 576px and,
 in a narrower column, is set 640px wide and scrolls sideways.
 
@@ -606,4 +616,20 @@ shared tokens in `app/globals.css`, focused CSS Modules for local surfaces, and 
 HTML, and match the existing type, measure, and spacing before adding a new pattern. The
 [architecture viewer](../architecture/) is a technical reference drawn in the site's
 palette: paper, ink and hairlines, square corners, one theme, no bullets before titles,
-and the site's Return Home link above its title.
+and the site's Return Home link above its title. Its drawing is read at its own size:
+node titles at the label role and every other label at 11px or more, so a drawing
+wider than its stage scrolls sideways from its first stage and the semantic radar shows
+the whole system. Present and Export stand on the title's row, the three notes share
+one frame divided by dashed hairlines, and the site footer closes the page.
+
+## Print
+
+A printed page is the reading column alone on white paper, with book margins
+(`app/print.css`, imported once by the root layout). The skip link, rail or phone
+header, column guides, contents, zoom controls and the footers' return links stay on
+screen. Every mark a figure, table or diagram draws prints whatever the browser's
+background setting (`print-color-adjust: exact`), and figures, tables, diagrams,
+displays and images never split across pages; a heading stays with what follows it.
+Figures print as they stand once drawn in. Nothing scrolls on paper: a display or a
+table formula wider than the page is set smaller to the page's width and keeps its
+number, and comparisons, panoramas and wide tables show whole.
