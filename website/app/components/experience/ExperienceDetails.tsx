@@ -22,6 +22,14 @@ function ValueParts({ text }: { text: string }) {
   ));
 }
 
+/** A position breaks after its comma first: the role and the group or name that
+    follows each hold one line where the line can hold them. */
+function PositionParts({ text }: { text: string }) {
+  return text.split(/(?<=,)\s+/u).map((part, index) => (
+    <Fragment key={index}>{index > 0 && " "}<span className="keep-whole"><KeepNumberJoins text={part} /></span></Fragment>
+  ));
+}
+
 export function ExperienceMetadata({ entry }: { entry: ShowcaseEntry }) {
   const { position, location, dates } = entry.metadata;
   const values = [entry.institution, position, location, dates];
@@ -30,7 +38,7 @@ export function ExperienceMetadata({ entry }: { entry: ShowcaseEntry }) {
     <div className={styles.record}>
       <dl className={styles.metadata} data-experience-metadata data-layout={layout}>
         <div><dt>Organization</dt><dd><KeepNumberJoins text={entry.institution} /></dd></div>
-        <div><dt>Position</dt><dd><KeepNumberJoins text={position} /></dd></div>
+        <div><dt>Position</dt><dd><PositionParts text={position} /></dd></div>
         <div><dt>Location</dt><dd><ValueParts text={location} /></dd></div>
         <div><dt>Dates</dt><dd><ValueParts text={dates} /></dd></div>
       </dl>
