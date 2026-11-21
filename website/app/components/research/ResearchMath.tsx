@@ -45,7 +45,7 @@ export function ResearchMath({ tex, display = false, reserveCh }: { tex: string;
     return (
       <span className={`${styles.formula} ${styles.display}`} data-research-formula="display" style={{ "--math-gutter": `${RESEARCH_MATH_GUTTER_EM}em` } as CSSProperties}>
         <span className={styles.expression}><DisplayTable table={table} /></span>
-        <span className={styles.equationEdge} data-equation-number={table.number ? true : undefined} aria-hidden="true">{table.number && `(${table.number})`}</span>
+        <span className={styles.equationEdge} data-equation-edge="" data-equation-number={table.number ? true : undefined} aria-hidden="true">{table.number && `(${table.number})`}</span>
         <span className={styles.assistive} dangerouslySetInnerHTML={{ __html: table.mathml }} />
       </span>
     );
@@ -56,7 +56,7 @@ export function ResearchMath({ tex, display = false, reserveCh }: { tex: string;
     return (
       <span className={`${styles.formula} ${styles.display}`} data-research-formula="display" style={{ "--math-gutter": `${RESEARCH_MATH_GUTTER_EM}em` } as CSSProperties}>
         <span className={styles.expression} dangerouslySetInnerHTML={{ __html: formula.svg }} />
-        <span className={styles.equationEdge} data-equation-number={formula.number ? true : undefined} aria-hidden="true">{formula.number && `(${formula.number})`}</span>
+        <span className={styles.equationEdge} data-equation-edge="" data-equation-number={formula.number ? true : undefined} aria-hidden="true">{formula.number && `(${formula.number})`}</span>
         {assistive}
       </span>
     );

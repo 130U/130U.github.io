@@ -209,9 +209,13 @@ variance curve and netting ratio in `app/lib/content/rough-heston-curves.ts`, an
 graph (each through `enhanceFigure`, which the zoom stage applies to its enlarged copy
 as well), table column highlighting and the entrances of figures and table rows. The
 research renderer frames every table and sets a directly preceding "**Table N.**"
-caption paragraph inside the frame as its title; `ZoomStage` keeps row labels in view,
-fades the scrolling edge, and opens the zoomed view of any table or figure on one stage
-per page, so a new table or figure needs no registration. `buildReferenceTargets` in
+caption paragraph inside the frame as its title. `tableLayout` in `ResearchArticle.tsx`
+classes every cell of a research or legal table from its rows (values, sentences,
+phrases, stacked headings, two halves), so both renderers set tables alike; `ZoomStage`
+closes up, folds, wraps and pins each table to its room, fades the scrolling edge,
+shows a magnifier only where the stage shows more than the page, and opens the zoomed
+view of any table or figure on one stage per page, so a new table or figure needs no
+registration. `buildReferenceTargets` in
 `app/lib/content/article-headings.ts` anchors the numbered equations, statements, tables
 and figures of the Asian and Rough Heston manuscripts and links their references; a
 re-import that numbers a label twice fails the build.
@@ -322,8 +326,11 @@ visible copy. The static preview binds to `127.0.0.1:8123` by default and serves
 development security policy required by Next.js tooling. `test:browser` uses isolated
 Chromium contexts and the actual static export to check every figure and view at
 six viewport widths, plus enlarged-text and keyboard-scroll regressions, and holds every
-manuscript table heading to two lines clear of its table's zoom control, every displayed
-equation to one starting axis, and every equation number to the column's right edge. It reports
+manuscript table heading to two lines (three over a column of values) clear of its
+table's zoom control, the row labels of words of a scrolling table in view, every inline
+formula of the text and tables on its line's baseline and unclipped, every displayed
+equation to one starting axis, every equation number to the column's right edge, and the
+fade of every scrolling display over ink at rest. It reports
 geometry and failure screenshots in `website/test-results/figure-layout/`. CI installs
 Chromium and requires these checks to pass before publishing.
 

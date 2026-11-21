@@ -33,8 +33,10 @@ test("research tables hold each row of values on one line and scroll natively be
   assert.ok(["auto", "scroll"].includes(region.get("overflow-x")), "Wide tables must remain natively scrollable.");
   assert.notEqual(region.get("scrollbar-width"), "none", "Do not conceal the table's horizontal scroll affordance.");
   const inlineMath = declarations(css, '.cell [data-research-formula="inline"]');
-  assert.equal(inlineMath.get("max-width"), "none", "A cell must accommodate the whole formula before the outer table scrolls.");
-  assert.equal(inlineMath.get("overflow"), "visible", "Do not create a second horizontal scroller inside a table cell.");
+  assert.equal(inlineMath.get("max-width"), "none", "A cell must accommodate the whole formula before the outer table scrolls, so the formula never scrolls inside it.");
+  // An inline-block whose overflow is visible takes its last line's baseline instead of its
+  // lower margin edge, and the formula would stand a canvas gutter above the text.
+  assert.ok(!inlineMath.has("overflow") && !inlineMath.has("overflow-x") && !inlineMath.has("overflow-y"), "A formula in a cell keeps the overflow, and so the baseline, it has in prose.");
 });
 
 test("all research tables retain native table semantics inside named keyboard-accessible scroll regions", async () => {
