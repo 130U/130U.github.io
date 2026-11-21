@@ -383,12 +383,12 @@ takes a line above its formula, on the axis; "s.t." keeps its constraints hung u
 and a qualifier that a statement goes on from (θ_A > θ_B for every admissible grader
 ⟺ …) stays with it. Each part is drawn from its own slice of the TeX and, while the row
 stands whole, set exactly where the whole row's drawing would set it. An equation wider
-than its column even so
-scrolls in place at its natural size in a box of its own, its rows parted where that
-helps and its number beneath it, so no number ever shares a line with an expression that
-scrolls. The expression fades out over an em at the column's edge while more remains, as
-a wide table fades at its right edge, and at the end of the scroll the fade stands past
-it, over blank paper. At rest the fade always lies over ink: where the edge falls
+than its column even so scrolls in place at its natural size in a box of its own, its
+rows parted where that helps; its number stands beside its last row where that row is
+whole and leaves it room, as TeX sets the tag, and beneath the display otherwise, so no
+number ever shares a line with a row that scrolls past the column's edge. The expression
+fades out over an em at the column's edge while more remains, as a wide table fades at
+its right edge, and at the end of the scroll the fade stands past it, over blank paper. At rest the fade always lies over ink: where the edge falls
 in a blank between two parts of the expression, the fade reaches back over the last ink
 before it, so a display that continues never looks finished. An inline formula that fits
 its line is no keyboard stop; one that scrolls is. An inline formula a little wider than a phone's line is

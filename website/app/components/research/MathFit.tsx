@@ -47,15 +47,17 @@ function lastLine(expression: HTMLElement) {
 /**
  * Where the last line of a stacked display leaves room for its number, the number stands beside
  * that line, on its baseline, as TeX sets a tag beside the last line of a display that has room
- * for it there (data-number-last, --number-top). Returns whether it does.
+ * for it there (data-number-last, --number-top), though an earlier row scrolls: the line, at rest,
+ * then ends short of the gap before the number, and so of the fade at the column's edge. Returns
+ * whether it does.
  */
-function besideLastLine(region: HTMLElement, { formula, expression, number }: Pieces) {
+function besideLastLine(region: HTMLElement, { formula, scroll, expression, number }: Pieces) {
   const svg = lastLine(expression).at(-1);
   if (!number || !svg) return false;
   const box = formula.getBoundingClientRect();
   const ink = svg.getBoundingClientRect();
-  // The drawing keeps a gutter past its ink.
-  if (ink.right - parseFloat(getComputedStyle(svg).fontSize) * GUTTER_EM + numberWidth(number) > box.right - SLACK_PX) return false;
+  // At rest, whatever the present scroll; the drawing keeps a gutter past its ink.
+  if (ink.right + scroll.scrollLeft - parseFloat(getComputedStyle(svg).fontSize) * GUTTER_EM + numberWidth(number) > box.right - SLACK_PX) return false;
   const view = svg.viewBox.baseVal;
   const baseline = ink.top - view.y * (ink.height / view.height);
   // The number's box reaches a strut's height above its baseline.
@@ -65,10 +67,11 @@ function besideLastLine(region: HTMLElement, { formula, expression, number }: Pi
 }
 
 /** Whether the display stands whole in its column: its number beside it, or beside its last line,
- * or, if `alone`, on the line beneath it. */
-function stands(region: HTMLElement, found: Pieces, alone: boolean) {
+ * or, if `alone`, on the line beneath it. A display that scrolls (`scrolls`, the last form) stands
+ * only with its number beside a whole last line. */
+function stands(region: HTMLElement, found: Pieces, alone: boolean, scrolls = false) {
   const { scroll, number } = found;
-  if (overflow(scroll) > 0) return false;
+  if (overflow(scroll) > 0) return scrolls && besideLastLine(region, found);
   if (!number || number.getBoundingClientRect().top < scroll.getBoundingClientRect().bottom - 1) return true;
   return besideLastLine(region, found) || alone;
 }
@@ -121,8 +124,8 @@ function partRows({ formula, scroll }: Pieces) {
  * its number on a line of its own beneath it (the formula's line wraps), natural or fitted; then
  * the same with each row that the column cannot hold parted, its qualifier or connecting word on
  * a line of its own. A display that stands whole in none of them scrolls at its natural size, its
- * rows parted where that helps, its number beneath it, and fades at the column's edge
- * (data-scrolls).
+ * rows parted where that helps, and fades at the column's edge (data-scrolls); its number stands
+ * beside its last row where that row is whole and leaves it room, and beneath it otherwise.
  */
 function layDisplay(region: HTMLElement) {
   naturalDisplay(region);
@@ -137,6 +140,7 @@ function layDisplay(region: HTMLElement) {
     if (fitDisplay(region, found, false) || fitDisplay(region, found, true)) return;
   }
   region.setAttribute("data-scrolls", "");
+  stands(region, found, false, true);
 }
 
 // At rest, a display that scrolls fades out over an em at the column's edge. Ink within the
@@ -146,7 +150,9 @@ function layDisplay(region: HTMLElement) {
 const FADE_VISIBLE_EM = 0.5;
 const FADE_PAST_INK_EM = 0.25;
 
-/** How far the fade of a scrolling display reaches back at rest, in pixels, or 0. */
+/** How far the fade of a scrolling display reaches back at rest, in pixels, or 0. A last line
+ * with the number beside it is whole: the fade reaches back no further than a quarter of an em
+ * past its ink. */
 function fadeReach(region: HTMLElement) {
   const scroll = region.querySelector<HTMLElement>("[data-equation-scroll]");
   const fade = scroll?.querySelector<HTMLElement>("[data-equation-fade]");
@@ -154,15 +160,22 @@ function fadeReach(region: HTMLElement) {
   const em = parseFloat(getComputedStyle(fade).fontSize);
   // Positions at rest, whatever the present scroll: the fade holds the box's right side.
   const start = scroll.getBoundingClientRect().left + scroll.clientWidth - fade.getBoundingClientRect().width;
+  const whole = region.hasAttribute("data-number-last") ? lastLine(scroll) : [];
   let last = -Infinity;
-  for (const node of scroll.querySelectorAll("svg path, svg rect, svg line")) {
+  for (const node of scroll.querySelectorAll<SVGGraphicsElement>("svg path, svg rect, svg line")) {
+    if (whole.some((svg) => svg.contains(node))) continue;
     const ink = node.getBoundingClientRect();
     if (!ink.width && !ink.height) continue;
     const [left, right] = [ink.left + scroll.scrollLeft, ink.right + scroll.scrollLeft];
     if (left < start + FADE_VISIBLE_EM * em && right > start) return 0;
     if (right <= start) last = Math.max(last, right);
   }
-  return Number.isFinite(last) ? start - last + (1 - FADE_PAST_INK_EM) * em : 0;
+  let reach = Number.isFinite(last) ? start - last + (1 - FADE_PAST_INK_EM) * em : 0;
+  for (const svg of whole) {
+    const end = svg.getBoundingClientRect().right + scroll.scrollLeft - parseFloat(getComputedStyle(svg).fontSize) * GUTTER_EM;
+    reach = Math.min(reach, start - end - FADE_PAST_INK_EM * em);
+  }
+  return Math.max(0, reach);
 }
 
 function reachFade(region: HTMLElement) {

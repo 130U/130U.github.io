@@ -97,7 +97,8 @@
    baseline one line of mathematics below the last row's (--number-drop, from
    the renderer), as if it were one more row. The expression stands in a box
    of its own, which scrolls only where the expression is wider than the column
-   even alone; the number never shares a line with an expression that scrolls. */
+   even alone; the number never shares a line with a row that the scroll cuts,
+   standing beside a whole last row (MathFit) or beneath. */
 .display {
   display: flex;
   flex-wrap: wrap;

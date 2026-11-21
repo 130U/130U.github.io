@@ -381,8 +381,8 @@ of values aligned on its decimal point (an interval on one line, or on two where
 table breaks it), every row that presents a display showing its number, every inline
 formula of the text and tables on its line's baseline and unclipped, every displayed
 equation to one starting axis, every equation number to the column's right edge, no
-equation number on a line with an expression that scrolls or within 8px of ink beside
-it, a number beneath its display only where it has no room beside it and then one line
+equation number on a line with a row cut by its display's scroll or within 8px of ink
+beside it, a number beneath its display only where it has no room beside it and then one line
 of mathematics below the last row, the fade of every scrolling display over ink at rest
 and past the expression at the scroll's end, every display row to one formula, and the
 rows of a stacked display to one axis, a line of mathematics apart, with the number on

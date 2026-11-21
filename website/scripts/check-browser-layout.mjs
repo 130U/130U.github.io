@@ -819,25 +819,36 @@ function inspectManuscript() {
     const text = textBox(number);
     const gap = column.right - text.right;
     if (Math.abs(gap) > 1) issues.push({ kind: "equation-number-off-right-edge", number: label, gap });
+    box.scrollLeft = 0;
     const scrolls = box.scrollWidth > box.clientWidth + 1;
     const lines = linesOf(formula);
+    const last = lines.at(-1).svgs;
+    const lastRight = Math.max(...last.map(svg => svg.getBoundingClientRect().right - gutterOf(svg)));
+    // In a display set as rows whose earlier row scrolls, the number may stand beside the last
+    // row, as TeX sets a tag beside the last line, where that row is not cut: its ink ends short
+    // of the fade at the column's edge, reaching back as far as MathFit sets it.
+    const fade = equation.querySelector("[data-equation-fade]");
+    const fadeStart = fade && getComputedStyle(fade).display !== "none" ? fade.getBoundingClientRect().left - (parseFloat(getComputedStyle(equation).getPropertyValue("--fade-reach")) || 0) : box.getBoundingClientRect().right;
+    const lastWhole = Boolean(formula.querySelector("[data-display-stack]")) && lastRight <= fadeStart + 0.5;
     // No ink on the number's line comes within 8px of it, and no number shares a line with an
-    // expression that scrolls: it stands beneath, on a line of its own.
+    // expression that scrolls, save a whole last row: it stands beneath, on a line of its own.
+    let besideCut = false;
     for (const line of lines) {
       for (const svg of line.svgs) {
         const ink = svg.getBoundingClientRect();
         if (Math.min(ink.bottom, text.bottom) - Math.max(ink.top, text.top) <= 0.3 * text.height) continue;
-        if (scrolls) issues.push({ kind: "equation-number-beside-cut-expression", number: label, overflow: box.scrollWidth - box.clientWidth });
-        else if (ink.right - gutterOf(svg) > text.left - 8) issues.push({ kind: "equation-number-overlaps-expression", number: label, gap: +(text.left - ink.right + gutterOf(svg)).toFixed(2) });
+        if (scrolls && !(line.svgs === last && lastWhole)) {
+          besideCut = true;
+          issues.push({ kind: "equation-number-beside-cut-expression", number: label, overflow: box.scrollWidth - box.clientWidth });
+        } else if (ink.right - gutterOf(svg) > text.left - 8) issues.push({ kind: "equation-number-overlaps-expression", number: label, gap: +(text.left - ink.right + gutterOf(svg)).toFixed(2) });
       }
     }
     const beneath = text.top >= box.getBoundingClientRect().bottom - 1;
-    if (scrolls && !beneath) issues.push({ kind: "equation-number-not-beneath-scrolling-expression", number: label });
+    if (scrolls && !beneath && !besideCut && !lastWhole) issues.push({ kind: "equation-number-not-beneath-scrolling-expression", number: label });
     if (!beneath) continue;
     // Beneath, the number's line is one more row: its baseline stands one line of mathematics
     // (1.8217em of the mathematics, set as the display is) below the last line's, or the last
     // line's depth and the rest of that line where the line is deep, below any scrollbar.
-    const last = lines.at(-1).svgs;
     const lastBaseline = Math.max(...last.map(baselineOf));
     const size = parseFloat(getComputedStyle(drawing).fontSize);
     const depth = Math.max(...last.map(svg => svg.getBoundingClientRect().bottom - gutterOf(svg))) - lastBaseline;
@@ -846,19 +857,20 @@ function inspectManuscript() {
     const pitch = numberBaseline(number) - lastBaseline;
     if (Math.abs(pitch - expected) > 0.75) issues.push({ kind: "equation-number-beneath-off-the-line", number: label, pitch: +pitch.toFixed(2), expected: +expected.toFixed(2) });
     // A number goes beneath only where no form leaves it room beside: not beside the expression
-    // set as small as the floor allows with the narrower gap, nor beside a stack's last line.
+    // set as small as the floor allows with the narrower gap, nor beside a stack's last line,
+    // whether or not an earlier row scrolls.
+    const em = parseFloat(getComputedStyle(number).fontSize);
     if (!scrolls) {
       const fit = parseFloat(getComputedStyle(equation).getPropertyValue("--equation-fit")) || 1;
       const ink = drawing.getBoundingClientRect().width - 2 * gutterOf(drawing);
       const padding = parseFloat(getComputedStyle(box).paddingLeft);
       const gutter = gutterOf(drawing) / fit;
-      const em = parseFloat(getComputedStyle(number).fontSize);
       const smallest = padding + gutter * (fit - 0.9) + (ink / fit) * 0.9 + 2 * gutter * 0.9 + em + text.width;
       if (smallest < column.width - 1.5) issues.push({ kind: "equation-number-beneath-with-room-beside", number: label, smallest: +smallest.toFixed(1), column: column.width });
-      if (formula.querySelector("[data-display-stack]")) {
-        const right = Math.max(...last.map(svg => svg.getBoundingClientRect().right - gutterOf(svg)));
-        if (right + em + text.width < column.right - 1.5) issues.push({ kind: "equation-number-beneath-with-room-beside-last-line", number: label });
-      }
+    }
+    if (formula.querySelector("[data-display-stack]")) {
+      const gapBefore = scrolls ? parseFloat(getComputedStyle(number).paddingLeft) : em;
+      if (lastRight + gapBefore + text.width < column.right - 1.5) issues.push({ kind: "equation-number-beneath-with-room-beside-last-line", number: label, scrolls });
     }
   }
   if (edges.length && Math.max(...edges) - Math.min(...edges) > 0.5) issues.push({ kind: "equations-start-on-different-axes", starts: [...starts] });
