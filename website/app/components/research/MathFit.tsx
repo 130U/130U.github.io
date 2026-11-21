@@ -74,41 +74,9 @@ function reachFade(region: HTMLElement) {
   markScrolled(region);
 }
 
-// A tabular display that scrolls keeps its row labels in view when they take no more than this
-// share of its room, as a research table does, or when the room they leave beside them holds a
-// column of values whole.
-const PIN_SHARE = 0.5;
-
-/** Marks whether a display has scrolled past its start, where pinned labels take an edge and the
- * fade returns to its em beneath the edge. */
+/** Marks whether a display has scrolled past its start, where the fade returns to its em beneath the edge. */
 function markScrolled(region: HTMLElement) {
   region.toggleAttribute("data-scrolled", region.scrollLeft > 0);
-}
-
-/**
- * The room pinned row labels leave for the values passing beside them, up to the number's edge,
- * and the narrowest column of values, its ink without the space after it.
- */
-function valueRoom(region: HTMLElement, table: HTMLElement, labels: HTMLElement) {
-  const box = region.getBoundingClientRect();
-  const label = labels.getBoundingClientRect();
-  const edge = region.querySelector<HTMLElement>("[data-equation-edge]")?.getBoundingClientRect().width ?? 0;
-  const room = region.clientWidth - (label.left - box.left + region.scrollLeft) - label.width - edge;
-  const columns = [...(table.firstElementChild?.children ?? [])].slice(1).map((cell) => cell.getBoundingClientRect().width - parseFloat(getComputedStyle(cell).paddingRight));
-  return { room, narrowest: Math.min(...columns) };
-}
-
-/** Pins a tabular display's row labels while it scrolls, when they leave room for the values. */
-function pinRowLabels(region: HTMLElement) {
-  const table = region.querySelector<HTMLElement>("[data-display-table]");
-  const labels = table?.firstElementChild?.firstElementChild as HTMLElement | null | undefined;
-  let pinned = false;
-  if (table && labels && overflow(region) > 0) {
-    const { room, narrowest } = valueRoom(region, table, labels);
-    pinned = labels.getBoundingClientRect().width <= region.clientWidth * PIN_SHARE || narrowest <= room;
-  }
-  region.toggleAttribute("data-pinned", pinned);
-  markScrolled(region);
 }
 
 const inlineAlign = new WeakMap<HTMLElement, string>();
@@ -160,13 +128,12 @@ function fitInline(formula: HTMLElement) {
  * Fits the article's displayed equations and the inline formulas wide enough
  * to scroll, whenever their room changes. An equation or formula that would
  * need more than the floor allows scrolls in place at its natural size, its
- * fade over ink at rest; a tabular display that scrolls keeps its row labels
- * in view. Every formula is complete without it.
+ * fade over ink at rest. Every formula is complete without it.
  */
 export function MathFit() {
   useEffect(() => {
-    const displays = [...document.querySelectorAll<HTMLElement>('[data-research-block-type="equation"]')];
-    const tables = displays.filter((region) => region.querySelector("[data-display-table]"));
+    // A table of mathematics is laid out as a research table, by ZoomStage.
+    const displays = [...document.querySelectorAll<HTMLElement>('[data-research-block-type="equation"]:not([data-math-table])')];
     const onScroll = (event: Event) => markScrolled(event.currentTarget as HTMLElement);
     displays.forEach((region) => region.addEventListener("scroll", onScroll, { passive: true }));
     const inline = [...document.querySelectorAll<HTMLElement>('[data-research-formula="inline"][tabindex]')]
@@ -185,7 +152,6 @@ export function MathFit() {
         if (widths.get(entry.target) === entry.contentRect.width) continue;
         widths.set(entry.target, entry.contentRect.width);
         if (displays.includes(entry.target as HTMLElement)) fitDisplay(entry.target as HTMLElement);
-        if (tables.includes(entry.target as HTMLElement)) pinRowLabels(entry.target as HTMLElement);
         if (displays.includes(entry.target as HTMLElement)) reachFade(entry.target as HTMLElement);
         holders.get(entry.target)?.forEach(fitInline);
       }
@@ -201,7 +167,6 @@ export function MathFit() {
       observer.disconnect();
       displays.forEach((region) => {
         region.removeEventListener("scroll", onScroll);
-        region.removeAttribute("data-pinned");
         region.removeAttribute("data-scrolled");
         region.style.removeProperty("--fade-reach");
         naturalDisplay(region);

@@ -261,12 +261,16 @@ vertical spaces are written in `--manuscript-line`; `app/lib/content/argument-un
 marks the paragraphs that open a statement, a proof or a run-in head and the paragraph
 that closes a proof, and `tests/manuscript-rhythm.test.mjs` pins the counts per
 manuscript, so a manuscript update that adds a statement updates the count with it. A
-display that is one `array` and nothing else but its `\tag` is drawn as a table of
-mathematics (`renderResearchDisplayTable`): its columns may be `l`, `c`, `r` and `|`, its
-rules `\hline`, and its row breaks `\\` or `\\[dim]`; any other column type or rule
-(`p{}`, `@{}`, `\cline`) fails the build, so a new form is designed before it is
-published. `tests/display-tables.test.mjs` pins the three such displays in the
-manuscripts.
+display that is one `array` and nothing else but its `\tag` is set as a table of
+mathematics in a research table's frame (`renderResearchDisplayTable`,
+`ResearchMathTable`): its columns may be `l`, `c`, `r` and `|`, its rules `\hline`, and
+its row breaks `\\` or `\\[dim]`; any other column type or rule (`p{}`, `@{}`,
+`\cline`) fails the build, so a new form is designed before it is published. Its title
+is the words of the sentence it ends that name it, kept in
+`app/lib/content/math-tables.ts` under its paper and its first cell; a new table of
+mathematics whose sentence names it ("the … are") takes its title there, and
+`tests/display-tables.test.mjs` holds every title to its sentence and pins the three
+such displays in the manuscripts.
 
 Use the semantic typography tokens in `app/globals.css` and the shared font files.
 The [design guide](design.md#typography) defines each role's size, weight, family,

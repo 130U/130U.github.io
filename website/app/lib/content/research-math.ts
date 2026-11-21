@@ -279,8 +279,8 @@ function assistiveMathml(tex: string, display: boolean) {
   return visitor.visitTree(root);
 }
 
-/** A column of a tabular display: its alignment, and the space after it in ems of the math size. */
-export type ResearchDisplayTableColumn = Readonly<{ align: "l" | "c" | "r"; gapEm: number }>;
+/** A column of a tabular display, aligned as the manuscript aligns it. */
+export type ResearchDisplayTableColumn = Readonly<{ align: "l" | "c" | "r" }>;
 export type ResearchDisplayTableRow = Readonly<{
   /** Each cell's TeX as the page draws it, or an empty string for an empty cell. */
   cells: readonly string[];
@@ -293,32 +293,21 @@ export type ResearchDisplayTable = Readonly<{
   columns: readonly ResearchDisplayTableColumn[];
   rows: readonly ResearchDisplayTableRow[];
 }>;
+/** A cell of a table of mathematics: an expression drawn by the pipeline, or text set in the table's own face. */
+export type ResearchTableCell =
+  | Readonly<{ kind: "math"; svg: string; depthEm: number }>
+  | Readonly<{ kind: "text"; text: string }>;
 export type ResearchDisplayTableMarkup = Readonly<{
-  columns: readonly ResearchDisplayTableColumn[];
-  rows: ReadonlyArray<Readonly<{ cells: readonly (ResearchMathMarkup | null)[]; rule?: "header" | "row"; extraEm?: number }>>;
-  /** How far the table's baseline, its first row's, stands above the display's: ems of the math
-   * size plus pixels of rule. A table is centred on the math axis as TeX centres an array; a
-   * numbered one moves by less than half a row, so the row nearest that axis stands on the
-   * display's baseline and its number on that row's. */
-  raiseEm: number;
-  raisePx: number;
+  /** How each column aligns in its frame: row labels left and a column of numbers right, as in every
+   * research table; any other column as the manuscript aligns it. */
+  columns: ReadonlyArray<Readonly<{ align: "l" | "c" | "r"; numeric: boolean }>>;
+  /** Whether the first row heads the columns, and so stands as the table's header band. */
+  header: boolean;
+  rows: ReadonlyArray<ReadonlyArray<ResearchTableCell | null>>;
   /** The whole display's assistive expression and the original TeX, and its equation number. */
   mathml: string;
   number?: string;
 }>;
-
-/** Columns of a tabular display stand an em apart, TeX's \arraycolsep on either side;
- * where the manuscript rules between two columns, the rule becomes a second em of space. */
-export const RESEARCH_TABLE_COLUMN_GAP_EM = 1;
-export const RESEARCH_TABLE_RULED_GAP_EM = 2;
-/** A rule stands in the middle of the space between two rows, with booktabs'
- * \aboverulesep (0.4ex) above it and \belowrulesep (0.65ex) below it. */
-export const RESEARCH_TABLE_ABOVE_RULE_EM = Number((0.4 * xHeight).toFixed(4));
-export const RESEARCH_TABLE_BELOW_RULE_EM = Number((0.65 * xHeight).toFixed(4));
-/** TeX centres an array on the math axis; the strut of a row of an array is 0.75em high and 0.25em deep. */
-const AXIS_HEIGHT_EM = output.font.params.axis_height;
-const STRUT_HEIGHT_EM = 0.75;
-const STRUT_DEPTH_EM = 0.25;
 
 type TableToken = { kind: "text"; text: string } | { kind: "cell" } | { kind: "row"; extraEm: number } | { kind: "hline" };
 
@@ -414,13 +403,12 @@ function wholeArray(tex: string) {
 /**
  * A display that is one array, and nothing else but its equation number, is a
  * table of mathematics: its cells keep their TeX, rows and columns, and the
- * page sets it as a formal table. A vertical rule becomes space between its
- * columns; the row that heads the columns stands over a rule, which is the row
+ * page sets it as a research table. The row that heads the columns is the row
  * the manuscript rules off, or the first row of a table whose first column the
- * manuscript rules off (its first cell then heads the row labels). A rule
- * between later rows is a hairline; one above the first row or below the last
- * is left to the white space around the display. The sentence's closing
- * punctuation after the last cell is not drawn, as on every display.
+ * manuscript rules off (its first cell then heads the row labels); a rule the
+ * manuscript draws between later rows is marked, though every row of a research
+ * table parts on a hairline. The sentence's closing punctuation after the last
+ * cell is not drawn, as on every display.
  */
 export function parseResearchDisplayTable(tex: string): ResearchDisplayTable | undefined {
   const source = tex.trim().replace(EQUATION_NUMBER, "").trim();
@@ -429,7 +417,7 @@ export function parseResearchDisplayTable(tex: string): ResearchDisplayTable | u
   const spec = array.spec.replace(/\s+/gu, "");
   if (!/^\|*(?:[lcr]\|*)+$/u.test(spec)) throw new Error(`A tabular display has a column specification the page does not set: {${array.spec}}.`);
   const aligns = [...spec.replace(/\|/gu, "")] as Array<"l" | "c" | "r">;
-  const ruled = [...spec.matchAll(/[lcr](?=\|+[lcr])/gu)].map((match) => [...spec.slice(0, match.index + 1)].filter((entry) => entry !== "|").length - 1);
+  const labelsRuled = /^\|*[lcr]\|+[lcr]/u.test(spec);
   const rows: Array<{ cells: string[]; extraEm: number; ruleAbove: boolean }> = [];
   let current = { cells: [""], extraEm: 0, ruleAbove: false };
   let pendingRule = false;
@@ -454,12 +442,9 @@ export function parseResearchDisplayTable(tex: string): ResearchDisplayTable | u
   // The sentence's punctuation after the last cell belongs to the prose, not the table.
   const last = cells.at(-1)!;
   last[last.length - 1] = normalizeResearchDisplayTex(last.at(-1)!).trim();
-  const header = rows.length > 1 && (rows[1].ruleAbove || ruled.includes(0));
+  const header = rows.length > 1 && (rows[1].ruleAbove || labelsRuled);
   return Object.freeze({
-    columns: aligns.map((align, column) => Object.freeze({
-      align,
-      gapEm: column === aligns.length - 1 ? 0 : ruled.includes(column) ? RESEARCH_TABLE_RULED_GAP_EM : RESEARCH_TABLE_COLUMN_GAP_EM,
-    })),
+    columns: aligns.map((align) => Object.freeze({ align })),
     rows: cells.map((row, index) => {
       const rule = index === 0 && header ? "header" : index < rows.length - 1 && rows[index + 1].ruleAbove ? "row" : undefined;
       const extraEm = index > 0 ? rows[index].extraEm : 0;
@@ -472,9 +457,38 @@ export function parseResearchDisplayTable(tex: string): ResearchDisplayTable | u
   });
 }
 
+/**
+ * Groups the digits after a decimal point in threes, counted from the point and
+ * parted by a thin space, when there are five or more, as the SI and ISO 80000
+ * set them. Only the drawing
+ * takes the spaces; the TeX that the assistive expression carries keeps the
+ * manuscript's number.
+ */
+export function groupDecimalDigits(tex: string) {
+  return tex.replace(/(?<![\d.])(\d*)\.(\d{5,})(?![\d.])/gu, (_, whole: string, fraction: string) => `${whole}.${fraction.match(/\d{1,3}/gu)!.join("\\,")}`);
+}
+
+// A cell that is text alone, which the table sets in its own face.
+const TEXT_CELL = /^\\text\s*\{([^{}\\$]*)\}$/u;
+// A cell that holds a number, a fraction, an interval or a bound on one, and nothing else:
+// once its relations and spaces are set aside, only figures and their punctuation remain.
+const NUMERIC_CELL = /^[-+]?[\d.,/()[\]+-]*\d[\d.,/()[\]+-]*$/u;
+const RELATIONS_AND_SPACES = /\\(?:le|leq|ge|geq|lt|gt|approx|pm)(?![A-Za-z])|\\[,;:! ]|\s+/gu;
+
+function numericTex(tex: string) {
+  return NUMERIC_CELL.test(tex.replace(RELATIONS_AND_SPACES, ""));
+}
+
 const tableCache = new Map<string, ResearchDisplayTableMarkup | null>();
 
-/** The tabular display a display TeX makes, each cell typeset in text style as TeX sets an array's cells. */
+/**
+ * The table of mathematics a display TeX makes. Each cell is typeset in text
+ * style, as TeX sets an array's cells, with the digits after a decimal point
+ * grouped; a cell that is text alone is set as text in the table's face, without
+ * a closing colon, which in the sentence introduced the values the table's columns
+ * now hold. Row labels align left and a column of numbers aligns right, as in
+ * every research table; any other column keeps the manuscript's alignment.
+ */
 export function renderResearchDisplayTable(tex: string): ResearchDisplayTableMarkup | undefined {
   const cached = tableCache.get(tex);
   if (cached !== undefined) return cached ?? undefined;
@@ -484,42 +498,24 @@ export function renderResearchDisplayTable(tex: string): ResearchDisplayTableMar
     return undefined;
   }
   const whole = renderResearchMath(tex, true);
-  const rows = table.rows.map((row) => Object.freeze({
-    ...row,
-    cells: row.cells.map((cell) => {
-      if (!cell) return null;
-      const markup = renderResearchMath(cell, false);
-      return Object.freeze({ ...markup, svg: markup.svg.replace(/data-research-svg="inline"/u, 'data-research-svg="cell"') });
-    }),
-  }));
-  // Each row is as tall as its tallest cell and its strut; rows stand a line of mathematics apart,
-  // a rule adds booktabs' space and its own pixel, and the table keeps the drawing's gutter around it.
-  const extent = (cell: ResearchMathMarkup | null) => cell ? [cell.heightEm - cell.depthEm - RESEARCH_MATH_GUTTER_EM, cell.depthEm - RESEARCH_MATH_GUTTER_EM] : [0, 0];
-  const heights = rows.map((row) => Math.max(STRUT_HEIGHT_EM, ...row.cells.map((cell) => extent(cell)[0])));
-  const depths = rows.map((row) => Math.max(STRUT_DEPTH_EM, ...row.cells.map((cell) => extent(cell)[1])));
-  // Each row's baseline below the first row's, in ems and in pixels of rule.
-  const baselines = [{ em: 0, px: 0 }];
-  rows.forEach((row, index) => {
-    if (index === 0) return;
-    const above = rows[index - 1];
-    const space = (row.extraEm ?? 0) + (above.rule ? RESEARCH_MATH_ROW_SPACING_EM + RESEARCH_TABLE_ABOVE_RULE_EM + RESEARCH_TABLE_BELOW_RULE_EM : RESEARCH_MATH_ROW_SPACING_EM);
-    const previous = baselines[index - 1];
-    baselines.push({ em: previous.em + depths[index - 1] + space + heights[index], px: previous.px + (above.rule ? 1 : 0) });
+  const header = table.rows[0].rule === "header";
+  const body = table.rows.slice(header ? 1 : 0);
+  const rows = table.rows.map((row) => Object.freeze(row.cells.map((cell): ResearchTableCell | null => {
+    if (!cell) return null;
+    const text = TEXT_CELL.exec(cell);
+    if (text) return Object.freeze({ kind: "text", text: text[1].trim().replace(/:$/u, "") });
+    const markup = renderResearchMath(groupDecimalDigits(cell), false);
+    return Object.freeze({ kind: "math", svg: markup.svg.replace(/data-research-svg="inline"/u, 'data-research-svg="cell"'), depthEm: markup.depthEm });
+  })));
+  const columns = table.columns.map(({ align }, column) => {
+    const values = body.map((row) => row.cells[column]).filter(Boolean);
+    const numeric = values.length > 0 && values.every(numericTex);
+    return Object.freeze({ align: numeric ? "r" as const : column === 0 ? "l" as const : align, numeric });
   });
-  const last = rows.length - 1;
-  const heightEm = 2 * RESEARCH_MATH_GUTTER_EM + heights[0] + baselines[last].em + depths[last];
-  const rules = rows.filter((row) => row.rule).length;
-  const firstAscent = RESEARCH_MATH_GUTTER_EM + heights[0];
-  const axis = { em: AXIS_HEIGHT_EM + heightEm / 2 - firstAscent, px: rules / 2 };
-  // A numbered table sets the row nearest the axis on the display's baseline, where its number stands.
-  const nearest = whole.number
-    ? baselines.reduce((best, line) => (Math.abs(line.em - axis.em) < Math.abs(best.em - axis.em) ? line : best))
-    : axis;
   const result = Object.freeze({
-    columns: table.columns,
+    columns,
+    header,
     rows,
-    raiseEm: Number(nearest.em.toFixed(6)),
-    raisePx: nearest.px,
     mathml: whole.mathml,
     ...(whole.number ? { number: whole.number } : {}),
   });

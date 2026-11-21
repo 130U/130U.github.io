@@ -181,77 +181,28 @@
   outline-offset: 2px;
 }
 
-/* A display that is one array is a table of mathematics, set as a formal
-   table (booktabs): no vertical rules, a vertical rule of the manuscript
-   becoming space; a firm rule under the row that heads the columns, with
-   booktabs' space above and below it; rows one line of mathematics apart,
-   each as tall as its strut or its tallest cell, as TeX sets an array's rows.
-   Every cell is typeset in text style, as TeX sets an array's cells, and sits
-   on its row's baseline in the column's alignment. The table keeps the canvas
-   gutter a drawing keeps, so its ink starts on the manuscript inset, and it is
-   centred on the math axis (the renderer computes the raise); a numbered table
-   sets the row nearest that axis on the display's baseline, so its number
-   stands on that row's baseline. */
-.table {
-  display: inline-table;
-  padding: var(--math-gutter);
-  border-collapse: separate;
-  border-spacing: 0;
-}
-
-.row {
-  display: table-row;
-}
-
-.cell {
-  display: table-cell;
-  padding: 0 var(--column-gap, 0em) 0 0;
+/* A display that is one array is a table of mathematics, set as a research
+   table (ResearchMathTable, ResearchArticle.module.css): its frame, title,
+   header band, hairline rows, hover, magnifier and stage, and its row labels
+   kept in view as it scrolls (ZoomStage). Every cell's mathematics is drawn at
+   the table's size, the reading size, the header band's too: there its x-height
+   (TeX's 0.442em, 7.07px) meets the label type's (Inter's 0.516em, 6.70px), and
+   its smallest script is half the reading size, as in a line of prose. Every
+   cell of a row stands on the row's baseline. */
+.mathTable table .mathCell.mathCell {
   vertical-align: baseline;
-  white-space: nowrap;
 }
 
-.cell[data-align="l"] {
+.mathCell[data-align="l"] {
   text-align: left;
 }
 
-.cell[data-align="c"] {
+.mathCell[data-align="c"] {
   text-align: center;
 }
 
-.cell[data-align="r"] {
+.mathCell[data-align="r"] {
   text-align: right;
-}
-
-.row + .row > .cell {
-  padding-top: calc(var(--row-gap) + var(--row-extra, 0em));
-}
-
-.row[data-rule] > .cell {
-  padding-bottom: calc(var(--row-gap) / 2 + var(--above-rule));
-  border-bottom: 1px solid var(--rule);
-}
-
-.row[data-rule="header"] > .cell {
-  border-bottom-color: var(--rule-strong);
-}
-
-/* A head stands centred over a column of right-aligned values, as booktabs
-   sets one, so heads over columns of unequal width keep even gaps; the values
-   keep the manuscript's alignment. */
-.row[data-rule="header"] > .cell[data-align="r"] {
-  text-align: center;
-}
-
-.row[data-rule] + .row > .cell {
-  padding-top: calc(var(--row-gap) / 2 + var(--below-rule) + var(--row-extra, 0em));
-}
-
-/* A row is at least as tall as an array row's strut: 0.75em above the
-   baseline and 0.25em below it. */
-.strut {
-  display: inline-block;
-  height: 1em;
-  vertical-align: -0.25em;
 }
 
 /* A cell's drawing takes the room of its expression; its baseline is its lower
@@ -263,40 +214,54 @@
   line-height: 0;
 }
 
-/* A tabular display that scrolls keeps its row labels in view while there is
-   room for the values beside them (MathFit pins them), as a research table
-   does: the labels hold the manuscript inset, the paper behind them covers
-   the values passing beneath, and a hairline marks the edge once the values
-   have moved. */
-.equation[data-pinned] .cell:first-child {
-  --label-edge: 0 0 0 transparent;
-  --label-ends: 0 0 0 transparent, 0 0 0 transparent;
-  position: sticky;
-  z-index: 1;
-  left: calc(var(--manuscript-inset) + 1px);
-  background: var(--page);
-  box-shadow: var(--label-edge), calc(-1 * var(--manuscript-inset) - 1px) 0 0 var(--page), var(--label-ends);
+.mathTable thead .cellMath {
+  font-size: calc(var(--type-reading) * var(--zoom, 1));
 }
 
-/* The paper also covers the table's gutter above its first row and below its
-   last, where the ink of a passing value may reach. */
-.equation[data-pinned] .row:first-child > .cell:first-child {
-  --label-ends: 0 calc(-1 * var(--math-gutter)) 0 var(--page), calc(-1 * var(--manuscript-inset) - 1px) calc(-1 * var(--math-gutter)) 0 var(--page);
+/* A row label that is text takes sentence case, as every table's labels do. */
+.mathTable tbody .mathCell[data-cell="text"]::first-letter {
+  text-transform: uppercase;
 }
 
-.equation[data-pinned] .row:last-child > .cell:first-child {
-  --label-ends: 0 var(--math-gutter) 0 var(--page), calc(-1 * var(--manuscript-inset) - 1px) var(--math-gutter) 0 var(--page);
+/* Where the magnifier stands on the header band of a table without a title,
+   its last column keeps clear of it in every row, as its head does, so a head
+   over values aligned right stays over them. */
+.mathTable > [data-table-zoom]:first-child:not([data-idle]) ~ [role="region"] tbody .mathCell:last-child {
+  padding-right: calc(var(--table-pad) + 32px);
 }
 
-.equation[data-pinned][data-scrolled] .cell:first-child {
-  --label-edge: 1px 0 0 var(--rule-medium);
+/* A table without a header band parts its first row from its title on a hairline. */
+.mathTable [data-table-title] ~ [role="region"] tbody:first-child > tr:first-child > .mathCell {
+  border-top: 1px solid var(--rule);
+}
+
+/* A table of mathematics stands in a research table's white space. A numbered
+   one stands its number beneath its frame, at the column's right edge where
+   every equation number stands, in the reading face of the references that cite
+   it, as a caption follows a figure's frame; it stays in the article when the
+   table is zoomed, as a caption does. */
+.mathTableBlock {
+  margin: 2.75rem 0;
+}
+
+.mathTableBlock > [data-table-frame] {
+  margin: 0;
+}
+
+.tableNumber {
+  margin: 14px 0 0;
+  font-family: var(--font-prose);
+  font-size: var(--type-reading);
+  font-variant-numeric: lining-nums proportional-nums;
+  line-height: var(--interface-leading);
+  text-align: end;
+  white-space: nowrap;
 }
 
 /* On paper, and where the system paints its own colors, the edge follows its
-   equation and a table's row labels scroll with their rows. */
+   equation. */
 @media print, (forced-colors: active) {
-  .equationEdge,
-  .equation[data-pinned] .cell:first-child {
+  .equationEdge {
     position: static;
     border-image-source: none;
   }

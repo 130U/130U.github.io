@@ -569,8 +569,9 @@ touch.
 
 ### Research tables
 
-Research and legal tables share the figures' frame. Every table carries a manuscript
-caption ("Table N." and one sentence), which becomes the title inside the frame; the header is a faintly tinted band in label type over a firm
+Research and legal tables share the figures' frame. Every manuscript table carries a
+caption ("Table N." and one sentence), which becomes the title inside the frame, and a
+table of mathematics takes its title from its sentence (below); the header is a faintly tinted band in label type over a firm
 rule; rows part on hairlines; numeric columns align right in tabular figures, while
 their headings keep proportional figures. Under a mouse, the hovered row and column take
 a quiet tint and the hovered column's header turns blue, while a tap lights nothing; a row or column the table emphasizes carries
@@ -601,29 +602,33 @@ labels and two of them, and otherwise each fills the room beside the labels, at 
 16rem, so one whole column reads at a time; the right edge fades while more remains.
 
 A display that is one array, and nothing else but its equation number, is a table of
-mathematics and stays a display: it ends its sentence, keeps the display's size, white
-space, inset and number, and takes no frame, title or magnifier. It is set as a formal
-table, the form of booktabs and of the SIAM and ASA style manuals. Each cell's TeX is
-typeset in text style, as TeX sets an array's cells, in the alignment the manuscript
-gives its column. Columns stand an em apart, and where the manuscript rules between
-two columns the rule becomes a second em of space, so no vertical rule is drawn. The
-row that heads the columns, the row the manuscript rules off, or the first row of a
-table whose first column it rules off (its first cell then heads the row labels),
-stands over the firm rule, with booktabs' 0.4ex of space above the rule and 0.65ex
-below, and a head over a column of right-aligned values is centred on it, as booktabs
-sets one, while the values keep the manuscript's alignment; a rule between later rows
-is a hairline, and one above the first row or below
-the last is left to the display's white space. Rows stand one line of mathematics
-apart, each as tall as an array row's strut (0.75em above the baseline, 0.25em below)
-or its tallest cell. The table keeps a drawing's gutter, so its ink starts on the
-manuscript inset, and it is centred on the math axis, as TeX centres an array. A
-numbered table moves by less than half a row so that the row nearest that axis stands on
-the display's baseline: its number then stands on that row's baseline, as every equation
-number stands on its expression's. Its drawing is decorative: one assistive expression
-carries the whole display and its TeX. A table of mathematics that scrolls keeps its row
-labels in view when they take no more than half of its room, or when the room they leave
-beside them, up to the number's edge, holds a column of its values whole, and the values
-pass beneath them; only a table whose labels leave no column of values room scrolls whole.
+mathematics, and it is set as a research table: frame, header band, hairline rows,
+hover, magnifier and stage, and row labels kept in view as it scrolls. It still ends its
+sentence: the prose around it is the manuscript's, and the sentence's closing
+punctuation after its last cell is not drawn. The manuscript gives it no caption, so it
+takes as its title the words of its sentence that name what it holds, the subject the
+sentence sets equal to it ("the four regime slopes are"), in sentence case; a table whose
+sentence names nothing ("Then") stands untitled. The row the manuscript rules off, or
+the first row of a table whose first column it rules off, is the header band, its first
+cell heading the row labels; a table the manuscript does not rule has no header band,
+and its first row parts from its title on a hairline. The first column holds the row
+labels, aligned left; a column of numbers (figures, fractions, intervals and bounds)
+aligns right, as in every research table, and any other column keeps the manuscript's
+alignment, its head aligned with it. Each cell's TeX is drawn by the math pipeline in
+text style, as TeX sets an array's cells, at the table's size, the reading size, the
+header band included: there its x-height (TeX's 0.442em of 16px, 7.07px) stands at the
+label type's (Inter's 0.516em of 13px, 6.70px), and its smallest script is half the
+reading size, as in a line of prose. A cell that is text alone (`\text{…}`) is set as text in
+the table's faces, label type in the header band and the reading face for a row label,
+in sentence case and without a closing colon, which in the sentence introduced the
+values its columns now hold. In a fractional part of five digits or more, the digits are
+grouped in threes from the point by a thin space, in the drawing alone, as the SI and
+ISO 80000 group them. Every cell of a row stands on the
+row's baseline. A numbered table stands its number beneath its frame at the column's
+right edge, where every equation number stands, in the reading face of the references
+that cite it; the number stays in the article when the table is zoomed, as a caption
+does. The drawing is decorative: one assistive expression carries the whole display and
+its TeX, so a table of mathematics counts as one formula.
 
 Every table and figure carries a magnifier where the stage shows more than the page:
 where it enlarges the table or figure by at least 1.15 times, or sets whole what the
@@ -632,7 +637,9 @@ fits its column, and a table the stage would not set whole, carry none; the magn
 never promises what the stage does not do. A table's magnifier stands in the top-right
 corner of its frame, on the title's first line or on the header band; a table without a
 title that scrolls would carry its headings beneath it, so there the control takes a row
-of its own above the header. Zoom lifts the table from its place to the center of
+of its own above the header. Where the control stands on the header band of a table of
+mathematics, the last column keeps clear of it in every row, as its head does, so a head
+over values aligned right stays over them. Zoom lifts the table from its place to the center of
 the window, on a square sheet with the page blurred behind it. The stage sets the
 largest type that keeps every row on one line: 20px, then 18px, then 16px, then closer
 columns, then headings on two lines, a table of two halves folding only when no step

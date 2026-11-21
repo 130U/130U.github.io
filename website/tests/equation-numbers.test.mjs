@@ -21,10 +21,16 @@ for (const [slug, numbered] of PAPERS) {
     const { markdown } = JSON.parse(await readFile(new URL(`../content/selected-research/${slug}.json`, import.meta.url), "utf8"));
     const html = await readFile(new URL(`../out/${slug}/index.html`, import.meta.url), "utf8");
     const manuscript = [...markdown.matchAll(/```math\n([\s\S]*?)\n```|\$\$([\s\S]*?)\$\$|\\\[([\s\S]*?)\\\]/gu)].map((match) => match[1] ?? match[2] ?? match[3]);
-    const page = [...html.matchAll(/<div\b[^>]*data-research-block-type="equation"[^>]*>([\s\S]*?)<\/annotation>/gu)].map(([, block]) => ({
-      shown: block.match(/data-equation-number[^>]*>([^<]*)</u)?.[1],
-      tex: decodeHtml(block.match(/<annotation\b[^>]*>([\s\S]*)$/u)[1]),
-    }));
+    // Each manuscript block runs from its marker to the next. A display stands its number at its
+    // right edge; a table of mathematics stands its number beneath its frame, within its block.
+    const starts = [...html.matchAll(/<[a-z]+\b[^>]*\bdata-research-block="\d+"/gu)].map((match) => match.index);
+    const page = starts
+      .map((start, index) => html.slice(start, starts[index + 1] ?? html.indexOf("</article>", start)))
+      .filter((block) => /^<[a-z]+\b[^>]*\bdata-research-block-type="equation"/u.test(block))
+      .map((block) => ({
+        shown: block.match(/data-equation-number[^>]*>([^<]*)</u)?.[1],
+        tex: decodeHtml(block.match(/<annotation\b[^>]*>([\s\S]*?)<\/annotation>/u)[1]),
+      }));
 
     assert.equal(page.length, manuscript.length, "The page shows every displayed equation of the manuscript.");
     page.forEach(({ shown, tex }, index) => {
