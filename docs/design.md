@@ -111,11 +111,16 @@ title also keeps to the reading measure, so it closes on the same edge as the te
 never reaches the guide that marks the measure. A hyphenated compound in a title
 (PCA-Based, Green-Credit) holds one line, so a display line never ends on a hyphen.
 
-The rail is as wide as its widest fixed item, the parent link Back to Experience, plus
-its insets (`--rail-item-width`): the wordmark keeps the mark beside the name and the
-parent link holds one line on every tablet, and the rail, reading field, and guides
-reflow together when text is enlarged. A longer label, Back to Selected Research, wraps
-in balanced lines beside its arrow. The rail is as tall as its contents, so the footer
+The rail takes three columns, or more where its widest fixed item, the parent link Back
+to Experience, needs more with its insets (`--rail-item-width`; 12px insets below
+1200px): the wordmark keeps the mark beside the name and the parent link holds one line
+on every tablet. The extra comes out of the fourth column, the margin-index track before
+the reading start, never below the frames' inset (41px at 768, 46px at 1024 as the
+narrowest), so the reading start and every column after it stand where the equal grid
+puts them; the content column and the sections of About, Experience, and Coursework take
+the frame's columns as a subgrid, so an index or a section rule starts where the rail
+ends. The rail, reading field, and guides reflow together when text is enlarged. A
+longer label, Back to Selected Research, wraps in balanced lines beside its arrow. The rail is as tall as its contents, so the footer
 never pushes it, and scrolls internally when they exceed the viewport height.
 Below 768px, top-level pages use a 4rem sticky header with a Menu / Close panel; detail
 pages show the wordmark and their parent link in the header without a menu, and while

@@ -30,9 +30,11 @@
   text-wrap: balance;
 }
 
+/* A section takes the frame's columns: its index stands on the margin-index
+   track and its body on the reading start. */
 .section {
   display: grid;
-  grid-template-columns: repeat(11, minmax(0, 1fr));
+  grid-template-columns: subgrid;
   grid-column: 1 / span 11;
   align-items: start;
   padding: 72px 0 104px;
@@ -155,7 +157,6 @@
 
 @media (768px <= width < 1024px) {
   .section {
-    grid-template-columns: repeat(9, minmax(0, 1fr));
     grid-column: 1 / -1;
   }
 

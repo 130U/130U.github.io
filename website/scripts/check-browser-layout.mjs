@@ -1034,6 +1034,23 @@ function inspectFrame() {
     probe.remove();
     return y;
   };
+  // The reading start, and every column after it, stands where the equal grid
+  // puts it (four of twelve columns on tablets, four of fifteen from 1024px):
+  // the rail's growth comes out of the margin-index track before it, which keeps
+  // the frames' inset.
+  const frame = document.querySelector(".site-frame");
+  const readingStart = document.querySelector(".structural-guide-reading-start");
+  const railBoundary = document.querySelector(".structural-guide-rail-boundary");
+  if (frame && readingStart && railBoundary && innerWidth >= 768 && getComputedStyle(readingStart).display !== "none") {
+    const style = getComputedStyle(frame);
+    const left = box(frame).left + parseFloat(style.paddingLeft);
+    const width = box(frame).width - parseFloat(style.paddingLeft) - parseFloat(style.paddingRight);
+    const expected = left + width * 4 / (innerWidth < 1024 ? 12 : 15);
+    const start = box(readingStart).left;
+    const inset = Math.min(24, Math.max(20, innerWidth * 0.02));
+    if (Math.abs(start - expected) > 0.5) issues.push({ kind: "reading-start-moved", start, expected });
+    if (start - box(railBoundary).left < inset - 0.5) issues.push({ kind: "margin-index-track-under-inset", track: start - box(railBoundary).left, inset });
+  }
   const rail = document.querySelector(".site-rail");
   const railColumn = rail && getComputedStyle(rail).position === "sticky" && innerWidth >= 768;
   if (railColumn) {
@@ -1564,6 +1581,19 @@ try {
           await page.goto(ORIGIN + route, { waitUntil: "networkidle" });
           await page.evaluate(() => document.fonts.ready);
           texts.push({ route, width, touch: width < 1200, issues: await page.evaluate(inspectNoteReferences) });
+        }
+      } finally { await context.close(); }
+    }
+    // The frame at the tablet widths between the text widths, on a page of each kind.
+    for (const width of [820, 834, 900, 1100, 1180]) {
+      const context = await browser.newContext({ viewport: { width, height: 1100 }, reducedMotion: "reduce", serviceWorkers: "block" });
+      await serveExport(context, missing);
+      try {
+        const page = await context.newPage();
+        for (const route of ["/", "/experience/", "/experience/jiritsu-network/", "/certified-valuation-of-arithmetic-asian-options/", "/coursework/"]) {
+          await page.goto(ORIGIN + route, { waitUntil: "networkidle" });
+          await page.evaluate(() => document.fonts.ready);
+          frames.push({ route, width, issues: await page.evaluate(inspectFrame) });
         }
       } finally { await context.close(); }
     }
