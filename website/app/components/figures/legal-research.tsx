@@ -1,5 +1,5 @@
 import type { CSSProperties } from "react";
-import { Dot, Figure, Mark, Panel, Plot, linear, path, sample, styles as kit } from "./kit";
+import { Dot, Figure, Legend, Mark, Panel, Plot, linear, path, sample, styles as kit } from "./kit";
 import styles from "./Figures.module.css";
 
 /* ---------- Autonomous authority in space ---------- */
@@ -11,24 +11,23 @@ function RiskTaxonomy() {
     { title: "Substitution", text: "Changes the harm" },
     { title: "Transformation", text: "Changes both the harm and the population" },
   ];
+  const columns = ["Same population", "Different population"];
   return (
     <Figure
       id="risk-taxonomy"
       title="Four kinds of countervailing risk"
       caption="A countervailing effect is classified against the target harm and the population that bears it, so whether an effect counts as a transfer depends on where the analysis draws the population boundary."
     >
-      <div className={kit.scrollViewport} data-figure-scroll role="region" tabIndex={0} aria-label="Risk-risk taxonomy, scroll horizontally to compare">
       <div className={styles.matrix} role="table" aria-label="Risk-risk taxonomy">
         <div role="row" style={{ display: "contents" }}>
-          <span className={styles.axisCell} role="columnheader" />
-          <span className={styles.axisCell} role="columnheader">Same population</span>
-          <span className={styles.axisCell} role="columnheader">Different population</span>
+          <span className={`${styles.axisCell} ${styles.matrixCorner}`} role="columnheader" />
+          {columns.map((column) => <span key={column} className={`${styles.axisCell} ${styles.columnHead}`} role="columnheader">{column}</span>)}
         </div>
         {[["Same harm", cells[0], cells[1]], ["Different harm", cells[2], cells[3]]].map(([label, ...row]) => (
           <div key={label as string} role="row" style={{ display: "contents" }}>
             <span className={`${styles.axisCell} ${styles.rowHead}`} role="rowheader">{label as string}</span>
-            {(row as typeof cells).map((cell) => (
-              <span key={cell.title} className={styles.cell} role="cell" data-tone={cell.example ? "accent" : undefined}>
+            {(row as typeof cells).map((cell, column) => (
+              <span key={cell.title} className={styles.cell} role="cell" data-tone={cell.example ? "accent" : undefined} data-column={columns[column]}>
                 <span className={styles.cellTitle}>{cell.title}</span>
                 <span className={styles.cellText}>{cell.text}</span>
                 {cell.example && <span className={styles.cellExample}>{cell.example}</span>}
@@ -36,7 +35,6 @@ function RiskTaxonomy() {
             ))}
           </div>
         ))}
-      </div>
       </div>
     </Figure>
   );
@@ -70,12 +68,12 @@ function TwoThresholds() {
             <span className={styles.flowDown}><span>{step.next}</span></span>
           </div>
         ))}
-        <div className={`${kit.node} ${styles.flowStep}`}>
+        <div className={`${kit.node} ${styles.flowStep}`} data-choice="">
           <span className={styles.stepIndex} aria-hidden="true">04</span>
           <span className={kit.nodeTitle}>Review cannot protect in time</span>
           <span className={kit.nodeText}>Choose one bounded alternative.</span>
         </div>
-        <span className={styles.flowArrow}><span>Choose</span></span>
+        <span className={styles.flowArrow} data-choice=""><span>Choose</span></span>
         <div className={`${styles.flowOut} ${styles.options}`}>
           <span>Advance-constrained action</span>
           <span>A justified fallback</span>
@@ -106,7 +104,7 @@ function CollisionSequence() {
         {steps.map((step, index) => (
           <div key={step} className={`${kit.node} ${styles.sequenceStep}`} data-tone={index === 1 || index === 2 ? "accent" : undefined} style={{ gridRow: index + 1 }}>
             <span className={styles.stepIndex} aria-hidden="true">{String(index + 1).padStart(2, "0")}</span>
-            {step}
+            <span>{step}</span>
           </div>
         ))}
         <p className={styles.sequenceNote} data-tone="accent" style={{ gridRow: "2 / span 2" }}>Forecasting: the ESA challenge</p>
@@ -190,6 +188,9 @@ function ExitPaths() {
   const sustained: Array<[number, number]> = [[0.02, 0], [0.24, 1], [decision, 1]];
   const taper: Array<[number, number]> = [[decision, 1], [0.97, 0]];
   const stop: Array<[number, number]> = [[decision, 1], [decision + 0.004, 0]];
+  // The tapering pathway is named above the middle of its falling line: on one
+  // line where the plot is wide, on two in a phone's.
+  const taperLabel = 0.7;
   return (
     <Figure
       id="exit-paths"
@@ -212,9 +213,9 @@ function ExitPaths() {
         </>}
       >
         <Dot left={x(decision)} top={100 - y(1)} tone="ink" />
-        <Mark left={x(decision)} top={100 - y(1)} anchor="bottom-left" wrap className={kit.muted}>Authorization expires or support is withdrawn</Mark>
-        <Mark left={x(decision)} top={100 - y(0.2)} anchor="right" tone="steel" className={kit.fade}>Abrupt cessation</Mark>
-        <Mark left={100} top={100 - y(0.8)} anchor="right" tone="accent" wrap className={`${kit.fade} ${styles.alignEnd}`} style={{ maxWidth: "4.5rem" }}>Tapering pathway</Mark>
+        <Mark left={x(decision)} top={100 - y(1)} anchor="bottom-left" wrap className={`${kit.muted} ${styles.decisionLabel}`}>Authorization expires or support is withdrawn</Mark>
+        <Mark left={x(decision)} top={100 - y(0.2)} anchor="right" tone="steel" knockout={false} className={`${kit.fade} ${styles.cessationLabel}`}>Abrupt cessation</Mark>
+        <Mark left={x(taperLabel)} top={100 - y(1 - (taperLabel - decision) / (0.97 - decision))} anchor="above-right" tone="accent" wrap knockout={false} className={kit.fade}>Tapering pathway</Mark>
       </Plot>
       <dl className={styles.lanes} aria-label="Three separate decisions">
         <dt>Program control</dt><dd>Political authority can change.</dd>
@@ -256,7 +257,7 @@ function EvidentiaryChain() {
             <li key={link.title}>
               <span className={`${kit.node} ${styles.ladderNode}`}>
                 <span className={styles.stepIndex} aria-hidden="true">{String(index + 1).padStart(2, "0")}</span>
-                {link.title}
+                <span>{link.title}</span>
               </span>
               <span className={styles.ladderExample}>{link.example ?? ""}</span>
             </li>
@@ -298,7 +299,7 @@ function DeepBay() {
             x={x}
             y={y}
             height="200px"
-            inset={{ top: 10, right: 92, bottom: 30, left: 92 }}
+            inset={{ top: 10, right: 44, bottom: 30, left: 96 }}
             xTicks={[{ at: 0, label: "2000", solid: true }, { at: 1, label: "2018", solid: true }]}
             curves={series.map((item) => <path key={item.name} className={kit[item.tone]} d={path([[0, item.from], [1, item.to]], x, y)} />)}
           >
@@ -318,9 +319,9 @@ function DeepBay() {
             {species.map((kind, index) => <span key={index} className={kind === "declined" ? kit.ink : kind === "increased" ? kit.accent : undefined} data-ring={kind === "other" ? "" : undefined} />)}
           </div>
           <ul className={`${kit.legend} ${styles.waffleLegend}`} aria-hidden="true">
-            <li><span className={`${kit.swatch} ${kit.ink}`} />Declined significantly, 12</li>
-            <li><span className={`${kit.swatch} ${kit.accent}`} />Increased, 9</li>
-            <li><span className={`${kit.swatch} ${kit.mist}`} data-shape="box" />Remaining, 21</li>
+            <li><span className={`${kit.swatch} ${styles.waffleKey} ${kit.ink}`} />Declined significantly, 12</li>
+            <li><span className={`${kit.swatch} ${styles.waffleKey} ${kit.accent}`} />Increased, 9</li>
+            <li><span className={`${kit.swatch} ${styles.waffleKey}`} data-ring="" />Remaining, 21</li>
           </ul>
         </div>
       </div>
@@ -342,14 +343,13 @@ function SanTinLoss() {
       id="san-tin-loss"
       title="Construction is a milestone; replacement function is an outcome"
       caption="Condition 9 ties pond filling to the start of construction, which shows that work has begun, not that replacement functions operate. The shaded interval is the loss the compensation package must address."
-      legend={[{ label: "Existing wetland function", tone: "ink", shape: "line" }, { label: "Expected replacement function", tone: "accent", shape: "line" }, { label: "Enhancement falls behind", tone: "steel", shape: "dash" }]}
     >
       <Plot
         label="Existing wetland function ends at pond filling, while replacement function rises only gradually afterwards; the gap between them is the period of loss."
         x={x}
         y={y}
         height="clamp(220px, 50cqi, 280px)"
-        inset={{ left: 14, top: 36 }}
+        inset={{ left: 14, top: 36, bottom: 46 }}
         yTicks={[{ at: 0, label: "", solid: true }]}
         yTitle="Wetland function"
         xTitle="Time"
@@ -364,8 +364,9 @@ function SanTinLoss() {
         <span className={styles.vline} style={{ left: `${x(filling)}%` }} />
         <Mark left={x(0.1)} top={4} anchor="center" tag className={kit.muted}>1</Mark>
         <Mark left={x(filling)} top={4} anchor="center" tag className={kit.muted}>9</Mark>
-        <Mark left={x(0.6)} top={100 - y(0.86)} anchor="center" tone="accent" knockout={false} className={`${kit.fade} ${styles.lossLabel}`}>Period of loss</Mark>
+        <Mark left={x(filling)} top={100 - y(1)} anchor="bottom-left" tone="accent" knockout={false} className={`${kit.fade} ${styles.lossLabel}`}>Period of loss</Mark>
       </Plot>
+      <Legend items={[{ label: "Existing wetland function", tone: "ink", shape: "line" }, { label: "Expected replacement function", tone: "accent", shape: "line" }, { label: "Enhancement falls behind", tone: "steel", shape: "dash" }]} />
       <dl className={styles.lanes} aria-label="Approval conditions">
         <dt>Condition 1</dt><dd>Habitat Creation and Management Plan submitted for approval at least nine months before pond filling.</dd>
         <dt>Condition 9</dt><dd>Pond filling linked to the start of construction of ecologically enhanced fishponds.</dd>
