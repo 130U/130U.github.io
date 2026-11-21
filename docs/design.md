@@ -585,8 +585,9 @@ sets its second half under its first, the same rows in the same order under the 
 heading; then its phrases and row labels wrap and two or more sentence columns share the
 room, to no less than 10rem each, closed up again if need be. A table wider than that
 scrolls at its natural spacing: its row labels, wrapped to no more than 45% of its room
-and 16rem, stay in view whenever they take no more than half of it, and the values pass
-beneath them; several sentence columns keep their shared width where the room holds the
+and 16rem, stay in view whenever they take no more than half of it, or whenever the room
+they leave beside them, short of the fading edge, holds a column of values whole, and the
+values pass beneath them; several sentence columns keep their shared width where the room holds the
 labels and two of them, and otherwise each fills the room beside the labels, at most
 16rem, so one whole column reads at a time; the right edge fades while more remains.
 
@@ -611,8 +612,9 @@ numbered table moves by less than half a row so that the row nearest that axis s
 the display's baseline: its number then stands on that row's baseline, as every equation
 number stands on its expression's. Its drawing is decorative: one assistive expression
 carries the whole display and its TeX. A table of mathematics that scrolls keeps its row
-labels in view when they take no more than half of its room, and the values pass beneath
-them in the other half, which holds a column or more of its short expressions.
+labels in view when they take no more than half of its room, or when the room they leave
+beside them, up to the number's edge, holds a column of its values whole, and the values
+pass beneath them; only a table whose labels leave no column of values room scrolls whole.
 
 Every table and figure carries a magnifier where the stage shows more than the page:
 where it enlarges the table or figure by at least 1.15 times, or sets whole what the

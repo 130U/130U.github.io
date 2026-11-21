@@ -614,12 +614,15 @@ function inspectManuscript() {
     const lines = lineCount(heading);
     if (lines > (heading.hasAttribute("data-stack") ? 3 : 2)) issues.push({ kind: "table-heading-over-two-lines", heading: heading.textContent.trim(), lines });
   }
-  // A table whose row labels are words keeps them in view while it scrolls, unless a word of
-  // theirs is wider than half its room.
+  // A table keeps its row labels in view while it scrolls when they take no more than half its
+  // room, or when the room beside them, short of the 40px fading edge, holds a column of values
+  // whole.
   for (const region of document.querySelectorAll('[data-table-frame] [role="region"]')) {
     const table = region.querySelector("table");
-    const label = table.rows[0].cells[0];
-    if (table.hasAttribute("data-label") && region.scrollWidth > region.clientWidth + 1 && !region.hasAttribute("data-pinned") && label.offsetWidth <= 0.5 * region.clientWidth) {
+    const [label, ...values] = [...table.rows[0].cells];
+    const narrowest = Math.min(...values.filter(cell => cell.offsetWidth > 0).map(cell => cell.offsetWidth - parseFloat(getComputedStyle(cell).paddingLeft) - parseFloat(getComputedStyle(cell).paddingRight)));
+    const eligible = label.offsetWidth <= 0.5 * region.clientWidth || narrowest <= region.clientWidth - label.offsetWidth - 40;
+    if (region.scrollWidth > region.clientWidth + 1 && !region.hasAttribute("data-pinned") && eligible) {
       issues.push({ kind: "table-labels-not-pinned", table: region.closest("[data-table-frame]").querySelector("[data-table-title]")?.textContent.trim().slice(0, 60), label: table.rows[0].cells[0].offsetWidth, room: region.clientWidth });
     }
   }
@@ -748,7 +751,13 @@ function inspectManuscript() {
     }
     const label = rows[0]?.firstElementChild;
     const scrolls = region.scrollWidth > region.clientWidth + 1;
-    if (scrolls && label.getBoundingClientRect().width <= 0.5 * region.clientWidth && !region.hasAttribute("data-pinned")) issues.push({ kind: "display-table-labels-not-pinned" });
+    // Labels stay in view when they take no more than half the room, or when the room they leave
+    // beside them, up to the number's edge, holds the ink of a column of values whole.
+    const regionBox = region.getBoundingClientRect();
+    const labelBox = label.getBoundingClientRect();
+    const beside = region.clientWidth - (labelBox.left - regionBox.left + region.scrollLeft) - labelBox.width - region.querySelector("[data-equation-edge]").getBoundingClientRect().width;
+    const narrowest = Math.min(...[...rows[0].children].slice(1).map(cell => cell.getBoundingClientRect().width - parseFloat(getComputedStyle(cell).paddingRight)));
+    if (scrolls && (labelBox.width <= 0.5 * region.clientWidth || narrowest <= beside) && !region.hasAttribute("data-pinned")) issues.push({ kind: "display-table-labels-not-pinned", label: labelBox.width, beside, narrowest });
     if (region.hasAttribute("data-pinned")) {
       const start = label.getBoundingClientRect().left;
       region.scrollLeft = region.scrollWidth;
