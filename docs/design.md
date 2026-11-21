@@ -363,13 +363,40 @@ Each AI and legal article opens with a `LogicDiagram`, its visual abstract, draw
 `app/lib/content/architecture-diagrams.ts`. Four stages read left to right, each holding
 one node or one node per lane, with an optional feedback loop to an earlier stage.
 Stage labels sit on short rules with blue ticks; nodes are flat panels with a 1px
-border, and the stage holding the decisive mechanism is set in ink. A lane's name above a
-node title is in the label role of the diagram's one face. Connectors are CSS
-on the same grid as the nodes; the loop is the one blue path, labeled beneath. Node
-details accept inline TeX. Below 640px of figure width the diagram becomes a vertical
-sequence (parallel nodes side by side from 480px) and the loop a labeled return note.
-A prose caption follows. The build fails if a stage holds neither one node nor as many
-as the widest stage.
+border, and the stage holding the decisive mechanism is set in ink: its title in paper,
+its detail and lane name in 84% paper, above 12:1 on the ink. A lane's name above a
+node title is in the label role of the diagram's one face. Lane rows share one height,
+so the nodes of a stage are equal and start their titles on one line, a single node
+stands on the middle of the lanes, and a line through a bus runs straight. A hyphenated
+compound holds one line where its node has room for it.
+
+Connectors are drawn in SVG on the same grid as the nodes: crisp 1px bars placed by
+percentages of their grid area, in one opaque color (42% ink on the paper), so a line
+keeps one width and one color at every device scale, fractional scales included, and
+nothing darkens where bars overlap. The bars of one line overlap at least to each
+other's centre line, so no rounding can open a seam; each line leaves and enters a node
+at its middle, and its arrowhead is centred on it with the tip on the node's edge. The
+loop is one path in the accent the whole way: down from the source node's lower edge,
+along the foot of the stages, and up to an arrowhead at the target's lower edge, labeled
+beneath.
+
+Node details accept inline TeX, set on the text's baseline: the formula's box clips
+its overflow, so its baseline is its lower margin edge, which stands the expression's
+depth below the text's baseline (a box that shows or merely clips its overflow takes the
+baseline of the drawing's own line and lifts the formula by its 0.375em gutter). It is
+set at the site's math size, 1.15em, where the TeX x-height (0.442em) meets Inter's
+(0.516em); there its stems are as heavy as Inter Regular's or heavier, so the math takes
+no added weight. A formula wider than its node is set smaller to fit, never below nine
+tenths of the text; one wider than seven ems may break after a relation at its outer
+level, as TeX breaks a formula in a line, and reads as one expression to assistive
+technology.
+
+Below 720px of figure width the diagram becomes a vertical sequence (parallel nodes
+side by side from 480px): a step down the column's centre joins each stage to the next,
+gathering side-by-side nodes through a short bus, and the loop becomes a labeled return
+note. A prose caption follows. The build fails if a stage holds neither one node nor as
+many as the widest stage, and the browser layout check holds each rule above at every
+width.
 
 ### Article figures
 

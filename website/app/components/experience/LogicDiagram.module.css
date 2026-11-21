@@ -1,7 +1,11 @@
 .diagram {
-  --line: rgba(11, 11, 11, 0.42);
+  /* Connectors are opaque: the composite of 42% ink on the page, so lines that
+     meet or cross never darken where they overlap. */
+  --line: color-mix(in srgb, var(--ink) 42%, var(--page));
   --diagram-gap: clamp(28px, 4.6cqi, 44px);
-  --arrow: 6px;
+  /* Mathematics in diagram text is set at the site's math size, between the
+     x-height and the cap height of the text face. */
+  --diagram-math: var(--type-math);
 
   container: diagram / inline-size;
   margin: 72px 0 0;
@@ -16,6 +20,7 @@
 }
 
 .canvas {
+  position: relative;
   display: grid;
   align-items: stretch;
   font-family: var(--font-text);
@@ -64,10 +69,12 @@
   padding: 6px 0;
 }
 
+/* Every node of a stage starts its text on one line: lane rows share one
+   height, and a node's text stands at its top. */
 .node {
   display: grid;
   flex: 1 1 auto;
-  align-content: center;
+  align-content: start;
   gap: 4px;
   min-width: 0;
   padding: 12px 14px 13px;
@@ -97,14 +104,25 @@
 }
 
 .nodeDetail {
+  container-type: inline-size;
   color: var(--supporting-ink);
   font-size: var(--type-label);
   line-height: var(--label-leading);
   text-wrap: pretty;
 }
 
-/* The decisive mechanism of each system is set in ink. */
+/* A hyphenated compound holds one line where the node has room for it. */
+.compound {
+  display: inline-block;
+  max-width: 100%;
+}
+
+/* The decisive mechanism of each system is set in ink. Its text is paper:
+   the title in full, the detail and the lane's name a step back, at a
+   contrast of at least 10:1 on the ink. */
 .emphasis {
+  --on-ink-detail: color-mix(in srgb, var(--page) 84%, var(--ink));
+
   border-color: var(--ink);
   background: var(--ink);
 }
@@ -115,124 +133,97 @@
 
 .emphasis .tag,
 .emphasis .nodeDetail {
-  color: rgba(247, 246, 245, 0.68);
+  color: var(--on-ink-detail);
 }
 
-/* A formula in a node fits its card: it scales down instead of scrolling, so
-   no glyph meets the card's edge or the connector beside it. */
-.nodeDetail [data-research-formula] {
-  max-width: 100%;
-  overflow: visible;
-  -webkit-mask-image: none;
-  mask-image: none;
-  animation: none;
-}
-
-.nodeDetail [data-research-formula] svg {
-  max-width: 100%;
-  height: auto;
-}
-
-/* Connectors: one piece per lane in each connector column. */
-.link {
+/* Inline mathematics stands in its line as a word does, on the text's
+   baseline: the drawing's canvas gutters lie in negative margins, and the box
+   clips its overflow, so its baseline is its lower margin edge, which stands
+   the expression's depth below the text's baseline. It is set at the math
+   size, or smaller where that is wider than its node. */
+.math {
   position: relative;
-  min-width: 0;
-  color: var(--line);
+}
+
+.mathPiece {
+  position: relative;
+  display: inline-block;
+  padding-block: 0.125em;
+  margin-block: calc(-0.125em - var(--math-gutter));
+  overflow: hidden;
+  font-size: min(var(--diagram-math), calc((100cqi - 1px - var(--reserve, 0em)) / var(--ink)));
+  line-height: 0;
+}
+
+.glued {
+  white-space: nowrap;
+}
+
+.assistive {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* Connectors: one crisp drawing over each connector column's lane rows, and
+   the loop's legs and return rule; each lies over its grid area. */
+.wires {
+  display: block;
+  overflow: visible;
+  fill: currentColor;
   pointer-events: none;
 }
 
-.link::before {
-  position: absolute;
-  top: 50%;
-  border-top: 1px solid currentColor;
-  content: "";
-}
-
-.straight::before,
-.branchOut::before,
-.join::before {
-  right: calc(var(--arrow) - 1px);
-}
-
-.straight::before { left: 0; }
-.stem::before,
-.branchIn::before { left: 0; width: 50%; }
-.branchOut::before,
-.join::before { left: 50%; }
-
-.straight::after,
-.branchOut::after,
-.join::after {
-  position: absolute;
-  top: 50%;
-  right: 0;
-  width: var(--arrow);
-  height: 7px;
-  margin-top: -3px;
-  background: currentColor;
-  clip-path: polygon(0 0, 100% 50%, 0 100%);
-  content: "";
-}
-
-.bus {
-  position: absolute;
-  left: 50%;
-  border-left: 1px solid currentColor;
-}
-
-[data-position="first"] > .bus { top: 50%; bottom: 0; }
-[data-position="middle"] > .bus { top: 0; bottom: 0; }
-[data-position="last"] > .bus { top: 0; height: calc(50% + 1px); }
-
-/* Feedback loop: legs drop from both endpoint nodes into a return rule. */
-.cell[data-loop] {
-  overflow: hidden;
-  overflow: clip;
-}
-
-.cell[data-loop] .node {
-  position: relative;
-}
-
-.cell[data-loop] .node::after {
-  position: absolute;
-  top: 100%;
-  left: 50%;
-  height: 100vh;
-  border-left: 1px solid var(--accent);
-  content: "";
-}
-
-.cell[data-loop="target"] .node::before {
-  position: absolute;
-  z-index: 1;
-  top: calc(100% + 1px);
-  left: calc(50% - 3px);
-  width: 7px;
-  height: var(--arrow);
-  background: var(--accent);
-  clip-path: polygon(50% 0, 100% 100%, 0 100%);
-  content: "";
-}
-
+.link,
 .loop {
-  height: 28px;
-  border-bottom: 1px solid var(--accent);
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
 }
 
-.loopStart {
-  margin-left: 50%;
-  border-left: 1px solid var(--accent);
+.link {
+  color: var(--line);
 }
 
-.loopEnd {
-  width: calc(50% + 1px);
-  border-right: 1px solid var(--accent);
+/* The feedback loop is one path in the accent, from the source node's lower
+   edge to the arrowhead at the target node's lower edge. */
+.loop,
+.leg {
+  color: var(--accent);
 }
 
-/* The return rule under the stages between the loop's two ends. */
-.loopSpan {
-  min-width: 0;
+.spacer {
+  flex: 1 0 6px;
+  margin-top: -6px;
+}
+
+.leg {
+  position: relative;
+  flex: 0 0 6px;
+  margin-bottom: -6px;
+}
+
+.cell[data-single] .leg {
+  flex-grow: 1;
+}
+
+.legWires {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.step,
+.stepBus {
+  display: none;
 }
 
 .loopLabel {
@@ -260,7 +251,7 @@
 }
 
 /* Narrow: the same markup becomes a vertical sequence. */
-@container diagram (width < 640px) {
+@container diagram (width < 720px) {
   .canvas {
     display: block;
   }
@@ -274,24 +265,16 @@
     padding-top: 40px;
   }
 
-  .stage:not([data-stage="1"])::before {
+  /* The step between stages: a line down the column's centre from the stage
+     above, its arrowhead 8px over the next stage's rule. */
+  .step {
     position: absolute;
-    top: 8px;
-    left: 20px;
-    height: 24px;
-    border-left: 1px solid var(--line);
-    content: "";
-  }
-
-  .stage:not([data-stage="1"])::after {
-    position: absolute;
-    top: 26px;
-    left: 17px;
-    width: 7px;
-    height: var(--arrow);
-    background: var(--line);
-    clip-path: polygon(0 0, 100% 0, 50% 100%);
-    content: "";
+    top: 0;
+    left: 0;
+    display: block;
+    width: 100%;
+    height: 32px;
+    color: var(--line);
   }
 
   .stageLabel {
@@ -308,8 +291,8 @@
 
   .link,
   .loop,
-  .cell[data-loop] .node::before,
-  .cell[data-loop] .node::after {
+  .leg,
+  .spacer {
     display: none;
   }
 
@@ -330,7 +313,7 @@
 }
 
 /* Mid widths: parallel nodes of a stage sit side by side. */
-@container diagram (480px <= width < 640px) {
+@container diagram (480px <= width < 720px) {
   .stage {
     display: grid;
     grid-template-columns: repeat(var(--columns), minmax(0, 1fr));
@@ -349,6 +332,15 @@
 
   .stage > .cell + .cell {
     margin-top: 0;
+  }
+
+  /* Side-by-side nodes drop into a bus over the step. */
+  .step:has(.stepBus) .stepStem {
+    display: none;
+  }
+
+  .stepBus {
+    display: inline;
   }
 
   .cell .node {
@@ -374,8 +366,13 @@
     color: CanvasText;
   }
 
-  .link::after,
-  .cell[data-loop="target"] .node::before {
-    background: CanvasText;
+  .link,
+  .step {
+    color: CanvasText;
+  }
+
+  .loop,
+  .leg {
+    color: LinkText;
   }
 }

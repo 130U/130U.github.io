@@ -7,6 +7,7 @@ import { fileURLToPath } from "node:url";
 import sharp from "sharp";
 import { secureStaticHtml } from "../scripts/secure-static-html.mjs";
 import { courseworkGroups } from "../app/lib/content/about.ts";
+import { architectureDiagrams } from "../app/lib/content/architecture-diagrams.ts";
 import { BEAMED_NOTE, NODE, NOTE } from "../app/components/clarinet-hero/shape.ts";
 
 const ROOT = fileURLToPath(new URL("../", import.meta.url));
@@ -706,6 +707,7 @@ test("the ten nonresearch detail routes keep metadata in a labeled record strip"
 test("each AI and legal article opens with one logic architecture diagram", async () => {
   const routes = [...AI_PROJECT_SLUGS.map((slug) => `${EXPERIENCE_ROUTE}${slug}/`), ...ARTICLES.map(([slug]) => `${EXPERIENCE_ROUTE}${slug}/`)];
   assert.equal(routes.length, 8);
+  const diagramTex = [];
   for (const route of routes) {
     const html = await routeHtml(route);
     const figures = [...html.matchAll(/<figure\b([^>]*)>([\s\S]*?)<\/figure>/giu)]
@@ -717,7 +719,18 @@ test("each AI and legal article opens with one logic architecture diagram", asyn
     const stages = [...figures[0][2].matchAll(/\bdata-stage="(\d+)"/gu)].map((match) => Number(match[1]));
     assert.deepEqual(stages, [1, 2, 3, 4], `${route}: four stages, read left to right`);
     assert.ok(stripMarkup(figures[0][2].match(/<figcaption\b[^>]*>([\s\S]*?)<\/figcaption>/iu)?.[1] ?? "").length > 40, `${route}: the diagram needs its caption`);
+    // Connectors are crisp SVG drawings, one over each connector column; the loop is drawn in its own.
+    const wires = [...figures[0][2].matchAll(/<svg\b([^>]*\bdata-wire="([^"]+)"[^>]*)>/gu)];
+    assert.equal(wires.filter((match) => match[2].startsWith("link-")).length, 3, `${route}: three connector columns`);
+    for (const [, attributes] of wires) assert.equal(attribute(attributes, "shape-rendering"), "crispEdges", `${route}: connectors are drawn with crisp edges`);
+    // Every formula keeps one assistive expression with its exact TeX, however its drawing breaks.
+    for (const formula of figures[0][2].split(/(?=<span\b[^>]*\bdata-diagram-math="true")/u).slice(1)) {
+      assert.equal((formula.match(/<math\b/gu) ?? []).length, 1, `${route}: one assistive expression per formula`);
+      diagramTex.push(decodeHtml(formula.match(/<annotation\b[^>]*>([\s\S]*?)<\/annotation>/u)[1]));
+    }
   }
+  const sourceTex = Object.values(architectureDiagrams).flatMap((diagram) => diagram.stages.flatMap((stage) => stage.nodes.flatMap((node) => [...(node.detail ?? "").matchAll(/\$([^$]+)\$/gu)].map((match) => match[1]))));
+  assert.deepEqual([...diagramTex].sort(), [...sourceTex].sort(), "Every diagram formula keeps its TeX");
 });
 
 test("law papers preserve article identity, chapter navigation, and bidirectional footnotes", async () => {
