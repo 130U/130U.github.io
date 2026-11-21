@@ -666,6 +666,195 @@ function inspectScrollers({ scope, nearMissPx, nearMissShare }) {
   return issues;
 }
 
+// The logic diagram at the head of each Experience article (docs/design.md, Logic
+// diagrams). Its connectors are crisp 1px bars in SVG: the bars of one line touch
+// or overlap, a bar that runs on in the same direction keeps its centre line, a line
+// into a bus from one side and out of it on the other is straight, and every line
+// ends in one arrowhead centred on it, whose tip meets a node. The loop is one line
+// in the accent from the source node's lower edge to the target's. A line never
+// crosses a node or a label. Each connector line has one opaque color. Inline
+// mathematics sits on its text's baseline within 0.5px, at no less than nine tenths
+// of the text's size, inside its node; text on an ink node stands at least 4.5:1 on
+// the ink; the nodes of a stage that share a row share one height and start their
+// titles on one line; and a hyphenated compound that fits its node holds one line.
+const DIAGRAM_WIDTHS = [320, 390, 768, 1024, 1200, 1240, 1280, 1440, 1920];
+
+function inspectDiagram() {
+  const issues = [];
+  const figure = document.querySelector("[data-logic-diagram]");
+  if (!figure) return [{ kind: "diagram-missing" }];
+  const box = element => element.getBoundingClientRect();
+  const shown = element => element.checkVisibility({ checkVisibilityCSS: true }) && box(element).width + box(element).height > 0;
+  const round = value => Math.round(value * 100) / 100;
+  const nodes = [...figure.querySelectorAll("[data-node]")].filter(shown);
+  const nodeBoxes = nodes.map(box);
+
+  // Colors: parse the computed forms Chrome returns (rgb(), rgba() and color(srgb ...)).
+  const parse = value => {
+    const srgb = /color\(srgb ([\d.e-]+) ([\d.e-]+) ([\d.e-]+)(?: \/ ([\d.]+))?\)/u.exec(value);
+    if (srgb) return [Number(srgb[1]) * 255, Number(srgb[2]) * 255, Number(srgb[3]) * 255, srgb[4] === undefined ? 1 : Number(srgb[4])];
+    const rgb = /rgba?\(([\d.]+),? ([\d.]+),? ([\d.]+)(?:[,/] ?([\d.]+))?\)/u.exec(value);
+    return rgb ? [Number(rgb[1]), Number(rgb[2]), Number(rgb[3]), rgb[4] === undefined ? 1 : Number(rgb[4])] : null;
+  };
+  const luminance = ([r, g, b]) => [r, g, b].map(channel => channel / 255).map(c => c <= 0.04045 ? c / 12.92 : ((c + 0.055) / 1.055) ** 2.4).reduce((sum, c, index) => sum + c * [0.2126, 0.7152, 0.0722][index], 0);
+  const contrast = (foreground, background) => {
+    const over = foreground.slice(0, 3).map((channel, index) => channel * foreground[3] + background[index] * (1 - foreground[3]));
+    const [a, b] = [luminance(over), luminance(background)].sort((x, y) => y - x);
+    return (a + 0.05) / (b + 0.05);
+  };
+
+  // Connector lines: bars are SVG rects, arrowheads are paths, grouped by drawing.
+  const bars = [];
+  const arrows = [];
+  for (const svg of [...figure.querySelectorAll("svg[data-wire]")].filter(shown)) {
+    for (const rect of svg.querySelectorAll("rect")) {
+      const b = box(rect);
+      if (b.width <= 0 || b.height <= 0) continue;
+      const axis = b.width > 1.01 ? "h" : b.height > 1.01 ? "v" : "dot";
+      bars.push({ b, axis, wire: svg.dataset.wire, fill: getComputedStyle(rect).fill, centre: axis === "h" ? (b.top + b.bottom) / 2 : (b.left + b.right) / 2 });
+    }
+    for (const path of svg.querySelectorAll("[data-arrow] > path")) {
+      arrows.push({ b: box(path), direction: path.parentElement.dataset.arrow, wire: svg.dataset.wire, fill: getComputedStyle(path).fill });
+    }
+  }
+  const touch = (a, b, slack = 0.5) => a.left <= b.right + slack && b.left <= a.right + slack && a.top <= b.bottom + slack && b.top <= a.bottom + slack;
+  for (const arrow of arrows) {
+    if (!bars.some(bar => bar.wire === arrow.wire && touch(bar.b, arrow.b))) issues.push({ kind: "diagram-arrowhead-without-line", wire: arrow.wire });
+  }
+  // Connected lines: bars that touch, with the arrowheads they reach.
+  const parent = bars.map((_, index) => index);
+  const find = index => parent[index] === index ? index : (parent[index] = find(parent[index]));
+  bars.forEach((a, i) => bars.forEach((b, j) => { if (j > i && a.wire === b.wire && touch(a.b, b.b)) parent[find(i)] = find(j); }));
+  const lines = new Map();
+  bars.forEach((bar, index) => lines.set(find(index), [...(lines.get(find(index)) ?? []), bar]));
+  for (const [, members] of lines) {
+    const ends = arrows.filter(arrow => arrow.wire === members[0].wire && members.some(bar => touch(bar.b, arrow.b)));
+    const where = { wire: members[0].wire, at: members.map(bar => [round(bar.b.left), round(bar.b.top)]).slice(0, 2) };
+    if (!ends.length || members[0].wire === "loop" && ends.length !== 1) issues.push({ kind: "diagram-line-arrowheads", arrowheads: ends.length, ...where });
+    const fills = new Set([...members.map(bar => bar.fill), ...ends.map(arrow => arrow.fill)]);
+    if (fills.size > 1) issues.push({ kind: "diagram-line-changes-color", fills: [...fills], ...where });
+    for (const fill of fills) if ((parse(fill)?.[3] ?? 0) < 1) issues.push({ kind: "diagram-line-translucent", fill, ...where });
+    // A bar that runs on in the same direction keeps the centre line of the bar before it.
+    members.forEach((a, i) => members.slice(i + 1).forEach(b => {
+      if (a.axis !== b.axis || a.axis === "dot" || !touch(a.b, b.b)) return;
+      if (Math.abs(a.centre - b.centre) > 0.5) issues.push({ kind: "diagram-line-steps", offset: round(a.centre - b.centre), ...where });
+    }));
+    for (const arrow of ends) {
+      const shaft = members.find(bar => touch(bar.b, arrow.b) && bar.axis === (arrow.direction === "right" ? "h" : "v"));
+      const axisCentre = arrow.direction === "right" ? (arrow.b.top + arrow.b.bottom) / 2 : (arrow.b.left + arrow.b.right) / 2;
+      if (!shaft || Math.abs(shaft.centre - axisCentre) > 0.5) issues.push({ kind: "diagram-arrowhead-off-its-line", offset: shaft && round(shaft.centre - axisCentre), ...where });
+      if (arrow.direction === "down") continue;
+      // The tip meets a node's edge: its left edge for a forward arrow, its lower edge for the loop.
+      const tip = arrow.direction === "right" ? { x: arrow.b.right, y: axisCentre } : { x: axisCentre, y: arrow.b.top };
+      const met = nodeBoxes.some(node => arrow.direction === "right"
+        ? Math.abs(node.left - tip.x) <= 0.5 && tip.y > node.top && tip.y < node.bottom
+        : Math.abs(node.bottom - tip.y) <= 0.5 && tip.x > node.left && tip.x < node.right);
+      if (!met) issues.push({ kind: "diagram-arrowhead-misses-node", tip: [round(tip.x), round(tip.y)], ...where });
+      // A forward arrow enters its node at the node's middle.
+      const entered = nodeBoxes.find(node => arrow.direction === "right" && Math.abs(node.left - tip.x) <= 0.5 && tip.y > node.top && tip.y < node.bottom);
+      if (entered && Math.abs((entered.top + entered.bottom) / 2 - tip.y) > 0.5) issues.push({ kind: "diagram-line-off-node-middle", offset: round(tip.y - (entered.top + entered.bottom) / 2), ...where });
+    }
+    // A line leaves a node at the node's middle.
+    for (const bar of members.filter(member => member.axis === "h")) {
+      const left = nodeBoxes.find(node => Math.abs(node.right - bar.b.left) <= 0.5 && bar.centre > node.top && bar.centre < node.bottom);
+      if (left && Math.abs((left.top + left.bottom) / 2 - bar.centre) > 0.5) issues.push({ kind: "diagram-line-off-node-middle", offset: round(bar.centre - (left.top + left.bottom) / 2), ...where });
+    }
+  }
+  // A line into a bus and a line out of it on the other side are one straight line.
+  for (const bus of bars.filter(bar => bar.axis === "v" && bar.b.height > 12)) {
+    const sides = bars.filter(bar => bar.axis === "h" && bar.wire === bus.wire && touch(bar.b, bus.b));
+    const left = sides.filter(bar => bar.b.left < bus.b.left - 1);
+    const right = sides.filter(bar => bar.b.right > bus.b.right + 1);
+    for (const a of left) for (const b of right) {
+      const offset = Math.abs(a.centre - b.centre);
+      if (offset > 0.5 && offset < 16) issues.push({ kind: "diagram-bus-junction-steps", wire: bus.wire, offset: round(offset) });
+    }
+  }
+  // The loop: one line from the source node's lower edge to the arrowhead at the target's.
+  const loopBars = bars.filter(bar => bar.wire === "loop");
+  if (loopBars.length) {
+    const roots = new Set(bars.flatMap((bar, index) => bar.wire === "loop" ? [find(index)] : []));
+    if (roots.size !== 1) issues.push({ kind: "diagram-loop-broken", pieces: roots.size });
+    const source = figure.querySelector('[data-loop="source"] [data-node]');
+    const legTop = Math.min(...loopBars.filter(bar => bar.axis === "v" && bar.b.left > box(source).left && bar.b.right < box(source).right).map(bar => bar.b.top));
+    if (Math.abs(legTop - box(source).bottom) > 0.5) issues.push({ kind: "diagram-loop-leaves-off-the-node", gap: round(legTop - box(source).bottom) });
+    // The loop's label is set in the accent; the line takes the same color.
+    const accent = parse(getComputedStyle(figure.querySelector("[class*='_loopLabel']")).color);
+    if (parse(loopBars[0].fill)?.slice(0, 3).join() !== accent?.slice(0, 3).join()) issues.push({ kind: "diagram-loop-not-in-the-accent", fill: loopBars[0].fill });
+  }
+  // No line crosses a node or a label.
+  const labels = [...figure.querySelectorAll("[class*='_loopLabel'], [class*='_stageLabel']")].filter(shown).map(box);
+  for (const bar of bars) {
+    const inside = (outer, inner) => inner.left < outer.right - 0.5 && inner.right > outer.left + 0.5 && inner.top < outer.bottom - 0.5 && inner.bottom > outer.top + 0.5;
+    if (nodeBoxes.some(node => inside(node, bar.b))) issues.push({ kind: "diagram-line-crosses-node", wire: bar.wire, at: [round(bar.b.left), round(bar.b.top)] });
+    for (const label of labels) {
+      const text = { left: label.left, right: label.right, top: label.top + 1, bottom: label.bottom };
+      if (inside(text, bar.b)) issues.push({ kind: "diagram-line-crosses-label", wire: bar.wire });
+    }
+  }
+
+  // Inline mathematics: on the text's baseline, at the math size or fitted no smaller
+  // than nine tenths of the text, and inside its node.
+  for (const piece of [...figure.querySelectorAll("[data-diagram-math-piece]")].filter(shown)) {
+    const svg = piece.querySelector("svg[data-research-svg]");
+    const [, top, , height] = svg.getAttribute("viewBox").split(/\s+/u).map(Number);
+    const drawing = box(svg);
+    const mathBaseline = drawing.top + (0 - top) / height * drawing.height;
+    // The text's baseline on the formula's line: a zero-size box beside the formula,
+    // after it, or before it where a formula that closes a full line pushes the box on.
+    const probe = document.createElement("span");
+    probe.style.cssText = "display:inline-block;width:0;height:0;vertical-align:baseline";
+    const textBaseline = ["after", "before"].map(side => {
+      piece[side](probe);
+      const baseline = box(probe).bottom;
+      probe.remove();
+      return baseline;
+    }).find(baseline => baseline > drawing.top && baseline < drawing.bottom) ?? NaN;
+    const tex = piece.closest("[data-research-formula]")?.querySelector("annotation")?.textContent;
+    if (!(Math.abs(mathBaseline - textBaseline) <= 0.5)) issues.push({ kind: "diagram-formula-off-baseline", tex, offset: round(mathBaseline - textBaseline) });
+    const text = parseFloat(getComputedStyle(piece.parentElement.closest("[class*='_nodeDetail']")).fontSize);
+    if (parseFloat(getComputedStyle(piece).fontSize) < 0.9 * text - 0.01) issues.push({ kind: "diagram-formula-too-small", tex, size: getComputedStyle(piece).fontSize });
+    const ink = box(svg.querySelector("g"));
+    const node = box(piece.closest("[data-node]"));
+    if (ink.left < node.left + 1 || ink.right > node.right - 1 || ink.top < node.top + 1 || ink.bottom > node.bottom - 1) issues.push({ kind: "diagram-formula-outside-node", tex });
+    if (piece.scrollWidth > piece.clientWidth + 0.5) issues.push({ kind: "diagram-formula-clipped", tex });
+  }
+  // Text on ink.
+  for (const node of [...figure.querySelectorAll("[class*='_emphasis']")].filter(shown)) {
+    const background = parse(getComputedStyle(node).backgroundColor);
+    for (const part of node.querySelectorAll("[class*='_nodeTitle'], [class*='_nodeDetail'], [class*='_tag'], [data-diagram-math-piece]")) {
+      const ratio = contrast(parse(getComputedStyle(part).color), background);
+      if (ratio < 4.5) issues.push({ kind: "diagram-ink-text-low-contrast", text: part.textContent.trim().slice(0, 30), ratio: round(ratio) });
+    }
+  }
+  // Nodes of a stage that share a row share one height, and their titles one line.
+  const canvas = figure.querySelector("[class*='_canvas']");
+  const horizontal = getComputedStyle(canvas).display === "grid";
+  for (const stage of figure.querySelectorAll("[data-stage]")) {
+    const own = [...stage.querySelectorAll("[data-node]")].filter(shown);
+    if (own.length < 2) continue;
+    const rows = horizontal ? [own] : Object.values(Object.groupBy(own, node => Math.round(box(node).top)));
+    for (const row of rows.filter(row => row.length > 1)) {
+      const heights = row.map(node => box(node).height);
+      if (Math.max(...heights) - Math.min(...heights) > 0.5) issues.push({ kind: "diagram-stage-nodes-uneven", stage: stage.dataset.stage, heights: heights.map(round) });
+    }
+    const offsets = own.map(node => box(node.querySelector("[class*='_nodeTitle']")).top - box(node).top);
+    if (Math.max(...offsets) - Math.min(...offsets) > 0.5) issues.push({ kind: "diagram-stage-titles-off-one-line", stage: stage.dataset.stage, offsets: offsets.map(round) });
+  }
+  // Node text stays inside its node; a hyphenated compound that fits its node holds one line.
+  for (const node of nodes) {
+    if (node.scrollWidth > node.clientWidth + 0.5 || node.scrollHeight > node.clientHeight + 0.5) issues.push({ kind: "diagram-node-text-clipped", text: node.textContent.trim().slice(0, 30) });
+  }
+  for (const compound of [...figure.querySelectorAll("[data-compound]")].filter(shown)) {
+    const range = document.createRange();
+    range.selectNodeContents(compound);
+    const lines = new Set([...range.getClientRects()].filter(rect => rect.width > 0).map(rect => Math.round(rect.top)));
+    const room = compound.parentElement.getBoundingClientRect().width;
+    if (lines.size > 1 && box(compound).width < room - 1) issues.push({ kind: "diagram-compound-breaks", text: compound.textContent });
+  }
+  return issues;
+}
+
 async function discoverPages(directory = OUT) {
   const routes = [];
   for (const entry of await readdir(directory, { withFileTypes: true })) {
@@ -698,6 +887,7 @@ const noScript = [];
 const longNumbers = [];
 const manuscripts = [];
 const texts = [];
+const diagrams = [];
 const scrolls = [];
 const missing = new Set();
 try {
@@ -773,6 +963,29 @@ try {
           await page.waitForFunction(() => !document.querySelector("[data-figure-zoom][hidden], [data-table-zoom][hidden]"));
           await page.evaluate(() => new Promise(resolve => requestAnimationFrame(() => requestAnimationFrame(() => setTimeout(resolve, 100)))));
           manuscripts.push({ route, width, issues: await page.evaluate(inspectManuscript) });
+        }
+      } finally { await context.close(); }
+    }
+    const diagramRoutes = [];
+    for (const route of await discoverPages()) {
+      if (/data-logic-diagram/u.test(await readFile(path.join(OUT, route, "index.html"), "utf8"))) diagramRoutes.push(route);
+    }
+    assert.equal(diagramRoutes.length, 8, `Expected 8 logic diagrams; found ${diagramRoutes.length}.`);
+    for (const width of DIAGRAM_WIDTHS) {
+      const context = await browser.newContext({ viewport: { width, height: 1100 }, reducedMotion: "reduce", serviceWorkers: "block" });
+      await serveExport(context, missing);
+      try {
+        const page = await context.newPage();
+        for (const route of diagramRoutes) {
+          await page.goto(ORIGIN + route, { waitUntil: "networkidle" });
+          await page.evaluate(() => document.fonts.ready);
+          const issues = await page.evaluate(inspectDiagram);
+          const record = { route, width, issues };
+          if (issues.length) {
+            record.screenshot = `diagram-${route.split("/").filter(Boolean).at(-1)}-${width}.png`;
+            await page.locator("[data-logic-diagram]").screenshot({ path: path.join(ARTIFACTS, record.screenshot) });
+          }
+          diagrams.push(record);
         }
       } finally { await context.close(); }
     }
@@ -906,10 +1119,10 @@ try {
   await browser.close();
 }
 const failures = records.filter(record => record.issues.length || record.pageErrors.length);
-const otherFailures = [...manuscripts, ...texts, ...home, ...longNumbers, ...noScript, ...scrolls].filter(record => record.issues.length);
-const report = { figures: unique.size, widths: WIDTHS, cases: records.length, missingAssets: [...missing], failures: failures.length + otherFailures.length, records, manuscripts, texts, home, longNumbers, noScript, scrolls };
+const otherFailures = [...manuscripts, ...texts, ...diagrams, ...home, ...longNumbers, ...noScript, ...scrolls].filter(record => record.issues.length);
+const report = { figures: unique.size, widths: WIDTHS, cases: records.length, missingAssets: [...missing], failures: failures.length + otherFailures.length, records, manuscripts, texts, diagrams, home, longNumbers, noScript, scrolls };
 await writeFile(path.join(ARTIFACTS, "results.json"), JSON.stringify(report, null, 2) + "\n");
 console.log(JSON.stringify({ figures: unique.size, cases: records.length, failures: failures.map(({ id, view, width, textScale, issues, pageErrors }) => ({ id, view, width, textScale, issues, pageErrors })), otherFailures, missingAssets: [...missing], artifacts: ARTIFACTS }, null, 2));
 assert.equal(missing.size, 0, "The static export is missing requested assets.");
 assert.equal(failures.length, 0, "Browser layout regression found collapsed labels, frame escapes, or broken interactions. Inspect results.json and screenshots.");
-assert.equal(otherFailures.length, 0, "Manuscript tables or equation numbers, text breaks and list markers, homepage text resizing, long-number scrolling, no-JavaScript navigation, or scroll near-misses regressed.");
+assert.equal(otherFailures.length, 0, "Manuscript tables or equation numbers, text breaks and list markers, logic diagrams, homepage text resizing, long-number scrolling, no-JavaScript navigation, or scroll near-misses regressed.");
