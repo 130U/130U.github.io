@@ -11,9 +11,9 @@ const AUDIT_POLICIES = [
   { name: "Residual- and cost-aware", sd: 0.515, change: "−17.8% variance", strata: [7.89, 19.37, 21.84], tone: "accent" },
 ] as const;
 const STRATA = [
-  { label: "Routine: 60%, cost 1", tone: "steel" },
-  { label: "Intermediate: 30%, cost 1.5", tone: "sky" },
-  { label: "Hardest: 10%, cost 3", tone: "ink" },
+  { label: "Routine, 60%, cost 1", tone: "steel" },
+  { label: "Intermediate, 30%, cost 1.5", tone: "sky" },
+  { label: "Hardest, 10%, cost 3", tone: "ink" },
 ] as const;
 
 function AuditPolicies() {
@@ -63,8 +63,8 @@ function ResidualMoment() {
   const curve = sample(0, 1, 101, (q) => q * (1 - q));
   const crosshair: Crosshair = {
     x: curve.filter((_, index) => index % 5 === 0).map(([q]) => x(q)),
-    heading: curve.filter((_, index) => index % 5 === 0).map(([q]) => `q = f = ${q.toFixed(2)}`),
-    series: [{ name: "m", tone: "accent", y: curve.filter((_, index) => index % 5 === 0).map(([, m]) => y(m)), value: curve.filter((_, index) => index % 5 === 0).map(([, m]) => m.toFixed(4)) }],
+    heading: curve.filter((_, index) => index % 5 === 0).map(([q]) => `qᵢ = fᵢ = ${q.toFixed(2)}`),
+    series: [{ name: "mᵢ", tone: "accent", y: curve.filter((_, index) => index % 5 === 0).map(([, m]) => y(m)), value: curve.filter((_, index) => index % 5 === 0).map(([, m]) => m.toFixed(4)) }],
   };
   return (
     <Figure
@@ -445,7 +445,7 @@ function BudgetFrontier() {
       caption="Each point is a plan of Table 5; lower and further left is better. The joint rule's three plans, one per precision ceiling, trace the exchange rate."
     >
       <Plot
-        label="Standard deviation of the estimate against defects shipped, for one budget of 5,000 cost units. Risk-first for audits and reviews: 0.657 points, 320.9 defects. Measurement rule, then reviews: 0.515 points, 336.2 defects. Joint rule: 0.568 points and 209.9 defects, 0.657 points and 197.1 defects, 1.035 points and 174.9 defects. At 0.657 points the joint rule ships 38.6% fewer defects than risk-first routing."
+        label="Standard deviation of the estimate in percentage points against defects shipped, for one budget of 5,000 cost units. Risk-first for audits and reviews: 0.657, 320.9 defects. Measurement rule, then reviews: 0.515, 336.2 defects. Joint rule: 0.568 and 209.9 defects, 0.657 and 197.1 defects, 1.035 and 174.9 defects. At 0.657 the joint rule ships 38.6% fewer defects than risk-first routing."
         x={x}
         y={y}
         xTicks={[0.5, 0.6, 0.7, 0.8, 0.9, 1].map((at) => ({ at, label: at.toFixed(1) }))}
@@ -459,7 +459,7 @@ function BudgetFrontier() {
         </>}
       >
         {BUDGET_PLANS.map((plan) => <span key={plan.name}>
-          <Dot left={x(plan.sd)} top={100 - y(Number(plan.shipped))} tone={plan.tone} shape={"shape" in plan ? plan.shape : undefined} className={kit.fade} tip={`${plan.name}\nStandard deviation ${plan.sd.toFixed(3)} points\n${plan.shipped} defects shipped`} />
+          <Dot left={x(plan.sd)} top={100 - y(Number(plan.shipped))} tone={plan.tone} shape={"shape" in plan ? plan.shape : undefined} className={kit.fade} tip={`${plan.name}\nStandard deviation ${plan.sd.toFixed(3)} pp\n${plan.shipped} defects shipped`} />
           <Mark left={x(plan.sd)} top={100 - y(Number(plan.shipped))} anchor={plan.anchor} className={`${kit.fade} ${styles.numericAnnotation}`}>{"label" in plan ? `${plan.label} ${plan.shipped}` : <span className={results.accentText}>{plan.shipped}</span>}</Mark>
         </span>)}
         <Mark left={x(legacy.sd)} top={100 - y(saving)} anchor="left" strong className={kit.fade}><span className={results.accentText}>38.6% fewer</span></Mark>

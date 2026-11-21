@@ -1,4 +1,5 @@
 import assert from "node:assert/strict";
+import { execFileSync } from "node:child_process";
 import { existsSync } from "node:fs";
 import { readFile, readdir } from "node:fs/promises";
 import path from "node:path";
@@ -33,12 +34,12 @@ const EXPERIENCE_DETAIL_SLUGS = new Map([
   [6, "euromonitor-international"],
   [7, "china-construction-bank"],
   [12, "jones-lang-lasalle"],
-  [13, "hubble-technology-investment"],
+  [13, "hubble-network"],
   [14, "saif-partners"],
   [15, "citic-securities"],
   [16, "ey-parthenon"],
-  [17, "independent-stem-olympiad-training"],
-  [18, "stem-olympiad-competitions"],
+  [17, "independent-stem-olympiad-training-practice"],
+  [18, "the-high-school-attached-to-hunan-normal-university"],
 ]);
 const EXPERIENCE_DETAIL_ROUTES = [...EXPERIENCE_DETAIL_SLUGS.values()].map((slug) => `/experience/${slug}/`);
 const LEGAL_LISTING_TITLES = [
@@ -370,6 +371,26 @@ test("the architecture viewer preserves its source with a static security policy
   assert.match(published, /<svg\b/iu);
 });
 
+test("the architecture viewer is shared as the site's pages are", async () => {
+  const viewer = await readFile(path.join(OUT, "architecture", "index.html"), "utf8");
+  const home = await routeHtml("/");
+  const address = `${SITE_ORIGIN}/architecture/`;
+  assert.equal(canonicalUrl(viewer), address);
+  assert.equal(metaContent(viewer, "property", "og:url"), address);
+  const description = metaContent(viewer, "name", "description");
+  assert.match(description ?? "", /^[A-Z][^.]{40,160}\.$/u, "One sentence that states what the page holds");
+  assert.equal(metaContent(viewer, "property", "og:description"), description);
+  assert.equal(metaContent(viewer, "name", "twitter:description"), description);
+  const title = viewer.match(/<title>([^<]+) \| Theodore Ouyang<\/title>/u)?.[1];
+  assert.equal(title, "Website Architecture");
+  for (const key of ["og:title", "twitter:title"]) assert.equal(metaContent(viewer, key.startsWith("og:") ? "property" : "name", key), title);
+  for (const key of ["og:site_name", "og:image", "og:image:width", "og:image:height", "og:image:alt", "og:type"]) {
+    assert.ok(metaContent(home, "property", key), key);
+    assert.equal(metaContent(viewer, "property", key), metaContent(home, "property", key), `${key} is the site's own`);
+  }
+  for (const key of ["twitter:card", "twitter:image"]) assert.equal(metaContent(viewer, "name", key), metaContent(home, "name", key), `${key} is the site's own`);
+});
+
 test("every route keeps canonical metadata, CSP, and navigation appropriate to its page level", async () => {
   const requiredCsp = [
     "default-src 'self'",
@@ -684,6 +705,57 @@ test("all eighteen approved Experience entries use institution titles and real l
   ], "The four nested contributions must stay under their parent item");
 });
 
+// An organization is a firm or institution's name in its own words; a team,
+// desk or division it worked in belongs to the position, after a comma.
+const UNIT_WORDS = /\b(?:Team|Desk|Division|Group|Department|Workstream)\b/u;
+const lowercaseWords = (name) => name.normalize("NFKD").replace(/\p{M}/gu, "").toLowerCase().replace(/[^a-z0-9]+/gu, "-").replace(/^-|-$/gu, "");
+
+test("every Experience organization is a firm or institution, and every page address follows one form", async () => {
+  const entries = await approvedExperience();
+  for (const entry of entries) {
+    assert.doesNotMatch(entry.organization, UNIT_WORDS, `Entry ${entry.id}: a team belongs in the position`);
+    assert.doesNotMatch(entry.organization, /:/u, `Entry ${entry.id}: the organization is a name, not a title`);
+    if (entry.categoryId === "03") assert.equal(entry.organization, "Duke Law School");
+    const [role] = entry.metadata.position.split(", ");
+    assert.doesNotMatch(role, UNIT_WORDS, `Entry ${entry.id}: the role comes first, its unit after the comma`);
+    // A unit the summary names as the one the work was for ("the Agriculture
+    // Research Group's reports") stands in the position.
+    if (["01", "03"].includes(entry.categoryId)) continue;
+    for (const [, unit] of entry.summary.matchAll(/\bthe ((?:[A-Z][\w-]*\s)+(?:Team|Desk|Division|Group|Department))\b/gu)) {
+      assert.ok(entry.metadata.position.endsWith(`, ${unit}`), `Entry ${entry.id}: ${unit} follows the role in Position`);
+    }
+  }
+  assert.equal(entries.find(({ id }) => id === 12).metadata.position, "Summer Intern, Capital Markets Team");
+  assert.equal(entries.find(({ id }) => id === 15).metadata.position, "Equity Research Intern, Agriculture Research Group");
+  // An entry's own page is its organization's name in lowercase words; an AI or
+  // legal article keeps its title's words, as its repository and PDF do.
+  for (const [id, slug] of EXPERIENCE_DETAIL_SLUGS) {
+    assert.equal(slug, lowercaseWords(entries.find((entry) => entry.id === id).organization), `Entry ${id}`);
+  }
+  for (const route of ROUTES) assert.match(route, /^\/(?:[a-z0-9]+(?:-[a-z0-9]+)*\/)*$/u, `${route}: an address is lowercase words joined by hyphens`);
+});
+
+test("every site address written anywhere in the repository is a published page", async () => {
+  const files = execFileSync("git", ["ls-files", "-z"], { cwd: REPOSITORY_ROOT, encoding: "utf8" }).split("\0")
+    .filter((file) => /\.(?:md|mjs|ts|tsx|json|html|yml|cff)$/u.test(file));
+  const published = new Set([...ROUTES, "/architecture/"]);
+  for (const file of files) {
+    const text = await readFile(path.join(REPOSITORY_ROOT, file), "utf8");
+    for (const [address] of text.matchAll(/(?<![\w./-])\/experience\/[a-z0-9]+(?:-[a-z0-9]+)*\//gu)) {
+      assert.ok(published.has(address), `${file} names ${address}, which is no page`);
+    }
+    // The tests' own fixtures build pages that are not the site's.
+    if (file.startsWith("website/tests/")) continue;
+    for (const [, link] of text.matchAll(/https:\/\/www\.theodoreoy\.com(\/[^\s)"'<>#?\\`\]]*)/gu)) {
+      const address = link.replace(/[.,;:]+$/u, "");
+      // An asset, a work published at its repository's address, or an address
+      // a script composes from a registered slug is checked where it is built.
+      if (/^\/(?:assets|BLOG-)[^/]*\//u.test(address) || /\.[a-z0-9]+$/u.test(address) || address.includes("${")) continue;
+      assert.ok(published.has(address), `${file} links ${address}, which is no page`);
+    }
+  }
+});
+
 test("the ten nonresearch detail routes keep metadata in a labeled record strip", async () => {
   const metadataStyles = (await readFile(path.join(ROOT, "app", "components", "experience", "Experience.module.css"), "utf8")).replace(/\r\n?/gu, "\n");
   assert.match(metadataStyles, /(?:^|\n)\.metadata\s*\{[^}]*grid-template-columns:\s*repeat\(2,\s*minmax\(0,\s*1fr\)\)[^}]*border:\s*1px solid var\(--frame\)/u, "The strip sets two fields per row in one frame");
@@ -699,8 +771,8 @@ test("the ten nonresearch detail routes keep metadata in a labeled record strip"
     assert.match(html, /<h1\b[^>]*\bid="experience-title"/u);
     assert.match(html, /<a class="top-link" href="#experience-title">Back to Top<\/a>/u, "Back to Top shares the footer action's hover and focus");
     const layout = attribute(html.match(/<dl\b([^>]*\bdata-experience-metadata\b[^>]*)>/u)?.[1] ?? "", "data-layout");
-    const expectedLayout = ["/experience/citic-securities/", "/experience/ey-parthenon/", "/experience/saif-partners/"].includes(route) ? "row"
-      : ["/experience/hubble-technology-investment/", "/experience/independent-stem-olympiad-training/", "/experience/stem-olympiad-competitions/"].includes(route) ? "long" : "pairs";
+    const expectedLayout = ["/experience/ey-parthenon/", "/experience/saif-partners/"].includes(route) ? "row"
+      : ["/experience/citic-securities/", "/experience/hubble-network/", "/experience/independent-stem-olympiad-training-practice/", "/experience/the-high-school-attached-to-hunan-normal-university/"].includes(route) ? "long" : "pairs";
     assert.equal(layout, expectedLayout, `${route}: only entries whose values fit one row of the strip set four across, and only a long value stacks a narrow strip`);
     assert.equal(canonicalUrl(html), `${SITE_ORIGIN}${route}`);
     const main = html.match(/<main\b[^>]*>([\s\S]*?)<\/main>/u)?.[1] ?? "";

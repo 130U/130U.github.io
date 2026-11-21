@@ -186,7 +186,7 @@ test("the budget frontier draws the five plans of Table 5", async () => {
   const plans = blocks.find((block) => block.type === "table" && block.rows[0][0].source === "Plan").rows.slice(1).map((row) => row.map((cell) => cell.source.replace(/\*\*/gu, "")));
   assert.equal(plans.length, 5);
   for (const [name, , , deviation, shipped] of plans) {
-    assert.ok(drawing.tips.includes(`${name}\nStandard deviation ${deviation} points\n${shipped} defects shipped`), `${name} is drawn at its row of Table 5.`);
+    assert.ok(drawing.tips.includes(`${name}\nStandard deviation ${deviation} pp\n${shipped} defects shipped`), `${name} is drawn at its row of Table 5, in the axis's unit.`);
     assert.ok(drawing.markup.includes(`${shipped}<`), `${name}: its defects shipped are written at its point.`);
   }
   const shipped = Object.fromEntries(plans.map((row) => [row[0], Number(row[4])]));
@@ -209,5 +209,56 @@ test("a key-result figure names its marks where they lie and keeps a short capti
       assert.ok(sentences.length <= 2, `${id}: a caption of at most two sentences, found ${sentences.length}.`);
       assert.ok(drawing.caption.split(/\s+/u).length <= 60, `${id}: a caption of at most 60 words.`);
     }
+  }
+});
+
+// Figure copy in one form on every article: a view is named in title case in one
+// to three words, a legend label names its mark without a colon, a label
+// formula stands on one level and a label or key line holds one formula, and
+// a readout or tip writes a symbol in the labels' notation and a quantity in
+// its axis's unit.
+const ARTICLE_PAGES = [
+  "critical-dependence-stress-for-diversification-gains-under-fixed-marginals",
+  "certified-valuation-of-arithmetic-asian-options",
+  "certified-joint-pricing-errors-in-rough-heston",
+  ...["large-scale-domain-expert-feedback-governance-and-adaptive-review", "financial-task-design-and-synthetic-data-engineering",
+    "general-reasoning-evaluation-and-layered-verification", "evidence-verification-and-robust-comparison-in-investment-research",
+    "autonomous-authority-in-space", "small-states-and-the-governance-of-strategic-space-dependence", "who-may-choose-the-lesser-risk",
+    "mangrove-restoration-and-the-limits-of-compensatory-mitigation"].map((slug) => `experience/${slug}`),
+];
+const SMALL_WORDS = new Set(["a", "an", "and", "at", "by", "for", "in", "of", "on", "or", "the", "to"]);
+const words = (markup) => decode(markup.replace(/<math[\s\S]*?<\/math>/gu, " $ ").replace(/<svg[\s\S]*?<\/svg>/gu, " $ ").replace(/<[^>]+>/gu, "")).split(/\s+/u).filter((word) => /[\p{L}\p{N}$]/u.test(word));
+
+test("figure switches, legends, label formulas and readouts follow one form", async () => {
+  let switches = 0;
+  for (const page of ARTICLE_PAGES) {
+    const html = await read(`out/${page}/index.html`);
+    for (const [, label] of html.matchAll(/<button type="button" data-fig-view="[^"]+"[^>]*>([\s\S]*?)<\/button>/gu)) {
+      switches += 1;
+      const named = words(label);
+      assert.ok(named.length >= 1 && named.length <= 3, `${page}: the view "${named.join(" ")}" is named in one to three words`);
+      for (const [index, word] of named.entries()) {
+        if (word === "$" || /^\p{N}/u.test(word) || (index > 0 && SMALL_WORDS.has(word))) continue;
+        assert.match(word, /^\p{Lu}/u, `${page}: the view "${named.join(" ")}" is in title case`);
+      }
+    }
+    for (const [, item] of html.matchAll(/<ul class="[^"]*_legend\b[^"]*"[^>]*>([\s\S]*?)<\/ul>/gu)) {
+      for (const [, label] of item.matchAll(/<li>([\s\S]*?)<\/li>/gu)) assert.doesNotMatch(words(label).join(" "), /:/u, `${page}: a legend label names its mark without a colon`);
+    }
+  }
+  assert.ok(switches >= 15, "Every article's view switches are read");
+  for (const file of ["ai-research", "selected-research", "asian-manuscript", "rough-manuscript", "dependence-manuscript", "legal-research"]) {
+    const source = await read(`app/components/figures/${file}.tsx`);
+    assert.doesNotMatch(source, /\\[dt]?frac\b/u, `${file}: a label formula stands on one level`);
+    assert.doesNotMatch(source, /\\q?quad\b/u, `${file}: a label or key holds one formula per line`);
+  }
+  const html = await read("out/experience/large-scale-domain-expert-feedback-governance-and-adaptive-review/index.html");
+  const moment = JSON.parse(decode(/data-figure="residual-moment"[\s\S]*?data-crosshair="([^"]+)"/u.exec(html)[1]));
+  assert.ok(moment.heading.every((heading) => /^qᵢ = fᵢ = \d\.\d\d$/u.test(heading)), "The readout writes qᵢ and fᵢ as the axis does");
+  assert.deepEqual(moment.series.map(({ name }) => name), ["mᵢ"]);
+  for (const id of ["audit-policies", "budget-frontier"]) {
+    const drawing = figure(html, id);
+    assert.ok(drawing.tips.some((tip) => / pp\n/u.test(tip)), `${id}: a standard deviation is in pp, the axis's unit`);
+    assert.ok(drawing.tips.every((tip) => !/\d points/u.test(tip)), `${id}: no tip names another unit`);
   }
 });

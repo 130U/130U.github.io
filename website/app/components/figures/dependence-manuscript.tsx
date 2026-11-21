@@ -39,7 +39,7 @@ function TailLayerFigure({ manuscript, caption }: ManuscriptFigureProps) {
       id="dependence-tail-layer"
       caption={caption}
       manuscript={manuscript}
-      legend={[{ label: "Local discrepancy $\\Delta_i$", tone: "accent", shape: "line" }, { label: "Remaining plan: $-\\Delta_i$", tone: "ink", shape: "dash" }]}
+      legend={[{ label: "Local discrepancy $\\Delta_i$", tone: "accent", shape: "line" }, { label: "Remaining plan $-\\Delta_i$", tone: "ink", shape: "dash" }]}
     >
       <div className={styles.panels}>
         <div className={styles.panel}>
@@ -158,13 +158,15 @@ function CornerCapacityFigure({ manuscript, caption }: ManuscriptFigureProps) {
         <dl className={styles.bounds}>
           <div data-key="demand">
             <dt><span className={`${kit.swatch} ${kit.accent}`} />Positive corner demand</dt>
-            <dd><Tx>{"$|E_\\delta|\\geq\\delta^2/2,\\quad y-x\\geq\\Delta/2$"}</Tx></dd>
-            <dd data-tone="accent"><Tx>{"$M_\\delta\\geq\\frac{\\lambda\\Delta^2}{16\\beta}\\,\\delta^2$"}</Tx></dd>
+            <dd><Tx>{"$|E_\\delta|\\geq\\delta^2/2$"}</Tx></dd>
+            <dd><Tx>{"$y-x\\geq\\Delta/2$"}</Tx></dd>
+            <dd data-tone="accent"><Tx>{"$M_\\delta\\geq\\lambda\\Delta^2\\delta^2/(16\\beta)$"}</Tx></dd>
           </div>
           <div data-key="capacity">
             <dt><span className={kit.swatch} data-shape="hatch" />Available return capacity</dt>
-            <dd><Tx>{"$|R_i|\\leq\\delta^2/2,\\quad |x-y|\\leq\\delta$"}</Tx></dd>
-            <dd><Tx>{"$N_1+N_2\\leq\\frac{\\Lambda}{12\\beta}\\,\\delta^4$"}</Tx></dd>
+            <dd><Tx>{"$|R_i|\\leq\\delta^2/2$"}</Tx></dd>
+            <dd><Tx>{"$|x-y|\\leq\\delta$"}</Tx></dd>
+            <dd><Tx>{"$N_1+N_2\\leq\\Lambda\\delta^4/(12\\beta)$"}</Tx></dd>
           </div>
         </dl>
       </div>

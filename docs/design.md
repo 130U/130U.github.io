@@ -207,9 +207,11 @@ assistive technology, so each link's accessible name is the section title.
 ### Record strip
 
 Organization, Position, Location, and Dates form a framed strip divided by dashed
-hairlines: two fields per row in equal columns, and one below 540px, as the contact
-strip stacks. An entry whose four values together run to at most 80 characters sets
-them in one row, each column as wide as its value, once the strip is 53rem wide and so
+hairlines. Organization is the firm or institution's own name (Jones Lang LaSalle, Duke
+Law School); a team, desk or program the record names never joins it, and follows the
+role in Position, after a comma (Summer Intern, Capital Markets Team). The strip sets
+two fields per row in equal columns, and one below 540px, as the contact strip stacks.
+An entry whose four values together run to at most 80 characters sets them in one row, each column as wide as its value, once the strip is 53rem wide and so
 holds every value on one line; a longer entry keeps two per row, and one with a value
 longer than 40 characters stacks its fields where the strip is narrower than 36rem, so no
 value folds into one-word lines. Each field is a label above a value in the reading face; a value breaks
@@ -262,7 +264,11 @@ their official wording and order.
 
 ### Detail pages
 
-Each of the eighteen Experience entries opens its own page. The H1 is the project or
+Each of the eighteen Experience entries opens its own page, at `/experience/{slug}/`.
+An AI or legal article's slug is its title's words, as its repository and PDF name it;
+every other entry's is its organization's name in lowercase words, joined by hyphens
+(`/experience/jones-lang-lasalle/`, `/experience/hubble-network/`). A retired address
+is not forwarded and nothing links to it. The H1 is the project or
 paper title; the browser title is `{institution}: {title}`. The record strip follows,
 then Key Contributions as an ordered list with decorative serif indices; a list of one
 stands without an index. Contextual notes are its final items, unnumbered, under a
@@ -508,6 +514,9 @@ rule by its own padding, takes no knockout and stands clear of the lines, and a 
 that names a line at the plot's right end stops short of the edge grid line. The browser
 layout check fails any label a line crosses without a knockout that holds it, and any
 label that ignores its tone, and any legend swatch with no mark of its form and colour.
+A figure whose views give its marks different tones keys each tone in that view's own
+legend, so an interval drawn in a tone other than ink is always named (In an unresolved
+pair, Certified minimiser); the check fails one that is not.
 Bar rows align on one grid, the label column taking at most 42% of the chart; a value's
 note stands beneath it, so a column's values share one right edge. A reference rule's
 name stands beside the top of its rule, 6px clear of it, and the rule runs up through
@@ -549,7 +558,14 @@ plot's top, or at its foot where it would cover a label), marks
 show exact values, the proof-obligation graph accepts a chosen failure, and each figure
 draws in once as it scrolls into view, except under reduced motion. Every plotted value
 restates the manuscript, and conceptual figures carry no numeric scale. Titles,
-captions, legends, and axis names use sentence case; view switches use title case.
+captions, legends, and axis names use sentence case; view switches use title case and
+name what each view shows in one to three words (Precision, Chain, Width Budget, Verify
+z₂), and a legend label names its mark, with any detail after a comma and no colon
+(Node support, 1,025 nodes; Routine, 60%, cost 1). Readouts set a symbol in the
+labels' own notation (qᵢ, mᵢ) and a quantity in the unit its axis names (pp), and a
+label formula stands on one level, a fraction written with a slash. A key sets one
+formula per line, as a display does: two conditions stand as two lines of the entry,
+4px apart, as its other lines are.
 Captions state what the figure shows in the article's own terms. The four manuscript
 figures of each of the three papers are drawn the same way, from the manuscript's
 formulas and its pinned results, with the manuscript's captions below them. A scatter is
@@ -769,7 +785,9 @@ the same geometry, aligned to whole pixels, in white on an ink tile.
 
 The social card master, `website/source-assets/brand/og.png`, repeats the hero on the
 paper background: the name, Duke Alumnus and Sequoia Fellow, the dotted clarinet with
-its blue corner marks, and the domain in the lower band. The repository README displays the same card.
+its blue corner marks, and the domain in the lower band. The repository README displays the same card
+and opens as every work README does under its cover: the name as its one h1, the
+context line, the links row, then the bold lead.
 
 ## Review
 
@@ -786,7 +804,9 @@ wider than its stage scrolls sideways, its right edge fading while more remains,
 wide table's does, and the semantic radar shows the whole system. It opens with the
 region that holds its first node at the stage's top-left; on a phone the stage is a
 window that scrolls both ways, so its first screen is never blank paper. Present and Export stand on the title's row, the three notes share
-one frame divided by dashed hairlines, and the site footer closes the page.
+one frame divided by dashed hairlines, and the site footer closes the page. A shared
+link to it reads as one to any page of the site: a one-sentence description, its
+canonical address, and the site's social card.
 
 ## Print
 

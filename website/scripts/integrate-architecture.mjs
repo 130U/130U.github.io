@@ -405,11 +405,42 @@ function applySiteDiagram(viewer) {
 
 const siteFooter = '\n    <footer class="site-footer" data-site-footer>\n      <p>&copy; 2026 Theodore Ouyang</p>\n      <p>Beijing | Boston</p>\n    </footer>\n';
 
-// Markup the integration owns: no generator stamp, the site's browser color
-// and touch icon, square corners in the drawing, Present and Export on the
-// title's row, bullets drawn by the stylesheet so they hang, and the footer.
+// The viewer is shared as every page of the site is: a description in the
+// site's form, its canonical address, and the site's social card.
+const SHARE_URL = "https://www.theodoreoy.com/architecture/";
+const SHARE_TITLE = "Website Architecture";
+const SHARE_DESCRIPTION = "An interactive map of how this site is built: content inputs, static rendering, validation, GitHub Pages delivery, and browser interactions.";
+const SHARE_IMAGE = { url: "https://www.theodoreoy.com/assets/brand/og-1774.jpg", width: 1774, height: 887, alt: "Theodore Ouyang" };
+const shareTags = [
+  `<meta name="description" content="${SHARE_DESCRIPTION}">`,
+  `<link rel="canonical" href="${SHARE_URL}">`,
+  `<meta property="og:title" content="${SHARE_TITLE}">`,
+  `<meta property="og:description" content="${SHARE_DESCRIPTION}">`,
+  `<meta property="og:url" content="${SHARE_URL}">`,
+  '<meta property="og:site_name" content="Theodore Ouyang">',
+  `<meta property="og:image" content="${SHARE_IMAGE.url}">`,
+  `<meta property="og:image:width" content="${SHARE_IMAGE.width}">`,
+  `<meta property="og:image:height" content="${SHARE_IMAGE.height}">`,
+  `<meta property="og:image:alt" content="${SHARE_IMAGE.alt}">`,
+  '<meta property="og:type" content="website">',
+  '<meta name="twitter:card" content="summary_large_image">',
+  `<meta name="twitter:title" content="${SHARE_TITLE}">`,
+  `<meta name="twitter:description" content="${SHARE_DESCRIPTION}">`,
+  `<meta name="twitter:image" content="${SHARE_IMAGE.url}">`,
+].map((tag) => `  ${tag}\n`).join("");
+
+function applyShareMetadata(viewer) {
+  const cleared = viewer.replace(/  <(?:meta (?:name="(?:description|twitter:[^"]+)"|property="og:[^"]+")|link rel="canonical")[^>]*>\n/gu, "");
+  assert.ok(/  <title>[^<]*<\/title>\n/u.test(cleared), "Missing the viewer's title.");
+  return cleared.replace(/(  <title>[^<]*<\/title>\n)/u, (title) => `${title}${shareTags}`);
+}
+
+// Markup the integration owns: no generator stamp, the site's browser color,
+// touch icon and share metadata, square corners in the drawing, Present and
+// Export on the title's row, bullets drawn by the stylesheet so they hang, and
+// the footer.
 function applyViewerMarkup(viewer) {
-  viewer = viewer.replace(/  <meta name="generator" content="[^"]*">\n/u, "");
+  viewer = applyShareMetadata(viewer.replace(/  <meta name="generator" content="[^"]*">\n/u, ""));
   if (!viewer.includes('<meta name="theme-color"')) {
     viewer = viewer.replace(/(  <meta name="viewport"[^\n]*\n)/u, '$1  <meta name="theme-color" content="#f7f6f5">\n');
   }

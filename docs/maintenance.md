@@ -289,13 +289,19 @@ layout and interaction rules.
 
 When adding content, update its source, loader/slug registry, route mapping, sitemap
 expectations, and output tests together. Experience routes are keyed by stable
-entry IDs; add the corresponding mapping when adding an entry. The loader checks
-for missing routes, duplicate slugs, and mismatched AI or legal manuscript routes.
+entry IDs; add the corresponding mapping when adding an entry. An entry's
+`organization` is the firm or institution's name, with any team or program after
+the role in `metadata.position`, and its slug is that name in lowercase words; an AI
+or legal article's slug is its title's. The loader checks for missing routes,
+duplicate slugs, and mismatched AI or legal manuscript routes, and the output tests
+hold every slug to its form. A renamed page's old address is not forwarded: replace
+every link to it in the repository (the tests fail on one that is no page), and ask
+for its removal from search results.
 
 `content/protected-sources.json` checks approved source bytes with LF normalization;
 `content/visible-copy-manifest.json` independently checks rendered text, metadata,
-alt text, and ARIA labels. Review intended content changes before updating either
-contract. Presentation changes preserve approved prose and formula annotations.
+alt text, and ARIA labels of every route and the architecture viewer. Review intended
+content changes before updating either contract. Presentation changes preserve approved prose and formula annotations.
 Keep independent route, link, figure, and mathematical checks when updating a loader.
 
 ## Assets and static assembly

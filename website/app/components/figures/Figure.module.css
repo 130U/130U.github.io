@@ -283,6 +283,15 @@
   background: var(--chart-hatch);
 }
 
+/* A capped interval, drawn as the figure draws a range: a 2px line between
+   two 1.5px caps. */
+.swatch[data-shape="range"] {
+  box-sizing: border-box;
+  width: 18px;
+  border-inline: 1.5px solid currentColor;
+  background: linear-gradient(currentColor, currentColor) center / 100% 2px no-repeat;
+}
+
 /* Color roles. Every mark takes its color from currentColor. */
 .ink { color: var(--ink); }
 
