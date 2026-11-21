@@ -1,10 +1,12 @@
 import assert from "node:assert/strict";
 import { mkdir, readFile, readdir, writeFile } from "node:fs/promises";
 import path from "node:path";
-import { fileURLToPath } from "node:url";
+import { fileURLToPath, pathToFileURL } from "node:url";
 import { chromium } from "playwright";
 
 const ROOT = fileURLToPath(new URL("../", import.meta.url));
+// The rule that sets a display's formulas side by side as rows, one formula to a row.
+const { researchDisplayRows } = await import(pathToFileURL(path.join(ROOT, "app", "lib", "content", "research-math.ts")).href);
 const OUT = path.join(ROOT, "out");
 const ARTIFACTS = path.resolve(process.env.LAYOUT_ARTIFACT_DIR ?? path.join(ROOT, "test-results/figure-layout"));
 const ORIGIN = "http://127.0.0.1:8127";
@@ -685,8 +687,9 @@ function inspectManuscript() {
   const starts = new Map();
   const edges = [];
   for (const equation of document.querySelectorAll('[data-research-block-type="equation"]')) {
-    // A tabular display keeps the drawing's gutter around its table, so it is measured as a drawing.
-    const drawing = equation.querySelector("[data-display-table], svg[data-research-svg]");
+    // A tabular display keeps the drawing's gutter around its table, and a display set as rows
+    // around its rows, so each is measured as a drawing.
+    const drawing = equation.querySelector("[data-display-table], [data-display-stack], svg[data-research-svg]");
     const column = equation.getBoundingClientRect();
     // The ink starts past the drawing's transparent gutter, 0.375em at the drawing's own
     // size, which a fitted equation sets smaller.
@@ -775,6 +778,40 @@ function inspectManuscript() {
     }
   }
 
+  // A display of formulas set side by side is set as rows: its rows start on one axis, each
+  // stands at least a line of mathematics below the one before, and its equation number stands
+  // on the last row's baseline.
+  for (const stack of document.querySelectorAll("[data-display-stack]")) {
+    const region = stack.closest('[data-research-block-type="equation"]');
+    const size = parseFloat(getComputedStyle(stack).fontSize);
+    const label = region.querySelector("[data-equation-number]")?.textContent || region.id || region.dataset.researchBlock;
+    const rows = [...stack.querySelectorAll('svg[data-research-svg="row"]')];
+    if (rows.length < 2 || rows.length !== stack.children.length) {
+      issues.push({ kind: "display-stack-without-rows", number: label, rows: rows.length });
+      continue;
+    }
+    // A drawing's own baseline is its canvas's y = 0.
+    const baselines = rows.map(svg => {
+      const box = svg.getBoundingClientRect();
+      const view = svg.viewBox.baseVal;
+      return box.top - view.y * (box.height / view.height);
+    });
+    const starts = rows.map(svg => svg.getBoundingClientRect().left);
+    if (Math.max(...starts) - Math.min(...starts) > 0.5) issues.push({ kind: "display-stack-rows-off-axis", number: label, starts });
+    baselines.forEach((line, index) => {
+      if (index && line - baselines[index - 1] < 1.8217 * size - 0.5) issues.push({ kind: "display-stack-rows-closer-than-a-line", number: label, row: index, pitch: line - baselines[index - 1] });
+    });
+    const number = region.querySelector("[data-equation-number]");
+    if (number?.textContent) {
+      const probe = document.createElement("span");
+      probe.style.cssText = "display:inline-block;width:0;height:0";
+      number.prepend(probe);
+      const line = probe.getBoundingClientRect().bottom;
+      probe.remove();
+      if (Math.abs(baselines.at(-1) - line) > 0.5) issues.push({ kind: "display-stack-number-off-last-row", number: label, offset: baselines.at(-1) - line });
+    }
+  }
+
   // Mathematics keeps the page's rhythm. A line of prose is taller than the
   // reading leading only where an inline expression itself reaches past the
   // line; every display stands in the same white space, from its expression to
@@ -807,9 +844,10 @@ function inspectManuscript() {
     return found.sort((a, b) => a - b).reduce((lines, baseline) => (!lines.length || baseline - lines.at(-1) > 3 ? [...lines, baseline] : lines), []);
   };
   // A drawing's box less the gutters its canvas keeps around the expression; a
-  // tabular display keeps the same gutter around its table.
+  // tabular display keeps the same gutter around its table, and a display set as
+  // rows around its rows.
   const expression = formula => {
-    const box = formula.querySelector("[data-display-table], svg[data-research-svg]").getBoundingClientRect();
+    const box = formula.querySelector("[data-display-table], [data-display-stack], svg[data-research-svg]").getBoundingClientRect();
     const gutter = parseFloat(getComputedStyle(formula).getPropertyValue("--math-gutter")) * parseFloat(getComputedStyle(formula).fontSize);
     return { top: box.top + gutter, bottom: box.bottom - gutter };
   };
@@ -890,6 +928,15 @@ function inspectManuscript() {
     }
   }
   return issues;
+}
+
+// Every displayed equation's TeX and, for a display set as rows, the slice of it each row draws.
+function drawnDisplayRows() {
+  return [...document.querySelectorAll('[data-research-formula="display"]')].map(formula => ({
+    tex: formula.querySelector("annotation")?.textContent ?? "",
+    number: formula.querySelector("[data-equation-number]")?.textContent || formula.closest("[data-research-block]")?.dataset.researchBlock,
+    rows: [...formula.querySelectorAll("[data-stack-row]")].map(row => row.dataset.stackRow.split(" ").map(Number)),
+  }));
 }
 
 // Text that breaks or aligns like a mistake, on every page at every width:
@@ -1544,7 +1591,17 @@ try {
           // controls; its first measurements land within two frames.
           await page.waitForFunction(() => !document.querySelector("[data-figure-zoom][hidden], [data-table-zoom][hidden]"));
           await page.evaluate(() => new Promise(resolve => requestAnimationFrame(() => requestAnimationFrame(() => setTimeout(resolve, 100)))));
-          manuscripts.push({ route, width, issues: await page.evaluate(inspectManuscript) });
+          const issues = await page.evaluate(inspectManuscript);
+          // No display row holds two formulas: each row a stacked display draws, and every other
+          // display whole, is one formula by the rule that sets formulas side by side as rows.
+          if (width === WIDTHS[0]) {
+            for (const display of await page.evaluate(drawnDisplayRows)) {
+              for (const row of display.rows.length ? display.rows.map(([start, end]) => display.tex.slice(start, end)) : [display.tex]) {
+                if (researchDisplayRows(row)) issues.push({ kind: "display-row-holds-two-formulas", number: display.number, row: row.slice(0, 80) });
+              }
+            }
+          }
+          manuscripts.push({ route, width, issues });
         }
       } finally { await context.close(); }
     }

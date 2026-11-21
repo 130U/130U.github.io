@@ -527,6 +527,335 @@ export function renderResearchDisplayTable(tex: string): ResearchDisplayTableMar
   return result;
 }
 
+/** A row of a display set as rows: its TeX, the slice of the display's TeX from `start` to `end`;
+ * the space a row break of the manuscript asks for above it beyond one line of mathematics; and,
+ * for a constraint after the first, the connecting word and space it hangs under ("s.t." and its
+ * quad), so the constraints of a problem start on one line. */
+export type ResearchDisplayRow = Readonly<{ tex: string; start: number; end: number; extraEm?: number; hang?: string }>;
+export type ResearchDisplayStackMarkup = Readonly<{
+  /** Each row's drawing, from its own slice of the TeX, in display style, and the space above it
+   * in ems of the math size: none above the first row; above a later one, one line of mathematics
+   * less what the two drawings fill of their struts. */
+  rows: ReadonlyArray<ResearchMathMarkup & Readonly<{ start: number; end: number; spaceEm: number }>>;
+  /** The whole display's assistive expression and the original TeX, and its equation number. */
+  mathml: string;
+  number?: string;
+}>;
+
+type DisplayToken = Readonly<{ text: string; start: number; end: number; top: boolean }>;
+
+/** The tokens of tex from `from` to `to`, each marked when it stands at the outer level: outside
+ * every group, environment, \left…\right pair and bracket. Positions are offsets into tex. */
+function displayTokens(tex: string, from = 0, to = tex.length): DisplayToken[] {
+  const tokens: DisplayToken[] = [];
+  let groups = 0;
+  let environments = 0;
+  let sized = 0;
+  let brackets = 0;
+  for (let index = from; index < to;) {
+    const top = groups === 0 && environments === 0 && sized === 0 && brackets === 0;
+    const outer = groups === 0 && environments === 0 && sized === 0;
+    const rest = tex.slice(index, to);
+    let text = rest[0];
+    if (text === "\\") {
+      const environment = /^\\(begin|end)\s*\{[A-Za-z*]+\}/u.exec(rest);
+      text = environment?.[0] ?? /^\\(?:[A-Za-z]+|[\s\S])/u.exec(rest)?.[0] ?? "\\";
+      if (environment) environments += environment[1] === "begin" ? 1 : -1;
+      else if (text === "\\left" || text === "\\right") {
+        // The delimiter after \left or \right belongs to it.
+        text += /^\s*(?:\\(?:[A-Za-z]+|[\s\S])|\S)/u.exec(rest.slice(text.length))?.[0] ?? "";
+        sized += text.startsWith("\\left") ? 1 : -1;
+      } else if (outer && (text === "\\{" || text === "\\lbrace" || text === "\\langle")) brackets += 1;
+      else if (outer && (text === "\\}" || text === "\\rbrace" || text === "\\rangle")) brackets = Math.max(0, brackets - 1);
+    } else if (text === "{") groups += 1;
+    else if (text === "}") groups -= 1;
+    // A half-open interval closes on either bracket.
+    else if (outer && (text === "(" || text === "[")) brackets += 1;
+    else if (outer && (text === ")" || text === "]")) brackets = Math.max(0, brackets - 1);
+    tokens.push({ text, start: index, end: index + text.length, top });
+    index += text.length;
+  }
+  return tokens;
+}
+
+const RELATIONS = new Set([
+  "=", "<", ">", "\\le", "\\leq", "\\ge", "\\geq", "\\lt", "\\gt", "\\leqslant", "\\geqslant", "\\ne", "\\neq", "\\ll", "\\gg",
+  "\\in", "\\notin", "\\ni", "\\subset", "\\subseteq", "\\supset", "\\supseteq", "\\sim", "\\simeq", "\\approx", "\\cong",
+  "\\equiv", "\\propto", "\\asymp", "\\prec", "\\preceq", "\\succ", "\\succeq", "\\vdash", "\\models", "\\perp", "\\mid",
+  "\\to", "\\rightarrow", "\\longrightarrow", "\\Rightarrow", "\\Longrightarrow", "\\implies", "\\iff", "\\leftrightarrow",
+  "\\Leftrightarrow", "\\Longleftrightarrow", "\\mapsto", "\\xrightarrow", "\\xleftarrow", "\\downarrow", "\\uparrow",
+]);
+const INEQUALITIES = new Set(["<", ">", "\\le", "\\leq", "\\ge", "\\geq", "\\lt", "\\gt", "\\leqslant", "\\geqslant"]);
+const OPERATORS = new Set(["+", "-", "*", "/", "\\cdot", "\\times", "\\pm", "\\mp", "\\cup", "\\cap", "\\circ", "\\ast", "\\setminus", "\\oplus", "\\otimes"]);
+const TEXT_COMMANDS = new Set(["\\text", "\\mbox", "\\hbox", "\\textrm", "\\textup", "\\textnormal"]);
+/** The spaces of the manuscript a join between two formulas is made of; a quad or more, or a
+ * control space, joins on its own, and thin spaces join as a run of two or more. */
+const SPACE = /^\\(?:qquad|quad|enspace|[ ;:>,])$/u;
+const WIDE_SPACE = /^\\(?:qquad|quad|enspace| )$/u;
+/** The spaces that set off a connecting word on either side. */
+const QUAD = /^\\(?:qquad|quad|enspace)$/u;
+// A part that opens on one of these words qualifies the formula before it.
+const QUALIFIER_WORD = /^(?:for|when|whenever|where|as|on|if|at|provided|unless|uniformly|almost)\b/iu;
+const SUCH_THAT = /^(?:s\.t\.|subject to)$/iu;
+const PUNCTUATION = new Set([",", ".", ";"]);
+
+const GREEK = "alpha|beta|gamma|delta|epsilon|varepsilon|zeta|eta|theta|vartheta|iota|kappa|lambda|mu|nu|xi|pi|varpi|rho|varrho|sigma|varsigma|tau|upsilon|phi|varphi|chi|psi|omega|Gamma|Delta|Theta|Lambda|Xi|Pi|Sigma|Upsilon|Phi|Psi|Omega|ell";
+const SYMBOL_BASE = `(?:[A-Za-z]|\\\\(?:${GREEK})(?![A-Za-z]))`;
+const SYMBOL_ACCENT = `(?:\\\\(?:bar|hat|tilde|widehat|widetilde|overline|mathcal|mathbb|mathrm|mathbf|boldsymbol)\\s*(?:\\{\\s*${SYMBOL_BASE}\\s*\\}|${SYMBOL_BASE}))`;
+const SYMBOL_SCRIPT = "(?:\\s*[_^]\\s*(?:\\{[^{}]*\\}|\\\\[A-Za-z]+|[A-Za-z0-9*]))";
+/** A symbol: a letter, accented or not, with its primes, subscript and superscript. */
+const SYMBOL = new RegExp(`^(?:${SYMBOL_ACCENT}|${SYMBOL_BASE})'*${SYMBOL_SCRIPT}{0,2}$`, "u");
+/** A number, a fraction of numbers, or infinity. */
+const NUMBER = /^-?(?:\d+\.?\d*|\.\d+)$|^\\[td]?frac(?:\d|\{\d+\})(?:\d|\{\d+\})$|^-?\\infty$/u;
+const isNumber = (term: string) => NUMBER.test(term.replace(/\s+/gu, ""));
+
+const significant = (tokens: readonly DisplayToken[]) => tokens.filter((token) => token.text.trim());
+
+const names = (source: string) => significant(displayTokens(source)).map((token) => token.text.replace(/\s+/gu, "")).filter((name) => name !== "{" && name !== "}");
+
+/** Whether `symbol` occurs in `tex`, token for token, with groups set aside. */
+function occursIn(symbol: string, tex: string) {
+  const wanted = names(symbol);
+  const within = names(tex);
+  return wanted.length > 0 && within.some((_, index) => wanted.every((name, offset) => within[index + offset] === name));
+}
+
+/** Whether a range of `symbol` qualifies `row`: the symbol occurs in the row and is not what the
+ * row states a relation of, as m_i is in m_i\ge0, where a range of m_i is a second statement. */
+function bounds(symbol: string, row: string) {
+  const subject = row.slice(0, displayTokens(row).find((token) => token.top && RELATIONS.has(token.text))?.start ?? 0);
+  return occursIn(symbol, row) && names(symbol).join(" ") !== names(subject).join(" ");
+}
+
+/** The terms of tex between its outer-level tokens that `at` accepts. */
+function termsOf(tex: string, at: (token: DisplayToken) => boolean) {
+  const terms: string[] = [];
+  let from = 0;
+  for (const token of displayTokens(tex)) {
+    if (!token.top || !at(token)) continue;
+    terms.push(tex.slice(from, token.start).trim());
+    from = token.end;
+  }
+  terms.push(tex.slice(from).trim());
+  return terms;
+}
+
+/**
+ * Whether a part qualifies the row before it rather than standing as a formula of its own: a
+ * condition in parentheses, as (0\le\rho\le r_\varepsilon); a part that opens on a qualifying word
+ * ("for", "when", "on") or on \forall; a range a symbol of the row keeps, as s\ge0 or
+ * 0\le\theta\le1; or the values an index of the row runs over, as \ell=P,Q. After "s.t." every part
+ * is a constraint of its own.
+ */
+function qualifies(part: string, row: string, constraints: boolean) {
+  const tokens = significant(displayTokens(part));
+  while (tokens.length && PUNCTUATION.has(tokens.at(-1)!.text)) tokens.pop();
+  if (!tokens.length) return false;
+  const [first] = tokens;
+  if (first.text === "(" && tokens.slice(1).every((token) => !token.top)) return true;
+  if (first.text === "\\forall") return true;
+  if (TEXT_COMMANDS.has(first.text) && QUALIFIER_WORD.test(/^\s*\{([^{}]*)\}/u.exec(part.slice(first.end))?.[1].trim() ?? "")) return true;
+  if (constraints) return false;
+  const body = part.slice(first.start, tokens.at(-1)!.end);
+  const relations = displayTokens(body).filter((token) => token.top && RELATIONS.has(token.text));
+  if (!relations.length) return false;
+  if (relations.every((token) => INEQUALITIES.has(token.text))) {
+    const terms = termsOf(body, (token) => INEQUALITIES.has(token.text));
+    return terms.every((term) => isNumber(term) || SYMBOL.test(term)) && terms.some((term) => SYMBOL.test(term) && bounds(term, row));
+  }
+  if (relations.length > 1 || relations[0].text !== "=") return false;
+  const [index, values] = termsOf(body, (token) => token.text === "=");
+  const list = termsOf(values, (token) => token.text === ",");
+  return SYMBOL.test(index) && list.length > 1 && list.every((value) => SYMBOL.test(value) || isNumber(value) || /^\\[lc]?dots$/u.test(value)) && bounds(index, row);
+}
+
+/**
+ * Whether the part after a space of the manuscript stands as a formula of its own beside the part
+ * before it: the part before is complete, not ending on a relation, an operator or a word that
+ * leads into what follows ("for" in m_i\ge0\quad\text{for}\ x<y); the part after holds a relation
+ * of its own at its outer level, does not continue the one before (as \Longleftrightarrow or \le
+ * after a space does), and does not qualify the row.
+ */
+function separates(before: string, after: string, row: string, constraints: boolean) {
+  const previous = significant(displayTokens(before)).filter((token) => token.top);
+  const next = significant(displayTokens(after));
+  if (!previous.length || !next.length) return false;
+  const last = previous.at(-1)!.text;
+  if (RELATIONS.has(last) || OPERATORS.has(last)) return false;
+  if (last === "{" && TEXT_COMMANDS.has(previous.at(-2)?.text ?? "")) return false;
+  if (RELATIONS.has(next[0].text) || (OPERATORS.has(next[0].text) && next[0].text !== "-" && !PUNCTUATION.has(last))) return false;
+  if (!next.some((token) => token.top && RELATIONS.has(token.text))) return false;
+  return !qualifies(after, row, constraints);
+}
+
+type DisplayLine = Readonly<{ start: number; end: number; extraEm: number }>;
+
+/** A display's lines: the display itself, or the rows of the one gathered environment it is, or of
+ * the one aligned environment that sets every row flush at its start. Undefined for a display whose
+ * rows an environment aligns at a relation. */
+function displayLines(tex: string, from: number, to: number): DisplayLine[] | undefined {
+  const tokens = significant(displayTokens(tex, from, to));
+  if (!tokens.length) return [];
+  const whole = [{ start: tokens[0].start, end: tokens.at(-1)!.end, extraEm: 0 }];
+  const opening = /^\\begin\s*\{(gathered|aligned)\}$/u.exec(tokens[0].text);
+  // The environment closes where the outer level returns; only sentence punctuation may follow it.
+  const after = tokens.findIndex((token, index) => index > 0 && token.top);
+  const closing = after < 0 ? tokens.length - 1 : after - 1;
+  if (!opening || !/^\\end\s*\{(?:gathered|aligned)\}$/u.test(tokens[closing].text) || tokens.slice(closing + 1).some((token) => !PUNCTUATION.has(token.text))) return whole;
+  const inner = displayTokens(tex, tokens[0].end, tokens[closing].start);
+  const lines: DisplayLine[] = [];
+  let line: DisplayToken[] = [];
+  let extraEm = 0;
+  // A row of a gathered environment, or a row of an aligned environment that opens on its one
+  // alignment point, is a line; any other alignment leaves the display as it is.
+  const close = () => {
+    const own = significant(line);
+    if (opening[1] === "aligned") {
+      if (!own.length || own[0].text !== "&") return false;
+      own.shift();
+    }
+    if (own.some((token) => token.top && token.text === "&")) return false;
+    if (own.length) lines.push({ start: own[0].start, end: own.at(-1)!.end, extraEm });
+    return true;
+  };
+  for (let index = 0; index < inner.length; index += 1) {
+    const token = inner[index];
+    if (!token.top || token.text !== "\\\\") {
+      line.push(token);
+      continue;
+    }
+    if (!close()) return undefined;
+    line = [];
+    // A row break may ask for more space: \\[2pt].
+    const space = /^\s*\[([^\]]*)\]/u.exec(tex.slice(token.end, tokens[closing].start));
+    extraEm = space ? lengthInEm(space[1].trim()) ?? 0 : 0;
+    while (space && index + 1 < inner.length && inner[index + 1].end <= token.end + space[0].length) index += 1;
+  }
+  return close() ? lines : undefined;
+}
+
+/** The spaces of a line at which two parts meet, each with the connecting word it holds, if any. */
+function lineJoins(tex: string, line: DisplayLine) {
+  const tokens = displayTokens(tex, line.start, line.end);
+  const blank = (token: DisplayToken | undefined) => token !== undefined && token.top && (SPACE.test(token.text) || !token.text.trim());
+  const joins: Array<{ start: number; end: number; word?: string; wordStart?: number }> = [];
+  for (let index = 0; index < tokens.length; index += 1) {
+    if (!blank(tokens[index]) || !tokens[index].text.trim()) continue;
+    let end = index;
+    while (blank(tokens[end + 1])) end += 1;
+    const run = tokens.slice(index, end + 1).filter((token) => token.text.trim());
+    if (!run.some((token) => WIDE_SPACE.test(token.text)) && run.length < 2) {
+      index = end;
+      continue;
+    }
+    // A word set off by a quad on either side connects two formulas: \quad\text{s.t.}\quad.
+    const word = tokens[end + 1];
+    if (run.some((token) => QUAD.test(token.text)) && word?.top && TEXT_COMMANDS.has(word.text) && tokens[end + 2]?.text === "{") {
+      let close = end + 2;
+      for (let depth = 0; close < tokens.length; close += 1) {
+        if (tokens[close].text === "{") depth += 1;
+        else if (tokens[close].text === "}" && --depth === 0) break;
+      }
+      let next = close + 1;
+      while (blank(tokens[next])) next += 1;
+      if (tokens.slice(close + 1, next).some((token) => QUAD.test(token.text))) {
+        joins.push({ start: tokens[index].start, end: tokens[next - 1].end, word: tex.slice(tokens[end + 2].end, tokens[close].start).trim(), wordStart: word.start });
+        index = next - 1;
+        continue;
+      }
+    }
+    joins.push({ start: tokens[index].start, end: tokens[end].end });
+    index = end;
+  }
+  return joins;
+}
+
+/**
+ * The rows of a display whose outer level sets two or more formulas side by side, joined by a
+ * space of the manuscript (\qquad, \quad, a control space or a run of thin spaces): each formula
+ * its own slice of the TeX, the comma that closes it kept with it. A part that qualifies a formula
+ * (a condition in parentheses, "for …", "when …", a range its symbol keeps) stays on its row; a
+ * connecting word set off by quads on both sides ("equivalently", "so that", "s.t.") opens the
+ * row it introduces. A single relation continued after a space (\Longleftrightarrow, \le) is one
+ * formula. A display that is one gathered environment, or one aligned environment flush at its
+ * rows' start, is read row by row. Undefined for a display of one formula a row.
+ */
+export function researchDisplayRows(tex: string): readonly ResearchDisplayRow[] | undefined {
+  const number = EQUATION_NUMBER.exec(tex);
+  const lines = displayLines(tex, 0, number ? number.index : tex.length);
+  if (!lines?.length) return undefined;
+  const rows: ResearchDisplayRow[] = [];
+  const push = (start: number, end: number, extraEm: number, hang?: string) => {
+    const text = tex.slice(start, end);
+    const lead = text.length - text.trimStart().length;
+    rows.push(Object.freeze({ tex: text.trim(), start: start + lead, end: start + lead + text.trim().length, ...(extraEm ? { extraEm } : {}), ...(hang ? { hang } : {}) }));
+  };
+  for (const line of lines) {
+    const joins = lineJoins(tex, line);
+    const parts = [line.start, ...joins.map((join) => join.end)].map((start, index) => ({ start, end: index < joins.length ? joins[index].start : line.end }));
+    let rowStart = line.start;
+    let extraEm = line.extraEm;
+    // After "s.t." each constraint is a row, hung under the first.
+    let constraints: string | undefined;
+    let hang: string | undefined;
+    joins.forEach((join, index) => {
+      const before = tex.slice(parts[index].start, parts[index].end);
+      const after = tex.slice(parts[index + 1].start, parts[index + 1].end);
+      const row = tex.slice(rowStart, parts[index].end);
+      const connects = join.word !== undefined && row.trim() !== "" && after.trim() !== "";
+      if (!connects && !separates(before, after, row, constraints !== undefined)) return;
+      push(rowStart, parts[index].end, extraEm, hang);
+      extraEm = 0;
+      rowStart = connects ? join.wordStart! : parts[index + 1].start;
+      if (connects && SUCH_THAT.test(join.word!)) constraints = tex.slice(join.wordStart, parts[index + 1].start).trim();
+      hang = connects ? undefined : constraints;
+    });
+    push(rowStart, line.end, extraEm, hang);
+  }
+  return rows.length > lines.length ? Object.freeze(rows) : undefined;
+}
+
+const stackCache = new Map<string, ResearchDisplayStackMarkup | null>();
+
+/**
+ * A display of formulas set side by side, set as rows: each row drawn in display style from its
+ * own slice of the TeX, the comma that closes a row kept with it as the display's closing
+ * punctuation is not; a constraint after "s.t." hangs under the first. Rows stand one line of
+ * mathematics apart, each as tall as an array row's strut or its drawing, as TeX sets aligned
+ * rows, plus the space a row break asks for; the stack keeps its drawings' own extent above the
+ * first row and below the last, as a display on one line does. One assistive expression carries
+ * the whole display and its TeX.
+ */
+export function renderResearchDisplayStack(tex: string): ResearchDisplayStackMarkup | undefined {
+  const cached = stackCache.get(tex);
+  if (cached !== undefined) return cached ?? undefined;
+  const rows = researchDisplayRows(tex);
+  if (!rows) {
+    stackCache.set(tex, null);
+    return undefined;
+  }
+  const whole = renderResearchMath(tex, true);
+  // A constraint after the first hangs under it, behind the invisible width of "s.t." and its space.
+  const drawn = rows.map((row, index) => renderResearchMath(`${row.hang ? `\\hphantom{${row.hang}}` : ""}${index < rows.length - 1 ? row.tex.replace(/,$/u, "{,}") : row.tex}`, true));
+  // A drawing's extent above and below its baseline, without its canvas gutter.
+  const height = (markup: ResearchMathMarkup) => markup.heightEm - markup.depthEm - RESEARCH_MATH_GUTTER_EM;
+  const depth = (markup: ResearchMathMarkup) => markup.depthEm - RESEARCH_MATH_GUTTER_EM;
+  const result = Object.freeze({
+    rows: drawn.map((markup, index) => Object.freeze({
+      ...markup,
+      svg: markup.svg.replace('data-research-svg="display"', 'data-research-svg="row"'),
+      start: rows[index].start,
+      end: rows[index].end,
+      spaceEm: index === 0 ? 0 : Number((RESEARCH_MATH_ROW_SPACING_EM + (rows[index].extraEm ?? 0)
+        + Math.max(0, STRUT_HEIGHT_EM - height(markup)) + Math.max(0, STRUT_DEPTH_EM - depth(drawn[index - 1]))).toFixed(4)),
+    })),
+    mathml: whole.mathml,
+    ...(whole.number ? { number: whole.number } : {}),
+  });
+  stackCache.set(tex, result);
+  return result;
+}
+
 export function renderResearchMath(tex: string, display = false): ResearchMathMarkup {
   if (!tex.trim()) throw new Error("Research equations cannot be empty.");
   const key = `${display ? "display" : "inline"}\u0000${tex}`;

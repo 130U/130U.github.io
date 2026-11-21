@@ -344,7 +344,21 @@ displayed equation follows one pattern, whatever its length: its ink starts on t
 manuscript inset (`--manuscript-inset`, 16 to 24px from the column's edge), the axis it
 shares with table text, and its number stands at the column's right edge on the
 equation's baseline, in the reading face of the references that cite it, set clear of
-the expression. An equation that overshoots its column by a little is fitted: the gap
+the expression. A display holds one formula to a line, at every width: where the
+manuscript sets two or more formulas side by side, joined by a quad, a control space or
+a run of thin spaces, the page sets them as rows, one formula to a row on the manuscript
+inset, one line of mathematics apart as aligned rows are, with the number on the last
+row's baseline. The comma that closes a formula ends its row. A qualifier stays on its
+formula's row: a condition in parentheses, a phrase that opens on "for", "when" or "on",
+a range of a symbol the row holds (s ≥ 0, 0 ≤ θ ≤ 1), or the values an index of the row
+runs over (ℓ = P, Q). A connecting word set off by quads ("equivalently", "so that",
+"s.t.") opens the row it introduces, and after "s.t." each constraint takes a row, hung
+under the first, as an optimization problem is set. One
+relation continued after a space (an equivalence, a chain, a limit) is one formula and
+keeps its line; a display that an environment aligns at a relation keeps its alignment.
+Each row is drawn from its own slice of the TeX, and one assistive expression carries
+the whole display, so nothing is drawn or read twice. A stack of rows is fitted or
+scrolls as one display. An equation that overshoots its column by a little is fitted: the gap
 before its number closes from 1.5em to 1em, and the expression is set smaller, to no
 less than nine tenths of its size, so a fitted display still stands above the reading
 size. An equation wider than that scrolls in place at its natural size: its number keeps
