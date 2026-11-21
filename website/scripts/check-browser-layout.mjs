@@ -645,15 +645,39 @@ function inspectManuscript() {
   }
   // A table keeps its row labels in view while it scrolls when they take no more than half its
   // room, or when the room beside them, short of the 40px fading edge, holds a column of values
-  // whole.
+  // whole; and only when that room holds its widest column too. A table that keeps its labels in
+  // view snaps its scrolling to the start of a column beside them, so at every resting place, the
+  // scrolled end included, no column's text stands half beneath the labels.
   for (const region of document.querySelectorAll('[data-table-frame] [role="region"]')) {
     const table = region.querySelector("table");
+    const where = region.closest("[data-table-frame]").querySelector("[data-table-title]")?.textContent.trim().slice(0, 60);
     const [label, ...values] = [...table.rows[0].cells];
-    const narrowest = Math.min(...values.filter(cell => cell.offsetWidth > 0).map(cell => cell.offsetWidth - parseFloat(getComputedStyle(cell).paddingLeft) - parseFloat(getComputedStyle(cell).paddingRight)));
-    const eligible = label.offsetWidth <= 0.5 * region.clientWidth || narrowest <= region.clientWidth - label.offsetWidth - 40;
-    if (region.scrollWidth > region.clientWidth + 1 && !region.hasAttribute("data-pinned") && eligible) {
-      issues.push({ kind: "table-labels-not-pinned", table: region.closest("[data-table-frame]").querySelector("[data-table-title]")?.textContent.trim().slice(0, 60), label: table.rows[0].cells[0].offsetWidth, room: region.clientWidth });
+    const shown = values.filter(cell => cell.offsetWidth > 0);
+    const narrowest = Math.min(...shown.map(cell => cell.offsetWidth - parseFloat(getComputedStyle(cell).paddingLeft) - parseFloat(getComputedStyle(cell).paddingRight)));
+    // A column from its start to the end of its text; the blank run past the last column (--snap-end) that
+    // makes the scrolled end a column's start is left out of the overflow.
+    const snapEnd = parseFloat(region.style.getPropertyValue("--snap-end")) || 0;
+    const widest = Math.max(...shown.map(cell => cell.offsetWidth - parseFloat(getComputedStyle(cell).paddingRight)));
+    const holds = widest <= region.clientWidth - label.offsetWidth;
+    const eligible = holds && (label.offsetWidth <= 0.5 * region.clientWidth || narrowest <= region.clientWidth - label.offsetWidth - 40);
+    if (region.scrollWidth - snapEnd > region.clientWidth + 1 && !region.hasAttribute("data-pinned") && eligible) {
+      issues.push({ kind: "table-labels-not-pinned", table: where, label: table.rows[0].cells[0].offsetWidth, room: region.clientWidth });
     }
+    if (!region.hasAttribute("data-pinned")) continue;
+    if (!/x/u.test(getComputedStyle(region).scrollSnapType) || !/mandatory/u.test(getComputedStyle(region).scrollSnapType)) issues.push({ kind: "table-pinned-without-snapping", table: where });
+    const start = region.scrollLeft;
+    for (const end of [false, true]) {
+      region.scrollLeft = end ? region.scrollWidth : 0;
+      const edge = label.getBoundingClientRect().right;
+      for (const cell of shown) {
+        const box = cell.getBoundingClientRect();
+        const style = getComputedStyle(cell);
+        const left = box.left + parseFloat(style.paddingLeft);
+        const right = box.right - parseFloat(style.paddingRight);
+        if (left < edge - 1 && right > edge + 1) issues.push({ kind: "table-column-half-under-labels", table: where, atScrollEnd: end, column: cell.textContent.trim().slice(0, 30), hidden: +(edge - left).toFixed(1) });
+      }
+    }
+    region.scrollLeft = start;
   }
   // An inline formula stands on its line's baseline in prose, lists, captions and table cells
   // alike: its drawing's own baseline, the canvas's y = 0, meets the line's within half a pixel.
@@ -704,10 +728,13 @@ function inspectManuscript() {
     region.scrollLeft = 0;
   }
   // A column of values aligns on the decimal point: the point of each value's first number, or the
-  // end of its integer part where it has no point, stands within half a pixel of the others' (a bold
-  // value within a pixel); an interval holds one line, or, broken after its comma where its table
-  // would otherwise scroll, two, the upper ends' points in line too; the pads that align a column
-  // draw nothing; and a row that presents a display shows the display's number beside its label.
+  // end of its integer part where it has no point, stands within half a pixel of the others', bold
+  // values among regular ones included; a row whose cell is words or a dash stands outside the
+  // column's alignment, and the values around it align all the same. An interval holds one line,
+  // or, broken after its comma where its table would otherwise scroll, two, the upper ends' points
+  // in line too; the pads that align a column draw nothing; every value of the page, a table of
+  // mathematics' included, stands in one face; and a row that presents a display shows the
+  // display's number beside its label.
   const charBox = (root, index) => {
     const walker = document.createTreeWalker(root, NodeFilter.SHOW_TEXT);
     for (let node = walker.nextNode(); node; node = walker.nextNode()) {
@@ -737,9 +764,8 @@ function inspectManuscript() {
     const body = [...table.tBodies[0].rows];
     const columns = Math.max(...body.map(row => row.cells.length));
     for (let column = 0; column < columns; column += 1) {
-      const cells = body.map(row => row.cells[column]).filter(cell => cell && cell.textContent.trim() && cell.textContent.trim() !== "—");
-      const values = cells.map(cell => cell.querySelector("[data-table-value]"));
-      if (values.length < 2 || values.some(value => !value || !value.getClientRects().length)) continue;
+      const values = body.map(row => row.cells[column]?.querySelector("[data-table-value]")).filter(value => value && value.getClientRects().length);
+      if (values.length < 2) continue;
       const firsts = [];
       const seconds = [];
       for (const value of values) {
@@ -756,11 +782,19 @@ function inspectManuscript() {
         const measured = points.filter(point => point.x !== null);
         if (measured.length < 2) continue;
         const spread = Math.max(...measured.map(point => point.x)) - Math.min(...measured.map(point => point.x));
-        if (spread > (measured.some(point => point.bold) ? 1 : 0.5)) issues.push({ kind, table: table.closest("[data-table-frame]")?.querySelector("[data-table-title]")?.textContent.trim().slice(0, 60), column, spread: +spread.toFixed(2) });
+        if (spread > 0.5) issues.push({ kind, table: table.closest("[data-table-frame]")?.querySelector("[data-table-title]")?.textContent.trim().slice(0, 60), column, spread: +spread.toFixed(2) });
       }
     }
     for (const pad of table.querySelectorAll("[data-table-pad]")) {
       if (getComputedStyle(pad, "::before").visibility !== "hidden" || pad.textContent) issues.push({ kind: "table-pad-shows", pad: pad.dataset.tablePad });
+    }
+    for (const lead of table.querySelectorAll("[data-table-lead]")) {
+      if (getComputedStyle(lead, "::before").visibility !== "hidden") issues.push({ kind: "table-pad-shows", pad: lead.dataset.tableLead });
+    }
+    const reading = document.querySelector('p[data-research-block-type="paragraph"]');
+    for (const value of table.querySelectorAll("[data-table-value]")) {
+      const face = getComputedStyle(value).fontFamily;
+      if (reading && face !== getComputedStyle(reading).fontFamily) issues.push({ kind: "table-value-off-the-reading-face", value: value.textContent.slice(0, 30), face });
     }
     for (const row of table.querySelectorAll("tr[data-equation-row]")) {
       const number = row.cells[0]?.querySelector("[data-equation-number]");
@@ -815,8 +849,9 @@ function inspectManuscript() {
   // which is at least the label type's x-height equivalent, and no script is
   // smaller than half that size, as in a line of prose; the drawing is
   // decorative beside one assistive expression; a numbered table stands its
-  // number beneath its frame at the column's right edge, in the face of every
-  // equation number; and row labels kept in view stay put as it scrolls.
+  // number at its frame's top-left, in the title's place, in the face of every
+  // equation number; it does not scroll from a tablet's width up; and row labels
+  // kept in view stay put as it scrolls.
   const numberFace = document.querySelector("[data-equation-edge]") && getComputedStyle(document.querySelector("[data-equation-edge]")).fontFamily;
   for (const block of document.querySelectorAll("[data-math-table]")) {
     const frame = block.querySelector("[data-table-frame]");
@@ -872,10 +907,16 @@ function inspectManuscript() {
       const text = document.createRange();
       text.selectNodeContents(number);
       const box = text.getBoundingClientRect();
-      const gap = block.getBoundingClientRect().right - box.right;
-      if (Math.abs(gap) > 1) issues.push({ kind: "math-table-number-off-right-edge", number: number.textContent, gap });
-      if (box.top < frame.getBoundingClientRect().bottom) issues.push({ kind: "math-table-number-not-beneath-frame", number: number.textContent });
+      const title = number.closest("[data-table-title]");
+      const start = title && title.getBoundingClientRect().left + parseFloat(getComputedStyle(title).paddingLeft);
+      if (!title || title.parentElement !== frame || Math.abs(box.left - start) > 1 || box.bottom > region.getBoundingClientRect().top) issues.push({ kind: "math-table-number-not-at-the-frame-top-left", number: number.textContent, offset: title ? +(box.left - start).toFixed(2) : null });
       if (numberFace && getComputedStyle(number).fontFamily !== numberFace) issues.push({ kind: "math-table-number-off-the-number-face", number: number.textContent, face: getComputedStyle(number).fontFamily });
+    }
+    // A table of mathematics fits the column on a tablet and a desktop; a column whose every cell is
+    // a number stands in the reading face as a research table's values do.
+    if (window.innerWidth >= 768 && region.scrollWidth > region.clientWidth + 1) issues.push({ kind: "math-table-scrolls", table: where, overflow: region.scrollWidth - region.clientWidth });
+    for (const cell of table.querySelectorAll('td[data-cell="value"]')) {
+      if (!cell.querySelector("[data-table-value]") || cell.querySelector("svg")) issues.push({ kind: "math-table-number-drawn-as-mathematics", table: where });
     }
     if (region.hasAttribute("data-pinned")) {
       const label = table.rows[0].cells[0];

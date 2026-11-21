@@ -9,11 +9,11 @@ import { ExperienceDiagram, ExperienceMetadata, KeyContributions, ProblemAndAppr
 import type { ShowcaseEntry } from "../../lib/content/experience-showcase";
 import { parseResearchMarkdown, type ResearchArticleContent, type ResearchCell, type ResearchInline } from "../../lib/content/research-markdown";
 import { RESEARCH_MATH_GUTTER_EM, parseResearchDisplayTable, renderResearchDisplayTable, renderResearchMath } from "../../lib/content/research-math";
-import { mathTableTitle } from "../../lib/content/math-tables";
+import { mathTableHeads, mathTableTitle } from "../../lib/content/math-tables";
 import { buildArticleHeadingMap, buildReferenceTargets, formatArticleHeadings, linkArticleSectionReferences, type ArticleInline } from "../../lib/content/article-headings";
 import { emphasisFor, manuscriptFigureFor, placeFigures } from "../../lib/content/article-figures";
 import { placePassageTables, type PlacedPassageTable } from "../../lib/content/passage-tables";
-import { alignColumn, isInterval, parseTableNumber, type AlignedNumber } from "../../lib/content/research-number";
+import { alignColumn, isInterval, parseTableNumber, writtenNumber, type AlignedNumber } from "../../lib/content/research-number";
 import { TableValue } from "./TableValue";
 import { argumentUnit, closesProof } from "../../lib/content/argument-units";
 import { ArticleFigure, FigureCaption, FigureController, ManuscriptFigure } from "../figures";
@@ -43,25 +43,36 @@ function numericCell({ source }: ResearchCell) {
 
 /**
  * The values of a table, by row and column, set for the page: each cell that
- * holds a number, percentage, interval or list of numbers, grouped and, where
- * every body cell of its column is such a value or a dash, aligned on the
- * decimal point with the rest of its column. `start` marks the columns that
- * align from their start, whose values hold different numbers of fields.
+ * holds a number, percentage, interval or list of numbers, with or without a
+ * note after it, grouped and aligned on the decimal point with the other values
+ * of its column; a row whose cell in the column is words ("7 of 10") or a dash
+ * stands outside the column's alignment. `start` marks the columns that align
+ * from their start: their values hold different numbers of fields, mix bold
+ * with regular, or carry notes.
  */
 export function tableValues(rows: ResearchCell[][]) {
   const values: (AlignedNumber | undefined)[][] = rows.map((row) => row.map(() => undefined));
   const start = rows[0].map(() => false);
   rows[0].forEach((_, column) => {
-    const body = rows.slice(1).map((row) => parseTableNumber(row[column].source));
-    const aligned = body.every((value, index) => value || /^(?:—|)$/u.test(rows[index + 1][column].source.trim()));
-    const set = aligned ? alignColumn(body.filter((value) => value !== undefined)) : undefined;
-    start[column] = set?.start ?? false;
+    const body = rows.slice(1).map((row) => parseTableNumber(row[column].source, { note: true }));
+    const present = body.filter((value) => value !== undefined);
+    if (!present.length) return;
+    const set = alignColumn(present);
+    start[column] = set.start;
     let next = 0;
     body.forEach((value, index) => {
-      if (value) values[index + 1][column] = set ? set.values[next++] : alignColumn([value]).values[0];
+      if (value) values[index + 1][column] = set.values[next++];
     });
   });
   return { values, start };
+}
+
+/** A cell's inlines after the value that opens it: the note that follows the value, from its space on. */
+function noteInlines(inlines: ResearchInline[], value: AlignedNumber) {
+  const [first, ...rest] = inlines;
+  const at = first?.type === "text" ? first.text.indexOf(" (") : -1;
+  if (first?.type !== "text" || at < 0) throw new Error(`A table value's note must follow its value as text: ${writtenNumber(value)}`);
+  return [{ ...first, text: first.text.slice(at) }, ...rest];
 }
 
 // The row labels' column counts as numeric when it holds numbers (strikes, steps,
@@ -349,6 +360,8 @@ export function ResearchArticle({ project, active, returnPath, returnLabel, titl
   }) {
     const layout = tableLayout(rows);
     const { values, start } = tableValues(rows);
+    // A column of intervals, broken after their commas, aligns from its start, its head over that start.
+    const intervals = rows[0].map((_, column) => values.some((row) => row[column]?.interval));
     const tableRows = rows.map((row, rowIndex) => (
       <tr key={rowIndex} {...rowAttributes?.(rowIndex)} data-emphasis={emphasis?.row !== undefined && rowIndex - 1 === emphasis.row ? "" : undefined}>{row.map((cell, cellIndex) => {
         const Cell = rowIndex === 0 ? "th" : "td";
@@ -361,10 +374,11 @@ export function ResearchArticle({ project, active, returnPath, returnLabel, titl
             scope={Cell === "th" ? "col" : undefined}
             {...cellLayout}
             className={start[cellIndex] ? `${cellLayout.className} ${styles.alignStart}` : cellLayout.className}
-            data-interval={value?.interval ? "" : undefined}
+            data-interval={value?.interval || (rowIndex === 0 && intervals[cellIndex]) ? "" : undefined}
             data-emphasis={emphasis?.column === cellIndex ? "" : undefined}
           >
             {value ? <TableValue value={value} display={cell.display?.tex} /> : <InlineContent inlines={link(cell.inlines, index)} />}
+            {value?.note !== undefined && <InlineContent inlines={link(noteInlines(cell.inlines, value), index)} />}
             {cellIndex === 0 && display && <span className={styles.rowNumber} data-equation-number aria-hidden="true">{`(${display.number})`}</span>}
           </Cell>
         );
@@ -410,7 +424,12 @@ export function ResearchArticle({ project, active, returnPath, returnLabel, titl
           rows,
           index,
           title: <p className={styles.tableTitle} data-table-title><InlineContent inlines={paragraphInlines(passage.title)} /></p>,
-          table: { "data-passage-table": passage.id, ...(passage.blockRows.get(index) === -1 ? { "data-research-block": index, id: first.id ?? anchors.get(index) } : {}) },
+          table: {
+            "data-passage-table": passage.id,
+            // A table that restates its passage down its columns says so, so its formulas are read in that order.
+            "data-reading": passage.reading === "columns" ? "columns" : undefined,
+            ...(passage.blockRows.get(index) === -1 ? { "data-research-block": index, id: first.id ?? anchors.get(index) } : {}),
+          },
           rowAttributes: (row) => {
             const block = rowBlocks.get(row);
             if (block === undefined) return {};
@@ -451,7 +470,10 @@ export function ResearchArticle({ project, active, returnPath, returnLabel, titl
     }
     if (block.type === "equation") {
       const table = renderResearchDisplayTable(block.tex);
-      if (table) return <ResearchMathTable key={index} table={table} title={mathTableTitle(project.slug, parseResearchDisplayTable(block.tex)!)} id={block.id ?? anchors.get(index)} attributes={marker} />;
+      if (table) {
+        const source = parseResearchDisplayTable(block.tex)!;
+        return <ResearchMathTable key={index} table={table} title={mathTableTitle(project.slug, source)} heads={mathTableHeads(project.slug, source)} id={block.id ?? anchors.get(index)} attributes={marker} />;
+      }
       return <div {...marker} id={block.id ?? anchors.get(index)} className={mathStyles.equation} key={index} tabIndex={0} role="region" aria-label="Mathematical equation"><ResearchMath tex={block.tex} display /></div>;
     }
     if (block.type === "figure") {

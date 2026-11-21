@@ -227,10 +227,11 @@ function visibleText(html, preserveFormulaPositions = false) {
   body = replaceElements(body, /<([a-z][\w:-]*)\b[^>]*aria-hidden=["']true["'][^>]*>/giu);
   // A word-break opportunity adds no text or word boundary, nor do the empty text
   // separators React writes beside one where its stream divides a run of text,
-  // nor the spans that group a table value's digits or pad it to its column.
+  // nor the spans that group a table value's digits, pad it to its column or box its lead.
   const unbroken = body
     .replace(/(?:<!--\s*-->)*<wbr\b[^>]*>(?:<!--\s*-->)*/giu, "")
     .replace(/(?:<!--\s*-->)*<span\b[^>]*\bdata-table-pad="[^"]*"[^>]*><\/span>(?:<!--\s*-->)*/giu, "")
+    .replace(/(?:<!--\s*-->)*<span\b[^>]*\bdata-table-lead="[^"]*"[^>]*><span>([^<]*)<\/span><\/span>(?:<!--\s*-->)*/giu, "$1")
     .replace(/(?:<!--\s*-->)*<span\b[^>]*\bdata-digit-group=""[^>]*>([^<]*)<\/span>(?:<!--\s*-->)*/giu, "$1");
   return stripInterfaceStrings(withoutComments(unbroken).replace(/<[^>]+>/gu, " "));
 }

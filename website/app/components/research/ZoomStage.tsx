@@ -39,12 +39,15 @@ const FIGURE_FIT_SHARE = 0.9;
 // than the window is set smaller, to no less than nine tenths of the reading size.
 const MIN_GAP_SHARE = 0.5;
 const MIN_TABLE_ZOOM = 0.9;
-// Room left inside a fitted box, against subpixel overflow.
+// Room left inside a fitted box, against subpixel overflow. A table that reaches
+// no more than one layout unit (1/64px) past its room does not scroll, so it fits.
 const FIT_SLACK = 0.5;
+const LAYOUT_UNIT = 1 / 64;
 const EDGE_FADE = 40;
 // Row labels stay in view while their table scrolls when they take no more than
 // half its room, or when the room beside them, short of the fading edge, holds a
-// column of values whole, as a table of mathematics keeps its labels; a table that
+// column of values whole, as a table of mathematics keeps its labels, and only
+// where that room holds the widest column; a table that
 // scrolls sets labels of words, wrapped, at no more than LABEL_SHARE of the room
 // and 16rem, or at their longest word.
 const PIN_SHARE = 0.5;
@@ -73,7 +76,7 @@ function overshoot(region: HTMLElement, table: HTMLTableElement) {
 function closeUp(region: HTMLElement, table: HTMLTableElement, gap: number) {
   region.style.removeProperty("--cell-gap");
   let over = overshoot(region, table);
-  if (over <= 0) return true;
+  if (over <= LAYOUT_UNIT) return true;
   const floor = gap * MIN_GAP_SHARE;
   // The first step assumes every column gives up the gap on both its inner sides;
   // later steps use the narrowing measured, since a wrapping column may not narrow.
@@ -83,7 +86,7 @@ function closeUp(region: HTMLElement, table: HTMLTableElement, gap: number) {
     const next = Math.max(floor, current - (over + FIT_SLACK) / slope);
     region.style.setProperty("--cell-gap", `${next.toFixed(3)}px`);
     const left = overshoot(region, table);
-    if (left <= 0) return true;
+    if (left <= LAYOUT_UNIT) return true;
     slope = (over - left) / (current - next);
     [current, over] = [next, left];
   }
@@ -108,6 +111,39 @@ function clearLabelWidth(region: HTMLElement) {
   region.removeAttribute("data-label-width");
   region.style.removeProperty("--label-width");
   region.style.removeProperty("--sentence-width");
+}
+
+/** The lines a cell's text takes. */
+function lineCount(cell: HTMLElement) {
+  const range = document.createRange();
+  range.selectNodeContents(cell);
+  return Math.max(1, Math.round(range.getBoundingClientRect().height / parseFloat(getComputedStyle(cell).lineHeight)));
+}
+
+/**
+ * A table that would still scroll by no more than its row labels of words can
+ * give, each taking at most one line more, sets them narrower, down to their
+ * longest word, where that makes it fit: a label on one more line reads better
+ * than a column of values cut at the edge. Whether the table fits.
+ */
+function narrowLabels(region: HTMLElement, table: HTMLTableElement, gap: number) {
+  if (!table.dataset.label) return false;
+  const set = region.hasAttribute("data-label-width") ? region.style.getPropertyValue("--label-width") : undefined;
+  const labels = [...table.rows].map((row) => row.cells[0]).filter((cell) => cell.offsetWidth > 0);
+  const lines = labels.map(lineCount);
+  region.style.setProperty("--cell-gap", `${(gap * MIN_GAP_SHARE).toFixed(3)}px`);
+  const width = table.rows[0].cells[0].getBoundingClientRect().width - overshoot(region, table) - FIT_SLACK;
+  region.setAttribute("data-label-width", "");
+  region.style.setProperty("--label-width", `${Math.floor(width)}px`);
+  if (closeUp(region, table, gap) && labels.every((cell, index) => lineCount(cell) <= lines[index] + 1)) return true;
+  if (set === undefined) {
+    region.removeAttribute("data-label-width");
+    region.style.removeProperty("--label-width");
+  } else {
+    region.style.setProperty("--label-width", set);
+  }
+  closeUp(region, table, gap);
+  return false;
 }
 
 // The narrowest a sentence column is set when several share a row.
@@ -162,11 +198,14 @@ function foldHalves(table: HTMLTableElement, fold: boolean) {
  * that makes it fit; a table of two halves folded, if that makes it fit;
  * otherwise with its columns of phrases and its row labels wrapped and its
  * sentence columns sharing the room, closed up again if need be; then with its
- * intervals broken after their commas (data-breaks, set by the renderer); and
- * otherwise, as it scrolls, with row labels that stay in view and sentence
- * columns set to read one whole column at a time where the room is narrow.
+ * intervals broken after their commas (data-breaks, set by the renderer); then
+ * with its row labels narrowed to as little as their longest word, if that
+ * makes it fit; and otherwise, as it scrolls, with row labels that stay in view
+ * and sentence columns set to read one whole column at a time where the room is
+ * narrow.
  */
 function layTable(region: HTMLElement, table: HTMLTableElement, gap: number) {
+  unpin(region);
   region.removeAttribute("data-wrap");
   region.removeAttribute("data-break");
   clearLabelWidth(region);
@@ -187,8 +226,8 @@ function layTable(region: HTMLElement, table: HTMLTableElement, gap: number) {
   if (table.hasAttribute("data-wraps")) region.dataset.wrap = "scroll";
   setLabelWidth(region, table);
   setSentenceWidth(region, table);
-  // Labels set narrower than their phrases may let the table fit after all.
-  closeUp(region, table, gap);
+  // Labels set narrower than their phrases may let the table fit after all, or narrower still.
+  if (!closeUp(region, table, gap)) narrowLabels(region, table, gap);
 }
 
 /** The right edge fades by as much as there is left to scroll. */
@@ -198,17 +237,54 @@ function paintEdges(region: HTMLElement) {
   region.toggleAttribute("data-scrolled", region.scrollLeft > 0);
 }
 
-/** Row labels stay in view while a wide table scrolls, when they leave room for the values. */
+/** Row labels leave view and the scrolling stops snapping, while a table is set anew. */
+function unpin(region: HTMLElement) {
+  region.removeAttribute("data-pinned");
+  region.style.removeProperty("--pin-width");
+  region.style.removeProperty("--snap-end");
+}
+
+/**
+ * A table that keeps its row labels in view snaps its scrolling to the start of
+ * a column of values, set beside the labels, so no column stands half beneath
+ * them; the table runs on past its last column, blank, by as much as it takes for
+ * the scrolled end to be such a start too.
+ */
+function snapColumns(region: HTMLElement, table: HTMLTableElement) {
+  if (!region.hasAttribute("data-pinned")) return;
+  const [label, ...values] = [...table.rows[0].cells];
+  const pin = label.getBoundingClientRect().width;
+  region.style.setProperty("--pin-width", `${pin.toFixed(2)}px`);
+  const origin = table.getBoundingClientRect().left + pin;
+  const starts = values.filter((cell) => cell.offsetWidth > 0).map((cell) => cell.getBoundingClientRect().left - origin);
+  const end = () => table.getBoundingClientRect().width - region.clientWidth;
+  const next = starts.find((start) => start >= end() - FIT_SLACK);
+  if (next === undefined) return;
+  // Measured again after each step, against subpixel rounding, until the end meets the start.
+  let widening = 0;
+  for (let attempt = 0; attempt < 4 && next - end() > FIT_SLACK; attempt += 1) {
+    widening += next - end();
+    region.style.setProperty("--snap-end", `${widening.toFixed(2)}px`);
+  }
+}
+
+/**
+ * Row labels stay in view while a wide table scrolls, when they leave room for the values: when
+ * they take no more than half the room, or when the room beside them holds a column of values
+ * whole; and only when that room holds its widest column too, so no column stands half beneath them.
+ */
 function pinRowLabels(region: HTMLElement, table: HTMLTableElement) {
+  unpin(region);
   const overflows = table.offsetWidth > region.clientWidth + 1;
   const [label, ...values] = [...table.rows[0].cells];
-  // Or when the room they leave beside them holds a column of values whole, its text without its padding.
-  const narrowest = Math.min(...values.filter((cell) => cell.offsetWidth > 0).map((cell) => {
-    const style = getComputedStyle(cell);
-    return cell.offsetWidth - parseFloat(style.paddingLeft) - parseFloat(style.paddingRight);
-  }));
+  const shown = values.filter((cell) => cell.offsetWidth > 0).map((cell) => ({ cell, style: getComputedStyle(cell) }));
+  // A column's text without its padding, and a column from its start to the end of its text.
+  const narrowest = Math.min(...shown.map(({ cell, style }) => cell.offsetWidth - parseFloat(style.paddingLeft) - parseFloat(style.paddingRight)));
+  const widest = Math.max(...shown.map(({ cell, style }) => cell.offsetWidth - parseFloat(style.paddingRight)));
   const room = region.clientWidth - label.offsetWidth - EDGE_FADE;
-  region.toggleAttribute("data-pinned", overflows && (label.offsetWidth <= region.clientWidth * PIN_SHARE || narrowest <= room));
+  const holds = widest <= region.clientWidth - label.offsetWidth;
+  region.toggleAttribute("data-pinned", overflows && holds && (label.offsetWidth <= region.clientWidth * PIN_SHARE || narrowest <= room));
+  snapColumns(region, table);
   paintEdges(region);
 }
 
@@ -307,6 +383,7 @@ export function ZoomStage() {
         if (mode === "wrap" && table.hasAttribute("data-wraps")) region.dataset.wrap = "fit";
         else region.removeAttribute("data-wrap");
         region.removeAttribute("data-break");
+        unpin(region);
         clearLabelWidth(region);
       };
 
@@ -337,7 +414,7 @@ export function ZoomStage() {
         if (table.hasAttribute("data-wraps")) region.dataset.wrap = "scroll";
         setLabelWidth(region, table);
         setSentenceWidth(region, table);
-        closeUp(region, table, gap);
+        if (!closeUp(region, table, gap)) narrowLabels(region, table, gap);
       };
       // A table that reaches a little past the bottom of the window is set smaller.
       const settleHeight = () => {

@@ -430,7 +430,7 @@
       "formulaCount": 1027
     },
     "/certified-valuation-of-arithmetic-asian-options/": {
-      "textSha256": "6603b88f429808a1e30e8d01aa8c5201a5505c26b6a76d1d0f78d7b0bc3027d2",
+      "textSha256": "848688de6a77041163112f0c8ac5993024f67104623b7544f9a4600b7e5b2803",
       "characterCount": 70436,
       "wordCount": 11610,
       "preview": "Skip to Main Content Theodore Ouyang Back to Selected Research Certified Valuation of Arithmetic Asian Options: The Cost of Exercising on the Geometric Average ",
@@ -684,7 +684,7 @@
         "twitterTitle": "Certified Valuation of Arithmetic Asian Options: The Cost of Exercising on the Geometric Average",
         "twitterDescription": "The cost of exercising an arithmetic Asian option on the geometric average: a proved bound, its cubic law in Black's model, and a certified Heston price interval with its Euler discretization error."
       },
-      "mathSourceSha256": "0d9316ec30a66dc6afcf100723d93f318875dc7b04bbb678ffa0cd3337b1d0b4",
+      "mathSourceSha256": "3202f8a19149c613547abc683737281d3a9aa1e7deb57f53044fdb8267bb3eb7",
       "formulaCount": 749
     },
     "/certified-joint-pricing-errors-in-rough-heston/": {

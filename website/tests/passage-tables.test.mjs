@@ -59,6 +59,15 @@ test("the build refuses a passage table that invents, drops or reorders what its
   assert.throws(place((spec) => { delete spec.rows[0].display; spec.rows[0].cells[1] = "$`[6.508371733,\\;6.518868974]`$"; return spec; }), /displays in a row/u, "A display must keep its row and number.");
   assert.throws(place((spec) => { spec.at = "The continuous price"; spec.from = "Nothing opens with this"; return spec; }), /exactly one block/u);
   assert.throws(place((spec) => { spec.form = "Table 99."; return spec; }), /does not hold/u);
+  // A table that reads down its columns restates its passage column by column: read by rows, or with two rows
+  // exchanged, its formulas leave the passage's order.
+  const [, estimates] = passageTablesFor(ASIAN);
+  const placeEstimates = (change) => () => placePassageTables(ASIAN, blocks, markdown, [change(structuredClone(estimates))]);
+  assert.equal(estimates.reading, "columns");
+  assert.doesNotThrow(placeEstimates((spec) => spec));
+  assert.throws(placeEstimates((spec) => { delete spec.reading; return spec; }), /formulas whole and in order/u, "Read by rows, the transposed table is refused.");
+  assert.throws(placeEstimates((spec) => { [spec.rows[0], spec.rows[1]] = [spec.rows[1], spec.rows[0]]; return spec; }), /formulas whole and in order/u, "Exchanged rows are refused.");
+  assert.throws(placeEstimates((spec) => { spec.rows[3].cells[0] = "0.07"; return spec; }), /writes 0\.07/u, "A point the manuscript does not state is refused.");
 });
 
 test("the evidence helpers read formulas, numbers and words as the manuscript writes them", () => {
@@ -109,10 +118,13 @@ test("Section 6.3 sets the sampling estimates as a table between Tables 9 and 10
   assert.ok(start > 0 && start > html.indexOf("Table 9. Enclosures") && start < html.indexOf("Table 10. Sampling"));
   const table = html.slice(start, html.indexOf("</table>", start));
   const rows = [...table.matchAll(/<tr\b[^>]*>([\s\S]*?)<\/tr>/gu)].map(([, markup]) => visible(markup));
+  // The initial variances run down the rows, as in Tables 9 and 10 beside it.
   assert.deepEqual(rows, [
-    "Initial variance 0.03 0.04 0.05 0.06",
-    "Estimate −0.041015 −0.011364 0.008329 0.019917",
-    "Standard error 0.002079 0.000566 0.000483 0.001274",
+    "Initial variance Estimate Standard error",
+    "0.03 −0.041015 0.002079",
+    "0.04 −0.011364 0.000566",
+    "0.05 0.008329 0.000483",
+    "0.06 0.019917 0.001274",
   ]);
   const after = html.slice(html.indexOf("</table>", start));
   assert.ok(visible(after).startsWith("The coefficient changes sign between"), visible(after).slice(0, 60));

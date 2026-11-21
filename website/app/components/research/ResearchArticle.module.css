@@ -392,6 +392,24 @@
   box-shadow: 1px 0 0 var(--rule-medium);
 }
 
+/* Row labels kept in view leave no column half beneath them: the table's
+   scrolling snaps to the start of a column of values, set beside the labels
+   (--pin-width), and its scrolled end is such a start too, the table running
+   on past its last column, blank, by as much as that takes (--snap-end), so no
+   column gives up its width to it; ZoomStage sets both. */
+.tableRegion[data-pinned] {
+  scroll-snap-type: x mandatory;
+  scroll-padding-inline-start: var(--pin-width, 0px);
+}
+
+.tableRegion[data-pinned] .cell:not(:first-child) {
+  scroll-snap-align: start;
+}
+
+.tableRegion[data-pinned] .table {
+  border-inline-end: var(--snap-end, 0px) solid transparent;
+}
+
 /* Rows below the fold enter once, top to bottom, as the table scrolls in. */
 .tableFrame[data-reveal="pending"] tbody tr {
   opacity: 0;
@@ -485,6 +503,26 @@ td.numeric {
   font-weight: normal;
 }
 
+/* In a column of both weights, where bold figures are wider than regular ones,
+   each number's lead (its bracket, sign and integer part) stands at the end of
+   a box as wide as the column's widest lead in bold, invisible generated text,
+   so the points align whatever a value's weight. */
+.lead {
+  display: inline-grid;
+  justify-items: end;
+}
+
+.lead::before {
+  content: attr(data-table-lead);
+  grid-area: 1 / 1;
+  font-weight: bold;
+  visibility: hidden;
+}
+
+.lead > span {
+  grid-area: 1 / 1;
+}
+
 /* An interval holds one line; in a table that would otherwise scroll it breaks
    after its comma, its upper end standing under its lower end, each aligned on
    its point from the cell's start (ZoomStage sets data-break). */
@@ -502,13 +540,24 @@ td.numeric {
   display: none;
 }
 
-/* A row that presents a display shows the display's number after its label,
-   in the reading face of every equation number. */
-.rowNumber {
-  margin-inline-start: 0.5em;
+/* An equation number a table carries stands in the reading face of every
+   equation number: after the label of a row that presents a display, and, for a
+   table that is itself an equation, at the frame's top-left in the title's
+   place, as a manuscript table is identified by "Table N.". */
+.rowNumber,
+.titleNumber {
   font-family: var(--font-prose);
   font-variant-numeric: lining-nums proportional-nums;
   white-space: nowrap;
+}
+
+.rowNumber {
+  margin-inline-start: 0.5em;
+}
+
+.titleNumber {
+  font-size: calc(var(--type-reading) * var(--zoom, 1));
+  font-weight: 400;
 }
 
 /* A formula in a cell keeps its whole width, since the table scrolls rather than
