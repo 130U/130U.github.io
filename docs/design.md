@@ -370,12 +370,19 @@ italics inside subsection headings render upright. Citations use the reading siz
 manuscripts write a citation's small-capitals fields (authors and titles of books,
 periodicals, institutional authors) in capitals; the page sets them in their proper case
 in Source Serif 4's own small capitals, with acronyms, initials and Roman numerals at full
-height, as a printed law review does. Numbered footnote references open the note in a
-native dialog: centered on desktop, a bottom sheet with 44px controls on phones. Escape,
-the backdrop, and Close return focus to the cited passage; View in Footnotes focuses the
-full endnote. Full notes and two-way links work without JavaScript. Note numbers stand
-right-aligned in their column, each Return to Text link holds one line, and a page or
-section range written with a hyphen (373-81, §§ 3.6-3.7) holds one line.
+height, as a printed law review does. A note reference stands a hair after the word or
+punctuation it annotates and never opens a line; on a touch screen its 24px target
+reaches past the number without taking room in the line. The author credit's asterisk
+is set at the byline's size. Numbered footnote references open the note in a native
+dialog: centered on desktop, a bottom sheet with 44px controls on phones, over the
+page frosted as it is behind the zoom stage. Escape, the backdrop, and Close return
+focus to the cited passage; View in Footnotes focuses the full endnote, whose number
+turns blue under a tint that fades. Full notes and two-way links work without
+JavaScript. Note numbers stand right-aligned in their column on the baseline of the
+note's first line, the author note and the notes run at one interval, each Return to
+Text link holds one line, and a page or section range written with a hyphen (373-81,
+§§ 3.6-3.7) holds one line. A table's title keeps a figure title's weight, bold runs
+and all.
 
 ### Blog
 
@@ -459,23 +466,38 @@ hold context, and `--chart-tint` marks an emphasized row, column, or region.
 Text is HTML at its true size, so labels stay legible at every width; only curves live
 in a stretched SVG layer whose strokes keep their width, and schematics scale uniformly
 so arrows and angles keep their shape. Labels sit in open space beside the marks they
-name and never cover a curve. A label takes the tone of the mark it names: the accent and
-green as they are, ink beside a sky or mist mark and muted ink beside a steel one, since
-those tones are too light to read as text. A plot's labels are knocked out of the grid
+name and never cover a curve; a label over open paper, with no grid line behind it,
+takes no knockout, so nothing cuts a gap in a curve. A label takes the tone of the mark
+it names: the accent and green as they are, ink beside a sky or mist mark and muted ink
+beside a steel one, since those tones are too light to read as text. A plot's labels are knocked out of the grid
 lines and reference rules behind them, on the surface they sit on (the page, or the
 sheet on the zoom stage) and 3px past the text, so no line runs through a word; a
 stacked bar's label and value reach 4px past their outer letters, so a line at either
 end of the scale stops short of them. A label on a tinted region, or one held clear of a
 rule by its own padding, takes no knockout and stands clear of the lines, and a label
 that names a line at the plot's right end stops short of the edge grid line. The browser
-layout check fails any label a line crosses without a knockout that holds it, and any
-label that ignores its tone. Bar rows align on one grid; in a narrow figure each label
-and its value stand above a full-width bar, and the grid and reference rules run through
-the bar's own row only. A comparison has a scroll width below which its columns cannot
-reflow; it takes its column's width down to nine tenths of that, and in less room it is
-set at its scroll width, scrolls sideways and fades at its right edge, as a wide table
-does. Labels that hang beside its last marks keep their room inside it. A title stands
+layout check fails any label a line crosses without a knockout that holds it, any label
+that ignores its tone, and any label of a legal figure within 4px of a curve. Bar rows
+align on one grid; in a narrow figure each label and its value stand above a full-width
+bar, and the grid and reference rules run through the bar's own row only. A comparison
+has a scroll width below which its columns cannot reflow; it takes its column's width
+down to nine tenths of that, and in less room it is set at its scroll width, scrolls
+sideways and fades at its right edge, as a wide table does. Labels that hang beside its last marks keep their room inside it. A title stands
 alone on its line, with any view switch beneath it as one segmented control.
+
+The legal articles' diagrams draw their connectors and arrowheads in the logic
+diagram's one tone, and their plots hold every label's text at least 4px clear of every
+curve at every width. A two-by-two matrix reflows rather than scrolls: beside its row
+heads where the figure is wide, with each row head as a band over its row below 34rem,
+and with its cells stacked below 21rem, each naming its column. Its cells share their
+edges, drawn once at the frame's weight, and the cells of a row share their title,
+definition and example lines. A numbered step hangs its number, so a wrapped title
+continues under its first word, and a bracket beside a run of steps opens toward them.
+A decision procedure runs each answer's arrow into the hatched result lane until it
+meets its result, and a bracket gathers a group of results; in a narrow figure the
+questions stand on one spine, and each answer that ends the procedure leaves it on an
+elbow to its result. A chain of links sets each observation beside its link, and
+beneath it, set in to the title, in a phone's figure.
 
 A segmented switch swaps views, a readout follows the pointer on line charts, marks
 show exact values, the proof-obligation graph accepts a chosen failure, and each figure

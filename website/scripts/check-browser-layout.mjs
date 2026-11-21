@@ -281,6 +281,43 @@ function inspectFigure(figure) {
       issues.push({ kind: "label-crossed-by-line", text: glyph.text.slice(0, 60), line: line.name, knockout: Boolean(cover), glyph: a, at: vertical ? b.left : b.top });
     }
   }
+  // A legal figure's label never touches a curve: every stroked path of the
+  // plot, sampled along its length, stays 4px clear of each label's text
+  // beyond its own half stroke.
+  const clearOfCurves = ["exit-paths", "san-tin-loss", "deep-bay"].includes(figure.dataset.figure);
+  const curves = clearOfCurves ? [...frame.querySelectorAll("svg path")].filter(curve => !curve.closest("button") && laidOut(curve) && getComputedStyle(curve).fill === "none" && curve.getTotalLength() > 0) : [];
+  for (const mark of [...frame.querySelectorAll('span[style*="--ax"]')].filter(shown)) {
+    const range = document.createRange();
+    range.selectNodeContents(mark);
+    const text = [...range.getClientRects()].filter(box => box.width > 0.5);
+    if (!text.length) continue;
+    let nearest = Infinity;
+    for (const curve of curves) {
+      const matrix = curve.getScreenCTM();
+      const half = parseFloat(getComputedStyle(curve).strokeWidth) / 2 || 0.5;
+      const length = curve.getTotalLength();
+      for (let step = 0; step <= 240; step += 1) {
+        const at = curve.getPointAtLength(length * step / 240);
+        const point = new DOMPoint(at.x, at.y).matrixTransform(matrix);
+        for (const box of text) {
+          const dx = Math.max(box.left - point.x, 0, point.x - box.right);
+          const dy = Math.max(box.top - point.y, 0, point.y - box.bottom);
+          nearest = Math.min(nearest, Math.hypot(dx, dy) - half);
+        }
+      }
+    }
+    if (nearest < 4) issues.push({ kind: "label-touches-curve", text: mark.textContent.replace(/\s+/gu, " ").trim().slice(0, 60), clearance: +nearest.toFixed(2) });
+  }
+  // A numbered step hangs its number: a title that wraps continues under its
+  // first word, never under the number.
+  for (const step of [...frame.querySelectorAll('[class*="_sequenceStep"], [class*="_ladderNode"]')].filter(shown)) {
+    const [number, title] = step.children;
+    if (!number || !title) { issues.push({ kind: "step-title-not-hung", text: step.textContent.trim() }); continue; }
+    const range = document.createRange();
+    range.selectNodeContents(title);
+    const starts = [...range.getClientRects()].filter(box => box.width > 0.5).map(box => box.left);
+    if (Math.max(...starts) - Math.min(...starts) > 0.75 || number.getBoundingClientRect().right > Math.min(...starts)) issues.push({ kind: "step-title-not-hung", text: step.textContent.trim() });
+  }
   // A label takes its mark's tone: the accent and green as they are, the light
   // sky and mist in ink, and steel in muted ink, so every label reads as text.
   // A label whose tone had no effect renders in the color it inherits; one that
@@ -780,6 +817,28 @@ function inspectFrame() {
   return issues;
 }
 
+// A note reference stands close after the word or punctuation it annotates and
+// never opens a line, with a fine pointer or a finger, whose larger target takes
+// no room in the line.
+function inspectNoteReferences() {
+  const issues = [];
+  for (const link of document.querySelectorAll('sup > a[role="doc-noteref"]:first-of-type')) {
+    if (link.closest("dialog") || !link.checkVisibility()) continue;
+    const before = link.parentElement.previousSibling;
+    if (!before?.textContent.trim()) continue;
+    const range = document.createRange();
+    range.selectNodeContents(before);
+    const last = [...range.getClientRects()].filter(box => box.width > 0.5).at(-1);
+    range.selectNodeContents(link);
+    const glyph = [...range.getClientRects()].filter(box => box.width > 0.5)[0];
+    if (!last || !glyph) continue;
+    const label = `${before.textContent.trim().slice(-20)}|${link.textContent}`;
+    if (glyph.top + glyph.height / 2 > last.bottom) issues.push({ kind: "note-reference-starts-line", reference: label });
+    else if (glyph.left - last.right > 3) issues.push({ kind: "note-reference-detached", reference: label, gap: +(glyph.left - last.right).toFixed(2) });
+  }
+  return issues;
+}
+
 // Back to Top returns a page to its top and moves focus to the title; on a page
 // that fits the window it steps aside. The sticky rail and phone header hold
 // their place to the end of the page.
@@ -1188,6 +1247,24 @@ try {
           const frameIssues = await page.evaluate(inspectFrame);
           if ([390, 768, 1024, 1440].includes(width)) frameIssues.push(...await inspectReturn(page));
           frames.push({ route, width, issues: frameIssues });
+        }
+      } finally { await context.close(); }
+    }
+    // Note references on phones and tablets, which take a finger's target, and on desktops.
+    const notedRoutes = [];
+    for (const route of pageRoutes) {
+      if ((await readFile(path.join(OUT, route, "index.html"), "utf8")).includes('role="doc-noteref"')) notedRoutes.push(route);
+    }
+    assert.ok(notedRoutes.length >= 4, `Expected the four legal articles to carry note references; found ${notedRoutes.length}.`);
+    for (const width of [320, 390, 768, 1440]) {
+      const context = await browser.newContext({ viewport: { width, height: 1100 }, isMobile: width < 768, hasTouch: width < 1200, reducedMotion: "reduce", serviceWorkers: "block" });
+      await serveExport(context, missing);
+      try {
+        const page = await context.newPage();
+        for (const route of notedRoutes) {
+          await page.goto(ORIGIN + route, { waitUntil: "networkidle" });
+          await page.evaluate(() => document.fonts.ready);
+          texts.push({ route, width, touch: width < 1200, issues: await page.evaluate(inspectNoteReferences) });
         }
       } finally { await context.close(); }
     }
