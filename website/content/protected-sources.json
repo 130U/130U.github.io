@@ -5,7 +5,7 @@
     "app/experience/page.tsx": "1dbf2ee75f4d859128a5ce92b6a0c7c6df94579962c37bc672544c4d7698c3a6",
     "app/experience/[slug]/page.tsx": "e6a081cd77645a94dc43660895ef4005661b9a333e8a1ce7cabff29b5b973401",
     "app/components/experience/ExperienceContent.tsx": "fb87aff83af5c44d9076175ceea080d27a1bc2ec5d04597ac809851e017b3f9a",
-    "app/components/experience/ExperienceDetails.tsx": "4570d394eb0122fde866daec614d5215dffbcedfa80bc3623ae87546906d9944",
+    "app/components/experience/ExperienceDetails.tsx": "ff9a079467d1ed87b777368f3f71858caeb85455381c2e2ca530d74dbd768bbc",
     "app/lib/content/experience-showcase.ts": "84ce4b67ad71abacb385e978074ffb296dbb4dc15fc10d05fab26a60f7577443",
     "app/lib/content/experience-domains.ts": "7362085d4857daa83ae476f176163378dde550572d5a1932d2f142d4d1a00c7d",
     "content/experience-showcase.json": "12af5b1973211d8b150ea9df408260eae190b3c6c760192e6f6a5b136c586e2e",

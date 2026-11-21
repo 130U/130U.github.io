@@ -22,12 +22,12 @@ function ValueParts({ text }: { text: string }) {
   ));
 }
 
-/** A position breaks after its comma first: the role and the group or name that
-    follows each hold one line where the line can hold them. */
+/** The group or name after a position's last comma holds one line where the line
+    can hold it; the role before it breaks as running text. */
 function PositionParts({ text }: { text: string }) {
-  return text.split(/(?<=,)\s+/u).map((part, index) => (
-    <Fragment key={index}>{index > 0 && " "}<span className="keep-whole"><KeepNumberJoins text={part} /></span></Fragment>
-  ));
+  const comma = text.lastIndexOf(", ");
+  if (comma < 0) return <KeepNumberJoins text={text} />;
+  return <><KeepNumberJoins text={text.slice(0, comma + 1)} /> <span className="keep-whole"><KeepNumberJoins text={text.slice(comma + 2)} /></span></>;
 }
 
 export function ExperienceMetadata({ entry }: { entry: ShowcaseEntry }) {

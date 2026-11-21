@@ -217,9 +217,9 @@ longer than 40 characters stacks its fields where the strip is narrower than 36r
 value folds into one-word lines. Each field is a label above a value in the reading face; a value breaks
 only between its parts, after a comma, a semicolon, or a range's dash, or before a
 parenthesis, so a place name (North Carolina) or a date (December 2024) holds one line
-and no line starts with a dash. A position breaks after its comma first, so a role and the
-group that follows it (Equity Research Intern, Agriculture Research Group) each hold one
-line where the line can hold them.
+and no line starts with a dash. The group or name after a position's last comma holds one
+line where the line can hold it (Equity Research Intern, Agriculture Research Group), and
+the role before it breaks as running text.
 
 ## Pages
 
