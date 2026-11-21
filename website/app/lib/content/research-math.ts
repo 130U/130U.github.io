@@ -811,6 +811,9 @@ export function researchDisplayRows(tex: string): readonly ResearchDisplayRow[] 
   return rows.length > lines.length ? Object.freeze(rows) : undefined;
 }
 
+/** A row of displayed mathematics keeps at least TeX's strut: 0.75em above its baseline and 0.25em below. */
+const STRUT_HEIGHT_EM = 0.75;
+const STRUT_DEPTH_EM = 0.25;
 const stackCache = new Map<string, ResearchDisplayStackMarkup | null>();
 
 /**
