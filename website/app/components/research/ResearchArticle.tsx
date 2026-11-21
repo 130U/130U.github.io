@@ -474,7 +474,7 @@ export function ResearchArticle({ project, active, returnPath, returnLabel, titl
         const source = parseResearchDisplayTable(block.tex)!;
         return <ResearchMathTable key={index} table={table} title={mathTableTitle(project.slug, source)} heads={mathTableHeads(project.slug, source)} id={block.id ?? anchors.get(index)} attributes={marker} />;
       }
-      return <div {...marker} id={block.id ?? anchors.get(index)} className={mathStyles.equation} key={index} tabIndex={0} role="region" aria-label="Mathematical equation"><ResearchMath tex={block.tex} display /></div>;
+      return <div {...marker} id={block.id ?? anchors.get(index)} className={mathStyles.equation} key={index}><ResearchMath tex={block.tex} display /></div>;
     }
     if (block.type === "figure") {
       const caption = <FigureCaption inlines={link(block.inlines, index)} />;

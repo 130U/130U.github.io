@@ -327,7 +327,8 @@ and matrices, nested or not, set their rows that far apart, and a row break that
 more space (`\\[2pt]`) adds it, as in TeX. An array inside a formula draws its column and
 row rules, which are part of its notation; a display that is one array is a table of
 mathematics (see Research tables). A display stands in two and a half lines of white space
-(70px), measured from its expression to the descenders of the line above and to the
+(70px), measured from its expression, or from the baseline of its number where the
+number stands beneath it, to the descenders of the line above and to the
 x-height of the line below, and the same between two displays: its block has 0.75rem of
 padding and margins of two lines less 0.5625rem above and less 1.0625rem below, since the
 reading face's line box keeps more empty room above its x-height than below its descenders
@@ -366,12 +367,28 @@ relation continued after a space (an equivalence, a chain, a limit) is one formu
 keeps its line; a display that an environment aligns at a relation keeps its alignment.
 Each row is drawn from its own slice of the TeX, and one assistive expression carries
 the whole display, so nothing is drawn or read twice. A stack of rows is fitted or
-scrolls as one display. An equation that overshoots its column by a little is fitted: the gap
-before its number closes from 1.5em to 1em, and the expression is set smaller, to no
-less than nine tenths of its size, so a fitted display still stands above the reading
-size. An equation wider than that scrolls in place at its natural size: its number keeps
-its position, and the expression fades beneath that edge while more remains, as a wide
-table fades at its right edge. At rest the fade always lies over ink: where the edge falls
+scrolls as one display. An equation that has no room beside its number takes the first
+of these forms that stands whole in its column. In a display set as rows, the number
+stands beside the last row where that row leaves it room, as TeX sets a tag beside the
+last line. Next the equation is fitted: the gap before its number closes from 1.5em to
+1em, and the expression is set smaller, to no less than nine tenths of its size, so a
+fitted display still stands above the reading size. Next the number takes a line of its
+own beneath the display, as amsmath sets a tag that does not fit: right-aligned at the
+column's edge, in the same face, its baseline one line of mathematics below the last
+row's, as if it were one more row, the expression at its natural size or fitted by the
+same bound. Last a row parts, only where it would otherwise scroll: its qualifier takes a
+line of its own, indented a `\qquad` under its formula's start, as TeX sets a continued
+line, and a connecting word that opens it ("where it equals", "so that", "equivalently")
+takes a line above its formula, on the axis; "s.t." keeps its constraints hung under it,
+and a qualifier that a statement goes on from (θ_A > θ_B for every admissible grader
+⟺ …) stays with it. Each part is drawn from its own slice of the TeX and, while the row
+stands whole, set exactly where the whole row's drawing would set it. An equation wider
+than its column even so scrolls in place at its natural size in a box of its own, its
+rows parted where that helps; its number stands beside its last row where that row is
+whole and leaves it room, as TeX sets the tag, and beneath the display otherwise, so no
+number ever shares a line with a row that scrolls past the column's edge. The expression
+fades out over an em at the column's edge while more remains, as a wide table fades at
+its right edge, and at the end of the scroll the fade stands past it, over blank paper. At rest the fade always lies over ink: where the edge falls
 in a blank between two parts of the expression, the fade reaches back over the last ink
 before it, so a display that continues never looks finished. An inline formula that fits
 its line is no keyboard stop; one that scrolls is. An inline formula a little wider than a phone's line is
@@ -910,4 +927,5 @@ background setting (`print-color-adjust: exact`), and figures, tables, diagrams,
 displays and images never split across pages; a heading stays with what follows it.
 Figures print as they stand once drawn in. Nothing scrolls on paper: a display or a
 table formula wider than the page is set smaller to the page's width and keeps its
-number, and comparisons, panoramas and wide tables show whole.
+number beside it, a row that parts on screen standing whole, its parts set smaller
+together, and comparisons, panoramas and wide tables show whole.

@@ -4,24 +4,27 @@ import path from "node:path";
 import test from "node:test";
 import { fileURLToPath } from "node:url";
 import {
-  RESEARCH_MATH_GUTTER_EM, RESEARCH_MATH_LINE_EM, RESEARCH_MATH_ROW_SPACING_EM, renderResearchDisplayStack, researchDisplayRows,
+  RESEARCH_MATH_GUTTER_EM, RESEARCH_MATH_LINE_EM, RESEARCH_MATH_ROW_SPACING_EM, renderResearchDisplayStack, renderResearchMath,
+  researchDisplayRows, researchDisplayStackRows, researchNumberDropEm,
 } from "../app/lib/content/research-math.ts";
 
 // One formula to a display line: a display whose outer level sets two or more formulas side by
 // side is set as rows, one formula to a row, at every width. A qualifier stays with its formula,
 // a connecting word opens the row it introduces, and a single relation continued after a space
 // stays one formula. Each row is drawn from its own slice of the TeX; one assistive expression
-// carries the whole display.
+// carries the whole display. Where a row would otherwise scroll, its qualifier and its connecting
+// word may each take a line of their own (the row's parts).
 const ROOT = fileURLToPath(new URL("../", import.meta.url));
-// Each page with mathematics, the displays it sets as rows, and their rows.
+// Each page with mathematics, the displays it sets as rows and their rows, the displays on one
+// line whose qualifier may take a line of its own, and the rows that may part.
 const MANUSCRIPTS = [
-  ["selected-research", "critical-dependence-stress-for-diversification-gains-under-fixed-marginals", 46, 117],
-  ["selected-research", "certified-valuation-of-arithmetic-asian-options", 46, 116],
-  ["selected-research", "certified-joint-pricing-errors-in-rough-heston", 19, 45],
-  ["artificial-intelligence", "evidence-verification-and-robust-comparison-in-investment-research", 8, 16],
-  ["artificial-intelligence", "financial-task-design-and-synthetic-data-engineering", 9, 18],
-  ["artificial-intelligence", "general-reasoning-evaluation-and-layered-verification", 9, 21],
-  ["artificial-intelligence", "large-scale-domain-expert-feedback-governance-and-adaptive-review", 9, 24],
+  ["selected-research", "critical-dependence-stress-for-diversification-gains-under-fixed-marginals", 46, 117, 5, 11],
+  ["selected-research", "certified-valuation-of-arithmetic-asian-options", 46, 116, 5, 7],
+  ["selected-research", "certified-joint-pricing-errors-in-rough-heston", 19, 45, 1, 8],
+  ["artificial-intelligence", "evidence-verification-and-robust-comparison-in-investment-research", 8, 16, 1, 2],
+  ["artificial-intelligence", "financial-task-design-and-synthetic-data-engineering", 9, 18, 1, 2],
+  ["artificial-intelligence", "general-reasoning-evaluation-and-layered-verification", 9, 21, 1, 2],
+  ["artificial-intelligence", "large-scale-domain-expert-feedback-governance-and-adaptive-review", 9, 24, 0, 2],
 ];
 const DISPLAY = /```math\n([\s\S]*?)\n```|\$\$([\s\S]*?)\$\$|\\\[([\s\S]*?)\\\]/gu;
 
@@ -167,7 +170,7 @@ test("rows stand one line of mathematics apart, each as tall as an array row's s
     }
   }
   const tsx = await readFile(path.join(ROOT, "app", "components", "research", "ResearchMath.tsx"), "utf8");
-  assert.match(tsx, /"--row-space": `\$\{row\.spaceEm\}em`/u);
+  assert.match(tsx, /"--row-space": row\.spaceEm \? em\(row\.spaceEm\)/u);
   const css = await readFile(path.join(ROOT, "app", "components", "research", "ResearchMath.module.css"), "utf8");
   const rule = (selector) => css.match(new RegExp(`(?:^|\\n)${selector.replace(/[.*+?^${}()|[\]\\]/gu, "\\$&")}\\s*\\{([^}]*)\\}`, "u"))?.[1] ?? "";
   assert.match(rule(".stackRow + .stackRow"), /padding-top:\s*var\(--row-space\)/u);
@@ -176,7 +179,7 @@ test("rows stand one line of mathematics apart, each as tall as an array row's s
 });
 
 test("the published pages draw every stacked display as rows of its own TeX, with one assistive expression", async () => {
-  for (const [group, slug, stacks, rowCount] of MANUSCRIPTS) {
+  for (const [group, slug, stacks, rowCount, oneLine] of MANUSCRIPTS) {
     const route = group === "artificial-intelligence" ? path.join("experience", slug) : slug;
     const html = await readFile(path.join(ROOT, "out", route, "index.html"), "utf8");
     const formulas = [];
@@ -185,17 +188,155 @@ test("the published pages draw every stacked display as rows of its own TeX, wit
       formulas.push(html.slice(at, end + "</math>".length));
     }
     const stacked = formulas.filter((formula) => formula.includes("data-display-stack"));
-    assert.equal(stacked.length, stacks, `${slug} draws ${stacks} displays as rows`);
+    assert.equal(stacked.length, stacks + oneLine, `${slug} draws ${stacks} displays as rows and ${oneLine} on one line as a row that may part`);
     let drawn = 0;
     for (const formula of stacked) {
       const tex = decodeHtml(formula.match(/<annotation\b[^>]*>([\s\S]*?)<\/annotation>/u)[1]);
+      const expected = researchDisplayStackRows(tex);
       const rows = [...formula.matchAll(/data-stack-row="(\d+) (\d+)"/gu)].map((match) => tex.slice(Number(match[1]), Number(match[2])));
-      assert.deepEqual(rows, researchDisplayRows(tex).map((row) => row.tex), "Each drawn row names its slice of the display's TeX");
+      assert.deepEqual(rows, expected.map((row) => row.tex), "Each drawn row names its slice of the display's TeX");
+      const parts = [...formula.matchAll(/data-row-part="(\w+)" data-part="(\d+) (\d+)"/gu)].map((match) => [match[1], tex.slice(Number(match[2]), Number(match[3]))]);
+      assert.deepEqual(parts, expected.flatMap((row) => (row.parts ?? []).map((part) => [part.kind, tex.slice(part.start, part.end)])), "Each drawn part names its slice of the display's TeX");
       assert.equal((formula.match(/<math\b/gu) ?? []).length, 1, "One assistive expression carries the whole display");
-      assert.equal((formula.match(/data-research-svg="row"/gu) ?? []).length, rows.length, "Each row is drawn once");
+      const drawings = expected.reduce((sum, row) => sum + (row.parts?.length ?? 1), 0);
+      assert.equal((formula.match(/data-research-svg="row"/gu) ?? []).length, drawings, "Each row, or each part of a row that may part, is drawn once");
       assert.doesNotMatch(formula, /data-research-svg="display"/u, "Nothing is drawn twice");
-      drawn += rows.length;
+      if (researchDisplayRows(tex)) drawn += rows.length;
     }
     assert.equal(drawn, rowCount);
+  }
+});
+
+const partTexs = (tex) => researchDisplayStackRows(tex)?.map((row) => row.parts?.map((part) => [part.kind, tex.slice(part.start, part.end)]));
+
+test("where a row would otherwise scroll, its qualifier or its connecting word may take a line of its own", async () => {
+  const dependence = ["selected-research", "critical-dependence-stress-for-diversification-gains-under-fixed-marginals"];
+  const asian = ["selected-research", "certified-valuation-of-arithmetic-asian-options"];
+  const rough = ["selected-research", "certified-joint-pricing-errors-in-rough-heston"];
+  const reasoning = ["artificial-intelligence", "general-reasoning-evaluation-and-layered-verification"];
+  const feedback = ["artificial-intelligence", "large-scale-domain-expert-feedback-governance-and-adaptive-review"];
+  for (const [group, slug, , , oneLine, parting] of MANUSCRIPTS) {
+    const all = (await displays(group, slug)).map((tex) => [tex, researchDisplayStackRows(tex)]).filter(([, rows]) => rows);
+    assert.equal(all.filter(([tex]) => !researchDisplayRows(tex)).length, oneLine, `${slug}: ${oneLine} displays on one line may part`);
+    assert.equal(all.reduce((sum, [, rows]) => sum + rows.filter((row) => row.parts).length, 0), parting, `${slug}: ${parting} rows may part`);
+    for (const [tex, rows] of all) {
+      for (const row of rows.filter((entry) => entry.parts)) {
+        // Parts are slices of their row, in order, around the row's one formula.
+        assert.ok(row.parts.every((part, index) => part.start >= row.start && part.end <= row.end && (index === 0 || part.start >= row.parts[index - 1].end)), tex);
+        assert.equal(row.parts[0].start, row.start);
+        assert.equal(row.parts.at(-1).end, row.end);
+        assert.equal(row.parts.filter((part) => part.kind === "formula").length, 1, tex);
+      }
+    }
+  }
+  // A display on one line keeps its qualifier on its line, and may part it: Asian (7.7), (7.3), (5.3).
+  assert.equal(researchDisplayRows(await numbered(...asian, "7.7")), undefined);
+  assert.deepEqual(partTexs(await numbered(...asian, "7.7")), [[["formula", String.raw`|q_Q(p)-q_P(p)| \le \varepsilon_0+e_{P,J}+e_{Q,J}+L_0\delta_u`], ["qualifier", String.raw`(0\lt p\lt 1).`]]], "The sentence's period stays in the slice; the drawing leaves it out");
+  const [formula73, qualifier73] = partTexs(await numbered(...asian, "7.3"))[0];
+  assert.deepEqual([formula73[0], formula73[1].endsWith(String.raw`\right),`), qualifier73], ["formula", true, ["qualifier", String.raw`\ell=P,Q.`]]);
+  assert.deepEqual(partTexs(await numbered(...asian, "5.3"))[0].map(([kind]) => kind), ["formula", "qualifier"]);
+  // A connecting word set off by quads opens its row and may take a line above its formula.
+  assert.deepEqual(partTexs(await numbered(...asian, "3.13"))[1].map(([kind, part]) => kind === "word" ? [kind, part] : [kind]), [["word", String.raw`\text{where it equals}`], ["formula"]]);
+  assert.deepEqual(partTexs(await numbered(...rough, "5.3"))[1][0], ["word", String.raw`\text{so that}`]);
+  assert.deepEqual(partTexs(await numbered(...rough, "3.3"))[1][0], ["word", String.raw`\text{equivalently}`]);
+  // "for x<y" may take its own line under m_i\ge0; after "s.t." the constraints keep their hang.
+  assert.deepEqual(partTexs(await numbered(...dependence, "4.15")).slice(2), [
+    [["formula", String.raw`m_i\ge0`], ["qualifier", String.raw`\text{for}\ x<y,`]],
+    [["formula", String.raw`m_i\le0`], ["qualifier", String.raw`\text{for}\ x>y.`]],
+  ]);
+  assert.ok(researchDisplayStackRows(await numbered(...feedback, "3.3")).every((row) => !row.parts), "s.t. keeps its constraint");
+  // A qualifier that a statement goes on from stays: theta_A > theta_B for every grader \iff ....
+  assert.ok(researchDisplayStackRows(await numbered(...reasoning, "1.2")).every((row) => !row.parts));
+  // Unit cases.
+  assert.deepEqual(partTexs(String.raw`f(x)=x^2\qquad(x>0) \tag{1}`), [[["formula", "f(x)=x^2"], ["qualifier", "(x>0)"]]]);
+  assert.deepEqual(partTexs(String.raw`F(s)=s^2,\qquad s\ge0`), [[["formula", "F(s)=s^2,"], ["qualifier", String.raw`s\ge0`]]]);
+  assert.deepEqual(partTexs(String.raw`a=b,\qquad\text{so that}\qquad c=d \quad (x>0)`)[1], [["word", String.raw`\text{so that}`], ["formula", "c=d"], ["qualifier", "(x>0)"]]);
+  assert.equal(researchDisplayStackRows(String.raw`a\quad\Longleftrightarrow\quad b=c`), undefined, "A continued relation has no part to take a line");
+  assert.equal(researchDisplayStackRows("f(x)=x^2"), undefined);
+  assert.equal(researchDisplayStackRows(String.raw`\begin{gathered} f(x)=x^2\qquad(x>0)\\ g=1 \end{gathered}`), undefined, "Rows an environment sets keep their form");
+});
+
+test("a row's parts stand where the whole row's drawing sets them, and part as rows do", async () => {
+  const extent = (markup) => [markup.heightEm - markup.depthEm - RESEARCH_MATH_GUTTER_EM, markup.depthEm - RESEARCH_MATH_GUTTER_EM];
+  const pitch = (above, below, extra = 0) => Math.max(extent(above)[1], 0.25) + RESEARCH_MATH_ROW_SPACING_EM + extra + Math.max(extent(below)[0], 0.75);
+  for (const [group, slug] of MANUSCRIPTS) {
+    for (const tex of (await displays(group, slug)).filter((entry) => researchDisplayStackRows(entry))) {
+      const stack = renderResearchDisplayStack(tex);
+      const rows = researchDisplayStackRows(tex);
+      stack.rows.forEach((row, index) => {
+        const above = stack.rows[index - 1];
+        const extra = rows[index].extraEm ?? 0;
+        if (row.parts) {
+          // Side by side, the parts and the spaces between them fill the whole row's width.
+          const width = row.parts.reduce((sum, part) => sum + part.widthEm - 2 * RESEARCH_MATH_GUTTER_EM + part.joinEm, 0);
+          assert.ok(Math.abs(width - (row.widthEm - 2 * RESEARCH_MATH_GUTTER_EM)) < 2e-3, tex);
+          assert.equal(row.parts[0].joinEm, 0);
+          // Parted, each part stands a line of mathematics below the one before.
+          row.parts.slice(1).forEach((part, at) => {
+            assert.ok(Math.abs(extent(row.parts[at])[1] + part.spaceEm + extent(part)[0] - pitch(row.parts[at], part)) < 1e-3, tex);
+          });
+          if (index) {
+            const line = above.parts?.at(-1) ?? above;
+            const space = above.parts ? row.partedSpaceAfterPartedEm : row.partedSpaceEm;
+            assert.ok(Math.abs(extent(line)[1] + space + extent(row.parts[0])[0] - pitch(line, row.parts[0], extra)) < 1e-3, tex);
+          }
+        }
+        if (index && above.parts) {
+          assert.ok(Math.abs(extent(above.parts.at(-1))[1] + row.spaceAfterPartedEm + extent(row)[0] - pitch(above.parts.at(-1), row, extra)) < 1e-3, tex);
+        }
+      });
+      // The number's line beneath the display is one more row, a line of mathematics below the last:
+      // the drawing's gutter, the drop, and the strut the number's line keeps above its baseline.
+      const last = stack.rows.at(-1);
+      const strut = { heightEm: 0.75 + RESEARCH_MATH_GUTTER_EM, depthEm: RESEARCH_MATH_GUTTER_EM };
+      for (const [line, drop] of [[last, stack.numberDropEm], ...(last.parts ? [[last.parts.at(-1), stack.numberDropPartedEm]] : [])]) {
+        assert.ok(Math.abs(extent(line)[1] + RESEARCH_MATH_GUTTER_EM + drop + 0.75 - pitch(line, strut)) < 1e-3, tex);
+      }
+    }
+  }
+  const flat = renderResearchMath(String.raw`x=1 \tag{9}`, true);
+  assert.equal(researchNumberDropEm(flat), Number((Math.max(0, 0.25 - (flat.depthEm - RESEARCH_MATH_GUTTER_EM)) + RESEARCH_MATH_ROW_SPACING_EM - RESEARCH_MATH_GUTTER_EM).toFixed(4)));
+  const css = await readFile(path.join(ROOT, "app", "components", "research", "ResearchMath.module.css"), "utf8");
+  const rule = (selector) => css.match(new RegExp(`(?:^|\\n)${selector.replace(/[.*+?^${}()|[\]\\]/gu, "\\$&")}\\s*\\{([^}]*)\\}`, "u"))?.[1] ?? "";
+  assert.match(rule(".rowPart + .rowPart"), /margin-inline-start:\s*var\(--join\)/u);
+  assert.match(rule(".stackRow[data-row-parted] > .rowPart + .rowPart"), /padding-top:\s*var\(--part-space\)/u);
+  assert.match(rule('.stackRow[data-row-parted] > [data-row-part="qualifier"]'), /padding-inline-start:\s*calc\(2em \+ var\(--hang, 0em\)\)/u, "A qualifier on a line of its own stands a quad's width twice in");
+  assert.match(rule(".stackRow[data-row-parted] + .stackRow"), /var\(--row-space-after-parted\)/u);
+  assert.match(rule(".stackRow + .stackRow[data-row-parted]"), /var\(--parted-row-space\)/u);
+  assert.match(rule(".stackRow[data-row-parted] + .stackRow[data-row-parted]"), /var\(--parted-row-space-after-parted\)/u);
+});
+
+test("an equation number never shares a line with an expression that scrolls: the expression has a box of its own", async () => {
+  const css = await readFile(path.join(ROOT, "app", "components", "research", "ResearchMath.module.css"), "utf8");
+  const rule = (selector) => css.match(new RegExp(`(?:^|\\n)${selector.replace(/[.*+?^${}()|[\]\\]/gu, "\\$&")}\\s*\\{([^}]*)\\}`, "u"))?.[1] ?? "";
+  // The formula's line wraps the number beneath the expression where it has no room beside it,
+  // a line of mathematics below the last row; only the expression's box scrolls.
+  assert.match(rule(".display"), /flex-wrap:\s*wrap/u);
+  assert.match(rule(".display"), /row-gap:\s*calc\(var\(--number-drop\) \* var\(--equation-fit, 1\)\)/u);
+  assert.match(rule(".equationEdge::before"), /height:\s*calc\(0\.75 \* var\(--type-math\) \* var\(--equation-fit, 1\)\)/u, "The number's line keeps a strut's height");
+  assert.match(rule(".equationEdge"), /margin-block-end:\s*calc\(0\.375 \* var\(--type-math\) \* var\(--equation-fit, 1\)\)/u, "and a drawing's gutter below it");
+  assert.match(rule(".equationScroll"), /overflow-x:\s*auto/u);
+  assert.doesNotMatch(rule(".equation"), /overflow/u, "The display's block does not scroll");
+  for (const [group, slug] of MANUSCRIPTS) {
+    const route = group === "artificial-intelligence" ? path.join("experience", slug) : slug;
+    const html = await readFile(path.join(ROOT, "out", route, "index.html"), "utf8");
+    const blocks = [...html.matchAll(/<div\b([^>]*\bdata-research-block-type="equation"[^>]*)>/gu)].filter((match) => !/\bdata-math-table\b/u.test(match[1]));
+    assert.ok(blocks.length > 0);
+    for (const block of blocks) {
+      assert.doesNotMatch(block[1], /\brole=|\btabindex=/u, "The block is no scroll region");
+      const at = block.index + block[0].length;
+      const close = html.indexOf("</math>", at);
+      const formula = html.slice(at, close);
+      const box = formula.match(/<span\b([^>]*\bdata-equation-scroll=""[^>]*)>/u);
+      assert.ok(box, "The expression stands in a box of its own");
+      assert.match(box[1], /\btabindex="0"/u);
+      assert.match(box[1], /\brole="region"/u);
+      assert.match(box[1], /\baria-label="Mathematical equation"/u);
+      // The number follows the box, outside it.
+      assert.doesNotMatch(formula, /data-equation-number/u, "The number stands outside the box that scrolls");
+      const after = html.slice(close, html.indexOf("</div>", close));
+      const tagged = /\\tag\{/u.test(decodeHtml(formula.match(/<annotation\b[^>]*>([\s\S]*?)<\/annotation>/u)[1]));
+      assert.equal(/data-equation-number="true"/u.test(after), tagged, "A numbered display shows its number after its box, an unnumbered one none");
+    }
   }
 });

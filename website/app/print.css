@@ -101,8 +101,8 @@
   }
 
   /* Nothing scrolls on paper. A display wider than the page is set smaller,
-     to the page's width, and keeps its number beside it; a comparison, a
-     panorama or a wide table shows whole. */
+     to the page's width, and keeps its number beside it, its rows whole; a
+     comparison, a panorama or a wide table shows whole. */
   [data-research-block-type="equation"],
   [data-figure-scroll],
   [role="region"] {
@@ -112,12 +112,42 @@
   }
 
   [data-research-formula="display"] {
-    min-width: 0 !important;
+    flex-wrap: nowrap !important;
   }
 
-  [data-research-formula="display"] > :first-child {
+  [data-research-formula="display"] > :first-child,
+  [data-equation-scroll] > :first-child {
     flex: 0 1 auto;
     min-width: 0;
+  }
+
+  [data-research-formula="display"] [data-equation-edge] {
+    position: static !important;
+  }
+
+  /* A row that parts on screen stands whole on paper, its parts set smaller
+     together, in proportion, where the row is wider than the page: each part
+     shrinks with its drawing, gutters and all. */
+  [data-row-parts] {
+    display: flex !important;
+    align-items: baseline;
+    margin-inline: calc(-1 * var(--math-gutter));
+  }
+
+  [data-row-parts] > [data-row-part] {
+    display: block !important;
+    flex: 0 1 auto;
+    min-width: 0;
+    padding: 0 !important;
+  }
+
+  [data-row-parts] > [data-row-part] + [data-row-part] {
+    margin-inline-start: calc(var(--join) - 2 * var(--math-gutter)) !important;
+  }
+
+  [data-row-part] > * {
+    max-width: 100%;
+    margin-inline: 0 !important;
   }
 
   [data-research-svg="display"],
@@ -131,11 +161,6 @@
   [data-display-stack],
   [data-display-stack] > * > * {
     max-width: 100%;
-  }
-
-  [data-equation-number] {
-    position: static !important;
-    border-image: none !important;
   }
 
   /* A post's figures print at the column's width, a panorama included. */
