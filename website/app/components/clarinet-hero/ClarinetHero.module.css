@@ -122,7 +122,7 @@
   }
 }
 /* A tall portrait tablet gives the instrument the height the name leaves, so
-   the stacked composition fills the first screen instead of floating in it. */
+   the stacked composition fills the first screen. */
 @media (768px <= width < 1100px) and (orientation: portrait) {
   .visual { width: min(100%, max(480px, (100svh - 480px) * .8)); }
 }

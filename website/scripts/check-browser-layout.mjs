@@ -1507,7 +1507,12 @@ try {
                 await scroller.evaluate(el => { el.scrollLeft = 0; });
                 await scroller.focus();
                 await page.keyboard.press("ArrowRight");
-                await page.waitForTimeout(180);
+                // The key's scroll lands within a few frames; a busy machine may take longer.
+                await scroller.evaluate(el => new Promise(resolve => {
+                  const start = performance.now();
+                  const wait = () => el.scrollLeft > 0 || performance.now() - start > 1000 ? resolve() : requestAnimationFrame(wait);
+                  wait();
+                }));
                 if (!await scroller.evaluate(el => el.scrollLeft > 0)) record.issues.push({ kind: "keyboard-scroll-did-not-move", region: index });
                 await scroller.evaluate(el => { el.scrollLeft = el.scrollWidth; });
                 if (!await scroller.evaluate(el => Math.abs(el.scrollWidth - el.clientWidth - el.scrollLeft) < 2)) record.issues.push({ kind: "scroll-end-unreachable", region: index });

@@ -34,8 +34,8 @@ test("research tables hold each row of values on one line and scroll natively be
   assert.notEqual(region.get("scrollbar-width"), "none", "Do not conceal the table's horizontal scroll affordance.");
   const inlineMath = declarations(css, '.cell [data-research-formula="inline"]');
   assert.equal(inlineMath.get("max-width"), "none", "A cell must accommodate the whole formula before the outer table scrolls, so the formula never scrolls inside it.");
-  // An inline-block whose overflow is visible takes its last line's baseline instead of its
-  // lower margin edge, and the formula would stand a canvas gutter above the text.
+  // An inline-block with hidden overflow takes its lower margin edge as its baseline, which
+  // sets the formula's own baseline on the text's.
   assert.ok(!inlineMath.has("overflow") && !inlineMath.has("overflow-x") && !inlineMath.has("overflow-y"), "A formula in a cell keeps the overflow, and so the baseline, it has in prose.");
 });
 

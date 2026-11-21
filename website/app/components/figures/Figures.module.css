@@ -599,7 +599,7 @@
 }
 
 /* A decision procedure: questions on the left, each answer's arrow running
-   into the hatched result lane, as in a two-lane agent diagram, and meeting
+   into the hatched result lane and meeting
    its result's edge. The arrow column holds its longest label clear of the
    lane, and the result lane holds each result on one line from a 500px
    figure. */

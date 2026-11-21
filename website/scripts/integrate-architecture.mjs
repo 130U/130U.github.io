@@ -435,8 +435,8 @@ function applyViewerMarkup(viewer) {
 }
 
 // The phone layout's sideways scrolling serves every width once the drawing
-// is wider than its stage: camera moves scroll to a node instead of scaling
-// the drawing below its reading size.
+// is wider than its stage: camera moves scroll to a node and keep
+// the drawing at its reading size.
 function applyViewerScript(viewer) {
   const wide = "(container.hasAttribute('data-wide-diagram') && container.scrollWidth > container.clientWidth + 1)";
   viewer = viewer
