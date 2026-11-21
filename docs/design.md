@@ -750,8 +750,10 @@ HTML, and match the existing type, measure, and spacing before adding a new patt
 palette: paper, ink and hairlines, square corners, one theme, no bullets before titles,
 and the site's Return Home link above its title. Its drawing is read at its own size:
 node titles at the label role and every other label at 11px or more, so a drawing
-wider than its stage scrolls sideways from its first stage and the semantic radar shows
-the whole system. Present and Export stand on the title's row, the three notes share
+wider than its stage scrolls sideways, its right edge fading while more remains, as a
+wide table's does, and the semantic radar shows the whole system. It opens with the
+region that holds its first node at the stage's top-left; on a phone the stage is a
+window that scrolls both ways, so its first screen is never blank paper. Present and Export stand on the title's row, the three notes share
 one frame divided by dashed hairlines, and the site footer closes the page.
 
 ## Print

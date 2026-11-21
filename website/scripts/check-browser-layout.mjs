@@ -1672,6 +1672,8 @@ try {
         const page = await context.newPage();
         await page.goto(ORIGIN + "/architecture/", { waitUntil: "networkidle" });
         await page.evaluate(() => document.fonts.ready);
+        // The viewer opens on its first stage once its fonts have laid it out.
+        await page.evaluate(() => new Promise(resolve => requestAnimationFrame(() => requestAnimationFrame(resolve))));
         const result = await page.evaluate(() => {
           const svg = document.querySelector(".diagram-container > svg");
           const scale = svg.getBoundingClientRect().width / svg.viewBox.baseVal.width;
@@ -1685,6 +1687,18 @@ try {
           const tops = ["out", "reset", "in"].map((view) => Math.round(document.querySelector(`.diagram-nav [data-view="${view}"]`).getBoundingClientRect().top));
           if (new Set(tops).size !== 1) issues.push({ kind: "viewer-zoom-controls-split" });
           if (document.documentElement.scrollWidth > innerWidth + 1) issues.push({ kind: "viewer-page-overflow" });
+          // The stage opens on its first node, never on blank paper, and its right edge
+          // fades while more of the drawing lies to the right.
+          const stage = document.querySelector(".diagram-container");
+          const box = stage.getBoundingClientRect();
+          const first = svg.querySelector("[data-node-id]").getBoundingClientRect();
+          // A stage that shows the drawing's whole height starts at its left edge; one that
+          // also scrolls down (a phone's) starts with the first node near its top.
+          const scrollsDown = getComputedStyle(stage).overflowY !== "hidden" && stage.scrollHeight > stage.clientHeight + 1;
+          if (first.left - box.left > 120 || (scrollsDown && first.top - box.top > 120) || first.right > box.right || first.bottom > box.bottom) issues.push({ kind: "viewer-opens-off-its-first-node", left: Math.round(first.left - box.left), top: Math.round(first.top - box.top) });
+          const remaining = stage.scrollWidth - stage.clientWidth - stage.scrollLeft;
+          const fade = parseFloat(getComputedStyle(stage.querySelector(".site-edge-fade") ?? stage).width) || 0;
+          if (remaining > 1 && fade < Math.min(40, remaining) - 0.5) issues.push({ kind: "viewer-cut-without-fade", remaining, fade });
           return { scale: +scale.toFixed(3), issues };
         });
         home.push({ width, check: "architecture-reading-size", ...result });

@@ -254,6 +254,7 @@ function diagramRules(viewer) {
   const viewBox = viewer.match(/<svg viewBox="0 0 ([\d.]+) ([\d.]+)" role="img"/u);
   assert.ok(viewBox, "Missing the diagram's viewBox.");
   const width = Math.ceil(Number(viewBox[1]) * READING_SCALE);
+  const height = Math.ceil(Number(viewBox[2]) * READING_SCALE);
   const labelScale = (from) => (SMALL_LABEL_UNITS / from).toFixed(4);
   const live = 'html:not([data-embed="true"]):not([data-present="true"])';
   const wide = `${live} .diagram-container[data-wide-diagram="true"]`;
@@ -292,6 +293,32 @@ function diagramRules(viewer) {
     ${wide} > svg { width: ${width}px; min-width: ${width}px; max-width: none; height: auto; }
     ${wide} :is(.diagram-nav, .overview-map, .focus-chip, .route-probe, .semantic-lens, .diagram-guide, .node-finder) {
       transform: translateX(var(--archify-scroll-x, 0px));
+    }
+    /* While more of the drawing lies to the right, the stage's right edge fades
+       by as much as is left to scroll, as a wide table's or equation's does. */
+    .site-edge-fade {
+      position: absolute;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      z-index: 6;
+      width: var(--site-edge-fade, 0px);
+      background: linear-gradient(to right, color-mix(in srgb, var(--bg) 0%, transparent), var(--bg));
+      transform: translate(var(--archify-scroll-x, 0px), var(--site-scroll-y, 0px));
+      pointer-events: none;
+    }
+    /* On a phone the stage is a window onto the drawing that scrolls both ways
+       and opens on the first stage, so its first screen is never blank paper;
+       the view controls stay at its foot. */
+    @media (width < 768px) {
+      ${wide} {
+        overflow: auto;
+        max-height: min(${height + 24}px, 64svh);
+      }
+      ${wide} .diagram-nav { position: sticky; bottom: 0; z-index: 12; }
+      ${wide} :is(.overview-map, .focus-chip, .route-probe, .semantic-lens, .diagram-guide, .node-finder) {
+        transform: translate(var(--archify-scroll-x, 0px), var(--site-scroll-y, 0px));
+      }
     }
     .diagram-nav { background: var(--bg); border: 1px solid var(--toolbar-border); }
     .diagram-nav button { font-weight: 500; letter-spacing: 0; }
@@ -412,9 +439,83 @@ function applyViewerMarkup(viewer) {
 // the drawing below its reading size.
 function applyViewerScript(viewer) {
   const wide = "(container.hasAttribute('data-wide-diagram') && container.scrollWidth > container.clientWidth + 1)";
-  return viewer
+  viewer = viewer
     .replaceAll("window.innerWidth <= 720 && container.hasAttribute('data-wide-diagram')", wide)
     .replace("if (window.innerWidth > 720) return frameDesktop(ids, options);", `if (!${wide}) return frameDesktop(ids, options);`);
+  // A stage that also scrolls down (a phone's) moves to a node in both directions,
+  // and the radar's viewport follows it.
+  const room = "(getComputedStyle(container).overflowY === 'hidden' ? 0 : Math.max(0, container.scrollHeight - container.clientHeight))";
+  const patches = [
+    [`          y = viewBox.y;
+          width = Math.min(viewBox.width, Math.max(1, container.clientWidth / metrics.scale));
+          height = viewBox.height;`, `          y = viewBox.y + (${room} ? container.scrollTop / metrics.scale : 0);
+          width = Math.min(viewBox.width, Math.max(1, container.clientWidth / metrics.scale));
+          height = ${room} ? Math.min(viewBox.height, Math.max(1, container.clientHeight / metrics.scale)) : viewBox.height;`],
+    ["          try { container.scrollTo({ left: mobileTarget, behavior: options.instant ? 'auto' : 'smooth' }); }",
+      `          var mobileTop = Math.max(0, Math.min(${room}, (logicalY - viewBox.y) * metrics.scale - container.clientHeight / 2));
+          try { container.scrollTo({ left: mobileTarget, top: mobileTop, behavior: options.instant ? 'auto' : 'smooth' }); }`],
+    [`        var target = Math.max(0, Math.min(svg.clientWidth - container.clientWidth, center - container.clientWidth / 2));
+        var transaction = cameraReceipt({ scrollLeft: target }, options);`, `        var target = Math.max(0, Math.min(svg.clientWidth - container.clientWidth, center - container.clientWidth / 2));
+        var middle = ((Math.min.apply(Math, boxes.map(function (box) { return box.y; })) + Math.max.apply(Math, boxes.map(function (box) { return box.y + box.height; }))) / 2 / viewBox.height) * (svg.clientHeight || 1);
+        var targetTop = Math.max(0, Math.min(${room}, middle - container.clientHeight / 2));
+        var transaction = cameraReceipt({ scrollLeft: target }, options);`],
+    ["        try { container.scrollTo({ left: target, behavior: instant ? 'auto' : 'smooth' }); }",
+      "        try { container.scrollTo({ left: target, top: targetTop, behavior: instant ? 'auto' : 'smooth' }); }"],
+  ];
+  for (const [from, to] of patches) {
+    if (viewer.includes(from)) viewer = viewer.replace(from, () => to);
+    else assert.ok(viewer.includes(to), `Viewer camera integration point missing: ${from.trim().slice(0, 60)}`);
+  }
+  return viewer;
+}
+
+// The viewer opens on its first stage: the region holding the drawing's first
+// node stands at the stage's top-left, and the right edge fades while more of
+// the drawing lies to the right.
+const openingScript = `  <script data-site-viewer>
+    (function () {
+      var container = document.querySelector('.diagram-container');
+      var svg = container && container.querySelector(':scope > svg');
+      if (!container || !svg || !container.hasAttribute('data-wide-diagram')) return;
+      var fade = document.createElement('span');
+      fade.className = 'site-edge-fade';
+      fade.setAttribute('aria-hidden', 'true');
+      container.appendChild(fade);
+      function paint() {
+        var remaining = container.scrollWidth - container.clientWidth - container.scrollLeft;
+        container.style.setProperty('--site-edge-fade', Math.max(0, Math.min(40, remaining)) + 'px');
+        container.style.setProperty('--site-scroll-y', container.scrollTop + 'px');
+      }
+      function open() {
+        var node = svg.querySelector('[data-node-id]');
+        if (node && container.scrollWidth > container.clientWidth + 1) {
+          var inner = node.getBBox();
+          var region = Array.prototype.find.call(svg.querySelectorAll('[data-graph-role="structural-frame"]'), function (frame) {
+            var box = frame.getBBox();
+            return box.x <= inner.x && box.y <= inner.y && box.x + box.width >= inner.x + inner.width && box.y + box.height >= inner.y + inner.height;
+          });
+          var target = (region || node).getBoundingClientRect();
+          var stage = container.getBoundingClientRect();
+          var inset = parseFloat(getComputedStyle(container).paddingLeft) || 0;
+          container.scrollLeft = Math.max(0, target.left - stage.left - container.clientLeft + container.scrollLeft - inset);
+          if (getComputedStyle(container).overflowY !== 'hidden') {
+            container.scrollTop = Math.max(0, target.top - stage.top - container.clientTop + container.scrollTop - inset);
+          }
+        }
+        paint();
+      }
+      container.addEventListener('scroll', paint, { passive: true });
+      window.addEventListener('resize', paint, { passive: true });
+      if (location.hash) paint();
+      else (document.fonts && document.fonts.ready ? document.fonts.ready : Promise.resolve()).then(function () { requestAnimationFrame(open); });
+    })();
+  </script>
+`;
+
+function applyOpening(viewer) {
+  const cleared = viewer.replace(/  <script data-site-viewer>[\s\S]*?  <\/script>\n/u, "");
+  assert.ok(cleared.includes("</body>"), "Missing the viewer's body.");
+  return cleared.replace("</body>", () => `${openingScript}</body>`);
 }
 
 let source = original.replaceAll(".card h3", ".card h2")
@@ -435,7 +536,7 @@ if (source.includes("data-site-typography")) {
   source = source.replace(/    :root \{\n(?:      --[^\n]+\n)+    \}(?:\n\n    @media \(width < 768px\) \{\n      :root \{[\s\S]*?\n      \}\n    \})?/u, typeRules);
   assert.ok(source.includes(typeRules));
   source = applyReturnLink(applySiteTheme(applyReaderLayout(source)));
-  source = applyViewerScript(applyViewerMarkup(applySiteDiagram(source)));
+  source = applyOpening(applyViewerScript(applyViewerMarkup(applySiteDiagram(source))));
   if (source !== original) await writeFile(viewerUrl, source);
   console.log("Architecture typography matches the website.");
 } else {
@@ -543,7 +644,7 @@ if (source.includes("data-site-typography")) {
   assert.doesNotMatch(viewer, /fonts\.googleapis|fonts\.gstatic|JetBrains|Georgia|Times New Roman/u);
   const svgMarkup = (source) => [...source.matchAll(/<svg\b[\s\S]*?<\/svg>/gu)].map(([svg]) => svg);
   assert.deepEqual(svgMarkup(viewer), svgMarkup(original), "Typography integration must preserve SVG markup.");
-  viewer = applyViewerScript(applyViewerMarkup(applySiteDiagram(applyReturnLink(viewer))));
+  viewer = applyOpening(applyViewerScript(applyViewerMarkup(applySiteDiagram(applyReturnLink(viewer)))));
   await writeFile(viewerUrl, viewer);
   console.log("Integrated shared Inter, HTML type roles, and embedded export fonts.");
 }

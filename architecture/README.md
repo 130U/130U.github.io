@@ -59,8 +59,10 @@ again leaves an integrated viewer unchanged.
 The drawing is shown at its reading size at every width: node titles at the label role
 (13px, which sets 13/11 pixels to an SVG unit) and every other label at 11px or more,
 so details, relationship and region labels are raised to 9.5 units and their knockouts
-grow with them. A drawing wider than its stage scrolls sideways from its first stage,
-and the view controls' 100% is that reading size; zoom enlarges it, and the semantic
+grow with them. A drawing wider than its stage scrolls sideways, and its right edge
+fades while more remains; on a phone the stage scrolls both ways. The viewer opens with
+the region holding the first node at the stage's top-left, and the view controls' 100%
+is that reading size; zoom enlarges it, and the semantic
 radar shows the whole system. Below a 480px stage the view controls take two aligned
 rows, the tools above zoom. The three notes share one frame with dashed dividers and
 hanging bullets.

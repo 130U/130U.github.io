@@ -5141,6 +5141,32 @@
     html:not([data-embed="true"]):not([data-present="true"]) .diagram-container[data-wide-diagram="true"] :is(.diagram-nav, .overview-map, .focus-chip, .route-probe, .semantic-lens, .diagram-guide, .node-finder) {
       transform: translateX(var(--archify-scroll-x, 0px));
     }
+    /* While more of the drawing lies to the right, the stage's right edge fades
+       by as much as is left to scroll, as a wide table's or equation's does. */
+    .site-edge-fade {
+      position: absolute;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      z-index: 6;
+      width: var(--site-edge-fade, 0px);
+      background: linear-gradient(to right, color-mix(in srgb, var(--bg) 0%, transparent), var(--bg));
+      transform: translate(var(--archify-scroll-x, 0px), var(--site-scroll-y, 0px));
+      pointer-events: none;
+    }
+    /* On a phone the stage is a window onto the drawing that scrolls both ways
+       and opens on the first stage, so its first screen is never blank paper;
+       the view controls stay at its foot. */
+    @media (width < 768px) {
+      html:not([data-embed="true"]):not([data-present="true"]) .diagram-container[data-wide-diagram="true"] {
+        overflow: auto;
+        max-height: min(852px, 64svh);
+      }
+      html:not([data-embed="true"]):not([data-present="true"]) .diagram-container[data-wide-diagram="true"] .diagram-nav { position: sticky; bottom: 0; z-index: 12; }
+      html:not([data-embed="true"]):not([data-present="true"]) .diagram-container[data-wide-diagram="true"] :is(.overview-map, .focus-chip, .route-probe, .semantic-lens, .diagram-guide, .node-finder) {
+        transform: translate(var(--archify-scroll-x, 0px), var(--site-scroll-y, 0px));
+      }
+    }
     .diagram-nav { background: var(--bg); border: 1px solid var(--toolbar-border); }
     .diagram-nav button { font-weight: 500; letter-spacing: 0; }
     .diagram-nav-icon { width: 14px; height: 14px; }
@@ -11822,9 +11848,9 @@
         var height;
         if ((container.hasAttribute('data-wide-diagram') && container.scrollWidth > container.clientWidth + 1)) {
           x = viewBox.x + container.scrollLeft / metrics.scale;
-          y = viewBox.y;
+          y = viewBox.y + ((getComputedStyle(container).overflowY === 'hidden' ? 0 : Math.max(0, container.scrollHeight - container.clientHeight)) ? container.scrollTop / metrics.scale : 0);
           width = Math.min(viewBox.width, Math.max(1, container.clientWidth / metrics.scale));
-          height = viewBox.height;
+          height = (getComputedStyle(container).overflowY === 'hidden' ? 0 : Math.max(0, container.scrollHeight - container.clientHeight)) ? Math.min(viewBox.height, Math.max(1, container.clientHeight / metrics.scale)) : viewBox.height;
         } else {
           x = viewBox.x + ((-state.x / state.scale) - metrics.offsetX) / metrics.scale;
           y = viewBox.y + ((-state.y / state.scale) - metrics.offsetY) / metrics.scale;
@@ -12046,7 +12072,8 @@
           var mobileTarget = (logicalX - viewBox.x) * metrics.scale - container.clientWidth / 2;
           mobileTarget = Math.max(0, Math.min(svg.clientWidth - container.clientWidth, mobileTarget));
           autoScrollUntil = Date.now() + 80;
-          try { container.scrollTo({ left: mobileTarget, behavior: options.instant ? 'auto' : 'smooth' }); }
+          var mobileTop = Math.max(0, Math.min((getComputedStyle(container).overflowY === 'hidden' ? 0 : Math.max(0, container.scrollHeight - container.clientHeight)), (logicalY - viewBox.y) * metrics.scale - container.clientHeight / 2));
+          try { container.scrollTo({ left: mobileTarget, top: mobileTop, behavior: options.instant ? 'auto' : 'smooth' }); }
           catch (_) { container.scrollLeft = mobileTarget; }
           return true;
         }
@@ -12205,11 +12232,13 @@
         var maxX = Math.max.apply(Math, boxes.map(function (box) { return box.x + box.width; }));
         var center = ((minX + maxX) / 2 / viewBox.width) * (svg.clientWidth || 1);
         var target = Math.max(0, Math.min(svg.clientWidth - container.clientWidth, center - container.clientWidth / 2));
+        var middle = ((Math.min.apply(Math, boxes.map(function (box) { return box.y; })) + Math.max.apply(Math, boxes.map(function (box) { return box.y + box.height; }))) / 2 / viewBox.height) * (svg.clientHeight || 1);
+        var targetTop = Math.max(0, Math.min((getComputedStyle(container).overflowY === 'hidden' ? 0 : Math.max(0, container.scrollHeight - container.clientHeight)), middle - container.clientHeight / 2));
         var transaction = cameraReceipt({ scrollLeft: target }, options);
         cameraTransaction = transaction;
         var instant = options.instant === true || reducedMotion() || document.hidden;
         autoScrollUntil = Date.now() + (instant ? 50 : 470);
-        try { container.scrollTo({ left: target, behavior: instant ? 'auto' : 'smooth' }); }
+        try { container.scrollTo({ left: target, top: targetTop, behavior: instant ? 'auto' : 'smooth' }); }
         catch (_) { container.scrollLeft = target; }
         if (instant) finishCameraTransaction(transaction, reducedMotion() ? 'reduced-motion' : (document.hidden ? 'hidden' : 'complete'));
         else {
@@ -15252,6 +15281,44 @@
         Archify.presentation.exit();
       }
     });
+  </script>
+  <script data-site-viewer>
+    (function () {
+      var container = document.querySelector('.diagram-container');
+      var svg = container && container.querySelector(':scope > svg');
+      if (!container || !svg || !container.hasAttribute('data-wide-diagram')) return;
+      var fade = document.createElement('span');
+      fade.className = 'site-edge-fade';
+      fade.setAttribute('aria-hidden', 'true');
+      container.appendChild(fade);
+      function paint() {
+        var remaining = container.scrollWidth - container.clientWidth - container.scrollLeft;
+        container.style.setProperty('--site-edge-fade', Math.max(0, Math.min(40, remaining)) + 'px');
+        container.style.setProperty('--site-scroll-y', container.scrollTop + 'px');
+      }
+      function open() {
+        var node = svg.querySelector('[data-node-id]');
+        if (node && container.scrollWidth > container.clientWidth + 1) {
+          var inner = node.getBBox();
+          var region = Array.prototype.find.call(svg.querySelectorAll('[data-graph-role="structural-frame"]'), function (frame) {
+            var box = frame.getBBox();
+            return box.x <= inner.x && box.y <= inner.y && box.x + box.width >= inner.x + inner.width && box.y + box.height >= inner.y + inner.height;
+          });
+          var target = (region || node).getBoundingClientRect();
+          var stage = container.getBoundingClientRect();
+          var inset = parseFloat(getComputedStyle(container).paddingLeft) || 0;
+          container.scrollLeft = Math.max(0, target.left - stage.left - container.clientLeft + container.scrollLeft - inset);
+          if (getComputedStyle(container).overflowY !== 'hidden') {
+            container.scrollTop = Math.max(0, target.top - stage.top - container.clientTop + container.scrollTop - inset);
+          }
+        }
+        paint();
+      }
+      container.addEventListener('scroll', paint, { passive: true });
+      window.addEventListener('resize', paint, { passive: true });
+      if (location.hash) paint();
+      else (document.fonts && document.fonts.ready ? document.fonts.ready : Promise.resolve()).then(function () { requestAnimationFrame(open); });
+    })();
   </script>
 </body>
 </html>
