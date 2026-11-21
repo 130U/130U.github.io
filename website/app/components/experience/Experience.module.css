@@ -23,9 +23,11 @@
   letter-spacing: 0;
   font-variant-numeric: tabular-nums;
 }
+/* A section takes the frame's columns: its index stands on the margin-index
+   track and its body on the reading start. */
 .section {
   display: grid;
-  grid-template-columns: repeat(11, minmax(0, 1fr));
+  grid-template-columns: subgrid;
   grid-column: 1 / span 11;
   border-top: 1px solid var(--rule-strong);
   padding: 72px 0 104px;
@@ -229,7 +231,7 @@
 }
 
 @media (768px <= width < 1024px) {
-  .section { grid-template-columns: repeat(9, minmax(0, 1fr)); grid-column: 1 / -1; }
+  .section { grid-column: 1 / -1; }
   .sectionBody { grid-column: 2 / -1; }
 }
 

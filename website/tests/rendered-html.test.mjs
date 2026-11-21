@@ -1000,7 +1000,10 @@ test("the production design contract is restrained and dependency-light", async 
   const structuralGrid = await readFile(path.join(ROOT, "app", "components", "StructuralGrid.tsx"), "utf8");
   const layout = await readFile(path.join(ROOT, "app", "layout.tsx"), "utf8");
   const packageJson = JSON.parse(await readFile(path.join(ROOT, "package.json"), "utf8"));
-  for (const token of ["--page: #f7f6f5", "--ink: #0b0b0b", "--muted: #70706c", "--accent: #2200ff", "repeat(3, minmax(calc(var(--rail-min-width) / 3), 1fr)) repeat(12, minmax(0, 1fr))"]) assert.ok(globals.includes(token));
+  for (const token of ["--page: #f7f6f5", "--ink: #0b0b0b", "--muted: #70706c", "--accent: #2200ff", "repeat(3, var(--rail-track)) max(var(--frame-inset), calc(100% * 4 / 15 - 3 * var(--rail-track))) repeat(11, minmax(0, 1fr))", "repeat(3, var(--rail-track)) max(var(--frame-inset), calc(100% / 3 - 3 * var(--rail-track))) repeat(8, minmax(0, 1fr))"]) assert.ok(globals.includes(token), `globals.css keeps ${token}`);
+  // The rail's growth comes out of the margin-index track; the content and its sections take the frame's own columns.
+  assert.match(globals, /\.content-column\s*\{[^}]*grid-template-columns:\s*subgrid/u);
+  for (const css of [await readFile(path.join(ROOT, "app", "components", "experience", "Experience.module.css"), "utf8"), await readFile(path.join(ROOT, "app", "coursework", "coursework.module.css"), "utf8"), home]) assert.match(css, /\.section\s*\{[^}]*grid-template-columns:\s*subgrid/u);
   assert.doesNotMatch(globals, /box-shadow|backdrop-filter/u);
   assert.doesNotMatch(home, /box-shadow|backdrop-filter|linear-gradient/u);
   assert.match(homePage, /<ClarinetHero \/>/u);
@@ -1018,12 +1021,12 @@ test("the production design contract is restrained and dependency-light", async 
   assert.match(home, /@media \(pointer:\s*coarse\)[\s\S]*?\.contactStrip a[\s\S]*?min-height:\s*44px/u);
   assert.match(globals, /width:\s*min\(100%,\s*1440px\)/u);
   assert.match(globals, /--content-top:\s*112px;/u);
-  assert.match(globals, /\.content-column\s*\{[\s\S]*?grid-template-columns:\s*repeat\(12,[\s\S]*?padding:\s*var\(--content-top\) 0 144px/u);
+  assert.match(globals, /\.content-column\s*\{[\s\S]*?grid-template-columns:\s*subgrid;[\s\S]*?padding:\s*var\(--content-top\) 0 144px/u);
   assert.match(globals, /\.site-rail\s*\{[^}]*padding:\s*var\(--content-top\) /u, "The rail's wordmark starts on the title's line.");
   assert.match(home, /\.homeFrame \.profileSection\s*\{[^}]*padding-top:\s*var\(--content-top\)/u);
   assert.match(globals, /\.structural-guide-tick\s*\{[\s\S]*?position:\s*sticky[\s\S]*?height:\s*20px/u);
   assert.match(directory, /\.directory\s*\{[^}]*grid-template-columns:\s*1fr/u);
-  assert.match(experience, /\.section\s*\{[^}]*grid-template-columns:\s*repeat\(11,[^}]*grid-column:\s*1 \/ span 11/u, "Sections end on the reading-end guide");
+  assert.match(experience, /\.section\s*\{[^}]*grid-template-columns:\s*subgrid;[^}]*grid-column:\s*1 \/ span 11/u, "Sections end on the reading-end guide");
   assert.match(experience, /\.sectionBody\s*\{[^}]*grid-column:\s*2\s*\/\s*span\s*10/u);
   assert.match(globals, /--hang-columns:\s*minmax\(0,\s*4fr\)\s+minmax\(0,\s*6fr\)/u, "Hanging rows put titles on 4 of 10 columns and prose on 6");
   assert.match(experience, /@media \(width >= 1200px\)[\s\S]*?grid-template-columns:\s*var\(--hang-columns\)/u);

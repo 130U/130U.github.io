@@ -6,7 +6,11 @@
   padding-top: 0;
 }
 
+/* The profile and its sections take the frame's columns: each index stands on
+   the margin-index track and each body on the reading start. */
 .homeFrame .profileSection {
+  display: grid;
+  grid-template-columns: subgrid;
   grid-column: 1 / span 11;
   padding-top: var(--content-top);
 }
@@ -14,7 +18,8 @@
 .identity,
 .section {
   display: grid;
-  grid-template-columns: repeat(11, minmax(0, 1fr));
+  grid-template-columns: subgrid;
+  grid-column: 1 / -1;
   align-items: start;
 }
 
@@ -252,11 +257,6 @@
     grid-column: 1 / -1;
   }
 
-  .identity,
-  .section {
-    grid-template-columns: repeat(9, minmax(0, 1fr));
-  }
-
   .sectionBody {
     grid-column: 2 / -1;
   }
@@ -268,6 +268,7 @@
   }
 
   .homeFrame .profileSection {
+    display: block;
     padding-top: 88px;
   }
 

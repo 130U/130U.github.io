@@ -60,10 +60,11 @@
   /* The top of the rail and of the content column: the wordmark sits on the
      line of the page title. */
   --content-top: 112px;
-  /* The rail is as wide as its widest fixed item plus its insets, so the
-     wordmark keeps the mark beside the name and "Back to Experience" holds one
-     line on tablets. That item is the parent link (arrow, gap, label); the
-     lockup (mark, gap, name) is a little narrower. */
+  /* The rail holds its widest fixed item plus its insets, so the wordmark
+     keeps the mark beside the name and "Back to Experience" holds one line on
+     tablets. That item is the parent link (arrow, gap, label); the lockup
+     (mark, gap, name) is a little narrower. Below 1200px the rail's insets are
+     12px. */
   --rail-item-width: calc(16px + 10px + 9.25 * var(--type-interface));
   --rail-min-width: calc(var(--rail-item-width) + var(--frame-inset) + 22px);
   /* The site footer's height (rule, padding and one line of label type), so a
@@ -223,10 +224,21 @@ h1[tabindex="-1"] {
   background: var(--page);
 }
 
+/* Fifteen equal columns on desktop, twelve on tablets. The rail takes three,
+   or more where its widest item needs more: the extra comes out of the fourth
+   column, the margin-index track before the reading start, and never leaves it
+   narrower than the frames' inset, so the reading start and every column after
+   it stand where the equal grid puts them. */
+.site-frame,
+.structural-grid {
+  --rail-track: max(calc(100% / 15), calc(var(--rail-min-width) / 3));
+
+  grid-template-columns: repeat(3, var(--rail-track)) max(var(--frame-inset), calc(100% * 4 / 15 - 3 * var(--rail-track))) repeat(11, minmax(0, 1fr));
+}
+
 .site-frame {
   position: relative;
   display: grid;
-  grid-template-columns: repeat(3, minmax(calc(var(--rail-min-width) / 3), 1fr)) repeat(12, minmax(0, 1fr));
   width: min(100%, 1440px);
   min-height: calc(100vh - var(--site-footer-height));
   min-height: calc(100dvh - var(--site-footer-height));
@@ -239,7 +251,6 @@ h1[tabindex="-1"] {
   z-index: 0;
   inset: 0 64px;
   display: grid;
-  grid-template-columns: repeat(3, minmax(calc(var(--rail-min-width) / 3), 1fr)) repeat(12, minmax(0, 1fr));
   pointer-events: none;
 }
 
@@ -334,6 +345,7 @@ h1[tabindex="-1"] {
 @media (768px <= width < 1200px) {
   :root {
     --reading-width: min(var(--reading-measure), 100% - var(--frame-inset));
+    --rail-min-width: calc(var(--rail-item-width) + 12px + 12px);
   }
 }
 
@@ -347,6 +359,16 @@ h1[tabindex="-1"] {
   align-self: start;
   min-width: 0;
   padding: var(--content-top) 22px 36px var(--rail-safe-inset);
+}
+
+/* Below 1200px the rail's text keeps 12px from the frame-start guide and from
+   the rail's own guide. */
+@media (768px <= width < 1200px) {
+  .site-rail {
+    --rail-safe-inset: 12px;
+
+    padding-right: 12px;
+  }
 }
 
 .rail-header {
@@ -526,7 +548,9 @@ h1[tabindex="-1"] {
   position: relative;
   z-index: 1;
   display: grid;
-  grid-template-columns: repeat(12, minmax(0, 1fr));
+  /* The content takes the frame's own columns, so a section that starts on
+     the margin-index track starts where the rail ends. */
+  grid-template-columns: subgrid;
   grid-auto-rows: max-content;
   grid-column: 4 / -1;
   align-content: start;
@@ -699,7 +723,7 @@ h1[tabindex="-1"] {
    edge every section ends on: the frame less its last content column. */
 .site-footer {
   --frame-width: min(100% - 128px, 1312px);
-  --frame-column: calc((var(--frame-width) - max(var(--rail-min-width), var(--frame-width) / 5)) / 12);
+  --frame-column: calc((var(--frame-width) - max(var(--frame-width) * 4 / 15, 3 * max(var(--frame-width) / 15, var(--rail-min-width) / 3) + var(--frame-inset))) / 11);
 
   display: flex;
   justify-content: space-between;
@@ -804,8 +828,9 @@ h1[tabindex="-1"] {
 @media (768px <= width < 1024px) {
   .site-frame,
   .structural-grid {
-    --rail-min-width: calc(var(--rail-item-width) + 12px + 12px);
-    grid-template-columns: repeat(3, minmax(calc(var(--rail-min-width) / 3), 1fr)) repeat(9, minmax(0, 1fr));
+    --rail-track: max(calc(100% / 12), calc(var(--rail-min-width) / 3));
+
+    grid-template-columns: repeat(3, var(--rail-track)) max(var(--frame-inset), calc(100% / 3 - 3 * var(--rail-track))) repeat(8, minmax(0, 1fr));
   }
 
   .site-frame {
@@ -827,14 +852,7 @@ h1[tabindex="-1"] {
     width: 0;
   }
 
-  .site-rail {
-    grid-column: 1 / span 3;
-    --rail-safe-inset: 12px;
-    padding-right: 12px;
-  }
-
   .content-column {
-    grid-template-columns: repeat(9, minmax(0, 1fr));
     grid-column: 4 / -1;
   }
 
