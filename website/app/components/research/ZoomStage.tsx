@@ -161,12 +161,14 @@ function foldHalves(table: HTMLTableElement, fold: boolean) {
  * Sets a table in the article: at its natural spacing if it fits; closed up if
  * that makes it fit; a table of two halves folded, if that makes it fit;
  * otherwise with its columns of phrases and its row labels wrapped and its
- * sentence columns sharing the room, closed up again if need be; and otherwise,
- * as it scrolls, with row labels that stay in view and sentence columns set to
- * read one whole column at a time where the room is narrow.
+ * sentence columns sharing the room, closed up again if need be; then with its
+ * intervals broken after their commas (data-breaks, set by the renderer); and
+ * otherwise, as it scrolls, with row labels that stay in view and sentence
+ * columns set to read one whole column at a time where the room is narrow.
  */
 function layTable(region: HTMLElement, table: HTMLTableElement, gap: number) {
   region.removeAttribute("data-wrap");
+  region.removeAttribute("data-break");
   clearLabelWidth(region);
   foldHalves(table, false);
   if (closeUp(region, table, gap)) return;
@@ -177,8 +179,12 @@ function layTable(region: HTMLElement, table: HTMLTableElement, gap: number) {
   if (table.hasAttribute("data-wraps")) {
     region.dataset.wrap = "fit";
     if (closeUp(region, table, gap)) return;
-    region.dataset.wrap = "scroll";
   }
+  if (table.hasAttribute("data-breaks")) {
+    region.setAttribute("data-break", "");
+    if (closeUp(region, table, gap)) return;
+  }
+  if (table.hasAttribute("data-wraps")) region.dataset.wrap = "scroll";
   setLabelWidth(region, table);
   setSentenceWidth(region, table);
   // Labels set narrower than their phrases may let the table fit after all.
@@ -300,6 +306,7 @@ export function ZoomStage() {
         region.toggleAttribute("data-headings-wrap", headings);
         if (mode === "wrap" && table.hasAttribute("data-wraps")) region.dataset.wrap = "fit";
         else region.removeAttribute("data-wrap");
+        region.removeAttribute("data-break");
         clearLabelWidth(region);
       };
 
@@ -323,6 +330,10 @@ export function ZoomStage() {
         place("wrap", 1, roomWidth, false, true);
         const gap = parseFloat(getComputedStyle(table).fontSize);
         if (closeUp(region, table, gap)) return;
+        if (table.hasAttribute("data-breaks")) {
+          region.setAttribute("data-break", "");
+          if (closeUp(region, table, gap)) return;
+        }
         if (table.hasAttribute("data-wraps")) region.dataset.wrap = "scroll";
         setLabelWidth(region, table);
         setSentenceWidth(region, table);

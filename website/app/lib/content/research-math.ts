@@ -465,7 +465,13 @@ export function parseResearchDisplayTable(tex: string): ResearchDisplayTable | u
  * manuscript's number.
  */
 export function groupDecimalDigits(tex: string) {
-  return tex.replace(/(?<![\d.])(\d*)\.(\d{5,})(?![\d.])/gu, (_, whole: string, fraction: string) => `${whole}.${fraction.match(/\d{1,3}/gu)!.join("\\,")}`);
+  // Groups of three after the point, a lone last digit joining the group before it, as
+  // fractionDigitGroups in research-number.ts groups a table's plain numbers.
+  return tex.replace(/(?<![\d.])(\d*)\.(\d{5,})(?![\d.])/gu, (_, whole: string, fraction: string) => {
+    const groups = fraction.match(/\d{1,3}/gu)!;
+    if (groups.length > 1 && groups[groups.length - 1].length === 1) groups.splice(-2, 2, groups[groups.length - 2] + groups[groups.length - 1]);
+    return `${whole}.${groups.join("\\,")}`;
+  });
 }
 
 // A cell that is text alone, which the table sets in its own face.

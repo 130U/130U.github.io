@@ -444,6 +444,73 @@ td.numeric {
   font-variant-numeric: lining-nums tabular-nums;
 }
 
+/* A column whose values hold different numbers of fields, an interval among
+   single values, or that sets some in bold, aligns them from its start on their
+   decimal points, and its head stands over that start. */
+.alignStart {
+  text-align: left;
+}
+
+/* A value takes tabular figures, a number written as a formula included, and
+   its digits after the point stand in groups of three, parted by TeX's thin
+   space. Invisible generated text pads each value to its column's widest
+   bracket, sign, integer part, fraction and marks, so the column's points
+   align; the pads are neither copied nor read (TableValue). */
+.value {
+  --digit-gap: calc(1em / 6);
+  font-variant-numeric: lining-nums tabular-nums;
+  white-space: nowrap;
+}
+
+.digitGroup {
+  margin-inline-start: var(--digit-gap);
+}
+
+.pad {
+  padding-inline-start: calc(var(--pad-gaps, 0) * var(--digit-gap));
+}
+
+.pad::before {
+  content: attr(data-table-pad);
+  visibility: hidden;
+}
+
+/* In a column of both weights a pad takes the weight of the digits it stands
+   for, so it is as wide as they are. */
+.pad[data-weight="bold"]::before {
+  font-weight: bold;
+}
+
+.pad[data-weight="regular"]::before {
+  font-weight: normal;
+}
+
+/* An interval holds one line; in a table that would otherwise scroll it breaks
+   after its comma, its upper end standing under its lower end, each aligned on
+   its point from the cell's start (ZoomStage sets data-break). */
+.tableRegion[data-break] .fieldBreak::after {
+  content: "\A";
+  white-space: pre;
+}
+
+.tableRegion[data-break] .cell[data-interval] {
+  text-align: left;
+}
+
+.tableRegion:not([data-break]) .pad[data-when="broken"],
+.tableRegion[data-break] .pad[data-when="line"] {
+  display: none;
+}
+
+/* A row that presents a display shows the display's number after its label,
+   in the reading face of every equation number. */
+.rowNumber {
+  margin-inline-start: 0.5em;
+  font-family: var(--font-prose);
+  font-variant-numeric: lining-nums proportional-nums;
+  white-space: nowrap;
+}
+
 /* A formula in a cell keeps its whole width, since the table scrolls rather than
    the formula. It stays a scroll container, as in prose, so its baseline is its
    lower margin edge, where ResearchMath sets the expression's own baseline on the

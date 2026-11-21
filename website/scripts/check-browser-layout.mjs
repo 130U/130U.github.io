@@ -703,6 +703,70 @@ function inspectManuscript() {
     }
     region.scrollLeft = 0;
   }
+  // A column of values aligns on the decimal point: the point of each value's first number, or the
+  // end of its integer part where it has no point, stands within half a pixel of the others' (a bold
+  // value within a pixel); an interval holds one line, or, broken after its comma where its table
+  // would otherwise scroll, two, the upper ends' points in line too; the pads that align a column
+  // draw nothing; and a row that presents a display shows the display's number beside its label.
+  const charBox = (root, index) => {
+    const walker = document.createTreeWalker(root, NodeFilter.SHOW_TEXT);
+    for (let node = walker.nextNode(); node; node = walker.nextNode()) {
+      if (index < node.data.length) {
+        const range = document.createRange();
+        range.setStart(node, index);
+        range.setEnd(node, index + 1);
+        return range.getBoundingClientRect();
+      }
+      index -= node.data.length;
+    }
+    return null;
+  };
+  // Where the first number from `from` on has its point: the left of its point, or the right of its
+  // last integer digit (a thousands comma is part of the integer).
+  const pointOf = (value, text, from) => {
+    let index = from;
+    while (index < text.length && !/\d/u.test(text[index]) && !(text[index] === "." && /\d/u.test(text[index + 1] ?? ""))) index += 1;
+    if (index >= text.length) return null;
+    while (/\d/u.test(text[index] ?? "") || (text[index] === "," && /^\d{3}(?!\d)/u.test(text.slice(index + 1)))) index += 1;
+    if (text[index] === ".") return charBox(value, index)?.left ?? null;
+    return charBox(value, index - 1)?.right ?? null;
+  };
+  for (const table of document.querySelectorAll("[data-research-table]")) {
+    const region = table.closest('[role="region"]');
+    const broken = region?.hasAttribute("data-break");
+    const body = [...table.tBodies[0].rows];
+    const columns = Math.max(...body.map(row => row.cells.length));
+    for (let column = 0; column < columns; column += 1) {
+      const cells = body.map(row => row.cells[column]).filter(cell => cell && cell.textContent.trim() && cell.textContent.trim() !== "—");
+      const values = cells.map(cell => cell.querySelector("[data-table-value]"));
+      if (values.length < 2 || values.some(value => !value || !value.getClientRects().length)) continue;
+      const firsts = [];
+      const seconds = [];
+      for (const value of values) {
+        const text = value.textContent;
+        firsts.push({ x: pointOf(value, text, 0), bold: Boolean(value.closest("strong")) });
+        const separator = value.querySelector("[data-field-break]");
+        if (!separator) continue;
+        const lines = new Set([...value.getClientRects()].map(rect => Math.round(rect.top))).size;
+        const expected = broken ? 2 : 1;
+        if (lines !== expected) issues.push({ kind: broken ? "table-interval-not-broken" : "table-interval-broken", value: text, lines });
+        if (broken) seconds.push({ x: pointOf(value, text, text.indexOf(separator.textContent, text.indexOf(",")) + 1), bold: Boolean(value.closest("strong")) });
+      }
+      for (const [kind, points] of [["table-points-misaligned", firsts], ["table-upper-points-misaligned", seconds]]) {
+        const measured = points.filter(point => point.x !== null);
+        if (measured.length < 2) continue;
+        const spread = Math.max(...measured.map(point => point.x)) - Math.min(...measured.map(point => point.x));
+        if (spread > (measured.some(point => point.bold) ? 1 : 0.5)) issues.push({ kind, table: table.closest("[data-table-frame]")?.querySelector("[data-table-title]")?.textContent.trim().slice(0, 60), column, spread: +spread.toFixed(2) });
+      }
+    }
+    for (const pad of table.querySelectorAll("[data-table-pad]")) {
+      if (getComputedStyle(pad, "::before").visibility !== "hidden" || pad.textContent) issues.push({ kind: "table-pad-shows", pad: pad.dataset.tablePad });
+    }
+    for (const row of table.querySelectorAll("tr[data-equation-row]")) {
+      const number = row.cells[0]?.querySelector("[data-equation-number]");
+      if (!number || !number.getClientRects().length || number.textContent !== `(${row.dataset.equationRow})`) issues.push({ kind: "table-equation-number-missing", row: row.dataset.equationRow });
+    }
+  }
   const starts = new Map();
   const edges = [];
   // A table of mathematics is set as a research table, and checked as one below; a display

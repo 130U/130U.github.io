@@ -150,7 +150,7 @@ test("only a display that is one array is a table, and its header follows the ma
 
 test("digits after a decimal point are grouped in threes in the drawing only", () => {
   assert.equal(groupDecimalDigits(String.raw`\le.008018821658`), String.raw`\le.008\,018\,821\,658`);
-  assert.equal(groupDecimalDigits(String.raw`[.0307690,.0307764]`), String.raw`[.030\,769\,0,.030\,776\,4]`);
+  assert.equal(groupDecimalDigits(String.raw`[.0307690,.0307764]`), String.raw`[.030\,7690,.030\,7764]`);
   assert.equal(groupDecimalDigits("0.12345"), String.raw`0.123\,45`);
   assert.equal(groupDecimalDigits("213.792201829985"), String.raw`213.792\,201\,829\,985`);
   // Four digits or fewer, integers, fractions and equation numbers are left as written.

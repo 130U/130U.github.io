@@ -607,6 +607,38 @@ their headings keep proportional figures. Under a mouse, the hovered row and col
 a quiet tint and the hovered column's header turns blue, while a tap lights nothing; a row or column the table emphasizes carries
 the accent tint. Rows enter once, top to bottom, as a table scrolls into view.
 
+A table's values are set as a printed table sets figures. A number, a percentage, an
+interval or a list of numbers, written as text or as a formula of numbers alone, stands
+in the reading face in tabular figures, so an interval and the width beside it read in
+one face. A certified enclosure keeps every digit the manuscript gives it, because a
+reader checks it against the PDF; its digits after the point stand in groups of three
+from the point, a lone final digit joining the group before it, as CODATA prints its
+constants (.030 7690, 6.508 371 733), parted by TeX's thin space, a sixth of an em; four
+digits or fewer stand together. Nothing is inserted, so a copied or searched value is
+the manuscript's number. Each column aligns on the decimal point: invisible generated text pads every
+value to the column's widest bracket, sign and integer part, and to its longest
+fraction, so the points stand in line and the column keeps its right alignment. A
+column whose values hold different numbers of fields, as an interval among single
+values, or that sets some of them in bold, whose figures are wider, aligns them from
+its start, its head over that start. An interval holds one
+line, its upper end set against its comma; where its table would otherwise scroll, it
+breaks after the comma, the upper end under the lower end's digits, and the points of
+each line stand in line down the column, so an enclosure reads whole on a phone.
+
+A passage of a manuscript that reports a list of results, several many-digit numbers or
+intervals strung through a sentence or set as a bare display, is set as a research
+table in the form of the paper's own: the passage's words become the title inside the
+frame, the column heads and the row labels, its formulas the cells, whole and in the
+manuscript's order. Its title names what it shows in the article's words and carries no
+table number, which the manuscript does not give it. The sentence before it ends where
+its own words end, and the words after it continue as a paragraph. A display the passage
+sets becomes a row: the display's number stands after the row's label in the reading
+face of the equation numbers, the row holds the display's anchor, and its value carries
+the display's TeX for assistive technology and copying, so the page still maps to the
+paper number for number. A passage whose numbers are steps of a derivation stays prose.
+The certificate of the Asian paper's Section 1.2 ((1.3), the price under absorbed Euler
+and their difference) and the sampling estimates of its Section 6.3 are such tables.
+
 A row of values holds one line. A column whose widest cell is a sentence wraps, at a
 16rem minimum; a column of phrases (cells of two words or more, as a contract's name or
 "75.0% (accepts 1,800 flawed solutions)") holds one line while its table fits, and wraps,
@@ -623,8 +655,8 @@ A table wider than the reading column closes up its columns, by as much as it ne
 to no less than an em between them, if that makes it fit; a table of two halves then
 sets its second half under its first, the same rows in the same order under the one
 heading; then its phrases and row labels wrap and two or more sentence columns share the
-room, to no less than 10rem each, closed up again if need be. A table wider than that
-scrolls at its natural spacing: its row labels, wrapped to no more than 45% of its room
+room, to no less than 10rem each, closed up again if need be; then its intervals break
+after their commas. A table wider than that scrolls at its natural spacing: its row labels, wrapped to no more than 45% of its room
 and 16rem, stay in view whenever they take no more than half of it, or whenever the room
 they leave beside them, short of the fading edge, holds a column of values whole, and the
 values pass beneath them; several sentence columns keep their shared width where the room holds the
@@ -675,8 +707,9 @@ largest type that keeps every row on one line: 20px, then 18px, then 16px, then 
 columns, then headings on two lines, a table of two halves folding only when no step
 holds it side by side; then it wraps the columns of sentences and phrases across the
 full width, at 18px and 16px and, before the table scrolls, at as little as nine tenths
-of the reading size. A table too wide even then scrolls at the reading size with its row
-labels in view, as in the article. The magnifier, the blurred page, and Escape close the
+of the reading size. A table too wide even then breaks its intervals after their commas,
+and one too wide for that scrolls at the reading size with its row labels in view, as in
+the article. The magnifier, the blurred page, and Escape close the
 stage and return focus to the table's own control.
 
 A figure's magnifier stands in the top-right corner of its frame, level with the first

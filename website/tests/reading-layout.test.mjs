@@ -40,10 +40,11 @@ test("research tables hold each row of values on one line and scroll natively be
 });
 
 test("all research tables retain native table semantics inside named keyboard-accessible scroll regions", async () => {
-  // Counts include the tables of mathematics: the dependence paper's one, the Asian paper's two.
+  // Counts include the tables of mathematics (the dependence paper's one, the Asian paper's two)
+  // and the passages set as tables (the Asian paper's two).
   const routes = [
     ["critical-dependence-stress-for-diversification-gains-under-fixed-marginals", 1],
-    ["certified-valuation-of-arithmetic-asian-options", 13],
+    ["certified-valuation-of-arithmetic-asian-options", 15],
     ["certified-joint-pricing-errors-in-rough-heston", 10],
     ["experience/large-scale-domain-expert-feedback-governance-and-adaptive-review", 6],
     ["experience/financial-task-design-and-synthetic-data-engineering", 4],
