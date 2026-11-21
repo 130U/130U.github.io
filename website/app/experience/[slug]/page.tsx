@@ -1,8 +1,10 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
+import { BackToTop } from "../../components/BackToTop";
 import { ReturnArrow } from "../../components/ReturnArrow";
 import { SiteShell } from "../../components/SiteShell";
+import { TitleText } from "../../components/TitleText";
 import { ExperienceMetadata, KeyContributions } from "../../components/experience/ExperienceDetails";
 import { LegalPaperPage } from "../../components/legal/LegalPaperPage";
 import { ResearchArticle } from "../../components/research/ResearchArticle";
@@ -60,13 +62,13 @@ export default async function ExperienceEntryPage({ params }: PageProps) {
     <SiteShell active="experience" parent={{ href: returnPath, label: "Experience" }} frameClassName={styles.frame} guides="index">
       <article className={styles.detailPage} aria-labelledby="experience-title">
         <header className={`page-intro ${styles.detailHeader}`}>
-          <h1 id="experience-title" tabIndex={-1}>{entry.headline}</h1>
+          <h1 id="experience-title" tabIndex={-1}><TitleText text={entry.headline} /></h1>
           <ExperienceMetadata entry={entry} />
         </header>
         <KeyContributions entry={entry} />
         <footer className={styles.detailFooter}>
           <Link className="back-link" href={returnPath}><ReturnArrow />Back to Experience</Link>
-          <a href="#experience-title">Back to Top</a>
+          <BackToTop target="experience-title" />
         </footer>
       </article>
     </SiteShell>

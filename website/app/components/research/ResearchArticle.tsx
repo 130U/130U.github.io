@@ -1,7 +1,9 @@
 import Link from "next/link";
 import { Fragment, type CSSProperties } from "react";
+import { BackToTop } from "../BackToTop";
 import { ReturnArrow } from "../ReturnArrow";
 import { SiteShell } from "../SiteShell";
+import { TitleText } from "../TitleText";
 import { ArticleReadingLayout } from "../article/ArticleReadingLayout";
 import { ExperienceDiagram, ExperienceMetadata, KeyContributions, ProblemAndApproach } from "../experience/ExperienceDetails";
 import type { ShowcaseEntry } from "../../lib/content/experience-showcase";
@@ -265,7 +267,7 @@ export function ResearchArticle({ project, active, returnPath, returnLabel, titl
     <SiteShell active={active} parent={{ href: returnPath, label: returnLabel }} frameClassName={showcase ? experienceStyles.frame : undefined}>
       <article className={`${readingStyles.paper} ${styles.manuscript}`} aria-labelledby={titleId}>
         <header className={`page-intro ${readingStyles.header}`}>
-          <h1 id={titleId} tabIndex={-1}>{showcase?.headline ?? project.title}</h1>
+          <h1 id={titleId} tabIndex={-1}><TitleText text={showcase?.headline ?? project.title} /></h1>
           {showcase && <ExperienceMetadata entry={showcase} />}
           {project.repositoryUrl && <p className={styles.sourceLinks}><a href={project.repositoryUrl}>GitHub</a><a href={project.sourceUrl}>Full Manuscript</a></p>}
           {showcase && <ExperienceDiagram entry={showcase} />}
@@ -284,7 +286,7 @@ export function ResearchArticle({ project, active, returnPath, returnLabel, titl
 
         <footer className={readingStyles.paperFooter}>
           <Link className="back-link" href={returnPath}><ReturnArrow />Back to {returnLabel}</Link>
-          <a href={`#${titleId}`}>Back to Top</a>
+          <BackToTop target={titleId} />
         </footer>
         {enhanced && <FigureController key={project.slug} />}
         <MathFit key={`${project.slug}-math`} />

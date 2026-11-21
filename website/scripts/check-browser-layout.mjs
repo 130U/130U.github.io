@@ -697,6 +697,116 @@ function inspectText() {
   return issues;
 }
 
+// The shared frame (docs/design.md, Reading frame, Links and actions, Record strip,
+// Detail pages): the rail holds its wordmark and parent link, titles and strip
+// values break only between their units, the hanging heading shares its list's
+// baseline, a list of one carries no index, and the site footer ends on the
+// closing guide.
+function inspectFrame() {
+  const issues = [];
+  const box = element => element.getBoundingClientRect();
+  const lines = element => {
+    const range = document.createRange();
+    range.selectNodeContents(element);
+    const tops = [];
+    for (const rect of range.getClientRects()) if (rect.width > 0.5 && !tops.some(top => Math.abs(top - rect.top) < rect.height / 2)) tops.push(rect.top);
+    return tops.length;
+  };
+  const baseline = element => {
+    const probe = document.createElement("span");
+    probe.style.cssText = "display:inline-block;width:0;height:0;vertical-align:baseline";
+    const text = document.createTreeWalker(element, NodeFilter.SHOW_TEXT).nextNode();
+    text.parentNode.insertBefore(probe, text);
+    const y = box(probe).top;
+    probe.remove();
+    return y;
+  };
+  const rail = document.querySelector(".site-rail");
+  const railColumn = rail && getComputedStyle(rail).position === "sticky" && innerWidth >= 768;
+  if (railColumn) {
+    const mark = box(document.querySelector(".wordmark-mark"));
+    const name = box(document.querySelector(".wordmark-name"));
+    if (Math.abs((mark.top + mark.bottom) / 2 - (name.top + name.bottom) / 2) > 3 || mark.right > name.left) issues.push({ kind: "rail-wordmark-split" });
+    const parent = document.querySelector(".parent-link span");
+    if (parent && parent.textContent.length <= "Back to Experience".length && lines(parent) > 1) issues.push({ kind: "rail-parent-link-wraps", text: parent.textContent });
+  }
+  // A held unit (a title's compound, a strip's place or date) stands on one line
+  // whenever the line can hold it.
+  for (const unit of document.querySelectorAll(".keep-whole")) {
+    if (lines(unit) < 2) continue;
+    const probe = unit.cloneNode(true);
+    probe.style.cssText = "position:absolute;visibility:hidden;white-space:nowrap;width:max-content";
+    unit.parentElement.append(probe);
+    const natural = box(probe).width;
+    probe.remove();
+    if (natural <= box(unit.parentElement).width - 1) issues.push({ kind: "held-unit-split", text: unit.textContent });
+  }
+  for (const value of document.querySelectorAll("[data-experience-metadata] dd")) {
+    const range = document.createRange();
+    const text = value.textContent;
+    const walker = document.createTreeWalker(value, NodeFilter.SHOW_TEXT);
+    let previousTop = null;
+    for (let node = walker.nextNode(); node; node = walker.nextNode()) {
+      for (let index = 0; index < node.data.length; index += 1) {
+        if (/\s/u.test(node.data[index])) continue;
+        range.setStart(node, index);
+        range.setEnd(node, index + 1);
+        const rect = range.getClientRects()[0];
+        if (!rect) continue;
+        if (previousTop !== null && rect.top > previousTop + rect.height / 2 && /[–,;)]/u.test(node.data[index])) issues.push({ kind: "strip-line-starts-with-punctuation", text });
+        previousTop = rect.top;
+      }
+    }
+  }
+  const contributions = document.querySelector(".content-column > article > [data-experience-contributions]");
+  if (contributions && innerWidth >= 1200) {
+    const heading = contributions.querySelector("h2");
+    const first = contributions.querySelector("ol > li > div");
+    if (Math.abs(baseline(heading) - baseline(first)) > 0.5) issues.push({ kind: "contributions-heading-off-baseline", offset: baseline(heading) - baseline(first) });
+  }
+  for (const list of document.querySelectorAll("[data-experience-contributions] > ol")) {
+    const items = [...list.children].filter(item => !item.hasAttribute("data-contribution-note"));
+    if (items.length === 1 && !/^(?:none|normal)$/u.test(getComputedStyle(items[0], "::before").content)) issues.push({ kind: "lone-contribution-numbered" });
+    for (const note of list.querySelectorAll(":scope > [data-contribution-note]")) {
+      if (!/^(?:none|normal)$/u.test(getComputedStyle(note, "::before").content)) issues.push({ kind: "note-numbered" });
+    }
+  }
+  const footer = document.querySelector(".site-footer");
+  const closing = document.querySelector(".structural-guide-reading-end");
+  if (footer && closing && innerWidth >= 768 && getComputedStyle(closing).display !== "none") {
+    const line = box(closing).left + parseFloat(getComputedStyle(closing, "::before").left) + 1;
+    if (Math.abs(box(footer).right - line) > 1) issues.push({ kind: "site-footer-off-closing-guide", footer: box(footer).right, guide: line });
+  }
+  return issues;
+}
+
+// Back to Top returns a page to its top and moves focus to the title; on a page
+// that fits the window it steps aside. The sticky rail and phone header hold
+// their place to the end of the page.
+async function inspectReturn(page) {
+  const issues = [];
+  const top = page.locator("footer a.top-link");
+  if (!await top.count()) return issues;
+  const state = await page.evaluate(() => {
+    scrollTo(0, document.documentElement.scrollHeight);
+    const wordmark = document.querySelector(".wordmark").getBoundingClientRect().top;
+    const rail = document.querySelector(".site-rail").getBoundingClientRect();
+    return { fits: document.documentElement.scrollHeight <= innerHeight + 1, wordmark, header: rail.bottom - Math.max(rail.top, 0), content: parseFloat(getComputedStyle(document.documentElement).getPropertyValue("--content-top")) };
+  });
+  const visible = await top.isVisible();
+  if (state.fits === visible) issues.push({ kind: state.fits ? "back-to-top-shown-on-page-that-fits" : "back-to-top-hidden" });
+  if (viewportWidth(page) >= 768 && Math.abs(state.wordmark - state.content) > 1) issues.push({ kind: "rail-moves-at-page-end", wordmark: state.wordmark });
+  if (viewportWidth(page) < 768 && state.header > 64) issues.push({ kind: "phone-header-pinned-too-tall", height: state.header });
+  if (!visible) return issues;
+  await top.click();
+  await page.waitForTimeout(120);
+  const landed = await page.evaluate(() => ({ scrollY, focus: document.activeElement?.tagName }));
+  if (landed.scrollY !== 0 || landed.focus !== "H1") issues.push({ kind: "back-to-top-misses-top", ...landed });
+  return issues;
+}
+
+const viewportWidth = page => page.viewportSize().width;
+
 // A box shows a scrollbar, or an inline formula's fade, only when its content is
 // genuinely wider or taller than its room. The components fit anything that
 // overshoots by a little: MathFit sets an equation or formula slightly smaller,
@@ -962,6 +1072,7 @@ const longNumbers = [];
 const manuscripts = [];
 const texts = [];
 const diagrams = [];
+const frames = [];
 const scrolls = [];
 const missing = new Set();
 try {
@@ -1074,6 +1185,9 @@ try {
           await page.goto(ORIGIN + route, { waitUntil: "networkidle" });
           await page.evaluate(() => document.fonts.ready);
           texts.push({ route, width, issues: await page.evaluate(inspectText) });
+          const frameIssues = await page.evaluate(inspectFrame);
+          if ([390, 768, 1024, 1440].includes(width)) frameIssues.push(...await inspectReturn(page));
+          frames.push({ route, width, issues: frameIssues });
         }
       } finally { await context.close(); }
     }
@@ -1193,10 +1307,10 @@ try {
   await browser.close();
 }
 const failures = records.filter(record => record.issues.length || record.pageErrors.length);
-const otherFailures = [...manuscripts, ...texts, ...diagrams, ...home, ...longNumbers, ...noScript, ...scrolls].filter(record => record.issues.length);
-const report = { figures: unique.size, widths: WIDTHS, cases: records.length, missingAssets: [...missing], failures: failures.length + otherFailures.length, records, manuscripts, texts, diagrams, home, longNumbers, noScript, scrolls };
+const otherFailures = [...manuscripts, ...texts, ...diagrams, ...frames, ...home, ...longNumbers, ...noScript, ...scrolls].filter(record => record.issues.length);
+const report = { figures: unique.size, widths: WIDTHS, cases: records.length, missingAssets: [...missing], failures: failures.length + otherFailures.length, records, manuscripts, texts, diagrams, frames, home, longNumbers, noScript, scrolls };
 await writeFile(path.join(ARTIFACTS, "results.json"), JSON.stringify(report, null, 2) + "\n");
 console.log(JSON.stringify({ figures: unique.size, cases: records.length, failures: failures.map(({ id, view, width, textScale, issues, pageErrors }) => ({ id, view, width, textScale, issues, pageErrors })), otherFailures, missingAssets: [...missing], artifacts: ARTIFACTS }, null, 2));
 assert.equal(missing.size, 0, "The static export is missing requested assets.");
 assert.equal(failures.length, 0, "Browser layout regression found collapsed labels, frame escapes, or broken interactions. Inspect results.json and screenshots.");
-assert.equal(otherFailures.length, 0, "Manuscript tables or equation numbers, text breaks and list markers, logic diagrams, homepage text resizing, long-number scrolling, no-JavaScript navigation, or scroll near-misses regressed.");
+assert.equal(otherFailures.length, 0, "Manuscript tables or equation numbers, text breaks and list markers, logic diagrams, the shared frame (rail, held units, strip, contributions, footer, Back to Top), homepage text resizing, long-number scrolling, no-JavaScript navigation, or scroll near-misses regressed.");

@@ -685,10 +685,10 @@ test("all eighteen approved Experience entries use institution titles and real l
 
 test("the ten nonresearch detail routes keep metadata in a labeled record strip", async () => {
   const metadataStyles = (await readFile(path.join(ROOT, "app", "components", "experience", "Experience.module.css"), "utf8")).replace(/\r\n?/gu, "\n");
-  assert.match(metadataStyles, /(?:^|\n)\.metadata\s*\{[^}]*grid-template-columns:\s*repeat\(4,\s*minmax\(0,\s*1fr\)\)[^}]*border:\s*1px solid var\(--frame\)/u, "Desktop sets the four fields in one frame");
-  assert.match(metadataStyles, /\.metadata > div \+ div\s*\{\s*background:\s*var\(--dash-y\)/u, "Dashed hairlines divide the fields");
-  assert.match(metadataStyles, /@media \(width < 1200px\) \{[^@]*?\.metadata\s*\{\s*grid-template-columns:\s*repeat\(2,\s*minmax\(0,\s*1fr\)\)/u, "Narrower layouts use two fields per row");
-  assert.match(metadataStyles, /@media \(width < 420px\) \{\s*\.metadata\s*\{\s*grid-template-columns:\s*1fr/u, "Phones stack the fields");
+  assert.match(metadataStyles, /(?:^|\n)\.metadata\s*\{[^}]*grid-template-columns:\s*repeat\(2,\s*minmax\(0,\s*1fr\)\)[^}]*border:\s*1px solid var\(--frame\)/u, "The strip sets two fields per row in one frame");
+  assert.match(metadataStyles, /\.metadata > div:nth-child\(2\)\s*\{\s*background:\s*var\(--dash-y\)/u, "Dashed hairlines divide the fields");
+  assert.match(metadataStyles, /@container \(width >= 53rem\) \{[^@]*?\.metadata\[data-layout="row"\]\s*\{\s*grid-template-columns:\s*repeat\(4,\s*minmax\(min-content,\s*auto\)\)/u, "Short values stand four across where the strip holds each on one line");
+  assert.match(metadataStyles, /@media \(width < 540px\) \{\s*\.metadata\s*\{\s*grid-template-columns:\s*minmax\(0,\s*1fr\)/u, "Phones stack the fields");
   assert.match(metadataStyles, /\.metadata dt\s*\{[^}]*font-size:\s*var\(--type-label\)/u, "Field labels use the label role");
   assert.match(metadataStyles, /\.metadata dd\s*\{[^}]*font-family:\s*var\(--font-prose\)[^}]*font-size:\s*var\(--type-reading\)/u, "Field values use the reading face and size");
   for (const route of EXPERIENCE_DETAIL_ROUTES) {
@@ -696,7 +696,11 @@ test("the ten nonresearch detail routes keep metadata in a labeled record strip"
     assert.equal(openingTags(html, "article").length, 1);
     assert.equal(openingTags(html, "details").length, 0);
     assert.match(html, /<h1\b[^>]*\bid="experience-title"/u);
-    assert.match(html, /href="#experience-title"/u);
+    assert.match(html, /<a class="top-link" href="#experience-title">Back to Top<\/a>/u, "Back to Top shares the footer action's hover and focus");
+    const layout = attribute(html.match(/<dl\b([^>]*\bdata-experience-metadata\b[^>]*)>/u)?.[1] ?? "", "data-layout");
+    const expectedLayout = ["/experience/citic-securities/", "/experience/ey-parthenon/", "/experience/saif-partners/"].includes(route) ? "row"
+      : ["/experience/hubble-technology-investment/", "/experience/independent-stem-olympiad-training/", "/experience/stem-olympiad-competitions/"].includes(route) ? "long" : "pairs";
+    assert.equal(layout, expectedLayout, `${route}: only entries whose values fit one row of the strip set four across, and only a long value stacks a narrow strip`);
     assert.equal(canonicalUrl(html), `${SITE_ORIGIN}${route}`);
     const main = html.match(/<main\b[^>]*>([\s\S]*?)<\/main>/u)?.[1] ?? "";
     assert.doesNotMatch(stripMarkup(main), /\p{Script=Han}/u);
@@ -1022,7 +1026,8 @@ test("the production design contract is restrained and dependency-light", async 
   assert.match(experience, /\.section\s*\{[^}]*grid-template-columns:\s*repeat\(11,[^}]*grid-column:\s*1 \/ span 11/u, "Sections end on the reading-end guide");
   assert.match(experience, /\.sectionBody\s*\{[^}]*grid-column:\s*2\s*\/\s*span\s*10/u);
   assert.match(globals, /--hang-columns:\s*minmax\(0,\s*4fr\)\s+minmax\(0,\s*6fr\)/u, "Hanging rows put titles on 4 of 10 columns and prose on 6");
-  for (const css of [experience, globals]) assert.match(css, /@media \(width >= 1200px\)[\s\S]*?grid-template-columns:\s*var\(--hang-columns\)/u);
+  assert.match(experience, /@media \(width >= 1200px\)[\s\S]*?grid-template-columns:\s*var\(--hang-columns\)/u);
+  assert.match(globals, /@media \(width >= 1200px\)[\s\S]*?\.ledger::before\s*\{[^}]*left:\s*calc\(40% - 0\.7px\)[\s\S]*?\.ledger-item\s*\{[^}]*grid-template-columns:\s*calc\(40% - 0\.2 \* var\(--frame-pad\) - 0\.2px\)/u, "A ledger's spine and its entries split on axis B, the column guide");
   assert.match(structuralGrid, /data-guides=\{layout\}/u);
   assert.match(globals, /\.structural-grid\[data-guides="index"\] \.structural-guide-reading-measure\s*\{\s*grid-column:\s*9/u, "Index pages mark the prose axis");
   // Each group of content sits in one faint, unfilled frame with a continuous dashed
@@ -1050,7 +1055,7 @@ test("the production design contract is restrained and dependency-light", async 
   assert.match(globals, /\.site-rail\[data-enhanced="true"\] \.rail-panel\s*\{[^}]*visibility:\s*hidden/u);
   assert.match(navigation, /wordmark-lockup[\s\S]*?wordmark-mark[\s\S]*?wordmark-name[\s\S]*?>Theodore Ouyang<\/span>/u);
   assert.match(layout, /assets\/brand\/favicon\.ico[\s\S]*?assets\/brand\/lo-mark\.svg[\s\S]*?sizes: "any"/u);
-  assert.match(experience, /\.metadata\s*\{[^}]*grid-template-columns:\s*repeat\(4,/u);
+  assert.match(experience, /\.metadata\[data-layout="row"\]\s*\{[^}]*grid-template-columns:\s*repeat\(4,/u);
   assert.match(globals, /\.ledger-title\s*\{[^}]*font-size:\s*var\(--type-subheading\)/u);
   assert.match(experience, /\.contributions > ol\s*\{[^}]*padding:\s*0\s*;[^}]*list-style:\s*none\s*;/u);
   assert.deepEqual(Object.keys(packageJson.dependencies).sort(), ["@mathjax/mathjax-tex-font", "@mathjax/src", "next", "react", "react-dom"]);

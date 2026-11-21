@@ -65,15 +65,46 @@ export function ArticleContents({ items }: { items: ArticleContentsItem[] }) {
     };
   }, [items]);
 
+  // Where the list runs past the sticky rail, the clipped edge fades: the rail
+  // marks which of its edges hide entries.
+  useEffect(() => {
+    const container = sidebar.current;
+    const list = container?.querySelector("ol");
+    if (!container || !list) return;
+    const edges = () => {
+      const scrolls = window.getComputedStyle(container).position === "sticky" && container.scrollHeight > container.clientHeight + 1;
+      container.toggleAttribute("data-clipped-top", scrolls && container.scrollTop > 1);
+      container.toggleAttribute("data-clipped-bottom", scrolls && container.scrollTop + container.clientHeight < container.scrollHeight - 1);
+    };
+    const observer = new ResizeObserver(edges);
+    observer.observe(container);
+    observer.observe(list);
+    container.addEventListener("scroll", edges, { passive: true });
+    edges();
+    return () => {
+      observer.disconnect();
+      container.removeEventListener("scroll", edges);
+      container.removeAttribute("data-clipped-top");
+      container.removeAttribute("data-clipped-bottom");
+    };
+  }, []);
+
+  // The entry being read stays clear of the rail's fading edges with the entry
+  // after it in view; when it reaches an edge, the rail brings it to two fifths
+  // of its height.
   useEffect(() => {
     const container = sidebar.current;
     if (!container || !active || !details.current?.open || window.getComputedStyle(container).position !== "sticky") return;
     const link = container.querySelector<HTMLAnchorElement>('a[aria-current="location"]');
     if (!link) return;
+    const entries = [...container.querySelectorAll<HTMLLIElement>("nav li")].filter((entry) => entry.getClientRects().length > 0);
+    const following = entries[entries.indexOf(link.closest("li")!) + 1];
+    const fade = 2.5 * Number.parseFloat(window.getComputedStyle(document.documentElement).fontSize);
     const bounds = container.getBoundingClientRect();
-    const linkBounds = link.getBoundingClientRect();
-    if (linkBounds.top < bounds.top) container.scrollTop -= bounds.top - linkBounds.top;
-    else if (linkBounds.bottom > bounds.bottom) container.scrollTop += linkBounds.bottom - bounds.bottom;
+    const top = link.getBoundingClientRect().top;
+    const bottom = (following ?? link).getBoundingClientRect().bottom;
+    const clear = (container.scrollTop === 0 || top >= bounds.top + fade) && (container.scrollTop + container.clientHeight >= container.scrollHeight - 1 || bottom <= bounds.bottom - fade);
+    if (!clear) container.scrollTop += top - (bounds.top + 0.4 * container.clientHeight);
   }, [active]);
 
   // The rail lists chapters; only the chapter being read opens its subsections.

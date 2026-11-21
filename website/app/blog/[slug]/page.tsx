@@ -1,11 +1,13 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
+import { BackToTop } from "../../components/BackToTop";
 import { BlogImage } from "../../components/blog/BlogImage";
 import { ReadingArrow } from "../../components/ReadingArrow";
 import { ReturnArrow } from "../../components/ReturnArrow";
 import { InlineContent } from "../../components/research/ResearchInline";
 import { SiteShell } from "../../components/SiteShell";
+import { TitleText } from "../../components/TitleText";
 import { blogPosts, formatBlogDate, getBlogPost, type BlogBlock, type BlogPost } from "../../lib/content/blog";
 import { SITE_NAME, createPageMetadata } from "../../lib/content/site";
 import styles from "../blog.module.css";
@@ -67,7 +69,7 @@ export default async function BlogPostPage({ params }: PageProps) {
     <SiteShell active="blog" parent={{ href: returnPath, label: "Blog" }} frameClassName={styles.frame} guides="article">
       <article className={styles.post} aria-labelledby="post-title">
         <header className={styles.header}>
-          <h1 id="post-title" tabIndex={-1}>{post.title}</h1>
+          <h1 id="post-title" tabIndex={-1}><TitleText text={post.title} /></h1>
           <p className={styles.byline}>
             <span>By {SITE_NAME}</span>
             <time dateTime={post.date}>{formatBlogDate(post.date)}</time>
@@ -87,7 +89,7 @@ export default async function BlogPostPage({ params }: PageProps) {
         </div>
         <footer className={styles.footer}>
           <Link className="back-link" href={returnPath}><ReturnArrow />Back to Blog</Link>
-          <a href="#post-title">Back to Top</a>
+          <BackToTop target="post-title" />
         </footer>
       </article>
     </SiteShell>

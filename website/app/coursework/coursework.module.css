@@ -3,7 +3,7 @@
 }
 
 .frame :global(.content-column) {
-  padding-top: 112px;
+  padding-top: var(--content-top);
 }
 
 .intro {
@@ -19,8 +19,10 @@
   letter-spacing: var(--title-tracking);
 }
 
+/* A section heading stands 56px above its frame, 32px on phones, as on About
+   and Experience. */
 .sectionBody h2 {
-  margin: 0 0 32px;
+  margin: 0 0 56px;
   font-size: var(--type-heading);
   font-weight: 400;
   line-height: var(--heading-leading);
@@ -134,13 +136,17 @@
   .section {
     display: block;
     padding: 40px 0 48px;
-    scroll-margin-top: 88px;
+    scroll-margin-top: 0.5rem;
   }
 
   .sectionIndex {
     display: block;
     padding: 0;
     margin-bottom: 12px;
+  }
+
+  .sectionBody h2 {
+    margin-bottom: 32px;
   }
 
   .courseList {

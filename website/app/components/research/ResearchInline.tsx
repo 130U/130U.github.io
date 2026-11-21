@@ -30,9 +30,12 @@ export function KeepRanges({ text }: { text: string }) {
 }
 
 // A word that joins numbers with a hyphen or a dash (373-81, 2019-2024, 62-345.600,
-// 120–150) holds one line. Only words that stand between spaces are held, so the
+// 120–150), a number and a word (50-member, tier-1), or a one- or two-letter
+// prefix or an acronym and its word (e-commerce, co-founder, IPhO-level) holds
+// one line. An ordinary compound (real-world) may still break after its hyphen,
+// as printed text does. Only words that stand between spaces are held, so the
 // text and its word boundaries stay exactly as written.
-const NUMBER_JOIN = /(?<=^|\s)(\S*\d[-–]\d\S*)(?=\s|$)/u;
+const NUMBER_JOIN = /(?<=^|\s)(\S*(?:\d[-–][\d\p{L}]|\p{L}-\d|(?<!\p{L})\p{L}{1,2}-\p{L}|\p{Lu}\p{L}*\p{Lu}\p{L}*-\p{L})\S*)(?=\s|$)/u;
 
 export function KeepNumberJoins({ text }: { text: string }) {
   if (!NUMBER_JOIN.test(text)) return text;

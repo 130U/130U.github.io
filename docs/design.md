@@ -73,7 +73,8 @@ Bold is weight 600.
 
 Roles use rem units and scale with the reader's text setting. Only titles and headings
 step down below 768px. Titles, headings, and item titles use `--title-tracking`,
-`--heading-tracking`, and `--subheading-tracking`; reading text and indices use none.
+`--heading-tracking`, and `--subheading-tracking`; reading text, labels, and indices
+use none.
 Inline `code` inherits the surrounding face, and summaries carry no bold. In Key
 Contributions, the lead sentence and results set in bold in the AI manuscript render at
 weight 600, so each contribution opens with its claim; italic run-ins and bold theorem
@@ -94,22 +95,33 @@ of prose. Horizontal gutters are 64px on desktop, 32px on tablets, and 20px on p
 The content field reserves one internal track for margin indices and aligns headings and
 prose to the reading track. Structural column guides are decorative, hidden from
 assistive technology, and omitted on phones. A guide meets the content edge it marks at
-every width; the closing guide on tablets sits on the last column's end. Every page
+every width; the closing guide on tablets sits on the last column's end, and the closing
+guide is drawn on the last pixel column of the frames that end on it, so a frame's edge
+and the guide read as one line. The site footer runs from the frame's first guide to the
+closing guide, and a page shorter than the window closes on the footer without scrolling
+(`--site-footer-height`). Every page
 title starts 112px below the top of the content field on desktop and 52px below the
 header on phones; the rail's wordmark starts at the same 112px (`--content-top`), so it
-sits on the title's line. A page title keeps to four fifths of its column
-(`--title-width`); below 1024px it takes the whole column, so a long title holds a few
-balanced lines on tablets and phones. On a reading page (papers, AI and legal articles) the
+sits on the title's line. A landscape phone, under 500px tall, keeps the rail and starts
+both at 48px. A page title keeps to four fifths of its column
+(`--title-width`); below 1200px, where it stacks above its content, it takes the whole
+column less the frame inset, and on phones the whole column, so a long title holds a few
+balanced lines and never reaches the closing guide. On a reading page (papers, AI and legal articles) the
 title also keeps to the reading measure, so it closes on the same edge as the text and
-never reaches the guide that marks the measure.
+never reaches the guide that marks the measure. A hyphenated compound in a title
+(PCA-Based, Green-Credit) holds one line, so a display line never ends on a hyphen.
 
-The rail's minimum width follows the interface type size, indent, padding, and
-scrollbar allowance, so the rail, reading field, and guides reflow together when text
-is enlarged. The rail scrolls internally when its contents exceed the viewport height.
+The rail is as wide as its widest fixed item, the parent link Back to Experience, plus
+its insets (`--rail-item-width`): the wordmark keeps the mark beside the name and the
+parent link holds one line on every tablet, and the rail, reading field, and guides
+reflow together when text is enlarged. A longer label, Back to Selected Research, wraps
+in balanced lines beside its arrow. The rail is as tall as its contents, so the footer
+never pushes it, and scrolls internally when they exceed the viewport height.
 Below 768px, top-level pages use a 4rem sticky header with a Menu / Close panel; detail
-pages show the wordmark and their parent link in the header without a menu. Without
-JavaScript, the links stay visible in normal document flow. Media-query ranges cover
-fractional viewport widths continuously.
+pages show the wordmark and their parent link in the header without a menu, and while
+the page scrolls the wordmark row leaves and the return row stays pinned, 53px tall.
+Without JavaScript, the links stay visible in normal document flow. Media-query ranges
+cover fractional viewport widths continuously.
 
 ### Measure
 
@@ -122,6 +134,7 @@ Paragraphs wrap ragged-right with no forced breaks, and long unbroken strings wr
 emergency; a word still sets the narrowest width of the column, cell, or label that
 holds it, so no word splits because its box was narrowed. Text never runs onto a hairline that bounds it: `--frame-inset` (20 to 24px)
 separates the rail's links, a section's margin index, a framed list's numbers, the
+text of framed rows on phones (directory, record strip, contact strip), the
 contents rail and right-aligned footer actions from their lines, and on tablets, where
 running text would otherwise reach the closing guide, `--reading-width` keeps the same
 inset. Frames themselves may meet a guide.
@@ -148,9 +161,10 @@ them.
 
 Framed lists use the global `ledger`, `ledger-item`, `ledger-title`, `ledger-body`, and
 `ledger-prose` classes. From 1200px one continuous dashed spine runs down the frame
-between titles and prose, with 72px between entries; below 1200px entries are divided
-by a dashed line inside the frame. On About, the contact strip's first divider falls on
-the same axis as the spine.
+between titles and prose, on axis B where the column guide stands, with 72px between
+entries; below 1200px entries are divided by a dashed line inside the frame. On About,
+the contact strip's first divider falls on the same axis as the spine. A section heading
+stands 56px above its frame, 32px on phones, on About, Experience, and Coursework.
 
 ### Links and actions
 
@@ -164,8 +178,13 @@ Every return action reads "Back to {destination}" with the decorative arrow from
 Back to Blog. On detail pages it is the parent link beside the wordmark; article,
 detail-page, and post footers repeat it beside Back to Top, in one footer: a hairline,
 then both actions on one centered 44px row, the return link underlined and Back to Top
-plain. On articles and posts the footer spans the reading column. The destination is the
-originating section or entry, so the link works after opening a page directly. The 404
+plain; both turn blue on hover and keyboard focus. On articles and posts the footer spans
+the reading column. Back to Top returns the page to its top, as it opened, and moves
+focus to the title; on a page that fits the window it steps aside. The destination of a
+return link is the originating section or entry, so the link works after opening a page
+directly; a return to the first entry of a section lands on the section, with its
+heading above the entry. On phones every section and entry lands half a rem below the
+header. The 404
 page offers Return Home with the same arrow. Parent links have 44px targets; coarse
 pointers also receive 44px primary navigation and standalone link targets.
 
@@ -182,9 +201,15 @@ assistive technology, so each link's accessible name is the section title.
 ### Record strip
 
 Organization, Position, Location, and Dates form a framed strip divided by dashed
-hairlines: four fields on desktop, two per row below 1200px, and one below 420px. Each
-field is a label above a value in the reading face; long values wrap without narrowing
-the prose.
+hairlines: two fields per row in equal columns, and one below 540px, as the contact
+strip stacks. An entry whose four values together run to at most 80 characters sets
+them in one row, each column as wide as its value, once the strip is 53rem wide and so
+holds every value on one line; a longer entry keeps two per row, and one with a value
+longer than 40 characters stacks its fields where the strip is narrower than 36rem, so no
+value folds into one-word lines. Each field is a label above a value in the reading face; a value breaks
+only between its parts, after a comma, a semicolon, or a range's dash, or before a
+parenthesis, so a place name (North Carolina) or a date (December 2024) holds one line
+and no line starts with a dash.
 
 ## Pages
 
@@ -228,17 +253,26 @@ rules. Courses keep their official wording and order.
 
 Each of the eighteen Experience entries opens its own page. The H1 is the project or
 paper title; the browser title is `{institution}: {title}`. The record strip follows,
-then Key Contributions as an ordered list with decorative serif indices and any
-contextual notes as its final items. On the ten pages that are not articles, the Key
-Contributions heading hangs on axis A beside its list. A page never repeats the summary
-shown on Experience.
+then Key Contributions as an ordered list with decorative serif indices; a list of one
+stands without an index. Contextual notes are its final items, unnumbered, under a
+dashed hairline, in supporting ink, with a leading label run in at the interface size
+and weight 500. Contributions wrap with `text-wrap: pretty`, so a paragraph does not end
+on one word, and a word that joins numbers, a number and a word (50-member, tier-1), or a
+short prefix or an acronym and its word (e-commerce, co-founder, IPhO-level) holds one
+line, here and in the legal articles' text. On the ten pages that are not articles, the
+Key Contributions heading hangs on axis A beside its list, on its first line's baseline.
+Between title and strip and between strip and contributions stand 48px and 72px, 32px
+and 48px on phones. A page never repeats the summary shown on Experience.
 
 ### Articles
 
 The four AI articles, four legal articles, and three Selected Research manuscripts
 share `ArticleReadingLayout`. The contents rail lists chapters and opens subsections
 only for the chapter being read; it is a sticky column when the field has room and a
-disclosure when the viewport or text size narrows it. Each AI and legal article opens
+disclosure when the viewport or text size narrows it. The sticky rail shows no
+scrollbar: where its list runs past an edge, the entries fade there, and the entry being
+read stays clear of the fades with the entry after it in view, brought to two fifths of
+the rail's height when it reaches an edge. Each AI and legal article opens
 with its logic diagram under the record strip.
 
 AI pages present the scope disclosure, Problem and Approach, Key Contributions, and the
@@ -567,7 +601,9 @@ JavaScript, a same-shape SVG of separated dots stands in.
 ## Interaction and motion
 
 Hover feedback applies only to fine pointers, and focus is always a visible blue
-outline. Anchor links use native scrolling. The mobile menu opens with a short
+outline; in the rail's navigation, whose rows stand 27px apart, it is drawn inside the
+row. A heading that an in-page link moves focus to is a target, not a control, and shows
+no ring. Anchor links use native scrolling. The mobile menu opens with a short
 transition, traps keyboard focus, closes on Escape or navigation, and releases the page
 when the viewport reaches desktop width. Editorial surfaces are flat. Two temporary
 surfaces lift off the page with a shadow: the note-preview dialog, whose rounded corners
