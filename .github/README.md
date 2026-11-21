@@ -1,16 +1,12 @@
-<p align="center">
-  <a href="https://www.theodoreoy.com/">
-    <img src="../website/public/assets/brand/og-1774.jpg" alt="Theodore Ouyang, Duke Alumnus and Sequoia Fellow">
-  </a>
-</p>
+<p align="center"><a href="https://www.theodoreoy.com/"><img src="../website/public/assets/brand/og-1774.jpg" alt="Theodore Ouyang, Duke Alumnus and Sequoia Fellow" width="100%"></a></p>
 
 # Theodore Ouyang
-
-**I make high-stakes conclusions verifiable:** certified error bounds in derivative pricing, layered verification in frontier AI evaluation, and evidence standards for delegating authority to autonomous systems.
 
 Duke Alumnus, B.S. in Mathematics and M.Eng. in Risk Engineering · Sequoia Fellow
 
 [theodoreoy.com](https://www.theodoreoy.com/) · [Email](mailto:10@alumni.duke.edu) · [X](https://x.com/D3rfr31schutz)
+
+**I make high-stakes conclusions verifiable:** certified error bounds in derivative pricing, layered verification in frontier AI evaluation, and evidence standards for delegating authority to autonomous systems.
 
 ## Selected Research
 
@@ -42,7 +38,7 @@ Jiritsu Network · Euromonitor International · China Construction Bank · Jones
 
 [All Experience](https://www.theodoreoy.com/experience/)
 
-## This Repository
+## Repository
 
 The site is built with the same care as the work it presents: a Next.js static export, a Canvas 2D clarinet drawn from separated particles, mathematics rendered to SVG at build time, figures drawn from each manuscript's own numbers, legal footnotes that open in place, a strict content security policy, and tests that cover every route and every line of visible copy.
 

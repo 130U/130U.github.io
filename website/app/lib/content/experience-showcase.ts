@@ -49,12 +49,12 @@ const entrySlugs: Readonly<Record<number, string>> = {
   10: "who-may-choose-the-lesser-risk",
   11: "mangrove-restoration-and-the-limits-of-compensatory-mitigation",
   12: "jones-lang-lasalle",
-  13: "hubble-technology-investment",
+  13: "hubble-network",
   14: "saif-partners",
   15: "citic-securities",
   16: "ey-parthenon",
-  17: "independent-stem-olympiad-training",
-  18: "stem-olympiad-competitions",
+  17: "independent-stem-olympiad-training-practice",
+  18: "the-high-school-attached-to-hunan-normal-university",
 };
 // Presentation labels are separate from the Experience copy.
 const legalResearchAreas: Record<number, string> = {
@@ -76,7 +76,7 @@ export const showcaseEntries: readonly ShowcaseEntry[] = source.entries.map((ent
     throw new Error(`Experience entry has no matching route: ${entry.id}`);
   }
   const article = entry.categoryId === "01" ? "ai" : entry.categoryId === "03" ? "legal" : undefined;
-  const organization = entry.categoryId === "03" ? "Duke Law School" : entry.organization;
+  const { organization } = entry;
   const listingTitle = entry.categoryId === "03" ? `${organization}: ${legalResearchAreas[entry.id]}`
     : entry.categoryId === "01" ? entry.detailTitle : organization;
   return {

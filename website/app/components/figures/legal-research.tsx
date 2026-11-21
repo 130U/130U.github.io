@@ -247,7 +247,7 @@ function EvidentiaryChain() {
       id="evidentiary-chain"
       title="From legal duty to durable function"
       caption="Each observation supports a different link, so aerial photographs of canopy expansion cannot establish the whole chain. The counterfactual also changes with the claim being tested."
-      views={[{ id: "chain", label: "Evidentiary Chain" }, { id: "counterfactual", label: "Counterfactual by Claim" }]}
+      views={[{ id: "chain", label: "Chain" }, { id: "counterfactual", label: "Counterfactuals" }]}
       viewsLabel="Show the evidentiary chain or the counterfactuals"
     >
       <Panel view="chain" active>

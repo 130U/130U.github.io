@@ -484,6 +484,9 @@ function HestonCandidateSeparation() {
         <span className={styles.layerA}>The joint enclosures separate 7 of 10 pairs; the leg-by-leg enclosures, 3 of 10.</span>
         <span className={styles.layerB}>The joint enclosures separate all 10 pairs; the leg-by-leg enclosures, 7 of 10.</span>
       </p>
+      {/* Each view keys the tone it gives a candidate, in the words of Section 7.5. */}
+      <Panel view="n1024" active={false}><Legend items={[{ label: "In an unresolved pair", tone: "steel", shape: "range" }]} /></Panel>
+      <Panel view="n2048" active><Legend items={[{ label: "Certified minimiser", tone: "accent", shape: "range" }]} /></Panel>
     </Figure>
   );
 }

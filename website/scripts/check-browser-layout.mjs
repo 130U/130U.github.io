@@ -322,6 +322,8 @@ function inspectFigure(figure) {
     const svgShapes = [...frame.querySelectorAll("svg :is(path, line, polyline, polygon, rect, circle)")].filter(shape => !shape.closest("svg[data-research-svg], button, [class*='_legend']") && shown(shape));
     const html = [...frame.querySelectorAll("span, div, button")].filter(element => !element.closest("[class*='_legend'], [data-research-formula]") && shown(element));
     const classed = (element, pattern) => [...element.classList].some(name => pattern.test(name));
+    // A drawn interval is the kit's absolutely placed range, not a number range in a label's text.
+    const interval = element => classed(element, /_range$/u) && getComputedStyle(element).position === "absolute";
     const keyed = [];
     for (const item of legendItems) {
       const swatch = item.querySelector('[class*="_swatch"]');
@@ -346,6 +348,7 @@ function inspectFigure(figure) {
         hatch: () => html.some(element => element.matches("[data-hatch], [data-state='unverified']")) || svgShapes.some(element => /url\(/u.test(getComputedStyle(element).fill)),
         box: () => html.some(element => element.matches("[data-state='verified'], [data-ring]") && !classed(element, /_dot$/u)),
         tint: () => svgShapes.some(element => element.matches("[data-fill]") && classed(element, /_(rangeFill|discrepancyShade)$/u)) || html.some(element => classed(element, /_(budgetBand|criticalBand|lensWindow|layerBand)$/u)),
+        range: () => html.some(element => interval(element) && getComputedStyle(element).color === color),
       }[shape];
       if (found && !found()) issues.push({ kind: "legend-swatch-without-mark", text: item.textContent.trim(), shape, color });
       keyed.push(`${shape}|${color}`);
@@ -356,6 +359,22 @@ function inspectFigure(figure) {
         const key = `${shape}|${getComputedStyle(dot).color}`;
         if (!keyed.includes(key) && !issues.some(issue => issue.kind === "dot-without-legend" && issue.key === key)) issues.push({ kind: "dot-without-legend", key });
       }
+    }
+  }
+  // In a figure that keys its marks in a legend, in any of its views, an
+  // interval drawn in a tone other than ink is keyed by the legend the shown
+  // view carries, as heston-candidates keys its grey and its accent candidates.
+  if (frame.querySelector('[class*="_legend"] > li')) {
+    const interval = element => [...element.classList].some(name => /_range$/u.test(name)) && getComputedStyle(element).position === "absolute";
+    const keyed = legendItems.flatMap(item => [...item.querySelectorAll('[class*="_swatch"][data-shape="range"]')]).map(swatch => getComputedStyle(swatch).color);
+    const probe = document.createElement("span");
+    probe.style.color = "var(--ink)";
+    frame.append(probe);
+    const ink = getComputedStyle(probe).color;
+    probe.remove();
+    const ranges = [...frame.querySelectorAll("span")].filter(element => !element.closest("[class*='_legend']") && shown(element) && interval(element));
+    for (const color of new Set(ranges.map(range => getComputedStyle(range).color))) {
+      if (color !== ink && !keyed.includes(color)) issues.push({ kind: "range-without-legend", key: `range|${color}` });
     }
   }
   // A key result's numbers stand over its caps and its notes beside its marks:

@@ -33,14 +33,15 @@ const ROUTES = [
   "/experience/euromonitor-international/",
   "/experience/china-construction-bank/",
   "/experience/jones-lang-lasalle/",
-  "/experience/hubble-technology-investment/",
+  "/experience/hubble-network/",
   "/experience/saif-partners/",
   "/experience/citic-securities/",
   "/experience/ey-parthenon/",
-  "/experience/independent-stem-olympiad-training/",
-  "/experience/stem-olympiad-competitions/",
+  "/experience/independent-stem-olympiad-training-practice/",
+  "/experience/the-high-school-attached-to-hunan-normal-university/",
   "/blog/",
   ...readdirSync(path.join(ROOT, "content", "blog")).map((file) => `/blog/${file.replace(/\.md$/u, "")}/`).sort(),
+  "/architecture/",
 ];
 const RESEARCH_ARTICLE_ROUTES = new Set([...RESEARCH_PAPER_ROUTES, ...AI_ARTICLE_ROUTES]);
 

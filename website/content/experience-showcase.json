@@ -226,7 +226,7 @@
     {
       "id": 8,
       "categoryId": "03",
-      "organization": "Autonomous Authority in Space: Risk Tradeoffs and the Law of Delegation",
+      "organization": "Duke Law School",
       "summary": "A spacecraft sometimes has to act before anyone on the ground can approve the command, and waiting carries risks of its own. I formulated a two-threshold test, drawn from the law of delegation, that separates the authority to act from the evidence needed to delegate execution, and applied it to delayed spacecraft operations, orbital avoidance, debris capture, and SETI. I also proposed task-specific authorization records, so that a delegated decision can be examined in advance, revised when its assumptions change, and reconstructed after the event.",
       "readMoreLabel": "Read More",
       "detailTitle": "Autonomous Authority in Space: Risk Tradeoffs and the Law of Delegation",
@@ -249,7 +249,7 @@
     {
       "id": 9,
       "categoryId": "03",
-      "organization": "Small States and the Governance of Strategic Space Dependence",
+      "organization": "Duke Law School",
       "summary": "A small state can license a launch, own a satellite, or buy a service and still lack the decision it meant to keep. I compared New Zealand's launch regulation, Norway's Arctic satellite partnership, and Luxembourg's LUXEOSys procurement to separate permission, ownership, operational rights, and implementation capacity. I proposed an accountable-acceptance standard for strategic dependencies, which ties interruption powers and response rights to funded capability, and translated it into licensing and procurement terms.",
       "readMoreLabel": "Read More",
       "detailTitle": "Small States and the Governance of Strategic Space Dependence",
@@ -272,7 +272,7 @@
     {
       "id": 10,
       "categoryId": "03",
-      "organization": "Who May Choose the Lesser Risk: Solar Geoengineering and the Legal Duties of Comparison and Continuity",
+      "organization": "Duke Law School",
       "summary": "Who may choose among climate risks for people who cannot leave the resulting climate? I proposed two legal duties for solar geoengineering. Comparative justification connects risk-risk analysis to authorization by requiring proponents to defend their policy alternatives and answer challenges from affected constituencies. Continuity answers termination risk by separating political control, operator succession, and the physical cooling trajectory, so that authority can change hands without an abrupt physical stop.",
       "readMoreLabel": "Read More",
       "detailTitle": "Who May Choose the Lesser Risk: Solar Geoengineering and the Legal Duties of Comparison and Continuity",
@@ -294,7 +294,7 @@
     {
       "id": 11,
       "categoryId": "03",
-      "organization": "Mangrove Restoration and the Limits of Compensatory Mitigation: Lessons from Florida for the Greater Bay Area",
+      "organization": "Duke Law School",
       "summary": "Restoring a wetland is one decision, and relying on that restoration to permit the loss of another is a second. I treated a compensation credit as a credit, to be discounted for delay and default, secured, and released against performance, and applied Florida's time-lag and risk discount to the published timetable of Hong Kong's 2024 San Tin approval: the Florida method would credit between roughly a quarter and seven tenths of the enhancement the assessment counted in full. I proposed project conditions that tie a defensible baseline to staged authorization, funded correction, and continuing responsibility.",
       "readMoreLabel": "Read More",
       "detailTitle": "Mangrove Restoration and the Limits of Compensatory Mitigation: Lessons from Florida for the Greater Bay Area",
@@ -316,12 +316,12 @@
     {
       "id": 12,
       "categoryId": "04",
-      "organization": "Jones Lang LaSalle Capital Markets Team",
+      "organization": "Jones Lang LaSalle",
       "summary": "A Southeast Asian conglomerate was looking to buy office properties in China, and I was the project team's ESG lead on the acquisition advisory. Working with JLL's internal ESG team, I screened the candidate assets, underwrote the shortlist, and set site-diligence priorities against the client's investment requirements and its options to refurbish or reposition each building.",
       "readMoreLabel": "Read More",
       "detailTitle": "Office Investment Underwriting and ESG Due Diligence",
       "metadata": {
-        "position": "Summer Intern",
+        "position": "Summer Intern, Capital Markets Team",
         "location": "Beijing, China",
         "dates": "June 2024 – August 2024"
       },

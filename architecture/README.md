@@ -50,8 +50,9 @@ The integration applies the site's type roles, a responsive reader layout, major
 heading semantics, control labels, and export-font settings while preserving SVG
 geometry. It sets the site's palette with no bullet before the title or the card
 headings, and adds the site's Return Home link, with its return arrow, above the title.
-The page takes the site's frame, gutters and footer; Present and Export stand on the
-title's row, and every surface is flat. The drawing has square corners, flat panels on
+Its head carries the site's share metadata: a description, the canonical address, and
+the site's social card. The page takes the site's frame, gutters and footer; Present
+and Export stand on the title's row, and every surface is flat. The drawing has square corners, flat panels on
 a 1px hairline, regions drawn by the site's dashed hairline without a fill, and no
 product logos. It accepts both freshly generated and integrated viewers, and running it
 again leaves an integrated viewer unchanged.

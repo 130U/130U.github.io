@@ -9,7 +9,7 @@ export { styles };
 
 type Tone = "ink" | "accent" | "sky" | "steel" | "mist" | "green";
 export type View = { id: string; label: ReactNode };
-type LegendItem = { label: ReactNode; tone: Tone; shape?: "square" | "line" | "thick" | "dash" | "dotted" | "dot" | "ring" | "triangle" | "hatch" | "box" | "tint" };
+type LegendItem = { label: ReactNode; tone: Tone; shape?: "square" | "line" | "thick" | "dash" | "dotted" | "dot" | "ring" | "triangle" | "hatch" | "box" | "tint" | "range" };
 
 /** Short copy that may contain inline TeX in the manuscripts' `$...$` form. */
 export function Tx({ children }: { children: string }) {
