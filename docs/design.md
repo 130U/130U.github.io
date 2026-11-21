@@ -487,7 +487,13 @@ label at the label size, axis names in flat gray pills, dashed hairline grids, a
 caption in the reading face and supporting ink below the frame. Every axis name starts
 on the frame's left edge, with the title and the legend. Figure text keeps the interface
 face's proportional figures, so a hyphenated label reads as one word; ticks and values
-take tabular figures. A manuscript caption opens with its "Figure N." in the interface
+take tabular figures. A number of five or more digits after its point, in a label, a key
+or a readout, stands in the digit groups of a research table: threes from the point, a
+lone final digit joining the group before it (0.000 637%, 6.513 35, 0.045 461 793),
+parted by TeX's thin space through spacing alone, so copying a label or a readout returns
+the manuscript's digits; one helper groups tables and figures alike. The browser layout
+check fails any shown run of figure text, or any open readout, that holds five such digits
+together. A manuscript caption opens with its "Figure N." in the interface
 face at weight 500, the face of a table's title, and the rest of the caption follows in
 the caption style. Ink and the accent carry the argument; `--chart-sky` marks a second
 series, `--chart-green` an exactly known segment, `--chart-steel` and `--chart-mist`
@@ -580,11 +586,13 @@ for each on a shared axis.
 A key result stated as an interval or a bound is drawn on its own scale, after the
 sentence that states it, beside what it is measured against: an earlier bound, a quoted
 band, a tolerance, or a value it rules out. Figure and number read as one: a proved
-interval is a line with end caps in the accent, and its endpoints stand over its caps,
-the lower starting at its cap and the upper ending at its own, so the row reads as the
-bracket it draws; the key interval's endpoints take the accent at weight 500. A row that
-restates a numbered display carries the display's number in the reading face of the
-equation numbers, so (1.3) in the figure is the (1.3) of the text. An interval known by
+interval is a line with end caps in the accent. Where no table beside the figure states
+it, its endpoints stand over its caps, the lower starting at its cap and the upper ending
+at its own, so the row reads as the bracket it draws, an accent endpoint at weight 500;
+where a table does, the row writes none and takes the table's row name, in the table's
+order. A row that restates a numbered display carries the display's number after its
+name, in the reading face of the equation numbers, as the table's row does, so (1.3) in
+the figure is the (1.3) of the table and the text. An interval known by
 one end has a cap there, with its bound written over it, and runs to an arrowhead at the
 end of the axis. Every mark and line is named beside it, so a key-result figure carries
 no legend, and secondary numbers (allowances, standard errors, ratios) live in its
@@ -598,6 +606,22 @@ says in one or two sentences what the drawing shows and what the reader cannot s
 the argument stays in the text. A test holds each figure to the text it restates and to
 these rules, and the browser layout check fails any two of its numbers or notes that
 touch.
+
+A figure that follows a table, with at most a paragraph between them, reads with it as
+one unit: the table gives the values, and the figure draws what only it can show, where
+the values lie against each other and against a reference. It writes none of the table's
+values, in any digit form, in its labels or its caption; each mark's readout carries its
+values exactly. Its rows take the table's row names, in the table's order. Its title names
+what the drawing shows and is never a near copy of the table's title, and its caption says
+in one or two sentences, in the article's terms, what only the drawing shows. A number
+stays on such a figure only where no table states it: a change between two columns, the
+regret an observation leaves, a value the text gives. The certificate of the Asian paper's
+Section 1.2 and its number line, its Tables 5 and 6 and the widths by Euler step, the
+Rough Heston Tables 2, 4 and 9 and their figures, and the tables the audit policies,
+rejection sampling, acceptance protocols and verification queries follow in the AI
+articles are such pairs. A test fails any label of such a figure that writes a table's
+value, or rounds one to three or more decimals, and any caption that writes one; a row's
+name, the table's first column, is no value.
 
 ### Research tables
 

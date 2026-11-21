@@ -165,12 +165,12 @@ function JointErrorSetFigure({ manuscript, caption }: ManuscriptFigureProps) {
         <dl className={styles.bounds}>
           <div>
             <dt><span className={`${kit.swatch} ${kit.accent}`} data-shape="line" />Joint support of the spread</dt>
-            <dd data-tone="accent"><Tx>{"$0.045461793$ index points"}</Tx></dd>
+            <dd data-tone="accent"><Tx>{"0.045461793 index points"}</Tx></dd>
             <dd>The width of the joint set in the direction of the spread.</dd>
           </div>
           <div>
             <dt><span className={`${kit.swatch} ${kit.ink}`} data-shape="dash" />Leg-by-leg support</dt>
-            <dd><Tx>{"$0.064536890$ index points"}</Tx></dd>
+            <dd><Tx>{"0.064536890 index points"}</Tx></dd>
             <dd>The width of the bounding box in the same direction.</dd>
           </div>
         </dl>

@@ -430,9 +430,9 @@
       "formulaCount": 1027
     },
     "/certified-valuation-of-arithmetic-asian-options/": {
-      "textSha256": "6603b88f429808a1e30e8d01aa8c5201a5505c26b6a76d1d0f78d7b0bc3027d2",
-      "characterCount": 70436,
-      "wordCount": 11610,
+      "textSha256": "4522f01c452a8aa89ff61b4c53eaa3f79f1e84a41b93fc498566d4bc82f3318f",
+      "characterCount": 70291,
+      "wordCount": 11590,
       "preview": "Skip to Main Content Theodore Ouyang Back to Selected Research Certified Valuation of Arithmetic Asian Options: The Cost of Exercising on the Geometric Average ",
       "altTexts": [],
       "ariaLabels": [
@@ -684,13 +684,13 @@
         "twitterTitle": "Certified Valuation of Arithmetic Asian Options: The Cost of Exercising on the Geometric Average",
         "twitterDescription": "The cost of exercising an arithmetic Asian option on the geometric average: a proved bound, its cubic law in Black's model, and a certified Heston price interval with its Euler discretization error."
       },
-      "mathSourceSha256": "0d9316ec30a66dc6afcf100723d93f318875dc7b04bbb678ffa0cd3337b1d0b4",
-      "formulaCount": 749
+      "mathSourceSha256": "af47187810800eb00e7a517b2be523f548a1d56977c7a8197e9c62f9021b40e4",
+      "formulaCount": 748
     },
     "/certified-joint-pricing-errors-in-rough-heston/": {
-      "textSha256": "c6488d5c8a6ac8b6056d7a3b9ae1f1e0d6e0ea0a207669b63b62cf1215dbb99f",
-      "characterCount": 65773,
-      "wordCount": 10638,
+      "textSha256": "20d19e73328d273589e843b46f4bf11e363f754ec2f8f0f32d83172477e085e2",
+      "characterCount": 65417,
+      "wordCount": 10587,
       "preview": "Skip to Main Content Theodore Ouyang Back to Selected Research Certified Joint Pricing Errors in Rough Heston GitHub Full Manuscript Abstract Every option on on",
       "altTexts": [],
       "ariaLabels": [
@@ -859,8 +859,6 @@
         "Research data table",
         "Zoom in",
         "The set of possible errors of the 4400 call and the 4500 call from the node radii of the three-month certificate, a rounded convex body inside its dashed bounding box. Two parallel lines in the direction of the spread touch the body and the corner of the box: the body's support is 0.045461793 index points and the box's is 0.064536890.",
-        "Scrollable mathematical expression",
-        "Scrollable mathematical expression",
         "Zoom in",
         "Research data table",
         "Scrollable mathematical expression",
@@ -892,8 +890,8 @@
         "twitterTitle": "Certified Joint Pricing Errors in Rough Heston",
         "twitterDescription": "Numerical pricing error as a common factor across strikes: a Riccati residual priced by forward variance in rough Heston, the netting of portfolio errors in strike space, and certified tolerances for S&P 500 option positions."
       },
-      "mathSourceSha256": "9e1916cd3607edc6f015c7ab8eaff0b0d7b2f9e06efb286a632a5c4479be0b31",
-      "formulaCount": 461
+      "mathSourceSha256": "14fa845b539de203d04fa6ebacae84605ab8ddeafa09ccfa9db73930ff758714",
+      "formulaCount": 459
     },
     "/experience/": {
       "textSha256": "6055306cc666f095f2b4e433e17c6838993ac1d9a7d1a88d858ab84039229773",
@@ -936,9 +934,9 @@
       }
     },
     "/experience/large-scale-domain-expert-feedback-governance-and-adaptive-review/": {
-      "textSha256": "09493386f34727a5aaccdfafdb0d90bcd5550ea119a9d405cb09e61b9fc6e165",
-      "characterCount": 36463,
-      "wordCount": 5786,
+      "textSha256": "adf1f1f2e5c623e18e7152d4e279c3579652e797339802a61e13522a6b094877",
+      "characterCount": 36337,
+      "wordCount": 5764,
       "preview": "Skip to Main Content Theodore Ouyang Back to Experience Large-Scale Domain Expert Feedback Governance and Adaptive Review Organization Duke University × Leading",
       "altTexts": [],
       "ariaLabels": [
@@ -1031,9 +1029,9 @@
       "formulaCount": 193
     },
     "/experience/financial-task-design-and-synthetic-data-engineering/": {
-      "textSha256": "b63ab5c79d187d5333dcbfafc036f25430c684d02c17a607fe196fbc8dd3683e",
-      "characterCount": 34041,
-      "wordCount": 5009,
+      "textSha256": "e9d9fbddd80e329be6bf5f6d251b44fbbb9c263dbc8494d2750901e7503082ef",
+      "characterCount": 33924,
+      "wordCount": 4998,
       "preview": "Skip to Main Content Theodore Ouyang Back to Experience Financial Task Design and Synthetic Data Engineering Organization Duke University × Leading Foundation M",
       "altTexts": [],
       "ariaLabels": [
@@ -1106,9 +1104,9 @@
       "formulaCount": 189
     },
     "/experience/general-reasoning-evaluation-and-layered-verification/": {
-      "textSha256": "8637bb637415de350671658c39fe3a0ad9b72bf43ad1d79e2fea3d1007272994",
-      "characterCount": 33526,
-      "wordCount": 5080,
+      "textSha256": "888593cdfdc4a013e1032b513dcaa34a127181cccdba348dc10e0613f66f06fc",
+      "characterCount": 33484,
+      "wordCount": 5073,
       "preview": "Skip to Main Content Theodore Ouyang Back to Experience General Reasoning Evaluation and Layered Verification Organization Duke University × Frontier AI Researc",
       "altTexts": [],
       "ariaLabels": [
@@ -1206,9 +1204,9 @@
       "formulaCount": 204
     },
     "/experience/evidence-verification-and-robust-comparison-in-investment-research/": {
-      "textSha256": "c8357bc6c2ff076a2468c05f86c43111e5ed3979ec0aaf121526a47a74357e33",
-      "characterCount": 29834,
-      "wordCount": 4619,
+      "textSha256": "b8b4eb22b5b98bfd3f8c01eb30184ee4107231d74fb484e9a7f7557d6b2454ec",
+      "characterCount": 29519,
+      "wordCount": 4573,
       "preview": "Skip to Main Content Theodore Ouyang Back to Experience Evidence Verification and Robust Comparison in Investment Research Organization Duke University × Leadin",
       "altTexts": [],
       "ariaLabels": [
@@ -1273,7 +1271,6 @@
         "Score differences for the eight scenarios lie at plus or minus 0.19, 0.31, 0.49 and 0.61. Verifying z1 separates positive from negative differences; rechecking the SHAP field or verifying z2 does not.",
         "Scrollable mathematical expression",
         "Scrollable mathematical expression",
-        "Scrollable mathematical expression",
         "Zoom in",
         "Research data table",
         "Scrollable mathematical expression"
@@ -1288,8 +1285,8 @@
         "twitterTitle": "Duke University × Leading Global Alternative Asset Manager: Evidence Verification and Robust Comparison in Investment Research",
         "twitterDescription": "Due diligence has more facts to check than analyst time to check them."
       },
-      "mathSourceSha256": "b99df2a9c92ee7c0c0ce847f92e45f8916b74b48a1bb7e09c8f8f2ad8f0f1dc3",
-      "formulaCount": 212
+      "mathSourceSha256": "236f28ce1755dd4c7c33e53eed3c936f72a9e26bb5687df2dbe8295235573cbf",
+      "formulaCount": 209
     },
     "/experience/autonomous-authority-in-space/": {
       "textSha256": "c57e4570ccdf01a206ad2e476a43671285c2e290c4ec591faf262a58ff3a5629",

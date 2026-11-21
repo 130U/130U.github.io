@@ -6,7 +6,9 @@ import { parseResearchMarkdown } from "../app/lib/content/research-markdown.ts";
 // Figures that draw a paper's or an article's key result on its own scale:
 // every drawn value must be one the text states, each figure must follow the
 // sentence that states it, and a reader reads each number where it lies: an
-// interval's endpoints stand over its caps, every mark is named beside it, and
+// interval no table beside it states carries its endpoints over its caps, an
+// interval a table states is drawn under the table's row name and leaves its
+// endpoints to the table and its readout, every mark is named beside it, and
 // the caption stays a caption.
 
 const read = (relative) => readFile(new URL(`../${relative}`, import.meta.url), "utf8");
@@ -50,7 +52,13 @@ function tableRows(blocks, title) {
 
 const near = (a, b) => Math.abs(a - b) < 0.01;
 
-test("the Asian number line follows the sentence of (1.3) and writes each interval at its caps", async () => {
+/** A row name or table label as read: each formula as its TeX between dollars, tags dropped, spaces collapsed. */
+const label = (markup) => decode(markup
+  .replace(/<math\b[\s\S]*?<annotation[^>]*>([\s\S]*?)<\/annotation>[\s\S]*?<\/math>/gu, (_, tex) => ` $${tex.trim()}$ `)
+  .replace(/<svg\b[\s\S]*?<\/svg>/gu, "")
+  .replace(/<[^>]+>/gu, " ")).replace(/\s+/gu, " ").replace(/\s+,/gu, ",").trim();
+
+test("the Asian number line follows the certificate's table, under its row names, and leaves the endpoints to the table", async () => {
   const slug = "certified-valuation-of-arithmetic-asian-options";
   const { markdown } = await json(`content/selected-research/${slug}.json`);
   const blocks = parseResearchMarkdown(markdown, { joinSoftLines: true });
@@ -64,20 +72,35 @@ test("the Asian number line follows the sentence of (1.3) and writes each interv
   assert.equal(blocks[after - 1].type, "equation");
   assert.match(blocks[after - 1].tex, /\[6\.508371733,\\;6\.518868974\]/u);
   assert.match(blocks[after - 1].tex, /\\tag\{1\.3\}/u);
+  const tableStart = html.lastIndexOf("<table", drawing.open);
+  const tableEnd = html.indexOf("</table>", tableStart);
+  assert.doesNotMatch(html.slice(tableEnd, drawing.open), /data-research-block=/u, "Nothing stands between the table and the figure.");
 
-  // The row of (1.3) carries the display's number, and each interval's endpoints
-  // stand over its own caps: the lower one starts at its cap, the upper one ends at its own.
-  assert.match(drawing.markup, /_number"[^>]*>\(1\.3\)</u);
+  // Table and figure read as one: the figure's rows are the table's first two rows,
+  // in its order and under its names, with (1.3) after its name as the table sets it.
+  const tableLabels = [...html.slice(tableStart, tableEnd).matchAll(/<tr\b[^>]*>\s*<t[hd]\b[^>]*>([\s\S]*?)<\/t[hd]>/gu)].map((row) => label(row[1])).filter((text) => text !== "Quantity");
+  const names = [...drawing.markup.matchAll(/<p class="[^"]*_name"[^>]*>([\s\S]*?)<\/p>/gu)].map((row) => label(row[1]));
+  assert.deepEqual(names, tableLabels.slice(0, 2));
+  assert.deepEqual(names, ["Continuous price (1.3)", "Price under absorbed Euler, $h=1/768$"]);
+  assert.match(drawing.markup, />Continuous price<span class="[^"]*_number"[^>]*>\(1\.3\)</u, "(1.3) follows its row's name.");
+
+  // The table states the endpoints, so the figure writes none of them: each line
+  // lies where its endpoints put it, against 6.52, and its readout gives them.
   const intervals = [["6.508371733", "6.518868974"], ["6.507844281", "6.519014106"]];
-  assert.deepEqual(drawing.ends.map((end) => end.text), intervals.flat());
-  intervals.forEach(([low, high], index) => {
+  assert.equal(drawing.ends.length, 0, "No endpoint stands over a cap.");
+  const visible = drawing.markup.replace(/\s(?:aria-label|data-tip)="[^"]*"/gu, "").replace(/<[^>]+>/gu, "");
+  for (const end of intervals.flat()) assert.ok(!visible.includes(end.slice(0, 5)), `${end} is left to the table.`);
+  const [continuous, scheme] = drawing.ranges;
+  assert.ok(scheme.from < continuous.from && continuous.to < scheme.to, "The interval under absorbed Euler contains (1.3).");
+  assert.ok(near((continuous.to - continuous.from) / (scheme.to - scheme.from), (6.518868974 - 6.508371733) / (6.519014106 - 6.507844281)), "Both lines share one scale.");
+  const library = Number(/_header"[^>]*><span style="left:([\d.]+)%"[^>]*>A library that prints 6\.52</u.exec(drawing.markup)?.[1]);
+  assert.ok(library > scheme.to && library > continuous.to, "6.52 lies outside both intervals.");
+  intervals.forEach(([low, high]) => {
     const interval = `[${low}, ${high}]`;
     assert.ok(drawing.labels.includes(interval) && drawing.tips.some((tip) => tip.includes(interval)), `The figure draws ${interval}.`);
     assert.ok(markdown.includes(`[${low},\\;${high}]`), `The text states ${interval}.`);
-    const [from, to] = drawing.ends.slice(2 * index, 2 * index + 2);
-    assert.deepEqual([from.side, to.side], ["low", "high"]);
-    assert.ok(near(from.at, drawing.ranges[index].from) && near(to.at, drawing.ranges[index].to), `${interval} is written over its caps.`);
   });
+  assert.ok(drawing.caption.startsWith("The interval under absorbed Euler contains (1.3), and 6.52 lies outside both."), "The caption says what only the figure shows.");
   assert.ok(drawing.tips.some((tip) => tip.startsWith("Proxy value 6.513251661289\nknown to ±.00021")));
   assert.ok(drawing.tips.some((tip) => tip.startsWith("Simulated price, close to 6.51335\n.000102 above the proxy value, standard error .000004")));
   for (const phrase of ["known to $`\\pm.00021`$", "close to $`6.51335`$", "A library that prints 6.52", "by $`.000102`$ with standard error $`.000004`$", "$`.005407`$ above and $`.004670`$ below"]) {

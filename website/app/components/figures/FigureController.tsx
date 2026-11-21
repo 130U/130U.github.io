@@ -1,7 +1,20 @@
 "use client";
 
 import { useEffect } from "react";
+import { digitRuns } from "./digit-runs";
 import styles from "./Figure.module.css";
+
+/** Sets a readout's text, each long number in the digit groups its labels use. */
+function writeReadout(element: HTMLElement, text: string) {
+  element.replaceChildren(...digitRuns(text).map((run) => {
+    if (!run.group) return document.createTextNode(run.text);
+    const group = document.createElement("span");
+    group.className = styles.digitGroup;
+    group.dataset.digitGroup = "";
+    group.textContent = run.text;
+    return group;
+  }));
+}
 
 type Crosshair = {
   x: number[];
@@ -130,7 +143,7 @@ export function enhanceFigure(figure: HTMLElement): () => void {
     const factor = scale();
     const box = frame.getBoundingClientRect();
     const mark = target.getBoundingClientRect();
-    tooltip.textContent = target.dataset.tip ?? "";
+    writeReadout(tooltip, target.dataset.tip ?? "");
     tooltip.dataset.open = "";
     const width = tooltip.offsetWidth;
     const height = tooltip.offsetHeight;
@@ -212,7 +225,7 @@ export function enhanceFigure(figure: HTMLElement): () => void {
         dots[position].style.left = `${spec.x[index]}%`;
         dots[position].style.top = `${100 - y}%`;
       });
-      tooltip.textContent = [spec.heading[index], ...spec.series.map((series) => `${series.name}: ${series.value[index]}`)].join("\n");
+      writeReadout(tooltip, [spec.heading[index], ...spec.series.map((series) => `${series.name}: ${series.value[index]}`)].join("\n"));
       tooltip.dataset.open = "";
       const frameBox = frame.getBoundingClientRect();
       const width = tooltip.offsetWidth;
@@ -249,7 +262,7 @@ export function enhanceFigure(figure: HTMLElement): () => void {
         const [from] = edge.dataset.dagEdge!.split(" ");
         edge.dataset.state = from === id || unverified.has(from) ? "unverified" : "verified";
       }
-      if (readout) readout.textContent = chosen.dataset.dagReadout ?? "";
+      if (readout) writeReadout(readout, chosen.dataset.dagReadout ?? "");
     };
     for (const node of nodes) {
       node.disabled = false;

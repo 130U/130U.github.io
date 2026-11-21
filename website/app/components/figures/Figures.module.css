@@ -21,14 +21,9 @@
   background: transparent;
 }
 
-/* A total and its verdict follow the row's name on its line. */
-.ledgerTotal {
-  margin-left: 0.75em;
-  font-variant-numeric: lining-nums tabular-nums;
-}
-
+/* A bar's verdict follows the row's name on its line. */
 .ledgerVerdict {
-  margin-left: 0.5em;
+  margin-left: 0.75em;
   color: var(--muted);
 }
 
@@ -60,18 +55,6 @@
 
 .candidates[data-view="n2048"] .best .candidate {
   color: var(--accent);
-}
-
-.candidates .layerA {
-  display: none;
-}
-
-.candidates[data-view="n1024"] .layerA {
-  display: inline;
-}
-
-.candidates[data-view="n1024"] .layerB {
-  display: none;
 }
 
 .tally {
