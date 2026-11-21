@@ -7,10 +7,15 @@
 // A passage runs from `from` (the opening of its first block; with `at`, from
 // those words on, the text before them staying a paragraph) through `through`
 // (the opening of its last block; with `after`, up to and including those
-// words, the text after them staying a paragraph). The build fails unless the
-// table restates the passage exactly:
+// words, the text after them staying a paragraph). A table reads by rows, or,
+// declared `reading: "columns"`, down its columns: a passage that lists one
+// quantity's values and then another's ("estimates …, with standard errors …")
+// sets each quantity as a column, its points down the rows, as the manuscript's
+// neighbouring tables set them. The build fails unless the table restates the
+// passage exactly:
 // - its formulas are the passage's formulas, every one of them, whole and in the
-//   manuscript's order (title, heads, then rows, left to right);
+//   manuscript's order (title, heads, then rows left to right, or columns top to
+//   bottom);
 // - every number the passage writes in digits outside a formula stands in the
 //   table, and every number the table writes outside a formula is one the
 //   passage or a cited `source` states;
@@ -39,6 +44,8 @@ export type PassageTableSpec = {
   form?: string;
   /** Manuscript text elsewhere that states a value or names a quantity the table writes. */
   sources?: string[];
+  /** The order in which the table's cells restate the passage: by rows (the default), or down its columns. */
+  reading?: "rows" | "columns";
   title: string;
   head: string[];
   rows: Row[];
@@ -67,11 +74,16 @@ const passageTables: Readonly<Record<string, readonly PassageTableSpec[]>> = {
       after: "and $`0.001274`$.",
       // The estimates stand "in increasing order of initial variance", at the four points of Table 9.
       sources: ["| 0.03 | $`[-3.441491358,3.441491358]`$ |", "| 0.04 | $`[-0.928189505,0.928189505]`$ |", "| 0.05 | $`[-0.785853082,0.785853082]`$ |", "| 0.06 | $`[-2.057270822,2.057270822]`$ |"],
+      // The initial variances run down the rows, as in Tables 9 and 10 beside it; the passage's
+      // estimates, then its standard errors, run down the columns.
+      reading: "columns",
       title: "Sampling estimate of the coefficient itself, with 2,097,152 Gaussian vectors per point",
-      head: ["Initial variance", "0.03", "0.04", "0.05", "0.06"],
+      head: ["Initial variance", "Estimate", "Standard error"],
       rows: [
-        { cells: ["Estimate", "$`-0.041015`$", "$`-0.011364`$", "$`0.008329`$", "$`0.019917`$"] },
-        { cells: ["Standard error", "$`0.002079`$", "$`0.000566`$", "$`0.000483`$", "$`0.001274`$"] },
+        { cells: ["0.03", "$`-0.041015`$", "$`0.002079`$"] },
+        { cells: ["0.04", "$`-0.011364`$", "$`0.000566`$"] },
+        { cells: ["0.05", "$`0.008329`$", "$`0.000483`$"] },
+        { cells: ["0.06", "$`0.019917`$", "$`0.001274`$"] },
       ],
     },
   ],
@@ -89,6 +101,8 @@ export type PlacedPassageTable = {
   head?: string;
   tail?: string;
   title: string;
+  /** Whether the table restates its passage down its columns rather than by rows. */
+  reading: "rows" | "columns";
   /** The heads, then the rows. */
   rows: PassageCell[][];
   /** For each passage block presented by the table, the row that first presents it (-1 for the table itself). */
@@ -195,11 +209,13 @@ export function placePassageTables(slug: string, blocks: readonly ResearchBlock[
       rows.push(cells);
     }
 
-    // Formulas: the passage's, whole and in order.
-    const tableFormulas = [
-      ...formulasOf(spec.title),
-      ...rows.flatMap((row) => row.flatMap((entry) => (entry.display ? [{ tex: entry.display.tex, display: true }] : formulasOf(entry.source)))),
-    ];
+    // Formulas: the passage's, whole and in order, read by rows or down the columns.
+    const formulasIn = (entry: PassageCell) => (entry.display ? [{ tex: entry.display.tex, display: true }] : formulasOf(entry.source));
+    const [heads, ...body] = rows;
+    const read = spec.reading === "columns"
+      ? [...heads.flatMap(formulasIn), ...heads.flatMap((_, column) => body.flatMap((row) => (row[column] ? formulasIn(row[column]) : [])))]
+      : rows.flatMap((row) => row.flatMap(formulasIn));
+    const tableFormulas = [...formulasOf(spec.title), ...read];
     const passageFormulas = formulasOf(replaced);
     if (JSON.stringify(tableFormulas) !== JSON.stringify(passageFormulas)) {
       throw new Error(`Passage table ${spec.id} must carry the passage's formulas whole and in order.\npassage ${JSON.stringify(passageFormulas)}\ntable   ${JSON.stringify(tableFormulas)}`);
@@ -240,6 +256,7 @@ export function placePassageTables(slug: string, blocks: readonly ResearchBlock[
       head: spec.at === undefined ? undefined : first.slice(0, cut).trimEnd(),
       tail: spec.after === undefined ? undefined : last.slice(resume).trimStart(),
       title: spec.title,
+      reading: spec.reading ?? "rows",
       rows,
       blockRows,
     });

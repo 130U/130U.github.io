@@ -21,7 +21,11 @@ function parts(value: AlignedNumber) {
   value.fields.forEach((field, index) => {
     add(value.interval && index === 1 ? <span key={`break-${index}`} className={styles.fieldBreak} data-field-break="">{field.separator}</span> : field.separator);
     add(padText(field.before, `before-${index}`));
-    add(`${field.open}${field.sign}${field.integer}${field.fraction === undefined ? "" : `.${field.groups[0]}`}`);
+    const lead = `${field.open}${field.sign}${field.integer}`;
+    // In a column of both weights, or of signs of different widths, the lead stands at the end of a box as wide
+    // as the column's widest lead in bold.
+    if (field.lead !== undefined) add(<span key={`lead-${index}`} className={styles.lead} data-table-lead={field.lead}><span>{lead}</span></span>);
+    add(`${field.lead === undefined ? lead : ""}${field.fraction === undefined ? "" : `.${field.groups[0]}`}`);
     field.groups.slice(1).forEach((group, position) => add(<span key={`group-${index}-${position}`} className={styles.digitGroup} data-digit-group="">{group}</span>));
     add(field.close);
     add(padText(field.after, `after-${index}`));

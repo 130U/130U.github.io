@@ -5,7 +5,8 @@ import test from "node:test";
 import { fileURLToPath } from "node:url";
 import { parseResearchMarkdown } from "../app/lib/content/research-markdown.ts";
 import { groupDecimalDigits, parseResearchDisplayTable, renderResearchDisplayTable } from "../app/lib/content/research-math.ts";
-import { MATH_TABLE_TITLES, mathTableTitle } from "../app/lib/content/math-tables.ts";
+import { MATH_TABLE_HEADS, MATH_TABLE_TITLES, mathTableHeads, mathTableTitle } from "../app/lib/content/math-tables.ts";
+import { alignTexColumn } from "../app/lib/content/research-number.ts";
 
 // A display that is one array is a table of mathematics. The page keeps every
 // cell's TeX, its row and column, the equation number and the sentence it ends,
@@ -102,6 +103,7 @@ test("the manuscripts hold three tables of mathematics, each keeping its cells' 
         assert.match(cell.svg, /^<svg\b[^>]*data-research-svg="cell"/u);
         assert.doesNotMatch(cell.svg, /<line\b|data-line=|<math\b/u, "A cell draws no rule and holds no second expression");
         assert.ok(Number.isFinite(cell.depthEm));
+        assert.equal(cell.tex, source, "A drawn cell keeps its TeX as written, so a column of numbers can be set as values");
       }
     }
   }
@@ -191,6 +193,35 @@ test("a table of mathematics takes as its title the words of its sentence that n
   assert.equal(mathTableTitle("certified-valuation-of-arithmetic-asian-options", parseResearchDisplayTable(String.raw`\begin{array}{c|c|c} \text{Case}&\delta_u&x\\ \hline a&b&c \end{array} \tag{7.8}`)), undefined, "(7.8) follows \"Then\", which names nothing");
 });
 
+test("a table of mathematics its manuscript does not head takes its column heads from the words of its sentence", async () => {
+  for (const [group, slug] of MANUSCRIPTS) {
+    const blocks = parseResearchMarkdown(await manuscript(group, slug), { joinSoftLines: true });
+    const keys = new Set(Object.keys(MATH_TABLE_HEADS[slug] ?? {}));
+    for (const [index, block] of blocks.entries()) {
+      const table = block.type === "equation" && parseResearchDisplayTable(block.tex);
+      if (!table) continue;
+      keys.delete(table.rows[0].cells[0]);
+      const heads = mathTableHeads(slug, table);
+      if (!heads) continue;
+      assert.notEqual(table.rows[0].rule, "header", "A table its manuscript heads keeps the manuscript's heads");
+      assert.equal(heads[0], "", "The row labels' column stands unheaded");
+      // Each head is words of the sentence that ends in the table, its numbers in the sentence's order.
+      const lead = blocks[index - 1].source;
+      let at = -1;
+      for (const head of heads.slice(1)) {
+        const [number, ...words] = head.split(" ");
+        const next = lead.indexOf(number, at + 1);
+        assert.ok(next > at, `${slug}: "${number}" follows in the sentence: …${lead.slice(-90)}`);
+        at = next;
+        for (const word of words) assert.ok(lead.includes(` ${word} `), `${slug}: "${word}" is a word of the sentence`);
+      }
+    }
+    assert.deepEqual([...keys], [], `${slug}: every set of heads belongs to a table of the manuscript`);
+  }
+  const headed = parseResearchDisplayTable(String.raw`\begin{array}{c|c} \text{one quote:}&x\\ \hline a&b \end{array}`);
+  assert.throws(() => mathTableHeads("certified-valuation-of-arithmetic-asian-options", headed), /takes no other heads/u);
+});
+
 test("the published pages set each table of mathematics as a framed research table and keep its TeX, number and sentence", async () => {
   for (const [group, slug, expected] of MANUSCRIPTS) {
     const route = group === "artificial-intelligence" ? path.join("experience", slug) : slug;
@@ -212,16 +243,25 @@ test("the published pages set each table of mathematics as a framed research tab
       assert.doesNotMatch(block, /data-research-svg="display"|<line\b/u, "No drawn array and no rules in SVG");
       const annotations = [...block.matchAll(/<annotation\b[^>]*>([\s\S]*?)<\/annotation>/gu)].map((match) => decodeHtml(match[1]));
       assert.deepEqual(annotations, [tex], "One assistive expression holds the whole display's TeX");
-      assert.equal((block.match(/<thead>/gu) ?? []).length, markup.header ? 1 : 0, "The row the manuscript rules off is the header band");
+      const heads = mathTableHeads(slug, parseResearchDisplayTable(tex)) ?? [];
+      assert.equal((block.match(/<thead>/gu) ?? []).length, markup.header || heads.length ? 1 : 0, "The row the manuscript rules off, or the site's heads, is the header band");
       for (const [, head] of block.matchAll(/<th\b([^>]*)>/gu)) assert.match(head, /\bscope="col"/u);
-      const cells = markup.rows.flat().filter(Boolean);
+      // A column whose every cell writes only numbers is set as values; every other cell is drawn or set as text.
+      const body = markup.header ? markup.rows.slice(1) : markup.rows;
+      const valueColumns = markup.columns.map(({ numeric }, column) => numeric && alignTexColumn(body.map((row) => row[column]?.tex ?? "")) !== undefined);
+      const cells = markup.rows.flatMap((row, rowIndex) => row.filter((cell, column) => cell && !(valueColumns[column] && (!markup.header || rowIndex > 0))));
       assert.equal((block.match(/data-research-svg="cell"/gu) ?? []).length, cells.filter((cell) => cell.kind === "math").length);
-      assert.equal((block.match(/data-cell="text"/gu) ?? []).length, cells.filter((cell) => cell.kind === "text").length);
-      const title = block.match(/<p\b[^>]*data-table-title=""[^>]*>([^<]*)<\/p>/u)?.[1];
-      assert.equal(title && decodeHtml(title), mathTableTitle(slug, parseResearchDisplayTable(tex)));
-      // A numbered table stands its number beneath its frame, in the reading face of equation numbers.
-      const number = block.match(/<\/table>[\s\S]*<span\b[^>]*data-equation-number="true"[^>]*aria-hidden="true"[^>]*>([^<]*)<\/span>/u)?.[1];
-      assert.equal(number, markup.number && `(${markup.number})`);
+      assert.equal((block.match(/data-cell="text"/gu) ?? []).length, cells.filter((cell) => cell.kind === "text").length + heads.filter(Boolean).length);
+      assert.equal((block.match(/<td\b[^>]*data-cell="value"[^>]*>\s*<span\b[^>]*data-table-value=""/gu) ?? []).length, body.length * valueColumns.filter(Boolean).length, "Every cell of a column of values is a value");
+      const title = /<p\b[^>]*data-table-title=""[^>]*>([\s\S]*?)<\/p>/u.exec(block)?.[1];
+      const words = title && decodeHtml(title.replace(/<span\b[^>]*data-equation-number[^>]*>[^<]*<\/span>/u, "").replace(/<!--[\s\S]*?-->/gu, "").replace(/<[^>]+>/gu, "")).trim();
+      assert.equal(words || undefined, mathTableTitle(slug, parseResearchDisplayTable(tex)));
+      // A numbered table is identified by its number at its frame's top-left, in the title's place, in the
+      // reading face of equation numbers, before the table and any title words.
+      const number = title && /^<span\b[^>]*data-equation-number="true"[^>]*aria-hidden="true"[^>]*>([^<]*)<\/span>/u.exec(title)?.[1];
+      assert.equal(number || undefined, markup.number && `(${markup.number})`);
+      assert.equal((block.match(/data-equation-number/gu) ?? []).length, markup.number ? 1 : 0, "The number stands once");
+      if (heads.length) assert.deepEqual([...block.matchAll(/<th\b[^>]*>([^<]*)<\/th>/gu)].map(([, text]) => text), heads, "The site's heads head the columns");
     }
   }
 });
@@ -232,7 +272,12 @@ test("cells take the table's size and baseline, and the CSS draws no vertical ru
   // The header band's mathematics is set at the reading size, where its x-height meets the label type's.
   assert.match(rule(".mathTable thead .cellMath"), /font-size:\s*calc\(var\(--type-reading\) \* var\(--zoom, 1\)\)/u);
   assert.match(rule(".mathTable table .mathCell.mathCell"), /vertical-align:\s*baseline/u);
-  assert.match(rule(".tableNumber"), /font-family:\s*var\(--font-prose\)/u);
-  assert.match(rule(".tableNumber"), /text-align:\s*end/u);
   assert.doesNotMatch(css, /border-(?:left|right|inline)[^;]*solid/u, "No vertical rules");
+  // An equation number a table carries, in a row or at the frame's top-left, stands in the reading face of
+  // every equation number.
+  const tables = await readFile(path.join(ROOT, "app", "components", "research", "ResearchArticle.module.css"), "utf8");
+  const numbers = tables.match(/\n\.rowNumber,\s*\n\.titleNumber\s*\{([^}]*)\}/u)?.[1] ?? "";
+  assert.match(numbers, /font-family:\s*var\(--font-prose\)/u);
+  assert.match(numbers, /lining-nums proportional-nums/u);
+  assert.match(tables.match(/\}\s*\n\.titleNumber\s*\{([^}]*)\}/u)?.[1] ?? "", /font-size:\s*calc\(var\(--type-reading\) \* var\(--zoom, 1\)\)/u);
 });

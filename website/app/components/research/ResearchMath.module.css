@@ -268,26 +268,14 @@
 }
 
 /* A table of mathematics stands in a research table's white space. A numbered
-   one stands its number beneath its frame, at the column's right edge where
-   every equation number stands, in the reading face of the references that cite
-   it, as a caption follows a figure's frame; it stays in the article when the
-   table is zoomed, as a caption does. */
+   one is identified by its number at the frame's top-left, in the title's place
+   (ResearchArticle.module.css, .titleNumber). */
 .mathTableBlock {
   margin: 2.75rem 0;
 }
 
 .mathTableBlock > [data-table-frame] {
   margin: 0;
-}
-
-.tableNumber {
-  margin: 14px 0 0;
-  font-family: var(--font-prose);
-  font-size: var(--type-reading);
-  font-variant-numeric: lining-nums proportional-nums;
-  line-height: var(--interface-leading);
-  text-align: end;
-  white-space: nowrap;
 }
 
 /* On paper, and where the system paints its own colors, the edge follows its

@@ -293,9 +293,10 @@ export type ResearchDisplayTable = Readonly<{
   columns: readonly ResearchDisplayTableColumn[];
   rows: readonly ResearchDisplayTableRow[];
 }>;
-/** A cell of a table of mathematics: an expression drawn by the pipeline, or text set in the table's own face. */
+/** A cell of a table of mathematics: an expression drawn by the pipeline, with its TeX as written, or text set
+ * in the table's own face. */
 export type ResearchTableCell =
-  | Readonly<{ kind: "math"; svg: string; depthEm: number }>
+  | Readonly<{ kind: "math"; svg: string; depthEm: number; tex: string }>
   | Readonly<{ kind: "text"; text: string }>;
 export type ResearchDisplayTableMarkup = Readonly<{
   /** How each column aligns in its frame: row labels left and a column of numbers right, as in every
@@ -511,7 +512,7 @@ export function renderResearchDisplayTable(tex: string): ResearchDisplayTableMar
     const text = TEXT_CELL.exec(cell);
     if (text) return Object.freeze({ kind: "text", text: text[1].trim().replace(/:$/u, "") });
     const markup = renderResearchMath(groupDecimalDigits(cell), false);
-    return Object.freeze({ kind: "math", svg: markup.svg.replace(/data-research-svg="inline"/u, 'data-research-svg="cell"'), depthEm: markup.depthEm });
+    return Object.freeze({ kind: "math", svg: markup.svg.replace(/data-research-svg="inline"/u, 'data-research-svg="cell"'), depthEm: markup.depthEm, tex: cell });
   })));
   const columns = table.columns.map(({ align }, column) => {
     const values = body.map((row) => row.cells[column]).filter(Boolean);

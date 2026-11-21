@@ -15,6 +15,15 @@ function withoutArticleFigures(html) {
     .replace(/(<figure\b[^>]*\bdata-manuscript-figure="[^"]*"[^>]*>)[\s\S]*?(<figcaption\b)/gu, "$1$2");
 }
 
+// A passage table that reads down its columns (passage-tables.ts) restates its passage column by column,
+// after its heads; its formulas are read in that order.
+function inReadingOrder(html) {
+  return html.replace(/<table\b[^>]*\bdata-reading="columns"[^>]*>[\s\S]*?<\/table>/gu, (table) => {
+    const [heads, ...rows] = [...table.matchAll(/<tr\b[^>]*>([\s\S]*?)<\/tr>/gu)].map(([, row]) => [...row.matchAll(/<t[hd]\b[^>]*>([\s\S]*?)<\/t[hd]>/gu)].map(([, cell]) => cell));
+    return [...heads, ...heads.flatMap((_, column) => rows.map((row) => row[column] ?? ""))].join("");
+  });
+}
+
 const PROJECTS = [
   { key: "asian", slug: "certified-valuation-of-arithmetic-asian-options", title: "Certified Valuation of Arithmetic Asian Options: The Cost of Exercising on the Geometric Average", repository: "RESEARCH-Certified-Valuation-of-Arithmetic-Asian-Options", commit: "dd4b147d822d45a4ca12a66294fae2a32cd252bb", blob: "73fd58c109bca144a8809e3fc9832e8ad258cae6", sections: 9, tables: 11, formulas: 724, figures: "asian" },
   { key: "rough", slug: "certified-joint-pricing-errors-in-rough-heston", title: "Certified Joint Pricing Errors in Rough Heston", repository: "RESEARCH-Certified-Joint-Pricing-Errors-in-Rough-Heston", commit: "038db24a3aadf9600edef385dfd7508e612d53c8", blob: "12b074bc25984ea11f9fc7d75768800c267a43eb", sections: 8, tables: 10, formulas: 440, figures: "rough" },
@@ -81,7 +90,7 @@ for (const expected of PROJECTS) {
   test(`${expected.key} published article retains every equation and all section links`, async () => {
     const { markdown } = JSON.parse(await readFile(new URL(`../content/selected-research/${expected.slug}.json`, import.meta.url), "utf8"));
     const html = withoutArticleFigures(await readFile(new URL(`../out/${expected.slug}/index.html`, import.meta.url), "utf8"));
-    const rendered = [...html.matchAll(/<math\b[^>]*data-research-math="(inline|display)"[^>]*>[\s\S]*?<annotation\b[^>]*encoding="application\/x-tex"[^>]*>([\s\S]*?)<\/annotation>[\s\S]*?<\/math>/gu)].map((match) => ({ tex: decodeHtml(match[2]), display: match[1] === "display" }));
+    const rendered = [...inReadingOrder(html).matchAll(/<math\b[^>]*data-research-math="(inline|display)"[^>]*>[\s\S]*?<annotation\b[^>]*encoding="application\/x-tex"[^>]*>([\s\S]*?)<\/annotation>[\s\S]*?<\/math>/gu)].map((match) => ({ tex: decodeHtml(match[2]), display: match[1] === "display" }));
     assert.deepEqual(rendered, sourceFormulas(markdown));
     const blocks = parseResearchMarkdown(markdown, { joinSoftLines: true });
     const abstractIndex = blocks.findIndex((block) => block.type === "heading" && block.source.trim() === "## Abstract");

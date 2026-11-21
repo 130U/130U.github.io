@@ -237,16 +237,21 @@ cited `source` states, and only words of the passage, a cited `source` or the he
 manuscript table whose form it takes (`form`), and unless each display of the passage
 becomes a row that names its equation number (`display`). The row then shows the number
 and carries the display's TeX and anchor, so `tests/equation-numbers.test.mjs` finds it
-as it finds a display. A manuscript update that rewrites such a passage fails the build
+as it finds a display. A table that sets the passage's quantities as columns declares
+`reading: "columns"`: the build then reads its formulas down the columns, and the page
+marks it `data-reading="columns"`, so `tests/selected-research-content.test.mjs` reads
+its formulas in the manuscript's order. A manuscript update that rewrites such a passage fails the build
 until its table is edited with it; the importers and frozen sources stay as they are.
 `tests/passage-tables.test.mjs` pins each table, and refuses an invented, dropped or
 reordered value. `app/lib/content/research-number.ts` reads every table cell that holds a
-number, percentage, interval or list of numbers, written as text or as one formula of
-numbers, and aligns each column of them on the decimal point with invisible generated
-pads; `TableValue` sets its digits in the groups of `fractionDigitGroups`, the one helper
-every table groups its digits through. Copying a cell returns
-the manuscript's number, and `verify-visible-copy` reads a value's groups and pads as
-the one number they set. Figures group through the same helper: a figure label passed as
+number, percentage, interval, bound or list of numbers, written as text or as one formula
+of numbers, with or without a note in parentheses after it, and aligns each column of
+them on the decimal point with invisible generated pads, leaving rows of words out of
+the alignment; `TableValue` sets its digits in the groups of `fractionDigitGroups`, the one helper
+every table groups its digits through, and the same path sets a table of mathematics'
+column of numbers (`alignTexColumn`). Copying a cell returns
+the manuscript's number, and `verify-visible-copy` reads a value's groups, pads and lead
+box as the one number they set. Figures group through the same helper: a figure label passed as
 plain text to `Tx`, or written with `Digits`, and every readout the figure controller
 writes (`writeReadout`), set a number of five or more digits after its point in its
 groups (`app/components/figures/digit-runs.ts`); write a long number in a label through
@@ -295,9 +300,10 @@ its row breaks `\\` or `\\[dim]`; any other column type or rule (`p{}`, `@{}`,
 `\cline`) fails the build, so a new form is designed before it is published. Its title
 is the words of the sentence it ends that name it, kept in
 `app/lib/content/math-tables.ts` under its paper and its first cell; a new table of
-mathematics whose sentence names it ("the … are") takes its title there, and
-`tests/display-tables.test.mjs` holds every title to its sentence and pins the three
-such displays in the manuscripts. A display whose outer level sets two or more formulas side by side is
+mathematics whose sentence names it ("the … are") takes its title there, a table the
+manuscript does not head takes its column heads there from the same sentence, and
+`tests/display-tables.test.mjs` holds every title and head to its sentence and pins the
+three such displays in the manuscripts. A display whose outer level sets two or more formulas side by side is
 drawn as rows (`researchDisplayRows`, `renderResearchDisplayStack`): the rule reads the
 display, or the rows of the one `gathered` environment it is, or of an `aligned`
 environment flush at its rows' start, and parts it at `\qquad`, `\quad`, `\enspace`, a
@@ -373,9 +379,13 @@ development security policy required by Next.js tooling. `test:browser` uses iso
 Chromium contexts and the actual static export to check every figure and view at
 six viewport widths, plus enlarged-text and keyboard-scroll regressions, and holds every
 manuscript table heading to two lines (three over a column of values) clear of its
-table's zoom control, the row labels of words of a scrolling table in view, every column
-of values aligned on its decimal point (an interval on one line, or on two where its
-table breaks it), every row that presents a display showing its number, every inline
+table's zoom control, the row labels of words of a scrolling table in view where the room
+beside them holds its widest column, a table that keeps them in view snapping to its
+columns with no column's text half beneath them at rest or at its scrolled end, every
+column of values aligned on its decimal point, rows of words left out (an interval on one
+line, or on two where its table breaks it), every value in the reading face, a table of
+mathematics unscrolled from 768px up with its number at its frame's top-left, every row
+that presents a display showing its number, every inline
 formula of the text and tables on its line's baseline and unclipped, every displayed
 equation to one starting axis, every equation number to the column's right edge, the
 fade of every scrolling display over ink at rest, every display row to one formula, and
