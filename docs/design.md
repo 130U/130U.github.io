@@ -504,8 +504,12 @@ does. Labels that hang beside its last marks keep their room inside it. A title 
 alone on its line, its hyphenated compounds held whole, with any view switch beneath it
 as one segmented control across the head's width: its segments share the width evenly
 while each keeps its label's width, and where the labels cannot share one row they
-stack, four in two columns and three in one. Every view of a figure keeps the tallest
-view's height, so switching views never moves the page.
+stack, four in two columns and three in one. Views whose heights differ by no more than
+15% or 60px share the tallest one's height, so the page beneath never moves for a near
+match; views further apart keep their own heights rather than show blank paper, and the
+frame eases to the shown view's height in 150ms (at once under reduced motion) below the
+switch, which stays where it was pressed. The browser layout check fails any view that
+leaves more than 60px and 15% of its height blank beneath its content.
 
 The legal articles' diagrams draw their connectors and arrowheads in the logic
 diagram's one tone, and their plots hold every label's text at least 4px clear of every

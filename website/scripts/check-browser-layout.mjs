@@ -306,6 +306,14 @@ function inspectFigure(figure) {
     const inherited = getComputedStyle(mark.parentElement).color;
     if (tone && rendered !== toneText[tone] && rendered === inherited) issues.push({ kind: "label-ignores-its-tone", text: mark.textContent.replace(/\s+/gu, " ").trim().slice(0, 60), tone, rendered, expected: toneText[tone] });
   }
+  // A view leaves no more blank paper beneath its content than 60px and 15% of
+  // its height together: views that far apart keep their own heights.
+  for (const panel of [...frame.querySelectorAll(":scope > [data-fig-panel]")].filter(element => !element.hidden && element.children.length)) {
+    const box = rect(panel);
+    const content = Math.max(...[...panel.children].filter(shown).map(child => rect(child).bottom + parseFloat(getComputedStyle(child).marginBottom)));
+    const blank = box.bottom - content;
+    if (Number.isFinite(blank) && blank > 60 && blank > 0.15 * box.height) issues.push({ kind: "view-blank", blank: Math.round(blank), height: Math.round(box.height) });
+  }
   // A legend keys what the figure draws: each swatch has a visible mark of its
   // form in its colour, and a figure that names none of its marks beside them
   // keys every kind of dot it draws.

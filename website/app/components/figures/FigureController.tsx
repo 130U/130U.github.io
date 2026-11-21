@@ -45,10 +45,34 @@ export function enhanceFigure(figure: HTMLElement): () => void {
   if (switcher) {
     switcher.hidden = false;
     const buttons = [...switcher.querySelectorAll<HTMLButtonElement>("[data-fig-view]")];
+    // Whether the views share one height (see settle below).
+    let shared = true;
+    const reduced = window.matchMedia("(prefers-reduced-motion: reduce)");
     const show = (view: string) => {
+      const pressedAt = switcher.getBoundingClientRect().top;
+      const before = frame.offsetHeight;
       figure.dataset.view = view;
       for (const button of buttons) button.setAttribute("aria-pressed", String(button.dataset.figView === view));
       for (const panel of figure.querySelectorAll<HTMLElement>("[data-fig-panel]")) panel.hidden = panel.dataset.figPanel !== view;
+      // The switch stays where it was pressed: the change happens below it, and
+      // a scroll anchor further down may not carry the page with it.
+      const moved = switcher.getBoundingClientRect().top - pressedAt;
+      if (Math.abs(moved) > 0.5 && !figure.closest("dialog")) window.scrollBy(0, moved);
+      // A frame that follows its view eases to the new height.
+      const after = frame.offsetHeight;
+      if (shared || reduced.matches || after === before) return;
+      const done = () => {
+        frame.style.removeProperty("height");
+        frame.style.removeProperty("overflow");
+        frame.style.removeProperty("transition");
+      };
+      frame.style.height = `${before}px`;
+      frame.style.overflow = "clip";
+      void frame.offsetHeight;
+      frame.style.transition = "height 150ms ease";
+      frame.style.height = `${after}px`;
+      frame.addEventListener("transitionend", done, { once: true });
+      window.setTimeout(done, 250);
     };
     for (const button of buttons) listen(button, "click", () => show(button.dataset.figView!));
     // The segments share one row while every label fits on it; otherwise they
@@ -62,8 +86,9 @@ export function enhanceFigure(figure: HTMLElement): () => void {
       delete switcher.dataset.stack;
       if (switcher.scrollWidth > switcher.clientWidth + 1) switcher.dataset.stack = "";
     };
-    // Every view keeps the height of the tallest, so switching views never
-    // moves the caption or the page beneath the figure.
+    // Views within 15% or 60px of one height share the tallest one's, so the
+    // page beneath never moves for a near match; views further apart keep
+    // their own heights rather than show blank paper, and the frame follows.
     const panels = [...frame.querySelectorAll<HTMLElement>(":scope > [data-fig-panel]")];
     let settledWidth = -1;
     const settle = () => {
@@ -77,7 +102,10 @@ export function enhanceFigure(figure: HTMLElement): () => void {
         panel.hidden = hidden;
         return height;
       });
-      for (const panel of panels) panel.style.minHeight = `${Math.max(...heights)}px`;
+      const tallest = Math.max(...heights);
+      const spread = tallest - Math.min(...heights);
+      shared = spread <= 60 || spread <= 0.15 * tallest;
+      if (shared) for (const panel of panels) panel.style.minHeight = `${tallest}px`;
     };
     fit();
     settle();
