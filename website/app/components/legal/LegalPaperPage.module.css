@@ -13,6 +13,11 @@
   font-weight: 600;
 }
 
+/* A table's title is set at the weight of a figure's title, bold runs and all. */
+.paper [data-table-title] strong {
+  font-weight: inherit;
+}
+
 .header {
   margin-bottom: 5rem;
 }
@@ -99,14 +104,21 @@
 
 .abstract p,
 .manuscriptAbstract p,
-.body p,
 .footnotes p {
+  margin: 0;
+}
+
+/* The body sets its own paragraphs apart. A figure's paragraphs (a readout, a
+   panel title, a bracket note) keep the spacing their classes give them: the
+   reset below takes no specificity, and the spacing reaches direct children
+   only. */
+:where(.body) p {
   margin: 0;
 }
 
 .abstract p + p,
 .manuscriptAbstract > p + p,
-.body p + p {
+.body > p + p {
   margin-top: 1.5rem;
 }
 
@@ -226,17 +238,39 @@
   letter-spacing: 0.025em;
 }
 
+/* A note reference stands close after the word or punctuation it annotates,
+   as in a printed law review, and never opens a line: the anchor stays inline,
+   and its target is widened by a box that takes no room in the line. */
 .reference {
-  margin-left: 0.12em;
+  margin-left: 0.1em;
   font-size: 0.75em;
   line-height: 0;
   vertical-align: super;
+  white-space: nowrap;
 }
 
 .reference a {
-  padding: 0.2em;
+  position: relative;
   color: var(--accent);
   text-decoration: none;
+}
+
+.reference a::after {
+  position: absolute;
+  top: 50%;
+  right: -0.4em;
+  left: -0.4em;
+  height: 1.25rem;
+  content: "";
+  transform: translateY(-50%);
+}
+
+/* The author credit's asterisk is set at the byline's size on its baseline,
+   where the face already raises it. */
+.manuscriptByline .reference {
+  margin-left: 0.04em;
+  font-size: 1em;
+  vertical-align: baseline;
 }
 
 .paper a[id] {
@@ -255,26 +289,50 @@
   scroll-margin-top: 6rem;
 }
 
+/* The author note and the numbered notes run at one interval. */
 .footnotes ol {
-  margin: 1.75rem 0 0;
+  margin: 0;
   padding: 0;
   list-style: none;
 }
 
 /* A note's number stands whole in a column wide enough for three figures,
-   right-aligned in tabular figures as in a printed list of notes, so the text
-   keeps the same gap from every number. */
+   right-aligned in tabular figures as in a printed list of notes and on the
+   baseline of the note's first line, so the text keeps the same gap from
+   every number. */
 .footnotes li,
 .authorNote {
   display: grid;
   grid-template-columns: 1.75rem minmax(0, 1fr);
+  align-items: baseline;
   padding: 0.875rem 0;
   gap: 0.5rem;
   scroll-margin-top: 6rem;
 }
 
+/* The note a reader arrives at (View in Footnotes, or a reference followed
+   without the preview) takes the accent on its number and a tint that fades. */
+.footnotes :is(li, .authorNote):target .noteNumber {
+  color: var(--accent);
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .footnotes :is(li, .authorNote):target {
+    animation: note-arrival 1.6s var(--ease-out);
+  }
+}
+
+@keyframes note-arrival {
+  from {
+    background-color: var(--chart-tint-strong);
+  }
+
+  to {
+    background-color: transparent;
+  }
+}
+
 .noteNumber {
-  padding-top: 0.25rem;
   color: var(--muted);
   font-size: var(--type-label);
   line-height: var(--label-leading);
@@ -366,6 +424,26 @@
       display: none;
     }
 
+    /* The rail has no scrollbar, so where its list runs past an edge the
+       entries fade there, as a wide table fades at its edge; the top rule
+       stays whole. ArticleContents marks the clipped edges. */
+    .contents[data-clipped-top],
+    .contents[data-clipped-bottom] {
+      --contents-top-fade: #000;
+      --contents-bottom-fade: #000;
+
+      -webkit-mask-image: linear-gradient(to bottom, #000 1px, var(--contents-top-fade) 1px, #000 calc(1px + 2rem), #000 calc(100% - 2.5rem), var(--contents-bottom-fade));
+      mask-image: linear-gradient(to bottom, #000 1px, var(--contents-top-fade) 1px, #000 calc(1px + 2rem), #000 calc(100% - 2.5rem), var(--contents-bottom-fade));
+    }
+
+    .contents[data-clipped-top] {
+      --contents-top-fade: transparent;
+    }
+
+    .contents[data-clipped-bottom] {
+      --contents-bottom-fade: transparent;
+    }
+
     .contents[data-enhanced="true"] .subsectionLink:not([data-open-chapter]) {
       display: none;
     }
@@ -410,22 +488,11 @@
 }
 
 @media (pointer: coarse) {
-  .reference a {
-    position: relative;
-    display: inline-block;
-    min-width: 1.5rem;
-    padding: 0;
-    text-align: center;
-  }
-
+  /* A finger's target is 24px square around a one-figure number. */
   .reference a::after {
-    position: absolute;
-    top: 50%;
-    right: 0;
-    left: 0;
+    right: -0.75em;
+    left: -0.75em;
     height: 1.5rem;
-    content: "";
-    transform: translateY(-50%);
   }
 
   .contents a,

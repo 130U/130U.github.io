@@ -3,6 +3,7 @@ import data from "../../../content/selected-research/certified-valuation-of-arit
 import { cubicLaw, kinkBoundPerStrike } from "../../lib/content/asian-kink-bound";
 import type { ManuscriptFigureProps } from "./dependence-manuscript";
 import { Dot, Figure, Mark, Plot, fixed, grouped, linear, logarithmic, path, styles as kit, type Crosshair } from "./kit";
+import results from "./Results.module.css";
 import styles from "./Figures.module.css";
 
 /* The four figures of "Certified Valuation of Arithmetic Asian Options", drawn
@@ -47,10 +48,9 @@ function DisagreementFigure({ manuscript, caption }: ManuscriptFigureProps) {
       caption={caption}
       manuscript={manuscript}
       legend={[
-        { label: "Proxy says no, option in the money: forgo $A-K$", tone: "accent", shape: "dot" },
-        { label: "Proxy says yes, option out of the money: lose $K-A$", tone: "ink", shape: "dot" },
+        { label: "Forgoes $A-K$", tone: "accent", shape: "dot" },
+        { label: "Pays $K-A$", tone: "ink", shape: "dot" },
         { label: "Both rules agree", tone: "steel", shape: "dot" },
-        { label: "The strike separates $cG$ from $A$", tone: "accent", shape: "tint" },
       ]}
     >
       <Plot
@@ -128,28 +128,25 @@ function CubicLawFigure({ manuscript, caption }: ManuscriptFigureProps) {
     heading: LEAD_DAYS.map(leadName),
     series: curves.map((curve) => ({ name: curve.name, tone: curve.tone, y: curve.bound.map((value) => y(value)), value: curve.bound.map((value) => scientific(value)) })),
   };
+  // Each averaging window is named at the end of its curve; the caption keys
+  // the dotted leading terms, the markers and the dashed one-cent level.
   return (
     <Figure
       id="asian-cubic-law"
       caption={caption}
       manuscript={manuscript}
-      legend={[
-        ...WINDOWS.map((window) => ({ label: window.name, tone: window.tone, shape: "line" as const })),
-        { label: "Leading term (4.4)", tone: "ink", shape: "dotted" },
-        { label: "Crude oil options of Table 1", tone: "accent", shape: "dot" },
-        { label: "One cent on a 70-dollar barrel", tone: "steel", shape: "dash" },
-      ]}
     >
       <Plot
         label="The bound on the cost of the kink per unit of strike in Black's model at 35 percent volatility, against the time before the first fixing from one day to 24 months, on logarithmic scales, for averaging windows of one month, one quarter and one year. Each curve falls with the square root of the lead time and lies close to its leading term. The one-month curve passes through the four crude oil options of Table 1, two orders of magnitude below one cent on a 70-dollar barrel; the one-year curve crosses that level."
         x={x}
         y={y}
         height="clamp(270px, 60cqi, 350px)"
+        inset={{ right: 84 }}
         xTicks={[
           { at: months(1), label: "1 day", edge: "start" },
           { at: months(5), label: "1 week" },
           ...[1, 3, 6, 12].map((at) => ({ at, label: String(at) })),
-          { at: 24, label: "24", edge: "end" },
+          { at: 24, label: "24" },
         ]}
         yTicks={powerTicks(-6, -3)}
         yTitle="Bound per unit of strike"
@@ -170,6 +167,11 @@ function CubicLawFigure({ manuscript, caption }: ManuscriptFigureProps) {
             className={kit.fade}
             tip={`Crude oil call, ${call.months} ${call.months === 1 ? "month" : "months"} ahead\nBound ${call.bound} on a strike of ${OIL_STRIKE}`}
           />
+        ))}
+        {curves.map((curve) => (
+          <Mark key={`name-${curve.fixings}`} left={x(months(LEAD_DAYS[LEAD_DAYS.length - 1]))} top={100 - y(curve.bound[curve.bound.length - 1])} anchor="left" tone={curve.tone} wrap style={{ maxWidth: "76px" }}>
+            {curve.name.split(",")[0]}
+          </Mark>
         ))}
       </Plot>
     </Figure>
@@ -208,24 +210,24 @@ function ProfileFigure({ manuscript, caption }: ManuscriptFigureProps) {
       { name: "Cost of the kink", tone: "accent", y: read.map(([strike, value]) => y(value / strike)), value: read.map(([strike, value]) => scientific(value / strike)) },
     ],
   };
+  // The caption keys the shaded area, the dotted curve and the upper curve;
+  // the legend names the one curve it leaves.
   return (
     <Figure
       id="asian-profile"
       caption={caption}
       manuscript={manuscript}
-      legend={[
-        { label: "Cost of the kink, $R_c(K)/K$", tone: "accent", shape: "line" },
-        { label: "Second-order term of (3.8)", tone: "ink", shape: "dotted" },
-        { label: "Theorem 3.3, the smaller of its two bounds", tone: "ink", shape: "line" },
-        { label: "Conservation law (3.4)", tone: "accent", shape: "tint" },
-      ]}
+      legend={[{ label: "Cost of the kink, $R_c(K)/K$", tone: "accent", shape: "line" }]}
     >
       <Plot
         label="The cost of the kink per unit of strike across strikes from 55 to 190, on logarithmic scales, for the twelve-fixing Heston contract. The cost peaks near strike 77 and falls steeply above 140; the second-order term follows it closely; the smaller of the two bounds of Theorem 3.3 lies above both at every strike. Dashed rules mark the strikes 95 and 110 of the spread."
         x={x}
         y={y}
         height="clamp(270px, 60cqi, 350px)"
-        xTicks={[60, 80, 95, 110, 140, 180].map((at) => ({ at, label: String(at), minor: at === 80 || at === 140 }))}
+        // The spread's strikes are drawn as dashed rules, which stand in for
+        // their grid lines; their labels splay away from each other, ending and
+        // starting on their rules, so the pair never reads as one number.
+        xTicks={[60, 80, 95, 110, 140, 180].map((at) => ({ at, label: String(at), minor: at === 80 || at === 140, grid: at !== 95 && at !== 110, edge: at === 95 ? "end" as const : at === 110 ? "start" as const : undefined }))}
         yTicks={powerTicks(-9, -4)}
         yTitle="Per unit of strike"
         xTitle="Strike $K$, logarithmic scale"
@@ -259,17 +261,22 @@ function EulerLadderFigure({ manuscript, caption }: ManuscriptFigureProps) {
   const x = logarithmic(9, 33000);
   const y = logarithmic(3e-8, 5e-2);
   const [first, last] = [rungs[0][0], rungs[rungs.length - 1][0]];
+  const highestBound = Math.max(...PROVED_GAP.map(({ bound }) => Number(bound)));
+  const [firstKink] = kink;
+  // Squares and triangles are named in open space, each on one line: the
+  // squares above all three, in the empty band over 10⁻², and the triangles to
+  // the left of the first, where the plot is empty. A figure too narrow for
+  // that leaves the triangles to the caption, which keys them. The legend keys
+  // the two kinds of circle and the dashed first-order line.
   return (
     <Figure
       id="asian-euler-ladder"
       caption={caption}
       manuscript={manuscript}
       legend={[
-        { label: "Bias of the proxy value, sign reversed", tone: "accent", shape: "ring" },
-        { label: "The same, from the certified finite sums", tone: "accent", shape: "dot" },
-        { label: "Proved bound on the Euler gap of the option", tone: "ink", shape: "square" },
-        { label: "Simulated change in the cost of the kink", tone: "steel", shape: "triangle" },
-        { label: "First-order term of (6.4), $0.15563\\,h$", tone: "steel", shape: "dash" },
+        { label: "Proxy-value bias, sign reversed", tone: "accent", shape: "ring" },
+        { label: "The same, certified finite sums", tone: "accent", shape: "dot" },
+        { label: <>First-order term of <span className={results.legendNumber}>(6.4)</span></>, tone: "steel", shape: "dash" },
       ]}
     >
       <Plot
@@ -316,6 +323,8 @@ function EulerLadderFigure({ manuscript, caption }: ManuscriptFigureProps) {
             tip={`${grouped(steps)} steps per year\nProved bound on the Euler gap ${bound}`}
           />
         ))}
+        <Mark left={x(PROVED_GAP[1].steps)} top={100 - y(highestBound)} anchor="bottom" className={kit.fade}>Proved Euler-gap bound</Mark>
+        <Mark left={x(firstKink[0])} top={100 - y(Math.abs(firstKink[1]) + 2 * firstKink[2])} anchor="right" tone="steel" className={`${kit.fade} ${styles.kinkLabel}`}>Simulated kink change</Mark>
       </Plot>
     </Figure>
   );

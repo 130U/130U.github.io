@@ -1,5 +1,5 @@
 import type { CSSProperties } from "react";
-import { Dot, Figure, Mark, Panel, Plot, linear, path, sample, styles as kit } from "./kit";
+import { Dot, Figure, Legend, Mark, Panel, Plot, linear, path, sample, styles as kit } from "./kit";
 import styles from "./Figures.module.css";
 
 /* ---------- Autonomous authority in space ---------- */
@@ -7,28 +7,27 @@ import styles from "./Figures.module.css";
 function RiskTaxonomy() {
   const cells = [
     { title: "Offset", text: "The same type of harm to the same population", example: "Automation trades loss of a spacecraft through delayed response for loss of the same spacecraft through an erroneous command." },
-    { title: "Transfer", text: "Changes the population", example: "An avoidance maneuver protects one spacecraft and raises collision exposure for a neighboring satellite's owner and users." },
+    { title: "Transfer", text: "Changes the population", example: "An avoidance maneuver moves collision exposure onto a neighboring satellite's owner and users." },
     { title: "Substitution", text: "Changes the harm" },
     { title: "Transformation", text: "Changes both the harm and the population" },
   ];
+  const columns = ["Same population", "Different population"];
   return (
     <Figure
       id="risk-taxonomy"
       title="Four kinds of countervailing risk"
       caption="A countervailing effect is classified against the target harm and the population that bears it, so whether an effect counts as a transfer depends on where the analysis draws the population boundary."
     >
-      <div className={kit.scrollViewport} data-figure-scroll role="region" tabIndex={0} aria-label="Risk-risk taxonomy, scroll horizontally to compare">
       <div className={styles.matrix} role="table" aria-label="Risk-risk taxonomy">
         <div role="row" style={{ display: "contents" }}>
-          <span className={styles.axisCell} role="columnheader" />
-          <span className={styles.axisCell} role="columnheader">Same population</span>
-          <span className={styles.axisCell} role="columnheader">Different population</span>
+          <span className={`${styles.axisCell} ${styles.matrixCorner}`} role="columnheader" />
+          {columns.map((column) => <span key={column} className={`${styles.axisCell} ${styles.columnHead}`} role="columnheader">{column}</span>)}
         </div>
         {[["Same harm", cells[0], cells[1]], ["Different harm", cells[2], cells[3]]].map(([label, ...row]) => (
           <div key={label as string} role="row" style={{ display: "contents" }}>
             <span className={`${styles.axisCell} ${styles.rowHead}`} role="rowheader">{label as string}</span>
-            {(row as typeof cells).map((cell) => (
-              <span key={cell.title} className={styles.cell} role="cell" data-tone={cell.example ? "accent" : undefined}>
+            {(row as typeof cells).map((cell, column) => (
+              <span key={cell.title} className={styles.cell} role="cell" data-tone={cell.example ? "accent" : undefined} data-column={columns[column]}>
                 <span className={styles.cellTitle}>{cell.title}</span>
                 <span className={styles.cellText}>{cell.text}</span>
                 {cell.example && <span className={styles.cellExample}>{cell.example}</span>}
@@ -37,22 +36,21 @@ function RiskTaxonomy() {
           </div>
         ))}
       </div>
-      </div>
     </Figure>
   );
 }
 
 function TwoThresholds() {
   const steps = [
-    { index: "01", title: "Authority", text: "Does the actor have authority to undertake the activity and impose the relevant exposure?", branch: "No", outcome: "Not authorized. Evidence for delegation cannot substitute for authority.", next: "Yes" },
-    { index: "02", title: "Evidence", text: "Does the evidence justify delegating this class of action under these conditions?", branch: "No", outcome: "Do not delegate this class of action.", next: "Yes" },
-    { index: "03", title: "Review", text: "Can individual review still change the outcome, credibly and in time?", branch: "Yes", outcome: "Require individual review.", next: "No" },
+    { index: "01", title: "Authority", text: "Is the actor authorized to act and impose the exposure?", branch: "No", outcome: "Not authorized", next: "Yes" },
+    { index: "02", title: "Evidence", text: "Does the evidence justify delegating this class of action?", branch: "No", outcome: "Do not delegate", next: "Yes" },
+    { index: "03", title: "Review", text: "Can individual review still change the outcome, credibly and in time?", branch: "Yes", outcome: "Require individual review", next: "No" },
   ];
   return (
     <Figure
       id="two-thresholds"
       title="The two-threshold decision procedure"
-      caption="Authority and evidence are separate gates, taken in order. Where both are met, individual review is required only where it can still protect; where it cannot, the choice is among three bounded alternatives, and lack of time is never by itself a reason for unrestricted autonomy."
+      caption="Authority and evidence are separate gates, taken in order: evidence for delegation cannot substitute for authority. Where review cannot protect in time, the choice is among three bounded alternatives."
     >
       <div className={styles.flow} role="group" aria-label="Decision procedure">
         <span className={styles.flowHead}>Question</span>
@@ -70,12 +68,12 @@ function TwoThresholds() {
             <span className={styles.flowDown}><span>{step.next}</span></span>
           </div>
         ))}
-        <div className={`${kit.node} ${styles.flowStep}`}>
+        <div className={`${kit.node} ${styles.flowStep}`} data-choice="">
           <span className={styles.stepIndex} aria-hidden="true">04</span>
           <span className={kit.nodeTitle}>Review cannot protect in time</span>
           <span className={kit.nodeText}>Choose one bounded alternative.</span>
         </div>
-        <span className={styles.flowArrow}><span>Choose</span></span>
+        <span className={styles.flowArrow} data-choice=""><span>Choose</span></span>
         <div className={`${styles.flowOut} ${styles.options}`}>
           <span>Advance-constrained action</span>
           <span>A justified fallback</span>
@@ -99,18 +97,18 @@ function CollisionSequence() {
   return (
     <Figure
       id="collision-sequence"
-      title="Collision avoidance is a sequence, and prediction is one part of it"
-      caption="The ESA challenge predicted the risk estimate in the final conjunction data message, another estimate rather than observed collisions or harm avoided. Strong forecasting supports the early steps; selecting and executing maneuvers among several operators needs its own policy-level assurance case."
+      title="Where prediction sits in collision avoidance"
+      caption="The ESA challenge predicted the risk estimate in the final conjunction data message, another estimate rather than observed harm avoided. Choosing and executing maneuvers among several operators needs its own policy-level assurance case."
     >
       <div className={styles.sequence} role="group" aria-label="Operational sequence of collision avoidance">
         {steps.map((step, index) => (
           <div key={step} className={`${kit.node} ${styles.sequenceStep}`} data-tone={index === 1 || index === 2 ? "accent" : undefined} style={{ gridRow: index + 1 }}>
             <span className={styles.stepIndex} aria-hidden="true">{String(index + 1).padStart(2, "0")}</span>
-            {step}
+            <span>{step}</span>
           </div>
         ))}
-        <p className={styles.sequenceNote} data-tone="accent" style={{ gridRow: "2 / span 2" }}>{"Forecasting: where the ESA challenge's predictors operate"}</p>
-        <p className={styles.sequenceNote} style={{ gridRow: "4 / span 4" }}>Maneuver policy: requires assurance beyond prediction performance</p>
+        <p className={styles.sequenceNote} data-tone="accent" style={{ gridRow: "2 / span 2" }}>Forecasting: the ESA challenge</p>
+        <p className={styles.sequenceNote} style={{ gridRow: "4 / span 4" }}>Maneuver policy: assurance beyond prediction</p>
       </div>
     </Figure>
   );
@@ -119,14 +117,15 @@ function CollisionSequence() {
 /* ---------- Small states ---------- */
 
 function StateCases() {
+  // Each case's question stands in the text just above the figure, so the
+  // comparison carries what it adds: the decision tested and the remedy.
   const cases = [
-    { key: "nz", name: "New Zealand", decision: "Permission", question: "Can the state apply its own assessment to an externally connected activity?", remedy: "Usable standards and supervisory information" },
-    { key: "no", name: "Norway", decision: "Operation", question: "Can cooperation deliver a function under specified national control?", remedy: "Clarity about interruption and recovery" },
-    { key: "lu", name: "Luxembourg", decision: "Informed commitment", question: "Can public institutions understand and govern what they have authorized?", remedy: "Credible requirements and financial scrutiny" },
+    { key: "nz", name: "New Zealand", decision: "Permission", remedy: "Usable standards and supervisory information" },
+    { key: "no", name: "Norway", decision: "Operation", remedy: "Clarity about interruption and recovery" },
+    { key: "lu", name: "Luxembourg", decision: "Informed commitment", remedy: "Credible requirements and financial scrutiny" },
   ];
   const rows = [
     { label: "Decision tested", field: "decision" as const, strong: true },
-    { label: "Question", field: "question" as const },
     { label: "Remedy it calls for", field: "remedy" as const },
   ];
   const order = (column: number, row: number) => ({ "--order": column * 10 + row } as CSSProperties);
@@ -189,11 +188,14 @@ function ExitPaths() {
   const sustained: Array<[number, number]> = [[0.02, 0], [0.24, 1], [decision, 1]];
   const taper: Array<[number, number]> = [[decision, 1], [0.97, 0]];
   const stop: Array<[number, number]> = [[decision, 1], [decision + 0.004, 0]];
+  // The tapering pathway is named above the middle of its falling line: on one
+  // line where the plot is wide, on two in a phone's.
+  const taperLabel = 0.7;
   return (
     <Figure
       id="exit-paths"
       title="Separating the decision to stop from the act of stopping"
-      caption="A severe termination shock needs substantial cooling, sudden cessation and a prolonged interruption. Treating program control, operation and the physical trajectory as separate decisions lets authority change without making abrupt cessation the price of dissent."
+      caption="Treating program control, operation and the physical trajectory as separate decisions lets authority change without making abrupt cessation the price of dissent."
     >
       <Plot
         label="Injection intensity rises and holds; when authorization expires, an automatic stop would drop it at once, while a tapering pathway lowers it gradually."
@@ -211,9 +213,9 @@ function ExitPaths() {
         </>}
       >
         <Dot left={x(decision)} top={100 - y(1)} tone="ink" />
-        <Mark left={x(decision)} top={100 - y(1)} anchor="bottom-left" wrap className={kit.muted}>Authorization expires or support is withdrawn</Mark>
-        <Mark left={x(decision)} top={100 - y(0.2)} anchor="right" tone="steel" className={kit.fade}>Abrupt cessation</Mark>
-        <Mark left={100} top={100 - y(0.8)} anchor="right" tone="accent" wrap className={`${kit.fade} ${styles.alignEnd}`} style={{ maxWidth: "4.5rem" }}>Tapering pathway</Mark>
+        <Mark left={x(decision)} top={100 - y(1)} anchor="bottom-left" wrap className={`${kit.muted} ${styles.decisionLabel}`}>Authorization expires or support is withdrawn</Mark>
+        <Mark left={x(decision)} top={100 - y(0.2)} anchor="right" tone="steel" knockout={false} className={`${kit.fade} ${styles.cessationLabel}`}>Abrupt cessation</Mark>
+        <Mark left={x(taperLabel)} top={100 - y(1 - (taperLabel - decision) / (0.97 - decision))} anchor="above-right" tone="accent" wrap knockout={false} className={kit.fade}>Tapering pathway</Mark>
       </Plot>
       <dl className={styles.lanes} aria-label="Three separate decisions">
         <dt>Program control</dt><dd>Political authority can change.</dd>
@@ -245,7 +247,7 @@ function EvidentiaryChain() {
       id="evidentiary-chain"
       title="From legal duty to durable function"
       caption="Each observation supports a different link, so aerial photographs of canopy expansion cannot establish the whole chain. The counterfactual also changes with the claim being tested."
-      views={[{ id: "chain", label: "Evidentiary Chain" }, { id: "counterfactual", label: "Counterfactual by Claim" }]}
+      views={[{ id: "chain", label: "Chain" }, { id: "counterfactual", label: "Counterfactuals" }]}
       viewsLabel="Show the evidentiary chain or the counterfactuals"
     >
       <Panel view="chain" active>
@@ -255,7 +257,7 @@ function EvidentiaryChain() {
             <li key={link.title}>
               <span className={`${kit.node} ${styles.ladderNode}`}>
                 <span className={styles.stepIndex} aria-hidden="true">{String(index + 1).padStart(2, "0")}</span>
-                {link.title}
+                <span>{link.title}</span>
               </span>
               <span className={styles.ladderExample}>{link.example ?? ""}</span>
             </li>
@@ -287,7 +289,7 @@ function DeepBay() {
     <Figure
       id="deep-bay"
       title="Deep Bay: canopy gained, mudflat lost"
-      caption="Mangrove cover rose from 8 to 15 percent of the mapped area and mudflat fell from 56 to 43 percent; twelve of 42 wintering waterbird species declined significantly. Added canopy cannot stand in for the performance of the whole wetland mosaic."
+      caption="Mangrove canopy grew while mudflat shrank, and twelve of 42 wintering waterbird species declined significantly. Added canopy cannot stand in for the performance of the whole wetland mosaic."
     >
       <div className={styles.panels}>
         <div>
@@ -297,7 +299,7 @@ function DeepBay() {
             x={x}
             y={y}
             height="200px"
-            inset={{ top: 10, right: 92, bottom: 30, left: 92 }}
+            inset={{ top: 10, right: 44, bottom: 30, left: 96 }}
             xTicks={[{ at: 0, label: "2000", solid: true }, { at: 1, label: "2018", solid: true }]}
             curves={series.map((item) => <path key={item.name} className={kit[item.tone]} d={path([[0, item.from], [1, item.to]], x, y)} />)}
           >
@@ -317,9 +319,9 @@ function DeepBay() {
             {species.map((kind, index) => <span key={index} className={kind === "declined" ? kit.ink : kind === "increased" ? kit.accent : undefined} data-ring={kind === "other" ? "" : undefined} />)}
           </div>
           <ul className={`${kit.legend} ${styles.waffleLegend}`} aria-hidden="true">
-            <li><span className={`${kit.swatch} ${kit.ink}`} />Declined significantly, 12</li>
-            <li><span className={`${kit.swatch} ${kit.accent}`} />Increased, 9</li>
-            <li><span className={`${kit.swatch} ${kit.mist}`} data-shape="box" />Remaining, 21</li>
+            <li><span className={`${kit.swatch} ${styles.waffleKey} ${kit.ink}`} />Declined significantly, 12</li>
+            <li><span className={`${kit.swatch} ${styles.waffleKey} ${kit.accent}`} />Increased, 9</li>
+            <li><span className={`${kit.swatch} ${styles.waffleKey}`} data-ring="" />Remaining, 21</li>
           </ul>
         </div>
       </div>
@@ -340,15 +342,14 @@ function SanTinLoss() {
     <Figure
       id="san-tin-loss"
       title="Construction is a milestone; replacement function is an outcome"
-      caption="Condition 9 ties pond filling to the start of construction of ecologically enhanced fishponds, which shows that work has begun, not that replacement functions operate. The shaded interval is the period of loss the compensation package must address, with measures ready if enhancement falls behind."
-      legend={[{ label: "Existing wetland function", tone: "ink", shape: "line" }, { label: "Expected replacement function", tone: "accent", shape: "line" }, { label: "Enhancement falls behind", tone: "steel", shape: "dash" }, { label: "Period of loss", tone: "accent", shape: "square" }]}
+      caption="Condition 9 ties pond filling to the start of construction, which shows that work has begun, not that replacement functions operate. The shaded interval is the loss the compensation package must address."
     >
       <Plot
         label="Existing wetland function ends at pond filling, while replacement function rises only gradually afterwards; the gap between them is the period of loss."
         x={x}
         y={y}
         height="clamp(220px, 50cqi, 280px)"
-        inset={{ left: 14, top: 36 }}
+        inset={{ left: 14, top: 36, bottom: 46 }}
         yTicks={[{ at: 0, label: "", solid: true }]}
         yTitle="Wetland function"
         xTitle="Time"
@@ -363,8 +364,9 @@ function SanTinLoss() {
         <span className={styles.vline} style={{ left: `${x(filling)}%` }} />
         <Mark left={x(0.1)} top={4} anchor="center" tag className={kit.muted}>1</Mark>
         <Mark left={x(filling)} top={4} anchor="center" tag className={kit.muted}>9</Mark>
-        <Mark left={x(0.6)} top={100 - y(0.86)} anchor="center" tone="accent" className={kit.fade}>Period of loss</Mark>
+        <Mark left={x(filling)} top={100 - y(1)} anchor="bottom-left" tone="accent" knockout={false} className={`${kit.fade} ${styles.lossLabel}`}>Period of loss</Mark>
       </Plot>
+      <Legend items={[{ label: "Existing wetland function", tone: "ink", shape: "line" }, { label: "Expected replacement function", tone: "accent", shape: "line" }, { label: "Enhancement falls behind", tone: "steel", shape: "dash" }]} />
       <dl className={styles.lanes} aria-label="Approval conditions">
         <dt>Condition 1</dt><dd>Habitat Creation and Management Plan submitted for approval at least nine months before pond filling.</dd>
         <dt>Condition 9</dt><dd>Pond filling linked to the start of construction of ecologically enhanced fishponds.</dd>

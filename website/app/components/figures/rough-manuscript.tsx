@@ -69,7 +69,7 @@ function ResidualKernelFigure({ manuscript, caption }: ManuscriptFigureProps) {
 const POSITIONS = [
   { name: "Call spread 4400/4500", tone: "ink", weights: position({ 4400: 1, 4500: -1 }) },
   { name: "Butterfly 4300/4400/4500", tone: "accent", weights: position({ 4300: 1, 4400: -2, 4500: 1 }) },
-  { name: "Equal-weight basket, twelve strikes", tone: "sky", weights: ROUGH_HESTON.strikes.map(() => 1 / 12) },
+  { name: "Equal-weight basket", tone: "sky", weights: ROUGH_HESTON.strikes.map(() => 1 / 12) },
 ] as const;
 const TOP_FREQUENCY = 128;
 const BAND = 4;
@@ -90,6 +90,8 @@ function NettingRatioFigure({ manuscript, caption }: ManuscriptFigureProps) {
       { name: `Node charge, band of ${BAND} from u`, tone: "steel" as const, y: read.map((u) => y(shareAt(u))), value: read.map((u) => `${(100 * shareAt(u)).toFixed(1)}%`) },
     ],
   };
+  // The caption keys the shaded profile; the legend names the three positions
+  // and places their Herfindahl levels.
   return (
     <Figure
       id="rough-netting-ratio"
@@ -97,8 +99,7 @@ function NettingRatioFigure({ manuscript, caption }: ManuscriptFigureProps) {
       manuscript={manuscript}
       legend={[
         ...POSITIONS.map((item) => ({ label: item.name, tone: item.tone, shape: "line" as const })),
-        { label: "Herfindahl level of each position, at the right edge", tone: "ink", shape: "square" },
-        { label: "Share of the leg-by-leg node charge by band of four, on the same scale", tone: "accent", shape: "tint" },
+        { label: "Herfindahl levels, at the right edge", tone: "ink", shape: "thick" },
       ]}
     >
       <Plot
@@ -164,12 +165,12 @@ function JointErrorSetFigure({ manuscript, caption }: ManuscriptFigureProps) {
         <dl className={styles.bounds}>
           <div>
             <dt><span className={`${kit.swatch} ${kit.accent}`} data-shape="line" />Joint support of the spread</dt>
-            <dd data-tone="accent"><Tx>{"$0.045461793$ index points"}</Tx></dd>
+            <dd data-tone="accent"><Tx>{"0.045461793 index points"}</Tx></dd>
             <dd>The width of the joint set in the direction of the spread.</dd>
           </div>
           <div>
             <dt><span className={`${kit.swatch} ${kit.ink}`} data-shape="dash" />Leg-by-leg support</dt>
-            <dd><Tx>{"$0.064536890$ index points"}</Tx></dd>
+            <dd><Tx>{"0.064536890 index points"}</Tx></dd>
             <dd>The width of the bounding box in the same direction.</dd>
           </div>
         </dl>
@@ -202,7 +203,6 @@ function PassCountsFigure({ manuscript, caption }: ManuscriptFigureProps) {
       legend={[
         { label: "Joint", tone: "accent", shape: "line" },
         { label: "Leg by leg", tone: "ink", shape: "line" },
-        { label: "Gain from netting", tone: "accent", shape: "tint" },
       ]}
     >
       <div className={styles.stack}>
@@ -229,7 +229,7 @@ function PassCountsFigure({ manuscript, caption }: ManuscriptFigureProps) {
                 y={y}
                 height={first || last ? "clamp(200px, 40cqi, 230px)" : "clamp(160px, 32cqi, 185px)"}
                 inset={{ top: first ? 42 : 10, bottom: last ? 58 : 30 }}
-                xTicks={[0, 0.25, 0.5, 0.75, 1, 1.25].map((at) => ({ at, label: at === 0 ? "0" : String(at), minor: at === 0.25 || at === 0.75 || at === 1.25, edge: at === 0 ? "start" as const : at === TOLERANCE_LIMIT ? "end" as const : undefined }))}
+                xTicks={[0, 0.25, 0.5, 0.75, 1, 1.25].map((at) => ({ at, label: at === 0 ? "0" : String(at), minor: at === 0.25 || at === 0.75, edge: at === 0 ? "start" as const : undefined }))}
                 yTicks={[0, 7, 14, 21, 28].map((at) => ({ at, label: String(at), solid: at === 0 }))}
                 yTitle={first ? "Positions certified" : undefined}
                 xTitle={last ? "Tolerance, index points" : undefined}

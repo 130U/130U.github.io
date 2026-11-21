@@ -1,7 +1,9 @@
 import Link from "next/link";
 import { Fragment, type ReactNode } from "react";
+import { BackToTop } from "../BackToTop";
 import { ReturnArrow } from "../ReturnArrow";
 import { SiteShell } from "../SiteShell";
+import { TitleText } from "../TitleText";
 import { ArticleReadingLayout } from "../article/ArticleReadingLayout";
 import { ExperienceDiagram, ExperienceMetadata, KeyContributions } from "../experience/ExperienceDetails";
 import { type LegalPaper, type PaperRun } from "../../lib/content/legal-papers";
@@ -11,7 +13,7 @@ import { placeFigures } from "../../lib/content/article-figures";
 import { ArticleFigure, FigureController } from "../figures";
 import { ZoomStage } from "../research/ZoomStage";
 import { AddressText, KeepNumberJoins } from "../research/ResearchInline";
-import { headingFloor, numericColumns, sentenceColumns } from "../research/ResearchArticle";
+import { tableLayout } from "../research/ResearchArticle";
 import { ZoomGlyph } from "../ZoomGlyph";
 import researchStyles from "../research/ResearchArticle.module.css";
 import stageStyles from "../research/Stage.module.css";
@@ -60,8 +62,7 @@ function RunText({ runs, prefix }: { runs: PaperRun[]; prefix: string }) {
 /** A legal table in the paper tables' frame: the same title, zoom, column fitting and cell classes. */
 function PaperTable({ rows, caption, index }: { rows: NonNullable<LegalPaper["blocks"][number]["rows"]>; caption?: LegalPaper["blocks"][number]["caption"]; index: number }) {
   const cells: ResearchCell[][] = rows.map((row) => row.map(({ text }) => ({ source: text, inlines: [{ type: "text", text }] })));
-  const numeric = numericColumns(cells);
-  const sentences = sentenceColumns(cells);
+  const layout = tableLayout(cells);
   const tableRows = rows.map((row, rowIndex) => (
     <tr key={rowIndex}>{row.map((cell, cellIndex) => {
       const Cell = rowIndex === 0 ? "th" : "td";
@@ -69,8 +70,7 @@ function PaperTable({ rows, caption, index }: { rows: NonNullable<LegalPaper["bl
         <Cell
           key={cellIndex}
           scope={Cell === "th" ? "col" : undefined}
-          className={[researchStyles.cell, numeric[cellIndex] && researchStyles.numeric, sentences[cellIndex] && researchStyles.sentence].filter(Boolean).join(" ")}
-          style={Cell === "th" ? headingFloor(cells[rowIndex][cellIndex]) : undefined}
+          {...layout.cell(rowIndex, cellIndex)}
         >
           <RunText runs={cell.runs} prefix={`table-${index}-${rowIndex}-${cellIndex}`} />
         </Cell>
@@ -82,7 +82,7 @@ function PaperTable({ rows, caption, index }: { rows: NonNullable<LegalPaper["bl
       {caption && <p className={researchStyles.tableTitle} data-table-title><RunText runs={caption.runs} prefix={`caption-${index}`} /></p>}
       <button type="button" className={`${stageStyles.control} ${researchStyles.zoom}`} data-table-zoom aria-label="Zoom in" aria-haspopup="dialog" hidden><ZoomGlyph /></button>
       <div tabIndex={0} role="region" aria-label="Table" className={researchStyles.tableRegion}>
-        <table className={researchStyles.table} data-research-table data-research-block-type="table">
+        <table {...layout.table} className={researchStyles.table} data-research-table data-research-block-type="table">
           <thead>{tableRows[0]}</thead>
           <tbody>{tableRows.slice(1)}</tbody>
         </table>
@@ -124,7 +124,7 @@ export function LegalPaperPage({ paper, showcase }: { paper: LegalPaper; showcas
           ...paper.footnotes.map((note) => ({ key: String(note.number), label: String(note.number), content: <RunText runs={note.runs} prefix={`preview-${note.number}`} /> })),
         ]}>
           <header className={`page-intro ${styles.header}`}>
-            <h1 id="paper-title" tabIndex={-1}>{showcase.headline}</h1>
+            <h1 id="paper-title" tabIndex={-1}><TitleText text={showcase.headline} /></h1>
             <ExperienceMetadata entry={showcase} />
             <p className={researchStyles.sourceLinks}><a href={paper.repositoryUrl}>GitHub</a><a href={paper.sourceUrl}>Full Manuscript</a></p>
             <ExperienceDiagram entry={showcase} />
@@ -168,7 +168,7 @@ export function LegalPaperPage({ paper, showcase }: { paper: LegalPaper; showcas
             </section>
           </ArticleReadingLayout>
 
-          <footer className={styles.paperFooter}><Link className="back-link" href={`/experience/#${showcase.slug}`}><ReturnArrow />Back to Experience</Link><a href="#paper-title">Back to Top</a></footer>
+          <footer className={styles.paperFooter}><Link className="back-link" href={`/experience/#${showcase.slug}`}><ReturnArrow />Back to Experience</Link><BackToTop target="paper-title" /></footer>
           {figures.size > 0 && <FigureController key={paper.slug} />}
           {(figures.size > 0 || paper.blocks.some(({ type }) => type === "table")) && <ZoomStage key={`${paper.slug}-stage`} />}
         </LegalPaperReader>

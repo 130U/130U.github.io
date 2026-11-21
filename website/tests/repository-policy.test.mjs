@@ -107,3 +107,17 @@ test("the protected-source manifest cannot omit a required path", async (t) => {
   await writeFile(path.join(root, "content", "protected-sources.json"), JSON.stringify(manifest));
   assert.throws(() => verifyProtectedSources(root), /must cover every required source/u);
 });
+
+test("the repository README opens as every work README does", async () => {
+  const readme = (await readFile(path.join(REPOSITORY_ROOT, ".github", "README.md"), "utf8")).replace(/\r\n?/gu, "\n");
+  const blocks = readme.split(/\n{2,}/u);
+  // The card, then the name as the one h1, the context line, the links row and
+  // the bold lead, as the work READMEs set their cover, title, byline, links and lead.
+  assert.match(blocks[0], /^<p align="center"><a href="https:\/\/www\.theodoreoy\.com\/"><img src="\.\.\/website\/public\/assets\/brand\/og-1774\.jpg" alt="[^"]+" width="100%"><\/a><\/p>$/u);
+  assert.equal(blocks[1], "# Theodore Ouyang");
+  assert.equal((readme.match(/^# /gmu) ?? []).length, 1, "One h1");
+  assert.match(blocks[2], /^Duke Alumnus, .+ · Sequoia Fellow$/u);
+  assert.match(blocks[3], /^\[theodoreoy\.com\]\(https:\/\/www\.theodoreoy\.com\/\)( · \[[^\]]+\]\([^)]+\))+$/u);
+  assert.match(blocks[4], /^\*\*[^*]+\*\* /u);
+  assert.doesNotMatch(readme, /^(?:---|\*\*\*)$/mu, "No horizontal rule");
+});

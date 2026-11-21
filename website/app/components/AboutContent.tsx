@@ -74,7 +74,7 @@ export function AboutContent({ hasHero = false }: { hasHero?: boolean }) {
         <div className={styles.sectionBody}>
           <h2 className={styles.sectionTitle} id="education-heading">Education</h2>
           <div className="ledger">
-            <div className="ledger-item">
+            <div className={`ledger-item ${styles.educationItem}`}>
               <h3 className="ledger-title">Duke University</h3>
               <div className="ledger-body">
                 <div className={styles.educationList}>

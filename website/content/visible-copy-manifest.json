@@ -53,9 +53,9 @@
       }
     },
     "/critical-dependence-stress-for-diversification-gains-under-fixed-marginals/": {
-      "textSha256": "a2529a73260af1ab27c2f8049a1958867237a58397f47546bb60809f8b7ddd28",
-      "characterCount": 77456,
-      "wordCount": 11710,
+      "textSha256": "0fdcada121964041529b2edb53415f8e59083fac4d8f1efdee9e0a607fb119a7",
+      "characterCount": 77452,
+      "wordCount": 11708,
       "preview": "Skip to Main Content Theodore Ouyang Back to Selected Research Critical Dependence Stress for Diversification Gains under Fixed Marginals GitHub Full Manuscript",
       "altTexts": [],
       "ariaLabels": [
@@ -68,7 +68,6 @@
         "Scrollable mathematical expression",
         "Scrollable mathematical expression",
         "Scrollable mathematical expression",
-        "Scrollable mathematical expression",
         "Mathematical equation",
         "Scrollable mathematical expression",
         "Scrollable mathematical expression",
@@ -151,7 +150,8 @@
         "Mathematical equation",
         "Scrollable mathematical expression",
         "Scrollable mathematical expression",
-        "Mathematical equation",
+        "Zoom in",
+        "Table of mathematics",
         "Scrollable mathematical expression",
         "Mathematical equation",
         "Mathematical equation",
@@ -328,7 +328,6 @@
         "Scrollable mathematical expression",
         "Scrollable mathematical expression",
         "Scrollable mathematical expression",
-        "Scrollable mathematical expression",
         "Mathematical equation",
         "Scrollable mathematical expression",
         "Mathematical equation",
@@ -427,13 +426,13 @@
         "twitterTitle": "Critical Dependence Stress for Diversification Gains under Fixed Marginals",
         "twitterDescription": "How much dependence stress erases a diversification gain under fixed marginals: a variational limit, a quadratic critical budget, the marginal-restoration premium and projected flow duality."
       },
-      "mathSourceSha256": "d31d21b93ee2cd9e32595eee5228e469588a65f6a3a7ee02e359ff2a4a17b153",
-      "formulaCount": 1025
+      "mathSourceSha256": "30c8c83cb78ab0f6353fb012d17e51863bc9133b2463aff39b9f17d450453c1a",
+      "formulaCount": 1027
     },
     "/certified-valuation-of-arithmetic-asian-options/": {
-      "textSha256": "539feae13fdff79f851d7a22c3fd9dfa9c05d0ca74f8f91518b003d44ac4d53f",
-      "characterCount": 70927,
-      "wordCount": 11701,
+      "textSha256": "7eeea72fcb7a6255f4afeaaf2317b5d0c8c052b04843559dca382061736faeb2",
+      "characterCount": 70291,
+      "wordCount": 11590,
       "preview": "Skip to Main Content Theodore Ouyang Back to Selected Research Certified Valuation of Arithmetic Asian Options: The Cost of Exercising on the Geometric Average ",
       "altTexts": [],
       "ariaLabels": [
@@ -451,14 +450,11 @@
         "Mathematical equation",
         "Scrollable mathematical expression",
         "Mathematical equation",
-        "Mathematical equation",
-        "Scrollable mathematical expression",
-        "Scrollable mathematical expression",
+        "Zoom in",
+        "Research data table",
         "Zoom in",
         "The continuous price lies in [6.508371733, 6.518868974], the interval (1.3); the price under absorbed Euler with step 1/768 lies in [6.507844281, 6.519014106]. Both contain the proxy value 6.513251661289 and exclude 6.52.",
         "Magnified around the proxy value: the proxy value 6.513251661289, known to plus or minus 0.00021, and the simulated price, close to 6.51335, which exceeds the proxy value by 0.000102 with standard error 0.000004.",
-        "Width of the price interval in quote steps, on a logarithmic scale. Monthly crude oil calls one to twelve months ahead: proved bound 0.0023 to 0.0081, first-order bound 2.6. Twelve monthly fixings, call at 95: proved bound 0.36, first-order bound 13.34. Annual-average oil put at 70: proved bound 0.91, first-order bound 52.06. A quote step is one cent per barrel, or 0.01.",
-        "Scrollable mathematical expression",
         "Scrollable mathematical expression",
         "Scrollable mathematical expression",
         "Scrollable mathematical expression",
@@ -532,6 +528,9 @@
         "Zoom in",
         "Research data table",
         "Scrollable mathematical expression",
+        "Zoom in",
+        "Monthly crude oil calls one to twelve months ahead, in cents per barrel on a logarithmic scale. Proved bound: 0.0081, 0.0047, 0.0033 and 0.0023 cents. Classical first-order estimate: 2.6 cents at every lead time, 320 to 1,140 times larger. A quote step is one cent per barrel.",
+        "Scrollable mathematical expression",
         "Scrollable mathematical expression",
         "Zoom in",
         "Research data table",
@@ -575,13 +574,6 @@
         "Scrollable mathematical expression",
         "Zoom in",
         "Research data table",
-        "Scrollable mathematical expression",
-        "Scrollable mathematical expression",
-        "Scrollable mathematical expression",
-        "Scrollable mathematical expression",
-        "Scrollable mathematical expression",
-        "Scrollable mathematical expression",
-        "Scrollable mathematical expression",
         "Scrollable mathematical expression",
         "Scrollable mathematical expression",
         "Scrollable mathematical expression",
@@ -593,9 +585,6 @@
         "Research data table",
         "Zoom in",
         "Research data table",
-        "Scrollable mathematical expression",
-        "Scrollable mathematical expression",
-        "Scrollable mathematical expression",
         "Zoom in",
         "Research data table",
         "Zoom in",
@@ -608,9 +597,6 @@
         "Scrollable mathematical expression",
         "Scrollable mathematical expression",
         "Scrollable mathematical expression",
-        "Scrollable mathematical expression",
-        "Scrollable mathematical expression",
-        "Scrollable mathematical expression",
         "Mathematical equation",
         "Scrollable mathematical expression",
         "Mathematical equation",
@@ -620,14 +606,6 @@
         "Mathematical equation",
         "Zoom in",
         "Research data table",
-        "Scrollable mathematical expression",
-        "Scrollable mathematical expression",
-        "Scrollable mathematical expression",
-        "Scrollable mathematical expression",
-        "Scrollable mathematical expression",
-        "Scrollable mathematical expression",
-        "Scrollable mathematical expression",
-        "Scrollable mathematical expression",
         "Mathematical equation",
         "Scrollable mathematical expression",
         "Scrollable mathematical expression",
@@ -656,10 +634,8 @@
         "Mathematical equation",
         "Zoom in",
         "Research data table",
-        "Scrollable mathematical expression",
-        "Scrollable mathematical expression",
-        "Scrollable mathematical expression",
-        "Scrollable mathematical expression",
+        "Zoom in",
+        "Research data table",
         "Scrollable mathematical expression",
         "Zoom in",
         "Research data table",
@@ -688,10 +664,12 @@
         "Scrollable mathematical expression",
         "Scrollable mathematical expression",
         "Mathematical equation",
-        "Mathematical equation",
+        "Zoom in",
+        "Table of mathematics",
         "Zoom in",
         "Research data table",
-        "Mathematical equation",
+        "Zoom in",
+        "Table of mathematics",
         "Scrollable mathematical expression",
         "Scrollable mathematical expression",
         "Mathematical equation"
@@ -706,13 +684,13 @@
         "twitterTitle": "Certified Valuation of Arithmetic Asian Options: The Cost of Exercising on the Geometric Average",
         "twitterDescription": "The cost of exercising an arithmetic Asian option on the geometric average: a proved bound, its cubic law in Black's model, and a certified Heston price interval with its Euler discretization error."
       },
-      "mathSourceSha256": "c03900cf8a6733ce42f51555d8c5b74e98983b617eb7efb0e1fb60f80a2449e9",
-      "formulaCount": 758
+      "mathSourceSha256": "d8025e68bf87443dd9abe5da6af6a3e477121cfbd9f0d9e1030f2ac0b98dcfe6",
+      "formulaCount": 748
     },
     "/certified-joint-pricing-errors-in-rough-heston/": {
-      "textSha256": "294bfca8129d226796b62407de90a06581315e7ce25e326a33d04a340fdd66dd",
-      "characterCount": 66217,
-      "wordCount": 10722,
+      "textSha256": "20d19e73328d273589e843b46f4bf11e363f754ec2f8f0f32d83172477e085e2",
+      "characterCount": 65417,
+      "wordCount": 10587,
       "preview": "Skip to Main Content Theodore Ouyang Back to Selected Research Certified Joint Pricing Errors in Rough Heston GitHub Full Manuscript Abstract Every option on on",
       "altTexts": [],
       "ariaLabels": [
@@ -881,8 +859,6 @@
         "Research data table",
         "Zoom in",
         "The set of possible errors of the 4400 call and the 4500 call from the node radii of the three-month certificate, a rounded convex body inside its dashed bounding box. Two parallel lines in the direction of the spread touch the body and the corner of the box: the body's support is 0.045461793 index points and the box's is 0.064536890.",
-        "Scrollable mathematical expression",
-        "Scrollable mathematical expression",
         "Zoom in",
         "Research data table",
         "Scrollable mathematical expression",
@@ -914,13 +890,13 @@
         "twitterTitle": "Certified Joint Pricing Errors in Rough Heston",
         "twitterDescription": "Numerical pricing error as a common factor across strikes: a Riccati residual priced by forward variance in rough Heston, the netting of portfolio errors in strike space, and certified tolerances for S&P 500 option positions."
       },
-      "mathSourceSha256": "9e1916cd3607edc6f015c7ab8eaff0b0d7b2f9e06efb286a632a5c4479be0b31",
-      "formulaCount": 461
+      "mathSourceSha256": "14fa845b539de203d04fa6ebacae84605ab8ddeafa09ccfa9db73930ff758714",
+      "formulaCount": 459
     },
     "/experience/": {
-      "textSha256": "052987f039d41664510e064e53dba9260c9ef10950e587bc127db9829c2c2fcf",
-      "characterCount": 10505,
-      "wordCount": 1551,
+      "textSha256": "6055306cc666f095f2b4e433e17c6838993ac1d9a7d1a88d858ab84039229773",
+      "characterCount": 10484,
+      "wordCount": 1548,
       "preview": "Skip to Main Content Theodore Ouyang About Experience Blog Experience: Areas of Focus AI Research and Engineering Data Science Legal Research and Policy Analysi",
       "altTexts": [],
       "ariaLabels": [
@@ -938,7 +914,7 @@
         "Read more about Duke Law School: Small States and the Governance of Strategic Space Dependence",
         "Read more about Duke Law School: Who May Choose the Lesser Risk — Solar Geoengineering and the Legal Duties of Comparison and Continuity",
         "Read more about Duke Law School: Mangrove Restoration and the Limits of Compensatory Mitigation — Lessons from Florida for the Greater Bay Area",
-        "Read more about Jones Lang LaSalle Capital Markets Team: Office Investment Underwriting and ESG Due Diligence",
+        "Read more about Jones Lang LaSalle: Office Investment Underwriting and ESG Due Diligence",
         "Read more about Hubble Network: Bluetooth Satellite Commercialization and Market Selection",
         "Read more about SAIF Partners: Dental Investment Research and Governance Due Diligence",
         "Read more about CITIC Securities: Agriculture Equity Research and Valuation",
@@ -958,16 +934,14 @@
       }
     },
     "/experience/large-scale-domain-expert-feedback-governance-and-adaptive-review/": {
-      "textSha256": "609872dcef08acb3b4fd54d0f4929d29586b1467d50ece699081877461ea651e",
-      "characterCount": 36872,
-      "wordCount": 5851,
+      "textSha256": "adf1f1f2e5c623e18e7152d4e279c3579652e797339802a61e13522a6b094877",
+      "characterCount": 36337,
+      "wordCount": 5764,
       "preview": "Skip to Main Content Theodore Ouyang Back to Experience Large-Scale Domain Expert Feedback Governance and Adaptive Review Organization Duke University × Leading",
       "altTexts": [],
       "ariaLabels": [
         "Theodore Ouyang home",
         "Parent navigation",
-        "Scrollable mathematical expression",
-        "Scrollable mathematical expression",
         "Scrollable mathematical expression",
         "Scrollable mathematical expression",
         "Scrollable mathematical expression",
@@ -1034,7 +1008,7 @@
         "Research data table",
         "Scrollable mathematical expression",
         "Zoom in",
-        "Standard deviation of the estimate against defects shipped, for one budget of 5,000 cost units. Risk-first for audits and reviews: 0.657 points, 320.9 defects. Measurement rule, then reviews: 0.515 points, 336.2 defects. Joint rule: 0.568 points and 209.9 defects, 0.657 points and 197.1 defects, 1.035 points and 174.9 defects. At 0.657 points the joint rule ships 38.6% fewer defects than risk-first routing.",
+        "Standard deviation of the estimate in percentage points against defects shipped, for one budget of 5,000 cost units. Risk-first for audits and reviews: 0.657, 320.9 defects. Measurement rule, then reviews: 0.515, 336.2 defects. Joint rule: 0.568 and 209.9 defects, 0.657 and 197.1 defects, 1.035 and 174.9 defects. At 0.657 the joint rule ships 38.6% fewer defects than risk-first routing.",
         "Mathematical equation",
         "Scrollable mathematical expression",
         "Scrollable mathematical expression",
@@ -1051,13 +1025,13 @@
         "twitterTitle": "Duke University × Leading Foundation Model Developer: Large-Scale Domain Expert Feedback Governance and Adaptive Review",
         "twitterDescription": "One pool of expert hours has to do two jobs in a post-training program: tell the team how good a batch is, and fix the data that ships."
       },
-      "mathSourceSha256": "ca24e7be57fa920da39b71863ba66b48d9aaea29f83f003e9c88617a4c3da6ef",
-      "formulaCount": 195
+      "mathSourceSha256": "40a10167ebdb44dfe971c2b3a4d54730dbceaef57d76ac70b51bdb0b05f919b3",
+      "formulaCount": 193
     },
     "/experience/financial-task-design-and-synthetic-data-engineering/": {
-      "textSha256": "01c0d49a5ee859bd813d8ee328af4c6edd4df00a9fe1f8d15e73e99a711db4d0",
-      "characterCount": 34124,
-      "wordCount": 5023,
+      "textSha256": "e9d9fbddd80e329be6bf5f6d251b44fbbb9c263dbc8494d2750901e7503082ef",
+      "characterCount": 33924,
+      "wordCount": 4998,
       "preview": "Skip to Main Content Theodore Ouyang Back to Experience Financial Task Design and Synthetic Data Engineering Organization Duke University × Leading Foundation M",
       "altTexts": [],
       "ariaLabels": [
@@ -1126,13 +1100,13 @@
         "twitterTitle": "Duke University × Leading Foundation Model Developer: Financial Task Design and Synthetic Data Engineering",
         "twitterDescription": "When a synthetic financial case changes one number, its reference answer, the evidence behind that answer and the expert's preference can all go stale together."
       },
-      "mathSourceSha256": "9ac614bce86276bf0e66de1376e49662e28b96c4699acfb79d1eb18c9dfbc35f",
+      "mathSourceSha256": "db9024d8b830141d1da935f0aeaddd2e358f3be4b34694d8c2ef6182f7f6da8b",
       "formulaCount": 189
     },
     "/experience/general-reasoning-evaluation-and-layered-verification/": {
-      "textSha256": "fba0d88df6e43dbe90f3949b39fc4b78767567475ce08d5dfeefb9e7cf6197eb",
-      "characterCount": 33928,
-      "wordCount": 5147,
+      "textSha256": "888593cdfdc4a013e1032b513dcaa34a127181cccdba348dc10e0613f66f06fc",
+      "characterCount": 33484,
+      "wordCount": 5073,
       "preview": "Skip to Main Content Theodore Ouyang Back to Experience General Reasoning Evaluation and Layered Verification Organization Duke University × Frontier AI Researc",
       "altTexts": [],
       "ariaLabels": [
@@ -1226,19 +1200,18 @@
         "twitterTitle": "Duke University × Frontier AI Research Laboratory: General Reasoning Evaluation and Layered Verification",
         "twitterDescription": "A model can reach the right answer through an unsupported step, and a grader that matches a reference solution will reject a correct proof that takes another route."
       },
-      "mathSourceSha256": "f92a1bc72bb97f196c7b4a410b9964d3d9d422b11e46c2ed5b3bba16035c5b72",
-      "formulaCount": 206
+      "mathSourceSha256": "a566b8f16fed06cd0d8b2072f2f6ef5bebaa143609c1191d7007e38923d3f988",
+      "formulaCount": 204
     },
     "/experience/evidence-verification-and-robust-comparison-in-investment-research/": {
-      "textSha256": "8f16f91c71467c928404c98cdf98a21cfdf12860d6ec5259facf50f2db39da0c",
-      "characterCount": 29888,
-      "wordCount": 4637,
+      "textSha256": "b8b4eb22b5b98bfd3f8c01eb30184ee4107231d74fb484e9a7f7557d6b2454ec",
+      "characterCount": 29519,
+      "wordCount": 4573,
       "preview": "Skip to Main Content Theodore Ouyang Back to Experience Evidence Verification and Robust Comparison in Investment Research Organization Duke University × Leadin",
       "altTexts": [],
       "ariaLabels": [
         "Theodore Ouyang home",
         "Parent navigation",
-        "Scrollable mathematical expression",
         "Scrollable mathematical expression",
         "Scrollable mathematical expression",
         "Article contents",
@@ -1294,9 +1267,9 @@
         "Zoom in",
         "Research data table",
         "Zoom in",
-        "Scrollable mathematical expression",
         "Choose a verification query",
         "Score differences for the eight scenarios lie at plus or minus 0.19, 0.31, 0.49 and 0.61. Verifying z1 separates positive from negative differences; rechecking the SHAP field or verifying z2 does not.",
+        "Scrollable mathematical expression",
         "Scrollable mathematical expression",
         "Zoom in",
         "Research data table",
@@ -1312,13 +1285,13 @@
         "twitterTitle": "Duke University × Leading Global Alternative Asset Manager: Evidence Verification and Robust Comparison in Investment Research",
         "twitterDescription": "Due diligence has more facts to check than analyst time to check them."
       },
-      "mathSourceSha256": "9b8be759a972114f3f850b35bb9966a2d52a5a25424d78e5661e0174a3a8e7a4",
-      "formulaCount": 214
+      "mathSourceSha256": "236f28ce1755dd4c7c33e53eed3c936f72a9e26bb5687df2dbe8295235573cbf",
+      "formulaCount": 209
     },
     "/experience/autonomous-authority-in-space/": {
-      "textSha256": "80649e4992bc0665e3968d9cc351a849da5e491f93e654d68de5bb024d7e831b",
-      "characterCount": 79482,
-      "wordCount": 11245,
+      "textSha256": "c57e4570ccdf01a206ad2e476a43671285c2e290c4ec591faf262a58ff3a5629",
+      "characterCount": 79107,
+      "wordCount": 11187,
       "preview": "Skip to Main Content Theodore Ouyang Back to Experience Autonomous Authority in Space: Risk Tradeoffs and the Law of Delegation Organization Duke Law School Pos",
       "altTexts": [],
       "ariaLabels": [
@@ -1329,7 +1302,6 @@
         "Footnote 1",
         "Footnote 2",
         "Zoom in",
-        "Risk-risk taxonomy, scroll horizontally to compare",
         "Risk-risk taxonomy",
         "Footnote 3",
         "Zoom in",
@@ -1435,9 +1407,9 @@
       }
     },
     "/experience/small-states-and-the-governance-of-strategic-space-dependence/": {
-      "textSha256": "90661d6fd0d2d8534588a2f3cf6e333dbbb8350a3a48bfd674c18f5448937cf4",
-      "characterCount": 63113,
-      "wordCount": 8779,
+      "textSha256": "97280541ebd43c4792067b8d0a2da5970e3aad542997f3c36713cf222c8c302d",
+      "characterCount": 62886,
+      "wordCount": 8747,
       "preview": "Skip to Main Content Theodore Ouyang Back to Experience Small States and the Governance of Strategic Space Dependence Organization Duke Law School Position Auth",
       "altTexts": [],
       "ariaLabels": [
@@ -1553,9 +1525,9 @@
       }
     },
     "/experience/who-may-choose-the-lesser-risk/": {
-      "textSha256": "cf73b434706937c92806e99a95b0237ea90011dd2d9f975259bb53a0cef81736",
-      "characterCount": 62183,
-      "wordCount": 8731,
+      "textSha256": "626fce4a2c19a9727836ef0a9112eb0a5aa69be2bf11285078f81607601a65ef",
+      "characterCount": 62082,
+      "wordCount": 8718,
       "preview": "Skip to Main Content Theodore Ouyang Back to Experience Who May Choose the Lesser Risk: Solar Geoengineering and the Legal Duties of Comparison and Continuity O",
       "altTexts": [],
       "ariaLabels": [
@@ -1680,9 +1652,9 @@
       }
     },
     "/experience/mangrove-restoration-and-the-limits-of-compensatory-mitigation/": {
-      "textSha256": "21ca7edb7a8eeb44674ab17be04a536a92989ab7da0b51ad86a5008b04219431",
-      "characterCount": 78724,
-      "wordCount": 11100,
+      "textSha256": "6a7009645faedb07cb41f68714e052a421c3561a5c10573ccf1fd6dd12061a0e",
+      "characterCount": 78557,
+      "wordCount": 11071,
       "preview": "Skip to Main Content Theodore Ouyang Back to Experience Mangrove Restoration and the Limits of Compensatory Mitigation: Lessons from Florida for the Greater Bay",
       "altTexts": [],
       "ariaLabels": [
@@ -1886,27 +1858,27 @@
       }
     },
     "/experience/jones-lang-lasalle/": {
-      "textSha256": "02e08be2833ebd9d9d9ab92ca1be761e2d033a77fd57a51a7716d52590be8696",
-      "characterCount": 2350,
+      "textSha256": "7a2a02f8c04b811f4e95afb3457040f6dd166b945d412f5c887d119293db93d6",
+      "characterCount": 2351,
       "wordCount": 302,
-      "preview": "Skip to Main Content Theodore Ouyang Back to Experience Office Investment Underwriting and ESG Due Diligence Organization Jones Lang LaSalle Capital Markets Tea",
+      "preview": "Skip to Main Content Theodore Ouyang Back to Experience Office Investment Underwriting and ESG Due Diligence Organization Jones Lang LaSalle Position Summer Int",
       "altTexts": [],
       "ariaLabels": [
         "Theodore Ouyang home",
         "Parent navigation"
       ],
       "metadata": {
-        "title": "Jones Lang LaSalle Capital Markets Team: Office Investment Underwriting and ESG Due Diligence | Theodore Ouyang",
+        "title": "Jones Lang LaSalle: Office Investment Underwriting and ESG Due Diligence | Theodore Ouyang",
         "description": "A Southeast Asian conglomerate was looking to buy office properties in China, and I was the project team's ESG lead on the acquisition advisory. Working with JLL's internal ESG team, I screened the candidate assets, underwrote the shortlist, and set site-diligence priorities against the client's investment requirements and its options to refurbish or reposition each building.",
         "canonical": "https://www.theodoreoy.com/experience/jones-lang-lasalle/",
-        "openGraphTitle": "Jones Lang LaSalle Capital Markets Team: Office Investment Underwriting and ESG Due Diligence",
+        "openGraphTitle": "Jones Lang LaSalle: Office Investment Underwriting and ESG Due Diligence",
         "openGraphDescription": "A Southeast Asian conglomerate was looking to buy office properties in China, and I was the project team's ESG lead on the acquisition advisory. Working with JLL's internal ESG team, I screened the candidate assets, underwrote the shortlist, and set site-diligence priorities against the client's investment requirements and its options to refurbish or reposition each building.",
         "openGraphUrl": "https://www.theodoreoy.com/experience/jones-lang-lasalle/",
-        "twitterTitle": "Jones Lang LaSalle Capital Markets Team: Office Investment Underwriting and ESG Due Diligence",
+        "twitterTitle": "Jones Lang LaSalle: Office Investment Underwriting and ESG Due Diligence",
         "twitterDescription": "A Southeast Asian conglomerate was looking to buy office properties in China, and I was the project team's ESG lead on the acquisition advisory. Working with JLL's internal ESG team, I screened the candidate assets, underwrote the shortlist, and set site-diligence priorities against the client's investment requirements and its options to refurbish or reposition each building."
       }
     },
-    "/experience/hubble-technology-investment/": {
+    "/experience/hubble-network/": {
       "textSha256": "94cd7ebaafaf0720afc3be71318a5ffd03376b6701b865883194c4672bde112e",
       "characterCount": 1806,
       "wordCount": 236,
@@ -1919,10 +1891,10 @@
       "metadata": {
         "title": "Hubble Network: Bluetooth Satellite Commercialization and Market Selection | Theodore Ouyang",
         "description": "Hubble was commercializing its Bluetooth satellite technology and had to choose its first markets. Through a Duke Practicum, I led the research on shipping, logistics, and industrial asset tracking, assessed where the technology's cost, accuracy, power consumption, and periodic reporting matched what customers needed, and recommended which applications to pursue first.",
-        "canonical": "https://www.theodoreoy.com/experience/hubble-technology-investment/",
+        "canonical": "https://www.theodoreoy.com/experience/hubble-network/",
         "openGraphTitle": "Hubble Network: Bluetooth Satellite Commercialization and Market Selection",
         "openGraphDescription": "Hubble was commercializing its Bluetooth satellite technology and had to choose its first markets. Through a Duke Practicum, I led the research on shipping, logistics, and industrial asset tracking, assessed where the technology's cost, accuracy, power consumption, and periodic reporting matched what customers needed, and recommended which applications to pursue first.",
-        "openGraphUrl": "https://www.theodoreoy.com/experience/hubble-technology-investment/",
+        "openGraphUrl": "https://www.theodoreoy.com/experience/hubble-network/",
         "twitterTitle": "Hubble Network: Bluetooth Satellite Commercialization and Market Selection",
         "twitterDescription": "Hubble was commercializing its Bluetooth satellite technology and had to choose its first markets. Through a Duke Practicum, I led the research on shipping, logistics, and industrial asset tracking, assessed where the technology's cost, accuracy, power consumption, and periodic reporting matched what customers needed, and recommended which applications to pursue first."
       }
@@ -1949,10 +1921,10 @@
       }
     },
     "/experience/citic-securities/": {
-      "textSha256": "e0aaf6845a8818146bcff32325aa5024a8e9795698721c5f5bcddb4e14453bf4",
-      "characterCount": 493,
-      "wordCount": 67,
-      "preview": "Skip to Main Content Theodore Ouyang Back to Experience Agriculture Equity Research and Valuation Organization CITIC Securities Position Equity Research Intern ",
+      "textSha256": "12760998d77c84c5c51a99d0072a8ac1a28dc0c7ec32b19e982d0fce8afe5acc",
+      "characterCount": 521,
+      "wordCount": 70,
+      "preview": "Skip to Main Content Theodore Ouyang Back to Experience Agriculture Equity Research and Valuation Organization CITIC Securities Position Equity Research Intern,",
       "altTexts": [],
       "ariaLabels": [
         "Theodore Ouyang home",
@@ -1990,7 +1962,7 @@
         "twitterDescription": "I served on the business-line restructuring workstream of a digital-transformation engagement for a leading Chinese company preparing to list."
       }
     },
-    "/experience/independent-stem-olympiad-training/": {
+    "/experience/independent-stem-olympiad-training-practice/": {
       "textSha256": "0ded30a036136c18fa46419851bbd3ced186abfd7c4fa4d956207f6cde46a0c7",
       "characterCount": 759,
       "wordCount": 100,
@@ -2003,15 +1975,15 @@
       "metadata": {
         "title": "Independent STEM Olympiad Training Practice: Advanced Physics Olympiad Instruction | Theodore Ouyang",
         "description": "I ran an independent coaching practice that prepared students for USAPhO and U.S. Physics Team selection, teaching IPhO-level physics online and in person and writing original problems for competition training.",
-        "canonical": "https://www.theodoreoy.com/experience/independent-stem-olympiad-training/",
+        "canonical": "https://www.theodoreoy.com/experience/independent-stem-olympiad-training-practice/",
         "openGraphTitle": "Independent STEM Olympiad Training Practice: Advanced Physics Olympiad Instruction",
         "openGraphDescription": "I ran an independent coaching practice that prepared students for USAPhO and U.S. Physics Team selection, teaching IPhO-level physics online and in person and writing original problems for competition training.",
-        "openGraphUrl": "https://www.theodoreoy.com/experience/independent-stem-olympiad-training/",
+        "openGraphUrl": "https://www.theodoreoy.com/experience/independent-stem-olympiad-training-practice/",
         "twitterTitle": "Independent STEM Olympiad Training Practice: Advanced Physics Olympiad Instruction",
         "twitterDescription": "I ran an independent coaching practice that prepared students for USAPhO and U.S. Physics Team selection, teaching IPhO-level physics online and in person and writing original problems for competition training."
       }
     },
-    "/experience/stem-olympiad-competitions/": {
+    "/experience/the-high-school-attached-to-hunan-normal-university/": {
       "textSha256": "a26be6593d5664cf8be6dbcaf3582928615811ce5a1418c924ade2b4b867ce33",
       "characterCount": 1574,
       "wordCount": 215,
@@ -2024,10 +1996,10 @@
       "metadata": {
         "title": "The High School Attached to Hunan Normal University: Olympiad Awards, Advanced Training, and Peer Mentoring | Theodore Ouyang",
         "description": "I earned provincial- and national-level awards in physics and mathematics Olympiads as a member of the school's nationally leading physics competition program, and mentored teammates in its study groups.",
-        "canonical": "https://www.theodoreoy.com/experience/stem-olympiad-competitions/",
+        "canonical": "https://www.theodoreoy.com/experience/the-high-school-attached-to-hunan-normal-university/",
         "openGraphTitle": "The High School Attached to Hunan Normal University: Olympiad Awards, Advanced Training, and Peer Mentoring",
         "openGraphDescription": "I earned provincial- and national-level awards in physics and mathematics Olympiads as a member of the school's nationally leading physics competition program, and mentored teammates in its study groups.",
-        "openGraphUrl": "https://www.theodoreoy.com/experience/stem-olympiad-competitions/",
+        "openGraphUrl": "https://www.theodoreoy.com/experience/the-high-school-attached-to-hunan-normal-university/",
         "twitterTitle": "The High School Attached to Hunan Normal University: Olympiad Awards, Advanced Training, and Peer Mentoring",
         "twitterDescription": "I earned provincial- and national-level awards in physics and mathematics Olympiads as a member of the school's nationally leading physics competition program, and mentored teammates in its study groups."
       }
@@ -2069,7 +2041,10 @@
       ],
       "ariaLabels": [
         "Theodore Ouyang home",
-        "Parent navigation"
+        "Parent navigation",
+        "Zoom in",
+        "Zoom in",
+        "Zoom in"
       ],
       "metadata": {
         "title": "As If Leaving, As If Returning | Theodore Ouyang",
@@ -2095,7 +2070,10 @@
       ],
       "ariaLabels": [
         "Theodore Ouyang home",
-        "Parent navigation"
+        "Parent navigation",
+        "Zoom in",
+        "Zoom in",
+        "Zoom in"
       ],
       "metadata": {
         "title": "Ten States of Water | Theodore Ouyang",
@@ -2121,7 +2099,10 @@
       ],
       "ariaLabels": [
         "Theodore Ouyang home",
-        "Parent navigation"
+        "Parent navigation",
+        "Zoom in",
+        "Zoom in",
+        "Zoom in"
       ],
       "metadata": {
         "title": "The Étude Sky | Theodore Ouyang",
@@ -2132,6 +2113,99 @@
         "openGraphUrl": "https://www.theodoreoy.com/blog/the-etude-sky/",
         "twitterTitle": "The Étude Sky",
         "twitterDescription": "Chopin's twenty-four études charted as stars on the circle of fifths, with a plate drawn from each recording and a watercolor handscroll that unrolls as you listen."
+      }
+    },
+    "/architecture/": {
+      "textSha256": "ea1ec3aff692728142e31a318ee1eaae1c8b5da668581e5c7a827ceed874ac52",
+      "characterCount": 3586,
+      "wordCount": 562,
+      "preview": "Return Home Website Architecture Dark Style Visual identity S cycles Classic Stable technical default Signal Flow Motion-forward presentation Blueprint Engineer",
+      "altTexts": [],
+      "ariaLabels": [
+        "Diagram actions",
+        "Toggle color theme",
+        "Choose visual style",
+        "Visual style",
+        "Pause motion",
+        "Enter presentation stage",
+        "Export diagram",
+        "Export",
+        "Share",
+        "Raster images",
+        "Vector and motion",
+        "Guided diagram views",
+        "Previous guided view",
+        "Story trail",
+        "Next guided view",
+        "Play guided story",
+        "Select a story beat to copy its exact link",
+        "Show entire diagram",
+        "Story chapters",
+        "Focus Content and Routes, Registry / Markdown / JSON, Content and Brand",
+        "Focus Next.js 16, Static Rendering / React 19, Build and Validation, Next.js",
+        "Focus Static Site, website/out/, Build and Validation",
+        "Focus GitHub Pages, www.theodoreoy.com, Static Delivery",
+        "Focus Visitor Browser, HTML / CSS / JavaScript, Static Delivery",
+        "Focus LO Brand Assets, Logos / Icons / Social Cover, Content and Brand",
+        "Focus GitHub Actions, Validate / Build / Deploy, Build and Validation",
+        "Focus Architecture, architecture/index.html, Build and Validation",
+        "Focus Reader Interactions, Menu / Contents / Figures / Notes, Static Delivery",
+        "Close diagram guide",
+        "Diagram exploration actions",
+        "Find any node",
+        "Trace a directed route",
+        "See the whole system",
+        "Compare semantic kinds",
+        "Play the guided story",
+        "Enter presentation stage",
+        "Additional keyboard shortcuts",
+        "Close node finder",
+        "Search diagram nodes",
+        "Diagram nodes",
+        "Node metadata",
+        "Verified source evidence",
+        "Trace authored reachability",
+        "Trace upstream authored reachability",
+        "Trace downstream authored reachability",
+        "Close semantic passport",
+        "Copy link to focused node",
+        "Show connected relationships",
+        "Connected relationships",
+        "Find a route start",
+        "Copy link to traced route",
+        "Clear route probe",
+        "Traced route",
+        "Route journey controls",
+        "Previous route position",
+        "Play route journey",
+        "Next route position",
+        "Show complete route overview",
+        "Close semantic lens",
+        "Semantic kinds",
+        "Copy link to semantic lens",
+        "Clear semantic lens",
+        "Open full semantic radar",
+        "Close semantic radar",
+        "Diagram overview. Click a node to focus it, or use arrow keys to pan.",
+        "Diagram view controls",
+        "Trace a directed route",
+        "Open semantic radar",
+        "Open semantic lens",
+        "Find a node",
+        "Open diagram guide",
+        "Zoom out",
+        "Reset diagram view",
+        "Zoom in"
+      ],
+      "metadata": {
+        "title": "Website Architecture | Theodore Ouyang",
+        "description": "An interactive map of how this site is built: content inputs, static rendering, validation, GitHub Pages delivery, and browser interactions.",
+        "canonical": "https://www.theodoreoy.com/architecture/",
+        "openGraphTitle": "Website Architecture",
+        "openGraphDescription": "An interactive map of how this site is built: content inputs, static rendering, validation, GitHub Pages delivery, and browser interactions.",
+        "openGraphUrl": "https://www.theodoreoy.com/architecture/",
+        "twitterTitle": "Website Architecture",
+        "twitterDescription": "An interactive map of how this site is built: content inputs, static rendering, validation, GitHub Pages delivery, and browser interactions."
       }
     }
   }

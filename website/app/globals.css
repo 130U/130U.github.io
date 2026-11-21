@@ -40,6 +40,9 @@
   --type-index: 0.6875rem;
   --type-reading: 1rem;
   --type-label: 0.8125rem;
+  /* A figure's caption: the reading face a step below the prose it follows. */
+  --type-caption: 0.875rem;
+  --caption-leading: 1.55;
   --type-interface: 0.9375rem;
   --type-action: var(--type-interface);
   --type-math: 1.15em;
@@ -57,11 +60,27 @@
   /* The top of the rail and of the content column: the wordmark sits on the
      line of the page title. */
   --content-top: 112px;
-  --rail-min-width: calc(5 * var(--type-interface) + 13px + var(--frame-inset) + 22px + 10px);
+  /* The rail holds its widest fixed item plus its insets, so the wordmark
+     keeps the mark beside the name and "Back to Experience" holds one line on
+     tablets. That item is the parent link (arrow, gap, label); the lockup
+     (mark, gap, name) is a little narrower. Below 1200px the rail's insets are
+     12px. */
+  --rail-item-width: calc(16px + 10px + 9.25 * var(--type-interface));
+  --rail-min-width: calc(var(--rail-item-width) + var(--frame-inset) + 22px);
+  /* The site footer's height (rule, padding and one line of label type), so a
+     page shorter than the window closes on the footer without scrolling. */
+  --site-footer-height: calc(1px + 25px + var(--type-label) * var(--label-leading) + 34px);
   --title-leading: 1.12;
   --heading-leading: 1.25;
   --subheading-leading: 1.4;
   --reading-leading: 1.65;
+  /* Manuscripts with mathematics (the papers and the AI articles) read at a
+     wider leading: a line that carries a formula keeps the white a line of
+     prose keeps at the reading leading. Their vertical spaces are measured in
+     this line: a paragraph break is one line, a statement, proof or run-in head
+     opens after a line and a half, and a display stands in two and a half. */
+  --manuscript-leading: 1.75;
+  --manuscript-line: calc(var(--manuscript-leading) * var(--type-reading));
   --interface-leading: 1.5;
   --label-leading: 1.45;
   --title-tracking: -0.022em;
@@ -143,6 +162,25 @@ button:focus-visible {
   outline-offset: 4px;
 }
 
+/* A heading that an in-page link moves focus to is a target, not a control: it
+   shows no focus ring. */
+:is(h1, h2, h3)[tabindex="-1"]:focus {
+  outline: none;
+}
+
+/* A page title is the target of Back to Top. Its scroll margin is more than its
+   distance from the top of the page, so the jump returns the page to its top,
+   as it opened, and focus moves to the title. */
+h1[tabindex="-1"] {
+  scroll-margin-top: calc(var(--content-top) + 4rem);
+}
+
+/* A short unit (a date, a place name, a hyphenated compound in a title) holds
+   one line when the line can hold it; in a narrower box it wraps inside. */
+.keep-whole {
+  display: inline-block;
+}
+
 ::selection {
   color: #fff;
   background: var(--accent);
@@ -186,12 +224,24 @@ button:focus-visible {
   background: var(--page);
 }
 
+/* Fifteen equal columns on desktop, twelve on tablets. The rail takes three,
+   or more where its widest item needs more: the extra comes out of the fourth
+   column, the margin-index track before the reading start, and never leaves it
+   narrower than the frames' inset, so the reading start and every column after
+   it stand where the equal grid puts them. */
+.site-frame,
+.structural-grid {
+  --rail-track: max(calc(100% / 15), calc(var(--rail-min-width) / 3));
+
+  grid-template-columns: repeat(3, var(--rail-track)) max(var(--frame-inset), calc(100% * 4 / 15 - 3 * var(--rail-track))) repeat(11, minmax(0, 1fr));
+}
+
 .site-frame {
   position: relative;
   display: grid;
-  grid-template-columns: repeat(3, minmax(calc(var(--rail-min-width) / 3), 1fr)) repeat(12, minmax(0, 1fr));
   width: min(100%, 1440px);
-  min-height: calc(100vh - 76px);
+  min-height: calc(100vh - var(--site-footer-height));
+  min-height: calc(100dvh - var(--site-footer-height));
   margin: 0 auto;
   padding: 0 64px;
 }
@@ -201,7 +251,6 @@ button:focus-visible {
   z-index: 0;
   inset: 0 64px;
   display: grid;
-  grid-template-columns: repeat(3, minmax(calc(var(--rail-min-width) / 3), 1fr)) repeat(12, minmax(0, 1fr));
   pointer-events: none;
 }
 
@@ -251,6 +300,12 @@ button:focus-visible {
   grid-column: 15;
 }
 
+/* The closing guide is drawn on the last pixel column of the frames that end
+   on it, so a frame's right edge and the guide read as one line. */
+.structural-guide-reading-end::before {
+  left: -1px;
+}
+
 .structural-guide-reading-start::before,
 .structural-guide-reading-measure::before {
   bottom: auto;
@@ -290,6 +345,7 @@ button:focus-visible {
 @media (768px <= width < 1200px) {
   :root {
     --reading-width: min(var(--reading-measure), 100% - var(--frame-inset));
+    --rail-min-width: calc(var(--rail-item-width) + 12px + 12px);
   }
 }
 
@@ -302,9 +358,17 @@ button:focus-visible {
   grid-column: 1 / span 3;
   align-self: start;
   min-width: 0;
-  height: 100vh;
-  height: 100dvh;
   padding: var(--content-top) 22px 36px var(--rail-safe-inset);
+}
+
+/* Below 1200px the rail's text keeps 12px from the frame-start guide and from
+   the rail's own guide. */
+@media (768px <= width < 1200px) {
+  .site-rail {
+    --rail-safe-inset: 12px;
+
+    padding-right: 12px;
+  }
 }
 
 .rail-header {
@@ -325,15 +389,34 @@ button:focus-visible {
 .menu-toggle:active,
 .primary-nav a:active,
 .parent-link:active,
-.back-link:active {
+.back-link:active,
+.top-link:active {
   color: var(--accent);
 }
 
+/* The footer's two actions turn blue on keyboard focus, as on hover. */
+.back-link:focus-visible,
+.top-link:focus-visible {
+  color: var(--accent);
+  text-decoration-color: var(--accent);
+}
+
+/* Back to Top: plain interface text beside the underlined return link. It
+   steps aside on a page that fits the window (BackToTop). */
+.top-link {
+  transition: color 180ms var(--ease-out);
+}
+
+.top-link[hidden] {
+  display: none;
+}
+
+/* The mark stands beside the name at every width; the rail is sized to hold it. */
 .wordmark-lockup {
   display: inline-flex;
   min-width: 0;
   flex: 0 1 auto;
-  flex-wrap: wrap;
+  flex-wrap: nowrap;
   align-items: center;
   color: var(--ink);
   gap: 12px;
@@ -355,6 +438,7 @@ button:focus-visible {
   letter-spacing: 0;
   line-height: var(--interface-leading);
   overflow-wrap: normal;
+  white-space: nowrap;
 }
 
 .menu-toggle {
@@ -407,6 +491,12 @@ button:focus-visible {
   transition: opacity 180ms var(--ease-out), transform 180ms var(--ease-out);
 }
 
+/* Rows stand 27px apart, so the focus ring is drawn inside the row and never
+   touches the links above and below. */
+.primary-nav a:focus-visible {
+  outline-offset: -2px;
+}
+
 .primary-nav a.active {
   color: var(--accent);
 }
@@ -439,8 +529,11 @@ button:focus-visible {
   margin-top: 2px;
 }
 
+/* A label longer than the rail ("Back to Selected Research") wraps in balanced
+   lines that hang beside the arrow. */
 .parent-link span {
   min-width: 0;
+  text-wrap: balance;
 }
 
 .back-link {
@@ -455,7 +548,9 @@ button:focus-visible {
   position: relative;
   z-index: 1;
   display: grid;
-  grid-template-columns: repeat(12, minmax(0, 1fr));
+  /* The content takes the frame's own columns, so a section that starts on
+     the margin-index track starts where the rail ends. */
+  grid-template-columns: subgrid;
   grid-auto-rows: max-content;
   grid-column: 4 / -1;
   align-content: start;
@@ -624,17 +719,21 @@ button:focus-visible {
   transition: transform 180ms var(--ease-out);
 }
 
+/* The site footer runs from the frame's first guide to the closing guide, the
+   edge every section ends on: the frame less its last content column. */
 .site-footer {
+  --frame-width: min(100% - 128px, 1312px);
+  --frame-column: calc((var(--frame-width) - max(var(--frame-width) * 4 / 15, 3 * max(var(--frame-width) / 15, var(--rail-min-width) / 3) + var(--frame-inset))) / 11);
+
   display: flex;
   justify-content: space-between;
-  width: min(calc(100% - 128px), 1312px);
-  margin: 0 auto;
+  width: calc(var(--frame-width) - var(--frame-column));
+  margin: 0 0 0 calc((100% - var(--frame-width)) / 2);
   padding: 25px 0 34px;
   border-top: 1px solid var(--rule-strong);
   color: var(--muted);
   font-size: var(--type-label);
   line-height: var(--label-leading);
-  letter-spacing: 0.015em;
 }
 
 .site-footer p {
@@ -646,6 +745,7 @@ button:focus-visible {
   .primary-nav a:hover,
   .parent-link:hover,
   .back-link:hover,
+  .top-link:hover,
   .education-note a:hover,
   .read-more:hover {
     color: var(--accent);
@@ -662,11 +762,14 @@ button:focus-visible {
 }
 
 @media (width >= 1200px) {
+  /* The spine stands on axis B, four of the frame's ten columns in, where the
+     column guide stands: 40% of the frame's border box, centred on the guide's
+     line. The entries split on the same axis. */
   .ledger::before {
     position: absolute;
     top: var(--frame-pad);
     bottom: var(--frame-pad);
-    left: calc(var(--frame-pad) + (100% - 2 * var(--frame-pad)) * 0.4);
+    left: calc(40% - 0.7px);
     width: 1px;
     background: var(--dash-y);
     content: "";
@@ -674,7 +777,7 @@ button:focus-visible {
 
   .ledger-item {
     display: grid;
-    grid-template-columns: var(--hang-columns);
+    grid-template-columns: calc(40% - 0.2 * var(--frame-pad) - 0.2px) minmax(0, 1fr);
     align-items: start;
   }
 
@@ -711,7 +814,11 @@ button:focus-visible {
 }
 
 @media (width >= 768px) {
+  /* The rail is as tall as its contents, so the site footer never pushes it up
+     at the end of a page; a rail taller than the window scrolls inside it. */
   .site-rail {
+    max-height: 100vh;
+    max-height: 100dvh;
     overflow-y: auto;
     scrollbar-width: thin;
     scrollbar-color: var(--rule-strong) transparent;
@@ -721,8 +828,9 @@ button:focus-visible {
 @media (768px <= width < 1024px) {
   .site-frame,
   .structural-grid {
-    --rail-min-width: calc(5 * var(--type-interface) + 13px + 12px + 12px + 10px);
-    grid-template-columns: repeat(3, minmax(calc(var(--rail-min-width) / 3), 1fr)) repeat(9, minmax(0, 1fr));
+    --rail-track: max(calc(100% / 12), calc(var(--rail-min-width) / 3));
+
+    grid-template-columns: repeat(3, var(--rail-track)) max(var(--frame-inset), calc(100% / 3 - 3 * var(--rail-track))) repeat(8, minmax(0, 1fr));
   }
 
   .site-frame {
@@ -744,14 +852,7 @@ button:focus-visible {
     width: 0;
   }
 
-  .site-rail {
-    grid-column: 1 / span 3;
-    --rail-safe-inset: 12px;
-    padding-right: 12px;
-  }
-
   .content-column {
-    grid-template-columns: repeat(9, minmax(0, 1fr));
     grid-column: 4 / -1;
   }
 
@@ -763,8 +864,10 @@ button:focus-visible {
     padding-inline: 24px;
   }
 
+  /* On tablets the closing guide stands on the frame's end. */
   .site-footer {
     width: calc(100% - 64px);
+    margin-inline: auto;
   }
 }
 
@@ -774,13 +877,11 @@ button:focus-visible {
     --type-heading: 1.375rem;
   }
 
+  /* One landing for every in-page target: the scroll padding clears the
+     header, and a section or entry adds half a rem of paper below it. */
   html {
     scrollbar-gutter: auto;
     scroll-padding-top: 4.5rem;
-  }
-
-  html:has(.site-rail[data-parent-navigation="true"]) {
-    scroll-padding-top: 7.5rem;
   }
 
   body.menu-open .site-rail {
@@ -795,7 +896,6 @@ button:focus-visible {
   .site-frame {
     display: block;
     width: 100%;
-    min-height: 100vh;
     padding: 0 20px;
   }
 
@@ -819,7 +919,10 @@ button:focus-visible {
     height: 4rem;
   }
 
+  /* On a detail page the wordmark row scrolls away and the return row stays
+     pinned, so reading keeps the way back at hand in a 53px header. */
   .site-rail[data-parent-navigation="true"] {
+    top: -3.5rem;
     height: auto;
     padding-bottom: 8px;
   }
@@ -927,7 +1030,7 @@ button:focus-visible {
   }
 
   .ledger-item {
-    scroll-margin-top: 6rem;
+    scroll-margin-top: 0.5rem;
   }
 
   .ledger-item + .ledger-item {
@@ -937,20 +1040,42 @@ button:focus-visible {
 
   .site-footer {
     width: calc(100% - 40px);
+    margin-inline: auto;
     padding-bottom: 28px;
   }
 }
 
-@media (width < 1024px) {
+/* Below 1200px a title stacks above its content and takes the whole column,
+   less the frames' inset from the closing guide; phones have no guides. */
+@media (width < 1200px) {
+  :root {
+    --title-width: calc(100% - var(--frame-inset));
+  }
+}
+
+@media (width < 768px) {
   :root {
     --title-width: 100%;
+    --site-footer-height: calc(1px + 25px + var(--type-label) * var(--label-leading) + 28px);
   }
 }
 
 @media (width <= 540px) {
+  :root {
+    --site-footer-height: calc(1px + 25px + 2 * var(--type-label) * var(--label-leading) + 4px + 28px);
+  }
+
   .site-footer {
     display: grid;
     gap: 4px;
+  }
+}
+
+/* A landscape phone keeps the rail, so the content field starts higher and
+   the first screen holds more than the title; the wordmark keeps its line. */
+@media (768px <= width) and (height < 500px) {
+  :root {
+    --content-top: 48px;
   }
 }
 
@@ -963,6 +1088,7 @@ button:focus-visible {
   .parent-link,
   .primary-nav a::before,
   .back-link,
+  .top-link,
   .rail-panel,
   .site-rail[data-menu-interacted="true"] .rail-panel,
   .read-more,

@@ -30,9 +30,13 @@ export function SiteNavigation({
     rail.dataset.enhanced = "true";
     // The mobile fallback navigation occupies more height before enhancement.
     // Restore section bookmarks after it collapses so the heading stays in view.
+    // A return to the first entry of a section lands on the section, so its
+    // heading stands above the entry.
     const anchorFrame = window.location.hash
       ? requestAnimationFrame(() => {
-          document.getElementById(window.location.hash.slice(1))?.scrollIntoView({
+          const target = document.getElementById(decodeURIComponent(window.location.hash.slice(1)));
+          const landing = target?.matches(".ledger-item:first-child") ? target.closest("section") ?? target : target;
+          landing?.scrollIntoView({
             block: "start",
             behavior: "instant",
           });

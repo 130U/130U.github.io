@@ -30,9 +30,12 @@ export function KeepRanges({ text }: { text: string }) {
 }
 
 // A word that joins numbers with a hyphen or a dash (373-81, 2019-2024, 62-345.600,
-// 120–150) holds one line. Only words that stand between spaces are held, so the
+// 120–150), a number and a word (50-member, tier-1), or a one- or two-letter
+// prefix or an acronym and its word (e-commerce, co-founder, IPhO-level) holds
+// one line. An ordinary compound (real-world) may still break after its hyphen,
+// as printed text does. Only words that stand between spaces are held, so the
 // text and its word boundaries stay exactly as written.
-const NUMBER_JOIN = /(?<=^|\s)(\S*\d[-–]\d\S*)(?=\s|$)/u;
+const NUMBER_JOIN = /(?<=^|\s)(\S*(?:\d[-–][\d\p{L}]|\p{L}-\d|(?<!\p{L})\p{L}{1,2}-\p{L}|\p{Lu}\p{L}*\p{Lu}\p{L}*-\p{L})\S*)(?=\s|$)/u;
 
 export function KeepNumberJoins({ text }: { text: string }) {
   if (!NUMBER_JOIN.test(text)) return text;
@@ -115,7 +118,7 @@ export function InlineContent({ inlines }: { inlines: ArticleInline[] }) {
       const opening = tail.get(index - 1);
       const closing = lead.get(index + 1);
       if (!opening && !closing) return <ResearchMath key={index} tex={inline.tex} />;
-      return <span key={index} className={styles.glued}>{opening}<ResearchMath tex={inline.tex} tightStart={Boolean(opening)} tightEnd={Boolean(closing)} reserveCh={reserveFor(inline.tex, `${opening ?? ""}${closing ?? ""}`)} />{closing}</span>;
+      return <span key={index} className={styles.glued}>{opening}<ResearchMath tex={inline.tex} reserveCh={reserveFor(inline.tex, `${opening ?? ""}${closing ?? ""}`)} />{closing}</span>;
     }
     if (inline.type === "line-break") return <br key={index} />;
     if (inline.type === "strong") return <strong key={index}><InlineContent inlines={inline.inlines} /></strong>;

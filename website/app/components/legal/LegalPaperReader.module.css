@@ -26,9 +26,13 @@
   grid-template-rows: auto minmax(0, 1fr) auto;
 }
 
+/* The page behind a note is frosted as it is behind the zoom stage: the page
+   colour over a light blur, so the reserved scrollbar gutter, which shows the
+   page, matches it. */
 .dialog::backdrop {
-  background: rgb(0 0 0 / 0.2);
-  backdrop-filter: blur(3px);
+  background: color-mix(in srgb, var(--page, #f7f6f5) 58%, transparent);
+  -webkit-backdrop-filter: blur(7px);
+  backdrop-filter: blur(7px);
 }
 
 .header {
@@ -81,7 +85,6 @@
   overflow-y: auto;
   overflow-wrap: break-word;
   overscroll-behavior: contain;
-  scrollbar-gutter: stable;
 }
 
 .content p {
@@ -166,6 +169,8 @@
 
 @media (prefers-reduced-transparency: reduce) {
   .dialog::backdrop {
+    background: color-mix(in srgb, var(--page, #f7f6f5) 92%, transparent);
+    -webkit-backdrop-filter: none;
     backdrop-filter: none;
   }
 }
@@ -178,7 +183,13 @@
 
   .dialog::backdrop {
     background: rgb(0 0 0 / 0.35);
+    -webkit-backdrop-filter: none;
     backdrop-filter: none;
+  }
+
+  /* The dark scrim stops at the scrollbar gutter; the root takes its tone. */
+  :global(html):has(.dialog[open]) {
+    background-color: color-mix(in srgb, var(--page), #000 35%);
   }
 }
 

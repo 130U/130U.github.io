@@ -1,0 +1,285 @@
+/* Key results drawn on their own scale: an interval no table beside it states
+   carries its endpoints over its caps, and each mark its name beside it, so a
+   reader reads a number where it lies. Text that crosses a grid line is knocked
+   out on the surface it sits on: the page in the article, the sheet on the zoom
+   stage. Shared roles, colors and marks come from Figure.module.css. */
+
+/* A panel of number lines sets every label at the label size. */
+.panel {
+  color: var(--ink);
+  font-size: var(--type-label);
+  line-height: var(--label-leading);
+}
+
+/* An interval row: its name, then any endpoints over its caps, then the capped
+   line. Grid lines and reference rules run through the whole row behind
+   knocked-out text. */
+.span {
+  position: relative;
+}
+
+.span + .span {
+  padding-top: 14px;
+}
+
+.lines {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+.name {
+  position: relative;
+  z-index: 1;
+  margin: 0 0 2px;
+  color: var(--ink);
+}
+
+/* The name's knockout reaches 4px before its first letter, so a grid line at
+   the start of the scale stops short of it. */
+.name > span {
+  margin-left: -4px;
+  padding-right: 8px;
+  padding-left: 4px;
+  background: var(--control-surface, var(--page));
+}
+
+/* The equation number a row restates, after the row's name as the table beside
+   the figure sets it, in the reading face the display and its references use.
+   Its figures stand taller than the name's line, so it carries its own
+   knockout, reaching 4px past them as the name's does. */
+.number {
+  margin-right: -4px;
+  margin-left: calc(0.5em - 4px);
+  padding-inline: 4px;
+  background: var(--control-surface, var(--page));
+  font-family: var(--font-prose);
+  font-size: var(--type-reading);
+  font-variant-numeric: lining-nums proportional-nums;
+  line-height: 1;
+}
+
+/* The same number where a legend cites the display. */
+.legendNumber {
+  font-family: var(--font-prose);
+  font-size: var(--type-reading);
+  font-variant-numeric: lining-nums proportional-nums;
+  line-height: 1;
+}
+
+.field {
+  position: relative;
+  height: 46px;
+}
+
+.field[data-plain] {
+  height: 30px;
+}
+
+/* The capped line and its marks sit on the lower part of the field. */
+.field > .bar {
+  position: absolute;
+  inset: auto 0 0;
+  height: 18px;
+  min-height: 0;
+}
+
+/* An endpoint stands over its cap: the lower one starts there, the upper one
+   ends there. One in the accent takes weight 500. */
+.end {
+  position: absolute;
+  z-index: 1;
+  top: 2px;
+  padding-inline: 4px;
+  margin-inline: -4px;
+  background: var(--control-surface, var(--page));
+  color: var(--ink);
+  font-variant-numeric: lining-nums tabular-nums;
+  white-space: nowrap;
+}
+
+/* The knockout's padding lies outside the text, so the upper endpoint moves
+   back by it to end on its cap. */
+.end[data-side="high"] {
+  transform: translateX(calc(-100% + 8px));
+}
+
+.end[data-tone="accent"] {
+  color: var(--accent);
+  font-weight: 500;
+}
+
+.end[data-tone="muted"] {
+  color: var(--muted);
+}
+
+/* A note beside a mark: above its line in the magnified strip, or on the line
+   beside a cluster of marks. */
+.note {
+  position: absolute;
+  z-index: 1;
+  bottom: calc(100% + 2px);
+  padding-inline: 4px;
+  margin-inline: -4px;
+  background: var(--control-surface, var(--page));
+  color: var(--ink);
+  white-space: nowrap;
+}
+
+/* A note to the left of its mark stands as far from it as one to the right. */
+.note[data-side="left"] {
+  transform: translateX(calc(-100% + 8px));
+  text-align: right;
+}
+
+.note small {
+  display: block;
+  color: var(--muted);
+  font-size: inherit;
+  font-variant-numeric: lining-nums tabular-nums;
+}
+
+.note.beside {
+  bottom: 9px;
+  transform: translateY(50%);
+}
+
+/* The distance between two clusters on one row, named on its line. */
+.gap {
+  position: absolute;
+  top: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 9px;
+  margin-top: -4.5px;
+  border-inline: 1px solid var(--chart-steel);
+  background: linear-gradient(var(--chart-steel), var(--chart-steel)) center / 100% 1px no-repeat;
+}
+
+/* A name wider than its span takes two lines, so the span's ends and line
+   stay in view beside it. */
+.gap > span {
+  max-width: calc(100% - 16px);
+  padding-inline: 6px;
+  background: var(--control-surface, var(--page));
+  color: var(--ink);
+  text-align: center;
+  text-wrap: balance;
+}
+
+/* Labels of the reference rules and column heads, set above the first row. A
+   label ends just past its rule, or starts at its column. */
+.header {
+  position: relative;
+  height: 22px;
+}
+
+.header > span {
+  position: absolute;
+  bottom: 4px;
+  color: var(--muted);
+  white-space: nowrap;
+  transform: translateX(calc(-100% + 8px));
+}
+
+.header > span[data-anchor="start"] {
+  transform: translateX(-4.5px);
+}
+
+.header > span[data-tone="ink"] {
+  color: var(--ink);
+}
+
+.header > span[data-tone="accent"] {
+  color: var(--accent);
+}
+
+.axis {
+  position: relative;
+  margin-top: 6px;
+}
+
+.axisTitle {
+  margin-top: 4px;
+}
+
+/* A chart label in the accent, for the line or point it names. */
+.accentText {
+  color: var(--accent);
+}
+
+/* The window that the strip below magnifies, marked on the rows above it. It
+   lies over any knockout in its rows, so none of them cuts its edges. */
+.lensWindow {
+  position: absolute;
+  z-index: 2;
+  top: 0;
+  bottom: 0;
+  background: var(--chart-tint);
+  box-shadow: inset 1px 0 0 rgba(34, 0, 255, 0.28), inset -1px 0 0 rgba(34, 0, 255, 0.28);
+  pointer-events: none;
+}
+
+/* Two hairlines carry the window's edges down through the 30px axis row and
+   out to the ends of the magnified axis. */
+.lensLink {
+  position: relative;
+  display: block;
+  width: 100%;
+  height: 60px;
+  margin-top: -30px;
+  overflow: visible;
+  pointer-events: none;
+}
+
+.lensLink polygon {
+  fill: var(--chart-tint);
+  stroke: none;
+}
+
+.lensLink polyline {
+  fill: none;
+  stroke: rgba(34, 0, 255, 0.28);
+  stroke-width: 1;
+  vector-effect: non-scaling-stroke;
+}
+
+/* The magnified strip keeps two lines of room above its line for the notes. */
+.strip {
+  padding-top: 40px;
+}
+
+/* An interval known by its lower end: a cap at that end, a line to the end of
+   the axis and an arrowhead there. */
+.openRange {
+  position: absolute;
+  top: 50%;
+  height: 10px;
+  transform: translateY(-50%);
+  border-left: 1.5px solid currentColor;
+}
+
+.openRange::before {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  right: 2px;
+  height: 2px;
+  margin-top: -1px;
+  background: currentColor;
+  content: "";
+}
+
+.openRange::after {
+  position: absolute;
+  top: 50%;
+  right: -1px;
+  width: 0;
+  height: 0;
+  margin-top: -4.5px;
+  border-top: 4.5px solid transparent;
+  border-bottom: 4.5px solid transparent;
+  border-left: 7px solid currentColor;
+  content: "";
+}

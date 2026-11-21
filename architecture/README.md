@@ -36,8 +36,8 @@ and legal-note previews; reading and ordinary links work without JavaScript.
 ## Update the viewer
 
 Update `site.json` against the current application and `.github/workflows/pages.yml`,
-then run these commands from the repository root. `<archify>` is the installed
-Archify skill directory.
+then run these commands from the repository root. `<archify>` is the Archify
+directory.
 
 ```sh
 node <archify>/bin/archify.mjs validate architecture architecture/site.json --quality showcase --json
@@ -49,16 +49,32 @@ npm --prefix website run check
 The integration applies the site's type roles, a responsive reader layout, major-section
 heading semantics, control labels, and export-font settings while preserving SVG
 geometry. It sets the site's palette with no bullet before the title or the card
-headings, and adds the site's Return Home link, with its return arrow, above the title. It accepts both freshly generated and integrated viewers, and running it again
-leaves an integrated viewer unchanged.
+headings, and adds the site's Return Home link, with its return arrow, above the title.
+Its head carries the site's share metadata: a description, the canonical address, and
+the site's social card. The page takes the site's frame, gutters and footer; Present
+and Export stand on the title's row, and every surface is flat. The drawing has square corners, flat panels on
+a 1px hairline, regions drawn by the site's dashed hairline without a fill, and no
+product logos. It accepts both freshly generated and integrated viewers, and running it
+again leaves an integrated viewer unchanged.
+
+The drawing is shown at its reading size at every width: node titles at the label role
+(13px, which sets 13/11 pixels to an SVG unit) and every other label at 11px or more,
+so details, relationship and region labels are raised to 9.5 units and their knockouts
+grow with them. A drawing wider than its stage scrolls sideways, and its right edge
+fades while more remains; on a phone the stage scrolls both ways. The viewer opens with
+the region holding the first node at the stage's top-left, and the view controls' 100%
+is that reading size; zoom enlarges it, and the semantic
+radar shows the whole system. Below a 480px stage the view controls take two aligned
+rows, the tools above zoom. The three notes share one frame with dashed dividers and
+hanging bullets.
 
 The viewer loads `../assets/fonts/inter.css`, preloads regular Inter, and shares the
 site's fixed optical axis of 14 and lining numerals; its interface is set entirely in
 Inter. The integration maps each text style onto the site's shared tokens: the page
-title takes the title role and card headings the heading role, both at weight 500;
+title takes the title role and card headings the heading role, both at weight 400;
 panel titles take the item-title role, card lists and explanatory text the reading
 role, controls the interface role, and everything else the label role. Diagram labels
-keep their SVG coordinate sizes.
+keep their SVG coordinates.
 
 SVG exports embed the local regular and italic Inter files with the same optical
 settings; PNG and WebM exports render from those prepared fonts. After regeneration,

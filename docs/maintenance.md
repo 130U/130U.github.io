@@ -209,9 +209,13 @@ variance curve and netting ratio in `app/lib/content/rough-heston-curves.ts`, an
 graph (each through `enhanceFigure`, which the zoom stage applies to its enlarged copy
 as well), table column highlighting and the entrances of figures and table rows. The
 research renderer frames every table and sets a directly preceding "**Table N.**"
-caption paragraph inside the frame as its title; `ZoomStage` keeps row labels in view,
-fades the scrolling edge, and opens the zoomed view of any table or figure on one stage
-per page, so a new table or figure needs no registration. `buildReferenceTargets` in
+caption paragraph inside the frame as its title. `tableLayout` in `ResearchArticle.tsx`
+classes every cell of a research or legal table from its rows (values, sentences,
+phrases, stacked headings, two halves), so both renderers set tables alike; `ZoomStage`
+closes up, folds, wraps and pins each table to its room, fades the scrolling edge,
+shows a magnifier only where the stage shows more than the page, and opens the zoomed
+view of any table or figure on one stage per page, so a new table or figure needs no
+registration. `buildReferenceTargets` in
 `app/lib/content/article-headings.ts` anchors the numbered equations, statements, tables
 and figures of the Asian and Rough Heston manuscripts and links their references; a
 re-import that numbers a label twice fails the build.
@@ -223,6 +227,58 @@ and its evidence together. The same module maps each manuscript image path to it
 drawing, with evidence checked the same way, and names the row or column a table
 emphasizes. Manuscript checks in the tests read articles without these figures and
 without the labels of the native drawings, keeping their manuscript captions.
+`app/lib/content/passage-tables.ts` presents a manuscript passage that reports a list of
+results as a research table, keyed the same way: from the block that opens with `from`
+(and, with `at`, from those words on) through the block that opens with `through` (and,
+with `after`, up to those words). The words before and after stay paragraphs. The build
+fails unless the table carries the passage's formulas whole and in the manuscript's
+order, every number the passage writes outside a formula, only numbers the passage or a
+cited `source` states, and only words of the passage, a cited `source` or the heads of the
+manuscript table whose form it takes (`form`), and unless each display of the passage
+becomes a row that names its equation number (`display`). The row then shows the number
+and carries the display's TeX and anchor, so `tests/equation-numbers.test.mjs` finds it
+as it finds a display. A table that sets the passage's quantities as columns declares
+`reading: "columns"`: the build then reads its formulas down the columns, and the page
+marks it `data-reading="columns"`, so `tests/selected-research-content.test.mjs` reads
+its formulas in the manuscript's order. A manuscript update that rewrites such a passage fails the build
+until its table is edited with it; the importers and frozen sources stay as they are.
+`tests/passage-tables.test.mjs` pins each table, and refuses an invented, dropped or
+reordered value. `app/lib/content/research-number.ts` reads every table cell that holds a
+number, percentage, interval, bound or list of numbers, written as text or as one formula
+of numbers, with or without a note in parentheses after it, and aligns each column of
+them on the decimal point with invisible generated pads, leaving rows of words out of
+the alignment; `TableValue` sets its digits in the groups of `fractionDigitGroups`, the one helper
+every table groups its digits through, and the same path sets a table of mathematics'
+column of numbers (`alignTexColumn`). Copying a cell returns
+the manuscript's number, and `verify-visible-copy` reads a value's groups, pads and lead
+box as the one number they set. Figures group through the same helper: a figure label passed as
+plain text to `Tx`, or written with `Digits`, and every readout the figure controller
+writes (`writeReadout`), set a number of five or more digits after its point in its
+groups (`app/components/figures/digit-runs.ts`); write a long number in a label through
+one of them, never as a bare string inside JSX. `tests/figure-numbers.test.mjs` fails a
+figure that shows such a number ungrouped, and a figure that follows a table and writes
+one of its values in a label or its caption: draw the table's values, under its row names
+and in its order, and leave the numbers to the table and to the marks' `tip`s.
+`tests/figure-reading-load.test.mjs` holds every built figure to the reading budget of
+the design (caption, title, legend and value-note limits), and the browser layout check
+fails a caption set at the reading size or a legend entry that wraps from 390px, so a
+new or edited figure is checked against the same budget. A `Mark` in a plot is knocked
+out of the grid lines behind it; pass `knockout={false}` for a label set on a tinted
+region or held clear of a rule by its own padding, and place it clear of the lines. The
+browser layout check fails any figure label that a grid line or reference rule crosses
+without a knockout that holds it, and any label that does not take its mark's tone. It
+also sets each figure at every column width from 280 to 600px and fails any label whose
+text stands less than 4px from a curve (beyond its half stroke), whose knockout or tag
+holds a point of a curve, or that overlaps a dot, bar, bracket or another label, tick labels closer than
+6px, a view switch whose labels leave their segments, and a legend swatch with no mark
+of its form and colour; place such a label in open space (another anchor, a `wrap`ped
+label, or a `narrowOnly`/`wideOnly` pair where a figure's widths need two places),
+never over the curve. A bar chart's reference rule is named through `BarHeader` with
+`rule`, and its group rows are `BarGroup`s, so the rule runs from its name to the axis;
+a tick whose value a drawn rule stands for takes `grid: false`.
+It also fails any numbered step whose wrapped title does not hang beside its number,
+and loads each page with note references on touch phones and tablets and on a desktop,
+failing a reference that opens a line or stands more than 3px from the word it follows.
 
 `ResearchArticle` serves AI and Selected Research. The Markdown parser supports
 typed prose, emphasis, links, headings, tables, and formulas rather than arbitrary
@@ -230,9 +286,43 @@ HTML. `ResearchMath` renders TeX to self-contained SVG and assistive MathML duri
 the build; no browser math engine is loaded. The original TeX is carried in accessible
 annotations. Invalid formulas fail the build. Wide equations and tables scroll
 locally without shrinking the reading text. The renderer derives the row pitch of
-displayed mathematics from `--reading-leading` and `--type-math`, which it holds as
-`RESEARCH_READING_LEADING` and `RESEARCH_DISPLAY_MATH_SCALE`; change a token and its
-constant together (`tests/research-math.test.mjs` compares them).
+displayed mathematics from `--manuscript-leading` and `--type-math`, which it holds as
+`RESEARCH_MANUSCRIPT_LEADING` and `RESEARCH_DISPLAY_MATH_SCALE`; change a token and its
+constant together (`tests/research-math.test.mjs` compares them). The manuscript's
+vertical spaces are written in `--manuscript-line`; `app/lib/content/argument-units.ts`
+marks the paragraphs that open a statement, a proof or a run-in head and the paragraph
+that closes a proof, and `tests/manuscript-rhythm.test.mjs` pins the counts per
+manuscript, so a manuscript update that adds a statement updates the count with it. A
+display that is one `array` and nothing else but its `\tag` is set as a table of
+mathematics in a research table's frame (`renderResearchDisplayTable`,
+`ResearchMathTable`): its columns may be `l`, `c`, `r` and `|`, its rules `\hline`, and
+its row breaks `\\` or `\\[dim]`; any other column type or rule (`p{}`, `@{}`,
+`\cline`) fails the build, so a new form is designed before it is published. Its title
+is the words of the sentence it ends that name it, kept in
+`app/lib/content/math-tables.ts` under its paper and its first cell; a new table of
+mathematics whose sentence names it ("the … are") takes its title there, a table the
+manuscript does not head takes its column heads there from the same sentence, and
+`tests/display-tables.test.mjs` holds every title and head to its sentence and pins the
+three such displays in the manuscripts. A display whose outer level sets two or more formulas side by side is
+drawn as rows (`researchDisplayRows`, `renderResearchDisplayStack`): the rule reads the
+display, or the rows of the one `gathered` environment it is, or of an `aligned`
+environment flush at its rows' start, and parts it at `\qquad`, `\quad`, `\enspace`, a
+control space or a run of thin spaces before a part that holds a relation of its own and
+does not qualify the one before. Each row names its slice of the TeX in `data-stack-row`;
+one assistive expression carries the whole display. The same rule names the parts a row
+may part into where it would otherwise scroll: the qualifier that closes it and the
+connecting word that opens it (`parts`; `researchDisplayStackRows` adds a display on one
+line whose qualifier may part); each part names its slice in `data-part` and carries the
+manuscript's space before it (`--join`), and `MathFit` parts a row (`data-row-parted`)
+only after the forms that keep it whole fail. A displayed equation's expression stands in
+a box of its own (`data-equation-scroll`, the keyboard region), and its number after it:
+the formula's line wraps the number beneath where it has no room beside the expression,
+at the drop the renderer computes (`--number-drop`), and `MathFit` sets it beside a
+stack's last line where that line leaves room (`data-number-last`) and marks a display
+that still scrolls (`data-scrolls`), which shows its fade. A manuscript update that adds or
+splits such a display updates the counts in `tests/display-stacks.test.mjs` with it; a
+qualifier the rule reads as a formula, or a formula it reads as a qualifier, is fixed in
+the rule, never in the manuscript.
 
 Use the semantic typography tokens in `app/globals.css` and the shared font files.
 The [design guide](design.md#typography) defines each role's size, weight, family,
@@ -242,13 +332,19 @@ layout and interaction rules.
 
 When adding content, update its source, loader/slug registry, route mapping, sitemap
 expectations, and output tests together. Experience routes are keyed by stable
-entry IDs; add the corresponding mapping when adding an entry. The loader checks
-for missing routes, duplicate slugs, and mismatched AI or legal manuscript routes.
+entry IDs; add the corresponding mapping when adding an entry. An entry's
+`organization` is the firm or institution's name, with any team or program after
+the role in `metadata.position`, and its slug is that name in lowercase words; an AI
+or legal article's slug is its title's. The loader checks for missing routes,
+duplicate slugs, and mismatched AI or legal manuscript routes, and the output tests
+hold every slug to its form. A renamed page's old address is not forwarded: replace
+every link to it in the repository (the tests fail on one that is no page), and ask
+for its removal from search results.
 
 `content/protected-sources.json` checks approved source bytes with LF normalization;
 `content/visible-copy-manifest.json` independently checks rendered text, metadata,
-alt text, and ARIA labels. Review intended content changes before updating either
-contract. Presentation changes preserve approved prose and formula annotations.
+alt text, and ARIA labels of every route and the architecture viewer. Review intended
+content changes before updating either contract. Presentation changes preserve approved prose and formula annotations.
 Keep independent route, link, figure, and mathematical checks when updating a loader.
 
 ## Assets and static assembly
@@ -292,8 +388,23 @@ visible copy. The static preview binds to `127.0.0.1:8123` by default and serves
 development security policy required by Next.js tooling. `test:browser` uses isolated
 Chromium contexts and the actual static export to check every figure and view at
 six viewport widths, plus enlarged-text and keyboard-scroll regressions, and holds every
-manuscript table heading to two lines clear of its table's zoom control, every displayed
-equation to one starting axis, and every equation number to the column's right edge. It reports
+manuscript table heading to two lines (three over a column of values) clear of its
+table's zoom control, the row labels of words of a scrolling table in view where the room
+beside them holds its widest column, a table that keeps them in view snapping to its
+columns with no column's text half beneath them at rest or at its scrolled end, every
+column of values aligned on its decimal point, rows of words left out (an interval on one
+line, or on two where its table breaks it), every value in the reading face, a table of
+mathematics unscrolled from 768px up with its number at its frame's top-left, every row
+that presents a display showing its number, every inline
+formula of the text and tables on its line's baseline and unclipped, every displayed
+equation to one starting axis, every equation number to the column's right edge, no
+equation number on a line with a row cut by its display's scroll or within 8px of ink
+beside it, a number beneath its display only where it has no room beside it and then one line
+of mathematics below the last row, the fade of every scrolling display over ink at rest
+and past the expression at the scroll's end, every display row to one formula, and the
+rows of a stacked display to one axis, a line of mathematics apart, with the number on
+the last row's baseline, a parted row's qualifier a `\qquad` in, a row parted only where it
+would otherwise scroll, and the parts of a whole row a manuscript space apart. It reports
 geometry and failure screenshots in `website/test-results/figure-layout/`. CI installs
 Chromium and requires these checks to pass before publishing.
 
@@ -316,8 +427,9 @@ installed lockfile on every build.
 Each exported HTML page receives hashes for its exact inline scripts before any
 script executes. Production CSP blocks arbitrary inline scripts, eval, inline event
 handlers, embedded frames/objects, media, and form submission; fonts, images, and
-network fetches use the same origin, and only the architecture viewer adds the data and
-blob images its exports draw. Inline styles support framework and viewer geometry.
+network fetches use the same origin, and only the architecture viewer, recognized by
+its Archify data script, adds the data and blob images its control icons and exports
+draw. Inline styles support framework and viewer geometry.
 Formulas are rendered at build time; a formula that sets a link, style, or class
 attribute stops the build.
 GitHub Pages controls HTTP response headers: a meta policy cannot enforce

@@ -3,12 +3,13 @@ import { showcaseDomains, type ShowcaseDomain, type ShowcaseEntry } from "../../
 import { InlineMarkdown } from "../research/ResearchInline";
 import { ReadingArrow } from "../ReadingArrow";
 import { SectionDirectory } from "../SectionDirectory";
+import { TitleText } from "../TitleText";
 import styles from "./Experience.module.css";
 
 function ExperienceEntry({ entry }: { entry: ShowcaseEntry }) {
   return (
     <article className="ledger-item" id={entry.slug} data-experience-entry={entry.id}>
-      <h3 className="ledger-title">{entry.listingTitle}</h3>
+      <h3 className="ledger-title"><TitleText text={entry.listingTitle} /></h3>
       <div className="ledger-body">
         <p className="ledger-prose" data-experience-summary>{entry.categoryId === "01" ? <InlineMarkdown text={entry.summary} /> : entry.summary}</p>
         <Link className="read-more" href={entry.detailPath} aria-label={`Read more about ${entry.pageTitle}`}>

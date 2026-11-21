@@ -9,6 +9,7 @@ import {
 import "../public/assets/fonts/inter.css";
 import "../public/assets/fonts/source-serif.css";
 import "./globals.css";
+import "./print.css";
 
 const DEVELOPMENT_SECURITY_POLICY = [
   "default-src 'self'",

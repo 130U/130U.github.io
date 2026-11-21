@@ -349,20 +349,26 @@ for (const expected of PROJECTS) {
     const vectorIndices = sourceFormulas.flatMap((_, index) => numericVisuals[index] ? [] : [index]);
     const math = [...content.matchAll(/<math\b([^>]*)>([\s\S]*?)<\/math>/giu)];
     const svg = [...content.matchAll(/<svg\b([^>]*)>/giu)].filter((match) => attr(match[1], "data-research-svg"));
-    const visualFormulas = svgRanges(content).map(([from, to]) => content.slice(from, to));
     const containers = formulaContainers(content);
+    // A display set as rows draws each row from its own slice of the TeX; its rows make one visual.
+    const stacked = containers.map((container) => /\bdata-display-stack=/u.test(container));
+    const visualFormulas = containers.filter((_, index) => !numericVisuals[index]).map((container) => svgRanges(container).map(([from, to]) => container.slice(from, to)).join(""));
     assert.equal(math.length, sourceFormulas.length);
-    assert.equal(svg.length, vectorIndices.length, "Every nonnumeric or display expression must have one deterministic visual SVG");
-    assert.equal(visualFormulas.length, vectorIndices.length, "Nested vector geometry must remain inside its own formula root");
+    assert.equal(svg.filter((match) => attr(match[1], "data-research-svg") !== "row").length + stacked.filter(Boolean).length, vectorIndices.length, "Every nonnumeric or display expression must have one deterministic visual: an SVG, or the rows of a stacked display");
+    assert.equal(svgRanges(content).length, svg.length, "Nested vector geometry must remain inside its own formula root");
     assert.equal(containers.length, math.length, "Every formula must have one visual and assistive container");
-    assert.deepEqual(svg.map((match) => attr(match[1], "data-research-svg")), vectorIndices.map((index) => sourceFormulas[index].kind));
+    assert.deepEqual(containers.flatMap((container, index) => numericVisuals[index] ? [] : [stacked[index] ? "display" : attr(container.match(/<svg\b([^>]*)>/iu)[1], "data-research-svg")]), vectorIndices.map((index) => sourceFormulas[index].kind));
     assert.deepEqual(containers.map((container) => attr(container.match(/^<span\b[^>]*>/iu)[0], "data-research-formula")), sourceFormulas.map(({ kind }) => kind));
     for (const [index, container] of containers.entries()) {
       const number = numericVisuals[index];
       const numericSpans = [...container.matchAll(/<span\b([^>]*\bdata-research-number\b[^>]*)>([\s\S]*?)<\/span>/giu)];
       assert.equal((container.match(/<math\b/giu) ?? []).length, 1, "Every formula retains exactly one assistive MathML expression");
       assert.equal(numericSpans.length, number ? 1 : 0, "Only complete inline numeric literals may use the prose-number presentation");
-      assert.equal((container.match(/data-research-svg=/gu) ?? []).length, number ? 0 : 1, "Numeric prose must not duplicate SVG; every other expression retains SVG");
+      // A stacked display draws each row once, or each part of a row that may part.
+      const count = (pattern) => (container.match(pattern) ?? []).length;
+      const rows = count(/\bdata-stack-row=/gu) - count(/\bdata-row-parts=/gu) + count(/\bdata-row-part=/gu);
+      assert.equal(count(/data-research-svg=/gu), number ? 0 : stacked[index] ? rows : 1, "Numeric prose must not duplicate SVG; every other expression retains SVG, a stacked display one for each row or part");
+      if (stacked[index]) assert.equal(count(/data-research-svg="row"/gu), rows, "A stacked display draws its rows and nothing else");
       if (number) {
         const [, attributes, markup] = numericSpans[0];
         assert.equal(attr(attributes, "aria-hidden"), "true", "Visible numeric text must not duplicate accessible math");

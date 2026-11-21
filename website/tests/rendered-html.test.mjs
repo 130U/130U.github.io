@@ -1,4 +1,5 @@
 import assert from "node:assert/strict";
+import { execFileSync } from "node:child_process";
 import { existsSync } from "node:fs";
 import { readFile, readdir } from "node:fs/promises";
 import path from "node:path";
@@ -7,6 +8,7 @@ import { fileURLToPath } from "node:url";
 import sharp from "sharp";
 import { secureStaticHtml } from "../scripts/secure-static-html.mjs";
 import { courseworkGroups } from "../app/lib/content/about.ts";
+import { architectureDiagrams } from "../app/lib/content/architecture-diagrams.ts";
 import { BEAMED_NOTE, NODE, NOTE } from "../app/components/clarinet-hero/shape.ts";
 
 const ROOT = fileURLToPath(new URL("../", import.meta.url));
@@ -32,12 +34,12 @@ const EXPERIENCE_DETAIL_SLUGS = new Map([
   [6, "euromonitor-international"],
   [7, "china-construction-bank"],
   [12, "jones-lang-lasalle"],
-  [13, "hubble-technology-investment"],
+  [13, "hubble-network"],
   [14, "saif-partners"],
   [15, "citic-securities"],
   [16, "ey-parthenon"],
-  [17, "independent-stem-olympiad-training"],
-  [18, "stem-olympiad-competitions"],
+  [17, "independent-stem-olympiad-training-practice"],
+  [18, "the-high-school-attached-to-hunan-normal-university"],
 ]);
 const EXPERIENCE_DETAIL_ROUTES = [...EXPERIENCE_DETAIL_SLUGS.values()].map((slug) => `/experience/${slug}/`);
 const LEGAL_LISTING_TITLES = [
@@ -369,6 +371,26 @@ test("the architecture viewer preserves its source with a static security policy
   assert.match(published, /<svg\b/iu);
 });
 
+test("the architecture viewer is shared as the site's pages are", async () => {
+  const viewer = await readFile(path.join(OUT, "architecture", "index.html"), "utf8");
+  const home = await routeHtml("/");
+  const address = `${SITE_ORIGIN}/architecture/`;
+  assert.equal(canonicalUrl(viewer), address);
+  assert.equal(metaContent(viewer, "property", "og:url"), address);
+  const description = metaContent(viewer, "name", "description");
+  assert.match(description ?? "", /^[A-Z][^.]{40,160}\.$/u, "One sentence that states what the page holds");
+  assert.equal(metaContent(viewer, "property", "og:description"), description);
+  assert.equal(metaContent(viewer, "name", "twitter:description"), description);
+  const title = viewer.match(/<title>([^<]+) \| Theodore Ouyang<\/title>/u)?.[1];
+  assert.equal(title, "Website Architecture");
+  for (const key of ["og:title", "twitter:title"]) assert.equal(metaContent(viewer, key.startsWith("og:") ? "property" : "name", key), title);
+  for (const key of ["og:site_name", "og:image", "og:image:width", "og:image:height", "og:image:alt", "og:type"]) {
+    assert.ok(metaContent(home, "property", key), key);
+    assert.equal(metaContent(viewer, "property", key), metaContent(home, "property", key), `${key} is the site's own`);
+  }
+  for (const key of ["twitter:card", "twitter:image"]) assert.equal(metaContent(viewer, "name", key), metaContent(home, "name", key), `${key} is the site's own`);
+});
+
 test("every route keeps canonical metadata, CSP, and navigation appropriate to its page level", async () => {
   const requiredCsp = [
     "default-src 'self'",
@@ -565,7 +587,7 @@ test("About research opens each complete paper through an explicit Read More lin
   assert.deepEqual(researchEntries, ["critical-dependence-stress-for-diversification-gains-under-fixed-marginals", "certified-valuation-of-arithmetic-asian-options", "certified-joint-pricing-errors-in-rough-heston"]);
   for (const [slug, title, description, tables, sections, repository] of [
     ["critical-dependence-stress-for-diversification-gains-under-fixed-marginals", "Critical Dependence Stress for Diversification Gains under Fixed Marginals", "I prove that the critical stress budget is quadratic in the trade size", 0, 5, "RESEARCH-Critical-Dependence-Stress-for-Diversification-Gains-under-Fixed-Marginals"],
-    ["certified-valuation-of-arithmetic-asian-options", "Certified Valuation of Arithmetic Asian Options: The Cost of Exercising on the Geometric Average", "the bound is below a hundredth of a cent per barrel", 11, 9, "RESEARCH-Certified-Valuation-of-Arithmetic-Asian-Options"],
+    ["certified-valuation-of-arithmetic-asian-options", "Certified Valuation of Arithmetic Asian Options: The Cost of Exercising on the Geometric Average", "the bound is below a hundredth of a cent per barrel", 13, 9, "RESEARCH-Certified-Valuation-of-Arithmetic-Asian-Options"],
     ["certified-joint-pricing-errors-in-rough-heston", "Certified Joint Pricing Errors in Rough Heston", "netting the legs certifies a half-point tolerance for all 28 six-month spreads, butterflies and baskets tested", 10, 8, "RESEARCH-Certified-Joint-Pricing-Errors-in-Rough-Heston"],
   ]) {
     assert.match(about, new RegExp(`id="${slug}"`, "u"));
@@ -589,7 +611,8 @@ test("About research opens each complete paper through an explicit Read More lin
     assert.equal(openingTags(article, "h1").length, 1);
     const articleHeader = article.match(/<article\b[^>]*>\s*<header\b[^>]*>([\s\S]*?)<\/header>/u)?.[1] ?? "";
     assert.equal(stripMarkup(articleHeader), `${title} GitHub Full Manuscript`, "Selected Research headers contain the title and source links; return navigation belongs in the rail.");
-    assert.equal(openingTags(article, "table").length, tables);
+    // The manuscript's tables, each carrying its block; a table of mathematics is a display.
+    assert.equal(openingTags(article, "table").filter((tag) => attribute(tag, "data-research-block-type") === "table").length, tables);
     assert.deepEqual(openingTags(article, "h2").map((tag) => attribute(tag, "data-source-number")).filter(Boolean), Array.from({ length: sections }, (_, index) => String(index + 1)), `${slug}: every numbered main chapter is rendered once and in order.`);
     assert.match(article, /aria-label="Article contents"/u);
     assert.match(article, /This page includes the complete (?:main text and references|abstract, five main sections)/u);
@@ -682,12 +705,63 @@ test("all eighteen approved Experience entries use institution titles and real l
   ], "The four nested contributions must stay under their parent item");
 });
 
+// An organization is a firm or institution's name in its own words; a team,
+// desk or division it worked in belongs to the position, after a comma.
+const UNIT_WORDS = /\b(?:Team|Desk|Division|Group|Department|Workstream)\b/u;
+const lowercaseWords = (name) => name.normalize("NFKD").replace(/\p{M}/gu, "").toLowerCase().replace(/[^a-z0-9]+/gu, "-").replace(/^-|-$/gu, "");
+
+test("every Experience organization is a firm or institution, and every page address follows one form", async () => {
+  const entries = await approvedExperience();
+  for (const entry of entries) {
+    assert.doesNotMatch(entry.organization, UNIT_WORDS, `Entry ${entry.id}: a team belongs in the position`);
+    assert.doesNotMatch(entry.organization, /:/u, `Entry ${entry.id}: the organization is a name, not a title`);
+    if (entry.categoryId === "03") assert.equal(entry.organization, "Duke Law School");
+    const [role] = entry.metadata.position.split(", ");
+    assert.doesNotMatch(role, UNIT_WORDS, `Entry ${entry.id}: the role comes first, its unit after the comma`);
+    // A unit the summary names as the one the work was for ("the Agriculture
+    // Research Group's reports") stands in the position.
+    if (["01", "03"].includes(entry.categoryId)) continue;
+    for (const [, unit] of entry.summary.matchAll(/\bthe ((?:[A-Z][\w-]*\s)+(?:Team|Desk|Division|Group|Department))\b/gu)) {
+      assert.ok(entry.metadata.position.endsWith(`, ${unit}`), `Entry ${entry.id}: ${unit} follows the role in Position`);
+    }
+  }
+  assert.equal(entries.find(({ id }) => id === 12).metadata.position, "Summer Intern, Capital Markets Team");
+  assert.equal(entries.find(({ id }) => id === 15).metadata.position, "Equity Research Intern, Agriculture Research Group");
+  // An entry's own page is its organization's name in lowercase words; an AI or
+  // legal article keeps its title's words, as its repository and PDF do.
+  for (const [id, slug] of EXPERIENCE_DETAIL_SLUGS) {
+    assert.equal(slug, lowercaseWords(entries.find((entry) => entry.id === id).organization), `Entry ${id}`);
+  }
+  for (const route of ROUTES) assert.match(route, /^\/(?:[a-z0-9]+(?:-[a-z0-9]+)*\/)*$/u, `${route}: an address is lowercase words joined by hyphens`);
+});
+
+test("every site address written anywhere in the repository is a published page", async () => {
+  const files = execFileSync("git", ["ls-files", "-z"], { cwd: REPOSITORY_ROOT, encoding: "utf8" }).split("\0")
+    .filter((file) => /\.(?:md|mjs|ts|tsx|json|html|yml|cff)$/u.test(file));
+  const published = new Set([...ROUTES, "/architecture/"]);
+  for (const file of files) {
+    const text = await readFile(path.join(REPOSITORY_ROOT, file), "utf8");
+    for (const [address] of text.matchAll(/(?<![\w./-])\/experience\/[a-z0-9]+(?:-[a-z0-9]+)*\//gu)) {
+      assert.ok(published.has(address), `${file} names ${address}, which is no page`);
+    }
+    // The tests' own fixtures build pages that are not the site's.
+    if (file.startsWith("website/tests/")) continue;
+    for (const [, link] of text.matchAll(/https:\/\/www\.theodoreoy\.com(\/[^\s)"'<>#?\\`\]]*)/gu)) {
+      const address = link.replace(/[.,;:]+$/u, "");
+      // An asset, a work published at its repository's address, or an address
+      // a script composes from a registered slug is checked where it is built.
+      if (/^\/(?:assets|BLOG-)[^/]*\//u.test(address) || /\.[a-z0-9]+$/u.test(address) || address.includes("${")) continue;
+      assert.ok(published.has(address), `${file} links ${address}, which is no page`);
+    }
+  }
+});
+
 test("the ten nonresearch detail routes keep metadata in a labeled record strip", async () => {
   const metadataStyles = (await readFile(path.join(ROOT, "app", "components", "experience", "Experience.module.css"), "utf8")).replace(/\r\n?/gu, "\n");
-  assert.match(metadataStyles, /(?:^|\n)\.metadata\s*\{[^}]*grid-template-columns:\s*repeat\(4,\s*minmax\(0,\s*1fr\)\)[^}]*border:\s*1px solid var\(--frame\)/u, "Desktop sets the four fields in one frame");
-  assert.match(metadataStyles, /\.metadata > div \+ div\s*\{\s*background:\s*var\(--dash-y\)/u, "Dashed hairlines divide the fields");
-  assert.match(metadataStyles, /@media \(width < 1200px\) \{[^@]*?\.metadata\s*\{\s*grid-template-columns:\s*repeat\(2,\s*minmax\(0,\s*1fr\)\)/u, "Narrower layouts use two fields per row");
-  assert.match(metadataStyles, /@media \(width < 420px\) \{\s*\.metadata\s*\{\s*grid-template-columns:\s*1fr/u, "Phones stack the fields");
+  assert.match(metadataStyles, /(?:^|\n)\.metadata\s*\{[^}]*grid-template-columns:\s*repeat\(2,\s*minmax\(0,\s*1fr\)\)[^}]*border:\s*1px solid var\(--frame\)/u, "The strip sets two fields per row in one frame");
+  assert.match(metadataStyles, /\.metadata > div:nth-child\(2\)\s*\{\s*background:\s*var\(--dash-y\)/u, "Dashed hairlines divide the fields");
+  assert.match(metadataStyles, /@container \(width >= 53rem\) \{[^@]*?\.metadata\[data-layout="row"\]\s*\{\s*grid-template-columns:\s*repeat\(4,\s*minmax\(min-content,\s*auto\)\)/u, "Short values stand four across where the strip holds each on one line");
+  assert.match(metadataStyles, /@media \(width < 540px\) \{\s*\.metadata\s*\{\s*grid-template-columns:\s*minmax\(0,\s*1fr\)/u, "Phones stack the fields");
   assert.match(metadataStyles, /\.metadata dt\s*\{[^}]*font-size:\s*var\(--type-label\)/u, "Field labels use the label role");
   assert.match(metadataStyles, /\.metadata dd\s*\{[^}]*font-family:\s*var\(--font-prose\)[^}]*font-size:\s*var\(--type-reading\)/u, "Field values use the reading face and size");
   for (const route of EXPERIENCE_DETAIL_ROUTES) {
@@ -695,7 +769,11 @@ test("the ten nonresearch detail routes keep metadata in a labeled record strip"
     assert.equal(openingTags(html, "article").length, 1);
     assert.equal(openingTags(html, "details").length, 0);
     assert.match(html, /<h1\b[^>]*\bid="experience-title"/u);
-    assert.match(html, /href="#experience-title"/u);
+    assert.match(html, /<a class="top-link" href="#experience-title">Back to Top<\/a>/u, "Back to Top shares the footer action's hover and focus");
+    const layout = attribute(html.match(/<dl\b([^>]*\bdata-experience-metadata\b[^>]*)>/u)?.[1] ?? "", "data-layout");
+    const expectedLayout = ["/experience/ey-parthenon/", "/experience/saif-partners/"].includes(route) ? "row"
+      : ["/experience/citic-securities/", "/experience/hubble-network/", "/experience/independent-stem-olympiad-training-practice/", "/experience/the-high-school-attached-to-hunan-normal-university/"].includes(route) ? "long" : "pairs";
+    assert.equal(layout, expectedLayout, `${route}: only entries whose values fit one row of the strip set four across, and only a long value stacks a narrow strip`);
     assert.equal(canonicalUrl(html), `${SITE_ORIGIN}${route}`);
     const main = html.match(/<main\b[^>]*>([\s\S]*?)<\/main>/u)?.[1] ?? "";
     assert.doesNotMatch(stripMarkup(main), /\p{Script=Han}/u);
@@ -706,6 +784,7 @@ test("the ten nonresearch detail routes keep metadata in a labeled record strip"
 test("each AI and legal article opens with one logic architecture diagram", async () => {
   const routes = [...AI_PROJECT_SLUGS.map((slug) => `${EXPERIENCE_ROUTE}${slug}/`), ...ARTICLES.map(([slug]) => `${EXPERIENCE_ROUTE}${slug}/`)];
   assert.equal(routes.length, 8);
+  const diagramTex = [];
   for (const route of routes) {
     const html = await routeHtml(route);
     const figures = [...html.matchAll(/<figure\b([^>]*)>([\s\S]*?)<\/figure>/giu)]
@@ -717,7 +796,18 @@ test("each AI and legal article opens with one logic architecture diagram", asyn
     const stages = [...figures[0][2].matchAll(/\bdata-stage="(\d+)"/gu)].map((match) => Number(match[1]));
     assert.deepEqual(stages, [1, 2, 3, 4], `${route}: four stages, read left to right`);
     assert.ok(stripMarkup(figures[0][2].match(/<figcaption\b[^>]*>([\s\S]*?)<\/figcaption>/iu)?.[1] ?? "").length > 40, `${route}: the diagram needs its caption`);
+    // Connectors are crisp SVG drawings, one over each connector column; the loop is drawn in its own.
+    const wires = [...figures[0][2].matchAll(/<svg\b([^>]*\bdata-wire="([^"]+)"[^>]*)>/gu)];
+    assert.equal(wires.filter((match) => match[2].startsWith("link-")).length, 3, `${route}: three connector columns`);
+    for (const [, attributes] of wires) assert.equal(attribute(attributes, "shape-rendering"), "crispEdges", `${route}: connectors are drawn with crisp edges`);
+    // Every formula keeps one assistive expression with its exact TeX, however its drawing breaks.
+    for (const formula of figures[0][2].split(/(?=<span\b[^>]*\bdata-diagram-math="true")/u).slice(1)) {
+      assert.equal((formula.match(/<math\b/gu) ?? []).length, 1, `${route}: one assistive expression per formula`);
+      diagramTex.push(decodeHtml(formula.match(/<annotation\b[^>]*>([\s\S]*?)<\/annotation>/u)[1]));
+    }
   }
+  const sourceTex = Object.values(architectureDiagrams).flatMap((diagram) => diagram.stages.flatMap((stage) => stage.nodes.flatMap((node) => [...(node.detail ?? "").matchAll(/\$([^$]+)\$/gu)].map((match) => match[1]))));
+  assert.deepEqual([...diagramTex].sort(), [...sourceTex].sort(), "Every diagram formula keeps its TeX");
 });
 
 test("law papers preserve article identity, chapter navigation, and bidirectional footnotes", async () => {
@@ -983,7 +1073,10 @@ test("the production design contract is restrained and dependency-light", async 
   const structuralGrid = await readFile(path.join(ROOT, "app", "components", "StructuralGrid.tsx"), "utf8");
   const layout = await readFile(path.join(ROOT, "app", "layout.tsx"), "utf8");
   const packageJson = JSON.parse(await readFile(path.join(ROOT, "package.json"), "utf8"));
-  for (const token of ["--page: #f7f6f5", "--ink: #0b0b0b", "--muted: #70706c", "--accent: #2200ff", "repeat(3, minmax(calc(var(--rail-min-width) / 3), 1fr)) repeat(12, minmax(0, 1fr))"]) assert.ok(globals.includes(token));
+  for (const token of ["--page: #f7f6f5", "--ink: #0b0b0b", "--muted: #70706c", "--accent: #2200ff", "repeat(3, var(--rail-track)) max(var(--frame-inset), calc(100% * 4 / 15 - 3 * var(--rail-track))) repeat(11, minmax(0, 1fr))", "repeat(3, var(--rail-track)) max(var(--frame-inset), calc(100% / 3 - 3 * var(--rail-track))) repeat(8, minmax(0, 1fr))"]) assert.ok(globals.includes(token), `globals.css keeps ${token}`);
+  // The rail's growth comes out of the margin-index track; the content and its sections take the frame's own columns.
+  assert.match(globals, /\.content-column\s*\{[^}]*grid-template-columns:\s*subgrid/u);
+  for (const css of [await readFile(path.join(ROOT, "app", "components", "experience", "Experience.module.css"), "utf8"), await readFile(path.join(ROOT, "app", "coursework", "coursework.module.css"), "utf8"), home]) assert.match(css, /\.section\s*\{[^}]*grid-template-columns:\s*subgrid/u);
   assert.doesNotMatch(globals, /box-shadow|backdrop-filter/u);
   assert.doesNotMatch(home, /box-shadow|backdrop-filter|linear-gradient/u);
   assert.match(homePage, /<ClarinetHero \/>/u);
@@ -1001,15 +1094,16 @@ test("the production design contract is restrained and dependency-light", async 
   assert.match(home, /@media \(pointer:\s*coarse\)[\s\S]*?\.contactStrip a[\s\S]*?min-height:\s*44px/u);
   assert.match(globals, /width:\s*min\(100%,\s*1440px\)/u);
   assert.match(globals, /--content-top:\s*112px;/u);
-  assert.match(globals, /\.content-column\s*\{[\s\S]*?grid-template-columns:\s*repeat\(12,[\s\S]*?padding:\s*var\(--content-top\) 0 144px/u);
+  assert.match(globals, /\.content-column\s*\{[\s\S]*?grid-template-columns:\s*subgrid;[\s\S]*?padding:\s*var\(--content-top\) 0 144px/u);
   assert.match(globals, /\.site-rail\s*\{[^}]*padding:\s*var\(--content-top\) /u, "The rail's wordmark starts on the title's line.");
   assert.match(home, /\.homeFrame \.profileSection\s*\{[^}]*padding-top:\s*var\(--content-top\)/u);
   assert.match(globals, /\.structural-guide-tick\s*\{[\s\S]*?position:\s*sticky[\s\S]*?height:\s*20px/u);
   assert.match(directory, /\.directory\s*\{[^}]*grid-template-columns:\s*1fr/u);
-  assert.match(experience, /\.section\s*\{[^}]*grid-template-columns:\s*repeat\(11,[^}]*grid-column:\s*1 \/ span 11/u, "Sections end on the reading-end guide");
+  assert.match(experience, /\.section\s*\{[^}]*grid-template-columns:\s*subgrid;[^}]*grid-column:\s*1 \/ span 11/u, "Sections end on the reading-end guide");
   assert.match(experience, /\.sectionBody\s*\{[^}]*grid-column:\s*2\s*\/\s*span\s*10/u);
   assert.match(globals, /--hang-columns:\s*minmax\(0,\s*4fr\)\s+minmax\(0,\s*6fr\)/u, "Hanging rows put titles on 4 of 10 columns and prose on 6");
-  for (const css of [experience, globals]) assert.match(css, /@media \(width >= 1200px\)[\s\S]*?grid-template-columns:\s*var\(--hang-columns\)/u);
+  assert.match(experience, /@media \(width >= 1200px\)[\s\S]*?grid-template-columns:\s*var\(--hang-columns\)/u);
+  assert.match(globals, /@media \(width >= 1200px\)[\s\S]*?\.ledger::before\s*\{[^}]*left:\s*calc\(40% - 0\.7px\)[\s\S]*?\.ledger-item\s*\{[^}]*grid-template-columns:\s*calc\(40% - 0\.2 \* var\(--frame-pad\) - 0\.2px\)/u, "A ledger's spine and its entries split on axis B, the column guide");
   assert.match(structuralGrid, /data-guides=\{layout\}/u);
   assert.match(globals, /\.structural-grid\[data-guides="index"\] \.structural-guide-reading-measure\s*\{\s*grid-column:\s*9/u, "Index pages mark the prose axis");
   // Each group of content sits in one faint, unfilled frame with a continuous dashed
@@ -1037,7 +1131,7 @@ test("the production design contract is restrained and dependency-light", async 
   assert.match(globals, /\.site-rail\[data-enhanced="true"\] \.rail-panel\s*\{[^}]*visibility:\s*hidden/u);
   assert.match(navigation, /wordmark-lockup[\s\S]*?wordmark-mark[\s\S]*?wordmark-name[\s\S]*?>Theodore Ouyang<\/span>/u);
   assert.match(layout, /assets\/brand\/favicon\.ico[\s\S]*?assets\/brand\/lo-mark\.svg[\s\S]*?sizes: "any"/u);
-  assert.match(experience, /\.metadata\s*\{[^}]*grid-template-columns:\s*repeat\(4,/u);
+  assert.match(experience, /\.metadata\[data-layout="row"\]\s*\{[^}]*grid-template-columns:\s*repeat\(4,/u);
   assert.match(globals, /\.ledger-title\s*\{[^}]*font-size:\s*var\(--type-subheading\)/u);
   assert.match(experience, /\.contributions > ol\s*\{[^}]*padding:\s*0\s*;[^}]*list-style:\s*none\s*;/u);
   assert.deepEqual(Object.keys(packageJson.dependencies).sort(), ["@mathjax/mathjax-tex-font", "@mathjax/src", "next", "react", "react-dom"]);

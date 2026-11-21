@@ -9,7 +9,7 @@ export function secureStaticHtml(source) {
   const scripts = [...html.matchAll(/<script\b([^>]*)>([\s\S]*?)<\/script>/giu)]
     .filter(([, attributes]) => !/\bsrc\s*=/iu.test(attributes))
     .map(([, , script]) => sourceHash(script));
-  const isArchitecture = /<meta name="generator" content="archify /u.test(html);
+  const isArchitecture = /<script id="archify-i18n-data"/u.test(html);
   const directives = [
     "default-src 'self'",
     `script-src 'self' ${[...new Set(scripts)].join(" ")}`.trim(),

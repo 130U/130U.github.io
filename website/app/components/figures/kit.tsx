@@ -1,19 +1,38 @@
-import type { CSSProperties, ReactNode } from "react";
+import { Fragment, type CSSProperties, type ReactNode } from "react";
 import type { ArticleInline } from "../../lib/content/article-headings";
 import { InlineContent, InlineMarkdown, KeepRanges } from "../research/ResearchInline";
 import { ZoomGlyph } from "../ZoomGlyph";
 import zoomStyles from "../research/Stage.module.css";
+import { digitRuns, hasLongFraction } from "./digit-runs";
 import styles from "./Figure.module.css";
 
 export { styles };
 
 type Tone = "ink" | "accent" | "sky" | "steel" | "mist" | "green";
 export type View = { id: string; label: ReactNode };
-type LegendItem = { label: ReactNode; tone: Tone; shape?: "square" | "line" | "dash" | "dotted" | "dot" | "ring" | "triangle" | "hatch" | "box" | "tint" };
+type LegendItem = { label: ReactNode; tone: Tone; shape?: "square" | "line" | "thick" | "dash" | "dotted" | "dot" | "ring" | "triangle" | "hatch" | "box" | "tint" | "range" };
 
-/** Short copy that may contain inline TeX in the manuscripts' `$...$` form. */
+/**
+ * Figure text whose numbers of five or more digits after the point stand in
+ * the groups a research table sets, parted by TeX's thin space through spans
+ * alone, so the text copied is the manuscript's.
+ */
+export function Digits({ text }: { text: string }) {
+  return <>{digitRuns(text).map((run, index) => (run.group ? <span key={index} className={styles.digitGroup} data-digit-group="">{run.text}</span> : run.text))}</>;
+}
+
+/** Short copy that may contain inline TeX in the manuscripts' `$...$` form; a
+    long number in plain copy stands in digit groups. */
 export function Tx({ children }: { children: string }) {
-  return children.includes("$") ? <InlineMarkdown text={children} /> : <KeepRanges text={children} />;
+  if (children.includes("$")) return <InlineMarkdown text={children} />;
+  return hasLongFraction(children) ? <Digits text={children} /> : <KeepRanges text={children} />;
+}
+
+/** A figure's title, each hyphenated compound held on one line, so a word
+    such as "three-month" never breaks at its hyphen. */
+function Title({ text }: { text: string }) {
+  if (text.includes("$")) return <Tx>{text}</Tx>;
+  return <>{text.split(/(\S+-\S+)/u).map((part, index) => (index % 2 ? <span key={index} className={styles.keep}>{part}</span> : <KeepRanges key={index} text={part} />))}</>;
 }
 
 const FIGURE_LABEL = /^(Figure \d+\.)\s*/u;
@@ -71,7 +90,7 @@ export function Figure({ id, title, caption, views, defaultView, viewsLabel, leg
         <button type="button" className={`${zoomStyles.control} ${styles.zoom}`} data-figure-zoom aria-label="Zoom in" aria-haspopup="dialog" hidden><ZoomGlyph /></button>
         {(title || views) && (
           <div className={styles.head}>
-            {title && <p className={styles.title} data-figure-title><Tx>{title}</Tx></p>}
+            {title && <p className={styles.title} data-figure-title><Title text={title} /></p>}
             {views && (
               <div className={styles.switch} role="group" aria-label={viewsLabel ?? "Figure view"} data-fig-switch data-count={views.length} hidden>
                 {views.map((item) => <button key={item.id} type="button" data-fig-view={item.id} aria-pressed={item.id === view}>{item.label}</button>)}
@@ -129,7 +148,21 @@ export function sample(from: number, to: number, count: number, fn: (value: numb
   });
 }
 
-type Tick = { at: number; label: ReactNode; solid?: boolean; edge?: "start" | "end"; minor?: boolean };
+/** An axis tick. `grid: false` keeps its label but draws no grid line, where a
+    reference rule drawn at that value stands in for it. */
+type Tick = { at: number; label: ReactNode; solid?: boolean; edge?: "start" | "end"; minor?: boolean; grid?: boolean };
+
+/**
+ * Whether a narrow axis may hide a tick: one marked minor, or, on seven ticks
+ * or more, every other interior tick, and on an even count the one before the
+ * last as well, so no two shown ticks stand a single step apart. An end tick
+ * always stays, so the axis keeps the value its scale ends on.
+ */
+function minorTick(ticks: Tick[], index: number) {
+  const last = ticks.length - 1;
+  if (index === 0 || index === last) return false;
+  return ticks[index].minor ?? (ticks.length >= 7 && (index % 2 === 1 || (last % 2 === 1 && index === last - 1)));
+}
 
 export type Crosshair = {
   x: number[];
@@ -171,10 +204,10 @@ export function Plot({ label, x, y, xTicks = [], yTicks = [], xGrid = true, xTit
         data-crosshair={crosshair ? JSON.stringify(crosshair) : undefined}
         aria-hidden="true"
       >
-        {yTicks.map((tick, index) => <span key={`gy${index}`} className={styles.gridY} data-solid={tick.solid ? "" : undefined} style={{ top: `${100 - y(tick.at)}%` }} />)}
-        {xGrid && xTicks.map((tick, index) => <span key={`gx${index}`} className={styles.gridX} data-solid={tick.solid ? "" : undefined} style={{ left: `${x(tick.at)}%` }} />)}
+        {yTicks.map((tick, index) => tick.grid !== false && <span key={`gy${index}`} className={styles.gridY} data-solid={tick.solid ? "" : undefined} style={{ top: `${100 - y(tick.at)}%` }} />)}
+        {xGrid && xTicks.map((tick, index) => tick.grid !== false && <span key={`gx${index}`} className={styles.gridX} data-solid={tick.solid ? "" : undefined} style={{ left: `${x(tick.at)}%` }} />)}
         {yTicks.map((tick, index) => <span key={`ty${index}`} className={styles.tickY} style={{ top: `${100 - y(tick.at)}%` }}>{tick.label}</span>)}
-        {xTicks.map((tick, index) => <span key={`tx${index}`} className={styles.tickX} data-edge={tick.edge} data-minor={tick.minor ?? (xTicks.length >= 4 && index % 2 === 1) ? "" : undefined} style={{ left: `${x(tick.at)}%` }}>{tick.label}</span>)}
+        {xTicks.map((tick, index) => <span key={`tx${index}`} className={styles.tickX} data-edge={tick.edge} data-minor={minorTick(xTicks, index) ? "" : undefined} style={{ left: `${x(tick.at)}%` }}>{tick.label}</span>)}
         {curves && <svg className={styles.curves} viewBox="0 0 100 100" preserveAspectRatio="none" focusable="false">{curves}</svg>}
         {children}
       </div>
@@ -189,9 +222,12 @@ export function Dot({ left, top, tone: color = "ink", ring, shape, tip, classNam
 
 /**
  * A label pinned to a point of the area. `anchor` names the side of the label
- * box that sits on the point: "left" puts the label to the right of it.
+ * box that sits on the point: "left" puts the label to the right of it. In a
+ * plot the label is knocked out of the grid lines behind it; one set on a
+ * tinted region, or held clear of a rule by its own padding, is drawn without
+ * a knockout (`knockout={false}`) and stands clear of the lines instead.
  */
-export function Mark({ left, top, anchor = "left", tone: color = "ink", strong, wrap, tag, children, className, style }: {
+export function Mark({ left, top, anchor = "left", tone: color = "ink", strong, wrap, tag, knockout = true, children, className, style }: {
   left: number;
   top: number;
   anchor?: "left" | "right" | "top" | "bottom" | "center" | "top-left" | "bottom-left" | "top-right" | "bottom-right" | "above-right" | "above-left" | "below-right" | "below-left";
@@ -199,6 +235,7 @@ export function Mark({ left, top, anchor = "left", tone: color = "ink", strong, 
   strong?: boolean;
   wrap?: boolean;
   tag?: boolean;
+  knockout?: boolean;
   children: ReactNode;
   className?: string;
   style?: CSSProperties;
@@ -231,6 +268,7 @@ export function Mark({ left, top, anchor = "left", tone: color = "ink", strong, 
       className={classes(styles.mark, styles[color], strong && styles.markStrong, className)}
       data-wrap={wrap ? "" : undefined}
       data-tag={tag ? "" : undefined}
+      data-bare={knockout ? undefined : ""}
       style={{ ...fit, ...style, left: `${left}%`, top: `${top}%`, "--ax": ax, "--ay": ay } as CSSProperties}
     >
       {typeof children === "string" ? <Tx>{children}</Tx> : children}
@@ -254,16 +292,27 @@ export function Bars({ label, stack, labelWidth, valueWidth, children, className
   return <div className={classes(styles.bars, className)} data-stack={stack === "narrow" ? "narrow" : stack ? "always" : undefined} style={style} role="img" aria-label={label}>{children}</div>;
 }
 
-type Rule = { at: number; tone?: "ink" | "soft" | "accent" };
+export type Rule = { at: number; tone?: "ink" | "soft" | "accent" };
 
-/** Grid lines and reference rules behind a row; they run through the whole row height. */
+/** Grid lines that keep clear of the reference rules: one within five percent
+    of the scale of a rule gives way to it, so the two never read as one doubled
+    line. The tick label stays. */
+export function clearOf(grid: number[], rules: ReadonlyArray<{ at: number }>) {
+  return grid.filter((left) => rules.every((rule) => Math.abs(rule.at - left) >= 5));
+}
+
+/** Grid lines behind a row's bar, and reference rules through the whole row:
+    in a stacked figure a rule runs on through the label and value lines,
+    behind their knocked-out text, up to the header that names it. */
 function Lines({ grid, rules }: { grid: number[]; rules: Rule[] }) {
-  return (
+  return <>
     <span className={styles.lines} aria-hidden="true">
-      {grid.map((left, index) => <span key={`g${index}`} className={styles.gridX} style={{ left: `${left}%` }} />)}
-      {rules.map((rule, index) => <span key={`r${index}`} className={styles.rule} data-tone={rule.tone === "ink" ? undefined : rule.tone} style={{ left: `${rule.at}%` }} />)}
+      {clearOf(grid, rules).map((left, index) => <span key={index} className={styles.gridX} style={{ left: `${left}%` }} />)}
     </span>
-  );
+    {rules.length > 0 && <span className={styles.rules} aria-hidden="true">
+      {rules.map((rule, index) => <span key={index} className={styles.rule} data-tone={rule.tone === "ink" ? undefined : rule.tone} style={{ left: `${rule.at}%` }} />)}
+    </span>}
+  </>;
 }
 
 export function BarRow({ label, value, valueNote, grid = [], rules = [], rowClass, children }: {
@@ -280,22 +329,40 @@ export function BarRow({ label, value, valueNote, grid = [], rules = [], rowClas
       <Lines grid={grid} rules={rules} />
       <div className={styles.barLabel}><span className={styles.labelText}>{typeof label === "string" ? <Tx>{label}</Tx> : label}</span></div>
       <div className={styles.track}>{children}</div>
-      <div className={styles.value}>
-        <span>{typeof value === "string" ? <Tx>{value}</Tx> : value}</span>
-        {valueNote && <small>{typeof valueNote === "string" ? <Tx>{valueNote}</Tx> : valueNote}</small>}
-      </div>
+      {(value !== undefined || valueNote !== undefined) && <div className={styles.value}>
+        {value !== undefined && <span>{typeof value === "string" ? <Tx>{value}</Tx> : value}</span>}
+        {valueNote !== undefined && <small>{typeof valueNote === "string" ? <Tx>{valueNote}</Tx> : valueNote}</small>}
+      </div>}
     </div>
   );
 }
 
-/** Labels for the dashed reference rules, set above the first row. */
-export function BarHeader({ marks }: { marks: Array<{ at: number; label: string; tone?: Tone; anchor?: "left" | "right" | "center" }> }) {
+/** A group's name above its rows; the reference rules run on through it. */
+export function BarGroup({ label, rules = [] }: { label: string; rules?: Rule[] }) {
+  return (
+    <div className={classes(styles.row, styles.group)}>
+      <Lines grid={[]} rules={rules} />
+      <p className={styles.groupLabel}><span className={styles.labelText}><Tx>{label}</Tx></span></p>
+    </div>
+  );
+}
+
+/**
+ * Names above the first row: a column's head, which starts or ends at its
+ * position, or a reference rule's name, which stands beside the top of its
+ * rule (`rule`), 6px clear of it on the anchored side, or centred over it.
+ */
+export function BarHeader({ marks }: { marks: Array<{ at: number; label: string; tone?: Tone; anchor?: "left" | "right" | "center"; rule?: Rule["tone"] }> }) {
   return (
     <div className={styles.row}>
       <div className={styles.barHeader}>
-        {marks.map((mark, index) => (
-          <span key={index} className={`${styles.headerMark} ${styles[mark.tone ?? "ink"]}`} data-anchor={mark.anchor ?? "center"} style={{ left: `${mark.at}%` }}><Tx>{mark.label}</Tx></span>
-        ))}
+        {marks.map((mark, index) => {
+          const anchor = mark.anchor ?? "center";
+          return <Fragment key={index}>
+            {mark.rule && <span className={styles.rule} data-tone={mark.rule === "ink" ? undefined : mark.rule} data-anchor={anchor} style={{ left: `${mark.at}%` }} />}
+            <span className={`${styles.headerMark} ${styles[mark.tone ?? "ink"]}`} data-anchor={anchor} data-rule={mark.rule ? "" : undefined} style={{ left: `${mark.at}%` }}><Tx>{mark.label}</Tx></span>
+          </Fragment>;
+        })}
       </div>
     </div>
   );
@@ -308,7 +375,7 @@ export function BarAxis({ x, ticks, title }: { x: Scale; ticks: Tick[]; title?: 
         {ticks.map((tick, index) => {
           const left = x(tick.at);
           const edge = tick.edge ?? (left < 5 ? "start" : left > 95 ? "end" : undefined);
-          return <span key={index} className={styles.tickX} data-edge={edge} data-minor={tick.minor ?? (ticks.length >= 4 && index % 2 === 1) ? "" : undefined} style={{ left: `${left}%` }}>{tick.label}</span>;
+          return <span key={index} className={styles.tickX} data-edge={edge} data-minor={minorTick(ticks, index) ? "" : undefined} style={{ left: `${left}%` }}>{tick.label}</span>;
         })}
       </div>
     </div>
