@@ -334,8 +334,9 @@ installed lockfile on every build.
 Each exported HTML page receives hashes for its exact inline scripts before any
 script executes. Production CSP blocks arbitrary inline scripts, eval, inline event
 handlers, embedded frames/objects, media, and form submission; fonts, images, and
-network fetches use the same origin, and only the architecture viewer adds the data and
-blob images its exports draw. Inline styles support framework and viewer geometry.
+network fetches use the same origin, and only the architecture viewer, recognized by
+its Archify data script, adds the data and blob images its control icons and exports
+draw. Inline styles support framework and viewer geometry.
 Formulas are rendered at build time; a formula that sets a link, style, or class
 attribute stops the build.
 GitHub Pages controls HTTP response headers: a meta policy cannot enforce

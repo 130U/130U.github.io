@@ -1266,6 +1266,54 @@ try {
         noScript.push({ route, links: count, hidden, issues: count > 0 && hidden.length === 0 ? [] : ["article-contents-hidden-without-javascript"] });
       } finally { await context.close(); }
     }
+    // The hero stacks on portrait tablets, the 13-inch iPad included, and fills their first
+    // screen; landscape tablets keep the name beside the instrument.
+    for (const [width, height, stacked] of [[820, 1180, true], [1024, 1366, true], [1180, 820, false], [1366, 1024, false]]) {
+      const context = await browser.newContext({ viewport: { width, height }, reducedMotion: "reduce", serviceWorkers: "block" });
+      await serveExport(context, missing);
+      try {
+        const page = await context.newPage();
+        await page.goto(ORIGIN + "/", { waitUntil: "networkidle" });
+        await page.evaluate(() => document.fonts.ready);
+        const result = await page.locator('section[aria-labelledby="hero-name"]').evaluate((hero, expected) => {
+          const frame = hero.firstElementChild;
+          const columns = getComputedStyle(frame).gridTemplateColumns.split(" ").length;
+          const band = frame.getBoundingClientRect().top - hero.getBoundingClientRect().top;
+          const issues = [];
+          if ((columns === 1) !== expected) issues.push(expected ? "hero-not-stacked-on-portrait-tablet" : "hero-stacked-on-landscape");
+          if (expected && band > 96) issues.push("hero-floats-on-portrait-tablet");
+          return { columns, band: Math.round(band), issues };
+        }, stacked);
+        home.push({ width, height, check: "hero-orientation", ...result });
+      } finally { await context.close(); }
+    }
+    // The architecture viewer's drawing is read at its own size: node titles at 13px and
+    // every other label at 11px or more, at every width; zoom keeps its controls together.
+    for (const width of [390, 768, 1440]) {
+      const context = await browser.newContext({ viewport: { width, height: 900 }, reducedMotion: "reduce", serviceWorkers: "block" });
+      await serveExport(context, missing);
+      try {
+        const page = await context.newPage();
+        await page.goto(ORIGIN + "/architecture/", { waitUntil: "networkidle" });
+        await page.evaluate(() => document.fonts.ready);
+        const result = await page.evaluate(() => {
+          const svg = document.querySelector(".diagram-container > svg");
+          const scale = svg.getBoundingClientRect().width / svg.viewBox.baseVal.width;
+          const issues = [];
+          for (const text of svg.querySelectorAll("text")) {
+            if (!text.getClientRects().length || getComputedStyle(text).display === "none" || getComputedStyle(text).visibility === "hidden") continue;
+            const size = parseFloat(getComputedStyle(text).fontSize) * scale;
+            const floor = text.hasAttribute("data-node-label") ? 13 : 11;
+            if (size < floor - 0.05) issues.push({ kind: "viewer-label-too-small", text: text.textContent.slice(0, 40), size: +size.toFixed(1), floor });
+          }
+          const tops = ["out", "reset", "in"].map((view) => Math.round(document.querySelector(`.diagram-nav [data-view="${view}"]`).getBoundingClientRect().top));
+          if (new Set(tops).size !== 1) issues.push({ kind: "viewer-zoom-controls-split" });
+          if (document.documentElement.scrollWidth > innerWidth + 1) issues.push({ kind: "viewer-page-overflow" });
+          return { scale: +scale.toFixed(3), issues };
+        });
+        home.push({ width, check: "architecture-reading-size", ...result });
+      } finally { await context.close(); }
+    }
     const scrollRoutes = await discoverPages();
     assert.ok(scrollRoutes.length >= 25, `Expected at least 25 pages; found ${scrollRoutes.length}.`);
     const scrollBrowser = await chromium.launch({ headless: true, ignoreDefaultArgs: ["--hide-scrollbars"], ...(process.env.PLAYWRIGHT_EXECUTABLE_PATH ? { executablePath: process.env.PLAYWRIGHT_EXECUTABLE_PATH } : {}) });

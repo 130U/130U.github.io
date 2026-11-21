@@ -3,6 +3,7 @@ import Link from "next/link";
 import { ReturnArrow } from "./components/ReturnArrow";
 import { SiteShell } from "./components/SiteShell";
 import { createPageMetadata } from "./lib/content/site";
+import styles from "./not-found.module.css";
 
 export const metadata: Metadata = createPageMetadata({
   title: "Page Not Found",
@@ -12,13 +13,13 @@ export const metadata: Metadata = createPageMetadata({
 
 export default function NotFound() {
   return (
-    <SiteShell>
+    <SiteShell guides="index">
       <header className="page-intro">
         <h1>Page Not Found</h1>
         <p className="lede">
           The page you requested does not exist.
         </p>
-        <Link className="back-link" href="/">
+        <Link className={`back-link ${styles.home}`} href="/">
           <ReturnArrow />Return Home
         </Link>
       </header>

@@ -32,7 +32,7 @@ const readerRules = `  <style data-site-reader-layout>
     .header-row h1, .card-header h2 { max-width: 100%; }
     .pulse-dot, .card-dot { flex: 0 0 auto; }
     .cards { grid-template-columns: repeat(auto-fit, minmax(min(280px, 100%), 1fr)); }
-    .toolbar { max-width: calc(100% - 2rem); flex-wrap: wrap; }
+    .toolbar { max-width: 100%; flex-wrap: wrap; }
     .toolbar > button, .toolbar > .preset-wrap, .toolbar > .export-wrap { min-width: 0; }
     .toolbar button { max-width: 100%; white-space: normal; }
     .diagram-container { container: diagram / inline-size; }
@@ -62,13 +62,13 @@ const readerRules = `  <style data-site-reader-layout>
 
     @container viewer (width < 60rem) {
       html:not([data-embed="true"]):not([data-present="true"]) .toolbar {
-        position: relative;
+        position: static;
         inset: auto;
-        width: 100%;
+        width: auto;
         max-width: 100%;
-        justify-content: flex-end;
+        justify-content: flex-start;
         gap: 8px;
-        margin: 0 0 20px;
+        margin: 0;
       }
       html:not([data-embed="true"]):not([data-present="true"]) .header {
         padding-right: 0;
@@ -125,7 +125,7 @@ const readerRules = `  <style data-site-reader-layout>
 // The site has one palette: the paper, the ink and hairlines. Every viewer
 // theme and preset resolves to it, so the theme and preset switches have
 // nothing to switch and are hidden.
-const site = Object.fromEntries(["page", "ink", "muted", "link-rule", "frame", "rule-medium", "rule-strong"].map((token) => {
+const site = Object.fromEntries(["page", "ink", "muted", "link-rule", "frame", "rule-medium", "rule-strong", "panel", "dash"].map((token) => {
   const value = globals.match(new RegExp(`--${token}:\\s*([^;]+);`, "u"))?.[1];
   assert.ok(value, `Missing shared color token: --${token}`);
   return [token, value.trim()];
@@ -137,6 +137,7 @@ const palette = {
   arrow: site["link-rule"], "arrow-emphasis": site.ink, mask: site.page,
   ...Object.fromEntries(categories.flatMap((category) => [[`${category}-fill`, site.page], [`${category}-stroke`, category === "external" ? site.muted : site.ink]])),
   "toolbar-bg": site.page, "toolbar-border": site["rule-medium"], "toolbar-text": site.ink, "toolbar-hover": site.page, "toolbar-menu-bg": site.page,
+  "site-panel": site.panel, "site-dash": site.dash,
 };
 const themeRules = `  <style data-site-theme>
     :root, [data-theme], [data-preset] {
@@ -187,7 +188,20 @@ function applyViewerLabels(viewer) {
     "viewer.guided.selectBeatLink": "Select a story beat to copy its exact link",
     "viewer.guide.map.hint": "Open semantic radar with a live viewport and stable nodes.",
     "viewer.radar.focus": "Focus {label} from semantic radar",
-    "viewer.radar.compacted": "Radar compacted to avoid covering the semantic passport or MAP controls.",
+    "viewer.radar.compacted": "Radar compacted to avoid covering the semantic passport or map controls.",
+    "viewer.radar.space": "Semantic radar needs more map space.",
+    "viewer.radar.needsSpace": "Semantic radar needs more visible map space",
+    "viewer.radar.cancelWaiting": "Cancel semantic radar waiting for more map space",
+    "viewer.nav.route.short": "Path",
+    "viewer.nav.radar.short": "Map",
+    "viewer.nav.lens.short": "Lens",
+    "viewer.nav.read": "Read",
+    "viewer.nav.level.map": "Map",
+    "viewer.nav.level.read": "Read",
+    "viewer.nav.level.full": "Full",
+    "viewer.nav.level.auto": "Auto",
+    "viewer.nav.detail.read": "Zoom in to reveal tags and annotations",
+    "viewer.nav.camera": "Reset diagram view. {hint}",
     "viewer.export.shareCard": "Share card",
     "viewer.export.routeShareCard": "Route share card",
     "viewer.export.reachShareCard": "Reach share card",
@@ -220,15 +234,195 @@ function applyViewerLabels(viewer) {
     .replaceAll("<strong>Route Share Card</strong>", "<strong>Route share card</strong>")
     .replaceAll("<strong>Reach Share Card</strong>", "<strong>Reach share card</strong>")
     .replaceAll("<strong>Copy Share Card</strong>", "<strong>Copy share card</strong>")
-    .replaceAll("Vector &amp; motion</span>", "Vector and motion</span>");
+    .replaceAll("Vector &amp; motion</span>", "Vector and motion</span>")
+    .replaceAll('title="Trace route (R)">PATH</button>', 'title="Trace route (R)">Path</button>')
+    .replaceAll('title="Semantic radar (M)">MAP</button>', 'title="Semantic radar (M)">Map</button>')
+    .replaceAll('title="Semantic lens (L)">LENS</button>', 'title="Semantic lens (L)">Lens</button>')
+    .replaceAll("data-view-detail hidden>READ</span>", "data-view-detail hidden>Read</span>")
+    .replaceAll("Semantic radar needs more MAP space.</p>", "Semantic radar needs more map space.</p>");
+}
+
+// The drawing is read at its own size: node titles at the label role (13px,
+// eleven SVG units at 13/11 pixels a unit) and every other label at no less
+// than 11px. It keeps that size at every width and scrolls sideways from its
+// first stage, as the viewer's phone layout already did; zoom enlarges it
+// further, and the radar shows the whole system.
+const READING_SCALE = 13 / 11;
+const SMALL_LABEL_UNITS = 9.5;
+
+function diagramRules(viewer) {
+  const viewBox = viewer.match(/<svg viewBox="0 0 ([\d.]+) ([\d.]+)" role="img"/u);
+  assert.ok(viewBox, "Missing the diagram's viewBox.");
+  const width = Math.ceil(Number(viewBox[1]) * READING_SCALE);
+  const labelScale = (from) => (SMALL_LABEL_UNITS / from).toFixed(4);
+  const live = 'html:not([data-embed="true"]):not([data-present="true"])';
+  const wide = `${live} .diagram-container[data-wide-diagram="true"]`;
+  const drawing = ".diagram-container > svg";
+  return `  <style data-site-diagram>
+    :root {
+      --site-dash-x: repeating-linear-gradient(to right, var(--site-dash) 0 4px, transparent 4px 8px);
+      --site-dash-y: repeating-linear-gradient(to bottom, var(--site-dash) 0 4px, transparent 4px 8px);
+    }
+    /* The page: the site's 1440px frame and gutters, its footer, flat
+       surfaces, and Present and Export on the title's row. */
+    body { padding: 2rem 64px 0; }
+    .container { max-width: 1312px !important; }
+    .header-row { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 12px 24px; }
+    .header-row > .toolbar { position: static; inset: auto; z-index: auto; margin: 0; }
+    html:not([data-embed="true"]) .header,
+    html[data-present="true"]:not([data-embed="true"]) .header { padding-right: 0; }
+    .toolbar, .toolbar button, .export-menu, .preset-menu, .diagram-container, .cards, .card, .diagram-nav,
+    .diagram-nav button, .overview-map, .focus-chip, .route-probe, .semantic-lens, .diagram-guide, .node-finder {
+      box-shadow: none !important;
+      -webkit-backdrop-filter: none !important;
+      backdrop-filter: none !important;
+    }
+    .diagram-container { border: 1px solid var(--panel-border); background: var(--bg); }
+    ${wide} {
+      overflow-x: auto;
+      overflow-y: hidden;
+      overscroll-behavior-x: contain;
+      padding: 12px;
+      scrollbar-width: thin;
+      scrollbar-color: var(--lane-stroke) transparent;
+    }
+    /* From a 48rem stage the view controls float in a strip under the drawing;
+       on a narrower one they follow it in flow. */
+    @media (width >= 832px) { ${wide} { padding-bottom: 64px; } }
+    ${wide} > svg { width: ${width}px; min-width: ${width}px; max-width: none; height: auto; }
+    ${wide} :is(.diagram-nav, .overview-map, .focus-chip, .route-probe, .semantic-lens, .diagram-guide, .node-finder) {
+      transform: translateX(var(--archify-scroll-x, 0px));
+    }
+    .diagram-nav { background: var(--bg); border: 1px solid var(--toolbar-border); }
+    .diagram-nav button { font-weight: 500; letter-spacing: 0; }
+    .diagram-nav-icon { width: 14px; height: 14px; }
+
+    /* The drawing in the site's terms: square corners, flat panels on a 1px
+       hairline, regions drawn by the dashed hairline without a fill, labels
+       in two weights, and generic glyphs only. */
+    ${drawing} rect { rx: 0; ry: 0; }
+    ${drawing} .c-region { fill: none; stroke: var(--site-dash); stroke-width: 1px; stroke-dasharray: 4 4; vector-effect: non-scaling-stroke; }
+    ${drawing} :is(.c-frontend, .c-backend, .c-database, .c-cloud, .c-security, .c-messagebus, .c-external) {
+      fill: var(--site-panel);
+      stroke: var(--lane-stroke);
+      stroke-width: 1px;
+      vector-effect: non-scaling-stroke;
+    }
+    ${drawing} .brand-mark { display: none; }
+    ${drawing} text[data-node-label], ${drawing} [data-boundary-label], ${drawing} [data-legend] > text { font-weight: 500; }
+    ${drawing} [data-legend] g text { font-weight: 400; }
+    ${drawing} [data-node-id] text[data-detail],
+    ${drawing} g[data-edge-label] > text,
+    ${drawing} [data-boundary-label],
+    ${drawing} [data-legend-count-badge] text { font-size: ${SMALL_LABEL_UNITS}px; }
+    ${drawing} g[data-edge-label] > .c-mask {
+      transform-box: fill-box;
+      transform-origin: center;
+      transform: scale(${labelScale(8)}, 1.1);
+    }
+    ${drawing} [data-graph-role="structural-frame-label-mask"] {
+      transform-box: fill-box;
+      transform-origin: 0 50%;
+      transform: scale(${labelScale(9)}, 1.1);
+    }
+
+    /* The three notes share one frame, divided by dashed hairlines: one
+       column, three from 1024px, with hanging bullets. */
+    .cards { display: grid; grid-template-columns: minmax(0, 1fr); gap: 0; margin-top: 24px; border: 1px solid var(--panel-border); }
+    .card { margin: 0; padding: 28px 24px 30px; border: 0 !important; background: none !important; }
+    .card + .card { background: var(--site-dash-x) left top / 100% 1px no-repeat !important; }
+    .card ul { padding: 0; }
+    .card li { position: relative; padding-left: 1em; }
+    .card li::before { content: "\\2022"; position: absolute; left: 0; }
+    @media (width >= 1024px) {
+      .cards { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+      .card + .card { background: var(--site-dash-y) left top / 1px 100% no-repeat !important; }
+    }
+
+    .site-footer {
+      display: flex;
+      justify-content: space-between;
+      gap: 24px;
+      margin: 72px 0 0;
+      padding: 25px 0 34px;
+      border-top: 1px solid var(--lane-stroke);
+      color: var(--text-muted);
+      font-size: var(--type-label);
+      line-height: var(--label-leading);
+      letter-spacing: 0.015em;
+    }
+    .site-footer p { margin: 0; }
+    html[data-embed="true"] .site-footer, html[data-present="true"] .site-footer { display: none; }
+
+    /* Below 480px the view controls keep two aligned rows: the tools, then
+       zoom with its three controls together. */
+    @container diagram (width < 30rem) {
+      ${live} .diagram-nav { flex-wrap: wrap; }
+      ${live} .diagram-nav::after { content: ""; order: 1; flex-basis: 100%; height: 0; }
+      ${live} .diagram-nav :is([data-view="out"], [data-view="reset"], [data-view="in"]) { order: 2; }
+      ${live} .diagram-nav [data-view="out"] { margin-left: auto; }
+      .diagram-nav #btn-node-finder::before, .diagram-nav [data-view="out"]::before { display: none; }
+    }
+    @media (768px <= width < 1024px) { body { padding-inline: 32px; } }
+    @media (width < 768px) { body { padding: 1.5rem 20px 0; } }
+  </style>`;
+}
+
+function applySiteDiagram(viewer) {
+  const rules = diagramRules(viewer);
+  if (viewer.includes("data-site-diagram")) {
+    return viewer.replace(/  <style data-site-diagram>[\s\S]*?  <\/style>/u, () => rules);
+  }
+  return viewer.replace("</head>", () => `${rules}\n</head>`);
+}
+
+const siteFooter = '\n    <footer class="site-footer" data-site-footer>\n      <p>&copy; 2026 Theodore Ouyang</p>\n      <p>Beijing | Boston</p>\n    </footer>\n';
+
+// Markup the integration owns: no generator stamp, the site's browser color
+// and touch icon, square corners in the drawing, Present and Export on the
+// title's row, bullets drawn by the stylesheet so they hang, and the footer.
+function applyViewerMarkup(viewer) {
+  viewer = viewer.replace(/  <meta name="generator" content="[^"]*">\n/u, "");
+  if (!viewer.includes('<meta name="theme-color"')) {
+    viewer = viewer.replace(/(  <meta name="viewport"[^\n]*\n)/u, '$1  <meta name="theme-color" content="#f7f6f5">\n');
+  }
+  if (!viewer.includes('rel="apple-touch-icon"')) {
+    viewer = viewer.replace(/(  <link rel="icon" href="\/assets\/brand\/lo-mark\.svg"[^\n]*\n)/u, '$1  <link rel="apple-touch-icon" href="/assets/brand/apple-touch-icon.png" sizes="180x180">\n');
+  }
+  const svgStart = viewer.indexOf('<svg viewBox="0 0 ');
+  const svgEnd = viewer.indexOf("</svg>", svgStart);
+  assert.ok(svgStart > 0 && svgEnd > svgStart, "Missing the diagram.");
+  viewer = viewer.slice(0, svgStart) + viewer.slice(svgStart, svgEnd).replace(/(<rect\b[^>]*?) rx="[\d.]+"/gu, '$1 rx="0"') + viewer.slice(svgEnd);
+  const toolbar = viewer.match(/  <!-- Toolbar:[\s\S]*?\n  <div class="toolbar"[\s\S]*?\n  <\/div>\n\n(?=  <div class="container">)/u);
+  if (toolbar) {
+    viewer = viewer.replace(toolbar[0], () => "");
+    const moved = toolbar[0].replace(/^  <!--[\s\S]*?-->\n/u, "").trimEnd().replace(/^/gmu, "      ");
+    viewer = viewer.replace(/(        <h1>[^<]*<\/h1>\n)/u, (heading) => `${heading}${moved}\n`);
+  }
+  assert.ok(/<div class="header-row"[\s\S]*?<div class="toolbar"/u.test(viewer), "Present and Export belong on the title's row.");
+  const cards = /    <!-- Info Cards -->\n    <div class="cards">[\s\S]*?\n    <\/div>\n/u;
+  assert.ok(cards.test(viewer), "Missing the viewer's notes.");
+  viewer = viewer.replace(cards, (block) => block.replaceAll("<li>&bull; ", "<li>"));
+  if (!viewer.includes("data-site-footer")) viewer = viewer.replace(cards, (block) => block + siteFooter);
+  return viewer;
+}
+
+// The phone layout's sideways scrolling serves every width once the drawing
+// is wider than its stage: camera moves scroll to a node instead of scaling
+// the drawing below its reading size.
+function applyViewerScript(viewer) {
+  const wide = "(container.hasAttribute('data-wide-diagram') && container.scrollWidth > container.clientWidth + 1)";
+  return viewer
+    .replaceAll("window.innerWidth <= 720 && container.hasAttribute('data-wide-diagram')", wide)
+    .replace("if (window.innerWidth > 720) return frameDesktop(ids, options);", `if (!${wide}) return frameDesktop(ids, options);`);
 }
 
 let source = original.replaceAll(".card h3", ".card h2")
   .replace(/(<div class="card-header">[\s\S]*?)<h3>([^<]+)<\/h3>/gu, "$1<h2>$2</h2>")
   .replace(/\n(?:      \/\/[^\n]*\n)+      try \{\n        if \(new URLSearchParams\(window\.location\.search\)\.get\('openExport'\) === '1'\) \{[\s\S]*?\n      \} catch \(_\) \{\}/u, "");
 assert.equal((source.match(/<h2>/gu) ?? []).length, 3, "Expected three major information cards.");
-source = source.replace(/(\.card h2\s*\{[^}]*font-weight:)\s*[^;]+;/gu, "$1 500;");
-source = source.replace(/(line-height: var\(--(?:title|heading)-leading\);\s+font-weight:)\s*\d+;/gu, "$1 500;");
+source = source.replace(/(\.card h2\s*\{[^}]*font-weight:)\s*[^;]+;/gu, "$1 400;");
+source = source.replace(/(line-height: var\(--(?:title|heading)-leading\);\s+font-weight:)\s*\d+;/gu, "$1 400;");
 source = source.replace(/(\.semantic-passport-reach-actions strong\s*\{[^}]*font-size:)\s*[^;]+;/gu,
   "$1 var(--type-interface);");
 source = source.replace(/(\.semantic-passport-reach-actions strong\s*\{[^}]*line-height:)\s*[^;]+;/gu,
@@ -241,6 +435,7 @@ if (source.includes("data-site-typography")) {
   source = source.replace(/    :root \{\n(?:      --[^\n]+\n)+    \}(?:\n\n    @media \(width < 768px\) \{\n      :root \{[\s\S]*?\n      \}\n    \})?/u, typeRules);
   assert.ok(source.includes(typeRules));
   source = applyReturnLink(applySiteTheme(applyReaderLayout(source)));
+  source = applyViewerScript(applyViewerMarkup(applySiteDiagram(source)));
   if (source !== original) await writeFile(viewerUrl, source);
   console.log("Architecture typography matches the website.");
 } else {
@@ -276,7 +471,7 @@ if (source.includes("data-site-typography")) {
       } else {
         updated = updated.replace(/font-size:[^;]+;/u, (size) => `${size}\n      line-height: var(--${role}-leading);`);
       }
-      if (role === "title" || role === "heading") updated = updated.replace(/font-weight:\s*[^;}]+;/gu, "font-weight: 500;");
+      if (role === "title" || role === "heading") updated = updated.replace(/font-weight:\s*[^;}]+;/gu, "font-weight: 400;");
       return `${selector}{${updated}}`;
     });
     css = replaceOnce(css, /    body \{\n/u,
@@ -348,7 +543,7 @@ if (source.includes("data-site-typography")) {
   assert.doesNotMatch(viewer, /fonts\.googleapis|fonts\.gstatic|JetBrains|Georgia|Times New Roman/u);
   const svgMarkup = (source) => [...source.matchAll(/<svg\b[\s\S]*?<\/svg>/gu)].map(([svg]) => svg);
   assert.deepEqual(svgMarkup(viewer), svgMarkup(original), "Typography integration must preserve SVG markup.");
-  viewer = applyReturnLink(viewer);
+  viewer = applyViewerScript(applyViewerMarkup(applySiteDiagram(applyReturnLink(viewer))));
   await writeFile(viewerUrl, viewer);
   console.log("Integrated shared Inter, HTML type roles, and embedded export fonts.");
 }

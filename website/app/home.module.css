@@ -232,6 +232,13 @@
   .contactStrip li:first-child {
     padding-left: var(--frame-pad);
   }
+
+  /* Beside its institution, the first degree name stands on the institution's
+     baseline: the item title and the degree line differ in size and leading,
+     so the two align by their first baselines rather than their tops. */
+  :global(.ledger-item).educationItem {
+    align-items: baseline;
+  }
 }
 
 @media (width < 1200px) {

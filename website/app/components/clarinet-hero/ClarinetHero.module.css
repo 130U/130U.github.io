@@ -95,7 +95,8 @@
 .cornerTR { right: 5.1%; top: 4.6%; }
 .cornerBL { left: 5.1%; bottom: 4.9%; }
 .cornerBR { right: 5.1%; bottom: 4.9%; }
-@media (768px <= width < 1024px) {
+/* Tablets, and large tablets held upright, keep a 32px gutter. */
+@media (768px <= width < 1024px), (768px <= width < 1100px) and (orientation: portrait) {
   .hero { padding: 32px; }
   .frame::before, .frame::after { top: -32px; bottom: -32px; }
 }
@@ -104,8 +105,9 @@
   .copy { padding-left: 20px; }
   .copy h1 { font-size: clamp(3rem, 6.5vw, 4.5rem); }
 }
-/* Phones and portrait tablets stack the name above the instrument. */
-@media (width < 768px), (width < 1024px) and (orientation: portrait) {
+/* Phones and portrait tablets, the 13-inch iPad included, stack the name above
+   the instrument. */
+@media (width < 768px), (width < 1100px) and (orientation: portrait) {
   .frame { grid-template-columns: minmax(0, 1fr); min-height: 0; padding: 44px 0 22px; }
   .copy { padding: 0 12px; }
   .copy h1 { font-size: clamp(3.25rem, 13.5vw, 5.5rem); line-height: 1.03; }
@@ -119,9 +121,20 @@
     overflow: hidden;
   }
 }
+/* A tall portrait tablet gives the instrument the height the name leaves, so
+   the stacked composition fills the first screen instead of floating in it. */
+@media (768px <= width < 1100px) and (orientation: portrait) {
+  .visual { width: min(100%, max(480px, (100svh - 480px) * .8)); }
+}
 @media (width < 768px) {
   .hero { min-height: 100svh; padding: 24px 20px; }
   .frame::before, .frame::after { top: -24px; bottom: -24px; }
+}
+/* From tablets the column guides start where the hero ends, so the frame's
+   side lines run the hero's full height to meet them. */
+@media (width >= 768px) {
+  .hero { overflow-y: clip; }
+  .frame::before, .frame::after { top: -100svh; bottom: -100svh; }
 }
 @media (prefers-reduced-motion: reduce) {
   .copy { opacity: 1 !important; transform: none !important; }
