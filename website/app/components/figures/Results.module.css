@@ -1,8 +1,8 @@
-/* Key results drawn on their own scale: each interval carries its endpoints over
-   its caps and each mark its name beside it, so a reader reads a number where it
-   lies. Text that crosses a grid line is knocked out on the surface it sits on:
-   the page in the article, the sheet on the zoom stage. Shared roles, colors and
-   marks come from Figure.module.css. */
+/* Key results drawn on their own scale: an interval no table beside it states
+   carries its endpoints over its caps, and each mark its name beside it, so a
+   reader reads a number where it lies. Text that crosses a grid line is knocked
+   out on the surface it sits on: the page in the article, the sheet on the zoom
+   stage. Shared roles, colors and marks come from Figure.module.css. */
 
 /* A panel of number lines sets every label at the label size. */
 .panel {
@@ -11,9 +11,9 @@
   line-height: var(--label-leading);
 }
 
-/* An interval row: its name, then its two endpoints over its caps, then the
-   capped line. Grid lines and reference rules run through the whole row
-   behind knocked-out text. */
+/* An interval row: its name, then any endpoints over its caps, then the capped
+   line. Grid lines and reference rules run through the whole row behind
+   knocked-out text. */
 .span {
   position: relative;
 }
@@ -44,10 +44,15 @@
   background: var(--control-surface, var(--page));
 }
 
-/* The equation number a row restates, in the reading face the display and
-   its references use. */
+/* The equation number a row restates, after the row's name as the table beside
+   the figure sets it, in the reading face the display and its references use.
+   Its figures stand taller than the name's line, so it carries its own
+   knockout, reaching 4px past them as the name's does. */
 .number {
-  margin-right: 0.5em;
+  margin-right: -4px;
+  margin-left: calc(0.5em - 4px);
+  padding-inline: 4px;
+  background: var(--control-surface, var(--page));
   font-family: var(--font-prose);
   font-size: var(--type-reading);
   font-variant-numeric: lining-nums proportional-nums;
@@ -80,7 +85,7 @@
 }
 
 /* An endpoint stands over its cap: the lower one starts there, the upper one
-   ends there. The key interval's endpoints take the accent. */
+   ends there. One in the accent takes weight 500. */
 .end {
   position: absolute;
   z-index: 1;
@@ -99,7 +104,6 @@
   transform: translateX(calc(-100% + 8px));
 }
 
-.span[data-key] .end,
 .end[data-tone="accent"] {
   color: var(--accent);
   font-weight: 500;
@@ -206,7 +210,7 @@
 }
 
 /* The window that the strip below magnifies, marked on the rows above it. It
-   lies over the endpoints' knockouts, so none of them cuts its edges. */
+   lies over any knockout in its rows, so none of them cuts its edges. */
 .lensWindow {
   position: absolute;
   z-index: 2;

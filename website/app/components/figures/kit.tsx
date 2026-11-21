@@ -3,6 +3,7 @@ import type { ArticleInline } from "../../lib/content/article-headings";
 import { InlineContent, InlineMarkdown, KeepRanges } from "../research/ResearchInline";
 import { ZoomGlyph } from "../ZoomGlyph";
 import zoomStyles from "../research/Stage.module.css";
+import { digitRuns, hasLongFraction } from "./digit-runs";
 import styles from "./Figure.module.css";
 
 export { styles };
@@ -11,9 +12,20 @@ type Tone = "ink" | "accent" | "sky" | "steel" | "mist" | "green";
 export type View = { id: string; label: ReactNode };
 type LegendItem = { label: ReactNode; tone: Tone; shape?: "square" | "line" | "thick" | "dash" | "dotted" | "dot" | "ring" | "triangle" | "hatch" | "box" | "tint" | "range" };
 
-/** Short copy that may contain inline TeX in the manuscripts' `$...$` form. */
+/**
+ * Figure text whose numbers of five or more digits after the point stand in
+ * the groups a research table sets, parted by TeX's thin space through spans
+ * alone, so the text copied is the manuscript's.
+ */
+export function Digits({ text }: { text: string }) {
+  return <>{digitRuns(text).map((run, index) => (run.group ? <span key={index} className={styles.digitGroup} data-digit-group="">{run.text}</span> : run.text))}</>;
+}
+
+/** Short copy that may contain inline TeX in the manuscripts' `$...$` form; a
+    long number in plain copy stands in digit groups. */
 export function Tx({ children }: { children: string }) {
-  return children.includes("$") ? <InlineMarkdown text={children} /> : <KeepRanges text={children} />;
+  if (children.includes("$")) return <InlineMarkdown text={children} />;
+  return hasLongFraction(children) ? <Digits text={children} /> : <KeepRanges text={children} />;
 }
 
 /** A figure's title, each hyphenated compound held on one line, so a word

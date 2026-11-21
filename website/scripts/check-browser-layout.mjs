@@ -115,6 +115,15 @@ function inspectFigure(figure) {
       const box = { left: fragment.left, right: fragment.right, top: fragment.top, bottom: fragment.bottom, width: fragment.width, height: fragment.height };
       if (!inFrame(box, element)) issues.push({ kind: "text-outside-frame", text: node.textContent.trim(), box });
     }
+    // A number of five or more digits after its point stands in digit groups
+    // (docs/design.md, Article figures): no run of shown text holds five such
+    // digits together.
+    if (/\.\d{5,}/u.test(node.textContent)) issues.push({ kind: "figure-number-ungrouped", text: node.textContent.trim().slice(0, 60) });
+  }
+  // Each digit group stands a thin space, a sixth of an em, after the digits before it.
+  for (const group of [...frame.querySelectorAll('[data-digit-group]')].filter(shown)) {
+    const style = getComputedStyle(group);
+    if (Math.abs(parseFloat(style.marginInlineStart) - parseFloat(style.fontSize) / 6) > 0.25) issues.push({ kind: "figure-digit-group-unspaced", text: group.parentElement.textContent.trim().slice(0, 60), gap: style.marginInlineStart });
   }
   // Math is rendered as SVG, so its enclosing inline box needs its own check.
   for (const formula of [...frame.querySelectorAll('[data-research-formula="inline"]')].filter(shown)) {
@@ -406,6 +415,31 @@ function inspectFigure(figure) {
     }
   }
   return { bounds, issues, ranking, wrappedLabels: marks.length };
+}
+
+// A readout sets its long numbers in the digit groups its labels use
+// (docs/design.md, Article figures): the first mark whose readout writes five
+// or more digits after a point is pointed at, and the open readout must show
+// them in groups, each a thin space after the one before it.
+function inspectReadouts(figure) {
+  const frame = figure.firstElementChild;
+  const target = [...frame.querySelectorAll("[data-tip]")].find(element => /\.\d{5,}/u.test(element.dataset.tip));
+  if (!target) return [];
+  const issues = [];
+  target.dispatchEvent(new PointerEvent("pointerover", { bubbles: true }));
+  const tooltip = frame.querySelector(":scope > div[data-figure-layer]");
+  if (!tooltip?.hasAttribute("data-open")) issues.push({ kind: "readout-did-not-open", tip: target.dataset.tip.slice(0, 60) });
+  else {
+    const runs = [...tooltip.childNodes].filter(node => node.nodeType === Node.TEXT_NODE).map(node => node.data);
+    if (runs.some(run => /\.\d{5,}/u.test(run)) || !tooltip.querySelector("[data-digit-group]")) issues.push({ kind: "readout-number-ungrouped", tip: target.dataset.tip.slice(0, 60) });
+    for (const group of tooltip.querySelectorAll("[data-digit-group]")) {
+      const style = getComputedStyle(group);
+      if (Math.abs(parseFloat(style.marginInlineStart) - parseFloat(style.fontSize) / 6) > 0.25) issues.push({ kind: "readout-digit-group-unspaced", tip: target.dataset.tip.slice(0, 60) });
+    }
+    if (tooltip.textContent !== target.dataset.tip) issues.push({ kind: "readout-text-changed", tip: target.dataset.tip.slice(0, 60) });
+  }
+  target.dispatchEvent(new PointerEvent("pointerout", { bubbles: true, relatedTarget: null }));
+  return issues;
 }
 
 // A label stands in open space beside the marks it names and never covers a
@@ -1626,6 +1660,7 @@ try {
               }
               const result = await figure.evaluate(inspectFigure);
               result.issues.push(...await figure.evaluate(inspectLabels));
+              if (width === 1440 && textScale === 1 && view === (views[0] ?? "default")) result.issues.push(...await figure.evaluate(inspectReadouts));
               // Labels keep their places at every column width, not only at the
               // viewports above: the figure is set at each width from 280px to
               // 600px, past the widest column (576px), in 4px steps up to 520px

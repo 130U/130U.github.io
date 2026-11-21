@@ -246,7 +246,14 @@ numbers, and aligns each column of them on the decimal point with invisible gene
 pads; `TableValue` sets its digits in the groups of `fractionDigitGroups`, the one helper
 every table groups its digits through. Copying a cell returns
 the manuscript's number, and `verify-visible-copy` reads a value's groups and pads as
-the one number they set.
+the one number they set. Figures group through the same helper: a figure label passed as
+plain text to `Tx`, or written with `Digits`, and every readout the figure controller
+writes (`writeReadout`), set a number of five or more digits after its point in its
+groups (`app/components/figures/digit-runs.ts`); write a long number in a label through
+one of them, never as a bare string inside JSX. `tests/figure-numbers.test.mjs` fails a
+figure that shows such a number ungrouped, and a figure that follows a table and writes
+one of its values in a label or its caption: draw the table's values, under its row names
+and in its order, and leave the numbers to the table and to the marks' `tip`s.
 `tests/figure-reading-load.test.mjs` holds every built figure to the reading budget of
 the design (caption, title, legend and value-note limits), and the browser layout check
 fails a caption set at the reading size or a legend entry that wraps from 390px, so a

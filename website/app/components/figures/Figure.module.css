@@ -21,6 +21,14 @@
   font-variant-numeric: lining-nums;
 }
 
+/* A number of five or more digits after its point, in a label or a readout,
+   stands in the groups a research table sets, each parted from the one before
+   by TeX's thin space (Digits, digitRuns); nothing is inserted, so the copied
+   text is the manuscript's number. */
+.digitGroup {
+  margin-inline-start: calc(1em / 6);
+}
+
 /* The zoom control holds the frame's top-right corner, level with the first
    line of the title or of the plot's axis title. */
 .zoom {
