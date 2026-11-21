@@ -1836,7 +1836,12 @@ try {
         await number.scrollIntoViewIfNeeded();
         await number.focus();
         await page.keyboard.press("ArrowRight");
-        await page.waitForTimeout(180);
+        // The key's scroll lands within a few frames; a busy machine may take longer.
+        await number.evaluate(element => new Promise(resolve => {
+          const start = performance.now();
+          const wait = () => element.scrollLeft > 0 || performance.now() - start > 1000 ? resolve() : requestAnimationFrame(wait);
+          wait();
+        }));
         if (!await number.evaluate(element => element.scrollLeft > 0)) issues.push("long-number-keyboard-scroll-did-not-move");
         await number.evaluate(element => { element.scrollLeft = element.scrollWidth; });
         if (!await number.evaluate(element => Math.abs(element.scrollWidth - element.clientWidth - element.scrollLeft) < 2)) issues.push("long-number-scroll-end-unreachable");

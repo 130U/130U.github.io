@@ -53,9 +53,9 @@
       }
     },
     "/critical-dependence-stress-for-diversification-gains-under-fixed-marginals/": {
-      "textSha256": "54413dea2e09a6faf3b1c40ca41f98124bd8973a0ca46221035c1b013794bec1",
-      "characterCount": 77409,
-      "wordCount": 11702,
+      "textSha256": "0fdcada121964041529b2edb53415f8e59083fac4d8f1efdee9e0a607fb119a7",
+      "characterCount": 77452,
+      "wordCount": 11708,
       "preview": "Skip to Main Content Theodore Ouyang Back to Selected Research Critical Dependence Stress for Diversification Gains under Fixed Marginals GitHub Full Manuscript",
       "altTexts": [],
       "ariaLabels": [
@@ -150,7 +150,8 @@
         "Mathematical equation",
         "Scrollable mathematical expression",
         "Scrollable mathematical expression",
-        "Mathematical equation",
+        "Zoom in",
+        "Table of mathematics",
         "Scrollable mathematical expression",
         "Mathematical equation",
         "Mathematical equation",
@@ -327,7 +328,6 @@
         "Scrollable mathematical expression",
         "Scrollable mathematical expression",
         "Scrollable mathematical expression",
-        "Scrollable mathematical expression",
         "Mathematical equation",
         "Scrollable mathematical expression",
         "Mathematical equation",
@@ -426,13 +426,13 @@
         "twitterTitle": "Critical Dependence Stress for Diversification Gains under Fixed Marginals",
         "twitterDescription": "How much dependence stress erases a diversification gain under fixed marginals: a variational limit, a quadratic critical budget, the marginal-restoration premium and projected flow duality."
       },
-      "mathSourceSha256": "caf3880fbf763c611889644e1a519a2806b1171f16951cb05a193702ed88d031",
-      "formulaCount": 1025
+      "mathSourceSha256": "30c8c83cb78ab0f6353fb012d17e51863bc9133b2463aff39b9f17d450453c1a",
+      "formulaCount": 1027
     },
     "/certified-valuation-of-arithmetic-asian-options/": {
-      "textSha256": "da5c4b47956e567522ff1041d11ea79c5177c878d3d2ee7bc2b549b6f7121776",
-      "characterCount": 70373,
-      "wordCount": 11599,
+      "textSha256": "6603b88f429808a1e30e8d01aa8c5201a5505c26b6a76d1d0f78d7b0bc3027d2",
+      "characterCount": 70436,
+      "wordCount": 11610,
       "preview": "Skip to Main Content Theodore Ouyang Back to Selected Research Certified Valuation of Arithmetic Asian Options: The Cost of Exercising on the Geometric Average ",
       "altTexts": [],
       "ariaLabels": [
@@ -664,10 +664,12 @@
         "Scrollable mathematical expression",
         "Scrollable mathematical expression",
         "Mathematical equation",
-        "Mathematical equation",
+        "Zoom in",
+        "Table of mathematics",
         "Zoom in",
         "Research data table",
-        "Mathematical equation",
+        "Zoom in",
+        "Table of mathematics",
         "Scrollable mathematical expression",
         "Scrollable mathematical expression",
         "Mathematical equation"
@@ -894,9 +896,9 @@
       "formulaCount": 461
     },
     "/experience/": {
-      "textSha256": "052987f039d41664510e064e53dba9260c9ef10950e587bc127db9829c2c2fcf",
-      "characterCount": 10505,
-      "wordCount": 1551,
+      "textSha256": "6055306cc666f095f2b4e433e17c6838993ac1d9a7d1a88d858ab84039229773",
+      "characterCount": 10484,
+      "wordCount": 1548,
       "preview": "Skip to Main Content Theodore Ouyang About Experience Blog Experience: Areas of Focus AI Research and Engineering Data Science Legal Research and Policy Analysi",
       "altTexts": [],
       "ariaLabels": [
@@ -914,7 +916,7 @@
         "Read more about Duke Law School: Small States and the Governance of Strategic Space Dependence",
         "Read more about Duke Law School: Who May Choose the Lesser Risk — Solar Geoengineering and the Legal Duties of Comparison and Continuity",
         "Read more about Duke Law School: Mangrove Restoration and the Limits of Compensatory Mitigation — Lessons from Florida for the Greater Bay Area",
-        "Read more about Jones Lang LaSalle Capital Markets Team: Office Investment Underwriting and ESG Due Diligence",
+        "Read more about Jones Lang LaSalle: Office Investment Underwriting and ESG Due Diligence",
         "Read more about Hubble Network: Bluetooth Satellite Commercialization and Market Selection",
         "Read more about SAIF Partners: Dental Investment Research and Governance Due Diligence",
         "Read more about CITIC Securities: Agriculture Equity Research and Valuation",
@@ -1008,7 +1010,7 @@
         "Research data table",
         "Scrollable mathematical expression",
         "Zoom in",
-        "Standard deviation of the estimate against defects shipped, for one budget of 5,000 cost units. Risk-first for audits and reviews: 0.657 points, 320.9 defects. Measurement rule, then reviews: 0.515 points, 336.2 defects. Joint rule: 0.568 points and 209.9 defects, 0.657 points and 197.1 defects, 1.035 points and 174.9 defects. At 0.657 points the joint rule ships 38.6% fewer defects than risk-first routing.",
+        "Standard deviation of the estimate in percentage points against defects shipped, for one budget of 5,000 cost units. Risk-first for audits and reviews: 0.657, 320.9 defects. Measurement rule, then reviews: 0.515, 336.2 defects. Joint rule: 0.568 and 209.9 defects, 0.657 and 197.1 defects, 1.035 and 174.9 defects. At 0.657 the joint rule ships 38.6% fewer defects than risk-first routing.",
         "Mathematical equation",
         "Scrollable mathematical expression",
         "Scrollable mathematical expression",
@@ -1653,9 +1655,9 @@
       }
     },
     "/experience/mangrove-restoration-and-the-limits-of-compensatory-mitigation/": {
-      "textSha256": "c60eb3e055cb0e32b73673425b4bc7ceb554b8a8623ac9117957bc6268d0d6c0",
-      "characterCount": 78577,
-      "wordCount": 11074,
+      "textSha256": "6a7009645faedb07cb41f68714e052a421c3561a5c10573ccf1fd6dd12061a0e",
+      "characterCount": 78557,
+      "wordCount": 11071,
       "preview": "Skip to Main Content Theodore Ouyang Back to Experience Mangrove Restoration and the Limits of Compensatory Mitigation: Lessons from Florida for the Greater Bay",
       "altTexts": [],
       "ariaLabels": [
@@ -1859,27 +1861,27 @@
       }
     },
     "/experience/jones-lang-lasalle/": {
-      "textSha256": "02e08be2833ebd9d9d9ab92ca1be761e2d033a77fd57a51a7716d52590be8696",
-      "characterCount": 2350,
+      "textSha256": "7a2a02f8c04b811f4e95afb3457040f6dd166b945d412f5c887d119293db93d6",
+      "characterCount": 2351,
       "wordCount": 302,
-      "preview": "Skip to Main Content Theodore Ouyang Back to Experience Office Investment Underwriting and ESG Due Diligence Organization Jones Lang LaSalle Capital Markets Tea",
+      "preview": "Skip to Main Content Theodore Ouyang Back to Experience Office Investment Underwriting and ESG Due Diligence Organization Jones Lang LaSalle Position Summer Int",
       "altTexts": [],
       "ariaLabels": [
         "Theodore Ouyang home",
         "Parent navigation"
       ],
       "metadata": {
-        "title": "Jones Lang LaSalle Capital Markets Team: Office Investment Underwriting and ESG Due Diligence | Theodore Ouyang",
+        "title": "Jones Lang LaSalle: Office Investment Underwriting and ESG Due Diligence | Theodore Ouyang",
         "description": "A Southeast Asian conglomerate was looking to buy office properties in China, and I was the project team's ESG lead on the acquisition advisory. Working with JLL's internal ESG team, I screened the candidate assets, underwrote the shortlist, and set site-diligence priorities against the client's investment requirements and its options to refurbish or reposition each building.",
         "canonical": "https://www.theodoreoy.com/experience/jones-lang-lasalle/",
-        "openGraphTitle": "Jones Lang LaSalle Capital Markets Team: Office Investment Underwriting and ESG Due Diligence",
+        "openGraphTitle": "Jones Lang LaSalle: Office Investment Underwriting and ESG Due Diligence",
         "openGraphDescription": "A Southeast Asian conglomerate was looking to buy office properties in China, and I was the project team's ESG lead on the acquisition advisory. Working with JLL's internal ESG team, I screened the candidate assets, underwrote the shortlist, and set site-diligence priorities against the client's investment requirements and its options to refurbish or reposition each building.",
         "openGraphUrl": "https://www.theodoreoy.com/experience/jones-lang-lasalle/",
-        "twitterTitle": "Jones Lang LaSalle Capital Markets Team: Office Investment Underwriting and ESG Due Diligence",
+        "twitterTitle": "Jones Lang LaSalle: Office Investment Underwriting and ESG Due Diligence",
         "twitterDescription": "A Southeast Asian conglomerate was looking to buy office properties in China, and I was the project team's ESG lead on the acquisition advisory. Working with JLL's internal ESG team, I screened the candidate assets, underwrote the shortlist, and set site-diligence priorities against the client's investment requirements and its options to refurbish or reposition each building."
       }
     },
-    "/experience/hubble-technology-investment/": {
+    "/experience/hubble-network/": {
       "textSha256": "94cd7ebaafaf0720afc3be71318a5ffd03376b6701b865883194c4672bde112e",
       "characterCount": 1806,
       "wordCount": 236,
@@ -1892,10 +1894,10 @@
       "metadata": {
         "title": "Hubble Network: Bluetooth Satellite Commercialization and Market Selection | Theodore Ouyang",
         "description": "Hubble was commercializing its Bluetooth satellite technology and had to choose its first markets. Through a Duke Practicum, I led the research on shipping, logistics, and industrial asset tracking, assessed where the technology's cost, accuracy, power consumption, and periodic reporting matched what customers needed, and recommended which applications to pursue first.",
-        "canonical": "https://www.theodoreoy.com/experience/hubble-technology-investment/",
+        "canonical": "https://www.theodoreoy.com/experience/hubble-network/",
         "openGraphTitle": "Hubble Network: Bluetooth Satellite Commercialization and Market Selection",
         "openGraphDescription": "Hubble was commercializing its Bluetooth satellite technology and had to choose its first markets. Through a Duke Practicum, I led the research on shipping, logistics, and industrial asset tracking, assessed where the technology's cost, accuracy, power consumption, and periodic reporting matched what customers needed, and recommended which applications to pursue first.",
-        "openGraphUrl": "https://www.theodoreoy.com/experience/hubble-technology-investment/",
+        "openGraphUrl": "https://www.theodoreoy.com/experience/hubble-network/",
         "twitterTitle": "Hubble Network: Bluetooth Satellite Commercialization and Market Selection",
         "twitterDescription": "Hubble was commercializing its Bluetooth satellite technology and had to choose its first markets. Through a Duke Practicum, I led the research on shipping, logistics, and industrial asset tracking, assessed where the technology's cost, accuracy, power consumption, and periodic reporting matched what customers needed, and recommended which applications to pursue first."
       }
@@ -1922,10 +1924,10 @@
       }
     },
     "/experience/citic-securities/": {
-      "textSha256": "e0aaf6845a8818146bcff32325aa5024a8e9795698721c5f5bcddb4e14453bf4",
-      "characterCount": 493,
-      "wordCount": 67,
-      "preview": "Skip to Main Content Theodore Ouyang Back to Experience Agriculture Equity Research and Valuation Organization CITIC Securities Position Equity Research Intern ",
+      "textSha256": "12760998d77c84c5c51a99d0072a8ac1a28dc0c7ec32b19e982d0fce8afe5acc",
+      "characterCount": 521,
+      "wordCount": 70,
+      "preview": "Skip to Main Content Theodore Ouyang Back to Experience Agriculture Equity Research and Valuation Organization CITIC Securities Position Equity Research Intern,",
       "altTexts": [],
       "ariaLabels": [
         "Theodore Ouyang home",
@@ -1963,7 +1965,7 @@
         "twitterDescription": "I served on the business-line restructuring workstream of a digital-transformation engagement for a leading Chinese company preparing to list."
       }
     },
-    "/experience/independent-stem-olympiad-training/": {
+    "/experience/independent-stem-olympiad-training-practice/": {
       "textSha256": "0ded30a036136c18fa46419851bbd3ced186abfd7c4fa4d956207f6cde46a0c7",
       "characterCount": 759,
       "wordCount": 100,
@@ -1976,15 +1978,15 @@
       "metadata": {
         "title": "Independent STEM Olympiad Training Practice: Advanced Physics Olympiad Instruction | Theodore Ouyang",
         "description": "I ran an independent coaching practice that prepared students for USAPhO and U.S. Physics Team selection, teaching IPhO-level physics online and in person and writing original problems for competition training.",
-        "canonical": "https://www.theodoreoy.com/experience/independent-stem-olympiad-training/",
+        "canonical": "https://www.theodoreoy.com/experience/independent-stem-olympiad-training-practice/",
         "openGraphTitle": "Independent STEM Olympiad Training Practice: Advanced Physics Olympiad Instruction",
         "openGraphDescription": "I ran an independent coaching practice that prepared students for USAPhO and U.S. Physics Team selection, teaching IPhO-level physics online and in person and writing original problems for competition training.",
-        "openGraphUrl": "https://www.theodoreoy.com/experience/independent-stem-olympiad-training/",
+        "openGraphUrl": "https://www.theodoreoy.com/experience/independent-stem-olympiad-training-practice/",
         "twitterTitle": "Independent STEM Olympiad Training Practice: Advanced Physics Olympiad Instruction",
         "twitterDescription": "I ran an independent coaching practice that prepared students for USAPhO and U.S. Physics Team selection, teaching IPhO-level physics online and in person and writing original problems for competition training."
       }
     },
-    "/experience/stem-olympiad-competitions/": {
+    "/experience/the-high-school-attached-to-hunan-normal-university/": {
       "textSha256": "a26be6593d5664cf8be6dbcaf3582928615811ce5a1418c924ade2b4b867ce33",
       "characterCount": 1574,
       "wordCount": 215,
@@ -1997,10 +1999,10 @@
       "metadata": {
         "title": "The High School Attached to Hunan Normal University: Olympiad Awards, Advanced Training, and Peer Mentoring | Theodore Ouyang",
         "description": "I earned provincial- and national-level awards in physics and mathematics Olympiads as a member of the school's nationally leading physics competition program, and mentored teammates in its study groups.",
-        "canonical": "https://www.theodoreoy.com/experience/stem-olympiad-competitions/",
+        "canonical": "https://www.theodoreoy.com/experience/the-high-school-attached-to-hunan-normal-university/",
         "openGraphTitle": "The High School Attached to Hunan Normal University: Olympiad Awards, Advanced Training, and Peer Mentoring",
         "openGraphDescription": "I earned provincial- and national-level awards in physics and mathematics Olympiads as a member of the school's nationally leading physics competition program, and mentored teammates in its study groups.",
-        "openGraphUrl": "https://www.theodoreoy.com/experience/stem-olympiad-competitions/",
+        "openGraphUrl": "https://www.theodoreoy.com/experience/the-high-school-attached-to-hunan-normal-university/",
         "twitterTitle": "The High School Attached to Hunan Normal University: Olympiad Awards, Advanced Training, and Peer Mentoring",
         "twitterDescription": "I earned provincial- and national-level awards in physics and mathematics Olympiads as a member of the school's nationally leading physics competition program, and mentored teammates in its study groups."
       }
@@ -2114,6 +2116,99 @@
         "openGraphUrl": "https://www.theodoreoy.com/blog/the-etude-sky/",
         "twitterTitle": "The Étude Sky",
         "twitterDescription": "Chopin's twenty-four études charted as stars on the circle of fifths, with a plate drawn from each recording and a watercolor handscroll that unrolls as you listen."
+      }
+    },
+    "/architecture/": {
+      "textSha256": "ea1ec3aff692728142e31a318ee1eaae1c8b5da668581e5c7a827ceed874ac52",
+      "characterCount": 3586,
+      "wordCount": 562,
+      "preview": "Return Home Website Architecture Dark Style Visual identity S cycles Classic Stable technical default Signal Flow Motion-forward presentation Blueprint Engineer",
+      "altTexts": [],
+      "ariaLabels": [
+        "Diagram actions",
+        "Toggle color theme",
+        "Choose visual style",
+        "Visual style",
+        "Pause motion",
+        "Enter presentation stage",
+        "Export diagram",
+        "Export",
+        "Share",
+        "Raster images",
+        "Vector and motion",
+        "Guided diagram views",
+        "Previous guided view",
+        "Story trail",
+        "Next guided view",
+        "Play guided story",
+        "Select a story beat to copy its exact link",
+        "Show entire diagram",
+        "Story chapters",
+        "Focus Content and Routes, Registry / Markdown / JSON, Content and Brand",
+        "Focus Next.js 16, Static Rendering / React 19, Build and Validation, Next.js",
+        "Focus Static Site, website/out/, Build and Validation",
+        "Focus GitHub Pages, www.theodoreoy.com, Static Delivery",
+        "Focus Visitor Browser, HTML / CSS / JavaScript, Static Delivery",
+        "Focus LO Brand Assets, Logos / Icons / Social Cover, Content and Brand",
+        "Focus GitHub Actions, Validate / Build / Deploy, Build and Validation",
+        "Focus Architecture, architecture/index.html, Build and Validation",
+        "Focus Reader Interactions, Menu / Contents / Figures / Notes, Static Delivery",
+        "Close diagram guide",
+        "Diagram exploration actions",
+        "Find any node",
+        "Trace a directed route",
+        "See the whole system",
+        "Compare semantic kinds",
+        "Play the guided story",
+        "Enter presentation stage",
+        "Additional keyboard shortcuts",
+        "Close node finder",
+        "Search diagram nodes",
+        "Diagram nodes",
+        "Node metadata",
+        "Verified source evidence",
+        "Trace authored reachability",
+        "Trace upstream authored reachability",
+        "Trace downstream authored reachability",
+        "Close semantic passport",
+        "Copy link to focused node",
+        "Show connected relationships",
+        "Connected relationships",
+        "Find a route start",
+        "Copy link to traced route",
+        "Clear route probe",
+        "Traced route",
+        "Route journey controls",
+        "Previous route position",
+        "Play route journey",
+        "Next route position",
+        "Show complete route overview",
+        "Close semantic lens",
+        "Semantic kinds",
+        "Copy link to semantic lens",
+        "Clear semantic lens",
+        "Open full semantic radar",
+        "Close semantic radar",
+        "Diagram overview. Click a node to focus it, or use arrow keys to pan.",
+        "Diagram view controls",
+        "Trace a directed route",
+        "Open semantic radar",
+        "Open semantic lens",
+        "Find a node",
+        "Open diagram guide",
+        "Zoom out",
+        "Reset diagram view",
+        "Zoom in"
+      ],
+      "metadata": {
+        "title": "Website Architecture | Theodore Ouyang",
+        "description": "An interactive map of how this site is built: content inputs, static rendering, validation, GitHub Pages delivery, and browser interactions.",
+        "canonical": "https://www.theodoreoy.com/architecture/",
+        "openGraphTitle": "Website Architecture",
+        "openGraphDescription": "An interactive map of how this site is built: content inputs, static rendering, validation, GitHub Pages delivery, and browser interactions.",
+        "openGraphUrl": "https://www.theodoreoy.com/architecture/",
+        "twitterTitle": "Website Architecture",
+        "twitterDescription": "An interactive map of how this site is built: content inputs, static rendering, validation, GitHub Pages delivery, and browser interactions."
       }
     }
   }
