@@ -43,7 +43,8 @@ const MIN_TABLE_ZOOM = 0.9;
 const FIT_SLACK = 0.5;
 const EDGE_FADE = 40;
 // Row labels stay in view while their table scrolls when they take no more than
-// half its room, as a table of mathematics keeps its labels; a table that
+// half its room, or when the room beside them, short of the fading edge, holds a
+// column of values whole, as a table of mathematics keeps its labels; a table that
 // scrolls sets labels of words, wrapped, at no more than LABEL_SHARE of the room
 // and 16rem, or at their longest word.
 const PIN_SHARE = 0.5;
@@ -194,7 +195,14 @@ function paintEdges(region: HTMLElement) {
 /** Row labels stay in view while a wide table scrolls, when they leave room for the values. */
 function pinRowLabels(region: HTMLElement, table: HTMLTableElement) {
   const overflows = table.offsetWidth > region.clientWidth + 1;
-  region.toggleAttribute("data-pinned", overflows && table.rows[0].cells[0].offsetWidth <= region.clientWidth * PIN_SHARE);
+  const [label, ...values] = [...table.rows[0].cells];
+  // Or when the room they leave beside them holds a column of values whole, its text without its padding.
+  const narrowest = Math.min(...values.filter((cell) => cell.offsetWidth > 0).map((cell) => {
+    const style = getComputedStyle(cell);
+    return cell.offsetWidth - parseFloat(style.paddingLeft) - parseFloat(style.paddingRight);
+  }));
+  const room = region.clientWidth - label.offsetWidth - EDGE_FADE;
+  region.toggleAttribute("data-pinned", overflows && (label.offsetWidth <= region.clientWidth * PIN_SHARE || narrowest <= room));
   paintEdges(region);
 }
 
