@@ -53,8 +53,8 @@
       }
     },
     "/critical-dependence-stress-for-diversification-gains-under-fixed-marginals/": {
-      "textSha256": "4598b07a11a216665c6b5c602acec102196ced9608fc395a326e014b267ae1f9",
-      "characterCount": 77404,
+      "textSha256": "54413dea2e09a6faf3b1c40ca41f98124bd8973a0ca46221035c1b013794bec1",
+      "characterCount": 77409,
       "wordCount": 11702,
       "preview": "Skip to Main Content Theodore Ouyang Back to Selected Research Critical Dependence Stress for Diversification Gains under Fixed Marginals GitHub Full Manuscript",
       "altTexts": [],
@@ -426,8 +426,8 @@
         "twitterTitle": "Critical Dependence Stress for Diversification Gains under Fixed Marginals",
         "twitterDescription": "How much dependence stress erases a diversification gain under fixed marginals: a variational limit, a quadratic critical budget, the marginal-restoration premium and projected flow duality."
       },
-      "mathSourceSha256": "27ba62c43232ccbd4206d000499bfa948e7350c30713a57f3a3b299a9bdaf178",
-      "formulaCount": 1023
+      "mathSourceSha256": "caf3880fbf763c611889644e1a519a2806b1171f16951cb05a193702ed88d031",
+      "formulaCount": 1025
     },
     "/certified-valuation-of-arithmetic-asian-options/": {
       "textSha256": "0d7087b496c5bb975163add12e0b29caa97b8ae44d42eb77da2ac78773534552",
@@ -1126,7 +1126,7 @@
         "twitterTitle": "Duke University × Leading Foundation Model Developer: Financial Task Design and Synthetic Data Engineering",
         "twitterDescription": "When a synthetic financial case changes one number, its reference answer, the evidence behind that answer and the expert's preference can all go stale together."
       },
-      "mathSourceSha256": "73edf09cf9fc14537005725a3531f981bc0264281f4790a4521e4464c79bac30",
+      "mathSourceSha256": "db9024d8b830141d1da935f0aeaddd2e358f3be4b34694d8c2ef6182f7f6da8b",
       "formulaCount": 189
     },
     "/experience/general-reasoning-evaluation-and-layered-verification/": {
@@ -1230,9 +1230,9 @@
       "formulaCount": 204
     },
     "/experience/evidence-verification-and-robust-comparison-in-investment-research/": {
-      "textSha256": "813af43d82a3f3362a51f10d969b785f0ecc2e73b457589a32ac04ce830ee34d",
-      "characterCount": 29839,
-      "wordCount": 4627,
+      "textSha256": "c8357bc6c2ff076a2468c05f86c43111e5ed3979ec0aaf121526a47a74357e33",
+      "characterCount": 29834,
+      "wordCount": 4619,
       "preview": "Skip to Main Content Theodore Ouyang Back to Experience Evidence Verification and Robust Comparison in Investment Research Organization Duke University × Leadin",
       "altTexts": [],
       "ariaLabels": [
@@ -1298,6 +1298,7 @@
         "Score differences for the eight scenarios lie at plus or minus 0.19, 0.31, 0.49 and 0.61. Verifying z1 separates positive from negative differences; rechecking the SHAP field or verifying z2 does not.",
         "Scrollable mathematical expression",
         "Scrollable mathematical expression",
+        "Scrollable mathematical expression",
         "Zoom in",
         "Research data table",
         "Scrollable mathematical expression"
@@ -1312,8 +1313,8 @@
         "twitterTitle": "Duke University × Leading Global Alternative Asset Manager: Evidence Verification and Robust Comparison in Investment Research",
         "twitterDescription": "Due diligence has more facts to check than analyst time to check them."
       },
-      "mathSourceSha256": "bc506004fed515307219730d8d695470d482096d20c9afcaba1105a47ba31d0a",
-      "formulaCount": 210
+      "mathSourceSha256": "b99df2a9c92ee7c0c0ce847f92e45f8916b74b48a1bb7e09c8f8f2ad8f0f1dc3",
+      "formulaCount": 212
     },
     "/experience/autonomous-authority-in-space/": {
       "textSha256": "c57e4570ccdf01a206ad2e476a43671285c2e290c4ec591faf262a58ff3a5629",

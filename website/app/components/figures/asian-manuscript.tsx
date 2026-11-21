@@ -3,6 +3,7 @@ import data from "../../../content/selected-research/certified-valuation-of-arit
 import { cubicLaw, kinkBoundPerStrike } from "../../lib/content/asian-kink-bound";
 import type { ManuscriptFigureProps } from "./dependence-manuscript";
 import { Dot, Figure, Mark, Plot, fixed, grouped, linear, logarithmic, path, styles as kit, type Crosshair } from "./kit";
+import results from "./Results.module.css";
 import styles from "./Figures.module.css";
 
 /* The four figures of "Certified Valuation of Arithmetic Asian Options", drawn
@@ -145,7 +146,7 @@ function CubicLawFigure({ manuscript, caption }: ManuscriptFigureProps) {
           { at: months(1), label: "1 day", edge: "start" },
           { at: months(5), label: "1 week" },
           ...[1, 3, 6, 12].map((at) => ({ at, label: String(at) })),
-          { at: 24, label: "24", edge: "end" },
+          { at: 24, label: "24" },
         ]}
         yTicks={powerTicks(-6, -3)}
         yTitle="Bound per unit of strike"
@@ -223,7 +224,10 @@ function ProfileFigure({ manuscript, caption }: ManuscriptFigureProps) {
         x={x}
         y={y}
         height="clamp(270px, 60cqi, 350px)"
-        xTicks={[60, 80, 95, 110, 140, 180].map((at) => ({ at, label: String(at), minor: at === 80 || at === 140 }))}
+        // The spread's strikes are drawn as dashed rules, which stand in for
+        // their grid lines; their labels splay away from each other, ending and
+        // starting on their rules, so the pair never reads as one number.
+        xTicks={[60, 80, 95, 110, 140, 180].map((at) => ({ at, label: String(at), minor: at === 80 || at === 140, grid: at !== 95 && at !== 110, edge: at === 95 ? "end" as const : at === 110 ? "start" as const : undefined }))}
         yTicks={powerTicks(-9, -4)}
         yTitle="Per unit of strike"
         xTitle="Strike $K$, logarithmic scale"
@@ -272,7 +276,7 @@ function EulerLadderFigure({ manuscript, caption }: ManuscriptFigureProps) {
       legend={[
         { label: "Proxy-value bias, sign reversed", tone: "accent", shape: "ring" },
         { label: "The same, certified finite sums", tone: "accent", shape: "dot" },
-        { label: "First-order term of (6.4)", tone: "steel", shape: "dash" },
+        { label: <>First-order term of <span className={results.legendNumber}>(6.4)</span></>, tone: "steel", shape: "dash" },
       ]}
     >
       <Plot

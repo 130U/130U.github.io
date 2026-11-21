@@ -51,6 +51,43 @@ export function enhanceFigure(figure: HTMLElement): () => void {
       for (const panel of figure.querySelectorAll<HTMLElement>("[data-fig-panel]")) panel.hidden = panel.dataset.figPanel !== view;
     };
     for (const button of buttons) listen(button, "click", () => show(button.dataset.figView!));
+    // The segments share one row while every label fits on it; otherwise they
+    // stack. Layout is measured in the frame's own units, so the stage's scale
+    // does not change the choice.
+    let measured = -1;
+    const fit = () => {
+      const room = (switcher.parentElement ?? switcher).clientWidth;
+      if (room === measured) return;
+      measured = room;
+      delete switcher.dataset.stack;
+      if (switcher.scrollWidth > switcher.clientWidth + 1) switcher.dataset.stack = "";
+    };
+    // Every view keeps the height of the tallest, so switching views never
+    // moves the caption or the page beneath the figure.
+    const panels = [...frame.querySelectorAll<HTMLElement>(":scope > [data-fig-panel]")];
+    let settledWidth = -1;
+    const settle = () => {
+      if (panels.length < 2 || frame.clientWidth === settledWidth) return;
+      settledWidth = frame.clientWidth;
+      for (const panel of panels) panel.style.minHeight = "";
+      const heights = panels.map((panel) => {
+        const hidden = panel.hidden;
+        panel.hidden = false;
+        const height = panel.offsetHeight;
+        panel.hidden = hidden;
+        return height;
+      });
+      for (const panel of panels) panel.style.minHeight = `${Math.max(...heights)}px`;
+    };
+    fit();
+    settle();
+    // The labels take their measure in the interface face once it loads.
+    void document.fonts?.ready.then(() => { measured = -1; settledWidth = -1; fit(); settle(); });
+    const observer = new ResizeObserver(() => { fit(); settle(); });
+    observer.observe(switcher.parentElement ?? switcher);
+    observer.observe(frame);
+    cleanups.push(() => observer.disconnect());
+    cleanups.push(() => panels.forEach((panel) => { panel.style.minHeight = ""; }));
   }
 
   // Tooltips for marks that carry data-tip.
@@ -155,6 +192,14 @@ export function enhanceFigure(figure: HTMLElement): () => void {
       const left = pointX + 14 + width > frame.offsetWidth - 8 ? pointX - width - 14 : pointX + 14;
       tooltip.style.left = `${Math.max(8, left)}px`;
       tooltip.style.top = `${(box.top - frameBox.top) / factor}px`;
+      // The readout stands at the top of the plot, or at its foot where it
+      // would cover one of the plot's labels.
+      const tip = tooltip.getBoundingClientRect();
+      const covers = [...area.querySelectorAll<HTMLElement>('[style*="--ax"]')].some((mark) => {
+        const label = mark.getBoundingClientRect();
+        return label.width > 0 && label.left < tip.right && tip.left < label.right && label.top < tip.bottom && tip.top < label.bottom;
+      });
+      if (covers) tooltip.style.top = `${(box.bottom - frameBox.top) / factor - tooltip.offsetHeight}px`;
     });
     listen(area, "pointerleave", hide);
   }
@@ -220,7 +265,9 @@ export function FigureController() {
       litTable = table;
       litColumn = column;
     };
+    // Hover is for a fine pointer: a tap or a touch scroll lights nothing.
     listen(document.documentElement, "pointerover", (event) => {
+      if (event.pointerType === "touch") return;
       const cell = (event.target as Element).closest<HTMLTableCellElement>("[data-research-table] td, [data-research-table] th");
       lightColumn(cell?.closest<HTMLTableElement>("[data-research-table]") ?? null, cell ? cell.cellIndex : -1);
     });

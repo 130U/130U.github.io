@@ -296,6 +296,46 @@ function inspectFigure(figure) {
     const inherited = getComputedStyle(mark.parentElement).color;
     if (tone && rendered !== toneText[tone] && rendered === inherited) issues.push({ kind: "label-ignores-its-tone", text: mark.textContent.replace(/\s+/gu, " ").trim().slice(0, 60), tone, rendered, expected: toneText[tone] });
   }
+  // A legend keys what the figure draws: each swatch has a visible mark of its
+  // form in its colour, and a figure that names none of its marks beside them
+  // keys every kind of dot it draws.
+  const legendItems = [...frame.querySelectorAll('[class*="_legend"] > li')].filter(shown);
+  if (legendItems.length) {
+    const svgShapes = [...frame.querySelectorAll("svg :is(path, line, polyline, polygon, rect, circle)")].filter(shape => !shape.closest("svg[data-research-svg], button, [class*='_legend']") && shown(shape));
+    const html = [...frame.querySelectorAll("span, div, button")].filter(element => !element.closest("[class*='_legend'], [data-research-formula]") && shown(element));
+    const classed = (element, pattern) => [...element.classList].some(name => pattern.test(name));
+    const keyed = [];
+    for (const item of legendItems) {
+      const swatch = item.querySelector('[class*="_swatch"]');
+      if (!swatch) continue;
+      const shape = swatch.dataset.shape ?? "square";
+      const color = getComputedStyle(swatch).color;
+      const stroked = shapes => svgShapes.some(element => element.matches(shapes) && getComputedStyle(element).stroke === color);
+      const dots = selector => html.some(element => classed(element, /_(dot|scenarioDot)$/u) && element.matches(selector) && getComputedStyle(element).color === color);
+      const found = {
+        line: () => stroked(":not([data-dash], [data-dotted], [data-thick], [data-axis], [data-scatter])"),
+        thick: () => stroked("[data-thick]"),
+        dash: () => stroked("[data-dash]") || html.some(element => classed(element, /_(hline|vline|rule)$/u)),
+        dotted: () => stroked("[data-dotted]"),
+        dot: () => dots(":not([data-ring], [data-shape], [data-sign='negative'])") || stroked("[data-scatter]") || svgShapes.some(element => element.matches("circle") && getComputedStyle(element).fill === color),
+        ring: () => dots("[data-ring], [data-sign='negative']"),
+        triangle: () => dots("[data-shape='triangle']"),
+        square: () => html.some(element => !classed(element, /_(dot|scenarioDot)$/u) && getComputedStyle(element).backgroundColor === color) || dots("[data-shape='square']") || svgShapes.some(element => getComputedStyle(element).fill === color),
+        hatch: () => html.some(element => element.matches("[data-hatch], [data-state='unverified']")) || svgShapes.some(element => /url\(/u.test(getComputedStyle(element).fill)),
+        box: () => html.some(element => element.matches("[data-state='verified'], [data-ring]") && !classed(element, /_dot$/u)),
+        tint: () => svgShapes.some(element => element.matches("[data-fill]") && classed(element, /_(rangeFill|discrepancyShade)$/u)) || html.some(element => classed(element, /_(budgetBand|criticalBand|lensWindow|layerBand)$/u)),
+      }[shape];
+      if (found && !found()) issues.push({ kind: "legend-swatch-without-mark", text: item.textContent.trim(), shape, color });
+      keyed.push(`${shape}|${color}`);
+    }
+    if (!frame.querySelector('span[style*="--ax"]')) {
+      for (const dot of html.filter(element => classed(element, /_dot$/u))) {
+        const shape = dot.hasAttribute("data-ring") ? "ring" : dot.dataset.shape ?? "dot";
+        const key = `${shape}|${getComputedStyle(dot).color}`;
+        if (!keyed.includes(key) && !issues.some(issue => issue.kind === "dot-without-legend" && issue.key === key)) issues.push({ kind: "dot-without-legend", key });
+      }
+    }
+  }
   // A key result's numbers stand over its caps and its notes beside its marks:
   // no two of them may touch, so each reads as its own number.
   const resultLabels = [...frame.querySelectorAll('[data-result-label]')].filter(laidOut).map(label => ({ text: label.textContent.trim(), box: rect(label) }));
@@ -323,6 +363,216 @@ function inspectFigure(figure) {
     }
   }
   return { bounds, issues, ranking, wrappedLabels: marks.length };
+}
+
+// A label stands in open space beside the marks it names and never covers a
+// curve (docs/design.md, Article figures), whether or not it is knocked out.
+// Its text stands 4px clear of every drawn stroke beyond the stroke's half
+// width; its knockout or tag holds no point of a stroke and, as a bare
+// label's glyphs do, overlaps no dot, bar or bracket; a knockout stands on no
+// filled region, where it would paint a hole; and no two labels touch. Tick
+// labels on one axis keep 6px between them.
+function inspectLabels(figure) {
+  const frame = figure.firstElementChild;
+  const issues = [];
+  const rect = element => {
+    const box = element.getBoundingClientRect();
+    return { left: box.left, right: box.right, top: box.top, bottom: box.bottom };
+  };
+  const shown = element => element.checkVisibility({ checkVisibilityCSS: true, checkOpacity: true }) && !element.closest("[hidden], math, script, style");
+  const opaque = color => { const alpha = /rgba?\(([^)]+)\)/u.exec(color)?.[1].split(",")[3]; return /^rgb/u.test(color) && (alpha === undefined || Number(alpha) === 1); };
+  // A label turned to run along a line is tested in its own frame, not by the
+  // upright box around it.
+  const inside = (box, x, y, pad = 0) => {
+    if (!box.turn) return x > box.left - pad && x < box.right + pad && y > box.top - pad && y < box.bottom + pad;
+    const { cx, cy, halfWidth, halfHeight, cos, sin } = box.turn;
+    const along = (x - cx) * cos + (y - cy) * sin;
+    const across = -(x - cx) * sin + (y - cy) * cos;
+    return Math.abs(along) < halfWidth + pad && Math.abs(across) < halfHeight + pad;
+  };
+  const labels = [];
+  const glyphs = element => {
+    const boxes = [];
+    const walker = document.createTreeWalker(element, NodeFilter.SHOW_TEXT);
+    for (let node = walker.nextNode(); node; node = walker.nextNode()) {
+      if (!node.textContent.trim() || node.parentElement.closest("svg, math") || !shown(node.parentElement)) continue;
+      const range = document.createRange();
+      range.selectNodeContents(node);
+      for (const box of range.getClientRects()) if (box.width > 0.5 && box.height > 0.5) boxes.push({ left: box.left, right: box.right, top: box.top, bottom: box.bottom });
+    }
+    for (const ink of element.querySelectorAll("svg[data-research-svg] g")) boxes.push(rect(ink));
+    return boxes;
+  };
+  for (const element of [...frame.querySelectorAll('span[style*="--ax"], [class*="_headerMark"]')].filter(shown)) {
+    const text = element.textContent.replace(/\s+/gu, " ").trim().slice(0, 60);
+    const style = getComputedStyle(element);
+    const matrix = new DOMMatrix(style.transform === "none" ? undefined : style.transform);
+    if (Math.abs(matrix.b) > 1e-3) {
+      const box = rect(element);
+      const angle = Math.atan2(matrix.b, matrix.a);
+      box.turn = { cx: (box.left + box.right) / 2, cy: (box.top + box.bottom) / 2, halfWidth: element.offsetWidth / 2, halfHeight: element.offsetHeight / 2, cos: Math.cos(angle), sin: Math.sin(angle) };
+      labels.push({ element, text, knockout: opaque(style.backgroundColor), boxes: [box], ink: [box] });
+      continue;
+    }
+    if (opaque(style.backgroundColor)) {
+      const box = rect(element);
+      for (const shadow of style.boxShadow === "none" ? [] : style.boxShadow.split(/,(?![^(]*\))/u)) {
+        if (/inset/u.test(shadow)) continue;
+        const [x = 0, y = 0, , spread = 0] = shadow.replace(/rgba?\([^)]*\)/u, "").trim().split(/\s+/u).map(Number.parseFloat);
+        box.left = Math.min(box.left, box.left + x - spread);
+        box.right = Math.max(box.right, box.right + x + spread);
+        box.top = Math.min(box.top, box.top + y - spread);
+        box.bottom = Math.max(box.bottom, box.bottom + y + spread);
+      }
+      labels.push({ element, text, knockout: true, boxes: [box], ink: glyphs(element) });
+      continue;
+    }
+    const boxes = glyphs(element);
+    if (boxes.length) labels.push({ element, text, knockout: false, boxes, ink: boxes });
+  }
+  if (labels.length) {
+    // Strokes, sampled along each shape at least every 1.5px on screen; a
+    // scatter's points are its move-to points.
+    const strokes = [];
+    const fills = [];
+    const shapes = [...frame.querySelectorAll("svg :is(path, line, polyline, polygon, circle, ellipse, rect)")]
+      .filter(shape => !shape.closest("svg[data-research-svg], [data-research-formula], button, [data-fig-switch], defs, pattern, clipPath, mask, marker, symbol") && shown(shape));
+    for (const shape of shapes) {
+      const style = getComputedStyle(shape);
+      const matrix = shape.getScreenCTM();
+      if (!matrix || Number(style.opacity) === 0) continue;
+      const toScreen = (x, y) => new DOMPoint(x, y).matrixTransform(matrix);
+      const scale = Math.sqrt(Math.abs(matrix.a * matrix.d - matrix.b * matrix.c));
+      const width = Number.parseFloat(style.strokeWidth) * (style.vectorEffect === "non-scaling-stroke" ? 1 : scale);
+      if (style.stroke !== "none" && width > 0 && Number(style.strokeOpacity) > 0) {
+        const name = [...(shape.classList.length ? shape.classList : shape.parentElement.classList)].map(item => item.replace(/^.*_/u, "")).join(" ") || shape.tagName;
+        const points = [];
+        if (shape.hasAttribute("data-scatter")) {
+          for (const match of (shape.getAttribute("d") ?? "").matchAll(/M\s*(-?[\d.]+)[\s,]+(-?[\d.]+)/gu)) points.push(toScreen(Number(match[1]), Number(match[2])));
+        } else {
+          const length = shape.getTotalLength();
+          if (length > 0) {
+            let estimate = 0;
+            let previous = toScreen(shape.getPointAtLength(0).x, shape.getPointAtLength(0).y);
+            for (let index = 1; index <= 200; index += 1) {
+              const point = shape.getPointAtLength((length * index) / 200);
+              const next = toScreen(point.x, point.y);
+              estimate += Math.hypot(next.x - previous.x, next.y - previous.y);
+              previous = next;
+            }
+            const count = Math.min(8000, Math.max(2, Math.ceil(estimate / 1.5)));
+            for (let index = 0; index <= count; index += 1) {
+              const point = shape.getPointAtLength((length * index) / count);
+              points.push(toScreen(point.x, point.y));
+            }
+          }
+        }
+        strokes.push({ name, half: width / 2, points });
+      }
+      if (style.fill !== "none" && Number(style.fillOpacity) > 0 && typeof shape.isPointInFill === "function") fills.push({ shape, inverse: matrix.inverse(), name: shape.getAttribute("class") ?? shape.tagName });
+    }
+    const MARK = /_(dot|seg|range|bracket|scenarioDot)$/u;
+    const marks = [...frame.querySelectorAll("span")].filter(element => [...element.classList].some(name => MARK.test(name)) && shown(element))
+      .map(element => ({ element, name: [...element.classList].find(name => MARK.test(name)).replace(/^.*_/u, ""), box: rect(element) }));
+    for (const label of labels) {
+      const hits = new Map();
+      const hit = (name, count = 1) => hits.set(name, (hits.get(name) ?? 0) + count);
+      // The text stands 4px clear of every stroke, beyond the stroke's half
+      // width, named or not.
+      let nearest = Infinity;
+      let nearestStroke = "";
+      for (const stroke of strokes) {
+        for (const point of stroke.points) {
+          for (const box of label.ink) {
+            let dx;
+            let dy;
+            if (box.turn) {
+              const { cx, cy, halfWidth, halfHeight, cos, sin } = box.turn;
+              dx = Math.max(Math.abs((point.x - cx) * cos + (point.y - cy) * sin) - halfWidth, 0);
+              dy = Math.max(Math.abs(-(point.x - cx) * sin + (point.y - cy) * cos) - halfHeight, 0);
+            } else {
+              dx = Math.max(box.left - point.x, 0, point.x - box.right);
+              dy = Math.max(box.top - point.y, 0, point.y - box.bottom);
+            }
+            if (dx < 12 && dy < 12 && Math.hypot(dx, dy) - stroke.half < nearest) {
+              nearest = Math.hypot(dx, dy) - stroke.half;
+              nearestStroke = stroke.name;
+            }
+          }
+        }
+      }
+      if (nearest < 4) issues.push({ kind: "label-touches-curve", text: label.text, clearance: +nearest.toFixed(2), stroke: nearestStroke });
+      for (const box of label.boxes) {
+        // A knockout or tag may not paint over any stroke's ink.
+        for (const stroke of label.knockout ? strokes : []) {
+          const count = stroke.points.filter(point => inside(box, point.x, point.y, stroke.half - 0.5)).length;
+          if (count) hit(`stroke ${stroke.name}`, count);
+        }
+        for (const mark of marks) {
+          if (label.element.contains(mark.element) || mark.element.contains(label.element)) continue;
+          const b = mark.box;
+          if (box.left < b.right - 0.5 && b.left < box.right - 0.5 && box.top < b.bottom - 0.5 && b.top < box.bottom - 0.5) hit(mark.name);
+        }
+        if (!label.knockout) continue;
+        for (const fill of fills) {
+          let count = 0;
+          for (let y = box.top + 1; y < box.bottom - 0.5; y += 2) {
+            for (let x = box.left + 1; x < box.right - 0.5; x += 2) {
+              if (box.turn && !inside(box, x, y)) continue;
+              const point = new DOMPoint(x, y).matrixTransform(fill.inverse);
+              if (fill.shape.isPointInFill(point)) count += 1;
+            }
+          }
+          if (count) hit(`fill ${fill.name}`, count);
+        }
+      }
+      if (hits.size) issues.push({ kind: "label-covers-mark", text: label.text, knockout: label.knockout, marks: Object.fromEntries(hits), box: label.boxes[0] });
+    }
+    // No two labels touch: each keeps 2px of paper around it.
+    labels.forEach((a, index) => {
+      for (const b of labels.slice(index + 1)) {
+        if (a.element.contains(b.element) || b.element.contains(a.element)) continue;
+        const touch = a.boxes.some(one => b.boxes.some(two => one.left < two.right + 2 && two.left < one.right + 2 && one.top < two.bottom + 2 && two.top < one.bottom + 2));
+        if (touch) issues.push({ kind: "labels-touch", text: `${a.text} / ${b.text}`.slice(0, 80) });
+      }
+    });
+  }
+  // A view switch keeps each label inside its own segment, and itself inside
+  // the head it stands in.
+  for (const control of [...frame.querySelectorAll("[data-fig-switch]")].filter(shown)) {
+    const room = rect(control.parentElement);
+    const box = rect(control);
+    if (box.right > room.right + 0.5 || control.scrollWidth > control.clientWidth + 1) issues.push({ kind: "switch-overflows", text: control.textContent.trim(), width: control.scrollWidth, room: room.right - room.left });
+    for (const button of control.querySelectorAll("button")) {
+      // Ink only: the words, and a formula's glyphs without its canvas gutters.
+      const ink = [];
+      const words = document.createTreeWalker(button, NodeFilter.SHOW_TEXT);
+      for (let node = words.nextNode(); node; node = words.nextNode()) {
+        if (!node.textContent.trim() || node.parentElement.closest("svg, math, [class*='assistive']")) continue;
+        const range = document.createRange();
+        range.selectNodeContents(node);
+        ink.push(...[...range.getClientRects()].filter(box => box.width > 0.5));
+      }
+      ink.push(...[...button.querySelectorAll("svg[data-research-svg] g")].map(element => element.getBoundingClientRect()));
+      const segment = rect(button);
+      if (ink.some(box => box.left < segment.left - 0.5 || box.right > segment.right + 0.5)) issues.push({ kind: "switch-label-outside-segment", text: button.textContent.replace(/\s+/gu, " ").trim() });
+    }
+  }
+  // Tick labels on one axis keep 6px apart.
+  const axes = new Map();
+  for (const tick of [...frame.querySelectorAll('[class*="_tickX"]')].filter(shown)) {
+    if (rect(tick).right - rect(tick).left < 0.5) continue;
+    if (!axes.has(tick.parentElement)) axes.set(tick.parentElement, []);
+    axes.get(tick.parentElement).push({ text: tick.textContent.trim(), box: rect(tick) });
+  }
+  for (const ticks of axes.values()) {
+    ticks.sort((a, b) => a.box.left - b.box.left);
+    ticks.slice(1).forEach((tick, index) => {
+      const before = ticks[index];
+      if (tick.box.left < before.box.right + 6 && tick.box.top < before.box.bottom && before.box.top < tick.box.bottom) issues.push({ kind: "ticks-touch", ticks: [before.text, tick.text], gap: tick.box.left - before.box.right });
+    });
+  }
+  return issues;
 }
 
 // Manuscript tables and displayed equations: a table heading takes at most two
@@ -800,6 +1050,29 @@ try {
                 assert.equal(await figure.getAttribute("data-view"), view, `${id}: view control did not activate ${view}`);
               }
               const result = await figure.evaluate(inspectFigure);
+              result.issues.push(...await figure.evaluate(inspectLabels));
+              // Labels keep their places at every column width, not only at the
+              // viewports above: the figure is set at each width from 280px to
+              // 600px, past the widest column (576px), in 4px steps up to 520px
+              // and 8px beyond, its container
+              // queries following, and its labels, switch and ticks are checked
+              // again once a view switch has refitted.
+              if (width === 1440 && textScale === 1) {
+                const swept = new Map();
+                for (let size = 280; size <= 600; size += size < 520 ? 4 : 8) {
+                  await figure.evaluate(async (element, value) => {
+                    element.style.width = `${value}px`;
+                    if (element.querySelector("[data-fig-switch]")) await new Promise(resolve => requestAnimationFrame(() => requestAnimationFrame(resolve)));
+                  }, size);
+                  for (const issue of await figure.evaluate(inspectLabels)) {
+                    const key = `${issue.kind}|${issue.text ?? issue.ticks?.join(" ")}`;
+                    if (!swept.has(key)) swept.set(key, { ...issue, figureWidths: [] });
+                    swept.get(key).figureWidths.push(size);
+                  }
+                }
+                await figure.evaluate(element => { element.style.width = ""; });
+                result.issues.push(...swept.values());
+              }
               const record = { route: entry.route, id, view, width, textScale, ...result, pageErrors: [...errors] };
               records.push(record);
               if (result.issues.length || id === "ranking-reversal" || id === "heston-candidates" && textScale === 2) {

@@ -1,5 +1,5 @@
 import type { CSSProperties, ReactNode } from "react";
-import { BarAxis, BarHeader, BarRow, Bars, Dot, Figure, Legend, Mark, Panel, Plot, Range, Seg, Tx, classes, linear, logarithmic, styles as kit, type Scale } from "./kit";
+import { BarAxis, BarGroup, BarHeader, BarRow, Bars, Dot, Figure, Legend, Mark, Panel, Plot, Range, Seg, Tx, classes, clearOf, linear, logarithmic, styles as kit, type Scale } from "./kit";
 import results from "./Results.module.css";
 import styles from "./Figures.module.css";
 
@@ -24,7 +24,7 @@ function DependenceBudgetRuler() {
         y={y}
         height="clamp(224px, 42cqi, 244px)"
         inset={{ top: 4, left: 14, right: 14 }}
-        xTicks={[0, 0.1, 0.2, 0.3].map((at) => ({ at, label: at === 0 ? "0" : at.toFixed(1), edge: at === 0 ? "start" as const : undefined }))}
+        xTicks={[0, 0.1, 0.2, 0.3].map((at) => ({ at, label: at === 0 ? "0" : at < 0.15 ? at.toFixed(1) : <span className={styles.wideOnly}>{at.toFixed(1)}</span>, edge: at === 0 ? "start" as const : undefined }))}
         yTicks={[{ at: 0, label: "", solid: true }]}
         xGrid={false}
         xTitle="Rescaled stress budget $s$"
@@ -33,10 +33,18 @@ function DependenceBudgetRuler() {
         <span className={styles.budgetBar} style={{ left: `${x(low)}%`, width: `${x(high) - x(low)}%` }} />
         <span className={styles.budgetRule} style={{ left: `${x(slope)}%` }} />
         <span className={`${styles.budgetGap} ${kit.fade}`} style={{ left: `${x(slope)}%`, width: `${x(low) - x(slope)}%`, top: `${100 - y(0.36)}%` }} />
-        <Mark left={(x(slope) + x(low)) / 2} top={100 - y(0.36)} anchor="bottom" tone="accent" strong className={kit.fade}>+30%</Mark>
+        {/* Every label keeps inside the region it names. The gain stands over
+            its arrow where the gap holds it, and left of the rule, at the
+            arrow, where it does not. The band holds its name; where it is too
+            narrow for the interval as well, the endpoints stand under the
+            bar's ends, in place of the 0.2 and 0.3 ticks. */}
+        <Mark left={(x(slope) + x(low)) / 2} top={100 - y(0.36)} anchor="bottom" tone="accent" strong className={`${kit.fade} ${styles.wideOnly}`}>+30%</Mark>
+        <Mark left={x(slope)} top={100 - y(0.36)} anchor="right" tone="accent" strong className={`${kit.fade} ${styles.narrowOnly}`}>+30%</Mark>
         <Dot left={x(slope)} top={100} tone="ink" tip={"Initial-slope extrapolation\ns = 5/32 = 0.15625"} />
         <Mark left={x(slope)} top={0} anchor="top-right" wrap knockout={false} className={`${styles.budgetLabel} ${styles.budgetLabelEnd}`} style={{ maxWidth: `calc(${x(slope)}% + 10px)` }}><>Initial-slope extrapolation<br /><Tx>$5/32$</Tx></></Mark>
-        <Mark left={x(low)} top={0} anchor="top-left" tone="accent" wrap knockout={false} className={styles.budgetLabel} style={{ maxWidth: `calc(${100 - x(low)}% + 12px)` }}><>Proved critical budget<br /><Tx>$[13/64,29/96]$</Tx></></Mark>
+        <Mark left={x(low)} top={0} anchor="top-left" tone="accent" wrap knockout={false} className={styles.budgetLabel} style={{ maxWidth: `calc(${x(high) - x(low)}% - 4px)` }}><>Proved critical budget<span className={styles.wideOnly}><br /><Tx>$[13/64,29/96]$</Tx></span></></Mark>
+        <Mark left={x(low)} top={100} anchor="top" tone="accent" className={styles.narrowOnly}>$13/64$</Mark>
+        <Mark left={x(high)} top={100} anchor="top" tone="accent" className={styles.narrowOnly}>$29/96$</Mark>
       </Plot>
     </Figure>
   );
@@ -48,11 +56,12 @@ function DependenceBudgetRuler() {
 
 type LineRule = { at: number; tone?: "soft" | "accent" };
 
-/** Grid lines and reference rules behind one row, through its name and its marks. */
+/** Grid lines and reference rules behind one row, through its name and its
+    marks; a grid line gives way to a rule drawn at or near its value. */
 function RowLines({ grid, rules = [] }: { grid: number[]; rules?: LineRule[] }) {
   return (
     <span className={results.lines} aria-hidden="true">
-      {grid.map((left, index) => <span key={`g${index}`} className={kit.gridX} style={{ left: `${left}%` }} />)}
+      {clearOf(grid, rules).map((left, index) => <span key={`g${index}`} className={kit.gridX} style={{ left: `${left}%` }} />)}
       {rules.map((rule, index) => <span key={`r${index}`} className={kit.rule} data-tone={rule.tone} style={{ left: `${rule.at}%` }} />)}
     </span>
   );
@@ -126,8 +135,8 @@ function AsianIntervalLine() {
   const grid = ticks.map((tick) => x(tick.at));
   const rules: LineRule[] = [{ at: x(SPREAD.library), tone: "soft" }];
   // The strip magnifies a window of 0.0006 around the proxy value, placed so
-  // that each mark keeps room for its note on a phone.
-  const zoom = [6.51301, 6.51361] as const;
+  // that each mark keeps room for its note, inside the strip, on a phone.
+  const zoom = [6.51304, 6.51364] as const;
   const zoomed = linear(...zoom);
   const lensTicks = [6.5131, 6.5133, 6.5135].map((at) => ({ at, label: at.toFixed(4) }));
   const windowBand = <span className={results.lensWindow} data-lens-window="" aria-hidden="true" style={{ left: `${x(zoom[0])}%`, width: `${x(zoom[1]) - x(zoom[0])}%` }} />;
@@ -350,22 +359,28 @@ function HestonStageBounds() {
       id="heston-stages"
       title="Complete bounds on the 4400–4500 spread, certificate by certificate"
       caption="Each row is a certificate of Table 2; a bound left of the dashed line certifies a quarter point. The forward-variance weight of Theorem 3.1, from H0 to H1, gives the largest reduction."
-      legend={[{ label: "Joint bound", tone: "accent", shape: "dot" }, { label: "Leg-by-leg bound", tone: "steel", shape: "ring" }]}
+      legend={[{ label: "Joint bound", tone: "ink", shape: "dot" }, { label: "Leg-by-leg bound", tone: "steel", shape: "ring" }]}
     >
       {/* Table 2 stands just above, so the rows carry no value column: each
-          marker's readout gives the exact bounds. */}
+          marker's readout gives the exact bounds. Every joint bound is one ink
+          dot, as the legend keys it; the dashed accent rule says which certify,
+          and runs from its name through the group rows to the axis. Where a
+          row's two bounds nearly meet, the ring is drawn over the dot, hollow,
+          so both stay in view. */}
       <Bars label="Joint bounds in index points: H0 1.398, H1 0.379, H2 0.367, H3 0.132, H4 0.115, Q0 1.208, Q1 0.351, Q2 0.233. Leg-by-leg bounds: H0 2.680, H1 0.476, H3 0.159, H4 0.138, Q0 1.545, Q1 0.408, Q2 0.252. The tolerance is a quarter point." labelWidth="17rem" valueWidth="0px" stack="narrow">
-        <BarHeader marks={[{ at: tolerance, label: "Quarter-point tolerance", tone: "accent", anchor: "left" }]} />
+        <BarHeader marks={[{ at: tolerance, label: "Quarter-point tolerance", tone: "accent", anchor: "left", rule: "accent" }]} />
         {HESTON_STAGES.map((row, index) => {
-          if (!("id" in row)) return <p key={index} className={kit.groupLabel}>{row.group}</p>;
+          if (!("id" in row)) return <BarGroup key={index} label={row.group} rules={[{ at: tolerance, tone: "accent" }]} />;
           const marginal = "marginal" in row ? row.marginal : undefined;
-          const certified = row.joint <= 0.25;
           const tip = `${row.id}: ${row.text}\nJoint ${row.joint}${marginal ? `\nLeg by leg ${marginal}` : ""}\nTolerance met: ${row.note}`;
+          const close = marginal !== undefined && x(marginal) - x(row.joint) < 4;
+          const ring = marginal !== undefined && <span className={`${kit.dot} ${kit.steel}${close ? ` ${styles.hollow}` : ""}`} data-ring="" data-tip={tip} style={{ left: `${x(marginal)}%`, top: "50%" }} />;
           return (
-            <BarRow key={row.id} label={<><span className={styles.id}>{row.id}</span><span className={styles.stageText}>{row.text}</span></>} grid={grid} rules={[{ at: tolerance, tone: "accent" }]}>
+            <BarRow key={row.id} label={<span className={styles.stageLabel}><span className={styles.id}>{row.id}</span><span className={styles.stageText}>{row.text}</span></span>} grid={grid} rules={[{ at: tolerance, tone: "accent" }]}>
               {marginal && <span className={`${styles.link} ${kit.steel}`} style={{ left: `${x(row.joint)}%`, width: `${x(marginal) - x(row.joint)}%` }} />}
-              {marginal && <span className={`${kit.dot} ${kit.steel}`} data-ring="" data-tip={tip} style={{ left: `${x(marginal)}%`, top: "50%" }} />}
-              <span className={`${kit.dot} ${certified ? kit.accent : kit.ink}`} data-tip={tip} style={{ left: `${x(row.joint)}%`, top: "50%" }} />
+              {!close && ring}
+              <span className={`${kit.dot} ${kit.ink}`} data-tip={tip} style={{ left: `${x(row.joint)}%`, top: "50%" }} />
+              {close && ring}
             </BarRow>
           );
         })}
@@ -459,7 +474,7 @@ function HestonCandidateSeparation() {
               grid={grid}
               rowClass={classes("unresolved" in row && styles.unresolved, "best" in row && styles.best)}
             >
-              <span className={`${kit.range} ${styles.candidate}`} style={style} data-tip={`α = ${row.alpha}\nNt = 1024: [${row.n1024.join(", ")}]\nNt = 2048: [${row.n2048.join(", ")}]`} />
+              <span className={`${kit.range} ${styles.candidate}`} style={style} data-tip={`α = ${row.alpha}\nNₜ = 1024: [${row.n1024.map((end) => end.toFixed(6)).join(", ")}]\nNₜ = 2048: [${row.n2048.map((end) => end.toFixed(6)).join(", ")}]`} />
             </BarRow>
           );
         })}
@@ -488,6 +503,8 @@ function HestonLedger() {
   const tolerance = x(0.25);
   // Each total is printed to the third decimal, which places it on either side
   // of a quarter point; the segments' readouts and Table 4 carry every digit.
+  // The total and its verdict follow the row's name, clear of the quarter-point
+  // rule they are read against.
   const rows = [
     { name: "Joint", key: "joint", total: 0.233318843, verdict: "Certified" },
     { name: "Leg-by-leg", key: "marginal", total: 0.252393939, verdict: "Not certified" },
@@ -500,11 +517,11 @@ function HestonLedger() {
       legend={LEDGER_PARTS.filter((part) => part.tone !== "mist").map((part) => ({ label: part.name, tone: part.tone }))}
     >
       <Bars label="Complete bounds of the three-month spread in index points. Joint 0.233318843, below a quarter point; leg-by-leg 0.252393939, above it. Shared components: absolute centre 0.149775147, strip remainder 0.000026654, exact infinite tail 0.038055248. Node support: joint 0.045461793, leg-by-leg 0.064536890." labelWidth="8rem" valueWidth="7rem" stack>
-        <BarHeader marks={[{ at: tolerance, label: "Quarter-point tolerance", tone: "accent", anchor: "right" }]} />
+        <BarHeader marks={[{ at: tolerance, label: "Quarter-point tolerance", tone: "accent", anchor: "right", rule: "accent" }]} />
         {rows.map((row) => {
           let start = 0;
           return (
-            <BarRow key={row.key} label={row.name} value={row.total.toFixed(3)} valueNote={row.verdict} grid={grid} rules={[{ at: tolerance, tone: "accent" }]}>
+            <BarRow key={row.key} label={<>{row.name}<span className={styles.ledgerTotal}>{row.total.toFixed(3)}</span><span className={styles.ledgerVerdict}>{row.verdict}</span></>} grid={grid} rules={[{ at: tolerance, tone: "accent" }]}>
               {LEDGER_PARTS.map((part) => {
                 const from = start;
                 start += part[row.key];

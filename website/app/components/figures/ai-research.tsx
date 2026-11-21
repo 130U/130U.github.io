@@ -31,7 +31,7 @@ function AuditPolicies() {
     >
       <Panel view="precision" active>
         <Bars label="Standard deviation of the corrected estimate in percentage points: uniform 0.568, risk-first 0.657, residual- and cost-aware 0.515." labelWidth="12rem" valueWidth="8.5rem" stack>
-          <BarHeader marks={[{ at: sd(0.568), label: "Uniform baseline", tone: "steel", anchor: "right" }]} />
+          <BarHeader marks={[{ at: sd(0.568), label: "Uniform baseline", tone: "steel", anchor: "right", rule: "soft" }]} />
           {AUDIT_POLICIES.map((policy) => (
             <BarRow key={policy.name} label={policy.name} value={policy.sd.toFixed(3)} valueNote={policy.change} grid={sdTicks.map((tick) => sd(tick.at))} rules={[{ at: sd(0.568), tone: "soft" }]}>
               <Seg x={sd} from={0} to={policy.sd} tone={policy.tone} tip={`${policy.name}\nStandard deviation ${policy.sd.toFixed(3)} pp\n${policy.change}`} />
@@ -157,8 +157,10 @@ function LabelFlip() {
   const y = linear(0, 50);
   const curve = sample(0, 3, 121, (ratio) => 100 * normalCdf(-ratio));
   const every = curve.filter((_, index) => index % 4 === 0);
-  // The final annotation ends at the plot's right edge, leaving room for the
-  // full percentage even when the plot is narrow.
+  // The final annotation ends at the plot's right edge, over the flat tail
+  // beyond 2.25 where the curve lies below it, and takes two lines where that
+  // tail is too short for one. Only the symbol is set as mathematics, so the
+  // numbers read in the label's own figures, as the readout writes them.
   const points = [
     { ratio: 0.25, rate: "40.13%", nudge: 0 },
     { ratio: 1, rate: "15.87%", nudge: 0 },
@@ -178,6 +180,9 @@ function LabelFlip() {
         yTicks={[0, 10, 20, 30, 40, 50].map((at) => ({ at, label: `${at}%`, solid: at === 0 }))}
         yTitle="Label-flip probability"
         xTitle="Margin-to-noise ratio $\gamma/s$"
+        // Tall enough on a phone that the 2.28% label, on two lines there,
+        // stands clear of the 15.87% label above it.
+        height="clamp(270px, 60cqi, 300px)"
         crosshair={{
           x: every.map(([ratio]) => x(ratio)),
           heading: every.map(([ratio]) => `γ/s = ${ratio.toFixed(2)}`),
@@ -192,7 +197,7 @@ function LabelFlip() {
           const rate = Number.parseFloat(point.rate);
           return <span key={point.ratio}>
             <Dot left={x(point.ratio)} top={100 - y(rate)} tone="ink" className={kit.fade} />
-            <Mark left={point.ratio === 2 ? 100 : x(point.ratio) + point.nudge} top={100 - y(rate)} anchor={point.ratio === 2 ? "bottom-right" : "above-right"} className={`${kit.fade} ${styles.numericAnnotation}`} tag wrap={point.ratio === 2} style={point.ratio === 2 ? { maxWidth: "min(6.5rem, 100%)" } : undefined}>{`$\\gamma/s=${point.ratio}$: ${point.rate}`}</Mark>
+            <Mark left={point.ratio === 2 ? 100 : x(point.ratio) + point.nudge} top={100 - y(rate)} anchor={point.ratio === 2 ? "bottom-right" : "above-right"} className={`${kit.fade} ${styles.numericAnnotation}`} tag wrap={point.ratio === 2} style={point.ratio === 2 ? { maxWidth: `min(6.5rem, max(${(100 - x(2.25)).toFixed(2)}%, 4.5rem))` } : undefined}>{`$\\gamma/s$ = ${point.ratio}: ${point.rate}`}</Mark>
           </span>;
         })}
       </Plot>
@@ -201,8 +206,10 @@ function LabelFlip() {
 }
 
 function BridgeLeakage() {
-  const x = linear(-0.38, 1);
-  const y = linear(0, 1.08);
+  // The history lane before s holds the "Permitted" band's name on a phone,
+  // and the variance axis ends at 1, where the vertical rules end.
+  const x = linear(-0.48, 1);
+  const y = linear(0, 1);
   const history = sample(0, 1, 2, (u) => u);
   const bridge = sample(0, 1, 81, (u) => u * (1 - u));
   const every = sample(0, 1, 21, (u) => u);
@@ -223,6 +230,7 @@ function BridgeLeakage() {
           yTicks={[{ at: 0, label: "0", solid: true }, { at: 0.5, label: "0.5" }, { at: 1, label: "1" }]}
           yTitle="Conditional variance of $X_t$"
           xTitle="Time $t$"
+          height="clamp(310px, 70cqi, 340px)"
           crosshair={{
             x: every.map(([u]) => x(u)),
             heading: every.map(([u]) => `(t − s)/(T − s) = ${u.toFixed(2)}`),
@@ -239,14 +247,14 @@ function BridgeLeakage() {
           <span className={styles.bracket} style={{ left: `${x(0.5)}%`, top: `${100 - y(0.5)}%`, height: `${y(0.5) - y(0.25)}%` }} />
           <Dot left={x(0.5)} top={100 - y(0.5)} tone="ink" className={kit.fade} />
           <Dot left={x(0.5)} top={100 - y(0.25)} tone="accent" className={kit.fade} />
-          <Mark left={x(0.5)} top={100 - y(0.375)} anchor="left" tone="accent" wrap className={kit.fade}>Variance halves</Mark>
-          <Mark left={x(-0.19)} top={50} anchor="center" className={kit.muted}>History</Mark>
-          {/* Each curve is named beside itself: the line in the open space
-              above it, ending before a phone's scroll fade, and the bridge
-              centred beneath its peak, the one place under the arch wide
-              enough for its name. */}
+          {/* Every label stands in open paper: the halving beside its bracket,
+              between the two curves, on two lines where the plot is narrow; the
+              line's name above it; and the bridge's name low under its arch,
+              where the arch is widest. The plot is tall enough for both. */}
+          <Mark left={x(0.5)} top={100 - y(0.375)} anchor="left" tone="accent" wrap knockout={false} className={kit.fade}>Variance halves</Mark>
+          <Mark left={x(-0.24)} top={100 - y(0.75)} anchor="center" className={kit.muted}>History</Mark>
           <Mark left={x(0.6)} top={100 - y(0.6)} anchor="above-left" className={kit.fade}>{"Given $\\mathcal{F}_s$"}</Mark>
-          <Mark left={x(0.5)} top={100 - y(0.25)} anchor="top" tone="accent" className={kit.fade}>{"Given $\\mathcal{F}_s$ and $X_T$"}</Mark>
+          <Mark left={x(0.5)} top={100 - y(0.065)} anchor="center" tone="accent" className={kit.fade}>{"Given $\\mathcal{F}_s$ and $X_T$"}</Mark>
         </Plot>
         <div className={styles.info} style={{ "--split": `${x(0)}%` } as CSSProperties} aria-label="Information sets" role="img">
           <span className={`${styles.infoBand} ${kit.steel}`} data-span="" data-hatch=""><span><Tx>{"Construction $\\mathcal{F}_{\\text{gen}}$: complete path and endpoint"}</Tx></span></span>
@@ -268,6 +276,10 @@ function RankingReversal() {
     { name: "A", theta: 72, score: 73.12, alpha: "4%", tone: "ink" as const },
     { name: "B", theta: 64, score: 76.96, alpha: "36%", tone: "accent" as const },
   ];
+  // B's rate stands below and to the right of a point on B's rising line, the
+  // one side that line leaves open at every width.
+  const along = 0.42;
+  const onB = models[1].theta + along * (models[1].score - models[1].theta);
   return (
     <Figure
       id="ranking-reversal"
@@ -277,8 +289,8 @@ function RankingReversal() {
       <div className={styles.rankingViewport} data-figure-scroll role="region" tabIndex={0} aria-label="Ranking comparison">
         <div className={styles.rankingCanvas}>
           <div className={styles.rankingHeads} aria-hidden="true">
-            <span data-ranking-heading><Tx>True validity $\theta_m$</Tx></span>
-            <span data-ranking-heading><Tx>Observed score $s_m$</Tx></span>
+            <span data-ranking-heading><Tx>True validity</Tx><br /><Tx>$\theta_m$</Tx></span>
+            <span data-ranking-heading><Tx>Observed score</Tx><br /><Tx>$s_m$</Tx></span>
           </div>
         <Plot
           label="Model A: true validity 72%, observed score 73.12%. Model B: true validity 64%, observed score 76.96%. The ranking reverses."
@@ -297,7 +309,7 @@ function RankingReversal() {
               <Mark left={100} top={100 - y(model.score)} anchor="left" tone={model.tone}><>{model.score}% <strong>{model.name}</strong></></Mark>
             </span>
           ))}
-          <Mark left={x(0.44)} top={100 - y(65)} anchor="center" tone="accent" className={kit.fade}>$\alpha_B=36\%$</Mark>
+          <Mark left={x(along)} top={100 - y(onB)} anchor="below-right" tone="accent" className={kit.fade}>$\alpha_B=36\%$</Mark>
           <Mark left={x(0.36)} top={100 - y(74.6)} anchor="center" className={kit.fade}>$\alpha_A=4\%$</Mark>
         </Plot>
         </div>
@@ -349,6 +361,7 @@ function GraderCeiling() {
           xTicks={xTicks}
           yTicks={[60, 70, 80, 90, 100].map((value) => ({ at: value, label: `${value}%` }))}
           yTitle="Share of the policy's work"
+          height="clamp(300px, 56cqi, 320px)"
           xTitle="Optimization strength $\eta$"
           crosshair={{
             x: at,
@@ -368,10 +381,13 @@ function GraderCeiling() {
             <Dot left={x(point.eta)} top={100 - yCeiling(Number.parseFloat(point.observed))} tone="ink" className={kit.fade} tip={`η = ${point.eta}\nObserved score ${point.observed}`} />
             <Dot left={x(point.eta)} top={100 - yCeiling(Number.parseFloat(point.valid))} tone="accent" className={kit.fade} tip={`η = ${point.eta}\nTrue validity ${point.valid}`} />
           </span>)}
-          {/* Each line is named at its right end, where it settles. */}
-          <Mark left={100} top={100 - yCeiling(100)} anchor="top-right" className={`${kit.fade} ${styles.endLabel}`}>Observed score</Mark>
+          {/* Each rising curve is named below and to the right of its point at
+              η = 2, the side it leaves open at every width, clear of the other
+              curve and of the limit; the limit is named at its right end, above
+              its dashed line. */}
+          <Mark left={x(2)} top={100 - yCeiling(96.1)} anchor="below-right" className={kit.fade}>Observed score</Mark>
           <Mark left={100} top={100 - yCeiling(limit)} anchor="bottom-right" className={`${kit.fade} ${styles.endLabel}`}><span className={results.accentText}>Limit 83.2%</span></Mark>
-          <Mark left={100} top={100 - yCeiling(limit)} anchor="top-right" className={`${kit.fade} ${styles.endLabel}`}><span className={results.accentText}>True validity</span></Mark>
+          <Mark left={x(2)} top={100 - yCeiling(79.9)} anchor="below-right" className={kit.fade}><span className={results.accentText}>True validity</span></Mark>
         </Plot>
       </Panel>
       <Panel view="rejection" active={false}>
@@ -382,6 +398,7 @@ function GraderCeiling() {
           xTicks={xTicks}
           yTicks={[0, 10, 20, 30, 40, 50].map((value) => ({ at: value, label: `${value}%`, solid: value === 0 }))}
           yTitle="Valid work on the rejected route"
+          height="clamp(300px, 56cqi, 320px)"
           xTitle="Optimization strength $\eta$"
           crosshair={{
             x: at,
@@ -454,17 +471,19 @@ function BudgetFrontier() {
 
 const DAG = {
   nodes: [
-    { id: "v1", label: "$v_1$", left: 27, top: 25, descendants: ["v3", "v5", "C"] },
-    { id: "v2", label: "$v_2$", left: 27, top: 75, descendants: ["v3", "v4", "v5", "C"] },
-    { id: "v3", label: "$v_3$", left: 51, top: 25, descendants: ["v5", "C"] },
-    { id: "v4", label: "$v_4$", left: 51, top: 75, descendants: ["C"] },
-    { id: "v5", label: "$v_5$", left: 73, top: 25, descendants: ["C"] },
+    { id: "v1", label: "$v_1$", left: 28, top: 25, descendants: ["v3", "v5", "C"] },
+    { id: "v2", label: "$v_2$", left: 28, top: 75, descendants: ["v3", "v4", "v5", "C"] },
+    { id: "v3", label: "$v_3$", left: 50, top: 25, descendants: ["v5", "C"] },
+    { id: "v4", label: "$v_4$", left: 50, top: 75, descendants: ["C"] },
+    { id: "v5", label: "$v_5$", left: 72, top: 25, descendants: ["C"] },
   ],
   edges: [["G", "v1"], ["G", "v2"], ["v1", "v3"], ["v2", "v3"], ["v2", "v4"], ["v3", "v5"], ["v5", "C"], ["v4", "C"]],
 };
 
 function ProofObligations() {
-  const position: Record<string, [number, number]> = { G: [4, 50], C: [96, 50] };
+  // Columns stand evenly apart, and the end nodes keep inside the field, so
+  // neighbours keep 12px between them on a 320px phone.
+  const position: Record<string, [number, number]> = { G: [8, 50], C: [92, 50] };
   for (const node of DAG.nodes) position[node.id] = [node.left, node.top];
   const failed = "v2";
   const unverified = new Set(DAG.nodes.find((node) => node.id === failed)!.descendants);
@@ -535,7 +554,7 @@ function ProtocolOutcomes() {
       legend={OUTCOMES.map((outcome) => ({ label: outcome.name, tone: outcome.tone }))}
     >
       <Bars label="Final-answer matching: 1,200 valid accepted, 1,800 invalid accepted, 600 invalid rejected; 40.0% of accepted submissions are valid. Strict reference-path matching: 600 valid accepted, 600 valid rejected, 2,400 invalid rejected. Certificate verification: 1,200 valid accepted, 2,400 invalid rejected." valueWidth="6rem" stack>
-        <BarHeader marks={[{ at: x(0), label: "Valid", tone: "steel", anchor: "left" }, { at: x(1200), label: "Invalid", tone: "steel", anchor: "left" }]} />
+        <BarHeader marks={[{ at: x(0), label: "Valid", tone: "steel", anchor: "left" }, { at: x(1200), label: "Invalid", tone: "steel", anchor: "left", rule: "soft" }]} />
         {/* The value column is named once, on its first row. */}
         {PROTOCOLS.map((protocol, row) => {
           let start = 0;
@@ -580,8 +599,10 @@ function CoverageCollapse() {
         label="Actual coverage of a nominal 95% interval with shared bias 0.2: 48.40% at 100 records and 0.000637% at 1,000 records when the bias is ignored; 97.50% with the widened half-width."
         x={x}
         y={y}
-        xTicks={[10, 100, 1000, 10000].map((at) => ({ at, label: grouped(at), edge: at === 10 ? "start" as const : at === 10000 ? "end" as const : undefined }))}
-        yTicks={[0, 25, 50, 75, 100].map((at) => ({ at, label: `${at}%`, solid: at === 0 }))}
+        xTicks={[10, 100, 1000, 10000].map((at) => ({ at, label: grouped(at), minor: at === 1000, edge: at === 10 ? "start" as const : at === 10000 ? "end" as const : undefined }))}
+        // The nominal 95% rule is the axis's top reference: its tick names it,
+        // and no grid line at 100% crowds it or the 97.50% line above it.
+        yTicks={[0, 25, 50, 75, 95].map((at) => ({ at, label: `${at}%`, solid: at === 0, grid: at !== 95 }))}
         yTitle="Actual coverage"
         xTitle="Records $n$, log scale"
         crosshair={{
@@ -599,9 +620,9 @@ function CoverageCollapse() {
       >
         <span className={styles.hline} style={{ top: `${100 - y(95)}%` }} />
         <Dot left={x(100)} top={100 - y(48.4)} tone="ink" className={kit.fade} />
-        <Mark left={x(100)} top={100 - y(48.4)} anchor="above-right" tag className={kit.fade}>48.40% at $n=100$</Mark>
+        <Mark left={x(100)} top={100 - y(48.4)} anchor="above-right" tag wrap className={kit.fade}>48.40% at $n=100$</Mark>
         <Dot left={x(1000)} top={100 - y(0.000637)} tone="ink" className={kit.fade} />
-        <Mark left={100} top={100 - y(0.000637)} anchor="bottom-right" tag wrap className={`${kit.fade} ${styles.alignEnd} ${styles.numericAnnotation}`} style={{ maxWidth: "min(12rem, 100%)" }}>{"0.000637% at $n=1{,}000$"}</Mark>
+        <Mark left={100} top={100 - y(0.000637)} anchor="bottom-right" tag wrap className={`${kit.fade} ${styles.alignEnd} ${styles.numericAnnotation}`} style={{ maxWidth: "min(12rem, 44%)" }}>{"0.000637% at $n=1{,}000$"}</Mark>
         <Mark left={100} top={100 - y(97.5)} anchor="bottom-right" tone="accent" className={kit.fade}>97.50%</Mark>
       </Plot>
     </Figure>
@@ -620,7 +641,7 @@ function SharedErrorCancellation() {
       caption="Nominal score difference 0.6 with a shared sector-benchmark error in $[-1,1]$. Subtracting separate intervals lets the shared error move in opposite directions at once and crosses zero; the joint support function cancels it exactly."
     >
       <Bars label="Bounds on the score difference between companies i and k. Separate intervals: from minus 1.4 to 2.6, which crosses zero and cannot certify the ordering. Joint support function: exactly 0.6, which certifies the ranking." labelWidth="11rem" valueWidth="8rem" stack>
-        <BarHeader marks={[{ at: x(0), label: "Decision boundary", tone: "steel", anchor: "left" }]} />
+        <BarHeader marks={[{ at: x(0), label: "Decision boundary", tone: "steel", anchor: "left", rule: "ink" }]} />
         <BarRow label="Separate company intervals" value="$[-1.4,2.6]$" valueNote="cannot certify" grid={grid} rules={rules}>
           <Range x={x} from={-1.4} to={2.6} tone="steel" tip={"Separately constructed intervals\n[−1.4, 2.6]"} />
           <span className={`${kit.dot} ${kit.steel}`} style={{ left: `${x(0.6)}%`, top: "50%", width: 7, height: 7, margin: "-3.5px 0 0 -3.5px" }} />
@@ -637,8 +658,8 @@ function SharedErrorCancellation() {
 const SCENARIO_VIEWS = [
   { id: "none", label: "Before Verification" },
   { id: "shap", label: "Recheck SHAP Field" },
-  { id: "z2", label: <>Verify z<sub>2</sub></> },
-  { id: "z1", label: <>Verify z<sub>1</sub></> },
+  { id: "z2", label: <Tx>{"Verify $z_2$"}</Tx> },
+  { id: "z1", label: <Tx>{"Verify $z_1$"}</Tx> },
 ];
 
 function RegretScenarios() {
@@ -704,7 +725,7 @@ function RegretScenarios() {
       </div>
       {SCENARIO_VIEWS.map((view) => (
         <p key={view.id} className={styles.readout} data-fig-panel={view.id} hidden={view.id !== "none"}>
-          {view.id === "none" ? "Before verification, either choice can leave a regret of 0.61." : <>Remaining regret under the worst observation: {value(view.id)[0]}; guaranteed reduction <Tx>{"$V(q)$"}</Tx> = {value(view.id)[1]}.</>}
+          {view.id === "none" ? "Before verification, either choice can leave a regret of 0.61." : <>Remaining regret under the worst observation: {value(view.id)[0]}; guaranteed reduction <Tx>{`$V(q)=${value(view.id)[1]}$`}</Tx>.</>}
         </p>
       ))}
     </Figure>
