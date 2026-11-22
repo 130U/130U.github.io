@@ -1,0 +1,2017 @@
+{
+  "slug": "who-may-choose-the-lesser-risk",
+  "title": "Who May Choose the Lesser Risk: Solar Geoengineering and the Legal Duties of Comparison and Continuity",
+  "author": "Letao (Theodore) Ouyang",
+  "date": "December 2024; revised November 2026",
+  "repositoryUrl": "https://github.com/130U/LAW-Who-May-Choose-the-Lesser-Risk",
+  "sourceUrl": "https://github.com/130U/LAW-Who-May-Choose-the-Lesser-Risk/blob/main/manuscript/who-may-choose-the-lesser-risk.md",
+  "abstract": [
+    {
+      "type": "paragraph",
+      "text": "Stratospheric aerosol injection poses a problem that identifying competing risks cannot resolve: who may choose among those risks for people who cannot escape the resulting climate? This Article argues that risk-risk analysis should support a comparative justification duty, rather than operate as a substitute for authorization. A deployment proponent should have to defend its policy comparator, expose distributional assumptions to challenge, and establish responsibility for both continued operation and eventual withdrawal. The argument holds whether or not solar geoengineering necessarily creates geographical losers. Even favorable climate simulations cannot settle the welfare metrics, acceptable inequalities, or allocation of authority through which their results acquire policy significance. The Article also develops a continuity duty from a further implication of termination risk: periodic authorization must permit political control to change without automatically requiring abrupt physical cessation. It grounds that duty in arrangements the law already uses for systems that cannot safely stop: resolution plans, decommissioning assurance, regulated abandonment, and bridge institutions. It distinguishes this proposed architecture from existing international law and from permission for limited research. The resulting position supports governed inquiry and restraint on deployment until comparative review and continuity obligations become institutionally credible, while requiring continuing scrutiny of the harms of nondeployment.",
+      "runs": [
+        {
+          "text": "Stratospheric aerosol injection poses a problem that identifying competing risks cannot resolve: who may choose among those risks for people who cannot escape the resulting climate? This Article argues that risk-risk analysis should support a comparative justification duty, rather than operate as a substitute for authorization. A deployment proponent should have to defend its policy comparator, expose distributional assumptions to challenge, and establish responsibility for both continued operation and eventual withdrawal. The argument holds whether or not solar geoengineering necessarily creates geographical losers. Even favorable climate simulations cannot settle the welfare metrics, acceptable inequalities, or allocation of authority through which their results acquire policy significance. The Article also develops a continuity duty from a further implication of termination risk: periodic authorization must permit political control to change without automatically requiring abrupt physical cessation. It grounds that duty in arrangements the law already uses for systems that cannot safely stop: resolution plans, decommissioning assurance, regulated abandonment, and bridge institutions. It distinguishes this proposed architecture from existing international law and from permission for limited research. The resulting position supports governed inquiry and restraint on deployment until comparative review and continuity obligations become institutionally credible, while requiring continuing scrutiny of the harms of nondeployment."
+        }
+      ]
+    }
+  ],
+  "acknowledgment": {
+    "number": "*",
+    "text": "I am grateful to Professor Jonathan B. Wiener for his instruction, review, and feedback on this paper. I also thank Professor Mark Borsuk, my academic advisor at Duke, for his guidance. Discussions with Professors Wiener and Borsuk about the risk-risk framework helped shape my thinking. Any errors are my own.",
+    "runs": [
+      {
+        "text": "I am grateful to Professor Jonathan B. Wiener for his instruction, review, and feedback on this paper. I also thank Professor Mark Borsuk, my academic advisor at Duke, for his guidance. Discussions with Professors Wiener and Borsuk about the risk-risk framework helped shape my thinking. Any errors are my own."
+      }
+    ]
+  },
+  "blocks": [
+    {
+      "type": "heading",
+      "level": 1,
+      "id": "section-1",
+      "text": "I. The Authorization Problem",
+      "runs": [
+        {
+          "text": "I. The Authorization Problem"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "A government confronting intensifying climate damage might reasonably ask whether reflecting additional sunlight could reduce suffering. A person exposed to the resulting intervention could reasonably ask a different question: who authorized that government to choose the climate under which she must live? Neither question disappears when a model predicts lower global temperatures. Solar radiation modification (SRM) forces risk regulation to confront both the consequences of action and the authority to determine which consequences others must bear.",
+      "runs": [
+        {
+          "text": "A government confronting intensifying climate damage might reasonably ask whether reflecting additional sunlight could reduce suffering. A person exposed to the resulting intervention could reasonably ask a different question: who authorized that government to choose the climate under which she must live? Neither question disappears when a model predicts lower global temperatures. Solar radiation modification (SRM) forces risk regulation to confront both the consequences of action and the authority to determine which consequences others must bear."
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "Stratospheric aerosol injection, or SAI, would introduce reflective particles or their precursors into the stratosphere. Sulfate-based approaches draw on atmospheric science, climate modeling, and observations following volcanic eruptions. Those observations help establish a cooling mechanism; they are not trials of a sustained, deliberately managed planetary intervention. SAI also leaves the underlying accumulation of carbon dioxide largely unaddressed and does not directly resolve ocean acidification. The relevant question is therefore whether a specified intervention could improve a specified climate-policy portfolio, taking account of consequences beyond temperature. It cannot be answered by assigning SAI a single label such as safe, dangerous, or cost-effective.1,2",
+      "runs": [
+        {
+          "text": "Stratospheric aerosol injection, or SAI, would introduce reflective particles or their precursors into the stratosphere. Sulfate-based approaches draw on atmospheric science, climate modeling, and observations following volcanic eruptions. Those observations help establish a cooling mechanism; they are not trials of a sustained, deliberately managed planetary intervention. SAI also leaves the underlying accumulation of carbon dioxide largely unaddressed and does not directly resolve ocean acidification. The relevant question is therefore whether a specified intervention could improve a specified climate-policy portfolio, taking account of consequences beyond temperature. It cannot be answered by assigning SAI a single label such as safe, dangerous, or cost-effective."
+        },
+        {
+          "text": "1,2",
+          "superscript": true,
+          "footnoteRef": "1,2"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "Risk-risk analysis provides an essential starting point. Measures addressing a target risk can generate countervailing risks and additional benefits; refusing those measures also has consequences. Yet the injunction to consider all important effects leaves open how policy alternatives are selected, whose losses receive attention, and who decides when a tradeoff is acceptable. A favorable comparison supplies reasons that an authorized decision maker should consider. It does not itself identify that decision maker.",
+      "runs": [
+        {
+          "text": "Risk-risk analysis provides an essential starting point. Measures addressing a target risk can generate countervailing risks and additional benefits; refusing those measures also has consequences. Yet the injunction to consider all important effects leaves open how policy alternatives are selected, whose losses receive attention, and who decides when a tradeoff is acceptable. A favorable comparison supplies reasons that an authorized decision maker should consider. It does not itself identify that decision maker."
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "This Article defends a comparative justification duty: before climate-affecting deployment, proponents should be required to defend a contestable comparison of feasible alternatives and establish institutions capable of answering to those exposed. The duty should extend beyond initial permission through a companion continuity duty. When sustained cooling makes abrupt cessation dangerous, proponents must demonstrate credible arrangements for continuity, succession, and eventual withdrawal. Otherwise, an initial intervention could manufacture the very dependence later invoked to insulate its operators from political challenge.",
+      "runs": [
+        {
+          "text": "This Article defends a "
+        },
+        {
+          "text": "comparative justification duty",
+          "italic": true
+        },
+        {
+          "text": ": before climate-affecting deployment, proponents should be required to defend a contestable comparison of feasible alternatives and establish institutions capable of answering to those exposed. The duty should extend beyond initial permission through a companion "
+        },
+        {
+          "text": "continuity duty",
+          "italic": true
+        },
+        {
+          "text": ". When sustained cooling makes abrupt cessation dangerous, proponents must demonstrate credible arrangements for continuity, succession, and eventual withdrawal. Otherwise, an initial intervention could manufacture the very dependence later invoked to insulate its operators from political challenge."
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "This is a conditional argument for restraint on deployment and governed research. SAI's potential benefits and the costs of withholding it warrant continuing evaluation. Control over a technology capable of imposing persistent, unavoidable exposure creates special responsibilities to people outside the controller's constituency. Those responsibilities cannot be discharged solely by predicting aggregate benefits. The proposal requires neither unanimous consent nor proof that nobody could be harmed.",
+      "runs": [
+        {
+          "text": "This is a conditional argument for restraint on deployment and governed research. SAI's potential benefits and the costs of withholding it warrant continuing evaluation. Control over a technology capable of imposing persistent, unavoidable exposure creates special responsibilities to people outside the controller's constituency. Those responsibilities cannot be discharged solely by predicting aggregate benefits. The proposal requires neither unanimous consent nor proof that nobody could be harmed."
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "This Article proposes two legal duties and the institutional design that would give them effect. The comparative justification duty connects the selection of comparators to procedural rights. The continuity duty connects termination risk to a separation between political and physical exit. The Article also formulates a priority rule for serious threats to subsistence and survival, and it proposes scrutiny of research based on expected effects and cumulative scale.",
+      "runs": [
+        {
+          "text": "This Article proposes two legal duties and the institutional design that would give them effect. The comparative justification duty connects the selection of comparators to procedural rights. The continuity duty connects termination risk to a separation between political and physical exit. The Article also formulates a priority rule for serious threats to subsistence and survival, and it proposes scrutiny of research based on expected effects and cumulative scale."
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "The Article speaks to three bodies of work. Risk-risk analysis identifies what a comparison must include and leaves the authority to decide unassigned. The literature on termination shows that the danger of stopping depends on design, and it relies on capable states standing ready to maintain or resume an intervention; it has no account of what follows when exposed parties withdraw their consent. A third literature asks whether solar geoengineering can be reconciled with democratic control at all.3 This Article takes that question as its own and answers it institutionally. The comparative justification duty assigns the authority to decide, and the continuity duty makes a withdrawal of consent something an institution can survive.",
+      "runs": [
+        {
+          "text": "The Article speaks to three bodies of work. Risk-risk analysis identifies what a comparison must include and leaves the authority to decide unassigned. The literature on termination shows that the danger of stopping depends on design, and it relies on capable states standing ready to maintain or resume an intervention; it has no account of what follows when exposed parties withdraw their consent. A third literature asks whether solar geoengineering can be reconciled with democratic control at all."
+        },
+        {
+          "text": "3",
+          "superscript": true,
+          "footnoteRef": "3"
+        },
+        {
+          "text": " This Article takes that question as its own and answers it institutionally. The comparative justification duty assigns the authority to decide, and the continuity duty makes a withdrawal of consent something an institution can survive."
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "Part II sets out what risk-risk analysis can establish and the limits of its categories and causal accounting. Part III separates the three baselines, takes the favorable scientific evidence seriously, and distinguishes uncertainty from value judgments. Part IV draws the line between research and deployment and shows that existing international law provides relevant constraints but does not already establish the proposed regime. Part V develops the comparative justification duty: who must justify what, how challenge becomes consequential, and what responsibility survives uncertainty. Part VI identifies the exit paradox and develops the continuity duty in response, drawing on domestic arrangements for systems that cannot safely stop. Part VII answers the objection that restraint privileges the damaging status quo and the opposite objection to research permission, and a brief outer-space comparison identifies the limits of transferring the argument to another domain. Part VIII concludes.",
+      "runs": [
+        {
+          "text": "Part II sets out what risk-risk analysis can establish and the limits of its categories and causal accounting. Part III separates the three baselines, takes the favorable scientific evidence seriously, and distinguishes uncertainty from value judgments. Part IV draws the line between research and deployment and shows that existing international law provides relevant constraints but does not already establish the proposed regime. Part V develops the comparative justification duty: who must justify what, how challenge becomes consequential, and what responsibility survives uncertainty. Part VI identifies the exit paradox and develops the continuity duty in response, drawing on domestic arrangements for systems that cannot safely stop. Part VII answers the objection that restraint privileges the damaging status quo and the opposite objection to research permission, and a brief outer-space comparison identifies the limits of transferring the argument to another domain. Part VIII concludes."
+        }
+      ]
+    },
+    {
+      "type": "heading",
+      "level": 1,
+      "id": "section-10",
+      "text": "II. What Risk-Risk Analysis Can Establish",
+      "runs": [
+        {
+          "text": "II. What Risk-Risk Analysis Can Establish"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "Graham and Wiener's framework distinguishes countervailing effects by whether they concern the same kind of risk and the same population as the targeted harm. Its familiar categories (offset, substitution, transfer, and transformation) help reveal consequences omitted by a narrow regulatory mission. The framework's fuller application also considers magnitude, uncertainty, timing, distribution, and alternatives that reduce multiple risks together. Felgenhauer and colleagues' SAI assessment expressly includes these dimensions. Treating this tradition as indifferent to justice would misdescribe it.4,5",
+      "runs": [
+        {
+          "text": "Graham and Wiener's framework distinguishes countervailing effects by whether they concern the same kind of risk and the same population as the targeted harm. Its familiar categories (offset, substitution, transfer, and transformation) help reveal consequences omitted by a narrow regulatory mission. The framework's fuller application also considers magnitude, uncertainty, timing, distribution, and alternatives that reduce multiple risks together. Felgenhauer and colleagues' SAI assessment expressly includes these dimensions. Treating this tradition as indifferent to justice would misdescribe it."
+        },
+        {
+          "text": "4,5",
+          "superscript": true,
+          "footnoteRef": "4,5"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "Classification nevertheless cannot determine the unit of moral or legal concern. If the affected population is defined as humanity, almost any climate intervention concerns the same population. If it is defined by livelihood, location, health, or generation, the same intervention may redistribute risk across groups. A monsoon change can affect agricultural producers, landless workers, food purchasers, and urban residents differently. Calling these people one population does not demonstrate that benefits and burdens accrue to the same persons.",
+      "runs": [
+        {
+          "text": "Classification nevertheless cannot determine the unit of moral or legal concern. If the affected population is defined as humanity, almost any climate intervention concerns the same population. If it is defined by livelihood, location, health, or generation, the same intervention may redistribute risk across groups. A monsoon change can affect agricultural producers, landless workers, food purchasers, and urban residents differently. Calling these people one population does not demonstrate that benefits and burdens accrue to the same persons."
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "The risk categories are similarly dependent on description. Heat-related mortality and ozone-related illness can be classified as different hazards or as the same broad health risk. Either description can be useful, but the choice of category cannot determine whether a policy is justified. The legally significant inquiry is which interests change, for whom, relative to what alternative, and subject to whose control. The four categories organize that inquiry; they do not supply its answer.",
+      "runs": [
+        {
+          "text": "The risk categories are similarly dependent on description. Heat-related mortality and ozone-related illness can be classified as different hazards or as the same broad health risk. Either description can be useful, but the choice of category cannot determine whether a policy is justified. The legally significant inquiry is which interests change, for whom, relative to what alternative, and subject to whose control. The four categories organize that inquiry; they do not supply its answer."
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "Two of those categories have already become law. Article 195 of the Convention on the Law of the Sea requires states, in taking measures against marine pollution, \"not to transfer, directly or indirectly, damage or hazards from one area to another or transform one type of pollution into another,\" and the International Tribunal for the Law of the Sea has said that marine geoengineering \"would be contrary to article 195 if it has the consequence of transforming one type of pollution into another.\"6 The provision turns risk transfer and risk transformation from analytic labels into a prohibition. It does not say who decides whether a transfer has occurred or is justified, which is the question this Article takes up.",
+      "runs": [
+        {
+          "text": "Two of those categories have already become law. Article 195 of the Convention on the Law of the Sea requires states, in taking measures against marine pollution, \"not to transfer, directly or indirectly, damage or hazards from one area to another or transform one type of pollution into another,\" and the International Tribunal for the Law of the Sea has said that marine geoengineering \"would be contrary to article 195 if it has the consequence of transforming one type of pollution into another.\""
+        },
+        {
+          "text": "6",
+          "superscript": true,
+          "footnoteRef": "6"
+        },
+        {
+          "text": " The provision turns risk transfer and risk transformation from analytic labels into a prohibition. It does not say who decides whether a transfer has occurred or is justified, which is the question this Article takes up."
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "A second limit concerns causal structure. Physical hazards, political responses, and governance failures interact. If confidence in SAI weakened emissions reductions, that response could increase the cooling subsequently required and the consequences of interruption. This is a plausible mechanism requiring investigation, not an established universal effect of research. The Intergovernmental Panel on Climate Change (IPCC) distinguishes evidence about individual responses from the harder question of effects on societal mitigation, and reports low agreement about a research-to-deployment slippery slope.7 Counting mitigation deterrence, longer deployment, and termination consequences as independent costs could also double-count one causal pathway. An adequate analysis must disclose dependencies as well as enumerate harms.",
+      "runs": [
+        {
+          "text": "A second limit concerns causal structure. Physical hazards, political responses, and governance failures interact. If confidence in SAI weakened emissions reductions, that response could increase the cooling subsequently required and the consequences of interruption. This is a plausible mechanism requiring investigation, not an established universal effect of research. The Intergovernmental Panel on Climate Change (IPCC) distinguishes evidence about individual responses from the harder question of effects on societal mitigation, and reports low agreement about a research-to-deployment slippery slope."
+        },
+        {
+          "text": "7",
+          "superscript": true,
+          "footnoteRef": "7"
+        },
+        {
+          "text": " Counting mitigation deterrence, longer deployment, and termination consequences as independent costs could also double-count one causal pathway. An adequate analysis must disclose dependencies as well as enumerate harms."
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "The framework's account of disregarded interests offers a basis for developing these legal duties. Wiener distinguishes the omission of impacts, for which additional information has costs, from the omission of people, whose claims warrant minimum procedural protections. Flegal and Gupta likewise question accounts that make equity primarily a problem for scientific experts to resolve through better projections. These arguments direct attention to how affected people can influence the questions being asked.8,9",
+      "runs": [
+        {
+          "text": "The framework's account of disregarded interests offers a basis for developing these legal duties. Wiener distinguishes the omission of impacts, for which additional information has costs, from the omission of people, whose claims warrant minimum procedural protections. Flegal and Gupta likewise question accounts that make equity primarily a problem for scientific experts to resolve through better projections. These arguments direct attention to how affected people can influence the questions being asked."
+        },
+        {
+          "text": "8,9",
+          "superscript": true,
+          "footnoteRef": "8,9"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "The proposed duty gives that concern institutional consequences. People represented in a model should have a route to challenge the comparator, impact measures, and treatment of their interests. This is more demanding than inviting comments after investigators have selected the policy options. Reasonable participants may disagree after all relevant evidence is considered. Risk analysis can discipline that disagreement, and legitimate decision rules are still needed to settle it.",
+      "runs": [
+        {
+          "text": "The proposed duty gives that concern institutional consequences. People represented in a model should have a route to challenge the comparator, impact measures, and treatment of their interests. This is more demanding than inviting comments after investigators have selected the policy options. Reasonable participants may disagree after all relevant evidence is considered. Risk analysis can discipline that disagreement, and legitimate decision rules are still needed to settle it."
+        }
+      ]
+    },
+    {
+      "type": "heading",
+      "level": 1,
+      "id": "section-18",
+      "text": "III. Comparing Policies Without Choosing the Answer in Advance",
+      "runs": [
+        {
+          "text": "III. Comparing Policies Without Choosing the Answer in Advance"
+        }
+      ]
+    },
+    {
+      "type": "heading",
+      "level": 2,
+      "id": "section-19",
+      "text": "A. Three Distinct Baselines",
+      "runs": [
+        {
+          "text": "A. Three Distinct Baselines"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "SAI analysis requires three separate comparisons. The first concerns a reference climate: the period against which temperature or precipitation anomalies are measured. The second concerns a counterfactual future without SAI. The third concerns the range of feasible policies available to decision makers. Confusing them can transform a technically sound result into an unsupported policy conclusion.",
+      "runs": [
+        {
+          "text": "SAI analysis requires three separate comparisons. The first concerns a reference climate: the period against which temperature or precipitation anomalies are measured. The second concerns a counterfactual future without SAI. The third concerns the range of feasible policies available to decision makers. Confusing them can transform a technically sound result into an unsupported policy conclusion."
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "A climate variable's movement toward its historical value is not necessarily an improvement in welfare. Nor does improvement against one high-emissions future establish superiority over all feasible alternatives. Conversely, a comparison with a perfectly coordinated, immediately decarbonized world can exclude SAI by assumption. An appropriate comparator must specify emissions, adaptation, carbon removal where relevant, resource requirements, and institutional feasibility. No-deployment is a family of policy portfolios, not a synonym for doing nothing.",
+      "runs": [
+        {
+          "text": "A climate variable's movement toward its historical value is not necessarily an improvement in welfare. Nor does improvement against one high-emissions future establish superiority over all feasible alternatives. Conversely, a comparison with a perfectly coordinated, immediately decarbonized world can exclude SAI by assumption. An appropriate comparator must specify emissions, adaptation, carbon removal where relevant, resource requirements, and institutional feasibility. No-deployment is a family of policy portfolios, not a synonym for doing nothing."
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "Two stages of analysis can keep these distinctions visible. An initial comparison holds emissions and adaptation assumptions constant to identify the marginal physical effects of adding a particular SAI design. A second examines complete portfolios, allowing expenditure, political behavior, and mitigation commitments to vary. The first stage offers analytical clarity; the second asks whether its fixed assumptions survive a policy decision. Neither can replace the other.",
+      "runs": [
+        {
+          "text": "Two stages of analysis can keep these distinctions visible. An initial comparison holds emissions and adaptation assumptions constant to identify the marginal physical effects of adding a particular SAI design. A second examines complete portfolios, allowing expenditure, political behavior, and mitigation commitments to vary. The first stage offers analytical clarity; the second asks whether its fixed assumptions survive a policy decision. Neither can replace the other."
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "For example, a deployment proposal should be compared both with the same mitigation program without SAI and with feasible uses of the proposal's resources for adaptation or additional mitigation. These alternatives need not produce identical short-term cooling to deserve consideration. Equally, merely mentioning mitigation does not establish that it can avert the same near-term harm. The proponent must explain the relevant time horizon and constraints. Reviewers should require plausible alternatives, rather than every conceivable future.",
+      "runs": [
+        {
+          "text": "For example, a deployment proposal should be compared both with the same mitigation program without SAI and with feasible uses of the proposal's resources for adaptation or additional mitigation. These alternatives need not produce identical short-term cooling to deserve consideration. Equally, merely mentioning mitigation does not establish that it can avert the same near-term harm. The proponent must explain the relevant time horizon and constraints. Reviewers should require plausible alternatives, rather than every conceivable future."
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "Feasibility must itself remain contestable. A wealthy sponsoring state should not be allowed to treat inadequate adaptation finance as immutable while treating its own capacity for sustained SAI as assured. Past policy failure matters when estimating available choices, but it is not a law of nature. Comparisons should identify which constraints are physical, which depend on institutions, and which could change through decisions by the actors seeking permission.",
+      "runs": [
+        {
+          "text": "Feasibility must itself remain contestable. A wealthy sponsoring state should not be allowed to treat inadequate adaptation finance as immutable while treating its own capacity for sustained SAI as assured. Past policy failure matters when estimating available choices, but it is not a law of nature. Comparisons should identify which constraints are physical, which depend on institutions, and which could change through decisions by the actors seeking permission."
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "Consider a hypothetical proposal justified by reducing heat-related harm in a densely populated region. Suppose its analysis also identifies an uncertain threat to rain-dependent livelihoods elsewhere. Comparing deployment only with unchanged emissions and unfunded adaptation may favor SAI. Adding a feasible package of heat protection and livelihood support may change the comparison, even if it supplies less global cooling. Conversely, if those measures cannot reach the most exposed people soon enough, their nominal availability does not defeat the proposal. The duty requires an account of delivery capacity as well as modeled effects. It also asks whether the sponsoring actors could finance protection for the second group without sacrificing the first group's gains. None of these outcomes follows from the designation risk transfer.",
+      "runs": [
+        {
+          "text": "Consider a hypothetical proposal justified by reducing heat-related harm in a densely populated region. Suppose its analysis also identifies an uncertain threat to rain-dependent livelihoods elsewhere. Comparing deployment only with unchanged emissions and unfunded adaptation may favor SAI. Adding a feasible package of heat protection and livelihood support may change the comparison, even if it supplies less global cooling. Conversely, if those measures cannot reach the most exposed people soon enough, their nominal availability does not defeat the proposal. The duty requires an account of delivery capacity as well as modeled effects. It also asks whether the sponsoring actors could finance protection for the second group without sacrificing the first group's gains. None of these outcomes follows from the designation "
+        },
+        {
+          "text": "risk transfer",
+          "italic": true
+        },
+        {
+          "text": "."
+        }
+      ]
+    },
+    {
+      "type": "heading",
+      "level": 2,
+      "id": "section-26",
+      "text": "B. Taking Favorable Evidence Seriously",
+      "runs": [
+        {
+          "text": "B. Taking Favorable Evidence Seriously"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "The scientific case for considering SAI is stronger than an inventory of possible harms suggests. Irvine and Keith's 2020 analysis found substantial potential to moderate selected climate hazards, with statistically significant exacerbation confined to a small fraction of analyzed land. Its partial-cooling case was constructed by linear interpolation between stratospheric aerosol simulations and a high-emissions RCP8.5 comparator. This is meaningful evidence against the proposition that intervention necessarily worsens modeled climate hazards across extensive regions. It is not evidence that every individual becomes better off. The authors expressly acknowledge that restoring a climate variable toward its reference value can harm people who benefited from its change, including water-stressed regions experiencing increased water availability.10",
+      "runs": [
+        {
+          "text": "The scientific case for considering SAI is stronger than an inventory of possible harms suggests. Irvine and Keith's 2020 analysis found substantial potential to moderate selected climate hazards, with statistically significant exacerbation confined to a small fraction of analyzed land. Its partial-cooling case was constructed by linear interpolation between stratospheric aerosol simulations and a high-emissions RCP8.5 comparator. This is meaningful evidence against the proposition that intervention necessarily worsens modeled climate hazards across extensive regions. It is not evidence that every individual becomes better off. The authors expressly acknowledge that restoring a climate variable toward its reference value can harm people who benefited from its change, including water-stressed regions experiencing increased water availability."
+        },
+        {
+          "text": "10",
+          "superscript": true,
+          "footnoteRef": "10"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "The distinction matters because policy concerns extend through several causal links: atmospheric change, local exposure, ecological response, livelihoods, and access to protection. Each link introduces questions a global or regional climate indicator cannot settle. National gains can coexist with losses among politically excluded groups. That possibility is reason enough to examine such losses before a modeled improvement is translated into authorization.",
+      "runs": [
+        {
+          "text": "The distinction matters because policy concerns extend through several causal links: atmospheric change, local exposure, ecological response, livelihoods, and access to protection. Each link introduces questions a global or regional climate indicator cannot settle. National gains can coexist with losses among politically excluded groups. That possibility is reason enough to examine such losses before a modeled improvement is translated into authorization."
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "Agriculture illustrates the problem. Proctor and colleagues used volcanic eruptions to estimate sunlight-mediated crop effects and projected that dimming losses could approximately offset cooling benefits for the crops and scenario studied. That is observationally informed extrapolation, not an observed outcome of deliberate SAI. Fan and colleagues subsequently reported modeled crop-yield gains and negligible net insolation effects. Yield findings alone cannot establish food access or the distribution of agricultural income. These differing methods and findings preclude treating either cooling or dimming as a complete account of food security.11,12",
+      "runs": [
+        {
+          "text": "Agriculture illustrates the problem. Proctor and colleagues used volcanic eruptions to estimate sunlight-mediated crop effects and projected that dimming losses could approximately offset cooling benefits for the crops and scenario studied. That is observationally informed extrapolation, not an observed outcome of deliberate SAI. Fan and colleagues subsequently reported modeled crop-yield gains and negligible net insolation effects. Yield findings alone cannot establish food access or the distribution of agricultural income. These differing methods and findings preclude treating either cooling or dimming as a complete account of food security."
+        },
+        {
+          "text": "11,12",
+          "superscript": true,
+          "footnoteRef": "11,12"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "Evidence should therefore be organized by mechanism and strength. Aerosol cooling has an established physical basis. Regional outcomes depend on deployment design and background conditions. Downstream welfare and geopolitical effects involve further uncertainties. The World Meteorological Organization's ozone assessment, for example, identifies scenario-dependent chemical effects and cautions that volcanic pulses cannot fully validate continuous injection. Those distinctions should govern the assessment of a deployment proposal; listing concerns does not give them equal evidentiary weight.13",
+      "runs": [
+        {
+          "text": "Evidence should therefore be organized by mechanism and strength. Aerosol cooling has an established physical basis. Regional outcomes depend on deployment design and background conditions. Downstream welfare and geopolitical effects involve further uncertainties. The World Meteorological Organization's ozone assessment, for example, identifies scenario-dependent chemical effects and cautions that volcanic pulses cannot fully validate continuous injection. Those distinctions should govern the assessment of a deployment proposal; listing concerns does not give them equal evidentiary weight."
+        },
+        {
+          "text": "13",
+          "superscript": true,
+          "footnoteRef": "13"
+        }
+      ]
+    },
+    {
+      "type": "heading",
+      "level": 2,
+      "id": "section-31",
+      "text": "C. Uncertainty Does Not Settle Values",
+      "runs": [
+        {
+          "text": "C. Uncertainty Does Not Settle Values"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "Scientific uncertainty concerns questions such as the range of precipitation responses under a specified injection strategy. A value judgment concerns how to weigh a potential livelihood loss against heat-related benefits elsewhere. The two interact: choosing what to model already reflects priorities. Nevertheless, additional observations cannot determine whether uncompensated cultural loss is acceptable, how future people should be represented, or which institution may impose a residual risk.",
+      "runs": [
+        {
+          "text": "Scientific uncertainty concerns questions such as the range of precipitation responses under a specified injection strategy. A value judgment concerns how to weigh a potential livelihood loss against heat-related benefits elsewhere. The two interact: choosing what to model already reflects priorities. Nevertheless, additional observations cannot determine whether uncompensated cultural loss is acceptable, how future people should be represented, or which institution may impose a residual risk."
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "The decision record should separate model results, disputed assumptions, unquantified hazards, and explicit evaluative choices. An ensemble's spread should not be presented as a complete probability distribution over political and ecological futures. Where probabilities are unreliable, scenario comparisons can expose whether a proposed policy depends on favorable assumptions about cooperation or adaptation. Such analysis does not generate an automatic decision threshold. It makes the dependence visible to those entitled to contest it.",
+      "runs": [
+        {
+          "text": "The decision record should separate model results, disputed assumptions, unquantified hazards, and explicit evaluative choices. An ensemble's spread should not be presented as a complete probability distribution over political and ecological futures. Where probabilities are unreliable, scenario comparisons can expose whether a proposed policy depends on favorable assumptions about cooperation or adaptation. Such analysis does not generate an automatic decision threshold. It makes the dependence visible to those entitled to contest it."
+        }
+      ]
+    },
+    {
+      "type": "heading",
+      "level": 1,
+      "id": "section-34",
+      "text": "IV. Research Permission and the Limits of Existing Law",
+      "runs": [
+        {
+          "text": "IV. Research Permission and the Limits of Existing Law"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "The research-deployment distinction is substantive. Modeling, observation, and limited process experiments can answer questions without producing a climatically significant intervention. A sequence of experiments, however, may build operational capacity, institutions, or political expectations. Regulation should examine physical effects and cumulative program development, rather than accept either the word research as an exemption or the possibility of future use as proof that all inquiry is equivalent to deployment.",
+      "runs": [
+        {
+          "text": "The research-deployment distinction is substantive. Modeling, observation, and limited process experiments can answer questions without producing a climatically significant intervention. A sequence of experiments, however, may build operational capacity, institutions, or political expectations. Regulation should examine physical effects and cumulative program development, rather than accept either the word "
+        },
+        {
+          "text": "research",
+          "italic": true
+        },
+        {
+          "text": " as an exemption or the possibility of future use as proof that all inquiry is equivalent to deployment."
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "The regulatory boundary should turn on the expected effects and cumulative scale of the activity. A proposed test deliberately intended to alter climate conditions should face deployment review even if its sponsors describe the results as experimental. Smaller activities should receive proportionate scrutiny of releases, location, duration, and links to a larger program. No scientifically established universal mass threshold separates legitimate research from deployment. The reviewing institution should publish its classification and consider related projects together to prevent fragmentation into nominally minor experiments. That approach preserves the distinction without assuming a sharp physical boundary that applicants could exploit.",
+      "runs": [
+        {
+          "text": "The regulatory boundary should turn on the expected effects and cumulative scale of the activity. A proposed test deliberately intended to alter climate conditions should face deployment review even if its sponsors describe the results as experimental. Smaller activities should receive proportionate scrutiny of releases, location, duration, and links to a larger program. No scientifically established universal mass threshold separates legitimate research from deployment. The reviewing institution should publish its classification and consider related projects together to prevent fragmentation into nominally minor experiments. That approach preserves the distinction without assuming a sharp physical boundary that applicants could exploit."
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "SCoPEx illustrates how these distinctions matter in practice. Its proposed 2021 Swedish platform flight would have tested equipment without releasing particles. The team accepted a pause pending broader engagement. Harvard later reported that work had been suspended in August 2023 and that the principal investigator ended pursuit of the experiment in March 2024. The dispute shows how procedural concerns can arise before substantial physical exposure.14,15",
+      "runs": [
+        {
+          "text": "SCoPEx illustrates how these distinctions matter in practice. Its proposed 2021 Swedish platform flight would have tested equipment without releasing particles. The team accepted a pause pending broader engagement. Harvard later reported that work had been suspended in August 2023 and that the principal investigator ended pursuit of the experiment in March 2024. The dispute shows how procedural concerns can arise before substantial physical exposure."
+        },
+        {
+          "text": "14,15",
+          "superscript": true,
+          "footnoteRef": "14,15"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "The National Academies' 2021 report recommended a governed research program and restricted consideration of outdoor releases to important questions unavailable through other means. Its recommendations did not endorse deployment. Similarly, the United States' 2023 research plan expressly disclaimed an Executive Branch policy decision on SRM. Neither document is a legal authorization to alter the global climate.16,17",
+      "runs": [
+        {
+          "text": "The National Academies' 2021 report recommended a governed research program and restricted consideration of outdoor releases to important questions unavailable through other means. Its recommendations did not endorse deployment. Similarly, the United States' 2023 research plan expressly disclaimed an Executive Branch policy decision on SRM. Neither document is a legal authorization to alter the global climate."
+        },
+        {
+          "text": "16,17",
+          "superscript": true,
+          "footnoteRef": "16,17"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "Subnational law has moved faster and with less care. Florida in 2025 prohibited the injection, release, or dispersion of any substance into the atmosphere within the state \"for the express purpose of affecting the temperature, weather, climate, or intensity of sunlight.\"18 A statute of that kind settles the question for one territory. It says nothing about a deployment conducted anywhere else, which is where the authorization problem lives.",
+      "runs": [
+        {
+          "text": "Subnational law has moved faster and with less care. Florida in 2025 prohibited the injection, release, or dispersion of any substance into the atmosphere within the state \"for the express purpose of affecting the temperature, weather, climate, or intensity of sunlight.\""
+        },
+        {
+          "text": "18",
+          "superscript": true,
+          "footnoteRef": "18"
+        },
+        {
+          "text": " A statute of that kind settles the question for one territory. It says nothing about a deployment conducted anywhere else, which is where the authorization problem lives."
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "International law supplies relevant obligations without supplying a complete licensing system. The Paris Agreement combines temperature objectives with emissions, adaptation, equity, and finance provisions. Achieving a temperature outcome through SAI would not, by itself, establish compliance with emissions-related commitments or confer deployment authority. The Agreement creates no SAI permitting body.19",
+      "runs": [
+        {
+          "text": "International law supplies relevant obligations without supplying a complete licensing system. The Paris Agreement combines temperature objectives with emissions, adaptation, equity, and finance provisions. Achieving a temperature outcome through SAI would not, by itself, establish compliance with emissions-related commitments or confer deployment authority. The Agreement creates no SAI permitting body."
+        },
+        {
+          "text": "19",
+          "superscript": true,
+          "footnoteRef": "19"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "Under the Convention on Biological Diversity (CBD), Decision X/33, paragraph 8(w), calls for restraint on climate-related geoengineering that may affect biodiversity, subject to conditions and a limited scientific-research exception. Its chapeau and status matter: this guidance is not a universally binding treaty prohibition. Its conditional scientific-research exception is not permission for unrestricted outdoor testing.20",
+      "runs": [
+        {
+          "text": "Under the Convention on Biological Diversity (CBD), Decision X/33, paragraph 8(w), calls for restraint on climate-related geoengineering that may affect biodiversity, subject to conditions and a limited scientific-research exception. Its chapeau and status matter: this guidance is not a universally binding treaty prohibition. Its conditional scientific-research exception is not permission for unrestricted outdoor testing."
+        },
+        {
+          "text": "20",
+          "superscript": true,
+          "footnoteRef": "20"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "General international law also requires attention to transboundary harm. In Pulp Mills, the International Court of Justice recognized an environmental-impact-assessment requirement where proposed industrial activity risks significant adverse transboundary effects, with assessment before implementation and monitoring where necessary. The Court did not derive a general affected-population consultation right from the instruments invoked. Certain Activities subsequently addressed assessment more broadly: where assessment confirms significant transboundary risk, notification and good-faith consultation with potentially affected states are necessary when needed to determine preventive or mitigating measures. Applying these principles to planetary SAI is an argument from existing doctrine, not an adjudicated conclusion about an actual deployment.21,22 The Court's 2025 advisory opinion on climate change, which describes the due diligence owed in preventing significant harm to the climate system as stringent, strengthens that doctrinal basis and leaves the caveat in place.23",
+      "runs": [
+        {
+          "text": "General international law also requires attention to transboundary harm. In "
+        },
+        {
+          "text": "Pulp Mills",
+          "italic": true
+        },
+        {
+          "text": ", the International Court of Justice recognized an environmental-impact-assessment requirement where proposed industrial activity risks significant adverse transboundary effects, with assessment before implementation and monitoring where necessary. The Court did not derive a general affected-population consultation right from the instruments invoked. "
+        },
+        {
+          "text": "Certain Activities",
+          "italic": true
+        },
+        {
+          "text": " subsequently addressed assessment more broadly: where assessment confirms significant transboundary risk, notification and good-faith consultation with potentially affected states are necessary when needed to determine preventive or mitigating measures. Applying these principles to planetary SAI is an argument from existing doctrine, not an adjudicated conclusion about an actual deployment."
+        },
+        {
+          "text": "21,22",
+          "superscript": true,
+          "footnoteRef": "21,22"
+        },
+        {
+          "text": " The Court's 2025 advisory opinion on climate change, which describes the due diligence owed in preventing significant harm to the climate system as stringent, strengthens that doctrinal basis and leaves the caveat in place."
+        },
+        {
+          "text": "23",
+          "superscript": true,
+          "footnoteRef": "23"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "These materials support assessment and preventive responsibility. They do not already create individual standing in a global SAI tribunal, prescribe a voting rule, or impose the proposed financing requirements. Nor should the hostile-use restrictions in the Environmental Modification Convention (ENMOD) be mistaken for a general prohibition on peaceful climate intervention; peaceful purpose, in turn, does not exempt an activity from other international law.24",
+      "runs": [
+        {
+          "text": "These materials support assessment and preventive responsibility. They do not already create individual standing in a global SAI tribunal, prescribe a voting rule, or impose the proposed financing requirements. Nor should the hostile-use restrictions in the Environmental Modification Convention (ENMOD) be mistaken for a general prohibition on peaceful climate intervention; peaceful purpose, in turn, does not exempt an activity from other international law."
+        },
+        {
+          "text": "24",
+          "superscript": true,
+          "footnoteRef": "24"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "Three instruments bear on stratospheric aerosols more directly than those usually invoked. The Vienna Convention for the Protection of the Ozone Layer obliges parties to protect against \"adverse effects resulting or likely to result from human activities which modify or are likely to modify the ozone layer\" and to control such activities under their jurisdiction; sulfate injection is an activity the ozone assessment treats as capable of affecting stratospheric ozone.25 The United Nations Framework Convention on Climate Change (UNFCCC) commits parties to \"employ appropriate methods, for example impact assessments,\" to minimize the adverse effects \"of projects or measures undertaken by them to mitigate or adapt to climate change.\"26 And the International Law Commission's guidelines on the protection of the atmosphere provide that intentional large-scale modification \"should only be conducted with prudence and caution, and subject to any applicable rules of international law, including those relating to environmental impact assessment,\" in a commentary that names stratospheric aerosols.27",
+      "runs": [
+        {
+          "text": "Three instruments bear on stratospheric aerosols more directly than those usually invoked. The Vienna Convention for the Protection of the Ozone Layer obliges parties to protect against \"adverse effects resulting or likely to result from human activities which modify or are likely to modify the ozone layer\" and to control such activities under their jurisdiction; sulfate injection is an activity the ozone assessment treats as capable of affecting stratospheric ozone."
+        },
+        {
+          "text": "25",
+          "superscript": true,
+          "footnoteRef": "25"
+        },
+        {
+          "text": " The United Nations Framework Convention on Climate Change (UNFCCC) commits parties to \"employ appropriate methods, for example impact assessments,\" to minimize the adverse effects \"of projects or measures undertaken by them to mitigate or adapt to climate change.\""
+        },
+        {
+          "text": "26",
+          "superscript": true,
+          "footnoteRef": "26"
+        },
+        {
+          "text": " And the International Law Commission's guidelines on the protection of the atmosphere provide that intentional large-scale modification \"should only be conducted with prudence and caution, and subject to any applicable rules of international law, including those relating to environmental impact assessment,\" in a commentary that names stratospheric aerosols."
+        },
+        {
+          "text": "27",
+          "superscript": true,
+          "footnoteRef": "27"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "Each of these supplies a duty of care and assessment. None supplies an authority able to refuse. The Commission's articles on prevention make the gap explicit: alternatives and the costs of prevention are factors in an equitable balance of interests, but if consultations fail the state of origin may still decide to authorize the activity, taking the affected state's interests into account.28 The comparative justification duty departs from existing law at exactly that point.",
+      "runs": [
+        {
+          "text": "Each of these supplies a duty of care and assessment. None supplies an authority able to refuse. The Commission's articles on prevention make the gap explicit: alternatives and the costs of prevention are factors in an equitable balance of interests, but if consultations fail the state of origin may still decide to authorize the activity, taking the affected state's interests into account."
+        },
+        {
+          "text": "28",
+          "superscript": true,
+          "footnoteRef": "28"
+        },
+        {
+          "text": " The comparative justification duty departs from existing law at exactly that point."
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "European policy materials also separate present authority from proposed governance. The June 2023 joint communication supported international assessment and governance discussion. In December 2024, the Commission's scientific advisers recommended a deployment moratorium alongside responsible research and conditional arrangements for limited experiments. That opinion was advice, not enacted EU law. The comparative challenge and continuity duties developed here would give that differentiated approach concrete institutional content.29,30",
+      "runs": [
+        {
+          "text": "European policy materials also separate present authority from proposed governance. The June 2023 joint communication supported international assessment and governance discussion. In December 2024, the Commission's scientific advisers recommended a deployment moratorium alongside responsible research and conditional arrangements for limited experiments. That opinion was advice, not enacted EU law. The comparative challenge and continuity duties developed here would give that differentiated approach concrete institutional content."
+        },
+        {
+          "text": "29,30",
+          "superscript": true,
+          "footnoteRef": "29,30"
+        }
+      ]
+    },
+    {
+      "type": "heading",
+      "level": 1,
+      "id": "section-47",
+      "text": "V. A Comparative Justification Duty",
+      "runs": [
+        {
+          "text": "V. A Comparative Justification Duty"
+        }
+      ]
+    },
+    {
+      "type": "heading",
+      "level": 2,
+      "id": "section-48",
+      "text": "A. Who Must Justify What",
+      "runs": [
+        {
+          "text": "A. Who Must Justify What"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "The proposed duty would attach to a state or coalition seeking climate-affecting deployment and, through domestic authorization, to its operators. The applicant would submit a public comparison of a specified injection strategy and feasible alternatives, disaggregated by relevant exposures and vulnerabilities. It would identify unresolved effects, disclose evaluative weights, and explain why proposed safeguards address the strongest supported objections. An independent reviewer could demand further analysis or recommend refusal. Permission for earlier research would create no presumption favoring approval.",
+      "runs": [
+        {
+          "text": "The proposed duty would attach to a state or coalition seeking climate-affecting deployment and, through domestic authorization, to its operators. The applicant would submit a public comparison of a specified injection strategy and feasible alternatives, disaggregated by relevant exposures and vulnerabilities. It would identify unresolved effects, disclose evaluative weights, and explain why proposed safeguards address the strongest supported objections. An independent reviewer could demand further analysis or recommend refusal. Permission for earlier research would create no presumption favoring approval."
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "The burden is asymmetric because applicants control design choices and seek authority to impose additional exposure. This does not mean existing emitters bear no responsibility or that nondeployment is harmless. Governments maintaining a moratorium should periodically assess forgone benefits, residual climate damage, and progress on alternative protections. But an institution's duty to explain restraint does not give a particular operator a presumptive right to deploy. The burdens answer different questions: whether policy is defensible, and whether this actor may exercise this power.",
+      "runs": [
+        {
+          "text": "The burden is asymmetric because applicants control design choices and seek authority to impose additional exposure. This does not mean existing emitters bear no responsibility or that nondeployment is harmless. Governments maintaining a moratorium should periodically assess forgone benefits, residual climate damage, and progress on alternative protections. But an institution's duty to explain restraint does not give a particular operator a presumptive right to deploy. The burdens answer different questions: whether policy is defensible, and whether this actor may exercise this power."
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "The objection from equal treatment nevertheless has force: emissions also alter the climate involuntarily, so why place distinctive conditions on an intervention intended to reduce damage? The answer cannot be that deliberate cooling is unnatural while warming is morally neutral. Continuing emissions warrant demanding mitigation and accountability. The additional SAI duty instead concerns identifiable decisions about operating a controllable program, including choices that may produce dependence on its continuation. Regulatory requirements can track those decision points without absolving other causes of harm. If evidence eventually established a credible, inclusive program whose absence predictably imposed far greater serious harm, the same comparative approach would require reconsidering restraint. The duty must remain capable of reaching that result.",
+      "runs": [
+        {
+          "text": "The objection from equal treatment nevertheless has force: emissions also alter the climate involuntarily, so why place distinctive conditions on an intervention intended to reduce damage? The answer cannot be that deliberate cooling is unnatural while warming is morally neutral. Continuing emissions warrant demanding mitigation and accountability. The additional SAI duty instead concerns identifiable decisions about operating a controllable program, including choices that may produce dependence on its continuation. Regulatory requirements can track those decision points without absolving other causes of harm. If evidence eventually established a credible, inclusive program whose absence predictably imposed far greater serious harm, the same comparative approach would require reconsidering restraint. The duty must remain capable of reaching that result."
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "This proposal concerns an ex ante regulatory record, not a reversal of evidentiary burdens in litigation for damages. Pulp Mills itself rejected an automatic reversal of the burden of proof based on precaution. The duty proposed here would require new implementing rules. Its justification is preventive: those seeking permission are positioned to produce information and commit resources before exposing others.31",
+      "runs": [
+        {
+          "text": "This proposal concerns an ex ante regulatory record, not a reversal of evidentiary burdens in litigation for damages. "
+        },
+        {
+          "text": "Pulp Mills",
+          "italic": true
+        },
+        {
+          "text": " itself rejected an automatic reversal of the burden of proof based on precaution. The duty proposed here would require new implementing rules. Its justification is preventive: those seeking permission are positioned to produce information and commit resources before exposing others."
+        },
+        {
+          "text": "31",
+          "superscript": true,
+          "footnoteRef": "31"
+        }
+      ]
+    },
+    {
+      "type": "heading",
+      "level": 2,
+      "id": "section-53",
+      "text": "B. Making Challenge Consequential",
+      "runs": [
+        {
+          "text": "B. Making Challenge Consequential"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "Affected states and representatives of exposed communities should be able to challenge omitted alternatives, population aggregation, and the treatment of serious losses. A publicly funded, independently administered participation mechanism should support their own expert choices. Future-generation and ecological interests require designated representation because those interests cannot organize an ordinary application. Representation must be contestable; neither governments nor nongovernmental organizations should be presumed to speak without disagreement for every vulnerable person.",
+      "runs": [
+        {
+          "text": "Affected states and representatives of exposed communities should be able to challenge omitted alternatives, population aggregation, and the treatment of serious losses. A publicly funded, independently administered participation mechanism should support their own expert choices. Future-generation and ecological interests require designated representation because those interests cannot organize an ordinary application. Representation must be contestable; neither governments nor nongovernmental organizations should be presumed to speak without disagreement for every vulnerable person."
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "Participating states could begin with a negotiated review council linked to their domestic licensing and funding powers. A deployment regime would require an international agreement defining that council's authority and domestic measures giving its decisions effect. General duties of assessment and consultation would remain independently applicable; they cannot confer the new council's licensing, financing, or remedial powers by implication. An independent scientific panel would assess evidence; the council would make the policy decision and publish responses to material objections. Transparent appointments and recusal rules should prevent applicants from unilaterally controlling review of their own proposals. Community representatives would have access to the record, a funded opportunity to propose alternatives, and review of procedural exclusions. Neither the UNFCCC nor the CBD already holds these powers.",
+      "runs": [
+        {
+          "text": "Participating states could begin with a negotiated review council linked to their domestic licensing and funding powers. A deployment regime would require an international agreement defining that council's authority and domestic measures giving its decisions effect. General duties of assessment and consultation would remain independently applicable; they cannot confer the new council's licensing, financing, or remedial powers by implication. An independent scientific panel would assess evidence; the council would make the policy decision and publish responses to material objections. Transparent appointments and recusal rules should prevent applicants from unilaterally controlling review of their own proposals. Community representatives would have access to the record, a funded opportunity to propose alternatives, and review of procedural exclusions. Neither the UNFCCC nor the CBD already holds these powers."
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "Such a council could coordinate restraint, research conditions, and review without claiming that its members can bind every outsider. Deployment would still require an agreement capable of securing sufficiently broad participation and effective control; a convenient coalition cannot manufacture global authority by approving its own application. Fundamental exclusion of exposed constituencies would defeat the justification for deployment.",
+      "runs": [
+        {
+          "text": "Such a council could coordinate restraint, research conditions, and review without claiming that its members can bind every outsider. Deployment would still require an agreement capable of securing sufficiently broad participation and effective control; a convenient coalition cannot manufacture global authority by approving its own application. Fundamental exclusion of exposed constituencies would defeat the justification for deployment."
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "At minimum, representatives of exposed, non-sponsoring constituencies, selected independently of applicants, must hold collective power to withhold approval or require redesign. Otherwise participation would leave the allocation of power untouched. The agreement must specify their selection, mandate, and review, with particular attention to limited adaptive capacity. A voting rule could require separate concurrence from sponsor representatives and from independently selected representatives of exposed constituencies. A sponsor bloc would then be unable to approve its own proposal over the latter's collective objection. The composition and voting thresholds would require negotiation, and formal balance would leave problems of coercion and unequal resources to be addressed. This condition goes beyond consultation without requiring universal consent. Existing obligations toward nonparticipating states continue to apply.",
+      "runs": [
+        {
+          "text": "At minimum, representatives of exposed, non-sponsoring constituencies, selected independently of applicants, must hold collective power to withhold approval or require redesign. Otherwise participation would leave the allocation of power untouched. The agreement must specify their selection, mandate, and review, with particular attention to limited adaptive capacity. A voting rule could require separate concurrence from sponsor representatives and from independently selected representatives of exposed constituencies. A sponsor bloc would then be unable to approve its own proposal over the latter's collective objection. The composition and voting thresholds would require negotiation, and formal balance would leave problems of coercion and unequal resources to be addressed. This condition goes beyond consultation without requiring universal consent. Existing obligations toward nonparticipating states continue to apply."
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "Separate concurrence is an established device where one group's decision binds another with different stakes. Under the Montreal Protocol, decisions on the financial mechanism that cannot be reached by consensus require a two-thirds majority that also represents \"a majority of the Parties operating under paragraph 1 of Article 5 present and voting and a majority of the Parties not so operating present and voting,\" so that neither developing nor developed parties can be outvoted as a group.32 Reorganization law reaches the same result for creditors. A plan is accepted class by class, by holders of \"at least two-thirds in amount and more than one-half in number\" of the claims voting in each class, and a dissenting holder in an impaired class must receive at least what liquidation would have paid.33 The second feature matters most here. It protects each dissenter against a baseline that the majority cannot vote away, which is the structure of the priority rule proposed below: a floor defined against a comparator, which aggregate benefit does not override. Weitzman proposed a supermajority rule for geoengineering to restrain the actor most eager to cool.34 Separate concurrence adds that the majority must include those who would bear the exposure.",
+      "runs": [
+        {
+          "text": "Separate concurrence is an established device where one group's decision binds another with different stakes. Under the Montreal Protocol, decisions on the financial mechanism that cannot be reached by consensus require a two-thirds majority that also represents \"a majority of the Parties operating under paragraph 1 of Article 5 present and voting and a majority of the Parties not so operating present and voting,\" so that neither developing nor developed parties can be outvoted as a group."
+        },
+        {
+          "text": "32",
+          "superscript": true,
+          "footnoteRef": "32"
+        },
+        {
+          "text": " Reorganization law reaches the same result for creditors. A plan is accepted class by class, by holders of \"at least two-thirds in amount and more than one-half in number\" of the claims voting in each class, and a dissenting holder in an impaired class must receive at least what liquidation would have paid."
+        },
+        {
+          "text": "33",
+          "superscript": true,
+          "footnoteRef": "33"
+        },
+        {
+          "text": " The second feature matters most here. It protects each dissenter against a baseline that the majority cannot vote away, which is the structure of the priority rule proposed below: a floor defined against a comparator, which aggregate benefit does not override. Weitzman proposed a supermajority rule for geoengineering to restrain the actor most eager to cool."
+        },
+        {
+          "text": "34",
+          "superscript": true,
+          "footnoteRef": "34"
+        },
+        {
+          "text": " Separate concurrence adds that the majority must include those who would bear the exposure."
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "This limitation produces an immediate policy consequence. States can make public research funding and domestic permissions conditional on transparent records, independent review, and a prohibition on progression to deployment without further authorization. They can also finance expertise selected by potential host and affected communities before projects are proposed. These steps do not solve enforcement against a determined nonparticipant. Their defensible purpose is to improve knowledge and constrain participating actors while broader authority remains unresolved, rather than to present voluntary cooperation as sufficient permission for planetary action.",
+      "runs": [
+        {
+          "text": "This limitation produces an immediate policy consequence. States can make public research funding and domestic permissions conditional on transparent records, independent review, and a prohibition on progression to deployment without further authorization. They can also finance expertise selected by potential host and affected communities before projects are proposed. These steps do not solve enforcement against a determined nonparticipant. Their defensible purpose is to improve knowledge and constrain participating actors while broader authority remains unresolved, rather than to present voluntary cooperation as sufficient permission for planetary action."
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "Participation also needs limits that preserve decision making. Published scoping criteria, representative submissions, and bounded review periods can prevent every speculative pathway from indefinitely reopening the record. Seriousness should depend on exposure and supporting reasons, not merely on a claimant's technical resources. No individual receives a universal veto. Conversely, accepting public comments without answering a substantiated objection would fail the duty. Reasons must explain why residual burdens are justified and what protection or remedy will follow.",
+      "runs": [
+        {
+          "text": "Participation also needs limits that preserve decision making. Published scoping criteria, representative submissions, and bounded review periods can prevent every speculative pathway from indefinitely reopening the record. Seriousness should depend on exposure and supporting reasons, not merely on a claimant's technical resources. No individual receives a universal veto. Conversely, accepting public comments without answering a substantiated objection would fail the duty. Reasons must explain why residual burdens are justified and what protection or remedy will follow."
+        }
+      ]
+    },
+    {
+      "type": "heading",
+      "level": 2,
+      "id": "section-61",
+      "text": "C. Responsibility That Survives Uncertainty",
+      "runs": [
+        {
+          "text": "C. Responsibility That Survives Uncertainty"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "Applicants should fund independent monitoring and commit resources for adaptation, emergency response, and claims before deployment begins. Two functions should remain separate. Liability or compensation for attributable incremental harm requires an appropriate causal and legal standard. Assistance to highly exposed groups can instead be financed because the program creates uncertainty and distributes risk unequally, which spares a claimant proof that a particular loss was caused by SAI. Horton and Keith have proposed parametric insurance, paid on a climate index, for a related reason.35 The arrangement proposed here differs in making pre-funded assistance a condition of authorization and in keeping a separate liability track.",
+      "runs": [
+        {
+          "text": "Applicants should fund independent monitoring and commit resources for adaptation, emergency response, and claims before deployment begins. Two functions should remain separate. Liability or compensation for attributable incremental harm requires an appropriate causal and legal standard. Assistance to highly exposed groups can instead be financed because the program creates uncertainty and distributes risk unequally, which spares a claimant proof that a particular loss was caused by SAI. Horton and Keith have proposed parametric insurance, paid on a climate index, for a related reason."
+        },
+        {
+          "text": "35",
+          "superscript": true,
+          "footnoteRef": "35"
+        },
+        {
+          "text": " The arrangement proposed here differs in making pre-funded assistance a condition of authorization and in keeping a separate liability track."
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "This distinction matters because regional changes and individual disasters may be difficult to attribute, as the National Academies explains. A system promising relief only after definitive attribution could offer little practical protection.36 Yet dispensing assistance is not proof of liability. Financial provision supports responsibility, but it cannot purchase unrestricted permission. Nor can a pre-funded account make every loss compensable. Death, ecological destruction, and cultural injury resist simple monetary substitution.",
+      "runs": [
+        {
+          "text": "This distinction matters because regional changes and individual disasters may be difficult to attribute, as the National Academies explains. A system promising relief only after definitive attribution could offer little practical protection."
+        },
+        {
+          "text": "36",
+          "superscript": true,
+          "footnoteRef": "36"
+        },
+        {
+          "text": " Yet dispensing assistance is not proof of liability. Financial provision supports responsibility, but it cannot purchase unrestricted permission. Nor can a pre-funded account make every loss compensable. Death, ecological destruction, and cultural injury resist simple monetary substitution."
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "The decision rule should therefore be stronger than aggregate net benefit but weaker than guaranteed universal improvement. A credible prospect of a grave, concentrated increase in harm relative to the defended feasible comparator should create a strong presumption against approval. Rebutting that presumption would require credible evidence that the proposed intervention would avert at least comparably grave threats to other vulnerable groups, that no feasible less harmful portfolio could do so, and that shared authorization and credible relief were secured. Aggregating lesser benefits elsewhere would not suffice. Where all feasible options threaten basic interests gravely, an absolute prohibition on imposing risk would conceal the conflict rather than resolve it. The decision maker must compare those threats and explain any remaining inequality. This Article proposes this priority rule; atmospheric science does not dictate the result.",
+      "runs": [
+        {
+          "text": "The decision rule should therefore be stronger than aggregate net benefit but weaker than guaranteed universal improvement. A credible prospect of a grave, concentrated increase in harm relative to the defended feasible comparator should create a strong presumption against approval. Rebutting that presumption would require credible evidence that the proposed intervention would avert at least comparably grave threats to other vulnerable groups, that no feasible less harmful portfolio could do so, and that shared authorization and credible relief were secured. Aggregating lesser benefits elsewhere would not suffice. Where all feasible options threaten basic interests gravely, an absolute prohibition on imposing risk would conceal the conflict rather than resolve it. The decision maker must compare those threats and explain any remaining inequality. This Article proposes this priority rule; atmospheric science does not dictate the result."
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "The relevant distinction is between being worse off than a historical climate and being worse off under the proposed policy than under an available alternative. Both may matter morally, but only the latter identifies the incremental burden under review. A group already facing severe climate damage might rationally support SAI despite residual losses. Its position should not be overwritten by outside advocates claiming that vulnerability necessarily requires opposition. Equally, hypothetical compensation should not be counted as protection until its delivery and accessibility are credible. The approach rejects a guaranteed Pareto improvement as an impossible general admission rule while refusing to let a large sum of modest benefits silently settle a conflict over subsistence or survival.",
+      "runs": [
+        {
+          "text": "The relevant distinction is between being worse off than a historical climate and being worse off under the proposed policy than under an available alternative. Both may matter morally, but only the latter identifies the incremental burden under review. A group already facing severe climate damage might rationally support SAI despite residual losses. Its position should not be overwritten by outside advocates claiming that vulnerability necessarily requires opposition. Equally, hypothetical compensation should not be counted as protection until its delivery and accessibility are credible. The approach rejects a guaranteed Pareto improvement as an impossible general admission rule while refusing to let a large sum of modest benefits silently settle a conflict over subsistence or survival."
+        }
+      ]
+    },
+    {
+      "type": "heading",
+      "level": 1,
+      "id": "section-66",
+      "text": "VI. The Problem of Exit",
+      "runs": [
+        {
+          "text": "VI. The Problem of Exit"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "Termination risk changes the legal meaning of revisability. Parker and Irvine distinguish the conditions for a severe termination shock from its probability. The conditions are substantial cooling, sudden cessation, and a sufficiently prolonged interruption. Gradual withdrawal, limited cooling, and operational redundancy change the risk. Their analysis challenges claims that catastrophe is inevitable, while depending on arrangements that are not guaranteed to materialize.37",
+      "runs": [
+        {
+          "text": "Termination risk changes the legal meaning of revisability. Parker and Irvine distinguish the conditions for a severe termination shock from its probability. The conditions are substantial cooling, sudden cessation, and a sufficiently prolonged interruption. Gradual withdrawal, limited cooling, and operational redundancy change the risk. Their analysis challenges claims that catastrophe is inevitable, while depending on arrangements that are not guaranteed to materialize."
+        },
+        {
+          "text": "37",
+          "superscript": true,
+          "footnoteRef": "37"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "The institutional implication is an exit paradox. Periodic review is usually intended to make permission conditional. But if an authorization expires after years of substantial cooling, automatically stopping injection could sharply increase climate risks. A community's withdrawal of support would not physically remove it from the affected atmosphere. A nominal right to reject continued operation could therefore become ineffective precisely when dependence makes accountable control most important.",
+      "runs": [
+        {
+          "text": "The institutional implication is an exit paradox. Periodic review is usually intended to make permission conditional. But if an authorization expires after years of substantial cooling, automatically stopping injection could sharply increase climate risks. A community's withdrawal of support would not physically remove it from the affected atmosphere. A nominal right to reject continued operation could therefore become ineffective precisely when dependence makes accountable control most important."
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "The paradox is no longer hypothetical in kind. On January 1, 2020, an international rule lowered the sulfur limit for marine fuel from 3.50 to 0.50 percent. The rule was lawful, it was adopted to protect health, and it planned no climatic trajectory. Atmospheric scientists have since analyzed its effect as an inadvertent termination of aerosol cooling.38 A regulatory decision can end a cooling influence abruptly, and nothing in the decision need consider what the ending does.",
+      "runs": [
+        {
+          "text": "The paradox is no longer hypothetical in kind. On January 1, 2020, an international rule lowered the sulfur limit for marine fuel from 3.50 to 0.50 percent. The rule was lawful, it was adopted to protect health, and it planned no climatic trajectory. Atmospheric scientists have since analyzed its effect as an inadvertent termination of aerosol cooling."
+        },
+        {
+          "text": "38",
+          "superscript": true,
+          "footnoteRef": "38"
+        },
+        {
+          "text": " A regulatory decision can end a cooling influence abruptly, and nothing in the decision need consider what the ending does."
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "This Article proposes separating three decisions: who governs the program, who operates it, and what physical trajectory it follows. An authorization could expire for a particular operator while temporary operation transfers to a previously designated public successor under a reviewed continuity plan. A political decision to end SAI could initiate a tapering pathway evaluated against emissions and atmospheric conditions. Neither decision implies unconditional continuation at the previous intensity, and neither should mechanically trigger abrupt cessation.",
+      "runs": [
+        {
+          "text": "This Article proposes separating three decisions: who governs the program, who operates it, and what physical trajectory it follows. An authorization could expire for a particular operator while temporary operation transfers to a previously designated public successor under a reviewed continuity plan. A political decision to end SAI could initiate a tapering pathway evaluated against emissions and atmospheric conditions. Neither decision implies unconditional continuation at the previous intensity, and neither should mechanically trigger abrupt cessation."
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "If shared approval is withdrawn, interim operation must rest on a separately bounded transition authority agreed collectively before deployment and subject to independent review. It cannot renew the rejected operator's political mandate through administrative convenience. This limitation makes the transition mechanism compatible with a meaningful power to refuse reauthorization.",
+      "runs": [
+        {
+          "text": "If shared approval is withdrawn, interim operation must rest on a separately bounded transition authority agreed collectively before deployment and subject to independent review. It cannot renew the rejected operator's political mandate through administrative convenience. This limitation makes the transition mechanism compatible with a meaningful power to refuse reauthorization."
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "Continuity must consequently be an obligation assumed before deployment, not an argument improvised afterward. Applicants should demonstrate operational redundancy, successor access to relevant information and equipment, independent monitoring, and financing for transition. Authorizations should require evaluation of scenarios in which the sponsor withdraws, funding fails, or the preferred mitigation pathway is not achieved. The ability to start cheaply is insufficient if no credible institution can discharge the resulting obligations.",
+      "runs": [
+        {
+          "text": "Continuity must consequently be an obligation assumed before deployment, not an argument improvised afterward. Applicants should demonstrate operational redundancy, successor access to relevant information and equipment, independent monitoring, and financing for transition. Authorizations should require evaluation of scenarios in which the sponsor withdraws, funding fails, or the preferred mitigation pathway is not achieved. The ability to start cheaply is insufficient if no credible institution can discharge the resulting obligations."
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "Domestic law has long experience with enterprises that cannot be allowed to stop abruptly, and its instruments correspond to each element of the continuity duty. A large financial company must file in advance \"the plan of such company for rapid and orderly resolution in the event of material financial distress or failure.\"39 A nuclear licensee must show \"reasonable assurance that funds will be available for the decommissioning process\" long before the plant needs decommissioning.40 A natural-gas company may not abandon facilities or service \"without the permission and approval of the Commission first had and obtained, after due hearing.\"41 And when a bank fails, the deposit insurer may organize a bridge institution to assume its deposits and \"perform any other temporary function,\" with a status that ends after two years unless extended.42 These are, in order, a continuity plan filed before operation, financing committed before it is needed, an exit that requires permission, and an interim successor with a bounded mandate. A deployment program should file the equivalent of a living will before its first injection.",
+      "runs": [
+        {
+          "text": "Domestic law has long experience with enterprises that cannot be allowed to stop abruptly, and its instruments correspond to each element of the continuity duty. A large financial company must file in advance \"the plan of such company for rapid and orderly resolution in the event of material financial distress or failure.\""
+        },
+        {
+          "text": "39",
+          "superscript": true,
+          "footnoteRef": "39"
+        },
+        {
+          "text": " A nuclear licensee must show \"reasonable assurance that funds will be available for the decommissioning process\" long before the plant needs decommissioning."
+        },
+        {
+          "text": "40",
+          "superscript": true,
+          "footnoteRef": "40"
+        },
+        {
+          "text": " A natural-gas company may not abandon facilities or service \"without the permission and approval of the Commission first had and obtained, after due hearing.\""
+        },
+        {
+          "text": "41",
+          "superscript": true,
+          "footnoteRef": "41"
+        },
+        {
+          "text": " And when a bank fails, the deposit insurer may organize a bridge institution to assume its deposits and \"perform any other temporary function,\" with a status that ends after two years unless extended."
+        },
+        {
+          "text": "42",
+          "superscript": true,
+          "footnoteRef": "42"
+        },
+        {
+          "text": " These are, in order, a continuity plan filed before operation, financing committed before it is needed, an exit that requires permission, and an interim successor with a bounded mandate. A deployment program should file the equivalent of a living will before its first injection."
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "The transition authority also reconciles this Article's two duties. Accounts that find termination shock avoidable rely on capable states standing ready to maintain or resume deployment, and small coalitions have strategic reasons to exclude others.43 Separate concurrence widens control and, by adding parties who may refuse, raises the chance that an authorization lapses. If lapse meant cessation, broader legitimacy would be bought with greater physical danger. Under the continuity duty a refusal changes who operates and starts a reviewed taper. Broad political control and physical continuity are compatible because a bounded successor stands between them.",
+      "runs": [
+        {
+          "text": "The transition authority also reconciles this Article's two duties. Accounts that find termination shock avoidable rely on capable states standing ready to maintain or resume deployment, and small coalitions have strategic reasons to exclude others."
+        },
+        {
+          "text": "43",
+          "superscript": true,
+          "footnoteRef": "43"
+        },
+        {
+          "text": " Separate concurrence widens control and, by adding parties who may refuse, raises the chance that an authorization lapses. If lapse meant cessation, broader legitimacy would be bought with greater physical danger. Under the continuity duty a refusal changes who operates and starts a reviewed taper. Broad political control and physical continuity are compatible because a bounded successor stands between them."
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "The comparison must include these obligations in the program's cost. A headline estimate for aircraft and materials cannot stand in for the resources required to monitor effects, maintain public control, support exposed communities, and retire the intervention. Financing should also avoid making continued injection the only funded option: otherwise budget design would prejudge later review. The IPCC assesses gradual phase-out combined with mitigation and carbon removal as a potential way to avoid termination effects, with medium confidence.44 That conditional pathway warrants investigation, and future carbon removal should count as an exit asset only once it exists.",
+      "runs": [
+        {
+          "text": "The comparison must include these obligations in the program's cost. A headline estimate for aircraft and materials cannot stand in for the resources required to monitor effects, maintain public control, support exposed communities, and retire the intervention. Financing should also avoid making continued injection the only funded option: otherwise budget design would prejudge later review. The IPCC assesses gradual phase-out combined with mitigation and carbon removal as a potential way to avoid termination effects, with medium confidence."
+        },
+        {
+          "text": "44",
+          "superscript": true,
+          "footnoteRef": "44"
+        },
+        {
+          "text": " That conditional pathway warrants investigation, and future carbon removal should count as an exit asset only once it exists."
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "These arrangements cannot ensure stable international cooperation for as long as cooling might be needed. A fund can be exhausted, a successor can refuse, and states can breach agreements. The proposed duty demands evidence of institutional capacity rather than a paper promise, but no currently established mechanism guarantees success. If continuity is credible only under optimistic political assumptions, that weakness belongs in the decision to withhold authorization. It is as much a property of the proposal as any engineering parameter.",
+      "runs": [
+        {
+          "text": "These arrangements cannot ensure stable international cooperation for as long as cooling might be needed. A fund can be exhausted, a successor can refuse, and states can breach agreements. The proposed duty demands evidence of institutional capacity rather than a paper promise, but no currently established mechanism guarantees success. If continuity is credible only under optimistic political assumptions, that weakness belongs in the decision to withhold authorization. It is as much a property of the proposal as any engineering parameter."
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "There is also a danger that continuity planning entrenches the program. A successor mechanism might become an institution dedicated to perpetuation; operators could exaggerate withdrawal risks to resist scrutiny. Review must therefore include independent evaluation of continuation, redesign, and tapering, with reasons tied to measured conditions rather than the sponsor's survival. Interim succession must not presume entitlement to the original dose. The two protections do not substitute for each other: technical redundancy can reduce operational failure, while dispersed political control and review are intended to prevent dependence from insulating operators from challenge.",
+      "runs": [
+        {
+          "text": "There is also a danger that continuity planning entrenches the program. A successor mechanism might become an institution dedicated to perpetuation; operators could exaggerate withdrawal risks to resist scrutiny. Review must therefore include independent evaluation of continuation, redesign, and tapering, with reasons tied to measured conditions rather than the sponsor's survival. Interim succession must not presume entitlement to the original dose. The two protections do not substitute for each other: technical redundancy can reduce operational failure, while dispersed political control and review are intended to prevent dependence from insulating operators from challenge."
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "Consider an expressly hypothetical case. After substantial deployment, a regional coalition alleges serious agricultural losses and withdraws its support. Immediate termination may expose it and others to larger harms, while unconditional continuation denies its challenge practical significance. Under the proposed regime, the claim would trigger independent assessment, interim protection, and review of the deployment design or operator. A continuity plan would preserve room to decide without making sudden interruption the price of political dissent. Independent review would determine whether the alleged harm is established and whether cooling should continue. It would prevent the original sponsor from presenting its own permanence as the only alternative to catastrophe.",
+      "runs": [
+        {
+          "text": "Consider an expressly hypothetical case. After substantial deployment, a regional coalition alleges serious agricultural losses and withdraws its support. Immediate termination may expose it and others to larger harms, while unconditional continuation denies its challenge practical significance. Under the proposed regime, the claim would trigger independent assessment, interim protection, and review of the deployment design or operator. A continuity plan would preserve room to decide without making sudden interruption the price of political dissent. Independent review would determine whether the alleged harm is established and whether cooling should continue. It would prevent the original sponsor from presenting its own permanence as the only alternative to catastrophe."
+        }
+      ]
+    },
+    {
+      "type": "heading",
+      "level": 1,
+      "id": "section-79",
+      "text": "VII. Objections and the Limits of the Argument",
+      "runs": [
+        {
+          "text": "VII. Objections and the Limits of the Argument"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "The strongest objection is that demanding institutions that do not yet exist privileges the damaging status quo. Vulnerable populations might prefer a plausible intervention to continued exposure while wealthy states debate procedure. A fair account must recognize that preference and the losses caused by delay. The preference is documented: a survey of more than thirty thousand respondents in thirty countries found publics in the Global South more supportive of climate-intervention technologies than publics in the Global North.45 Institutions maintaining restraint should explain what evidence or institutional developments would change their decision and what alternative protection they will provide. Periodic review should be scheduled, with earlier reconsideration when material evidence changes. Restraint cannot mean indefinite analytical neglect.",
+      "runs": [
+        {
+          "text": "The strongest objection is that demanding institutions that do not yet exist privileges the damaging status quo. Vulnerable populations might prefer a plausible intervention to continued exposure while wealthy states debate procedure. A fair account must recognize that preference and the losses caused by delay. The preference is documented: a survey of more than thirty thousand respondents in thirty countries found publics in the Global South more supportive of climate-intervention technologies than publics in the Global North."
+        },
+        {
+          "text": "45",
+          "superscript": true,
+          "footnoteRef": "45"
+        },
+        {
+          "text": " Institutions maintaining restraint should explain what evidence or institutional developments would change their decision and what alternative protection they will provide. Periodic review should be scheduled, with earlier reconsideration when material evidence changes. Restraint cannot mean indefinite analytical neglect."
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "Even so, the harms of nondeployment do not establish that any willing sponsor may decide for everyone. A purported emergency does not supply missing regional knowledge, operational reliability, or political accountability. Faster procedures may be defensible where delay creates greater danger, but departures should be limited, reasoned, and independently reviewed. Existing law supplies no general SAI emergency license. In Certain Activities, the Court did not accept domestic emergency treatment as eliminating the international assessment obligation, while leaving a genuine emergency question open on different facts.46",
+      "runs": [
+        {
+          "text": "Even so, the harms of nondeployment do not establish that any willing sponsor may decide for everyone. A purported emergency does not supply missing regional knowledge, operational reliability, or political accountability. Faster procedures may be defensible where delay creates greater danger, but departures should be limited, reasoned, and independently reviewed. Existing law supplies no general SAI emergency license. In "
+        },
+        {
+          "text": "Certain Activities",
+          "italic": true
+        },
+        {
+          "text": ", the Court did not accept domestic emergency treatment as eliminating the international assessment obligation, while leaving a genuine emergency question open on different facts."
+        },
+        {
+          "text": "46",
+          "superscript": true,
+          "footnoteRef": "46"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "The opposite objection challenges the permission to research. Biermann and colleagues argue that just, inclusive planetary governance is unavailable within the existing international system and advocate a non-use agreement, including restrictions on directed development and outdoor experiments. Their concern cannot be answered merely by describing an ideal review council. Parson and colleagues respond that broad prohibitions would impede evidence and inclusive deliberation while climate risks continue. These positions disagree about institutional trajectories as well as physical uncertainty.47,48",
+      "runs": [
+        {
+          "text": "The opposite objection challenges the permission to research. Biermann and colleagues argue that just, inclusive planetary governance is unavailable within the existing international system and advocate a non-use agreement, including restrictions on directed development and outdoor experiments. Their concern cannot be answered merely by describing an ideal review council. Parson and colleagues respond that broad prohibitions would impede evidence and inclusive deliberation while climate risks continue. These positions disagree about institutional trajectories as well as physical uncertainty."
+        },
+        {
+          "text": "47,48",
+          "superscript": true,
+          "footnoteRef": "47,48"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "Inquiry should be permitted where its expected informational value, alternatives, direct effects, and contribution to a larger program withstand review. This standard does not presume that knowledge is socially costless. Funding should support investigating reasons against deployment and strengthen independent assessment outside sponsoring institutions. Where an experiment mainly advances deployability without answering a decision-relevant question unavailable by safer means, refusal can be justified. Conversely, preventing low-impact inquiry that could expose a decisive flaw also has costs. Research oversight should preserve a real possibility of ending the program.",
+      "runs": [
+        {
+          "text": "Inquiry should be permitted where its expected informational value, alternatives, direct effects, and contribution to a larger program withstand review. This standard does not presume that knowledge is socially costless. Funding should support investigating reasons against deployment and strengthen independent assessment outside sponsoring institutions. Where an experiment mainly advances deployability without answering a decision-relevant question unavailable by safer means, refusal can be justified. Conversely, preventing low-impact inquiry that could expose a decisive flaw also has costs. Research oversight should preserve a real possibility of ending the program."
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "Finally, the argument has limits of transferability. The Outer Space Treaty already addresses state responsibility, authorization and continuing supervision of private activities, and due regard for other states. These provisions illustrate that technical capability need not determine legal authority. They do not settle disputed entitlements to extracted resources. Nor does a bounded extraction project necessarily create SAI's dependence on continued planetary cooling. A resource-sharing arrangement therefore requires its own comparator, affected groups, and legal analysis. The general duties to compare and answer objections may travel; the specific continuity architecture requires evidence of the corresponding dependence.49",
+      "runs": [
+        {
+          "text": "Finally, the argument has limits of transferability. The Outer Space Treaty already addresses state responsibility, authorization and continuing supervision of private activities, and due regard for other states. These provisions illustrate that technical capability need not determine legal authority. They do not settle disputed entitlements to extracted resources. Nor does a bounded extraction project necessarily create SAI's dependence on continued planetary cooling. A resource-sharing arrangement therefore requires its own comparator, affected groups, and legal analysis. The general duties to compare and answer objections may travel; the specific continuity architecture requires evidence of the corresponding dependence."
+        },
+        {
+          "text": "49",
+          "superscript": true,
+          "footnoteRef": "49"
+        }
+      ]
+    },
+    {
+      "type": "heading",
+      "level": 1,
+      "id": "section-85",
+      "text": "VIII. Conclusion",
+      "runs": [
+        {
+          "text": "VIII. Conclusion"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "Risk-risk analysis is most useful when it changes the questions institutions must answer. In SAI governance, those questions include which future supplies the comparator, whose welfare is hidden by aggregation, and whether technical control is being mistaken for legitimate authority. Favorable climate evidence strengthens the case for serious evaluation and leaves these questions to be answered.",
+      "runs": [
+        {
+          "text": "Risk-risk analysis is most useful when it changes the questions institutions must answer. In SAI governance, those questions include which future supplies the comparator, whose welfare is hidden by aggregation, and whether technical control is being mistaken for legitimate authority. Favorable climate evidence strengthens the case for serious evaluation and leaves these questions to be answered."
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "A comparative justification duty would make alternatives and distributional choices open to consequential challenge. A continuity duty would require sponsors to confront the obligations created by sustained intervention, while separating changes in political control from dangerous physical interruption. The law already knows how to keep an indispensable system running while control over it changes hands, and the continuity duty asks that the same be arranged for the stratosphere before anyone depends on it. Together, these duties support governed research and withholding deployment authorization where credible comparison, representation, and continuity remain absent. They also require scrutiny of the harms of restraint. Those exposed to the intervention would have no practical means of withdrawing from its effects.",
+      "runs": [
+        {
+          "text": "A comparative justification duty would make alternatives and distributional choices open to consequential challenge. A continuity duty would require sponsors to confront the obligations created by sustained intervention, while separating changes in political control from dangerous physical interruption. The law already knows how to keep an indispensable system running while control over it changes hands, and the continuity duty asks that the same be arranged for the stratosphere before anyone depends on it. Together, these duties support governed research and withholding deployment authorization where credible comparison, representation, and continuity remain absent. They also require scrutiny of the harms of restraint. Those exposed to the intervention would have no practical means of withdrawing from its effects."
+        }
+      ]
+    }
+  ],
+  "footnotes": [
+    {
+      "number": 1,
+      "text": "World Meteorological Organization, Executive Summary: Scientific Assessment of Ozone Depletion: 2022, ch. 6 summary (Global Atmosphere Watch Rep. No. 278, 2022).",
+      "runs": [
+        {
+          "text": "World Meteorological Organization, Executive Summary: Scientific Assessment of Ozone Depletion",
+          "smallCaps": true
+        },
+        {
+          "text": ": 2022, ch. 6 summary (Global Atmosphere Watch Rep. No. 278, 2022)."
+        }
+      ]
+    },
+    {
+      "number": 2,
+      "text": "Christopher H. Trisos et al., Cross-Working Group Box SRM: Solar Radiation Modification, in Climate Change 2022: Impacts, Adaptation and Vulnerability 2473, 2474, 2476-78 (Hans-Otto Pörtner et al. eds., 2022).",
+      "runs": [
+        {
+          "text": "Christopher H. Trisos et al., "
+        },
+        {
+          "text": "Cross-Working Group Box SRM: Solar Radiation Modification",
+          "italic": true
+        },
+        {
+          "text": ", "
+        },
+        {
+          "text": "in",
+          "italic": true
+        },
+        {
+          "text": " "
+        },
+        {
+          "text": "Climate Change",
+          "smallCaps": true
+        },
+        {
+          "text": " 2022: "
+        },
+        {
+          "text": "Impacts, Adaptation and Vulnerability",
+          "smallCaps": true
+        },
+        {
+          "text": " 2473, 2474, 2476-78 (Hans-Otto Pörtner et al. eds., 2022)."
+        }
+      ]
+    },
+    {
+      "number": 3,
+      "text": "Bronislaw Szerszynski et al., Why Solar Radiation Management Geoengineering and Democracy Won't Mix, 45 Env't & Plan. A 2809 (2013); Joshua B. Horton et al., Solar Geoengineering and Democracy, 18 Glob. Env't Pol. 5 (2018).",
+      "runs": [
+        {
+          "text": "Bronislaw Szerszynski et al., "
+        },
+        {
+          "text": "Why Solar Radiation Management Geoengineering and Democracy Won't Mix",
+          "italic": true
+        },
+        {
+          "text": ", 45 "
+        },
+        {
+          "text": "Env't & Plan.",
+          "smallCaps": true
+        },
+        {
+          "text": " A 2809 (2013); Joshua B. Horton et al., "
+        },
+        {
+          "text": "Solar Geoengineering and Democracy",
+          "italic": true
+        },
+        {
+          "text": ", 18 "
+        },
+        {
+          "text": "Glob. Env't Pol.",
+          "smallCaps": true
+        },
+        {
+          "text": " 5 (2018)."
+        }
+      ]
+    },
+    {
+      "number": 4,
+      "text": "John D. Graham & Jonathan B. Wiener, Confronting Risk Tradeoffs, in Risk vs. Risk: Tradeoffs in Protecting Health and the Environment 1 (John D. Graham & Jonathan B. Wiener eds., 1995).",
+      "runs": [
+        {
+          "text": "John D. Graham & Jonathan B. Wiener, "
+        },
+        {
+          "text": "Confronting Risk Tradeoffs",
+          "italic": true
+        },
+        {
+          "text": ", "
+        },
+        {
+          "text": "in",
+          "italic": true
+        },
+        {
+          "text": " "
+        },
+        {
+          "text": "Risk vs. Risk: Tradeoffs in Protecting Health and the Environment",
+          "smallCaps": true
+        },
+        {
+          "text": " 1 (John D. Graham & Jonathan B. Wiener eds., 1995)."
+        }
+      ]
+    },
+    {
+      "number": 5,
+      "text": "Tyler Felgenhauer et al., Solar Radiation Modification: A Risk-Risk Analysis 13-16 & tbls. 1-2 (2022), https://www.c2g2.net/wp-content/uploads/202203-C2G-RR-Full.pdf.",
+      "runs": [
+        {
+          "text": "Tyler Felgenhauer et al., Solar Radiation Modification: A Risk-Risk Analysis",
+          "smallCaps": true
+        },
+        {
+          "text": " 13-16 & tbls. 1-2 (2022), https://www.c2g2.net/wp-content/uploads/202203-C2G-RR-Full.pdf."
+        }
+      ]
+    },
+    {
+      "number": 6,
+      "text": "United Nations Convention on the Law of the Sea art. 195, Dec. 10, 1982, 1833 U.N.T.S. 397; Request for an Advisory Opinion Submitted by the Commission of Small Island States on Climate Change and International Law, Case No. 31, Advisory Opinion of May 21, 2024, ¶ 231 (ITLOS).",
+      "runs": [
+        {
+          "text": "United Nations Convention on the Law of the Sea art. 195, Dec. 10, 1982, 1833 U.N.T.S. 397; Request for an Advisory Opinion Submitted by the Commission of Small Island States on Climate Change and International Law, Case No. 31, Advisory Opinion of May 21, 2024, ¶ 231 (ITLOS)."
+        }
+      ]
+    },
+    {
+      "number": 7,
+      "text": "Trisos et al., supra note 2, at 2474, 2476-78.",
+      "runs": [
+        {
+          "text": "Trisos et al., "
+        },
+        {
+          "text": "supra",
+          "italic": true
+        },
+        {
+          "text": " note 2, at 2474, 2476-78."
+        }
+      ]
+    },
+    {
+      "number": 8,
+      "text": "Jonathan B. Wiener, Disregard and Due Regard, 29 N.Y.U. Env't L.J. 437, 454, 460-64 (2021).",
+      "runs": [
+        {
+          "text": "Jonathan B. Wiener, "
+        },
+        {
+          "text": "Disregard and Due Regard",
+          "italic": true
+        },
+        {
+          "text": ", 29 "
+        },
+        {
+          "text": "N.Y.U. Env't L.J.",
+          "smallCaps": true
+        },
+        {
+          "text": " 437, 454, 460-64 (2021)."
+        }
+      ]
+    },
+    {
+      "number": 9,
+      "text": "Jane A. Flegal & Aarti Gupta, Evoking Equity as a Rationale for Solar Geoengineering Research? Scrutinizing Emerging Expert Visions of Equity, 18 Int'l Env't Agreements 45 (2018).",
+      "runs": [
+        {
+          "text": "Jane A. Flegal & Aarti Gupta, "
+        },
+        {
+          "text": "Evoking Equity as a Rationale for Solar Geoengineering Research? Scrutinizing Emerging Expert Visions of Equity",
+          "italic": true
+        },
+        {
+          "text": ", 18 "
+        },
+        {
+          "text": "Int'l Env't Agreements",
+          "smallCaps": true
+        },
+        {
+          "text": " 45 (2018)."
+        }
+      ]
+    },
+    {
+      "number": 10,
+      "text": "Peter J. Irvine & David W. Keith, Halving Warming with Stratospheric Aerosol Geoengineering Moderates Policy-Relevant Climate Hazards, 15 Env't Rsch. Letters 044011, at 2-3, 8, 10 (2020).",
+      "runs": [
+        {
+          "text": "Peter J. Irvine & David W. Keith, "
+        },
+        {
+          "text": "Halving Warming with Stratospheric Aerosol Geoengineering Moderates Policy-Relevant Climate Hazards",
+          "italic": true
+        },
+        {
+          "text": ", 15 "
+        },
+        {
+          "text": "Env't Rsch. Letters",
+          "smallCaps": true
+        },
+        {
+          "text": " 044011, at 2-3, 8, 10 (2020)."
+        }
+      ]
+    },
+    {
+      "number": 11,
+      "text": "Jonathan Proctor et al., Estimating Global Agricultural Effects of Geoengineering Using Volcanic Eruptions, 560 Nature 480, 480-83 (2018).",
+      "runs": [
+        {
+          "text": "Jonathan Proctor et al., "
+        },
+        {
+          "text": "Estimating Global Agricultural Effects of Geoengineering Using Volcanic Eruptions",
+          "italic": true
+        },
+        {
+          "text": ", 560 "
+        },
+        {
+          "text": "Nature",
+          "smallCaps": true
+        },
+        {
+          "text": " 480, 480-83 (2018)."
+        }
+      ]
+    },
+    {
+      "number": 12,
+      "text": "Yuanchao Fan et al., Solar Geoengineering Can Alleviate Climate Change Pressures on Crop Yields, 2 Nature Food 373, 373-81 (2021).",
+      "runs": [
+        {
+          "text": "Yuanchao Fan et al., "
+        },
+        {
+          "text": "Solar Geoengineering Can Alleviate Climate Change Pressures on Crop Yields",
+          "italic": true
+        },
+        {
+          "text": ", 2 "
+        },
+        {
+          "text": "Nature Food",
+          "smallCaps": true
+        },
+        {
+          "text": " 373, 373-81 (2021)."
+        }
+      ]
+    },
+    {
+      "number": 13,
+      "text": "World Meteorological Organization, supra note 1, ch. 6 summary.",
+      "runs": [
+        {
+          "text": "World Meteorological Organization",
+          "smallCaps": true
+        },
+        {
+          "text": ", "
+        },
+        {
+          "text": "supra",
+          "italic": true
+        },
+        {
+          "text": " note 1, ch. 6 summary."
+        }
+      ]
+    },
+    {
+      "number": 14,
+      "text": "SCoPEx Research Team, Statements (Dec. 15, 2020 & Mar. 31, 2021), https://www.keutschgroup.com/scopex/statements.",
+      "runs": [
+        {
+          "text": "SCoPEx Research Team, "
+        },
+        {
+          "text": "Statements",
+          "italic": true
+        },
+        {
+          "text": " (Dec. 15, 2020 & Mar. 31, 2021), https://www.keutschgroup.com/scopex/statements."
+        }
+      ]
+    },
+    {
+      "number": 15,
+      "text": "John H. Shaw & James H. Stock, An Update on SCoPEx, Harvard Salata Inst. (Mar. 18, 2024), https://salatainstitute.harvard.edu/an-update-on-scopex/.",
+      "runs": [
+        {
+          "text": "John H. Shaw & James H. Stock, "
+        },
+        {
+          "text": "An Update on SCoPEx",
+          "italic": true
+        },
+        {
+          "text": ", "
+        },
+        {
+          "text": "Harvard Salata Inst.",
+          "smallCaps": true
+        },
+        {
+          "text": " (Mar. 18, 2024), https://salatainstitute.harvard.edu/an-update-on-scopex/."
+        }
+      ]
+    },
+    {
+      "number": 16,
+      "text": "National Academies of Sciences, Engineering, and Medicine, Reflecting Sunlight: Recommendations for Solar Geoengineering Research and Research Governance 8-9, 13, 16-17, 69-70 (2021).",
+      "runs": [
+        {
+          "text": "National Academies of Sciences, Engineering, and Medicine, Reflecting Sunlight: Recommendations for Solar Geoengineering Research and Research Governance",
+          "smallCaps": true
+        },
+        {
+          "text": " 8-9, 13, 16-17, 69-70 (2021)."
+        }
+      ]
+    },
+    {
+      "number": 17,
+      "text": "Office of Science & Technology Policy, Congressionally Mandated Research Plan and an Initial Research Governance Framework Related to Solar Radiation Modification 4, 28, 35-39 (June 2023).",
+      "runs": [
+        {
+          "text": "Office of Science & Technology Policy, Congressionally Mandated Research Plan and an Initial Research Governance Framework Related to Solar Radiation Modification",
+          "smallCaps": true
+        },
+        {
+          "text": " 4, 28, 35-39 (June 2023)."
+        }
+      ]
+    },
+    {
+      "number": 18,
+      "text": "Fla. Stat. § 403.411(1) (2025); Act of June 20, 2025, ch. 2025-157, 2025 Fla. Laws (effective July 1, 2025).",
+      "runs": [
+        {
+          "text": "Fla. Stat.",
+          "smallCaps": true
+        },
+        {
+          "text": " § 403.411(1) (2025); Act of June 20, 2025, ch. 2025-157, 2025 Fla. Laws (effective July 1, 2025)."
+        }
+      ]
+    },
+    {
+      "number": 19,
+      "text": "Paris Agreement arts. 2, 4, 7-9, Dec. 12, 2015, T.I.A.S. No. 16-1104.",
+      "runs": [
+        {
+          "text": "Paris Agreement arts. 2, 4, 7-9, Dec. 12, 2015, T.I.A.S. No. 16-1104."
+        }
+      ]
+    },
+    {
+      "number": 20,
+      "text": "Conference of the Parties to the Convention on Biological Diversity, Decision X/33, Biodiversity and Climate Change, ¶ 8 & ¶ 8(w), U.N. Doc. UNEP/CBD/COP/DEC/X/33 (Oct. 29, 2010).",
+      "runs": [
+        {
+          "text": "Conference of the Parties to the Convention on Biological Diversity, Decision X/33, "
+        },
+        {
+          "text": "Biodiversity and Climate Change",
+          "italic": true
+        },
+        {
+          "text": ", ¶ 8 & ¶ 8(w), U.N. Doc. UNEP/CBD/COP/DEC/X/33 (Oct. 29, 2010)."
+        }
+      ]
+    },
+    {
+      "number": 21,
+      "text": "Pulp Mills on the River Uruguay (Arg. v. Uru.), Judgment, 2010 I.C.J. 14, ¶¶ 101, 164, 204-05, 216 (Apr. 20).",
+      "runs": [
+        {
+          "text": "Pulp Mills on the River Uruguay (Arg. v. Uru.), Judgment, 2010 I.C.J. 14, ¶¶ 101, 164, 204-05, 216 (Apr. 20)."
+        }
+      ]
+    },
+    {
+      "number": 22,
+      "text": "Certain Activities Carried Out by Nicaragua in the Border Area (Costa Rica v. Nicar.) & Construction of a Road in Costa Rica Along the San Juan River (Nicar. v. Costa Rica), Judgment, 2015 I.C.J. 665, ¶¶ 104, 153, 157-58, 168 (Dec. 16).",
+      "runs": [
+        {
+          "text": "Certain Activities Carried Out by Nicaragua in the Border Area (Costa Rica v. Nicar.) & Construction of a Road in Costa Rica Along the San Juan River (Nicar. v. Costa Rica), Judgment, 2015 I.C.J. 665, ¶¶ 104, 153, 157-58, 168 (Dec. 16)."
+        }
+      ]
+    },
+    {
+      "number": 23,
+      "text": "Obligations of States in Respect of Climate Change, Advisory Opinion, ¶ 138 (I.C.J. July 23, 2025).",
+      "runs": [
+        {
+          "text": "Obligations of States in Respect of Climate Change, Advisory Opinion, ¶ 138 (I.C.J. July 23, 2025)."
+        }
+      ]
+    },
+    {
+      "number": 24,
+      "text": "Convention on the Prohibition of Military or Any Other Hostile Use of Environmental Modification Techniques arts. I-III, opened for signature May 18, 1977, 31 U.S.T. 333, 1108 U.N.T.S. 151.",
+      "runs": [
+        {
+          "text": "Convention on the Prohibition of Military or Any Other Hostile Use of Environmental Modification Techniques arts. I-III, "
+        },
+        {
+          "text": "opened for signature",
+          "italic": true
+        },
+        {
+          "text": " May 18, 1977, 31 U.S.T. 333, 1108 U.N.T.S. 151."
+        }
+      ]
+    },
+    {
+      "number": 25,
+      "text": "Vienna Convention for the Protection of the Ozone Layer art. 2(1), (2)(b), Mar. 22, 1985, T.I.A.S. No. 11,097, 1513 U.N.T.S. 293; World Meteorological Organization, supra note 1, ch. 6 summary.",
+      "runs": [
+        {
+          "text": "Vienna Convention for the Protection of the Ozone Layer art. 2(1), (2)(b), Mar. 22, 1985, T.I.A.S. No. 11,097, 1513 U.N.T.S. 293; "
+        },
+        {
+          "text": "World Meteorological Organization",
+          "smallCaps": true
+        },
+        {
+          "text": ", "
+        },
+        {
+          "text": "supra",
+          "italic": true
+        },
+        {
+          "text": " note 1, ch. 6 summary."
+        }
+      ]
+    },
+    {
+      "number": 26,
+      "text": "United Nations Framework Convention on Climate Change art. 4(1)(f), May 9, 1992, S. Treaty Doc. No. 102-38, 1771 U.N.T.S. 107.",
+      "runs": [
+        {
+          "text": "United Nations Framework Convention on Climate Change art. 4(1)(f), May 9, 1992, "
+        },
+        {
+          "text": "S. Treaty Doc. No.",
+          "smallCaps": true
+        },
+        {
+          "text": " 102-38, 1771 U.N.T.S. 107."
+        }
+      ]
+    },
+    {
+      "number": 27,
+      "text": "Int'l Law Comm'n, Draft Guidelines on the Protection of the Atmosphere, guideline 7 & cmt. ¶¶ (3)-(4), in Rep. of the Int'l Law Comm'n on the Work of Its Seventy-Second Session, U.N. Doc. A/76/10 (2021).",
+      "runs": [
+        {
+          "text": "Int'l Law Comm'n, Draft Guidelines on the Protection of the Atmosphere, guideline 7 & cmt. ¶¶ (3)-(4), "
+        },
+        {
+          "text": "in",
+          "italic": true
+        },
+        {
+          "text": " Rep. of the Int'l Law Comm'n on the Work of Its Seventy-Second Session, U.N. Doc. A/76/10 (2021)."
+        }
+      ]
+    },
+    {
+      "number": 28,
+      "text": "Int'l Law Comm'n, Draft Articles on Prevention of Transboundary Harm from Hazardous Activities arts. 9(3), 10(d)-(e), in Rep. of the Int'l Law Comm'n on the Work of Its Fifty-Third Session, U.N. Doc. A/56/10 (2001).",
+      "runs": [
+        {
+          "text": "Int'l Law Comm'n, Draft Articles on Prevention of Transboundary Harm from Hazardous Activities arts. 9(3), 10(d)-(e), "
+        },
+        {
+          "text": "in",
+          "italic": true
+        },
+        {
+          "text": " Rep. of the Int'l Law Comm'n on the Work of Its Fifty-Third Session, U.N. Doc. A/56/10 (2001)."
+        }
+      ]
+    },
+    {
+      "number": 29,
+      "text": "European Commission & High Representative of the Union for Foreign Affairs & Security Policy, A New Outlook on the Climate and Security Nexus, at 20, 22, JOIN (2023) 19 final (June 28, 2023).",
+      "runs": [
+        {
+          "text": "European Commission & High Representative of the Union for Foreign Affairs & Security Policy",
+          "smallCaps": true
+        },
+        {
+          "text": ", "
+        },
+        {
+          "text": "A New Outlook on the Climate and Security Nexus",
+          "italic": true
+        },
+        {
+          "text": ", at 20, 22, JOIN (2023) 19 final (June 28, 2023)."
+        }
+      ]
+    },
+    {
+      "number": 30,
+      "text": "European Commission, Directorate-General for Research & Innovation, Group of Chief Scientific Advisors, Solar Radiation Modification 7-9, 24-33 (Sci. Op. No. 17, Dec. 9, 2024).",
+      "runs": [
+        {
+          "text": "European Commission, Directorate-General for Research & Innovation, Group of Chief Scientific Advisors, Solar Radiation Modification",
+          "smallCaps": true
+        },
+        {
+          "text": " 7-9, 24-33 (Sci. Op. No. 17, Dec. 9, 2024)."
+        }
+      ]
+    },
+    {
+      "number": 31,
+      "text": "Pulp Mills on the River Uruguay (Arg. v. Uru.), Judgment, 2010 I.C.J. 14, ¶ 164 (Apr. 20).",
+      "runs": [
+        {
+          "text": "Pulp Mills on the River Uruguay (Arg. v. Uru.), Judgment, 2010 I.C.J. 14, ¶ 164 (Apr. 20)."
+        }
+      ]
+    },
+    {
+      "number": 32,
+      "text": "Montreal Protocol on Substances that Deplete the Ozone Layer art. 10(9), Sept. 16, 1987, 1522 U.N.T.S. 3 (as amended June 29, 1990).",
+      "runs": [
+        {
+          "text": "Montreal Protocol on Substances that Deplete the Ozone Layer art. 10(9), Sept. 16, 1987, 1522 U.N.T.S. 3 (as amended June 29, 1990)."
+        }
+      ]
+    },
+    {
+      "number": 33,
+      "text": "11 U.S.C. §§ 1126(c), 1129(a)(7)(A)(ii) (2024); see also id. § 1129(b)(1) (confirmation over a dissenting class only where the plan does not discriminate unfairly and is fair and equitable).",
+      "runs": [
+        {
+          "text": "11 U.S.C. §§ 1126(c), 1129(a)(7)(A)(ii) (2024); "
+        },
+        {
+          "text": "see also id.",
+          "italic": true
+        },
+        {
+          "text": " § 1129(b)(1) (confirmation over a dissenting class only where the plan does not discriminate unfairly and is fair and equitable)."
+        }
+      ]
+    },
+    {
+      "number": 34,
+      "text": "Martin L. Weitzman, A Voting Architecture for the Governance of Free-Driver Externalities, with Application to Geoengineering, 117 Scandinavian J. Econ. 1049 (2015).",
+      "runs": [
+        {
+          "text": "Martin L. Weitzman, "
+        },
+        {
+          "text": "A Voting Architecture for the Governance of Free-Driver Externalities, with Application to Geoengineering",
+          "italic": true
+        },
+        {
+          "text": ", 117 "
+        },
+        {
+          "text": "Scandinavian J. Econ.",
+          "smallCaps": true
+        },
+        {
+          "text": " 1049 (2015)."
+        }
+      ]
+    },
+    {
+      "number": 35,
+      "text": "Joshua B. Horton & David W. Keith, Multilateral Parametric Climate Risk Insurance: A Tool to Facilitate Agreement About Deployment of Solar Geoengineering?, 19 Climate Pol'y 820 (2019).",
+      "runs": [
+        {
+          "text": "Joshua B. Horton & David W. Keith, "
+        },
+        {
+          "text": "Multilateral Parametric Climate Risk Insurance: A Tool to Facilitate Agreement About Deployment of Solar Geoengineering?",
+          "italic": true
+        },
+        {
+          "text": ", 19 "
+        },
+        {
+          "text": "Climate Pol'y",
+          "smallCaps": true
+        },
+        {
+          "text": " 820 (2019)."
+        }
+      ]
+    },
+    {
+      "number": 36,
+      "text": "National Academies, supra note 16, at 69-70.",
+      "runs": [
+        {
+          "text": "National Academies",
+          "smallCaps": true
+        },
+        {
+          "text": ", "
+        },
+        {
+          "text": "supra",
+          "italic": true
+        },
+        {
+          "text": " note 16, at 69-70."
+        }
+      ]
+    },
+    {
+      "number": 37,
+      "text": "Andy Parker & Peter J. Irvine, The Risk of Termination Shock from Solar Geoengineering, 6 Earth's Future 456, 456-67 (2018).",
+      "runs": [
+        {
+          "text": "Andy Parker & Peter J. Irvine, "
+        },
+        {
+          "text": "The Risk of Termination Shock from Solar Geoengineering",
+          "italic": true
+        },
+        {
+          "text": ", 6 "
+        },
+        {
+          "text": "Earth's Future",
+          "smallCaps": true
+        },
+        {
+          "text": " 456, 456-67 (2018)."
+        }
+      ]
+    },
+    {
+      "number": 38,
+      "text": "Int'l Mar. Org., Res. MEPC.280(70), Effective Date of Implementation of the Fuel Oil Standard in Regulation 14.1.3 of MARPOL Annex VI (Oct. 28, 2016); Tianle Yuan et al., Abrupt Reduction in Shipping Emission as an Inadvertent Geoengineering Termination Shock Produces Substantial Radiative Warming, 5 Commc'ns Earth & Env't, art. 281 (2024).",
+      "runs": [
+        {
+          "text": "Int'l Mar. Org., Res. MEPC.280(70), Effective Date of Implementation of the Fuel Oil Standard in Regulation 14.1.3 of MARPOL Annex VI (Oct. 28, 2016); Tianle Yuan et al., "
+        },
+        {
+          "text": "Abrupt Reduction in Shipping Emission as an Inadvertent Geoengineering Termination Shock Produces Substantial Radiative Warming",
+          "italic": true
+        },
+        {
+          "text": ", 5 "
+        },
+        {
+          "text": "Commc'ns Earth & Env't",
+          "smallCaps": true
+        },
+        {
+          "text": ", art. 281 (2024)."
+        }
+      ]
+    },
+    {
+      "number": 39,
+      "text": "12 U.S.C. § 5365(d)(1) (2024).",
+      "runs": [
+        {
+          "text": "12 U.S.C. § 5365(d)(1) (2024)."
+        }
+      ]
+    },
+    {
+      "number": 40,
+      "text": "10 C.F.R. § 50.75(a) (2024).",
+      "runs": [
+        {
+          "text": "10 C.F.R. § 50.75(a) (2024)."
+        }
+      ]
+    },
+    {
+      "number": 41,
+      "text": "15 U.S.C. § 717f(b) (2024).",
+      "runs": [
+        {
+          "text": "15 U.S.C. § 717f(b) (2024)."
+        }
+      ]
+    },
+    {
+      "number": 42,
+      "text": "12 U.S.C. § 1821(n)(1)(B), (9) (2024). The status ends two years after the charter is granted and may be extended for three additional one-year periods.",
+      "runs": [
+        {
+          "text": "12 U.S.C. § 1821(n)(1)(B), (9) (2024). The status ends two years after the charter is granted and may be extended for three additional one-year periods."
+        }
+      ]
+    },
+    {
+      "number": 43,
+      "text": "Parker & Irvine, supra note 37, at 456-67; Katharine L. Ricke, Juan B. Moreno-Cruz & Ken Caldeira, Strategic Incentives for Climate Geoengineering Coalitions to Exclude Broad Participation, 8 Env't Rsch. Letters 014021 (2013).",
+      "runs": [
+        {
+          "text": "Parker & Irvine, "
+        },
+        {
+          "text": "supra",
+          "italic": true
+        },
+        {
+          "text": " note 37, at 456-67; Katharine L. Ricke, Juan B. Moreno-Cruz & Ken Caldeira, "
+        },
+        {
+          "text": "Strategic Incentives for Climate Geoengineering Coalitions to Exclude Broad Participation",
+          "italic": true
+        },
+        {
+          "text": ", 8 "
+        },
+        {
+          "text": "Env't Rsch. Letters",
+          "smallCaps": true
+        },
+        {
+          "text": " 014021 (2013)."
+        }
+      ]
+    },
+    {
+      "number": 44,
+      "text": "Trisos et al., supra note 2, at 2474, 2476-78.",
+      "runs": [
+        {
+          "text": "Trisos et al., "
+        },
+        {
+          "text": "supra",
+          "italic": true
+        },
+        {
+          "text": " note 2, at 2474, 2476-78."
+        }
+      ]
+    },
+    {
+      "number": 45,
+      "text": "Chad M. Baum et al., Public Perceptions and Support of Climate Intervention Technologies Across the Global North and Global South, 15 Nature Commc'ns, art. 2060 (2024).",
+      "runs": [
+        {
+          "text": "Chad M. Baum et al., "
+        },
+        {
+          "text": "Public Perceptions and Support of Climate Intervention Technologies Across the Global North and Global South",
+          "italic": true
+        },
+        {
+          "text": ", 15 "
+        },
+        {
+          "text": "Nature Commc'ns",
+          "smallCaps": true
+        },
+        {
+          "text": ", art. 2060 (2024)."
+        }
+      ]
+    },
+    {
+      "number": 46,
+      "text": "Certain Activities Carried Out by Nicaragua in the Border Area (Costa Rica v. Nicar.) & Construction of a Road in Costa Rica Along the San Juan River (Nicar. v. Costa Rica), Judgment, 2015 I.C.J. 665, ¶¶ 157-59 (Dec. 16).",
+      "runs": [
+        {
+          "text": "Certain Activities Carried Out by Nicaragua in the Border Area (Costa Rica v. Nicar.) & Construction of a Road in Costa Rica Along the San Juan River (Nicar. v. Costa Rica), Judgment, 2015 I.C.J. 665, ¶¶ 157-59 (Dec. 16)."
+        }
+      ]
+    },
+    {
+      "number": 47,
+      "text": "Frank Biermann et al., Solar Geoengineering: The Case for an International Non-Use Agreement, 13 WIREs Climate Change e754, §§ 2-3 (2022).",
+      "runs": [
+        {
+          "text": "Frank Biermann et al., "
+        },
+        {
+          "text": "Solar Geoengineering: The Case for an International Non-Use Agreement",
+          "italic": true
+        },
+        {
+          "text": ", 13 "
+        },
+        {
+          "text": "WIREs Climate Change",
+          "smallCaps": true
+        },
+        {
+          "text": " e754, §§ 2-3 (2022)."
+        }
+      ]
+    },
+    {
+      "number": 48,
+      "text": "Edward A. Parson et al., Toward an Evidence-Informed, Responsible, and Inclusive Debate on Solar Geoengineering: A Response to the Proposed Non-Use Agreement, 15 WIREs Climate Change e903 (2024).",
+      "runs": [
+        {
+          "text": "Edward A. Parson et al., "
+        },
+        {
+          "text": "Toward an Evidence-Informed, Responsible, and Inclusive Debate on Solar Geoengineering: A Response to the Proposed Non-Use Agreement",
+          "italic": true
+        },
+        {
+          "text": ", 15 "
+        },
+        {
+          "text": "WIREs Climate Change",
+          "smallCaps": true
+        },
+        {
+          "text": " e903 (2024)."
+        }
+      ]
+    },
+    {
+      "number": 49,
+      "text": "Treaty on Principles Governing the Activities of States in the Exploration and Use of Outer Space, Including the Moon and Other Celestial Bodies arts. I-II, VI, IX, Jan. 27, 1967, 18 U.S.T. 2410, 610 U.N.T.S. 205 [hereinafter Outer Space Treaty].",
+      "runs": [
+        {
+          "text": "Treaty on Principles Governing the Activities of States in the Exploration and Use of Outer Space, Including the Moon and Other Celestial Bodies arts. I-II, VI, IX, Jan. 27, 1967, 18 U.S.T. 2410, 610 U.N.T.S. 205 [hereinafter Outer Space Treaty]."
+        }
+      ]
+    }
+  ]
+}

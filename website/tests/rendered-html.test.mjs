@@ -1,0 +1,1233 @@
+import assert from "node:assert/strict";
+import { execFileSync } from "node:child_process";
+import { existsSync } from "node:fs";
+import { readFile, readdir } from "node:fs/promises";
+import path from "node:path";
+import test from "node:test";
+import { fileURLToPath } from "node:url";
+import sharp from "sharp";
+import { secureStaticHtml } from "../scripts/secure-static-html.mjs";
+import { courseworkGroups } from "../app/lib/content/about.ts";
+import { architectureDiagrams } from "../app/lib/content/architecture-diagrams.ts";
+import { BEAMED_NOTE, NODE, NOTE } from "../app/components/clarinet-hero/shape.ts";
+
+const ROOT = fileURLToPath(new URL("../", import.meta.url));
+const REPOSITORY_ROOT = path.dirname(ROOT.replace(/[\\/]$/u, ""));
+const OUT = path.join(ROOT, "out");
+const SITE_ORIGIN = "https://www.theodoreoy.com";
+const EXPERIENCE_ROUTE = "/experience/";
+const ARTICLES = [
+  ["autonomous-authority-in-space", "Autonomous Authority in Space: Risk Tradeoffs and the Law of Delegation", "", 44],
+  ["small-states-and-the-governance-of-strategic-space-dependence", "Small States and the Governance of Strategic Space Dependence", "", 45],
+  ["who-may-choose-the-lesser-risk", "Who May Choose the Lesser Risk", "Solar Geoengineering and the Legal Duties of Comparison and Continuity", 49],
+  ["mangrove-restoration-and-the-limits-of-compensatory-mitigation", "Mangrove Restoration and the Limits of Compensatory Mitigation", "Lessons from Florida for the Greater Bay Area", 54],
+];
+const ARTICLE_ROUTES = ARTICLES.map(([slug]) => `${EXPERIENCE_ROUTE}${slug}/`);
+const AI_PROJECT_SLUGS = [
+  "large-scale-domain-expert-feedback-governance-and-adaptive-review",
+  "financial-task-design-and-synthetic-data-engineering",
+  "general-reasoning-evaluation-and-layered-verification",
+  "evidence-verification-and-robust-comparison-in-investment-research",
+];
+const EXPERIENCE_DETAIL_SLUGS = new Map([
+  [5, "jiritsu-network"],
+  [6, "euromonitor-international"],
+  [7, "china-construction-bank"],
+  [12, "jones-lang-lasalle"],
+  [13, "hubble-network"],
+  [14, "saif-partners"],
+  [15, "citic-securities"],
+  [16, "ey-parthenon"],
+  [17, "independent-stem-olympiad-training-practice"],
+  [18, "the-high-school-attached-to-hunan-normal-university"],
+]);
+const EXPERIENCE_DETAIL_ROUTES = [...EXPERIENCE_DETAIL_SLUGS.values()].map((slug) => `/experience/${slug}/`);
+const LEGAL_LISTING_TITLES = [
+  "Duke Law School: Space Law and Autonomous Systems Research",
+  "Duke Law School: Space Law and Strategic Infrastructure Research",
+  "Duke Law School: Climate Law and Geoengineering Governance Research",
+  "Duke Law School: Environmental Law and Ecological Restoration Research",
+];
+const DISPLAY_DETAIL_TITLES = new Map([
+  [8, "Autonomous Authority in Space — Risk Tradeoffs and the Law of Delegation"],
+  [10, "Who May Choose the Lesser Risk — Solar Geoengineering and the Legal Duties of Comparison and Continuity"],
+  [11, "Mangrove Restoration and the Limits of Compensatory Mitigation — Lessons from Florida for the Greater Bay Area"],
+]);
+const RESEARCH_SLUGS = [
+  "critical-dependence-stress-for-diversification-gains-under-fixed-marginals",
+  "certified-valuation-of-arithmetic-asian-options",
+  "certified-joint-pricing-errors-in-rough-heston",
+];
+// About's children sit at /<slug>/; every Experience entry at /experience/<slug>/;
+// every post at /blog/<slug>/.
+const RESEARCH_ROUTES = RESEARCH_SLUGS.map((slug) => `/${slug}/`);
+const AI_ROUTES = AI_PROJECT_SLUGS.map((slug) => `${EXPERIENCE_ROUTE}${slug}/`);
+const BLOG_ROUTE = "/blog/";
+const BLOG_DIRECTORY = path.join(ROOT, "content", "blog");
+const BLOG_SLUGS = (await readdir(BLOG_DIRECTORY)).map((file) => file.replace(/\.md$/u, "")).sort();
+const BLOG_POST_ROUTES = BLOG_SLUGS.map((slug) => `${BLOG_ROUTE}${slug}/`);
+const ROUTES = [
+  "/",
+  "/coursework/",
+  ...RESEARCH_ROUTES,
+  "/experience/",
+  ...EXPERIENCE_DETAIL_ROUTES,
+  ...ARTICLE_ROUTES,
+  ...AI_ROUTES,
+  BLOG_ROUTE,
+  ...BLOG_POST_ROUTES,
+];
+const NAVIGATION = [
+  ["About", "/"],
+  ["Experience", "/experience/"],
+  ["Blog", "/blog/"],
+];
+const CANONICAL_ROUTES = ROUTES;
+// Expected category placement is independent of the renderer and route registry.
+const DOMAINS = [
+  ["AI Research and Engineering", "artificial-intelligence", [1, 2, 3, 4]],
+  ["Data Science", "data-science", [5, 6, 7]],
+  ["Legal Research and Policy Analysis", "legal-research-and-policy-analysis", [8, 9, 10, 11]],
+  ["Finance and Consulting", "finance", [12, 13, 14, 15, 16]],
+  ["STEM Academic Competitions and Training", "stem-academic-competitions-and-training", [17, 18]],
+];
+const DETAIL_PARENTS = new Map([
+  ["/coursework/", ["Back to Education", "/#education"]],
+  ...RESEARCH_SLUGS.map((slug) => [
+    `/${slug}/`, ["Back to Selected Research", `/#${slug}`],
+  ]),
+  ...[...EXPERIENCE_DETAIL_SLUGS.values()].map((slug) => [
+    `/experience/${slug}/`, ["Back to Experience", `/experience/#${slug}`],
+  ]),
+  ...[...ARTICLES.map(([slug]) => slug), ...AI_PROJECT_SLUGS].map((slug) => [
+    `${EXPERIENCE_ROUTE}${slug}/`, ["Back to Experience", `/experience/#${slug}`],
+  ]),
+  ...BLOG_SLUGS.map((slug) => [`${BLOG_ROUTE}${slug}/`, ["Back to Blog", `${BLOG_ROUTE}#${slug}`]]),
+]);
+const BLOG_ASSETS = (await Promise.all(BLOG_SLUGS.map((slug) => readFile(path.join(BLOG_DIRECTORY, `${slug}.md`), "utf8"))))
+  .flatMap((post) => post.match(/assets\/blog\/[^\s)"]+/gu) ?? []);
+const EXPECTED_PUBLIC_ASSETS = [
+  ...[...new Set(BLOG_ASSETS)].sort(),
+  "assets/brand/apple-touch-icon.png",
+  "assets/brand/favicon.ico",
+  "assets/brand/lo-mark.svg",
+  "assets/brand/og-1774.jpg",
+  "assets/fonts/InterVariable-Italic.woff2",
+  "assets/fonts/InterVariable.woff2",
+  "assets/fonts/LICENSE.txt",
+  "assets/fonts/SourceSerif4-LICENSE.md",
+  "assets/fonts/SourceSerif4Variable-Italic.woff2",
+  "assets/fonts/SourceSerif4Variable-Roman.woff2",
+  "assets/fonts/inter.css",
+  "assets/fonts/source-serif.css",
+];
+
+function decodeHtml(value) {
+  const named = new Map([["amp", "&"], ["apos", "'"], ["gt", ">"], ["lt", "<"], ["nbsp", " "], ["quot", '"']]);
+  return value.replace(/&(#x[\da-f]+|#\d+|[a-z]+);/giu, (match, entity) => {
+    if (entity.startsWith("#x")) return String.fromCodePoint(Number.parseInt(entity.slice(2), 16));
+    if (entity.startsWith("#")) return String.fromCodePoint(Number.parseInt(entity.slice(1), 10));
+    return named.get(entity.toLowerCase()) ?? match;
+  });
+}
+
+function normalizeSpace(value) {
+  return decodeHtml(value).replace(/\s+/gu, " ").trim();
+}
+
+function stripMarkup(value) {
+  return normalizeSpace(value.replace(/<script\b[\s\S]*?<\/script>/giu, " ").replace(/<style\b[\s\S]*?<\/style>/giu, " ").replace(/<wbr\b[^>]*>/giu, "").replace(/<[^>]+>/gu, " "));
+}
+
+function inlineText(value) {
+  return normalizeSpace(value.replace(/<[^>]+>/gu, ""));
+}
+
+function markdownInlineText(value) {
+  let formula = 0;
+  return normalizeSpace(value
+    .replace(/\$`([^`]*?)`\$|(?<!\\)\$([^$\r\n]+?)(?<!\\)\$/gu, () => ` MATH_${formula++} `)
+    .replace(/\[([^\]]+)\]\((?:https?:\/\/|#)[^\s)]+\)/gu, "$1")
+    .replace(/\*\*([\s\S]+?)\*\*|\*([^*]+)\*|`([^`]+)`/gu, (_, strong, emphasis, code) => strong ?? emphasis ?? code));
+}
+
+function renderedInlineText(value) {
+  let formula = 0;
+  return normalizeSpace(value
+    .replace(/<svg\b[\s\S]*?<\/svg>/giu, "")
+    .replace(/<span\b([^>]*\bdata-research-number\b[^>]*)>[\s\S]*?<\/span>/giu, (whole, attributes) => attribute(attributes, "aria-hidden") === "true" ? "" : whole)
+    .replace(/<math\b[\s\S]*?<\/math>/giu, () => ` MATH_${formula++} `)
+    .replace(/<[^>]+>/gu, ""));
+}
+
+function assertApprovedInline(html, source) {
+  assert.equal(renderedInlineText(html), markdownInlineText(source), "Approved inline prose must survive Markdown rendering exactly");
+  const expected = [...source.matchAll(/\$`([^`]*?)`\$|(?<!\\)\$([^$\r\n]+?)(?<!\\)\$/gu)].map((match) => match[1] ?? match[2]);
+  const actual = [...html.matchAll(/<annotation\b[^>]*encoding="application\/x-tex"[^>]*>([\s\S]*?)<\/annotation>/giu)].map((match) => decodeHtml(match[1]));
+  assert.deepEqual(actual, expected, "Approved inline equations must preserve their exact TeX");
+  const numericExpected = expected.map((tex) => {
+    const compact = tex.replace(/\s+/gu, "");
+    const suffix = compact.endsWith("\\%") ? "%" : "";
+    const value = suffix ? compact.slice(0, -2) : compact;
+    const numeric = /^[+-]?(?:(?:\d{1,3}(?:,\d{3})+|\d+)(?:\.\d+)?|\.\d+)$/u;
+    const scientific = value.match(/^(?:(.+)\\times)?10\^\{([+-]?\d+)\}$/u);
+    const minus = (text) => text.replace(/^-/u, "−");
+    if (scientific && (scientific[1] === undefined || numeric.test(scientific[1]))) {
+      const base = scientific[1] === undefined ? "10" : `${minus(scientific[1])} × 10`;
+      return `${base}<sup>${minus(scientific[2])}</sup>${suffix}`;
+    }
+    return numeric.test(value) ? `${minus(value)}${suffix}` : undefined;
+  });
+  const visibleNumbers = [...html.matchAll(/<span\b([^>]*\bdata-research-number\b[^>]*)>([\s\S]*?)<\/span>/giu)];
+  assert.deepEqual(visibleNumbers.map((match) => decodeHtml(match[2].replace(/<!--[\s\S]*?-->/gu, ""))), numericExpected.filter((number) => number !== undefined), "Visible numeric literals must preserve exact bases, superscripts, and percent suffixes");
+  for (const match of visibleNumbers) assert.equal(attribute(match[1], "aria-hidden"), "true");
+  const vectorCount = openingTags(html, "svg").filter((tag) => attribute(tag, "data-research-svg") !== undefined).length;
+  assert.equal(vectorCount, expected.length - visibleNumbers.length, "All other inline expressions retain their mathematical SVG rendering");
+}
+
+function attribute(tag, name) {
+  const escaped = name.replace(/[.*+?^${}()|[\]\\]/gu, "\\$&");
+  const match = tag.match(new RegExp(`(?:^|\\s)${escaped}\\s*=\\s*(?:"([^"]*)"|'([^']*)'|([^\\s>]+))`, "iu"));
+  return match ? decodeHtml(match[1] ?? match[2] ?? match[3] ?? "") : undefined;
+}
+
+function openingTags(html, tagName) {
+  return html.match(new RegExp(`<${tagName}\\b[^>]*>`, "giu")) ?? [];
+}
+
+function elementHtmlById(html, id) {
+  const escapedId = id.replace(/[.*+?^${}()|[\]\\]/gu, "\\$&");
+  const opening = new RegExp(`<([a-z][\\w:-]*)\\b[^>]*\\bid="${escapedId}"[^>]*>`, "iu").exec(html);
+  assert.ok(opening, `Missing element #${id}`);
+  const end = html.indexOf(`</${opening[1]}>`, opening.index + opening[0].length);
+  assert.ok(end >= 0, `Incomplete element #${id}`);
+  return html.slice(opening.index, end);
+}
+
+function elementsWithClass(html, tagName, className) {
+  return [...html.matchAll(new RegExp(`<${tagName}\\b([^>]*)>([\\s\\S]*?)<\\/${tagName}>`, "giu"))].filter((match) =>
+    (attribute(match[1], "class") ?? "").split(/\s+/u).includes(className),
+  );
+}
+
+function metaContent(html, key, value) {
+  const tag = openingTags(html, "meta").find((candidate) => attribute(candidate, key)?.toLowerCase() === value.toLowerCase());
+  return tag ? attribute(tag, "content") : undefined;
+}
+
+function canonicalUrl(html) {
+  const tag = openingTags(html, "link").find((candidate) => (attribute(candidate, "rel") ?? "").split(/\s+/u).includes("canonical"));
+  return tag ? attribute(tag, "href") : undefined;
+}
+
+function navigationLinks(html, label) {
+  const nav = [...html.matchAll(/<nav\b([^>]*)>([\s\S]*?)<\/nav>/giu)].find((match) => attribute(match[1], "aria-label") === label);
+  assert.ok(nav, `${label} is missing`);
+  return [...nav[2].matchAll(/<a\b([^>]*)>([\s\S]*?)<\/a>/giu)].map((match) => [stripMarkup(match[2]), attribute(match[1], "href")]);
+}
+
+async function approvedExperience() {
+  return JSON.parse(await readFile(path.join(ROOT, "content", "experience-showcase.json"), "utf8")).entries;
+}
+
+function expectedExperiencePresentation(entry) {
+  const legal = entry.categoryId === "03";
+  const ai = entry.categoryId === "01";
+  const organization = legal ? "Duke Law School" : entry.organization;
+  const slug = ai ? AI_PROJECT_SLUGS[entry.id - 1]
+    : legal ? ARTICLES[entry.id - 8][0] : EXPERIENCE_DETAIL_SLUGS.get(entry.id);
+  assert.ok(slug, `Entry ${entry.id} needs an independent expected route`);
+  return {
+    listingTitle: legal ? LEGAL_LISTING_TITLES[entry.id - 8] : entry.categoryId === "01" ? entry.detailTitle : entry.organization,
+    pageTitle: `${organization}: ${DISPLAY_DETAIL_TITLES.get(entry.id) ?? entry.detailTitle}`,
+    path: `${EXPERIENCE_ROUTE}${slug}/`,
+    slug,
+  };
+}
+
+function experienceEntries(html) {
+  return [...html.matchAll(/<article\b([^>]*)>([\s\S]*?)<\/article>/giu)]
+    .filter((match) => attribute(match[1], "data-experience-entry") !== undefined)
+    .map((match) => ({ id: Number(attribute(match[1], "data-experience-entry")), html: match[2] }));
+}
+
+function topLevelListItems(html) {
+  const items = [];
+  let depth = 0;
+  let opening;
+  for (const tag of html.matchAll(/<\/?li\b[^>]*>/giu)) {
+    if (!tag[0].startsWith("</")) {
+      if (depth === 0) opening = tag;
+      depth += 1;
+    } else {
+      depth -= 1;
+      assert.ok(depth >= 0, "List items must have balanced tags");
+      if (depth === 0) items.push({ attributes: opening[0], html: html.slice(opening.index + opening[0].length, tag.index) });
+    }
+  }
+  assert.equal(depth, 0, "List items must remain complete");
+  return items;
+}
+
+function assertExperienceDetails(html, expected) {
+  const metadata = [...html.matchAll(/<dl\b([^>]*)>([\s\S]*?)<\/dl>/giu)]
+    .filter((match) => attribute(match[1], "data-experience-metadata") !== undefined);
+  assert.equal(metadata.length, 1, `Entry ${expected.id} must have one metadata group`);
+  const metadataRows = [...metadata[0][2].matchAll(/<div\b[^>]*>([\s\S]*?)<\/div>/giu)];
+  assert.equal(metadataRows.length, 4, `Entry ${expected.id} must keep Organization, Position, Location, and Dates in separate rows`);
+  for (const [index, row] of metadataRows.entries()) {
+    assert.equal(openingTags(row[1], "dt").length, 1, `Entry ${expected.id}, metadata row ${index + 1}`);
+    assert.equal(openingTags(row[1], "dd").length, 1, `Entry ${expected.id}, metadata row ${index + 1}`);
+  }
+  assert.deepEqual([...metadata[0][2].matchAll(/<d[td]\b[^>]*>([\s\S]*?)<\/d[td]>/giu)].map((match) => stripMarkup(match[1])), [
+    "Organization", expected.categoryId === "03" ? "Duke Law School" : expected.organization, "Position", expected.metadata.position, "Location", expected.metadata.location, "Dates", expected.metadata.dates,
+  ]);
+  const contributions = [...html.matchAll(/<section\b([^>]*)>([\s\S]*?)<\/section>/giu)]
+    .find((match) => attribute(match[1], "data-experience-contributions") === String(expected.id));
+  assert.ok(contributions, `Entry ${expected.id} is missing its contribution block`);
+  assert.equal(stripMarkup(contributions[2].match(/<h[2-6]\b[^>]*>([\s\S]*?)<\/h[2-6]>/iu)?.[1] ?? ""), expected.contributionsLabel);
+  const items = topLevelListItems(contributions[2]);
+  const approvedItems = [...expected.keyContributions, ...expected.notes];
+  assert.equal(items.length, approvedItems.length);
+  for (const [index, item] of items.entries()) {
+    assert.equal(attribute(item.attributes, "data-contribution-item"), String(index), "Top-level contribution order must remain explicit");
+    const nested = [...item.html.matchAll(/<(ul|ol)\b([^>]*\bdata-contribution-details\b[^>]*)>([\s\S]*?)<\/\1>/giu)];
+    const approvedDetails = expected.keyContributionDetails?.[String(index)];
+    assert.equal(nested.length, approvedDetails ? 1 : 0, "Each contribution retains exactly its approved nested detail group");
+    const parentCopy = nested.length ? item.html.slice(0, nested[0].index) + item.html.slice(nested[0].index + nested[0][0].length) : item.html;
+    if (expected.categoryId === "01") assertApprovedInline(parentCopy, approvedItems[index]);
+    else assert.equal(stripMarkup(parentCopy), normalizeSpace(approvedItems[index]));
+    if (approvedDetails) {
+      assert.equal(nested[0][1], approvedDetails.ordered ? "ol" : "ul", "Numbered and bulleted source lists retain their semantics");
+      assert.equal(attribute(nested[0][2], "data-contribution-details"), String(index));
+      const childItems = topLevelListItems(nested[0][3]);
+      assert.equal(childItems.length, approvedDetails.items.length);
+      childItems.forEach((child, childIndex) => {
+        assert.equal(attribute(child.attributes, "data-contribution-detail"), String(childIndex));
+        assertApprovedInline(child.html, approvedDetails.items[childIndex]);
+      });
+    }
+  }
+  assert.equal(openingTags(contributions[2], "p").length, 0, "Supporting notes must be exact trailing list items, not separate paragraphs");
+  if (expected.categoryId === "01") {
+    const disclosure = [...html.matchAll(/<aside\b([^>]*)>([\s\S]*?)<\/aside>/giu)]
+      .find((match) => attribute(match[1], "data-experience-disclosure") !== undefined);
+    assert.equal(disclosure, undefined, "AI detail pages must not repeat the directory's confidentiality disclosure");
+    assert.equal(expected.disclosure, undefined);
+    const context = [...html.matchAll(/<section\b([^>]*)>([\s\S]*?)<\/section>/giu)]
+      .find((match) => attribute(match[1], "data-problem-and-approach") !== undefined);
+    assert.ok(context, "AI pages open with the problem and approach");
+    assert.equal(stripMarkup(context[2].match(/<h2\b[^>]*>([\s\S]*?)<\/h2>/iu)?.[1] ?? ""), expected.problemAndApproach.title);
+    const paragraphs = [...context[2].matchAll(/<p\b[^>]*>([\s\S]*?)<\/p>/giu)];
+    const approvedParagraphs = expected.problemAndApproach.text.split(/\n+/u);
+    assert.equal(paragraphs.length, approvedParagraphs.length);
+    paragraphs.forEach((paragraph, index) => assertApprovedInline(paragraph[1], approvedParagraphs[index]));
+    assert.ok(metadata[0].index < context.index && context.index < contributions.index, "Metadata, problem and approach, and contributions must retain their reading order");
+  }
+}
+
+async function walk(directory) {
+  const files = [];
+  for (const entry of await readdir(directory, { withFileTypes: true })) {
+    const absolute = path.join(directory, entry.name);
+    if (entry.isDirectory()) files.push(...(await walk(absolute)));
+    else files.push(absolute);
+  }
+  return files;
+}
+
+function routeFile(route) {
+  return route === "/" ? path.join(OUT, "index.html") : path.join(OUT, ...route.split("/").filter(Boolean), "index.html");
+}
+
+async function routeHtml(route) {
+  return readFile(routeFile(route), "utf8");
+}
+
+async function exportedRoutes() {
+  return (await walk(OUT))
+    .filter((file) => path.basename(file) === "index.html" && !file.includes(`${path.sep}_next${path.sep}`))
+    .map((file) => {
+      const relative = path.relative(OUT, path.dirname(file)).split(path.sep).join("/");
+      return relative ? `/${relative}/` : "/";
+    })
+    .filter((route) => route !== "/404/" && route !== "/_not-found/")
+    .sort();
+}
+
+test("the static export contains exactly the three sections' pages and the architecture viewer", async () => {
+  assert.deepEqual(await exportedRoutes(), [...ROUTES, "/architecture/"].sort());
+  assert.ok(existsSync(path.join(OUT, "404.html")));
+  for (const route of ROUTES.slice(1)) {
+    assert.ok(route === "/coursework/" || route.startsWith(EXPERIENCE_ROUTE) || route.startsWith(BLOG_ROUTE) || RESEARCH_ROUTES.includes(route), `${route} belongs to About, Experience or Blog`);
+  }
+});
+
+test("the architecture viewer preserves its source with a static security policy", async () => {
+  const source = await readFile(path.join(REPOSITORY_ROOT, "architecture", "index.html"), "utf8");
+  const published = await readFile(path.join(OUT, "architecture", "index.html"), "utf8");
+  assert.equal(published, secureStaticHtml(source));
+  assert.match(published, /<!doctype html>/iu);
+  assert.match(published, /<svg\b/iu);
+});
+
+test("the architecture viewer is shared as the site's pages are", async () => {
+  const viewer = await readFile(path.join(OUT, "architecture", "index.html"), "utf8");
+  const home = await routeHtml("/");
+  const address = `${SITE_ORIGIN}/architecture/`;
+  assert.equal(canonicalUrl(viewer), address);
+  assert.equal(metaContent(viewer, "property", "og:url"), address);
+  const description = metaContent(viewer, "name", "description");
+  assert.match(description ?? "", /^[A-Z][^.]{40,160}\.$/u, "One sentence that states what the page holds");
+  assert.equal(metaContent(viewer, "property", "og:description"), description);
+  assert.equal(metaContent(viewer, "name", "twitter:description"), description);
+  const title = viewer.match(/<title>([^<]+) \| Theodore Ouyang<\/title>/u)?.[1];
+  assert.equal(title, "Website Architecture");
+  for (const key of ["og:title", "twitter:title"]) assert.equal(metaContent(viewer, key.startsWith("og:") ? "property" : "name", key), title);
+  for (const key of ["og:site_name", "og:image", "og:image:width", "og:image:height", "og:image:alt", "og:type"]) {
+    assert.ok(metaContent(home, "property", key), key);
+    assert.equal(metaContent(viewer, "property", key), metaContent(home, "property", key), `${key} is the site's own`);
+  }
+  for (const key of ["twitter:card", "twitter:image"]) assert.equal(metaContent(viewer, "name", key), metaContent(home, "name", key), `${key} is the site's own`);
+});
+
+test("every route keeps canonical metadata, CSP, and navigation appropriate to its page level", async () => {
+  const requiredCsp = [
+    "default-src 'self'",
+    "script-src 'self' 'sha256-",
+    "script-src-attr 'none'",
+    "frame-src 'none'",
+    "object-src 'none'",
+    "base-uri 'self'",
+    "form-action 'none'",
+  ];
+  for (const route of ROUTES) {
+    const html = await routeHtml(route);
+    const absolute = new URL(route, SITE_ORIGIN).toString();
+    assert.equal(canonicalUrl(html), absolute);
+    assert.equal(metaContent(html, "property", "og:url"), absolute);
+    assert.equal(metaContent(html, "name", "theme-color"), "#f7f6f5");
+    const parent = DETAIL_PARENTS.get(route);
+    assert.deepEqual(navigationLinks(html, parent ? "Parent navigation" : "Primary navigation"), parent ? [parent] : NAVIGATION);
+    const csp = metaContent(html, "http-equiv", "Content-Security-Policy") ?? "";
+    for (const directive of requiredCsp) assert.ok(csp.includes(directive), `${route} lost ${directive}`);
+  }
+});
+
+test("every detail page keeps its wordmark and a direct parent link outside the mobile menu", async () => {
+  assert.equal(DETAIL_PARENTS.size, 22 + BLOG_SLUGS.length);
+  const targetPages = new Map();
+  for (const [route, expectedParent] of DETAIL_PARENTS) {
+    const html = await routeHtml(route);
+    const parentNavs = elementsWithClass(html, "nav", "parent-nav");
+    assert.equal(parentNavs.length, 1, `${route}: one parent navigation is required.`);
+    assert.equal(attribute(parentNavs[0][1], "aria-label"), "Parent navigation");
+    assert.deepEqual(navigationLinks(html, "Parent navigation"), [expectedParent]);
+    assert.equal(elementsWithClass(html, "nav", "primary-nav").length, 0, `${route}: details replace the primary navigation.`);
+    assert.equal(elementsWithClass(html, "button", "menu-toggle").length, 0, `${route}: returning to the parent must not require opening a menu.`);
+    assert.ok(!openingTags(html, "div").some((tag) => attribute(tag, "id") === "site-menu"));
+    const parentLinks = elementsWithClass(parentNavs[0][2], "a", "parent-link");
+    assert.equal(parentLinks.length, 1);
+    assert.doesNotMatch(parentLinks[0][1], /\bonclick\s*=|role="button"/iu, "Parent navigation must be a native link.");
+    const arrows = openingTags(parentLinks[0][2], "svg");
+    assert.equal(arrows.length, 1);
+    assert.equal(attribute(arrows[0], "aria-hidden"), "true", "The arrow is decorative; the parent link has a text name.");
+    const wordmarks = elementsWithClass(html, "a", "wordmark");
+    assert.equal(wordmarks.length, 1);
+    assert.equal(attribute(wordmarks[0][1], "href"), "/");
+    assert.equal(attribute(wordmarks[0][1], "aria-label"), "Theodore Ouyang home");
+    assert.equal(stripMarkup(wordmarks[0][2]), "Theodore Ouyang");
+    assert.ok(html.indexOf(parentNavs[0][0]) < html.indexOf("<main"), `${route}: parent navigation belongs to the persistent rail.`);
+    const main = html.match(/<main\b[^>]*>([\s\S]*?)<\/main>/u)?.[1] ?? "";
+    assert.equal(elementsWithClass(main.slice(0, main.indexOf("<h1")), "a", "back-link").length, 0, `${route}: the page introduction must not repeat the rail's return action.`);
+    for (const header of main.matchAll(/<header\b[^>]*>([\s\S]*?)<\/header>/gu)) {
+      assert.equal(elementsWithClass(header[1], "a", "back-link").length, 0, `${route}: the reading header must not repeat the rail's return action.`);
+    }
+    const target = new URL(expectedParent[1], SITE_ORIGIN);
+    if (!targetPages.has(target.pathname)) targetPages.set(target.pathname, await routeHtml(target.pathname));
+    assert.ok(target.hash, `${route}: return to the originating section or entry.`);
+    assert.ok(targetPages.get(target.pathname).includes(`id="${decodeURIComponent(target.hash.slice(1))}"`), `${route}: the parent link's anchor must exist in the static export.`);
+  }
+  for (const route of ROUTES.filter((candidate) => !DETAIL_PARENTS.has(candidate))) {
+    const html = await routeHtml(route);
+    assert.deepEqual(navigationLinks(html, "Primary navigation"), NAVIGATION);
+    assert.equal(elementsWithClass(html, "nav", "parent-nav").length, 0, `${route}: top-level pages carry the primary navigation.`);
+  }
+});
+
+test("About opens with its accessible clarinet hero before the profile", async () => {
+  const home = await routeHtml("/");
+  assert.equal(openingTags(home, "canvas").length, 1);
+  assert.equal(attribute(openingTags(home, "canvas")[0], "aria-hidden"), "true");
+  assert.ok(home.indexOf("<canvas") < home.indexOf('id="home-profile"'));
+  const hero = home.match(/<section\b[^>]*aria-labelledby="hero-name"[^>]*>([\s\S]*?)<\/section>/u)?.[1];
+  assert.ok(hero, "The hero is a named section.");
+  assert.equal(openingTags(hero, "a").length, 0, "The hero has no call-to-action link.");
+  assert.equal(openingTags(hero, "button").length, 0, "The hero has no playback control.");
+  const heading = home.match(/<h1\b[^>]*>([\s\S]*?)<\/h1>/u);
+  assert.ok(heading);
+  assert.equal(openingTags(home, "h1").length, 1);
+  assert.equal(stripMarkup(heading[1]), "Theodore Ouyang");
+  assert.match(stripMarkup(hero), /Duke Alumnus/u);
+  assert.match(stripMarkup(hero), /Sequoia Fellow/u);
+  const cornerTags = [...hero.matchAll(/<[a-z][\w:-]*\b[^>]*>/gu)]
+    .map(match => match[0]).filter(tag => (attribute(tag, "class") ?? "").split(/\s+/u)
+      .some(name => /_corner(?:TL|TR|BL|BR)$/u.test(name)));
+  assert.equal(cornerTags.length, 4, "All four decorative corner marks are in the HTML.");
+  for (const tag of cornerTags) assert.equal(attribute(tag, "aria-hidden"), "true");
+  assert.ok(openingTags(home, "svg").some((tag) => attribute(tag, "viewBox") === "0 0 1286 1223"),
+    "The clarinet has an inline SVG fallback at the stage's aspect ratio.");
+  const fallback = hero.match(/<svg\b[^>]*>[\s\S]*?<\/svg>/u)?.[0];
+  assert.ok(fallback);
+  assert.doesNotMatch(fallback, /<(?:linearGradient|radialGradient|image)\b/u,
+    "The loading and no-JavaScript fallback must not flash a solid gradient or bitmap.");
+  const patterns = [...fallback.matchAll(/<pattern\b([^>]*)>([\s\S]*?)<\/pattern>/gu)];
+  assert.ok(patterns.length >= 2, "The fallback uses transparent dot patterns for its materials.");
+  const patternIds = new Set();
+  for (const [, attributes, body] of patterns) {
+    patternIds.add(attribute(attributes, "id"));
+    const width = Number(attribute(attributes, "width"));
+    const height = Number(attribute(attributes, "height"));
+    assert.equal(attribute(attributes, "patternUnits"), "userSpaceOnUse");
+    const dots = openingTags(body, "rect");
+    assert.equal(dots.length, 1);
+    assert.ok(Number(attribute(dots[0], "width")) > 0 && Number(attribute(dots[0], "width")) < width);
+    assert.ok(Number(attribute(dots[0], "height")) > 0 && Number(attribute(dots[0], "height")) < height,
+      "Each tile leaves a transparent gap between particles.");
+  }
+  const visibleFallback = fallback.replace(/<defs\b[^>]*>[\s\S]*?<\/defs>/gu, "");
+  const visibleGeometry = ["path", "ellipse", "rect"].flatMap(name => openingTags(visibleFallback, name));
+  const accents = visibleGeometry.filter(tag => attribute(tag, "data-clarinet-accent") !== undefined);
+  assert.equal(accents.length, 5, "Only four notes and the single blue node may be solid.");
+  const notes = accents.filter(tag => attribute(tag, "data-clarinet-accent") === "note");
+  const nodes = accents.filter(tag => attribute(tag, "data-clarinet-accent") === "node");
+  assert.equal(notes.length, 4); assert.equal(nodes.length, 1);
+  assert.equal(notes.filter(tag => attribute(tag, "d") === BEAMED_NOTE).length, 1);
+  for (const tag of notes) {
+    assert.match(tag, /^<path\b/u);
+    assert.ok([NOTE, BEAMED_NOTE].includes(attribute(tag, "d")));
+    assert.ok(["currentColor", "#2200ff"].includes(attribute(tag, "fill")));
+  }
+  assert.match(nodes[0], /^<ellipse\b/u);
+  assert.equal(attribute(nodes[0], "fill"), "#2200ff");
+  assert.equal(Number(attribute(nodes[0], "rx")), NODE.rx);
+  assert.equal(Number(attribute(nodes[0], "ry")), NODE.ry);
+  for (const tag of accents) assert.ok([undefined, "none"].includes(attribute(tag, "stroke")));
+  for (const tag of visibleGeometry.filter(tag => attribute(tag, "data-clarinet-accent") === undefined)) {
+    for (const paint of ["fill", "stroke"]) {
+      const value = attribute(tag, paint);
+      if (paint === "stroke" && value === undefined) continue;
+      assert.ok(value === "none" || patternIds.has(value?.match(/^url\(#([^)]*)\)$/u)?.[1]),
+        "Instrument, keywork and arc geometry must paint only separated dots, with no solid underlay or outline.");
+    }
+  }
+  const ringDots = openingTags(visibleFallback, "path").find(tag => attribute(tag, "fill-rule") === "evenodd");
+  assert.ok(ringDots, "The fallback draws the six ring keys and the bell rim as point fields.");
+  assert.equal((attribute(ringDots, "d").match(/Z/gu) ?? []).length, 14,
+    "Six ring keys and one bell rim each have an inner and outer contour.");
+  const profileHeading = home.match(/<h2\b[^>]*id="home-heading"[^>]*>([\s\S]*?)<\/h2>/u);
+  assert.equal(stripMarkup(profileHeading?.[1] ?? ""), "Thinking Mathematically Working in AI");
+  assert.match(home, /<title>Theodore Ouyang<\/title>/u);
+  assert.match(home, /id="home-profile"/u);
+  for (const index of ["01", "02", "03", "04", "05"]) {
+    assert.match(home, new RegExp(`aria-hidden="true"[^>]*>${index}<`, "u"));
+  }
+  assert.ok(stripMarkup(home).includes("Mathematics is how I understand a problem. I want to know which assumptions underlie a conclusion, what happens when they change, and where intuition stops being reliable."));
+  assert.ok(stripMarkup(home).includes("My work makes high-stakes conclusions verifiable: certified error bounds in derivative pricing, layered verification in frontier AI evaluation, and evidence standards for delegating authority to autonomous systems."));
+  assert.ok(decodeHtml(stripMarkup(home)).includes("Finance and AI are at its center. From 2023 to 2026 I designed review and verification systems with a leading foundation model developer, a frontier AI lab, and a leading global alternative asset manager. I also build systems of my own: a language model trained from scratch for financial research, and four gates that decide which evaluation feedback may change an agent."));
+  const profileLinks = [...elementHtmlById(home, "home-profile").matchAll(/<a\b([^>]*)>([\s\S]*?)<\/a>/gu)];
+  assert.deepEqual(profileLinks.map((match) => [decodeHtml(stripMarkup(match[2])), attribute(match[1], "href")]), [
+    ["a language model", "https://github.com/130U/RESEARCH-Financial-Large-Language-Model"],
+    ["four gates", "https://github.com/130U/RESEARCH-Agent-Evaluation-Methodology"],
+  ]);
+  for (const id of ["selected-research", "education", "coursework", "fellowship", "contact"]) {
+    assert.match(home, new RegExp(`id="${id}"`, "u"));
+  }
+  const fellowship = elementHtmlById(home, "fellowship");
+  assert.equal(stripMarkup(fellowship.match(/<h2\b[^>]*>([\s\S]*?)<\/h2>/u)?.[1] ?? ""), "Fellowship");
+  assert.equal(stripMarkup(fellowship.match(/<h3\b[^>]*>([\s\S]*?)<\/h3>/u)?.[1] ?? ""), "Sequoia Fellow");
+  assert.deepEqual(openingTags(fellowship, "a").map((tag) => attribute(tag, "href")), ["https://www.hongshan.com/"]);
+  const fellowshipText = decodeHtml(stripMarkup(fellowship));
+  assert.ok(fellowshipText.includes("the venture firm formerly known as Sequoia China, runs with its portfolio companies. It selects people early in their careers by application and brings them into the firm's circle of founders, mentors, and peers in technology and entrepreneurship. Fellows stay on as an alumni community, with access to the firm's closed-door events and industry exchanges."));
+  for (const tag of [...profileLinks.map((match) => `<a${match[1]}>`), ...openingTags(fellowship, "a")]) {
+    assert.equal(attribute(tag, "target"), "_blank");
+    assert.equal(attribute(tag, "rel"), "noopener noreferrer");
+  }
+  assert.match(home, /href="mailto:10@alumni\.duke\.edu"/u);
+  assert.match(home, /href="https:\/\/github\.com\/130U"/u);
+  const contact = elementHtmlById(home, "contact");
+  assert.deepEqual(openingTags(contact, "a").map((tag) => attribute(tag, "href")), [
+    "mailto:10@alumni.duke.edu", "https://github.com/130U", "https://x.com/D3rfr31schutz",
+  ]);
+  assert.ok(stripMarkup(contact).includes("@D3rfr31schutz"));
+  assert.equal(stripMarkup(contact.match(/<h2\b[^>]*>([\s\S]*?)<\/h2>/u)?.[1] ?? ""), "Contact");
+  assert.equal(openingTags(home, "img").length, 0);
+  for (const route of ROUTES.slice(1)) assert.equal(openingTags(await routeHtml(route), "canvas").length, 0);
+});
+
+test("structured data names the author, his manuscript name and both public profiles", async () => {
+  for (const route of ["/", "/experience/", BLOG_ROUTE]) {
+    const html = await routeHtml(route);
+    const scripts = [...html.matchAll(/<script\b([^>]*)>([\s\S]*?)<\/script>/giu)].filter((match) => attribute(match[1], "type") === "application/ld+json");
+    assert.equal(scripts.length, 1, `${route}: one Person record.`);
+    const person = JSON.parse(scripts[0][2]);
+    assert.equal(person["@type"], "Person");
+    assert.equal(person.name, "Theodore Ouyang");
+    assert.equal(person.alternateName, "Letao Ouyang");
+    assert.equal(person.url, `${SITE_ORIGIN}/`);
+    assert.deepEqual(person.sameAs, ["https://github.com/130U", "https://x.com/D3rfr31schutz"]);
+  }
+});
+
+test("About research opens each complete paper through an explicit Read More link", async () => {
+  const about = await routeHtml("/");
+  assert.ok(about.indexOf('id="selected-research"') < about.indexOf('id="education"'));
+  assert.ok(about.indexOf('id="education"') < about.indexOf('id="coursework"'));
+  const researchEntries = [...about.matchAll(/<article\b[^>]*id="([^"]+)"[^>]*>[\s\S]*?<\/article>/gu)].map((match) => match[1]).filter((id) => id.startsWith("critical-dependence-") || id.startsWith("certified-"));
+  assert.deepEqual(researchEntries, ["critical-dependence-stress-for-diversification-gains-under-fixed-marginals", "certified-valuation-of-arithmetic-asian-options", "certified-joint-pricing-errors-in-rough-heston"]);
+  for (const [slug, title, description, tables, sections, repository] of [
+    ["critical-dependence-stress-for-diversification-gains-under-fixed-marginals", "Critical Dependence Stress for Diversification Gains under Fixed Marginals", "I prove that the critical stress budget is quadratic in the trade size", 0, 5, "RESEARCH-Critical-Dependence-Stress-for-Diversification-Gains-under-Fixed-Marginals"],
+    ["certified-valuation-of-arithmetic-asian-options", "Certified Valuation of Arithmetic Asian Options: The Cost of Exercising on the Geometric Average", "the bound is below a hundredth of a cent per barrel", 13, 9, "RESEARCH-Certified-Valuation-of-Arithmetic-Asian-Options"],
+    ["certified-joint-pricing-errors-in-rough-heston", "Certified Joint Pricing Errors in Rough Heston", "netting the legs certifies a half-point tolerance for all 28 six-month spreads, butterflies, and baskets tested", 10, 8, "RESEARCH-Certified-Joint-Pricing-Errors-in-Rough-Heston"],
+  ]) {
+    assert.match(about, new RegExp(`id="${slug}"`, "u"));
+    const headings = [...about.matchAll(/<h3\b[^>]*>([\s\S]*?)<\/h3>/gu)].map((match) => stripMarkup(match[1]));
+    assert.ok(headings.includes(title));
+    assert.ok(stripMarkup(about).includes(description));
+    const entry = about.match(new RegExp(`<article\\b[^>]*id="${slug}"[^>]*>([\\s\\S]*?)</article>`, "u"))?.[1] ?? "";
+    const researchLink = entry.match(/<a\b([^>]*)>([\s\S]*?)<\/a>/u);
+    assert.equal(attribute(researchLink?.[1] ?? "", "href"), `/${slug}/`);
+    assert.equal(stripMarkup(researchLink?.[2] ?? ""), "Read More");
+    assert.equal(attribute(researchLink?.[1] ?? "", "aria-label"), `Read more about ${title}`);
+    assert.equal(stripMarkup(elementHtmlById(entry, `${slug}-title`)), title);
+    assert.doesNotMatch(researchLink?.[2] ?? "", /<(?:h3|p)\b/u,
+      "The manuscript action is separate from its static title and summary.");
+    assert.doesNotMatch(researchLink?.[1] ?? "", /\bonclick\s*=|role="button"/iu,
+      "Read More is a native navigation link.");
+    assert.equal(openingTags(researchLink?.[2] ?? "", "svg").length, 1);
+    assert.equal(attribute(openingTags(researchLink?.[2] ?? "", "svg")[0], "aria-hidden"), "true");
+    assert.equal(openingTags(entry, "a").length, 1);
+    const article = await routeHtml(`/${slug}/`);
+    assert.equal(openingTags(article, "h1").length, 1);
+    const articleHeader = article.match(/<article\b[^>]*>\s*<header\b[^>]*>([\s\S]*?)<\/header>/u)?.[1] ?? "";
+    assert.equal(stripMarkup(articleHeader), `${title} GitHub Full Manuscript`, "Selected Research headers contain the title and source links; return navigation belongs in the rail.");
+    // The manuscript's tables, each carrying its block; a table of mathematics is a display.
+    assert.equal(openingTags(article, "table").filter((tag) => attribute(tag, "data-research-block-type") === "table").length, tables);
+    assert.deepEqual(openingTags(article, "h2").map((tag) => attribute(tag, "data-source-number")).filter(Boolean), Array.from({ length: sections }, (_, index) => String(index + 1)), `${slug}: every numbered main chapter is rendered once and in order.`);
+    assert.match(article, /aria-label="Article contents"/u);
+    assert.match(article, /This page includes the complete (?:main text and references|abstract, five main sections)/u);
+    assert.match(article, new RegExp(`href="/#${slug}"`, "u"));
+    assert.deepEqual(navigationLinks(article, "Parent navigation"), [["Back to Selected Research", `/#${slug}`]]);
+    const githubLink = openingTags(articleHeader, "a").find((tag) => attribute(tag, "href") === `https://github.com/130U/${repository}`);
+    assert.ok(githubLink, `${slug}: the article header links to its actual source repository.`);
+  }
+});
+
+test("Experience presents five numbered sections and all eighteen approved entries in order", async () => {
+  const html = await routeHtml("/experience/");
+  const expected = await approvedExperience();
+  assert.deepEqual(expected.map(({ id }) => id), Array.from({ length: 18 }, (_, index) => index + 1));
+  assert.deepEqual(expected.map(({ keyContributions }) => keyContributions.length), [9, 6, 8, 7, 8, 7, 6, 6, 6, 5, 5, 7, 5, 6, 1, 1, 2, 4]);
+  assert.deepEqual(experienceEntries(html).map(({ id }) => id), expected.map(({ id }) => id));
+  assert.equal(openingTags(html, "h1").length, 1);
+  assert.match(html, /<h1>Experience: Areas of Focus<\/h1>/u);
+  const directory = [...html.matchAll(/<nav\b([^>]*)>([\s\S]*?)<\/nav>/giu)]
+    .find((match) => attribute(match[1], "aria-label") === "Experience sections");
+  assert.ok(directory);
+  const sectionLinks = [...directory[2].matchAll(/<a\b([^>]*)>([\s\S]*?)<\/a>/giu)];
+  assert.deepEqual(sectionLinks.map((match) => attribute(match[1], "href")), DOMAINS.map(([, slug]) => `#${slug}`));
+  for (const [index, [name, slug, ids]] of DOMAINS.entries()) {
+    const number = String(index + 1).padStart(2, "0");
+    const directoryLabels = [...sectionLinks[index][2].matchAll(/<span\b([^>]*)>([\s\S]*?)<\/span>/gu)];
+    assert.deepEqual(directoryLabels.map((match) => stripMarkup(match[2])), [number, name, "View"]);
+    assert.equal(attribute(directoryLabels[0][1], "aria-hidden"), "true", "The decorative number must not lengthen the section link's accessible name.");
+    assert.notEqual(attribute(directoryLabels[1][1], "aria-hidden"), "true", "The domain title supplies the section link's accessible name.");
+    assert.equal(attribute(directoryLabels[2][1], "aria-hidden"), "true", "The repeated visual action must not lengthen each section link's accessible name.");
+    assert.ok(openingTags(html, "section").some((tag) => attribute(tag, "id") === slug));
+    assert.equal(stripMarkup(elementHtmlById(html, `${slug}-heading`)), name);
+    assert.deepEqual(expected.filter(({ categoryId }) => categoryId === String(index + 1).padStart(2, "0")).map(({ id }) => id), ids);
+  }
+  const main = html.match(/<main\b[^>]*>([\s\S]*?)<\/main>/u)?.[1] ?? "";
+  const approvedDisclosure = JSON.parse(await readFile(path.join(ROOT, "content", "experience-showcase.json"), "utf8")).categories.find(({ id }) => id === "01").disclosure;
+  const disclosure = [...html.matchAll(/<aside\b([^>]*)>([\s\S]*?)<\/aside>/giu)].find((match) => attribute(match[1], "data-experience-disclosure") !== undefined);
+  assert.ok(disclosure, "The AI section must introduce its approved confidentiality disclosure");
+  assert.equal(stripMarkup(disclosure[2].match(/<h3\b[^>]*>([\s\S]*?)<\/h3>/iu)?.[1] ?? ""), approvedDisclosure.title);
+  assertApprovedInline(disclosure[2].match(/<p\b[^>]*>([\s\S]*?)<\/p>/iu)?.[1] ?? "", approvedDisclosure.text);
+  assert.doesNotMatch(stripMarkup(main), /\p{Script=Han}/u, "The public Experience copy must be English only");
+});
+
+test("all eighteen approved Experience entries use institution titles and real links to complete detail pages", async () => {
+  const html = await routeHtml("/experience/");
+  const expected = await approvedExperience();
+  const entries = experienceEntries(html);
+  assert.equal(openingTags(html, "details").length, 0, "Experience must not expand entries inline");
+  assert.equal(openingTags(html, "summary").length, 0);
+  assert.doesNotMatch(html, /data-experience-metadata|data-experience-contributions/u, "Detail content belongs on the linked page");
+  const destinations = [];
+  for (const entry of expected) {
+    const presentation = expectedExperiencePresentation(entry);
+    const rendered = entries.find(({ id }) => id === entry.id).html;
+    const summaries = [...rendered.matchAll(/<p\b([^>]*)>([\s\S]*?)<\/p>/giu)]
+      .filter((match) => attribute(match[1], "data-experience-summary") !== undefined);
+    assert.equal(summaries.length, 1);
+    if (entry.categoryId === "01") assertApprovedInline(summaries[0][2], entry.summary);
+    else assert.equal(stripMarkup(summaries[0][2]), normalizeSpace(entry.summary));
+    assert.equal(openingTags(rendered, "p").length, 1, `Entry ${entry.id} must have one outer summary`);
+    assert.equal(stripMarkup(rendered.match(/<h3\b[^>]*>([\s\S]*?)<\/h3>/u)?.[1] ?? ""), presentation.listingTitle);
+    const links = [...rendered.matchAll(/<a\b([^>]*)>([\s\S]*?)<\/a>/giu)];
+    assert.equal(links.length, 1, `Entry ${entry.id} needs one Read More action`);
+    assert.equal(attribute(links[0][1], "href"), presentation.path);
+    assert.equal(stripMarkup(links[0][2]), entry.readMoreLabel);
+    assert.doesNotMatch(links[0][1], /\bonclick\s*=|role="button"/iu, "Read More must be a native link");
+    destinations.push(presentation.path);
+
+    const detailPage = await routeHtml(presentation.path);
+    assert.equal(openingTags(detailPage, "h1").length, 1);
+    assert.equal(stripMarkup(detailPage.match(/<h1\b[^>]*>([\s\S]*?)<\/h1>/u)?.[1] ?? ""), entry.detailTitle);
+    assert.equal((presentation.pageTitle.match(/:/gu) ?? []).length, 1, "Only the institution separator may be a colon");
+    assertExperienceDetails(detailPage, entry);
+    assert.ok(detailPage.indexOf("data-experience-metadata") < detailPage.indexOf("data-experience-contributions"));
+    const returns = openingTags(detailPage, "a").filter((tag) => attribute(tag, "href") === `/experience/#${presentation.slug}`);
+    assert.equal(returns.length, 2, `Entry ${entry.id} needs rail and footer links to its listing anchor`);
+    assert.ok(openingTags(html, "article").some((tag) => attribute(tag, "id") === presentation.slug));
+    assert.deepEqual(navigationLinks(detailPage, "Parent navigation"), [["Back to Experience", `/experience/#${presentation.slug}`]]);
+  }
+  assert.equal(new Set(destinations).size, 18);
+  assert.deepEqual([...destinations].sort(), [...AI_ROUTES, ...ARTICLE_ROUTES, ...EXPERIENCE_DETAIL_ROUTES].sort(), "Every entry opens at /experience/<slug>/");
+  assert.equal(expected.find(({ id }) => id === 16).metadata.location, "Beijing, China");
+  assert.deepEqual(expected.filter(({ categoryId }) => ["02", "04", "05"].includes(categoryId)).map(({ keyContributions }) => keyContributions.length), [8, 7, 6, 7, 5, 6, 1, 1, 2, 4]);
+  assert.equal(expected.find(({ id }) => id === 18).notes.length, 1, "The school-program context must survive the detailed-bullet merge");
+  assert.deepEqual(expected.filter(({ keyContributionDetails }) => keyContributionDetails).map((entry) => ({
+    id: entry.id,
+    groups: Object.entries(entry.keyContributionDetails).map(([index, detail]) => ({ index, ordered: detail.ordered, count: detail.items.length })),
+  })), [
+    { id: 2, groups: [{ index: "4", ordered: false, count: 4 }] },
+  ], "The four nested contributions must stay under their parent item");
+});
+
+// An organization is a firm or institution's name in its own words; a team,
+// desk or division it worked in belongs to the position, after a comma.
+const UNIT_WORDS = /\b(?:Team|Desk|Division|Group|Department|Workstream)\b/u;
+const lowercaseWords = (name) => name.normalize("NFKD").replace(/\p{M}/gu, "").toLowerCase().replace(/[^a-z0-9]+/gu, "-").replace(/^-|-$/gu, "");
+
+test("every Experience organization is a firm or institution, and every page address follows one form", async () => {
+  const entries = await approvedExperience();
+  for (const entry of entries) {
+    assert.doesNotMatch(entry.organization, UNIT_WORDS, `Entry ${entry.id}: a team belongs in the position`);
+    assert.doesNotMatch(entry.organization, /:/u, `Entry ${entry.id}: the organization is a name, not a title`);
+    if (entry.categoryId === "03") assert.equal(entry.organization, "Duke Law School");
+    const [role] = entry.metadata.position.split(", ");
+    assert.doesNotMatch(role, UNIT_WORDS, `Entry ${entry.id}: the role comes first, its unit after the comma`);
+    // A unit the summary names as the one the work was for ("the Agriculture
+    // Research Group's reports") stands in the position.
+    if (["01", "03"].includes(entry.categoryId)) continue;
+    for (const [, unit] of entry.summary.matchAll(/\bthe ((?:[A-Z][\w-]*\s)+(?:Team|Desk|Division|Group|Department))\b/gu)) {
+      assert.ok(entry.metadata.position.endsWith(`, ${unit}`), `Entry ${entry.id}: ${unit} follows the role in Position`);
+    }
+  }
+  assert.equal(entries.find(({ id }) => id === 12).metadata.position, "Summer Intern, Capital Markets Team");
+  assert.equal(entries.find(({ id }) => id === 15).metadata.position, "Equity Research Intern, Agriculture Research Group");
+  // An entry's own page is its organization's name in lowercase words; an AI or
+  // legal article keeps its title's words, as its repository and PDF do.
+  for (const [id, slug] of EXPERIENCE_DETAIL_SLUGS) {
+    assert.equal(slug, lowercaseWords(entries.find((entry) => entry.id === id).organization), `Entry ${id}`);
+  }
+  for (const route of ROUTES) assert.match(route, /^\/(?:[a-z0-9]+(?:-[a-z0-9]+)*\/)*$/u, `${route}: an address is lowercase words joined by hyphens`);
+});
+
+test("every site address written anywhere in the repository is a published page", async () => {
+  const files = execFileSync("git", ["ls-files", "-z"], { cwd: REPOSITORY_ROOT, encoding: "utf8" }).split("\0")
+    .filter((file) => /\.(?:md|mjs|ts|tsx|json|html|yml|cff)$/u.test(file));
+  const published = new Set([...ROUTES, "/architecture/"]);
+  for (const file of files) {
+    const text = await readFile(path.join(REPOSITORY_ROOT, file), "utf8");
+    for (const [address] of text.matchAll(/(?<![\w./-])\/experience\/[a-z0-9]+(?:-[a-z0-9]+)*\//gu)) {
+      assert.ok(published.has(address), `${file} names ${address}, which is no page`);
+    }
+    // The tests' own fixtures build pages that are not the site's.
+    if (file.startsWith("website/tests/")) continue;
+    for (const [, link] of text.matchAll(/https:\/\/www\.theodoreoy\.com(\/[^\s)"'<>#?\\`\]]*)/gu)) {
+      const address = link.replace(/[.,;:]+$/u, "");
+      // An asset, a work published at its repository's address, or an address
+      // a script composes from a registered slug is checked where it is built.
+      if (/^\/(?:assets|BLOG-)[^/]*\//u.test(address) || /\.[a-z0-9]+$/u.test(address) || address.includes("${")) continue;
+      assert.ok(published.has(address), `${file} links ${address}, which is no page`);
+    }
+  }
+});
+
+test("the ten nonresearch detail routes keep metadata in a labeled record strip", async () => {
+  const metadataStyles = (await readFile(path.join(ROOT, "app", "components", "experience", "Experience.module.css"), "utf8")).replace(/\r\n?/gu, "\n");
+  assert.match(metadataStyles, /(?:^|\n)\.metadata\s*\{[^}]*grid-template-columns:\s*repeat\(2,\s*minmax\(0,\s*1fr\)\)[^}]*border:\s*1px solid var\(--frame\)/u, "The strip sets two fields per row in one frame");
+  assert.match(metadataStyles, /\.metadata > div:nth-child\(2\)\s*\{\s*background:\s*var\(--dash-y\)/u, "Dashed hairlines divide the fields");
+  assert.match(metadataStyles, /@container \(width >= 53rem\) \{[^@]*?\.metadata\[data-layout="row"\]\s*\{\s*grid-template-columns:\s*repeat\(4,\s*minmax\(min-content,\s*auto\)\)/u, "Short values stand four across where the strip holds each on one line");
+  assert.match(metadataStyles, /@media \(width < 540px\) \{\s*\.metadata\s*\{\s*grid-template-columns:\s*minmax\(0,\s*1fr\)/u, "Phones stack the fields");
+  assert.match(metadataStyles, /\.metadata dt\s*\{[^}]*font-size:\s*var\(--type-label\)/u, "Field labels use the label role");
+  assert.match(metadataStyles, /\.metadata dd\s*\{[^}]*font-family:\s*var\(--font-prose\)[^}]*font-size:\s*var\(--type-reading\)/u, "Field values use the reading face and size");
+  for (const route of EXPERIENCE_DETAIL_ROUTES) {
+    const html = await routeHtml(route);
+    assert.equal(openingTags(html, "article").length, 1);
+    assert.equal(openingTags(html, "details").length, 0);
+    assert.match(html, /<h1\b[^>]*\bid="experience-title"/u);
+    assert.match(html, /<a class="top-link" href="#experience-title">Back to Top<\/a>/u, "Back to Top shares the footer action's hover and focus");
+    const layout = attribute(html.match(/<dl\b([^>]*\bdata-experience-metadata\b[^>]*)>/u)?.[1] ?? "", "data-layout");
+    const expectedLayout = ["/experience/ey-parthenon/", "/experience/saif-partners/"].includes(route) ? "row"
+      : ["/experience/citic-securities/", "/experience/hubble-network/", "/experience/independent-stem-olympiad-training-practice/", "/experience/the-high-school-attached-to-hunan-normal-university/"].includes(route) ? "long" : "pairs";
+    assert.equal(layout, expectedLayout, `${route}: only entries whose values fit one row of the strip set four across, and only a long value stacks a narrow strip`);
+    assert.equal(canonicalUrl(html), `${SITE_ORIGIN}${route}`);
+    const main = html.match(/<main\b[^>]*>([\s\S]*?)<\/main>/u)?.[1] ?? "";
+    assert.doesNotMatch(stripMarkup(main), /\p{Script=Han}/u);
+    assert.doesNotMatch(main, /data-experience-summary/u, "The outer summary must not be repeated on the detail page");
+  }
+});
+
+test("each AI and legal article opens with one logic architecture diagram", async () => {
+  const routes = [...AI_PROJECT_SLUGS.map((slug) => `${EXPERIENCE_ROUTE}${slug}/`), ...ARTICLES.map(([slug]) => `${EXPERIENCE_ROUTE}${slug}/`)];
+  assert.equal(routes.length, 8);
+  const diagramTex = [];
+  for (const route of routes) {
+    const html = await routeHtml(route);
+    const figures = [...html.matchAll(/<figure\b([^>]*)>([\s\S]*?)<\/figure>/giu)]
+      .filter((match) => attribute(match[1], "data-logic-diagram") !== undefined);
+    assert.equal(figures.length, 1, `${route} needs exactly one logic diagram`);
+    const header = html.match(/<header\b[^>]*>([\s\S]*?)<\/header>/iu)?.[1] ?? "";
+    assert.ok(header.includes("data-logic-diagram"), `${route}: the diagram belongs in the article header as its visual abstract`);
+    assert.ok(header.indexOf("data-experience-metadata") < header.indexOf("data-logic-diagram"), `${route}: the record strip precedes the diagram`);
+    const stages = [...figures[0][2].matchAll(/\bdata-stage="(\d+)"/gu)].map((match) => Number(match[1]));
+    assert.deepEqual(stages, [1, 2, 3, 4], `${route}: four stages, read left to right`);
+    assert.ok(stripMarkup(figures[0][2].match(/<figcaption\b[^>]*>([\s\S]*?)<\/figcaption>/iu)?.[1] ?? "").length > 40, `${route}: the diagram needs its caption`);
+    // Connectors are crisp SVG drawings, one over each connector column; the loop is drawn in its own.
+    const wires = [...figures[0][2].matchAll(/<svg\b([^>]*\bdata-wire="([^"]+)"[^>]*)>/gu)];
+    assert.equal(wires.filter((match) => match[2].startsWith("link-")).length, 3, `${route}: three connector columns`);
+    for (const [, attributes] of wires) assert.equal(attribute(attributes, "shape-rendering"), "crispEdges", `${route}: connectors are drawn with crisp edges`);
+    // Every formula keeps one assistive expression with its exact TeX, however its drawing breaks.
+    for (const formula of figures[0][2].split(/(?=<span\b[^>]*\bdata-diagram-math="true")/u).slice(1)) {
+      assert.equal((formula.match(/<math\b/gu) ?? []).length, 1, `${route}: one assistive expression per formula`);
+      diagramTex.push(decodeHtml(formula.match(/<annotation\b[^>]*>([\s\S]*?)<\/annotation>/u)[1]));
+    }
+  }
+  const sourceTex = Object.values(architectureDiagrams).flatMap((diagram) => diagram.stages.flatMap((stage) => stage.nodes.flatMap((node) => [...(node.detail ?? "").matchAll(/\$([^$]+)\$/gu)].map((match) => match[1]))));
+  assert.deepEqual([...diagramTex].sort(), [...sourceTex].sort(), "Every diagram formula keeps its TeX");
+});
+
+test("law papers preserve article identity, chapter navigation, and bidirectional footnotes", async () => {
+  const approved = await approvedExperience();
+  for (const [index, [slug, title, subtitle, expectedFootnotes]] of ARTICLES.entries()) {
+    const route = `${EXPERIENCE_ROUTE}${slug}/`;
+    const html = await routeHtml(route);
+    const text = stripMarkup(html);
+    const titleMatch = html.match(/<h1\b[^>]*>([\s\S]*?)<\/h1>/iu);
+    assert.ok(titleMatch, `${route} is missing its article title`);
+    assert.equal(stripMarkup(titleMatch[1]), approved.find(({ id }) => id === index + 8).detailTitle);
+    assert.ok(text.includes(title.split(": ").join(" — ")), `${route} lost its original article-title wording`);
+    if (subtitle) assert.ok(text.includes(subtitle), `${route} lost its original subtitle`);
+    assert.ok(text.includes("Author, Letao (Theodore) Ouyang"), `${route} lost its author name`);
+    assert.ok(text.includes("December 2024"), `${route} lost its original date`);
+    assert.ok(text.includes("Abstract"), `${route} is missing its abstract`);
+    assert.equal(openingTags(html, "article").length, 1, `${route} must have one article reading region`);
+    assert.ok(openingTags(html, "a").some((tag) => attribute(tag, "href") === `/experience/#${slug}`), `${route} is missing its return link`);
+
+    const allIds = [...html.matchAll(/\bid="([^"]+)"/giu)].map((match) => decodeHtml(match[1]));
+    const ids = new Set(allIds);
+    assert.equal(ids.size, allIds.length, `${route} has duplicate anchors`);
+    const links = openingTags(html, "a");
+    const chapterIds = [...html.matchAll(/<h[2-6]\b[^>]*\bid="(section-[^"]+)"[^>]*>/giu)].map((match) => decodeHtml(match[1]));
+    assert.ok(chapterIds.length > 0, `${route} is missing chapter anchors`);
+    for (const id of chapterIds) assert.ok(links.some((tag) => attribute(tag, "href") === `#${id}`), `${route} is missing its contents link to ${id}`);
+
+    const references = links.filter((tag) => attribute(tag, "role") === "doc-noteref");
+    assert.ok(references.length >= expectedFootnotes, `${route} lost footnote references`);
+    const referencedNumbers = [...html.matchAll(/<a\b([^>]*)>([\s\S]*?)<\/a>/giu)]
+      .filter((match) => attribute(match[1], "role") === "doc-noteref")
+      .map((match) => stripMarkup(match[2]))
+      .filter((number) => /^\d+$/u.test(number))
+      .map(Number);
+    assert.deepEqual([...new Set(referencedNumbers)].sort((a, b) => a - b), Array.from({ length: expectedFootnotes }, (_, index) => index + 1), `${route} lost or combined numbered references`);
+    const noteTargets = new Set();
+    for (const reference of references) {
+      const referenceId = attribute(reference, "id");
+      const href = attribute(reference, "href");
+      assert.ok(referenceId && href?.startsWith("#"), `${route} has an unaddressable footnote reference`);
+      const targetId = href.slice(1);
+      assert.ok(ids.has(targetId), `${route} has a dangling footnote target: ${href}`);
+      noteTargets.add(targetId);
+      const note = elementHtmlById(html, targetId);
+      assert.ok(openingTags(note, "a").some((tag) => attribute(tag, "href") === `#${referenceId}`), `${route} is missing the backlink for ${referenceId}`);
+    }
+    assert.ok(noteTargets.size >= expectedFootnotes, `${route} is missing distinct footnotes`);
+    for (const link of links) {
+      const href = attribute(link, "href") ?? "";
+      if (href.startsWith("#")) assert.ok(ids.has(href.slice(1)), `${route} has a broken local anchor ${href}`);
+      if (!/^https?:/iu.test(href)) assert.doesNotMatch(href, /\.pdf(?:[?#]|$)/iu, `${route} must not link to an original PDF`);
+    }
+    assert.equal(openingTags(html, "iframe").length + openingTags(html, "embed").length + openingTags(html, "object").length, 0);
+  }
+});
+
+test("law articles expose one complete native contents menu and source-only publication details", async () => {
+  for (const [slug] of ARTICLES) {
+    const source = JSON.parse(await readFile(path.join(ROOT, "content", "legal-papers", `${slug}.json`), "utf8"));
+    const html = await routeHtml(`${EXPERIENCE_ROUTE}${slug}/`);
+    const menus = [...html.matchAll(/<nav\b([^>]*)>([\s\S]*?)<\/nav>/giu)]
+      .filter((match) => attribute(match[1], "aria-label") === "Article contents");
+    assert.equal(menus.length, 1, `${slug} must expose one article contents menu`);
+    const links = [...menus[0][2].matchAll(/<a\b([^>]*)>([\s\S]*?)<\/a>/giu)]
+      .map((match) => ({ href: attribute(match[1], "href"), text: inlineText(match[2]) }));
+    const expectedLinks = [
+      { href: "#key-contributions", text: "Key Contributions" },
+      { href: "#abstract-heading", text: "Abstract" },
+      ...source.blocks.filter(({ type }) => type === "heading").map(({ id, text }) => ({ href: `#${id}`, text: normalizeSpace(text) })),
+      { href: "#footnotes", text: "Footnotes" },
+    ];
+    assert.deepEqual(links, expectedLinks, `${slug} must link the approved contributions, abstract, every source heading, and footnotes in reading order`);
+    const targets = [...openingTags(html, "h2"), ...openingTags(html, "h3"), ...openingTags(html, "section")];
+    for (const { href } of expectedLinks) {
+      assert.ok(targets.some((tag) => attribute(tag, "id") === href.slice(1)), `${slug} has a contents target that needs JavaScript: ${href}`);
+    }
+
+    const frontmatter = html.match(/<article\b[^>]*>[\s\S]*?<header\b[^>]*>([\s\S]*?)<\/header>/iu);
+    assert.ok(frontmatter, `${slug} lost its article frontmatter`);
+    const expected = (await approvedExperience()).find(({ id }) => id === ARTICLES.findIndex(([articleSlug]) => articleSlug === slug) + 8);
+    const metadata = [...frontmatter[1].matchAll(/<d[td]\b[^>]*>([\s\S]*?)<\/d[td]>/giu)].map((match) => inlineText(match[1]));
+    assert.deepEqual(metadata, ["Organization", "Duke Law School", "Position", expected.metadata.position, "Location", expected.metadata.location, "Dates", expected.metadata.dates]);
+    assert.ok(html.indexOf('id="key-contributions"') < html.indexOf('id="abstract-heading"'));
+    for (const key of ["citation_journal_title", "citation_doi", "citation_volume", "citation_issue", "citation_issn", "citation_conference_title"]) {
+      assert.equal(metaContent(html, "name", key), undefined, `${slug} invents unsupported ${key}`);
+    }
+  }
+});
+
+test("law article paragraphs, headings, and citations exactly match the approved structured sources", async () => {
+  for (const [slug] of ARTICLES) {
+    const source = JSON.parse(await readFile(path.join(ROOT, "content", "legal-papers", `${slug}.json`), "utf8"));
+    const html = await routeHtml(`${EXPERIENCE_ROUTE}${slug}/`);
+    const abstract = [...html.matchAll(/<section\b([^>]*)>([\s\S]*?)<\/section>/giu)]
+      .find((match) => attribute(match[1], "aria-labelledby") === "abstract-heading");
+    assert.ok(abstract, `${slug} lost its abstract region`);
+    const abstractHeadingEnd = abstract[2].indexOf("</h2>") + "</h2>".length;
+    assert.ok(abstractHeadingEnd >= "</h2>".length, `${slug} lost its Abstract heading`);
+    const byline = abstract[2].slice(0, abstractHeadingEnd);
+    assert.deepEqual([...byline.matchAll(/<p\b[^>]*>([\s\S]*?)<\/p>/giu)].map((match) => inlineText(match[1])), [
+      `${source.author}${source.acknowledgment ? "*" : ""}`,
+      ...(source.date ? [normalizeSpace(source.date)] : []),
+    ], `${slug} must preserve the original author and date before its abstract`);
+    const abstractParagraphs = [...abstract[2].slice(abstractHeadingEnd).matchAll(/<p\b[^>]*>([\s\S]*?)<\/p>/giu)].map((match) => inlineText(match[1]));
+    assert.deepEqual(abstractParagraphs, source.abstract.map(({ text }) => normalizeSpace(text)), `${slug} changed abstract text`);
+
+    const blocks = [...html.matchAll(/<(p|h2|h3)\b([^>]*)>([\s\S]*?)<\/\1>/giu)]
+      .filter((match) => attribute(match[2], "data-paper-block") !== undefined)
+      .map((match) => ({ index: Number(attribute(match[2], "data-paper-block")), tag: match[1], text: inlineText(match[3]) }));
+    for (const [index, block] of source.blocks.entries()) {
+      if (block.type !== "table") continue;
+      const frame = html.match(new RegExp(`<div\\b[^>]*\\bdata-paper-block="${index}"[^>]*>([\\s\\S]*?)<\\/table>`, "u"));
+      assert.ok(frame, `${slug} lost its table at block ${index}`);
+      const cells = [...frame[1].matchAll(/<tr\b[^>]*>([\s\S]*?)<\/tr>/giu)].map((row) => [...row[1].matchAll(/<(th|td)\b[^>]*>([\s\S]*?)<\/\1>/giu)].map((cell) => inlineText(cell[2])));
+      assert.deepEqual(cells, block.rows.map((row) => row.map(({ text }) => normalizeSpace(text))), `${slug} changed a table cell at block ${index}`);
+    }
+    assert.deepEqual(blocks, source.blocks.flatMap(({ type, level, text }, index) => type === "table" ? [] : [{ index, tag: type === "heading" ? (level > 1 ? "h3" : "h2") : "p", text: normalizeSpace(text) }]), `${slug} changed or omitted body text or heading structure`);
+
+    for (const note of source.footnotes) {
+      const noteHtml = elementHtmlById(html, `fn-${note.number}`);
+      const paragraphs = [...noteHtml.matchAll(/<p\b[^>]*>([\s\S]*?)<\/p>/giu)].map((match) => inlineText(match[1]));
+      assert.deepEqual(paragraphs, [normalizeSpace(note.text)], `${slug} changed footnote ${note.number}`);
+    }
+    const acknowledgmentHtml = elementHtmlById(html, "fn-author");
+    const acknowledgment = acknowledgmentHtml.match(/<p\b[^>]*>([\s\S]*?)<\/p>/iu);
+    assert.ok(acknowledgment, `${slug} lost its acknowledgment`);
+    assert.equal(inlineText(acknowledgment[1]), normalizeSpace(source.acknowledgment.text), `${slug} changed its acknowledgment`);
+  }
+});
+
+test("public assets and the exported website contain no PDFs", async () => {
+  for (const directory of [path.join(ROOT, "public"), OUT]) {
+    assert.deepEqual((await walk(directory)).filter((file) => /\.pdf$/iu.test(file)), [], `${directory} exposes an original PDF`);
+  }
+});
+
+test("About lists both degrees and the advisor record and links to all 49 courses on their own page", async () => {
+  for (const route of ["/"]) {
+    const html = await routeHtml(route);
+    assert.equal(elementsWithClass(html, "article", "education-entry").length, 2);
+    const education = elementHtmlById(html, "education");
+    const coursework = elementHtmlById(education, "coursework");
+    const courseworkLink = coursework.match(/<a\b([^>]*)>([\s\S]*?)<\/a>/u);
+    assert.equal(attribute(courseworkLink?.[1] ?? "", "href"), "/coursework/");
+    assert.equal(stripMarkup(courseworkLink?.[2] ?? ""), "Read More");
+    assert.equal(attribute(courseworkLink?.[1] ?? "", "aria-label"), "Read more about coursework");
+    assert.doesNotMatch(courseworkLink?.[1] ?? "", /\bonclick\s*=|role="button"/iu);
+    assert.equal(openingTags(courseworkLink?.[2] ?? "", "svg").length, 1);
+    assert.equal(attribute(openingTags(courseworkLink?.[2] ?? "", "svg")[0], "aria-hidden"), "true");
+    assert.equal(openingTags(education, "details").length, 0, "The Education control navigates to a separate page.");
+    assert.equal(elementsWithClass(html, "ul", "course-list").length, 0, "Course lists must not consume space on About.");
+    for (const course of courseworkGroups.flatMap((group) => group.courses)) {
+      assert.ok(!stripMarkup(education).includes(course), `${route}: ${course} belongs on the coursework page.`);
+    }
+    const text = stripMarkup(html);
+    for (const record of ["Master of Engineering in Risk Engineering", "Financial Risk Concentration", "Bachelor of Science in Mathematics", "Dual-Degree Undergraduate Program", "Pratt School of Engineering Merit Scholarship", "Undergraduate Merit Scholarship", "Academic Advisor:", "Mark Borsuk, Ph.D."]) {
+      assert.ok(text.includes(record), `${route} is missing ${record}`);
+    }
+    assert.equal((text.match(/Duke University/gu) ?? []).length, 1);
+    assert.doesNotMatch(stripMarkup(education), /Sequoia Fellow/u,
+      "The fellowship has its own section, apart from the degree records.");
+  }
+
+  const html = await routeHtml("/coursework/");
+  assert.equal(stripMarkup(html.match(/<h1\b[^>]*>([\s\S]*?)<\/h1>/u)?.[1] ?? ""), "Selected Coursework");
+  assert.equal(canonicalUrl(html), `${SITE_ORIGIN}/coursework/`);
+  assert.deepEqual(navigationLinks(html, "Parent navigation"), [["Back to Education", "/#education"]]);
+  const categories = ["mathematics", "ai-and-data-science", "finance-and-economics", "law-ethics-and-global-affairs"];
+  const directory = [...html.matchAll(/<nav\b([^>]*)>([\s\S]*?)<\/nav>/giu)]
+    .find((match) => attribute(match[1], "aria-label") === "Coursework sections");
+  assert.ok(directory);
+  const links = [...directory[2].matchAll(/<a\b([^>]*)>([\s\S]*?)<\/a>/giu)];
+  assert.deepEqual(links.map((match) => attribute(match[1], "href")), categories.map((id) => `#${id}`));
+  const lists = elementsWithClass(html, "ul", "course-list");
+  assert.equal(lists.length, 4);
+  assert.equal(lists.reduce((total, list) => total + (list[2].match(/<li\b/giu) ?? []).length, 0), 49);
+  for (const [index, group] of courseworkGroups.entries()) {
+    const number = String(index + 1).padStart(2, "0");
+    const directoryLabels = [...links[index][2].matchAll(/<span\b([^>]*)>([\s\S]*?)<\/span>/gu)];
+    assert.deepEqual(directoryLabels.map((match) => stripMarkup(match[2])), [number, group.title, "View"]);
+    assert.equal(attribute(directoryLabels[0][1], "aria-hidden"), "true", "The decorative number must not lengthen the section link's accessible name.");
+    assert.notEqual(attribute(directoryLabels[1][1], "aria-hidden"), "true", "The coursework category supplies the section link's accessible name.");
+    assert.equal(attribute(directoryLabels[2][1], "aria-hidden"), "true", "The repeated visual action must not lengthen each section link's accessible name.");
+    const section = elementHtmlById(html, categories[index]);
+    assert.match(section, new RegExp(`aria-hidden="true"[^>]*>${number}<`, "u"));
+    assert.equal(stripMarkup(section.match(/<h2\b[^>]*>([\s\S]*?)<\/h2>/u)?.[1] ?? ""), group.title);
+    const list = elementsWithClass(section, "ul", "course-list")[0];
+    assert.ok(list);
+    assert.deepEqual([...list[2].matchAll(/<li\b[^>]*>([\s\S]*?)<\/li>/gu)].map((match) => stripMarkup(match[1])), group.courses, "Every course retains its approved wording and order.");
+    assert.equal(openingTags(list[2], "a").length, 0, "Course names are static text, not empty navigation targets.");
+  }
+});
+
+test("the website uses its local brand assets without remote runtime resources", async () => {
+  const assets = (await walk(path.join(OUT, "assets"))).map((file) => path.relative(OUT, file).replaceAll("\\", "/")).sort();
+  assert.deepEqual(assets, EXPECTED_PUBLIC_ASSETS);
+  for (const route of ROUTES) {
+    const html = await routeHtml(route);
+    for (const tag of [...openingTags(html, "script"), ...openingTags(html, "img"), ...openingTags(html, "source")]) {
+      for (const name of ["src", "srcset"]) {
+        const value = attribute(tag, name)?.trim();
+        if (!value) continue;
+        const candidates = name === "srcset" ? value.split(",").map((candidate) => candidate.trim().split(/\s+/u)[0]) : [value];
+        for (const candidate of candidates) {
+          const resource = new URL(candidate, new URL(route, SITE_ORIGIN));
+          assert.equal(resource.origin, SITE_ORIGIN, `${route}: ${name} resources must be served from this site.`);
+        }
+      }
+    }
+  }
+});
+
+test("the LO identity stays monochrome across browser and touch icons", async () => {
+  const sourceMark = await readFile(path.join(ROOT, "source-assets", "brand", "lo-mark.svg"));
+  const publicMark = await readFile(path.join(ROOT, "public", "assets", "brand", "lo-mark.svg"));
+  assert.deepEqual(publicMark, sourceMark);
+  const masterSource = sourceMark.toString("utf8");
+  assert.match(masterSource, /viewBox="0 0 20 20"/u);
+  assert.match(masterSource, /fill="#0b0b0b"/u);
+  assert.match(masterSource, /@media \(prefers-color-scheme: dark\) \{ path \{ fill: #ffffff; \} \}/u);
+
+  const navigation = await readFile(path.join(ROOT, "app", "components", "SiteNavigation.tsx"), "utf8");
+  const pathData = (source) => [...source.matchAll(/<path[^>]*\sd="([^"]+)"/gu)].map((match) => match[1]);
+  assert.deepEqual(pathData(navigation), pathData(masterSource), "The rail draws the master mark's geometry");
+
+  const ico = await readFile(path.join(ROOT, "public", "assets", "brand", "favicon.ico"));
+  const icoImages = Array.from({ length: ico.readUInt16LE(4) }, (_, index) => {
+    const entry = 6 + index * 16;
+    const start = ico.readUInt32LE(entry + 12);
+    return [`favicon.ico ${ico.readUInt8(entry)}px`, ico.readUInt8(entry), ico.subarray(start, start + ico.readUInt32LE(entry + 8))];
+  });
+  assert.deepEqual(icoImages.map(([, size]) => size), [16, 32, 48]);
+
+  const touchIcon = path.join(ROOT, "public", "assets", "brand", "apple-touch-icon.png");
+  for (const [asset, size, input] of [...icoImages, ["apple-touch-icon.png", 180, touchIcon]]) {
+    const { data, info } = await sharp(input)
+      .removeAlpha()
+      .raw()
+      .toBuffer({ resolveWithObject: true });
+    assert.equal(info.width, size);
+    assert.equal(info.height, size);
+    for (let index = 0; index < data.length; index += info.channels) {
+      assert.equal(data[index], data[index + 1], `${asset} contains a chromatic red/green pixel`);
+      assert.equal(data[index + 1], data[index + 2], `${asset} contains a chromatic green/blue pixel`);
+    }
+  }
+});
+
+test("robots and sitemap share the exact route manifest", async () => {
+  const robots = await readFile(path.join(OUT, "robots.txt"), "utf8");
+  assert.match(robots, /^Sitemap:\s*https:\/\/www\.theodoreoy\.com\/sitemap\.xml$/imu);
+  const sitemap = await readFile(path.join(OUT, "sitemap.xml"), "utf8");
+  const routes = [...sitemap.matchAll(/<loc>(.*?)<\/loc>/giu)].map((match) => new URL(decodeHtml(match[1])).pathname).sort();
+  assert.deepEqual(routes, [...CANONICAL_ROUTES].sort());
+});
+
+test("the production design contract is restrained and dependency-light", async () => {
+  const globals = await readFile(path.join(ROOT, "app", "globals.css"), "utf8");
+  const home = await readFile(path.join(ROOT, "app", "home.module.css"), "utf8");
+  const homePage = await readFile(path.join(ROOT, "app", "page.tsx"), "utf8");
+  const hero = await readFile(path.join(ROOT, "app", "components", "clarinet-hero", "ClarinetHero.module.css"), "utf8");
+  const navigation = await readFile(path.join(ROOT, "app", "components", "SiteNavigation.tsx"), "utf8");
+  const structuralGrid = await readFile(path.join(ROOT, "app", "components", "StructuralGrid.tsx"), "utf8");
+  const layout = await readFile(path.join(ROOT, "app", "layout.tsx"), "utf8");
+  const packageJson = JSON.parse(await readFile(path.join(ROOT, "package.json"), "utf8"));
+  for (const token of ["--page: #f7f6f5", "--ink: #0b0b0b", "--muted: #70706c", "--accent: #2200ff", "repeat(3, var(--rail-track)) max(var(--frame-inset), calc(100% * 4 / 15 - 3 * var(--rail-track))) repeat(11, minmax(0, 1fr))", "repeat(3, var(--rail-track)) max(var(--frame-inset), calc(100% / 3 - 3 * var(--rail-track))) repeat(8, minmax(0, 1fr))"]) assert.ok(globals.includes(token), `globals.css keeps ${token}`);
+  // The rail's growth comes out of the margin-index track; the content and its sections take the frame's own columns.
+  assert.match(globals, /\.content-column\s*\{[^}]*grid-template-columns:\s*subgrid/u);
+  for (const css of [await readFile(path.join(ROOT, "app", "components", "experience", "Experience.module.css"), "utf8"), await readFile(path.join(ROOT, "app", "coursework", "coursework.module.css"), "utf8"), home]) assert.match(css, /\.section\s*\{[^}]*grid-template-columns:\s*subgrid/u);
+  assert.doesNotMatch(globals, /box-shadow|backdrop-filter/u);
+  assert.doesNotMatch(home, /box-shadow|backdrop-filter|linear-gradient/u);
+  assert.match(homePage, /<ClarinetHero \/>/u);
+  assert.match(hero, /\.copy h1\s*\{[^}]*font-family:\s*var\(--font-text\)/u);
+  assert.match(hero, /\.credentials\s*\{[^}]*font-family:\s*var\(--font-prose\)/u);
+  assert.match(hero, /\.credentials strong\s*\{[^}]*font-family:\s*var\(--font-text\)/u);
+  const markerStyle = hero.match(/\.markers i\s*\{([^}]+)\}/u)?.[1] ?? "";
+  assert.match(markerStyle, /background:\s*var\(--accent\)/u);
+  const markerWidth = Number(markerStyle.match(/(?:^|;)\s*width:\s*([\d.]+)px/u)?.[1]);
+  const markerHeight = Number(markerStyle.match(/(?:^|;)\s*height:\s*([\d.]+)px/u)?.[1]);
+  assert.ok(markerHeight > markerWidth && markerWidth > 0, "Corner markers are vertical blue bars.");
+  const experience = await readFile(path.join(ROOT, "app", "components", "experience", "Experience.module.css"), "utf8");
+  const directory = await readFile(path.join(ROOT, "app", "components", "SectionDirectory.module.css"), "utf8");
+  assert.match(globals, /@media \(pointer:\s*coarse\)[\s\S]*?\.primary-nav a\s*\{[^}]*min-height:\s*44px/u);
+  assert.match(home, /@media \(pointer:\s*coarse\)[\s\S]*?\.contactStrip a[\s\S]*?min-height:\s*44px/u);
+  assert.match(globals, /width:\s*min\(100%,\s*1440px\)/u);
+  assert.match(globals, /--content-top:\s*112px;/u);
+  assert.match(globals, /\.content-column\s*\{[\s\S]*?grid-template-columns:\s*subgrid;[\s\S]*?padding:\s*var\(--content-top\) 0 144px/u);
+  assert.match(globals, /\.site-rail\s*\{[^}]*padding:\s*var\(--content-top\) /u, "The rail's wordmark starts on the title's line.");
+  assert.match(home, /\.homeFrame \.profileSection\s*\{[^}]*padding-top:\s*var\(--content-top\)/u);
+  assert.match(globals, /\.structural-guide-tick\s*\{[\s\S]*?position:\s*sticky[\s\S]*?height:\s*20px/u);
+  assert.match(directory, /\.directory\s*\{[^}]*grid-template-columns:\s*1fr/u);
+  assert.match(experience, /\.section\s*\{[^}]*grid-template-columns:\s*subgrid;[^}]*grid-column:\s*1 \/ span 11/u, "Sections end on the reading-end guide");
+  assert.match(experience, /\.sectionBody\s*\{[^}]*grid-column:\s*2\s*\/\s*span\s*10/u);
+  assert.match(globals, /--hang-columns:\s*minmax\(0,\s*4fr\)\s+minmax\(0,\s*6fr\)/u, "Hanging rows put titles on 4 of 10 columns and prose on 6");
+  assert.match(experience, /@media \(width >= 1200px\)[\s\S]*?grid-template-columns:\s*var\(--hang-columns\)/u);
+  assert.match(globals, /@media \(width >= 1200px\)[\s\S]*?\.ledger::before\s*\{[^}]*left:\s*calc\(40% - 0\.7px\)[\s\S]*?\.ledger-item\s*\{[^}]*grid-template-columns:\s*calc\(40% - 0\.2 \* var\(--frame-pad\) - 0\.2px\)/u, "A ledger's spine and its entries split on axis B, the column guide");
+  assert.match(structuralGrid, /data-guides=\{layout\}/u);
+  assert.match(globals, /\.structural-grid\[data-guides="index"\] \.structural-guide-reading-measure\s*\{\s*grid-column:\s*9/u, "Index pages mark the prose axis");
+  // Each group of content sits in one faint, unfilled frame with a continuous dashed
+  // spine; divisions inside a frame are dashed hairlines.
+  assert.match(globals, /--frame:\s*rgba\(0, 0, 0, 0\.08\)/u);
+  assert.match(globals, /--dash-y:\s*repeating-linear-gradient\(to bottom/u);
+  assert.match(globals, /(?:^|\n)\.ledger\s*\{[^}]*border:\s*1px solid var\(--frame\)/u, "A ledger is a section's single frame");
+  assert.match(globals, /\.ledger::before\s*\{[^}]*background:\s*var\(--dash-y\)/u, "A ledger draws one continuous spine");
+  for (const component of ["AboutContent.tsx", path.join("experience", "ExperienceContent.tsx")]) {
+    const source = await readFile(path.join(ROOT, "app", "components", component), "utf8");
+    for (const part of ["ledger", "ledger-item", "ledger-title", "ledger-body", "ledger-prose", "read-more"]) {
+      assert.ok(source.includes(`className="${part}"`), `${component} renders its lists with .${part}`);
+    }
+  }
+  for (const css of [globals, experience, home, directory]) assert.doesNotMatch(css, /background:\s*var\(--panel\)/u, "Frames stay unfilled");
+  assert.match(directory, /\.directory\s*\{[^}]*border:\s*1px solid var\(--frame\)/u);
+  assert.match(directory, /\.directory a \+ a\s*\{[^}]*background-image:\s*var\(--dash-x\)/u);
+  assert.doesNotMatch(directory, /\.directory a\s*\{[^}]*border/u);
+  for (const guide of ["frame-start", "rail-boundary", "reading-start", "reading-measure", "reading-end"]) assert.ok(structuralGrid.includes(`"${guide}"`));
+  for (const contract of ["aria-controls=\"site-menu\"", "aria-expanded={menuOpen}", 'event.key === "Escape"', 'document.body.classList.add("menu-open")', 'querySelectorAll<HTMLElement>']) assert.ok(navigation.includes(contract));
+  assert.match(navigation, /backgroundRegions[\s\S]*?region\.inert = true[\s\S]*?region\.inert = false/u);
+  assert.match(navigation, /rail\.dataset\.enhanced = "true"/u);
+  assert.match(navigation, /matchMedia\("\(min-width: 768px\)"\)[\s\S]*?if \(desktopQuery\.matches\) closeMenu\(false\)/u);
+  assert.match(navigation, /desktopQuery\.addEventListener\("change", onViewportChange\)[\s\S]*?desktopQuery\.removeEventListener\("change", onViewportChange\)/u);
+  assert.match(globals, /\.site-rail\[data-enhanced="true"\] \.rail-panel\s*\{[^}]*visibility:\s*hidden/u);
+  assert.match(navigation, /wordmark-lockup[\s\S]*?wordmark-mark[\s\S]*?wordmark-name[\s\S]*?>Theodore Ouyang<\/span>/u);
+  assert.match(layout, /assets\/brand\/favicon\.ico[\s\S]*?assets\/brand\/lo-mark\.svg[\s\S]*?sizes: "any"/u);
+  assert.match(experience, /\.metadata\[data-layout="row"\]\s*\{[^}]*grid-template-columns:\s*repeat\(4,/u);
+  assert.match(globals, /\.ledger-title\s*\{[^}]*font-size:\s*var\(--type-subheading\)/u);
+  assert.match(experience, /\.contributions > ol\s*\{[^}]*padding:\s*0\s*;[^}]*list-style:\s*none\s*;/u);
+  assert.deepEqual(Object.keys(packageJson.dependencies).sort(), ["@mathjax/mathjax-tex-font", "@mathjax/src", "next", "react", "react-dom"]);
+  assert.equal(packageJson.dependencies["@mathjax/src"], "4.1.3");
+  assert.equal(packageJson.dependencies["@mathjax/mathjax-tex-font"], "4.1.3");
+});
+
+test("shared typography source roles preserve article names, compact indices, metadata, and mathematical scale", async () => {
+  const [fonts, exportedFonts, globals, articles, experience, math, home, coursework, directory] = await Promise.all([
+    readFile(path.join(ROOT, "public", "assets", "fonts", "inter.css"), "utf8"),
+    readFile(path.join(OUT, "assets", "fonts", "inter.css"), "utf8"),
+    readFile(path.join(ROOT, "app", "globals.css"), "utf8"),
+    readFile(path.join(ROOT, "app", "components", "legal", "LegalPaperPage.module.css"), "utf8"),
+    readFile(path.join(ROOT, "app", "components", "experience", "Experience.module.css"), "utf8"),
+    readFile(path.join(ROOT, "app", "components", "research", "ResearchMath.module.css"), "utf8"),
+    readFile(path.join(ROOT, "app", "home.module.css"), "utf8"),
+    readFile(path.join(ROOT, "app", "coursework", "coursework.module.css"), "utf8"),
+    readFile(path.join(ROOT, "app", "components", "SectionDirectory.module.css"), "utf8"),
+  ]);
+  const rule = (css, selector) => {
+    const escaped = selector.replace(/[.*+?^${}()|[\]\\]/gu, "\\$&");
+    const match = css.match(new RegExp(`(?:^|\\n)\\s*${escaped}\\s*\\{([^}]+)\\}`, "u"));
+    assert.ok(match, `Missing typography role ${selector}`);
+    return match[1];
+  };
+  const fontRoot = rule(fonts, ":root");
+  assert.equal(exportedFonts, fonts, "The export must ship the shared font stylesheet verbatim");
+  assert.match(fontRoot, /--font-text:\s*"Inter",\s*sans-serif\s*;/u);
+  assert.match(fontRoot, /font-optical-sizing:\s*none\s*;/u);
+  assert.match(fontRoot, /font-variation-settings:\s*"opsz"\s+14\s*;/u);
+  assert.match(fontRoot, /font-variant-numeric:\s*lining-nums\s+proportional-nums\s*;/u);
+  assert.match(fontRoot, /font-synthesis:\s*none\s*;/u);
+  assert.doesNotMatch(experience, /font-optical-sizing|font-variation-settings/u, "Experience must inherit the global optical settings rather than create a different font instance");
+  assert.match(rule(globals, "body"), /font-family:\s*var\(--font-text\)/u);
+  const tokens = rule(globals, ":root");
+  // One size per role: title 36, heading 24, subheading 18, reading 16, interface 15, label 13, index 11.
+  assert.match(tokens, /--type-title:\s*2\.25rem\s*;/u);
+  assert.match(tokens, /--type-heading:\s*1\.5rem\s*;/u);
+  assert.match(tokens, /--type-subheading:\s*1\.125rem\s*;/u);
+  assert.match(tokens, /--type-index:\s*0\.6875rem\s*;/u);
+  assert.match(tokens, /--type-reading:\s*1rem\s*;/u);
+  assert.match(tokens, /--type-interface:\s*0\.9375rem\s*;/u);
+  assert.match(tokens, /--type-label:\s*0\.8125rem\s*;/u);
+  assert.match(tokens, /--type-math:\s*1\.15em\s*;/u);
+  for (const css of [home, experience, coursework]) {
+    assert.match(rule(css, ".sectionIndex"), /font-size:\s*var\(--type-index\)\s*;/u, "Section indices share the compact index role.");
+  }
+  assert.match(rule(directory, ".directory a"), /font-size:\s*var\(--type-subheading\)\s*;/u, "Both framed section indices share the subheading role.");
+  assert.match(rule(directory, ".index"), /font-size:\s*var\(--type-index\)\s*;/u, "Both directories use the compact section-index role.");
+  assert.match(rule(coursework, ".sectionBody h2"), /font-size:\s*var\(--type-heading\)\s*;/u);
+  assert.match(rule(coursework, ".courseList"), /font-size:\s*var\(--type-reading\)\s*;/u);
+  for (const declarations of [rule(articles, ".paper .header h1"), rule(experience, ".detailPage .detailHeader h1")]) {
+    assert.match(declarations, /font-size:\s*var\(--type-title\)\s*;/u, "Every page title shares the title role");
+    assert.match(declarations, /font-weight:\s*400\s*;/u);
+    assert.match(declarations, /line-height:\s*var\(--title-leading\)\s*;/u);
+  }
+  const entryTitle = rule(globals, ".ledger-title");
+  assert.match(entryTitle, /font-size:\s*var\(--type-subheading\)\s*;/u, "Every item title shares the subheading role");
+  assert.match(entryTitle, /font-weight:\s*500\s*;/u);
+  assert.match(entryTitle, /line-height:\s*var\(--subheading-leading\)\s*;/u);
+  assert.match(rule(math, ".formula"), /font-size:\s*var\(--type-math\)\s*;/u);
+  assert.match(rule(math, ".inline"), /font-size:\s*1em\s*;/u, "Inline expressions must track surrounding prose rather than the display-math scale");
+  assert.doesNotMatch(rule(math, ".display"), /font-size:/u, "Display expressions retain the shared 1.15em formula role");
+  assert.match(rule(math, ".number"), /font:\s*inherit\s*;/u);
+  assert.match(rule(math, ".number"), /font-variant-numeric:\s*lining-nums\s+proportional-nums\s*;/u);
+  assert.match(rule(math, ".number sup"), /font-size:\s*0\.75em\s*;/u);
+  assert.match(rule(math, ".number sup"), /vertical-align:\s*super\s*;/u);
+  assert.match(rule(experience, ".metadata dd"), /font-size:\s*var\(--type-reading\)\s*;/u);
+  assert.match(experience, /\.contributions > ol\s*\{[^}]*gap:\s*1\.75rem\s*;/u);
+  assert.match(experience, /\.contributions > ol strong\s*\{\s*font-weight:\s*600;/u, "Lead sentences carry the emphasis authored in the manuscript");
+  assert.doesNotMatch(experience, /\.contributions\s+li(?:\s*\+\s*li)?\s*\{/u, "Contribution spacing and dividers must not cascade into nested items");
+  const nestedDetails = rule(experience, ".contributionDetails");
+  assert.match(nestedDetails, /font-size:\s*var\(--type-reading\)\s*;/u);
+  assert.match(nestedDetails, /gap:\s*8px\s*;/u);
+  assert.match(nestedDetails, /padding-left:\s*20px\s*;/u);
+  assert.doesNotMatch(nestedDetails, /border|font-family/u, "Nested lists inherit the same typeface and avoid per-item divider styling");
+
+  const researchRoutes = [...RESEARCH_ROUTES, ...ARTICLE_ROUTES, ...AI_ROUTES];
+  const stylesheetCache = new Map();
+  for (const route of [...researchRoutes, ...EXPERIENCE_DETAIL_ROUTES]) {
+    const html = await routeHtml(route);
+    const header = html.match(/<header\b([^>]*)>[\s\S]*?<h1\b/iu);
+    assert.ok(header, `${route} needs a title inside its semantic page header`);
+    const headerClass = researchRoutes.includes(route) ? "_header" : "_detailHeader";
+    assert.ok(attribute(header[1], "class")?.split(/\s+/u).some((name) => name.endsWith(headerClass)), `${route} must bind its title to the shared article-name role`);
+    const stylesheetHrefs = openingTags(html, "link").filter((tag) => attribute(tag, "rel") === "stylesheet").map((tag) => attribute(tag, "href"));
+    const loadedStyles = await Promise.all(stylesheetHrefs.map(async (href) => {
+      assert.ok(href?.startsWith("/"), "Typography assets must be local");
+      if (!stylesheetCache.has(href)) stylesheetCache.set(href, await readFile(path.join(OUT, ...href.split("/").filter(Boolean)), "utf8"));
+      return stylesheetCache.get(href);
+    }));
+    assert.ok(loadedStyles.some((css) => /font-optical-sizing:\s*none/u.test(css) && /font-variation-settings:\s*"opsz"\s+14/u.test(css) && /font-variant-numeric:\s*lining-nums\s+proportional-nums/u.test(css)), `${route} must load the compiled shared Inter settings`);
+  }
+});
+
+test("a footnote address that holds balanced parentheses links in full", async () => {
+  const page = await routeHtml("/experience/mangrove-restoration-and-the-limits-of-compensatory-mitigation/");
+  assert.match(page, /href="https:\/\/www\.epd\.gov\.hk\/[^"]*Management%20Plan%20\(Ref\.%20Z22-03\)\.pdf"/u);
+});

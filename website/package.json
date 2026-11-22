@@ -1,0 +1,41 @@
+{
+  "name": "theodore-ouyang-site",
+  "version": "1.0.0",
+  "private": true,
+  "engines": {
+    "node": "^22.18.0 || >=23.6.0"
+  },
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build && node scripts/assemble-static.mjs",
+    "check:protected-sources": "node scripts/check-protected-sources.mjs",
+    "check:visible-copy": "node scripts/verify-visible-copy.mjs",
+    "preview:static": "node scripts/preview-static.mjs",
+    "typecheck": "tsc --noEmit",
+    "test": "npm run build && npm run test:artifact && npm run check:visible-copy",
+    "test:artifact": "node --test",
+    "test:browser": "node scripts/check-browser-layout.mjs",
+    "check": "npm run check:protected-sources && npm run lint && npm test",
+    "generate:brand-icons": "node scripts/generate-brand-icons.mjs",
+    "lint": "eslint .",
+    "optimize:images": "node scripts/optimize-images.mjs"
+  },
+  "dependencies": {
+    "@mathjax/mathjax-tex-font": "4.1.3",
+    "@mathjax/src": "4.1.3",
+    "next": "16.4.6",
+    "react": "19.2.8",
+    "react-dom": "19.2.8"
+  },
+  "devDependencies": {
+    "@types/node": "22.19.19",
+    "@types/react": "19.2.14",
+    "@types/react-dom": "19.2.3",
+    "eslint": "9.39.4",
+    "eslint-config-next": "16.4.6",
+    "playwright": "1.62.1",
+    "sharp": "0.35.5",
+    "typescript": "5.9.3"
+  },
+  "type": "module"
+}

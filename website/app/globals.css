@@ -1,0 +1,1123 @@
+:root {
+  color-scheme: light;
+  --page: #f7f6f5;
+  --ink: #0b0b0b;
+  --muted: #70706c;
+  --supporting-ink: #5c5c58;
+  --link-rule: #a6a6a1;
+  --rule: rgba(0, 0, 0, 0.06);
+  --rule-medium: rgba(0, 0, 0, 0.12);
+  --rule-strong: rgba(0, 0, 0, 0.24);
+  --panel: #fcfbfa;
+  /* Frames: one faint, unfilled edge around each group of content, with room
+     inside that eases from 44px at 1440px to 32px at 1200px; divisions inside a
+     frame are dashed hairlines. */
+  --frame: rgba(0, 0, 0, 0.08);
+  --dash: rgba(0, 0, 0, 0.15);
+  --dash-x: repeating-linear-gradient(to right, var(--dash) 0 4px, transparent 4px 8px);
+  --dash-y: repeating-linear-gradient(to bottom, var(--dash) 0 4px, transparent 4px 8px);
+  --frame-pad: clamp(32px, calc(32px + (100vw - 1200px) * 0.05), 44px);
+  /* Manuscript inset: table text and displayed equations start on one axis,
+     measured from the edge of the column that holds them. */
+  --manuscript-inset: clamp(16px, 4cqi, 24px);
+  --accent: #2200ff;
+  /* Article figures: ink and the accent carry the argument, sky marks a second
+     series, green marks an exactly known segment, grays hold context, and the
+     tint marks an emphasized row or column. */
+  --chart-sky: #4fb0e3;
+  --chart-green: #0d8a57;
+  --chart-steel: #8d8d88;
+  --chart-mist: #d9d8d4;
+  --chart-tint: rgba(34, 0, 255, 0.05);
+  --chart-tint-strong: rgba(34, 0, 255, 0.1);
+  --chart-pill: rgba(0, 0, 0, 0.05);
+  --chart-hatch: repeating-linear-gradient(135deg, rgba(11, 11, 11, 0.16) 0 1px, transparent 1px 6px);
+  /* One size per role, everywhere: title 36, heading 24, subheading 18,
+     reading 16, interface 15, caption 14, label 13, index 11. */
+  --type-title: 2.25rem;
+  --type-heading: 1.5rem;
+  --type-subheading: 1.125rem;
+  --type-index: 0.6875rem;
+  --type-reading: 1rem;
+  --type-label: 0.8125rem;
+  /* A figure's caption: the reading face a step below the prose it follows. */
+  --type-caption: 0.875rem;
+  --caption-leading: 1.55;
+  --type-interface: 0.9375rem;
+  --type-action: var(--type-interface);
+  --type-math: 1.15em;
+  /* A page title keeps to four fifths of its column; on tablets and phones it
+     takes the whole column. */
+  --title-width: 80%;
+  /* About seventy characters of Source Serif 4 at the reading size. */
+  --reading-measure: 36rem;
+  /* Running text at the measure; on tablets, where it would reach the hairline
+     that closes the column, it keeps the frames' inset from that line. */
+  --reading-width: var(--reading-measure);
+  /* The inset of text from the hairline that bounds it: the rail's links, a
+     section's index, a framed list's numbers. */
+  --frame-inset: clamp(20px, 2vw, 24px);
+  /* The top of the rail and of the content column: the wordmark sits on the
+     line of the page title. */
+  --content-top: 112px;
+  /* The rail holds its widest fixed item plus its insets, so the wordmark
+     keeps the mark beside the name and "Back to Experience" holds one line on
+     tablets. That item is the parent link (arrow, gap, label); the lockup
+     (mark, gap, name) is a little narrower. Below 1200px the rail's insets are
+     12px. */
+  --rail-item-width: calc(16px + 10px + 9.25 * var(--type-interface));
+  --rail-min-width: calc(var(--rail-item-width) + var(--frame-inset) + 22px);
+  /* The site footer's height (rule, padding and one line of label type), so a
+     page shorter than the window closes on the footer without scrolling. */
+  --site-footer-height: calc(1px + 25px + var(--type-label) * var(--label-leading) + 34px);
+  --title-leading: 1.12;
+  --heading-leading: 1.25;
+  --subheading-leading: 1.4;
+  --reading-leading: 1.65;
+  /* Manuscripts with mathematics (the papers and the AI articles) read at a
+     wider leading: a line that carries a formula keeps the white a line of
+     prose keeps at the reading leading. Their vertical spaces are measured in
+     this line: a paragraph break is one line, a statement, proof or run-in head
+     opens after a line and a half, and a display stands in two and a half. */
+  --manuscript-leading: 1.75;
+  --manuscript-line: calc(var(--manuscript-leading) * var(--type-reading));
+  --interface-leading: 1.5;
+  --label-leading: 1.45;
+  --title-tracking: -0.022em;
+  --heading-tracking: -0.015em;
+  --subheading-tracking: -0.006em;
+  /* Hanging layout: titles on axis A (4 of 10 columns), prose on axis B (6 of 10).
+     The gap belongs to the title cell so axis B lands exactly on a grid line,
+     and prose keeps an inset from the reading-end guide. Gap and inset narrow
+     with the frame so laptops hold a full line of prose. */
+  --hang-columns: minmax(0, 4fr) minmax(0, 6fr);
+  --hang-gap: clamp(28px, calc(28px + (100vw - 1200px) * 0.05), 40px);
+  --prose-inset: clamp(var(--frame-inset), calc((100vw - 1200px) * 0.1333), 32px);
+  --link-underline-offset: 0.18em;
+  --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
+  --drawer-ease: cubic-bezier(0.32, 0.72, 0, 1);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  overflow-y: scroll;
+  scrollbar-gutter: stable;
+  scroll-behavior: auto;
+  scroll-padding-top: 32px;
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  margin: 0;
+  color: var(--ink);
+  background: var(--page);
+  font-family: var(--font-text);
+  font-size: var(--type-reading);
+  line-height: var(--reading-leading);
+  letter-spacing: 0;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+}
+
+body.menu-open {
+  overflow: hidden;
+}
+
+h1,
+h2,
+h3 {
+  font-family: var(--font-text);
+}
+
+strong,
+b {
+  font-weight: 600;
+}
+
+code,
+kbd,
+samp {
+  font-family: inherit;
+  font-size: inherit;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button,
+input,
+textarea,
+select {
+  font: inherit;
+}
+
+a:focus-visible,
+button:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 4px;
+}
+
+/* A heading that an in-page link moves focus to is a target, not a control: it
+   shows no focus ring. */
+:is(h1, h2, h3)[tabindex="-1"]:focus {
+  outline: none;
+}
+
+/* A page title is the target of Back to Top. Its scroll margin is more than its
+   distance from the top of the page, so the jump returns the page to its top,
+   as it opened, and focus moves to the title. */
+h1[tabindex="-1"] {
+  scroll-margin-top: calc(var(--content-top) + 4rem);
+}
+
+/* A short unit (a date, a place name, a hyphenated compound in a title) holds
+   one line when the line can hold it; in a narrower box it wraps inside. */
+.keep-whole {
+  display: inline-block;
+}
+
+::selection {
+  color: #fff;
+  background: var(--accent);
+}
+
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+  border: 0;
+}
+
+.skip-link {
+  position: fixed;
+  z-index: 200;
+  top: 12px;
+  left: 12px;
+  padding: 9px 12px;
+  border: 1px solid var(--ink);
+  color: var(--ink);
+  background: var(--page);
+  font-size: var(--type-interface);
+  line-height: 1;
+  transform: translateY(calc(-100% - 24px));
+  transition: transform 180ms var(--ease-out);
+}
+
+.skip-link:focus-visible {
+  transform: translateY(0);
+}
+
+.site-shell {
+  position: relative;
+  min-height: 100vh;
+  min-height: 100dvh;
+  background: var(--page);
+}
+
+/* Fifteen equal columns on desktop, twelve on tablets. The rail takes three,
+   or more where its widest item needs more: the extra comes out of the fourth
+   column, the margin-index track before the reading start, and never leaves it
+   narrower than the frames' inset, so the reading start and every column after
+   it stand where the equal grid puts them. */
+.site-frame,
+.structural-grid {
+  --rail-track: max(calc(100% / 15), calc(var(--rail-min-width) / 3));
+
+  grid-template-columns: repeat(3, var(--rail-track)) max(var(--frame-inset), calc(100% * 4 / 15 - 3 * var(--rail-track))) repeat(11, minmax(0, 1fr));
+}
+
+.site-frame {
+  position: relative;
+  display: grid;
+  width: min(100%, 1440px);
+  min-height: calc(100vh - var(--site-footer-height));
+  min-height: calc(100dvh - var(--site-footer-height));
+  margin: 0 auto;
+  padding: 0 64px;
+}
+
+.structural-grid {
+  position: absolute;
+  z-index: 0;
+  inset: 0 64px;
+  display: grid;
+  pointer-events: none;
+}
+
+.structural-guide {
+  position: relative;
+  grid-row: 1;
+  min-height: 100%;
+}
+
+.structural-guide::before {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: -0.5px;
+  width: 1px;
+  background: var(--rule);
+  content: "";
+}
+
+.structural-guide-frame-start {
+  grid-column: 1;
+}
+
+.structural-guide-rail-boundary {
+  grid-column: 4;
+}
+
+.structural-guide-reading-start {
+  grid-column: 5;
+}
+
+.structural-guide-reading-measure {
+  grid-column: 12;
+}
+
+.structural-grid[data-guides="index"] .structural-guide-reading-measure {
+  grid-column: 9;
+}
+
+@media (width < 1200px) {
+  .structural-grid[data-guides="index"] .structural-guide-reading-measure {
+    display: none;
+  }
+}
+
+.structural-guide-reading-end {
+  grid-column: 15;
+}
+
+/* The closing guide is drawn on the last pixel column of the frames that end
+   on it, so a frame's right edge and the guide read as one line. */
+.structural-guide-reading-end::before {
+  left: -1px;
+}
+
+.structural-guide-reading-start::before,
+.structural-guide-reading-measure::before {
+  bottom: auto;
+  background: linear-gradient(to bottom, var(--rule) 0%, var(--rule) 55%, transparent 100%);
+}
+
+.structural-guide-reading-start::before {
+  height: 220px;
+}
+
+/* Stops above the first line of content, which spans this column on every page. */
+.structural-guide-reading-measure::before {
+  height: 96px;
+}
+
+.structural-guide-tick {
+  position: sticky;
+  z-index: 1;
+  top: 0;
+  display: block;
+  width: 2px;
+  height: 20px;
+  padding-top: 8px;
+  background: var(--page);
+  transform: translateX(-1px);
+}
+
+.structural-guide-tick::after {
+  display: block;
+  width: 2px;
+  height: 8px;
+  background: var(--muted);
+  content: "";
+  opacity: 0.55;
+}
+
+@media (768px <= width < 1200px) {
+  :root {
+    --reading-width: min(var(--reading-measure), 100% - var(--frame-inset));
+    --rail-min-width: calc(var(--rail-item-width) + 12px + 12px);
+  }
+}
+
+.site-rail {
+  --rail-safe-inset: var(--frame-inset);
+
+  position: sticky;
+  z-index: 30;
+  top: 0;
+  grid-column: 1 / span 3;
+  align-self: start;
+  min-width: 0;
+  padding: var(--content-top) 22px 36px var(--rail-safe-inset);
+}
+
+/* Below 1200px the rail's text keeps 12px from the frame-start guide and from
+   the rail's own guide. */
+@media (768px <= width < 1200px) {
+  .site-rail {
+    --rail-safe-inset: 12px;
+
+    padding-right: 12px;
+  }
+}
+
+.rail-header {
+  display: block;
+}
+
+.wordmark {
+  display: inline-flex;
+  max-width: 100%;
+  min-height: 44px;
+  align-items: center;
+  color: var(--ink);
+  line-height: 1;
+  transition: color 180ms var(--ease-out);
+}
+
+.wordmark:active,
+.menu-toggle:active,
+.primary-nav a:active,
+.parent-link:active,
+.back-link:active,
+.top-link:active {
+  color: var(--accent);
+}
+
+/* The footer's two actions turn blue on keyboard focus, as on hover. */
+.back-link:focus-visible,
+.top-link:focus-visible {
+  color: var(--accent);
+  text-decoration-color: var(--accent);
+}
+
+/* Back to Top: plain interface text beside the underlined return link. It
+   steps aside on a page that fits the window (BackToTop). */
+.top-link {
+  transition: color 180ms var(--ease-out);
+}
+
+.top-link[hidden] {
+  display: none;
+}
+
+/* The mark stands beside the name at every width; the rail is sized to hold it. */
+.wordmark-lockup {
+  display: inline-flex;
+  min-width: 0;
+  flex: 0 1 auto;
+  flex-wrap: nowrap;
+  align-items: center;
+  color: var(--ink);
+  gap: 12px;
+  transition: color 180ms var(--ease-out);
+}
+
+.wordmark-mark {
+  display: block;
+  width: 20px;
+  height: 20px;
+  flex: 0 0 20px;
+}
+
+.wordmark-name {
+  display: block;
+  min-width: min-content;
+  font-size: var(--type-interface);
+  font-weight: 500;
+  letter-spacing: 0;
+  line-height: var(--interface-leading);
+  overflow-wrap: normal;
+  white-space: nowrap;
+}
+
+.menu-toggle {
+  display: none;
+  min-width: 44px;
+  min-height: 44px;
+  justify-content: flex-end;
+  padding: 0;
+  border: 0;
+  color: var(--ink);
+  background: transparent;
+  font-size: var(--type-interface);
+  line-height: 1;
+  cursor: pointer;
+  transition: color 180ms var(--ease-out);
+}
+
+.rail-panel {
+  display: block;
+}
+
+.primary-nav {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  margin-top: 33px;
+  font-size: var(--type-interface);
+  line-height: var(--interface-leading);
+}
+
+.primary-nav a {
+  position: relative;
+  display: flex;
+  min-height: 27px;
+  align-items: center;
+  padding-left: 13px;
+  transition: color 180ms var(--ease-out);
+}
+
+.primary-nav a::before {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  width: 2px;
+  height: 12px;
+  background: currentColor;
+  content: "";
+  opacity: 0;
+  transform: translateY(-50%) scaleY(0.4);
+  transform-origin: center;
+  transition: opacity 180ms var(--ease-out), transform 180ms var(--ease-out);
+}
+
+/* Rows stand 27px apart, so the focus ring is drawn inside the row and never
+   touches the links above and below. */
+.primary-nav a:focus-visible {
+  outline-offset: -2px;
+}
+
+.primary-nav a.active {
+  color: var(--accent);
+}
+
+.primary-nav a.active::before {
+  opacity: 1;
+  transform: translateY(-50%) scaleY(1);
+}
+
+.parent-nav {
+  margin-top: 33px;
+  font-size: var(--type-interface);
+  line-height: var(--interface-leading);
+}
+
+.parent-link {
+  display: flex;
+  width: fit-content;
+  max-width: 100%;
+  min-height: 44px;
+  align-items: flex-start;
+  gap: 10px;
+  padding-block: 10px;
+  color: var(--ink);
+  transition: color 180ms var(--ease-out);
+}
+
+.parent-link svg {
+  flex: 0 0 16px;
+  margin-top: 2px;
+}
+
+/* A label longer than the rail ("Back to Selected Research") wraps in balanced
+   lines that hang beside the arrow. */
+.parent-link span {
+  min-width: 0;
+  text-wrap: balance;
+}
+
+.back-link {
+  text-decoration: underline;
+  text-decoration-color: var(--link-rule);
+  text-decoration-thickness: 1px;
+  text-underline-offset: var(--link-underline-offset);
+  transition: color 180ms var(--ease-out), text-decoration-color 180ms var(--ease-out);
+}
+
+.content-column {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  /* The content takes the frame's own columns, so a section that starts on
+     the margin-index track starts where the rail ends. */
+  grid-template-columns: subgrid;
+  grid-auto-rows: max-content;
+  grid-column: 4 / -1;
+  align-content: start;
+  min-width: 0;
+  /* A string longer than its line breaks in an emergency, but a word still
+     sets the narrowest width of the grid track or flex item that holds it, so
+     no label, heading or cell is narrowed until its words split. */
+  overflow-wrap: break-word;
+  padding: var(--content-top) 0 144px;
+}
+
+.content-column > * {
+  grid-column: 2 / span 10;
+  min-width: 0;
+}
+
+.page-intro {
+  margin: 0 0 72px;
+}
+
+.page-intro h1 {
+  max-width: var(--title-width);
+  margin: 0;
+  color: var(--ink);
+  font-size: var(--type-title);
+  font-weight: 400;
+  line-height: var(--title-leading);
+  letter-spacing: var(--title-tracking);
+  text-wrap: balance;
+}
+
+.lede {
+  margin: 27px 0 0;
+  color: var(--ink);
+  font-family: var(--font-prose);
+  font-size: var(--type-reading);
+  line-height: var(--reading-leading);
+}
+
+.back-link {
+  display: inline-flex;
+  min-height: 44px;
+  align-items: center;
+  margin-bottom: 58px;
+  font-size: var(--type-interface);
+  line-height: var(--interface-leading);
+  gap: 10px;
+}
+
+.back-link svg {
+  flex: 0 0 16px;
+}
+
+.education-entry {
+  padding: 36px 0 46px;
+  border-bottom: 1px solid var(--rule);
+}
+
+.education-degree {
+  margin: 20px 0 0;
+  font-size: var(--type-subheading);
+  font-weight: 600;
+  line-height: var(--subheading-leading);
+  text-wrap: balance;
+}
+
+.entry-subtitle,
+.education-note {
+  margin: 6px 0 0;
+  font-family: var(--font-prose);
+  font-size: var(--type-reading);
+  line-height: var(--reading-leading);
+}
+
+.entry-subtitle {
+  color: var(--muted);
+}
+
+.education-notes {
+  margin-top: 20px;
+}
+
+.education-note + .education-note {
+  margin-top: 12px;
+}
+
+.education-note a {
+  text-decoration: underline;
+  text-decoration-color: var(--link-rule);
+  text-decoration-thickness: 1px;
+  text-underline-offset: var(--link-underline-offset);
+  text-decoration-skip-ink: auto;
+}
+
+.education-note a:focus-visible {
+  color: var(--accent);
+  text-decoration-color: currentColor;
+}
+
+/* Ledger: a section's items in one unfilled frame with room inside. Each title
+   hangs on the left; from 1200px one continuous dashed spine divides the titles
+   from their prose. */
+.ledger {
+  position: relative;
+  padding: var(--frame-pad) var(--frame-pad) calc(var(--frame-pad) - 10px);
+  border: 1px solid var(--frame);
+}
+
+.ledger-item {
+  scroll-margin-top: 40px;
+}
+
+.ledger-item + .ledger-item {
+  margin-top: 72px;
+}
+
+.ledger-title {
+  margin: 0;
+  color: var(--ink);
+  font-size: var(--type-subheading);
+  font-weight: 500;
+  line-height: var(--subheading-leading);
+  letter-spacing: var(--subheading-tracking);
+  text-wrap: pretty;
+}
+
+.ledger-body {
+  min-width: 0;
+  max-width: var(--reading-measure);
+}
+
+.ledger-prose {
+  margin: 0;
+  font-family: var(--font-prose);
+  font-size: var(--type-reading);
+  line-height: var(--reading-leading);
+  text-wrap: pretty;
+}
+
+.ledger-prose code {
+  font: inherit;
+  overflow-wrap: anywhere;
+}
+
+.read-more {
+  display: flex;
+  width: fit-content;
+  align-items: center;
+  min-height: 44px;
+  margin-top: 8px;
+  gap: 6px;
+  font-size: var(--type-action);
+  font-weight: 500;
+  line-height: var(--interface-leading);
+  text-decoration: underline;
+  text-decoration-color: var(--link-rule);
+  text-underline-offset: var(--link-underline-offset);
+  cursor: pointer;
+  transition: color 180ms var(--ease-out), text-decoration-color 180ms var(--ease-out);
+}
+
+.read-more svg {
+  width: 14px;
+  height: 14px;
+  flex-shrink: 0;
+  transition: transform 180ms var(--ease-out);
+}
+
+/* The site footer runs from the frame's first guide to the closing guide, the
+   edge every section ends on: the frame less its last content column. */
+.site-footer {
+  --frame-width: min(100% - 128px, 1312px);
+  --frame-column: calc((var(--frame-width) - max(var(--frame-width) * 4 / 15, 3 * max(var(--frame-width) / 15, var(--rail-min-width) / 3) + var(--frame-inset))) / 11);
+
+  display: flex;
+  justify-content: space-between;
+  width: calc(var(--frame-width) - var(--frame-column));
+  margin: 0 0 0 calc((100% - var(--frame-width)) / 2);
+  padding: 25px 0 34px;
+  border-top: 1px solid var(--rule-strong);
+  color: var(--muted);
+  font-size: var(--type-label);
+  line-height: var(--label-leading);
+}
+
+.site-footer p {
+  margin: 0;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .menu-toggle:hover,
+  .primary-nav a:hover,
+  .parent-link:hover,
+  .back-link:hover,
+  .top-link:hover,
+  .education-note a:hover,
+  .read-more:hover {
+    color: var(--accent);
+    text-decoration-color: var(--accent);
+  }
+
+  .wordmark:hover .wordmark-lockup {
+    color: var(--accent);
+  }
+
+  .read-more:hover svg {
+    transform: translateX(2px);
+  }
+}
+
+@media (width >= 1200px) {
+  /* The spine stands on axis B, four of the frame's ten columns in, where the
+     column guide stands: 40% of the frame's border box, centered on the guide's
+     line. The entries split on the same axis. */
+  .ledger::before {
+    position: absolute;
+    top: var(--frame-pad);
+    bottom: var(--frame-pad);
+    left: calc(40% - 0.7px);
+    width: 1px;
+    background: var(--dash-y);
+    content: "";
+  }
+
+  .ledger-item {
+    display: grid;
+    grid-template-columns: calc(40% - 0.2 * var(--frame-pad) - 0.2px) minmax(0, 1fr);
+    align-items: start;
+  }
+
+  .ledger-title {
+    padding-right: var(--hang-gap);
+  }
+
+  .ledger-body {
+    max-width: none;
+    padding-left: var(--hang-gap);
+  }
+}
+
+@media (width < 1200px) {
+  .ledger {
+    padding: 32px 32px 22px;
+  }
+
+  .ledger-title {
+    margin-bottom: 12px;
+  }
+
+  .ledger-item + .ledger-item {
+    margin-top: 36px;
+    padding-top: 36px;
+    background: var(--dash-x) left top / 100% 1px no-repeat;
+  }
+}
+
+@media (pointer: coarse) {
+  .primary-nav a {
+    min-height: 44px;
+  }
+}
+
+@media (width >= 768px) {
+  /* The rail is as tall as its contents, so the site footer never pushes it up
+     at the end of a page; a rail taller than the window scrolls inside it. */
+  .site-rail {
+    max-height: 100vh;
+    max-height: 100dvh;
+    overflow-y: auto;
+    scrollbar-width: thin;
+    scrollbar-color: var(--rule-strong) transparent;
+  }
+}
+
+@media (768px <= width < 1024px) {
+  .site-frame,
+  .structural-grid {
+    --rail-track: max(calc(100% / 12), calc(var(--rail-min-width) / 3));
+
+    grid-template-columns: repeat(3, var(--rail-track)) max(var(--frame-inset), calc(100% / 3 - 3 * var(--rail-track))) repeat(8, minmax(0, 1fr));
+  }
+
+  .site-frame {
+    padding: 0 32px;
+  }
+
+  .structural-grid {
+    inset: 0 32px;
+  }
+
+  .structural-guide-reading-measure {
+    display: none;
+  }
+
+  .structural-guide-reading-end {
+    grid-column: 12;
+    justify-self: end;
+    /* Zero width puts the line, drawn on the guide's left edge, on the column's end. */
+    width: 0;
+  }
+
+  .content-column {
+    grid-column: 4 / -1;
+  }
+
+  .content-column > * {
+    grid-column: 2 / -1;
+  }
+
+  .ledger {
+    padding-inline: 24px;
+  }
+
+  /* On tablets the closing guide stands on the frame's end. */
+  .site-footer {
+    width: calc(100% - 64px);
+    margin-inline: auto;
+  }
+}
+
+@media (width < 768px) {
+  :root {
+    --type-title: 1.875rem;
+    --type-heading: 1.375rem;
+  }
+
+  /* One landing for every in-page target: the scroll padding clears the
+     header, and a section or entry adds half a rem of paper below it. */
+  html {
+    scrollbar-gutter: auto;
+    scroll-padding-top: 4.5rem;
+  }
+
+  body.menu-open .site-rail {
+    position: fixed;
+    top: 0;
+    right: 0;
+    left: 0;
+    width: 100%;
+    margin-left: 0;
+  }
+
+  .site-frame {
+    display: block;
+    width: 100%;
+    padding: 0 20px;
+  }
+
+  .structural-grid {
+    display: none;
+  }
+
+  .site-rail {
+    position: sticky;
+    z-index: 80;
+    top: 0;
+    width: calc(100% + 40px);
+    height: auto;
+    margin-left: -20px;
+    padding: 0 20px;
+    border-bottom: 1px solid var(--rule);
+    background: var(--page);
+  }
+
+  .site-rail[data-enhanced="true"] {
+    height: 4rem;
+  }
+
+  /* On a detail page the wordmark row scrolls away and the return row stays
+     pinned, so reading keeps the way back at hand in a 53px header. */
+  .site-rail[data-parent-navigation="true"] {
+    top: -3.5rem;
+    height: auto;
+    padding-bottom: 8px;
+  }
+
+  .site-rail[data-parent-navigation="true"] .rail-header {
+    height: 3.5rem;
+  }
+
+  .parent-nav {
+    margin-top: 0;
+  }
+
+  .rail-header {
+    position: relative;
+    z-index: 2;
+    display: flex;
+    height: 4rem;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+  }
+
+  .wordmark {
+    min-width: 0;
+  }
+
+  .site-rail[data-enhanced="true"] .menu-toggle {
+    display: inline-flex;
+    align-items: center;
+  }
+
+  .rail-panel {
+    padding-bottom: 20px;
+  }
+
+  .site-rail[data-enhanced="true"] .rail-panel {
+    position: fixed;
+    z-index: 1;
+    top: 4rem;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    overflow-y: auto;
+    padding: 39px 20px 56px;
+    background: var(--page);
+    opacity: 0;
+    pointer-events: none;
+    visibility: hidden;
+  }
+
+  .site-rail[data-menu-interacted="true"] .rail-panel {
+    transition:
+      opacity 200ms var(--drawer-ease),
+      visibility 0s linear 200ms;
+  }
+
+  .site-rail[data-menu-open="true"] .rail-panel {
+    opacity: 1;
+    pointer-events: auto;
+    visibility: visible;
+    transition-delay: 0s;
+  }
+
+  .primary-nav {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    margin: 0;
+  }
+
+  .site-rail[data-enhanced="true"] .primary-nav {
+    grid-template-columns: 1fr;
+  }
+
+  .primary-nav a {
+    min-height: 54px;
+    padding-left: 15px;
+  }
+
+  .primary-nav a::before {
+    height: 18px;
+  }
+
+  .content-column {
+    display: block;
+    padding: 52px 0 100px;
+  }
+
+  .page-intro {
+    margin-bottom: 66px;
+  }
+
+  .education-entry {
+    padding: 29px 0 36px;
+  }
+
+  .education-degree {
+    margin-top: 15px;
+  }
+
+  .back-link {
+    margin-bottom: 45px;
+  }
+
+  .ledger {
+    padding: 28px 20px 18px;
+  }
+
+  .ledger-item {
+    scroll-margin-top: 0.5rem;
+  }
+
+  .ledger-item + .ledger-item {
+    margin-top: 28px;
+    padding-top: 28px;
+  }
+
+  .site-footer {
+    width: calc(100% - 40px);
+    margin-inline: auto;
+    padding-bottom: 28px;
+  }
+}
+
+/* Below 1200px a title stacks above its content and takes the whole column,
+   less the frames' inset from the closing guide; phones have no guides. */
+@media (width < 1200px) {
+  :root {
+    --title-width: calc(100% - var(--frame-inset));
+  }
+}
+
+@media (width < 768px) {
+  :root {
+    --title-width: 100%;
+    --site-footer-height: calc(1px + 25px + var(--type-label) * var(--label-leading) + 28px);
+  }
+}
+
+@media (width <= 540px) {
+  :root {
+    --site-footer-height: calc(1px + 25px + 2 * var(--type-label) * var(--label-leading) + 4px + 28px);
+  }
+
+  .site-footer {
+    display: grid;
+    gap: 4px;
+  }
+}
+
+/* A landscape phone keeps the rail, so the content field starts higher and
+   the first screen holds more than the title; the wordmark keeps its line. */
+@media (768px <= width) and (height < 500px) {
+  :root {
+    --content-top: 48px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .skip-link,
+  .wordmark,
+  .wordmark-lockup,
+  .menu-toggle,
+  .primary-nav a,
+  .parent-link,
+  .primary-nav a::before,
+  .back-link,
+  .top-link,
+  .rail-panel,
+  .site-rail[data-menu-interacted="true"] .rail-panel,
+  .read-more,
+  .read-more svg {
+    transition: none;
+  }
+}
+
+@media (prefers-contrast: more) {
+  :root {
+    --muted: #454542;
+    --rule: rgba(0, 0, 0, 0.2);
+    --rule-strong: rgba(0, 0, 0, 0.48);
+  }
+
+  a:focus-visible,
+  button:focus-visible {
+    outline-width: 3px;
+  }
+}
+
+@media (forced-colors: active) {
+  :root {
+    --page: Canvas;
+    --ink: CanvasText;
+    --muted: CanvasText;
+    --rule: GrayText;
+    --rule-strong: CanvasText;
+    --accent: LinkText;
+  }
+
+}

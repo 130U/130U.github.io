@@ -1,0 +1,369 @@
+"use client";
+
+import { useEffect } from "react";
+import { digitRuns } from "./digit-runs";
+import styles from "./Figure.module.css";
+
+/** Sets a readout's text, each long number in the digit groups its labels use. */
+function writeReadout(element: HTMLElement, text: string) {
+  element.replaceChildren(...digitRuns(text).map((run) => {
+    if (!run.group) return document.createTextNode(run.text);
+    const group = document.createElement("span");
+    group.className = styles.digitGroup;
+    group.dataset.digitGroup = "";
+    group.textContent = run.text;
+    return group;
+  }));
+}
+
+type Crosshair = {
+  x: number[];
+  heading: string[];
+  series: Array<{ name: string; tone: string; y: number[]; value: string[] }>;
+};
+
+/**
+ * Gives one server-rendered figure its view switches, hover readouts, linked
+ * emphasis and proof-obligation graph, in the article or enlarged on the zoom
+ * stage, and returns what removes them. Readouts are placed in the frame's own
+ * units, so they keep their place while the stage scales the figure.
+ */
+export function enhanceFigure(figure: HTMLElement): () => void {
+  const cleanups: Array<() => void> = [];
+  const listen = <K extends keyof HTMLElementEventMap>(target: HTMLElement, type: K, handler: (event: HTMLElementEventMap[K]) => void) => {
+    target.addEventListener(type, handler as EventListener);
+    cleanups.push(() => target.removeEventListener(type, handler as EventListener));
+  };
+  const frame = figure.firstElementChild as HTMLElement;
+  const scale = () => frame.getBoundingClientRect().width / frame.offsetWidth || 1;
+
+  // Make a wide comparison's sideways continuation visible on small screens:
+  // its right edge fades by as much as is left to scroll.
+  for (const region of figure.querySelectorAll<HTMLElement>("[data-figure-scroll]")) {
+    const update = () => {
+      const remaining = region.scrollWidth - region.clientWidth - region.scrollLeft;
+      region.toggleAttribute("data-scroll-overflow", region.scrollWidth > region.clientWidth + 2);
+      region.style.setProperty("--edge-fade", `${Math.max(0, Math.min(40, remaining))}px`);
+    };
+    update();
+    listen(region, "scroll", update);
+    const observer = new ResizeObserver(update);
+    observer.observe(region);
+    if (region.firstElementChild) observer.observe(region.firstElementChild);
+    cleanups.push(() => observer.disconnect());
+  }
+
+  // View switches.
+  const switcher = figure.querySelector<HTMLElement>("[data-fig-switch]");
+  if (switcher) {
+    switcher.hidden = false;
+    const buttons = [...switcher.querySelectorAll<HTMLButtonElement>("[data-fig-view]")];
+    // Whether the views share one height (see settle below).
+    let shared = true;
+    const reduced = window.matchMedia("(prefers-reduced-motion: reduce)");
+    const show = (view: string) => {
+      const pressedAt = switcher.getBoundingClientRect().top;
+      const before = frame.offsetHeight;
+      figure.dataset.view = view;
+      for (const button of buttons) button.setAttribute("aria-pressed", String(button.dataset.figView === view));
+      for (const panel of figure.querySelectorAll<HTMLElement>("[data-fig-panel]")) panel.hidden = panel.dataset.figPanel !== view;
+      // The switch stays where it was pressed: the change happens below it, and
+      // a scroll anchor further down may not carry the page with it.
+      const moved = switcher.getBoundingClientRect().top - pressedAt;
+      if (Math.abs(moved) > 0.5 && !figure.closest("dialog")) window.scrollBy(0, moved);
+      // A frame that follows its view eases to the new height.
+      const after = frame.offsetHeight;
+      if (shared || reduced.matches || after === before) return;
+      const done = () => {
+        frame.style.removeProperty("height");
+        frame.style.removeProperty("overflow");
+        frame.style.removeProperty("transition");
+      };
+      frame.style.height = `${before}px`;
+      frame.style.overflow = "clip";
+      void frame.offsetHeight;
+      frame.style.transition = "height 150ms ease";
+      frame.style.height = `${after}px`;
+      frame.addEventListener("transitionend", done, { once: true });
+      window.setTimeout(done, 250);
+    };
+    for (const button of buttons) listen(button, "click", () => show(button.dataset.figView!));
+    // The segments share one row while every label fits on it; otherwise they
+    // stack, four in two columns while each label holds its half, and else one
+    // to a row, so no label takes two lines. Layout is measured in the frame's
+    // own units, so the stage's scale does not change the choice.
+    let measured = -1;
+    // A label fits its segment when its ink stands within the segment's padding.
+    const cramped = (button: HTMLButtonElement) => {
+      const style = getComputedStyle(button);
+      const room = button.clientWidth - parseFloat(style.paddingLeft) - parseFloat(style.paddingRight);
+      const range = document.createRange();
+      range.selectNodeContents(button);
+      return range.getBoundingClientRect().width / scale() > room + 0.5;
+    };
+    const overflows = () => switcher.scrollWidth > switcher.clientWidth + 1 || buttons.some(cramped);
+    const fit = () => {
+      const room = (switcher.parentElement ?? switcher).clientWidth;
+      if (room === measured) return;
+      measured = room;
+      delete switcher.dataset.stack;
+      if (!overflows()) return;
+      switcher.dataset.stack = "";
+      if (overflows()) switcher.dataset.stack = "column";
+    };
+    // Views within 15% or 60px of one height share the tallest one's, so the
+    // page beneath never moves for a near match; views further apart keep
+    // their own heights rather than show blank paper, and the frame follows.
+    const panels = [...frame.querySelectorAll<HTMLElement>(":scope > [data-fig-panel]")];
+    let settledWidth = -1;
+    const settle = () => {
+      if (panels.length < 2 || frame.clientWidth === settledWidth) return;
+      settledWidth = frame.clientWidth;
+      for (const panel of panels) panel.style.minHeight = "";
+      const heights = panels.map((panel) => {
+        const hidden = panel.hidden;
+        panel.hidden = false;
+        const height = panel.offsetHeight;
+        panel.hidden = hidden;
+        return height;
+      });
+      const tallest = Math.max(...heights);
+      const spread = tallest - Math.min(...heights);
+      shared = spread <= 60 || spread <= 0.15 * tallest;
+      if (shared) for (const panel of panels) panel.style.minHeight = `${tallest}px`;
+    };
+    fit();
+    settle();
+    // The labels take their measure in the interface face once it loads.
+    void document.fonts?.ready.then(() => { measured = -1; settledWidth = -1; fit(); settle(); });
+    const observer = new ResizeObserver(() => { fit(); settle(); });
+    observer.observe(switcher.parentElement ?? switcher);
+    observer.observe(frame);
+    cleanups.push(() => observer.disconnect());
+    cleanups.push(() => panels.forEach((panel) => { panel.style.minHeight = ""; }));
+  }
+
+  // Tooltips for marks that carry data-tip.
+  const tooltip = document.createElement("div");
+  tooltip.className = styles.tooltip;
+  tooltip.setAttribute("aria-hidden", "true");
+  tooltip.dataset.figureLayer = "";
+  frame.append(tooltip);
+  cleanups.push(() => tooltip.remove());
+  let tipTarget: HTMLElement | null = null;
+  const placeTip = (target: HTMLElement) => {
+    const factor = scale();
+    const box = frame.getBoundingClientRect();
+    const mark = target.getBoundingClientRect();
+    writeReadout(tooltip, target.dataset.tip ?? "");
+    tooltip.dataset.open = "";
+    const width = tooltip.offsetWidth;
+    const height = tooltip.offsetHeight;
+    let left = (mark.left + mark.width / 2 - box.left) / factor - width / 2;
+    left = Math.max(8, Math.min(left, frame.offsetWidth - width - 8));
+    let top = (mark.top - box.top) / factor - height - 10;
+    if (top < 4) top = (mark.bottom - box.top) / factor + 10;
+    tooltip.style.left = `${left}px`;
+    tooltip.style.top = `${top}px`;
+  };
+  listen(frame, "pointerover", (event) => {
+    const target = (event.target as HTMLElement).closest<HTMLElement>("[data-tip]");
+    if (!target || target === tipTarget) return;
+    tipTarget = target;
+    placeTip(target);
+  });
+  listen(frame, "pointerout", (event) => {
+    const next = (event.relatedTarget as HTMLElement | null)?.closest?.("[data-tip]");
+    if (tipTarget && next !== tipTarget) {
+      tipTarget = null;
+      delete tooltip.dataset.open;
+    }
+  });
+  listen(frame, "focusin", (event) => {
+    const target = (event.target as HTMLElement).closest<HTMLElement>("[data-tip]");
+    if (target) placeTip(target);
+  });
+  listen(frame, "focusout", () => delete tooltip.dataset.open);
+
+  // Linked emphasis: hovering any [data-key] marks every element with that key.
+  const keyed = [...figure.querySelectorAll<HTMLElement>("[data-key]")];
+  if (keyed.length) {
+    listen(frame, "pointerover", (event) => {
+      const key = (event.target as HTMLElement).closest<HTMLElement>("[data-key]")?.dataset.key;
+      if (key === figure.dataset.focus) return;
+      if (key) figure.dataset.focus = key; else delete figure.dataset.focus;
+      for (const node of keyed) node.toggleAttribute("data-key-active", node.dataset.key === key);
+    });
+    listen(frame, "pointerleave", () => {
+      delete figure.dataset.focus;
+      for (const node of keyed) node.removeAttribute("data-key-active");
+    });
+  }
+
+  // Crosshair readouts on line charts.
+  for (const area of figure.querySelectorAll<HTMLElement>("[data-crosshair]")) {
+    const spec = JSON.parse(area.dataset.crosshair!) as Crosshair;
+    const rule = document.createElement("span");
+    rule.className = styles.crossRule;
+    const dots = spec.series.map((series) => {
+      const dot = document.createElement("span");
+      dot.className = `${styles.crossDot} ${styles[series.tone] ?? ""}`;
+      return dot;
+    });
+    const layer = [rule, ...dots];
+    for (const node of layer) {
+      node.hidden = true;
+      node.dataset.figureLayer = "";
+    }
+    area.append(...layer);
+    cleanups.push(() => layer.forEach((node) => node.remove()));
+    const hide = () => {
+      for (const node of layer) node.hidden = true;
+      delete tooltip.dataset.open;
+    };
+    listen(area, "pointermove", (event) => {
+      const factor = scale();
+      const box = area.getBoundingClientRect();
+      const at = ((event.clientX - box.left) / box.width) * 100;
+      let index = 0;
+      for (let candidate = 1; candidate < spec.x.length; candidate += 1) {
+        if (Math.abs(spec.x[candidate] - at) < Math.abs(spec.x[index] - at)) index = candidate;
+      }
+      rule.hidden = false;
+      rule.style.left = `${spec.x[index]}%`;
+      spec.series.forEach((series, position) => {
+        const y = series.y[index];
+        dots[position].hidden = !Number.isFinite(y);
+        dots[position].style.left = `${spec.x[index]}%`;
+        dots[position].style.top = `${100 - y}%`;
+      });
+      writeReadout(tooltip, [spec.heading[index], ...spec.series.map((series) => `${series.name}: ${series.value[index]}`)].join("\n"));
+      tooltip.dataset.open = "";
+      const frameBox = frame.getBoundingClientRect();
+      const width = tooltip.offsetWidth;
+      const pointX = (box.left - frameBox.left) / factor + (spec.x[index] / 100) * area.offsetWidth;
+      const left = pointX + 14 + width > frame.offsetWidth - 8 ? pointX - width - 14 : pointX + 14;
+      tooltip.style.left = `${Math.max(8, left)}px`;
+      tooltip.style.top = `${(box.top - frameBox.top) / factor}px`;
+      // The readout stands at the top of the plot, or at its foot where it
+      // would cover one of the plot's labels.
+      const tip = tooltip.getBoundingClientRect();
+      const covers = [...area.querySelectorAll<HTMLElement>('[style*="--ax"]')].some((mark) => {
+        const label = mark.getBoundingClientRect();
+        return label.width > 0 && label.left < tip.right && tip.left < label.right && label.top < tip.bottom && tip.top < label.bottom;
+      });
+      if (covers) tooltip.style.top = `${(box.bottom - frameBox.top) / factor - tooltip.offsetHeight}px`;
+    });
+    listen(area, "pointerleave", hide);
+  }
+
+  // Proof-obligation graph: choosing a node marks it as the first failed
+  // obligation and its descendants as unverified.
+  const nodes = [...figure.querySelectorAll<HTMLButtonElement>("[data-dag-node]")];
+  if (nodes.length) {
+    const readout = figure.querySelector<HTMLElement>("[data-dag-status]");
+    const select = (id: string) => {
+      const chosen = nodes.find((node) => node.dataset.dagNode === id)!;
+      const unverified = new Set((chosen.dataset.dagDescendants ?? "").split(" ").filter(Boolean));
+      for (const node of nodes) {
+        const state = node === chosen ? "failed" : unverified.has(node.dataset.dagNode!) ? "unverified" : "verified";
+        node.dataset.state = state;
+        node.setAttribute("aria-pressed", String(node === chosen));
+      }
+      for (const edge of figure.querySelectorAll<SVGElement>("[data-dag-edge]")) {
+        const [from] = edge.dataset.dagEdge!.split(" ");
+        edge.dataset.state = from === id || unverified.has(from) ? "unverified" : "verified";
+      }
+      if (readout) writeReadout(readout, chosen.dataset.dagReadout ?? "");
+    };
+    for (const node of nodes) {
+      node.disabled = false;
+      listen(node, "click", () => select(node.dataset.dagNode!));
+    }
+  }
+
+  return () => cleanups.forEach((cleanup) => cleanup());
+}
+
+/**
+ * Enhances the article's server-rendered figures and tables: each figure's
+ * interactions, column highlighting and a single entrance as each figure
+ * scrolls into view. Every figure is complete without it.
+ */
+export function FigureController() {
+  useEffect(() => {
+    const cleanups: Array<() => void> = [];
+    const listen = <K extends keyof HTMLElementEventMap>(target: HTMLElement, type: K, handler: (event: HTMLElementEventMap[K]) => void) => {
+      target.addEventListener(type, handler as EventListener);
+      cleanups.push(() => target.removeEventListener(type, handler as EventListener));
+    };
+    const figures = [...document.querySelectorAll<HTMLElement>("[data-figure]")];
+    for (const figure of figures) cleanups.push(enhanceFigure(figure));
+
+    // Research tables: highlight the hovered column and its header, in the
+    // article and on the zoomed stage alike.
+    const tables = [...document.querySelectorAll<HTMLTableElement>("[data-research-table]")];
+    let litTable: HTMLTableElement | null = null;
+    let litColumn = -1;
+    const lightColumn = (table: HTMLTableElement | null, column: number) => {
+      if (table === litTable && column === litColumn) return;
+      const paint = (target: HTMLTableElement | null, index: number) => {
+        if (!target) return;
+        for (const row of target.rows) {
+          [...row.cells].forEach((cell, position) => cell.toggleAttribute("data-column-hover", position === index && position > 0));
+        }
+      };
+      if (table !== litTable) paint(litTable, -1);
+      paint(table, column);
+      litTable = table;
+      litColumn = column;
+    };
+    // Hover is for a fine pointer: a tap or a touch scroll lights nothing.
+    listen(document.documentElement, "pointerover", (event) => {
+      if (event.pointerType === "touch") return;
+      const cell = (event.target as Element).closest<HTMLTableCellElement>("[data-research-table] td, [data-research-table] th");
+      lightColumn(cell?.closest<HTMLTableElement>("[data-research-table]") ?? null, cell ? cell.cellIndex : -1);
+    });
+    listen(document.documentElement, "pointerleave", () => lightColumn(null, -1));
+
+    // One entrance per figure or table, only for those that start below the fold.
+    const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    if (!reduced && "IntersectionObserver" in window) {
+      const frames = tables.map((table) => table.closest<HTMLElement>("[data-table-frame]")).filter((frame): frame is HTMLElement => Boolean(frame));
+      const pendingFrames = frames.filter((frame) => frame.getBoundingClientRect().top > window.innerHeight);
+      const tableObserver = new IntersectionObserver((entries) => {
+        for (const entry of entries) {
+          if (!entry.isIntersecting) continue;
+          const frame = entry.target as HTMLElement;
+          tableObserver.unobserve(frame);
+          requestAnimationFrame(() => { frame.dataset.reveal = "in"; });
+        }
+      }, { rootMargin: "0px 0px -10% 0px" });
+      for (const frame of pendingFrames) {
+        [...frame.querySelectorAll<HTMLTableRowElement>("tbody tr")].forEach((row, index) => row.style.setProperty("--row", String(Math.min(index, 12))));
+        frame.dataset.reveal = "pending";
+        tableObserver.observe(frame);
+      }
+      cleanups.push(() => tableObserver.disconnect());
+
+      const pending = figures.filter((figure) => figure.getBoundingClientRect().top > window.innerHeight);
+      const observer = new IntersectionObserver((entries) => {
+        for (const entry of entries) {
+          if (!entry.isIntersecting) continue;
+          const figure = entry.target as HTMLElement;
+          observer.unobserve(figure);
+          requestAnimationFrame(() => { figure.dataset.reveal = "in"; });
+        }
+      }, { rootMargin: "0px 0px -15% 0px" });
+      for (const figure of pending) {
+        figure.dataset.reveal = "pending";
+        observer.observe(figure);
+      }
+      cleanups.push(() => observer.disconnect());
+    }
+
+    return () => cleanups.forEach((cleanup) => cleanup());
+  }, []);
+
+  return null;
+}

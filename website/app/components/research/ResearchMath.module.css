@@ -1,0 +1,379 @@
+.formula {
+  position: relative;
+  padding-block: 0.125em;
+  margin-block: -0.125em;
+  font-size: var(--type-math);
+  line-height: 0;
+}
+
+/* An inline formula takes the room of its expression in the line: its canvas
+   gutters lie in negative margins, so a line of prose keeps its leading unless
+   the expression itself reaches past it, and the word space alone parts the
+   formula from the words beside it, as TeX sets mathematics in a line. */
+.inline {
+  display: inline-block;
+  margin-block: calc(-0.125em - var(--math-gutter));
+  /* Include the two negative gutter margins supplied by ResearchMath. */
+  max-width: calc(100% + 2 * var(--math-gutter));
+  overflow-x: auto;
+  overflow-y: hidden;
+  scrollbar-width: none;
+  font-size: 1em;
+}
+
+/* A formula a little wider than its line is set slightly smaller (MathFit). */
+.inline > :first-child {
+  font-size: calc(var(--formula-fit, 1) * 1em);
+}
+
+.number {
+  position: relative;
+  font: inherit;
+  font-variant-numeric: lining-nums proportional-nums;
+  white-space: nowrap;
+}
+
+.number sup {
+  font-size: 0.75em;
+  line-height: 0;
+  vertical-align: super;
+}
+
+.numberScroll {
+  display: inline-block;
+  max-width: 100%;
+  overflow-x: auto;
+  overflow-y: hidden;
+  vertical-align: bottom;
+  scrollbar-width: thin;
+  scrollbar-color: var(--rule-strong) transparent;
+}
+
+.inline::-webkit-scrollbar {
+  display: none;
+}
+
+/* An inline formula wider than its line scrolls in place. While more of it
+   remains to the right, its last em fades out, as a display fades beneath its
+   number; at the end of the scroll the fade is gone. A formula that fits has
+   no scroll timeline and no fade. */
+@property --inline-remaining {
+  syntax: "<length>";
+  inherits: false;
+  initial-value: 0px;
+}
+
+@keyframes inline-remaining {
+  from, 96% { --inline-remaining: 1em; }
+  to { --inline-remaining: 0px; }
+}
+
+@supports (animation-timeline: scroll()) {
+  .inline[tabindex] {
+    animation: inline-remaining linear both;
+    animation-timeline: scroll(self inline);
+    -webkit-mask-image: linear-gradient(to left, transparent, #000 var(--inline-remaining));
+    mask-image: linear-gradient(to left, transparent, #000 var(--inline-remaining));
+  }
+
+  .inline[tabindex]:focus-visible {
+    -webkit-mask-image: none;
+    mask-image: none;
+  }
+}
+
+/* Every displayed equation follows one pattern, whatever its length. Its ink
+   starts on the manuscript inset, the axis its column shares with the text of a
+   framed table (the inset, inside the frame's 1px edge). Its number stands at
+   the column's right edge on the equation's baseline, in the prose face of the
+   references that cite it, set clear of the expression. An equation that
+   overshoots its column beside its number by a little is fitted (MathFit): the
+   gap before the number closes to an em, and the expression is set smaller,
+   never below nine tenths of its size, its gutter scaling with it so the ink
+   keeps its axis. An equation that has no room beside its number even so sets
+   the number on a line of its own beneath it, right-aligned at the column's
+   edge, as amsmath sets a tag that does not fit: the line wraps, and the gap
+   between lines, which stands only where the line wraps, sets the number's
+   baseline one line of mathematics below the last row's (--number-drop, from
+   the renderer), as if it were one more row. The expression stands in a box
+   of its own, which scrolls only where the expression is wider than the column
+   even alone; the number never shares a line with a row that the scroll cuts,
+   standing beside a whole last row (MathFit) or beneath. */
+.display {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  row-gap: calc(var(--number-drop) * var(--equation-fit, 1));
+}
+
+.equation:has([data-row-parted]:last-child) .display {
+  row-gap: calc(var(--number-drop-parted) * var(--equation-fit, 1));
+}
+
+/* The expression's box: the manuscript inset scrolls with the expression, so a
+   display that scrolls passes beneath the column's edge, not the inset. */
+.equationScroll {
+  display: flex;
+  flex: 0 1 auto;
+  align-items: baseline;
+  min-width: 0;
+  max-width: 100%;
+  padding-inline-start: calc(var(--manuscript-inset) + 1px - var(--math-gutter) * var(--equation-fit, 1));
+  overflow-x: auto;
+  overflow-y: hidden;
+  overscroll-behavior-x: contain;
+  scrollbar-width: thin;
+  scrollbar-color: var(--rule-strong) transparent;
+}
+
+.expression {
+  flex: none;
+  font-size: calc(var(--equation-fit, 1) * 1em);
+}
+
+/* The number keeps a strut's height above its baseline (0.75em of the
+   mathematics, as a row does) and a drawing's gutter below it, neither of which
+   reaches past the expression beside it; on a line of its own the strut sets
+   the line's baseline and the gutter the display's white space below. */
+.equationEdge {
+  flex: 1 0 auto;
+  margin-block-end: calc(0.375 * var(--type-math) * var(--equation-fit, 1));
+  padding-inline-start: 1.5em;
+  font-family: var(--font-prose);
+  font-size: var(--type-reading);
+  font-variant-numeric: lining-nums proportional-nums;
+  text-align: end;
+  white-space: nowrap;
+}
+
+.equationEdge::before {
+  content: "";
+  display: inline-block;
+  height: calc(0.75 * var(--type-math) * var(--equation-fit, 1));
+}
+
+.equation[data-fit] .equationEdge {
+  padding-inline-start: 1em;
+}
+
+/* Where the last line of a display set as rows leaves room for the number,
+   the number stands beside that line, on its baseline, as TeX sets a tag
+   beside the last line that has room for it (MathFit sets the offset). */
+.equation[data-number-last] .equationEdge {
+  position: absolute;
+  inset-inline-end: 0;
+  top: var(--number-top);
+  margin: 0;
+}
+
+/* A display that scrolls (MathFit marks it) fades out over an em at the
+   column's edge while more of it remains, as a wide table fades at its right
+   edge: the fade keeps the edge, and at the end of the scroll it stands past
+   the expression, over blank paper. Its paper reaches 2px past the column's
+   edge, so no sliver of the passing expression shows where the fade and the
+   box's clip fall on different device pixels. At rest, where the edge falls in
+   a blank of the expression, the fade reaches back over the last ink before it
+   (--fade-reach), so the expression visibly fades while more remains. */
+.fade {
+  display: none;
+}
+
+.equation[data-scrolls] .fade {
+  display: block;
+  position: sticky;
+  inset-inline-end: 0;
+  flex: none;
+  align-self: stretch;
+  width: 1em;
+  font-size: var(--type-reading);
+  border-image: linear-gradient(to right, transparent, var(--page) 1em) fill 0 // 100vmax 2px 100vmax 0;
+}
+
+.equation[data-scrolls] .equationScroll:not([data-scrolled]) .fade {
+  border-image-outset: 100vmax 2px 100vmax var(--fade-reach, 0px);
+}
+
+.assistive {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* A display of formulas the manuscript sets side by side is set as rows, one
+   formula to a row, at every width. The rows stand on the display's axis, one
+   line of mathematics apart, each as tall as an array row's strut (0.75em
+   above the baseline, 0.25em below) or its drawing, as TeX sets the rows of
+   aligned equations: the renderer gives each row the space above it. The
+   stack keeps a drawing's gutter, so its ink starts on the manuscript inset
+   and it stands in a display's white space; its baseline is its last row's,
+   where the equation number stands. A row wider than the column is fitted or
+   scrolls as any display does, the whole stack with it. */
+.stack {
+  display: inline-block;
+  padding: var(--math-gutter);
+}
+
+.stackRow {
+  display: block;
+  white-space: nowrap;
+}
+
+.stackRow + .stackRow {
+  padding-top: var(--row-space);
+}
+
+/* A row that may part stands whole, its parts side by side at the manuscript's
+   space (--join), exactly where the whole row's drawing sets them. Where the
+   row would otherwise scroll, MathFit parts it: each part takes a line of its
+   own, a line of mathematics below the one before as rows stand, the
+   connecting word and the formula on the display's axis and the qualifier
+   indented under its formula's start by a \qquad, as TeX sets a continued
+   line; behind a hung constraint it keeps the hang. The spaces above a row
+   and below it follow its first and last lines. */
+.rowPart + .rowPart {
+  margin-inline-start: var(--join);
+}
+
+.stackRow[data-row-parted] > .rowPart {
+  display: block;
+}
+
+.stackRow[data-row-parted] > .rowPart + .rowPart {
+  margin-inline-start: 0;
+  padding-top: var(--part-space);
+}
+
+.stackRow[data-row-parted] > [data-row-part="qualifier"] {
+  padding-inline-start: calc(2em + var(--hang, 0em));
+}
+
+.stackRow[data-row-parted] + .stackRow {
+  padding-top: var(--row-space-after-parted);
+}
+
+.stackRow + .stackRow[data-row-parted] {
+  padding-top: var(--parted-row-space);
+}
+
+.stackRow[data-row-parted] + .stackRow[data-row-parted] {
+  padding-top: var(--parted-row-space-after-parted);
+}
+
+/* A row's drawing takes the room of its expression, its canvas gutters in
+   negative margins, and stands on the row's baseline as a display drawing
+   stands on its own. */
+.rowMath {
+  display: inline-block;
+  margin: calc(-1 * var(--math-gutter));
+  line-height: 0;
+}
+
+/* A display stands in two and a half lines of the manuscript of white space
+   (70px at the reading size), measured from its expression, or from the
+   baseline of its number where the number stands beneath it, to the
+   descenders of the line above and to the x-height of the line below. Each
+   margin is two lines less the room the display's padding, its canvas and the
+   neighboring line box already keep: the reading face's line box holds more
+   empty room above its x-height than below its descenders, so the margin above
+   is half a rem larger than the one below. Consecutive displays keep the same
+   white space between them. */
+.equation {
+  container-type: inline-size;
+  min-width: 0;
+  max-width: 100%;
+  padding-block: 0.75rem;
+  margin-block: calc(2 * var(--manuscript-line) - 0.5625rem) calc(2 * var(--manuscript-line) - 1.0625rem);
+}
+
+.equation:has(+ .equation) {
+  margin-block-end: calc(2.5 * var(--manuscript-line) - 2.375rem);
+}
+
+.equation + .equation {
+  margin-block-start: calc(2.5 * var(--manuscript-line) - 2.375rem);
+}
+
+.inline:focus-visible,
+.numberScroll:focus-visible,
+.equationScroll:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+/* A display that is one array is a table of mathematics, set as a research
+   table (ResearchMathTable, ResearchArticle.module.css): its frame, title,
+   header band, hairline rows, hover, magnifier and stage, and its row labels
+   kept in view as it scrolls (ZoomStage). Every cell's mathematics is drawn at
+   the table's size, the reading size, the header band's too: there its x-height
+   (TeX's 0.442em, 7.07px) meets the label type's (Inter's 0.516em, 6.70px), and
+   its smallest script is half the reading size, as in a line of prose. Every
+   cell of a row stands on the row's baseline. */
+.mathTable table .mathCell.mathCell {
+  vertical-align: baseline;
+}
+
+.mathCell[data-align="l"] {
+  text-align: left;
+}
+
+.mathCell[data-align="c"] {
+  text-align: center;
+}
+
+.mathCell[data-align="r"] {
+  text-align: right;
+}
+
+/* A cell's drawing takes the room of its expression; its baseline is its lower
+   margin edge, the expression's depth below the row's baseline. */
+.cellMath {
+  display: inline-block;
+  overflow: hidden;
+  margin: calc(-1 * var(--math-gutter));
+  line-height: 0;
+}
+
+.mathTable thead .cellMath {
+  font-size: calc(var(--type-reading) * var(--zoom, 1));
+}
+
+/* A row label that is text takes sentence case, as every table's labels do. */
+.mathTable tbody .mathCell[data-cell="text"]::first-letter {
+  text-transform: uppercase;
+}
+
+/* Where the magnifier stands on the header band of a table without a title,
+   its last column keeps clear of it in every row, as its head does, so a head
+   over values aligned right stays over them. */
+.mathTable > [data-table-zoom]:first-child:not([data-idle]) ~ [role="region"] tbody .mathCell:last-child {
+  padding-right: calc(var(--table-pad) + 32px);
+}
+
+/* A table without a header band parts its first row from its title on a hairline. */
+.mathTable [data-table-title] ~ [role="region"] tbody:first-child > tr:first-child > .mathCell {
+  border-top: 1px solid var(--rule);
+}
+
+/* A table of mathematics stands in a research table's white space. A numbered
+   one is identified by its number at the frame's top-left, in the title's place
+   (ResearchArticle.module.css, .titleNumber). */
+.mathTableBlock {
+  margin: 2.75rem 0;
+}
+
+.mathTableBlock > [data-table-frame] {
+  margin: 0;
+}
+
+/* On paper, and where the system paints its own colors, nothing fades. */
+@media print, (forced-colors: active) {
+  .equation[data-scrolls] .fade {
+    display: none;
+  }
+}

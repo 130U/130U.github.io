@@ -1,0 +1,174 @@
+/* Print. A printed page is the reading column alone, on white paper with a
+   book's margins: navigation, guides and controls stay on screen, every mark
+   a figure, table or diagram draws prints whatever the browser's background
+   setting, a figure, table, diagram or display never splits across pages,
+   and a wide equation is set smaller, number and all, to fit the page.
+
+   Components are reached through the site's global classes and the data
+   attributes they render, so this file holds every print rule in one place. */
+@media print {
+  @page {
+    margin: 18mm 24mm 20mm;
+  }
+
+  :root {
+    --page: #fff;
+    --panel: #fff;
+    print-color-adjust: exact;
+    -webkit-print-color-adjust: exact;
+  }
+
+  html,
+  body,
+  .site-shell {
+    min-height: 0;
+    background: #fff;
+  }
+
+  /* Screen furniture: the skip link, rail or phone header, column guides,
+     contents, zoom controls, the stage and the footers' return links. */
+  .skip-link,
+  .site-rail,
+  .structural-grid,
+  aside:has(> details > nav[aria-label="Article contents"]),
+  [data-figure-zoom],
+  [data-table-zoom],
+  dialog,
+  main footer:has(.back-link) {
+    display: none !important;
+  }
+
+  /* The content takes the page. */
+  .site-frame {
+    display: block;
+    width: auto;
+    min-height: 0;
+    margin: 0;
+    padding: 0;
+  }
+
+  .content-column {
+    display: block;
+    padding: 0;
+  }
+
+  .site-footer {
+    width: auto;
+    margin: 12mm 0 0;
+    padding-inline: 0;
+  }
+
+  /* Whole blocks: a figure, table, diagram, display or image stays on one
+     page with its caption, and a heading stays with what follows it. */
+  figure,
+  [data-figure],
+  [data-table-frame],
+  [data-logic-diagram],
+  [data-research-block-type="equation"],
+  img,
+  tr {
+    break-inside: avoid;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  dt {
+    break-after: avoid;
+  }
+
+  p,
+  li {
+    orphans: 3;
+    widows: 3;
+  }
+
+  /* Figures and tables are printed as they stand once drawn in. */
+  [data-reveal="pending"] [class*="_curves"],
+  [data-reveal="pending"] [class*="_track"] {
+    clip-path: none !important;
+  }
+
+  [data-reveal="pending"] [class*="_fade"],
+  [data-reveal="pending"] tbody tr {
+    opacity: 1 !important;
+  }
+
+  [data-reveal="pending"] [class*="_budgetBar"],
+  [data-reveal="pending"] tbody tr {
+    transform: none !important;
+  }
+
+  /* Nothing scrolls on paper. A display wider than the page is set smaller,
+     to the page's width, and keeps its number beside it, its rows whole; a
+     comparison, a panorama or a wide table shows whole. */
+  [data-research-block-type="equation"],
+  [data-figure-scroll],
+  [role="region"] {
+    overflow: visible !important;
+    -webkit-mask-image: none !important;
+    mask-image: none !important;
+  }
+
+  [data-research-formula="display"] {
+    flex-wrap: nowrap !important;
+  }
+
+  [data-research-formula="display"] > :first-child,
+  [data-equation-scroll] > :first-child {
+    flex: 0 1 auto;
+    min-width: 0;
+  }
+
+  [data-research-formula="display"] [data-equation-edge] {
+    position: static !important;
+  }
+
+  /* A row that parts on screen stands whole on paper, its parts set smaller
+     together, in proportion, where the row is wider than the page: each part
+     shrinks with its drawing, gutters and all. */
+  [data-row-parts] {
+    display: flex !important;
+    align-items: baseline;
+    margin-inline: calc(-1 * var(--math-gutter));
+  }
+
+  [data-row-parts] > [data-row-part] {
+    display: block !important;
+    flex: 0 1 auto;
+    min-width: 0;
+    padding: 0 !important;
+  }
+
+  [data-row-parts] > [data-row-part] + [data-row-part] {
+    margin-inline-start: calc(var(--join) - 2 * var(--math-gutter)) !important;
+  }
+
+  [data-row-part] > * {
+    max-width: 100%;
+    margin-inline: 0 !important;
+  }
+
+  [data-research-svg="display"],
+  [data-research-svg="row"],
+  [data-table-frame] svg[data-research-svg] {
+    max-width: 100%;
+    height: auto;
+  }
+
+  /* A display set as rows sets each row to the page's width as a display on one line is set. */
+  [data-display-stack],
+  [data-display-stack] > * > * {
+    max-width: 100%;
+  }
+
+  /* A post's figures print at the column's width, a panorama included. */
+  img[data-panorama] {
+    width: 100% !important;
+  }
+
+  a {
+    text-decoration-color: currentColor;
+  }
+}

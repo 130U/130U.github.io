@@ -1,0 +1,128 @@
+{
+  "repository": "130U/RESEARCH-Critical-Dependence-Stress-for-Diversification-Gains-under-Fixed-Marginals",
+  "commit": "c0782609a95f9887c248631c56174615233c7ae4",
+  "commitDate": "2026-11-19T11:43:47-05:00",
+  "fetchedWith": "Authenticated Git checkout at the exact commit; git show bytes checked against Git blob SHA-1",
+  "files": [
+    {
+      "path": "paper/source/declarations.tex",
+      "sha": "af7fa007c564ae03964b4ff6794298fde311774b",
+      "size": 929
+    },
+    {
+      "path": "paper/source/figure-budget.tex",
+      "sha": "7ea1729bbcba78937e1d80f8abee868d6a36a319",
+      "size": 617
+    },
+    {
+      "path": "paper/source/figure-corner.tex",
+      "sha": "3e1c46d033b7f651ecc68785a35b2f2e15ace35a",
+      "size": 719
+    },
+    {
+      "path": "paper/source/figure-tail-layer.tex",
+      "sha": "854ab425a884ccfc969ddd50d3e63019395f18d6",
+      "size": 668
+    },
+    {
+      "path": "paper/source/main-classification-flow.tex",
+      "sha": "10cd64c31c40954ccfb78c304a026574722f7c21",
+      "size": 19601
+    },
+    {
+      "path": "paper/source/main-crossing-proof.tex",
+      "sha": "c45aaa4c98e0af2f8ccb004bcd6e5a884b2d07a2",
+      "size": 4201
+    },
+    {
+      "path": "paper/source/main-crossing.tex",
+      "sha": "b132bc78e96f5be64b8963ea08e59e78715d783a",
+      "size": 8510
+    },
+    {
+      "path": "paper/source/main-introduction.tex",
+      "sha": "fcea6eafa21b135bcdbe060cb2499ae60c2eda9f",
+      "size": 12229
+    },
+    {
+      "path": "paper/source/main-model-benchmark.tex",
+      "sha": "45f274bad2930d2a417c8717ab2d44db4f2c12b3",
+      "size": 23082
+    },
+    {
+      "path": "paper/source/main-quantitative.tex",
+      "sha": "c29019e57b7308207ddcdc01d9dd8a4308a2de38",
+      "size": 12880
+    },
+    {
+      "path": "paper/source/main-scope.tex",
+      "sha": "ccdaef8cda3df6c3d5c4217e4c9fc19381770a15",
+      "size": 3954
+    },
+    {
+      "path": "paper/source/main-variational-proof.tex",
+      "sha": "4214352cc0a9f158ddc87ec37b4fd3126abe02fd",
+      "size": 3639
+    },
+    {
+      "path": "paper/source/main-variational.tex",
+      "sha": "9a9609383ae8bb36e4b77150fbdfc346540511de",
+      "size": 9209
+    },
+    {
+      "path": "paper/source/paper.tex",
+      "sha": "72d5cf95d6812da8198cca12f313c59d254ef3d0",
+      "size": 6004
+    },
+    {
+      "path": "paper/source/references.tex",
+      "sha": "c9c14922694c91f8a2a861d086e8401dc81cbddc",
+      "size": 10734
+    },
+    {
+      "path": "paper/source/technical-cost-proof.tex",
+      "sha": "ea715352f8899c7bc66d3cc9ff605c801064775a",
+      "size": 2740
+    },
+    {
+      "path": "paper/source/technical-efficiency-identity.tex",
+      "sha": "b188c94e0d4745dc71fa48167de7e0e4b62be369",
+      "size": 1589
+    },
+    {
+      "path": "paper/source/technical-flow-proof.tex",
+      "sha": "e95bd18d25be9329ec063c12d1e5e46befe9362d",
+      "size": 7728
+    },
+    {
+      "path": "paper/source/technical-limit.tex",
+      "sha": "2d6b7883cb179a58f9d0bed5c664624188ce0e99",
+      "size": 12160
+    },
+    {
+      "path": "paper/source/technical-mixture-obstruction.tex",
+      "sha": "0b82578a62446d1c75fe7176c156dceee12bdff3",
+      "size": 1420
+    },
+    {
+      "path": "paper/source/technical-quantitative.tex",
+      "sha": "2008838b2847da91fe1bf496147cacf3b91644ed",
+      "size": 6494
+    },
+    {
+      "path": "paper/source/technical-reference.tex",
+      "sha": "0ee665753aee525c8b898fcf4d0ff4f5955c84d8",
+      "size": 3207
+    },
+    {
+      "path": "paper/source/technical-threshold-statement.tex",
+      "sha": "5e71c0fd445b34ce0ae2a17515b142dc7ad1f382",
+      "size": 437
+    },
+    {
+      "path": "paper/source/technical-variational-proof.tex",
+      "sha": "8b4987f3cb404513f2a0fdbc29850412ef224aa9",
+      "size": 18024
+    }
+  ]
+}
