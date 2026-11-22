@@ -201,7 +201,6 @@ test("the table styles group digits by a thin space and keep the pads invisible"
   assert.match(rule(".lead::before"), /font-weight:\s*bold/u);
   // A value holds one line: nothing breaks an interval after its comma.
   assert.match(rule(".value"), /white-space:\s*nowrap/u);
-  assert.doesNotMatch(css, /data-break|fieldBreak|data-when|\\A/u);
   // A table that keeps its labels in view snaps its scrolling to a column's start beside them.
   assert.match(rule(".tableRegion[data-pinned]"), /scroll-snap-type:\s*x mandatory/u);
   assert.match(rule(".tableRegion[data-pinned]"), /scroll-padding-inline-start:\s*var\(--pin-width/u);

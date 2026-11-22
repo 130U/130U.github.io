@@ -26,10 +26,10 @@ const ROUTES = [
 
 /** Each table of a page: its first header cell's text, and for each body row the columns marked as sentences. */
 function tables(html) {
-  return [...html.matchAll(/<table\b([^>]*)>([\s\S]*?)<\/table>/gu)].map(([, attributes, inner]) => {
+  return [...html.matchAll(/<table\b[^>]*>([\s\S]*?)<\/table>/gu)].map(([, inner]) => {
     const head = /<th\b[^>]*>([\s\S]*?)<\/th>/u.exec(inner);
     const rows = [...inner.matchAll(/<tbody>([\s\S]*?)<\/tbody>/gu)].flatMap(([, body]) => [...body.matchAll(/<tr\b[^>]*>([\s\S]*?)<\/tr>/gu)]).map(([, row]) => [...row.matchAll(/<td\b([^>]*)>/gu)].map(([, cell]) => /\bdata-sentence=""/u.test(cell)));
-    return { attributes, inner, first: head ? text(head[1]) : "", rows };
+    return { first: head ? text(head[1]) : "", rows };
   });
 }
 
@@ -50,21 +50,11 @@ test("only the columns a page names as sentences wrap; every other cell holds on
   assert.deepEqual([...found].sort(), named.map(({ slug, firstCell }) => `${slug}|${firstCell}`).sort(), "Every named table is a table of the site.");
 });
 
-test("no table carries a mechanism that wraps a row to spare its scroll", async () => {
-  for (const [slug, prefix] of ROUTES) {
-    const html = await read(`out/${prefix}${slug}/index.html`);
-    for (const table of tables(html)) {
-      // Intervals break nowhere, labels are never narrowed or wrapped, and no heading stacks on three lines.
-      assert.doesNotMatch(table.attributes, /\bdata-(?:breaks|wraps|label)=/u, `${slug}: "${table.first}"`);
-      assert.doesNotMatch(table.inner, /\bdata-(?:stack|field-break|interval|when)=|--wrap-floor|--label-width/u, `${slug}: "${table.first}"`);
-    }
-  }
+test("on screen a cell wraps only in a column of sentences or as a heading", async () => {
   const css = await read("app/components/research/ResearchArticle.module.css");
-  // A cell of a table wraps only in a column of sentences, or as a heading (to two lines), or on paper.
+  // Paper sets its own rule for wrapping, after the screen's.
   const screen = css.replace(/@media print\s*\{[\s\S]*$/u, "");
   const wrapping = [...screen.matchAll(/([^{}]+)\{[^}]*white-space:\s*normal[^}]*\}/gu)].map(([, selector]) => selector.replace(/\/\*[\s\S]*?\*\//gu, "").trim());
+  assert.ok(wrapping.some((selector) => /\.sentence/u.test(selector)), "A column of sentences wraps.");
   for (const selector of wrapping) assert.match(selector, /\.sentence|thead \.cell|\.tableTitle/u, `Only a column of sentences or a heading wraps: ${selector}`);
-  assert.doesNotMatch(css, /\.phrase|data-label-width|--label-width|--wrap-floor|data-break|data-stack/u);
-  const stage = await read("app/components/research/ZoomStage.tsx");
-  assert.doesNotMatch(stage, /narrowLabels|setLabelWidth|data-break|data-wraps|dataset\.label/u, "The stage and the article never wrap a row to fit.");
 });

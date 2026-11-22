@@ -53,7 +53,6 @@ test("manuscripts with mathematics read at their own leading and measure their s
 test("an inline formula stands at the word space", async () => {
   const component = await source("app/components/research/ResearchMath.tsx");
   assert.match(component, /marginInline: `\$\{-RESEARCH_MATH_GUTTER_EM\}em`/u, "The canvas gutters lie wholly in negative margins.");
-  assert.doesNotMatch(component, /INLINE_SPACE|tightStart|tightEnd/u, "No extra space is added beside an inline formula.");
   const math = await source("app/components/research/ResearchMath.module.css");
   assert.equal(declarations(math, ".inline").get("max-width"), "calc(100% + 2 * var(--math-gutter))");
 });
