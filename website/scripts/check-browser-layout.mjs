@@ -79,7 +79,7 @@ function inspectFigure(figure) {
     const horizontal = scroll || box.left >= bounds.left - 2 && box.right <= bounds.right + 2;
     return horizontal && box.top >= bounds.top - 2 && box.bottom <= bounds.bottom + 2;
   };
-  const marks = [...frame.querySelectorAll('[data-wrap], span[style*="--ax"]')].filter(shown);
+  const marks = [...frame.querySelectorAll('span[style*="--ax"]')].filter(shown);
   const assertWholeWords = element => {
     const words = document.createTreeWalker(element, NodeFilter.SHOW_TEXT);
     for (let node = words.nextNode(); node; node = words.nextNode()) {
@@ -152,7 +152,7 @@ function inspectFigure(figure) {
   }
   let ranking;
   if (figure.dataset.figure === "ranking-reversal") {
-    const heads = [...frame.querySelectorAll('[data-ranking-heading], [data-wrap]')].filter(element => /True validity|Observed score/u.test(element.textContent));
+    const heads = [...frame.querySelectorAll('[data-ranking-heading]')].filter(element => /True validity|Observed score/u.test(element.textContent));
     const title = frame.querySelector('p');
     const boxes = heads.map(rect);
     const titleBox = rect(title);
@@ -197,19 +197,11 @@ function inspectFigure(figure) {
     }
   }
   // The reading budget: a caption is set a step below the prose (the reading
-  // size is 1rem), and from a 390px phone up each legend entry holds one line.
-  // A key result follows its own rule (docs/design.md, Article figures).
+  // size is 1rem). Each legend entry, as every short text, holds one line
+  // (inspectShortText).
   const caption = figure.querySelector(":scope > figcaption");
   const rem = parseFloat(getComputedStyle(document.documentElement).fontSize);
   if (caption && parseFloat(getComputedStyle(caption).fontSize) > 0.9 * rem) issues.push({ kind: "caption-at-reading-size", fontSize: getComputedStyle(caption).fontSize });
-  const keyResult = ["asian-interval", "heston-misfit", "grader-ceiling", "budget-frontier"].includes(figure.dataset.figure);
-  if (!keyResult && innerWidth >= 390 && rem <= 16) {
-    for (const entry of [...frame.querySelectorAll('[class*="_legend"] > li')].filter(shown)) {
-      const label = entry.lastElementChild ?? entry;
-      const lines = new Set([...label.getClientRects()].filter(box => box.width > 0).map(box => Math.round(box.top)));
-      if (rect(entry).height > 1.6 * parseFloat(getComputedStyle(entry).lineHeight) || lines.size > 1) issues.push({ kind: "legend-entry-wraps", text: entry.textContent.trim() });
-    }
-  }
   // A figure's own paragraphs keep its spacing on every page: a heading row
   // stands clear of what it heads, and a bracket starts on its first step.
   for (const head of [...frame.querySelectorAll('[class*="_panelTitle"], [class*="_tierAxis"], [class*="_ladderHead"]')].filter(shown)) {
@@ -349,7 +341,7 @@ function inspectFigure(figure) {
       const found = {
         line: () => stroked(":not([data-dash], [data-dotted], [data-thick], [data-axis], [data-scatter])"),
         thick: () => stroked("[data-thick]"),
-        dash: () => stroked("[data-dash]") || html.some(element => classed(element, /_(hline|vline|rule)$/u)),
+        dash: () => stroked("[data-dash]") || html.some(element => classed(element, /_(hline|vline|rule|budgetRule)$/u)),
         dotted: () => stroked("[data-dotted]"),
         dot: () => dots(":not([data-ring], [data-shape], [data-sign='negative'])") || stroked("[data-scatter]") || svgShapes.some(element => element.matches("circle") && getComputedStyle(element).fill === color),
         ring: () => dots("[data-ring], [data-sign='negative']"),
@@ -414,7 +406,62 @@ function inspectFigure(figure) {
       if (Math.abs(line.left - plot.left) > 1 || Math.abs(line.right - plot.right) > 1) issues.push({ kind: "bar-axis-track-misaligned", axis: line, track: plot });
     }
   }
-  return { bounds, issues, ranking, wrappedLabels: marks.length };
+  return { bounds, issues, ranking, labels: marks.length };
+}
+
+// Every text of a figure holds one line, save its title and the text marked
+// data-figure-wraps (a panel's title, a sentence, a question, a node's
+// description): labels, values, ticks, key entries, row and lane names, header
+// marks, switch segments, step and node titles (docs/design.md, Article
+// figures). A unit of text is the run of words in one box, the nearest box
+// around them that is not inline, a formula standing as a word of the run around
+// it; it holds one line when its glyphs and formulas share one line.
+function inspectShortText(figure) {
+  const frame = figure.firstElementChild;
+  const exempt = "[data-figure-title], [data-figure-wraps], [data-figure-layer], svg, math";
+  const hidden = element => {
+    if (!element.checkVisibility({ checkVisibilityCSS: true }) || element.closest("[hidden], script, style")) return true;
+    for (let ancestor = element; ancestor && ancestor !== frame; ancestor = ancestor.parentElement) {
+      const style = getComputedStyle(ancestor);
+      const clip = /^rect\(([^)]+)\)$/u.exec(style.clip)?.[1].split(/[,\s]+/u).map(Number.parseFloat);
+      if (clip?.length === 4 && /absolute|fixed/u.test(style.position) && (clip[1] <= clip[3] || clip[2] <= clip[0])) return true;
+    }
+    return false;
+  };
+  const unitOf = node => {
+    for (let element = node.parentElement; element && element !== frame; element = element.parentElement) {
+      if (element.closest("[data-research-formula]")) continue;
+      const style = getComputedStyle(element);
+      if (!/^(inline|contents)$/u.test(style.display) || /absolute|fixed/u.test(style.position)) return element;
+    }
+    return frame;
+  };
+  const units = new Map();
+  const add = (unit, box) => {
+    if (!units.has(unit)) units.set(unit, []);
+    units.get(unit).push(box);
+  };
+  const walker = document.createTreeWalker(frame, NodeFilter.SHOW_TEXT);
+  for (let node = walker.nextNode(); node; node = walker.nextNode()) {
+    const element = node.parentElement;
+    if (!node.data.trim() || !element || element.closest(exempt) || hidden(element)) continue;
+    const range = document.createRange();
+    range.selectNodeContents(node);
+    for (const box of range.getClientRects()) if (box.width > 0.5 && box.height > 0.5) add(unitOf(node), box);
+  }
+  for (const formula of frame.querySelectorAll('[data-research-formula="inline"]')) {
+    const ink = formula.querySelector("svg[data-research-svg] g");
+    if (!ink || formula.closest("[data-figure-title], [data-figure-wraps], [data-figure-layer]") || hidden(formula)) continue;
+    const box = ink.getBoundingClientRect();
+    if (box.width > 0.5) add(unitOf(ink), box);
+  }
+  const sameLine = (a, b) => Math.min(a.bottom, b.bottom) - Math.max(a.top, b.top) > 0.3 * Math.min(a.height, b.height);
+  const issues = [];
+  for (const [unit, boxes] of units) {
+    const lines = boxes.reduce((found, box) => (found.some(line => sameLine(line, box)) ? found : [...found, box]), []).length;
+    if (lines > 1) issues.push({ kind: "figure-text-wraps", text: unit.textContent.replace(/\s+/gu, " ").trim().slice(0, 60), lines, width: Math.round(unit.getBoundingClientRect().width) });
+  }
+  return issues;
 }
 
 // A readout sets its long numbers in the digit groups its labels use
@@ -1585,8 +1632,9 @@ function inspectScrollers({ scope, nearMissPx, nearMissShare }) {
 // mathematics sits on its text's baseline within 0.5px, at no less than nine tenths
 // of the text's size, inside its node; text on an ink node stands at least 4.5:1 on
 // the ink; the nodes of a stage that share a row share one height and start their
-// titles on one line; and a hyphenated compound that fits its node holds one line.
-const DIAGRAM_WIDTHS = [320, 390, 768, 1024, 1200, 1240, 1280, 1440, 1920];
+// titles on one line; every node title, lane name and stage label holds one line;
+// and a hyphenated compound in a description that fits its node holds one line.
+const DIAGRAM_WIDTHS = [320, 390, 430, 768, 820, 1024, 1200, 1240, 1280, 1366, 1432, 1440, 1920];
 
 function inspectDiagram() {
   const issues = [];
@@ -1754,6 +1802,13 @@ function inspectDiagram() {
   for (const node of nodes) {
     if (node.scrollWidth > node.clientWidth + 0.5 || node.scrollHeight > node.clientHeight + 0.5) issues.push({ kind: "diagram-node-text-clipped", text: node.textContent.trim().slice(0, 30) });
   }
+  for (const text of [...figure.querySelectorAll("[class*='_nodeTitle'], [class*='_tag'], [class*='_stageLabel']")].filter(shown)) {
+    const range = document.createRange();
+    range.selectNodeContents(text);
+    const tops = [];
+    for (const rect of range.getClientRects()) if (rect.width > 0.5 && !tops.some(top => Math.abs(top - rect.top) < rect.height / 2)) tops.push(rect.top);
+    if (tops.length > 1) issues.push({ kind: "diagram-text-wraps", text: text.textContent.trim().slice(0, 40), lines: tops.length });
+  }
   for (const compound of [...figure.querySelectorAll("[data-compound]")].filter(shown)) {
     const range = document.createRange();
     range.selectNodeContents(compound);
@@ -1827,6 +1882,7 @@ try {
               }
               const result = await figure.evaluate(inspectFigure);
               result.issues.push(...await figure.evaluate(inspectLabels));
+              result.issues.push(...await figure.evaluate(inspectShortText));
               if (width === 1440 && textScale === 1 && view === (views[0] ?? "default")) result.issues.push(...await figure.evaluate(inspectReadouts));
               // Labels keep their places at every column width, not only at the
               // viewports above: the figure is set at each width from 280px to
@@ -1841,7 +1897,7 @@ try {
                     element.style.width = `${value}px`;
                     if (element.querySelector("[data-fig-switch]")) await new Promise(resolve => requestAnimationFrame(() => requestAnimationFrame(resolve)));
                   }, size);
-                  for (const issue of await figure.evaluate(inspectLabels)) {
+                  for (const issue of [...await figure.evaluate(inspectLabels), ...await figure.evaluate(inspectShortText)]) {
                     const key = `${issue.kind}|${issue.text ?? issue.ticks?.join(" ")}`;
                     if (!swept.has(key)) swept.set(key, { ...issue, figureWidths: [] });
                     swept.get(key).figureWidths.push(size);
@@ -2156,6 +2212,9 @@ try {
               await control.click();
               await page.evaluate(() => new Promise(resolve => requestAnimationFrame(() => requestAnimationFrame(resolve))));
               issues.push(...(await page.evaluate(inspectScrollers, { ...rule, scope: "dialog[open]" })).map(issue => ({ ...issue, stage: label })));
+              // A staged figure keeps every short text on one line, as in the article.
+              const staged = page.locator("dialog[open] [data-figure]");
+              if (await staged.count()) issues.push(...(await staged.first().evaluate(inspectShortText)).map(issue => ({ ...issue, stage: label })));
               await page.keyboard.press("Escape");
               await page.waitForFunction(() => !document.querySelector("dialog[open]"));
             }

@@ -169,7 +169,7 @@ function CubicLawFigure({ manuscript, caption }: ManuscriptFigureProps) {
           />
         ))}
         {curves.map((curve) => (
-          <Mark key={`name-${curve.fixings}`} left={x(months(LEAD_DAYS[LEAD_DAYS.length - 1]))} top={100 - y(curve.bound[curve.bound.length - 1])} anchor="left" tone={curve.tone} wrap style={{ maxWidth: "76px" }}>
+          <Mark key={`name-${curve.fixings}`} left={x(months(LEAD_DAYS[LEAD_DAYS.length - 1]))} top={100 - y(curve.bound[curve.bound.length - 1])} anchor="left" tone={curve.tone}>
             {curve.name.split(",")[0]}
           </Mark>
         ))}

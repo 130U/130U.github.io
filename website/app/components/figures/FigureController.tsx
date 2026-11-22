@@ -89,15 +89,27 @@ export function enhanceFigure(figure: HTMLElement): () => void {
     };
     for (const button of buttons) listen(button, "click", () => show(button.dataset.figView!));
     // The segments share one row while every label fits on it; otherwise they
-    // stack. Layout is measured in the frame's own units, so the stage's scale
-    // does not change the choice.
+    // stack, four in two columns while each label holds its half, and else one
+    // to a row, so no label takes two lines. Layout is measured in the frame's
+    // own units, so the stage's scale does not change the choice.
     let measured = -1;
+    // A label fits its segment when its ink stands within the segment's padding.
+    const cramped = (button: HTMLButtonElement) => {
+      const style = getComputedStyle(button);
+      const room = button.clientWidth - parseFloat(style.paddingLeft) - parseFloat(style.paddingRight);
+      const range = document.createRange();
+      range.selectNodeContents(button);
+      return range.getBoundingClientRect().width / scale() > room + 0.5;
+    };
+    const overflows = () => switcher.scrollWidth > switcher.clientWidth + 1 || buttons.some(cramped);
     const fit = () => {
       const room = (switcher.parentElement ?? switcher).clientWidth;
       if (room === measured) return;
       measured = room;
       delete switcher.dataset.stack;
-      if (switcher.scrollWidth > switcher.clientWidth + 1) switcher.dataset.stack = "";
+      if (!overflows()) return;
+      switcher.dataset.stack = "";
+      if (overflows()) switcher.dataset.stack = "column";
     };
     // Views within 15% or 60px of one height share the tallest one's, so the
     // page beneath never moves for a near match; views further apart keep

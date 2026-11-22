@@ -144,28 +144,30 @@
   transform: translateY(50%);
 }
 
-/* The distance between two clusters on one row, named on its line. */
+/* The distance between two clusters on one row: a capped line at the foot of
+   its field, named on one line above it, centred, so a span narrower than its
+   name keeps its ends and its line in view. */
+.field:has(> .gap) {
+  height: 34px;
+}
+
 .gap {
   position: absolute;
-  top: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  bottom: 0;
   height: 9px;
-  margin-top: -4.5px;
   border-inline: 1px solid var(--chart-steel);
   background: linear-gradient(var(--chart-steel), var(--chart-steel)) center / 100% 1px no-repeat;
 }
 
-/* A name wider than its span takes two lines, so the span's ends and line
-   stay in view beside it. */
 .gap > span {
-  max-width: calc(100% - 16px);
-  padding-inline: 6px;
+  position: absolute;
+  bottom: calc(100% + 3px);
+  left: 50%;
+  padding-inline: 4px;
   background: var(--control-surface, var(--page));
   color: var(--ink);
-  text-align: center;
-  text-wrap: balance;
+  white-space: nowrap;
+  transform: translateX(-50%);
 }
 
 /* Labels of the reference rules and column heads, set above the first row. A
