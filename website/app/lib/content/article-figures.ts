@@ -1,0 +1,511 @@
+// The site's own figures for the eleven full articles, keyed by article slug.
+// Each figure follows one manuscript block, named by the opening of its source
+// text (or, for a table, by its first header cell). `evidence` lists source text
+// that every plotted value or label restates; the build fails if any of it is
+// missing from the article.
+
+type FigureAnchor = { paragraph: string } | { table: string };
+type FigurePlacement = { figure: string; after: FigureAnchor; evidence: string[] };
+type TableEmphasis = { table: string; row?: number; column?: number };
+
+const articleFigures: Readonly<Record<string, readonly FigurePlacement[]>> = {
+  "critical-dependence-stress-for-diversification-gains-under-fixed-marginals": [
+    {
+      figure: "dependence-budget",
+      after: { paragraph: "How much of a portfolio's diversification benefit survives" },
+      evidence: ["already $`30\\%`$ above the local-efficiency prediction $`5/32`$", "extrapolates its slope to $`J=5/32`$", "the critical budget lies in $`[13/64,29/96]`$", "$`\\gamma=(1,1,2)`$"],
+    },
+  ],
+  "certified-valuation-of-arithmetic-asian-options": [
+    {
+      figure: "asian-interval",
+      after: { paragraph: "the price under absorbed Euler with step $`h=1/768`$ lies in" },
+      evidence: [
+        "a proved price interval, $`[6.508371733,\\;6.518868974]`$",
+        "the price under absorbed Euler with step $`h=1/768`$ lies in $`[6.507844281,\\;6.519014106]`$",
+        "The finite inversion sums for the proxy value are $`6.513251661289`$ under $`P`$",
+        "It is built around the proxy value, known to $`\\pm.00021`$, and almost all of its width is the allowance for the two costs of the kink, $`.005407`$ above and $`.004670`$ below.",
+        "the spread exceeds its proxy value by $`.000102`$ with standard error $`.000004`$, and the continuous price is close to $`6.51335`$",
+        "A library that prints 6.52 for either has an error that no sample size will explain.",
+        "The continuous price lies in",
+      ],
+    },
+    {
+      figure: "asian-first-order",
+      after: { paragraph: "The bound is nearly attained." },
+      evidence: [
+        "| Crude oil call, 1 month ahead | 3.206408 | 0.0000805 | 0.0081 | 0.0000523 | 0.0259 |",
+        "| Crude oil call, 3 months ahead | 5.058865 | 0.0000462 | 0.0047 | 0.0000388 | 0.0262 |",
+        "| Crude oil call, 6 months ahead | 6.906596 | 0.0000324 | 0.0033 | 0.0000293 | 0.0261 |",
+        "| Crude oil call, 12 months ahead | 9.431726 | 0.0000224 | 0.0023 | 0.0000210 | 0.0256 |",
+        "A quote step is one cent per barrel, one cent per tonne, one pip, or 0.01.",
+        "The last two columns are computed in binary64 arithmetic: a Monte Carlo estimate of the true cost on $`2^{20}`$ paths, and $`E[\\mathrm{sd}(A\\mid G)]/2`$, the Rogers–Shi form of the classical first-order bound.",
+        "ball arithmetic gives price intervals 0.0023 to 0.0081 cents per barrel wide",
+        "The bound is nearly attained.",
+        "The classical first-order estimate is 2.6 cents at every lead time, between 320 and 1,140 times larger.",
+      ],
+    },
+    {
+      figure: "asian-width",
+      after: { paragraph: "At the three steps the cost of the kink is 95.5, 94.5 and 92.8 percent of the width" },
+      evidence: [
+        "| $`1/384`$ | $`[-0.014169989568,\\;0.013839530031]`$ | 0.028009519599 |",
+        "| $`1/768`$ | $`[-0.011024692273,\\;0.010642371599]`$ | 0.021667063872 |",
+        "| $`1/1536`$ | $`[-0.010967952032,\\;0.010766337995]`$ | 0.021734290027 |",
+        "| Cost of the kink | 0.026754977094 | 0.020478587752 | 0.020171631177 |",
+        "| Projection | 0.000265787793 | 0.000008620825 | 0.000000265628 |",
+        "| Frequency tail under $`P`$ | 0.000028191423 | 0.000028191423 | 0.000028191423 |",
+        "| Frequency tail under $`Q`$ | 0.000177646019 | 0.000368746602 | 0.000751284529 |",
+        "| Periodization | 0.000782917272 | 0.000782917272 | 0.000782917272 |",
+        "the cost of the kink is 95.5, 94.5 and 92.8 percent of the width",
+        "The width settles near $`.0217`$.",
+        "roughly doubles when the step is halved",
+      ],
+    },
+  ],
+  "certified-joint-pricing-errors-in-rough-heston": [
+    {
+      figure: "heston-stages",
+      after: { paragraph: "The step from H0 to H1 changes one thing." },
+      evidence: [
+        "| H0: six months, uniform state bound | 1.397612096 | 2.679930311 | none |",
+        "| H1: six months, Theorem 3.1, global residual | 0.378598956 | 0.476401716 | 1/2 point, both |",
+        "| H2: six months, Theorem 3.1, 128 time bins | 0.367258782 | — | 1/2 point |",
+        "| H3: six months, reference through 128, upper band global | 0.132245064 | 0.158585551 | 1/4 point, both |",
+        "| H4: six months, reference through 128, 128 bins | 0.115215934 | 0.137896018 | 1/4 point, both |",
+        "| Q0: three months, reference through 64, global | 1.207557898 | 1.545191542 | none |",
+        "| Q1: three months, reference through 128, global | 0.351318692 | 0.408293698 | 1/2 point, both |",
+        "| Q2: three months, reference through 128, 128 bins | 0.233318843 | 0.252393939 | 1/4 point, joint only |",
+        "H1 applies (3.5), which weights each residual by the forward variance that remains. The complete bound falls by 72.91 per cent.",
+      ],
+    },
+    {
+      figure: "heston-ledger",
+      after: { paragraph: "Netting lowers the node term by 30 per cent" },
+      evidence: [
+        "| Absolute centre \\(|w^\\top d|\\) | 0.149775147 | 0.149775147 |",
+        "| Node support, 1,025 nodes | 0.045461793 | 0.064536890 |",
+        "| Strip remainder | 0.000026654 | 0.000026654 |",
+        "| Exact infinite tail | 0.038055248 | 0.038055248 |",
+        "| Complete bound | 0.233318843 | 0.252393939 |",
+        "The two columns share the stored output, the reference centre, all 1,025 node radii and every remainder.",
+        "Netting lowers the node term by 30 per cent and the complete bound by 7.56 per cent, from above a quarter point to below it.",
+      ],
+    },
+    {
+      figure: "heston-candidates",
+      after: { paragraph: "At the finer level the five enclosures are disjoint and ordered" },
+      evidence: [
+        "| 0.520 | 0.020 | [4.825094, 6.778350] | [5.293449, 6.024095] |",
+        "| 0.525 | 0.025 | [5.645378, 7.501414] | [6.097920, 6.798485] |",
+        "| 0.530 | 0.030 | [6.748974, 8.517584] | [7.187004, 7.859529] |",
+        "| 0.540 | 0.040 | [9.807435, 11.422182] | [10.218707, 10.839486] |",
+        "| 0.550 | 0.050 | [14.000658, 15.482012] | [14.387007, 14.960680] |",
+        "| Pairs separated, joint | | 7 of 10 | 10 of 10 |",
+        "| Pairs separated, leg-by-leg | | 3 of 10 | 7 of 10 |",
+        "\\(\\alpha=0.520\\) is the certified minimiser on this grid",
+        "The objective is the normalised least-squares distance to the mid prices",
+      ],
+    },
+    {
+      figure: "heston-misfit",
+      after: { paragraph: "A certificate also settles the opposite question." },
+      evidence: [
+        "At \\(\\alpha=0.52\\), on the coarsest bank H0, the exact model price of the 4400 call lies in an interval whose lower end is 92.886 points, while the quoted ask is 92.396: the model is above the ask by at least 0.490 points.",
+        "For the 4500 call the excess is at least 0.067 points.",
+        "At the other ten strikes the certified interval meets the quoted band.",
+        "can rule out the pricer as the cause",
+        "| 4400 | 91.10 | 92.40 | 1.30 |",
+        "| 4500 | 55.00 | 56.20 | 1.21 |",
+        "each width computed from the unrounded quotes",
+        "Six-month SPX call quotes of 18 June 2021 in index points",
+      ],
+    },
+  ],
+  "large-scale-domain-expert-feedback-governance-and-adaptive-review": [
+    {
+      figure: "residual-moment",
+      after: { paragraph: "The first is the conditional Bernoulli variance" },
+      evidence: ["m_i := E[(Y_i - f_i)^2 \\mid X_i] = q_i(1 - q_i) + (q_i - f_i)^2", "($`q_i \\approx 1`$) and the predictor recognizes this ($`f_i \\approx 1`$), then $`m_i \\approx 0`$", "($`q_i \\approx 0.5`$)"],
+    },
+    {
+      figure: "audit-policies",
+      after: { paragraph: "Three results hold everywhere in the envelope" },
+      evidence: [
+        "| Uniform sampling | 14.81% / 14.81% / 14.81% | 0.568 | Baseline |",
+        "| Risk-first (probability proportional to $`f_i`$) | 3.00% / 11.56% / 43.33% | 0.657 | +33.8% |",
+        "| Residual- and cost-aware (Section 3) | 7.89% / 19.37% / 21.84% | **0.515** | **-17.8%** |",
+        "| Share of the batch | 60% | 30% | 10% |",
+        "| Cost of an independent reference audit ($`c`$, routine = 1) | 1 | 1.5 | 3 |",
+        "The audit budget is 2,000 cost units",
+        "a sampling floor of $`\\pi_{\\min} = 3\\%`$",
+      ],
+    },
+    {
+      figure: "remediation-exchange",
+      after: { paragraph: "Whenever $`\\Delta_k > \\Delta_i`$, the exchange strictly reduces delivered defect loss" },
+      evidence: [
+        "Two task groups of $`100`$ items each have initial error risks of $`0.40`$ and $`0.15`$",
+        "$`0.30`$ ($`\\Delta_1 = 0.10`$) and $`0.01`$ ($`\\Delta_2 = 0.14`$)",
+        "capacity is $`100`$ items",
+        "$`100(0.30) + 100(0.15) = 45`$",
+        "$`100(0.40) + 100(0.01) = 41`$",
+        "**8.89%**",
+      ],
+    },
+    {
+      figure: "budget-frontier",
+      after: { paragraph: "The last three rows are the exchange rate." },
+      evidence: [
+        "The total budget is 5,000 cost units",
+        "| Risk-first for audits and for reviews | 3.00% / 11.56% / 43.33% | 0% / 67% / 100% | 0.657 | 320.9 |",
+        "| Measurement rule of Section 3, then reviews by removable loss | 7.89% / 19.37% / 21.84% | 0% / 100% / 50% | 0.515 | 336.2 |",
+        "| Joint rule at the precision of risk-first routing | 3.31% / 9.57% / 100% | 0% / 61% / 0% | 0.657 | **197.1** |",
+        "| Joint rule at the precision of uniform sampling | 4.20% / 12.74% / 100% | 0% / 52% / 0% | 0.568 | **209.9** |",
+        "| Joint rule with no precision ceiling | 3.00% / 3.00% / 100% | 0% / 75% / 0% | 1.035 | 174.9 |",
+        "At the same budget and the same precision, the joint rule ships **38.6%** fewer defects than risk-first routing",
+        "Choosing audits for measurement and then spending the rest on repair gives the best estimate in the table and ships more defects than the legacy policy",
+        "Holding the estimate at 0.657 points costs 22 shipped defects relative to no ceiling, and tightening it to 0.568 costs 13 more.",
+      ],
+    },
+  ],
+  "financial-task-design-and-synthetic-data-engineering": [
+    {
+      figure: "rejection-cost",
+      after: { table: "Simultaneous constraints" },
+      evidence: [
+        "| **1** | 3.9878% | 25.08 |",
+        "| **2** | 0.1590% | 628.84 |",
+        "| **4** | **0.0002529%** | **395,442.59** |",
+        "$`\\epsilon = 0.05`$ residual standard deviations",
+      ],
+    },
+    {
+      figure: "label-flip",
+      after: { paragraph: "• Near a diagnostic decision boundary" },
+      evidence: [
+        "\\Phi\\left(-\\frac{\\gamma}{s}\\right)",
+        "$`\\gamma / s = 2`$, the error rate is **2.28%**",
+        "$`\\gamma / s = 1`$, it is **15.87%**",
+        "$`\\gamma / s = 0.25`$, it is **40.13%**",
+      ],
+    },
+    {
+      figure: "bridge-leakage",
+      after: { paragraph: "3. **Evaluation and oracle information" },
+      evidence: ["\\sigma^2(t - s)\\frac{T - t}{T - s}", "conditioning on $`X_T`$ halves the conditional variance", "**29.29% apparent reduction in RMSE**", "**Construction information ($`\\mathcal{F}_{\\text{gen}}`$):**", "**Permitted predictor filtration ($`\\mathcal{F}_s`$):**", "**Evaluation and oracle information ($`\\mathcal{F}_{\\text{eval}}`$):** outcomes realized after $`s`$"],
+    },
+  ],
+  "general-reasoning-evaluation-and-layered-verification": [
+    {
+      figure: "ranking-reversal",
+      after: { paragraph: "To see what this does to a score" },
+      evidence: ["$`\\theta_A = 72\\%`$ and $`\\theta_B = 64\\%`$", "$`\\alpha_A = 4\\%`$ and $`\\alpha_B = 36\\%`$, with $`\\beta_A = \\beta_B = 0\\%`$", "$`s_A = 73.12\\%`$ and $`s_B = 76.96\\%`$"],
+    },
+    {
+      figure: "grader-ceiling",
+      after: { paragraph: "• *False rejection removes routes.*" },
+      evidence: [
+        "$`\\theta_A = 72\\%`$ and $`\\theta_B = 64\\%`$",
+        "$`\\alpha_A = 4\\%`$ and $`\\alpha_B = 36\\%`$, with $`\\beta_A = \\beta_B = 0\\%`$",
+        "\\theta_\\eta = \\frac{\\theta(1-\\beta)e^{\\eta} + \\theta\\beta}{\\big[\\theta(1-\\beta) + (1-\\theta)\\alpha\\big]e^{\\eta} + \\theta\\beta + (1-\\theta)(1-\\alpha)}",
+        "The limit is the grader's positive predictive value at the starting policy, and the observed score goes to 100% along the way.",
+        "| Observed score | 77.0% | 90.1% | 96.1% | 99.5% | 100% |",
+        "| True validity | 64.0% | 74.9% | 79.9% | 82.7% | 83.2% |",
+        "The policy can reach the grader's positive predictive value and no more: 83.2% for Model B",
+        "A valid route that the grader always rejects loses its share of valid work at rate $`e^{-\\eta}`$.",
+        "If two valid routes start equally common and the grader accepts only one, the other falls from 50% of valid work to 26.9%, 11.9% and 1.8% at $`\\eta = 1, 2, 4`$.",
+      ],
+    },
+    {
+      figure: "proof-obligations",
+      after: { paragraph: "For feedback, I record the first failed obligation" },
+      evidence: [
+        "mark its descendant subgraph $`\\mathrm{desc}(v_j)`$ as unverified",
+        "\\Gamma_q \\cup \\{v_j : j \\in \\mathrm{sink}(G)\\} \\vdash C_q",
+      ],
+    },
+    {
+      figure: "protocol-outcomes",
+      after: { paragraph: "Certificate verification accepted 1,800 fewer invalid proofs" },
+      evidence: [
+        "| Final-answer matching only | 75.0% (accepts 1,800 flawed solutions) | 0.0% | 40.0% |",
+        "| Strict reference-path matching | 0.0% | 50.0% (rejects 600 valid elimination proofs) | 100.0% |",
+        "| Certificate verification | 0.0% | 0.0% | 100.0% |",
+        "1,200 valid certificates, 2 per family",
+        "2,400 submissions with controlled defects",
+      ],
+    },
+  ],
+  "evidence-verification-and-robust-comparison-in-investment-research": [
+    {
+      figure: "coverage-collapse",
+      after: { paragraph: "• Set the shared bias" },
+      evidence: [
+        "$`b = 0.2`$ and independent noise to $`\\sigma = 1`$",
+        "48.40% at $`n = 100`$ records and 0.000637% at $`n = 1{,}000`$",
+        "$`0.2 + 1.96/\\sqrt{n}`$ gives 97.50% coverage",
+      ],
+    },
+    {
+      figure: "shared-error",
+      after: { paragraph: "• Two companies have a nominal score difference" },
+      evidence: ["nominal score difference of $`0.6`$ points", "sector-benchmark error in $`[-1, 1]`$", "$`[-1.4, 2.6]`$", "$`[0.6, 0.6]`$"],
+    },
+    {
+      figure: "regret-scenarios",
+      after: { paragraph: "Enumerating the eight scenarios" },
+      evidence: [
+        "$`\\theta \\in \\{-1, 1\\}`$",
+        "$`z_1 \\in \\{-0.4, 0.4\\}`$, $`z_2 \\in \\{-0.2, 0.2\\}`$",
+        "$`\\Delta_\\theta = 0.15\\theta + z_1 + 0.3\\theta z_2`$",
+        "| 0.61 | 0 |",
+        "| 0 | 0.61 |",
+      ],
+    },
+  ],
+  "autonomous-authority-in-space": [
+    {
+      figure: "risk-taxonomy",
+      after: { paragraph: "The risk-risk taxonomy distinguishes" },
+      evidence: ["An offset introduces the same type of harm to the same population; substitution changes the harm; transfer changes the population; transformation changes both.", "the countervailing effect is an offset", "the same class of physical harm is transferred to a different owner and potentially different service users"],
+    },
+    {
+      figure: "two-thresholds",
+      after: { paragraph: "The decision procedure this Article proposes therefore has two thresholds" },
+      evidence: ["First, does the actor have authority to undertake the activity and impose the relevant exposure?", "Second, does the evidence justify delegating this class of action under these conditions?", "Evidence satisfying the second threshold cannot substitute for the first.", "the choice becomes advance-constrained action, a justified fallback, or withholding permission for the activity altogether"],
+    },
+    {
+      figure: "collision-sequence",
+      after: { paragraph: "The ESA spacecraft collision-avoidance challenge" },
+      evidence: ["detecting and tracking objects, estimating their future states and uncertainty, screening conjunctions, selecting a response, coordinating where possible, executing the command, and evaluating the resulting trajectory", "used earlier conjunction data messages to predict the estimated risk in the final available message", "needs a policy-level assurance case beyond prediction performance"],
+    },
+  ],
+  "small-states-and-the-governance-of-strategic-space-dependence": [
+    {
+      figure: "state-cases",
+      after: { paragraph: "This comparison also changes the relevant policy alternatives" },
+      evidence: ["New Zealand concerns permission: can the state apply its own assessment to an externally connected activity?", "Norway concerns operation: can cooperation deliver a function under specified national control?", "Luxembourg concerns informed commitment: can public institutions understand and govern what they have authorized?", "A licensing problem calls for usable standards and supervisory information; a service dependency calls for clarity about interruption and recovery; a procurement failure calls for credible requirements and financial scrutiny.", "More national hardware cannot solve all three."],
+    },
+  ],
+  "who-may-choose-the-lesser-risk": [
+    {
+      figure: "evidence-tiers",
+      after: { paragraph: "Evidence should therefore be organized by mechanism and strength" },
+      evidence: ["Aerosol cooling has an established physical basis.", "Regional outcomes depend on deployment design and background conditions.", "Downstream welfare and geopolitical effects involve further uncertainties."],
+    },
+    {
+      figure: "exit-paths",
+      after: { paragraph: "This Article proposes separating three decisions" },
+      evidence: ["who governs the program, who operates it, and what physical trajectory it follows", "temporary operation transfers to a previously designated public successor under a reviewed continuity plan", "A political decision to end SAI could initiate a tapering pathway evaluated against emissions and atmospheric conditions", "The conditions are substantial cooling, sudden cessation, and a sufficiently prolonged interruption."],
+    },
+  ],
+  "mangrove-restoration-and-the-limits-of-compensatory-mitigation": [
+    {
+      figure: "evidentiary-chain",
+      after: { paragraph: "Evidence about legal requirements and evidence about ecological performance" },
+      evidence: ["runs from an applicable legal duty, through a changed decision and funded conduct, to altered site conditions, ecological responses, and durable functions", "A permit might require a tidal creek, a contractor might excavate it, monitoring might establish improved exchange, and recruitment might follow.", "Aerial photographs of canopy expansion cannot establish all of them.", "what would have happened without reconnection or with planting alone", "whether the same work would have occurred without that obligation, funding condition, or credible sanction", "including the habitat and management that would otherwise persist"],
+    },
+    {
+      figure: "deep-bay",
+      after: { paragraph: "Deep Bay supplies a reason to reject mangrove acreage" },
+      evidence: [
+        "Between 2000 and 2018, mapped mangrove coverage increased from 8 to 15 percent and other vegetation from 3 to 14 percent, while mudflat coverage declined from 56 to 43 percent.",
+        "Among 42 bird species analyzed over 1998-2017, twelve declined significantly and nine increased.",
+        "These are different observation windows and denominators, not a single causal time series.",
+      ],
+    },
+    {
+      figure: "san-tin-loss",
+      after: { paragraph: "When development extinguishes an existing function" },
+      evidence: ["at least nine months before pond filling", "Condition 9 linked pond filling to the commencement of construction of ecologically enhanced fishponds.", "it supplies no independent evidence that replacement functions are operating", "the measures available if enhancement falls behind"],
+    },
+  ],
+};
+
+const tableEmphasis: Readonly<Record<string, readonly TableEmphasis[]>> = {
+  "large-scale-domain-expert-feedback-governance-and-adaptive-review": [{ table: "Audit policy", row: 2 }],
+  "general-reasoning-evaluation-and-layered-verification": [{ table: "Acceptance protocol", row: 2 }],
+  "evidence-verification-and-robust-comparison-in-investment-research": [{ table: "Verification query", row: 2 }],
+  "certified-joint-pricing-errors-in-rough-heston": [
+    { table: "Maturity and certificate", column: 1 },
+    { table: "Output", column: 1 },
+    { table: "Component", column: 1 },
+  ],
+};
+
+// Manuscript figures drawn natively, keyed by the image path the manuscript
+// cites. The dependence drawings evaluate the manuscript's formulas
+// (130U/RESEARCH-Critical-Dependence-Stress-for-Diversification-Gains-under-Fixed-Marginals at the pinned commit:
+// computation/code/generate_mechanism_figures.py and
+// computation/calculations/plot_profiles_and_flows.py); the Asian drawings plot the study
+// results of 130U/RESEARCH-Certified-Valuation-of-Arithmetic-Asian-Options at the pinned
+// commit and evaluate Proposition 4.1; the Rough Heston drawings plot the saved
+// banks of 130U/RESEARCH-Certified-Joint-Pricing-Errors-in-Rough-Heston at the pinned commit and
+// evaluate (3.9), (5.7) and (7.1). `evidence` ties each drawing's labels,
+// plotted functions and restated values to the article text, and the build
+// fails if any is missing.
+export const manuscriptFigures: Readonly<Record<string, { figure: string; evidence: string[] }>> = {
+  "/assets/research/asian/disagreement.png": {
+    figure: "asian-disagreement",
+    evidence: [
+      "If the proxy is below the strike while $`A`$ is above, she forgoes $`A-K`$. If the proxy is above while $`A`$ is below, she pays $`K-A`$.",
+      "with $`88\\lt cG\\lt 102`$, 2,231 of a sample of 6,000, and strike $`K=95`$",
+      "which happens on 34 of them: the shaded wedges",
+      "its horizontal distance to the dashed line $`A=K`$",
+    ],
+  },
+  "/assets/research/asian/cubic-law.png": {
+    figure: "asian-cubic-law",
+    evidence: [
+      "R_{c_*}(K)\\le\\frac{K}{v\\sqrt{2\\pi t_1}}\\Bigl[\\log E\\,X-(E\\,X-1)+\\tfrac12E(X-1)^2\\Bigr].",
+      "K\\,\\frac{v^3\\tau^2}{360\\sqrt{2\\pi t_1}}\\quad(n\\to\\infty).",
+      "at 35 percent volatility, for three averaging windows, against the time before the first fixing",
+      "Dotted lines are the leading term (4.4) under continuous monitoring. The markers are the four crude oil options of Table 1. Below the dashed line the proxy value prices a 70-dollar barrel to within one cent.",
+      "| Crude oil call, 1 month ahead | 3.206408 | 0.0000805 |",
+      "| Crude oil call, 3 months ahead | 5.058865 | 0.0000462 |",
+      "| Crude oil call, 6 months ahead | 6.906596 | 0.0000324 |",
+      "| Crude oil call, 12 months ahead | 9.431726 | 0.0000224 |",
+      "a calendar month of 21 daily settlements of a futures price of 70 dollars with 35 percent volatility, struck at 70",
+      "A year has 252 trading days.",
+    ],
+  },
+  "/assets/research/asian/profile.png": {
+    figure: "asian-profile",
+    evidence: [
+      "by simulation on $`2^{20}`$ paths",
+      "The shaded area is the conservation law (3.4). The dotted curve is the second-order term of (3.8). The upper curve is the smaller of the two bounds of Theorem 3.3",
+      "per unit of strike the cost peaks near $`K=77`$",
+      "a 95–110 call spread on twelve monthly fixings",
+    ],
+  },
+  "/assets/research/asian/euler-ladder.png": {
+    figure: "asian-euler-ladder",
+    evidence: [
+      "Circles: the bias of the proxy value, from Table 8 and the full ladder of twelve steps. Squares: the proved bound on the Euler gap of the option at the three certified steps (Table 5). Triangles: the simulated change in the cost of the kink, shown as its absolute value plus two standard errors.",
+      "| 384 (certified sums) | $`-0.000406686`$ | $`-0.156167`$ |",
+      "| 768 (certified sums) | $`-0.000202992`$ | $`-0.155898`$ |",
+      "| 1536 (certified sums) | $`-0.000101409`$ | $`-0.155764`$ |",
+      "\\approx-0.15563\\,h-0.205\\,h^2",
+      "| $`1/384`$ | $`[-0.014169989568,\\;0.013839530031]`$ | 0.028009519599 |",
+      "| $`1/768`$ | $`[-0.011024692273,\\;0.010642371599]`$ | 0.021667063872 |",
+      "| $`1/1536`$ | $`[-0.010967952032,\\;0.010766337995]`$ | 0.021734290027 |",
+      "$`-1.2\\cdot10^{-7}`$ for the spread with standard error $`1.2\\cdot10^{-7}`$",
+    ],
+  },
+  "/assets/research/rough/residual-kernel.png": {
+    figure: "rough-residual-kernel",
+    evidence: [
+      "the forward variance curve of the calibrated model under the pricing measure and under the half-share measure of Proposition 3.2. Six-month horizon",
+      "(\\alpha_0,V_0,\\theta,\\lambda_\\xi)=(0.5286,\\,0.0262,\\,0.0721,\\,0.5037)",
+      "\\(\\nu=0.2897\\), \\(\\rho=-0.7445\\)",
+      "W_\\lambda(t)=\\sum_{n=0}^\\infty(-\\lambda)^n\\,t^{1+n\\alpha}",
+      "by at most 7.5 per cent, the order of \\(\\lambda_*T^\\alpha\\approx0.075\\)",
+    ],
+  },
+  "/assets/research/rough/netting-ratio.png": {
+    figure: "rough-netting-ratio",
+    evidence: [
+      "Netting ratios of an adjacent call spread, an adjacent butterfly and an equal-weight basket of twelve calls on the strike ladder of Section 7, with the Herfindahl levels of Proposition 5.3. The shaded profile is the share of the leg-by-leg node charge carried by each frequency in the six-month certificate.",
+      "\\chi_w(u)=\\frac{|\\widehat w(u)|}{\\sum_i|w_i|\\sqrt{m_i}}\\in[0,1].",
+      "Its square root is \\(1/\\sqrt2\\approx0.707\\) for a two-leg spread, \\(\\sqrt6/4\\approx0.612\\) for a butterfly with weights \\((1,-2,1)\\), and \\(1/\\sqrt p\\) for an equal-weight basket of \\(p\\) strikes.",
+      "| Equal-weight baskets | twelve, lower six, upper six strikes | 3 | 0.076–0.156–0.221 | 0.289, 0.408 | 0.344 |",
+      "strikes 3700 to 4800 in steps of 100",
+      "We use the index level 4221.86 of that data set as the forward",
+      "three quarters of the node charge of this bank sits between \\(u=64\\) and \\(u=96\\)",
+    ],
+  },
+  "/assets/research/rough/joint-error-set.png": {
+    figure: "rough-joint-error-set",
+    evidence: [
+      "The node error set of the three-month 4400 and 4500 calls (Q2) and its bounding box, in index points. The width of the set in the direction of the spread is the joint node support of Table 4; the box gives the leg-by-leg support.",
+      "| Node support, 1,025 nodes | 0.045461793 | 0.064536890 |",
+      "each frequency contributes an ellipse to \\(\\mathcal E\\)",
+    ],
+  },
+  "/assets/research/rough/pass-counts.png": {
+    figure: "rough-pass-counts",
+    evidence: [
+      "Number of the 28 fixed six-month positions certified as a function of the tolerance, on bank H1 for three roughness candidates, from exact endpoints. The shaded area between the joint and the leg-by-leg count is the gain from netting.",
+      "| 0.52 | 1/4 | 0 | 2 |",
+      "| 0.52 | 1/2 | 13 | 28 |",
+      "| 0.52 | 1 | 28 | 28 |",
+      "| 0.60 | 1/4 | 1 | 10 |",
+      "| 0.60 | 1/2 | 22 | 28 |",
+      "| 0.60 | 1 | 28 | 28 |",
+      "| 0.90 | 1/4 | 13 | 20 |",
+      "| 0.90 | 1/2 | 25 | 25 |",
+      "| 0.90 | 1 | 27 | 28 |",
+    ],
+  },
+  "/assets/research/dependence/tail-layer-repair.png": {
+    figure: "dependence-tail-layer",
+    evidence: [
+      "A layer with thickness and mass of order $`O(\\varepsilon)`$, transported over distances of order $`O(\\varepsilon)`$, incurs second-order cost.",
+      "Their integrated absolute values give the compensation lower bound, with leading coefficients $`\\|j_i\\|_1`$",
+      "\\mathcal C(\\alpha)=I(\\alpha)+\\sum_{i=1}^3\\gamma_i\\|j_i\\|_{L^1(I_i)}",
+    ],
+  },
+  "/assets/research/dependence/corner-capacity.png": {
+    figure: "dependence-corner",
+    evidence: [
+      "illustrated on $`I=I_3=[0,2]`$ for $`\\beta=7/4`$, $`v=15/4`$, $`\\delta=0.35`$",
+      "The blue region $`E_\\delta`$ stays away from the diagonal",
+      "Return sources lie in the hatched triangles",
+      "with $`\\lambda=\\min f`$, $`\\Lambda=\\max f`$, and $`\\Delta=\\xi_+-\\xi_-`$, violate $`M_\\delta\\le N_1+N_2`$",
+    ],
+  },
+  "/assets/research/dependence/budget-comparison.png": {
+    figure: "dependence-envelopes",
+    evidence: [
+      "2s-5/16,&0\\le s\\le1/96,\\\\\ns-29/96,&1/96\\le s\\le29/96.",
+      "\\overline F(s):=\\min\\left\\{2s-\\frac5{16},\\frac43s-\\frac{13}{48}\\right\\}",
+      "The inset shows the exact initial interval $`[0,1/96]`$ in green. The dashed line extrapolates its slope to $`J=5/32`$, whereas the critical budget lies in $`[13/64,29/96]`$.",
+      "The guaranteed linear segment $`[0,s_{\\rm lin}]`$",
+    ],
+  },
+  "/assets/research/dependence/optimal-flow-shares.png": {
+    figure: "dependence-flow-shares",
+    evidence: [
+      "for $`\\vartheta=0`$ (U, top) and $`\\vartheta=1/4`$ (D, bottom). The panels evaluate the explicit shares $`a,b,1-a-b`$",
+      "all use the same scale from zero to one",
+      "Blank regions lie outside $`D`$.",
+    ],
+  },
+};
+
+/** The native drawing for a manuscript image, after checking its evidence. */
+export function manuscriptFigureFor(slug: string, src: string, source: string) {
+  const entry = manuscriptFigures[src];
+  if (!entry) throw new Error(`Manuscript image ${src} in ${slug} has no native drawing.`);
+  for (const evidence of entry.evidence) {
+    if (!source.includes(evidence)) throw new Error(`Figure ${entry.figure} in ${slug} restates text missing from the article: ${evidence}`);
+  }
+  return entry.figure;
+}
+
+function anchorMatches(anchor: FigureAnchor, block: { type: string; source?: string; text?: string; firstCell?: string }) {
+  if ("table" in anchor) return block.type === "table" && (block.firstCell ?? "").startsWith(anchor.table);
+  return block.type === "paragraph" && (block.source ?? block.text ?? "").trimStart().startsWith(anchor.paragraph);
+}
+
+/**
+ * Resolve an article's figures to the block each follows. `source` is the
+ * article's complete text, against which every evidence string is checked.
+ */
+export function placeFigures(slug: string, blocks: ReadonlyArray<{ type: string; source?: string; text?: string; firstCell?: string }>, source: string) {
+  const placements = new Map<number, string[]>();
+  for (const placement of articleFigures[slug] ?? []) {
+    const matches = blocks.flatMap((block, index) => (anchorMatches(placement.after, block) ? [index] : []));
+    if (matches.length !== 1) throw new Error(`Figure ${placement.figure} in ${slug} must follow exactly one block; found ${matches.length}.`);
+    for (const evidence of placement.evidence) {
+      if (!source.includes(evidence)) throw new Error(`Figure ${placement.figure} in ${slug} restates text missing from the article: ${evidence}`);
+    }
+    placements.set(matches[0], [...(placements.get(matches[0]) ?? []), placement.figure]);
+  }
+  return placements;
+}
+
+export function emphasisFor(slug: string, firstCell: string) {
+  return (tableEmphasis[slug] ?? []).find((entry) => firstCell.startsWith(entry.table));
+}

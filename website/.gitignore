@@ -1,0 +1,10 @@
+node_modules/
+/.next/
+/out/
+/test-results/
+next-env.d.ts
+*.tsbuildinfo
+*.log
+.env*
+*.pem
+.DS_Store

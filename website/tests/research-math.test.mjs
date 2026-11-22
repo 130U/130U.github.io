@@ -1,0 +1,318 @@
+import assert from "node:assert/strict";
+import { createHash } from "node:crypto";
+import { readFile } from "node:fs/promises";
+import path from "node:path";
+import test from "node:test";
+import { fileURLToPath } from "node:url";
+import { RESEARCH_DISPLAY_MATH_SCALE, RESEARCH_MATH_GUTTER_EM, RESEARCH_MATH_LINE_EM, RESEARCH_MATH_ROW_SPACING_EM, RESEARCH_MANUSCRIPT_LEADING, normalizeResearchDisplayTex, renderResearchMath } from "../app/lib/content/research-math.ts";
+import { parseResearchMarkdown } from "../app/lib/content/research-markdown.ts";
+
+const ROOT = fileURLToPath(new URL("../", import.meta.url));
+const PROJECTS = [
+  ["large-scale-domain-expert-feedback-governance-and-adaptive-review", 165],
+  ["financial-task-design-and-synthetic-data-engineering", 149],
+  ["general-reasoning-evaluation-and-layered-verification", 173],
+  ["evidence-verification-and-robust-comparison-in-investment-research", 176],
+];
+
+function decodeXml(value) {
+  return value.replace(/&(#x[\da-f]+|#\d+|amp|apos|gt|lt|quot);/giu, (match, entity) => {
+    if (entity.startsWith("#x")) return String.fromCodePoint(Number.parseInt(entity.slice(2), 16));
+    if (entity.startsWith("#")) return String.fromCodePoint(Number.parseInt(entity.slice(1), 10));
+    return { amp: "&", apos: "'", gt: ">", lt: "<", quot: '"' }[entity] ?? match;
+  });
+}
+
+function originalTex(mathml) {
+  const annotation = mathml.match(/<annotation\b[^>]*encoding="application\/x-tex"[^>]*>([\s\S]*?)<\/annotation>/iu);
+  assert.ok(annotation, "Accessible formulas must retain the original TeX annotation");
+  return decodeXml(annotation[1]);
+}
+
+function tagCount(value, tag) {
+  return (value.match(new RegExp(`<${tag}\\b`, "giu")) ?? []).length;
+}
+
+function visualText(svg) {
+  return [...svg.matchAll(/<text\b[^>]*>([\s\S]*?)<\/text>/giu)]
+    .map((match) => decodeXml(match[1].replace(/<[^>]*>/gu, "")).trim())
+    .filter(Boolean);
+}
+
+function glyphPaths(svg) {
+  return [...svg.matchAll(/<path\b[^>]*>/gu)].map(([tag]) => ({
+    code: tag.match(/data-c="([^"]+)"/u)?.[1],
+    d: tag.match(/\bd="([^"]+)"/u)?.[1],
+  }));
+}
+
+function assertCompleteFormula(rendered, tex) {
+  assert.match(rendered.svg, /^<svg\b/iu);
+  assert.match(rendered.mathml, /^<math\b/iu);
+  assert.equal(originalTex(rendered.mathml), tex);
+  assert.ok(tagCount(rendered.svg, "path") > 0, "Formula glyphs must have embedded vector paths");
+  assert.deepEqual(visualText(rendered.svg), [], "Math glyphs must not use browser font fallback");
+  assert.doesNotMatch(rendered.svg + rendered.mathml, /data-mjx-error|<merror\b|<foreignObject\b|\b(?:NaN|Infinity|undefined)\b/iu);
+  assert.doesNotMatch(rendered.svg, /<(?:use|image)\b[^>]*(?:href|xlink:href)="(?!#)/iu);
+  for (const name of ["widthEm", "heightEm", "depthEm"]) {
+    assert.ok(Number.isFinite(rendered[name]) && rendered[name] >= 0, `${name} must be a finite positive layout measurement`);
+  }
+  assert.ok(rendered.widthEm > 0 && rendered.heightEm > 0);
+  const ids = [...rendered.svg.matchAll(/\bid="([^"]+)"/giu)].map((match) => match[1]);
+  assert.equal(new Set(ids).size, ids.length, "One formula must not contain colliding glyph IDs");
+  // A numbered display draws its expression; the row that carries the number
+  // lives in the assistive expression, and the page sets the number beside it.
+  const numberRow = rendered.number === undefined ? {} : { mtable: 1, mlabeledtr: 1 };
+  for (const semantic of ["mfrac", "msqrt", "mover", "munder", "msup", "msubsup", "mtable", "mlabeledtr"]) {
+    const visualCount = (rendered.svg.match(new RegExp(`data-mml-node="${semantic}"`, "gu")) ?? []).length;
+    assert.equal(visualCount, tagCount(rendered.mathml, semantic) - (numberRow[semantic] ?? 0), `${tex} must preserve every ${semantic} in its visible geometry`);
+  }
+}
+
+test("all 663 reviewed formulas have complete vector glyphs and exact accessible TeX", async () => {
+  let total = 0;
+  const mathematicalPaths = [];
+  for (const [slug, expected] of PROJECTS) {
+    const source = JSON.parse(await readFile(path.join(ROOT, "content", "artificial-intelligence", `${slug}.json`), "utf8"));
+    const formulas = [...source.markdown.matchAll(/\$\$([\s\S]*?)\$\$|\$\x60([\s\S]*?)\x60\$/gu)];
+    assert.equal(formulas.length, expected, `${slug} must retain its approved formula count`);
+    for (const formula of formulas) {
+      const tex = formula[1] ?? formula[2];
+      const rendered = await renderResearchMath(tex, formula[1] !== undefined);
+      assertCompleteFormula(rendered, tex);
+      mathematicalPaths.push(glyphPaths(rendered.svg).filter(({ code }) => code !== "2C" && code !== "2E"));
+      assert.equal(tagCount(rendered.mathml, "mfrac"), (tex.match(/\\(?:t|d)?frac(?![A-Za-z])/gu) ?? []).length, `${slug} must preserve each fraction`);
+      assert.equal(tagCount(rendered.mathml, "msqrt"), (tex.match(/\\sqrt(?![A-Za-z])/gu) ?? []).length, `${slug} must preserve each square root`);
+      assert.equal(tagCount(rendered.mathml, "mover"), (tex.match(/\\(?:bar|overline|hat|widehat|tilde|widetilde|xrightarrow(?!\[))(?![A-Za-z])/gu) ?? []).length, `${slug} must preserve each source accent and labelled arrow`);
+      assert.equal(tagCount(rendered.mathml, "mlabeledtr"), (tex.match(/\\tag(?![A-Za-z])/gu) ?? []).length, `${slug} must preserve each equation number`);
+    }
+    total += formulas.length;
+  }
+  assert.equal(total, 663);
+  assert.equal(createHash("sha256").update(JSON.stringify(mathematicalPaths)).digest("hex"), "a99f252ad4b1dd8ffffee83d2b0356393464f5e44dc6a58c99fd572f5e2f29cf", "All mathematical glyphs must retain the reviewed shapes and order");
+});
+
+test("display punctuation normalization changes only true sentence and equation-row termini", () => {
+  const fixtures = [
+    ["x=0.25.\n", "x=0.25\n"],
+    ["x=.5,", "x=.5"],
+    ["x=1...", "x=1..."],
+    [String.raw`x=\ldots.`, String.raw`x=\ldots`],
+    [String.raw`x=f(a,b),\qquad y=\{0,1\}.`, String.raw`x=f(a,b),\qquad y=\{0,1\}`],
+    [String.raw`x=\text{a,b.}.`, String.raw`x=\text{a,b.}`],
+    [String.raw`x=\operatorname{f,g}(a,b).`, String.raw`x=\operatorname{f,g}(a,b)`],
+    [String.raw`x=\left.a\right.`, String.raw`x=\left.a\right.`],
+    [String.raw`x=\frac{1}{2.}.`, String.raw`x=\frac{1}{2.}`],
+    [String.raw`\begin{aligned}x&=f(a,b),\\y&=0.25.\end{aligned}\tag{4}`, String.raw`\begin{aligned}x&=f(a,b)\\y&=0.25\end{aligned}\tag{4}`],
+    [String.raw`\begin{gathered}a,b\\c,d,\end{gathered}\tag{5}`, String.raw`\begin{gathered}a,b\\c,d\end{gathered}\tag{5}`],
+    [String.raw`\begin{aligned}x&=f(a,\\b).\end{aligned}`, String.raw`\begin{aligned}x&=f(a,\\b)\end{aligned}`],
+    [String.raw`\begin{aligned}x&=\lparen a,\\b\rparen.\end{aligned}`, String.raw`\begin{aligned}x&=\lparen a,\\b\rparen\end{aligned}`],
+    [String.raw`\begin{aligned}x&=\lbrack a,\\b\rbrack.\end{aligned}`, String.raw`\begin{aligned}x&=\lbrack a,\\b\rbrack\end{aligned}`],
+    [String.raw`\begin{cases}a,&x=0\\b,&x=1\end{cases}.`, String.raw`\begin{cases}a,&x=0\\b,&x=1\end{cases}`],
+    [String.raw`\begin{matrix}a,&b\\c,&d\end{matrix}.`, String.raw`\begin{matrix}a,&b\\c,&d\end{matrix}`],
+  ];
+  for (const [source, expected] of fixtures) assert.equal(normalizeResearchDisplayTex(source), expected, source);
+});
+
+test("visible display math preserves internal punctuation, original annotations, and inline glyphs", () => {
+  const tex = String.raw`x=f(a,b)+0.25.`;
+  const display = renderResearchMath(tex, true);
+  const inline = renderResearchMath(tex, false);
+  assertCompleteFormula(display, tex);
+  assertCompleteFormula(inline, tex);
+  assert.equal(glyphPaths(display.svg).filter(({ code }) => code === "2C").length, 1);
+  assert.equal(glyphPaths(display.svg).filter(({ code }) => code === "2E").length, 1);
+  assert.equal(glyphPaths(inline.svg).filter(({ code }) => code === "2C").length, 1);
+  assert.equal(glyphPaths(inline.svg).filter(({ code }) => code === "2E").length, 2);
+  assert.match(display.mathml, /<mn>0\.25<\/mn>/u);
+  assert.match(display.mathml, /<mo>,<\/mo>/u);
+});
+
+test("every multi-row display sets its rows one line of mathematics apart, plus the space its row breaks ask for", async () => {
+  // One line of the manuscript in ems of the display size, and a jot, as LaTeX spaces aligned rows.
+  const css = await readFile(path.join(ROOT, "app", "globals.css"), "utf8");
+  assert.equal(Number(css.match(/--manuscript-leading:\s*([\d.]+);/u)?.[1]), RESEARCH_MANUSCRIPT_LEADING);
+  assert.equal(Number(css.match(/--type-math:\s*([\d.]+)em;/u)?.[1]), RESEARCH_DISPLAY_MATH_SCALE);
+  assert.equal(RESEARCH_MATH_LINE_EM, 1.8217);
+  assert.equal(RESEARCH_MATH_ROW_SPACING_EM, 0.8217);
+  for (const tex of [
+    String.raw`\begin{aligned}a&=b\\c&=d\end{aligned}`,
+    String.raw`\begin{gathered}a\\b\end{gathered}`,
+    String.raw`\begin{cases}a,&x\\b,&y\end{cases}`,
+    String.raw`\begin{array}{c|c}a&b\\c&d\end{array}`,
+    String.raw`\begin{matrix}a&b\\c&d\end{matrix}`,
+    String.raw`\begin{pmatrix}a&b\\c&d\end{pmatrix}`,
+  ]) {
+    const display = renderResearchMath(tex, true);
+    assert.match(display.mathml, /<mtable\b[^>]*rowspacing="0\.8217em"/u, tex);
+    // Two rows of 1em struts stand one line apart: their baselines are 1.8217em apart.
+    const rows = [...display.svg.matchAll(/<g data-mml-node="mtr"[^>]*transform="translate\([-\d.]+,\s*([-\d.]+)\)"/gu)].map((match) => Number(match[1]));
+    assert.equal(rows.length, 2, tex);
+    assert.equal(Math.round(rows[0] - rows[1]), 1822, tex);
+  }
+  // Inline formulas keep MathJax's spacing; script stacks keep theirs.
+  assert.match(renderResearchMath(String.raw`\begin{aligned}x&=1\\y&=2\end{aligned}`, false).mathml, /<mtable\b[^>]*rowspacing="3pt"/u);
+  assert.match(renderResearchMath(String.raw`\begin{cases}x,&y=1\\z,&y=2\end{cases}`, false).mathml, /<mtable\b[^>]*rowspacing="\.2em"/u);
+  assert.match(renderResearchMath(String.raw`\sup_{\substack{P\in\Pi\\ W\le\rho}}x`, true).mathml, /<mtable\b[^>]*rowspacing="0\.1em"/u);
+  // A row break \\[dim] adds its dimension to the line, as in TeX.
+  assert.match(renderResearchMath(String.raw`\begin{cases}a,&x\\[2pt]b,&y\\c,&z\end{cases}`, true).mathml, /rowspacing="1\.0217em 0\.8217em 0\.8217em"/u);
+  assert.match(renderResearchMath(String.raw`\begin{aligned}a&=b\\[4pt]c&=d\\e&=f\end{aligned}`, true).mathml, /rowspacing="1\.2217em 0\.8217em 0\.8217em"/u);
+  // A nested environment takes the same line.
+  assert.equal((renderResearchMath(String.raw`\begin{aligned}x&=\begin{cases}a&b\\c&d\end{cases}\\y&=2\end{aligned}`, true).mathml.match(/rowspacing="0\.8217em"/gu) ?? []).length, 2);
+});
+
+test("the rows of every displayed equation in the manuscripts stand at least one line of mathematics apart", async () => {
+  const sources = [
+    ...["critical-dependence-stress-for-diversification-gains-under-fixed-marginals", "certified-valuation-of-arithmetic-asian-options", "certified-joint-pricing-errors-in-rough-heston"].map((slug) => path.join(ROOT, "content", "selected-research", `${slug}.json`)),
+    ...PROJECTS.map(([slug]) => path.join(ROOT, "content", "artificial-intelligence", `${slug}.json`)),
+  ];
+  let tables = 0;
+  for (const file of sources) {
+    const { markdown } = JSON.parse(await readFile(file, "utf8"));
+    for (const block of parseResearchMarkdown(markdown, { joinSoftLines: true }).filter((entry) => entry.type === "equation")) {
+      for (const [, attributes] of renderResearchMath(block.tex, true).mathml.matchAll(/<mtable\b([^>]*)>/gu)) {
+        const spacing = attributes.match(/rowspacing="([^"]+)"/u)?.[1];
+        if (!spacing || attributes.includes("data-mjx-smallmatrix")) continue;
+        tables += 1;
+        for (const entry of spacing.split(" ")) assert.ok(Number.parseFloat(entry) >= RESEARCH_MATH_ROW_SPACING_EM && entry.endsWith("em"), `${block.tex.slice(0, 60)} sets rows ${entry} apart`);
+      }
+    }
+  }
+  assert.ok(tables >= 89, `Expected the manuscripts' row environments; found ${tables}`);
+});
+
+test("array rules carry their own stroke", () => {
+  const { svg } = renderResearchMath(String.raw`\begin{array}{c|c}a&b\\\hline c&d\end{array}`, true);
+  const rules = [...svg.matchAll(/<line\b[^>]*data-line="([hv])"[^>]*>/gu)];
+  assert.deepEqual(rules.map((rule) => rule[1]).sort(), ["h", "v"]);
+  for (const [rule] of rules) {
+    assert.match(rule, /stroke-width="70"/u);
+    assert.match(rule, /fill="none"/u);
+  }
+});
+
+test("Greek symbols, accents, primes, and fractions retain distinct mathematical geometry", async () => {
+  const fixtures = [
+    [String.raw`\Delta`, "mi", /\u0394/u],
+    [String.raw`\frac{x}{y}`, "mfrac"],
+    [String.raw`\bar{x}`, "mover"],
+    [String.raw`\overline{x}`, "mover"],
+    [String.raw`\underline{x}`, "munder"],
+    [String.raw`\widehat{x+y}`, "mover"],
+    [String.raw`\widetilde{x+y}`, "mover"],
+    [String.raw`x'`, "msup", /\u2032/u],
+  ];
+  for (const [tex, semantic, symbol] of fixtures) {
+    const rendered = await renderResearchMath(tex, false);
+    assertCompleteFormula(rendered, tex);
+    assert.equal(tagCount(rendered.mathml, semantic), 1, `${tex} must retain its ${semantic} structure`);
+    assert.match(rendered.svg, new RegExp(`data-mml-node="${semantic}"`, "u"), `${tex} must have matching visual geometry`);
+    if (symbol) assert.match(decodeXml(rendered.mathml), symbol);
+  }
+  const delta = await renderResearchMath(String.raw`\Delta`, false);
+  const latin = await renderResearchMath("D", false);
+  assert.match(delta.svg, /data-c="394"/u);
+  assert.doesNotMatch(delta.svg, /data-c="44"/u);
+  assert.notEqual(delta.svg.match(/<path\b[^>]*\bd="([^"]+)"/u)?.[1], latin.svg.match(/<path\b[^>]*\bd="([^"]+)"/u)?.[1]);
+});
+
+test("aligned equations preserve rows, fractions, and all nine science equation numbers", async () => {
+  const alignedTex = String.raw`\begin{aligned}x&=\frac{1}{2}\\y&=3\end{aligned}`;
+  const aligned = await renderResearchMath(alignedTex, true);
+  assertCompleteFormula(aligned, alignedTex);
+  assert.equal(tagCount(aligned.mathml, "mtable"), 1);
+  assert.equal(tagCount(aligned.mathml, "mtr"), 2);
+  assert.equal(tagCount(aligned.mathml, "mfrac"), 1);
+  assert.match(aligned.svg, /data-mml-node="mtable"/u);
+  for (let number = 1; number <= 9; number += 1) {
+    const tex = String.raw`x=\frac{1}{2}\tag{${number}}`;
+    const rendered = await renderResearchMath(tex, true);
+    assertCompleteFormula(rendered, tex);
+    assert.equal(tagCount(rendered.mathml, "mlabeledtr"), 1, "Equation labels must be associated with their expression");
+    const label = rendered.mathml.match(/<mlabeledtr\b[^>]*>\s*<mtd\b[^>]*>([\s\S]*?)<\/mtd>/iu)?.[1] ?? "";
+    const labelText = [...label.matchAll(/<mtext\b[^>]*>([\s\S]*?)<\/mtext>/giu)].map((match) => decodeXml(match[1])).join("");
+    assert.equal(labelText, `(${number})`, "Equation labels must retain the correct numeral and parentheses");
+    assert.equal(rendered.number, String(number), "The page sets the same number beside the drawn expression");
+    assert.equal(rendered.svg, (await renderResearchMath(String.raw`x=\frac{1}{2}`, true)).svg, "The drawing is the expression alone");
+  }
+});
+
+test("unsupported, malformed and markup-bearing TeX fail the render with an error", async () => {
+  for (const tex of [
+    String.raw`\unknownCommand{x}`, String.raw`\frac{x}{`, String.raw`\href{javascript:alert(1)}{x}`,
+    String.raw`\mmlToken{mi}[href="javascript:alert(1)"]{x}`, String.raw`\mmlToken{mi}[style="position:fixed"]{x}`,
+    String.raw`\mmlToken{mi}[class="site-rail"]{x}`, String.raw`\text{\mmlToken{mi}[style="color:red"]{x}}`,
+  ]) {
+    await assert.rejects(async () => renderResearchMath(tex, false), /.+/u);
+  }
+});
+
+test("SVG canvases preserve natural glyph scale and baselines with room for accents and labels", async () => {
+  assert.equal(RESEARCH_MATH_GUTTER_EM, 0.375);
+  // Science formula 32 and investment formulas 26–27, copied from the manuscripts
+  // so these geometry checks do not depend on an equation's position.
+  const fixtures = [
+    {
+      tex: String.raw`
+\begin{gathered}
+\left|J'(\Phi(u))-aJ(u)-b\right|\le\varepsilon,
+\qquad a>0,\\
+av+b-\varepsilon\le v'\le av+b+\varepsilon,\\
+J(u)-v\le\delta
+\quad\Longrightarrow\quad
+J'(\Phi(u))-v'\le a\delta+2\varepsilon,
+\end{gathered}
+\tag{5}
+`,
+      display: true,
+      widthEm: 19.970002, heightEm: 4.879238, depthEm: 2.189668,
+      viewBox: [0, -2689.7, 19969.8, 4879.3], number: "5",
+      pathCount: 66, pathGeometrySha256: "fdf8b95f9328741adc3575820c0d4a231c75aa52ea248a929af71b81ba22e335",
+    },
+    {
+      tex: String.raw`
+\underline\Delta_{ik}
+=\inf_{(f,X)\in\Omega(E)}[f(x_i)-f(x_k)],
+\qquad
+\overline\Delta_{ik}
+=\sup_{(f,X)\in\Omega(E)}[f(x_i)-f(x_k)].
+`,
+      display: true,
+      widthEm: 28.503254, heightEm: 2.20116, depthEm: 1.168206,
+      viewBox: [0, -1033, 28503.3, 2201.1],
+      pathCount: 63, pathGeometrySha256: "4ba2daeeea8ad99a6d08749790eb5efd2cab9526b8fa0ad42c8a66d6bde95dcd",
+    },
+    {
+      tex: String.raw`\underline\Delta_{ik}>0`,
+      display: false,
+      widthEm: 3.361852, heightEm: 1.07627, depthEm: 0.36023,
+      viewBox: [0, -716, 3361.9, 1076.1],
+      pathCount: 6, pathGeometrySha256: "8af038a117b5a0595e72f3f92338d7b7337e442ee08c26206f15020ecb559975",
+    },
+  ];
+  const close = (actual, expected, message, tolerance = 1e-8) => assert.ok(Math.abs(actual - expected) <= tolerance, message);
+  for (const fixture of fixtures) {
+    const rendered = await renderResearchMath(fixture.tex, fixture.display);
+    assertCompleteFormula(rendered, fixture.tex);
+    close(rendered.widthEm, fixture.widthEm + 0.75, "Canvas must leave 0.375em on each horizontal side");
+    close(rendered.heightEm, fixture.heightEm + 0.75, "Canvas must leave 0.375em above and below the expression");
+    close(rendered.depthEm, fixture.depthEm + 0.375, "The vertical alignment must compensate for the lower canvas gutter");
+    close(rendered.heightEm - rendered.depthEm - 0.375, fixture.heightEm - fixture.depthEm, "The original expression must retain its distance above the text baseline");
+    const root = rendered.svg.match(/^<svg\b[^>]*>/iu)?.[0] ?? "";
+    const viewBox = (root.match(/\bviewBox="([^"]+)"/u)?.[1] ?? "").split(/\s+/u).map(Number);
+    assert.equal(viewBox.length, 4);
+    assert.deepEqual(viewBox, [fixture.viewBox[0] - 375, fixture.viewBox[1] - 375, fixture.viewBox[2] + 750, fixture.viewBox[3] + 750]);
+    assert.equal(rendered.number, fixture.number, "Only a numbered display carries an equation number");
+    assert.equal(/vertical-align:-[\d.]+em/u.test(root), fixture.display, "A display sits on its own baseline; an inline formula takes its offset from its container");
+    close(rendered.widthEm / viewBox[2], fixture.widthEm / fixture.viewBox[2], "Canvas space must not rescale equation glyphs horizontally", 1e-7);
+    close(rendered.heightEm / viewBox[3], fixture.heightEm / fixture.viewBox[3], "Canvas space must not rescale equation glyphs vertically", 1e-7);
+    const paths = [...rendered.svg.matchAll(/<path\b[^>]*\bd="([^"]+)"/gu)].map((match) => match[1]);
+    assert.equal(paths.length, fixture.pathCount);
+    assert.equal(createHash("sha256").update(JSON.stringify(paths)).digest("hex"), fixture.pathGeometrySha256, "Original mathematical glyph paths must remain exact");
+    // The root canvas exposes accents and labels past its edge; the nested canvases that clip the
+    // extender pieces of bars, braces, arrows and radicals keep their clipping.
+    const [rootCanvas, ...nestedCanvases] = [...rendered.svg.matchAll(/<svg\b[^>]*>/giu)].map((svg) => svg[0]);
+    assert.match(rootCanvas, /style="[^"]*overflow:\s*visible/iu, "The root canvas must expose its full ink");
+    for (const svg of nestedCanvases) assert.doesNotMatch(svg, /overflow:\s*visible/iu, "Nested canvases must clip their stretched pieces");
+  }
+});

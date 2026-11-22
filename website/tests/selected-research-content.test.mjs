@@ -1,0 +1,114 @@
+import assert from "node:assert/strict";
+import { createHash } from "node:crypto";
+import { readFile } from "node:fs/promises";
+import test from "node:test";
+import { parseResearchMarkdown } from "../app/lib/content/research-markdown.ts";
+import { renderResearchMath } from "../app/lib/content/research-math.ts";
+import { restoreGithubMath } from "../app/lib/content/github-math.ts";
+
+// Article figures restate manuscript values in their own captions and labels,
+// and natively drawn manuscript figures label their drawings; manuscript checks
+// read the article without those, keeping each manuscript figure's caption.
+function withoutArticleFigures(html) {
+  return html
+    .replace(/<figure\b[^>]*\bdata-article-figure="[^"]*"[^>]*>[\s\S]*?<\/figure>/gu, "")
+    .replace(/(<figure\b[^>]*\bdata-manuscript-figure="[^"]*"[^>]*>)[\s\S]*?(<figcaption\b)/gu, "$1$2");
+}
+
+// A passage table that reads down its columns (passage-tables.ts) restates its passage column by column,
+// after its heads; its formulas are read in that order.
+function inReadingOrder(html) {
+  return html.replace(/<table\b[^>]*\bdata-reading="columns"[^>]*>[\s\S]*?<\/table>/gu, (table) => {
+    const [heads, ...rows] = [...table.matchAll(/<tr\b[^>]*>([\s\S]*?)<\/tr>/gu)].map(([, row]) => [...row.matchAll(/<t[hd]\b[^>]*>([\s\S]*?)<\/t[hd]>/gu)].map(([, cell]) => cell));
+    return [...heads, ...heads.flatMap((_, column) => rows.map((row) => row[column] ?? ""))].join("");
+  });
+}
+
+const PROJECTS = [
+  { key: "asian", slug: "certified-valuation-of-arithmetic-asian-options", title: "Certified Valuation of Arithmetic Asian Options: The Cost of Exercising on the Geometric Average", repository: "RESEARCH-Certified-Valuation-of-Arithmetic-Asian-Options", commit: "dd4b147d822d45a4ca12a66294fae2a32cd252bb", blob: "73fd58c109bca144a8809e3fc9832e8ad258cae6", sections: 9, tables: 11, formulas: 724, figures: "asian" },
+  { key: "rough", slug: "certified-joint-pricing-errors-in-rough-heston", title: "Certified Joint Pricing Errors in Rough Heston", repository: "RESEARCH-Certified-Joint-Pricing-Errors-in-Rough-Heston", commit: "038db24a3aadf9600edef385dfd7508e612d53c8", blob: "12b074bc25984ea11f9fc7d75768800c267a43eb", sections: 8, tables: 10, formulas: 440, figures: "rough" },
+];
+
+function sourceFormulas(markdown) {
+  return [...markdown.matchAll(/```math\r?\n([\s\S]*?)\r?\n```|\$\$([\s\S]*?)\$\$|\\\[([\s\S]*?)\\\]|\\\(([\s\S]*?)\\\)|\$`([^`]*?)`\$|(?<!\\)\$([^$\r\n]+?)(?<!\\)\$/gu)].map((match) => ({
+    tex: match[1] ?? match[2] ?? match[3] ?? match[4] ?? match[5] ?? match[6],
+    display: match[1] !== undefined || match[2] !== undefined || match[3] !== undefined,
+  }));
+}
+
+function parsedFormulas(blocks) {
+  const formulas = [];
+  function visit(inline) {
+    if (inline.type === "math") formulas.push({ tex: inline.tex, display: false });
+    else if (inline.inlines) inline.inlines.forEach(visit);
+  }
+  for (const block of blocks) {
+    if (block.type === "equation") formulas.push({ tex: block.tex, display: true });
+    else if (block.inlines) block.inlines.forEach(visit);
+    else block.rows.flat().forEach((cell) => cell.inlines.forEach(visit));
+  }
+  return formulas;
+}
+
+function decodeHtml(value) {
+  return value.replace(/&(amp|lt|gt|quot|apos);/gu, (_, name) => ({ amp: "&", lt: "<", gt: ">", quot: '"', apos: "'" })[name]);
+}
+
+for (const expected of PROJECTS) {
+  test(`${expected.key} main text and references are complete and match the frozen GitHub source`, async () => {
+    const bytes = await readFile(new URL(`../content/sources/selected-research/${expected.key}-source.md`, import.meta.url));
+    assert.equal(createHash("sha1").update(`blob ${bytes.length}\0`).update(bytes).digest("hex"), expected.blob);
+    const text = bytes.toString("utf8").replace(/\r\n/gu, "\n");
+    const upstream = expected.key === "asian" ? restoreGithubMath(text) : text;
+    const article = JSON.parse(await readFile(new URL(`../content/selected-research/${expected.slug}.json`, import.meta.url), "utf8"));
+    assert.equal(article.sourceCommit, expected.commit);
+    assert.equal(article.sourceBlob, expected.blob);
+    const subtitle = upstream.match(/^# .+\n\n\[[^\n]+\n\n([A-Z][^\n*[\]$`]+)\n/u)?.[1];
+    assert.equal(article.title, upstream.match(/^# (.+)$/mu)[1] + (subtitle ? `: ${subtitle}` : ""));
+    assert.equal(article.title, expected.title, "The page title is the paper's full PDF title.");
+    const main = upstream.slice(upstream.indexOf("\n") + 1, upstream.indexOf("\n## Appendix A.")).trim()
+      .replace(/^!\[([^\]\n]+)\]\(figures\/([a-z0-9-]+)\.png\)\n\n\*\*\1\*\*([^\n]*)$/gmu, (_, label, image, caption) => `![**${label}**${caption}](/assets/research/${expected.figures}/${image}.png)`)
+      .replace(/^!\[(Figure \d+\.[^\n]*)\]\(\.\.\/figures\/([a-z0-9-]+)\.png\)$/gmu, (_, caption, image) => `![${caption}](/assets/research/${expected.figures}/${image}.png)`)
+      .replace(/\]\((\.\.\/[^\s)]+)\)/gu, (_, relative) => `](https://github.com/130U/${expected.repository}/blob/${expected.commit}/${relative.slice(3)})`);
+    const references = upstream.slice(upstream.indexOf("\n## References")).trim();
+    assert.ok(article.markdown.startsWith(main + "\n\n## Appendices and supporting material\n"), "Every main-text character must survive import, except resolved relative link targets and each figure's image path, with an image label its caption repeats.");
+    assert.ok(article.markdown.endsWith(references + "\n"), "The complete bibliography must survive import.");
+    assert.doesNotMatch(article.markdown, /^## Appendix [A-Z]\./mu);
+    const blocks = parseResearchMarkdown(article.markdown, { joinSoftLines: true });
+    assert.equal(blocks.filter((block) => block.type === "heading" && /^## \d+\./u.test(block.source)).length, expected.sections);
+    assert.equal(blocks.filter((block) => block.type === "table").length, expected.tables);
+    const formulas = sourceFormulas(article.markdown);
+    assert.equal(formulas.length, expected.formulas);
+    assert.deepEqual(parsedFormulas(blocks), formulas, "All mathematical inputs must retain their exact TeX, order and display mode.");
+    for (const { tex, display } of formulas) {
+      const result = renderResearchMath(tex, display);
+      assert.doesNotMatch(result.svg + result.mathml, /data-mjx-error|<merror\b|<foreignObject\b|\b(?:NaN|Infinity)\b/iu);
+      assert.ok(result.widthEm > 0 && result.heightEm > 0);
+    }
+  });
+
+  test(`${expected.key} published article retains every equation and all section links`, async () => {
+    const { markdown } = JSON.parse(await readFile(new URL(`../content/selected-research/${expected.slug}.json`, import.meta.url), "utf8"));
+    const html = withoutArticleFigures(await readFile(new URL(`../out/${expected.slug}/index.html`, import.meta.url), "utf8"));
+    const rendered = [...inReadingOrder(html).matchAll(/<math\b[^>]*data-research-math="(inline|display)"[^>]*>[\s\S]*?<annotation\b[^>]*encoding="application\/x-tex"[^>]*>([\s\S]*?)<\/annotation>[\s\S]*?<\/math>/gu)].map((match) => ({ tex: decodeHtml(match[2]), display: match[1] === "display" }));
+    assert.deepEqual(rendered, sourceFormulas(markdown));
+    const blocks = parseResearchMarkdown(markdown, { joinSoftLines: true });
+    const abstractIndex = blocks.findIndex((block) => block.type === "heading" && block.source.trim() === "## Abstract");
+    assert.ok(abstractIndex >= 0, "Selected Research must begin its reading content at Abstract.");
+    const markers = [...html.matchAll(/data-research-block="(\d+)"/gu)].map((match) => Number(match[1]));
+    assert.deepEqual(markers, blocks.slice(abstractIndex).map((_, index) => abstractIndex + index), "Every block from Abstract onward must appear once, in source order; pre-abstract front matter stays in the source.");
+    const contents = html.match(/<nav\b[^>]*aria-label="Article contents"[^>]*>([\s\S]*?)<\/nav>/u);
+    assert.ok(contents);
+    assert.doesNotMatch(contents[1], /data-research-block/u, "Only navigation, never manuscript content, belongs in the disclosure.");
+    const firstHeading = blocks.findIndex((block) => block.type === "heading");
+    const firstChapter = blocks.findIndex((block, index) => index > firstHeading && block.type === "heading");
+    assert.ok(contents.index > html.indexOf(`data-research-block="${firstChapter - 1}"`), "The complete abstract must precede the contents in reading order.");
+    assert.ok(contents.index < html.indexOf(`data-research-block="${firstChapter}"`), "Contents must precede the first body chapter in reading order.");
+    for (const heading of blocks.filter((block) => block.type === "heading")) {
+      assert.ok(html.includes(`href="#${heading.id}"`));
+      assert.ok(html.includes(`id="${heading.id}"`));
+    }
+    const ids = [...html.matchAll(/\bid="([^"]+)"/gu)].map((match) => match[1]);
+    assert.equal(new Set(ids).size, ids.length);
+  });
+}

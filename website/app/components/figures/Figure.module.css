@@ -1,0 +1,1124 @@
+/* Article figures share one frame, one plot grammar and two text roles:
+   the title at interface size and every label at label size. Text is HTML at
+   its true size, so charts keep legible labels at every width; only the curves
+   live in a stretched SVG layer with non-scaling strokes. */
+.figure {
+  container: figure / inline-size;
+  min-width: 0;
+  margin: 2.75rem 0;
+  color: var(--ink);
+}
+
+/* Text in a figure keeps the face's proportional figures, so a hyphenated
+   label reads as one word; ticks and values take tabular figures. */
+.frame {
+  --figure-pad: clamp(16px, 5cqi, 28px);
+  position: relative;
+  overflow-x: clip;
+  padding: var(--figure-pad);
+  border: 1px solid var(--frame);
+  font-family: var(--font-text);
+  font-variant-numeric: lining-nums;
+}
+
+/* A number of five or more digits after its point, in a label or a readout,
+   stands in the groups a research table sets, each parted from the one before
+   by TeX's thin space (Digits, digitRuns); nothing is inserted, so the copied
+   text is the manuscript's number. */
+.digitGroup {
+  margin-inline-start: calc(1em / 6);
+}
+
+/* The zoom control holds the frame's top-right corner, level with the first
+   line of the title or of the plot's axis title. */
+.zoom {
+  position: absolute;
+  z-index: 4;
+  top: calc(var(--figure-pad) - 5px);
+  right: calc(var(--figure-pad) - 8px);
+}
+
+/* Where a label holds that corner, the control takes a row of its own. */
+.frame[data-zoom-row] {
+  padding-top: calc(var(--figure-pad) + 32px);
+}
+
+/* Keep comparison diagrams legible when their columns cannot reflow. A
+   comparison is set at its scroll width W only where its room is less than nine
+   tenths of W; with more room it fits, so it never scrolls by less than a tenth
+   of its width. Each one writes this as
+   min-width: calc(W - round(down, 100%, 0.9W) * 10 / 9), after a plain W for
+   browsers without round(). */
+.scrollViewport {
+  max-width: 100%;
+  overflow-x: auto;
+  overscroll-behavior-x: contain;
+  scrollbar-width: thin;
+}
+
+.scrollViewport:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+}
+
+/* A comparison wider than its column fades at the right edge by as much as is
+   left to scroll, as a wide table does. */
+.frame [data-figure-scroll][data-scroll-overflow] {
+  -webkit-mask-image: linear-gradient(to right, #000 calc(100% - var(--edge-fade, 0px)), transparent);
+  mask-image: linear-gradient(to right, #000 calc(100% - var(--edge-fade, 0px)), transparent);
+}
+
+/* The title sits alone on its line; a view switch follows it as one segmented
+   control. Whatever stands first in the head keeps clear of the zoom control
+   in the frame's top-right corner; a switch beneath the title takes the head's
+   full width. */
+.head {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 14px;
+  margin-bottom: 26px;
+}
+
+.title {
+  max-width: min(34rem, calc(100% - 32px));
+  margin: 0;
+  color: var(--ink);
+  font-size: var(--type-interface);
+  font-weight: 500;
+  line-height: var(--interface-leading);
+  text-wrap: balance;
+}
+
+.keep {
+  white-space: nowrap;
+}
+
+/* Segments share the width evenly, and each keeps at least its label's width,
+   so a label never runs out of its segment. Every label holds one line: where
+   the labels cannot share one row, the controller stacks them (data-stack),
+   four in two columns where each label holds its half, and otherwise one
+   segment to a row. */
+.switch {
+  display: inline-grid;
+  grid-auto-columns: 1fr;
+  grid-auto-flow: column;
+  gap: 2px;
+  max-width: 100%;
+  padding: 2px;
+  background: var(--chart-pill);
+}
+
+.switch:first-child {
+  max-width: calc(100% - 32px);
+}
+
+.switch[hidden] {
+  display: none;
+}
+
+@container figure (max-width: 520px) {
+  .switch {
+    align-self: stretch;
+  }
+}
+
+.switch[data-stack] {
+  align-self: stretch;
+  grid-auto-flow: row;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.switch[data-stack]:is([data-count="2"], [data-count="3"]),
+.switch[data-stack="column"] {
+  grid-template-columns: minmax(0, 1fr);
+}
+
+.switch button {
+  min-height: 30px;
+  padding: 4px 12px;
+  border: 0;
+  background: transparent;
+  color: var(--supporting-ink);
+  cursor: pointer;
+  font: inherit;
+  font-size: var(--type-label);
+  line-height: var(--label-leading);
+  text-align: center;
+  white-space: nowrap;
+  overflow-wrap: normal;
+  transition: color 160ms ease, background-color 160ms ease;
+}
+
+@container figure (max-width: 22rem) {
+  .switch button {
+    padding-inline: 6px;
+  }
+}
+
+.switch button[aria-pressed="true"] {
+  background: var(--panel);
+  color: var(--ink);
+  outline: 1px solid var(--rule-medium);
+  outline-offset: -1px;
+}
+
+.switch button:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 1px;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .switch button:hover {
+    color: var(--accent);
+  }
+}
+
+@media (pointer: coarse) {
+  .switch button {
+    min-height: 44px;
+  }
+}
+
+/* The caption is set a step below the prose, in the reading face and
+   supporting ink, so it reads as the figure's caption and not as the next
+   paragraph. */
+.caption {
+  max-width: var(--reading-measure);
+  margin: 14px 0 0;
+  color: var(--supporting-ink);
+  font-family: var(--font-prose);
+  font-size: var(--type-caption);
+  line-height: var(--caption-leading);
+  text-wrap: pretty;
+}
+
+/* "Figure N." of a manuscript caption, in the face and weight of a table's
+   title, at the label size beside the caption's serif. */
+.captionLabel {
+  color: var(--ink);
+  font-family: var(--font-text);
+  font-size: var(--type-label);
+  font-weight: 500;
+}
+
+.caption strong {
+  font-weight: inherit;
+}
+
+.legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 20px;
+  margin: 22px 0 0;
+  padding: 0;
+  color: var(--supporting-ink);
+  font-size: var(--type-label);
+  line-height: var(--label-leading);
+  list-style: none;
+}
+
+.legend li {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  white-space: nowrap;
+}
+
+.swatch {
+  flex: none;
+  width: 10px;
+  height: 10px;
+  background: currentColor;
+}
+
+.swatch[data-shape="line"] {
+  width: 18px;
+  height: 2px;
+}
+
+/* A short thick bar, as a level is marked at a plot's edge. */
+.swatch[data-shape="thick"] {
+  width: 14px;
+  height: 4px;
+}
+
+.swatch[data-shape="dash"] {
+  width: 18px;
+  height: 0;
+  border-top: 1px dashed currentColor;
+  background: none;
+}
+
+.swatch[data-shape="dotted"] {
+  width: 18px;
+  height: 0;
+  border-top: 2px dotted currentColor;
+  background: none;
+}
+
+.swatch[data-shape="dot"] {
+  border-radius: 50%;
+}
+
+.swatch[data-shape="triangle"] {
+  clip-path: polygon(0 8%, 100% 8%, 50% 96%);
+}
+
+.swatch[data-shape="ring"] {
+  border: 1.5px solid currentColor;
+  border-radius: 50%;
+  background: var(--control-surface, var(--page));
+}
+
+.swatch[data-shape="box"] {
+  outline: 1px solid currentColor;
+  outline-offset: -1px;
+  background: var(--panel);
+}
+
+.swatch[data-shape="tint"] {
+  outline: 1px solid rgba(34, 0, 255, 0.35);
+  outline-offset: -1px;
+  background: var(--chart-tint-strong);
+}
+
+.swatch[data-shape="hatch"] {
+  outline: 1px solid var(--rule-strong);
+  outline-offset: -1px;
+  background: var(--chart-hatch);
+}
+
+/* A capped interval, drawn as the figure draws a range: a 2px line between
+   two 1.5px caps. */
+.swatch[data-shape="range"] {
+  box-sizing: border-box;
+  width: 18px;
+  border-inline: 1.5px solid currentColor;
+  background: linear-gradient(currentColor, currentColor) center / 100% 2px no-repeat;
+}
+
+/* Color roles. Every mark takes its color from currentColor. */
+.ink { color: var(--ink); }
+
+.accent { color: var(--accent); }
+
+.sky { color: var(--chart-sky); }
+
+.green { color: var(--chart-green); }
+
+.steel { color: var(--chart-steel); }
+
+.mist { color: var(--chart-mist); }
+
+/* ---------- Plot: HTML text around a stretched curve layer ---------- */
+.plot {
+  position: relative;
+  height: var(--plot-h, clamp(230px, 52cqi, 300px));
+  color: var(--ink);
+  font-size: var(--type-label);
+  line-height: var(--label-leading);
+}
+
+.area {
+  position: absolute;
+  inset: var(--pt, 42px) var(--pr, 14px) var(--pb, 58px) var(--pl, 46px);
+}
+
+.gridY,
+.gridX {
+  position: absolute;
+  pointer-events: none;
+}
+
+.gridY {
+  left: 0;
+  right: 0;
+  height: 1px;
+  margin-top: -0.5px;
+  background: var(--dash-x);
+}
+
+.gridX {
+  top: 0;
+  bottom: 0;
+  width: 1px;
+  margin-left: -0.5px;
+  background: var(--dash-y);
+}
+
+.gridY[data-solid] {
+  background: var(--rule-strong);
+}
+
+.gridX[data-solid] {
+  background: var(--rule-strong);
+}
+
+.tickY,
+.tickX {
+  position: absolute;
+  color: var(--muted);
+  font-variant-numeric: lining-nums tabular-nums;
+  white-space: nowrap;
+  pointer-events: none;
+}
+
+.tickY {
+  right: calc(100% + 9px);
+  transform: translateY(-50%);
+}
+
+.tickX {
+  top: calc(100% + 9px);
+  transform: translateX(-50%);
+}
+
+.tickX[data-edge="start"] {
+  transform: none;
+}
+
+.tickX[data-edge="end"] {
+  transform: translateX(-100%);
+}
+
+@container figure (max-width: 420px) {
+  .tickX[data-minor] {
+    display: none;
+  }
+}
+
+.pill {
+  display: inline-block;
+  padding: 3px 8px;
+  background: var(--chart-pill);
+  color: var(--ink);
+  font-size: var(--type-label);
+  line-height: var(--label-leading);
+  white-space: nowrap;
+}
+
+/* Every axis title starts on the frame's left edge, where the head and the
+   legend start. */
+.yTitle {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.xTitle {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+}
+
+.curves {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+  pointer-events: none;
+}
+
+.curves path,
+.curves line,
+.curves polyline {
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.6;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  vector-effect: non-scaling-stroke;
+}
+
+.curves [data-dash] {
+  stroke-dasharray: 4 4;
+  stroke-linecap: butt;
+}
+
+.curves [data-fill] {
+  fill: currentColor;
+  stroke: none;
+}
+
+.curves [data-dotted] {
+  stroke-dasharray: 0.1 5;
+}
+
+.curves [data-thick] {
+  stroke-width: 3.5;
+  stroke-linecap: butt;
+}
+
+/* A scatter is one path of zero-length strokes, each drawn as a round point. */
+.curves [data-scatter] {
+  stroke-width: 3.2;
+  opacity: 0.55;
+}
+
+.dot {
+  position: absolute;
+  width: 9px;
+  height: 9px;
+  margin: -4.5px 0 0 -4.5px;
+  border-radius: 50%;
+  background: currentColor;
+}
+
+.dot[data-ring] {
+  border: 1.5px solid currentColor;
+  background: var(--control-surface, var(--page));
+}
+
+.dot[data-shape] {
+  border-radius: 0;
+}
+
+.dot[data-shape="triangle"] {
+  clip-path: polygon(0 8%, 100% 8%, 50% 96%);
+}
+
+.dot[data-tip] {
+  cursor: default;
+}
+
+.dot[data-tip]::after {
+  position: absolute;
+  inset: -10px;
+  content: "";
+}
+
+/* A positioned label, on one line. --ax/--ay pick the anchor point of the
+   label box, moved by whole pixels, so a thin glyph such as a subscript plus is
+   never lost to a fractional raster offset. */
+.mark {
+  position: absolute;
+  transform: translate(var(--ax, 0%), var(--ay, -50%));
+  transform: translate(round(var(--ax, 0%), 1px), round(var(--ay, -50%), 1px));
+  font-size: var(--type-label);
+  line-height: var(--label-leading);
+  white-space: nowrap;
+  pointer-events: none;
+}
+
+/* A label takes the tone of the mark it names. The accent and green read as
+   text on the paper; the light tones do not, so a label beside a sky or mist
+   mark reads in ink and one beside a steel mark in muted ink. */
+.mark.sky,
+.mark.mist {
+  color: var(--ink);
+}
+
+.mark.steel {
+  color: var(--muted);
+}
+
+/* A plot label is knocked out of the grid lines and reference rules behind
+   it, on the surface it sits on: the page in the article, the sheet on the
+   zoom stage. The knockout reaches 3px past the text on either side without
+   moving it. A label set on a tinted region, or held clear of a rule by its
+   own padding, is bare (data-bare) and stands clear of the lines instead. */
+.plot .mark:not([data-tag], [data-bare]) {
+  background: var(--control-surface, var(--page));
+  box-shadow: -3px 0 0 var(--control-surface, var(--page)), 3px 0 0 var(--control-surface, var(--page));
+}
+
+.mark[data-tag] {
+  padding: 1px 6px;
+  background: var(--control-surface, var(--page));
+}
+
+.markStrong {
+  font-weight: 500;
+}
+
+/* A label's qualifier, or a figure's in-place names, stand where the figure is
+   at least 30rem wide (wide); in a narrower figure a label keeps its value, the
+   qualifier moving to the mark's readout, and names move to a key beneath the
+   drawing (narrow). */
+.narrow {
+  display: none;
+}
+
+@container figure (max-width: 30rem) {
+  .wide {
+    display: none;
+  }
+
+  .narrow {
+    display: block;
+  }
+
+  span.narrow {
+    display: inline;
+  }
+}
+
+.muted {
+  color: var(--muted);
+}
+
+/* ---------- Bar rows: label | track | value ----------
+   The label column takes at most 42% of the chart, so the track keeps room
+   for its scale where a figure is a little too wide to stack. */
+.bars {
+  display: grid;
+  grid-template-columns: minmax(0, min(var(--label-w, 11rem), 42%)) minmax(0, 1fr) minmax(max-content, var(--value-w, 5.5rem));
+  column-gap: 14px;
+  font-size: var(--type-label);
+  line-height: var(--label-leading);
+}
+
+/* One row of the chart: a subgrid line holding label, track and value, with
+   the grid lines and reference rules drawn behind the track column. */
+.row {
+  position: relative;
+  display: grid;
+  grid-column: 1 / -1;
+  grid-template-columns: subgrid;
+  grid-template-rows: auto;
+  align-items: center;
+}
+
+.row > .lines,
+.row > .rules {
+  grid-row: 1;
+  grid-column: 2;
+  align-self: stretch;
+}
+
+.row > .barLabel {
+  grid-row: 1;
+  grid-column: 1;
+}
+
+.row > .track {
+  grid-row: 1;
+  grid-column: 2;
+}
+
+.row > .value {
+  grid-row: 1;
+  grid-column: 3;
+}
+
+.row > .barHeader,
+.row > .axis {
+  grid-row: 1;
+  grid-column: 2;
+}
+
+.lines,
+.rules {
+  position: relative;
+  z-index: 0;
+  min-height: 1px;
+  pointer-events: none;
+}
+
+.barLabel {
+  position: relative;
+  z-index: 1;
+  min-width: 0;
+  padding: 8px 0;
+  color: var(--ink);
+  white-space: nowrap;
+}
+
+.track {
+  position: relative;
+  z-index: 1;
+  align-self: stretch;
+  min-height: 36px;
+}
+
+/* A value with a note beneath it takes a taller row, so each pair reads as one
+   and rows part visibly. */
+@container figure (width > 30rem) {
+  .bars:not([data-stack="always"]) > .row:has(> .value > small) > .track {
+    min-height: 50px;
+  }
+}
+
+.seg {
+  position: absolute;
+  top: 50%;
+  height: 14px;
+  transform: translateY(-50%);
+  transform-origin: left center;
+  background: currentColor;
+}
+
+.seg[data-hatch] {
+  outline: 1px solid currentColor;
+  outline-offset: -1px;
+  background: var(--chart-hatch);
+}
+
+.seg[data-tip]::after {
+  position: absolute;
+  inset: -6px 0;
+  content: "";
+}
+
+.seg + .seg {
+  box-shadow: inset 1px 0 0 var(--control-surface, var(--page));
+}
+
+.range {
+  position: absolute;
+  top: 50%;
+  height: 10px;
+  transform: translateY(-50%);
+  border-inline: 1.5px solid currentColor;
+}
+
+.range::before {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  right: 0;
+  height: 2px;
+  margin-top: -1px;
+  background: currentColor;
+  content: "";
+}
+
+/* A value stands at the row's end in tabular figures; its note stands beneath
+   it in muted ink, so every value of a column shares one right edge. */
+.value {
+  position: relative;
+  z-index: 1;
+  color: var(--ink);
+  font-variant-numeric: lining-nums tabular-nums;
+  text-align: right;
+  white-space: nowrap;
+}
+
+.value small {
+  display: block;
+  color: var(--muted);
+  font-size: inherit;
+}
+
+/* A rule is a 1px dashed border centred on its value, as a grid line is. */
+.rule {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 0;
+  margin-left: -0.5px;
+  border-left: 1px dashed var(--ink);
+  pointer-events: none;
+}
+
+.rule[data-tone="soft"] {
+  border-left-color: var(--rule-strong);
+}
+
+.rule[data-tone="accent"] {
+  border-left-color: var(--accent);
+}
+
+.group > .groupLabel {
+  grid-row: 1;
+  grid-column: 1 / -1;
+}
+
+.groupLabel {
+  position: relative;
+  z-index: 1;
+  margin: 0;
+  padding: 14px 0 2px;
+  color: var(--muted);
+  white-space: nowrap;
+}
+
+.group:first-child > .groupLabel {
+  padding-top: 0;
+}
+
+.axis {
+  position: relative;
+  height: 30px;
+  border-top: 1px solid var(--rule-strong);
+  color: var(--muted);
+}
+
+.axis .tickX {
+  top: 7px;
+}
+
+.axisTitle {
+  grid-column: 1 / -1;
+  justify-self: start;
+  padding-top: 4px;
+}
+
+.barHeader {
+  position: relative;
+  height: 28px;
+}
+
+/* A head names a column from its start or its end; the name of a rule stands
+   beside the top of its rule, which runs up through the header row to it, or
+   centred over it. */
+.headerMark {
+  position: absolute;
+  bottom: 6px;
+  transform: translateX(-50%);
+  font-size: var(--type-label);
+  line-height: var(--label-leading);
+  white-space: nowrap;
+}
+
+/* A label in the steel tone of a context rule reads in muted ink. */
+.headerMark.steel {
+  color: var(--muted);
+}
+
+.headerMark[data-anchor="left"] {
+  transform: none;
+}
+
+.headerMark[data-anchor="right"] {
+  transform: translateX(-100%);
+}
+
+.headerMark[data-anchor="left"][data-rule] {
+  transform: translateX(6px);
+}
+
+.headerMark[data-anchor="right"][data-rule] {
+  transform: translateX(calc(-100% - 6px));
+}
+
+.barHeader > .rule {
+  top: 8px;
+}
+
+.barHeader > .rule[data-anchor="center"] {
+  top: auto;
+  height: 4px;
+}
+
+/* Stacked rows: the label and its value share one line above a full-width
+   track, and the grid continues up through that line behind knocked-out text.
+   "narrow" stacks below 30rem so text enlargement shares the same breakpoint. */
+.bars[data-stack="always"] {
+  grid-template-columns: minmax(0, 1fr);
+}
+
+.bars[data-stack="always"] > .row {
+  grid-template-columns: minmax(0, 1fr) auto;
+  grid-template-rows: auto auto;
+  column-gap: 16px;
+}
+
+.bars[data-stack="always"] > .row > .lines,
+.bars[data-stack="always"] > .row > .rules {
+  grid-row: 1 / 3;
+  grid-column: 1 / -1;
+}
+
+.bars[data-stack="always"] > .row > .barLabel,
+.bars[data-stack="always"] > .row > .value {
+  grid-row: 1;
+  align-self: start;
+  padding: 12px 0 2px;
+}
+
+.bars[data-stack="always"] > .row > .barLabel {
+  grid-column: 1;
+}
+
+.bars[data-stack="always"] > .row > .value {
+  grid-column: 2;
+}
+
+.bars[data-stack="always"] > .row > .track {
+  grid-row: 2;
+  grid-column: 1 / -1;
+  min-height: 32px;
+}
+
+.bars[data-stack="always"] > .row > .barHeader,
+.bars[data-stack="always"] > .row > .axis,
+.bars[data-stack="always"] > .group > .rules {
+  grid-column: 1 / -1;
+}
+
+/* The knockout reaches 4px past the text's outer edge, so a grid line at
+   either end of the scale stops short of the first and the last letter. */
+.bars[data-stack="always"] .labelText,
+.bars[data-stack="always"] .value > * {
+  background: var(--control-surface, var(--page));
+  box-decoration-break: clone;
+  -webkit-box-decoration-break: clone;
+}
+
+.bars[data-stack="always"] .labelText {
+  margin-left: -4px;
+  padding-right: 8px;
+  padding-left: 4px;
+}
+
+.bars[data-stack="always"] .value > * {
+  margin-right: -4px;
+  padding-right: 4px;
+  padding-left: 8px;
+}
+
+/* A narrow figure stacks every bar chart. Each row sets its label and its
+   value on one line above a full-width track, the value moving whole beneath
+   the label only when the two cannot share it; each holds one line. The grid
+   runs through the bar's own row only; a reference rule runs on through the
+   label and the value, behind their knocked-out text, and through the header
+   to its name. Rows part by more than a label stands from its own bar. */
+@container figure (max-width: 30rem) {
+  .bars[data-stack] {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .bars[data-stack] > .row {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .bars[data-stack] > .row:has(> .barLabel) {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-start;
+    column-gap: 16px;
+    padding-top: 16px;
+  }
+
+  .bars[data-stack] > .row > .barLabel {
+    flex: 1 1 auto;
+    padding: 0 0 4px;
+  }
+
+  .bars[data-stack] > .row > .value {
+    flex: 0 1 auto;
+    min-width: 0;
+    margin-left: auto;
+    padding: 0 0 4px;
+  }
+
+  .bars[data-stack] > .row > .track {
+    flex: 1 0 100%;
+    order: 1;
+    min-height: 24px;
+  }
+
+  .bars[data-stack] > .row:has(> .barLabel) > .lines {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    height: 24px;
+  }
+
+  .bars[data-stack] > .row:has(> .barLabel) > .rules {
+    position: absolute;
+    inset: 0;
+  }
+
+  .bars[data-stack] > .row > .barHeader,
+  .bars[data-stack] > .row > .axis,
+  .bars[data-stack] > .row > .rules {
+    grid-column: 1;
+  }
+
+  .bars[data-stack] .labelText,
+  .bars[data-stack] .value > * {
+    background: var(--control-surface, var(--page));
+    box-decoration-break: clone;
+    -webkit-box-decoration-break: clone;
+  }
+
+  .bars[data-stack] .labelText {
+    margin-left: -4px;
+    padding-right: 8px;
+    padding-left: 4px;
+  }
+
+  .bars[data-stack] .value > * {
+    margin-right: -4px;
+    padding-right: 4px;
+    padding-left: 8px;
+  }
+}
+
+/* ---------- Schematic drawings ---------- */
+.schematic {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  min-width: 0;
+  color: var(--ink);
+  font-size: var(--type-label);
+  line-height: var(--label-leading);
+}
+
+.schematicArea {
+  position: relative;
+  align-self: stretch;
+  margin: var(--pt, 12px) var(--pr, 0) var(--pb, 30px) var(--pl, 0);
+}
+
+.schematicArt {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+}
+
+.schematicArt :is(path, line, polyline, polygon, rect, circle) {
+  vector-effect: non-scaling-stroke;
+}
+
+.schematicArt :is(line, polyline, path:not([data-fill])) {
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.5;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.schematicArt [data-dash] {
+  stroke-dasharray: 4 4;
+  stroke-linecap: butt;
+}
+
+.schematicArt [data-head] {
+  fill: currentColor;
+  stroke: none;
+}
+
+.schematicArt [data-axis] {
+  stroke: var(--rule-strong);
+  stroke-width: 1;
+}
+
+/* ---------- Diagrams ---------- */
+.node {
+  position: relative;
+  padding: 12px 14px;
+  border: 1px solid var(--rule-medium);
+  background: var(--panel);
+  font-size: var(--type-label);
+  line-height: var(--label-leading);
+}
+
+.node[data-tone="ink"] {
+  border-color: var(--ink);
+}
+
+.node[data-tone="accent"] {
+  border-color: var(--accent);
+}
+
+.node[data-tone="quiet"] {
+  border-style: dashed;
+  border-color: var(--rule-strong);
+  background: transparent;
+  color: var(--supporting-ink);
+}
+
+.nodeTitle {
+  display: block;
+  color: var(--ink);
+  font-size: var(--type-interface);
+  font-weight: 500;
+  line-height: var(--interface-leading);
+  white-space: nowrap;
+}
+
+.nodeText {
+  display: block;
+  margin-top: 4px;
+  color: var(--supporting-ink);
+}
+
+/* ---------- Interaction: tooltip, crosshair, reveal ---------- */
+.tooltip {
+  position: absolute;
+  z-index: 3;
+  max-width: min(18rem, calc(100% - 16px));
+  padding: 8px 10px;
+  border: 1px solid var(--rule-medium);
+  background: var(--panel);
+  color: var(--ink);
+  font-size: var(--type-label);
+  line-height: var(--label-leading);
+  white-space: pre-line;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 120ms ease;
+}
+
+.tooltip[data-open] {
+  opacity: 1;
+}
+
+.crossRule {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 1px;
+  margin-left: -0.5px;
+  background: rgba(11, 11, 11, 0.35);
+  pointer-events: none;
+}
+
+.crossDot {
+  position: absolute;
+  width: 9px;
+  height: 9px;
+  margin: -4.5px 0 0 -4.5px;
+  border: 2px solid var(--control-surface, var(--page));
+  border-radius: 50%;
+  background: currentColor;
+  box-sizing: content-box;
+  transform: translate(-2px, -2px);
+  pointer-events: none;
+}
+
+.crosshair {
+  touch-action: pan-y;
+}
+
+/* Figures below the fold enter once as they scroll into view. */
+.figure[data-reveal="pending"] .curves {
+  clip-path: inset(-12px 100% -12px -12px);
+}
+
+.figure[data-reveal="pending"] .track {
+  clip-path: inset(-12px 100% -12px -12px);
+}
+
+.figure[data-reveal="pending"] .fade {
+  opacity: 0;
+}
+
+.figure[data-reveal="in"] .curves {
+  clip-path: inset(-12px -12px -12px -12px);
+  transition: clip-path 900ms var(--ease-out);
+}
+
+.figure[data-reveal="in"] .track {
+  clip-path: inset(-12px -12px -12px -12px);
+  transition: clip-path 800ms var(--ease-out);
+}
+
+.figure[data-reveal="in"] .fade {
+  transition: opacity 500ms ease 450ms;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .figure * {
+    transition: none !important;
+  }
+}

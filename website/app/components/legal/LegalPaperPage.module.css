@@ -1,0 +1,511 @@
+.paper {
+  container-type: inline-size;
+  min-width: 0;
+  color: var(--ink);
+  font-size: var(--type-reading);
+  line-height: var(--reading-leading);
+  letter-spacing: 0;
+  overflow-wrap: break-word;
+}
+
+.paper strong,
+.paper th {
+  font-weight: 600;
+}
+
+/* A table's title is set at the weight of a figure's title, bold runs and all. */
+.paper [data-table-title] strong {
+  font-weight: inherit;
+}
+
+.header {
+  margin-bottom: 5rem;
+}
+
+/* On a reading page the title keeps to the reading measure, so its last line
+   stays inside the guide that closes the measure; below 1024px it takes the
+   whole column, like every title. */
+.paper .header h1 {
+  max-width: min(var(--title-width), var(--reading-measure));
+  font-size: var(--type-title);
+  font-weight: 400;
+  line-height: var(--title-leading);
+  letter-spacing: var(--title-tracking);
+}
+
+@media (width < 1024px) {
+  .paper .header h1 {
+    max-width: var(--title-width);
+  }
+}
+
+.readingLayout {
+  min-width: 0;
+}
+
+.overview {
+  min-width: 0;
+  max-width: var(--reading-width);
+}
+
+.readingColumn {
+  min-width: 0;
+  max-width: var(--reading-width);
+}
+
+.abstract {
+  margin-bottom: 2.75rem;
+  padding-top: 2rem;
+  border-top: 1px solid var(--rule-strong);
+}
+
+.abstract,
+.manuscriptAbstract,
+.body,
+.footnotes {
+  font-family: var(--font-prose);
+}
+
+.contents,
+.manuscriptByline,
+.backlinks,
+.authorNote > div > a,
+.paperFooter {
+  font-family: var(--font-text);
+}
+
+.contents {
+  margin-bottom: 2rem;
+  padding: 0.5rem 0;
+  border-top: 1px solid var(--rule-strong);
+  border-bottom: 1px solid var(--rule);
+}
+
+/* Where the column closes on a hairline, the contents keep the frames' inset
+   from it; its rules run to the line. */
+@media (width >= 768px) {
+  .contents {
+    padding-right: var(--frame-inset);
+  }
+}
+
+.abstract h2,
+.manuscriptAbstract h2,
+.body h2,
+.footnotes h2 {
+  margin: 0 0 1.25rem;
+  font-size: var(--type-heading);
+  font-weight: 400;
+  line-height: var(--heading-leading);
+  letter-spacing: var(--heading-tracking);
+  text-wrap: balance;
+  scroll-margin-top: 6rem;
+}
+
+.abstract p,
+.manuscriptAbstract p,
+.footnotes p {
+  margin: 0;
+}
+
+/* The body sets its own paragraphs apart. A figure's paragraphs (a readout, a
+   panel title, a bracket note) keep the spacing their classes give them: the
+   reset below takes no specificity, and the spacing reaches direct children
+   only. */
+:where(.body) p {
+  margin: 0;
+}
+
+.abstract p + p,
+.manuscriptAbstract > p + p,
+.body > p + p {
+  margin-top: 1.5rem;
+}
+
+.manuscriptAbstract {
+  margin-top: 6rem;
+}
+
+.manuscriptByline {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 0.5rem 1.5rem;
+  margin-bottom: 1.5rem;
+  color: var(--supporting-ink);
+  font-size: var(--type-interface);
+  line-height: var(--interface-leading);
+}
+
+.manuscriptByline p + p {
+  margin-top: 0;
+}
+
+.contents summary {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  min-height: 44px;
+  cursor: pointer;
+  font-size: var(--type-interface);
+  line-height: var(--interface-leading);
+  font-weight: 400;
+  transition: color 180ms var(--ease-out);
+  list-style: none;
+}
+
+.contents summary::-webkit-details-marker {
+  display: none;
+}
+
+.contentsChevron {
+  width: 7px;
+  height: 7px;
+  margin: 0 3px 3px 1rem;
+  border-right: 1px solid currentColor;
+  border-bottom: 1px solid currentColor;
+  transform: rotate(45deg);
+}
+
+.contents details[open] .contentsChevron {
+  margin-bottom: 0;
+  transform: rotate(225deg);
+}
+
+.contents ol {
+  display: grid;
+  margin: 0.5rem 0 1rem;
+  padding: 0;
+  list-style: none;
+  gap: 0.25rem;
+}
+
+.contents li {
+  font-size: var(--type-interface);
+  line-height: var(--interface-leading);
+}
+
+.contents a {
+  display: block;
+  padding: 0.375rem 0 0.375rem 0.75rem;
+  border-left: 1px solid transparent;
+  color: var(--supporting-ink);
+}
+
+/* A numbered entry hangs its number, so a title that wraps continues under
+   its first word, as in a printed table of contents. The gap is a word space. */
+.contents a[data-numbered] {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  align-content: center;
+  align-items: baseline;
+  column-gap: 0.28em;
+}
+
+.contents a[aria-current="location"] {
+  border-left-color: var(--accent);
+  color: var(--ink);
+}
+
+.subsectionLink {
+  padding-left: 0.75rem;
+}
+
+.body h2 {
+  margin: 6rem 0 1.25rem;
+  scroll-margin-top: 6rem;
+}
+
+.body h3 em {
+  font-style: normal;
+}
+
+.body h3 {
+  margin: 3rem 0 0.75rem;
+  font-size: var(--type-subheading);
+  font-weight: 500;
+  line-height: var(--subheading-leading);
+  letter-spacing: var(--subheading-tracking);
+  text-wrap: balance;
+  scroll-margin-top: 6rem;
+}
+
+/* A citation's small-caps field (authors and titles of books, periodicals,
+   institutional authors) in the serif's own small capitals, lightly tracked. */
+.smallCaps {
+  font-variant-caps: small-caps;
+  letter-spacing: 0.025em;
+}
+
+/* A note reference stands close after the word or punctuation it annotates,
+   as in a printed law review, and never opens a line: the anchor stays inline,
+   and its target is widened by a box that takes no room in the line. */
+.reference {
+  margin-left: 0.1em;
+  font-size: 0.75em;
+  line-height: 0;
+  vertical-align: super;
+  white-space: nowrap;
+}
+
+.reference a {
+  position: relative;
+  color: var(--accent);
+  text-decoration: none;
+}
+
+.reference a::after {
+  position: absolute;
+  top: 50%;
+  right: -0.4em;
+  left: -0.4em;
+  height: 1.25rem;
+  content: "";
+  transform: translateY(-50%);
+}
+
+/* The author credit's asterisk is set at the byline's size on its baseline,
+   where the face already raises it. */
+.manuscriptByline .reference {
+  margin-left: 0.04em;
+  font-size: 1em;
+  vertical-align: baseline;
+}
+
+.paper a[id] {
+  scroll-margin-top: 6rem;
+}
+
+.paper a:not(.reference a, .contents a) {
+  text-decoration-line: underline;
+  text-decoration-color: var(--link-rule);
+  text-decoration-thickness: 1px;
+  text-underline-offset: var(--link-underline-offset);
+}
+
+.footnotes {
+  margin-top: 6rem;
+  scroll-margin-top: 6rem;
+}
+
+/* The author note and the numbered notes run at one interval. */
+.footnotes ol {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+/* A note's number stands whole in a column wide enough for three figures,
+   right-aligned in tabular figures as in a printed list of notes and on the
+   baseline of the note's first line, so the text keeps the same gap from
+   every number. */
+.footnotes li,
+.authorNote {
+  display: grid;
+  grid-template-columns: 1.75rem minmax(0, 1fr);
+  align-items: baseline;
+  padding: 0.875rem 0;
+  gap: 0.5rem;
+  scroll-margin-top: 6rem;
+}
+
+/* The note a reader arrives at (View in Footnotes, or a reference followed
+   without the preview) takes the accent on its number and a tint that fades. */
+.footnotes :is(li, .authorNote):target .noteNumber {
+  color: var(--accent);
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .footnotes :is(li, .authorNote):target {
+    animation: note-arrival 1.6s var(--ease-out);
+  }
+}
+
+@keyframes note-arrival {
+  from {
+    background-color: var(--chart-tint-strong);
+  }
+
+  to {
+    background-color: transparent;
+  }
+}
+
+.noteNumber {
+  color: var(--muted);
+  font-size: var(--type-label);
+  line-height: var(--label-leading);
+  font-variant-numeric: tabular-nums;
+  text-align: end;
+  white-space: nowrap;
+}
+
+.backlinks,
+.authorNote a {
+  display: flex;
+  flex-wrap: wrap;
+  margin-top: 0.375rem;
+  font-size: var(--type-interface);
+  line-height: var(--interface-leading);
+  gap: 0.5rem 1rem;
+}
+
+/* Each Return to Text link holds one line. */
+.backlinks a,
+.authorNote > div > a {
+  white-space: nowrap;
+}
+
+/* The footer every article, post and detail page closes on: a hairline,
+   then the return link and Back to Top on one row at the height of a touch
+   target. Here it spans the reading column, so Back to Top ends where the
+   chapter rules end. */
+.paperFooter {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  max-width: var(--reading-width);
+  margin-top: 72px;
+  padding-top: 24px;
+  border-top: 1px solid var(--rule);
+  font-size: var(--type-interface);
+  line-height: var(--interface-leading);
+  gap: 24px;
+}
+
+.paperFooter > a {
+  display: inline-flex;
+  min-height: 44px;
+  align-items: center;
+}
+
+.paper .paperFooter > a:not(:global(.back-link)) {
+  text-decoration-line: none;
+}
+
+@media (width >= 1200px) {
+  @container (min-width: 44rem) {
+    /* Seven grid columns of reading, three of contents: the split lands on the guides. */
+    .readingLayout {
+      display: grid;
+      grid-template-columns: minmax(0, 7fr) minmax(0, 3fr);
+      align-items: start;
+    }
+
+    .overview {
+      grid-column: 1;
+      grid-row: 1;
+      margin-bottom: 0;
+    }
+
+    .readingColumn {
+      grid-column: 1;
+      grid-row: 2;
+    }
+
+    .contents {
+      position: sticky;
+      top: 4rem;
+      grid-column: 2;
+      grid-row: 1 / span 2;
+      max-height: calc(100dvh - 8rem);
+      margin-bottom: 0;
+      margin-left: 2.5rem;
+      padding-top: 1rem;
+      overflow-y: auto;
+      overscroll-behavior: contain;
+      scrollbar-width: none;
+      border-bottom: 0;
+    }
+
+    .contents::-webkit-scrollbar {
+      display: none;
+    }
+
+    /* The rail has no scrollbar, so where its list runs past an edge the
+       entries fade there, as a wide table fades at its edge; the top rule
+       stays whole. ArticleContents marks the clipped edges. */
+    .contents[data-clipped-top],
+    .contents[data-clipped-bottom] {
+      --contents-top-fade: #000;
+      --contents-bottom-fade: #000;
+
+      -webkit-mask-image: linear-gradient(to bottom, #000 1px, var(--contents-top-fade) 1px, #000 calc(1px + 2rem), #000 calc(100% - 2.5rem), var(--contents-bottom-fade));
+      mask-image: linear-gradient(to bottom, #000 1px, var(--contents-top-fade) 1px, #000 calc(1px + 2rem), #000 calc(100% - 2.5rem), var(--contents-bottom-fade));
+    }
+
+    .contents[data-clipped-top] {
+      --contents-top-fade: transparent;
+    }
+
+    .contents[data-clipped-bottom] {
+      --contents-bottom-fade: transparent;
+    }
+
+    .contents[data-enhanced="true"] .subsectionLink:not([data-open-chapter]) {
+      display: none;
+    }
+
+    .contents ol {
+      gap: 0.125rem;
+    }
+  }
+}
+
+@media (width < 768px) {
+  .header {
+    margin-bottom: 2rem;
+  }
+
+  .abstract {
+    padding-top: 1.5rem;
+  }
+
+  .body h2 {
+    margin-top: 4.5rem;
+  }
+}
+
+.paperFooter :global(.back-link) {
+  margin-bottom: 0;
+}
+
+.paper a:focus-visible,
+.contents summary:focus-visible {
+  color: var(--accent);
+  outline: 2px solid var(--accent);
+  outline-offset: 4px;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .paper a:hover,
+  .contents summary:hover {
+    color: var(--accent);
+    text-decoration-color: currentColor;
+  }
+}
+
+@media (pointer: coarse) {
+  /* A finger's target is 24px square around a one-figure number. */
+  .reference a::after {
+    right: -0.75em;
+    left: -0.75em;
+    height: 1.5rem;
+  }
+
+  .contents a,
+  .backlinks a,
+  .authorNote a {
+    display: inline-flex;
+    align-items: center;
+    min-height: 44px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .contents summary {
+    transition: none;
+  }
+}

@@ -1,0 +1,384 @@
+.diagram {
+  /* Connectors are opaque: the composite of 42% ink on the page, so lines that
+     meet or cross never darken where they overlap. */
+  --line: color-mix(in srgb, var(--ink) 42%, var(--page));
+  --diagram-gap: clamp(28px, 4.6cqi, 44px);
+  /* Mathematics in diagram text is set at the site's math size, between the
+     x-height and the cap height of the text face. */
+  --diagram-math: var(--type-math);
+
+  container: diagram / inline-size;
+  margin: 72px 0 0;
+}
+
+.label {
+  margin: 0 0 32px;
+  color: var(--muted);
+  font-family: var(--font-text);
+  font-size: var(--type-label);
+  line-height: var(--label-leading);
+}
+
+.canvas {
+  position: relative;
+  display: grid;
+  align-items: stretch;
+  font-family: var(--font-text);
+}
+
+/* Stages are transparent wrappers on the grid; their children carry positions. */
+.stage {
+  display: contents;
+}
+
+.stageLabel {
+  position: relative;
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+  margin: 0 0 18px;
+  padding-top: 10px;
+  border-top: 1px solid var(--rule-medium);
+  color: var(--ink);
+  font-size: var(--type-label);
+  line-height: var(--label-leading);
+  white-space: nowrap;
+}
+
+.stageLabel::before {
+  position: absolute;
+  top: -5px;
+  left: 0;
+  width: 2px;
+  height: 9px;
+  background: var(--accent);
+  content: "";
+}
+
+.stageIndex {
+  color: var(--muted);
+  font-family: var(--font-prose);
+  font-size: var(--type-index);
+  font-variant-numeric: tabular-nums;
+}
+
+.cell {
+  display: flex;
+  min-width: 0;
+  flex-direction: column;
+  justify-content: center;
+  padding: 6px 0;
+}
+
+/* Every node of a stage starts its text on one line: lane rows share one
+   height, and a node's text stands at its top. */
+.node {
+  display: grid;
+  flex: 1 1 auto;
+  align-content: start;
+  gap: 4px;
+  min-width: 0;
+  padding: 12px 14px 13px;
+  border: 1px solid var(--rule-medium);
+  background: var(--panel);
+}
+
+.cell[data-single] .node {
+  flex: 0 0 auto;
+}
+
+/* A lane's name is a label, in the diagram's one face. A node's title and its
+   lane's name hold one line, a stage label too: the layout gives each the room
+   (diagram-layout.ts). */
+.tag {
+  color: var(--muted);
+  font-family: var(--font-text);
+  font-size: var(--type-label);
+  line-height: var(--label-leading);
+  white-space: nowrap;
+}
+
+.nodeTitle {
+  color: var(--ink);
+  font-size: var(--type-interface);
+  font-weight: 500;
+  line-height: 1.35;
+  letter-spacing: -0.003em;
+  white-space: nowrap;
+}
+
+.nodeDetail {
+  container-type: inline-size;
+  color: var(--supporting-ink);
+  font-size: var(--type-label);
+  line-height: var(--label-leading);
+  text-wrap: pretty;
+}
+
+/* A hyphenated compound in a node's description holds one line where the node
+   has room for it. */
+.compound {
+  display: inline-block;
+  max-width: 100%;
+}
+
+/* The decisive mechanism of each system is set in ink. Its text is paper:
+   the title in full, the detail and the lane's name a step back, at a
+   contrast of at least 10:1 on the ink. */
+.emphasis {
+  --on-ink-detail: color-mix(in srgb, var(--page) 84%, var(--ink));
+
+  border-color: var(--ink);
+  background: var(--ink);
+}
+
+.emphasis .nodeTitle {
+  color: var(--page);
+}
+
+.emphasis .tag,
+.emphasis .nodeDetail {
+  color: var(--on-ink-detail);
+}
+
+/* Inline mathematics stands in its line as a word does, on the text's
+   baseline: the drawing's canvas gutters lie in negative margins, and the box
+   clips its overflow, so its baseline is its lower margin edge, which stands
+   the expression's depth below the text's baseline. It is set at the math
+   size, or smaller where that is wider than its node. */
+.math {
+  position: relative;
+}
+
+.mathPiece {
+  position: relative;
+  display: inline-block;
+  padding-block: 0.125em;
+  margin-block: calc(-0.125em - var(--math-gutter));
+  overflow: hidden;
+  font-size: min(var(--diagram-math), calc((100cqi - 1px - var(--reserve, 0em)) / var(--ink)));
+  line-height: 0;
+}
+
+.glued {
+  white-space: nowrap;
+}
+
+.assistive {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* Connectors: one crisp drawing over each connector column's lane rows, and
+   the loop's legs and return rule; each lies over its grid area. */
+.wires {
+  display: block;
+  overflow: visible;
+  fill: currentColor;
+  pointer-events: none;
+}
+
+.link,
+.loop {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.link {
+  color: var(--line);
+}
+
+/* The feedback loop is one path in the accent, from the source node's lower
+   edge to the arrowhead at the target node's lower edge. */
+.loop,
+.leg {
+  color: var(--accent);
+}
+
+.spacer {
+  flex: 1 0 6px;
+  margin-top: -6px;
+}
+
+.leg {
+  position: relative;
+  flex: 0 0 6px;
+  margin-bottom: -6px;
+}
+
+.cell[data-single] .leg {
+  flex-grow: 1;
+}
+
+.legWires {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.step,
+.stepBus {
+  display: none;
+}
+
+.loopLabel {
+  margin: 0;
+  padding: 10px 12px 0;
+  color: var(--accent);
+  font-size: var(--type-label);
+  line-height: var(--label-leading);
+  text-align: center;
+  text-wrap: balance;
+}
+
+.loopReturn {
+  display: none;
+}
+
+.caption {
+  max-width: var(--reading-width);
+  margin-top: 36px;
+  color: var(--supporting-ink);
+  font-family: var(--font-prose);
+  font-size: var(--type-caption);
+  line-height: var(--caption-leading);
+  text-wrap: pretty;
+}
+
+/* Narrow: the same markup becomes a vertical sequence. */
+@container diagram (width < 53.75rem) {
+  .canvas {
+    display: block;
+  }
+
+  .stage {
+    position: relative;
+    display: block;
+  }
+
+  .stage:not([data-stage="1"]) {
+    padding-top: 40px;
+  }
+
+  /* The step between stages: a line down the column's centre from the stage
+     above, its arrowhead 8px over the next stage's rule. */
+  .step {
+    position: absolute;
+    top: 0;
+    left: 0;
+    display: block;
+    width: 100%;
+    height: 32px;
+    color: var(--line);
+  }
+
+  .stageLabel {
+    margin-bottom: 12px;
+  }
+
+  .cell {
+    padding: 0;
+  }
+
+  .cell + .cell {
+    margin-top: 8px;
+  }
+
+  .link,
+  .loop,
+  .leg,
+  .spacer {
+    display: none;
+  }
+
+  .loopLabel {
+    margin-top: 28px;
+    padding: 2px 0 2px 14px;
+    border-left: 1px solid var(--accent);
+    text-align: left;
+  }
+
+  .loopReturn {
+    display: inline;
+  }
+
+  .caption {
+    margin-top: 28px;
+  }
+}
+
+/* Mid widths: parallel nodes of a stage sit side by side where each of their
+   titles holds one line there (data-side); the others stack. */
+@container diagram (30rem <= width < 53.75rem) {
+  .stage[data-side] {
+    display: grid;
+    grid-template-columns: repeat(var(--columns), minmax(0, 1fr));
+    gap: 8px;
+  }
+
+  .stage[data-side] > .stageLabel {
+    grid-column: 1 / -1 !important;
+    grid-row: auto !important;
+  }
+
+  .stage[data-side] > .cell {
+    grid-column: auto !important;
+    grid-row: auto !important;
+  }
+
+  .stage[data-side] > .cell + .cell {
+    margin-top: 0;
+  }
+
+  /* Side-by-side nodes drop into a bus over the step. */
+  .step:has(.stepBus) .stepStem {
+    display: none;
+  }
+
+  .stepBus {
+    display: inline;
+  }
+
+  .cell .node {
+    flex: 1 1 auto;
+  }
+}
+
+@media (width < 768px) {
+  .diagram {
+    margin-top: 56px;
+  }
+}
+
+@media (forced-colors: active) {
+  .emphasis {
+    border-color: CanvasText;
+    background: Canvas;
+  }
+
+  .emphasis .nodeTitle,
+  .emphasis .tag,
+  .emphasis .nodeDetail {
+    color: CanvasText;
+  }
+
+  .link,
+  .step {
+    color: CanvasText;
+  }
+
+  .loop,
+  .leg {
+    color: LinkText;
+  }
+}

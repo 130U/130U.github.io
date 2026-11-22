@@ -1,0 +1,367 @@
+.frame {
+  font-family: var(--font-text);
+}
+
+.frame :global(.content-column) {
+  padding-top: var(--content-top);
+}
+
+/* Index: the title alone, then one framed ledger of posts, newest first. Each
+   entry hangs its title and date on the left and its summary on the right. */
+.intro {
+  margin-bottom: 80px;
+}
+
+.intro h1 {
+  margin: 0;
+  font-size: var(--type-title);
+  font-weight: 400;
+  line-height: var(--title-leading);
+  letter-spacing: var(--title-tracking);
+}
+
+.entryHead {
+  min-width: 0;
+}
+
+.entryHead :global(.ledger-title) {
+  margin: 0;
+}
+
+.date {
+  display: block;
+  margin-top: 6px;
+  color: var(--muted);
+  font-size: var(--type-label);
+  line-height: var(--label-leading);
+}
+
+/* Post: one column at the reading measure, from the reading start. The title
+   and byline sit over a hairline, then the hero, the work and the prose. */
+.post {
+  min-width: 0;
+  max-width: var(--reading-width);
+}
+
+.header h1 {
+  margin: 0;
+  font-size: var(--type-title);
+  font-weight: 400;
+  line-height: var(--title-leading);
+  letter-spacing: var(--title-tracking);
+  text-wrap: balance;
+}
+
+.byline {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 4px 24px;
+  margin: 20px 0 0;
+  padding-bottom: 28px;
+  border-bottom: 1px solid var(--rule-medium);
+  color: var(--muted);
+  font-size: var(--type-label);
+  line-height: var(--label-leading);
+}
+
+.hero {
+  display: block;
+  width: 100%;
+  height: auto;
+  margin-top: 32px;
+}
+
+/* The work itself: a tinted band that opens the published piece. */
+.work {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px 24px;
+  margin-top: 32px;
+  padding: 14px 20px;
+  color: var(--ink);
+  background: rgba(0, 0, 0, 0.03);
+  transition: background-color 180ms var(--ease-out);
+}
+
+.workText {
+  display: grid;
+  gap: 2px;
+  min-width: 0;
+}
+
+.workTitle {
+  font-size: var(--type-subheading);
+  font-weight: 500;
+  line-height: var(--subheading-leading);
+  letter-spacing: var(--subheading-tracking);
+}
+
+.workDescription {
+  color: var(--supporting-ink);
+  font-family: var(--font-prose);
+  font-size: var(--type-reading);
+  line-height: var(--reading-leading);
+}
+
+.workAction {
+  display: inline-flex;
+  flex-shrink: 0;
+  align-items: center;
+  gap: 6px;
+  min-height: 44px;
+  font-size: var(--type-action);
+  font-weight: 500;
+  line-height: var(--interface-leading);
+  transition: color 180ms var(--ease-out);
+}
+
+.workAction svg {
+  width: 14px;
+  height: 14px;
+  transition: transform 180ms var(--ease-out);
+}
+
+.body {
+  margin-top: 56px;
+  font-family: var(--font-prose);
+  font-size: var(--type-reading);
+  line-height: var(--reading-leading);
+}
+
+.body > p {
+  margin: 0;
+  text-wrap: pretty;
+}
+
+.body > p + p {
+  margin-top: 1.25rem;
+}
+
+.body > h2 {
+  margin: 3.5rem 0 1.25rem;
+  font-family: var(--font-text);
+  font-size: var(--type-heading);
+  font-weight: 400;
+  line-height: var(--heading-leading);
+  letter-spacing: var(--heading-tracking);
+  scroll-margin-top: 32px;
+}
+
+/* The epigraph hangs off the dashed spine used between titles and prose. */
+.epigraph {
+  margin: 0 0 2.5rem;
+  padding: 2px 0 2px 24px;
+  background: var(--dash-y) left top / 1px 100% no-repeat;
+}
+
+.epigraph blockquote,
+.epigraph p {
+  margin: 0;
+}
+
+.epigraph p {
+  font-style: italic;
+}
+
+.epigraph figcaption {
+  margin-top: 8px;
+  color: var(--muted);
+  font-family: var(--font-text);
+  font-size: var(--type-label);
+  line-height: var(--label-leading);
+}
+
+.figure {
+  margin: 2.5rem 0;
+}
+
+.media {
+  position: relative;
+  overflow-x: auto;
+  overscroll-behavior-x: contain;
+  scrollbar-width: thin;
+  scrollbar-color: var(--rule-strong) transparent;
+}
+
+/* A figure opens its full-resolution file; from tablets, with JavaScript, the
+   whole image opens it on the zoom stage instead. */
+.full {
+  display: block;
+  cursor: zoom-in;
+}
+
+.full:focus-visible {
+  outline-offset: -2px;
+}
+
+/* The zoom control covers the image, so the image itself is the target; its
+   magnifier stands in the top-right corner on a square of paper, shown on
+   hover and focus where a pointer can hover and always on touch. */
+.media .zoom {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  width: auto;
+  height: auto;
+  padding: 8px;
+  place-items: start end;
+  background: transparent;
+}
+
+.media .zoom::before {
+  display: none;
+}
+
+.media .zoom svg {
+  box-sizing: content-box;
+  padding: 7px;
+  border: 1px solid var(--frame);
+  background: var(--page);
+  transition: opacity 180ms var(--ease-out), transform 120ms var(--ease-out);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .media .zoom:hover {
+    background: transparent;
+  }
+
+  .media .zoom:not(:hover, :focus-visible) svg {
+    opacity: 0;
+  }
+
+  [data-zoomed] .media .zoom svg {
+    opacity: 1;
+  }
+}
+
+@media (width < 768px) {
+  .media .zoom {
+    display: none;
+  }
+}
+
+.media img {
+  display: block;
+  width: 100%;
+  height: auto;
+  border: 1px solid var(--frame);
+}
+
+.figure figcaption {
+  margin-top: 0.75rem;
+  color: var(--supporting-ink);
+  font-size: var(--type-caption);
+  line-height: var(--caption-leading);
+  text-wrap: pretty;
+}
+
+.footer {
+  display: flex;
+  justify-content: space-between;
+  gap: 24px;
+  margin-top: 72px;
+  padding-top: 24px;
+  border-top: 1px solid var(--rule);
+  font-family: var(--font-text);
+  font-size: var(--type-interface);
+  line-height: var(--interface-leading);
+}
+
+.footer a {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+}
+
+.footer :global(.back-link) {
+  margin-bottom: 0;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .work:hover {
+    background: rgba(0, 0, 0, 0.05);
+  }
+
+  .work:hover .workAction {
+    color: var(--accent);
+  }
+
+  .work:hover .workAction svg {
+    transform: translateX(2px);
+  }
+}
+
+.work:active .workAction {
+  color: var(--accent);
+}
+
+@media (width >= 1200px) {
+  .entryHead {
+    padding-right: var(--hang-gap);
+  }
+
+  .entryHead :global(.ledger-title) {
+    padding-right: 0;
+  }
+}
+
+@media (width < 1200px) {
+  .entryHead {
+    margin-bottom: 12px;
+  }
+}
+
+@media (width < 768px) {
+  .frame :global(.content-column) {
+    padding-top: 52px;
+  }
+
+  .intro {
+    margin-bottom: 40px;
+  }
+
+  .work {
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 14px 16px 6px;
+  }
+
+  .body {
+    margin-top: 44px;
+  }
+
+  .body > h2 {
+    margin-top: 2.75rem;
+    scroll-margin-top: 6rem;
+  }
+
+  .figure {
+    margin: 2rem 0;
+  }
+
+  /* A panorama such as a handscroll keeps a legible height and unrolls sideways.
+     It takes the column's width down to 576px and is set at 640px below that,
+     so it never scrolls by less than a tenth of its width. */
+  .media img[data-panorama] {
+    width: 640px;
+    width: max(100%, calc(640px - round(down, 100%, 576px) * 10 / 9));
+    max-width: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .work,
+  .workAction,
+  .workAction svg,
+  .media .zoom svg {
+    transition: none;
+  }
+}
+
+@media (forced-colors: active) {
+  .work {
+    border: 1px solid CanvasText;
+  }
+}
