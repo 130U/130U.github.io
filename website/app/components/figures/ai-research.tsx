@@ -264,7 +264,7 @@ function BridgeLeakage() {
           <Mark left={x(0.5)} top={100 - y(0.375)} anchor="left" tone="accent" knockout={false} className={`${kit.fade} ${styles.narrowOnly}`}>Halves</Mark>
           <Mark left={x(-0.24)} top={100 - y(0.75)} anchor="center" className={kit.muted}>History</Mark>
           <Mark left={x(0.6)} top={100 - y(0.6)} anchor="above-left" className={kit.fade}>{"Given $\\mathcal{F}_s$"}</Mark>
-          <Mark left={x(0.5)} top={100 - y(0.065)} anchor="center" tone="accent" className={kit.fade}>{"Given $\\mathcal{F}_s$ and $X_T$"}</Mark>
+          <Mark left={x(0.5)} top={100 - y(0.05)} anchor="center" tone="accent" className={kit.fade}>{"Given $\\mathcal{F}_s$ and $X_T$"}</Mark>
         </Plot>
         {/* Each band names its information set on one line; where the figure
             is narrow it keeps the set's symbol, and its readout the name. */}
