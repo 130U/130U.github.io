@@ -8,7 +8,7 @@ Theodore Ouyang
 
 ## Confidentiality and Disclosure Note
 
-I conducted the following four projects through Duke University collaborations from September 2023 to September 2026. Partner names and proprietary internal system identifiers are withheld under nondisclosure agreements. The collaborators include a leading foundation model developer, a frontier AI research laboratory, and a leading global alternative asset manager with more than $300 billion in assets under management. The project titles, my role as a researcher, locations, dates, system architectures and mathematical formulations are cleared for public disclosure. Production records and operating figures are withheld; the numerical results are closed-form values, reference runs and worked examples with their inputs stated.
+I conducted the following four projects through Duke University collaborations from September 2023 to September 2026. Partner names and proprietary internal system identifiers are withheld under nondisclosure agreements. The collaborators include a leading foundation model developer, a frontier AI research laboratory, and a leading global alternative asset manager with more than $300 billion in assets under management. The project titles, my role as a researcher, locations, dates, system architectures, and mathematical formulations are cleared for public disclosure. Production records and operating figures are withheld; the numerical results are closed-form values, reference runs, and worked examples with their inputs stated.
 
 # Project 01: large-scale-domain-expert-feedback-governance-and-adaptive-review
 
@@ -379,7 +379,7 @@ Read More
 
 ## Summary
 
-When a synthetic financial case changes one number, its reference answer, the evidence behind that answer and the expert's preference can all go stale together. Synthetic data is judged on fidelity, utility and privacy, and none of the three asks whether the label is still right; at a margin of a quarter of the perturbation scale, an inherited label is wrong 40% of the time. I built the rules that decide when each object has to be recomputed, and the generators that keep accounting identities exact as the data scales. I created Batch Zero to test those rules on domain experts before a task family scaled, and the partner company subsequently adopted the protocol across other post-training programs.
+When a synthetic financial case changes one number, its reference answer, the evidence behind that answer, and the expert's preference can all go stale together. Synthetic data is judged on fidelity, utility, and privacy, and none of the three asks whether the label is still right; at a margin of a quarter of the perturbation scale, an inherited label is wrong 40% of the time. I built the rules that decide when each object has to be recomputed, and the generators that keep accounting identities exact as the data scales. I created Batch Zero to test those rules on domain experts before a task family scaled, and the partner company subsequently adopted the protocol across other post-training programs.
 
 ## Problem and Approach
 
@@ -650,7 +650,7 @@ Read More
 
 ## Summary
 
-A model can reach the right answer through an unsupported step, and a grader that matches a reference solution will reject a correct proof that takes another route. I designed an acceptance rule that resolves both: a conclusion stands when its assumptions, derivations and execution evidence support it, whichever valid route was taken, and a failed step removes support from everything downstream. Checkable obligations are discharged by certificates that need no reference solution, LLM-assisted screening flags possible gaps, and specialists adjudicate what remains. I also derived what a grader must achieve before its verdicts can be used. A policy trained against a grader converges to that grader's positive predictive value, which on a test set of 3,600 submissions with known verdicts is 40% for final-answer matching and 100% for certificate checking.
+A model can reach the right answer through an unsupported step, and a grader that matches a reference solution will reject a correct proof that takes another route. I designed an acceptance rule that resolves both: a conclusion stands when its assumptions, derivations, and execution evidence support it, whichever valid route was taken, and a failed step removes support from everything downstream. Checkable obligations are discharged by certificates that need no reference solution, LLM-assisted screening flags possible gaps, and specialists adjudicate what remains. I also derived what a grader must achieve before its verdicts can be used. A policy trained against a grader converges to that grader's positive predictive value, which on a test set of 3,600 submissions with known verdicts is 40% for final-answer matching and 100% for certificate checking.
 
 ## Problem and Approach
 

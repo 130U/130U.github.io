@@ -18,7 +18,7 @@ export const courseworkGroups = [
       "Mathematics of Machine Learning",
       "Measure and Integration",
       "Number Theory",
-      "Numerical Linear Algebra, Optimization and Monte Carlo Simulation",
+      "Numerical Linear Algebra, Optimization, and Monte Carlo Simulation",
       "Ordinary and Partial Differential Equations",
       "Real Analysis",
       "Statistical Inference",
@@ -42,9 +42,9 @@ export const courseworkGroups = [
   {
     title: "Finance and Economics",
     courses: [
-      "Asset Pricing & Risk Management",
+      "Asset Pricing and Risk Management",
       "Corporate Finance",
-      "Data Science and Decision Optimization in Banking & Financial Services",
+      "Data Science and Decision Optimization in Banking and Financial Services",
       "Econometrics",
       "Empirical Methods in High Frequency Financial Econometrics",
       "Environment, Social, Governance (ESG) Investing",

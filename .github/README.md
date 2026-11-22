@@ -24,7 +24,7 @@ Duke Alumnus, B.S. in Mathematics and M.Eng. in Risk Engineering · Sequoia Fell
 - **[Financial Task Design and Synthetic Data Engineering](https://www.theodoreoy.com/experience/financial-task-design-and-synthetic-data-engineering/)**\
   A framework for scaling financial training data while preserving the validity of its supervision. I created Batch Zero to test its rules on domain experts before a task family scales, and the partner company adopted the protocol across other post-training programs.
 - **[General Reasoning Evaluation and Layered Verification](https://www.theodoreoy.com/experience/general-reasoning-evaluation-and-layered-verification/)**\
-  A proof-obligation framework linking conclusions to their assumptions, derivations and execution evidence. On a test set of 3,600 submissions with known verdicts, the certificate verifier accepted every valid proof and rejected every invalid one.
+  A proof-obligation framework linking conclusions to their assumptions, derivations, and execution evidence. On a test set of 3,600 submissions with known verdicts, the certificate verifier accepted every valid proof and rejected every invalid one.
 - **[Evidence Verification and Robust Comparison in Investment Research](https://www.theodoreoy.com/experience/evidence-verification-and-robust-comparison-in-investment-research/)**\
   A decision-theoretic framework for investment due diligence that determines which conclusions the evidence supports and which facts are most valuable to verify next. I implemented it with a leading global alternative asset manager.
 

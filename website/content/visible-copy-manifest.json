@@ -6,8 +6,8 @@
   ],
   "routes": {
     "/": {
-      "textSha256": "92cc0490f6f8307388cd86a586caff51922aea0bb85a0d9a2e07a9ba1f46c58c",
-      "characterCount": 4080,
+      "textSha256": "e4b25c94b40e037077a5f3ef639ecfc2b863d070c4621e0aeb0396dd6e0e5191",
+      "characterCount": 4081,
       "wordCount": 623,
       "preview": "Skip to Main Content Theodore Ouyang Duke Alumnus Sequoia Fellow Theodore Ouyang About Experience Blog Thinking Mathematically Working in AI Mathematics is how ",
       "altTexts": [],
@@ -31,8 +31,8 @@
       }
     },
     "/coursework/": {
-      "textSha256": "cea7f5191276c9a677fad8456aea2c64b2b79811b31b21ac8a63db2ee68c7f70",
-      "characterCount": 1703,
+      "textSha256": "eeb580b69f3b04f4097fec8e5936179ae75c852bdebc6eea18c0d70ead595ad9",
+      "characterCount": 1708,
       "wordCount": 207,
       "preview": "Skip to Main Content Theodore Ouyang Back to Education Selected Coursework Mathematics AI and Data Science Finance and Economics Law, Ethics, and Global Affairs",
       "altTexts": [],
@@ -894,8 +894,8 @@
       "formulaCount": 459
     },
     "/experience/": {
-      "textSha256": "6055306cc666f095f2b4e433e17c6838993ac1d9a7d1a88d858ab84039229773",
-      "characterCount": 10484,
+      "textSha256": "18d7b11e79fd12419885e7acbf932adc0f4056937eaa7dcea364248aff96728b",
+      "characterCount": 10489,
       "wordCount": 1548,
       "preview": "Skip to Main Content Theodore Ouyang About Experience Blog Experience: Areas of Focus AI Research and Engineering Data Science Legal Research and Policy Analysi",
       "altTexts": [],
@@ -1092,13 +1092,13 @@
       ],
       "metadata": {
         "title": "Duke University × Leading Foundation Model Developer: Financial Task Design and Synthetic Data Engineering | Theodore Ouyang",
-        "description": "When a synthetic financial case changes one number, its reference answer, the evidence behind that answer and the expert's preference can all go stale together.",
+        "description": "When a synthetic financial case changes one number, its reference answer, the evidence behind that answer, and the expert's preference can all go stale together.",
         "canonical": "https://www.theodoreoy.com/experience/financial-task-design-and-synthetic-data-engineering/",
         "openGraphTitle": "Duke University × Leading Foundation Model Developer: Financial Task Design and Synthetic Data Engineering",
-        "openGraphDescription": "When a synthetic financial case changes one number, its reference answer, the evidence behind that answer and the expert's preference can all go stale together.",
+        "openGraphDescription": "When a synthetic financial case changes one number, its reference answer, the evidence behind that answer, and the expert's preference can all go stale together.",
         "openGraphUrl": "https://www.theodoreoy.com/experience/financial-task-design-and-synthetic-data-engineering/",
         "twitterTitle": "Duke University × Leading Foundation Model Developer: Financial Task Design and Synthetic Data Engineering",
-        "twitterDescription": "When a synthetic financial case changes one number, its reference answer, the evidence behind that answer and the expert's preference can all go stale together."
+        "twitterDescription": "When a synthetic financial case changes one number, its reference answer, the evidence behind that answer, and the expert's preference can all go stale together."
       },
       "mathSourceSha256": "f7a3afa0054e41d663d0fea176c3c7b440d344fa477922dbaf3cd63b5b785b10",
       "formulaCount": 192

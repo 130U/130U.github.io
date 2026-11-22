@@ -5,7 +5,7 @@
       "title": "AI Research and Engineering",
       "disclosure": {
         "title": "Confidentiality and Disclosure Note",
-        "text": "I conducted the following four projects through Duke University collaborations from September 2023 to September 2026. Partner names and proprietary internal system identifiers are withheld under nondisclosure agreements. The collaborators include a leading foundation model developer, a frontier AI research laboratory, and a leading global alternative asset manager with more than $300 billion in assets under management. The project titles, my role as a researcher, locations, dates, system architectures and mathematical formulations are cleared for public disclosure. Production records and operating figures are withheld; the numerical results are closed-form values, reference runs and worked examples with their inputs stated."
+        "text": "I conducted the following four projects through Duke University collaborations from September 2023 to September 2026. Partner names and proprietary internal system identifiers are withheld under nondisclosure agreements. The collaborators include a leading foundation model developer, a frontier AI research laboratory, and a leading global alternative asset manager with more than $300 billion in assets under management. The project titles, my role as a researcher, locations, dates, system architectures, and mathematical formulations are cleared for public disclosure. Production records and operating figures are withheld; the numerical results are closed-form values, reference runs, and worked examples with their inputs stated."
       }
     },
     {
@@ -60,7 +60,7 @@
       "id": 2,
       "categoryId": "01",
       "organization": "Duke University × Leading Foundation Model Developer",
-      "summary": "When a synthetic financial case changes one number, its reference answer, the evidence behind that answer and the expert's preference can all go stale together. Synthetic data is judged on fidelity, utility and privacy, and none of the three asks whether the label is still right; at a margin of a quarter of the perturbation scale, an inherited label is wrong 40% of the time. I built the rules that decide when each object has to be recomputed, and the generators that keep accounting identities exact as the data scales. I created Batch Zero to test those rules on domain experts before a task family scaled, and the partner company subsequently adopted the protocol across other post-training programs.",
+      "summary": "When a synthetic financial case changes one number, its reference answer, the evidence behind that answer, and the expert's preference can all go stale together. Synthetic data is judged on fidelity, utility, and privacy, and none of the three asks whether the label is still right; at a margin of a quarter of the perturbation scale, an inherited label is wrong 40% of the time. I built the rules that decide when each object has to be recomputed, and the generators that keep accounting identities exact as the data scales. I created Batch Zero to test those rules on domain experts before a task family scaled, and the partner company subsequently adopted the protocol across other post-training programs.",
       "readMoreLabel": "Read More",
       "detailTitle": "Financial Task Design and Synthetic Data Engineering",
       "metadata": {
@@ -98,7 +98,7 @@
       "id": 3,
       "categoryId": "01",
       "organization": "Duke University × Frontier AI Research Laboratory",
-      "summary": "A model can reach the right answer through an unsupported step, and a grader that matches a reference solution will reject a correct proof that takes another route. I designed an acceptance rule that resolves both: a conclusion stands when its assumptions, derivations and execution evidence support it, whichever valid route was taken, and a failed step removes support from everything downstream. Checkable obligations are discharged by certificates that need no reference solution, LLM-assisted screening flags possible gaps, and specialists adjudicate what remains. I also derived what a grader must achieve before its verdicts can be used. A policy trained against a grader converges to that grader's positive predictive value, which on a test set of 3,600 submissions with known verdicts is 40% for final-answer matching and 100% for certificate checking.",
+      "summary": "A model can reach the right answer through an unsupported step, and a grader that matches a reference solution will reject a correct proof that takes another route. I designed an acceptance rule that resolves both: a conclusion stands when its assumptions, derivations, and execution evidence support it, whichever valid route was taken, and a failed step removes support from everything downstream. Checkable obligations are discharged by certificates that need no reference solution, LLM-assisted screening flags possible gaps, and specialists adjudicate what remains. I also derived what a grader must achieve before its verdicts can be used. A policy trained against a grader converges to that grader's positive predictive value, which on a test set of 3,600 submissions with known verdicts is 40% for final-answer matching and 100% for certificate checking.",
       "readMoreLabel": "Read More",
       "detailTitle": "General Reasoning Evaluation and Layered Verification",
       "metadata": {
@@ -464,6 +464,6 @@
   "aiSourceDocument": {
     "fileName": "ai-research-and-engineering.md",
     "path": "content/sources/ai-portfolio/ai-research-and-engineering.md",
-    "sha256": "7df3344b9f5c5c90cef9a720d5991925545d82f885af49749d16a6aa67ee9f47"
+    "sha256": "fb9115a2c59f11ced6a6ebd9c67523aa23800fcba5505cb4189d40b5d72e977e"
   }
 }

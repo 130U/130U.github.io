@@ -588,7 +588,7 @@ test("About research opens each complete paper through an explicit Read More lin
   for (const [slug, title, description, tables, sections, repository] of [
     ["critical-dependence-stress-for-diversification-gains-under-fixed-marginals", "Critical Dependence Stress for Diversification Gains under Fixed Marginals", "I prove that the critical stress budget is quadratic in the trade size", 0, 5, "RESEARCH-Critical-Dependence-Stress-for-Diversification-Gains-under-Fixed-Marginals"],
     ["certified-valuation-of-arithmetic-asian-options", "Certified Valuation of Arithmetic Asian Options: The Cost of Exercising on the Geometric Average", "the bound is below a hundredth of a cent per barrel", 13, 9, "RESEARCH-Certified-Valuation-of-Arithmetic-Asian-Options"],
-    ["certified-joint-pricing-errors-in-rough-heston", "Certified Joint Pricing Errors in Rough Heston", "netting the legs certifies a half-point tolerance for all 28 six-month spreads, butterflies and baskets tested", 10, 8, "RESEARCH-Certified-Joint-Pricing-Errors-in-Rough-Heston"],
+    ["certified-joint-pricing-errors-in-rough-heston", "Certified Joint Pricing Errors in Rough Heston", "netting the legs certifies a half-point tolerance for all 28 six-month spreads, butterflies, and baskets tested", 10, 8, "RESEARCH-Certified-Joint-Pricing-Errors-in-Rough-Heston"],
   ]) {
     assert.match(about, new RegExp(`id="${slug}"`, "u"));
     const headings = [...about.matchAll(/<h3\b[^>]*>([\s\S]*?)<\/h3>/gu)].map((match) => stripMarkup(match[1]));
