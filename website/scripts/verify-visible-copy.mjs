@@ -1,0 +1,334 @@
+import { createHash } from "node:crypto";
+import { readdirSync } from "node:fs";
+import { readFile } from "node:fs/promises";
+import path from "node:path";
+import { fileURLToPath } from "node:url";
+
+const ROOT = fileURLToPath(new URL("../", import.meta.url));
+const OUT = path.join(ROOT, "out");
+const MANIFEST_PATH = path.join(ROOT, "content", "visible-copy-manifest.json");
+const IGNORED_INTERFACE_STRINGS = ["Menu", "Close"];
+const RESEARCH_PAPER_ROUTES = [
+  "/critical-dependence-stress-for-diversification-gains-under-fixed-marginals/",
+  "/certified-valuation-of-arithmetic-asian-options/",
+  "/certified-joint-pricing-errors-in-rough-heston/",
+];
+const AI_ARTICLE_ROUTES = [
+  "/experience/large-scale-domain-expert-feedback-governance-and-adaptive-review/",
+  "/experience/financial-task-design-and-synthetic-data-engineering/",
+  "/experience/general-reasoning-evaluation-and-layered-verification/",
+  "/experience/evidence-verification-and-robust-comparison-in-investment-research/",
+];
+const ROUTES = [
+  "/",
+  "/coursework/",
+  ...RESEARCH_PAPER_ROUTES,
+  "/experience/",
+  ...AI_ARTICLE_ROUTES,
+  "/experience/autonomous-authority-in-space/",
+  "/experience/small-states-and-the-governance-of-strategic-space-dependence/",
+  "/experience/who-may-choose-the-lesser-risk/",
+  "/experience/mangrove-restoration-and-the-limits-of-compensatory-mitigation/",
+  "/experience/jiritsu-network/",
+  "/experience/euromonitor-international/",
+  "/experience/china-construction-bank/",
+  "/experience/jones-lang-lasalle/",
+  "/experience/hubble-network/",
+  "/experience/saif-partners/",
+  "/experience/citic-securities/",
+  "/experience/ey-parthenon/",
+  "/experience/independent-stem-olympiad-training-practice/",
+  "/experience/the-high-school-attached-to-hunan-normal-university/",
+  "/blog/",
+  ...readdirSync(path.join(ROOT, "content", "blog")).map((file) => `/blog/${file.replace(/\.md$/u, "")}/`).sort(),
+  "/architecture/",
+];
+const RESEARCH_ARTICLE_ROUTES = new Set([...RESEARCH_PAPER_ROUTES, ...AI_ARTICLE_ROUTES]);
+
+function decodeHtml(value) {
+  return value
+    .replaceAll("&amp;", "&")
+    .replaceAll("&lt;", "<")
+    .replaceAll("&gt;", ">")
+    .replaceAll("&quot;", '"')
+    .replaceAll("&#x27;", "'")
+    .replaceAll("&#39;", "'")
+    .replaceAll("&apos;", "'")
+    .replaceAll("&nbsp;", " ")
+    .replace(/&#(\d+);/gu, (_, digits) => String.fromCodePoint(Number(digits)))
+    .replace(/&#x([\da-f]+);/giu, (_, digits) => String.fromCodePoint(Number.parseInt(digits, 16)));
+}
+
+function normalizeWhitespace(value) {
+  return decodeHtml(value).replace(/\s+/gu, " ").trim();
+}
+
+function stripInterfaceStrings(value) {
+  let result = value;
+  for (const label of IGNORED_INTERFACE_STRINGS) {
+    result = result.replace(new RegExp(`\\b${label}\\b`, "gu"), " ");
+  }
+  return normalizeWhitespace(result);
+}
+
+function sha256(value) {
+  return createHash("sha256").update(value, "utf8").digest("hex");
+}
+
+function routeHtmlPath(route) {
+  return route === "/"
+    ? path.join(OUT, "index.html")
+    : path.join(OUT, ...route.split("/").filter(Boolean), "index.html");
+}
+
+function firstMatch(html, pattern) {
+  return normalizeWhitespace(html.match(pattern)?.[1] ?? "");
+}
+
+function metaContent(html, attribute, value) {
+  const escaped = value.replace(/[.*+?^${}()|[\]\\]/gu, "\\$&");
+  const patterns = [
+    new RegExp(`<meta\\b[^>]*${attribute}=["']${escaped}["'][^>]*content=["']([^"']*)["'][^>]*>`, "iu"),
+    new RegExp(`<meta\\b[^>]*content=["']([^"']*)["'][^>]*${attribute}=["']${escaped}["'][^>]*>`, "iu"),
+  ];
+  for (const pattern of patterns) {
+    const match = html.match(pattern);
+    if (match) return decodeHtml(match[1]);
+  }
+  return "";
+}
+
+function linkHref(html, rel) {
+  const escaped = rel.replace(/[.*+?^${}()|[\]\\]/gu, "\\$&");
+  const patterns = [
+    new RegExp(`<link\\b[^>]*rel=["']${escaped}["'][^>]*href=["']([^"']*)["'][^>]*>`, "iu"),
+    new RegExp(`<link\\b[^>]*href=["']([^"']*)["'][^>]*rel=["']${escaped}["'][^>]*>`, "iu"),
+  ];
+  for (const pattern of patterns) {
+    const match = html.match(pattern);
+    if (match) return decodeHtml(match[1]);
+  }
+  return "";
+}
+
+function attributeValues(html, attribute) {
+  const values = [];
+  const pattern = new RegExp(`\\b${attribute}=["']([^"']*)["']`, "giu");
+  for (const match of html.matchAll(pattern)) values.push(decodeHtml(match[1]));
+  return values;
+}
+
+function bodyHtml(html) {
+  const opening = /<body\b[^>]*>/iu.exec(html);
+  if (!opening) return "";
+  const start = opening.index + opening[0].length;
+  const end = html.toLowerCase().indexOf("</body>", start);
+  return end < 0 ? "" : html.slice(start, end);
+}
+
+function replaceRanges(html, ranges, replacement = " ") {
+  const pieces = [];
+  let cursor = 0;
+  for (const [start, end] of ranges) {
+    pieces.push(html.slice(cursor, start), typeof replacement === "function" ? replacement() : replacement);
+    cursor = end;
+  }
+  pieces.push(html.slice(cursor));
+  return pieces.join("");
+}
+
+// Match only opening tags. Large manuscript bodies and framework payloads must
+// not pass through a repeated regex group that grows with the enclosed content.
+// With `nested`, an element of the same name inside a matched one ends inside
+// it, so the match runs to the closing tag of its own element.
+function replaceElements(html, openingPattern, replacement = " ", nested = false) {
+  const lower = html.toLowerCase();
+  const ranges = [];
+  let cursor = 0;
+  for (const opening of html.matchAll(openingPattern)) {
+    if (opening.index < cursor) continue;
+    const name = opening[1].toLowerCase();
+    const closing = `</${name}>`;
+    let end = lower.indexOf(closing, opening.index + opening[0].length);
+    if (nested) {
+      const tags = new RegExp(`<\\/?${name}(?=[\\s>/])[^>]*>`, "gu");
+      tags.lastIndex = opening.index + opening[0].length;
+      let depth = 1;
+      end = -1;
+      for (let tag = tags.exec(lower); tag; tag = tags.exec(lower)) {
+        depth += tag[0].startsWith("</") ? -1 : tag[0].endsWith("/>") ? 0 : 1;
+        if (depth === 0) {
+          end = tag.index;
+          break;
+        }
+      }
+    }
+    if (end < 0) continue;
+    cursor = end + closing.length;
+    ranges.push([opening.index, cursor]);
+  }
+  return replaceRanges(html, ranges, replacement);
+}
+
+function withoutComments(html) {
+  const ranges = [];
+  let cursor = 0;
+  for (let start = html.indexOf("<!--", cursor); start >= 0; start = html.indexOf("<!--", cursor)) {
+    const end = html.indexOf("-->", start + 4);
+    if (end < 0) break;
+    cursor = end + 3;
+    ranges.push([start, cursor]);
+  }
+  return replaceRanges(html, ranges);
+}
+
+function withoutSvg(html) {
+  const ranges = [];
+  let depth = 0;
+  let start = 0;
+  for (const tag of html.matchAll(/<\/?svg\b[^>]*>/giu)) {
+    if (tag[0].startsWith("</")) {
+      depth -= 1;
+      if (depth < 0) throw new Error("SVG elements must have balanced closing tags.");
+      if (depth === 0) ranges.push([start, tag.index + tag[0].length]);
+    } else if (!tag[0].endsWith("/>")) {
+      if (depth === 0) start = tag.index;
+      depth += 1;
+    } else if (depth === 0) {
+      ranges.push([tag.index, tag.index + tag[0].length]);
+    }
+  }
+  if (depth !== 0) throw new Error("SVG elements must be complete.");
+  return replaceRanges(html, ranges);
+}
+
+function formulaSnapshot(html) {
+  const formulas = [...html.matchAll(/<math\b([^>]*)>([\s\S]*?)<\/math>/giu)].map((match) => {
+    const mode = match[1].match(/\bdata-research-math="(inline|display)"/u)?.[1];
+    const annotation = match[2].match(/<annotation\b[^>]*encoding="application\/x-tex"[^>]*>([\s\S]*?)<\/annotation>/iu)?.[1];
+    if (!mode || annotation === undefined) throw new Error("Research formulas must preserve an exact TeX annotation and display mode.");
+    return { mode, tex: decodeHtml(annotation) };
+  });
+  return { mathSourceSha256: sha256(JSON.stringify(formulas)), formulaCount: formulas.length };
+}
+
+function visibleText(html, preserveFormulaPositions = false) {
+  let body = bodyHtml(html);
+  if (preserveFormulaPositions) {
+    let formulaIndex = 0;
+    body = replaceElements(withoutSvg(body), /<(math)\b[^>]*>/giu, () => ` MATH_${formulaIndex++} `);
+  }
+  for (const tag of ["script", "style", "template", "annotation"]) {
+    body = replaceElements(body, new RegExp(`<(${tag})\\b[^>]*>`, "giu"));
+  }
+  body = replaceElements(body, /<([a-z][\w:-]*)\b[^>]*data-visible-copy-role=["']visual-identity["'][^>]*>/giu);
+  // A table value drawn for a formula holds the spans that group and pad its digits.
+  body = replaceElements(body, /<(span)\b[^>]*\bdata-table-value=""[^>]*aria-hidden=["']true["'][^>]*>/giu, " ", true);
+  body = replaceElements(body, /<([a-z][\w:-]*)\b[^>]*aria-hidden=["']true["'][^>]*>/giu);
+  // A word-break opportunity adds no text or word boundary, nor do the empty text
+  // separators React writes beside one where its stream divides a run of text,
+  // nor the spans that group a table value's digits, pad it to its column or box its lead.
+  const unbroken = body
+    .replace(/(?:<!--\s*-->)*<wbr\b[^>]*>(?:<!--\s*-->)*/giu, "")
+    .replace(/(?:<!--\s*-->)*<span\b[^>]*\bdata-table-pad="[^"]*"[^>]*><\/span>(?:<!--\s*-->)*/giu, "")
+    .replace(/(?:<!--\s*-->)*<span\b[^>]*\bdata-table-lead="[^"]*"[^>]*><span>([^<]*)<\/span><\/span>(?:<!--\s*-->)*/giu, "$1")
+    .replace(/(?:<!--\s*-->)*<span\b[^>]*\bdata-digit-group=""[^>]*>([^<]*)<\/span>(?:<!--\s*-->)*/giu, "$1");
+  return stripInterfaceStrings(withoutComments(unbroken).replace(/<[^>]+>/gu, " "));
+}
+
+function metadataSnapshot(html) {
+  return {
+    title: firstMatch(html, /<title\b[^>]*>([\s\S]*?)<\/title>/iu),
+    description: metaContent(html, "name", "description"),
+    canonical: linkHref(html, "canonical"),
+    openGraphTitle: metaContent(html, "property", "og:title"),
+    openGraphDescription: metaContent(html, "property", "og:description"),
+    openGraphUrl: metaContent(html, "property", "og:url"),
+    twitterTitle: metaContent(html, "name", "twitter:title"),
+    twitterDescription: metaContent(html, "name", "twitter:description"),
+  };
+}
+
+export function snapshotHtml(html, isResearchArticle = false) {
+  const text = visibleText(html, isResearchArticle);
+  const body = bodyHtml(html);
+  return {
+    textSha256: sha256(text),
+    characterCount: [...text].length,
+    wordCount: text ? text.split(" ").length : 0,
+    preview: text.slice(0, 160),
+    altTexts: attributeValues(body, "alt"),
+    ariaLabels: attributeValues(body, "aria-label"),
+    metadata: metadataSnapshot(html),
+    ...(isResearchArticle ? formulaSnapshot(body) : {}),
+  };
+}
+
+async function routeSnapshot(route) {
+  const html = await readFile(routeHtmlPath(route), "utf8");
+  return snapshotHtml(html, RESEARCH_ARTICLE_ROUTES.has(route));
+}
+
+async function createManifest() {
+  const routes = {};
+  for (const route of ROUTES) routes[route] = await routeSnapshot(route);
+  return {
+    version: 1,
+    ignoredInterfaceStrings: IGNORED_INTERFACE_STRINGS,
+    routes,
+  };
+}
+
+function stableJson(value) {
+  return JSON.stringify(value, null, 2);
+}
+
+async function verify() {
+  const manifest = JSON.parse(await readFile(MANIFEST_PATH, "utf8"));
+  if (
+    manifest.version !== 1 ||
+    stableJson(Object.keys(manifest.routes ?? {}).sort()) !== stableJson([...ROUTES].sort())
+  ) {
+    throw new Error("The visible-copy manifest must cover exactly the registered website routes.");
+  }
+  if (stableJson(manifest.ignoredInterfaceStrings) !== stableJson(IGNORED_INTERFACE_STRINGS)) {
+    throw new Error("The ignored interface strings must be Menu and Close.");
+  }
+
+  const failures = [];
+  for (const route of ROUTES) {
+    const expected = manifest.routes?.[route];
+    if (!expected) {
+      failures.push(`${route}: missing from visible-copy manifest`);
+      continue;
+    }
+    const actual = await routeSnapshot(route);
+    if (actual.textSha256 !== expected.textSha256) {
+      // The text read from the page, one sentence per line, so a run can be compared with a local build.
+      const text = visibleText(await readFile(routeHtmlPath(route), "utf8"), RESEARCH_ARTICLE_ROUTES.has(route));
+      console.error(`Visible text of ${route}:\n${text.replace(/([.;:]) /gu, "$1\n")}\n`);
+    }
+    const fields = ["textSha256", "characterCount", "wordCount", "altTexts", "ariaLabels", "metadata"];
+    if (RESEARCH_ARTICLE_ROUTES.has(route)) fields.push("mathSourceSha256", "formulaCount");
+    for (const field of fields) {
+      if (stableJson(actual[field]) !== stableJson(expected[field])) {
+        failures.push(
+          `${route}: ${field} changed\nexpected ${stableJson(expected[field])}\nactual   ${stableJson(actual[field])}`,
+        );
+      }
+    }
+  }
+
+  if (failures.length > 0) {
+    throw new Error(`Visible copy does not match its content manifest:\n\n${failures.join("\n\n")}`);
+  }
+  console.log("Visible text, metadata, alt text, and aria-label copy match the content manifest.");
+}
+
+if (process.argv[1] && path.resolve(process.argv[1]) === fileURLToPath(import.meta.url)) {
+  if (process.argv.includes("--emit")) {
+    console.log(stableJson(await createManifest()));
+  } else {
+    await verify();
+  }
+}

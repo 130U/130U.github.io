@@ -1,0 +1,619 @@
+.body {
+  max-width: var(--reading-measure);
+  font-size: var(--type-reading);
+  line-height: var(--manuscript-leading);
+}
+
+.body h3 {
+  font-size: var(--type-subheading);
+}
+
+/* A manuscript's vertical spaces are measured in its line (--manuscript-line):
+   a paragraph break is one line, and a statement, a proof or a paragraph that
+   opens on a run-in head starts a line and a half below the paragraph before
+   it, as does the paragraph after a proof's end. A display stands in two and a
+   half lines (ResearchMath.module.css). A paper's abstract reads at the same
+   leading. */
+.manuscript [data-article-overview] > p {
+  line-height: var(--manuscript-leading);
+}
+
+.manuscript [data-article-overview] > p + p,
+.manuscript .body > p + p {
+  margin-top: var(--manuscript-line);
+}
+
+.manuscript .body > p + p[data-unit],
+.manuscript .body > p[data-proof-close] + p {
+  margin-top: calc(1.5 * var(--manuscript-line));
+}
+
+/* A subsection opens after more white than a display stands in: three lines of
+   margin, about three and a half lines of white to its capitals. */
+.manuscript .body h3 {
+  margin-top: calc(3 * var(--manuscript-line));
+}
+
+.sourceLinks {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem 1.5rem;
+  margin: 1.5rem 0 0;
+  color: var(--supporting-ink);
+  font-size: var(--type-interface);
+  line-height: var(--interface-leading);
+}
+
+.sourceLinks a {
+  display: inline-flex;
+  min-height: 44px;
+  align-items: center;
+}
+
+.proofEnd {
+  display: inline-block;
+  margin-inline-start: 0.5em;
+  font-size: var(--type-interface);
+  font-style: normal;
+  white-space: nowrap;
+}
+
+.proofEnd abbr {
+  text-decoration: none;
+}
+
+/* A formula with the punctuation around it, and a number range, each hold one
+   line. */
+.glued,
+.range {
+  white-space: nowrap;
+}
+
+/* A written-out web address or identifier breaks only at the opportunities
+   AddressText marks. In a column under 16em, as with very large text on a
+   phone, it wraps like any word, so it never runs past the column. */
+@container (width >= 16em) {
+  .address {
+    white-space: nowrap;
+  }
+}
+
+.body code {
+  font-size: var(--type-reading);
+  overflow-wrap: anywhere;
+}
+
+/* Tables share the figures' frame. A manuscript caption becomes the frame's
+   title; the header is a tinted band in label type over a firm rule; rows part
+   on hairlines; the hovered row and column take a quiet tint and the hovered
+   column's header turns accent. Numbers align right in tabular figures. Every
+   row holds one line: values, intervals, numbers and labels never wrap, and
+   only a column of sentences does; a heading takes at most two lines. A table
+   a little wider than the column closes up its columns (ZoomStage sets
+   --cell-gap), down to half their gap; a table wider than that scrolls at its
+   natural spacing, its row labels kept in view where the room beside them
+   holds a column of values whole. */
+.tableFrame {
+  --table-pad: var(--manuscript-inset);
+  --table-surface: var(--page);
+  --table-band: color-mix(in srgb, #000 2.8%, var(--table-surface));
+  position: relative;
+  container: table-frame / inline-size;
+  min-width: 0;
+  max-width: 100%;
+  margin: 2.75rem 0;
+  border: 1px solid var(--frame);
+}
+
+.tableTitle {
+  max-width: calc(34rem + 36px);
+  margin: 0;
+  padding: 22px calc(var(--table-pad) + 36px) 18px var(--table-pad);
+  color: var(--ink);
+  font-family: var(--font-text);
+  font-size: var(--type-interface);
+  font-weight: 500;
+  line-height: var(--interface-leading);
+  text-wrap: pretty;
+}
+
+.tableTitle strong {
+  font-weight: inherit;
+}
+
+/* The zoom control holds the frame's top-right corner: on the title's first
+   line, or on the header band of a table without a title. */
+.zoom {
+  --control-surface: var(--table-surface);
+  position: absolute;
+  z-index: 4;
+  top: calc(22px + var(--type-interface) * var(--interface-leading) * var(--zoom, 1) / 2 - 16px);
+  right: calc(var(--table-pad) - 8px);
+}
+
+.zoom:first-child {
+  top: 6px;
+  background: var(--table-band);
+}
+
+/* A table without a title that scrolls would carry its headings beneath the
+   control, so the control takes a row of its own above the header. */
+.tableFrame[data-zoom-row] {
+  padding-top: 44px;
+}
+
+:where([data-zoom-row]) > .zoom:first-child {
+  background: transparent;
+}
+
+.tableFrame[data-zoom-row] thead .cell {
+  border-top: 1px solid var(--rule);
+}
+
+.tableRegion:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: -2px;
+}
+
+.tableRegion {
+  min-width: 0;
+  max-width: 100%;
+  margin: 0;
+  overflow-x: auto;
+  overflow-y: hidden;
+  overscroll-behavior-x: contain;
+  scrollbar-width: thin;
+  scrollbar-color: var(--rule-strong) transparent;
+  -webkit-mask-image: linear-gradient(to right, #000 calc(100% - var(--edge-fade, 0px)), transparent);
+  mask-image: linear-gradient(to right, #000 calc(100% - var(--edge-fade, 0px)), transparent);
+}
+
+.table {
+  width: 100%;
+  min-width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+  table-layout: auto;
+  text-align: left;
+  font: inherit;
+  overflow-wrap: normal;
+  word-break: normal;
+}
+
+.cell {
+  padding: 0.875rem var(--cell-gap, 1rem);
+  border-bottom: 1px solid var(--rule);
+  vertical-align: top;
+  overflow-wrap: normal;
+  word-break: normal;
+  white-space: nowrap;
+}
+
+.sentence {
+  min-width: 16rem;
+  white-space: normal;
+  text-wrap: pretty;
+}
+
+/* A row label narrows with its table, so the columns of values stay in view. */
+.sentence:first-child {
+  min-width: clamp(8rem, 28cqi, 16rem);
+}
+
+/* In a table with a column of sentences, a column of values keeps its
+   content's width and leaves the rest of the row to the text. */
+.table[data-hug] .numeric {
+  width: 1%;
+}
+
+/* To fit, two or more sentence columns beside the row labels share the room
+   the labels leave, each to no less than 10rem (--sentence-columns, set by the
+   renderer). A table that scrolls all the same keeps that width where the room
+   holds the labels and two such columns, and otherwise sets each column in the
+   room beside the labels, at most 16rem (--sentence-width, set by ZoomStage). */
+.tableRegion[data-wrap="fit"] .table[data-sentence-columns] td.sentence:not(:first-child) {
+  min-width: clamp(10rem, calc((72cqi - 2 * var(--table-pad)) / var(--sentence-columns) - 2rem), 16rem);
+}
+
+.tableRegion[data-wrap="scroll"] .table[data-sentence-columns] td.sentence:not(:first-child) {
+  min-width: var(--sentence-width, 16rem);
+}
+
+/* A list item hangs its marker in a column as wide as the widest marker of its
+   run of items (--marker-digits, set by the renderer): a number stands whole on
+   its line, period included, right-aligned in tabular figures as in a printed
+   reference list; a bullet stands at the column's start; the text keeps the
+   same gap from the column whatever the number. One digit keeps a 1.25em
+   indent, and each further digit widens the column by one figure (1ch).
+   Consecutive items keep close together. */
+.body p[data-list-item] {
+  --list-indent: calc(1.25em + (var(--marker-digits, 1) - 1) * 1ch);
+  --marker-gap: 0.4em;
+  padding-inline-start: var(--list-indent);
+}
+
+.body p[data-list-item] + p[data-list-item] {
+  margin-top: 0.5rem;
+}
+
+.listMarker {
+  display: inline-block;
+  width: calc(var(--list-indent) - var(--marker-gap));
+  margin-inline: calc(-1 * var(--list-indent)) var(--marker-gap);
+  font-kerning: none;
+  font-variant-numeric: lining-nums tabular-nums;
+  text-align: end;
+  white-space: nowrap;
+}
+
+.listMarker[data-marker="bullet"] {
+  text-align: start;
+}
+
+.cell:first-child {
+  padding-left: var(--table-pad);
+}
+
+/* The second of two halves set side by side stands a second em from the first. */
+.cell[data-half]:not(:first-child) {
+  padding-left: calc(2 * var(--cell-gap, 1rem));
+}
+
+.cell:last-child {
+  padding-right: var(--table-pad);
+}
+
+.cell code {
+  overflow-wrap: normal;
+  word-break: normal;
+}
+
+.table thead .cell {
+  box-sizing: content-box;
+  min-width: max(var(--heading-floor, 0em), var(--heading-drawn, 0em));
+  padding-top: 0.75rem;
+  padding-bottom: 0.75rem;
+  vertical-align: bottom;
+  border-bottom: 1px solid var(--rule-strong);
+  background: var(--table-band);
+  color: var(--ink);
+  font-family: var(--font-text);
+  font-size: var(--type-label);
+  font-weight: 500;
+  line-height: var(--label-leading);
+  white-space: normal;
+  text-wrap: balance;
+  transition: color 160ms ease, box-shadow 160ms ease;
+}
+
+.table thead .cell::first-letter {
+  text-transform: uppercase;
+}
+
+.tableTitle ~ .tableRegion thead .cell {
+  border-top: 1px solid var(--rule);
+}
+
+.zoom:first-child:not([data-idle]) ~ .tableRegion thead .cell:last-child {
+  padding-right: calc(var(--table-pad) + 32px);
+}
+
+.table[data-one-line] {
+  width: min-content;
+  min-width: 0;
+}
+
+.table[data-one-line] .cell {
+  min-width: 0;
+  white-space: nowrap;
+}
+
+.table tbody tr:last-child > .cell {
+  border-bottom: 0;
+}
+
+.table tbody tr {
+  transition: background-color 160ms ease;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .table tbody tr:hover {
+    background: rgba(0, 0, 0, 0.022);
+  }
+}
+
+/* The hovered column's tint answers a fine pointer only, so a tap or a touch
+   scroll leaves no column lit. */
+@media (hover: hover) and (pointer: fine) {
+  .table .cell[data-column-hover] {
+    background: rgba(0, 0, 0, 0.035);
+  }
+
+  .table thead .cell[data-column-hover] {
+    background: color-mix(in srgb, #000 5%, var(--table-surface));
+    color: var(--accent);
+    box-shadow: inset 0 -2px 0 var(--accent);
+  }
+}
+
+/* Row labels stay in view while a wide table scrolls past them. */
+.tableRegion[data-pinned] .cell:first-child {
+  position: sticky;
+  z-index: 1;
+  left: 0;
+  background-color: var(--table-surface);
+}
+
+.tableRegion[data-pinned] thead .cell:first-child {
+  z-index: 3;
+  background-color: var(--table-band);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .tableRegion[data-pinned] tbody tr:hover > .cell:first-child {
+    background-color: color-mix(in srgb, #000 2.2%, var(--table-surface));
+  }
+}
+
+.tableRegion[data-pinned][data-scrolled] .cell:first-child {
+  box-shadow: 1px 0 0 var(--rule-medium);
+}
+
+/* Row labels kept in view leave no column half beneath them: the table's
+   scrolling snaps to the start of a column of values, set beside the labels
+   (--pin-width), and its scrolled end is such a start too, the table running
+   on past its last column, blank, by as much as that takes (--snap-end), so no
+   column gives up its width to it; ZoomStage sets both. */
+.tableRegion[data-pinned] {
+  scroll-snap-type: x mandatory;
+  scroll-padding-inline-start: var(--pin-width, 0px);
+}
+
+.tableRegion[data-pinned] .cell:not(:first-child) {
+  scroll-snap-align: start;
+}
+
+.tableRegion[data-pinned] .table {
+  border-inline-end: var(--snap-end, 0px) solid transparent;
+}
+
+/* Rows below the fold enter once, top to bottom, as the table scrolls in. */
+.tableFrame[data-reveal="pending"] tbody tr {
+  opacity: 0;
+  transform: translateY(6px);
+}
+
+.tableFrame[data-reveal="in"] tbody tr {
+  transition:
+    opacity 420ms ease calc(var(--row, 0) * 40ms),
+    transform 560ms var(--ease-out) calc(var(--row, 0) * 40ms),
+    background-color 160ms ease;
+}
+
+.table .cell[data-emphasis],
+.table tr[data-emphasis] > .cell {
+  background: var(--chart-tint);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .table .cell[data-emphasis][data-column-hover],
+  .table tr[data-emphasis] > .cell[data-column-hover] {
+    background: var(--chart-tint-strong);
+  }
+}
+
+.table tr[data-emphasis] > .cell:first-child {
+  box-shadow: inset 2px 0 0 var(--accent);
+}
+
+.table thead .cell[data-emphasis] {
+  background: color-mix(in srgb, var(--accent) 5%, var(--table-surface));
+  box-shadow: inset 0 2px 0 var(--accent);
+}
+
+.tableRegion[data-pinned] tr[data-emphasis] > .cell:first-child {
+  background: color-mix(in srgb, var(--accent) 5%, var(--table-surface));
+}
+
+.tableRegion[data-pinned][data-scrolled] tr[data-emphasis] > .cell:first-child {
+  box-shadow: inset 2px 0 0 var(--accent), 1px 0 0 var(--rule-medium);
+}
+
+/* Values take tabular figures; a heading keeps the text's proportional
+   figures, whose hyphen is narrower. */
+.numeric {
+  text-align: right;
+}
+
+td.numeric {
+  font-variant-numeric: lining-nums tabular-nums;
+}
+
+/* A column whose values hold different numbers of fields, an interval among
+   single values, or that sets some in bold, aligns them from its start on their
+   decimal points, and its head stands over that start. */
+.alignStart {
+  text-align: left;
+}
+
+/* A value takes tabular figures, a number written as a formula included, and
+   its digits after the point stand in groups of three, parted by TeX's thin
+   space. Invisible generated text pads each value to its column's widest
+   bracket, sign, integer part, fraction and marks, so the column's points
+   align; the pads are neither copied nor read (TableValue). */
+.value {
+  --digit-gap: calc(1em / 6);
+  font-variant-numeric: lining-nums tabular-nums;
+  white-space: nowrap;
+}
+
+.digitGroup {
+  margin-inline-start: var(--digit-gap);
+}
+
+.pad {
+  padding-inline-start: calc(var(--pad-gaps, 0) * var(--digit-gap));
+}
+
+.pad::before {
+  content: attr(data-table-pad);
+  visibility: hidden;
+}
+
+/* In a column of both weights a pad takes the weight of the digits it stands
+   for, so it is as wide as they are. */
+.pad[data-weight="bold"]::before {
+  font-weight: bold;
+}
+
+.pad[data-weight="regular"]::before {
+  font-weight: normal;
+}
+
+/* In a column of both weights, where bold figures are wider than regular ones,
+   each number's lead (its bracket, sign and integer part) stands at the end of
+   a box as wide as the column's widest lead in bold, invisible generated text,
+   so the points align whatever a value's weight. */
+.lead {
+  display: inline-grid;
+  justify-items: end;
+}
+
+.lead::before {
+  content: attr(data-table-lead);
+  grid-area: 1 / 1;
+  font-weight: bold;
+  visibility: hidden;
+}
+
+.lead > span {
+  grid-area: 1 / 1;
+}
+
+/* An equation number a table carries stands in the reading face of every
+   equation number: after the label of a row that presents a display, and, for a
+   table that is itself an equation, at the frame's top-left in the title's
+   place, as a manuscript table is identified by "Table N.". */
+.rowNumber,
+.titleNumber {
+  font-family: var(--font-prose);
+  font-variant-numeric: lining-nums proportional-nums;
+  white-space: nowrap;
+}
+
+.rowNumber {
+  margin-inline-start: 0.5em;
+}
+
+.titleNumber {
+  font-size: calc(var(--type-reading) * var(--zoom, 1));
+  font-weight: 400;
+}
+
+/* A formula in a cell keeps its whole width, since the table scrolls rather than
+   the formula. It stays a scroll container, as in prose, so its baseline is its
+   lower margin edge, where ResearchMath sets the expression's own baseline on the
+   line's. */
+.cell [data-research-formula="inline"] {
+  max-width: none;
+}
+
+/* Zoomed, the table lifts onto a sheet over the blurred page. The stage sets it
+   at the largest step of type that holds every row on one line. In a table of
+   long sentences, those columns wrap across the full width. A table wider than
+   the window even so is set whole at the size that fits it, every row still on
+   one line (ZoomStage sets --zoom). */
+.tableFrame[data-zoomed] {
+  --table-pad: clamp(16px, 2.4vw, 32px);
+  --table-surface: var(--panel);
+  display: flex;
+  flex-direction: column;
+  max-height: 100%;
+  margin: 0;
+  border-color: var(--rule-medium);
+  background: var(--table-surface);
+  box-shadow: 0 1px 3px rgb(0 0 0 / 0.04), 0 28px 72px -20px rgb(0 0 0 / 0.2);
+  container-type: normal;
+  transform-origin: 0 0;
+}
+
+.tableFrame[data-zoomed] .tableTitle {
+  flex: none;
+  max-width: none;
+  padding-bottom: 20px;
+  font-size: calc(var(--type-interface) * var(--zoom, 1));
+}
+
+.tableFrame[data-zoomed] .tableRegion {
+  flex: 0 1 auto;
+  min-height: 0;
+  overflow: auto;
+  overscroll-behavior: contain;
+}
+
+.tableFrame[data-zoomed] .table {
+  font-size: calc(var(--type-reading) * var(--zoom, 1));
+}
+
+.tableFrame[data-zoomed] .tableRegion[data-dense] {
+  --cell-gap: 0.625em;
+}
+
+.tableFrame[data-zoomed] .cell {
+  min-width: 0;
+  padding: 0.625em var(--cell-gap, 1em);
+}
+
+.tableFrame[data-zoomed] .cell:first-child {
+  padding-left: var(--table-pad);
+}
+
+.tableFrame[data-zoomed] .cell:last-child {
+  padding-right: var(--table-pad);
+}
+
+.tableFrame[data-zoomed] .cell[data-half]:not(:first-child) {
+  padding-left: calc(2 * var(--cell-gap, 1em));
+}
+
+.tableFrame[data-zoomed] thead .cell {
+  position: sticky;
+  z-index: 2;
+  top: 0;
+  padding-block: 0.8em;
+  font-size: calc(var(--type-label) * var(--zoom, 1));
+  white-space: nowrap;
+}
+
+.tableFrame[data-zoomed] .tableRegion[data-headings-wrap] thead .cell {
+  min-width: max(var(--heading-floor, 0em), var(--heading-drawn, 0em));
+  white-space: normal;
+}
+
+.tableFrame[data-zoomed][data-fit="line"] .sentence {
+  white-space: nowrap;
+}
+
+.tableFrame[data-zoomed][data-fit="wrap"] .sentence {
+  min-width: 12em;
+}
+
+@media (prefers-contrast: more) {
+  .tableFrame[data-zoomed] {
+    border-color: var(--ink);
+  }
+}
+
+@media print {
+  .tableRegion {
+    overflow: visible;
+    -webkit-mask-image: none;
+    mask-image: none;
+  }
+
+  .table .cell,
+  .table thead .cell {
+    min-width: 0;
+    white-space: normal;
+  }
+}

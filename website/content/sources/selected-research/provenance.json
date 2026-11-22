@@ -1,0 +1,197 @@
+{
+  "fetchedWith": "Authenticated Git checkout at the exact commit; bytes read with git show and checked against Git blob SHA-1",
+  "sources": [
+    {
+      "slug": "certified-valuation-of-arithmetic-asian-options",
+      "fetchedAt": "2026-11-19",
+      "sourceUrl": "https://github.com/130U/RESEARCH-Certified-Valuation-of-Arithmetic-Asian-Options/blob/dd4b147d822d45a4ca12a66294fae2a32cd252bb/manuscript/report.md",
+      "sourceCommit": "dd4b147d822d45a4ca12a66294fae2a32cd252bb",
+      "sourceBlob": "73fd58c109bca144a8809e3fc9832e8ad258cae6",
+      "sourceSha256": "9390024a6e2cd57e036fbcac6aac05ef1fa8ef5580c5637f8403931472d1b055",
+      "importedMarkdownSha256": "84af2285b119f6d7cf2a6c5c9c638a1f72ab0118f80db7d8f1e10ade07ea54c4",
+      "includedHeadings": [
+        "Abstract",
+        "1. Introduction",
+        "1.1 The idea",
+        "1.2 Results",
+        "1.3 Related work",
+        "2. Average-price contracts and their two averages",
+        "2.1 The contract",
+        "2.2 The gap between the averages is dispersion",
+        "3. Exercising on a proxy",
+        "3.1 The cost of the kink",
+        "3.2 A common factor",
+        "3.3 The bound",
+        "3.4 The best scale",
+        "3.5 Reading the bound",
+        "4. How large is the cost? A cubic law",
+        "4.1 Black's model",
+        "4.2 Contracts that trade",
+        "4.3 Stochastic volatility",
+        "5. A proved price interval under Heston",
+        "5.1 Model, scheme and contract",
+        "5.2 The common factor and the boundary",
+        "5.3 The proxy value and the second moment",
+        "5.4 The certificate",
+        "5.5 What the interval contains",
+        "5.6 Scale, steps and a second point",
+        "6. What discretization does to the price",
+        "6.1 Euler on the price is Euler on the Riccati equation",
+        "6.2 The bias of the proxy value is first order",
+        "6.3 Deterministic variance: a vega times a quadrature error",
+        "6.4 Coupling the two laws",
+        "7. After calibration",
+        "7.1 Price transfer for small volatility of volatility",
+        "7.2 The posterior",
+        "7.3 Numbers",
+        "8. Two uses",
+        "8.1 An acceptance test for a pricing engine",
+        "8.2 A numerical line in the valuation reserve",
+        "9. Conclusion"
+      ],
+      "mainSections": 9,
+      "omitted": [
+        "## Appendix A. Finite certification of the weighted second moment",
+        "## Appendix B. The actual projection kernel and affine identification",
+        "## Appendix C. Complete error control for inversion of the thirteen linear transforms",
+        "## Appendix D. Gaussian density expansions and finite-step bounds",
+        "## Appendix E. Perturbation constants for positive volatility of volatility",
+        "## Appendix F. Posterior inputs, normalization, and finite coupling",
+        "## Appendix G. Programs and evidence",
+        "## Appendix H. A coupled bound on the change in the cost of the kink",
+        "## Appendix I. Black's model: dispersion and the proxy value"
+      ],
+      "transformations": [
+        "The title is rendered once by the page header, with a subtitle joined after a colon as in the PDF title.",
+        "Relative file links resolve to the frozen GitHub commit.",
+        "Each figure is one captioned figure at a local path, which the page draws from the manuscript's formulas and the pinned study results.",
+        "A paragraph links omitted appendices and supporting material to GitHub.",
+        "Main text, all main-text tables, mathematical TeX and references are otherwise retained verbatim."
+      ],
+      "figures": [
+        {
+          "label": "Figure 1. Where exercising on the geometric average goes wrong.",
+          "src": "/assets/research/asian/disagreement.png"
+        },
+        {
+          "label": "Figure 2. The cubic law.",
+          "src": "/assets/research/asian/cubic-law.png"
+        },
+        {
+          "label": "Figure 3. The cost of the kink across strikes.",
+          "src": "/assets/research/asian/profile.png"
+        },
+        {
+          "label": "Figure 4. Three sizes of Euler error.",
+          "src": "/assets/research/asian/euler-ladder.png"
+        }
+      ],
+      "studies": [
+        {
+          "sourceUrl": "https://github.com/130U/RESEARCH-Certified-Valuation-of-Arithmetic-Asian-Options/blob/dd4b147d822d45a4ca12a66294fae2a32cd252bb/studies/results/gap-profile.json",
+          "sourceBlob": "30e1676f4cc0c72d0b0dbdb1cac384c41a70370b",
+          "sourceSha256": "c90aa118de02bff2d85bf816639e9b9883d47de60f829dc7085e0321931d8bac"
+        },
+        {
+          "sourceUrl": "https://github.com/130U/RESEARCH-Certified-Valuation-of-Arithmetic-Asian-Options/blob/dd4b147d822d45a4ca12a66294fae2a32cd252bb/studies/results/euler-ladder.json",
+          "sourceBlob": "5359e2b42d32881df6fd678301feb0051cf4095c",
+          "sourceSha256": "8df582b58273fe949af1e892fcfe987c5dafe69425bd0ab76b3a219907d05e1f"
+        }
+      ],
+      "figureDataSha256": "bdf15c5413f7e2908aee5edcd90184288671f3266c6c774d95b15b93ee204612"
+    },
+    {
+      "slug": "certified-joint-pricing-errors-in-rough-heston",
+      "fetchedAt": "2026-11-19",
+      "sourceUrl": "https://github.com/130U/RESEARCH-Certified-Joint-Pricing-Errors-in-Rough-Heston/blob/038db24a3aadf9600edef385dfd7508e612d53c8/manuscript/merged-heston-en.md",
+      "sourceCommit": "038db24a3aadf9600edef385dfd7508e612d53c8",
+      "sourceBlob": "12b074bc25984ea11f9fc7d75768800c267a43eb",
+      "sourceSha256": "bbb79f3b21e37fde92b02fb45a49b3a4404492e7f37819c5c1a7a4ee4db32642",
+      "importedMarkdownSha256": "b7e51a7037014ff439169191dc322aaf8a4ca9aad9f1cb9f8d92f27b6fd61314",
+      "includedHeadings": [
+        "Abstract",
+        "1. Introduction",
+        "1.1. What a Riccati residual costs",
+        "1.2. Transform error as a common factor",
+        "1.3. Evidence and economic scale",
+        "1.4. Relation to the literature",
+        "2. The pricing problem",
+        "2.1. Model, transform and price",
+        "2.2. Two faces of the exponent",
+        "3. What a Riccati residual costs",
+        "3.1. A martingale that fails to be one",
+        "3.2. The residual bound",
+        "3.3. The weight is a forward variance curve",
+        "3.4. Cell weights",
+        "4. From residuals to prices",
+        "4.1. A reference shaped by the startup expansion",
+        "4.2. Transform disks and the price bound",
+        "5. Portfolios: transform error as a common factor",
+        "5.1. The joint error set",
+        "5.2. The netting ratio",
+        "5.3. The calibration objective is a portfolio",
+        "6. The stored output",
+        "7. Evidence from S&P 500 options",
+        "7.1. Data and market scale",
+        "7.2. What the forward variance weight buys",
+        "7.3. A decision that turns on netting",
+        "7.4. Twenty-eight positions",
+        "7.5. Is the roughness ranking numerical?",
+        "7.6. Model misfit without solver doubt",
+        "7.7. Auditing an output or replacing it",
+        "8. Conclusion"
+      ],
+      "mainSections": 8,
+      "omitted": [
+        "## Appendix A. Rescaled variables, model and transform",
+        "## Appendix B. The rational output",
+        "## Appendix C. Propagation proofs",
+        "## Appendix D. The certified reference",
+        "## Appendix E. Experimental record"
+      ],
+      "transformations": [
+        "The title is rendered once by the page header, with a subtitle joined after a colon as in the PDF title.",
+        "Relative file links resolve to the frozen GitHub commit.",
+        "Each figure is one captioned figure at a local path, which the page draws from the manuscript's formulas and the pinned study results.",
+        "A paragraph links omitted appendices and supporting material to GitHub.",
+        "Main text, all main-text tables, mathematical TeX and references are otherwise retained verbatim."
+      ],
+      "figures": [
+        {
+          "label": "Figure 1.",
+          "src": "/assets/research/rough/residual-kernel.png"
+        },
+        {
+          "label": "Figure 2.",
+          "src": "/assets/research/rough/netting-ratio.png"
+        },
+        {
+          "label": "Figure 3.",
+          "src": "/assets/research/rough/joint-error-set.png"
+        },
+        {
+          "label": "Figure 4.",
+          "src": "/assets/research/rough/pass-counts.png"
+        }
+      ],
+      "studies": [
+        {
+          "sourceUrl": "https://github.com/130U/RESEARCH-Certified-Joint-Pricing-Errors-in-Rough-Heston/blob/038db24a3aadf9600edef385dfd7508e612d53c8/science/baseline/finite-history/finite-history-nodes-alpha-13_25.json",
+          "sourceBlob": "c6ae3634bd49abcf1ce00f1abc9cd1e9648acdb6",
+          "sourceSha256": "a0b2df22264e111b177541383eecf01bba63f47aac6296c3428f832a0c5ceca7"
+        },
+        {
+          "sourceUrl": "https://github.com/130U/RESEARCH-Certified-Joint-Pricing-Errors-in-Rough-Heston/blob/038db24a3aadf9600edef385dfd7508e612d53c8/science/baseline/frontier/transfer-time-local-nodes.json",
+          "sourceBlob": "085f5093feb64a2d51bfea8e25e5090875b78345",
+          "sourceSha256": "60e0cc82268facc9af3523847a707e1fda5ed7142060f4bf02a648db18e839f8"
+        },
+        {
+          "sourceUrl": "https://github.com/130U/RESEARCH-Certified-Joint-Pricing-Errors-in-Rough-Heston/blob/038db24a3aadf9600edef385dfd7508e612d53c8/audit-experiments/portfolio-budget-counts.json",
+          "sourceBlob": "c54490b525090394fec3773dc497a5cc6ff463a0",
+          "sourceSha256": "8655215cef79ab6995f4472bd64fcd2e21b6daf5824d30d4b27c819520cfaf20"
+        }
+      ],
+      "figureDataSha256": "790a793fcad7c3def3f3f5ae97a81208291977d7feec44d9d166a5f49e2e2c22"
+    }
+  ]
+}
