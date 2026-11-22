@@ -40,6 +40,8 @@ const FIGURE_FIT_SHARE = 0.9;
 // than the window is set smaller, to no less than nine tenths of the reading size.
 const MIN_GAP_SHARE = 0.5;
 const MIN_TABLE_ZOOM = 0.9;
+// Where a table set whole still reaches past its room, its size steps down by this share until it fits.
+const WHOLE_STEP = 0.97;
 // Room left inside a fitted box, against subpixel overflow. A table that reaches
 // no more than one layout unit (1/64px) past its room does not scroll, so it fits.
 const FIT_SLACK = 0.5;
@@ -151,6 +153,85 @@ function foldHalves(table: HTMLTableElement, fold: boolean) {
       row.remove();
     });
   }
+}
+
+type HeadingPiece = { joined: boolean; range?: Range; formula?: HTMLElement };
+
+/** The pieces of a heading in reading order, each a run of text or a formula, and whether it joins
+ * the piece before it with no break between them. */
+function headingPieces(cell: HTMLElement) {
+  const pieces: HeadingPiece[] = [];
+  let joined = false;
+  const read = (parent: Node) => {
+    for (const node of parent.childNodes) {
+      if (node instanceof Text) {
+        const wraps = !/nowrap|^pre$/u.test(getComputedStyle(node.parentElement!).whiteSpace);
+        for (const run of node.data.matchAll(/\s+|\S+/gu)) {
+          if (/^\s/u.test(run[0])) {
+            if (wraps) joined = false;
+            continue;
+          }
+          const range = document.createRange();
+          range.setStart(node, run.index);
+          range.setEnd(node, run.index + run[0].length);
+          pieces.push({ joined, range });
+          joined = true;
+        }
+      } else if (node instanceof Element) {
+        if (node.matches("br")) joined = false;
+        else if (node.matches("[data-research-formula]")) {
+          pieces.push({ joined, formula: node as HTMLElement });
+          joined = true;
+        } else if (!node.matches("math, svg, [hidden]")) read(node);
+      }
+    }
+  };
+  read(cell);
+  return pieces;
+}
+
+/**
+ * A heading takes at most two lines. The build sets each heading's floor from
+ * estimated advances (headingFloor); each is measured again as drawn, set on
+ * one line, since a renderer that draws small type at whole-pixel advances sets
+ * it wider than estimated. The floor is the longest line of its most even break
+ * into two, in ems of the heading's size, so it follows the type as it scales.
+ */
+function floorHeadings(table: HTMLTableElement) {
+  const cells = [...table.querySelectorAll<HTMLElement>("thead th")].filter((cell) => !cell.hidden && cell.style.getPropertyValue("--heading-floor"));
+  // Where each heading may break is read before the headings are set on one line.
+  const pieces = cells.map(headingPieces);
+  cells.forEach((cell) => cell.style.setProperty("white-space", "nowrap"));
+  const floors = cells.map((cell, index) => {
+    const words: Array<{ left: number; right: number }> = [];
+    for (const { joined, range, formula } of pieces[index]) {
+      let left: number;
+      let right: number;
+      if (formula) {
+        // A formula's drawing carries a transparent gutter either side that its negative margins take back.
+        const box = formula.getBoundingClientRect();
+        const gutter = -parseFloat(getComputedStyle(formula).marginLeft) || 0;
+        [left, right] = [box.left + gutter, box.right - gutter];
+      } else {
+        const boxes = [...range!.getClientRects()].filter((box) => box.width > 0);
+        if (!boxes.length) continue;
+        [left, right] = [Math.min(...boxes.map((box) => box.left)), Math.max(...boxes.map((box) => box.right))];
+      }
+      const last = words.at(-1);
+      if (joined && last) [last.left, last.right] = [Math.min(last.left, left), Math.max(last.right, right)];
+      else words.push({ left, right });
+    }
+    if (!words.length) return undefined;
+    const line = (from: number, to: number) => words[to - 1].right - words[from].left;
+    let best = line(0, words.length);
+    for (let split = 1; split < words.length; split += 1) best = Math.min(best, Math.max(line(0, split), line(split, words.length)));
+    return Math.ceil(((best + FIT_SLACK) / parseFloat(getComputedStyle(cell).fontSize)) * 1000) / 1000;
+  });
+  cells.forEach((cell, index) => {
+    cell.style.removeProperty("white-space");
+    if (floors[index] === undefined) cell.style.removeProperty("--heading-drawn");
+    else cell.style.setProperty("--heading-drawn", `${floors[index]}em`);
+  });
 }
 
 /**
@@ -336,7 +417,9 @@ export function ZoomStage() {
         else region.removeAttribute("data-wrap");
         unpin(region);
         clearSentenceWidth(region);
+        if (headings) floorHeadings(table);
       };
+      const fits = () => overshoot(region, table) <= LAYOUT_UNIT;
       // The room the table has inside its region, a scrollbar aside.
       const regionRoom = () => region.getBoundingClientRect().width - (region.offsetWidth - region.clientWidth);
 
@@ -361,11 +444,31 @@ export function ZoomStage() {
         // type by the room over the table's width, and the frame's fixed insets make the next step smaller.
         let whole = MIN_TABLE_ZOOM;
         place("whole", whole, roomWidth, true, true);
-        for (let attempt = 0; attempt < 8 && overshoot(region, table) > LAYOUT_UNIT; attempt += 1) {
+        for (let attempt = 0; attempt < 8 && !fits(); attempt += 1) {
           whole = Math.floor(((whole * (regionRoom() - FIT_SLACK)) / table.getBoundingClientRect().width) * 1000) / 1000;
           place("whole", whole, roomWidth, true, true);
         }
-        if (overshoot(region, table) <= LAYOUT_UNIT) return;
+        // Where type is drawn at whole-pixel advances, a table narrows in steps rather than with its type,
+        // and those steps can stop a pixel short: the size steps down until the table fits, then back up,
+        // halving the interval, to the largest size found that fits.
+        if (!fits()) {
+          let [low, high] = [whole, whole];
+          for (let attempt = 0; attempt < 8 && !fits(); attempt += 1) {
+            high = low;
+            low = Math.floor(low * WHOLE_STEP * 1000) / 1000;
+            place("whole", low, roomWidth, true, true);
+          }
+          if (fits()) {
+            for (let attempt = 0; attempt < 6 && high - low > 0.002; attempt += 1) {
+              const middle = Math.floor(((low + high) / 2) * 1000) / 1000;
+              place("whole", middle, roomWidth, true, true);
+              if (fits()) low = middle;
+              else high = middle;
+            }
+            place("whole", low, roomWidth, true, true);
+          }
+        }
+        if (fits()) return;
         // Only a table that no size sets whole scrolls, at the reading size, its row labels in view.
         place("wrap", 1, roomWidth, false, true);
         if (table.hasAttribute("data-sentence-columns")) region.dataset.wrap = "scroll";
@@ -373,16 +476,23 @@ export function ZoomStage() {
       };
       // A table that reaches a little past the bottom of the window is set smaller, to no less than nine
       // tenths of the reading size, or of the size that sets it whole where that is smaller.
+      // A table set whole stays whole: a smaller size that would widen it, as whole-pixel advances can, is
+      // not taken.
       const settleHeight = () => {
         const zoom = Number(panel.style.getPropertyValue("--zoom"));
+        const whole = fits();
         const floor = zoom < MIN_TABLE_ZOOM ? zoom * MIN_TABLE_ZOOM : MIN_TABLE_ZOOM;
+        const size = (value: number) => {
+          panel.style.setProperty("--zoom", String(value));
+          if (region.hasAttribute("data-headings-wrap")) floorHeadings(table);
+        };
         let next = zoom;
         for (let attempt = 0; attempt < 4 && region.scrollHeight > region.clientHeight; attempt += 1) {
           next = Math.floor(((next * (region.clientHeight - FIT_SLACK)) / region.scrollHeight) * 1000) / 1000;
           if (next < floor) break;
-          panel.style.setProperty("--zoom", String(next));
+          size(next);
         }
-        if (region.scrollHeight > region.clientHeight) panel.style.setProperty("--zoom", String(zoom));
+        if (next !== zoom && (region.scrollHeight > region.clientHeight || (whole && !fits()))) size(zoom);
       };
       settle();
       settleHeight();
@@ -564,6 +674,7 @@ export function ZoomStage() {
 
     const settleFrame = ({ frame, region, table, control }: (typeof frames)[number]) => {
       // A table a little wider than its column closes up to fit, then wraps its phrases.
+      floorHeadings(table);
       layTable(region, table, parseFloat(getComputedStyle(root).fontSize));
       pinRowLabels(region, table);
       control.toggleAttribute("data-idle", !tableGains(frame, region, table));

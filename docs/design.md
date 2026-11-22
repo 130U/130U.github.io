@@ -732,7 +732,9 @@ stands on one line at every width, in the article and on the stage. Only a colum
 sentences wraps, at a 16rem minimum: a column whose cells are clauses, as a query
 written as an instruction, a step of a design or a finding ("Platform command held; the
 American and commercial payloads are separate"), which its page names as such beside the
-table. A heading takes at most two lines. In a table with a column of sentences, the
+table. A heading takes at most two lines: its column is at least as wide as the longer line
+of its most even break into two, estimated when the page is built and measured again as the
+type is drawn, at every size the table is set. In a table with a column of sentences, the
 columns of values keep their content's width and leave the rest of the row to the text.
 A column of row labels that holds numbers aligns right in tabular figures, as every
 column of values does, and an inline formula in a cell stands on the cell's baseline, as
@@ -818,7 +820,9 @@ holds it side by side; then it wraps its columns of sentences across the full wi
 18px and 16px and at as little as nine tenths of the reading size. A table too wide even
 then is set whole at the size that fits the window's width, its columns closer and every
 row still on one line, as a figure is set whole: on a phone the reader sees the whole
-table at once and may enlarge it with the browser's own zoom. Nothing on the stage wraps
+table at once and may enlarge it with the browser's own zoom. Where type is drawn at
+whole-pixel advances, a table narrows in steps rather than with its type; the stage then
+steps the size down until the table fits and back up to the largest size that does. Nothing on the stage wraps
 a row: values, intervals and labels hold one line there as in the article. The magnifier, the blurred page, and Escape close the
 stage and return focus to the table's own control.
 

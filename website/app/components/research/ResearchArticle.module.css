@@ -270,7 +270,7 @@
 
 .table thead .cell {
   box-sizing: content-box;
-  min-width: var(--heading-floor, 0em);
+  min-width: max(var(--heading-floor, 0em), var(--heading-drawn, 0em));
   padding-top: 0.75rem;
   padding-bottom: 0.75rem;
   vertical-align: bottom;
@@ -586,7 +586,7 @@ td.numeric {
 }
 
 .tableFrame[data-zoomed] .tableRegion[data-headings-wrap] thead .cell {
-  min-width: var(--heading-floor, 0em);
+  min-width: max(var(--heading-floor, 0em), var(--heading-drawn, 0em));
   white-space: normal;
 }
 
