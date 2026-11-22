@@ -652,31 +652,76 @@ function inspectLabels(figure) {
   return issues;
 }
 
-// Manuscript tables and displayed equations: a table heading takes at most two
-// lines and stays clear of the table's zoom control at either end of its scroll;
-// every equation on a page starts on one axis, whatever its length; and every
-// equation number stands at its column's right edge, clear of the expression
-// once the equation is in full view.
-function inspectManuscript() {
+// Every table, in the article or (with `scope`, the open stage) zoomed: every
+// row holds one line, so every cell that is not in a column of sentences (a
+// value, an interval, a number, a row label, a name) takes one line, and a
+// heading takes at most two. In the article, a table wider than its column
+// scrolls and carries a magnifier; on the stage it is set whole.
+function inspectTables(scope) {
   const issues = [];
+  const root = scope ? document.querySelector(scope) : document;
+  // The lines an element's text and drawn formulas take: boxes whose middles fall within one another's
+  // height share a line.
   const lineCount = element => {
-    const tops = [];
+    const boxes = [];
     const walker = document.createTreeWalker(element, NodeFilter.SHOW_TEXT);
     for (let node = walker.nextNode(); node; node = walker.nextNode()) {
-      if (!node.data.trim() || node.parentElement.closest("math, svg")) continue;
+      if (!node.data.trim() || node.parentElement.closest("math, svg, [hidden]")) continue;
       const range = document.createRange();
       range.selectNodeContents(node);
-      for (const box of range.getClientRects()) {
-        if (box.width > 0 && !tops.some(top => Math.abs(top - box.top) < box.height / 2)) tops.push(box.top);
+      boxes.push(...[...range.getClientRects()].filter(box => box.width > 0.5));
+    }
+    for (const svg of element.querySelectorAll("svg[data-research-svg]")) {
+      const box = svg.getBoundingClientRect();
+      if (box.width > 0.5 && !svg.closest("[hidden]")) boxes.push(box);
+    }
+    const lines = [];
+    for (const box of boxes.sort((a, b) => a.top - b.top)) {
+      const middle = (box.top + box.bottom) / 2;
+      const line = lines.find(entry => (middle >= entry.top - 0.5 && middle <= entry.bottom + 0.5) || ((entry.top + entry.bottom) / 2 >= box.top && (entry.top + entry.bottom) / 2 <= box.bottom));
+      if (line) {
+        line.top = Math.min(line.top, box.top);
+        line.bottom = Math.max(line.bottom, box.bottom);
+      } else {
+        lines.push({ top: box.top, bottom: box.bottom });
       }
     }
-    return tops.length;
+    return lines.length;
   };
-  // A heading takes at most two lines, or three over a column of short values.
-  for (const heading of document.querySelectorAll("[data-research-table] thead th")) {
-    const lines = lineCount(heading);
-    if (lines > (heading.hasAttribute("data-stack") ? 3 : 2)) issues.push({ kind: "table-heading-over-two-lines", heading: heading.textContent.trim(), lines });
+  for (const table of root.querySelectorAll("[data-research-table]")) {
+    const frame = table.closest("[data-table-frame], [data-zoomed]");
+    const where = frame.querySelector("[data-table-title]")?.textContent.trim().slice(0, 60) ?? table.closest("[data-math-table]")?.id ?? "untitled";
+    for (const cell of table.querySelectorAll("tbody td")) {
+      if (cell.hasAttribute("data-sentence") || !cell.offsetWidth) continue;
+      const lines = lineCount(cell);
+      if (lines > 1) issues.push({ kind: "table-cell-over-one-line", table: where, cell: cell.textContent.trim().slice(0, 40), lines, stage: Boolean(scope) });
+    }
+    for (const heading of table.querySelectorAll("thead th")) {
+      if (heading.hidden) continue;
+      const lines = lineCount(heading);
+      if (lines > 2) issues.push({ kind: "table-heading-over-two-lines", table: where, heading: heading.textContent.trim().slice(0, 40), lines, stage: Boolean(scope) });
+    }
+    const region = table.closest('[role="region"]');
+    // The blank run past the last column (--snap-end) that makes the scrolled end a column's start is left out.
+    const over = region.scrollWidth - (parseFloat(region.style.getPropertyValue("--snap-end")) || 0) - region.clientWidth;
+    if (scope) {
+      if (over > 1) issues.push({ kind: "table-not-whole-on-stage", table: where, over });
+      continue;
+    }
+    const control = frame.querySelector("[data-table-zoom]");
+    if (over > 1 && !/auto|scroll/u.test(getComputedStyle(region).overflowX)) issues.push({ kind: "table-overflows-without-scrolling", table: where, over });
+    if (over > 1 && (!control || control.hidden || control.hasAttribute("data-idle"))) issues.push({ kind: "table-scrolls-without-magnifier", table: where, over });
   }
+  return issues;
+}
+
+// Manuscript tables and displayed equations: a table heading stays clear of the
+// table's zoom control at either end of its scroll; every equation on a page
+// starts on one axis, whatever its length; and every equation number stands at
+// its column's right edge, clear of the expression once the equation is in
+// full view.
+function inspectManuscript() {
+  const issues = [];
   // A table keeps its row labels in view while it scrolls when they take no more than half its
   // room, or when the room beside them, short of the 40px fading edge, holds a column of values
   // whole; and only when that room holds its widest column too. A table that keeps its labels in
@@ -764,11 +809,9 @@ function inspectManuscript() {
   // A column of values aligns on the decimal point: the point of each value's first number, or the
   // end of its integer part where it has no point, stands within half a pixel of the others', bold
   // values among regular ones included; a row whose cell is words or a dash stands outside the
-  // column's alignment, and the values around it align all the same. An interval holds one line,
-  // or, broken after its comma where its table would otherwise scroll, two, the upper ends' points
-  // in line too; the pads that align a column draw nothing; every value of the page, a table of
-  // mathematics' included, stands in one face; and a row that presents a display shows the
-  // display's number beside its label.
+  // column's alignment, and the values around it align all the same. The pads that align a column
+  // draw nothing; every value of the page, a table of mathematics' included, stands in one face;
+  // and a row that presents a display shows the display's number beside its label.
   const charBox = (root, index) => {
     const walker = document.createTreeWalker(root, NodeFilter.SHOW_TEXT);
     for (let node = walker.nextNode(); node; node = walker.nextNode()) {
@@ -793,31 +836,15 @@ function inspectManuscript() {
     return charBox(value, index - 1)?.right ?? null;
   };
   for (const table of document.querySelectorAll("[data-research-table]")) {
-    const region = table.closest('[role="region"]');
-    const broken = region?.hasAttribute("data-break");
     const body = [...table.tBodies[0].rows];
     const columns = Math.max(...body.map(row => row.cells.length));
     for (let column = 0; column < columns; column += 1) {
       const values = body.map(row => row.cells[column]?.querySelector("[data-table-value]")).filter(value => value && value.getClientRects().length);
       if (values.length < 2) continue;
-      const firsts = [];
-      const seconds = [];
-      for (const value of values) {
-        const text = value.textContent;
-        firsts.push({ x: pointOf(value, text, 0), bold: Boolean(value.closest("strong")) });
-        const separator = value.querySelector("[data-field-break]");
-        if (!separator) continue;
-        const lines = new Set([...value.getClientRects()].map(rect => Math.round(rect.top))).size;
-        const expected = broken ? 2 : 1;
-        if (lines !== expected) issues.push({ kind: broken ? "table-interval-not-broken" : "table-interval-broken", value: text, lines });
-        if (broken) seconds.push({ x: pointOf(value, text, text.indexOf(separator.textContent, text.indexOf(",")) + 1), bold: Boolean(value.closest("strong")) });
-      }
-      for (const [kind, points] of [["table-points-misaligned", firsts], ["table-upper-points-misaligned", seconds]]) {
-        const measured = points.filter(point => point.x !== null);
-        if (measured.length < 2) continue;
-        const spread = Math.max(...measured.map(point => point.x)) - Math.min(...measured.map(point => point.x));
-        if (spread > 0.5) issues.push({ kind, table: table.closest("[data-table-frame]")?.querySelector("[data-table-title]")?.textContent.trim().slice(0, 60), column, spread: +spread.toFixed(2) });
-      }
+      const points = values.map(value => pointOf(value, value.textContent, 0)).filter(point => point !== null);
+      if (points.length < 2) continue;
+      const spread = Math.max(...points) - Math.min(...points);
+      if (spread > 0.5) issues.push({ kind: "table-points-misaligned", table: table.closest("[data-table-frame]")?.querySelector("[data-table-title]")?.textContent.trim().slice(0, 60), column, spread: +spread.toFixed(2) });
     }
     for (const pad of table.querySelectorAll("[data-table-pad]")) {
       if (getComputedStyle(pad, "::before").visibility !== "hidden" || pad.textContent) issues.push({ kind: "table-pad-shows", pad: pad.dataset.tablePad });
@@ -1044,9 +1071,7 @@ function inspectManuscript() {
       if (!title || title.parentElement !== frame || Math.abs(box.left - start) > 1 || box.bottom > region.getBoundingClientRect().top) issues.push({ kind: "math-table-number-not-at-the-frame-top-left", number: number.textContent, offset: title ? +(box.left - start).toFixed(2) : null });
       if (numberFace && getComputedStyle(number).fontFamily !== numberFace) issues.push({ kind: "math-table-number-off-the-number-face", number: number.textContent, face: getComputedStyle(number).fontFamily });
     }
-    // A table of mathematics fits the column on a tablet and a desktop; a column whose every cell is
-    // a number stands in the reading face as a research table's values do.
-    if (window.innerWidth >= 768 && region.scrollWidth > region.clientWidth + 1) issues.push({ kind: "math-table-scrolls", table: where, overflow: region.scrollWidth - region.clientWidth });
+    // A column whose every cell is a number stands in the reading face as a research table's values do.
     for (const cell of table.querySelectorAll('td[data-cell="value"]')) {
       if (!cell.querySelector("[data-table-value]") || cell.querySelector("svg")) issues.push({ kind: "math-table-number-drawn-as-mathematics", table: where });
     }
@@ -1902,6 +1927,7 @@ try {
           await page.waitForFunction(() => !document.querySelector("[data-figure-zoom][hidden], [data-table-zoom][hidden]"));
           await page.evaluate(() => new Promise(resolve => requestAnimationFrame(() => requestAnimationFrame(() => setTimeout(resolve, 100)))));
           const issues = await page.evaluate(inspectManuscript);
+          issues.push(...await page.evaluate(inspectTables, null));
           // No display row holds two formulas: each row a stacked display draws, and every other
           // display whole, is one formula by the rule that sets formulas side by side as rows.
           if (width === WIDTHS[0]) {
@@ -1912,6 +1938,40 @@ try {
             }
           }
           manuscripts.push({ route, width, issues });
+        }
+      } finally { await context.close(); }
+    }
+    // Every table holds one line per row at the large phone and tablet widths between the check
+    // widths too; and at a phone's, a tablet's and a desktop's width the stage sets every table
+    // whose magnifier shows whole, one line per row.
+    const tableRoutes = [];
+    for (const route of manuscriptRoutes) {
+      if (/data-research-table/u.test(await readFile(path.join(OUT, route, "index.html"), "utf8"))) tableRoutes.push(route);
+    }
+    assert.ok(tableRoutes.length >= 9, `Expected at least 9 pages with tables; found ${tableRoutes.length}.`);
+    for (const width of [390, 430, 820, 1440]) {
+      const context = await browser.newContext({ viewport: { width, height: 1100 }, reducedMotion: "reduce", serviceWorkers: "block" });
+      await serveExport(context, missing);
+      try {
+        const page = await context.newPage();
+        for (const route of tableRoutes) {
+          await page.goto(ORIGIN + route, { waitUntil: "networkidle" });
+          await page.evaluate(() => document.fonts.ready);
+          await page.waitForFunction(() => !document.querySelector("[data-table-zoom][hidden]"));
+          await page.evaluate(() => new Promise(resolve => requestAnimationFrame(() => requestAnimationFrame(() => setTimeout(resolve, 100)))));
+          const issues = [430, 820].includes(width) ? await page.evaluate(inspectTables, null) : [];
+          if ([390, 820, 1440].includes(width)) {
+            const controls = page.locator("[data-table-zoom]:not([data-idle])");
+            for (let index = 0; index < await controls.count(); index += 1) {
+              await controls.nth(index).click();
+              await page.waitForSelector("dialog[open] [data-research-table]");
+              await page.evaluate(() => new Promise(resolve => requestAnimationFrame(() => requestAnimationFrame(resolve))));
+              issues.push(...await page.evaluate(inspectTables, "dialog[open]"));
+              await page.keyboard.press("Escape");
+              await page.waitForFunction(() => !document.querySelector("dialog[open]"));
+            }
+          }
+          manuscripts.push({ route, width, tables: true, issues });
         }
       } finally { await context.close(); }
     }

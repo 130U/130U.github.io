@@ -11,8 +11,9 @@ import styles from "./ResearchMath.module.css";
  * A display that is one array, set as a research table: the frame, its title,
  * the header band over a firm rule, rows on hairlines, row labels left and
  * columns of numbers right, the hovered row and column tinted, the magnifier and
- * the stage, and row labels kept in view while it scrolls (ZoomStage). Each cell
- * is drawn by the math pipeline at the table's size, or set as text in its face;
+ * the stage, and row labels kept in view while it scrolls (ZoomStage); every
+ * cell holds one line. Each cell is drawn by the math pipeline at the table's
+ * size, or set as text in its face;
  * a column whose every cell writes only numbers is a column of values, set as a
  * research table sets its values (TableValue). A numbered table is identified
  * by its number at the frame's top-left, in the title's place, as a manuscript
@@ -34,15 +35,10 @@ export function ResearchMathTable({ table, title, heads, id, attributes }: {
     const entry = row![column];
     return entry?.kind === "math" ? entry.tex : "";
   })) : undefined));
-  const breaks = columns.some((column) => column?.values.some((value) => value?.interval));
-  // Row labels that are words may wrap, as a research table's do, where the table would otherwise scroll.
-  const label = body.every((row) => row![0]?.kind === "text") ? "phrase" : undefined;
   const cell = (entry: ResearchTableCell | null, column: number, row?: number) => {
     const Cell = row === undefined ? "th" : "td";
     const { align, numeric } = table.columns[column];
     const value = row === undefined ? undefined : columns[column]?.values[row];
-    // A column of intervals, broken after their commas, aligns from its start, its head over that start.
-    const interval = row === undefined ? columns[column]?.values.some((entry) => entry?.interval) : value?.interval;
     return (
       <Cell
         key={column}
@@ -50,7 +46,6 @@ export function ResearchMathTable({ table, title, heads, id, attributes }: {
         className={[tableStyles.cell, numeric && tableStyles.numeric, columns[column]?.start && tableStyles.alignStart, styles.mathCell].filter(Boolean).join(" ")}
         data-align={align}
         data-cell={value ? "value" : entry?.kind}
-        data-interval={interval ? "" : undefined}
       >
         {value && <TableValue value={value} />}
         {!value && entry?.kind === "text" && entry.text}
@@ -76,7 +71,7 @@ export function ResearchMathTable({ table, title, heads, id, attributes }: {
         )}
         <button type="button" className={`${stageStyles.control} ${tableStyles.zoom}`} data-table-zoom aria-label="Zoom in" aria-haspopup="dialog" hidden><ZoomGlyph /></button>
         <div tabIndex={0} role="region" aria-label="Table of mathematics" className={tableStyles.tableRegion}>
-          <table className={tableStyles.table} data-research-table="" data-breaks={breaks ? "" : undefined} data-label={label} aria-hidden="true" style={{ "--math-gutter": `${RESEARCH_MATH_GUTTER_EM}em` } as CSSProperties}>
+          <table className={tableStyles.table} data-research-table="" aria-hidden="true" style={{ "--math-gutter": `${RESEARCH_MATH_GUTTER_EM}em` } as CSSProperties}>
             {head && <thead><tr>{head.map((entry, column) => cell(entry, column))}</tr></thead>}
             <tbody>{body.map((entries, index) => <tr key={index}>{entries!.map((entry, column) => cell(entry, column, index))}</tr>)}</tbody>
           </table>

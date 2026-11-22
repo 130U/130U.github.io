@@ -7,7 +7,7 @@ import styles from "./ResearchArticle.module.css";
 /** Invisible generated text that pads a value to its column's alignment; it is neither copied nor read. */
 function padText(pad: Pad, key: string) {
   if (!pad.text && !pad.gaps) return null;
-  return <span key={key} className={styles.pad} data-table-pad={pad.text} data-when={pad.when} data-weight={pad.bold === undefined ? undefined : pad.bold ? "bold" : "regular"} style={pad.gaps ? { "--pad-gaps": pad.gaps } as CSSProperties : undefined} />;
+  return <span key={key} className={styles.pad} data-table-pad={pad.text} data-weight={pad.bold === undefined ? undefined : pad.bold ? "bold" : "regular"} style={pad.gaps ? { "--pad-gaps": pad.gaps } as CSSProperties : undefined} />;
 }
 
 /** The marks and digits of a value, adjacent text joined into one run, so the page's text is the written number. */
@@ -19,7 +19,7 @@ function parts(value: AlignedNumber) {
     else list.push(part);
   };
   value.fields.forEach((field, index) => {
-    add(value.interval && index === 1 ? <span key={`break-${index}`} className={styles.fieldBreak} data-field-break="">{field.separator}</span> : field.separator);
+    add(field.separator);
     add(padText(field.before, `before-${index}`));
     const lead = `${field.open}${field.sign}${field.integer}`;
     // In a column of both weights, or of signs of different widths, the lead stands at the end of a box as wide
@@ -37,8 +37,7 @@ function parts(value: AlignedNumber) {
 /**
  * A value in a research table, in tabular figures with its digits after the
  * point grouped in threes by spacing alone, padded to its column's decimal
- * point. An interval may break after its comma, where its table would
- * otherwise scroll. A value the manuscript writes as a formula keeps that
+ * point, on one line. A value the manuscript writes as a formula keeps that
  * formula's MathML and TeX for assistive technology and copying, as a number in
  * prose does; `display` is the TeX of a display the value's row presents.
  */

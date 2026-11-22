@@ -87,10 +87,13 @@ test("all research tables retain native table semantics inside named keyboard-ac
   }
 });
 
-test("a table of values never wraps its rows, and a table of sentences wraps only those columns", async () => {
-  const html = await readFile(new URL("../out/certified-joint-pricing-errors-in-rough-heston/index.html", import.meta.url), "utf8");
-  const tables = [...html.matchAll(/<table\b[\s\S]*?<\/table>/gu)].map(([table]) => table);
+test("a table of values and names never wraps its rows, and a table of sentences wraps only those columns", async () => {
   const sentenceCells = (table) => [...table.matchAll(/<t[dh]\b[^>]*class="([^"]*)"/gu)].filter(([, classes]) => /sentence/u.test(classes)).length;
-  assert.equal(sentenceCells(tables[0]), 0, "Quotes hold only values.");
-  assert.ok(sentenceCells(tables[1]) > 0, "The descriptions of the certificates are set in sentences.");
+  const rough = await readFile(new URL("../out/certified-joint-pricing-errors-in-rough-heston/index.html", import.meta.url), "utf8");
+  const roughTables = [...rough.matchAll(/<table\b[\s\S]*?<\/table>/gu)].map(([table]) => table);
+  assert.equal(sentenceCells(roughTables[0]), 0, "Quotes hold only values.");
+  assert.equal(sentenceCells(roughTables[1]), 0, "A certificate's name (H3: six months, reference through 128, upper band global) is a name, on one line.");
+  const staged = await readFile(new URL("../out/experience/financial-task-design-and-synthetic-data-engineering/index.html", import.meta.url), "utf8");
+  const design = [...staged.matchAll(/<table\b[\s\S]*?<\/table>/gu)].map(([table]) => table).find((table) => table.includes("Comparison stage"));
+  assert.ok(sentenceCells(design) > 0, "The stages, methods and measures of the staged design are sentences.");
 });

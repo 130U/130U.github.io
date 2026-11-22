@@ -13,7 +13,8 @@ import { mathTableHeads, mathTableTitle } from "../../lib/content/math-tables";
 import { buildArticleHeadingMap, buildReferenceTargets, formatArticleHeadings, linkArticleSectionReferences, type ArticleInline } from "../../lib/content/article-headings";
 import { emphasisFor, manuscriptFigureFor, placeFigures } from "../../lib/content/article-figures";
 import { placePassageTables, type PlacedPassageTable } from "../../lib/content/passage-tables";
-import { alignColumn, isInterval, parseTableNumber, writtenNumber, type AlignedNumber } from "../../lib/content/research-number";
+import { alignColumn, parseTableNumber, writtenNumber, type AlignedNumber } from "../../lib/content/research-number";
+import { sentenceColumnsFor } from "../../lib/content/table-sentences";
 import { TableValue } from "./TableValue";
 import { argumentUnit, closesProof } from "../../lib/content/argument-units";
 import { ArticleFigure, FigureCaption, FigureController, ManuscriptFigure } from "../figures";
@@ -84,8 +85,8 @@ export function numericColumns(rows: ResearchCell[][]) {
     && body.some((row) => row[column].source.trim() !== "—"));
 }
 
-// Values and labels hold one line, so a row reads as one line; a column wraps
-// only when its widest cell is a sentence. Widths are estimated in ems.
+// Every value, interval, number and label holds one line, so a row reads as one
+// line; only a column of sentences wraps. Widths are estimated in ems.
 const AVERAGE_GLYPH_EM = 0.5;
 const SENTENCE_EM = 26;
 
@@ -107,49 +108,20 @@ function contentWidth(inlines: ResearchInline[]): number {
   return Math.max(widest, line);
 }
 
-export function sentenceColumns(rows: ResearchCell[][]) {
-  const body = rows.slice(1);
-  return rows[0].map((_, column) => body.some((row) => contentWidth(row[column].inlines) > SENTENCE_EM));
-}
-
-/** The words of a cell's text, formulas and numbers aside. */
-function cellWords(inlines: ResearchInline[]): string[] {
-  return inlines.flatMap((inline) => inline.type === "text" || inline.type === "code"
-    ? inline.text.match(/\p{L}{2,}/gu) ?? []
-    : inline.type === "math" || inline.type === "line-break" ? [] : cellWords(inline.inlines));
-}
-
 /**
- * Columns of phrases: a column that holds values neither as numbers nor as
- * sentences, but some of whose cells read as two words or more ("Crude oil
- * call, 1 month ahead", "75.0% (accepts 1,800 flawed solutions)"). Such a
- * column holds one line while its table fits, and wraps when the table would
- * otherwise scroll (ZoomStage).
+ * The columns of sentences of a table: the columns its page names as such
+ * (table-sentences.ts), each of which holds a sentence too long for a line of
+ * a narrow column. Every other column, row labels and long names included,
+ * holds one line.
  */
-export function phraseColumns(rows: ResearchCell[][]) {
-  const numeric = numericColumns(rows);
-  const sentences = sentenceColumns(rows);
+export function sentenceColumns(rows: ResearchCell[][], declared: readonly number[] = []) {
   const body = rows.slice(1);
-  return rows[0].map((_, column) => !numeric[column] && !sentences[column] && body.some((row) => cellWords(row[column].inlines).length >= 2));
+  return rows[0].map((_, column) => {
+    if (!declared.includes(column)) return false;
+    if (!body.some((row) => contentWidth(row[column].inlines) > SENTENCE_EM)) throw new Error(`A column of sentences holds a sentence: column ${column} of the table headed "${rows[0][0].source}" holds none.`);
+    return true;
+  });
 }
-
-// A wrapping phrase keeps lines of a few words: its column folds to about half
-// its widest phrase, to no less than 6em and no more than 10em, and never wider
-// than the phrase itself.
-const WRAP_FLOOR_MIN_EM = 6;
-const WRAP_FLOOR_MAX_EM = 10;
-
-function wrapFloor(rows: ResearchCell[][], column: number) {
-  const widest = Math.max(...rows.slice(1).map((row) => contentWidth(row[column].inlines)));
-  return Math.min(widest, Math.max(widest / 2 + 1, WRAP_FLOOR_MIN_EM), WRAP_FLOOR_MAX_EM);
-}
-
-/**
- * A heading over a column of values may take three lines, as a printed table
- * stacks a long head over a narrow column of figures; every other heading takes
- * at most two.
- */
-export const stackedHeadings = numericColumns;
 
 /** A table set as two halves side by side under one heading repeated (Strike, Bid, Ask, Width,
  * Strike, Bid, Ask, Width): the number of columns in a half, or 0. */
@@ -161,32 +133,22 @@ export function tableHalves(rows: ResearchCell[][]) {
 
 /**
  * The classes and properties every cell of a research or legal table takes, from
- * its rows: numeric columns align right in tabular figures, a column of
- * sentences wraps, a column of phrases may wrap, and a heading over values may
- * stack on three lines. In a table with a column of sentences, its phrases
- * wrap too, and the numeric columns keep their content's width, leaving the
- * rest of the row to the text. The second of two halves set side by side stands
- * a second em from the first, and in less room follows it (ZoomStage).
+ * its rows and the columns of sentences its page names: numeric columns align
+ * right in tabular figures, a column of sentences wraps, and every other cell
+ * holds one line; a heading takes at most two. In a table with a column of
+ * sentences, the numeric columns keep their content's width, leaving the rest
+ * of the row to the text. The second of two halves set side by side stands a
+ * second em from the first, and in less room follows it (ZoomStage).
  */
-export function tableLayout(rows: ResearchCell[][]) {
+export function tableLayout(rows: ResearchCell[][], declared: readonly number[] = []) {
   const numeric = numericColumns(rows);
-  const sentences = sentenceColumns(rows);
-  const phrases = phraseColumns(rows);
-  const stacked = stackedHeadings(rows);
+  const sentences = sentenceColumns(rows, declared);
   const halves = tableHalves(rows);
-  const floors = rows[0].map((_, column) => phrases[column] ? wrapFloor(rows, column) : 0);
   // Sentence columns beyond the row labels share the room left of a label column.
   const shared = sentences.filter((sentence, column) => sentence && column > 0).length;
-  const intervals = rows.slice(1).some((row) => row.some((cell) => {
-    const value = parseTableNumber(cell.source);
-    return value !== undefined && isInterval(value);
-  }));
   return {
     table: {
       "data-hug": sentences.some(Boolean) ? "" : undefined,
-      "data-wraps": phrases.some(Boolean) || shared >= 2 ? "" : undefined,
-      "data-breaks": intervals ? "" : undefined,
-      "data-label": sentences[0] ? "sentence" : phrases[0] ? "phrase" : undefined,
       "data-sentence-columns": shared >= 2 ? shared : undefined,
       "data-halves": halves || undefined,
       style: shared >= 2 ? { "--sentence-columns": shared } as CSSProperties : undefined,
@@ -194,21 +156,17 @@ export function tableLayout(rows: ResearchCell[][]) {
     cell(rowIndex: number, column: number) {
       const head = rowIndex === 0;
       return {
-        className: [styles.cell, numeric[column] && styles.numeric, sentences[column] && styles.sentence, phrases[column] && styles.phrase].filter(Boolean).join(" "),
-        style: {
-          ...(head ? headingFloor(rows[0][column], stacked[column] ? 3 : 2) : {}),
-          ...(phrases[column] && !head ? { "--wrap-floor": `${floors[column].toFixed(2)}em` } : {}),
-        } as CSSProperties,
-        "data-stack": head && stacked[column] ? "" : undefined,
+        className: [styles.cell, numeric[column] && styles.numeric, sentences[column] && styles.sentence].filter(Boolean).join(" "),
+        style: head ? headingFloor(rows[0][column]) : undefined,
+        "data-sentence": !head && sentences[column] ? "" : undefined,
         "data-half": halves && column === halves ? "" : undefined,
       };
     },
   };
 }
 
-// A heading may take two lines beside its values, or three over a column of
-// short values, never more: its column is at least as wide as the longest line
-// of its most even break into that many lines. Advances of the label face are
+// A heading takes at most two lines: its column is at least as wide as the
+// longest line of its most even break into two. Advances of the label face are
 // estimated by glyph class, in ems of the label size.
 const LABEL_SPACE_EM = 0.27;
 const LABEL_SLACK_EM = 0.25;
@@ -257,7 +215,7 @@ function headingWords(inlines: ResearchInline[]) {
   return words;
 }
 
-export function headingFloor(cell: ResearchCell, lines: 2 | 3 = 2) {
+export function headingFloor(cell: ResearchCell, lines = 2) {
   const words = headingWords(cell.inlines);
   const line = (from: number, to: number) => words.slice(from, to).reduce((sum, word) => sum + word, 0) + LABEL_SPACE_EM * Math.max(0, to - from - 1);
   // The narrowest width at which the words from `from` on fill at most `count` lines.
@@ -358,10 +316,8 @@ export function ResearchArticle({ project, active, returnPath, returnLabel, titl
     rowAttributes?: (row: number) => Record<string, unknown>;
     emphasis?: ReturnType<typeof emphasisFor>;
   }) {
-    const layout = tableLayout(rows);
+    const layout = tableLayout(rows, sentenceColumnsFor(project.slug, rows[0][0].source));
     const { values, start } = tableValues(rows);
-    // A column of intervals, broken after their commas, aligns from its start, its head over that start.
-    const intervals = rows[0].map((_, column) => values.some((row) => row[column]?.interval));
     const tableRows = rows.map((row, rowIndex) => (
       <tr key={rowIndex} {...rowAttributes?.(rowIndex)} data-emphasis={emphasis?.row !== undefined && rowIndex - 1 === emphasis.row ? "" : undefined}>{row.map((cell, cellIndex) => {
         const Cell = rowIndex === 0 ? "th" : "td";
@@ -374,7 +330,6 @@ export function ResearchArticle({ project, active, returnPath, returnLabel, titl
             scope={Cell === "th" ? "col" : undefined}
             {...cellLayout}
             className={start[cellIndex] ? `${cellLayout.className} ${styles.alignStart}` : cellLayout.className}
-            data-interval={value?.interval || (rowIndex === 0 && intervals[cellIndex]) ? "" : undefined}
             data-emphasis={emphasis?.column === cellIndex ? "" : undefined}
           >
             {value ? <TableValue value={value} display={cell.display?.tex} /> : <InlineContent inlines={link(cell.inlines, index)} />}

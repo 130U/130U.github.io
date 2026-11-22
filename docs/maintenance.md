@@ -211,11 +211,16 @@ as well), table column highlighting and the entrances of figures and table rows.
 research renderer frames every table and sets a directly preceding "**Table N.**"
 caption paragraph inside the frame as its title. `tableLayout` in `ResearchArticle.tsx`
 classes every cell of a research or legal table from its rows (values, sentences,
-phrases, stacked headings, two halves), so both renderers set tables alike; `ZoomStage`
-closes up, folds, wraps and pins each table to its room, fades the scrolling edge,
-shows a magnifier only where the stage shows more than the page, and opens the zoomed
-view of any table or figure on one stage per page, so a new table or figure needs no
-registration. `buildReferenceTargets` in
+two-line headings, two halves), so both renderers set tables alike. Every cell holds one
+line except in a column of sentences, and a column is one only where
+`app/lib/content/table-sentences.ts` names it, by page slug and the table's first header
+cell: name a new table's column there only when its cells are clauses, and the build
+fails if a named column holds no sentence. `ZoomStage` closes up and folds each table to
+its room and otherwise lets it scroll at its natural spacing, never wrapping a row, pins
+its labels, fades the scrolling edge, shows a magnifier only where the stage shows more
+than the page, sets a table on the stage whole (at a smaller size where the window is
+narrower than the table), and opens the zoomed view of any table or figure on one stage
+per page, so a new table or figure needs no other registration. `buildReferenceTargets` in
 `app/lib/content/article-headings.ts` anchors the numbered equations, statements, tables
 and figures of the Asian and Rough Heston manuscripts and links their references; a
 re-import that numbers a label twice fails the build.
@@ -388,14 +393,16 @@ visible copy. The static preview binds to `127.0.0.1:8123` by default and serves
 development security policy required by Next.js tooling. `test:browser` uses isolated
 Chromium contexts and the actual static export to check every figure and view at
 six viewport widths, plus enlarged-text and keyboard-scroll regressions, and holds every
-manuscript table heading to two lines (three over a column of values) clear of its
-table's zoom control, the row labels of words of a scrolling table in view where the room
-beside them holds its widest column, a table that keeps them in view snapping to its
-columns with no column's text half beneath them at rest or at its scrolled end, every
-column of values aligned on its decimal point, rows of words left out (an interval on one
-line, or on two where its table breaks it), every value in the reading face, a table of
-mathematics unscrolled from 768px up with its number at its frame's top-left, every row
-that presents a display showing its number, every inline
+table cell outside a column of sentences (values, intervals, numbers, row labels, names)
+to one line and every table heading to two, at the six widths and at 430 and 820px, and
+on the stage opened from every magnifier at 390, 820 and 1440px, where the table must
+stand whole; every table wider than its column to scrolling with its magnifier shown;
+every heading clear of its table's zoom control, the row labels of a scrolling table in
+view where the room beside them holds its widest column, a table that keeps them in view
+snapping to its columns with no column's text half beneath them at rest or at its
+scrolled end, every column of values aligned on its decimal point, rows of words left
+out, every value in the reading face, a table of mathematics with its number at its
+frame's top-left, every row that presents a display showing its number, every inline
 formula of the text and tables on its line's baseline and unclipped, every displayed
 equation to one starting axis, every equation number to the column's right edge, no
 equation number on a line with a row cut by its display's scroll or within 8px of ink

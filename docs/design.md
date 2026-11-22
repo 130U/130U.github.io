@@ -672,10 +672,7 @@ its start, its head over that start. Where bold figures, which are wider, stand 
 regular ones, or a plus among minus signs written as hyphens, which are narrower, each
 number's lead (its bracket, sign and integer part) stands at the end of a box as wide as
 the column's widest lead set in bold, so its point stands where every other's does. An interval holds one
-line, its upper end set against its comma; where its table would otherwise scroll, it
-breaks after the comma, the upper end under the lower end's digits, and the points of
-each line stand in line down the column, so an enclosure reads whole on a phone; the
-broken column then aligns from its start, its head over that start.
+line at every width, its upper end set against its comma.
 
 A passage of a manuscript that reports a list of results, several many-digit numbers or
 intervals strung through a sentence or set as a bare display, is set as a research
@@ -695,36 +692,38 @@ The certificate of the Asian paper's Section 1.2 ((1.3), the price under absorbe
 and their difference) and the sampling estimates of its Section 6.3 (initial variances
 down the rows, as in Tables 9 and 10 beside it) are such tables.
 
-A row of values holds one line. A column whose widest cell is a sentence wraps, at a
-16rem minimum; a column of phrases (cells of two words or more, as a contract's name or
-"75.0% (accepts 1,800 flawed solutions)") holds one line while its table fits, and wraps,
-to about half its widest phrase, in a table with a column of sentences or one that would
-otherwise scroll. A heading takes at most two lines, or three over a column of values, as
-a printed table stacks a long head over a narrow column of figures. In a table with a
-column of sentences, the columns of values keep their content's width and leave the rest
-of the row to the text. A column of row labels that holds numbers aligns right in tabular
-figures, as every column of values does, and an inline formula in a cell stands on the
-cell's baseline, as in prose. A table set as two halves side by side under one repeated
-heading parts them by a second em.
+Every row of a table holds one line. Every value, interval and number, every row label
+and every name in a column of words ("Crude oil call, 3 months ahead", "H3: six months,
+reference through 128, upper band global", "75.0% (accepts 1,800 flawed solutions)")
+stands on one line at every width, in the article and on the stage. Only a column of
+sentences wraps, at a 16rem minimum: a column whose cells are clauses, as a query
+written as an instruction, a step of a design or a finding ("Platform command held; the
+American and commercial payloads are separate"), which its page names as such beside the
+table. A heading takes at most two lines. In a table with a column of sentences, the
+columns of values keep their content's width and leave the rest of the row to the text.
+A column of row labels that holds numbers aligns right in tabular figures, as every
+column of values does, and an inline formula in a cell stands on the cell's baseline, as
+in prose. A table set as two halves side by side under one repeated heading parts them
+by a second em.
 
-A table wider than the reading column closes up its columns, by as much as it needs and
-to no less than an em between them, if that makes it fit; a table of two halves then
-sets its second half under its first, the same rows in the same order under the one
-heading; then its phrases and row labels wrap and two or more sentence columns share the
-room, to no less than 10rem each, closed up again if need be; then its intervals break
-after their commas; then its row labels of words narrow, as far as their longest word
-and each by at most one more line, where that makes it fit, since a label on one more
-line reads better than a column of values cut at the edge. A table wider than that scrolls at its natural spacing: its row labels, wrapped to no more than 45% of its room
-and 16rem, stay in view whenever they take no more than half of it, or whenever the room
-they leave beside them, short of the fading edge, holds a column of values whole, and the
-values pass beneath them; they stay in view only where the room beside them holds the
-widest column of values too, so no column stands half beneath them. Labels in view snap
+A table wider than the reading column does not wrap a row to fit. It closes up its
+columns, by as much as it needs and to no less than an em between them, if that makes it
+fit; a table of two halves then sets its second half under its first, the same rows in
+the same order under the one heading; two or more sentence columns share the room, to
+no less than 10rem each, closed up again if need be. A table wider than that scrolls at
+its natural spacing, every row still on one line, and its magnifier opens it whole: not
+every column shows at once. Its row labels stay in view whenever they take no more than
+half of its room, or whenever the room they leave beside them, short of the fading edge,
+holds a column of values whole, and the values pass beneath them; they stay in view only
+where the room beside them holds the widest column of values too, so no column stands
+half beneath them. Labels in view snap
 the table's scrolling to the start of a column, set beside them, and the table runs on
 past its last column, blank, by as much as it takes for the scrolled end to be such a
 start too, so at every resting place each column stands wholly beside the labels or
 wholly beneath them; several sentence columns keep their shared width where the room holds the
 labels and two of them, and otherwise each fills the room beside the labels, at most
-16rem, so one whole column reads at a time; the right edge fades while more remains.
+16rem, so one whole column reads at a time, where that room holds at least 10rem; the
+right edge fades while more remains.
 
 A display that is one array, and nothing else but its equation number, is a table of
 mathematics, and it is set as a research table: frame, header band, hairline rows,
@@ -746,8 +745,8 @@ aligns right, as in every research table, and any other column keeps the manuscr
 alignment, its head aligned with it. A column whose every cell writes only figures (an
 interval, a bound with its relation, a number) is a column of values, set exactly as a
 research table sets its values: the reading face, tabular figures, the digits grouped,
-the points aligned, and its intervals breaking after their commas where the table would
-otherwise scroll, so (7.8), the quantiles and Table 11 beside them read in one face. Every
+the points aligned, each interval on one line, so (7.8), the quantiles and Table 11
+beside them read in one face. Every
 other cell's TeX is drawn by the math pipeline in
 text style, as TeX sets an array's cells, at the table's size, the reading size, the
 header band included: there its x-height (TeX's 0.442em of 16px, 7.07px) stands at the
@@ -755,7 +754,7 @@ label type's (Inter's 0.516em of 13px, 6.70px), and its smallest script is half 
 reading size, as in a line of prose. A cell that is text alone (`\text{…}`) is set as text in
 the table's faces, label type in the header band and the reading face for a row label,
 in sentence case and without a closing colon, which in the sentence introduced the
-values its columns now hold; row labels of words may wrap, as a research table's do. In
+values its columns now hold; row labels hold one line, as a research table's do. In
 a drawn fractional part of five digits or more, the digits are
 grouped in threes from the point by a thin space, in the drawing alone, as the SI and
 ISO 80000 group them. Every cell of a row stands on the
@@ -764,15 +763,16 @@ that becomes a row of a table keeps its number in its row, after the label; a di
 that is itself a whole table is identified by its number at the frame's top-left, in the
 title's place and before any title words, as a manuscript table is by "Table N.", in the
 reading face of every equation number, and the number goes with the table to the stage
-as a title does. A table of mathematics fits the column from a tablet's width up. The
+as a title does. A table of mathematics wider than the column scrolls as a research
+table does, its row labels in view, and opens whole on the stage. The
 drawing is decorative: one assistive expression carries the whole display and
 its TeX, so a table of mathematics counts as one formula.
 
 Every table and figure carries a magnifier where the stage shows more than the page:
 where it enlarges the table or figure by at least 1.15 times, or sets whole what the
-page scrolls. On a phone, where the stage is barely wider than the column, a figure that
-fits its column, and a table the stage would not set whole, carry none; the magnifier
-never promises what the stage does not do. A table's magnifier stands in the top-right
+page scrolls, so every table that scrolls carries one. On a phone, where the stage is
+barely wider than the column, a figure or a table that fits its column carries none; the
+magnifier never promises what the stage does not do. A table's magnifier stands in the top-right
 corner of its frame, on the title's first line or on the header band; a table without a
 title that scrolls would carry its headings beneath it, so there the control takes a row
 of its own above the header. Where the control stands on the header band of a table of
@@ -781,11 +781,12 @@ over values aligned right stays over them. Zoom lifts the table from its place t
 the window, on a square sheet with the page blurred behind it. The stage sets the
 largest type that keeps every row on one line: 20px, then 18px, then 16px, then closer
 columns, then headings on two lines, a table of two halves folding only when no step
-holds it side by side; then it wraps the columns of sentences and phrases across the
-full width, at 18px and 16px and, before the table scrolls, at as little as nine tenths
-of the reading size. A table too wide even then breaks its intervals after their commas,
-then narrows its row labels as in the article, and one too wide for that scrolls at the
-reading size with its row labels in view, as in the article. The magnifier, the blurred page, and Escape close the
+holds it side by side; then it wraps its columns of sentences across the full width, at
+18px and 16px and at as little as nine tenths of the reading size. A table too wide even
+then is set whole at the size that fits the window's width, its columns closer and every
+row still on one line, as a figure is set whole: on a phone the reader sees the whole
+table at once and may enlarge it with the browser's own zoom. Nothing on the stage wraps
+a row: values, intervals and labels hold one line there as in the article. The magnifier, the blurred page, and Escape close the
 stage and return focus to the table's own control.
 
 A figure's magnifier stands in the top-right corner of its frame, level with the first
@@ -797,8 +798,8 @@ so the stage shows it whole: whole within the window up to 1.75 times its size, 
 that would enlarge it by less than 1.15 times, at up to 1.5 times its size with the stage
 scrolling from its top, unless the whole figure fits at nine tenths of that size, where
 it is set whole. A zoomed table a little taller than the window is set smaller, to no
-less than nine tenths of the reading size, and one a little wider closes up its columns,
-before either scrolls. Readouts and view switches work on the stage; the caption stays
+less than nine tenths of the reading size, or of the size that sets it whole where that
+is smaller, before it scrolls down. Readouts and view switches work on the stage; the caption stays
 in the article. One stage serves every table and figure of a page.
 
 ## Clarinet hero
