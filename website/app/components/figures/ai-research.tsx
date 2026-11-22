@@ -494,7 +494,7 @@ const DAG = {
 
 function ProofObligations() {
   // Columns stand evenly apart, and the end nodes keep inside the field, so
-  // neighbours keep 12px between them on a 320px phone.
+  // neighbors keep 12px between them on a 320px phone.
   const position: Record<string, [number, number]> = { G: [8, 50], C: [92, 50] };
   for (const node of DAG.nodes) position[node.id] = [node.left, node.top];
   const failed = "v2";

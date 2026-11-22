@@ -78,7 +78,7 @@ function noteInlines(inlines: ResearchInline[], value: AlignedNumber) {
 
 // The row labels' column counts as numeric when it holds numbers (strikes, steps,
 // widths), so its figures align as every column of values does.
-export function numericColumns(rows: ResearchCell[][]) {
+function numericColumns(rows: ResearchCell[][]) {
   const body = rows.slice(1);
   return rows[0].map((_, column) => body.length > 0
     && body.every((row) => numericCell(row[column]))
@@ -114,7 +114,7 @@ function contentWidth(inlines: ResearchInline[]): number {
  * a narrow column. Every other column, row labels and long names included,
  * holds one line.
  */
-export function sentenceColumns(rows: ResearchCell[][], declared: readonly number[] = []) {
+function sentenceColumns(rows: ResearchCell[][], declared: readonly number[] = []) {
   const body = rows.slice(1);
   return rows[0].map((_, column) => {
     if (!declared.includes(column)) return false;
@@ -125,7 +125,7 @@ export function sentenceColumns(rows: ResearchCell[][], declared: readonly numbe
 
 /** A table set as two halves side by side under one heading repeated (Strike, Bid, Ask, Width,
  * Strike, Bid, Ask, Width): the number of columns in a half, or 0. */
-export function tableHalves(rows: ResearchCell[][]) {
+function tableHalves(rows: ResearchCell[][]) {
   const heading = rows[0].map((cell) => cell.source.trim());
   const half = heading.length / 2;
   return Number.isInteger(half) && half >= 2 && heading.slice(0, half).every((cell, column) => cell && cell === heading[column + half]) ? half : 0;
@@ -253,7 +253,7 @@ function listMarker(block: ResearchArticleContent["blocks"][number] | undefined)
 }
 
 /** The digits of the widest number among each run of consecutive list items, by block index. */
-export function listMarkerDigits(blocks: ResearchArticleContent["blocks"]) {
+function listMarkerDigits(blocks: ResearchArticleContent["blocks"]) {
   const digits = new Map<number, number>();
   for (let start = 0; start < blocks.length;) {
     let end = start;

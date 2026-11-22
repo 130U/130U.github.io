@@ -33,7 +33,7 @@
   --chart-pill: rgba(0, 0, 0, 0.05);
   --chart-hatch: repeating-linear-gradient(135deg, rgba(11, 11, 11, 0.16) 0 1px, transparent 1px 6px);
   /* One size per role, everywhere: title 36, heading 24, subheading 18,
-     reading 16, interface 15, label 13, index 11. */
+     reading 16, interface 15, caption 14, label 13, index 11. */
   --type-title: 2.25rem;
   --type-heading: 1.5rem;
   --type-subheading: 1.125rem;
@@ -763,7 +763,7 @@ h1[tabindex="-1"] {
 
 @media (width >= 1200px) {
   /* The spine stands on axis B, four of the frame's ten columns in, where the
-     column guide stands: 40% of the frame's border box, centred on the guide's
+     column guide stands: 40% of the frame's border box, centered on the guide's
      line. The entries split on the same axis. */
   .ledger::before {
     position: absolute;

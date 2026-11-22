@@ -270,7 +270,7 @@
     padding-top: 40px;
   }
 
-  /* The step between stages: a line down the column's centre from the stage
+  /* The step between stages: a line down the column's center from the stage
      above, its arrowhead 8px over the next stage's rule. */
   .step {
     position: absolute;

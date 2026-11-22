@@ -290,7 +290,7 @@ also sets each figure at every column width from 280 to 600px and fails any labe
 text stands less than 4px from a curve (beyond its half stroke), whose knockout or tag
 holds a point of a curve, or that overlaps a dot, bar, bracket or another label, tick labels closer than
 6px, a view switch whose labels leave their segments, and a legend swatch with no mark
-of its form and colour; place such a label in open space (another anchor, a value alone
+of its form and color; place such a label in open space (another anchor, a value alone
 in a narrow figure, or a `narrowOnly`/`wideOnly` pair where a figure's widths need two
 places), never over the curve. A bar chart's reference rule is named through `BarHeader` with
 `rule`, and its group rows are `BarGroup`s, so the rule runs from its name to the axis;
@@ -383,7 +383,7 @@ Inter. Keep both font licenses with the assets when updating or redistributing t
 
 `npm run build` runs Next.js, then `scripts/assemble-static.mjs`. Assembly includes
 the architecture viewer and its license, normalizes segment payload filenames, and
-applies production CSP. Payload moves validate containment and destination
+applies production CSP and the frame guard. Payload moves validate containment and destination
 collisions; export entries may not be symbolic links. Preserve these output checks
 when upgrading Next.js. See [architecture](../architecture/README.md) for viewer
 generation and export-font integration.
@@ -453,7 +453,9 @@ its Archify data script, adds the data and blob images its control icons and exp
 draw. Inline styles support framework and viewer geometry.
 Formulas are rendered at build time; a formula that sets a link, style, or class
 attribute stops the build.
-GitHub Pages controls HTTP response headers: a meta policy cannot enforce
-`frame-ancestors` or supply host-level security headers. Keep the lockfile and pinned
+GitHub Pages controls HTTP response headers, so the frame policy lives in the page:
+the first script of every exported page (`FRAME_GUARD` in
+`scripts/secure-static-html.mjs`) hides a page that another origin frames, while the
+site's own pages may frame one another. Keep the lockfile and pinned
 dependencies aligned. An advisory check is current only when the npm endpoint returns
 a successful result.

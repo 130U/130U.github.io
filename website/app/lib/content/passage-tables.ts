@@ -11,7 +11,7 @@
 // declared `reading: "columns"`, down its columns: a passage that lists one
 // quantity's values and then another's ("estimates …, with standard errors …")
 // sets each quantity as a column, its points down the rows, as the manuscript's
-// neighbouring tables set them. The build fails unless the table restates the
+// neighboring tables set them. The build fails unless the table restates the
 // passage exactly:
 // - its formulas are the passage's formulas, every one of them, whole and in the
 //   manuscript's order (title, heads, then rows left to right, or columns top to
@@ -34,7 +34,7 @@ type Row = {
   display?: string;
 };
 
-export type PassageTableSpec = {
+type PassageTableSpec = {
   id: string;
   from: string;
   at?: string;
@@ -90,7 +90,7 @@ const passageTables: Readonly<Record<string, readonly PassageTableSpec[]>> = {
 };
 
 /** A cell's Markdown; a display's value cell also carries the display's TeX and number. */
-export type PassageCell = { source: string; display?: { tex: string; number: string } };
+type PassageCell = { source: string; display?: { tex: string; number: string } };
 
 export type PlacedPassageTable = {
   id: string;
@@ -117,7 +117,7 @@ export function formulasOf(text: string) {
 }
 
 /** Text outside formulas, links' targets and anchors. */
-export function proseOf(text: string) {
+function proseOf(text: string) {
   return text.replace(FORMULA, " ").replace(/\]\([^)]*\)/gu, "]").replace(/<a id="[^"]*"><\/a>/gu, " ");
 }
 
@@ -136,7 +136,7 @@ function cell(markdown: string): PassageCell {
 }
 
 /** A display's value as the table writes it: its expression, without environment, number or closing punctuation. */
-export function displayValue(tex: string) {
+function displayValue(tex: string) {
   return tex.replace(/\\tag\{[^}]*\}/gu, "").replace(/\\(?:begin|end)\{gathered\}/gu, "").trim().replace(/[.,;]$/u, "").trim();
 }
 

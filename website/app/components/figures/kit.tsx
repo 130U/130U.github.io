@@ -294,7 +294,7 @@ export function Bars({ label, stack, labelWidth, valueWidth, children, className
   return <div className={classes(styles.bars, className)} data-stack={stack === "narrow" ? "narrow" : stack ? "always" : undefined} style={style} role="img" aria-label={label}>{children}</div>;
 }
 
-export type Rule = { at: number; tone?: "ink" | "soft" | "accent" };
+type Rule = { at: number; tone?: "ink" | "soft" | "accent" };
 
 /** Grid lines that keep clear of the reference rules: one within five percent
     of the scale of a rule gives way to it, so the two never read as one doubled
@@ -352,7 +352,7 @@ export function BarGroup({ label, rules = [] }: { label: string; rules?: Rule[] 
 /**
  * Names above the first row: a column's head, which starts or ends at its
  * position, or a reference rule's name, which stands beside the top of its
- * rule (`rule`), 6px clear of it on the anchored side, or centred over it.
+ * rule (`rule`), 6px clear of it on the anchored side, or centered over it.
  */
 export function BarHeader({ marks }: { marks: Array<{ at: number; label: string; tone?: Tone; anchor?: "left" | "right" | "center"; rule?: Rule["tone"] }> }) {
   return (

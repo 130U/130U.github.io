@@ -145,7 +145,7 @@
 }
 
 /* The distance between two clusters on one row: a capped line at the foot of
-   its field, named on one line above it, centred, so a span narrower than its
+   its field, named on one line above it, centered, so a span narrower than its
    name keeps its ends and its line in view. */
 .field:has(> .gap) {
   height: 34px;

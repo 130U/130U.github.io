@@ -1,7 +1,7 @@
 import { fractionDigitGroups } from "../../lib/content/research-number";
 
 /** A run of a figure's text: plain text, or a group of digits that stands a thin space after the run before it. */
-export type DigitRun = { text: string; group: boolean };
+type DigitRun = { text: string; group: boolean };
 
 // A number with five or more digits after its point.
 const LONG_FRACTION = /(\d*\.)(\d{5,})(?!\d)/gu;

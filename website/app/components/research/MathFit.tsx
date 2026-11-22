@@ -4,7 +4,7 @@ import { useEffect } from "react";
 
 /** The smallest share of its size a formula is set at to fit its room. A displayed equation is set
  * at 1.15 times the reading size, so a fitted display still stands above the text around it. */
-export const MATH_FIT_FLOOR = 0.9;
+const MATH_FIT_FLOOR = 0.9;
 // The transparent gutter each formula drawing carries on either side (RESEARCH_MATH_GUTTER_EM).
 const GUTTER_EM = 0.375;
 // Room left inside a fitted box, against subpixel overflow.

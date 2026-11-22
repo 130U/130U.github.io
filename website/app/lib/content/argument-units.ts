@@ -9,7 +9,7 @@ import type { ResearchBlock, ResearchInline } from "./research-markdown";
 const STATEMENT = /^(?:Theorem|Lemma|Proposition|Corollary|Definition|Assumption|Remark|Example)\b/u;
 const PROOF = /^Proof\b/u;
 
-export type ArgumentUnit = "statement" | "proof" | "head";
+type ArgumentUnit = "statement" | "proof" | "head";
 
 function plainText(inlines: readonly ResearchInline[]): string {
   return inlines.map((inline) => {

@@ -250,7 +250,7 @@ for (const [index, match] of [...references.matchAll(/\\bibitem\{([^}]+)\}([\s\S
   referenceParagraphs.push(`<a id="ref-${match[1]}"></a>\n\n${index + 1}. ${value}`);
 }
 assert.equal(referenceParagraphs.length, bibliographyKeys.length);
-converted += `\n\n## Appendices and supporting material\n\nThis page includes the complete abstract, five main sections, all four main-text figures, and references. Technical appendices and declarations are available in the [full manuscript](${sourceUrl}) and the [GitHub repository](${repositoryUrl}).\n\n## References\n\n${referenceParagraphs.join("\n\n")}\n`;
+converted += `\n\n## Appendices and Supporting Material\n\nThis page includes the complete abstract, five main sections, all four main-text figures, and references. Technical appendices and declarations are available in the [full manuscript](${sourceUrl}) and the [GitHub repository](${repositoryUrl}).\n\n## References\n\n${referenceParagraphs.join("\n\n")}\n`;
 converted = converted.replace(/@@DEPENDENCE-BLOCK-(\d+)@@/gu, (_, index) => blocks[Number(index)]);
 const mathUses = mathematics.map(() => 0);
 converted = converted.replace(/@@DEPENDENCE-MATH-(\d+)@@/gu, (_, rawIndex) => {

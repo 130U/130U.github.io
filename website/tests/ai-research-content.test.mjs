@@ -383,7 +383,7 @@ for (const expected of PROJECTS) {
       const fallbackText = [...visual.matchAll(/<text\b[^>]*>([\s\S]*?)<\/text>/giu)]
         .map((match) => normalized(match[1].replace(/<[^>]+>/gu, ""))).filter(Boolean);
       assert.deepEqual(fallbackText, [], "Exported math must not fall back to browser text glyphs");
-      // A numbered display sets its number at the column edge, outside the labelled row MathML gives it.
+      // A numbered display sets its number at the column edge, outside the labeled row MathML gives it.
       const tagged = /\\tag\{/u.test(sourceFormulas[vectorIndices[index]].tex) ? 1 : 0;
       for (const semantic of ["mfrac", "msqrt", "mover", "munder", "msup", "msubsup", "mtable", "mlabeledtr"]) {
         const visualCount = (visual.match(new RegExp(`data-mml-node="${semantic}"`, "gu")) ?? []).length;

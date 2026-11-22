@@ -4,7 +4,7 @@ import { readFile, readdir } from "node:fs/promises";
 import path from "node:path";
 import test from "node:test";
 import { fileURLToPath } from "node:url";
-import { secureStaticHtml } from "../scripts/secure-static-html.mjs";
+import { FRAME_GUARD, secureStaticHtml } from "../scripts/secure-static-html.mjs";
 
 const OUT = fileURLToPath(new URL("../out/", import.meta.url));
 const hash = (source) => `'sha256-${createHash("sha256").update(source).digest("base64")}'`;
@@ -29,6 +29,9 @@ test("every exported HTML page permits only its authored inline scripts", async 
     const scripts = policy.split("; ").find((rule) => rule.startsWith("script-src "));
     assert.doesNotMatch(scripts, /'unsafe-inline'|'unsafe-eval'|https?:|\*/u);
     assert.ok(html.indexOf("Content-Security-Policy") < html.indexOf("<script"));
+    const firstScript = html.match(/<script\b[^>]*>([\s\S]*?)<\/script>/iu);
+    assert.equal(firstScript?.[1], FRAME_GUARD, `${filename}: the frame guard runs before any other script`);
+    assert.equal(html.split(FRAME_GUARD).length, 2, `${filename}: one frame guard`);
     for (const [, attributes, body] of html.matchAll(/<script\b([^>]*)>([\s\S]*?)<\/script>/giu)) {
       if (!/\bsrc\s*=/iu.test(attributes)) assert.ok(scripts.includes(hash(body)), filename);
     }
@@ -47,6 +50,8 @@ test("static policies are deterministic and normalize browser line endings", () 
   assert.ok(secured.includes(hash('const label = "café";\n')));
   assert.equal(secureStaticHtml(secured), secured);
   assert.equal((secured.match(/http-equiv="Content-Security-Policy"/gu) ?? []).length, 1);
+  assert.equal(secured.split(FRAME_GUARD).length, 2);
+  assert.ok(secured.includes(hash(FRAME_GUARD)));
   assert.ok(secured.includes("script-src-attr 'none'"));
   assert.throws(() => secureStaticHtml("<body></body>"), /must have a head/u);
 });

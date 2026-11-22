@@ -83,7 +83,7 @@ test("all 663 reviewed formulas have complete vector glyphs and exact accessible
       mathematicalPaths.push(glyphPaths(rendered.svg).filter(({ code }) => code !== "2C" && code !== "2E"));
       assert.equal(tagCount(rendered.mathml, "mfrac"), (tex.match(/\\(?:t|d)?frac(?![A-Za-z])/gu) ?? []).length, `${slug} must preserve each fraction`);
       assert.equal(tagCount(rendered.mathml, "msqrt"), (tex.match(/\\sqrt(?![A-Za-z])/gu) ?? []).length, `${slug} must preserve each square root`);
-      assert.equal(tagCount(rendered.mathml, "mover"), (tex.match(/\\(?:bar|overline|hat|widehat|tilde|widetilde|xrightarrow(?!\[))(?![A-Za-z])/gu) ?? []).length, `${slug} must preserve each source accent and labelled arrow`);
+      assert.equal(tagCount(rendered.mathml, "mover"), (tex.match(/\\(?:bar|overline|hat|widehat|tilde|widetilde|xrightarrow(?!\[))(?![A-Za-z])/gu) ?? []).length, `${slug} must preserve each source accent and labeled arrow`);
       assert.equal(tagCount(rendered.mathml, "mlabeledtr"), (tex.match(/\\tag(?![A-Za-z])/gu) ?? []).length, `${slug} must preserve each equation number`);
     }
     total += formulas.length;

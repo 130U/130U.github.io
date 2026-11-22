@@ -71,7 +71,7 @@ for (const expected of PROJECTS) {
       .replace(/^!\[(Figure \d+\.[^\n]*)\]\(\.\.\/figures\/([a-z0-9-]+)\.png\)$/gmu, (_, caption, image) => `![${caption}](/assets/research/${expected.figures}/${image}.png)`)
       .replace(/\]\((\.\.\/[^\s)]+)\)/gu, (_, relative) => `](https://github.com/130U/${expected.repository}/blob/${expected.commit}/${relative.slice(3)})`);
     const references = upstream.slice(upstream.indexOf("\n## References")).trim();
-    assert.ok(article.markdown.startsWith(main + "\n\n## Appendices and supporting material\n"), "Every main-text character must survive import, except resolved relative link targets and each figure's image path, with an image label its caption repeats.");
+    assert.ok(article.markdown.startsWith(main + "\n\n## Appendices and Supporting Material\n"), "Every main-text character must survive import, except resolved relative link targets and each figure's image path, with an image label its caption repeats.");
     assert.ok(article.markdown.endsWith(references + "\n"), "The complete bibliography must survive import.");
     assert.doesNotMatch(article.markdown, /^## Appendix [A-Z]\./mu);
     const blocks = parseResearchMarkdown(article.markdown, { joinSoftLines: true });

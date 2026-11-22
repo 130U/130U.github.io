@@ -233,8 +233,8 @@ and meet the column guides below it. The name and the institutions Duke and Sequ
 the roles Alumnus and Fellow use Source Serif 4. The two-line "Thinking Mathematically /
 Working in AI" introduction is an H2 at the title size, its second line in the muted
 tone, with the biography below on the same edge within the measure. Links inside the
-biography and the Fellowship paragraph are underlined in the link rule and open in a
-new tab.
+biography, the advisor line and the Fellowship paragraph are underlined in the link rule
+and open in a new tab.
 
 Five numbered sections follow: the introduction, Selected Research, Education,
 Fellowship, and Contact. Fellowship is one ledger with Sequoia Fellow on axis A and a
@@ -269,8 +269,8 @@ their official wording and order.
 Each of the eighteen Experience entries opens its own page, at `/experience/{slug}/`.
 An AI or legal article's slug is its title's words, as its repository and PDF name it;
 every other entry's is its organization's name in lowercase words, joined by hyphens
-(`/experience/jones-lang-lasalle/`, `/experience/hubble-network/`). A retired address
-is not forwarded and nothing links to it. The H1 is the project or
+(`/experience/jones-lang-lasalle/`, `/experience/hubble-network/`). Each entry has one
+address, and every link uses it. The H1 is the project or
 paper title; the browser title is `{institution}: {title}`. The record strip follows,
 then Key Contributions as an ordered list with decorative serif indices; a list of one
 stands without an index. Contextual notes are its final items, unnumbered, under a
@@ -426,7 +426,7 @@ page frosted as it is behind the zoom stage. Escape, the backdrop, and Close ret
 focus to the cited passage; View in Footnotes focuses the full endnote, whose number
 turns blue under a tint that fades. Full notes and two-way links work without
 JavaScript. Note numbers stand right-aligned in their column on the baseline of the
-note's first line, the author note and the notes run at one interval, each Return to
+note's first line, the author note and the notes run at one interval, each Back to
 Text link holds one line, and a page or section range written with a hyphen (373-81,
 §§ 3.6-3.7) holds one line. A table's title keeps a figure title's weight, bold runs
 and all.
@@ -475,8 +475,8 @@ Connectors are drawn in SVG on the same grid as the nodes: crisp 1px bars placed
 percentages of their grid area, in one opaque color (42% ink on the paper), so a line
 keeps one width and one color at every device scale, fractional scales included, and
 nothing darkens where bars overlap. The bars of one line overlap at least to each
-other's centre line, so no rounding can open a seam; each line leaves and enters a node
-at its middle, and its arrowhead is centred on it with the tip on the node's edge. The
+other's center line, so no rounding can open a seam; each line leaves and enters a node
+at its middle, and its arrowhead is centered on it with the tip on the node's edge. The
 loop is one path in the accent the whole way: down from the source node's lower edge,
 along the foot of the stages, and up to an arrowhead at the target's lower edge, labeled
 beneath.
@@ -494,14 +494,14 @@ technology.
 
 The diagram reads left to right from 53.75rem (860px at the reading size), where every
 diagram's stages hold their widest titles side by side; below that it becomes a vertical
-sequence: a step down the column's centre joins each stage to the next, and the loop
+sequence: a step down the column's center joins each stage to the next, and the loop
 becomes a labeled return note. From 30rem a stage sets its parallel nodes side by side,
 gathered into the step through a short bus, only where each of their titles holds one
 line at that width; its other stages stack their nodes. `app/lib/content/diagram-layout.ts`
 measures each title in the interface face's advance widths to decide, and a test holds
-every diagram to the left-to-right width. Two titles were shortened to fit, their words
-kept in the node: Compensation, for new loss, and Autonomous task. A prose caption
-follows. The build fails if a stage holds neither one node nor as many as the widest
+every diagram to the left-to-right width. Two titles take a short form that holds one
+line, their full words in the node: Compensation, for new loss, and Autonomous task.
+A prose caption follows. The build fails if a stage holds neither one node nor as many as the widest
 stage, and the browser layout check holds each rule above at every width.
 
 ### Article figures
@@ -552,7 +552,7 @@ at the six check widths and at every column width from 280 to 600px. A
 narrow axis hides every other interior tick of an odd count of five or more, never an
 end tick, and tick labels keep 6px apart. A grid line gives way to a reference rule
 drawn at or within five percent of its value, keeping its tick label, so the two never
-read as one doubled line; rules are centred on their values as grid lines are. A label over open paper, with no grid line behind it, takes no knockout, so nothing
+read as one doubled line; rules are centered on their values as grid lines are. A label over open paper, with no grid line behind it, takes no knockout, so nothing
 cuts a gap in a curve. A label takes the tone of the mark it names: the accent and
 green as they are, ink beside a sky or mist mark and muted ink beside a steel one, since
 those tones are too light to read as text. A plot's labels are knocked out of the grid
@@ -563,7 +563,7 @@ end of the scale stops short of them. A label on a tinted region, or one held cl
 rule by its own padding, takes no knockout and stands clear of the lines, and a label
 that names a line at the plot's right end stops short of the edge grid line. The browser
 layout check fails any label a line crosses without a knockout that holds it, and any
-label that ignores its tone, and any legend swatch with no mark of its form and colour.
+label that ignores its tone, and any legend swatch with no mark of its form and color.
 A figure whose views give its marks different tones keys each tone in that view's own
 legend, so an interval drawn in a tone other than ink is always named (In an unresolved
 pair, Certified minimiser); the check fails one that is not.
@@ -623,7 +623,7 @@ labels' own notation (qᵢ, mᵢ) and a quantity in the unit its axis names (pp)
 label formula stands on one level, a fraction written with a slash. A key sets one
 formula per line, as a display does: two conditions stand as two lines of the entry,
 4px apart, as its other lines are. The distance between two clusters on one row is named
-above its capped line, centred, so a span narrower than its name keeps its ends in view.
+above its capped line, centered, so a span narrower than its name keeps its ends in view.
 Captions state what the figure shows in the article's own terms. The four manuscript
 figures of each of the three papers are drawn the same way, from the manuscript's
 formulas and its pinned results, with the manuscript's captions below them. A scatter is
@@ -719,7 +719,7 @@ face of the equation numbers, the row holds the display's anchor, and its value 
 the display's TeX for assistive technology and copying, so the page still maps to the
 paper number for number. A passage that lists one quantity's values and then another's
 ("estimates …, with standard errors …") sets each quantity as a column, its points down
-the rows, as the manuscript's neighbouring tables set them; the table then restates the
+the rows, as the manuscript's neighboring tables set them; the table then restates the
 passage down its columns, and says so, so its formulas are read in that order. A passage whose numbers are steps of a derivation stays prose.
 The certificate of the Asian paper's Section 1.2 ((1.3), the price under absorbed Euler
 and their difference) and the sampling estimates of its Section 6.3 (initial variances

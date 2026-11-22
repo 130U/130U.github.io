@@ -106,7 +106,7 @@ export function mountClarinet(canvas: HTMLCanvasElement, hero?: HTMLElement) {
       const homeX = (Math.round(dot.x * dpr - dotPixels / 2) + dotPixels / 2) / dpr;
       const homeY = (Math.round(dot.y * dpr - dotPixels / 2) + dotPixels / 2) / dpr;
       const angle = random() * Math.PI * 2;
-      // The entering ring stays inside the stage: centred at .52 of its width with an
+      // The entering ring stays inside the stage: centered at .52 of its width with an
       // outer radius of .45, its right edge keeps clear of the frame's hairline.
       const radius = width * (.27 + random() * .18);
       const x = entering ? width * .52 + Math.cos(angle) * radius : homeX;

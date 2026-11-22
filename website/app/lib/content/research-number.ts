@@ -39,7 +39,7 @@ export function fractionDigitGroups(fraction: string): string[] {
 // inserted: the groups are spans and the alignment is set by invisible generated
 // text, so the copied and searched text is the manuscript's.
 
-export type NumberField = {
+type NumberField = {
   /** What precedes the number in its cell, after the previous field: a separator, a relation and any opening bracket. */
   separator: string;
   open: string;
@@ -52,7 +52,7 @@ export type NumberField = {
 };
 
 /** A value; `note` is the text after it in its cell, from the space before its opening parenthesis. */
-export type TableNumber = { bold: boolean; tex?: string; fields: NumberField[]; note?: string };
+type TableNumber = { bold: boolean; tex?: string; fields: NumberField[]; note?: string };
 
 /**
  * Invisible text that pads a value to its column's alignment, and the digit-group
@@ -69,7 +69,7 @@ export type Pad = { text: string; gaps: number; bold?: boolean };
  * part) stands at the end of a box as wide as the column's widest lead set in
  * bold, its sign a plus (`lead`), so its point stands where every other's does.
  */
-export type AlignedField = NumberField & { groups: string[]; before: Pad; after: Pad; lead?: string };
+type AlignedField = NumberField & { groups: string[]; before: Pad; after: Pad; lead?: string };
 export type AlignedNumber = { bold: boolean; tex?: string; interval: boolean; fields: AlignedField[]; tail: Pad[]; note?: string };
 
 const NUMBER = String.raw`([-+−]?)(\d{1,3}(?:,\d{3})+|\d*)(?:\.(\d+))?`;
@@ -214,7 +214,7 @@ export function isInterval(value: TableNumber) {
   return value.fields[0].open.endsWith("[");
 }
 
-export type AlignedColumn = { values: AlignedNumber[]; start: boolean };
+type AlignedColumn = { values: AlignedNumber[]; start: boolean };
 
 const NO_PAD: Pad = { text: "", gaps: 0 };
 

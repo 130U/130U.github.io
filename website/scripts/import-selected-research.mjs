@@ -177,7 +177,7 @@ for (const config of sources) {
   const appendixUrl = `${repositoryUrl}/blob/${config.sourceCommit}/${config.appendixFile ?? config.file}#${config.appendixAnchor}`;
   const markdown = [
     captioned,
-    "## Appendices and supporting material",
+    "## Appendices and Supporting Material",
     `This page includes the complete main text and references. Appendices, supplementary proofs, code and verification material are available in the [GitHub repository](${repositoryUrl}) and the [full manuscript](${appendixUrl}).`,
     refs,
   ].join("\n\n").replace(/\]\((\.\.\/[^\s)]+)\)/gu, (_, relative) => `](${repositoryUrl}/blob/${config.sourceCommit}/${relative.slice(3)})`) + "\n";

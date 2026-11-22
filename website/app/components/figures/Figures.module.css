@@ -74,7 +74,7 @@
 
 /* ---------- Line-chart annotations ---------- */
 
-/* A reference line is a 1px dashed border centred on its value, as a grid
+/* A reference line is a 1px dashed border centered on its value, as a grid
    line is, so a line drawn at a tick's value reads as one line. */
 .hline {
   position: absolute;
@@ -140,7 +140,7 @@
   min-width: calc(20rem - round(down, 100%, 18rem) * 10 / 9);
 }
 
-/* Each head stands centred over its axis on one line, its name and its
+/* Each head stands centered over its axis on one line, its name and its
    symbol, so the pair matches at every width. Both share one grid cell, and
    the comparison's scroll width keeps them apart. */
 .rankingHeads {
@@ -470,7 +470,7 @@
 
 /* A two-by-two matrix reflows rather than scrolls. Beside its row heads where
    the figure is wide; below 34rem each row head becomes a band over its row;
-   below 21rem the cells stack, each naming its column. Neighbouring cells
+   below 21rem the cells stack, each naming its column. Neighboring cells
    share an edge, drawn in an opaque hairline so the shared edges read at the
    frame's weight, and the cells of a row share their title, definition and
    example lines. */
@@ -627,7 +627,7 @@
 }
 
 /* The last question leads to a group of results: its node takes the group's
-   height, with its text centred on the arrow. */
+   height, with its text centered on the arrow. */
 .flowStep[data-choice] {
   display: flex;
   flex-direction: column;
@@ -1349,7 +1349,7 @@
 }
 
 /* A panel whose axis carries no tick labels keeps their row only while a
-   neighbour beside it does, so the axis names of side-by-side panels align. */
+   neighbor beside it does, so the axis names of side-by-side panels align. */
 .unmarkedAxis {
   --pb: 30px;
 }
@@ -1576,7 +1576,7 @@ span.pathDot {
 }
 
 /* The grid holds the axis name and ticks that hang beside its last panels. Each
-   column's head holds one line, centred over its panel and reaching into the
+   column's head holds one line, centered over its panel and reaching into the
    gaps beside it; the grid fits its room down to 29.7rem, where a panel is
    about 110px wide, and in less room is set at 33rem and scrolls. */
 .shares {
@@ -1609,7 +1609,7 @@ span.pathDot {
   pointer-events: none;
 }
 
-/* The axis name stands above the top tick, which is centred on the panel's
+/* The axis name stands above the top tick, which is centered on the panel's
    top edge, and 4px clear of it. */
 .shareAxisY {
   right: calc(100% + 6px);

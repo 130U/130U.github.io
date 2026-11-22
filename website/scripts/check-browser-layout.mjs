@@ -318,7 +318,7 @@ function inspectFigure(figure) {
     if (Number.isFinite(blank) && blank > 60 && blank > 0.15 * box.height) issues.push({ kind: "view-blank", blank: Math.round(blank), height: Math.round(box.height) });
   }
   // A legend keys what the figure draws: each swatch has a visible mark of its
-  // form in its colour, and a figure that names none of its marks beside them
+  // form in its color, and a figure that names none of its marks beside them
   // keys every kind of dot it draws.
   const legendItems = [...frame.querySelectorAll('[class*="_legend"] > li')].filter(shown);
   if (legendItems.length) {
@@ -332,7 +332,7 @@ function inspectFigure(figure) {
       const swatch = item.querySelector('[class*="_swatch"]');
       if (!swatch) continue;
       // An outlined square swatch keys outlined square marks: an empty cell drawn by
-      // its outline, matched by the outline's colour.
+      // its outline, matched by the outline's color.
       const outlined = swatch.hasAttribute("data-ring") && !swatch.dataset.shape;
       const shape = outlined ? "outlined" : swatch.dataset.shape ?? "square";
       const color = outlined ? getComputedStyle(swatch).outlineColor : getComputedStyle(swatch).color;
@@ -366,7 +366,7 @@ function inspectFigure(figure) {
   }
   // In a figure that keys its marks in a legend, in any of its views, an
   // interval drawn in a tone other than ink is keyed by the legend the shown
-  // view carries, as heston-candidates keys its grey and its accent candidates.
+  // view carries, as heston-candidates keys its gray and its accent candidates.
   if (frame.querySelector('[class*="_legend"] > li')) {
     const interval = element => [...element.classList].some(name => /_range$/u.test(name)) && getComputedStyle(element).position === "absolute";
     const keyed = legendItems.flatMap(item => [...item.querySelectorAll('[class*="_swatch"][data-shape="range"]')]).map(swatch => getComputedStyle(swatch).color);
@@ -1326,7 +1326,7 @@ function drawnDisplayRows() {
 // and their gap to the text; punctuation pushed to the next line by the formula,
 // link or marker it closes against; a word, a number, a number range or a part
 // of a written-out address split mid-token; a contents entry whose wrapped title
-// returns under its number; and a Return to Text or footer link that wraps.
+// returns under its number; and a Back to Text or footer link that wraps.
 function inspectText() {
   const issues = [];
   const visibility = new Map();
@@ -1649,9 +1649,9 @@ function inspectScrollers({ scope, nearMissPx, nearMissShare }) {
 
 // The logic diagram at the head of each Experience article (docs/design.md, Logic
 // diagrams). Its connectors are crisp 1px bars in SVG: the bars of one line touch
-// or overlap, a bar that runs on in the same direction keeps its centre line, a line
+// or overlap, a bar that runs on in the same direction keeps its center line, a line
 // into a bus from one side and out of it on the other is straight, and every line
-// ends in one arrowhead centred on it, whose tip meets a node. The loop is one line
+// ends in one arrowhead centered on it, whose tip meets a node. The loop is one line
 // in the accent from the source node's lower edge to the target's. A line never
 // crosses a node or a label. Each connector line has one opaque color. Inline
 // mathematics sits on its text's baseline within 0.5px, at no less than nine tenths
@@ -1693,7 +1693,7 @@ function inspectDiagram() {
       const b = box(rect);
       if (b.width <= 0 || b.height <= 0) continue;
       const axis = b.width > 1.01 ? "h" : b.height > 1.01 ? "v" : "dot";
-      bars.push({ b, axis, wire: svg.dataset.wire, fill: getComputedStyle(rect).fill, centre: axis === "h" ? (b.top + b.bottom) / 2 : (b.left + b.right) / 2 });
+      bars.push({ b, axis, wire: svg.dataset.wire, fill: getComputedStyle(rect).fill, center: axis === "h" ? (b.top + b.bottom) / 2 : (b.left + b.right) / 2 });
     }
     for (const path of svg.querySelectorAll("[data-arrow] > path")) {
       arrows.push({ b: box(path), direction: path.parentElement.dataset.arrow, wire: svg.dataset.wire, fill: getComputedStyle(path).fill });
@@ -1716,18 +1716,18 @@ function inspectDiagram() {
     const fills = new Set([...members.map(bar => bar.fill), ...ends.map(arrow => arrow.fill)]);
     if (fills.size > 1) issues.push({ kind: "diagram-line-changes-color", fills: [...fills], ...where });
     for (const fill of fills) if ((parse(fill)?.[3] ?? 0) < 1) issues.push({ kind: "diagram-line-translucent", fill, ...where });
-    // A bar that runs on in the same direction keeps the centre line of the bar before it.
+    // A bar that runs on in the same direction keeps the center line of the bar before it.
     members.forEach((a, i) => members.slice(i + 1).forEach(b => {
       if (a.axis !== b.axis || a.axis === "dot" || !touch(a.b, b.b)) return;
-      if (Math.abs(a.centre - b.centre) > 0.5) issues.push({ kind: "diagram-line-steps", offset: round(a.centre - b.centre), ...where });
+      if (Math.abs(a.center - b.center) > 0.5) issues.push({ kind: "diagram-line-steps", offset: round(a.center - b.center), ...where });
     }));
     for (const arrow of ends) {
       const shaft = members.find(bar => touch(bar.b, arrow.b) && bar.axis === (arrow.direction === "right" ? "h" : "v"));
-      const axisCentre = arrow.direction === "right" ? (arrow.b.top + arrow.b.bottom) / 2 : (arrow.b.left + arrow.b.right) / 2;
-      if (!shaft || Math.abs(shaft.centre - axisCentre) > 0.5) issues.push({ kind: "diagram-arrowhead-off-its-line", offset: shaft && round(shaft.centre - axisCentre), ...where });
+      const axisCenter = arrow.direction === "right" ? (arrow.b.top + arrow.b.bottom) / 2 : (arrow.b.left + arrow.b.right) / 2;
+      if (!shaft || Math.abs(shaft.center - axisCenter) > 0.5) issues.push({ kind: "diagram-arrowhead-off-its-line", offset: shaft && round(shaft.center - axisCenter), ...where });
       if (arrow.direction === "down") continue;
       // The tip meets a node's edge: its left edge for a forward arrow, its lower edge for the loop.
-      const tip = arrow.direction === "right" ? { x: arrow.b.right, y: axisCentre } : { x: axisCentre, y: arrow.b.top };
+      const tip = arrow.direction === "right" ? { x: arrow.b.right, y: axisCenter } : { x: axisCenter, y: arrow.b.top };
       const met = nodeBoxes.some(node => arrow.direction === "right"
         ? Math.abs(node.left - tip.x) <= 0.5 && tip.y > node.top && tip.y < node.bottom
         : Math.abs(node.bottom - tip.y) <= 0.5 && tip.x > node.left && tip.x < node.right);
@@ -1738,8 +1738,8 @@ function inspectDiagram() {
     }
     // A line leaves a node at the node's middle.
     for (const bar of members.filter(member => member.axis === "h")) {
-      const left = nodeBoxes.find(node => Math.abs(node.right - bar.b.left) <= 0.5 && bar.centre > node.top && bar.centre < node.bottom);
-      if (left && Math.abs((left.top + left.bottom) / 2 - bar.centre) > 0.5) issues.push({ kind: "diagram-line-off-node-middle", offset: round(bar.centre - (left.top + left.bottom) / 2), ...where });
+      const left = nodeBoxes.find(node => Math.abs(node.right - bar.b.left) <= 0.5 && bar.center > node.top && bar.center < node.bottom);
+      if (left && Math.abs((left.top + left.bottom) / 2 - bar.center) > 0.5) issues.push({ kind: "diagram-line-off-node-middle", offset: round(bar.center - (left.top + left.bottom) / 2), ...where });
     }
   }
   // A line into a bus and a line out of it on the other side are one straight line.
@@ -1748,7 +1748,7 @@ function inspectDiagram() {
     const left = sides.filter(bar => bar.b.left < bus.b.left - 1);
     const right = sides.filter(bar => bar.b.right > bus.b.right + 1);
     for (const a of left) for (const b of right) {
-      const offset = Math.abs(a.centre - b.centre);
+      const offset = Math.abs(a.center - b.center);
       if (offset > 0.5 && offset < 16) issues.push({ kind: "diagram-bus-junction-steps", wire: bus.wire, offset: round(offset) });
     }
   }

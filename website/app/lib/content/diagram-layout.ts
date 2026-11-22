@@ -38,7 +38,7 @@ type Stage = ArchitectureDiagram["stages"][number];
 type Node = Stage["nodes"][number];
 
 /** A node's widest line of short text: its title, or its lane's name. */
-export function nodeTextWidth(node: Node) {
+function nodeTextWidth(node: Node) {
   return Math.max(interfaceWidth(node.title, 15, 500, -0.003), node.tag ? interfaceWidth(node.tag, 13, 400) : 0);
 }
 

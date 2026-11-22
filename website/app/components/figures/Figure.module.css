@@ -702,7 +702,7 @@
   font-size: inherit;
 }
 
-/* A rule is a 1px dashed border centred on its value, as a grid line is. */
+/* A rule is a 1px dashed border centered on its value, as a grid line is. */
 .rule {
   position: absolute;
   top: 0;
@@ -763,7 +763,7 @@
 
 /* A head names a column from its start or its end; the name of a rule stands
    beside the top of its rule, which runs up through the header row to it, or
-   centred over it. */
+   centered over it. */
 .headerMark {
   position: absolute;
   bottom: 6px;

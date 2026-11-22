@@ -6844,7 +6844,7 @@
       "labels": []
     }
   ],
-  "importedMarkdownSha256": "1da898ae2988ae838cbb9120cc7b38a3b47cf082ea681b627eb106665d5fe772",
+  "importedMarkdownSha256": "e056a3e5c37d773e3db2f1d4ecc04f404a32f4cd273e3189e05a6def323b8680",
   "transformations": [
     "Seven main TeX input files contain five numbered sections and eleven subsections; recursively included main-text proofs are retained.",
     "TeX line wrapping, layout commands, font styling, and text accents are converted to equivalent web markup.",

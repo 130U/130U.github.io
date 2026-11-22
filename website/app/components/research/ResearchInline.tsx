@@ -56,11 +56,11 @@ const SHORT_PART = 16;
 const LONG_PART = 24;
 const PART_CHUNK = /.{1,12}/gu;
 
-export function isAddress(text: string) {
+function isAddress(text: string) {
   return ADDRESS.test(text);
 }
 
-export function addressParts(text: string) {
+function addressParts(text: string) {
   const parts = text.split(ADDRESS_BREAK).filter(Boolean)
     .flatMap((part) => part.length > SHORT_PART ? part.split(PART_BREAK).filter(Boolean) : [part])
     .flatMap((part) => part.length > LONG_PART ? part.match(PART_CHUNK)! : [part]);

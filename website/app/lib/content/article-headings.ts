@@ -126,10 +126,10 @@ const internalReferenceContexts: Readonly<Record<string, readonly string[]>> = {
 // dependence paper's do from its TeX source: an equation by its parenthesized
 // number, a statement, table or figure by its number.
 const CROSS_REFERENCED = new Set(["certified-valuation-of-arithmetic-asian-options", "certified-joint-pricing-errors-in-rough-heston"]);
-const LABELLED = "Theorem|Proposition|Lemma|Corollary|Remark|Definition|Assumption|Example|Table|Figure";
+const LABELED = "Theorem|Proposition|Lemma|Corollary|Remark|Definition|Assumption|Example|Table|Figure";
 const LABEL_NUMBER = String.raw`[A-Z]?\d+(?:\.\d+)?`;
-const STATEMENT = new RegExp(String.raw`^(?:!\[)?\*\*(${LABELLED}) (${LABEL_NUMBER})[ .(]`, "u");
-const CITED_STATEMENTS = new RegExp(String.raw`\b(${LABELLED})s? (${LABEL_NUMBER}(?:(?:,\s*(?:and\s+)?|\s+and\s+|\s*[–-]\s*)${LABEL_NUMBER})*)`, "gu");
+const STATEMENT = new RegExp(String.raw`^(?:!\[)?\*\*(${LABELED}) (${LABEL_NUMBER})[ .(]`, "u");
+const CITED_STATEMENTS = new RegExp(String.raw`\b(${LABELED})s? (${LABEL_NUMBER}(?:(?:,\s*(?:and\s+)?|\s+and\s+|\s*[–-]\s*)${LABEL_NUMBER})*)`, "gu");
 const CITED_EQUATION = /\(((?:[A-Z]\.)?\d+\.\d+)\)/gu;
 // A label right after a year or "their" belongs to another paper.
 const OTHER_PAPER = /(?:\d{4}[a-z]?,|\btheir)\s*$/u;

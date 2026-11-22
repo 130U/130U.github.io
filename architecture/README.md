@@ -27,8 +27,8 @@ paragraph runs and footnotes; each blog post is one Markdown file. The
 commands, and extension checks.
 
 Next.js exports HTML, CSS, and JavaScript to `website/out/`. Build assembly includes
-this viewer and applies the production content security policy before GitHub Actions
-deploys the artifact to GitHub Pages. There is no request-time API, database,
+this viewer and applies the production content security policy and frame guard before
+GitHub Actions deploys the artifact to GitHub Pages. There is no request-time API, database,
 authentication, or analytics. The browser interactions are the Canvas 2D clarinet hero,
 the top-level navigation menu, article contents, article figures, table and figure zoom,
 and legal-note previews; reading and ordinary links work without JavaScript.

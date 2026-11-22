@@ -27,7 +27,7 @@
 }
 
 /* The page behind a note is frosted as it is behind the zoom stage: the page
-   colour over a light blur, so the reserved scrollbar gutter, which shows the
+   color over a light blur, so the reserved scrollbar gutter, which shows the
    page, matches it. */
 .dialog::backdrop {
   background: color-mix(in srgb, var(--page, #f7f6f5) 58%, transparent);

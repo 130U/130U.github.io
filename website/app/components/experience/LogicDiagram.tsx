@@ -11,15 +11,15 @@ const pad = (value: number) => String(value).padStart(2, "0");
  * Wires. Every connector is drawn in SVG with crisp edges, as 1px bars placed by
  * percentages of its grid area and pixel offsets, so a line keeps one width and
  * one color at every device scale. Where two bars of one line meet, one runs to
- * the centre line of the other or past it; the colors are opaque, so the overlap
+ * the center line of the other or past it; the colors are opaque, so the overlap
  * cannot show and no rounding can open a gap. Arrowheads are drawn on the
- * geometric centre line of the bar they end.
+ * geometric center line of the bar they end.
  */
 type At = readonly [percent: number, px: number];
 const at = (percent: number, px = 0): At => [percent, px];
 const pct = (value: number) => `${Number(value.toFixed(4))}%`;
 
-/** A 1px bar along one axis from `from` to `to`, centred across that axis on `across`. */
+/** A 1px bar along one axis from `from` to `to`, centered across that axis on `across`. */
 function Bar({ axis, from, to, across }: { axis: "h" | "v"; from: At; to: At; across: At }) {
   const span = to[0] - from[0];
   const extra = to[1] - from[1];
@@ -60,7 +60,7 @@ function Wires({ wire, className, style, children }: { wire: string; className: 
 
 /**
  * The connectors between two stages, one drawing over every lane row of the
- * connector column. Lane rows share one height, so lane i of n is centred at
+ * connector column. Lane rows share one height, so lane i of n is centered at
  * (2i + 1) / 2n of the drawing, and a single node at its middle.
  */
 function Links({ from, to }: { from: number; to: number }) {
@@ -100,19 +100,19 @@ const columns = (stage: ArchitectureDiagram["stages"][number]) => (sideBySide(st
 
 /**
  * The step between two stages of the vertical sequence: a line down the
- * column's centre from the stage above to an arrowhead 8px over the next
+ * column's center from the stage above to an arrowhead 8px over the next
  * stage's rule. Where the stage above sets its nodes side by side, each node
  * drops into a short bus over the line, so the step leaves the whole stage.
  */
 function Step({ columns: count }: { columns: number }) {
-  const centres = Array.from({ length: count }, (_, index) => at(((2 * index + 1) / (2 * count)) * 100));
+  const centers = Array.from({ length: count }, (_, index) => at(((2 * index + 1) / (2 * count)) * 100));
   return (
     <Wires wire="step" className={styles.step}>
       <g className={styles.stepStem}><Bar axis="v" from={at(0)} to={at(100)} across={at(50)} /></g>
       {count > 1 && (
         <g className={styles.stepBus}>
-          {centres.map((x) => <Bar key={x[0]} axis="v" from={at(0)} to={at(0, 8.5)} across={x} />)}
-          <Bar axis="h" from={centres[0]} to={centres[count - 1]} across={at(0, 8)} />
+          {centers.map((x) => <Bar key={x[0]} axis="v" from={at(0)} to={at(0, 8.5)} across={x} />)}
+          <Bar axis="h" from={centers[0]} to={centers[count - 1]} across={at(0, 8)} />
           <Bar axis="v" from={at(0, 8)} to={at(0, 32)} across={at(50)} />
         </g>
       )}
@@ -270,16 +270,16 @@ export function LogicDiagram({ diagram }: { diagram: ArchitectureDiagram }) {
                 </p>
                 {stage.nodes.map((node, nodeIndex) => {
                   const end = loopEnd(stageIndex, nodeIndex);
-                  const centred = single && lanes > 1;
+                  const centered = single && lanes > 1;
                   return (
                     <div
                       className={styles.cell}
                       key={node.title}
-                      data-single={centred ? "" : undefined}
+                      data-single={centered ? "" : undefined}
                       data-loop={end}
                       style={{ gridColumn: nodeColumn(stageIndex), gridRow: single ? allLanes : nodeIndex + 2 }}
                     >
-                      {end && centred && <span className={styles.spacer} />}
+                      {end && centered && <span className={styles.spacer} />}
                       <div className={stage.emphasis ? `${styles.node} ${styles.emphasis}` : styles.node} data-node>
                         {node.tag && <span className={styles.tag}><Words text={node.tag} /></span>}
                         <span className={styles.nodeTitle}><Words text={node.title} /></span>

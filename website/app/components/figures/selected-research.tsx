@@ -132,7 +132,7 @@ const SPREAD = {
 
 function AsianIntervalLine() {
   const interval = ([low, high]: readonly [number, number]) => `[${low}, ${high}]`;
-  // The axis runs far enough past 6.52 for its tick to stand centred on its rule.
+  // The axis runs far enough past 6.52 for its tick to stand centered on its rule.
   const x = linear(6.5075, 6.5212);
   const ticks = [6.51, 6.515, 6.52].map((at) => ({ at, label: at.toFixed(3) }));
   const grid = ticks.map((tick) => x(tick.at));

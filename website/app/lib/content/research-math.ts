@@ -280,8 +280,8 @@ function assistiveMathml(tex: string, display: boolean) {
 }
 
 /** A column of a tabular display, aligned as the manuscript aligns it. */
-export type ResearchDisplayTableColumn = Readonly<{ align: "l" | "c" | "r" }>;
-export type ResearchDisplayTableRow = Readonly<{
+type ResearchDisplayTableColumn = Readonly<{ align: "l" | "c" | "r" }>;
+type ResearchDisplayTableRow = Readonly<{
   /** Each cell's TeX as the page draws it, or an empty string for an empty cell. */
   cells: readonly string[];
   /** The rule under the row: the firm rule under a header row, or a hairline between rows. */
@@ -534,19 +534,19 @@ export function renderResearchDisplayTable(tex: string): ResearchDisplayTableMar
  * connecting word that opens the row ("where it equals", "so that"), the formula, or the
  * qualifier that closes it ("(0<p<1)", "for x<y", "\ell=P,Q"). Each is a slice of the display's
  * TeX; the space of the manuscript between two parts belongs to neither. */
-export type ResearchDisplayRowPart = Readonly<{ kind: "word" | "formula" | "qualifier"; start: number; end: number }>;
+type ResearchDisplayRowPart = Readonly<{ kind: "word" | "formula" | "qualifier"; start: number; end: number }>;
 /** A row of a display set as rows: its TeX, the slice of the display's TeX from `start` to `end`;
  * the space a row break of the manuscript asks for above it beyond one line of mathematics; for a
  * constraint after the first, the connecting word and space it hangs under ("s.t." and its quad),
  * so the constraints of a problem start on one line; and, for a row that may part, its parts. */
-export type ResearchDisplayRow = Readonly<{
+type ResearchDisplayRow = Readonly<{
   tex: string; start: number; end: number; extraEm?: number; hang?: string; parts?: readonly ResearchDisplayRowPart[];
 }>;
 /** A part of a row as drawn: its drawing, from its own slice of the TeX; the space of the
  * manuscript before it where the row stands whole (`joinEm`, from the end of the part before to
  * its own start, so the parts stand exactly where the whole row's drawing sets them); and, where
  * the row parts, the space above it (`spaceEm`, as between rows). */
-export type ResearchDisplayStackPart = ResearchMathMarkup & Readonly<{
+type ResearchDisplayStackPart = ResearchMathMarkup & Readonly<{
   kind: ResearchDisplayRowPart["kind"]; start: number; end: number; joinEm: number; spaceEm: number;
 }>;
 export type ResearchDisplayStackRow = ResearchMathMarkup & Readonly<{
