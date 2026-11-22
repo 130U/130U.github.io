@@ -1,5 +1,5 @@
 import type { CSSProperties } from "react";
-import { BarAxis, BarHeader, BarRow, Bars, Digits, Dot, Figure, Legend, Mark, Panel, Plot, Range, Seg, Tx, fixed, grouped, linear, logarithmic, normalCdf, path, sample, styles as kit, type Crosshair } from "./kit";
+import { BarAxis, BarHeader, BarRow, Bars, Digits, Dot, Figure, Legend, Mark, Panel, Plot, Range, Seg, Tx, fixed, grouped, linear, logarithmic, normalCdf, path, sample, styles as kit, wraps, type Crosshair } from "./kit";
 import styles from "./Figures.module.css";
 import results from "./Results.module.css";
 
@@ -166,9 +166,10 @@ function LabelFlip() {
   const curve = sample(0, 3, 121, (ratio) => 100 * normalCdf(-ratio));
   const every = curve.filter((_, index) => index % 4 === 0);
   // The final annotation ends at the plot's right edge, over the flat tail
-  // beyond 2.25 where the curve lies below it, and takes two lines where that
-  // tail is too short for one. Only the symbol is set as mathematics, so the
-  // numbers read in the label's own figures, as the readout writes them.
+  // beyond 2.25 where the curve lies below it. In a narrow figure each label
+  // keeps its rate and its point's readout names the ratio. Only the symbol is
+  // set as mathematics, so the numbers read in the label's own figures, as the
+  // readout writes them.
   const points = [
     { ratio: 0.25, rate: "40.13%", nudge: 0 },
     { ratio: 1, rate: "15.87%", nudge: 0 },
@@ -188,9 +189,8 @@ function LabelFlip() {
         yTicks={[0, 10, 20, 30, 40, 50].map((at) => ({ at, label: `${at}%`, solid: at === 0 }))}
         yTitle="Label-flip probability"
         xTitle="Margin-to-noise ratio $\gamma/s$"
-        // Tall enough on a phone that the 2.28% label, on two lines there,
-        // stands clear of the 15.87% label above it.
-        height="clamp(270px, 60cqi, 300px)"
+        // Tall enough on a phone that the 2.28% label stands clear of the 10% grid line.
+        height="clamp(290px, 60cqi, 300px)"
         crosshair={{
           x: every.map(([ratio]) => x(ratio)),
           heading: every.map(([ratio]) => `γ/s = ${ratio.toFixed(2)}`),
@@ -204,8 +204,8 @@ function LabelFlip() {
         {points.map((point) => {
           const rate = Number.parseFloat(point.rate);
           return <span key={point.ratio}>
-            <Dot left={x(point.ratio)} top={100 - y(rate)} tone="ink" className={kit.fade} />
-            <Mark left={point.ratio === 2 ? 100 : x(point.ratio) + point.nudge} top={100 - y(rate)} anchor={point.ratio === 2 ? "bottom-right" : "above-right"} className={`${kit.fade} ${styles.numericAnnotation}`} tag wrap={point.ratio === 2} style={point.ratio === 2 ? { maxWidth: `min(6.5rem, max(${(100 - x(2.25)).toFixed(2)}%, 4.5rem))` } : undefined}>{`$\\gamma/s$ = ${point.ratio}: ${point.rate}`}</Mark>
+            <Dot left={x(point.ratio)} top={100 - y(rate)} tone="ink" className={kit.fade} tip={`γ/s = ${point.ratio}\nΦ(−γ/s) = ${point.rate}`} />
+            <Mark left={point.ratio === 2 ? 100 : x(point.ratio) + point.nudge} top={100 - y(rate)} anchor={point.ratio === 2 ? "bottom-right" : "above-right"} className={`${kit.fade} ${styles.numericAnnotation}`} tag><><span className={kit.wide}><Tx>{`$\\gamma/s$ = ${point.ratio}:`}</Tx>{" "}</span>{point.rate}</></Mark>
           </span>;
         })}
       </Plot>
@@ -255,19 +255,23 @@ function BridgeLeakage() {
           <span className={styles.bracket} style={{ left: `${x(0.5)}%`, top: `${100 - y(0.5)}%`, height: `${y(0.5) - y(0.25)}%` }} />
           <Dot left={x(0.5)} top={100 - y(0.5)} tone="ink" className={kit.fade} />
           <Dot left={x(0.5)} top={100 - y(0.25)} tone="accent" className={kit.fade} />
-          {/* Every label stands in open paper: the halving beside its bracket,
-              between the two curves, on two lines where the plot is narrow; the
-              line's name above it; and the bridge's name low under its arch,
-              where the arch is widest. The plot is tall enough for both. */}
-          <Mark left={x(0.5)} top={100 - y(0.375)} anchor="left" tone="accent" wrap knockout={false} className={kit.fade}>Variance halves</Mark>
+          {/* Every label stands in open paper, on one line: the halving beside
+              its bracket, between the two curves, in one word where the plot is
+              narrow; the line's name above it; and the bridge's name low under
+              its arch, where the arch is widest. The plot is tall enough for
+              both. */}
+          <Mark left={x(0.5)} top={100 - y(0.375)} anchor="left" tone="accent" knockout={false} className={`${kit.fade} ${styles.wideOnly}`}>Variance halves</Mark>
+          <Mark left={x(0.5)} top={100 - y(0.375)} anchor="left" tone="accent" knockout={false} className={`${kit.fade} ${styles.narrowOnly}`}>Halves</Mark>
           <Mark left={x(-0.24)} top={100 - y(0.75)} anchor="center" className={kit.muted}>History</Mark>
           <Mark left={x(0.6)} top={100 - y(0.6)} anchor="above-left" className={kit.fade}>{"Given $\\mathcal{F}_s$"}</Mark>
           <Mark left={x(0.5)} top={100 - y(0.065)} anchor="center" tone="accent" className={kit.fade}>{"Given $\\mathcal{F}_s$ and $X_T$"}</Mark>
         </Plot>
+        {/* Each band names its information set on one line; where the figure
+            is narrow it keeps the set's symbol, and its readout the name. */}
         <div className={styles.info} style={{ "--split": `${x(0)}%` } as CSSProperties} aria-label="Information sets" role="img">
-          <span className={`${styles.infoBand} ${kit.steel}`} data-span="" data-hatch=""><span><Tx>{"Construction $\\mathcal{F}_{\\text{gen}}$: complete path and endpoint"}</Tx></span></span>
-          <span className={`${styles.infoBand} ${kit.accent}`} data-fill=""><span><Tx>{"Permitted $\\mathcal{F}_s$"}</Tx></span></span>
-          <span className={`${styles.infoBand} ${kit.ink}`}><span><Tx>{"Evaluation $\\mathcal{F}_{\\text{eval}}$: outcomes after $s$"}</Tx></span></span>
+          <span className={`${styles.infoBand} ${kit.steel}`} data-span="" data-hatch="" data-tip={"Construction\nComplete path and endpoint"}><span><span className={styles.wideOnly}><Tx>{"Construction $\\mathcal{F}_{\\text{gen}}$: complete path and endpoint"}</Tx></span><span className={styles.narrowOnly}><Tx>{"$\\mathcal{F}_{\\text{gen}}$"}</Tx></span></span></span>
+          <span className={`${styles.infoBand} ${kit.accent}`} data-fill="" data-tip="Permitted"><span><span className={styles.wideOnly}><Tx>{"Permitted $\\mathcal{F}_s$"}</Tx></span><span className={styles.narrowOnly}><Tx>{"$\\mathcal{F}_s$"}</Tx></span></span></span>
+          <span className={`${styles.infoBand} ${kit.ink}`} data-tip={"Evaluation\nOutcomes after s"}><span><span className={styles.wideOnly}><Tx>{"Evaluation $\\mathcal{F}_{\\text{eval}}$: outcomes after $s$"}</Tx></span><span className={styles.narrowOnly}><Tx>{"$\\mathcal{F}_{\\text{eval}}$"}</Tx></span></span></span>
         </div>
       </div>
       </div>
@@ -297,8 +301,8 @@ function RankingReversal() {
       <div className={styles.rankingViewport} data-figure-scroll role="region" tabIndex={0} aria-label="Ranking comparison">
         <div className={styles.rankingCanvas}>
           <div className={styles.rankingHeads} aria-hidden="true">
-            <span data-ranking-heading><Tx>True validity</Tx><br /><Tx>$\theta_m$</Tx></span>
-            <span data-ranking-heading><Tx>Observed score</Tx><br /><Tx>$s_m$</Tx></span>
+            <span data-ranking-heading><Tx>{"True validity $\\theta_m$"}</Tx></span>
+            <span data-ranking-heading><Tx>{"Observed score $s_m$"}</Tx></span>
           </div>
         <Plot
           label="Model A: true validity 72%, observed score 73.12%. Model B: true validity 64%, observed score 76.96%. The ranking reverses."
@@ -533,7 +537,7 @@ function ProofObligations() {
           <span className={styles.dagNode} data-fixed="" data-dag-node="C" data-state={state("C")} style={{ left: `${position.C[0]}%`, top: `${position.C[1]}%` }}><Tx>{"$C_q$"}</Tx></span>
         </div>
       </div>
-      <p className={styles.readout} data-dag-status aria-live="polite">{readout(failed, [...unverified])}</p>
+      <p className={styles.readout} data-dag-status aria-live="polite" {...wraps}>{readout(failed, [...unverified])}</p>
     </Figure>
   );
 }
@@ -630,10 +634,12 @@ function CoverageCollapse() {
         </>}
       >
         <span className={styles.hline} style={{ top: `${100 - y(95)}%` }} />
-        <Dot left={x(100)} top={100 - y(48.4)} tone="ink" className={kit.fade} />
-        <Mark left={x(100)} top={100 - y(48.4)} anchor="above-right" tag wrap className={kit.fade}>48.40% at $n=100$</Mark>
-        <Dot left={x(1000)} top={100 - y(0.000637)} tone="ink" className={kit.fade} />
-        <Mark left={100} top={100 - y(0.000637)} anchor="bottom-right" tag wrap className={`${kit.fade} ${styles.alignEnd} ${styles.numericAnnotation}`} style={{ maxWidth: "min(12rem, 44%)" }}><><Digits text="0.000637%" /> at <Tx>{"$n=1{,}000$"}</Tx></></Mark>
+        {/* Each point names its coverage and its record count on one line; in
+            a narrow figure it keeps the coverage, and its readout the count. */}
+        <Dot left={x(100)} top={100 - y(48.4)} tone="ink" className={kit.fade} tip={"n = 100\nBias ignored: 48.40%"} />
+        <Mark left={x(100)} top={100 - y(48.4)} anchor="above-right" tag className={kit.fade}><>48.40%<span className={kit.wide}> at <Tx>{"$n=100$"}</Tx></span></></Mark>
+        <Dot left={x(1000)} top={100 - y(0.000637)} tone="ink" className={kit.fade} tip={"n = 1,000\nBias ignored: 0.000637%"} />
+        <Mark left={100} top={100 - y(0.000637)} anchor="bottom-right" tag className={`${kit.fade} ${styles.numericAnnotation}`}><><Digits text="0.000637%" /><span className={kit.wide}> at <Tx>{"$n=1{,}000$"}</Tx></span></></Mark>
         <Mark left={100} top={100 - y(97.5)} anchor="bottom-right" tone="accent" className={kit.fade}>97.50%</Mark>
       </Plot>
     </Figure>

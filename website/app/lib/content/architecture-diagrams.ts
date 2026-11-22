@@ -105,7 +105,7 @@ export const architectureDiagrams: Readonly<Record<number, ArchitectureDiagram>>
   8: {
     label: FRAMEWORK,
     stages: [
-      { label: "Task", nodes: [{ title: "Autonomous space task", detail: "Delayed spacecraft operations, orbital avoidance, debris capture, SETI" }] },
+      { label: "Task", nodes: [{ title: "Autonomous task", detail: "Delayed spacecraft operations, orbital avoidance, debris capture, SETI" }] },
       { label: "Test", emphasis: true, nodes: [{ title: "Two-threshold test", detail: "Authority to act, then evidence to delegate, then the point at which human review can still change the outcome" }] },
       {
         label: "Supervise",
@@ -178,7 +178,7 @@ export const architectureDiagrams: Readonly<Record<number, ArchitectureDiagram>>
         nodes: [
           { title: "Protection" },
           { title: "Repair" },
-          { title: "Compensation for new loss" },
+          { title: "Compensation", detail: "For new loss" },
         ],
       },
       { label: "Evidence", nodes: [{ title: "Functional replacement", detail: "Additionality, timing and a discount for delay and risk, not canopy growth or construction alone; West Lake, Deep Bay, San Tin" }] },

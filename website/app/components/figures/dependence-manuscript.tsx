@@ -1,5 +1,5 @@
 import type { CSSProperties, ReactNode } from "react";
-import { Arrow, Dot, Figure, Mark, Plot, Schematic, Tx, linear, path, styles as kit, type Crosshair } from "./kit";
+import { Arrow, Dot, Figure, Mark, Plot, Schematic, Tx, linear, path, styles as kit, wraps, type Crosshair } from "./kit";
 import styles from "./Figures.module.css";
 
 /* The four figures of "Critical Dependence Stress", drawn natively from the
@@ -43,7 +43,7 @@ function TailLayerFigure({ manuscript, caption }: ManuscriptFigureProps) {
     >
       <div className={styles.panels}>
         <div className={styles.panel}>
-          <p className={styles.panelTitle}>(a) Local transport in a thin layer</p>
+          <p className={styles.panelTitle} {...wraps}>(a) Local transport in a thin layer</p>
           <Schematic
             label="A thin layer around the tail surface B = v, of thickness of order epsilon; points of the layer move over distances of order epsilon, so the local transport cost is of order epsilon squared."
             size={[aw, ah]}
@@ -69,12 +69,12 @@ function TailLayerFigure({ manuscript, caption }: ManuscriptFigureProps) {
             <Mark left={2} top={pct(ay(0), ah)} anchor="above-right" tone="accent">$B=v$</Mark>
             <Mark left={93} top={pct(ay(0.13), ah)} anchor="bottom">$O(\varepsilon)$</Mark>
             <Mark left={3} top={pct(ay(0.47), ah)} anchor="top-left" className={styles.note}>
-              <><Tx>{"Mass $O(\\varepsilon)$ × distance $O(\\varepsilon)$"}</Tx><br /><Tx>{"Local transport cost $O(\\varepsilon^2)$"}</Tx></>
+              <><span className={styles.labelLine}><Tx>{"Mass $O(\\varepsilon)$ × distance $O(\\varepsilon)$"}</Tx></span><span className={styles.labelLine}><Tx>{"Local transport cost $O(\\varepsilon^2)$"}</Tx></span></>
             </Mark>
           </Schematic>
         </div>
         <div className={styles.panel}>
-          <p className={styles.panelTitle}>(b) Cancellation of full marginal discrepancies</p>
+          <p className={styles.panelTitle} {...wraps}>(b) Cancellation of full marginal discrepancies</p>
           <Schematic
             label="A signed marginal CDF discrepancy along one coordinate from l_i to r_i, with the remaining plan supplying its negative; the compensation cost is gamma_i times the integral of its absolute value."
             size={[bw, bh]}
@@ -117,7 +117,7 @@ function CornerCapacityFigure({ manuscript, caption }: ManuscriptFigureProps) {
     <Figure id="dependence-corner" className={styles.cornerFigure} caption={caption} manuscript={manuscript}>
       <div className={styles.corner}>
         <div className={styles.panel}>
-          <p className={styles.panelTitle}>Projected source geometry</p>
+          <p className={styles.panelTitle} {...wraps}>Projected source geometry</p>
           <Schematic
             label="The projected source region Omega on the square from xi minus to xi plus, with the corner region E delta at the upper left, away from the diagonal x = y, and two hatched return triangles R1 and R2 on the diagonal at the lower left and upper right."
             size={[side, side]}
@@ -248,7 +248,7 @@ function BudgetEnvelopesFigure({ manuscript, caption }: ManuscriptFigureProps) {
         <Mark left={(x(LOW) + x(HIGH)) / 2} top={0} anchor="bottom" className={styles.criticalLabel}>$13/64\leq s^*\leq 29/96$</Mark>
       </Plot>
       <div className={styles.inset}>
-        <p className={styles.insetTitle}><Tx>{"Initial range: $s_{\\rm lin}=1/96$"}</Tx></p>
+        <p className={styles.insetTitle} {...wraps}><Tx>{"Initial range: $s_{\\rm lin}=1/96$"}</Tx></p>
         <Plot
           label="Inset on budgets from 0 to 0.02: the two profiles coincide with the exact initial segment 2s minus 5/16 up to s = 1/96, then separate."
           x={ix}

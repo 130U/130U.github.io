@@ -191,7 +191,14 @@ indices, and View feedback for pointer, keyboard, and touch input. Framed lists 
 global `ledger`, `ledger-item`, `ledger-title`, `ledger-body`, and `ledger-prose`
 classes, every Read More link uses `read-more` with the shared `ReadingArrow`, and every
 return link uses `ReturnArrow`; reuse them for any new list or page. `LogicDiagram`
-renders the article diagrams from `app/lib/content/architecture-diagrams.ts`. Browser
+renders the article diagrams from `app/lib/content/architecture-diagrams.ts`; every node
+title, lane name and stage label holds one line, and `app/lib/content/diagram-layout.ts`
+measures the titles in the interface face's advance widths (a table of the printable
+ASCII characters at weights 400 and 500) to decide which stages set their nodes side by
+side, while `tests/figure-lines.test.mjs` fails a diagram whose stages cannot stand left to
+right from 860px: shorten a new title, keeping its words in the node's description, or
+the test and the browser layout check fail. A title with a character outside that table
+fails the build until the table carries it. Browser
 interaction lives in focused client components, and the About hero is isolated in
 `app/components/clarinet-hero/`.
 
@@ -266,8 +273,15 @@ one of its values in a label or its caption: draw the table's values, under its 
 and in its order, and leave the numbers to the table and to the marks' `tip`s.
 `tests/figure-reading-load.test.mjs` holds every built figure to the reading budget of
 the design (caption, title, legend and value-note limits), and the browser layout check
-fails a caption set at the reading size or a legend entry that wraps from 390px, so a
-new or edited figure is checked against the same budget. A `Mark` in a plot is knocked
+fails a caption set at the reading size, so a new or edited figure is checked against the
+same budget. Every text of a figure holds one line, save its title and the text marked
+with the kit's `wraps` (`data-figure-wraps`: a panel's title, a sentence, a question, a
+node's description); the browser layout check fails any other text that takes two lines,
+in every view at its check widths, at every figure width from 280 to 600px and on the zoom
+stage. Give a label that lacks room another place, its value alone with its qualifier in
+`kit.wide` and in its mark's `tip`, a key in `kit.narrow` beneath the plot, or the
+figure's scroll width; set a name and its value as two `labelLine`s, never with a line
+break, and never mark a label as wrapping. A `Mark` in a plot is knocked
 out of the grid lines behind it; pass `knockout={false}` for a label set on a tinted
 region or held clear of a rule by its own padding, and place it clear of the lines. The
 browser layout check fails any figure label that a grid line or reference rule crosses
@@ -276,12 +290,12 @@ also sets each figure at every column width from 280 to 600px and fails any labe
 text stands less than 4px from a curve (beyond its half stroke), whose knockout or tag
 holds a point of a curve, or that overlaps a dot, bar, bracket or another label, tick labels closer than
 6px, a view switch whose labels leave their segments, and a legend swatch with no mark
-of its form and colour; place such a label in open space (another anchor, a `wrap`ped
-label, or a `narrowOnly`/`wideOnly` pair where a figure's widths need two places),
-never over the curve. A bar chart's reference rule is named through `BarHeader` with
+of its form and colour; place such a label in open space (another anchor, a value alone
+in a narrow figure, or a `narrowOnly`/`wideOnly` pair where a figure's widths need two
+places), never over the curve. A bar chart's reference rule is named through `BarHeader` with
 `rule`, and its group rows are `BarGroup`s, so the rule runs from its name to the axis;
 a tick whose value a drawn rule stands for takes `grid: false`.
-It also fails any numbered step whose wrapped title does not hang beside its number,
+It also fails any numbered step whose title does not hang beside its number,
 and loads each page with note references on touch phones and tablets and on a desktop,
 failing a reference that opens a line or stands more than 3px from the word it follows.
 

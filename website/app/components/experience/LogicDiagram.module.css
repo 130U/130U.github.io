@@ -42,6 +42,7 @@
   color: var(--ink);
   font-size: var(--type-label);
   line-height: var(--label-leading);
+  white-space: nowrap;
 }
 
 .stageLabel::before {
@@ -86,12 +87,15 @@
   flex: 0 0 auto;
 }
 
-/* A lane's name is a label, in the diagram's one face. */
+/* A lane's name is a label, in the diagram's one face. A node's title and its
+   lane's name hold one line, a stage label too: the layout gives each the room
+   (diagram-layout.ts). */
 .tag {
   color: var(--muted);
   font-family: var(--font-text);
   font-size: var(--type-label);
   line-height: var(--label-leading);
+  white-space: nowrap;
 }
 
 .nodeTitle {
@@ -100,7 +104,7 @@
   font-weight: 500;
   line-height: 1.35;
   letter-spacing: -0.003em;
-  text-wrap: balance;
+  white-space: nowrap;
 }
 
 .nodeDetail {
@@ -111,7 +115,8 @@
   text-wrap: pretty;
 }
 
-/* A hyphenated compound holds one line where the node has room for it. */
+/* A hyphenated compound in a node's description holds one line where the node
+   has room for it. */
 .compound {
   display: inline-block;
   max-width: 100%;
@@ -251,7 +256,7 @@
 }
 
 /* Narrow: the same markup becomes a vertical sequence. */
-@container diagram (width < 720px) {
+@container diagram (width < 53.75rem) {
   .canvas {
     display: block;
   }
@@ -312,25 +317,26 @@
   }
 }
 
-/* Mid widths: parallel nodes of a stage sit side by side. */
-@container diagram (480px <= width < 720px) {
-  .stage {
+/* Mid widths: parallel nodes of a stage sit side by side where each of their
+   titles holds one line there (data-side); the others stack. */
+@container diagram (30rem <= width < 53.75rem) {
+  .stage[data-side] {
     display: grid;
     grid-template-columns: repeat(var(--columns), minmax(0, 1fr));
     gap: 8px;
   }
 
-  .stageLabel {
+  .stage[data-side] > .stageLabel {
     grid-column: 1 / -1 !important;
     grid-row: auto !important;
   }
 
-  .stage > .cell {
+  .stage[data-side] > .cell {
     grid-column: auto !important;
     grid-row: auto !important;
   }
 
-  .stage > .cell + .cell {
+  .stage[data-side] > .cell + .cell {
     margin-top: 0;
   }
 

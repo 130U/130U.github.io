@@ -29,7 +29,7 @@ export function Tx({ children }: { children: string }) {
 }
 
 /** A figure's title, each hyphenated compound held on one line, so a word
-    such as "three-month" never breaks at its hyphen. */
+    such as "three-month" never breaks at its hyphen. A title may wrap. */
 function Title({ text }: { text: string }) {
   if (text.includes("$")) return <Tx>{text}</Tx>;
   return <>{text.split(/(\S+-\S+)/u).map((part, index) => (index % 2 ? <span key={index} className={styles.keep}>{part}</span> : <KeepRanges key={index} text={part} />))}</>;
@@ -55,6 +55,14 @@ export function FigureCaption({ inlines }: { inlines: ArticleInline[] }) {
 }
 
 const tone = (value: Tone) => styles[value];
+
+/**
+ * Text in a figure holds one line, except a title and prose: a sentence, a
+ * question, a node's description. A panel's title and prose carry this
+ * attribute (the figure's own title carries data-figure-title), and the
+ * browser layout check holds every other text of a figure to one line.
+ */
+export const wraps = { "data-figure-wraps": "" } as const;
 
 /** A class list of the names given, leaving out absent ones. */
 export const classes =(...names: (string | false | undefined)[]) => names.filter(Boolean).join(" ");
@@ -225,15 +233,16 @@ export function Dot({ left, top, tone: color = "ink", ring, shape, tip, classNam
  * box that sits on the point: "left" puts the label to the right of it. In a
  * plot the label is knocked out of the grid lines behind it; one set on a
  * tinted region, or held clear of a rule by its own padding, is drawn without
- * a knockout (`knockout={false}`) and stands clear of the lines instead.
+ * a knockout (`knockout={false}`) and stands clear of the lines instead. A
+ * label holds one line: where it lacks room, the figure places it elsewhere,
+ * shortens it to its value (`Wide`) or keys it in a narrow layout.
  */
-export function Mark({ left, top, anchor = "left", tone: color = "ink", strong, wrap, tag, knockout = true, children, className, style }: {
+export function Mark({ left, top, anchor = "left", tone: color = "ink", strong, tag, knockout = true, children, className, style }: {
   left: number;
   top: number;
   anchor?: "left" | "right" | "top" | "bottom" | "center" | "top-left" | "bottom-left" | "top-right" | "bottom-right" | "above-right" | "above-left" | "below-right" | "below-left";
   tone?: Tone;
   strong?: boolean;
-  wrap?: boolean;
   tag?: boolean;
   knockout?: boolean;
   children: ReactNode;
@@ -257,19 +266,12 @@ export function Mark({ left, top, anchor = "left", tone: color = "ink", strong, 
     "below-left": ["calc(-100% - 5px)", "5px"],
   };
   const [ax, ay] = offsets[anchor];
-  // Directional labels use the space on their anchored side. Centered labels
-  // use their CSS or explicit width, including the plot's insets.
-  const extendsLeft = anchor === "right" || anchor.endsWith("-right") && !anchor.startsWith("above") && !anchor.startsWith("below") || anchor === "above-left" || anchor === "below-left";
-  const centered = anchor === "top" || anchor === "bottom" || anchor === "center";
-  const room = extendsLeft ? left : 100 - left;
-  const fit = wrap && !centered && room > 0 && style?.maxWidth === undefined ? { maxWidth: `min(13rem, calc(${room.toFixed(2)}% - 8px))` } : undefined;
   return (
     <span
       className={classes(styles.mark, styles[color], strong && styles.markStrong, className)}
-      data-wrap={wrap ? "" : undefined}
       data-tag={tag ? "" : undefined}
       data-bare={knockout ? undefined : ""}
-      style={{ ...fit, ...style, left: `${left}%`, top: `${top}%`, "--ax": ax, "--ay": ay } as CSSProperties}
+      style={{ ...style, left: `${left}%`, top: `${top}%`, "--ax": ax, "--ay": ay } as CSSProperties}
     >
       {typeof children === "string" ? <Tx>{children}</Tx> : children}
     </span>

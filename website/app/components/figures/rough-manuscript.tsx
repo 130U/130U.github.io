@@ -1,7 +1,7 @@
 import data from "../../../content/selected-research/certified-joint-pricing-errors-in-rough-heston.figures.json";
 import { ROUGH_HESTON, forwardVariance, halfShareDamping, herfindahlLevel, nettingRatio, position } from "../../lib/content/rough-heston-curves";
 import type { ManuscriptFigureProps } from "./dependence-manuscript";
-import { Figure, Mark, Plot, Schematic, Tx, linear, path, styles as kit, type Crosshair } from "./kit";
+import { Figure, Mark, Plot, Schematic, Tx, linear, path, styles as kit, wraps, type Crosshair } from "./kit";
 import styles from "./Figures.module.css";
 
 /* The four figures of "Certified Joint Pricing Errors in Rough Heston", drawn
@@ -166,12 +166,12 @@ function JointErrorSetFigure({ manuscript, caption }: ManuscriptFigureProps) {
           <div>
             <dt><span className={`${kit.swatch} ${kit.accent}`} data-shape="line" />Joint support of the spread</dt>
             <dd data-tone="accent"><Tx>{"0.045461793 index points"}</Tx></dd>
-            <dd>The width of the joint set in the direction of the spread.</dd>
+            <dd {...wraps}>The width of the joint set in the direction of the spread.</dd>
           </div>
           <div>
             <dt><span className={`${kit.swatch} ${kit.ink}`} data-shape="dash" />Leg-by-leg support</dt>
             <dd><Tx>{"0.064536890 index points"}</Tx></dd>
-            <dd>The width of the bounding box in the same direction.</dd>
+            <dd {...wraps}>The width of the bounding box in the same direction.</dd>
           </div>
         </dl>
       </div>
@@ -222,7 +222,7 @@ function PassCountsFigure({ manuscript, caption }: ManuscriptFigureProps) {
           const alpha = candidate.alpha.toFixed(2);
           return (
             <div key={alpha} className={styles.panel}>
-              <p className={styles.panelTitle}><Tx>{`$\\alpha=${alpha}$`}</Tx></p>
+              <p className={styles.panelTitle} {...wraps}><Tx>{`$\\alpha=${alpha}$`}</Tx></p>
               <Plot
                 label={`Positions certified out of 28 against the tolerance in index points at roughness ${alpha}. At tolerances of 1/4, 1/2 and 1 point the joint bound certifies ${[0.25, 0.5, 1].map((tolerance) => count(candidate.joint, tolerance)).join(", ")} positions and the leg-by-leg bound ${[0.25, 0.5, 1].map((tolerance) => count(candidate.legByLeg, tolerance)).join(", ")}.`}
                 x={x}

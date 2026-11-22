@@ -1,5 +1,5 @@
 import type { CSSProperties } from "react";
-import { Dot, Figure, Legend, Mark, Panel, Plot, linear, path, sample, styles as kit } from "./kit";
+import { Dot, Figure, Legend, Mark, Panel, Plot, linear, path, sample, styles as kit, wraps } from "./kit";
 import styles from "./Figures.module.css";
 
 /* ---------- Autonomous authority in space ---------- */
@@ -29,8 +29,8 @@ function RiskTaxonomy() {
             {(row as typeof cells).map((cell, column) => (
               <span key={cell.title} className={styles.cell} role="cell" data-tone={cell.example ? "accent" : undefined} data-column={columns[column]}>
                 <span className={styles.cellTitle}>{cell.title}</span>
-                <span className={styles.cellText}>{cell.text}</span>
-                {cell.example && <span className={styles.cellExample}>{cell.example}</span>}
+                <span className={styles.cellText} {...wraps}>{cell.text}</span>
+                {cell.example && <span className={styles.cellExample} {...wraps}>{cell.example}</span>}
               </span>
             ))}
           </div>
@@ -61,7 +61,7 @@ function TwoThresholds() {
             <div className={`${kit.node} ${styles.flowStep}`} data-tone={step.index === "02" ? "ink" : undefined}>
               <span className={styles.stepIndex} aria-hidden="true">{step.index}</span>
               <span className={kit.nodeTitle}>{step.title}</span>
-              <span className={kit.nodeText}>{step.text}</span>
+              <span className={kit.nodeText} {...wraps}>{step.text}</span>
             </div>
             <span className={styles.flowArrow}><span>{step.branch}</span></span>
             <div className={`${kit.node} ${styles.flowOut}`} data-tone={step.branch === "Yes" ? "accent" : "quiet"}>{step.outcome}</div>
@@ -70,8 +70,8 @@ function TwoThresholds() {
         ))}
         <div className={`${kit.node} ${styles.flowStep}`} data-choice="">
           <span className={styles.stepIndex} aria-hidden="true">04</span>
-          <span className={kit.nodeTitle}>Review cannot protect in time</span>
-          <span className={kit.nodeText}>Choose one bounded alternative.</span>
+          <span className={kit.nodeTitle}>Review comes too late</span>
+          <span className={kit.nodeText} {...wraps}>Choose one bounded alternative.</span>
         </div>
         <span className={styles.flowArrow} data-choice=""><span>Choose</span></span>
         <div className={`${styles.flowOut} ${styles.options}`}>
@@ -84,16 +84,21 @@ function TwoThresholds() {
   );
 }
 
+/* Each step and each bracket's note holds one line. Where the figure is wide
+   the notes stand beside the runs they bracket; where it is narrow each note
+   heads its run, in the run's tone. */
 function CollisionSequence() {
   const steps = [
     "Detect and track objects",
-    "Estimate future states and uncertainty",
+    "Predict states and uncertainty",
     "Screen conjunctions",
     "Select a response",
     "Coordinate where possible",
     "Execute the command",
-    "Evaluate the resulting trajectory",
+    "Evaluate the new trajectory",
   ];
+  // Grid rows in the wide figure (beside) and the narrow one (headed).
+  const stepRow = (index: number) => ({ "--row": index + 1, "--row-narrow": index + 1 + (index >= 1 ? 1 : 0) + (index >= 3 ? 1 : 0) } as CSSProperties);
   return (
     <Figure
       id="collision-sequence"
@@ -102,13 +107,13 @@ function CollisionSequence() {
     >
       <div className={styles.sequence} role="group" aria-label="Operational sequence of collision avoidance">
         {steps.map((step, index) => (
-          <div key={step} className={`${kit.node} ${styles.sequenceStep}`} data-tone={index === 1 || index === 2 ? "accent" : undefined} style={{ gridRow: index + 1 }}>
+          <div key={step} className={`${kit.node} ${styles.sequenceStep}`} data-tone={index === 1 || index === 2 ? "accent" : undefined} style={stepRow(index)}>
             <span className={styles.stepIndex} aria-hidden="true">{String(index + 1).padStart(2, "0")}</span>
             <span>{step}</span>
           </div>
         ))}
-        <p className={styles.sequenceNote} data-tone="accent" style={{ gridRow: "2 / span 2" }}>Forecasting: the ESA challenge</p>
-        <p className={styles.sequenceNote} style={{ gridRow: "4 / span 4" }}>Maneuver policy: assurance beyond prediction</p>
+        <p className={styles.sequenceNote} data-tone="accent" style={{ "--row": "2 / span 2", "--row-narrow": 2 } as CSSProperties}>Forecasting: the ESA challenge</p>
+        <p className={styles.sequenceNote} style={{ "--row": "4 / span 4", "--row-narrow": 5 } as CSSProperties}>Maneuver policy: beyond prediction</p>
       </div>
     </Figure>
   );
@@ -128,26 +133,34 @@ function StateCases() {
     { label: "Decision tested", field: "decision" as const, strong: true },
     { label: "Remedy it calls for", field: "remedy" as const },
   ];
-  const order = (column: number, row: number) => ({ "--order": column * 10 + row } as CSSProperties);
+  // Each case is a row of the comparison: its name, then each field's label
+  // and value on one line, beside each other where the figure is wide and the
+  // label above its value where it is narrow; the comparison scrolls where its
+  // longest value is wider than the figure.
   return (
     <Figure
       id="state-cases"
       title="Three cases, three decisions at risk"
       caption="Permission, operational capability and information are complementary conditions, not substitutes. The remedy follows the decision at risk rather than the nationality of every input, which is why more national hardware cannot solve all three."
     >
-      <div className={styles.compare} style={{ "--count": 3 } as CSSProperties} role="table" aria-label="Comparison of the three cases">
-        <div role="row" style={{ display: "contents" }}>
-          <span className={styles.compareCorner} role="columnheader" style={order(0, 0)} />
-          {cases.map((item, column) => <span key={item.key} className={styles.compareHead} role="columnheader" data-key={item.key} style={order(column + 1, 0)}>{item.name}</span>)}
-        </div>
-        {rows.map((row, rowIndex) => (
-          <div key={row.field} role="row" style={{ display: "contents" }}>
-            <span className={styles.compareLabel} role="rowheader" style={order(0, rowIndex + 1)}>{row.label}</span>
-            {cases.map((item, column) => (
-              <span key={item.key} className={styles.compareValue} role="cell" data-key={item.key} data-label={row.label} data-strong={row.strong ? "" : undefined} style={order(column + 1, rowIndex + 1)}>{item[row.field]}</span>
-            ))}
+      <div className={kit.scrollViewport} data-figure-scroll role="region" tabIndex={0} aria-label="Comparison of the three cases, scroll horizontally to read each remedy">
+        <div className={styles.cases} role="table" aria-label="Comparison of the three cases">
+          <div className={styles.casesHead} role="row">
+            <span role="columnheader">Case</span>
+            {rows.map((row) => <span key={row.field} role="columnheader">{row.label}</span>)}
           </div>
-        ))}
+          {cases.map((item) => (
+            <div key={item.key} className={styles.case} role="row" data-key={item.key}>
+              <span className={styles.caseName} role="rowheader">{item.name}</span>
+              {rows.map((row) => (
+                <span key={row.field} className={styles.caseField} role="cell">
+                  <span className={styles.caseLabel} aria-hidden="true">{row.label}</span>
+                  <span className={styles.caseValue} data-strong={row.strong ? "" : undefined}>{item[row.field]}</span>
+                </span>
+              ))}
+            </div>
+          ))}
+        </div>
       </div>
     </Figure>
   );
@@ -159,7 +172,7 @@ function EvidenceTiers() {
   const tiers = [
     { title: "Aerosol cooling", text: "Established physical basis", strength: 3 },
     { title: "Regional outcomes", text: "Depend on deployment design and background conditions", strength: 2 },
-    { title: "Downstream welfare and geopolitical effects", text: "Involve further uncertainties", strength: 1 },
+    { title: "Downstream effects", text: "Welfare and geopolitical effects involve further uncertainties", strength: 1 },
   ];
   return (
     <Figure
@@ -167,13 +180,12 @@ function EvidenceTiers() {
       title="Evidence organized by mechanism and strength"
       caption="Each step away from the physical mechanism adds uncertainty, so concerns listed side by side do not carry equal evidentiary weight. A deployment assessment should keep the tiers apart."
     >
-      <p className={styles.tierAxis} aria-hidden="true"><span>Physical mechanism</span><span>Downstream effects</span></p>
       <ol className={styles.tiers} aria-label="Evidence tiers, from strongest to weakest">
         {tiers.map((tier) => (
           <li key={tier.title} className={styles.tier}>
             <span className={styles.pips} aria-hidden="true">{[1, 2, 3].map((pip) => <span key={pip} data-on={pip <= tier.strength ? "" : undefined} />)}</span>
             <span className={kit.nodeTitle}>{tier.title}</span>
-            <span className={kit.nodeText}>{tier.text}</span>
+            <span className={kit.nodeText} {...wraps}>{tier.text}</span>
           </li>
         ))}
       </ol>
@@ -188,8 +200,10 @@ function ExitPaths() {
   const sustained: Array<[number, number]> = [[0.02, 0], [0.24, 1], [decision, 1]];
   const taper: Array<[number, number]> = [[decision, 1], [0.97, 0]];
   const stop: Array<[number, number]> = [[decision, 1], [decision + 0.004, 0]];
-  // The tapering pathway is named above the middle of its falling line: on one
-  // line where the plot is wide, on two in a phone's.
+  // The decision is named above its point, the expiry or withdrawal that
+  // brings it in its readout. The tapering pathway is named above the middle of
+  // its falling line and the cessation beside its drop where the figure is
+  // wide; a narrow figure keys the two in a legend beneath the plot.
   const taperLabel = 0.7;
   return (
     <Figure
@@ -212,15 +226,16 @@ function ExitPaths() {
           <path className={kit.accent} d={path(taper, x, y)} />
         </>}
       >
-        <Dot left={x(decision)} top={100 - y(1)} tone="ink" />
-        <Mark left={x(decision)} top={100 - y(1)} anchor="bottom-left" wrap className={`${kit.muted} ${styles.decisionLabel}`}>Authorization expires or support is withdrawn</Mark>
-        <Mark left={x(decision)} top={100 - y(0.2)} anchor="right" tone="steel" knockout={false} className={`${kit.fade} ${styles.cessationLabel}`}>Abrupt cessation</Mark>
-        <Mark left={x(taperLabel)} top={100 - y(1 - (taperLabel - decision) / (0.97 - decision))} anchor="above-right" tone="accent" wrap knockout={false} className={kit.fade}>Tapering pathway</Mark>
+        <Dot left={x(decision)} top={100 - y(1)} tone="ink" tip={"Decision to stop\nAuthorization expires or support is withdrawn"} />
+        <Mark left={x(decision)} top={100 - y(1)} anchor="bottom" className={kit.muted}>Decision to stop</Mark>
+        <Mark left={x(decision)} top={100 - y(0.2)} anchor="right" tone="steel" knockout={false} className={`${kit.fade} ${kit.wide}`}>Abrupt cessation</Mark>
+        <Mark left={x(taperLabel)} top={100 - y(1 - (taperLabel - decision) / (0.97 - decision))} anchor="above-right" tone="accent" knockout={false} className={`${kit.fade} ${kit.wide}`}>Tapering pathway</Mark>
       </Plot>
+      <div className={kit.narrow}><Legend items={[{ label: "Tapering pathway", tone: "accent", shape: "line" }, { label: "Abrupt cessation", tone: "steel", shape: "dash" }]} /></div>
       <dl className={styles.lanes} aria-label="Three separate decisions">
-        <dt>Program control</dt><dd>Political authority can change.</dd>
-        <dt>Operation</dt><dd>Temporary operation passes to a designated public successor under a reviewed continuity plan.</dd>
-        <dt>Physical trajectory</dt><dd>Withdrawal follows a tapering pathway evaluated against emissions and atmospheric conditions.</dd>
+        <dt>Program control</dt><dd {...wraps}>Political authority can change.</dd>
+        <dt>Operation</dt><dd {...wraps}>Temporary operation passes to a designated public successor under a reviewed continuity plan.</dd>
+        <dt>Physical trajectory</dt><dd {...wraps}>Withdrawal follows a tapering pathway evaluated against emissions and atmospheric conditions.</dd>
       </dl>
     </Figure>
   );
@@ -251,6 +266,7 @@ function EvidentiaryChain() {
       viewsLabel="Show the evidentiary chain or the counterfactuals"
     >
       <Panel view="chain" active>
+        <div className={styles.chain}>
         <p className={styles.ladderHead} aria-hidden="true"><span>Link</span><span>Observation that supports it</span></p>
         <ol className={styles.ladder} aria-label="Evidentiary chain">
           {links.map((link, index) => (
@@ -259,14 +275,15 @@ function EvidentiaryChain() {
                 <span className={styles.stepIndex} aria-hidden="true">{String(index + 1).padStart(2, "0")}</span>
                 <span>{link.title}</span>
               </span>
-              <span className={styles.ladderExample}>{link.example ?? ""}</span>
+              <span className={styles.ladderExample} {...wraps}>{link.example ?? ""}</span>
             </li>
           ))}
         </ol>
+        </div>
       </Panel>
       <Panel view="counterfactual" active={false}>
         <dl className={styles.claims}>
-          {claims.map((item) => <div key={item.claim}><dt>{item.claim}</dt><dd>{item.question}</dd></div>)}
+          {claims.map((item) => <div key={item.claim}><dt>{item.claim}</dt><dd {...wraps}>{item.question}</dd></div>)}
         </dl>
       </Panel>
     </Figure>
@@ -293,7 +310,7 @@ function DeepBay() {
     >
       <div className={styles.panels}>
         <div>
-          <p className={styles.panelTitle}>Mapped coverage of the study area, 2000 to 2018</p>
+          <p className={styles.panelTitle} {...wraps}>Mapped coverage of the study area, 2000 to 2018</p>
           <Plot
             label="Mapped coverage: mangrove rose from 8 to 15 percent and mudflat fell from 56 to 43 percent between 2000 and 2018."
             x={x}
@@ -314,7 +331,7 @@ function DeepBay() {
           </Plot>
         </div>
         <div>
-          <p className={styles.panelTitle}>42 wintering waterbird species, 1998 to 2017</p>
+          <p className={styles.panelTitle} {...wraps}>42 wintering waterbird species, 1998 to 2017</p>
           <div className={styles.waffle} role="img" aria-label="Of 42 species, twelve declined significantly and nine increased.">
             {species.map((kind, index) => <span key={index} className={kind === "declined" ? kit.ink : kind === "increased" ? kit.accent : undefined} data-ring={kind === "other" ? "" : undefined} />)}
           </div>
@@ -368,8 +385,8 @@ function SanTinLoss() {
       </Plot>
       <Legend items={[{ label: "Existing wetland function", tone: "ink", shape: "line" }, { label: "Expected replacement function", tone: "accent", shape: "line" }, { label: "Enhancement falls behind", tone: "steel", shape: "dash" }]} />
       <dl className={styles.lanes} aria-label="Approval conditions">
-        <dt>Condition 1</dt><dd>Habitat Creation and Management Plan submitted for approval at least nine months before pond filling.</dd>
-        <dt>Condition 9</dt><dd>Pond filling linked to the start of construction of ecologically enhanced fishponds.</dd>
+        <dt>Condition 1</dt><dd {...wraps}>Habitat Creation and Management Plan submitted for approval at least nine months before pond filling.</dd>
+        <dt>Condition 9</dt><dd {...wraps}>Pond filling linked to the start of construction of ecologically enhanced fishponds.</dd>
       </dl>
     </Figure>
   );

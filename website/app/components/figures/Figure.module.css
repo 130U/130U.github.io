@@ -95,9 +95,10 @@
 }
 
 /* Segments share the width evenly, and each keeps at least its label's width,
-   so a label never runs out of its segment. Where the labels cannot share one
-   row, the controller stacks them (data-stack): four in two columns, three in
-   one, two side by side with their labels wrapped. */
+   so a label never runs out of its segment. Every label holds one line: where
+   the labels cannot share one row, the controller stacks them (data-stack),
+   four in two columns where each label holds its half, and otherwise one
+   segment to a row. */
 .switch {
   display: inline-grid;
   grid-auto-columns: 1fr;
@@ -128,7 +129,8 @@
   grid-template-columns: repeat(2, minmax(0, 1fr));
 }
 
-.switch[data-stack][data-count="3"] {
+.switch[data-stack]:is([data-count="2"], [data-count="3"]),
+.switch[data-stack="column"] {
   grid-template-columns: minmax(0, 1fr);
 }
 
@@ -152,11 +154,6 @@
   .switch button {
     padding-inline: 6px;
   }
-}
-
-.switch[data-stack] button {
-  white-space: normal;
-  text-wrap: balance;
 }
 
 .switch button[aria-pressed="true"] {
@@ -225,6 +222,7 @@
   display: inline-flex;
   align-items: center;
   gap: 7px;
+  white-space: nowrap;
 }
 
 .swatch {
@@ -491,12 +489,11 @@
   content: "";
 }
 
-/* A positioned label. --ax/--ay pick the anchor point of the label box, moved
-   by whole pixels, so a thin glyph such as a subscript plus is never lost to a
-   fractional raster offset. */
+/* A positioned label, on one line. --ax/--ay pick the anchor point of the
+   label box, moved by whole pixels, so a thin glyph such as a subscript plus is
+   never lost to a fractional raster offset. */
 .mark {
   position: absolute;
-  max-width: 13rem;
   transform: translate(var(--ax, 0%), var(--ay, -50%));
   transform: translate(round(var(--ax, 0%), 1px), round(var(--ay, -50%), 1px));
   font-size: var(--type-label);
@@ -527,13 +524,6 @@
   box-shadow: -3px 0 0 var(--control-surface, var(--page)), 3px 0 0 var(--control-surface, var(--page));
 }
 
-/* A wrapping label takes its natural width up to its maximum, wherever it is
-   anchored. */
-.mark[data-wrap] {
-  width: max-content;
-  white-space: normal;
-}
-
 .mark[data-tag] {
   padding: 1px 6px;
   background: var(--control-surface, var(--page));
@@ -541,6 +531,28 @@
 
 .markStrong {
   font-weight: 500;
+}
+
+/* A label's qualifier, or a figure's in-place names, stand where the figure is
+   at least 30rem wide (wide); in a narrower figure a label keeps its value, the
+   qualifier moving to the mark's readout, and names move to a key beneath the
+   drawing (narrow). */
+.narrow {
+  display: none;
+}
+
+@container figure (max-width: 30rem) {
+  .wide {
+    display: none;
+  }
+
+  .narrow {
+    display: block;
+  }
+
+  span.narrow {
+    display: inline;
+  }
 }
 
 .muted {
@@ -611,6 +623,7 @@
   min-width: 0;
   padding: 8px 0;
   color: var(--ink);
+  white-space: nowrap;
 }
 
 .track {
@@ -719,6 +732,7 @@
   margin: 0;
   padding: 14px 0 2px;
   color: var(--muted);
+  white-space: nowrap;
 }
 
 .group:first-child > .groupLabel {
@@ -857,11 +871,11 @@
 }
 
 /* A narrow figure stacks every bar chart. Each row sets its label and its
-   value on one line above a full-width track, the value wrapping beneath the
-   label only when the two cannot share it. The grid runs through the bar's own
-   row only; a reference rule runs on through the label and the value, behind
-   their knocked-out text, and through the header to its name. Rows part by
-   more than a label stands from its own bar. */
+   value on one line above a full-width track, the value moving whole beneath
+   the label only when the two cannot share it; each holds one line. The grid
+   runs through the bar's own row only; a reference rule runs on through the
+   label and the value, behind their knocked-out text, and through the header
+   to its name. Rows part by more than a label stands from its own bar. */
 @container figure (max-width: 30rem) {
   .bars[data-stack] {
     grid-template-columns: minmax(0, 1fr);
@@ -882,7 +896,6 @@
   .bars[data-stack] > .row > .barLabel {
     flex: 1 1 auto;
     padding: 0 0 4px;
-    overflow-wrap: normal;
   }
 
   .bars[data-stack] > .row > .value {
@@ -890,8 +903,6 @@
     min-width: 0;
     margin-left: auto;
     padding: 0 0 4px;
-    white-space: normal;
-    overflow-wrap: normal;
   }
 
   .bars[data-stack] > .row > .track {
@@ -1022,6 +1033,7 @@
   font-size: var(--type-interface);
   font-weight: 500;
   line-height: var(--interface-leading);
+  white-space: nowrap;
 }
 
 .nodeText {

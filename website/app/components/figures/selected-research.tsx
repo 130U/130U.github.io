@@ -1,5 +1,5 @@
 import type { CSSProperties, ReactNode } from "react";
-import { BarAxis, BarGroup, BarHeader, BarRow, Bars, Digits, Dot, Figure, Legend, Mark, Panel, Plot, Range, Seg, Tx, classes, clearOf, linear, logarithmic, styles as kit, type Scale } from "./kit";
+import { BarAxis, BarGroup, BarHeader, BarRow, Bars, Digits, Dot, Figure, Legend, Mark, Panel, Plot, Range, Seg, Tx, classes, clearOf, linear, logarithmic, styles as kit, wraps, type Scale } from "./kit";
 import results from "./Results.module.css";
 import styles from "./Figures.module.css";
 
@@ -33,19 +33,22 @@ function DependenceBudgetRuler() {
         <span className={styles.budgetBar} style={{ left: `${x(low)}%`, width: `${x(high) - x(low)}%` }} />
         <span className={styles.budgetRule} style={{ left: `${x(slope)}%` }} />
         <span className={`${styles.budgetGap} ${kit.fade}`} style={{ left: `${x(slope)}%`, width: `${x(low) - x(slope)}%`, top: `${100 - y(0.36)}%` }} />
-        {/* Every label keeps inside the region it names. The gain stands over
-            its arrow where the gap holds it, and left of the rule, at the
-            arrow, where it does not. The band holds its name; where it is too
-            narrow for the interval as well, the endpoints stand under the
-            bar's ends, in place of the 0.2 and 0.3 ticks. */}
+        {/* Every label keeps inside the region it names, each of its lines on
+            one line. The gain stands over its arrow where the gap holds it, and
+            left of the rule, at the arrow, where it does not. Where the band
+            holds its name, the rule and the band are named in place, each
+            value beneath its name; where it does not, a key beneath the plot
+            names them, and the band's endpoints stand under the bar's ends, in
+            place of the 0.2 and 0.3 ticks. */}
         <Mark left={(x(slope) + x(low)) / 2} top={100 - y(0.36)} anchor="bottom" tone="accent" strong className={`${kit.fade} ${styles.wideOnly}`}>+30%</Mark>
         <Mark left={x(slope)} top={100 - y(0.36)} anchor="right" tone="accent" strong className={`${kit.fade} ${styles.narrowOnly}`}>+30%</Mark>
         <Dot left={x(slope)} top={100} tone="ink" tip={"Initial-slope extrapolation\ns = 5/32 = 0.15625"} />
-        <Mark left={x(slope)} top={0} anchor="top-right" wrap knockout={false} className={`${styles.budgetLabel} ${styles.budgetLabelEnd}`} style={{ maxWidth: `calc(${x(slope)}% + 10px)` }}><>Initial-slope extrapolation<br /><Tx>$5/32$</Tx></></Mark>
-        <Mark left={x(low)} top={0} anchor="top-left" tone="accent" wrap knockout={false} className={styles.budgetLabel} style={{ maxWidth: `calc(${x(high) - x(low)}% - 4px)` }}><>Proved critical budget<span className={styles.wideOnly}><br /><Tx>$[13/64,29/96]$</Tx></span></></Mark>
+        <Mark left={x(slope)} top={0} anchor="top-right" knockout={false} className={`${styles.budgetLabel} ${styles.budgetLabelEnd} ${styles.wideOnly}`}><><span className={styles.labelLine}>Initial-slope extrapolation</span><span className={styles.labelLine}><Tx>$5/32$</Tx></span></></Mark>
+        <Mark left={x(low)} top={0} anchor="top-left" tone="accent" knockout={false} className={`${styles.budgetLabel} ${styles.wideOnly}`}><><span className={styles.labelLine}>Proved critical budget</span><span className={styles.labelLine}><Tx>$[13/64,29/96]$</Tx></span></></Mark>
         <Mark left={x(low)} top={100} anchor="top" tone="accent" className={styles.narrowOnly}>$13/64$</Mark>
         <Mark left={x(high)} top={100} anchor="top" tone="accent" className={styles.narrowOnly}>$29/96$</Mark>
       </Plot>
+      <div className={styles.narrowOnly}><Legend items={[{ label: "Initial-slope extrapolation, $5/32$", tone: "ink", shape: "dash" }, { label: "Proved critical budget", tone: "accent", shape: "tint" }]} /></div>
     </Figure>
   );
 }
@@ -302,7 +305,7 @@ function AsianWidthPlateau() {
           </BarRow>
           <BarAxis x={change} ticks={changeTicks} title="Width, price units" />
         </Bars>
-        <p className={styles.tally}><Tx>{"Hatched terms shrink; the periodization term and the frequency tail under $P$ are unchanged."}</Tx></p>
+        <p className={styles.tally} {...wraps}><Tx>{"Hatched terms shrink; the periodization term and the frequency tail under $P$ are unchanged."}</Tx></p>
       </Panel>
       {/* One message: the kink supplies most of each width. The four smaller
           terms share one tone here; the change view names them, and each
@@ -339,7 +342,10 @@ function AsianWidthPlateau() {
   );
 }
 
-/* Rough Heston, Table 2: complete bounds for the 4400–4500 spread against a quarter-point tolerance. */
+/* Rough Heston, Table 2: complete bounds for the 4400–4500 spread against a
+   quarter-point tolerance. Each row sets its certificate's ID and Table 2's
+   description on one line above its bar; a figure too narrow for the longest
+   keeps the IDs, and each marker's readout the description. */
 const HESTON_STAGES = [
   { group: "Six months" },
   { id: "H0", text: "Uniform state bound", joint: 1.397612096, marginal: 2.679930311, note: "none" },
@@ -371,7 +377,7 @@ function HestonStageBounds() {
           and runs from its name through the group rows to the axis. Where a
           row's two bounds nearly meet, the ring is drawn over the dot, hollow,
           so both stay in view. */}
-      <Bars label="Joint bounds in index points: H0 1.398, H1 0.379, H2 0.367, H3 0.132, H4 0.115, Q0 1.208, Q1 0.351, Q2 0.233. Leg-by-leg bounds: H0 2.680, H1 0.476, H3 0.159, H4 0.138, Q0 1.545, Q1 0.408, Q2 0.252. The tolerance is a quarter point." labelWidth="17rem" valueWidth="0px" stack="narrow">
+      <Bars label="Joint bounds in index points: H0 1.398, H1 0.379, H2 0.367, H3 0.132, H4 0.115, Q0 1.208, Q1 0.351, Q2 0.233. Leg-by-leg bounds: H0 2.680, H1 0.476, H3 0.159, H4 0.138, Q0 1.545, Q1 0.408, Q2 0.252. The tolerance is a quarter point." valueWidth="0px" stack>
         <BarHeader marks={[{ at: tolerance, label: "Quarter-point tolerance", tone: "accent", anchor: "left", rule: "accent" }]} />
         {HESTON_STAGES.map((row, index) => {
           if (!("id" in row)) return <BarGroup key={index} label={row.group} rules={[{ at: tolerance, tone: "accent" }]} />;

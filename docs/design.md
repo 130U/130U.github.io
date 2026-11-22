@@ -465,7 +465,10 @@ border, and the stage holding the decisive mechanism is set in ink: its title in
 its detail and lane name in 84% paper, above 12:1 on the ink. A lane's name above a
 node title is in the label role of the diagram's one face. Lane rows share one height,
 so the nodes of a stage are equal and start their titles on one line, a single node
-stands on the middle of the lanes, and a line through a bus runs straight. A hyphenated
+stands on the middle of the lanes, and a line through a bus runs straight. Every node
+title, lane name and stage label holds one line, at every width: each stage's column
+takes at least its widest title, and the layout chooses the form that gives every title
+its room (below). In a node's description, which is prose and may wrap, a hyphenated
 compound holds one line where its node has room for it.
 
 Connectors are drawn in SVG on the same grid as the nodes: crisp 1px bars placed by
@@ -489,12 +492,17 @@ tenths of the text; one wider than seven ems may break after a relation at its o
 level, as TeX breaks a formula in a line, and reads as one expression to assistive
 technology.
 
-Below 720px of figure width the diagram becomes a vertical sequence (parallel nodes
-side by side from 480px): a step down the column's centre joins each stage to the next,
-gathering side-by-side nodes through a short bus, and the loop becomes a labeled return
-note. A prose caption follows. The build fails if a stage holds neither one node nor as
-many as the widest stage, and the browser layout check holds each rule above at every
-width.
+The diagram reads left to right from 53.75rem (860px at the reading size), where every
+diagram's stages hold their widest titles side by side; below that it becomes a vertical
+sequence: a step down the column's centre joins each stage to the next, and the loop
+becomes a labeled return note. From 30rem a stage sets its parallel nodes side by side,
+gathered into the step through a short bus, only where each of their titles holds one
+line at that width; its other stages stack their nodes. `app/lib/content/diagram-layout.ts`
+measures each title in the interface face's advance widths to decide, and a test holds
+every diagram to the left-to-right width. Two titles were shortened to fit, their words
+kept in the node: Compensation, for new loss, and Autonomous task. A prose caption
+follows. The build fails if a stage holds neither one node nor as many as the widest
+stage, and the browser layout check holds each rule above at every width.
 
 ### Article figures
 
@@ -515,6 +523,23 @@ face at weight 500, the face of a table's title, and the rest of the caption fol
 the caption style. Ink and the accent carry the argument; `--chart-sky` marks a second
 series, `--chart-green` an exactly known segment, `--chart-steel` and `--chart-mist`
 hold context, and `--chart-tint` marks an emphasized row, column, or region.
+
+Every short text of a figure holds one line, at every width and on the zoom stage: a
+label, a value, a tick, a key entry, a row or lane name, a header mark, a switch segment,
+a step or node title. Only a title and prose (a sentence, a question, a node's
+description, which carry `data-figure-wraps`, the kit's `wraps`) may wrap. Where a figure
+lacks the room, it uses its own means and never a second line: its narrow layout (a
+sequence's notes head their runs, a comparison's fields stand under their names, a key
+beneath a plot names what the plot names in place where it is wide); a shorter
+placement; a label set as its value alone where the figure is narrower than 30rem, its
+qualifier moving to its mark's readout (48.40%, at n = 100 in the readout); a secondary
+text moved to a readout (a band's description, a certificate's description beside its
+ID in a phone's figure); a one-line shortening of the site's own copy, never of a
+manuscript's; or the figure's own scroll width, as a wide comparison uses. A label of a
+name and its value sets each on a line of its own (`labelLine`), as a key sets one
+formula per line. The browser layout check fails any other text of a figure that takes
+two lines, in every view at the check widths, at every figure width from 280 to 600px,
+and on the zoom stage.
 
 Text is HTML at its true size, so labels stay legible at every width; only curves live
 in a stretched SVG layer whose strokes keep their width, and schematics scale uniformly
@@ -547,7 +572,7 @@ note stands beneath it, so a column's values share one right edge. A reference r
 name stands beside the top of its rule, 6px clear of it, and the rule runs up through
 the header and any group rows to it; a column's head starts or ends at its position. In
 a narrow figure each row sets its label and value on one line above a full-width bar,
-the value wrapping beneath only when the two cannot share it, and rows part by more
+the value moving whole beneath only when the two cannot share it, and rows part by more
 than a label stands from its own bar; the grid runs through the bar's own row only, and
 a reference rule runs on through the label and value lines behind their knocked-out
 text. A comparison has a scroll width below which its columns cannot
@@ -557,7 +582,8 @@ does. Labels that hang beside its last marks keep their room inside it. A title 
 alone on its line, its hyphenated compounds held whole, with any view switch beneath it
 as one segmented control across the head's width: its segments share the width evenly
 while each keeps its label's width, and where the labels cannot share one row they
-stack, four in two columns and three in one. Views whose heights differ by no more than
+stack, four in two columns where each label holds its half, and otherwise one to a row,
+every label on one line. Views whose heights differ by no more than
 15% or 60px share the tallest one's height, so the page beneath never moves for a near
 match; views further apart keep their own heights rather than show blank paper, and the
 frame eases to the shown view's height in 150ms (at once under reduced motion) below the
@@ -570,13 +596,19 @@ curve at every width. A two-by-two matrix reflows rather than scrolls: beside it
 heads where the figure is wide, with each row head as a band over its row below 34rem,
 and with its cells stacked below 21rem, each naming its column. Its cells share their
 edges, drawn once at the frame's weight, and the cells of a row share their title,
-definition and example lines. A numbered step hangs its number, so a wrapped title
-continues under its first word, and a bracket beside a run of steps opens toward them.
-A decision procedure runs each answer's arrow into the hatched result lane until it
-meets its result, and a bracket gathers a group of results; in a narrow figure the
-questions stand on one spine, and each answer that ends the procedure leaves it on an
-elbow to its result. A chain of links sets each observation beside its link, and
-beneath it, set in to the title, in a phone's figure.
+definition and example lines. A numbered step hangs its number before its title, which
+holds one line, and a bracket beside a run of steps opens toward them, its note on one
+line; in a figure narrower than 35rem each note heads its run instead, in the run's
+tone. A decision procedure runs each answer's arrow into the hatched result lane until it
+meets its result, and a bracket gathers a group of results; in a figure narrower than
+35rem, where the result lane cannot hold the longest alternative, the questions stand on
+one spine, and each answer that ends the procedure leaves it on an elbow to its result.
+A chain of links sets each observation beside its link, the links' column taking the
+longest link, and beneath it, set in to the title, in a phone's figure; claims and their
+counterfactuals share a grid the same way. Evidence tiers stand in one column, each a
+step down from the one before, and a comparison of cases sets each case as a row, its
+fields' names beside their values where the figure is wide and above them where it is
+narrow, scrolling where its longest value is wider than a phone.
 
 A segmented switch swaps views, a readout follows the pointer on line charts (at the
 plot's top, or at its foot where it would cover a label), marks
@@ -590,7 +622,8 @@ z₂), and a legend label names its mark, with any detail after a comma and no c
 labels' own notation (qᵢ, mᵢ) and a quantity in the unit its axis names (pp), and a
 label formula stands on one level, a fraction written with a slash. A key sets one
 formula per line, as a display does: two conditions stand as two lines of the entry,
-4px apart, as its other lines are.
+4px apart, as its other lines are. The distance between two clusters on one row is named
+above its capped line, centred, so a span narrower than its name keeps its ends in view.
 Captions state what the figure shows in the article's own terms. The four manuscript
 figures of each of the three papers are drawn the same way, from the manuscript's
 formulas and its pinned results, with the manuscript's captions below them. A scatter is

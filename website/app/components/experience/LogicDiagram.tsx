@@ -1,5 +1,6 @@
 import { Fragment, type CSSProperties, type ReactNode } from "react";
 import type { ArchitectureDiagram } from "../../lib/content/architecture-diagrams";
+import { sideBySide, stageColumns } from "../../lib/content/diagram-layout";
 import { parseResearchMarkdown } from "../../lib/content/research-markdown";
 import { RESEARCH_MATH_GUTTER_EM, renderResearchMath } from "../../lib/content/research-math";
 import styles from "./LogicDiagram.module.css";
@@ -93,8 +94,9 @@ function Links({ from, to }: { from: number; to: number }) {
   );
 }
 
-/** Parallel nodes side by side at mid widths: two columns for four, otherwise one per node. */
-const columns = (nodes: number) => nodes > 3 ? 2 : nodes;
+/** The columns a stage's nodes take in the vertical sequence: side by side
+    where every title holds one line there, otherwise one. */
+const columns = (stage: ArchitectureDiagram["stages"][number]) => (sideBySide(stage) ? stageColumns(stage.nodes.length) : 1);
 
 /**
  * The step between two stages of the vertical sequence: a line down the
@@ -228,8 +230,10 @@ function DiagramText({ text }: { text: string }) {
  * A left-to-right logic diagram laid out on one CSS grid: node columns alternate
  * with connector columns, and every multi-node stage shares the same lane rows,
  * which share one height, so arrows, fan-out buses and the feedback loop align
- * without measuring. Below 720px of width the same markup reflows into a
- * vertical sequence.
+ * without measuring. Each node column takes at least its widest title, so every
+ * title holds one line. Below 53.75rem of width the same markup reflows into a
+ * vertical sequence, whose stages set their nodes side by side from 30rem where
+ * each title holds one line there (diagram-layout.ts).
  */
 export function LogicDiagram({ diagram }: { diagram: ArchitectureDiagram }) {
   const { stages, loop } = diagram;
@@ -239,7 +243,7 @@ export function LogicDiagram({ diagram }: { diagram: ArchitectureDiagram }) {
   const allLanes = `2 / span ${lanes}`;
   const loopRow = lanes + 2;
   const canvas: CSSProperties = {
-    gridTemplateColumns: stages.map((_, index) => index < stages.length - 1 ? "minmax(0, 1fr) var(--diagram-gap)" : "minmax(0, 1fr)").join(" "),
+    gridTemplateColumns: stages.map((_, index) => index < stages.length - 1 ? "minmax(min-content, 1fr) var(--diagram-gap)" : "minmax(min-content, 1fr)").join(" "),
     // The loop's return rule runs 28px below the lane rows, its label beneath it.
     gridTemplateRows: `auto repeat(${lanes}, 1fr)${loop ? " 28px auto" : ""}`,
   };
@@ -255,10 +259,11 @@ export function LogicDiagram({ diagram }: { diagram: ArchitectureDiagram }) {
       <div className={styles.canvas} style={canvas}>
         {stages.map((stage, stageIndex) => {
           const single = stage.nodes.length === 1;
+          const side = sideBySide(stage);
           return (
             <Fragment key={stage.label}>
-              <div className={styles.stage} data-stage={stageIndex + 1} style={{ "--columns": columns(stage.nodes.length) } as CSSProperties}>
-                {stageIndex > 0 && <Step columns={columns(stages[stageIndex - 1].nodes.length)} />}
+              <div className={styles.stage} data-stage={stageIndex + 1} data-side={side ? "" : undefined} style={{ "--columns": columns(stage) } as CSSProperties}>
+                {stageIndex > 0 && <Step columns={columns(stages[stageIndex - 1])} />}
                 <p className={styles.stageLabel} style={{ gridColumn: nodeColumn(stageIndex), gridRow: 1 }}>
                   <span className={styles.stageIndex} aria-hidden="true">{pad(stageIndex + 1)}</span>
                   {stage.label}

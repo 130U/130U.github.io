@@ -10,10 +10,18 @@
   color: var(--supporting-ink);
 }
 
-/* A certificate's name wraps beside its ID, never beneath it. */
+/* A certificate's description stands beside its ID on one line; a figure too
+   narrow for the longest keeps the IDs, and each marker's readout the
+   description. */
 .stageLabel {
   display: inline-grid;
   grid-template-columns: auto minmax(0, 1fr);
+}
+
+@container figure (max-width: 20.5rem) {
+  .stageText {
+    display: none;
+  }
 }
 
 /* A ring drawn over the dot it nearly meets stays hollow, so both show. */
@@ -128,13 +136,13 @@
   --pr: 5.5rem;
   --pt: 0.5rem;
   --pb: 1rem;
-  min-width: 15rem;
-  min-width: calc(15rem - round(down, 100%, 13.5rem) * 10 / 9);
+  min-width: 20rem;
+  min-width: calc(20rem - round(down, 100%, 18rem) * 10 / 9);
 }
 
-/* Each head stands centred over its axis, its name above its symbol, so the
-   pair matches at every width. Both share one grid cell, so the taller sets
-   the row, and each wraps before it would meet the other. */
+/* Each head stands centred over its axis on one line, its name and its
+   symbol, so the pair matches at every width. Both share one grid cell, and
+   the comparison's scroll width keeps them apart. */
 .rankingHeads {
   display: grid;
   margin-bottom: 0.75rem;
@@ -149,9 +157,8 @@
   grid-area: 1 / 1;
   justify-self: start;
   width: max-content;
-  max-width: calc(100% - var(--pl) - var(--pr) - 1rem);
   transform: translateX(-50%);
-  text-wrap: balance;
+  white-space: nowrap;
 }
 
 .rankingHeads > span:first-child {
@@ -457,8 +464,7 @@
 .flow,
 .sequence,
 .ladder,
-.tiers,
-.tierAxis {
+.tiers {
   --connector: rgba(11, 11, 11, 0.42);
 }
 
@@ -481,6 +487,7 @@
   align-items: flex-end;
   padding: 0 0 10px;
   color: var(--muted);
+  white-space: nowrap;
 }
 
 /* A column head starts on its cells' text. */
@@ -582,10 +589,10 @@
 }
 
 /* A decision procedure: questions on the left, each answer's arrow running
-   into the hatched result lane and meeting
-   its result's edge. The arrow column holds its longest label clear of the
-   lane, and the result lane holds each result on one line from a 500px
-   figure. */
+   into the hatched result lane and meeting its result's edge. The arrow column
+   holds its longest label clear of the lane. Every title, answer and result
+   holds one line; the procedure stands in two lanes from a 35rem figure, where
+   the result lane holds the longest alternative. */
 .flow {
   position: relative;
   display: grid;
@@ -633,6 +640,7 @@
   grid-column: 3;
   align-self: center;
   margin: 10px 12px;
+  white-space: nowrap;
 }
 
 .flowArrow {
@@ -698,6 +706,7 @@
   left: 32px;
   transform: translateY(-50%);
   color: var(--muted);
+  white-space: nowrap;
 }
 
 .stepIndex {
@@ -742,7 +751,7 @@
    the procedure leaves the spine on an elbow to its result, set in to the
    right; the answer that continues runs down the spine to the next question,
    and the last question's choice runs down to the alternatives. */
-@container figure (max-width: 520px) {
+@container figure (max-width: 35rem) {
   .flow {
     grid-template-columns: 60px minmax(0, 1fr);
   }
@@ -834,105 +843,91 @@
   }
 }
 
-/* Comparison table-figure with column emphasis on hover. The hovered column's
-   tint reaches as far above its head as below its last value; the frame's
-   spacing above the heads is kept by drawing the grid that much higher. */
-.compare {
+/* A comparison of cases: each case a row, its name and then each field's
+   label and value, every one on one line, the label beside its value where the
+   figure is wide and above it where it is narrow. Hovering a case tints it.
+   The comparison is set at its scroll width, 20rem, where its longest value is
+   wider than the figure, and scrolls as a wide comparison does. */
+.cases {
   display: grid;
-  grid-template-columns: minmax(6.5rem, auto) repeat(var(--count), minmax(min-content, 1fr));
-  margin-top: -12px;
-  overflow: clip;
+  grid-template-columns: max-content minmax(0, 1fr);
+  column-gap: 18px;
+  min-width: 20rem;
+  min-width: calc(20rem - round(down, 100%, 18rem) * 10 / 9);
   font-size: var(--type-label);
   line-height: var(--label-leading);
 }
 
-.compareCorner,
-.compareHead,
-.compareLabel,
-.compareValue {
-  padding: 12px 14px;
-}
-
-.compareHead {
-  border-bottom: 1px solid var(--rule-strong);
-  color: var(--ink);
-  font-size: var(--type-interface);
-  font-weight: 500;
-  line-height: var(--interface-leading);
-}
-
-.compareCorner {
-  border-bottom: 1px solid var(--rule-strong);
-}
-
-/* A row's dashed rule is drawn once, from its label across the figure, so the
-   dashes run unbroken past the cell joins; the grid clips it at its edge. */
-.compareLabel {
-  position: relative;
-  padding-left: 0;
-  color: var(--muted);
-}
-
-.compareLabel::after {
+.casesHead {
   position: absolute;
-  bottom: 0;
-  left: 0;
-  width: 100cqi;
-  border-bottom: 1px dashed var(--dash);
-  content: "";
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
 }
 
-.compareValue {
-  color: var(--ink);
+.case {
+  display: grid;
+  grid-column: 1 / -1;
+  grid-template-columns: subgrid;
+  row-gap: 6px;
+  padding: 14px 0;
+  border-top: 1px dashed var(--dash);
   transition: background-color 160ms ease;
 }
 
-.compareValue[data-strong] {
+.casesHead + .case {
+  padding-top: 0;
+  border-top: 0;
+}
+
+.case:last-child {
+  padding-bottom: 0;
+}
+
+.caseName {
+  grid-column: 1 / -1;
+  color: var(--ink);
+  font-size: var(--type-interface);
+  font-weight: 500;
+  line-height: var(--interface-leading);
+  white-space: nowrap;
+}
+
+.caseField {
+  display: grid;
+  grid-column: 1 / -1;
+  grid-template-columns: subgrid;
+  align-items: baseline;
+  white-space: nowrap;
+}
+
+.caseLabel {
+  color: var(--muted);
+}
+
+.caseValue {
+  color: var(--ink);
+}
+
+.caseValue[data-strong] {
   font-size: var(--type-interface);
   font-weight: 500;
   line-height: var(--interface-leading);
 }
 
-[role="row"]:last-child > .compareLabel::after {
-  display: none;
-}
-
-.compare [data-key-active] {
+.cases [data-key-active] {
   background: var(--chart-tint);
 }
 
-@container figure (max-width: 520px) {
-  .compare {
+@container figure (max-width: 30rem) {
+  .cases {
     grid-template-columns: minmax(0, 1fr);
-    margin-top: 0;
   }
 
-  .compare [role="row"] > * {
-    order: var(--order, 0);
-  }
-
-  .compare .compareLabel,
-  .compare .compareCorner {
-    display: none;
-  }
-
-  .compareHead {
-    margin-top: 18px;
-    padding-top: 0;
-    padding-left: 0;
-  }
-
-  .compareValue {
-    padding-left: 0;
-    border-bottom: 0;
-  }
-
-  .compareValue::before {
-    display: block;
-    color: var(--muted);
-    font-size: var(--type-label);
-    font-weight: 400;
-    content: attr(data-label);
+  .case {
+    row-gap: 8px;
   }
 }
 
@@ -989,6 +984,7 @@
 .lanes > :nth-child(odd) {
   padding-right: 16px;
   color: var(--muted);
+  white-space: nowrap;
 }
 
 .lanes > :nth-child(even) {
@@ -1006,9 +1002,11 @@
   }
 }
 
+/* Evidence tiers stand in one column, each a step down from the one before,
+   so every tier's title holds one line. */
 .tiers {
   display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
+  grid-template-columns: minmax(0, 1fr);
   gap: 10px;
   font-size: var(--type-label);
   line-height: var(--label-leading);
@@ -1021,22 +1019,18 @@
   background: var(--panel);
 }
 
-@container figure (max-width: 520px) {
-  .tiers {
-    grid-template-columns: minmax(0, 1fr);
-  }
-}
-
 .rowHead {
   grid-row: span 3;
   align-items: center;
   padding: 0 14px 0 0;
 }
 
-/* Sequence with side brackets. */
+/* A sequence with side brackets. Every step and note holds one line: where
+   the figure is wide each note stands beside the run it brackets; where it is
+   narrow each note heads its run, in its run's tone (--row-narrow). */
 .sequence {
   display: grid;
-  grid-template-columns: minmax(0, 1.75fr) minmax(0, 1fr);
+  grid-template-columns: minmax(max-content, 1.75fr) minmax(max-content, 1fr);
   column-gap: 18px;
   row-gap: 8px;
   font-size: var(--type-label);
@@ -1044,9 +1038,11 @@
 }
 
 .sequenceStep {
+  grid-row: var(--row);
   grid-column: 1;
   padding: 8px 12px;
   color: var(--ink);
+  white-space: nowrap;
 }
 
 /* A numbered step hangs its number, so a title that wraps continues under its
@@ -1065,6 +1061,7 @@
 
 .sequenceNote {
   position: relative;
+  grid-row: var(--row);
   grid-column: 2;
   display: flex;
   align-items: center;
@@ -1072,6 +1069,7 @@
   padding: 4px 0 4px 16px;
   border-left: 1.5px solid var(--chart-steel);
   color: var(--ink);
+  white-space: nowrap;
 }
 
 /* The bracket opens toward the steps it groups. */
@@ -1095,8 +1093,45 @@
   border-color: var(--accent);
 }
 
-/* Vertical chain with an example beside each link. */
+@container figure (max-width: 35rem) {
+  .sequence {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .sequenceStep,
+  .sequenceNote {
+    grid-row: var(--row-narrow);
+    grid-column: 1;
+  }
+
+  .sequenceNote {
+    padding: 10px 0 0;
+    border-left: 0;
+  }
+
+  .sequenceNote::before,
+  .sequenceNote::after {
+    display: none;
+  }
+
+  .sequenceNote[data-tone="accent"] {
+    color: var(--accent);
+  }
+}
+
+/* Vertical chain with an example beside each link. The head and the links
+   share one grid, whose first column takes the longest link's width, so every
+   link holds one line and its observation starts on one edge. */
+.chain {
+  display: grid;
+  grid-template-columns: max-content minmax(0, 1fr);
+  column-gap: 18px;
+}
+
 .ladder {
+  display: grid;
+  grid-column: 1 / -1;
+  grid-template-columns: subgrid;
   margin: 0;
   padding: 0;
   font-size: var(--type-label);
@@ -1107,8 +1142,8 @@
 .ladder li {
   position: relative;
   display: grid;
-  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
-  column-gap: 18px;
+  grid-column: 1 / -1;
+  grid-template-columns: subgrid;
   align-items: center;
   padding-bottom: 16px;
 }
@@ -1141,6 +1176,7 @@
 .ladderNode {
   padding: 8px 12px;
   color: var(--ink);
+  white-space: nowrap;
 }
 
 .ladderExample {
@@ -1155,16 +1191,16 @@
 /* In a phone's figure each link takes the full width and its observation
    follows beneath, set in to the title, while the chain runs down beside it. */
 @container figure (max-width: 25rem) {
-  .ladderHead.ladderHead {
+  .chain {
     grid-template-columns: minmax(0, 1fr);
+  }
+
+  .ladderHead.ladderHead {
+    grid-template-columns: subgrid;
   }
 
   .ladderHead > span + span {
     padding-left: calc(12px + 1.6rem);
-  }
-
-  .ladder li {
-    grid-template-columns: minmax(0, 1fr);
   }
 
   .ladder li:not(:last-child)::before {
@@ -1179,7 +1215,12 @@
   }
 }
 
+/* Claims and the counterfactual each tests share one grid, so every claim's
+   name holds one line and its question starts on one edge. */
 .claims {
+  display: grid;
+  grid-template-columns: minmax(max-content, 0.6fr) minmax(0, 1.4fr);
+  column-gap: 16px;
   margin: 0;
   font-size: var(--type-label);
   line-height: var(--label-leading);
@@ -1187,8 +1228,8 @@
 
 .claims > div {
   display: grid;
-  grid-template-columns: minmax(8rem, 0.6fr) minmax(0, 1.4fr);
-  gap: 16px;
+  grid-column: 1 / -1;
+  grid-template-columns: subgrid;
   padding: 12px 0;
   border-top: 1px dashed var(--dash);
 }
@@ -1201,6 +1242,7 @@
 .claims dt {
   color: var(--ink);
   font-weight: 500;
+  white-space: nowrap;
 }
 
 .claims dd {
@@ -1209,9 +1251,12 @@
 }
 
 @container figure (max-width: 460px) {
-  .claims > div {
+  .claims {
     grid-template-columns: minmax(0, 1fr);
-    gap: 4px;
+  }
+
+  .claims > div {
+    row-gap: 4px;
   }
 }
 
@@ -1260,76 +1305,27 @@
   background: transparent;
 }
 
-.tierAxis {
-  position: relative;
-  display: flex;
-  justify-content: space-between;
-  gap: 12px;
-  margin: 0 0 14px;
-  color: var(--muted);
-  font-size: var(--type-label);
-  line-height: var(--label-leading);
-}
-
-.tierAxis::before {
-  position: absolute;
-  top: 50%;
-  left: calc(8.5rem);
-  right: calc(8.5rem);
-  height: 0;
-  border-top: 1px solid var(--connector);
-  content: "";
-}
-
-.tierAxis::after {
-  position: absolute;
-  top: calc(50% - 4px);
-  right: calc(8.5rem - 1px);
-  border-top: 4px solid transparent;
-  border-bottom: 4px solid transparent;
-  border-left: 6px solid var(--connector);
-  content: "";
-}
-
-/* The head between two tiers stands centred in their gap. */
+/* The head between two tiers stands in their gap, pointing down. */
 .tier:not(:last-child)::after {
   position: absolute;
-  top: 50%;
-  right: -9px;
+  bottom: -9px;
+  left: 22px;
   z-index: 1;
-  border-top: 4px solid transparent;
-  border-bottom: 4px solid transparent;
-  border-left: 6px solid var(--connector);
+  border-top: 6px solid var(--connector);
+  border-right: 4px solid transparent;
+  border-left: 4px solid transparent;
   content: "";
-  transform: translateY(-50%);
-}
-
-@container figure (max-width: 520px) {
-  .tierAxis {
-    display: none;
-  }
-
-  .tier:not(:last-child)::after {
-    top: auto;
-    right: auto;
-    bottom: -9px;
-    left: 22px;
-    border-top: 6px solid var(--connector);
-    border-right: 4px solid transparent;
-    border-bottom: 0;
-    border-left: 4px solid transparent;
-    transform: none;
-  }
 }
 
 .ladderHead {
   display: grid;
-  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
-  column-gap: 18px;
+  grid-column: 1 / -1;
+  grid-template-columns: subgrid;
   margin: 0 0 12px;
   color: var(--muted);
   font-size: var(--type-label);
   line-height: var(--label-leading);
+  white-space: nowrap;
 }
 
 /* ---------- Manuscript figures drawn natively (Critical Dependence Stress) ---------- */
@@ -1579,13 +1575,14 @@ span.pathDot {
   overflow: hidden;
 }
 
-/* The grid holds the axis name and ticks that hang beside its last panels. It
-   fits its room down to 23.4rem, where a panel is about 90px wide; in less room,
-   on phones, it is set at 26rem and scrolls. */
+/* The grid holds the axis name and ticks that hang beside its last panels. Each
+   column's head holds one line, centred over its panel and reaching into the
+   gaps beside it; the grid fits its room down to 29.7rem, where a panel is
+   about 110px wide, and in less room is set at 33rem and scrolls. */
 .shares {
   display: grid;
-  min-width: 26rem;
-  min-width: calc(26rem - round(down, 100%, 23.4rem) * 10 / 9);
+  min-width: 33rem;
+  min-width: calc(33rem - round(down, 100%, 29.7rem) * 10 / 9);
   grid-template-columns: auto repeat(3, minmax(0, 1fr));
   gap: 24px 22px;
   align-items: center;
@@ -1627,10 +1624,10 @@ span.pathDot {
 
 .shareHead {
   align-self: end;
+  justify-self: center;
   color: var(--ink);
   font-weight: 500;
-  text-align: center;
-  text-wrap: balance;
+  white-space: nowrap;
 }
 
 .shareRowHead {
@@ -1805,13 +1802,14 @@ span.pathDot {
   line-height: 1.6;
 }
 
+/* A label of a name and its value stands on two lines, one for each. */
+.labelLine {
+  display: block;
+}
+
 .budgetLabel.budgetLabelEnd {
   padding-right: 9px;
   padding-left: 0;
-  text-align: right;
-}
-
-.alignEnd {
   text-align: right;
 }
 
@@ -1843,21 +1841,6 @@ span.pathDot {
    above the shading, where no curve runs at any width. */
 .lossLabel {
   margin-left: 8px;
-}
-
-/* The exit-path figure: in a phone's figure the abrupt cessation is named on
-   two lines, right-aligned against the stop line, clear of the ramp before it,
-   and the decision's label starts past its dot, clear of the axis name. */
-@container figure (max-width: 23rem) {
-  .cessationLabel.cessationLabel {
-    width: min-content;
-    white-space: normal;
-    text-align: right;
-  }
-
-  .decisionLabel {
-    margin-left: 6px;
-  }
 }
 
 /* Asian options, Figure 4: the triangles are named on one line to the left of
