@@ -56,14 +56,11 @@ export type TableNumber = { bold: boolean; tex?: string; fields: NumberField[]; 
 
 /**
  * Invisible text that pads a value to its column's alignment, and the digit-group
- * gaps it stands for. An interval holds one line, its upper end following its
- * comma, or, in a table that would otherwise scroll, breaks after its comma with
- * each end on its own line: a pad set `when` "line" stands only in the first
- * form, one set "broken" only in the second. In a column of both weights, a pad
- * takes the weight of the digits it stands for (`bold`), so it is as wide as they
- * are; otherwise it takes its value's weight.
+ * gaps it stands for. In a column of both weights, a pad takes the weight of the
+ * digits it stands for (`bold`), so it is as wide as they are; otherwise it takes
+ * its value's weight.
  */
-export type Pad = { text: string; gaps: number; when?: "line" | "broken"; bold?: boolean };
+export type Pad = { text: string; gaps: number; bold?: boolean };
 
 /**
  * A field aligned in its column. In a column of both weights, where bold figures
@@ -230,15 +227,11 @@ const NO_PAD: Pad = { text: "", gaps: 0 };
  * values hold different numbers of fields (an interval among single values, a
  * list among numbers), or some are bold, or some carry a note after them, the
  * column aligns from its start (`start`), padded before its numbers only. An
- * interval on one line keeps its
- * upper end against its comma, its pads moved to its end, so no gap opens
- * inside the brackets; broken
- * after its comma, its upper end stands under the lower end's digits, both ends
- * padded on their own lines.
+ * interval holds one line and keeps its upper end against its comma, its pads
+ * moved to its end, so no gap opens inside the brackets.
  */
 export function alignColumn(values: TableNumber[]): AlignedColumn {
   const slots = slotsOf(values);
-  const intervals = values.some(isInterval);
   // Bold figures are wider than regular ones, so a column that sets some values in bold aligns from its start too,
   // as does one whose notes, of their own lengths, follow its values.
   const weights = new Set(values.map((value) => value.bold)).size > 1;
@@ -254,8 +247,7 @@ export function alignColumn(values: TableNumber[]): AlignedColumn {
         const groups = field.fraction === undefined ? [] : fractionDigitGroups(field.fraction);
         const after = start ? NO_PAD : join(fractionPad(slot, field), { text: slot.close.slice(field.close.length), gaps: 0 });
         // In a column of both weights, or of signs of different widths, a number's lead stands in a box as wide
-        // as the widest lead in bold, its sign a plus, the widest sign; an interval's upper end, on its own
-        // line, stands under its lower end's (below).
+        // as the widest lead in bold, its sign a plus, the widest sign; an interval's upper end follows its comma.
         if (boxed && !(isInterval(value) && index === 1)) {
           return { ...field, groups, before: { text: slot.separator.slice(field.separator.length), gaps: 0 }, after, lead: `${slot.open}${slot.sign ? "+" : ""}${slot.integer}` };
         }
@@ -268,30 +260,19 @@ export function alignColumn(values: TableNumber[]): AlignedColumn {
         return { ...field, groups, before, after };
       });
       if (!isInterval(value)) {
-        // A value beside broken intervals stands on their first line, so the fields it lacks pad only one line.
-        const tail: Pad[] = start ? [] : [{ ...join(...slots.slice(value.fields.length).map(wholeSlot)), when: intervals ? "line" : undefined }];
+        const tail: Pad[] = start ? [] : [join(...slots.slice(value.fields.length).map(wholeSlot))];
         return { bold: value.bold, tex: value.tex, interval: false, fields: aligned, tail, ...(value.note === undefined ? {} : { note: value.note }) };
       }
+      // The upper end follows the comma: what would pad the lower end's fraction and the upper end's lead
+      // stands after the closing bracket instead.
       const [lower, upper] = aligned;
-      // Broken, the upper end stands with its point under the lower end's, when its sign and integer
-      // part are no wider than the lower ends'; otherwise under the lower end's digits, in line with the
-      // other upper ends.
-      const [first, second] = slots;
-      const under = second.sign.length <= first.sign.length && second.integer.length <= first.integer.length;
-      const indent: Pad = {
-        text: under ? `${first.open}${first.sign.slice(upper.sign.length)}${first.integer.slice(0, first.integer.length - upper.integer.length)}` : `${first.open}${first.sign}${upper.before.text}`,
-        gaps: 0,
-        when: "broken",
-        // Under a lead set in its bold box, the indent takes the bold weight too.
-        ...(boxed ? { bold: true } : {}),
-      };
       const moved = join(lower.after, upper.before, upper.after);
       return {
         bold: value.bold,
         tex: value.tex,
         interval: true,
-        fields: [{ ...lower, after: { ...lower.after, when: "broken" } }, { ...upper, before: indent, after: { ...upper.after, when: "broken" } }],
-        tail: start ? [] : [{ ...moved, when: "line" }],
+        fields: [{ ...lower, after: NO_PAD }, { ...upper, before: NO_PAD, after: NO_PAD }],
+        tail: start ? [] : [moved],
         ...(value.note === undefined ? {} : { note: value.note }),
       };
     }),

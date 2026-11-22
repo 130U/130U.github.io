@@ -14,6 +14,7 @@ import { ArticleFigure, FigureController } from "../figures";
 import { ZoomStage } from "../research/ZoomStage";
 import { AddressText, KeepNumberJoins } from "../research/ResearchInline";
 import { tableLayout } from "../research/ResearchArticle";
+import { sentenceColumnsFor } from "../../lib/content/table-sentences";
 import { ZoomGlyph } from "../ZoomGlyph";
 import researchStyles from "../research/ResearchArticle.module.css";
 import stageStyles from "../research/Stage.module.css";
@@ -60,9 +61,9 @@ function RunText({ runs, prefix }: { runs: PaperRun[]; prefix: string }) {
 }
 
 /** A legal table in the paper tables' frame: the same title, zoom, column fitting and cell classes. */
-function PaperTable({ rows, caption, index }: { rows: NonNullable<LegalPaper["blocks"][number]["rows"]>; caption?: LegalPaper["blocks"][number]["caption"]; index: number }) {
+function PaperTable({ slug, rows, caption, index }: { slug: string; rows: NonNullable<LegalPaper["blocks"][number]["rows"]>; caption?: LegalPaper["blocks"][number]["caption"]; index: number }) {
   const cells: ResearchCell[][] = rows.map((row) => row.map(({ text }) => ({ source: text, inlines: [{ type: "text", text }] })));
-  const layout = tableLayout(cells);
+  const layout = tableLayout(cells, sentenceColumnsFor(slug, cells[0][0].source));
   const tableRows = rows.map((row, rowIndex) => (
     <tr key={rowIndex}>{row.map((cell, cellIndex) => {
       const Cell = rowIndex === 0 ? "th" : "td";
@@ -150,7 +151,7 @@ export function LegalPaperPage({ paper, showcase }: { paper: LegalPaper; showcas
             <div className={styles.body}>
               {paper.blocks.map((block, index) => {
                 const content = <RunText runs={block.runs} prefix={`body-${index}`} />;
-                if (block.type === "table" && block.rows) return <PaperTable key={index} rows={block.rows} caption={block.caption} index={index} />;
+                if (block.type === "table" && block.rows) return <PaperTable key={index} slug={paper.slug} rows={block.rows} caption={block.caption} index={index} />;
                 if (block.type === "heading") {
                   const Heading = (block.level ?? 1) > 1 ? "h3" : "h2";
                   return <Heading id={block.id} tabIndex={-1} data-paper-block={index} key={index}>{content}</Heading>;
