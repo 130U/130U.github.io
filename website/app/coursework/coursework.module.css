@@ -1,0 +1,194 @@
+.frame {
+  font-family: var(--font-text);
+}
+
+.frame :global(.content-column) {
+  padding-top: var(--content-top);
+}
+
+.intro {
+  margin-bottom: 80px;
+}
+
+.intro h1 {
+  max-width: var(--title-width);
+  margin: 0;
+  font-size: var(--type-title);
+  font-weight: 400;
+  line-height: var(--title-leading);
+  letter-spacing: var(--title-tracking);
+}
+
+/* A section heading stands 56px above its frame, 32px on phones, as on About
+   and Experience. */
+.sectionBody h2 {
+  margin: 0 0 56px;
+  font-size: var(--type-heading);
+  font-weight: 400;
+  line-height: var(--heading-leading);
+  letter-spacing: var(--heading-tracking);
+  text-wrap: balance;
+}
+
+/* A section takes the frame's columns: its index stands on the margin-index
+   track and its body on the reading start. */
+.section {
+  display: grid;
+  grid-template-columns: subgrid;
+  grid-column: 1 / span 11;
+  align-items: start;
+  padding: 72px 0 104px;
+  border-top: 1px solid var(--rule-strong);
+  scroll-margin-top: 32px;
+}
+
+.section:last-child {
+  padding-bottom: 0;
+}
+
+.sectionIndex {
+  grid-column: 1;
+  padding: 0.5rem 0 0 var(--frame-inset);
+  color: var(--muted);
+  font-family: var(--font-prose);
+  font-size: var(--type-index);
+  font-weight: 400;
+  line-height: 1.5;
+  letter-spacing: 0;
+  font-variant-numeric: tabular-nums;
+}
+
+.sectionBody {
+  grid-column: 2 / span 10;
+  min-width: 0;
+}
+
+/* Each subject's courses sit in one faint frame; columns are divided by the
+   site's dashed hairline (4px on, 4px off), drawn on the column gaps from the
+   top of the first course to the end of the longest column. */
+.courseList {
+  --course-pad-top: 24px;
+  --course-pad-x: 28px;
+  --course-pad-bottom: 18px;
+  --course-gap: 56px;
+  position: relative;
+  display: block;
+  margin: 0;
+  padding: var(--course-pad-top) var(--course-pad-x) var(--course-pad-bottom);
+  border: 1px solid var(--frame);
+  list-style: none;
+  color: var(--ink);
+  font-family: var(--font-prose);
+  font-size: var(--type-reading);
+  line-height: var(--reading-leading);
+}
+
+.courseList li + li {
+  margin-top: 8px;
+}
+
+@media (width >= 768px) {
+  .courseList {
+    columns: 2;
+    column-gap: var(--course-gap);
+  }
+
+  .courseList::before,
+  .courseList::after {
+    position: absolute;
+    top: var(--course-pad-top);
+    bottom: var(--course-pad-bottom);
+    width: 1px;
+    background: var(--dash-y);
+    pointer-events: none;
+  }
+
+  /* Two columns: one rule, on the middle of the gap. */
+  .courseList::before {
+    content: "";
+    left: calc(50% - 0.5px);
+  }
+
+  .courseList li {
+    padding-bottom: 8px;
+    break-inside: avoid;
+  }
+
+  .courseList li + li {
+    margin-top: 0;
+  }
+}
+
+@media (width >= 1200px) {
+  .intro {
+    display: grid;
+    grid-template-columns: var(--hang-columns);
+    align-items: start;
+  }
+
+  .intro h1 {
+    max-width: none;
+    padding-right: var(--hang-gap);
+  }
+
+  .intro > nav {
+    margin-top: 0;
+  }
+
+  .courseList {
+    columns: 3;
+  }
+
+  /* Three columns: a rule on the middle of each gap. */
+  .courseList::before,
+  .courseList::after {
+    content: "";
+    --course-rule: calc(var(--course-pad-x) + (100% - 2 * var(--course-pad-x) - 2 * var(--course-gap)) / 3 + var(--course-gap) / 2 - 0.5px);
+  }
+
+  .courseList::before {
+    left: var(--course-rule);
+  }
+
+  .courseList::after {
+    right: var(--course-rule);
+  }
+}
+
+@media (768px <= width < 1024px) {
+  .section {
+    grid-column: 1 / -1;
+  }
+
+  .sectionBody {
+    grid-column: 2 / -1;
+  }
+}
+
+@media (width < 768px) {
+  .frame :global(.content-column) {
+    padding-top: 52px;
+  }
+
+  .section {
+    display: block;
+    padding: 40px 0 48px;
+    scroll-margin-top: 0.5rem;
+  }
+
+  .sectionIndex {
+    display: block;
+    padding: 0;
+    margin-bottom: 12px;
+  }
+
+  .sectionBody h2 {
+    margin-bottom: 32px;
+  }
+
+  .courseList {
+    --course-pad-top: 18px;
+    --course-pad-x: 20px;
+    --course-pad-bottom: 14px;
+  }
+}

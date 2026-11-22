@@ -1,0 +1,1853 @@
+/* Figure-specific geometry. Shared roles, colors and rows live in Figure.module.css. */
+.id {
+  display: inline-block;
+  min-width: 1.9em;
+  color: var(--ink);
+  font-weight: 500;
+}
+
+.stageText {
+  color: var(--supporting-ink);
+}
+
+/* A certificate's description stands beside its ID on one line; a figure too
+   narrow for the longest keeps the IDs, and each marker's readout the
+   description. */
+.stageLabel {
+  display: inline-grid;
+  grid-template-columns: auto minmax(0, 1fr);
+}
+
+@container figure (max-width: 20.5rem) {
+  .stageText {
+    display: none;
+  }
+}
+
+/* A ring drawn over the dot it nearly meets stays hollow, so both show. */
+.hollow.hollow {
+  background: transparent;
+}
+
+/* A bar's verdict follows the row's name on its line. */
+.ledgerVerdict {
+  margin-left: 0.75em;
+  color: var(--muted);
+}
+
+/* A connector is a hairline drawn as a border, which the browser sets on
+   whole device pixels, so every row draws it at one weight. */
+.link {
+  position: absolute;
+  top: 50%;
+  height: 0;
+  border-top: 1px solid currentColor;
+}
+
+/* Rough Heston candidates: one bar per candidate, moved between layers. */
+.candidate {
+  left: var(--from-b);
+  width: var(--width-b);
+  color: var(--ink);
+  transition: left 650ms var(--ease-out), width 650ms var(--ease-out), color 300ms ease;
+}
+
+.candidates[data-view="n1024"] .candidate {
+  left: var(--from-a);
+  width: var(--width-a);
+}
+
+.candidates[data-view="n1024"] .unresolved .candidate {
+  color: var(--chart-steel);
+}
+
+.candidates[data-view="n2048"] .best .candidate {
+  color: var(--accent);
+}
+
+.tally {
+  margin: 14px 0 0;
+  color: var(--supporting-ink);
+  font-size: var(--type-label);
+  line-height: var(--label-leading);
+}
+
+/* ---------- Line-chart annotations ---------- */
+
+/* A reference line is a 1px dashed border centered on its value, as a grid
+   line is, so a line drawn at a tick's value reads as one line. */
+.hline {
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: 0;
+  margin-top: -0.5px;
+  border-top: 1px dashed var(--rule-strong);
+  pointer-events: none;
+}
+
+.vline {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 0;
+  margin-left: -0.5px;
+  border-left: 1px dashed var(--rule-strong);
+  pointer-events: none;
+}
+
+.bracket {
+  position: absolute;
+  width: 0;
+  border-left: 1.5px solid var(--accent);
+  pointer-events: none;
+}
+
+.bracket::before,
+.bracket::after {
+  position: absolute;
+  left: -4px;
+  width: 7px;
+  height: 0;
+  border-top: 1.5px solid var(--accent);
+  content: "";
+}
+
+.bracket::before { top: 0; }
+
+.bracket::after { bottom: 0; }
+
+/* ---------- Slope chart ---------- */
+.rankingViewport,
+.bridgeViewport {
+  overflow-x: auto;
+  overscroll-behavior-x: contain;
+  scrollbar-width: thin;
+}
+
+.rankingViewport:focus-visible,
+.bridgeViewport:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 4px;
+}
+
+.rankingCanvas {
+  --pl: 4.25rem;
+  --pr: 5.5rem;
+  --pt: 0.5rem;
+  --pb: 1rem;
+  min-width: 20rem;
+  min-width: calc(20rem - round(down, 100%, 18rem) * 10 / 9);
+}
+
+/* Each head stands centered over its axis on one line, its name and its
+   symbol, so the pair matches at every width. Both share one grid cell, and
+   the comparison's scroll width keeps them apart. */
+.rankingHeads {
+  display: grid;
+  margin-bottom: 0.75rem;
+  color: var(--muted);
+  font-size: var(--type-label);
+  line-height: var(--label-leading);
+  text-align: center;
+  overflow-wrap: normal;
+}
+
+.rankingHeads > span {
+  grid-area: 1 / 1;
+  justify-self: start;
+  width: max-content;
+  transform: translateX(-50%);
+  white-space: nowrap;
+}
+
+.rankingHeads > span:first-child {
+  margin-left: var(--pl);
+}
+
+.rankingHeads > span:last-child {
+  margin-left: calc(100% - var(--pr));
+}
+
+.numericAnnotation {
+  overflow-wrap: normal;
+}
+
+.bridgeCanvas {
+  min-width: 20rem;
+  min-width: calc(20rem - round(down, 100%, 18rem) * 10 / 9);
+}
+
+/* ---------- Timelines below a chart ---------- */
+/* Information-set bands share the plot's horizontal scale. */
+.info {
+  display: grid;
+  grid-template-columns: var(--split) minmax(0, 1fr);
+  row-gap: 8px;
+  margin: 26px var(--pr, 14px) 0 var(--pl, 46px);
+  font-size: var(--type-label);
+  line-height: var(--label-leading);
+}
+
+.infoBand {
+  display: flex;
+  min-width: 0;
+  min-height: 28px;
+  align-items: center;
+  padding: 3px 4px;
+  border: 1px solid currentColor;
+  overflow-wrap: normal;
+}
+
+.infoBand[data-span] {
+  grid-column: 1 / -1;
+}
+
+.infoBand[data-fill] {
+  background: var(--chart-tint);
+}
+
+.infoBand[data-hatch] {
+  background: var(--chart-hatch);
+}
+
+.infoBand > span {
+  padding: 0 4px;
+  background: var(--control-surface, var(--page));
+  color: var(--ink);
+}
+
+.infoBand[data-fill] > span {
+  padding: 0;
+  background: transparent;
+}
+
+/* ---------- Scenario explorer (investment research) ---------- */
+.scenarios {
+  position: relative;
+  height: 196px;
+  margin: 0 var(--pr, 14px) 0 var(--pl, 46px);
+}
+
+.scenarioDot {
+  position: absolute;
+  left: var(--x);
+  top: var(--y-none);
+  width: 13px;
+  height: 13px;
+  margin: -6.5px 0 0 -6.5px;
+  border-radius: 50%;
+  background: currentColor;
+  transition: top 600ms var(--ease-out), opacity 300ms ease;
+}
+
+.scenarioDot[data-sign="negative"] {
+  border: 1.5px solid currentColor;
+  background: var(--control-surface, var(--page));
+}
+
+.scenarioDot::after {
+  position: absolute;
+  inset: -8px;
+  content: "";
+}
+
+.scenarioFigure[data-view="shap"] .scenarioDot { top: var(--y-shap); }
+
+.scenarioFigure[data-view="z2"] .scenarioDot { top: var(--y-z2); }
+
+.scenarioFigure[data-view="z1"] .scenarioDot { top: var(--y-z1); }
+
+.laneSet {
+  position: absolute;
+  inset: 0;
+}
+
+.laneSet[hidden] {
+  display: none;
+}
+
+.scenarioAxis {
+  position: relative;
+  height: 30px;
+  margin: 0 var(--pr, 14px) 0 var(--pl, 46px);
+  border-top: 1px solid var(--rule-strong);
+  font-size: var(--type-label);
+}
+
+.scenarioAxis > span {
+  top: 7px;
+}
+
+.mini {
+  height: 5px;
+}
+
+/* The three strata start together at zero: no separator before a mini bar. */
+.mini.mini {
+  box-shadow: none;
+}
+
+.mini[data-row="0"] { top: calc(50% - 7px); }
+
+.mini[data-row="2"] { top: calc(50% + 7px); }
+
+.zero {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 0;
+  margin-left: -0.5px;
+  border-left: 1px solid var(--rule-strong);
+}
+
+.lane {
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: 0;
+  border-top: 1px dashed var(--rule-medium);
+}
+
+/* A lane's name is knocked out of the zero rule it may cross in a narrow
+   figure, 4px past its text, which stays on the lane's start. */
+.laneLabel {
+  position: absolute;
+  left: 0;
+  margin-left: -4px;
+  padding-inline: 4px;
+  transform: translateY(calc(-100% - 6px));
+  background: var(--control-surface, var(--page));
+  color: var(--muted);
+  font-size: var(--type-label);
+  white-space: nowrap;
+}
+
+.laneRegret {
+  position: absolute;
+  right: 0;
+  transform: translateY(calc(-100% - 6px));
+  color: var(--ink);
+  font-size: var(--type-label);
+  white-space: nowrap;
+}
+
+.laneRegret[data-zero] {
+  color: var(--accent);
+}
+
+@container figure (max-width: 420px) {
+  .scenarios {
+    height: 216px;
+  }
+
+  .laneRegret {
+    transform: translateY(8px);
+  }
+}
+
+/* ---------- Proof-obligation graph ---------- */
+.dag {
+  position: relative;
+  height: clamp(190px, 44cqi, 250px);
+}
+
+.dagField {
+  position: absolute;
+  inset: 0 24px;
+}
+
+@container figure (max-width: 22rem) {
+  .dagField {
+    inset: 0 4px;
+  }
+}
+
+.dagEdges {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+}
+
+.dagEdges line {
+  stroke: rgba(11, 11, 11, 0.45);
+  stroke-width: 1.25;
+  vector-effect: non-scaling-stroke;
+  transition: stroke 200ms ease;
+}
+
+.dagEdges line[data-state="unverified"] {
+  stroke: var(--chart-steel);
+  stroke-dasharray: 3 4;
+}
+
+.dagNode {
+  position: absolute;
+  display: inline-flex;
+  min-width: 40px;
+  min-height: 36px;
+  align-items: center;
+  justify-content: center;
+  padding: 4px 10px;
+  transform: translate(-50%, -50%);
+  border: 1px solid var(--ink);
+  background: var(--panel);
+  color: var(--ink);
+  font: inherit;
+  font-size: var(--type-interface);
+  line-height: 1;
+  cursor: pointer;
+  transition: border-color 200ms ease, background-color 200ms ease, color 200ms ease;
+}
+
+.dagNode:disabled {
+  cursor: default;
+}
+
+.dagNode[data-fixed] {
+  border-color: var(--rule-strong);
+  cursor: default;
+}
+
+.dagNode[data-state="failed"] {
+  border-color: var(--accent);
+  background: var(--accent);
+  color: #fff;
+}
+
+.dagNode[data-state="unverified"] {
+  border-style: dashed;
+  border-color: var(--chart-steel);
+  background: var(--chart-hatch), var(--control-surface, var(--page));
+  color: var(--supporting-ink);
+}
+
+/* The hatch stops short of an unverified node's name. */
+.dagNode[data-state="unverified"] > * {
+  padding: 0 2px;
+  background: var(--control-surface, var(--page));
+}
+
+/* A node keeps its drawn size on touch screens; an invisible margin makes its
+   target 44px. */
+@media (pointer: coarse) {
+  button.dagNode::after {
+    position: absolute;
+    inset: -4px;
+    content: "";
+  }
+}
+
+.dagNode:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .dagNode:not(:disabled):not([data-fixed]):hover {
+    border-color: var(--accent);
+  }
+}
+
+.readout {
+  min-height: 1.45em;
+  margin: 18px 0 0;
+  color: var(--ink);
+  font-size: var(--type-label);
+  line-height: var(--label-leading);
+}
+
+/* ---------- Diagrams: matrices, flows and chains ---------- */
+/* The legal diagrams draw their connectors in the logic diagram's one tone. */
+.flow,
+.sequence,
+.ladder,
+.tiers {
+  --connector: rgba(11, 11, 11, 0.42);
+}
+
+/* A two-by-two matrix reflows rather than scrolls. Beside its row heads where
+   the figure is wide; below 34rem each row head becomes a band over its row;
+   below 21rem the cells stack, each naming its column. Neighboring cells
+   share an edge, drawn in an opaque hairline so the shared edges read at the
+   frame's weight, and the cells of a row share their title, definition and
+   example lines. */
+.matrix {
+  --matrix-rule: color-mix(in srgb, #000 12%, var(--control-surface, var(--page)));
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr) minmax(0, 1fr);
+  font-size: var(--type-label);
+  line-height: var(--label-leading);
+}
+
+.axisCell {
+  display: flex;
+  align-items: flex-end;
+  padding: 0 0 10px;
+  color: var(--muted);
+  white-space: nowrap;
+}
+
+/* A column head starts on its cells' text. */
+.columnHead {
+  padding-left: 16px;
+}
+
+.cell {
+  display: grid;
+  grid-row: span 3;
+  grid-template-rows: subgrid;
+  align-content: start;
+  min-height: 112px;
+  margin: -1px 0 0 -1px;
+  padding: 14px 16px;
+  border: 1px solid var(--matrix-rule);
+  transition: background-color 160ms ease;
+}
+
+.rowHead + .cell {
+  margin-left: 0;
+}
+
+@container figure (max-width: 34rem) {
+  .matrix {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  }
+
+  .matrixCorner {
+    display: none;
+  }
+
+  .matrix .rowHead {
+    grid-column: 1 / -1;
+    grid-row: auto;
+    padding: 14px 0 8px;
+  }
+
+  .matrix > [role="row"]:nth-child(2) > .rowHead {
+    padding-top: 0;
+  }
+}
+
+@container figure (max-width: 21rem) {
+  .matrix {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .columnHead {
+    display: none;
+  }
+
+  .matrix .cell {
+    display: block;
+    grid-row: auto;
+    min-height: 0;
+    margin-left: 0;
+  }
+
+  .cell::before {
+    display: block;
+    margin-bottom: 4px;
+    color: var(--muted);
+    content: attr(data-column);
+    content: attr(data-column) / "";
+  }
+}
+
+.cell[data-tone="accent"] {
+  background: rgba(34, 0, 255, 0.03);
+}
+
+.cellTitle {
+  display: block;
+  color: var(--ink);
+  font-size: var(--type-interface);
+  font-weight: 500;
+  line-height: var(--interface-leading);
+}
+
+.cellText {
+  display: block;
+  margin-top: 4px;
+  color: var(--supporting-ink);
+}
+
+.cellExample {
+  display: block;
+  margin-top: 10px;
+  padding-top: 8px;
+  border-top: 1px dashed var(--dash);
+  color: var(--ink);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .cell:hover {
+    background: var(--chart-tint-strong);
+  }
+}
+
+/* A decision procedure: questions on the left, each answer's arrow running
+   into the hatched result lane and meeting its result's edge. The arrow column
+   holds its longest label clear of the lane. Every title, answer and result
+   holds one line; the procedure stands in two lanes from a 35rem figure, where
+   the result lane holds the longest alternative. */
+.flow {
+  position: relative;
+  display: grid;
+  grid-template-columns: minmax(0, 0.9fr) 60px minmax(0, 1fr);
+  font-size: var(--type-label);
+  line-height: var(--label-leading);
+}
+
+.flow::before {
+  position: absolute;
+  top: 31px;
+  right: 0;
+  bottom: 0;
+  width: calc((100% - 60px) / 1.9);
+  border: 1px solid var(--rule-medium);
+  background-image: repeating-linear-gradient(135deg, rgba(11, 11, 11, 0.06) 0 1px, transparent 1px 7px);
+  content: "";
+}
+
+.flowHead {
+  padding: 0 0 12px;
+  color: var(--muted);
+}
+
+.flowHeadOut {
+  padding-left: 12px;
+}
+
+.flowStep {
+  position: relative;
+  grid-column: 1;
+}
+
+/* The last question leads to a group of results: its node takes the group's
+   height, with its text centered on the arrow. */
+.flowStep[data-choice] {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.flowOut {
+  position: relative;
+  z-index: 1;
+  grid-column: 3;
+  align-self: center;
+  margin: 10px 12px;
+  white-space: nowrap;
+}
+
+.flowArrow {
+  position: relative;
+  grid-column: 2;
+  align-self: center;
+  height: 0;
+  margin-right: -12px;
+  border-top: 1px solid var(--connector);
+}
+
+.flowArrow::after {
+  position: absolute;
+  top: -4.5px;
+  right: 0;
+  width: 0;
+  height: 0;
+  border-top: 4px solid transparent;
+  border-bottom: 4px solid transparent;
+  border-left: 6px solid var(--connector);
+  content: "";
+}
+
+.flowArrow > span {
+  position: absolute;
+  bottom: 4px;
+  left: 6px;
+  color: var(--muted);
+  white-space: nowrap;
+}
+
+.flowDown {
+  position: relative;
+  grid-column: 1 / -1;
+  height: 34px;
+}
+
+.flowDown::before {
+  position: absolute;
+  top: 0;
+  bottom: 5px;
+  left: 22px;
+  width: 0;
+  border-left: 1px solid var(--connector);
+  content: "";
+}
+
+.flowDown::after {
+  position: absolute;
+  bottom: 0;
+  left: 18px;
+  width: 0;
+  height: 0;
+  border-left: 4px solid transparent;
+  border-right: 4px solid transparent;
+  border-top: 6px solid var(--connector);
+  content: "";
+}
+
+.flowDown > span {
+  position: absolute;
+  top: 50%;
+  left: 32px;
+  transform: translateY(-50%);
+  color: var(--muted);
+  white-space: nowrap;
+}
+
+.stepIndex {
+  display: block;
+  margin-bottom: 2px;
+  color: var(--muted);
+  font-family: var(--font-prose);
+  font-size: var(--type-index);
+}
+
+/* The bounded alternatives stand as one group: a bracket in the lane's margin
+   gathers them, and the arrow that offers the choice meets the bracket. The
+   alternatives keep the other results' edge, and their text the nodes' inset. */
+.options {
+  display: grid;
+  gap: 6px;
+}
+
+.options::before {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: -6px;
+  width: 4px;
+  border: 1px solid var(--accent);
+  border-right: 0;
+  content: "";
+}
+
+.flowArrow[data-choice] {
+  margin-right: -6px;
+}
+
+.options > span {
+  padding: 6px 14px;
+  border: 1px solid var(--accent);
+  background: var(--panel);
+  color: var(--ink);
+}
+
+/* In a narrow figure the questions stand on one spine. Each answer that ends
+   the procedure leaves the spine on an elbow to its result, set in to the
+   right; the answer that continues runs down the spine to the next question,
+   and the last question's choice runs down to the alternatives. */
+@container figure (max-width: 35rem) {
+  .flow {
+    grid-template-columns: 60px minmax(0, 1fr);
+  }
+
+  .flow::before,
+  .flow > .flowHead,
+  .flow > span:empty {
+    display: none;
+  }
+
+  .flowStep {
+    grid-column: 1 / -1;
+  }
+
+  .flowArrow {
+    grid-column: 1;
+    align-self: stretch;
+    height: auto;
+    margin-right: 0;
+    border-top: 0;
+    background: linear-gradient(var(--connector), var(--connector)) 22px 50% / calc(100% - 28px) 1px no-repeat;
+  }
+
+  .flowArrow::before {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 22px;
+    border-left: 1px solid var(--connector);
+    content: "";
+  }
+
+  .flowArrow::after {
+    top: calc(50% - 4px);
+  }
+
+  .flowArrow > span {
+    bottom: calc(50% + 2px);
+    left: 29px;
+  }
+
+  .flowOut {
+    grid-column: 2;
+    margin: 8px 0;
+  }
+
+  .flowStep[data-choice] {
+    display: block;
+  }
+
+  .flowArrow[data-choice] {
+    grid-column: 1 / -1;
+    height: 34px;
+    margin-right: 0;
+    background: none;
+  }
+
+  .flowArrow[data-choice]::before {
+    bottom: 5px;
+  }
+
+  .flowArrow[data-choice]::after {
+    top: auto;
+    right: auto;
+    bottom: 0;
+    left: 18px;
+    border-top: 6px solid var(--connector);
+    border-right: 4px solid transparent;
+    border-bottom: 0;
+    border-left: 4px solid transparent;
+  }
+
+  .flowArrow[data-choice] > span {
+    top: 50%;
+    bottom: auto;
+    left: 32px;
+    transform: translateY(-50%);
+  }
+
+  .flow .options {
+    grid-column: 1 / -1;
+    margin: 0;
+    padding-left: 10px;
+  }
+
+  .options::before {
+    left: 0;
+    width: 5px;
+  }
+}
+
+/* A comparison of cases: each case a row, its name and then each field's
+   label and value, every one on one line, the label beside its value where the
+   figure is wide and above it where it is narrow. Hovering a case tints it.
+   The comparison is set at its scroll width, 20rem, where its longest value is
+   wider than the figure, and scrolls as a wide comparison does. */
+.cases {
+  display: grid;
+  grid-template-columns: max-content minmax(0, 1fr);
+  column-gap: 18px;
+  min-width: 20rem;
+  min-width: calc(20rem - round(down, 100%, 18rem) * 10 / 9);
+  font-size: var(--type-label);
+  line-height: var(--label-leading);
+}
+
+.casesHead {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+}
+
+.case {
+  display: grid;
+  grid-column: 1 / -1;
+  grid-template-columns: subgrid;
+  row-gap: 6px;
+  padding: 14px 0;
+  border-top: 1px dashed var(--dash);
+  transition: background-color 160ms ease;
+}
+
+.casesHead + .case {
+  padding-top: 0;
+  border-top: 0;
+}
+
+.case:last-child {
+  padding-bottom: 0;
+}
+
+.caseName {
+  grid-column: 1 / -1;
+  color: var(--ink);
+  font-size: var(--type-interface);
+  font-weight: 500;
+  line-height: var(--interface-leading);
+  white-space: nowrap;
+}
+
+.caseField {
+  display: grid;
+  grid-column: 1 / -1;
+  grid-template-columns: subgrid;
+  align-items: baseline;
+  white-space: nowrap;
+}
+
+.caseLabel {
+  color: var(--muted);
+}
+
+.caseValue {
+  color: var(--ink);
+}
+
+.caseValue[data-strong] {
+  font-size: var(--type-interface);
+  font-weight: 500;
+  line-height: var(--interface-leading);
+}
+
+.cases [data-key-active] {
+  background: var(--chart-tint);
+}
+
+@container figure (max-width: 30rem) {
+  .cases {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .case {
+    row-gap: 8px;
+  }
+}
+
+/* Waffle of species counts: 14px squares that close up in a panel narrower
+   than fourteen of them. */
+.waffle {
+  display: grid;
+  grid-template-columns: repeat(14, minmax(0, 14px));
+  gap: 4px;
+}
+
+.waffle > span {
+  aspect-ratio: 1;
+  background: currentColor;
+}
+
+.waffle > span[data-ring] {
+  outline: 1px solid var(--rule-strong);
+  outline-offset: -1px;
+  background: transparent;
+}
+
+.panels {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: 28px;
+}
+
+@container figure (max-width: 560px) {
+  .panels {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+/* Lanes under a schematic timeline. */
+.lanes {
+  display: grid;
+  grid-template-columns: minmax(7rem, auto) minmax(0, 1fr);
+  margin-top: 22px;
+  font-size: var(--type-label);
+  line-height: var(--label-leading);
+}
+
+.lanes {
+  margin-bottom: 0;
+}
+
+.lanes > * {
+  margin: 0;
+  padding: 10px 0;
+  border-top: 1px dashed var(--dash);
+}
+
+.lanes > :nth-child(odd) {
+  padding-right: 16px;
+  color: var(--muted);
+  white-space: nowrap;
+}
+
+.lanes > :nth-child(even) {
+  color: var(--ink);
+}
+
+@container figure (max-width: 460px) {
+  .lanes {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .lanes > :nth-child(even) {
+    padding-top: 0;
+    border-top: 0;
+  }
+}
+
+/* Evidence tiers stand in one column, each a step down from the one before,
+   so every tier's title holds one line. */
+.tiers {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 10px;
+  font-size: var(--type-label);
+  line-height: var(--label-leading);
+}
+
+.tier {
+  position: relative;
+  padding: 14px 14px 12px;
+  border: 1px solid var(--rule-medium);
+  background: var(--panel);
+}
+
+.rowHead {
+  grid-row: span 3;
+  align-items: center;
+  padding: 0 14px 0 0;
+}
+
+/* A sequence with side brackets. Every step and note holds one line: where
+   the figure is wide each note stands beside the run it brackets; where it is
+   narrow each note heads its run, in its run's tone (--row-narrow). */
+.sequence {
+  display: grid;
+  grid-template-columns: minmax(max-content, 1.75fr) minmax(max-content, 1fr);
+  column-gap: 18px;
+  row-gap: 8px;
+  font-size: var(--type-label);
+  line-height: var(--label-leading);
+}
+
+.sequenceStep {
+  grid-row: var(--row);
+  grid-column: 1;
+  padding: 8px 12px;
+  color: var(--ink);
+  white-space: nowrap;
+}
+
+/* A numbered step hangs its number, so a title that wraps continues under its
+   first word. */
+.sequenceStep,
+.ladderNode {
+  display: grid;
+  grid-template-columns: 1.6rem minmax(0, 1fr);
+  align-items: baseline;
+}
+
+.sequenceStep .stepIndex,
+.ladderNode .stepIndex {
+  margin: 0;
+}
+
+.sequenceNote {
+  position: relative;
+  grid-row: var(--row);
+  grid-column: 2;
+  display: flex;
+  align-items: center;
+  margin: 0;
+  padding: 4px 0 4px 16px;
+  border-left: 1.5px solid var(--chart-steel);
+  color: var(--ink);
+  white-space: nowrap;
+}
+
+/* The bracket opens toward the steps it groups. */
+.sequenceNote::before,
+.sequenceNote::after {
+  position: absolute;
+  left: -7px;
+  width: 7px;
+  height: 0;
+  border-top: 1.5px solid var(--chart-steel);
+  content: "";
+}
+
+.sequenceNote::before { top: 0; }
+
+.sequenceNote::after { bottom: 0; }
+
+.sequenceNote[data-tone="accent"],
+.sequenceNote[data-tone="accent"]::before,
+.sequenceNote[data-tone="accent"]::after {
+  border-color: var(--accent);
+}
+
+@container figure (max-width: 35rem) {
+  .sequence {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .sequenceStep,
+  .sequenceNote {
+    grid-row: var(--row-narrow);
+    grid-column: 1;
+  }
+
+  .sequenceNote {
+    padding: 10px 0 0;
+    border-left: 0;
+  }
+
+  .sequenceNote::before,
+  .sequenceNote::after {
+    display: none;
+  }
+
+  .sequenceNote[data-tone="accent"] {
+    color: var(--accent);
+  }
+}
+
+/* Vertical chain with an example beside each link. The head and the links
+   share one grid, whose first column takes the longest link's width, so every
+   link holds one line and its observation starts on one edge. */
+.chain {
+  display: grid;
+  grid-template-columns: max-content minmax(0, 1fr);
+  column-gap: 18px;
+}
+
+.ladder {
+  display: grid;
+  grid-column: 1 / -1;
+  grid-template-columns: subgrid;
+  margin: 0;
+  padding: 0;
+  font-size: var(--type-label);
+  line-height: var(--label-leading);
+  list-style: none;
+}
+
+.ladder li {
+  position: relative;
+  display: grid;
+  grid-column: 1 / -1;
+  grid-template-columns: subgrid;
+  align-items: center;
+  padding-bottom: 16px;
+}
+
+.ladder li:last-child {
+  padding-bottom: 0;
+}
+
+.ladder li:not(:last-child)::after {
+  position: absolute;
+  bottom: 2px;
+  left: 22px;
+  width: 0;
+  height: 0;
+  border-left: 4px solid transparent;
+  border-right: 4px solid transparent;
+  border-top: 6px solid var(--connector);
+  content: "";
+}
+
+.ladder li:not(:last-child)::before {
+  position: absolute;
+  bottom: 8px;
+  left: 25.5px;
+  height: 8px;
+  border-left: 1px solid var(--connector);
+  content: "";
+}
+
+.ladderNode {
+  padding: 8px 12px;
+  color: var(--ink);
+  white-space: nowrap;
+}
+
+.ladderExample {
+  color: var(--supporting-ink);
+}
+
+.ladderExample:not(:empty) {
+  padding-left: 14px;
+  border-left: 1px dashed var(--rule-strong);
+}
+
+/* In a phone's figure each link takes the full width and its observation
+   follows beneath, set in to the title, while the chain runs down beside it. */
+@container figure (max-width: 25rem) {
+  .chain {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .ladderHead.ladderHead {
+    grid-template-columns: subgrid;
+  }
+
+  .ladderHead > span + span {
+    padding-left: calc(12px + 1.6rem);
+  }
+
+  .ladder li:not(:last-child)::before {
+    top: 0;
+    height: auto;
+  }
+
+  .ladderExample:not(:empty) {
+    margin-top: 6px;
+    padding-left: calc(12px + 1.6rem);
+    border-left: 0;
+  }
+}
+
+/* Claims and the counterfactual each tests share one grid, so every claim's
+   name holds one line and its question starts on one edge. */
+.claims {
+  display: grid;
+  grid-template-columns: minmax(max-content, 0.6fr) minmax(0, 1.4fr);
+  column-gap: 16px;
+  margin: 0;
+  font-size: var(--type-label);
+  line-height: var(--label-leading);
+}
+
+.claims > div {
+  display: grid;
+  grid-column: 1 / -1;
+  grid-template-columns: subgrid;
+  padding: 12px 0;
+  border-top: 1px dashed var(--dash);
+}
+
+.claims > div:first-child {
+  padding-top: 0;
+  border-top: 0;
+}
+
+.claims dt {
+  color: var(--ink);
+  font-weight: 500;
+  white-space: nowrap;
+}
+
+.claims dd {
+  margin: 0;
+  color: var(--supporting-ink);
+}
+
+@container figure (max-width: 460px) {
+  .claims {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .claims > div {
+    row-gap: 4px;
+  }
+}
+
+.tiers {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.pips {
+  display: flex;
+  gap: 4px;
+  margin-bottom: 12px;
+}
+
+.pips > span {
+  width: 22px;
+  height: 4px;
+  background: var(--chart-mist);
+}
+
+.pips > span[data-on] {
+  background: var(--accent);
+}
+
+.waffleLegend {
+  flex-direction: column;
+  gap: 6px;
+  margin-top: 16px;
+}
+
+.lossFill {
+  color: rgba(34, 0, 255, 0.09);
+}
+
+/* The Deep Bay key: squares the size of the waffle's, the remaining species
+   outlined as their cells are. */
+.waffleLegend .waffleKey {
+  width: 12px;
+  height: 12px;
+}
+
+.waffleLegend .waffleKey[data-ring] {
+  outline: 1px solid var(--rule-strong);
+  outline-offset: -1px;
+  background: transparent;
+}
+
+/* The head between two tiers stands in their gap, pointing down. */
+.tier:not(:last-child)::after {
+  position: absolute;
+  bottom: -9px;
+  left: 22px;
+  z-index: 1;
+  border-top: 6px solid var(--connector);
+  border-right: 4px solid transparent;
+  border-left: 4px solid transparent;
+  content: "";
+}
+
+.ladderHead {
+  display: grid;
+  grid-column: 1 / -1;
+  grid-template-columns: subgrid;
+  margin: 0 0 12px;
+  color: var(--muted);
+  font-size: var(--type-label);
+  line-height: var(--label-leading);
+  white-space: nowrap;
+}
+
+/* ---------- Manuscript figures drawn natively (Critical Dependence Stress) ---------- */
+/* Side-by-side panels share their title row, so the drawings align even when
+   one title wraps; the shorter title sits on its drawing. */
+.panels {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  column-gap: 28px;
+}
+
+.panels > .panel {
+  display: grid;
+  grid-row: span 2;
+  grid-template-rows: subgrid;
+  row-gap: 0;
+}
+
+.panels > .panel > .panelTitle {
+  align-self: end;
+}
+
+/* A panel whose axis carries no tick labels keeps their row only while a
+   neighbor beside it does, so the axis names of side-by-side panels align. */
+.unmarkedAxis {
+  --pb: 30px;
+}
+
+@container figure (max-width: 540px) {
+  .unmarkedAxis {
+    --pb: 8px;
+  }
+
+  .panels {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .panels > .panel + .panel {
+    margin-top: 30px;
+  }
+}
+
+.panel {
+  display: flex;
+  min-width: 0;
+  flex-direction: column;
+}
+
+.panelTitle {
+  margin: 0 0 14px;
+  color: var(--ink);
+  font-size: var(--type-interface);
+  font-weight: 500;
+  line-height: var(--interface-leading);
+  text-wrap: balance;
+}
+
+/* Under a figure's own title, a panel title is the next level down: the
+   label size, so the eye lands on the figure's title first. */
+figure:has([data-figure-title]) .panelTitle {
+  font-size: var(--type-label);
+  line-height: var(--label-leading);
+}
+
+.note {
+  color: var(--supporting-ink);
+}
+
+.layerBand {
+  fill: var(--chart-tint-strong);
+}
+
+.discrepancyShade {
+  fill: var(--chart-tint-strong);
+  stroke: none;
+}
+
+/* Figure 2: the source region, the corner demand and the return triangles. */
+.corner {
+  display: grid;
+  grid-template-columns: minmax(0, 1.05fr) minmax(0, 1fr);
+  gap: 28px;
+  align-items: center;
+}
+
+@container figure (max-width: 540px) {
+  .corner {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+.omega {
+  fill: rgba(0, 0, 0, 0.035);
+  stroke: var(--chart-steel);
+  stroke-width: 1;
+}
+
+.demand {
+  fill: var(--accent);
+  fill-opacity: 0.88;
+  transition: fill-opacity 200ms ease, opacity 200ms ease;
+}
+
+.capacity polygon {
+  stroke: var(--ink);
+  stroke-width: 1.1;
+  stroke-linejoin: round;
+}
+
+.hatchLine.hatchLine {
+  stroke: var(--ink);
+  stroke-width: 0.9;
+  stroke-opacity: 0.6;
+  vector-effect: none;
+}
+
+.capacity {
+  transition: opacity 200ms ease;
+}
+
+.omegaLabel {
+  font-size: var(--type-subheading);
+}
+
+.diagonal.diagonal {
+  transform: translate(-50%, -50%) rotate(-45deg);
+}
+
+.bounds {
+  display: grid;
+  gap: 0;
+  margin: 0;
+  font-size: var(--type-interface);
+  line-height: var(--interface-leading);
+}
+
+.bounds > div {
+  padding: 16px 0;
+  border-top: 1px dashed var(--rule-medium);
+  transition: opacity 200ms ease;
+}
+
+.bounds > div:first-child {
+  padding-top: 0;
+  border-top: 0;
+}
+
+.bounds dt {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  margin-bottom: 8px;
+  color: var(--ink);
+  font-weight: 500;
+}
+
+/* Every term's swatch takes one 18px slot, so its values hang on the term's
+   first letter whatever the swatch's shape. */
+.bounds dt > .swatch:not([data-shape="line"], [data-shape="dash"]) {
+  margin-inline: 4px;
+}
+
+.bounds dd {
+  margin: 4px 0 0 27px;
+  color: var(--supporting-ink);
+}
+
+/* The return-capacity swatch is drawn as its triangles are: an ink outline
+   over ink hatching. */
+.bounds .swatch[data-shape="hatch"] {
+  outline: 1px solid var(--ink);
+  outline-offset: -1px;
+  background: repeating-linear-gradient(135deg, rgba(11, 11, 11, 0.6) 0 1px, transparent 1px 3.5px);
+}
+
+.bounds dd[data-tone="accent"] {
+  color: var(--accent);
+}
+
+.cornerFigure[data-focus="demand"] [data-key="capacity"],
+.cornerFigure[data-focus="capacity"] [data-key="demand"] {
+  opacity: 0.28;
+}
+
+/* Figure 3: the proved range, the critical band and the inset. */
+.rangeFill {
+  color: var(--chart-tint-strong);
+}
+
+.criticalBand {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.045);
+  pointer-events: none;
+}
+
+.criticalLabel {
+  color: var(--ink);
+}
+
+.zoomWindow {
+  position: absolute;
+  border: 1px dashed var(--chart-steel);
+  pointer-events: none;
+}
+
+.inset {
+  margin-top: 22px;
+  padding-top: 18px;
+  border-top: 1px dashed var(--rule-medium);
+}
+
+.insetTitle {
+  margin: 0 0 12px;
+  color: var(--ink);
+  font-size: var(--type-label);
+  font-weight: 500;
+  line-height: var(--label-leading);
+}
+
+.greenRule {
+  border-left: 1px dotted var(--chart-green);
+}
+
+/* Rough Heston, Figure 4: one panel for each roughness candidate on a shared tolerance axis. */
+.stack {
+  display: grid;
+  gap: 22px;
+}
+
+/* Asian options, Figure 1: one marker for each simulated path inside a wedge,
+   ringed in the color of the surface it sits on, so that neighboring paths
+   stay apart. */
+span.pathDot {
+  width: 5px;
+  height: 5px;
+  margin: -2.5px 0 0 -2.5px;
+  box-shadow: 0 0 0 1px var(--control-surface, var(--page));
+}
+
+/* Figure 4: small multiples of the three shares under models U and D. */
+.defs {
+  position: absolute;
+  width: 0;
+  height: 0;
+  overflow: hidden;
+}
+
+/* The grid holds the axis name and ticks that hang beside its last panels. Each
+   column's head holds one line, centered over its panel and reaching into the
+   gaps beside it; the grid fits its room down to 29.7rem, where a panel is
+   about 110px wide, and in less room is set at 33rem and scrolls. */
+.shares {
+  display: grid;
+  min-width: 33rem;
+  min-width: calc(33rem - round(down, 100%, 29.7rem) * 10 / 9);
+  grid-template-columns: auto repeat(3, minmax(0, 1fr));
+  gap: 24px 22px;
+  align-items: center;
+  padding-right: calc(6px + 1.25em);
+  font-size: var(--type-label);
+  line-height: var(--label-leading);
+}
+
+@container figure (max-width: 34rem) {
+  .shares {
+    gap: 20px 14px;
+  }
+}
+
+.shareRow {
+  display: contents;
+}
+
+.shareAxisY,
+.shareAxisX {
+  position: absolute;
+  color: var(--muted);
+  white-space: nowrap;
+  pointer-events: none;
+}
+
+/* The axis name stands above the top tick, which is centered on the panel's
+   top edge, and 4px clear of it. */
+.shareAxisY {
+  right: calc(100% + 6px);
+  bottom: calc(100% + 0.5em * var(--label-leading) + 4px);
+}
+
+.shareAxisX {
+  left: calc(100% + 6px);
+  top: 100%;
+  transform: translateY(-50%);
+}
+
+.shareHead {
+  align-self: end;
+  justify-self: center;
+  color: var(--ink);
+  font-weight: 500;
+  white-space: nowrap;
+}
+
+.shareRowHead {
+  display: flex;
+  flex-direction: column;
+  padding-right: 16px;
+  color: var(--supporting-ink);
+  white-space: nowrap;
+}
+
+.shareRowHead strong {
+  color: var(--ink);
+  font-size: var(--type-interface);
+  font-weight: 500;
+}
+
+.sharePanel {
+  position: relative;
+  aspect-ratio: 1;
+}
+
+/* Room for the ticks set 4px beneath the last row. */
+.sharePanel[data-last-row] {
+  margin-bottom: calc(4px + 1lh);
+}
+
+.sharePanel > svg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+}
+
+.sharePanel polygon[data-key] {
+  transition: opacity 200ms ease;
+}
+
+.shareOutline {
+  fill: none;
+  stroke: var(--rule-strong);
+  stroke-width: 1;
+  vector-effect: non-scaling-stroke;
+}
+
+.sharePanel [data-axis] {
+  stroke: var(--rule-strong);
+  stroke-width: 1;
+  vector-effect: non-scaling-stroke;
+}
+
+.flowFigure[data-focus] .sharePanel polygon[data-key]:not([data-key-active]) {
+  opacity: 0.22;
+}
+
+.shareTickY,
+.shareTickX {
+  position: absolute;
+  color: var(--muted);
+  white-space: nowrap;
+  pointer-events: none;
+}
+
+.shareTickY {
+  right: calc(100% + 6px);
+  transform: translateY(-50%);
+}
+
+.shareTickX {
+  top: calc(100% + 4px);
+  transform: translateX(-50%);
+}
+
+.colorbar {
+  display: grid;
+  grid-template-columns: auto minmax(0, 15rem);
+  grid-template-areas: "label ramp" ". ticks";
+  gap: 4px 14px;
+  align-items: center;
+  justify-content: start;
+  margin-top: 24px;
+  color: var(--supporting-ink);
+  font-size: var(--type-label);
+  line-height: var(--label-leading);
+}
+
+.colorbarLabel {
+  grid-area: label;
+}
+
+.colorbarRamp {
+  grid-area: ramp;
+  height: 10px;
+}
+
+.colorbarTicks {
+  display: flex;
+  grid-area: ticks;
+  justify-content: space-between;
+  color: var(--muted);
+}
+
+@container figure (max-width: 480px) {
+  .colorbar {
+    grid-template-columns: minmax(0, 1fr);
+    grid-template-areas: "label" "ramp" "ticks";
+  }
+}
+
+/* ---------- The critical-budget ruler ---------- */
+.budgetBand {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  border-inline: 1px solid rgba(34, 0, 255, 0.28);
+  background: var(--chart-tint);
+}
+
+.budgetBand::after {
+  position: absolute;
+  inset: 0;
+  content: "";
+}
+
+.budgetBar {
+  position: absolute;
+  bottom: 0;
+  height: 6px;
+  transform-origin: left center;
+  background: var(--accent);
+  pointer-events: none;
+}
+
+.ruler[data-reveal="pending"] .budgetBar {
+  transform: scaleX(0);
+}
+
+.ruler[data-reveal="in"] .budgetBar {
+  transition: transform 700ms var(--ease-out);
+}
+
+.budgetRule {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 0;
+  border-left: 1px dashed var(--ink);
+  pointer-events: none;
+}
+
+.budgetGap {
+  position: absolute;
+  height: 0;
+  border-top: 1.5px solid var(--accent);
+  pointer-events: none;
+}
+
+.budgetGap::after {
+  position: absolute;
+  top: -5px;
+  right: -1px;
+  width: 0;
+  height: 0;
+  border-top: 4.25px solid transparent;
+  border-bottom: 4.25px solid transparent;
+  border-left: 7px solid var(--accent);
+  content: "";
+}
+
+.budgetLabel {
+  padding-left: 9px;
+  line-height: 1.6;
+}
+
+/* A label of a name and its value stands on two lines, one for each. */
+.labelLine {
+  display: block;
+}
+
+.budgetLabel.budgetLabelEnd {
+  padding-right: 9px;
+  padding-left: 0;
+  text-align: right;
+}
+
+/* Critical Dependence Stress, the budget ruler: where the band is too narrow
+   for the interval, its endpoints stand under the bar's ends in place of the
+   0.2 and 0.3 ticks, and the gain stands left of its rule, at its arrow. */
+.narrowOnly {
+  display: none;
+}
+
+@container figure (max-width: 35rem) {
+  .narrowOnly {
+    display: block;
+  }
+
+  .wideOnly {
+    display: none;
+  }
+}
+
+/* A label that names a line at the plot's right end stops short of the edge
+   grid line, which keeps running past it. */
+.endLabel {
+  margin-left: -6px;
+}
+
+/* Mangrove restoration, the San Tin figure: the period of loss is named over
+   its interval, from just past the rule at condition 9, on the open paper
+   above the shading, where no curve runs at any width. */
+.lossLabel {
+  margin-left: 8px;
+}
+
+/* Asian options, Figure 4: the triangles are named on one line to the left of
+   the first, in the plot's empty corner. A figure too narrow to hold the name
+   there leaves the triangles to the caption, which keys them. */
+@container figure (max-width: 32rem) {
+  .kinkLabel {
+    display: none;
+  }
+}

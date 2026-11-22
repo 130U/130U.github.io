@@ -1,0 +1,6 @@
+/* Return Home stands off the sentence above it by the room the title keeps
+   above that sentence: its 44px target centers the text, so 16px of margin
+   leaves about 27px between the two lines of text. */
+.home {
+  margin-top: 16px;
+}
