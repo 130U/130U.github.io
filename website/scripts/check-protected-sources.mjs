@@ -1,0 +1,83 @@
+import { createHash } from "node:crypto";
+import { readFileSync } from "node:fs";
+import path from "node:path";
+import { fileURLToPath } from "node:url";
+
+const ROOT = fileURLToPath(new URL("../", import.meta.url));
+const PROTECTED_PATHS = [
+  "app/experience/page.tsx",
+  "app/experience/[slug]/page.tsx",
+  "app/components/experience/ExperienceContent.tsx",
+  "app/components/experience/ExperienceDetails.tsx",
+  "app/lib/content/experience-showcase.ts",
+  "app/lib/content/experience-domains.ts",
+  "content/experience-showcase.json",
+  "app/components/AboutContent.tsx",
+  "app/lib/content/about.ts",
+  "app/coursework/page.tsx",
+  "app/components/research/ResearchArticle.tsx",
+  "app/components/research/ResearchInline.tsx",
+  "app/components/research/ResearchMath.tsx",
+  "app/lib/content/research-markdown.ts",
+  "app/lib/content/research-math.ts",
+  "app/lib/content/research-number.ts",
+  "app/[paper]/page.tsx",
+  "app/lib/content/selected-research.ts",
+  "content/selected-research/certified-valuation-of-arithmetic-asian-options.json",
+  "content/selected-research/certified-joint-pricing-errors-in-rough-heston.json",
+  "content/selected-research/critical-dependence-stress-for-diversification-gains-under-fixed-marginals.json",
+  "app/lib/content/legal-papers.ts",
+  "app/lib/content/metadata-excerpt.ts",
+  "app/components/legal/LegalPaperPage.tsx",
+  "content/legal-papers/autonomous-authority-in-space.json",
+  "content/legal-papers/small-states-and-the-governance-of-strategic-space-dependence.json",
+  "content/legal-papers/who-may-choose-the-lesser-risk.json",
+  "content/legal-papers/mangrove-restoration-and-the-limits-of-compensatory-mitigation.json",
+  "app/lib/content/ai-projects.ts",
+  "app/lib/content/routes.ts",
+  "content/artificial-intelligence/large-scale-domain-expert-feedback-governance-and-adaptive-review.json",
+  "content/artificial-intelligence/financial-task-design-and-synthetic-data-engineering.json",
+  "content/artificial-intelligence/general-reasoning-evaluation-and-layered-verification.json",
+  "content/artificial-intelligence/evidence-verification-and-robust-comparison-in-investment-research.json",
+  "content/sources/ai-portfolio/ai-research-and-engineering.md",
+  "scripts/import-ai-portfolio.mjs",
+];
+
+export function verifyProtectedSources(root = ROOT) {
+  const manifest = JSON.parse(
+    readFileSync(path.join(root, "content", "protected-sources.json"), "utf8"),
+  );
+  const paths = Object.keys(manifest.sources ?? {}).sort();
+  if (
+    manifest.version !== 1 ||
+    manifest.normalization !== "LF" ||
+    JSON.stringify(paths) !== JSON.stringify([...PROTECTED_PATHS].sort())
+  ) {
+    throw new Error("The protected-source manifest must cover every required source with LF normalization.");
+  }
+
+  const failures = [];
+  for (const relative of PROTECTED_PATHS) {
+    const expected = manifest.sources[relative];
+    if (!/^[\da-f]{64}$/u.test(expected)) {
+      failures.push(`${relative}: invalid SHA-256 in the protected-source manifest`);
+      continue;
+    }
+    try {
+      const source = readFileSync(path.join(root, relative), "utf8").replace(/\r\n?/gu, "\n");
+      const actual = createHash("sha256").update(source, "utf8").digest("hex");
+      if (actual !== expected) failures.push(`${relative}: content differs from its protected SHA-256`);
+    } catch (error) {
+      failures.push(`${relative}: ${error.code === "ENOENT" ? "protected source is missing" : "protected source cannot be read"}`);
+    }
+  }
+
+  if (failures.length > 0) {
+    throw new Error(`Protected source verification failed:\n${failures.join("\n")}`);
+  }
+}
+
+if (process.argv[1] && path.resolve(process.argv[1]) === fileURLToPath(import.meta.url)) {
+  verifyProtectedSources();
+  console.log(`All ${PROTECTED_PATHS.length} protected sources match their content hashes.`);
+}

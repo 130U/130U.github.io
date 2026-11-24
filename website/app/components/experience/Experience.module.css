@@ -1,0 +1,263 @@
+.frame {
+  font-family: var(--font-text);
+}
+.frame :global(.content-column) { padding-top: var(--content-top); }
+
+.intro { margin-bottom: 80px; }
+.intro h1 {
+  max-width: var(--title-width);
+  margin: 0;
+  font-size: var(--type-title);
+  font-weight: 400;
+  line-height: var(--title-leading);
+  letter-spacing: var(--title-tracking);
+  text-wrap: balance;
+}
+
+.sectionIndex {
+  color: var(--muted);
+  font-family: var(--font-prose);
+  font-size: var(--type-index);
+  font-weight: 400;
+  line-height: 1.5;
+  letter-spacing: 0;
+  font-variant-numeric: tabular-nums;
+}
+/* A section takes the frame's columns: its index stands on the margin-index
+   track and its body on the reading start. */
+.section {
+  display: grid;
+  grid-template-columns: subgrid;
+  grid-column: 1 / span 11;
+  border-top: 1px solid var(--rule-strong);
+  padding: 72px 0 104px;
+  scroll-margin-top: 32px;
+}
+/* The page ends on the content column's own bottom space, as every page does. */
+.section:last-child { padding-bottom: 0; }
+.sectionIndex { grid-column: 1; padding: 0.5rem 0 0 var(--frame-inset); }
+.sectionBody { grid-column: 2 / span 10; min-width: 0; }
+.sectionTitle {
+  margin: 0 0 56px;
+  font-size: var(--type-heading);
+  font-weight: 400;
+  line-height: var(--heading-leading);
+  letter-spacing: var(--heading-tracking);
+  text-wrap: balance;
+}
+
+.indexDisclosure p,
+.problemAndApproach p,
+.contributions > ol {
+  font-family: var(--font-prose);
+}
+
+/* The AI section's note is its standfirst: under the heading, on the same edge. */
+.indexDisclosure { max-width: var(--reading-width); margin: -24px 0 72px; }
+.indexDisclosure p { color: var(--supporting-ink); }
+.indexDisclosure p, .problemAndApproach p {
+  margin: 0;
+  font-size: var(--type-reading);
+  line-height: var(--reading-leading);
+}
+.problemAndApproach + .contributions { margin-top: 5rem; }
+.problemAndApproach h2 {
+  margin: 0 0 1.25rem;
+  font-size: var(--type-heading);
+  line-height: var(--heading-leading);
+  font-weight: 400;
+  letter-spacing: var(--heading-tracking);
+  scroll-margin-top: 6rem;
+}
+.problemAndApproach p + p { margin-top: 1.25rem; }
+.contributions code, .problemAndApproach code {
+  font: inherit;
+  overflow-wrap: anywhere;
+}
+
+/* Detail pages */
+.detailPage { min-width: 0; }
+.detailHeader { margin-bottom: 4.5rem; }
+.detailPage .detailHeader h1 {
+  max-width: var(--title-width);
+  font-size: var(--type-title);
+  font-weight: 400;
+  line-height: var(--title-leading);
+  letter-spacing: var(--title-tracking);
+}
+.detailFooter { display: flex; justify-content: space-between; gap: 24px; border-top: 1px solid var(--rule); margin-top: 72px; padding-top: 24px; font-size: var(--type-interface); }
+.detailFooter a { display: inline-flex; align-items: center; min-height: 44px; }
+.detailFooter :global(.back-link) { margin-bottom: 0; }
+/* Back to Top keeps the frames' inset from the column's closing line. */
+@media (width >= 768px) { .detailFooter { padding-right: var(--frame-inset); } }
+
+/* Record strip: four labeled fields in one frame, divided by dashed hairlines,
+   values in the reading face. Two fields stand per row in equal columns, and
+   one below 540px, as the contact strip stacks. An entry whose four values are
+   short (ExperienceMetadata marks it data-layout="row") sets them in one row,
+   each column as wide as its value, once the strip holds every value on one
+   line (53rem); its width, not the window's, decides, so enlarged text keeps
+   two per row. An entry with a value longer than 40 characters
+   (data-layout="long") stacks in a strip narrower than 36rem. */
+.record {
+  container-type: inline-size;
+  margin: 48px 0 0;
+}
+.metadata {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  margin: 0;
+  border: 1px solid var(--frame);
+}
+.metadata > div { display: grid; align-content: start; gap: 6px; min-width: 0; padding: 18px 24px 20px; }
+/* Two per row: a dashed line between the columns and one between the rows.
+   The second row's vertical dash starts a pixel below the horizontal one, so
+   the cross draws each pixel once. */
+.metadata > div:nth-child(2) { background: var(--dash-y) left top / 1px 100% no-repeat; }
+.metadata > div:nth-child(3) { background: var(--dash-x) left top / 100% 1px no-repeat; }
+.metadata > div:nth-child(4) {
+  background:
+    var(--dash-y) left 0 top 1px / 1px calc(100% - 1px) no-repeat,
+    var(--dash-x) left top / 100% 1px no-repeat;
+}
+.metadata dt {
+  margin: 0;
+  color: var(--muted);
+  font-family: var(--font-text);
+  font-size: var(--type-label);
+  line-height: var(--label-leading);
+}
+.metadata dd {
+  margin: 0;
+  color: var(--ink);
+  font-family: var(--font-prose);
+  font-size: var(--type-reading);
+  line-height: 1.5;
+  text-wrap: pretty;
+}
+@container (width >= 53rem) {
+  .metadata[data-layout="row"] { grid-template-columns: repeat(4, minmax(min-content, auto)); }
+  .metadata[data-layout="row"] > div:nth-child(n + 2) { background: var(--dash-y) left top / 1px 100% no-repeat; }
+}
+/* An entry with a long value (data-layout="long") stacks its fields in a strip
+   narrower than 36rem, where two per row would fold that value into many short
+   lines. */
+@container (width < 36rem) {
+  .metadata[data-layout="long"] { grid-template-columns: minmax(0, 1fr); }
+  .metadata[data-layout="long"] > div:nth-child(n + 2) { background: var(--dash-x) left top / 100% 1px no-repeat; }
+}
+
+.contributions h2 {
+  margin: 0 0 1.75rem;
+  font-size: var(--type-heading);
+  font-weight: 400;
+  line-height: var(--heading-leading);
+  letter-spacing: var(--heading-tracking);
+  scroll-margin-top: 6rem;
+}
+.contributions > ol {
+  display: grid;
+  gap: 1.75rem;
+  padding: 0;
+  margin: 0;
+  font-size: var(--type-reading);
+  line-height: var(--reading-leading);
+  list-style: none;
+  counter-reset: contribution;
+  text-wrap: pretty;
+}
+.contributions > ol > li {
+  display: grid;
+  grid-template-columns: 2.25rem minmax(0, 1fr);
+  align-items: baseline;
+  counter-increment: contribution;
+}
+/* The list already conveys order; the visible index is decorative. */
+.contributions > ol > li::before {
+  content: counter(contribution, decimal-leading-zero);
+  content: counter(contribution, decimal-leading-zero) / "";
+  color: var(--muted);
+  font-family: var(--font-prose);
+  font-size: var(--type-index);
+  font-variant-numeric: tabular-nums;
+  line-height: 1;
+  user-select: none;
+}
+/* A list of one has no sequence to number: its sentence stands alone, on the
+   edge where the index would hang. */
+.contributions > ol > li:only-child { grid-template-columns: minmax(0, 1fr); }
+.contributions > ol > li:only-child::before { content: none; }
+/* A note gives context rather than a contribution: it closes the list
+   unnumbered, under a dashed hairline, in supporting ink on the text's edge,
+   with its label run in. */
+.contributions > ol > li[data-contribution-note] {
+  padding-top: 1.75rem;
+  background: var(--dash-x) left top / 100% 1px no-repeat;
+  color: var(--supporting-ink);
+  counter-increment: none;
+}
+.contributions > ol > li[data-contribution-note]::before { content: none; }
+.contributions > ol > li[data-contribution-note] > div { grid-column: 2; }
+.noteLabel {
+  color: var(--ink);
+  font-family: var(--font-text);
+  font-size: var(--type-interface);
+  font-weight: 500;
+}
+.contributions > ol strong { font-weight: 600; }
+.contributionDetails {
+  display: grid;
+  gap: 8px;
+  margin: 12px 0 0;
+  padding-left: 20px;
+  font-size: var(--type-reading);
+  line-height: var(--reading-leading);
+}
+
+@media (width >= 1200px) {
+  .intro,
+  .detailPage > .contributions {
+    display: grid;
+    grid-template-columns: var(--hang-columns);
+    align-items: start;
+  }
+  /* The hanging heading shares the first line's baseline. */
+  .detailPage > .contributions { align-items: baseline; }
+  .intro h1 { max-width: none; padding-right: var(--hang-gap); }
+  .intro > nav { margin-top: 0; }
+  .detailPage > .contributions h2 { padding-right: var(--hang-gap); }
+  .detailPage > .contributions h2 { margin: 0; }
+  .detailPage > .contributions > ol { padding-right: var(--prose-inset); }
+}
+
+@media (768px <= width < 1024px) {
+  .section { grid-column: 1 / -1; }
+  .sectionBody { grid-column: 2 / -1; }
+}
+
+@media (width < 1200px) {
+  .detailPage > .contributions > ol { max-width: var(--reading-width); }
+}
+
+@media (width < 768px) {
+  .frame :global(.content-column) { padding-top: 52px; }
+  .intro { margin-bottom: 40px; }
+  .intro h1,
+  .detailPage .detailHeader h1 { max-width: none; }
+  /* On phones the scroll padding clears the header; a section lands with half a
+     rem of paper below it. */
+  .section { display: block; padding: 40px 0 56px; scroll-margin-top: 0.5rem; }
+  .sectionIndex { display: block; margin-bottom: 10px; padding: 0; }
+  .sectionTitle { margin-bottom: 32px; }
+  .indexDisclosure { margin: -8px 0 48px; }
+  /* Title to strip and strip to contributions keep the desktop's 2 : 3. */
+  .detailHeader { margin-bottom: 3rem; }
+  .record { margin-top: 32px; }
+  .metadata > div { padding: 14px var(--frame-inset) 16px; }
+  .contributions > ol > li { grid-template-columns: 1.75rem minmax(0, 1fr); }
+}
+
+@media (width < 540px) {
+  .metadata { grid-template-columns: minmax(0, 1fr); }
+  .metadata > div:nth-child(n + 2) { background: var(--dash-x) left top / 100% 1px no-repeat; }
+}

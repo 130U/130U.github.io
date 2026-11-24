@@ -1,0 +1,258 @@
+{
+  "schema_version": 1,
+  "diagram_type": "architecture",
+  "meta": {
+    "title": "Website Architecture",
+    "locale": "en",
+    "quality_profile": "showcase",
+    "viewBox": [
+      1380,
+      700
+    ]
+  },
+  "components": [
+    {
+      "id": "content-registry",
+      "type": "external",
+      "label": "Content and Routes",
+      "sublabel": "Registry / Markdown / JSON",
+      "pos": [
+        45,
+        300
+      ],
+      "size": [
+        175,
+        76
+      ]
+    },
+    {
+      "id": "static-render",
+      "type": "frontend",
+      "label": "Next.js 16",
+      "sublabel": "Static Rendering / React 19",
+      "brand": "next-js",
+      "tag": "output: export",
+      "pos": [
+        315,
+        300
+      ],
+      "size": [
+        185,
+        76
+      ]
+    },
+    {
+      "id": "site-bundle",
+      "type": "frontend",
+      "label": "Static Site",
+      "sublabel": "website/out/",
+      "pos": [
+        590,
+        300
+      ],
+      "size": [
+        175,
+        76
+      ]
+    },
+    {
+      "id": "pages-host",
+      "type": "cloud",
+      "label": "GitHub Pages",
+      "sublabel": "www.theodoreoy.com",
+      "pos": [
+        865,
+        300
+      ],
+      "size": [
+        185,
+        76
+      ]
+    },
+    {
+      "id": "reader-browser",
+      "type": "external",
+      "label": "Visitor Browser",
+      "sublabel": "HTML / CSS / JavaScript",
+      "pos": [
+        1145,
+        300
+      ],
+      "size": [
+        185,
+        76
+      ]
+    },
+    {
+      "id": "brand-library",
+      "type": "frontend",
+      "label": "LO Brand Assets",
+      "sublabel": "Logos / Icons / Social Cover",
+      "pos": [
+        45,
+        535
+      ],
+      "size": [
+        175,
+        76
+      ]
+    },
+    {
+      "id": "actions-quality",
+      "type": "cloud",
+      "label": "GitHub Actions",
+      "sublabel": "Validate / Build / Deploy",
+      "pos": [
+        315,
+        95
+      ],
+      "size": [
+        185,
+        76
+      ]
+    },
+    {
+      "id": "architecture-viewer",
+      "type": "external",
+      "label": "Architecture",
+      "sublabel": "architecture/index.html",
+      "pos": [
+        590,
+        95
+      ],
+      "size": [
+        175,
+        76
+      ]
+    },
+    {
+      "id": "browser-islands",
+      "type": "frontend",
+      "label": "Reader Interactions",
+      "sublabel": "Menu / Contents / Figures / Notes",
+      "pos": [
+        1145,
+        535
+      ],
+      "size": [
+        185,
+        76
+      ]
+    }
+  ],
+  "boundaries": [
+    {
+      "kind": "region",
+      "label": "Content and Brand",
+      "wraps": [
+        "content-registry",
+        "brand-library"
+      ],
+      "pad": 24
+    },
+    {
+      "kind": "region",
+      "label": "Build and Validation",
+      "wraps": [
+        "static-render",
+        "site-bundle",
+        "actions-quality",
+        "architecture-viewer"
+      ],
+      "pad": 24
+    },
+    {
+      "kind": "region",
+      "label": "Static Delivery",
+      "wraps": [
+        "pages-host",
+        "reader-browser",
+        "browser-islands"
+      ],
+      "pad": 24
+    }
+  ],
+  "connections": [
+    {
+      "id": "content-build",
+      "from": "content-registry",
+      "to": "static-render",
+      "label": "Read",
+      "variant": "emphasis"
+    },
+    {
+      "id": "build-output",
+      "from": "static-render",
+      "to": "site-bundle",
+      "label": "Export",
+      "variant": "emphasis"
+    },
+    {
+      "id": "output-deploy",
+      "from": "site-bundle",
+      "to": "pages-host",
+      "label": "Deploy",
+      "variant": "emphasis"
+    },
+    {
+      "id": "pages-browser",
+      "from": "pages-host",
+      "to": "reader-browser",
+      "label": "HTTPS",
+      "variant": "emphasis"
+    },
+    {
+      "id": "brand-build",
+      "from": "brand-library",
+      "to": "static-render",
+      "label": "Bundle"
+    },
+    {
+      "id": "quality-build",
+      "from": "actions-quality",
+      "to": "static-render",
+      "label": "npm run check",
+      "labelDy": 76
+    },
+    {
+      "id": "architecture-publish",
+      "from": "architecture-viewer",
+      "to": "site-bundle",
+      "label": "Include HTML",
+      "labelDy": 76
+    },
+    {
+      "id": "browser-enhance",
+      "from": "reader-browser",
+      "to": "browser-islands",
+      "label": "Enhance",
+      "labelDy": 91
+    }
+  ],
+  "cards": [
+    {
+      "dot": "cyan",
+      "title": "Content First",
+      "items": [
+        "49 courses, 18 Experience entries in 5 domains, 3 Selected Research papers, and Blog",
+        "Shared route registry and protected source text"
+      ]
+    },
+    {
+      "dot": "emerald",
+      "title": "Static Delivery",
+      "items": [
+        "28 content pages in three sections, architecture viewer, and 404",
+        "No runtime API, database, or authentication"
+      ]
+    },
+    {
+      "dot": "violet",
+      "title": "Focused Interactions",
+      "items": [
+        "Clarinet hero, navigation, contents, article figures, table and figure zoom, and note previews",
+        "Architecture search, tracing, and export"
+      ]
+    }
+  ]
+}
