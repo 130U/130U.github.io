@@ -8,7 +8,7 @@ relationship tracing, and image export.
 
 | File | Responsibility |
 | --- | --- |
-| `site.json` | Editable Archify definition of the current system |
+| `site.json` | Editable definition of the current system |
 | `index.html` | Standalone interactive viewer |
 | `LICENSE` | MIT license for the viewer |
 
@@ -36,12 +36,12 @@ and legal-note previews; reading and ordinary links work without JavaScript.
 ## Update the viewer
 
 Update `site.json` against the current application and `.github/workflows/pages.yml`,
-then run these commands from the repository root. `<archify>` is the Archify
-directory.
+then run these commands from the repository root. `<generator>` is the command file of
+the viewer's generator, the program named in `LICENSE`.
 
 ```sh
-node <archify>/bin/archify.mjs validate architecture architecture/site.json --quality showcase --json
-node <archify>/bin/archify.mjs deliver architecture architecture/site.json architecture/index.html --quality showcase --json
+node <generator> validate architecture architecture/site.json --quality showcase --json
+node <generator> deliver architecture architecture/site.json architecture/index.html --quality showcase --json
 node website/scripts/integrate-architecture.mjs
 npm --prefix website run check
 ```
@@ -54,8 +54,9 @@ Its head carries the site's share metadata: a description, the canonical address
 the site's social card. The page takes the site's frame, gutters and footer; Present
 and Export stand on the title's row, and every surface is flat. The drawing has square corners, flat panels on
 a 1px hairline, regions drawn by the site's dashed hairline without a fill, and no
-product logos. It accepts both freshly generated and integrated viewers, and running it
-again leaves an integrated viewer unchanged.
+product logos. The preset and share-card badges read ARCHITECTURE, and the drawing's
+description names the site. It accepts both freshly generated and integrated viewers,
+and running it again leaves an integrated viewer unchanged.
 
 The drawing is shown at its reading size at every width: node titles at the label role
 (13px, which sets 13/11 pixels to an SVG unit) and every other label at 11px or more,

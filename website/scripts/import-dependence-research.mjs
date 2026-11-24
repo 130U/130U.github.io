@@ -13,7 +13,7 @@ async function writeOrCheck(url, content) {
   else await writeFile(url, content);
 }
 const manifest = JSON.parse(await readFile(new URL("source-manifest.json", sourceDirectory), "utf8"));
-const commit = "c0782609a95f9887c248631c56174615233c7ae4";
+const commit = "39021533a6d2fa105ffcdae62eb45553a0af5e03";
 const paperBlob = "72d5cf95d6812da8198cca12f313c59d254ef3d0";
 assert.equal(manifest.commit, commit);
 assert.equal(manifest.repository, "130U/RESEARCH-Critical-Dependence-Stress-for-Diversification-Gains-under-Fixed-Marginals");

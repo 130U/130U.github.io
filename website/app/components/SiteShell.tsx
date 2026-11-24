@@ -40,7 +40,7 @@ export function SiteShell({
 
       <footer className="site-footer">
         <p>© 2026 Theodore Ouyang</p>
-        <p>Beijing | Boston</p>
+        <p>Shanghai | Durham, North Carolina</p>
       </footer>
     </div>
   );

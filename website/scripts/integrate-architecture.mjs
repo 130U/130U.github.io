@@ -220,6 +220,10 @@ function applyViewerLabels(viewer) {
     "viewer.export.error.viewerState": "Share card export could not remove temporary viewer state",
     "viewer.export.error.routeState": "Route card export could not preserve the resolved route safely",
     "viewer.export.error.reachState": "Reach card export could not preserve authored reach safely",
+    "viewer.preset.badge.editorialPlate": "ARCHITECTURE / PLATE 04",
+    "viewer.export.card.routeBadge": "ARCHITECTURE · ROUTE · {hops}",
+    "viewer.export.card.reachBadge": "ARCHITECTURE · {direction} REACH",
+    "viewer.export.card.defaultBadge": "ARCHITECTURE · {preset} · {theme}",
   };
   for (const [key, value] of Object.entries(labels)) {
     const pattern = new RegExp(`("${key.replaceAll(".", "\\.")}":)"[^"]*"`, "u");
@@ -239,7 +243,9 @@ function applyViewerLabels(viewer) {
     .replaceAll('title="Semantic radar (M)">MAP</button>', 'title="Semantic radar (M)">Map</button>')
     .replaceAll('title="Semantic lens (L)">LENS</button>', 'title="Semantic lens (L)">Lens</button>')
     .replaceAll("data-view-detail hidden>READ</span>", "data-view-detail hidden>Read</span>")
-    .replaceAll("Semantic radar needs more MAP space.</p>", "Semantic radar needs more map space.</p>");
+    .replaceAll("Semantic radar needs more MAP space.</p>", "Semantic radar needs more map space.</p>")
+    .replace(/(data-preset-badge-editorial-plate=")[^"]*"/u, '$1ARCHITECTURE / PLATE 04"')
+    .replace(/(so vendor color never replaces )\S+(\s+semantic node)/u, "$1the viewer's$2");
 }
 
 // The drawing is read at its own size: node titles at the label role (13px,
@@ -392,6 +398,8 @@ function diagramRules(viewer) {
     }
     @media (768px <= width < 1024px) { body { padding-inline: 32px; } }
     @media (width < 768px) { body { padding: 1.5rem 20px 0; } }
+    /* On a phone the footer's two lines stack, as the site's footer does. */
+    @media (width <= 540px) { .site-footer { display: grid; gap: 4px; } }
   </style>`;
 }
 
@@ -403,7 +411,8 @@ function applySiteDiagram(viewer) {
   return viewer.replace("</head>", () => `${rules}\n</head>`);
 }
 
-const siteFooter = '\n    <footer class="site-footer" data-site-footer>\n      <p>&copy; 2026 Theodore Ouyang</p>\n      <p>Beijing | Boston</p>\n    </footer>\n';
+const siteFooter = '\n    <footer class="site-footer" data-site-footer>\n      <p>&copy; 2026 Theodore Ouyang</p>\n      <p>Shanghai | Durham, North Carolina</p>\n    </footer>\n';
+const DIAGRAM_DESCRIPTION = "The architecture of theodoreoy.com.";
 
 // The viewer is shared as every page of the site is: a description in the
 // site's form, its canonical address, and the site's social card.
@@ -436,9 +445,9 @@ function applyShareMetadata(viewer) {
 }
 
 // Markup the integration owns: no generator stamp, the site's browser color,
-// touch icon and share metadata, square corners in the drawing, Present and
-// Export on the title's row, bullets drawn by the stylesheet so they hang, and
-// the footer.
+// touch icon and share metadata, the drawing's description, square corners in
+// the drawing, Present and Export on the title's row, bullets drawn by the
+// stylesheet so they hang, and the footer.
 function applyViewerMarkup(viewer) {
   viewer = applyShareMetadata(viewer.replace(/  <meta name="generator" content="[^"]*">\n/u, ""));
   if (!viewer.includes('<meta name="theme-color"')) {
@@ -450,7 +459,11 @@ function applyViewerMarkup(viewer) {
   const svgStart = viewer.indexOf('<svg viewBox="0 0 ');
   const svgEnd = viewer.indexOf("</svg>", svgStart);
   assert.ok(svgStart > 0 && svgEnd > svgStart, "Missing the diagram.");
-  viewer = viewer.slice(0, svgStart) + viewer.slice(svgStart, svgEnd).replace(/(<rect\b[^>]*?) rx="[\d.]+"/gu, '$1 rx="0"') + viewer.slice(svgEnd);
+  const description = /(<desc id="[^"]*diagram-description">)[^<]*(<\/desc>)/u;
+  assert.ok(description.test(viewer), "Missing the drawing's description.");
+  viewer = viewer.slice(0, svgStart) + viewer.slice(svgStart, svgEnd)
+    .replace(/(<rect\b[^>]*?) rx="[\d.]+"/gu, '$1 rx="0"')
+    .replace(description, `$1${DIAGRAM_DESCRIPTION}$2`) + viewer.slice(svgEnd);
   const toolbar = viewer.match(/  <!-- Toolbar:[\s\S]*?\n  <div class="toolbar"[\s\S]*?\n  <\/div>\n\n(?=  <div class="container">)/u);
   if (toolbar) {
     viewer = viewer.replace(toolbar[0], () => "");
@@ -461,7 +474,8 @@ function applyViewerMarkup(viewer) {
   const cards = /    <!-- Info Cards -->\n    <div class="cards">[\s\S]*?\n    <\/div>\n/u;
   assert.ok(cards.test(viewer), "Missing the viewer's notes.");
   viewer = viewer.replace(cards, (block) => block.replaceAll("<li>&bull; ", "<li>"));
-  if (!viewer.includes("data-site-footer")) viewer = viewer.replace(cards, (block) => block + siteFooter);
+  viewer = viewer.replace(/\n    <footer class="site-footer" data-site-footer>[\s\S]*?<\/footer>\n/u, "");
+  viewer = viewer.replace(cards, (block) => block + siteFooter);
   return viewer;
 }
 

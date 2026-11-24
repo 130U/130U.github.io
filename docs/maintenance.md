@@ -43,7 +43,7 @@ Paths below are relative to `website/`.
 | Selected Research | `content/sources/selected-research/` (pinned manuscripts), `content/selected-research/` (generated articles) | Research import scripts, `app/lib/content/selected-research.ts` | `/[paper]/` |
 | Legal research | `content/legal-papers/` structured manuscripts, generated from the LAW repositories | `app/lib/content/legal-papers.ts` | `/experience/[slug]/` |
 | Blog | `content/blog/<slug>.md`, images in `public/assets/blog/<slug>/` | `app/lib/content/blog.ts` | `/blog/`, `/blog/[slug]/` |
-| Architecture | `../architecture/site.json` | Archify and `scripts/integrate-architecture.mjs` | `/architecture/` |
+| Architecture | `../architecture/site.json` | The viewer's generator and `scripts/integrate-architecture.mjs` | `/architecture/` |
 
 `app/lib/content/site.ts` owns site identity, core routes, and navigation types;
 `app/lib/content/routes.ts` supplies canonical sitemap routes.
@@ -449,7 +449,7 @@ Each exported HTML page receives hashes for its exact inline scripts before any
 script executes. Production CSP blocks arbitrary inline scripts, eval, inline event
 handlers, embedded frames/objects, media, and form submission; fonts, images, and
 network fetches use the same origin, and only the architecture viewer, recognized by
-its Archify data script, adds the data and blob images its control icons and exports
+its message-data script, adds the data and blob images its control icons and exports
 draw. Inline styles support framework and viewer geometry.
 Formulas are rendered at build time; a formula that sets a link, style, or class
 attribute stops the build.
