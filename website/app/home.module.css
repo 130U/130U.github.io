@@ -1,0 +1,316 @@
+.homeFrame {
+  font-family: var(--font-text);
+}
+
+.homeFrame :global(.content-column) {
+  padding-top: 0;
+}
+
+/* The profile and its sections take the frame's columns: each index stands on
+   the margin-index track and each body on the reading start. */
+.homeFrame .profileSection {
+  display: grid;
+  grid-template-columns: subgrid;
+  grid-column: 1 / span 11;
+  padding-top: var(--content-top);
+}
+
+.identity,
+.section {
+  display: grid;
+  grid-template-columns: subgrid;
+  grid-column: 1 / -1;
+  align-items: start;
+}
+
+.identity {
+  padding-bottom: 112px;
+}
+
+.section {
+  border-top: 1px solid var(--rule-strong);
+  padding: 72px 0 104px;
+  scroll-margin-top: 32px;
+}
+
+.section:last-child {
+  padding-bottom: 0;
+}
+
+.sectionBody {
+  grid-column: 2 / span 10;
+  width: 100%;
+  min-width: 0;
+}
+
+.sectionIndex {
+  grid-column: 1;
+  margin: 0;
+  padding: 0.5rem 0 0 var(--frame-inset);
+  color: var(--muted);
+  font-family: var(--font-prose);
+  font-size: var(--type-index);
+  font-weight: 400;
+  font-variant-numeric: tabular-nums;
+  line-height: 1.5;
+  letter-spacing: 0;
+  user-select: none;
+}
+
+.identity :is(h1, h2) {
+  margin: 0;
+  font-size: var(--type-title);
+  font-weight: 400;
+  letter-spacing: var(--title-tracking);
+  line-height: var(--title-leading);
+  text-wrap: balance;
+}
+
+.identity :is(h1, h2) span {
+  display: block;
+}
+
+/* A two-line statement: the second line steps back in tone, not in size. */
+.identity :is(h1, h2) span + span {
+  color: var(--muted);
+}
+
+.biographyCopy {
+  max-width: var(--reading-width);
+  margin-top: 40px;
+  font-family: var(--font-prose);
+  font-size: var(--type-reading);
+  line-height: var(--reading-leading);
+  text-wrap: pretty;
+}
+
+.biographyCopy p {
+  margin: 0;
+}
+
+.biographyCopy p + p {
+  margin-top: 1.25rem;
+}
+
+.inlineLink {
+  text-decoration: underline;
+  text-decoration-color: var(--link-rule);
+  text-decoration-thickness: 1px;
+  text-underline-offset: var(--link-underline-offset);
+  text-decoration-skip-ink: auto;
+  transition: color 180ms var(--ease-out), text-decoration-color 180ms var(--ease-out);
+}
+
+.inlineLink:focus-visible,
+.inlineLink:active {
+  color: var(--accent);
+  text-decoration-color: var(--accent);
+}
+
+/* A ledger that ends in prose keeps the same room below as above. */
+.sectionBody .fellowship {
+  padding-bottom: var(--frame-pad);
+}
+
+.sectionTitle {
+  margin: 0 0 56px;
+  font-size: var(--type-heading);
+  font-weight: 400;
+  line-height: var(--heading-leading);
+  letter-spacing: var(--heading-tracking);
+}
+
+.educationList :global(.education-entry) {
+  padding: 0;
+  border-bottom: 0;
+}
+
+.educationList :global(.education-entry) + :global(.education-entry) {
+  margin-top: 24px;
+  padding-top: 24px;
+  background: var(--dash-x) left top / 100% 1px no-repeat;
+}
+
+.educationList :global(.education-degree) {
+  margin: 0 0 2px;
+  font-family: var(--font-text);
+  font-size: var(--type-interface);
+  font-weight: 500;
+  line-height: var(--interface-leading);
+}
+
+.educationList :global(.entry-subtitle),
+.educationList :global(.education-note) {
+  margin-top: 0;
+  color: var(--supporting-ink);
+}
+
+.educationList :global(.education-notes) {
+  margin-top: 0;
+}
+
+.educationList :global(.education-note) + :global(.education-note) {
+  margin-top: 0;
+}
+
+.coursework {
+  margin-top: 20px;
+  scroll-margin-top: 32px;
+}
+
+/* Contact fields share one frame, divided by dashed hairlines. */
+.contactStrip {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  margin: 0;
+  padding: 0;
+  border: 1px solid var(--frame);
+  list-style: none;
+}
+
+.contactStrip li {
+  display: grid;
+  min-width: 0;
+  align-content: start;
+  gap: 6px;
+  padding: 18px 24px 20px;
+}
+
+.contactStrip li + li {
+  background: var(--dash-y) left top / 1px 100% no-repeat;
+}
+
+.contactLabel {
+  color: var(--muted);
+  font-size: var(--type-label);
+  line-height: var(--label-leading);
+}
+
+.contactStrip a {
+  display: inline-flex;
+  align-items: center;
+  width: fit-content;
+  max-width: 100%;
+  min-height: 28px;
+  font-family: var(--font-prose);
+  font-size: var(--type-reading);
+  text-decoration: underline;
+  text-decoration-color: var(--link-rule);
+  text-decoration-thickness: 1px;
+  text-underline-offset: var(--link-underline-offset);
+  text-decoration-skip-ink: auto;
+  overflow-wrap: anywhere;
+  transition: color 180ms var(--ease-out), text-decoration-color 180ms var(--ease-out);
+}
+
+.contactStrip a:focus-visible,
+.contactStrip a:active {
+  color: var(--accent);
+  text-decoration-color: var(--accent);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .contactStrip a:hover,
+  .inlineLink:hover {
+    color: var(--accent);
+    text-decoration-color: var(--accent);
+  }
+}
+
+@media (pointer: coarse) {
+  .contactStrip a {
+    min-height: 44px;
+  }
+}
+
+@media (width >= 1200px) {
+  /* Three equal fields, each value set the frame's padding from its own
+     divider, so the first starts where the ledger titles above start. */
+  .contactStrip li {
+    padding-inline: var(--frame-pad) 24px;
+  }
+
+  /* Beside its institution, the first degree name stands on the institution's
+     baseline: the item title and the degree line differ in size and leading,
+     so the two align by their first baselines rather than their tops. */
+  :global(.ledger-item).educationItem {
+    align-items: baseline;
+  }
+}
+
+@media (width < 1200px) {
+  .sectionBody .fellowship {
+    padding-bottom: 32px;
+  }
+}
+
+@media (768px <= width < 1024px) {
+  .homeFrame .profileSection {
+    grid-column: 1 / -1;
+  }
+
+  .sectionBody {
+    grid-column: 2 / -1;
+  }
+}
+
+@media (width < 768px) {
+  .sectionBody .fellowship {
+    padding-bottom: 28px;
+  }
+
+  .homeFrame .profileSection {
+    display: block;
+    padding-top: 88px;
+  }
+
+  .identity,
+  .section {
+    display: block;
+  }
+
+  .identity {
+    padding-bottom: 72px;
+  }
+
+  .section {
+    padding: 56px 0 72px;
+    scroll-margin-top: 0.5rem;
+  }
+
+  .sectionIndex {
+    display: none;
+  }
+
+  .biographyCopy {
+    margin-top: 24px;
+  }
+
+  .sectionTitle {
+    margin-bottom: 32px;
+  }
+}
+
+/* Below the width that holds all three addresses whole, the strip stacks. */
+@media (width < 1100px) {
+  .contactStrip {
+    grid-template-columns: 1fr;
+  }
+
+  .contactStrip li + li {
+    background: var(--dash-x) left top / 100% 1px no-repeat;
+  }
+}
+
+@media (width <= 540px) {
+  .contactStrip li {
+    padding: 14px var(--frame-inset) 16px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .contactStrip a,
+  .inlineLink {
+    transition: none;
+  }
+}

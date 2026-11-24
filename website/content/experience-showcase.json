@@ -1,0 +1,469 @@
+{
+  "categories": [
+    {
+      "id": "01",
+      "title": "AI Research and Engineering",
+      "disclosure": {
+        "title": "Confidentiality and Disclosure Note",
+        "text": "I conducted the following four projects through Duke University collaborations from September 2023 to September 2026. Partner names and proprietary internal system identifiers are withheld under nondisclosure agreements. The collaborators include a leading foundation model developer, a frontier AI research laboratory, and a leading global alternative asset manager with more than $300 billion in assets under management. The project titles, my role as a researcher, locations, dates, system architectures, and mathematical formulations are cleared for public disclosure. Production records and operating figures are withheld; the numerical results are closed-form values, reference runs, and worked examples with their inputs stated."
+      }
+    },
+    {
+      "id": "02",
+      "title": "Data Science"
+    },
+    {
+      "id": "03",
+      "title": "Legal Research and Policy Analysis"
+    },
+    {
+      "id": "04",
+      "title": "Finance and Consulting"
+    },
+    {
+      "id": "05",
+      "title": "STEM Academic Competitions and Training"
+    }
+  ],
+  "entries": [
+    {
+      "id": 1,
+      "categoryId": "01",
+      "organization": "Duke University × Leading Foundation Model Developer",
+      "summary": "One pool of expert hours has to do two jobs in a post-training program: tell the team how good a batch is, and fix the data that ships. Sending the riskiest submissions to review, the usual practice, makes the dashboard overstate the batch's defect rate and spends repair capacity where a review fixes least. I derived the allocation each job calls for and one rule that prices them against each other. At the same budget and the same measurement precision, that rule ships 19% to 67% fewer defects than risk-first routing across a 20% envelope around a reference batch at the program's scale. The design coordinated more than 300 specialists on weekly batches of over 10,000 tasks and was reused in later post-training programs.",
+      "readMoreLabel": "Read More",
+      "detailTitle": "Large-Scale Domain Expert Feedback Governance and Adaptive Review",
+      "metadata": {
+        "position": "Researcher",
+        "location": "Durham, North Carolina; Palo Alto, California",
+        "dates": "September 2023 – September 2026"
+      },
+      "contributionsLabel": "Key Contributions",
+      "keyContributions": [
+        "**I formulated expert review as a statistical decision problem in which each review has two separate values: what it reveals about the quality of the batch, and what it repairs in the data that ships.** The formulation took shape in late 2023, and I kept refining it as the program grew. For each task I defined an *initial error risk* ($`q_i`$), the *statistical information value of an independent reference audit* ($`m_i / c_i`$), and the *expected defect loss removable through additional human handling* ($`\\Delta_i = r_{i0} - r_{i1}`$). A high-risk task can be worth little to audit and little to repair, so the three quantities call for different uses of the same expert capacity.",
+        "**I derived the allocation each value calls for.** Audit probabilities follow a clipped square-root rule in residual second moment and cost, which is Neyman's allocation carried to a separate expert cost for every item, with a sampling floor. Repair is ranked by removable defect loss per unit cost under specialist-capacity limits.",
+        "**I joined the two in one rule and located risk-first routing inside it.** A reference audit that finds a defect also corrects it, so the optimal audit probability is $`\\pi_i^* = \\mathrm{clip}\\,\\sqrt{\\nu m_i / (\\lambda c_i - r_i)_+}`$, in which the item's residual risk $`r_i`$ is a rebate on the audit's price $`\\lambda c_i`$. With the price of precision $`\\nu`$ at zero the rule becomes a threshold on risk per unit cost, which is risk-first routing. The batch program separates by price, so ten thousand tasks are solved by a search over a handful of multipliers.",
+        "**I derived what the allocation is worth in expert hours and how accurate its inputs must be.** Every precision target costs the same fixed fraction $`\\kappa = (\\sum_i \\sqrt{m_i c_i})^2 / (\\sum_i c_i \\sum_i m_i)`$ of the uniform audit budget. Errors in the residual estimates cost a quarter of their weighted variance, so a 20% relative error raises the variance by about 1%.",
+        "**The framework supported a program of more than 300 domain experts across several specialties and an external vendor network, and later post-training programs reused its design.** I led its development and defined the mathematical specifications and operating standards for task organization, reliability calibration, acceptance adjudication and review allocation. Those procedures made distributed expert judgments traceable and open to calibration as post-training feedback.",
+        "**I designed tiered review rules from Beta-Binomial reliability posteriors, credible intervals, verified sample counts and task-level risk priors.** In one workflow, a flagged submission was dynamically assigned to three additional specialists, and an initially accepted one went to one or two. Expert adjudications fed back into the system, updating contributor reliability posteriors, informing targeted coaching and adjusting review intensity.",
+        "**I paired independent random reference audits with escalation of high-risk tasks, so quality could still be measured while review concentrated on the hardest work.** Recurring annotator disagreements became explicit acceptance criteria. I separated missing context from ambiguous instructions and from contributor errors, then revised the task instructions, boundary cases and shared calibration anchors accordingly. Later comparisons against reviewer-error and cost-sensitive deferral models informed the escalation thresholds.",
+        "**I built the SQL and Python pipelines behind the allocation solvers.** They brought together task metadata, review histories, acceptance outcomes, turnaround times and behavioral logs, and reconciled platform activity with the team's KPI monitoring system. From these records the solvers took empirical estimates of unit verification costs ($`c_i`$), task-stratum latencies ($`t_{iaj}`$) and hard specialist capacity limits ($`H_j^{\\text{review}}`$). I also translated client-reported model defects into reproducible engineering investigations and standard operating procedures.",
+        "**On a reference batch at the program's scale, the joint rule ships 38.6% fewer defects than risk-first routing at the same budget and the same precision, and 19% to 67% fewer across a 20% envelope around that batch.** The uncorrected review queue reads **19.60%** where the batch's defect rate is 7.10%. The residual- and cost-aware allocation reaches any precision target with **15.2%** less audit budget than uniform sampling (7.5% to 27.3% across the envelope), and risk-first routing carries **62.7%** more variance than that allocation (14% to 137%)."
+      ],
+      "notes": [],
+      "problemAndApproach": {
+        "title": "Problem and Approach",
+        "text": "In late 2023 I started from a question about expert capacity: how should a post-training program spend a limited pool of reviewers when each review does two jobs at once? A review reveals something about the quality of the whole batch, and a correction improves the data that ships. The two values call for different allocations of the same hours. High-risk routing shows the tension. When review succeeds in targeting the tasks with higher true error probabilities, selection is correlated with the defect it looks for ($`\\mathrm{Cov}(\\pi(X), q(X)) > 0`$), and on a reference batch at the program's scale the error rate in the review queue reads two to four times the batch's rate.\n\nI separated the two jobs and then joined them under one budget. Quality is measured by independent reference audits drawn with known probabilities, so the estimate is correct whatever the risk model gets wrong. Audit effort goes where residual uncertainty per unit of expert cost is largest, and repair goes where a review removes the most defect loss per unit cost. A single rule then sets both. An audit that finds a defect has also repaired it, so risk enters the audit decision as a discount on the audit's price, and risk-first routing turns out to be this rule with the value of measurement set to zero. Costs, latencies and capacities came from production records. The design coordinated hundreds of distributed specialists and external vendor queues, and I kept refining its specifications as later programs took it up. Sections 1 through 7 give the derivations, the results on the reference batch and the operating standards."
+      }
+    },
+    {
+      "id": 2,
+      "categoryId": "01",
+      "organization": "Duke University × Leading Foundation Model Developer",
+      "summary": "When a synthetic financial case changes one number, its reference answer, the evidence behind that answer, and the expert's preference can all go stale together. Synthetic data is judged on fidelity, utility, and privacy, and none of the three asks whether the label is still right; at a margin of a quarter of the perturbation scale, an inherited label is wrong 40% of the time. I built the rules that decide when each object has to be recomputed, and the generators that keep accounting identities exact as the data scales. I created Batch Zero to test those rules on domain experts before a task family scaled, and the partner company subsequently adopted the protocol across other post-training programs.",
+      "readMoreLabel": "Read More",
+      "detailTitle": "Financial Task Design and Synthetic Data Engineering",
+      "metadata": {
+        "position": "Researcher",
+        "location": "Durham, North Carolina; Palo Alto, California",
+        "dates": "September 2023 – September 2026"
+      },
+      "contributionsLabel": "Key Contributions",
+      "keyContributions": [
+        "**I framed the scaling of financial training data as a problem of keeping its supervision valid.** When a financial scenario changes, its reference conclusion, supporting evidence and expert preference can all stop being correct together. From late 2023 I treated those four objects and the dependencies among them as a single design problem, and I refined the framework through the programs that followed. For a frontier foundation model program I specified the capability taxonomy, primary evidence standards, input schemas, decisive variables and acceptance criteria. The diagnostic cases targeted high-stakes business decision boundaries where foundation models and practitioners repeatedly make errors, and they translated doctoral or CFA-level domain judgment into testable task requirements.",
+        "**I tied reference recomputation to the decision margin of each synthetic variant.** Margin conditions certify when the decision label remains unchanged; reference calculations, supporting evidence and pairwise preferences are checked separately. Gaussian margin-to-noise analysis ($`\\gamma/s`$) measures the label-flip risk, and for covenant tests, which are ratios of accounting levels, the closed form is exact. Variants below a margin-to-noise threshold are recomputed and the rest inherit their labels with a stated error bound. When a perturbation approaches or crosses a decision boundary, the workflow recomputes the reference solution and collects new five-level preference judgments on fresh model reasoning.",
+        "**I designed a five-level pairwise preference protocol for RLHF and DPO supervision.** It records why an expert prefers one response to another. Each judgment has to cite verifiable evidence, the relevant accounting rules and the decisive variables, so the preference reaches post-training with its reasons attached and helps train models to assess whether a financial judgment has sufficient support. One graded judgment carries the information of 1.4 to 2 binary judgments about the quality gap between two responses.",
+        "**I created Batch Zero to establish and refine these standards, and the partner company subsequently adopted the protocol across other post-training programs.** Starting from the capability objectives and data requirements of post-training research teams, I established a protocol for independent execution and expert calibration that a task family goes through before it enters large-scale data construction. Doctoral-level domain experts independently construct tasks, generate synthetic variants, solve reference cases and assign five-level pairwise preference scores. The disagreements and failure modes that appear in execution inform revisions to task specifications, boundary cases and **Batch One** data acceptance criteria. An error caught at the seed is caught once for every variant the seed would have produced.",
+        "**I developed financial synthetic data methods for four settings.** For each task I selected a mathematical generator and adapted it to the task's structural invariants, data types and permitted information:",
+        "**I quantified stale-label errors, temporal leakage and task-family clustering in closed form.** When labels are not recomputed, perturbations near a decision boundary produce **40.13%** inherited-label error at $`\\gamma/s = 0.25`$. Undisclosed Brownian bridge endpoint conditioning creates an apparent **29.29% reduction in RMSE** at the interval midpoint through future-information leakage, and for mean-reverting rates the leak shrinks to $`1 - (1 + e^{-2\\kappa h})^{-1/2}`$. With within-family correlation $`\\rho = 0.5`$, 2,000 nominal synthetic variants from 100 task families amount to about **190** effective independent observations, and the same budget spent at the optimal number of variants per family has 29% less variance."
+      ],
+      "notes": [],
+      "keyContributionDetails": {
+        "4": {
+          "ordered": false,
+          "items": [
+            "*Cross-sectional corporate fundamentals.* I used Gaussian and vine copulas with conditional sampling for company size, operating history and financial ratios. These methods preserve joint dependencies across columns and avoid the unrealistic combinations that sampling each column independently produces.",
+            "*Accounting identities, ratio bounds and chronological order.* Constrained sampling, variable transformations and covariance-weighted affine projections enforce balance-sheet and cash-flow identities, ratio ranges and date ordering. On a reference run of 200,000 twelve-dimensional draws under four identities, the maximum constraint residual was **$`3.0 \\times 10^{-15}`$**; rejection sampling under four constraints at a tolerance of 0.05 standard deviations accepts $`0.0002529\\%`$ of candidates. The distance each draw is moved is a chi-square statistic that monitors the upstream generator at no cost.",
+            "*Multimodal records with numerical and categorical fields.* Deep tabular generators model the multimodal empirical distributions, and business-rule checks are mandatory after generation.",
+            "*Continuous-time price and interest-rate paths.* SDEs, neural SDEs, Brownian bridges and stochastic interpolation generate paths for temporal financial tasks, and each method is matched to the task's permitted filtration ($`\\mathcal{F}_s`$) to keep future information out of evaluation."
+          ]
+        }
+      },
+      "problemAndApproach": {
+        "title": "Problem and Approach",
+        "text": "In late 2023, frontier foundation models could reproduce corporate finance definitions and still made unpredictable errors in financial workflows, where a small numerical change or an accounting footnote could reverse an investment recommendation. Adding synthetic data helps only if the supervision moves with the scenario. I built the data strategy around that requirement, connecting task specifications, synthesis methods and expert calibration to the capability objectives of post-training research teams and to two problems:\n1. **Diagnosing reasoning limits through task design.** I designed prompts around subtle business failure modes, including covenant breaches, off-balance-sheet adjustments and valuation differences close to a decision boundary, because simple prompts may give little basis for telling candidate responses apart. Paired with the five-level preference protocol, these prompts carry a domain judgment such as *\"Response A is better because it isolates the working-capital constraint and cites Footnote 4\"* into structured preference supervision for post-training.\n2. **Matching the generator to the financial structure.** Synthetic financial data has to satisfy structural constraints, stay consistent with reference judgments and respect the task's information boundaries. A corporate table that violates Total Assets $`=`$ Total Liabilities $`+`$ Equity, even by a fraction of a percentage point, introduces a structural error. An interest-rate path that exposes a future terminal rate to a historical forecasting task introduces temporal leakage.\n\nI treat the result as a fourth axis of synthetic-data quality, *supervision validity*: the share of generated cases whose scenario, reference conclusion, evidence and preference are all still correct for the case as generated. The system that maintains it works like an incremental build. The four objects form a dependency graph, a change to the scenario marks everything downstream as stale, and a certificate computed from the decision margin says which labels may be inherited without rework. Identities hold by construction in the generator, each temporal task states which information it may see, and Batch Zero checks before scale that experts who did not write a specification can execute it. Sections 1 through 6 give the conditions, analytical results and designs for each part.\n\nThe team averaged roughly 500 completed financial tasks a week. Each task combined synthetic financial data with a reference solution and expert review. A typical financial task took about three specialist-hours across drafting, three reviews and revision."
+      }
+    },
+    {
+      "id": 3,
+      "categoryId": "01",
+      "organization": "Duke University × Frontier AI Research Laboratory",
+      "summary": "A model can reach the right answer through an unsupported step, and a grader that matches a reference solution will reject a correct proof that takes another route. I designed an acceptance rule that resolves both: a conclusion stands when its assumptions, derivations, and execution evidence support it, whichever valid route was taken, and a failed step removes support from everything downstream. Checkable obligations are discharged by certificates that need no reference solution, LLM-assisted screening flags possible gaps, and specialists adjudicate what remains. I also derived what a grader must achieve before its verdicts can be used. A policy trained against a grader converges to that grader's positive predictive value, which on a test set of 3,600 submissions with known verdicts is 40% for final-answer matching and 100% for certificate checking.",
+      "readMoreLabel": "Read More",
+      "detailTitle": "General Reasoning Evaluation and Layered Verification",
+      "metadata": {
+        "position": "Researcher",
+        "location": "Durham, North Carolina; Palo Alto, California",
+        "dates": "September 2023 – September 2026"
+      },
+      "contributionsLabel": "Key Contributions",
+      "keyContributions": [
+        "**I developed a proof-obligation framework that defines when a model's reasoning should be accepted.** Starting in late 2023, I organized deliverables into dependency graphs ($`\\Gamma_q \\vdash C_q`$) that link each conclusion to its domain assumptions, method applicability, evidentiary support, compliant execution, uniform approximation bounds and claimed strength. Valid alternative derivations pass on the same terms as the reference route. When a step fails, the graph locates the first unsupported step and what it affects downstream. For tasks that admit formalization, checking local nodes and their dependencies within a sound inference system establishes the full conclusion.",
+        "**I developed checkable error certificates and bounds on solution quality for programmatically verifiable task families.** The projected-residual optimality bound ($`0 \\le f(x) - v^* \\le \\|P_{\\ker A} r\\|_2^2 / (2\\mu)`$) splits feasibility, stationarity and the accuracy of a conclusion into separate verification obligations, and different proofs can pass by satisfying the same ones. The same template, a residual the submission exposes, a constant the designer verifies and an inequality between them, covers convex programs, linear systems, eigenpairs and fixed points. None of these checks needs a reference solution.",
+        "**I established complementary forms of verification across mathematical certificates, code and rule checks, LLM-assisted screening and specialist adjudication, and later programs reused the layered design.** Code checks directly verifiable answers, required deliverables, tool permissions and other requirements specified in advance. LLM-as-a-Judge helps flag missing evidence, misapplied rules and gaps in reasoning, and disputed domain judgments go to scholars with relevant expertise. I derived when a screen may decide: at screening sensitivity $`\\text{se}`$, a share $`1 - \\alpha^*/(1 - \\text{se})`$ of unflagged work still has to reach specialists to hold the system's false acceptance at $`\\alpha^*`$.",
+        "**I evaluated answers, visible reasoning and execution evidence together.** I cross-checked the model's displayed CoT against its actual tool calls, return values and intermediate outputs to test whether what it claimed had observable support. From elapsed time, attempt counts and changes in intermediate results I identified repeated operations, continued use of failed assumptions and attempts that added no evidence. I recorded correctness, compliance and efficiency as separate results, and a resource limit counted toward acceptance only when the task specification set it beforehand.",
+        "**I derived how false acceptance ($`\\alpha`$) and false rejection ($`\\beta`$) reverse model rankings, and the condition under which a ranking is certified.** In the worked example, models with true validity rates of 72% and 64% score 73.12% and 76.96%, so the weaker one ranks first. A lead of $`g`$ over a rival scoring $`s_B`$ certifies the order of true validity exactly when the grader's false-acceptance rate is below $`g / (1 - s_B)`$.",
+        "**I showed that a policy optimized against a grader converges to the grader's positive predictive value.** The observed score goes to 100% while true validity stops at $`\\theta(1-\\beta) / [\\theta(1-\\beta) + (1-\\theta)\\alpha]`$. False acceptance sets the ceiling, and false rejection removes valid routes from what the policy produces. The same analysis gives the bias in the binary cross-entropy gradient used to train process reward models ($`E[\\nabla_s \\ell(s,V) - \\nabla_s \\ell(s,Z) \\mid h] = p(h) - \\tilde{p}(h)`$).",
+        "**I gave the tolerance-propagation rule ($`a\\delta + 2\\varepsilon`$) for bijective task transformations and its composition law for chains of transformations.** Together they say when a transformed task still supports a valid comparison and what tolerance its solutions are owed.",
+        "**On a test set of 3,600 exact-arithmetic submissions from 600 strongly convex quadratic task families, every verdict known, final-answer matching accepted 75.0% of the invalid submissions and strict reference-path matching rejected 50.0% of the valid proofs.** Certificate checking accepted all 1,200 valid proofs and rejected all 2,400 invalid submissions, so strict error detection and acceptance of valid alternative routes held together on the same set."
+      ],
+      "notes": [],
+      "problemAndApproach": {
+        "title": "Problem and Approach",
+        "text": "The question I took up in late 2023 was what should entitle a model's reasoning to be accepted. A correct answer can coexist with unsupported assumptions, misapplied rules or tool use that violates the task specification, and a fixed reference path will reject sound work that takes another route. I designed an acceptance rule around proof obligations: a conclusion stands when its assumptions, derivations and execution evidence support it, whichever valid route the model took, and a failed obligation removes support from everything that depends on it. Programmatic certificates discharge checkable obligations, LLM-assisted screening identifies possible gaps, and specialist scholars adjudicate disputed semantic questions.\n\nTwo things follow from defining acceptance this way. A certificate bounds how far a submission is from the truth using only a residual the submission exposes and a constant the task designer has verified, so the check never consults a reference solution and inherits none of its errors. And once a grader's two error rates are named, they can be priced: I derived the false-acceptance rate below which a leaderboard lead is certified, the level of true validity a policy can reach when the grader is its reward, and the screening sensitivity at which an LLM judge may decide instead of screen. I kept refining the design through September 2026. Sections 1 through 7 set out the acceptance criteria, the certificates, the thresholds, the measurements and the related literature.\n\nThe team produced roughly 500 scientific reasoning tasks a week. Each task included a detailed, step-by-step reference solution and repeated verification of the argument."
+      }
+    },
+    {
+      "id": 4,
+      "categoryId": "01",
+      "organization": "Duke University × Leading Global Alternative Asset Manager",
+      "summary": "Due diligence has more facts to check than analyst time to check them. I built a method that determines which investment conclusions the evidence in hand already supports and which facts are most valuable to verify next, with ranking guarantees that hold across every near-optimal scoring model and every admissible resolution of the unverified evidence. For affine scores I solved the verification problem exactly: a field has guaranteed value only when its unresolved swing exceeds the current margin, and a plan over many fields is a knapsack on swing per unit of analyst cost. I implemented the method with a leading global alternative asset manager, and subsequent research reused it.",
+      "readMoreLabel": "Read More",
+      "detailTitle": "Evidence Verification and Robust Comparison in Investment Research",
+      "metadata": {
+        "position": "Researcher",
+        "location": "Durham, North Carolina; Washington, DC",
+        "dates": "September 2023 – September 2026"
+      },
+      "contributionsLabel": "Key Contributions",
+      "keyContributions": [
+        "**I framed investment due diligence as a decision problem: which conclusions does the current evidence support, and which fact is most valuable to verify next?** The framework took shape in late 2023, and I refined it through the work that followed. I represented unresolved evidence $`\\mathcal{X}(E)`$ jointly with a near-optimal model set $`\\mathcal{F}_\\alpha`$ through $`\\Omega(E) = \\mathcal{F}_\\alpha \\times \\mathcal{X}(E)`$ and derived convex support-function bounds ($`h_U(a_f)`$) that give ranking guarantees across every retained model and admissible resolution of the evidence. Under the same affine scoring model, common measurement errors cancel when the two companies have identical exposures. In a worked comparison, the joint model certified a 0.6-point advantage that the difference bound from separate company intervals ($`[-1.4, 2.6]`$) could not show.",
+        "**I derived a query criterion that ranks verification by its effect on the decision, and solved it exactly for affine scores.** The criterion is the reduction in worst-case decision regret that a query can guarantee, and it needs no probability distribution over the scenarios inside the joint uncertainty set. With interval evidence, verifying a set of fields with combined swing $`s_J`$ leaves worst-case regret $`(h - \\max(s_J, \\left\\vert m\\right\\vert))_+`$. A single field therefore has guaranteed value only if its swing exceeds the margin, fields worthless alone can be valuable together, and the best plan within an analyst budget is a knapsack on swing per unit cost.",
+        "**I gave each certified ranking a number a committee can read: how many simultaneous worst-case misstatements it survives.** One inclusion event certifies every pairwise ranking at once, with no penalty for the number of comparisons, so the output is a certified partial order that verification can only extend.",
+        "**I implemented the framework with a leading global alternative asset manager, and subsequent research reused it.** Institutional diligence requirements became measures of score reliability, pairwise ranking stability and verification priority. The workflow ingests evidence, scores companies across a set of near-optimal models, computes ranking bounds and allocates verification effort by minimax regret. Each correction triggers rescoring and attribution updates, so the investment committee has a traceable basis for its analysis.",
+        "**I showed where conventional bootstrap resampling, and verification priorities based on raw SHAP magnitudes, fail when inputs contain shared reporting bias or unverified claims.** Under a fixed common bias, a nominal 95% interval loses coverage as the sample grows, and resampling the same records cannot identify the bias. A self-reported metric near the sector mean can carry a near-zero attribution and still hold enough unresolved error to reverse a ranking. I derived the sample size past which collecting more records is worth less than verifying the ones in hand.",
+        "**I analyzed how AI-polished corporate narratives shift LLM-assisted scoring, ESG ratings and investment analysis when the claims beneath them lack factual support.** I converted operating reports, audited financial statements, sustainability disclosures, management questionnaires and third-party datasets into structured scoring rules that carry source and version records. AI-assisted checks then pick out unsupported claims and contradictions across documents, and shared reporting errors enter the same review, so that verification in private-market and ESG research can be targeted.",
+        "**I deployed gradient-boosted trees and deep tabular models to capture nonlinear thresholds and interactions, and measured how far their explanations depend on model choice.** Attributions computed across the near-optimal set $`\\mathcal{F}_\\alpha`$, read together with conditional analysis of correlated features, identify the scoring factors whose contributions stay stable across models."
+      ],
+      "notes": [],
+      "problemAndApproach": {
+        "title": "Problem and Approach",
+        "text": "Due diligence has a limited budget of analyst time and a long list of facts that could be checked. In late 2023 I began treating that as a decision problem: given the evidence in hand, which conclusions does it support, and which facts would most improve the decision if they were verified? AI-polished narratives, unverified sustainability claims and common reporting errors can all move ESG and investment scores, so the answer has to account for uncertainty in the corporate evidence as well as in the scoring models. The usual guide to what deserves checking is feature attribution, which measures what the model cares about. What a diligence team needs to know is which evidence is still open and able to change the decision.\n\nThe architecture I developed takes a traceable evidence state as its input and builds in model multiplicity, joint measurement error and the costs of verification. Its guarantees need no probability that any particular disclosure is exaggerated. It returns three things an investment committee can act on: the set of pairwise rankings that hold whatever the unverified evidence turns out to be, the number of simultaneous worst-case misstatements each ranking survives, and the verification plan that removes the most decision regret for the analyst hours available. I kept refining it through 2026. Sections 1 through 6 develop the limits of attribution methods, the joint uncertainty model, ranking bounds, the verification plan, versioned updates and worked examples."
+      }
+    },
+    {
+      "id": 5,
+      "categoryId": "02",
+      "organization": "Jiritsu Network",
+      "summary": "I built the data and ranking system behind Jiritsu's partnerships for its asset-verification and privacy-preserving computation services, as the sole dedicated contributor for new issuers. I reported to co-founder Asher Gottesman and ran core-team reviews with technical and financial guidance from Gene Itkis of MIT Lincoln Laboratory and Michael Lustig, former Senior Managing Director at BlackRock. I screened more than 18,000 token records down to six proposed pilot counterparties and delivered the partnership recommendations to the board.",
+      "readMoreLabel": "Read More",
+      "detailTitle": "Asset-Verification Partnerships and Issuer Ranking",
+      "metadata": {
+        "position": "Data Scientist",
+        "location": "Los Angeles, California (Remote)",
+        "dates": "August 2024 – October 2025"
+      },
+      "contributionsLabel": "Key Contributions",
+      "keyContributions": [
+        "I was the sole dedicated contributor to business development for new issuers, reporting to co-founder Asher Gottesman. I turned commercialization priorities into screening criteria, experiments, data requirements, and outreach plans, and independently managed analysis, counterparty discussions, and recommendations.",
+        "I organized core-team reviews with commercial input from Asher Gottesman and technical and financial guidance from Gene Itkis of MIT Lincoln Laboratory and Michael Lustig, former Senior Managing Director at BlackRock and Adjunct Professor of Finance at NYU Stern. In these reviews, I assessed applied cryptography, zero-knowledge applications, technical fit, liquidity, and risk.",
+        "I designed a two-stage framework for real-world assets, stablecoins, DeFi, and infrastructure: it tests identity, liquidity, pricing validity, data completeness, and risk, then ranks commercial fit and accessibility. I used issuer-level error analysis to refine qualification rules, exclude out-of-scope projects, and record evidence-backed reasons for each decision.",
+        "I resolved issuer identities across CoinGecko, chain records, websites, white papers, and disclosures, and reconciled multichain listings and wrapped or bridged assets to remove duplicate opportunities. I then built market and text features spanning liquidity, capitalization, activity, project age, chain affiliation, business models, and technical needs.",
+        "I built a Python, Prefect, DuckDB, and Parquet pipeline for ingestion, standardization, entity mapping, feature preparation, and querying, with scheduled refreshes, retries, persisted outputs, reruns, and historical backfills to support model training and repeatable shortlist updates.",
+        "I trained a LightGBM pairwise ranking model on the core team's comparisons of eligible counterparties, combining commercial, disclosure, and market features to prioritize approximately 800 potential partners. I repeated comparison, retraining, and ranking over two to four weeks, using uncertainty sampling to focus expert review on borderline candidates, near ties, and conflicting evidence.",
+        "I applied issuer similarity analysis and Leiden community detection to discover overlooked projects with related business or technical characteristics, then brought qualified candidates into commercial review and ranking.",
+        "I screened 18,000+ token records into approximately 800 potential counterparties, 30 outreach priorities, and six proposed pilot counterparties. I discussed asset-verification needs, service arrangements, and technology licensing with prospects, and delivered the candidate list and commercial assessments to the board for technical and business evaluation."
+      ],
+      "notes": []
+    },
+    {
+      "id": 6,
+      "categoryId": "02",
+      "organization": "Euromonitor International",
+      "summary": "A premium European appliance brand was planning its entry into China, Japan, and the Middle East, and I led the China workstream. Working from approximately 50,000 e-commerce listings, consumer reviews, and policy research, I recommended the products, prices, channels, and marketing for China that would keep the brand's global positioning intact.",
+      "readMoreLabel": "Read More",
+      "detailTitle": "China Market Entry for a Premium European Appliance Brand",
+      "metadata": {
+        "position": "Data Analyst Intern",
+        "location": "Shanghai, China",
+        "dates": "September 2021 – May 2022"
+      },
+      "contributionsLabel": "Key Contributions",
+      "keyContributions": [
+        "I structured the analysis as a MECE framework of product fit, pricing, channels, marketing, and policy, and set out for each which elements of the client's premium positioning had to stay consistent worldwide and where China required local adaptation.",
+        "I specified the data to collect across five e-commerce platforms and seven appliance categories, working with data scientists on collection and local analysts on validation. I processed and interpreted approximately 50,000 listings in Python myself, standardizing attributes, efficiency labels, prices, promotions, and reviews and keeping channel-specific observations.",
+        "I mapped competitors in Tableau by category, price band, efficiency, and features. From product comparisons and consumer reviews, I identified relatively underserved segments, including high-efficiency products at mid- to high-price points, and assessed opportunities in tier-1 and tier-2 cities.",
+        "I checked the European portfolio against Chinese usage needs, product dimensions, and efficiency requirements, and recommended local assortments. I compared the brand's website, e-commerce, physical retail, and channel partnerships as routes to market, and brought Xiaohongshu and Douyin into the marketing analysis.",
+        "I researched efficiency standards, subsidies, certification, and market access through published sources and expert interviews, including think-tank discussions. I built entry scenarios by category and city tier, and used current requirements and expected policy changes to recommend which products to introduce and when.",
+        "I delivered the China market report and represented the workstream in global project meetings, where I presented the evidence behind the product, pricing, channel, and marketing recommendations and coordinated green-product definitions and policy assumptions. I documented field mappings and processing rules in a reusable template for subsequent regional analysis.",
+        "I received a full-time offer from Euromonitor's consulting team during the internship."
+      ],
+      "notes": []
+    },
+    {
+      "id": 7,
+      "categoryId": "02",
+      "organization": "China Construction Bank",
+      "summary": "China Construction Bank's internal framework assessed sustainability on more than 30 indicators, some of which carried overlapping information. I used PCA and historically labeled cases to compare approximately 2,000 green-credit candidates on a compact set of dimensions, tested the ranked shortlist against the framework's minimum requirements, and documented the method for the product managers and risk officers evaluating it for platform use.",
+      "readMoreLabel": "Read More",
+      "detailTitle": "PCA-Based Sustainability Analysis and Green-Credit Screening",
+      "metadata": {
+        "position": "Fintech Intern",
+        "location": "Shanghai and Suzhou, China",
+        "dates": "March 2021 – May 2021"
+      },
+      "contributionsLabel": "Key Contributions",
+      "keyContributions": [
+        "I analyzed financial, operational, and environmental data for approximately 2,000 entities within CCB's framework of more than 30 indicators, assessing overall scores alongside minimum requirements for individual metrics.",
+        "I used PCA to find where the indicators overlapped and to build compact representations for comparing candidates. I applied supervised learning to historically labeled cases to see which feature patterns went with positive and negative assessments, and used those patterns as empirical evidence in candidate assessment.",
+        "I applied life cycle assessment principles to the sustainability analysis, examining operating and environmental factors alongside financial performance.",
+        "I tested the initial top 30% of ranked candidates against individual-metric and overall-score minimums, retaining approximately 28% of the full pool for further research and review.",
+        "I reviewed selection and exclusion patterns across the pool, separating ranking cutoffs from threshold failures, and converted borderline cases, unmet requirements, and follow-up questions into a reusable checklist linked to the applicable screening rules.",
+        "I delivered a methodology note explaining scoring logic, data sources, model behavior, and edge cases to product managers and risk officers assessing the method for platform use."
+      ],
+      "notes": []
+    },
+    {
+      "id": 8,
+      "categoryId": "03",
+      "organization": "Duke Law School",
+      "summary": "A spacecraft sometimes has to act before anyone on the ground can approve the command, and waiting carries risks of its own. I formulated a two-threshold test, drawn from the law of delegation, that separates the authority to act from the evidence needed to delegate execution, and applied it to delayed spacecraft operations, orbital avoidance, debris capture, and SETI. I also proposed task-specific authorization records, so that a delegated decision can be examined in advance, revised when its assumptions change, and reconstructed after the event.",
+      "readMoreLabel": "Read More",
+      "detailTitle": "Autonomous Authority in Space: Risk Tradeoffs and the Law of Delegation",
+      "metadata": {
+        "position": "Author, Letao (Theodore) Ouyang",
+        "location": "Durham, North Carolina",
+        "dates": "December 2024; revised November 2026"
+      },
+      "contributionsLabel": "Key Contributions",
+      "keyContributions": [
+        "I specified a two-threshold decision procedure linking legal authority, evidence for delegation, and the time at which human review can still change the outcome, distinguishing individual approval, advance-constrained action, and fallback behavior as separate supervisory choices.",
+        "I traced each element of the procedure to the law of delegation: the authority threshold to the rule against giving a private actor power over its rivals, the evidence threshold to the requirement of reasoned decision on a record, and the timing test to the rule that a retained final decision must be exercised in time.",
+        "I designed a task-specific authorization record specifying responsible actors, permitted actions, operating conditions, exposed interests, and reassessment triggers, and connected these terms to independent scrutiny and event records that allow consequential decisions to be reconstructed. I showed that the record connects supervision before the event to liability after it: departure from its operating range is evidence of fault under the Liability Convention, and operation within it is evidence of care without being a defense.",
+        "I compared delayed spacecraft operations and orbital avoidance against existing automation and ground review, analyzing how latency, uncertain trajectories, simultaneous maneuvers, and failed coordination affect delegation and redistribute risk among operators, and concluded that a licensing condition should ask for interoperable right-of-way rules and maneuver-intent messages before it asks for any common prediction model.",
+        "I used debris capture and SETI to distinguish technical capability from permission to affect another party's interests or confirm a scientific interpretation, and proposed scientific verification through alternative explanations, independent observations, and documented evidence.",
+        "I integrated review delays, compliance costs, disclosure risks, and correlated failures into the proposed controls. I developed proportionate reassessment around material changes, reusable evidence, and legally competent institutions, making the burdens of supervision part of the authorization decision."
+      ],
+      "notes": []
+    },
+    {
+      "id": 9,
+      "categoryId": "03",
+      "organization": "Duke Law School",
+      "summary": "A small state can license a launch, own a satellite, or buy a service and still lack the decision it meant to keep. I compared New Zealand's launch regulation, Norway's Arctic satellite partnership, and Luxembourg's LUXEOSys procurement to separate permission, ownership, operational rights, and implementation capacity. I proposed an accountable-acceptance standard for strategic dependencies, which ties interruption powers and response rights to funded capability, and translated it into licensing and procurement terms.",
+      "readMoreLabel": "Read More",
+      "detailTitle": "Small States and the Governance of Strategic Space Dependence",
+      "metadata": {
+        "position": "Author, Letao (Theodore) Ouyang",
+        "location": "Durham, North Carolina",
+        "dates": "December 2024; revised November 2026"
+      },
+      "contributionsLabel": "Key Contributions",
+      "keyContributions": [
+        "I separated control over a space system into five entitlements (permission, title, operation, interruption and priority, and voice), drawing on property theory and the economics of incomplete contracts, and showed from the three states' administrative records that the residual power to decide in a crisis follows the chokepoint rather than the title.",
+        "I built a structured comparison around specific public functions and the decisions needed to perform them, defining practical autonomy as the capacity to make and implement a specified lawful public decision. I examined external dependencies, legal and operational rights, domestic capability, and documented outcomes to assess whether retained authority could support an actual public decision.",
+        "I identified distinct mechanisms in the three cases: retained launch-permission authority in New Zealand, operational capability through divided responsibilities in Norway, and the planning and legislative information required alongside asset ownership in Luxembourg.",
+        "I proposed an accountable-acceptance standard requiring decision makers to identify who can interrupt essential services, which information and rights permit a response, and what funded capacity enables action. Material gaps would require reasoned acceptance or revision before commitment. Like environmental review under the National Environmental Policy Act, the standard forbids uninformed dependence and leaves the choice to depend with the responsible authority.",
+        "I translated the standard into proposed licensing and procurement terms covering operator information, significant changes, suspension, recovery, and service transition, and connected these terms to lifetime costs, technical staffing, and timely legislative scrutiny of financial commitments.",
+        "I analyzed collective agency through anti-satellite-testing commitments, UN consensus procedures, and ESA program and voting rules. I distinguished participation rights, influence, and implementation capacity, connecting national safeguards to collective restraint on debris and cross-border service disruption."
+      ],
+      "notes": []
+    },
+    {
+      "id": 10,
+      "categoryId": "03",
+      "organization": "Duke Law School",
+      "summary": "Who may choose among climate risks for people who cannot leave the resulting climate? I proposed two legal duties for solar geoengineering. Comparative justification connects risk-risk analysis to authorization by requiring proponents to defend their policy alternatives and answer challenges from affected constituencies. Continuity answers termination risk by separating political control, operator succession, and the physical cooling trajectory, so that authority can change hands without an abrupt physical stop.",
+      "readMoreLabel": "Read More",
+      "detailTitle": "Who May Choose the Lesser Risk: Solar Geoengineering and the Legal Duties of Comparison and Continuity",
+      "metadata": {
+        "position": "Author, Letao (Theodore) Ouyang",
+        "location": "Durham, North Carolina",
+        "dates": "December 2024; revised November 2026"
+      },
+      "contributionsLabel": "Key Contributions",
+      "keyContributions": [
+        "I separated historical climate conditions, a future without stratospheric aerosol injection, and feasible policy portfolios as distinct comparators, and analyzed how baseline selection, welfare measures, and distributional assumptions shape the case for intervention and the burdens assigned to exposed populations.",
+        "I proposed a comparative justification duty requiring proponents to defend alternatives, disclose distributional choices, and answer substantiated objections, and designed powers for independently selected representatives of exposed constituencies to demand redesign or withhold collective approval through separate concurrence, a device the Montreal Protocol's financial mechanism and reorganization law already use.",
+        "I developed a continuity duty separating program control, operator choice, and the cooling trajectory. It specifies bounded interim succession, independent monitoring, transition finance, and gradual withdrawal so that political authority can change without automatically triggering abrupt physical cessation, and grounds each element in law that already governs systems that cannot safely stop: resolution plans, decommissioning assurance, regulated abandonment, and bridge institutions.",
+        "I showed that existing law, from the Vienna Convention and the Framework Convention to the International Law Commission's texts and the International Court of Justice's decisions, supplies assessment, notification, and consultation but no authority able to refuse, and drew the comparative justification duty at that point. I distinguished limited research from climate-affecting deployment and proposed scrutiny based on expected effects and cumulative scale, including review of related projects together.",
+        "I formulated a priority rule for serious threats to subsistence and survival, requiring comparison of feasible alternatives, shared authorization, and credible relief, and built periodic reassessment of forgone benefits and harms of nondeployment into the same decision process."
+      ],
+      "notes": []
+    },
+    {
+      "id": 11,
+      "categoryId": "03",
+      "organization": "Duke Law School",
+      "summary": "Restoring a wetland is one decision, and relying on that restoration to permit the loss of another is a second. I treated a compensation credit as a credit, to be discounted for delay and default, secured, and released against performance, and applied Florida's time-lag and risk discount to the published timetable of Hong Kong's 2024 San Tin approval: the Florida method would credit between roughly a quarter and seven tenths of the enhancement the assessment counted in full. I proposed project conditions that tie a defensible baseline to staged authorization, funded correction, and continuing responsibility.",
+      "readMoreLabel": "Read More",
+      "detailTitle": "Mangrove Restoration and the Limits of Compensatory Mitigation: Lessons from Florida for the Greater Bay Area",
+      "metadata": {
+        "position": "Author, Letao (Theodore) Ouyang",
+        "location": "Durham, North Carolina",
+        "dates": "December 2024; revised November 2026"
+      },
+      "contributionsLabel": "Key Contributions",
+      "keyContributions": [
+        "I distinguished restoration as repair from restoration as currency and treated a compensation credit as a credit, matching its four properties to their regulatory counterparts: discounts or ratios for temporal loss, ratios for the likelihood of success, financial assurances, and release of credits against demonstrated performance.",
+        "I applied Florida's uniform mitigation assessment method to San Tin's published timetable, on which pond filling may begin in 2026/27 and the conservation park is to be completed by 2039, and showed that no combination of time lag and risk score credits the promised enhancement in full; the credited share runs from 23 to 70 percent.",
+        "I used West Lake to examine hydrological rehabilitation and Deep Bay, where mapped mangrove cover rose from 8 to 15 percent while mudflat fell from 56 to 43 percent, to separate canopy growth, construction, and predicted enhancement from evidence of functional replacement, including additionality.",
+        "I showed that the timing norm is already written in each legal system compared, in federal mitigation rules, Florida's method, Hong Kong's Technical Memorandum and Deep Bay planning guidelines, and mainland policy and the Wetland Protection Law, so that reform gives these principles a decision to govern: the start of each damaging phase.",
+        "I designed a restoration schedule that separates engineering completion from ecological acceptance, funds monitoring and correction in advance, distinguishes contractor performance from ecological uncertainty, and allows smaller footprints, revised sequencing, alternative sites, or refusal to credit compensation where promised functions lack credible replacement."
+      ],
+      "notes": []
+    },
+    {
+      "id": 12,
+      "categoryId": "04",
+      "organization": "Jones Lang LaSalle",
+      "summary": "A Southeast Asian conglomerate was looking to buy office properties in China, and I was the project team's ESG lead on the acquisition advisory. Working with JLL's internal ESG team, I screened the candidate assets, underwrote the shortlist, and set site-diligence priorities against the client's investment requirements and its options to refurbish or reposition each building.",
+      "readMoreLabel": "Read More",
+      "detailTitle": "Office Investment Underwriting and ESG Due Diligence",
+      "metadata": {
+        "position": "Summer Intern, Capital Markets Team",
+        "location": "Beijing, China",
+        "dates": "June 2024 – August 2024"
+      },
+      "contributionsLabel": "Key Contributions",
+      "keyContributions": [
+        "I screened 22 cities across four investable regions against client preferences, preliminary budgets, market liquidity, and institutional-grade office stock, narrowing the search to 20 assets in Beijing, Shanghai, Guangzhou, Shenzhen, and Chengdu.",
+        "I developed a GRESB-informed desktop screen with approximately 40 ESG and operating indicators, coordinating with JLL's internal ESG team. It flagged environmental, operating, and capital-expenditure concerns that excluded approximately 40% of candidates before full valuation and due diligence.",
+        "I structured diligence across management, performance, and development: ownership and SPV transparency, policy coverage, compliance, safety, and 12 months of continuous operating records. I benchmarked energy, carbon, water, waste, certifications, and upgrades against comparable properties matched by city, submarket, vintage, and building systems.",
+        "I assessed upgrade, refurbishment, and extension risks through capital-expenditure and cash-flow analysis, using equipment age, chiller efficiency, building-management systems, sub-metering, air monitoring, and maintenance records as proxies where utility data were unavailable. I converted findings into red, amber, and green signals and asset-specific diligence priorities.",
+        "I underwrote shortlisted properties using discounted cash flow, replacement cost, and comparable transactions, and carried each property's operating conditions and upgrade requirements into its valuation assumptions, cash-flow scenarios, and exit-risk assessment.",
+        "I built ten dashboards in Excel, Python, and Tableau to compare market fundamentals, valuations, ESG indicators, and scenario exposures across cities, assets, and the investment pipeline.",
+        "I led bilingual briefings for capital-markets leadership and client managers, shaped site-visit sequencing and ESG questions, and delivered standardized asset books covering tenant concentration, weighted average lease expiry, vacancy, rents, operating costs, valuation models, and diligence findings."
+      ],
+      "notes": []
+    },
+    {
+      "id": 13,
+      "categoryId": "04",
+      "organization": "Hubble Network",
+      "summary": "Hubble was commercializing its Bluetooth satellite technology and had to choose its first markets. Through a Duke Practicum, I led the research on shipping, logistics, and industrial asset tracking, assessed where the technology's cost, accuracy, power consumption, and periodic reporting matched what customers needed, and recommended which applications to pursue first.",
+      "readMoreLabel": "Read More",
+      "detailTitle": "Bluetooth Satellite Commercialization and Market Selection",
+      "metadata": {
+        "position": "Student Consultant and Business Analytics Analyst, Duke Practicum",
+        "location": "Seattle, Washington",
+        "dates": "August 2023 – January 2024"
+      },
+      "contributionsLabel": "Key Contributions",
+      "keyContributions": [
+        "I led the shipping, logistics, and industrial tracking workstreams after Hubble's $20 million Series A and before its first satellite launches, and helped refocus the go-to-market brief on vertical-market selection by organizing opportunity scans, elimination criteria, detailed assessment, market sizing, and prioritization.",
+        "I assessed each application from stakeholder objectives, company cost data, and technical parameters, comparing customer needs, incumbent solutions, accuracy, power consumption, and reporting frequency to identify promising uses for periodic location tracking.",
+        "I prepared and conducted workstream interviews through Duke Pratt's alumni network, including sales professionals, contributing to a team research program covering approximately 20 fields, typically two or three alumni per field, and more than 100 hours of expert interviews.",
+        "I cross-checked Fuqua business databases, official statistics, industry reports, competitor research, and interviews, applied SWOT and PESTLE, and contributed market-sizing models, scenario forecasts, and sensitivity analyses to the comparison of priority applications.",
+        "My workstream's findings informed the team's evaluation of approximately 20 use cases, its five recommended market directions, and its 100-page strategy report. I presented the conclusions to management and the board, covering market attractiveness, competition, and what commercialization would require."
+      ],
+      "notes": []
+    },
+    {
+      "id": 14,
+      "categoryId": "04",
+      "organization": "SAIF Partners",
+      "summary": "SAIF Partners was researching a dental-investment theme in Greater China, and I owned the public-data research and governance screening. Working with the VP and investment team, I narrowed a longlist of over 100 targets to a shortlist of more than ten, and wrote up the governance concerns as investment recommendations, questions for management, and priorities for on-site diligence.",
+      "readMoreLabel": "Read More",
+      "detailTitle": "Dental Investment Research and Governance Due Diligence",
+      "metadata": {
+        "position": "Summer Intern",
+        "location": "Shanghai, China",
+        "dates": "June 2022 – October 2022"
+      },
+      "contributionsLabel": "Key Contributions",
+      "keyContributions": [
+        "I reconciled approximately 2,000 funding cases and 200 regulatory items from about 20 sources, including CVSource, industry reporting, and corporate registries. I deduplicated rounds and standardized entities, subsectors, dates, financing classifications, and currencies, producing 600+ deals and 120–150 actionable regulatory events.",
+        "I owned funding-flow, regulatory, industry-structure, and competitive research, comparing orthodontic aligner brands, private dental chains, equipment suppliers, and digital and SaaS providers to inform subsector prioritization.",
+        "I worked with the VP and investment team to narrow a longlist of 100+ targets to more than ten candidates. I profiled financing histories, valuation ranges, and investor bases, and assigned pass, watch, or exclude recommendations with regulatory, reputational, shareholder, and supplier-risk flags.",
+        "I converted MSCI Corporate Governance and Corporate Behavior topics into ten subcategories and 33 diligence checks covering control complexity, related-party exposure, disclosure, audit quality, and business ethics.",
+        "I authored pass, conditional, and deny memoranda to guide diligence depth and valuation discussions, specifying evidence requirements and management questions for governance issues requiring further investigation.",
+        "I presented governance and risk findings to partners, prompting two management meetings and additional auditor-tenure checks. I identified accounting and related-party concerns in two finalists and wrote them up as questions for management and priorities for on-site diligence."
+      ],
+      "notes": []
+    },
+    {
+      "id": 15,
+      "categoryId": "04",
+      "organization": "CITIC Securities",
+      "summary": "I produced sector analysis and valuation work for the Agriculture Research Group's research reports and its internal investment-strategy discussions.",
+      "readMoreLabel": "Read More",
+      "detailTitle": "Agriculture Equity Research and Valuation",
+      "metadata": {
+        "position": "Equity Research Intern, Agriculture Research Group",
+        "location": "Beijing, China",
+        "dates": "August 2021 – October 2021"
+      },
+      "contributionsLabel": "Key Contributions",
+      "keyContributions": [
+        "I compiled sector datasets, stress-tested valuation assumptions, and summarized market and trading commentary for the team's internal investment-strategy discussions and research reports."
+      ],
+      "notes": []
+    },
+    {
+      "id": 16,
+      "categoryId": "04",
+      "organization": "EY-Parthenon",
+      "summary": "I served on the business-line restructuring workstream of a digital-transformation engagement for a leading Chinese company preparing to list.",
+      "readMoreLabel": "Read More",
+      "detailTitle": "Business-Line Restructuring for Digital Transformation",
+      "metadata": {
+        "position": "Summer Intern",
+        "location": "Beijing, China",
+        "dates": "May 2021 – August 2021"
+      },
+      "contributionsLabel": "Key Contributions",
+      "keyContributions": [
+        "With the engagement team, I reviewed and restructured the client's business lines for clearer visibility into operations, and prepared the inputs to the cost and efficiency analysis."
+      ],
+      "notes": []
+    },
+    {
+      "id": 17,
+      "categoryId": "05",
+      "organization": "Independent STEM Olympiad Training Practice",
+      "summary": "I ran an independent coaching practice that prepared students for USAPhO and U.S. Physics Team selection, teaching IPhO-level physics online and in person and writing original problems for competition training.",
+      "readMoreLabel": "Read More",
+      "detailTitle": "Advanced Physics Olympiad Instruction",
+      "metadata": {
+        "position": "IPhO-Level Physics Instructor and Original Problem Designer",
+        "location": "Durham, North Carolina (Hybrid)",
+        "dates": "August 2019 – January 2026"
+      },
+      "contributionsLabel": "Key Contributions",
+      "keyContributions": [
+        "I coached students competing in USAPhO and U.S. Physics Team selection, training them in rigorous derivation, clearly structured written solutions, and problem-solving methods built for competition time limits.",
+        "I delivered online and in-person IPhO-level training camps in mechanics, electromagnetism, thermodynamics, optics, modern physics, and advanced mathematical methods."
+      ],
+      "notes": []
+    },
+    {
+      "id": 18,
+      "categoryId": "05",
+      "organization": "The High School Attached to Hunan Normal University",
+      "summary": "I earned provincial- and national-level awards in physics and mathematics Olympiads as a member of the school's nationally leading physics competition program, and mentored teammates in its study groups.",
+      "readMoreLabel": "Read More",
+      "detailTitle": "Olympiad Awards, Advanced Training, and Peer Mentoring",
+      "metadata": {
+        "position": "Physics and Mathematics Olympiad Competitor and Peer Mentor, School Physics Competition Team",
+        "location": "Changsha, China",
+        "dates": "August 2016 – January 2019"
+      },
+      "contributionsLabel": "Key Contributions",
+      "keyContributions": [
+        "I earned provincial- and national-level competition awards across physics and mathematics Olympiads.",
+        "I mentored teammates in the mechanics and electromagnetism study groups, working through advanced problems and explaining the derivations behind each solution method. I also presented methods from my own study and from group discussion to the full competition team.",
+        "I completed intensive training in mechanics, electromagnetism, thermodynamics, optics, and modern physics, including undergraduate-level classical mechanics, electrodynamics, statistical physics, and quantum mechanics.",
+        "I studied mathematical analysis, linear algebra, calculus, ordinary differential equations, and numerical analysis, applying these tools to nonstandard physics problems and extended derivations."
+      ],
+      "notes": [
+        "Program context: In 2020, 10 students from the program were selected for China's 50-member national physics Olympiad training squad (20%): eight listed under the school and two who studied in the program with school registration in Chongqing. This exceeded the total from any province or municipality outside Hunan. The program also included a 2019 IPhO gold medalist."
+      ]
+    }
+  ],
+  "aiSourceDocument": {
+    "fileName": "ai-research-and-engineering.md",
+    "path": "content/sources/ai-portfolio/ai-research-and-engineering.md",
+    "sha256": "fb9115a2c59f11ced6a6ebd9c67523aa23800fcba5505cb4189d40b5d72e977e"
+  }
+}
