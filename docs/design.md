@@ -168,7 +168,7 @@ Framed lists use the global `ledger`, `ledger-item`, `ledger-title`, `ledger-bod
 `ledger-prose` classes. From 1200px one continuous dashed spine runs down the frame
 between titles and prose, on axis B where the column guide stands, with 72px between
 entries; below 1200px entries are divided by a dashed line inside the frame. On About,
-the contact strip's first divider falls on the same axis as the spine. A section heading
+the contact strip divides its frame into three equal fields. A section heading
 stands 56px above its frame, 32px on phones, on About, Experience, and Coursework.
 
 ### Links and actions
@@ -231,10 +231,12 @@ portrait tablet gives the instrument the height the name leaves, so the composit
 fills the first screen. From 768px the frame's side lines run the hero's full height
 and meet the column guides below it. The name and the institutions Duke and Sequoia use Inter;
 the roles Alumnus and Fellow use Source Serif 4. The two-line "Thinking Mathematically /
-Working in AI" introduction is an H2 at the title size, its second line in the muted
-tone, with the biography below on the same edge within the measure. Links inside the
-biography, the advisor line and the Fellowship paragraph are underlined in the link rule
-and open in a new tab.
+Working in Artificial Intelligence" introduction is an H2 at the title size, its second
+line in the muted tone, with the biography below on the same edge within the measure:
+three paragraphs of even length on mathematics, the work in AI, and life beyond work.
+Links inside the biography, the advisor line and the Fellowship paragraph are underlined
+in the link rule; links that leave the site open in a new tab, and the biography's Blog
+link stays in the same tab.
 
 Five numbered sections follow: the introduction, Selected Research, Education,
 Fellowship, and Contact. Fellowship is one ledger with Sequoia Fellow on axis A and a
@@ -917,8 +919,9 @@ title is the name alone. Descriptions state the work directly, without hedges su
 "exploring", and biographical and research claims stay measured. The fellowship is
 written `Sequoia Fellow` everywhere: the hero, About's Fellowship section, site metadata
 from `app/lib/content/site.ts`, the social card, and the repository README. The
-Fellowship paragraph names HongShan as the organizer and describes the program as a
-selected community.
+Fellowship paragraph names HongShan and its founding partner as the program's founders,
+then states its selectivity, its focus on technology, and the lifelong community its
+fellows form.
 
 ## Identity
 

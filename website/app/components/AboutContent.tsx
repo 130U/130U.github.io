@@ -21,29 +21,29 @@ export function AboutContent({ hasHero = false }: { hasHero?: boolean }) {
         <div className={styles.sectionBody}>
           <Heading id="home-heading">
             <span>Thinking Mathematically</span>{" "}
-            <span>Working in AI</span>
+            <span>Working in Artificial Intelligence</span>
           </Heading>
           <div className={styles.biographyCopy}>
             <p>
               Mathematics is how I understand a problem. I want to know which
               assumptions underlie a conclusion, what happens when they change,
-              and where intuition stops being reliable.
+              and where intuition stops being reliable. I hold my research in
+              quantitative finance to that standard: its central results are
+              proved theorems and certified bounds.
             </p>
             <p>
-              My work makes high-stakes conclusions verifiable: certified error
-              bounds in derivative pricing, layered verification in frontier AI
-              evaluation, and evidence standards for delegating authority to
-              autonomous systems.
+              That is what sets me apart as an AI engineer: I look past what a
+              model does to the mathematics of why it does it. I am a research
+              engineer at a foundation model company, where I build personal
+              agents, and I have worked with a frontier AI lab and a leading
+              global alternative asset manager.
             </p>
             <p>
-              Finance and AI are at its center. From 2023 to 2026 I designed
-              review and verification systems with a leading foundation model
-              developer, a frontier AI lab, and a leading global alternative
-              asset manager. I also build systems of my own:{" "}
-              <a className={styles.inlineLink} href="https://github.com/130U/RESEARCH-Financial-Large-Language-Model" target="_blank" rel="noopener noreferrer">a language model</a>{" "}
-              trained from scratch for financial research, and{" "}
-              <a className={styles.inlineLink} href="https://github.com/130U/RESEARCH-Agent-Evaluation-Methodology" target="_blank" rel="noopener noreferrer">four gates</a>{" "}
-              that decide which evaluation feedback may change an agent.
+              Beyond work, what I value is simple: joy, and experiencing the
+              world with my whole heart. I find it most in music and in nature,
+              and the <Link className={styles.inlineLink} href="/blog/">Blog</Link>{" "}
+              keeps what I make of them, from Chopin&apos;s études charted as
+              stars to an essay on Weber&apos;s <em>Der Freischütz</em>.
             </p>
           </div>
         </div>
@@ -113,8 +113,8 @@ export function AboutContent({ hasHero = false }: { hasHero?: boolean }) {
               <h3 className="ledger-title">Sequoia Fellow</h3>
               <div className="ledger-body">
                 <p className="ledger-prose">
-                  I am a fellow of the program that{" "}
-                  <a className={styles.inlineLink} href="https://www.hongshan.com/" target="_blank" rel="noopener noreferrer">HongShan</a>, the venture firm formerly known as Sequoia China, runs with its portfolio companies. It selects people early in their careers by application and brings them into the firm&apos;s circle of founders, mentors, and peers in technology and entrepreneurship. Fellows stay on as an alumni community, with access to the firm&apos;s closed-door events and industry exchanges.
+                  Founding partner Neil Shen launched this fellowship at{" "}
+                  <a className={styles.inlineLink} href="https://www.hongshan.com/" target="_blank" rel="noopener noreferrer">HongShan</a>, the venture firm formerly known as Sequoia China, whose portfolio includes ByteDance, Meituan, and Pinduoduo. It is highly selective: the first cohort admitted 15 of 2,116 applicants. It centers on the technology industry, and its fellows form a lifelong community with closed-door access to the firm&apos;s investors and portfolio executives.
                 </p>
               </div>
             </div>

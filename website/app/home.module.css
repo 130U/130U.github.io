@@ -224,18 +224,10 @@
 }
 
 @media (width >= 1200px) {
-  /* The first divider falls on the same axis as the ledger spine above,
-     and each value starts where their titles and prose start. */
-  .contactStrip {
-    grid-template-columns: calc(40% - 0.7px) minmax(0, 1fr) minmax(0, 1fr);
-  }
-
+  /* Three equal fields, each value set the frame's padding from its own
+     divider, so the first starts where the ledger titles above start. */
   .contactStrip li {
-    padding-inline: var(--hang-gap) 24px;
-  }
-
-  .contactStrip li:first-child {
-    padding-left: var(--frame-pad);
+    padding-inline: var(--frame-pad) 24px;
   }
 
   /* Beside its institution, the first degree name stands on the institution's

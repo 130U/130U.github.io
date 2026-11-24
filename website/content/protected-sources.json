@@ -9,7 +9,7 @@
     "app/lib/content/experience-showcase.ts": "84ce4b67ad71abacb385e978074ffb296dbb4dc15fc10d05fab26a60f7577443",
     "app/lib/content/experience-domains.ts": "7362085d4857daa83ae476f176163378dde550572d5a1932d2f142d4d1a00c7d",
     "content/experience-showcase.json": "fd8d8913b4265e5280d4def57273e7080c0a0f7a5b5c8c98870a74c422098c40",
-    "app/components/AboutContent.tsx": "58166b8f103f823feb62ce24487e89c63b158a99db523693d865965f7bb643f8",
+    "app/components/AboutContent.tsx": "287f87a29c626222fb3f36c16d59e65f8e4119fb4ce40c94ac3685b73012c2df",
     "app/lib/content/about.ts": "a37068e6dcf09a05ea6f35e5e8e98b9b61a009b2419a66705d6065b59124c79a",
     "app/coursework/page.tsx": "a1caf4bd363d652ce401c237e06336be26e15296a3ffa19890b3d1c53b6ab63c",
     "app/components/research/ResearchArticle.tsx": "75f5b97e41c3efae87600985f21baae6b6a9511523ed3a93405adfef70788ad1",

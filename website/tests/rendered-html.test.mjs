@@ -526,20 +526,25 @@ test("About opens with its accessible clarinet hero before the profile", async (
   assert.equal((attribute(ringDots, "d").match(/Z/gu) ?? []).length, 14,
     "Six ring keys and one bell rim each have an inner and outer contour.");
   const profileHeading = home.match(/<h2\b[^>]*id="home-heading"[^>]*>([\s\S]*?)<\/h2>/u);
-  assert.equal(stripMarkup(profileHeading?.[1] ?? ""), "Thinking Mathematically Working in AI");
+  assert.equal(stripMarkup(profileHeading?.[1] ?? ""), "Thinking Mathematically Working in Artificial Intelligence");
   assert.match(home, /<title>Theodore Ouyang<\/title>/u);
   assert.match(home, /id="home-profile"/u);
   for (const index of ["01", "02", "03", "04", "05"]) {
     assert.match(home, new RegExp(`aria-hidden="true"[^>]*>${index}<`, "u"));
   }
-  assert.ok(stripMarkup(home).includes("Mathematics is how I understand a problem. I want to know which assumptions underlie a conclusion, what happens when they change, and where intuition stops being reliable."));
-  assert.ok(stripMarkup(home).includes("My work makes high-stakes conclusions verifiable: certified error bounds in derivative pricing, layered verification in frontier AI evaluation, and evidence standards for delegating authority to autonomous systems."));
-  assert.ok(decodeHtml(stripMarkup(home)).includes("Finance and AI are at its center. From 2023 to 2026 I designed review and verification systems with a leading foundation model developer, a frontier AI lab, and a leading global alternative asset manager. I also build systems of my own: a language model trained from scratch for financial research, and four gates that decide which evaluation feedback may change an agent."));
+  const profileText = decodeHtml(inlineText(elementHtmlById(home, "home-profile")));
+  for (const paragraph of [
+    "Mathematics is how I understand a problem. I want to know which assumptions underlie a conclusion, what happens when they change, and where intuition stops being reliable. I hold my research in quantitative finance to that standard: its central results are proved theorems and certified bounds.",
+    "That is what sets me apart as an AI engineer: I look past what a model does to the mathematics of why it does it. I am a research engineer at a foundation model company, where I build personal agents, and I have worked with a frontier AI lab and a leading global alternative asset manager.",
+    "Beyond work, what I value is simple: joy, and experiencing the world with my whole heart. I find it most in music and in nature, and the Blog keeps what I make of them, from Chopin's études charted as stars to an essay on Weber's Der Freischütz.",
+  ]) {
+    assert.ok(profileText.includes(paragraph), `About's introduction reads: ${paragraph.slice(0, 48)}`);
+  }
   const profileLinks = [...elementHtmlById(home, "home-profile").matchAll(/<a\b([^>]*)>([\s\S]*?)<\/a>/gu)];
   assert.deepEqual(profileLinks.map((match) => [decodeHtml(stripMarkup(match[2])), attribute(match[1], "href")]), [
-    ["a language model", "https://github.com/130U/RESEARCH-Financial-Large-Language-Model"],
-    ["four gates", "https://github.com/130U/RESEARCH-Agent-Evaluation-Methodology"],
+    ["Blog", "/blog/"],
   ]);
+  assert.equal(attribute(`<a${profileLinks[0][1]}>`, "target"), undefined, "The Blog link stays in the site's own tab.");
   for (const id of ["selected-research", "education", "coursework", "fellowship", "contact"]) {
     assert.match(home, new RegExp(`id="${id}"`, "u"));
   }
@@ -547,9 +552,9 @@ test("About opens with its accessible clarinet hero before the profile", async (
   assert.equal(stripMarkup(fellowship.match(/<h2\b[^>]*>([\s\S]*?)<\/h2>/u)?.[1] ?? ""), "Fellowship");
   assert.equal(stripMarkup(fellowship.match(/<h3\b[^>]*>([\s\S]*?)<\/h3>/u)?.[1] ?? ""), "Sequoia Fellow");
   assert.deepEqual(openingTags(fellowship, "a").map((tag) => attribute(tag, "href")), ["https://www.hongshan.com/"]);
-  const fellowshipText = decodeHtml(stripMarkup(fellowship));
-  assert.ok(fellowshipText.includes("the venture firm formerly known as Sequoia China, runs with its portfolio companies. It selects people early in their careers by application and brings them into the firm's circle of founders, mentors, and peers in technology and entrepreneurship. Fellows stay on as an alumni community, with access to the firm's closed-door events and industry exchanges."));
-  for (const tag of [...profileLinks.map((match) => `<a${match[1]}>`), ...openingTags(fellowship, "a")]) {
+  const fellowshipText = decodeHtml(inlineText(fellowship));
+  assert.ok(fellowshipText.includes("Founding partner Neil Shen launched this fellowship at HongShan, the venture firm formerly known as Sequoia China, whose portfolio includes ByteDance, Meituan, and Pinduoduo. It is highly selective: the first cohort admitted 15 of 2,116 applicants. It centers on the technology industry, and its fellows form a lifelong community with closed-door access to the firm's investors and portfolio executives."));
+  for (const tag of openingTags(fellowship, "a")) {
     assert.equal(attribute(tag, "target"), "_blank");
     assert.equal(attribute(tag, "rel"), "noopener noreferrer");
   }

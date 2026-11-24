@@ -6,10 +6,10 @@
   ],
   "routes": {
     "/": {
-      "textSha256": "e4b25c94b40e037077a5f3ef639ecfc2b863d070c4621e0aeb0396dd6e0e5191",
-      "characterCount": 4081,
-      "wordCount": 623,
-      "preview": "Skip to Main Content Theodore Ouyang Duke Alumnus Sequoia Fellow Theodore Ouyang About Experience Blog Thinking Mathematically Working in AI Mathematics is how ",
+      "textSha256": "4eb131a6e30402c7edd3528e2a3a938148abfc1b084120e8b2eb68f0747c663a",
+      "characterCount": 4177,
+      "wordCount": 653,
+      "preview": "Skip to Main Content Theodore Ouyang Duke Alumnus Sequoia Fellow Theodore Ouyang About Experience Blog Thinking Mathematically Working in Artificial Intelligenc",
       "altTexts": [],
       "ariaLabels": [
         "Theodore Ouyang home",
@@ -21,13 +21,13 @@
       ],
       "metadata": {
         "title": "Theodore Ouyang",
-        "description": "Theodore Ouyang makes high-stakes conclusions verifiable across derivative pricing, frontier AI evaluation, and law. Duke Alumnus and Sequoia Fellow.",
+        "description": "Theodore Ouyang thinks mathematically and works in artificial intelligence, building personal agents at a foundation model company. Duke Alumnus and Sequoia Fellow.",
         "canonical": "https://www.theodoreoy.com/",
         "openGraphTitle": "Theodore Ouyang",
-        "openGraphDescription": "Theodore Ouyang makes high-stakes conclusions verifiable across derivative pricing, frontier AI evaluation, and law. Duke Alumnus and Sequoia Fellow.",
+        "openGraphDescription": "Theodore Ouyang thinks mathematically and works in artificial intelligence, building personal agents at a foundation model company. Duke Alumnus and Sequoia Fellow.",
         "openGraphUrl": "https://www.theodoreoy.com/",
         "twitterTitle": "Theodore Ouyang",
-        "twitterDescription": "Theodore Ouyang makes high-stakes conclusions verifiable across derivative pricing, frontier AI evaluation, and law. Duke Alumnus and Sequoia Fellow."
+        "twitterDescription": "Theodore Ouyang thinks mathematically and works in artificial intelligence, building personal agents at a foundation model company. Duke Alumnus and Sequoia Fellow."
       }
     },
     "/coursework/": {
